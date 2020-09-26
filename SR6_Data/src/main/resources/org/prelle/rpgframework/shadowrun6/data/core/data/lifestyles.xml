@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lifestyles>
+    <lifestyle id="street"   cost="0"      />
+    <lifestyle id="squatter" cost="500"    />
+    <lifestyle id="low"      cost="2000"   />
+    <lifestyle id="middle"   cost="5000"   />
+    <lifestyle id="high"     cost="10000"  />
+    <lifestyle id="luxury"   cost="100000" />
+</lifestyles>

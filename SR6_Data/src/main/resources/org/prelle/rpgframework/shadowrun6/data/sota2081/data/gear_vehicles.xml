@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<!-- bikes -->
+	<item id="messerschmitt-kawasaki_mantikor" avail="2" cost="10000" type="VEHICLES" subtype="BIKES">
+      <vehicle han="3/4" acc="20"  spdi="30" tspd="200" bod="7" arm="4" pil="1" sen="1" sea="2"/>
+   </item>
+	
+	<!-- Cars -->
+   <item id="mercedes_clk_170t" avail="2"  cost="17000"  subtype="CARS" type="VEHICLES">
+      <vehicle han="4/5" acc="12" spdi="20" tspd="195" bod="7" arm="1" pil="1" sen="1" sea="4"/>
+   </item>
+   <item id="mercedes_w-SR290_wesir" avail="2"  cost="20000"  subtype="CARS" type="VEHICLES">
+      <vehicle han="3/5" acc="15" spdi="30" tspd="180" bod="10" arm="6" pil="2" sen="2" sea="4"/>
+   </item>
+      
+   
+   <!-- Trucks and Vans -->
+   <item id="chrysler-nissan_packer_m" avail="2"  cost="28000" type="VEHICLES" subtype="TRUCKS">
+      <vehicle han="4/5" acc="10" spdi="15" tspd="150" bod="10" arm="4" pil="3" sen="3" sea="8"/>
+      <modifications>
+         <accessorymod hook="VEHICLE_ELECTRONICS" item="rigger_interface"/>
+      </modifications>
+   </item>
+   
+   <!-- Boats -->
+   <item id="messerschmitt_kawasaki_katzenhai" avail="4"  cost="46000" type="VEHICLES" subtype="BOATS">
+      <vehicle han="3" acc="20" spdi="20" tspd="120" bod="10" arm="10" pil="3" sen="4" sea="2"/>
+      <modifications>
+         <itemhookmod capacity="2" hook="VEHICLE_WEAPON"/>
+      </modifications>
+   </item>
+</items>

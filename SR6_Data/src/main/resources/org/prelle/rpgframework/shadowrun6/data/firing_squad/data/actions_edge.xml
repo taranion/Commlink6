@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+  <action type="EDGE" cat="COMBAT" cost="4" apply="ATTACK" id="blinding_strike" /> 
+  <action type="EDGE" cat="COMBAT" cost="5" apply="ATTACK" id="called_shot_break_weapon" /> 
+  <action type="EDGE" cat="COMBAT" cost="5" apply="ATTACK" id="called_shot_incapacitate" /> 
+  <action type="EDGE" cat="COMBAT" cost="4" apply="MELEE"  id="charge" /> 
+  <action type="EDGE" cat="COMBAT" cost="3" apply="RANGED" id="cover_fire" /> 
+  <action type="EDGE" cat="COMBAT" cost="3" apply="RANGED" id="entanglement" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="ATTACK" id="fake_out" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="ACTION" id="freerunning" /> 
+  <action type="EDGE" cat="COMBAT" cost="3" apply="ATTACK" id="hamstring" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="ACTION" id="imposing_stone" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="SKILL"  id="intimidating_presence" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="ACTION" id="karmic_escape" /> 
+  <action type="EDGE" cat="COMBAT" cost="4" apply="ATTACK" id="knuckle_breaker" /> 
+  <action type="EDGE" cat="COMBAT" cost="3" apply="ACTION" id="leaf_on_the_wind" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="ACTION" id="monkey_climb" /> 
+  <action type="EDGE" cat="COMBAT" cost="3" apply="RANGED" id="pin" /> 
+  <action type="EDGE" cat="COMBAT" cost="3" apply="SKILL"  id="playing_possum" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="ACTION" id="protect_the_principal" /> 
+  <action type="EDGE" cat="COMBAT" cost="3" apply="ACTION" id="right_back_at_ya" /> 
+  <action type="EDGE" cat="COMBAT" cost="4" apply="MELEE"  id="riposte" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="ACTION" id="rolling_clouds" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="ACTION" id="rooted" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="MELEE"  id="sucker_punch" /> 
+  <action type="EDGE" cat="COMBAT" cost="1" apply="SKILL"  id="taunt" /> 
+  <action type="EDGE" cat="COMBAT" cost="1" apply="MELEE"  id="threatening_edge" /> 
+  <action type="EDGE" cat="COMBAT" cost="1" apply="MELEE"  id="throat_strike" /> 
+  <action type="EDGE" cat="COMBAT" cost="4" apply="MELEE"  id="throw_person" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="MELEE"  id="thunder_palm" /> 
+  <action type="EDGE" cat="COMBAT" cost="1" apply="MELEE"  id="tuck_and_roll" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="ATTACK" id="weapon_flash" /> 
+  <action type="EDGE" cat="COMBAT" cost="1" apply="MELEE"  id="weapon_spread" /> 
+  <action type="EDGE" cat="COMBAT" cost="3" apply="MELEE"  id="yielding_force" /> 
+  <action type="BOOST" cat="COMBAT" cost="4" apply="MELEE"  id="i_saw_it_in_a_trid_once" time="INITIATIVE" /> 
+  <action type="BOOST" cat="COMBAT" cost="5" apply="MELEE"  id="recover" time="ANYTIME" /> 
+</actions>

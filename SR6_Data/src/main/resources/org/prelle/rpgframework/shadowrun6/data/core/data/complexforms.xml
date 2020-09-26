@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<complexforms>
+   <complexform id="cleaner"          dur="PERMANENT" fad="2"/>
+   <complexform id="diffusion"        dur="SUSTAINED" fad="4" choice="MATRIX_ATTRIBUTE" mul="true" />
+   <complexform id="editor"           dur="PERMANENT" fad="3"/>
+   <complexform id="emulate"          dur="SUSTAINED" fad="0" choice="PROGRAM" mul="true" />
+   <complexform id="infusion"         dur="SUSTAINED" fad="4" choice="MATRIX_ATTRIBUTE" mul="true" />
+   <complexform id="mirrored_persona" dur="SUSTAINED" fad="3" />
+   <complexform id="pulse_storm"      dur="IMMEDIATE" fad="3"/>
+   <complexform id="puppeteer"        dur="SUSTAINED" fad="5"/>
+   <complexform id="resonance_channel"  dur="SUSTAINED" fad="2"/>
+   <complexform id="resonance_spike"  dur="IMMEDIATE" fad="4"/>
+   <complexform id="resonance_veil"   dur="SUSTAINED" fad="4"/>
+   <complexform id="static_bomb"      dur="IMMEDIATE" fad="6"/>
+   <complexform id="static_veil"      dur="SUSTAINED" fad="3"/>
+   <complexform id="stitches"         dur="PERMANENT" fad="4"/>
+   <complexform id="tattletale"       dur="PERMANENT" fad="3"/>
+</complexforms>

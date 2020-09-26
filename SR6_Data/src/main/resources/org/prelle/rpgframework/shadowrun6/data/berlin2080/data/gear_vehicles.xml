@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>   
+   <!-- Bikes -->
+   <item avail="2"  cost="500" id="baer_e_sperber">
+      <useas type="VEHICLES" subtype="BIKES"/>
+      <vehicle han="5/7" acc="3" spdi="10" tspd="80" bod="3" arm="0" pil="0" sen="0" sea="2" type="GROUND"/>
+   </item>
+   <item avail="2"  cost="1000" id="rattenbike">
+      <useas type="VEHICLES" subtype="BIKES"/>
+      <vehicle han="4/7" acc="10" spdi="20" tspd="170" bod="4" arm="2" pil="0" sen="0" sea="2" type="GROUND"/>
+   </item>
+   <item avail="2"  cost="400" id="e-rikscha">
+      <useas type="VEHICLES" subtype="BIKES"/>
+      <vehicle han="5/7" acc="3" spdi="12" tspd="50" bod="1" arm="2" pil="0" sen="0" sea="2" type="GROUND"/>
+   </item>
+   
+   <!-- Cars -->
+   <item avail="2"  cost="800" id="tuk_tuk" >
+      <useas type="VEHICLES" subtype="CARS"/>
+      <vehicle han="4/5" acc="5" spdi="10" tspd="70" bod="3" arm="1" pil="0" sen="0" sea="6" type="GROUND"/>
+   </item>
+   <item avail="2"  cost="4000" id="dreckskarre" >
+      <useas type="VEHICLES" subtype="CARS"/>
+      <vehicle han="4/5" acc="10" spdi="15" tspd="120" bod="8" arm="2" pil="0" sen="0" sea="4" type="GROUND"/>
+   </item>
+   <item avail="2"  cost="8000" id="bessere_dreckskarre" >
+      <useas type="VEHICLES" subtype="CARS"/>
+      <vehicle han="4/4" acc="12" spdi="20" tspd="150" bod="10" arm="4" pil="0" sen="0" sea="4" type="GROUND"/>
+   </item>
+   <item avail="2"  cost="10000" id="drecks_van" >
+      <useas type="VEHICLES" subtype="TRUCKS"/>
+      <vehicle han="5/6" acc="8" spdi="10" tspd="120" bod="14" arm="8" pil="0" sen="0" sea="8" type="GROUND"/>
+   </item>
+   <item avail="8"  cost="32000" id="baer_schlachtkreuzer" >
+      <useas type="VEHICLES" subtype="CARS"/>
+      <vehicle han="5/5" acc="10" spdi="17" tspd="180" bod="15" arm="12" pil="1" sen="1" sea="4" type="GROUND"/>
+      <modifications>
+        <accessorymod item="weapon_mount_heavy_manual" hook="VEHICLE_BODY" />
+      </modifications>
+   </item>
+   
+   <!-- Drones -->
+   <item avail="4"  cost="3500" id="junkdog" >
+      <useas type="DRONES" subtype="MEDIUM_DRONES"/>
+      <vehicle han="3/3" acc="6" spdi="15" tspd="40" bod="4" arm="1" pil="3" sen="2" sea="0" type="GROUND"/>
+   </item>
+   <item avail="6"  cost="3000" id="kuznechik" >
+      <useas type="DRONES" subtype="MEDIUM_DRONES"/>
+      <useas type="VEHICLES" subtype="ROTORCRAFT"/>
+      <vehicle han="3/3" acc="25" spdi="30" tspd="140" bod="6" arm="2" pil="1" sen="2" sea="1" type="AIR"/>
+   </item>
+   <item avail="4I"  cost="130000" id="ruhrmetall_selket" >
+      <useas type="VEHICLES" subtype="WALKER"/>
+      <vehicle han="3/5" acc="15" spdi="15" tspd="140" bod="18" arm="16" pil="4" sen="4" sea="5" type="GROUND"/>
+      <modifications>
+         <accessorymod hook="INTERNAL" item="rpk_hmg"/>
+         <accessorymod hook="INTERNAL" item="armtech_mgl12"/>
+      </modifications>
+   </item>
+   
+   
+</items>

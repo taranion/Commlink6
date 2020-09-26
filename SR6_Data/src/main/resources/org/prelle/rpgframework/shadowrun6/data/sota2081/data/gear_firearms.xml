@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<!-- SOTA 2081 Weapons -->
+	
+	<!-- PISTOLS_LIGHT -->
+	<item id="altmayr_MTR_3" avail="2L" cost="400">
+      <useas type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" />
+		<modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="BARREL"/>
+         <accessorymod hook="TOP"    item="laser_sight" included="true"/>
+      </modifications>
+      <weapon dmg="3P" attack="9,10,8,," mode="SA" ammo="6(cy)" skill="firearms" spec="firearms/pistols"/>
+   </item>
+   
+   <!-- PISTOLS_HEAVY -->
+	<item id="altmayr_SPX_2" avail="2L" cost="475">
+      <useas type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" />
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="BARREL"/>
+      </modifications>
+      <weapon dmg="5P" attack="9,9,5,," mode="SA" ammo="8(m)" skill="firearms" spec="firearms/pistols"/>
+   </item>
+   <!-- die  glock_drachent&#246;ter_II kann ein spezielles Ernstfall-Magzin mit 30 Schuss bekommen koste 350 und hat eine Verfügbarkeit von 4L -->
+   <item id="glock_drachentoeter_II" avail="4L" cost="1850">
+      <useas type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" />
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="BARREL"/>
+		 <itemhookmod hook="UNDER"/>
+		 <accessorymod hook="TOP" item="laser_sight" included="true"/>
+      </modifications>
+      <weapon dmg="3P" attack="11,10,9,," mode="SA" ammo="16(c)" skill="firearms" spec="firearms/pistols"/>
+   </item>
+   <item id="walther_secura_II" avail="3L" cost="925">
+      <useas type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" />
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="BARREL"/>
+		 <itemhookmod hook="UNDER"/>
+		 <moditemmod ref="smartgun_system_internal"/>
+		 <accessorymod hook="INTERNAL" item="flashlight"/>
+      </modifications>
+      <weapon dmg="3P" attack="11,9,8,," mode="SA/BF" ammo="18(c)" skill="firearms" spec="firearms/pistols"/>
+   </item>
+   
+   <!-- Machine Pistols -->
+   <!-- die ruhrmetall_SFP_9M egal welche der beiden varianten können nur mit hülsenloser muntion schiesen weis nicht wie man das kenntlich machen soll -->
+   <item id="ruhrmetall_SFP_9M_laser" avail="5L" cost="950" >
+      <useas type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS" />
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+		 <itemhookmod hook="STOCK"/>
+         <accessorymod hook="STOCK" item="folding_stock"/>
+         <accessorymod hook="BARREL" item="gas-vent_system" rating="2"/>
+         <accessorymod hook="TOP" item="laser_sight"/>
+		 <accessorymod hook="INTERNAL" item="flashlight"/>
+      </modifications>
+      <weapon dmg="3P" attack="12,11,8,," mode="SA/BF" ammo="25(c)" skill="firearms" spec="firearms/automatics"/>
+   </item>
+   <item id="ruhrmetall_SFP_9M_smart" avail="5L" cost="1250">
+      <useas type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS" />
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+		 <itemhookmod hook="STOCK"/>
+         <accessorymod hook="STOCK" item="folding_stock"/>
+         <accessorymod hook="BARREL" item="gas-vent_system" rating="2"/>
+         <moditemmod ref="smartgun_system_internal"/>
+		 <accessorymod hook="INTERNAL" item="flashlight"/>
+      </modifications>
+      <weapon dmg="3P" attack="13,12,9,," mode="SA/BF" ammo="25(c)" skill="firearms" spec="firearms/automatics"/>
+   </item>
+   
+   <!-- Shotgun -->
+     <item id="donnerbuechse" avail="2I" cost="150">
+      <useas type="WEAPON_FIREARMS" subtype="SHOTGUNS" />
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+      <weapon attack="8,7,,," ammo="2(b)" dmg="3P" mode="SS" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+   
+   <!-- Rifles -->
+   <item id="pjss_mammutbuechse" avail="5L" cost="15000">
+      <useas type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING" />
+      <modifications>
+      </modifications>
+      <weapon dmg="5P" mode="SS" attack="2,8,11,13,12" ammo="4(c)"  skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item id="pjss_modell_75" avail="5L" cost="1000">
+      <useas type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING" />
+      <modifications>
+      </modifications>
+      <weapon dmg="4P" mode="SS/SA" attack="3,12,8,," ammo="2(b)"  skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item id="pjss_modell_75_III" avail="5L" cost="1500">
+      <useas type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING" />
+      <modifications>
+      </modifications>
+      <weapon dmg="5P" mode="SS/BF" attack="3,12,8,," ammo="2(b)"  skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item id="steyr_ucr" avail="4L" cost="2900">
+      <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" />
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="UNDER"/>
+         <accessorymod hook="TOP" item="laser_sight"/>
+         <accessorymod hook="STOCK" item="shock_pad"/>
+		 <itemmod item="steyr_ucr_shotgun"/>
+      </modifications>
+      <weapon dmg="5P" mode="SA/BF/FA" attack="4,10,10,6,2" ammo="40(c)"  skill="firearms" spec="firearms/rifles"/>
+   </item>
+   
+   <item id="walther_securion" avail="4L" cost="2500">
+      <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" />
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="UNDER"/>
+         <itemhookmod hook="SIDE_L"/>
+         <itemhookmod hook="SIDE_R"/>         
+         <accessorymod hook="STOCK" item="folding_stock"/>
+		 <accessorymod hook="INTERNAL" item="silencer"/>
+      </modifications>
+      <weapon dmg="5P" mode="SA/BF/FA" attack="4,9,9,7,2" ammo="36(c)"  skill="firearms" spec="firearms/rifles"/>
+   </item>
+   
+    <!-- Machine Guns -->
+   <item id="ruhrmetall_SFM_11m_laser" avail="4L" cost="6500">
+      <useas type="WEAPON_FIREARMS" subtype="LMG" />
+      <modifications>
+         <accessorymod hook="STOCK" item="shock_pad"/>
+		 <accessorymod hook="STOCK" item="folding_stock"/>
+         <accessorymod hook="INTERNAL" item="laser_sight"/>
+         <accessorymod hook="BARREL" item="gas-vent_system" rating="2"/>
+		 <!--accessorymod hook="INTERNAL" item="heavy_flashlight"/-->
+		 <accessorymod hook="INTERNAL" item="flashlight_thermographic"/>
+		 <accessorymod hook="UNDER" item="bipod"/>
+      </modifications>
+      <weapon dmg="4P" mode="SA/BF/FA" attack="3,12,12,7,3" ammo="53(c)/60(d)/60(belt)"  skill="firearms" spec="firearms/longarms"/>
+   </item>
+   <item id="ruhrmetall_SFM_11m_smart" avail="4L" cost="7100">
+      <useas type="WEAPON_FIREARMS" subtype="LMG" />
+      <modifications>
+         <accessorymod hook="STOCK" item="shock_pad"/>
+		 <accessorymod hook="STOCK" item="folding_stock"/>
+         <moditemmod ref="smartgun_system_internal"/>
+         <accessorymod hook="BARREL" item="gas-vent_system" rating="2"/>
+		 <!--accessorymod hook="INTERNAL" item="heavy_flashlight"/-->
+		 <accessorymod hook="INTERNAL" item="flashlight_thermographic"/>
+		 <accessorymod hook="UNDER" item="bipod"/>
+      </modifications>
+      <weapon dmg="4P" mode="SA/BF/FA" attack="4,13,13,8,4" ammo="53(c)/60(d)/60(belt)"  skill="firearms" spec="firearms/longarms"/>
+   </item>
+   <item id="ruhrmetall_SMK_252" avail="7I" cost="15000">
+      <useas type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" />
+      <modifications>
+         <itemhookmod hook="STOCK"/>
+         <accessorymod hook="STOCK" item="shock_pad"/>
+		 <accessorymod hook="UNDER" item="bipod"/>
+		 <accessorymod hook="INTERNAL" item="imaging_scope"/>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+      <weapon dmg="7P" mode="SA" attack="1,10,11,10,7" ammo="53(c)/60(d)/60(belt)"  skill="firearms" spec="firearms/longarms"/>
+   </item>
+</items>

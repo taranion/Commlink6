@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <!-- Basic Program -->
+	<item avail="1" cost="60" id="browse"  >
+	   <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	</item> 
+ 	<item avail="1" cost="60" id="baby_monitor"> 
+       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	</item> 
+ 	<item avail="1" cost="60" id="configurator"> 
+       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	</item> 
+ 	<item avail="1" cost="60" id="edit">
+       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	</item> 
+ 	<item avail="1" cost="60" id="encryption">
+       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	</item> 
+ 	<item avail="1" cost="60" id="signal_scrubber">
+       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	</item> 
+ 	<item avail="1" cost="60" id="toolbox" >
+       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	</item> 
+ 	<item avail="1" cost="60" id="virtual_machine" >
+       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	
+	<!-- Hacking Program -->
+	<item avail="4I" cost="250" id="armor" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="biofeedback">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="biofeedback_filter">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="blackout" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="decryption">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+    <item avail="4I" cost="250" id="disarm" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+    </item> 
+	<item avail="4I" cost="250" id="defuse" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="exploit">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="fork" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="lockdown">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="overclock" >
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="stealth">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+	<item avail="4I" cost="250" id="trace">
+       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	</item> 
+
+	 <!-- Autosofts -->
+	<item avail="1" cost="500" id="clearsight"   maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL">
+       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1"/>
+	</item> 
+	<item avail="1" cost="500" id="electronic_warfare" maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL">
+       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
+	</item> 
+	<item avail="1" cost="500" id="evasion"      maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL">
+       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
+	</item> 
+	<item avail="1" cost="500" id="maneuvering"  maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL" >
+       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
+	</item> 
+	<item avail="1" cost="500" id="stealth_auto"  maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL" >
+       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
+	</item> 
+	<item avail="1" cost="500" id="targeting"    maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL" choice="WEAPON" multi="yes">
+       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
+	</item> 
+
+ 	<!-- OTHER -->
+   <item avail="2" cost="150" id="datasoft" choice="NAME" multi="yes">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" />
+	</item> 
+   <item avail="2" cost="100" id="mapsoft" choice="NAME" multi="yes" >
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" />
+	</item> 
+   <item avail="2" cost="150" id="shopsoft" multi="yes" choice="NAME">
+       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" />
+	</item> 
+   <item avail="4" cost="5000" id="activesoft" maxrat="6" rate="true" ratemul="PRICE" multi="yes" choice="PHYSICAL_SKILL">
+       <useas type="ACCESSORY" subtype="SKILLSOFT" slot="SKILLJACK" cap="1"/>
+       <requires>
+       	 <itemreq item="skillwires" char="y"/>
+       </requires>
+       <modifications>
+         <skillmod val="1" modType="ALTERNATE"/>
+       </modifications>
+   </item>
+   <item avail="2" cost="2500" id="knowsoft" choice="NAME" multi="yes">
+       <useas type="ACCESSORY" subtype="SKILLSOFT" slot="SKILLJACK" cap="1"/>
+       <modifications>
+         <skillmod ref="knowledge" val="1" modType="ALTERNATE"/>
+       </modifications>
+	</item> 
+   <item avail="1" cost="1500" id="linguasoft" maxrat="4" rate="true" ratemul="PRICE" choice="NAME" multi="yes">
+       <useas type="ACCESSORY" subtype="SKILLSOFT" slot="SKILLJACK" cap="1"/>
+       <modifications>
+         <skillmod ref="language" val="1" modType="ALTERNATE"/>
+       </modifications>
+	</item> 
+   <item avail="1" cost="400" id="tutorsoft1" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
+   <item avail="1" cost="800" id="tutorsoft2" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
+   <item avail="1" cost="1200" id="tutorsoft3" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
+   <item avail="1" cost="1600" id="tutorsoft4" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
+   <item avail="2" cost="2000" id="tutorsoft5" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
+   <item avail="2" cost="2400" id="tutorsoft6" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
+</items>

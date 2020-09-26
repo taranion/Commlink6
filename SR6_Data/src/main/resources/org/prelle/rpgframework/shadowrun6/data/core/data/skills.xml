@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<skills>
+    <skill id="astral"  attr="INTUITION" type="MAGIC" untr="n" restrict="y">
+        <skillspec id="astral_combat"/>
+        <skillspec id="astral_signatures"/>
+        <skillspec id="emotional_stress"/>
+        <skillspec id="spirit_types"/>
+    </skill>
+    <skill id="athletics"  attr="AGILITY" type="PHYSICAL" untr="y">
+        <skillspec id="climbing"/>
+        <skillspec id="flying"/>
+        <skillspec id="gymnastics"/>
+        <skillspec id="sprinting"/>
+        <skillspec id="swimming"/>
+        <skillspec id="throwing"/>
+        <skillspec id="archery"/>
+    </skill>
+    <skill id="biotech"  attr="LOGIC" type="TECHNICAL" untr="n">
+        <skillspec id="biotechnology"/>
+        <skillspec id="cybertechnology"/>
+        <skillspec id="first_aid"/>
+        <skillspec id="medicine"/>
+    </skill>
+    <skill id="close_combat"  attr="AGILITY" type="COMBAT" untr="y">
+        <skillspec id="blades"/>
+        <skillspec id="clubs"/>
+        <skillspec id="unarmed"/>
+    </skill>
+    <skill id="con"  attr="CHARISMA" type="SOCIAL" untr="y">
+        <skillspec id="acting"/>
+        <skillspec id="disguise"/>
+        <skillspec id="impersonation"/>
+        <skillspec id="performance"/>
+    </skill>
+    <skill id="conjuring"  attr="MAGIC" type="MAGIC" untr="n" restrict="y">
+        <skillspec id="banishing"/>
+        <skillspec id="summoning"/>
+    </skill>
+    <skill id="cracking"  attr="LOGIC" type="TECHNICAL" untr="n">
+        <skillspec id="cybercombat"/>
+        <skillspec id="electronic_warfare"/>
+        <skillspec id="hacking"/>
+    </skill>
+    <skill id="electronics"  attr="LOGIC" type="TECHNICAL" untr="y">
+        <skillspec id="computer"/>
+        <skillspec id="hardware"/>
+        <skillspec id="software"/>
+    </skill>
+    <skill id="enchanting"  attr="MAGIC" type="MAGIC" untr="n" restrict="y">
+        <skillspec id="alchemy"/>
+        <skillspec id="artificing"/>
+        <skillspec id="disenchanting"/>
+    </skill>
+    <skill id="engineering"  attr="LOGIC" type="TECHNICAL" untr="y">
+        <skillspec id="aeronautics_mechanic"/>
+        <skillspec id="armorer"/>
+        <skillspec id="automotive_mechanic"/>
+        <skillspec id="demolitions"/>
+        <skillspec id="gunnery"/>
+        <skillspec id="industrial_mechanic"/>
+        <skillspec id="lockpicking"/>
+        <skillspec id="nautical_mechanic"/>
+    </skill>
+    <skill id="exotic_weapons"  attr="AGILITY" type="COMBAT" untr="n">
+<!--         <skillspec id="bullwhip"/> -->
+<!--         <skillspec id="monofilament_whip"/> -->
+    </skill>
+    <skill id="firearms"  attr="AGILITY" type="COMBAT" untr="y">
+        <skillspec id="automatics" subtypes="MACHINE_PISTOLS,LMG,MMG,HMG"/>
+        <skillspec id="pistols" subtypes="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY"/>
+        <skillspec id="longarms"/>
+        <skillspec id="rifles" subtypes="RIFLE_ASSAULT,RIFLE_HUNTING,RIFLE_SNIPER"/>
+        <skillspec id="shotguns" subtypes="SHOTGUNS"/>
+    </skill>
+    <skill id="influence"  attr="CHARISMA" type="SOCIAL" untr="y">
+        <skillspec id="etiquette"/>
+        <skillspec id="instruction"/>
+        <skillspec id="intimidation"/>
+        <skillspec id="leadership"/>
+        <skillspec id="negotiation"/>
+    </skill>
+    <skill id="outdoors"  attr="INTUITION" type="PHYSICAL" untr="y">
+        <skillspec id="navigation"/>
+        <skillspec id="survival"/>
+        <skillspec id="tracking_woods"/>
+        <skillspec id="tracking_desert"/>
+        <skillspec id="tracking_urban"/>
+        <skillspec id="tracking_other"/>
+    </skill>
+    <skill id="perception"  attr="INTUITION" type="PHYSICAL" untr="y">
+        <skillspec id="visual"/>
+        <skillspec id="aural"/>
+        <skillspec id="tactile"/>
+        <skillspec id="scent" />
+        <skillspec id="taste" />
+        <skillspec id="perception_woods"/>
+        <skillspec id="perception_desert"/>
+        <skillspec id="perception_urban"/>
+        <skillspec id="perception_other"/>
+    </skill>
+    <skill id="piloting"  attr="REACTION" type="TECHNICAL" untr="y">
+        <skillspec id="ground_craft"/>
+        <skillspec id="aircraft"/>
+        <skillspec id="watercraft"/>
+    </skill>
+    <skill id="sorcery"  attr="MAGIC" type="MAGIC" untr="n" restrict="y">
+        <skillspec id="counterspelling"/>
+        <skillspec id="ritual_spellcasting"/>
+        <skillspec id="spellcasting"/>
+    </skill>
+    <skill id="stealth"  attr="AGILITY" type="PHYSICAL" untr="y">
+        <skillspec id="disguise"/>
+        <skillspec id="palming"/>
+        <skillspec id="sneaking"/>
+        <skillspec id="camouflage"/>
+    </skill>
+    <skill id="tasking"  attr="RESONANCE" type="RESONANCE" untr="n" restrict="y">
+        <skillspec id="compiling"/>
+        <skillspec id="decompiling"/>
+        <skillspec id="registering"/>
+    </skill>
+    <skill id="knowledge"  attr="LOGIC" type="KNOWLEDGE" untr="n" />
+    <skill id="language"  attr="LOGIC" type="LANGUAGE" untr="n" />
+</skills>

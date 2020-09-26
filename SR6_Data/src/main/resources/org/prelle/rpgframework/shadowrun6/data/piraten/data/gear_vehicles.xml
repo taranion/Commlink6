@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+ <!-- Boats -->
+   <item avail="5L"  cost="2500000" id="LKB-T3">
+      <useas type="VEHICLES" subtype="BOATS"/>
+      <vehicle han="4/4" acc="25" spdi="15" tspd="130" bod="22" arm="16" pil="2" sen="3" sea="10"/>
+      <modifications>
+        <accessorymod item="weapon_mount_heavy" hook="VEHICLE_BODY" />
+        <accessorymod item="weapon_mount_heavy" hook="VEHICLE_BODY" />
+      </modifications>
+   </item>
+
+   <item avail="4"  cost="350000" id="Selkie">
+      <useas type="VEHICLES" subtype="BOATS"/>
+      <useas type="VEHICLES" subtype="SUBMARINES"/>
+      <vehicle han="3" acc="20" spdi="20" tspd="80" bod="10" arm="8" pil="3" sen="3" sea="4"/>
+   </item>
+
+   <item avail="4L"  cost="22000" id="SCX-hunt">
+      <useas type="VEHICLES" subtype="BOATS"/>
+      <vehicle han="2" acc="30" spdi="30" tspd="90" bod="7" arm="6" pil="2" sen="2" sea="3"/>
+      <modifications>
+        <accessorymod item="rigger_interface" hook="VEHICLE_ELECTRONICS" />
+        <accessorymod item="weapon_mount_standard" hook="VEHICLE_BODY" />
+        <accessorymod item="weapon_mount_standard" hook="VEHICLE_BODY" />
+      </modifications>
+   </item>
+
+   <item avail="4I"  cost="80000000" id="Umea">
+      <useas type="VEHICLES" subtype="BOATS"/>
+      <vehicle han="4" acc="10" spdi="15" tspd="70" bod="32" arm="20" pil="3" sen="4" sea="45"/>
+   </item>
+
+ <!-- Submarines -->
+   <item avail="3"  cost="5500" id="SK-Dreizack">
+      <useas type="VEHICLES" subtype="SUBMARINES"/>
+      <useas type="DRONES" subtype="MEDIUM_DRONES" />
+      <vehicle han="2" acc="8" spdi="10" tspd="25" bod="4" arm="5" pil="3" sen="2" sea="1"/>
+      <modifications>
+        <itemattrmod attr="CAPACITY" val="1" slot="VEHICLE_BODY"/>
+      </modifications>
+   </item>
+
+<!-- Medium drones -->
+   <item avail="3"  cost="12000" id="LZ-74" >
+      <useas type="DRONES" subtype="MEDIUM_DRONES" />
+      <vehicle han="5" acc="5" spdi="5" tspd="10" bod="3" arm="4" pil="3" sen="4" type="AIR"/>
+   </item>
+  
+</items>

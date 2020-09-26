@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+  <action cat="MATRIX" id="backdoor_entry" illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER"  iattr="SLEAZE"/>
+  <action cat="MATRIX" id="brute_force"    illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" iattr="ATTACK"/>
+  <action cat="MATRIX" id="change_icon"    illegal="false"                 type="MINOR" access="USER/ADMIN"    />
+  <action cat="MATRIX" id="check_os"       illegal="true" skill="cracking" type="MAJOR" access="ADMIN" />
+  <action cat="MATRIX" id="control_device" illegal="false" skill="electronics" type="MAJOR" access="USER/ADMIN" />
+  <action cat="MATRIX" id="crack_file"     illegal="true" skill="cracking" type="MAJOR" access="USER/ADMIN" />
+  <action cat="MATRIX" id="crash_program"  illegal="true" skill="cracking" type="MAJOR" access="ADMIN" />
+  <action cat="MATRIX" id="data_spike"     illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" iattr="ATTACK"/>
+  <action cat="MATRIX" id="disarm_data_bomb" illegal="false" skill="cracking" type="MAJOR" access="USER/ADMIN" />
+  <action cat="MATRIX" id="edit_file"      illegal="false" skill="electronics" type="MAJOR" access="USER/ADMIN" />
+  <action cat="MATRIX" id="encrypt_file"   illegal="false" skill="electronics" type="MAJOR" access="USER/ADMIN" />
+  <action cat="MATRIX" id="enter_host"     illegal="false" type="MINOR" access="OUTSIDER/USER/ADMIN" />
+  <action cat="MATRIX" id="erase_matrix_signature" illegal="true" skill="electronics" type="MAJOR" access="USER/ADMIN" />
+  <action cat="MATRIX" id="format_device"  illegal="false" skill="electronics" type="MAJOR" access="ADMIN" />
+  <action cat="MATRIX" id="full_matrix_defense" illegal="false" type="MAJOR" access="OUTSIDER/USER/ADMIN" />
+  <action cat="MATRIX" id="hash_check"     illegal="true" skill="electronics" type="MAJOR" access="USER" />
+  <action cat="MATRIX" id="hide"           illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" />
+  <action cat="MATRIX" id="jack_out"       illegal="false" skill="electronics" type="MAJOR" access="OUTSIDER/USER/ADMIN" attr="WILLPOWER"/>
+  <action cat="MATRIX" id="jam_signals"    illegal="true" skill="cracking" type="MAJOR" access="ADMIN" />
+  <action cat="MATRIX" id="jump_rigged"    illegal="false" skill="electronics" type="MAJOR" access="USER/ADMIN" />
+  <action cat="MATRIX" id="matrix_perception" illegal="false" skill="electronics" type="MAJOR" access="OUTSIDER/USER/ADMIN" attr="INTUITION"/>
+  <action cat="MATRIX" id="matrix_search"  illegal="false" skill="electronics" type="SPECIAL" access="OUTSIDER/USER/ADMIN" attr="INTUITION"/>
+  <action cat="MATRIX" id="probe"          illegal="true" skill="cracking" type="SPECIAL" access="OUTSIDER/USER/ADMIN" iattr="SLEAZE"/>
+  <action cat="MATRIX" id="reboot_device"  illegal="false" skill="electronics" type="MAJOR" access="ADMIN" />
+  <action cat="MATRIX" id="reconfigure"    illegal="false" type="MINOR" access="ADMIN" />
+  <action cat="MATRIX" id="send_message"   illegal="false" type="MINOR" access="OUTSIDER/USER/ADMIN" />
+  <action cat="MATRIX" id="set_data_bomb"  illegal="true" skill="electronics" type="MAJOR" access="ADMIN" />
+  <action cat="MATRIX" id="snoop"          illegal="true" skill="cracking" type="MAJOR" access="ADMIN" />
+  <action cat="MATRIX" id="spoof_command"  illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" />
+  <action cat="MATRIX" id="switch_ifmode"  illegal="true" type="MINOR" access="ADMIN" />
+  <action cat="MATRIX" id="tarpit"         illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" iattr="ATTACK"/>
+  <action cat="MATRIX" id="trace_icon"     illegal="true" skill="electronics" type="MAJOR" access="ADMIN" attr="INTUITION"/>
+  <!-- Technomancer only -->
+  <action cat="MATRIX" id="compile_sprite" illegal="true" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
+  <action cat="MATRIX" id="register_sprite" illegal="true" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
+  <action cat="MATRIX" id="decompile_sprite" illegal="true" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
+</actions>

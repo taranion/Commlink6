@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sprites>
+  <sprite id="courier"/>
+  <sprite id="crack"/>
+  <sprite id="data"/>
+  <sprite id="fault"/>
+  <sprite id="machine"/>
+</sprites>

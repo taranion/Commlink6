@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mentorspirits>
+  <mentorspirit id="bear">
+    <modifications>
+      <edgemod type="COST" resist="BOTH" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="HEALTH" />
+    </magician>
+    <adept>
+      <powermod ref="rapid_healing" value="1"/>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="cat" >
+    <modifications>
+      <edgemod type="COST" skill="athletics" />
+      <edgemod type="COST" skill="stealth" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="ILLUSION" />
+    </magician>
+    <adept>
+      <powermod ref="traceless_walk" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="coyote" >
+    <modifications>
+      <edgemod type="COST" skill="con" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="MANIPULATION" />
+    </magician>
+    <adept>
+      <powermod ref="vocal_control" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="dog" >
+    <modifications>
+      <edgemod type="COST" skill="outdoors" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="DETECTION" />
+    </magician>
+    <adept>
+      <powermod ref="improved_sense" value="2" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="dragonslayer">
+    <modifications>
+      <edgemod type="COST" skill="influence" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="COMBAT" />
+    </magician>
+    <adept>
+      <powermod ref="danger_sense" value="1"/>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="eagle" >
+    <modifications>
+      <edgemod type="COST" skill="perception" />
+      <qualitymod ref="allergy_common_mild" choice="Pollutants"/>
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+      <powermod ref="combat_sense" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="firebringer" >
+    <modifications>
+      <selmod uuid="9b909b3d-ddcb-46b4-838e-4d182a721d14">
+        <edgemod type="COST" skill="engineering" />
+        <edgemod type="COST" skill="enchanting" />
+      </selmod>
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="MANIPULATION" />
+    </magician>
+    <adept>
+      <selmod uuid="f85e6a72-7555-4620-9f57-8061f6b94ba5">
+        <powermod ref="improved_ability" choice="astral" value="1" />
+        <powermod ref="improved_ability" choice="athletics" value="1" />
+        <powermod ref="improved_ability" choice="biotech" value="1" />
+        <powermod ref="improved_ability" choice="con" value="1" />
+        <powermod ref="improved_ability" choice="conjuring" value="1" />
+        <powermod ref="improved_ability" choice="cracking" value="1" />
+        <powermod ref="improved_ability" choice="electronics" value="1" />
+        <powermod ref="improved_ability" choice="enchanting" value="1" />
+        <powermod ref="improved_ability" choice="engineering" value="1" />
+        <powermod ref="improved_ability" choice="influence" value="1" />
+        <powermod ref="improved_ability" choice="outdoors" value="1" />
+        <powermod ref="improved_ability" choice="perception" value="1" />
+        <powermod ref="improved_ability" choice="piloting" value="1" />
+        <powermod ref="improved_ability" choice="sorcery" value="1" />
+        <powermod ref="improved_ability" choice="stealth" value="1" />
+        <powermod ref="improved_ability" choice="tasking" value="1" />
+      </selmod>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="mountain" >
+    <modifications>
+      <edgemod type="COST" skill="outdoors" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="sorcery" />
+    </magician>
+    <adept>
+      <powermod ref="mystic_armor" value="2" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="rat" >
+    <modifications>
+      <edgemod type="COST" skill="stealth" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="sorcery" />
+    </magician>
+    <adept>
+      <powermod ref="pain_resistance" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="sea" >
+    <modifications>
+      <edgemod type="COST" skill="athletics" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+      <powermod ref="improved_ability" choice="athletics" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="seducer" >
+    <modifications>
+      <edgemod type="COST" skill="con" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="ILLUSION" />
+    </magician>
+    <adept>
+      <selmod uuid="480ddbd2-f063-4139-8e30-895de8737f55">
+        <powermod ref="improved_ability" choice="con" value="1" />
+        <powermod ref="improved_ability" choice="influence" value="1" />
+      </selmod>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="shark" >
+    <modifications>
+      <edgemod type="COST" skill="close_combat" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="COMBAT" />
+    </magician>
+    <adept>
+      <powermod ref="killing_hands" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="snake" >
+    <modifications>
+      <skillmod ref="knowledge" val="1" uuid="210b2d71-2d9c-4c87-914f-f7df4768c7d8"/>
+      <skillmod ref="knowledge" val="1" uuid="06e4c414-493a-40c4-8b55-821591eba5d0"/>
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="DETECTION" />
+    </magician>
+    <adept>
+      <powermod ref="kinesics" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="thunderbird" >
+    <modifications>
+      <edgemod type="COST" skill="influence" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+      <powermod ref="critical_strike" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="wise_warrior">
+    <modifications>
+      <edgemod type="COST" skill="influence" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="COMBAT" />
+    </magician>
+    <adept>
+      <selmod uuid="8fa64b51-c088-4f66-bfde-89e5b3eed562">
+        <powermod ref="improved_ability_combat" choice="close_combat" value="1" />
+        <powermod ref="improved_ability_combat" choice="exotic_weapons" value="1" />
+        <powermod ref="improved_ability_combat" choice="firearms" value="1" />
+      </selmod>
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="wolf" >
+    <modifications>
+      <edgemod type="COST" skill="sorcery" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="COMBAT" />
+    </magician>
+    <adept>
+      <powermod ref="attribute_boost" value="2" choice="AGILITY"/>
+    </adept>
+  </mentorspirit>
+
+</mentorspirits>

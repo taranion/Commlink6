@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="4L" cost="290" id="cyberspace_designs_quadrotor_crossbow" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+      <requires>
+         <slotreq capacity="0" slot="VEHICLE_BODY"/>
+         <itemreq item="cyberspace_designs_quadrotor"/>
+      </requires>
+      <weapon dmg="3P" attack="2,10,4,2," ammo="4(m)" mode="SS"  skill="engineering" spec="engineering/gunnery"/>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+	</item>
+</items>

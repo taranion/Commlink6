@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<foci>
+   <focus id="alchemical_focus" karma="3" cost="5000">
+     <modifications>
+       <skillmod ref="enchanting" cond="true"/>
+     </modifications>
+   </focus>
+   <focus id="disenchanting_focus" karma="3" cost="5000" >
+     <modifications>
+       <skillmod ref="enchanting" cond="true"/>
+     </modifications>
+   </focus>
+   <focus id="centering_focus"  karma="3" cost="9000">
+     <modifications>
+       <relevancemod topic="MAGICAL"/>
+     </modifications>
+   </focus>
+   <focus id="flexible_signature_focus"  karma="3" cost="9000">
+     <modifications>
+       <relevancemod topic="MAGICAL"/>
+     </modifications>
+   </focus>
+   <focus id="masking_focus"  karma="3" cost="9000">
+     <modifications>
+       <relevancemod topic="MAGICAL"/>
+     </modifications>
+   </focus>
+   <focus id="spell_shaping_focus"  karma="3" cost="9000" >
+     <modifications>
+       <relevancemod topic="MAGICAL"/>
+     </modifications>
+   </focus>
+   
+   <focus id="power_focus"     karma="6" cost="18000" avail="3" >
+     <modifications>
+       <skillmod ref="sorcery" cond="true"/>
+     </modifications>
+   </focus>
+   <focus id="qi_focus"  karma="2" cost="3000" choice="ADEPT_POWER">
+     <modifications>
+       <powermod/>
+     </modifications>
+   </focus>
+   <focus id="counterspelling_focus"  karma="2" cost="4000" choice="SPELL_CATEGORY">
+     <modifications>
+       <skillmod ref="sorcery" val="1" cond="true"/>
+     </modifications>
+   </focus>
+   <focus id="spellcasting_focus"  karma="2" cost="4000" choice="SPELL_CATEGORY" >
+     <modifications>
+       <skillmod ref="sorcery" val="1" cond="true"/>
+     </modifications>
+   </focus>
+   <focus id="ritualspellcasting_focus"  karma="2" cost="4000" choice="SPELL_CATEGORY">
+     <modifications>
+       <skillmod ref="sorcery" val="1" cond="true"/>
+     </modifications>
+   </focus>
+   <focus id="sustaining_focus"  karma="2" cost="4000" choice="SPELL_CATEGORY" >
+     <modifications>
+       <skillmod ref="sorcery" val="1" cond="true"/>
+     </modifications>
+   </focus>
+   <focus id="summoning_focus"  karma="2" cost="4000" choice="SPIRIT">
+     <modifications>
+       <skillmod ref="conjuring" val="1" cond="true"/>
+     </modifications>
+   </focus>
+   <focus id="banishing_focus"  karma="2" cost="4000" choice="SPIRIT">
+     <modifications>
+       <skillmod ref="conjuring" val="1" cond="true"/>
+     </modifications>
+   </focus>
+   <focus id="weapon_focus"  karma="3" cost="7000" choice="MELEE_WEAPON" avail="3">
+
+   </focus>
+</foci>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="3" cost="250" id="chemical_protection" rate="true" ratemul="PRICE CAPACITY" >
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="1"/>
+   </item>
+   <item avail="5" cost="3000" id="chemical_seal" >
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="6"/>
+      <requires>
+        <itemreq item="full_body_armor_with_helmet"/>
+      </requires>
+   </item>
+   <item avail="3" cost="250" id="cold_resistance" rate="true" ratemul="PRICE CAPACITY">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="1"/>
+   </item>
+   <item avail="3" cost="250" id="fire_resistance" rate="true" ratemul="PRICE CAPACITY">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="1"/>
+   </item>
+   <item avail="3" cost="250" id="electricity_resistance" rate="true" ratemul="PRICE CAPACITY" >
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="1"/>
+   </item>
+   <item avail="1" cost="75" id="electrochromic_feature">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="0"/>
+   </item>
+   <item avail="2" cost="150" id="feedback_feature" >
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="0"/>
+   </item>
+</items>

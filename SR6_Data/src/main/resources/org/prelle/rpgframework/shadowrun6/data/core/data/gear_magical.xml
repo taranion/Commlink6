@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+<!--    <item id="alchemical_focus" avail="1" cost="5000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_ENCHANTING"> -->
+<!--      <focus karma="3" /> -->
+<!--      <modifications> -->
+<!--        <skillmod ref="enchanting" cond="true"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="disenchanting_focus" avail="1" cost="5000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_ENCHANTING"> -->
+<!--      <focus karma="3" /> -->
+<!--      <modifications> -->
+<!--        <skillmod ref="enchanting" cond="true"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="centering_focus"  avail="1" cost="9000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_METAMAGIC" > -->
+<!--      <focus karma="3" /> -->
+<!--      <modifications> -->
+<!--        <relevancemod topic="MAGICAL"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="flexible_signature_focus"  avail="1" cost="9000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_METAMAGIC" > -->
+<!--      <focus karma="3" /> -->
+<!--      <modifications> -->
+<!--        <relevancemod topic="MAGICAL"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="masking_focus"  avail="1" cost="9000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_METAMAGIC" > -->
+<!--      <focus karma="3" /> -->
+<!--      <modifications> -->
+<!--        <relevancemod topic="MAGICAL"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="spell_shaping_focus"  avail="1" cost="9000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_METAMAGIC" > -->
+<!--      <focus karma="3" /> -->
+<!--      <modifications> -->
+<!--        <relevancemod topic="MAGICAL"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+   
+<!--    <item id="power_focus"     avail="1" cost="18000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_POWER"> -->
+<!--      <focus karma="6" /> -->
+<!--      <modifications> -->
+<!--        <skillmod ref="sorcery" cond="true"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="qi_focus"  avail="1" cost="9000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_QI"> -->
+<!--      <focus karma="2" choice="ADEPT_POWER"/> -->
+<!--    </item> -->
+<!--    <item id="counterspelling_focus"  avail="1" cost="4000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_SPELL"> -->
+<!--      <focus karma="2" choice="SPELL_CATEGORY" /> -->
+<!--      <modifications> -->
+<!--        <skillmod ref="sorcery" val="1" cond="true"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="spellcasting_focus"  avail="1" cost="4000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_SPELL"> -->
+<!--      <focus karma="2" choice="SPELL_CATEGORY" /> -->
+<!--      <modifications> -->
+<!--        <skillmod ref="sorcery" val="1" cond="true"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="ritualspellcasting_focus"  avail="1" cost="4000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_SPELL"> -->
+<!--      <focus karma="2" choice="SPELL_CATEGORY" /> -->
+<!--      <modifications> -->
+<!--        <skillmod ref="sorcery" val="1" cond="true"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="sustaining_focus"  avail="1" cost="4000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_SPELL"> -->
+<!--      <focus karma="2" choice="SPELL_CATEGORY" /> -->
+<!--      <modifications> -->
+<!--        <skillmod ref="sorcery" val="1" cond="true"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="summoning_focus"  avail="1" cost="4000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_SPIRIT"> -->
+<!--      <focus karma="2" choice="SPIRIT" /> -->
+<!--      <modifications> -->
+<!--        <skillmod ref="conjuring" val="1" cond="true"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="banishing_focus"  avail="1" cost="4000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_SPIRIT"> -->
+<!--      <focus karma="2" choice="SPIRIT" /> -->
+<!--      <modifications> -->
+<!--        <skillmod ref="conjuring" val="1" cond="true"/> -->
+<!--      </modifications> -->
+<!--    </item> -->
+<!--    <item id="weapon_focus"  avail="1" cost="7000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_WEAPON"> -->
+<!--      <focus karma="3" choice="WEAPON" /> -->
+<!--    </item> -->
+   
+   <item id="magical_lodge_materials" avail="1" cost="500" maxrat="24" rate="true" ratemul="AVAIL PRICE" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y"/>
+   <item id="reagents_per_dram" avail="2" cost="50" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y"/>
+
+</items>

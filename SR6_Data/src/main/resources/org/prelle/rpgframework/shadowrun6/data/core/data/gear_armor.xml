@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+    <item avail="1" cost="10" id="clothing_street" subtype="ARMOR_BODY" type="ARMOR" modonly="true">
+        <armor rating="0"/>
+        <modifications>
+            <itemhookmod capacity="0" hook="ARMOR"/>
+        </modifications>
+    </item>
+
+    <item avail="1" cost="10" id="clothing_squatter" subtype="ARMOR_BODY" type="ARMOR">
+        <armor rating="0"/>
+        <modifications>
+            <itemhookmod capacity="0" hook="ARMOR"/>
+        </modifications>
+    </item>
+
+    <item avail="1" cost="100" id="clothing_low" subtype="ARMOR_BODY" type="ARMOR">
+        <armor rating="0"/>
+        <modifications>
+            <itemhookmod capacity="0" hook="ARMOR"/>
+        </modifications>
+    </item>
+
+    <item avail="1" cost="1000" id="clothing_middle" subtype="ARMOR_BODY" type="ARMOR">
+        <armor rating="0"/>
+        <modifications>
+            <itemhookmod capacity="0" hook="ARMOR"/>
+        </modifications>
+    </item>
+
+    <item avail="1" cost="5000" id="clothing_high" subtype="ARMOR_BODY" type="ARMOR">
+        <armor rating="0"/>
+        <modifications>
+            <itemhookmod capacity="0" hook="ARMOR"/>
+        </modifications>
+    </item>
+
+    <item avail="1" cost="10000" id="clothing_luxury" subtype="ARMOR_BODY" type="ARMOR">
+        <armor rating="0"/>
+        <modifications>
+            <itemhookmod capacity="0" hook="ARMOR"/>
+        </modifications>
+    </item>
+
+    <item id="synthleather_jacket" avail="1" cost="300">
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="1" social="-2" />
+        <modifications>
+            <itemhookmod capacity="3" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="actioneer_business" avail="2" cost="1500">
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="2" social="+2" />
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="armor_clothing" avail="2" cost="500">
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="2" social="0"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="armor_jacket" avail="2" cost="1000" >
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="4" social="-3"/>
+        <modifications>
+            <itemhookmod capacity="8" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="armor_vest" avail="4" cost="750" >
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="3" social="-1"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="chameleon_suit" avail="4I" cost="2000" >
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="2" social="-3"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="full_body_armor" avail="4L" cost="2000">
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="5" social="-5"/>
+        <modifications>
+            <itemhookmod capacity="10" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="full_body_armor_with_helmet" avail="4L" cost="2500">
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="7" social="-9"/>
+        <modifications>
+            <itemhookmod capacity="10" hook="ARMOR"/>
+            <itemhookmod capacity="6" hook="HELMET_ACCESSORY"/>
+        </modifications>
+    </item>
+    <item id="lined_coat" avail="4" cost="900">
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="3"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="urban_explorer_jumpsuit" avail="2" cost="800">
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="3" social="-2"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+        </modifications>
+    </item>
+
+    <item avail="1" cost="200" id="helmet">
+        <useas type="ARMOR" subtype="ARMOR_HELMET"/>
+        <armor rating="1" social="-4"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="HELMET_ACCESSORY"/>
+        </modifications>
+    </item>
+
+    <item avail="4" cost="900" id="ballistic_shield">
+        <useas type="ARMOR" subtype="ARMOR_SHIELD"/>
+        <armor rating="2"/>
+        <weapon dmg="2S" attack="4,,,," skill="exotic_weapons"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <itemmod item="ballistic_shield_weapon"/>
+        </modifications>
+    </item>
+    <item avail="4" cost="1200" id="riot_shield">
+        <useas type="ARMOR" subtype="ARMOR_SHIELD"/>
+        <armor rating="2"/>
+        <weapon dmg="4S(e)" attack="4,,,," skill="exotic_weapons"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <itemmod item="riot_shield_weapon"/>
+        </modifications>
+    </item>
+
+
+</items>

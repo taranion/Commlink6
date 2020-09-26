@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="steyr_ucr_shotgun" avail="5L" cost="1500">
+   	  <useas type="WEAPON_FIREARMS" subtype="SHOTGUNS"/>
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="UNDER"/>
+         <accessorymod hook="TOP" item="laser_sight"/>
+         <accessorymod hook="STOCK" item="shock_pad"/>
+      </modifications>
+      <weapon dmg="4P" mode="SS/SA" attack="7,9,8,," ammo="4(m)"  skill="firearms" spec="firearms/rifles"/>
+   </item>
+</items>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>   
+ <!-- 2019/07 -->
+   <item avail="3"  cost="55000" id="mercedes_multimog-d1" issue="2019-07">
+      <useas type="VEHICLES" subtype="TRUCKS"/>
+      <vehicle han="5/4" acc="8" spdi="10" tspd="130" bod="17" arm="14" pil="2" sen="2" sea="10"/>
+   </item>
+   <item avail="3"  cost="85000" id="mercedes_multimog-k4" issue="2019-07">
+      <useas type="VEHICLES" subtype="TRUCKS"/>
+      <vehicle han="5/4" acc="8" spdi="10" tspd="120" bod="18" arm="16" pil="4" sen="4" sea="8"/>
+      <modifications>
+         <accessorymod hook="INTERNAL" item="rigger_interface"/>
+      </modifications>
+   </item>
+   
+ <!-- 2019/11 -->
+   <item avail="2"  cost="14000" id="bmw_blitzen_2080" issue="2019-11">
+      <useas type="VEHICLES" subtype="BIKES"/>
+      <vehicle han="3/5" acc="16" spdi="30" tspd="200" bod="7" arm="6" pil="1" sen="1" sea="2"/>
+   </item>
+
+ <!-- 2020/05 -->
+  <!-- Motorcycles -->
+   <item avail="5"  cost="18500" id="m-k-revolution" issue="2020-05">
+      <useas type="VEHICLES" subtype="BIKES"/>
+      <useas type="VEHICLES" subtype="BOATS"/>
+      <vehicle han="3/5" acc="25" spdi="25" tspd="220" bod="7" arm="6" pil="2" sen="2" sea="1"/>
+   </item>
+
+  <!-- Boats -->
+   <item avail="2"  cost="950" id="suzuki-watersport" issue="2020-05">
+      <useas type="VEHICLES" subtype="BOATS"/>
+      <vehicle han="2" acc="4" spdi="10" tspd="60" bod="3" arm="1" pil="1" sen="1" sea="2"/>
+   </item>
+
+   <item avail="3"  cost="27500" id="mt-barrakuda" issue="2020-05">
+      <useas type="VEHICLES" subtype="BOATS"/>
+      <vehicle han="4" acc="20" spdi="20" tspd="100" bod="14" arm="12" pil="2" sen="2" sea="10"/>
+   </item>
+   
+</items>

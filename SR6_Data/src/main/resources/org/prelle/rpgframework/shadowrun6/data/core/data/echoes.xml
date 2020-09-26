@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+   <metaecho id="living_network" type="ECHO"/>
+   <metaecho id="machine_mind"   type="ECHO">
+     <modifications>
+       <itemmod item="control_rig" rating="1"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="attack_upgrade" type="ECHO" max="2">
+     <modifications>
+       <attrmod attr="ATTACK" val="1" type="AUGMENTED"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="data_processing_upgrade" type="ECHO" max="2">
+     <modifications>
+       <attrmod attr="DATA_PROCESSING" val="1" type="AUGMENTED"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="firewall_upgrade" type="ECHO" max="2">
+     <modifications>
+       <attrmod attr="FIREWALL" val="1" type="AUGMENTED"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="sleaze_upgrade" type="ECHO" max="2">
+     <modifications>
+       <attrmod attr="SLEAZE" val="1" type="AUGMENTED"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="neurofilter"  type="ECHO" max="2" />
+   <metaecho id="overclocking" type="ECHO" max="1">
+     <modifications>
+       <attrmod attr="INITIATIVE_DICE_MATRIX_VR_HOT" val="1" type="AUGMENTED"/>
+       <!-- Already included by adding additional dice -->
+       <!-- attrmod attr="MINOR_ACTION_MATRIX" val="1" cond="true" type="AUGMENTED"/-->
+     </modifications>
+   </metaecho>
+   <metaecho id="resonance_link" type="ECHO" />
+   <metaecho id="skin_link" type="ECHO"/>
+</metaechoes>

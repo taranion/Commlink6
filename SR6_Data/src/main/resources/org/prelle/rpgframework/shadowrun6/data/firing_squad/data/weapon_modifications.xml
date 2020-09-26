@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<itemenhancements>
+	<itemenhancement id="accessory_rail_left" avail="3L" cost="75">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemhookmod hook="SIDE_L"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="accessory_rail_right" avail="3L" cost="75">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemhookmod hook="SIDE_R"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="barrel_extension" avail="3L" cost="350">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="-2,,+1,+2,+2"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="biometric_gun_lock" avail="2L" cost="100">
+	  <requires>
+    	<itemtypereq type="WEAPON_FIREARMS"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="collapsible_stock" avail="2" cost="250">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="-2,,+1,+2,+1" cond="true"/>
+         <itemattrmod attr="ATTACK_RATING" objVal="+1,+1,,-2,-1" cond="true"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="custom_style" avail="2" cost="250">
+	  <requires>
+	    <anyreq>
+	    	<itemtypereq type="WEAPON_FIREARMS"/>
+	    	<itemtypereq type="WEAPON_SPECIAL"/>
+	    </anyreq>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="dikote" avail="5" cost="225">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="BLADES"/>
+	    	<itemsubtypereq type="AMMUNITION"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="1,,,,"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="easy_breakdown" avail="2" cost="250">
+	  <requires>
+	    	<itemtypereq type="WEAPON_FIREARMS"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="folding_stock" avail="2L" cost="75">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal=",,-1,-2,-3" />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="foregrip" avail="2" cost="250">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="+1,+2,+1,," />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="gas-vent_improved" avail="3" cost="600">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal=",+1,+2,+2," />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="gecko_grip" avail="2" cost="90">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="TASERS"/>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <relevancemod topic="COMBAT" />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="gyro_mount_ii" avail="3" cost="1500">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="+1,+1,+1,+1,+1" cond="true" />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="heavy_weight" avail="3" cost="175">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="-2,+2,+1,," />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="light_weight" avail="3" cost="175">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="+2,0,-2,," />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="melee_hardening" avail="3" cost="300" size="2">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="TASERS"/>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemmod item="firearm_in_melee" />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="metahuman_adaption" avail="3" cost="200">
+	  <requires>
+	    <anyreq>
+	    	<itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+	    	<itemtypereq type="WEAPON_RANGED"/>
+	    	<itemtypereq type="WEAPON_FIREARMS"/>
+	    	<itemtypereq type="WEAPON_SPECIAL"/>
+	    </anyreq>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="nanoconstruction" avail="3L" cost="130">
+	  <requires>
+	    <anyreq>
+	    	<itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+	    	<itemtypereq type="WEAPON_RANGED"/>
+	    	<itemtypereq type="WEAPON_FIREARMS"/>
+	    	<itemtypereq type="WEAPON_SPECIAL"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <specrulemod ref="ATTACK_REPLACE_WITH_1_WILD_DIE" />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="no_stock" avail="1" cost="50">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="+2,,-1,-2,-3" />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="personalized_grip_ranged" avail="3L" cost="200">
+	  <requires>
+	    <anyreq>
+	    	<itemtypereq type="WEAPON_RANGED"/>
+	    	<itemtypereq type="WEAPON_FIREARMS"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="+1,+1,,," />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="personalized_grip_melee" avail="3L" cost="200">
+	  <requires>
+	    	<itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="+2,,,," />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="revolution_arms_collapsible_stock" avail="3L" cost="700">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="TASERS"/>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="-2,,+1,+2,+1" cond="true"/>
+         <itemattrmod attr="ATTACK_RATING" objVal="+1,+1,,-2,-2" cond="true"/>
+         <itemattrmod attr="ATTACK_RATING" objVal="+2,,-1,-2,-3" cond="true"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="ruthenium_coating" avail="4I" cost="1000">
+	  <requires>
+	    	<itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+	    	<itemtypereq type="WEAPON_RANGED"/>
+	    	<itemtypereq type="WEAPON_FIREARMS"/>
+	    	<itemtypereq type="WEAPON_SPECIAL"/>
+	  </requires>
+    </itemenhancement>
+	<itemenhancement id="rigid_stock" avail="3" cost="250">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal=",+1,+2,+1,+1" cond="true"/>
+         <itemattrmod attr="ATTACK_RATING" objVal="-1,+1,+1,+2,+1" cond="true"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="safe_firing_iff_system" avail="3L" cost="400" size="2">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="TASERS"/>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="short_barrel" avail="2" cost="65">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="+2,+1,-2,,-99"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="side_ammo_mount" avail="2L" cost="150">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="TASERS"/>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="smart_materials_melee" avail="2" cost="65">
+	  <requires>
+	    <anyreq>
+	    	<itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="+2,,,," cond="true"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="stock" avail="1" cost="100">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="TASERS"/>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="-1,+2,+1,," />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="trigger_removal" avail="3L" cost="250" size="2">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="TASERS"/>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    	<itemsubtypereq type="LAUNCHERS"/>
+	    </anyreq>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="underbarrel_weapon_mount_attach" avail="3I" cost="500" size="2">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemhookmod hook="UNDER_WEAPON_MOUNT"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="underbarrel_weight" avail="2" cost="70">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    	<itemsubtypereq type="LAUNCHERS"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="-2,+1,+1,," />
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="weapon_security_system" avail="2" cost="500">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="TASERS"/>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    	<itemsubtypereq type="LAUNCHERS"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemhookmod hook="WEAPON_SECURITY"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="weapon_commlink" avail="4L" cost="2000" size="2">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="TASERS"/>
+	    	<itemsubtypereq type="HOLDOUTS"/>
+	    	<itemsubtypereq type="PISTOLS_LIGHT"/>
+	    	<itemsubtypereq type="PISTOLS_HEAVY"/>
+	    	<itemsubtypereq type="MACHINE_PISTOLS"/>
+	    	<itemsubtypereq type="SUBMACHINE_GUNS"/>
+	    	<itemsubtypereq type="RIFLE_ASSAULT"/>
+	    	<itemsubtypereq type="RIFLE_HUNTING"/>
+	    	<itemsubtypereq type="RIFLE_SNIPER"/>
+	    	<itemsubtypereq type="SHOTGUNS"/>
+	    	<itemsubtypereq type="LMG"/>
+	    	<itemsubtypereq type="MMG"/>
+	    	<itemsubtypereq type="HMG"/>
+	    	<itemsubtypereq type="ASSAULT_CANNON"/>
+	    	<itemsubtypereq type="LAUNCHERS"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemmod item="weapon_commlink" />
+	  </modifications>
+	</itemenhancement>
+	
+	<!--  Page 66: Melee weapon modifications -->
+	<itemenhancement id="flashing_blade" avail="4L" cost="150">
+	  <requires>
+    	<itemsubtypereq type="BLADES"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="spikes" avail="1" cost="40">
+	  <requires>
+    	<itemsubtypereq type="CLUBS"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="spikes_retractable" avail="2" cost="115">
+	  <requires>
+    	<itemsubtypereq type="CLUBS"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="zapper_coating" avail="3" cost="275">
+	  <requires>
+    	<itemsubtypereq type="CLUBS"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="glowcoat" avail="2" cost="40">
+	  <requires>
+    	<itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="concealable_sheath" avail="2" cost="50">
+	  <requires>
+   	<itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="melee_quick_draw_sheath" avail="2" cost="115" >
+	  <requires>
+   	<itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="melee_hidden_arm_slide" avail="2" cost="125">
+	  <requires>
+    	<itemsubtypereq type="BLADES"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="dynamic_tension_system" avail="3" cost="200">
+	  <requires>
+    	<itemsubtypereq type="BOWS"/>
+	  </requires>
+	</itemenhancement>
+	
+	<!-- p.38 Grenade modifications -->
+	<itemenhancement id="directional_mine_modification" avail="2" cost="100">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="GRENADES"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="AVAILABILITY" val="+2"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="gecko_grip_modification" avail="2" cost="50">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="GRENADES"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="AVAILABILITY" val="+2"/>
+	  </modifications>
+	</itemenhancement>
+	<itemenhancement id="land_mine_modification" avail="2" cost="100">
+	  <requires>
+	    <anyreq>
+	    	<itemsubtypereq type="GRENADES"/>
+	    </anyreq>
+	  </requires>
+	  <modifications>
+         <itemattrmod attr="AVAILABILITY" val="+2"/>
+	  </modifications>
+	</itemenhancement>
+
+</itemenhancements>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<priotable>
+	<priotableentry prio="A" type="METATYPE" adj="13">
+		<metaopt type="dwarf"/>
+		<metaopt type="ork"  />
+		<metaopt type="troll"/>
+	</priotableentry>
+	<priotableentry prio="B" type="METATYPE" adj="11">
+		<metaopt type="elf"   />
+		<metaopt type="dwarf" />
+		<metaopt type="ork"   />
+		<metaopt type="troll" />
+	</priotableentry>
+	<priotableentry prio="C" type="METATYPE" adj="9">
+		<metaopt type="human" />
+		<metaopt type="elf"   />
+		<metaopt type="dwarf" />
+		<metaopt type="ork"   />
+		<metaopt type="troll" />
+	</priotableentry>
+	<priotableentry prio="D" type="METATYPE" adj="4">
+		<metaopt type="human" />
+		<metaopt type="elf"   />
+		<metaopt type="dwarf" />
+		<metaopt type="ork"   />
+		<metaopt type="troll" />
+	</priotableentry>
+	<priotableentry prio="E" type="METATYPE" adj="1">
+		<metaopt type="human" />
+		<metaopt type="elf"   />
+		<metaopt type="dwarf" />
+		<metaopt type="ork"   />
+		<metaopt type="troll" />
+	</priotableentry>
+
+	<priotableentry prio="A" type="MAGIC">
+		<magicopt type="magician"         value="4" />
+		<magicopt type="mysticadept"      value="4" />
+		<magicopt type="adept"            value="4" />
+        <magicopt type="aspectedmagician" value="5" />
+		<magicopt type="technomancer"     value="4" />
+	</priotableentry>
+	<priotableentry prio="B" type="MAGIC">
+		<magicopt type="magician"         value="3" />
+		<magicopt type="mysticadept"      value="3" />
+		<magicopt type="adept"            value="3" />
+        <magicopt type="aspectedmagician" value="4" />
+		<magicopt type="technomancer"     value="3" />
+	</priotableentry>
+	<priotableentry prio="C" type="MAGIC">
+		<magicopt type="magician"         value="2" />
+		<magicopt type="mysticadept"      value="2" />
+		<magicopt type="adept"            value="2" />
+        <magicopt type="aspectedmagician" value="3" />
+		<magicopt type="technomancer"     value="2" />
+	</priotableentry>
+	<priotableentry prio="D" type="MAGIC">
+		<magicopt type="magician"         value="1" />
+		<magicopt type="mysticadept"      value="1" />
+		<magicopt type="adept"            value="1" />
+        <magicopt type="aspectedmagician" value="2" />
+		<magicopt type="technomancer"     value="1" />
+	</priotableentry>
+
+	<priotableentry prio="E" type="MAGIC">
+		<magicopt type="mundane" />
+	</priotableentry>
+
+</priotable>
+
+

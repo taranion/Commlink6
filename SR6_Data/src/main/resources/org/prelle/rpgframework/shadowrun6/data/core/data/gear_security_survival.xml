@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <!-- Security Devices -->
+   <item avail="2" cost="10"  id="lock"            maxrat="6" rate="true" ratemul="PRICE" subtype="SECURITY" type="ELECTRONICS"/>
+   <item avail="1" cost="20"  id="metal_restraints"     subtype="SECURITY" type="ELECTRONICS" count="y"/>
+   <item avail="2" cost="50"  id="plasteel_restraints"  subtype="SECURITY" type="ELECTRONICS" count="y"/>
+   <item avail="1" cost="5"   id="plastic_straps"       subtype="SECURITY" type="ELECTRONICS" count="y"/>
+   <item avail="3" cost="100" id="maglock"         maxrat="9" rate="true" ratemul="PRICE" subtype="SECURITY" type="ELECTRONICS"/>
+   <item avail="3" cost="250" id="containment_manacles" subtype="SECURITY" type="ELECTRONICS" count="y"/>
+   <item avail="1" cost="50"  id="keypad"               subtype="SECURITY" type="ELECTRONICS"/>
+   <item avail="1" cost="50"  id="card_reader"          subtype="SECURITY" type="ELECTRONICS"/>
+   
+   <!-- Breaking and Entering -->
+   <item avail="4L" cost="500" id="autopicker"       subtype="BREAKING" type="ELECTRONICS"/>
+   <item avail="6I" cost="500" id="cellular_glove_molder" maxrat="4" rate="true" ratemul="PRICE" subtype="BREAKING" type="ELECTRONICS"/>
+   <item avail="1" cost="20"  id="chisel"               subtype="BREAKING" type="ELECTRONICS"/>
+   <item avail="4I" cost="600" id="keycard_copier"  subtype="BREAKING" type="ELECTRONICS"/>
+   <item avail="2L"  cost="250" id="lockpick_set"        subtype="BREAKING" type="ELECTRONICS"/>
+   <item avail="3I" cost="2000" id="maglock_passkey" maxrat="4" rate="true" ratemul="PRICE" subtype="BREAKING" type="ELECTRONICS"/>
+   <item avail="1" cost="250" id="miniwelder"           subtype="BREAKING" type="ELECTRONICS"/>
+   <item avail="1" cost="80"  id="miniwelder_fuel"      subtype="BREAKING" type="ELECTRONICS" count="y"/>
+   <item avail="3" cost="500" id="monofilament_chainsaw" subtype="BREAKING" type="ELECTRONICS"/>
+   <item avail="4i" cost="250" id="sequencer" maxrat="6" rate="true" ratemul="PRICE" subtype="BREAKING" type="ELECTRONICS"/>
+   
+   <!-- Industrial chemicals -->
+   <item avail="1"  cost="90"  id="glue_solvent"        subtype="INDUSTRIAL_CHEMICALS" type="CHEMICALS" count="y"/>
+   <item avail="1"  cost="150" id="glue_sprayer"        subtype="INDUSTRIAL_CHEMICALS" type="CHEMICALS" count="y"/>
+   <item avail="5L" cost="500" id="thermit_burning_bar" subtype="INDUSTRIAL_CHEMICALS" type="CHEMICALS" count="y"/>
+   
+   <!-- Survival gear -->
+   <item avail="4" cost="150"  id="chemsuit"       maxrat="6" rate="true" ratemul="PRICE" subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="1" cost="200"  id="climbing_gear"     subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="3" cost="2000" id="diving_gear"       subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="1" cost="25"   id="flashlight"        subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="1" cost="200"  id="gas_mask"          subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="3" cost="250"  id="gecko_tape_gloves" subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="3" cost="3000" id="hazmat_suit"       subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="1" cost="25"   id="light_stick"       subtype="SURVIVAL_GEAR" type="SURVIVAL" count="y"/>
+   <item avail="1" cost="5"    id="magnesium_torch"   subtype="SURVIVAL_GEAR" type="SURVIVAL" count="y"/>
+   <item avail="1" cost="175"  id="microflare_launcher" subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="1" cost="25"   id="microflares"       subtype="SURVIVAL_GEAR" type="SURVIVAL" count="y"/>
+   <item avail="1" cost="50"   id="rappelling_gloves" subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="1" cost="50"   id="respirator" maxrat="6" rate="true" ratemul="PRICE" subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="2" cost="200"  id="survival_kit"      subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   
+   <!-- Grapple gun -->
+   <item avail="3" cost="500"  id="grapple_gun"       subtype="GRAPPLE_GUN" type="SURVIVAL"/>
+   <item avail="2" cost="50"   id="microwire"         subtype="GRAPPLE_GUN" type="SURVIVAL"/>
+   <item avail="4" cost="200"  id="myomeric_rope"     subtype="GRAPPLE_GUN" type="SURVIVAL"/>
+   <item avail="1" cost="20"   id="standard_rope"     subtype="GRAPPLE_GUN" type="SURVIVAL"/>
+   <item avail="3I" cost="85"  id="stealth_rope"      subtype="GRAPPLE_GUN" type="SURVIVAL"/>
+   <item avail="3I" cost="120" id="catalyst_stick"    subtype="GRAPPLE_GUN" type="SURVIVAL"/>
+
+   <!-- Toxins-->
+   <item avail="2L" cost="20" id="tear_gas" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+   <item avail="7I" cost="200" id="gamma_scopolamine" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+   <item avail="4L" cost="50" id="narcoject" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+   <item avail="3L" cost="25" id="nausea_gas" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+   <item avail="5L" cost="60" id="neuro_stun_viii" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+   <item avail="6L" cost="60" id="neuro_stun_ix" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+   <item avail="7L" cost="100" id="neuro_stun_x" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+   <item avail="1" cost="5" id="pepper-punch" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+   <item avail="10I" cost="1000" id="seven_7" count="y">
+      <useas type="CHEMICALS" subtype="TOXINS"/>
+   </item>
+
+   <!-- DRUGS -->
+   <item avail="1" cost="5" id="alcohol" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="2I" cost="15" id="bliss" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="2L" cost="10" id="cram" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="4I" cost="400" id="deepweed" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="2L" cost="75" id="jazz" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="3L" cost="100" id="kamikaze" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="1" cost="50" id="long_haul" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="2L" cost="50" id="nitro" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="2L" cost="10" id="nova_coke" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="1" cost="200" id="psyche" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+   <item avail="3L" cost="5" id="zen" count="y">
+      <useas type="CHEMICALS" subtype="DRUGS"/>
+   </item>
+</items>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+  <action type="MAJOR" cat="COMBAT" time="ANYTIME"    id="assist"/> 
+  <action type="MAJOR" cat="MAGIC"  time="INITIATIVE" id="astral_projection"/> 
+  <action type="MAJOR" cat="COMBAT" time="INITIATIVE" id="attack"/> 
+  <action type="MAJOR" cat="MAGIC"  time="INITIATIVE" id="banish_spirit"/> 
+  <action type="MAJOR" cat="MAGIC"  time="INITIATIVE" id="cast_spell"  skill="sorcery"/> 
+  <action type="MAJOR" cat="MAGIC"  time="INITIATIVE" id="cleanse"/> 
+  <action type="MAJOR" cat="MAGIC"  time="ANYTIME"    id="boosted_defense" skill="sorcery"/> 
+  <action type="MAJOR" cat="MAGIC"  time="ANYTIME"    id="dispelling"      skill="sorcery"/> 
+  <action type="MAJOR" cat="COMBAT" time="ANYTIME"    id="full_defense"/> 
+  <action type="MAJOR" cat="MAGIC"  time="INITIATIVE" id="manifest"/> 
+  <action type="MAJOR" cat="OTHER"  time="INITIATIVE" id="observe_in_detail"/> 
+  <action type="MAJOR" cat="OTHER"  time="INITIATIVE" id="pick_updown"/> 
+  <action type="MAJOR" cat="COMBAT" time="INITIATIVE" id="ready_weapon"/> 
+  <action type="MAJOR" cat="COMBAT" time="INITIATIVE" id="reload_weapon"/> 
+  <action type="MAJOR" cat="MATRIX" time="INITIATIVE" id="rigger_jump_in"/> 
+  <action type="MAJOR" cat="POSITION" time="INITIATIVE" id="sprint"/> 
+  <action type="MAJOR" cat="MAGIC"  time="INITIATIVE" id="summon_spirit"/> 
+  <action type="MAJOR" cat="OTHER"  time="INITIATIVE" id="use_simple"/> 
+  <action type="MAJOR" cat="OTHER"  time="ANYTIME"    id="use_skill"/> 
+</actions>

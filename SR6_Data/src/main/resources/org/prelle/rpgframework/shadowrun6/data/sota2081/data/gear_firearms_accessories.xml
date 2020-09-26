@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="1" cost="450" id="pjss_mammutbuechse_bipod">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <requires>
+         <itemreq item="pjss_mammutbuechse"/>
+      </requires>
+      <modifications>
+         <itemattrmod attr="ATTACK_RATING" val="2"/>
+      </modifications>
+   </item>
+   <item avail="1" cost="250" id="pjss_mammutbuechse_laser_sight" type="ACCESSORY">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <requires>
+         <itemreq item="pjss_mammutbuechse"/>
+      </requires>
+      <modifications>
+         <itemattrmod attr="ATTACK_RATING" val="1"/>
+      </modifications>
+   </item>
+   <item avail="1" cost="750" id="pjss_mammutbuechse_imaging_scope" type="ACCESSORY">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <requires>
+         <itemreq item="pjss_mammutbuechse"/>
+      </requires>
+      <modifications>
+         <itemhookmod capacity="3" hook="OPTICAL"/>
+      </modifications>
+   </item>
+</items>

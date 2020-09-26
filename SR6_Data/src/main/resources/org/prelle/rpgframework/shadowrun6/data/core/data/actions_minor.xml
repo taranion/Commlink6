@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+  <action type="MINOR" cat="MAGIC"  time="INITIATIVE" id="de_activate_focus"/> 
+  <action type="MINOR" cat="COMBAT" time="ANYTIME"    id="avoid_incoming"/> 
+  <action type="MINOR" cat="COMBAT" time="ANYTIME"    id="block"/> 
+  <action type="MINOR" cat="COMBAT" time="INITIATIVE" id="call_a_shot" apply="ACTION" action="attack"/> 
+  <action type="MINOR" cat="MATRIX"  time="INITIATIVE" id="change_device_mode"/> 
+  <action type="MINOR" cat="MATRIX" time="INITIATIVE" id="command_drone"/> 
+  <action type="MINOR" cat="MAGIC"  time="INITIATIVE" id="command_spirit"/> 
+  <action type="MINOR" cat="COMBAT" time="ANYTIME"    id="dodge"/> 
+  <action type="MINOR" cat="COMBAT" time="ANYTIME"    id="drop_object"/> 
+  <action type="MINOR" cat="POSITION" time="INITIATIVE" id="drop_prone"/> 
+  <action type="MINOR" cat="POSITION" time="ANYTIME"    id="hit_the_dirt"/> 
+  <action type="MINOR" cat="COMBAT" time="ANYTIME"    id="intercept" apply="ACTION" action="attack"/> 
+  <action type="MINOR" cat="POSITION" time="INITIATIVE" id="move"/> 
+  <action type="MINOR" cat="COMBAT" time="INITIATIVE" id="multiple_attacks" apply="ACTION" action="attack"/> 
+  <action type="MINOR" cat="COMBAT" time="INITIATIVE" id="quick_draw" apply="ACTION" action="attack"/> 
+  <action type="MINOR" cat="COMBAT" time="INITIATIVE" id="reload_smartgun"/> 
+  <action type="MINOR" cat="MAGIC" time="INITIATIVE" id="shift_perception"/> 
+  <action type="MINOR" cat="POSITION" time="INITIATIVE" id="stand_up"/> 
+  <action type="MINOR" cat="COMBAT" time="INITIATIVE" id="take_aim"/> 
+  <action type="MINOR" cat="POSITION" time="INITIATIVE" id="take_cover"/> 
+  <action type="MINOR" cat="COMBAT" time="INITIATIVE" id="trip" apply="ACTION" action="attack"/> 
+  <!-- p.282 "Augementation Overdrive" -->
+  <action type="MINOR" cat="COMBAT" time="ANYTIME" id="augmentation_overdrive"/> 
+</actions>

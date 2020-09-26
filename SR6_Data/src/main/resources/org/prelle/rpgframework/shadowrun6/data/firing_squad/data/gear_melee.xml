@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <!-- Melee weapons -->
+   <item id="hand_talons" avail="4L" cost="75" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="2P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="horizon_flynn_pilum" avail="4L" cost="750" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="4P" attack="10,8,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="kami_standard" avail="3" cost="100" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="kami_folding" avail="3" cost="100" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="kukri" avail="5" cost="200"  >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="3P" attack="9,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="nodachi" avail="4" cost="900" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="5P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="trench_knife" avail="3" cost="100" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   
+   <!-- Clubs -->
+   <item id="long_tooth" avail="4" cost="300">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <modifications>
+         <itemmod item="long_tooth_blade"/>
+      </modifications>
+      <weapon  dmg="4P" attack="8,4,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="dassault_alpenstock" avail="3L" cost="500">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <modifications>
+         <itemmod item="dassault_alpenstock_blade"/>
+         <itemmod item="dassault_alpenstock_spear"/>
+      </modifications>
+      <weapon  dmg="4P" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="tactical_hammer_short" avail="4" cost="200">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <weapon  dmg="2P" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="tactical_hammer_long" avail="4" cost="300">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <weapon  dmg="2P" attack="9,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   
+   <!-- Exotic Melee -->
+   <item id="ash_arms_standard_combat_chainsaw" avail="3" cost="1000">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE"/>
+      <weapon  dmg="4P" attack="10,,,," skill="exotic_weapons"/>
+   </item>
+   <item id="ash_arms_monofilament_combat_chainsaw" avail="3" cost="3000">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE"/>
+      <weapon  dmg="6P" attack="10,,,," skill="exotic_weapons"/>
+   </item>
+   <item id="bates_brown_combat_boots" avail="2" cost="200">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+      <weapon  dmg="3S" attack="STRx2,,,," skill="close_combat" spec="close_combat/unarmed"/>
+   </item>
+   <item id="manriki_chain" avail="2" cost="250">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE"/>
+      <weapon  dmg="4S" attack="5,6,,," skill="exotic_weapons"/>
+   </item>
+   <item id="tonfa" avail="1" cost="75">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <weapon  dmg="3S" attack="6,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="urban_tribe_tomahawk_mkII" avail="1" cost="75">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="2P" attack="10,9,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="xiphos_tactical_gladius" avail="4" cost="300">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="3P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   
+   <!-- Zoe heritage -->
+   <item id="bearded_axe" avail="3L" cost="600" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="3P" attack="11,,,," skill="close_combat" spec="close_combat/blades"/>
+      <modifications>
+        <moditemmod ref="personalized_grip_melee"/>
+        <moditemmod ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+   <item id="claymore" avail="3L" cost="750">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="4P" attack="12,,,," skill="close_combat" spec="close_combat/blades"/>
+      <modifications>
+        <moditemmod ref="personalized_grip_melee"/>
+        <moditemmod ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+   <item id="labrys" avail="3L" cost="1000">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="4P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+      <modifications>
+        <moditemmod ref="personalized_grip_melee"/>
+        <moditemmod ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+   <item id="tomahawk" avail="3L" cost="225">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="2P" attack="10,9,,," skill="close_combat" spec="close_combat/blades"/>
+      <modifications>
+        <moditemmod ref="personalized_grip_melee"/>
+        <moditemmod ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+   <item id="gunstock_warclub" avail="3L" cost="300">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <weapon  dmg="4S" attack="10,6,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="macuahuitl" avail="3L" cost="200">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="3P" attack="9,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="shillelagh" avail="3L" cost="150">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <weapon  dmg="3S" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="taiaha" avail="3L" cost="200">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <weapon  dmg="3S" attack="9,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="tonfa_zoe_heritage" avail="1" cost="125">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="CLUBS"/>
+      <weapon  dmg="2S" attack="7,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="war_fan" avail="3L" cost="175">
+      <useas type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE"/>
+      <weapon  dmg="1P" attack="6,,,," skill="exotic_weapons"/>
+   </item>
+   <item id="chakram" avail="3L" cost="200">
+   	  <useas type="WEAPON_RANGED" subtype="THROWING"/>
+      <weapon dmg="2P" attack="10,9,3,,"  skill="athletics" spec="athletics/throwing"/>
+   </item>
+   <item id="katar" avail="3L" cost="200">
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="UNARMED"/>
+      <weapon  dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/unarmed"/>
+   </item>
+   
+   <!-- Projectiles -->"
+   <item id="crossbow_collapsible_light" avail="3L" cost="300">
+   	  <useas type="WEAPON_RANGED" subtype="CROSSBOWS"/>
+      <weapon dmg="2P" mode="SS" attack="6,8,2,," ammo="4(m)" skill="athletics" spec="athletics/archery"/>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+   </item>
+   <item id="crossbow_collapsible" avail="3L" cost="600">
+   	  <useas type="WEAPON_RANGED" subtype="CROSSBOWS"/>
+      <weapon dmg="3P" mode="SS" attack="2,10,4,2," ammo="4(m)" skill="athletics" spec="athletics/archery"/>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+   </item>
+   <item id="crossbow_collapsible_heavy" avail="4L" cost="850">
+   	  <useas type="WEAPON_RANGED" subtype="CROSSBOWS"/>
+      <weapon dmg="4P" mode="SS" attack="2,8,6,4," ammo="4(m)" skill="athletics" spec="athletics/archery"/>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+   </item>
+   
+</items>

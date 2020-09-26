@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item id="ammo_arrow"           cost="2" avail="1" rate="y" maxrat="14" ratemul="AVAIL3 PRICE" count="y">
+        <useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="BOWS" />
+        </requires>
+    </item>
+    <item id="ammo_injection_arrow" cost="20" avail="4" rate="y" maxrat="14" ratemul="PRICE" count="y">
+        <useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="BOWS" />
+        </requires>
+    </item>
+    <item id="ammo_bolt"           cost="5" avail="2" choice="AMMUNITION_TYPE" count="y">
+        <useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="CROSSBOWS" />
+        </requires>
+    </item>
+    <item id="ammo_injection_bolt" cost="50" avail="4" choice="AMMUNITION_TYPE" count="y">
+        <useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="CROSSBOWS" />
+        </requires>
+    </item>
+
+	<item id="ammo_holdout_light_machine" cost="5" avail="1" choice="AMMUNITION_TYPE" count="y">
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+		<requires>
+			<itemsubtypereq
+				type="HOLDOUTS,PISTOLS_LIGHT,MACHINE_PISTOLS" />
+		</requires>
+	</item>
+	<item id="ammo_heavy_smg" cost="10" avail="1" choice="AMMUNITION_TYPE" count="y">
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+		<requires>
+			<itemsubtypereq type="PISTOLS_HEAVY,SUBMACHINE_GUNS" />
+		</requires>
+	</item>
+	<item id="ammo_rifles" cost="20" avail="2L" choice="AMMUNITION_TYPE" count="y">
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+		<requires>
+			<itemsubtypereq type="RIFLE_ASSAULT,RIFLE_HUNTING,RIFLE_SNIPER" />
+		</requires>
+	</item>
+	<item id="ammo_taser" cost="10" avail="1" choice="AMMUNITION_TYPE" count="y">
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+		<requires>
+			<itemsubtypereq type="TASERS" />
+		</requires>
+	</item>
+	<item id="ammo_darts" cost="5" avail="1" choice="AMMUNITION_TYPE" count="y">
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="OTHER_SPECIAL" />
+        </requires>
+	</item>
+	<item id="ammo_cannon" cost="10" avail="1" choice="AMMUNITION_TYPE" count="y">
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="ASSAULT_CANNON" />
+        </requires>
+	</item>
+	<item id="ammo_machine_gun" cost="15" avail="2L" choice="AMMUNITION_TYPE" count="y">
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="LMG,MMG,HMG" />
+        </requires>
+	</item>
+	<item id="ammo_dmso" cost="10" avail="1" choice="AMMUNITION_TYPE" count="y">
+		<useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+           <itemsubtypereq  type="HOLDOUTS,PISTOLS_LIGHT,MACHINE_PISTOLS,PISTOLS_HEAVY" />
+        </requires>
+	</item>
+
+	<!-- Explosives (p.262) -->
+	<item avail="4L" cost="100" id="stun_grenade" count="y">
+		<useas type="AMMUNITION" subtype="GRENADES" />
+		<ammo gz="10S" close="8S" near="6S" blast="15" />
+	</item>
+	<item avail="4I" cost="150" id="fragmentation_grenade" count="y">
+		<useas type="AMMUNITION" subtype="GRENADES" />
+		<ammo gz="16P" close="12P" near="8P" blast="20" />
+	</item>
+	<item avail="4I" cost="150" id="high_explosive_grenade" count="y">
+		<useas type="AMMUNITION" subtype="GRENADES" />
+		<ammo gz="16P" close="10P" near="4P" blast="15" />
+	</item>
+	<item avail="4I" cost="50" id="gas_grenade" count="y">
+		<useas type="AMMUNITION" subtype="GRENADES" />
+		<ammo />
+	</item>
+	<item avail="4I" cost="50" id="smoke_grenade" count="y">
+		<useas type="AMMUNITION" subtype="GRENADES" />
+		<ammo />
+	</item>
+	<item avail="4I" cost="125" id="flash_pak" count="y">
+		<useas type="AMMUNITION" subtype="GRENADES" />
+		<ammo blast="10" />
+	</item>
+
+    <!-- Rockets (p.264) -->
+    <item avail="5I" cost="2800" id="anti-vehicle_rocket" count="y">
+        <useas type="AMMUNITION" subtype="ROCKETS" />
+        <ammo gz="12P" close="8P" near="4P" blast="10" />
+    </item>
+    <item avail="5I" cost="2000" id="fragmentation_rocket" count="y">
+        <useas type="AMMUNITION" subtype="ROCKETS" />
+        <ammo gz="16P" close="12P" near="8P" blast="30" />
+    </item>
+    <item avail="5I" cost="2100" id="high_explosive_rocket" count="y">
+        <useas type="AMMUNITION" subtype="ROCKETS" />
+        <ammo gz="16P" close="10P" near="4P" blast="20" />
+    </item>
+    <item avail="4I" cost="750" id="gas_rocket" count="y">
+        <useas type="AMMUNITION" subtype="ROCKETS" />
+        <ammo/>
+    </item>
+    <item avail="4I" cost="120" id="smoke_rocket" count="y">
+        <useas type="AMMUNITION" subtype="ROCKETS" />
+        <ammo />
+    </item>
+
+    <!-- Missiles (p.264) -->
+    <item avail="5I" cost="500" id="anti-vehicle_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
+        <useas type="AMMUNITION" subtype="MISSILES" cost="2800"/>
+        <ammo gz="12P" close="8P" near="4P" blast="10" />
+        <modifications>
+         <itemattrmod attr="ATTACK_RATING" val="2"/>
+        </modifications>
+    </item>
+    <item avail="5I" cost="2000" id="fragmentation_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
+        <useas type="AMMUNITION" subtype="ROCKETS" cost="2800" />
+        <ammo gz="16P" close="12P" near="8P" blast="30" />
+        <modifications>
+         <itemattrmod attr="ATTACK_RATING" val="2"/>
+        </modifications>
+    </item>
+    <item avail="5I" cost="2100" id="high_explosive_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
+        <useas type="AMMUNITION" subtype="ROCKETS" cost="2800" />
+        <ammo gz="16P" close="10P" near="4P" blast="20" />
+        <modifications>
+         <itemattrmod attr="ATTACK_RATING" val="2"/>
+        </modifications>
+    </item>
+    <item avail="4I" cost="750" id="gas_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
+        <useas type="AMMUNITION" subtype="ROCKETS" cost="2800" />
+        <ammo/>
+        <modifications>
+         <itemattrmod attr="ATTACK_RATING" val="2"/>
+        </modifications>
+    </item>
+    <item avail="4I" cost="120" id="smoke_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
+        <useas type="AMMUNITION" subtype="ROCKETS" cost="2800" />
+        <ammo />
+        <modifications>
+         <itemattrmod attr="ATTACK_RATING" val="2"/>
+        </modifications>
+    </item>
+    
+    <!-- Explosives p.264 -->
+    <item avail="4I" id="conventional_explosives" rate="y" maxrat="20" ratemul="PRICE" count="y" cost="0">
+        <useas type="AMMUNITION" subtype="EXPLOSIVES" />
+        <pricetable>10,10,10,50,50,50,100,100,100,250,250,250,500,500,500,1000,1000,5000,5000</pricetable>
+        <ammo />
+    </item>
+    <item avail="4I" id="plastic_explosives" rate="y" maxrat="20" ratemul="PRICE" count="y" cost="0">
+        <useas type="AMMUNITION" subtype="EXPLOSIVES" />
+        <pricetable>10,10,10,50,50,50,100,100,100,250,250,250,500,500,500,1000,1000,5000,5000</pricetable>
+        <ammo />
+    </item>
+    <item avail="4I" id="foam_explosives" rate="y" maxrat="20" ratemul="PRICE" count="y" cost="0">
+        <useas type="AMMUNITION" subtype="EXPLOSIVES" />
+        <pricetable>10,10,10,50,50,50,100,100,100,250,250,250,500,500,500,1000,1000,5000,5000</pricetable>
+        <ammo />
+    </item>
+    
+    <item avail="4I" id="detonator_cap" count="y" cost="75">
+        <useas type="AMMUNITION" subtype="EXPLOSIVES" />
+        <ammo />
+    </item>
+    
+    
+</items>

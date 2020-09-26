@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metatypes>
+    <metatype id="human">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="6"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="7"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+         </modifications>
+		<!-- size base="160" d10="5" wmin="50" wmax="100"/-->
+    </metatype>
+
+    <metatype id="elf">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="6"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="7"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="6"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="8"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="low-light_vision"/>
+         </modifications>
+    </metatype>
+
+    <metatype id="dwarf">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="7"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="5"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="8"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="7"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="6"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="toxin_resistance"/>
+            <qualitymod ref="thermographic_vision"/>
+         </modifications>
+    </metatype>
+
+    <metatype id="ork">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="8"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="6"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="8"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="5"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="low-light_vision"/>
+            <qualitymod ref="built_tough" val="1"/>
+         </modifications>
+    </metatype>
+
+    <metatype id="troll">
+        <modifications>
+            <attrmod type="MAX"      attr="BODY"      val="9"/>
+            <attrmod type="MAX"      attr="AGILITY"   val="5"/>
+            <attrmod type="MAX"      attr="REACTION"  val="6"/>
+            <attrmod type="MAX"      attr="STRENGTH"  val="9"/>
+            <attrmod type="MAX"      attr="WILLPOWER" val="6"/>
+            <attrmod type="MAX"      attr="LOGIC"     val="6"/>
+            <attrmod type="MAX"      attr="INTUITION" val="6"/>
+            <attrmod type="MAX"      attr="CHARISMA"  val="5"/>
+            <attrmod type="MAX"      attr="EDGE"      val="6"/>
+            <attrmod type="MAX"      attr="MAGIC"     val="6"/>
+            <attrmod type="MAX"      attr="RESONANCE" val="6"/>
+            <qualitymod ref="thermographic_vision"/>
+            <qualitymod ref="built_tough" val="2"/>
+            <qualitymod ref="dermal_deposits"/>
+         </modifications>
+    </metatype>
+</metatypes>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="cyclopean_eye" karma="0" type="POSITIVE" selectable="n" >
+     <modifications>
+       <edgemod skill="perception" type="BONUS"/>
+       <edgemod skill="firearms" type="BONUS"/>
+       <edgemod skill="close_combat" type="BONUS"/>
+       <relevancemod topic="COMBAT"/>
+     </modifications>
+   </quality>
+   <quality id="goring_horns" karma="0" type="POSITIVE" selectable="n" >
+     <modifications>
+       <itemmod item="goring_horns" />
+     </modifications>
+   </quality>
+   <quality id="dermal_alteration" karma="0" type="POSITIVE" selectable="n" >
+     <modifications>
+       <itemmod item="dermal_deposits" />
+       <itemmod item="unarmed_dermal_deposits" />
+     </modifications>
+   </quality>
+</qualities>

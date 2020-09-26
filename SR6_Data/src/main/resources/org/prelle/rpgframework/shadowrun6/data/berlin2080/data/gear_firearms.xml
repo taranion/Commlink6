@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="2" cost="0" devrat="1" id="volkskomm">
+     <useas type="ELECTRONICS" subtype="COMMLINK"       />
+     <useas type="CYBERWARE"   subtype="COMMLINK" ess="0.2" cost="2000"/>
+     <useas type="ACCESSORY"   subtype="COMMLINK" cap="2" slot="HEADWARE_IMPLANT" cost="2000"/>
+       <modifications>
+         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
+      </modifications>
+      <cyberdeck d="1" f="0" programs="0"/>
+   </item>
+
+   <!-- Heavy Pistols -->
+   <item id="sorokin_predator_i" avail="5L" cost="200">
+      <useas type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY"/>
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="TOP"/>
+      </modifications>
+      <weapon dmg="3P" attack="10,9,8,," mode="SS" ammo="15(c)" skill="firearms" spec="firearms/pistols"/>
+   </item>
+   <item id="altmayr_white_star" avail="6L" cost="250">
+      <useas type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY"/>
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="TOP"/>
+      </modifications>
+      <weapon dmg="3P" attack="10,9,8,," mode="SA" ammo="12(c)" skill="firearms" spec="firearms/pistols"/>
+   </item>
+   
+   <item id="haka_skorpion" avail="6L" cost="220">
+      <useas type="WEAPON_FIREARMS" subtype="MACHINE_PISTOLS"/>
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="STOCK"/>
+         <accessorymod hook="STOCK" item="folding_stock"/>
+      </modifications>
+      <weapon attack="10,9,8,," ammo="30(c)" dmg="2P" mode="SA/BF" skill="firearms" spec="firearms/automatics"/>
+   </item>
+   
+   <!-- Submachine Guns -->
+   <item avail="4L" cost="375" id="haka_mp2">
+      <useas type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS"/>
+      <modifications>
+         <accessorymod hook="TOP" />
+         <accessorymod hook="BARREL"/>
+         <itemhookmod hook="STOCK"/>
+         <accessorymod hook="STOCK" item="folding_stock"/>
+      </modifications>
+      <weapon attack="8,8,7,," ammo="24(c)" dmg="3P" mode="SA/FA" skill="firearms" spec="firearms/automatics"/>
+   </item>
+   
+   <!-- Shotguns -->
+   <item avail="2L" cost="200" id="altmayer_sp">
+      <useas type="WEAPON_FIREARMS" subtype="SHOTGUNS"/>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+      <weapon attack="7,10,4,," ammo="5(m)" dmg="4P" mode="SS/SA" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+   
+   <!-- Rifles -->
+   <item avail="4L" cost="1800" id="barzani_ak_47m1">
+      <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT"/>
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+      <weapon attack="5,11,7,5,1" ammo="30(c)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="4L" cost="3000" id="samopal_vz88v">
+      <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT"/>
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+      <weapon attack="4,9,8,8,4" ammo="30(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="6L" cost="2500" id="sorokin_g9">
+      <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT"/>
+      <modifications>
+         <itemhookmod hook="BARREL"/>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+      <weapon attack="4,10,9,7,1" ammo="30(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+</items>

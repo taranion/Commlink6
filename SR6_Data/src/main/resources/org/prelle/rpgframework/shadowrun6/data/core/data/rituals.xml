@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rituals>
+   <ritual id="circle_of_healing" thr="7">
+      <ritualfeature ref="anchored"/>
+      <ritualfeature ref="spell"/>
+   </ritual>
+   <ritual id="circle_of_protection" thr="6">
+      <ritualfeature ref="anchored"/>
+   </ritual>
+   <ritual id="curse" thr="5">
+      <ritualfeature ref="material_link"/>
+      <ritualfeature ref="spell"/>
+   </ritual>
+   <ritual id="prodigal_spell" thr="6">
+      <ritualfeature ref="spell"/>
+      <ritualfeature ref="spotter"/>
+   </ritual>
+   <ritual id="remote_sensing" thr="5">
+      <ritualfeature ref="spell"/>
+      <ritualfeature ref="spotter"/>
+   </ritual>
+   <ritual id="renascence" thr="6">
+      <ritualfeature ref="anchored"/>
+      <ritualfeature ref="spell"/>
+   </ritual>
+   <ritual id="ward" thr="6">
+      <ritualfeature ref="anchored"/>
+   </ritual>
+   <ritual id="watcher" thr="4">
+      <ritualfeature ref="minion"/>
+   </ritual>
+</rituals>

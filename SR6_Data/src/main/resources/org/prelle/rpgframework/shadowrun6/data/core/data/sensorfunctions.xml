@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sensorfunctions>
+   <sensorfunction id="atmosphere_sensor" />
+<!--    <sensorfunction id="camera" /> -->
+   <sensorfunction id="cyberware_scanner" />
+<!--    <sensorfunction id="directional_microphone" /> -->
+   <sensorfunction id="geiger_counter" />
+<!--    <sensorfunction id="laser_microphone" /> -->
+   <sensorfunction id="laser_range_finder" />
+   <sensorfunction id="mad_scanner" />
+   <sensorfunction id="motion_sensor" />
+   <sensorfunction id="olfactory_sensor" />
+<!--    <sensorfunction id="omni_directional_microphone" /> -->
+<!--    <sensorfunction id="radio_signal_scanner" /> -->
+   <sensorfunction id="ultrasound" />
+
+</sensorfunctions>

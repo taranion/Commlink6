@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="iron_bear_combat_axe" avail="3" cost="1000" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="5P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="iron_fang_combat_knife" avail="3" cost="350" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="3P" attack="9,1,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="steel_claw_combat_broadsword" avail="3" cost="500" >
+   	  <useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/>
+      <weapon  dmg="4P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="iron_hawk_composite_bow3" avail="4L" cost="295">
+   	  <useas type="WEAPON_RANGED" subtype="BOWS"/>
+      <weapon dmg="2P" mode="SS" attack="3,5,1,1," skill="athletics" spec="athletics/archery"/>
+      <requires>
+        <attrreq attr="STRENGTH" val="3"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+   </item>
+   <item id="iron_hawk_composite_bow4" avail="4L" cost="310">
+   	  <useas type="WEAPON_RANGED" subtype="BOWS"/>
+      <weapon dmg="3P" mode="SS" attack="3,6,1,1," skill="athletics" spec="athletics/archery"/>
+      <requires>
+        <attrreq attr="STRENGTH" val="4"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+   </item>
+   <item id="iron_hawk_composite_bow5" avail="4L" cost="325">
+   	  <useas type="WEAPON_RANGED" subtype="BOWS"/>
+      <weapon dmg="3P" mode="SS" attack="4,7,2,1," skill="athletics" spec="athletics/archery"/>
+      <requires>
+        <attrreq attr="STRENGTH" val="5"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+   </item>
+   <item id="iron_hawk_composite_bow6" avail="4L" cost="340">
+   	  <useas type="WEAPON_RANGED" subtype="BOWS"/>
+      <weapon dmg="4P" mode="SS" attack="4,8,2,2," skill="athletics" spec="athletics/archery"/>
+      <requires>
+        <attrreq attr="STRENGTH" val="6"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+   </item>
+    <item id="iron_hawk_arrow" cost="10" avail="4L" rate="y" maxrat="8" ratemul="AVAIL3 PRICE" count="y">
+        <useas type="AMMUNITION" subtype="AMMUNITION" />
+        <requires>
+            <itemsubtypereq type="BOWS" />
+        </requires>
+    </item>
+    <item id="steel_falcon_crossbow" avail="4L" cost="650">
+   	  <useas type="WEAPON_RANGED" subtype="CROSSBOWS"/>
+      <weapon dmg="3P" mode="SA" attack="1,10,6,5,1" ammo="6(c)" skill="athletics" spec="athletics/archery"/>
+      <modifications>
+         <itemhookmod hook="TOP"/>
+         <itemhookmod hook="UNDER"/>
+      </modifications>
+   </item>
+    <item id="steel_falcon_crossbow_bolt" cost="10" avail="4L" choice="AMMUNITION_TYPE" count="y">
+        <useas type="AMMUNITION" subtype="CROSSBOWS" />
+        <requires>
+            <itemsubtypereq type="CROSSBOWS" />
+        </requires>
+    </item>
+	<item id="fire_ant" avail="4" cost="350">
+		<useas type="WEAPON_FIREARMS" subtype="HOLDOUTS" />
+		<weapon dmg="2P" mode="SS/SA" attack="10,6,,," ammo="6(c)" skill="firearms" spec="firearms/pistols" />
+	</item>
+	<item id="raven" avail="4L" cost="450">
+		<useas type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+         	<moditemmod ref="side_ammo_mount"/>
+		</modifications>
+		<weapon dmg="2P" mode="SA" attack="10,8,5,," ammo="16(c)" skill="firearms" spec="firearms/pistols" />
+	</item>
+	<item id="ocelot" avail="4L" cost="700">
+		<useas type="WEAPON_FIREARMS" subtype="MACHINE_PISTOLS" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+		</modifications>
+		<weapon dmg="2P" mode="SA/BF/FA" attack="9,10,5,," ammo="40(c)" skill="firearms" spec="firearms/pistols" />
+	</item>
+	<item id="iron_eagle" avail="4L" cost="300">
+		<useas type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" />
+		<modifications>
+			<itemhookmod hook="BARREL" />
+			<itemhookmod hook="TOP" />
+		</modifications>
+		<weapon dmg="4P" mode="SA" attack="9,9,7,," ammo="8(c)" skill="firearms" spec="firearms/pistols" />
+	</item>
+	<item id="cheetah" avail="4L" cost="750">
+		<useas type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS" />
+		<weapon dmg="3P" mode="SA/BF" attack="10,9,6,," ammo="32(c)" skill="firearms" spec="firearms/automatics" />
+        <modifications>
+           <itemhookmod hook="TOP"/>
+           <itemhookmod hook="BARREL"/>
+           <itemhookmod hook="STOCK"/>
+           <accessorymod hook="TOP" item="laser_sight"/>
+        </modifications>
+	</item>
+	<item id="black_wolf" avail="5L" cost="2500">
+		<useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" />
+		<modifications>
+			<itemhookmod hook="BARREL" />
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="UNDER" />
+         	<moditemmod ref="smartgun_system_internal"/>
+         	<moditemmod ref="side_ammo_mount"/>
+		</modifications>
+		<weapon dmg="3P" mode="SA/BF" attack="10,9,6,," ammo="32(c)" skill="firearms" spec="firearms/rifles" />
+	</item>
+	<item id="iron_bull" avail="5L" cost="750">
+		<useas type="WEAPON_FIREARMS" subtype="SHOTGUNS" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+			<itemhookmod hook="UNDER" />
+		</modifications>
+		<weapon dmg="4P" mode="SA/BF" attack="4,11,6,," ammo="8(c)" skill="firearms" spec="firearms/rifles" />
+	</item>
+	<item id="steel_tiger" avail="6L" cost="14000">
+		<useas type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+			<itemhookmod hook="UNDER" />
+			<itemhookmod hook="STOCK" />
+			<accessorymod hook="INTERNAL" item="silencer" />
+			<moditemmod ref="easy_breakdown" />
+		</modifications>
+		<weapon dmg="5P" mode="SA" attack="1,8,8,12,12" ammo="10(c)" skill="firearms" spec="firearms/rifles" />
+	</item>
+	<item id="rhino" avail="6L" cost="5200">
+		<useas type="WEAPON_FIREARMS" subtype="LMG" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+			<itemhookmod hook="UNDER" />
+		</modifications>
+		<requires>
+			<attrreq attr="STRENGTH" val="3" />
+		</requires>
+		<weapon dmg="4P" mode="SA/BF/FA" attack="3,10,11,6,4" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/longarms" />
+	</item>
+	<item id="behemoth" avail="6L" cost="6000">
+		<useas type="WEAPON_FIREARMS" subtype="MMG" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+			<itemhookmod hook="UNDER" />
+		</modifications>
+		<requires>
+			<attrreq attr="STRENGTH" val="4" />
+		</requires>
+		<weapon dmg="5P" mode="SA/BF/FA" attack="2,10,10,8,5" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/longarms" />
+	</item>
+	<item id="juggernaut" avail="6L" cost="9500">
+		<useas type="WEAPON_FIREARMS" subtype="HMG" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+			<itemhookmod hook="UNDER" />
+		</modifications>
+		<requires>
+			<attrreq attr="STRENGTH" val="5" />
+		</requires>
+		<weapon dmg="6P" mode="SA/BF/FA" attack="1,8,12,10,8" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/longarms" />
+	</item>
+	<item id="megalodon" avail="6I" cost="12000">
+		<useas type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+			<itemhookmod hook="UNDER" />
+		</modifications>
+		<requires>
+			<attrreq attr="STRENGTH" val="5" />
+		</requires>
+		<weapon dmg="7P" mode="SA/BF" attack="3,8,12,8,8" ammo="8(c)" skill="firearms" spec="firearms/longarms" />
+	</item>
+	<item id="pulse" avail="7I" cost="3500">
+		<useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+		</modifications>
+		<weapon dmg="1S" mode="SS" attack="8,10,,," ammo="20(c)" skill="exotic_weapons" />
+	</item>
+	<item id="hell_turtle" avail="6I" cost="3500">
+		<useas type="WEAPON_SPECIAL" subtype="THROWERS" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="BARREL" />
+         	<moditemmod ref="smartgun_system_internal"/>
+		</modifications>
+		<weapon dmg="3P" mode="SS" attack="6,10,,," ammo="15(c)/150(belt)" skill="exotic_weapons" />
+	</item>
+	<item id="honey_badger" avail="6I" cost="7500">
+		<useas type="WEAPON_SPECIAL" subtype="LAUNCHERS" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="UNDER" />
+		</modifications>
+		<weapon mode="SS" attack=",8,8,8,8" ammo="1(ml)" skill="exotic_weapons" />
+	</item>
+	<item id="tarantula_hawk" avail="6I" cost="9500">
+		<useas type="WEAPON_SPECIAL" subtype="LAUNCHERS" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="UNDER" />
+		</modifications>
+		<weapon mode="SS" attack=",4,8,10,9" ammo="1(ml)" skill="exotic_weapons" />
+	</item>
+	<item id="crimson_wasp" avail="6I" cost="1500">
+		<useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="UNDER" />
+		</modifications>
+		<weapon dmg="5P" mode="SA" attack="16,14,11,6," ammo="15(c)" skill="exotic_weapons" />
+	</item>
+	<item id="red_fox" avail="6I" cost="2800">
+		<useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL" />
+		<modifications>
+			<itemhookmod hook="TOP" />
+			<itemhookmod hook="UNDER" />
+		</modifications>
+		<weapon dmg="6P" mode="SA/BF" attack="14,16,16,9," ammo="30(c)" skill="exotic_weapons" />
+	</item>
+    
+</items>

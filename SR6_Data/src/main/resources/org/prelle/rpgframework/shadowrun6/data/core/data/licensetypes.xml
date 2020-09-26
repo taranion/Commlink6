@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<licensetypes>
+   <licensetype id="hunting">
+     <requires>
+       <itemtypereq type="WEAPON_RANGED"/>
+     </requires>
+   </licensetype>
+   <licensetype id="firearms">
+     <requires>
+       <itemtypereq type="WEAPON_FIREARMS"/>
+     </requires>
+   </licensetype>
+   <licensetype id="cyberware">
+     <requires>
+       <itemtypereq type="CYBERWARE"/>
+     </requires>
+   </licensetype>
+   <licensetype id="cyberdeck">
+     <requires>
+       <itemtypereq type="ELECTRONICS"/>
+       <itemsubtypereq type="CYBERDECK"/>
+     </requires>
+   </licensetype>
+   <licensetype id="rcc">
+     <requires>
+       <itemtypereq type="ELECTRONICS"/>
+       <itemsubtypereq type="RIGGER_CONSOLE"/>
+     </requires>
+   </licensetype>
+   <licensetype id="concealed_carry" />
+   <licensetype id="spellcasting" />
+   <licensetype id="driver" />
+</licensetypes>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="4L" cost="450" id="ares_gunfighter_scabbard">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   </item>
+   <item avail="2L" cost="25" id="ammo_pouch">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   </item>
+   <item avail="2L" cost="50" id="ammo_sling">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   </item>
+   <item avail="3L" cost="250" id="armored_retention_holster" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+         <itemsubtypereq type="HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY"/>
+      </requires>
+   </item>
+   <item avail="3I" cost="75" id="bayonet_standard" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+      <weapon  dmg="2P" attack="5,2,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item avail="4I" cost="90" id="bayonet_retractable" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+      <weapon  dmg="2P" attack="5,2,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item avail="2" cost="225" id="concealbale_quickdraw_holster" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+         <itemsubtypereq type="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY"/>
+      </requires>
+   </item>
+   <item avail="3I" cost="75" id="detachable_drum_magazine" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+      <modifications>
+         <itemattrmod attr="AMMUNITION" val="-98" />
+      </modifications>
+   </item>
+   <item avail="4L" cost="25" id="extended_clip" maxrat="2" rate="true" ratemul="PRICE" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   </item>
+   <item avail="3I" cost="75" id="flashlight_low-light" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <modifications>
+         <edgemod type="BONUS" skill="firearms"/>
+      </modifications>
+   </item>
+   <item avail="1" cost="100" id="flashlight_thermographic" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <modifications>
+         <edgemod type="BONUS" skill="firearms"/>
+      </modifications>
+   </item>
+   <item avail="4L" cost="350" id="guncam">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <modifications>
+         <itemhookmod capacity="2" hook="OPTICAL"/>
+      </modifications>
+   </item>
+   <item avail="2" cost="180" id="hip_bad_bracing_system">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="STOCK"/>
+      <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="+2,+1,-1,-2,-4" />
+      </modifications>
+   </item>
+   <item avail="1" cost="80" id="laser_sight_low_power">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="1,1,,,"/>
+      </modifications>
+   </item>
+   <item avail="1" cost="125" id="laser_sight">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="1,1,1,,"/>
+      </modifications>
+   </item>
+   <item avail="1" cost="200" id="laser_sight_high_power">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="1,1,1,1,1"/>
+      </modifications>
+   </item>
+   <item avail="4I" cost="250" id="machine_gun_blast_shield_small">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <requires>
+      	<anyreq>
+        	<itemsubtypereq type="LMG"/>
+         	<itemsubtypereq type="MMG"/>
+         </anyreq>
+      </requires>
+      <modifications>
+         <attrmod attr="DEFENSE_RATING" val="1"/>
+      </modifications>
+   </item>
+   <item avail="4I" cost="350" id="machine_gun_blast_shield_large">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+      <requires>
+      	<anyreq>
+        	<itemsubtypereq type="HMG"/>
+         	<itemsubtypereq type="MMG"/>
+         </anyreq>
+      </requires>
+      <modifications>
+         <attrmod attr="DEFENSE_RATING" val="2"/>
+      </modifications>
+   </item>
+   <item avail="2" cost="115" id="quick_draw_quiver" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+      	<anyreq>
+        	<itemsubtypereq type="BOWS"/>
+         	<itemsubtypereq type="CROSSBOWS"/>
+         </anyreq>
+      </requires>
+      <modifications>
+         <itemattrmod attr="ATTACK_RATING" objVal="1,1,1,1,1"/>
+      </modifications>
+   </item>
+   <item avail="2" cost="160" id="quick_draw_scabbard" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+         <itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+      </requires>
+   </item>
+   <item avail="2" cost="115" id="ranger_arms_eagle_eye" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+         <itemtypereq type="WEAPON_FIREARMS"/>
+       </requires>
+      <modifications>
+        <itemattrmod attr="ATTACK_RATING" objVal="-4,-5,+4,+3,+2"/>
+      </modifications>
+   </item>
+   <item avail="3" cost="50" id="regular_sling">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+         <itemsubtypereq type="SUBMACHINE_GUNS,RIFLE_ASSAULT,SHOTGUNS"/>
+      </requires>
+   </item>
+   <item avail="4L" cost="75" id="tactical_sling">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+         <itemsubtypereq type="SUBMACHINE_GUNS,RIFLE_ASSAULT,SHOTGUNS"/>
+      </requires>
+   </item>
+   <item avail="4" cost="1000" id="ruthenium_rifle_sheath" modonly="yes">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+      <useas type="ACCESSORY" subtype="ACCESSORY" slot="MELEE_EXTERNAL"/>
+   </item>
+
+	<!-- Special weapon accessories -->
+   <item avail="4" cost="750" id="colt_arms_arm-brace" modonly="yes">
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+         <itemreq item="colt_arms_m24"/>
+      </requires>
+      <modifications>
+        <itemattrmod attr="ATTACK_RATING" objVal="0,+1,+1,0,0"/>
+      </modifications>
+      <accessory/>
+   </item>
+
+	<!-- Melee weapon accessories -->
+   <item avail="2" cost="50" id="concealable_sheath_acc" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
+      <requires>
+         <itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+      </requires>
+   </item>
+   <item avail="2" cost="115" id="melee_quick_draw_sheath_acc" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
+      <requires>
+         <itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+      </requires>
+   </item>
+   <item avail="2" cost="125" id="melee_hidden_arm_slide_acc" >
+      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
+      <requires>
+         <itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+      </requires>
+   </item>
+   
+</items>

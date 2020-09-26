@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+   <metaecho id="adept_centering" type="METAMAGIC_ADEPT" >
+    <modifications>
+      <relevancemod topic="MAGICAL"/>
+    </modifications>
+   </metaecho>
+   <metaecho id="centering" type="METAMAGIC">
+    <modifications>
+      <attrmod attr="DRAIN_RESISTANCE" val="1" cond="true"/>
+      <relevancemod topic="MAGICAL"/>
+    </modifications>
+   </metaecho>
+   <metaecho id="fixation" type="METAMAGIC">
+    <modifications>
+      <relevancemod topic="MAGICAL"/>
+    </modifications>
+   </metaecho>
+   <metaecho id="flexible_signature" type="METAMAGIC"/>
+   <metaecho id="masking" type="METAMAGIC"/>
+   <metaecho id="power_points" max="99" type="METAMAGIC_ADEPT">
+    <modifications>
+      <attrmod attr="POWER_POINTS" val="1" type="NATURAL"/>
+      <attrmod attr="POWER_POINTS" val="1" type="MAX"/>
+    </modifications>
+   </metaecho>
+   <metaecho id="quickening" type="METAMAGIC">
+    <modifications>
+      <relevancemod topic="MAGICAL"/>
+    </modifications>
+   </metaecho>
+   <metaecho id="spell_shapening" type="METAMAGIC">
+    <modifications>
+      <relevancemod topic="MAGICAL"/>
+    </modifications>
+   </metaecho>
+   <metaecho id="shielding" type="METAMAGIC">
+    <modifications>
+      <relevancemod topic="MAGICAL"/>
+    </modifications>
+   </metaecho>
+</metaechoes>

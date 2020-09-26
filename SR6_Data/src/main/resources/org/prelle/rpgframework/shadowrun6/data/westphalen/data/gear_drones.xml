@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Medium drones -->
+   <item avail="2"  cost="5000" id="CNH_G12" type="DRONES" subtype="MEDIUM_DRONES">
+      <vehicle han="2" acc="15" spdi="30" tspd="140" bod="4" arm="3" pil="3" sen="4" type="AIR"/>
+      <modifications>
+        <accessorymod item="weapon_mount_standard" hook="VEHICLE_BODY" />
+      </modifications>
+   </item>
+
+   <!-- Large drones -->
+   <item avail="4"  cost="450000" id="CNH_K12" type="DRONES" subtype="LARGE_DRONES">
+      <vehicle han="5/6" acc="4" spdi="10" tspd="80" bod="22" arm="10" pil="4" sen="4" type="GROUND"/>
+   </item>
+   <item avail="3"  cost="50000" id="CNH_T12" type="DRONES" subtype="LARGE_DRONES">
+      <vehicle han="5/7" acc="8" spdi="10" tspd="120" bod="20" arm="6" pil="2" sen="1" type="GROUND"/>
+   </item>   
+
+</items>

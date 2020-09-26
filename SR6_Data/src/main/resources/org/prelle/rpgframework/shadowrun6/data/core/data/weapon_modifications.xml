@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<itemenhancements>
+
+	<itemenhancement id="smartgun_system_internal" avail="1L" cost="500">
+	  <requires>
+	    <anyreq>
+			<itemtypereq type="WEAPON_FIREARMS"/>
+	    </anyreq>
+	  </requires>
+      <modifications>
+         <itemattrmod attr="ATTACK_RATING" val="2" cond="true"/>
+         <itemhookmod capacity="1" hook="OPTICAL"/>
+      </modifications>
+	</itemenhancement>
+
+</itemenhancements>

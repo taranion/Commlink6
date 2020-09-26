@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mentorspirits>
+  <mentorspirit id="autobahn">
+    <modifications>
+      <edgemod type="COST" skill="piloting" />
+    </modifications>
+    <magician>
+      <relevancemod topic="MAGICAL" />
+    </magician>
+    <adept>
+      <powermod ref="improved_reflexes" value="1"/>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="badger" >
+    <modifications>
+      <edgemod type="COST" skill="perception" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="COMBAT" />
+    </magician>
+    <adept>
+      <powermod ref="danger_sense" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="elektromarder" >
+    <modifications>
+      <selmod uuid="1e9e5d74-b4e0-4332-848b-6736861522b9">
+        <edgemod type="COST" skill="electronics" />
+        <edgemod type="COST" skill="cracking" />
+      </selmod>
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="ILLUSION" />
+    </magician>
+    <adept>
+      <selmod uuid="cdb84187-d266-463f-9653-ba77ed0ff240">
+        <powermod ref="improved_ability" choice="electronics" value="1" />
+        <powermod ref="improved_ability" choice="cracking"   value="1"/>
+      </selmod>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="fuchs" >
+    <modifications>
+      <edgemod type="COST" skill="stealth" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="ILLUSION" />
+    </magician>
+    <adept>
+      <powermod ref="improved_sense" value="2" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="gezeiten">
+    <modifications>
+      <relevancemod topic="SOCIAL" />
+      <relevancemod topic="MAGICAL" />
+      <relevancemod topic="MUNDANE" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+      <selmod uuid="3c0fef09-88b4-4f77-b2d1-1ffd0ad1d98b">
+        <powermod ref="improved_physical_attribute" choice="BODY" value="1" />
+        <powermod ref="improved_physical_attribute" choice="STRENGTH"   value="1"/>
+      </selmod>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="heinzelmaennchen" >
+    <modifications>
+      <edgemod type="COST" skill="engineering" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="MANIPULATION" />
+    </magician>
+    <adept>
+        <powermod ref="improved_ability" choice="engineering" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="moewe" >
+    <modifications>
+      <edgemod type="COST" skill="outdoors" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="MANIPULATION" />
+    </magician>
+    <adept>
+      <selmod uuid="c6541756-3f57-430b-ab27-bb961c8dcde5">
+        <powermod ref="improved_ability" choice="astral" value="1" />
+        <powermod ref="improved_ability" choice="athletics" value="1" />
+        <powermod ref="improved_ability" choice="biotech" value="1" />
+        <powermod ref="improved_ability" choice="con" value="1" />
+        <powermod ref="improved_ability" choice="conjuring" value="1" />
+        <powermod ref="improved_ability" choice="cracking" value="1" />
+        <powermod ref="improved_ability" choice="electronics" value="1" />
+        <powermod ref="improved_ability" choice="enchanting" value="1" />
+        <powermod ref="improved_ability" choice="engineering" value="1" />
+        <powermod ref="improved_ability" choice="influence" value="1" />
+        <powermod ref="improved_ability" choice="outdoors" value="1" />
+        <powermod ref="improved_ability" choice="perception" value="1" />
+        <powermod ref="improved_ability" choice="piloting" value="1" />
+        <powermod ref="improved_ability" choice="sorcery" value="1" />
+        <powermod ref="improved_ability" choice="stealth" value="1" />
+        <powermod ref="improved_ability" choice="tasking" value="1" />
+      </selmod>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="murmeltier" >
+    <modifications>
+      <edgemod type="COST" skill="influence" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="DETECTION" />
+    </magician>
+    <adept>
+      <powermod ref="enhanced_perception" value="1"/>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="myst_waechter" >
+    <modifications>
+      <edgemod type="COST" skill="perception" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="COMBAT" />
+    </magician>
+    <adept>
+      <powermod ref="combat_sense" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="robbe" >
+    <modifications>
+      <edgemod type="COST" skill="astral" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="MANIPULATION" />
+    </magician>
+    <adept>
+      <powermod ref="astral_perception" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="rotkaeppchen" >
+    <modifications>
+      <selmod uuid="c69ee48b-fd9a-4f36-b05b-3fb2bc2f6680">
+        <edgemod type="COST" skill="con" />
+        <edgemod type="COST" skill="influence" />
+      </selmod>
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+      <powermod ref="vocal_control" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="steinbock" >
+    <modifications>
+      <edgemod type="COST" skill="athletics" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+      <powermod ref="wall_running" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="storch" >
+    <modifications>
+      <edgemod type="COST" skill="biotech" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="HEALTH" />
+    </magician>
+    <adept>
+      <powermod ref="rapid_healing" value="1"/>
+    </adept>
+  </mentorspirit>
+</mentorspirits>
