@@ -5,13 +5,11 @@ package org.prelle.shadowrun6;
 
 import java.util.MissingResourceException;
 
-import de.rpgframework.ResourceI18N;
-
 /**
  * @author prelle
  *
  */
-public enum Attribute {
+public enum Attribute implements de.rpgframework.genericrpg.data.IAttribute {
 
 	BODY,
 	AGILITY,
@@ -84,16 +82,16 @@ public enum Attribute {
 //	public String getShortName() {
 //		return ResourceI18N.get(ShadowrunCore.getI18nResources(),"attribute."+this.name().toLowerCase()+".short");
 //	}
-//
-//    //-------------------------------------------------------------------
-//    public String getName() {
-//        try {
-//			return ShadowrunCore.getI18nResources().getString("attribute."+this.name().toLowerCase());
-//		} catch (MissingResourceException e) {
-//			System.err.println("Missing "+e.getKey()+" in "+ShadowrunCore.getI18nResources().getBaseBundleName());
-//			return e.getKey();
-//		}
-//    }
+
+    //-------------------------------------------------------------------
+    public String getName() {
+        try {
+			return ShadowrunCore.getI18nResources().getString("attribute."+this.name().toLowerCase());
+		} catch (MissingResourceException e) {
+			System.err.println("Missing "+e.getKey()+" in "+ShadowrunCore.getI18nResources().getBaseBundleName());
+			return e.getKey();
+		}
+    }
 
 	//-------------------------------------------------------------------
 	public static Attribute[] primaryValues() {
