@@ -1,0 +1,21 @@
+Combat
+- Action
+- Reaction
+- Incidentally
+
+
+Social
+- Influence
+  - Intimidation
+  Con
+  
+Checks
+=======
+Skill
+Attribute
+
+<check cat="MAGICAL" time="ACTION" id="conjure_spirit">
+	<checkcomp type="skill" ref="conjuring"/>
+	<checkcomp type="attr"  ref="MAGIC"/>
+	<special id="spirit_fire"/>
+</check>

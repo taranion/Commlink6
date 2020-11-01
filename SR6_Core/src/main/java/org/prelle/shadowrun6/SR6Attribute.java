@@ -9,7 +9,7 @@ import java.util.MissingResourceException;
  * @author prelle
  *
  */
-public enum Attribute implements de.rpgframework.genericrpg.data.IAttribute {
+public enum SR6Attribute implements de.rpgframework.genericrpg.data.IAttribute {
 
 	BODY,
 	AGILITY,
@@ -94,74 +94,74 @@ public enum Attribute implements de.rpgframework.genericrpg.data.IAttribute {
     }
 
 	//-------------------------------------------------------------------
-	public static Attribute[] primaryValues() {
-		return new Attribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA};
+	public static SR6Attribute[] primaryValues() {
+		return new SR6Attribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA};
 	}
 
 	//-------------------------------------------------------------------
-	public static Attribute[] derivedValues() {
-		return new Attribute[]{INITIATIVE_PHYSICAL, INITIATIVE_MATRIX, INITIATIVE_ASTRAL, DEFENSIVE_POOL, COMPOSURE, JUDGE_INTENTIONS, MEMORY, LIFT_CARRY,
+	public static SR6Attribute[] derivedValues() {
+		return new SR6Attribute[]{INITIATIVE_PHYSICAL, INITIATIVE_MATRIX, INITIATIVE_ASTRAL, DEFENSIVE_POOL, COMPOSURE, JUDGE_INTENTIONS, MEMORY, LIFT_CARRY,
 				};
 	}
 
 	//-------------------------------------------------------------------
-	public static Attribute[] secondaryValues() {
-		return new Attribute[]{INITIATIVE_PHYSICAL, INITIATIVE_MATRIX, INITIATIVE_ASTRAL, DEFENSIVE_POOL, COMPOSURE, JUDGE_INTENTIONS, MEMORY, LIFT_CARRY, 
+	public static SR6Attribute[] secondaryValues() {
+		return new SR6Attribute[]{INITIATIVE_PHYSICAL, INITIATIVE_MATRIX, INITIATIVE_ASTRAL, DEFENSIVE_POOL, COMPOSURE, JUDGE_INTENTIONS, MEMORY, LIFT_CARRY, 
 				ATTACK, SLEAZE, DATA_PROCESSING, FIREWALL, MELEE_DAMAGE, PHYSICAL_MONITOR, STUN_MONITOR, DEFENSE_RATING};
 	}
 
 	//-------------------------------------------------------------------
-	public static Attribute[] specialAttributes() {
-		return new Attribute[]{EDGE,MAGIC,RESONANCE, POWER_POINTS, HEAT, REPUTATION};
+	public static SR6Attribute[] specialAttributes() {
+		return new SR6Attribute[]{EDGE,MAGIC,RESONANCE, POWER_POINTS, HEAT, REPUTATION};
 	}
 
 	//-------------------------------------------------------------------
-	public static Attribute[] primaryAndSpecialValues() {
-		return new Attribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA,EDGE,MAGIC,RESONANCE};
+	public static SR6Attribute[] primaryAndSpecialValues() {
+		return new SR6Attribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA,EDGE,MAGIC,RESONANCE};
 	}
 
 	//-------------------------------------------------------------------
-	public static Attribute[] physicalValues() {
-		return new Attribute[]{BODY,AGILITY,REACTION,STRENGTH};
+	public static SR6Attribute[] physicalValues() {
+		return new SR6Attribute[]{BODY,AGILITY,REACTION,STRENGTH};
 	}
 
 	//-------------------------------------------------------------------
-	public static Attribute[] attributesToSave() {
-		return new Attribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA,EDGE,MAGIC,RESONANCE, POWER_POINTS};
+	public static SR6Attribute[] attributesToSave() {
+		return new SR6Attribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA,EDGE,MAGIC,RESONANCE, POWER_POINTS};
 	}
 
 	//-------------------------------------------------------------------
-	public static Attribute[] primaryTableValues() {
-		return new Attribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA,EDGE,MAGIC,RESONANCE};
+	public static SR6Attribute[] primaryTableValues() {
+		return new SR6Attribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA,EDGE,MAGIC,RESONANCE};
 	}
 
 	//-------------------------------------------------------------------
-	public static Attribute[] derivedTableValues() {
-		return new Attribute[]{INITIATIVE_PHYSICAL, INITIATIVE_MATRIX, INITIATIVE_MATRIX_VR_COLD, INITIATIVE_MATRIX_VR_HOT, INITIATIVE_ASTRAL, MINOR_ACTION, MINOR_ACTION_MATRIX, MINOR_ACTION_ASTRAL, DEFENSIVE_POOL, COMPOSURE, JUDGE_INTENTIONS, MEMORY, LIFT_CARRY};
+	public static SR6Attribute[] derivedTableValues() {
+		return new SR6Attribute[]{INITIATIVE_PHYSICAL, INITIATIVE_MATRIX, INITIATIVE_MATRIX_VR_COLD, INITIATIVE_MATRIX_VR_HOT, INITIATIVE_ASTRAL, MINOR_ACTION, MINOR_ACTION_MATRIX, MINOR_ACTION_ASTRAL, DEFENSIVE_POOL, COMPOSURE, JUDGE_INTENTIONS, MEMORY, LIFT_CARRY};
 	}
 
 	//-------------------------------------------------------------------
-	public static Attribute[] matrixValues() {
-		return new Attribute[]{FIREWALL, SLEAZE, DATA_PROCESSING, ATTACK};
+	public static SR6Attribute[] matrixValues() {
+		return new SR6Attribute[]{FIREWALL, SLEAZE, DATA_PROCESSING, ATTACK};
 	}
 
 	//-------------------------------------------------------------------
 	public boolean isPrimary() {
-		for (Attribute key : primaryValues())
+		for (SR6Attribute key : primaryValues())
 			if (this==key) return true;
 		return false;
 	}
 
 	//-------------------------------------------------------------------
 	public boolean isSpecial() {
-		for (Attribute key : specialAttributes())
+		for (SR6Attribute key : specialAttributes())
 			if (this==key) return true;
 		return false;
 	}
 
 	//-------------------------------------------------------------------
 	public boolean isPhysical() {
-		for (Attribute key : physicalValues())
+		for (SR6Attribute key : physicalValues())
 			if (this==key) return true;
 		return false;
 	}

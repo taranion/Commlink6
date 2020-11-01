@@ -36,6 +36,11 @@
 			<artifactId>rpgframework-rules</artifactId>
 			<version>5.0.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>de.rpgframework</groupId>
+			<artifactId>shadowrun-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>junit</groupId>

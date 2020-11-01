@@ -1,20 +1,20 @@
 package org.prelle.shadowrun6.persist;
 
-import org.prelle.shadowrun6.Attribute;
+import org.prelle.shadowrun6.SR6Attribute;
 import org.prelle.simplepersist.StringValueConverter;
 
 /**
  * @author prelle
  *
  */
-public class AttributeConverter implements StringValueConverter<Attribute> {
+public class AttributeConverter implements StringValueConverter<SR6Attribute> {
 
 	//-------------------------------------------------------------------
 	/**
 	 * @see org.prelle.simplepersist.StringValueConverter#write(org.prelle.simplepersist.XmlNode, java.lang.Object)
 	 */
 	@Override
-	public String write(Attribute value) throws Exception {
+	public String write(SR6Attribute value) throws Exception {
 		return value.name();
 	}
 
@@ -23,8 +23,8 @@ public class AttributeConverter implements StringValueConverter<Attribute> {
 	 * @see org.prelle.simplepersist.StringValueConverter#read(org.prelle.simplepersist.Persister.ParseNode, javax.xml.stream.events.StartElement)
 	 */
 	@Override
-	public Attribute read(String idref) throws Exception {
-		return Attribute.valueOf(idref.toUpperCase());
+	public SR6Attribute read(String idref) throws Exception {
+		return SR6Attribute.valueOf(idref.toUpperCase());
 	}
 
 }

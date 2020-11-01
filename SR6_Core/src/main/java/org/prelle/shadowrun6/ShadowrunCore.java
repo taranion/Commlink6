@@ -1,19 +1,11 @@
 package org.prelle.shadowrun6;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.MultiLanguageResourceBundle;
-import de.rpgframework.genericrpg.data.DataItem;
-import de.rpgframework.genericrpg.data.DataSet;
-import de.rpgframework.genericrpg.data.DataStorage;
 import de.rpgframework.genericrpg.data.GenericCore;
 
 /**
