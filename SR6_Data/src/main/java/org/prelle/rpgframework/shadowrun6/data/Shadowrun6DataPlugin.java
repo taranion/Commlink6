@@ -13,14 +13,12 @@ import org.prelle.shadowrun6.SpellFeature;
 import org.prelle.shadowrun6.SpellFeatureList;
 import org.prelle.shadowrun6.SpellList;
 import org.prelle.shadowrun6.modifications.ShadowrunCheckInfluence;
-import org.prelle.shadowrun6.modifications.ShadowrunChoiceType;
 import org.prelle.shadowrun6.modifications.ShadowrunCostType;
 import org.prelle.shadowrun6.modifications.ShadowrunReference;
 import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.CheckInfluence;
-import de.rpgframework.genericrpg.data.ChoiceType;
 import de.rpgframework.genericrpg.data.CostType;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
@@ -41,7 +39,6 @@ public class Shadowrun6DataPlugin  {
 	//--------------------------------------------------------------------
 	public Shadowrun6DataPlugin() {
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+ModifiedObjectType.class.getName(), ShadowrunReference.class);
-		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+ChoiceType.class.getName(), ShadowrunChoiceType.class);
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+CostType.class.getName(), ShadowrunCostType.class);
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+CheckInfluence.class.getName(), ShadowrunCheckInfluence.class);
 	}

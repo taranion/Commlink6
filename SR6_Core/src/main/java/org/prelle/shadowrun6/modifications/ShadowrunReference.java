@@ -52,4 +52,13 @@ public enum ShadowrunReference implements ModifiedObjectType {
 		}
 		return new ReferenceException(type, key);
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.modification.ModifiedObjectType#resolve(java.lang.String)
+	 */
+	@Override
+	public Object resolve(String key) {
+		return ShadowrunReference.resolve(this, key);
+	}
 }
