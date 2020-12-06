@@ -1,20 +1,10 @@
-package org.prelle.rpgframework.shadowrun6.data;
+package de.rpgframework.shadowrun6.data;
 
 import java.util.List;
 import java.util.Locale;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.prelle.shadowrun6.ShadowrunCore;
-import org.prelle.shadowrun6.Skill;
-import org.prelle.shadowrun6.SkillList;
-import org.prelle.shadowrun6.Spell;
-import org.prelle.shadowrun6.SpellFeature;
-import org.prelle.shadowrun6.SpellFeatureList;
-import org.prelle.shadowrun6.SpellList;
-import org.prelle.shadowrun6.modifications.ShadowrunCheckInfluence;
-import org.prelle.shadowrun6.modifications.ShadowrunCostType;
-import org.prelle.shadowrun6.modifications.ShadowrunReference;
 import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.core.RoleplayingSystem;
@@ -25,6 +15,18 @@ import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityList;
+import de.rpgframework.shadowrun6.MetaTypeList;
+import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.SkillList;
+import de.rpgframework.shadowrun6.Spell;
+import de.rpgframework.shadowrun6.SpellFeature;
+import de.rpgframework.shadowrun6.SpellFeatureList;
+import de.rpgframework.shadowrun6.SpellList;
+import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
+import de.rpgframework.shadowrun6.modifications.ShadowrunCostType;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author Stefan
@@ -55,19 +57,21 @@ public class Shadowrun6DataPlugin  {
 		double count = 0;
 		alreadyInitialized = true;
 		logger.info("START -------------------------------Core-----------------------------------------------");
-		DataSet core = new DataSet(RoleplayingSystem.SHADOWRUN6, "CORE", "org.prelle.rpgframework.shadowrun6.data", Locale.GERMAN, Locale.ENGLISH);
+		DataSet core = new DataSet(RoleplayingSystem.SHADOWRUN6, "CORE", "de.rpgframework.shadowrun6.data", Locale.GERMAN, Locale.ENGLISH);
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		try {
-			list = ShadowrunCore.loadDataItems(SkillList.class, Skill.class, core, clazz.getResourceAsStream("core/data/skills.xml"));
+			list = Shadowrun6Core.loadDataItems(SkillList.class, SR6Skill.class, core, clazz.getResourceAsStream("core/data/skills.xml"));
 			logger.debug("Loaded "+list.size()+" skills");
-			list = ShadowrunCore.loadDataItems(SpellFeatureList.class, SpellFeature.class, core, clazz.getResourceAsStream("core/data/spellfeatures.xml"));
+			list = Shadowrun6Core.loadDataItems(SpellFeatureList.class, SpellFeature.class, core, clazz.getResourceAsStream("core/data/spellfeatures.xml"));
 			logger.debug("Loaded "+list.size()+" spell features");
-			list = ShadowrunCore.loadDataItems(SpellList.class, Spell.class, core, clazz.getResourceAsStream("core/data/spells.xml"));
+			list = Shadowrun6Core.loadDataItems(SpellList.class, Spell.class, core, clazz.getResourceAsStream("core/data/spells.xml"));
 			logger.debug("Loaded "+list.size()+" spells");
-			list = ShadowrunCore.loadDataItems(QualityList.class, Quality.class, core, clazz.getResourceAsStream("core/data/qualities.xml"));
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, core, clazz.getResourceAsStream("core/data/qualities.xml"));
 			logger.debug("Loaded "+list.size()+" qualities");
+			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, core, clazz.getResourceAsStream("core/data/metatypes.xml"));
+			logger.debug("Loaded "+list.size()+" metatypes");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metatypes>
+    <metatype id="human">
+        <modifications>
+            <valmod ref="EDGE" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+        </modifications>
+    </metatype>
+
+    <metatype id="elf">
+        <modifications>
+           <valmod ref="AGILITY"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="CHARISMA" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <itemmod ref="low-light_vision" type="QUALITY"/>
+         </modifications>
+    </metatype>
+
+    <metatype id="dwarf">
+        <modifications>
+           <valmod ref="BODY"      type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="REACTION"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+           <valmod ref="STRENGTH"  type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
+           <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <itemmod ref="toxin_resistance" type="QUALITY"/>
+           <itemmod ref="thermographic_vision" type="QUALITY"/>
+         </modifications>
+    </metatype>
+
+    <metatype id="ork">
+        <modifications>
+           <valmod ref="BODY"     type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
+           <valmod ref="STRENGTH" type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
+           <valmod ref="CHARISMA" type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+           <itemmod ref="low-light_vision" type="QUALITY"/>
+           <valmod ref="built_tough"       type="QUALITY" value="1"/>
+        </modifications>
+    </metatype>
+
+    <metatype id="troll">
+        <modifications>
+            <valmod ref="BODY"     type="ATTRIBUTE" value="9" set="MAX" when="CREATION"/>
+            <valmod ref="AGILITY"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+            <valmod ref="STRENGTH" type="ATTRIBUTE" value="9" set="MAX" when="CREATION"/>
+            <valmod ref="CHARISMA" type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+            <itemmod ref="thermographic_vision" type="QUALITY"/>
+            <valmod ref="built_tough"           type="QUALITY" value="1"/>
+            <itemmod ref="dermal_deposits"      type="QUALITY"/>
+         </modifications>
+    </metatype>
+</metatypes>

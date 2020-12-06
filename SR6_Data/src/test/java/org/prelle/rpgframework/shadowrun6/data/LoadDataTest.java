@@ -9,8 +9,10 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Locale;
 
 import org.junit.Test;
-import org.prelle.shadowrun6.ShadowrunCore;
-import org.prelle.shadowrun6.Skill;
+
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 
 /**
  * @author prelle
@@ -25,7 +27,7 @@ public class LoadDataTest {
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );
 		
-		Skill athlet = ShadowrunCore.getSkill("athletics");
+		SR6Skill athlet = Shadowrun6Core.getSkill("athletics");
 		assertNotNull(athlet);
 		assertEquals("Athletik", athlet.getName(Locale.GERMAN));
 		assertEquals("Athletics", athlet.getName(Locale.ENGLISH));
