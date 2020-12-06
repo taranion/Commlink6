@@ -1,46 +1,45 @@
-package org.prelle.shadowrun6;
+package de.rpgframework.shadowrun6;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.charset.Charset;
 import java.util.Locale;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.core.BabylonEventBus;
+import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.data.GenericCore;
 
 /**
  * @author prelle
  *
  */
-public class ShadowrunCore extends GenericCore {
+public class Shadowrun6Core extends GenericCore {
 
 	private static Logger logger = LogManager.getLogger("shadowrun6");
 
 	private static MultiLanguageResourceBundle i18NResources;
-	private static MultiLanguageResourceBundle i18NHelpResources;
 	
 	
 	//-------------------------------------------------------------------
 	static {
-		i18NResources = new MultiLanguageResourceBundle(ShadowrunCore.class.getPackageName()+".i18n.core", Locale.ENGLISH, Locale.GERMAN);
-		i18NHelpResources = new MultiLanguageResourceBundle(ShadowrunCore.class.getPackageName()+".i18n.core-help", Locale.ENGLISH, Locale.GERMAN);
+		i18NResources = new MultiLanguageResourceBundle(Shadowrun6Core.class.getPackageName()+".i18n.core", Locale.ENGLISH, Locale.GERMAN);
 	}
 	
 	//-------------------------------------------------------------------
 	/**
 	 */
-	public ShadowrunCore() {
+	public Shadowrun6Core() {
 		// TODO Auto-generated constructor stub
 	}
 
 	//-------------------------------------------------------------------
 	public static MultiLanguageResourceBundle getI18nResources() {
 		return i18NResources;
-	}
-
-	//-------------------------------------------------------------------
-	public static MultiLanguageResourceBundle getI18nHelpResources() {
-		return i18NHelpResources;
 	}
 
 	//
@@ -76,13 +75,29 @@ public class ShadowrunCore extends GenericCore {
 //	}
 
 	//-------------------------------------------------------------------
-	public static Skill getSkill(String key) {
-		return getItem(Skill.class, key);
+	public static SR6Skill getSkill(String key) {
+		return getItem(SR6Skill.class, key);
 	}
 
 	//-------------------------------------------------------------------
 	public static SpellFeature getSpellFeature(String key) {
 		return getItem(SpellFeature.class, key);
+	}
+
+	//-------------------------------------------------------------------
+	public static byte[] save(Shadowrun6Character character) {
+		try {
+			StringWriter out = new StringWriter();
+			serializer.write(character, out);
+			return out.toString().getBytes(Charset.forName("UTF-8"));
+		} catch (IOException e) {
+			logger.error("Failed generating XML for char",e);
+			StringWriter mess = new StringWriter();
+			mess.append("Failed saving character\n\n");
+			e.printStackTrace(new PrintWriter(mess));
+			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, mess.toString());
+		}
+		return null;
 	}
 
 }

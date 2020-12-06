@@ -1,4 +1,4 @@
-package org.prelle.shadowrun6;
+package de.rpgframework.shadowrun6;
 
 import org.prelle.simplepersist.Attribute;
 

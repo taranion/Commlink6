@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.prelle.shadowrun6.items;
+package de.rpgframework.shadowrun6.items;
 
 import java.util.ArrayList;
 import java.util.Arrays;

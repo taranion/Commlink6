@@ -1,9 +1,9 @@
 /**
  * 
  */
-package org.prelle.shadowrun6.persist;
+package de.rpgframework.shadowrun6.persist;
 
-import org.prelle.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle

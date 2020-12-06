@@ -1,11 +1,12 @@
 /**
  * 
  */
-package org.prelle.shadowrun6;
+package de.rpgframework.shadowrun6;
 
-import org.prelle.shadowrun6.persist.SpellFeatureConverter;
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
+
+import de.rpgframework.shadowrun6.persist.SpellFeatureConverter;
 
 /**
  * @author prelle

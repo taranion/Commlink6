@@ -1,8 +1,8 @@
-package org.prelle.shadowrun6;
+package de.rpgframework.shadowrun6;
 
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
-import de.rpgframework.genericrpg.data.OneAttributeSkill;
-import de.rpgframework.shadowrun.ASkill;
+import de.rpgframework.shadowrun.AShadowrunSkill;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
 
 /**
@@ -10,10 +10,8 @@ import de.rpgframework.shadowrun.SkillType;
  *
  */
 @DataItemTypeKey(id="skill")
-public class Skill extends ASkill implements OneAttributeSkill<SR6Attribute> {
+public class SR6Skill extends AShadowrunSkill {
 
-	@org.prelle.simplepersist.Attribute(required=true)
-	private SR6Attribute attr;
 	@org.prelle.simplepersist.Attribute(name="untr",required=true)
 	private boolean useUntrained;
 	@org.prelle.simplepersist.Attribute(name="tospec")
@@ -22,14 +20,14 @@ public class Skill extends ASkill implements OneAttributeSkill<SR6Attribute> {
 	//-------------------------------------------------------------------
 	/**
 	 */
-	public Skill() {
+	public SR6Skill() {
 		type = SkillType.PHYSICAL;
 	}
 
 	//-------------------------------------------------------------------
 	/**
 	 */
-	public Skill(String id, SkillType type, SR6Attribute attrib) {
+	public SR6Skill(String id, SkillType type, ShadowrunAttribute attrib) {
 		this();
 		this.id = id;
 		this.type = type;
@@ -48,15 +46,6 @@ public class Skill extends ASkill implements OneAttributeSkill<SR6Attribute> {
 	@Override
 	public String getId() {
 		return id;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.data.OneAttributeSkill#getAttribute()
-	 */
-	@Override
-	public SR6Attribute getAttribute() {
-		return attr;
 	}
 
 	//-------------------------------------------------------------------

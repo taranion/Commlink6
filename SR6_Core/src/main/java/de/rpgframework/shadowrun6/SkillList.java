@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.prelle.shadowrun6;
+package de.rpgframework.shadowrun6;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,8 +15,8 @@ import org.prelle.simplepersist.Root;
  *
  */
 @Root(name="skills")
-@ElementList(entry="skill",type=Skill.class,inline=true)
-public class SkillList extends ArrayList<Skill> {
+@ElementList(entry="skill",type=SR6Skill.class,inline=true)
+public class SkillList extends ArrayList<SR6Skill> {
 
 	private static final long serialVersionUID = 550291427112058863L;
 
@@ -30,12 +30,12 @@ public class SkillList extends ArrayList<Skill> {
 	/**
 	 * @param c
 	 */
-	public SkillList(Collection<? extends Skill> c) {
+	public SkillList(Collection<? extends SR6Skill> c) {
 		super(c);
 	}
 
 	//-------------------------------------------------------------------
-	public List<Skill> getSkills() {
+	public List<SR6Skill> getSkills() {
 		return this;
 	}
 }

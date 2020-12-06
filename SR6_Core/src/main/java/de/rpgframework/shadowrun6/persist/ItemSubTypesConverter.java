@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.prelle.shadowrun6.persist;
+package de.rpgframework.shadowrun6.persist;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.apache.logging.log4j.LogManager;
-import org.prelle.shadowrun6.items.ItemSubType;
 import org.prelle.simplepersist.StringValueConverter;
+
+import de.rpgframework.shadowrun6.items.ItemSubType;
 
 /**
  * @author prelle

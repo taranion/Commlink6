@@ -1,12 +1,13 @@
 /**
  * 
  */
-package org.prelle.shadowrun6.persist;
+package de.rpgframework.shadowrun6.persist;
 
-import org.prelle.shadowrun6.ShadowrunCore;
-import org.prelle.shadowrun6.SpellFeature;
-import org.prelle.shadowrun6.modifications.ShadowrunReference;
 import org.prelle.simplepersist.StringValueConverter;
+
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.SpellFeature;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -29,7 +30,7 @@ public class SpellFeatureConverter implements StringValueConverter<SpellFeature>
 	 */
 	@Override
 	public SpellFeature read(String idref) throws Exception {
-		SpellFeature skill = ShadowrunCore.getSpellFeature(idref);
+		SpellFeature skill = Shadowrun6Core.getSpellFeature(idref);
 		if (skill==null)
 			throw new ReferenceException(ShadowrunReference.SPELLFEATURE, idref);
 

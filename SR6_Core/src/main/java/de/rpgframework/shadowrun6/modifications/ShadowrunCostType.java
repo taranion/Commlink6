@@ -1,4 +1,4 @@
-package org.prelle.shadowrun6.modifications;
+package de.rpgframework.shadowrun6.modifications;
 
 import de.rpgframework.genericrpg.data.CostType;
 

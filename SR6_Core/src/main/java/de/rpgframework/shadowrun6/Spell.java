@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.prelle.shadowrun6;
+package de.rpgframework.shadowrun6;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -32,20 +32,20 @@ public class Spell extends DataItem implements Comparable<Spell> {
 		ILLUSION,
 		MANIPULATION
 		;
-		public String getName() { return ShadowrunCore.getI18nResources().getString("spellcategory."+name().toLowerCase()); }
-		public String getShortName() { return ShadowrunCore.getI18nResources().getString("spellcategory."+name().toLowerCase()+".short"); }
-		public String getName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spellcategory."+name().toLowerCase(), loc); }
-		public String getShortName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spellcategory."+name().toLowerCase()+".short", loc); }
+		public String getName() { return Shadowrun6Core.getI18nResources().getString("spellcategory."+name().toLowerCase()); }
+		public String getShortName() { return Shadowrun6Core.getI18nResources().getString("spellcategory."+name().toLowerCase()+".short"); }
+		public String getName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spellcategory."+name().toLowerCase(), loc); }
+		public String getShortName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spellcategory."+name().toLowerCase()+".short", loc); }
 	}
 
 	public enum Type {
 		PHYSICAL,
 		MANA
 		;
-		public String getName() { return ShadowrunCore.getI18nResources().getString("spelltype."+name().toLowerCase()); }
-		public String getShortName() { return ShadowrunCore.getI18nResources().getString("spelltype."+name().toLowerCase()+".short"); }
-		public String getName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spelltype."+name().toLowerCase(), loc); }
-		public String getShortName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spelltype."+name().toLowerCase()+".short", loc); }
+		public String getName() { return Shadowrun6Core.getI18nResources().getString("spelltype."+name().toLowerCase()); }
+		public String getShortName() { return Shadowrun6Core.getI18nResources().getString("spelltype."+name().toLowerCase()+".short"); }
+		public String getName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spelltype."+name().toLowerCase(), loc); }
+		public String getShortName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spelltype."+name().toLowerCase()+".short", loc); }
 	}
 
 	public enum Range {
@@ -55,10 +55,10 @@ public class Spell extends DataItem implements Comparable<Spell> {
 		SELF,
 		SELF_AREA,
 		;
-		public String getName() { return ShadowrunCore.getI18nResources().getString("spellrange."+name().toLowerCase()); }
-		public String getShortName() { return ShadowrunCore.getI18nResources().getString("spellrange."+name().toLowerCase()+".short"); }
-		public String getName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spellrange."+name().toLowerCase(), loc); }
-		public String getShortName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spellrange."+name().toLowerCase()+".short", loc); }
+		public String getName() { return Shadowrun6Core.getI18nResources().getString("spellrange."+name().toLowerCase()); }
+		public String getShortName() { return Shadowrun6Core.getI18nResources().getString("spellrange."+name().toLowerCase()+".short"); }
+		public String getName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spellrange."+name().toLowerCase(), loc); }
+		public String getShortName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spellrange."+name().toLowerCase()+".short", loc); }
 	}
 
 	public enum Duration {
@@ -68,10 +68,10 @@ public class Spell extends DataItem implements Comparable<Spell> {
 		LIMITED,
 		SPECIAL
 		;
-		public String getName() { return ShadowrunCore.getI18nResources().getString("spellduration."+name().toLowerCase()); }
-		public String getShortName() { return ShadowrunCore.getI18nResources().getString("spellduration."+name().toLowerCase()+".short"); }
-		public String getName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spellduration."+name().toLowerCase(), loc); }
-		public String getShortName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spellduration."+name().toLowerCase()+".short", loc); }
+		public String getName() { return Shadowrun6Core.getI18nResources().getString("spellduration."+name().toLowerCase()); }
+		public String getShortName() { return Shadowrun6Core.getI18nResources().getString("spellduration."+name().toLowerCase()+".short"); }
+		public String getName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spellduration."+name().toLowerCase(), loc); }
+		public String getShortName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spellduration."+name().toLowerCase()+".short", loc); }
 	}
 
 	public enum Damage {
@@ -79,10 +79,10 @@ public class Spell extends DataItem implements Comparable<Spell> {
 		STUN,
 		SPECIAL
 		;
-		public String getName() { return ShadowrunCore.getI18nResources().getString("spelldamage."+name().toLowerCase()); }
-		public String getShortName() { return ShadowrunCore.getI18nResources().getString("spelldamage."+name().toLowerCase()+".short"); }
-		public String getName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spelldamage."+name().toLowerCase(), loc); }
-		public String getShortName(Locale loc) { return ShadowrunCore.getI18nResources().getString("spelldamage."+name().toLowerCase()+".short", loc); }
+		public String getName() { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()); }
+		public String getShortName() { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()+".short"); }
+		public String getName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase(), loc); }
+		public String getShortName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()+".short", loc); }
 	}
 
 	@Attribute
