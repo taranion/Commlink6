@@ -23,6 +23,7 @@ public class LoadDataTest {
 	//-------------------------------------------------------------------
 	@Test
 	public void loadDataTest() {
+		System.setProperty("logdir", "/tmp");
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );

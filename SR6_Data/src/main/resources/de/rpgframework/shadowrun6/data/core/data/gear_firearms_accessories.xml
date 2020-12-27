@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="ares_light_fire_75" avail="3L" cost="400" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT">
+      <usage slot="CARRIED"/>
+	  <usage slot="VEHICLE_MOUNT" volume="1" />
+  	  <useas slot="CYBER_WEAPON" />
+      <modifications>
+         <itemmod type="SLOT" ref="TOP"/>
+         <itemmod type="SLOT" ref="BARREL"/>
+         <itemmod type="ITEM_ENHANCEMENT" ref="smartgun_system"/>
+      </modifications>
+      <accessories>
+        <accessory item="laser_sight" slot="TOP" included="true"/>
+      </accessories>
+      <weapon dmg="2P" attack="10,7,6,," mode="SA" ammo="16(c)" skill="firearms" spec="firearms/pistols"/>
+   </item>
+	<item id="laser_sight" avail="1" cost="125" type="WEAPON_FIREARMS" subtype="ACCESSORY">
+		<usage slot="TOP" />
+		<usage slot="UNDER" />
+		<modifications>
+		    <itemmod type="ACTION_ITEM"  ref="toggle_laser_sight" />
+		    <valmod  type="ACTION_COST"  ref="toggle_laser_sight" mode="WIRELESS" value="MINOR_ZERO"/>
+		</modifications>
+		<mode id="mode.active">
+		  <modifications>
+		  	<valmod type="ITEMATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,1,1" mode="OFFLINE,!SMARTGUN" />
+		  </modifications>
+		</mode>
+		<mode id="mode.active_wireless">
+		  <modifications>
+		  	<valmod type="ITEMATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2" mode="WIRELESS,!SMARTGUN" />
+		  </modifications>
+		</mode>
+	</item>
+	<item id="smartgun_system" avail="2L" cost="200" type="WEAPON_FIREARMS" subtype="ACCESSORY">
+		<usage slot="TOP" />
+		<usage slot="UNDER" />
+		<modifications>
+		    <valmod  type="ACTION_COST"  ref="reload" mode="WIRELESS" value="MINOR_ZERO"/>
+		    <valmod  type="ACTION_COST"  ref="change_device_mode" mode="WIRELESS" value="MINOR_ZERO"/>
+		</modifications>
+		<mode id="SMARTGUN">
+			<requires>
+		    	<datareq apply="ACTIVE_GEAR" type="GEAR" ref="smartlink" />
+		  	</requires>
+			<modifications>
+		  		<valmod type="ITEMATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2" />
+		  		<valmod type="ITEMATTRIBUTE" ref="DICEPOOL"      value="1" mode="WIRELESS" />
+		  	</modifications>
+		</mode>
+	</item>
+<!--    <item avail="3" cost="600" id="airburst_link" type="ACCESSORY" subtype="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="INTERNAL"/> -->
+<!--       <requires> -->
+<!--           <itemsubtypereq type="LAUNCHERS"/> -->
+<!--       </requires> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="200" id="bipod"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/> -->
+<!--       <modifications> -->
+<!--          <itemattrmod attr="ATTACK_RATING" val="2"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="150" id="concealable_holster" type="ACCESSORY" subtype="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/> -->
+<!--       <requires> -->
+<!--          <itemsubtypereq type="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY,MACHINE_PISTOLS"/> -->
+<!--       </requires> -->
+<!--    </item> -->
+<!--    <item avail="0" cost="0" id="fn_p93_flashlight" type="ACCESSORY"> -->
+<!--       <requires> -->
+<!--          <itemreq item="fn_p93_praetor"/> -->
+<!--       </requires> -->
+<!--    </item> -->
+<!--    <item avail="3" cost="500" id="gas-vent_system" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/> -->
+<!--       <modifications> -->
+<!--          <itemattrmod attr="ATTACK_RATING" val="2" cond="y"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="3" cost="1400" id="gyro_mount" > -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" cap="8" slot="CYBERLIMB_IMPLANT"/> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="350" id="hidden_arm_slide" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/> -->
+<!--       <modifications> -->
+<!--          <itemattrmod attr="CONCEALABILITY" val="1"/> -->
+<!--       </modifications> -->
+<!--       <requires> -->
+<!--          <itemsubtypereq type="TASERS,HOLDOUTS,PISTOLS_LIGHT"/> -->
+<!--       </requires> -->
+<!--       <accessory/> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="350" id="imaging_scope" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="3" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="125" id="laser_sight" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/> -->
+<!--       <modifications> -->
+<!--          <itemattrmod attr="ATTACK_RATING" objVal="1,1,1,,"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="3" cost="70" id="periscope" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/> -->
+<!--       <requires> -->
+<!--          <slotreq slot="TOP"/> -->
+<!--       </requires> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="175" id="quick_draw_holster" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/> -->
+<!--       <requires> -->
+<!--          <itemsubtypereq type="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY"/> -->
+<!--       </requires> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="50" id="shock_pad" > -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="STOCK"/> -->
+<!--       <modifications> -->
+<!--          <itemattrmod attr="ATTACK_RATING" val="1" cond="y"/> -->
+<!--       </modifications> -->
+<!--       <requires> -->
+<!--          <itemsubtypereq type="RIFLE_ASSAULT,RIFLE_HUNTING,RIFLE_SNIPER,SHOTGUNS"/> -->
+<!--       </requires> -->
+<!--       <accessory/> -->
+<!--    </item> -->
+<!--    <item avail="4" cost="500" id="silencer"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/> -->
+<!--       <requires> -->
+<!--          <itemsubtypereq type="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY,SUBMACHINE_GUNS,LMG,MMG,HMG,ASSAULT_CANNON,RIFLE_ASSAULT,RIFLE_HUNTING,RIFLE_SNIPER"/> -->
+<!--          <slotreq slot="BARREL"/> -->
+<!--       </requires> -->
+<!--       <accessory/> -->
+<!--    </item> -->
+<!--    <item avail="4" cost="750" id="ares_lf_silencer" modonly="yes"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/> -->
+<!--       <requires> -->
+<!--          <anyreq> -->
+<!--             <itemreq item="ares_light_fire_70"/> -->
+<!--             <itemreq item="ares_light_fire_75"/> -->
+<!--          </anyreq> -->
+<!--       </requires> -->
+<!--       <accessory/> -->
+<!--    </item> -->
+<!--    <item avail="5" cost="2500" id="smart_firing_platform"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/> -->
+<!--       <requires> -->
+<!--          <slotreq slot="UNDER"/> -->
+<!--       </requires> -->
+<!--       <accessory/> -->
+<!--    </item> -->
+<!--    <item avail="1L" cost="+500" id="smartgun_system" type="ACCESSORY" modonly="true"> -->
+<!--       <modifications> -->
+<!--          <itemattrmod attr="ATTACK_RATING" val="2" cond="true"/> -->
+<!--          <itemhookmod capacity="1" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="2L" cost="200" id="smartgun_system_external" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/> -->
+<!--       <modifications> -->
+<!--          <itemattrmod attr="ATTACK_RATING" val="2" cond="true"/> -->
+<!--          <itemhookmod capacity="1" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="5" id="spare_clip" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/> -->
+<!--       <requires> -->
+<!--          <itemtypereq type="WEAPON_FIREARMS"/> -->
+<!--       </requires> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="30" id="spare_clip_predator" type="ACCESSORY" multi="y" > -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/> -->
+<!--       <requires> -->
+<!--          <itemreq item="ares_predator_vi"/> -->
+<!--       </requires> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="25" id="speed_loader" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/> -->
+<!--       <requires> -->
+<!--          <itemtypereq type="WEAPON_FIREARMS"/> -->
+<!--       </requires> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="30" id="folding_stock" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="STOCK"/> -->
+<!--       <modifications> -->
+<!--          <itemattrmod attr="CONCEALABILITY" val="1"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="500" id="tripod" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/> -->
+<!--       <modifications> -->
+<!--       </modifications> -->
+<!--    </item> -->
+   
+</items>

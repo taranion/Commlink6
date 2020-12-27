@@ -37,13 +37,13 @@
        <checkmod ref="athletics" type="SKILL" what="BONUS" value="1"/>
      </modifications>
    </quality>
-<!--    <quality id="dermal_deposits"  	  karma="7" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--        <valmod type="ATTRIBUTE" ref="MELEE_DAMAGE" value="1" set="NATURAL" /> -->
-<!--         <itemmod type="GEAR" ref="dermal_deposits" /> -->
-<!--        <dmgtypemod type="PHYSICAL"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
+   <quality id="dermal_deposits"  	  karma="7" type="POSITIVE" >
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="MELEE_DAMAGE" value="1" set="NATURAL" />
+        <itemmod type="GEAR" ref="dermal_deposits" />
+       <itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" />
+     </modifications>
+   </quality>
 <!--    <quality id="double_jointed"   	  karma="12" type="POSITIVE" > -->
 <!--      <modifications> -->
 <!--        <edgemod skill="athletics" edge="BONUS"/> -->
@@ -116,7 +116,7 @@
 <!--        <relevancemod topic="COMBAT"/> -->
 <!--      </modifications> -->
 <!--    </quality> -->
-<!--    <quality id="low-light_vision"     karma="6" type="POSITIVE" /> -->
+   <quality id="low-light_vision"     karma="6" type="POSITIVE" />
 <!--    <quality id="magic_resistance"     karma="8" type="POSITIVE"> -->
 <!--      <modifications> -->
 <!--        <relevancemod topic="MAGICAL"/> -->
@@ -142,7 +142,7 @@
 <!--        <edgemod skill="tasking" edge="BONUS"/> -->
 <!--      </modifications> -->
 <!--    </quality> -->
-<!--    <quality id="thermographic_vision" karma="8" type="POSITIVE" /> -->
+   <quality id="thermographic_vision" karma="8" type="POSITIVE" />
 <!--    <quality id="toughness" 			  karma="12" type="POSITIVE" > -->
 <!--      <modifications> -->
 <!--        <edgemod attr="DEFENSIVE_POOL" edge="BONUS"/> -->

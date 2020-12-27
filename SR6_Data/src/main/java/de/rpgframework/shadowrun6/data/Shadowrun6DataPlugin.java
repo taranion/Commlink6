@@ -24,6 +24,8 @@ import de.rpgframework.shadowrun6.Spell;
 import de.rpgframework.shadowrun6.SpellFeature;
 import de.rpgframework.shadowrun6.SpellFeatureList;
 import de.rpgframework.shadowrun6.SpellList;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemTemplateList;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCostType;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -57,7 +59,7 @@ public class Shadowrun6DataPlugin  {
 		double count = 0;
 		alreadyInitialized = true;
 		logger.info("START -------------------------------Core-----------------------------------------------");
-		DataSet core = new DataSet(RoleplayingSystem.SHADOWRUN6, "CORE", "de.rpgframework.shadowrun6.data", Locale.GERMAN, Locale.ENGLISH);
+		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN);
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
@@ -72,6 +74,8 @@ public class Shadowrun6DataPlugin  {
 			logger.debug("Loaded "+list.size()+" qualities");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, core, clazz.getResourceAsStream("core/data/metatypes.xml"));
 			logger.debug("Loaded "+list.size()+" metatypes");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear.xml"));
+			logger.debug("Loaded "+list.size()+" items");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
