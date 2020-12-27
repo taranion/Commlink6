@@ -7,11 +7,14 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
+import de.rpgframework.shadowrun6.persist.RuleConverter;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.SpellFeature;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.persist.ReferenceException;
+import de.rpgframework.shadowrun6.persist.SkillSpecializationConverter;
 /**
  * @author prelle
  *
@@ -19,10 +22,13 @@ import de.rpgframework.shadowrun6.persist.ReferenceException;
 public enum ShadowrunReference implements ModifiedObjectType {
 
 	ATTRIBUTE(new AttributeConverter()),
+	GEAR(ItemTemplate.class),
 	METATYPE(SR6MetaType.class),
+	RULE(new RuleConverter()),
 	QUALITY(Quality.class),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILL(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
+	SKILLSPECIALIZATION(new SkillSpecializationConverter()),
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id())
 	;
 	

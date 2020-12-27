@@ -74,16 +74,16 @@ public class Spell extends DataItem implements Comparable<Spell> {
 		public String getShortName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spellduration."+name().toLowerCase()+".short", loc); }
 	}
 
-	public enum Damage {
-		PHYSICAL,
-		STUN,
-		SPECIAL
-		;
-		public String getName() { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()); }
-		public String getShortName() { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()+".short"); }
-		public String getName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase(), loc); }
-		public String getShortName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()+".short", loc); }
-	}
+//	public enum Damage {
+//		PHYSICAL,
+//		STUN,
+//		SPECIAL
+//		;
+//		public String getName() { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()); }
+//		public String getShortName() { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()+".short"); }
+//		public String getName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase(), loc); }
+//		public String getShortName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()+".short", loc); }
+//	}
 
 	@Attribute
 	private String id;

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="combat_axe" avail="4" cost="500">
+      <!--useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/-->
+      <weapon  dmg="5P" attack="9,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+</items>
