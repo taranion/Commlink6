@@ -44,7 +44,7 @@ public class ScreenLoader {
 //		((AttributesPageController)loader.getController()).setComponent(ret);
 //		return ret;
 //	}
-//
+
 //	//-------------------------------------------------------------------
 //	public static VBox loadSpellDescriptionVBox(Spell data) throws IOException {
 //		FXMLLoader loader = new FXMLLoader(
@@ -71,7 +71,7 @@ public class ScreenLoader {
 //		((SpellDescriptionPageController)loader.getController()).setData(data);
 //		return ret;
 //	}
-//
+
 //	//-------------------------------------------------------------------
 //	public static Page loadMastershipDescriptionPage(Mastership data) throws IOException {
 //		FXMLLoader loader = new FXMLLoader(

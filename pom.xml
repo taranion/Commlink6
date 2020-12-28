@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.prelle</groupId>
+	<artifactId>shadowrun-master</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>Shadowrun Master</name>
+	<packaging>pom</packaging>
+
+	<developers>
+		<developer>
+			<name>Stefan Prelle</name>
+			<email>stefan@prelle.org</email>
+			<timezone>GMT+1</timezone>
+			<roles>
+				<role>Lead developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<log4j.version>2.13.3</log4j.version>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+
+		<!-- Dependencies -->
+		<vaadin.version>14.3.1</vaadin.version>
+		<jetty.version>9.4.31.v20200723</jetty.version>
+	</properties>
+
+	<modules>
+		<module>Splittermond_Core</module>
+		<module>Splittermond_Data</module>
+		<module>Splittermond_CharGen</module>
+		<module>Splittermond_CharGen_JFX</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>rpgframework-core</artifactId>
+				<version>5.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>rpgframework-rules</artifactId>
+				<version>5.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>rpgframework-javafx</artifactId>
+				<version>5.0.0-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<distributionManagement>
+		<repository>
+			<id>jfrog</id>
+			<url>https://rpgframework.jfrog.io/artifactory/RPGFramework</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+	</distributionManagement>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
