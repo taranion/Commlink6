@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.prelle.javafx.Page?>
+<?import org.prelle.splittermond.chargen.jfx.SpliMoPrimaryAttributeTable?>
+
+<Page title="%page.title" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.prelle.splittermond.chargen.jfx.SpellDescriptionPageController">
+	<content>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox spacing="10.0">
+         <children>
+            <Label styleClass="base" text="%spell.type" />
+            <Label fx:id="type" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="10.0">
+         <children>
+            <Label styleClass="base" text="%spell.difficulty" />
+            <Label fx:id="difficulty" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="10.0">
+         <children>
+            <Label styleClass="base" text="%spell.cost" />
+            <Label fx:id="cost" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="10.0">
+         <children>
+            <Label styleClass="base" text="%spell.castduration" />
+            <Label fx:id="castduration" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="10.0">
+         <children>
+            <Label styleClass="base" text="%spell.castrange" />
+            <Label fx:id="castrange" text="Label" />
+         </children>
+      </HBox>
+      <HBox spacing="10.0">
+         <children>
+            <Label styleClass="base" text="%spell.duration" />
+            <Label fx:id="duration" text="Label" />
+         </children>
+      </HBox>
+      <Label fx:id="description" text="Label" wrapText="true" />
+      <HBox spacing="10.0">
+         <children>
+            <Label styleClass="base" text="%spell.enhanced" />
+            <Label fx:id="enhanced" text="Label" />
+         </children>
+      </HBox>
+      <Label fx:id="enhanceDescr" text="Label" wrapText="true" />
+   </children>
+</VBox>
+	</content>
+</Page>

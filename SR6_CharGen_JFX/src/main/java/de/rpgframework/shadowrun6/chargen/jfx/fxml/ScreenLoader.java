@@ -10,6 +10,7 @@ import org.prelle.javafx.Page;
 import de.rpgframework.shadowrun6.Spell;
 import de.rpgframework.shadowrun6.chargen.jfx.CharacterOverviewController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.SpellDescriptionPageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 
@@ -45,19 +46,19 @@ public class ScreenLoader {
 //		return ret;
 //	}
 
-//	//-------------------------------------------------------------------
-//	public static VBox loadSpellDescriptionVBox(Spell data) throws IOException {
-//		FXMLLoader loader = new FXMLLoader(
-//				ScreenLoader.class.getResource("SpellDescription.fxml"),
-//				ResourceBundle.getBundle("org.prelle.splittermond.chargen.jfx.SpellDescriptionPage")
-//				);
-//		FXMLLoader.setDefaultClassLoader(ScreenLoader.class.getClassLoader());
-//		loader.setBuilderFactory(new ExtendedComponentBuilderFactory());
-//		VBox ret = loader.load();
-//		((SpellDescriptionPageController)loader.getController()).setData(data);
-//		return ret;
-//	}
-//
+	//-------------------------------------------------------------------
+	public static VBox loadSpellDescriptionVBox(Spell data) throws IOException {
+		FXMLLoader loader = new FXMLLoader(
+				ScreenLoader.class.getResource("SpellDescription.fxml"),
+				ResourceBundle.getBundle("org.prelle.splittermond.chargen.jfx.SpellDescriptionPage")
+				);
+		FXMLLoader.setDefaultClassLoader(ScreenLoader.class.getClassLoader());
+		loader.setBuilderFactory(new ExtendedComponentBuilderFactory());
+		VBox ret = loader.load();
+		((SpellDescriptionPageController)loader.getController()).setData(data);
+		return ret;
+	}
+
 //	//-------------------------------------------------------------------
 //	public static Page loadSpellDescriptionPage(Spell data) throws IOException {
 //		FXMLLoader loader = new FXMLLoader(

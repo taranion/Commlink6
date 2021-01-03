@@ -44,7 +44,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		gen.start(new Shadowrun6Character());
 		logger.info("Create wizard for "+wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
-		CloseType close = getApplication().showAndWait(wizard);
+		CloseType close = getAppLayout().getApplication().showAndWait(wizard);
 		logger.info("Wizard closed via "+close);
 		controller.refresh();
 		if (close==CloseType.FINISH) {
@@ -57,7 +57,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			}
 		}
 		if (close==CloseType.CANCEL) {
-			getApplication().closeAppLayout();
+//			getApplication().closeAppLayout();
+			getAppLayout().historyBack();
 		}
 	}
 
@@ -73,7 +74,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		GeneratorWrapper wrapper = new GeneratorWrapper(gen);
 		wrapper.continueCreation((Shadowrun6Character) model);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
-		CloseType close = getApplication().showAndWait(wizard);
+		CloseType close = getAppLayout().getApplication().showAndWait(wizard);
 		logger.info("Wizard closed via "+close);
 		controller.refresh();
 		if (close==CloseType.FINISH) {
@@ -104,10 +105,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.debug("RCV "+type);
-		Page page = getVisiblePage();
-		if (page!=null && page instanceof ControllerListener) {
-			((ControllerListener)page).handleControllerEvent(type, param);
-		}
+//		Page page = getVisiblePage();
+//		if (page!=null && page instanceof ControllerListener) {
+//			((ControllerListener)page).handleControllerEvent(type, param);
+//		}
 	}
 
 }
