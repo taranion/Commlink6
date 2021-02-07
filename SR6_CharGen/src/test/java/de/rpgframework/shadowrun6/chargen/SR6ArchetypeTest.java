@@ -3,13 +3,12 @@
  */
 package de.rpgframework.shadowrun6.chargen;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -26,7 +25,7 @@ public class SR6ArchetypeTest {
 	private PriorityCharacterGenerator charGen;
 
 	//-------------------------------------------------------------------
-	@BeforeAll
+	@BeforeClass
 	public static void setupClass() {
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
@@ -34,7 +33,7 @@ public class SR6ArchetypeTest {
 	}
 
 	//-------------------------------------------------------------------
-	@BeforeEach
+	@Before
 	public void setup() {
 		model = new Shadowrun6Character();
 		charGen = new PriorityCharacterGenerator();
@@ -42,13 +41,15 @@ public class SR6ArchetypeTest {
 	}
 	
 	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testAdept() {
 		
 		SR6MetaType human = Shadowrun6Core.getItem(SR6MetaType.class, "human");
-		assertNotNull(human, "Metatype 'human' not found");
-		assertNotNull(charGen.getMetatypeController(), "No metatype controller found");
+		assertNotNull("Metatype 'human' not found", human);
+		assertNotNull("No metatype controller found", charGen.getMetatypeController());
 		charGen.getMetatypeController().canBeSelected(human);
+		charGen.getMetatypeController().select(human);
 		
 		byte[] raw = Shadowrun6Core.save(model);
 		String xml = new String(raw);

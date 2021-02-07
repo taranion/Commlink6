@@ -3,9 +3,6 @@
  */
 package de.rpgframework.shadowrun6.items;
 
-import de.rpgframework.ResourceI18N;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
-
 /**
  * @author prelle
  *

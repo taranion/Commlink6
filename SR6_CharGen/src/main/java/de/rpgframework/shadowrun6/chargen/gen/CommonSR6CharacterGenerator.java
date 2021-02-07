@@ -1,11 +1,11 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
-import de.rpgframework.shadowrun.chargen.charctrl.MetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
@@ -17,10 +17,11 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
  */
 public abstract class CommonSR6CharacterGenerator extends CharacterControllerImpl<Shadowrun6Character> implements SR6CharacterGenerator {
 
-	protected static final Logger logger = LogManager.getLogger("shadowrun6.gen.proc");
+	protected static final Logger logger = LoggerFactory.getLogger("shadowrun6.gen.proc");
 
-	protected MetatypeController meta;
+	protected IMetatypeController meta;
 	protected SR6SkillGenerator  skill;
+	protected IQualityController  qualities;
 
 	//-------------------------------------------------------------------
 	protected CommonSR6CharacterGenerator() {
@@ -81,13 +82,22 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	public SR6SkillController getSkillController() {
 		return skill;
 	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getQualityController()
+	 */
+	@Override
+	public IQualityController getQualityController() {
+		return qualities;
+	}
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.ShadowrunCharacterGenerator#getMetatypeController()
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getMetatypeController()
 	 */
 	@Override
-	public MetatypeController getMetatypeController() {
+	public IMetatypeController getMetatypeController() {
 		return meta;
 	}
 

@@ -1,6 +1,5 @@
 package de.rpgframework.shadowrun6;
 
-import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.MetaType;

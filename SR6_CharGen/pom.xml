@@ -2,75 +2,62 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.rpgframework</groupId>
+
+	<parent>
+		<groupId>de.rpgframework</groupId>
+		<artifactId>shadowrun6-master</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 	<artifactId>shadowrun6-chargen</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>SR6_CharGen</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<log4j.version>2.13.3</log4j.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.install.skip>false</maven.install.skip>
 		<maven.deploy.skip>false</maven.deploy.skip>
-		<revision>4.0.0</revision>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>${log4j.version}</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle</groupId>
 			<artifactId>simple-persist</artifactId>
-			<version>[3.2.0-SNAPSHOT, 3.99.99)</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>rpgframework-core</artifactId>
-			<version>5.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>rpgframework-rules</artifactId>
-			<version>5.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>shadowrun-common-chargen</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>shadowrun6-core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>shadowrun6-data</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.5.0</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.5.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j.version}</version>
-			<scope>test</scope>
+			<groupId>org.slf4j</groupId>
+   		<artifactId>slf4j-simple</artifactId>
+  			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

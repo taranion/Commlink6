@@ -4,21 +4,20 @@ import java.io.InputStream;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.NodeWithTitleSkeleton;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
 import org.prelle.rpgframework.jfx.DataItemSpinnerPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.Gender;
-import de.rpgframework.shadowrun.chargen.charctrl.MetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import javafx.scene.Node;
@@ -38,7 +37,7 @@ import javafx.util.StringConverter;
  */
 public class WizardPageMetatype extends WizardPage {
 	
-	private final static Logger logger = LogManager.getLogger(WizardPageMetatype.class);
+	private final static Logger logger = LoggerFactory.getLogger(WizardPageMetatype.class);
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(WizardPageMetatype.class.getName());
 
@@ -127,7 +126,7 @@ public class WizardPageMetatype extends WizardPage {
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		contentPane.selectedItemProperty().addListener( (ov,o,n) -> {
-			MetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
+			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
 			if (ctrl==null) {
 				logger.error(charGen.getClass()+".getMetatypeController returns null  (internal "+charGen.getWrapped()+" ) of "+charGen);
 			} else
@@ -138,7 +137,7 @@ public class WizardPageMetatype extends WizardPage {
 		
 		btnRoll.setOnAction(ev -> {
 			logger.info("Roll");
-			MetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
+			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
 //			ctrl.rollEyes();
 //			ctrl.rollGender();
 //			ctrl.rollHair();

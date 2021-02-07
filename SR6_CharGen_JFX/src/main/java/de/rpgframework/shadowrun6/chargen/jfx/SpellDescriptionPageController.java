@@ -3,8 +3,8 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.rpgframework.shadowrun6.Spell;
 import javafx.fxml.FXML;
@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  */
 public class SpellDescriptionPageController {
 	
-	private final static Logger logger = LogManager.getLogger(SpellDescriptionPageController.class);
+	private final static Logger logger = LoggerFactory.getLogger(SpellDescriptionPageController.class);
 
 	@FXML
     private ResourceBundle resources;

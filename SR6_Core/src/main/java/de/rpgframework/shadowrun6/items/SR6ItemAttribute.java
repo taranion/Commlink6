@@ -5,7 +5,7 @@ import java.util.MissingResourceException;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.genericrpg.data.IItemAttribute;
+import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
@@ -17,12 +17,13 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	ACCELERATION,
 //	AMMUNITION,
 //	ARMOR,
-//	ATTACK_RATING,
+	ATTACK_RATING,
 	AVAILABILITY,
 //	BODY,
 //	CAPACITY,
 //	CONCEALABILITY,
 	DAMAGE,
+	RATING,
 //	DAMAGE_REDUCTION,
 //	DEFENSE_RATING,
 //	DEVICE_RATING,
@@ -34,7 +35,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	MAX_SENSOR_RATING,
 //	MODIFICATION_SLOTS,
 //	PILOT,
-//	PRICE,
+	PRICE,
 //	QUALITY,
 //	SEATS,
 //	SENSORS,

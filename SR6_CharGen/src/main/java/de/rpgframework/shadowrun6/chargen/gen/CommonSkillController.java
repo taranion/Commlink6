@@ -2,8 +2,8 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -20,7 +20,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  */
 public class CommonSkillController extends ControllerImpl<SR6Skill> implements SR6SkillController {
 	
-	protected final static Logger logger = LogManager.getLogger("shadowrun6.gen.skill");
+	protected final static Logger logger = LoggerFactory.getLogger("shadowrun6.gen.skill");
 
 	protected Shadowrun6Character model;
 

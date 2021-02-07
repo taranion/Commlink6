@@ -28,5 +28,10 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	public RoleplayingSystem getRules() {
 		return RoleplayingSystem.SHADOWRUN6;
 	}
+	
+	//-------------------------------------------------------------------
+	public SR6MetaType getMetatype() {
+		return Shadowrun6Core.getItem(SR6MetaType.class, metatype);
+	}
 
 }

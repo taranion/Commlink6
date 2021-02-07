@@ -8,7 +8,7 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.MetaTypeOption;
-import de.rpgframework.shadowrun.chargen.charctrl.MetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -17,7 +17,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
  * @author prelle
  *
  */
-public class PriorityMetatypeController extends ControllerImpl<SR6MetaType> implements MetatypeController<SR6MetaType> {
+public class PriorityMetatypeController extends ControllerImpl<SR6MetaType> implements IMetatypeController<SR6MetaType> {
 
 	private Map<SR6MetaType, MetaTypeOption> availableOptions;
 
@@ -48,13 +48,18 @@ public class PriorityMetatypeController extends ControllerImpl<SR6MetaType> impl
 	@Override
 	public boolean canBeSelected(SR6MetaType type) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean select(SR6MetaType value) {
-		// TODO Auto-generated method stub
-		return false;
+		if (!canBeSelected(value))
+			return false;
+		
+		getModel().setMetatype(value);
+		
+		parent.runProcessors();
+		return true;
 	}
 
 	@Override

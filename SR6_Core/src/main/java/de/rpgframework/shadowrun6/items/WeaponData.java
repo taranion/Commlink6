@@ -7,9 +7,9 @@ import java.util.Locale;
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
 
-import de.rpgframework.genericrpg.data.AGearData;
-import de.rpgframework.genericrpg.data.IGearTypeData;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
+import de.rpgframework.genericrpg.items.AGearData;
+import de.rpgframework.genericrpg.items.IGearTypeData;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.persist.AttackRatingConverter;
 import de.rpgframework.shadowrun6.persist.FireModesConverter;
@@ -256,7 +256,8 @@ public class WeaponData implements IGearTypeData {
 	@Override
 	public void copyToAttributes(AGearData copyTo) {
 		// TODO Auto-generated method stub
-		copyTo.setAttribute(SR6ItemAttribute.DAMAGE, damage);
+		if (damage!=null)
+			copyTo.setAttribute(SR6ItemAttribute.DAMAGE, damage);
 	}
 
 }

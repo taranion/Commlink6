@@ -1,12 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.prelle</groupId>
-	<artifactId>shadowrun-master</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<name>Shadowrun Master</name>
+	<groupId>de.rpgframework</groupId>
+	<artifactId>shadowrun6-master</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Shadowrun6 Master</name>
 	<packaging>pom</packaging>
 
 	<developers>
@@ -22,24 +22,26 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<log4j.version>2.13.3</log4j.version>
+		<slf4j.version>2.0.0-alpha1</slf4j.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
-
-		<!-- Dependencies -->
-		<vaadin.version>14.3.1</vaadin.version>
-		<jetty.version>9.4.31.v20200723</jetty.version>
+		<revision>0.0.1-SNAPSHOT</revision>
 	</properties>
 
 	<modules>
-		<module>Splittermond_Core</module>
-		<module>Splittermond_Data</module>
-		<module>Splittermond_CharGen</module>
-		<module>Splittermond_CharGen_JFX</module>
+		<module>SR6_Core</module>
+		<module>SR6_Data</module>
+		<module>SR6_CharGen</module>
+		<module>SR6_CharGen_JFX</module>
 	</modules>
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.prelle</groupId>
+				<artifactId>simple-persist</artifactId>
+				<version>[3.4.0-SNAPSHOT, 3.99.99)</version>
+			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-core</artifactId>
@@ -55,11 +57,53 @@
 				<artifactId>rpgframework-javafx</artifactId>
 				<version>5.0.0-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>shadowrun-common-core</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>shadowrun-common-chargen</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>shadowrun-common-chargen-jfx</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>shadowrun6-core</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>shadowrun6-data</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>shadowrun6-chargen</artifactId>
+				<version>${revision}</version>
+			</dependency>
 
 			<dependency>
-				<groupId>org.apache.logging.log4j</groupId>
-				<artifactId>log4j-api</artifactId>
-				<version>${log4j.version}</version>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<scope>test</scope>
+				<version>4.13</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -72,7 +116,7 @@
 			<uniqueVersion>false</uniqueVersion>
 		</repository>
 	</distributionManagement>
-	
+
 	<build>
 		<plugins>
 			<plugin>

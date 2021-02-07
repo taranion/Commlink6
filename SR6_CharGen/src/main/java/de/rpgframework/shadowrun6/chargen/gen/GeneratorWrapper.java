@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
@@ -14,7 +14,8 @@ import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
-import de.rpgframework.shadowrun.chargen.charctrl.MetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -26,7 +27,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  */
 public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrapper<Shadowrun6Character, SR6CharacterGenerator> {
 
-	private static Logger logger = LogManager.getLogger(GeneratorWrapper.class);
+	private static Logger logger = LoggerFactory.getLogger(GeneratorWrapper.class);
 	
 	private SR6CharacterGenerator wrapped;
 
@@ -37,7 +38,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.ShadowrunCharacterGenerator#getId()
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getId()
 	 */
 	@Override
 	public String getId() {
@@ -46,7 +47,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.ShadowrunCharacterGenerator#getWizardPages()
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getWizardPages()
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
@@ -148,11 +149,11 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.ShadowrunCharacterGenerator#getMetatypeController()
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getMetatypeController()
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public MetatypeController getMetatypeController() {
+	public IMetatypeController getMetatypeController() {
 		return wrapped.getMetatypeController();
 	}
 
@@ -181,6 +182,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public SR6SkillController getSkillController() {
 		return wrapped.getSkillController();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getQualityController()
+	 */
+	@Override
+	public IQualityController getQualityController() {
+		return wrapped.getQualityController();
 	}
 
 	//-------------------------------------------------------------------

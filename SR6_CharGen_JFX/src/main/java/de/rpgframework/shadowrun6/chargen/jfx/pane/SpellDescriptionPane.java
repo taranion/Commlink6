@@ -51,7 +51,10 @@ public class SpellDescriptionPane extends VBox {
 		Label hdDurat = new Label(ResourceI18N.get(UI,"label.spell.duration"));
 		Label lbDurat = new Label(spell.getDuration().getShortName());
 		Label hdDrain = new Label(ResourceI18N.get(UI,"label.spell.drain"));
-		Label lbDrain = new Label(spell.getDuration().getShortName());
+		String drainText = String.valueOf(spell.getDrain());
+		if (spell.getDrain()<0)
+			drainText=Math.abs(spell.getDrain())+"+";
+		Label lbDrain = new Label(drainText);
 		hdRange.setMaxWidth(Double.MAX_VALUE);
 		hdType.setMaxWidth(Double.MAX_VALUE);
 		hdDurat.setMaxWidth(Double.MAX_VALUE);
@@ -84,13 +87,14 @@ public class SpellDescriptionPane extends VBox {
 	    grid.getColumnConstraints().addAll(col1);
 		}
 		grid.setStyle("-fx-background-color: #e9e9e2;");
-		grid.setMaxWidth(Double.MAX_VALUE);
+//		grid.setMaxWidth(Double.MAX_VALUE);
 		
 		// Effect
 		Label lblDescr = new Label(spell.getDescription());
 		lblDescr.setWrapText(true);
 
 		
+		this.setStyle("-fx-max-width: 35em");
 		getChildren().addAll(
 				lbFeatures, 
 				grid,

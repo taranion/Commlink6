@@ -2,17 +2,16 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.prelle.javafx.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import de.rpgframework.shadowrun6.chargen.jfx.fxml.ScreenLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class CharacterOverviewController {
 	
-	private final static Logger logger = LogManager.getLogger(CharacterOverviewController.class);
+	private final static Logger logger = LoggerFactory.getLogger(CharacterOverviewController.class);
 
 	private transient SR6CharacterViewLayout screen;
 	

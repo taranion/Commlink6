@@ -6,8 +6,8 @@ import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.core.BabylonEventBus;
@@ -20,7 +20,7 @@ import de.rpgframework.genericrpg.data.GenericCore;
  */
 public class Shadowrun6Core extends GenericCore {
 
-	private static Logger logger = LogManager.getLogger("shadowrun6");
+	private static Logger logger = LoggerFactory.getLogger("shadowrun6");
 
 	private static MultiLanguageResourceBundle i18NResources;
 	

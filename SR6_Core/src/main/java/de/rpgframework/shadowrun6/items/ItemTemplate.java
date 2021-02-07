@@ -8,9 +8,9 @@ import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.Element;
 
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
-import de.rpgframework.genericrpg.data.IGearTypeData;
-import de.rpgframework.genericrpg.data.PieceOfGear;
-import de.rpgframework.genericrpg.data.PieceOfGearUsage;
+import de.rpgframework.genericrpg.items.IGearTypeData;
+import de.rpgframework.genericrpg.items.PieceOfGear;
+import de.rpgframework.genericrpg.items.PieceOfGearUsage;
 import de.rpgframework.shadowrun6.persist.AvailabilityConverter;
 
 /**
@@ -48,6 +48,9 @@ public class ItemTemplate extends PieceOfGear {
 	@Override
 	public void validate() {
 		attributes.clear();
+		
+		setAttribute(SR6ItemAttribute.PRICE, super.price);
+
 		if (availability!=null) 
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);
 		

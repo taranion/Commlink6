@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.ElementList;
 
@@ -23,7 +23,7 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
 @DataItemTypeKey(id="spell")
 public class Spell extends DataItem implements Comparable<Spell> {
 
-	private static Logger logger = LogManager.getLogger("shadowrun");
+	private static Logger logger = LoggerFactory.getLogger("shadowrun6");
 
 	public enum Category {
 		COMBAT,
@@ -85,8 +85,6 @@ public class Spell extends DataItem implements Comparable<Spell> {
 //		public String getShortName(Locale loc) { return Shadowrun6Core.getI18nResources().getString("spelldamage."+name().toLowerCase()+".short", loc); }
 //	}
 
-	@Attribute
-	private String id;
 	@Attribute(name="cat")
 	private Category category;
 	@Attribute

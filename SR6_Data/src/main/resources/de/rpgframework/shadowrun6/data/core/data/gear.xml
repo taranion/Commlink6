@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item id="combat_axe" avail="4" cost="500">
-      <!--useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/-->
-      <weapon  dmg="5P" attack="9,,,," skill="close_combat" spec="close_combat/blades"/>
-   </item>
+	<item id="combat_axe" avail="4" cost="500">
+		<!--useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/ -->
+		<weapon dmg="5P" attack="9,,,," skill="close_combat"
+			spec="close_combat/blades" />
+	</item>
+
+	<item id="bow" cost="100">
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" min="$(RATING)"/>
+		</requires>
+		<attrval id="RATING" max="14" op="ADD" factor="10" />
+		<attrval id="DAMAGE"        value="$(RATING/2)P" />
+		<attrval id="ATTACK_RATING" value="$(RATING/2),$(RATING),$(RATING/4),," />
+		<attrval id="AVAILABILITY"  value="$(RATING/3)L" />
+		<weapon skill="close_combat" spec="close_combat/blades" />
+	</item>
 </items>

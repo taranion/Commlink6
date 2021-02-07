@@ -1,0 +1,9 @@
+image: maven:3.6-jdk-11
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - maven
+        script: 
+          - mvn -B -U -s settings.xml clean deploy -DskipTests=true

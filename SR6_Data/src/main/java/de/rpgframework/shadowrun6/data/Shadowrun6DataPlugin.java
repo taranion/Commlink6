@@ -3,8 +3,8 @@ package de.rpgframework.shadowrun6.data;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.core.RoleplayingSystem;
@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.data.CheckInfluence;
 import de.rpgframework.genericrpg.data.CostType;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
+import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityList;
@@ -26,6 +27,7 @@ import de.rpgframework.shadowrun6.SpellFeatureList;
 import de.rpgframework.shadowrun6.SpellList;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemTemplateList;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCostType;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -36,7 +38,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class Shadowrun6DataPlugin  {
 
-	private static Logger logger = LogManager.getLogger("shadowrun6.data");
+	private static Logger logger = LoggerFactory.getLogger("shadowrun6.data");
 
 	private static boolean alreadyInitialized = false;
 
@@ -45,6 +47,7 @@ public class Shadowrun6DataPlugin  {
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+ModifiedObjectType.class.getName(), ShadowrunReference.class);
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+CostType.class.getName(), ShadowrunCostType.class);
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+CheckInfluence.class.getName(), ShadowrunCheckInfluence.class);
+		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+IItemAttribute.class.getName(), SR6ItemAttribute.class);
 	}
 	
 	//--------------------------------------------------------------------

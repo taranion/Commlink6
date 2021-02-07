@@ -28,7 +28,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.ShadowrunCharacterGenerator#getId()
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getId()
 	 */
 	@Override
 	public String getId() {
@@ -37,7 +37,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.ShadowrunCharacterGenerator#getWizardPages()
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getWizardPages()
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
@@ -68,6 +68,10 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 		meta     = new PriorityMetatypeController(this);
 		skill    = new PrioritySkillGenerator(this);
 		logger.info("meta = "+getMetatypeController()+"  of "+this);
+		
+		processChain.add(meta);
+//		processChain.add(attr);
+		processChain.add(skill);
 	}
 
 	//--------------------------------------------------------------------

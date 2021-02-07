@@ -8,7 +8,6 @@ import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ASkillValue;
 import de.rpgframework.genericrpg.data.ApplyTo;
-import de.rpgframework.genericrpg.data.ISkill;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.AShadowrunSkill;
@@ -50,7 +49,7 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see org.prelle.SR6SkillController.charctrl.SkillController#getPointsLeftInKnowledgeAndLanguage()
+	 * @see org.prelle.SR6SkillController.charctrl.ISkillController#getPointsLeftInKnowledgeAndLanguage()
 	 */
 	@Override
 	public int getPointsLeftInKnowledgeAndLanguage() {
@@ -59,7 +58,7 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see org.prelle.SR6SkillController.charctrl.SkillController#getPointsLeftSkills()
+	 * @see org.prelle.SR6SkillController.charctrl.ISkillController#getPointsLeftSkills()
 	 */
 	@Override
 	public int getPointsLeftSkills() {

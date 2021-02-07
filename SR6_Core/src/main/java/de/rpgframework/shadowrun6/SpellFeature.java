@@ -5,8 +5,6 @@ package de.rpgframework.shadowrun6;
 
 import java.text.Collator;
 
-import org.prelle.simplepersist.Attribute;
-
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 
@@ -16,9 +14,6 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
  */
 @DataItemTypeKey(id="spellfeature")
 public class SpellFeature extends DataItem implements Comparable<SpellFeature> {
-	
-	@Attribute(required=true)
-	private String id;
 
 	//-------------------------------------------------------------------
 	public String toString() {

@@ -3,8 +3,8 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.prelle.rpgframework.jfx.pages.CharacterViewLayout;
 import org.prelle.rpgframework.jfx.pages.CharactersOverviewPage;
 
@@ -19,7 +19,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.fxml.ScreenLoader;
  */
 public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	
-	private final static Logger logger = LogManager.getLogger(SR6CharactersOverviewPage.class);
+	private final static Logger logger = LoggerFactory.getLogger(SR6CharactersOverviewPage.class);
 
 	//-------------------------------------------------------------------
 	/**

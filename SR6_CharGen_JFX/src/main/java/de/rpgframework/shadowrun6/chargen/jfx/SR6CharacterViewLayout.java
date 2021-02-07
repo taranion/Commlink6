@@ -2,11 +2,10 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.prelle.javafx.CloseType;
-import org.prelle.javafx.Page;
 import org.prelle.rpgframework.jfx.pages.CharacterViewLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
@@ -23,7 +22,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
  */
 public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribute, Shadowrun6Character> implements ControllerListener {
 	
-	private final static Logger logger = LogManager.getLogger(SR6CharacterViewLayout.class);
+	private final static Logger logger = LoggerFactory.getLogger(SR6CharacterViewLayout.class);
 
 	private CharacterOverviewController controller;
 	
