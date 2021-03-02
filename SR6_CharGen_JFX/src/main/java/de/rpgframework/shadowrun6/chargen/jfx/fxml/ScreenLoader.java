@@ -5,12 +5,11 @@ import java.util.ResourceBundle;
 
 import org.prelle.javafx.ExtendedComponentBuilderFactory;
 import org.prelle.javafx.FlexibleApplication;
-import org.prelle.javafx.Page;
 
-import de.rpgframework.shadowrun6.Spell;
+import de.rpgframework.shadowrun.Spell;
+import de.rpgframework.shadowrun.chargen.jfx.SpellDescriptionPageController;
 import de.rpgframework.shadowrun6.chargen.jfx.CharacterOverviewController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
-import de.rpgframework.shadowrun6.chargen.jfx.SpellDescriptionPageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 

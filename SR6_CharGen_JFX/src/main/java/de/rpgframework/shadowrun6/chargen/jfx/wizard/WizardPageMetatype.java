@@ -8,12 +8,12 @@ import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.NodeWithTitleSkeleton;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
-import org.prelle.rpgframework.jfx.DataItemSpinnerPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.Gender;
+import de.rpgframework.jfx.DataItemSpinnerPane;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;

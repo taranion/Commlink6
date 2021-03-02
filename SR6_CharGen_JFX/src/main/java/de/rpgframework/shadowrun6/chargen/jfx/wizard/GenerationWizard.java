@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
-import org.prelle.rpgframework.jfx.wizard.WizardPageGenerator;
 
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.jfx.wizard.WizardPageGenerator;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;

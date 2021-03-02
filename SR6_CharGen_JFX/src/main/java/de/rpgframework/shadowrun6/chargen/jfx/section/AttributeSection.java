@@ -5,8 +5,8 @@ import java.util.ResourceBundle;
 
 import org.prelle.javafx.ScreenManagerProvider;
 import org.prelle.javafx.Section;
-import org.prelle.rpgframework.jfx.rules.AttributeTable;
 
+import de.rpgframework.jfx.rules.AttributeTable;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import javafx.scene.control.CheckBox;

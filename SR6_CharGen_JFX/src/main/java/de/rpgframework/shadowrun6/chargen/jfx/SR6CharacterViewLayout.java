@@ -3,12 +3,12 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.io.IOException;
 
 import org.prelle.javafx.CloseType;
-import org.prelle.rpgframework.jfx.pages.CharacterViewLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
+import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -33,7 +33,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see org.prelle.rpgframework.jfx.pages.CharacterViewLayout#startCreation()
+	 * @see de.rpgframework.jfx.pages.CharacterViewLayout#startCreation()
 	 */
 	@Override
 	public void startCreation() {
@@ -63,7 +63,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see org.prelle.rpgframework.jfx.pages.CharacterViewLayout#continueCreation(de.rpgframework.character.RuleSpecificCharacterObject)
+	 * @see de.rpgframework.jfx.pages.CharacterViewLayout#continueCreation(de.rpgframework.character.RuleSpecificCharacterObject)
 	 */
 	@Override
 	public void continueCreation(Shadowrun6Character model) {
@@ -89,7 +89,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see org.prelle.rpgframework.jfx.pages.CharacterViewLayout#edit(de.rpgframework.character.RuleSpecificCharacterObject)
+	 * @see de.rpgframework.jfx.pages.CharacterViewLayout#edit(de.rpgframework.character.RuleSpecificCharacterObject)
 	 */
 	@Override
 	public void edit(Shadowrun6Character model) {

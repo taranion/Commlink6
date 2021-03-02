@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.prelle.rpgframework.jfx.pages.CharacterViewLayout;
-import org.prelle.rpgframework.jfx.pages.CharactersOverviewPage;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.jfx.pages.CharacterViewLayout;
+import de.rpgframework.jfx.pages.CharactersOverviewPage;
 import de.rpgframework.shadowrun6.chargen.jfx.fxml.ScreenLoader;
 
 /**
@@ -23,7 +23,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see org.prelle.rpgframework.jfx.pages.CharactersOverviewPage#createCharacterAppLayout()
+	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#createCharacterAppLayout()
 	 */
 	@Override
 	protected CharacterViewLayout createCharacterAppLayout() {
@@ -40,7 +40,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see org.prelle.rpgframework.jfx.pages.CharactersOverviewPage#loadCharacters()
+	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#loadCharacters()
 	 */
 	@Override
 	protected List<CharacterHandle> loadCharacters() {
