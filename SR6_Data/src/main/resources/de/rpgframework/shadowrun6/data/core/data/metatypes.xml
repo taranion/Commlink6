@@ -42,7 +42,7 @@
             <valmod ref="STRENGTH" type="ATTRIBUTE" value="9" set="MAX" when="CREATION"/>
             <valmod ref="CHARISMA" type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
             <itemmod ref="thermographic_vision" type="QUALITY"/>
-            <valmod ref="built_tough"           type="QUALITY" value="1"/>
+            <valmod ref="built_tough"           type="QUALITY" value="2"/>
             <itemmod ref="dermal_deposits"      type="QUALITY"/>
          </modifications>
     </metatype>

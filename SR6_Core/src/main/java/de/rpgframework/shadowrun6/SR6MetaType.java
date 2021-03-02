@@ -1,5 +1,8 @@
 package de.rpgframework.shadowrun6;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.MetaType;
@@ -60,6 +63,24 @@ public class SR6MetaType extends MetaType {
 				}
 			}
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.MetaType#getAttributeModifications()
+	 */
+	@Override
+	public List<Modification> getAttributeModifications() {
+		return getModifications().stream().filter(mod -> mod.getReferenceType()==ShadowrunReference.ATTRIBUTE).collect(Collectors.toList());
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.MetaType#getNonAttributeModifications()
+	 */
+	@Override
+	public List<Modification> getNonAttributeModifications() {
+		return getModifications().stream().filter(mod -> mod.getReferenceType()!=ShadowrunReference.ATTRIBUTE).collect(Collectors.toList());
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 import org.prelle.simplepersist.StringValueConverter;
 
-import de.rpgframework.shadowrun6.DamageType;
+import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.Damage.WeaponDamageType;
 

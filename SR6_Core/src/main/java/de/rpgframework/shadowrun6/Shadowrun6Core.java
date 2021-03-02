@@ -13,6 +13,7 @@ import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.data.GenericCore;
+import de.rpgframework.shadowrun.SpellFeature;
 
 /**
  * @author prelle

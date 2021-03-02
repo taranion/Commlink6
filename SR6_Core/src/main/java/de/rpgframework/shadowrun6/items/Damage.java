@@ -5,8 +5,8 @@ import java.util.List;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun6.DamageType;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
