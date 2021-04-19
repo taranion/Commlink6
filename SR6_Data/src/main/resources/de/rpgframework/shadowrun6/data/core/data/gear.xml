@@ -1,19 +1,90 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-	<item id="combat_axe" avail="4" cost="500">
-		<!--useas type="WEAPON_CLOSE_COMBAT" subtype="BLADES"/ -->
-		<weapon dmg="5P" attack="9,,,," skill="close_combat"
-			spec="close_combat/blades" />
+	<item id="combat_axe" avail="4" price="500" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+		<equip mode="NORMAL"/>
+		<weapon dmg="5P" attack="9,,,," skill="close_combat" spec="close_combat/blades" />
 	</item>
+   <item id="combat_knife" avail="2" price="220" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon  dmg="3P" attack="8,2,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="survival_knife" avail="2" price="220" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon  dmg="3P" attack="8,2,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>  
+   <item id="forearm_snap_blades" avail="3" price="185" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="knife" avail="1" price="20" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon dmg="2P" attack="6,1,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="katana" avail="3" price="350" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon dmg="4P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="polearm" avail="2" price="210" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon dmg="4P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="sword" avail="3" price="320" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon dmg="3P" attack="9,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   
+   <!-- Clubs -->
+   <item id="club" avail="1" price="65" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+       <weapon dmg="3S" attack="6,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="extendable_baton" avail="2" price="50" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+      <weapon dmg="2S" attack="5,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="sab" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+      <weapon dmg="2S" attack="6,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="staff" avail="1" price="150" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+      <weapon dmg="4S" attack="8,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="stun_baton" avail="2" price="600" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+      <weapon dmg="5S(e)" attack="6,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="telescopic_staff" avail="2" price="250" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+      <weapon dmg="4S" attack="8,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+   </item>
 
-	<item id="bow" cost="100">
+	<item id="bow" price="100" type="WEAPON_RANGED" subtype="BOWS">
 		<requires>
 			<valuereq type="ATTRIBUTE" ref="STRENGTH" min="$(RATING)"/>
 		</requires>
+      <modifications>
+         <itemmod type="SLOT" ref="TOP"/>
+         <itemmod type="SLOT" ref="UNDER"/>
+      </modifications>
 		<attrval id="RATING" max="14" op="ADD" factor="10" />
 		<attrval id="DAMAGE"        value="$(RATING/2)P" />
 		<attrval id="ATTACK_RATING" value="$(RATING/2),$(RATING),$(RATING/4),," />
 		<attrval id="AVAILABILITY"  value="$(RATING/3)L" />
 		<weapon skill="close_combat" spec="close_combat/blades" />
 	</item>
+   <item id="crossbow_light" avail="3" price="150" type="WEAPON_RANGED" subtype="CROSSBOWS">
+      <weapon dmg="2P" attack="6,8,2,," ammo="4(m)" mode="SS" skill="athletics" spec="athletics/archery"/>
+      <modifications>
+         <itemmod type="SLOT" ref="TOP"/>
+         <itemmod type="SLOT" ref="UNDER"/>
+      </modifications>
+   </item>
+   <item id="crossbow_standard" avail="3L" price="290" type="WEAPON_RANGED" subtype="CROSSBOWS">
+      <weapon dmg="3P" attack="2,10,4,2," ammo="4(m)" mode="SS"  skill="athletics" spec="athletics/archery"/>
+      <modifications>
+         <itemmod type="SLOT" ref="TOP"/>
+         <itemmod type="SLOT" ref="UNDER"/>
+      </modifications>
+   </item>
+   <item id="crossbow_heavy" avail="4L" price="425" type="WEAPON_RANGED" subtype="CROSSBOWS">
+      <weapon dmg="4P" attack="2,8,6,4," ammo="4(m)" mode="SS"  skill="athletics" spec="athletics/archery"/>
+      <modifications>
+         <itemmod type="SLOT" ref="TOP"/>
+         <itemmod type="SLOT" ref="UNDER"/>
+      </modifications>
+   </item>
+   <item id="throwing_knives" avail="2" price="155" type="WEAPON_RANGED" subtype="THROWING">
+      <weapon dmg="2P" attack="10,9,3,,"  skill="athletics" spec="athletics/throwing"/>
+   </item>
+   <item id="throwing_stars" avail="2" price="160" type="WEAPON_RANGED" subtype="THROWING">
+      <weapon dmg="2P" attack="9,11,4,,"  skill="athletics" spec="athletics/throwing"/>
+   </item>
 </items>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<npcs>
+	<npc id="humanis_goon" rating="0">
+		<attributes>
+			<attribute id="BODY"      value="2" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="2" />
+			<attribute id="STRENGTH"  value="2" />
+			<attribute id="WILLPOWER" value="2" />
+			<attribute id="LOGIC"     value="2" />
+			<attribute id="INTUITION" value="2" />
+			<attribute id="CHARISMA"  value="1" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval skill="athletics"    val="1"/>
+			<skillval skill="close_combat" val="3"/>
+			<skillval skill="influence"    val="1">
+				<skillspec special="influence/intimidation" />
+			</skillval>
+		</skills>
+		<gear>
+			<item id="commlink"/>
+			<item id="club"/>
+		</gear>
+	</npc>
+</npcs>

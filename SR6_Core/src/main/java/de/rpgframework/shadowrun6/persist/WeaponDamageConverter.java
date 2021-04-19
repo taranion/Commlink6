@@ -5,9 +5,9 @@ import java.util.StringTokenizer;
 
 import org.prelle.simplepersist.StringValueConverter;
 
+import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun6.items.Damage;
-import de.rpgframework.shadowrun6.items.Damage.WeaponDamageType;
 
 public class WeaponDamageConverter implements StringValueConverter<Damage> {
 
@@ -21,13 +21,13 @@ public class WeaponDamageConverter implements StringValueConverter<Damage> {
 
 		Damage ret = new Damage();
 		if (v.endsWith("(e)")) {
-			ret.setWeaponDamageType(WeaponDamageType.ELECTRICAL);
+			ret.setElement(DamageElement.ELECTRICITY);
 			v = v.substring(0, v.length()-3).trim();
 		}
-		if (v.endsWith("(f)")) {
-			ret.setWeaponDamageType(WeaponDamageType.FLECHETTE);
-			v = v.substring(0, v.length()-3).trim();
-		}
+//		if (v.endsWith("(f)")) {
+//			ret.setWeaponDamageType(WeaponDamageType.FLECHETTE);
+//			v = v.substring(0, v.length()-3).trim();
+//		}
 
 		if (v.endsWith("P"))
 			ret.setType(DamageType.PHYSICAL);
@@ -67,7 +67,7 @@ public class WeaponDamageConverter implements StringValueConverter<Damage> {
 		else
 			buf.append("S");
 
-		if (v.getWeaponDamageType()!=null && v.getWeaponDamageType()==WeaponDamageType.ELECTRICAL) {
+		if (v.getElement()!=null && v.getElement()==DamageElement.ELECTRICITY) {
 			buf.append("(e)");
 		}
 		return buf.toString();

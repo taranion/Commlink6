@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +18,7 @@ import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.data.GenericCore;
+import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellFeature;
 
 /**
@@ -78,6 +84,17 @@ public class Shadowrun6Core extends GenericCore {
 	//-------------------------------------------------------------------
 	public static SR6Skill getSkill(String key) {
 		return getItem(SR6Skill.class, key);
+	}
+
+	//-------------------------------------------------------------------
+	public static List<SR6Skill> getSkills(SkillType type) {
+		List<SR6Skill> ret = getItemList(SR6Skill.class).stream().filter(sk -> sk.getType()==type).collect(Collectors.toList());
+		Collections.sort(ret, new Comparator<SR6Skill>() {
+			public int compare(SR6Skill arg0, SR6Skill arg1) {
+				return Collator.getInstance().compare(arg0.getName(),  arg1.getName());
+			}
+		});
+		return ret;
 	}
 
 	//-------------------------------------------------------------------

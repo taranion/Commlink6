@@ -23,7 +23,6 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	CAPACITY,
 //	CONCEALABILITY,
 	DAMAGE,
-	RATING,
 //	DAMAGE_REDUCTION,
 //	DEFENSE_RATING,
 //	DEVICE_RATING,
@@ -37,6 +36,8 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	PILOT,
 	PRICE,
 //	QUALITY,
+	RANGE,
+	RATING,
 //	SEATS,
 //	SENSORS,
 //	SKILL,
@@ -52,7 +53,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	CONCURRENT_PROGRAMS,
 	;
 	
-	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(Shadowrun6Core.class, "core", Locale.ENGLISH, Locale.GERMAN);
+	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
 
 	//-------------------------------------------------------------------
 	/**

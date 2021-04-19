@@ -41,7 +41,7 @@ public class AttributeTable extends TableView<AttributeValue> {
 //		if (ctrl==null)
 //			throw new NullPointerException();
 		this.ctrl = ctrl;
-		setSkin(new GridPaneTableViewSkin<>(this));
+		setSkin(new GridPaneTableViewSkin<>(this, true));
 		initColumns();
 		initValueFactories();
 		initCellFactories();

@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -134,15 +135,15 @@ public class CommonSkillController extends ControllerImpl<SR6Skill> implements S
 	}
 
 	@Override
-	public boolean canBeSelected(SR6Skill data) {
+	public Possible canBeSelected(SR6Skill data) {
 		// TODO Auto-generated method stub
-		return false;
+		return new Possible(false);
 	}
 
 	@Override
-	public boolean canBeDeselected(SR6SkillValue value) {
+	public Possible canBeDeselected(SR6SkillValue value) {
 		// TODO Auto-generated method stub
-		return false;
+		return new Possible(false);
 	}
 
 	@Override

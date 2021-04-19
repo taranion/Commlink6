@@ -1,8 +1,5 @@
 package de.rpgframework.shadowrun6.chargen.jfx.section;
 
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
-
 import org.prelle.javafx.ScreenManagerProvider;
 import org.prelle.javafx.Section;
 
@@ -10,7 +7,6 @@ import de.rpgframework.jfx.rules.AttributeTable;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import javafx.scene.control.CheckBox;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**

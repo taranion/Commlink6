@@ -8,6 +8,8 @@ import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.log.Logging;
@@ -202,5 +204,23 @@ public class Shadowrun6Tools {
 
 		Logging.logger.error("Missing string conversion for "+mod.getClass());
 		return mod.toString();
+	}
+
+	//-------------------------------------------------------------------
+	public static String getRequirementString(Requirement req, Locale loc) {
+		if (req instanceof ExistenceRequirement) {
+			ExistenceRequirement tmp = (ExistenceRequirement)req;
+//			switch ((ShadowrunReference)tmp.getType()) {
+//			case MASTERSHIP:
+//				Mastership master =  SplitterMondCore.getItem(Mastership.class, tmp.getKey());
+//				if (master==null) {
+//					return "Unknown "+SplitterMondCore.getI18nResources().getString("label.mastership")+" "+tmp.getKey();
+//				}
+//				return master.getName(loc);
+//			}
+		}
+
+		Logging.logger.error("Missing string conversion for "+req.getClass());
+		return req.toString();
 	}
 }

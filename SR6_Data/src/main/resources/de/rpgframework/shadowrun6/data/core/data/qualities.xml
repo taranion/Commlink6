@@ -44,251 +44,285 @@
        <itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" />
      </modifications>
    </quality>
-<!--    <quality id="double_jointed"   	  karma="12" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--        <edgemod skill="athletics" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="elemental_resistance" karma="12" type="POSITIVE" select="ELEMENTAL"> -->
-<!--      <modifications> -->
-<!--        <relevancemod topic="COMBAT"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="exceptional_attribute" karma="12" type="POSITIVE" select="ATTRIBUTE"> -->
-<!--      <modifications> -->
-<!--        <attrmod val="1" type="MAX" /> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="first_impression"     karma="12" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--        <edgemod skill="con" edge="BONUS"/> -->
-<!--        <edgemod skill="influence" edge="BONUS"/> -->
-<!--        <relevancemod topic="SOCIAL"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="focused_concentration" karma="12" type="POSITIVE" max="3"> -->
-<!--      <modifications> -->
-<!--        <relevancemod topic="MAGICAL"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="gearhead" 		  	  karma="10" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--        <edgemod skill="engineering" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="guts" 		  		  karma="12" type="POSITIVE" /> -->
-<!--    <quality id="hardening"            karma="10" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--        <relevancemod topic="MATRIX"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="high_pain_tolerance"  karma="7" type="POSITIVE"> -->
-<!--      <modifications> -->
- <!--        <specrulemod ref="PAIN_TOLERANCE_HIGH" lvl="1"/> --> 
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="home_ground" 		  karma="10" type="POSITIVE" multi="true" select="NAME"> -->
-<!--      <modifications> -->
-<!--        <edgemod skill="outdoors" edge="BONUS"/> -->
-<!--        <edgemod skill="perception" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="human-looking" 		  karma="6" type="POSITIVE"> -->
-<!--      <requires> -->
-<!--        <anyreq> -->
-<!--          <metareq ref="elf"/> -->
-<!--          <metareq ref="ork"/> -->
-<!--          <metareq ref="dwarf"/> -->
-<!--        </anyreq> -->
-<!--      </requires> -->
-<!--    </quality> -->
-<!--    <quality id="indomitable" 		  karma="12" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="juryrigger" 		  karma="12" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--        <edgemod skill="engineering" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="long_reach"  		  karma="12" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--        <relevancemod topic="COMBAT"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
+   <quality id="double_jointed"   	  karma="12" type="POSITIVE" >
+     <modifications>
+       <valmod type="SKILL" ref="athletics" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="elemental_resistance" karma="12" type="POSITIVE">
+     <choices>
+       <choice type="ELEMENT" uuid="b60de552-82ee-470d-b7e6-26a2f46c17b8"/>
+     </choices>
+     <modifications>
+       <relevancemod topic="COMBAT"/>
+     </modifications>
+   </quality>
+   <quality id="exceptional_attribute" karma="12" type="POSITIVE">
+     <choices>
+       <choice type="ATTRIBUTE" uuid="4096584c-eb76-49b2-be6b-1a6c0ca9e50a"/>
+     </choices>
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="CHOICE" choice="4096584c-eb76-49b2-be6b-1a6c0ca9e50a" value="1" set="MAX" />
+     </modifications>
+   </quality>
+   <quality id="first_impression"     karma="12" type="POSITIVE" >
+     <modifications>
+       <valmod type="SKILL" ref="con" value="1" set="EDGE_BONUS"/>
+       <valmod type="SKILL" ref="influence" value="1" set="EDGE_BONUS"/>
+       <relevancemod topic="SOCIAL"/>
+     </modifications>
+   </quality>
+   <quality id="focused_concentration" karma="12" type="POSITIVE" max="3">
+     <modifications>
+       <relevancemod topic="MAGICAL"/>
+     </modifications>
+   </quality>
+   <quality id="gearhead" 		  	  karma="10" type="POSITIVE" >
+     <modifications>
+       <valmod type="SKILL" ref="engineering" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="guts" 		  		  karma="12" type="POSITIVE" />
+   <quality id="hardening"            karma="10" type="POSITIVE" >
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="high_pain_tolerance"  karma="7" type="POSITIVE">
+     <modifications>
+       <itemmod type="RULE" ref="PAIN_TOLERANCE_HIGH"/> 
+     </modifications>
+   </quality>
+   <quality id="home_ground" 		  karma="10" type="POSITIVE" multi="true" select="NAME">
+   	<choices>
+   		<choice type="TEXT" uuid="2cef71b7-7af8-4def-a788-d73903c776e9"/>
+   	</choices>
+     <modifications>
+       <valmod type="SKILL" ref="outdoors" value="1" set="EDGE_BONUS"/>
+       <valmod type="SKILL" ref="perception" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="human-looking" 		  karma="6" type="POSITIVE">
+     <requires>
+       <selreq type="METATYPE">
+         <datareq type="METATYPE" ref="elf"/>
+         <datareq type="METATYPE" ref="ork"/>
+         <datareq type="METATYPE" ref="dwarf"/>
+       </selreq>
+     </requires>
+   </quality>
+   <quality id="indomitable" 		  karma="12" type="POSITIVE" >
+     <modifications>
+<!--        <valmod type="SKILL" ref="outdoors" edge="COST"/> -->
+     </modifications>
+   </quality>
+   <quality id="juryrigger" 		  karma="12" type="POSITIVE" >
+     <modifications>
+       <valmod type="SKILL" ref="engineering" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="long_reach"  		  karma="12" type="POSITIVE" >
+     <modifications>
+       <relevancemod topic="COMBAT"/>
+     </modifications>
+   </quality>
    <quality id="low-light_vision"     karma="6" type="POSITIVE" />
-<!--    <quality id="magic_resistance"     karma="8" type="POSITIVE"> -->
-<!--      <modifications> -->
-<!--        <relevancemod topic="MAGICAL"/> -->
-<!--        <edgemod attr="DEFENSIVE_POOL_COMBAT_DIRECT" edge="BONUS"/> -->
-<!--        <edgemod attr="DEFENSIVE_POOL_COMBAT_INDIRECT" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="mentor_spirit" 		  karma="10" type="POSITIVE" select="MENTOR_SPIRIT"/> -->
-<!--    <quality id="photographic_memory"  karma="12" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--        <edgemod attr="MEMORY" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="quick_healer" 		  karma="8" type="POSITIVE" /> -->
-<!--    <quality id="resistance_pathogens" karma="12" type="POSITIVE" /> -->
-<!--    <quality id="spirit_affinity"	  karma="14" type="POSITIVE" select="SPIRIT" multi="true"> -->
-<!--      <modifications> -->
-<!--        <edgemod skill="conjuring" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="sprite_affinity"      karma="14" type="POSITIVE" select="SPRITE" multi="true"> -->
-<!--      <modifications> -->
-<!--        <edgemod skill="tasking" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
+   <quality id="magic_resistance"     karma="8" type="POSITIVE">
+     <modifications>
+       <relevancemod topic="MAGICAL"/>
+       <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_COMBAT_DIRECT" value="1" set="EDGE_BONUS"/>
+       <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_COMBAT_INDIRECT" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="mentor_spirit" 		  karma="10" type="POSITIVE" select="MENTOR_SPIRIT"/>
+   <quality id="photographic_memory"  karma="12" type="POSITIVE" >
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="MEMORY" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="quick_healer" 		  karma="8" type="POSITIVE" />
+   <quality id="resistance_pathogens" karma="12" type="POSITIVE" />
+   <quality id="spirit_affinity"	  karma="14" type="POSITIVE" select="SPIRIT" multi="true">
+     <modifications>
+       <valmod type="SKILL" ref="conjuring" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="sprite_affinity"      karma="14" type="POSITIVE" select="SPRITE" multi="true">
+     <modifications>
+       <valmod type="SKILL" ref="tasking" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
    <quality id="thermographic_vision" karma="8" type="POSITIVE" />
-<!--    <quality id="toughness" 			  karma="12" type="POSITIVE" > -->
-<!--      <modifications> -->
-<!--        <edgemod attr="DEFENSIVE_POOL" edge="BONUS"/> -->
-<!--        <relevancemod topic="COMBAT"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="toxin_resistance"     karma="12" type="POSITIVE"> -->
-<!--      <modifications> -->
-<!--        <edgemod attr="DEFENSIVE_POOL_RESIST_TOXIN_DAMAGE" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!-- 	<quality id="will_to_live" karma="8" type="POSITIVE" max="3"> -->
-<!-- 		<modifications> -->
-<!-- 			<attrmod attr="DAMAGE_OVERFLOW" val="1" /> -->
-<!-- 		</modifications> -->
-<!-- 	</quality> -->
+   <quality id="toughness" 			  karma="12" type="POSITIVE" >
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL" value="1" set="EDGE_BONUS"/>
+       <relevancemod topic="COMBAT"/>
+     </modifications>
+   </quality>
+   <quality id="toxin_resistance"     karma="12" type="POSITIVE">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_RESIST_TOXIN_DAMAGE" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+	<quality id="will_to_live" karma="8" type="POSITIVE" max="3">
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="DAMAGE_OVERFLOW" value="1" />
+		</modifications>
+	</quality>
 	
-<!--    <quality id="addiction"    karma="2" type="NEGATIVE" max="6" multi="true" select="NAME"/> -->
-   <!--quality id="allergy"      karma="2" type="NEGATIVE" multi="true" select="SUBSTANCE_SEVERITY"/-->
-<!--    <quality id="allergy_common_mild"      karma="11" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_common_moderate"  karma="14" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_common_severe"    karma="17" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_common_extreme"   karma="20" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_seasonal_mild"      karma="8" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_seasonal_moderate"  karma="11" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_seasonal_severe"    karma="14" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_seasonal_extreme"   karma="17" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_uncommon_mild" 	   karma="5" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_uncommon_moderate" karma="8" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_uncommon_severe"   karma="11" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_uncommon_extreme"  karma="14" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_rare_mild"     karma="2" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_rare_moderate" karma="5" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_rare_severe"   karma="8" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="allergy_rare_extreme"  karma="11" type="NEGATIVE" multi="true" select="NAME" /> -->
-<!--    <quality id="ar_vertigo"           karma="10" type="NEGATIVE" /> -->
-<!--    <quality id="astral_beacon" 	 	  karma="10" type="NEGATIVE"> -->
-<!--      <modifications> -->
-<!--        <edgemod skill="stealth"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="bad_luck" 	 	      karma="10" type="NEGATIVE" /> -->
-<!--    <quality id="bad_rep" 	 	      karma="8" type="NEGATIVE" > -->
-<!--      <modifications> -->
-<!--        <relevancemod topic="SOCIAL"/> -->
-<!--        <edgemod skill="influence"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="combat_paralysis"  	  karma="8" type="NEGATIVE" > -->
-<!--      <modifications> -->
-<!--        <relevancemod topic="COMBAT"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="dependents"           karma="4" type="NEGATIVE" max="3" select="NAME"/> -->
-<!--    <quality id="distinctive_style" 	  karma="6" type="NEGATIVE" /> -->
-<!--    <quality id="elf_poser"  	  	  karma="6" type="NEGATIVE" /> -->
-<!--    <quality id="glass_jaw"            karma="4" type="NEGATIVE" max="6"> -->
-<!--      <modifications> -->
-<!--        <attrmod attr="STUN_MONITOR" val="-1" type="AUGMENTED" /> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="gremlins"  	  	 	  karma="6" type="NEGATIVE"/> -->
-<!--    <quality id="honorbound"           karma="10" type="NEGATIVE" select="NAME"/> -->
-<!--    <quality id="impaired"             karma="8" type="NEGATIVE" select="ATTRIBUTE" multi="true" max="8"> -->
-<!--      <modifications> -->
-<!--        <attrmod val="-1" type="MAX" /> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="incompetent"  	  	  karma="10" type="NEGATIVE" select="SKILL"> -->
-<!--        <modifications> -->
-<!--          <forbidmod/> -->
-<!--        </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="in_debt"              karma="0" type="NEGATIVE" select="NAME"> -->
-<!--      <modifications> -->
-<!--         <specrulemod ref="IN_DEBT"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="insomnia" 	  	  	  karma="4" type="NEGATIVE" /> -->
-<!--    <quality id="loss_confidence"  	  karma="6" type="NEGATIVE" /> -->
-<!--    <quality id="low_pain_tolerance"   karma="10" type="NEGATIVE" > -->
-<!--      <modifications> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="ork_poser"  	  	  karma="6" type="NEGATIVE" /> -->
-<!--    <quality id="prejudiced"           karma="8" type="NEGATIVE" multi="true" select="NAME"/> -->
-<!--    <quality id="scorched"  	  		  karma="6" type="NEGATIVE" > -->
-<!--      <modifications> -->
-<!--        <relevancemod topic="MATRIX"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="sensitive_system"	  karma="8" type="NEGATIVE" > -->
-<!--      <requires> -->
-<!--         Technically not correct, since a burned out magic user could use it -->
-<!--        <magresreq type="mundane"/> -->
-<!--      </requires> -->
-<!--    </quality> -->
-<!--    <quality id="simsense_vertigo"	  karma="6" type="NEGATIVE" > -->
-<!--      <modifications> -->
-<!--        <relevancemod topic="MATRIX"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
+   <quality id="addiction"    karma="2" type="NEGATIVE" max="6" multi="true">
+   	<choices>
+   		<choice type="TEXT" uuid="b7a6a592-e334-43a2-adf4-d92fb59de8cd"/>
+   	</choices>
+   </quality>
+   <quality id="allergy"      karma="2" type="NEGATIVE" multi="true" select="SUBSTANCE_SEVERITY">
+   	<choices>
+   		<choice type="ALLERGY_ALLERGEN" uuid="55a6dda7-7565-4108-9a04-65b7607081df" cost="0,3,6,9" />
+   		<choice type="ALLERGY_SEVERITY" uuid="b3cd035c-f2c3-4c56-abcd-9a218954d92a" cost="0,3,6,9" />
+   	</choices>
+   </quality>
+   <quality id="ar_vertigo"           karma="10" type="NEGATIVE" />
+   <quality id="astral_beacon" 	 	  karma="10" type="NEGATIVE">
+     <modifications>
+       <checkmod type="SKILL" ref="stealth"  value="1" what="USAGE"/>
+     </modifications>
+   </quality>
+   <quality id="bad_luck" 	 	      karma="10" type="NEGATIVE" />
+   <quality id="bad_rep" 	 	      karma="8" type="NEGATIVE" >
+     <modifications>
+       <relevancemod topic="SOCIAL"/>
+       <valmod type="SKILL" ref="influence" value="1" set="EDGE_USAGE"/>
+     </modifications>
+   </quality>
+   <quality id="combat_paralysis"  	  karma="8" type="NEGATIVE" >
+     <modifications>
+       <relevancemod topic="COMBAT"/>
+     </modifications>
+   </quality>
+   <quality id="dependents"           karma="4" type="NEGATIVE" max="3">
+   	<choices>
+   		<choice type="TEXT" uuid="b22770d5-de1c-40ed-89ba-a858efa86710"/>
+   	</choices>
+   </quality>
+   <quality id="distinctive_style" 	  karma="6" type="NEGATIVE" />
+   <quality id="elf_poser"  	  	  karma="6" type="NEGATIVE" />
+   <quality id="glass_jaw"            karma="4" type="NEGATIVE" max="6">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="STUN_MONITOR" value="-1" />
+     </modifications>
+   </quality>
+   <quality id="gremlins"  	  	 	  karma="6" type="NEGATIVE"/>
+   <quality id="honorbound"           karma="10" type="NEGATIVE">
+   	<choices>
+   		<choice type="TEXT" uuid="428282c1-c1d2-4d42-94e1-6f5cb5febf2b"/>
+   	</choices>
+   </quality>
+   <quality id="impaired"             karma="8" type="NEGATIVE" select="ATTRIBUTE" multi="true" max="6">
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="7f3a7e00-93b4-4012-883f-c737ca18c1df"/>
+   	</choices>
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="choice" choice="7f3a7e00-93b4-4012-883f-c737ca18c1df" value="-1" set="MAX" />
+     </modifications>
+   </quality>
+   <quality id="incompetent"  	  	  karma="10" type="NEGATIVE">
+   	<choices>
+   		<choice type="SKILL" uuid="d0b872d0-0783-4b7a-b38a-35db1cef3685"/>
+   	</choices>
+       <modifications>
+         <allowmod type="SKILL" ref="choice" choice="d0b872d0-0783-4b7a-b38a-35db1cef3685" neg="true"/>
+       </modifications>
+   </quality>
+   <quality id="in_debt"              karma="0" type="NEGATIVE" >
+   	<choices>
+   		<choice type="TEXT" uuid="3011a0ca-1cc5-4ca1-b046-0870a282c3be"/>
+   	</choices>
+     <modifications>
+        <itemmod type="RULE" ref="IN_DEBT"/>
+     </modifications>
+   </quality>
+   <quality id="insomnia" 	  	  	  karma="4" type="NEGATIVE" />
+   <quality id="loss_confidence"  	  karma="6" type="NEGATIVE" />
+   <quality id="low_pain_tolerance"   karma="10" type="NEGATIVE" >
+     <modifications>
+        <itemmod type="RULE" ref="LOW_PAIN"/>
+     </modifications>
+   </quality>
+   <quality id="ork_poser"  	  	  karma="6" type="NEGATIVE" />
+   <quality id="prejudiced"           karma="8" type="NEGATIVE" multi="true">
+   	<choices>
+   		<choice type="TEXT" uuid="2310ce02-abc3-4d23-b833-b5f5d68c3f21"/>
+   	</choices>
+   </quality>
+   <quality id="scorched"  	  		  karma="6" type="NEGATIVE" >
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
+   <quality id="sensitive_system"	  karma="8" type="NEGATIVE" >
+     <requires>
+        Technically not correct, since a burned out magic user could use it
+       <datareq type="MAGIC_RESO" ref="mundane"/>
+     </requires>
+   </quality>
+   <quality id="simsense_vertigo"	  karma="6" type="NEGATIVE" >
+     <modifications>
+       <relevancemod topic="MATRIX"/>
+     </modifications>
+   </quality>
    
-<!--    <quality id="sinner"	              karma="8" type="NEGATIVE" > -->
-<!--        <modifications> -->
-<!--            <sinmod quality="REAL_SIN"/> -->
-<!--        </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="social_stress"	      karma="8" type="NEGATIVE" select="NAME"> -->
-<!--      <modifications> -->
-<!--        <edgemod skill="con"/> -->
-<!--        <edgemod skill="influence"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="spirit_bane"	      karma="12" type="NEGATIVE" select="SPIRIT" multi="true"> -->
-<!--      <modifications> -->
-<!--        <edgemod skill="conjuring" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="sprite_bane"      karma="12" type="NEGATIVE" select="SPRITE" multi="true"> -->
-<!--      <modifications> -->
-<!--        <edgemod skill="tasking" edge="BONUS"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="uncouth"	      	  karma="6" type="NEGATIVE" > -->
-<!--      <modifications> -->
-<!--        <edgemod skill="con" edge="USAGE"/> -->
-<!--        <edgemod skill="influence" edge="USAGE"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="uneducated"           karma="6" type="NEGATIVE" > -->
-<!--      <modifications> -->
-<!--        <edgemod skill="biotech" edge="USAGE"/> -->
-<!--        <edgemod skill="cracking" edge="USAGE"/> -->
-<!--        <edgemod skill="electronics" edge="USAGE"/> -->
-<!--        <edgemod skill="engineering" edge="USAGE"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="unsteady_hands"	      karma="4" type="NEGATIVE" > -->
-<!--      <modifications> -->
-<!--        <edgemod skill="athletics" edge="USAGE"/> -->
-<!--        <edgemod skill="close_combat" edge="USAGE"/> -->
-<!--        <edgemod skill="exotic_weapons" edge="USAGE"/> -->
-<!--        <edgemod skill="firearms" edge="USAGE"/> -->
-<!--        <edgemod skill="stealth" edge="USAGE"/> -->
-<!--      </modifications> -->
-<!--    </quality> -->
-<!--    <quality id="weak_immune_system"   karma="8" type="NEGATIVE" /> -->
+   <quality id="sinner"	              karma="8" type="NEGATIVE" >
+     <modifications>
+        <itemmod type="RULE" ref="REAL_SIN"/>
+     </modifications>
+   </quality>
+   <quality id="social_stress"	      karma="8" type="NEGATIVE">
+   	<choices>
+   		<choice type="TEXT" uuid="93911833-2a2c-418b-b610-4894779879bf"/>
+   	</choices>
+     <modifications>
+       <valmod type="SKILL" ref="con" value="0" set="EDGE_USAGE" />
+       <valmod type="SKILL" ref="influence" value="0" set="EDGE_USAGE" />
+     </modifications>
+   </quality>
+   <quality id="spirit_bane"	      karma="12" type="NEGATIVE" multi="true">
+   	<choices>
+   		<choice type="SPIRIT" uuid="281aba04-1bd9-4d84-b6f4-f7bb97d217f0"/>
+   	</choices>
+     <modifications>
+       <valmod type="SKILL" ref="conjuring" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="sprite_bane"      karma="12" type="NEGATIVE" select="SPRITE" multi="true">
+   	<choices>
+   		<choice type="SPRITE" uuid="75f01ecc-60f3-4b5b-98de-c80008ebffec"/>
+   	</choices>
+     <modifications>
+       <valmod type="SKILL" ref="tasking" value="1" set="EDGE_BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="uncouth"	      	  karma="6" type="NEGATIVE" >
+     <modifications>
+       <valmod type="SKILL" ref="con" value="0" set="EDGE_USAGE" />
+       <valmod type="SKILL" ref="influence" value="0" set="EDGE_USAGE" />
+     </modifications>
+   </quality>
+   <quality id="uneducated"           karma="6" type="NEGATIVE" >
+     <modifications>
+       <valmod type="SKILL" ref="biotech" value="0" set="EDGE_USAGE" />
+       <valmod type="SKILL" ref="cracking" value="0" set="EDGE_USAGE" />
+       <valmod type="SKILL" ref="electronics" value="0" set="EDGE_USAGE" />
+       <valmod type="SKILL" ref="engineering" value="0" set="EDGE_USAGE" />
+     </modifications>
+   </quality>
+   <quality id="unsteady_hands"	      karma="4" type="NEGATIVE" >
+     <modifications>
+       <valmod type="SKILL" ref="athletics" value="0" set="EDGE_USAGE" />
+       <valmod type="SKILL" ref="close_combat" value="0" set="EDGE_USAGE" />
+       <valmod type="SKILL" ref="exotic_weapons" value="0" set="EDGE_USAGE" />
+       <valmod type="SKILL" ref="firearms" value="0" set="EDGE_USAGE" />
+       <valmod type="SKILL" ref="stealth" value="0" set="EDGE_USAGE" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="weak_immune_system"   karma="8" type="NEGATIVE" />
 </qualities>

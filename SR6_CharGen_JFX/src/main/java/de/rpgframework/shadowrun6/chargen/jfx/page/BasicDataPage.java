@@ -1,12 +1,16 @@
 package de.rpgframework.shadowrun6.chargen.jfx.page;
 
+import java.util.ResourceBundle;
+
+import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.Page;
 import org.prelle.javafx.Section;
-import org.prelle.javafx.SymbolIcon;
 
 import com.onexip.flexboxfx.FlexBox;
 
+import de.rpgframework.ResourceI18N;
+import de.rpgframework.jfx.RPGFrameworkJavaFX;
 import de.rpgframework.jfx.section.AppearanceSection;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
@@ -17,28 +21,25 @@ import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.QualityGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 
 /**
  * @author prelle
  *
  */
 public class BasicDataPage extends Page {
+	
+	private final static ResourceBundle RES = ResourceBundle.getBundle(BasicDataPage.class.getName());
 
 	private Section secBaseData;
 	private AppearanceSection secPortrait;
-	private FlowPane flow1;
+	private FlexBox flex;
 	private Section secAttrib;
-	private Section secQualities;
-	
-	private Button btnPortraitEdit;
-	private Button btnPortraitRemove;
+	private QualitySection secQualities;
 	
 	//-------------------------------------------------------------------
 	public BasicDataPage() {
@@ -46,12 +47,7 @@ public class BasicDataPage extends Page {
 		initBaseData();
 		initPortrait();	
 		
-//		flow1 = new FlowPane(secBaseData, secPortrait);
-//		flow1.setHgap(20);
-//		flow1.setVgap(20);
-//		secBaseData.setMaxWidth(Double.MAX_VALUE);
-		
-		FlexBox flex = new FlexBox();
+		flex = new FlexBox();
 		flex.setHorizontalSpace(20);
 		flex.setVerticalSpace(20);
 		flex.getChildren().addAll(secBaseData, secPortrait);
@@ -59,25 +55,46 @@ public class BasicDataPage extends Page {
 		// Flow 2
 		initAttributes();
 		initQualities();
-//		FlowPane flow2 = new FlowPane(secAttrib, secQualities);
-//		flow2.setHgap(20);
-//		flow2.setVgap(20);
-		
 		FlexBox flex2 = new FlexBox();
 		flex2.setHorizontalSpace(20);
 		flex2.setVerticalSpace(20);
 		flex2.getChildren().addAll(secAttrib, secQualities);
-				
 		
-		OptionalNodePane layout = new OptionalNodePane(new VBox(20,flex, flex2), new Label("Langer Text"));
+		ScrollPane scroll = new ScrollPane(new VBox(20,flex, flex2));
+		scroll.setFitToWidth(true);
+		
+		OptionalNodePane layout = new OptionalNodePane(scroll, new Label("Langer Text"));
 		layout.setTitle("Erklärung");
 		setContent(layout);
 		setTitle("Basics");
+		
+		
+		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
+			System.out.println("secQuality.showHelpFor: "+n);
+			if (n==null) {
+				layout.setOptional(null);
+			} else {
+				Label descTitle = new Label();
+				descTitle.getStyleClass().add(JavaFXConstants.STYLE_HEADING3);
+				descTitle.setStyle("-fx-text-fill: highlight");
+				Label descSources = new Label();
+				TextFlow description = new TextFlow();
+				
+				descTitle.setText(n.getName());
+				QualityValue v = (QualityValue)n;
+				descSources.setText(RPGFrameworkJavaFX.createSourceText(v.getResolved()));
+				
+				VBox box = new VBox(descTitle, descSources, description);
+				RPGFrameworkJavaFX.parseMarkupAndFillTextFlow(description, v.getResolved().getDescription());
+				layout.setOptional(box);
+			}
+		});
 	}
 	
 	//-------------------------------------------------------------------
 	private void initBaseData() {
 		secBaseData = new BasicDataSection();
+		secBaseData.setMaxHeight(Double.MAX_VALUE);
 	}
 	
 	//-------------------------------------------------------------------
@@ -85,25 +102,13 @@ public class BasicDataPage extends Page {
 		secPortrait = new AppearanceSection();
 		Image img = new Image("/mugshot.jpg");
 		secPortrait.iView.setImage(img);
-//		btnPortraitEdit = new Button(null, new SymbolIcon("Edit"));
-//		btnPortraitEdit.setTooltip(new Tooltip("Change image"));
-//		btnPortraitRemove = new Button(null, new SymbolIcon("delete"));
-//		btnPortraitRemove.setTooltip(new Tooltip("Delete image"));
-//		
-//		ImageView iView = new ImageView();
-//		iView.setFitWidth(200);
-//		iView.setFitHeight(200);
-//		Image img = new Image("/mugshot.jpg");
-//		iView.setImage(img);
-//		secPortrait = new Section("Portrait", iView);
-//		secPortrait.getButtons().addAll(btnPortraitEdit, btnPortraitRemove);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initAttributes() {
 		PriorityCharacterGenerator charGen = new PriorityCharacterGenerator();
 		charGen.start(new Shadowrun6Character());
-		secAttrib = new AttributeSection("Attributes", charGen, null);
+		secAttrib = new AttributeSection(ResourceI18N.get(RES, "page.basicdata.section.attributes.title"), charGen, null);
 	}
 	
 	//-------------------------------------------------------------------
@@ -112,7 +117,7 @@ public class BasicDataPage extends Page {
 		Shadowrun6Character model = new Shadowrun6Character();
 		model.addQuality(new QualityValue(Shadowrun6Core.getItem(Quality.class, "built_tough"), 2));
 		charGen.start(model);
-		secQualities = new QualitySection("Qualities", new QualityGenerator(charGen));
+		secQualities = new QualitySection(ResourceI18N.get(RES, "page.basicdata.section.qualities.title"), new QualityGenerator(charGen));
 	}
 	
 }

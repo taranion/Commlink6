@@ -12,5 +12,7 @@ public enum ShadowrunCheckInfluence implements CheckInfluence {
 	BONUS,
 	/** Egde gained by a test */
 	EDGE,
+	/** Can test be made at all */
+	USAGE,
 	
 }

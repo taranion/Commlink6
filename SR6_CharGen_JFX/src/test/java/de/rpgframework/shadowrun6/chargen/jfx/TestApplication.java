@@ -54,7 +54,7 @@ public class TestApplication extends FlexibleApplication {
 		super.start(stage);
 		
 		Scene scene = stage.getScene();
-//		setStyle(scene, DARK_STYLE);
+		setStyle(scene, DARK_STYLE);
 		
 //        stage.getScene().getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
      }

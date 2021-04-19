@@ -1,0 +1,90 @@
+package de.rpgframework.shadowrun6.items;
+
+import java.util.Locale;
+
+import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+
+/**
+ * @author Stefan
+ *
+ */
+public enum ItemHook {
+
+	MELEE_EXTERNAL,
+	FIREARMS_EXTERNAL,
+	BARREL,
+	INTERNAL, // Only used for auto-added
+	SMARTGUN,
+	TOP,
+	UNDER,
+	UNDER_WEAPON_MOUNT, // Firing squad
+	WEAPON_SECURITY, // Firing squad
+	SIDE_L, // Firing squad
+	SIDE_R, // Firing squard
+	STOCK,
+	ELECTRONIC_ACCESSORY,
+	OPTICAL(true),
+	AUDIO(true),
+	SENSOR_HOUSING(true),
+	SENSOR_FUNCTION(true),
+	ARMOR(true),
+	ARMOR_REACTIVE(true),
+	ARMOR_ADDITION(true),
+	ARMOR_MEMS(true),
+	HELMET_ACCESSORY(true),
+	HEADWARE_IMPLANT(true),
+	CYBEREYE_IMPLANT(true),
+	CYBEREAR_IMPLANT(true),
+	CYBERLIMB_IMPLANT(true),
+	MOUNTED_MELEE,
+	MOUNTED_RANGED,
+	MOUNTED_HOLDOUT,
+	MOUNTED_PISTOL_LIGHT,
+	MOUNTED_PISTOL_MACHINE,
+	MOUNTED_PISTOL_HEAVY,
+	MOUNTED_SMG, // Submachine guns
+	MOUNTED_SHOTGUN,
+	MOUNTED_RIFLES,
+	MOUNTED_MACHINEGUN,
+	MOUNTED_LAUNCHER,
+	VEHICLE_DRIVE(true),
+	VEHICLE_PROTECTION(true),
+	VEHICLE_WEAPON(true),
+	VEHICLE_BODY(true),
+	VEHICLE_ELECTRONICS(true),
+	VEHICLE_COSMETICS(true),
+	SOFTWARE(true),
+	SKILLJACK(true),
+	SOFTWARE_RIGGER(true),
+	SOFTWARE_DRONE(true),
+	SOFTWARE_TACNET(true),
+	INSTRUMENT_SLOT(true),
+	INSTRUMENT_WEAPON(true),
+	PROCAM_SLOT(true),
+	;
+	
+	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(Shadowrun6Core.class, Locale.GERMAN, Locale.ENGLISH);
+
+	boolean hasCapacity;
+	
+	//-------------------------------------------------------------------
+	private ItemHook() {
+		hasCapacity = false;
+	}
+	
+	//-------------------------------------------------------------------
+	private ItemHook(boolean cap) {
+		hasCapacity = cap;
+	}
+	
+	//-------------------------------------------------------------------
+	public String getName() {
+		return RES.getString("itemhook."+this.name().toLowerCase());
+	}
+	
+	//-------------------------------------------------------------------
+	public boolean hasCapacity() {
+		return hasCapacity;
+	}
+}

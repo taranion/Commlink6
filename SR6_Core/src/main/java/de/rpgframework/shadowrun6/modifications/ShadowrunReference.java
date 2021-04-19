@@ -21,15 +21,23 @@ import de.rpgframework.shadowrun6.persist.SkillSpecializationConverter;
  */
 public enum ShadowrunReference implements ModifiedObjectType {
 
+	ALLERGY_ALLERGEN("Allergen"),
+	ALLERGY_SEVERITY("Severity"),
 	ATTRIBUTE(new AttributeConverter()),
+	ELEMENT("Element"),
 	GEAR(ItemTemplate.class),
+	MAGIC_RESO("MagicOrResonance"),
 	METATYPE(SR6MetaType.class),
 	RULE(new RuleConverter()),
 	QUALITY(Quality.class),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILL(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILLSPECIALIZATION(new SkillSpecializationConverter()),
-	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id())
+	SLOT("ItemHook"),
+	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
+	SPIRIT("Spirit"),
+	SPRITE("Sprite"),
+	TEXT("TEXT"),
 	;
 	
 	Class<? extends DataItem> typeClass;

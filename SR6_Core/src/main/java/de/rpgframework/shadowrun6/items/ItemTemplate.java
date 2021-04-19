@@ -10,28 +10,28 @@ import org.prelle.simplepersist.Element;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.items.IGearTypeData;
 import de.rpgframework.genericrpg.items.PieceOfGear;
+import de.rpgframework.genericrpg.items.PieceOfGearEquip;
 import de.rpgframework.genericrpg.items.PieceOfGearUsage;
-import de.rpgframework.shadowrun6.persist.AvailabilityConverter;
+import de.rpgframework.shadowrun.items.Availability;
+import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 
 /**
  * @author prelle
  *
  */
 @DataItemTypeKey(id = "item")
-public class ItemTemplate extends PieceOfGear {
+public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode> {
 
 	@Attribute(name="avail",required=false)
 	@AttribConvert(AvailabilityConverter.class)
 	private Availability availability;
+	@Attribute
+	private ItemType type;
+	@Attribute
+	private ItemSubType subtype;
 
 	@Element
 	private WeaponData weapon; 
-	
-	@Override
-	public List<? extends PieceOfGearUsage> getUsages() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -53,6 +53,17 @@ public class ItemTemplate extends PieceOfGear {
 
 		if (availability!=null) 
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);
+		
+		/* If there is no USAGE assume a NORMAL mode and no slot */
+		if (equips.isEmpty()) {
+			PieceOfGearEquip<SR6EquipMode> add = new SR6GearEquip(SR6EquipMode.NORMAL);
+			equips.add(add);
+		}
+		if (usages.isEmpty()) {
+			PieceOfGearUsage<SR6UsageMode> add = new SR6GearUsage(SR6UsageMode.NORMAL);
+			usages.add(add);
+		}
+		
 		
 		super.validate();
 	}

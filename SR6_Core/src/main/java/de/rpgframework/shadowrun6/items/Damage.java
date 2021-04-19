@@ -3,27 +3,21 @@ package de.rpgframework.shadowrun6.items;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun.items.IDamage;
 
 /**
  * @author Stefan
  *
  */
-public class Damage extends ItemAttributeNumericalValue implements Cloneable {
-
-	public enum WeaponDamageType {
-		NORMAL,
-		ELECTRICAL,
-		FLECHETTE,
-	}
+public class Damage extends ItemAttributeNumericalValue implements Cloneable, IDamage {
 
 	private boolean addStrength;
 	private DamageType type;
-	private WeaponDamageType weaponDamageType = WeaponDamageType.NORMAL;
+	private DamageElement element = DamageElement.REGULAR;
 
 	//--------------------------------------------------------------------
 	public Damage() {
@@ -31,11 +25,11 @@ public class Damage extends ItemAttributeNumericalValue implements Cloneable {
 	}
 
 	//--------------------------------------------------------------------
-	public Damage(int val, boolean addStrength, DamageType type, WeaponDamageType dType) {
+	public Damage(int val, boolean addStrength, DamageType type, DamageElement element) {
 		super(SR6ItemAttribute.DAMAGE,val, new ArrayList<Modification>());
 		this.addStrength = addStrength;
 		this.type = type;
-		this.weaponDamageType = dType;
+		this.element = element;
 	}
 
 	//--------------------------------------------------------------------
@@ -43,7 +37,7 @@ public class Damage extends ItemAttributeNumericalValue implements Cloneable {
 		super(SR6ItemAttribute.DAMAGE, copy.getValue(), mods);
 		addStrength = copy.addStrength();
 		type        = copy.getType();
-		weaponDamageType = copy.getWeaponDamageType();
+		element     = copy.getElement();
 		modifications.addAll(mods);
 	}
 
@@ -76,7 +70,6 @@ public class Damage extends ItemAttributeNumericalValue implements Cloneable {
 	//--------------------------------------------------------------------
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
-		MultiLanguageResourceBundle res = Shadowrun6Core.getI18nResources();
 		if (addStrength) {
 			buf.append("("+ShadowrunAttribute.STRENGTH.getShortName()+"/2");
 			buf.append("+"+getModifiedValue());
@@ -84,13 +77,10 @@ public class Damage extends ItemAttributeNumericalValue implements Cloneable {
 		} else
 			buf.append(String.valueOf(getModifiedValue()));
 
-		if (type==DamageType.PHYSICAL)
-			buf.append(res.getString("damage.physical.short"));
-		else
-			buf.append(res.getString("damage.stun.short"));
+		buf.append(type.getShortName());
 
-		if (weaponDamageType!=null && weaponDamageType!=WeaponDamageType.NORMAL) {
-			buf.append("("+res.getString("damage.damagetype."+weaponDamageType.name().toLowerCase())+")");
+		if (element!=null && element!=DamageElement.REGULAR) {
+			buf.append("("+element.getShortName()+")");
 		}
 
 		return buf.toString();
@@ -132,16 +122,16 @@ public class Damage extends ItemAttributeNumericalValue implements Cloneable {
 	/**
 	 * @return the weaponDamageType
 	 */
-	public WeaponDamageType getWeaponDamageType() {
-		return weaponDamageType;
+	public DamageElement getElement() {
+		return element;
 	}
 
 	//--------------------------------------------------------------------
 	/**
 	 * @param weaponDamageType the weaponDamageType to set
 	 */
-	public void setWeaponDamageType(WeaponDamageType weaponDamageType) {
-		this.weaponDamageType = weaponDamageType;
+	public void setElement(DamageElement element) {
+		this.element = element;
 	}
 
 

@@ -10,9 +10,12 @@ import org.prelle.simplepersist.Attribute;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.AGearData;
 import de.rpgframework.genericrpg.items.IGearTypeData;
+import de.rpgframework.shadowrun.items.AmmunitionSlot;
+import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun.persist.AmmunitionConverter;
+import de.rpgframework.shadowrun.persist.FireModesConverter;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.persist.AttackRatingConverter;
-import de.rpgframework.shadowrun6.persist.FireModesConverter;
 import de.rpgframework.shadowrun6.persist.SkillConverter;
 import de.rpgframework.shadowrun6.persist.SkillSpecializationConverter;
 import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
@@ -33,6 +36,7 @@ public class WeaponData implements IGearTypeData {
 	@Attribute(name="attack")
 	@AttribConvert(value=AttackRatingConverter.class)
 	private int[] attackRating;
+	private int[] range = new int[] {3,50,250,500,1000};
 
 	@Attribute(name="dmg")
 	@AttribConvert(WeaponDamageConverter.class)
@@ -40,9 +44,9 @@ public class WeaponData implements IGearTypeData {
 	@Attribute(name="mode")
 	@AttribConvert(FireModesConverter.class)
 	private List<FireMode> mode;
-//	@Attribute(name="ammo")
-//	@AttribConvert(AmmunitionConverter.class)
-//	private List<AmmunitionSlot> ammo;
+	@AttribConvert(AmmunitionConverter.class)
+	@Attribute(name="ammo")
+	private List<AmmunitionSlot> ammo;
 	@Attribute(name="wild")
 	private boolean useWildDie;
 	@Attribute(name="nowifi")
