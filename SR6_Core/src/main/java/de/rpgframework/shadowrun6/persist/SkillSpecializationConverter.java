@@ -3,8 +3,8 @@ package de.rpgframework.shadowrun6.persist;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+import org.apache.logging.log4j.LogManager;
 import org.prelle.simplepersist.StringValueConverter;
-import org.slf4j.LoggerFactory;
 
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -46,9 +46,9 @@ public class SkillSpecializationConverter implements StringValueConverter<SkillS
 			if (special==null)
 				special = skill.getSpecialization(idref);
 			if (special==null) {
-				LoggerFactory.getLogger("shadowrun6.persist").error("No specialization '"+idref+"' or '"+specialID+"' in skill "+skillID);
+				LogManager.getLogger("shadowrun6.persist").error("No specialization '"+idref+"' or '"+specialID+"' in skill "+skillID);
 				for (SkillSpecialization spec : skill.getSpecializations()) {
-					LoggerFactory.getLogger("shadowrun6.persist").error("  Known: "+spec.getId());
+					LogManager.getLogger("shadowrun6.persist").error("  Known: "+spec.getId());
 				}
 				throw new ReferenceException(ShadowrunReference.SKILLSPECIALIZATION, idref);
 			}

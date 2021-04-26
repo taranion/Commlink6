@@ -64,7 +64,7 @@ public enum ItemHook {
 	PROCAM_SLOT(true),
 	;
 	
-	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(Shadowrun6Core.class, Locale.GERMAN, Locale.ENGLISH);
+	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
 
 	boolean hasCapacity;
 	

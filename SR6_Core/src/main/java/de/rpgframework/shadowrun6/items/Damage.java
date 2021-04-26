@@ -1,8 +1,8 @@
 package de.rpgframework.shadowrun6.items;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
@@ -13,7 +13,7 @@ import de.rpgframework.shadowrun.items.IDamage;
  * @author Stefan
  *
  */
-public class Damage extends ItemAttributeNumericalValue implements Cloneable, IDamage {
+public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implements Cloneable, IDamage {
 
 	private boolean addStrength;
 	private DamageType type;
@@ -21,12 +21,12 @@ public class Damage extends ItemAttributeNumericalValue implements Cloneable, ID
 
 	//--------------------------------------------------------------------
 	public Damage() {
-		super(SR6ItemAttribute.DAMAGE,0, new ArrayList<Modification>());
+		super(SR6ItemAttribute.DAMAGE);
 	}
 
 	//--------------------------------------------------------------------
 	public Damage(int val, boolean addStrength, DamageType type, DamageElement element) {
-		super(SR6ItemAttribute.DAMAGE,val, new ArrayList<Modification>());
+		super(SR6ItemAttribute.DAMAGE);
 		this.addStrength = addStrength;
 		this.type = type;
 		this.element = element;
@@ -34,7 +34,8 @@ public class Damage extends ItemAttributeNumericalValue implements Cloneable, ID
 
 	//--------------------------------------------------------------------
 	public Damage(Damage copy, List<Modification> mods) {
-		super(SR6ItemAttribute.DAMAGE, copy.getValue(), mods);
+		super(SR6ItemAttribute.DAMAGE);
+		super.modifications.addAll(mods);
 		addStrength = copy.addStrength();
 		type        = copy.getType();
 		element     = copy.getElement();

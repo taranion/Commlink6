@@ -14,8 +14,12 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
  */
 public enum SR6UsageMode implements IUsageMode {
 	
-	/** The one default of the item */
+	/** Carried*/
 	NORMAL,
+	IMPLANTED,
+	EMBEDDED,
+	/** Added to an weapon mount */
+	MOUNTED,
 	;
 	
 	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(Shadowrun6Core.class, "core", Locale.ENGLISH, Locale.GERMAN);

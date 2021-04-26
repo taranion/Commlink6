@@ -3,6 +3,11 @@ package de.rpgframework.shadowrun6.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.prelle.simplepersist.Attribute;
+import org.prelle.simplepersist.Element;
+import org.prelle.simplepersist.IgnoreMissingAttributes;
+
+import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.items.IGearTypeData;
 import de.rpgframework.genericrpg.items.PieceOfGearUsage;
 
@@ -10,9 +15,15 @@ import de.rpgframework.genericrpg.items.PieceOfGearUsage;
  * @author prelle
  *
  */
+@DataItemTypeKey(id="usage")
+@IgnoreMissingAttributes("id")
 public class SR6GearUsage extends PieceOfGearUsage<SR6UsageMode> {
 	
+	@Attribute
 	private ItemHook slot;
+
+	@Element
+	private WeaponData weapon; 
 
 	//-------------------------------------------------------------------
 	public SR6GearUsage() {
