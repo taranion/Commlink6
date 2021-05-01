@@ -54,7 +54,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"de.rpgframework.shadowrun6.persist.AvailabilityConverter",
+  "name":"de.rpgframework.shadowrun6.persist.ItemSubTypesConverter",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
