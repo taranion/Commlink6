@@ -1,192 +1,196 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
    <!-- Tools p.273 -->
-   <item avail="1" cost="500" id="kit" choice="SKILL">
-     <useas type="TOOLS" subtype="TOOLS"/>
-   </item>
-   <item avail="4" cost="5000" id="shop" choice="SKILL">
-     <useas type="TOOLS" subtype="TOOLS"/>
-   </item>
-   <item avail="7" cost="50000" id="facility" choice="SKILL">
-     <useas type="TOOLS" subtype="TOOLS"/>
-   </item>
+<!--    <item avail="1" cost="500" id="kit" choice="SKILL"> -->
+<!--      <useas type="TOOLS" subtype="TOOLS"/> -->
+<!--    </item> -->
+<!--    <item avail="4" cost="5000" id="shop" choice="SKILL"> -->
+<!--      <useas type="TOOLS" subtype="TOOLS"/> -->
+<!--    </item> -->
+<!--    <item avail="7" cost="50000" id="facility" choice="SKILL"> -->
+<!--      <useas type="TOOLS" subtype="TOOLS"/> -->
+<!--    </item> -->
 
-   <item avail="1" cost="50" id="binoculars" maxrat="3" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="OPTICAL"/>
-      </modifications>
-   </item>
-   <item avail="1" cost="50" id="binoculars_optical" subtype="OPTICAL" type="ELECTRONICS"/>
-   <item avail="1" cost="100" id="camera" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="OPTICAL"/>
-      </modifications>
-   </item>
-   <item avail="1" cost="100" id="microcamera" subtype="IMAGING" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="OPTICAL"/>
-      </modifications>
-   </item>
-   <item avail="2" cost="200" id="contacts" maxrat="3" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="OPTICAL"/>
-      </modifications>
-   </item>
-   <item avail="3" cost="250" id="endoscope" subtype="OPTICAL" type="ELECTRONICS"/>
-   <item avail="1" cost="100" id="glasses" maxrat="4" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="OPTICAL"/>
-      </modifications>
-   </item>
-   <item avail="1" cost="50" id="goggles" maxrat="6" rate="true" ratemul="CAPACITY PRICE">
-     <useas type="ELECTRONICS" subtype="IMAGING"/>
-      <modifications>
-         <itemhookmod capacity="1" hook="OPTICAL"/>
-      </modifications>
-   </item>
-   <item avail="1" cost="350" id="imaging_scope_single" subtype="IMAGING" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="3" hook="OPTICAL"/>
-      </modifications>
-   </item>
-   <item avail="5" cost="3000" id="mage-sight-goggles" subtype="OPTICAL" type="ELECTRONICS"/>
-   <item avail="1" cost="120" id="monocle" maxrat="4" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="OPTICAL"/>
-      </modifications>
-   </item>
+<!--    <item avail="1" cost="50" id="binoculars" maxrat="3" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="50" id="binoculars_optical" subtype="OPTICAL" type="ELECTRONICS"/> -->
+<!--    <item avail="1" cost="100" id="camera" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="100" id="microcamera" subtype="IMAGING" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="200" id="contacts" maxrat="3" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="3" cost="250" id="endoscope" subtype="OPTICAL" type="ELECTRONICS"/> -->
+<!--    <item avail="1" cost="100" id="glasses" maxrat="4" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="50" id="goggles" maxrat="6" rate="true" ratemul="CAPACITY PRICE"> -->
+<!--      <useas type="ELECTRONICS" subtype="IMAGING"/> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="350" id="imaging_scope_single" subtype="IMAGING" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="3" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="5" cost="3000" id="mage-sight-goggles" subtype="OPTICAL" type="ELECTRONICS"/> -->
+<!--    <item avail="1" cost="120" id="monocle" maxrat="4" rate="true" ratemul="CAPACITY PRICE" subtype="IMAGING" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="OPTICAL"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
 
    
    <!-- Visual enhancements -->
-   <item avail="1" cost="250" id="flare_compensation">
-      <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/>
-      <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="1" slot="CYBEREYE_IMPLANT"      cost="750" avail="2"/>
-      <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="750" avail="2"/>
-      <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" />
-   </item>
-  <item avail="1" cost="25" id="image_link">
-      <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/>
-      <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="1" slot="CYBEREYE_IMPLANT"      cost="775" avail="2"/>
-      <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="775" avail="2"/>
-      <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" />
-   </item>
-   <item avail="2" cost="500" id="low_light_vision">
-      <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/>
+<!--    <item avail="1" cost="250" id="flare_compensation"> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="1" slot="CYBEREYE_IMPLANT"      cost="750" avail="2"/> -->
+<!--       <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="750" avail="2"/> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" /> -->
+<!--    </item> -->
+<!--   <item avail="1" cost="25" id="image_link"> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="1" slot="CYBEREYE_IMPLANT"      cost="775" avail="2"/> -->
+<!--       <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="775" avail="2"/> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" /> -->
+<!--    </item> -->
+   <item avail="2" cost="500" id="low_light_vision" type="ENHANCEMENTS" subtype="VISUAL">   	
+  <usage mode="BODYWARE"  slot="BODY"             volume="0.1" />
+  <usage mode="IMPLANTED" slot="OPTICAL"          volume="1" />
+  <usage mode="IMPLANTED" slot="CYBEREYE_IMPLANT" volume="2"  cost="1000" />
+  <usage mode="IMPLANTED" slot="HELMET_ACCESSORY" volume="1" />
+      <usage type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/>
       <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="2" slot="CYBEREYE_IMPLANT"      cost="1000" avail="2"/>
       <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="1000" avail="2"/>
       <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" />
    </item>
-   <item avail="2" cost="2000" id="smartlink">
-      <useas type="ACCESSORY" subtype="OPTICAL" cap="2" slot="OPTICAL"/>
-      <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="3" slot="CYBEREYE_IMPLANT"      cost="3000" avail="3L"/>
-      <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.2" cost="3000" avail="3L"/>
-      <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" />
-   </item>
-   <item avail="2" cost="500" id="thermographic_vision">
-      <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/>
-      <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="2" slot="CYBEREYE_IMPLANT"      cost="1500"/>
-      <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="1500"/>
-      <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" />
-   </item>
-   <item avail="1" cost="300" id="ultrasound_link">
-      <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/>
-      <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" />
-   </item>
-   <item avail="1" cost="500" id="vision_enhancement" >
-      <useas type="ACCESSORY" subtype="OPTICAL" cap="2" slot="OPTICAL"/>
-      <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="2" slot="CYBEREYE_IMPLANT"      cost="3500" avail="3"/>
-      <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="3500" avail="3"/>
-      <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="2" />
-   </item>
-   <item avail="1" cost="250" id="vision_magnification">
-      <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/>
-      <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="2" slot="CYBEREYE_IMPLANT"      cost="1750" avail="3"/>
-      <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="1750" avail="3"/>
-      <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" />
-      <modifications>
-         <attrmod attr="ATTACK_RATING" ar="0,0,2,2,2"/>
-      </modifications>
-   </item>
+<!--    <item avail="2" cost="2000" id="smartlink"> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL" cap="2" slot="OPTICAL"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="3" slot="CYBEREYE_IMPLANT"      cost="3000" avail="3L"/> -->
+<!--       <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.2" cost="3000" avail="3L"/> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" /> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="500" id="thermographic_vision"> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="2" slot="CYBEREYE_IMPLANT"      cost="1500"/> -->
+<!--       <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="1500"/> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" /> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="300" id="ultrasound_link"> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" /> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="500" id="vision_enhancement" > -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL" cap="2" slot="OPTICAL"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="2" slot="CYBEREYE_IMPLANT"      cost="3500" avail="3"/> -->
+<!--       <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="3500" avail="3"/> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="2" /> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="250" id="vision_magnification"> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL" cap="1" slot="OPTICAL"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_EYEWARE" cap="2" slot="CYBEREYE_IMPLANT"      cost="1750" avail="3"/> -->
+<!--       <useas type="CYBERWARE" subtype="CYBER_EYEWARE" ess="0.1" cost="1750" avail="3"/> -->
+<!--       <useas type="ACCESSORY" subtype="OPTICAL"  slot="HELMET_ACCESSORY" cap="1" /> -->
+<!--       <modifications> -->
+<!--          <attrmod attr="ATTACK_RATING" ar="0,0,2,2,2"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
    
    <!-- Auditory devices -->
-   <item avail="2" cost="50" id="directional_microphone" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="AUDIO"/>
-      </modifications>
-   </item>
-   <item avail="1" cost="50" id="earbuds" maxrat="3" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="AUDIO"/>
-      </modifications>
-   </item>
-    <item avail="1" cost="50" id="headphones" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="AUDIO"/>
-      </modifications>
-   </item>
-   <item avail="2" cost="100" id="laser_microphone" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="AUDIO"/>
-      </modifications>
-   </item>
-   <item avail="1" cost="50" id="omnidirectional_microphone" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS">
-      <modifications>
-         <itemhookmod capacity="1" hook="AUDIO"/>
-      </modifications>
-   </item>
+<!--    <item avail="2" cost="50" id="directional_microphone" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="50" id="earbuds" maxrat="3" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--     <item avail="1" cost="50" id="headphones" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="100" id="laser_microphone" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--    <item avail="1" cost="50" id="omnidirectional_microphone" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
 
     <!-- Audio enhancements -->
-    <item avail="1" cost="500" id="audio_enhancement" >
-      <useas type="ACCESSORY" subtype="AUDIO_ENHANCEMENT" cap="1" slot="AUDIO"/>
-      <useas type="ACCESSORY" subtype="CYBER_EARWARE"     cap="1" slot="CYBEREAR_IMPLANT"   cost="3500" avail="2"/>
-      <useas type="CYBERWARE" subtype="CYBER_EARWARE"   ess="0.1" cost="3500" avail="2"/>
-   </item>
-   <item avail="3" cost="250" id="select_sound_filter" maxrat="3" rate="true" ratemul="CAPACITY PRICE" >
-      <useas type="ACCESSORY" subtype="AUDIO_ENHANCEMENT" cap="1" slot="AUDIO"/>
-      <useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="1" slot="CYBEREAR_IMPLANT"   cost="3250" avail="4" maxrat="6"/>
-      <useas type="CYBERWARE" subtype="CYBER_EARWARE" ess="0.1" cost="3250" avail="4"/>
-   </item>
-   <item avail="2" cost="1000" id="spatial_recognizer" subtype="AUDIO_ENHANCEMENT" type="ACCESSORY">
-      <useas type="ACCESSORY" subtype="AUDIO_ENHANCEMENT" cap="2" slot="AUDIO"/>
-      <useas type="ACCESSORY" subtype="CYBER_EARWARE"     cap="2" slot="CYBEREAR_IMPLANT"   cost="3000" avail="2"/>
-      <useas type="CYBERWARE" subtype="CYBER_EARWARE"   ess="0.1" cost="3000" avail="2"/>
-   </item>
+<!--     <item avail="1" cost="500" id="audio_enhancement" > -->
+<!--       <useas type="ACCESSORY" subtype="AUDIO_ENHANCEMENT" cap="1" slot="AUDIO"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_EARWARE"     cap="1" slot="CYBEREAR_IMPLANT"   cost="3500" avail="2"/> -->
+<!--       <useas type="CYBERWARE" subtype="CYBER_EARWARE"   ess="0.1" cost="3500" avail="2"/> -->
+<!--    </item> -->
+<!--    <item avail="3" cost="250" id="select_sound_filter" maxrat="3" rate="true" ratemul="CAPACITY PRICE" > -->
+<!--       <useas type="ACCESSORY" subtype="AUDIO_ENHANCEMENT" cap="1" slot="AUDIO"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="1" slot="CYBEREAR_IMPLANT"   cost="3250" avail="4" maxrat="6"/> -->
+<!--       <useas type="CYBERWARE" subtype="CYBER_EARWARE" ess="0.1" cost="3250" avail="4"/> -->
+<!--    </item> -->
+<!--    <item avail="2" cost="1000" id="spatial_recognizer" subtype="AUDIO_ENHANCEMENT" type="ACCESSORY"> -->
+<!--       <useas type="ACCESSORY" subtype="AUDIO_ENHANCEMENT" cap="2" slot="AUDIO"/> -->
+<!--       <useas type="ACCESSORY" subtype="CYBER_EARWARE"     cap="2" slot="CYBEREAR_IMPLANT"   cost="3000" avail="2"/> -->
+<!--       <useas type="CYBERWARE" subtype="CYBER_EARWARE"   ess="0.1" cost="3000" avail="2"/> -->
+<!--    </item> -->
 
    <!-- Sensors -->
-    <item avail="1" cost="100" id="handheld_housing" maxrat="3" rate="true" ratemul="CAPACITY PRICE" sensrat="3">
-      <useas type="ELECTRONICS" subtype="SENSOR_HOUSING"/>
-      <modifications>
-         <itemhookmod capacity="1" hook="SENSOR_HOUSING"/>
-      </modifications>
-   </item>
-    <item avail="1" cost="250" id="wall-mounted_housing" maxrat="6" rate="true" ratemul="CAPACITY PRICE" sensrat="6">
-      <useas type="ELECTRONICS" subtype="SENSOR_HOUSING"/>
-      <modifications>
-         <itemhookmod capacity="1" hook="SENSOR_HOUSING"/>
-      </modifications>
-   </item>
-    <item avail="3" cost="1000" id="sensor_array" minrat="2" maxrat="8" rate="true" ratemul="CAPACITY PRICE">
-      <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_HOUSING" cap="1"/>
-      <modifications>
-         <itemhookmod capacity="1" hook="SENSOR_FUNCTION"/>
-      </modifications>
-   </item>
-    <item avail="2" cost="100" id="single_sensor" maxrat="8" rate="true" ratemul="PRICE">
-      <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_HOUSING" cap="1"/>
-      <modifications>
-         <itemhookmod hook="SENSOR_FUNCTION"/>
-      </modifications>
-   </item>
+<!--     <item avail="1" cost="100" id="handheld_housing" maxrat="3" rate="true" ratemul="CAPACITY PRICE" sensrat="3"> -->
+<!--       <useas type="ELECTRONICS" subtype="SENSOR_HOUSING"/> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="SENSOR_HOUSING"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--     <item avail="1" cost="250" id="wall-mounted_housing" maxrat="6" rate="true" ratemul="CAPACITY PRICE" sensrat="6"> -->
+<!--       <useas type="ELECTRONICS" subtype="SENSOR_HOUSING"/> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="SENSOR_HOUSING"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--     <item avail="3" cost="1000" id="sensor_array" minrat="2" maxrat="8" rate="true" ratemul="CAPACITY PRICE"> -->
+<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_HOUSING" cap="1"/> -->
+<!--       <modifications> -->
+<!--          <itemhookmod capacity="1" hook="SENSOR_FUNCTION"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
+<!--     <item avail="2" cost="100" id="single_sensor" maxrat="8" rate="true" ratemul="PRICE"> -->
+<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_HOUSING" cap="1"/> -->
+<!--       <modifications> -->
+<!--          <itemhookmod hook="SENSOR_FUNCTION"/> -->
+<!--       </modifications> -->
+<!--    </item> -->
    
-    <item id="atmosphere_sensor" rate="true" ratemul="" cost="0">
-      <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/>
-    </item>
-    <item id="cyberware_scanner" rate="true" ratemul="" cost="0">
-      <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/>
-    </item>
-    <item id="geiger_counter" rate="true" ratemul="" 
-    cost="0">
-      <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/>
-    </item>
+<!--     <item id="atmosphere_sensor" rate="true" ratemul="" cost="0"> -->
+<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/> -->
+<!--     </item> -->
+<!--     <item id="cyberware_scanner" rate="true" ratemul="" cost="0"> -->
+<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/> -->
+<!--     </item> -->
+<!--     <item id="geiger_counter" rate="true" ratemul=""  -->
+<!--     cost="0"> -->
+<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/> -->
+<!--     </item> -->
 
 </items>

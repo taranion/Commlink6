@@ -47,6 +47,9 @@
    </item>
 
 	<item id="bow" price="100" type="WEAPON_RANGED" subtype="BOWS">
+		<choices>
+			<choice type="ITEM_ATTRIBUTE" ref="RATING" uuid="" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/> 
+		</choices>
 		<requires>
 			<valuereq type="ATTRIBUTE" ref="STRENGTH" min="$(RATING)"/>
 		</requires>
@@ -54,10 +57,10 @@
          <itemmod type="SLOT" ref="TOP"/>
          <itemmod type="SLOT" ref="UNDER"/>
       </modifications>
-		<attrval id="RATING" max="14" op="ADD" factor="10" />
-		<attrval id="DAMAGE"        value="$(RATING/2)P" />
-		<attrval id="ATTACK_RATING" value="$(RATING/2),$(RATING),$(RATING/4),," />
-		<attrval id="AVAILABILITY"  value="$(RATING/3)L" />
+		<attrdef id="PRICE"         op="ADD" factor="10" />
+		<attrdef id="DAMAGE"        value="$(RATING/2)P" />
+		<attrdef id="ATTACK_RATING" value="$(RATING/2),$(RATING),$(RATING/4),," />
+		<attrdef id="AVAILABILITY"  value="$(RATING/3)L" />
 		<weapon skill="close_combat" spec="close_combat/blades" />
 	</item>
    <item id="crossbow_light" avail="3" price="150" type="WEAPON_RANGED" subtype="CROSSBOWS">

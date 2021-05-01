@@ -4,7 +4,7 @@
   <action type="MINOR" cat="COMBAT" time="ANYTIME"    id="avoid_incoming"/> 
   <action type="MINOR" cat="COMBAT" time="ANYTIME"    id="block"/> 
   <action type="MINOR" cat="COMBAT" time="INITIATIVE" id="call_a_shot" apply="ACTION" action="attack"/> 
-  <action type="MINOR" cat="MATRIX"  time="INITIATIVE" id="change_device_mode"/> 
+  <action type="MINOR" cat="COMBAT"  time="INITIATIVE" id="change_device_mode"/> 
   <action type="MINOR" cat="MATRIX" time="INITIATIVE" id="command_drone"/> 
   <action type="MINOR" cat="MAGIC"  time="INITIATIVE" id="command_spirit"/> 
   <action type="MINOR" cat="COMBAT" time="ANYTIME"    id="dodge"/> 

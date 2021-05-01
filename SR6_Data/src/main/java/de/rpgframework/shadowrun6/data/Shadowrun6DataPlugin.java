@@ -3,9 +3,9 @@ package de.rpgframework.shadowrun6.data;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.prelle.simplepersist.Persister;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.CheckInfluence;
@@ -26,9 +26,11 @@ import de.rpgframework.shadowrun.Spell;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureList;
 import de.rpgframework.shadowrun.SpellList;
+import de.rpgframework.shadowrun6.ActionList;
 import de.rpgframework.shadowrun6.MetaTypeList;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.SkillList;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -48,7 +50,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class Shadowrun6DataPlugin  {
 
-	private static Logger logger = LoggerFactory.getLogger("shadowrun6.data");
+	private static Logger logger = LogManager.getLogger("shadowrun6.data");
 
 	private static boolean alreadyInitialized = false;
 
@@ -93,8 +95,16 @@ public class Shadowrun6DataPlugin  {
 			logger.debug("Loaded "+list.size()+" qualities");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, core, clazz.getResourceAsStream("core/data/metatypes.xml"));
 			logger.debug("Loaded "+list.size()+" metatypes");
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz.getResourceAsStream("core/data/actions_minor.xml"));
+			logger.debug("Loaded "+list.size()+" minor actions");
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz.getResourceAsStream("core/data/actions_major.xml"));
+			logger.debug("Loaded "+list.size()+" major actions");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear.xml"));
 			logger.debug("Loaded "+list.size()+" items");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms_accessories.xml"));
+			logger.debug("Loaded "+list.size()+" weapon accessories");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms.xml"));
+			logger.debug("Loaded "+list.size()+" firearms");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
