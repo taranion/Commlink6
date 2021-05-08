@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.Page;
-import org.prelle.javafx.Page.Mode;
+
 import com.onexip.flexboxfx.FlexBox;
 
 import de.rpgframework.ResourceI18N;

@@ -2,9 +2,10 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.prelle.javafx.CloseType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.prelle.javafx.FlexibleApplication;
 
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
@@ -22,14 +23,14 @@ import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
  */
 public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribute, Shadowrun6Character> implements ControllerListener {
 	
-	private final static Logger logger = LoggerFactory.getLogger(SR6CharacterViewLayout.class);
+	private final static Logger logger = LogManager.getLogger(SR6CharacterViewLayout.class);
 
-	private CharacterOverviewController controller;
+//	private CharacterOverviewController controller;
 	
-	//-------------------------------------------------------------------
-	public void setController(CharacterOverviewController ctrl) {
-		this.controller = ctrl;		
-	}
+//	//-------------------------------------------------------------------
+//	public void setController(CharacterOverviewController ctrl) {
+//		this.controller = ctrl;		
+//	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -43,12 +44,13 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		gen.start(new Shadowrun6Character());
 		logger.info("Create wizard for "+wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
-		CloseType close = getAppLayout().getApplication().showAndWait(wizard);
+		CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
 		logger.info("Wizard closed via "+close);
-		controller.refresh();
+//		controller.refresh();
 		if (close==CloseType.FINISH) {
 			gen.finish();
 			try {
+				logger.debug("Call save() on "+gen.getClass());
 				gen.save(Shadowrun6Core.save(gen.getModel()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -75,7 +77,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		GenerationWizard wizard = new GenerationWizard(wrapper);
 		CloseType close = getAppLayout().getApplication().showAndWait(wizard);
 		logger.info("Wizard closed via "+close);
-		controller.refresh();
+//		controller.refresh();
 		if (close==CloseType.FINISH) {
 			gen.finish();
 			try {

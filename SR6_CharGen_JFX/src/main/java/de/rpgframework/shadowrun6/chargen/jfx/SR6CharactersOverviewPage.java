@@ -3,15 +3,14 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.jfx.pages.CharactersOverviewPage;
-import de.rpgframework.shadowrun6.chargen.jfx.fxml.ScreenLoader;
 
 /**
  * @author prelle
@@ -19,7 +18,9 @@ import de.rpgframework.shadowrun6.chargen.jfx.fxml.ScreenLoader;
  */
 public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	
-	private final static Logger logger = LoggerFactory.getLogger(SR6CharactersOverviewPage.class);
+	private final static Logger logger = LogManager.getLogger(SR6CharactersOverviewPage.class);
+
+	//-------------------------------------------------------------------
 
 	//-------------------------------------------------------------------
 	/**
@@ -28,14 +29,15 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	@Override
 	protected CharacterViewLayout createCharacterAppLayout() {
 		logger.debug("##############createCharacterAppLayout");
-		try {
-			return ScreenLoader.loadMainScreen();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(1);
-			return null;
-		}
+		return new SR6CharacterViewLayout();
+//		try {
+//			return ScreenLoader.loadMainScreen();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			System.exit(1);
+//			return null;
+//		}
 	}
 
 	//-------------------------------------------------------------------

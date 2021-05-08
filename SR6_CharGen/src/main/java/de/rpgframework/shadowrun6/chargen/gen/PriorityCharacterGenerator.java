@@ -37,6 +37,24 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#getName()
+	 */
+	@Override
+	public String getName() {
+		return RES.getString("generator.name");
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#getDescription()
+	 */
+	@Override
+	public String getDescription() {
+		return RES.getString("generator.desc");
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getWizardPages()
 	 */
 	@Override

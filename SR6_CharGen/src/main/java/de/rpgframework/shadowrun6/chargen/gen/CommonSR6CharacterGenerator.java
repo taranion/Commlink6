@@ -61,7 +61,8 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	@Override
 	public boolean canBeFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		logger.warn("TODO: canBeFinished");
+		return true;
 	}
 
 	//-------------------------------------------------------------------
@@ -71,7 +72,8 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub
-		
+		logger.warn("TODO: finish");
+	
 	}
 
 	//-------------------------------------------------------------------

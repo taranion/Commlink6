@@ -3,12 +3,17 @@ package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
 
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.jfx.wizard.WizardPageGenerator;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
@@ -19,6 +24,8 @@ import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
  *
  */
 public class GenerationWizard extends Wizard {
+
+	private final static Logger logger = LogManager.getLogger(GenerationWizard.class);
 	
 	private GeneratorWrapper wrapper;
 	
@@ -27,10 +34,11 @@ public class GenerationWizard extends Wizard {
 	private WizardPageMetatype race;
 //	private WizardPageCulture culture;
 //	private WizardPageAttributes attrib;
+	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 
 	//-------------------------------------------------------------------
 	public GenerationWizard(GeneratorWrapper charGen) {
-		setTitle("Hello");
+		setTitle("Unreplaced Wizard Title");
 		this.wrapper = charGen;
 		charGen.runProcessors();
 		
@@ -48,6 +56,7 @@ public class GenerationWizard extends Wizard {
 //			case CULTURE    : ret.add(culture); break;
 			case METATYPE   : ret.add(   race); break;
 //			case RECOMMENDER: ret.add(profiles); break;
+			case NAME       : ret.add(   name); break;
 			default:
 				logger.error("Unsupported page type "+type);
 			}
@@ -62,9 +71,11 @@ public class GenerationWizard extends Wizard {
 //		culture= new WizardPageCulture(this, wrapper);
 //		attrib = new WizardPageAttributes(this, wrapper.getAttributeController());
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
+		name   = new WizardPageName<>(this, wrapper);
 		
-		getPages().add(chargen);		
+		getPages().add(chargen);
 		getPages().addAll(getPageList());
+		logger.warn("Pages: "+getPages());
 	}
 	
 	//-------------------------------------------------------------------

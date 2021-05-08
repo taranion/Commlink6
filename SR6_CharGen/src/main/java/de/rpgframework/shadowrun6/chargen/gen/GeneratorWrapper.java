@@ -47,6 +47,24 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#getName()
+	 */
+	@Override
+	public String getName() {
+		return wrapped.getName();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#getDescription()
+	 */
+	@Override
+	public String getDescription() {
+		return wrapped.getDescription();
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getWizardPages()
 	 */
 	@Override
