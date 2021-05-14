@@ -4,9 +4,12 @@ import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.prelle.javafx.AlertManager;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
+import org.prelle.javafx.ManagedDialog;
 
+import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
@@ -16,6 +19,9 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
+import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.VBox;
 
 /**
  * @author stefa
@@ -44,23 +50,30 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		gen.start(new Shadowrun6Character());
 		logger.info("Create wizard for "+wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
-		CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
-		logger.info("Wizard closed via "+close);
-//		controller.refresh();
-		if (close==CloseType.FINISH) {
-			gen.finish();
-			try {
-				logger.debug("Call save() on "+gen.getClass());
-				gen.save(Shadowrun6Core.save(gen.getModel()));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		while (true) {
+			CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
+			logger.info("Wizard closed via "+close);
+			//		controller.refresh();
+			if (close==CloseType.FINISH) {
+				gen.finish();
+				try {
+					logger.debug("Call save() on "+gen.getClass());
+					gen.save(Shadowrun6Core.save(gen.getModel()));
+					return;
+				} catch (CharacterIOException e) {
+					super.showCharacterIOException(e, gen.getModel());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (close==CloseType.CANCEL) {
+				//			getApplication().closeAppLayout();
+				getAppLayout().historyBack();
+				return;
 			}
 		}
-		if (close==CloseType.CANCEL) {
-//			getApplication().closeAppLayout();
-			getAppLayout().historyBack();
-		}
+		
 	}
 
 	//-------------------------------------------------------------------
