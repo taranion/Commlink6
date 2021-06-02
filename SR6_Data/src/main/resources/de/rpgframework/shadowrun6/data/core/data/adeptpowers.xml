@@ -11,70 +11,83 @@
 			<choice type="ATTRIBUTE" uuid="1ec3bdd5-f9da-4ad2-8d44-9120529830e2" options="BODY,AGILITY,REACTION,STRENGTH" />
 		</choices>
 	</power>
-<!--    <power id="combat_sense"      cost="0.5" levels="true" act="PASSIVE"> -->
-<!--      <modifications> -->
-<!--         <relevancemod topic="COMBAT"/> -->
-<!--         <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL" value="1"/> -->
-<!--         <edgemod type="BONUS" skill="perception" /> -->
-<!--      </modifications> -->
-<!--    </power> -->
-<!--    <power id="critical_strike"   cost="1" levels="true" act="PASSIVE"> -->
-<!--      <modifications> -->
-<!--         <itemattrmod attr="DAMAGE" val="1" type="WEAPON_CLOSE_COMBAT" /> -->
-<!--      </modifications> -->
-<!--    </power> -->
-<!--    <power id="danger_sense"      cost="0.5" act="PASSIVE" /> -->
-<!--    <power id="direction_sense"   cost="0.25" act="PASSIVE" /> -->
-<!--    <power id="enhanced_perception" cost="0.5" act="PASSIVE" /> -->
-<!--    <power id="enhanced_accuracy" cost="0.5" act="PASSIVE"> -->
-<!--      <modifications> -->
-<!--          <attrmod attr="ATTACK_RATING" ar="2,2,2,2,2"/>         -->
-<!--      </modifications> -->
-<!--    </power> -->
-<!--    <power id="improved_ability"  cost="0.5" levels="true" select="NONCOMBAT_SKILL" act="PASSIVE"> -->
-<!--      <modifications> -->
-<!--         <skillmod val="1" modType="AUGMENTED"/> -->
-<!--      </modifications> -->
-<!--      <requires> -->
-<!--        <skillreq val="1"/> -->
-<!--      </requires> -->
-<!--    </power> -->
-<!--    <power id="improved_ability_combat"  cost="1" levels="true" select="COMBAT_SKILL" act="PASSIVE"> -->
-<!--      <modifications> -->
-<!--         <skillmod val="1" modType="AUGMENTED"/> -->
-<!--      </modifications> -->
-<!--      <requires> -->
-<!--        <skillreq val="1"/> -->
-<!--      </requires> -->
-<!--    </power> -->
-<!--    <power id="improved_physical_attribute" cost="1" levels="true" select="PHYSICAL_ATTRIBUTE" act="PASSIVE"> -->
-<!--      <modifications> -->
-<!--      	<attrmod val="1"/> -->
-<!--      </modifications> -->
-<!--    </power> -->
-<!--    <power id="improved_reflexes"  cost="1.0" levels="true" max="4" act="PASSIVE"> -->
-<!--      <modifications> -->
-<!--      	<attrmod attr="REACTION" val="1" type="AUGMENTED" /> -->
-<!--      	<attrmod attr="INITIATIVE_DICE_PHYSICAL" val="1"/> -->
-<!--      </modifications> -->
-<!--    </power> -->
-<!--    <power id="improved_sense"  cost="0.25" select="SENSE" act="PASSIVE"/> -->
-<!--    <power id="killing_hands"   cost="0.5"  act="MINOR_ACTION"/> -->
-<!--    <power id="kinesics"        cost="0.25" act="PASSIVE"/> -->
-<!--    <power id="mystic_armor"    cost="0.25" levels="true" act="PASSIVE"> -->
-<!--      <modifications> -->
-<!--        <itemmod item="mystic_armor" rating="1"/> -->
-<!--      </modifications> -->
-<!--    </power> -->
-<!--    <power id="pain_resistance" cost="0.25" levels="true" act="PASSIVE"> -->
-<!--      <modifications> -->
-<!--        <specrulemod ref="PAIN_TOLERANCE_HIGH" lvl="1"/> -->
-<!--      </modifications> -->
-<!--    </power> -->
-<!--    <power id="rapid_healing"   cost="0.5" levels="true" act="PASSIVE"/> -->
-<!--    <power id="spell_resistance" cost="0.5" act="PASSIVE"/> -->
-<!--    <power id="traceless_walk"  cost="0.5"  act="PASSIVE"/> -->
-<!--    <power id="vocal_control"   cost="0.5" levels="true" act="PASSIVE"/> -->
-<!--    <power id="wall_running"    cost="0.5" act="MINOR_ACTION" /> -->
+   <power id="combat_sense"      cost="0.5" levels="true" act="PASSIVE">
+     <modifications>
+        <relevancemod topic="COMBAT"/>
+        <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL" value="1"/>
+        <checkmod type="POOL" ref="DEFENSE_POOL" value="1" what="BONUS" cond="y" />
+     </modifications>
+   </power>
+   <power id="critical_strike"   cost="1" levels="true" act="PASSIVE">
+     <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" mode="WEAPON_CLOSE_COMBAT" />
+     </modifications>
+   </power>
+   <power id="danger_sense"      cost="0.5" act="PASSIVE" />
+   <power id="direction_sense"   cost="0.25" act="PASSIVE" />
+   <power id="enhanced_perception" cost="0.5" act="PASSIVE" />
+   <power id="enhanced_accuracy" cost="0.5" act="PASSIVE">
+     <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2"/>        
+     </modifications>
+   </power>
+   <power id="improved_ability"  cost="0.5" levels="true" act="PASSIVE">
+		<choices>
+			<choice type="SKILL" uuid="05054102-0183-482a-9e2b-84bc8d5f153f" options="athletics,biotech,con,conjuring,cracking,electronics,engineering,influence,outdoors,perception,piloting,stealth" />
+		</choices>
+     <modifications>
+        <valmod type="SKILL" ref="CHOICE" choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="1" set="AUGMENTED"/>
+     </modifications>
+     <requires>
+       <valuereq type="SKILL" ref="CHOICE" choice="05054102-0183-482a-9e2b-84bc8d5f153f" min="1"/>
+     </requires>
+   </power>
+   <power id="improved_ability_combat"  cost="1" levels="true" act="PASSIVE">
+		<choices>
+			<choice type="SKILL" uuid="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" options="close_combat,exotic_weapons,firearms" />
+		</choices>
+     <modifications>
+        <valmod type="SKILL" ref="CHOICE" choice="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" value="1" set="AUGMENTED"/>
+     </modifications>
+     <requires>
+       <valuereq type="SKILL" ref="CHOICE" choice="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" min="1"/>
+     </requires>
+   </power>
+   <power id="improved_physical_attribute" cost="1" levels="true" act="PASSIVE">
+		<choices>
+			<choice type="ATTRIBUTE" uuid="7282ba2c-fe33-4220-8fce-2ed77e0a3068" options="BODY,AGILITY,REACTION,STRENGTH" />
+		</choices>
+     <modifications>
+        <valmod type="ATTRIBUTE" ref="CHOICE" choice="7282ba2c-fe33-4220-8fce-2ed77e0a3068" value="1" set="AUGMENTED"/>
+     </modifications>
+   </power>
+   <power id="improved_reflexes"  cost="1.0" levels="true" max="4" act="PASSIVE">
+     <modifications>
+        <valmod type="ATTRIBUTE" ref="REACTION" value="1" set="AUGMENTED"/>
+        <valmod type="POOL" ref="INITIATIVE_DICE_PHYSICAL" value="1" set="AUGMENTED"/>
+     </modifications>
+   </power>
+   <power id="improved_sense"  cost="0.25" act="PASSIVE">
+		<choices>
+			<choice type="SENSE" uuid="220e6dfd-a76d-4c7e-97e1-dfdbdca464ef" />
+		</choices>
+   </power>
+   <power id="killing_hands"   cost="0.5"  act="MINOR_ACTION"/>
+   <power id="kinesics"        cost="0.25" act="PASSIVE"/>
+   <power id="mystic_armor"    cost="0.25" levels="true" act="PASSIVE">
+     <modifications>
+        <valmod type="POOL" ref="DEFENSE_RATINGL" value="1" />
+     </modifications>
+   </power>
+   <power id="pain_resistance" cost="0.25" levels="true" act="PASSIVE">
+     <modifications>
+       <valmod type="RULE" ref="PAIN_TOLERANCE_HIGH" value="1"/>
+     </modifications>
+   </power>
+   <power id="rapid_healing"   cost="0.5" levels="true" act="PASSIVE"/>
+   <power id="spell_resistance" cost="0.5" act="PASSIVE"/>
+   <power id="traceless_walk"  cost="0.5"  act="PASSIVE"/>
+   <power id="vocal_control"   cost="0.5" levels="true" act="PASSIVE"/>
+   <power id="wall_running"    cost="0.5" act="MINOR_ACTION" />
 
 </powers>
