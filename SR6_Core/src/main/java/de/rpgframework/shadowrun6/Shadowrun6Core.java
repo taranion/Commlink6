@@ -107,7 +107,7 @@ public class Shadowrun6Core extends GenericCore {
 		try {
 			StringWriter out = new StringWriter();
 			serializer.write(character, out);
-			return out.toString().getBytes(Charset.forName("UTF-8"));
+			return out.toString().getBytes(Charset.forName("UTF-16"));
 		} catch (IOException e) {
 			logger.error("Failed generating XML for char",e);
 			StringWriter mess = new StringWriter();
@@ -116,6 +116,12 @@ public class Shadowrun6Core extends GenericCore {
 			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, mess.toString());
 		}
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	public static Shadowrun6Character load(byte[] rawData) throws Exception {
+		String data = new String(rawData, Charset.forName("UTF-8"));
+		return serializer.read(Shadowrun6Character.class, data);
 	}
 
 }

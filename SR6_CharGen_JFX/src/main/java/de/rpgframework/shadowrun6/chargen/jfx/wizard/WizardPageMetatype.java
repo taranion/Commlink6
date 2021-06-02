@@ -15,6 +15,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.Gender;
 import de.rpgframework.jfx.DataItemSpinnerPane;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
+import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -61,7 +62,7 @@ public class WizardPageMetatype extends WizardPage {
 		initInteractivity();
 //		refreshDataTab();
 		
-		contentPane.getValueFactory().setValue(Shadowrun6Core.getItem(SR6MetaType.class, "human"));
+		contentPane.getValueFactory().setValue(charGen.getModel().getMetatype());
 	}
 	
 	//-------------------------------------------------------------------
@@ -69,11 +70,11 @@ public class WizardPageMetatype extends WizardPage {
 		contentPane = new DataItemSpinnerPane<SR6MetaType>();
 		contentPane.setId("species");
 		contentPane.setImageConverter(new Function<SR6MetaType,Image>(){
-			public Image apply(SR6MetaType value) {				
-				InputStream in = SR6CharacterViewLayout.class.getResourceAsStream("images/metatype_"+value.getId()+".png");
+			public Image apply(SR6MetaType value) {	
+				InputStream in = CommonShadowrunJFXResourceHook.class.getResourceAsStream("images/metatypes/metatype_"+value.getId()+".png");
 				if (in!=null)
 					return new Image(in);
-				logger.error("Missing resource "+SR6CharacterViewLayout.class.getName()+" + images/metatype_"+value.getId()+".png");
+				logger.error("Missing resource "+CommonShadowrunJFXResourceHook.class.getName()+" + images/metatypes/metatype_"+value.getId()+".png");
 				return null;
 			}});
 //		contentPane.setModificationConverter((m) -> SplitterTools.getModificationString(contentPane.getSelectedItem(),m));
@@ -84,16 +85,20 @@ public class WizardPageMetatype extends WizardPage {
 //			SplitterJFXUtil.openDecisionDialog(r, c, null);
 		});
 		contentPane.setItems(Shadowrun6Core.getItemList(SR6MetaType.class));
+		contentPane.setShowDecisionColumn(false);
 		
 		/*
 		 * Custom node
 		 */
 		btnRoll  = new Button(ResourceI18N.get(RES, "button.roll"));
-		btnRoll.setStyle("-fx-background-color: dark; -fx-text-fill: light");
+		btnRoll.setStyle("-fx-background-color: accent; -fx-text-fill: light");
 		cbGender = new ChoiceBox<>();
 		cbGender.getItems().addAll(Gender.values());
 		cbGender.setConverter(new StringConverter<Gender>() {
-			public String toString(Gender key) {return ResourceI18N.get(RES,"gender."+key.name().toLowerCase());}
+			public String toString(Gender key) {
+				if (key==null) return "?";
+				return ResourceI18N.get(RES,"gender."+key.name().toLowerCase());
+			}
 			public Gender fromString(String key) {return Gender.valueOf(key.toUpperCase());}
 		});
 		tfSize   = new TextField();
@@ -159,18 +164,27 @@ public class WizardPageMetatype extends WizardPage {
 	}
 	
 	//-------------------------------------------------------------------
+	/**
+	 * @see org.prelle.javafx.WizardPage#pageVisited()
+	 */
+	@Override
+	public void pageVisited() {
+		logger.info("pageVisited");
+	}
+	
+	//-------------------------------------------------------------------
 	private void refresh() {
 		Shadowrun6Character model = charGen.getModel();
 		cbGender.setValue(model.getGender());
 //		tfHair.setText(charGen.getModel().getHairColor());
 //		tfEyes.setText(charGen.getModel().getEyeColor());
 //		tfSkin.setText(charGen.getModel().getSkinColor());
-//		try {
-//			tfSize.setText(String.valueOf(model.getSize()));
-//			tfWeight.setText(String.valueOf(model.getWeight()));
-//		} catch (Exception e) {
-//			logger.warn("Found invalid data in textfields: "+e);
-//		}
+		try {
+			tfSize.setText(String.valueOf(model.getSize()));
+			tfWeight.setText(String.valueOf(model.getWeight()));
+		} catch (Exception e) {
+			logger.warn("Found invalid data in textfields: "+e);
+		}
 	}
 
 //	//-------------------------------------------------------------------

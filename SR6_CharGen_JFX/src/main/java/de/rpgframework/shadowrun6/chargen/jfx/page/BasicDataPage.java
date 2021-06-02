@@ -100,8 +100,8 @@ public class BasicDataPage extends Page {
 	//-------------------------------------------------------------------
 	private void initPortrait() {
 		secPortrait = new AppearanceSection();
-		Image img = new Image("/mugshot.jpg");
-		secPortrait.iView.setImage(img);
+//		Image img = new Image("/mugshot.jpg");
+//		secPortrait.iView.setImage(img);
 	}
 	
 	//-------------------------------------------------------------------

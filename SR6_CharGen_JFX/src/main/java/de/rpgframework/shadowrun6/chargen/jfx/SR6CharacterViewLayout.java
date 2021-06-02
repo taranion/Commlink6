@@ -69,6 +69,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			}
 			if (close==CloseType.CANCEL) {
 				//			getApplication().closeAppLayout();
+				logger.info("call historyBack() on "+getAppLayout().getBreadcrumb());
 				getAppLayout().historyBack();
 				return;
 			}
@@ -108,7 +109,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void edit(Shadowrun6Character model) {
-		// TODO Auto-generated method stub
+		logger.info("Edit "+model);
 		
 	}
 

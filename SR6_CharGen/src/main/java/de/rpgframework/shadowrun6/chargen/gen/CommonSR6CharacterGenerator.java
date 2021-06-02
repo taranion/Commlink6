@@ -6,7 +6,9 @@ import org.slf4j.LoggerFactory;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
+import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
@@ -39,6 +41,8 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	@Override
 	public void start(Shadowrun6Character model) {
 		super.model = model;
+		if (model.getMetatype()==null)
+			model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "human"));
 		setupProcessChain();
 		runProcessors();
 	}

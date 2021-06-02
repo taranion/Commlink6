@@ -34,4 +34,16 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		return Shadowrun6Core.getItem(SR6MetaType.class, metatype);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.character.RuleSpecificCharacterObject#getShortDescription()
+	 */
+	@Override
+	public String getShortDescription() {
+		SR6MetaType meta = getMetatype();
+				
+		String p1 = (meta!=null)?meta.getName():"?";
+		return p1;
+	}
+
 }

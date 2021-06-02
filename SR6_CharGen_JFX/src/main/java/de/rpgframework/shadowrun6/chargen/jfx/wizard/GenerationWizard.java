@@ -39,6 +39,7 @@ public class GenerationWizard extends Wizard {
 	//-------------------------------------------------------------------
 	public GenerationWizard(GeneratorWrapper charGen) {
 		setTitle("Unreplaced Wizard Title");
+		setPlain(true);
 		this.wrapper = charGen;
 		charGen.runProcessors();
 		

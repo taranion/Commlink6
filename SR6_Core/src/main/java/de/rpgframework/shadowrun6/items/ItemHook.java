@@ -1,15 +1,14 @@
 package de.rpgframework.shadowrun6.items;
 
-import java.util.Locale;
-
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
  * @author Stefan
  *
  */
-public enum ItemHook {
+public enum ItemHook implements Hook {
 
 	MELEE_EXTERNAL,
 	FIREARMS_EXTERNAL,
@@ -84,6 +83,9 @@ public enum ItemHook {
 	}
 	
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.items.Hook#hasCapacity()
+	 */
 	public boolean hasCapacity() {
 		return hasCapacity;
 	}

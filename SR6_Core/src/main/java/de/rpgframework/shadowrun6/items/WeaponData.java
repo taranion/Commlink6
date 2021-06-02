@@ -259,9 +259,18 @@ public class WeaponData implements IGearTypeData {
 
 	@Override
 	public void copyToAttributes(AGearData copyTo) {
-		// TODO Auto-generated method stub
+		if (ammo!=null)
+			copyTo.setAttribute(SR6ItemAttribute.AMMUNITION, ammo);
+		if (attackRating!=null)
+			copyTo.setAttribute(SR6ItemAttribute.ATTACK_RATING, attackRating);
 		if (damage!=null)
 			copyTo.setAttribute(SR6ItemAttribute.DAMAGE, damage);
+		if (mode!=null)
+			copyTo.setAttribute(SR6ItemAttribute.FIREMODES, mode);
+		if (skill!=null)
+			copyTo.setAttribute(SR6ItemAttribute.SKILL, skill);
+		if (spec!=null)
+			copyTo.setAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION, spec);
 	}
 
 }

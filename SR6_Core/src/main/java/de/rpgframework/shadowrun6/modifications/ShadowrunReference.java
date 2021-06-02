@@ -37,8 +37,10 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	MAGIC_RESO("MagicOrResonance"),
 	MENTOR_SPIRIT("Mentorspirit"),
 	METATYPE(SR6MetaType.class),
+	POOL("Pool"), // Derived values like defense pool
 	RULE(new RuleConverter()),
 	QUALITY(Quality.class),
+	SENSE("Sense"),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILL(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILLSPECIALIZATION(new SkillSpecializationConverter()),

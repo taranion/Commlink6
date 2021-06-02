@@ -13,7 +13,7 @@
 	</power>
    <power id="combat_sense"      cost="0.5" levels="true" act="PASSIVE">
      <modifications>
-        <relevancemod topic="COMBAT"/>
+        <relevancemod topic="COMBAT" />
         <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL" value="1"/>
         <checkmod type="POOL" ref="DEFENSE_POOL" value="1" what="BONUS" cond="y" />
      </modifications>

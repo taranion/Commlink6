@@ -15,7 +15,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 public enum SR6ItemAttribute implements IItemAttribute {
 	
 //	ACCELERATION,
-//	AMMUNITION,
+	AMMUNITION,
 //	ARMOR,
 	ATTACK_RATING,
 	AVAILABILITY,
@@ -27,9 +27,9 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	DEFENSE_RATING,
 //	DEVICE_RATING,
 //	ESSENCECOST,
+	FIREMODES,
 //	HANDLING,
 //	HAS_RATING,
-//	MODE,
 //	/** Maximum rating of embedded items */
 //	MAX_SENSOR_RATING,
 //	MODIFICATION_SLOTS,
