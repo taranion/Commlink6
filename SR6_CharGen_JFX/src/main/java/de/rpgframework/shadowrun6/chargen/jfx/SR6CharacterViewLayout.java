@@ -8,6 +8,7 @@ import org.prelle.javafx.AlertManager;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.ManagedDialog;
+import org.prelle.javafx.Page;
 
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
@@ -18,6 +19,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
@@ -31,12 +33,26 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	
 	private final static Logger logger = LogManager.getLogger(SR6CharacterViewLayout.class);
 
-//	private CharacterOverviewController controller;
+	private BasicDataPage page;
+	
+	//-------------------------------------------------------------------
+	public SR6CharacterViewLayout() {
+		initPages();
+	}
 	
 //	//-------------------------------------------------------------------
 //	public void setController(CharacterOverviewController ctrl) {
 //		this.controller = ctrl;		
 //	}
+	
+	//-------------------------------------------------------------------
+	public void initPages() {
+		page = new BasicDataPage();
+		getPages().add(page);
+		
+		Page skillPage = new Page("Skills");
+		getPages().add(skillPage);
+	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -109,8 +125,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void edit(Shadowrun6Character model) {
-		logger.info("Edit "+model);
-		
+		logger.info("ToDo: Edit "+model);
 	}
 
 	//-------------------------------------------------------------------

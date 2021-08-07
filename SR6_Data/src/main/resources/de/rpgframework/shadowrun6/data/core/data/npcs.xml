@@ -26,4 +26,33 @@
 			<item id="club"/>
 		</gear>
 	</npc>
+	<npc id="terrafirst_shaman" rating="0">
+		<attributes>
+			<attribute id="BODY"      value="1" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="3" />
+			<attribute id="STRENGTH"  value="2" />
+			<attribute id="WILLPOWER" value="3" />
+			<attribute id="LOGIC"     value="2" />
+			<attribute id="INTUITION" value="2" />
+			<attribute id="CHARISMA"  value="1" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="2" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval skill="astral"    val="2"/>
+			<skillval skill="conjuring" val="2"/>
+			<skillval skill="sorcery"   val="2"/>
+		</skills>
+		<spells>
+			<spellval ref="acid_stream"/>
+			<spellval ref="antidote"/>
+			<spellval ref="blast"/>
+			<spellval ref="cleansing_heal"/>
+		</spells>
+		<gear>
+			<item id="commlink"/>
+		</gear>
+	</npc>
 </npcs>

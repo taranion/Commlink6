@@ -38,7 +38,7 @@ public class TestApplication extends FlexibleApplication {
 	@Override
 	public Page createPage(MenuItem menuItem) {
 		// TODO Auto-generated method stub
-		return new SR6CharacterSheet();
+		return new SR6CharacterViewLayout();
 	}
 	
     //-------------------------------------------------------------------
