@@ -8,10 +8,12 @@ import org.apache.logging.log4j.Logger;
 import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.genericrpg.data.ASkillValue;
 import de.rpgframework.genericrpg.data.CheckInfluence;
 import de.rpgframework.genericrpg.data.CostType;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
+import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.items.IEquipMode;
 import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.IUsageMode;
@@ -20,16 +22,22 @@ import de.rpgframework.genericrpg.items.PieceOfGearUsage;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerList;
+import de.rpgframework.shadowrun.ANPC;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityList;
-import de.rpgframework.shadowrun.Spell;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureList;
 import de.rpgframework.shadowrun.SpellList;
 import de.rpgframework.shadowrun6.ActionList;
 import de.rpgframework.shadowrun6.MetaTypeList;
+import de.rpgframework.shadowrun6.NPCList;
 import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.SkillList;
@@ -60,10 +68,14 @@ public class Shadowrun6DataPlugin  {
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+CostType.class.getName(), ShadowrunCostType.class);
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+CheckInfluence.class.getName(), ShadowrunCheckInfluence.class);
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+IItemAttribute.class.getName(), SR6ItemAttribute.class);
-		Persister.putContext(Persister.PREFIX_KEY_ABSTRACT+"."+PieceOfGearEquip.class.getName(), SR6GearEquip.class);
+		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+IAttribute.class.getName(), ShadowrunAttribute.class);
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+IEquipMode.class.getName(), SR6EquipMode.class);
-		Persister.putContext(Persister.PREFIX_KEY_ABSTRACT+"."+PieceOfGearUsage.class.getName(), SR6GearUsage.class);
 		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+IUsageMode.class.getName(), SR6UsageMode.class);
+		Persister.putContext(Persister.PREFIX_KEY_ABSTRACT+"."+PieceOfGearUsage.class.getName(), SR6GearUsage.class);
+		Persister.putContext(Persister.PREFIX_KEY_ABSTRACT+"."+PieceOfGearEquip.class.getName(), SR6GearEquip.class);
+		Persister.putContext(Persister.PREFIX_KEY_ABSTRACT+"."+ANPC.class.getName(), SR6NPC.class);
+		Persister.putContext(Persister.PREFIX_KEY_ABSTRACT+"."+ASkillValue.class.getName(), SR6SkillValue.class);
+		Persister.putContext(Persister.PREFIX_KEY_ABSTRACT+"."+ASpell.class.getName(), SR6Spell.class);
 	}
 	
 	//--------------------------------------------------------------------
@@ -87,7 +99,7 @@ public class Shadowrun6DataPlugin  {
 			logger.debug("Loaded "+list.size()+" skills");
 			list = Shadowrun6Core.loadDataItems(SpellFeatureList.class, SpellFeature.class, core, clazz.getResourceAsStream("core/data/spellfeatures.xml"));
 			logger.debug("Loaded "+list.size()+" spell features");
-			list = Shadowrun6Core.loadDataItems(SpellList.class, Spell.class, core, clazz.getResourceAsStream("core/data/spells.xml"));
+			list = Shadowrun6Core.loadDataItems(SpellList.class, ASpell.class, core, clazz.getResourceAsStream("core/data/spells.xml"));
 			logger.debug("Loaded "+list.size()+" spells");
 			list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, core, clazz.getResourceAsStream("core/data/adeptpowers.xml"));
 			logger.debug("Loaded "+list.size()+" adept powers");
@@ -101,10 +113,12 @@ public class Shadowrun6DataPlugin  {
 			logger.debug("Loaded "+list.size()+" major actions");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear.xml"));
 			logger.debug("Loaded "+list.size()+" items");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms_accessories.xml"));
-			logger.debug("Loaded "+list.size()+" weapon accessories");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms.xml"));
-			logger.debug("Loaded "+list.size()+" firearms");
+//			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms_accessories.xml"));
+//			logger.debug("Loaded "+list.size()+" weapon accessories");
+//			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms.xml"));
+//			logger.debug("Loaded "+list.size()+" firearms");
+//			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
+//			logger.debug("Loaded "+list.size()+" NPCs");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

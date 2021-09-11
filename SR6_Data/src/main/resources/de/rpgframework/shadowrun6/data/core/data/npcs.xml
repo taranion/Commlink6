@@ -15,15 +15,15 @@
 			<attribute id="RESONANCE" value="0" />
 		</attributes>
 		<skills>
-			<skillval skill="athletics"    val="1"/>
-			<skillval skill="close_combat" val="3"/>
-			<skillval skill="influence"    val="1">
-				<skillspec special="influence/intimidation" />
+			<skillval skill="athletics"    value="1"/>
+			<skillval skill="close_combat" value="3"/>
+			<skillval skill="influence"    value="1">
+				<skillspec ref="influence/intimidation" />
 			</skillval>
 		</skills>
 		<gear>
-			<item id="commlink"/>
-			<item id="club"/>
+			<item ref="commlink"/>
+			<item ref="club"/>
 		</gear>
 	</npc>
 	<npc id="terrafirst_shaman" rating="0">
@@ -41,9 +41,9 @@
 			<attribute id="RESONANCE" value="0" />
 		</attributes>
 		<skills>
-			<skillval skill="astral"    val="2"/>
-			<skillval skill="conjuring" val="2"/>
-			<skillval skill="sorcery"   val="2"/>
+			<skillval skill="astral"    value="2"/>
+			<skillval skill="conjuring" value="2"/>
+			<skillval skill="sorcery"   value="2"/>
 		</skills>
 		<spells>
 			<spellval ref="acid_stream"/>
@@ -52,7 +52,7 @@
 			<spellval ref="cleansing_heal"/>
 		</spells>
 		<gear>
-			<item id="commlink"/>
+			<item ref="commlink"/>
 		</gear>
 	</npc>
 </npcs>

@@ -1,8 +1,5 @@
 package de.rpgframework.shadowrun6.persist;
 
-import java.util.NoSuchElementException;
-import java.util.StringTokenizer;
-
 import org.prelle.simplepersist.StringValueConverter;
 
 import de.rpgframework.shadowrun.DamageElement;
@@ -35,16 +32,7 @@ public class WeaponDamageConverter implements StringValueConverter<Damage> {
 			ret.setType(DamageType.STUN);
 		v = v.substring(0, v.length()-1);
 
-		if (v.startsWith("(")) {
-			StringTokenizer tok = new StringTokenizer(v, "()+ ");
-			tok.nextToken(); // STR
-			ret.setAddStrength(true);
-			if (!tok.hasMoreTokens())
-				throw new NoSuchElementException("Missing second token in '"+v+"'");
-			ret.setValue(Integer.parseInt(tok.nextToken()));
-		} else {
-			ret.setValue(Integer.parseInt(v));
-		}
+		ret.setValue(Integer.parseInt(v.trim()));
 		return ret;
 	}
 
@@ -57,11 +45,7 @@ public class WeaponDamageConverter implements StringValueConverter<Damage> {
 		if (v==null)
 			return null;
 		StringBuffer buf = new StringBuffer();
-		if (v.addStrength()) {
-			buf.append("(STR+"+v.getValue()+")");
-		} else {
-			buf.append(String.valueOf(v.getValue()));
-		}
+		buf.append(String.valueOf(v.getValue()));
 		if (v.getType()==DamageType.PHYSICAL)
 			buf.append("P");
 		else

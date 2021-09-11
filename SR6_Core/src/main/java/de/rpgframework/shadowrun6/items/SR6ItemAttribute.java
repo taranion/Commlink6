@@ -3,10 +3,16 @@ package de.rpgframework.shadowrun6.items;
 import java.util.Locale;
 import java.util.MissingResourceException;
 
+import org.prelle.simplepersist.StringValueConverter;
+
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.IItemAttribute;
+import de.rpgframework.genericrpg.persist.IntegerArrayConverter;
+import de.rpgframework.genericrpg.persist.IntegerConverter;
+import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
 
 /**
  * @author prelle
@@ -17,12 +23,12 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	ACCELERATION,
 	AMMUNITION,
 //	ARMOR,
-	ATTACK_RATING,
-	AVAILABILITY,
+	ATTACK_RATING(new IntegerArrayConverter()),
+	AVAILABILITY(new AvailabilityConverter()),
 //	BODY,
 //	CAPACITY,
 //	CONCEALABILITY,
-	DAMAGE,
+	DAMAGE(new WeaponDamageConverter()),
 //	DAMAGE_REDUCTION,
 //	DEFENSE_RATING,
 //	DEVICE_RATING,
@@ -54,6 +60,18 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	;
 	
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
+
+	private StringValueConverter<? extends Object> converter;
+
+	//-------------------------------------------------------------------
+	private SR6ItemAttribute() {
+		converter = new IntegerConverter();
+	}
+
+	//-------------------------------------------------------------------
+	private SR6ItemAttribute(StringValueConverter<? extends Object> conv) {
+		converter = conv;
+	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -91,41 +109,61 @@ public enum SR6ItemAttribute implements IItemAttribute {
 			return e.getKey();
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.data.IItemAttribute#resolve(java.lang.String)
+	 * @see de.rpgframework.genericrpg.items.IItemAttribute#resolve(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T resolve(String key) {
+	public SR6ItemAttribute resolve(String key) {
+		return SR6ItemAttribute.valueOf(key);
+	}
+	
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.genericrpg.data.IItemAttribute#resolve(java.lang.String)
+//	 */
+//	@Override
+//	public <T> T resolve(String key) {
+//		LogManager.getLogger("shadowrun6.core").debug("Resolve "+key);
 //		try {
 //			if (converter!=null)
 //				return (T) converter.read(key);
 //		} catch (Exception e1) {
 //			throw new IllegalArgumentException(e1);
 //		}
-		try {
-			return (T)Integer.valueOf(key);
-		} catch (NumberFormatException e) {
-			return (T)key;
-		}
-	}
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.data.IItemAttribute#toString(java.lang.Object)
-	 */
-	@Override
-	public <E extends Object> String toString(E value) {
+//		try {
+//			return (T)Integer.valueOf(key);
+//		} catch (NumberFormatException e) {
+//			return (T)key;
+//		}
+//	}
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.genericrpg.data.IItemAttribute#toString(java.lang.Object)
+//	 */
+//	@Override
+//	public <E extends Object> String toString(E value) {
 //		if (converter!=null) {
 //			try {
-//				return converter.write(bla);
+//				return ((StringValueConverter<E>)converter).write(value);
 //			} catch (Exception e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
 //		}
-		// TODO Auto-generated method stub
-		return String.valueOf(value);
+//		// TODO Auto-generated method stub
+//		return String.valueOf(value);
+//	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.items.IItemAttribute#getConverter()
+	 */
+	@Override
+	public <T> StringValueConverter<T> getConverter() {
+		return (StringValueConverter<T>) converter;
 	}
 
 }

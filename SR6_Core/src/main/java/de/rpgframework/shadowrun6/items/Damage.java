@@ -6,7 +6,6 @@ import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.items.IDamage;
 
 /**
@@ -15,7 +14,6 @@ import de.rpgframework.shadowrun.items.IDamage;
  */
 public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implements Cloneable, IDamage {
 
-	private boolean addStrength;
 	private DamageType type;
 	private DamageElement element = DamageElement.REGULAR;
 
@@ -25,9 +23,8 @@ public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implem
 	}
 
 	//--------------------------------------------------------------------
-	public Damage(int val, boolean addStrength, DamageType type, DamageElement element) {
+	public Damage(int val, DamageType type, DamageElement element) {
 		super(SR6ItemAttribute.DAMAGE);
-		this.addStrength = addStrength;
 		this.type = type;
 		this.element = element;
 	}
@@ -36,7 +33,6 @@ public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implem
 	public Damage(Damage copy, List<Modification> mods) {
 		super(SR6ItemAttribute.DAMAGE);
 		super.modifications.addAll(mods);
-		addStrength = copy.addStrength();
 		type        = copy.getType();
 		element     = copy.getElement();
 		modifications.addAll(mods);
@@ -54,11 +50,6 @@ public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implem
     }
 
 	//--------------------------------------------------------------------
-	public boolean addStrength() {
-		return addStrength;
-	}
-
-	//--------------------------------------------------------------------
 	public int getValue() {
 		return Math.round(value);
 	}
@@ -71,12 +62,7 @@ public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implem
 	//--------------------------------------------------------------------
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
-		if (addStrength) {
-			buf.append("("+ShadowrunAttribute.STRENGTH.getShortName()+"/2");
-			buf.append("+"+getModifiedValue());
-			buf.append(")");
-		} else
-			buf.append(String.valueOf(getModifiedValue()));
+		buf.append(String.valueOf(getModifiedValue()));
 
 		buf.append(type.getShortName());
 
@@ -85,22 +71,6 @@ public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implem
 		}
 
 		return buf.toString();
-	}
-
-	//--------------------------------------------------------------------
-	/**
-	 * @return the addStrength
-	 */
-	public boolean isAddStrength() {
-		return addStrength;
-	}
-
-	//--------------------------------------------------------------------
-	/**
-	 * @param addStrength the addStrength to set
-	 */
-	public void setAddStrength(boolean addStrength) {
-		this.addStrength = addStrength;
 	}
 
 	//--------------------------------------------------------------------

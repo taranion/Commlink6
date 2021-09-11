@@ -35,7 +35,7 @@ import de.rpgframework.shadowrun6.items.WeaponData;
  * @author prelle
  *
  */
-public class LoadDataTest {
+public class LoadSR6DataTest {
 	
 	//-------------------------------------------------------------------
 	@BeforeClass
@@ -60,8 +60,11 @@ public class LoadDataTest {
 		assertNotNull(axe.getAttribute(SR6ItemAttribute.PRICE));
 //		assertEquals(500, axe.getAttribute(SR6ItemAttribute.PRICE).getModifiedValue());
 		assertNotNull(axe.getAttribute(SR6ItemAttribute.DAMAGE));
-		assertFalse(axe.getAttribute(SR6ItemAttribute.DAMAGE).isFormula());
+		assertTrue(axe.getAttribute(SR6ItemAttribute.DAMAGE).getFormula().isResolved());
 		assertEquals("5P", axe.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue());
+		assertNotNull("Formula missing" ,   axe.getAttribute(SR6ItemAttribute.DAMAGE).getFormula());
+		System.out.println("loadDataTest: "+axe.getAttribute(SR6ItemAttribute.DAMAGE).getFormula());
+		assertTrue(   axe.getAttribute(SR6ItemAttribute.DAMAGE).getFormula().isResolved() );
 		assertNotNull(   (Damage)axe.getAttribute(SR6ItemAttribute.DAMAGE).getValue() );
 		assertEquals(5,  ((Damage)axe.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getModifiedValue() );
 		
@@ -70,7 +73,7 @@ public class LoadDataTest {
 	}
 
 	//-------------------------------------------------------------------
-	@Test
+//	@Test
 	public void loadSingleWeapons() {
 		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "defiance_super_shock");
 		assertNotNull(item);
@@ -101,7 +104,7 @@ public class LoadDataTest {
 	}
 
 	//-------------------------------------------------------------------
-	@Test
+//	@Test
 	public void loadDualWeapons() {
 		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "yamaha_pulsar_2");
 		assertNotNull(item);
@@ -117,7 +120,6 @@ public class LoadDataTest {
 	}
 
 	//-------------------------------------------------------------------
-	@Test
 	public void exportSkillSpecializations() {
 		StringBuffer buf = new StringBuffer();
 		StringBuffer de = new StringBuffer();

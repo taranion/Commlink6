@@ -1,12 +1,16 @@
 package de.rpgframework.shadowrun6.modifications;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.StringValueConverter;
 
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
+import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
@@ -16,6 +20,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.persist.ItemAttributeConverter;
 import de.rpgframework.shadowrun6.persist.ReferenceException;
 import de.rpgframework.shadowrun6.persist.RuleConverter;
 import de.rpgframework.shadowrun6.persist.SkillSpecializationConverter;
@@ -33,7 +38,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ELEMENT("Element"),
 	GEAR(ItemTemplate.class),
 	HOOK(ItemHook.class, 0),
-	ITEM_ATTRIBUTE("ItemAttribute"),
+	ITEM_ATTRIBUTE(new ItemAttributeConverter()),
 	MAGIC_RESO("MagicOrResonance"),
 	MENTOR_SPIRIT("Mentorspirit"),
 	METATYPE(SR6MetaType.class),
@@ -45,6 +50,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SKILL(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILLSPECIALIZATION(new SkillSpecializationConverter()),
 	SLOT("ItemHook"),
+	SPELL(ASpell.class),
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
 	SPIRIT("Spirit"),
 	SPRITE("Sprite"),
@@ -77,8 +83,28 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	}
 	
 	//-------------------------------------------------------------------
+	private static StringValueConverter getConverter(Class cls, String enumName) {
+		try {
+			Field field = cls.getDeclaredField(enumName);
+			if (field==null)
+				return null;
+			AttribConvert attrib = field.getAnnotation(AttribConvert.class);
+			if (attrib!=null && attrib.value()!=null) {
+				StringValueConverter ret = attrib.value().getDeclaredConstructor().newInstance();
+				return ret;
+			}
+		} catch (NoSuchFieldException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;		
+	}
+	
+	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public static <T> T resolve(ShadowrunReference type, String key) {
+		
 		if (type.typeClass!=null) {
 			return (T) Shadowrun6Core.getItem(type.typeClass, key);
 		} else if (type.enumType!=null) {
@@ -90,6 +116,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 				e.printStackTrace();
 			}
 		} else {
+			if (type.converter==null)
+				throw new RuntimeException("No type class nor StringConverter set for type "+type);
 			try {
 				return (T) type.converter.read(key);
 			} catch (Exception e) {

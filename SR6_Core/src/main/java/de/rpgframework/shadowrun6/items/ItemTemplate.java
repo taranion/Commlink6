@@ -59,7 +59,7 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 	//-------------------------------------------------------------------
 	@Override
 	public void validate() {
-		attributes.clear();
+//		attributes.clear();
 		
 		setAttribute(SR6ItemAttribute.PRICE, super.price);
 
