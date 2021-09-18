@@ -115,8 +115,8 @@ public class Shadowrun6DataPlugin  {
 			logger.debug("Loaded "+list.size()+" items");
 //			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms_accessories.xml"));
 //			logger.debug("Loaded "+list.size()+" weapon accessories");
-//			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms.xml"));
-//			logger.debug("Loaded "+list.size()+" firearms");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms.xml"));
+			logger.debug("Loaded "+list.size()+" firearms");
 //			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
 //			logger.debug("Loaded "+list.size()+" NPCs");
 		} catch (Exception e) {

@@ -1,14 +1,13 @@
 package de.rpgframework.shadowrun6.items;
 
 import de.rpgframework.MultiLanguageResourceBundle;
-import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
  * @author Stefan
  *
  */
-public enum ItemHook implements Hook {
+public enum ItemHook {
 
 	MELEE_EXTERNAL,
 	FIREARMS_EXTERNAL,

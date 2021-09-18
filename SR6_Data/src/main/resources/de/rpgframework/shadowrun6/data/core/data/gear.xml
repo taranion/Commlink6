@@ -61,7 +61,7 @@
 		<attrdef id="DAMAGE"        value="$RATING/2 P" />
 		<attrdef id="ATTACK_RATING" value="$RATING/2,$RATING,$RATING/4,," />
 		<attrdef id="AVAILABILITY"  value="$RATING/3 L" />
-		<weapon skill="close_combat" spec="close_combat/blades" />
+		<weapon skill="athletics" spec="athletics/archery" />
 	</item>
    <item id="crossbow_light" avail="3" price="150" type="WEAPON_RANGED" subtype="CROSSBOWS">
       <weapon dmg="2P" attack="6,8,2,," ammo="4(m)" mode="SS" skill="athletics" spec="athletics/archery"/>
