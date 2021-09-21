@@ -1,7 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
@@ -19,7 +19,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
  */
 public abstract class CommonSR6CharacterGenerator extends CharacterControllerImpl<Shadowrun6Character> implements SR6CharacterGenerator {
 
-	protected static final Logger logger = LoggerFactory.getLogger("shadowrun6.gen.proc");
+	protected static final Logger logger = LogManager.getLogger("shadowrun6.gen.proc");
 
 	protected IMetatypeController meta;
 	protected SR6SkillGenerator  skill;

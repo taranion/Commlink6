@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ASkillValue;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.genericrpg.requirements.ValueRequirement;
 import de.rpgframework.shadowrun.AShadowrunSkill;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
@@ -84,6 +86,24 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 		
 		int newVal = (sVal==null)?1:(sVal.getModifiedValue()+1);
 		return newVal*5;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillController#canBeSelected(SR6Skill)
+	 */
+	@Override
+	public Possible canBeSelected(SR6Skill data) {
+		if (pointsSkills>0)
+			return Possible.TRUE;
+		if (pointsLangAndKnow>0 && (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)) {
+			return Possible.TRUE;			
+		}
+		// No points left - maybe with karma?
+		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
+		if (model.getKarmaFree()>=karma)
+			return Possible.TRUE;
+		return new Possible(new ValueRequirement(ShadowrunReference.ATTRIBUTE, "KARMA", karma));
 	}
 
 	//-------------------------------------------------------------------

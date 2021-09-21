@@ -107,7 +107,7 @@ public class Shadowrun6Core extends GenericCore {
 		try {
 			StringWriter out = new StringWriter();
 			serializer.write(character, out);
-			return out.toString().getBytes(Charset.forName("UTF-16"));
+			return out.toString().getBytes(Charset.forName("UTF-8"));
 		} catch (IOException e) {
 			logger.error("Failed generating XML for char",e);
 			StringWriter mess = new StringWriter();

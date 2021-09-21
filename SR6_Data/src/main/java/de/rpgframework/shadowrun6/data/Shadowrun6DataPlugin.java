@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.genericrpg.chargen.RuleInterpretationList;
 import de.rpgframework.genericrpg.data.ASkillValue;
 import de.rpgframework.genericrpg.data.CheckInfluence;
 import de.rpgframework.genericrpg.data.CostType;
@@ -119,6 +121,9 @@ public class Shadowrun6DataPlugin  {
 			logger.debug("Loaded "+list.size()+" firearms");
 //			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
 //			logger.debug("Loaded "+list.size()+" NPCs");
+			
+			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
+			logger.debug("Loaded "+list.size()+" rule presets");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

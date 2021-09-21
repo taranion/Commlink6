@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metatypes>
-    <metatype id="human">
+    <metatype id="human" size="175" weight="78">
         <modifications>
             <valmod ref="EDGE" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
         </modifications>
     </metatype>
 
-    <metatype id="elf">
+    <metatype id="elf" size="190" weight="80">
         <modifications>
            <valmod ref="AGILITY"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="CHARISMA" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
@@ -14,7 +14,7 @@
          </modifications>
     </metatype>
 
-    <metatype id="dwarf">
+    <metatype id="dwarf" size="120" weight="54">
         <modifications>
            <valmod ref="BODY"      type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="REACTION"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
@@ -25,7 +25,7 @@
          </modifications>
     </metatype>
 
-    <metatype id="ork">
+    <metatype id="ork" size="190" weight="128">
         <modifications>
            <valmod ref="BODY"     type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <valmod ref="STRENGTH" type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
@@ -35,7 +35,7 @@
         </modifications>
     </metatype>
 
-    <metatype id="troll">
+    <metatype id="troll" size="250" weight="300">
         <modifications>
             <valmod ref="BODY"     type="ATTRIBUTE" value="9" set="MAX" when="CREATION"/>
             <valmod ref="AGILITY"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>

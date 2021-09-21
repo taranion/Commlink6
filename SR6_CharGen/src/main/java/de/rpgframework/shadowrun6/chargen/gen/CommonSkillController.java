@@ -2,10 +2,11 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -21,7 +22,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  */
 public class CommonSkillController extends ControllerImpl<SR6Skill> implements SR6SkillController {
 	
-	protected final static Logger logger = LoggerFactory.getLogger("shadowrun6.gen.skill");
+	protected final static Logger logger = LogManager.getLogger("shadowrun6.gen.skill");
 
 	protected Shadowrun6Character model;
 
@@ -146,10 +147,31 @@ public class CommonSkillController extends ControllerImpl<SR6Skill> implements S
 		return new Possible(false);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.SelectionController#select(de.rpgframework.genericrpg.data.DataItem)
+	 */
 	@Override
-	public SR6SkillValue select(SR6Skill data) {
-		// TODO Auto-generated method stub
-		return null;
+	public OperationResult<SR6SkillValue> select(SR6Skill data) {
+		logger.debug("ENTER select("+data+")");
+		try {
+			// Ensure selecting this skill is allowed 
+			Possible possible = canBeSelected(data);
+			if (!possible.get()) {
+				logger.warn("Tried to select a skill that is not valid to select: "+possible);
+				return new OperationResult<>(possible);
+			}
+			
+			// Now add skill to character
+			SR6SkillValue ret = new SR6SkillValue(data, 1);
+			model.addSkillValue(ret);
+			
+			parent.runProcessors();
+			
+			return new OperationResult<SR6SkillValue>(ret);			
+		} finally {
+			logger.debug("LEAVE select("+data+")");			
+		}
 	}
 
 	@Override
@@ -171,7 +193,7 @@ public class CommonSkillController extends ControllerImpl<SR6Skill> implements S
 	}
 
 	@Override
-	public SR6SkillValue select(SR6Skill data, Object option) {
+	public OperationResult<SR6SkillValue> select(SR6Skill data, Object option) {
 		// TODO Auto-generated method stub
 		return null;
 	}
