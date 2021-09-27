@@ -1,6 +1,8 @@
 package de.rpgframework.shadowrun6.chargen;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,9 +16,12 @@ import org.junit.Test;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
+import de.rpgframework.genericrpg.chargen.Rule;
+import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
@@ -78,10 +83,10 @@ public class PrioSkillGenTest {
 				return false;
 			}
 			public boolean canBeFinished() {return false;}
-			public void start(Shadowrun6Character model) {}
-			public void continueCreation(Shadowrun6Character model) {}
+			public void setModel(Shadowrun6Character model) {}
 			public void finish() {}
 			public IMetatypeController getMetatypeController() {return null;}
+			public IAttributeController getAttributeController() {return null;}
 			public IQualityController getQualityController() { return null;}
 			@Override
 			public String getName() {
@@ -93,6 +98,8 @@ public class PrioSkillGenTest {
 				// TODO Auto-generated method stub
 				return null;
 			}
+			public <T> T getRule(Rule rule) {return null;}
+			public List<RuleValue> getRules() { return new ArrayList<>(); }
 		};
 		ctrl  = new PrioritySkillGenerator(charGen);
 	}

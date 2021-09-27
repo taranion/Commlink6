@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.shadowrun.chargen.gen.Priority;
+import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityType;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -17,7 +18,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PriorityCharacterGenerator.class,
 			Locale.ENGLISH, Locale.GERMAN);
 
-	protected SR6PriorityTableController prioCtrl;
+	protected PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prioCtrl;
 
 	private boolean dontProcess;
 	private boolean recalcuateHasEnoughData;
@@ -68,6 +69,11 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.NAME, };
 	}
 
+	//--------------------------------------------------------------------
+	protected PriorityTableController<Shadowrun6Character,SR6PrioritySettings> createPriorityTableController() {
+		return new PriorityTableController<Shadowrun6Character,SR6PrioritySettings>(this, SR6PrioritySettings.class);
+	}
+
 	// --------------------------------------------------------------------
 	@Override
 	protected void setupProcessChain() {
@@ -78,7 +84,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 				return;
 			}
 
-			prioCtrl = new SR6PriorityTableController(this);
+			prioCtrl = createPriorityTableController();
 			meta = new PriorityMetatypeController(this);
 			skill = new PrioritySkillGenerator(this);
 			logger.info("meta = " + getMetatypeController() + "  of " + this);
@@ -96,18 +102,18 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 	}
 
 	//-------------------------------------------------------------------
-	public SR6PriorityTableController getPriorityController() {
+	public PriorityTableController<Shadowrun6Character,SR6PrioritySettings> getPriorityController() {
 		return prioCtrl;
 	}
 
-	// --------------------------------------------------------------------
+	//-------------------------------------------------------------------
 	/**
-	 * @see org.prelle.shadowrun6.gen.CharacterGenerator#start(org.prelle.shadowrun6.ShadowrunCharacter)
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#setModel(Shadowrun6Character)
 	 */
 	@Override
-	public void start(Shadowrun6Character model) {
+	public void setModel(Shadowrun6Character model) {
 		this.model = model;
-		this.setupDone = false;
+		this.setupDone = false;		
 		SR6PrioritySettings settings = new SR6PrioritySettings();
 		settings.variant = PriorityVariant.STANDARD;
 		settings.priorities.put(PriorityType.METATYPE, Priority.B);
@@ -115,11 +121,12 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 		settings.priorities.put(PriorityType.MAGIC, Priority.C);
 		settings.priorities.put(PriorityType.SKILLS, Priority.D);
 		settings.priorities.put(PriorityType.RESOURCES, Priority.E);
+		model.addRule(Shadowrun6Rules.CHARGEN_ALLOW_INITIATION, "false");
 		model.setCharGenUsed(getId());
 		model.setCharGenSettings(settings);
 		model.setKarmaFree(50);
 		logger.info("----------------Start generator-----------------------" + toString() + "\n\n\n");
-
+		
 		try {
 			setupProcessChain();
 		} catch (Exception e) {

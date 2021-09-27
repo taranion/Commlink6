@@ -9,15 +9,18 @@ import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
 
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.jfx.wizard.WizardPageGenerator;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 
 /**
  * @author stefa
@@ -67,7 +70,10 @@ public class GenerationWizard extends Wizard {
 	
 	//-------------------------------------------------------------------
 	private void initPages() {
-		chargen= new WizardPageGenerator(this, wrapper, CharacterGeneratorRegistry.getGenerators());
+		chargen= new WizardPageGenerator(this, wrapper, 
+				CharacterGeneratorRegistry.getGenerators(),
+				Shadowrun6Core.getItemList(RuleInterpretation.class),
+				Shadowrun6Rules.values());
 		race   = new WizardPageMetatype(this, wrapper);
 //		culture= new WizardPageCulture(this, wrapper);
 //		attrib = new WizardPageAttributes(this, wrapper.getAttributeController());

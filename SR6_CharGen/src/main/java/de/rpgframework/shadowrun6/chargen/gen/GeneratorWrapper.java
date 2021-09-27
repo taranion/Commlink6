@@ -14,6 +14,9 @@ import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
+import de.rpgframework.genericrpg.chargen.Rule;
+import de.rpgframework.genericrpg.chargen.RuleValue;
+import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
@@ -119,7 +122,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 			newCtrl.addListener(callback);
 			wrapped.removeListener(callback);
 		}
-		newCtrl.continueCreation(wrapped.getModel());
+		newCtrl.setModel(wrapped.getModel());
 		wrapped = newCtrl;
 		wrapped.fireEvent(BasicControllerEvents.GENERATOR_CHANGED);
 	}
@@ -177,20 +180,38 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#start(de.rpgframework.character.RuleSpecificCharacterObject)
+	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#setModel(de.rpgframework.character.RuleSpecificCharacterObject)
 	 */
 	@Override
-	public void start(Shadowrun6Character model) {
-		wrapped.start(model);
+	public void setModel(Shadowrun6Character model) {
+		wrapped.setModel(model);
 	}
+
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#start(de.rpgframework.character.RuleSpecificCharacterObject)
+//	 */
+//	@Override
+//	public void start(Shadowrun6Character model) {
+//		wrapped.start(model);
+//	}
+//
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#continueCreation(de.rpgframework.character.RuleSpecificCharacterObject)
+//	 */
+//	@Override
+//	public void continueCreation(Shadowrun6Character model) {
+//		wrapped.continueCreation(model);
+//	}
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#continueCreation(de.rpgframework.character.RuleSpecificCharacterObject)
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getAttributeController()
 	 */
 	@Override
-	public void continueCreation(Shadowrun6Character model) {
-		wrapped.continueCreation(model);
+	public IAttributeController getAttributeController() {
+		return wrapped.getAttributeController();
 	}
 
 	//-------------------------------------------------------------------
@@ -219,6 +240,24 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	public void finish() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRule(de.rpgframework.genericrpg.chargen.Rule)
+	 */
+	@Override
+	public <T> T getRule(Rule rule) {
+		return wrapped.getRule(rule);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRules()
+	 */
+	@Override
+	public List<RuleValue> getRules() {
+		return wrapped.getRules();
 	}
 
 }

@@ -15,19 +15,11 @@ import javafx.scene.layout.VBox;
  */
 public class AttributeSection extends Section {
 
-//	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(AttributeSection.class.getName());
-
-	private SR6CharacterController control;
-
-	private AttributeTable table;
-//	private DerivedAttributeTable derived;
+	private AttributeTable<ShadowrunAttribute> table;
 
 	//-------------------------------------------------------------------
-	public AttributeSection(String title, SR6CharacterController ctrl, ScreenManagerProvider provider) {
+	public AttributeSection(String title, ScreenManagerProvider provider) {
 		super(title.toUpperCase(), null);
-		control = ctrl;
-//		if (ctrl instanceof SR6CharacterLeveller)
-//			setSettingsButton( new Button(null, new SymbolIcon("setting")) );
 
 		initComponents();
 		initLayoutNormal();
@@ -37,10 +29,7 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		table = new AttributeTable(ShadowrunAttribute.primaryValues(), (control!=null)?AttributeTable.Mode.GENERATE:AttributeTable.Mode.SHOW_ONLY);
-//		table.setController(control.getAttributeController());
-		table.setModel(control.getModel());
-//		derived = new DerivedAttributeTable(control);
+		table = new AttributeTable<ShadowrunAttribute>(ShadowrunAttribute.primaryValues());
 	}
 
 	//-------------------------------------------------------------------
@@ -61,6 +50,13 @@ public class AttributeSection extends Section {
 	private void initInteractivity() {
 //		if (getSettingsButton()!=null)
 //			getSettingsButton().setOnAction(ev -> onSettings());
+	}
+
+	//-------------------------------------------------------------------
+	public void updateController(SR6CharacterController ctrl) {
+		table.setController(ctrl.getAttributeController());
+		table.setModel(ctrl.getModel());
+		table.setMode(AttributeTable.Mode.GENERATE);
 	}
 
 	//-------------------------------------------------------------------

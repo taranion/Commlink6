@@ -12,18 +12,14 @@ import com.onexip.flexboxfx.FlexBox;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.RPGFrameworkJavaFX;
 import de.rpgframework.jfx.section.AppearanceSection;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
-import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.QualityGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 
@@ -31,10 +27,12 @@ import javafx.scene.text.TextFlow;
  * @author prelle
  *
  */
-public class BasicDataPage extends Page {
+public class BasicDataPage extends Page implements IShadowrunCharacterControllerProvider<SR6CharacterController> {
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(BasicDataPage.class.getName());
 
+	private SR6CharacterController control;
+	
 	private Section secBaseData;
 	private AppearanceSection secPortrait;
 	private FlexBox flex;
@@ -106,18 +104,33 @@ public class BasicDataPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initAttributes() {
-		PriorityCharacterGenerator charGen = new PriorityCharacterGenerator();
-		charGen.start(new Shadowrun6Character());
-		secAttrib = new AttributeSection(ResourceI18N.get(RES, "page.basicdata.section.attributes.title"), charGen, null);
+		secAttrib = new AttributeSection(ResourceI18N.get(RES, "page.basicdata.section.attributes.title"), null);
+//		((AttributeSection)secAttrib).updateController(ctrl);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initQualities() {
-		PriorityCharacterGenerator charGen = new PriorityCharacterGenerator();
-		Shadowrun6Character model = new Shadowrun6Character();
-		model.addQuality(new QualityValue(Shadowrun6Core.getItem(Quality.class, "built_tough"), 2));
-		charGen.start(model);
-		secQualities = new QualitySection(ResourceI18N.get(RES, "page.basicdata.section.qualities.title"), new QualityGenerator(charGen));
+		secQualities = new QualitySection(ResourceI18N.get(RES, "page.basicdata.section.qualities.title"));
+//		((QualitySection)secQualities).updateController(ctrl);
+	}
+	
+	//-------------------------------------------------------------------
+	public void setController(SR6CharacterController ctrl) {
+		this.control = ctrl;
+		((AttributeSection)secAttrib).updateController(ctrl);
+		((QualitySection)secQualities).updateController(ctrl);
+		((AppearanceSection)secPortrait).updateController(ctrl);
+		secAttrib.refresh();
+		secQualities.refresh();
+		secPortrait.refresh();
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterControllerProvider#getCharacterController()
+	 */
+	public SR6CharacterController getCharacterController() {
+		return control;
 	}
 	
 }

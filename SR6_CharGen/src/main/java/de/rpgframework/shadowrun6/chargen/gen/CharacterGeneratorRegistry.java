@@ -17,6 +17,9 @@ public class CharacterGeneratorRegistry {
 	static {
 		generators = new ArrayList<Class<? extends SR6CharacterGenerator>>();
 		generators.add(PriorityCharacterGenerator.class);
+		generators.add(SumToTenCharacterGenerator.class);
+		generators.add(KarmaCharacterGenerator.class);
+		generators.add(LifeModulesCharacterGenerator.class);
 	}
 
 	//-------------------------------------------------------------------

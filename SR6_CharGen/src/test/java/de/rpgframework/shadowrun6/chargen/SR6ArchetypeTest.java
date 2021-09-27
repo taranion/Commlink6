@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.shadowrun.chargen.gen.Priority;
+import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -20,7 +21,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PriorityTableController;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 
 /**
@@ -45,13 +46,13 @@ public class SR6ArchetypeTest {
 	public void setup() {
 		model = new Shadowrun6Character();
 		charGen = new PriorityCharacterGenerator();
-		charGen.start(model);
+		charGen.setModel(model);
 	}
 	
 	//-------------------------------------------------------------------
 	@Test
 	public void testIdle() {
-		SR6PriorityTableController prio = charGen.getPriorityController();
+		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		assertEquals(50, model.getKarmaFree());
 	}
 	
@@ -59,7 +60,7 @@ public class SR6ArchetypeTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testAdept() {
-		SR6PriorityTableController prio = charGen.getPriorityController();
+		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
 		prio.setPriority(PriorityType.METATYPE, Priority.C);
 		prio.setPriority(PriorityType.MAGIC, Priority.B);
