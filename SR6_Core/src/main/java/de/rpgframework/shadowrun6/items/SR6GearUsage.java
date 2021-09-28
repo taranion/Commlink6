@@ -21,6 +21,8 @@ public class SR6GearUsage extends PieceOfGearUsage<SR6UsageMode> {
 	
 	@Attribute
 	private ItemHook slot;
+	@Attribute
+	private float volume;
 
 	@Element
 	private WeaponData weapon; 
@@ -53,6 +55,15 @@ public class SR6GearUsage extends PieceOfGearUsage<SR6UsageMode> {
 	public List<? extends IGearTypeData> getTypeData() {
 		// TODO Auto-generated method stub
 		return new ArrayList<>();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * How many capacity points are used up by this item
+	 * @return the volume
+	 */
+	public float getVolume() {
+		return volume;
 	}
 
 }
