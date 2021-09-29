@@ -114,23 +114,6 @@ public enum ItemType {
 			ItemSubType.THROWERS,
 			ItemSubType.OTHER_SPECIAL
 			),
-	// START: For backward compatibility
-	WEAPON(
-			ItemSubType.CLOSE_COMBAT,
-			ItemSubType.PROJECTILES,
-			ItemSubType.TASERS,
-			ItemSubType.HOLDOUTS,
-			ItemSubType.PISTOLS_LIGHT,
-			ItemSubType.MACHINE_PISTOLS,
-			ItemSubType.PISTOLS_HEAVY,
-			ItemSubType.SUBMACHINE_GUNS,
-			ItemSubType.SHOTGUNS,
-			ItemSubType.RIFLES,
-			ItemSubType.MACHINE_GUNS,
-			ItemSubType.SPECIAL_WEAPONS,
-			ItemSubType.LAUNCHERS
-			),
-	// END: For backward compatibility
 	AMMUNITION(
 			ItemSubType.AMMUNITION,
 			ItemSubType.ROCKETS,

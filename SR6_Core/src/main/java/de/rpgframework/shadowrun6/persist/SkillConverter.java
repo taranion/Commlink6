@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.persist;
 
 import org.prelle.simplepersist.StringValueConverter;
 
+import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;

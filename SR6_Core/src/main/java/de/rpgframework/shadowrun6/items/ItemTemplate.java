@@ -8,10 +8,14 @@ import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.ElementList;
 
+import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
+import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.items.IGearTypeData;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.items.PieceOfGearEquip;
+import de.rpgframework.genericrpg.modification.EmbedModification;
+import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 
@@ -76,6 +80,23 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 			usages.add(add);
 		}
 		
+		// Validate hook identifier in modifications
+		for (Modification tmp : getModifications()) {
+			if (tmp instanceof EmbedModification) {
+				try {
+					((EmbedModification)tmp).getHook();
+					//((EmbedModification)tmp).getResolvedKey();
+				} catch (ClassCastException e) {
+					throw new DataErrorException(this, "Internal class cast error: "+e.getMessage());
+				} catch (ReferenceException e) {
+					throw new DataErrorException(this, e.getError());
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new DataErrorException(this, "Internal error: "+e.getMessage());
+				}
+				
+			}
+		}
 		
 		super.validate();
 	}

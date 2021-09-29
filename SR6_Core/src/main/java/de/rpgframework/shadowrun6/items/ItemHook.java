@@ -1,13 +1,14 @@
 package de.rpgframework.shadowrun6.items;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
  * @author Stefan
  *
  */
-public enum ItemHook {
+public enum ItemHook implements Hook {
 
 	MELEE_EXTERNAL,
 	FIREARMS_EXTERNAL,
@@ -77,6 +78,10 @@ public enum ItemHook {
 	}
 	
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.items.Hook#getName()
+	 */
+	@Override
 	public String getName() {
 		return RES.getString("itemhook."+this.name().toLowerCase());
 	}
@@ -85,6 +90,7 @@ public enum ItemHook {
 	/**
 	 * @see de.rpgframework.genericrpg.items.Hook#hasCapacity()
 	 */
+	@Override
 	public boolean hasCapacity() {
 		return hasCapacity;
 	}

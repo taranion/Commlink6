@@ -39,7 +39,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-         <!--accessorymod hook="TOP"    item="laser_sight" included="true"/-->
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
       </modifications>
       <weapon dmg="2P" attack="10,7,6,," mode="SA" ammo="16(c)" skill="firearms" spec="firearms/pistols"/>
    </item>

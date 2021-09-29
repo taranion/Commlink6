@@ -3,12 +3,14 @@ package de.rpgframework.shadowrun6.modifications;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.function.Function;
 
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.StringValueConverter;
 
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
+import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.Quality;
@@ -19,9 +21,10 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.items.ItemHook;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.persist.ItemAttributeConverter;
-import de.rpgframework.shadowrun6.persist.ReferenceException;
 import de.rpgframework.shadowrun6.persist.RuleConverter;
 import de.rpgframework.shadowrun6.persist.SkillSpecializationConverter;
 /**
@@ -39,6 +42,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	GEAR(ItemTemplate.class),
 	HOOK(ItemHook.class, 0),
 	ITEM_ATTRIBUTE(new ItemAttributeConverter()),
+	ITEMTYPE(ItemType.class,0),
+	ITEMSUBTYPE(ItemSubType.class,0),
 	MAGIC_RESO("MagicOrResonance"),
 	MENTOR_SPIRIT("Mentorspirit"),
 	METATYPE(SR6MetaType.class),
@@ -47,7 +52,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	QUALITY(Quality.class),
 	SENSE("Sense"),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
-	SKILL(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
+	SKILL(key -> Shadowrun6Core.getSkill(key)),
 	SKILLSPECIALIZATION(new SkillSpecializationConverter()),
 	SLOT("ItemHook"),
 	SPELL(ASpell.class),
@@ -61,10 +66,16 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	String typeId;
 	Class<? extends Enum<?>> enumType;
 	StringValueConverter<? extends Object> converter;
+	Function<String, ? extends DataItem> resolver;
 	
 	//-------------------------------------------------------------------
 	ShadowrunReference(StringValueConverter<? extends Object> conv) {
 		converter = conv;
+	}
+	
+	//-------------------------------------------------------------------
+	ShadowrunReference(Function<String, ? extends DataItem> resolv) {
+		resolver = resolv;
 	}
 	
 	//-------------------------------------------------------------------
@@ -104,24 +115,34 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public static <T> T resolve(ShadowrunReference type, String key) {
-		
 		if (type.typeClass!=null) {
 			return (T) Shadowrun6Core.getItem(type.typeClass, key);
 		} else if (type.enumType!=null) {
 			try {
 				Method valueOf = type.enumType.getMethod("valueOf", String.class);
 				return (T) valueOf.invoke(null, key);
+			} catch (InvocationTargetException ivte) {
+				Throwable ee = ivte.getTargetException();
+				if (ee instanceof IllegalArgumentException) {
+					throw new ReferenceException(type, key);
+				}
+				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-1:");
+				ivte.printStackTrace();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-1:");
 				e.printStackTrace();
 			}
+		} else if (type.resolver!=null) {
+			return (T)type.resolver.apply(key);
 		} else {
 			if (type.converter==null)
-				throw new RuntimeException("No type class nor StringConverter set for type "+type);
+				throw new RuntimeException("Neither class, nor enumType nor converter  class nor StringConverter set for type "+type);
 			try {
 				return (T) type.converter.read(key);
+			} catch (ReferenceException e) {
+				throw new ReferenceException(type, key);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-2:");
 				e.printStackTrace();
 			}
 		}

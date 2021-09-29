@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.chargen.RuleInterpretationList;
 import de.rpgframework.genericrpg.data.ASkillValue;
 import de.rpgframework.genericrpg.data.CheckInfluence;
 import de.rpgframework.genericrpg.data.CostType;
+import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.IAttribute;
@@ -22,19 +23,18 @@ import de.rpgframework.genericrpg.items.IUsageMode;
 import de.rpgframework.genericrpg.items.PieceOfGearEquip;
 import de.rpgframework.genericrpg.items.PieceOfGearUsage;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
+import de.rpgframework.shadowrun.ANPC;
+import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerList;
-import de.rpgframework.shadowrun.ANPC;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityList;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureList;
 import de.rpgframework.shadowrun.SpellList;
 import de.rpgframework.shadowrun6.ActionList;
 import de.rpgframework.shadowrun6.MetaTypeList;
-import de.rpgframework.shadowrun6.NPCList;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -97,36 +97,42 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		try {
-			list = Shadowrun6Core.loadDataItems(SkillList.class, SR6Skill.class, core, clazz.getResourceAsStream("core/data/skills.xml"));
+			list = Shadowrun6Core.loadDataItems(SkillList.class, SR6Skill.class, core, clazz,"core/data/skills.xml");
 			logger.debug("Loaded "+list.size()+" skills");
-			list = Shadowrun6Core.loadDataItems(SpellFeatureList.class, SpellFeature.class, core, clazz.getResourceAsStream("core/data/spellfeatures.xml"));
+			list = Shadowrun6Core.loadDataItems(SpellFeatureList.class, SpellFeature.class, core, clazz, "core/data/spellfeatures.xml");
 			logger.debug("Loaded "+list.size()+" spell features");
-			list = Shadowrun6Core.loadDataItems(SpellList.class, ASpell.class, core, clazz.getResourceAsStream("core/data/spells.xml"));
+			list = Shadowrun6Core.loadDataItems(SpellList.class, ASpell.class, core, clazz, "core/data/spells.xml");
 			logger.debug("Loaded "+list.size()+" spells");
-			list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, core, clazz.getResourceAsStream("core/data/adeptpowers.xml"));
-			logger.debug("Loaded "+list.size()+" adept powers");
-			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, core, clazz.getResourceAsStream("core/data/qualities.xml"));
+//			list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, core, clazz.getResourceAsStream("core/data/adeptpowers.xml"));
+//			logger.debug("Loaded "+list.size()+" adept powers");
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, core, clazz, "core/data/qualities.xml");
 			logger.debug("Loaded "+list.size()+" qualities");
-			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, core, clazz.getResourceAsStream("core/data/metatypes.xml"));
+			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, core, clazz, "core/data/metatypes.xml");
 			logger.debug("Loaded "+list.size()+" metatypes");
-			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz.getResourceAsStream("core/data/actions_minor.xml"));
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz, "core/data/actions_minor.xml");
 			logger.debug("Loaded "+list.size()+" minor actions");
-			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz.getResourceAsStream("core/data/actions_major.xml"));
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz, "core/data/actions_major.xml");
 			logger.debug("Loaded "+list.size()+" major actions");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear.xml"));
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz, "core/data/gear.xml");
 			logger.debug("Loaded "+list.size()+" items");
-//			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms_accessories.xml"));
-//			logger.debug("Loaded "+list.size()+" weapon accessories");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz.getResourceAsStream("core/data/gear_firearms.xml"));
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms_accessories.xml");
+			logger.debug("Loaded "+list.size()+" weapon accessories");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms.xml");
 			logger.debug("Loaded "+list.size()+" firearms");
+//			logger.fatal("Stop here");
+//			System.exit(1);
 //			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
 //			logger.debug("Loaded "+list.size()+" NPCs");
 			
 			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 			logger.debug("Loaded "+list.size()+" rule presets");
+		} catch (DataErrorException e) {
+			logger.error("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
+			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
+			System.exit(1);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Failed loading data",e);
+			System.exit(1);
 		}
 	}
 	

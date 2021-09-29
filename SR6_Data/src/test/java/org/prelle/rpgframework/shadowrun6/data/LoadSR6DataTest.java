@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
+import de.rpgframework.genericrpg.items.OperationMode;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.items.Availability;
@@ -104,7 +105,18 @@ public class LoadSR6DataTest {
 	}
 
 	//-------------------------------------------------------------------
-//	@Test
+	@Test
+	public void detectModes() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "laser_sight");
+		assertNotNull(item);
+		
+		List<OperationMode> modes = item.getOperationModes();
+		assertNotNull(modes);
+		assertEquals(2, modes.size());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
 	public void loadDualWeapons() {
 		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "yamaha_pulsar_2");
 		assertNotNull(item);

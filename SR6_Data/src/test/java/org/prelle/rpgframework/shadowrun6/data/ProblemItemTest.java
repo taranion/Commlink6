@@ -62,7 +62,32 @@ public class ProblemItemTest {
 		
 		int[] expected = new int[] {4,7,2,0,0};
 		assertArrayEquals(expected, carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getValue());
+		assertArrayEquals(expected, carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());		
+	}
+
+	//-------------------------------------------------------------------
+	/** Archetype for a weapon with accessories included in the stats */
+	@Test
+	public void loadAresLightFire() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "ares_light_fire_70");
+		assertNotNull(item);
+		assertEquals(0, item.getChoices().size());
+		
+		// New create an item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item);
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+//		GearTool.recalculate("", carried);
+//		
+//		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getDistributed());
+//		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
+		assertEquals(350, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		
+		int[] expected = new int[] {10,7,6,0,0};
+		assertArrayEquals(expected, carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getValue());
 		assertArrayEquals(expected, carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
+		
 		
 	}
 
