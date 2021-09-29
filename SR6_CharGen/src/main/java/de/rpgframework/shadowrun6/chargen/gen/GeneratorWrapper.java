@@ -32,11 +32,12 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	private static Logger logger = LoggerFactory.getLogger(GeneratorWrapper.class);
 	
+	private Shadowrun6Character cached;
 	private SR6CharacterGenerator wrapped;
 
 	//-------------------------------------------------------------------
-	public GeneratorWrapper(SR6CharacterGenerator wrapped) {
-		this.wrapped = wrapped;
+	public GeneratorWrapper(Shadowrun6Character model) {
+		this.cached = model;
 	}
 
 	//-------------------------------------------------------------------
@@ -118,15 +119,21 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	public void setWrapped(SR6CharacterGenerator newCtrl) {
 		logger.info("#################Generator changed to "+newCtrl+"\n\n\n");
 		// Move all existing listener to new controller
-		for (ControllerListener callback : new ArrayList<>(wrapped.getListener())) {
-			newCtrl.addListener(callback);
-			wrapped.removeListener(callback);
+		if (wrapped!=null) {
+			for (ControllerListener callback : new ArrayList<>(wrapped.getListener())) {
+				newCtrl.addListener(callback);
+				wrapped.removeListener(callback);
+			}
 		}
-		newCtrl.setModel(wrapped.getModel());
+		newCtrl.setModel(cached);
 		wrapped = newCtrl;
 		wrapped.fireEvent(BasicControllerEvents.GENERATOR_CHANGED);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getListener()
+	 */
 	@Override
 	public Collection<ControllerListener> getListener() {
 		return wrapped.getListener();

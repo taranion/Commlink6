@@ -33,7 +33,7 @@ public class BasicDataPage extends Page implements IShadowrunCharacterController
 
 	private SR6CharacterController control;
 	
-	private Section secBaseData;
+	private BasicDataSection secBaseData;
 	private AppearanceSection secPortrait;
 	private FlexBox flex;
 	private Section secAttrib;
@@ -91,7 +91,7 @@ public class BasicDataPage extends Page implements IShadowrunCharacterController
 	
 	//-------------------------------------------------------------------
 	private void initBaseData() {
-		secBaseData = new BasicDataSection();
+		secBaseData = new BasicDataSection(ResourceI18N.get(RES, "page.basicdata.section.basic.title"));
 		secBaseData.setMaxHeight(Double.MAX_VALUE);
 	}
 	
@@ -117,9 +117,11 @@ public class BasicDataPage extends Page implements IShadowrunCharacterController
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		this.control = ctrl;
+		((BasicDataSection)secBaseData).updateController(ctrl);
 		((AttributeSection)secAttrib).updateController(ctrl);
 		((QualitySection)secQualities).updateController(ctrl);
 		((AppearanceSection)secPortrait).updateController(ctrl);
+		secBaseData.refresh();
 		secAttrib.refresh();
 		secQualities.refresh();
 		secPortrait.refresh();

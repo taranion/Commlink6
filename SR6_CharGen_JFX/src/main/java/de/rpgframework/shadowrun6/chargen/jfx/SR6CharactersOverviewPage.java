@@ -25,7 +25,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
  */
 public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	
-	private final static Logger logger = LogManager.getLogger(SR6CharactersOverviewPage.class);
+	private final static Logger logger = LogManager.getLogger(SR6CharactersOverviewPage.class.getPackageName());
 
 	//-------------------------------------------------------------------
 
@@ -35,8 +35,12 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 */
 	@Override
 	protected CharacterViewLayout createCharacterAppLayout() {
-		logger.debug("##############createCharacterAppLayout");
-		return new SR6CharacterViewLayout();
+		logger.debug("ENTER: createCharacterAppLayout");
+		try {
+			return new SR6CharacterViewLayout();
+		} finally {
+			logger.debug("LEAVE: createCharacterAppLayout");			
+		}
 //		try {
 //			return ScreenLoader.loadMainScreen();
 //		} catch (Exception e) {

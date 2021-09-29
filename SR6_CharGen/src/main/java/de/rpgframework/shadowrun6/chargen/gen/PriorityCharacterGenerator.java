@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.chargen.gen.Priority;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityType;
@@ -13,6 +14,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  * @author prelle
  *
  */
+@GeneratorId("prio")
 public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 
 	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PriorityCharacterGenerator.class,
@@ -112,6 +114,13 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 	 */
 	@Override
 	public void setModel(Shadowrun6Character model) {
+//		try {
+//			throw new RuntimeException("TRrace");
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+		
 		this.model = model;
 		this.setupDone = false;		
 		SR6PrioritySettings settings = new SR6PrioritySettings();

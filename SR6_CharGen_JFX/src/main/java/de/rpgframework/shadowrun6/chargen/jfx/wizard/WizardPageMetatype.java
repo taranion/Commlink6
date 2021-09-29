@@ -154,11 +154,21 @@ public class WizardPageMetatype extends WizardPage {
 		tfSize.textProperty().addListener( (ov,o,n) -> {
 			try {
 				int size = Integer.parseInt(n);
-//				charGen.getModel().setSize(size);
+				charGen.getModel().setSize(size);
 				tfSize.getStyleClass().remove("invalid");
 			} catch (NumberFormatException e) {
 				if (!tfSize.getStyleClass().contains("invalid"))
 					tfSize.getStyleClass().add("invalid");
+			}
+		});
+		tfWeight.textProperty().addListener( (ov,o,n) -> {
+			try {
+				int weight = Integer.parseInt(n);
+				charGen.getModel().setWeight(weight);
+				tfWeight.getStyleClass().remove("invalid");
+			} catch (NumberFormatException e) {
+				if (!tfWeight.getStyleClass().contains("invalid"))
+					tfWeight.getStyleClass().add("invalid");
 			}
 		});
 	}

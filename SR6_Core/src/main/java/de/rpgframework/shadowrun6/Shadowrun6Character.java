@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6;
 
+import org.prelle.simplepersist.Element;
 import org.prelle.simplepersist.Root;
 
 import de.rpgframework.character.Gender;
@@ -15,6 +16,9 @@ import de.rpgframework.shadowrun.ShadowrunCharacter;
 @Root(name="sr6char")
 public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillValue> implements RuleSpecificCharacterObject<ShadowrunAttribute> {
 
+	@Element
+	private int heat;
+	
 	//-------------------------------------------------------------------
 	public Shadowrun6Character() {
 		gender = Gender.MALE;
@@ -44,6 +48,22 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 				
 		String p1 = (meta!=null)?meta.getName():"?";
 		return p1;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the heat
+	 */
+	public int getHeat() {
+		return heat;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param heat the heat to set
+	 */
+	public void setHeat(int heat) {
+		this.heat = Math.max(0,heat);
 	}
 
 }

@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.SumToTenPriorityTableController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -11,6 +12,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  * @author stefa
  *
  */
+@GeneratorId("sumto10")
 public class SumToTenCharacterGenerator extends PriorityCharacterGenerator {
 
 	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(SumToTenCharacterGenerator.class,

@@ -1,16 +1,17 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.prelle.javafx.AlertManager;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
-import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.Page;
 
 import de.rpgframework.character.CharacterIOException;
+import de.rpgframework.core.BabylonEventBus;
+import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
@@ -18,14 +19,11 @@ import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
-import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -61,9 +59,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	@Override
 	public void startCreation() {
 		logger.warn("ENTER: Start creation");
-		PriorityCharacterGenerator gen = new PriorityCharacterGenerator();
-		GeneratorWrapper wrapper = new GeneratorWrapper(gen);
-		gen.setModel(new Shadowrun6Character());
+		GeneratorWrapper wrapper = new GeneratorWrapper(new Shadowrun6Character());
 		page.setController(wrapper);
 		//skillPage.setController(wrapper);
 		logger.warn("Create wizard for "+wrapper);
@@ -73,13 +69,13 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			logger.info("Wizard closed via "+close);
 			//		controller.refresh();
 			if (close==CloseType.FINISH) {
-				gen.finish();
+				wrapper.finish();
 				try {
-					logger.debug("Call save() on "+gen.getClass());
-					gen.save(Shadowrun6Core.save(gen.getModel()));
+					logger.debug("Call save() on "+wrapper.getClass());
+					wrapper.save(Shadowrun6Core.save(wrapper.getModel()));
 					return;
 				} catch (CharacterIOException e) {
-					super.showCharacterIOException(e, gen.getModel());
+					super.showCharacterIOException(e, wrapper.getModel());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -102,19 +98,25 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	@Override
 	public void continueCreation(Shadowrun6Character model) {
 		logger.info("Continue creation");
+		GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model);
 		logger.warn("ToDo: Detect previously used generator");
-		PriorityCharacterGenerator gen = new PriorityCharacterGenerator();
-		GeneratorWrapper wrapper = new GeneratorWrapper(gen);
-		wrapper.setModel((Shadowrun6Character) model);
+		try {
+			SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator( model.getCharGenUsed() );
+			wrapper.setWrapped(charGen);
+		} catch (Exception e) {
+			logger.fatal("Error creating generator '"+model.getCharGenUsed(),e);
+			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Internal error creating character generator instance");
+			return;
+		}
 		page.setController(wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
-		CloseType close = getAppLayout().getApplication().showAndWait(wizard);
+		CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
 		logger.info("Wizard closed via "+close);
 //		controller.refresh();
 		if (close==CloseType.FINISH) {
-			gen.finish();
+			wrapper.finish();
 			try {
-				gen.save(Shadowrun6Core.save((Shadowrun6Character) model));
+				wrapper.save(Shadowrun6Core.save((Shadowrun6Character) model));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

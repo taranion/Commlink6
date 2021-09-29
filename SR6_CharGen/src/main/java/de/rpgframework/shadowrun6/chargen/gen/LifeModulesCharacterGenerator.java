@@ -3,12 +3,14 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 
 /**
  * @author stefa
  *
  */
+@GeneratorId("life")
 public class LifeModulesCharacterGenerator extends CommonSR6CharacterGenerator {
 
 	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(LifeModulesCharacterGenerator.class,
