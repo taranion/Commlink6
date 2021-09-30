@@ -116,13 +116,6 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	 */
 	@Override
 	public void setModel(Shadowrun6Character model) {
-//		try {
-//			throw new RuntimeException("TRrace");
-//		} catch (Exception e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-		
 		this.model = model;
 		this.setupDone = false;		
 		SR6PrioritySettings settings = new SR6PrioritySettings();
@@ -137,7 +130,6 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		model.setCharGenSettings(settings);
 		model.setKarmaFree(50);
 		logger.info("----------------Start generator-----------------------" + toString() + "\n\n\n");
-		logger.info("Settings = "+settings);
 		
 		try {
 			setupProcessChain();
