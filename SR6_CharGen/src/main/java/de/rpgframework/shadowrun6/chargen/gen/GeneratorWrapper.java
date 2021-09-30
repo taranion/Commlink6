@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
@@ -30,7 +30,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  */
 public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrapper<Shadowrun6Character, SR6CharacterGenerator> {
 
-	private static Logger logger = LoggerFactory.getLogger(GeneratorWrapper.class);
+	private static Logger logger = LogManager.getLogger(GeneratorWrapper.class);
 	
 	private Shadowrun6Character cached;
 	private SR6CharacterGenerator wrapped;
@@ -89,7 +89,9 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	 */
 	@Override
 	public Shadowrun6Character getModel() {
-		return wrapped.getModel();
+		if (wrapped!=null)
+			return wrapped.getModel();
+		return cached;
 	}
 
 	//-------------------------------------------------------------------
@@ -127,7 +129,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 		}
 		newCtrl.setModel(cached);
 		wrapped = newCtrl;
-		wrapped.fireEvent(BasicControllerEvents.GENERATOR_CHANGED);
+		wrapped.fireEvent(BasicControllerEvents.GENERATOR_CHANGED, newCtrl);
 	}
 
 	//-------------------------------------------------------------------

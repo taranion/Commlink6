@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.jfx.wizard.WizardPageGenerator;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPagePriority;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -20,6 +21,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 
 /**
@@ -34,6 +36,7 @@ public class GenerationWizard extends Wizard {
 	
 	private WizardPageGenerator<Shadowrun6Character, CommonSR6CharacterGenerator> chargen;
 //	private WizardPageProfiles profiles;
+	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
 	private WizardPageMetatype race;
 //	private WizardPageCulture culture;
 //	private WizardPageAttributes attrib;
@@ -56,6 +59,7 @@ public class GenerationWizard extends Wizard {
 		List<WizardPage> ret = new ArrayList<>();
 		for (WizardPageType type : wrapper.getWrapped().getWizardPages()) {
 			switch (type) {
+			case PRIORITIES : ret.add(  prios); break;
 //			case ATTRIBUTES : ret.add( attrib); break;
 //			case CULTURE    : ret.add(culture); break;
 			case METATYPE   : ret.add(   race); break;
@@ -74,6 +78,7 @@ public class GenerationWizard extends Wizard {
 				CharacterGeneratorRegistry.getGenerators(),
 				Shadowrun6Core.getItemList(RuleInterpretation.class),
 				Shadowrun6Rules.values());
+		prios  = new WizardPagePriority<>(this, wrapper.getWrapped(), new SR6PriorityTable( (type,prio) -> Shadowrun6Core.getPriorityTableEntry(type, prio)));
 		race   = new WizardPageMetatype(this, wrapper);
 //		culture= new WizardPageCulture(this, wrapper);
 //		attrib = new WizardPageAttributes(this, wrapper.getAttributeController());

@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
@@ -17,7 +18,13 @@ import org.apache.logging.log4j.Logger;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
+import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.GenericCore;
+import de.rpgframework.shadowrun.Priority;
+import de.rpgframework.shadowrun.PriorityTable;
+import de.rpgframework.shadowrun.PriorityTableEntry;
+import de.rpgframework.shadowrun.PriorityTableEntryList;
+import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellFeature;
 
@@ -31,17 +38,12 @@ public class Shadowrun6Core extends GenericCore {
 
 	private static MultiLanguageResourceBundle i18NResources;
 	
+	private static PriorityTable prioTable;
 	
 	//-------------------------------------------------------------------
 	static {
 		i18NResources = new MultiLanguageResourceBundle(Shadowrun6Core.class.getPackageName()+".i18n.core", Locale.ENGLISH, Locale.GERMAN);
-	}
-	
-	//-------------------------------------------------------------------
-	/**
-	 */
-	public Shadowrun6Core() {
-		// TODO Auto-generated constructor stub
+		prioTable   = new PriorityTable();
 	}
 
 	//-------------------------------------------------------------------
@@ -49,6 +51,37 @@ public class Shadowrun6Core extends GenericCore {
 		return i18NResources;
 	}
 
+	//-------------------------------------------------------------------
+	public static void loadPriorityTableEntries(DataSet plugin, InputStream in) {
+		logger.debug("Load priority table entries (Plugin="+plugin.getID()+")");
+		try {
+			PriorityTableEntryList toAdd = (PriorityTableEntryList)serializer.read(PriorityTableEntryList.class, in);
+			logger.info("Successfully loaded "+toAdd.size()+" priority table entries");
+
+			// Set translation
+			for (PriorityTableEntry tmp : toAdd) {
+//				tmp.setResourceBundle(resrc);
+//				tmp.setHelpResourceBundle(helpResources);
+//				tmp.setPlugin(plugin);
+//				if (logger.isDebugEnabled())
+//					logger.debug("* "+tmp.getName());
+
+				PriorityTableEntry mergeTo = prioTable.get(tmp.getType()).get(tmp.getPriority());
+				mergeTo.mergeFrom(tmp);
+			}
+
+		} catch (Exception e) {
+			logger.fatal("Failed deserializing priority table entries",e);
+			return;
+		}
+	}
+
+	//-------------------------------------------------------------------
+	public static PriorityTableEntry getPriorityTableEntry(PriorityType type, Priority prio) {
+		return prioTable.get(type).get(prio);
+	}
+
+	
 	//
 //	//-------------------------------------------------------------------
 //	public static <E extends DataItem> void loadDataItems(Class<? extends List<E>> cls, DataSet plugin, InputStream in) {

@@ -4,9 +4,10 @@ import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
-import de.rpgframework.shadowrun.chargen.gen.Priority;
+import de.rpgframework.shadowrun.Priority;
+import de.rpgframework.shadowrun.PriorityType;
+import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
-import de.rpgframework.shadowrun.chargen.gen.PriorityType;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 
@@ -15,7 +16,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  *
  */
 @GeneratorId("prio")
-public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
+public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator 
+	implements IPriorityGenerator<Shadowrun6Character, SR6PrioritySettings> {
 
 	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PriorityCharacterGenerator.class,
 			Locale.ENGLISH, Locale.GERMAN);
@@ -127,14 +129,15 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator {
 		settings.variant = PriorityVariant.STANDARD;
 		settings.priorities.put(PriorityType.METATYPE, Priority.B);
 		settings.priorities.put(PriorityType.ATTRIBUTE, Priority.A);
-		settings.priorities.put(PriorityType.MAGIC, Priority.C);
-		settings.priorities.put(PriorityType.SKILLS, Priority.D);
-		settings.priorities.put(PriorityType.RESOURCES, Priority.E);
-		model.addRule(Shadowrun6Rules.CHARGEN_ALLOW_INITIATION, "false");
+		settings.priorities.put(PriorityType.MAGIC, Priority.E);
+		settings.priorities.put(PriorityType.SKILLS, Priority.C);
+		settings.priorities.put(PriorityType.RESOURCES, Priority.D);
+//		model.addRule(Shadowrun6Rules.CHARGEN_ALLOW_INITIATION, "false");
 		model.setCharGenUsed(getId());
 		model.setCharGenSettings(settings);
 		model.setKarmaFree(50);
 		logger.info("----------------Start generator-----------------------" + toString() + "\n\n\n");
+		logger.info("Settings = "+settings);
 		
 		try {
 			setupProcessChain();

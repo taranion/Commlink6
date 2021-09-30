@@ -27,6 +27,8 @@ import de.rpgframework.shadowrun.ANPC;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerList;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.MagicOrResonanceTypeList;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityList;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -119,6 +121,9 @@ public class Shadowrun6DataPlugin  {
 			logger.debug("Loaded "+list.size()+" weapon accessories");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms.xml");
 			logger.debug("Loaded "+list.size()+" firearms");
+			list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, core, clazz,"core/data/magicOrResonance.xml");
+			logger.debug("Loaded "+list.size()+" magic or resonance entries");
+			Shadowrun6Core.loadPriorityTableEntries(core, clazz.getResourceAsStream("core/data/priorities.xml"));
 //			logger.fatal("Stop here");
 //			System.exit(1);
 //			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));

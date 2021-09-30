@@ -136,6 +136,7 @@ public class WizardPageMetatype extends WizardPage {
 				logger.error(charGen.getClass()+".getMetatypeController returns null  (internal "+charGen.getWrapped()+" ) of "+charGen);
 			} else
 			ctrl.select(n);
+			ctrl.randomizeSizeWeight();
 //			ctrl.rollGender();
 			refresh();
 		});
@@ -143,10 +144,11 @@ public class WizardPageMetatype extends WizardPage {
 		btnRoll.setOnAction(ev -> {
 			logger.info("Roll");
 			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
+			ctrl.roll();
 //			ctrl.rollEyes();
 //			ctrl.rollGender();
 //			ctrl.rollHair();
-//			ctrl.rollSizeAndWeight();
+			ctrl.randomizeSizeWeight();
 			refresh();
 		});
 		

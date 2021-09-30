@@ -4,40 +4,35 @@
 
 	<magicreson id="magician" magic="true" spells="true" cost="30">
 		<modifications>
-			<qualitymod ref="magician" />
-            <allowmod skill="astral" />
-            <allowmod skill="conjuring" />
-            <allowmod skill="enchanting" />
-            <allowmod skill="sorcery" />
+            <allowmod type="SKILL" ref="astral" />
+            <allowmod type="SKILL" ref="conjuring" />
+            <allowmod type="SKILL" ref="enchanting" />
+            <allowmod type="SKILL" ref="sorcery" />
 		</modifications>
 	</magicreson>
 
 	<magicreson id="mysticadept" magic="true" spells="true" powers="true" paysPowers="true" cost="35">
 		<modifications>
-			<qualitymod ref="mysticadept" />
-            <allowmod skill="conjuring" />
-            <allowmod skill="enchanting" />
-            <allowmod skill="sorcery" />
+            <allowmod type="SKILL" ref="conjuring" />
+            <allowmod type="SKILL" ref="enchanting" />
+            <allowmod type="SKILL" ref="sorcery" />
 		</modifications>
 	</magicreson>
 
 	<magicreson id="technomancer" resonance="true" cost="15">
 		<modifications>
-			<qualitymod ref="technomancer" />
-			<allowmod skill="tasking" />
+			<allowmod type="SKILL" ref="tasking" />
 		</modifications>
 	</magicreson>
 
 	<magicreson id="adept" magic="true" powers="true" paysPowers="false" cost="20">
 		<modifications>
-			<qualitymod ref="adept" />
 		</modifications>
 	</magicreson>
 
 	<magicreson id="aspectedmagician" magic="true" spells="true" aspected="true" cost="15">
 		<modifications>
-			<qualitymod ref="aspectedmagician" />
-            <allowmod skill="astral" />
+            <allowmod type="SKILL" ref="astral" />
 		</modifications>
 	</magicreson>
 

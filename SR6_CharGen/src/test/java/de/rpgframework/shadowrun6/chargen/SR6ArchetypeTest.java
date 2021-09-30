@@ -12,9 +12,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.shadowrun.chargen.gen.Priority;
+import de.rpgframework.shadowrun.Priority;
+import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
-import de.rpgframework.shadowrun.chargen.gen.PriorityType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;

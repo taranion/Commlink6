@@ -22,6 +22,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
 
@@ -60,8 +61,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	public void startCreation() {
 		logger.warn("ENTER: Start creation");
 		GeneratorWrapper wrapper = new GeneratorWrapper(new Shadowrun6Character());
-		page.setController(wrapper);
-		//skillPage.setController(wrapper);
+		wrapper.setWrapped(new PriorityCharacterGenerator());
 		logger.warn("Create wizard for "+wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
 		while (true) {
