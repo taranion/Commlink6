@@ -6,6 +6,8 @@ import org.prelle.simplepersist.Root;
 import de.rpgframework.character.Gender;
 import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 
@@ -22,6 +24,12 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public Shadowrun6Character() {
 		gender = Gender.MALE;
+		
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
+			attributes.add(new AttributeValue<ShadowrunAttribute>(key, 1));
+		}
+		attributes.add(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.MAGIC, 0));
+		attributes.add(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.RESONANCE, 0));
 	}
 
 	//-------------------------------------------------------------------
@@ -64,6 +72,15 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	 */
 	public void setHeat(int heat) {
 		this.heat = Math.max(0,heat);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.ShadowrunCharacter#getMagicOrResonanceType()
+	 */
+	@Override
+	public MagicOrResonanceType getMagicOrResonanceType() {
+		return Shadowrun6Core.getItem(MagicOrResonanceType.class, magicOrResonance);
 	}
 
 }

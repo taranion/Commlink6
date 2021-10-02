@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.jfx.wizard.WizardPageGenerator;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAttributes;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPagePriority;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -38,8 +39,7 @@ public class GenerationWizard extends Wizard {
 //	private WizardPageProfiles profiles;
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
 	private WizardPageMetatype race;
-//	private WizardPageCulture culture;
-//	private WizardPageAttributes attrib;
+	private WizardPageAttributes attrib;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 
 	//-------------------------------------------------------------------
@@ -60,7 +60,7 @@ public class GenerationWizard extends Wizard {
 		for (WizardPageType type : wrapper.getWrapped().getWizardPages()) {
 			switch (type) {
 			case PRIORITIES : ret.add(  prios); break;
-//			case ATTRIBUTES : ret.add( attrib); break;
+			case ATTRIBUTES : ret.add( attrib); break;
 //			case CULTURE    : ret.add(culture); break;
 			case METATYPE   : ret.add(   race); break;
 //			case RECOMMENDER: ret.add(profiles); break;
@@ -81,7 +81,7 @@ public class GenerationWizard extends Wizard {
 		prios  = new WizardPagePriority<>(this, wrapper.getWrapped(), new SR6PriorityTable( (type,prio) -> Shadowrun6Core.getPriorityTableEntry(type, prio)));
 		race   = new WizardPageMetatype(this, wrapper);
 //		culture= new WizardPageCulture(this, wrapper);
-//		attrib = new WizardPageAttributes(this, wrapper.getAttributeController());
+		attrib = new WizardPageAttributes(this, wrapper.getWrapped());
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		name   = new WizardPageName<>(this, wrapper);
 		

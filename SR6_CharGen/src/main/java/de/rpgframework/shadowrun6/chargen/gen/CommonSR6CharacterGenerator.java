@@ -30,7 +30,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	protected static final Logger logger = LogManager.getLogger("shadowrun6.gen.proc");
 
 	protected IMetatypeController meta;
-//	protected SR6AttributeGenerator attributes;
+	protected CommonAttributeGenerator attributes;
 	protected SR6SkillGenerator skill;
 	protected IQualityController qualities;
 
@@ -158,7 +158,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	 */
 	@Override
 	public IAttributeController getAttributeController() {
-		return null;
+		return attributes;
 	}
 
 	// -------------------------------------------------------------------

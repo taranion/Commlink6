@@ -7,6 +7,7 @@ import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
+import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -89,13 +90,14 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			}
 
 			prioCtrl = createPriorityTableController();
+			attributes = new PriorityAttributeGenerator(this);
 			meta = new PriorityMetatypeController(this);
 			skill = new PrioritySkillGenerator(this);
 			logger.info("meta = " + getMetatypeController() + "  of " + this);
 
 			processChain.add(prioCtrl);
 			processChain.add(meta);
-			//processChain.add(attr);
+			processChain.add(attributes);
 			processChain.add(skill);
 
 			setupDone = true;
@@ -137,5 +139,23 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			// TODO Auto-generated catch block
 			logger.error("Failed on process chain", e);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator#getSettings()
+	 */
+	@Override
+	public SR6PrioritySettings getSettings() {		
+		return model.getCharGenSettings(SR6PrioritySettings.class);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator#getPriorityAttributeController()
+	 */
+	@Override
+	public PriorityAttributeController getPriorityAttributeController() {
+		return (PriorityAttributeController) super.attributes;
 	}
 }
