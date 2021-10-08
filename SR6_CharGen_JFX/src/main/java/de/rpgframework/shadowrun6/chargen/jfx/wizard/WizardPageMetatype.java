@@ -71,10 +71,15 @@ public class WizardPageMetatype extends WizardPage {
 		contentPane.setId("species");
 		contentPane.setImageConverter(new Function<SR6MetaType,Image>(){
 			public Image apply(SR6MetaType value) {	
-				InputStream in = CommonShadowrunJFXResourceHook.class.getResourceAsStream("images/metatypes/metatype_"+value.getId()+".png");
+				String name = (value.getVariantOf()==null)
+						?
+								"images/metatypes/metatype_"+value.getId()+".jpg"
+								:
+								"images/metatypes/metatype_"+value.getId()+"_"+value.getVariantOf().getId()+".jpg";
+				InputStream in = CommonShadowrunJFXResourceHook.class.getResourceAsStream(name);
 				if (in!=null)
 					return new Image(in);
-				logger.error("Missing resource "+CommonShadowrunJFXResourceHook.class.getName()+" + images/metatypes/metatype_"+value.getId()+".png");
+				logger.error("Missing resource "+CommonShadowrunJFXResourceHook.class.getName()+" + "+name);
 				return null;
 			}});
 //		contentPane.setModificationConverter((m) -> SplitterTools.getModificationString(contentPane.getSelectedItem(),m));

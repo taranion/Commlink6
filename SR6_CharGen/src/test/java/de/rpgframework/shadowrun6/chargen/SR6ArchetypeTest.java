@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.rpgframework.shadowrun6.chargen;
 
 import static org.junit.Assert.assertEquals;
@@ -12,8 +9,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityType;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
+import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -73,6 +74,11 @@ public class SR6ArchetypeTest {
 		assertNotNull("No metatype controller found", charGen.getMetatypeController());
 		charGen.getMetatypeController().canBeSelected(human);
 		charGen.getMetatypeController().select(human);
+		
+		PriorityAttributeController attribs = (PriorityAttributeController) charGen.getAttributeController();
+		AttributeValue aVal = model.getAttribute(ShadowrunAttribute.AGILITY);
+		attribs.increaseAttrib(ShadowrunAttribute.AGILITY); // 2
+		attribs.increaseAdjust(ShadowrunAttribute.BODY); // 2
 		
 		SR6SkillController skills = charGen.getSkillController();
 		OperationResult<SR6SkillValue> sVal = skills.select(Shadowrun6Core.getSkill("athletics"));

@@ -1,16 +1,19 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.util.Locale;
+import java.util.function.BiFunction;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.Priority;
+import de.rpgframework.shadowrun.PriorityTableEntry;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
  * @author prelle
@@ -25,6 +28,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 	protected PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prioCtrl;
 
+	protected BiFunction<PriorityType, Priority, PriorityTableEntry> resolver;
+
 	private boolean dontProcess;
 	private boolean recalcuateHasEnoughData;
 	private boolean hasEnoughData;
@@ -33,6 +38,10 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	//-------------------------------------------------------------------
 	public PriorityCharacterGenerator() {
 		super();
+		resolver = new BiFunction<PriorityType, Priority, PriorityTableEntry>() {
+			public PriorityTableEntry apply(PriorityType type, Priority prio) {
+				return Shadowrun6Core.getPriorityTableEntry(type, prio);
+			}};
 	}
 
 	// -------------------------------------------------------------------
@@ -76,7 +85,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 	//--------------------------------------------------------------------
 	protected PriorityTableController<Shadowrun6Character,SR6PrioritySettings> createPriorityTableController() {
-		return new PriorityTableController<Shadowrun6Character,SR6PrioritySettings>(this, SR6PrioritySettings.class);
+		return new PriorityTableController<Shadowrun6Character,SR6PrioritySettings>(this, SR6PrioritySettings.class, resolver);
 	}
 
 	// --------------------------------------------------------------------

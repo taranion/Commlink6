@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <priotable>
-	<priotableentry prio="A" type="METATYPE" adj="13">
+	<priotableentry id="metaA" prio="A" type="METATYPE" adj="13">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ADJUST" value="13"/>
+		</modifications>
 		<metaopt type="dwarf"/>
 		<metaopt type="ork"  />
 		<metaopt type="troll"/>
 	</priotableentry>
-	<priotableentry prio="B" type="METATYPE" adj="11">
+	<priotableentry id="metaB" prio="B" type="METATYPE" adj="11">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ADJUST" value="11"/>
+		</modifications>
 		<metaopt type="elf"   />
 		<metaopt type="dwarf" />
 		<metaopt type="ork"   />
 		<metaopt type="troll" />
 	</priotableentry>
-	<priotableentry prio="C" type="METATYPE" adj="9">
+	<priotableentry id="metaC" prio="C" type="METATYPE" adj="9">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ADJUST" value="9"/>
+		</modifications>
 		<metaopt type="human" />
 		<metaopt type="elf"   />
 		<metaopt type="dwarf" />
 		<metaopt type="ork"   />
 		<metaopt type="troll" />
 	</priotableentry>
-	<priotableentry prio="D" type="METATYPE" adj="4">
+	<priotableentry id="metaD" prio="D" type="METATYPE" adj="4">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ADJUST" value="4"/>
+		</modifications>
 		<metaopt type="human" />
 		<metaopt type="elf"   />
 		<metaopt type="dwarf" />
 		<metaopt type="ork"   />
 		<metaopt type="troll" />
 	</priotableentry>
-	<priotableentry prio="E" type="METATYPE" adj="1">
+	<priotableentry id="metaE" prio="E" type="METATYPE" adj="1">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ADJUST" value="1"/>
+		</modifications>
 		<metaopt type="human" />
 		<metaopt type="elf"   />
 		<metaopt type="dwarf" />
@@ -33,36 +48,61 @@
 		<metaopt type="troll" />
 	</priotableentry>
 
-	<priotableentry prio="A" type="MAGIC">
+	<priotableentry id="attribA" prio="A" type="ATTRIBUTE">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ATTRIBUTES" value="24"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="attribB" prio="B" type="ATTRIBUTE">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ATTRIBUTES" value="16"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="attribC" prio="C" type="ATTRIBUTE">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ATTRIBUTES" value="12"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="attribD" prio="D" type="ATTRIBUTE">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ATTRIBUTES" value="8"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="attribE" prio="E" type="ATTRIBUTE">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="ATTRIBUTES" value="2"/>
+		</modifications>
+	</priotableentry>
+
+	<priotableentry id="magicA" prio="A" type="MAGIC">
 		<magicopt type="magician"         value="4" />
 		<magicopt type="mysticadept"      value="4" />
 		<magicopt type="adept"            value="4" />
         <magicopt type="aspectedmagician" value="5" />
 		<magicopt type="technomancer"     value="4" />
 	</priotableentry>
-	<priotableentry prio="B" type="MAGIC">
+	<priotableentry id="magicB" prio="B" type="MAGIC">
 		<magicopt type="magician"         value="3" />
 		<magicopt type="mysticadept"      value="3" />
 		<magicopt type="adept"            value="3" />
         <magicopt type="aspectedmagician" value="4" />
 		<magicopt type="technomancer"     value="3" />
 	</priotableentry>
-	<priotableentry prio="C" type="MAGIC">
+	<priotableentry id="magicC" prio="C" type="MAGIC">
 		<magicopt type="magician"         value="2" />
 		<magicopt type="mysticadept"      value="2" />
 		<magicopt type="adept"            value="2" />
         <magicopt type="aspectedmagician" value="3" />
 		<magicopt type="technomancer"     value="2" />
 	</priotableentry>
-	<priotableentry prio="D" type="MAGIC">
+	<priotableentry id="magicD" prio="D" type="MAGIC">
 		<magicopt type="magician"         value="1" />
 		<magicopt type="mysticadept"      value="1" />
 		<magicopt type="adept"            value="1" />
         <magicopt type="aspectedmagician" value="2" />
 		<magicopt type="technomancer"     value="1" />
 	</priotableentry>
-
-	<priotableentry prio="E" type="MAGIC">
+	<priotableentry id="magicE" prio="E" type="MAGIC">
 		<magicopt type="mundane" />
 	</priotableentry>
 

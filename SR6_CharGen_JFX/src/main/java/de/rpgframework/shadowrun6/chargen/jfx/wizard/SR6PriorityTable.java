@@ -57,7 +57,7 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 		PriorityTableEntry entry = resolver.apply(PriorityType.METATYPE, prio); 
 		List<String> names = new ArrayList<>();
 		
-		entry.forEach(opt -> names.add(Shadowrun6Core.getItem(SR6MetaType.class, ((MetaTypeOption)opt).getType()).getName()));
+		entry.getOptions().forEach(opt -> names.add(Shadowrun6Core.getItem(SR6MetaType.class, ((MetaTypeOption)opt).getType()).getName()));
 		String ret = String.join(", ", names)+" ("+entry.getAdjustmentPoints()+")";
 
 		return new Label(ret);
@@ -94,7 +94,7 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 		int oldPoints = -1;
 		StringBuffer buf = null;
 		MagicOrResonanceType lastType = null;
-		for ( PriorityOption opt : entry ) {
+		for ( PriorityOption opt : entry.getOptions() ) {
 //			logger.info("*******"+opt);
 			MagicOrResonanceType type = Shadowrun6Core.getItem(MagicOrResonanceType.class, ((MagicOrResonanceOption)opt).getType() );
 			int points = ((MagicOrResonanceOption)opt).getValue();

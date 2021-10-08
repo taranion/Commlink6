@@ -100,7 +100,7 @@ public class PriorityMetatypeController extends ControllerImpl<SR6MetaType> impl
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		// TODO Auto-generated method stub
-		return null;
+		return unprocessed;
 	}
 
 }

@@ -131,6 +131,12 @@ public class Shadowrun6DataPlugin  {
 			
 			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 			logger.debug("Loaded "+list.size()+" rule presets");
+
+			logger.info("START -------------------------------Core-----------------------------------------------");
+			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "INGENTIS", "ingentis.i18n", Locale.ENGLISH, Locale.GERMAN);
+			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "ingentis/data/metatypes.xml");
+			logger.debug("Loaded "+list.size()+" metatypes");
+
 		} catch (DataErrorException e) {
 			logger.error("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());

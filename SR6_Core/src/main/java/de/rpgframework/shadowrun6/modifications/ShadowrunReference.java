@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
+import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
@@ -38,6 +39,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ALLERGY_ALLERGEN("Allergen"),
 	ALLERGY_SEVERITY("Severity"),
 	ATTRIBUTE(new AttributeConverter()),
+	CREATION_POINTS(CreatePoints.class,0),
 	ELEMENT("Element"),
 	GEAR(ItemTemplate.class),
 	HOOK(ItemHook.class, 0),
