@@ -75,8 +75,10 @@ public class GenerateExcelTest {
 			// Availability
 			createCell(row, item, 1, SR6ItemAttribute.AVAILABILITY, new AvailabilityConverter());
 			createCell(row, item, 2, SR6ItemAttribute.PRICE, null);
-			createCell(row, item, 3, SR6ItemAttribute.DAMAGE, new WeaponDamageConverter());
-			createCell(row, item, 4, SR6ItemAttribute.ATTACK_RATING, new IntegerArrayConverter());
+			if (item.getAttribute(SR6ItemAttribute.DAMAGE)!=null)
+				createCell(row, item, 3, SR6ItemAttribute.DAMAGE, new WeaponDamageConverter());
+			if (item.getAttribute(SR6ItemAttribute.ATTACK_RATING)!=null)
+				createCell(row, item, 4, SR6ItemAttribute.ATTACK_RATING, new IntegerArrayConverter());
 		}
 		
 		sheet.autoSizeColumn(0);
@@ -90,6 +92,8 @@ public class GenerateExcelTest {
 	private void createCell(Row row, ItemTemplate item, int col, SR6ItemAttribute attr, StringValueConverter<?> conv) {
 		Cell cell = row.createCell(col, CellType.STRING);
 		ItemAttributeDefinition dmgDef = item.getAttribute(attr);
+		if (dmgDef==null)
+			throw new NullPointerException("No damage definition for "+item);
 		Formula form = dmgDef.getFormula();
 		if (form.isResolved()) {
 			if (form.isObject()) {
