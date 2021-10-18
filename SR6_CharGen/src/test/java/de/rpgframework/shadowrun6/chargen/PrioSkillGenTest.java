@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
@@ -83,7 +84,7 @@ public class PrioSkillGenTest {
 				return false;
 			}
 			public boolean canBeFinished() {return false;}
-			public void setModel(Shadowrun6Character model) {}
+			public void setModel(Shadowrun6Character model, CharacterHandle handle) {}
 			public void finish() {}
 			public IMetatypeController getMetatypeController() {return null;}
 			public IAttributeController getAttributeController() {return null;}

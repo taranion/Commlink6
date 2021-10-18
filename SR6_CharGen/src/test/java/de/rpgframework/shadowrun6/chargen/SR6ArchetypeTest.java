@@ -47,7 +47,7 @@ public class SR6ArchetypeTest {
 	public void setup() {
 		model = new Shadowrun6Character();
 		charGen = new PriorityCharacterGenerator();
-		charGen.setModel(model);
+		charGen.setModel(model, null);
 	}
 	
 	//-------------------------------------------------------------------

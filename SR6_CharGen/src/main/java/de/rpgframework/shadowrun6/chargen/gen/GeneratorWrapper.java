@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.CharacterGenerator;
@@ -33,11 +34,13 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	private static Logger logger = LogManager.getLogger(GeneratorWrapper.class);
 	
 	private Shadowrun6Character cached;
+	private CharacterHandle cachedHandle;
 	private SR6CharacterGenerator wrapped;
 
 	//-------------------------------------------------------------------
-	public GeneratorWrapper(Shadowrun6Character model) {
+	public GeneratorWrapper(Shadowrun6Character model, CharacterHandle handle) {
 		this.cached = model;
+		this.cachedHandle = handle;
 	}
 
 	//-------------------------------------------------------------------
@@ -127,7 +130,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 				wrapped.removeListener(callback);
 			}
 		}
-		newCtrl.setModel(cached);
+		newCtrl.setModel(cached, cachedHandle);
 		wrapped = newCtrl;
 		wrapped.fireEvent(BasicControllerEvents.GENERATOR_CHANGED, newCtrl);
 	}
@@ -192,8 +195,8 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#setModel(de.rpgframework.character.RuleSpecificCharacterObject)
 	 */
 	@Override
-	public void setModel(Shadowrun6Character model) {
-		wrapped.setModel(model);
+	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
+		wrapped.setModel(model, handle);
 	}
 
 //	//-------------------------------------------------------------------

@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.function.BiFunction;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTableEntry;
@@ -126,8 +127,9 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#setModel(Shadowrun6Character)
 	 */
 	@Override
-	public void setModel(Shadowrun6Character model) {
+	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
 		this.model = model;
+		this.handle= handle;
 		this.setupDone = false;		
 		SR6PrioritySettings settings = new SR6PrioritySettings();
 		settings.variant = PriorityVariant.STANDARD;

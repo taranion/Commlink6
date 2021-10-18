@@ -9,6 +9,7 @@ import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.Page;
 
+import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
@@ -60,7 +61,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	@Override
 	public void startCreation() {
 		logger.warn("ENTER: Start creation");
-		GeneratorWrapper wrapper = new GeneratorWrapper(new Shadowrun6Character());
+		GeneratorWrapper wrapper = new GeneratorWrapper(new Shadowrun6Character(), null);
 		wrapper.setWrapped(new PriorityCharacterGenerator());
 		logger.warn("Create wizard for "+wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
@@ -96,9 +97,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 * @see de.rpgframework.jfx.pages.CharacterViewLayout#continueCreation(de.rpgframework.character.RuleSpecificCharacterObject)
 	 */
 	@Override
-	public void continueCreation(Shadowrun6Character model) {
+	public void continueCreation(Shadowrun6Character model, CharacterHandle handle) {
 		logger.info("Continue creation");
-		GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model);
+		GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
 		logger.warn("ToDo: Detect previously used generator");
 		try {
 			SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator( model.getCharGenUsed() );

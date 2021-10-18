@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleConfiguration;
@@ -47,8 +48,9 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#setModel(de.rpgframework.character.RuleSpecificCharacterObject)
 	 */
 	@Override
-	public void setModel(Shadowrun6Character model) {
+	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
 		super.model = model;
+		super.handle= handle;
 		if (model.getMetatype() == null)
 			model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "human"));
 		setupProcessChain();
