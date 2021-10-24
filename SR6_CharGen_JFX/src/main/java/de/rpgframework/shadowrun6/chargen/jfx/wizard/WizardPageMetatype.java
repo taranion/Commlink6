@@ -6,6 +6,8 @@ import java.util.function.Function;
 
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.NodeWithTitleSkeleton;
+import org.prelle.javafx.ResponsiveControlManager;
+import org.prelle.javafx.WindowMode;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
 import org.slf4j.Logger;
@@ -131,6 +133,13 @@ public class WizardPageMetatype extends WizardPage {
 		
 		VBox cust = new VBox(10, btnRoll, customNode1);
 		contentPane.setCustomNode1(new NodeWithTitleSkeleton(ResourceI18N.get(RES,"tab.custom"), cust));
+		
+		// Be smaller in larger screens, but higher on smaller screens
+		if (ResponsiveControlManager.getCurrentMode()==WindowMode.MINIMAL) {
+			customNode1.setStyle("-fx-max-width: 40em");
+		} else {
+			customNode1.setStyle("-fx-max-width: 12em");
+		}
 	}
 	
 	//-------------------------------------------------------------------
@@ -227,5 +236,20 @@ public class WizardPageMetatype extends WizardPage {
 //		dataScroll.setMaxHeight(Double.MAX_VALUE);
 //		tabData.setContent(dataScroll);
 //	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see org.prelle.javafx.WizardPage#setResponsiveMode(org.prelle.javafx.WindowMode)
+	 */
+	@Override
+	public void setResponsiveMode(WindowMode value) {
+		super.setResponsiveMode(value);
+		
+		if (value==WindowMode.MINIMAL) {
+			customNode1.setStyle("-fx-max-width: 40em");
+		} else {
+			customNode1.setStyle("-fx-max-width: 12em");
+		}
+	}
 
 }
