@@ -13,6 +13,8 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
+import de.rpgframework.shadowrun.MagicOrResonanceOption;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
@@ -46,7 +48,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ITEM_ATTRIBUTE(new ItemAttributeConverter()),
 	ITEMTYPE(ItemType.class,0),
 	ITEMSUBTYPE(ItemSubType.class,0),
-	MAGIC_RESO("MagicOrResonance"),
+	MAGIC_RESO(MagicOrResonanceType.class),
 	MENTOR_SPIRIT("Mentorspirit"),
 	METATYPE(SR6MetaType.class),
 	POOL("Pool"), // Derived values like defense pool

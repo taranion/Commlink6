@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
@@ -45,7 +46,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getId()
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getId()
 	 */
 	@Override
 	public String getId() {
@@ -72,7 +73,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getWizardPages()
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getWizardPages()
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
@@ -182,7 +183,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getMetatypeController()
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getMetatypeController()
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -270,6 +271,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public List<RuleValue> getRules() {
 		return wrapped.getRules();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getMagicOrResonanceController()
+	 */
+	@Override
+	public IMagicOrResonanceController getMagicOrResonanceController() {
+		return wrapped.getMagicOrResonanceController();
 	}
 
 }

@@ -25,7 +25,7 @@ public class LifeModulesCharacterGenerator extends CommonSR6CharacterGenerator {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getId()
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getId()
 	 */
 	@Override
 	public String getId() {
@@ -34,7 +34,7 @@ public class LifeModulesCharacterGenerator extends CommonSR6CharacterGenerator {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getWizardPages()
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getWizardPages()
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {

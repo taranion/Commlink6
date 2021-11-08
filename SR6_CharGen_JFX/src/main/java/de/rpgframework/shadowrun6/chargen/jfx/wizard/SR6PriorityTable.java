@@ -57,7 +57,7 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 		PriorityTableEntry entry = resolver.apply(PriorityType.METATYPE, prio); 
 		List<String> names = new ArrayList<>();
 		
-		entry.getOptions().forEach(opt -> names.add(Shadowrun6Core.getItem(SR6MetaType.class, ((MetaTypeOption)opt).getType()).getName()));
+		entry.getOptions().forEach(opt -> names.add(Shadowrun6Core.getItem(SR6MetaType.class, ((MetaTypeOption)opt).getKey()).getName()));
 		String ret = String.join(", ", names)+" ("+entry.getAdjustmentPoints()+")";
 
 		return new Label(ret);

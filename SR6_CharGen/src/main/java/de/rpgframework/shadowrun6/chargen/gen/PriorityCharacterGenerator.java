@@ -6,6 +6,7 @@ import java.util.function.BiFunction;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTableEntry;
 import de.rpgframework.shadowrun.PriorityType;
@@ -47,7 +48,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 	// -------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getId()
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getId()
 	 */
 	@Override
 	public String getId() {
@@ -74,7 +75,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 	// -------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getWizardPages()
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getWizardPages()
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
@@ -102,11 +103,14 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			prioCtrl = createPriorityTableController();
 			attributes = new PriorityAttributeGenerator(this);
 			meta = new PriorityMetatypeController(this);
+			magicReso = new PriorityMagicOrResonanceController(this);
 			skill = new PrioritySkillGenerator(this);
 			logger.info("meta = " + getMetatypeController() + "  of " + this);
 
+			processChain.add(new ResetGenerator(this));
 			processChain.add(prioCtrl);
 			processChain.add(meta);
+			processChain.add(magicReso);
 			processChain.add(attributes);
 			processChain.add(skill);
 
@@ -169,4 +173,5 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	public PriorityAttributeController getPriorityAttributeController() {
 		return (PriorityAttributeController) super.attributes;
 	}
+
 }

@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,8 +99,19 @@ public class PriorityMetatypeController extends ControllerImpl<SR6MetaType> impl
 	}
 
 	@Override
-	public List<Modification> process(List<Modification> unprocessed) {
-		// TODO Auto-generated method stub
+	public List<Modification> process(List<Modification> previous) {
+		List<Modification> unprocessed = new ArrayList<>();
+		
+		for (Modification mod : previous) {
+			unprocessed.add(mod);
+		}
+		
+		// Add modifications from selection
+		MetaType selected = getModel().getMetatype();
+		if (selected!=null) {
+			unprocessed.addAll(selected.getModifications());
+		}
+		
 		return unprocessed;
 	}
 

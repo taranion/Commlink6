@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -58,6 +59,17 @@ public class SR6ArchetypeTest {
 	}
 	
 	//-------------------------------------------------------------------
+	private boolean raiseAttributeTo(ShadowrunAttribute key, int target) {
+		PriorityAttributeController attribs = (PriorityAttributeController) charGen.getAttributeController();
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(key);
+		while (val.getModifiedValue()<target) {
+			assertTrue("May not increase "+val.getModifyable(), attribs.canBeIncreased(val));
+			assertTrue("Failed raising from "+val.getModifiedValue(), attribs.increase(val));
+		}
+		return true;
+	}
+	
+	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testAdept() {
@@ -75,22 +87,32 @@ public class SR6ArchetypeTest {
 		charGen.getMetatypeController().canBeSelected(human);
 		charGen.getMetatypeController().select(human);
 		
+		// Select adept
+		charGen.getMagicOrResonanceController().select(Shadowrun6Core.getItem(MagicOrResonanceType.class, "adept"));
+		
 		PriorityAttributeController attribs = (PriorityAttributeController) charGen.getAttributeController();
-		AttributeValue aVal = model.getAttribute(ShadowrunAttribute.AGILITY);
-		attribs.increaseAttrib(ShadowrunAttribute.AGILITY); // 2
-		attribs.increaseAdjust(ShadowrunAttribute.BODY); // 2
+		raiseAttributeTo(ShadowrunAttribute.BODY     , 5);
+		raiseAttributeTo(ShadowrunAttribute.AGILITY  , 6);
+		raiseAttributeTo(ShadowrunAttribute.REACTION , 5);
+		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 5);
+		raiseAttributeTo(ShadowrunAttribute.WILLPOWER, 4);
+		raiseAttributeTo(ShadowrunAttribute.LOGIC    , 2);
+		raiseAttributeTo(ShadowrunAttribute.INTUITION, 3);
+		raiseAttributeTo(ShadowrunAttribute.CHARISMA , 2);
+		raiseAttributeTo(ShadowrunAttribute.EDGE     , 7);
+		raiseAttributeTo(ShadowrunAttribute.MAGIC    , 6);
 		
-		SR6SkillController skills = charGen.getSkillController();
-		OperationResult<SR6SkillValue> sVal = skills.select(Shadowrun6Core.getSkill("athletics"));
-		assertNotNull(sVal);
-		assertTrue(sVal.getError(), sVal.isPresent());
-		skills.increase(sVal.get()); // 2
-		skills.increase(sVal.get()); // 3
-		assertEquals(3,model.getSkillValue(Shadowrun6Core.getSkill("athletics")).getDistributed());
-		
-		byte[] raw = Shadowrun6Core.save(model);
-		String xml = new String(raw);
-		System.out.println(xml);
+//		SR6SkillController skills = charGen.getSkillController();
+//		OperationResult<SR6SkillValue> sVal = skills.select(Shadowrun6Core.getSkill("athletics"));
+//		assertNotNull(sVal);
+//		assertTrue(sVal.getError(), sVal.isPresent());
+//		skills.increase(sVal.get()); // 2
+//		skills.increase(sVal.get()); // 3
+//		assertEquals(3,model.getSkillValue(Shadowrun6Core.getSkill("athletics")).getDistributed());
+//		
+//		byte[] raw = Shadowrun6Core.save(model);
+//		String xml = new String(raw);
+//		System.out.println(xml);
 	}
 
 }

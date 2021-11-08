@@ -12,8 +12,10 @@ import de.rpgframework.genericrpg.chargen.RuleConfiguration;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
+import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -31,6 +33,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	protected static final Logger logger = LogManager.getLogger("shadowrun6.gen.proc");
 
 	protected IMetatypeController meta;
+	protected MagicOrResonanceController magicReso;
 	protected CommonAttributeGenerator attributes;
 	protected SR6SkillGenerator skill;
 	protected IQualityController qualities;
@@ -183,11 +186,20 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 
 	// -------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getMetatypeController()
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getMetatypeController()
 	 */
 	@Override
 	public IMetatypeController getMetatypeController() {
 		return meta;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getMagicOrResonanceController()
+	 */
+	@Override
+	public IMagicOrResonanceController getMagicOrResonanceController() {
+		return magicReso;
 	}
 
 }

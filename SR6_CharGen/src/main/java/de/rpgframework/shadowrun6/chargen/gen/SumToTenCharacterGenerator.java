@@ -24,7 +24,7 @@ public class SumToTenCharacterGenerator extends PriorityCharacterGenerator {
 
 	// -------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterGenerator#getId()
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getId()
 	 */
 	@Override
 	public String getId() {

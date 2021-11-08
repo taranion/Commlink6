@@ -33,8 +33,12 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	 */
 	@Override
 	public boolean canBeIncreased(AttributeValue<ShadowrunAttribute> value) {
-		// TODO Auto-generated method stub
-		return false;
+		if (value.getModifyable()==ShadowrunAttribute.MAGIC && ( parent.getModel().getMagicOrResonanceType()==null || !parent.getModel().getMagicOrResonanceType().usesMagic()))
+			return false;
+		if (value.getModifyable()==ShadowrunAttribute.RESONANCE && ( parent.getModel().getMagicOrResonanceType()==null || !parent.getModel().getMagicOrResonanceType().usesResonance()))
+			return false;
+		int max = (value.getMaximum()!=0)?value.getMaximum():6;
+		return value.getDistributed()<max;
 	}
 
 	//-------------------------------------------------------------------
@@ -43,8 +47,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	 */
 	@Override
 	public boolean canBeDecreased(AttributeValue<ShadowrunAttribute> value) {
-		// TODO Auto-generated method stub
-		return false;
+		return value.getModifiedValue()>1;
 	}
 
 	//-------------------------------------------------------------------
@@ -53,8 +56,13 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	 */
 	@Override
 	public boolean increase(AttributeValue<ShadowrunAttribute> value) {
-		// TODO Auto-generated method stub
-		return false;
+		if (!canBeIncreased(value)) {
+			logger.warn("Tried increasing "+value+" although not possible");
+			return false;
+		}
+		
+		value.setDistributed(value.getDistributed()+1);
+		return true;
 	}
 
 	//-------------------------------------------------------------------
@@ -63,8 +71,13 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	 */
 	@Override
 	public boolean decrease(AttributeValue<ShadowrunAttribute> value) {
-		// TODO Auto-generated method stub
-		return false;
+		if (!canBeDecreased(value)) {
+			logger.warn("Tried decreasing "+value+" although not possible");
+			return false;
+		}
+		
+		value.setDistributed(value.getDistributed()-1);
+		return true;
 	}
 
 	//-------------------------------------------------------------------

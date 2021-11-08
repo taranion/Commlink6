@@ -2,11 +2,17 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.data.ApplyWhen;
+import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -27,10 +33,150 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 	
 	private int adjustmentPoints;
 	private int attributePoints;
+	private List<ShadowrunAttribute> allowedAdjust = new ArrayList<>();
+	private boolean redistribute;
 	
 	//-------------------------------------------------------------------
 	public PriorityAttributeGenerator(SR6CharacterController parent) {
 		super(parent);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonAttributeGenerator#canBeIncreased(AttributeValue)
+	 */
+	@Override
+	public boolean canBeIncreased(AttributeValue<ShadowrunAttribute> value) {
+		if (!super.canBeIncreased(value))
+			return false;
+		ShadowrunAttribute key = value.getModifyable();
+		return canIncreaseAdjust(key) || canIncreaseAttrib(key) || canIncreaseKarma(key);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonAttributeGenerator#canBeDecreased(AttributeValue)
+	 */
+	@Override
+	public boolean canBeDecreased(AttributeValue<ShadowrunAttribute> value) {
+		ShadowrunAttribute key = value.getModifyable();
+		return canDecreaseAdjust(key) || canDecreaseAttrib(key) || canDecreaseKarma(key);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public boolean increase(AttributeValue<ShadowrunAttribute> value) {
+		boolean increased = super.increase(value);
+		if (increased) {
+			redistribute = true;
+		}
+		logger.info("Increased "+value.getModifyable()+" to "+value.getModifiedValue());
+		int t1 = value.getModifiedValue();
+		
+		parent.runProcessors();
+		int t2 = value.getModifiedValue();
+		logger.info("Increased2 "+value.getModifyable()+" to "+value.getModifiedValue());
+		if (t1!=t2) {
+			logger.error("Increasing "+value.getModifyable()+" failed");
+			return false;
+		}
+
+		return increased;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#decrease(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public boolean decrease(AttributeValue<ShadowrunAttribute> value) {
+		boolean decreased = super.decrease(value);
+		if (decreased) {
+			redistribute = true;
+		}
+		logger.info("Decreased "+value.getModifyable()+" to "+value.getModifiedValue());
+		
+		parent.runProcessors();
+
+		return decreased;
+	}
+
+	//-------------------------------------------------------------------
+	private void payAdjustment(SR6PrioritySettings settings, ShadowrunAttribute key) {
+		AttributeValue aVal = parent.getModel().getAttribute(key);
+		
+		int toPay = aVal.getModifiedValue() - settings.perAttrib.get(key).base;
+		settings.perAttrib.get(key).adjust = toPay;
+		logger.debug("Pay "+toPay+" adjustment points for "+key);
+	}
+
+	//-------------------------------------------------------------------
+	@SuppressWarnings("rawtypes")
+	private void calculateDistribution( ) {
+		logger.info("calculateDistribution");
+		// Clear current settings
+		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+		for (PerAttributePoints tmp : settings.perAttrib.values()) {
+			tmp.clear();
+			tmp.base = 1;
+		}
+		settings.perAttrib.get(ShadowrunAttribute.MAGIC).base=0;
+		settings.perAttrib.get(ShadowrunAttribute.RESONANCE).base=0;
+		
+		// ToDo: Modifications from priorities
+		
+		// Sort attributes highest value first
+		List<AttributeValue<ShadowrunAttribute>> sorted = new ArrayList<>(parent.getModel().getAttributes());
+		Collections.sort(sorted, new Comparator<AttributeValue>() {
+			public int compare(AttributeValue a1, AttributeValue a2) {
+				return -Integer.compare(a1.getModifiedValue(), a2.getModifiedValue());
+			}
+		});
+		for (AttributeValue val : sorted)
+			logger.debug(val.getModifyable()+" = "+val.getModifiedValue()+" = "+val.getModifications()+"   \tmax="+val.getMaximum());
+		
+		// Pay MAGIC, RESONANCE and EDGE with adjustment points
+		payAdjustment(settings, ShadowrunAttribute.EDGE );
+		if (parent.getModel().getMagicOrResonanceType()!=null && parent.getModel().getMagicOrResonanceType().usesMagic())
+			payAdjustment(settings, ShadowrunAttribute.MAGIC);
+		if (parent.getModel().getMagicOrResonanceType()!=null && parent.getModel().getMagicOrResonanceType().usesResonance())
+			payAdjustment(settings, ShadowrunAttribute.RESONANCE);
+		
+		// Invest remaining adjustment points
+		for (AttributeValue<ShadowrunAttribute> aVal : sorted) {
+			ShadowrunAttribute key = aVal.getModifyable();
+			if (key==ShadowrunAttribute.EDGE || key==ShadowrunAttribute.MAGIC || key==ShadowrunAttribute.RESONANCE)
+				continue;
+			
+			int toPay = aVal.getModifiedValue() - settings.perAttrib.get(key).getSum();
+			logger.debug("  "+key+" is at "+settings.perAttrib.get(key).getSum()+" - need "+toPay+" more");
+			if (toPay>0 && allowedAdjust.contains(aVal.getModifyable())) {
+				int payed = Math.min(toPay, adjustmentPoints);
+				settings.perAttrib.get(key).adjust = payed;
+				adjustmentPoints -= payed;
+				logger.debug("Payed "+payed+" adjustment points for "+key);
+			}
+		}
+		logger.debug("After distributing adjustment points, there are "+adjustmentPoints+" left");
+		
+		// Invest attribute points
+		for (AttributeValue<ShadowrunAttribute> aVal : sorted) {
+			ShadowrunAttribute key = aVal.getModifyable();
+			PerAttributePoints per = settings.perAttrib.get(key);
+			int toPay = aVal.getDistributed()-1 - per.adjust;
+			if (toPay>0) {
+				int payed = Math.min(toPay, attributePoints);
+				per.regular = payed;
+				attributePoints -= payed;
+				logger.debug("Payed "+payed+" attribute points for "+key);
+			}
+		}
+		logger.debug("After distributing attribute points, there are "+attributePoints+" left");
+		
+		redistribute = false;
 	}
 
 	//-------------------------------------------------------------------
@@ -238,7 +384,13 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 	private void updateAttributeValues() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
-			parent.getModel().getAttribute(key).setDistributed(per.getSum());
+			AttributeValue<ShadowrunAttribute> val = parent.getModel().getAttribute(key);
+			if (per.getSum()>7 || ( val.getMaximum()>0 && per.getSum()>val.getMaximum())) {
+				logger.error("New value for "+key+":"+per.getSum()+" would exceed maximum of "+val.getMaximum());
+				System.exit(1);
+			}
+			logger.info(key+" = "+per.getSum()+" - "+per.base + " = "+(per.getSum()-per.base));
+			parent.getModel().getAttribute(key).setDistributed(per.getSum() - per.base);
 		}
 	}
 
@@ -298,6 +450,36 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 	}
 
 	//-------------------------------------------------------------------
+	private void reset() {
+		adjustmentPoints = 0;
+		attributePoints  = 0;
+		allowedAdjust.clear();
+		for (AttributeValue tmp : getModel().getAttributes()) {
+			tmp.clearModifications();
+		}
+		
+		for (Entry<ShadowrunAttribute,PerAttributePoints> entry : getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.entrySet()) {
+			switch (entry.getKey()) {
+			case MAGIC: case RESONANCE:
+				entry.getValue().base=0;
+				break;
+			default:
+				entry.getValue().base=1;
+			}
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void ensureMaximumSet() {
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
+			if (val.getMaximum()==0) {
+				val.addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
+			}
+		}
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
@@ -307,9 +489,10 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 		List<Modification> unprocessed = new ArrayList<>();
 		
 		try {
+			SR6PrioritySettings prioSettings = getModel().getCharGenSettings(SR6PrioritySettings.class);
 			// Reset
-			adjustmentPoints = 0;
-			attributePoints  = 0;
+			reset();
+			
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
 				if (tmp.getReferenceType()==ShadowrunReference.CREATION_POINTS) {
@@ -321,6 +504,19 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 					} else {
 						unprocessed.add(mod);
 					}
+				} else if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE) {
+					ValueModification mod = (ValueModification)tmp;
+					ShadowrunAttribute attr = mod.getResolvedKey();
+					getModel().getAttribute(attr).addModification(mod);
+					logger.info("Consume "+mod);
+					if (mod.getSet()==ValueType.MAX && mod.getValue()>6)
+						allowedAdjust.add(attr);
+					// Update base
+					if (mod.getSet()==ValueType.NATURAL) {
+						logger.debug("Updated base of "+attr+" with +"+mod.getValue());
+						prioSettings.perAttrib.get(attr).base += mod.getValue();
+						logger.debug("Updated base of "+attr+" to +"+prioSettings.perAttrib.get(attr).base);
+					}
 				} else {
 					unprocessed.add(tmp);
 				}
@@ -328,23 +524,30 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 			
 			logger.debug("Start with "+adjustmentPoints+" adjust and "+attributePoints+" attrib points");
 			
-			// Reduce points
-			Shadowrun6Character model = parent.getModel();
-			for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
-				PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
-				if (per==null) {
-					logger.warn("No data for "+key);
-					continue;
-				}
-				per.base = 1;
-//				logger.debug("  pay for "+per);
-				adjustmentPoints -= per.adjust;
-				attributePoints  -= per.regular;
-				model.setKarmaFree( model.getKarmaFree() - per.getKarmaInvest());
-				model.setKarmaInvested( model.getKarmaInvested() + per.getKarmaInvest());
-			}			
-			logger.debug("Finish with "+adjustmentPoints+" adjust and "+attributePoints+" attrib points");
+			ensureMaximumSet();
 			
+			
+			if (redistribute) {
+				calculateDistribution();
+			} else {
+
+				// Reduce points
+				Shadowrun6Character model = parent.getModel();
+				for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+					PerAttributePoints per = prioSettings.perAttrib.get(key);
+					if (per == null) {
+						logger.warn("No data for " + key);
+						continue;
+					}
+//				per.base = 1;
+//				logger.debug("  pay for "+per);
+					adjustmentPoints -= per.adjust;
+					attributePoints -= per.regular;
+					model.setKarmaFree(model.getKarmaFree() - per.getKarmaInvest());
+					model.setKarmaInvested(model.getKarmaInvested() + per.getKarmaInvest());
+				}
+				logger.debug("Finish with " + adjustmentPoints + " adjust and " + attributePoints + " attrib points");
+			}
 			
 			// Copy current setup 
 			updateAttributeValues();

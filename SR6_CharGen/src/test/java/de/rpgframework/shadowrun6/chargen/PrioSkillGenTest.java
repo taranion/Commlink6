@@ -22,9 +22,11 @@ import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
+import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -101,6 +103,8 @@ public class PrioSkillGenTest {
 			}
 			public <T> T getRule(Rule rule) {return null;}
 			public List<RuleValue> getRules() { return new ArrayList<>(); }
+			@Override
+			public MagicOrResonanceController getMagicOrResonanceController() {return null;}
 		};
 		ctrl  = new PrioritySkillGenerator(charGen);
 	}
