@@ -21,8 +21,9 @@ import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6ReferenceTypeConverter;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -75,15 +76,18 @@ public class WizardPageMetatype extends WizardPage {
 			public Image apply(SR6MetaType value) {	
 				String name = (value.getVariantOf()==null)
 						?
-								"images/metatypes/metatype_"+value.getId()+".jpg"
+								"images/metatypes/metatype_"+value.getId()+".png"
 								:
-								"images/metatypes/metatype_"+value.getId()+"_"+value.getVariantOf().getId()+".jpg";
+								"images/metatypes/metatype_"+value.getVariantOf().getId()+"_"+value.getId()+".png";
 				InputStream in = CommonShadowrunJFXResourceHook.class.getResourceAsStream(name);
+				System.err.println("Search for "+name+" = "+in);
 				if (in!=null)
 					return new Image(in);
-				logger.error("Missing resource "+CommonShadowrunJFXResourceHook.class.getName()+" + "+name);
+				logger.error("Missing resource "+CommonShadowrunJFXResourceHook.class.getPackage().getName()+" + "+name);
 				return null;
 			}});
+		contentPane.setModificationConverter((m) -> Shadowrun6Tools.getModificationString(contentPane.getSelectedItem(),m));
+		contentPane.setReferenceTypeConverter(new SR6ReferenceTypeConverter<>());
 //		contentPane.setModificationConverter((m) -> SplitterTools.getModificationString(contentPane.getSelectedItem(),m));
 //		contentPane.setChoiceConverter((c) -> SplitterTools.getChoiceString(contentPane.getSelectedItem(), c));
 		contentPane.setModel(charGen.getModel());
