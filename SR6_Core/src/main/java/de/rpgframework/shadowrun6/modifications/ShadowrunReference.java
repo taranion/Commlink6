@@ -13,9 +13,9 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
-import de.rpgframework.shadowrun.MagicOrResonanceOption;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
@@ -98,6 +98,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	}
 	
 	//-------------------------------------------------------------------
+	@SuppressWarnings("rawtypes")
 	private static StringValueConverter getConverter(Class cls, String enumName) {
 		try {
 			Field field = cls.getDeclaredField(enumName);
@@ -152,7 +153,33 @@ public enum ShadowrunReference implements ModifiedObjectType {
 		}
 		throw new ReferenceException(type, key);
 	}
-
+	
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	public static <T> T[] resolveAll(ShadowrunReference type) {
+		switch (type) {
+		case ATTRIBUTE:
+			return (T[]) ShadowrunAttribute.primaryValues();
+		default:
+			throw new IllegalArgumentException("ALL not supported for "+type);
+		}
+	}
+	
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	public static <T> T[] resolveVariable(ShadowrunReference type, String varName) {
+		switch (type) {
+		case ATTRIBUTE:
+			switch (varName) {
+			case "PHYSICAL": return (T[]) new ShadowrunAttribute[] {ShadowrunAttribute.BODY, ShadowrunAttribute.AGILITY, ShadowrunAttribute.REACTION, ShadowrunAttribute.STRENGTH};
+			case "MENTAL": return (T[]) new ShadowrunAttribute[] {ShadowrunAttribute.WILLPOWER, ShadowrunAttribute.LOGIC, ShadowrunAttribute.INTUITION, ShadowrunAttribute.CHARISMA};
+			}
+			throw new IllegalArgumentException("Unknown variable "+varName+" for "+type);
+		default:
+			throw new IllegalArgumentException("Variables of type "+type+" not supported");
+		}
+	}
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.modification.ModifiedObjectType#resolve(java.lang.String)
@@ -172,4 +199,25 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	public <T extends DataItem> T resolveAsDataItem(String key) {
 		return (T)ShadowrunReference.resolve(this, key);
 	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.modification.ModifiedObjectType#resolveAny()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T[] resolveAny() {
+		return (T[])ShadowrunReference.resolveAll(this);
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.modification.ModifiedObjectType#resolveAny()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T[] resolveVariable(String varName) {
+		return (T[])ShadowrunReference.resolveVariable(this, varName);
+	}
+	
 }

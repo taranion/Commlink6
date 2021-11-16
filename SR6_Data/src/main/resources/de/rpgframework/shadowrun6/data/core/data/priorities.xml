@@ -4,48 +4,48 @@
 		<modifications>
 			<valmod type="CREATION_POINTS" ref="ADJUST" value="13"/>
 		</modifications>
-		<metaopt ref="dwarf"/>
-		<metaopt ref="ork"  />
-		<metaopt ref="troll"/>
+		<metaopt id="dwarf"/>
+		<metaopt id="ork"  />
+		<metaopt id="troll"/>
 	</priotableentry>
 	<priotableentry id="metaB" prio="B" type="METATYPE" adj="11">
 		<modifications>
 			<valmod type="CREATION_POINTS" ref="ADJUST" value="11"/>
 		</modifications>
-		<metaopt ref="elf"   />
-		<metaopt ref="dwarf" />
-		<metaopt ref="ork"   />
-		<metaopt ref="troll" />
+		<metaopt id="elf"   />
+		<metaopt id="dwarf" />
+		<metaopt id="ork"   />
+		<metaopt id="troll" />
 	</priotableentry>
 	<priotableentry id="metaC" prio="C" type="METATYPE" adj="9">
 		<modifications>
 			<valmod type="CREATION_POINTS" ref="ADJUST" value="9"/>
 		</modifications>
-		<metaopt ref="human" />
-		<metaopt ref="elf"   />
-		<metaopt ref="dwarf" />
-		<metaopt ref="ork"   />
-		<metaopt ref="troll" />
+		<metaopt id="human" />
+		<metaopt id="elf"   />
+		<metaopt id="dwarf" />
+		<metaopt id="ork"   />
+		<metaopt id="troll" />
 	</priotableentry>
 	<priotableentry id="metaD" prio="D" type="METATYPE" adj="4">
 		<modifications>
 			<valmod type="CREATION_POINTS" ref="ADJUST" value="4"/>
 		</modifications>
-		<metaopt ref="human" />
-		<metaopt ref="elf"   />
-		<metaopt ref="dwarf" />
-		<metaopt ref="ork"   />
-		<metaopt ref="troll" />
+		<metaopt id="human" />
+		<metaopt id="elf"   />
+		<metaopt id="dwarf" />
+		<metaopt id="ork"   />
+		<metaopt id="troll" />
 	</priotableentry>
 	<priotableentry id="metaE" prio="E" type="METATYPE" adj="1">
 		<modifications>
 			<valmod type="CREATION_POINTS" ref="ADJUST" value="1"/>
 		</modifications>
-		<metaopt ref="human" />
-		<metaopt ref="elf"   />
-		<metaopt ref="dwarf" />
-		<metaopt ref="ork"   />
-		<metaopt ref="troll" />
+		<metaopt id="human" />
+		<metaopt id="elf"   />
+		<metaopt id="dwarf" />
+		<metaopt id="ork"   />
+		<metaopt id="troll" />
 	</priotableentry>
 
 	<priotableentry id="attribA" prio="A" type="ATTRIBUTE">

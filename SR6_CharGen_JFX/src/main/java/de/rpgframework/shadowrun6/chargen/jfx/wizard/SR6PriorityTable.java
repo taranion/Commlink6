@@ -10,6 +10,8 @@ import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceOption;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetaTypeOption;
@@ -57,7 +59,7 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 		PriorityTableEntry entry = resolver.apply(PriorityType.METATYPE, prio); 
 		List<String> names = new ArrayList<>();
 		
-		entry.getOptions().forEach(opt -> names.add(Shadowrun6Core.getItem(SR6MetaType.class, ((MetaTypeOption)opt).getKey()).getName()));
+		entry.getOptions().forEach(opt -> names.add(Shadowrun6Core.getItem(SR6MetaType.class, ((MetaTypeOption)opt).getId()).getName()));
 		String ret = String.join(", ", names)+" ("+entry.getAdjustmentPoints()+")";
 
 		return new Label(ret);
@@ -88,19 +90,18 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 	@Override
 	public Node getMagicOrResonanceNode(Priority prio) {
 		PriorityTableEntry entry = resolver.apply(PriorityType.MAGIC, prio);
-//		logger.info("----"+entry);
+		logger.info("----"+entry.getType()+":"+entry.getPriority()+" with "+entry.getModifications().size()+" modifications");
 		VBox ret = new VBox();
 		
 		int oldPoints = -1;
 		StringBuffer buf = null;
 		MagicOrResonanceType lastType = null;
-		for ( PriorityOption opt : entry.getOptions() ) {
-//			logger.info("*******"+opt);
-			MagicOrResonanceType type = Shadowrun6Core.getItem(MagicOrResonanceType.class, ((MagicOrResonanceOption)opt).getType() );
-			int points = ((MagicOrResonanceOption)opt).getValue();
-//			logger.info("  type="+type+"  points="+points);
+		for (Modification tmp : entry.getModifications()) {
+			ValueModification mod = (ValueModification)tmp;
+			MagicOrResonanceType type = mod.getReferenceType().resolve(mod.getKey());
+			int points = mod.getValue();
 			if (points!=oldPoints) {
-//				logger.info(" change from "+oldPoints+" to "+points+"   Buffer is "+buf);
+				logger.info(" change from "+oldPoints+" to "+points+"   Buffer is "+buf);
 				// Print old
 				if (buf!=null) {
 					Label part1 = new Label(buf.toString()+":");
@@ -123,14 +124,19 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 			lastType = type;
 		};
 //		logger.info(" after loop buffer is "+buf+" and points were "+oldPoints+"   and lastType="+lastType);
-		Label part1 = new Label(buf.toString()+":");
-		part1.setStyle("-fx-font-weight: bold");
-		Label part2 = new Label(ResourceI18N.get(RES, (lastType.getId().equals("technomancer")?"label.resonance":"label.magic"))+" "+oldPoints);
-		HBox line = new HBox(5, part1, part2);
-		if (lastType.getId().equals("mundane"))
-			line = new HBox(5, new Label(lastType.getName()));
-		ret.getChildren().add(line);
-		
+		if (buf == null || lastType == null) {
+			ret.getChildren().add(new Label("ERROR"));
+		} else {
+			Label part1 = new Label(buf.toString() + ":");
+			part1.setStyle("-fx-font-weight: bold");
+			Label part2 = new Label(
+					ResourceI18N.get(RES, (lastType.getId().equals("technomancer") ? "label.resonance" : "label.magic"))
+							+ " " + oldPoints);
+			HBox line = new HBox(5, part1, part2);
+			if (lastType.getId().equals("mundane"))
+				line = new HBox(5, new Label(lastType.getName()));
+			ret.getChildren().add(line);
+		}
 		return ret;
 	}
 
