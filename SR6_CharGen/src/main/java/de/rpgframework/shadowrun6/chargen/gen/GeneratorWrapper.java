@@ -15,6 +15,7 @@ import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
+import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
@@ -217,6 +218,11 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 //	public void continueCreation(Shadowrun6Character model) {
 //		wrapped.continueCreation(model);
 //	}
+
+	//-------------------------------------------------------------------
+	public <T> RecommendingController<T> getRecommendingControllerFor(T item) {
+		return wrapped.getRecommendingControllerFor(item);
+	}
 
 	//-------------------------------------------------------------------
 	/**

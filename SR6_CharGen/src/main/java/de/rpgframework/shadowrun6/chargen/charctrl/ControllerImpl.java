@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.PartialController;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
@@ -32,6 +33,15 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 		this.parent = parent;
 		this.todos  = new ArrayList<>();
 		this.choices= new ArrayList<>();
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.PartialController#getCharacterController()
+	 */
+	@Override
+	public CharacterController<?> getCharacterController() {
+		return parent;
 	}
 
 	//-------------------------------------------------------------------

@@ -17,12 +17,12 @@ import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
+import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
@@ -105,6 +105,8 @@ public class PrioSkillGenTest {
 			public List<RuleValue> getRules() { return new ArrayList<>(); }
 			@Override
 			public MagicOrResonanceController getMagicOrResonanceController() {return null;}
+			@Override
+			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
 		ctrl  = new PrioritySkillGenerator(charGen);
 	}

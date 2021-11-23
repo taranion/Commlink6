@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
+import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleConfiguration;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
@@ -155,6 +156,13 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 		} finally {
 			logger.debug("LEAVE updateEffectiveRules");
 		}
+	}
+
+	//-------------------------------------------------------------------
+	public <T> RecommendingController<T> getRecommendingControllerFor(T item) {
+//		if (item instanceof ShadowrunAttribute)
+//			return getAttributeController();
+		return null;
 	}
 
 	//-------------------------------------------------------------------
