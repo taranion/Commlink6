@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleConfiguration;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.chargen.RuleValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
@@ -28,7 +29,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
  * @author prelle
  *
  */
-public abstract class CommonSR6CharacterGenerator extends CharacterControllerImpl<Shadowrun6Character>
+public abstract class CommonSR6CharacterGenerator extends CharacterControllerImpl<ShadowrunAttribute,Shadowrun6Character>
 		implements SR6CharacterGenerator {
 
 	protected static final Logger logger = LogManager.getLogger("shadowrun6.gen.proc");

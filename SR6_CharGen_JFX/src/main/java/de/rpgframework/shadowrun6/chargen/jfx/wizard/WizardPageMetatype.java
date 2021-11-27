@@ -76,13 +76,18 @@ public class WizardPageMetatype extends WizardPage {
 			public Image apply(SR6MetaType value) {	
 				String name = (value.getVariantOf()==null)
 						?
-								"images/metatypes/metatype_"+value.getId()+".png"
+								"images/metatypes/metatype_"+value.getId()+".jpg"
 								:
-								"images/metatypes/metatype_"+value.getVariantOf().getId()+"_"+value.getId()+".png";
+								"images/metatypes/metatype_"+value.getVariantOf().getId()+"_"+value.getId()+".jpg";
 				InputStream in = CommonShadowrunJFXResourceHook.class.getResourceAsStream(name);
 				System.err.println("Search for "+name+" = "+in);
-				if (in!=null)
-					return new Image(in);
+				if (in!=null) {
+					Image img = new Image(in);
+					if (img.isError()) {
+						System.err.println("Error loading "+name+": "+img.getException());
+					}
+					return img;
+				}
 				logger.error("Missing resource "+CommonShadowrunJFXResourceHook.class.getPackage().getName()+" + "+name);
 				return null;
 			}});

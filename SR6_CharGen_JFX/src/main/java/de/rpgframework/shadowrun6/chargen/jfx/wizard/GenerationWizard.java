@@ -11,6 +11,7 @@ import org.prelle.javafx.WizardPage;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.jfx.wizard.WizardPageGenerator;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAttributes;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
@@ -35,7 +36,7 @@ public class GenerationWizard extends Wizard {
 	
 	private GeneratorWrapper wrapper;
 	
-	private WizardPageGenerator<Shadowrun6Character, CommonSR6CharacterGenerator> chargen;
+	private WizardPageGenerator<ShadowrunAttribute ,Shadowrun6Character, CommonSR6CharacterGenerator> chargen;
 //	private WizardPageProfiles profiles;
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
 	private WizardPageMetatype race;

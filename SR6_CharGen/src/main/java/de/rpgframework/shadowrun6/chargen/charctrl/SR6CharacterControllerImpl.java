@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 
@@ -9,7 +10,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  * @author Stefan
  *
  */
-public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl<Shadowrun6Character	>
+public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl<ShadowrunAttribute,Shadowrun6Character	>
 		implements SR6CharacterController {
 	
 	protected SR6SkillController skills;

@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.PartialController;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 
 /**
@@ -40,7 +41,7 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 	 * @see de.rpgframework.genericrpg.chargen.PartialController#getCharacterController()
 	 */
 	@Override
-	public CharacterController<?> getCharacterController() {
+	public CharacterController<ShadowrunAttribute,Shadowrun6Character> getCharacterController() {
 		return parent;
 	}
 

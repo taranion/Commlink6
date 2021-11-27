@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
@@ -31,7 +32,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  * @author stefa
  *
  */
-public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrapper<Shadowrun6Character, SR6CharacterGenerator> {
+public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrapper<ShadowrunAttribute,Shadowrun6Character, SR6CharacterGenerator> {
 
 	private static Logger logger = LogManager.getLogger(GeneratorWrapper.class);
 	
@@ -84,7 +85,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	//-------------------------------------------------------------------
 	public boolean canBeFinished() {
 		if (wrapped instanceof CharacterGenerator)
-			return ((CharacterGenerator<?>)wrapped).canBeFinished();
+			return ((CharacterGenerator<ShadowrunAttribute,?>)wrapped).canBeFinished();
 		return true;
 	}
 
