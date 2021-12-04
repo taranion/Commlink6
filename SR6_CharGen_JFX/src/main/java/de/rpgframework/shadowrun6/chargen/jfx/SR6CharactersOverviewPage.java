@@ -14,10 +14,15 @@ import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.genericrpg.chargen.CharacterController;
+import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.jfx.pages.CharactersOverviewPage;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
+import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 
 /**
  * @author prelle
@@ -27,14 +32,47 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	
 	private final static Logger logger = LogManager.getLogger(SR6CharactersOverviewPage.class.getPackageName());
 
+
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#createCharacterGenerator()
+	 */
+	@Override
+	protected CharacterGenerator<?, ?> createCharacterGenerator() {
+		logger.info("create new character and new generator");
+		Shadowrun6Character model = new Shadowrun6Character();
+		@SuppressWarnings("unchecked")
+		Class<SR6CharacterGenerator> clazz = (Class<SR6CharacterGenerator>) CharacterGeneratorRegistry.getGenerators().get(0);
+		try {
+			SR6CharacterGenerator wrapped = (SR6CharacterGenerator) clazz
+					.getConstructor(Shadowrun6Character.class, CharacterHandle.class)
+					.newInstance(model, null);
+			GeneratorWrapper ret = new GeneratorWrapper(model, null);
+			ret.setWrapped(wrapped);
+			return ret;
+		} catch (Exception e) {
+			logger.fatal("Failed creating CharacterGenerator "+clazz,e);
+			System.exit(1);
+			return null;
+		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#createCharacterController(de.rpgframework.character.RuleSpecificCharacterObject)
+	 */
+	@Override
+	protected CharacterController<?, ?> createCharacterController(RuleSpecificCharacterObject<?> model) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#createCharacterAppLayout()
 	 */
 	@Override
-	protected CharacterViewLayout createCharacterAppLayout() {
+	protected CharacterViewLayout createCharacterAppLayout(CharacterController<?, ?> control) {
 		logger.debug("ENTER: createCharacterAppLayout");
 		try {
 			return new SR6CharacterViewLayout();

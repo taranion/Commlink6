@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import java.util.function.Function;
 
 import org.prelle.javafx.JavaFXConstants;
-import org.prelle.javafx.NodeWithTitleSkeleton;
+import org.prelle.javafx.NodeWithTitle;
 import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
 import org.prelle.javafx.Wizard;
@@ -141,7 +141,7 @@ public class WizardPageMetatype extends WizardPage {
 		addToCustom(new HBox(5, tfWeight, new Label("kg")), "label.weight");
 		
 		VBox cust = new VBox(10, btnRoll, customNode1);
-		contentPane.setCustomNode1(new NodeWithTitleSkeleton(ResourceI18N.get(RES,"tab.custom"), cust));
+		contentPane.setCustomNode1(new NodeWithTitle(ResourceI18N.get(RES,"tab.custom"), cust));
 		
 		// Be smaller in larger screens, but higher on smaller screens
 		if (ResponsiveControlManager.getCurrentMode()==WindowMode.MINIMAL) {
