@@ -93,10 +93,10 @@
         <skillspec id="tactile"/>
         <skillspec id="scent" />
         <skillspec id="taste" />
-        <skillspec id="perception_woods"/>
-        <skillspec id="perception_desert"/>
-        <skillspec id="perception_urban"/>
-        <skillspec id="perception_other"/>
+        <skillspec id="woods"/>
+        <skillspec id="desert"/>
+        <skillspec id="urban"/>
+        <skillspec id="other"/>
     </skill>
     <skill id="piloting"  attr="REACTION" type="TECHNICAL" untr="y">
         <skillspec id="ground_craft"/>
