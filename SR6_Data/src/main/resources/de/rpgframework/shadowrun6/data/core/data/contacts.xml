@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<npcs>
+	<npc id="bartender" rating="1" type="CONTACT">
+		<attributes>
+			<attribute id="BODY"      value="2" />
+			<attribute id="AGILITY"   value="3" />
+			<attribute id="REACTION"  value="2" />
+			<attribute id="STRENGTH"  value="2" />
+			<attribute id="WILLPOWER" value="3" />
+			<attribute id="LOGIC"     value="2" />
+			<attribute id="INTUITION" value="2" />
+			<attribute id="CHARISMA"  value="3" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="close_combat" value="4"/>
+			<skillval ref="firearms"     value="2">
+				<skillspec ref="firearms/shotgun" value="2"/>
+			</skillval>
+			<skillval ref="influence"    value="4"/>
+		</skills>
+	</npc>
+	
+	<npc id="fixer" rating="1" type="CONTACT">
+		<types>FIXER,FENCE,LOAN_SHARK</types>
+		<attributes>
+			<attribute id="BODY"      value="2" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="2" />
+			<attribute id="STRENGTH"  value="2" />
+			<attribute id="WILLPOWER" value="3" />
+			<attribute id="LOGIC"     value="2" />
+			<attribute id="INTUITION" value="4" />
+			<attribute id="CHARISMA"  value="4" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="electronics"  value="6"/>
+			<skillval ref="firearms"     value="4"/>
+			<skillval ref="influence"    value="5"/>
+			<skillval ref="perception"   value="2"/>
+		</skills>
+	</npc>	
+	
+	<npc id="mrJohnson" rating="2" type="CONTACT">
+		<types>MR_JOHNSON</types>
+		<attributes>
+			<attribute id="BODY"      value="2" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="2" />
+			<attribute id="STRENGTH"  value="2" />
+			<attribute id="WILLPOWER" value="3" />
+			<attribute id="LOGIC"     value="3" />
+			<attribute id="INTUITION" value="4" />
+			<attribute id="CHARISMA"  value="4" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="con"          value="4"/>
+			<skillval ref="electronics"  value="4"/>
+			<skillval ref="firearms"     value="3"/>
+			<skillval ref="influence"    value="5"/>
+			<skillval ref="perception"   value="3"/>
+		</skills>
+	</npc>	
+</npcs>
