@@ -3,8 +3,8 @@ package de.rpgframework.shadowrun6;
 import org.prelle.simplepersist.Element;
 import org.prelle.simplepersist.Root;
 
-import de.rpgframework.character.Gender;
 import de.rpgframework.character.RuleSpecificCharacterObject;
+import de.rpgframework.classification.Gender;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.MagicOrResonanceType;

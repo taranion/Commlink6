@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <npcs>
-	<npc id="humanis_goon" rating="0">
+	<npc id="goon" rating="0" type="GRUNT">
 		<attributes>
 			<attribute id="BODY"      value="2" />
 			<attribute id="AGILITY"   value="2" />
@@ -15,18 +15,18 @@
 			<attribute id="RESONANCE" value="0" />
 		</attributes>
 		<skills>
-			<skillval skill="athletics"    value="1"/>
-			<skillval skill="close_combat" value="3"/>
-			<skillval skill="influence"    value="1">
+			<skillval ref="athletics"    value="1"/>
+			<skillval ref="close_combat" value="3"/>
+			<skillval ref="influence"    value="1">
 				<skillspec ref="influence/intimidation" />
 			</skillval>
 		</skills>
 		<gear>
-			<item ref="commlink"/>
-			<item ref="club"/>
+<!-- 			<item ref="commlink"/> -->
+<!-- 			<item ref="club"/> -->
 		</gear>
 	</npc>
-	<npc id="terrafirst_shaman" rating="0">
+	<npc id="shaman" rating="0" type="GRUNT">
 		<attributes>
 			<attribute id="BODY"      value="1" />
 			<attribute id="AGILITY"   value="2" />
@@ -41,9 +41,9 @@
 			<attribute id="RESONANCE" value="0" />
 		</attributes>
 		<skills>
-			<skillval skill="astral"    value="2"/>
-			<skillval skill="conjuring" value="2"/>
-			<skillval skill="sorcery"   value="2"/>
+			<skillval ref="astral"    value="2"/>
+			<skillval ref="conjuring" value="2"/>
+			<skillval ref="sorcery"   value="2"/>
 		</skills>
 		<spells>
 			<spellval ref="acid_stream"/>
@@ -52,7 +52,235 @@
 			<spellval ref="cleansing_heal"/>
 		</spells>
 		<gear>
-			<item ref="commlink"/>
+<!-- 			<item ref="commlink"/> -->
 		</gear>
 	</npc>
+	
+	<npc id="go_ganger" rating="1" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="2" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="2" />
+			<attribute id="STRENGTH"  value="2" />
+			<attribute id="WILLPOWER" value="2" />
+			<attribute id="LOGIC"     value="2" />
+			<attribute id="INTUITION" value="2" />
+			<attribute id="CHARISMA"  value="1" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="athletics"    value="2"/>
+			<skillval ref="close_combat" value="3"/>
+			<skillval ref="firearms"     value="2"/>
+			<skillval ref="influence"    value="3">
+				<skillspec ref="influence/intimidation" />
+			</skillval>
+			<skillval ref="perception"   value="1"/>
+			<skillval ref="piloting"     value="2"/>
+		</skills>
+		<gear>
+		</gear>
+	</npc>
+	<npc id="debt_collector" rating="1" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="2" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="2" />
+			<attribute id="STRENGTH"  value="2" />
+			<attribute id="WILLPOWER" value="2" />
+			<attribute id="LOGIC"     value="2" />
+			<attribute id="INTUITION" value="2" />
+			<attribute id="CHARISMA"  value="1" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="athletics"    value="2"/>
+			<skillval ref="biotech"      value="1"/>
+			<skillval ref="close_combat" value="4"/>
+			<skillval ref="firearms"     value="2"/>
+			<skillval ref="perception"   value="3"/>
+		</skills>
+		<gear>
+		</gear>
+	</npc>
+	
+	<!-- 2 -->
+	<npc id="brute" rating="2" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="3" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="2" />
+			<attribute id="STRENGTH"  value="4" />
+			<attribute id="WILLPOWER" value="2" />
+			<attribute id="LOGIC"     value="1" />
+			<attribute id="INTUITION" value="2" />
+			<attribute id="CHARISMA"  value="1" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="athletics"    value="2"/>
+			<skillval ref="close_combat" value="4"/>
+			<skillval ref="firearms"     value="3"/>
+			<skillval ref="influence"    value="5">
+				<skillspec ref="influence/intimidation" />
+			</skillval>
+			<skillval ref="perception"   value="3"/>
+		</skills>
+		<gear>
+		</gear>
+	</npc>
+	<npc id="data_harvester" rating="2" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="3" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="3" />
+			<attribute id="STRENGTH"  value="1" />
+			<attribute id="WILLPOWER" value="4" />
+			<attribute id="LOGIC"     value="4" />
+			<attribute id="INTUITION" value="4" />
+			<attribute id="CHARISMA"  value="1" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="close_combat" value="2"/>
+			<skillval ref="con"          value="1"/>
+			<skillval ref="cracking"     value="3"/>
+			<skillval ref="electronics"  value="3"/>
+			<skillval ref="firearms"     value="2"/>
+			<skillval ref="influence"    value="1"/>
+			<skillval ref="perception"   value="2"/>
+			<skillval ref="stealth"      value="1"/>
+		</skills>
+		<gear>
+		</gear>
+	</npc>
+	
+	<!-- 3 -->
+	<npc id="lone_star_patrol" rating="3" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="3" />
+			<attribute id="AGILITY"   value="3" />
+			<attribute id="REACTION"  value="3" />
+			<attribute id="STRENGTH"  value="3" />
+			<attribute id="WILLPOWER" value="3" />
+			<attribute id="LOGIC"     value="2" />
+			<attribute id="INTUITION" value="3" />
+			<attribute id="CHARISMA"  value="2" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="athletics"    value="1"/>
+			<skillval ref="biotech"      value="1"/>
+			<skillval ref="close_combat" value="4"/>
+			<skillval ref="con"          value="1"/>
+			<skillval ref="electronics"  value="1"/>
+			<skillval ref="firearms"     value="4"/>
+			<skillval ref="influence"    value="2"/>
+			<skillval ref="perception"   value="4"/>
+			<skillval ref="piloting"     value="4"/>
+		</skills>
+		<gear>
+		</gear>
+	</npc>
+	<npc id="securityrigger" rating="3" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="2" />
+			<attribute id="AGILITY"   value="3" />
+			<attribute id="REACTION"  value="4" />
+			<attribute id="STRENGTH"  value="2" />
+			<attribute id="WILLPOWER" value="5" />
+			<attribute id="LOGIC"     value="5" />
+			<attribute id="INTUITION" value="5" />
+			<attribute id="CHARISMA"  value="1" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="athletics"    value="1"/>
+			<skillval ref="close_combat" value="2"/>
+			<skillval ref="cracking"     value="4"/>
+			<skillval ref="electronics"  value="3"/>
+			<skillval ref="engineering"  value="4"/>
+			<skillval ref="firearms"     value="3"/>
+			<skillval ref="influence"    value="1"/>
+			<skillval ref="outdoors"     value="2"/>
+			<skillval ref="perception"   value="3"/>
+			<skillval ref="piloting"     value="4"/>
+			<skillval ref="stealth"      value="2"/>
+		</skills>
+		<gear>
+		</gear>
+	</npc>
+	
+	<!-- 4 -->
+	<npc id="soldato" rating="4" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="3" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="2" />
+			<attribute id="STRENGTH"  value="3" />
+			<attribute id="WILLPOWER" value="2" />
+			<attribute id="LOGIC"     value="1" />
+			<attribute id="INTUITION" value="2" />
+			<attribute id="CHARISMA"  value="1" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="athletics"    value="3"/>
+			<skillval ref="biotech"      value="2"/>
+			<skillval ref="close_combat" value="5"/>
+			<skillval ref="con"          value="3"/>
+			<skillval ref="firearms"     value="4"/>
+			<skillval ref="influence"    value="4">
+				<skillspec ref="influence/intimidation" />
+			</skillval>
+			<skillval ref="perception"   value="4"/>
+			<skillval ref="piloting"     value="1"/>
+		</skills>
+		<gear>
+		</gear>
+	</npc>
+	<npc id="blademaster" rating="4" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="3" />
+			<attribute id="AGILITY"   value="5" />
+			<attribute id="REACTION"  value="3" />
+			<attribute id="STRENGTH"  value="3" />
+			<attribute id="WILLPOWER" value="2" />
+			<attribute id="LOGIC"     value="2" />
+			<attribute id="INTUITION" value="3" />
+			<attribute id="CHARISMA"  value="2" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="4" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="astral"       value="2"/>
+			<skillval ref="athletics"    value="4"/>
+			<skillval ref="close_combat" value="5">
+				<skillspec ref="close_combat/blades" value="2" />
+			</skillval>
+			<skillval ref="outdoors"     value="2">
+				<skillspec ref="outdoors/tracking" value="2" />
+			</skillval>
+			<skillval ref="perception"   value="4"/>
+			<skillval ref="stealth"      value="5"/>
+		</skills>
+		<gear>
+		</gear>
+	</npc>
+	
 </npcs>

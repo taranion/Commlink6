@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6;
 
+import java.lang.System.Logger.Level;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,14 +52,14 @@ public class SR6MetaType extends MetaType {
 		
 		for (Modification mod : modifications) {
 			if (mod.getReferenceType()==null) {
-				logger.error("Missing reference type for modification "+mod+" in metatype "+id);
+				logger.log(Level.ERROR,"Missing reference type for modification "+mod+" in metatype "+id);
 				continue;
 			}
 			if (mod instanceof DataItemModification) {
 				String key = ((DataItemModification)mod).getKey();
 				Object resolved = mod.getReferenceType().resolve( key );
 				if (resolved==null) {
-					logger.error("Unknown reference "+mod.getReferenceType()+":'"+key+"' for modification in metatype "+id);
+					logger.log(Level.ERROR,"Unknown reference "+mod.getReferenceType()+":'"+key+"' for modification in metatype "+id);
 //					throw new IllegalArgumentException("Unknown reference "+mod.getReferenceType()+":'"+key+"' for metatype "+id);
 				}
 			}

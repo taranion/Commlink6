@@ -5,7 +5,6 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.shadowrun.ANPC;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 

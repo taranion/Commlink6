@@ -37,6 +37,7 @@ import de.rpgframework.shadowrun.SpellFeatureList;
 import de.rpgframework.shadowrun.SpellList;
 import de.rpgframework.shadowrun6.ActionList;
 import de.rpgframework.shadowrun6.MetaTypeList;
+import de.rpgframework.shadowrun6.NPCList;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -126,8 +127,10 @@ public class Shadowrun6DataPlugin  {
 			Shadowrun6Core.loadPriorityTableEntries(core, clazz.getResourceAsStream("core/data/priorities.xml"));
 //			logger.fatal("Stop here");
 //			System.exit(1);
-//			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
-//			logger.debug("Loaded "+list.size()+" NPCs");
+			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
+			logger.debug("Loaded "+list.size()+" NPCs");
+			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/contacts.xml"));
+			logger.debug("Loaded "+list.size()+" NPCs");
 			
 			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 			logger.debug("Loaded "+list.size()+" rule presets");
