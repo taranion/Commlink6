@@ -5,10 +5,18 @@ import java.io.IOException;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.NavigationPane;
 import org.prelle.javafx.Page;
+import org.prelle.javafx.ResponsiveControl;
+import org.prelle.javafx.ResponsiveControlManager;
 
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.ControllerEvent;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 /**
@@ -38,7 +46,7 @@ public class TestApplication extends FlexibleApplication {
 	@Override
 	public Page createPage(MenuItem menuItem) {
 		// TODO Auto-generated method stub
-		return new SR6CharacterViewLayout();
+		return null; //new SR6CharacterViewLayout();
 	}
 	
     //-------------------------------------------------------------------
@@ -47,16 +55,26 @@ public class TestApplication extends FlexibleApplication {
      * @see javafx.application.Application#start(javafx.stage.Stage)
      */
     public void start(Stage stage) throws Exception {
-		stage.setMaxWidth(1400);
+		stage.setMaxWidth(2400);
 //		stage.setMaxHeight(900);
-		stage.setMinWidth(360);
+		stage.setMinWidth(400);
 		stage.setMinHeight(560);
 		super.start(stage);
 		
 		Scene scene = stage.getScene();
 		setStyle(scene, DARK_STYLE);
+        stage.getScene().getStylesheets().add(getClass().getResource("sr6test.css").toExternalForm());
 		
-//        stage.getScene().getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        Shadowrun6Character model = new Shadowrun6Character();
+        model.setName("Unnamed");
+        SR6CharacterViewLayout screen = new SR6CharacterViewLayout();
+        PriorityCharacterGenerator chargen = new PriorityCharacterGenerator();
+        chargen.setModel(model, null);
+        //KarmaCharacterGenerator karma = new KarmaCharacterGenerator(model, null);
+        screen.handleControllerEvent(BasicControllerEvents.GENERATOR_CHANGED, chargen);
+		openScreen(screen);
+		ResponsiveControlManager.initialize((Region) scene.getRoot(), 800, 1200);
+		ResponsiveControlManager.manageResponsiveControls((Region) scene.getRoot(), 800, 1200);
      }
 
 }

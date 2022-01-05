@@ -1,9 +1,8 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -22,7 +21,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  */
 public class CommonSkillController extends ControllerImpl<SR6Skill> implements SR6SkillController {
 	
-	protected final static Logger logger = LogManager.getLogger("shadowrun6.gen.skill");
+	protected final static Logger logger = System.getLogger(CommonSkillController.class.getPackageName()+".skill");
 
 	protected Shadowrun6Character model;
 
@@ -73,15 +72,15 @@ public class CommonSkillController extends ControllerImpl<SR6Skill> implements S
 	 */
 	@Override
 	public boolean increase(SR6SkillValue ref) {
-		logger.debug("increase "+ref);
+		logger.log(Level.DEBUG, "increase "+ref);
 		if (!canBeIncreased(ref)) {
-			logger.warn("Trying to increase a skill which cannot be increased: "+ref);
+			logger.log(Level.WARNING, "Trying to increase a skill which cannot be increased: "+ref);
 			return false;
 		}
 	
 		// Change model
 		ref.setDistributed(ref.getDistributed()+1);
-		logger.info("Increase skill "+ref.getModifyable().getId()+" to "+ref.getDistributed());
+		logger.log(Level.INFO, "Increase skill "+ref.getModifyable().getId()+" to "+ref.getDistributed());
 		
 		return true;
 	}
@@ -92,7 +91,7 @@ public class CommonSkillController extends ControllerImpl<SR6Skill> implements S
 	 */
 	@Override
 	public boolean decrease(SR6SkillValue ref) {
-		logger.debug("decrease "+ref);
+		logger.log(Level.DEBUG, "decrease "+ref);
 		if (!canBeDecreased(ref))
 			return false;
 	
@@ -100,7 +99,7 @@ public class CommonSkillController extends ControllerImpl<SR6Skill> implements S
 		ref.setDistributed(ref.getDistributed()-1);
 		if (ref.getModifiedValue()==0)
 			model.removeSkillValue( ref);
-		logger.info("Decrease skill "+ref.getModifyable().getId()+" to "+ref.getDistributed());
+		logger.log(Level.INFO, "Decrease skill "+ref.getModifyable().getId()+" to "+ref.getDistributed());
 		
 		return true;
 	}
@@ -153,12 +152,12 @@ public class CommonSkillController extends ControllerImpl<SR6Skill> implements S
 	 */
 	@Override
 	public OperationResult<SR6SkillValue> select(SR6Skill data) {
-		logger.debug("ENTER select("+data+")");
+		logger.log(Level.DEBUG, "ENTER select("+data+")");
 		try {
 			// Ensure selecting this skill is allowed 
 			Possible possible = canBeSelected(data);
 			if (!possible.get()) {
-				logger.warn("Tried to select a skill that is not valid to select: "+possible);
+				logger.log(Level.WARNING, "Tried to select a skill that is not valid to select: "+possible);
 				return new OperationResult<>(possible);
 			}
 			
@@ -170,7 +169,7 @@ public class CommonSkillController extends ControllerImpl<SR6Skill> implements S
 			
 			return new OperationResult<SR6SkillValue>(ret);			
 		} finally {
-			logger.debug("LEAVE select("+data+")");			
+			logger.log(Level.DEBUG, "LEAVE select("+data+")");			
 		}
 	}
 

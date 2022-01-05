@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.jfx.page;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.prelle.javafx.Mode;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.Page;
 

@@ -4,10 +4,12 @@ import java.util.ResourceBundle;
 
 import de.rpgframework.ResourceI18N;
 
-public enum PriorityVariant {
+public enum PowerLevel {
+	LOW_LEVEL,
+	STREET_LEVEL,
 	STANDARD,
 	PRIME_RUNNER,
-	STREET_LEVEL
+	EILTE,
 	;
 	public String getName() { 
 		return ResourceI18N.get(ResourceBundle.getBundle(PriorityCharacterGenerator.class.getName()), "variant."+this.name().toLowerCase());

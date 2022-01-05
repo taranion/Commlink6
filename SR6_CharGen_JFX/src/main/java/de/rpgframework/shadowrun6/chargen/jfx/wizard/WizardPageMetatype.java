@@ -1,6 +1,8 @@
 package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
 import java.io.InputStream;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -10,11 +12,9 @@ import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.character.Gender;
+import de.rpgframework.classification.Gender;
 import de.rpgframework.jfx.DataItemSpinnerPane;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
@@ -36,12 +36,12 @@ import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 /**
- * @author stefa
+ * @author prelle
  *
  */
 public class WizardPageMetatype extends WizardPage {
 	
-	private final static Logger logger = LoggerFactory.getLogger(WizardPageMetatype.class);
+	private final static Logger logger = System.getLogger(WizardPageMetatype.class.getPackageName());
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(WizardPageMetatype.class.getName());
 
@@ -88,7 +88,7 @@ public class WizardPageMetatype extends WizardPage {
 					}
 					return img;
 				}
-				logger.error("Missing resource "+CommonShadowrunJFXResourceHook.class.getPackage().getName()+" + "+name);
+				logger.log(Level.ERROR, "Missing resource "+CommonShadowrunJFXResourceHook.class.getPackage().getName()+" + "+name);
 				return null;
 			}});
 		contentPane.setModificationConverter((m) -> Shadowrun6Tools.getModificationString(contentPane.getSelectedItem(),m));
@@ -97,7 +97,7 @@ public class WizardPageMetatype extends WizardPage {
 //		contentPane.setChoiceConverter((c) -> SplitterTools.getChoiceString(contentPane.getSelectedItem(), c));
 		contentPane.setModel(charGen.getModel());
 		contentPane.setDecisionHandler( (r,c) -> {
-			logger.warn("ToDo: make decision");
+			logger.log(Level.WARNING, "ToDo: make decision");
 //			SplitterJFXUtil.openDecisionDialog(r, c, null);
 		});
 		contentPane.setItems(Shadowrun6Core.getItemList(SR6MetaType.class));
@@ -156,7 +156,7 @@ public class WizardPageMetatype extends WizardPage {
 		contentPane.selectedItemProperty().addListener( (ov,o,n) -> {
 			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
 			if (ctrl==null) {
-				logger.error(charGen.getClass()+".getMetatypeController returns null  (internal "+charGen.getWrapped()+" ) of "+charGen);
+				logger.log(Level.ERROR, charGen.getClass()+".getMetatypeController returns null  (internal "+charGen.getWrapped()+" ) of "+charGen);
 			} else
 			ctrl.select(n);
 			ctrl.randomizeSizeWeight();
@@ -165,7 +165,7 @@ public class WizardPageMetatype extends WizardPage {
 		});
 		
 		btnRoll.setOnAction(ev -> {
-			logger.info("Roll");
+			logger.log(Level.INFO, "Roll");
 			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
 			ctrl.roll();
 //			ctrl.rollEyes();
@@ -204,7 +204,7 @@ public class WizardPageMetatype extends WizardPage {
 	 */
 	@Override
 	public void pageVisited() {
-		logger.info("pageVisited");
+		logger.log(Level.INFO, "pageVisited");
 	}
 	
 	//-------------------------------------------------------------------
@@ -218,13 +218,13 @@ public class WizardPageMetatype extends WizardPage {
 			tfSize.setText(String.valueOf(model.getSize()));
 			tfWeight.setText(String.valueOf(model.getWeight()));
 		} catch (Exception e) {
-			logger.warn("Found invalid data in textfields: "+e);
+			logger.log(Level.WARNING, "Found invalid data in textfields: "+e);
 		}
 	}
 
 //	//-------------------------------------------------------------------
 //	private void refreshDataTab() {
-//		logger.info("set data of "+spinner.getValue().getId());
+//		logger.log(Level.INFO, "set data of "+spinner.getValue().getId());
 //		// Data
 //		List<String> attr = spinner.getValue().getModifications().stream()
 //				.filter(m -> (m instanceof ValueModification))

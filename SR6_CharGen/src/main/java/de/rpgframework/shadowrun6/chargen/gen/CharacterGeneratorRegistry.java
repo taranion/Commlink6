@@ -25,7 +25,7 @@ public class CharacterGeneratorRegistry {
 		generators = new HashMap<String,Class<? extends SR6CharacterGenerator>>();
 		addGenerator(PriorityCharacterGenerator.class);
 		addGenerator(SumToTenCharacterGenerator.class);
-		addGenerator(KarmaCharacterGenerator.class);
+		addGenerator(PointBuyCharacterGenerator.class);
 		addGenerator(LifeModulesCharacterGenerator.class);
 	}
 

@@ -12,6 +12,6 @@
         <Logger name="xml" level="warn" />
         <Logger name="prelle.jfx" level="warn" />
         <Logger name="rpgframework" level="debug" />
-        <Logger name="splittermond" level="debug" />
+        <Logger name="de.rpgframework.shadowrun6.chargen.gen.attrib" level="INFO" />
     </Loggers>
 </Configuration>

@@ -7,7 +7,7 @@ import org.prelle.javafx.Section;
 import org.prelle.javafx.TitledComponent;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.character.Gender;
+import de.rpgframework.classification.Gender;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;

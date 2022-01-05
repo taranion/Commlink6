@@ -2,11 +2,10 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterProviderLoader;
@@ -30,7 +29,7 @@ import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
  */
 public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	
-	private final static Logger logger = LogManager.getLogger(SR6CharactersOverviewPage.class.getPackageName());
+	private final static Logger logger = System.getLogger(SR6CharactersOverviewPage.class.getPackageName());
 
 
 	//-------------------------------------------------------------------
@@ -39,11 +38,12 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 */
 	@Override
 	protected CharacterGenerator<?, ?> createCharacterGenerator() {
-		logger.info("create new character and new generator");
+		logger.log(Level.DEBUG, "ENTER createCharacterGenerator");
 		Shadowrun6Character model = new Shadowrun6Character();
 		@SuppressWarnings("unchecked")
 		Class<SR6CharacterGenerator> clazz = (Class<SR6CharacterGenerator>) CharacterGeneratorRegistry.getGenerators().get(0);
 		try {
+			logger.log(Level.INFO, "creating "+clazz);
 			SR6CharacterGenerator wrapped = (SR6CharacterGenerator) clazz
 					.getConstructor(Shadowrun6Character.class, CharacterHandle.class)
 					.newInstance(model, null);
@@ -51,9 +51,11 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 			ret.setWrapped(wrapped);
 			return ret;
 		} catch (Exception e) {
-			logger.fatal("Failed creating CharacterGenerator "+clazz,e);
+			logger.log(Level.ERROR, "Failed creating CharacterGenerator "+clazz,e);
 			System.exit(1);
 			return null;
+		} finally {
+			logger.log(Level.TRACE, "LEAVE createCharacterGenerator");
 		}
 	}
 
@@ -73,20 +75,12 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 */
 	@Override
 	protected CharacterViewLayout createCharacterAppLayout(CharacterController<?, ?> control) {
-		logger.debug("ENTER: createCharacterAppLayout");
+		logger.log(Level.DEBUG, "ENTER: createCharacterAppLayout");
 		try {
 			return new SR6CharacterViewLayout();
 		} finally {
-			logger.debug("LEAVE: createCharacterAppLayout");			
+			logger.log(Level.DEBUG, "LEAVE: createCharacterAppLayout");			
 		}
-//		try {
-//			return ScreenLoader.loadMainScreen();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			System.exit(1);
-//			return null;
-//		}
 	}
 
 	//-------------------------------------------------------------------
@@ -98,7 +92,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		try {
 			return CharacterProviderLoader.getCharacterProvider().getMyCharacters(RoleplayingSystem.SHADOWRUN6);
 		} catch (Exception e) {
-			logger.error("Failed loading characters",e);
+			logger.log(Level.ERROR, "Failed loading characters",e);
 		}
 		return new ArrayList<CharacterHandle>();
 	}
@@ -112,7 +106,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		try {
 			return Shadowrun6Core.load(raw);
 		} catch (Exception e) {
-			logger.error("Failed parsing XML for char",e);
+			logger.log(Level.ERROR, "Failed parsing XML for char",e);
 			StringWriter mess = new StringWriter();
 			mess.append("Failed loading character\n\n");
 			e.printStackTrace(new PrintWriter(mess));

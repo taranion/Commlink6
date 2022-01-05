@@ -1,11 +1,22 @@
 package de.rpgframework.shadowrun6.chargen.jfx.section;
 
+import org.prelle.javafx.Mode;
 import org.prelle.javafx.ScreenManagerProvider;
 import org.prelle.javafx.Section;
 
-import de.rpgframework.jfx.rules.AttributeTable;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
+import de.rpgframework.shadowrun.chargen.jfx.KarmaAttributeTable;
+import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
+import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTable;
+import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTablePrioritySkin;
+import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTableSkin;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.AttributeTable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
@@ -15,11 +26,11 @@ import javafx.scene.layout.VBox;
  */
 public class AttributeSection extends Section {
 
-	private AttributeTable<ShadowrunAttribute> table;
+	private ShadowrunAttributeTable<SR6Skill,SR6SkillValue,Shadowrun6Character> table;
 
 	//-------------------------------------------------------------------
 	public AttributeSection(String title, ScreenManagerProvider provider) {
-		super(title.toUpperCase(), null);
+		super(title, null);
 
 		initComponents();
 		initLayoutNormal();
@@ -29,7 +40,7 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		table = new AttributeTable<ShadowrunAttribute>(ShadowrunAttribute.primaryValues());
+		table = new KarmaAttributeTable<SR6Skill,SR6SkillValue,Shadowrun6Character>();
 	}
 
 	//-------------------------------------------------------------------
@@ -38,6 +49,7 @@ public class AttributeSection extends Section {
 //		layout.setStyle("-fx-spacing: 1em;");
 		
 		setContent(table);
+		setMode(Mode.BACKDROP);
 		
 		
 		CheckBox cb1 = new CheckBox("Configuration Setting 1");
@@ -54,9 +66,25 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
-		table.setController(ctrl.getAttributeController());
-		table.setModel(ctrl.getModel());
-		table.setMode(AttributeTable.Mode.GENERATE);
+		table.setController(ctrl);
+		
+		Shadowrun6Character model = ctrl.getModel();
+		MagicOrResonanceType mor = model.getMagicOrResonanceType();
+		if (mor != null) {
+			table.setShowMagic(mor.usesMagic());
+			table.setShowResonance(mor.usesResonance());
+		}
+
+//		table.setModel(ctrl.getModel());
+//		table.setMode(AttributeTable.Mode.GENERATE);
+		if (ctrl instanceof IPriorityGenerator) {
+ 			System.err.println("AttributeSection: change controller to Priority");
+			table = new PriorityAttributeTable<>();
+		} else {
+			System.err.println("AttributeSection: change controller to Karma");
+			table = new KarmaAttributeTable<>();
+		}
+		setContent(table);
 	}
 
 	//-------------------------------------------------------------------

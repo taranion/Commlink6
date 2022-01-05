@@ -1,10 +1,5 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.APrioritySettings;
 
 /**
@@ -13,7 +8,7 @@ import de.rpgframework.shadowrun.chargen.gen.APrioritySettings;
  */
 public class SR6PrioritySettings extends APrioritySettings {
 
-	public PriorityVariant variant;
+	public PowerLevel variant;
 	
 	public int mysticAdeptMaxPoints;
 	public int mysticAdeptPowerPoints;

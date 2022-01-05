@@ -45,6 +45,12 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 		updateEffectiveRules();
 	}
 
+	//-------------------------------------------------------------------
+	public CommonSR6CharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
+		this.model = model;
+		this.handle = handle;
+	}
+
 	// --------------------------------------------------------------------
 	protected abstract void setupProcessChain();
 

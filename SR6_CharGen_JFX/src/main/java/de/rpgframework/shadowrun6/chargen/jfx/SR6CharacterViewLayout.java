@@ -13,17 +13,20 @@ import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
+import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
 
 /**
@@ -34,7 +37,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	
 	private final static Logger logger = LogManager.getLogger(SR6CharacterViewLayout.class);
 	
-	private BasicDataPage page;
+	private BasicDataPage2 page;
 	
 	//-------------------------------------------------------------------
 	/**
@@ -46,11 +49,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	
 	//-------------------------------------------------------------------
 	public void initPages() {
-		page = new BasicDataPage();
-		getPages().add(page);
-		
+		page = new BasicDataPage2();
 		Page skillPage = new Page("Skills");
-		getPages().add(skillPage);
+		getPages().addAll(page, skillPage);
 	}
 
 	//-------------------------------------------------------------------
@@ -58,10 +59,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 * @see de.rpgframework.jfx.pages.CharacterViewLayout#startCreation()
 	 */
 	@Override
-	public void startCreation() {
+	public void startCreation(CharacterGenerator<?,?> charGen) {
 		logger.warn("ENTER: Start creation");
-		GeneratorWrapper wrapper = new GeneratorWrapper(new Shadowrun6Character(), null);
-		wrapper.setWrapped(new PriorityCharacterGenerator());
+		GeneratorWrapper wrapper = (GeneratorWrapper) charGen; //new GeneratorWrapper(new Shadowrun6Character(), null);
+//		wrapper.setWrapped(new PriorityCharacterGenerator());
 		logger.warn("Create wizard for "+wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
 		while (true) {
@@ -83,8 +84,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			}
 			if (close==CloseType.CANCEL) {
 				//			getApplication().closeAppLayout();
-				logger.info("call historyBack() on "+getAppLayout().getBreadcrumb());
-				getAppLayout().historyBack();
+				logger.info("call historyBack()");
+				getApplication().closeScreen(this);
 				return;
 			}
 		}
@@ -142,7 +143,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.debug("RCV "+type);
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
-			page.setController(null);
+			page.setController((SR6CharacterController) param[0]);
 		
 		}
 //		Page page = getVisiblePage();

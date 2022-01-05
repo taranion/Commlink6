@@ -5,11 +5,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ApplyWhen;
 import de.rpgframework.genericrpg.data.AttributeValue;
@@ -39,6 +41,12 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 	//-------------------------------------------------------------------
 	public PriorityAttributeGenerator(SR6CharacterController parent) {
 		super(parent);
+	}
+
+	@Override
+	public String getHumanReadable(Possible result, Locale loc) {
+		// TODO Auto-generated method stub
+		return result.getI18NKey();
 	}
 
 	//-------------------------------------------------------------------

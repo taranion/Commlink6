@@ -4,20 +4,28 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.data.ASkillValue;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
 import de.rpgframework.shadowrun.AShadowrunSkill;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
+import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
+import de.rpgframework.shadowrun.chargen.gen.PriorityPointBuySkillController;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
@@ -27,18 +35,15 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PrioritySkillGenerator extends CommonSkillController implements SR6SkillGenerator, SR6SkillController {
+public class PointBuySkillGenerator extends CommonSkillController implements SR6SkillGenerator, SR6SkillController, PriorityPointBuySkillController<SR6Skill, SR6SkillValue> {
 
 	private int pointsSkills;
-	private int pointsLangAndKnow;
-	private List<ToDoElement> normalToDos;
-	private List<ToDoElement> knowledgeToDos;
+	private int skillsFromCP;
+//	private int pointsLangAndKnow;
 
 	//-------------------------------------------------------------------
-	public PrioritySkillGenerator(SR6CharacterGenerator parent) {
+	public PointBuySkillGenerator(SR6CharacterGenerator parent) {
 		super(parent);
-		normalToDos    = new ArrayList<>();
-		knowledgeToDos = new ArrayList<>();
 		
 		// Ensure native language skill is present
 		boolean found = false;
@@ -50,13 +55,19 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 //			parent.getModel().addSkill(new SkillValue(Shadowrun6Core.getSkill("language"), SkillValue.LANGLEVEL_NATIVE));
 	}
 
+	@Override
+	public String getHumanReadable(Possible result, Locale loc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see org.prelle.SR6SkillController.charctrl.ISkillController#getPointsLeftInKnowledgeAndLanguage()
 	 */
 	@Override
 	public int getPointsLeftInKnowledgeAndLanguage() {
-		return pointsLangAndKnow;
+		return 0; //pointsLangAndKnow;
 	}
 
 	//-------------------------------------------------------------------
@@ -97,9 +108,9 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 	public Possible canBeSelected(SR6Skill data) {
 		if (pointsSkills>0)
 			return Possible.TRUE;
-		if (pointsLangAndKnow>0 && (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)) {
-			return Possible.TRUE;			
-		}
+//		if (pointsLangAndKnow>0 && (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)) {
+//			return Possible.TRUE;			
+//		}
 		// No points left - maybe with karma?
 		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 		if (model.getKarmaFree()>=karma)
@@ -191,43 +202,157 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 	public List<Modification> process(List<Modification> previous) {
 		List<Modification> unprocessed = new ArrayList<>();
 		
-		logger.log(Level.TRACE, "START: Skills");
+		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
 		try {
 			// Reset values
-			pointsSkills   = 0;
-			pointsLangAndKnow = 0;
-			normalToDos.clear();
-			knowledgeToDos.clear();
+			pointsSkills   = 12;
+			skillsFromCP   = 0;
+//			pointsLangAndKnow = 0;
+			todos.clear();
 			
 			for (Modification tmp : previous) {
-				if (tmp instanceof ValueModification) {
-					ValueModification mod = (ValueModification)tmp;
-					if (ApplyTo.POINTS==mod.getApplyTo()) {
-						ShadowrunReference ref = (ShadowrunReference)mod.getReferenceType();
-						switch (ref) {
-						case SKILL:
-							logger.log(Level.DEBUG, "Add "+mod.getValue()+" skill points from "+tmp.getSource());
-							pointsSkills += mod.getValue();
-							break;
-						case SKILL_KNOWLEDGE:
-							logger.log(Level.DEBUG, "Add "+mod.getValue()+" knowledge skill points from "+tmp.getSource());
-							pointsLangAndKnow += mod.getValue();
-							break;
-						default:
-							unprocessed.add(mod);
-						}						
-					}					
-				} else {
+//				if (tmp instanceof ValueModification) {
+//					ValueModification mod = (ValueModification)tmp;
+//					if (ApplyTo.POINTS==mod.getApplyTo()) {
+//						ShadowrunReference ref = (ShadowrunReference)mod.getReferenceType();
+//						switch (ref) {
+//						case SKILL:
+//							logger.log(Level.DEBUG, "Add "+mod.getValue()+" skill points from "+tmp.getSource());
+//							pointsSkills += mod.getValue();
+//							break;
+//						case SKILL_KNOWLEDGE:
+//							logger.log(Level.DEBUG, "Add "+mod.getValue()+" knowledge skill points from "+tmp.getSource());
+//							pointsLangAndKnow += mod.getValue();
+//							break;
+//						default:
+//							unprocessed.add(mod);
+//						}						
+//					}					
+//				} else {
 					unprocessed.add(tmp);
+//				}
+			}
+
+			Shadowrun6Character model = parent.getModel();
+			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
+			for (SR6Skill key : Shadowrun6Core.getItemList(SR6Skill.class)) {
+				PerSkillPoints per = settings.perSkill.get(key.getId());
+				if (per == null) {
+					logger.log(Level.WARNING, "No data for " + key);
+					continue;
+				}
+				/* 
+				 * Pay skilll points 
+				 */
+				int required = per.regular;
+				if (required>0) {
+					if (pointsSkills>0) {
+						int pay = Math.min(pointsSkills, required);
+						logger.log(Level.DEBUG, "Pay {} free CP for {}", pay, key);
+						pointsSkills -= pay;
+						required -= pay;
+					}
+					// If not enough, convert
+					if (required>0) {
+						int pay = required*2;
+						logger.log(Level.DEBUG, "Convert {} CP to {} skill points for {}", pay, required, key);
+						settings.characterPoints -= pay;
+						settings.cpToSkills += required;
+						required -= pay;
+					}
 				}
 			}
+			logger.log(Level.DEBUG, "Finish with {} skill points", pointsSkills);
+			if (logger.isLoggable(Level.TRACE))
+				logger.log(Level.TRACE, settings.toSkillString());
+
+			
+			logger.log(Level.INFO, "{} CP converted to {} skills", settings.cpToSkills*2, settings.cpToSkills);
+			
+			/*
+			 * Ensure limits of 20 are in kept
+			 */
+			if (settings.cpToSkills>20) {
+				todos.add(new ToDoElement(Severity.STOPPER, "Too many CP converted to skill points"));
+			}
+			if (pointsSkills>0) {
+				todos.add(new ToDoElement(Severity.STOPPER, pointsSkills+" skill points left to spend"));
+			}
+
 		} catch (Exception e) {
 			
 		} finally {
-			logger.log(Level.TRACE, "STOP : Skills");
+			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
 		}
 		
 		return unprocessed;
+	}
+
+	@Override
+	public int getPointsLeft() {
+		return pointsSkills;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityPointBuySkillController#canDecreasePoints(de.rpgframework.shadowrun.AShadowrunSkill)
+	 */
+	@Override
+	public Possible canDecreasePoints(SR6Skill key) {
+		PerSkillPoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perSkill.get(key);
+		return (per.regular>0)?Possible.TRUE:Possible.FALSE;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityPointBuySkillController#canIncreasePoints(de.rpgframework.shadowrun.AShadowrunSkill)
+	 */
+	@Override
+	public Possible canIncreasePoints(SR6Skill key) {
+		// Only 20 attribute points may be generated from CP
+		if (skillsFromCP >= 20)
+			return new Possible("skill.points.already20CP");
+		// Every conversion costs 2 CP
+		if (parent.getModel().getCharGenSettings(SR6PointBuySettings.class).characterPoints < 2)
+			return new Possible("skill.points.notEnoughCP");
+
+		return Possible.TRUE;
+	}
+
+	@Override
+	public boolean increasePoints(SR6Skill key) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean decreasePoints(SR6Skill key) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Possible canDecreaseKarma(SR6Skill key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Possible canIncreaseKarma(SR6Skill key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean increaseKarma(SR6Skill key) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean decreaseKarma(SR6Skill key) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

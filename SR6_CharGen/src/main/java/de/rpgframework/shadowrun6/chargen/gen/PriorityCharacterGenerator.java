@@ -136,7 +136,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		this.handle= handle;
 		this.setupDone = false;		
 		SR6PrioritySettings settings = new SR6PrioritySettings();
-		settings.variant = PriorityVariant.STANDARD;
+		settings.variant = PowerLevel.STANDARD;
 		settings.priorities.put(PriorityType.METATYPE, Priority.B);
 		settings.priorities.put(PriorityType.ATTRIBUTE, Priority.A);
 		settings.priorities.put(PriorityType.MAGIC, Priority.E);

@@ -27,7 +27,7 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 
 /**
- * @author stefa
+ * @author prelle
  *
  */
 public class GenerationWizard extends Wizard {

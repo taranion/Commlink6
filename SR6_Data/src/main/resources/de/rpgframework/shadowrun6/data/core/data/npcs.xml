@@ -283,4 +283,38 @@
 		</gear>
 	</npc>
 	
+	<!-- 5 -->
+	<npc id="combat_mage" rating="5" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="3" />
+			<attribute id="AGILITY"   value="4" />
+			<attribute id="REACTION"  value="4" />
+			<attribute id="STRENGTH"  value="2" />
+			<attribute id="WILLPOWER" value="4" />
+			<attribute id="LOGIC"     value="4" />
+			<attribute id="INTUITION" value="4" />
+			<attribute id="CHARISMA"  value="4" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="5" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="astral"       value="4"/>
+			<skillval ref="athletics"    value="4"/>
+			<skillval ref="biotech"      value="2"/>
+			<skillval ref="close_combat" value="2"/>
+			<skillval ref="conjuring"    value="4"/>
+			<skillval ref="electronics"  value="1"/>
+			<skillval ref="influence"    value="2">
+				<skillspec ref="influence/intimidation" />
+			</skillval>
+			<skillval ref="perception"   value="4"/>
+			<skillval ref="piloting"     value="1"/>
+			<skillval ref="sorcery"      value="5"/>
+			<skillval ref="stealth"      value="2"/>
+		</skills>
+		<gear>
+		</gear>
+	</npc>
+	
 </npcs>
