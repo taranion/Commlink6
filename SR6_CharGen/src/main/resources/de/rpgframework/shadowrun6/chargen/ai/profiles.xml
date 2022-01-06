@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles>
-  <profile id="i_pick_every_lock">
+  <profile id="pick_every_lock">
     <modifications>
     	<recommod type="SKILL" ref="engineering" level="VERY_GOOD"/>
     	<recommod type="SKILLSPECIALIZATION" ref="engineering/lockpicking"/>
+    	<recommod type="ATTRIBUTE" ref="AGILITY" level="VERY_GOOD"/>
+    </modifications>
+  </profile>
+  <profile id="gun_master">
+    <modifications>
+    	<recommod type="SKILL" ref="firearms" level="MASTER"/>
+    	<recommod type="ATTRIBUTE" ref="AGILITY" level="MASTER"/>
     </modifications>
   </profile>
   

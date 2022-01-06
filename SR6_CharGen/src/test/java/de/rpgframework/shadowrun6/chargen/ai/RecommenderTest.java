@@ -50,9 +50,11 @@ public class RecommenderTest {
 	@Test
 	public void test1() {
 		Recommender recommender = new Recommender();
-		recommender.addConfiguration( AITool.getProfile("i_pick_every_lock").getModifications() );
+		recommender.addConfiguration( AITool.getProfile("pick_every_lock").getModifications() );
+		recommender.addConfiguration( AITool.getProfile("gun_master").getModifications() );
 		
 		assertEquals(RecommendationState.RECOMMENDED, recommender.getRecommendationState(Shadowrun6Core.getSkill("engineering")));
+		assertEquals(RecommendationState.RECOMMENDED, recommender.getRecommendationState(ShadowrunAttribute.LOGIC));
 	}
 	
 }
