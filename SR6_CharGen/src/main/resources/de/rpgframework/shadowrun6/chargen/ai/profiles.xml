@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profiles>
+  <profile id="i_pick_every_lock">
+    <modifications>
+    	<recommod type="SKILL" ref="engineering" level="VERY_GOOD"/>
+    	<recommod type="SKILLSPECIALIZATION" ref="engineering/lockpicking"/>
+    </modifications>
+  </profile>
+  
+</profiles>
