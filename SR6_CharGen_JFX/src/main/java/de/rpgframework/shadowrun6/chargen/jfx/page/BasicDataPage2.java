@@ -1,5 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.jfx.page;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ResourceBundle;
 
 import org.prelle.javafx.JavaFXConstants;
@@ -29,6 +31,8 @@ import javafx.scene.text.TextFlow;
  *
  */
 public class BasicDataPage2 extends Page implements IShadowrunCharacterControllerProvider<SR6CharacterController> {
+
+	private final static Logger logger = System.getLogger(BasicDataPage2.class.getPackageName());
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(BasicDataPage.class.getName());
 
@@ -42,6 +46,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	
 	//-------------------------------------------------------------------
 	public BasicDataPage2() {
+		logger.log(Level.DEBUG, "init<>");
 		// Flow 1
 		initBaseData();
 		initPortrait();	
@@ -131,6 +136,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
+		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		this.control = ctrl;

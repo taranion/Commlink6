@@ -21,7 +21,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  */
 public abstract class ControllerImpl<A> implements PartialController<A> {
 	
-	protected static Logger logger = LogManager.getLogger("shadowrun6.gen");
+	protected static Logger logger = LogManager.getLogger(ControllerImpl.class.getPackageName());
 
 	protected static Random random = new Random();
 	

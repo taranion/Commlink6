@@ -62,6 +62,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	public void startCreation(CharacterGenerator<?,?> charGen) {
 		logger.warn("ENTER: Start creation");
 		GeneratorWrapper wrapper = (GeneratorWrapper) charGen; //new GeneratorWrapper(new Shadowrun6Character(), null);
+		
+		handleControllerEvent(BasicControllerEvents.GENERATOR_CHANGED, wrapper);
+		
 //		wrapper.setWrapped(new PriorityCharacterGenerator());
 		logger.warn("Create wizard for "+wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);

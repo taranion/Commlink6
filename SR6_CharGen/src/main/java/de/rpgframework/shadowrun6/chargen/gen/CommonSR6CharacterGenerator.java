@@ -32,7 +32,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
 public abstract class CommonSR6CharacterGenerator extends CharacterControllerImpl<ShadowrunAttribute,Shadowrun6Character>
 		implements SR6CharacterGenerator {
 
-	protected static final Logger logger = LogManager.getLogger("shadowrun6.gen.proc");
+	protected static final Logger logger = LogManager.getLogger(CommonSR6CharacterGenerator.class.getPackageName());
 
 	protected IMetatypeController meta;
 	protected MagicOrResonanceController magicReso;

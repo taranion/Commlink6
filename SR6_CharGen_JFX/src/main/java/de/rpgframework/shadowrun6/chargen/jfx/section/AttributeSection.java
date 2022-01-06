@@ -1,22 +1,23 @@
 package de.rpgframework.shadowrun6.chargen.jfx.section;
 
-import org.prelle.javafx.Mode;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+
 import org.prelle.javafx.ScreenManagerProvider;
 import org.prelle.javafx.Section;
 
+import de.rpgframework.jfx.rules.AttributeTable.Mode;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
+import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.jfx.KarmaAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTable;
-import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTablePrioritySkin;
-import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTableSkin;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.jfx.pane.AttributeTable;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuyAttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PriorityAttributeGenerator;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
@@ -26,11 +27,16 @@ import javafx.scene.layout.VBox;
  */
 public class AttributeSection extends Section {
 
+	private final static Logger logger = System.getLogger(AttributeSection.class.getPackageName());
+
 	private ShadowrunAttributeTable<SR6Skill,SR6SkillValue,Shadowrun6Character> table;
+	
+	private Mode mode = Mode.GENERATE;
 
 	//-------------------------------------------------------------------
 	public AttributeSection(String title, ScreenManagerProvider provider) {
 		super(title, null);
+		logger.log(Level.DEBUG, "<init>");
 
 		initComponents();
 		initLayoutNormal();
@@ -49,7 +55,7 @@ public class AttributeSection extends Section {
 //		layout.setStyle("-fx-spacing: 1em;");
 		
 		setContent(table);
-		setMode(Mode.BACKDROP);
+		setMode(org.prelle.javafx.Mode.BACKDROP);
 		
 		
 		CheckBox cb1 = new CheckBox("Configuration Setting 1");
@@ -66,6 +72,7 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
+		logger.log(Level.INFO, "updateController");
 		table.setController(ctrl);
 		
 		Shadowrun6Character model = ctrl.getModel();
@@ -75,10 +82,14 @@ public class AttributeSection extends Section {
 			table.setShowResonance(mor.usesResonance());
 		}
 
+		IAttributeController attrib = ctrl.getAttributeController();
 //		table.setModel(ctrl.getModel());
 //		table.setMode(AttributeTable.Mode.GENERATE);
-		if (ctrl instanceof IPriorityGenerator) {
+		if (attrib instanceof PriorityAttributeGenerator) {
  			System.err.println("AttributeSection: change controller to Priority");
+			table = new PriorityAttributeTable<>();
+		} else if (attrib instanceof PointBuyAttributeGenerator) {
+ 			System.err.println("AttributeSection: change controller to Point Buy");
 			table = new PriorityAttributeTable<>();
 		} else {
 			System.err.println("AttributeSection: change controller to Karma");
@@ -89,6 +100,7 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void refresh() {
+		logger.log(Level.DEBUG, "refresh");
 		table.refresh();
 //		derived.refresh();
 	}

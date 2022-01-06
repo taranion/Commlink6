@@ -129,6 +129,7 @@ public class PointBuyGenTest {
 		 * Attributes
 		 */
 		PointBuySkillGenerator skill = (PointBuySkillGenerator) charGen.getSkillController();
+		assertNotNull(Shadowrun6Core.getItem(SR6Skill.class, "athletics"));
 		assertTrue(skill.increase(model.getSkillValue(Shadowrun6Core.getItem(SR6Skill.class, "athletics"))));
 	}
 	

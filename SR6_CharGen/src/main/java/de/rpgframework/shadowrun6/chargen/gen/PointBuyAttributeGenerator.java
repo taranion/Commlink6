@@ -8,12 +8,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
-import java.util.Map.Entry;
 
 import de.rpgframework.MultiLanguageResourceBundle;
-import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;

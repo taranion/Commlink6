@@ -1,14 +1,8 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
-import java.util.List;
-
-import de.rpgframework.character.RuleSpecificCharacterObject;
-import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
+import de.rpgframework.genericrpg.chargen.ai.Recommender;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.data.Choice;
-import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
@@ -86,7 +80,13 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	 */
 	@Override
 	public RecommendationState getRecommendationState(ShadowrunAttribute item) {
-		return RecommendationState.NEUTRAL;
+		Recommender recommender = getModel().getRecommender();
+		// No recommender set, means no recommendation
+		if (recommender==null) {		
+			return RecommendationState.NEUTRAL;
+		}
+		
+		return recommender.getRecommendationState(item);
 	}
 
 	//-------------------------------------------------------------------

@@ -10,6 +10,7 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ASkillValue;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -320,15 +321,15 @@ public class PointBuySkillGenerator extends CommonSkillController implements SR6
 	}
 
 	@Override
-	public boolean increasePoints(SR6Skill key) {
+	public OperationResult<SR6SkillValue> increasePoints(SR6Skill key) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
-	public boolean decreasePoints(SR6Skill key) {
+	public OperationResult<SR6SkillValue> decreasePoints(SR6Skill key) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
