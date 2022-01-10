@@ -4,18 +4,18 @@
 
 	<magicreson id="magician" magic="true" spells="true" cost="10">
 		<modifications>
-            <allowmod type="SKILL" ref="astral" />
-            <allowmod type="SKILL" ref="conjuring" />
-            <allowmod type="SKILL" ref="enchanting" />
-            <allowmod type="SKILL" ref="sorcery" />
+			<allowmod type="SKILL" ref="astral" />
+			<allowmod type="SKILL" ref="conjuring" />
+			<allowmod type="SKILL" ref="enchanting" />
+			<allowmod type="SKILL" ref="sorcery" />
 		</modifications>
 	</magicreson>
 
 	<magicreson id="mysticadept" magic="true" spells="true" powers="true" paysPowers="true" cost="10">
 		<modifications>
-            <allowmod type="SKILL" ref="conjuring" />
-            <allowmod type="SKILL" ref="enchanting" />
-            <allowmod type="SKILL" ref="sorcery" />
+			<allowmod type="SKILL" ref="conjuring" />
+			<allowmod type="SKILL" ref="enchanting" />
+			<allowmod type="SKILL" ref="sorcery" />
 		</modifications>
 	</magicreson>
 
@@ -32,7 +32,7 @@
 
 	<magicreson id="aspectedmagician" magic="true" spells="true" aspected="true" cost="10">
 		<modifications>
-            <allowmod type="SKILL" ref="astral" />
+			<allowmod type="SKILL" ref="astral" />
 		</modifications>
 	</magicreson>
 

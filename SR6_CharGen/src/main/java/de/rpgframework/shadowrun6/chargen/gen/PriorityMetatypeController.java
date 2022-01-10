@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
+
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -98,6 +100,10 @@ public class PriorityMetatypeController extends ControllerImpl<SR6MetaType> impl
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
+	 */
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 		List<Modification> unprocessed = new ArrayList<>();
@@ -109,6 +115,7 @@ public class PriorityMetatypeController extends ControllerImpl<SR6MetaType> impl
 		// Add modifications from selection
 		MetaType selected = getModel().getMetatype();
 		if (selected!=null) {
+			logger.log(Level.INFO, "Selected metatype "+selected);
 			unprocessed.addAll(selected.getModifications());
 		}
 		

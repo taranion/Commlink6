@@ -2,35 +2,38 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import de.rpgframework.genericrpg.NumericalValueWith3PoolsController;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
-import de.rpgframework.genericrpg.ValueType;
-import de.rpgframework.genericrpg.data.ASkillValue;
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
-import de.rpgframework.shadowrun.AShadowrunSkill;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
+ * Points 1 = Skill Points
+ * Points 2 = Free Language/Knowledge skills
+ * Points 3 = Karma
  * @author prelle
  *
  */
-public class PrioritySkillGenerator extends CommonSkillController implements SR6SkillGenerator, SR6SkillController {
+public class PrioritySkillGenerator extends CommonSkillGenerator implements NumericalValueWith3PoolsController<SR6Skill, SR6SkillValue> {
 
-	private int pointsSkills;
-	private int pointsLangAndKnow;
 	private List<ToDoElement> normalToDos;
 	private List<ToDoElement> knowledgeToDos;
 
@@ -39,62 +42,64 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 		super(parent);
 		normalToDos    = new ArrayList<>();
 		knowledgeToDos = new ArrayList<>();
-		
-		// Ensure native language skill is present
-		boolean found = false;
-//		for (SkillValue val : parent.getModel().getSkillValues(SkillType.LANGUAGE)) {
-//			if (val.getPoints()==SkillValue.LANGLEVEL_NATIVE)
-//				found=true;
-//		}
-//		if (!found)
-//			parent.getModel().addSkill(new SkillValue(Shadowrun6Core.getSkill("language"), SkillValue.LANGLEVEL_NATIVE));
 	}
-
+	
 	//-------------------------------------------------------------------
-	/**
-	 * @see org.prelle.SR6SkillController.charctrl.ISkillController#getPointsLeftInKnowledgeAndLanguage()
-	 */
-	@Override
-	public int getPointsLeftInKnowledgeAndLanguage() {
-		return pointsLangAndKnow;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see org.prelle.SR6SkillController.charctrl.ISkillController#getPointsLeftSkills()
-	 */
-	@Override
-	public int getPointsLeftSkills() {
-		return pointsSkills;
-	}
-
-	//-------------------------------------------------------------------
-	private List<ASkillValue> getMaximizedSkills() {
-		List<ASkillValue> maxed = new ArrayList<ASkillValue>();
-		for (ASkillValue val : model.getSkillValues()) {
-			if (val.getDistributed() >= (6+val.getModifiedValue(ValueType.MAX)))
-				maxed.add(val);
+	public static void optimize(Map<SR6SkillValue, PerSkillPoints> perSkill, int knowPoints, int skillPoints) {
+		// Prepare a map to temporarily store data in
+		Map<SR6SkillValue, PerSkillPoints> result = new LinkedHashMap<>();
+		for (SR6SkillValue key : perSkill.keySet()) {
+			result.put(key, new PerSkillPoints());
 		}
-		return maxed;
-	}
-
-	//-------------------------------------------------------------------
-	private int getIncreaseCost(ShadowrunCharacter model, AShadowrunSkill key) {
-		ASkillValue sVal = model.getSkillValue(key);
-
-		if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE) 
-			return 3;
 		
-		int newVal = (sVal==null)?1:(sVal.getModifiedValue()+1);
-		return newVal*5;
+		// Pay knowledge/language skills first
+		List<SR6SkillValue> knowIDs = new ArrayList<>();
+		int requiredPointsInKnowledgeSkills = 0;
+		for (SR6SkillValue key : perSkill.keySet()) {
+			SR6Skill skill = key.getModifyable();
+			if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
+				knowIDs.add(key);
+				requiredPointsInKnowledgeSkills += perSkill.get(key).getSum();
+			}
+		}
+		// Now sort knowledge skill - highest rank first
+		Collections.sort(knowIDs, new Comparator<SR6SkillValue>() {
+			public int compare(SR6SkillValue o1, SR6SkillValue o2) {
+				return - Integer.compare(o1.getDistributed(), o2.getDistributed());
+			}
+		});
+		// Pay with knowledge points, as long as it is possible
+		for (SR6SkillValue key : knowIDs) {
+			PerSkillPoints old = perSkill.get(key);
+			PerSkillPoints neu = result.get(key);
+			int required = old.getSum();
+			int invest   = Math.min(knowPoints, required);
+			if (invest>0) {
+				logger.log(Level.DEBUG, "Invest {} free knowledge skill points for {}", invest, key);
+				neu.points2 = invest;
+				required -= invest;
+				requiredPointsInKnowledgeSkills -= invest;
+			}
+		}
+		
+		/*
+		 * Regular skill points
+		 */
+		
 	}
-
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillController#canBeSelected(SR6Skill)
 	 */
 	@Override
 	public Possible canBeSelected(SR6Skill data) {
+		// First check if it is allowed to select this skill
+		Possible pos = super.canBeSelected(data);
+		if (!pos.get())
+			return pos;
+		
+		// Now find out if it could be payed
 		if (pointsSkills>0)
 			return Possible.TRUE;
 		if (pointsLangAndKnow>0 && (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)) {
@@ -109,64 +114,54 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.genericrpg.SelectionController#select(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public OperationResult<SR6SkillValue> select(SR6Skill data) {
+		logger.log(Level.DEBUG, "ENTER select("+data+")");
+		try {
+			OperationResult<SR6SkillValue> result = super.select(data);
+			if (result.hasError()) {
+				logger.log(Level.WARNING, "Selecting {} failed, because {}",data.getId(), result.getMessages());
+				return result;
+			}
+			
+			logger.log(Level.INFO, "Selected skill {}", data.getId());
+			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+			PerSkillPoints per = new PerSkillPoints();
+			per.points1=1;
+			settings.perSkill.put(result.get(), per);
+			
+			getCharacterController().runProcessors();
+			return result;
+		} finally {
+			logger.log(Level.DEBUG, "LEAVE select("+data+")");
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private int getIncreaseCost(SR6SkillValue sVal) {
+		SR6Skill key = sVal.getModifyable();
+
+		if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE) 
+			return 3;
+		
+		int newVal = (sVal==null)?1:(sVal.getModifiedValue()+1);
+		return newVal*5;
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeIncreased(de.rpgframework.genericrpg.NumericalValue)
 	 */
 	@Override
-	public boolean canBeIncreased(SR6SkillValue ref) {
-		SkillType type = ((SR6Skill)ref.getModifyable()).getType();
-		// Cannot increase knowledge skills
-		if (type==SkillType.KNOWLEDGE)
-			return false;
-//		// Is automatically added
-//		if (model.isAutoSkill(ref))
-//			return false;
-		
-		// Maximum not reached yet
-		int maximum = 6  + ref.getModifiedValue(ValueType.MAX);
-		if (type==SkillType.LANGUAGE) {
-			// Language skills have different maximums
-			maximum = SR6SkillValue.LANGLEVEL_EXPERT;
-		}
-		if (ref.getDistributed()>=maximum) {
-			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "Cannot increase skill "+ref+" because current value "+ref.getModifiedValue()+" is already at maximum "+maximum);
-			return false;
-		}
-		
-		Collection<ASkillValue> alreadyMaxed = getMaximizedSkills();
+	public Possible canBeIncreased(SR6SkillValue value) {
+		Possible allowed = super.canBeIncreased(value);
+		if (!allowed.get())
+			return allowed;
 
-		// Only allow to max an attribute, if there isn't one already
-		if ((ref.getDistributed()+1)>=(6 + ref.getModifiedValue(ValueType.MAX))) {
-			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "Increasing "+ref.getModifyable()+" would reach maximum of "+(6+ref.getModifiedValue(ValueType.MAX))+".  Is already one maxed = "+alreadyMaxed);
-			return alreadyMaxed.isEmpty();
-		}
-		
-//		// Only can raise magic skills, if MagicOrResonance allows it
-//		if (type==SkillType.MAGIC && !model.getMagicOrResonanceType().usesSpells()) {
-//			logger.log(Level.INFO, "Cannot raise "+ref+" because char doesn't use spells");
-//			return false;
-//		}
-		
-		
-
-		// Enough points
-		int karmaCost = getIncreaseCost(model,(AShadowrunSkill) ref.getModifyable());
-		if (type!=SkillType.KNOWLEDGE && type!=SkillType.LANGUAGE) {
-			if (getPointsLeftSkills()<=0 && karmaCost>model.getKarmaFree()) {
-				logger.log(Level.DEBUG, "Cannot increase because no points ("+getPointsLeftSkills()+") left and not enough karma ("+model.getKarmaFree()+") to raise to "+(ref.getDistributed()+1));
-				return false;
-			}
-		} else {
-			// Is language or knowledge
-			if (!(getPointsLeftInKnowledgeAndLanguage()>0 || getIncreaseCost(model,(AShadowrunSkill) ref.getModifyable())<=model.getKarmaFree())) {
-				logger.log(Level.DEBUG, "Cannot increase because no points ("+getPointsLeftInKnowledgeAndLanguage()+") left and not enough karma ("+model.getKarmaFree()+") to raise");				
-			}
-
-			return getPointsLeftInKnowledgeAndLanguage()>0 || karmaCost<=model.getKarmaFree();
-		}
-
-		return true;
+		// Can it be payed in any way
+		return new Possible( canBeIncreasedPoints(value).get() || canBeIncreasedPoints2(value).get() || canBeIncreasedPoints3(value).get() );
 	}
 
 	//-------------------------------------------------------------------
@@ -174,13 +169,108 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
 	 */
 	@Override
-	public boolean increase(SR6SkillValue ref) {
-		boolean hasBeenIncreased = super.increase(ref);
-		if (!hasBeenIncreased)
-			return false;
+	public OperationResult<SR6SkillValue> increase(SR6SkillValue ref) {
+		OperationResult<SR6SkillValue> result = super.increase(ref);
 		
 		parent.runProcessors();
-		return true;
+		return result;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith2PoolsController#canBeDecreasedPoints2(java.lang.Object)
+	 */
+	@Override
+	public Possible canBeDecreasedPoints2(SR6SkillValue value) {
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+		PerSkillPoints per = settings.perSkill.get(value);
+		if (per==null)
+			return new Possible(I18N_NOT_SELECTED);
+		
+		return new Possible(per.points2>0, I18N_NOT_RAISED_POINT2);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith3PoolsController#getPointsLeft3()
+	 */
+	@Override
+	public int getPointsLeft3() {
+		return model.getKarmaFree();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith3PoolsController#canBeIncreasedPoints3(java.lang.Object)
+	 */
+	@Override
+	public Possible canBeIncreasedPoints3(SR6SkillValue key) {
+		int karma = getIncreaseCost(key);
+		if (model.getKarmaFree()>=karma)
+			return Possible.TRUE;
+		return new Possible(new ValueRequirement(ShadowrunReference.ATTRIBUTE, "KARMA", karma));
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith3PoolsController#canBeDecreasedPoints3(java.lang.Object)
+	 */
+	@Override
+	public Possible canBeDecreasedPoints3(SR6SkillValue key) {
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+		PerSkillPoints per = settings.perSkill.get(key);
+		if (per==null)
+			return new Possible(I18N_NOT_SELECTED);
+		
+		return new Possible(per.points3>0, I18N_NOT_RAISED_KARMA);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith3PoolsController#increasePoints3(java.lang.Object)
+	 */
+	@Override
+	public OperationResult<SR6SkillValue> increasePoints3(SR6SkillValue value) {
+		Possible allowed = canBeIncreasedPoints3(value);
+		if (!allowed.get()) 
+			return new OperationResult<>(allowed);
+		
+		if (value==null) {
+			logger.log(Level.ERROR, "Trying to increase a skill not previously selected");
+			return new OperationResult<>(new Possible(I18N_NOT_SELECTED));
+		}
+		
+		// Do increase
+		int karma = getIncreaseCost(value);
+		value.setDistributed(value.getDistributed()+1);
+		// Pay karma
+		model.setKarmaFree(model.getKarmaFree() - karma);
+		
+		return new OperationResult<SR6SkillValue>(value);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith3PoolsController#decreasePoints3(java.lang.Object)
+	 */
+	@Override
+	public OperationResult<SR6SkillValue> decreasePoints3(SR6SkillValue value) {
+		Possible allowed = canBeDecreasedPoints3(value);
+		if (!allowed.get()) 
+			return new OperationResult<>(allowed);
+		
+		if (value==null) {
+			logger.log(Level.ERROR, "Trying to decrease a skill not previously selected");
+			return new OperationResult<>(new Possible(I18N_NOT_SELECTED));
+		}
+		
+		// Do increase
+		value.setDistributed(value.getDistributed()-1);
+		// Return karma
+		int karma = getIncreaseCost(value);
+		model.setKarmaFree(model.getKarmaFree() + karma);
+		
+		return new OperationResult<SR6SkillValue>(value);
 	}
 
 	//-------------------------------------------------------------------
@@ -221,6 +311,54 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 					unprocessed.add(tmp);
 				}
 			}
+			
+			Shadowrun6Character model = parent.getModel();
+			SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
+			for (Entry<SR6SkillValue, PerSkillPoints> entry : settings.perSkill.entrySet()) {
+				SR6Skill key = entry.getKey().getModifyable();
+				PerSkillPoints per = entry.getValue();
+				/* 
+				 * Pay skill points 
+				 */
+				int required = per.points1;
+				if (required>0) {
+					if (pointsSkills>0) {
+						int pay = Math.min(pointsSkills, required);
+						logger.log(Level.DEBUG, "Pay {} skillpoints for {}", pay, key);
+						pointsSkills -= pay;
+						required -= pay;
+					}
+					// If not enough, convert
+					if (required>0) {
+						per.points1 -= required;
+						logger.log(Level.WARNING, "Not enough skillpoints to pay {} - reduce it to ", key, per.points1);
+					}
+				}
+			}
+			logger.log(Level.DEBUG, "Finish with {} skill points", pointsSkills);
+			if (logger.isLoggable(Level.TRACE))
+				logger.log(Level.TRACE, settings.toSkillString());
+
+			/*
+			 * Copy from settings to character
+			 */
+			List<SR6SkillValue> usedSkills = new ArrayList<>();
+			for (Entry<SR6SkillValue,PerSkillPoints> entry : settings.perSkill.entrySet()) {
+				if (entry.getValue().getSum()==0) continue;
+				if (!model.getSkillValues().contains(entry.getKey())) {
+					model.addSkillValue(entry.getKey());
+				}
+				SR6SkillValue val = entry.getKey();
+				val.setDistributed(entry.getValue().getSum());
+				usedSkills.add(val);
+			}
+			// Reverse check: all skills in model should be in usedSkills
+			for (SR6SkillValue val : new ArrayList<>(model.getSkillValues())) {
+				if (!usedSkills.contains(val)) {
+					logger.log(Level.WARNING, "Skill {} was found in character, but not in skill generator settings", val);
+					model.getSkillValues().remove(val);
+				}
+			}
 		} catch (Exception e) {
 			
 		} finally {
@@ -228,6 +366,24 @@ public class PrioritySkillGenerator extends CommonSkillController implements SR6
 		}
 		
 		return unprocessed;
+	}
+
+	@Override
+	public String getColumn1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getColumn2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getColumn3() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

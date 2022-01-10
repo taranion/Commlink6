@@ -80,6 +80,8 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 							ShadowrunAttribute.RESONANCE.name(), 1));
 					break;
 				}
+				
+				unprocessed.addAll(type.getModifications());
 			}
 
 			return unprocessed;

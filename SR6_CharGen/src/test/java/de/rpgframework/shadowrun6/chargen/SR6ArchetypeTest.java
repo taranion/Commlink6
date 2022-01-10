@@ -63,8 +63,8 @@ public class SR6ArchetypeTest {
 		PriorityAttributeController attribs = (PriorityAttributeController) charGen.getAttributeController();
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(key);
 		while (val.getModifiedValue()<target) {
-			assertTrue("May not increase "+val.getModifyable(), attribs.canBeIncreased(val));
-			assertTrue("Failed raising from "+val.getModifiedValue(), attribs.increase(val));
+			assertTrue("May not increase "+val.getModifyable(), attribs.canBeIncreased(val).get());
+			assertTrue("Failed raising from "+val.getModifiedValue(), attribs.increase(val).wasSuccessful());
 		}
 		return true;
 	}

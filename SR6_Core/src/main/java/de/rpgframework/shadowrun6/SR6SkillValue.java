@@ -35,6 +35,11 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 	}
 
 	//-------------------------------------------------------------------
+	public String toString() {
+		return id+"(distr="+distributed+")";
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.SelectedValue#getModifyable()
 	 */

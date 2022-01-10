@@ -23,9 +23,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
-import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
@@ -36,19 +34,18 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.gen.PrioritySkillGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuySkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
-import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
  *
  */
-public class PrioSkillGenTest {
+public class PointBuySkillGenTest {
 	
 	private Shadowrun6Character model;
-	private PrioritySkillGenerator ctrl;
+	private PointBuySkillGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
 
@@ -64,7 +61,7 @@ public class PrioSkillGenTest {
 	@Before
 	public void setup() {
 		model = new Shadowrun6Character();
-		model.setCharGenSettings(new SR6PrioritySettings());
+		model.setCharGenSettings(new SR6PointBuySettings());
 		preMods.clear();
 		charGen = new SR6CharacterGenerator() {
 			public String getId() { return "dummy";}
@@ -113,30 +110,18 @@ public class PrioSkillGenTest {
 			@Override
 			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
-		ctrl  = new PrioritySkillGenerator(charGen);
+		ctrl  = new PointBuySkillGenerator(charGen);
 		charGen.runProcessors();
 	}
 	
-	//-------------------------------------------------------------------
-	@Test
-	public void testIdle() {
-		assertEquals(0, ctrl.getPointsLeft());
-		assertEquals(0, ctrl.getPointsLeft2());
-		assertEquals(0, ctrl.getPointsLeft3());
-		assertEquals(0, model.getKarmaFree());
-		
-		assertTrue("There should be no skillvalues", model.getSkillValues().isEmpty() );
-		
-		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-
-	}
-
 	//-------------------------------------------------------------------
 	/**
 	 * Test to increase or decrease a skill not present in the character
 	 */
 	@Test
 	public void testNonExisting() {
+		assertEquals(12, ctrl.getPointsLeft());
+		assertEquals(0, ctrl.getPointsLeft2());
 		SR6SkillValue val = new SR6SkillValue(Shadowrun6Core.getSkill("athletics"), 0);
 		// Increasing or decreasing should not be possible
 		assertFalse(ctrl.canBeDecreased(val).get());
@@ -145,8 +130,6 @@ public class PrioSkillGenTest {
 		assertFalse(ctrl.canBeIncreasedPoints(val).get());
 		assertFalse(ctrl.canBeDecreasedPoints2(val).get());
 		assertFalse(ctrl.canBeIncreasedPoints2(val).get());
-		assertFalse(ctrl.canBeDecreasedPoints3(val).get());
-		assertFalse(ctrl.canBeIncreasedPoints3(val).get());
 		// attempting it should fail
 		assertFalse(ctrl.decrease(val).wasSuccessful());
 		assertFalse(ctrl.increase(val).wasSuccessful());
@@ -154,8 +137,6 @@ public class PrioSkillGenTest {
 		assertTrue(ctrl.increasePoints(val).hasError());
 		assertTrue(ctrl.decreasePoints2(val).hasError());
 		assertTrue(ctrl.increasePoints2(val).hasError());
-		assertTrue(ctrl.decreasePoints3(val).hasError());
-		assertTrue(ctrl.increasePoints3(val).hasError());
 	}
 	
 	//-------------------------------------------------------------------
@@ -164,12 +145,7 @@ public class PrioSkillGenTest {
 	 */
 	@Test
 	public void testSelect() {
-		// Inject 1 skill point
-		ValueModification mod = new ValueModification(ShadowrunReference.SKILL, "XXXX", 1, ApplyTo.POINTS, null);
-		preMods.add(mod);
-		charGen.runProcessors();
-		assertEquals(1, ctrl.getPointsLeft());
-		
+		assertEquals(12, ctrl.getPointsLeft());
 		OperationResult<SR6SkillValue> selected = ctrl.select(Shadowrun6Core.getSkill("athletics"));
 		assertNotNull(selected);
 		assertFalse(selected.hasError());
@@ -177,7 +153,7 @@ public class PrioSkillGenTest {
 		assertNotNull(selected.get());
 		assertEquals(1,selected.get().getModifiedValue());
 		assertEquals(1,selected.get().getDistributed());
-		assertEquals(0, ctrl.getPointsLeft());
+		assertEquals(11, ctrl.getPointsLeft());
 	}
 	
 	//-------------------------------------------------------------------
@@ -186,12 +162,7 @@ public class PrioSkillGenTest {
 	 * of 0 (this should never happen)
 	 */
 	@Test
-	public void testExistingValue0() {
-		// Add points
-		ValueModification mod = new ValueModification(ShadowrunReference.SKILL, "XXXX", 12, ApplyTo.POINTS, null);
-		preMods.add(mod);
-		charGen.runProcessors();
-
+	public void testExistingWithSkillPoints() {
 		SR6SkillValue val = ctrl.select(Shadowrun6Core.getSkill("athletics")).get();
 		assertEquals(1,val.getDistributed());
 		
@@ -233,6 +204,33 @@ public class PrioSkillGenTest {
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertNull(result.get());
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * Test to increase or decrease a skill present in the character with a value
+	 * of 0 (this should never happen)
+	 */
+	@Test
+	public void testExistingWithKarma() {
+		SR6SkillValue val = ctrl.select(Shadowrun6Core.getSkill("athletics")).get();
+		
+		assertEquals(11, ctrl.getPointsLeft());
+		assertEquals(0, ctrl.getPointsLeft2());
+		// Returning Karma by decreasing should not be possible
+		assertFalse(ctrl.canBeDecreasedPoints2(val).get());
+		// Increasing for Karma should not be possible, since there still are skillpoints left
+		assertFalse(ctrl.canBeIncreasedPoints2(val).get());
+		
+		// attempting it should fail
+		assertTrue(ctrl.decreasePoints2(val).hasError());
+		assertTrue(ctrl.increasePoints2(val).hasError());
+		
+		// Now grant Karma
+		model.setKarmaFree(50);
+		// decreasing should fail, increasing too, since skill points need to be spent first
+		assertTrue(ctrl.decreasePoints2(val).hasError());
+		assertTrue(ctrl.increasePoints2(val).hasError());
 	}
 
 }

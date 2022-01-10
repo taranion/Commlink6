@@ -75,11 +75,11 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 */
 	@Override
 	protected CharacterViewLayout createCharacterAppLayout(CharacterController<?, ?> control) {
-		logger.log(Level.DEBUG, "ENTER: createCharacterAppLayout");
+		logger.log(Level.DEBUG, "ENTER: createCharacterViewLayout");
 		try {
 			return new SR6CharacterViewLayout();
 		} finally {
-			logger.log(Level.DEBUG, "LEAVE: createCharacterAppLayout");			
+			logger.log(Level.DEBUG, "LEAVE: createCharacterViewLayout");			
 		}
 	}
 

@@ -72,18 +72,18 @@ public class PointBuyGenTest {
 		 */
 		PointBuyAttributeGenerator attrib = (PointBuyAttributeGenerator) charGen.getAttributeController();
 		// Invest Free Special point to raise EDGE
- 		attrib.increaseAdjust(ShadowrunAttribute.EDGE);
+ 		attrib.increasePoints(model.getAttribute(ShadowrunAttribute.EDGE));
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.EDGE).getModifiedValue());
 		assertEquals(90, settings.characterPoints);
 
-		assertTrue(attrib.increaseAdjust(ShadowrunAttribute.RESONANCE));
+		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue());
-		assertTrue(attrib.increaseAdjust(ShadowrunAttribute.RESONANCE));
- 		assertTrue(attrib.increaseAdjust(ShadowrunAttribute.RESONANCE));
- 		assertTrue(attrib.increaseAdjust(ShadowrunAttribute.RESONANCE));
- 		assertTrue(attrib.increaseAdjust(ShadowrunAttribute.RESONANCE));
+		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
+ 		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
+ 		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
+ 		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
 		assertEquals(70, settings.characterPoints);
-		assertTrue(attrib.increaseAdjust(ShadowrunAttribute.EDGE));
+		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.EDGE)).wasSuccessful());
 		assertEquals(66, settings.characterPoints);
 		
 		/*
@@ -92,26 +92,26 @@ public class PointBuyGenTest {
 		 * points. Since we get four for free, we only need to buy 16 attribute 
 		 * points for 32 CPs. 
 		 */
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.REACTION)); // 2
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.REACTION)); // 3
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.REACTION)); // 4
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.WILLPOWER)); // 2
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.WILLPOWER)); // 3
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.WILLPOWER)); // 4
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.WILLPOWER)); // 5
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.LOGIC)); // 2
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.LOGIC)); // 3
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.LOGIC)); // 4
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.LOGIC)); // 5
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.LOGIC)); // 6
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.INTUITION)); // 2
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.INTUITION)); // 3
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.INTUITION)); // 4
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.INTUITION)); // 5
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.CHARISMA)); // 2
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.CHARISMA)); // 3
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.CHARISMA)); // 4
-		assertTrue(attrib.increaseAttrib(ShadowrunAttribute.CHARISMA)); // 5
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.REACTION)).wasSuccessful()); // 2
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.REACTION)).wasSuccessful()); // 3
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.REACTION)).wasSuccessful()); // 4
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.WILLPOWER)).wasSuccessful()); // 2
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.WILLPOWER)).wasSuccessful()); // 3
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.WILLPOWER)).wasSuccessful()); // 4
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.WILLPOWER)).wasSuccessful()); // 5
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.LOGIC)).wasSuccessful()); // 2
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.LOGIC)).wasSuccessful()); // 3
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.LOGIC)).wasSuccessful()); // 4
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.LOGIC)).wasSuccessful()); // 5
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.LOGIC)).wasSuccessful()); // 6
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.INTUITION)).wasSuccessful()); // 2
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.INTUITION)).wasSuccessful()); // 3
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.INTUITION)).wasSuccessful()); // 4
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.INTUITION)).wasSuccessful()); // 5
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.CHARISMA)).wasSuccessful()); // 2
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.CHARISMA)).wasSuccessful()); // 3
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.CHARISMA)).wasSuccessful()); // 4
+		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.CHARISMA)).wasSuccessful()); // 5
 		assertEquals(34, settings.characterPoints);
 		
 		/*
@@ -119,18 +119,68 @@ public class PointBuyGenTest {
 		 *  to raise our Agility up to 3.
 		 */
 		assertEquals(50, model.getKarmaFree());
-		assertTrue(attrib.increaseKarma(ShadowrunAttribute.BODY)); // 2
-		assertTrue(attrib.increaseKarma(ShadowrunAttribute.AGILITY)); // 2
-		assertTrue(attrib.increaseKarma(ShadowrunAttribute.AGILITY)); // 3
+		assertTrue(attrib.increasePoints3(model.getAttribute(ShadowrunAttribute.BODY)).wasSuccessful()); // 2
+		assertTrue(attrib.increasePoints3(model.getAttribute(ShadowrunAttribute.AGILITY)).wasSuccessful()); // 2
+		assertTrue(attrib.increasePoints3(model.getAttribute(ShadowrunAttribute.AGILITY)).wasSuccessful()); // 3
 		assertEquals(15, model.getKarmaFree());
 		assertEquals(34, settings.characterPoints);
 		
 		/* 
-		 * Attributes
+		 * Skills
 		 */
 		PointBuySkillGenerator skill = (PointBuySkillGenerator) charGen.getSkillController();
-		assertNotNull(Shadowrun6Core.getItem(SR6Skill.class, "athletics"));
-		assertTrue(skill.increase(model.getSkillValue(Shadowrun6Core.getItem(SR6Skill.class, "athletics"))));
+		assertEquals(12, skill.getPointsLeft());
+		SR6Skill athletics = Shadowrun6Core.getItem(SR6Skill.class, "athletics");
+		assertNotNull(athletics);
+		assertTrue(skill.select(athletics).wasSuccessful());
+		assertTrue(skill.increase(model.getSkillValue(athletics)).wasSuccessful()); // 2
+		assertTrue(skill.increase(model.getSkillValue(athletics)).wasSuccessful()); // 3
+		assertTrue(skill.increase(model.getSkillValue(athletics)).wasSuccessful()); // 4
+		assertEquals( 8, skill.getPointsLeft());
+		assertEquals(34, settings.characterPoints);
+		// Cracking
+		SR6Skill cracking = Shadowrun6Core.getItem(SR6Skill.class, "cracking");
+		assertTrue(skill.select(cracking).wasSuccessful());
+		assertTrue(skill.increase(model.getSkillValue(cracking)).wasSuccessful()); // 2
+		assertTrue(skill.increase(model.getSkillValue(cracking)).wasSuccessful()); // 3
+		assertTrue(skill.increase(model.getSkillValue(cracking)).wasSuccessful()); // 4
+		assertTrue(skill.increase(model.getSkillValue(cracking)).wasSuccessful()); // 5
+		assertTrue(skill.increase(model.getSkillValue(cracking)).wasSuccessful()); // 6
+		assertEquals( 2, skill.getPointsLeft());
+		assertEquals(34, settings.characterPoints);
+		// Electronics
+		SR6Skill electronics = Shadowrun6Core.getItem(SR6Skill.class, "electronics");
+		assertTrue(skill.select(electronics).wasSuccessful());
+		assertTrue(skill.increase(model.getSkillValue(electronics)).wasSuccessful()); // 2
+		assertEquals(34, settings.characterPoints);
+		assertTrue("Paying with autoconversion of CP doesn't work",skill.increase(model.getSkillValue(electronics)).wasSuccessful()); // 3
+		assertEquals(32, settings.characterPoints);
+		assertTrue(skill.increase(model.getSkillValue(electronics)).wasSuccessful()); // 4
+		assertTrue(skill.increase(model.getSkillValue(electronics)).wasSuccessful()); // 5
+		assertEquals(28, settings.characterPoints);
+		// Perception
+		SR6Skill perception = Shadowrun6Core.getItem(SR6Skill.class, "perception");
+		assertNotNull(perception);
+		assertTrue(skill.select(perception).wasSuccessful());
+		assertTrue(skill.increase(model.getSkillValue(perception)).wasSuccessful()); // 2
+		assertTrue(skill.increase(model.getSkillValue(perception)).wasSuccessful()); // 3
+		assertEquals(22, settings.characterPoints);
+		// Stealth
+		SR6Skill stealth = Shadowrun6Core.getItem(SR6Skill.class, "stealth");
+		assertTrue(skill.select(stealth).wasSuccessful());
+		assertTrue(skill.increase(model.getSkillValue(stealth)).wasSuccessful()); // 2
+		assertTrue(skill.increase(model.getSkillValue(stealth)).wasSuccessful()); // 3
+		assertTrue(skill.increase(model.getSkillValue(stealth)).wasSuccessful()); // 4
+		assertTrue(skill.increase(model.getSkillValue(stealth)).wasSuccessful()); // 5
+		assertEquals(12, settings.characterPoints);
+		// Tasking
+		SR6Skill tasking = Shadowrun6Core.getItem(SR6Skill.class, "tasking");
+		assertTrue(skill.select(tasking).wasSuccessful());
+		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 2
+		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 3
+		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 4
+		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 5
+		assertEquals(2, settings.characterPoints);
 	}
 	
 }

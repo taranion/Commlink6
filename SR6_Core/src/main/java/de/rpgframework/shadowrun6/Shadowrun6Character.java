@@ -33,6 +33,18 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	}
 
 	//-------------------------------------------------------------------
+	public SR6SkillValue addSkillValue(SR6SkillValue value) {
+		try {
+			if (value.getModifiedValue()==0)
+			throw new RuntimeException("Trace");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return super.addSkillValue(value);
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.RuleSpecificCharacterObject#getRules()
 	 */
