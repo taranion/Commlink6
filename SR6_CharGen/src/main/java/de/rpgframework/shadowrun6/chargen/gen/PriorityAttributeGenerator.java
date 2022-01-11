@@ -464,7 +464,6 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 	private void updateAttributeValues() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
-			AttributeValue<ShadowrunAttribute> val = parent.getModel().getAttribute(key);
 			parent.getModel().getAttribute(key).setDistributed(per.getSum() );
 		}
 	}
