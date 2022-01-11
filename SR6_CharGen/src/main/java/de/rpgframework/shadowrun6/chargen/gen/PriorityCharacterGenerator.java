@@ -104,7 +104,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			attributes = new PriorityAttributeGenerator(this);
 			meta = new PriorityMetatypeController(this);
 			magicReso = new PriorityMagicOrResonanceController(this);
-			skill = new PrioritySkillGenerator(this);
+			skill = new PrioritySR6SkillGenerator(this);
 			logger.info("meta = " + getMetatypeController() + "  of " + this);
 
 			processChain.add(new ResetGenerator(this));

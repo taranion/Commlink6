@@ -22,7 +22,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuySkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 

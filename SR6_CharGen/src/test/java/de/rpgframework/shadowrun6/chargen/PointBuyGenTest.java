@@ -16,7 +16,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuySkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 
@@ -128,7 +128,7 @@ public class PointBuyGenTest {
 		/* 
 		 * Skills
 		 */
-		PointBuySkillGenerator skill = (PointBuySkillGenerator) charGen.getSkillController();
+		PointBuySR6SkillGenerator skill = (PointBuySR6SkillGenerator) charGen.getSkillController();
 		assertEquals(12, skill.getPointsLeft());
 		SR6Skill athletics = Shadowrun6Core.getItem(SR6Skill.class, "athletics");
 		assertNotNull(athletics);

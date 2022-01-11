@@ -107,7 +107,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator {
 			attributes = new PointBuyAttributeGenerator(this);
 			meta = new PointBuyMetatypeController(this);
 			magicReso = new PointBuyMagicOrResonanceController(this);
-			skill = new PointBuySkillGenerator(this);
+			skill = new PointBuySR6SkillGenerator(this);
 			logger.info("meta = " + getMetatypeController() + "  of " + this);
 
 			processChain.add(new PointBuyResetGenerator(this));

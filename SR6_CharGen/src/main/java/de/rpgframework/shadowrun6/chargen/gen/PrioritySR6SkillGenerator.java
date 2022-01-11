@@ -32,13 +32,13 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PrioritySkillGenerator extends CommonSkillGenerator implements NumericalValueWith3PoolsController<SR6Skill, SR6SkillValue> {
+public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements NumericalValueWith3PoolsController<SR6Skill, SR6SkillValue> {
 
 	private List<ToDoElement> normalToDos;
 	private List<ToDoElement> knowledgeToDos;
 
 	//-------------------------------------------------------------------
-	public PrioritySkillGenerator(SR6CharacterGenerator parent) {
+	public PrioritySR6SkillGenerator(SR6CharacterGenerator parent) {
 		super(parent);
 		normalToDos    = new ArrayList<>();
 		knowledgeToDos = new ArrayList<>();
@@ -324,7 +324,7 @@ public class PrioritySkillGenerator extends CommonSkillGenerator implements Nume
 				if (required>0) {
 					if (pointsSkills>0) {
 						int pay = Math.min(pointsSkills, required);
-						logger.log(Level.DEBUG, "Pay {} skillpoints for {}", pay, key);
+						logger.log(Level.DEBUG, "  Pay {} skillpoints for {}", pay, key);
 						pointsSkills -= pay;
 						required -= pay;
 					}

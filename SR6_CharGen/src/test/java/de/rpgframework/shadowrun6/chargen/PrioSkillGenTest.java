@@ -36,7 +36,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.gen.PrioritySkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -48,7 +48,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class PrioSkillGenTest {
 	
 	private Shadowrun6Character model;
-	private PrioritySkillGenerator ctrl;
+	private PrioritySR6SkillGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
 
@@ -93,6 +93,7 @@ public class PrioSkillGenTest {
 			public boolean canBeFinished() {return false;}
 			public void setModel(Shadowrun6Character model, CharacterHandle handle) {}
 			public void finish() {}
+			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public IMetatypeController getMetatypeController() {return null;}
 			public IAttributeController getAttributeController() {return null;}
 			public IQualityController getQualityController() { return null;}
@@ -113,7 +114,7 @@ public class PrioSkillGenTest {
 			@Override
 			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
-		ctrl  = new PrioritySkillGenerator(charGen);
+		ctrl  = new PrioritySR6SkillGenerator(charGen);
 		charGen.runProcessors();
 	}
 	
@@ -126,9 +127,6 @@ public class PrioSkillGenTest {
 		assertEquals(0, model.getKarmaFree());
 		
 		assertTrue("There should be no skillvalues", model.getSkillValues().isEmpty() );
-		
-		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-
 	}
 
 	//-------------------------------------------------------------------

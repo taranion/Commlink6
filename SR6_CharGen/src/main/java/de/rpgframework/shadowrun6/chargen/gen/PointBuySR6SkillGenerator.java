@@ -25,13 +25,13 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PointBuySkillGenerator extends CommonSkillGenerator {
+public class PointBuySR6SkillGenerator extends CommonSkillGenerator {
 
 	private int skillsFromCP;
 //	private int pointsLangAndKnow;
 
 	//-------------------------------------------------------------------
-	public PointBuySkillGenerator(SR6CharacterGenerator parent) {
+	public PointBuySR6SkillGenerator(SR6CharacterGenerator parent) {
 		super(parent);
 	}
 

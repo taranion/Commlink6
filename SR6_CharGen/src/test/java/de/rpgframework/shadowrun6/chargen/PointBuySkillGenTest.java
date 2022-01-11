@@ -34,7 +34,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuySkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 
@@ -45,7 +45,7 @@ import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 public class PointBuySkillGenTest {
 	
 	private Shadowrun6Character model;
-	private PointBuySkillGenerator ctrl;
+	private PointBuySR6SkillGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
 
@@ -90,6 +90,7 @@ public class PointBuySkillGenTest {
 			public boolean canBeFinished() {return false;}
 			public void setModel(Shadowrun6Character model, CharacterHandle handle) {}
 			public void finish() {}
+			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public IMetatypeController getMetatypeController() {return null;}
 			public IAttributeController getAttributeController() {return null;}
 			public IQualityController getQualityController() { return null;}
@@ -110,7 +111,7 @@ public class PointBuySkillGenTest {
 			@Override
 			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
-		ctrl  = new PointBuySkillGenerator(charGen);
+		ctrl  = new PointBuySR6SkillGenerator(charGen);
 		charGen.runProcessors();
 	}
 	
