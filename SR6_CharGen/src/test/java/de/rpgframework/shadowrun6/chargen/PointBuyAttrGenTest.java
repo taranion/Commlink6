@@ -103,6 +103,7 @@ public class PointBuyAttrGenTest {
 			public boolean canBeFinished() {return false;}
 			public void setModel(Shadowrun6Character model, CharacterHandle handle) {}
 			public void finish() {}
+			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public IMetatypeController getMetatypeController() {return null;}
 			public IAttributeController getAttributeController() {return ctrl;}
 			public IQualityController getQualityController() { return null;}
