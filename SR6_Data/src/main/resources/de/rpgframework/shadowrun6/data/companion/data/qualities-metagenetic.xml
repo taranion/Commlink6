@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="pelage_camouflage" karma="4" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
+     <modifications>
+       <checkmod ref="stealth" type="SKILL" what="BONUS" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="insulating_coat" karma="6" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
+     <modifications>
+       <checkmod type="SKILL" ref="outdoors" value="1" what="EDGE"/>
+     </modifications>
+   </quality>
+   <quality id="quills" karma="10" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
+     <modifications>
+       <!-- ToDo: Exotic Weapon (Quills) -->
+     </modifications>
+   </quality>
+   
+   <quality id="corrosive_spit" karma="4" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" max="4">
+     <modifications>
+       <!-- ToDo: Exotic Weapon (Spittle) -->
+     </modifications>
+   </quality>
+   <quality id="defensive_secretion" karma="6" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" >
+     <modifications>
+     </modifications>
+   </quality>
+   <quality id="greasy_skin" karma="6" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" >
+     <modifications>
+     </modifications>
+   </quality>
+   <quality id="natural_venom" karma="9" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" >
+     <choices>
+       <choice type="SUBSELECT" ref="vector" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5" count="4">
+         <subOption id="contact" cost="3"/>
+         <subOption id="exhaled" cost="3"/>
+         <subOption id="injected" cost="1"/>
+         <subOption id="spat" cost="5"/>
+       </choice>
+       <choice type="SUBSELECT" ref="speed" uuid="f9dd21db-30a6-422a-81dc-3c547ec9ccd3" >
+         <subOption id="turn" cost="3"/>
+         <subOption id="immediate" cost="5"/>
+       </choice>
+       <choice type="SUBSELECT" ref="power" uuid="86b773bc-5c9d-4c7d-baec-75b0a651000d" >
+         <subOption id="2" cost="2"/>
+         <subOption id="4" cost="4"/>
+         <subOption id="6" cost="6"/>
+         <subOption id="8" cost="8"/>
+       </choice>
+       <choice type="SUBSELECT" ref="power" uuid="e52e835f-00ff-49f1-a124-31124b42c5a3" >
+         <subOption id="stun"     cost="3"/>
+         <subOption id="physical" cost="5"/>
+       </choice>
+     </choices>
+     <modifications>
+     	<!-- CLUSTERFUCK - need a subselection of factors that must be added -->
+     </modifications>
+   </quality>
+   
+   <quality id="arcane_arrester" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" max="4">
+     <modifications>
+       <relevancemod topic="MAGICAL"/>
+       <!--valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_COMBAT_DIRECT" value="1" set="EDGE"/>
+       <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_COMBAT_INDIRECT" value="1" set="EDGE"/-->
+     </modifications>
+   </quality>
+   <quality id="climate_adaption" karma="5" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" max="4">
+     <modifications>
+       <checkmod type="SKILL" ref="outdoors" value="1" what="EDGE"/>
+     </modifications>
+   </quality>
+   <quality id="gills_air"        karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" />
+   <quality id="gills_freshwater" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" />
+   <quality id="gills_saltwater"  karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" />
+   <quality id="glamour" karma="12" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
+     <modifications>
+       <checkmod ref="con"       type="SKILL" what="EDGE" value="1"/>
+       <checkmod ref="influence" type="SKILL" what="EDGE" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="metagenetic_attribute_improvement" karma="15" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" multi="y" >
+     <choices>
+       <choice type="ATTRIBUTE" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5"/>
+     </choices>
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="CHOICE" choice="dbb18bb4-89a4-4435-bede-3077ee600bc5" value="1" set="MAX"/>
+     </modifications>
+   </quality>
+   <quality id="metahuman_traits"  karma="6" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS"  />
+   <quality id="nasty_vibe" karma="6" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
+     <modifications>
+       <checkmod ref="influence" type="SKILL" what="EDGE" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="photometabolism" karma="4" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
+     <modifications>
+     	<!--  ToDo Lifestyle points -->
+       <checkmod ref="con"       type="SKILL" what="EDGE" value="1"/>
+       <checkmod ref="influence" type="SKILL" what="EDGE" value="1"/>
+     </modifications>
+     <requires>
+         <datareq type="QUALITY" ref="nocturnal"/>
+     </requires>
+   </quality>
+   <quality id="tough_gut" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
+     <modifications>
+     	<!--  ToDo Lifestyle points -->
+     	<!--  ToDo Resist ingested toxins -->
+     </modifications>
+   </quality>
+   <quality id="dermal_alt_bark" karma="4" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
+     <modifications>
+     	<!--valmod type="POOL" ref="DEFENSE_RATING" value="2" set="NATURAL"/-->
+     </modifications>
+   </quality>
+   <quality id="dermal_alt_blubber" karma="3" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
+     <modifications>
+     	<!--  ToDo ? Kälteangriffe -->
+     </modifications>
+   </quality>
+   <quality id="dermal_camouflage" karma="5" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS">
+     <modifications>
+       <checkmod ref="stealth" type="SKILL" what="BONUS" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="dermal_camouflage_dynamic" karma="10" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS">
+     <modifications>
+       <checkmod ref="stealth" type="SKILL" what="BONUS" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="dermal_dragon" karma="3" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS">
+     <modifications>
+     	<!--  ToDo ? Feuerangriff -->
+     </modifications>
+   </quality>
+   <quality id="dermal_granite" karma="3" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS">
+     <modifications>
+     	<!--valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="4"/-->
+     	<!-- ToDo Critterpower Hardened Armor -->
+     </modifications>
+   </quality>
+   <quality id="dermal_granite" karma="3" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS">
+     <modifications>
+     	<!--valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="4"/-->
+     	<!-- ToDo Critterpower Hardened Armor -->
+     </modifications>
+   </quality>
+   
+   <quality id="broadened_auditory_spectrum" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" multi="y">
+     <choices>
+       <choice type="SUBSELECT" ref="range" uuid="b0121bc0-5074-4157-a6a6-341f61ee5e8d">
+         <subOption id="ultrasonic"/>
+         <subOption id="infrasonic"/>
+       </choice>
+     </choices>
+     <modifications>
+     </modifications>
+   </quality>
+   <quality id="biosonar"     karma="6" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="elecrosense"  karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="low-light_vision_metagenetic" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="magnetosense" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="manasense"    karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="balance_receptor" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_SENSES">
+     <modifications>
+       <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
+     </modifications>
+   </quality>
+   <quality id="thermographic_vision_metagenetic" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="thermal_sense"     karma="7" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="underwater_vision" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="vomeronasal_gland" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_SENSES">
+     <modifications>
+       <checkmod type="SKILL" ref="perception" value="1" what="EDGE"/>
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE"/>
+     </modifications>
+   </quality>
+   
+   
+   <quality id="degree_sight_360" karma="5" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <choices>
+       <choice type="SUBSELECT" ref="neurological" uuid="bd1b0a90-eae2-4ef9-ac83-f5f9dcd3f521">
+         <subOption id="unadapted" />
+         <subOption id="adapted"  cost="5"/>
+       </choice>
+     </choices>
+     <modifications>
+       <checkmod type="SKILL" ref="perception" value="1" what="EDGE"/>
+       <!--costmod type="PRICE" ref="NUR_AUGENCYBERWARE"/>
+       <costmod type="ESSENCE" ref="NUR_AUGENCYBERWARE"/-->
+     </modifications>
+   </quality>
+   <quality id="beak" karma="9" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS" >
+     <choices>
+       <choice type="SUBSELECT" ref="variant" uuid="bd170d36-8f72-48b4-870f-c23c2c618e33">
+         <subOption id="standard" />
+         <subOption id="raptor"  cost="2"/>
+       </choice>
+     </choices>
+     <modifications>
+     	<!--  ToDo Lifestyle points -->
+     	<!--  ToDo Resist ingested toxins -->
+     </modifications>
+   </quality>
+   <quality id="bicardiac" karma="5" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <modifications>
+       <!--costmod type="PRICE" ref="synthacardium"/>
+       <costmod type="ESSENCE" ref="synthacardium"/-->
+     </modifications>
+   </quality>
+   <quality id="bone_spikes" karma="10" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <modifications>
+     	<!-- ToDo Armor teurer -->
+     	<!-- ToDo Waffe: Spurs -->
+     </modifications>
+   </quality>
+   <quality id="celerity" karma="10" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <modifications>
+     	<!-- ToDo Armor teurer -->
+     	<!-- ToDo Waffe: Spurs -->
+     </modifications>
+   </quality>
+   <quality id="claws" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <choices>
+       <choice type="SUBSELECT" ref="variant" uuid="7204c631-53e0-4158-b155-ba3912089231">
+         <subOption id="digging" />
+         <subOption id="razor"  />
+         <subOption id="retractable"  cost="2"/>
+       </choice>
+     </choices>
+     <modifications>
+     	<!-- ToDo Waffe: Claws -->
+     </modifications>
+   </quality>
+   <quality id="dermal_deposits_metagenetic"  	  karma="7" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS" >
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="MELEE_DAMAGE" value="1" set="NATURAL" />
+       <itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" />
+     </modifications>
+   </quality>
+   <quality id="elongated_limbs"  		  karma="12" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS"  >
+     <modifications>
+       <relevancemod topic="COMBAT"/>
+     </modifications>
+   </quality>
+   <quality id="fangs" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <modifications>
+     	<!-- ToDo Waffe: Fangs -->
+     </modifications>
+   </quality>
+   <quality id="frog_tongue" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <modifications>
+     	<!-- ToDo Waffe: Tongue -->
+     </modifications>
+   </quality>
+   <quality id="functional_tail" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <choices>
+       <choice type="SUBSELECT" ref="variant" uuid="b237c0da-1eb1-4070-879a-22bc2899c106">
+         <subOption id="balance">
+    		 <modifications>
+           <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>           
+     		</modifications>
+         </subOption>
+         <subOption id="paddle"     cost="2">
+    		 <modifications>
+           <checkmod type="SKILL" ref="athletics" value="2" set="NATURAL"/>           
+     		</modifications>
+         </subOption>
+         <subOption id="prehensile" cost="2">
+    			<modifications>
+           		<checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>           
+      		</modifications>
+         </subOption>
+         <subOption id="thagomizer" cost="4">
+           <!-- ToDo Weapon -->      
+         </subOption>
+         <subOption id="whip" cost="4">
+     		 <modifications>
+           <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>           
+           <!-- ToDo Weapon -->      
+     		</modifications>
+         </subOption>
+       </choice>
+     </choices>
+     <modifications>
+     	<!-- ToDo Waffe: Claws -->
+     </modifications>
+   </quality>
+    <quality id="functional_wings" karma="12" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <choices>
+       <choice type="SUBSELECT" ref="variant" uuid="da1c74d5-0b31-4241-abc8-78d045e7b698">
+         <subOption id="type1">
+     	<!-- ToDo Waffe: Claws -->
+         </subOption>
+         <subOption id="type2" cost="8">
+     	<!-- ToDo Waffe: Claws -->
+         </subOption>
+       </choice>
+     </choices>
+     <modifications>
+     	<!-- ToDo Waffe: Claws -->
+     </modifications>
+   </quality>
+   <quality id="goring_horns" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <modifications>
+     	<!-- ToDo Waffe: Horns -->
+     </modifications>
+   </quality>
+   <quality id="keen_eared" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_SENSES">
+     <modifications>
+       <checkmod type="SKILL" ref="perception" value="1" what="EDGE"/>
+     </modifications>
+   </quality>
+   <quality id="larger_tusks" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+     <modifications>
+     	<!-- ToDo Waffe: Tusks -->
+     </modifications>
+   </quality>
+   <quality id="marsupial_pouch" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="monkey_paws" karma="5" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
+     <modifications>
+       <checkmod ref="athletics" type="SKILL" what="EDGE" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="probosics" karma="6" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
+     <modifications>
+     	<!-- ToDo Waffe: Trunk -->
+     </modifications>
+   </quality>
+   <quality id="satyr_legs" karma="12" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
+     <modifications>
+     	<!-- ToDo Movement rate -->
+     	<!-- +2 AR in combat when kicking -->
+       <checkmod ref="athletics" type="SKILL" what="BONUS" value="4"/>
+     </modifications>
+   </quality>
+   <quality id="setae" karma="5" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
+     <modifications>
+       <checkmod ref="athletics" type="SKILL" what="BONUS" value="2"/>
+     </modifications>
+   </quality>
+   <quality id="shiva_arms" karma="5" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE" max="3">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="BODY" value="1" set="MAX"/>
+       <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" set="MAX"/>
+     </modifications>
+   </quality>
+   <quality id="webbed_digits" karma="4" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
+     <modifications>
+       <checkmod ref="athletics" type="SKILL" what="BONUS" value="2"/>
+     </modifications>
+   </quality>
+   
+   <!-- Negative Qualites -->
+</qualities>
