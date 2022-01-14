@@ -116,7 +116,13 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 
 	// -------------------------------------------------------------------
 	protected void updateEffectiveRules() {
-		logger.debug("ENTER updateEffectiveRules");
+		logger.debug("ENTER updateEffectiveRules for "+this);
+//		try {
+//			throw new RuntimeException("Trace");
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		try {
 			effectiveRules.clear();
 			// Use hardcoded defaults first

@@ -14,7 +14,7 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuyAttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6AttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuySettings;
@@ -70,7 +70,7 @@ public class PointBuyGenTest {
 		/* 
 		 * Attributes
 		 */
-		PointBuyAttributeGenerator attrib = (PointBuyAttributeGenerator) charGen.getAttributeController();
+		PointBuySR6AttributeGenerator attrib = (PointBuySR6AttributeGenerator) charGen.getAttributeController();
 		// Invest Free Special point to raise EDGE
  		attrib.increasePoints(model.getAttribute(ShadowrunAttribute.EDGE));
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.EDGE).getModifiedValue());

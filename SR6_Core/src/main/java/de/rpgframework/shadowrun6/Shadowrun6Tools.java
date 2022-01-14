@@ -1,7 +1,14 @@
 package de.rpgframework.shadowrun6;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
+import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.DataItem;
@@ -12,14 +19,76 @@ import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
  *
  */
 public class Shadowrun6Tools {
+
+	public final static List<Class<? extends ProcessingStep>> RECALCULATE_STEPS = Arrays.asList(
+//		new ResetModifications(),
+//		new ResolveChoicesInReferences(),
+		GetModificationsFromMetaType.class
+//		new GetModificationsFromMagicOrResonance(),
+//		new GetModificationsFromQualities(),
+//		new ApplyAdeptPowerModifications(),
+////		new GetModificationsFromPowers(),
+//		new RecalculateEquipment(),
+////		new FixDeprecatedRecursiveAccessories(),
+//		new FixOldWeaponType(),
+//		new GetModificationsFromEquipment(),
+//		new GetModificationsFromMetamagicOrEchoes(),
+//		new GetModificationsFromFoci(),
+//		new ApplyAdeptPowerModifications(),
+//		new GetModificationsFromPowers(),
+//		new GetModificationsFromTechniques(),
+//		new ApplyCarriedItemModifications(),
+//		new DistributeAccessoriesToContainers(),
+//		new ApplyAttributeModifications(),
+//		new ApplySkillModifications(),
+//		new ApplyMemorizedUUIDModifications(),
+////		new ApplySINModifications(),
+//		new ConnectSignatureManeuvers(),
+//		new ApplyRelevanceAndEdgeMods(),
+//		new CalculateDerivedAttributes(),
+//		new CalculateEssence(),
+//		new CalculatePersona(),
+	);
+
+	//-------------------------------------------------------------------
+	public static List<ProcessingStep> getCharacterProcessingSteps(Shadowrun6Character model) {
+		List<ProcessingStep> steps = new ArrayList<>();
+		for (Class<? extends ProcessingStep> cls : RECALCULATE_STEPS) {
+			Constructor<? extends ProcessingStep> cons =  null;
+			try {
+				cons = cls.getConstructor(ShadowrunCharacter.class);
+			} catch (Exception e) {
+			}
+			if (cons==null) {
+				try {
+					cons = cls.getConstructor(Shadowrun6Character.class);
+				} catch (Exception e) {
+				}
+			}
+			
+			if (cons!=null) {
+				try {
+					steps.add( cons.newInstance(model));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return steps;
+	}
 
 	//-------------------------------------------------------------------
 	public static String getChoiceString(ComplexDataItem data, Choice choice) {
@@ -101,6 +170,8 @@ public class Shadowrun6Tools {
 				}
 				
 				if (valMod.getValue()>0) {
+					if (valMod.getSet()==ValueType.MAX)
+						return ShadowrunAttribute.valueOf(valMod.getKey()).getName()+" "+valMod.getValue();
 					return ShadowrunAttribute.valueOf(valMod.getKey()).getName()+" +"+valMod.getValue();
 				} else {
 					return ShadowrunAttribute.valueOf(valMod.getKey()).getName()+" "+valMod.getValue();

@@ -15,7 +15,7 @@ import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
-import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController;
+import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -60,7 +60,7 @@ public class SR6ArchetypeTest {
 	
 	//-------------------------------------------------------------------
 	private boolean raiseAttributeTo(ShadowrunAttribute key, int target) {
-		PriorityAttributeController attribs = (PriorityAttributeController) charGen.getAttributeController();
+		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(key);
 		while (val.getModifiedValue()<target) {
 			assertTrue("May not increase "+val.getModifyable(), attribs.canBeIncreased(val).get());
@@ -90,7 +90,7 @@ public class SR6ArchetypeTest {
 		// Select adept
 		charGen.getMagicOrResonanceController().select(Shadowrun6Core.getItem(MagicOrResonanceType.class, "adept"));
 		
-		PriorityAttributeController attribs = (PriorityAttributeController) charGen.getAttributeController();
+		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
 		raiseAttributeTo(ShadowrunAttribute.BODY     , 5);
 		raiseAttributeTo(ShadowrunAttribute.AGILITY  , 6);
 		raiseAttributeTo(ShadowrunAttribute.REACTION , 5);

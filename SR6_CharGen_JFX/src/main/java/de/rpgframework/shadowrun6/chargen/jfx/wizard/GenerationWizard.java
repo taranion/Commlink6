@@ -82,7 +82,7 @@ public class GenerationWizard extends Wizard {
 		prios  = new WizardPagePriority<>(this, wrapper.getWrapped(), new SR6PriorityTable( (type,prio) -> Shadowrun6Core.getPriorityTableEntry(type, prio)));
 		race   = new WizardPageMetatype(this, wrapper);
 //		culture= new WizardPageCulture(this, wrapper);
-		attrib = new WizardPageAttributes(this, wrapper.getWrapped());
+		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		name   = new WizardPageName<>(this, wrapper);
 		

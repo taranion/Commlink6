@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -13,6 +16,8 @@ import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetaTypeOption;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 
@@ -21,14 +26,17 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
  *
  */
 public class PointBuyMetatypeController extends ControllerImpl<SR6MetaType> implements IMetatypeController<SR6MetaType> {
+	
+	private static MultiLanguageResourceBundle RES = PointBuyCharacterGenerator.RES;
 
-	private Map<SR6MetaType, MetaTypeOption> availableOptions;
+	private List<SR6MetaType> availableOptions;
 	private static Random random = new Random();
 
 	//-------------------------------------------------------------------
 	public PointBuyMetatypeController(SR6CharacterController parent) {
 		super(parent);
-		availableOptions  = new HashMap<SR6MetaType,MetaTypeOption>();
+		availableOptions  = new ArrayList<>();
+		availableOptions.addAll(Shadowrun6Core.getItemList(SR6MetaType.class));
 	}
 
 	@Override
@@ -110,10 +118,30 @@ public class PointBuyMetatypeController extends ControllerImpl<SR6MetaType> impl
 			unprocessed.add(mod);
 		}
 		
-		// Add modifications from selection
-		MetaType selected = getModel().getMetatype();
-		if (selected!=null) {
-			unprocessed.addAll(selected.getModifications());
+		Shadowrun6Character model = parent.getModel();
+		logger.debug("Available metatype options: "+availableOptions);
+		SR6MetaType selected = model.getMetatype();
+		logger.debug("  selected: "+selected);
+
+		/*
+		 * If a metatype is selected, apply it
+		 */
+		if (selected==null) {
+			todos.add(new ToDoElement(Severity.STOPPER, RES.getString("pointbuy.todo.metatype")));
+		} else {
+			// A selection has been made
+			if (!availableOptions.contains(selected)) {
+				logger.warn("Deselected metatype since it is not available anymore");
+				model.setMetatype(null);
+				todos.add(new ToDoElement(Severity.STOPPER, RES.getString("pointbuy.todo.metatype")));
+			} else {
+				int karma = selected.getKarma();
+				if (karma>0) {
+					logger.info("Pay "+karma+" for metatype "+selected.getId());
+					model.setKarmaFree(model.getKarmaFree()-karma);
+				}
+				// Applying modification is a special CharacterProcessor from Core
+			}
 		}
 		
 		return unprocessed;

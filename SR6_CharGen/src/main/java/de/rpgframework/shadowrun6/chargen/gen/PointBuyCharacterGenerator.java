@@ -5,15 +5,18 @@ import java.util.Locale;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
+import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
 
 /**
  * @author stefa
  *
  */
 @GeneratorId("karma")
-public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator {
+public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  implements ISR6PointBuyGenerator {
 
 	static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PointBuyCharacterGenerator.class,
 			Locale.ENGLISH, Locale.GERMAN);
@@ -44,7 +47,10 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator {
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
-		return new WizardPageType[] {};
+		return new WizardPageType[] { WizardPageType.METATYPE,
+				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
+				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.ALCHEMY, WizardPageType.RITUALS,
+				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.NAME, };
 	}
 
 	//-------------------------------------------------------------------
@@ -104,12 +110,13 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator {
 				return;
 			}
 
-			attributes = new PointBuyAttributeGenerator(this);
+			attributes = new PointBuySR6AttributeGenerator(this);
 			meta = new PointBuyMetatypeController(this);
 			magicReso = new PointBuyMagicOrResonanceController(this);
 			skill = new PointBuySR6SkillGenerator(this);
 			logger.info("meta = " + getMetatypeController() + "  of " + this);
 
+			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			processChain.add(new PointBuyResetGenerator(this));
 			processChain.add(meta);
 			processChain.add(magicReso);
@@ -130,5 +137,23 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator {
 		SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 		settings.characterPoints = 100;
 		super.runProcessors();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator#getSettings()
+	 */
+	@Override
+	public SR6PointBuySettings getSettings() {
+		return getModel().getCharGenSettings(SR6PointBuySettings.class);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator#getPointBuyAttributeController()
+	 */
+	@Override
+	public PointBuyAttributeGenerator getPointBuyAttributeController() {
+		return (PointBuyAttributeGenerator) super.attributes;
 	}
 }

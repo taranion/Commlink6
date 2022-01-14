@@ -20,7 +20,7 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
-import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController;
+import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -30,16 +30,16 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PriorityAttributeGenerator extends CommonAttributeGenerator implements PriorityAttributeController {
+public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator implements PriorityAttributeGenerator {
 
-	private final static Logger logger = System.getLogger(PriorityAttributeGenerator.class.getPackageName());
+	private final static Logger logger = System.getLogger(PrioritySR6AttributeGenerator.class.getPackageName());
 	
 	private int adjustmentPoints;
 	private int attributePoints;
 	private boolean redistribute;
 	
 	//-------------------------------------------------------------------
-	public PriorityAttributeGenerator(SR6CharacterController parent) {
+	public PrioritySR6AttributeGenerator(SR6CharacterController parent) {
 		super(parent);
 	}
 
@@ -194,7 +194,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#getAdjustmentPointsLeft()
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#getAdjustmentPointsLeft()
 	 */
 	@Override
 	public int getPointsLeft() {
@@ -203,7 +203,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#getAttributePointsLeft()
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#getAttributePointsLeft()
 	 */
 	@Override
 	public int getPointsLeft2() {
@@ -212,7 +212,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#canBeDecreasedPoints1(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#canBeDecreasedPoints1(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public Possible canBeDecreasedPoints(AttributeValue<ShadowrunAttribute> value) {
@@ -222,7 +222,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#canBeIncreasedPoints(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#canBeIncreasedPoints(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public Possible canBeIncreasedPoints(AttributeValue<ShadowrunAttribute> value) {
@@ -232,7 +232,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#increaseAdjust(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#increaseAdjust(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> increasePoints(AttributeValue<ShadowrunAttribute> value) {
@@ -260,7 +260,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#decreaseAdjust(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#decreaseAdjust(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> decreasePoints(AttributeValue<ShadowrunAttribute> value) {
@@ -288,7 +288,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#canDecreaseAttrib(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#canDecreaseAttrib(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public Possible canBeDecreasedPoints2(AttributeValue<ShadowrunAttribute> value) {
@@ -298,7 +298,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#canIncreaseAttrib(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#canIncreaseAttrib(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public Possible canBeIncreasedPoints2(AttributeValue<ShadowrunAttribute> value) {
@@ -310,7 +310,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#increaseAttrib(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#increaseAttrib(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> increasePoints2(
@@ -339,7 +339,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#decreaseAttrib(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#decreaseAttrib(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> decreasePoints2(AttributeValue<ShadowrunAttribute> value) {
@@ -368,7 +368,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#canBeDecreasedPoints3(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#canBeDecreasedPoints3(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public Possible canBeDecreasedPoints3(AttributeValue<ShadowrunAttribute> value) {
@@ -378,7 +378,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#canBeIncreasedPoints3(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#canBeIncreasedPoints3(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public Possible canBeIncreasedPoints3(AttributeValue<ShadowrunAttribute> value) {
@@ -406,7 +406,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#increasePoints3(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#increasePoints3(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> increasePoints3(AttributeValue<ShadowrunAttribute> value) {
@@ -434,7 +434,7 @@ public class PriorityAttributeGenerator extends CommonAttributeGenerator impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController#decreasePoints3(de.rpgframework.shadowrun.ShadowrunAttribute)
+	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#decreasePoints3(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> decreasePoints3(AttributeValue<ShadowrunAttribute> value) {

@@ -3,6 +3,9 @@ package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -93,6 +96,16 @@ public class WizardPageMetatype extends WizardPage {
 			}});
 		contentPane.setModificationConverter((m) -> Shadowrun6Tools.getModificationString(contentPane.getSelectedItem(),m));
 		contentPane.setReferenceTypeConverter(new SR6ReferenceTypeConverter<>());
+		contentPane.setNameConverter( meta -> {
+			if (meta==null) return "-";
+			String suffix = " ("+meta.getKarma()+" Karma)";
+			if (meta.getVariantOf()==null) {
+				if (meta.getKarma()==0)
+					return meta.getName();
+				return meta.getName()+suffix;
+			}
+			return "- "+meta.getName()+suffix;
+		});
 //		contentPane.setModificationConverter((m) -> SplitterTools.getModificationString(contentPane.getSelectedItem(),m));
 //		contentPane.setChoiceConverter((c) -> SplitterTools.getChoiceString(contentPane.getSelectedItem(), c));
 		contentPane.setModel(charGen.getModel());
@@ -100,7 +113,25 @@ public class WizardPageMetatype extends WizardPage {
 			logger.log(Level.WARNING, "ToDo: make decision");
 //			SplitterJFXUtil.openDecisionDialog(r, c, null);
 		});
-		contentPane.setItems(Shadowrun6Core.getItemList(SR6MetaType.class));
+		
+		List<SR6MetaType> items = Shadowrun6Core.getItemList(SR6MetaType.class);
+		Collections.sort(items, new Comparator<SR6MetaType>() {
+			public int compare(SR6MetaType meta1, SR6MetaType meta2) {
+				if (meta1.getId().equals("human")) return -1;
+				if (meta2.getId().equals("human")) return +1;
+				if (meta1.getVariantOf()!=null && meta1.getVariantOf().getId().equals("human") && (!meta2.getId().equals("human"))) return -1;
+				if (meta2.getVariantOf()!=null && meta2.getVariantOf().getId().equals("human") && (!meta1.getId().equals("human"))) return +1;
+				String comp1 = meta1.getName();
+				if (meta1.getVariantOf()!=null)
+					comp1 = meta1.getVariantOf().getName()+" / "+comp1;
+				String comp2 = meta2.getName();
+				if (meta2.getVariantOf()!=null)
+					comp2 = meta2.getVariantOf().getName()+" / "+comp2;
+				return comp1.compareTo(comp2);
+			}
+		});
+		
+		contentPane.setItems(items);
 		contentPane.setShowDecisionColumn(false);
 		
 		/*

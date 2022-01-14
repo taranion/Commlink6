@@ -54,6 +54,10 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	}
 	
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.ShadowrunCharacter#getMetatype()
+	 */
+	@SuppressWarnings("unchecked")
 	public SR6MetaType getMetatype() {
 		return Shadowrun6Core.getItem(SR6MetaType.class, metatype);
 	}

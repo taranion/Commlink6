@@ -41,7 +41,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.gen.PriorityAttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -53,7 +53,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class PrioAttrGenTest {
 	
 	private Shadowrun6Character model;
-	private PriorityAttributeGenerator ctrl;
+	private PrioritySR6AttributeGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
 	
@@ -121,7 +121,7 @@ public class PrioAttrGenTest {
 			@Override
 			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
-		ctrl  = new PriorityAttributeGenerator(charGen);
+		ctrl  = new PrioritySR6AttributeGenerator(charGen);
 		charGen.runProcessors();
 	}
 	

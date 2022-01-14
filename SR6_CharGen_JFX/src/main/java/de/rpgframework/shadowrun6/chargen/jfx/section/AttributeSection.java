@@ -9,15 +9,15 @@ import org.prelle.javafx.Section;
 import de.rpgframework.jfx.rules.AttributeTable.Mode;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
-import de.rpgframework.shadowrun.chargen.jfx.KarmaAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTable;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuyAttributeGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.PriorityAttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
@@ -38,15 +38,8 @@ public class AttributeSection extends Section {
 		super(title, null);
 		logger.log(Level.DEBUG, "<init>");
 
-		initComponents();
 		initLayoutNormal();
-		refresh();
 		initInteractivity();
-	}
-
-	//-------------------------------------------------------------------
-	private void initComponents() {
-		table = new KarmaAttributeTable<SR6Skill,SR6SkillValue,Shadowrun6Character>();
 	}
 
 	//-------------------------------------------------------------------
@@ -73,7 +66,6 @@ public class AttributeSection extends Section {
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "updateController");
-		table.setController(ctrl);
 		
 		Shadowrun6Character model = ctrl.getModel();
 		MagicOrResonanceType mor = model.getMagicOrResonanceType();
@@ -85,15 +77,14 @@ public class AttributeSection extends Section {
 		IAttributeController attrib = ctrl.getAttributeController();
 //		table.setModel(ctrl.getModel());
 //		table.setMode(AttributeTable.Mode.GENERATE);
-		if (attrib instanceof PriorityAttributeGenerator) {
+		if (attrib instanceof PrioritySR6AttributeGenerator) {
  			System.err.println("AttributeSection: change controller to Priority");
-			table = new PriorityAttributeTable<>();
-		} else if (attrib instanceof PointBuyAttributeGenerator) {
+			table = new PriorityAttributeTable<>(ctrl);
+		} else if (attrib instanceof PointBuySR6AttributeGenerator) {
  			System.err.println("AttributeSection: change controller to Point Buy");
-			table = new PriorityAttributeTable<>();
+			table = new PointBuyAttributeTable<>(ctrl);
 		} else {
 			System.err.println("AttributeSection: change controller to Karma");
-			table = new KarmaAttributeTable<>();
 		}
 		setContent(table);
 	}

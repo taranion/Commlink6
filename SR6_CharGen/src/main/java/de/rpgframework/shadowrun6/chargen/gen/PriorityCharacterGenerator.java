@@ -11,7 +11,7 @@ import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTableEntry;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
-import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeController;
+import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -101,7 +101,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			}
 
 			prioCtrl = createPriorityTableController();
-			attributes = new PriorityAttributeGenerator(this);
+			attributes = new PrioritySR6AttributeGenerator(this);
 			meta = new PriorityMetatypeController(this);
 			magicReso = new PriorityMagicOrResonanceController(this);
 			skill = new PrioritySR6SkillGenerator(this);
@@ -170,8 +170,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	 * @see de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator#getPriorityAttributeController()
 	 */
 	@Override
-	public PriorityAttributeController getPriorityAttributeController() {
-		return (PriorityAttributeController) super.attributes;
+	public PriorityAttributeGenerator getPriorityAttributeController() {
+		return (PriorityAttributeGenerator) super.attributes;
 	}
 
 }

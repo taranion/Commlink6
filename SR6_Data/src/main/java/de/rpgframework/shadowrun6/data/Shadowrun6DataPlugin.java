@@ -135,9 +135,11 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 			logger.debug("Loaded "+list.size()+" rule presets");
 
-			logger.info("START -------------------------------Core-----------------------------------------------");
-			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "INGENTIS", "ingentis.i18n", Locale.ENGLISH, Locale.GERMAN);
-			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "ingentis/data/metatypes.xml");
+			logger.info("START -------------------------------COMPANION------------------------------------------");
+			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH);
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities-metagenetic.xml");
+			logger.debug("Loaded "+list.size()+" metagenetic qualities");
+			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "companion/data/metatypes.xml");
 			logger.debug("Loaded "+list.size()+" metatypes");
 
 		} catch (DataErrorException e) {

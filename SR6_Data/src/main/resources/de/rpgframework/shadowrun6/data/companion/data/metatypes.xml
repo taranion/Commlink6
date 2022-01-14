@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metatypes>
 	<!-- Dwarf variants -->
-	<metatype id="duende" variantof="dwarf" size="110" weight="55">
+	<metatype id="duende" variantof="dwarf" size="110" weight="55" karma="10">
 		<modifications>
            <valmod ref="BODY"      type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="REACTION"  type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
-           <itemmod ref="toxin_resistance" type="QUALITY"/>
+           <itemmod type="QUALITY" ref="toxin_resistance"/>
+           <itemmod type="QUALITY" ref="allergy">
+           	 <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
+           	 <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="extreme"/>
+           	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="sunlight"/>
+           </itemmod>
 		</modifications>
 	</metatype>
-	<metatype id="gnome" variantof="dwarf" size="80" weight="37">
+	<metatype id="gnome" variantof="dwarf" size="80" weight="37" karma="5">
 		<modifications>
            <valmod ref="BODY"      type="ATTRIBUTE" value="4" set="MAX" when="CREATION"/>
            <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
@@ -17,7 +22,7 @@
            <itemmod ref="toxin_resistance" type="QUALITY"/>
 		</modifications>
 	</metatype>
-	<metatype id="hanuman" variantof="dwarf" size="120" weight="48">
+	<metatype id="hanuman" variantof="dwarf" size="120" weight="48" karma="5">
 		<modifications>
            <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="STRENGTH"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
@@ -25,7 +30,7 @@
            <itemmod ref="toxin_resistance" type="QUALITY"/>
 		</modifications>
 	</metatype>
-	<metatype id="koborokuru" variantof="dwarf" size="110" weight="42">
+	<metatype id="koborokuru" variantof="dwarf" size="110" weight="42" karma="5">
 		<modifications>
            <valmod ref="BODY"      type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="STRENGTH"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
@@ -33,7 +38,7 @@
            <itemmod ref="toxin_resistance" type="QUALITY"/>
 		</modifications>
 	</metatype>
-	<metatype id="menehune" variantof="dwarf" size="110" weight="42">
+	<metatype id="menehune" variantof="dwarf" size="110" weight="42" karma="5">
 		<modifications>
            <valmod ref="BODY"      type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
@@ -43,93 +48,93 @@
 	</metatype>
 	
 	<!-- Elf variants -->
-	<metatype id="dalakitnon" variantof="elf" size="170" weight="80">
+	<metatype id="dalakitnon" variantof="elf" size="170" weight="80" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="dryad" variantof="elf" size="175" weight="63">
+	<metatype id="dryad" variantof="elf" size="175" weight="63" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="nocturna" variantof="elf" size="190" weight="80">
+	<metatype id="nocturna" variantof="elf" size="190" weight="80" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="wakyambi" variantof="elf" size="230" weight="145">
+	<metatype id="wakyambi" variantof="elf" size="230" weight="145" karma="10">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="xapiri_thepe" variantof="elf" size="170" weight="57">
+	<metatype id="xapiri_thepe" variantof="elf" size="170" weight="57" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
 	
 	<!-- Human variants -->
-	<metatype id="nartaki" variantof="human" size="175" weight="86">
+	<metatype id="nartaki" variantof="human" size="175" weight="86" karma="5">
 		<modifications>
 			<valmod ref="EDGE" type="ATTRIBUTE" value="7" set="MAX" when="CREATION" />
 		</modifications>
 	</metatype>
-	<metatype id="valkyrie" variantof="human" size="176" weight="115">
+	<metatype id="valkyrie" variantof="human" size="176" weight="115" karma="15">
 		<modifications>
 		</modifications>
 	</metatype>
 	
 	<!-- Ork variants -->
-	<metatype id="hobgoblin" variantof="ork" size="180" weight="98">
+	<metatype id="hobgoblin" variantof="ork" size="180" weight="98" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="ogre" variantof="ork" size="170" weight="101">
+	<metatype id="ogre" variantof="ork" size="170" weight="101" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="oni" variantof="ork" size="190" weight="128">
+	<metatype id="oni" variantof="ork" size="190" weight="128" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="satyr" variantof="ork" size="160" weight="69">
+	<metatype id="satyr" variantof="ork" size="160" weight="69" karma="10">
 		<modifications>
 		</modifications>
 	</metatype>
 
 
 	<!-- Troll variants -->
-	<metatype id="cyclops" variantof="troll" size="270" weight="421">
+	<metatype id="cyclops" variantof="troll" size="270" weight="421" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="fomorian" variantof="troll" size="235" weight="224">
+	<metatype id="fomorian" variantof="troll" size="235" weight="224" karma="10">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="giant" variantof="troll" size="300" weight="467">
+	<metatype id="giant" variantof="troll" size="300" weight="467" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="minotaur" variantof="troll" size="240" weight="265">
+	<metatype id="minotaur" variantof="troll" size="240" weight="265" karma="5">
 		<modifications>
 		</modifications>
 	</metatype>
 
 	<!-- Metasapients -->
-	<metatype id="centaur" size="210" weight="435">
+	<metatype id="centaur" size="210" weight="435" karma="15">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="merrow" size="285" weight="435">
+	<metatype id="merrow" size="285" weight="435" karma="15">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="naga" size="690" weight="245">
+	<metatype id="naga" size="690" weight="245" karma="15">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="pixie" size="60" weight="19">
+	<metatype id="pixie" size="60" weight="19" karma="10">
 		<modifications>
 		</modifications>
 	</metatype>
-	<metatype id="sasquatch" size="240" weight="244">
+	<metatype id="sasquatch" size="240" weight="244" karma="10">
 		<modifications>
 		</modifications>
 	</metatype>
