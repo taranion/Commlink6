@@ -20,8 +20,8 @@
            <valmod ref="REACTION"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
            <valmod ref="STRENGTH"  type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
-           <itemmod ref="toxin_resistance" type="QUALITY"/>
-           <itemmod ref="thermographic_vision" type="QUALITY"/>
+           <itemmod type="QUALITY" ref="toxin_resistance"/>
+           <itemmod type="QUALITY" ref="thermographic_vision"/>
          </modifications>
     </metatype>
 
@@ -30,8 +30,8 @@
            <valmod ref="BODY"     type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <valmod ref="STRENGTH" type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <valmod ref="CHARISMA" type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
-           <itemmod ref="low-light_vision" type="QUALITY"/>
-           <valmod ref="built_tough"       type="QUALITY" value="1"/>
+           <itemmod type="QUALITY" ref="low-light_vision"/>
+           <valmod type="QUALITY" ref="built_tough" value="1"/>
         </modifications>
     </metatype>
 

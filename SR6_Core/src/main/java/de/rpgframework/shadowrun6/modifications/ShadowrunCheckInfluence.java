@@ -14,5 +14,6 @@ public enum ShadowrunCheckInfluence implements CheckInfluence {
 	EDGE,
 	/** Can test be made at all */
 	USAGE,
+	EDGE_COST_MALUS
 	
 }
