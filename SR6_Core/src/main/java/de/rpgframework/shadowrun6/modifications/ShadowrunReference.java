@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
+import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -42,6 +43,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ALLERGY_SEVERITY("Severity"),
 	ATTRIBUTE(new AttributeConverter()),
 	CREATION_POINTS(CreatePoints.class,0),
+	CRITTER_POWER(CritterPower.class),
 	ELEMENT("Element"),
 	GEAR(ItemTemplate.class),
 	HOOK(ItemHook.class, 0),

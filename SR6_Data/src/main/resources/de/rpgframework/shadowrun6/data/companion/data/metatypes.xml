@@ -166,7 +166,7 @@
          <valmod ref="CHARISMA" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
           <itemmod type="QUALITY" ref="fangs"/>
           <itemmod type="QUALITY" ref="low-light_vision"/>
-          <itemmod type="QUALITY" ref="extravagant_eyes"/>
+          <itemmod type="QUALITY" ref="mad_eyes"/>
           <itemmod type="QUALITY" ref="poor_self_control"/>
 		</modifications>
 	</metatype>
@@ -204,40 +204,109 @@
 	<!-- Troll variants -->
 	<metatype id="cyclops" variantof="troll" size="270" weight="421" karma="5">
 		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"   value="5" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" when="CREATION"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <itemmod type="QUALITY"  ref="cyclopean_eye"/>
+         <itemmod type="QUALITY"  ref="thermographic_vision"/>
 		</modifications>
 	</metatype>
 	<metatype id="fomorian" variantof="troll" size="235" weight="224" karma="10">
 		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" when="CREATION"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <itemmod type="QUALITY"  ref="magic_resistance"/>
+         <itemmod type="QUALITY"  ref="thermographic_vision"/>
 		</modifications>
 	</metatype>
 	<metatype id="giant" variantof="troll" size="300" weight="467" karma="5">
 		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"   value="5" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" when="CREATION"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <itemmod type="QUALITY"  ref="dermal_alt_bark"/>
+         <itemmod type="QUALITY"  ref="thermographic_vision"/>
 		</modifications>
 	</metatype>
 	<metatype id="minotaur" variantof="troll" size="240" weight="265" karma="5">
 		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"   value="5" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" when="CREATION"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <itemmod type="QUALITY"  ref="goring_horns"/>
+         <itemmod type="QUALITY"  ref="thermographic_vision"/>
 		</modifications>
 	</metatype>
 
 	<!-- Metasapients -->
 	<metatype id="centaur" size="210" weight="435" karma="15">
 		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" when="CREATION"/>
+         <itemmod type="QUALITY" ref="low-light_vision"/>
+         <itemmod type="QUALITY" ref="manasense"/>
+         <itemmod type="CRITTER_POWER" ref="search"/>
+         <itemmod type="QUALITY"  ref="thermographic_vision"/>
 		</modifications>
 	</metatype>
 	<metatype id="merrow" size="285" weight="435" karma="15">
 		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" when="CREATION"/>
+         <itemmod type="QUALITY"  ref="biosonar"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <itemmod type="CRITTER_POWER" ref="dual_natured"/>
+         <itemmod type="QUALITY"  ref="low-light_vision"/>
+         <itemmod type="QUALITY"  ref="underwater_vision"/>
 		</modifications>
 	</metatype>
 	<metatype id="naga" size="690" weight="245" karma="15">
 		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"   value="7" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" when="CREATION"/>
+         <valmod type="CRITTER_POWER" ref="armor" value="4"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <itemmod type="QUALITY"   ref="cold_blooded"/>
+         <itemmod type="CRITTER_POWER" ref="dual_natured"/>
 		</modifications>
 	</metatype>
 	<metatype id="pixie" size="60" weight="19" karma="10">
 		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="3" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"   value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="2" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="LOGIC"     value="7" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="CHARISMA"  value="8" set="MAX" when="CREATION"/>
+           <itemmod type="QUALITY" ref="allergy">
+           	 <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="uncommon"/>
+           	 <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="medium"/>
+           	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="iron"/>
+           </itemmod>
+         <itemmod type="CRITTER_POWER" ref="concealment"/>
+         <itemmod type="CRITTER_POWER" ref="vanishing"/>
 		</modifications>
 	</metatype>
 	<metatype id="sasquatch" size="240" weight="244" karma="10">
 		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
+         <itemmod type="QUALITY"  ref="biosonar"/>
+         <itemmod type="CRITTER_POWER" ref="dual_natured"/>
+         <itemmod type="CRITTER_POWER" ref="mimicry"/>
 		</modifications>
 	</metatype>
 

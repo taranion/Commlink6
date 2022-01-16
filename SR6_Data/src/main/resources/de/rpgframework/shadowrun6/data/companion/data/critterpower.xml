@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<critterpowers>
+    <critterpower id="vanishing" type="PHYSICAL"   action="MINOR" range="SELF" dur="IMMEDIATE" />
+</critterpowers>

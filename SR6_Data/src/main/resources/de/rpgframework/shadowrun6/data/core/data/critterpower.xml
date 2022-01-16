@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<critterpowers>
+    <critterpower id="armor" type="PHYSICAL"   action="AUTO" range="SELF" dur="ALWAYS" level="true"/>
+    <critterpower id="concealment" type="PHYSICAL"   action="AUTO" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
+    <critterpower id="dual_natured" type="PHYSICAL"   action="AUTO" range="SELF" dur="ALWAYS" />
+    <critterpower id="search" type="PHYSICAL"   action="MAJOR" range="SPECIAL" dur="SPECIAL" />
+</critterpowers>

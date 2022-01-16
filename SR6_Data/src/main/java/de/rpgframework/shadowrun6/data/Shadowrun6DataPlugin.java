@@ -27,6 +27,8 @@ import de.rpgframework.shadowrun.ANPC;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerList;
+import de.rpgframework.shadowrun.CritterPower;
+import de.rpgframework.shadowrun.CritterPowerList;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MagicOrResonanceTypeList;
 import de.rpgframework.shadowrun.Quality;
@@ -110,6 +112,8 @@ public class Shadowrun6DataPlugin  {
 //			logger.debug("Loaded "+list.size()+" adept powers");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, core, clazz, "core/data/qualities.xml");
 			logger.debug("Loaded "+list.size()+" qualities");
+			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, core, clazz, "core/data/critterpower.xml");
+			logger.debug("Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, core, clazz, "core/data/metatypes.xml");
 			logger.debug("Loaded "+list.size()+" metatypes");
 			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz, "core/data/actions_minor.xml");
@@ -139,6 +143,8 @@ public class Shadowrun6DataPlugin  {
 			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH);
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities-metagenetic.xml");
 			logger.debug("Loaded "+list.size()+" metagenetic qualities");
+			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, core, clazz, "companion/data/critterpower.xml");
+			logger.debug("Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "companion/data/metatypes.xml");
 			logger.debug("Loaded "+list.size()+" metatypes");
 
