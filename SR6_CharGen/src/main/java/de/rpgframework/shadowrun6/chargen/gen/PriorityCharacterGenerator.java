@@ -46,6 +46,15 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			}};
 	}
 
+	//-------------------------------------------------------------------
+	public PriorityCharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
+		super(model, handle);
+		resolver = new BiFunction<PriorityType, Priority, PriorityTableEntry>() {
+			public PriorityTableEntry apply(PriorityType type, Priority prio) {
+				return Shadowrun6Core.getPriorityTableEntry(type, prio);
+			}};
+	}
+
 	// -------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getId()

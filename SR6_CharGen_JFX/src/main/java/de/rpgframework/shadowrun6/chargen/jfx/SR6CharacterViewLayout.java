@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.Page;
+import org.prelle.javafx.WindowMode;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterIOException;
@@ -153,6 +154,15 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 //		if (page!=null && page instanceof ControllerListener) {
 //			((ControllerListener)page).handleControllerEvent(type, param);
 //		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see org.prelle.javafx.ResponsiveControl#setResponsiveMode(org.prelle.javafx.WindowMode)
+	 */
+	@Override
+	public void setResponsiveMode(WindowMode value) {
+		logger.warn("Mode "+value);
 	}
 
 }

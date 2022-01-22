@@ -415,7 +415,6 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		lblNam.get(ShadowrunAttribute.RESONANCE).setVisible(showReson);
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			y++;
-			logger.log(Level.INFO, "Put "+key+" at "+y);
 			if (key==ShadowrunAttribute.MAGIC) {
 				if (!showMagic)
 					continue;

@@ -2,12 +2,10 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
-import javax.management.RuntimeErrorException;
 
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -22,7 +20,7 @@ public class CharacterGeneratorRegistry {
 
 	//-------------------------------------------------------------------
 	static {
-		generators = new HashMap<String,Class<? extends SR6CharacterGenerator>>();
+		generators = new LinkedHashMap<String,Class<? extends SR6CharacterGenerator>>();
 		addGenerator(PriorityCharacterGenerator.class);
 		addGenerator(SumToTenCharacterGenerator.class);
 		addGenerator(PointBuyCharacterGenerator.class);

@@ -47,6 +47,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 
 	//-------------------------------------------------------------------
 	public CommonSR6CharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
+		this();
 		this.model = model;
 		this.handle = handle;
 	}
@@ -99,7 +100,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	@Override
 	public boolean canBeFinished() {
 		// TODO Auto-generated method stub
-		logger.warn("TODO: canBeFinished");
+		logger.debug("TODO: canBeFinished");
 		return true;
 	}
 

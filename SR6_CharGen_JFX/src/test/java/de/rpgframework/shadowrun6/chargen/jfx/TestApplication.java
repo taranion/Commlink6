@@ -73,8 +73,9 @@ public class TestApplication extends FlexibleApplication {
         //KarmaCharacterGenerator karma = new KarmaCharacterGenerator(model, null);
         screen.handleControllerEvent(BasicControllerEvents.GENERATOR_CHANGED, chargen);
 		openScreen(screen);
-		ResponsiveControlManager.initialize((Region) scene.getRoot(), 800, 1200);
-		ResponsiveControlManager.manageResponsiveControls((Region) scene.getRoot(), 800, 1200);
+		ResponsiveControlManager.setBreakpoints(800, 1000);
+		ResponsiveControlManager.manageResponsiveControls((Region) scene.getRoot());
+		ResponsiveControlManager.initialize((Region) scene.getRoot());
      }
 
 }
