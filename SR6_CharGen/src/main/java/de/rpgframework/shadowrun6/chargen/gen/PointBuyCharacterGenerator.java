@@ -50,8 +50,10 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	@Override
 	public WizardPageType[] getWizardPages() {
 		return new WizardPageType[] { WizardPageType.METATYPE,
-				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
-				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.ALCHEMY, WizardPageType.RITUALS,
+				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED, 
+				WizardPageType.QUALITIES, 
+				WizardPageType.ATTRIBUTES,
+				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,
 				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.NAME, };
 	}
 

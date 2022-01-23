@@ -19,6 +19,7 @@ import org.prelle.javafx.WizardPage;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.classification.Gender;
 import de.rpgframework.jfx.DataItemSpinnerPane;
+import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -56,6 +57,7 @@ public class WizardPageMetatype extends WizardPage {
 	private Button btnRoll;
 	private TextField tfSize;
 	private TextField tfWeight;
+	private ChoiceBox<BodyType> cbSpecialBody;
 	private FlowPane customNode1;
 	
 	//-------------------------------------------------------------------
@@ -152,6 +154,17 @@ public class WizardPageMetatype extends WizardPage {
 		tfSize.setPrefColumnCount(3);
 		tfWeight = new TextField();
 		tfWeight.setPrefColumnCount(3);
+		
+		cbSpecialBody = new ChoiceBox<BodyType>();
+		cbSpecialBody.getItems().addAll(BodyType.values());
+		cbSpecialBody.setConverter(new StringConverter<BodyType>() {
+			public String toString(BodyType key) {
+				if (key==null) return "?";
+				return ResourceI18N.get(RES,"bodytype."+key.name().toLowerCase());
+			}
+			public BodyType fromString(String key) {return BodyType.valueOf(key.toUpperCase());}
+		});
+		cbSpecialBody.setValue(BodyType.METAHUMAN);
 	}
 	
 	//-------------------------------------------------------------------
@@ -170,6 +183,7 @@ public class WizardPageMetatype extends WizardPage {
 		addToCustom(cbGender, "label.gender");
 		addToCustom(new HBox(5, tfSize, new Label("cm")), "label.size");
 		addToCustom(new HBox(5, tfWeight, new Label("kg")), "label.weight");
+		addToCustom(cbSpecialBody, "label.bodytype");
 		
 		VBox cust = new VBox(10, btnRoll, customNode1);
 		contentPane.setCustomNode1(new NodeWithTitle(ResourceI18N.get(RES,"tab.custom"), cust));
@@ -207,6 +221,9 @@ public class WizardPageMetatype extends WizardPage {
 		});
 		
 		cbGender.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> charGen.getModel().setGender(n));
+		cbSpecialBody.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			charGen.getMetatypeController().selectBodyType(n);
+		});
 		tfSize.textProperty().addListener( (ov,o,n) -> {
 			try {
 				int size = Integer.parseInt(n);

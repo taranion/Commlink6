@@ -247,7 +247,7 @@
 	</metatype>
 
 	<!-- Metasapients -->
-	<metatype id="centaur" size="210" weight="435" karma="15">
+	<metatype id="centaur" size="210" weight="435" karma="15" human="false">
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" when="CREATION"/>
@@ -257,7 +257,7 @@
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
 		</modifications>
 	</metatype>
-	<metatype id="merrow" size="285" weight="435" karma="15">
+	<metatype id="merrow" size="285" weight="435" karma="15" human="false">
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" when="CREATION"/>
@@ -268,7 +268,7 @@
          <itemmod type="QUALITY"  ref="underwater_vision"/>
 		</modifications>
 	</metatype>
-	<metatype id="naga" size="690" weight="245" karma="15">
+	<metatype id="naga" size="690" weight="245" karma="15" human="false">
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="AGILITY"   value="7" set="MAX" when="CREATION"/>
@@ -281,7 +281,7 @@
          <itemmod type="CRITTER_POWER" ref="dual_natured"/>
 		</modifications>
 	</metatype>
-	<metatype id="pixie" size="60" weight="19" karma="10">
+	<metatype id="pixie" size="60" weight="19" karma="10" human="false">
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="3" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="AGILITY"   value="8" set="MAX" when="CREATION"/>
@@ -300,7 +300,7 @@
          <itemmod type="CRITTER_POWER" ref="vanishing"/>
 		</modifications>
 	</metatype>
-	<metatype id="sasquatch" size="240" weight="244" karma="10">
+	<metatype id="sasquatch" size="240" weight="244" karma="10" human="false">
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>

@@ -6,7 +6,6 @@ import java.util.function.BiFunction;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
-import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTableEntry;
 import de.rpgframework.shadowrun.PriorityType;
@@ -16,6 +15,8 @@ import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
@@ -89,8 +90,9 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	@Override
 	public WizardPageType[] getWizardPages() {
 		return new WizardPageType[] { WizardPageType.PRIORITIES, WizardPageType.METATYPE,
-				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
-				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.ALCHEMY, WizardPageType.RITUALS,
+				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED, 
+				WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
+				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,
 				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.NAME, };
 	}
 
@@ -111,15 +113,18 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 			prioCtrl = createPriorityTableController();
 			attributes = new PrioritySR6AttributeGenerator(this);
-			meta = new PriorityMetatypeController(this);
+			meta = new SR6PriorityMetatypeController(this);
 			magicReso = new PriorityMagicOrResonanceController(this);
 			skill = new PrioritySR6SkillGenerator(this);
+			qualities = new QualityGenerator(this);
 			logger.info("meta = " + getMetatypeController() + "  of " + this);
 
+			processChain.add(new ResetModifications(model));
 			processChain.add(new ResetGenerator(this));
 			processChain.add(prioCtrl);
 			processChain.add(meta);
 			processChain.add(magicReso);
+			processChain.add(qualities);
 			processChain.add(attributes);
 			processChain.add(skill);
 

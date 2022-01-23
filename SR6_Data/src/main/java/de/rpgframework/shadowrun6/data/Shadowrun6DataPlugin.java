@@ -142,7 +142,9 @@ public class Shadowrun6DataPlugin  {
 			logger.info("START -------------------------------COMPANION------------------------------------------");
 			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH);
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities-metagenetic.xml");
-			logger.debug("Loaded "+list.size()+" metagenetic qualities");
+			logger.debug("Loaded "+list.size()+" metagenic qualities");
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities-infected.xml");
+			logger.debug("Loaded "+list.size()+" infected qualities");
 			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, core, clazz, "companion/data/critterpower.xml");
 			logger.debug("Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "companion/data/metatypes.xml");

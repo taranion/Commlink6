@@ -1,0 +1,152 @@
+package de.rpgframework.shadowrun6.chargen.jfx;
+
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
+import org.prelle.javafx.SymbolIcon;
+
+import de.rpgframework.ResourceI18N;
+import de.rpgframework.jfx.ComplexDataItemControllerNode;
+import de.rpgframework.jfx.ComplexDataItemListFilter;
+import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.Quality.QualityType;
+import de.rpgframework.shadowrun.QualityValue;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
+
+/**
+ * @author prelle
+ *
+ */
+public class QualityFilterNode extends ComplexDataItemListFilter<Quality,QualityValue> {
+	
+	private final static Logger logger = System.getLogger(QualityFilterNode.class.getPackageName());
+	
+	private enum What {
+		ALL,
+		POSITIVE,
+		NEGATIVE
+	}
+	
+	private enum Sort {
+		NAME,
+		KARMA
+	}
+	
+	private ResourceBundle RES;
+	private List<QualityType> allowedTypes;
+	
+	private ChoiceBox<What> cbWhat;
+	private Button btnSort;
+	private TextField tfSearch;
+	
+	private Comparator<Quality> compareByName = new Comparator<Quality>() {
+		public int compare(Quality q1, Quality q2) {
+			return Collator.getInstance().compare(q1.getName(), q2.getName());
+		}
+	};
+	private Comparator<Quality> compareByKarma = new Comparator<Quality>() {
+		public int compare(Quality q1, Quality q2) {
+			int c = Integer.compare(q1.getKarmaCost(), q2.getKarmaCost());
+			if (c==0)
+				c = Collator.getInstance().compare(q1.getName(), q2.getName());
+			return c;
+		}
+	};
+	
+	private Sort currentSort = Sort.NAME;
+
+	//-------------------------------------------------------------------
+	public QualityFilterNode(ResourceBundle RES, ComplexDataItemControllerNode<Quality, QualityValue> parent, QualityType...types) {
+		super(parent);
+		this.RES = RES;
+		allowedTypes = List.of(types);
+		initComponents();
+		initLayout();
+		initInteractivity();
+		refreshAvailable();
+	}
+	
+	//-------------------------------------------------------------------
+	private void initComponents() {
+		cbWhat = new ChoiceBox<What>();
+		cbWhat.getItems().addAll(What.values());
+		cbWhat.setValue(What.ALL);
+		cbWhat.setConverter(new StringConverter<QualityFilterNode.What>() {
+			public String toString(What what) { return ResourceI18N.get(RES, "quality.what."+what.name().toLowerCase());}
+			public What fromString(String arg0) {return null;}
+		});
+		
+		btnSort = new Button(null,new SymbolIcon("sort"));
+		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "quality.sort.tooltip")));
+		
+		tfSearch = new TextField();
+		tfSearch.setPromptText(ResourceI18N.get(RES, "quality.search.prompt"));
+	}
+	
+	//-------------------------------------------------------------------
+	private void initLayout() {
+		HBox line = new HBox(cbWhat, btnSort);
+		HBox.setHgrow(line, Priority.ALWAYS);
+		line.setMaxWidth(Double.MAX_VALUE);
+		cbWhat.setMaxWidth(Double.MAX_VALUE);
+		getChildren().addAll(line, tfSearch);
+		
+		VBox.setMargin(tfSearch, new Insets(5,0,5,0));
+	}
+	
+	//-------------------------------------------------------------------
+	private void initInteractivity() {
+		btnSort.setOnAction(ev -> {
+			if (currentSort==Sort.NAME)
+				currentSort=Sort.KARMA;
+			else
+				currentSort=Sort.NAME;
+			logger.log(Level.INFO, "Sort changed to "+currentSort);
+
+			refreshAvailable();
+		});
+		
+		cbWhat.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "Selection changed");
+			refreshAvailable();
+		});
+		
+		tfSearch.textProperty().addListener( (ov,o,n) -> {if (n.length()>2) refreshAvailable();});
+	}
+	
+	//-------------------------------------------------------------------
+	private void refreshAvailable() {
+		What n = cbWhat.getValue();
+		final String search = tfSearch.getText().toLowerCase();
+		List<Quality> unfiltered = parent.getController().getAvailable();
+		List<Quality> filtered = unfiltered.stream()
+			.filter(q -> allowedTypes.contains(q.getType()))
+			.filter(q -> (n==What.ALL || (n==What.NEGATIVE && !q.isPositive()) || (n==What.POSITIVE && q.isPositive())))
+			.filter(q -> (search==null || search.isBlank() || q.getName().toLowerCase().contains(search)))
+			.collect(Collectors.toList());
+		logger.log(Level.INFO, "{} items now", filtered.size());
+		logger.log(Level.INFO, "byName ="+compareByName);
+		logger.log(Level.INFO, "byKarma="+compareByKarma);
+		
+		switch (currentSort) {
+		case NAME : Collections.sort(filtered, compareByName); break;
+		case KARMA: Collections.sort(filtered, compareByKarma); break;
+		}
+		parent.availableProperty().get().setAll(filtered);
+	}
+
+}

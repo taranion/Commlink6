@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+	<quality id="bandersnatch" karma="22" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="sasquatch"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="12" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="4" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="banshee" karma="32" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="elf"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="9" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="chiron" karma="28" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="centaur"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="dzoo_noo_qua" karma="43" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="troll"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="fomoraig" karma="22" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="troll"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="12" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="12" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="4" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="ghoul_human" karma="29" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="human"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="4" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="ghoul_dwarf" karma="29" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="dwarf"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="4" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="ghoul_elf" karma="29" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="elf"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="6" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="ghoul_ork" karma="29" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="ork"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="12" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="3" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="ghoul_troll" karma="29" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="troll"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="13" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="12" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="3" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="gnawer" karma="29" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="dwarf"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="grendel" karma="32" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="ork"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="4" set="MAX" />
+		</modifications>
+	</quality>
+
+</qualities>

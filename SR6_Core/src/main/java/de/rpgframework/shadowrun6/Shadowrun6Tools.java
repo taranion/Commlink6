@@ -23,6 +23,7 @@ import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
@@ -32,9 +33,10 @@ import de.rpgframework.shadowrun6.proc.ResetModifications;
 public class Shadowrun6Tools {
 
 	public final static List<Class<? extends ProcessingStep>> RECALCULATE_STEPS = Arrays.asList(
-//		new ResetModifications(),
+		ResetModifications.class,
 //		new ResolveChoicesInReferences(),
-		GetModificationsFromMetaType.class
+		GetModificationsFromMetaType.class,
+		ApplyQualityModifications.class
 //		new GetModificationsFromMagicOrResonance(),
 //		new GetModificationsFromQualities(),
 //		new ApplyAdeptPowerModifications(),

@@ -44,6 +44,7 @@ public class GenerationWizard extends Wizard {
 //	private WizardPageProfiles profiles;
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
 	private WizardPageMetatype race;
+	private SR6WizardPageChangeling surge;
 	private WizardPageAttributes attrib;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 	private Function<Class<CommonSR6CharacterGenerator>,String> nameGetter = gen -> {
@@ -69,9 +70,10 @@ public class GenerationWizard extends Wizard {
 		for (WizardPageType type : wrapper.getWrapped().getWizardPages()) {
 			switch (type) {
 			case PRIORITIES : ret.add(  prios); break;
+			case METATYPE   : ret.add(   race); break;
+			case SURGE      : ret.add(  surge); break;
 			case ATTRIBUTES : ret.add( attrib); break;
 //			case CULTURE    : ret.add(culture); break;
-			case METATYPE   : ret.add(   race); break;
 //			case RECOMMENDER: ret.add(profiles); break;
 			case NAME       : ret.add(   name); break;
 			default:
@@ -90,6 +92,7 @@ public class GenerationWizard extends Wizard {
 				nameGetter);
 		prios  = new WizardPagePriority<>(this, wrapper.getWrapped(), new SR6PriorityTable( (type,prio) -> Shadowrun6Core.getPriorityTableEntry(type, prio)));
 		race   = new WizardPageMetatype(this, wrapper);
+		surge  = new SR6WizardPageChangeling(this, wrapper);
 //		culture= new WizardPageCulture(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));

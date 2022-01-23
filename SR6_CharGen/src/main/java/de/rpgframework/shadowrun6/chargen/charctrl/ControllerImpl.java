@@ -1,11 +1,10 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.CharacterController;
@@ -21,7 +20,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  */
 public abstract class ControllerImpl<A> implements PartialController<A> {
 	
-	protected static Logger logger = LogManager.getLogger(ControllerImpl.class.getPackageName());
+	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName());
 
 	protected static Random random = new Random();
 	
@@ -78,7 +77,7 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 	 */
 	@Override
 	public void decide(A decideFor, Choice choice, Decision decision) {
-		logger.warn("TODO: decide "+decision+" from "+decideFor);
+		logger.log(Level.WARNING, "TODO: decide "+decision+" from "+decideFor);
 		parent.getModel().addDecision(decision);
 //		model.setDecision(choice);
 //		cached.put(decision.getChoice(), decision);

@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetaTypeOption;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
@@ -91,7 +93,7 @@ public class PointBuyMetatypeController extends ControllerImpl<SR6MetaType> impl
 	 */
 	@Override
 	public boolean select(SR6MetaType value) {
-		logger.debug("ENTER select("+value+")");
+		logger.log(Level.DEBUG, "ENTER select("+value+")");
 		try {
 			if (!canBeSelected(value))
 				return false;
@@ -102,7 +104,7 @@ public class PointBuyMetatypeController extends ControllerImpl<SR6MetaType> impl
 			parent.runProcessors();
 			return true;
 		} finally {
-			logger.debug("LEAVE select("+value+")");
+			logger.log(Level.DEBUG, "LEAVE select("+value+")");
 		}
 	}
 
@@ -119,9 +121,9 @@ public class PointBuyMetatypeController extends ControllerImpl<SR6MetaType> impl
 		}
 		
 		Shadowrun6Character model = parent.getModel();
-		logger.debug("Available metatype options: "+availableOptions);
+		logger.log(Level.DEBUG, "Available metatype options: "+availableOptions);
 		SR6MetaType selected = model.getMetatype();
-		logger.debug("  selected: "+selected);
+		logger.log(Level.DEBUG, "  selected: "+selected);
 
 		/*
 		 * If a metatype is selected, apply it
@@ -131,13 +133,13 @@ public class PointBuyMetatypeController extends ControllerImpl<SR6MetaType> impl
 		} else {
 			// A selection has been made
 			if (!availableOptions.contains(selected)) {
-				logger.warn("Deselected metatype since it is not available anymore");
+				logger.log(Level.WARNING, "Deselected metatype since it is not available anymore");
 				model.setMetatype(null);
 				todos.add(new ToDoElement(Severity.STOPPER, RES.getString("pointbuy.todo.metatype")));
 			} else {
 				int karma = selected.getKarma();
 				if (karma>0) {
-					logger.info("Pay "+karma+" for metatype "+selected.getId());
+					logger.log(Level.INFO, "Pay "+karma+" for metatype "+selected.getId());
 					model.setKarmaFree(model.getKarmaFree()-karma);
 				}
 				// Applying modification is a special CharacterProcessor from Core
@@ -145,6 +147,23 @@ public class PointBuyMetatypeController extends ControllerImpl<SR6MetaType> impl
 		}
 		
 		return unprocessed;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#selectBodyType(de.rpgframework.shadowrun.BodyType)
+	 */
+	@Override
+	public boolean selectBodyType(BodyType value) {
+		logger.log(Level.DEBUG, "ENTER selectBodyType("+value+")");
+		try {
+			getModel().setBodytype(value);
+
+			parent.runProcessors();
+			return true;
+		} finally {
+			logger.log(Level.DEBUG, "LEAVE selectBodyType("+value+")");
+		}
 	}
 
 }

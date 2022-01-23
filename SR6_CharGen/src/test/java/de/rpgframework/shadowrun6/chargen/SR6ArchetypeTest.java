@@ -114,5 +114,23 @@ public class SR6ArchetypeTest {
 //		String xml = new String(raw);
 //		System.out.println(xml);
 	}
-
+	
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testNartaki() {
+		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
+		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
+		prio.setPriority(PriorityType.METATYPE, Priority.C);
+		prio.setPriority(PriorityType.MAGIC, Priority.B);
+		prio.setPriority(PriorityType.SKILLS, Priority.D);
+		prio.setPriority(PriorityType.RESOURCES, Priority.E);
+		assertEquals(50, model.getKarmaFree());
+		
+		SR6MetaType human = Shadowrun6Core.getItem(SR6MetaType.class, "nartaki");
+		assertNotNull("Metatype 'nartaki' not found", human);
+		assertNotNull("No metatype controller found", charGen.getMetatypeController());
+		charGen.getMetatypeController().canBeSelected(human);
+		charGen.getMetatypeController().select(human);
+	}
 }
