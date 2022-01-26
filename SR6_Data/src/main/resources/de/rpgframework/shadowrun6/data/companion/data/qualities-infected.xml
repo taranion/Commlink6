@@ -180,5 +180,187 @@
 			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="4" set="MAX" />
 		</modifications>
 	</quality>
+	<quality id="harvester" karma="29" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="elf"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="4" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="4" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="jabbawock" karma="28" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="sasquatch"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="6" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="lamia" karma="40" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="naga"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="lopu_garou" karma="30" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="human"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="5" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="4" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="mutaqua_mundane" karma="54" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="troll"/>
+			<!-- Mundane -->
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="12" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="mutaqua_awakened" karma="44" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="troll"/>
+			<!-- Awakened -->
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="11" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="12" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="nibliinaabe" karma="32" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="merrow"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="6" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="nosferatu_mundane" karma="48" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="human"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="8" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="nosferatu_awakened" karma="38" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="human"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="8" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="vampire_human" karma="27" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="human"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="8" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="wendigo_mundane" karma="47" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="ork"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" />
+		</modifications>
+	</quality>
+	<quality id="wendigo_awakened" karma="37" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="ork"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" />
+		</modifications>
+	</quality>
 
 </qualities>
