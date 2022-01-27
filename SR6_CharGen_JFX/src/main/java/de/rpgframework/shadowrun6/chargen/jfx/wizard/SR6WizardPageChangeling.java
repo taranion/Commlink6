@@ -13,6 +13,7 @@ import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
+import org.prelle.javafx.layout.AutoBox;
 import org.prelle.javafx.layout.ResponsiveBox;
 
 import de.rpgframework.ResourceI18N;
@@ -48,6 +49,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	
 	private ComplexDataItemControllerNode<Quality, QualityValue> selection;
 	private GenericDescriptionVBox<Quality> bxDescription;
+	private OptionalNodePane layout;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageChangeling(Wizard wizard, GeneratorWrapper charGen) {
@@ -86,8 +88,11 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		ResponsiveBox responsive = new ResponsiveBox(selection, bxDescription);
-		setContent(responsive);
+		layout = new OptionalNodePane(selection, bxDescription);
+		//ResponsiveBox responsive = new ResponsiveBox(selection, bxDescription);
+//		AutoBox responsive = new AutoBox();
+//		responsive.getContent().addAll(selection, bxDescription);
+		setContent(layout);
 	}
 	
 	//-------------------------------------------------------------------
@@ -95,6 +100,11 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		selection.showHelpForProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.INFO, "show help for "+n);
 			bxDescription.setData(n);
+			if (n!=null) {
+				layout.setTitle(n.getName());
+			} else {
+				layout.setTitle(null);
+			}
 		});
 	}
 

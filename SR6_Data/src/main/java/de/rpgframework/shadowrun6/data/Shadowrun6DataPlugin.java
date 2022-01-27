@@ -145,7 +145,7 @@ public class Shadowrun6DataPlugin  {
 			logger.debug("Loaded "+list.size()+" metagenic qualities");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities-infected.xml");
 			logger.debug("Loaded "+list.size()+" infected qualities");
-			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, core, clazz, "companion/data/critterpower.xml");
+			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "companion/data/critterpower.xml");
 			logger.debug("Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "companion/data/metatypes.xml");
 			logger.debug("Loaded "+list.size()+" metatypes");

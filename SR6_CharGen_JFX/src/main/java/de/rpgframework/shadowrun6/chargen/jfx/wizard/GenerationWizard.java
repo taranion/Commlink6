@@ -47,9 +47,10 @@ public class GenerationWizard extends Wizard {
 	private SR6WizardPageChangeling surge;
 	private WizardPageAttributes attrib;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
-	private Function<Class<CommonSR6CharacterGenerator>,String> nameGetter = gen -> {
-		String key= "chargen."+gen.getSimpleName();
-		return SR6CharacterGenerator.RES.getString(key);
+	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
+		String name = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName());
+		String desc = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName()+".desc");
+		return new String[]{name,desc};
 	}; 
 
 	//-------------------------------------------------------------------
