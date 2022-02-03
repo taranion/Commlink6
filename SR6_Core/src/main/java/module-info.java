@@ -10,6 +10,6 @@ module de.rpgframework.shadowrun6.core {
 	requires transitive de.rpgframework.rules;
 	requires java.xml;
 	requires transitive org.apache.logging.log4j;
-	requires shadowrun.common;
+	requires transitive shadowrun.common;
 	requires simple.persist;
 }

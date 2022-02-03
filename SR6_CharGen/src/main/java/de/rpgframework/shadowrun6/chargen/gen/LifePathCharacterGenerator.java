@@ -1,0 +1,138 @@
+package de.rpgframework.shadowrun6.chargen.gen;
+
+import java.util.Locale;
+
+import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.character.CharacterHandle;
+import de.rpgframework.genericrpg.chargen.GeneratorId;
+import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
+
+/**
+ * @author stefa
+ *
+ */
+@GeneratorId("life")
+public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
+
+	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(LifePathCharacterGenerator.class,
+			Locale.ENGLISH, Locale.GERMAN);
+	
+	private boolean setupDone;
+
+	//-------------------------------------------------------------------
+	/**
+	 */
+	public LifePathCharacterGenerator() {
+		// TODO Auto-generated constructor stub
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getId()
+	 */
+	@Override
+	public String getId() {
+		return "life";
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getWizardPages()
+	 */
+	@Override
+	public WizardPageType[] getWizardPages() {
+		return new WizardPageType[] {
+				WizardPageType.METATYPE,
+				WizardPageType.SR6_LIFEPATH1,
+				WizardPageType.MAGIC_OR_RESONANCE, 
+				WizardPageType.SURGE, 
+				WizardPageType.INFECTED};
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#getName()
+	 */
+	@Override
+	public String getName() {
+		return RES.getString("generator.name");
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#getDescription()
+	 */
+	@Override
+	public String getDescription() {
+		return RES.getString("generator.desc");
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#setModel(Shadowrun6Character)
+	 */
+	@Override
+	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
+		this.model = model;
+		this.handle= handle;
+		this.setupDone = false;		
+		SR6LifePathSettings settings = new SR6LifePathSettings();
+		settings.variant = PowerLevel.STANDARD;
+//		model.addRule(Shadowrun6Rules.CHARGEN_ALLOW_INITIATION, "false");
+		model.setCharGenUsed(getId());
+		model.setCharGenSettings(settings);
+		model.setKarmaFree(50);
+		logger.info("----------------Start generator-----------------------" + toString() + "\n\n\n");
+		
+		try {
+			setupProcessChain();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("Failed on process chain", e);
+		}
+		
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#setupProcessChain()
+	 */
+	@Override
+	protected void setupProcessChain() {
+		if (logger.isDebugEnabled())
+			logger.debug("ENTER: setupProcessChain()");
+		try {
+			if (setupDone) {
+				return;
+			}
+
+//			attributes = new PointBuySR6AttributeGenerator(this);
+			meta = new SR6LifePathMetatypeController(this);
+			magicReso = new SR6LifePathMagicOrResonanceController(this);
+//			skill = new PointBuySR6SkillGenerator(this);
+			logger.info("meta = " + getMetatypeController() + "  of " + this);
+
+			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
+			processChain.add(new SR6LifePathResetGenerator(this));
+			processChain.add(meta);
+			processChain.add(magicReso);
+//			processChain.add(attributes);
+//			processChain.add(skill);
+
+			setupDone = true;
+		} finally {
+			if (logger.isDebugEnabled())
+				logger.debug("LEAVE: setupProcessChain()");
+		}
+		logger.error("ToDo");
+	}
+
+	//-------------------------------------------------------------------
+	public void setNativeLanguage(String n) {
+		logger.warn("ToDo: setLanguage");
+		//skill.setLanguage(n);
+	}
+
+}

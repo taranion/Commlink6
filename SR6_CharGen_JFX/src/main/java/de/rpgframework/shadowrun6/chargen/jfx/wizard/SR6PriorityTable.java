@@ -101,7 +101,7 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 			MagicOrResonanceType type = mod.getReferenceType().resolve(mod.getKey());
 			int points = mod.getValue();
 			if (points!=oldPoints) {
-				logger.info(" change from "+oldPoints+" to "+points+"   Buffer is "+buf);
+				logger.debug(" change from "+oldPoints+" to "+points+"   Buffer is "+buf);
 				// Print old
 				if (buf!=null) {
 					Label part1 = new Label(buf.toString()+":");

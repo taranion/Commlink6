@@ -37,6 +37,8 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureList;
 import de.rpgframework.shadowrun.SpellList;
+import de.rpgframework.shadowrun.Tradition;
+import de.rpgframework.shadowrun.TraditionList;
 import de.rpgframework.shadowrun6.ActionList;
 import de.rpgframework.shadowrun6.MetaTypeList;
 import de.rpgframework.shadowrun6.NPCList;
@@ -129,6 +131,8 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, core, clazz,"core/data/magicOrResonance.xml");
 			logger.debug("Loaded "+list.size()+" magic or resonance entries");
 			Shadowrun6Core.loadPriorityTableEntries(core, clazz.getResourceAsStream("core/data/priorities.xml"));
+			list = Shadowrun6Core.loadDataItems(TraditionList.class, Tradition.class, core, clazz,"core/data/traditions.xml");
+			logger.debug("Loaded "+list.size()+" magic traditions");
 //			logger.fatal("Stop here");
 //			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));

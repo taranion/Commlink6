@@ -7,12 +7,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceOption;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -34,6 +36,37 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 	public PointBuyMagicOrResonanceController(IShadowrunCharacterGenerator parent) {
 		super(parent);
 		available = new LinkedHashMap<>();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController#getAvailable()
+	 */
+	@Override
+	public List<MagicOrResonanceType> getAvailable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController#selectTradition(de.rpgframework.shadowrun.Tradition)
+	 */
+	@Override
+	public void selectTradition(Tradition value) {
+		logger.log(Level.INFO, "select magic tradition: {}", value);
+		model.setTradition(value);
+		parent.runProcessors();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.RecommendingController#getRecommendationState(java.lang.Object)
+	 */
+	@Override
+	public RecommendationState getRecommendationState(Tradition item) {
+		// TODO Auto-generated method stub
+		return RecommendationState.NEUTRAL;
 	}
 
 	// -------------------------------------------------------------------

@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
+import javax.management.RuntimeErrorException;
+
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -41,6 +43,12 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	//-------------------------------------------------------------------
 	public PrioritySR6AttributeGenerator(SR6CharacterController parent) {
 		super(parent);
+		try {
+			throw new RuntimeException("Trace "+this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -226,8 +234,8 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	 */
 	@Override
 	public Possible canBeIncreasedPoints(AttributeValue<ShadowrunAttribute> value) {
-		if (adjustmentPoints<1) return Possible.FALSE;
-		return new Possible(allowedAdjust.contains(value.getModifyable()));
+		if (adjustmentPoints<1) return new Possible(false, "zero_adjustment_points");
+		return new Possible(allowedAdjust.contains(value.getModifyable()), "no_special_attribute");
 	}
 
 	//-------------------------------------------------------------------
@@ -237,7 +245,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> increasePoints(AttributeValue<ShadowrunAttribute> value) {
 		if (logger.isLoggable(Level.TRACE))
-			logger.log(Level.TRACE, "ENTER decreasePoints2({})", value.getModifyable());
+			logger.log(Level.TRACE, "ENTER increasePoints({})", value.getModifyable());
 
 		try {
 			ShadowrunAttribute key = value.getModifyable();		
@@ -249,12 +257,12 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			per.points1++;
-			logger.log(Level.INFO, "Increased {} to {}", key, per.getSum());
+			logger.log(Level.INFO, "Increased {} to {} by adjustment points", key, per.getSum());
 
 			parent.runProcessors();
 			return new OperationResult<>(value);
 		} finally {
-			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE increasePoints2");
+			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE increasePoints");
 		}
 	}
 
@@ -577,6 +585,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	public List<Modification> process(List<Modification> previous) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
 		List<Modification> unprocessed = new ArrayList<>();
+		logger.log(Level.WARNING, "ENTER process "+this);
 		
 		try {
 			SR6PrioritySettings prioSettings = getModel().getCharGenSettings(SR6PrioritySettings.class);
@@ -589,8 +598,10 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 					ValueModification mod = (ValueModification)tmp;
 					if (mod.getResolvedKey()==CreatePoints.ADJUST) {
 						adjustmentPoints = mod.getValue();
+						logger.log(Level.INFO, "Consume "+mod+" and set adjustment points to "+adjustmentPoints);
 					} else if (mod.getResolvedKey()==CreatePoints.ATTRIBUTES) {
 						attributePoints = mod.getValue();
+						logger.log(Level.INFO, "Consume "+mod+" and set attribute points to "+attributePoints);
 					} else {
 						unprocessed.add(mod);
 					}

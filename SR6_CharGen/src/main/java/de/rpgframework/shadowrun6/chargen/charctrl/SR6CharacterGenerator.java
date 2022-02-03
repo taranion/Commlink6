@@ -17,7 +17,5 @@ public interface SR6CharacterGenerator extends SR6CharacterController, IShadowru
 
 	public final static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(SR6CharacterGenerator.class,
 			Locale.ENGLISH, Locale.GERMAN);;
-
-	public IMagicOrResonanceController getMagicOrResonanceController();
 	
 }

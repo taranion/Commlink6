@@ -365,19 +365,22 @@ public class PrioAttrGenTest {
 		karma = 50;
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));
+		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, "BODY", 4, ApplyWhen.ALLCREATE, ValueType.MAX));
 		charGen.runProcessors();
-		assertEquals(8, ctrl.getPointsLeft());
+		// Although 2 adjustment points are spent, they should be taken into account
+		// since only EGDE may be used for adjustmentpoints on humans
+		assertEquals(10, ctrl.getPointsLeft()); 
 		assertEquals(8, ctrl.getPointsLeft2());
-		assertEquals(20, ctrl.getPointsLeft3());
-		assertEquals(6, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
+		assertEquals(30, ctrl.getPointsLeft3());// Pay 20 karma to raise from 3 to 4, leaves 30
+		assertEquals(4, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
 		
 		// One more adjustment point, should exceed maximum
 		settings.perAttrib.put(ShadowrunAttribute.BODY, new PerAttributePoints(3,2,1));
 		charGen.runProcessors();
-		assertEquals(7, ctrl.getPointsLeft());
+		assertEquals(10, ctrl.getPointsLeft());
 		assertEquals(8, ctrl.getPointsLeft2());
-		assertEquals(50, ctrl.getPointsLeft3());
-		assertEquals(6, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
+		assertEquals(30, ctrl.getPointsLeft3()); 
+		assertEquals(4, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
 	}
 	
 	//-------------------------------------------------------------------
@@ -416,5 +419,24 @@ public class PrioAttrGenTest {
 		assertEquals(8, model.getAttribute(ShadowrunAttribute.CHARISMA ).getDistributed());
 		assertEquals(6, model.getAttribute(ShadowrunAttribute.MAGIC    ).getDistributed());
 		assertEquals(5, model.getAttribute(ShadowrunAttribute.EDGE     ).getDistributed());
+	}
+	
+	//-------------------------------------------------------------------
+	@Test
+	public void testIncreaseEdge6Times() {
+		Shadowrun6Character model = charGen.getModel();
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);		
+		karma = 50;
+		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
+		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));
+		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, "EDGE", 7, ApplyWhen.ALLCREATE, ValueType.MAX));
+		charGen.runProcessors();
+		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		assertEquals(7, model.getAttribute(ShadowrunAttribute.EDGE).getDistributed());
 	}
 }

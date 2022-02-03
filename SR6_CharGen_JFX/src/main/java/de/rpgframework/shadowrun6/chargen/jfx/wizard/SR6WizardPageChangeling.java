@@ -2,21 +2,18 @@ package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
 import org.prelle.javafx.OptionalNodePane;
-import org.prelle.javafx.ResponsiveControl;
 import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
-import org.prelle.javafx.layout.AutoBox;
-import org.prelle.javafx.layout.ResponsiveBox;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.requirements.Requirement;
@@ -33,7 +30,6 @@ import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.QualityFilterNode;
-import javafx.scene.layout.HBox;
 
 /**
  * @author prelle
@@ -61,11 +57,10 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		initInteractivity();
 		
 		charGen.addListener(this);
-		logger.log(Level.WARNING, "<init> with chargen="+charGen);
-		logger.log(Level.WARNING, "            wrapped="+charGen.getWrapped());
 	}
 	
 	//-------------------------------------------------------------------
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void initComponents() {
 		selection = new ComplexDataItemControllerNode<>(charGen.getQualityController());
 		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.METAGENIC));
@@ -109,29 +104,25 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	}
 
 	//-------------------------------------------------------------------
+	/**
+	 * Enable or disable page
+	 */
 	private void refresh() {
-//		side.setPoints(charGen.getComplexFormController().getComplexFormsLeft());
-//		side.setKarma(charGen.getCharacter().getKarmaFree());
-
-		/*
-		 * Enable or disable page
-		 */
 		BodyType type = charGen.getModel().getBodytype();
 		if (type!=null) {
 			// Enable or disable page
-//			if (type.usesResonance()) {
-//				logger.debug(type+" uses resonance - enable page");
-//				activeProperty().set(true);
-//			} else {
-//				logger.debug(type+" does not use resonance - disable page");
-//				activeProperty().set(false);
-//			}
-//		} else {
-//			logger.warn("No magic or resonance type selected yet");
-//			activeProperty().set(false);
+			boolean isMetaHuman = type!=BodyType.SHAPESHIFTER;
+			if (isMetaHuman) {
+				logger.log(Level.DEBUG, type+" can have metagenic qualities - enable page");
+				activeProperty().set(true);
+			} else {
+				logger.log(Level.DEBUG, type+" is not a metahuman - disable page");
+				activeProperty().set(false);
+			}
+		} else {
+			logger.log(Level.WARNING, "No body type selected yet");
+			activeProperty().set(false);
 		}
-
-//		selectPane.refresh();
 	}
 	
 	//-------------------------------------------------------------------
@@ -144,9 +135,14 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		selection.refresh();
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ControllerListener#handleControllerEvent(de.rpgframework.genericrpg.chargen.ControllerEvent, java.lang.Object[])
+	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
-		logger.log(Level.WARNING,"handleControllerEvent("+type+", "+Arrays.toString(param)+")");
+		if (type==BasicControllerEvents.CHARACTER_CHANGED) 
+			refresh();
 	}
 
 	//-------------------------------------------------------------------

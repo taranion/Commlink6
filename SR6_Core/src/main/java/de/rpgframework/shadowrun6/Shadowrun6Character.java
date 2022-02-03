@@ -10,6 +10,7 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.Tradition;
 
 /**
  * @author prelle
@@ -97,6 +98,15 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	@Override
 	public MagicOrResonanceType getMagicOrResonanceType() {
 		return Shadowrun6Core.getItem(MagicOrResonanceType.class, magicOrResonance);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.ShadowrunCharacter#getTradition()
+	 */
+	@Override
+	public Tradition getTradition() {
+		return Shadowrun6Core.getItem(Tradition.class, tradition);
 	}
 
 }

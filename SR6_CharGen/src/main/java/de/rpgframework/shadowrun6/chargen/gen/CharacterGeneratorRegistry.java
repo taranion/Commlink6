@@ -24,7 +24,7 @@ public class CharacterGeneratorRegistry {
 		addGenerator(PriorityCharacterGenerator.class);
 		addGenerator(SumToTenCharacterGenerator.class);
 		addGenerator(PointBuyCharacterGenerator.class);
-		addGenerator(LifeModulesCharacterGenerator.class);
+		addGenerator(LifePathCharacterGenerator.class);
 	}
 
 	//-------------------------------------------------------------------

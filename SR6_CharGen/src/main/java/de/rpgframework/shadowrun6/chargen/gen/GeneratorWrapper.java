@@ -133,9 +133,10 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 				wrapped.removeListener(callback);
 			}
 		}
-		newCtrl.setModel(cached, cachedHandle);
 		wrapped = newCtrl;
 		wrapped.fireEvent(BasicControllerEvents.GENERATOR_CHANGED, newCtrl);
+		logger.info("#################Call setModel()");
+		newCtrl.setModel(cached, cachedHandle);
 	}
 
 	//-------------------------------------------------------------------

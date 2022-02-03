@@ -33,6 +33,22 @@ public class ResetGenerator implements ProcessingStep {
 			val.clearModifications();
 		}
 		
+		model.setKarmaFree(50);
+		model.setKarmaInvested(0);
+		PowerLevel level = null;
+		if (charGen instanceof LifePathCharacterGenerator) {
+			SR6LifePathSettings settings = model.getCharGenSettings(SR6LifePathSettings.class);
+			level = settings.variant;
+		} else if (charGen instanceof PointBuyCharacterGenerator) {
+			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+			level = settings.variant;
+		} else {
+			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+			level = settings.variant;
+			if (level==PowerLevel.PRIME_RUNNER)
+				model.setKarmaFree(100);
+		}
+		
 		return unprocessed;
 	}
 
