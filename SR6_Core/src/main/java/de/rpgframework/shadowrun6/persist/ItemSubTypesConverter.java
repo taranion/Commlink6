@@ -3,14 +3,13 @@
  */
 package de.rpgframework.shadowrun6.persist;
 
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
 import org.prelle.simplepersist.StringValueConverter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.shadowrun6.items.ItemSubType;
 
@@ -56,7 +55,7 @@ public class ItemSubTypesConverter implements StringValueConverter<List<ItemSubT
 			try {
 				ret.add(ItemSubType.valueOf(tok.nextToken()));
 			} catch (IllegalArgumentException e) {
-				LogManager.getLogger("shadowrun6").error(e.toString(),e);
+				System.getLogger("shadowrun6.persist").log(Level.ERROR, e.toString(),e);
 				System.err.println(e.toString());
 //				System.exit(1);
 			}

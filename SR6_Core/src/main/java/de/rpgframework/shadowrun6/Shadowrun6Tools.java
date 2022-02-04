@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6;
 
+import java.lang.System.Logger.Level;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -134,7 +135,7 @@ public class Shadowrun6Tools {
 //				if (skill!=null)
 //					positive.add(skill.getName());
 //				else {
-//					Logging.logger.warn("Unknown skill reference '"+key+"' in choice "+choice.getUUID()+" from "+data);
+//					Logging.logger.log(Level.WARNING, "Unknown skill reference '"+key+"' in choice "+choice.getUUID()+" from "+data);
 //				}
 //			}
 //			for (SMSkill tmp : SplitterMondCore.getItemList(SMSkill.class)) {
@@ -196,7 +197,7 @@ public class Shadowrun6Tools {
 				
 				SR6Skill skill = Shadowrun6Core.getSkill(valMod.getKey());
 				if (skill==null) {
-					Logging.logger.warn("Found unknown skill '"+valMod.getKey()+"' in valuemod of "+data);
+					Logging.logger.log(Level.WARNING, "Found unknown skill '"+valMod.getKey()+"' in valuemod of "+data);
 					return "Unknown skill '"+valMod.getKey()+"'";
 				}
 				if (valMod.getValue()>0) {
@@ -206,12 +207,12 @@ public class Shadowrun6Tools {
 				}
 			case QUALITY:
 				if (valMod.getConnectedChoice()!=null) {
-					Logging.logger.warn("TODO: value modification for quality with choice: "+valMod);
+					Logging.logger.log(Level.WARNING, "TODO: value modification for quality with choice: "+valMod);
 				}
 				
 				Quality quality = Shadowrun6Core.getItem(Quality.class, valMod.getKey());
 				if (quality==null) {
-					Logging.logger.warn("Found unknown quality '"+valMod.getKey()+"' in valuemod of "+data);
+					Logging.logger.log(Level.WARNING, "Found unknown quality '"+valMod.getKey()+"' in valuemod of "+data);
 					return "Unknown quality '"+valMod.getKey()+"'";
 				}
 				if (valMod.getValue()>0) {
@@ -246,7 +247,7 @@ public class Shadowrun6Tools {
 //				
 //				CultureLore cultlore = type.resolve(valMod.getKey());
 //				if (cultlore==null) {
-//					Logging.logger.warn("Found unknown cultlore '"+valMod.getKey()+"' in valuemod of "+data);
+//					Logging.logger.log(Level.WARNING, "Found unknown cultlore '"+valMod.getKey()+"' in valuemod of "+data);
 //					return "Unknown cultlore '"+valMod.getKey()+"'";
 //				}
 //				return "Kulturkunde "+cultlore.getName();
@@ -261,7 +262,7 @@ public class Shadowrun6Tools {
 //				
 //				Language lang = type.resolve(valMod.getKey());
 //				if (lang==null) {
-//					Logging.logger.warn("Found unknown skill '"+valMod.getKey()+"' in valuemod of "+data);
+//					Logging.logger.log(Level.WARNING, "Found unknown skill '"+valMod.getKey()+"' in valuemod of "+data);
 //					return "Unknown language '"+valMod.getKey()+"'";
 //				}
 //				return "Sprache "+lang.getName();
@@ -275,7 +276,7 @@ public class Shadowrun6Tools {
 			return "ToDo: "+type;
 		}
 
-		Logging.logger.error("Missing string conversion for "+mod.getClass());
+		Logging.logger.log(Level.ERROR, "Missing string conversion for "+mod.getClass());
 		return mod.toString();
 	}
 
@@ -293,7 +294,7 @@ public class Shadowrun6Tools {
 //			}
 		}
 
-		Logging.logger.error("Missing string conversion for "+req.getClass());
+		Logging.logger.log(Level.ERROR, "Missing string conversion for "+req.getClass());
 		return req.toString();
 	}
 }

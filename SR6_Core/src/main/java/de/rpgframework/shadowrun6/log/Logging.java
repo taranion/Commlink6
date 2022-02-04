@@ -1,7 +1,6 @@
 package de.rpgframework.shadowrun6.log;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.lang.System.Logger;
 
 /**
  * @author prelle
@@ -9,6 +8,6 @@ import org.apache.logging.log4j.Logger;
  */
 public class Logging {
 
-	public final static Logger logger = LogManager.getLogger("shadowrun6");
+	public final static Logger logger = System.getLogger("shadowrun6");
 
 }

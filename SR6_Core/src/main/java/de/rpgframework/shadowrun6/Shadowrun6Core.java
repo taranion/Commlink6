@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.nio.charset.Charset;
 import java.text.Collator;
 import java.util.Collections;
@@ -11,9 +13,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.core.BabylonEventBus;
@@ -34,7 +33,7 @@ import de.rpgframework.shadowrun.SpellFeature;
  */
 public class Shadowrun6Core extends GenericCore {
 
-	private static Logger logger = LogManager.getLogger("shadowrun6");
+	private static Logger logger = System.getLogger("shadowrun6");
 
 	private static MultiLanguageResourceBundle i18NResources;
 	
@@ -53,10 +52,10 @@ public class Shadowrun6Core extends GenericCore {
 
 	//-------------------------------------------------------------------
 	public static void loadPriorityTableEntries(DataSet plugin, InputStream in) {
-		logger.debug("Load priority table entries (Plugin="+plugin.getID()+")");
+		logger.log(Level.DEBUG, "Load priority table entries (Plugin="+plugin.getID()+")");
 		try {
 			PriorityTableEntryList toAdd = (PriorityTableEntryList)serializer.read(PriorityTableEntryList.class, in);
-			logger.info("Successfully loaded "+toAdd.size()+" priority table entries");
+			logger.log(Level.INFO, "Successfully loaded "+toAdd.size()+" priority table entries");
 
 			// Set translation
 			for (PriorityTableEntry tmp : toAdd) {
@@ -64,14 +63,14 @@ public class Shadowrun6Core extends GenericCore {
 //				tmp.setHelpResourceBundle(helpResources);
 //				tmp.setPlugin(plugin);
 //				if (logger.isDebugEnabled())
-//					logger.debug("* "+tmp.getName());
+//					logger.log(Level.DEBUG, "* "+tmp.getName());
 
 				PriorityTableEntry mergeTo = prioTable.get(tmp.getType()).get(tmp.getPriority());
 				mergeTo.mergeFrom(tmp);
 			}
 
 		} catch (Exception e) {
-			logger.fatal("Failed deserializing priority table entries",e);
+			logger.log(Level.ERROR, "Failed deserializing priority table entries",e);
 			return;
 		}
 	}
@@ -85,14 +84,14 @@ public class Shadowrun6Core extends GenericCore {
 	//
 //	//-------------------------------------------------------------------
 //	public static <E extends DataItem> void loadDataItems(Class<? extends List<E>> cls, DataSet plugin, InputStream in) {
-//		logger.debug("Load skills (Plugin="+plugin.getID()+")");
+//		logger.log(Level.DEBUG, "Load skills (Plugin="+plugin.getID()+")");
 //		try {
 //			List<E> addSkills = serializer.read(cls, in);
-//			logger.info("Successfully loaded "+addSkills.size()+" skills");
+//			logger.log(Level.INFO, "Successfully loaded "+addSkills.size()+" skills");
 //			addSkills.forEach(skill -> skill.assignToDataSet(plugin));
 //			addSkills.forEach(skill -> skills.add((Skill) skill));
 //		} catch (Exception e) {
-//			logger.fatal("Failed deserializing skills",e);
+//			logger.log(Level.ERROR, "Failed deserializing skills",e);
 //			System.exit(0);
 //			return;
 //		}
@@ -101,14 +100,14 @@ public class Shadowrun6Core extends GenericCore {
 //	//-------------------------------------------------------------------
 //	public static void loadSkills(DataSet plugin, InputStream in) {
 //		loadDataItems(SkillList.class, plugin, in);
-//		logger.debug("Load skills (Plugin="+plugin.getID()+")");
+//		logger.log(Level.DEBUG, "Load skills (Plugin="+plugin.getID()+")");
 //		try {
 //			SkillList addSkills = serializer.read(SkillList.class, in);
-//			logger.info("Successfully loaded "+addSkills.size()+" skills");
+//			logger.log(Level.INFO, "Successfully loaded "+addSkills.size()+" skills");
 //			addSkills.forEach(skill -> skill.assignToDataSet(plugin));
 //			addSkills.forEach(skill -> skills.add(skill));
 //		} catch (Exception e) {
-//			logger.fatal("Failed deserializing skills",e);
+//			logger.log(Level.ERROR, "Failed deserializing skills",e);
 //			System.exit(0);
 //			return;
 //		}
@@ -142,7 +141,7 @@ public class Shadowrun6Core extends GenericCore {
 			serializer.write(character, out);
 			return out.toString().getBytes(Charset.forName("UTF-8"));
 		} catch (IOException e) {
-			logger.error("Failed generating XML for char",e);
+			logger.log(Level.ERROR, "Failed generating XML for char",e);
 			StringWriter mess = new StringWriter();
 			mess.append("Failed saving character\n\n");
 			e.printStackTrace(new PrintWriter(mess));

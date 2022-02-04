@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PropertyResourceBundle;
@@ -12,11 +13,9 @@ import org.prelle.javafx.WindowMode;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.MagicOrResonanceOption;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetaTypeOption;
 import de.rpgframework.shadowrun.Priority;
-import de.rpgframework.shadowrun.PriorityOption;
 import de.rpgframework.shadowrun.PriorityTableEntry;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.PriorityTable;
@@ -90,7 +89,7 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 	@Override
 	public Node getMagicOrResonanceNode(Priority prio) {
 		PriorityTableEntry entry = resolver.apply(PriorityType.MAGIC, prio);
-		logger.info("----"+entry.getType()+":"+entry.getPriority()+" with "+entry.getModifications().size()+" modifications");
+		logger.log(Level.INFO,"----"+entry.getType()+":"+entry.getPriority()+" with "+entry.getModifications().size()+" modifications");
 		VBox ret = new VBox();
 		
 		int oldPoints = -1;
@@ -101,7 +100,7 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 			MagicOrResonanceType type = mod.getReferenceType().resolve(mod.getKey());
 			int points = mod.getValue();
 			if (points!=oldPoints) {
-				logger.debug(" change from "+oldPoints+" to "+points+"   Buffer is "+buf);
+				logger.log(Level.DEBUG," change from "+oldPoints+" to "+points+"   Buffer is "+buf);
 				// Print old
 				if (buf!=null) {
 					Label part1 = new Label(buf.toString()+":");

@@ -95,11 +95,15 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
-  "name":"de.rpgframework.shadowrun6.persist.AttackRatingConverter",
+  "name":"de.rpgframework.shadowrun6.persist.ItemAttributeConverter",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"de.rpgframework.shadowrun6.persist.ItemSubTypesConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.persist.MagicOrResonanceTypeConverter",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
