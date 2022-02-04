@@ -1,12 +1,11 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.ToDoElement;
@@ -34,7 +33,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  */
 public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrapper<ShadowrunAttribute,Shadowrun6Character, SR6CharacterGenerator> {
 
-	private static Logger logger = LogManager.getLogger(GeneratorWrapper.class);
+	private static Logger logger = System.getLogger(GeneratorWrapper.class.getPackageName());
 	
 	private Shadowrun6Character cached;
 	private CharacterHandle cachedHandle;
@@ -125,7 +124,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	
 	//-------------------------------------------------------------------
 	public void setWrapped(SR6CharacterGenerator newCtrl) {
-		logger.info("#################Generator changed to "+newCtrl+"\n\n\n");
+		logger.log(Level.INFO, "#################Generator changed to "+newCtrl+"\n\n\n");
 		// Move all existing listener to new controller
 		if (wrapped!=null) {
 			for (ControllerListener callback : new ArrayList<>(wrapped.getListener())) {
@@ -135,7 +134,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 		}
 		wrapped = newCtrl;
 		wrapped.fireEvent(BasicControllerEvents.GENERATOR_CHANGED, newCtrl);
-		logger.info("#################Call setModel()");
+		logger.log(Level.INFO, "#################Call setModel()");
 		newCtrl.setModel(cached, cachedHandle);
 	}
 

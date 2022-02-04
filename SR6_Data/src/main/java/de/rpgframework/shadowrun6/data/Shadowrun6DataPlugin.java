@@ -1,10 +1,10 @@
 package de.rpgframework.shadowrun6.data;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.core.RoleplayingSystem;
@@ -25,8 +25,6 @@ import de.rpgframework.genericrpg.items.PieceOfGearUsage;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ANPC;
 import de.rpgframework.shadowrun.ASpell;
-import de.rpgframework.shadowrun.AdeptPower;
-import de.rpgframework.shadowrun.AdeptPowerList;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerList;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -67,7 +65,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class Shadowrun6DataPlugin  {
 
-	private static Logger logger = LogManager.getLogger("shadowrun6.data");
+	private static Logger logger = System.getLogger("shadowrun6.data");
 
 	private static boolean alreadyInitialized = false;
 
@@ -98,68 +96,68 @@ public class Shadowrun6DataPlugin  {
 		double totalPlugins = 23.0;
 		double count = 0;
 		alreadyInitialized = true;
-		logger.info("START -------------------------------Core-----------------------------------------------");
+		logger.log(Level.INFO, "START -------------------------------Core-----------------------------------------------");
 		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN);
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		try {
 			list = Shadowrun6Core.loadDataItems(SkillList.class, SR6Skill.class, core, clazz,"core/data/skills.xml");
-			logger.debug("Loaded "+list.size()+" skills");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" skills");
 			list = Shadowrun6Core.loadDataItems(SpellFeatureList.class, SpellFeature.class, core, clazz, "core/data/spellfeatures.xml");
-			logger.debug("Loaded "+list.size()+" spell features");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" spell features");
 			list = Shadowrun6Core.loadDataItems(SpellList.class, ASpell.class, core, clazz, "core/data/spells.xml");
-			logger.debug("Loaded "+list.size()+" spells");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
 //			list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, core, clazz.getResourceAsStream("core/data/adeptpowers.xml"));
-//			logger.debug("Loaded "+list.size()+" adept powers");
+//			logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, core, clazz, "core/data/qualities.xml");
-			logger.debug("Loaded "+list.size()+" qualities");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, core, clazz, "core/data/critterpower.xml");
-			logger.debug("Loaded "+list.size()+" critter power");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, core, clazz, "core/data/metatypes.xml");
-			logger.debug("Loaded "+list.size()+" metatypes");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" metatypes");
 			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz, "core/data/actions_minor.xml");
-			logger.debug("Loaded "+list.size()+" minor actions");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" minor actions");
 			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz, "core/data/actions_major.xml");
-			logger.debug("Loaded "+list.size()+" major actions");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" major actions");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz, "core/data/gear.xml");
-			logger.debug("Loaded "+list.size()+" items");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" items");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms_accessories.xml");
-			logger.debug("Loaded "+list.size()+" weapon accessories");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon accessories");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms.xml");
-			logger.debug("Loaded "+list.size()+" firearms");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
 			list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, core, clazz,"core/data/magicOrResonance.xml");
-			logger.debug("Loaded "+list.size()+" magic or resonance entries");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic or resonance entries");
 			Shadowrun6Core.loadPriorityTableEntries(core, clazz.getResourceAsStream("core/data/priorities.xml"));
 			list = Shadowrun6Core.loadDataItems(TraditionList.class, Tradition.class, core, clazz,"core/data/traditions.xml");
-			logger.debug("Loaded "+list.size()+" magic traditions");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic traditions");
 //			logger.fatal("Stop here");
 //			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
-			logger.debug("Loaded "+list.size()+" NPCs");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/contacts.xml"));
-			logger.debug("Loaded "+list.size()+" NPCs");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
 			
 			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
-			logger.debug("Loaded "+list.size()+" rule presets");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" rule presets");
 
-			logger.info("START -------------------------------COMPANION------------------------------------------");
+			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
 			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH);
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities-metagenetic.xml");
-			logger.debug("Loaded "+list.size()+" metagenic qualities");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" metagenic qualities");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities-infected.xml");
-			logger.debug("Loaded "+list.size()+" infected qualities");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" infected qualities");
 			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "companion/data/critterpower.xml");
-			logger.debug("Loaded "+list.size()+" critter power");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "companion/data/metatypes.xml");
-			logger.debug("Loaded "+list.size()+" metatypes");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" metatypes");
 
 		} catch (DataErrorException e) {
-			logger.error("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
+			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.exit(1);
 		} catch (Exception e) {
-			logger.error("Failed loading data",e);
+			logger.log(Level.ERROR, "Failed loading data",e);
 			System.exit(1);
 		}
 	}

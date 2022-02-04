@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.function.BiFunction;
 
@@ -104,8 +105,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	// --------------------------------------------------------------------
 	@Override
 	protected void setupProcessChain() {
-		if (logger.isDebugEnabled())
-			logger.debug("ENTER: setupProcessChain()");
+		if (logger.isLoggable(Level.DEBUG))
+			logger.log(Level.DEBUG, "ENTER: setupProcessChain()");
 		try {
 			if (setupDone) {
 				return;
@@ -117,7 +118,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			magicReso = new PriorityMagicOrResonanceController(this);
 			skill = new PrioritySR6SkillGenerator(this);
 			qualities = new QualityGenerator(this);
-			logger.info("meta = " + getMetatypeController() + "  of " + this);
+			logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
 
 			processChain.add(new ResetModifications(model));
 			processChain.add(new ResetGenerator(this));
@@ -130,8 +131,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 			setupDone = true;
 		} finally {
-			if (logger.isDebugEnabled())
-				logger.debug("LEAVE: setupProcessChain()");
+			if (logger.isLoggable(Level.DEBUG))
+				logger.log(Level.DEBUG, "LEAVE: setupProcessChain()");
 		}
 	}
 
@@ -160,13 +161,13 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		model.setCharGenUsed(getId());
 		model.setCharGenSettings(settings);
 		model.setKarmaFree(50);
-		logger.info("----------------Start generator-----------------------" + toString() + "\n\n\n");
+		logger.log(Level.INFO, "----------------Start generator-----------------------" + toString() + "\n\n\n");
 		
 		try {
 			setupProcessChain();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			logger.error("Failed on process chain", e);
+			logger.log(Level.ERROR, "Failed on process chain", e);
 		}
 	}
 

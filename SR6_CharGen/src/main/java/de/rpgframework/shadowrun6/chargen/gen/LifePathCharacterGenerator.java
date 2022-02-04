@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger.Level;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
@@ -84,13 +85,13 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 		model.setCharGenUsed(getId());
 		model.setCharGenSettings(settings);
 		model.setKarmaFree(50);
-		logger.info("----------------Start generator-----------------------" + toString() + "\n\n\n");
+		logger.log(Level.INFO, "----------------Start generator-----------------------" + toString() + "\n\n\n");
 		
 		try {
 			setupProcessChain();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			logger.error("Failed on process chain", e);
+			logger.log(Level.ERROR, "Failed on process chain", e);
 		}
 		
 	}
@@ -101,8 +102,8 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 	 */
 	@Override
 	protected void setupProcessChain() {
-		if (logger.isDebugEnabled())
-			logger.debug("ENTER: setupProcessChain()");
+		if (logger.isLoggable(Level.DEBUG))
+			logger.log(Level.DEBUG, "ENTER: setupProcessChain()");
 		try {
 			if (setupDone) {
 				return;
@@ -112,7 +113,7 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 			meta = new SR6LifePathMetatypeController(this);
 			magicReso = new SR6LifePathMagicOrResonanceController(this);
 //			skill = new PointBuySR6SkillGenerator(this);
-			logger.info("meta = " + getMetatypeController() + "  of " + this);
+			logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
 
 			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			processChain.add(new SR6LifePathResetGenerator(this));
@@ -123,15 +124,15 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 
 			setupDone = true;
 		} finally {
-			if (logger.isDebugEnabled())
-				logger.debug("LEAVE: setupProcessChain()");
+			if (logger.isLoggable(Level.DEBUG))
+				logger.log(Level.DEBUG, "LEAVE: setupProcessChain()");
 		}
-		logger.error("ToDo");
+		logger.log(Level.ERROR, "ToDo");
 	}
 
 	//-------------------------------------------------------------------
 	public void setNativeLanguage(String n) {
-		logger.warn("ToDo: setLanguage");
+		logger.log(Level.WARNING, "ToDo: setLanguage");
 		//skill.setLanguage(n);
 	}
 

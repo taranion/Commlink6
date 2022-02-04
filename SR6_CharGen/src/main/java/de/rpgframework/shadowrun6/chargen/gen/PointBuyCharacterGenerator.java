@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger.Level;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
@@ -91,13 +92,13 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		model.setCharGenUsed(getId());
 		model.setCharGenSettings(settings);
 		model.setKarmaFree(50);
-		logger.info("----------------Start generator-----------------------" + toString() + "\n\n\n");
+		logger.log(Level.INFO, "----------------Start generator-----------------------" + toString() + "\n\n\n");
 		
 		try {
 			setupProcessChain();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			logger.error("Failed on process chain", e);
+			logger.log(Level.ERROR, "Failed on process chain", e);
 		}
 	}
 
@@ -107,8 +108,8 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	 */
 	@Override
 	protected void setupProcessChain() {
-		if (logger.isDebugEnabled())
-			logger.debug("ENTER: setupProcessChain()");
+		if (logger.isLoggable(Level.DEBUG))
+			logger.log(Level.DEBUG, "ENTER: setupProcessChain()");
 		try {
 			if (setupDone) {
 				return;
@@ -118,7 +119,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			meta = new PointBuyMetatypeController(this);
 			magicReso = new PointBuyMagicOrResonanceController(this);
 			skill = new PointBuySR6SkillGenerator(this);
-			logger.info("meta = " + getMetatypeController() + "  of " + this);
+			logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
 
 			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			processChain.add(new PointBuyResetGenerator(this));
@@ -129,10 +130,10 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 
 			setupDone = true;
 		} finally {
-			if (logger.isDebugEnabled())
-				logger.debug("LEAVE: setupProcessChain()");
+			if (logger.isLoggable(Level.DEBUG))
+				logger.log(Level.DEBUG, "LEAVE: setupProcessChain()");
 		}
-		logger.error("ToDo");
+		logger.log(Level.ERROR, "ToDo");
 	}
 
 	//-------------------------------------------------------------------

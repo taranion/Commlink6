@@ -1,9 +1,8 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
@@ -32,7 +31,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
 public abstract class CommonSR6CharacterGenerator extends CharacterControllerImpl<ShadowrunAttribute,Shadowrun6Character>
 		implements SR6CharacterGenerator {
 
-	protected static final Logger logger = LogManager.getLogger(CommonSR6CharacterGenerator.class.getPackageName());
+	protected static final Logger logger = System.getLogger(CommonSR6CharacterGenerator.class.getPackageName());
 
 	protected IMetatypeController meta;
 	protected MagicOrResonanceController magicReso;
@@ -100,7 +99,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	@Override
 	public boolean canBeFinished() {
 		// TODO Auto-generated method stub
-		logger.debug("TODO: canBeFinished");
+		logger.log(Level.DEBUG, "TODO: canBeFinished");
 		return true;
 	}
 
@@ -111,13 +110,13 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub
-		logger.warn("TODO: finish");
+		logger.log(Level.WARNING, "TODO: finish");
 
 	}
 
 	// -------------------------------------------------------------------
 	protected void updateEffectiveRules() {
-		logger.debug("ENTER updateEffectiveRules for "+this);
+		logger.log(Level.DEBUG, "ENTER updateEffectiveRules for "+this);
 //		try {
 //			throw new RuntimeException("Trace");
 //		} catch (Exception e) {
@@ -130,7 +129,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 			for (Rule rule : Shadowrun6Rules.values()) {
 				RuleValue rVal = new RuleValue(rule);
 				effectiveRules.put(rule, rVal);
-				logger.info("start with "+rVal);
+				logger.log(Level.INFO, "start with "+rVal);
 			}
 
 			// Apply settings from character
@@ -144,7 +143,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 						// Overwrite default with setting from char
 						RuleValue rv = getRule(rule);
 						rv.setValue(rule.parseValue(rc.getValueString()));
-						logger.info("stored in character: "+rv);
+						logger.log(Level.INFO, "stored in character: "+rv);
 					}
 				}
 
@@ -153,7 +152,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 				if (model.getStrictness() != null) {
 					RuleInterpretation inter = Shadowrun6Core.getItem(RuleInterpretation.class, model.getStrictness());
 					if (inter == null) {
-						logger.error("Character uses an unknown rule interpretation: " + model.getStrictness());
+						logger.log(Level.ERROR, "Character uses an unknown rule interpretation: " + model.getStrictness());
 					} else {
 						for (RuleConfiguration set : inter.getRules()) {
 							Rule rule = Shadowrun6Rules.getRule(set.getRuleId());
@@ -162,13 +161,13 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 							// If set in strictness, remove from character
 							model.clearRuleValue(rule);
 							rv.setEditable(false);
-							logger.info("by strictness: "+rv);
+							logger.log(Level.INFO, "by strictness: "+rv);
 						}
 					}
 				}
 			}
 		} finally {
-			logger.debug("LEAVE updateEffectiveRules");
+			logger.log(Level.DEBUG, "LEAVE updateEffectiveRules");
 		}
 	}
 

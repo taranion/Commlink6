@@ -1,9 +1,9 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.Page;
@@ -25,8 +25,6 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
 
@@ -36,7 +34,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
  */
 public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribute, Shadowrun6Character> implements ControllerListener {
 	
-	private final static Logger logger = LogManager.getLogger(SR6CharacterViewLayout.class);
+	private final static Logger logger = System.getLogger(SR6CharacterViewLayout.class.getPackageName());
 	
 	private BasicDataPage2 page;
 	
@@ -61,22 +59,22 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void startCreation(CharacterGenerator<?,?> charGen) {
-		logger.warn("ENTER: Start creation");
+		logger.log(Level.WARNING, "ENTER: Start creation");
 		GeneratorWrapper wrapper = (GeneratorWrapper) charGen; //new GeneratorWrapper(new Shadowrun6Character(), null);
 		
 		handleControllerEvent(BasicControllerEvents.GENERATOR_CHANGED, wrapper);
 		
 //		wrapper.setWrapped(new PriorityCharacterGenerator());
-		logger.warn("Create wizard for "+wrapper);
+		logger.log(Level.WARNING, "Create wizard for "+wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
 		while (true) {
 			CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
-			logger.info("Wizard closed via "+close);
+			logger.log(Level.INFO, "Wizard closed via "+close);
 			//		controller.refresh();
 			if (close==CloseType.FINISH) {
 				wrapper.finish();
 				try {
-					logger.debug("Call save() on "+wrapper.getClass());
+					logger.log(Level.DEBUG, "Call save() on "+wrapper.getClass());
 					wrapper.save(Shadowrun6Core.save(wrapper.getModel()));
 					return;
 				} catch (CharacterIOException e) {
@@ -88,7 +86,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			}
 			if (close==CloseType.CANCEL) {
 				//			getApplication().closeAppLayout();
-				logger.info("call historyBack()");
+				logger.log(Level.INFO, "call historyBack()");
 				getApplication().closeScreen(this);
 				return;
 			}
@@ -102,21 +100,21 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void continueCreation(Shadowrun6Character model, CharacterHandle handle) {
-		logger.info("Continue creation");
+		logger.log(Level.INFO, "Continue creation");
 		GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
-		logger.warn("ToDo: Detect previously used generator");
+		logger.log(Level.WARNING, "ToDo: Detect previously used generator");
 		try {
 			SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator( model.getCharGenUsed() );
 			wrapper.setWrapped(charGen);
 		} catch (Exception e) {
-			logger.fatal("Error creating generator '"+model.getCharGenUsed(),e);
+			logger.log(Level.ERROR, "Error creating generator '"+model.getCharGenUsed(),e);
 			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Internal error creating character generator instance");
 			return;
 		}
 		page.setController(wrapper);
 		GenerationWizard wizard = new GenerationWizard(wrapper);
 		CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
-		logger.info("Wizard closed via "+close);
+		logger.log(Level.INFO, "Wizard closed via "+close);
 //		controller.refresh();
 		if (close==CloseType.FINISH) {
 			wrapper.finish();
@@ -135,7 +133,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void edit(Shadowrun6Character model) {
-		logger.info("ToDo: Edit "+model);
+		logger.log(Level.INFO, "ToDo: Edit "+model);
 		
 	}
 
@@ -145,7 +143,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
-		logger.debug("RCV "+type);
+		logger.log(Level.DEBUG, "RCV "+type);
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
 			page.setController((SR6CharacterController) param[0]);
 		
@@ -162,7 +160,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void setResponsiveMode(WindowMode value) {
-		logger.warn("Mode "+value);
+		logger.log(Level.WARNING, "Mode "+value);
 	}
 
 }

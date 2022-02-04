@@ -1,17 +1,17 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 
 import org.prelle.javafx.Page;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class CharacterOverviewController {
 	
-	private final static Logger logger = LogManager.getLogger(CharacterOverviewController.class);
+	private final static Logger logger = System.getLogger(CharacterOverviewController.class.getPackageName());
 
 	private transient SR6CharacterViewLayout screen;
 	
@@ -51,7 +51,7 @@ public class CharacterOverviewController {
 	//-------------------------------------------------------------------
 	@FXML
 	public void navigateAttributes(ActionEvent ev) throws IOException {
-		logger.debug("Navigate Attributes");
+		logger.log(Level.DEBUG, "Navigate Attributes");
 //		if (pgAttributes==null) {
 //			pgAttributes = ScreenLoader.loadAttributesPage();
 //		}
