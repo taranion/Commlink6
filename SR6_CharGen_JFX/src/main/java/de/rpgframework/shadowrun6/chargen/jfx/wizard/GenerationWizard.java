@@ -51,6 +51,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private WizardPageLifePath1 lifepath1;
 	private SR6WizardPageChangeling surge;
 	private SR6WizardPageMagicOrResonance magic;
+	private SR6WizardPageQualities qualities;
 	private WizardPageAttributes attrib;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
@@ -75,14 +76,15 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		List<WizardPage> ret = new ArrayList<>();
 		for (WizardPageType type : wrapper.getWrapped().getWizardPages()) {
 			switch (type) {
-			case PRIORITIES : ret.add(  prios); break;
-			case METATYPE   : ret.add(   race); break;
-			case SR6_LIFEPATH1: ret.add(lifepath1); break;
-			case SURGE      : ret.add(  surge); break;
+			case PRIORITIES  : ret.add(    prios); break;
+			case METATYPE    : ret.add(     race); break;
+			case SR6_LIFEPATH1:ret.add(lifepath1); break;
+			case SURGE       : ret.add(    surge); break;
 			case MAGIC_OR_RESONANCE: ret.add(magic); break;
-			case ATTRIBUTES : ret.add( attrib); break;
-//			case RECOMMENDER: ret.add(profiles); break;
-			case NAME       : ret.add(   name); break;
+			case QUALITIES   : ret.add(qualities); break;
+			case ATTRIBUTES  : ret.add(   attrib); break;
+//			case RECOMMENDER : ret.add(profiles); break;
+			case NAME        : ret.add(   name); break;
 			default:
 				logger.log(Level.ERROR,"Unsupported page type "+type);
 			}
@@ -102,6 +104,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		lifepath1 = new WizardPageLifePath1(this, wrapper);
 		surge  = new SR6WizardPageChangeling(this, wrapper);
 		magic  = new SR6WizardPageMagicOrResonance(this, wrapper);
+		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		name   = new WizardPageName<>(this, wrapper);

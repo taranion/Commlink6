@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map.Entry;
 
 import de.rpgframework.MultiLanguageResourceBundle;
@@ -23,7 +22,6 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -51,11 +49,6 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 	//-------------------------------------------------------------------
 	public PointBuySR6AttributeGenerator(SR6CharacterController parent) {
 		super(parent);
-	}
-
-	//-------------------------------------------------------------------
-	public String getHumanReadable(Possible result, Locale loc) {
-		return RES.getString(result.getI18NKey(), loc);
 	}
 
 	//-------------------------------------------------------------------

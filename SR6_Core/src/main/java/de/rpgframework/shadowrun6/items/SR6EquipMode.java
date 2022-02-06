@@ -24,7 +24,7 @@ public enum SR6EquipMode implements IEquipMode {
 	BODYWARE
 	;
 	
-	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(Shadowrun6Core.class, "core", Locale.ENGLISH, Locale.GERMAN);
+	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
 
 	//-------------------------------------------------------------------
 	/**

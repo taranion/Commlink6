@@ -149,4 +149,13 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 		parent.availableProperty().get().setAll(filtered);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.ComplexDataItemListFilter#applyFilter()
+	 */
+	@Override
+	public void applyFilter() {
+		refreshAvailable();
+	}
+
 }

@@ -33,7 +33,7 @@
    <item id="extendable_baton" avail="2" price="50" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
       <weapon dmg="2S" attack="5,,,,"  skill="close_combat" spec="close_combat/clubs"/>
    </item>
-   <item id="sab" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+   <item id="sap" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
       <weapon dmg="2S" attack="6,,,,"  skill="close_combat" spec="close_combat/clubs"/>
    </item>
    <item id="staff" avail="1" price="150" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">

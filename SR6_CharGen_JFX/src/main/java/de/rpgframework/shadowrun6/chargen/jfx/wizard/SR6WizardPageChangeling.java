@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
+import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
@@ -30,6 +31,7 @@ import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.QualityFilterNode;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 
 /**
  * @author prelle
@@ -64,6 +66,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	private void initComponents() {
 		selection = new ComplexDataItemControllerNode<>(charGen.getQualityController());
 		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.METAGENIC));
+		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.METAGENIC);
 		
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "placeholder.available"));
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "placeholder.selected"));
@@ -76,6 +79,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 					}}, 
 				null));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
+		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), selection.getController()));
 		
 		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
 		bxDescription = new GenericDescriptionVBox(resolver);

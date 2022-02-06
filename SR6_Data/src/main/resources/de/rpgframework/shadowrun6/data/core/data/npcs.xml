@@ -23,7 +23,7 @@
 		</skills>
 		<gear>
 <!-- 			<item ref="commlink"/> -->
-<!-- 			<item ref="club"/> -->
+			<item ref="club"/>
 		</gear>
 	</npc>
 	<npc id="shaman" rating="0" type="GRUNT">

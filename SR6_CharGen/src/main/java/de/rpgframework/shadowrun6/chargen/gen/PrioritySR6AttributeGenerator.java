@@ -43,18 +43,12 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	//-------------------------------------------------------------------
 	public PrioritySR6AttributeGenerator(SR6CharacterController parent) {
 		super(parent);
-		try {
-			throw new RuntimeException("Trace "+this);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public String getHumanReadable(Possible result, Locale loc) {
-		// TODO Auto-generated method stub
-		return result.getI18NKey();
+//		try {
+//			throw new RuntimeException("Trace "+this);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	//-------------------------------------------------------------------

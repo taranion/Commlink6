@@ -22,7 +22,7 @@ public enum SR6UsageMode implements IUsageMode {
 	MOUNTED,
 	;
 	
-	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(Shadowrun6Core.class, "core", Locale.ENGLISH, Locale.GERMAN);
+	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
 
 	//-------------------------------------------------------------------
 	/**
