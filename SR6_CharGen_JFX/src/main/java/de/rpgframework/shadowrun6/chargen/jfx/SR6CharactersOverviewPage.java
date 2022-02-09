@@ -19,6 +19,7 @@ import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.jfx.pages.CharactersOverviewPage;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
@@ -103,16 +104,22 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 */
 	@Override
 	protected RuleSpecificCharacterObject<?> loadRuleSpecific(byte[] raw) {
+		logger.log(Level.INFO, "ENTER loadRuleSpecific");
+		
 		try {
-			return Shadowrun6Core.load(raw);
+			Shadowrun6Character rawChar = Shadowrun6Core.load(raw);
+			Shadowrun6Tools.resolveChar(rawChar);
+			return rawChar;
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Failed parsing XML for char",e);
 			StringWriter mess = new StringWriter();
 			mess.append("Failed loading character\n\n");
 			e.printStackTrace(new PrintWriter(mess));
 			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, mess.toString());
+			return null;
+		} finally {
+			logger.log(Level.INFO, "LEAVE loadRuleSpecific");
 		}
-		return null;
 	}
 
 }

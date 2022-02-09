@@ -1,13 +1,18 @@
 package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
 import java.lang.System.Logger.Level;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 import org.prelle.javafx.TitledComponent;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.Tradition;
@@ -15,6 +20,8 @@ import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageMagicOrResonance;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PointBuyMagicOrResonanceController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -22,7 +29,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
@@ -49,6 +59,10 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 	public SR6WizardPageMagicOrResonance(Wizard wizard, IShadowrunCharacterGenerator<?, ?, ?> charGen) {
 		super(wizard, charGen);
 		
+		System.err.println("SR6WizardPageMagicOrResonance: "+charGen.getModel().getCharGenUsed());
+		if (charGen.getModel().getCharGenUsed().equals("pointbuy")) {
+			lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith());
+		}
 
 		/* For mystic adepts */
 		lbTotal = new Label("?");
@@ -200,4 +214,72 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 		return new VBox(10, tcTrad, tcDist);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ControllerListener#handleControllerEvent(de.rpgframework.genericrpg.chargen.ControllerEvent, java.lang.Object[])
+	 */
+	@Override
+	public void handleControllerEvent(ControllerEvent type, Object... param) {
+		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
+			logger.log(Level.WARNING,"RCV {} : {}", type, Arrays.toString(param));
+			if (param[0] instanceof PointBuyCharacterGenerator) {
+				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith());
+			}
+		} else {
+			super.handleControllerEvent(type, param);
+		}
+	}
+
 }
+
+class MagicOrResonanceCellWith extends ListCell<MagicOrResonanceType> {
+
+	protected static PropertyResourceBundle SR6UI = (PropertyResourceBundle) ResourceBundle
+			.getBundle(SR6WizardPageMagicOrResonance.class.getName());
+
+	private HBox layout;
+	private VBox vlayout;
+	private Label lblHeading;
+	private Label lblSecond;
+	private Label lblKarma;
+
+	//--------------------------------------------------------------------
+	public MagicOrResonanceCellWith() {
+		lblHeading = new Label();
+		lblSecond = new Label();
+		lblKarma = new Label();
+		lblKarma.setStyle("-fx-font-size:150%");
+		lblHeading.getStyleClass().add("base");
+		
+		vlayout = new VBox(5, lblHeading, lblSecond);
+		
+		layout = new HBox(10);
+		layout.getChildren().addAll(vlayout, lblKarma);
+		layout.setAlignment(Pos.CENTER);
+
+		vlayout.setMaxWidth(Double.MAX_VALUE);
+		HBox.setHgrow(vlayout, Priority.ALWAYS);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see javafx.scene.control.Cell#updateItem(java.lang.Object, boolean)
+	 */
+	@Override
+	public void updateItem(MagicOrResonanceType item, boolean empty) {
+		super.updateItem(item, empty);
+
+		if (empty) {
+			setText(null);
+			setGraphic(null);
+		} else {
+			setGraphic(layout);
+			lblHeading.setText(item.getName());
+			int cost =0;
+			if (item.usesMagic() || item.usesResonance())
+				cost = 10;
+			lblKarma.setText( ResourceI18N.format(SR6UI, "mortypecell.cost", cost) );
+		}
+	}
+}
+

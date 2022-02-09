@@ -2,7 +2,9 @@ package de.rpgframework.shadowrun6.chargen.jfx.selector;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.HashMap;
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +32,8 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -144,6 +148,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				content.getChildren().add(lbName);
 
 				switch ((ShadowrunReference) choice.getChooseFrom()) {
+				case SKILL:
+					handleSKILL(item, choice);
+					break;
 				case SUBSELECT:
 					handleSUBSELECT(item, choice);
 					break;
@@ -167,6 +174,29 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		} finally {
 			logger.log(Level.INFO, "LEAVE apply({}, {} with {})", item, choices, closed);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private void handleSKILL(T item, Choice choice) {
+		ChoiceBox<SR6Skill> cbSub = new ChoiceBox<>();
+		cbSub.setConverter(new StringConverter<SR6Skill>() {
+			public SR6Skill fromString(String value) { return null;}
+			public String toString(SR6Skill value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		cbSub.getItems().addAll(Shadowrun6Core.getItemList(SR6Skill.class));
+		Collections.sort(cbSub.getItems(), new Comparator<SR6Skill>() {
+			public int compare(SR6Skill o1, SR6Skill o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {} for {}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+			updateButtons(); 
+			showHelpFor(n); });
+		content.getChildren().add(cbSub);
 	}
 
 	//-------------------------------------------------------------------

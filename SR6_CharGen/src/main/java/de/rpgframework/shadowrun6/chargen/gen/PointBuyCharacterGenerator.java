@@ -119,12 +119,14 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			meta = new PointBuyMetatypeController(this);
 			magicReso = new PointBuyMagicOrResonanceController(this);
 			skill = new PointBuySR6SkillGenerator(this);
+			qualities = new QualityGenerator(this);
 			logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
 
 			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			processChain.add(new PointBuyResetGenerator(this));
 			processChain.add(meta);
 			processChain.add(magicReso);
+			processChain.add(qualities);
 			processChain.add(attributes);
 			processChain.add(skill);
 

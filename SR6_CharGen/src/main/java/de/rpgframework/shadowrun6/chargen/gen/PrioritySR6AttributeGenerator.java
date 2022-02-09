@@ -13,6 +13,8 @@ import java.util.Map.Entry;
 import javax.management.RuntimeErrorException;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyWhen;
@@ -26,6 +28,7 @@ import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -466,7 +469,8 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	private void updateAttributeValues() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
-			parent.getModel().getAttribute(key).setDistributed(per.getSum() );
+			AttributeValue val = parent.getModel().getAttribute(key);
+			val.setDistributed(per.getSum() -  val.getModifier());
 		}
 	}
 
@@ -542,12 +546,14 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 
 	//-------------------------------------------------------------------
 	private void reset() {
+		todos.clear();
 		adjustmentPoints = 0;
 		attributePoints  = 0;
 		allowedAdjust.clear();
 		allowedAdjust.add(ShadowrunAttribute.EDGE);
 		for (AttributeValue tmp : getModel().getAttributes()) {
 			tmp.clearModifications();
+			tmp.setDistributed(0);
 		}
 		
 		for (Entry<ShadowrunAttribute,PerAttributePoints> entry : getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.entrySet()) {
@@ -690,6 +696,10 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 				}
 			}
 			logger.log(Level.DEBUG, "Finish with {} adjust and {} attrib points and {} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());
+			
+			if (adjustmentPoints>0) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6CharacterGenerator.TODO_ATTRIB_REMAIN_ADJUST, adjustmentPoints));
+			}
 			
 			// Copy current setup 
 			updateAttributeValues();

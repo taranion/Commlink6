@@ -1,7 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <critterpowers>
-    <critterpower id="armor" type="PHYSICAL"   action="AUTO" range="SELF" dur="ALWAYS" level="true"/>
-    <critterpower id="concealment" type="PHYSICAL"   action="AUTO" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
-    <critterpower id="dual_natured" type="PHYSICAL"   action="AUTO" range="SELF" dur="ALWAYS" />
-    <critterpower id="search" type="PHYSICAL"   action="MAJOR" range="SPECIAL" dur="SPECIAL" />
+    <critterpower id="accident"       type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="animal_control" type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED" />
+    <critterpower id="armor"          type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" level="true"/>
+    <critterpower id="astral_form"    type="MANA"     action="AUTO"  range="SELF" dur="ALWAYS" />
+    <critterpower id="binding"        type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="compulsion"     type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED" />
+    <critterpower id="concealment"    type="PHYSICAL" action="AUTO"  range="LINE_OF_SIGHT" dur="SUSTAINED"/>
+    <critterpower id="confusion"      type="MANA"     action="AUTO"  range="LINE_OF_SIGHT" dur="SUSTAINED"/>
+    <critterpower id="corrosive_spit" type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="dual_natured"   type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" />
+    <critterpower id="elemental_attack" type="PHYSICAL" action="AUTO"  range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="energy_aura"    type="PHYSICAL" action="AUTO"  range="LINE_OF_SIGHT" dur="ALWAYS" />
+    <critterpower id="engulf"         type="PHYSICAL" action="MAJOR" range="TOUCH"         dur="SUSTAINED" />
+    <critterpower id="enhanced_senses" type="PHYSICAL" action="AUTO" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="essence_drain"  type="PHYSICAL" action="MAJOR" range="TOUCH"         dur="PERMANENT" />
+    <critterpower id="fear"           type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="SPECIAL" />
+    <critterpower id="guard"          type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
+    <critterpower id="hardened_armor" type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" level="true"/>
+    <critterpower id="hardened_mystic_armor" type="MANA" action="AUTO"  range="SELF"          dur="ALWAYS" level="true"/>
+    <critterpower id="immunity"       type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" />
+    <critterpower id="infection"      type="PHYSICAL" action="AUTO"  range="TOUCH"         dur="PERMANENT" />
+    <critterpower id="influence"      type="MANA"     action="AUTO"  range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="innate_spell"   type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS">
+    	<choices>
+			<choice type="SPELL" ref="spell" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" />
+    	</choices>
+    </critterpower>
+    <critterpower id="materialization" type="MANA"     action="MAJOR" range="SELF"          dur="SUSTAINED" />
+    <critterpower id="mimicry"         type="PHYSICAL" action="MINOR" range="SELF"          dur="SUSTAINED" />
+    <critterpower id="mindspeech"      type="MANA"     action="AUTO"  range="LINE_OF_SIGHT" dur="INSTANTANEOUS"/>
+    <critterpower id="mist_form"       type="PHYSICAL" action="MAJOR" range="SELF"          dur="SUSTAINED" />
+    <critterpower id="movement"        type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
+    <critterpower id="mystic_armor"    type="MANA"     action="AUTO"  range="SELF"          dur="ALWAYS" level="true"/>
+    <critterpower id="natural_weapon"  type="PHYSICAL" action="AUTO"  range="TOUCH"         dur="INSTANTANEOUS" />
+    <critterpower id="noxious_breath"  type="PHYSICAL" action="MAJOR" range="SPECIAL"       dur="INSTANTANEOUS" />
+    <critterpower id="paralyzing_howl" type="PHYSICAL" action="MAJOR" range="SPECIAL"      dur="SPECIAL" />
+    <critterpower id="paralyzing_touch" type="PHYSICAL" action="MAJOR" range="TOUCH"       dur="SPECIAL" />
+    <critterpower id="petrification"   type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
+    <critterpower id="psychokinesis"   type="PHYSICAL" action="MINOR" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
+    <critterpower id="regeneration"    type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS"/>
+    <critterpower id="sapience"        type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS"/>
+    <critterpower id="search"          type="PHYSICAL" action="MAJOR" range="SPECIAL"       dur="SPECIAL" />
+    <critterpower id="venom"           type="PHYSICAL" action="AUTO"  range="TOUCH"         dur="INSTANTANEOUS" />
+    <critterpower id="weather_control" type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
 </critterpowers>

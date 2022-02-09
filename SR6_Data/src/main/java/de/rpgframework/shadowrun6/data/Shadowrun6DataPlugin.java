@@ -135,6 +135,8 @@ public class Shadowrun6DataPlugin  {
 //			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
+			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/critters_awakened.xml"));
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" awakened critters");
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/contacts.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
 			

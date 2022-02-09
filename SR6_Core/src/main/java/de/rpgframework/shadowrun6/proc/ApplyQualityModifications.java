@@ -41,6 +41,7 @@ public class ApplyQualityModifications implements ProcessingStep {
 				if (value==null) {
 					value = new QualityValue(item, 0);
 					model.addQuality(value);
+					logger.log(Level.DEBUG, "Add quality {} to character", item);
 				}
 				value.addModification(mod);
 			}

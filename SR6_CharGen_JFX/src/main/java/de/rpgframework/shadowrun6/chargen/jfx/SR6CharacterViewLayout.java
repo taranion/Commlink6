@@ -44,6 +44,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	public SR6CharacterViewLayout() {
 		initPages();
+		
+		setOnBackAction(ev -> logger.log(Level.INFO, "BACK action"));
 	}
 	
 	//-------------------------------------------------------------------

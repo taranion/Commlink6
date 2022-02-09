@@ -4,6 +4,8 @@ import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.shadowrun.ANPC;
+import de.rpgframework.shadowrun.CritterPower;
+import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -36,6 +38,15 @@ public class SR6NPC extends ANPC<ShadowrunAttribute, SR6Skill, SR6SkillValue, SR
 				PieceOfGear res = ShadowrunReference.GEAR.resolveAsDataItem(tmp.getKey());
 				if (res==null)
 					throw new DataErrorException(res, "Error in NPC '"+id+"': No gear with id '"+tmp.getKey()+"' found");
+				tmp.setResolved(res);
+			}
+		}
+		// Validate critter power references
+		for (CritterPowerValue tmp : critterpowers) {
+			if (tmp.getResolved()==null) {
+				CritterPower res = ShadowrunReference.CRITTER_POWER.resolveAsDataItem(tmp.getKey());
+				if (res==null)
+					throw new DataErrorException(res, "Error in NPC '"+id+"': No critter power with id '"+tmp.getKey()+"' found");
 				tmp.setResolved(res);
 			}
 		}

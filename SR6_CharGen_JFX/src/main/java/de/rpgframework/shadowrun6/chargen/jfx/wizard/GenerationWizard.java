@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+import org.prelle.javafx.AlertType;
+import org.prelle.javafx.CloseType;
+import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
 import org.prelle.javafx.skin.WizardSkin;
@@ -33,6 +36,7 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
+import javafx.util.Callback;
 
 /**
  * @author prelle
@@ -118,6 +122,20 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private void initInteractivtiy() {
 		wrapper.addListener(this);
 		canBeFinishedCallback = (wizard) -> wrapper.canBeFinished(); // new Callback<Wizard, Boolean>() {
+		
+		setConfirmCancelCallback(new Callback<Wizard, Boolean>() {
+
+			@Override
+			public Boolean call(Wizard param) {
+				logger.log(Level.WARNING, "ToDo: ask user to confirm cancellation");
+				
+				CloseType type = FlexibleApplication.getInstance().showAlertAndCall(AlertType.CONFIRMATION, "Really cancel?", "Do you really want to quit?");
+				logger.log(Level.WARNING, "User confirmed cancellation: "+type);
+				if (type==CloseType.OK || type==CloseType.YES)
+					return Boolean.TRUE;
+				return Boolean.FALSE;
+			}
+		});
 	}
 
 	//-------------------------------------------------------------------

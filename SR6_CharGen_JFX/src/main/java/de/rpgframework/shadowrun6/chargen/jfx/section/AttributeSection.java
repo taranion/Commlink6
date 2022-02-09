@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
 import javafx.scene.control.CheckBox;
@@ -68,6 +69,13 @@ public class AttributeSection extends Section {
 		logger.log(Level.INFO, "updateController");
 		
 		Shadowrun6Character model = ctrl.getModel();
+		if (model.getCharGenUsed().equals("prio")) {
+			table = new PriorityAttributeTable<>(ctrl);
+			setContent(table);
+		} else {
+			logger.log(Level.ERROR, "Don't support controller "+model.getCharGenUsed());
+		}
+		
 		MagicOrResonanceType mor = model.getMagicOrResonanceType();
 		if (mor != null) {
 			table.setShowMagic(mor.usesMagic());

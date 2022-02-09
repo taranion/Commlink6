@@ -1,16 +1,22 @@
 package de.rpgframework.shadowrun6;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.prelle.simplepersist.Element;
+import org.prelle.simplepersist.ElementList;
 import org.prelle.simplepersist.Root;
 
 import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.classification.Gender;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.Tradition;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 
 /**
  * @author prelle

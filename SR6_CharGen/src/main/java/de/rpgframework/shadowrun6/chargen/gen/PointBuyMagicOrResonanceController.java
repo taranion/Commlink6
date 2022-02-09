@@ -2,7 +2,10 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -27,7 +31,7 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 
 	private final static Logger logger = System.getLogger(PointBuyMagicOrResonanceController.class.getPackageName());
 
-	private Map<MagicOrResonanceType, Integer> available;
+	private List<MagicOrResonanceType> available;
 
 	// -------------------------------------------------------------------
 	/**
@@ -35,7 +39,13 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 	 */
 	public PointBuyMagicOrResonanceController(IShadowrunCharacterGenerator parent) {
 		super(parent);
-		available = new LinkedHashMap<>();
+		// Build available
+		available  = new ArrayList<>(Shadowrun6Core.getItemList(MagicOrResonanceType.class));
+		Collections.sort(available, new Comparator<MagicOrResonanceType>() {
+			public int compare(MagicOrResonanceType arg0, MagicOrResonanceType arg1) {
+				return Collator.getInstance().compare(arg0.getName(), arg1.getName());
+			}
+		});
 	}
 
 	//-------------------------------------------------------------------
@@ -44,8 +54,7 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 	 */
 	@Override
 	public List<MagicOrResonanceType> getAvailable() {
-		// TODO Auto-generated method stub
-		return null;
+		return available;
 	}
 
 	//-------------------------------------------------------------------

@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -19,6 +20,7 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
@@ -32,6 +34,8 @@ import de.rpgframework.shadowrun6.proc.ResetModifications;
  *
  */
 public class Shadowrun6Tools {
+	
+	private final static Logger logger = System.getLogger("de.rpgframework.shadowrun6");
 
 	public final static List<Class<? extends ProcessingStep>> RECALCULATE_STEPS = Arrays.asList(
 		ResetModifications.class,
@@ -296,5 +300,20 @@ public class Shadowrun6Tools {
 
 		Logging.logger.log(Level.ERROR, "Missing string conversion for "+req.getClass());
 		return req.toString();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * Walk through all items in the character and resolve them
+	 * @param rawChar
+	 */
+	public static void resolveChar(Shadowrun6Character model) {
+		logger.log(Level.DEBUG, "ENTER resolveChar");
+		
+		for (QualityValue tmp : model.getQualities()) {
+			Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey());
+			tmp.setResolved(resolved);
+		}
+		
 	}
 }
