@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<npcs>
+	<npc id="barghest" type="CRITTER_AWAKENED">
+		<attributes>
+			<attribute id="BODY"      value="7" />
+			<attribute id="AGILITY"   value="4" />
+			<attribute id="REACTION"  value="5" />
+			<attribute id="STRENGTH"  value="5" />
+			<attribute id="WILLPOWER" value="3" />
+			<attribute id="LOGIC"     value="2" />
+			<attribute id="INTUITION" value="5" />
+			<attribute id="CHARISMA"  value="5" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="5" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="astral"       value="4"/>
+			<skillval ref="athletics"    value="5"/>
+			<skillval ref="close_combat" value="8"/>
+			<skillval ref="influence"    value="5">
+				<skillspec ref="influence/intimidation" />
+			</skillval>
+			<skillval ref="outdoors"     value="5"/>
+			<skillval ref="perception"   value="6"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="armor" value="4"/>
+			<critterpowerval ref="dual_natured" />
+		</critterpowers>
+	</npc>
+	<npc id="basilisk" type="CRITTER_AWAKENED">
+		<attributes>
+			<attribute id="BODY"      value="6" />
+			<attribute id="AGILITY"   value="2" />
+			<attribute id="REACTION"  value="3" />
+			<attribute id="STRENGTH"  value="6" />
+			<attribute id="WILLPOWER" value="4" />
+			<attribute id="LOGIC"     value="1" />
+			<attribute id="INTUITION" value="3" />
+			<attribute id="CHARISMA"  value="1" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="4" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="athletics"    value="5">
+				<skillspec ref="athletics/swimming" />
+			</skillval>
+			<skillval ref="close_combat" value="6"/>
+			<skillval ref="perception"   value="4"/>
+			<skillval ref="stealth"      value="3"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="armor" value="7"/>
+			<critterpowerval ref="natural_weapon" />
+			<critterpowerval ref="petrification" />
+		</critterpowers>
+	</npc>
+</npcs>

@@ -8,10 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import de.rpgframework.genericrpg.chargen.RecommendationState;
-import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.MagicOrResonanceOption;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.Tradition;
@@ -84,7 +82,6 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			if (tmp instanceof ValueModification) {
 				ValueModification mod = (ValueModification)tmp;
 				if (mod.getReferenceType()==ShadowrunReference.MAGIC_RESO) {
-					MagicOrResonanceType opt = mod.getResolvedKey();
 					available.put(mod.getResolvedKey(), mod.getValue());
 					logger.log(Level.INFO, "Allow "+mod.getKey()+" with "+mod.getValue()+" points in attribute");
 				} else {
@@ -108,6 +105,10 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 				logger.log(Level.INFO, "Selected "+type.getId()+" grants "+points+" RESONANCE");
 				unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), points));
 			}
+			// For mystic adepts
+			SR6PrioritySettings sett = (SR6PrioritySettings)model.getCharGenSettings(SR6PrioritySettings.class);
+			sett.mysticAdeptMaxPoints = points;
+			sett.mysticAdeptPowerPoints = Math.max(points, sett.mysticAdeptPowerPoints);
 		}
 		
 		return unprocessed;
