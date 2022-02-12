@@ -105,7 +105,7 @@
        <checkmod ref="influence" type="SKILL" what="EDGE" value="1"/>
      </modifications>
      <requires>
-         <datareq type="QUALITY" ref="nocturnal"/>
+         <datareq type="QUALITY" ref="nocturnal" negate="true"/>
      </requires>
    </quality>
    <quality id="tough_gut" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
@@ -413,7 +413,7 @@
    <quality id="astral_hazing_non_awakened" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_ANOMALIES">
    	<requires>
    		<selreq>
-   			<datareq type="MAGIC_RESO" ref="mundance" />
+   			<datareq type="MAGIC_RESO" ref="mundane" />
    			<datareq type="MAGIC_RESO" ref="technomancer"/>
    		</selreq>
    	</requires>
