@@ -45,7 +45,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	public SR6CharacterViewLayout() {
 		initPages();
 		
-		setOnBackAction(ev -> logger.log(Level.INFO, "BACK action"));
+		setOnBackAction(ev -> closeRequested());
 	}
 	
 	//-------------------------------------------------------------------
@@ -163,6 +163,11 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	@Override
 	public void setResponsiveMode(WindowMode value) {
 		logger.log(Level.WARNING, "Mode "+value);
+	}
+
+	//-------------------------------------------------------------------
+	private void closeRequested() {
+		logger.log(Level.INFO, "ENTER closeRequested");
 	}
 
 }

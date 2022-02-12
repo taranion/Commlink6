@@ -72,6 +72,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		
 		initPages();
 		initInteractivtiy();
+		setShowProgress(false);
 		refresh();
 	}
 	

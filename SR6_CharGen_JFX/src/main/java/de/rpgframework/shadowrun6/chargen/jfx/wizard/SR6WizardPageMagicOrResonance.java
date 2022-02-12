@@ -98,6 +98,8 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 		});
 		
 		initInteractivity();
+		
+		refresh();
 	}
 	
 	//-------------------------------------------------------------------
@@ -225,6 +227,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			if (param[0] instanceof PointBuyCharacterGenerator) {
 				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith());
 			}
+			refresh();
 		} else {
 			super.handleControllerEvent(type, param);
 		}

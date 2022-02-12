@@ -3,12 +3,12 @@ package de.rpgframework.shadowrun6;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.Choice;
@@ -17,8 +17,11 @@ import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.PriorityTable;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -36,6 +39,8 @@ import de.rpgframework.shadowrun6.proc.ResetModifications;
 public class Shadowrun6Tools {
 	
 	private final static Logger logger = System.getLogger("de.rpgframework.shadowrun6");
+
+	private static MultiLanguageResourceBundle RES;
 
 	public final static List<Class<? extends ProcessingStep>> RECALCULATE_STEPS = Arrays.asList(
 		ResetModifications.class,
@@ -67,6 +72,11 @@ public class Shadowrun6Tools {
 //		new CalculateEssence(),
 //		new CalculatePersona(),
 	);
+	
+	//-------------------------------------------------------------------
+	static {
+		RES = new MultiLanguageResourceBundle(Shadowrun6Tools.class.getName(), Locale.ENGLISH, Locale.GERMAN);
+	}
 
 	//-------------------------------------------------------------------
 	public static List<ProcessingStep> getCharacterProcessingSteps(Shadowrun6Character model) {
@@ -288,17 +298,41 @@ public class Shadowrun6Tools {
 	public static String getRequirementString(Requirement req, Locale loc) {
 		if (req instanceof ExistenceRequirement) {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
-//			switch ((ShadowrunReference)tmp.getType()) {
+			String prefix = (tmp.isNegate())?(RES.getString("require.negate")+" "):"";
+			switch ((ShadowrunReference)tmp.getType()) {
+			case MAGIC_RESO:
+				MagicOrResonanceType morType = Shadowrun6Core.getItem(MagicOrResonanceType.class, tmp.getKey());
+				if (morType==null)
+					return "Unknown "+tmp.getKey();
+				return prefix+morType.getName(loc);
+			case METATYPE:
+				SR6MetaType meta = Shadowrun6Core.getItem(SR6MetaType.class, tmp.getKey());
+				if ( meta==null)
+					return "Unknown "+tmp.getKey();
+				return prefix+ meta.getName(loc);
+			case QUALITY:
+				Quality qual = Shadowrun6Core.getItem(Quality.class, tmp.getKey());
+				if (qual==null)
+					return "Unknown "+tmp.getKey();
+				return prefix+qual.getName(loc);
+				
 //			case MASTERSHIP:
 //				Mastership master =  SplitterMondCore.getItem(Mastership.class, tmp.getKey());
 //				if (master==null) {
 //					return "Unknown "+SplitterMondCore.getI18nResources().getString("label.mastership")+" "+tmp.getKey();
 //				}
 //				return master.getName(loc);
-//			}
+			default:
+				Logging.logger.log(Level.ERROR, "Making cleartext of "+tmp.getType()+" existance req. not supported");
+			}
+		} else if (req instanceof AnyRequirement) {
+			AnyRequirement any = (AnyRequirement)req;
+			List<String> names = any.getOptionList().stream().map(r -> getRequirementString(r,loc)).toList();
+			return "("+String.join(", ", names)+")";
 		}
 
-		Logging.logger.log(Level.ERROR, "Missing string conversion for "+req.getClass());
+		Logging.logger.log(Level.ERROR, "Missing string conversion for "+req.getClass()+" and "+req.getType());
+		System.err.println("Shadowrun6Tool: Missing string conversion for "+req.getClass()+" and "+req.getType());
 		return req.toString();
 	}
 
@@ -315,5 +349,30 @@ public class Shadowrun6Tools {
 			tmp.setResolved(resolved);
 		}
 		
+	}
+
+	//-------------------------------------------------------------------
+	public static boolean isRequirementMet(Shadowrun6Character model, Requirement req) {
+		if (req instanceof ExistenceRequirement) {
+			ExistenceRequirement tmp = (ExistenceRequirement)req;
+			boolean negated = tmp.isNegate();
+			ShadowrunReference type = (ShadowrunReference)tmp.getType();			
+			DataItem item = ShadowrunReference.resolve(type, req.getKey());
+			switch (type) {
+			case QUALITY:
+				if (negated) return !model.hasQuality(req.getKey());
+				return model.hasQuality(req.getKey());
+			case METATYPE:
+				if (model.getMetatype()==null) return false;
+				if (negated) return !model.getMetatype().getId().equals(req.getKey());
+				return model.getMetatype().getId().equals(req.getKey());
+			case MAGIC_RESO:
+				
+			}
+			
+		}
+		System.err.println("Shadowrun6Tool: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
+		logger.log(Level.WARNING,"ToDo: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
+		return false;
 	}
 }

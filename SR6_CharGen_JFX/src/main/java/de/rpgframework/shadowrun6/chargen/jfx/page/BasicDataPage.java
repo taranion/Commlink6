@@ -1,5 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.jfx.page;
 
+import java.lang.System.Logger.Level;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.prelle.javafx.JavaFXConstants;
@@ -10,11 +12,14 @@ import org.prelle.javafx.Section;
 import com.onexip.flexboxfx.FlexBox;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.RPGFrameworkJavaFX;
 import de.rpgframework.jfx.section.AppearanceSection;
+import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
@@ -39,6 +44,8 @@ public class BasicDataPage extends Page implements IShadowrunCharacterController
 	private Section secAttrib;
 	private QualitySection secQualities;
 	
+	private OptionalNodePane layout;
+	
 	//-------------------------------------------------------------------
 	public BasicDataPage() {
 		// Flow 1
@@ -61,7 +68,7 @@ public class BasicDataPage extends Page implements IShadowrunCharacterController
 		ScrollPane scroll = new ScrollPane(new VBox(20,flex, flex2));
 		scroll.setFitToWidth(true);
 		
-		OptionalNodePane layout = new OptionalNodePane(scroll, new Label("Langer Text"));
+		layout = new OptionalNodePane(scroll, new Label("Langer Text"));
 		layout.setTitle("Erklärung");
 		setContent(layout);
 //		setTitle("Basics");
@@ -110,7 +117,14 @@ public class BasicDataPage extends Page implements IShadowrunCharacterController
 	
 	//-------------------------------------------------------------------
 	private void initQualities() {
-		secQualities = new QualitySection(ResourceI18N.get(RES, "page.basicdata.section.qualities.title"));
+		secQualities = new QualitySection(ResourceI18N.get(RES, "page.basicdata.section.qualities.title"),
+				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
+			System.getLogger("shadowrun6").log(Level.INFO, "ShowHelpFor "+n);
+			if (n!=null) {
+				layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			}
+		});
 //		((QualitySection)secQualities).updateController(ctrl);
 	}
 	

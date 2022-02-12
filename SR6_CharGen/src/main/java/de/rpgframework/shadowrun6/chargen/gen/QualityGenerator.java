@@ -17,11 +17,13 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ChoiceOption;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -180,6 +182,18 @@ public class QualityGenerator extends ControllerImpl<Quality> implements IQualit
 	 */
 	@Override
 	public Possible canBeSelected(Quality value, Decision... decisions) {
+		// Check if all requirements are met
+		List<Requirement> notMet = new ArrayList<>();
+		for (Requirement req : value.getRequirements()) {
+			if (!Shadowrun6Tools.isRequirementMet(getModel(), req)) {
+				notMet.add(req);
+			}
+		}
+		if (notMet.size()>0) {
+			return new Possible(notMet, (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		}
+		
+		
 		int karma = value.getKarmaCost();
 		List<Choice> requiredChoices = value.getChoices();
 		for (Decision dec : decisions) {

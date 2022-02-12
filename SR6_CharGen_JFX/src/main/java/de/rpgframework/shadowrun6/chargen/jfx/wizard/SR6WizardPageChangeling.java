@@ -28,10 +28,13 @@ import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.QualityFilterNode;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import javafx.geometry.Insets;
+import javafx.scene.layout.HBox;
 
 /**
  * @author prelle
@@ -45,9 +48,11 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 
 	private GeneratorWrapper charGen;
 	
+	private Function<Requirement,String> requirementResolver;
 	private ComplexDataItemControllerNode<Quality, QualityValue> selection;
 	private GenericDescriptionVBox<Quality> bxDescription;
 	private OptionalNodePane layout;
+	private NumberUnitBackHeader backHeader;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageChangeling(Wizard wizard, GeneratorWrapper charGen) {
@@ -64,10 +69,12 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	//-------------------------------------------------------------------
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void initComponents() {
+		requirementResolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
+
 		selection = new ComplexDataItemControllerNode<>(charGen.getQualityController());
 		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.METAGENIC));
 		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.METAGENIC);
-		
+		selection.setRequirementResolver(requirementResolver);
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "placeholder.available"));
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "placeholder.selected"));
 		
@@ -81,8 +88,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), selection.getController()));
 		
-		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
-		bxDescription = new GenericDescriptionVBox(resolver);
+		bxDescription = new GenericDescriptionVBox(requirementResolver);
 	}
 	
 	//-------------------------------------------------------------------
@@ -92,6 +98,16 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 //		AutoBox responsive = new AutoBox();
 //		responsive.getContent().addAll(selection, bxDescription);
 		setContent(layout);
+
+		// Back header
+		backHeader = new NumberUnitBackHeader("Karma");
+		backHeader.setValue(charGen.getModel().getKarmaFree());
+		HBox.setMargin(backHeader, new Insets(0,10,0,10));
+		if (ResponsiveControlManager.getCurrentMode()==WindowMode.EXPANDED) {
+			super.setBackHeader(null);
+		} else {
+			super.setBackHeader(backHeader);
+		}
 	}
 	
 	//-------------------------------------------------------------------
@@ -112,6 +128,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	 * Enable or disable page
 	 */
 	private void refresh() {
+		backHeader.setValue(charGen.getModel().getKarmaFree());
 		BodyType type = charGen.getModel().getBodytype();
 		if (type!=null) {
 			// Enable or disable page

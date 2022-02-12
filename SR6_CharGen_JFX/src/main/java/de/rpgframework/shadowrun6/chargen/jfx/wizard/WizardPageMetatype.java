@@ -22,12 +22,14 @@ import de.rpgframework.jfx.DataItemSpinnerPane;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6ReferenceTypeConverter;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -59,6 +61,7 @@ public class WizardPageMetatype extends WizardPage {
 	private TextField tfWeight;
 	private ChoiceBox<BodyType> cbSpecialBody;
 	private FlowPane customNode1;
+	private NumberUnitBackHeader backHeader;
 	
 	//-------------------------------------------------------------------
 	public WizardPageMetatype(Wizard wizard, GeneratorWrapper charGen) {
@@ -194,6 +197,16 @@ public class WizardPageMetatype extends WizardPage {
 		} else {
 			customNode1.setStyle("-fx-max-width: 12em");
 		}
+
+		// Back header
+		backHeader = new NumberUnitBackHeader("Karma");
+		backHeader.setValue(charGen.getModel().getKarmaFree());
+		HBox.setMargin(backHeader, new Insets(0,10,0,10));
+		if (ResponsiveControlManager.getCurrentMode()==WindowMode.EXPANDED) {
+			super.setBackHeader(null);
+		} else {
+			super.setBackHeader(backHeader);
+		}
 	}
 	
 	//-------------------------------------------------------------------
@@ -258,6 +271,7 @@ public class WizardPageMetatype extends WizardPage {
 	//-------------------------------------------------------------------
 	private void refresh() {
 		Shadowrun6Character model = charGen.getModel();
+		backHeader.setValue(model.getKarmaFree());
 		cbGender.setValue(model.getGender());
 //		tfHair.setText(charGen.getModel().getHairColor());
 //		tfEyes.setText(charGen.getModel().getEyeColor());
