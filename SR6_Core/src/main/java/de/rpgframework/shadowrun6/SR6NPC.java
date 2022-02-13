@@ -23,6 +23,15 @@ public class SR6NPC extends ANPC<ShadowrunAttribute, SR6Skill, SR6SkillValue, SR
 	 * @return Error message or NULL
 	 */
 	public void validate() throws DataErrorException {
+		// Validate skill references
+		for (SR6SkillValue tmp : skills) {
+			if (tmp.getModifyable()==null) {
+				SR6Skill res = ShadowrunReference.SKILL.resolveAsDataItem(tmp.getKey());
+				if (res==null)
+					throw new DataErrorException(res, "Error in NPC '"+id+"': No spell with id '"+tmp.getKey()+"' found");
+				tmp.setResolved(res);
+			}
+		}
 		// Validate spell references
 		for (SpellValue<SR6Spell> tmp : spells) {
 			if (tmp.getResolved()==null) {

@@ -45,7 +45,7 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 	 */
 	@Override
 	public SR6Skill getModifyable() {
-		return (SR6Skill) skill;
+		return (SR6Skill) resolved;
 	}
 
 	//-------------------------------------------------------------------
@@ -54,10 +54,10 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 	 */
 	@Override
 	public SR6Skill getSkill() {
-		if (skill!=null)			
-			return (SR6Skill) skill;
-		skill = ShadowrunReference.resolve(ShadowrunReference.SKILL, id);
-		return (SR6Skill) skill;
+		if (resolved!=null)			
+			return (SR6Skill) resolved;
+		resolved = ShadowrunReference.resolve(ShadowrunReference.SKILL, id);
+		return (SR6Skill) resolved;
 	}
 
 }

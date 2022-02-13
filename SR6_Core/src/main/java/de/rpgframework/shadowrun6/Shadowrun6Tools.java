@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.ProcessingStep;
@@ -327,7 +328,7 @@ public class Shadowrun6Tools {
 			}
 		} else if (req instanceof AnyRequirement) {
 			AnyRequirement any = (AnyRequirement)req;
-			List<String> names = any.getOptionList().stream().map(r -> getRequirementString(r,loc)).toList();
+			List<String> names = any.getOptionList().stream().map(r -> getRequirementString(r,loc)).collect(Collectors.toList());
 			return "("+String.join(", ", names)+")";
 		}
 
