@@ -107,7 +107,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		logger.log(Level.INFO, "ENTER loadRuleSpecific");
 		
 		try {
-			Shadowrun6Character rawChar = Shadowrun6Core.load(raw);
+			Shadowrun6Character rawChar = Shadowrun6Core.decode(raw);
 			Shadowrun6Tools.resolveChar(rawChar);
 			return rawChar;
 		} catch (Exception e) {

@@ -14,8 +14,8 @@
    <power id="combat_sense"      cost="0.5" levels="true" act="PASSIVE">
      <modifications>
         <relevancemod topic="COMBAT" />
-        <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL" value="1"/>
-        <checkmod type="POOL" ref="DEFENSE_POOL" value="1" what="BONUS" cond="y" />
+        <!--valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL" value="1"/-->
+        <!--checkmod type="ATTRIBUTE" ref="DEFENSE_POOL" value="1" what="BONUS" cond="y" /-->
      </modifications>
    </power>
    <power id="critical_strike"   cost="1" levels="true" act="PASSIVE">
@@ -64,7 +64,7 @@
    <power id="improved_reflexes"  cost="1.0" levels="true" max="4" act="PASSIVE">
      <modifications>
         <valmod type="ATTRIBUTE" ref="REACTION" value="1" set="AUGMENTED"/>
-        <valmod type="POOL" ref="INITIATIVE_DICE_PHYSICAL" value="1" set="AUGMENTED"/>
+        <valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_PHYSICAL" value="1" set="AUGMENTED"/>
      </modifications>
    </power>
    <power id="improved_sense"  cost="0.25" act="PASSIVE">
@@ -76,12 +76,12 @@
    <power id="kinesics"        cost="0.25" act="PASSIVE"/>
    <power id="mystic_armor"    cost="0.25" levels="true" act="PASSIVE">
      <modifications>
-        <valmod type="POOL" ref="DEFENSE_RATINGL" value="1" />
+        <!--valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="1" /-->
      </modifications>
    </power>
    <power id="pain_resistance" cost="0.25" levels="true" act="PASSIVE">
      <modifications>
-       <valmod type="RULE" ref="PAIN_TOLERANCE_HIGH" value="1"/>
+       <!--valmod type="RULE" ref="PAIN_TOLERANCE_HIGH" value="1"/-->
      </modifications>
    </power>
    <power id="rapid_healing"   cost="0.5" levels="true" act="PASSIVE"/>

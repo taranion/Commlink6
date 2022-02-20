@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.jfx.section;
 
+import java.lang.System.Logger.Level;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
@@ -13,6 +14,8 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -89,22 +92,31 @@ public class BasicDataSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-		tfStreetName.textProperty().addListener( (ov,o,n) -> {control.getModel().setName(n);});
+		tfStreetName.textProperty().addListener( (ov,o,n) -> {control.getModel().setName(n); control.runProcessors();});
 		tfRealName.textProperty().addListener( (ov,o,n) -> {control.getModel().setRealName(n);});
 		cbGender.getSelectionModel().selectedItemProperty().addListener((ov,o,n) -> control.getModel().setGender(n));
 		tfHeat.textProperty().addListener( (ov,o,n) -> {
 			try {
 				control.getModel().setHeat(Integer.parseInt(n));
 				tfHeat.getStyleClass().remove("invalid");
+				control.runProcessors();
 			} catch (NumberFormatException nfe) {
 				if (!tfHeat.getStyleClass().contains("invalid"))
 					tfHeat.getStyleClass().add("invalid");
 			}
-		});		
+		});	
+		
+		cbMOR.getSelectionModel().selectedItemProperty().addListener((ov,o,n) -> {
+			if (control instanceof SR6CharacterGenerator) {
+				((SR6CharacterGenerator)control).getMagicOrResonanceController().select(n);
+			}
+		});
 	}
 
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
+		System.getLogger(BasicDataSection.class.getPackageName()).log(Level.INFO, "updateController to "+ctrl);
+		System.err.println("updateController to "+ctrl);
 		this.control = ctrl;
 		refresh();
 	}
@@ -118,7 +130,7 @@ public class BasicDataSection extends Section {
 		tfRealName.setText(model.getRealName());
 		cbGender.setValue(model.getGender());
 		cbMetatype.setValue(model.getMetatype());
-		//cbMOR.setValue(model.getMagicOrResonance());
+		cbMOR.setValue(model.getMagicOrResonanceType());
 		tfHeat.setText(String.valueOf(model.getHeat()));
 	}
 

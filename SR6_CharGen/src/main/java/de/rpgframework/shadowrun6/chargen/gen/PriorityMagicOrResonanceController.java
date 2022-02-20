@@ -97,6 +97,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 		MagicOrResonanceType type = model.getMagicOrResonanceType();
 		if (type!=null) {
 			Integer points = available.get(type);
+			if (points==null) points=0;
 			// Grant MAGIC or Resonance points
 			if (type.usesMagic()) {
 				logger.log(Level.INFO, "Selected "+type.getId()+" grants "+points+" MAGIC");

@@ -17,8 +17,10 @@ import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
+import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -285,28 +287,33 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 		try {
 			// Reset values
 			pointsSkills   = 0;
-			pointsLangAndKnow = 0;
+			pointsLangAndKnow = model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed();
 			normalToDos.clear();
 			knowledgeToDos.clear();
 			
 			for (Modification tmp : previous) {
-				if (tmp instanceof ValueModification) {
+				if (tmp.getReferenceType()==ShadowrunReference.CREATION_POINTS) {
 					ValueModification mod = (ValueModification)tmp;
-					if (ApplyTo.POINTS==mod.getApplyTo()) {
-						ShadowrunReference ref = (ShadowrunReference)mod.getReferenceType();
-						switch (ref) {
-						case SKILL:
-							logger.log(Level.DEBUG, "Add "+mod.getValue()+" skill points from "+tmp.getSource());
-							pointsSkills += mod.getValue();
-							break;
-						case SKILL_KNOWLEDGE:
-							logger.log(Level.DEBUG, "Add "+mod.getValue()+" knowledge skill points from "+tmp.getSource());
-							pointsLangAndKnow += mod.getValue();
-							break;
-						default:
-							unprocessed.add(mod);
-						}						
-					}					
+					if (mod.getResolvedKey()==CreatePoints.SKILLS) {
+						pointsSkills += mod.getValue();
+						logger.log(Level.INFO, "Consume "+mod+" and set pointsSkills to "+pointsSkills);
+					} else {
+						if (ApplyTo.POINTS==mod.getApplyTo()) {
+							ShadowrunReference ref = (ShadowrunReference)mod.getReferenceType();
+							switch (ref) {
+							case SKILL:
+								logger.log(Level.DEBUG, "Add "+mod.getValue()+" skill points from "+tmp.getSource());
+								pointsSkills += mod.getValue();
+								break;
+							case SKILL_KNOWLEDGE:
+								logger.log(Level.DEBUG, "Add "+mod.getValue()+" knowledge skill points from "+tmp.getSource());
+								pointsLangAndKnow += mod.getValue();
+								break;
+							default:
+								unprocessed.add(mod);
+							}						
+						}					
+					}
 				} else {
 					unprocessed.add(tmp);
 				}
@@ -331,9 +338,11 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 					// If not enough, convert
 					if (required>0) {
 						per.points1 -= required;
-						logger.log(Level.WARNING, "Not enough skillpoints to pay {} - reduce it to ", key, per.points1);
+						logger.log(Level.WARNING, "Not enough skillpoints to pay {} - reduce it to {}", key, per.points1);
 					}
 				}
+				
+				// Update model
 			}
 			logger.log(Level.DEBUG, "Finish with {} skill points", pointsSkills);
 			if (logger.isLoggable(Level.TRACE))
@@ -356,7 +365,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			for (SR6SkillValue val : new ArrayList<>(model.getSkillValues())) {
 				if (!usedSkills.contains(val)) {
 					logger.log(Level.WARNING, "Skill {} was found in character, but not in skill generator settings", val);
-					model.getSkillValues().remove(val);
+//					model.getSkillValues().remove(val);
 				}
 			}
 		} catch (Exception e) {

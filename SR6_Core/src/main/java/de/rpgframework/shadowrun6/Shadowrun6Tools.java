@@ -344,12 +344,20 @@ public class Shadowrun6Tools {
 	 */
 	public static void resolveChar(Shadowrun6Character model) {
 		logger.log(Level.DEBUG, "ENTER resolveChar");
-		
-		for (QualityValue tmp : model.getQualities()) {
-			Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey());
-			tmp.setResolved(resolved);
+		try {
+			for (QualityValue tmp : model.getQualities()) {
+				Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+
+			for (SR6SkillValue tmp : model.getSkillValues()) {
+				SR6Skill resolved = Shadowrun6Core.getItem(SR6Skill.class, tmp.getKey());
+				if (resolved==null) logger.log(Level.ERROR, "Character {} contains unknown skill '{}'", model.getName(), tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+		} finally {
+			logger.log(Level.DEBUG, "LEAVE resolveChar");
 		}
-		
 	}
 
 	//-------------------------------------------------------------------

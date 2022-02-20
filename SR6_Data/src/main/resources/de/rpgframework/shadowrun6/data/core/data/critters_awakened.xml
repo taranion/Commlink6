@@ -27,7 +27,17 @@
 		<critterpowers>
 			<critterpowerval ref="armor" value="4"/>
 			<critterpowerval ref="dual_natured" />
+			<critterpowerval ref="enhanced_senses">
+			  
+			</critterpowerval>
+			<critterpowerval ref="fear" />
+			<critterpowerval ref="immunity" />
+			<critterpowerval ref="natural_weapon" />
+			<critterpowerval ref="paralyzing_howl" />
 		</critterpowers>
+		<gear>
+			<item ref="barghest_claws"/>
+		</gear>
 	</npc>
 	<npc id="basilisk" type="CRITTER_AWAKENED">
 		<attributes>

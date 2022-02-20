@@ -15,6 +15,8 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.character.CharacterIOException;
+import de.rpgframework.character.CharacterIOException.ErrorCode;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.data.DataSet;
@@ -119,8 +121,9 @@ public class Shadowrun6Core extends GenericCore {
 	}
 
 	//-------------------------------------------------------------------
-	public static List<SR6Skill> getSkills(SkillType type) {
-		List<SR6Skill> ret = getItemList(SR6Skill.class).stream().filter(sk -> sk.getType()==type).collect(Collectors.toList());
+	public static List<SR6Skill> getSkills(SkillType... types) {
+		List<SkillType> allowed = List.of(types);
+		List<SR6Skill> ret = getItemList(SR6Skill.class).stream().filter(sk -> allowed.contains(sk.getType())).collect(Collectors.toList());
 		Collections.sort(ret, new Comparator<SR6Skill>() {
 			public int compare(SR6Skill arg0, SR6Skill arg1) {
 				return Collator.getInstance().compare(arg0.getName(),  arg1.getName());
@@ -135,23 +138,19 @@ public class Shadowrun6Core extends GenericCore {
 	}
 
 	//-------------------------------------------------------------------
-	public static byte[] save(Shadowrun6Character character) {
+	public static byte[] encode(Shadowrun6Character character) throws CharacterIOException {
 		try {
 			StringWriter out = new StringWriter();
 			serializer.write(character, out);
 			return out.toString().getBytes(Charset.forName("UTF-8"));
 		} catch (IOException e) {
 			logger.log(Level.ERROR, "Failed generating XML for char",e);
-			StringWriter mess = new StringWriter();
-			mess.append("Failed saving character\n\n");
-			e.printStackTrace(new PrintWriter(mess));
-			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, mess.toString());
+			throw new CharacterIOException(ErrorCode.ENCODING_FAILED, "Failed generating XML", e);
 		}
-		return null;
 	}
 
 	//-------------------------------------------------------------------
-	public static Shadowrun6Character load(byte[] rawData) throws Exception {
+	public static Shadowrun6Character decode(byte[] rawData) throws Exception {
 		String data = new String(rawData, Charset.forName("UTF-8"));
 		return serializer.read(Shadowrun6Character.class, data);
 	}

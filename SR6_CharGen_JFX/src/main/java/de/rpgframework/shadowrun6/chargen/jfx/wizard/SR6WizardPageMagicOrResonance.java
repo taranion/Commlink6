@@ -196,19 +196,26 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 		Label hdAdept    = new Label(ResourceI18N.get(UI, "wizard.page.mortype.label.adept"));
 		hdMagician.getStyleClass().add("base");
 		hdAdept.getStyleClass().add("base");
-		lbTotal.setAlignment(Pos.CENTER);
-		lbTotal.setMaxWidth(Double.MAX_VALUE);
+		if (lbTotal != null) {
+			lbTotal.setAlignment(Pos.CENTER);
+			lbTotal.setMaxWidth(Double.MAX_VALUE);
+		}
 		GridPane mysticGrid = new GridPane();
 		mysticGrid.setStyle("-fx-vgap: 0.5em; -fx-hgap: 1em;"); 
 		mysticGrid.add(hdMagician, 0, 0, 2,1);
-		mysticGrid.add(   lbTotal, 2, 0);
-		mysticGrid.add(   hdAdept, 3, 0, 2,1);
-		mysticGrid.add(   lbMagic, 0, 1);
-		mysticGrid.add(    btnDec, 1, 1);
-		mysticGrid.add(    btnInc, 3, 1);
-		mysticGrid.add(   lbPower, 4, 1);
-		GridPane.setHalignment(lbMagic, HPos.RIGHT);
-		GridPane.setFillWidth(lbTotal, true);
+		try {
+			mysticGrid.add(   lbTotal, 2, 0);
+			mysticGrid.add(   hdAdept, 3, 0, 2,1);
+			mysticGrid.add(   lbMagic, 0, 1);
+			mysticGrid.add(    btnDec, 1, 1);
+			mysticGrid.add(    btnInc, 3, 1);
+			mysticGrid.add(   lbPower, 4, 1);
+			GridPane.setHalignment(lbMagic, HPos.RIGHT);
+			GridPane.setFillWidth(lbTotal, true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		TitledComponent tcTrad = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.tradition"), cbTradition);
 		TitledComponent tcDist = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.distribute"), mysticGrid);

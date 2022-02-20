@@ -53,6 +53,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	
 	//-------------------------------------------------------------------
 	public BasicDataPage2() {
+		super(ResourceI18N.get(RES, "page.basicdata.title"));
 		logger.log(Level.DEBUG, "init<>");
 		// Flow 1
 		initBaseData();
@@ -66,50 +67,21 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		initAttributes();
 		initQualities();
 		flex.getChildren().addAll(secAttrib, secQualities);
-//		FlexBox flex2 = new FlexBox();
-//		flex2.setHorizontalSpace(20);
-//		flex2.setVerticalSpace(20);
-//		flex2.getChildren().addAll(secAttrib, secQualities);
 		
-		ScrollPane scroll = new ScrollPane(new VBox(20,flex));
-		scroll.setFitToWidth(true);
-		
-		layout = new OptionalNodePane(scroll, new Label("Langer Text 2"));
-		layout.setTitle("Erklärung");
+		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 //		setTitle("Basics");
 		
-		
-//		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
-//			System.out.println("secQuality.showHelpFor: "+n);
-//			if (n==null) {
-//				layout.setOptional(null);
-//			} else {
-//				Label descTitle = new Label();
-//				descTitle.getStyleClass().add(JavaFXConstants.STYLE_HEADING3);
-//				descTitle.setStyle("-fx-text-fill: highlight");
-//				Label descSources = new Label();
-//				TextFlow description = new TextFlow();
-//				
-//				descTitle.setText(n.getName());
-//				QualityValue v = (QualityValue)n;
-//				descSources.setText(RPGFrameworkJavaFX.createSourceText(v.getResolved()));
-//				
-//				VBox box = new VBox(descTitle, descSources, description);
-//				RPGFrameworkJavaFX.parseMarkupAndFillTextFlow(description, v.getResolved().getDescription());
-//				layout.setOptional(box);
-//			}
-//		});
 	}
 	
 	//-------------------------------------------------------------------
 	private void initBaseData() {
 		secBaseData = new BasicDataSection(ResourceI18N.get(RES, "page.basicdata.section.basic.title"));
 		secBaseData.setMaxHeight(Double.MAX_VALUE);
-		FlexGridPane.setMinWidth(secBaseData, 2);
-		FlexGridPane.setMinHeight(secBaseData, 2);
-//		FlexGridPane.setMaxWidth(secBaseData, 3);
-//		FlexGridPane.setMediumHeight(secBaseData, 2);
+		FlexGridPane.setMinWidth(secBaseData, 4);
+		FlexGridPane.setMinHeight(secBaseData, 5);
+		FlexGridPane.setMediumWidth(secBaseData, 5);
+		FlexGridPane.setMediumHeight(secBaseData, 4);
 	}
 	
 	//-------------------------------------------------------------------
@@ -117,10 +89,10 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		secPortrait = new AppearanceSection();
 //		Image img = new Image("/mugshot.jpg");
 //		secPortrait.iView.setImage(img);
-		FlexGridPane.setMinWidth(secPortrait, 2);
-		FlexGridPane.setMediumWidth(secPortrait, 4);
-		FlexGridPane.setMinHeight(secPortrait, 3);
-		FlexGridPane.setMediumHeight(secPortrait, 2);
+		FlexGridPane.setMinWidth(secPortrait, 4);
+		FlexGridPane.setMediumWidth(secPortrait, 8);
+		FlexGridPane.setMinHeight(secPortrait, 7);
+		FlexGridPane.setMediumHeight(secPortrait, 4);
 	}
 	
 	//-------------------------------------------------------------------
@@ -129,8 +101,8 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 //		((AttributeSection)secAttrib).updateController(ctrl);
 		
 		FlexGridPane.setMinWidth(secAttrib, 4);
-		FlexGridPane.setMediumWidth(secAttrib, 5);
-		FlexGridPane.setMinHeight(secAttrib, 3);
+		FlexGridPane.setMediumWidth(secAttrib, 9);
+		FlexGridPane.setMinHeight(secAttrib, 7);
 	}
 	
 	//-------------------------------------------------------------------
@@ -139,8 +111,9 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 				ResourceI18N.get(RES, "page.basicdata.section.qualities.title"),
 				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 //		((QualitySection)secQualities).updateController(ctrl);
-		FlexGridPane.setMinWidth(secQualities, 2);
-		FlexGridPane.setMinHeight(secQualities, 3);
+		FlexGridPane.setMinWidth(secQualities, 4);
+		FlexGridPane.setMediumWidth(secQualities, 5);
+		FlexGridPane.setMinHeight(secQualities, 7);
 		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
 			System.getLogger("shadowrun6").log(Level.INFO, "ShowHelpFor "+n);
 			if (n!=null) {
@@ -160,10 +133,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		((AttributeSection)secAttrib).updateController(ctrl);
 		((QualitySection)secQualities).updateController(ctrl);
 		((AppearanceSection)secPortrait).updateController(ctrl);
-		secBaseData.refresh();
-		secAttrib.refresh();
-		secQualities.refresh();
-		secPortrait.refresh();
+		refresh();
 	}
 	
 	//-------------------------------------------------------------------
@@ -172,6 +142,14 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	 */
 	public SR6CharacterController getCharacterController() {
 		return control;
+	}
+	
+	//-------------------------------------------------------------------
+	public void refresh() {
+		secBaseData.refresh();
+		secAttrib.refresh();
+		secQualities.refresh();
+		secPortrait.refresh();
 	}
 	
 }

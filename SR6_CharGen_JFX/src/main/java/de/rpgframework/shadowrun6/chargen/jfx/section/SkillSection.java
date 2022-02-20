@@ -1,7 +1,10 @@
 package de.rpgframework.shadowrun6.chargen.jfx.section;
 
+import java.lang.System.Logger.Level;
+
 import org.prelle.javafx.Section;
 
+import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.jfx.rules.SkillTable;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
@@ -20,27 +23,28 @@ import javafx.scene.layout.VBox;
 public class SkillSection extends Section {
 
 	private SR6CharacterController control;
-	private SkillType type;
+	private SkillType[] type;
 
 	private SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue> table;
 
 	//-------------------------------------------------------------------
-	public SkillSection(String title, SR6CharacterController ctrl, SkillType type) {
+	public SkillSection(String title, SkillType... type) {
 		super(title, null);
-		this.control = ctrl;
 		this.type = type;
-		setId("skills-"+type.name().toLowerCase());
+		if (type.length==1)
+			setId("skills-"+type[0].name().toLowerCase());
+		else
+			setId("skills-multiple");
 		initComponents();
 		initLayout();
-		table.setData(Shadowrun6Core.getItemList(SR6Skill.class));
+//		table.setData(Shadowrun6Core.getItemList(SR6Skill.class));
 		refresh();
 	}
 
 	//-------------------------------------------------------------------
 	private void initComponents() {
+		System.getLogger(getClass().getPackageName()).log(Level.WARNING, "Skills = "+Shadowrun6Core.getSkills(type));
 		table = new SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue>(Shadowrun6Core.getSkills(type));
-		table.setController(control.getSkillController());
-		table.setModel(control.getModel());
 		table.setMaxHeight(Double.MAX_VALUE);
 	}
 
@@ -62,6 +66,17 @@ public class SkillSection extends Section {
 	//-------------------------------------------------------------------
 	public ReadOnlyObjectProperty<SR6SkillValue> selectedSkillProperty() {
 		return table.getSelectionModel().selectedItemProperty();
+	}
+
+	//-------------------------------------------------------------------
+	@SuppressWarnings("rawtypes")
+	public void updateController(CharacterController ctrl) {
+		control = (SR6CharacterController) ctrl;
+		System.getLogger(getClass().getPackageName()).log(Level.INFO, "#############updateController with model "+control.getModel());
+		if (control.getModel()==null) throw new NullPointerException("Controller has NULL as model");
+		table.setModel(control.getModel());
+		table.setController(control.getSkillController());
+		refresh();
 	}
 
 }

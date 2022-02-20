@@ -116,6 +116,32 @@
 		</modifications>
 	</priotableentry>
 
+	<priotableentry id="skillA" prio="A" type="SKILLS">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="SKILLS" value="32"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="skillB" prio="B" type="SKILLS">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="SKILLS" value="24"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="skillC" prio="C" type="SKILLS">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="SKILLS" value="20"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="skillD" prio="D" type="SKILLS">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="SKILLS" value="16"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="skillE" prio="E" type="SKILLS">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="SKILLS" value="10"/>
+		</modifications>
+	</priotableentry>
+
 </priotable>
 
 
