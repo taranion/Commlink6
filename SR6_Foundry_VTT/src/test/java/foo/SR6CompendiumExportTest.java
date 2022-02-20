@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -37,6 +39,7 @@ public class SR6CompendiumExportTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
 	}
@@ -73,25 +76,34 @@ public class SR6CompendiumExportTest {
 		byte[] data = modDeep.fos.toByteArray();
 		assertNotNull(data);
 		assertTrue(data.length>0);
-//		assertEquals(2,data.length);
+		byte[] zip = modDeep.fos.toByteArray();
+		File file = new File("/tmp/shadowrun6.zip");
+		if (file.exists())
+			file.delete();
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(zip);
+		fos.close();
+		System.out.println("Written to "+file.getAbsolutePath());
+		System.exit(1);
+		assertEquals(2,data.length);
 	}
 
-	//-------------------------------------------------------------------
-	@Test
-	public void testAllDE() throws IOException {
-		Function<Collection<PageReference>,Locale[]> callback = (references) -> new Locale[] {Locale.GERMAN};
-		
-		List<DataSet> sets = Shadowrun6Core.getDataSets();
-		Module modShallow = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, true);
-		assertNotNull(modShallow);
-		Gson gson = (new GsonBuilder()).setPrettyPrinting().create();
-//		System.out.println(gson.toJson(modShallow));
-		Module modDeep = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, false);
-		assertNotNull(modDeep);
-		byte[] data = modDeep.fos.toByteArray();
-		assertNotNull(data);
-		assertTrue(data.length>0);
+//	//-------------------------------------------------------------------
+//	@Test
+//	public void testAllDE() throws IOException {
+//		Function<Collection<PageReference>,Locale[]> callback = (references) -> new Locale[] {Locale.GERMAN};
+//		
+//		List<DataSet> sets = Shadowrun6Core.getDataSets();
+//		Module modShallow = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, true);
+//		assertNotNull(modShallow);
+//		Gson gson = (new GsonBuilder()).setPrettyPrinting().create();
+////		System.out.println(gson.toJson(modShallow));
+//		Module modDeep = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, false);
+//		assertNotNull(modDeep);
+//		byte[] data = modDeep.fos.toByteArray();
+//		assertNotNull(data);
+//		assertTrue(data.length>0);
 //		assertEquals(2,data.length);
-	}
+//	}
 
 }

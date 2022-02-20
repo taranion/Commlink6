@@ -1,16 +1,21 @@
 package de.rpgframework.eden.foundry.sr6;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -21,33 +26,28 @@ import com.google.gson.GsonBuilder;
 import de.rpgframework.eden.foundry.Language;
 import de.rpgframework.eden.foundry.Module;
 import de.rpgframework.eden.foundry.Pack;
+import de.rpgframework.foundry.ActorData;
+import de.rpgframework.foundry.ItemData;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.PageReference;
 import de.rpgframework.reality.Player;
+import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun6.SR6NPC;
-import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.foundry.ActorData;
 import de.rpgframework.shadowrun6.foundry.FVTTAdeptPower;
+import de.rpgframework.shadowrun6.foundry.FVTTCritterPower;
 import de.rpgframework.shadowrun6.foundry.FVTTGear;
-import de.rpgframework.shadowrun6.foundry.FVTTNPCActor;
 import de.rpgframework.shadowrun6.foundry.FVTTQuality;
-import de.rpgframework.shadowrun6.foundry.FVTTRitual;
-import de.rpgframework.shadowrun6.foundry.FVTTSkill;
 import de.rpgframework.shadowrun6.foundry.FVTTSpell;
-import de.rpgframework.shadowrun6.foundry.FVTTVehicleActor;
-import de.rpgframework.shadowrun6.foundry.FVTTWeapon;
-import de.rpgframework.foundry.ItemData;
+import de.rpgframework.shadowrun6.foundry.GeneralActor;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
-import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 /**
  * @author prelle
@@ -58,6 +58,72 @@ public class Shadowrun6CompendiumFactory {
 	private static Logger logger = System.getLogger("shadowrun6.compendium");
 
 	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	private final static String IMGROOT = "/home/data/shadowrun";
+
+	private final static String VALIDCHARS2 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	private final static String VALIDCHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
+	private final static Random RANDOM = new Random();
+	@Deprecated
+	private final static String createRandomID() {
+		StringBuffer buf = new StringBuffer();
+		for (int i=0; i<16; i++) {
+			buf.append(VALIDCHARS.charAt(RANDOM.nextInt(VALIDCHARS.length())));
+		}
+		return buf.toString();
+	}
+
+	//-------------------------------------------------------------------
+	private static void addImages(ZipOutputStream zipOut, String type, String id, ActorData<?> entry) throws IOException {
+		// Check for image
+		String imgPath = "images/"+type+"/" + id + ".webp";
+		String imgPath2= "images/"+type+"/" + id + ".jpg";
+		Path path = Paths.get(IMGROOT, imgPath);
+		Path path2 = Paths.get(IMGROOT, imgPath);
+		if (Files.exists(path)) {
+//			logger.warn("Found image "+path);
+			FileInputStream fins = new FileInputStream(path.toFile());
+			entry.img = "modules/shadowrun6-data/" + imgPath;
+			ZipEntry zipEntry = new ZipEntry(imgPath);
+			zipOut.putNextEntry(zipEntry);
+			zipOut.write(fins.readAllBytes());
+			fins.close();
+		} else if (Files.exists(path2)) {
+//			logger.warn("Found image "+path);
+			FileInputStream fins = new FileInputStream(path2.toFile());
+			entry.img = "modules/shadowrun6-data/" + imgPath2;
+			ZipEntry zipEntry = new ZipEntry(imgPath2);
+			zipOut.putNextEntry(zipEntry);
+			zipOut.write(fins.readAllBytes());
+			fins.close();
+		} else {
+			logger.log(Level.WARNING,"Missing image "+path);
+		}
+		
+		// Check for token
+		String tokPath = "tokens/"+type+"/" + id + ".png";
+		Path token = Paths.get(IMGROOT, tokPath);
+		if (Files.exists(token)) {
+//			logger.warn("Found token "+tokPath);
+			FileInputStream fins = new FileInputStream(token.toFile());
+			entry.token.img = "modules/shadowrun6-data/" + tokPath;
+			ZipEntry zipEntry = new ZipEntry(tokPath);
+			zipOut.putNextEntry(zipEntry);
+			zipOut.write(fins.readAllBytes());
+			fins.close();
+		} else {
+			logger.log(Level.WARNING,"Missing token "+tokPath);
+			if (Files.exists(path)) {
+				logger.log(Level.WARNING,"Use image alternative "+path);
+				FileInputStream fins = new FileInputStream(path.toFile());
+				entry.token.img = "modules/shadowrun6-data/" + path;
+				ZipEntry zipEntry = new ZipEntry(tokPath);
+				zipOut.putNextEntry(zipEntry);
+				zipOut.write(fins.readAllBytes());
+				fins.close();
+			}
+		}
+		
+	}
 	
 	//-------------------------------------------------------------------
 	private static String createSourceText(DataItem item, Locale loc) {
@@ -91,18 +157,20 @@ public class Shadowrun6CompendiumFactory {
 			module.setVersion("0.0.2");  // For ZIP
 		}
 		module.setMinimumCoreVersion("0.8.0");
-		module.setCompatibleCoreVersion("9.242");
+		module.setCompatibleCoreVersion("9.249");
 		module.setAuthor("Stefan Prelle");
 		
 		module.fos = new ByteArrayOutputStream();
         ZipOutputStream zipOut = new ZipOutputStream(module.fos);
 		
 		createAdeptPowers(module, zipOut, localeCallback, shallow);
+		createCritterPowers(module, zipOut, localeCallback, shallow);
 		createQualities  (module, zipOut, sets, localeCallback, shallow);
 		createSpells     (module, zipOut, localeCallback, shallow);
 		createWeapons    (module, zipOut, localeCallback, shallow);
 		createVehicle    (module, zipOut, localeCallback, shallow);
-//		createNPCs       (module, zipOut, localeCallback, shallow);
+		createGrunts     (module, zipOut, localeCallback, shallow);
+		createCritter    (module, zipOut, localeCallback, shallow);
 		
 		for (Language lang : module.getLanguages()) {
         	ZipEntry zipEntry = new ZipEntry(lang.getPath());
@@ -153,12 +221,48 @@ public class Shadowrun6CompendiumFactory {
 				module.addTranslation(loc.getLanguage(), "adeptpower."+tmp.getId()+".src", createSourceText(tmp, loc));
 			}
 			ItemData<FVTTAdeptPower> entry = Converter.convertAdeptPower(tmp, locales[0]);
-			entry._id  = tmp.getId();
+//			entry._id  = tmp.getId();
+			entry._id  = createRandomID();
 			buf.append(gson.toJson(entry));
 			buf.append('\n');
 		}
 		
     	ZipEntry zipEntry = new ZipEntry("packs/adeptpowers.db");
+    	zipOut.putNextEntry(zipEntry);
+    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createCritterPowers(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
+		Pack pack = new Pack();
+		pack.setName("shadowrun6-critterpowers");
+		pack.setLabel("Critter Powers");
+		pack.setEntity("Item");
+		pack.setPath("packs/critterpowers.db");
+		pack.setSystem("shadowrun6-eden");
+		module.getPacks().add(pack);
+		
+		if (shallow)
+			return;
+		
+		StringBuffer buf = new StringBuffer();
+		Gson gson = new GsonBuilder().create();
+		for (CritterPower tmp : Shadowrun6Core.getItemList(CritterPower.class)) {
+			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
+			for (Locale loc : locales) {
+				module.addTranslation(loc.getLanguage(), "critterpower."+tmp.getId()+".desc", tmp.getDescription(loc));
+				module.addTranslation(loc.getLanguage(), "critterpower."+tmp.getId()+".name", tmp.getName(loc));
+				module.addTranslation(loc.getLanguage(), "critterpower."+tmp.getId()+".src", createSourceText(tmp, loc));
+			}
+			ItemData<FVTTCritterPower> entry = Converter.convert(tmp, locales[0]);
+//			entry._id  = tmp.getId();
+			entry._id  = createRandomID();
+			buf.append(gson.toJson(entry));
+			buf.append('\n');
+		}
+		
+    	ZipEntry zipEntry = new ZipEntry("packs/critterpowers.db");
     	zipOut.putNextEntry(zipEntry);
     	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
 		return;
@@ -179,16 +283,17 @@ public class Shadowrun6CompendiumFactory {
 		
 		StringBuffer buf = new StringBuffer();
 		Gson gson = new GsonBuilder().create();
-		for (SR6Spell spell : Shadowrun6Core.getItemList(SR6Spell.class)) {
+		for (ASpell spell : Shadowrun6Core.getItemList(ASpell.class)) {
 			Locale[] locales = localeCallback.apply(spell.getPageReferences());
-			logger.log(Level.INFO, "Locales = "+Arrays.toString(locales));
+//			logger.log(Level.INFO, "Locales = "+Arrays.toString(locales));
 			for (Locale loc : locales) {
 				module.addTranslation(loc.getLanguage(), "spell."+spell.getId()+".desc", spell.getDescription(loc));
 				module.addTranslation(loc.getLanguage(), "spell."+spell.getId()+".name", spell.getName(loc));
 				module.addTranslation(loc.getLanguage(), "spell."+spell.getId()+".src", createSourceText(spell, loc));
 			}
 			
-			ItemData<FVTTSpell> entry = Converter.convertSpell(spell, locales[0]);
+			ItemData<FVTTSpell> entry = Converter.convertSpell((SR6Spell) spell, locales[0]);
+			entry._id  = createRandomID();
 			buf.append(gson.toJson(entry));
 			buf.append('\n');
 		}
@@ -231,7 +336,8 @@ public class Shadowrun6CompendiumFactory {
 				module.addTranslation(loc.getLanguage(), "quality."+tmp.getId()+".src", createSourceText(tmp, loc));
 			}
 			ItemData<FVTTQuality> entry = Converter.convertQuality(tmp, locales[0]);
-			entry._id  = tmp.getId();
+			entry._id  = createRandomID();
+//			logger.log(Level.INFO, entry._id);
 			
 			buf.append(gson.toJson(entry));
 			buf.append('\n');
@@ -269,10 +375,13 @@ public class Shadowrun6CompendiumFactory {
 			}
 			
 			ItemData<FVTTGear> entry = Converter.convert(tmp, locales[0]);
-			entry._id  = tmp.getId();
+//			entry._id  = tmp.getId();
+			entry._id  = createRandomID();
+			
 			buf.append(gson.toJson(entry));
 			buf.append('\n');
 		}
+		
 		
     	ZipEntry zipEntry = new ZipEntry("packs/weapons.db");
     	zipOut.putNextEntry(zipEntry);
@@ -351,8 +460,8 @@ public class Shadowrun6CompendiumFactory {
 				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".name", tmp.getName(loc));
 				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".src", createSourceText(tmp, loc));
 			}
-			ActorData entry = Converter.convertActor(tmp, locales[0]);
-			entry._id  = tmp.getId();
+			ActorData<?> entry = Converter.convertActor(tmp, locales[0]);
+//			entry._id  = tmp.getId();
 //			entry.flags.core.sheetClass="shadowrun6-eden.Shadowrun6ActorSheetVehicleCompendium";
 			
 			buf.append(gson.toJson(entry));
@@ -365,37 +474,37 @@ public class Shadowrun6CompendiumFactory {
 		return;
 	}
 
-//	//-------------------------------------------------------------------
-//	private static void createNPCs(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
-//		Pack pack = new Pack();
-//		pack.setName("shadowrun6-grunts");
-//		pack.setLabel("Grunts");
-//		pack.setEntity("Actor");
-//		pack.setPath("packs/grunts.db");
-//		pack.setSystem("shadowrun6-eden");
-//		module.getPacks().add(pack);
-//		
-//		if (shallow)
-//			return;
-//		
-//		StringBuffer buf = new StringBuffer();
-//		Gson gson = new GsonBuilder().create();
-//		for (SR6NPC tmp : Shadowrun6Core.getItemList(SR6NPC.class)) {
-//			if (tmp.getType()!=NPCType.GRUNT)
-//				continue;
-//			
-//			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
-//			for (Locale loc : locales) {
-//				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".desc", tmp.getDescription(loc));
-//				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".name", tmp.getName(loc));
-//				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".src", createSourceText(tmp, loc));
-//			}
-//			CompendiumEntry entry = new CompendiumEntry();
-//			entry._id = tmp.getId();
-//			entry.name = tmp.getName(locales[0]);
-//			entry.type = "NPC";
-////			entry.flags.core.sheetClass="shadowrun6-eden.Shadowrun6ActorSheetVehicleCompendium";
-//			
+	//-------------------------------------------------------------------
+	private static void createGrunts(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
+		Pack pack = new Pack();
+		pack.setName("shadowrun6-grunts");
+		pack.setLabel("Grunts");
+		pack.setEntity("Actor");
+		pack.setPath("packs/grunts.db");
+		pack.setSystem("shadowrun6-eden");
+		module.getPacks().add(pack);
+		
+		if (shallow)
+			return;
+		
+		StringBuffer buf = new StringBuffer();
+		Gson gson = new GsonBuilder().create();
+		for (SR6NPC tmp : Shadowrun6Core.getItemList(SR6NPC.class)) {
+			if (tmp.getType()!=NPCType.GRUNT)
+				continue;
+			
+			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
+			for (Locale loc : locales) {
+				module.addTranslation(loc.getLanguage(), "npc."+tmp.getId()+".name", tmp.getName(loc));
+				module.addTranslation(loc.getLanguage(), "npc."+tmp.getId()+".src", createSourceText(tmp, loc));
+				if (!tmp.getDescription(loc).endsWith(".desc"))
+					module.addTranslation(loc.getLanguage(), "npc."+tmp.getId()+".desc", tmp.getDescription(loc));
+			}
+			
+			ActorData<? extends GeneralActor> entry = Converter.convertActor(tmp, locales[0]);
+			entry._id = tmp.getId();
+//			entry.flags.core.sheetClass="shadowrun6-eden.Shadowrun6ActorSheetVehicleCompendium";
+			
 //			FVTTNPCActor data = new FVTTNPCActor();
 //			data.attributes.bod.base = tmp.getAttribute(ShadowrunAttribute.BODY).getDistributed();
 //			data.attributes.bod.mod  = tmp.getAttribute(ShadowrunAttribute.BODY).getModifier();
@@ -438,15 +547,57 @@ public class Shadowrun6CompendiumFactory {
 ////			data.type  = spell.getType().name();
 ////			data.range = spell.getRange().name();
 //			entry.data = data;
-//			
-//			buf.append(gson.toJson(entry));
-//			buf.append('\n');
-//		}
-//		
-//    	ZipEntry zipEntry = new ZipEntry("packs/grunts.db");
-//    	zipOut.putNextEntry(zipEntry);
-//    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
-//		return;
-//	}
+			
+			buf.append(gson.toJson(entry));
+			buf.append('\n');
+		}
+		
+    	ZipEntry zipEntry = new ZipEntry("packs/grunts.db");
+    	zipOut.putNextEntry(zipEntry);
+    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createCritter(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
+		Pack pack = new Pack();
+		pack.setName("shadowrun6-critter");
+		pack.setLabel("Critter");
+		pack.setEntity("Actor");
+		pack.setPath("packs/critter.db");
+		pack.setSystem("shadowrun6-eden");
+		module.getPacks().add(pack);
+		
+		if (shallow)
+			return;
+		
+		StringBuffer buf = new StringBuffer();
+		Gson gson = new GsonBuilder().create();
+		for (SR6NPC tmp : Shadowrun6Core.getItemList(SR6NPC.class)) {
+			if (tmp.getType()!=NPCType.CRITTER && tmp.getType()!=NPCType.CRITTER_AWAKENED)
+				continue;
+			logger.log(Level.WARNING, "Critter "+tmp.getName()+" "+tmp.getType());
+			
+			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
+			for (Locale loc : locales) {
+				module.addTranslation(loc.getLanguage(), "critter."+tmp.getId()+".name", tmp.getName(loc));
+				module.addTranslation(loc.getLanguage(), "critter."+tmp.getId()+".src", createSourceText(tmp, loc));
+				if (!tmp.getDescription(loc).endsWith(".desc"))
+					module.addTranslation(loc.getLanguage(), "critter."+tmp.getId()+".desc", tmp.getDescription(loc));
+			}
+			
+			ActorData<? extends GeneralActor> entry = Converter.convertActor(tmp, locales[0]);
+			entry._id = createRandomID();
+			
+			addImages(zipOut, "critter", tmp.getId(), entry);
+			buf.append(gson.toJson(entry));
+			buf.append('\n');
+		}
+		
+    	ZipEntry zipEntry = new ZipEntry("packs/critter.db");
+    	zipOut.putNextEntry(zipEntry);
+    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
+		return;
+	}
 
 }

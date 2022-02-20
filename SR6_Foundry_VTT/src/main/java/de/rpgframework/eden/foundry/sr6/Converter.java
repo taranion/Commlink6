@@ -1,23 +1,40 @@
 package de.rpgframework.eden.foundry.sr6;
 
 import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.Locale;
 
 import de.rpgframework.foundry.ActorData;
 import de.rpgframework.foundry.ItemData;
+import de.rpgframework.genericrpg.data.Lifeform;
+import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.CritterPower;
+import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeatureReference;
 import de.rpgframework.shadowrun.SpellValue;
+import de.rpgframework.shadowrun6.SR6NPC;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.foundry.ActionSkills.ActionSkillValue;
 import de.rpgframework.shadowrun6.foundry.FVTTAdeptPower;
+import de.rpgframework.shadowrun6.foundry.FVTTCritter;
+import de.rpgframework.shadowrun6.foundry.FVTTCritterPower;
 import de.rpgframework.shadowrun6.foundry.FVTTGear;
+import de.rpgframework.shadowrun6.foundry.FVTTNPCActor;
 import de.rpgframework.shadowrun6.foundry.FVTTQuality;
 import de.rpgframework.shadowrun6.foundry.FVTTSpell;
 import de.rpgframework.shadowrun6.foundry.FVTTVehicleActor;
 import de.rpgframework.shadowrun6.foundry.FVTTWeapon;
+import de.rpgframework.shadowrun6.foundry.GeneralActor;
+import de.rpgframework.shadowrun6.foundry.LifeformActor;
+import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -52,6 +69,29 @@ public class Converter {
 //	}
 
 	//-------------------------------------------------------------------
+	public static ItemData<FVTTCritterPower> convert(CritterPower item, Locale loc) {
+		FVTTCritterPower data = new FVTTCritterPower();
+		// Definition fields
+		data.genesisID   = item.getId();
+		data.action 	 = item.getAction().name().toLowerCase();
+		data.duration    = item.getDuration().name().toLowerCase();
+		data.range       = item.getRange().name().toLowerCase();
+		data.type        = item.getType().name().toLowerCase();
+
+		return new ItemData<FVTTCritterPower>(item.getName(loc), "critterpower", data);
+	}
+
+	//-------------------------------------------------------------------
+	public static ItemData<FVTTCritterPower> convert(CritterPowerValue val, Locale loc) {
+		ItemData<FVTTCritterPower> ret = convert(val.getModifyable(), loc);
+		FVTTCritterPower fVal = ret.getData();
+		// Value fields
+//		fVal.rating = val.get
+
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
 	public static ItemData<FVTTGear> convert(ItemTemplate tmp, Locale loc) {
 		FVTTGear data = new FVTTGear();
 		if (ItemType.isWeapon(tmp.getItemType()))
@@ -69,8 +109,14 @@ public class Converter {
 		if (tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)!=null)
 			data.skillSpec  = tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION).getRawValue();
 
-		if ((data instanceof FVTTWeapon) && tmp.getAttribute(SR6ItemAttribute.DAMAGE)!=null) 	
+		if ((data instanceof FVTTWeapon) && tmp.getAttribute(SR6ItemAttribute.DAMAGE)!=null) {
 			((FVTTWeapon)data).dmgDef     = tmp.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue();
+			try {
+				((FVTTWeapon)data).dmg        = ((Damage)tmp.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getModifiedValue();
+			} catch (IllegalStateException e) {
+				logger.log(Level.ERROR, "Error converting {}: {}", tmp.getId(), e.toString());
+			}
+		}
 
 		return new ItemData<FVTTGear>(tmp.getName(loc), "gear", data);
 	}
@@ -154,6 +200,119 @@ public class Converter {
 		FVTTVehicleActor actor = new FVTTVehicleActor();
 
 		ActorData foundry = new ActorData(item.getName(loc), "vehicle", actor);
+		return foundry;
+	}
+
+	//-------------------------------------------------------------------
+	private static void fillAttributes(LifeformActor actor, Lifeform<ShadowrunAttribute,SR6Skill,SR6SkillValue> life) {
+		actor.attributes.agi.base = life.getAttribute(ShadowrunAttribute.AGILITY).getDistributed();
+		actor.attributes.agi.mod  = life.getAttribute(ShadowrunAttribute.AGILITY).getModifier();
+		actor.attributes.agi.pool = life.getAttribute(ShadowrunAttribute.AGILITY).getModifiedValue();
+		actor.attributes.bod.base = life.getAttribute(ShadowrunAttribute.BODY).getDistributed();
+		actor.attributes.bod.mod  = life.getAttribute(ShadowrunAttribute.BODY).getModifier();
+		actor.attributes.bod.pool = life.getAttribute(ShadowrunAttribute.BODY).getModifiedValue();
+		actor.attributes.cha.base = life.getAttribute(ShadowrunAttribute.CHARISMA).getDistributed();
+		actor.attributes.cha.mod  = life.getAttribute(ShadowrunAttribute.CHARISMA).getModifier();
+		actor.attributes.cha.pool = life.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue();
+		actor.attributes.inn.base = life.getAttribute(ShadowrunAttribute.INTUITION).getDistributed();
+		actor.attributes.inn.mod  = life.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
+		actor.attributes.inn.pool = life.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue();
+		actor.attributes.log.base = life.getAttribute(ShadowrunAttribute.LOGIC).getDistributed();
+		actor.attributes.log.mod  = life.getAttribute(ShadowrunAttribute.LOGIC).getModifier();
+		actor.attributes.log.pool = life.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue();
+		actor.attributes.rea.base = life.getAttribute(ShadowrunAttribute.REACTION).getDistributed();
+		actor.attributes.rea.mod  = life.getAttribute(ShadowrunAttribute.REACTION).getModifier();
+		actor.attributes.rea.pool = life.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue();
+		actor.attributes.str.base = life.getAttribute(ShadowrunAttribute.STRENGTH).getDistributed();
+		actor.attributes.str.mod  = life.getAttribute(ShadowrunAttribute.STRENGTH).getModifier();
+		actor.attributes.str.pool = life.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue();
+		actor.attributes.wil.base = life.getAttribute(ShadowrunAttribute.WILLPOWER).getDistributed();
+		actor.attributes.wil.mod  = life.getAttribute(ShadowrunAttribute.WILLPOWER).getModifier();
+		actor.attributes.wil.pool = life.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue();
+		actor.attributes.mag.base = life.getAttribute(ShadowrunAttribute.MAGIC).getDistributed();
+		actor.attributes.mag.mod  = life.getAttribute(ShadowrunAttribute.MAGIC).getModifier();
+		actor.attributes.mag.pool = life.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
+		actor.attributes.res.base = life.getAttribute(ShadowrunAttribute.RESONANCE).getDistributed();
+		actor.attributes.res.mod  = life.getAttribute(ShadowrunAttribute.RESONANCE).getModifier();
+		actor.attributes.res.pool = life.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue();
+		actor.edge.max = life.getAttribute(ShadowrunAttribute.EDGE).getModifiedValue();
+	}
+
+	//-------------------------------------------------------------------
+	private static void fillSkillValue(ActionSkillValue fvtt, SR6SkillValue val) {
+		if (val==null)
+			return;
+		fvtt.points = val.getDistributed();
+		fvtt.modifier = val.getModifier();
+		
+		for (SkillSpecializationValue<SR6Skill> spec : val.getSpecializations()) {
+			if (spec.getDistributed()==1)
+				fvtt.specialization = spec.getKey();
+			if (spec.getDistributed()==2)
+				fvtt.expertise = spec.getKey();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static void fillSkills(LifeformActor actor, Lifeform<ShadowrunAttribute,SR6Skill,SR6SkillValue> life) {
+		fillSkillValue( actor.skills.astral      , life.getSkillValue(Shadowrun6Core.getSkill("astral")));
+		fillSkillValue( actor.skills.athletics   , life.getSkillValue(Shadowrun6Core.getSkill("athletics")));
+		fillSkillValue( actor.skills.biotech     , life.getSkillValue(Shadowrun6Core.getSkill("biotech")));
+		fillSkillValue( actor.skills.close_combat, life.getSkillValue(Shadowrun6Core.getSkill("close_combat")));
+		fillSkillValue( actor.skills.con         , life.getSkillValue(Shadowrun6Core.getSkill("con")));
+		fillSkillValue( actor.skills.conjuring   , life.getSkillValue(Shadowrun6Core.getSkill("conjuring")));
+		fillSkillValue( actor.skills.cracking    , life.getSkillValue(Shadowrun6Core.getSkill("cracking")));
+		fillSkillValue( actor.skills.electronics    , life.getSkillValue(Shadowrun6Core.getSkill("electronics")));
+		fillSkillValue( actor.skills.enchanting  , life.getSkillValue(Shadowrun6Core.getSkill("enchanting")));
+		fillSkillValue( actor.skills.engineering , life.getSkillValue(Shadowrun6Core.getSkill("engineering")));
+		fillSkillValue( actor.skills.exotic_weapons, life.getSkillValue(Shadowrun6Core.getSkill("exotic_weapons")));
+		fillSkillValue( actor.skills.firearms    , life.getSkillValue(Shadowrun6Core.getSkill("firearms")));
+		fillSkillValue( actor.skills.influence   , life.getSkillValue(Shadowrun6Core.getSkill("influence")));
+		fillSkillValue( actor.skills.outdoors    , life.getSkillValue(Shadowrun6Core.getSkill("outdoors")));
+		fillSkillValue( actor.skills.perception  , life.getSkillValue(Shadowrun6Core.getSkill("perception")));
+		fillSkillValue( actor.skills.piloting    , life.getSkillValue(Shadowrun6Core.getSkill("piloting")));
+		fillSkillValue( actor.skills.sorcery     , life.getSkillValue(Shadowrun6Core.getSkill("sorcery")));
+		fillSkillValue( actor.skills.stealth     , life.getSkillValue(Shadowrun6Core.getSkill("stealth")));
+		fillSkillValue( actor.skills.tasking     , life.getSkillValue(Shadowrun6Core.getSkill("tasking")));
+	}
+
+	//-------------------------------------------------------------------
+	public static ActorData<? extends GeneralActor> convertActor(SR6NPC item, Locale loc) {
+		switch (item.getType()) {
+		case CRITTER:
+		case CRITTER_AWAKENED:
+			return convertCritterActor(item, loc);
+		case GRUNT:
+			return convertNPCActor(item, loc);
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	private static ActorData<FVTTCritter> convertCritterActor(SR6NPC data, Locale loc) {
+		FVTTCritter actor = new FVTTCritter();
+
+		ActorData<FVTTCritter> foundry = new ActorData<FVTTCritter>(data.getName(loc), "Critter", actor);
+		fillAttributes(foundry.data, data);
+		fillSkills(foundry.data, data);
+		
+		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
+		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
+		data.getGear().forEach(tmp -> {
+			foundry.addItem(convert(tmp,loc));});
+
+		return foundry;
+	}
+
+	//-------------------------------------------------------------------
+	private static ActorData<FVTTNPCActor> convertNPCActor(SR6NPC data, Locale loc) {
+		FVTTNPCActor actor = new FVTTNPCActor();
+
+		ActorData<FVTTNPCActor> foundry = new ActorData<FVTTNPCActor>(data.getName(loc), "NPC", actor);
+		fillAttributes(foundry.data, data);
+		fillSkills(foundry.data, data);
+		
+		
 		return foundry;
 	}
 
