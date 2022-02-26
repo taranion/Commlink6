@@ -4,7 +4,9 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
+import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -24,9 +26,13 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
  */
 public abstract class CommonSkillGenerator extends CommonSkillController implements SR6SkillGenerator {
 
+	protected static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(CommonSkillGenerator.class,
+			Locale.ENGLISH, Locale.GERMAN);
+
 	public final static String I18N_NOT_RAISED_POINT1 = "skill.error.notRaisedWithPoints1";
 	public final static String I18N_NOT_RAISED_POINT2 = "skill.error.notRaisedWithPoints2";
 	public final static String I18N_NOT_RAISED_KARMA = "skill.error.notRaisedWithKarma";
+	public final static String I18N_NOT_AVAILABLE_SPEC = "skill.error.specNotAvailable";
 
 	protected int pointsSkills;
 	protected int pointsLangAndKnow;
@@ -86,7 +92,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	}
 	
 	//-------------------------------------------------------------------
-	private PerSkillPoints getPerSkill(SR6SkillValue value) {
+	protected PerSkillPoints getPerSkill(SR6SkillValue value) {
 		try {
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			return settings.perSkill.get(value);
@@ -217,8 +223,11 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			return new Possible(I18N_SKILL_IS_MAXED);
 		}
 		
-		// Are there enoigh points
-		return new Possible(pointsLangAndKnow>0);
+		// Are there enough points		
+		if (pointsLangAndKnow<1){
+			return new Possible(I18N_NOT_RAISED_POINT2);
+		}
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------
@@ -227,16 +236,21 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	@Override
 	public OperationResult<SR6SkillValue> increasePoints2(SR6SkillValue value) {
-		Possible allowed = canBeIncreasedPoints2(value);
-		if (!allowed.get()) 
-			return new OperationResult<>(allowed);
-		
-		PerSkillPoints per = getPerSkill(value);
-		// Do increase
-		per.points2++;
-		
-		getCharacterController().runProcessors();
-		return new OperationResult<SR6SkillValue>(value);
+		logger.log(Level.INFO, "ENTER increasePoints2");
+		try {
+			Possible allowed = canBeIncreasedPoints2(value);
+			if (!allowed.get())
+				return new OperationResult<>(allowed);
+
+			PerSkillPoints per = getPerSkill(value);
+			// Do increase
+			per.points2++;
+
+			getCharacterController().runProcessors();
+			return new OperationResult<SR6SkillValue>(value);
+		} finally {
+			logger.log(Level.INFO, "LEAVE increasePoints2");
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -281,6 +295,10 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			return new Possible(I18N_SKILL_IS_MAXED);
 		}
 		
+		if (pointsSkills<1){
+			return new Possible(I18N_NOT_RAISED_POINT1);
+		}
+		
 		return Possible.TRUE;
 	}
 
@@ -303,8 +321,8 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	@Override
 	public OperationResult<SR6SkillValue> increasePoints(SR6SkillValue value) {
-		if (logger.isLoggable(Level.TRACE))
-			logger.log(Level.TRACE, "ENTER increasePoints({})", value.getModifyable().getId());
+//		if (logger.isLoggable(Level.TRACE))
+			logger.log(Level.INFO, "ENTER increasePoints({})", value.getModifyable().getId());
 
 		try {
 			Possible allowed = canBeIncreasedPoints(value);
@@ -334,6 +352,14 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		if (logger.isLoggable(Level.TRACE))
 			logger.log(Level.TRACE, "ENTER decreasePoints({})", value.getModifyable().getId());
 
+		
+		try {
+			throw new RuntimeException("Trace");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		try {
 			Possible allowed = canBeDecreasedPoints(value);
 			if (!allowed.get())

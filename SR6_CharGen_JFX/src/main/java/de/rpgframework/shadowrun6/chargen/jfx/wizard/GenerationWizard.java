@@ -56,7 +56,8 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageChangeling surge;
 	private SR6WizardPageMagicOrResonance magic;
 	private SR6WizardPageQualities qualities;
-	private WizardPageAttributes attrib;
+	private SR6WizardPageAttributes attrib;
+	private SR6WizardPageSkills skills;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
 		String name = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName());
@@ -88,6 +89,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case MAGIC_OR_RESONANCE: ret.add(magic); break;
 			case QUALITIES   : ret.add(qualities); break;
 			case ATTRIBUTES  : ret.add(   attrib); break;
+			case SKILLS      : ret.add(   skills); break;
 //			case RECOMMENDER : ret.add(profiles); break;
 			case NAME        : ret.add(   name); break;
 			default:
@@ -111,6 +113,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		magic  = new SR6WizardPageMagicOrResonance(this, wrapper);
 		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
+		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		name   = new WizardPageName<>(this, wrapper);
 		

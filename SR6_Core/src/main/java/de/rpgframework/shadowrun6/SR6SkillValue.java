@@ -36,7 +36,7 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 
 	//-------------------------------------------------------------------
 	public String toString() {
-		return id+"(distr="+distributed+")";
+		return ref+"(distr="+value+")";
 	}
 
 	//-------------------------------------------------------------------
@@ -56,7 +56,7 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 	public SR6Skill getSkill() {
 		if (resolved!=null)			
 			return (SR6Skill) resolved;
-		resolved = ShadowrunReference.resolve(ShadowrunReference.SKILL, id);
+		resolved = ShadowrunReference.resolve(ShadowrunReference.SKILL, ref);
 		return (SR6Skill) resolved;
 	}
 

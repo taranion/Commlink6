@@ -4,12 +4,15 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
-import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -21,7 +24,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  * @author prelle
  *
  */
-public abstract class CommonSkillController extends ControllerImpl<SR6Skill> implements SR6SkillController {
+public abstract class CommonSkillController extends ControllerImpl<SR6Skill> implements SR6SkillController, ComplexDataItemController<SR6Skill, SR6SkillValue> {
 	
 	protected final static Logger logger = System.getLogger(CommonSkillController.class.getPackageName()+".skill");
 	
@@ -136,22 +139,13 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		return available;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
+	 */
 	@Override
 	public List<SR6SkillValue> getSelected() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public double getSelectionCost(SR6Skill data) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double getDeselectionCost(SR6SkillValue value) {
-		// TODO Auto-generated method stub
-		return 0;
+		return model.getSkillValues();
 	}
 
 	//-------------------------------------------------------------------
@@ -159,7 +153,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	 * @see de.rpgframework.genericrpg.SelectionController#canBeSelected(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public Possible canBeSelected(SR6Skill skill) {
+	public Possible canBeSelected(SR6Skill skill, Decision... decisions) {
 		if (skill.isRestricted() && !available.contains(skill)) {
 			return new Possible(I18N_RESTRICTED_SKILL);
 		}
@@ -175,7 +169,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	public Possible canBeDeselected(SR6SkillValue value) {
 		if (!model.getSkillValues().contains(value)) return Possible.FALSE;
 		// If the skill has modifications, it should not be deletable
-		if (value.getModifier()>0)
+		if (value.getModifier()>0 || value.isAutoAdded())
 			return new Possible(I18N_SKILL_AUTOSELECT);
 		
 		return Possible.TRUE;
@@ -186,11 +180,11 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	 * @see de.rpgframework.genericrpg.SelectionController#select(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public OperationResult<SR6SkillValue> select(SR6Skill data) {
+	public OperationResult<SR6SkillValue> select(SR6Skill data, Decision...decisions) {
 		logger.log(Level.DEBUG, "ENTER select("+data+")");
 		try {
 			// Ensure selecting this skill is allowed 
-			Possible possible = canBeSelected(data);
+			Possible possible = canBeSelected(data, decisions);
 			if (!possible.get()) {
 				logger.log(Level.WARNING, "Tried to select a skill that is not valid to select: "+possible);
 				return new OperationResult<>(possible);
@@ -199,6 +193,11 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 			// Now add skill to character
 			SR6SkillValue ret = new SR6SkillValue(data, 1);
 			model.addSkillValue(ret);
+			logger.log(Level.DEBUG, "Added skill {} to model", data);
+			
+			for (Decision dec : decisions) {
+				ret.addDecision(dec);
+			}
 			
 			return new OperationResult<SR6SkillValue>(ret);			
 		} finally {
@@ -206,28 +205,61 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
 	@Override
 	public boolean deselect(SR6SkillValue value) {
-		// TODO Auto-generated method stub
-		return false;
+		logger.log(Level.DEBUG, "ENTER deselect("+value+")");
+		try {
+			// Ensure selecting this skill is allowed 
+			Possible possible = canBeDeselected(value);
+			if (!possible.get()) {
+				logger.log(Level.WARNING, "Tried to deselect a skill that is not valid to deselect: "+possible);
+				return false;
+			}
+			
+			// Now remove skill from character
+			model.removeSkillValue(value);
+			
+			return true;
+		} finally {
+			logger.log(Level.DEBUG, "LEAVE deselect("+value+")");			
+		}
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.ISkillController#getAvailableSpecializations()
+	 */
+	public List<SkillSpecialization<SR6Skill>> getAvailableSpecializations(SR6SkillValue skillVal) {
+		List<SkillSpecialization<SR6Skill>> ret = new ArrayList<>(); 
+		for (SkillSpecialization raw : skillVal.getSkill().getSpecializations()) {
+			ret.add(raw);
+		}
+		ret = ret.stream().filter(sp -> skillVal.getSpecializations().stream().allMatch(s2 -> !s2.getKey().equals(sp.getId()))).collect(Collectors.toList());
+		
+		return ret;
+		
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
 	@Override
-	public boolean needsOptionSelection(SR6Skill toSelect) {
-		// TODO Auto-generated method stub
-		return false;
+	public RecommendationState getRecommendationState(SR6SkillValue value) {
+		return RecommendationState.NEUTRAL;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getChoicesToDecide(de.rpgframework.genericrpg.data.DataItem)
+	 */
 	@Override
-	public List<?> getOptions(SR6Skill toSelect) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OperationResult<SR6SkillValue> select(SR6Skill data, Object option) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Choice> getChoicesToDecide(SR6Skill value) {
+		return value.getChoices();
 	}
 
 }

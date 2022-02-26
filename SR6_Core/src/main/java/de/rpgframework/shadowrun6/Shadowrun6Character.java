@@ -1,29 +1,24 @@
 package de.rpgframework.shadowrun6;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.prelle.simplepersist.Element;
-import org.prelle.simplepersist.ElementList;
 import org.prelle.simplepersist.Root;
 
 import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.classification.Gender;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.Tradition;
-import de.rpgframework.shadowrun6.items.ItemTemplate;
 
 /**
  * @author prelle
  *
  */
 @Root(name="sr6char")
-public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillValue> implements RuleSpecificCharacterObject<ShadowrunAttribute> {
+public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillValue> implements RuleSpecificCharacterObject<ShadowrunAttribute, SR6Skill, SR6SkillValue> {
 
 	@Element
 	private int heat;
@@ -48,7 +43,15 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return super.addSkillValue(value);
+
+		// You can have multiple times knowledge or language
+		// but other skills are unique
+		SkillType type = value.getModifyable().getType();
+		if (skills.contains(value) && !(type==SkillType.KNOWLEDGE || type==SkillType.LANGUAGE))
+			return value;
+//		removeSkillValue(value);
+		skills.add(value);
+		return value;
 	}
 
 	//-------------------------------------------------------------------

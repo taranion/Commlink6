@@ -165,6 +165,7 @@ public class Shadowrun6DataPlugin  {
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
+			e.printStackTrace();
 			System.exit(1);
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Failed loading data",e);

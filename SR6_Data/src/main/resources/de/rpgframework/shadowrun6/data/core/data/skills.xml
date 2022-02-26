@@ -119,6 +119,14 @@
         <skillspec id="decompiling"/>
         <skillspec id="registering"/>
     </skill>
-    <skill id="knowledge"  attr="LOGIC" type="KNOWLEDGE" untr="n" />
-    <skill id="language"  attr="LOGIC" type="LANGUAGE" untr="n" />
+    <skill id="knowledge"  attr="LOGIC" type="KNOWLEDGE" untr="n" >
+  		<choices>
+   		<choice type="TEXT" uuid="89ebc659-ba06-4732-b347-6b832842a55b"/>
+   	</choices>
+    </skill>
+    <skill id="language"  attr="LOGIC" type="LANGUAGE" untr="n" >
+  		<choices>
+   		<choice type="TEXT" uuid="a7103ee4-31fa-435d-ac42-08f7d4d1e80c"/>
+   	</choices>
+    </skill>
 </skills>

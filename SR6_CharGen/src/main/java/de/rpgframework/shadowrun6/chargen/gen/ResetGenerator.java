@@ -1,14 +1,16 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 public class ResetGenerator implements ProcessingStep {
 

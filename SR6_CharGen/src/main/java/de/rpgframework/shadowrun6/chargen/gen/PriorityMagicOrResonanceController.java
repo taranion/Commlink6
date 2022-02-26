@@ -71,7 +71,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 	 */
 	@Override
 	public List<Modification> process(List<Modification> previous) {
-		logger.log(Level.WARNING,"process()");
+		logger.log(Level.DEBUG,"process()");
 		List<Modification> unprocessed = new ArrayList<>();
 		
 		// Clear old available information

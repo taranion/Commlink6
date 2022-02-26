@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,7 +32,6 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
@@ -155,10 +155,13 @@ public class SR6ArchetypeTest {
 		skills.increase(sVal.get()); // 2
 		skills.increase(sVal.get()); // 3
 		assertEquals(3,model.getSkillValue(Shadowrun6Core.getSkill("athletics")).getDistributed());
+		assertEquals(13, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
 		
 		sVal = skills.select(Shadowrun6Core.getSkill("biotech"));
 		skills.increase(sVal.get()); // 2
-//		skills.select(sVal, Shadowrun6Core.getSkill("biotech").getSpecialization("first_aid"), false);
+		assertEquals(11, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
 		
 		sVal = skills.select(Shadowrun6Core.getSkill("close_combat"));
 		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 2
@@ -166,26 +169,49 @@ public class SR6ArchetypeTest {
 		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 4
 		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 5
 		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 6
-//		skills.select(sVal, Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed"), false);
+		assertEquals(5, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
 
 		sVal = skills.select(Shadowrun6Core.getSkill("outdoors"));
 		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 2
+		assertEquals(3, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
+		assertEquals(46, model.getKarmaFree());
 
 		sVal = skills.select(Shadowrun6Core.getSkill("perception"));
+		assertNotNull(sVal);
+		assertTrue(sVal.getError(), sVal.isPresent());
 		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 2
 		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 3
-		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 4
-//		skills.select(sVal, Shadowrun6Core.getSkill("perception").getSpecialization("visual"), false);
-
 		assertEquals(0, skills.getPointsLeft());
 		assertEquals(2, skills.getPointsLeft2());
-//		assertEquals(1, model.getSkillValues(SkillType.LANGUAGE).size());
-//		assertEquals(SkillValue.LANGLEVEL_NATIVE, model.getSkillValues(SkillType.LANGUAGE).get(0).getPoints());
+		assertEquals(46, model.getKarmaFree());
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 4
+		assertEquals(26, model.getKarmaFree());
+
+
+		SR6SkillValue tmp = model.getSkillValue(Shadowrun6Core.getSkill("athletics"));
+		skills.select(tmp, Shadowrun6Core.getSkill("athletics").getSpecialization("throwing"), false);
+		assertEquals(21, model.getKarmaFree());
+		tmp = model.getSkillValue(Shadowrun6Core.getSkill("biotech"));
+		skills.select(tmp, Shadowrun6Core.getSkill("biotech").getSpecialization("first_aid"), false);
+		assertEquals(16, model.getKarmaFree());
+		tmp = model.getSkillValue(Shadowrun6Core.getSkill("close_combat"));
+		skills.select(tmp, Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed"), false);
+		assertEquals(11, model.getKarmaFree());
+		tmp = model.getSkillValue(Shadowrun6Core.getSkill("perception"));
+		skills.select(tmp, Shadowrun6Core.getSkill("perception").getSpecialization("visual"), false);
+		assertEquals(6, model.getKarmaFree());
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
+		
+		assertEquals(1, model.getSkillValues(SkillType.LANGUAGE).size());
+		assertEquals(4, model.getSkillValues(SkillType.LANGUAGE).get(0).getDistributed());
 //		model.getSkillValues(SkillType.LANGUAGE).get(0).setName("English");
 		assertTrue(skills.canBeSelected(Shadowrun6Core.getSkill("knowledge")).get());
-//		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), "Fight Clubs") );
-//		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), "Fort Lewis Geography") );
-//		assertEquals(0, skills.getPointsLeft2());
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Fight Clubs")) );
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Fort Lewis Geography") ));
+		assertEquals(0, skills.getPointsLeft2());
 		
 		CarriedItem item = new CarriedItem(Shadowrun6Core.getItem(ItemTemplate.class, "bow"), null);
 		model.addCarriedItem(item);

@@ -65,7 +65,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#createCharacterController(de.rpgframework.character.RuleSpecificCharacterObject)
 	 */
 	@Override
-	protected CharacterController<?, ?> createCharacterController(RuleSpecificCharacterObject<?> model) {
+	protected CharacterController<?, ?> createCharacterController(RuleSpecificCharacterObject<?,?,?> model) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -103,7 +103,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#loadRuleSpecific(de.rpgframework.character.CharacterHandle)
 	 */
 	@Override
-	protected RuleSpecificCharacterObject<?> loadRuleSpecific(byte[] raw) {
+	protected RuleSpecificCharacterObject<?,?,?> loadRuleSpecific(byte[] raw) {
 		logger.log(Level.INFO, "ENTER loadRuleSpecific");
 		
 		try {

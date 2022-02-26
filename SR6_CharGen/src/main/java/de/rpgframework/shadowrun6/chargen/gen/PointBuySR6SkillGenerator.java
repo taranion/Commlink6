@@ -5,10 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import de.rpgframework.genericrpg.NumericalValueWith2PoolsController;
+import de.rpgframework.genericrpg.NumericalValueWith3PoolsController;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.chargen.RecommendationState;
+import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
+import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.SkillType;
@@ -25,7 +32,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PointBuySR6SkillGenerator extends CommonSkillGenerator {
+public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements NumericalValueWith2PoolsController<SR6Skill,SR6SkillValue> {
 
 	private int skillsFromCP;
 //	private int pointsLangAndKnow;
@@ -40,7 +47,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator {
 	 * @see de.rpgframework.genericrpg.SelectionController#canBeSelected(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public Possible canBeSelected(SR6Skill skill) {
+	public Possible canBeSelected(SR6Skill skill, Decision... dec) {
 		// Check if that skill is allowed
 		Possible allowed = super.canBeSelected(skill);
 		if (!allowed.get()) return allowed;
@@ -59,10 +66,10 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.SelectionController#select(de.rpgframework.genericrpg.data.DataItem)
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillController#select(SR6Skill, Decision[])
 	 */
 	@Override
-	public OperationResult<SR6SkillValue> select(SR6Skill data) {
+	public OperationResult<SR6SkillValue> select(SR6Skill data, Decision...decisions) {
 		logger.log(Level.DEBUG, "ENTER select("+data+")");
 		try {
 			OperationResult<SR6SkillValue> result = super.select(data);
@@ -296,6 +303,47 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator {
 	public String getColumn2() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
+		return Possible.FALSE;
+	}
+
+	public Possible canDeselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
+		return Possible.FALSE;
+	}
+	public OperationResult<SR6SkillValue> selectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
+		return new OperationResult<>();
+	}
+
+	public OperationResult<SR6SkillValue> deselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
+		return new OperationResult<>();
+	}
+
+	@Override
+	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec,
+			boolean expertise) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Possible canDeselectSpecialization(SR6SkillValue skillVal, SkillSpecializationValue<SR6Skill> spec) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OperationResult<SkillSpecializationValue<SR6Skill>> select(SR6SkillValue skillVal,
+			SkillSpecialization<SR6Skill> spec, boolean expertise) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deselect(SR6SkillValue skillVal, SkillSpecializationValue<SR6Skill> spec) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

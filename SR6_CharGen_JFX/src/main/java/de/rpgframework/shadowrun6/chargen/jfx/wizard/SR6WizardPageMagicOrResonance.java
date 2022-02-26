@@ -131,7 +131,6 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 	 */
 	@Override
 	protected Node getChoiceConfigNode(MagicOrResonanceType type) {
-		logger.log(Level.ERROR, "getChoiceConfigNode: {}", type);
 		if (type==null) return null;
 		
 		switch (type.getId()) {
