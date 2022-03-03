@@ -8,6 +8,8 @@ public enum CreatePoints {
 	
 	ADJUST,
 	ATTRIBUTES,
+	CHARACTER_POINTS,
+	LIFEPATH_MODULES,
 	SKILLS,
 
 }

@@ -87,7 +87,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			int required = old.getSum();
 			int invest   = Math.min(knowPoints, required);
 			if (invest>0) {
-				logger.log(Level.DEBUG, "Invest {} free knowledge skill points for {}", invest, key);
+				logger.log(Level.DEBUG, "Invest {0} free knowledge skill points for {1}", invest, key);
 				neu.points2 = invest;
 				required -= invest;
 				requiredPointsInKnowledgeSkills -= invest;
@@ -112,9 +112,9 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			return pos;
 		
 		// Now find out if it could be payed
-		if (pointsSkills>0)
+		if (points1>0)
 			return Possible.TRUE;
-		if (pointsLangAndKnow>0 && (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)) {
+		if (points2>0 && (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)) {
 			return Possible.TRUE;			
 		}
 		// No points left - maybe with karma?
@@ -134,13 +134,13 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 		try {
 			OperationResult<SR6SkillValue> result = super.select(data);
 			if (result.hasError()) {
-				logger.log(Level.WARNING, "Selecting {} failed, because {}",data.getId(), result.getMessages());
+				logger.log(Level.WARNING, "Selecting {0} failed, because {1}",data.getId(), result.getMessages());
 				return result;
 			}
 			
-			logger.log(Level.INFO, "Selected skill {}", data.getId());
+			logger.log(Level.INFO, "Selected skill {0}", data.getId());
 			if (decisions.length>0) {
-				logger.log(Level.INFO, "Decisions: {}", List.of(decisions));
+				logger.log(Level.INFO, "Decisions: {0}", List.of(decisions));
 				for (Decision dec : decisions) {
 					result.get().addDecision(dec);
 				}
@@ -151,10 +151,10 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			 */
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			PerSkillPoints per = new PerSkillPoints();
-			if ((data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE) && super.pointsLangAndKnow>0) {
+			if ((data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE) && super.points2>0) {
 				logger.log(Level.DEBUG, "pay with free knowledge skill points");
 				per.points2++;				
-			} else if (pointsSkills>0) {
+			} else if (points1>0) {
 				logger.log(Level.DEBUG, "pay with skill points");
 				per.points1++;		
 			} else {
@@ -180,11 +180,11 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 		try {
 			boolean success = super.deselect(data);
 			if (!success) {
-				logger.log(Level.WARNING, "Deselecting {} failed",data.getKey());
+				logger.log(Level.WARNING, "Deselecting {0} failed",data.getKey());
 				return false;
 			}
 			
-			logger.log(Level.INFO, "Deselected skill {}", data);		
+			logger.log(Level.INFO, "Deselected skill {0}", data);		
 			
 			/*
 			 * Already has been removed from model,
@@ -232,7 +232,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public OperationResult<SR6SkillValue> increase(SR6SkillValue ref) {
 		if (logger.isLoggable(Level.TRACE))
-			logger.log(Level.TRACE, "ENTER increase({})", ref);
+			logger.log(Level.TRACE, "ENTER increase({0})", ref);
 		try {
 			Possible allowed = canBeIncreasedPoints(ref);
 			if (allowed.get()) {
@@ -253,7 +253,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			return new OperationResult<>();
 		} finally {
 			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "ENTER increase({})", ref);
+				logger.log(Level.TRACE, "ENTER increase({0})", ref);
 		}
 	}
 
@@ -329,7 +329,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 	 */
 	@Override
 	public OperationResult<SR6SkillValue> increasePoints3(SR6SkillValue value) {
-		logger.log(Level.INFO, "ENTER: increasePoints3({})", value);
+		logger.log(Level.INFO, "ENTER: increasePoints3({0})", value);
 		try {
 
 			if (value == null) {
@@ -345,7 +345,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			
 			PerSkillPoints per = getPerSkill(value);
 			if (per==null) {
-				logger.log(Level.ERROR, "No PerSkillPoints found for {}",value);
+				logger.log(Level.ERROR, "No PerSkillPoints found for {0}",value);
 				return new OperationResult<>();
 			}
 
@@ -357,14 +357,14 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 
 			// Do increase
 			per.points3++;
-			logger.log(Level.INFO, "increase karma points of {} to {} - sum is now {}", value.getModifyable().getId(),
+			logger.log(Level.INFO, "increase karma points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points3, per.getSum());
 
 			parent.runProcessors();
 
 			return new OperationResult<SR6SkillValue>(value);
 		} finally {
-			logger.log(Level.TRACE, "LEAVE: increasePoints3({})", value.getKey());
+			logger.log(Level.TRACE, "LEAVE: increasePoints3({0})", value.getKey());
 		}
 	}
 
@@ -433,8 +433,8 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 		logger.log(Level.TRACE, "START: Skills");
 		try {
 			// Reset values
-			pointsSkills   = 0;
-			pointsLangAndKnow = model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed();
+			points1   = 0;
+			points2 = model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed();
 			normalToDos.clear();
 			knowledgeToDos.clear();
 			updateAvailable();
@@ -446,19 +446,19 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 				if (tmp.getReferenceType()==ShadowrunReference.CREATION_POINTS) {
 					ValueModification mod = (ValueModification)tmp;
 					if (mod.getResolvedKey()==CreatePoints.SKILLS) {
-						pointsSkills += mod.getValue();
-						logger.log(Level.INFO, "Consume "+mod+" and set pointsSkills to "+pointsSkills);
+						points1 += mod.getValue();
+						logger.log(Level.INFO, "Consume "+mod+" and set pointsSkills to "+points1);
 					} else {
 						if (ApplyTo.POINTS==mod.getApplyTo()) {
 							ShadowrunReference ref = (ShadowrunReference)mod.getReferenceType();
 							switch (ref) {
 							case SKILL:
 								logger.log(Level.DEBUG, "Add "+mod.getValue()+" skill points from "+tmp.getSource());
-								pointsSkills += mod.getValue();
+								points1 += mod.getValue();
 								break;
 							case SKILL_KNOWLEDGE:
 								logger.log(Level.DEBUG, "Add "+mod.getValue()+" knowledge skill points from "+tmp.getSource());
-								pointsLangAndKnow += mod.getValue();
+								points2 += mod.getValue();
 								break;
 							default:
 								unprocessed.add(mod);
@@ -482,32 +482,32 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 				 */
 				int required = per.points1;
 				if (required>0) {
-					if (pointsSkills>0) {
-						int pay = Math.min(pointsSkills, required);
-						logger.log(Level.DEBUG, "  Pay {} skillpoints for {}", pay, key);
-						pointsSkills -= pay;
+					if (points1>0) {
+						int pay = Math.min(points1, required);
+						logger.log(Level.DEBUG, "  Pay {0} skillpoints for {1}", pay, key);
+						points1 -= pay;
 						required -= pay;
 					}
 					// If not enough, convert
 					if (required>0) {
 						per.points1 -= required;
-						logger.log(Level.WARNING, "Not enough skillpoints to pay {} - reduce it to {}", key, per.points1);
+						logger.log(Level.WARNING, "Not enough skillpoints to pay {0} - reduce it to {1}", key, per.points1);
 					}
 				}
 				
 				/* Pay language/knowledge */
 				required = per.points2;
 				if (required>0) {
-					if (pointsLangAndKnow>0) {
-						int pay = Math.min(pointsLangAndKnow, required);
-						logger.log(Level.DEBUG, "  Pay {} knowledge skillpoints for {}", pay, key);
-						pointsLangAndKnow -= pay;
+					if (points2>0) {
+						int pay = Math.min(points2, required);
+						logger.log(Level.DEBUG, "  Pay {0} knowledge skillpoints for {1}", pay, key);
+						points2 -= pay;
 						required -= pay;
 					}
 					// If not enough, convert
 					if (required>0) {
 						per.points2 -= required;
-						logger.log(Level.WARNING, "Not enough skillpoints to pay {} - reduce it to {}", key, per.points1);
+						logger.log(Level.WARNING, "Not enough skillpoints to pay {0} - reduce it to {1}", key, per.points1);
 					}
 				}
 				
@@ -515,18 +515,18 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 				if (per.points3>0) {
 					int pay = per.getKarmaInvestSR6();
 					model.setKarmaFree( model.getKarmaFree() - pay );
-					logger.log(Level.DEBUG, "  Pay {} karma for {}", pay, key);
+					logger.log(Level.DEBUG, "  Pay {0} karma for {1}", pay, key);
 				}
 				
 				if (per.karmaSpec>0) {
 					int pay = per.karmaSpec*5;
 					model.setKarmaFree( model.getKarmaFree() - pay );
-					logger.log(Level.DEBUG, "  Pay {} karma for specializations {}", pay, key);
+					logger.log(Level.DEBUG, "  Pay {0} karma for specializations {1}", pay, key);
 				}
 				
 				// Update model
 			}
-			logger.log(Level.DEBUG, "Finish with {} and {} skill points and {} Karma", pointsSkills, pointsLangAndKnow, getModel().getKarmaFree());
+			logger.log(Level.DEBUG, "Finish with {0} and {1} skill points and {2} Karma", points1, points2, getModel().getKarmaFree());
 			if (logger.isLoggable(Level.TRACE))
 				logger.log(Level.TRACE, settings.toSkillString());
 
@@ -551,10 +551,10 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 					// If not auto-added skill, remove it
 					if (!val.isAutoAdded()) {
 						logger.log(Level.WARNING,
-								"Skill {} was found in character, but not in skill generator settings", val);
+								"Skill {0} was found in character, but not in skill generator settings", val);
 						model.getSkillValues().remove(val);
 					} else {
-						logger.log(Level.DEBUG, "Found auto-added skill {}", val);
+						logger.log(Level.DEBUG, "Found auto-added skill {0}", val);
 					}
 				}
 			}
@@ -614,7 +614,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 	 */
 	@Override
 	public OperationResult<SkillSpecializationValue<SR6Skill>> select(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec, boolean expertise) {
-		logger.log(Level.TRACE, "ENTER: select({}, {}, {})", skillVal.getKey(), spec, expertise);
+		logger.log(Level.TRACE, "ENTER: select({0}, {1}, {2})", skillVal.getKey(), spec, expertise);
 		try {
 			Possible poss = canSelectSpecialization(skillVal, spec, expertise);
 			if (!poss.get()) {
@@ -624,14 +624,14 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			
 			SkillSpecializationValue<SR6Skill> ret = new SkillSpecializationValue<>(spec);
 			skillVal.getSpecializations().add(ret);
-			logger.log(Level.INFO, "Select specialization '{}' in skill '{}'", spec.getId(), skillVal.getKey());
+			logger.log(Level.INFO, "Select specialization '{0}' in skill '{1}'", spec.getId(), skillVal.getKey());
 			
 			// Now pay
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			if (settings.perSkill.get(skillVal)==null) {
 				settings.perSkill.put(skillVal, new PerSkillPoints());
 			}
-			if (pointsSkills>0) {
+			if (points1>0) {
 				logger.log(Level.INFO, "Pay with skill points");
 				settings.perSkill.get(skillVal).points1++;
 			} else {
@@ -644,7 +644,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			
 			return new OperationResult<>(ret);
 		} finally {
-			logger.log(Level.TRACE, "LEAVE: select({}, {}, {})", skillVal.getKey(), spec, expertise);
+			logger.log(Level.TRACE, "LEAVE: select({0}, {1}, {2})", skillVal.getKey(), spec, expertise);
 		}
 	}
 
@@ -654,7 +654,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 	 */
 	@Override
 	public boolean deselect(SR6SkillValue skillVal, SkillSpecializationValue<SR6Skill> spec) {
-		logger.log(Level.DEBUG, "ENTER: deselect({}, {}",skillVal, spec);
+		logger.log(Level.DEBUG, "ENTER: deselect({0}, {1}",skillVal, spec);
 		try {
 			Possible poss = canDeselectSpecialization(skillVal, spec);
 			if (!poss.get())
@@ -664,7 +664,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			
 			return true;
 		} finally {
-			logger.log(Level.DEBUG, "LEAVE: deselect({}, {}",skillVal, spec);
+			logger.log(Level.DEBUG, "LEAVE: deselect({0}, {1}",skillVal, spec);
 		}
 	}
 

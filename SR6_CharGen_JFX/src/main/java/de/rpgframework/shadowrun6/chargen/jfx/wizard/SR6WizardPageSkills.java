@@ -24,7 +24,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6SkillTablePrioSkin;
-import de.rpgframework.shadowrun6.chargen.jfx.pane.SkillSettingsPane;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
 
 /**
  * @author prelle
@@ -76,7 +76,7 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 	private CloseType openActionDialog(SR6SkillValue sVal) {
 		logger.log(Level.INFO, "openActionDialog({})", sVal);
 		
-		SkillSettingsPane pane = new SkillSettingsPane(sVal, charGen.getSkillController());
+		SRSkillSettingsPane pane = new SRSkillSettingsPane(sVal, charGen.getSkillController());
 		ManagedDialog dialog = new ManagedDialog("Settings", pane, CloseType.OK);
 		CloseType close = FlexibleApplication.getInstance().showAlertAndCall(dialog, null);
 		return close;

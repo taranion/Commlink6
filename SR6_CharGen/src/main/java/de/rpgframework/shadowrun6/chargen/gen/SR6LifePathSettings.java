@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 
 /**

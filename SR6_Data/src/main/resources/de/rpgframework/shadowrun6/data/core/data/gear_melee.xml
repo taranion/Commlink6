@@ -45,6 +45,23 @@
    <item id="telescopic_staff" avail="2" price="250" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
       <weapon dmg="4S" attack="8,,,,"  skill="close_combat" spec="close_combat/clubs"/>
    </item>
+   
+   <item id="bike_chain" avail="1" price="15" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+      <weapon dmg="2S" attack="5,,,,"  skill="close_combat" spec="close_combat/unarmed"/>
+   </item>
+   <item id="bullwhip" avail="4" price="255" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+      <weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
+   </item>
+   <item id="knucks" avail="1" price="100" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+      <weapon dmg="3P" attack="5,,,,"  skill="close_combat" spec="close_combat/unarmed"/>
+   </item>
+   <item id="shock_gloves" avail="4" price="790" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+      <weapon dmg="4S(e)" attack="5,,,,"  skill="close_combat" spec="close_combat/unarmed"/>
+   </item>
+   <item id="monofilament_whip" avail="6I" price="1300" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+      <!--useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="8I" price="1300"/-->
+      <weapon dmg="6P" attack="14,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
+   </item>
 
 	<item id="bow" price="100" type="WEAPON_RANGED" subtype="BOWS">
 		<choices>

@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
@@ -32,6 +33,7 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -126,7 +128,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	 */
 	@Override
 	public Decision[] apply(T item, List<Choice> choices) {
-		logger.log(Level.INFO, "ENTER apply({}, {})", item, choices);
+		logger.log(Level.INFO, "ENTER apply({0}, {1})", item, choices);
 		this.item = item;
 		this.choices = choices;
 		CloseType closed = null;
@@ -148,6 +150,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				content.getChildren().add(lbName);
 
 				switch ((ShadowrunReference) choice.getChooseFrom()) {
+				case ATTRIBUTE:
+					handleATTRIBUTE(item, choice);
+					break;
 				case SKILL:
 					handleSKILL(item, choice);
 					break;
@@ -158,6 +163,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 					handleTEXT(item, choice);
 					break;
 				default:
+					System.err.println( "Not implemented: choosing from " + choice.getChooseFrom());
 					logger.log(Level.ERROR, "Not implemented: choosing from " + choice.getChooseFrom());
 				}
 			}
@@ -172,7 +178,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				return null;
 			return getDecisions();
 		} finally {
-			logger.log(Level.INFO, "LEAVE apply({}, {} with {})", item, choices, closed);
+			logger.log(Level.INFO, "LEAVE apply({0}, {1} with {2})", item, choices, closed);
 		}
 	}
 
@@ -186,16 +192,55 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				return value.getName();
 			}
 		});
-		cbSub.getItems().addAll(Shadowrun6Core.getItemList(SR6Skill.class));
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			cbSub.getItems().addAll(
+					Shadowrun6Core.getItemList(SR6Skill.class).stream().filter(s -> ids.contains(s.getId())).collect(Collectors.toList())
+					);			
+		} else {
+			cbSub.getItems().addAll(Shadowrun6Core.getItemList(SR6Skill.class));
+		}
 		Collections.sort(cbSub.getItems(), new Comparator<SR6Skill>() {
 			public int compare(SR6Skill o1, SR6Skill o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}});
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.DEBUG, "Chose {} for {}", n, choice.getUUID());
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
 			updateButtons(); 
 			showHelpFor(n); });
+		content.getChildren().add(cbSub);
+	}
+
+	//-------------------------------------------------------------------
+	private void handleATTRIBUTE(T item, Choice choice) {
+		ChoiceBox<ShadowrunAttribute> cbSub = new ChoiceBox<>();
+		cbSub.setConverter(new StringConverter<ShadowrunAttribute>() {
+			public ShadowrunAttribute fromString(String value) { return null;}
+			public String toString(ShadowrunAttribute value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			cbSub.getItems().addAll(
+					List.of(ShadowrunAttribute.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
+					);			
+		} else {
+			cbSub.getItems().addAll(ShadowrunAttribute.primaryValues());
+		}
+		Collections.sort(cbSub.getItems(), new Comparator<ShadowrunAttribute>() {
+			public int compare(ShadowrunAttribute o1, ShadowrunAttribute o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.name()));
+			updateButtons(); 
+		 });
 		content.getChildren().add(cbSub);
 	}
 
@@ -223,7 +268,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			
 		}
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.DEBUG, "Chose {} for {}", n, choice.getUUID());
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
 			updateButtons(); 
 			showHelpFor(n); });

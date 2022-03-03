@@ -27,15 +27,15 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
- * Points 1 = Character Points
- * Points 2 = Karma
+ * Points 1 = Free skill points
+ * Points 2 = Character Points
+ * Points 3 = Karma
  * @author prelle
  *
  */
 public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements NumericalValueWith2PoolsController<SR6Skill,SR6SkillValue> {
 
 	private int skillsFromCP;
-//	private int pointsLangAndKnow;
 
 	//-------------------------------------------------------------------
 	public PointBuySR6SkillGenerator(SR6CharacterGenerator parent) {
@@ -54,7 +54,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 		
 		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 		// Are there enough unused skillpoints
-		if (pointsSkills>0) return Possible.TRUE;
+		if (points1>0) return Possible.TRUE;
 		// Are there enough unused skillpoints
 		if (settings.characterPoints>=2) return Possible.TRUE;
 		// Has the user enough karma
@@ -74,14 +74,18 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 		try {
 			OperationResult<SR6SkillValue> result = super.select(data);
 			if (result.hasError()) {
-				logger.log(Level.DEBUG, "Selecting {} failed, because {}",data.getId(), result.getMessages());
+				logger.log(Level.DEBUG, "Selecting {0} failed, because {1}",data.getId(), result.getMessages());
 				return result;
 			}
 			
-			logger.log(Level.INFO, "Selected skill {}", data.getId());
+			logger.log(Level.INFO, "Selected skill {0}", data.getId());
 			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 			PerSkillPoints per = new PerSkillPoints();
-			per.points1=1;
+			if (points1>0)
+				per.points1=1;
+			else if (points2>0)
+				per.points2=1;
+				
 			settings.perSkill.put(result.get(), per);
 			
 			getCharacterController().runProcessors();
@@ -105,21 +109,21 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 		return new Possible( canBeIncreasedPoints(value).get() || canBeIncreasedPoints2(value).get());
 	}
 
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
-	 */
-	@Override
-	public OperationResult<SR6SkillValue> increase(SR6SkillValue ref) {
-		OperationResult<SR6SkillValue> result = increasePoints(ref);
-		if (result.wasSuccessful()) return result;
-		
-		result = increasePoints2(ref);
-		if (result.wasSuccessful()) return result;
-		
-		logger.log(Level.WARNING, "Could not raise with any method");
-		return new OperationResult<>();
-	}
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
+//	 */
+//	@Override
+//	public OperationResult<SR6SkillValue> increase(SR6SkillValue ref) {
+//		OperationResult<SR6SkillValue> result = increasePoints(ref);
+//		if (result.wasSuccessful()) return result;
+//		
+//		result = increasePoints2(ref);
+//		if (result.wasSuccessful()) return result;
+//		
+//		logger.log(Level.WARNING, "Could not raise with any method");
+//		return new OperationResult<>();
+//	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -131,8 +135,14 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 		
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
 		try {
+			Shadowrun6Character model = parent.getModel();
+			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
+			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
+
 			// Reset values
-			pointsSkills   = 12;
+			settings.cpToSkills = 0;
+			points1   = 12;
+			points2   = settings.characterPoints/2;
 			skillsFromCP   = 0;
 //			pointsLangAndKnow = 0;
 			available.clear();
@@ -144,9 +154,9 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 					if (mod.getReferenceType()==ShadowrunReference.SKILL) {
 						SR6Skill skill = mod.getResolvedKey();
 						if (skill==null) {
-							logger.log(Level.ERROR, "AllowMod for unknown skill {}", mod.getKey());
+							logger.log(Level.ERROR, "AllowMod for unknown skill {0}", mod.getKey());
 						} else {
-							logger.log(Level.DEBUG, "Allow skill {} from {}", mod.getKey(), mod.getSource());
+							logger.log(Level.DEBUG, "Allow skill {0} from {1}", mod.getKey(), mod.getSource());
 							this.available.add(skill);
 						}
 					} else {
@@ -174,8 +184,6 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 				}
 			}
 
-			Shadowrun6Character model = parent.getModel();
-			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 			for (Entry<SR6SkillValue,PerSkillPoints> entry : settings.perSkill.entrySet()) {
 				SR6Skill key = entry.getKey().getModifyable();
 				PerSkillPoints per = entry.getValue();
@@ -186,30 +194,28 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 				/* 
 				 * Pay skilll points 
 				 */
-				int required = per.points1;
-				if (required>0) {
-					if (pointsSkills>0) {
-						int pay = Math.min(pointsSkills, required);
-						logger.log(Level.DEBUG, "Pay {} free CP for {}", pay, key);
-						pointsSkills -= pay;
-						required -= pay;
-					}
-					// If not enough, convert
-					if (required>0) {
-						int pay = required*2;
-						logger.log(Level.DEBUG, "Convert {} CP to {} skill points for {}", pay, required, key);
-						settings.characterPoints -= pay;
-						settings.cpToSkills += required;
-						required -= pay;
-					}
+				if (per.points1>0) {
+					logger.log(Level.DEBUG, "Pay {0} free CP for {1}", per.points1, key);
+					points1 -= per.points1;					
+				}
+				if (per.points2>0) {
+					logger.log(Level.DEBUG, "Pay {0} CP for {1}", per.points2, key);
+					points2 -= per.points2;	
+					settings.cpToSkills += per.points2;
+					settings.characterPoints -= per.points2*2;
+				}
+				if (per.points3>0) {
+					int pay = per.getKarmaInvestSR6();
+					logger.log(Level.DEBUG, "Pay {0} Karma for {1}", pay, key);
+					model.setKarmaFree( model.getKarmaFree() - pay);
 				}
 			}
-			logger.log(Level.DEBUG, "Finish with {} skill points", pointsSkills);
+			logger.log(Level.DEBUG, "Finish with {0} skill points", points1);
 			if (logger.isLoggable(Level.TRACE))
 				logger.log(Level.TRACE, settings.toSkillString());
 
 			
-			logger.log(Level.INFO, "{} CP converted to {} skills", settings.cpToSkills*2, settings.cpToSkills);
+			logger.log(Level.INFO, "{0} CP converted to {1} skills", settings.cpToSkills*2, settings.cpToSkills);
 			
 			/*
 			 * Copy from settings to character
@@ -227,7 +233,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			// Reverse check: all skills in model should be in usedSkills
 			for (SR6SkillValue val : new ArrayList<>(model.getSkillValues())) {
 				if (!usedSkills.contains(val)) {
-					logger.log(Level.WARNING, "Skill {} was found in character, but not in skill generator settings", val);
+					logger.log(Level.WARNING, "Skill {0} was found in character, but not in skill generator settings", val);
 					model.getSkillValues().remove(val);
 				}
 			}
@@ -237,10 +243,10 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			 * Ensure limits of 20 are in kept
 			 */
 			if (settings.cpToSkills>20) {
-				todos.add(new ToDoElement(Severity.STOPPER, "Too many CP converted to skill points"));
+				todos.add(new ToDoElement(Severity.STOPPER, PointBuyCharacterGenerator.RES, PointBuyCharacterGenerator.TODO_SKILLS_TOO_MANY_CP_CONVERTED, settings.cpToSkills));
 			}
-			if (pointsSkills>0) {
-				todos.add(new ToDoElement(Severity.STOPPER, pointsSkills+" skill points left to spend"));
+			if (points1>0) {
+				todos.add(new ToDoElement(Severity.STOPPER, points1+" skill points left to spend"));
 			}
 
 		} catch (Exception e) {
@@ -254,7 +260,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 
 	@Override
 	public int getPointsLeft() {
-		return pointsSkills;
+		return points1;
 	}
 
 	//-------------------------------------------------------------------
@@ -268,7 +274,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			return allowed;
 		
 		// Are there enough free points?
-		if (pointsSkills>0)
+		if (points1>0)
 			return Possible.TRUE;
 		// Only 20 attribute points may be generated from CP
 		if (skillsFromCP >= 20)

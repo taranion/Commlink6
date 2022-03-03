@@ -25,9 +25,9 @@ import javafx.scene.layout.VBox;
  * @author prelle
  *
  */
-public class SkillSettingsPane extends VBox {
+public class SRSkillSettingsPane extends VBox {
 
-	private final static Logger logger = System.getLogger(SkillSettingsPane.class.getPackageName());
+	private final static Logger logger = System.getLogger(SRSkillSettingsPane.class.getPackageName());
 	
 	private  ISkillController<SR6Skill, SR6SkillValue> control;
 	private UUID nameUUID;
@@ -40,7 +40,7 @@ public class SkillSettingsPane extends VBox {
 	private Map<SkillSpecialization<SR6Skill>, CheckBox> boxesExpert;
 	
 	//-------------------------------------------------------------------
-	public SkillSettingsPane(SR6SkillValue data, ISkillController<SR6Skill, SR6SkillValue> ctrl) {
+	public SRSkillSettingsPane(SR6SkillValue data, ISkillController<SR6Skill, SR6SkillValue> ctrl) {
 		this.data = data;
 		this.control = ctrl;
 		if (!data.getModifyable().getChoices().isEmpty()) {

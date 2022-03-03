@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.RuleConfiguration;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
@@ -20,6 +21,7 @@ import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
@@ -38,6 +40,8 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	protected CommonAttributeGenerator attributes;
 	protected SR6SkillGenerator skill;
 	protected IQualityController qualities;
+	protected IAdeptPowerController adeptPowers;
+	protected IEquipmentController equipment;
 
 	// -------------------------------------------------------------------
 	protected CommonSR6CharacterGenerator() {
@@ -221,6 +225,24 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	@Override
 	public IMagicOrResonanceController getMagicOrResonanceController() {
 		return magicReso;
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getAdeptPowerController()
+	 */
+	@Override
+	public IAdeptPowerController getAdeptPowerController() {
+		return adeptPowers;
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getEquipmentController()
+	 */
+	@Override
+	public IEquipmentController getEquipmentController() {
+		return equipment;
 	}
 
 }

@@ -50,7 +50,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 	 */
 	@Override
 	public void selectTradition(Tradition value) {
-		logger.log(Level.INFO, "select magic tradition: {}", value);
+		logger.log(Level.INFO, "select magic tradition: {0}", value);
 		model.setTradition(value);
 		parent.runProcessors();
 	}
@@ -102,6 +102,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			if (type.usesMagic()) {
 				logger.log(Level.INFO, "Selected "+type.getId()+" grants "+points+" MAGIC");
 				unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), points));
+				// Only for regular adepts - get power points 
 			} else if (type.usesResonance()) {
 				logger.log(Level.INFO, "Selected "+type.getId()+" grants "+points+" RESONANCE");
 				unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), points));

@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 
 /**
@@ -21,6 +22,9 @@ public class SR6PointBuySettings {
 	public int cpBoughtAttrib;
 	public int cpToSkills;
 	public int cpToResources;
+	public int boughtPP;
+	public int boughtSpells;
+	public int boughtComplex;
 	/** How points and karma is spent on attribute */
 	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib;
 	public Map<SR6SkillValue, PerSkillPoints> perSkill;

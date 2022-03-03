@@ -30,6 +30,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
@@ -39,9 +40,10 @@ import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -53,7 +55,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class PointBuyAttrGenTest {
 	
 	private Shadowrun6Character model;
-	private PointBuySR6AttributeGenerator ctrl;
+	private SR6PointBuyAttributeGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
 	
@@ -105,6 +107,8 @@ public class PointBuyAttrGenTest {
 			public IMetatypeController getMetatypeController() {return null;}
 			public IAttributeController getAttributeController() {return ctrl;}
 			public IQualityController getQualityController() { return null;}
+			public IEquipmentController getEquipmentController() { return null;}
+			public IAdeptPowerController getAdeptPowerController() { return null;}
 			@Override
 			public String getName() {
 				// TODO Auto-generated method stub
@@ -122,7 +126,7 @@ public class PointBuyAttrGenTest {
 			@Override
 			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
-		ctrl  = new PointBuySR6AttributeGenerator(charGen);
+		ctrl  = new SR6PointBuyAttributeGenerator(charGen);
 		charGen.runProcessors();
 	}
 	

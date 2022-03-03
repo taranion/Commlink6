@@ -29,6 +29,7 @@ import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -242,7 +243,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> increasePoints(AttributeValue<ShadowrunAttribute> value) {
 		if (logger.isLoggable(Level.TRACE))
-			logger.log(Level.TRACE, "ENTER increasePoints({})", value.getModifyable());
+			logger.log(Level.TRACE, "ENTER increasePoints({0})", value.getModifyable());
 
 		try {
 			ShadowrunAttribute key = value.getModifyable();		
@@ -254,7 +255,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			per.points1++;
-			logger.log(Level.INFO, "Increased {} to {} by adjustment points", key, per.getSum());
+			logger.log(Level.INFO, "Increased {0} to {1} by adjustment points", key, per.getSum());
 
 			parent.runProcessors();
 			return new OperationResult<>(value);
@@ -270,19 +271,19 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> decreasePoints(AttributeValue<ShadowrunAttribute> value) {
 		if (logger.isLoggable(Level.TRACE))
-			logger.log(Level.TRACE, "ENTER decreasePoints2({})", value.getModifyable());
+			logger.log(Level.TRACE, "ENTER decreasePoints2({0})", value.getModifyable());
 
 		try {
 			ShadowrunAttribute key = value.getModifyable();
 			Possible allowed = canBeDecreasedPoints(value);
 			if (!allowed.get()) {
-				logger.log(Level.WARNING, "Trying to increase attribute " + key + " with adjustment points, although {}", allowed.getI18NKey());
+				logger.log(Level.WARNING, "Trying to increase attribute " + key + " with adjustment points, although {0}", allowed.getI18NKey());
 				return new OperationResult<>(allowed);
 			}
 
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			per.points1--;
-			logger.log(Level.INFO, "Decreased {} to {}", key, per.getSum());
+			logger.log(Level.INFO, "Decreased {0} to {1}", key, per.getSum());
 			
 			parent.runProcessors();
 			return new OperationResult<>(value);
@@ -522,7 +523,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			if (per.points1>0 && !allowedAdjust.contains(key)) {
-				logger.log(Level.ERROR, "Attribute {} has spent adjustment points, though it is not allowed - remove them", key);
+				logger.log(Level.ERROR, "Attribute {0} has spent adjustment points, though it is not allowed - remove them", key);
 				per.points1=0;
 			}
 		}
@@ -656,7 +657,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 				int required = per.points1;
 				if (required>0 &&adjustmentPoints>0) {
 					int payed = Math.min(required, adjustmentPoints);
-					logger.log(Level.INFO, "  pay {} adjustment points for {}", payed, key);
+					logger.log(Level.INFO, "  pay {0} adjustment points for {1}", payed, key);
 					adjustmentPoints-=payed;
 					required-=payed;
 				}
@@ -666,17 +667,17 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 					per.points1-=required;
 					if (key.isPrimary()) {
 						per.points2+=required;
-						logger.log(Level.WARNING, "Shifted {} points from adjustment to attribute points for {}", required, key);
+						logger.log(Level.WARNING, "Shifted {0} points from adjustment to attribute points for {1}", required, key);
 					} else {
 						per.points3+=required;
-						logger.log(Level.WARNING, "Shifted {} points from adjustment to Karma for {}", required, key);
+						logger.log(Level.WARNING, "Shifted {0} points from adjustment to Karma for {1}", required, key);
 					}
 				}
 				// Now pay attribute points
 				required = per.points2;
 				if (required>0 && attributePoints>0) {
 					int payed = Math.min(required, attributePoints);
-					logger.log(Level.INFO, "  pay {} attribute points for {}", payed, key);
+					logger.log(Level.INFO, "  pay {0} attribute points for {1}", payed, key);
 					attributePoints-=payed;
 					required-=payed;
 				}
@@ -685,20 +686,20 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 				if (required>0) { 
 					per.points2-=required;
 					per.points3+=required;
-					logger.log(Level.WARNING, "Shifted {} points from attribute to Karma for {}", required, key);
+					logger.log(Level.WARNING, "Shifted {0} points from attribute to Karma for {1}", required, key);
 				}
 				// Now pay karma
 				required = per.points3;
 				if (required>0) {
 					int karma = per.getKarmaInvest();
-					logger.log(Level.INFO, "  pay {} Karma for {}", karma, key);
+					logger.log(Level.INFO, "  pay {0} Karma for {1}", karma, key);
 					getModel().setKarmaFree( getModel().getKarmaFree() - karma);
 				}
 			}
-			logger.log(Level.DEBUG, "Finish with {} adjust and {} attrib points and {} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());
+			logger.log(Level.DEBUG, "Finish with {0} adjust and {1} attrib points and {2} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());
 			
 			if (adjustmentPoints>0) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6CharacterGenerator.TODO_ATTRIB_REMAIN_ADJUST, adjustmentPoints));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_ATTRIB_REMAIN_ADJUST, adjustmentPoints));
 			}
 			
 			// Copy current setup 

@@ -32,13 +32,13 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator implements PointBuyAttributeGenerator, NumericalValueWith3PoolsController<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> {
+public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator implements PointBuyAttributeGenerator, NumericalValueWith3PoolsController<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> {
 	
 	public final static String I18N_NOT_SPECIAL_OR_RACIAL = "attrib.adjust.noSpecialAttribute";
 
 	private static MultiLanguageResourceBundle RES = PointBuyCharacterGenerator.RES;
 	
-	private final static Logger logger = System.getLogger(PointBuySR6AttributeGenerator.class.getPackageName()+".attrib");
+	private final static Logger logger = System.getLogger(SR6PointBuyAttributeGenerator.class.getPackageName()+".attrib");
 	
 	private int specialFromCP;
 	private int attribFromCP;
@@ -47,7 +47,7 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 	private boolean redistribute;
 	
 	//-------------------------------------------------------------------
-	public PointBuySR6AttributeGenerator(SR6CharacterController parent) {
+	public SR6PointBuyAttributeGenerator(SR6CharacterController parent) {
 		super(parent);
 	}
 
@@ -87,13 +87,13 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 			ShadowrunAttribute key = value.getModifyable();
 			Possible poss = canBeIncreasedPoints(value);
 			if (!poss.get()) {
-				logger.log(Level.WARNING, "Trying to increase attribute {} with adjustment points, although not possible: {}",key, poss);
+				logger.log(Level.WARNING, "Trying to increase attribute {0} with adjustment points, although not possible: {1}",key, poss);
 				return new OperationResult<>(poss);
 			}
 
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.get(key);
 			per.points1++;
-			logger.log(Level.INFO, "Increased {} to {}", key, per.getSum());
+			logger.log(Level.INFO, "Increased {0} to {1}", key, per.getSum());
 
 			parent.runProcessors();
 			return new OperationResult<>(value);
@@ -117,7 +117,7 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.get(key);
 			per.points1--;
-			logger.log(Level.INFO, "Decreased {} to {}", key, per.getSum());
+			logger.log(Level.INFO, "Decreased {0} to {1}", key, per.getSum());
 
 			parent.runProcessors();
 			return new OperationResult<>(value);
@@ -472,7 +472,7 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.get(key);
 			if (per.points1>0 && !allowedAdjust.contains(key)) {
-				logger.log(Level.ERROR, "Attribute {} has spent adjustment points, though it is not allowed - remove them", key);
+				logger.log(Level.ERROR, "Attribute {0} has spent adjustment points, though it is not allowed - remove them", key);
 				per.points1=0;
 			}
 		}
@@ -541,7 +541,7 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 			todos.clear();
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 			settings.cpBoughtAttrib=0;
-			settings.cpBoughtAttrib=0;
+			settings.cpBoughtSpecial=0;
 //			settings.perAttrib.get(ShadowrunAttribute.MAGIC).base=0;
 //			settings.perAttrib.get(ShadowrunAttribute.RESONANCE).base=0;
 //			settings.perAttrib.get(ShadowrunAttribute.EDGE).base=1;
@@ -560,11 +560,11 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 						if (mod.getValue()>6 || getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))
 							allowedAdjust.add(attr);					
 					}
-					// Update base
-					if (mod.getSet()==ValueType.NATURAL) {
-						logger.log(Level.DEBUG, "Updated base of "+attr+" with +"+mod.getValue());
-						settings.perAttrib.get(attr).base += mod.getValue();
-					}
+//					// Update base
+//					if (mod.getSet()==ValueType.NATURAL) {
+//						logger.log(Level.INFO, "Updated base of "+attr+" with +"+mod.getValue());
+//						settings.perAttrib.get(attr).base += mod.getValue();
+//					}
 				} else {
 					unprocessed.add(tmp);
 				}
@@ -584,6 +584,7 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 			ensureMaximumNotExceeded();
 			validateAdjustmentpoints();
 
+			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
 				// Reduce points
 				Shadowrun6Character model = parent.getModel();
 				for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
@@ -599,14 +600,14 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 					if (requiredSpecial>0) {
 						if (special>0) {
 							int pay = Math.min(special, requiredSpecial);
-							logger.log(Level.INFO, "  Pay {} free special points for {}", pay, key);
+							logger.log(Level.INFO, "  Pay {0} free special points for {1}", pay, key);
 							special -= pay;
 							requiredSpecial -= pay;
 						}
 						// If not enough, convert
 						if (requiredSpecial>0) {
 							int pay = requiredSpecial*4;
-							logger.log(Level.INFO, "  Pay {} CP / {} special points for {}", pay, requiredSpecial, key);
+							logger.log(Level.INFO, "  Pay {0} CP / {1} special points for {2}", pay, requiredSpecial, key);
 							settings.characterPoints -= pay;
 							settings.cpBoughtSpecial += pay;
 							specialFromCP+=requiredSpecial;
@@ -620,14 +621,14 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 					if (requiredAttrib>0) {
 						if (attrib>0) {
 							int pay = Math.min(attrib, requiredAttrib);
-							logger.log(Level.INFO, "  Pay {} free attribute points for {}", pay, key);
+							logger.log(Level.INFO, "  Pay {0} free attribute points for {1}", pay, key);
 							attrib -= pay;
 							requiredAttrib -= pay;
 						}
 						// If not enough, convert
 						if (requiredAttrib>0) {
 							int pay = requiredAttrib*2;
-							logger.log(Level.INFO, "  Pay {} CP / {} attribute points for {}", pay, requiredAttrib, key);
+							logger.log(Level.INFO, "  Pay {0} CP / {1} attribute points for {2}", pay, requiredAttrib, key);
 							settings.characterPoints -= pay;
 							settings.cpBoughtAttrib += pay;
 							attribFromCP+=requiredAttrib;
@@ -638,7 +639,7 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 					 * Pay Karma
 					 */
 					if (per.getKarmaInvest() > 0) {
-						logger.log(Level.INFO, "  Pay {} Karma to raise {} from {} to {}", per.getKarmaInvest(), key, per.getSumBeforeKarma(), per.getSum());
+						logger.log(Level.INFO, "  Pay {0} Karma to raise {1} from {2} to {3}", per.getKarmaInvest(), key, per.getSumBeforeKarma(), per.getSum());
 						model.setKarmaFree(model.getKarmaFree() - per.getKarmaInvest());
 						model.setKarmaInvested(model.getKarmaInvested() + per.getKarmaInvest());
 					}
@@ -650,17 +651,18 @@ public class PointBuySR6AttributeGenerator extends CommonAttributeGenerator impl
 			updateAttributeValues();
 
 			
-			logger.log(Level.INFO, "{} CP converted to {} special attributes", settings.cpBoughtSpecial, specialFromCP);
-			logger.log(Level.INFO, "{} CP converted to {} regular attributes", settings.cpBoughtAttrib, attribFromCP);
+			logger.log(Level.INFO, "{0} CP converted to {1} special attributes", settings.cpBoughtSpecial, specialFromCP);
+			logger.log(Level.INFO, "{0} CP converted to {1} regular attributes", settings.cpBoughtAttrib, attribFromCP);
+			logger.log(Level.INFO, "Leave with {0} character points", settings.characterPoints);
 			
 			/*
 			 * Ensure limits of 12 / 20 are in kept
 			 */
-			if (settings.cpBoughtAttrib>20) {
-				todos.add(new ToDoElement(Severity.STOPPER, "Too many CP converted to regular attributes"));
+			if (attribFromCP>20) {
+				todos.add(new ToDoElement(Severity.STOPPER, PointBuyCharacterGenerator.RES, PointBuyCharacterGenerator.TODO_ATTRIB_TOO_MANY_CP_CONV_REG, attribFromCP));
 			}
-			if (settings.cpBoughtSpecial>12) {
-				todos.add(new ToDoElement(Severity.STOPPER, "Too many CP converted to special attributes"));
+			if (specialFromCP>12) {
+				todos.add(new ToDoElement(Severity.STOPPER, PointBuyCharacterGenerator.RES, PointBuyCharacterGenerator.TODO_ATTRIB_TOO_MANY_CP_CONV_SPEC, specialFromCP));
 			}
 			
 			

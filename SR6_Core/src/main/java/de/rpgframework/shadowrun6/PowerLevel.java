@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6;
 
 import java.util.ResourceBundle;
 
@@ -12,6 +12,6 @@ public enum PowerLevel {
 	EILTE,
 	;
 	public String getName() { 
-		return ResourceI18N.get(ResourceBundle.getBundle(PriorityCharacterGenerator.class.getName()), "variant."+this.name().toLowerCase());
+		return ResourceI18N.get(ResourceBundle.getBundle(Shadowrun6Character.class.getName()), "variant."+this.name().toLowerCase());
 	}
 }

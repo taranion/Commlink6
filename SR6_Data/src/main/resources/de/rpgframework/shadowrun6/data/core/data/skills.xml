@@ -62,15 +62,27 @@
         <skillspec id="nautical_mechanic"/>
     </skill>
     <skill id="exotic_weapons"  attr="AGILITY" type="COMBAT" untr="n">
-<!--         <skillspec id="bullwhip"/> -->
-<!--         <skillspec id="monofilament_whip"/> -->
+		<skillspec id="brawling"/>
+		<skillspec id="whips"/>
+		<skillspec id="chainsaws"/>
+		<skillspec id="launchers"/>
+		<skillspec id="air"/>
+		<skillspec id="spray"/>
+		<skillspec id="laser"/>
+		<skillspec id="emitter"/>
+		<skillspec id="other"/>
     </skill>
     <skill id="firearms"  attr="AGILITY" type="COMBAT" untr="y">
-        <skillspec id="automatics" subtypes="MACHINE_PISTOLS,LMG,MMG,HMG"/>
-        <skillspec id="pistols" subtypes="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY"/>
-        <skillspec id="longarms"/>
+        <skillspec id="tasers" subtypes="TASERS"/>
+        <skillspec id="holdouts" subtypes="HOLDOUTS"/>
+        <skillspec id="pistols_light" subtypes="PISTOLS_LIGHT"/>
+        <skillspec id="pistols_heavy" subtypes="PISTOLS_HEAVY"/>
+        <skillspec id="machine_pistols" subtypes="MACHINE_PISTOLS"/>
+        <skillspec id="submachine_guns" subtypes="SUBMACHINE_GUNS"/>
+        <skillspec id="machine_guns" subtypes="LMG,MMG,HMG"/>
         <skillspec id="rifles" subtypes="RIFLE_ASSAULT,RIFLE_HUNTING,RIFLE_SNIPER"/>
         <skillspec id="shotguns" subtypes="SHOTGUNS"/>
+        <skillspec id="assault_cannons" subtypes="ASSAULT_CANNON"/>
     </skill>
     <skill id="influence"  attr="CHARISMA" type="SOCIAL" untr="y">
         <skillspec id="etiquette"/>

@@ -1,6 +1,9 @@
 package de.rpgframework.shadowrun6;
 
+import java.util.List;
+
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.shadowrun.AShadowrunSkill;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
@@ -70,6 +73,14 @@ public class SR6Skill extends AShadowrunSkill {
 	 */
 	public boolean isToSpecify() {
 		return toSpecify;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.data.ISkill#getSpecializations()
+	 */
+	public List<SkillSpecialization<?>> getSpecializations() {
+		return specializations;
 	}
 
 }

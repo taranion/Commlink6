@@ -8,13 +8,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuySettings;
@@ -48,7 +49,8 @@ public class PointBuyGenTest {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
-	public void test6WCp29() {
+	public void test6WCp29() throws CharacterIOException {
+		charGen.runProcessors();
 		assertEquals(50, model.getKarmaFree());
 		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 		assertEquals(100, settings.characterPoints);
@@ -70,7 +72,7 @@ public class PointBuyGenTest {
 		/* 
 		 * Attributes
 		 */
-		PointBuySR6AttributeGenerator attrib = (PointBuySR6AttributeGenerator) charGen.getAttributeController();
+		SR6PointBuyAttributeGenerator attrib = (SR6PointBuyAttributeGenerator) charGen.getAttributeController();
 		// Invest Free Special point to raise EDGE
  		attrib.increasePoints(model.getAttribute(ShadowrunAttribute.EDGE));
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.EDGE).getModifiedValue());
@@ -181,6 +183,10 @@ public class PointBuyGenTest {
 		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 4
 		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 5
 		assertEquals(2, settings.characterPoints);
+
+		byte[] raw = Shadowrun6Core.encode(model);
+		String xml = new String(raw);
+		System.out.println(xml);
 	}
 	
 }

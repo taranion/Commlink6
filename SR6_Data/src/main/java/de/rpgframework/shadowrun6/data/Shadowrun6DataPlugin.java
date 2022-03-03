@@ -126,12 +126,14 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" minor actions");
 			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz, "core/data/actions_major.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" major actions");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz, "core/data/gear.xml");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz, "core/data/gear_melee.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" items");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms_accessories.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon accessories");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_armor.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
 			list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, core, clazz,"core/data/magicOrResonance.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic or resonance entries");
 			Shadowrun6Core.loadPriorityTableEntries(core, clazz.getResourceAsStream("core/data/priorities.xml"));

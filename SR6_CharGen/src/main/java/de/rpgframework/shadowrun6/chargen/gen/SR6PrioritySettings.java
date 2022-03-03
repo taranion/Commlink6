@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import de.rpgframework.shadowrun.chargen.gen.APrioritySettings;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 
 /**
@@ -14,8 +15,6 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
  */
 public class SR6PrioritySettings extends APrioritySettings {
 
-	public PowerLevel variant;
-	
 	public int mysticAdeptMaxPoints;
 	public int mysticAdeptPowerPoints;
 	/**

@@ -152,7 +152,7 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 				todos.add(new ToDoElement(Severity.STOPPER, RES, "generror.metatype_not_selected"));
 			} else {
 				if (meta.getKarma() != 0) {
-					logger.log(Level.INFO, "Pay {} Karma for metatype '{}'", meta.getKarma(), meta.getId());
+					logger.log(Level.INFO, "Pay {0} Karma for metatype '{1}'", meta.getKarma(), meta.getId());
 					model.setKarmaFree(model.getKarmaFree() - meta.getKarma());
 				}
 				// Add more modifications

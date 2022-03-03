@@ -64,7 +64,7 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see org.prelle.splittermond.chargen.gen.GenerationProcessingStep#getDecisionsToMake()
+	 * @see de.rpgframework.genericrpg.chargen.PartialController#getChoices()
 	 */
 	@Override
 	public List<Choice> getChoices() {

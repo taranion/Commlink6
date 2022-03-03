@@ -80,7 +80,15 @@
 			<skillval ref="perception"   value="1"/>
 			<skillval ref="piloting"     value="2"/>
 		</skills>
+		<geardef>
+			<item id="gang_leathers" type="ARMOR" subtype="ARMOR_BODY">
+				<armor rating="1" social="-1" />
+			</item>
+		</geardef>
 		<gear>
+			<item ref="gang_leathers"/> 
+			<item ref="bike_chain"/> 
+			<item ref="streetline_special"/> 
 		</gear>
 	</npc>
 	<npc id="debt_collector" rating="1" type="GRUNT">
@@ -105,6 +113,9 @@
 			<skillval ref="perception"   value="3"/>
 		</skills>
 		<gear>
+			<item ref="armor_clothing"/> 
+			<item ref="club"/> 
+			<item ref="beretta_201T"/> 
 		</gear>
 	</npc>
 	
@@ -133,6 +144,9 @@
 			<skillval ref="perception"   value="3"/>
 		</skills>
 		<gear>
+			<item ref="armor_clothing"/> 
+			<item ref="knucks"/> 
+			<item ref="beretta_101T"/> 
 		</gear>
 	</npc>
 	<npc id="data_harvester" rating="2" type="GRUNT">
@@ -159,7 +173,15 @@
 			<skillval ref="perception"   value="2"/>
 			<skillval ref="stealth"      value="1"/>
 		</skills>
+		<geardef>
+			<item id="gang_leathers" type="ARMOR" subtype="ARMOR_BODY">
+				<armor rating="1" social="-1" />
+			</item>
+		</geardef>
 		<gear>
+			<item ref="gang_leathers"/> 
+			<item ref="combat_knife"/> 
+			<item ref="fichetti_security_600"/> 
 		</gear>
 	</npc>
 	
@@ -190,6 +212,9 @@
 			<skillval ref="piloting"     value="4"/>
 		</skills>
 		<gear>
+			<item ref="armor_vest"/> 
+			<item ref="colt_america_l36"/> 
+			<item ref="stun_baton"/> 
 		</gear>
 	</npc>
 	<npc id="securityrigger" rating="3" type="GRUNT">
@@ -220,6 +245,9 @@
 			<skillval ref="stealth"      value="2"/>
 		</skills>
 		<gear>
+			<item ref="armor_vest"/> 
+			<item ref="ares_light_fire_70"/> 
+			<item ref="telescopic_staff"/> 
 		</gear>
 	</npc>
 	
@@ -251,6 +279,9 @@
 			<skillval ref="piloting"     value="1"/>
 		</skills>
 		<gear>
+			<item ref="armor_clothing"/> 
+			<item ref="sap"/> 
+			<item ref="beretta_101T"/> 
 		</gear>
 	</npc>
 	<npc id="blademaster" rating="4" type="GRUNT">
@@ -280,6 +311,7 @@
 			<skillval ref="stealth"      value="5"/>
 		</skills>
 		<gear>
+			<item ref="katana"/> 
 		</gear>
 	</npc>
 	
@@ -314,6 +346,8 @@
 			<skillval ref="stealth"      value="2"/>
 		</skills>
 		<gear>
+			<item ref="colt_america_l36"/> 
+			<item ref="stun_baton"/> 
 		</gear>
 	</npc>
 	

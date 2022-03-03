@@ -34,8 +34,8 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	public final static String I18N_NOT_RAISED_KARMA = "skill.error.notRaisedWithKarma";
 	public final static String I18N_NOT_AVAILABLE_SPEC = "skill.error.specNotAvailable";
 
-	protected int pointsSkills;
-	protected int pointsLangAndKnow;
+	protected int points1;
+	protected int points2;
 	/** How many skills are allowed to be maximized */
 	protected int maxLimit;
 
@@ -147,7 +147,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	@Override
 	public OperationResult<SR6SkillValue> increase(SR6SkillValue ref) {
 		if (logger.isLoggable(Level.TRACE))
-			logger.log(Level.TRACE, "ENTER increase({})", ref);
+			logger.log(Level.TRACE, "ENTER increase({0})", ref);
 		try {
 			SR6Skill key = ref.getModifyable();
 			
@@ -165,7 +165,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			return new OperationResult<>();
 		} finally {
 			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "ENTER increase({})", ref);
+				logger.log(Level.TRACE, "ENTER increase({0})", ref);
 		}
 	}
 
@@ -204,7 +204,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	@Override
 	public int getPointsLeft2() {
-		return pointsLangAndKnow;
+		return points2;
 	}
 
 	//-------------------------------------------------------------------
@@ -224,7 +224,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		}
 		
 		// Are there enough points		
-		if (pointsLangAndKnow<1){
+		if (points2<1){
 			return new Possible(I18N_NOT_RAISED_POINT2);
 		}
 		return Possible.TRUE;
@@ -239,13 +239,16 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		logger.log(Level.INFO, "ENTER increasePoints2");
 		try {
 			Possible allowed = canBeIncreasedPoints2(value);
-			if (!allowed.get())
+			if (!allowed.get()) {
+				logger.log(Level.WARNING, "Trying to increase with points2, but "+allowed);
 				return new OperationResult<>(allowed);
+			}
 
 			PerSkillPoints per = getPerSkill(value);
 			// Do increase
 			per.points2++;
-
+			logger.log(Level.INFO, "Increased using points2 to "+per.getSum()+ " with "+per);
+			
 			getCharacterController().runProcessors();
 			return new OperationResult<SR6SkillValue>(value);
 		} finally {
@@ -265,7 +268,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		
 		// Do increase
 		value.setDistributed(value.getDistributed()-1);
-		pointsLangAndKnow++;
+		points2++;
 		
 		return new OperationResult<SR6SkillValue>(value);
 	}
@@ -276,7 +279,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	@Override
 	public int getPointsLeft() {
-		return pointsSkills;
+		return points1;
 	}
 
 	//-------------------------------------------------------------------
@@ -295,7 +298,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			return new Possible(I18N_SKILL_IS_MAXED);
 		}
 		
-		if (pointsSkills<1){
+		if (points1<1){
 			return new Possible(I18N_NOT_RAISED_POINT1);
 		}
 		
@@ -322,24 +325,26 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	@Override
 	public OperationResult<SR6SkillValue> increasePoints(SR6SkillValue value) {
 //		if (logger.isLoggable(Level.TRACE))
-			logger.log(Level.INFO, "ENTER increasePoints({})", value.getModifyable().getId());
+			logger.log(Level.INFO, "ENTER increasePoints({0})", value.getModifyable().getId());
 
 		try {
 			Possible allowed = canBeIncreasedPoints(value);
-			if (!allowed.get())
+			if (!allowed.get()) {
+				logger.log(Level.WARNING, "Trying to increase with points1, but "+allowed);
 				return new OperationResult<>(allowed);
+			}
 
 			PerSkillPoints per = getPerSkill(value);
 			// Do increase
 			per.points1++;
-			logger.log(Level.INFO, "increase points of {} to {} - sum is now {}", value.getModifyable().getId(),
+			logger.log(Level.INFO, "increase points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points1, per.getSum());
 
 			getCharacterController().runProcessors();
 			return new OperationResult<SR6SkillValue>(value);
 		} finally {
 			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "LEAVE increasePoints({})", value.getModifyable().getId());
+				logger.log(Level.TRACE, "LEAVE increasePoints({0})", value.getModifyable().getId());
 		}
 	}
 
@@ -350,7 +355,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	@Override
 	public OperationResult<SR6SkillValue> decreasePoints(SR6SkillValue value) {
 		if (logger.isLoggable(Level.TRACE))
-			logger.log(Level.TRACE, "ENTER decreasePoints({})", value.getModifyable().getId());
+			logger.log(Level.TRACE, "ENTER decreasePoints({0})", value.getModifyable().getId());
 
 		
 		try {
@@ -368,15 +373,25 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			PerSkillPoints per = getPerSkill(value);
 			// Do increase
 			per.points1--;
-			logger.log(Level.INFO, "decrease points of {} to {} - sum is now {}", value.getModifyable().getId(),
+			logger.log(Level.INFO, "decrease points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points1, per.getSum());
 
 			getCharacterController().runProcessors();
 			return new OperationResult<SR6SkillValue>(value);
 		} finally {
 			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "LEAVE decreasePoints({})", value.getModifyable().getId());
+				logger.log(Level.TRACE, "LEAVE decreasePoints({0})", value.getModifyable().getId());
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public float getSelectionCost(SR6Skill data) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

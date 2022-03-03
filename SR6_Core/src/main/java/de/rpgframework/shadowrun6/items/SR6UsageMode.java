@@ -15,11 +15,12 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 public enum SR6UsageMode implements IUsageMode {
 	
 	/** Carried*/
-	NORMAL,
-	IMPLANTED,
-	EMBEDDED,
-	/** Added to an weapon mount */
-	MOUNTED,
+	PRIMARY,
+	/** 
+	 * For things which's primary job isn't to be a weapon, but
+	 * can be used as such. 
+	 */
+	WEAPON,
 	;
 	
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();

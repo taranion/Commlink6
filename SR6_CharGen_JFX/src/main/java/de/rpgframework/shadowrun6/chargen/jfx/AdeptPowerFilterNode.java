@@ -14,53 +14,41 @@ import org.prelle.javafx.SymbolIcon;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.ComplexDataItemListFilter;
-import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.Quality.QualityType;
-import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.AdeptPowerValue;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.util.StringConverter;
 
 /**
  * @author prelle
  *
  */
-public class QualityFilterNode extends ComplexDataItemListFilter<Quality,QualityValue> {
+public class AdeptPowerFilterNode extends ComplexDataItemListFilter<AdeptPower,AdeptPowerValue> {
 	
-	private final static Logger logger = System.getLogger(QualityFilterNode.class.getPackageName());
-	
-	private enum What {
-		ALL,
-		POSITIVE,
-		NEGATIVE
-	}
+	private final static Logger logger = System.getLogger(AdeptPowerFilterNode.class.getPackageName());
 	
 	private enum Sort {
 		NAME,
-		KARMA
+		COST
 	}
 	
 	private ResourceBundle RES;
-	private List<QualityType> allowedTypes;
-	
-	private ChoiceBox<What> cbWhat;
 	private Button btnSort;
 	private TextField tfSearch;
 	
-	private Comparator<Quality> compareByName = new Comparator<Quality>() {
-		public int compare(Quality q1, Quality q2) {
+	private Comparator<AdeptPower> compareByName = new Comparator<AdeptPower>() {
+		public int compare(AdeptPower q1, AdeptPower q2) {
 			return Collator.getInstance().compare(q1.getName(), q2.getName());
 		}
 	};
-	private Comparator<Quality> compareByKarma = new Comparator<Quality>() {
-		public int compare(Quality q1, Quality q2) {
-			int c = Integer.compare(q1.getKarmaCost(), q2.getKarmaCost());
+	private Comparator<AdeptPower> compareByKarma = new Comparator<AdeptPower>() {
+		public int compare(AdeptPower q1, AdeptPower q2) {
+			int c = Float.compare(q1.getCost(), q2.getCost());
 			if (c==0)
 				c = Collator.getInstance().compare(q1.getName(), q2.getName());
 			return c;
@@ -70,10 +58,9 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	private Sort currentSort = Sort.NAME;
 
 	//-------------------------------------------------------------------
-	public QualityFilterNode(ResourceBundle RES, ComplexDataItemControllerNode<Quality, QualityValue> parent, QualityType...types) {
+	public AdeptPowerFilterNode(ResourceBundle RES, ComplexDataItemControllerNode<AdeptPower, AdeptPowerValue> parent) {
 		super(parent);
 		this.RES = RES;
-		allowedTypes = List.of(types);
 		initComponents();
 		initLayout();
 		initInteractivity();
@@ -82,27 +69,18 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		cbWhat = new ChoiceBox<What>();
-		cbWhat.getItems().addAll(What.values());
-		cbWhat.setValue(What.ALL);
-		cbWhat.setConverter(new StringConverter<QualityFilterNode.What>() {
-			public String toString(What what) { return ResourceI18N.get(RES, "quality.what."+what.name().toLowerCase());}
-			public What fromString(String arg0) {return null;}
-		});
-		
 		btnSort = new Button(null,new SymbolIcon("sort"));
-		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "quality.sort.tooltip")));
+		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "AdeptPower.sort.tooltip")));
 		
 		tfSearch = new TextField();
-		tfSearch.setPromptText(ResourceI18N.get(RES, "quality.search.prompt"));
+		tfSearch.setPromptText(ResourceI18N.get(RES, "AdeptPower.search.prompt"));
 	}
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		HBox line = new HBox(cbWhat, btnSort);
+		HBox line = new HBox(btnSort);
 		HBox.setHgrow(line, Priority.ALWAYS);
 		line.setMaxWidth(Double.MAX_VALUE);
-		cbWhat.setMaxWidth(Double.MAX_VALUE);
 		getChildren().addAll(line, tfSearch);
 		
 		VBox.setMargin(tfSearch, new Insets(5,0,5,0));
@@ -112,16 +90,11 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	private void initInteractivity() {
 		btnSort.setOnAction(ev -> {
 			if (currentSort==Sort.NAME)
-				currentSort=Sort.KARMA;
+				currentSort=Sort.COST;
 			else
 				currentSort=Sort.NAME;
 			logger.log(Level.INFO, "Sort changed to "+currentSort);
 
-			refreshAvailable();
-		});
-		
-		cbWhat.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.INFO, "Selection changed");
 			refreshAvailable();
 		});
 		
@@ -130,12 +103,9 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	
 	//-------------------------------------------------------------------
 	private void refreshAvailable() {
-		What n = cbWhat.getValue();
 		final String search = tfSearch.getText().toLowerCase();
-		List<Quality> unfiltered = parent.getController().getAvailable();
-		List<Quality> filtered = unfiltered.stream()
-			.filter(q -> allowedTypes.contains(q.getType()))
-			.filter(q -> (n==What.ALL || (n==What.NEGATIVE && !q.isPositive()) || (n==What.POSITIVE && q.isPositive())))
+		List<AdeptPower> unfiltered = parent.getController().getAvailable();
+		List<AdeptPower> filtered = unfiltered.stream()
 			.filter(q -> (search==null || search.isBlank() || q.getName().toLowerCase().contains(search)))
 			.collect(Collectors.toList());
 		logger.log(Level.INFO, "{0} items now", filtered.size());
@@ -144,7 +114,7 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 		
 		switch (currentSort) {
 		case NAME : Collections.sort(filtered, compareByName); break;
-		case KARMA: Collections.sort(filtered, compareByKarma); break;
+		case COST: Collections.sort(filtered, compareByKarma); break;
 		}
 		parent.availableProperty().get().setAll(filtered);
 	}

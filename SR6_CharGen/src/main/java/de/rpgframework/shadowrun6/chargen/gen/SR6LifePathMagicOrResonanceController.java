@@ -68,7 +68,7 @@ public class SR6LifePathMagicOrResonanceController extends MagicOrResonanceContr
 	 */
 	@Override
 	public void selectTradition(Tradition value) {
-		logger.log(Level.INFO, "select magic tradition: {}", value);
+		logger.log(Level.INFO, "select magic tradition: {0}", value);
 		model.setTradition(value);
 		parent.runProcessors();
 	}

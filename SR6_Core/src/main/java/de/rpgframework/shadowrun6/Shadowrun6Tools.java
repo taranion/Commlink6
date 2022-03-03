@@ -10,19 +10,23 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.genericrpg.requirements.ValueRequirement;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
-import de.rpgframework.shadowrun.PriorityTable;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -316,6 +320,17 @@ public class Shadowrun6Tools {
 				if (qual==null)
 					return "Unknown "+tmp.getKey();
 				return prefix+qual.getName(loc);
+			case SKILL:
+				String value = (req instanceof ValueRequirement)?((ValueRequirement)req).getMin():"";
+				if ("CHOICE".equals(tmp.getKey())) {
+					if (tmp.isNegate()) 
+						return ResourceI18N.format(RES, loc, "skill.chosen.not", value);
+					return ResourceI18N.format(RES, loc, "skill.chosen", value);
+				}
+				SR6Skill skill = Shadowrun6Core.getItem(SR6Skill.class, tmp.getKey());
+				if (skill==null)
+					return "Unknown "+tmp.getKey();
+				return prefix+skill.getName(loc);
 				
 //			case MASTERSHIP:
 //				Mastership master =  SplitterMondCore.getItem(Mastership.class, tmp.getKey());
@@ -375,13 +390,54 @@ public class Shadowrun6Tools {
 				if (model.getMetatype()==null) return false;
 				if (negated) return !model.getMetatype().getId().equals(req.getKey());
 				return model.getMetatype().getId().equals(req.getKey());
-			case MAGIC_RESO:
-				
+			default:
+				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type);
 			}
 			
 		}
 		System.err.println("Shadowrun6Tool: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
 		logger.log(Level.WARNING,"ToDo: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
-		return false;
+		return true;
+	}
+
+	//-------------------------------------------------------------------
+	public static Possible areRequirementsMet(Shadowrun6Character model, ComplexDataItem data) {
+		List<Requirement> list = new ArrayList<>();
+		for (Requirement req : data.getRequirements()) {
+			if (!isRequirementMet(model, req)) {
+				list.add(req);
+			}
+		}
+		
+		if (list.isEmpty())
+			return Possible.TRUE;
+		return new Possible(list.toArray(new Requirement[list.size()]));
+	}
+
+	//-------------------------------------------------------------------
+	public static Possible areAllDecisionsPresent(ComplexDataItem model, Decision...decisions) {
+		for (Choice choice : model.getChoices()) {
+			boolean decisionMissing = true;
+			for (Decision dec : decisions) {
+				if (dec==null) continue;
+				if (choice.getUUID().equals(dec.getChoiceUUID())) {
+					decisionMissing = false;
+					break;
+				}
+			}
+			if (decisionMissing) {
+				return new Possible(Severity.INFO, RES, "impossible.choiceMissing");
+			}
+		}
+		
+		return Possible.TRUE;
+	}
+
+	//-------------------------------------------------------------------
+	public static Possible checkDecisionsAndRequirements(Shadowrun6Character model, ComplexDataItem data, Decision...decisions) {
+		Possible p1 = areRequirementsMet(model, data);
+		Possible p2 = areAllDecisionsPresent(data, decisions);
+		
+		return new Possible(p1, p2);
 	}
 }

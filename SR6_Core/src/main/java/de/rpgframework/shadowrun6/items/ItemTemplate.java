@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.items;
 
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.ElementList;
+import org.prelle.simplepersist.ElementListUnion;
 
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
@@ -34,8 +36,11 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 	@Attribute
 	private ItemSubType subtype;
 
-	@ElementList(entry = "weapon", type = WeaponData.class, inline = true)
-	private List<WeaponData> weapons; 
+	@ElementListUnion({
+		@ElementList(entry = "weapon", type = WeaponData.class, inline = true),
+		@ElementList(entry="armor", type=ArmorData.class, inline=true),
+	})
+	private List<IGearTypeData> weapons; 
 
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
@@ -48,15 +53,25 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 	 */
 	@Override
 	public List<? extends IGearTypeData> getTypeData() {
-		ArrayList<IGearTypeData> ret = new ArrayList<>();
-		if (!weapons.isEmpty())
-			ret.add(weapons.get(0));
-		return ret;
+//		ArrayList<IGearTypeData> ret = new ArrayList<>();
+//		if (!weapons.isEmpty())
+//			ret.add(weapons.get(0));
+		return weapons;
 	}
 
 	//-------------------------------------------------------------------
 	public List<WeaponData> getAttacks() {
-		ArrayList<WeaponData> ret = new ArrayList<>(weapons);
+		ArrayList<WeaponData> ret = new ArrayList<>();
+		for (IGearTypeData tmp : weapons) {
+			if (tmp instanceof WeaponData) {
+				ret.add((WeaponData) tmp);
+			}
+		}
+		// Add from usages
+		for (SR6GearUsage usage : super.getUsages()) {
+			logger.log(Level.WARNING, "ToDo: Usage: "+usage);
+		}
+		
 		return ret;
 	}
 
@@ -76,7 +91,7 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 			equips.add(add);
 		}
 		if (usages.isEmpty()) {
-			SR6GearUsage add = new SR6GearUsage(SR6UsageMode.NORMAL);
+			SR6GearUsage add = new SR6GearUsage(SR6UsageMode.PRIMARY);
 			usages.add(add);
 		}
 		
@@ -104,7 +119,7 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 	//-------------------------------------------------------------------
 	public List<SR6GearUsage> getUsages() {
 		if (usages.isEmpty()) {
-			return Arrays.asList(new SR6GearUsage(SR6UsageMode.NORMAL));
+			return Arrays.asList(new SR6GearUsage(SR6UsageMode.PRIMARY));
 		}
 		return usages;
 	}

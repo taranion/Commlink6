@@ -7,6 +7,7 @@ import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 

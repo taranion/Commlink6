@@ -21,7 +21,9 @@ public enum SR6EquipMode implements IEquipMode {
 	/** Installed as an accessory in another item */
 	EMBEDDED,
 	/** Directly implanted in your body */
-	BODYWARE
+	BODYWARE,
+	/** Any kind of alternative or secondary usage */
+	ALTERNATE
 	;
 	
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();

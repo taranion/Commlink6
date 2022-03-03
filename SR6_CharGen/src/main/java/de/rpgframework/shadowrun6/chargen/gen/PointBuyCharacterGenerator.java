@@ -8,6 +8,7 @@ import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
@@ -21,6 +22,11 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 
 	static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PointBuyCharacterGenerator.class,
 			Locale.ENGLISH, Locale.GERMAN);
+	
+	public static String TODO_SKILLS_TOO_MANY_CP_CONVERTED = "pointbuy.todo.skills.too_many_converted";
+	public static String TODO_ATTRIB_TOO_MANY_CP_CONV_REG  = "pointbuy.todo.attrib.too_many_regular";
+	public static String TODO_ATTRIB_TOO_MANY_CP_CONV_SPEC = "pointbuy.todo.attrib.too_many_special";
+	
 
 	private boolean setupDone;
 
@@ -87,7 +93,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		this.setupDone = false;		
 		SR6PointBuySettings settings = new SR6PointBuySettings();
 		settings.variant = PowerLevel.STANDARD;
-		settings.characterPoints = 100;
+//		settings.characterPoints = 100;
 //		model.addRule(Shadowrun6Rules.CHARGEN_ALLOW_INITIATION, "false");
 		model.setCharGenUsed(getId());
 		model.setCharGenSettings(settings);
@@ -115,15 +121,15 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 				return;
 			}
 
-			attributes = new PointBuySR6AttributeGenerator(this);
+			attributes = new SR6PointBuyAttributeGenerator(this);
 			meta = new PointBuyMetatypeController(this);
 			magicReso = new PointBuyMagicOrResonanceController(this);
 			skill = new PointBuySR6SkillGenerator(this);
-			qualities = new QualityGenerator(this);
+			qualities = new CommonQualityGenerator(this);
 			logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
 
 			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
-			processChain.add(new PointBuyResetGenerator(this));
+			processChain.add(new ResetGenerator(this));
 			processChain.add(meta);
 			processChain.add(magicReso);
 			processChain.add(qualities);

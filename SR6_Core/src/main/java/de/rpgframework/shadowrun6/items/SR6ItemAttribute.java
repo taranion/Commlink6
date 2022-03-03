@@ -29,7 +29,11 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	CAPACITY,
 //	CONCEALABILITY,
 	DAMAGE(new WeaponDamageConverter()),
-//	DAMAGE_REDUCTION,
+	// Defense Rating against physical attacks
+	DEFENSE_PHYSICAL,
+	// Defense Rating against social attacks
+	DEFENSE_SOCIAL,
+	DAMAGE_REDUCTION,
 //	DEFENSE_RATING,
 //	DEVICE_RATING,
 //	ESSENCECOST,

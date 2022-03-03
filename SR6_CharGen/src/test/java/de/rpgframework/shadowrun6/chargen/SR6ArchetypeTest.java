@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
@@ -18,6 +19,8 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityType;
@@ -25,6 +28,7 @@ import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
@@ -32,6 +36,7 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
@@ -127,7 +132,10 @@ public class SR6ArchetypeTest {
 		// Honorbound
 		poss = qualities.canBeSelected(Shadowrun6Core.getItem(Quality.class, "honorbound")); 
 		assertNotNull(poss.getMostSevere());
-		assertTrue(poss.get());
+		assertFalse(poss.toString(), poss.get());
+		poss = qualities.canBeSelected(Shadowrun6Core.getItem(Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(Quality.class, "honorbound").getChoices().get(0).getUUID(),"Code Duello")); 
+		assertNull(poss.getMostSevere());
+		assertTrue(poss.toString(), poss.get());
 		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "honorbound"));
 		assertFalse("Should have failed: "+res,res.wasSuccessful());
 		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(Quality.class, "honorbound").getChoices().get(0).getUUID(),"Code Duello"));
@@ -213,8 +221,41 @@ public class SR6ArchetypeTest {
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Fort Lewis Geography") ));
 		assertEquals(0, skills.getPointsLeft2());
 		
-		CarriedItem item = new CarriedItem(Shadowrun6Core.getItem(ItemTemplate.class, "bow"), null);
-		model.addCarriedItem(item);
+		IAdeptPowerController adept = charGen.getAdeptPowerController();
+		assertEquals(6.0f, adept.getUnsedPowerPoints(), 0f);
+		// Combat Sense 2
+		OperationResult<AdeptPowerValue> pVal =  adept.select(Shadowrun6Core.getItem(AdeptPower.class, "combat_sense"));
+		assertTrue(pVal.toString(), pVal.wasSuccessful());
+		assertEquals(5.5f, adept.getUnsedPowerPoints(), 0f);
+		pVal =  adept.increase(pVal.get());
+		assertTrue(pVal.toString(), pVal.wasSuccessful());
+		assertEquals(5f, adept.getUnsedPowerPoints(), 0f);
+		// Critical Strike 2
+		pVal =  adept.select(Shadowrun6Core.getItem(AdeptPower.class, "critical_strike"));
+		pVal =  adept.increase(pVal.get());
+		assertTrue(pVal.toString(), pVal.wasSuccessful());
+		assertEquals(3f, adept.getUnsedPowerPoints(), 0f);
+		// Improved reflexes 2
+		pVal =  adept.select(Shadowrun6Core.getItem(AdeptPower.class, "improved_reflexes"));
+		pVal =  adept.increase(pVal.get());
+		assertTrue(pVal.toString(), pVal.wasSuccessful());
+		assertEquals(1f, adept.getUnsedPowerPoints(), 0f);
+		// Killing hands
+		pVal =  adept.select(Shadowrun6Core.getItem(AdeptPower.class, "killing_hands"));
+		assertTrue(pVal.toString(), pVal.wasSuccessful());
+		assertEquals(0.5f, adept.getUnsedPowerPoints(), 0f);
+		
+//		IEquipmentController equip = charGen.getEquipmentController();
+//		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest"));
+//		assertNotNull(poss);
+//		assertTrue( poss.toString(), poss.get());
+//		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest")).wasSuccessful() );
+//		
+//		ItemTemplate bow = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
+//		// Try to add bow without rating
+//		assertFalse(  equip.select(bow).wasSuccessful() );
+//		// Try to add bow with rating
+//		assertTrue(  equip.select(bow, new Decision(bow.getChoices().get(0), "5")).wasSuccessful() );
 		
 		
 		byte[] raw = Shadowrun6Core.encode(model);

@@ -22,6 +22,7 @@ import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.jfx.wizard.WizardPageGenerator;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAdeptPowers;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAttributes;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPagePriority;
@@ -40,6 +41,7 @@ import javafx.util.Callback;
 
 /**
  * @author prelle
+ * @param <WizardPageAdeptPowers>
  *
  */
 public class GenerationWizard extends Wizard implements ControllerListener {
@@ -58,6 +60,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageQualities qualities;
 	private SR6WizardPageAttributes attrib;
 	private SR6WizardPageSkills skills;
+	private WizardPageAdeptPowers powers;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
 		String name = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName());
@@ -90,6 +93,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case QUALITIES   : ret.add(qualities); break;
 			case ATTRIBUTES  : ret.add(   attrib); break;
 			case SKILLS      : ret.add(   skills); break;
+			case POWERS      : ret.add(   powers); break;
 //			case RECOMMENDER : ret.add(profiles); break;
 			case NAME        : ret.add(   name); break;
 			default:
@@ -114,6 +118,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());
+		powers = new SR6WizardPageAdeptPowers(this, wrapper);
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		name   = new WizardPageName<>(this, wrapper);
 		
@@ -169,9 +174,9 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			getPages().addAll(getPageList());
 		}
 		
-		logger.log(Level.INFO, "Pages now");
+		logger.log(Level.DEBUG, "Pages now");
 		for (WizardPage page : getPages()) {
-			logger.log(Level.INFO, "- "+page);
+			logger.log(Level.DEBUG, "- "+page);
 		}
 //		attrib.refresh();
 		// Update buttons

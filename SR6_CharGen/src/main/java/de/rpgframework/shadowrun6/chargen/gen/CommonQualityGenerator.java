@@ -1,0 +1,259 @@
+package de.rpgframework.shadowrun6.chargen.gen;
+
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+
+import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.ChoiceOption;
+import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.chargen.gen.QualityGenerator;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
+
+/**
+ * @author prelle
+ *
+ */
+public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character> implements IQualityController {
+	
+	private final static Logger logger = System.getLogger(CommonQualityGenerator.class.getPackageName());
+
+	public final static MultiLanguageResourceBundle RES = SR6CharacterGenerator.RES;
+	
+	private int karmaGain;
+	private int numberOfQualities;
+
+	//-------------------------------------------------------------------
+	public CommonQualityGenerator(SR6CharacterGenerator parent) {
+		super(parent);
+	}
+
+	//-------------------------------------------------------------------
+	public int getKarmaGain() { return karmaGain; }
+	public int getNumberOfQualities() { return numberOfQualities; }
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.NumericalDataItemController#canBeIncreased(de.rpgframework.genericrpg.data.ComplexDataItemValue)
+	 */
+	@Override
+	public Possible canBeIncreased(QualityValue value) {
+		Possible poss = super.canBeIncreased(value);
+		if (!poss.get())
+			return poss;
+		
+		// For previously not user-selected qualities, ensure limit is not reached yet
+		if (value.getDistributed()==0 && numberOfQualities>=6) {
+			// Already 6 qualities
+			return new Possible(Severity.STOPPER, RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6);
+		}
+		
+		return Possible.TRUE;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getChoicesToDecide(de.rpgframework.genericrpg.data.ComplexDataItem)
+	 */
+	@Override
+	public List<Choice> getChoicesToDecide(Quality value) {
+		return new ArrayList<Choice>( value.getChoices() );
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.ComplexDataItem, de.rpgframework.genericrpg.data.Decision[])
+	 */
+	@Override
+	public Possible canBeSelected(Quality value, Decision... decisions) {
+		Possible poss = super.canBeSelected(value, decisions);
+		if (!poss.get())
+			return poss;
+
+		// Check if all requirements are met
+		List<Requirement> notMet = new ArrayList<>();
+		for (Requirement req : value.getRequirements()) {
+			if (!Shadowrun6Tools.isRequirementMet(model, req)) {
+				notMet.add(req);
+			}
+		}
+		if (notMet.size()>0) {
+			return new Possible(notMet, (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		}
+		
+		
+		int karma = value.getKarmaCost();
+		List<Choice> requiredChoices = value.getChoices();
+		for (Decision dec : decisions) {
+			logger.log(Level.INFO, "Decision "+dec);
+			if (dec==null) continue;
+			Choice choice = value.getChoice( dec.getChoiceUUID() );
+			// If we found 
+			if (choice!=null) requiredChoices.remove(choice);
+			if (choice!=null && choice.getChooseFrom()==ShadowrunReference.SUBSELECT) {
+				ChoiceOption subOpt = choice.getSubOption(dec.getValue());
+				if (subOpt!=null) {
+					karma += subOpt.getCost();
+				} else {
+					logger.log(Level.ERROR, "Unknown choice ''{0}'' for choice {1}", dec.getValue(), dec.getChoiceUUID());
+				}
+			}
+		}
+		if (karma>model.getKarmaFree()) {
+			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
+		}
+
+		// If there are decisions open, don't allow selection
+		if (!requiredChoices.isEmpty()) {
+			// Convert open decisions into names or at least identifiers
+			List<String> names = new ArrayList<>();
+			requiredChoices.forEach(c -> names.add( 
+					(c.getChooseFrom()==ShadowrunReference.SUBSELECT)?value.getChoiceName(c, Locale.getDefault()):String.valueOf(c.getChooseFrom())));
+			return new Possible(Severity.WARNING, RES, SR6RejectReasons.IMPOSS_MISSING_DECISIONS,names);
+		}
+		
+		// Is Karma gain >20
+		int cost = value.getKarmaCost();
+		if (!value.isPositive() && ((karmaGain+cost)>20)) 
+			return new Possible(Severity.STOPPER, RES, SR6RejectReasons.IMPOSS_QUALITY_KARMAGAIN);
+		
+		// No more than 6 user-selected qualities
+		if (numberOfQualities>=6) {
+			// Already 6 qualities 
+			return new Possible(Severity.STOPPER, RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6);
+		}
+		
+		return Possible.TRUE;
+	}
+
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#select(de.rpgframework.genericrpg.data.ComplexDataItem, de.rpgframework.genericrpg.data.Decision[])
+//	 */
+//	@Override
+//	public OperationResult<QualityValue> select(Quality value, Decision... decisions) {
+//		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER select");
+//		
+//		try {
+//			Possible possible = canBeSelected(value, decisions);
+//			if (!possible.get()) {
+//				logger.log(Level.WARNING, "User tries to select {0} but that is not possible because of {1}", value, possible.getI18NKey());
+//				return new OperationResult<>(possible);
+//			}
+//			if (possible.getMostSevere()!=null && possible.getMostSevere().getSeverity()!=Severity.INFO) {
+//				possible.setState(State.IMPOSSIBLE);
+//				logger.log(Level.WARNING, "User tries to select {0} but that is not possible because of {1}", value, possible.getI18NKey());
+//				return new OperationResult<>(possible);
+//			}
+//			
+//			return super.select(value, decisions);
+//		} finally {
+//			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE select");
+//		}
+//	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
+	 */
+	@Override
+	public List<Modification> process(List<Modification> previous) {
+		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
+		List<Modification> unprocessed = new ArrayList<>();
+
+		try {
+			karmaGain = 0;
+			// Reset
+			todos.clear();
+			numberOfQualities=0;
+//			reset();
+
+			// Walk modifications for creation points
+			for (Modification tmp : previous) {
+				if (tmp.getReferenceType()==ShadowrunReference.QUALITY) {
+					logger.log(Level.INFO, "Consume "+tmp);
+					ApplyQualityModifications.applyModification(model, tmp);
+				} else {
+					unprocessed.add(tmp);
+				}
+			}
+			
+			// Pay or grant Karma for qualities
+			for (QualityValue val : model.getQualities()) {
+				Quality item = val.getModifyable();
+				int cost = item.getKarmaCost();
+				if (item.hasLevel())
+					cost *= val.getDistributed();
+				if (item.isPositive()) {
+					logger.log(Level.INFO, "Pay {0} Karma for ''{1}'' on level {2}", cost, item.getId(), val.getDistributed());
+					model.setKarmaFree( model.getKarmaFree() - cost);
+					karmaGain -= cost;
+				} else {
+					logger.log(Level.INFO, "Get {0} Karma for ''{1}''", cost, item);
+					model.setKarmaFree( model.getKarmaFree() + cost);
+					karmaGain += cost;
+				}
+				
+				if (val.isAutoAdded()) {
+					if (val.getDistributed()>0) {
+						numberOfQualities++;
+					}
+				} else
+					numberOfQualities++;
+			}
+			
+			return unprocessed;
+		} finally {
+			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
+		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getAvailable()
+	 */
+	@Override
+	public List<Quality> getAvailable() {
+		return Shadowrun6Core.getItemList(Quality.class).stream()
+				.filter(p -> parent.showDataItem(p))
+				.filter(p -> !model.hasQuality(p.getId()) || p.isMulti())
+				.collect(Collectors.toList());
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
+	 */
+	@Override
+	public List<QualityValue> getSelected() {
+		return model.getQualities();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public float getSelectionCost(Quality data) {
+		return data.getKarmaCost();
+	}
+
+}

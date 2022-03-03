@@ -15,7 +15,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
@@ -88,7 +88,7 @@ public class AttributeSection extends Section {
 		if (attrib instanceof PrioritySR6AttributeGenerator) {
  			System.err.println("AttributeSection: change controller to Priority");
 			table = new PriorityAttributeTable<>(ctrl);
-		} else if (attrib instanceof PointBuySR6AttributeGenerator) {
+		} else if (attrib instanceof SR6PointBuyAttributeGenerator) {
  			System.err.println("AttributeSection: change controller to Point Buy");
 			table = new PointBuyAttributeTable<>(ctrl);
 		} else {

@@ -93,7 +93,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 //		logger.log(Level.DEBUG, "increase "+ref);
 //		Possible allowed = canBeIncreased(ref);
 //		if (!allowed.get()) {
-//			logger.log(Level.WARNING, "Trying to increase {} which cannot be increased: {}", ref.getSkill().getId(), allowed);
+//			logger.log(Level.WARNING, "Trying to increase {0} which cannot be increased: {1}", ref.getSkill().getId(), allowed);
 //			return false;
 //		}
 //	
@@ -193,7 +193,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 			// Now add skill to character
 			SR6SkillValue ret = new SR6SkillValue(data, 1);
 			model.addSkillValue(ret);
-			logger.log(Level.DEBUG, "Added skill {} to model", data);
+			logger.log(Level.DEBUG, "Added skill {0} to model", data);
 			
 			for (Decision dec : decisions) {
 				ret.addDecision(dec);

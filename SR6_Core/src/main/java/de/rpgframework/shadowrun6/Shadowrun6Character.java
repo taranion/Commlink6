@@ -21,6 +21,8 @@ import de.rpgframework.shadowrun.Tradition;
 public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillValue> implements RuleSpecificCharacterObject<ShadowrunAttribute, SR6Skill, SR6SkillValue> {
 
 	@Element
+	private PowerLevel powerLevel;
+	@Element
 	private int heat;
 	
 	//-------------------------------------------------------------------
@@ -116,6 +118,22 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	@Override
 	public Tradition getTradition() {
 		return Shadowrun6Core.getItem(Tradition.class, tradition);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the powerLevel
+	 */
+	public PowerLevel getPowerLevel() {
+		return powerLevel;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param powerLevel the powerLevel to set
+	 */
+	public void setPowerLevel(PowerLevel powerLevel) {
+		this.powerLevel = powerLevel;
 	}
 
 }

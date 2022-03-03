@@ -14,9 +14,11 @@ import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6AdeptPowerController;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
@@ -117,7 +119,9 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			meta = new SR6PriorityMetatypeController(this);
 			magicReso = new PriorityMagicOrResonanceController(this);
 			skill = new PrioritySR6SkillGenerator(this);
-			qualities = new QualityGenerator(this);
+			qualities = new CommonQualityGenerator(this);
+			equipment = new CommonEquipmentController(this);
+			adeptPowers = new SR6AdeptPowerGenerator(this);
 			logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
 
 			processChain.add(new ResetModifications(model));
@@ -128,6 +132,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(qualities);
 			processChain.add(attributes);
 			processChain.add(skill);
+			processChain.add(adeptPowers);
+			processChain.add(equipment);
 
 			setupDone = true;
 		} finally {
@@ -151,7 +157,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		this.handle= handle;
 		this.setupDone = false;		
 		SR6PrioritySettings settings = new SR6PrioritySettings();
-		settings.variant = PowerLevel.STANDARD;
+//		settings.variant = PowerLevel.STANDARD;
 		settings.priorities.put(PriorityType.METATYPE, Priority.B);
 		settings.priorities.put(PriorityType.ATTRIBUTE, Priority.A);
 		settings.priorities.put(PriorityType.MAGIC, Priority.E);
