@@ -63,7 +63,7 @@ public class Shadowrun6CompendiumFactory {
 	private final static String VALIDCHARS2 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	private final static String VALIDCHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
 	private final static Random RANDOM = new Random();
-	@Deprecated
+	
 	private final static String createRandomID() {
 		StringBuffer buf = new StringBuffer();
 		for (int i=0; i<16; i++) {
@@ -461,6 +461,7 @@ public class Shadowrun6CompendiumFactory {
 				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".src", createSourceText(tmp, loc));
 			}
 			ActorData<?> entry = Converter.convertActor(tmp, locales[0]);
+			entry._id  = createRandomID();
 //			entry._id  = tmp.getId();
 //			entry.flags.core.sheetClass="shadowrun6-eden.Shadowrun6ActorSheetVehicleCompendium";
 			
@@ -502,7 +503,7 @@ public class Shadowrun6CompendiumFactory {
 			}
 			
 			ActorData<? extends GeneralActor> entry = Converter.convertActor(tmp, locales[0]);
-			entry._id = tmp.getId();
+			entry._id = createRandomID();
 //			entry.flags.core.sheetClass="shadowrun6-eden.Shadowrun6ActorSheetVehicleCompendium";
 			
 //			FVTTNPCActor data = new FVTTNPCActor();
