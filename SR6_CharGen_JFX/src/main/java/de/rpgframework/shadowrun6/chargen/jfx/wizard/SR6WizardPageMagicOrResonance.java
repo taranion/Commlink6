@@ -21,7 +21,6 @@ import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageMagicOrResonance;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuyMagicOrResonanceController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;

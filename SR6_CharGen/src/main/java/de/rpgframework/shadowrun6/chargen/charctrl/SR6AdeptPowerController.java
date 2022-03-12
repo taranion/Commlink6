@@ -379,4 +379,49 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		return data.getCost();
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController#canBuyPowerPoints()
+	 */
+	@Override
+	public boolean canBuyPowerPoints() {
+		return false;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController#canIncreasePowerPoints()
+	 */
+	@Override
+	public boolean canIncreasePowerPoints() {
+		return false;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController#canDecreasePowerPoints()
+	 */
+	@Override
+	public boolean canDecreasePowerPoints() {
+		return false;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController#increasePowerPoints()
+	 */
+	@Override
+	public boolean increasePowerPoints() {
+		return false;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController#decreasePowerPoints()
+	 */
+	@Override
+	public boolean decreasePowerPoints() {
+		return false;
+	}
+
 }

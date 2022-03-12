@@ -22,21 +22,22 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class PriorityMagicOrResonanceController extends MagicOrResonanceController {
-	
-	private final static Logger logger = System.getLogger(PriorityMagicOrResonanceController.class.getPackageName());
+
+	private final static Logger logger = System
+			.getLogger(PriorityMagicOrResonanceController.class.getPackageName() + ".mor");
 
 	protected Map<MagicOrResonanceType, Integer> available;
-	
-	//-------------------------------------------------------------------
+
+	// -------------------------------------------------------------------
 	/**
 	 * @param parent
 	 */
-	public PriorityMagicOrResonanceController(IShadowrunCharacterGenerator parent) {
+	public PriorityMagicOrResonanceController(IShadowrunCharacterGenerator<?, ?, ?> parent) {
 		super(parent);
 		available = new LinkedHashMap<>();
 	}
-	
-	//-------------------------------------------------------------------
+
+	// -------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController#getAvailable()
 	 */
@@ -44,7 +45,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 		return new ArrayList<>(available.keySet());
 	}
 
-	//-------------------------------------------------------------------
+	// -------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController#selectTradition(de.rpgframework.shadowrun.Tradition)
 	 */
@@ -55,7 +56,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 		parent.runProcessors();
 	}
 
-	//-------------------------------------------------------------------
+	// -------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.RecommendingController#getRecommendationState(java.lang.Object)
 	 */
@@ -65,55 +66,66 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 		return RecommendationState.NEUTRAL;
 	}
 
-	//-------------------------------------------------------------------
+	// -------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController#process(java.util.List)
 	 */
 	@Override
 	public List<Modification> process(List<Modification> previous) {
-		logger.log(Level.DEBUG,"process()");
-		List<Modification> unprocessed = new ArrayList<>();
-		
-		// Clear old available information
-		available.clear();
-		
-		// Check for options
-		for (Modification tmp : previous) {
-			if (tmp instanceof ValueModification) {
-				ValueModification mod = (ValueModification)tmp;
-				if (mod.getReferenceType()==ShadowrunReference.MAGIC_RESO) {
-					available.put(mod.getResolvedKey(), mod.getValue());
-					logger.log(Level.INFO, "Allow "+mod.getKey()+" with "+mod.getValue()+" points in attribute");
+		logger.log(Level.DEBUG, "process()");
+		try {
+			List<Modification> unprocessed = new ArrayList<>();
+
+			// Clear old available information
+			available.clear();
+
+			// Check for options
+			for (Modification tmp : previous) {
+				if (tmp instanceof ValueModification) {
+					ValueModification mod = (ValueModification) tmp;
+					if (mod.getReferenceType() == ShadowrunReference.MAGIC_RESO) {
+						available.put(mod.getResolvedKey(), mod.getValue());
+						logger.log(Level.INFO,
+								"Allow " + mod.getKey() + " with " + mod.getValue() + " points in attribute");
+					} else {
+						unprocessed.add(mod);
+					}
 				} else {
-					unprocessed.add(mod);
+					unprocessed.add(tmp);
 				}
-			} else {
-				unprocessed.add(tmp);
 			}
-		}
-		
-		
-		
-		MagicOrResonanceType type = model.getMagicOrResonanceType();
-		if (type!=null) {
+			logger.log(Level.DEBUG, "Available = " + available.keySet());
+
+			MagicOrResonanceType type = model.getMagicOrResonanceType();
+			if (type == null || !available.containsKey(type)) {
+				type = available.keySet().iterator().next();
+				logger.log(Level.WARNING, "Auto-select MOR type " + type);
+				model.setMagicOrResonanceType(type);
+			}
+
 			Integer points = available.get(type);
-			if (points==null) points=0;
+			if (points == null)
+				points = 0;
 			// Grant MAGIC or Resonance points
 			if (type.usesMagic()) {
-				logger.log(Level.INFO, "Selected "+type.getId()+" grants "+points+" MAGIC");
-				unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), points));
-				// Only for regular adepts - get power points 
+				logger.log(Level.INFO, "Selected " + type.getId() + " grants " + points + " MAGIC");
+				unprocessed.add(
+						new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), points));
+				// Only for regular adepts - get power points
 			} else if (type.usesResonance()) {
-				logger.log(Level.INFO, "Selected "+type.getId()+" grants "+points+" RESONANCE");
-				unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), points));
+				logger.log(Level.INFO, "Selected " + type.getId() + " grants " + points + " RESONANCE");
+				unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(),
+						points));
 			}
 			// For mystic adepts
-			SR6PrioritySettings sett = (SR6PrioritySettings)model.getCharGenSettings(SR6PrioritySettings.class);
+			SR6PrioritySettings sett = (SR6PrioritySettings) model.getCharGenSettings(SR6PrioritySettings.class);
 			sett.mysticAdeptMaxPoints = points;
 			sett.mysticAdeptPowerPoints = Math.max(points, sett.mysticAdeptPowerPoints);
+
+			return unprocessed;
+		} finally {
+
 		}
-		
-		return unprocessed;
 	}
 
 }
