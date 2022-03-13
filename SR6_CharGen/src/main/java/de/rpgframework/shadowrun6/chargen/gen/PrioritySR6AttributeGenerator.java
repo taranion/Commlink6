@@ -609,15 +609,15 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 				} else if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE) {
 					ValueModification mod = (ValueModification)tmp;
 					ShadowrunAttribute attr = mod.getResolvedKey();
-					getModel().getAttribute(attr).addModification(mod);
 					logger.log(Level.INFO, "Consume "+mod);
+					getModel().getAttribute(attr).addModification(mod);
 					if (mod.getSet()==ValueType.MAX) {
 						// Optional: Allow adjustment points on lowered maximum
 						if (mod.getValue()>6 || getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))
 							allowedAdjust.add(attr);					
 					}
 					// Update base
-					if (mod.getSet()==ValueType.NATURAL) {
+					if (mod.getSet()==ValueType.NATURAL && prioSettings.perAttrib.get(attr)!=null) {
 						logger.log(Level.DEBUG, "Updated base of "+attr+" with +"+mod.getValue());
 						prioSettings.perAttrib.get(attr).base += mod.getValue();
 					}

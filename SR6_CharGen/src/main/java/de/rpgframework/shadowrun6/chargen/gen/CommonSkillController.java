@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
+import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -191,8 +192,12 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 			}
 			
 			// Now add skill to character
-			SR6SkillValue ret = new SR6SkillValue(data, 1);
-			model.addSkillValue(ret);
+			// It may be already present due to modifications
+			SR6SkillValue ret = model.getSkillValue(data);
+			if (ret==null || data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE) {
+				ret = new SR6SkillValue(data, 1);
+				model.addSkillValue(ret);
+			}
 			logger.log(Level.DEBUG, "Added skill {0} to model", data);
 			
 			for (Decision dec : decisions) {

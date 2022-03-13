@@ -28,6 +28,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 
 /**
  * @author stefa
@@ -307,6 +308,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public IAdeptPowerController getAdeptPowerController() {
 		return wrapped.getAdeptPowerController();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSpellController()
+	 */
+	@Override
+	public SR6SpellController getSpellController() {
+		return wrapped.getSpellController();
 	}
 
 }

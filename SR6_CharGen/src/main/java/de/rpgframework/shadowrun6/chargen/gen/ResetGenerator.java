@@ -38,9 +38,25 @@ public class ResetGenerator implements ProcessingStep {
 	public List<Modification> process(List<Modification> unprocessed) {
 		// Reset all attributes
 		Shadowrun6Character model = charGen.getModel();
-		for (AttributeValue<ShadowrunAttribute> val : model.getAttributes()) {
+		for (ShadowrunAttribute attrib : ShadowrunAttribute.values()) {
+			AttributeValue<ShadowrunAttribute> val = model.getAttribute(attrib);
+			if (val==null) {
+				val = new AttributeValue<ShadowrunAttribute>(attrib);
+				model.setAttribute(val);
+			}
 			val.clearModifications();
 			logger.log(Level.DEBUG, "Mods of "+val+" = "+val.getModifiedValue());
+		}
+		// Reset all skills
+		for (SR6Skill tmp : Shadowrun6Core.getItemList(SR6Skill.class)) {
+			SR6SkillValue val = model.getSkillValue(tmp);
+//			if (val==null) {
+//				val = new SR6SkillValue(tmp,0);
+//				val.setResolved(tmp);
+//				model.addSkillValue(val);
+//			}
+			if (val!=null)
+			val.clearModifications();
 		}
 		for (QualityValue val : model.getQualities()) {
 			val.clearModifications();

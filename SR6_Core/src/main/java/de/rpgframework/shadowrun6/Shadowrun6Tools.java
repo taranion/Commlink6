@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
@@ -16,7 +17,9 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.CommonCharacter;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
@@ -440,4 +443,21 @@ public class Shadowrun6Tools {
 		
 		return new Possible(p1, p2);
 	}
+	
+	//-------------------------------------------------------------------
+	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, CommonCharacter<?, ?, ?> model) {
+		if (tmp instanceof ValueModification) {
+			ValueModification clone = ((ValueModification)tmp).clone();
+			if ("CHOICE".equals( clone.getKey() )) {
+				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
+				Decision dec = value.getDecision(uuid);
+				clone.setKey( dec.getValue());
+			}
+			
+			return clone;
+		}
+		
+		throw new IllegalArgumentException("Cannot instantiate "+tmp.getClass());
+	}
+	
 }

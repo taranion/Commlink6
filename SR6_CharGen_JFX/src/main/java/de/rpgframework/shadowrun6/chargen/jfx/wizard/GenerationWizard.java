@@ -11,9 +11,6 @@ import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
-import org.prelle.javafx.skin.WizardSkin;
-
-import com.itextpdf.text.pdf.PdfPageEventHelper;
 
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
@@ -23,12 +20,12 @@ import de.rpgframework.jfx.wizard.WizardPageGenerator;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAdeptPowers;
-import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAttributes;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPagePriority;
-import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageMagicOrResonance;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSpells;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -60,6 +57,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageQualities qualities;
 	private SR6WizardPageAttributes attrib;
 	private SR6WizardPageSkills skills;
+	private WizardPageSpells<SR6Spell> spells;
 	private WizardPageAdeptPowers powers;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
@@ -93,6 +91,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case QUALITIES   : ret.add(qualities); break;
 			case ATTRIBUTES  : ret.add(   attrib); break;
 			case SKILLS      : ret.add(   skills); break;
+			case SPELLS      : ret.add(   spells); break;
 			case POWERS      : ret.add(   powers); break;
 //			case RECOMMENDER : ret.add(profiles); break;
 			case NAME        : ret.add(   name); break;
@@ -104,6 +103,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	}
 	
 	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
 	private void initPages() {
 		chargen= new WizardPageGenerator(this, wrapper, 
 				CharacterGeneratorRegistry.getGenerators(),
@@ -118,6 +118,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());
+		spells = new WizardPageSpells<SR6Spell>(this, wrapper);
 		powers = new SR6WizardPageAdeptPowers(this, wrapper);
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		name   = new WizardPageName<>(this, wrapper);

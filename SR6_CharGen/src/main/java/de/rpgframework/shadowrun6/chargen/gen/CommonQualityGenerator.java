@@ -199,17 +199,25 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			// Pay or grant Karma for qualities
 			for (QualityValue val : model.getQualities()) {
 				Quality item = val.getModifyable();
-				int cost = item.getKarmaCost();
-				if (item.hasLevel())
-					cost *= val.getDistributed();
-				if (item.isPositive()) {
-					logger.log(Level.INFO, "Pay {0} Karma for ''{1}'' on level {2}", cost, item.getId(), val.getDistributed());
-					model.setKarmaFree( model.getKarmaFree() - cost);
-					karmaGain -= cost;
-				} else {
-					logger.log(Level.INFO, "Get {0} Karma for ''{1}''", cost, item);
-					model.setKarmaFree( model.getKarmaFree() + cost);
-					karmaGain += cost;
+				int cost = val.getKarmaCost();
+//				if (item.hasLevel())
+//					cost *= val.getDistributed();
+//				else if (val.isAutoAdded())
+//					cost = 0;
+				if (cost != 0) {
+					if (item.isPositive()) {
+						if (item.hasLevel()) {
+							logger.log(Level.INFO, "Pay {0} Karma for ''{1}'' on level {2}", cost, item.getId(), val.getDistributed());
+						} else {
+							logger.log(Level.INFO, "Pay {0} Karma for ''{1}''", cost, item.getId());
+						}
+						model.setKarmaFree(model.getKarmaFree() - cost);
+						karmaGain -= cost;
+					} else {
+						logger.log(Level.INFO, "Get {0} Karma for ''{1}''", cost, item.getId());
+						model.setKarmaFree(model.getKarmaFree() + cost);
+						karmaGain += cost;
+					}
 				}
 				
 				if (val.isAutoAdded()) {
@@ -218,6 +226,12 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 					}
 				} else
 					numberOfQualities++;
+				
+				// Inject modifications from qualities
+				for (Modification mod : val.getEffectiveModifications(model)) {
+					logger.log(Level.DEBUG, "Add modification {0}", mod);
+					unprocessed.add(mod);
+				}
 			}
 			
 			return unprocessed;

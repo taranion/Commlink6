@@ -8,9 +8,12 @@ import java.util.function.Function;
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.StringValueConverter;
 
+import de.rpgframework.genericrpg.data.CommonCharacter;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
+import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.CritterPower;
@@ -24,6 +27,7 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -223,6 +227,15 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	@Override
 	public <T> T[] resolveVariable(String varName) {
 		return (T[])ShadowrunReference.resolveVariable(this, varName);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.modification.ModifiedObjectType#instantiateModification(de.rpgframework.genericrpg.modification.Modification, de.rpgframework.genericrpg.data.ComplexDataItemValue, de.rpgframework.genericrpg.data.CommonCharacter)
+	 */
+	@Override
+	public Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, CommonCharacter<?, ?, ?> model) {
+		return Shadowrun6Tools.instantiateModification(tmp, value, model );
 	}
 	
 }

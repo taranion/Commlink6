@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.NumericalValueWith3PoolsController;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.ApplyTo;
@@ -400,7 +401,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			// If it is a knowledge skill or not present yet, it is available
 			if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE)
 				available.add(skill);
-			else if (model.getSkillValue(skill)==null) {
+			else if (model.getSkillValue(skill)==null || model.getSkillValue(skill).getModifiedValue()==0) {
 				available.add(skill);
 			}
 		}
@@ -463,9 +464,33 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 							default:
 								unprocessed.add(mod);
 							}						
+						} else {
+							logger.log(Level.WARNING, "ToDo: handle "+mod);
+							unprocessed.add(tmp);
 						}					
 					}
+				} else if (tmp.getReferenceType()==ShadowrunReference.SKILL) {
+					if (tmp instanceof ValueModification) {
+						ValueModification mod = (ValueModification)tmp;
+						SR6Skill key = mod.getResolvedKey();
+						SR6SkillValue val = model.getSkillValue(key);
+						// If skill is non-existent yet, add it
+						if (val==null) {
+							val = new SR6SkillValue(key,0);
+							val.setResolved(key);
+							model.addSkillValue(val);
+						}
+						logger.log(Level.INFO, "Consume {0} in skillval {1}", mod, val);
+						val.addModification(mod);
+						if (mod.getSet()==ValueType.MAX) {
+							logger.log(Level.INFO, "Maximum of skill {0} is now {1}", key, getMaximum(val));
+						}
+					} else {
+						logger.log(Level.WARNING, "ToDo: handle "+tmp);
+						unprocessed.add(tmp);
+					}
 				} else {
+					logger.log(Level.WARNING, "ToDo: handle "+tmp);
 					unprocessed.add(tmp);
 				}
 			}

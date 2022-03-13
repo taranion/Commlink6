@@ -1,7 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
-import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 

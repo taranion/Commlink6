@@ -34,6 +34,8 @@ public class SR6AdeptPowerGenerator extends SR6AdeptPowerController {
 		logger.log(Level.INFO, "MOR = "+model.getMagicOrResonanceType());
 		if (model.getMagicOrResonanceType()==null) 
 			return 0;
+		if (!model.getMagicOrResonanceType().usesPowers()) 
+			return 0;
 		
 		// Regular adepts get free power points matching their magic attribute
 		if (!model.getMagicOrResonanceType().paysPowers()) {

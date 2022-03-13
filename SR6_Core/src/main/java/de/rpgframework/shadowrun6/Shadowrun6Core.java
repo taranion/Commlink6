@@ -8,6 +8,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.nio.charset.Charset;
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -21,6 +22,7 @@ import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.GenericCore;
+import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTable;
 import de.rpgframework.shadowrun.PriorityTableEntry;
@@ -135,6 +137,20 @@ public class Shadowrun6Core extends GenericCore {
 	//-------------------------------------------------------------------
 	public static SpellFeature getSpellFeature(String key) {
 		return getItem(SpellFeature.class, key);
+	}
+
+	//-------------------------------------------------------------------
+	public static List<SR6Spell> getSpells() {
+		List<SR6Spell> ret = new ArrayList<>();
+		getItemList(ASpell.class).forEach(s -> ret.add((SR6Spell)s));
+		Collections.sort(ret, new Comparator<SR6Spell>() {
+			public int compare(SR6Spell arg0, SR6Spell arg1) {
+				int cmp = arg0.getCategory().compareTo(arg1.getCategory());
+				if (cmp!=0) return cmp;
+				return Collator.getInstance().compare(arg0.getName(),  arg1.getName());
+			}
+		});
+		return ret;
 	}
 
 	//-------------------------------------------------------------------

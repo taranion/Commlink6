@@ -25,6 +25,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 
 /**
  * @author prelle
@@ -41,6 +42,7 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	protected SR6SkillGenerator skill;
 	protected IQualityController qualities;
 	protected IAdeptPowerController adeptPowers;
+	protected SR6SpellController spells;
 	protected IEquipmentController equipment;
 
 	// -------------------------------------------------------------------
@@ -234,6 +236,15 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	@Override
 	public IAdeptPowerController getAdeptPowerController() {
 		return adeptPowers;
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSpellController()
+	 */
+	@Override
+	public SR6SpellController getSpellController() {
+		return spells;
 	}
 	
 	//-------------------------------------------------------------------

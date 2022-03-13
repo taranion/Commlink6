@@ -38,6 +38,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
@@ -101,6 +102,7 @@ public class PrioSkillGenTest {
 			public IQualityController getQualityController() { return null;}
 			public IEquipmentController getEquipmentController() { return null;}
 			public IAdeptPowerController getAdeptPowerController() { return null;}
+			public SR6SpellController getSpellController() { return null;}
 			@Override
 			public String getName() {
 				// TODO Auto-generated method stub
