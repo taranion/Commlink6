@@ -1,24 +1,25 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 import java.util.List;
 
-import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ToDoElement;
-import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun6.CreatePoints;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -104,6 +105,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			logger.log(Level.INFO, "Add {0} to model", item.toString());
 			getModel().addCarriedItem(item);
 			
+			parent.runProcessors();
 			return new OperationResult<CarriedItem<ItemTemplate>>(item);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {0}", value, List.of(decisions));
@@ -123,9 +125,39 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	}
 
 	@Override
-	public List<Modification> process(List<Modification> unprocessed) {
-		// TODO Auto-generated method stub
-		return unprocessed;
+	public List<Modification> process(List<Modification> previous) {
+		logger.log(Level.DEBUG, "ENTER");
+		try {
+			Shadowrun6Character model = getModel();
+			// Reset character nuyen
+			model.setNuyen(0);
+			
+			List<Modification> unprocessed = new ArrayList<>();
+			for (Modification tmp : previous) {
+				if (tmp instanceof ValueModification) {
+					ValueModification mod = (ValueModification)tmp;
+					if (mod.getReferenceType()==ShadowrunReference.CREATION_POINTS && mod.getResolvedKey()==CreatePoints.NUYEN) {
+						model.setNuyen( model.getNuyen() + mod.getValue());
+						logger.log(Level.DEBUG, "consume {0}", tmp);
+					}
+				} else {
+					// No ValueModification
+					unprocessed.add(tmp);
+				}
+			}
+			logger.log(Level.INFO, "{0} Nuyen available", model.getNuyen());
+			
+			/*
+			 * Walk through all items and pay for them
+			 */
+			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
+				logger.log(Level.DEBUG, "Pay {0} for {1}", 0, tmp.getNameWithRating());
+			}
+			
+			return unprocessed;
+		} finally {
+			logger.log(Level.DEBUG, "LEAVE");
+		}
 	}
 
 	@Override

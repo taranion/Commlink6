@@ -10,6 +10,7 @@ public enum CreatePoints {
 	ATTRIBUTES,
 	CHARACTER_POINTS,
 	LIFEPATH_MODULES,
+	NUYEN,
 	SKILLS,
 
 }

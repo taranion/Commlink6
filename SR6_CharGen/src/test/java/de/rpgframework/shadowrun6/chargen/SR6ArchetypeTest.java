@@ -135,7 +135,8 @@ public class SR6ArchetypeTest {
 		// Honorbound
 		poss = qualities.canBeSelected(Shadowrun6Core.getItem(Quality.class, "honorbound")); 
 		assertNotNull(poss.getMostSevere());
-		assertFalse(poss.toString(), poss.get());
+		assertEquals(Possible.State.DECISIONS_MISSING, poss.getState());
+		assertTrue(poss.toString(), poss.get()); // Non-stopper warnings should not lead to blocking
 		poss = qualities.canBeSelected(Shadowrun6Core.getItem(Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(Quality.class, "honorbound").getChoices().get(0).getUUID(),"Code Duello")); 
 		assertNull(poss.getMostSevere());
 		assertTrue(poss.toString(), poss.get());
@@ -248,17 +249,17 @@ public class SR6ArchetypeTest {
 		assertTrue(pVal.toString(), pVal.wasSuccessful());
 		assertEquals(0.5f, adept.getUnsedPowerPoints(), 0f);
 		
-//		IEquipmentController equip = charGen.getEquipmentController();
-//		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest"));
-//		assertNotNull(poss);
-//		assertTrue( poss.toString(), poss.get());
-//		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest")).wasSuccessful() );
-//		
-//		ItemTemplate bow = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
-//		// Try to add bow without rating
-//		assertFalse(  equip.select(bow).wasSuccessful() );
-//		// Try to add bow with rating
-//		assertTrue(  equip.select(bow, new Decision(bow.getChoices().get(0), "5")).wasSuccessful() );
+		IEquipmentController equip = charGen.getEquipmentController();
+		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest"));
+		assertNotNull(poss);
+		assertTrue( poss.toString(), poss.get());
+		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest")).wasSuccessful() );
+		
+		ItemTemplate bow = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
+		// Try to add bow without rating
+		assertFalse(  equip.select(bow).wasSuccessful() );
+		// Try to add bow with rating
+		assertTrue(  equip.select(bow, new Decision(bow.getChoices().get(0), "5")).wasSuccessful() );
 		
 		
 		byte[] raw = Shadowrun6Core.encode(model);

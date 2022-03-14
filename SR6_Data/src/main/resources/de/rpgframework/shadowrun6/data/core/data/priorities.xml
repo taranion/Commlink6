@@ -142,6 +142,32 @@
 		</modifications>
 	</priotableentry>
 
+	<priotableentry id="resourceA" prio="A" type="RESOURCES">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="NUYEN" value="450000"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="resourceB" prio="B" type="RESOURCES">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="NUYEN" value="275000"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="resourceC" prio="C" type="RESOURCES">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="NUYEN" value="150000"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="resourceD" prio="D" type="RESOURCES">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="NUYEN" value="50000"/>
+		</modifications>
+	</priotableentry>
+	<priotableentry id="resourceE" prio="E" type="RESOURCES">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="NUYEN" value="8000"/>
+		</modifications>
+	</priotableentry>
+
 </priotable>
 
 
