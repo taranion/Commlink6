@@ -256,295 +256,268 @@
    </item>
    
    <!-- Shotguns -->
-<!--    <item avail="2L" price="330" id="defiance_t250"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="SHOTGUNS"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="7,10,6,," ammo="5(m)" dmg="4P" mode="SS/SA" skill="firearms" spec="firearms/shotguns"/> -->
-<!--    </item> -->
-<!--    <item avail="2L" price="330" id="defiance_t250_shortbarrel"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="SHOTGUNS"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="8,8,4,," ammo="5(m)" dmg="3P" mode="SS/SA" skill="firearms" spec="firearms/shotguns"/> -->
-<!--    </item> -->
-<!--    <item avail="4L" price="700" id="mossberg_cmdt"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="SHOTGUNS"/> -->
-<!--       <modifications> -->
-<!--          <accessorymod hook="TOP" item="laser_sight"/> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="4,11,7,," ammo="10(c)/24(d)" dmg="4P" mode="SA/BF" skill="firearms" spec="firearms/shotguns"/> -->
-<!--    </item> -->
-<!--    <item avail="5L" price="825" id="pjss_model_55"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="SHOTGUNS"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <accessorymod hook="INTERNAL" item="shock_pad"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="3,12,8,," ammo="2(b)" dmg="4P" mode="SA/BF" skill="firearms" spec="firearms/shotguns"/> -->
-<!--    </item> -->
-<!--    <item avail="2L" price="325" id="remington_roomsweeper"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="SHOTGUNS"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="9,8,4,," ammo="8(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/shotguns"/> -->
-<!--    </item> -->
+   <item avail="2L" price="330" id="defiance_t250" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+       <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack="7,10,6,," ammo="5(m)" dmg="4P" mode="SS/SA" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+   <item avail="2L" price="330" id="defiance_t250_shortbarrel" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack="8,8,4,," ammo="5(m)" dmg="3P" mode="SS/SA" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+   <item avail="4L" price="700" id="mossberg_cmdt" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
+      </modifications>
+      <weapon attack="4,11,7,," ammo="10(c)/24(d)" dmg="4P" mode="SA/BF" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+   <item avail="5L" price="825" id="pjss_model_55" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+      </modifications>
+      <weapon attack="3,12,8,," ammo="2(b)" dmg="4P" mode="SA/BF" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+   <item avail="2L" price="325" id="remington_roomsweeper" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+      </modifications>
+      <weapon attack="9,8,4,," ammo="8(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/shotguns"/>
+   </item>
    
    <!-- Rifles -->
-<!--    <item avail="3L" price="12000" id="remington_900"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <accessorymod hook="TOP" item="imaging_scope"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="2,7,10,12,11" ammo="5(m)" dmg="5P" mode="SS" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="2L" price="11100" id="ruger_101"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <itemmod type="HOOK" ref="STOCK"/> -->
-<!--          <accessorymod hook="INTERNAL" item="imaging_scope"/> -->
-<!--          <accessorymod hook="STOCK" item="shock_pad"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="2,6,10,12,11"  ammo="8(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="2L" price="2100" id="ak_97"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="4,11,9,7,1" ammo="38(c)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="5L" price="3400" id="ares_alpha"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <accessorymod hook="UNDER" item="ares_alpha_grenade_launcher"/> -->
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="4,10,9,7,2" ammo="42(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="2L" price="1500" id="colt_m23"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!-- 		 <itemmod type="HOOK" ref="SIDE_L"/> -->
-<!-- 		 <itemmod type="HOOK" ref="SIDE_R"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="5,8,8,8,4" ammo="40(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="3L" price="2100" id="fn_har" > -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <accessorymod hook="BARREL" item="gas-vent_system" rating="2"/> -->
-<!--          <accessorymod hook="TOP" item="laser_sight"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="3,11,10,6,1" ammo="35(c)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="5L" price="3200" id="yamaha_raiden" > -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
-<!--          <accessorymod hook="INTERNAL" item="silencer"/> -->
-<!--          <itemmod item="yamaha_raiden_shotgun"/> -->
-<!--          <itemmod item="yamaha_raiden_launcher"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="4,11,10,7,2" ammo="60(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="4I" price="11000" id="ares_desert_strike"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <accessorymod hook="TOP" item="imaging_scope"/> -->
-<!--          <accessorymod hook="STOCK" item="shock_pad"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="3,10,10,10,10" ammo="14(c)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="5I" price="9050" id="cavalier_arms_crocket_ebr"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <itemmod type="HOOK" ref="STOCK"/> -->
-<!--          <accessorymod hook="TOP" item="imaging_scope"/> -->
-<!--          <accessorymod hook="STOCK" item="shock_pad"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="3,8,11,8,8" ammo="20(c)" dmg="5P" mode="SA/BF" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="5I" price="13200" id="ranger_arms_sm6"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <itemmod type="HOOK" ref="STOCK"/> -->
-<!--          <accessorymod hook="INTERNAL" item="imaging_scope"/> -->
-<!--          <accessorymod hook="STOCK" item="shock_pad"/> -->
-<!--          <accessorymod hook="INTERNAL" item="silencer"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="3,6,9,11,12" ammo="15(c)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
-<!--    <item avail="6I" price="15200" id="barret_model_122" > -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <itemmod type="HOOK" ref="STOCK"/> -->
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
-<!--          <accessorymod hook="UNDER" item="bipod"/> -->
-<!--          <accessorymod hook="INTERNAL" item="silencer"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="1,8,11,16,14" ammo="10(c)" dmg="6P" mode="SA" skill="firearms" spec="firearms/rifles"/> -->
-<!--    </item> -->
+   <item avail="3L" price="12000" id="remington_900" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+      </modifications>
+      <weapon attack="2,7,10,12,11" ammo="5(m)" dmg="5P" mode="SS" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="2L" price="11100" id="ruger_101" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+      </modifications>
+      <weapon attack="2,6,10,12,11"  ammo="8(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="2L" price="2100" id="ak_97" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack="4,11,9,7,1" ammo="38(c)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="5L" price="3400" id="ares_alpha" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <!--embed type="GEAR" ref="ares_alpha_grenade_launcher" intoType="HOOK" intoRef="UNDER"/-->
+         <!--moditemmod ref="smartgun_system_internal"/-->
+      </modifications>
+      <weapon attack="4,10,9,7,2" ammo="42(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="2L" price="1500" id="colt_m23" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+		 <itemmod type="HOOK" ref="SIDE_L"/>
+		 <itemmod type="HOOK" ref="SIDE_R"/>
+      </modifications>
+      <weapon attack="5,8,8,8,4" ammo="40(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="3L" price="2100" id="fn_har" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
+      </modifications>
+      <weapon attack="3,11,10,6,1" ammo="35(c)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="5L" price="3200" id="yamaha_raiden" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <!--moditemmod ref="smartgun_system_internal"/-->
+         <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <!--itemmod item="yamaha_raiden_shotgun"/>
+         <itemmod item="yamaha_raiden_launcher"/-->
+      </modifications>
+      <weapon attack="4,11,10,7,2" ammo="60(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="4I" price="11000" id="ares_desert_strike" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+      </modifications>
+      <weapon attack="3,10,10,10,10" ammo="14(c)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="5I" price="9050" id="cavalier_arms_crocket_ebr" type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+      </modifications>
+      <weapon attack="3,8,11,8,8" ammo="20(c)" dmg="5P" mode="SA/BF" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="5I" price="13200" id="ranger_arms_sm6" type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+         <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
+      </modifications>
+      <weapon attack="3,6,9,11,12" ammo="15(c)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item avail="6I" price="15200" id="barret_model_122" type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <!--moditemmod ref="smartgun_system_internal"/-->
+         <embed type="GEAR" ref="bipod" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
+      </modifications>
+      <weapon attack="1,8,11,16,14" ammo="10(c)" dmg="6P" mode="SA" skill="firearms" spec="firearms/rifles"/>
+   </item>
    
    <!-- Machine Guns -->
-<!--    <item avail="4L" price="4175" id="ingram_valiant"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="LMG"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="STOCK"/> -->
-<!--          <accessorymod hook="STOCK" item="shock_pad"/> -->
-<!--          <accessorymod hook="INTERNAL" item="laser_sight"/> -->
-<!--          <accessorymod hook="BARREL" item="gas-vent_system" rating="2"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="2,11,12,7,3" ammo="50(c)/100(belt)" dmg="4P" mode="SA/BF/FA"  skill="firearms" spec="firearms/longarms"/> -->
-<!--    </item> -->
-<!--    <item avail="4L" price="6900" id="stoner_ares_m202"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="MMG"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <requires> -->
-<!--         <attrreq attr="STRENGTH" val="3"/> -->
-<!--       </requires> -->
-<!--       <weapon attack="1,10,11,7,6" ammo="50(c)/100(belt)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/longarms"/> -->
-<!--    </item> -->
-<!--    <item avail="5L" price="8000" id="rpk_hmg"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="HMG"/> -->
-<!--       <modifications> -->
-<!--          <accessorymod hook="INTERNAL" item="tripod"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <requires> -->
-<!--         <attrreq attr="STRENGTH" val="5"/> -->
-<!--       </requires> -->
-<!--       <weapon attack="1,10,12,8,7" ammo="50(c)/100(belt)" dmg="6P" mode="SA/BF/FA" skill="firearms" spec="firearms/longarms"/> -->
-<!--    </item> -->
-<!--    <item avail="6I" price="10000" id="panther_xxl"> -->
-<!--       <useas type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON"/> -->
-<!--       <modifications> -->
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="BARREL"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <requires> -->
-<!--         <attrreq attr="STRENGTH" val="5"/> -->
-<!--       </requires> -->
-<!--       <weapon attack="1,9,12,8,6" ammo="15(c)" dmg="7P" mode="SA" skill="firearms" spec="firearms/longarms"/> -->
-<!--    </item> -->
+   <item avail="4L" price="4175" id="ingram_valiant" type="WEAPON_FIREARMS" subtype="LMG">
+      <modifications>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack="2,11,12,7,3" ammo="50(c)/100(belt)" dmg="4P" mode="SA/BF/FA"  skill="firearms" spec="firearms/longarms"/>
+   </item>
+   <item avail="4L" price="6900" id="stoner_ares_m202" type="WEAPON_FIREARMS" subtype="MMG">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <requires>
+      	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="3"/>
+      </requires>
+      <weapon attack="1,10,11,7,6" ammo="50(c)/100(belt)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/longarms"/>
+   </item>
+   <item avail="5L" price="8000" id="rpk_hmg" type="WEAPON_FIREARMS" subtype="HMG">
+      <modifications>
+          <embed type="GEAR" ref="tripod" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <requires>
+      	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="5"/>
+      </requires>
+      <weapon attack="1,10,12,8,7" ammo="50(c)/100(belt)" dmg="6P" mode="SA/BF/FA" skill="firearms" spec="firearms/longarms"/>
+   </item>
+   <item avail="6I" price="10000" id="panther_xxl" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+      <modifications>
+         <!--moditemmod ref="smartgun_system_internal"/-->
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <requires>
+      	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="5"/>
+      </requires>
+      <weapon attack="1,9,12,8,6" ammo="15(c)" dmg="7P" mode="SA" skill="firearms" spec="firearms/longarms"/>
+   </item>
    
    <!-- Exotic Weapons -->
-<!--    <item avail="3L" price="560" id="ares_s3_super_squirt"> -->
-<!--       <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="8,12,9,," ammo="20(c)" dmg="0P" mode="SS" skill="exotic_weapons" /> -->
-<!--    </item> -->
-<!--    <item avail="11R" price="600" id="parashield_dart_pistol"> -->
-<!--       <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="9,10,8,," ammo="5(c)" dmg="1P" mode="SS" skill="exotic_weapons"/> -->
-<!--    </item> -->
-<!--    <item avail="11R" price="1200" id="parashield_dart_rifle"> -->
-<!--       <useas type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--          <accessorymod hook="TOP" item="imaging_scope"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack="5,8,11,3," ammo="6(m)" dmg="1P" mode="SS" skill="exotic_weapons"/> -->
-<!--    </item> -->
-<!--     <item avail="3I" price="5900" id="ares_antioch-2"> -->
-<!--       <useas type="WEAPON_SPECIAL" subtype="LAUNCHERS"/> -->
-<!--       <modifications> -->
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack=",6,8,6,5" ammo="8(m)" dmg="0P" mode="SS" skill="exotic_weapons"/> -->
-<!--    </item> -->
-<!--    <item avail="4I" price="1800" id="armtech_mgl6"> -->
-<!--       <useas type="WEAPON_SPECIAL" subtype="LAUNCHERS"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack=",8,8,3," ammo="12(c)" dmg="0P" mode="SA" skill="exotic_weapons" /> -->
-<!--    </item> -->
-<!--    <item avail="4I" price="5000" id="armtech_mgl12"> -->
-<!--       <useas type="WEAPON_SPECIAL" subtype="LAUNCHERS"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack=",8,9,6,2" ammo="12(c)" dmg="0P" mode="SA" skill="exotic_weapons" /> -->
-<!--    </item> -->
-<!--    <item avail="5I" price="700" id="aztechnology_striker"> -->
-<!--       <useas type="WEAPON_SPECIAL" subtype="LAUNCHERS"/> -->
-<!--       <modifications> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack=",4,10,9,5" ammo="1(ml)" dmg="0P" mode="SS" skill="exotic_weapons"/> -->
-<!--    </item> -->
-<!--    <item avail="5I" price="9000" id="onotari_interceptor"> -->
-<!--       <useas type="WEAPON_SPECIAL" subtype="LAUNCHERS"/> -->
-<!--       <modifications> -->
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
-<!--          <itemmod type="HOOK" ref="TOP"/> -->
-<!--          <itemmod type="HOOK" ref="UNDER"/> -->
-<!--       </modifications> -->
-<!--       <weapon attack=",5,9,10,8" ammo="2(ml)" dmg="0P" mode="SS" skill="exotic_weapons" /> -->
-<!--    </item> -->
+   <item avail="3L" price="560" id="ares_s3_super_squirt" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack="8,12,9,," ammo="20(c)" dmg="0P" mode="SS" skill="exotic_weapons" />
+   </item>
+   <item avail="11R" price="600" id="parashield_dart_pistol" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+      </modifications>
+      <weapon attack="9,10,8,," ammo="5(c)" dmg="1P" mode="SS" skill="exotic_weapons"/>
+   </item>
+   <item avail="11R" price="1200" id="parashield_dart_rifle" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+          <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+      </modifications>
+      <weapon attack="5,8,11,3," ammo="6(m)" dmg="1P" mode="SS" skill="exotic_weapons"/>
+   </item>
+    <item avail="3I" price="5900" id="ares_antioch-2" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+      <modifications>
+         <!--moditemmod ref="smartgun_system_internal"/-->
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack=",6,8,6,5" ammo="8(m)" dmg="0P" mode="SS" skill="exotic_weapons"/>
+   </item>
+   <item avail="4I" price="1800" id="armtech_mgl6" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+       <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack=",8,8,3," ammo="12(c)" dmg="0P" mode="SA" skill="exotic_weapons" />
+   </item>
+   <item avail="4I" price="5000" id="armtech_mgl12" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+       <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack=",8,9,6,2" ammo="12(c)" dmg="0P" mode="SA" skill="exotic_weapons" />
+   </item>
+   <item avail="5I" price="700" id="aztechnology_striker" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack=",4,10,9,5" ammo="1(ml)" dmg="0P" mode="SS" skill="exotic_weapons"/>
+   </item>
+   <item avail="5I" price="9000" id="onotari_interceptor" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+      <modifications>
+         <!--moditemmod ref="smartgun_system_internal"/-->
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon attack=",5,9,10,8" ammo="2(ml)" dmg="0P" mode="SS" skill="exotic_weapons" />
+   </item>
    
 </items>
