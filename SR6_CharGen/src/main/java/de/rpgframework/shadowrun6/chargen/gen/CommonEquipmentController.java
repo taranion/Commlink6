@@ -10,8 +10,10 @@ import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
@@ -32,34 +34,51 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		super(parent);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getAvailable()
+	 */
 	@Override
 	public List<ItemTemplate> getAvailable() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>();
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
+	 */
 	@Override
 	public List<CarriedItem<ItemTemplate>> getSelected() {
-		// TODO Auto-generated method stub
-		return null;
+		List<CarriedItem<ItemTemplate>> ret = new ArrayList<>();
+		getModel().getCarriedItems().forEach(it -> ret.add(it));
+		return ret;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItem)
+	 */
 	@Override
 	public RecommendationState getRecommendationState(ItemTemplate value) {
-		// TODO Auto-generated method stub
-		return null;
+		return RecommendationState.NEUTRAL;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
 	@Override
 	public RecommendationState getRecommendationState(CarriedItem<ItemTemplate> value) {
-		// TODO Auto-generated method stub
-		return null;
+		return RecommendationState.NEUTRAL;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getChoicesToDecide(de.rpgframework.genericrpg.data.DataItem)
+	 */
 	@Override
 	public List<Choice> getChoicesToDecide(ItemTemplate value) {
-		// TODO Auto-generated method stub
-		return null;
+		return value.getChoices();
 	}
 
 	//-------------------------------------------------------------------
@@ -79,7 +98,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				}
 			}
 			if (choiceNotFound)
-				return new Possible(false, "Choice "+choice.getUUID()+" missing");
+				return new Possible(true, IRejectReasons.IMPOSS_MISSING_DECISIONS);
 		}
 		
 		return Possible.TRUE;
@@ -99,9 +118,8 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				return new OperationResult<>(poss);
 			}
 
-			CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(value, null);
-			item.getDecisions().addAll(List.of(decisions));
-			
+			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, decisions);
+			CarriedItem<ItemTemplate> item = ret.get();
 			logger.log(Level.INFO, "Add {0} to model", item.toString());
 			getModel().addCarriedItem(item);
 			
@@ -112,10 +130,17 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeDeselected(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
 	@Override
 	public Possible canBeDeselected(CarriedItem<ItemTemplate> value) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!getModel().getCarriedItems().contains(value))
+			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
+		if (value.isAutoAdded())
+			return new Possible(false, IRejectReasons.IMPOSS_AUTO_ADDED);
+		return Possible.TRUE;
 	}
 
 	@Override
@@ -124,6 +149,10 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		return false;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
+	 */
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 		logger.log(Level.DEBUG, "ENTER");
@@ -150,9 +179,14 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			/*
 			 * Walk through all items and pay for them
 			 */
+			int nuyen = model.getNuyen();
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
-				logger.log(Level.DEBUG, "Pay {0} for {1}", 0, tmp.getNameWithRating());
+				logger.log(Level.DEBUG, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE), tmp.getNameWithRating());
+				int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+				nuyen -= cost;
 			}
+			model.setNuyen(nuyen);
+			logger.log(Level.INFO, "Nuyen remaining: {0}", model.getNuyen());
 			
 			return unprocessed;
 		} finally {
