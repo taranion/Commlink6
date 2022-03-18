@@ -101,10 +101,10 @@
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
    </item>
-   <item id="throwing_knives" avail="2" price="155" type="WEAPON_RANGED" subtype="THROWING">
+   <item id="throwing_knives" avail="2" price="155" type="WEAPON_RANGED" subtype="THROWING" count="y">
       <weapon dmg="2P" attack="10,9,3,,"  skill="athletics" spec="athletics/throwing"/>
    </item>
-   <item id="throwing_stars" avail="2" price="160" type="WEAPON_RANGED" subtype="THROWING">
+   <item id="throwing_stars" avail="2" price="160" type="WEAPON_RANGED" subtype="THROWING" count="y">
       <weapon dmg="2P" attack="9,11,4,,"  skill="athletics" spec="athletics/throwing"/>
    </item>
 </items>
