@@ -30,6 +30,8 @@ import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
+import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
@@ -108,6 +110,8 @@ public class PrioQualGenTest {
 			public IEquipmentController getEquipmentController() { return null;}
 			public IAdeptPowerController getAdeptPowerController() { return null;}
 			public SR6SpellController getSpellController() { return null;}
+			public IComplexFormController getComplexFormController() { return null;}
+			public IContactController getContactController() { return null;}
 			@Override
 			public String getName() {
 				// TODO Auto-generated method stub

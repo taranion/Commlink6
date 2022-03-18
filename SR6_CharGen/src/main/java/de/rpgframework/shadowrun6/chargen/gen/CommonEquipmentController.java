@@ -98,7 +98,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				}
 			}
 			if (choiceNotFound)
-				return new Possible(true, IRejectReasons.IMPOSS_MISSING_DECISIONS);
+				return new Possible(Possible.State.DECISIONS_MISSING, IRejectReasons.IMPOSS_MISSING_DECISIONS);
 		}
 		
 		return Possible.TRUE;
@@ -113,13 +113,14 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		logger.log(Level.TRACE, "ENTER select({0}, {1}", value, List.of(decisions));
 		try {
 			Possible poss = canBeSelected(value, decisions);
-			if (!poss.get()) {
+			if (!poss.getRequireDecisions()) {
 				logger.log(Level.ERROR, "Trying to select {0} which may not be selected: {1}", value, poss.toString());
 				return new OperationResult<>(poss);
 			}
 
 			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
+			if (value.isCountable()) item.setCount(1);
 			logger.log(Level.INFO, "Add {0} to model", item.toString());
 			getModel().addCarriedItem(item);
 			
@@ -194,10 +195,68 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
+	 */
 	@Override
 	public float getSelectionCost(ItemTemplate data) {
 		// TODO Auto-generated method stub
 		return data.getAttribute(SR6ItemAttribute.PRICE).getDistributed();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeIncreased(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public Possible canBeIncreased(CarriedItem<ItemTemplate> value) {
+		if (!value.getModifyable().isCountable())
+			return Possible.FALSE;
+		return Possible.TRUE;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeDecreased(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public Possible canBeDecreased(CarriedItem<ItemTemplate> value) {
+		if (!value.getModifyable().isCountable())
+			return Possible.FALSE;
+		if (value.getCount()<2)
+			return Possible.FALSE;
+		return Possible.TRUE;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public OperationResult<CarriedItem<ItemTemplate>> increase(CarriedItem<ItemTemplate> value) {
+		logger.log(Level.TRACE, "increase {0}", value);
+		Possible poss = canBeIncreased(value);
+		if (!poss.get()) {
+			logger.log(Level.WARNING, "Trying to increase count on item where not allowed");
+			return new OperationResult<>(poss);
+		}
+		
+		value.setCount( value.getCount()+1 );
+		logger.log(Level.INFO, "Increase count of {0} to {1}", value, value.getCount());
+		
+		parent.runProcessors();
+		return new OperationResult<>(value);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#decrease(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public OperationResult<CarriedItem<ItemTemplate>> decrease(CarriedItem<ItemTemplate> value) {
+		// TODO Auto-generated method stub
+		return new OperationResult<>(value);
 	}
 
 }

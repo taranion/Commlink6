@@ -5,45 +5,31 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 
 import de.rpgframework.character.CharacterHandle;
-import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleConfiguration;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.chargen.RuleValue;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
-import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
-import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 
 /**
  * @author prelle
  *
  */
-public abstract class CommonSR6CharacterGenerator extends CharacterControllerImpl<ShadowrunAttribute,Shadowrun6Character>
+public abstract class CommonSR6CharacterGenerator extends SR6CharacterControllerImpl
 		implements SR6CharacterGenerator {
 
 	protected static final Logger logger = System.getLogger(CommonSR6CharacterGenerator.class.getPackageName());
 
 	protected IMetatypeController meta;
 	protected MagicOrResonanceController magicReso;
-	protected CommonAttributeGenerator attributes;
-	protected SR6SkillGenerator skill;
-	protected IQualityController qualities;
-	protected IAdeptPowerController adeptPowers;
-	protected SR6SpellController spells;
-	protected IEquipmentController equipment;
 
 	// -------------------------------------------------------------------
 	protected CommonSR6CharacterGenerator() {
@@ -184,33 +170,6 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 		return null;
 	}
 
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getAttributeController()
-	 */
-	@Override
-	public IAttributeController getAttributeController() {
-		return attributes;
-	}
-
-	// -------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSkillController()
-	 */
-	@Override
-	public SR6SkillController getSkillController() {
-		return skill;
-	}
-
-	// -------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getQualityController()
-	 */
-	@Override
-	public IQualityController getQualityController() {
-		return qualities;
-	}
-
 	// -------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getMetatypeController()
@@ -227,33 +186,6 @@ public abstract class CommonSR6CharacterGenerator extends CharacterControllerImp
 	@Override
 	public IMagicOrResonanceController getMagicOrResonanceController() {
 		return magicReso;
-	}
-	
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getAdeptPowerController()
-	 */
-	@Override
-	public IAdeptPowerController getAdeptPowerController() {
-		return adeptPowers;
-	}
-	
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSpellController()
-	 */
-	@Override
-	public SR6SpellController getSpellController() {
-		return spells;
-	}
-	
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getEquipmentController()
-	 */
-	@Override
-	public IEquipmentController getEquipmentController() {
-		return equipment;
 	}
 
 }

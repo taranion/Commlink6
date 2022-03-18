@@ -261,6 +261,17 @@ public class SR6ArchetypeTest {
 		// Try to add bow with rating
 		assertTrue(  equip.select(bow, new Decision(bow.getChoices().get(0), "5")).wasSuccessful() );
 		
+		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "knife")).wasSuccessful() );
+		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "shock_gloves")).wasSuccessful() );
+		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "stun_baton")).wasSuccessful() );
+		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "sword")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> itemRes = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "throwing_knives"));
+		CarriedItem<ItemTemplate> item = itemRes.get();
+		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 2
+		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 3
+		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 4
+		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 5
+		
 		
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);

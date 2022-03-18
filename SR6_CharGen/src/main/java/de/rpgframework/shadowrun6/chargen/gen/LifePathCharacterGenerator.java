@@ -99,6 +99,20 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl#createPartialController()
+	 */
+	@Override
+	protected void createPartialController() {
+//		attributes = new PointBuySR6AttributeGenerator(this);
+		meta = new SR6LifePathMetatypeController(this);
+		magicReso = new SR6LifePathMagicOrResonanceController(this);
+//		skill = new PointBuySR6SkillGenerator(this);
+		logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
+
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#setupProcessChain()
 	 */
 	@Override
@@ -110,12 +124,7 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 				return;
 			}
 
-//			attributes = new PointBuySR6AttributeGenerator(this);
-			meta = new SR6LifePathMetatypeController(this);
-			magicReso = new SR6LifePathMagicOrResonanceController(this);
-//			skill = new PointBuySR6SkillGenerator(this);
-			logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
-
+			createPartialController();
 			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			processChain.add(new SR6LifePathResetGenerator(this));
 			processChain.add(meta);

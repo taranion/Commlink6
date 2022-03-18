@@ -101,6 +101,23 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		return new PriorityTableController<Shadowrun6Character,SR6PrioritySettings>(this, SR6PrioritySettings.class, resolver);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl#createPartialController()
+	 */
+	@Override
+	protected void createPartialController() {
+		prioCtrl = createPriorityTableController();
+		attributes = new PrioritySR6AttributeGenerator(this);
+		meta = new SR6PriorityMetatypeController(this);
+		magicReso = new PriorityMagicOrResonanceController(this);
+		skills = new PrioritySR6SkillGenerator(this);
+		qualities = new CommonQualityGenerator(this);
+		equipment = new CommonEquipmentController(this);
+		spells    = new SR6PrioritySpellGenerator(this);
+		adeptPowers = new SR6AdeptPowerGenerator(this);
+	}
+
 	// --------------------------------------------------------------------
 	@Override
 	protected void setupProcessChain() {
@@ -111,16 +128,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 				return;
 			}
 
-			prioCtrl = createPriorityTableController();
-			attributes = new PrioritySR6AttributeGenerator(this);
-			meta = new SR6PriorityMetatypeController(this);
-			magicReso = new PriorityMagicOrResonanceController(this);
-			skill = new PrioritySR6SkillGenerator(this);
-			qualities = new CommonQualityGenerator(this);
-			equipment = new CommonEquipmentController(this);
-			spells    = new SR6PrioritySpellGenerator(this);
-			adeptPowers = new SR6AdeptPowerGenerator(this);
-			logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
+			createPartialController();
 
 			processChain.add(new ResetModifications(model));
 			processChain.add(new ResetGenerator(this));
@@ -129,7 +137,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(magicReso);
 			processChain.add(qualities);
 			processChain.add(attributes);
-			processChain.add(skill);
+			processChain.add(skills);
 			processChain.add(spells);
 			processChain.add(adeptPowers);
 			processChain.add(equipment);

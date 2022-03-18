@@ -121,20 +121,14 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 				return;
 			}
 
-			attributes = new SR6PointBuyAttributeGenerator(this);
-			meta = new PointBuyMetatypeController(this);
-			magicReso = new PointBuyMagicOrResonanceController(this);
-			skill = new PointBuySR6SkillGenerator(this);
-			qualities = new CommonQualityGenerator(this);
-			logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
-
+			createPartialController();
 			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			processChain.add(new ResetGenerator(this));
 			processChain.add(meta);
 			processChain.add(magicReso);
 			processChain.add(qualities);
 			processChain.add(attributes);
-			processChain.add(skill);
+			processChain.add(skills);
 
 			setupDone = true;
 		} finally {
@@ -168,5 +162,19 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	@Override
 	public PointBuyAttributeGenerator getPointBuyAttributeController() {
 		return (PointBuyAttributeGenerator) super.attributes;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl#createPartialController()
+	 */
+	@Override
+	protected void createPartialController() {
+		attributes = new SR6PointBuyAttributeGenerator(this);
+		meta = new PointBuyMetatypeController(this);
+		magicReso = new PointBuyMagicOrResonanceController(this);
+		skills = new PointBuySR6SkillGenerator(this);
+		qualities = new CommonQualityGenerator(this);
+		logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
 	}
 }
