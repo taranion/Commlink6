@@ -422,7 +422,7 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
-      <weapon attack="2,11,12,7,3" ammo="50(c)/100(belt)" dmg="4P" mode="SA/BF/FA"  skill="firearms" spec="firearms/longarms"/>
+      <weapon attack="2,11,12,7,3" ammo="50(c)/100(belt)" dmg="4P" mode="SA/BF/FA"  skill="firearms" spec="firearms/machine_guns"/>
    </item>
    <item avail="4L" price="6900" id="stoner_ares_m202" type="WEAPON_FIREARMS" subtype="MMG">
       <modifications>
@@ -433,7 +433,7 @@
       <requires>
       	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="3"/>
       </requires>
-      <weapon attack="1,10,11,7,6" ammo="50(c)/100(belt)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/longarms"/>
+      <weapon attack="1,10,11,7,6" ammo="50(c)/100(belt)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/machine_guns"/>
    </item>
    <item avail="5L" price="8000" id="rpk_hmg" type="WEAPON_FIREARMS" subtype="HMG">
       <modifications>
@@ -445,7 +445,7 @@
       <requires>
       	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="5"/>
       </requires>
-      <weapon attack="1,10,12,8,7" ammo="50(c)/100(belt)" dmg="6P" mode="SA/BF/FA" skill="firearms" spec="firearms/longarms"/>
+      <weapon attack="1,10,12,8,7" ammo="50(c)/100(belt)" dmg="6P" mode="SA/BF/FA" skill="firearms" spec="firearms/machine_guns"/>
    </item>
    <item avail="6I" price="10000" id="panther_xxl" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
       <modifications>
@@ -457,7 +457,7 @@
       <requires>
       	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="5"/>
       </requires>
-      <weapon attack="1,9,12,8,6" ammo="15(c)" dmg="7P" mode="SA" skill="firearms" spec="firearms/longarms"/>
+      <weapon attack="1,9,12,8,6" ammo="15(c)" dmg="7P" mode="SA" skill="firearms" spec="firearms/machine_guns"/>
    </item>
    
    <!-- Exotic Weapons -->
