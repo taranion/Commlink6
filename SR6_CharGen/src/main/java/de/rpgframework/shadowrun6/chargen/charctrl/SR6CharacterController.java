@@ -14,7 +14,5 @@ public interface SR6CharacterController extends IShadowrunCharacterController<SR
 	public SR6SkillController getSkillController();
 
 	public IEquipmentController getEquipmentController();
-
-	public SR6SpellController getSpellController();
 	
 }

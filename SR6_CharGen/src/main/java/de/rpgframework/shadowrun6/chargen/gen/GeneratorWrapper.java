@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
+import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
@@ -25,7 +26,9 @@ import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
+import de.rpgframework.shadowrun.chargen.charctrl.ISpellController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -316,8 +319,9 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSpellController()
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public SR6SpellController getSpellController() {
+	public ISpellController<SR6Spell> getSpellController() {
 		return wrapped.getSpellController();
 	}
 

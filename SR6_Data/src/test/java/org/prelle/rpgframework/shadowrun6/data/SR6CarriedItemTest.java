@@ -146,7 +146,7 @@ public class SR6CarriedItemTest {
 		assertNotNull(item.getAsObject(SR6ItemAttribute.SKILL));
 		assertEquals(Shadowrun6Core.getSkill("firearms"), (SR6Skill)item.getAsObject(SR6ItemAttribute.SKILL).getModifiedValue());
 		assertNotNull(item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION));
-		assertEquals(Shadowrun6Core.getSkill("firearms").getSpecialization("pistols"), (SkillSpecialization<SR6Skill>)item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getModifiedValue());
+		assertEquals(Shadowrun6Core.getSkill("firearms").getSpecialization("tasers"), (SkillSpecialization<SR6Skill>)item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getModifiedValue());
 		
 		//item.get
 	}
