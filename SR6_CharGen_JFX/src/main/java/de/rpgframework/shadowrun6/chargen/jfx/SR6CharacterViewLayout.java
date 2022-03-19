@@ -141,9 +141,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		super.pages.setHeader(tmp);
 
 		GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
-		logger.log(Level.WARNING, "ToDo: Detect previously used generator");
+		logger.log(Level.INFO, "ToDo: Detect previously used generator: {0}",model.getCharGenUsed());
 		try {
-			SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator( model.getCharGenUsed() );
+			SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator( model.getCharGenUsed(), model, handle );
 			wrapper.setWrapped(charGen);
 			super.control = wrapper;
 		} catch (Exception e) {

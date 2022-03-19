@@ -122,7 +122,7 @@ public class PrioQualGenTest {
 				// TODO Auto-generated method stub
 				return null;
 			}
-			public <T> T getRule(Rule rule) {return null;}
+			public RuleValue getRule(Rule rule) {return null;}
 			public List<RuleValue> getRules() { return new ArrayList<>(); }
 			@Override
 			public MagicOrResonanceController getMagicOrResonanceController() {return null;}

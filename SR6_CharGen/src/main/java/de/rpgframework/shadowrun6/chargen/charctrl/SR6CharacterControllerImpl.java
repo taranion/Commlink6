@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
@@ -29,6 +30,13 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	
 	//-------------------------------------------------------------------
 	public SR6CharacterControllerImpl() {
+		// Moved to child controller/generators
+		//createPartialController();
+	}
+	
+	//-------------------------------------------------------------------
+	public SR6CharacterControllerImpl(Shadowrun6Character model, CharacterHandle handle) {
+		super(model,handle);
 		createPartialController();
 	}
 	

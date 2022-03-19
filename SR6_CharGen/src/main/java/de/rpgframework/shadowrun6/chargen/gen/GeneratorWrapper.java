@@ -275,7 +275,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRule(de.rpgframework.genericrpg.chargen.Rule)
 	 */
 	@Override
-	public <T> T getRule(Rule rule) {
+	public RuleValue getRule(Rule rule) {
 		return wrapped.getRule(rule);
 	}
 

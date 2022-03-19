@@ -20,6 +20,7 @@ import de.rpgframework.jfx.wizard.WizardPageGenerator;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAdeptPowers;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageComplexForms;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPagePriority;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSpells;
@@ -59,6 +60,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageSkills skills;
 	private WizardPageSpells<SR6Spell> spells;
 	private WizardPageAdeptPowers powers;
+	private WizardPageComplexForms complexForms;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
 		String name = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName());
@@ -83,18 +85,19 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		List<WizardPage> ret = new ArrayList<>();
 		for (WizardPageType type : wrapper.getWrapped().getWizardPages()) {
 			switch (type) {
-			case PRIORITIES  : ret.add(    prios); break;
-			case METATYPE    : ret.add(     race); break;
+			case PRIORITIES   : ret.add(    prios); break;
+			case METATYPE     : ret.add(     race); break;
 			case SR6_LIFEPATH1:ret.add(lifepath1); break;
-			case SURGE       : ret.add(    surge); break;
+			case SURGE        : ret.add(    surge); break;
 			case MAGIC_OR_RESONANCE: ret.add(magic); break;
-			case QUALITIES   : ret.add(qualities); break;
-			case ATTRIBUTES  : ret.add(   attrib); break;
-			case SKILLS      : ret.add(   skills); break;
-			case SPELLS      : ret.add(   spells); break;
-			case POWERS      : ret.add(   powers); break;
-//			case RECOMMENDER : ret.add(profiles); break;
-			case NAME        : ret.add(   name); break;
+			case QUALITIES    : ret.add(qualities); break;
+			case ATTRIBUTES   : ret.add(   attrib); break;
+			case SKILLS       : ret.add(   skills); break;
+			case SPELLS       : ret.add(   spells); break;
+			case POWERS       : ret.add(   powers); break;
+			case COMPLEX_FORMS: ret.add(complexForms); break;
+//			case RECOMMENDER  : ret.add(profiles); break;
+			case NAME         : ret.add(   name); break;
 			default:
 				logger.log(Level.ERROR,"Unsupported page type "+type);
 			}
@@ -120,6 +123,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());
 		spells = new WizardPageSpells<SR6Spell>(this, wrapper);
 		powers = new SR6WizardPageAdeptPowers(this, wrapper);
+		complexForms = new WizardPageComplexForms(this, wrapper);
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		name   = new WizardPageName<>(this, wrapper);
 		

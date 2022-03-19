@@ -38,9 +38,9 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 
 	//-------------------------------------------------------------------
 	public CommonSR6CharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
-		this();
-		this.model = model;
-		this.handle = handle;
+		super(model, handle);
+		updateEffectiveRules();
+		createPartialController();
 	}
 
 	// --------------------------------------------------------------------

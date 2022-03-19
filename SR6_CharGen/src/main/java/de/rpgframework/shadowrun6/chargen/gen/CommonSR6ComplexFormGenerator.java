@@ -4,42 +4,47 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
+import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.ChoiceOption;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.shadowrun.ASpell;
-import de.rpgframework.shadowrun.AdeptPowerValue;
+import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.SpellValue;
+import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
  *
  */
-public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implements SR6SpellController {
-	
-	private int freeSpells;
+public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> implements IComplexFormController {
+
+	public final static MultiLanguageResourceBundle RES = SR6CharacterGenerator.RES;
 
 	//-------------------------------------------------------------------
-	protected SR6PrioritySpellGenerator(SR6CharacterController parent) {
+	/**
+	 * @param parent
+	 */
+	public CommonSR6ComplexFormGenerator(SR6CharacterController parent) {
 		super(parent);
-	}
-
-	//-------------------------------------------------------------------
-	public int getFreeSpells() {
-		return freeSpells;
+		// TODO Auto-generated constructor stub
 	}
 
 	//-------------------------------------------------------------------
@@ -47,12 +52,12 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getAvailable()
 	 */
 	@Override
-	public List<SR6Spell> getAvailable() {
-		List<SR6Spell> ret = new ArrayList<>(Shadowrun6Core.getSpells());
-		for (SpellValue<? extends ASpell> tmp : getModel().getSpells()) {
-			ret.remove(tmp.getModifyable());
-		}
-		logger.log(Level.WARNING, "Return "+ret.size()+" available");
+	public List<ComplexForm> getAvailable() {
+		List<ComplexForm> ret = new ArrayList<>();
+		ret.addAll( Shadowrun6Core.getItemList(ComplexForm.class).stream()
+			.filter(cf -> cf.isMultipleSelectable() || getModel().getComplexForm(cf.getId())==null)
+			.collect(Collectors.toList())
+		);
 		return ret;
 	}
 
@@ -60,12 +65,9 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<SpellValue<SR6Spell>> getSelected() {
-		List<SpellValue<SR6Spell>> ret = new ArrayList<>();
-		getModel().getSpells().forEach( sp -> ret.add((SpellValue<SR6Spell>) sp));
-		return ret;
+	public List<ComplexFormValue> getSelected() {
+		return getModel().getComplexForms();
 	}
 
 	//-------------------------------------------------------------------
@@ -73,7 +75,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public RecommendationState getRecommendationState(SR6Spell value) {
+	public RecommendationState getRecommendationState(ComplexForm value) {
 		return RecommendationState.NEUTRAL;
 	}
 
@@ -82,7 +84,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItemValue)
 	 */
 	@Override
-	public RecommendationState getRecommendationState(SpellValue<SR6Spell> value) {
+	public RecommendationState getRecommendationState(ComplexFormValue value) {
 		return RecommendationState.NEUTRAL;
 	}
 
@@ -91,8 +93,9 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getChoicesToDecide(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public List<Choice> getChoicesToDecide(SR6Spell value) {
-		return value.getChoices();
+	public List<Choice> getChoicesToDecide(ComplexForm value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	//-------------------------------------------------------------------
@@ -100,15 +103,33 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
+	public Possible canBeSelected(ComplexForm value, Decision... decisions) {
 		// Ensure spell has not been selected yet
-		for (SpellValue<SR6Spell> tmp : getSelected()) {
-			if (tmp.getResolved()==value)
+		for (ComplexFormValue tmp : getSelected()) {
+			if (tmp.getResolved()==value && !value.isMultipleSelectable())
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 		
-		if (freeSpells<1)
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+		List<Choice> requiredChoices = value.getChoices();
+		for (Decision dec : decisions) {
+			logger.log(Level.INFO, "Decision "+dec);
+			if (dec==null) continue;
+			Choice choice = value.getChoice( dec.getChoiceUUID() );
+			// If we found 
+			if (choice!=null) requiredChoices.remove(choice);
+		}
+
+		// If there are decisions open, don't allow selection
+		if (!requiredChoices.isEmpty()) {
+			// Convert open decisions into names or at least identifiers
+			List<String> names = new ArrayList<>();
+			requiredChoices.forEach(c -> names.add( 
+					(c.getChooseFrom()==ShadowrunReference.SUBSELECT)?value.getChoiceName(c, Locale.getDefault()):String.valueOf(c.getChooseFrom())));
+			return new Possible(Severity.WARNING, RES, SR6RejectReasons.IMPOSS_MISSING_DECISIONS,names);
+		}
+		
+//		if (freeSpells<1)
+//			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 			
 		return Possible.TRUE;
 	}
@@ -118,22 +139,22 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#select(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public OperationResult<SpellValue<SR6Spell>> select(SR6Spell value, Decision... decisions) {
+	public OperationResult<ComplexFormValue> select(ComplexForm value, Decision... decisions) {
 		logger.log(Level.TRACE, "ENTER select({0}, {1})", value, Arrays.toString(decisions));
 		try {
 			Possible poss = canBeSelected(value, decisions);
-			if (!poss.get()) {
-				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
+			if (!poss.getRequireDecisions()) {
+				logger.log(Level.WARNING, "Trying to select a complex form which cannot be selected: {0}",poss);
 				return new OperationResult<>(poss);
 			}
 			
-			SpellValue<SR6Spell> toAdd = new SpellValue<SR6Spell>(value);
+			ComplexFormValue toAdd = new ComplexFormValue(value);
 			for (Decision dec : decisions) {
 				toAdd.addDecision(dec);
 			}
 			
-			getModel().addSpell(toAdd);
-			logger.log(Level.INFO, "Added spell {0}", toAdd);
+			getModel().addComplexForm(toAdd);
+			logger.log(Level.INFO, "Added complex form {0}", toAdd);
 			
 			parent.runProcessors();
 			
@@ -148,7 +169,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeDeselected(de.rpgframework.genericrpg.data.DataItemValue)
 	 */
 	@Override
-	public Possible canBeDeselected(SpellValue<SR6Spell> value) {
+	public Possible canBeDeselected(ComplexFormValue value) {
 		if (!getSelected().contains(value)) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
@@ -165,17 +186,17 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
 	 */
 	@Override
-	public boolean deselect(SpellValue<SR6Spell> value) {
+	public boolean deselect(ComplexFormValue value) {
 		logger.log(Level.TRACE, "ENTER deselect({0})", value);
 		try {
 			Possible poss = canBeDeselected(value);
-			if (!poss.getRequireDecisions()) {
-				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
+			if (!poss.get()) {
+				logger.log(Level.WARNING, "Trying to select a complex form which cannot be selected: {0}",poss);
 				return false;
 			}
 			
-			getModel().removeSpell(value);
-			logger.log(Level.INFO, "Removed spell {0}", value);
+			getModel().removeComplexForm(value);
+			logger.log(Level.INFO, "Removed complex form {0}", value);
 			
 			parent.runProcessors();
 			
@@ -190,7 +211,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(SR6Spell data) {
+	public float getSelectionCost(ComplexForm data) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

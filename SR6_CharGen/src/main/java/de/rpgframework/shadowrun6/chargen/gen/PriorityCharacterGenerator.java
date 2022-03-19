@@ -116,6 +116,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		equipment = new CommonEquipmentController(this);
 		spells    = new SR6PrioritySpellGenerator(this);
 		adeptPowers = new SR6AdeptPowerGenerator(this);
+		complex   = new CommonSR6ComplexFormGenerator(this);
 	}
 
 	// --------------------------------------------------------------------
@@ -141,6 +142,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(spells);
 			processChain.add(adeptPowers);
 			processChain.add(equipment);
+			processChain.add(complex);
 
 			setupDone = true;
 		} finally {

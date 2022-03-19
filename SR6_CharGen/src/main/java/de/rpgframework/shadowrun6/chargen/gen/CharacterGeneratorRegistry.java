@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 
 /**
@@ -41,12 +43,12 @@ public class CharacterGeneratorRegistry {
 	}
 
 	//-------------------------------------------------------------------
-	public static SR6CharacterGenerator getGenerator(String id) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException  {
+	public static SR6CharacterGenerator getGenerator(String id, Shadowrun6Character model, CharacterHandle handle) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException  {
 		
 		Class<? extends SR6CharacterGenerator> clazz = generators.get(id);
 		if (clazz==null)
 			throw new NoSuchElementException("Unknown generator: "+id);
-		return clazz.getConstructor().newInstance();
+		return clazz.getConstructor(Shadowrun6Character.class, CharacterHandle.class).newInstance(model, handle);
 	}
 
 }
