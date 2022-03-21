@@ -29,17 +29,20 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	CAPACITY,
 //	CONCEALABILITY,
 	DAMAGE(new WeaponDamageConverter()),
+	DEFENSE_MATRIX,
 	// Defense Rating against physical attacks
 	DEFENSE_PHYSICAL,
 	// Defense Rating against social attacks
 	DEFENSE_SOCIAL,
 	DAMAGE_REDUCTION,
 //	DEFENSE_RATING,
-//	DEVICE_RATING,
+	DEVICE_RATING,
 //	ESSENCECOST,
 	FIREMODES,
 //	HANDLING,
 //	HAS_RATING,
+	/* For accessories: Where to attach it */
+	HOOK,
 //	/** Maximum rating of embedded items */
 //	MAX_SENSOR_RATING,
 //	MODIFICATION_SLOTS,
@@ -50,17 +53,19 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	RATING,
 //	SEATS,
 //	SENSORS,
+	/** The amount of capacity slots required */
+	SIZE,
 	SKILL,
 	SKILL_SPECIALIZATION,
 //	SOCIAL,
 //	SPEED_INTERVAL,
 //	SPEED,
-//
-//	ATTACK,
-//	SLEAZE,
-//	DATA_PROCESSING,
-//	FIREWALL,
-//	CONCURRENT_PROGRAMS,
+
+	ATTACK,
+	SLEAZE,
+	DATA_PROCESSING,
+	FIREWALL,
+	CONCURRENT_PROGRAMS,
 	;
 	
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();

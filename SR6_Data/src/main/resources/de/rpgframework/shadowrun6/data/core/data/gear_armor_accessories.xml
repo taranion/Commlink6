@@ -1,27 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item avail="3" cost="250" id="chemical_protection" rate="true" ratemul="PRICE CAPACITY" >
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="1"/>
-   </item>
-   <item avail="5" cost="3000" id="chemical_seal" >
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="6"/>
-      <requires>
-        <itemreq item="full_body_armor_with_helmet"/>
-      </requires>
-   </item>
-   <item avail="3" cost="250" id="cold_resistance" rate="true" ratemul="PRICE CAPACITY">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="1"/>
-   </item>
-   <item avail="3" cost="250" id="fire_resistance" rate="true" ratemul="PRICE CAPACITY">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="1"/>
-   </item>
-   <item avail="3" cost="250" id="electricity_resistance" rate="true" ratemul="PRICE CAPACITY" >
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="1"/>
-   </item>
-   <item avail="1" cost="75" id="electrochromic_feature">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="0"/>
-   </item>
-   <item avail="2" cost="150" id="feedback_feature" >
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="0"/>
-   </item>
+	<item avail="3" price="250" id="chemical_protection"
+		type="ACCESSORY" subtype="ARMOR_BODY">
+		<choices>
+			<choice uuid="594d14a0-8313-4e56-99e9-e839ee9df9a8"
+				type="ITEM_ATTRIBUTE" ref="RATING"
+				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
+		</choices>
+		<attrdef id="HOOK" value="ARMOR" />
+		<attrdef id="SIZE" value="$RATING" />
+		<attrdef id="PRICE" value="$RATING*250" />
+	</item>
+	<item avail="5" price="3000" id="chemical_seal" type="ACCESSORY"
+		subtype="ARMOR_BODY">
+		<attrdef id="HOOK" value="ARMOR" />
+		<attrdef id="SIZE" value="6" />
+		<requires>
+			<datareq type="GEAR" ref="full_body_armor_with_helmet" />
+		</requires>
+	</item>
+	<item avail="3" price="250" id="cold_resistance" type="ACCESSORY"
+		subtype="ARMOR_BODY">
+		<choices>
+			<choice uuid="594d14a0-8313-4e56-99e9-e839ee9df9a8"
+				type="ITEM_ATTRIBUTE" ref="RATING"
+				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
+		</choices>
+		<attrdef id="HOOK" value="ARMOR" />
+		<attrdef id="SIZE" value="$RATING" />
+		<attrdef id="PRICE" value="$RATING*250" />
+	</item>
+	<item avail="3" price="250" id="fire_resistance" type="ACCESSORY"
+		subtype="ARMOR_BODY">
+		<choices>
+			<choice uuid="594d14a0-8313-4e56-99e9-e839ee9df9a8"
+				type="ITEM_ATTRIBUTE" ref="RATING"
+				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
+		</choices>
+		<attrdef id="HOOK" value="ARMOR" />
+		<attrdef id="SIZE" value="$RATING" />
+		<attrdef id="PRICE" value="$RATING*250" />
+	</item>
+	<item avail="3" price="250" id="electricity_resistance">
+		<choices>
+			<choice uuid="594d14a0-8313-4e56-99e9-e839ee9df9a8"
+				type="ITEM_ATTRIBUTE" ref="RATING"
+				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
+		</choices>
+		<attrdef id="HOOK" value="ARMOR" />
+		<attrdef id="SIZE" value="$RATING" />
+		<attrdef id="PRICE" value="$RATING*250" />
+	</item>
+	<item avail="1" price="75" id="electrochromic_feature" type="ACCESSORY" subtype="ARMOR_BODY">
+		<attrdef id="HOOK" value="ARMOR" />
+	</item>
+	<item avail="2" price="150" id="feedback_feature" type="ACCESSORY" subtype="ARMOR_BODY" >
+		<attrdef id="HOOK" value="ARMOR" />
+	</item>
 </items>

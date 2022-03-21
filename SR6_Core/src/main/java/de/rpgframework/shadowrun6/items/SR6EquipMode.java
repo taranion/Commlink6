@@ -9,8 +9,8 @@ import de.rpgframework.genericrpg.items.IEquipMode;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
+ * Decision made when adding the item to the character.
  * @author prelle
- *
  */
 public enum SR6EquipMode implements IEquipMode {
 	

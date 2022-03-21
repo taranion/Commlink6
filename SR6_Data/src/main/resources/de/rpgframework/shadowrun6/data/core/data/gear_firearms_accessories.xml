@@ -132,7 +132,7 @@
 <!--          <itemtypereq type="WEAPON_FIREARMS"/> -->
       </requires>
    </item>
-   <item avail="2" price="30" id="spare_clip_predator" type="ACCESSORY" subtype="WEAPON_ACCESSORY" multi="y" >
+   <item avail="2" price="30" id="spare_clip_predator" type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y" >
       <usage slot="FIREARMS_EXTERNAL"/>
       <requires>
 <!--          <itemreq item="ares_predator_vi"/> -->

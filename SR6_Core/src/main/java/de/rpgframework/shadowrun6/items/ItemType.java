@@ -23,11 +23,7 @@ public enum ItemType {
 			ItemSubType.CYBERDECK,
 			ItemSubType.CYBER_LIMB_ENHANCEMENT,
 			ItemSubType.CYBER_LIMB_ACCESSORY,
-			ItemSubType.VEHICLE_ACCESSORY,
-			ItemSubType.BASIC_PROGRAM,
-			ItemSubType.HACKING_PROGRAM,
-			ItemSubType.AUTOSOFT,
-			ItemSubType.SKILLSOFT
+			ItemSubType.VEHICLE_ACCESSORY
 			),
 	ARMOR(ItemSubType.ARMOR_BODY, ItemSubType.ARMOR_HELMET, ItemSubType.ARMOR_SHIELD),
 	ARMOR_ADDITION,
@@ -55,8 +51,8 @@ public enum ItemType {
 	ELECTRONICS(
 			ItemSubType.COMMLINK,
 			ItemSubType.CYBERDECK,
-			ItemSubType.ELECTRONIC_ACCESSORIES,
 			ItemSubType.RIGGER_CONSOLE,
+			ItemSubType.ELECTRONIC_ACCESSORIES,
 			ItemSubType.RFID,
 			ItemSubType.COMMUNICATION,
 			ItemSubType.ID_CREDIT,
@@ -67,6 +63,12 @@ public enum ItemType {
 			ItemSubType.SECURITY,
 			ItemSubType.BREAKING,
 			ItemSubType.TAC_NET
+			),
+	SOFTWARE(
+			ItemSubType.AUTOSOFT,
+			ItemSubType.BASIC_PROGRAM,
+			ItemSubType.HACKING_PROGRAM,
+			ItemSubType.SKILLSOFT
 			),
 	NANOWARE(
 			ItemSubType.NANOWARE_HARD,

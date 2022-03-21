@@ -72,13 +72,13 @@
       </modifications>
       <matrix a="7" s="6" programs="8" devrat="4"/>
    </item>
-   <item avail="5I" price="172500" id="shiawase_cyber6" type="ELECTRONICS" subtype="CYBERDECK">
-       <modifications>
-         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
-      </modifications>
-      <matrix a="8" s="7" programs="10" devrat="5"/>
-   </item>
+	<item avail="5I" price="172500" id="shiawase_cyber6" type="ELECTRONICS" subtype="CYBERDECK">
+		<modifications>
+			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY" />
+			<itemmod type="HOOK" ref="SOFTWARE" />
+		</modifications>
+	    <matrix a="8" s="7" programs="10" devrat="5"/>
+	</item>
    <item avail="6I" price="410600" id="fairlight_excalibur" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
@@ -171,12 +171,14 @@
    
    <!-- Accessories -->
    <item avail="2" price="100"  id="sim_module" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
+   	<equip mode="EMBEDDED"/>
    	<attrdef id="DEVICE_RATING" value="3"/>
       <requires>
          <datareq type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
       </requires>
    </item>
    <item avail="2I" price="250"  id="sim_module_hot" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
+   	<equip mode="EMBEDDED"/>
    	<attrdef id="DEVICE_RATING" value="3"/>
       <requires>
          <datareq type="HOOK" ref="ELECTRONIC_ACCESSORY"/>

@@ -1,127 +1,281 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
     <!-- Basic Program -->
-	<item avail="1" cost="60" id="browse"  >
-	   <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	<item avail="1" price="60" id="browse" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<equip mode="EMBEDDED"/>
+	   <requires><datareq type="HOOK" ref="SOFTWARE"/></requires>
 	</item> 
- 	<item avail="1" cost="60" id="baby_monitor"> 
-       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	<item avail="1" price="60" id="baby_monitor" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<equip mode="EMBEDDED"/>
+	   <requires><datareq type="HOOK" ref="SOFTWARE"/></requires>
 	</item> 
- 	<item avail="1" cost="60" id="configurator"> 
-       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	<item avail="1" price="60" id="configurator" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<equip mode="EMBEDDED"/>
+	   <requires><datareq type="HOOK" ref="SOFTWARE"/></requires>
 	</item> 
- 	<item avail="1" cost="60" id="edit">
-       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	<item avail="1" price="60" id="edit" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<equip mode="EMBEDDED"/>
+	   <requires><datareq type="HOOK" ref="SOFTWARE"/></requires>
 	</item> 
- 	<item avail="1" cost="60" id="encryption">
-       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	<item avail="1" price="60" id="encryption" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<equip mode="EMBEDDED"/>
+	   <requires><datareq type="HOOK" ref="SOFTWARE"/></requires>
 	</item> 
- 	<item avail="1" cost="60" id="signal_scrubber">
-       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	<item avail="1" price="60" id="signal_scrubber" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<equip mode="EMBEDDED"/>
+	   <requires><datareq type="HOOK" ref="SOFTWARE"/></requires>
 	</item> 
- 	<item avail="1" cost="60" id="toolbox" >
-       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	<item avail="1" price="60" id="toolbox" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<equip mode="EMBEDDED"/>
+	   <requires><datareq type="HOOK" ref="SOFTWARE"/></requires>
+	   <mode id="active">
+	   	<modifications>
+	   		<valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="1"/>
+	   	</modifications>
+	   </mode>
 	</item> 
- 	<item avail="1" cost="60" id="virtual_machine" >
-       <useas type="ACCESSORY" subtype="BASIC_PROGRAM" slot="SOFTWARE" />
+	<item avail="1" price="60" id="virtual_machine" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<equip mode="EMBEDDED"/>
+	   <requires><datareq type="HOOK" ref="SOFTWARE"/></requires>
+	   <mode id="active">
+	   	<modifications>
+	   		<valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="2"/>
+	   	</modifications>
+	   </mode>
 	</item> 
 	
 	<!-- Hacking Program -->
-	<item avail="4I" cost="250" id="armor" >
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="armor" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+		<requires>
+			<datareq type="HOOK" ref="SOFTWARE" />
+		</requires>
+		<mode id="active">
+			<modifications>
+				<valmod type="ITEM_ATTRIBUTE" ref="DEFENSE_MATRIX" value="2" />
+			</modifications>
+		</mode>
 	</item> 
-	<item avail="4I" cost="250" id="biofeedback">
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="biofeedback" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   	<valuereq type="ITEM_ATTRIBUTE" ref="ATTACK" min="1"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-	<item avail="4I" cost="250" id="biofeedback_filter">
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="biofeedback_filter" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-	<item avail="4I" cost="250" id="blackout" >
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="blackout"  type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-	<item avail="4I" cost="250" id="decryption">
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="decryption" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-    <item avail="4I" cost="250" id="disarm" >
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
-    </item> 
-	<item avail="4I" cost="250" id="defuse" >
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="defuse" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-	<item avail="4I" cost="250" id="exploit">
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="exploit" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-	<item avail="4I" cost="250" id="fork" >
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="fork" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-	<item avail="4I" cost="250" id="lockdown">
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="lockdown" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-	<item avail="4I" cost="250" id="overclock" >
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="overclock" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-	<item avail="4I" cost="250" id="stealth">
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="stealth" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
-	<item avail="4I" cost="250" id="trace">
-       <useas type="ACCESSORY" subtype="HACKING_PROGRAM" slot="SOFTWARE" />
+	<item avail="4I" price="250" id="trace" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE"/>
+ 	   </requires>
+	   <mode id="active" />
 	</item> 
 
 	 <!-- Autosofts -->
-	<item avail="1" cost="500" id="clearsight"   maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL">
-       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1"/>
+	<item avail="1" price="500" id="clearsight" type="SOFTWARE" subtype="AUTOSOFT">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWSOFTWARE_DRONEARE"/>
+ 	   </requires>
 	</item> 
-	<item avail="1" cost="500" id="electronic_warfare" maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL">
-       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
+	<item avail="1" price="500" id="electronic_warfare" type="SOFTWARE" subtype="AUTOSOFT">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<valuereq type="HOOK" ref="SOFTWARE_DRONE"/>
+ 	   </requires>
 	</item> 
-	<item avail="1" cost="500" id="evasion"      maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL">
-       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
+	<item avail="1" price="500" id="evasion" type="SOFTWARE" subtype="AUTOSOFT">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE_DRONE" apply="DATA_ITEM"/>
+ 	   </requires>
 	</item> 
-	<item avail="1" cost="500" id="maneuvering"  maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL" >
-       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
+	<item avail="1" price="500" id="stealth_auto" type="SOFTWARE" subtype="AUTOSOFT">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE_DRONE" apply="DATA_ITEM"/>
+ 	   </requires>
 	</item> 
-	<item avail="1" cost="500" id="stealth_auto"  maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL" >
-       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
-	</item> 
-	<item avail="1" cost="500" id="targeting"    maxrat="6" rate="true" ratemul="PRICE MODIFIER AVAIL" choice="WEAPON" multi="yes">
-       <useas type="ACCESSORY" subtype="AUTOSOFT" slot="SOFTWARE_DRONE" cap="1" />
+	<item avail="1" price="500" id="targeting" type="SOFTWARE" subtype="AUTOSOFT">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="GEAR" ref="WEAPON" />
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE_DRONE" apply="DATA_ITEM"/>
+ 	   </requires>
 	</item> 
 
  	<!-- OTHER -->
-   <item avail="2" cost="150" id="datasoft" choice="NAME" multi="yes">
-       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" />
+   <item avail="2" price="150" id="datasoft" type="SOFTWARE" subtype="OTHER_PROGRAMS">
+		<choices>
+			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
+		</choices>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE" apply="DATA_ITEM"/>
+ 	   </requires>
 	</item> 
-   <item avail="2" cost="100" id="mapsoft" choice="NAME" multi="yes" >
-       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" />
+   <item avail="2" price="100" id="mapsoft" type="SOFTWARE" subtype="OTHER_PROGRAMS">
+		<choices>
+			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
+		</choices>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE" apply="DATA_ITEM"/>
+ 	   </requires>
 	</item> 
-   <item avail="2" cost="150" id="shopsoft" multi="yes" choice="NAME">
-       <useas type="ACCESSORY" subtype="OTHER_PROGRAMS" slot="SOFTWARE" />
+   <item avail="2" price="150" id="shopsoft"  type="SOFTWARE" subtype="OTHER_PROGRAMS">
+		<choices>
+			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
+		</choices>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE" apply="DATA_ITEM"/>
+ 	   </requires>
 	</item> 
-   <item avail="4" cost="5000" id="activesoft" maxrat="6" rate="true" ratemul="PRICE" multi="yes" choice="PHYSICAL_SKILL">
-       <useas type="ACCESSORY" subtype="SKILLSOFT" slot="SKILLJACK" cap="1"/>
-       <requires>
-       	 <itemreq item="skillwires" char="y"/>
-       </requires>
-       <modifications>
-         <skillmod val="1" modType="ALTERNATE"/>
+   <item avail="4" price="5000" id="activesoft"  type="SOFTWARE" subtype="SKILLSOFT">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="mundane" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*5000"/>
+		<attrdef id="SIZE" value="1"/>
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SKILLJACK"/>
+ 	   	<datareq type="GEAR" ref="skillwires"/>
+ 	   </requires>
+      <modifications>
+         <valmod type="SKILL" ref="CHOICE" choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="$RATING" set="ARTIFICAL"/>
        </modifications>
    </item>
-   <item avail="2" cost="2500" id="knowsoft" choice="NAME" multi="yes">
-       <useas type="ACCESSORY" subtype="SKILLSOFT" slot="SKILLJACK" cap="1"/>
+   <item avail="2" price="2500" id="knowsoft" type="SOFTWARE" subtype="SKILLSOFT" >
+		<choices>
+			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="knowledge" />
+		</choices>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SKILLJACK"/>
+ 	   </requires>
        <modifications>
-         <skillmod ref="knowledge" val="1" modType="ALTERNATE"/>
+         <itemmod type="SKILL" ref="CHOICE" choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" />
        </modifications>
 	</item> 
-   <item avail="1" cost="1500" id="linguasoft" maxrat="4" rate="true" ratemul="PRICE" choice="NAME" multi="yes">
-       <useas type="ACCESSORY" subtype="SKILLSOFT" slot="SKILLJACK" cap="1"/>
-       <modifications>
-         <skillmod ref="language" val="1" modType="ALTERNATE"/>
+   <item avail="1" price="1500" id="linguasoft" type="SOFTWARE" subtype="SKILLSOFT" >
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="mundane" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*1500"/>
+		<attrdef id="SIZE" value="1"/>
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SKILLJACK"/>
+ 	   </requires>
+      <modifications>
+         <valmod type="SKILL" ref="CHOICE" choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="$RATING" set="ARTIFICAL"/>
        </modifications>
 	</item> 
-   <item avail="1" cost="400" id="tutorsoft1" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
-   <item avail="1" cost="800" id="tutorsoft2" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
-   <item avail="1" cost="1200" id="tutorsoft3" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
-   <item avail="1" cost="1600" id="tutorsoft4" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
-   <item avail="2" cost="2000" id="tutorsoft5" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
-   <item avail="2" cost="2400" id="tutorsoft6" type="ACCESSORY" subtype="OTHER_PROGRAMS" multi="yes"/>
+   <item avail="1" price="400" id="tutorsoft" type="SOFTWARE" subtype="OTHER_PROGRAMS">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="mundane" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*400"/>
+		<attrdef id="AVAILABILITY" value="$RATING/3"/>
+		<attrdef id="SIZE" value="1"/>
+		<equip mode="EMBEDDED"/>
+ 	   <requires>
+ 	   	<datareq type="HOOK" ref="SOFTWARE" apply="DATA_ITEM"/>
+ 	   </requires>
+   </item>
 </items>
