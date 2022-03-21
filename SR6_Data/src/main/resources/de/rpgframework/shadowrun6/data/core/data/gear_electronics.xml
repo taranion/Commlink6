@@ -1,288 +1,277 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item avail="2" cost="100" devrat="1" id="meta_link">
-     <useas type="ELECTRONICS" subtype="COMMLINK"       />
-     <useas type="CYBERWARE"   subtype="COMMLINK" ess="0.2" cost="2000"/>
-     <useas type="ACCESSORY"   subtype="COMMLINK" cap="2" slot="HEADWARE_IMPLANT" cost="2000"/>
+	<item avail="2" price="100" id="meta_link" type="ELECTRONICS" subtype="COMMLINK">
+		<modifications>
+			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+			<itemmod type="HOOK" ref="SOFTWARE" />
+		</modifications>
+		<matrix d="1" f="0" programs="0" devrat="1" />
+	</item>
+   <item avail="2" price="700" id="sony_emporer" type="ELECTRONICS" subtype="COMMLINK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck d="1" f="0" programs="0"/>
+      <matrix d="1" f="1" programs="1" devrat="2"/>
    </item>
-   <item avail="2" cost="700" devrat="2" id="sony_emporer">
-     <useas type="ELECTRONICS" subtype="COMMLINK"       />
-     <useas type="CYBERWARE"   subtype="COMMLINK" ess="0.2" cost="2000"/>
-     <useas type="ACCESSORY"   subtype="COMMLINK" cap="2" slot="HEADWARE_IMPLANT" cost="2000"/>
+   <item avail="2" price="1000" id="renraku_sensei" type="ELECTRONICS" subtype="COMMLINK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck d="1" f="1" programs="1"/>
+      <matrix d="2" f="0" programs="1" devrat="3" />
    </item>
-   <item avail="2" cost="1000" devrat="3" id="renraku_sensei" subtype="COMMLINK" type="ELECTRONICS">
-     <useas type="ELECTRONICS" subtype="COMMLINK"       />
-     <useas type="CYBERWARE"   subtype="COMMLINK" ess="0.2" cost="2000"/>
-     <useas type="ACCESSORY"   subtype="COMMLINK" cap="2" slot="HEADWARE_IMPLANT" cost="2000"/>
+   <item avail="2" price="2500" id="erika_elite" type="ELECTRONICS" subtype="COMMLINK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck d="2" f="0" programs="1"/>
+      <matrix d="2" f="1" programs="2" devrat="4"/>
    </item>
-   <item avail="2" cost="2500" devrat="4" id="erika_elite" subtype="COMMLINK" type="ELECTRONICS">
-     <useas type="ELECTRONICS" subtype="COMMLINK"       />
-     <useas type="CYBERWARE"   subtype="COMMLINK" ess="0.2" cost="2000"/>
-     <useas type="ACCESSORY"   subtype="COMMLINK" cap="2" slot="HEADWARE_IMPLANT" cost="2000"/>
+   <item avail="3" price="5000" id="hermes_ikon" type="ELECTRONICS" subtype="COMMLINK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck d="2" f="1" programs="2"/>
+      <matrix d="3" f="0" programs="2" devrat="5"/>
    </item>
-   <item avail="3" cost="5000" devrat="5" id="hermes_ikon" subtype="COMMLINK" type="ELECTRONICS">
-     <useas type="ELECTRONICS" subtype="COMMLINK"       />
-     <useas type="CYBERWARE"   subtype="COMMLINK" ess="0.2" cost="2000"/>
-     <useas type="ACCESSORY"   subtype="COMMLINK" cap="2" slot="HEADWARE_IMPLANT" cost="2000"/>
+   <item avail="3" price="8000" id="transys_avalon" subtype="COMMLINK" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck d="3" f="0" programs="2"/>
-   </item>
-   <item avail="3" cost="8000" devrat="6" id="transys_avalon" subtype="COMMLINK" type="ELECTRONICS">
-     <useas type="ELECTRONICS" subtype="COMMLINK"       />
-     <useas type="CYBERWARE"   subtype="COMMLINK" ess="0.2" cost="2000"/>
-     <useas type="ACCESSORY"   subtype="COMMLINK" cap="2" slot="HEADWARE_IMPLANT" cost="2000"/>
-       <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-      </modifications>
-      <cyberdeck d="3" f="1" programs="3"/>
+      <matrix d="3" f="1" programs="3" devrat="6"/>
    </item>
 
 	<!-- Cyberdecks -->
-   <item avail="3I" cost="24750" devrat="1" id="erika_mcd6">
-     <useas type="ELECTRONICS" subtype="CYBERDECK"       />
-     <useas type="CYBERWARE"   subtype="CYBERDECK" ess="0.4" cost="5000"/>
-     <useas type="ACCESSORY"   subtype="CYBERDECK" cap="4" slot="HEADWARE_IMPLANT" cost="5000"/>
+   <item avail="3I" price="24750" id="erika_mcd6" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck a="4" s="3" programs="2"/>
+      <matrix a="4" s="3" programs="2" devrat="1"/>
    </item>
-   <item avail="3I" cost="61500" devrat="2" id="spinrad_falcon">
-     <useas type="ELECTRONICS" subtype="CYBERDECK"       />
-     <useas type="CYBERWARE"   subtype="CYBERDECK" ess="0.4" cost="5000"/>
-     <useas type="ACCESSORY"   subtype="CYBERDECK" cap="4" slot="HEADWARE_IMPLANT" cost="5000"/>
+   <item avail="3I" price="61500" id="spinrad_falcon" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck a="5" s="4" programs="4"/>
+      <matrix a="5" s="4" programs="4" devrat="2"/>
    </item>
-   <item avail="3I" cost="95000" devrat="3" id="mct_360">
-     <useas type="ELECTRONICS" subtype="CYBERDECK"       />
-     <useas type="CYBERWARE"   subtype="CYBERDECK" ess="0.4" cost="5000"/>
-     <useas type="ACCESSORY"   subtype="CYBERDECK" cap="4" slot="HEADWARE_IMPLANT" cost="5000"/>
+   <item avail="3I" price="95000" id="mct_360" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck a="6" s="5" programs="6"/>
+      <matrix a="6" s="5" programs="6" devrat="3"/>
    </item>
-   <item avail="4I" cost="107000" devrat="4" id="renraku_kitsune">
-     <useas type="ELECTRONICS" subtype="CYBERDECK"       />
-     <useas type="CYBERWARE"   subtype="CYBERDECK" ess="0.4" cost="5000"/>
-     <useas type="ACCESSORY"   subtype="CYBERDECK" cap="4" slot="HEADWARE_IMPLANT" cost="5000"/>
+   <item avail="4I" price="107000" id="renraku_kitsune" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck a="7" s="6" programs="8"/>
+      <matrix a="7" s="6" programs="8" devrat="4"/>
    </item>
-   <item avail="5I" cost="172500" devrat="5" id="shiawase_cyber6" >
-     <useas type="ELECTRONICS" subtype="CYBERDECK"       />
-     <useas type="CYBERWARE"   subtype="CYBERDECK" ess="0.4" cost="5000"/>
-     <useas type="ACCESSORY"   subtype="CYBERDECK" cap="4" slot="HEADWARE_IMPLANT" cost="5000"/>
+   <item avail="5I" price="172500" id="shiawase_cyber6" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck a="8" s="7" programs="10"/>
+      <matrix a="8" s="7" programs="10" devrat="5"/>
    </item>
-   <item avail="6I" cost="410600" devrat="6" id="fairlight_excalibur" >
-     <useas type="ELECTRONICS" subtype="CYBERDECK"       />
-     <useas type="CYBERWARE"   subtype="CYBERDECK" ess="0.4" cost="5000"/>
-     <useas type="ACCESSORY"   subtype="CYBERDECK" cap="4" slot="HEADWARE_IMPLANT" cost="5000"/>
+   <item avail="6I" price="410600" id="fairlight_excalibur" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
       </modifications>
-      <cyberdeck a="9" s="8" programs="12"/>
+      <matrix a="9" s="8" programs="12" devrat="6"/>
    </item>
    
    <!-- Rigger consoles -->
-   <item avail="1L" cost="1400" devrat="1" id="scratch_built_junk" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="1L" price="1400" id="scratch_built_junk" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="3" f="2" />
+      <matrix d="3" f="2" devrat="1" />
    </item>
-   <item avail="3L" cost="8000" devrat="2" id="allegiance_control_center" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="3L" price="8000" id="allegiance_control_center" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="3" f="3" />
+      <matrix d="3" f="3" devrat="2" />
    </item>
-   <item avail="3L" cost="16000" devrat="3" id="essy_motors_drone_master" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="3L" price="16000" id="essy_motors_drone_master" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="4" f="4" />
+      <matrix d="4" f="4" devrat="3"/>
    </item>
-   <item avail="4L" cost="32000" devrat="4" id="horizons_overseer" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="4L" price="32000" id="horizons_overseer" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="5" f="4" />
+      <matrix d="5" f="4" devrat="4" />
    </item>
-   <item avail="5L" cost="34000" devrat="4" id="maersk_spider" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="5L" price="34000" id="maersk_spider" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="4" f="5" />
+      <matrix d="4" f="5" devrat="4" />
    </item>
-   <item avail="5L" cost="66000" devrat="5" id="vulcan_liegelord" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="5L" price="66000" id="vulcan_liegelord" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="6" f="5" />
+      <matrix d="6" f="5" devrat="5"/>
    </item>
-   <item avail="6L" cost="68000" devrat="5" id="proteus_poseidon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="6L" price="68000" id="proteus_poseidon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="5" f="6" />
+      <matrix d="5" f="6" devrat="5"/>
    </item>
-   <item avail="7L" cost="75000" devrat="6" id="transys_eidolon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="7L" price="75000" id="transys_eidolon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="6" f="5" />
+      <matrix d="6" f="5" devrat="6"/>
    </item>
-   <item avail="8L" cost="95000" devrat="6" id="ares_red_dog_series" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="8L" price="95000" id="ares_red_dog_series" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="7" f="6" />
+      <matrix d="7" f="6" devrat="6"/>
    </item>
-   <item avail="9L" cost="140000" devrat="6" id="aztechnology_tlaloc" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
+   <item avail="9L" price="140000" id="aztechnology_tlaloc" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
-         <itemhookmod hook="ELECTRONIC_ACCESSORY"/>
-         <itemhookmod hook="SOFTWARE" capacity="99"/>
-         <itemhookmod hook="SOFTWARE_DRONE" capacity="99"/>
+         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+         <itemmod type="HOOK" ref="SOFTWARE" />
+         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
       </modifications>
-      <cyberdeck d="8" f="7" />
+      <matrix d="8" f="7" devrat="6"/>
    </item>
    
    <!-- Accessories -->
-   <item avail="2" cost="100"  devrat="3" id="sim_module" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
+   <item avail="2" price="100"  id="sim_module" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
+   	<attrdef id="DEVICE_RATING" value="3"/>
       <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
+         <datareq type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
       </requires>
    </item>
-   <item avail="2I" cost="250"  devrat="3" id="sim_module_hot" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
+   <item avail="2I" price="250"  id="sim_module_hot" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
+   	<attrdef id="DEVICE_RATING" value="3"/>
       <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
+         <datareq type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
       </requires>
    </item>
-   <item avail="1" cost="150"  devrat="3" id="ar_gloves" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
+   <item avail="1" price="150"  id="ar_gloves" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
+   	<attrdef id="DEVICE_RATING" value="3"/>
+   </item>
+   <item avail="2" price="200"  id="biometric_reader" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
+   	<attrdef id="DEVICE_RATING" value="3"/>
+   </item>
+   <item avail="1" price="5" id="electronic_paper" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
+    	<attrdef id="DEVICE_RATING" value="1"/>
+   </item>
+   <item avail="1" price="25"  id="printer" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
+   	<attrdef id="DEVICE_RATING" value="3"/>
+   </item>
+   <item avail="3" price="500"  id="satellite_link" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
+   	<attrdef id="DEVICE_RATING" value="4"/>
+   </item>
+   <item avail="4" price="1000" id="simrig" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
+   	<attrdef id="DEVICE_RATING" value="3"/>
       <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
+         <datareq type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
       </requires>
    </item>
-   <item avail="2" cost="200"  devrat="3" id="biometric_reader" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
-      <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
-      </requires>
+   <item avail="1" price="200"  id="trid_projector" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
+   	<attrdef id="DEVICE_RATING" value="3"/>
    </item>
-   <item avail="1" cost="5"    devrat="1" id="electronic_paper" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
-      <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
-      </requires>
+   <item avail="2" price="50" id="subvocal_microphone" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
+   	<attrdef id="DEVICE_RATING" value="3"/>
    </item>
-   <item avail="1" cost="25"   devrat="3" id="printer" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
-      <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
-      </requires>
-   </item>
-   <item avail="3" cost="500"  devrat="4" id="satellite_link" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
-      <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
-      </requires>
-   </item>
-   <item avail="4" cost="1000" devrat="3" id="simrig" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
-      <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
-      </requires>
-   </item>
-   <item avail="1" cost="200"  devrat="3" id="trid_projector" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
-      <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
-      </requires>
-   </item>
-   <item avail="2" cost="50"   devrat="3" id="subvocal_microphone" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
-      <requires>
-         <slotreq slot="ELECTRONIC_ACCESSORY"/>
-      </requires>
-   </item>
-   <item avail="1" cost="70"   devrat="3" id="trodes" >
-     <useas type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES"  slot="ELECTRONIC_ACCESSORY" />
-     <useas type="ACCESSORY" subtype="ELECTRONIC_ACCESSORIES"  slot="HELMET_ACCESSORY" cap="2"/>
+   <item avail="1" price="70"  id="trodes" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES">
+	<attrdef id="DEVICE_RATING" value="3" />
+	<equip mode="NORMAL">
+	</equip>
+	<equip mode="EMBEDDED">
+		<requires>
+			<datareq type="HOOK" ref="HELMET_ACCESSORY" />
+		</requires>
+	</equip>
    </item>
    
    <!-- RFID -->
-   <item avail="1" cost="1"  devrat="1" id="standard_tag" subtype="RFID" type="ELECTRONICS" count="y"/>
-   <item avail="1" cost="5"  devrat="1" id="datachip"     subtype="RFID" type="ELECTRONICS" count="y"/>
-   <item avail="2" cost="10" devrat="3" id="security_tag" subtype="RFID" type="ELECTRONICS" count="y"/>
-   <item avail="2" cost="10" devrat="3" id="stealth_tag"  subtype="RFID" type="ELECTRONICS" count="y"/>
-   <item avail="2" cost="40" devrat="2" id="sensor_tag"   subtype="RFID" type="ELECTRONICS" count="y"/>
+   <item avail="1" price="1"  id="standard_tag" subtype="RFID" type="ELECTRONICS" count="y">
+   	<attrdef id="DEVICE_RATING" value="1"/>
+   </item>
+   <item avail="1" price="5"  id="datachip"     subtype="RFID" type="ELECTRONICS" count="y">
+   	<attrdef id="DEVICE_RATING" value="1"/>
+   </item>
+   <item avail="2" price="10" id="security_tag" subtype="RFID" type="ELECTRONICS" count="y">
+   	<attrdef id="DEVICE_RATING" value="3"/>
+   </item>
+   <item avail="2" price="10" id="stealth_tag"  subtype="RFID" type="ELECTRONICS" count="y">
+   	<attrdef id="DEVICE_RATING" value="3"/>
+   </item>
+   <item avail="2" price="40" id="sensor_tag"   subtype="RFID" type="ELECTRONICS" count="y">
+   	<attrdef id="DEVICE_RATING" value="2"/>
+   </item>
    
    <!-- Communication and Countermeasures -->
-   <item avail="3" cost="200" id="bug_scanner" subtype="COMMUNICATION" type="ELECTRONICS"/>
-   <item avail="2" cost="300" id="data_tap"    subtype="COMMUNICATION" type="ELECTRONICS" count="y"/>
-   <item avail="5I" cost="150" id="headjammer" maxrat="6" rate="true" ratemul="PRICE" subtype="COMMUNICATION" type="ELECTRONICS"/>
-   <item avail="4L" cost="200" id="jammer_area" maxrat="6" rate="true" ratemul="PRICE" subtype="COMMUNICATION" type="ELECTRONICS"/>
-   <item avail="4L" cost="200" id="jammer_direct" maxrat="6" rate="true" ratemul="PRICE" subtype="COMMUNICATION" type="ELECTRONICS"/>
-   <item avail="1" cost="100" id="micro-transceiver" subtype="COMMUNICATION" type="ELECTRONICS"/>
-   <item avail="3" cost="450" id="tag_eraser" subtype="COMMUNICATION" type="ELECTRONICS"/>
-   <item avail="3" cost="50"  id="white_noise_generator" maxrat="6" rate="true" ratemul="PRICE" subtype="COMMUNICATION" type="ELECTRONICS"/>
+   <item avail="3" price="200" id="bug_scanner" subtype="COMMUNICATION" type="ELECTRONICS"/>
+   <item avail="2" price="300" id="data_tap"    subtype="COMMUNICATION" type="ELECTRONICS" count="y"/>
+   <item avail="5I" price="150" id="headjammer" subtype="COMMUNICATION" type="ELECTRONICS">
+   	<choices>
+   		<choice uuid="720ed738-46d2-4124-bd6f-5ed62025be20" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+   	<attrdef id="PRICE" value="$RATING*150"/>
+   </item>
+   <item avail="4L" price="200" id="jammer_area" subtype="COMMUNICATION" type="ELECTRONICS">
+   	<choices>
+   		<choice uuid="720ed738-46d2-4124-bd6f-5ed62025be20" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+   	<attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+   <item avail="4L" price="200" id="jammer_direct" subtype="COMMUNICATION" type="ELECTRONICS">
+   	<choices>
+   		<choice uuid="720ed738-46d2-4124-bd6f-5ed62025be20" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+   	<attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+   <item avail="1" price="100" id="micro-transceiver" subtype="COMMUNICATION" type="ELECTRONICS"/>
+   <item avail="3" price="450" id="tag_eraser" subtype="COMMUNICATION" type="ELECTRONICS"/>
+   <item avail="3" price="50"  id="white_noise_generator" subtype="COMMUNICATION" type="ELECTRONICS">
+   	<choices>
+   		<choice uuid="720ed738-46d2-4124-bd6f-5ed62025be20" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+   	<attrdef id="PRICE" value="$RATING*50"/>
+   </item>
 
     <!-- ID and Credit -->
-   <item avail="1" cost="5"    id="credstick_standard" subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="1" cost="20"   id="credstick_silver"   subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="2" cost="100"  id="credstick_gold"     subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="3" cost="500"  id="credstick_platin"   subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="5" cost="1000" id="credstick_ebony"    subtype="ID_CREDIT" type="ELECTRONICS"/>
+   <item avail="1" price="5"    id="credstick_standard" subtype="ID_CREDIT" type="ELECTRONICS"/>
+   <item avail="1" price="20"   id="credstick_silver"   subtype="ID_CREDIT" type="ELECTRONICS"/>
+   <item avail="2" price="100"  id="credstick_gold"     subtype="ID_CREDIT" type="ELECTRONICS"/>
+   <item avail="3" price="500"  id="credstick_platin"   subtype="ID_CREDIT" type="ELECTRONICS"/>
+   <item avail="5" price="1000" id="credstick_ebony"    subtype="ID_CREDIT" type="ELECTRONICS"/>
    
 </items>

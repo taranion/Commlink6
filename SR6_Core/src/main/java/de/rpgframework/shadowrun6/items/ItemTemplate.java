@@ -37,8 +37,9 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 	private ItemSubType subtype;
 
 	@ElementListUnion({
-		@ElementList(entry = "weapon", type = WeaponData.class, inline = true),
+		@ElementList(entry="weapon", type = WeaponData.class, inline = true),
 		@ElementList(entry="armor", type=ArmorData.class, inline=true),
+		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
 	})
 	private List<IGearTypeData> weapons; 
 
