@@ -46,7 +46,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	/* For accessories: Where to attach it */
 	HOOK,
 //	/** Maximum rating of embedded items */
-//	MAX_SENSOR_RATING,
+	MAX_SENSOR_RATING,
 //	MODIFICATION_SLOTS,
 //	PILOT,
 	PRICE,

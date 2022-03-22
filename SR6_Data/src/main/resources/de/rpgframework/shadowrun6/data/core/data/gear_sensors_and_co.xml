@@ -261,84 +261,181 @@
    </item>
    
    <!-- Auditory devices -->
-<!--    <item avail="2" price="50" id="directional_microphone" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
-<!--       <modifications> -->
-<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
-<!--       </modifications> -->
-<!--    </item> -->
-<!--    <item avail="1" price="50" id="earbuds" maxrat="3" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
-<!--       <modifications> -->
-<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
-<!--       </modifications> -->
-<!--    </item> -->
-<!--     <item avail="1" price="50" id="headphones" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
-<!--       <modifications> -->
-<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
-<!--       </modifications> -->
-<!--    </item> -->
-<!--    <item avail="2" price="100" id="laser_microphone" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
-<!--       <modifications> -->
-<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
-<!--       </modifications> -->
-<!--    </item> -->
-<!--    <item avail="1" price="50" id="omnidirectional_microphone" maxrat="6" rate="true" ratemul="CAPACITY PRICE" subtype="AUDIO" type="ELECTRONICS"> -->
-<!--       <modifications> -->
-<!--          <itemhookmod capacity="1" hook="AUDIO"/> -->
-<!--       </modifications> -->
-<!--    </item> -->
+   <item avail="2" price="50" id="directional_microphone" subtype="AUDIO" type="ELECTRONICS">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*50"/>
+      <modifications>
+			<valmod type="HOOK" ref="AUDIO" value="$RATING"/>
+      </modifications>
+   </item>
+   <item avail="1" price="50" id="earbuds" subtype="AUDIO" type="ELECTRONICS">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <modifications>
+			<valmod type="HOOK" ref="AUDIO" value="$RATING"/>
+      </modifications>
+   </item>
+    <item avail="1" price="50" id="headphones" subtype="AUDIO" type="ELECTRONICS">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*50"/>
+      <modifications>
+			<valmod type="HOOK" ref="AUDIO" value="$RATING"/>
+      </modifications>
+   </item>
+   <item avail="2" price="100" id="laser_microphone" subtype="AUDIO" type="ELECTRONICS">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*100"/>
+      <modifications>
+			<valmod type="HOOK" ref="AUDIO" value="$RATING"/>
+      </modifications>
+   </item>
+   <item avail="1" price="50" id="omnidirectional_microphone" subtype="AUDIO" type="ELECTRONICS">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*50"/>
+      <modifications>
+			<valmod type="HOOK" ref="AUDIO" value="$RATING"/>
+      </modifications>
+   </item>
 
     <!-- Audio enhancements -->
-<!--     <item avail="1" price="500" id="audio_enhancement" > -->
-<!--       <useas type="ACCESSORY" subtype="AUDIO_ENHANCEMENT" cap="1" slot="AUDIO"/> -->
-<!--       <useas type="ACCESSORY" subtype="CYBER_EARWARE"     cap="1" slot="CYBEREAR_IMPLANT"   price="3500" avail="2"/> -->
-<!--       <useas type="CYBERWARE" subtype="CYBER_EARWARE"   ess="0.1" price="3500" avail="2"/> -->
-<!--    </item> -->
-<!--    <item avail="3" price="250" id="select_sound_filter" maxrat="3" rate="true" ratemul="CAPACITY PRICE" > -->
-<!--       <useas type="ACCESSORY" subtype="AUDIO_ENHANCEMENT" cap="1" slot="AUDIO"/> -->
-<!--       <useas type="ACCESSORY" subtype="CYBER_EARWARE" cap="1" slot="CYBEREAR_IMPLANT"   price="3250" avail="4" maxrat="6"/> -->
-<!--       <useas type="CYBERWARE" subtype="CYBER_EARWARE" ess="0.1" price="3250" avail="4"/> -->
-<!--    </item> -->
-<!--    <item avail="2" price="1000" id="spatial_recognizer" subtype="AUDIO_ENHANCEMENT" type="ACCESSORY"> -->
-<!--       <useas type="ACCESSORY" subtype="AUDIO_ENHANCEMENT" cap="2" slot="AUDIO"/> -->
-<!--       <useas type="ACCESSORY" subtype="CYBER_EARWARE"     cap="2" slot="CYBEREAR_IMPLANT"   price="3000" avail="2"/> -->
-<!--       <useas type="CYBERWARE" subtype="CYBER_EARWARE"   ess="0.1" price="3000" avail="2"/> -->
-<!--    </item> -->
+    <item avail="1" price="500" id="audio_enhancement" type="ACCESSORY" subtype="AUDIO_ENHANCEMENT">
+   	<equip mode="EMBEDDED">
+   		<requires>
+				<valuereq type="HOOK" ref="AUDIO" value="1"/>
+   		</requires>
+   	</equip>   	
+   	<equip mode="EMBEDDED">
+   		<attrdef id="PRICE" value="4000"/>
+   		<attrdef id="AUGMENTATION" value="true"/>
+   		<requires>
+				<valuereq type="HOOK" ref="CYBEREAR_IMPLANT" value="2"/>
+   		</requires>
+   	</equip>   	
+   	<equip mode="BODYWARE">
+   		<attrdef id="PRICE" value="400"/>
+   		<attrdef id="ESSENCECOST" value="0.1"/>
+   	</equip>   	
+   </item>
+   <item avail="3" price="250" id="select_sound_filter" type="ACCESSORY" subtype="AUDIO_ENHANCEMENT">
+   	<equip mode="EMBEDDED">
+			<choices>
+				<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			</choices>
+   		<attrdef id="PRICE" value="$RATING*250"/>
+   		<requires>
+				<valuereq type="HOOK" ref="AUDIO" value="$RATING"/>
+   		</requires>
+   	</equip>   	
+   	<equip mode="EMBEDDED">
+			<choices>
+				<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			</choices>
+   		<attrdef id="PRICE" value="$RATING*3500"/>
+   		<attrdef id="AUGMENTATION" value="true"/>
+   		<attrdef id="AVAILABILITY" value="4"/>
+   		<requires>
+				<valuereq type="HOOK" ref="CYBEREAR_IMPLANT" value="$RATING"/>
+   		</requires>
+   	</equip>   	
+   	<equip mode="BODYWARE">
+			<choices>
+				<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			</choices>
+   		<attrdef id="PRICE" value="$RATING*3500"/>
+   		<attrdef id="AVAILABILITY" value="4"/>
+   		<attrdef id="ESSENCECOST" value="0.1"/>
+   	</equip>   	
+   </item>
+   <item avail="2" price="1000" id="spatial_recognizer" subtype="AUDIO_ENHANCEMENT" type="ACCESSORY">
+   	<equip mode="EMBEDDED">
+   		<requires>
+				<valuereq type="HOOK" ref="AUDIO" value="2"/>
+   		</requires>
+   	</equip>   	
+   	<equip mode="EMBEDDED">
+   		<attrdef id="PRICE" value="4000"/>
+   		<attrdef id="AVAILABILITY" value="3"/>
+   		<attrdef id="AUGMENTATION" value="true"/>
+   		<requires>
+				<valuereq type="HOOK" ref="CYBEREAR_IMPLANT" value="2"/>
+   		</requires>
+   	</equip>   	
+   	<equip mode="BODYWARE">
+   		<attrdef id="PRICE" value="400"/>
+   		<attrdef id="AVAILABILITY" value="3"/>
+   		<attrdef id="ESSENCECOST" value="0.1"/>
+   	</equip>   	
+   </item>
 
    <!-- Sensors -->
-<!--     <item avail="1" price="100" id="handheld_housing" maxrat="3" rate="true" ratemul="CAPACITY PRICE" sensrat="3"> -->
-<!--       <useas type="ELECTRONICS" subtype="SENSOR_HOUSING"/> -->
-<!--       <modifications> -->
-<!--          <itemhookmod capacity="1" hook="SENSOR_HOUSING"/> -->
-<!--       </modifications> -->
-<!--    </item> -->
-<!--     <item avail="1" price="250" id="wall-mounted_housing" maxrat="6" rate="true" ratemul="CAPACITY PRICE" sensrat="6"> -->
-<!--       <useas type="ELECTRONICS" subtype="SENSOR_HOUSING"/> -->
-<!--       <modifications> -->
-<!--          <itemhookmod capacity="1" hook="SENSOR_HOUSING"/> -->
-<!--       </modifications> -->
-<!--    </item> -->
-<!--     <item avail="3" price="1000" id="sensor_array" minrat="2" maxrat="8" rate="true" ratemul="CAPACITY PRICE"> -->
-<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_HOUSING" cap="1"/> -->
-<!--       <modifications> -->
-<!--          <itemhookmod capacity="1" hook="SENSOR_FUNCTION"/> -->
-<!--       </modifications> -->
-<!--    </item> -->
-<!--     <item avail="2" price="100" id="single_sensor" maxrat="8" rate="true" ratemul="PRICE"> -->
-<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_HOUSING" cap="1"/> -->
-<!--       <modifications> -->
-<!--          <itemhookmod hook="SENSOR_FUNCTION"/> -->
-<!--       </modifications> -->
-<!--    </item> -->
+    <item avail="1" price="100" id="handheld_housing" type="ELECTRONICS" subtype="SENSOR">
+ 		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+  		<attrdef id="MAX_SENSOR_RATING" value="3"/>
+  		<attrdef id="PRICE" value="$RATING*100"/>
+      <modifications>
+			<valmod type="HOOK" ref="SENSOR_HOUSING" value="$RATING"/>
+      </modifications>
+   </item>
+    <item avail="1" price="250" id="wall-mounted_housing" type="ELECTRONICS" subtype="SENSOR">
+  		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+  		<attrdef id="MAX_SENSOR_RATING" value="6"/>
+  		<attrdef id="PRICE" value="$RATING*250"/>
+      <modifications>
+			<valmod type="HOOK" ref="SENSOR_HOUSING" value="$RATING"/>
+      </modifications>
+   </item>
+
+    <item avail="3" price="2000" id="sensor_array" type="ELECTRONICS" subtype="SENSOR">
+    	<equip mode="EMBEDDED"/>
+  		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="2,3,4,5,6,7,8"/>
+		</choices>
+		<requires>
+			<valuereq type="HOOK" ref="SENSOR_HOUSING" value="$RATING"/>
+		</requires>
+  		<attrdef id="MAX_SENSOR_RATING" value="$RATING"/>
+  		<attrdef id="PRICE" value="$RATING*1000"/>
+      <modifications>
+			<valmod type="HOOK" ref="SENSOR_FUNCTION" value="$RATING"/>
+      </modifications>
+   </item>
    
-<!--     <item id="atmosphere_sensor" rate="true" ratemul="" price="0"> -->
-<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/> -->
-<!--     </item> -->
-<!--     <item id="cyberware_scanner" rate="true" ratemul="" price="0"> -->
-<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/> -->
-<!--     </item> -->
-<!--     <item id="geiger_counter" rate="true" ratemul=""  -->
-<!--     price="0"> -->
-<!--       <useas type="ACCESSORY" subtype="SENSOR" slot="SENSOR_FUNCTION" cap="1"/> -->
-<!--     </item> -->
+    <item id="atmosphere_sensor" price="0" type="ELECTRONICS" subtype="SENSOR">
+  		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
+		</choices>
+		<requires>
+			<valuereq type="HOOK" ref="SENSOR_FUNCTION" value="1"/>
+		</requires>
+    </item>
+    <item id="cyberware_scanner" price="0" type="ELECTRONICS" subtype="SENSOR">
+  		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
+		</choices>
+		<requires>
+			<valuereq type="HOOK" ref="SENSOR_FUNCTION" value="1"/>
+		</requires>
+    </item>
+    <item id="geiger_counter" price="0" type="ELECTRONICS" subtype="SENSOR">
+  		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
+		</choices>
+		<requires>
+			<valuereq type="HOOK" ref="SENSOR_FUNCTION" value="1"/>
+		</requires>
+    </item>
 
 </items>
