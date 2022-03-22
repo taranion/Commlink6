@@ -24,6 +24,8 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	AMMUNITION,
 //	ARMOR,
 	ATTACK_RATING(new IntegerArrayConverter()),
+	/** Boolean: is this item subject to augmentation grade changes */
+	AUGMENTATION,
 	AVAILABILITY(new AvailabilityConverter()),
 //	BODY,
 //	CAPACITY,
@@ -37,7 +39,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	DAMAGE_REDUCTION,
 //	DEFENSE_RATING,
 	DEVICE_RATING,
-//	ESSENCECOST,
+	ESSENCECOST,
 	FIREMODES,
 //	HANDLING,
 //	HAS_RATING,

@@ -101,7 +101,7 @@ public enum ItemSubType {
 	// Accessories
 	ACCESSORY,
 	MODIFICATION,
-//	VISION_ENHANCEMENT,
+	VISION_ENHANCEMENT,
 	AUDIO_ENHANCEMENT,
 	SENSOR,
     // Chemicals

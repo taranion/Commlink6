@@ -16,7 +16,7 @@ public enum ItemType {
 	ACCESSORY(
 			ItemSubType.ACCESSORY, 
 			ItemSubType.MODIFICATION,
-//			ItemSubType.VISION_ENHANCEMENT,
+			ItemSubType.VISION_ENHANCEMENT,
 			ItemSubType.AUDIO_ENHANCEMENT,
 			ItemSubType.SENSOR,
 			ItemSubType.COMMLINK,
