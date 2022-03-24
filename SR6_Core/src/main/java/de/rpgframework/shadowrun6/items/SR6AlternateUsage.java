@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.Element;
+import org.prelle.simplepersist.ElementList;
+import org.prelle.simplepersist.ElementListUnion;
 import org.prelle.simplepersist.IgnoreMissingAttributes;
 
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.items.IGearTypeData;
-import de.rpgframework.genericrpg.items.PieceOfGearUsage;
+import de.rpgframework.genericrpg.items.AlternateUsage;
 
 /**
  * @author prelle
@@ -17,27 +19,33 @@ import de.rpgframework.genericrpg.items.PieceOfGearUsage;
  */
 @DataItemTypeKey(id="usage")
 @IgnoreMissingAttributes("id")
-public class SR6GearUsage extends PieceOfGearUsage<SR6UsageMode> {
+public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
 	
 	@Attribute
 	private ItemHook slot;
 	@Attribute
 	private float volume;
 
-	@Element
-	private WeaponData weapon; 
+	@ElementListUnion({
+		@ElementList(entry="weapon", type = WeaponData.class, inline = true),
+		@ElementList(entry="armor", type=ArmorData.class, inline=true),
+		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
+	})
+	private List<IGearTypeData> shortcuts; 
 
 	//-------------------------------------------------------------------
-	public SR6GearUsage() {
+	public SR6AlternateUsage() {
+		shortcuts = new ArrayList<>();
 	}
 
 	//-------------------------------------------------------------------
-	public SR6GearUsage(SR6UsageMode mode) {
+	public SR6AlternateUsage(SR6UsageMode mode) {
+		this();
 		this.mode = mode;
 	}
 
 	//-------------------------------------------------------------------
-	public SR6GearUsage(SR6UsageMode mode, ItemHook slot) {
+	public SR6AlternateUsage(SR6UsageMode mode, ItemHook slot) {
 		this(mode);
 		this.slot = slot;
 	}

@@ -41,7 +41,7 @@ public class LoadSR6DataTest {
 	//-------------------------------------------------------------------
 	@BeforeClass
 	public static void beforeClass() {
-		System.setProperty("logdir", "/tmp");
+		System.setProperty("logdir", "C:\\Users\\stefa");
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );		
@@ -105,7 +105,7 @@ public class LoadSR6DataTest {
 		assertEquals(Shadowrun6Core.getSkill("firearms"), (SR6Skill)item.getAttribute(SR6ItemAttribute.SKILL).getValue());
 		assertEquals(Shadowrun6Core.getSkill("firearms").getSpecialization("pistols"), (SkillSpecialization)item.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION).getValue());
 		
-		assertEquals(1, item.getUsages().size());
+		assertEquals(1, item.getAlternates().size());
 	}
 
 	//-------------------------------------------------------------------

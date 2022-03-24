@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
    <item avail="3" price="600" id="airburst_link" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
-      <usage slot="INTERNAL"/>
+      <usage mode="EMBEDDED" slot="INTERNAL"/>
       <requires>
-          <datareq type="ITEMTYPE" ref="LAUNCHERS" apply="DATA_ITEM"/>
+          <datareq type="ITEMSUBTYPE" ref="LAUNCHERS" apply="DATA_ITEM"/>
       </requires>
    </item>
    <item avail="1" price="200" id="bipod">
       <usage slot="UNDER"/>
       <modifications>
-		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2" />
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2" />
       </modifications>
 	  <mode id="bipod.wireless">
 	  		<!-- Only when prone or sitting -->
@@ -21,12 +21,18 @@
    <item avail="1" price="150" id="concealable_holster" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage slot="FIREARMS_EXTERNAL"/>
       <requires>
-         <datareq type="ITEMSUBTYPE" ref="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY,MACHINE_PISTOLS"/>
+      	<selreq>
+	         <datareq type="ITEMSUBTYPE" ref="TASERS"/>
+   	      <datareq type="ITEMSUBTYPE" ref="HOLDOUTS"/>
+         	<datareq type="ITEMSUBTYPE" ref="PISTOLS_LIGHT"/>
+	         <datareq type="ITEMSUBTYPE" ref="PISTOLS_HEAVY"/>
+         	<datareq type="ITEMSUBTYPE" ref="MACHINE_PISTOLS"/>
+      	</selreq>
       </requires>
    </item>
    <item avail="0" price="0" id="fn_p93_flashlight" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <requires>
-<!--          <itemreq item="fn_p93_praetor"/> -->
+          <datareq type="GEAR" ref="fn_p93_praetor" apply="DATA_ITEM"/>
       </requires>
    </item>
    <item avail="3" price="500" id="gas-vent_system" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
@@ -38,7 +44,7 @@
    </item>
    <item avail="3" price="1400" id="gyro_mount" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage slot="UNDER"/>
-      <usage slot="CYBERLIMB_IMPLANT" volume="8"/>
+      <usage slot="CYBERLIMB_IMPLANT" size="8"/>
    </item>
    <item avail="2" price="350" id="hidden_arm_slide" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage slot="FIREARMS_EXTERNAL"/>
@@ -78,7 +84,12 @@
    <item avail="2" price="175" id="quick_draw_holster" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage slot="FIREARMS_EXTERNAL"/>
       <requires>
-<!--          <itemsubtypereq type="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY"/> -->
+      	<selreq>
+	         <datareq type="ITEMSUBTYPE" ref="TASERS"/>
+   	      <datareq type="ITEMSUBTYPE" ref="HOLDOUTS"/>
+         	<datareq type="ITEMSUBTYPE" ref="PISTOLS_LIGHT"/>
+	         <datareq type="ITEMSUBTYPE" ref="PISTOLS_HEAVY"/>
+      	</selreq>
       </requires>
    </item>
    <item avail="2" price="50" id="shock_pad" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
@@ -100,8 +111,8 @@
       <usage slot="BARREL"/>
       <requires>
          <selreq>
-<!--             <itemreq item="ares_light_fire_70"/> -->
-<!--             <itemreq item="ares_light_fire_75"/> -->
+          <datareq type="GEAR" ref="ares_light_fire_70" apply="DATA_ITEM"/>
+          <datareq type="GEAR" ref="ares_light_fire_70" apply="DATA_ITEM"/>
          </selreq>
       </requires>
    </item>
@@ -111,9 +122,10 @@
 	<item id="smartgun_system" avail="2L" price="200" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
 		<usage slot="TOP" />
 		<usage slot="UNDER" />
-		<usage slot="INTERNAL">
+		<variant id="internal">
+			<usage slot="INTERNAL"/>
 			<attrdef id="PRICE" value="500"/>
-		</usage>		
+		</variant>
 		<mode id="SMARTGUN">
 			<requires>
 		    	<datareq apply="ACTIVE_GEAR" type="GEAR" ref="smartlink" />

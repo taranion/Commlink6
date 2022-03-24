@@ -16,6 +16,7 @@ import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.CommonCharacter;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
@@ -407,6 +408,8 @@ public class Shadowrun6Tools {
 	public static Possible areRequirementsMet(Shadowrun6Character model, ComplexDataItem data) {
 		List<Requirement> list = new ArrayList<>();
 		for (Requirement req : data.getRequirements()) {
+			if (req.getApply()!=ApplyTo.CHARACTER)
+				continue;
 			if (!isRequirementMet(model, req)) {
 				list.add(req);
 			}

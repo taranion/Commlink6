@@ -15,7 +15,6 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.items.IGearTypeData;
 import de.rpgframework.genericrpg.items.PieceOfGear;
-import de.rpgframework.genericrpg.items.PieceOfGearEquip;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.items.Availability;
@@ -26,7 +25,7 @@ import de.rpgframework.shadowrun.persist.AvailabilityConverter;
  *
  */
 @DataItemTypeKey(id = "item")
-public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearUsage> {
+public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6PieceOfGearVariant,SR6AlternateUsage> {
 
 	@Attribute(name="avail",required=false)
 	@AttribConvert(AvailabilityConverter.class)
@@ -41,11 +40,11 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 		@ElementList(entry="armor", type=ArmorData.class, inline=true),
 		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
 	})
-	private List<IGearTypeData> weapons; 
+	private List<IGearTypeData> shortcuts; 
 
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
-		weapons = new ArrayList<>();
+		shortcuts = new ArrayList<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -57,19 +56,19 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 //		ArrayList<IGearTypeData> ret = new ArrayList<>();
 //		if (!weapons.isEmpty())
 //			ret.add(weapons.get(0));
-		return weapons;
+		return shortcuts;
 	}
 
 	//-------------------------------------------------------------------
 	public List<WeaponData> getAttacks() {
 		ArrayList<WeaponData> ret = new ArrayList<>();
-		for (IGearTypeData tmp : weapons) {
+		for (IGearTypeData tmp : shortcuts) {
 			if (tmp instanceof WeaponData) {
 				ret.add((WeaponData) tmp);
 			}
 		}
 		// Add from usages
-		for (SR6GearUsage usage : super.getUsages()) {
+		for (SR6AlternateUsage usage : super.getAlternates()) {
 			logger.log(Level.WARNING, "ToDo: Usage: "+usage);
 		}
 		
@@ -87,13 +86,13 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);
 		
 		/* If there is no USAGE assume a NORMAL mode and no slot */
-		if (equips.isEmpty()) {
-			PieceOfGearEquip<SR6EquipMode> add = new SR6GearEquip(SR6EquipMode.NORMAL);
-			equips.add(add);
+		if (variants.isEmpty()) {
+			SR6PieceOfGearVariant add = new SR6PieceOfGearVariant(SR6VariantMode.NORMAL);
+			variants.add(add);
 		}
-		if (usages.isEmpty()) {
-			SR6GearUsage add = new SR6GearUsage(SR6UsageMode.PRIMARY);
-			usages.add(add);
+		if (alternates.isEmpty()) {
+			SR6AlternateUsage add = new SR6AlternateUsage(SR6UsageMode.PRIMARY);
+			alternates.add(add);
 		}
 		
 		// Validate hook identifier in modifications
@@ -117,13 +116,13 @@ public class ItemTemplate extends PieceOfGear<SR6EquipMode,SR6UsageMode,SR6GearU
 		super.validate();
 	}
 
-	//-------------------------------------------------------------------
-	public List<SR6GearUsage> getUsages() {
-		if (usages.isEmpty()) {
-			return Arrays.asList(new SR6GearUsage(SR6UsageMode.PRIMARY));
-		}
-		return usages;
-	}
+//	//-------------------------------------------------------------------
+//	public List<SR6GearUsage> getAlternates() {
+//		if (alternates.isEmpty()) {
+//			return Arrays.asList(new SR6GearUsage(SR6UsageMode.PRIMARY));
+//		}
+//		return alternates;
+//	}
 
 	//-------------------------------------------------------------------
 	/**

@@ -31,7 +31,8 @@ public class ProblemItemTest {
 	//-------------------------------------------------------------------
 	@BeforeClass
 	public static void beforeClass() {
-		System.setProperty("logdir", "/tmp");
+		System.setProperty("logdir", "C:\\Users\\stefa");
+//		System.setProperty("logdir", "/tmp");
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );		
@@ -86,9 +87,32 @@ public class ProblemItemTest {
 		
 		int[] expected = new int[] {10,7,6,0,0};
 		assertArrayEquals(expected, carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getValue());
-		assertArrayEquals(expected, carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
+		assertArrayEquals(expected, carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());	
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadItemWithRatingMultiplied() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "chemical_protection");
+		assertNotNull(item);
+		assertEquals(1, item.getChoices().size());
+		Choice choice = item.getChoices().get(0);
+		assertNotNull(choice);
 		
+		assertEquals(ShadowrunReference.ITEM_ATTRIBUTE,choice.getChooseFrom());
+		assertEquals("RATING",choice.getTypeReference());
 		
+		// New create an item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, new Decision(choice, "7"));
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+		GearTool.recalculate("", carried);
+		
+		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getDistributed());
+		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
+		assertEquals(1750, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals(7, carried.getAsValue(SR6ItemAttribute.SIZE).getModifiedValue());
 	}
 
 }

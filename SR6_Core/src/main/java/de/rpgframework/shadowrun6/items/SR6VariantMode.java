@@ -5,14 +5,14 @@ import java.util.MissingResourceException;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.genericrpg.items.IEquipMode;
+import de.rpgframework.genericrpg.items.IVariantMode;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
  * Decision made when adding the item to the character.
  * @author prelle
  */
-public enum SR6EquipMode implements IEquipMode {
+public enum SR6VariantMode implements IVariantMode {
 	
 	/** Carried in your hands or whatever the default is for such an item */
 	NORMAL,

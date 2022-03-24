@@ -3,33 +3,37 @@ package de.rpgframework.shadowrun6.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.IgnoreMissingAttributes;
 
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.items.IGearTypeData;
-import de.rpgframework.genericrpg.items.PieceOfGearEquip;
+import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 
 /**
  * @author prelle
  *
  */
-@DataItemTypeKey(id="equip")
-@IgnoreMissingAttributes("id")
-public class SR6GearEquip extends PieceOfGearEquip<SR6EquipMode> {
+@DataItemTypeKey(id = "variant")
+//@IgnoreMissingAttributes("id")
+public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	
+	@Attribute
 	private ItemHook slot;
+	@Attribute
+	private float size;
 
 	//-------------------------------------------------------------------
-	public SR6GearEquip() {
+	public SR6PieceOfGearVariant() {
 	}
 
 	//-------------------------------------------------------------------
-	public SR6GearEquip(SR6EquipMode mode) {
+	public SR6PieceOfGearVariant(SR6VariantMode mode) {
 		this.mode = mode;
 	}
 
 	//-------------------------------------------------------------------
-	public SR6GearEquip(SR6EquipMode mode, ItemHook slot) {
+	public SR6PieceOfGearVariant(SR6VariantMode mode, ItemHook slot) {
 		this(mode);
 		this.slot = slot;
 	}

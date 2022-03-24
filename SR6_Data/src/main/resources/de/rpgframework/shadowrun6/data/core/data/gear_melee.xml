@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
 	<item id="combat_axe" avail="4" price="500" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
-		<equip mode="NORMAL"/>
 		<weapon dmg="5P" attack="9,,,," skill="close_combat" spec="close_combat/blades" />
 	</item>
    <item id="combat_knife" avail="2" price="220" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">

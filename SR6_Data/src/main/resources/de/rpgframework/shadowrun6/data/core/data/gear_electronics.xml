@@ -171,18 +171,12 @@
    
    <!-- Accessories -->
    <item avail="2" price="100"  id="sim_module" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
-   	<equip mode="EMBEDDED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    	<attrdef id="DEVICE_RATING" value="3"/>
-      <requires>
-         <datareq type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-      </requires>
    </item>
    <item avail="2I" price="250"  id="sim_module_hot" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
-   	<equip mode="EMBEDDED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    	<attrdef id="DEVICE_RATING" value="3"/>
-      <requires>
-         <datareq type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-      </requires>
    </item>
    <item avail="1" price="150"  id="ar_gloves" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
    	<attrdef id="DEVICE_RATING" value="3"/>
@@ -213,13 +207,13 @@
    </item>
    <item avail="1" price="70"  id="trodes" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES">
 	<attrdef id="DEVICE_RATING" value="3" />
-	<equip mode="NORMAL">
-	</equip>
-	<equip mode="EMBEDDED">
+	<variant id="regular" mode="NORMAL">
+	</variant>
+	<variant id="helmet" mode="EMBEDDED">
 		<requires>
 			<datareq type="HOOK" ref="HELMET_ACCESSORY" />
 		</requires>
-	</equip>
+	</variant>
    </item>
    
    <!-- RFID -->
