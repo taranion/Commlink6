@@ -88,10 +88,10 @@
    
    <!-- Visual enhancements -->
    <item avail="1" price="250" id="flare_compensation" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
-	  	<usage mode="EMBEDDED" slot="OPTICAL" size="1"/>
-  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" size="1"/>
+	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
    	<variant id="cybereye">
-   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" size="1"/>
+   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="1"/>
    		<attrdef id="PRICE" value="1000"/>
    		<attrdef id="AVAILABILITY" value="2"/>
    		<flag>AUGMENTATION</flag>
@@ -105,10 +105,10 @@
    	</variant>
 	</item>
 	<item avail="1" price="25" id="image_link" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
-	  	<usage mode="EMBEDDED" slot="OPTICAL" size="1"/>
-  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" size="1"/>
+	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
    	<variant id="cybereye">
-   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" size="1"/>
+   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="1"/>
    		<attrdef id="PRICE" value="800"/>
    		<attrdef id="AVAILABILITY" value="2"/>
    		<flag>AUGMENTATION</flag>
@@ -122,10 +122,10 @@
    	</variant>
    </item>
    <item avail="2" price="500" id="low_light_vision" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
-	  	<usage mode="EMBEDDED" slot="OPTICAL" size="1"/>
-  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" size="1"/>
+	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
    	<variant id="cybereye">
-   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" size="2"/>
+   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="1500"/>
    		<flag>AUGMENTATION</flag>
    	</variant>   	
@@ -137,10 +137,10 @@
    	</variant>   	
    </item>
    <item avail="2" price="2000" id="smartlink"  type="ACCESSORY" subtype="VISION_ENHANCEMENT">
-	  	<usage mode="EMBEDDED" slot="OPTICAL" size="2"/>
-  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" size="2"/>
+	  	<usage mode="EMBEDDED" slot="OPTICAL" value="2"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="2"/>
    	<variant id="cybereye">
-   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" size="3"/>
+   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="3"/>
     		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3L"/>
    		<flag>AUGMENTATION</flag>
@@ -155,10 +155,10 @@
    </item>
    
    <item avail="2" price="500" id="thermographic_vision" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
-	  	<usage mode="EMBEDDED" slot="OPTICAL" size="1"/>
-  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" size="1"/>
+	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
    	<variant id="cybereye">
-   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" size="1"/>
+   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="1"/>
    		<attrdef id="PRICE" value="1500"/>
    		<attrdef id="AVAILABILITY" value="2"/>
    		<flag>AUGMENTATION</flag>
@@ -172,14 +172,14 @@
    	</variant>
    </item>
    <item avail="1" price="300" id="ultrasound_link" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
-	  	<usage mode="EMBEDDED" slot="OPTICAL" size="1"/>
-  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" size="1"/>
+	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
    </item>
    <item avail="1" price="500" id="vision_enhancement" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
-	  	<usage mode="EMBEDDED" slot="OPTICAL" size="1"/>
-  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" size="1"/>
+	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
    	<variant id="cybereye">
-   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" size="2"/>
+   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<flag>AUGMENTATION</flag>
@@ -193,10 +193,10 @@
    	</variant>
    </item>
    <item avail="1" price="250" id="vision_magnification" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
-	  	<usage mode="EMBEDDED" slot="OPTICAL" size="1"/>
-  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" size="1"/>
+	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
    	<variant id="cybereye">
-   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" size="2"/>
+   		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="2000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<flag>AUGMENTATION</flag>
@@ -261,9 +261,9 @@
 
     <!-- Audio enhancements -->
     <item avail="1" price="500" id="audio_enhancement" type="ACCESSORY" subtype="AUDIO_ENHANCEMENT">
-	  	<usage mode="EMBEDDED" slot="AUDIO" size="1"/>
+	  	<usage mode="EMBEDDED" slot="AUDIO" value="1"/>
    	<variant id="cyberear">
-		  	<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" size="2"/>
+		  	<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="4000"/>
    		<flag>AUGMENTATION</flag>
    	</variant>   	
@@ -278,11 +278,11 @@
 		<choices>
 			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
-	  	<usage mode="EMBEDDED" slot="AUDIO" size="$RATING"/>
+	  	<usage mode="EMBEDDED" slot="AUDIO" value="$RATING"/>
   		<attrdef id="PRICE" value="$RATING*250"/>
   		<attrdef id="SIZE" value="$RATING"/>
    	<variant id="cyberear">
-		  	<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" size="$RATING"/>
+		  	<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="$RATING"/>
 			<choices>
 				<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 			</choices>
@@ -302,7 +302,7 @@
    	</variant>   	
    </item>
    <item avail="2" price="1000" id="spatial_recognizer" subtype="AUDIO_ENHANCEMENT" type="ACCESSORY">
-   	<usage mode="EMBEDDED" slot="AUDIO" size="2"/>
+   	<usage mode="EMBEDDED" slot="AUDIO" value="2"/>
    	<variant id="cyberear">
    		<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="4000"/>

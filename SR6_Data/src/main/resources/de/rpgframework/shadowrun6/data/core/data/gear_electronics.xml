@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
 	<item avail="2" price="100" id="meta_link" type="ELECTRONICS" subtype="COMMLINK">
+		<usage mode="CARRIED"/>
 		<modifications>
 			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
 			<itemmod type="HOOK" ref="SOFTWARE" />
@@ -8,6 +9,7 @@
 		<matrix d="1" f="0" programs="0" devrat="1" />
 	</item>
    <item avail="2" price="700" id="sony_emporer" type="ELECTRONICS" subtype="COMMLINK">
+		<usage mode="CARRIED"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
@@ -15,6 +17,7 @@
       <matrix d="1" f="1" programs="1" devrat="2"/>
    </item>
    <item avail="2" price="1000" id="renraku_sensei" type="ELECTRONICS" subtype="COMMLINK">
+		<usage mode="CARRIED"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
@@ -22,6 +25,7 @@
       <matrix d="2" f="0" programs="1" devrat="3" />
    </item>
    <item avail="2" price="2500" id="erika_elite" type="ELECTRONICS" subtype="COMMLINK">
+		<usage mode="CARRIED"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
@@ -29,6 +33,8 @@
       <matrix d="2" f="1" programs="2" devrat="4"/>
    </item>
    <item avail="3" price="5000" id="hermes_ikon" type="ELECTRONICS" subtype="COMMLINK">
+		<usage mode="CARRIED"/>
+		<usage mode="EMBEDDED" slot="COMMLINK"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
@@ -36,6 +42,8 @@
       <matrix d="3" f="0" programs="2" devrat="5"/>
    </item>
    <item avail="3" price="8000" id="transys_avalon" subtype="COMMLINK" type="ELECTRONICS">
+		<usage mode="CARRIED"/>
+		<usage mode="EMBEDDED" slot="COMMLINK"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
