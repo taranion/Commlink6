@@ -139,21 +139,55 @@ public enum ItemType {
 			),
 	VEHICLES(
 			ItemSubType.BIKES,
+			ItemSubType.ATVS,
 			ItemSubType.CARS,
 			ItemSubType.TRUCKS,
+			ItemSubType.VANS,
+			ItemSubType.BUS,
+			ItemSubType.TRACKED,
+			ItemSubType.SPECIAL_VEHICLES,
+			ItemSubType.HOVERCRAFT,
+			ItemSubType.PWC,
 			ItemSubType.BOATS,
+			ItemSubType.SHIPS,
 			ItemSubType.SUBMARINES,
 			ItemSubType.FIXED_WING,
 			ItemSubType.ROTORCRAFT,
 			ItemSubType.VTOL,
-			ItemSubType.WALKER
+			ItemSubType.LAV,
+			ItemSubType.LTAV,
+			ItemSubType.GRAV,
+			ItemSubType.SPACECRAFT,
+			ItemSubType.WALKER,
+			ItemSubType.MOD_TRAILER
 			),
-	DRONES(
-			ItemSubType.MICRODRONES,
-			ItemSubType.MINIDRONES,
-			ItemSubType.SMALL_DRONES,
-			ItemSubType.MEDIUM_DRONES,
-			ItemSubType.LARGE_DRONES
+	DRONE_MICRO(
+			ItemSubType.GROUND,
+			ItemSubType.AIR,
+			ItemSubType.AQUATIC
+			),
+	DRONE_MINI(
+			ItemSubType.GROUND,
+			ItemSubType.AIR,
+			ItemSubType.AQUATIC
+			),
+	DRONE_SMALL(
+			ItemSubType.GROUND,
+			ItemSubType.AIR,
+			ItemSubType.AQUATIC,
+			ItemSubType.ANTHRO
+			),
+	DRONE_MEDIUM(
+			ItemSubType.GROUND,
+			ItemSubType.AIR,
+			ItemSubType.AQUATIC,
+			ItemSubType.ANTHRO
+			),
+	DRONE_LARGE(
+			ItemSubType.GROUND,
+			ItemSubType.AIR,
+			ItemSubType.AQUATIC,
+			ItemSubType.ANTHRO
 			),
 	MAGICAL(
 //			ItemSubType.FOCI_ENCHANTING,
@@ -166,6 +200,35 @@ public enum ItemType {
 //			ItemSubType.MAGICAL_FORMULA,
 			ItemSubType.MAGICAL_SUPPLIES
 			),
+	// Vehicle Modifications
+		MOD_CHASSIS(
+				ItemSubType.MOD_LAYOUT,
+				ItemSubType.MOD_CORE,
+				ItemSubType.MOD_HANDLING,
+				ItemSubType.MOD_INTERIOR,
+				ItemSubType.MOD_CARGO
+				),
+		MOD_SKIN(
+				ItemSubType.MOD_FORM,
+				ItemSubType.MOD_ARMOR,
+				ItemSubType.MOD_ELEMENTS
+				),
+		MOD_POWER(
+				ItemSubType.MOD_ACC,
+				ItemSubType.MOD_EFFICIENCY,
+				ItemSubType.MOD_SPEED,
+				ItemSubType.MOD_PROPULSION
+				),
+		MOD_ELEC(
+				ItemSubType.MOD_COAT,
+				ItemSubType.MOD_MISC,
+				ItemSubType.MOD_PILOT
+				),
+		MOD_HARD(					
+				ItemSubType.MOD_MOUNT,
+				ItemSubType.MOD_RACK,
+				ItemSubType.MOD_OTHERS
+				),
     ;
 
 	private ItemSubType[] subTypes;
@@ -191,7 +254,11 @@ public enum ItemType {
     }
 
     public static ItemType[] vehicleTypes() {
-    	return new ItemType[]{VEHICLES,DRONES};
+    	return new ItemType[]{VEHICLES,DRONE_MICRO,DRONE_MINI,DRONE_MEDIUM,DRONE_SMALL,DRONE_LARGE};
+    }
+
+    public static ItemType[] droneTypes() {
+    	return new ItemType[]{DRONE_MICRO,DRONE_MINI,DRONE_MEDIUM,DRONE_SMALL,DRONE_LARGE};
     }
 
     public static ItemType[] weaponTypes() {

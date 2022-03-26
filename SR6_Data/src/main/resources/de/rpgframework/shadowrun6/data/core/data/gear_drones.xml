@@ -1,92 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
    <!-- Microdrones -->
-   <item avail="2"  cost="450" id="gmc_micromachine" type="DRONES" subtype="MICRODRONES">
-      <vehicle han="3/6" acc="5" spdi="5" tspd="25" bod="0" arm="0" pil="1" sen="1" type="GROUND"/>
+   <item avail="2"  price="450" id="gmc_micromachine" type="DRONE_MICRO" subtype="GROUND">
+      <vehicle han="3/6" acc="5" spdi="5" tspd="25" bod="0" arm="0" pil="1" sen="1"/>
    </item>
-   <item avail="2"  cost="900" id="shiawase_kanmushi" type="DRONES" subtype="MICRODRONES">
-      <vehicle han="2/3" acc="4" spdi="5" tspd="15" bod="0" arm="0" pil="3" sen="2" type="GROUND" />
+   <item avail="2"  price="900" id="shiawase_kanmushi" type="DRONE_MICRO" subtype="GROUND">
+      <vehicle han="2/3" acc="4" spdi="5" tspd="15" bod="0" arm="0" pil="3" sen="2"/>
    </item>
-   <item avail="2"  cost="850" id="mct-sikorsky-bell_microskimmer_xxs" type="DRONES" subtype="MICRODRONES">
-      <vehicle han="2" acc="6" spdi="10" tspd="35" bod="0" arm="0" pil="2" sen="1" type="AIR"/>
+   <item avail="2"  price="850" id="mct-sikorsky-bell_microskimmer_xxs" type="DRONE_MICRO" subtype="AIR">
+      <vehicle han="2" acc="6" spdi="10" tspd="35" bod="0" arm="0" pil="2" sen="1"/>
    </item>
-   <item avail="2"  cost="800" id="mct_gnat" type="DRONES" subtype="MICRODRONES">
-      <vehicle han="3" acc="4" spdi="10" tspd="30" bod="0" arm="0" pil="2" sen="1" type="AIR"/>
+   <item avail="2"  price="800" id="mct_gnat" type="DRONE_MICRO" subtype="AIR">
+      <vehicle han="3" acc="4" spdi="10" tspd="30" bod="0" arm="0" pil="2" sen="1"/>
    </item>
 
    <!-- Minidrones -->
-   <item avail="2"  cost="1000" id="gm-nissan_flip_flop" type="DRONES" subtype="MINIDRONES">
-      <vehicle han="2/4" acc="8" spdi="15" tspd="50" bod="1" arm="0" pil="2" sen="1" type="GROUND"/>
+   <item avail="2"  price="1000" id="gm-nissan_flip_flop" type="DRONE_MINI" subtype="GROUND">
+      <vehicle han="2/4" acc="8" spdi="15" tspd="50" bod="1" arm="0" pil="2" sen="1"/>
    </item>
-   <item avail="2"  cost="1100" id="shiawase_inu" type="DRONES" subtype="MINIDRONES">
-      <vehicle han="2/3" acc="6" spdi="8" tspd="24" bod="1" arm="0" pil="2" sen="2" type="GROUND"/>
+   <item avail="2"  price="1100" id="shiawase_inu" type="DRONE_MINI" subtype="GROUND">
+      <vehicle han="2/3" acc="6" spdi="8" tspd="24" bod="1" arm="0" pil="2" sen="2" />
    </item>
-   <item avail="2"  cost="1600" id="shiawase_inu_better_suit" type="DRONES" subtype="MINIDRONES">
-      <vehicle han="2/3" acc="6" spdi="8" tspd="24" bod="1" arm="0" pil="2" sen="2" type="GROUND"/>
+   <item avail="2"  price="1600" id="shiawase_inu_better_suit" type="DRONE_MINI" subtype="GROUND">
+      <vehicle han="2/3" acc="6" spdi="8" tspd="24" bod="1" arm="0" pil="2" sen="2" />
    </item>
-   <item avail="2"  cost="2000" id="horizon_flying_eye" type="DRONES" subtype="MINIDRONES">
-      <vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" type="AIR"/>
+   <item avail="2"  price="2000" id="horizon_flying_eye" type="DRONE_MINI" subtype="AIR">
+      <vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" />
+      <variant id="grenade">
+        <attrdef id="PRICE" value="2500"/>
+      </variant>
    </item>
-   <item avail="2"  cost="2500" id="horizon_flying_eye_extra" type="DRONES" subtype="MINIDRONES">
-      <vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" type="AIR"/>
-   </item>
-   <item avail="2"  cost="2100" id="mct_hornet" type="DRONES" subtype="MINIDRONES">
-      <vehicle han="3" acc="20" spdi="15" tspd="35" bod="1" arm="0" pil="2" sen="2" type="AIR"/>
+   <item avail="2"  price="2100" id="mct_hornet" type="DRONE_MINI" subtype="AIR">
+      <vehicle han="3" acc="20" spdi="15" tspd="35" bod="1" arm="0" pil="2" sen="2" />
+      <modifications>
+        <accessorymod item="hornet_injector_mount" hook="VEHICLE_BODY" />
+      </modifications>
    </item>
 
    <!-- Small drones -->
-   <item avail="3"  cost="11000" id="chrysler-nissan_pursuit_v" type="DRONES" subtype="SMALL_DRONES">
-      <vehicle han="3/6" acc="30" spdi="50" tspd="280" bod="4" arm="2" pil="4" sen="3" type="GROUND"/>
+   <item avail="3"  price="11000" id="chrysler-nissan_pursuit_v" type="DRONE_SMALL" subtype="GROUND">
+      <vehicle han="3/6" acc="30" spdi="50" tspd="280" bod="4" arm="2" pil="4" sen="3" />
    </item>
-   <item avail="2"  cost="4500" id="aztechnology_crawler" type="DRONES" subtype="SMALL_DRONES">
-      <vehicle han="3/4" acc="8" spdi="10" tspd="30" bod="6" arm="2" pil="2" sen="2" type="GROUND"/>
+   <item avail="2"  price="4500" id="aztechnology_crawler" type="DRONE_SMALL" subtype="GROUND">
+      <vehicle han="3/4" acc="8" spdi="10" tspd="30" bod="6" arm="2" pil="2" sen="2" />
    </item>
-   <item avail="2"  cost="5000" id="cyberspace_designs_quadrotor" type="DRONES" subtype="SMALL_DRONES">
-      <vehicle han="2" acc="15" spdi="20" tspd="120" bod="3" arm="1" pil="3" sen="2" type="AIR"/>
+   <item avail="2"  price="5000" id="cyberspace_designs_quadrotor" type="DRONE_SMALL" subtype="AIR">
+      <vehicle han="2" acc="15" spdi="20" tspd="120" bod="3" arm="1" pil="3" sen="2" />
 	  <modifications>
-        <itemattrmod attr="CAPACITY" val="-1" slot="VEHICLE_BODY"/>
+      	<itemattrmod attr="CAPACITY" slot="VEHICLE_BODY" val="0"/>
       </modifications>
    </item>
-   <item avail="3"  cost="18000" id="lockheed_optic_x2" type="DRONES" subtype="SMALL_DRONES">
-      <vehicle han="4" acc="15" spdi="30" tspd="140" bod="2" arm="4" pil="4" sen="4" type="AIR"/>
+   <item avail="3"  price="18000" id="lockheed_optic_x2" type="DRONE_SMALL" subtype="AIR">
+      <vehicle han="4" acc="15" spdi="30" tspd="140" bod="2" arm="4" pil="4" sen="4" />
    </item>
 
    <!-- Medium drones -->
-   <item avail="2"  cost="6500" id="gm-nissan_dobermann" >
-      <useas type="DRONES" subtype="MEDIUM_DRONES" />
-      <vehicle han="3/5" acc="10" spdi="15" tspd="100" bod="4" arm="6" pil="2" sen="3" type="GROUND"/>
+   <item avail="2"  price="6500" id="gm-nissan_dobermann" type="DRONE_MEDIUM" subtype="GROUND" >
+      <vehicle han="3/5" acc="10" spdi="15" tspd="100" bod="4" arm="6" pil="2" sen="3" />
       <modifications>
         <accessorymod item="weapon_mount_standard" hook="VEHICLE_BODY" />
       </modifications>
    </item>
-   <item avail="2"  cost="4500" id="nissan_samurai" type="DRONES" subtype="MEDIUM_DRONES">
+   <item avail="2"  price="4500" id="nissan_samurai" type="DRONE_MEDIUM" subtype="ANTHRO">
       <vehicle han="3/4" acc="10" spdi="10" tspd="30" bod="6" arm="6" pil="3" sen="2" type="GROUND"/>
+      <modifications>
+        <accessorymod item="spurs_samurai_oni" hook="VEHICLE_BODY" />
+      </modifications>
    </item>
-   <item avail="2"  cost="5000" id="mct-nissan_roto_drone" type="DRONES" subtype="MEDIUM_DRONES">
-      <vehicle han="3" acc="20" spdi="30" tspd="160" bod="5" arm="6" pil="3" sen="2" type="AIR"/>
+   <item avail="2"  price="5000" id="mct-nissan_roto_drone" type="DRONE_MEDIUM" subtype="AIR">
+      <vehicle han="3" acc="20" spdi="30" tspd="160" bod="5" arm="6" pil="3" sen="2" />
       <modifications>
         <itemattrmod attr="CAPACITY" val="1" slot="VEHICLE_BODY"/>
       </modifications>
    </item>
-   <item avail="3"  cost="8000" id="federated-boeing_blackhawk" type="DRONES" subtype="MEDIUM_DRONES">
-      <vehicle han="3" acc="35" spdi="40" tspd="200" bod="8" arm="6" pil="3" sen="3" type="AIR"/>
+   <item avail="3"  price="8000" id="federated-boeing_blackhawk" type="DRONE_MEDIUM" subtype="AIR">
+      <vehicle han="3" acc="35" spdi="40" tspd="200" bod="8" arm="6" pil="3" sen="3" />
    </item>
 
    <!-- Large drones -->
-   <item avail="4"  cost="25000" id="steel_lynx_combat_drone" type="DRONES" subtype="LARGE_DRONES">
-      <vehicle han="3/5" acc="15" spdi="15" tspd="80" bod="12" arm="16" pil="4" sen="4" type="GROUND"/>
+   <item avail="4"  price="25000" id="steel_lynx_combat_drone" type="DRONE_LARGE" subtype="GROUND">
+      <vehicle han="3/5" acc="15" spdi="15" tspd="80" bod="12" arm="16" pil="4" sen="4" />
    </item>
-   <item avail="3"  cost="10000" id="ares_packmule" type="DRONES" subtype="LARGE_DRONES">
-      <vehicle han="3/4" acc="6" spdi="5" tspd="30" bod="8" arm="6" pil="2" sen="1" type="GROUND"/>
+   <item avail="3"  price="10000" id="ares_packmule" type="DRONE_LARGE" subtype="GROUND">
+      <vehicle han="3/4" acc="6" spdi="5" tspd="30" bod="8" arm="6" pil="2" sen="1" />
    </item>
-   <item avail="3"  cost="10000" id="cyberspace_designs_dalmatian" type="DRONES" subtype="LARGE_DRONES">
-      <vehicle han="3" acc="13" spdi="20" tspd="130" bod="6" arm="4" pil="3" sen="3" type="AIR"/>
+   <item avail="3"  price="10000" id="cyberspace_designs_dalmatian" type="DRONE_LARGE" subtype="AIR">
+      <vehicle han="3" acc="13" spdi="20" tspd="130" bod="6" arm="4" pil="3" sen="3" />
    </item>
-   <item avail="5"  cost="43000" id="ares_black_sky" type="DRONES" subtype="LARGE_DRONES">
-      <vehicle han="2" acc="25" spdi="50" tspd="300" bod="8" arm="10" pil="4" sen="4" type="AIR"/>
+   <item avail="5"  price="43000" id="ares_black_sky" type="DRONE_LARGE" subtype="AIR">
+      <vehicle han="2" acc="25" spdi="50" tspd="300" bod="8" arm="10" pil="4" sen="4" />
    </item>
-   <item avail="2"  cost="6700" id="nissan_oni" type="DRONES" subtype="LARGE_DRONES">
+   <item avail="2"  price="6700" id="nissan_oni" type="DRONE_LARGE" subtype="ANTHRO">
       <vehicle han="3/4" acc="10" spdi="8" tspd="30" bod="9" arm="10" pil="3" sen="2" type="GROUND"/>
+      <modifications>
+        <accessorymod item="spurs_samurai_oni" hook="VEHICLE_BODY" />
+      </modifications>
    </item>
    
 </items>

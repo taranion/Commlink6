@@ -136,7 +136,7 @@
    </item>
    <item avail="5" price="2500" id="smart_firing_platform" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="UNDER"/>
-      <alternate mode="VEHICLE" id="drone" type="DRONES" subtype="MINIDRONES">
+      <alternate mode="VEHICLE" id="drone" type="DRONE_MINI" subtype="GROUND">
       	<usage mode="CARRIED" />
 			<vehicle bod="3" arm="3" pil="3" sen="3"/>
 			<modifications>
