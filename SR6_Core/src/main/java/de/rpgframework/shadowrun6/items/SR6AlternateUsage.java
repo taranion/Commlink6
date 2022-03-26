@@ -22,14 +22,15 @@ import de.rpgframework.genericrpg.items.AlternateUsage;
 public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
 	
 	@Attribute
-	private ItemHook slot;
+	private ItemType type;
 	@Attribute
-	private float volume;
+	private ItemSubType subtype;
 
 	@ElementListUnion({
 		@ElementList(entry="weapon", type = WeaponData.class, inline = true),
 		@ElementList(entry="armor", type=ArmorData.class, inline=true),
 		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
+		@ElementList(entry="vehicle", type=VehicleData.class, inline=true),
 	})
 	private List<IGearTypeData> shortcuts; 
 
@@ -45,17 +46,6 @@ public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
 	}
 
 	//-------------------------------------------------------------------
-	public SR6AlternateUsage(SR6UsageMode mode, ItemHook slot) {
-		this(mode);
-		this.slot = slot;
-	}
-
-	//-------------------------------------------------------------------
-	public ItemHook getSlot() {
-		return slot;
-	}
-
-	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.items.AGearData#getTypeData()
 	 */
@@ -63,15 +53,6 @@ public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
 	public List<? extends IGearTypeData> getTypeData() {
 		// TODO Auto-generated method stub
 		return new ArrayList<>();
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * How many capacity points are used up by this item
-	 * @return the volume
-	 */
-	public float getVolume() {
-		return volume;
 	}
 
 }

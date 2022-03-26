@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.Possible.State;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -21,6 +24,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -266,7 +270,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 */
 	@Override
 	public List<ItemTemplate> getEmbeddableIn(CarriedItem ref, ItemHook slot) {
-		return List.of();
+		return ItemUtil.getEmbeddableIn(ref, slot);
 	}
 
 	//-------------------------------------------------------------------
@@ -275,7 +279,26 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 */
 	@Override
 	public Possible canBeEmbedded(CarriedItem container, ItemHook slot, ItemTemplate value, Decision... decisions) {
-		return Possible.FALSE;
+		if (!getEmbeddableIn(container, slot).contains(value)) {
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_EMBEDDABLE, value.getName(), slot, container.getNameWithRating());
+		}
+		
+		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, decisions);
+		if (res.hasError()) {
+			return new Possible(State.IMPOSSIBLE, res.getMessages().toString());
+		}
+		
+		ItemAttributeNumericalValue<SR6ItemAttribute> val = res.get().getAsValue(SR6ItemAttribute.PRICE);
+		if (val==null) {
+			logger.log(Level.ERROR, "No PRICE attribute after building "+res.get());
+		} else {
+			int nuyen = val.getModifiedValue();
+			if (nuyen > getModel().getNuyen()) {
+				return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());			
+			}
+		}
+		
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------
@@ -284,7 +307,17 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem container, ItemHook slot, ItemTemplate value, Decision... decisions) {
-		return new OperationResult<>(null);
+		logger.log(Level.TRACE, "ENTER embed {0} into {1}", value, container);
+		try {
+			Possible poss = canBeEmbedded(container, slot, value, decisions);
+			if (!poss.get()) {
+				logger.log(Level.WARNING, "Trying to embed, which isn't possible: "+poss.getMostSevere());
+				return new OperationResult<>();
+			}
+			return new OperationResult<>(null);
+		} finally {
+			logger.log(Level.TRACE, "LEAVE embed{0}", value);
+		}
 	}
 
 }

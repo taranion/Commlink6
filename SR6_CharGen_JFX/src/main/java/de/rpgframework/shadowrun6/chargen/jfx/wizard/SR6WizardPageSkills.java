@@ -66,9 +66,10 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 			ret.setSkin(new SR6SkillTablePrioSkin(ret));
 //		} else if (realCtrl instanceof PointBuyCharacterGenerator) {
 //			return new PointBuyAttributeTable<>(controller);
+		} else {
+			logger.log(Level.ERROR, "Don't know what to return for "+realCtrl);
+			System.err.println("SR6WizardPageSkills: Don't know what to return for "+realCtrl);
 		}
-		logger.log(Level.ERROR, "Don't know what to return for "+realCtrl);
-		System.err.println("SR6WizardPageSkills: Don't know what to return for "+realCtrl);
 		return ret;
 	}
 

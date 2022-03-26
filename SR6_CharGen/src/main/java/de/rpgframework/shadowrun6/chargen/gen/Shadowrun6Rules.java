@@ -15,7 +15,17 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(Shadowrun6Rules.class,
 			Locale.ENGLISH, Locale.GERMAN);
 
+	public static enum PRIORITY_MAGIC {
+		/** Only use magic rating from priority */
+		PRIO_MAGIC,
+		/** Use the priority magic plus any points added by Karma */
+		MAGIC_PLUS_KARMA,
+		/** Use the magic rating with any adjustments */
+		FINAL_MAGIC,
+	}
+	
 	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule("CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule CHARGEN_PRIO_ADEPT_PP = new Rule("CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.FINAL_MAGIC);
 
 	
 	//-------------------------------------------------------------------

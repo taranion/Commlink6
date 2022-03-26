@@ -1,169 +1,210 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item id="adrenaline_pump" avail="5I" cost="55000"  maxrat="3" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.75"/>
+   <item id="adrenaline_pump" avail="5I" price="55000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.75"/>
+      <attrdef id="PRICE" value="$RATING*55000"/>
       <modifications>
-         <attrmod attr="AGILITY"   val="1" type="AUGMENTED"/>
-         <attrmod attr="REACTION"  val="1" type="AUGMENTED"/>
-         <attrmod attr="STRENGTH"  val="1" cond="true"/>
-         <attrmod attr="WILLPOWER" val="1" cond="true"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING" cond="true"/>
+         <valmod type="ATTRIBUTE" ref="REACTION"  value="$RATING" cond="true"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="$RATING" cond="true"/>
+         <valmod type="ATTRIBUTE" ref="WILLPOWER"  value="$RATING" cond="true"/>
       </modifications>
    </item>
-   <item id="bone_density_augmentation_1" avail="4L" cost="5000">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.3"/>
+   <item id="bone_density_augmentation" avail="4L" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.3"/>
+      <attrdef id="PRICE" value="$RATING*5000"/>
       <modifications>
-         <attrmod attr="DAMAGE_RESISTANCE"  val="1"/>
-         <attrmod attr="MELEE_DAMAGE"  val="1"/>
-         <attrmod attr="ATTACK_RATING" val="1"/>
-         <dmgtypemod type="PHYSICAL"/>
+         <valmod type="ATTRIBUTE" ref="RESIST_DAMAGE"  value="$RATING"/>
+   		<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="$RATING" table="1,1,2,2" apply="UNARMED"/>
+   		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$RATING" table="1,,,,|2,,,,|2,,,,|3,,,," apply="UNARMED"/>
+      	<itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL"/>
       </modifications>
    </item>
-   <item id="bone_density_augmentation_2" avail="4L" cost="10000">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.6"/>
+   <item id="cats_eyes" avail="3" price="4000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+      <usage mode="IMPLANTED" value="0.1"/>
       <modifications>
-         <attrmod attr="DAMAGE_RESISTANCE"  val="2"/>
-         <attrmod attr="MELEE_DAMAGE"  val="1"/>
-         <attrmod attr="ATTACK_RATING" val="2"/>
-         <dmgtypemod type="PHYSICAL"/>
+         <itemmod type="QUALITY" ref="low-light_vision"/>
       </modifications>
    </item>
-   <item id="bone_density_augmentation_3" avail="4L" cost="15000">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.9"/>
+   <item id="enhanced_articulation" avail="4" price="30000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+   	<usage mode="IMPLANTED" value="0.2"/>
       <modifications>
-         <attrmod attr="DAMAGE_RESISTANCE"  val="3"/>
-         <attrmod attr="MELEE_DAMAGE"  val="2"/>
-         <attrmod attr="ATTACK_RATING" val="2"/>
-         <dmgtypemod type="PHYSICAL"/>
+      	<valmod type="ATTRIBUTE" ref="AGILITY"  value="1" cond="y"/>
+        	<checkmod type="SKILL" ref="athletics" value="1" cond="y" what="EDGE"/>
       </modifications>
    </item>
-   <item id="bone_density_augmentation_4" avail="4L" cost="20000">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="1.2"/>
+   <item id="muscle_augmentation" avail="4L" price="31000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.2"/>
+      <attrdef id="PRICE" value="$RATING*31000"/>
       <modifications>
-         <attrmod attr="DAMAGE_RESISTANCE"  val="4"/>
-         <attrmod attr="MELEE_DAMAGE"  val="2"/>
-         <attrmod attr="ATTACK_RATING" val="3"/>
-         <dmgtypemod type="PHYSICAL"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="$RATING" />
       </modifications>
    </item>
-   <item id="cats_eyes" avail="3" cost="4000">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+   <item id="muscle_toner" avail="4L" price="32000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.2"/>
+      <attrdef id="PRICE" value="$RATING*32000"/>
       <modifications>
-         <qualitymod ref="low-light_vision"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING"/>
       </modifications>
    </item>
-   <item id="enhanced_articulation" avail="4" cost="30000">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+   <item id="orthoskin" avail="4L" price="6000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.25"/>
+      <attrdef id="PRICE" value="$RATING*6000"/>
       <modifications>
-        <attrmod attr="AGILITY"  val="1"/>
-        <edgemod type="BONUS" skill="athletics" />
+         <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$RATING"/>
+         <itemmod type="QUALITY" ref="dermal_deposits" remove="true"/>
       </modifications>
    </item>
-   <item id="muscle_augmentation" avail="4L" cost="31000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+   <item id="platelet_factories" avail="4" price="17000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+      <usage mode="IMPLANTED" value="0.2"/>
+   </item>
+   <item id="skin_pocket" avail="4" price="12000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+      <usage mode="IMPLANTED" value="0.1"/>
+   </item>
+   <item id="suprathyroid_gland" avail="5L" price="140000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+      <usage mode="IMPLANTED" value="0.7"/>
       <modifications>
-        <attrmod attr="STRENGTH" val="1"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH" value="1"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY" value="1"/>
+         <valmod type="ATTRIBUTE" ref="REACTION" value="1"/>
+         <valmod type="ATTRIBUTE" ref="BODY" value="1"/>
+         <!--costmod type="LIFESTYLE" ref="ALL" percent="25"/-->
       </modifications>
    </item>
-   <item id="muscle_toner" avail="4L" cost="32000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+   <item id="symbiotes" avail="4" price="3500" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.2"/>
+      <attrdef id="PRICE" value="$RATING*3500"/>
       <modifications>
-        <attrmod attr="AGILITY" val="1"/>
+      	<!-- Dicepool modifier for healing checks -->
+         <!-- checkmod type="ATTRIBUTE" ref="HEALING" value="$RATING"/-->
       </modifications>
    </item>
-   <item id="orthoskin" avail="4L" cost="6000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.25"/>
-      <armor rating="1" add="true"/>
+   <item id="synthacardium" avail="3" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.1"/>
+      <attrdef id="PRICE" value="$RATING*30000"/>
       <modifications>
-         <itemmod item="dermal_deposits" remove="true"/>
+      	<checkmod type="SKILL" ref="athletics" value="$RATING" cond="true" what="BONUS"/>
       </modifications>
    </item>
-   <item id="platelet_factories" avail="4" cost="17000">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
-   </item>
-   <item id="skin_pocket" avail="4" cost="12000" >
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
-   </item>
-   <item id="suprathyroid_gland" avail="5L" cost="140000">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.7"/>
+   <item id="tailored_pheremones" avail="4L" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.2"/>
+      <attrdef id="PRICE" value="$RATING*31000"/>
       <modifications>
-        <attrmod attr="STRENGTH" val="1"/>
-        <attrmod attr="AGILITY" val="1"/>
-        <attrmod attr="REACTION" val="1"/>
-        <attrmod attr="BODY" val="1"/>
-        <lifecostmod percent="25"/>
+      	<checkmod type="SKILL" ref="con" value="$RATING" cond="true" what="BONUS"/>
+      	<checkmod type="SKILL" ref="influence" value="$RATING" cond="true" what="BONUS"/>
       </modifications>
    </item>
-   <item id="symbiotes" avail="4" cost="3500" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
+   <item id="toxin_etractor" avail="4" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.2"/>
+      <attrdef id="PRICE" value="$RATING*4800"/>
       <modifications>
-        <attrmod attr="HEALING" val="1"/>
+      	<checkmod type="RESISTANCE" ref="TOXIN_THRESHOLD" value="$RATING" what="REDUCE_THRESHOLD"/>
       </modifications>
    </item>
-   <item id="synthacardium" avail="3" cost="30000" maxrat="3" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
+   <item id="tracheal_filter" avail="4" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.1"/>
+      <attrdef id="PRICE" value="$RATING*4500"/>
+      <flag>AUGMENTATION</flag>
       <modifications>
-        <skillmod ref="athletics" val="1" cond="true"/>
-      </modifications>
-   </item>
-   <item id="tailored_pheremones" avail="4L" cost="31000" maxrat="4" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
-      <modifications>
-        <skillmod ref="con" val="1" cond="true" modType="NATURAL"/>
-        <skillmod ref="influence" val="1" cond="true" modType="NATURAL"/>
-      </modifications>
-   </item>
-   <item id="toxin_etractor" avail="4" cost="4800" maxrat="6" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.2"/>
-      <modifications>
-        <attrmod attr="TOXIN_RESISTANCE_THRESHOLD" val="1"/>
-      </modifications>
-   </item>
-   <item id="tracheal_filter" avail="4" cost="4500" maxrat="6" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_STANDARD" ess="0.1"/>
-      <modifications>
-        <attrmod attr="TOXIN_RESISTANCE_POOL" val="1"/>
+      	<checkmod type="RESISTANCE" ref="TOXIN_POOL" value="$RATING" what="BONUS"/>
       </modifications>
    </item>
    
    <!-- Cultured Bioware -->
-   <item id="cerebral_booster" avail="5" cost="31500"  maxrat="3" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.2"/>
+   <item id="cerebral_booster" avail="5" type="BIOWARE" subtype="BIOWARE_CULTURED">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.2"/>
+      <attrdef id="PRICE" value="$RATING*31500"/>
+      <flag>AUGMENTATION</flag>
       <modifications>
-         <attrmod attr="LOGIC"     val="1"/>
+      	<valmod type="ATTRIBUTE" ref="LOGIC" value="$RATING"/>
       </modifications>
    </item>
-   <item id="damage_compensator" avail="5L" cost="2000"  maxrat="12" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+   <item id="damage_compensator" avail="5L" type="BIOWARE" subtype="BIOWARE_CULTURED">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.1"/>
+      <attrdef id="PRICE" value="$RATING*2000"/>
+      <flag>AUGMENTATION</flag>
       <modifications>
       </modifications>
    </item>
-   <item id="mnemonic_enhancer" avail="5" cost="9000"  maxrat="3" rate="true" ratemul="PRICE ESSENCE MODIFIER">
-      <useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+   <item id="mnemonic_enhancer" avail="5" type="BIOWARE" subtype="BIOWARE_CULTURED">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.1"/>
+      <attrdef id="PRICE" value="$RATING*9000"/>
+      <flag>AUGMENTATION</flag>
       <modifications>
         <relevancemod topic="SOCIAL"/>
       </modifications>
    </item>
-   <item id="pain_editor" avail="5I" cost="48000" >
-      <useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.3"/>
+   <item id="pain_editor" avail="5I" price="48000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+      <usage mode="IMPLANTED" value="0.3"/>
+      <flag>AUGMENTATION</flag>
       <modifications>
-         <attrmod attr="WILLPOWER"   val="1" cond="true"/>
-         <attrmod attr="INTUITION"  val="-1" cond="true"/>
+      	<valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" cond="true"/>
+      	<valmod type="ATTRIBUTE" ref="INTUITION" value="-1" cond="true"/>
       </modifications>
    </item>
-   <item id="reflex_recorder" avail="5" cost="14000" choice="PHYSICAL_SKILL">
-      <useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+   <item id="reflex_recorder" avail="5" price="14000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+		<choices>
+			<choice uuid="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" type="SKILL" ref="CHOICE" options="athletics,firearms,"/>
+		</choices>
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flag>AUGMENTATION</flag>
       <modifications>
-         <skillmod val="1" modType="AUGMENTED"/>
+      	<valmod type="SKILL" ref="CHOICE" choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="1"/>
       </modifications>
    </item>
-   <item id="sleep_regulator" avail="5" cost="12000" subtype="BIOWARE_CULTURED" type="BIOWARE">
-      <useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.1"/>
+   <item id="sleep_regulator" avail="5" price="12000" subtype="BIOWARE_CULTURED" type="BIOWARE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flag>AUGMENTATION</flag>
    </item>
-   <item id="synaptic_booster" avail="5L" cost="95000"  maxrat="3" rate="true" ratemul="PRICE ESSENCE MODIFIER MINORACT">
+   <item id="synaptic_booster" avail="5L">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.5"/>
+      <attrdef id="PRICE" value="$RATING*95000"/>
+      <flag>AUGMENTATION</flag>
       <modifications>
-         <attrmod attr="REACTION"     val="1"/>
-         <attrmod attr="INITIATIVE_DICE_PHYSICAL" val="1"/>
+      	<valmod type="ATTRIBUTE" ref="REACTION" value="$RATING"/>
+      	<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_PHYSICAL" value="$RATING"/>
       </modifications>
-      <useas type="BIOWARE" subtype="BIOWARE_CULTURED" ess="0.5"/>
    </item>
 </items>

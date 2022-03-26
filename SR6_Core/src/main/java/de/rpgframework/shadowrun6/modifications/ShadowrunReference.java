@@ -19,6 +19,7 @@ import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.Resistance;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
@@ -54,12 +55,15 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ITEM_ATTRIBUTE(new ItemAttributeConverter()),
 	ITEMTYPE(ItemType.class,0),
 	ITEMSUBTYPE(ItemSubType.class,0),
+	LIFESTYLE("Lifestyle"),
 	MAGIC_RESO(MagicOrResonanceType.class),
 	MATRIX_ATTRIBUTE(new ItemAttributeConverter()),
 	MENTOR_SPIRIT("Mentorspirit"),
 	METATYPE(SR6MetaType.class),
 	POOL("Pool"), // Derived values like defense pool
-	PROGRAM("Program"), // D
+	PROGRAM("Program"), // 
+	// All Resistance tests
+	RESISTANCE(Resistance.class,0),
 	RULE(new RuleConverter()),
 	QUALITY(Quality.class),
 	SENSE("Sense"),

@@ -22,6 +22,9 @@ public enum ItemHook implements Hook {
 	SIDE_L, // Firing squad
 	SIDE_R, // Firing squard
 	STOCK,
+	// Especially for cyberimplant weapons
+	IMPLANTWEAPON_ACCESSORY,
+	
 	ELECTRONIC_ACCESSORY,
 	OPTICAL(true),
 	AUDIO(true),
@@ -32,6 +35,8 @@ public enum ItemHook implements Hook {
 	ARMOR_ADDITION(true),
 	ARMOR_MEMS(true),
 	HELMET_ACCESSORY(true),
+	COMMLINK,
+	CYBERDECK,
 	HEADWARE_IMPLANT(true),
 	CYBEREYE_IMPLANT(true),
 	CYBEREAR_IMPLANT(true),

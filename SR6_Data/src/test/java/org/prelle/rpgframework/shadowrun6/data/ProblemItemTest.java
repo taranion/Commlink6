@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 import java.util.Locale;
 
 import org.junit.BeforeClass;
@@ -16,6 +15,8 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.shadowrun.items.Availability;
+import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -55,7 +56,7 @@ public class ProblemItemTest {
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
-		GearTool.recalculate("", carried);
+		GearTool.recalculate("", null, carried);
 		
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getDistributed());
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
@@ -107,12 +108,39 @@ public class ProblemItemTest {
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
-		GearTool.recalculate("", carried);
+		GearTool.recalculate("", null, carried);
 		
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getDistributed());
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
 		assertEquals(1750, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.SIZE).getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadItemWithTables() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "cyberjack");
+		assertNotNull(item);
+		assertEquals(1, item.getChoices().size());
+		Choice choice = item.getChoices().get(0);
+		assertNotNull(choice);
+		
+		assertEquals(ShadowrunReference.ITEM_ATTRIBUTE,choice.getChooseFrom());
+		assertEquals("RATING",choice.getTypeReference());
+		
+		// New create an item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, new Decision(choice, "4"));
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+		GearTool.recalculate("", null, carried);
+		
+		assertEquals(4, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
+		assertEquals(7, carried.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue());
+		assertEquals(6, carried.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue());
+		assertEquals(95000, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals(new Availability(4, Legality.RESTRICTED, false), carried.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue());
+
 	}
 
 }

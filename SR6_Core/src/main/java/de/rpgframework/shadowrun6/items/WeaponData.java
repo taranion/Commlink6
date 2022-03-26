@@ -257,6 +257,10 @@ public class WeaponData implements IGearTypeData {
 		this.noWiFi = noWiFi;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.items.IGearTypeData#copyToAttributes(de.rpgframework.genericrpg.items.AGearData)
+	 */
 	@Override
 	public void copyToAttributes(AGearData copyTo) {
 		if (ammo!=null)

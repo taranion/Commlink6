@@ -8,6 +8,7 @@ import org.prelle.simplepersist.StringValueConverter;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.IItemAttribute;
+import de.rpgframework.genericrpg.persist.FloatConverter;
 import de.rpgframework.genericrpg.persist.IntegerArrayConverter;
 import de.rpgframework.genericrpg.persist.IntegerConverter;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
@@ -39,14 +40,16 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	DAMAGE_REDUCTION,
 //	DEFENSE_RATING,
 	DEVICE_RATING,
-	ESSENCECOST,
+	ESSENCECOST(new FloatConverter()),
 	FIREMODES,
 //	HANDLING,
 //	HAS_RATING,
 	/* For accessories: Where to attach it */
 	HOOK,
+	
 //	/** Maximum rating of embedded items */
 	MAX_SENSOR_RATING,
+	MAX_SKILLSOFT_RATING,
 //	MODIFICATION_SLOTS,
 //	PILOT,
 	PRICE,

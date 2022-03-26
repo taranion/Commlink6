@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item avail="2"  cost="1000" id="rigger_interface" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+<!-- Vehicle Accessories -->   
+   <item avail="2"  cost="1000" id="rigger_interface"  type="MOD_ELEC" subtype="MOD_MISC" multi="yes">
       <requires>
          <slotreq capacity="0" slot="VEHICLE_ELECTRONICS"/>
+         <itemtypereq type="VEHICLES" />
       </requires>
    </item>
-   <item avail="4I"  cost="2500" id="weapon_mount_standard" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" multi="yes">
+   <item avail="4I"  cost="2500" id="weapon_mount_standard" type="MOD_HARD" subtype="MOD_MOUNT" multi="yes">
       <requires>
          <slotreq capacity="1" slot="VEHICLE_BODY"/>
       </requires>
@@ -13,7 +15,7 @@
          <itemhookmod capacity="1" hook="VEHICLE_WEAPON"/>
       </modifications>
    </item>
-   <item avail="5I"  cost="3000" id="weapon_mount_standard_manual" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" multi="yes">
+   <item avail="5I"  cost="3000" id="weapon_mount_standard_manual" type="MOD_HARD" subtype="MOD_MOUNT" multi="yes">
       <requires>
          <slotreq capacity="1" slot="VEHICLE_BODY"/>
       </requires>
@@ -21,23 +23,52 @@
          <itemhookmod capacity="1" hook="VEHICLE_WEAPON"/>
       </modifications>
    </item>
-   <item avail="5I"  cost="5000" id="weapon_mount_heavy" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" multi="yes">
+   <item avail="5I"  cost="5000" id="weapon_mount_heavy" type="MOD_HARD" subtype="MOD_MOUNT" multi="yes">
       <requires>
          <slotreq capacity="2" slot="VEHICLE_BODY"/>
       </requires>
       <modifications>
-         <itemhookmod capacity="2" hook="VEHICLE_WEAPON"/>
+         <itemhookmod hook="VEHICLE_WEAPON_LARGE" capacity="1"/>
       </modifications>
    </item>
-   <item avail="6I"  cost="5500" id="weapon_mount_heavy_manual" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" multi="yes">
+   <item avail="6I"  cost="5000" id="weapon_mount_heavy" lang="de" type="MOD_HARD" subtype="MOD_MOUNT" multi="yes">
       <requires>
          <slotreq capacity="2" slot="VEHICLE_BODY"/>
       </requires>
       <modifications>
-         <itemhookmod capacity="2" hook="VEHICLE_WEAPON"/>
+         <itemhookmod hook="VEHICLE_WEAPON_LARGE" capacity="1"/>
+      </modifications>
+   </item>
+   <item avail="6I"  cost="5500" id="weapon_mount_heavy_manual" type="MOD_ELEC" subtype="MOD_MISC" multi="yes">
+      <requires>
+         <slotreq capacity="2" slot="VEHICLE_BODY"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="VEHICLE_WEAPON_LARGE" capacity="1"/>
+      </modifications>
+   </item>
+   <item avail="7I"  cost="5500" id="weapon_mount_heavy_manual" lang="de" type="MOD_ELEC" subtype="MOD_MISC" multi="yes">
+      <requires>
+         <slotreq capacity="2" slot="VEHICLE_BODY"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="VEHICLE_WEAPON_LARGE" capacity="1"/>
       </modifications>
    </item>
 
+   <!-- This is a special weapon mount, only for the quadrotor crossbow. Instead of buying the weapon you buy this mount with the pre-installed weapon. -->   
+   <item avail="4L"  cost="2000" id="weapon_mount_crossbow" type="MOD_ELEC" subtype="MOD_MISC" > <!-- no info on cost, assuming 1500 for small mount + 290 for medium crossbow + estimated 210 for air power -->
+      <requires>
+         <slotreq capacity="0" slot="VEHICLE_BODY"/>
+		 <itemreq item="cyberspace_designs_quadrotor"/>
+      </requires>
+      <modifications>
+         <itemhookmod hook="VEHICLE_WEAPON_SMALL" capacity="0"/>
+         <accessorymod hook="VEHICLE_WEAPON_SMALL" item="cyberspace_designs_quadrotor_crossbow"/>
+      </modifications>
+   </item>
+
+<!-- Motorcycles -->
    <item avail="2"  cost="3000" id="dodge_scoot" subtype="BIKES" type="VEHICLES">
       <vehicle han="5/7" acc="4"  spdi="10" tspd="80" bod="2" arm="0" pil="1" sen="0" sea="2"/>
    </item>
@@ -51,12 +82,12 @@
       <vehicle han="2/6" acc="29" spdi="30" tspd="260" bod="4" arm="2" pil="1" sen="1" sea="1" />
    </item>
    
-   <!-- Cars -->
+<!-- Cars -->
    <item avail="2"  cost="11000" id="chrysler-nissan_jackrabbit" subtype="CARS" type="VEHICLES">
       <vehicle han="3/5" acc="20" spdi="10" tspd="160" bod="8" arm="4" pil="2" sen="1" sea="3"/>
    </item>
    <item avail="2"  cost="13000" id="honda_spirit" subtype="CARS" type="VEHICLES">
-      <vehicle han="4/5" acc="15" spdi="20" tspd="150" bod="10" arm="3" pil="1" sen="1" sea="4"/>
+      <vehicle han="4/5" acc="15" spdi="20" tspd="150" bod="10" arm="3" pil="1" sen="1" sea="2"/>
    </item>
    <item avail="3"  cost="115000" id="eurocar_westwind_x80" subtype="CARS" type="VEHICLES">
       <vehicle han="2/6" acc="24" spdi="30" tspd="250" bod="6" arm="1" pil="4" sen="3" sea="2"/>
@@ -74,21 +105,21 @@
       <vehicle han="4/6" acc="10" spdi="10" tspd="160" bod="18" arm="10" pil="3" sen="4" sea="8"/>
    </item>
    
-   <!-- Trucks and Vans -->
+<!-- Trucks and Vans -->
    <item avail="2"  cost="25000" id="toyota_gopher" type="VEHICLES" subtype="TRUCKS">
       <vehicle han="4/4" acc="15" spdi="15" tspd="160" bod="12" arm="6" pil="1" sen="1" sea="4"/>
    </item>
-   <item avail="2"  cost="35000" id="gmc_bulldog" type="VEHICLES" subtype="TRUCKS">
+   <item avail="2"  cost="35000" id="gmc_bulldog" type="VEHICLES" subtype="VANS">
       <vehicle han="5/7" acc="10" spdi="10" tspd="140" bod="16" arm="12" pil="2" sen="3" sea="10"/>
    </item>
-   <item avail="3"  cost="73000" id="range_rover_model_2080" type="VEHICLES" subtype="TRUCKS">
+   <item avail="3"  cost="73000" id="range_rover_model_2080" type="VEHICLES" subtype="VANS">
       <vehicle han="4/5" acc="12" spdi="20" tspd="160" bod="16" arm="10" pil="4" sen="4" sea="7"/>
    </item>
-   <item avail="2"  cost="68000" id="ares_roadmaster" type="VEHICLES" subtype="TRUCKS">
+   <item avail="2"  cost="68000" id="ares_roadmaster" type="VEHICLES" subtype="VANS">
       <vehicle han="5/7" acc="8" spdi="10" tspd="120" bod="18" arm="16" pil="2" sen="2" sea="12"/>
    </item>
    
-   <!-- Boats -->
+<!-- Boats -->
    <item avail="2"  cost="25000" id="samuvani_criscraft_otter" type="VEHICLES" subtype="BOATS">
       <vehicle han="4" acc="10" spdi="15" tspd="90" bod="6" arm="4" pil="2" sen="2" sea="6"/>
    </item>
@@ -99,7 +130,7 @@
       <vehicle han="4" acc="15" spdi="15" tspd="100" bod="14" arm="12" pil="4" sen="4" sea="8"/>
    </item>
    
-   <!-- Submarines -->
+<!-- Submarines -->
    <item avail="2"  cost="15000" id="proteus_lamprey" type="VEHICLES" subtype="SUBMARINES">
       <vehicle han="3" acc="13" spdi="10" tspd="60" bod="2" arm="1" pil="2" sen="1" sea="4"/>
    </item>
@@ -107,7 +138,7 @@
       <vehicle han="4" acc="20" spdi="20" tspd="120" bod="8" arm="3" pil="3" sen="3" sea="5"/>
    </item>
    
-   <!-- Fixed wing aircrafts -->
+<!-- Fixed wing aircrafts -->
    <item avail="2"  cost="20000" id="artemis_industries_nightwing" type="VEHICLES" subtype="FIXED_WING">
       <vehicle han="4" acc="15" spdi="25" tspd="150" bod="2" arm="0" pil="1" sen="1" sea="1"/>
    </item>
@@ -115,10 +146,10 @@
       <vehicle han="5" acc="20" spdi="25" tspd="250" bod="8" arm="2" pil="2" sen="1" sea="4"/>
    </item>
    <item avail="2"  cost="300000" id="mct-sikorsky-bell_seahawk" type="VEHICLES" subtype="FIXED_WING">
-      <vehicle han="5" acc="30" spdi="50" tspd="500" bod="4" arm="4" pil="2" sen="2" sea="8"/>
+      <vehicle han="5" acc="30" spdi="50" tspd="500" bod="12" arm="4" pil="2" sen="2" sea="8"/>
    </item>
    
-   <!-- Rotorcraft -->
+<!-- Rotorcraft -->
    <item avail="2"  cost="360000" id="ares_dragon" type="VEHICLES" subtype="ROTORCRAFT">
       <vehicle han="4" acc="10" spdi="30" tspd="260" bod="16" arm="10" pil="2" sen="3" sea="16"/>
    </item>
@@ -129,18 +160,20 @@
       <vehicle han="3" acc="25" spdi="30" tspd="330" bod="10" arm="8" pil="3" sen="3" sea="2"/>
    </item>
     
-   <!-- VTOL/VSTOL -->
-   <item avail="3"  cost="400000" id="ares_venture" type="VEHICLES" subtype="VTOL">
-      <vehicle han="4" acc="40" spdi="60" tspd="680" bod="16" arm="12" pil="2" sen="2" sea="8"/>
-   </item>
-   <item avail="4"  cost="1300000" id="gmc_banshee" type="VEHICLES" subtype="VTOL">
-      <vehicle han="3" acc="60" spdi="90" tspd="900" bod="18" arm="18" pil="4" sen="4" sea="12"/>
-   </item>
+<!-- VTOL/VSTOL -->
    <item avail="2"  cost="350000" id="federated_boeing_commuter" type="VEHICLES" subtype="VTOL">
       <vehicle han="3" acc="35" spdi="60" tspd="420" bod="16" arm="10" pil="2" sen="2" sea="10"/>
    </item>
    <item avail="4"  cost="800000" id="federated_boeing_osprey_x" type="VEHICLES" subtype="VTOL">
       <vehicle han="3" acc="35" spdi="80" tspd="420" bod="16" arm="16" pil="4" sen="4" sea="10"/>
    </item>
-   
+
+<!-- LAV -->
+   <item avail="3"  cost="400000" id="ares_venture" type="VEHICLES" subtype="LAV">
+      <vehicle han="4" acc="40" spdi="60" tspd="680" bod="16" arm="12" pil="2" sen="2" sea="8"/>
+   </item>
+   <item avail="4"  cost="1300000" id="gmc_banshee" type="VEHICLES" subtype="LAV">
+      <vehicle han="3" acc="60" spdi="90" tspd="900" bod="18" arm="18" pil="4" sen="4" sea="12"/>
+   </item>
+
 </items>

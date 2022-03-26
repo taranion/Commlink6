@@ -44,6 +44,7 @@ import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySpellGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 
 /**
@@ -271,6 +272,14 @@ public class SR6ArchetypeTest {
 		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 3
 		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 4
 		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 5
+		// Contacts
+		OperationResult<CarriedItem<ItemTemplate>> contactsRes = equip.select(
+				Shadowrun6Core.getItem(ItemTemplate.class, "contacts"),
+				new Decision( 
+						Shadowrun6Core.getItem(ItemTemplate.class, "contacts").getChoices().get(0).getUUID(),
+						"3"));
+		assertTrue( contactsRes.getError(), contactsRes.wasSuccessful() );
+		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation")).wasSuccessful() );
 		
 		
 		byte[] raw = Shadowrun6Core.encode(model);
@@ -389,7 +398,7 @@ public class SR6ArchetypeTest {
 		
 		// Spells
 		SR6SpellController spells = charGen.getSpellController();
-//		assertEquals(6, ((SR6PrioritySpellGenerator)spells).getFreeSpells());
+		assertEquals(6, ((SR6PrioritySpellGenerator)spells).getFreeSpells());
 		
 //		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "armor")).wasSuccessful() );
 	

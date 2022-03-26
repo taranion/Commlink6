@@ -39,8 +39,12 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		@ElementList(entry="weapon", type = WeaponData.class, inline = true),
 		@ElementList(entry="armor", type=ArmorData.class, inline=true),
 		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
+		@ElementList(entry="vehicle", type=VehicleData.class, inline=true),
 	})
 	private List<IGearTypeData> shortcuts; 
+	
+	@Attribute(name="reqVariant")
+	private boolean requireVariant;
 
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
@@ -86,14 +90,20 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);
 		
 		/* If there is no USAGE assume a NORMAL mode and no slot */
-		if (variants.isEmpty()) {
-			SR6PieceOfGearVariant add = new SR6PieceOfGearVariant(SR6VariantMode.NORMAL);
-			variants.add(add);
-		}
-		if (alternates.isEmpty()) {
-			SR6AlternateUsage add = new SR6AlternateUsage(SR6UsageMode.PRIMARY);
-			alternates.add(add);
-		}
+//		if (variants.isEmpty()) {
+//			SR6PieceOfGearVariant add = new SR6PieceOfGearVariant(SR6VariantMode.NORMAL);
+//			variants.add(add);
+//		}
+//		if (alternates.isEmpty()) {
+//			SR6AlternateUsage add = new SR6AlternateUsage(SR6UsageMode.PRIMARY);
+//			alternates.add(add);
+//		}
+
+		// TODO
+		// Make a implant version of every weapon
+		// for that remove normal accessory slots and replace them with
+		// implant versions
+		
 		
 		// Validate hook identifier in modifications
 		for (Modification tmp : getModifications()) {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="shadowrunner_starter_pack" price="25000" type="PACK" subtype="COMPLETE_PACK">
+      <modifications>
+         <embed rf="fake_sin">
+         	<decision uuid="" ref="4"/>
+         </embed>
+      </modifications>
+   </item>
+</items>

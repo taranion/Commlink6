@@ -155,6 +155,10 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" sensors & co");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_security_survival.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" security & survival gear");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_cyberware.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_bioware.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" bioware");
 //			logger.log(Level.ERROR, "Stop here");
 //			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, core, clazz,"core/data/magicOrResonance.xml");

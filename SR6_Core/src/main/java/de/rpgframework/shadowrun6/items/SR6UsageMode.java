@@ -21,6 +21,10 @@ public enum SR6UsageMode implements IUsageMode {
 	 * can be used as such. 
 	 */
 	WEAPON,
+	/**
+	 * Item duplicates as drone or vehicle
+	 */
+	VEHICLE,
 	;
 	
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();

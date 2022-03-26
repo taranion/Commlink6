@@ -159,13 +159,13 @@
    <quality id="thermographic_vision" karma="8" pos="true" type="NORMAL" />
    <quality id="toughness" 			  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_PHYSICAL" value="1" set="EDGE_BONUS"/>
+       <valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1" set="EDGE_BONUS"/>
        <relevancemod topic="COMBAT"/>
      </modifications>
    </quality>
    <quality id="toxin_resistance"     karma="12" pos="true" type="NORMAL">
      <modifications>
-       <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_RESIST_TOXIN_DAMAGE" value="1" set="EDGE_BONUS"/>
+       <valmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" set="EDGE_BONUS"/>
      </modifications>
    </quality>
 	<quality id="will_to_live" karma="8" pos="true" type="NORMAL" max="3">

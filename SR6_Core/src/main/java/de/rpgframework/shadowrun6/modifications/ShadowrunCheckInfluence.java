@@ -10,7 +10,8 @@ public enum ShadowrunCheckInfluence implements CheckInfluence {
 
 	/** Bonus added to result roll */
 	BONUS,
-	/** Egde gained by a test */
+	REDUCE_THRESHOLD,
+	/** Edge gained by a test */
 	EDGE,
 	/** Can test be made at all */
 	USAGE,
