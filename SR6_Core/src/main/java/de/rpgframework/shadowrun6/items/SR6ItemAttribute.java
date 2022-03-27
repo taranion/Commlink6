@@ -21,14 +21,18 @@ import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
  */
 public enum SR6ItemAttribute implements IItemAttribute {
 	
-//	ACCELERATION,
+	ACCELERATION,
 	AMMUNITION,
-//	ARMOR,
+	// Vehicle Armor
+	ARMOR,
 	ATTACK_RATING(new IntegerArrayConverter()),
 	/** Boolean: is this item subject to augmentation grade changes */
 	AUGMENTATION,
 	AVAILABILITY(new AvailabilityConverter()),
-//	BODY,
+	// Vehicle Body
+	BODY,
+	// Vehicle Cargo Factor (CF)
+	CARGO,
 //	CAPACITY,
 //	CONCEALABILITY,
 	DAMAGE(new WeaponDamageConverter()),
@@ -42,7 +46,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	DEVICE_RATING,
 	ESSENCECOST(new FloatConverter()),
 	FIREMODES,
-//	HANDLING,
+	HANDLING,
 //	HAS_RATING,
 	/* For accessories: Where to attach it */
 	HOOK,
@@ -51,20 +55,22 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	MAX_SENSOR_RATING,
 	MAX_SKILLSOFT_RATING,
 //	MODIFICATION_SLOTS,
-//	PILOT,
+	// Vehicle Pilot
+	PILOT,
 	PRICE,
 //	QUALITY,
 	RANGE,
 	RATING,
-//	SEATS,
-//	SENSORS,
+	SEATS,
+	SENSORS,
 	/** The amount of capacity slots required */
 	SIZE,
 	SKILL,
 	SKILL_SPECIALIZATION,
 //	SOCIAL,
-//	SPEED_INTERVAL,
-//	SPEED,
+	SPEED_INTERVAL,
+	TOPSPEED,
+	VEHICLE_TYPE,
 
 	ATTACK,
 	SLEAZE,

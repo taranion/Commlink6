@@ -292,19 +292,17 @@ public class VehicleData implements IGearTypeData {
 	 */
 	@Override
 	public void copyToAttributes(AGearData copyTo) {
-//		if (handling!=null)
-//			copyTo.setAttribute(SR6ItemAttribute.HANDLING, handling);
-//		if (sensor!=null)
-//			copyTo.setAttribute(SR6ItemAttribute.SENSOR, sensor);
-//		if (damage!=null)
-//			copyTo.setAttribute(SR6ItemAttribute.DAMAGE, damage);
-//		if (mode!=null)
-//			copyTo.setAttribute(SR6ItemAttribute.FIREMODES, mode);
-//		if (skill!=null)
-//			copyTo.setAttribute(SR6ItemAttribute.SKILL, skill);
-//		if (spec!=null)
-//			copyTo.setAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION, spec);
-		System.err.println("ToDo: VehicleData.copyToAttributes");
+		if (acceleration!=null) copyTo.setAttribute(SR6ItemAttribute.ACCELERATION, acceleration);
+		if (armor   !=null) copyTo.setAttribute(SR6ItemAttribute.ARMOR, armor);
+		if (body    !=null) copyTo.setAttribute(SR6ItemAttribute.BODY, body);
+		if (cargoFactor!=null) copyTo.setAttribute(SR6ItemAttribute.CARGO, cargoFactor);
+		if (handling!=null) copyTo.setAttribute(SR6ItemAttribute.HANDLING, handling);
+		if (pilot   !=null) copyTo.setAttribute(SR6ItemAttribute.PILOT, pilot);
+		if (seats   !=null) copyTo.setAttribute(SR6ItemAttribute.SEATS, seats);
+		if (sensor  !=null) copyTo.setAttribute(SR6ItemAttribute.SENSORS, sensor);
+		if (speedInterval!=null) copyTo.setAttribute(SR6ItemAttribute.SPEED_INTERVAL, speedInterval);
+		if (topSpeed!=null) copyTo.setAttribute(SR6ItemAttribute.TOPSPEED, topSpeed);
+		if (type    !=null) copyTo.setAttribute(SR6ItemAttribute.VEHICLE_TYPE, type);
 	}
 
 }

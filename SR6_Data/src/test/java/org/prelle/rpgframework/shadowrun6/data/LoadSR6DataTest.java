@@ -41,7 +41,8 @@ public class LoadSR6DataTest {
 	//-------------------------------------------------------------------
 	@BeforeClass
 	public static void beforeClass() {
-		System.setProperty("logdir", "C:\\Users\\stefa");
+//		System.setProperty("logdir", "C:\\Users\\stefa");
+		System.setProperty("logdir", "/tmp");
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );		
