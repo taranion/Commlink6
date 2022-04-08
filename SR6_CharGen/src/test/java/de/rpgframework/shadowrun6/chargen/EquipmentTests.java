@@ -1,6 +1,8 @@
 package de.rpgframework.shadowrun6.chargen;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -9,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
@@ -47,9 +48,23 @@ public class EquipmentTests {
 		
 		CarriedItem<ItemTemplate> ref = new CarriedItem<ItemTemplate>(ares, null);
 		List<ItemTemplate> list = ItemUtil.getEmbeddableIn(ref, ItemHook.BARREL);
-		System.out.println("Embeddable in "+ares+" are:");
+		System.out.println("#########################\nEmbeddable in BARREL of "+ares+" are:");
 		for (ItemTemplate tmp : list) {
 			System.out.println("  * "+tmp);
 		}
+		assertTrue( list.contains(Shadowrun6Core.getItem(ItemTemplate.class, "ares_lf_silencer")));
+		assertTrue( list.contains(Shadowrun6Core.getItem(ItemTemplate.class, "silencer")));
+
+		ares = Shadowrun6Core.getItem(ItemTemplate.class, "ares_alpha");
+		assertNotNull(ares);
+		
+		ref = new CarriedItem<ItemTemplate>(ares, null);
+		list = ItemUtil.getEmbeddableIn(ref, ItemHook.BARREL);
+		System.out.println("#########################\nEmbeddable in BARREL of "+ares+" are:");
+		for (ItemTemplate tmp : list) {
+			System.out.println("  * "+tmp);
+		}
+		assertFalse("Requirement not honored", list.contains(Shadowrun6Core.getItem(ItemTemplate.class, "ares_lf_silencer")));
+		assertTrue( list.contains(Shadowrun6Core.getItem(ItemTemplate.class, "silencer")));
 	}
 }

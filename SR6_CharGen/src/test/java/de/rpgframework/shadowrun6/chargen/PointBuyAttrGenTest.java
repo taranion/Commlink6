@@ -93,6 +93,7 @@ public class PointBuyAttrGenTest {
 			public List<ToDoElement> getToDos() {
 				return null;
 			}
+			public void setAllowRunProcessor(boolean value) {}
 			public void runProcessors() {
 				System.getLogger(PointBuyAttrGenTest.class.getPackageName()).log(Level.DEBUG,"---------------");
 				model.setKarmaFree(karma);

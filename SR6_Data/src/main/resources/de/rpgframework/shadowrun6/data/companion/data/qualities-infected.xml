@@ -2,7 +2,7 @@
 <qualities>
 	<quality id="bandersnatch" karma="22" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="sasquatch"/>
+			<datareq type="METATYPE" ref="sasquatch" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="11" set="MAX" />
@@ -17,7 +17,7 @@
 	</quality>
 	<quality id="banshee" karma="32" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="elf"/>
+			<datareq type="METATYPE" ref="elf" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
@@ -32,7 +32,7 @@
 	</quality>
 	<quality id="chiron" karma="28" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="centaur"/>
+			<datareq type="METATYPE" ref="centaur" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" />
@@ -47,7 +47,7 @@
 	</quality>
 	<quality id="dzoo_noo_qua" karma="43" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="troll"/>
+			<datareq type="METATYPE" ref="troll" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="11" set="MAX" />
@@ -62,7 +62,7 @@
 	</quality>
 	<quality id="fomoraig" karma="22" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="troll"/>
+			<datareq type="METATYPE" ref="troll" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="12" set="MAX" />
@@ -77,7 +77,7 @@
 	</quality>
 	<quality id="ghoul_human" karma="29" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="human"/>
+			<datareq type="METATYPE" ref="human" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
@@ -92,7 +92,7 @@
 	</quality>
 	<quality id="ghoul_dwarf" karma="29" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="dwarf"/>
+			<datareq type="METATYPE" ref="dwarf" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="11" set="MAX" />
@@ -107,7 +107,7 @@
 	</quality>
 	<quality id="ghoul_elf" karma="29" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="elf"/>
+			<datareq type="METATYPE" ref="elf" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
@@ -122,7 +122,7 @@
 	</quality>
 	<quality id="ghoul_ork" karma="29" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="ork"/>
+			<datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="12" set="MAX" />
@@ -137,7 +137,7 @@
 	</quality>
 	<quality id="ghoul_troll" karma="29" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="troll"/>
+			<datareq type="METATYPE" ref="troll" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="13" set="MAX" />
@@ -152,7 +152,7 @@
 	</quality>
 	<quality id="gnawer" karma="29" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="dwarf"/>
+			<datareq type="METATYPE" ref="dwarf" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" />
@@ -167,7 +167,7 @@
 	</quality>
 	<quality id="grendel" karma="32" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="ork"/>
+			<datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
@@ -182,7 +182,7 @@
 	</quality>
 	<quality id="harvester" karma="29" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="elf"/>
+			<datareq type="METATYPE" ref="elf" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" />
@@ -197,7 +197,7 @@
 	</quality>
 	<quality id="jabbawock" karma="28" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="sasquatch"/>
+			<datareq type="METATYPE" ref="sasquatch" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
@@ -212,7 +212,7 @@
 	</quality>
 	<quality id="lamia" karma="40" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="naga"/>
+			<datareq type="METATYPE" ref="naga" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" />
@@ -227,7 +227,7 @@
 	</quality>
 	<quality id="lopu_garou" karma="30" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="human"/>
+			<datareq type="METATYPE" ref="human" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
@@ -242,7 +242,7 @@
 	</quality>
 	<quality id="mutaqua_mundane" karma="54" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="troll"/>
+			<datareq type="METATYPE" ref="troll" apply="CHARACTER"/>
 			<!-- Mundane -->
 		</requires>
 		<modifications>
@@ -258,7 +258,7 @@
 	</quality>
 	<quality id="mutaqua_awakened" karma="44" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="troll"/>
+			<datareq type="METATYPE" ref="troll" apply="CHARACTER"/>
 			<!-- Awakened -->
 		</requires>
 		<modifications>
@@ -274,7 +274,7 @@
 	</quality>
 	<quality id="nibliinaabe" karma="32" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="merrow"/>
+			<datareq type="METATYPE" ref="merrow" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" />
@@ -289,7 +289,7 @@
 	</quality>
 	<quality id="nosferatu_mundane" karma="48" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="human"/>
+			<datareq type="METATYPE" ref="human" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
@@ -304,7 +304,7 @@
 	</quality>
 	<quality id="nosferatu_awakened" karma="38" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="human"/>
+			<datareq type="METATYPE" ref="human" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
@@ -319,7 +319,7 @@
 	</quality>
 	<quality id="vampire_human" karma="27" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="human"/>
+			<datareq type="METATYPE" ref="human" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" />
@@ -334,7 +334,7 @@
 	</quality>
 	<quality id="wendigo_mundane" karma="47" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="ork"/>
+			<datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />
@@ -349,7 +349,7 @@
 	</quality>
 	<quality id="wendigo_awakened" karma="37" pos="true" type="INFECTED">
 		<requires>
-			<datareq type="METATYPE" ref="ork"/>
+			<datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" />

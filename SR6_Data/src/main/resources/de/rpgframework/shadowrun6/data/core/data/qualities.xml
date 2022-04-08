@@ -98,10 +98,10 @@
    </quality>
    <quality id="human-looking" 		  karma="6" pos="true" type="NORMAL">
      <requires>
-       <selreq type="METATYPE">
-         <datareq type="METATYPE" ref="elf"/>
-         <datareq type="METATYPE" ref="ork"/>
-         <datareq type="METATYPE" ref="dwarf"/>
+       <selreq type="METATYPE" apply="CHARACTER">
+         <datareq type="METATYPE" ref="elf" apply="CHARACTER"/>
+         <datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
+         <datareq type="METATYPE" ref="dwarf" apply="CHARACTER"/>
        </selreq>
      </requires>
    </quality>
@@ -277,7 +277,7 @@
    <quality id="sensitive_system"	  karma="8" pos="false" type="NORMAL" >
      <requires>
         Technically not correct, since a burned out magic user could use it
-       <datareq type="MAGIC_RESO" ref="mundane"/>
+       <datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER"/>
      </requires>
    </quality>
    <quality id="simsense_vertigo"	  karma="6" pos="false" type="NORMAL" >

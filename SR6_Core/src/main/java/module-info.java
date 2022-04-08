@@ -12,4 +12,5 @@ module de.rpgframework.shadowrun6.core {
 	requires java.xml;
 	requires transitive shadowrun.common;
 	requires simple.persist;
+	requires com.google.gson;
 }

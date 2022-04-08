@@ -94,7 +94,7 @@ public class SR6ArchetypeTest {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
-	public void test01Adept() throws CharacterIOException {
+	public void test01Adept() throws Exception {
 		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
 		prio.setPriority(PriorityType.METATYPE, Priority.B);
@@ -285,6 +285,9 @@ public class SR6ArchetypeTest {
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+		
+		// Try to reload it again
+		Shadowrun6Core.decode(raw);
 	}
 	
 	//-------------------------------------------------------------------

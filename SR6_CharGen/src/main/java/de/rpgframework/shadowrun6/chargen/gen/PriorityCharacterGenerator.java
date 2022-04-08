@@ -49,7 +49,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 	//-------------------------------------------------------------------
 	public PriorityCharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
-		super(model, handle);
+		super(model, handle, SR6PrioritySettings.class);
 		resolver = new BiFunction<PriorityType, Priority, PriorityTableEntry>() {
 			public PriorityTableEntry apply(PriorityType type, Priority prio) {
 				return Shadowrun6Core.getPriorityTableEntry(type, prio);
@@ -164,8 +164,16 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
 		this.model = model;
 		this.handle= handle;
-		this.setupDone = false;		
-		SR6PrioritySettings settings = new SR6PrioritySettings();
+		this.setupDone = false;	
+		
+		if (model.getCharGenSettings(Object.class) == null) {
+			if (model.getChargenSettingsJSON() != null) {
+				logger.log(Level.INFO, "Restore generator config from {0}", model.getChargenSettingsJSON());
+				SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+				model.setCharGenSettings(settings);
+			} else {
+				logger.log(Level.INFO, "Create new generator config");
+				SR6PrioritySettings settings = new SR6PrioritySettings();
 //		settings.variant = PowerLevel.STANDARD;
 		settings.priorities.put(PriorityType.METATYPE, Priority.B);
 		settings.priorities.put(PriorityType.ATTRIBUTE, Priority.A);
@@ -174,8 +182,10 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		settings.priorities.put(PriorityType.RESOURCES, Priority.D);
 //		model.addRule(Shadowrun6Rules.CHARGEN_ALLOW_INITIATION, "false");
 		model.setCharGenUsed(getId());
-		model.setCharGenSettings(settings);
+		model.setCharGenSettings(settings);		
 		model.setKarmaFree(50);
+		}
+		}
 		logger.log(Level.INFO, "----------------Start generator-----------------------" + toString() + "\n\n\n");
 		
 		try {

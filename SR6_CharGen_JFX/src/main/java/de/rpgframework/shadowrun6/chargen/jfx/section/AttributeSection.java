@@ -66,21 +66,9 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
-		logger.log(Level.INFO, "updateController");
+		logger.log(Level.DEBUG, "updateController");
 		
 		Shadowrun6Character model = ctrl.getModel();
-		if (model.getCharGenUsed().equals("prio")) {
-			table = new PriorityAttributeTable<>(ctrl);
-			setContent(table);
-		} else {
-			logger.log(Level.ERROR, "Don't support controller "+model.getCharGenUsed());
-		}
-		
-		MagicOrResonanceType mor = model.getMagicOrResonanceType();
-		if (mor != null) {
-			table.setShowMagic(mor.usesMagic());
-			table.setShowResonance(mor.usesResonance());
-		}
 
 		IAttributeController attrib = ctrl.getAttributeController();
 //		table.setModel(ctrl.getModel());
@@ -93,7 +81,15 @@ public class AttributeSection extends Section {
 			table = new PointBuyAttributeTable<>(ctrl);
 		} else {
 			System.err.println("AttributeSection: change controller to Karma");
+			logger.log(Level.ERROR, "Don't support controller "+model.getCharGenUsed());
 		}
+		
+		MagicOrResonanceType mor = model.getMagicOrResonanceType();
+		if (mor != null) {
+			table.setShowMagic(mor.usesMagic());
+			table.setShowResonance(mor.usesResonance());
+		}
+
 		setContent(table);
 	}
 

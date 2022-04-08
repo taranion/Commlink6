@@ -1,28 +1,21 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ResourceBundle;
 
-import org.prelle.javafx.AlertManager;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.WindowMode;
 
-import de.rpgframework.ResourceI18N;
-import de.rpgframework.character.Attachment.Format;
-import de.rpgframework.character.Attachment.Type;
+import com.google.gson.Gson;
+
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterIOException;
-import de.rpgframework.character.CharacterProvider;
-import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
-import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
@@ -35,6 +28,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CombatPage;
@@ -42,7 +36,6 @@ import de.rpgframework.shadowrun6.chargen.jfx.page.MagicPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.MatrixPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 
 /**
@@ -133,38 +126,43 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void continueCreation(Shadowrun6Character model, CharacterHandle handle) {
-		logger.log(Level.INFO, "Continue creation");
+		logger.log(Level.INFO, "ENTER: Continue creation");
 		this.handle = handle;
-		
-		Label tmp = new Label(model.getName());
-		tmp.getStyleClass().add(JavaFXConstants.STYLE_HEADING2);
-		super.pages.setHeader(tmp);
 
-		GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
-		logger.log(Level.INFO, "ToDo: Detect previously used generator: {0}",model.getCharGenUsed());
 		try {
-			SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator( model.getCharGenUsed(), model, handle );
-			wrapper.setWrapped(charGen);
-			super.control = wrapper;
-		} catch (Exception e) {
-			logger.log(Level.ERROR, "Error creating generator '"+model.getCharGenUsed(),e);
-			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Internal error creating character generator instance");
-			return;
+			Label tmp = new Label(model.getName());
+			tmp.getStyleClass().add(JavaFXConstants.STYLE_HEADING2);
+			super.pages.setHeader(tmp);
+
+			GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
+			logger.log(Level.INFO, "ToDo: Detect previously used generator: {0}", model.getCharGenUsed());
+			try {
+				logger.log(Level.DEBUG, "JSON = "+model.getChargenSettingsJSON());
+//				switch (model.getCharGenUsed()) {
+//				case "prio":
+//					model.setCharGenSettings( (new Gson()).fromJson(model.getChargenSettingsJSON(), SR6PrioritySettings.class) );
+//					break;
+//				default:
+//					logger.log(Level.ERROR, "Don't know how to read settings from "+model.getCharGenUsed());
+//					System.exit(1);
+//				}
+				
+				SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator(model.getCharGenUsed(), model,
+						handle);
+				wrapper.setWrapped(charGen);
+				super.control = wrapper;
+				logger.log(Level.INFO, "Generator to continue with: {0}", charGen.getClass().getSimpleName());
+				charGen.setModel(model, handle);
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Error creating generator '" + model.getCharGenUsed(), e);
+				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2,
+						"Internal error creating character generator instance");
+				return;
+			}
+			refreshController();
+		} finally {
+			logger.log(Level.INFO, "LEAVE: Continue creation");
 		}
-		refreshController();
-//		GenerationWizard wizard = new GenerationWizard(wrapper);
-//		CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
-//		logger.log(Level.INFO, "Wizard closed via "+close);
-////		controller.refresh();
-//		if (close==CloseType.FINISH) {
-//			wrapper.finish();
-//			try {
-//				wrapper.save(Shadowrun6Core.save((Shadowrun6Character) model));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
 	}
 
 	//-------------------------------------------------------------------
@@ -180,12 +178,15 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 
 	//-------------------------------------------------------------------
 	private void refreshController() {
+		control.setAllowRunProcessor(false);
 		pgBasic.setController(control);
 		pgSkills.setController(control);
 		pgCombat.setController(control);
 		pgAugment.setController(control);
 		pgMagic.setController(control);
 		pgMatrix.setController(control);
+		control.setAllowRunProcessor(true);
+		control.runProcessors();
 	}
 
 	//-------------------------------------------------------------------
@@ -224,7 +225,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 
 	//-------------------------------------------------------------------
 	private void closeRequested() {
-		logger.log(Level.INFO, "ENTER closeRequested");
+		logger.log(Level.ERROR, "ENTER closeRequested");
 	}
 
 	//-------------------------------------------------------------------

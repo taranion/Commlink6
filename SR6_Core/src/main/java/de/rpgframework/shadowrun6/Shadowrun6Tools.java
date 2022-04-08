@@ -381,6 +381,8 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static boolean isRequirementMet(Shadowrun6Character model, Requirement req) {
+		if (req.getApply()!=ApplyTo.CHARACTER) return true;
+		
 		if (req instanceof ExistenceRequirement) {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
 			boolean negated = tmp.isNegate();

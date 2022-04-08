@@ -55,22 +55,22 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
-  "name":"de.rpgframework.shadowrun6.items.SR6EquipMode",
-  "allDeclaredFields":true,
-  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
-},
-{
-  "name":"de.rpgframework.shadowrun6.items.SR6GearEquip",
-  "allDeclaredFields":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"de.rpgframework.shadowrun6.items.SR6GearUsage",
+  "name":"de.rpgframework.shadowrun6.items.SR6AlternateUsage",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"de.rpgframework.shadowrun6.items.SR6ItemAttribute",
+  "allDeclaredFields":true,
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.items.SR6VariantMode",
   "allDeclaredFields":true,
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },

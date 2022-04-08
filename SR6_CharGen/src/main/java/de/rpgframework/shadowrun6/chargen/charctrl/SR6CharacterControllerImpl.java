@@ -35,8 +35,9 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	}
 	
 	//-------------------------------------------------------------------
-	public SR6CharacterControllerImpl(Shadowrun6Character model, CharacterHandle handle) {
+	public SR6CharacterControllerImpl(Shadowrun6Character model, CharacterHandle handle, Class<?> charGenSettingsClazz) {
 		super(model,handle);
+		model.readCharGenSettings(charGenSettingsClazz);
 		createPartialController();
 	}
 	

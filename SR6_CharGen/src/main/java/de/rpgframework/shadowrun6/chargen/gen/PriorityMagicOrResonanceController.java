@@ -98,6 +98,10 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 
 			MagicOrResonanceType type = model.getMagicOrResonanceType();
 			if (type == null || !available.containsKey(type)) {
+				if (available.keySet().isEmpty()) {
+					logger.log(Level.ERROR, "No resonance type set");
+					return unprocessed;
+				}
 				type = available.keySet().iterator().next();
 				logger.log(Level.WARNING, "Auto-select MOR type " + type);
 				model.setMagicOrResonanceType(type);

@@ -16,7 +16,7 @@
 		<attrdef id="HOOK" value="ARMOR" />
 		<attrdef id="SIZE" value="6" />
 		<requires>
-			<datareq type="GEAR" ref="full_body_armor_with_helmet" />
+			<datareq type="GEAR" ref="full_body_armor_with_helmet" apply="DATA_ITEM"/>
 		</requires>
 	</item>
 	<item avail="3" price="250" id="cold_resistance" type="ACCESSORY"

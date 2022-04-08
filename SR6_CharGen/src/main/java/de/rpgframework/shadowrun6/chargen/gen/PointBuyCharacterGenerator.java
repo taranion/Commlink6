@@ -37,7 +37,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 
 	//-------------------------------------------------------------------
 	public PointBuyCharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
-		super(model, handle);
+		super(model, handle, SR6PointBuySettings.class);
 //		try {throw new RuntimeException("Trace");} catch (Exception e) {e.printStackTrace();}
 	}
 

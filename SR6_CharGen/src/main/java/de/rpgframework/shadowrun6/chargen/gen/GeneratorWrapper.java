@@ -17,7 +17,6 @@ import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
-import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
@@ -33,7 +32,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 
 /**
  * @author stefa
@@ -162,6 +160,11 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public void fireEvent(ControllerEvent type, Object...param) {
 		wrapped.fireEvent(type, param);
+	}
+	
+	//-------------------------------------------------------------------
+	public void setAllowRunProcessor(boolean value) {
+		wrapped.setAllowRunProcessor(value);
 	}
 
 	//-------------------------------------------------------------------

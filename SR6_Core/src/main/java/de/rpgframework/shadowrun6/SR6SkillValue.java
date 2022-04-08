@@ -34,10 +34,10 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 		super(toClone);
 	}
 
-	//-------------------------------------------------------------------
-	public String toString() {
-		return ref+"(distr="+value+")";
-	}
+//	//-------------------------------------------------------------------
+//	public String toString() {
+//		return ref+"(distr="+value+")";
+//	}
 
 	//-------------------------------------------------------------------
 	/**

@@ -202,10 +202,8 @@
    	<attrdef id="DEVICE_RATING" value="4"/>
    </item>
    <item avail="4" price="1000" id="simrig" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    	<attrdef id="DEVICE_RATING" value="3"/>
-      <requires>
-         <datareq type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-      </requires>
    </item>
    <item avail="1" price="200"  id="trid_projector" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
    	<attrdef id="DEVICE_RATING" value="3"/>
@@ -216,11 +214,10 @@
    <item avail="1" price="70"  id="trodes" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES">
 	<attrdef id="DEVICE_RATING" value="3" />
 	<variant id="regular" mode="NORMAL">
+   	<usage mode="CARRIED"/>
 	</variant>
 	<variant id="helmet" mode="EMBEDDED">
-		<requires>
-			<datareq type="HOOK" ref="HELMET_ACCESSORY" />
-		</requires>
+   	<usage mode="EMBEDDED" slot="HELMET_ACCESSORY"/>
 	</variant>
    </item>
    

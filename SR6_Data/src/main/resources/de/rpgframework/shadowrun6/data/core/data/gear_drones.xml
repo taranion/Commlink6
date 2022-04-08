@@ -47,7 +47,7 @@
    <item avail="4L" price="290" id="cyberspace_designs_quadrotor_crossbow" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
    	<usage mode="EMBEDDED" slot="VEHICLE_BODY" value="0"/>
       <requires>
-         <datareq type="GEAR" ref="cyberspace_designs_quadrotor"/>
+         <datareq type="GEAR" ref="cyberspace_designs_quadrotor" apply="DATA_ITEM"/>
       </requires>
       <weapon dmg="3P" attack="2,10,4,2," ammo="4(m)" mode="SS"  skill="engineering" spec="engineering/gunnery"/>
       <modifications>

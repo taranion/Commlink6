@@ -84,6 +84,7 @@ public class PointBuySkillGenTest {
 			public List<ToDoElement> getToDos() {
 				return null;
 			}
+			public void setAllowRunProcessor(boolean value) {}
 			public void runProcessors() {
 				System.out.println("---------------");
 				ctrl.process(preMods);

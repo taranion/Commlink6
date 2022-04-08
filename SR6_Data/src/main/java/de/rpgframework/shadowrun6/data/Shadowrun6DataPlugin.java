@@ -163,8 +163,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_drones.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
-			logger.log(Level.ERROR, "Stop here");
-			System.exit(1);
+//			logger.log(Level.ERROR, "Stop here");
+//			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, core, clazz,"core/data/magicOrResonance.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic or resonance entries");
 			Shadowrun6Core.loadPriorityTableEntries(core, clazz.getResourceAsStream("core/data/priorities.xml"));

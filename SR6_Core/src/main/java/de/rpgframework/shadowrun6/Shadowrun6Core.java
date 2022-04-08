@@ -2,7 +2,6 @@ package de.rpgframework.shadowrun6;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -15,11 +14,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import com.google.gson.Gson;
+
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.character.CharacterIOException.ErrorCode;
-import de.rpgframework.core.BabylonEventBus;
-import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.GenericCore;
 import de.rpgframework.shadowrun.ASpell;
@@ -156,6 +155,9 @@ public class Shadowrun6Core extends GenericCore {
 	//-------------------------------------------------------------------
 	public static byte[] encode(Shadowrun6Character character) throws CharacterIOException {
 		try {
+			String json = (new Gson()).toJson(character.getCharGenSettings(Object.class));
+			character.setChargenSettingsJSON(json);
+			logger.log(Level.INFO, json);
 			StringWriter out = new StringWriter();
 			serializer.write(character, out);
 			return out.toString().getBytes(Charset.forName("UTF-8"));

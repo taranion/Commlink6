@@ -314,7 +314,11 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				logger.log(Level.WARNING, "Trying to embed, which isn't possible: "+poss.getMostSevere());
 				return new OperationResult<>();
 			}
-			return new OperationResult<>(null);
+			
+			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, decisions);
+			logger.log(Level.WARNING, "ToDo: really embed");
+			logger.log(Level.WARNING, "ToDo: recalculate item after embedding");
+			return res;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE embed{0}", value);
 		}

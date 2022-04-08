@@ -13,8 +13,10 @@ import org.prelle.simplepersist.ElementListUnion;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.IGearTypeData;
 import de.rpgframework.genericrpg.items.PieceOfGear;
+import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.items.Availability;
@@ -90,6 +92,9 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);
 		
 		/* If there is no USAGE assume a NORMAL mode and no slot */
+		if (usages.isEmpty()) {
+			usages.add(new Usage(CarryMode.CARRIED));
+		}
 //		if (variants.isEmpty()) {
 //			SR6PieceOfGearVariant add = new SR6PieceOfGearVariant(SR6VariantMode.NORMAL);
 //			variants.add(add);

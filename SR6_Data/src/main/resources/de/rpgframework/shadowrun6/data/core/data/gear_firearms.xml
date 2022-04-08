@@ -441,7 +441,7 @@
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
       <requires>
-      	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="3"/>
+      	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="3" apply="CHARACTER"/>
       </requires>
       <weapon attack="1,10,11,7,6" ammo="50(c)/100(belt)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/machine_guns"/>
    </item>
@@ -453,7 +453,7 @@
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
       <requires>
-      	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="5"/>
+      	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="5" apply="CHARACTER"/>
       </requires>
       <weapon attack="1,10,12,8,7" ammo="50(c)/100(belt)" dmg="6P" mode="SA/BF/FA" skill="firearms" spec="firearms/machine_guns"/>
    </item>
@@ -465,7 +465,7 @@
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
       <requires>
-      	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="5"/>
+      	<valuereq type="ATTRIBUTE" ref="STRENGTH" min="5" apply="CHARACTER"/>
       </requires>
       <weapon attack="1,9,12,8,6" ammo="15(c)" dmg="7P" mode="SA" skill="firearms" spec="firearms/machine_guns"/>
    </item>

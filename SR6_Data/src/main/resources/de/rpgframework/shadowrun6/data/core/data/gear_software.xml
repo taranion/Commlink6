@@ -48,7 +48,7 @@
 	<item avail="4I" price="250" id="biofeedback" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
  	   <requires>
- 	   	<valuereq type="ITEM_ATTRIBUTE" ref="ATTACK" min="1"/>
+ 	   	<valuereq type="ITEM_ATTRIBUTE" ref="ATTACK" min="1" apply="DATA_ITEM"/>
  	   </requires>
 	   <mode id="active" />
 	</item> 
@@ -169,7 +169,7 @@
 		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SKILLJACK"/>
  	   <requires>
- 	   	<datareq type="GEAR" ref="skillwires"/>
+ 	   	<datareq type="GEAR" ref="skillwires" apply="CHARACTER"/>
  	   </requires>
       <modifications>
          <valmod type="SKILL" ref="CHOICE" choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="$RATING" set="ARTIFICAL"/>

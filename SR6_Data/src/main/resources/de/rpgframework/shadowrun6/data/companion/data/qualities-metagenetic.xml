@@ -105,7 +105,7 @@
        <checkmod ref="influence" type="SKILL" what="EDGE" value="1"/>
      </modifications>
      <requires>
-         <datareq type="QUALITY" ref="nocturnal" negate="true"/>
+         <datareq type="QUALITY" ref="nocturnal" negate="true" apply="CHARACTER"/>
      </requires>
    </quality>
    <quality id="tough_gut" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
@@ -395,12 +395,12 @@
        <checkmod ref="athletics" type="SKILL" what="EDGE" value="-99"/>
      </modifications>
    	<requires>
-   		<datareq type="QUALITY" ref="third_eye" negate="true"/>
+   		<datareq type="QUALITY" ref="third_eye" negate="true" apply="CHARACTER"/>
    	</requires>
    </quality>
    <quality id="third_eye" karma="5" pos="true" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA">
    	<requires>
-   		<datareq type="QUALITY" ref="cyclopean_eye" negate="true"/>
+   		<datareq type="QUALITY" ref="cyclopean_eye" negate="true" apply="CHARACTER"/>
    	</requires>
    </quality>
    <quality id="reflective_eyes"  karma="4" pos="false" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA" />
@@ -413,18 +413,18 @@
    <quality id="astral_hazing_non_awakened" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_ANOMALIES">
    	<requires>
    		<selreq>
-   			<datareq type="MAGIC_RESO" ref="mundane" />
-   			<datareq type="MAGIC_RESO" ref="technomancer"/>
+   			<datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER" />
+   			<datareq type="MAGIC_RESO" ref="technomancer" apply="CHARACTER"/>
    		</selreq>
    	</requires>
    </quality>
    <quality id="astral_hazing_awakened" karma="15" pos="true" type="METAGENIC" cat="METAGENIC_ANOMALIES">
    	<requires>
    		<selreq>
-   			<datareq type="MAGIC_RESO" ref="magician" />
-   			<datareq type="MAGIC_RESO" ref="adept"/>
-   			<datareq type="MAGIC_RESO" ref="mysticadept" />
-   			<datareq type="MAGIC_RESO" ref="aspectedmagician"/>
+   			<datareq type="MAGIC_RESO" ref="magician" apply="CHARACTER" />
+   			<datareq type="MAGIC_RESO" ref="adept" apply="CHARACTER"/>
+   			<datareq type="MAGIC_RESO" ref="mysticadept" apply="CHARACTER"/>
+   			<datareq type="MAGIC_RESO" ref="aspectedmagician" apply="CHARACTER"/>
    		</selreq>
    	</requires>
    </quality>

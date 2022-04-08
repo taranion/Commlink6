@@ -91,6 +91,7 @@ public class PrioQualGenTest {
 			public List<ToDoElement> getToDos() {
 				return null;
 			}
+			public void setAllowRunProcessor(boolean value) {}
 			public void runProcessors() {
 				System.out.println("---------------");
 				(new ResetGenerator(charGen)).process(List.of());
