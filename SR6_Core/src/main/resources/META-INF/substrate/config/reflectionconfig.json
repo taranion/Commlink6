@@ -5,17 +5,41 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.CreatePoints",
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.MetaTypeList",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"de.rpgframework.shadowrun6.Shadowrun6Action",
+  "name":"de.rpgframework.shadowrun6.NPCList",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.PowerLevel",
+  "allDeclaredFields":true,
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.SR6MetaType",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.SR6NPC",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.SR6Ritual",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.SR6RitualList",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -25,12 +49,32 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"de.rpgframework.shadowrun6.SkillList",
+  "name":"de.rpgframework.shadowrun6.SR6SkillValue",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"de.rpgframework.shadowrun6.SR6Spell",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.Shadowrun6Action",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.Shadowrun6Character",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.SkillList",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.items.ArmorData",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -60,6 +104,11 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.items.MatrixData",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.items.SR6AlternateUsage",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -75,12 +124,22 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.items.SR6UsageMode",
+  "allDeclaredFields":true,
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.items.SR6VariantMode",
   "allDeclaredFields":true,
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
-  "name":"de.rpgframework.shadowrun6.items.SR6UsageMode",
+  "name":"de.rpgframework.shadowrun6.items.VehicleData",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.items.VehicleData$VehicleType",
   "allDeclaredFields":true,
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
@@ -100,15 +159,7 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
-  "name":"de.rpgframework.shadowrun6.persist.ItemAttributeConverter",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"de.rpgframework.shadowrun6.persist.ItemSubTypesConverter",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"de.rpgframework.shadowrun6.persist.MagicOrResonanceTypeConverter",
+  "name":"de.rpgframework.shadowrun6.persist.OnRoadOffRoadConverter",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
