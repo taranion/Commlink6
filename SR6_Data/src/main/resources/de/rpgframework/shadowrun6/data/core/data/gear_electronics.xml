@@ -204,6 +204,12 @@
    <item avail="4" price="1000" id="simrig" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
    	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    	<attrdef id="DEVICE_RATING" value="3"/>
+   	<variant id="cyberware">
+	      <usage mode="IMPLANTED" value="0.2"/>
+			<attrdef id="PRICE" value="4000" />
+			<attrdef id="AVAILABILITY" value="4L" />
+ 			<flag>AUGMENTATION</flag>   	
+   	</variant>
    </item>
    <item avail="1" price="200"  id="trid_projector" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
    	<attrdef id="DEVICE_RATING" value="3"/>

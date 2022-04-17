@@ -103,22 +103,6 @@
       <usage mode="IMPLANTED" value="0.2"/>
  		<flag>AUGMENTATION</flag>
    </item>
-    <item avail="4L" price="4000" id="simrig" type="CYBERWARE" subtype="CYBER_HEADWARE">
-      <usage mode="IMPLANTED" value="0.2"/>
- 		<flag>AUGMENTATION</flag>
-   </item>
-   <item avail="4" price="1000" id="skilljack" lang="de" type="CYBERWARE" subtype="CYBER_HEADWARE">
-		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
-		</choices>
-      <usage mode="IMPLANTED" value="0.1"/>
-		<attrdef id="PRICE" value="$RATING*1000"/>
-		<attrdef id="MAX_SKILLSOFT_RATING" value="$RATING"/>
- 		<flag>AUGMENTATION</flag>
- 		<modifications>
-         <valmod type="HOOK" ref="SKILLJACK" value="$RATING*2"/>
-      </modifications>
-   </item>
    <item avail="4" price="20000" id="skilljack" type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
 			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
@@ -147,11 +131,6 @@
  		<flag>AUGMENTATION</flag>
    </item>
    <item avail="4" price="36000" id="ultrasound_sensor" type="CYBERWARE" subtype="CYBER_HEADWARE">
-      <usage mode="EMBEDDED" slot="HEADWARE_IMPLANT" value="2"/>
-      <usage mode="IMPLANTED" value="0.3"/>
- 		<flag>AUGMENTATION</flag>
-   </item>
-   <item avail="4" price="3600" id="ultrasound_sensor" lang="de" type="CYBERWARE" subtype="CYBER_HEADWARE">
       <usage mode="EMBEDDED" slot="HEADWARE_IMPLANT" value="2"/>
       <usage mode="IMPLANTED" value="0.3"/>
  		<flag>AUGMENTATION</flag>
@@ -298,14 +277,14 @@
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
  		<flag>AUGMENTATION</flag>
    </item>
-   <item avail="3" price="3000" id="grapple_gun" type="CYBERWARE" subtype="CYBER_BODYWARE">
+   <!--item avail="3" price="3000" id="grapple_gun" type="CYBERWARE" subtype="CYBER_BODYWARE">
       <usage mode="IMPLANTED" value="0.5" />
       <usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
  		<flag>AUGMENTATION</flag>
       <modifications>
           <itemmod type="GEAR" ref="grapple_gun" />
       </modifications>
-   </item>
+   </item-->
    <item avail="2" id="internal_air_tank" type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
 			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
@@ -351,6 +330,12 @@
    <item avail="3" price="7500" id="smuggling_compartment" type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<usage mode="IMPLANTED" value="0.2"/>
       <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT" />
+ 		<flag>AUGMENTATION</flag>
+      <variant id="cyberlimb">
+			<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="5"/>
+			<attrdef id="PRICE" value="6000"/>
+			<attrdef id="AVAILABILITY" value="2"/>
+      </variant>
    </item>
    <item id="wired_reflexes"  type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
@@ -566,10 +551,10 @@
 		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="$RATING"/>
  		<flag>AUGMENTATION</flag>
    </item>
-   <item avail="2" price="6000" id="smuggling_compartment" subtype="CYBER_LIMB_ACCESSORY" type="ACCESSORY">
+   <!--item avail="2" price="6000" id="smuggling_compartment" subtype="CYBER_LIMB_ACCESSORY" type="ACCESSORY">
 		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="5"/>
  		<flag>AUGMENTATION</flag>
-   </item>
+   </item-->
 
 	<!-- Cyber implant firearms -->
    <item avail="3L" price="2000" id="cyber_holdout" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">

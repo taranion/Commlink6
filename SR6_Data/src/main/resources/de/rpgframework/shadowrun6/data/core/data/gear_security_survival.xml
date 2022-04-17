@@ -65,7 +65,15 @@
    <item avail="2" price="200"  id="survival_kit"      subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
    
    <!-- Grapple gun -->
-   <item avail="3" price="500"  id="grapple_gun"       subtype="GRAPPLE_GUN" type="SURVIVAL"/>
+   <item avail="3" price="500"  id="grapple_gun"       subtype="GRAPPLE_GUN" type="SURVIVAL">
+   	<usage mode="CARRIED"/>
+   	<variant id="cyberware">
+     		<usage mode="IMPLANTED" value="0.5" />
+      	<usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
+      	<attrdef id="PRICE" value="3000"/>
+ 			<flag>AUGMENTATION</flag>
+   	</variant>
+   </item>
    <item avail="2" price="50"   id="microwire"         subtype="GRAPPLE_GUN" type="SURVIVAL"/>
    <item avail="4" price="200"  id="myomeric_rope"     subtype="GRAPPLE_GUN" type="SURVIVAL"/>
    <item avail="1" price="20"   id="standard_rope"     subtype="GRAPPLE_GUN" type="SURVIVAL"/>
