@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Quality;
@@ -40,6 +41,12 @@ public class ApplyQualityModifications implements ProcessingStep {
 				QualityValue value = model.getQuality(mod.getKey());
 				if (value==null) {
 					value = new QualityValue(item, 0);
+					// Handle decisions
+					for (Decision dec : mod.getDecisions()) {
+						value.addDecision(dec);
+						logger.log(Level.DEBUG, "Add decision {0} to quality {1}", dec, item);
+					}
+					
 					model.addQuality(value);
 					logger.log(Level.DEBUG, "Add quality {0} to character", item);
 				}

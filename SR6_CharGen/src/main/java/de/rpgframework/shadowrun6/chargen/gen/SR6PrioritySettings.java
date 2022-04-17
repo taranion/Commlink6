@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import de.rpgframework.shadowrun.Priority;
+import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.chargen.gen.APrioritySettings;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -28,6 +30,11 @@ public class SR6PrioritySettings extends APrioritySettings {
 	//-------------------------------------------------------------------
 	public SR6PrioritySettings() {
 		perSkill = new LinkedHashMap<>();
+		priorities.put(PriorityType.METATYPE, Priority.B);
+		priorities.put(PriorityType.ATTRIBUTE, Priority.A);
+		priorities.put(PriorityType.MAGIC, Priority.E);
+		priorities.put(PriorityType.SKILLS, Priority.C);
+		priorities.put(PriorityType.RESOURCES, Priority.D);
 	}
 	
 	//-------------------------------------------------------------------

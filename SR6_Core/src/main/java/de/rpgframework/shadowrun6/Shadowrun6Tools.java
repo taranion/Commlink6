@@ -398,8 +398,14 @@ public class Shadowrun6Tools {
 				return model.getMetatype().getId().equals(req.getKey());
 			default:
 				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type);
+			}			
+		} else if (req instanceof AnyRequirement) {
+			AnyRequirement any = (AnyRequirement)req;
+			for (Requirement tmp : any.getOptionList()) {
+				if (isRequirementMet(model, tmp))
+					return true;
 			}
-			
+			return false;
 		}
 		System.err.println("Shadowrun6Tool: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
 		logger.log(Level.WARNING,"ToDo: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
