@@ -176,7 +176,7 @@
      </modifications>
    </quality>
    <quality id="biosonar"     karma="6" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
-   <quality id="elecrosense"  karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
+   <quality id="electrosense" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
    <quality id="low-light_vision_metagenetic" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
    <quality id="magnetosense" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
    <quality id="manasense"    karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" />
