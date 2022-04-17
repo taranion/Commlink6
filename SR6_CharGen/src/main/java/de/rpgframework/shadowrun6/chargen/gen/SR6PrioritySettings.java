@@ -3,12 +3,16 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityType;
+import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.gen.APrioritySettings;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
+import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
  * @author Stefan Prelle
@@ -25,7 +29,7 @@ public class SR6PrioritySettings extends APrioritySettings {
 	
 	/** Modifier to apply to customization karma */
 	public int karmaMod;
-	public Map<SR6SkillValue, PerSkillPoints> perSkill;
+	public Map<String, PerSkillPoints> perSkill;
 
 	//-------------------------------------------------------------------
 	public SR6PrioritySettings() {
@@ -40,11 +44,45 @@ public class SR6PrioritySettings extends APrioritySettings {
 	//-------------------------------------------------------------------
 	public String toSkillString() {
 		StringBuffer buf = new StringBuffer();
-		for (Entry<SR6SkillValue,PerSkillPoints> ent : perSkill.entrySet()) {
+		for (Entry<String,PerSkillPoints> ent : perSkill.entrySet()) {
 			if (ent.getValue().getSum()>0)
-				buf.append(String.format("\n%10s : %s", ent.getKey().getSkill(), ent.getValue().toString()));
+				buf.append(String.format("\n%10s : %s", Shadowrun6Core.getSkill(ent.getKey()), ent.getValue().toString()));
 		}
+//		for (Entry<UUID,PerSkillPoints> ent : perKnowledgeSkill.entrySet()) {
+//			if (ent.getValue().getSum()>0)
+//				buf.append(String.format("\n%10s : %s", Shadowrun6Core.getSkill(ent.getKey()), ent.getValue().toString()));
+//		}
 		return buf.toString();
+	}
+	
+	//-------------------------------------------------------------------
+	public void put(SR6SkillValue sVal, PerSkillPoints per) {
+		SR6Skill skill = sVal.getModifyable();
+		String id = skill.getId();
+		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
+			id+="/"+sVal.getUuid();
+		} 
+		perSkill.put(id, per);
+	}
+	
+	//-------------------------------------------------------------------
+	public PerSkillPoints get(SR6SkillValue sVal) {
+		SR6Skill skill = sVal.getModifyable();
+		String id = skill.getId();
+		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
+			id+="/"+sVal.getUuid();
+		} 
+		return perSkill.get(id);
+	}
+
+	//-------------------------------------------------------------------
+	public void remove(SR6SkillValue sVal) {
+		SR6Skill skill = sVal.getModifyable();
+		String id = skill.getId();
+		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
+			id+="/"+sVal.getUuid();
+		} 
+		perSkill.remove(id);
 	}
 	
 }

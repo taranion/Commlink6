@@ -23,6 +23,8 @@ import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -30,12 +32,17 @@ import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
+import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
@@ -361,19 +368,39 @@ public class Shadowrun6Tools {
 	 * Walk through all items in the character and resolve them
 	 * @param rawChar
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void resolveChar(Shadowrun6Character model) {
-		logger.log(Level.DEBUG, "ENTER resolveChar");
+		logger.log(Level.INFO, "ENTER resolveChar");
 		try {
+			logger.log(Level.DEBUG, "resolve qualities");
 			for (QualityValue tmp : model.getQualities()) {
 				Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 
+			logger.log(Level.DEBUG, "resolve skills");
 			for (SR6SkillValue tmp : model.getSkillValues()) {
 				SR6Skill resolved = Shadowrun6Core.getItem(SR6Skill.class, tmp.getKey());
 				if (resolved==null) logger.log(Level.ERROR, "Character {} contains unknown skill '{}'", model.getName(), tmp.getKey());
 				tmp.setResolved(resolved);
 			}
+			logger.log(Level.DEBUG, "resolve adept powers");
+			for (AdeptPowerValue tmp : model.getAdeptPowers()) {
+				AdeptPower resolved = Shadowrun6Core.getItem(AdeptPower.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+			logger.log(Level.DEBUG, "resolve spells");
+			for (SpellValue tmp : model.getSpells()) {
+				SR6Spell resolved = Shadowrun6Core.getItem(SR6Spell.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+			logger.log(Level.DEBUG, "resolve gear");
+			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
+				ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
+				tmp.setResolved(resolved);
+				GearTool.recalculate("", model, tmp);
+			}
+
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE resolveChar");
 		}

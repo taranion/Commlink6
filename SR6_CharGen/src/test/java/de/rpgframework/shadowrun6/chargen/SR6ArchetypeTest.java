@@ -27,12 +27,14 @@ import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunFlags;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.SR6Rule;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -43,6 +45,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySpellGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -71,6 +74,7 @@ public class SR6ArchetypeTest {
 		model = new Shadowrun6Character();
 		charGen = new PriorityCharacterGenerator();
 		charGen.setModel(model, null);
+		model.setRuleValue(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA, "true");
 	}
 	
 	//-------------------------------------------------------------------
@@ -260,7 +264,9 @@ public class SR6ArchetypeTest {
 		// Try to add bow without rating
 		assertFalse(  equip.select(bow).wasSuccessful() );
 		// Try to add bow with rating
-		assertTrue(  equip.select(bow, new Decision(bow.getChoices().get(0), "5")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> bowC = equip.select(bow, new Decision(bow.getChoices().get(0), "5")); 
+		assertTrue(  bowC.wasSuccessful() );
+		bowC.get().addFlag(ShadowrunFlags.PRIMARY_RANGED_WEAPON);
 		
 		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "knife")).wasSuccessful() );
 		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "shock_gloves")).wasSuccessful() );
@@ -280,7 +286,7 @@ public class SR6ArchetypeTest {
 						"3"));
 		assertTrue( contactsRes.getError(), contactsRes.wasSuccessful() );
 		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation")).wasSuccessful() );
-		
+		model.setName("Adept");
 		
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
@@ -354,6 +360,7 @@ public class SR6ArchetypeTest {
 
 		OperationResult<SR6SkillValue> sVal = skills.select(Shadowrun6Core.getSkill("sorcery"));
 		assertTrue("Could not select skill with maximum modifications",sVal.wasSuccessful());
+		assertEquals(15, skills.getPointsLeft());
 		skills.increase(sVal.get()); // 2
 		skills.increase(sVal.get()); // 3
 		skills.increase(sVal.get()); // 4
@@ -403,20 +410,30 @@ public class SR6ArchetypeTest {
 		SR6SpellController spells = charGen.getSpellController();
 		assertEquals(6, ((SR6PrioritySpellGenerator)spells).getFreeSpells());
 		
-//		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "armor")).wasSuccessful() );
+		SR6Spell spell = Shadowrun6Core.getItem(SR6Spell.class, "armor");
+		assertNotNull("Spell not found",spell);
+		assertTrue( spells.select(spell).wasSuccessful() );
+		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "confusion")).wasSuccessful() );
+		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "detect_enemies")).wasSuccessful() );
+		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "flamestrike")).wasSuccessful() );
+		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "heal")).wasSuccessful() );
+		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "ice_storm")).wasSuccessful() );
+		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "levitate")).wasSuccessful() );
+		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "physical_barrier")).wasSuccessful() );
 	
-//		IEquipmentController equip = charGen.getEquipmentController();
-//		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest"));
-//		assertNotNull(poss);
-//		assertTrue( poss.toString(), poss.get());
-//		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest")).wasSuccessful() );
-//		
+		IEquipmentController equip = charGen.getEquipmentController();
+		Possible poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "armor_jacket"));
+		assertNotNull(poss);
+		assertTrue( poss.toString(), poss.get());
+		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_jacket")).wasSuccessful() );
+		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "chrysler-nissan_jackrabbit")).wasSuccessful() );
+		
 //		ItemTemplate bow = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
 //		// Try to add bow without rating
 //		assertFalse(  equip.select(bow).wasSuccessful() );
 //		// Try to add bow with rating
 //		assertTrue(  equip.select(bow, new Decision(bow.getChoices().get(0), "5")).wasSuccessful() );
-		
+		model.setName("Combat Mage");
 		
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);

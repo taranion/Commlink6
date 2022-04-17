@@ -27,7 +27,7 @@ public class SR6SkillTablePrioSkin extends ShadowrunSkillTableSkin<SR6Skill, SR6
 	public int getPoints1(SR6SkillValue sVal) {
 		Shadowrun6Character model = getSkinnable().getController().getModel();
 		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-		PerSkillPoints points = settings.perSkill.get(sVal);
+		PerSkillPoints points = settings.get(sVal);
 		if (points!=null) {
 			return points.points1 + points.points2;
 		}
@@ -39,7 +39,7 @@ public class SR6SkillTablePrioSkin extends ShadowrunSkillTableSkin<SR6Skill, SR6
 	public int getPoints2(SR6SkillValue sVal) {
 		Shadowrun6Character model = getSkinnable().getController().getModel();
 		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-		PerSkillPoints points = settings.perSkill.get(sVal);
+		PerSkillPoints points = settings.get(sVal);
 		if (points!=null) {
 			return points.points3;
 		}

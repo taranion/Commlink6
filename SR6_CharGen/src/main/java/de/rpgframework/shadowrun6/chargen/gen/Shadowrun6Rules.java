@@ -26,6 +26,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	
 	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule("CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_PRIO_ADEPT_PP = new Rule("CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.FINAL_MAGIC);
+	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule("CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
 
 	
 	//-------------------------------------------------------------------

@@ -26,6 +26,7 @@ import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -71,7 +72,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SKILL(key -> Shadowrun6Core.getSkill(key)),
 	SKILLSPECIALIZATION(new SkillSpecializationConverter()),
 	SLOT("ItemHook"),
-	SPELL(ASpell.class),
+	SPELL(SR6Spell.class),
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
 	SPIRIT("Spirit"),
 	SPRITE("Sprite"),

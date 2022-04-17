@@ -95,7 +95,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	protected PerSkillPoints getPerSkill(SR6SkillValue value) {
 		try {
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-			return settings.perSkill.get(value);
+			return settings.get(value);
 		} catch (ClassCastException cce) {
 			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 			return settings.perSkill.get(value);

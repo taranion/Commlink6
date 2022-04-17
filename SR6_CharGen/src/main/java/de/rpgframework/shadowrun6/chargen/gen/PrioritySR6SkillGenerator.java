@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import de.rpgframework.genericrpg.NumericalValueWith3PoolsController;
 import de.rpgframework.genericrpg.Possible;
@@ -146,6 +147,9 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 					result.get().addDecision(dec);
 				}
 			}
+			if (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE) {
+				result.get().setUuid(UUID.randomUUID());
+			}
 			
 			/*
 			 * Now try to detect how to pay it
@@ -162,7 +166,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 				logger.log(Level.DEBUG, "pay with karma");
 				per.points3++;		
 			}
-			settings.perSkill.put(result.get(), per);
+			settings.put(result.get(), per);
 			
 			getCharacterController().runProcessors();
 			return result;
@@ -192,7 +196,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			 * Now remove it from generator
 			 */
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-			settings.perSkill.remove(data);
+			settings.remove(data);
 			
 			getCharacterController().runProcessors();
 			return true;
@@ -282,7 +286,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public Possible canBeDecreasedPoints2(SR6SkillValue value) {
 		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-		PerSkillPoints per = settings.perSkill.get(value);
+		PerSkillPoints per = settings.get(value);
 		if (per==null)
 			return new Possible(I18N_NOT_SELECTED);
 		
@@ -317,7 +321,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public Possible canBeDecreasedPoints3(SR6SkillValue key) {
 		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-		PerSkillPoints per = settings.perSkill.get(key);
+		PerSkillPoints per = settings.get(key);
 		if (per==null)
 			return new Possible(I18N_NOT_SELECTED);
 		
@@ -424,6 +428,33 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 	}
 	
 	//-------------------------------------------------------------------
+	private SR6Skill getSkillFromPrioritySettings(String prioritySettingsId) {
+		if (prioritySettingsId.contains("/")) {
+			String key = prioritySettingsId.substring(0, prioritySettingsId.indexOf("/"));
+			return Shadowrun6Core.getSkill(key);
+		} else {
+			return Shadowrun6Core.getSkill(prioritySettingsId);
+		}
+	}
+	
+	//-------------------------------------------------------------------
+	private SR6SkillValue getFromPrioritySettings(String prioritySettingsId) {
+		if (prioritySettingsId.contains("/")) {
+			String key = prioritySettingsId.substring(0, prioritySettingsId.indexOf("/"));
+			UUID uuid = UUID.fromString(prioritySettingsId.substring(prioritySettingsId.indexOf("/")+1));
+			SR6Skill skill = Shadowrun6Core.getSkill(key);
+			for (SR6SkillValue val : model.getSkillValues()) {
+				if (val.getSkill()==skill && val.getUuid()!=null && val.getUuid().equals(uuid)) {
+					return val;
+				}
+			}
+		} else {
+			return model.getSkillValue(Shadowrun6Core.getSkill(prioritySettingsId));
+		}
+		return null;
+	}
+	
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
@@ -497,11 +528,16 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			
 			Shadowrun6Character model = parent.getModel();
 			SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
-			for (Entry<SR6SkillValue, PerSkillPoints> entry : settings.perSkill.entrySet()) {
-				SR6Skill key = entry.getKey().getModifyable();
+			for (Entry<String, PerSkillPoints> entry : settings.perSkill.entrySet()) {
+				SR6SkillValue sVal = getFromPrioritySettings(entry.getKey());
+				if (sVal==null) {
+					logger.log(Level.ERROR, "Cannot find SkillValue for ''{0}'' from PrioritySettings", entry.getKey());
+					continue;
+				}
+				SR6Skill key = sVal.getResolved();
 				
 				PerSkillPoints per = entry.getValue();
-//				logger.log(Level.DEBUG, key+" = "+per.toString());
+				logger.log(Level.INFO, key+" = "+per.toString());
 				/* 
 				 * Pay skill points 
 				 */
@@ -559,14 +595,16 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			 * Copy from settings to character
 			 */
 			List<SR6SkillValue> usedSkills = new ArrayList<>();
-			for (Entry<SR6SkillValue,PerSkillPoints> entry : settings.perSkill.entrySet()) {
+			for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
 				logger.log(Level.DEBUG, "  final "+entry.getKey()+"= "+ entry.getValue());
 				if (entry.getValue().getSum()==0) continue;
-				if (!model.getSkillValues().contains(entry.getKey())) {
-					model.addSkillValue(entry.getKey());
+				SR6SkillValue val = getFromPrioritySettings(entry.getKey());
+				if (val==null) {
+					SR6Skill skill = getSkillFromPrioritySettings(entry.getKey());
+					val = new SR6SkillValue(skill, 0);
+					model.addSkillValue(val);
 					logger.log(Level.DEBUG, "  Add skill value to char: "+entry.getKey());
 				}
-				SR6SkillValue val = entry.getKey();
 				val.setDistributed(entry.getValue().getSum());
 				usedSkills.add(val);
 			}
@@ -653,15 +691,15 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			
 			// Now pay
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-			if (settings.perSkill.get(skillVal)==null) {
-				settings.perSkill.put(skillVal, new PerSkillPoints());
+			if (settings.get(skillVal)==null) {
+				settings.put(skillVal, new PerSkillPoints());
 			}
 			if (points1>0) {
 				logger.log(Level.INFO, "Pay with skill points");
-				settings.perSkill.get(skillVal).points1++;
+				settings.get(skillVal).points1++;
 			} else {
-				settings.perSkill.get(skillVal).karmaSpec++;
-				logger.log(Level.INFO, "Pay with karma "+settings.perSkill.get(skillVal));
+				settings.get(skillVal).karmaSpec++;
+				logger.log(Level.INFO, "Pay with karma "+settings.get(skillVal));
 			}
 			
 			

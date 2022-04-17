@@ -7,4 +7,5 @@ package de.rpgframework.shadowrun6;
 public enum SR6Rule {
 
 	UNARMED_DAMAGE_IS_PHYSICAL,
+	
 }
