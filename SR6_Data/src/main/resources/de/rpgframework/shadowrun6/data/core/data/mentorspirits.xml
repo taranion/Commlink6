@@ -97,7 +97,6 @@
 		<similar>generosity</similar>
 		<choices>
 			<choice type="SKILL" uuid="9b909b3d-ddcb-46b4-838e-4d182a721d14" options="engineering,enchanting"/>  
-			<choice type="SKILL" uuid="f85e6a72-7555-4620-9f57-8061f6b94ba5" options="astral,athletics,biotech,con,conjuring,cracking,electronics,enchanting,engineering,influence,outdoors,perception,piloting,sorcery,stealth,tasking"/>  
 		</choices>
 		<modifications>
 			<checkmod type="SKILL" ref="CHOICE" choice="9b909b3d-ddcb-46b4-838e-4d182a721d14" value="-1" what="EDGE_BOOST" />
@@ -106,9 +105,7 @@
 			<checkmod type="SPELL" ref="MANIPULATION" value="-1" what="EDGE_BOOST" />
 		</magician>
 		<adept>
-			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-				<decision choice="f85e6a72-7555-4620-9f57-8061f6b94ba5" value="CHOICE"/>
-			</valmod>
+			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" />
 		</adept>
 	</mentorspirit>
 
@@ -159,9 +156,6 @@
 	<mentorspirit id="seducer">
 		<similar>seductress</similar>
 		<similar>temptation</similar>
-		<choices>
-			<choice type="SKILL" uuid="480ddbd2-f063-4139-8e30-895de8737f55" options="con,influence"/>  
-		</choices>
 		<modifications>
 			<checkmod type="SKILL" ref="con" value="-1" what="EDGE_BOOST"/>
 		</modifications>
@@ -169,9 +163,7 @@
 			<checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
 		</magician>
 		<adept>
-			<valmod type="ADEPT_POWER" ref="improved_ability" value="1">
-				<decision choice="480ddbd2-f063-4139-8e30-895de8737f55" value="CHOICE"/>
-			</valmod>
+			<valmod type="ADEPT_POWER" ref="improved_ability" choice="05054102-0183-482a-9e2b-84bc8d5f153f" options="con,influence" value="1" />
 		</adept>
 	</mentorspirit>
 
@@ -229,9 +221,6 @@
 	<mentorspirit id="wise_warrior">
 		<similar>duty</similar>
 		<similar>wisdom</similar>
-		<choices>
-			<choice type="SKILL" uuid="8fa64b51-c088-4f66-bfde-89e5b3eed562" options="close_combat,exotic_weapons,firearms"/>  
-		</choices>
 		<modifications>
 			<checkmod type="SKILL" ref="influence" value="-1" what="EDGE_BOOST"/>
 		</modifications>
@@ -239,18 +228,13 @@
 			<checkmod type="SPELL" ref="COMBAT" value="-1" what="EDGE_BOOST" />
 		</magician>
 		<adept>
-			<valmod type="ADEPT_POWER" ref="improved_ability_combat" value="1" >
-				<decision choice="8fa64b51-c088-4f66-bfde-89e5b3eed562" value="CHOICE"/>
-			</valmod>
+			<valmod type="ADEPT_POWER" ref="improved_ability_combat" value="1" />
 		</adept>
 	</mentorspirit>
 
 	<mentorspirit id="wolf">
 		<similar>fellowship</similar>
 		<similar>hunting</similar>
-		<choices>
-			<choice type="ATTRIBUTE" uuid="1ec3bdd5-f9da-4ad2-8d44-9120529830e2" options="BODY,AGILITY,REACTION,STRENGTH" />
-		</choices>
 		<modifications>
 			<checkmod type="SKILL" ref="sorcery" value="-1" what="EDGE_BOOST" cond="y"/>
 		</modifications>
@@ -258,8 +242,8 @@
 			<checkmod type="SPELL" ref="COMBAT" value="-1" what="EDGE_BOOST" />
 		</magician>
 		<adept>
-			<valmod type="ADEPT_POWER" ref="attribute_boost" value="2">
-				<decision choice="1ec3bdd5-f9da-4ad2-8d44-9120529830e2" value="CHOICE"/>
+			<valmod type="ADEPT_POWER" ref="attribute_boost"  value="2">
+				<decision choice="1ec3bdd5-f9da-4ad2-8d44-9120529830e2" value="AGILITY"/>
 			</valmod>
 		</adept>
 	</mentorspirit>

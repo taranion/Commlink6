@@ -3,6 +3,8 @@ package de.rpgframework.shadowrun6.chargen.jfx.selector;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -32,11 +34,20 @@ import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.DataItemModification;
+import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -66,6 +77,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private List<Choice> choices;
 	private Map<Choice, Decision> decisions = new LinkedHashMap<>();
 	
+	private List<Node> toDeleteOnMentorSpirit = new ArrayList<>();
+	private BooleanProperty chooseAdeptAdvantages = new SimpleBooleanProperty(false);
+	
 	//-------------------------------------------------------------------
 	public ChoiceSelectorDialog(FlexibleApplication app, ComplexDataItemController<T,V> ctrl) {
 		super("Select",null, CloseType.CANCEL, CloseType.OK);
@@ -79,6 +93,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		lbProblem.setStyle("-fx-text-fill: -fx-accent");
 		
 		setContent(new VBox(10,optional, lbProblem));
+		
+		Shadowrun6Character model = ctrl.getModel();
+		chooseAdeptAdvantages.setValue( model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers());
 	}
 
 	//-------------------------------------------------------------------
@@ -123,6 +140,14 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
+	private Node addLabel(String title) {
+		Label lbName = new Label(title);
+		lbName.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		content.getChildren().add(lbName);
+		return lbName;
+	}
+	
+	//-------------------------------------------------------------------
 	/**
 	 * @see java.util.function.BiFunction#apply(java.lang.Object, java.lang.Object)
 	 */
@@ -143,29 +168,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			content.getChildren().add(explain);
 
 			for (Choice choice : choices) {
-				logger.log(Level.DEBUG, "Choice " + choice);
-
-				Label lbName = new Label(item.getChoiceName(choice, Locale.getDefault()));
-				lbName.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-				content.getChildren().add(lbName);
-
-				switch ((ShadowrunReference) choice.getChooseFrom()) {
-				case ATTRIBUTE:
-					handleATTRIBUTE(item, choice);
-					break;
-				case SKILL:
-					handleSKILL(item, choice);
-					break;
-				case SUBSELECT:
-					handleSUBSELECT(item, choice);
-					break;
-				case TEXT:
-					handleTEXT(item, choice);
-					break;
-				default:
-					System.err.println( "Not implemented: choosing from " + choice.getChooseFrom());
-					logger.log(Level.ERROR, "Not implemented: choosing from " + choice.getChooseFrom());
-				}
+				processChoice(item,choice, null);
 			}
 
 			btnCtrl = new NavigButtonControl();
@@ -182,8 +185,43 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		}
 	}
 
+	// -------------------------------------------------------------------
+	private List<Node>  processChoice(ComplexDataItem item, Choice choice, String forceTitle) {
+		logger.log(Level.DEBUG, "Choice " + choice);
+		List<Node> ret = new ArrayList<>();
+		
+		ret.add( addLabel(
+				(forceTitle==null)
+				?
+				item.getChoiceName(choice, Locale.getDefault())
+				:
+				forceTitle)
+				);
+		switch ((ShadowrunReference) choice.getChooseFrom()) {
+		case ATTRIBUTE:
+			ret.add( handleATTRIBUTE(item, choice));
+			break;
+		case MENTOR_SPIRIT:
+			ret.add( handleMENTOR_SPIRIT(item, choice) );
+			break;
+		case SKILL:
+			ret.add( handleSKILL(item, choice) );
+			break;
+		case SUBSELECT:
+			ret.add( handleSUBSELECT(item, choice) );
+			break;
+		case TEXT:
+			ret.add( handleTEXT(item, choice) );
+			break;
+		default:
+			System.err.println("Not implemented: choosing from " + choice.getChooseFrom());
+			logger.log(Level.ERROR, "Not implemented: choosing from " + choice.getChooseFrom());
+		}
+		return ret;
+	}
+
 	//-------------------------------------------------------------------
-	private void handleSKILL(T item, Choice choice) {
+	private Node handleSKILL(ComplexDataItem item, Choice choice) {
 		ChoiceBox<SR6Skill> cbSub = new ChoiceBox<>();
 		cbSub.setConverter(new StringConverter<SR6Skill>() {
 			public SR6Skill fromString(String value) { return null;}
@@ -211,10 +249,11 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			updateButtons(); 
 			showHelpFor(n); });
 		content.getChildren().add(cbSub);
+		return cbSub;
 	}
 
 	//-------------------------------------------------------------------
-	private void handleATTRIBUTE(T item, Choice choice) {
+	private Node handleATTRIBUTE(ComplexDataItem item, Choice choice) {
 		ChoiceBox<ShadowrunAttribute> cbSub = new ChoiceBox<>();
 		cbSub.setConverter(new StringConverter<ShadowrunAttribute>() {
 			public ShadowrunAttribute fromString(String value) { return null;}
@@ -242,10 +281,130 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			updateButtons(); 
 		 });
 		content.getChildren().add(cbSub);
+		return cbSub;
 	}
 
 	//-------------------------------------------------------------------
-	private void handleSUBSELECT(T item, Choice choice) {
+	private void populateAdeptChoices(MentorSpirit n) {
+		for (Modification tmp: n.getAdeptModifications()) {
+			DataItemModification mod = (DataItemModification)tmp;
+			Object val = mod.getResolvedKey();
+			if (val instanceof ComplexDataItem) {
+				ComplexDataItem cplx = (ComplexDataItem) val;
+				for (Choice choice : cplx.getChoices()) {
+					logger.log(Level.INFO, "...... has choice "+choice);
+					Choice cloned = (Choice) choice.clone();
+					if (mod.getChoiceOptions()!=null && mod.getConnectedChoice()!=null && mod.getConnectedChoice().equals(choice.getUUID())) {
+						logger.log(Level.DEBUG, "Restrict choice options from {0} to {1}", Arrays.toString(cloned.getChoiceOptions()), mod.getChoiceOptions());
+						cloned.setChoiceOptions(mod.getChoiceOptions());
+					}
+					List<Node> added = processChoice(cplx, cloned, cplx.getName());
+					added.forEach(node -> {
+						node.visibleProperty().bind(chooseAdeptAdvantages);
+						node.managedProperty().bind(chooseAdeptAdvantages);
+					});
+				}
+			}
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void populateMagicianChoices(MentorSpirit n) {
+		for (Modification tmp: n.getMagicianModifications()) {
+			DataItemModification mod = (DataItemModification)tmp;
+			Object val = mod.getResolvedKey();
+			if (val instanceof ComplexDataItem) {
+				ComplexDataItem cplx = (ComplexDataItem) val;
+				for (Choice choice : cplx.getChoices()) {
+					logger.log(Level.INFO, "...... has choice "+choice);
+					List<Node> added = processChoice(cplx, choice, cplx.getName());
+					added.forEach(node -> {
+						node.visibleProperty().bind(chooseAdeptAdvantages.not());
+						node.managedProperty().bind(chooseAdeptAdvantages.not());
+					});
+				}
+			}
+		}
+	}
+	
+	//-------------------------------------------------------------------
+	private Node handleMENTOR_SPIRIT(ComplexDataItem item, Choice choice) {
+		ChoiceBox<MentorSpirit> cbMentor = new ChoiceBox<>();
+		cbMentor.setConverter(new StringConverter<MentorSpirit>() {
+			public MentorSpirit fromString(String value) { return null;}
+			public String toString(MentorSpirit value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			cbMentor.getItems().addAll(
+					Shadowrun6Core.getItemList(MentorSpirit.class).stream().filter(s -> ids.contains(s.getId())).collect(Collectors.toList())
+					);			
+		} else {
+			cbMentor.getItems().addAll(Shadowrun6Core.getItemList(MentorSpirit.class));
+		}
+		Collections.sort(cbMentor.getItems(), new Comparator<MentorSpirit>() {
+			public int compare(MentorSpirit o1, MentorSpirit o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbMentor.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+			
+			// Clear content from previous mentor spirit selection
+			if (o!=null && !o.getChoices().isEmpty()) {
+				choices.removeAll(o.getChoices());
+			}			
+			content.getChildren().removeAll(toDeleteOnMentorSpirit);
+			
+			// Memorize current GUI elements
+			List<Node> current = new ArrayList<Node>(content.getChildren());
+			
+			// Populate with generic decisions
+			logger.log(Level.INFO, "Choices of Mentor spirit: "+n.getChoices());
+			for (Choice tmpChoice : n.getChoices()) {
+				processChoice(item, tmpChoice, null);
+				choices.add(choice);
+			}
+			populateMagicianChoices(n);
+			populateAdeptChoices(n);
+			
+			// Compare with now updated
+			List<Node> updated = new ArrayList<Node>(content.getChildren());
+			toDeleteOnMentorSpirit  = updated.stream().filter(i -> !current.contains(i)).collect(Collectors.toList());
+
+			
+			updateButtons(); 
+			showHelpFor(n);
+		 });
+		content.getChildren().add(cbMentor);
+		
+		Shadowrun6Character model = ctrl.getModel();
+		if ( model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers() && model.getMagicOrResonanceType().usesSpells()) {
+			addLabel(ResourceI18N.get(RES, "choice.magician_adept"));
+
+			ChoiceBox<MagicOrResonanceType> cbMagOrAdp = new ChoiceBox<>();
+			cbMagOrAdp.getItems().add(Shadowrun6Core.getItem(MagicOrResonanceType.class, "magician"));
+			cbMagOrAdp.getItems().add(Shadowrun6Core.getItem(MagicOrResonanceType.class, "adept"));
+			cbMagOrAdp.setConverter(new StringConverter<MagicOrResonanceType>() {
+				public String toString(MagicOrResonanceType v) {return (v!=null)?v.getName():null;}
+				public MagicOrResonanceType fromString(String string) {return null;}
+			});
+			content.getChildren().add(cbMagOrAdp);
+			cbMagOrAdp.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+				logger.log(Level.DEBUG, "Use advantages for "+n);
+				chooseAdeptAdvantages.setValue (n!=null && n.usesPowers());
+			});
+		}
+		
+		return cbMentor;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleSUBSELECT(ComplexDataItem item, Choice choice) {
 		ChoiceBox<ChoiceOption> cbSub = new ChoiceBox<>();
 		cbSub.setConverter(new StringConverter<ChoiceOption>() {
 			public ChoiceOption fromString(String value) { return null;}
@@ -273,16 +432,18 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			updateButtons(); 
 			showHelpFor(n); });
 		content.getChildren().add(cbSub);
+		return cbSub;
 	}
 
 	//-------------------------------------------------------------------
-	private void handleTEXT(T item, Choice choice) {
+	private Node handleTEXT(ComplexDataItem item, Choice choice) {
 		TextField tfDescr = new TextField();
 		content.getChildren().add(tfDescr);
 		tfDescr.textProperty().addListener( (ov,o,n) -> {
 			decisions.put(choice, new Decision(choice, n));
 			updateButtons(); 
 		});
+		return tfDescr;
 	}
 	
 }
