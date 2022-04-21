@@ -14,6 +14,7 @@ import com.onexip.flexboxfx.FlexBox;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.jfx.ListSection;
 import de.rpgframework.jfx.section.AppearanceSection;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
@@ -23,6 +24,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.KnowledgeSkillSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SkillSection;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -38,7 +40,7 @@ public class SkillPage extends Page {
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SkillPage.class.getName());
 	
 	private SkillSection secNormal;
-	private SkillSection secKnowl;
+	private KnowledgeSkillSection secKnowl;
 	private SkillSection secLang;
 	
 	private FlexGridPane flex;
@@ -72,16 +74,19 @@ public class SkillPage extends Page {
 		FlexGridPane.setMinHeight(secNormal, 6);
 		FlexGridPane.setMediumWidth(secNormal, 8);
 		FlexGridPane.setMediumHeight(secNormal, 4);
+		FlexGridPane.setMaxWidth(secNormal, 10);
+		FlexGridPane.setMaxHeight(secNormal, 6);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initKnowledge() {
-		secKnowl = new SkillSection(ResourceI18N.get(RES, "page.skills.section.knowledge"), SkillType.KNOWLEDGE);
-		secKnowl.setMaxHeight(Double.MAX_VALUE);
+		secKnowl = new KnowledgeSkillSection(ResourceI18N.get(RES, "page.skills.section.knowledge"));
+//		secKnowl.setMaxHeight(Double.MAX_VALUE);
+//		secKnowl.setStyle("-fx-min-height: 10em; -fx-pref-height: 30em; -fx-max-width: 15em"); 
 		FlexGridPane.setMinWidth(secKnowl, 4);
-		FlexGridPane.setMinHeight(secKnowl, 6);
 		FlexGridPane.setMediumWidth(secKnowl, 4);
-		FlexGridPane.setMediumHeight(secKnowl, 6);
+		FlexGridPane.setMaxWidth(secKnowl, 5);
+		FlexGridPane.setMinHeight(secKnowl, 6);
 	}
 	
 	//-------------------------------------------------------------------
@@ -89,8 +94,9 @@ public class SkillPage extends Page {
 		secLang = new SkillSection(ResourceI18N.get(RES, "page.skills.section.language"), SkillType.LANGUAGE);
 		secLang.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secLang, 4);
-		FlexGridPane.setMinHeight(secLang, 6);
 		FlexGridPane.setMediumWidth(secLang, 4);
+		FlexGridPane.setMaxWidth(secLang, 5);
+		FlexGridPane.setMinHeight(secLang, 6);
 		FlexGridPane.setMediumHeight(secLang, 6);
 	}
 	

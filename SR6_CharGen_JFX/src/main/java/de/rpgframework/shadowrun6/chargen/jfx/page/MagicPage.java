@@ -101,7 +101,7 @@ public class MagicPage extends Page {
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
-//		secKnowl.updateController(ctrl);
+		secAdeptPowers.updateController(ctrl);
 //		secLang.updateController(ctrl);
 //		secNormal.updateController(ctrl);
 		refresh();
@@ -109,7 +109,7 @@ public class MagicPage extends Page {
 	
 	//-------------------------------------------------------------------
 	public void refresh() {
-//		secNormal.refresh();
+		secAdeptPowers.refresh();
 //		secLang.refresh();
 //		secKnowl.refresh();
 	}

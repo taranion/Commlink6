@@ -16,6 +16,7 @@ import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
+import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
@@ -45,6 +46,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 
 	ACTION(Shadowrun6Action.class),
 	ACTION_BONUS(Shadowrun6Action.Type.class, 0),
+	ADEPT_POWER(AdeptPower.class),
 	ALLERGY_ALLERGEN("Allergen"),
 	ALLERGY_SEVERITY("Severity"),
 	ATTRIBUTE(new AttributeConverter()),
