@@ -34,6 +34,8 @@ import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerList;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MagicOrResonanceTypeList;
+import de.rpgframework.shadowrun.MentorSpirit;
+import de.rpgframework.shadowrun.MentorSpiritList;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityList;
 import de.rpgframework.shadowrun.RitualFeature;
@@ -193,6 +195,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "companion/data/metatypes.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" metatypes");
+			list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, core, clazz.getResourceAsStream("core/data/mentorspirits.xml"));
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
 
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
