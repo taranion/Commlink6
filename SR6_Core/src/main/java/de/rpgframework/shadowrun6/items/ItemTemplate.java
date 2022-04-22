@@ -76,6 +76,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		// Add from usages
 		for (SR6AlternateUsage usage : super.getAlternates()) {
 			logger.log(Level.WARNING, "ToDo: Usage: "+usage);
+			ret.addAll(usage.getAttacks());
 		}
 		
 		return ret;

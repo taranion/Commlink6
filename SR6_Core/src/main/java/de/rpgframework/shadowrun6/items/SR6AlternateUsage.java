@@ -55,4 +55,17 @@ public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
 		return new ArrayList<>();
 	}
 
+	//-------------------------------------------------------------------
+	public String toString() {
+		return mode+"(type="+type+", subtype="+subtype+") with "+shortcuts;
+	}
+
+	//-------------------------------------------------------------------
+	public List<WeaponData> getAttacks() {
+		for (IGearTypeData sc : shortcuts) {
+			if (sc instanceof WeaponData)
+				return List.of( (WeaponData)sc );
+		}
+		return List.of();
+	}
 }

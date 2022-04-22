@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
@@ -93,7 +94,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED, 
 				WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
 				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,
-				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.NAME, };
+				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO, 
+				WizardPageType.NAME, };
 	}
 
 	//--------------------------------------------------------------------
@@ -117,6 +119,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		spells    = new SR6PrioritySpellGenerator(this);
 		adeptPowers = new SR6AdeptPowerGenerator(this);
 		complex   = new CommonSR6ComplexFormGenerator(this);
+		metaEcho  = new SR6MetamagicOrEchoController(this);
 	}
 
 	// --------------------------------------------------------------------
@@ -143,6 +146,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(adeptPowers);
 			processChain.add(equipment);
 			processChain.add(complex);
+			processChain.add(metaEcho);
 
 			setupDone = true;
 		} finally {

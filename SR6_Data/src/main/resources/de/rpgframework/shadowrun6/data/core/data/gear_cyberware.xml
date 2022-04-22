@@ -50,7 +50,12 @@
 		<attrdef id="PRICE" value="$RATING*30000"/>
 		<attrdef id="ESSENCECOST" value="$RATING"/>
  		<flag>AUGMENTATION</flag>
+   	<variant id="echo_machine_mind">
+			<attrdef id="PRICE" value="0"/>
+	   	<attrdef id="ESSENCECOST" value="0.0"/>
+   	</variant>
    </item>
+
    <item avail="6I" price="10000" id="cortex_kink_bomb" type="CYBERWARE" subtype="CYBER_HEADWARE">
    	<usage mode="EMBEDDED" slot="HEADWARE_IMPLANT" value="1"/>
      	<usage mode="IMPLANTED" value="0"/>

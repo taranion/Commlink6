@@ -7,9 +7,9 @@ import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
+import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.gen.CommonAttributeGenerator;
 
 /**
  * A base class for leveller and generator
@@ -26,6 +26,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected IContactController contacts;
 	protected IAdeptPowerController adeptPowers;
 	protected SR6SpellController spells;
+	protected IMetamagicOrEchoController metaEcho;
 	protected IEquipmentController equipment;
 	
 	//-------------------------------------------------------------------
@@ -108,6 +109,15 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	@Override
 	public SR6SpellController getSpellController() {
 		return spells;
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getMetamagicOrEchoController()
+	 */
+	@Override
+	public IMetamagicOrEchoController getMetamagicOrEchoController() {
+		return metaEcho;
 	}
 	
 	//-------------------------------------------------------------------

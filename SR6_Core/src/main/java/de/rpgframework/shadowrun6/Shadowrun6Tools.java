@@ -489,7 +489,11 @@ public class Shadowrun6Tools {
 			if ("CHOICE".equals( clone.getKey() )) {
 				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
 				Decision dec = value.getDecision(uuid);
-				clone.setKey( dec.getValue());
+				if (dec!=null) {
+					clone.setKey( dec.getValue());
+				} else {
+					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value);
+				}
 			}
 			
 			return clone;

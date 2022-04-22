@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -22,6 +23,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemUtil;
@@ -166,6 +169,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			Shadowrun6Character model = getModel();
 			// Reset character nuyen
 			model.setNuyen(0);
+			todos.clear();
 			
 			List<Modification> unprocessed = new ArrayList<>();
 			for (Modification tmp : previous) {
@@ -193,6 +197,12 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			}
 			model.setNuyen(nuyen);
 			logger.log(Level.INFO, "Nuyen remaining: {0}", model.getNuyen());
+			
+			if (model.getNuyen()<0) {
+				todos.add(new ToDoElement(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.TODO_NEGATIVE_NUYEN, model.getNuyen()));
+			} else if (model.getNuyen()>5000) {
+				todos.add(new ToDoElement(Severity.WARNING, IRejectReasons.RES, IRejectReasons.TODO_TOO_MANY_NUYEN, model.getNuyen()));
+			}
 			
 			return unprocessed;
 		} finally {
@@ -260,7 +270,20 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> decrease(CarriedItem<ItemTemplate> value) {
-		// TODO Auto-generated method stub
+		logger.log(Level.TRACE, "dencrease {0}", value);
+		Possible poss = canBeDecreased(value);
+		if (!poss.get()) {
+			logger.log(Level.WARNING, "Trying to increase count on item where not allowed");
+			return new OperationResult<>(poss);
+		}
+		
+		value.setCount( value.getCount()-1 );
+		logger.log(Level.INFO, "Decrease count of {0} to {1}", value, value.getCount());
+		if (value.getCount()==0) {
+			getModel().removeCarriedItem(value);
+		}
+		
+		parent.runProcessors();
 		return new OperationResult<>(value);
 	}
 	

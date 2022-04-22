@@ -24,6 +24,8 @@ import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Resistance;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
+import de.rpgframework.shadowrun.Spirit;
+import de.rpgframework.shadowrun.Sprite;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -77,8 +79,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SLOT("ItemHook"),
 	SPELL(SR6Spell.class),
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
-	SPIRIT("Spirit"),
-	SPRITE("Sprite"),
+	SPIRIT(Spirit.class),
+	SPRITE(Sprite.class),
 	SUBSELECT("Subselect"), // Subselect
 	TEXT("TEXT"),
 	;

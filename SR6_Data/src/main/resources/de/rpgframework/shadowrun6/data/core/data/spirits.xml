@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <spirits>
-  <spirit id="spirit_of_air" />
-  <spirit id="spirit_of_beasts" />
-  <spirit id="spirit_of_earth" />
-  <spirit id="spirit_of_fire" />
-  <spirit id="spirit_of_kin" />
-  <spirit id="spirit_of_water" />
+  <spirit id="air" />
+  <spirit id="beasts" />
+  <spirit id="earth" />
+  <spirit id="fire" />
+  <spirit id="kin" />
+  <spirit id="water" />
 </spirits>

@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ChoiceOption;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.requirements.Requirement;
@@ -118,9 +119,34 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 				}
 			}
 		}
+		
 		if (karma>model.getKarmaFree()) {
 			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
+
+		/* If a quality resolves to a ComplexDataItem, check for choices there too */
+		for (Decision dec : decisions) {
+			if (dec==null) continue;
+			Choice choice = value.getChoice( dec.getChoiceUUID() );
+			if (choice==null) continue;
+			switch ( (ShadowrunReference)choice.getChooseFrom()) {
+			case SUBSELECT:
+			case TEXT:
+				continue;
+			}
+			Object item = choice.getChooseFrom().resolve(dec.getValue());
+			if (item instanceof ComplexDataItem) {
+				outer:
+				for (Choice tmpC : ((ComplexDataItem)item).getChoices()) {
+					for (Decision dec2 : decisions) {
+						if (dec2.getChoiceUUID().equals(tmpC.getUUID())) {
+							continue outer;
+						}
+					}
+					requiredChoices.add(tmpC);
+				}
+			}
+		}		
 
 		// If there are decisions open, don't allow selection
 		if (!requiredChoices.isEmpty()) {

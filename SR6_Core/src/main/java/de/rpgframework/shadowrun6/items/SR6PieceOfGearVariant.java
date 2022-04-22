@@ -22,6 +22,12 @@ public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	private ItemHook slot;
 	@Attribute
 	private float size;
+	/**
+	 * Can the gear only be picked by modifications (TRUE) or
+	 * can the user freely select it (FALSE)
+	 */
+	@Attribute(name="modonly")
+	private boolean modOnly;
 
 	//-------------------------------------------------------------------
 	public SR6PieceOfGearVariant() {
@@ -51,6 +57,14 @@ public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	public List<? extends IGearTypeData> getTypeData() {
 		// TODO Auto-generated method stub
 		return new ArrayList<>();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the modOnly
+	 */
+	public boolean isModOnly() {
+		return modOnly;
 	}
 
 }

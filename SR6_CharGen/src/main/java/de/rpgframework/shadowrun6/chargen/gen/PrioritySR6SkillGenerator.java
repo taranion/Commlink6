@@ -537,7 +537,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 				SR6Skill key = sVal.getResolved();
 				
 				PerSkillPoints per = entry.getValue();
-				logger.log(Level.INFO, key+" = "+per.toString());
+				logger.log(Level.DEBUG, key+" = "+per.toString());
 				/* 
 				 * Pay skill points 
 				 */
