@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
@@ -40,10 +41,11 @@ import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -78,7 +80,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private Map<Choice, Decision> decisions = new LinkedHashMap<>();
 	
 	private List<Node> toDeleteOnMentorSpirit = new ArrayList<>();
+	/** Choice to reflect the decision of the player to use the magician or adept advantages */
+	private Choice magicianOrAdept = new Choice(CommonQualityGenerator.MENTOR_SPIRIT_ADVANTAGES, ShadowrunReference.MAGIC_RESO);
 	private BooleanProperty chooseAdeptAdvantages = new SimpleBooleanProperty(false);
+	private BooleanProperty useBothAdvantages = new SimpleBooleanProperty(false);
 	
 	//-------------------------------------------------------------------
 	public ChoiceSelectorDialog(FlexibleApplication app, ComplexDataItemController<T,V> ctrl) {
@@ -96,6 +101,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		
 		Shadowrun6Character model = ctrl.getModel();
 		chooseAdeptAdvantages.setValue( model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers());
+		useBothAdvantages.set(model.hasRuleFlag(SR6RuleFlag.MENTOR_SPIRIT_BOTH_ADVANTAGES));
 	}
 
 	//-------------------------------------------------------------------
@@ -106,10 +112,16 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	private Decision[] getDecisions() {
-		Decision[] ret = new Decision[choices.size()];
-		for (int i=0; i<choices.size(); i++) {
-			ret[i] = decisions.get(choices.get(i));
+		Decision[] ret = new Decision[decisions.size()];
+		int i=0;
+		for (Entry<Choice, Decision> entry : decisions.entrySet()) {
+			ret[i] = entry.getValue();
+			logger.log(Level.DEBUG, "Decision [{0}] = {1}", i, entry.getValue());
+			i++;
 		}
+//		for (int i=0; i<choices.size(); i++) {
+//			ret[i] = decisions.get(choices.get(i));
+//		}
 		return ret;
 	}
 
@@ -300,8 +312,8 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 					}
 					List<Node> added = processChoice(cplx, cloned, cplx.getName());
 					added.forEach(node -> {
-						node.visibleProperty().bind(chooseAdeptAdvantages);
-						node.managedProperty().bind(chooseAdeptAdvantages);
+						node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+						node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
 					});
 				}
 			}
@@ -319,8 +331,8 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 					logger.log(Level.INFO, "...... has choice "+choice);
 					List<Node> added = processChoice(cplx, choice, cplx.getName());
 					added.forEach(node -> {
-						node.visibleProperty().bind(chooseAdeptAdvantages.not());
-						node.managedProperty().bind(chooseAdeptAdvantages.not());
+						node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
+						node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
 					});
 				}
 			}
@@ -357,6 +369,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			// Clear content from previous mentor spirit selection
 			if (o!=null && !o.getChoices().isEmpty()) {
 				choices.removeAll(o.getChoices());
+				o.getChoices().forEach(c -> decisions.remove(o));
 			}			
 			content.getChildren().removeAll(toDeleteOnMentorSpirit);
 			
@@ -383,7 +396,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		content.getChildren().add(cbMentor);
 		
 		Shadowrun6Character model = ctrl.getModel();
-		if ( model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers() && model.getMagicOrResonanceType().usesSpells()) {
+		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers() && model.getMagicOrResonanceType().usesSpells()) {
 			addLabel(ResourceI18N.get(RES, "choice.magician_adept"));
 
 			ChoiceBox<MagicOrResonanceType> cbMagOrAdp = new ChoiceBox<>();
@@ -396,6 +409,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			content.getChildren().add(cbMagOrAdp);
 			cbMagOrAdp.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 				logger.log(Level.DEBUG, "Use advantages for "+n);
+				decisions.put(magicianOrAdept, new Decision(magicianOrAdept, n.getId()));
 				chooseAdeptAdvantages.setValue (n!=null && n.usesPowers());
 			});
 		}
@@ -440,6 +454,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		TextField tfDescr = new TextField();
 		content.getChildren().add(tfDescr);
 		tfDescr.textProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n));
 			updateButtons(); 
 		});

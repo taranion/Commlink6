@@ -19,6 +19,7 @@ import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Resistance;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -36,7 +37,7 @@ import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.persist.ItemAttributeConverter;
-import de.rpgframework.shadowrun6.persist.RuleConverter;
+import de.rpgframework.shadowrun6.persist.RuleFlagConverter;
 import de.rpgframework.shadowrun6.persist.SkillSpecializationConverter;
 /**
  * @author prelle
@@ -61,13 +62,13 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	LIFESTYLE("Lifestyle"),
 	MAGIC_RESO(MagicOrResonanceType.class),
 	MATRIX_ATTRIBUTE(new ItemAttributeConverter()),
-	MENTOR_SPIRIT("Mentorspirit"),
+	MENTOR_SPIRIT(MentorSpirit.class),
 	METATYPE(SR6MetaType.class),
 	POOL("Pool"), // Derived values like defense pool
 	PROGRAM("Program"), // 
 	// All Resistance tests
 	RESISTANCE(Resistance.class,0),
-	RULE(new RuleConverter()),
+	RULE(new RuleFlagConverter()),
 	QUALITY(Quality.class),
 	SENSE("Sense"),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
