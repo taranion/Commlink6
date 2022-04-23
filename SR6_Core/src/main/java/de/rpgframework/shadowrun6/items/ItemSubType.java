@@ -192,6 +192,8 @@ public enum ItemSubType {
 	TRANSGENETICS,
 	MICRO_ENVIRONADAPT,
 	COMPLEMENTAL_GENETICS, 
+	// PACKS
+	COMPLETE_PACK
     ;
 
 //    public String getName() {

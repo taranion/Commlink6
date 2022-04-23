@@ -2,9 +2,34 @@
 <items>
    <item id="shadowrunner_starter_pack" price="25000" type="PACK" subtype="COMPLETE_PACK">
       <modifications>
-         <embed rf="fake_sin">
+         <!--itemmod type="GEAR" ref="fake_sin">
          	<decision uuid="" ref="4"/>
-         </embed>
+         </itemmod-->
+         <itemmod type="GEAR" ref="hermes_ikon"/>
+         <itemmod type="GEAR" ref="meta_link"/>
+         <itemmod type="GEAR" ref="stealth_tag"/>
+         <itemmod type="GEAR" ref="bug_scanner"/>
+         <itemmod type="GEAR" ref="tag_eraser"/>
+         <itemmod type="GEAR" ref="jammer_area"><decision choice="720ed738-46d2-4124-bd6f-5ed62025be20" value="6"/></itemmod>
+         <itemmod type="GEAR" ref="micro-transceiver"/>
+         <itemmod type="GEAR" ref="plastic_straps"/>
+         <itemmod type="GEAR" ref="miniwelder"/>
+         <itemmod type="GEAR" ref="miniwelder_fuel"/>
+         <itemmod type="GEAR" ref="miniwelder_fuel"/>
+         <itemmod type="GEAR" ref="gas_mask"/>
+         <itemmod type="GEAR" ref="respirator"><decision choice="56b520d3-0a66-45dd-ae9c-0cff597895cc" value="6"/></itemmod>
+         <itemmod type="GEAR" ref="climbing_gear"/>
+         <itemmod type="GEAR" ref="survival_kit"/>
+         <itemmod type="GEAR" ref="flashlight"/>
+         <itemmod type="GEAR" ref="gecko_tape_gloves"/>
+         <itemmod type="GEAR" ref="grapple_gun"/>
+         <itemmod type="GEAR" ref="biomonitor"/>
+         <itemmod type="GEAR" ref="stim_patch"><decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="6"/></itemmod>
+         <itemmod type="GEAR" ref="stim_patch"><decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="6"/></itemmod>
+         <itemmod type="GEAR" ref="trauma_patch"/>
+         <itemmod type="GEAR" ref="trauma_patch"/>
+         <!--itemmod type="LIFESTYLE" ref="low"/-->
+         <itemmod type="GEAR" ref="trid_projector"/>
       </modifications>
    </item>
 </items>

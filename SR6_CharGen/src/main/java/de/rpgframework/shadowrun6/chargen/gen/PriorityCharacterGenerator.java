@@ -95,7 +95,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 				WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
 				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,
 				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO, 
-				WizardPageType.NAME, };
+				WizardPageType.GEAR, WizardPageType.NAME, };
 	}
 
 	//--------------------------------------------------------------------

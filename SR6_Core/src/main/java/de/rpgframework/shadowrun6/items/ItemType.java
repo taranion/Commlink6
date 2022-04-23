@@ -83,6 +83,9 @@ public enum ItemType {
 			ItemSubType.MICRO_ENVIRONADAPT,
 			ItemSubType.COMPLEMENTAL_GENETICS
 			),
+	PACK(
+			ItemSubType.COMPLETE_PACK
+			),
 	WEAPON_CLOSE_COMBAT(
 			ItemSubType.BLADES,
 			ItemSubType.CLUBS,

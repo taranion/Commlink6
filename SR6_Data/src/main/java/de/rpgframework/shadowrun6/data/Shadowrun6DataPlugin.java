@@ -191,6 +191,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
 			list = Shadowrun6Core.loadDataItems(SpiritList.class, Spirit.class, core, clazz, "core/data/spirits.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" spirits");
+			list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, core, clazz.getResourceAsStream("core/data/mentorspirits.xml"));
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
 			
 			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" rule presets");
@@ -205,8 +207,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "companion/data/metatypes.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" metatypes");
-			list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, core, clazz.getResourceAsStream("core/data/mentorspirits.xml"));
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-complete.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" complete PACKs");
 
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());

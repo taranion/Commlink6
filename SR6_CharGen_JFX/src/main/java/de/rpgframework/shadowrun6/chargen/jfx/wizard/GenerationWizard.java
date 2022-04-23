@@ -62,6 +62,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private WizardPageAdeptPowers powers;
 	private WizardPageComplexForms complexForms;
 	private SR6WizardPageMetaOrEcho metaEchoes;
+	private SR6WizardPageGear gear;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
 		String name = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName());
@@ -98,7 +99,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case POWERS       : ret.add(   powers); break;
 			case COMPLEX_FORMS: ret.add(complexForms); break;
 			case METAECHO     : ret.add(metaEchoes); break;
-//			case RECOMMENDER  : ret.add(profiles); break;
+			case GEAR         : ret.add(   gear); break;
 			case NAME         : ret.add(   name); break;
 			default:
 				logger.log(Level.ERROR,"Unsupported page type "+type);
@@ -127,6 +128,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		powers = new SR6WizardPageAdeptPowers(this, wrapper);
 		complexForms = new WizardPageComplexForms(this, wrapper);
 		metaEchoes   = new SR6WizardPageMetaOrEcho(this, wrapper);
+		gear   = new SR6WizardPageGear(this, wrapper);
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		name   = new WizardPageName<>(this, wrapper);
 		
