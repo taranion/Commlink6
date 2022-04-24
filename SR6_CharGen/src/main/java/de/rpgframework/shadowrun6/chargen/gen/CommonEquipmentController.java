@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -26,6 +27,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -36,6 +38,8 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class CommonEquipmentController extends ControllerImpl<ItemTemplate> implements IEquipmentController {
 
+	private int conversionRate = 2000;
+	
 	//-------------------------------------------------------------------
 	public CommonEquipmentController(SR6CharacterController parent) {
 		super(parent);
@@ -108,6 +112,22 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				return new Possible(Possible.State.DECISIONS_MISSING, IRejectReasons.IMPOSS_MISSING_DECISIONS);
 		}
 		
+		OperationResult<CarriedItem<ItemTemplate>> carried = GearTool.buildItem(value, decisions);
+		// Check availability
+		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
+			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
+			if (avail!=null && avail.getValue() >= 7) {
+				return new Possible(Possible.State.IMPOSSIBLE, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH);
+			}
+		}
+		// Check money
+		if (carried.get().getAsValue(SR6ItemAttribute.PRICE) != null) {
+			int nuyen = carried.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+			if (nuyen>getModel().getNuyen()) {
+				return new Possible(Possible.State.IMPOSSIBLE, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN);
+			}
+		}
+		
 		return Possible.TRUE;
 	}
 
@@ -134,7 +154,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			parent.runProcessors();
 			return new OperationResult<CarriedItem<ItemTemplate>>(item);
 		} finally {
-			logger.log(Level.TRACE, "LEAVE select({0}, {0}", value, List.of(decisions));
+			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, List.of(decisions));
 		}
 	}
 
@@ -151,10 +171,28 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		return Possible.TRUE;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
 	@Override
 	public boolean deselect(CarriedItem<ItemTemplate> value) {
-		// TODO Auto-generated method stub
-		return false;
+		logger.log(Level.TRACE, "ENTER deselect({0})", value);
+		try {
+			Possible poss = canBeDeselected(value);
+			if (!poss.get()) {
+				logger.log(Level.ERROR, "Trying to deselect {0} which may not be deselected: {1}", value, poss.toString());
+				return false;
+			}
+
+			logger.log(Level.INFO, "Remove {0 frommodel", value.toString());
+			getModel().removeCarriedItem(value);
+			
+			parent.runProcessors();
+			return true;
+		} finally {
+			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -168,6 +206,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			Shadowrun6Character model = getModel();
 			// Reset character nuyen
 			model.setNuyen(0);
+			conversionRate = 2000;
 			todos.clear();
 			
 			List<Modification> unprocessed = new ArrayList<>();
@@ -185,12 +224,21 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			}
 			logger.log(Level.INFO, "{0} Nuyen available", model.getNuyen());
 			
+			/* Expand PACKs */
+			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
+				if (tmp.getModifyable().getItemType()==ItemType.PACK) {
+					logger.log(Level.WARNING, "ToDo: handle PACK "+tmp);
+				}
+			}
+			
+			
+			
 			/*
 			 * Walk through all items and pay for them
 			 */
 			int nuyen = model.getNuyen();
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
-				logger.log(Level.DEBUG, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE), tmp.getNameWithRating());
+				logger.log(Level.INFO, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE), tmp.getNameWithRating());
 				int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 				nuyen -= cost;
 			}
@@ -344,6 +392,45 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		} finally {
 			logger.log(Level.TRACE, "LEAVE embed{0}", value);
 		}
+	}
+
+	@Override
+	public int getConvertedKarma() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#getConversionRateKarma()
+	 */
+	@Override
+	public int getConversionRateKarma() {
+		return conversionRate;
+	}
+
+	@Override
+	public boolean canIncreaseConversion() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean increaseConversion() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canDecreaseConversion() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean decreaseConversion() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+
 /**
  * @author prelle
  *
@@ -243,6 +245,11 @@ public enum ItemType {
 //    public String getName() {
 //        return Resource.get(ShadowrunCore.getI18nResources(),"itemtype."+name().toLowerCase());
 //    }
+	
+	//-------------------------------------------------------------------
+	public String getName() {
+		return Shadowrun6Core.getI18nResources().getString("itemtype."+this.name().toLowerCase());
+	}
 
     public ItemSubType[] getSubTypes() {
     	return subTypes;

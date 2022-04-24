@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -65,11 +66,13 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 	};
 	
 	private Sort currentSort = Sort.NAME;
-
+	private ItemType preselect;
+	
 	//-------------------------------------------------------------------
-	public ItemTemplateFilterNode(ResourceBundle RES, ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>> parent, ItemType...types) {
+	public ItemTemplateFilterNode(ResourceBundle RES, ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>> parent, ItemType preselect, ItemType...types) {
 		super(parent);
 		this.RES = RES;
+		this.preselect = preselect;
 		allowedTypes = List.of(types);
 		initComponents();
 		initLayout();
@@ -81,12 +84,19 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 	private void initComponents() {
 		cbTypes = new ChoiceBox<ItemType>();
 		cbTypes.getItems().addAll(ItemType.values());
-//		cbTypes.setValue(What.ALL);
+		if (!allowedTypes.isEmpty())
+			cbTypes.getItems().setAll(allowedTypes);
+		if (preselect!=null)
+			cbTypes.setValue(preselect);
 		cbTypes.setConverter(new StringConverter<ItemType>() {
-			public String toString(ItemType what) { return (what!=null)?ResourceI18N.get(RES, "itemtype."+what.name().toLowerCase()):"";}
+			public String toString(ItemType what) { return (what!=null)?what.getName():"";}
 			public ItemType fromString(String arg0) {return null;}
 		});
 		cbSubTypes = new ChoiceBox<ItemSubType>();
+		cbSubTypes.setConverter(new StringConverter<ItemSubType>() {
+			public String toString(ItemSubType what) { return (what!=null)?what.getName():"";}
+			public ItemSubType fromString(String arg0) {return null;}
+		});
 		
 		btnSort = new Button(null,new SymbolIcon("sort"));
 		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "quality.sort.tooltip")));
@@ -121,6 +131,10 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 		
 		cbTypes.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.INFO, "Selection changed");
+			updateSubtypes();
+			refreshAvailable();
+		});
+		cbSubTypes.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			refreshAvailable();
 		});
 		
@@ -128,13 +142,38 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 	}
 	
 	//-------------------------------------------------------------------
-	private void refreshAvailable() {
+	private void updateSubtypes() {
 		ItemType n = cbTypes.getValue();
 		final String search = tfSearch.getText().toLowerCase();
 		List<ItemTemplate> unfiltered = parent.getController().getAvailable();
 		List<ItemTemplate> filtered = unfiltered.stream()
 //			.filter(q -> allowedTypes.contains(q.getItemType()))
 			.filter(q -> (n==q.getItemType()))
+			.filter(q -> (search==null || search.isBlank() || q.getName().toLowerCase().contains(search)))
+			.collect(Collectors.toList());
+
+		// Build a list of available subtypes
+		ItemSubType s = cbSubTypes.getValue();
+		List<ItemSubType> stList = new ArrayList<>();
+		filtered.forEach(t -> {if (!stList.contains(t.getItemSubtype())) stList.add(t.getItemSubtype());});
+		Collections.sort(stList, new Comparator<ItemSubType>() {
+			public int compare(ItemSubType o1, ItemSubType o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}
+		});
+		cbSubTypes.getItems().setAll(stList);
+	}	
+	
+	//-------------------------------------------------------------------
+	private void refreshAvailable() {
+		ItemType n = cbTypes.getValue();
+		ItemSubType s = cbSubTypes.getValue();
+		final String search = tfSearch.getText().toLowerCase();
+		List<ItemTemplate> unfiltered = parent.getController().getAvailable();
+		List<ItemTemplate> filtered = unfiltered.stream()
+//			.filter(q -> allowedTypes.contains(q.getItemType()))
+			.filter(q -> (n==null || n==q.getItemType()))
+			.filter(q -> (s==null || s==q.getItemSubtype()))
 			.filter(q -> (search==null || search.isBlank() || q.getName().toLowerCase().contains(search)))
 			.collect(Collectors.toList());
 		logger.log(Level.INFO, "{0} items now", filtered.size());

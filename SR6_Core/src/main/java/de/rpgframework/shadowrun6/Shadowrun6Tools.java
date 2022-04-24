@@ -433,6 +433,21 @@ public class Shadowrun6Tools {
 					return true;
 			}
 			return false;
+		} else if (req instanceof ValueRequirement) {
+			ValueRequirement tmp = (ValueRequirement)req;
+			int max = tmp.getMax();
+			int min = tmp.getValue();
+			ShadowrunReference type = (ShadowrunReference)tmp.getType();			
+			DataItem item = ShadowrunReference.resolve(type, req.getKey());
+			switch (type) {
+			case SKILL:
+				int val = model.getSkillValue( (SR6Skill)item).getModifiedValue();
+				if (min>0 && val<min) return false;
+				if (max>0 && val>min) return false;
+				return true;
+			default:
+				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type);
+			}			
 		}
 		System.err.println("Shadowrun6Tool: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
 		logger.log(Level.WARNING,"ToDo: Requirement checking not supported for "+req.getClass()+" and "+req.getType());

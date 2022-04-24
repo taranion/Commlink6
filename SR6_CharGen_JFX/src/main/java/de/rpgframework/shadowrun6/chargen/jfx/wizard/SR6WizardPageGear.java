@@ -19,26 +19,24 @@ import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
-import de.rpgframework.shadowrun.MagicOrResonanceType;
-import de.rpgframework.shadowrun.Quality.QualityType;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
-import de.rpgframework.shadowrun.chargen.jfx.listcell.ComplexDataItemListCell;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemTemplateFilterNode;
-import de.rpgframework.shadowrun6.chargen.jfx.QualityFilterNode;
+import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -52,7 +50,9 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 
 	protected SR6CharacterController charGen;
 	
-	private Label lbPPCurrent, lbPPMax;
+	private Label lbConverted, lbConvNuyen;
+	private Button btnDec;
+	private Button btnInc;
 	
 	protected ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>> selection;
 	protected GenericDescriptionVBox<ItemTemplate> bxDescription;
@@ -74,15 +74,17 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	
 	//-------------------------------------------------------------------
 	protected void initComponents() {
-		lbPPCurrent = new Label("?");
-		lbPPMax     = new Label("?");
+		lbConverted = new Label("?");
+		lbConvNuyen = new Label("?");
+		btnDec = new Button("-");
+		btnInc = new Button("+");
 		
 		selection = new ComplexDataItemControllerNode<>(charGen.getEquipmentController());
 		
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.available"));
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.selected"));
 		
-		selection.setAvailableCellFactory(lv -> new ComplexDataItemListCell<ItemTemplate>( () -> charGen.getEquipmentController()));
+		selection.setAvailableCellFactory(lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController()));
 		selection.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell( () -> charGen.getEquipmentController()));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		
@@ -90,7 +92,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		
 		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection, ItemType.PACK));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), charGen.getEquipmentController()));
-//		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
+		selection.setSelectedFilter(qv -> qv.getModifyable().getItemType()==ItemType.PACK);
 		
 		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
 	}
@@ -111,19 +113,25 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		}
 		
 		// Information about spent PP
-		Label hdUnspent = new Label(ResourceI18N.get(RES, "page.gear.unspent"));
-		hdUnspent.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-		HBox selectedHeading = new HBox(10, hdUnspent, lbPPCurrent, new Label("/"), lbPPMax);
-		selection.setSelectedListHead(selectedHeading);
+		Label hdConverted = new Label(ResourceI18N.get(RES, "page.gear.converted"));
+		Label hdNuyen     = new Label(ResourceI18N.get(RES, "page.gear.nuyen"));
+		hdConverted.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		hdNuyen.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		HBox conversion = new HBox(10, btnDec, lbConverted, btnInc, hdConverted, lbConvNuyen, hdNuyen);
+		conversion.setAlignment(Pos.CENTER_LEFT);
+		
+		VBox col1 = new VBox(10, conversion, selection);
 		
 		
-		layout = new OptionalNodePane(selection, bxDescription);
+		layout = new OptionalNodePane(col1, bxDescription);
 		layout.setId("optional-spells");
 		setContent(layout);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
+		btnDec.setOnAction(ev -> charGen.getEquipmentController().decreaseConversion());
+		btnInc.setOnAction(ev -> charGen.getEquipmentController().increaseConversion());
 		selection.showHelpForProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.INFO, "show help for "+n);
 			bxDescription.setData(n);
@@ -137,11 +145,15 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 
 	//-------------------------------------------------------------------
 	protected void refresh() {
+		backHeaderKarma.setValue(charGen.getModel().getKarmaFree());
+		backHeaderNuyen.setValue(charGen.getModel().getNuyen());
+		btnDec.setDisable(!charGen.getEquipmentController().canDecreaseConversion());
+		btnInc.setDisable(!charGen.getEquipmentController().canIncreaseConversion());
 //		MagicOrResonanceType morType = charGen.getModel().getMagicOrResonanceType();
 //		activeProperty().set( morType!=null && morType.usesSpells()); 
-//		selection.refresh();
+		selection.refresh();
 		
-//		lbPPCurrent.setText( String.valueOf(charGen.getSpellController().get) );
+		lbConverted.setText( String.valueOf(charGen.getEquipmentController().getConvertedKarma()) );
 	}
 	
 	//-------------------------------------------------------------------

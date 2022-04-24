@@ -29,5 +29,23 @@ public interface IEquipmentController extends
 	public Possible canBeEmbedded(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, Decision...decisions);
 
 	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, Decision...decisions);
+
+	//-------------------------------------------------------------------
+	public int getConvertedKarma();
+
+	//-------------------------------------------------------------------
+	public int getConversionRateKarma();
+
+	//-------------------------------------------------------------------
+	public boolean canIncreaseConversion();
+
+	//-------------------------------------------------------------------
+	public boolean increaseConversion();
+
+	//-------------------------------------------------------------------
+	public boolean canDecreaseConversion();
+
+	//-------------------------------------------------------------------
+	public boolean decreaseConversion();
 	
 }

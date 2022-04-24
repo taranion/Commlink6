@@ -3,6 +3,8 @@
  */
 package de.rpgframework.shadowrun6.items;
 
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+
 /**
  * @author prelle
  *
@@ -195,9 +197,11 @@ public enum ItemSubType {
 	// PACKS
 	COMPLETE_PACK
     ;
+	
+	//-------------------------------------------------------------------
+	public String getName() {
+		return Shadowrun6Core.getI18nResources().getString("itemsubtype."+this.name().toLowerCase());
+	}
 
-//    public String getName() {
-//        return ResourceI18N.get(ShadowrunCore.getI18nResources(),"itemsubtype."+name().toLowerCase());
-//    }
-
+	
 }
