@@ -14,5 +14,8 @@ public interface SR6CharacterController extends IShadowrunCharacterController<SR
 	public SR6SkillController getSkillController();
 
 	public IEquipmentController getEquipmentController();
+
+	@SuppressWarnings("unchecked")
+	public SR6LifestyleController getLifestyleController();
 	
 }

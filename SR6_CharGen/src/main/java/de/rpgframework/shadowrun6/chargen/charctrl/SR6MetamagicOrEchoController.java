@@ -262,7 +262,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		// TODO Auto-generated method stub
-		return null;
+		return unprocessed;
 	}
 
 }

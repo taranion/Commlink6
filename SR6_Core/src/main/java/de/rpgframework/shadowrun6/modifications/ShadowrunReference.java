@@ -39,6 +39,7 @@ import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.persist.ItemAttributeConverter;
+import de.rpgframework.shadowrun6.persist.LifestyleQualityConverter;
 import de.rpgframework.shadowrun6.persist.RuleFlagConverter;
 import de.rpgframework.shadowrun6.persist.SkillSpecializationConverter;
 /**
@@ -61,7 +62,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ITEM_ATTRIBUTE(new ItemAttributeConverter()),
 	ITEMTYPE(ItemType.class,0),
 	ITEMSUBTYPE(ItemSubType.class,0),
-	LIFESTYLE("Lifestyle"),
+	LIFESTYLE(new LifestyleQualityConverter()),
 	MAGIC_RESO(MagicOrResonanceType.class),
 	MATRIX_ATTRIBUTE(new ItemAttributeConverter()),
 	MENTOR_SPIRIT(MentorSpirit.class),

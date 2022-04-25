@@ -36,7 +36,7 @@
 			<choice type="SKILL" uuid="05054102-0183-482a-9e2b-84bc8d5f153f" options="athletics,biotech,con,conjuring,cracking,electronics,engineering,influence,outdoors,perception,piloting,stealth" />
 		</choices>
      <modifications>
-        <valmod type="SKILL" ref="CHOICE" choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="1" set="AUGMENTED"/>
+        <valmod type="SKILL" ref="CHOICE" choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="1" />
      </modifications>
      <requires>
        <valuereq type="SKILL" ref="CHOICE" choice="05054102-0183-482a-9e2b-84bc8d5f153f" min="1" apply="CHARACTER"/>

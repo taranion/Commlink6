@@ -28,6 +28,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected SR6SpellController spells;
 	protected IMetamagicOrEchoController metaEcho;
 	protected IEquipmentController equipment;
+	protected SR6LifestyleController lifestyles;
 	
 	//-------------------------------------------------------------------
 	public SR6CharacterControllerImpl() {
@@ -127,6 +128,15 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	@Override
 	public IEquipmentController getEquipmentController() {
 		return equipment;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getLifestyleController()
+	 */
+	@Override
+	public SR6LifestyleController getLifestyleController() {
+		return lifestyles;
 	}
 
 }

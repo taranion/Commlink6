@@ -3,7 +3,6 @@ package de.rpgframework.shadowrun6.chargen;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -23,7 +22,6 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
-import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Quality;
@@ -37,15 +35,14 @@ import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
-import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
@@ -115,6 +112,7 @@ public class PrioQualGenTest {
 			public IMetamagicOrEchoController getMetamagicOrEchoController() { return null;}
 			public IComplexFormController getComplexFormController() { return null;}
 			public IContactController getContactController() { return null;}
+			public SR6LifestyleController getLifestyleController() { return null;}
 			@Override
 			public String getName() {
 				// TODO Auto-generated method stub

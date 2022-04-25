@@ -14,6 +14,7 @@ import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
@@ -120,6 +121,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		adeptPowers = new SR6AdeptPowerGenerator(this);
 		complex   = new CommonSR6ComplexFormGenerator(this);
 		metaEcho  = new SR6MetamagicOrEchoController(this);
+		lifestyles= new SR6LifestyleGenerator(this);
 	}
 
 	// --------------------------------------------------------------------
@@ -144,9 +146,11 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(skills);
 			processChain.add(spells);
 			processChain.add(adeptPowers);
+			processChain.add(new GetModificationsFromGear(model));
 			processChain.add(equipment);
 			processChain.add(complex);
 			processChain.add(metaEcho);
+			processChain.add(lifestyles);
 
 			setupDone = true;
 		} finally {

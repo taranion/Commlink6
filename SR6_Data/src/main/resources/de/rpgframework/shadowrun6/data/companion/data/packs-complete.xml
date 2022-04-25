@@ -28,7 +28,7 @@
          <itemmod type="GEAR" ref="stim_patch"><decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="6"/></itemmod>
          <itemmod type="GEAR" ref="trauma_patch"/>
          <itemmod type="GEAR" ref="trauma_patch"/>
-         <!--itemmod type="LIFESTYLE" ref="low"/-->
+         <itemmod type="LIFESTYLE" ref="low"/>
          <itemmod type="GEAR" ref="trid_projector"/>
       </modifications>
    </item>

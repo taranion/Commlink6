@@ -598,4 +598,22 @@ public class SR6ArchetypeTest {
 		charGen.getMetatypeController().canBeSelected(human);
 		charGen.getMetatypeController().select(human);
 	}
+	
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testPACK() throws CharacterIOException {
+		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
+		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
+		prio.setPriority(PriorityType.METATYPE, Priority.C);
+		prio.setPriority(PriorityType.MAGIC, Priority.B);
+		prio.setPriority(PriorityType.SKILLS, Priority.E);
+		prio.setPriority(PriorityType.RESOURCES, Priority.D);
+		assertEquals(50, model.getKarmaFree());
+		
+		charGen.getEquipmentController().select(Shadowrun6Core.getItem(ItemTemplate.class, "shadowrunner_starter_pack"));
+		byte[] raw = Shadowrun6Core.encode(model);
+		String xml = new String(raw);
+		System.out.println(xml);
+	}
 }

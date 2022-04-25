@@ -32,6 +32,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 
 /**
@@ -354,6 +355,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public IMetamagicOrEchoController getMetamagicOrEchoController() {
 		return wrapped.getMetamagicOrEchoController();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getLifestyleController()
+	 */
+	@Override
+	public SR6LifestyleController getLifestyleController() {
+		return wrapped.getLifestyleController();
 	}
 
 }

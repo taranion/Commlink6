@@ -1,6 +1,10 @@
 package de.rpgframework.shadowrun6;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.prelle.simplepersist.Element;
+import org.prelle.simplepersist.ElementList;
 import org.prelle.simplepersist.Root;
 
 import de.rpgframework.character.RuleSpecificCharacterObject;
@@ -24,10 +28,13 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	private PowerLevel powerLevel;
 	@Element
 	private int heat;
+	@ElementList(entry="lifestyle", type = SR6Lifestyle.class, inline = false)
+	private List<SR6Lifestyle> lifestyles;
 	
 	//-------------------------------------------------------------------
 	public Shadowrun6Character() {
 		gender = Gender.MALE;
+		lifestyles = new ArrayList<>();
 		
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			attributes.add(new AttributeValue<ShadowrunAttribute>(key, 1));
@@ -126,6 +133,25 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	 */
 	public void setPowerLevel(PowerLevel powerLevel) {
 		this.powerLevel = powerLevel;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the qualities
+	 */
+	public List<SR6Lifestyle> getLifestyles() {
+		return lifestyles;
+	}
+
+	//-------------------------------------------------------------------
+	public void addLifestyle(SR6Lifestyle value) {
+		if (!lifestyles.contains(value))
+			lifestyles.add(value);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeLifestyle(SR6Lifestyle value) {
+		lifestyles.remove(value);
 	}
 
 }

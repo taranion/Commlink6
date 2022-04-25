@@ -15,6 +15,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -216,7 +217,22 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 					if (mod.getReferenceType()==ShadowrunReference.CREATION_POINTS && mod.getResolvedKey()==CreatePoints.NUYEN) {
 						model.setNuyen( model.getNuyen() + mod.getValue());
 						logger.log(Level.DEBUG, "consume {0}", tmp);
-					}
+					} else if (mod.getReferenceType()==ShadowrunReference.GEAR) {
+						ItemTemplate template = mod.getResolvedKey();
+						model.setNuyen( model.getNuyen() + mod.getValue());
+						logger.log(Level.DEBUG, "add {0}", template);
+					} else
+						unprocessed.add(tmp);
+				} else if (tmp instanceof DataItemModification) {
+					DataItemModification mod = (DataItemModification)tmp;
+					if (mod.getReferenceType()==ShadowrunReference.GEAR) {
+						ItemTemplate template = mod.getResolvedKey();
+						Decision[] dec = new Decision[mod.getDecisions().size()];
+						OperationResult<CarriedItem<ItemTemplate>> carry = GearTool.buildItem(template, mod.getDecisions().toArray(dec));
+						logger.log(Level.DEBUG, "add {0}", template);
+						model.addCarriedItem(carry.get());
+					} else
+						unprocessed.add(tmp);
 				} else {
 					// No ValueModification
 					unprocessed.add(tmp);
@@ -238,7 +254,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			 */
 			int nuyen = model.getNuyen();
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
-				logger.log(Level.INFO, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE), tmp.getNameWithRating());
+				logger.log(Level.INFO, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue(), tmp.getNameWithRating());
 				int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 				nuyen -= cost;
 			}
