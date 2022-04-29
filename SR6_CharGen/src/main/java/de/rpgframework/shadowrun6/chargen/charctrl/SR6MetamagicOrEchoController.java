@@ -1,7 +1,11 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
@@ -10,16 +14,20 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.GenericRPGTools;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -28,6 +36,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho>
 		implements IMetamagicOrEchoController {
 
+	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".metaecho");
+	
 	//-------------------------------------------------------------------
 	public SR6MetamagicOrEchoController(SR6CharacterController parent) {
 		super(parent);
@@ -135,6 +145,17 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	 */
 	@Override
 	public Possible canBeSelected(MetamagicOrEcho value, Decision... decisions) {
+		logger.log(Level.WARNING, "canBeSelected {0}, {1}", value, Arrays.toString( decisions ));
+		// Check if all requirements are met
+		List<Requirement> notMet = new ArrayList<>();
+		for (Requirement req : value.getRequirements()) {
+			if (!Shadowrun6Tools.isRequirementMet(getModel(), value, req, decisions)) {
+				notMet.add(req);
+			}
+		}
+		if (notMet.size()>0) {
+			return new Possible(notMet, (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		}
 		// Is it available in general?
 		if (!getAvailable().contains(value)) {
 			return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
@@ -229,39 +250,178 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
+	 */
 	@Override
 	public float getSelectionCost(MetamagicOrEcho data) {
-		// TODO Auto-generated method stub
-		return 0;
+		return 10 + getGrade() +1;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeIncreased(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
 	public Possible canBeIncreased(MetamagicOrEchoValue value) {
-		// TODO Auto-generated method stub
-		return null;
+		// It must be already possessed
+		if (!getModel().getMetamagicOrEchoes().contains(value)) {
+			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
+		}
+		
+		MetamagicOrEcho item = value.getModifyable();
+		if (!item.hasLevel()) {
+			return new Possible(IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
+		}
+
+		// Calculate Karma cost
+		int karma = 10 + getGrade() +1;
+		
+		if (getModel().getKarmaFree()<karma) {
+			return new Possible(false, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+		}
+		return Possible.TRUE;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeDecreased(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
 	public Possible canBeDecreased(MetamagicOrEchoValue value) {
-		// TODO Auto-generated method stub
-		return null;
+		// It must be already possessed
+		if (!getModel().getMetamagicOrEchoes().contains(value)) {
+			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
+		}
+		
+		MetamagicOrEcho item = value.getModifyable();
+		if (!item.hasLevel()) {
+			return new Possible(IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
+		}
+		
+		if (value.getDistributed()<1) {
+			return new Possible(false, IRejectReasons.IMPOSS_MIN_LEVEL_REACHED);
+		}
+		return Possible.TRUE;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
 	public OperationResult<MetamagicOrEchoValue> increase(MetamagicOrEchoValue value) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.log(Level.TRACE, "ENTER increase({0})", value);
+		try {
+			Possible possible = canBeIncreased(value);
+			if (possible.getState()!=State.POSSIBLE) {
+				logger.log(Level.ERROR, "Trying to increase a metamagic/echo that cannot be selected: {0}",possible.getI18NKey());
+				return new OperationResult<MetamagicOrEchoValue>(possible, false);
+			}
+
+			int karma = 10 + getGrade() +1;
+			value.setDistributed(value.getDistributed()+1);
+
+			logger.log(Level.INFO, "Increased metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
+			Shadowrun6Character model = getModel(); 
+			model.setKarmaFree( model.getKarmaFree() - karma);
+			model.setKarmaInvested( model.getKarmaInvested() + karma);
+
+			parent.runProcessors();
+			return new OperationResult<MetamagicOrEchoValue>(value);
+		} finally {
+			logger.log(Level.TRACE, "LEAVE increase({0})", value);
+		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#decrease(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
 	public OperationResult<MetamagicOrEchoValue> decrease(MetamagicOrEchoValue value) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.log(Level.TRACE, "ENTER decrease({0})", value);
+		try {
+			Possible possible = canBeIncreased(value);
+			if (possible.getState()!=State.POSSIBLE) {
+				logger.log(Level.ERROR, "Trying to decrease a metamagic/echo that cannot be selected: {0}",possible.getI18NKey());
+				return new OperationResult<MetamagicOrEchoValue>(possible, false);
+			}
+
+			value.setDistributed(value.getDistributed()+1);
+			int karma = 10 + getGrade() +1;
+
+			logger.log(Level.INFO, "Decreased metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
+			Shadowrun6Character model = getModel(); 
+			model.setKarmaFree( model.getKarmaFree() + karma);
+			model.setKarmaInvested( model.getKarmaInvested() - karma);
+
+			parent.runProcessors();
+			return new OperationResult<MetamagicOrEchoValue>(value);
+		} finally {
+			logger.log(Level.TRACE, "LEAVE decrease({0})", value);
+		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
+	 */
 	@Override
-	public List<Modification> process(List<Modification> unprocessed) {
-		// TODO Auto-generated method stub
+	public List<Modification> process(List<Modification> previous) {
+		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
+		List<Modification> unprocessed = new ArrayList<>();
+		try {
+			Shadowrun6Character model = getModel();
+			for (Modification tmp : previous) {
+				if (tmp.getReferenceType()==ShadowrunReference.METAECHO) {
+					DataItemModification mod = (DataItemModification)tmp;
+					MetamagicOrEcho item = mod.getResolvedKey();
+					MetamagicOrEchoValue val = model.getMetamagicOrEcho(mod.getKey());
+					if (val==null || !item.hasLevel()) {
+						val = new MetamagicOrEchoValue(item);
+						val.addModification(mod);
+						getModel().addMetamagicOrEcho(val);
+						logger.log(Level.DEBUG, "Auto-Added Metamagic/Echo ''{0}''", mod.getKey());
+					} else {
+						val.addModification(mod);
+						logger.log(Level.DEBUG, "Auto-Increased Metamagic/Echo ''{0}''", mod.getKey());
+					}
+					continue;
+				}
+				unprocessed.add(tmp);
+			}
+			
+			// Pay karma and apply modifications
+			int payNext = 11;
+			int grade = 0;
+			for (MetamagicOrEchoValue val : model.getMetamagicOrEchoes()) {
+				if (val.getModifyable().hasLevel()) {
+					for (int i=0; i<val.getDistributed(); i++) {
+						logger.log(Level.INFO, "Pay {0} Karma for metaecho ''{1}'' {2}", payNext, val.getModifyable().getId(), (i+1));
+						model.setKarmaFree( model.getKarmaFree() - payNext);
+						grade++;
+						payNext++;
+					}
+				} else {
+					logger.log(Level.INFO, "Pay {0} Karma for metaecho ''{1}''", payNext, val.getModifyable().getId());
+					model.setKarmaFree( model.getKarmaFree() - payNext);
+					grade++;
+					payNext++;
+				}
+				// Add modifications
+				for (Modification mod : val.getModifications()) {
+					Modification copy = Shadowrun6Tools.instantiateModification(mod, val, model);
+					logger.log(Level.DEBUG, "Add modification "+copy);
+					unprocessed.add(copy);
+				}
+			}
+			
+			logger.log(Level.INFO, "Initiation/Submersion grade = "+grade);
+		} finally {
+			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
+		}
 		return unprocessed;
 	}
 
