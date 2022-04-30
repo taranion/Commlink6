@@ -39,7 +39,7 @@
         <valmod type="SKILL" ref="CHOICE" choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="1" />
      </modifications>
      <requires>
-       <valuereq type="SKILL" ref="CHOICE" choice="05054102-0183-482a-9e2b-84bc8d5f153f" min="1" apply="CHARACTER"/>
+       <valuereq type="SKILL" ref="CHOICE" choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="1" apply="CHARACTER"/>
      </requires>
    </power>
    <power id="improved_ability_combat"  cost="1" hasLevel="true" act="PASSIVE">
@@ -50,7 +50,7 @@
         <valmod type="SKILL" ref="CHOICE" choice="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" value="1" set="AUGMENTED"/>
      </modifications>
      <requires>
-       <valuereq type="SKILL" ref="CHOICE" choice="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" min="1" apply="CHARACTER"/>
+       <valuereq type="SKILL" ref="CHOICE" choice="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" value="1" apply="CHARACTER"/>
      </requires>
    </power>
    <power id="improved_physical_attribute" cost="1" hasLevel="true" act="PASSIVE">

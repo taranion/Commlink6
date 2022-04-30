@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.charctrl;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,7 +97,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	 */
 	@Override
 	public Possible canBeSelected(AdeptPower value, Decision... decisions) {
-		logger.log(Level.WARNING, "canBeSelected {0}, {1}", value, decisions);
+		logger.log(Level.WARNING, "canBeSelected {0}, {1}", value, Arrays.toString( decisions ));
 		// Check if all choices have been made and all requirements are fulfilled
 		Possible poss = Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
 		if (!poss.get()) 

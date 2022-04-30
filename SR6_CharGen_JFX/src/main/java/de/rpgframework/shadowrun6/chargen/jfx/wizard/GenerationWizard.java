@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAdeptPowers;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageComplexForms;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageContacts;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPagePriority;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSpells;
@@ -64,6 +65,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageMetaOrEcho metaEchoes;
 	private SR6WizardPageGear gear;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
+	private WizardPageContacts contacts;
 	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
 		String name = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName());
 		String desc = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName()+".desc");
@@ -72,6 +74,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 
 	//-------------------------------------------------------------------
 	public GenerationWizard(GeneratorWrapper charGen) {
+		super(CloseType.CANCEL, CloseType.PREVIOUS, CloseType.RANDOMIZE, CloseType.NEXT, CloseType.FINISH);
 		setTitle("Unreplaced Wizard Title");
 		setPlain(false);
 		this.wrapper = charGen;
@@ -100,6 +103,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case COMPLEX_FORMS: ret.add(complexForms); break;
 			case METAECHO     : ret.add(metaEchoes); break;
 			case GEAR         : ret.add(   gear); break;
+			case CONTACTS     : ret.add(contacts); break;
 			case NAME         : ret.add(   name); break;
 			default:
 				logger.log(Level.ERROR,"Unsupported page type "+type);
@@ -130,6 +134,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		metaEchoes   = new SR6WizardPageMetaOrEcho(this, wrapper);
 		gear   = new SR6WizardPageGear(this, wrapper);
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
+		contacts = new SR6WizardPageContacts(this, wrapper.getWrapped());
 		name   = new WizardPageName<>(this, wrapper);
 		
 		getPages().add(chargen);
@@ -155,6 +160,14 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 				return Boolean.FALSE;
 			}
 		});
+		
+		addExtraButton(CloseType.RANDOMIZE, ev -> {
+			if (getCurrentPage().getOnExtraActionHandler()!=null) {
+				getCurrentPage().getOnExtraActionHandler().accept(CloseType.RANDOMIZE);
+			} else {
+				logger.log(Level.WARNING, "No handler for RANDOMIZE on page {0}",getCurrentPage());
+			}
+			});
 	}
 
 	//-------------------------------------------------------------------

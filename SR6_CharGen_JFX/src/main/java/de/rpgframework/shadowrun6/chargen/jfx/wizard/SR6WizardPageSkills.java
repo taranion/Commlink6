@@ -75,7 +75,7 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 
 	//-------------------------------------------------------------------
 	private CloseType openActionDialog(SR6SkillValue sVal) {
-		logger.log(Level.INFO, "openActionDialog({})", sVal);
+		logger.log(Level.INFO, "openActionDialog({0})", sVal);
 		
 		SRSkillSettingsPane pane = new SRSkillSettingsPane(sVal, charGen.getSkillController());
 		ManagedDialog dialog = new ManagedDialog("Settings", pane, CloseType.OK);

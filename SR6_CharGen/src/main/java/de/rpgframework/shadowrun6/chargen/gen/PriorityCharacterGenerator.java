@@ -96,7 +96,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 				WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
 				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,
 				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO, 
-				WizardPageType.GEAR, WizardPageType.NAME, };
+				WizardPageType.GEAR, WizardPageType.SIN_LICENSE, WizardPageType.LIFESTYLE, 
+				WizardPageType.CONTACTS, WizardPageType.NAME, };
 	}
 
 	//--------------------------------------------------------------------
@@ -122,6 +123,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		complex   = new CommonSR6ComplexFormGenerator(this);
 		metaEcho  = new SR6MetamagicOrEchoController(this);
 		lifestyles= new SR6LifestyleGenerator(this);
+		contacts  = new SR6ContactGenerator(this);
 	}
 
 	// --------------------------------------------------------------------
@@ -151,6 +153,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(complex);
 			processChain.add(metaEcho);
 			processChain.add(lifestyles);
+			processChain.add(contacts);
 
 			setupDone = true;
 		} finally {

@@ -23,7 +23,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected SR6SkillController skills;
 	protected IQualityController qualities;
 	protected IComplexFormController complex;
-	protected IContactController contacts;
+	protected SR6ContactController contacts;
 	protected IAdeptPowerController adeptPowers;
 	protected SR6SpellController spells;
 	protected IMetamagicOrEchoController metaEcho;

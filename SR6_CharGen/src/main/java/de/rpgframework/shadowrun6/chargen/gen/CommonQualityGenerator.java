@@ -93,7 +93,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		// Check if all requirements are met
 		List<Requirement> notMet = new ArrayList<>();
 		for (Requirement req : value.getRequirements()) {
-			if (!Shadowrun6Tools.isRequirementMet(model, req)) {
+			if (!Shadowrun6Tools.isRequirementMet(model, value, req, decisions)) {
 				notMet.add(req);
 			}
 		}

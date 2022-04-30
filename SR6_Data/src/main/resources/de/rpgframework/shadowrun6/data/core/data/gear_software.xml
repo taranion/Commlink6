@@ -48,7 +48,7 @@
 	<item avail="4I" price="250" id="biofeedback" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
  	   <requires>
- 	   	<valuereq type="ITEM_ATTRIBUTE" ref="ATTACK" min="1" apply="DATA_ITEM"/>
+ 	   	<valuereq type="ITEM_ATTRIBUTE" ref="ATTACK" value="1" apply="DATA_ITEM"/>
  	   </requires>
 	   <mode id="active" />
 	</item> 

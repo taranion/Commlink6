@@ -332,7 +332,7 @@ public class Shadowrun6Tools {
 					return "Unknown "+tmp.getKey();
 				return prefix+qual.getName(loc);
 			case SKILL:
-				String value = (req instanceof ValueRequirement)?((ValueRequirement)req).getMin():"";
+				String value = (req instanceof ValueRequirement)?((ValueRequirement)req).getRawValue():"";
 				if ("CHOICE".equals(tmp.getKey())) {
 					if (tmp.isNegate()) 
 						return ResourceI18N.format(RES, loc, "skill.chosen.not", value);
@@ -351,6 +351,14 @@ public class Shadowrun6Tools {
 //				return master.getName(loc);
 			default:
 				Logging.logger.log(Level.ERROR, "Making cleartext of "+tmp.getType()+" existance req. not supported");
+			}
+		} else if (req instanceof ValueRequirement) {
+			ValueRequirement tmp = (ValueRequirement)req;
+			ShadowrunReference type = (ShadowrunReference)tmp.getType();			
+			DataItem item = ShadowrunReference.resolve(type, req.getKey());
+			switch ((ShadowrunReference)tmp.getType()) {
+			case SKILL:
+				return item.getName(loc)+" "+tmp.getRawValue()+"+";			
 			}
 		} else if (req instanceof AnyRequirement) {
 			AnyRequirement any = (AnyRequirement)req;
@@ -407,8 +415,8 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static boolean isRequirementMet(Shadowrun6Character model, Requirement req) {
-		if (req.getApply()!=ApplyTo.CHARACTER) return true;
+	public static boolean isRequirementMet(Shadowrun6Character model, ComplexDataItem requiredFor, Requirement req, Decision[] decisions) {
+		if (req.getApply()!=null && req.getApply()!=ApplyTo.CHARACTER) return true;
 		
 		if (req instanceof ExistenceRequirement) {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
@@ -423,27 +431,39 @@ public class Shadowrun6Tools {
 				if (model.getMetatype()==null) return false;
 				if (negated) return !model.getMetatype().getId().equals(req.getKey());
 				return model.getMetatype().getId().equals(req.getKey());
+			case MAGIC_RESO:
+				logger.log(Level.WARNING, "Check for magic/Reso "+item);
+				return model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType()==item;
 			default:
-				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type);
+				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type+" = "+item);
 			}			
 		} else if (req instanceof AnyRequirement) {
 			AnyRequirement any = (AnyRequirement)req;
 			for (Requirement tmp : any.getOptionList()) {
-				if (isRequirementMet(model, tmp))
+				if (isRequirementMet(model, requiredFor, tmp, decisions))
 					return true;
 			}
 			return false;
 		} else if (req instanceof ValueRequirement) {
 			ValueRequirement tmp = (ValueRequirement)req;
-			int max = tmp.getMax();
 			int min = tmp.getValue();
 			ShadowrunReference type = (ShadowrunReference)tmp.getType();			
 			DataItem item = ShadowrunReference.resolve(type, req.getKey());
+			if (item==null && !("CHOICE".equals(req.getKey()))) {
+				logger.log(Level.ERROR, "Cannot find item for key ''{0}''", tmp.getType()+":"+tmp.getKey());
+				return false;
+			}
 			switch (type) {
 			case SKILL:
+				if ("CHOICE".equals(tmp.getKey())) {
+					return true;
+				}
+				if (model.getSkillValue((SR6Skill)item)==null) {
+					return false;
+				}
 				int val = model.getSkillValue( (SR6Skill)item).getModifiedValue();
 				if (min>0 && val<min) return false;
-				if (max>0 && val>min) return false;
+				//if (max>0 && val>min) return false;
 				return true;
 			default:
 				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type);
@@ -451,22 +471,23 @@ public class Shadowrun6Tools {
 		}
 		System.err.println("Shadowrun6Tool: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
 		logger.log(Level.WARNING,"ToDo: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
-		return true;
+		return false;
 	}
 
 	//-------------------------------------------------------------------
-	public static Possible areRequirementsMet(Shadowrun6Character model, ComplexDataItem data) {
+	public static Possible areRequirementsMet(Shadowrun6Character model, ComplexDataItem data, Decision[] decisions) {
 		List<Requirement> list = new ArrayList<>();
 		for (Requirement req : data.getRequirements()) {
-			if (req.getApply()!=ApplyTo.CHARACTER)
+			if (req.getApply()!=null && req.getApply()!=ApplyTo.CHARACTER)
 				continue;
-			if (!isRequirementMet(model, req)) {
+			if (!isRequirementMet(model, data, req, decisions)) {
 				list.add(req);
 			}
 		}
 		
 		if (list.isEmpty())
 			return Possible.TRUE;
+		System.err.println("Shadowrun6Tools.areReqMet: Not met for "+data+": "+list);
 		return new Possible(list.toArray(new Requirement[list.size()]));
 	}
 
@@ -491,7 +512,7 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static Possible checkDecisionsAndRequirements(Shadowrun6Character model, ComplexDataItem data, Decision...decisions) {
-		Possible p1 = areRequirementsMet(model, data);
+		Possible p1 = areRequirementsMet(model, data, decisions);
 		Possible p2 = areAllDecisionsPresent(data, decisions);
 		
 		return new Possible(p1, p2);

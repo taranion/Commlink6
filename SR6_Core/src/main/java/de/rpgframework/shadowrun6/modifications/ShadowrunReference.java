@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Resistance;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -66,6 +67,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	MAGIC_RESO(MagicOrResonanceType.class),
 	MATRIX_ATTRIBUTE(new ItemAttributeConverter()),
 	MENTOR_SPIRIT(MentorSpirit.class),
+	METAECHO(MetamagicOrEcho.class),
 	METATYPE(SR6MetaType.class),
 	POOL("Pool"), // Derived values like defense pool
 	PROGRAM("Program"), // 

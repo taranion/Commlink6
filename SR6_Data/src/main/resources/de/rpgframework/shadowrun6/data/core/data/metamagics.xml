@@ -4,6 +4,12 @@
 		<modifications>
 			<relevancemod topic="MAGICAL" />
 		</modifications>
+		<requires>
+			<selreq>
+	   		<datareq type="MAGIC_RESO" ref="adept" apply="CHARACTER" />
+	   		<datareq type="MAGIC_RESO" ref="mysticadept" apply="CHARACTER" />
+			</selreq>
+		</requires>
 	</metaecho>
 	<metaecho id="centering" type="METAMAGIC">
 		<modifications>
@@ -22,6 +28,12 @@
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="POWER_POINTS" value="1" />
 		</modifications>
+		<requires>
+			<selreq>
+	   		<datareq type="MAGIC_RESO" ref="adept" apply="CHARACTER" />
+	   		<datareq type="MAGIC_RESO" ref="mysticadept" apply="CHARACTER" />
+			</selreq>
+		</requires>
 	</metaecho>
 	<metaecho id="quickening" type="METAMAGIC">
 		<modifications>
