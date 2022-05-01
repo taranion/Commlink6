@@ -3,7 +3,6 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.UUID;
 
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityType;
@@ -18,7 +17,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
  * @author Stefan Prelle
  *
  */
-public class SR6PrioritySettings extends APrioritySettings {
+public class SR6PrioritySettings extends APrioritySettings implements CommonSR6GeneratorSettings {
 
 	public int mysticAdeptMaxPoints;
 	public int mysticAdeptPowerPoints;
@@ -30,6 +29,9 @@ public class SR6PrioritySettings extends APrioritySettings {
 	/** Modifier to apply to customization karma */
 	public int karmaMod;
 	public Map<String, PerSkillPoints> perSkill;
+	
+	private int toNuyen;
+	private int toContacts;
 
 	//-------------------------------------------------------------------
 	public SR6PrioritySettings() {
@@ -84,5 +86,17 @@ public class SR6PrioritySettings extends APrioritySettings {
 		} 
 		perSkill.remove(id);
 	}
+
+	@Override
+	public int getKarmaToNuyen() { return toNuyen; }
+
+	@Override
+	public void setKaramToNuyen(int val) { toNuyen = val; }
+
+	@Override
+	public int getBoughtContactPoints() {return toContacts; }
+
+	@Override
+	public void setBoughtContactPoints(int val) { toContacts = val; }
 	
 }

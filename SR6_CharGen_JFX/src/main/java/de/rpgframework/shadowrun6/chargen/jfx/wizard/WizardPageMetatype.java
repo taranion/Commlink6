@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.NodeWithTitle;
@@ -119,7 +120,9 @@ public class WizardPageMetatype extends WizardPage {
 //			SplitterJFXUtil.openDecisionDialog(r, c, null);
 		});
 		
-		List<SR6MetaType> items = Shadowrun6Core.getItemList(SR6MetaType.class);
+		List<SR6MetaType> items = Shadowrun6Core.getItemList(SR6MetaType.class).stream()
+				.filter(p -> charGen.showDataItem(p))
+				.collect(Collectors.toList());
 		Collections.sort(items, new Comparator<SR6MetaType>() {
 			public int compare(SR6MetaType meta1, SR6MetaType meta2) {
 				if (meta1.getId().equals("human")) return -1;

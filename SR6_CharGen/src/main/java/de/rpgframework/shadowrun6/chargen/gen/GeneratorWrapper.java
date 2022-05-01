@@ -27,6 +27,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.ISpellController;
+import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -355,6 +356,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public IMetamagicOrEchoController getMetamagicOrEchoController() {
 		return wrapped.getMetamagicOrEchoController();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getSINController()
+	 */
+	@Override
+	public SINController getSINController() {
+		return wrapped.getSINController();
 	}
 
 	//-------------------------------------------------------------------

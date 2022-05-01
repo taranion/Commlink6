@@ -33,6 +33,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
+import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -111,6 +112,7 @@ public class PrioQualGenTest {
 			public SR6SpellController getSpellController() { return null;}
 			public IMetamagicOrEchoController getMetamagicOrEchoController() { return null;}
 			public IComplexFormController getComplexFormController() { return null;}
+			public SINController getSINController() { return null;}
 			public IContactController getContactController() { return null;}
 			public SR6LifestyleController getLifestyleController() { return null;}
 			@Override

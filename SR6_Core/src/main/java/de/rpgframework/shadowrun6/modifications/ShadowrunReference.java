@@ -15,7 +15,6 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
-import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -23,6 +22,7 @@ import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Resistance;
+import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.Spirit;
@@ -76,6 +76,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	RULE(new RuleFlagConverter()),
 	QUALITY(Quality.class),
 	SENSE("Sense"),
+	SIN(FakeRating.class,0),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILL(key -> Shadowrun6Core.getSkill(key)),
 	SKILLSPECIALIZATION(new SkillSpecializationConverter()),

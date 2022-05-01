@@ -12,10 +12,13 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6AdeptPowerController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules.PRIORITY_MAGIC;
+import de.rpgframework.shadowrun6.generators.Shadowrun6Generators;
 
 /**
  * @author prelle
@@ -99,14 +102,6 @@ public class SR6AdeptPowerGenerator extends SR6AdeptPowerController {
 			for (AdeptPowerValue val : model.getAdeptPowers()) {
 				// Apply modifications
 				unprocessed.addAll(val.getModifications());
-			}
-			
-			// Summary and eventually warn
-			logger.log(Level.INFO, "Have {0} remaining power points", freePoints);
-			if (freePoints>0) {
-				todos.add(new ToDoElement(Severity.WARNING, "Unused power points"));
-			} else if (freePoints<0) {
-				todos.add(new ToDoElement(Severity.STOPPER, "Too many power points used"));
 			}
 			
 			return unprocessed;

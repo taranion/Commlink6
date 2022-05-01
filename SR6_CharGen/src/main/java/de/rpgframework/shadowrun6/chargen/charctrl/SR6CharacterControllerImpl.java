@@ -9,6 +9,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
+import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 
 /**
@@ -28,6 +29,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected SR6SpellController spells;
 	protected IMetamagicOrEchoController metaEcho;
 	protected IEquipmentController equipment;
+	protected SINController sins;
 	protected SR6LifestyleController lifestyles;
 	
 	//-------------------------------------------------------------------
@@ -128,6 +130,15 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	@Override
 	public IEquipmentController getEquipmentController() {
 		return equipment;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getSINController()
+	 */
+	@Override
+	public SINController getSINController() {
+		return sins;
 	}
 
 	//-------------------------------------------------------------------

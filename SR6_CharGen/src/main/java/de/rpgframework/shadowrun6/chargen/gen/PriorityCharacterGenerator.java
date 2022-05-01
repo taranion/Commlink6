@@ -122,6 +122,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		adeptPowers = new SR6AdeptPowerGenerator(this);
 		complex   = new CommonSR6ComplexFormGenerator(this);
 		metaEcho  = new SR6MetamagicOrEchoController(this);
+		sins      = new SR6SINGenerator(this);
 		lifestyles= new SR6LifestyleGenerator(this);
 		contacts  = new SR6ContactGenerator(this);
 	}
@@ -152,6 +153,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(equipment);
 			processChain.add(complex);
 			processChain.add(metaEcho);
+			processChain.add(sins);
 			processChain.add(lifestyles);
 			processChain.add(contacts);
 

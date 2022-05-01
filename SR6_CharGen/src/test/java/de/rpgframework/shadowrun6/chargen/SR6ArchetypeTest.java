@@ -7,7 +7,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
-import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -21,6 +20,8 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
+import de.rpgframework.shadowrun.Contact;
+import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.Priority;
@@ -31,11 +32,12 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunFlags;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
+import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
+import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6MetaType;
-import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -254,11 +256,22 @@ public class SR6ArchetypeTest {
 		assertTrue(pVal.toString(), pVal.wasSuccessful());
 		assertEquals(0.5f, adept.getUnsedPowerPoints(), 0f);
 		
+		// Equipment
 		IEquipmentController equip = charGen.getEquipmentController();
 		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest"));
 		assertNotNull(poss);
 		assertTrue( poss.toString(), poss.get());
 		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest")).wasSuccessful() );
+		// Contacts
+		OperationResult<CarriedItem<ItemTemplate>> contactsRes = equip.select(
+				Shadowrun6Core.getItem(ItemTemplate.class, "contacts"),
+				new Decision( 
+						Shadowrun6Core.getItem(ItemTemplate.class, "contacts").getChoices().get(0).getUUID(),
+						"3"));
+		assertTrue( contactsRes.getError(), contactsRes.wasSuccessful() );
+		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation")).wasSuccessful() );
+		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "image_link")).wasSuccessful() );
+		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "low_light_vision")).wasSuccessful() );
 		
 		ItemTemplate bow = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
 		// Try to add bow without rating
@@ -278,14 +291,33 @@ public class SR6ArchetypeTest {
 		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 3
 		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 4
 		assertTrue(  equip.increase(item).wasSuccessful() ); // Count 5
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "yamaha_growler")).wasSuccessful() );
+		
+		// Lifestyle
+		OperationResult<SR6Lifestyle> lifeRes = charGen.getLifestyleController().select(Shadowrun6Core.getItem(LifestyleQuality.class, "low"));
+		assertTrue(lifeRes.wasSuccessful());
+		lifeRes.get().setSIN(model.getSINs().get(0).getUniqueId());
+		
 		// Contacts
-		OperationResult<CarriedItem<ItemTemplate>> contactsRes = equip.select(
-				Shadowrun6Core.getItem(ItemTemplate.class, "contacts"),
-				new Decision( 
-						Shadowrun6Core.getItem(ItemTemplate.class, "contacts").getChoices().get(0).getUUID(),
-						"3"));
-		assertTrue( contactsRes.getError(), contactsRes.wasSuccessful() );
-		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation")).wasSuccessful() );
+		IContactController contacts = charGen.getContactController();
+		Contact ganger = contacts.createContact();
+		assertNotNull(ganger);
+		ganger.setName("First Nations Ganger");
+		contacts.increaseLoyalty(ganger);
+		Contact secretary = contacts.createContact();
+		secretary.setName("Salish Government Secretary");
+		contacts.increaseRating(secretary);
+		contacts.increaseLoyalty(secretary);
+		Contact sensei = contacts.createContact();
+		sensei.setName("Sensei");
+		contacts.increaseLoyalty(sensei);
+		Contact squatter = contacts.createContact();
+		squatter.setName("Squatter");
+		
 		model.setName("Adept");
 		
 		byte[] raw = Shadowrun6Core.encode(model);

@@ -288,7 +288,7 @@
    
    <quality id="sinner"	              karma="8" pos="false" type="NORMAL" >
      <modifications>
-        <!--itemmod type="RULE" ref="REAL_SIN"/-->
+        <itemmod type="SIN" ref="REAL_SIN"/>
      </modifications>
    </quality>
    <quality id="social_stress"	      karma="8" pos="false" type="NORMAL">

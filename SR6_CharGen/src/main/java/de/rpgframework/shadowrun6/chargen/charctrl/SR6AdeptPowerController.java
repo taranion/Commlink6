@@ -310,9 +310,9 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 			// Summary and eventually warn
 			logger.log(Level.INFO, "Have {0} remaining power points", freePoints);
 			if (freePoints>0) {
-				todos.add(new ToDoElement(Severity.WARNING, "Unused power points"));
+				todos.add(new ToDoElement(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.TODO_UNUSED_POWER_POINTS, freePoints));
 			} else if (freePoints<0) {
-				todos.add(new ToDoElement(Severity.STOPPER, "Too many power points used"));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, IRejectReasons.TODO_TOO_MANY_POWERS, -freePoints));
 			}
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");

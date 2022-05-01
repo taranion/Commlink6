@@ -534,6 +534,20 @@ public class Shadowrun6Tools {
 			
 			return clone;
 		}
+		if (tmp instanceof DataItemModification) {
+			DataItemModification clone = ((DataItemModification)tmp).clone();
+			if ("CHOICE".equals( clone.getKey() )) {
+				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
+				Decision dec = value.getDecision(uuid);
+				if (dec!=null) {
+					clone.setKey( dec.getValue());
+				} else {
+					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value);
+				}
+			}
+			
+			return clone;
+		}
 		
 		throw new IllegalArgumentException("Cannot instantiate "+tmp.getClass());
 	}

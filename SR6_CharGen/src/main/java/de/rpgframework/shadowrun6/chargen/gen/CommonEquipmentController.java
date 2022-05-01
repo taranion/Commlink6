@@ -238,7 +238,18 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 					unprocessed.add(tmp);
 				}
 			}
+			
+			CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
+			if (sett.getKarmaToNuyen()>0) {
+				int rate = 2000;
+				int add  = sett.getKarmaToNuyen()*rate;
+				logger.log(Level.INFO, "Convert {0} Karma into {1} Nuyen (Rate 1:{2})", sett.getKarmaToNuyen(), add, rate);
+				model.setNuyen( model.getNuyen() + add);
+			}
+			
 			logger.log(Level.INFO, "{0} Nuyen available", model.getNuyen());
+			
+			
 			
 			/* Expand PACKs */
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
@@ -402,8 +413,8 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			}
 			
 			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, decisions);
-			logger.log(Level.WARNING, "ToDo: really embed");
-			logger.log(Level.WARNING, "ToDo: recalculate item after embedding");
+			logger.log(Level.ERROR, "ToDo: really embed");
+			logger.log(Level.ERROR, "ToDo: recalculate item after embedding");
 			return res;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE embed{0}", value);
@@ -425,28 +436,62 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		return conversionRate;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canIncreaseConversion()
+	 */
 	@Override
 	public boolean canIncreaseConversion() {
-		// TODO Auto-generated method stub
-		return false;
+		if (getModel().getKarmaFree()<1) return false;
+		return true;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#increaseConversion()
+	 */
 	@Override
 	public boolean increaseConversion() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!canIncreaseConversion()) {
+			logger.log(Level.ERROR, "Trying to increase Karma -> Nuyen conversion although not allowed");
+			return false;
+		}
+		
+		CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
+		sett.setKaramToNuyen(sett.getKarmaToNuyen()+1);
+		logger.log(Level.INFO, "increased Karma converted to Nuyen to {0}", sett.getKarmaToNuyen());
+		
+		parent.runProcessors();
+		return true;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canDecreaseConversion()
+	 */
 	@Override
 	public boolean canDecreaseConversion() {
-		// TODO Auto-generated method stub
-		return false;
+		CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
+		return sett.getKarmaToNuyen()>0;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#decreaseConversion()
+	 */
 	@Override
 	public boolean decreaseConversion() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!canDecreaseConversion()) {
+			logger.log(Level.ERROR, "Trying to decrease Karma -> Nuyen conversion although not allowed");
+			return false;
+		}
+		
+		CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
+		sett.setKaramToNuyen(sett.getKarmaToNuyen()-1);
+		logger.log(Level.INFO, "decreased Karma converted to Nuyen to {0}", sett.getKarmaToNuyen());
+		
+		parent.runProcessors();
+		return true;
 	}
 
 }
