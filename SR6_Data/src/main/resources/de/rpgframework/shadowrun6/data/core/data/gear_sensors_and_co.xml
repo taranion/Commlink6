@@ -47,7 +47,7 @@
 		</choices>
 		<attrdef id="PRICE" value="$RATING*100"/>
       <modifications>
-			<valmod type="HOOK" ref="OPTICAL" value="1"/>
+			<valmod type="HOOK" ref="OPTICAL" value="$RATING"/>
       </modifications>
    </item>
    <item avail="3" price="250" id="endoscope" subtype="OPTICAL" type="ELECTRONICS"/>
@@ -103,6 +103,9 @@
    		<attrdef id="ESSENCECOST" value="0.1"/>
    		<flag>AUGMENTATION</flag>
    	</variant>
+   	<modifications>
+   		<checkmod type="SKILL" ref="perception" value="1" what="EDGE" cond="true"/>
+   	</modifications>
 	</item>
 	<item avail="1" price="25" id="image_link" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
 	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>

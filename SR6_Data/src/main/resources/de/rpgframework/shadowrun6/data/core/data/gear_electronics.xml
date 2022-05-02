@@ -188,18 +188,28 @@
    </item>
    <item avail="1" price="150"  id="ar_gloves" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
    	<attrdef id="DEVICE_RATING" value="3"/>
+  		<usage mode="CARRIED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    </item>
    <item avail="2" price="200"  id="biometric_reader" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
    	<attrdef id="DEVICE_RATING" value="3"/>
+  		<usage mode="CARRIED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    </item>
    <item avail="1" price="5" id="electronic_paper" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
     	<attrdef id="DEVICE_RATING" value="1"/>
+  		<usage mode="CARRIED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    </item>
    <item avail="1" price="25"  id="printer" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
    	<attrdef id="DEVICE_RATING" value="3"/>
+  		<usage mode="CARRIED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    </item>
    <item avail="3" price="500"  id="satellite_link" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
    	<attrdef id="DEVICE_RATING" value="4"/>
+   	<usage mode="CARRIED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    </item>
    <item avail="4" price="1000" id="simrig" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
    	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
@@ -216,15 +226,15 @@
    </item>
    <item avail="2" price="50" id="subvocal_microphone" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
    	<attrdef id="DEVICE_RATING" value="3"/>
+   	<usage mode="CARRIED"/>
+   	<usage mode="EMBEDDED" slot="HELMET_ACCESSORY"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    </item>
    <item avail="1" price="70"  id="trodes" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES">
-	<attrdef id="DEVICE_RATING" value="3" />
-	<variant id="regular" mode="NORMAL">
+		<attrdef id="DEVICE_RATING" value="3" />
    	<usage mode="CARRIED"/>
-	</variant>
-	<variant id="helmet" mode="EMBEDDED">
    	<usage mode="EMBEDDED" slot="HELMET_ACCESSORY"/>
-	</variant>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    </item>
    
    <!-- RFID -->

@@ -57,6 +57,7 @@ public abstract class CommonSINController extends ControllerImpl<de.rpgframework
 	@Override
 	public SIN createNewSIN(String name, FakeRating quality) {
 		if (!canCreateNewSIN(quality)) {
+			logger.log(Level.ERROR, "Tried to create a rating "+quality.getValue()+" SIN, but I may not");
 			return null;
 		}
 		
@@ -75,8 +76,9 @@ public abstract class CommonSINController extends ControllerImpl<de.rpgframework
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.SINController#createNewSIN(java.lang.String, de.rpgframework.shadowrun.SIN.FakeRating, int)
 	 */
 	@Override
-	public SIN[] createNewSIN(String name, FakeRating quality, int count) {
+	public SIN[] createNewSIN(FakeRating quality, int count) {
 		if (!canCreateNewSIN(quality, count)) {
+			logger.log(Level.ERROR, "Tried to create "+count+" rating "+quality.getValue()+" SINs, but I may not");
 			return null;
 		}
 		

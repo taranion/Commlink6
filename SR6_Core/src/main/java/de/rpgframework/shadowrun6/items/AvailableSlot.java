@@ -9,7 +9,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
  * @author prelle
  *
  */
-public class AvailableSlot extends AAvailableSlot<CarriedItem,ItemHook>  {
+public class AvailableSlot extends AAvailableSlot<ItemHook>  {
 
 	@Attribute
 	private ItemHook ref;

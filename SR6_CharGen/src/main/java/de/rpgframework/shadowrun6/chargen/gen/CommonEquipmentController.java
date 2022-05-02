@@ -146,10 +146,16 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				return new OperationResult<>(poss);
 			}
 
+			if (value.requiresVariant()) {
+				logger.log(Level.ERROR, "Trying to select {0} which may not be selected: {1}", value, poss.toString());
+				poss = new Possible(false, IRejectReasons.IMPOSS_MUST_CHOOSE_VARIANT);
+				return new OperationResult<>(poss);
+			}
+			
 			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
-			logger.log(Level.INFO, "Add {0} to model", item.toString());
+			logger.log(Level.INFO, "Add {0} to model", item.getKey());
 			getModel().addCarriedItem(item);
 			
 			parent.runProcessors();
@@ -245,6 +251,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				int add  = sett.getKarmaToNuyen()*rate;
 				logger.log(Level.INFO, "Convert {0} Karma into {1} Nuyen (Rate 1:{2})", sett.getKarmaToNuyen(), add, rate);
 				model.setNuyen( model.getNuyen() + add);
+				model.setKarmaFree( model.getKarmaFree() - sett.getKarmaToNuyen());
 			}
 			
 			logger.log(Level.INFO, "{0} Nuyen available", model.getNuyen());
@@ -414,7 +421,11 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			
 			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, decisions);
 			logger.log(Level.ERROR, "ToDo: really embed");
+			if (res.wasSuccessful()) {
+				container.addAccessory(res.get(), slot);
+			}
 			logger.log(Level.ERROR, "ToDo: recalculate item after embedding");
+			GearTool.recalculate("", getModel(), container);
 			return res;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE embed{0}", value);

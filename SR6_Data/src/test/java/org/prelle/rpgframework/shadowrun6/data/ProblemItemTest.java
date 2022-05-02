@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -56,7 +57,7 @@ public class ProblemItemTest {
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
-		GearTool.recalculate("", null, carried);
+		SR6GearTool.recalculate("", null, carried);
 		
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getDistributed());
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
@@ -108,7 +109,7 @@ public class ProblemItemTest {
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
-		GearTool.recalculate("", null, carried);
+		SR6GearTool.recalculate("", null, carried);
 		
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getDistributed());
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
@@ -133,7 +134,7 @@ public class ProblemItemTest {
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
-		GearTool.recalculate("", null, carried);
+		SR6GearTool.recalculate("", null, carried);
 		
 		assertEquals(4, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue());

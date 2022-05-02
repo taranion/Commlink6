@@ -33,7 +33,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	BODY,
 	// Vehicle Cargo Factor (CF)
 	CARGO,
-//	CAPACITY,
+	CAPACITY,
 //	CONCEALABILITY,
 	DAMAGE(new WeaponDamageConverter()),
 	DEFENSE_MATRIX,

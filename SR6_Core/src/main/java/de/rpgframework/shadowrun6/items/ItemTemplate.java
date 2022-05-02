@@ -172,4 +172,9 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		this.subtype = subtype;
 	}
 
+	//-------------------------------------------------------------------
+	public boolean requiresVariant() {
+		return requireVariant;
+	}
+
 }

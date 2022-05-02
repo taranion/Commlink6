@@ -241,6 +241,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 			for (SR6Lifestyle val : model.getLifestyles()) {
 				int lp = val.getLifestylePoints();
 				logger.log(Level.DEBUG, "Pay {1} for lifestyle {1}", val.getNameWithRating(), getLifestyleCost(val));
+				model.setNuyen( model.getNuyen() - getLifestyleCost(val));
 			}
 			
 			return unprocessed;

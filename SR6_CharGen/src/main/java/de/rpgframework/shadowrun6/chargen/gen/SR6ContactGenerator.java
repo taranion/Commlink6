@@ -6,19 +6,14 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
-import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Contact;
-import de.rpgframework.shadowrun.SIN;
-import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6ContactController;
-import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -164,7 +159,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			return false;
 		}
 		
-		con.setRating(con.getRating()+1);
+		con.setLoyalty(con.getLoyalty()+1);
 		logger.log(Level.INFO, "Increased contact loyalty of "+con.getName());
 		
 		parent.runProcessors();

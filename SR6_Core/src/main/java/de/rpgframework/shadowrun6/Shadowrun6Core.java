@@ -19,8 +19,10 @@ import com.google.gson.Gson;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.character.CharacterIOException.ErrorCode;
+import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.GenericCore;
+import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTable;
@@ -29,6 +31,7 @@ import de.rpgframework.shadowrun.PriorityTableEntryList;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellFeature;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 
 /**
  * @author prelle
@@ -46,6 +49,8 @@ public class Shadowrun6Core extends GenericCore {
 	static {
 		i18NResources = new MultiLanguageResourceBundle(Shadowrun6Core.class.getPackageName()+".i18n.core", Locale.ENGLISH, Locale.GERMAN);
 		prioTable   = new PriorityTable();
+		GearTool.setPerRPGStatsPhase1(RoleplayingSystem.SHADOWRUN6, SR6GearTool.SR6_PHASE1_STEPS);
+		GearTool.setPerRPGStatsPhase2(RoleplayingSystem.SHADOWRUN6, SR6GearTool.SR6_PHASE2_STEPS);
 	}
 
 	//-------------------------------------------------------------------

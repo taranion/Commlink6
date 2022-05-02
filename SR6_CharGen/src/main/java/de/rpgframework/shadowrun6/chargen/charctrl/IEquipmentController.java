@@ -26,8 +26,10 @@ public interface IEquipmentController extends
 	 */
 	public List<ItemTemplate> getEmbeddableIn(CarriedItem<ItemTemplate> ref, ItemHook slot);
 
+	//-------------------------------------------------------------------
 	public Possible canBeEmbedded(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, Decision...decisions);
 
+	//-------------------------------------------------------------------
 	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, Decision...decisions);
 
 	//-------------------------------------------------------------------

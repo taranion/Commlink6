@@ -24,7 +24,6 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -42,7 +41,7 @@ import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemUtil;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
@@ -406,7 +405,7 @@ public class Shadowrun6Tools {
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
 				ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
 				tmp.setResolved(resolved);
-				GearTool.recalculate("", model, tmp);
+				SR6GearTool.recalculate("", model, tmp);
 			}
 
 		} finally {

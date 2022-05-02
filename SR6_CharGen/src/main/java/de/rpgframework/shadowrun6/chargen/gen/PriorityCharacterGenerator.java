@@ -156,6 +156,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(sins);
 			processChain.add(lifestyles);
 			processChain.add(contacts);
+			processChain.add(new RemainingKarmaNuyenController(this));
 
 			setupDone = true;
 		} finally {
