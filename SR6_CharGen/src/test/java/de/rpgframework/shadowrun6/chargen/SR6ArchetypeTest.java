@@ -21,6 +21,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.Contact;
+import de.rpgframework.shadowrun.LicenseType;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
@@ -273,16 +274,16 @@ public class SR6ArchetypeTest {
 						Shadowrun6Core.getItem(ItemTemplate.class, "contacts").getChoices().get(0).getUUID(),
 						"3"));
 		assertTrue( contactsRes.getError(), contactsRes.wasSuccessful() );
-		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation")).wasSuccessful() );
-		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "image_link")).wasSuccessful() );
-		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "low_light_vision")).wasSuccessful() );
+		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation"), null).wasSuccessful() );
+		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), null).wasSuccessful() );
+		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "low_light_vision"), null).wasSuccessful() );
 		assertEquals(1075, contactsRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		OperationResult<CarriedItem<ItemTemplate>> sonyRes = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "sony_emporer"));
 		assertEquals(700, sonyRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "subvocal_microphone")).wasSuccessful() );
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "trodes")).wasSuccessful() );
 		assertTrue( contactsRes.getError(), contactsRes.wasSuccessful() );
-		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation")).wasSuccessful() );
+		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation"), (String)null).wasSuccessful() );
 		
 		ItemTemplate bow = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
 		// Try to add bow without rating
@@ -642,28 +643,122 @@ public class SR6ArchetypeTest {
 		
 		// Augmentations
 		IEquipmentController equip = charGen.getEquipmentController();
-//		assertTrue(equip.increaseConversion());
-//		assertTrue(equip.increaseConversion());
-//		assertTrue(equip.increaseConversion());
-//		assertTrue(equip.increaseConversion());
-//		assertTrue(equip.increaseConversion());
-//		assertTrue(equip.increaseConversion());
-//		assertTrue(equip.increaseConversion());
-//		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
 		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "datajack"));
 		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"));
-		Possible poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"));
-		assertNotNull(poss);
-		assertTrue( poss.toString(), poss.get());
 		OperationResult<CarriedItem<ItemTemplate>> toner = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner").getChoices().get(0), "1"));
 		OperationResult<CarriedItem<ItemTemplate>> enhan = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "reaction_enhancers"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "reaction_enhancers").getChoices().get(0), "1"));
 		OperationResult<CarriedItem<ItemTemplate>> wired = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "wired_reflexes"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "wired_reflexes").getChoices().get(0), "1"));
-		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"));
-//		assertTrue (hand.getError(), hand.wasSuccessful());
+
+		Possible poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"));
+		assertNotNull(poss);
+		assertFalse("Missing variant not detected" , poss.get());
+		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious");
+		assertTrue(poss.toString(), poss.get());
+		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious");
+		assertTrue (hand.getError(), hand.wasSuccessful());
+		hand.get().setCustomName("Obvious left hand");
+		OperationResult<CarriedItem<ItemTemplate>> shock = equip.embed(hand.get(), ItemHook.CYBERLIMB_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "shock_limb"), null);
+		assertTrue (shock.getError(), shock.wasSuccessful());
+		shock.get().setCustomName("Shock Hand");
+		OperationResult<CarriedItem<ItemTemplate>> imageLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), "bodyware");
+		assertTrue (imageLink.getError(), imageLink.wasSuccessful());
+		OperationResult<CarriedItem<ItemTemplate>> smartLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "smartlink"), "bodyware");
+		assertTrue (smartLink.getError(), smartLink.wasSuccessful());
 		
+		//Gear
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "actioneer_business")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "jammer_area"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "jammer_area").getChoices().get(0), "6")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "autopicker")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "bug_scanner")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> cam = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "camera"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "camera").getChoices().get(0), "4"));
+		assertTrue( equip.embed(cam.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "low_light_vision"), null).wasSuccessful() );
+		assertTrue( equip.embed(cam.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "thermographic_vision"), null).wasSuccessful() );
+		assertTrue( equip.embed(cam.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "vision_enhancement"), null).wasSuccessful() );
+		assertTrue( equip.embed(cam.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "vision_magnification"), null).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "climbing_gear")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> contacts = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "contacts"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "contacts").getChoices().get(0), "3"));
+		assertTrue( equip.embed(contacts.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), null).wasSuccessful() );
+		assertTrue( equip.embed(contacts.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "thermographic_vision"), null).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "jammer_direct"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "jammer_direct").getChoices().get(0), "6")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> micro = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "directional_microphone"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "directional_microphone").getChoices().get(0), "3"));
+		assertTrue( equip.embed(micro.get(), ItemHook.AUDIO, Shadowrun6Core.getItem(ItemTemplate.class, "select_sound_filter"), null).wasSuccessful() );
+		assertTrue( equip.embed(micro.get(), ItemHook.AUDIO, Shadowrun6Core.getItem(ItemTemplate.class, "audio_enhancement"), null).wasSuccessful() );
+		
+		SINController sinCtrl = charGen.getSINController();
+		SIN sin1 =sinCtrl.createNewSIN("Someone",FakeRating.SUPERFICIALLY_PLAUSIBLE);
+		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin1, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Concealed Carry License");
+		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin1, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Cyberware License");
+		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin1, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Driver's License");
+		SIN sin2 =sinCtrl.createNewSIN("Someone",FakeRating.GOOD_MATCH);
+		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin2, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Concealed Carry License");
+		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin2, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Cyberware License");
+		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin2, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Driver's License");
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "flashlight")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "gecko_tape_gloves")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> glasses = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "glasses"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "glasses").getChoices().get(0), "2"));
+		assertTrue( equip.embed(glasses.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), null).wasSuccessful() );
+		assertTrue( equip.embed(glasses.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "vision_enhancement"), null).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "glue_sprayer")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "honda_spirit")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "keycard_copier")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "lockpick_set")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "maglock_passkey"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "maglock_passkey").getChoices().get(0), "3")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> transc = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "micro-transceiver"));
+		assertTrue (transc.wasSuccessful());
+		equip.increase(transc.get());
+		equip.increase(transc.get());
+		equip.increase(transc.get());
+		equip.increase(transc.get());
+		equip.increase(transc.get());
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "monofilament_chainsaw")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "rappelling_gloves")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "respirator"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "respirator").getChoices().get(0), "6")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "sequencer"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "sequencer").getChoices().get(0), "4")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> stealth = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "stealth_tag"));
+		assertTrue (transc.wasSuccessful());
+		for (int i=2; i<=10; i++) equip.increase(stealth.get());
+		OperationResult<CarriedItem<ItemTemplate>> stim = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "stim_patch"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "stim_patch").getChoices().get(0), "6"));
+		assertTrue (stim.wasSuccessful());
+		for (int i=2; i<=5; i++) equip.increase(stim.get());
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "tag_eraser")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> transsys = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "transys_avalon"));
+		assertTrue( equip.embed(transsys.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "subvocal_microphone"), null).wasSuccessful() );
+		assertTrue( equip.embed(transsys.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "trid_projector"), null).wasSuccessful() );
+		assertTrue( equip.embed(transsys.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "trodes"), null).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> tranq = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "tranq_patch"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "tranq_patch").getChoices().get(0), "10"));
+		assertTrue (tranq.wasSuccessful());
+		for (int i=2; i<=5; i++) equip.increase(tranq.get());
+		OperationResult<CarriedItem<ItemTemplate>> ultra = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "handheld_housing"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "handheld_housing").getChoices().get(0), "2"));
+		assertTrue( equip.embed(ultra.get(), ItemHook.SENSOR_HOUSING, Shadowrun6Core.getItem(ItemTemplate.class, "sensor_array"), null).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_predator_vi")).wasSuccessful() );
+		
+		model.setName("Covert-Ops Specialist");
 		
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
