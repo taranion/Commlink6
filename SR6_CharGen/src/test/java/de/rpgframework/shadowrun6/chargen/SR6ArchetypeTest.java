@@ -755,7 +755,8 @@ public class SR6ArchetypeTest {
 		OperationResult<CarriedItem<ItemTemplate>> ultra = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "handheld_housing"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "handheld_housing").getChoices().get(0), "2"));
 		assertTrue( equip.embed(ultra.get(), ItemHook.SENSOR_HOUSING, Shadowrun6Core.getItem(ItemTemplate.class, "sensor_array"), null).wasSuccessful() );
-		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator").getChoices().get(0), "6")).wasSuccessful() );
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_predator_vi")).wasSuccessful() );
 		
 		model.setName("Covert-Ops Specialist");
@@ -892,6 +893,10 @@ public class SR6ArchetypeTest {
 		assertTrue( poss.toString(), poss.get());
 		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest")).wasSuccessful() );
 		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "meta_link")).wasSuccessful() );
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
 		assertTrue(  equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "suzuki_mirage")).wasSuccessful() );
 		
 		model.setName("Street Shaman");

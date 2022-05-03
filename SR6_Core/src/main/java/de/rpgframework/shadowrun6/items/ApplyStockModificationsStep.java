@@ -41,7 +41,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	@Override
 	public OperationResult<List<Modification>> process(String indent, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
-		for (Modification tmp : model.getModifyable().getModifications()) {
+		for (Modification tmp : model.getModifications()) {
 			if (tmp.getApplyTo()==ApplyTo.CHARACTER) {
 				unprocessed.add(tmp);
 				if (logger.isLoggable(Level.DEBUG)) logger.log(Level.DEBUG, indent+"found modification for character: "+tmp);

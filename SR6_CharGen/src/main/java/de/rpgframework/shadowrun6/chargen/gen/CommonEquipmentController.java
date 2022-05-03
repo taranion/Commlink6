@@ -12,9 +12,11 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -23,14 +25,17 @@ import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -44,6 +49,14 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	//-------------------------------------------------------------------
 	public CommonEquipmentController(SR6CharacterController parent) {
 		super(parent);
+	}
+
+	//-------------------------------------------------------------------
+	public static Possible checkDecisionsAndRequirements(Shadowrun6Character model, ItemTemplate data, String variantID, Decision...decisions) {
+		Possible p1 = Shadowrun6Tools.areRequirementsMet(model, data, decisions);
+		Possible p2 = GenericRPGTools.areAllDecisionsPresent(data, variantID, decisions);
+		
+		return new Possible(p1, p2);
 	}
 
 	//-------------------------------------------------------------------
@@ -99,21 +112,35 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 */
 	@Override
 	public Possible canBeSelected(ItemTemplate value, Decision... decisions) {
+		return canBeSelected(value, null, decisions);
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canBeSelected(ItemTemplate, String, Decision[])
+	 */
+	@Override
+	public Possible canBeSelected(ItemTemplate value, String variantID, Decision... decisions) {
 		// Ensure all choices are made
-		for (Choice choice : value.getChoices()) {
-			boolean choiceNotFound = true;
-			for (Decision dec : decisions) {
-				if (dec.getChoiceUUID()==choice.getUUID()) {
-					choiceNotFound = false;
-					// ToDo: validate choice value
-					break;
-				}
-			}
-			if (choiceNotFound)
-				return new Possible(Possible.State.DECISIONS_MISSING, IRejectReasons.IMPOSS_MISSING_DECISIONS);
+		Possible poss =  GenericRPGTools.areAllDecisionsPresent(value, variantID, decisions);
+		if (!poss.get())
+			return poss;
+		
+		if (value.requiresVariant() && variantID==null) {
+			return new Possible(Possible.State.IMPOSSIBLE, IRejectReasons.IMPOSS_MUST_CHOOSE_VARIANT);
 		}
 		
-		OperationResult<CarriedItem<ItemTemplate>> carried = GearTool.buildItem(value, decisions);
+		// Try to build item
+		OperationResult<CarriedItem<ItemTemplate>> carried = null;
+		if (variantID!=null) {
+			PieceOfGearVariant<SR6VariantMode> variant = value.getVariant(variantID);
+			if (variant==null) {
+				return new Possible(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
+			}
+			carried = GearTool.buildItem(value, variant, decisions);
+		} else {		
+			carried = GearTool.buildItem(value, decisions);
+		}
 		// Check availability
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
 			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
@@ -125,9 +152,12 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		if (carried.get().getAsValue(SR6ItemAttribute.PRICE) != null) {
 			int nuyen = carried.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			if (nuyen>getModel().getNuyen()) {
-				return new Possible(Possible.State.IMPOSSIBLE, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN);
+				return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());
 			}
 		}
+		
+		// Check requirements of carried item
+		//Shadowrun6Tools.areRequirementsMet(getModel(), carried.get());
 		
 		return Possible.TRUE;
 	}
@@ -138,21 +168,29 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, Decision... decisions) {
+		return select(value, null, decisions);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#select(ItemTemplate, String, Decision[])
+	 */
+	@Override
+	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variantID, Decision... decisions) {
 		logger.log(Level.TRACE, "ENTER select({0}, {1}", value, List.of(decisions));
 		try {
-			Possible poss = canBeSelected(value, decisions);
-			if (!poss.getRequireDecisions()) {
+			Possible poss = canBeSelected(value, variantID, decisions);
+			if (!poss.get()) {
 				logger.log(Level.ERROR, "Trying to select {0} which may not be selected: {1}", value, poss.toString());
 				return new OperationResult<>(poss);
 			}
 
-			if (value.requiresVariant()) {
-				logger.log(Level.ERROR, "Trying to select {0} which may not be selected: {1}", value, poss.toString());
-				poss = new Possible(false, IRejectReasons.IMPOSS_MUST_CHOOSE_VARIANT);
-				return new OperationResult<>(poss);
+			PieceOfGearVariant<SR6VariantMode> variant = null;
+			if (variantID!=null) {
+				variant = value.getVariant(variantID);
 			}
 			
-			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, decisions);
+			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, variant, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
 			logger.log(Level.INFO, "Add {0} to model", item.getKey());
@@ -279,12 +317,6 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			model.setNuyen(nuyen);
 			logger.log(Level.INFO, "Nuyen remaining: {0}", model.getNuyen());
 			
-			if (model.getNuyen()<0) {
-				todos.add(new ToDoElement(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.TODO_NEGATIVE_NUYEN, model.getNuyen()));
-			} else if (model.getNuyen()>5000) {
-				todos.add(new ToDoElement(Severity.WARNING, IRejectReasons.RES, IRejectReasons.TODO_TOO_MANY_NUYEN, model.getNuyen()));
-			}
-			
 			return unprocessed;
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE");
@@ -382,7 +414,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canBeEmbedded(CarriedItem, ItemHook, ItemTemplate, Decision[])
 	 */
 	@Override
-	public Possible canBeEmbedded(CarriedItem container, ItemHook slot, ItemTemplate value, Decision... decisions) {
+	public Possible canBeEmbedded(CarriedItem container, ItemHook slot, ItemTemplate value, String variant, Decision... decisions) {
 		if (!getEmbeddableIn(container, slot).contains(value)) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_EMBEDDABLE, value.getName(), slot, container.getNameWithRating());
 		}
@@ -410,10 +442,10 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#embed(CarriedItem, ItemHook, ItemTemplate, Decision[])
 	 */
 	@Override
-	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem container, ItemHook slot, ItemTemplate value, Decision... decisions) {
+	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem container, ItemHook slot, ItemTemplate value, String variant, Decision... decisions) {
 		logger.log(Level.TRACE, "ENTER embed {0} into {1}", value, container);
 		try {
-			Possible poss = canBeEmbedded(container, slot, value, decisions);
+			Possible poss = canBeEmbedded(container, slot, value, variant, decisions);
 			if (!poss.get()) {
 				logger.log(Level.WARNING, "Trying to embed, which isn't possible: "+poss.getMostSevere());
 				return new OperationResult<>();
@@ -426,6 +458,9 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			}
 			logger.log(Level.ERROR, "ToDo: recalculate item after embedding");
 			GearTool.recalculate("", getModel(), container);
+			logger.log(Level.INFO, "Embedded {0} into {1}", value.getId()+"/"+variant, container.getKey());
+			
+			parent.runProcessors();
 			return res;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE embed{0}", value);

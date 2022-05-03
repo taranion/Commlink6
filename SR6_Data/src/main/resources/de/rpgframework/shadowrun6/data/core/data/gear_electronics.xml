@@ -223,6 +223,8 @@
    </item>
    <item avail="1" price="200"  id="trid_projector" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
    	<attrdef id="DEVICE_RATING" value="3"/>
+   	<usage mode="CARRIED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    </item>
    <item avail="2" price="50" id="subvocal_microphone" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
    	<attrdef id="DEVICE_RATING" value="3"/>
@@ -275,7 +277,7 @@
    	</choices>
    	<attrdef id="PRICE" value="$RATING*200"/>
    </item>
-   <item avail="1" price="100" id="micro-transceiver" subtype="COMMUNICATION" type="ELECTRONICS"/>
+   <item avail="1" price="100" id="micro-transceiver" subtype="COMMUNICATION" type="ELECTRONICS" count="y"/>
    <item avail="3" price="450" id="tag_eraser" subtype="COMMUNICATION" type="ELECTRONICS"/>
    <item avail="3" price="50"  id="white_noise_generator" subtype="COMMUNICATION" type="ELECTRONICS">
    	<choices>

@@ -14,7 +14,6 @@ import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Choice;
@@ -23,7 +22,12 @@ import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.formula.FormulaImpl;
+import de.rpgframework.genericrpg.items.formula.FormulaTool;
+import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -42,6 +46,7 @@ import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
@@ -445,8 +450,25 @@ public class Shadowrun6Tools {
 			return false;
 		} else if (req instanceof ValueRequirement) {
 			ValueRequirement tmp = (ValueRequirement)req;
-			int min = tmp.getValue();
 			ShadowrunReference type = (ShadowrunReference)tmp.getType();			
+			int min = -1;
+			if (tmp.getFormula().isResolved()) {
+				min = tmp.getValue();
+			} else {
+				logger.log(Level.WARNING, "ToDo: check unresolved requirement "+req.getKey()+":"+tmp.getFormula()+" for "+requiredFor.getClass());
+				if (requiredFor.getClass()==ItemTemplate.class) {
+					logger.log(Level.WARNING, "Special handling for ItemTemplates");
+					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, decisions).get();
+					VariableResolver resolver = new VariableResolver(item, model);
+					logger.log(Level.WARNING, "ToDo: Resolve "+tmp.getFormula());
+					SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf( ((FormulaImpl)tmp.getFormula()).toString().substring(1));
+					FormulaTool.resolve(itemAttr, (FormulaImpl)tmp.getFormula(), resolver);
+				}
+				SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf(req.getKey().substring(1));
+				
+//				FormulaTool.resolve(itemAttr, (FormulaImpl)tmp.getFormula(), new VariableResolver((CarriedItem)requiredFor, model));
+				System.exit(1);
+			}
 			DataItem item = ShadowrunReference.resolve(type, req.getKey());
 			if (item==null && !("CHOICE".equals(req.getKey()))) {
 				logger.log(Level.ERROR, "Cannot find item for key ''{0}''", tmp.getType()+":"+tmp.getKey());
@@ -491,28 +513,9 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static Possible areAllDecisionsPresent(ComplexDataItem model, Decision...decisions) {
-		for (Choice choice : model.getChoices()) {
-			boolean decisionMissing = true;
-			for (Decision dec : decisions) {
-				if (dec==null) continue;
-				if (choice.getUUID().equals(dec.getChoiceUUID())) {
-					decisionMissing = false;
-					break;
-				}
-			}
-			if (decisionMissing) {
-				return new Possible(Severity.INFO, RES, "impossible.choiceMissing");
-			}
-		}
-		
-		return Possible.TRUE;
-	}
-
-	//-------------------------------------------------------------------
 	public static Possible checkDecisionsAndRequirements(Shadowrun6Character model, ComplexDataItem data, Decision...decisions) {
 		Possible p1 = areRequirementsMet(model, data, decisions);
-		Possible p2 = areAllDecisionsPresent(data, decisions);
+		Possible p2 = GenericRPGTools.areAllDecisionsPresent(data, decisions);
 		
 		return new Possible(p1, p2);
 	}

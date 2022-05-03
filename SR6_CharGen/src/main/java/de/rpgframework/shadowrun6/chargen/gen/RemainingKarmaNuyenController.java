@@ -50,6 +50,8 @@ public class RemainingKarmaNuyenController extends ControllerImpl<Object> implem
 		}
 		if (model.getNuyen()>5000) {
 			todos.add(new ToDoElement(Severity.WARNING, RES, IRejectReasons.TODO_LOOSE_NUYEN, model.getNuyen()));
+		} else if (model.getNuyen()<0) {
+			todos.add(new ToDoElement(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.TODO_NEGATIVE_NUYEN, model.getNuyen()));
 		}
 		return unprocessed;
 	}

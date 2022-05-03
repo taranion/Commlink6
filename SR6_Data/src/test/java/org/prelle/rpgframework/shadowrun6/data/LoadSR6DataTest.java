@@ -14,8 +14,10 @@ import java.util.Locale;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.OperationMode;
@@ -136,6 +138,23 @@ public class LoadSR6DataTest {
 		ItemAttributeObjectValue<SR6ItemAttribute> dmg = carried.getAsObject(SR6ItemAttribute.DAMAGE);
 	}
 
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadWithIntegerAvailability() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "image_link");
+		ItemAttributeDefinition attrDef = temp.getAttribute(SR6ItemAttribute.AVAILABILITY);
+		assertEquals(1, ((Availability)attrDef.getValue()).getValue());
+		attrDef = temp.getAttribute(SR6ItemAttribute.PRICE);
+		assertEquals(25, attrDef.getFormula().getAsInteger());
+		assertEquals(25, attrDef.getDistributed());
+		
+		OperationResult<CarriedItem<ItemTemplate>> item = GearTool.buildItem(temp, temp.getVariant("bodyware"));
+		assertTrue(item.wasSuccessful());
+		item.get().getAsObject(SR6ItemAttribute.AVAILABILITY);
+		item.get().getAsValue(SR6ItemAttribute.PRICE);
+	}
+	
 	//-------------------------------------------------------------------
 	public void exportSkillSpecializations() {
 		StringBuffer buf = new StringBuffer();

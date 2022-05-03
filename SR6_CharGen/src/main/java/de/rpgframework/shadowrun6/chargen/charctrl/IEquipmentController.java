@@ -18,6 +18,28 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 public interface IEquipmentController extends 
 	ComplexDataItemController<ItemTemplate, CarriedItem<ItemTemplate>>, 
 	NumericalValueController<ItemTemplate, CarriedItem<ItemTemplate>> {
+	
+	//-------------------------------------------------------------------
+	/**
+	 * Check if the user is allowed to select the item
+	 * @param value  Item to select
+	 * @param variant Variant to select
+	 * @param decisions Decisions made
+	 * @return Selection allowed or not
+	 * @throws IllegalArgumentException Thrown if a decision is missing or invalid
+	 */
+	public Possible canBeSelected(ItemTemplate value, String variant, Decision... decisions);
+	
+	//-------------------------------------------------------------------
+	/**
+	 * Add/Select the item using the given decisions
+	 * @param value  Item to select
+	 * @param variant Variant to select
+	 * @param decisions Decisions made
+	 * @return value instance of selected item
+	 * @throws IllegalArgumentException Thrown if a decision is missing or invalid
+	 */
+	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variant, Decision... decisions);
 
 
 	//-------------------------------------------------------------------
@@ -27,10 +49,10 @@ public interface IEquipmentController extends
 	public List<ItemTemplate> getEmbeddableIn(CarriedItem<ItemTemplate> ref, ItemHook slot);
 
 	//-------------------------------------------------------------------
-	public Possible canBeEmbedded(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, Decision...decisions);
+	public Possible canBeEmbedded(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, String variant, Decision...decisions);
 
 	//-------------------------------------------------------------------
-	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, Decision...decisions);
+	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, String variant, Decision...decisions);
 
 	//-------------------------------------------------------------------
 	public int getConvertedKarma();

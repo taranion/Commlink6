@@ -453,7 +453,7 @@
     	<variant id="obvious">
     		<attrdef id="PRICE" value="6000"/>
     		<modifications>
-    			<valmod type="HOOK" ref="HEADWARE_IMPLANT" value="4"/>
+    			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="4"/>
     		</modifications>
     	</variant>
     </item>

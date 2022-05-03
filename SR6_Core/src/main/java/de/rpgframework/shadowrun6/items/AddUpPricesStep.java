@@ -6,11 +6,10 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Lifeform;
-import de.rpgframework.genericrpg.items.AccessoryInSlot;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
-import de.rpgframework.genericrpg.modification.ApplyableValueModification;
+import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -37,8 +36,7 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 	@Override
 	public OperationResult<List<Modification>> process(String indent, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
-		for (AccessoryInSlot tmp : model.getAccessories()) {
-			CarriedItem<ItemTemplate> carried = tmp.getItem();
+		for (CarriedItem<? extends PieceOfGear> carried : model.getAccessories()) {
 			int cost = carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			logger.log(Level.INFO, "Increase cost by {0} from {1}", cost, carried.getKey());
 			ItemAttributeNumericalValue<SR6ItemAttribute> attrib = model.getAsValue(SR6ItemAttribute.PRICE);
