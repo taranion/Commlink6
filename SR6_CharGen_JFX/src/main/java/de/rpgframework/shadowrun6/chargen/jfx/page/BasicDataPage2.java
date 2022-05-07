@@ -115,7 +115,6 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		FlexGridPane.setMediumWidth(secQualities, 5);
 		FlexGridPane.setMinHeight(secQualities, 7);
 		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
-			System.getLogger("shadowrun6").log(Level.INFO, "ShowHelpFor "+n);
 			if (n!=null) {
 				layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
 				layout.setTitle(n.getModifyable().getName());

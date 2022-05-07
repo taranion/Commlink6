@@ -1,12 +1,17 @@
 package de.rpgframework.shadowrun6.chargen.jfx.section;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.ListSection;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
+import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 
 /**
@@ -14,6 +19,10 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
  *
  */
 public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
+
+	private final static Logger logger = System.getLogger(QualitySection.class.getPackageName());
+
+	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(QualitySection.class.getPackageName()+".Selection");
 
 	private IShadowrunCharacterController control;
 	private ShadowrunCharacter model;

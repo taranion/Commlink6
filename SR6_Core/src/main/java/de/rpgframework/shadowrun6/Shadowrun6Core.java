@@ -146,7 +146,7 @@ public class Shadowrun6Core extends GenericCore {
 	//-------------------------------------------------------------------
 	public static List<SR6Spell> getSpells() {
 		List<SR6Spell> ret = new ArrayList<>();
-		getItemList(ASpell.class).forEach(s -> ret.add((SR6Spell)s));
+		getItemList(SR6Spell.class).forEach(s -> ret.add((SR6Spell)s));
 		Collections.sort(ret, new Comparator<SR6Spell>() {
 			public int compare(SR6Spell arg0, SR6Spell arg1) {
 				int cmp = arg0.getCategory().compareTo(arg1.getCategory());
