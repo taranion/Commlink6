@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.prelle.simplepersist.AttribConvert;
-import org.prelle.simplepersist.Element;
+import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.ElementList;
 
-import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.shadowrun.Lifestyle;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.Quality;
@@ -19,13 +18,23 @@ import de.rpgframework.shadowrun6.persist.LifestyleQualityConverter;
  */
 public class SR6Lifestyle extends Lifestyle {
 	
-	@Element(name = "neigh")
+	@Attribute(name = "neigh")
 	@AttribConvert(LifestyleQualityConverter.class)
 	private LifestyleQuality neighborhood;
+	@Attribute(name = "necess")
+	@AttribConvert(LifestyleQualityConverter.class)
 	private LifestyleQuality necessities;
+	@Attribute(name = "comfort")
+	@AttribConvert(LifestyleQualityConverter.class)
 	private LifestyleQuality comforts;
+	@Attribute(name = "security")
+	@AttribConvert(LifestyleQualityConverter.class)
 	private LifestyleQuality security;
+	@Attribute(name = "entert")
+	@AttribConvert(LifestyleQualityConverter.class)
 	private LifestyleQuality entertainment;
+	@Attribute(name = "space")
+	@AttribConvert(LifestyleQualityConverter.class)
 	private LifestyleQuality space;
 	
 	@ElementList(entry = "quality", type = String.class )
@@ -40,6 +49,12 @@ public class SR6Lifestyle extends Lifestyle {
 	public SR6Lifestyle(LifestyleQuality value) {
 		super(value);
 		qualities = new ArrayList<>();
+		neighborhood = value;
+		necessities  = value;
+		comforts     = value;
+		security     = value;
+		entertainment= value;
+		space        = value;
 	}
 	
 	//-------------------------------------------------------------------
