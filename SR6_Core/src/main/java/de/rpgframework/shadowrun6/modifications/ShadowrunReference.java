@@ -163,6 +163,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 		} else if (type.resolver!=null) {
 			return (T)type.resolver.apply(key);
 		} else {
+			if (type==ShadowrunReference.TEXT)
+				return (T)key;
 			if (type.converter==null)
 				throw new RuntimeException("Neither class, nor enumType nor converter  class nor StringConverter set for type "+type);
 			try {

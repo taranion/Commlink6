@@ -25,6 +25,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
@@ -47,6 +48,7 @@ import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
@@ -407,9 +409,22 @@ public class Shadowrun6Tools {
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve gear");
+			SR6ResolveTemplatesStep resolver = new SR6ResolveTemplatesStep();
+
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
-				ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
-				tmp.setResolved(resolved);
+				resolver.process("", model, tmp, List.of());
+//				ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
+//				if (resolved==null) {
+//					logger.log(Level.ERROR, "Item {0} refers to unknown item template ''{1}''", tmp.getUuid(), tmp.getKey());
+//					System.exit(1);
+//					continue;
+//				}
+//				if (tmp.getVariantID()!=null) {
+//					PieceOfGearVariant variant = resolved.getVariant(tmp.getVariantID());
+//					tmp.setResolved(resolved, variant);
+//				} else {
+//					tmp.setResolved(resolved);
+//				}
 				SR6GearTool.recalculate("", model, tmp);
 			}
 

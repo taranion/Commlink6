@@ -343,7 +343,7 @@ public class SR6ArchetypeTest {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
-	public void test02CombatMage() throws CharacterIOException {
+	public void test02CombatMage() throws Exception {
 		model.setRuleValue(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA, "true");
 		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
@@ -516,6 +516,9 @@ public class SR6ArchetypeTest {
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+		
+		// Try to reload it again
+		Shadowrun6Core.decode(raw);
 	}
 	
 	//-------------------------------------------------------------------
@@ -764,6 +767,9 @@ public class SR6ArchetypeTest {
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+		
+		// Try to reload it again
+		Shadowrun6Core.decode(raw);
 	}
 	
 	//-------------------------------------------------------------------

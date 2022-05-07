@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -37,7 +38,12 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 	public OperationResult<List<Modification>> process(String indent, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
 		for (CarriedItem<? extends PieceOfGear> carried : model.getAccessories()) {
-			int cost = carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+			ItemAttributeNumericalValue<SR6ItemAttribute> aVal = carried.getAsValue(SR6ItemAttribute.PRICE);
+			if (aVal==null) {
+				logger.log(Level.ERROR, "No attribute PRICE set for item "+carried.getKey()+"/"+carried.getUuid());
+				return new OperationResult<List<Modification>>();
+			}
+			int cost = aVal.getModifiedValue();
 			logger.log(Level.INFO, "Increase cost by {0} from {1}", cost, carried.getKey());
 			ItemAttributeNumericalValue<SR6ItemAttribute> attrib = model.getAsValue(SR6ItemAttribute.PRICE);
 			attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), cost) );
