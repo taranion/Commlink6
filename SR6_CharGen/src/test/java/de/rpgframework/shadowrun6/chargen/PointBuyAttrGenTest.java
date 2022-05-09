@@ -37,6 +37,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
+import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
 import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
@@ -117,6 +118,7 @@ public class PointBuyAttrGenTest {
 			public IEquipmentController getEquipmentController() { return null;}
 			public IAdeptPowerController getAdeptPowerController() { return null;}
 			public SR6SpellController getSpellController() { return null;}
+			public IRitualController getRitualController() { return null;}
 			public IMetamagicOrEchoController getMetamagicOrEchoController() { return null;}
 			public IComplexFormController getComplexFormController() { return null;}
 			public SINController getSINController() { return null;}

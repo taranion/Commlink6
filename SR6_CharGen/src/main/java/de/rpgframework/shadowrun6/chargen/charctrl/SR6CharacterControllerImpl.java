@@ -9,6 +9,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
+import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
 import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 
@@ -27,6 +28,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected SR6ContactController contacts;
 	protected IAdeptPowerController adeptPowers;
 	protected SR6SpellController spells;
+	protected IRitualController rituals;
 	protected IMetamagicOrEchoController metaEcho;
 	protected IEquipmentController equipment;
 	protected SINController sins;
@@ -112,6 +114,15 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	@Override
 	public SR6SpellController getSpellController() {
 		return spells;
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getRitualController()
+	 */
+	@Override
+	public IRitualController getRitualController() {
+		return rituals;
 	}
 	
 	//-------------------------------------------------------------------

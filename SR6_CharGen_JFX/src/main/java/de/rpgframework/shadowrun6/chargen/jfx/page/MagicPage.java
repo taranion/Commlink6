@@ -13,9 +13,15 @@ import org.prelle.javafx.layout.FlexGridPane;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
+import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.chargen.jfx.pane.SpellDescriptionPane;
+import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
+import de.rpgframework.shadowrun.chargen.jfx.section.RitualSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.SpellSection;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -36,6 +42,8 @@ public class MagicPage extends Page {
 	
 	private AdeptPowerSection secAdeptPowers;
 	private SpellSection<SR6Spell> secSpells;
+	private MetamagicOrEchoSection secMeta;
+	private RitualSection secRituals;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -52,6 +60,8 @@ public class MagicPage extends Page {
 	private void initComponents() {
 		initPowers();
 		initSpells();
+		initMetamagic();
+		initRituals();
 	}
 	
 	//-------------------------------------------------------------------
@@ -60,8 +70,8 @@ public class MagicPage extends Page {
 		secAdeptPowers.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secAdeptPowers, 4);
 		FlexGridPane.setMinHeight(secAdeptPowers, 6);
-		FlexGridPane.setMediumWidth(secAdeptPowers, 8);
-		FlexGridPane.setMediumHeight(secAdeptPowers, 4);
+		FlexGridPane.setMediumWidth(secAdeptPowers, 5);
+		FlexGridPane.setMediumHeight(secAdeptPowers, 6);
 	}
 	
 	//-------------------------------------------------------------------
@@ -73,8 +83,35 @@ public class MagicPage extends Page {
 		secSpells.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secSpells, 4);
 		FlexGridPane.setMinHeight(secSpells, 6);
-		FlexGridPane.setMediumWidth(secSpells, 8);
-		FlexGridPane.setMediumHeight(secSpells, 4);
+		FlexGridPane.setMediumWidth(secSpells, 5);
+		FlexGridPane.setMediumHeight(secSpells, 8);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initMetamagic() {
+		secMeta = new MetamagicOrEchoSection(
+				ResourceI18N.get(RES, "page.magic.section.metamagic"),
+				r -> Shadowrun6Tools.getRequirementString((Requirement)r, Locale.getDefault()), 
+				MetamagicOrEcho.Type.METAMAGIC
+				);
+		secMeta.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secMeta, 4);
+		FlexGridPane.setMinHeight(secMeta, 6);
+		FlexGridPane.setMediumWidth(secMeta, 5);
+		FlexGridPane.setMediumHeight(secMeta, 8);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initRituals() {
+		secRituals = new RitualSection(
+				ResourceI18N.get(RES, "page.magic.section.rituals"),
+				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault())
+				);
+		secRituals.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secRituals, 4);
+		FlexGridPane.setMinHeight(secRituals, 6);
+		FlexGridPane.setMediumWidth(secRituals, 5);
+		FlexGridPane.setMediumHeight(secRituals, 6);
 	}
 	
 	//-------------------------------------------------------------------
@@ -82,7 +119,7 @@ public class MagicPage extends Page {
 		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secAdeptPowers, secSpells);
+		flex.getChildren().addAll(secAdeptPowers, secSpells, secMeta, secRituals);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -101,8 +138,8 @@ public class MagicPage extends Page {
 			}
 		});
 		secAdeptPowers.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
-//		secKnowl.selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
-//		secLang .selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
+		secMeta.showHelpForProperty().addListener( (ov,o,n) -> showDescription((MetamagicOrEchoValue)n));
+		secRituals.showHelpForProperty().addListener( (ov,o,n) -> showDescription((RitualValue)n));
 	}
 
 	//-------------------------------------------------------------------
@@ -124,6 +161,8 @@ public class MagicPage extends Page {
 		
 		secAdeptPowers.updateController(ctrl);
 		secSpells.updateController(ctrl);
+		secMeta.updateController(ctrl);
+		secRituals.updateController(ctrl);
 		refresh();
 	}
 	
@@ -131,6 +170,7 @@ public class MagicPage extends Page {
 	public void refresh() {
 		secAdeptPowers.refresh();
 		secSpells.refresh();
+		secMeta.refresh();
 	}
 
 }

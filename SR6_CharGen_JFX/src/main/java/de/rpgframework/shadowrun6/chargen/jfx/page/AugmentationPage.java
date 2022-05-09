@@ -13,9 +13,15 @@ import org.prelle.javafx.layout.FlexGridPane;
 import com.onexip.flexboxfx.FlexBox;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.section.AppearanceSection;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
+import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -38,9 +44,7 @@ public class AugmentationPage extends Page {
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
-//	private SkillSection secNormal;
-//	private SkillSection secKnowl;
-//	private SkillSection secLang;
+	private MetamagicOrEchoSection secMeta;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -57,7 +61,7 @@ public class AugmentationPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		initBaseData();
+		initMetamagic();
 //		initKnowledge();
 //		initLanguage();
 		
@@ -65,13 +69,17 @@ public class AugmentationPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
-	private void initBaseData() {
-//		secNormal = new SkillSection(ResourceI18N.get(RES, "page.skills.section.normal"), SkillType.ACTION);
-//		secNormal.setMaxHeight(Double.MAX_VALUE);
-//		FlexGridPane.setMinWidth(secNormal, 4);
-//		FlexGridPane.setMinHeight(secNormal, 6);
-//		FlexGridPane.setMediumWidth(secNormal, 8);
-//		FlexGridPane.setMediumHeight(secNormal, 4);
+	private void initMetamagic() {
+		secMeta = new MetamagicOrEchoSection(
+				ResourceI18N.get(RES, "page.augmentation.section.transhumanism"),
+				r -> Shadowrun6Tools.getRequirementString((Requirement)r, Locale.getDefault()), 
+				MetamagicOrEcho.Type.TRANSHUMANISM
+				);
+		secMeta.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secMeta, 4);
+		FlexGridPane.setMinHeight(secMeta, 6);
+		FlexGridPane.setMediumWidth(secMeta, 5);
+		FlexGridPane.setMediumHeight(secMeta, 8);
 	}
 	
 	//-------------------------------------------------------------------
@@ -79,7 +87,7 @@ public class AugmentationPage extends Page {
 		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-//		flex.getChildren().addAll(secNormal, secKnowl, secLang);
+		flex.getChildren().addAll(secMeta);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -88,18 +96,19 @@ public class AugmentationPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-//		secNormal.selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
+		secMeta.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 //		secKnowl.selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
 //		secLang .selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
 	//-------------------------------------------------------------------
-	private void showDescription(SR6SkillValue n) {
+	private void showDescription(ComplexDataItemValue<? extends ComplexDataItem> n) {
+		logger.log(Level.INFO, "Show description "+n);
 		if (n==null) {
-			layout.setOptional(new Label("Langer Text"));
+			layout.setOptional(null);
 		} else {
-			descBox.setData(n.getModifyable());
-			layout.setOptional(descBox);
+			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setTitle(n.getModifyable().getName());
 		}
 	}
 	
@@ -109,7 +118,7 @@ public class AugmentationPage extends Page {
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
-//		secKnowl.updateController(ctrl);
+		secMeta.updateController(ctrl);
 //		secLang.updateController(ctrl);
 //		secNormal.updateController(ctrl);
 		refresh();
