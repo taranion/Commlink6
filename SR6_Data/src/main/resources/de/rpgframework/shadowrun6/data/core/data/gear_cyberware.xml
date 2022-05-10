@@ -165,7 +165,7 @@
       </modifications>
    </item>
    
-   <item avail="3" price="6000" id="ocular_drone" >
+   <item avail="3" price="6000" id="ocular_drone" type="CYBERWARE" subtype="CYBER_EYEWARE">
       <usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="6"/>
       <usage mode="IMPLANTED" value="0.3"/>
  		<flag>AUGMENTATION</flag>
@@ -176,7 +176,7 @@
       </modifications>
    </item>
    
-   <item avail="5I" price="20000" id="retinal_duplication" >
+   <item avail="5I" price="20000" id="retinal_duplication" type="CYBERWARE" subtype="CYBER_EYEWARE">
    	<choices>
    		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d2" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
    	</choices>
@@ -545,7 +545,7 @@
 		<usage mode="EMBEDDED" value="3" slot="CYBERLIMB_IMPLANT"/>
  		<flag>AUGMENTATION</flag>
    </item>
-   <item avail="4" price="2000" id="cyber_holster">
+   <item avail="4" price="2000" id="cyber_holster" type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY">
 		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="5"/>
  		<flag>AUGMENTATION</flag>
    </item>

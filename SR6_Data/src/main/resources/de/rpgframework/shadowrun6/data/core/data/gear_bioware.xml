@@ -209,7 +209,7 @@
       <usage mode="IMPLANTED" value="0.1"/>
       <flag>AUGMENTATION</flag>
    </item>
-   <item id="synaptic_booster" avail="5L">
+   <item id="synaptic_booster" avail="5L" type="BIOWARE" subtype="BIOWARE_CULTURED">
 		<choices>
 			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>

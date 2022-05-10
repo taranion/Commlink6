@@ -37,19 +37,19 @@
 			<valmod type="HOOK" ref="ARMOR" value="4" />
 		</modifications>
 	</item>
-	<item id="armor_jacket" avail="2" price="1000">
+	<item id="armor_jacket" avail="2" price="1000" type="ARMOR" subtype="ARMOR_BODY">
 		<armor rating="4" social="-3" />
 		<modifications>
 			<valmod type="HOOK" ref="ARMOR" value="8" />
 		</modifications>
 	</item>
-	<item id="armor_vest" avail="4" price="750">
+	<item id="armor_vest" avail="4" price="750" type="ARMOR" subtype="ARMOR_BODY">
 		<armor rating="3" social="-1" />
 		<modifications>
 			<valmod type="HOOK" ref="ARMOR" value="6" />
 		</modifications>
 	</item>
-	<item id="chameleon_suit" avail="4I" price="2000">
+	<item id="chameleon_suit" avail="4I" price="2000" type="ARMOR" subtype="ARMOR_BODY">
 		<armor rating="2" social="-3" />
 		<modifications>
 			<valmod type="HOOK" ref="ARMOR" value="4" />

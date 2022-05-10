@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-	<item avail="3" price="250" id="chemical_protection"
-		type="ACCESSORY" subtype="ARMOR_BODY">
+	<item avail="3" price="250" id="chemical_protection" type="ACCESSORY" subtype="ARMOR_BODY">
 		<choices>
 			<choice uuid="594d14a0-8313-4e56-99e9-e839ee9df9a8"
 				type="ITEM_ATTRIBUTE" ref="RATING"
@@ -41,7 +40,7 @@
 		<attrdef id="SIZE" value="$RATING" />
 		<attrdef id="PRICE" value="$RATING*250" />
 	</item>
-	<item avail="3" price="250" id="electricity_resistance">
+	<item avail="3" price="250" id="electricity_resistance" type="ACCESSORY" subtype="ARMOR_BODY">
 		<choices>
 			<choice uuid="594d14a0-8313-4e56-99e9-e839ee9df9a8"
 				type="ITEM_ATTRIBUTE" ref="RATING"

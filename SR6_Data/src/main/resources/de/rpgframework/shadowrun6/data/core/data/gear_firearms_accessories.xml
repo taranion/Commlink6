@@ -6,7 +6,7 @@
           <datareq type="ITEMSUBTYPE" ref="LAUNCHERS" apply="DATA_ITEM"/>
       </requires>
    </item>
-   <item avail="1" price="200" id="bipod">
+   <item avail="1" price="200" id="bipod" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="UNDER"/>
       <modifications>
 			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2" />
