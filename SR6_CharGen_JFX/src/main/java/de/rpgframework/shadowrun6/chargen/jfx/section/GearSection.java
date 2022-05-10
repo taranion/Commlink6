@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 
@@ -46,6 +47,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	public GearSection(String title, ItemType...types) {
 		super(title);
 		allowedTypes = List.of(types);
+		list.setCellFactory(lv -> new CarriedItemListCell( () -> control.getEquipmentController()));
 		
 		refresh();
 	}
