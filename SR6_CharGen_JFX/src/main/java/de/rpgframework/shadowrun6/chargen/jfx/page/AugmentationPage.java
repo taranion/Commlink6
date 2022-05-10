@@ -10,29 +10,18 @@ import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
-import com.onexip.flexboxfx.FlexBox;
-
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
-import de.rpgframework.jfx.section.AppearanceSection;
-import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.SkillType;
-import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
-import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
-import de.rpgframework.shadowrun6.SR6Skill;
-import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
-import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
-import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
-import de.rpgframework.shadowrun6.chargen.jfx.section.SkillSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.EssenceSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
+import de.rpgframework.shadowrun6.items.ItemType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -44,7 +33,9 @@ public class AugmentationPage extends Page {
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
-	private MetamagicOrEchoSection secMeta;
+	private EssenceSection secTrans;
+	private GearSection secCyber;
+	private GearSection secBio;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -61,33 +52,58 @@ public class AugmentationPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		initMetamagic();
-//		initKnowledge();
-//		initLanguage();
+		initEssence();
+		initCyberware();
+		initBioware();
 		
 		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------
-	private void initMetamagic() {
-		secMeta = new MetamagicOrEchoSection(
-				ResourceI18N.get(RES, "page.augmentation.section.transhumanism"),
-				r -> Shadowrun6Tools.getRequirementString((Requirement)r, Locale.getDefault()), 
-				MetamagicOrEcho.Type.TRANSHUMANISM
+	private void initCyberware() {
+		secCyber = new GearSection(
+				ResourceI18N.get(RES, "page.augmentation.section.cyberware"),
+				ItemType.CYBERWARE
 				);
-		secMeta.setMaxHeight(Double.MAX_VALUE);
-		FlexGridPane.setMinWidth(secMeta, 4);
-		FlexGridPane.setMinHeight(secMeta, 6);
-		FlexGridPane.setMediumWidth(secMeta, 5);
-		FlexGridPane.setMediumHeight(secMeta, 8);
+		secCyber.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secCyber, 4);
+		FlexGridPane.setMinHeight(secCyber, 6);
+		FlexGridPane.setMediumWidth(secCyber, 5);
+		FlexGridPane.setMediumHeight(secCyber, 6);
+		FlexGridPane.setMaxWidth(secCyber, 5);
+		FlexGridPane.setMaxHeight(secCyber, 9);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initBioware() {
+		secBio = new GearSection(
+				ResourceI18N.get(RES, "page.augmentation.section.bioware"),
+				ItemType.BIOWARE
+				);
+		secBio.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secBio, 4);
+		FlexGridPane.setMinHeight(secBio, 6);
+		FlexGridPane.setMediumWidth(secBio, 5);
+		FlexGridPane.setMediumHeight(secBio, 6);
+		FlexGridPane.setMaxWidth(secBio, 5);
+		FlexGridPane.setMaxHeight(secBio, 9);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initEssence() {
+		secTrans = new EssenceSection(ResourceI18N.get(RES, "page.augmentation.section.essence"));
+		secTrans.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secTrans, 4);
+		FlexGridPane.setMinHeight(secTrans, 4);
+		FlexGridPane.setMediumWidth(secTrans, 4);
+		FlexGridPane.setMediumHeight(secTrans, 4);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secMeta);
+		flex.getChildren().addAll(secTrans, secCyber, secBio);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -96,9 +112,9 @@ public class AugmentationPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-		secMeta.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
-//		secKnowl.selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
-//		secLang .selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
+		secCyber.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secBio  .showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secTrans.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
 	//-------------------------------------------------------------------
@@ -111,6 +127,17 @@ public class AugmentationPage extends Page {
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
+
+	//-------------------------------------------------------------------
+	private void showDescription(ComplexDataItem n) {
+		logger.log(Level.INFO, "Show description "+n);
+		if (n==null) {
+			layout.setOptional(null);
+		} else {
+			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
+			layout.setTitle(n.getName());
+		}
+	}
 	
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
@@ -118,17 +145,17 @@ public class AugmentationPage extends Page {
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
-		secMeta.updateController(ctrl);
-//		secLang.updateController(ctrl);
-//		secNormal.updateController(ctrl);
+		secCyber.updateController(ctrl);
+		secBio  .updateController(ctrl);
+		secTrans.updateController(ctrl);
 		refresh();
 	}
 	
 	//-------------------------------------------------------------------
 	public void refresh() {
-//		secNormal.refresh();
-//		secLang.refresh();
-//		secKnowl.refresh();
+		secCyber.refresh();
+		secBio  .refresh();
+		secTrans.refresh();
 	}
 
 }

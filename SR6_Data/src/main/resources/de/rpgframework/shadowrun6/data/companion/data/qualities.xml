@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+	<quality id="augmentation_acclimation" karma="2" pos="true" type="NORMAL" max="10">
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="ESSENCE_HOLE" value="100" />
+		</modifications>
+	</quality>
+</qualities>

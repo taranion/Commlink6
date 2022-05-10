@@ -25,7 +25,6 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.GearTool;
-import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
@@ -52,6 +51,7 @@ import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
+import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
@@ -68,7 +68,7 @@ public class Shadowrun6Tools {
 		ResetModifications.class,
 //		new ResolveChoicesInReferences(),
 		GetModificationsFromMetaType.class,
-		ApplyQualityModifications.class
+		ApplyQualityModifications.class,
 //		new GetModificationsFromMagicOrResonance(),
 //		new GetModificationsFromQualities(),
 //		new ApplyAdeptPowerModifications(),
@@ -91,7 +91,7 @@ public class Shadowrun6Tools {
 //		new ConnectSignatureManeuvers(),
 //		new ApplyRelevanceAndEdgeMods(),
 //		new CalculateDerivedAttributes(),
-//		new CalculateEssence(),
+		CalculateEssence.class
 //		new CalculatePersona(),
 	);
 	
@@ -360,10 +360,16 @@ public class Shadowrun6Tools {
 			}
 		} else if (req instanceof ValueRequirement) {
 			ValueRequirement tmp = (ValueRequirement)req;
-			ShadowrunReference type = (ShadowrunReference)tmp.getType();			
-			DataItem item = ShadowrunReference.resolve(type, req.getKey());
+			ShadowrunReference type = (ShadowrunReference)tmp.getType();
+			DataItem item = null;
 			switch ((ShadowrunReference)tmp.getType()) {
+			case ATTRIBUTE:
+				if (tmp.getMaxValue()>0) {
+					return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" <="+tmp.getMaxValue();			
+				}
+				return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" "+tmp.getValue()+"+";			
 			case SKILL:
+				item = ShadowrunReference.resolve(type, req.getKey());
 				return item.getName(loc)+" "+tmp.getRawValue()+"+";			
 			}
 		} else if (req instanceof AnyRequirement) {

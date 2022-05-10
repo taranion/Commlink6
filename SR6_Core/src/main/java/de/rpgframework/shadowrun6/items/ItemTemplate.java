@@ -86,6 +86,9 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	@Override
 	public void validate() {
 //		attributes.clear();
+		if (type==null) throw new DataErrorException(this, "sort type not set for '"+id+"'");
+		if (subtype==null) throw new DataErrorException(this, "sort subtype not set for '"+id+"'");
+		
 		
 		setAttribute(SR6ItemAttribute.PRICE, super.price);
 

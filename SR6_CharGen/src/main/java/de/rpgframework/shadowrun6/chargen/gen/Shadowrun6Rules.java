@@ -25,8 +25,9 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	}
 	
 	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule("CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
-	public static Rule CHARGEN_PRIO_ADEPT_PP = new Rule("CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.FINAL_MAGIC);
+	public static Rule CHARGEN_PRIO_ADEPT_PP    = new Rule("CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.FINAL_MAGIC);
 	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule("CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule ALLOW_TRANSHUMANISM      = new Rule("ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
 
 	
 	//-------------------------------------------------------------------
@@ -36,7 +37,8 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_MAX_KARMA_REMAIN,
 				CHARGEN_MAX_NUYEN_REMAIN,
 				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
-				CAREER_PAY_GEAR
+				CAREER_PAY_GEAR,
+				ALLOW_TRANSHUMANISM
 		};
 	}
 	

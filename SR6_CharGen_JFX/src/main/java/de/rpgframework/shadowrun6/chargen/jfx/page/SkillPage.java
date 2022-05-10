@@ -10,24 +10,15 @@ import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
-import com.onexip.flexboxfx.FlexBox;
-
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.GenericDescriptionVBox;
-import de.rpgframework.jfx.ListSection;
-import de.rpgframework.jfx.section.AppearanceSection;
 import de.rpgframework.shadowrun.SkillType;
-import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
-import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
-import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.KnowledgeSkillSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SkillSection;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
