@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 import org.prelle.javafx.JavaFXConstants;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.jfx.ListSection;
+import de.rpgframework.jfx.section.ListSection;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
