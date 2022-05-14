@@ -657,6 +657,7 @@ public class SR6ArchetypeTest {
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
 		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "datajack"));
+		System.exit(1);
 		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"));
 		OperationResult<CarriedItem<ItemTemplate>> toner = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner").getChoices().get(0), "1"));
@@ -667,7 +668,8 @@ public class SR6ArchetypeTest {
 
 		Possible poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"));
 		assertNotNull(poss);
-		assertFalse("Missing variant not detected" , poss.get());
+		assertNotNull("Missing variant not detected" , poss.getMostSevere());
+		assertTrue("Should be marked selectable, although variant not selected" , poss.get());
 		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious");
 		assertTrue(poss.toString(), poss.get());
 		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious");

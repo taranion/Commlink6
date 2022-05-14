@@ -43,7 +43,9 @@ public class CalculateEssence implements ProcessingStep {
 			float essenceCost = 0.0f;
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(item.getResolved().getItemType())) {
+					logger.log(Level.INFO, "Test "+item.getKey()+" with "+item.getResolved().getItemType());
 					ItemAttributeObjectValue<SR6ItemAttribute> aVal = item.getAsObject(SR6ItemAttribute.ESSENCECOST);
+					logger.log(Level.INFO, "  essence = "+aVal);
 					if (aVal==null) continue;
 					float essence = item.getAsObject(SR6ItemAttribute.ESSENCECOST).getModifiedValue(); 
 					logger.log(Level.INFO,"* "+item.getNameWithoutRating()+" = "+essence);

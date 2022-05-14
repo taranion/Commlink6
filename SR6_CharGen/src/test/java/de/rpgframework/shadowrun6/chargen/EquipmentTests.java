@@ -14,6 +14,7 @@ import org.junit.Test;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -98,6 +99,29 @@ public class EquipmentTests {
 		}
 		
 		System.out.println("DUMP\n"+ref.dump());
+		
+		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
+		assertEquals(1075, attr.getModifiedValue());
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * Ensure essence is calculated when cyberware is added
+	 */
+	@Test
+	public void test03() {
+		CarriedItem<ItemTemplate> ref = GearTool.buildItem(Shadowrun6Core.getItem(ItemTemplate.class, "datajack"), model).get();
+		System.out.println("DUMP1\n"+ref.dump());
+		
+		
+		OperationResult<List<Modification>> mods = SR6GearTool.recalculate("", null, ref);
+		assertTrue(mods.wasSuccessful());
+		List<Modification> list = mods.get();
+		for (Modification val : list) {
+			System.out.println("  = "+val);
+		}
+		
+		System.out.println("DUMP2\n"+ref.dump());
 		
 		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
 		assertEquals(1075, attr.getModifiedValue());

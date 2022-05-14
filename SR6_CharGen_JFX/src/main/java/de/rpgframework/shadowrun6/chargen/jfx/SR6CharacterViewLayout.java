@@ -16,6 +16,7 @@ import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
+import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
@@ -24,6 +25,7 @@ import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
@@ -60,9 +62,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 * @param ctrl Either a GeneratorWrapper or a CharacterLeveller
 	 */
 	public SR6CharacterViewLayout() {
+		super(RoleplayingSystem.SHADOWRUN6);
 		initPages();
 		
-		setOnBackAction(ev -> closeRequested());
+		setOnBackAction(ev -> closeRequested( ));
 	}
 	
 	//-------------------------------------------------------------------
@@ -224,8 +227,13 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	}
 
 	//-------------------------------------------------------------------
+	/**
+	 * This method is called, after closing the page has been confirmed -
+	 * AND the character has already been saved, if requested.
+	 * To enable reverting the character to the state from the disk, reload it here
+	 */
 	private void closeRequested() {
-		logger.log(Level.ERROR, "ENTER closeRequested");
+		logger.log(Level.DEBUG, "ENTER closeRequested");
 	}
 
 	//-------------------------------------------------------------------
@@ -236,6 +244,18 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	protected byte[] encodeCharacter(Shadowrun6Character model) throws CharacterIOException {
 		logger.log(Level.DEBUG, "START: encodeCharacter");
 		return Shadowrun6Core.encode(model); 
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.pages.CharacterViewLayout#decodeCharacter(byte[])
+	 */
+	@Override
+	protected Shadowrun6Character decodeCharacter(byte[] encoded) throws CharacterIOException {
+		logger.log(Level.DEBUG, "START: decodeCharacter");
+		Shadowrun6Character model = Shadowrun6Core.decode(encoded);
+		Shadowrun6Tools.resolveChar(model);
+		return model;
 	}
 
 }

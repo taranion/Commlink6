@@ -23,7 +23,6 @@ import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.GenericCore;
 import de.rpgframework.genericrpg.items.GearTool;
-import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTable;
 import de.rpgframework.shadowrun.PriorityTableEntry;
@@ -173,9 +172,14 @@ public class Shadowrun6Core extends GenericCore {
 	}
 
 	//-------------------------------------------------------------------
-	public static Shadowrun6Character decode(byte[] rawData) throws Exception {
+	public static Shadowrun6Character decode(byte[] rawData) throws CharacterIOException {
 		String data = new String(rawData, Charset.forName("UTF-8"));
-		return serializer.read(Shadowrun6Character.class, data);
+		try {
+			return serializer.read(Shadowrun6Character.class, data);
+		} catch (IOException e) {
+			logger.log(Level.ERROR, "Failed deocding XML from char",e);
+			throw new CharacterIOException(ErrorCode.DECODING_FAILED, "Failed decoding XML", e);
+		}
 	}
 
 }

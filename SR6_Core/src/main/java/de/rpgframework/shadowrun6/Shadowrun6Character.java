@@ -39,9 +39,9 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			attributes.add(new AttributeValue<ShadowrunAttribute>(key, 1));
 		}
-		attributes.add(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.MAGIC, 0));
-		attributes.add(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.RESONANCE, 0));
-		attributes.add(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0));
+		setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.MAGIC, 0));
+		setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.RESONANCE, 0));
+		setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0));
 	}
 
 	//-------------------------------------------------------------------
