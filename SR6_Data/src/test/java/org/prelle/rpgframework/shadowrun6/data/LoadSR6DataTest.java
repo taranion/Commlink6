@@ -149,7 +149,7 @@ public class LoadSR6DataTest {
 		assertEquals(25, attrDef.getFormula().getAsInteger());
 		assertEquals(25, attrDef.getDistributed());
 		
-		OperationResult<CarriedItem<ItemTemplate>> item = GearTool.buildItem(temp, temp.getVariant("bodyware"));
+		OperationResult<CarriedItem<ItemTemplate>> item = GearTool.buildItem(temp, temp.getVariant("bodyware"), null);
 		assertTrue(item.wasSuccessful());
 		item.get().getAsObject(SR6ItemAttribute.AVAILABILITY);
 		item.get().getAsValue(SR6ItemAttribute.PRICE);

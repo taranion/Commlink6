@@ -240,6 +240,10 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 			// Pay Nuyen for lifestyles
 			for (SR6Lifestyle val : model.getLifestyles()) {
 				int lp = val.getLifestylePoints();
+				if (val.isAutoAdded()) {
+					logger.log(Level.DEBUG, "Don't pay for auto-added lifestyle {0}", val.getKey());
+					continue;
+				} 
 				logger.log(Level.DEBUG, "Pay {1} for lifestyle {1}", val.getNameWithRating(), getLifestyleCost(val));
 				model.setNuyen( model.getNuyen() - getLifestyleCost(val));
 			}

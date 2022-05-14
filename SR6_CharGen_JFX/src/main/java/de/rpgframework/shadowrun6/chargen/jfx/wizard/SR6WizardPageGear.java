@@ -24,6 +24,7 @@ import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemTemplateFilterNode;
@@ -59,6 +60,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	protected OptionalNodePane layout;
 	private NumberUnitBackHeader backHeaderKarma;
 	private NumberUnitBackHeader backHeaderNuyen;
+	private NumberUnitBackHeader backHeaderEssence;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageGear(Wizard wizard, SpliMoCharacterController charGen) {
@@ -99,17 +101,20 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		// Current Karma
-		backHeaderKarma = new NumberUnitBackHeader("Karma");
+		backHeaderKarma = new NumberUnitBackHeader(ResourceI18N.get(RES, "label.karma"));
 		backHeaderKarma.setValue(charGen.getModel().getKarmaFree());
-		backHeaderNuyen = new NumberUnitBackHeader("Nuyen");
+		backHeaderNuyen = new NumberUnitBackHeader(ResourceI18N.get(RES, "label.nuyen"));
 		backHeaderNuyen.setValue(charGen.getModel().getNuyen());
+		backHeaderEssence = new NumberUnitBackHeader(ResourceI18N.get(RES, "label.essence"));
+		float essence = charGen.getModel().getAttribute(ShadowrunAttribute.ESSENCE).getModifiedValue();
+		backHeaderEssence.setValue( essence/1000.0f );
 		HBox.setMargin(backHeaderKarma, new Insets(0,10,0,10));
 		HBox.setMargin(backHeaderNuyen, new Insets(0,10,0,10));
-		if (ResponsiveControlManager.getCurrentMode()==WindowMode.EXPANDED) {
-			super.setBackHeader(null);
-		} else {
-			super.setBackHeader(new HBox(backHeaderKarma, backHeaderNuyen));
-		}
+//		if (ResponsiveControlManager.getCurrentMode()==WindowMode.EXPANDED) {
+//			super.setBackHeader(null);
+//		} else {
+			super.setBackHeader(new HBox(backHeaderKarma, backHeaderNuyen, backHeaderEssence));
+//		}
 		
 		// Information about spent PP
 		Label hdConverted = new Label(ResourceI18N.get(RES, "page.gear.converted"));

@@ -138,9 +138,9 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			if (variant==null) {
 				return new Possible(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
 			}
-			carried = GearTool.buildItem(value, variant, decisions);
+			carried = GearTool.buildItem(value, variant, getModel(), decisions);
 		} else {		
-			carried = GearTool.buildItem(value, decisions);
+			carried = GearTool.buildItem(value, getModel(), decisions);
 		}
 		// Check availability
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
@@ -191,7 +191,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				variant = value.getVariant(variantID);
 			}
 			
-			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, variant, decisions);
+			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, variant, getModel(), decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
 			logger.log(Level.INFO, "Add {0} to model", item.getKey());
@@ -231,7 +231,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				return false;
 			}
 
-			logger.log(Level.INFO, "Remove {0 frommodel", value.toString());
+			logger.log(Level.INFO, "Remove {0} from model", value.toString());
 			getModel().removeCarriedItem(value);
 			
 			parent.runProcessors();
@@ -273,7 +273,8 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 					if (mod.getReferenceType()==ShadowrunReference.GEAR) {
 						ItemTemplate template = mod.getResolvedKey();
 						Decision[] dec = new Decision[mod.getDecisions().size()];
-						OperationResult<CarriedItem<ItemTemplate>> carry = GearTool.buildItem(template, mod.getDecisions().toArray(dec));
+						OperationResult<CarriedItem<ItemTemplate>> carry = GearTool.buildItem(template, getModel(), mod.getDecisions().toArray(dec));
+						carry.get().addModification(mod);
 						logger.log(Level.DEBUG, "add {0}", template);
 						model.addCarriedItem(carry.get());
 					} else
@@ -311,9 +312,12 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			 */
 			int nuyen = model.getNuyen();
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
-				logger.log(Level.INFO, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue(), tmp.getNameWithRating());
-				int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
-				nuyen -= cost;
+				if (!tmp.isAutoAdded()) {
+					logger.log(Level.INFO, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue(),
+							tmp.getNameWithRating());
+					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+					nuyen -= cost;
+				}
 			}
 			model.setNuyen(nuyen);
 			logger.log(Level.INFO, "Nuyen remaining: {0}", model.getNuyen());
@@ -420,7 +424,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_EMBEDDABLE, value.getName(), slot, container.getNameWithRating());
 		}
 		
-		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, decisions);
+		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, getModel(), decisions);
 		if (res.hasError()) {
 			return new Possible(State.IMPOSSIBLE, res.getMessages().toString());
 		}
@@ -452,7 +456,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				return new OperationResult<>();
 			}
 			
-			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, decisions);
+			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, getModel(), decisions);
 			logger.log(Level.ERROR, "ToDo: really embed");
 			if (res.wasSuccessful()) {
 				container.addAccessory(res.get(), slot);

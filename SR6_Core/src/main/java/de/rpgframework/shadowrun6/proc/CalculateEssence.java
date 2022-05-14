@@ -40,32 +40,47 @@ public class CalculateEssence implements ProcessingStep {
 		logger.log(Level.TRACE, "ENTER: process");
 		try {
 
-			float sum = 0.0f;
+			float essenceCost = 0.0f;
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(item.getResolved().getItemType())) {
 					ItemAttributeObjectValue<SR6ItemAttribute> aVal = item.getAsObject(SR6ItemAttribute.ESSENCECOST);
 					if (aVal==null) continue;
 					float essence = item.getAsObject(SR6ItemAttribute.ESSENCECOST).getModifiedValue(); 
 					logger.log(Level.INFO,"* "+item.getNameWithoutRating()+" = "+essence);
-					sum += essence;
+					essenceCost += essence;
 				}
 			}
 			
-			AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
-			if (aVal==null) {
-				aVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0);
-				model.setAttribute(aVal);
+			// Ensure presence of attributes
+			AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);
+			if (essVal==null) {
+				essVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE, 6000);
+				model.setAttribute(essVal);
 			}
-			sum += (float)(aVal.getModifiedValue())/1000.0f;
+			AttributeValue<ShadowrunAttribute> holeVal = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
+			if (holeVal==null) {
+				holeVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0);
+				model.setAttribute(holeVal);
+			}
+			essenceCost += (float)(holeVal.getModifiedValue())/1000.0f;
+			
+			if (model.isInCareerMode()) {
+				// Determine the max essence
+				float max = 6000 - model.getEssenceHole();
+				// Reduce the cost by variable
+				logger.log(Level.WARNING, "ToDo: Calculate essence");
+			} else {
+				// Max essence to substract from is 6 plus additional essence hole
+				float max = 6000 + holeVal.getModifiedValue();
+				
+				int remain = Math.min(6000, Math.round(max - (int)(essenceCost*1000)));
+				essVal.setDistributed(remain);
+				holeVal.setDistributed(0);
+				model.setEssenceHole(0);
+				logger.log(Level.INFO, "Essence cost is {0}, hole is {1}, resulting remain essence is {2}", essenceCost, holeVal.getModifiedValue(), remain);
+			}
 
-			float normalLow = (6000 - (int)(sum*1000)) / 1000.0f;
-//			if (model.getEssence()==0 || normalLow<model.getEssence()) {
-//				logger.info("Unused essence decreased to "+normalLow);
-//				model.setEssence(normalLow);
-//			}
-//			logger.info("sum="+sum+"  normalLow="+normalLow+"  unused="+model.getEssence());
-
-			float min = 6.0f - sum; //Math.min(model.getEssence(), 6.0f-sum);
+			float min = 6.0f - essenceCost; //Math.min(model.getEssence(), 6.0f-sum);
 //			if (min!=model.getEssence()) {
 //				logger.warn("Fix essence to "+min);
 //				model.setEssence(min);

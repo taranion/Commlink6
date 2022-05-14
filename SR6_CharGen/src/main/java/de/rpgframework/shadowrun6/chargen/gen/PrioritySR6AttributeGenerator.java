@@ -609,7 +609,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 				} else if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE) {
 					ValueModification mod = (ValueModification)tmp;
 					ShadowrunAttribute attr = mod.getResolvedKey();
-					logger.log(Level.INFO, "Consume "+mod);
+					logger.log(Level.DEBUG, "Consume "+mod);
 					getModel().getAttribute(attr).addModification(mod);
 					if (mod.getSet()==ValueType.MAX) {
 						// Optional: Allow adjustment points on lowered maximum
@@ -634,7 +634,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 				allowedAdjust.add(ShadowrunAttribute.RESONANCE);
 			
 			logger.log(Level.DEBUG, "Start with "+adjustmentPoints+" adjust and "+attributePoints+" attrib points");
-			logger.log(Level.INFO, "Adjustment points may be used for "+allowedAdjust);
+			logger.log(Level.DEBUG, "Adjustment points may be used for "+allowedAdjust);
 			
 			ensureMaximumSet();
 			validateAdjustmentpoints();

@@ -197,11 +197,10 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			getPages().addAll(getPageList());
 		}
 		
-		logger.log(Level.DEBUG, "Pages now");
-		for (WizardPage page : getPages()) {
-			logger.log(Level.DEBUG, "- "+page);
-		}
-//		attrib.refresh();
+//		logger.log(Level.DEBUG, "Pages now");
+//		for (WizardPage page : getPages()) {
+//			logger.log(Level.DEBUG, "- "+page);
+//		}
 		// Update buttons
 		refresh();
 	}

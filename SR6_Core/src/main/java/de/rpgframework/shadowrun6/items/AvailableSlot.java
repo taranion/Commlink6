@@ -24,7 +24,7 @@ public class AvailableSlot extends AAvailableSlot<ItemHook>  {
 		super();
 		this.ref = hook;
 		if (hook.hasCapacity())
-			throw new IllegalArgumentException("Hook has capacity - use other constructor");
+			throw new IllegalArgumentException("Hook "+hook+" has capacity - use other constructor");
 	}
 	
 	//-------------------------------------------------------------------

@@ -6,17 +6,20 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.AAvailableSlot;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.Formula;
+import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -44,7 +47,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		for (Modification tmp : model.getModifications()) {
 			if (tmp.getApplyTo()==ApplyTo.CHARACTER) {
 				unprocessed.add(tmp);
-				if (logger.isLoggable(Level.DEBUG)) logger.log(Level.DEBUG, indent+"found modification for character: "+tmp);
+//				if (logger.isLoggable(Level.DEBUG)) logger.log(Level.DEBUG, indent+"found modification for character: "+tmp);
 			} else {
 				if (tmp instanceof ValueModification) {
 					applyModification(indent, charac, model, (ValueModification) tmp);
@@ -62,24 +65,29 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 
 	//-------------------------------------------------------------------
 	private void applyModification(String indent, Lifeform charac, CarriedItem<?> model, ValueModification mod) {
+		if (mod.getApplyTo()==ApplyTo.CHARACTER) {
+			logger.log(Level.WARNING, "Ignore for now "+mod);
+			model.addCharacterModification(mod);
+			return;
+		}
 		switch ((ShadowrunReference) mod.getReferenceType()) {
 		case HOOK:
 			ItemHook hook = mod.getResolvedKey();
 			Formula form = mod.getFormula();
-			logger.log(Level.INFO, indent+"form="+form+" / "+form.isResolved());
+//			logger.log(Level.INFO, indent+"form="+form+" / "+form.isResolved());
 			AAvailableSlot<ItemHook> slot = null;
 			if (!form.isResolved()) {
 				VariableResolver resolver = new VariableResolver(model, charac);
 
 				String foo = FormulaTool.resolve(SR6ItemAttribute.CAPACITY, (FormulaImpl) form, resolver);
-				logger.log(Level.INFO, indent+"foo="+foo);
+//				logger.log(Level.INFO, indent+"foo="+foo);
 				int capacity = Integer.parseInt(foo);
 				slot = new AvailableSlot(hook, capacity);
 			} else {
 				slot = new AvailableSlot(hook, mod.getValue());
 			}
 			model.addSlot(slot);
-			logger.log(Level.INFO, indent+"Added slot {0} with capacity {1}", hook, slot.getCapacity());
+//			logger.log(Level.TRACE, indent+"Added slot {0} with capacity {1}", hook, slot.getCapacity());
 			return;
 		}
 		logger.log(Level.WARNING, "ToDo: ValueModification "+mod);
@@ -88,12 +96,23 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 
 	//-------------------------------------------------------------------
 	private void applyModification(String indent, Lifeform charac, CarriedItem<?> model, DataItemModification mod) {
+		if (mod.getApplyTo()==ApplyTo.CHARACTER) {
+			model.addCharacterModification(mod);
+			logger.log(Level.WARNING, "Ignore for now "+mod);
+			return;
+		}
+		
+		Decision[] decs = new Decision[mod.getDecisions().size()];
+		decs = mod.getDecisions().toArray(decs);
 		switch ((ShadowrunReference) mod.getReferenceType()) {
 		case HOOK:
 			ItemHook hook = mod.getResolvedKey();
+			logger.log(Level.INFO, indent+"Add slot {0} without capacity ", hook);
 			AAvailableSlot<ItemHook> slot = new AvailableSlot(hook);
 			model.addSlot(slot);
-			logger.log(Level.INFO, indent+"Added slot {0} without capacity ", hook);
+			return;
+		case GEAR:
+			model.addCharacterModification(mod);
 			return;
 		}
 		logger.log(Level.WARNING, "ToDo: DataItemModification "+mod);

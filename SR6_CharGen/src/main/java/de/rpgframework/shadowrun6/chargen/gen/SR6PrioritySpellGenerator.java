@@ -53,7 +53,6 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 		for (SpellValue<? extends ASpell> tmp : getModel().getSpells()) {
 			ret.remove(tmp.getModifyable());
 		}
-		logger.log(Level.WARNING, "Return "+ret.size()+" available");
 		return ret;
 	}
 

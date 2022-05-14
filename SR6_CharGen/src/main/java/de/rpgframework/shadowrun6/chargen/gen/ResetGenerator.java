@@ -2,10 +2,12 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.QualityValue;
@@ -45,7 +47,7 @@ public class ResetGenerator implements ProcessingStep {
 				model.setAttribute(val);
 			}
 			val.clearModifications();
-			logger.log(Level.DEBUG, "Mods of "+val+" = "+val.getModifiedValue());
+//			logger.log(Level.DEBUG, "Mods of "+val+" = "+val.getModifiedValue());
 		}
 		// Reset all skills
 		for (SR6Skill tmp : Shadowrun6Core.getItemList(SR6Skill.class)) {
@@ -60,6 +62,12 @@ public class ResetGenerator implements ProcessingStep {
 		}
 		for (QualityValue val : model.getQualities()) {
 			val.clearModifications();
+		}
+		// Remove all auto-added items
+		for (CarriedItem<?> item : model.getCarriedItems()) {
+			if (item.isAutoAdded()) {
+				model.removeCarriedItem(item);
+			}
 		}
 		
 		model.setKarmaFree(50);

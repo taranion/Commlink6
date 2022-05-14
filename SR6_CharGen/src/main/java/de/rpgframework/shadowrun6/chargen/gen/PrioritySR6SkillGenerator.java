@@ -479,7 +479,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 					ValueModification mod = (ValueModification)tmp;
 					if (mod.getResolvedKey()==CreatePoints.SKILLS) {
 						points1 += mod.getValue();
-						logger.log(Level.INFO, "Consume "+mod+" and set pointsSkills to "+points1);
+						logger.log(Level.DEBUG, "Consume "+mod+" and set pointsSkills to "+points1);
 					} else {
 						if (ApplyTo.POINTS==mod.getApplyTo()) {
 							ShadowrunReference ref = (ShadowrunReference)mod.getReferenceType();

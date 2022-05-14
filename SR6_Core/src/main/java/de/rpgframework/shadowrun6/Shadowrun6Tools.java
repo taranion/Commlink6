@@ -484,7 +484,7 @@ public class Shadowrun6Tools {
 				logger.log(Level.WARNING, "ToDo: check unresolved requirement "+req.getKey()+":"+tmp.getFormula()+" for "+requiredFor.getClass());
 				if (requiredFor.getClass()==ItemTemplate.class) {
 					logger.log(Level.WARNING, "Special handling for ItemTemplates");
-					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, decisions).get();
+					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, model, decisions).get();
 					VariableResolver resolver = new VariableResolver(item, model);
 					logger.log(Level.WARNING, "ToDo: Resolve "+tmp.getFormula());
 					SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf( ((FormulaImpl)tmp.getFormula()).toString().substring(1));

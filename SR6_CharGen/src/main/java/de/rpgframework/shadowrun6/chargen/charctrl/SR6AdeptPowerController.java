@@ -97,7 +97,6 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	 */
 	@Override
 	public Possible canBeSelected(AdeptPower value, Decision... decisions) {
-		logger.log(Level.WARNING, "canBeSelected {0}, {1}", value, Arrays.toString( decisions ));
 		// Check if all choices have been made and all requirements are fulfilled
 		Possible poss = Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
 		if (!poss.get()) 

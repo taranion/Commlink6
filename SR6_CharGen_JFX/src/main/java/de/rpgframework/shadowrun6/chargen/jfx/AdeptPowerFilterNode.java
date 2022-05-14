@@ -108,9 +108,9 @@ public class AdeptPowerFilterNode extends ComplexDataItemListFilter<AdeptPower,A
 		List<AdeptPower> filtered = unfiltered.stream()
 			.filter(q -> (search==null || search.isBlank() || q.getName().toLowerCase().contains(search)))
 			.collect(Collectors.toList());
-		logger.log(Level.INFO, "{0} items now", filtered.size());
-		logger.log(Level.INFO, "byName ="+compareByName);
-		logger.log(Level.INFO, "byKarma="+compareByKarma);
+//		logger.log(Level.INFO, "{0} items now", filtered.size());
+//		logger.log(Level.DEBUG, "byName ="+compareByName);
+//		logger.log(Level.DEBUG, "byKarma="+compareByKarma);
 		
 		switch (currentSort) {
 		case NAME : Collections.sort(filtered, compareByName); break;

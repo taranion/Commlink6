@@ -53,7 +53,7 @@ public class ProblemItemTest {
 		assertEquals("RATING",choice.getTypeReference());
 		
 		// New create an item
-		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, new Decision(choice, "7"));
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, null, new Decision(choice, "7"));
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
@@ -77,7 +77,7 @@ public class ProblemItemTest {
 		assertEquals(0, item.getChoices().size());
 		
 		// New create an item
-		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item);
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, null);
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
@@ -105,7 +105,7 @@ public class ProblemItemTest {
 		assertEquals("RATING",choice.getTypeReference());
 		
 		// New create an item
-		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, new Decision(choice, "7"));
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, null, new Decision(choice, "7"));
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
@@ -130,7 +130,7 @@ public class ProblemItemTest {
 		assertEquals("RATING",choice.getTypeReference());
 		
 		// New create an item
-		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, new Decision(choice, "4"));
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, null, new Decision(choice, "4"));
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
