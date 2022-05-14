@@ -25,7 +25,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -47,7 +47,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	private boolean redistribute;
 	
 	//-------------------------------------------------------------------
-	public SR6PointBuyAttributeGenerator(SR6CharacterController parent) {
+	public SR6PointBuyAttributeGenerator(SpliMoCharacterController parent) {
 		super(parent);
 	}
 

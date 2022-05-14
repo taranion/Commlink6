@@ -9,7 +9,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  * @author Stefan Prelle
  *
  */
-public interface SR6CharacterController extends IShadowrunCharacterController<SR6Skill,SR6SkillValue,Shadowrun6Character> {
+public interface SpliMoCharacterController extends IShadowrunCharacterController<SR6Skill,SR6SkillValue,Shadowrun6Character> {
 
 	public SR6SkillController getSkillController();
 

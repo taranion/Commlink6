@@ -13,7 +13,7 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
@@ -30,7 +30,7 @@ public class BasicDataSection extends Section {
 	
 	private final static ResourceBundle RES = PropertyResourceBundle.getBundle(BasicDataPage.class.getName());
 	
-	private SR6CharacterController control;
+	private SpliMoCharacterController control;
 
 	private TextField tfStreetName;
 	private TextField tfRealName;
@@ -114,7 +114,7 @@ public class BasicDataSection extends Section {
 	}
 
 	//-------------------------------------------------------------------
-	public void updateController(SR6CharacterController ctrl) {
+	public void updateController(SpliMoCharacterController ctrl) {
 		System.getLogger(BasicDataSection.class.getPackageName()).log(Level.INFO, "updateController to "+ctrl);
 		System.err.println("updateController to "+ctrl);
 		this.control = ctrl;

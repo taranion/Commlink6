@@ -9,7 +9,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonSINController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -22,7 +22,7 @@ public class SR6SINGenerator extends CommonSINController {
 	/**
 	 * @param parent
 	 */
-	public SR6SINGenerator(SR6CharacterController parent) {
+	public SR6SINGenerator(SpliMoCharacterController parent) {
 		super(parent);
 		// TODO Auto-generated constructor stub
 	}

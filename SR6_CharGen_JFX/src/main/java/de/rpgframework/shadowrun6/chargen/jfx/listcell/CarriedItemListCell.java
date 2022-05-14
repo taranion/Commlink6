@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.shadowrun.chargen.jfx.listcell.ComplexDataItemValueListCell;
+import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 
 /**

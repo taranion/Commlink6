@@ -10,7 +10,7 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 
 /**
  * @author Stefan Prelle
@@ -23,7 +23,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	//-------------------------------------------------------------------
 	/**
 	 */
-	public CommonAttributeGenerator(SR6CharacterController parent) {
+	public CommonAttributeGenerator(SpliMoCharacterController parent) {
 		super(parent);
 	}
 

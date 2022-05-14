@@ -24,7 +24,7 @@ import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
@@ -42,7 +42,7 @@ import javafx.scene.control.Label;
  * @author prelle
  *
  */
-public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribute, Shadowrun6Character, SR6CharacterController> implements ControllerListener {
+public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribute, Shadowrun6Character, SpliMoCharacterController> implements ControllerListener {
 	
 	private final static ResourceBundle UI = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
@@ -197,7 +197,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.log(Level.DEBUG, "RCV "+type);
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
-			control = (SR6CharacterController) param[0];
+			control = (SpliMoCharacterController) param[0];
 			refreshController();
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {

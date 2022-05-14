@@ -88,7 +88,16 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 
 	//-------------------------------------------------------------------
 	private void applyModification(String indent, Lifeform charac, CarriedItem<?> model, DataItemModification mod) {
+		switch ((ShadowrunReference) mod.getReferenceType()) {
+		case HOOK:
+			ItemHook hook = mod.getResolvedKey();
+			AAvailableSlot<ItemHook> slot = new AvailableSlot(hook);
+			model.addSlot(slot);
+			logger.log(Level.INFO, indent+"Added slot {0} without capacity ", hook);
+			return;
+		}
 		logger.log(Level.WARNING, "ToDo: DataItemModification "+mod);
+		model.addModification(mod);
 	}
 
 }

@@ -22,10 +22,10 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
-import de.rpgframework.shadowrun.chargen.jfx.listcell.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemTemplateFilterNode;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
@@ -48,7 +48,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageGear.class.getPackageName()+".SR6WizardPages");
 
-	protected SR6CharacterController charGen;
+	protected SpliMoCharacterController charGen;
 	
 	private Label lbConverted, lbConvNuyen;
 	private Button btnDec;
@@ -61,7 +61,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	private NumberUnitBackHeader backHeaderNuyen;
 
 	//-------------------------------------------------------------------
-	public SR6WizardPageGear(Wizard wizard, SR6CharacterController charGen) {
+	public SR6WizardPageGear(Wizard wizard, SpliMoCharacterController charGen) {
 		super(wizard);
 		this.charGen = charGen;
 		setTitle(ResourceI18N.get(RES, "page.gear.title"));
@@ -92,7 +92,6 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		
 		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection, ItemType.PACK));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), charGen.getEquipmentController()));
-		selection.setSelectedFilter(qv -> qv.getModifyable().getItemType()==ItemType.PACK);
 		
 		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
 	}
@@ -145,6 +144,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 
 	//-------------------------------------------------------------------
 	protected void refresh() {
+		logger.log(Level.WARNING, "refresh");
 		backHeaderKarma.setValue(charGen.getModel().getKarmaFree());
 		backHeaderNuyen.setValue(charGen.getModel().getNuyen());
 		btnDec.setDisable(!charGen.getEquipmentController().canDecreaseConversion());
@@ -154,6 +154,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		selection.refresh();
 		
 		lbConverted.setText( String.valueOf(charGen.getEquipmentController().getConvertedKarma()) );
+		lbConvNuyen.setText( String.valueOf(charGen.getEquipmentController().getConvertedKarma()*charGen.getEquipmentController().getConversionRateKarma()) );
 	}
 	
 	//-------------------------------------------------------------------
@@ -176,6 +177,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 			refresh();
 		
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
+			refresh();
 //			bxLine.setManaged(charGen.getAdeptPowerController().canBuyPowerPoints());
 //			bxLine.setVisible(charGen.getAdeptPowerController().canBuyPowerPoints());
 		}

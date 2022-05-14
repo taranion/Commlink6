@@ -25,7 +25,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -42,7 +42,7 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 	/**
 	 * @param parent
 	 */
-	public CommonSR6ComplexFormGenerator(SR6CharacterController parent) {
+	public CommonSR6ComplexFormGenerator(SpliMoCharacterController parent) {
 		super(parent);
 		// TODO Auto-generated constructor stub
 	}

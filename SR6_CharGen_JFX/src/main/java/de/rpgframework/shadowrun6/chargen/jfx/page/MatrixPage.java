@@ -20,7 +20,7 @@ import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
@@ -104,7 +104,7 @@ public class MatrixPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
-	public void setController(SR6CharacterController ctrl) {
+	public void setController(SpliMoCharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");

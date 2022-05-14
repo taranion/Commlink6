@@ -18,7 +18,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 
 /**
@@ -39,7 +39,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	protected Shadowrun6Character model;
 
 	//-------------------------------------------------------------------
-	public CommonSkillController(SR6CharacterController parent) {
+	public CommonSkillController(SpliMoCharacterController parent) {
 		super(parent);
 		model = parent.getModel();
 		

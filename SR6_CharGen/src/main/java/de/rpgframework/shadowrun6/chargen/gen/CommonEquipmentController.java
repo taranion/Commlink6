@@ -28,7 +28,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -47,7 +47,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	private int conversionRate = 2000;
 	
 	//-------------------------------------------------------------------
-	public CommonEquipmentController(SR6CharacterController parent) {
+	public CommonEquipmentController(SpliMoCharacterController parent) {
 		super(parent);
 	}
 
@@ -76,6 +76,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	public List<CarriedItem<ItemTemplate>> getSelected() {
 		List<CarriedItem<ItemTemplate>> ret = new ArrayList<>();
 		getModel().getCarriedItems().forEach(it -> ret.add(it));
+		logger.log(Level.INFO, "+++++++++++++++++++getSelected() returns "+ret.size()+" elements");
 		return ret;
 	}
 
@@ -127,7 +128,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			return poss;
 		
 		if (value.requiresVariant() && variantID==null) {
-			return new Possible(Possible.State.IMPOSSIBLE, IRejectReasons.IMPOSS_MUST_CHOOSE_VARIANT);
+			return new Possible(Possible.State.DECISIONS_MISSING, IRejectReasons.IMPOSS_MUST_CHOOSE_VARIANT);
 		}
 		
 		// Try to build item
@@ -145,7 +146,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
 			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
 			if (avail!=null && avail.getValue() >= 7) {
-				return new Possible(Possible.State.IMPOSSIBLE, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH);
+				return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH, avail.getValue());
 			}
 		}
 		// Check money
@@ -467,10 +468,13 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#getConvertedKarma()
+	 */
 	@Override
 	public int getConvertedKarma() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getModel().getCharGenSettings(CommonSR6GeneratorSettings.class).getKarmaToNuyen();
 	}
 
 	//-------------------------------------------------------------------

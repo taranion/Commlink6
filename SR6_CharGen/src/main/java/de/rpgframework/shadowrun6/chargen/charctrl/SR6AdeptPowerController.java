@@ -38,7 +38,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	protected float freePoints;
 
 	//-------------------------------------------------------------------
-	public SR6AdeptPowerController(SR6CharacterController parent) {
+	public SR6AdeptPowerController(SpliMoCharacterController parent) {
 		super(parent);
 		// TODO Auto-generated constructor stub
 	}

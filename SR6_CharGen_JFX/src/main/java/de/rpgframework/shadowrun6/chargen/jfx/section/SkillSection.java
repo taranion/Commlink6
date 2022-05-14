@@ -13,7 +13,7 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -27,7 +27,7 @@ public class SkillSection extends Section {
 	
 	protected Logger logger = System.getLogger(getClass().getPackageName());
 
-	private SR6CharacterController control;
+	private SpliMoCharacterController control;
 	private SkillType[] type;
 
 	private SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue> table;
@@ -91,7 +91,7 @@ public class SkillSection extends Section {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("rawtypes")
 	public void updateController(CharacterController ctrl) {
-		control = (SR6CharacterController) ctrl;
+		control = (SpliMoCharacterController) ctrl;
 		logger.log(Level.INFO, "#############updateController with model "+control.getModel());
 		if (control.getModel()==null) throw new NullPointerException("Controller has NULL as model");
 		table.setModel(control.getModel());

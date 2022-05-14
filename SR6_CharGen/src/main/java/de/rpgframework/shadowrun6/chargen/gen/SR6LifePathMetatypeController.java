@@ -25,7 +25,7 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 
 /**
  * @author prelle
@@ -39,7 +39,7 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 	private static Random random = new Random();
 
 	//-------------------------------------------------------------------
-	public SR6LifePathMetatypeController(SR6CharacterController parent) {
+	public SR6LifePathMetatypeController(SpliMoCharacterController parent) {
 		super(parent);
 		// Build available
 		available  = new ArrayList<>();

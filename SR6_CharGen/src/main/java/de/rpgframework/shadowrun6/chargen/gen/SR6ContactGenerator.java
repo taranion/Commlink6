@@ -11,7 +11,7 @@ import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6ContactController;
 
@@ -23,7 +23,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	
 	private int pointsLeft;
 
-	protected SR6ContactGenerator(SR6CharacterController parent) {
+	protected SR6ContactGenerator(SpliMoCharacterController parent) {
 		super(parent);
 		// TODO Auto-generated constructor stub
 	}

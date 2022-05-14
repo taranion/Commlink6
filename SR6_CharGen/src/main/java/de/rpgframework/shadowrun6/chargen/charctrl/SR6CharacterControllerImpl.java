@@ -19,7 +19,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  *
  */
 public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl<ShadowrunAttribute,Shadowrun6Character	>
-		implements SR6CharacterController {
+		implements SpliMoCharacterController {
 	
 	protected IAttributeController attributes;
 	protected SR6SkillController skills;
@@ -64,7 +64,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 
 	// -------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSkillController()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController#getSkillController()
 	 */
 	@Override
 	public SR6SkillController getSkillController() {
@@ -109,7 +109,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSpellController()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController#getSpellController()
 	 */
 	@Override
 	public SR6SpellController getSpellController() {
@@ -136,7 +136,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getEquipmentController()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController#getEquipmentController()
 	 */
 	@Override
 	public IEquipmentController getEquipmentController() {
@@ -154,7 +154,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getLifestyleController()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController#getLifestyleController()
 	 */
 	@Override
 	public SR6LifestyleController getLifestyleController() {

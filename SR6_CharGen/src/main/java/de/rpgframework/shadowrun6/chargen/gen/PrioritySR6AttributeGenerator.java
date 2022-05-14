@@ -27,7 +27,7 @@ import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -45,7 +45,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	private boolean redistribute;
 	
 	//-------------------------------------------------------------------
-	public PrioritySR6AttributeGenerator(SR6CharacterController parent) {
+	public PrioritySR6AttributeGenerator(SpliMoCharacterController parent) {
 		super(parent);
 //		try {
 //			throw new RuntimeException("Trace "+this);

@@ -9,7 +9,7 @@ import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 
 /**
  * @author prelle
@@ -21,7 +21,7 @@ public class SR6PointBuyAdeptPowerGenerator extends SR6AdeptPowerGenerator {
 	/**
 	 * @param parent
 	 */
-	public SR6PointBuyAdeptPowerGenerator(SR6CharacterController parent) {
+	public SR6PointBuyAdeptPowerGenerator(SpliMoCharacterController parent) {
 		super(parent);
 	}
 

@@ -473,8 +473,13 @@ public class Shadowrun6Tools {
 			ValueRequirement tmp = (ValueRequirement)req;
 			ShadowrunReference type = (ShadowrunReference)tmp.getType();			
 			int min = -1;
+			int max = Integer.MAX_VALUE;
 			if (tmp.getFormula().isResolved()) {
-				min = tmp.getValue();
+				if (tmp.getRawValue()!=null) {
+					min = tmp.getValue();
+				} else {
+					max = tmp.getMaxValue();
+				}
 			} else {
 				logger.log(Level.WARNING, "ToDo: check unresolved requirement "+req.getKey()+":"+tmp.getFormula()+" for "+requiredFor.getClass());
 				if (requiredFor.getClass()==ItemTemplate.class) {
@@ -490,7 +495,7 @@ public class Shadowrun6Tools {
 //				FormulaTool.resolve(itemAttr, (FormulaImpl)tmp.getFormula(), new VariableResolver((CarriedItem)requiredFor, model));
 				System.exit(1);
 			}
-			DataItem item = ShadowrunReference.resolve(type, req.getKey());
+			Object item = ShadowrunReference.resolve(type, req.getKey());
 			if (item==null && !("CHOICE".equals(req.getKey()))) {
 				logger.log(Level.ERROR, "Cannot find item for key ''{0}''", tmp.getType()+":"+tmp.getKey());
 				return false;
@@ -504,6 +509,19 @@ public class Shadowrun6Tools {
 					return false;
 				}
 				int val = model.getSkillValue( (SR6Skill)item).getModifiedValue();
+				if (max!=Integer.MAX_VALUE && val>max) return false;
+				if (min>0 && val<min) return false;
+				//if (max>0 && val>min) return false;
+				return true;
+			case ATTRIBUTE:
+				if ("CHOICE".equals(tmp.getKey())) {
+					return true;
+				}
+				if (model.getAttribute((ShadowrunAttribute)item)==null) {
+					return false;
+				}
+				val = model.getAttribute( (ShadowrunAttribute)item).getModifiedValue();
+				if (max!=Integer.MAX_VALUE && val>max) return false;
 				if (min>0 && val<min) return false;
 				//if (max>0 && val>min) return false;
 				return true;

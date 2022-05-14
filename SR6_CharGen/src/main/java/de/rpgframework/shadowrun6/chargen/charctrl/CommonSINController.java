@@ -16,7 +16,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 public abstract class CommonSINController extends ControllerImpl<de.rpgframework.shadowrun.SIN> implements SINController {
 
 	//-------------------------------------------------------------------
-	protected CommonSINController(SR6CharacterController parent) {
+	protected CommonSINController(SpliMoCharacterController parent) {
 		super(parent);
 	}
 

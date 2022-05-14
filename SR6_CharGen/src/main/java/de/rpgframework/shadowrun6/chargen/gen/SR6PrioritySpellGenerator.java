@@ -22,7 +22,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 
 /**
@@ -34,7 +34,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	private int freeSpells;
 
 	//-------------------------------------------------------------------
-	protected SR6PrioritySpellGenerator(SR6CharacterController parent) {
+	protected SR6PrioritySpellGenerator(SpliMoCharacterController parent) {
 		super(parent);
 	}
 

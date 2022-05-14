@@ -97,6 +97,7 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 			public String toString(ItemSubType what) { return (what!=null)?what.getName():"";}
 			public ItemSubType fromString(String arg0) {return null;}
 		});
+		cbSubTypes.setStyle("-fx-min-width: 5em");
 		
 		btnSort = new Button(null,new SymbolIcon("sort"));
 		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "quality.sort.tooltip")));
@@ -154,6 +155,7 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 
 		// Build a list of available subtypes
 		ItemSubType s = cbSubTypes.getValue();
+		cbSubTypes.getItems().clear();
 		List<ItemSubType> stList = new ArrayList<>();
 		filtered.forEach(t -> {if (!stList.contains(t.getItemSubtype())) stList.add(t.getItemSubtype());});
 		Collections.sort(stList, new Comparator<ItemSubType>() {
@@ -162,6 +164,8 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 			}
 		});
 		cbSubTypes.getItems().setAll(stList);
+		if (stList.contains(s))
+			cbSubTypes.getSelectionModel().select(s);
 	}	
 	
 	//-------------------------------------------------------------------

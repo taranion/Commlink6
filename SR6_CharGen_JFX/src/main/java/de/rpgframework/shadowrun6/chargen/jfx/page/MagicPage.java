@@ -25,7 +25,7 @@ import de.rpgframework.shadowrun.chargen.jfx.section.RitualSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.SpellSection;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AdeptPowerSection;
 import javafx.scene.control.Label;
@@ -154,7 +154,7 @@ public class MagicPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
-	public void setController(SR6CharacterController ctrl) {
+	public void setController(SpliMoCharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");

@@ -9,7 +9,7 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -27,7 +27,7 @@ public class AttributeTable extends TableView<AttributeValue> {
 
 	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(AttributeTable.class.getName());
 
-	private SR6CharacterController ctrl;
+	private SpliMoCharacterController ctrl;
 
 	private TableColumn<AttributeValue, Boolean> recCol;
 	private TableColumn<AttributeValue, String> nameCol;
@@ -37,7 +37,7 @@ public class AttributeTable extends TableView<AttributeValue> {
 	private TableColumn<AttributeValue, Number> sumCol;
 
 	//--------------------------------------------------------------------
-	public AttributeTable(SR6CharacterController ctrl) {
+	public AttributeTable(SpliMoCharacterController ctrl) {
 //		if (ctrl==null)
 //			throw new NullPointerException();
 		this.ctrl = ctrl;

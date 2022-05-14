@@ -26,7 +26,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -43,7 +43,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	//-------------------------------------------------------------------
 	/**
 	 */
-	public SR6LifestyleGenerator(SR6CharacterController parent) {
+	public SR6LifestyleGenerator(SpliMoCharacterController parent) {
 		super(parent);
 		model = parent.getModel();
 	}
