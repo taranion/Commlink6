@@ -21,7 +21,7 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 
 /**
  * @author prelle
@@ -35,7 +35,7 @@ public class PointBuyMetatypeController extends ControllerImpl<SR6MetaType> impl
 	private static Random random = new Random();
 
 	//-------------------------------------------------------------------
-	public PointBuyMetatypeController(SpliMoCharacterController parent) {
+	public PointBuyMetatypeController(SR6CharacterController parent) {
 		super(parent);
 		availableOptions  = new ArrayList<>();
 		availableOptions.addAll(Shadowrun6Core.getItemList(SR6MetaType.class));

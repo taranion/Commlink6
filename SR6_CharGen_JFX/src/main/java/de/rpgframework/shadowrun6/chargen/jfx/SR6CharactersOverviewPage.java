@@ -103,20 +103,20 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#loadRuleSpecific(de.rpgframework.character.CharacterHandle)
 	 */
 	@Override
-	protected RuleSpecificCharacterObject<?,?,?> loadRuleSpecific(byte[] raw) {
+	protected RuleSpecificCharacterObject<?,?,?> loadRuleSpecific(byte[] raw) throws Exception {
 		logger.log(Level.INFO, "ENTER loadRuleSpecific");
 		
 		try {
 			Shadowrun6Character rawChar = Shadowrun6Core.decode(raw);
 			Shadowrun6Tools.resolveChar(rawChar);
 			return rawChar;
-		} catch (Exception e) {
-			logger.log(Level.ERROR, "Failed parsing XML for char",e);
-			StringWriter mess = new StringWriter();
-			mess.append("Failed loading character\n\n");
-			e.printStackTrace(new PrintWriter(mess));
-			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, mess.toString());
-			return null;
+//		} catch (Exception e) {
+//			logger.log(Level.ERROR, "Failed parsing XML for char",e);
+//			StringWriter mess = new StringWriter();
+//			mess.append("Failed loading character\n\n");
+//			e.printStackTrace(new PrintWriter(mess));
+//			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, mess.toString());
+//			return null;
 		} finally {
 			logger.log(Level.INFO, "LEAVE loadRuleSpecific");
 		}

@@ -24,12 +24,12 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 
 	protected static Random random = new Random();
 	
-	protected SpliMoCharacterController parent;
+	protected SR6CharacterController parent;
 	protected List<ToDoElement> todos;
 	protected List<Choice> choices;
 	
 	//-------------------------------------------------------------------
-	protected ControllerImpl(SpliMoCharacterController parent) {
+	protected ControllerImpl(SR6CharacterController parent) {
 		this.parent = parent;
 		this.todos  = new ArrayList<>();
 		this.choices= new ArrayList<>();

@@ -16,7 +16,7 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.EssenceSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
@@ -140,7 +140,7 @@ public class AugmentationPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
-	public void setController(SpliMoCharacterController ctrl) {
+	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");

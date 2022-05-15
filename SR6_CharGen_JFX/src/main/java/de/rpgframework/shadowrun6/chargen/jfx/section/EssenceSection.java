@@ -20,7 +20,7 @@ import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import javafx.beans.property.ObjectProperty;
@@ -50,7 +50,7 @@ public class EssenceSection extends Section {
 	
 	private GridPane grid;
 
-	private SpliMoCharacterController control;
+	private SR6CharacterController control;
 	private ShadowrunCharacter model;
 	private ObjectProperty<ComplexDataItem> showHelpFor = new SimpleObjectProperty<>();
 	
@@ -108,7 +108,7 @@ public class EssenceSection extends Section {
 	}
 
 	//-------------------------------------------------------------------
-	public void updateController(SpliMoCharacterController ctrl) {
+	public void updateController(SR6CharacterController ctrl) {
 		logger.log(Level.DEBUG, "updateController");
 		this.control = ctrl;
 		model = ctrl.getModel();

@@ -16,7 +16,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
@@ -37,7 +37,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	
 	private List<ItemType> allowedTypes;
 
-	private SpliMoCharacterController control;
+	private SR6CharacterController control;
 	private ShadowrunCharacter model;
 
 	//-------------------------------------------------------------------
@@ -73,7 +73,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	}
 
 	//-------------------------------------------------------------------
-	public void updateController(SpliMoCharacterController ctrl) {
+	public void updateController(SR6CharacterController ctrl) {
 		logger.log(Level.DEBUG, "updateController");
 		this.control = ctrl;
 		model = ctrl.getModel();

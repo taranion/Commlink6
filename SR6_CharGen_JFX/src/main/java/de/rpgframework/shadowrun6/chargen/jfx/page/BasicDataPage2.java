@@ -23,7 +23,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerP
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import javafx.scene.control.Label;
@@ -35,13 +35,13 @@ import javafx.scene.text.TextFlow;
  * @author prelle
  *
  */
-public class BasicDataPage2 extends Page implements IShadowrunCharacterControllerProvider<SpliMoCharacterController> {
+public class BasicDataPage2 extends Page implements IShadowrunCharacterControllerProvider<SR6CharacterController> {
 
 	private final static Logger logger = System.getLogger(BasicDataPage2.class.getPackageName());
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(BasicDataPage.class.getName());
 
-	private SpliMoCharacterController control;
+	private SR6CharacterController control;
 	
 	private BasicDataSection secBaseData;
 	private AppearanceSection secPortrait;
@@ -123,7 +123,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	}
 	
 	//-------------------------------------------------------------------
-	public void setController(SpliMoCharacterController ctrl) {
+	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
@@ -139,7 +139,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.CharacterControllerProvider#getCharacterController()
 	 */
-	public SpliMoCharacterController getCharacterController() {
+	public SR6CharacterController getCharacterController() {
 		return control;
 	}
 	

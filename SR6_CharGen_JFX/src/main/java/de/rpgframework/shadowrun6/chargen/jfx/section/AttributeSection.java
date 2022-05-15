@@ -14,7 +14,7 @@ import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTable;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
@@ -65,7 +65,7 @@ public class AttributeSection extends Section {
 	}
 
 	//-------------------------------------------------------------------
-	public void updateController(SpliMoCharacterController ctrl) {
+	public void updateController(SR6CharacterController ctrl) {
 		logger.log(Level.DEBUG, "updateController");
 		
 		Shadowrun6Character model = ctrl.getModel();

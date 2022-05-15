@@ -8,10 +8,14 @@ import java.util.ResourceBundle;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
+import org.prelle.javafx.Mode;
+import org.prelle.javafx.ResponsiveControl;
+import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
 
 import com.google.gson.Gson;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.core.BabylonEventBus;
@@ -26,7 +30,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
@@ -38,13 +42,16 @@ import de.rpgframework.shadowrun6.chargen.jfx.page.MagicPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.MatrixPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 
 /**
  * @author prelle
  *
  */
-public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribute, Shadowrun6Character, SpliMoCharacterController> implements ControllerListener {
+public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribute, Shadowrun6Character, SR6CharacterController> implements ControllerListener {
 	
 	private final static ResourceBundle UI = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
@@ -57,15 +64,33 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private MagicPage pgMagic;
 	private MatrixPage pgMatrix;
 	
+	private Label lbMode;
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @param ctrl Either a GeneratorWrapper or a CharacterLeveller
 	 */
 	public SR6CharacterViewLayout() {
 		super(RoleplayingSystem.SHADOWRUN6);
+		initComponents();
 		initPages();
 		
 		setOnBackAction(ev -> closeRequested( ));
+	}
+	
+	//-------------------------------------------------------------------
+	private void initComponents() {
+		lbMode = new Label("Creation Mode");
+		lbMode.getStyleClass().add(JavaFXConstants.STYLE_HEADING3);
+		lbMode.setStyle("-fx-text-fill: accent; -fx-font-style: italic");
+		lbMode.setMaxWidth(Double.MAX_VALUE);
+		lbMode.setAlignment(Pos.CENTER_RIGHT);
+		HBox.setMargin(lbMode, new Insets(0, 100, 0, 0));
+		
+		pages.setAdditionalHeader(lbMode);
+		lbMode.setManaged(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
+		lbMode.setVisible(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
+
 	}
 	
 	//-------------------------------------------------------------------
@@ -141,6 +166,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			logger.log(Level.INFO, "ToDo: Detect previously used generator: {0}", model.getCharGenUsed());
 			try {
 				logger.log(Level.DEBUG, "JSON = "+model.getChargenSettingsJSON());
+				if (model.getCharGenUsed()==null) {
+					throw new NullPointerException(ResourceI18N.get(UI, "error.no_chargen_in_character"));
+				}
 //				switch (model.getCharGenUsed()) {
 //				case "prio":
 //					model.setCharGenSettings( (new Gson()).fromJson(model.getChargenSettingsJSON(), SR6PrioritySettings.class) );
@@ -160,6 +188,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 				logger.log(Level.ERROR, "Error creating generator '" + model.getCharGenUsed(), e);
 				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2,
 						"Internal error creating character generator instance");
+				showAnyException(e, model);
 				return;
 			}
 			refreshController();
@@ -200,7 +229,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.log(Level.DEBUG, "RCV "+type);
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
-			control = (SpliMoCharacterController) param[0];
+			control = (SR6CharacterController) param[0];
 			refreshController();
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
@@ -223,7 +252,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void setResponsiveMode(WindowMode value) {
-		logger.log(Level.WARNING, "Mode "+value);
+		lbMode.setManaged(value!=WindowMode.MINIMAL);
+		lbMode.setVisible(value!=WindowMode.MINIMAL);
 	}
 
 	//-------------------------------------------------------------------

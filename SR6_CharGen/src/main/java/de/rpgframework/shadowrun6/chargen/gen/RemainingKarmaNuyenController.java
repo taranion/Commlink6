@@ -18,7 +18,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 
 /**
@@ -32,7 +32,7 @@ public class RemainingKarmaNuyenController extends ControllerImpl<Object> implem
 	protected final static Logger logger = System.getLogger(RemainingKarmaNuyenController.class.getPackageName());
 
 	//-------------------------------------------------------------------
-	protected RemainingKarmaNuyenController(SpliMoCharacterController parent) {
+	protected RemainingKarmaNuyenController(SR6CharacterController parent) {
 		super(parent);
 	}
 

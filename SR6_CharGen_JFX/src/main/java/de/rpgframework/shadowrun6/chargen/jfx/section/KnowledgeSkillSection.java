@@ -15,7 +15,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerP
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.KnowledgeSkillListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -29,7 +29,7 @@ public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements
 	
 	protected Logger logger = System.getLogger(getClass().getPackageName());
 
-	private SpliMoCharacterController control;
+	private SR6CharacterController control;
 
 	//-------------------------------------------------------------------
 	public KnowledgeSkillSection(String title) {
@@ -91,7 +91,7 @@ public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements
 
 	//-------------------------------------------------------------------
 	public void updateController(CharacterController ctrl) {
-		control = (SpliMoCharacterController) ctrl;
+		control = (SR6CharacterController) ctrl;
 		logger.log(Level.INFO, "#############updateController with model "+control.getModel());
 		if (control.getModel()==null) throw new NullPointerException("Controller has NULL as model");
 //		table.setModel(control.getModel());

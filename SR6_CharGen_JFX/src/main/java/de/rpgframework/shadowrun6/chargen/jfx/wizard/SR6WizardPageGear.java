@@ -26,7 +26,7 @@ import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemTemplateFilterNode;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
@@ -49,7 +49,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageGear.class.getPackageName()+".SR6WizardPages");
 
-	protected SpliMoCharacterController charGen;
+	protected SR6CharacterController charGen;
 	
 	private Label lbConverted, lbConvNuyen;
 	private Button btnDec;
@@ -63,7 +63,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	private NumberUnitBackHeader backHeaderEssence;
 
 	//-------------------------------------------------------------------
-	public SR6WizardPageGear(Wizard wizard, SpliMoCharacterController charGen) {
+	public SR6WizardPageGear(Wizard wizard, SR6CharacterController charGen) {
 		super(wizard);
 		this.charGen = charGen;
 		setTitle(ResourceI18N.get(RES, "page.gear.title"));

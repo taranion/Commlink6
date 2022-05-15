@@ -39,7 +39,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".metaecho");
 	
 	//-------------------------------------------------------------------
-	public SR6MetamagicOrEchoController(SpliMoCharacterController parent) {
+	public SR6MetamagicOrEchoController(SR6CharacterController parent) {
 		super(parent);
 	}
 

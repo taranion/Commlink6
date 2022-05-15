@@ -28,7 +28,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -47,7 +47,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	private int conversionRate = 2000;
 	
 	//-------------------------------------------------------------------
-	public CommonEquipmentController(SpliMoCharacterController parent) {
+	public CommonEquipmentController(SR6CharacterController parent) {
 		super(parent);
 	}
 

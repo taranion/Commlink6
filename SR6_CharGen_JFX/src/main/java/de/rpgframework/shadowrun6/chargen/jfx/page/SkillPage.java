@@ -15,7 +15,7 @@ import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.section.KnowledgeSkillSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SkillSection;
 import javafx.scene.control.Label;
@@ -121,7 +121,7 @@ public class SkillPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
-	public void setController(SpliMoCharacterController ctrl) {
+	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");

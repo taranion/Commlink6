@@ -5,6 +5,8 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 
 import de.rpgframework.character.CharacterHandle;
+import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleConfiguration;
@@ -90,8 +92,10 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 	 */
 	@Override
 	public boolean canBeFinished() {
-		// TODO Auto-generated method stub
-		logger.log(Level.DEBUG, "TODO: canBeFinished");
+		for (ToDoElement todo : getToDos()) {
+			if (todo.getSeverity()==Severity.STOPPER)
+				return false;
+		}
 		return true;
 	}
 

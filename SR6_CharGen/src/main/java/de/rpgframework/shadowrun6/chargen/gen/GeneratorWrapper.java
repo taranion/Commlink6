@@ -251,7 +251,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController#getSkillController()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSkillController()
 	 */
 	@Override
 	public SR6SkillController getSkillController() {
@@ -306,7 +306,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController#getEquipmentController()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getEquipmentController()
 	 */
 	@Override
 	public IEquipmentController getEquipmentController() {
@@ -324,7 +324,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController#getSpellController()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSpellController()
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -370,7 +370,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController#getLifestyleController()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getLifestyleController()
 	 */
 	@Override
 	public SR6LifestyleController getLifestyleController() {

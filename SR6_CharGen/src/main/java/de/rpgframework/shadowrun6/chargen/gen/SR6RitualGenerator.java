@@ -23,7 +23,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 
 /**
  * @author prelle
@@ -34,7 +34,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	private int freeSpells;
 
 	//-------------------------------------------------------------------
-	protected SR6RitualGenerator(SpliMoCharacterController parent) {
+	protected SR6RitualGenerator(SR6CharacterController parent) {
 		super(parent);
 	}
 

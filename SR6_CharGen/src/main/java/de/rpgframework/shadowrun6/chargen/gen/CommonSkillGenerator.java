@@ -14,7 +14,7 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
-import de.rpgframework.shadowrun6.chargen.charctrl.SpliMoCharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
 
 /**
@@ -42,7 +42,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	//-------------------------------------------------------------------
 	/**
 	 */
-	public CommonSkillGenerator(SpliMoCharacterController parent) {
+	public CommonSkillGenerator(SR6CharacterController parent) {
 		super(parent);
 	}
 
