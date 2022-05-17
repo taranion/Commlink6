@@ -14,14 +14,17 @@ import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetaTypeOption;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
+import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -46,10 +49,14 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 		
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#getAvailable()
+	 */
 	@Override
 	public List<MetaTypeOption> getAvailable() {
-		// TODO Auto-generated method stub
-		return null;
+		List<MetaTypeOption> ret = new ArrayList<>(availableOptions.values());
+		return ret;
 	}
 
 	@Override
@@ -58,9 +65,14 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 		return 0;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#canBeSelected(de.rpgframework.shadowrun.MetaType)
+	 */
 	@Override
 	public boolean canBeSelected(SR6MetaType type) {
-		// TODO Auto-generated method stub
+		if (!availableOptions.containsKey(type))
+			return false;
 		return true;
 	}
 	
@@ -118,16 +130,39 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 		Shadowrun6Character model = getModel();
 
 		try {
-
+			availableOptions.clear();
+			
 			for (Modification mod : previous) {
-				unprocessed.add(mod);
+				if (mod.getReferenceType()==ShadowrunReference.METATYPE) {
+					if (mod instanceof ValueModification) {
+						ValueModification vMod = (ValueModification)mod;
+						SR6MetaType meta = vMod.getResolvedKey();
+						if (meta!=null) {
+							MetaTypeOption opt = new MetaTypeOption(meta, meta.getKarma());
+							opt.setSpecialAttributePoints(vMod.getValue());
+							availableOptions.put(meta, opt);
+							if (logger.isLoggable(Level.TRACE))
+								logger.log(Level.TRACE, "Allow {0} for {1} cust. Karma and {2} AP", vMod.getKey(), opt.getAdditionalKarmaKost(), opt.getSpecialAttributePoints());
+						}
+					}
+				} else {
+					unprocessed.add(mod);
+				}
 			}
+			logger.log(Level.INFO, "Found {0} allowed metatypes", availableOptions.size());
 
 			// Add modifications from selection
 			MetaType meta = getModel().getMetatype();
 			if (meta == null) {
 				todos.add(new ToDoElement(Severity.STOPPER, RES, "generror.metatype_not_selected"));
 			} else {
+				MetaTypeOption opt = availableOptions.get(meta);
+				if (opt==null) {
+					logger.log(Level.ERROR, "Metatype is not allowed: "+meta);
+				} else {
+					unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), opt.getSpecialAttributePoints()));
+				}
+				
 				if (meta.getKarma() != 0) {
 					logger.log(Level.INFO, "Pay {0} Karma for metatype '{1}'", meta.getKarma(), meta.getId());
 					model.setKarmaFree(model.getKarmaFree() - meta.getKarma());

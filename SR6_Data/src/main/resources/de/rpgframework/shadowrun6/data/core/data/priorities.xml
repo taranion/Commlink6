@@ -2,50 +2,152 @@
 <priotable>
 	<priotableentry id="metaA" prio="A" type="METATYPE" adj="13">
 		<modifications>
-			<valmod type="CREATION_POINTS" ref="ADJUST" value="13"/>
+			<valmod type="METATYPE" ref="dwarf"      value="13"/>
+			<valmod type="METATYPE" ref="dour"       value="13"/>
+			<valmod type="METATYPE" ref="gnome"      value="13"/>
+			<valmod type="METATYPE" ref="hanuman"    value="12"/>
+			<valmod type="METATYPE" ref="koborokuru" value="13"/>
+			<valmod type="METATYPE" ref="menehune"   value="12"/>
+			<valmod type="METATYPE" ref="ork"        value="13"/>
+			<valmod type="METATYPE" ref="hobgoblin"  value="13"/>
+			<valmod type="METATYPE" ref="ogre"       value="13"/>
+			<valmod type="METATYPE" ref="oni"        value="13"/>
+			<valmod type="METATYPE" ref="satyr"      value="13"/>
+			<valmod type="METATYPE" ref="troll"      value="13"/>
+			<valmod type="METATYPE" ref="cyclops"    value="13"/>
+			<valmod type="METATYPE" ref="fomorian"   value="14"/>
+			<valmod type="METATYPE" ref="giant"      value="14"/>
+			<valmod type="METATYPE" ref="minotaur"   value="13"/>
+			<valmod type="METATYPE" ref="centaur"    value="13"/>
+			<valmod type="METATYPE" ref="merrow"     value="13"/>
+			<valmod type="METATYPE" ref="naga"       value="11"/>
+			<valmod type="METATYPE" ref="pixie"      value="12"/>
+			<valmod type="METATYPE" ref="sasquatch"  value="14"/>
 		</modifications>
-		<metaopt id="dwarf"/>
-		<metaopt id="ork"  />
-		<metaopt id="troll"/>
 	</priotableentry>
 	<priotableentry id="metaB" prio="B" type="METATYPE" adj="11">
 		<modifications>
-			<valmod type="CREATION_POINTS" ref="ADJUST" value="11"/>
+			<valmod type="METATYPE" ref="dwarf"      value="11"/>
+			<valmod type="METATYPE" ref="dour"       value="11"/>
+			<valmod type="METATYPE" ref="gnome"      value="11"/>
+			<valmod type="METATYPE" ref="hanuman"    value="10"/>
+			<valmod type="METATYPE" ref="koborokuru" value="11"/>
+			<valmod type="METATYPE" ref="menehune"   value="10"/>
+			<valmod type="METATYPE" ref="elf"        value="11"/>
+			<valmod type="METATYPE" ref="dalakitnon" value="11"/>
+			<valmod type="METATYPE" ref="dryad"      value="11"/>
+			<valmod type="METATYPE" ref="nocturna"   value="10"/>
+			<valmod type="METATYPE" ref="wakayambi"  value="12"/>
+			<valmod type="METATYPE" ref="xapiri_thepe" value="10"/>
+			<valmod type="METATYPE" ref="valkyrie"   value="11"/>
+			
+			<valmod type="METATYPE" ref="ork"        value="11"/>
+			<valmod type="METATYPE" ref="hobgoblin"  value="11"/>
+			<valmod type="METATYPE" ref="ogre"       value="11"/>
+			<valmod type="METATYPE" ref="oni"        value="11"/>
+			<valmod type="METATYPE" ref="satyr"      value="11"/>
+			<valmod type="METATYPE" ref="troll"      value="11"/>
+			<valmod type="METATYPE" ref="cyclops"    value="11"/>
+			<valmod type="METATYPE" ref="fomorian"   value="11"/>
+			<valmod type="METATYPE" ref="giant"      value="11"/>
+			<valmod type="METATYPE" ref="minotaur"   value="11"/>
+			<valmod type="METATYPE" ref="centaur"    value="11"/>
+			<valmod type="METATYPE" ref="merrow"     value="11"/>
+			<valmod type="METATYPE" ref="naga"       value="9"/>
+			<valmod type="METATYPE" ref="pixie"      value="10"/>
+			<valmod type="METATYPE" ref="sasquatch"  value="11"/>
 		</modifications>
-		<metaopt id="elf"   />
-		<metaopt id="dwarf" />
-		<metaopt id="ork"   />
-		<metaopt id="troll" />
 	</priotableentry>
 	<priotableentry id="metaC" prio="C" type="METATYPE" adj="9">
 		<modifications>
-			<valmod type="CREATION_POINTS" ref="ADJUST" value="9"/>
+			<valmod type="METATYPE" ref="dwarf"      value="9"/>
+			<valmod type="METATYPE" ref="dour"       value="9"/>
+			<valmod type="METATYPE" ref="gnome"      value="9"/>
+			<valmod type="METATYPE" ref="hanuman"    value="9"/>
+			<valmod type="METATYPE" ref="koborokuru" value="9"/>
+			<valmod type="METATYPE" ref="menehune"   value="9"/>
+			<valmod type="METATYPE" ref="elf"        value="9"/>
+			<valmod type="METATYPE" ref="dalakitnon" value="9"/>
+			<valmod type="METATYPE" ref="dryad"      value="9"/>
+			<valmod type="METATYPE" ref="nocturna"   value="8"/>
+			<valmod type="METATYPE" ref="wakayambi"  value="9"/>
+			<valmod type="METATYPE" ref="xapiri_thepe" value="8"/>
+			<valmod type="METATYPE" ref="human"      value="9"/>
+			<valmod type="METATYPE" ref="nartaki"    value="10"/>
+			<valmod type="METATYPE" ref="valkyrie"   value="10"/>			
+			<valmod type="METATYPE" ref="ork"        value="9"/>
+			<valmod type="METATYPE" ref="hobgoblin"  value="9"/>
+			<valmod type="METATYPE" ref="ogre"       value="9"/>
+			<valmod type="METATYPE" ref="oni"        value="9"/>
+			<valmod type="METATYPE" ref="satyr"      value="9"/>
+			<valmod type="METATYPE" ref="troll"      value="9"/>
+			<valmod type="METATYPE" ref="cyclops"    value="9"/>
+			<valmod type="METATYPE" ref="fomorian"   value="9"/>
+			<valmod type="METATYPE" ref="giant"      value="9"/>
+			<valmod type="METATYPE" ref="minotaur"   value="9"/>
+			<valmod type="METATYPE" ref="centaur"    value="9"/>
+			<valmod type="METATYPE" ref="merrow"     value="9"/>
+			<valmod type="METATYPE" ref="naga"       value="4"/>
+			<valmod type="METATYPE" ref="pixie"      value="9"/>
+			<valmod type="METATYPE" ref="sasquatch"  value="9"/>
 		</modifications>
-		<metaopt id="human" />
-		<metaopt id="elf"   />
-		<metaopt id="dwarf" />
-		<metaopt id="ork"   />
-		<metaopt id="troll" />
 	</priotableentry>
 	<priotableentry id="metaD" prio="D" type="METATYPE" adj="4">
 		<modifications>
-			<valmod type="CREATION_POINTS" ref="ADJUST" value="4"/>
+			<valmod type="METATYPE" ref="dwarf"      value="4"/>
+			<valmod type="METATYPE" ref="dour"       value="4"/>
+			<valmod type="METATYPE" ref="gnome"      value="4"/>
+			<valmod type="METATYPE" ref="hanuman"    value="4"/>
+			<valmod type="METATYPE" ref="koborokuru" value="4"/>
+			<valmod type="METATYPE" ref="menehune"   value="4"/>
+			<valmod type="METATYPE" ref="elf"        value="4"/>
+			<valmod type="METATYPE" ref="dalakitnon" value="4"/>
+			<valmod type="METATYPE" ref="dryad"      value="4"/>
+			<valmod type="METATYPE" ref="nocturna"   value="4"/>
+			<valmod type="METATYPE" ref="wakayambi"  value="4"/>
+			<valmod type="METATYPE" ref="xapiri_thepe" value="4"/>
+			<valmod type="METATYPE" ref="human"      value="4"/>
+			<valmod type="METATYPE" ref="nartaki"    value="4"/>
+			<valmod type="METATYPE" ref="valkyrie"   value="4"/>			
+			<valmod type="METATYPE" ref="ork"        value="4"/>
+			<valmod type="METATYPE" ref="hobgoblin"  value="4"/>
+			<valmod type="METATYPE" ref="ogre"       value="4"/>
+			<valmod type="METATYPE" ref="oni"        value="4"/>
+			<valmod type="METATYPE" ref="satyr"      value="4"/>
+			<valmod type="METATYPE" ref="troll"      value="4"/>
+			<valmod type="METATYPE" ref="cyclops"    value="4"/>
+			<valmod type="METATYPE" ref="fomorian"   value="4"/>
+			<valmod type="METATYPE" ref="giant"      value="4"/>
+			<valmod type="METATYPE" ref="minotaur"   value="4"/>
+			<valmod type="METATYPE" ref="centaur"    value="4"/>
+			<valmod type="METATYPE" ref="merrow"     value="5"/>
+			<valmod type="METATYPE" ref="naga"       value="2"/>
+			<valmod type="METATYPE" ref="pixie"      value="4"/>
+			<valmod type="METATYPE" ref="sasquatch"  value="4"/>
 		</modifications>
-		<metaopt id="human" />
-		<metaopt id="elf"   />
-		<metaopt id="dwarf" />
-		<metaopt id="ork"   />
-		<metaopt id="troll" />
 	</priotableentry>
 	<priotableentry id="metaE" prio="E" type="METATYPE" adj="1">
 		<modifications>
-			<valmod type="CREATION_POINTS" ref="ADJUST" value="1"/>
+			<valmod type="METATYPE" ref="dwarf"      value="1"/>
+			<valmod type="METATYPE" ref="dour"       value="1"/>
+			<valmod type="METATYPE" ref="gnome"      value="1"/>
+			<valmod type="METATYPE" ref="hanuman"    value="1"/>
+			<valmod type="METATYPE" ref="koborokuru" value="1"/>
+			<valmod type="METATYPE" ref="elf"        value="1"/>
+			<valmod type="METATYPE" ref="dalakitnon" value="1"/>
+			<valmod type="METATYPE" ref="dryad"      value="1"/>
+			<valmod type="METATYPE" ref="nocturna"   value="1"/>
+			<valmod type="METATYPE" ref="xapiri_thepe" value="1"/>
+			<valmod type="METATYPE" ref="human"      value="1"/>
+			<valmod type="METATYPE" ref="ork"        value="1"/>
+			<valmod type="METATYPE" ref="hobgoblin"  value="1"/>
+			<valmod type="METATYPE" ref="ogre"       value="1"/>
+			<valmod type="METATYPE" ref="oni"        value="1"/>
+			<valmod type="METATYPE" ref="satyr"      value="1"/>
+			<valmod type="METATYPE" ref="cyclops"    value="1"/>
+			<valmod type="METATYPE" ref="giant"      value="1"/>
+			<valmod type="METATYPE" ref="minotaur"   value="1"/>
 		</modifications>
-		<metaopt id="human" />
-		<metaopt id="elf"   />
-		<metaopt id="dwarf" />
-		<metaopt id="ork"   />
-		<metaopt id="troll" />
 	</priotableentry>
 
 	<priotableentry id="attribA" prio="A" type="ATTRIBUTE">
