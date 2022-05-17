@@ -1,6 +1,8 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
@@ -9,6 +11,8 @@ import de.rpgframework.genericrpg.chargen.ai.Recommender;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
+import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 
@@ -20,6 +24,8 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	
 	protected List<ShadowrunAttribute> allowedAdjust = new ArrayList<>();
 
+	protected int numAttributesToMax = 1;
+	
 	//-------------------------------------------------------------------
 	/**
 	 */
@@ -31,6 +37,34 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	public int getMaximumValue(ShadowrunAttribute key) {
 		int max = parent.getModel().getAttribute(key).getMaximum();
 		return (max>0)?max:6;
+	}
+
+	//-------------------------------------------------------------------
+	private List<ShadowrunAttribute> getMaximizedAttributes() {
+		List<ShadowrunAttribute> maxed = new ArrayList<ShadowrunAttribute>();
+		Shadowrun6Character model = parent.getModel();
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+			PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
+			if (per.getSum() >= model.getAttribute(key).getMaximum())
+				maxed.add(key);
+		}
+		return maxed;
+	}
+	
+	//-------------------------------------------------------------------
+	protected boolean isAnotherAttributeAlreadyMaxed(ShadowrunAttribute key) {
+		if (key.isSpecial())
+			return false;
+
+		Collection<ShadowrunAttribute> alreadyMaxed = getMaximizedAttributes();
+		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
+		// Only allow to max an attribute, if there isn't one already
+		if ((per.getSum()+1)>=getMaximumValue(key) && key.isPrimary()) {
+			if (logger.isLoggable(Level.TRACE))
+				logger.log(Level.TRACE, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed+" of "+numAttributesToMax);
+			return alreadyMaxed.size()>=numAttributesToMax;
+		}
+		return false;
 	}
 
 	//-------------------------------------------------------------------

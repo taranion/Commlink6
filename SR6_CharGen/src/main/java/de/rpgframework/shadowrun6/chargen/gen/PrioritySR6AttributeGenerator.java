@@ -23,6 +23,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.CreatePoints;
@@ -217,6 +218,11 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	}
 
 	//-------------------------------------------------------------------
+	private boolean wouldMaximizeMoreThanAllowed(AttributeValue<ShadowrunAttribute> value) {
+		return false;
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator#canBeDecreasedPoints1(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
@@ -233,6 +239,14 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	@Override
 	public Possible canBeIncreasedPoints(AttributeValue<ShadowrunAttribute> value) {
 		if (adjustmentPoints<1) return new Possible(false, "zero_adjustment_points");
+
+		ShadowrunAttribute key = value.getModifyable();		
+		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
+		if (per.getSum()>=getMaximumValue(key))
+			return Possible.FALSE;
+
+		if (isAnotherAttributeAlreadyMaxed(key))
+			return new Possible(false, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
 		return new Possible(allowedAdjust.contains(value.getModifyable()), "no_special_attribute");
 	}
 
@@ -308,8 +322,16 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	 */
 	@Override
 	public Possible canBeIncreasedPoints2(AttributeValue<ShadowrunAttribute> value) {
+		ShadowrunAttribute key = value.getModifyable();		
 		if (value.getModifyable().isSpecial()) return Possible.FALSE;
 		if (attributePoints<1) return Possible.FALSE;
+
+		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
+		if (per.getSum()>=getMaximumValue(key))
+			return Possible.FALSE;
+
+		if (isAnotherAttributeAlreadyMaxed(key))
+			return new Possible(false, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
 		// TODO Auto-generated method stub
 		return Possible.TRUE;
 	}
@@ -401,7 +423,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 			return Possible.FALSE;
 
 		if (isAnotherAttributeAlreadyMaxed(key))
-			return Possible.FALSE;
+			return new Possible(false, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
 		
 		int requiredKarma = (per.getSum()+1)*5;
 		if (model.getKarmaFree()<requiredKarma) {
@@ -475,18 +497,6 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		}
 	}
 
-	//-------------------------------------------------------------------
-	private List<ShadowrunAttribute> getMaximizedAttributes() {
-		List<ShadowrunAttribute> maxed = new ArrayList<ShadowrunAttribute>();
-		Shadowrun6Character model = parent.getModel();
-		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
-			PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
-			if (per.getSum() >= model.getAttribute(key).getMaximum())
-				maxed.add(key);
-		}
-		return maxed;
-	}
-
 	//--------------------------------------------------------------------
 	/**
 	 * Validate that the maximum value of each attribute is not exceeded.
@@ -528,22 +538,6 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 			}
 		}
 	}
-	
-	//-------------------------------------------------------------------
-	private boolean isAnotherAttributeAlreadyMaxed(ShadowrunAttribute key) {
-		if (key.isSpecial())
-			return false;
-
-		Collection<ShadowrunAttribute> alreadyMaxed = getMaximizedAttributes();
-		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
-		// Only allow to max an attribute, if there isn't one already
-		if ((per.getSum()+1)>=getMaximumValue(key) && key.isPrimary()) {
-			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed);
-			return !alreadyMaxed.isEmpty();
-		}
-		return false;
-	}
 
 	//-------------------------------------------------------------------
 	private void reset() {
@@ -552,6 +546,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		attributePoints  = 0;
 		allowedAdjust.clear();
 		allowedAdjust.add(ShadowrunAttribute.EDGE);
+		numAttributesToMax = 1;
 		for (AttributeValue tmp : getModel().getAttributes()) {
 			tmp.clearModifications();
 			tmp.setDistributed(0);

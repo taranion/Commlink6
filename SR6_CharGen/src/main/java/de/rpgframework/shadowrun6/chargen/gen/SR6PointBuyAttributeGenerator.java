@@ -477,22 +477,6 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 			}
 		}
 	}
-	
-	//-------------------------------------------------------------------
-	private boolean isAnotherAttributeAlreadyMaxed(ShadowrunAttribute key) {
-		if (key.isSpecial())
-			return false;
-
-		Collection<ShadowrunAttribute> alreadyMaxed = getMaximizedAttributes();
-		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.get(key);
-		// Only allow to max an attribute, if there isn't one already
-		if ((per.getSum()+1)>=getMaximumValue(key) && key.isPrimary()) {
-			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed);
-			return !alreadyMaxed.isEmpty();
-		}
-		return false;
-	}
 
 	//-------------------------------------------------------------------
 	private void ensureMaximumSet() {
