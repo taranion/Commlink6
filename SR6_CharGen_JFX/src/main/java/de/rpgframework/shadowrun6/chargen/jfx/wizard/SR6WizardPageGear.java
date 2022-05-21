@@ -10,6 +10,7 @@ import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.ResponsiveControlManager;
+import org.prelle.javafx.SymbolIcon;
 import org.prelle.javafx.WindowMode;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
@@ -39,6 +40,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /**
@@ -117,10 +120,19 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		backHeaderEssence.setValue( essence/1000.0f );
 		HBox.setMargin(backHeaderKarma, new Insets(0,10,0,10));
 		HBox.setMargin(backHeaderNuyen, new Insets(0,10,0,10));
+
+		Region buf = new Region();
+		buf.setMaxWidth(Double.MAX_VALUE);
+		HBox backHeader = new HBox(10, new HBox(backHeaderKarma, backHeaderNuyen, backHeaderEssence), buf, new SymbolIcon("setting"));
+		HBox.setHgrow(buf, Priority.ALWAYS);
+		backHeader.setMaxWidth(Double.MAX_VALUE);
+		HBox.setMargin(new HBox(backHeaderKarma, backHeaderNuyen, backHeaderEssence), new Insets(0,0,0,10));
+		HBox.setMargin(backHeader.getChildren().get(2), new Insets(0,10,0,0));
+
 //		if (ResponsiveControlManager.getCurrentMode()==WindowMode.EXPANDED) {
 //			super.setBackHeader(null);
 //		} else {
-			super.setBackHeader(new HBox(backHeaderKarma, backHeaderNuyen, backHeaderEssence));
+			super.setBackHeader(backHeader);
 //		}
 			
 		setBackContent(cbIgnoreRequirements);

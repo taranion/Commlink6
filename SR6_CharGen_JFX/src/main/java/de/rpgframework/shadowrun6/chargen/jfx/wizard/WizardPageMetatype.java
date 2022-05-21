@@ -144,7 +144,8 @@ public class WizardPageMetatype extends WizardPage implements ControllerListener
 //			SplitterJFXUtil.openDecisionDialog(r, c, null);
 		});
 		
-		List<SR6MetaType> items = Shadowrun6Core.getItemList(SR6MetaType.class).stream()
+		List<SR6MetaType> items = ((IMetatypeController<SR6MetaType>)charGen.getMetatypeController()).getAvailable().stream()
+				.map(mo -> (SR6MetaType)mo.getResolved())
 				.filter(p -> charGen.showDataItem(p))
 				.collect(Collectors.toList());
 		Collections.sort(items, comparator);
@@ -227,6 +228,7 @@ public class WizardPageMetatype extends WizardPage implements ControllerListener
 	private void initInteractivity() {
 		contentPane.selectedItemProperty().addListener( (ov,o,n) -> {
 			if (updating) return;
+			if (n==null) return;
 			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
 			if (ctrl==null) {
 				logger.log(Level.ERROR, charGen.getClass()+".getMetatypeController returns null  (internal "+charGen.getWrapped()+" ) of "+charGen);

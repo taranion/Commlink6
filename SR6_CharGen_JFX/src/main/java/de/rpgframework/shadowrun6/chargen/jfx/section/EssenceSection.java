@@ -123,24 +123,29 @@ public class EssenceSection extends Section {
 		logger.log(Level.DEBUG, "refresh");
 		
 		//Acclimation
+		Quality acclimQual = Shadowrun6Core.getItem(Quality.class, "augmentation_acclimation"); 
 		NumericalValueController<Quality, QualityValue> qCtrl = control.getQualityController();		
 		QualityValue qVal = model.getQuality("augmentation_acclimation");
-		if (qVal==null) {
-			qVal = new QualityValue(Shadowrun6Core.getItem(Quality.class, "augmentation_acclimation"), 0);
+		if (acclimQual!=null) {
+			if (qVal==null) {
+				qVal = new QualityValue(acclimQual, 0);
+			}
+			nfAcclimation.setData(qVal, new SimpleObjectProperty<NumericalValueController<Quality, QualityValue>>(qCtrl));
+			nfAcclimation.setUserData(acclimQual);
 		}
-		nfAcclimation.setData(qVal, new SimpleObjectProperty<NumericalValueController<Quality, QualityValue>>(qCtrl));
-		nfAcclimation.setUserData(Shadowrun6Core.getItem(Quality.class, "augmentation_acclimation"));
 		
 		// Transhumanism
-		NumericalValueController<MetamagicOrEcho,MetamagicOrEchoValue> tCtrl = control.getMetamagicOrEchoController();		
+		MetamagicOrEcho transhum = Shadowrun6Core.getItem(MetamagicOrEcho.class, "transhumanism");
+		NumericalValueController<MetamagicOrEcho, MetamagicOrEchoValue> tCtrl = control.getMetamagicOrEchoController();
 		MetamagicOrEchoValue mVal = model.getMetamagicOrEcho("transhumanism");
-		if (mVal==null) {
-			mVal = new MetamagicOrEchoValue(Shadowrun6Core.getItem(MetamagicOrEcho.class, "transhumanism"));
+		if (transhum != null) {
+			if (mVal == null) {
+				mVal = new MetamagicOrEchoValue(transhum);
+			}
+			nfTranshumanism.setData(mVal, new SimpleObjectProperty<NumericalValueController<MetamagicOrEcho, MetamagicOrEchoValue>>(tCtrl));
+			nfTranshumanism.setUserData(Shadowrun6Core.getItem(MetamagicOrEcho.class, "transhumanism"));
 		}
-		nfTranshumanism.setData(mVal, new SimpleObjectProperty<NumericalValueController<MetamagicOrEcho,MetamagicOrEchoValue>>(tCtrl));
-		nfTranshumanism.setUserData(Shadowrun6Core.getItem(MetamagicOrEcho.class, "transhumanism"));
-		
-		boolean allowTransh = Boolean.parseBoolean( Shadowrun6Rules.ALLOW_TRANSHUMANISM.getDefaultValue() );
+		boolean allowTransh = Boolean.parseBoolean(Shadowrun6Rules.ALLOW_TRANSHUMANISM.getDefaultValue()) && (transhum!=null);
 		RuleConfiguration conf =  model.getRuleValue(Shadowrun6Rules.ALLOW_TRANSHUMANISM);
 		if (conf!=null)
 			allowTransh = Boolean.parseBoolean( conf.getValueString() );
