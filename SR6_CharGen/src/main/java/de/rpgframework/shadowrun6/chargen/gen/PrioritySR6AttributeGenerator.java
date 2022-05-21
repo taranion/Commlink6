@@ -577,7 +577,6 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	public List<Modification> process(List<Modification> previous) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
 		List<Modification> unprocessed = new ArrayList<>();
-		logger.log(Level.WARNING, "ENTER process "+this);
 		
 		try {
 			SR6PrioritySettings prioSettings = getModel().getCharGenSettings(SR6PrioritySettings.class);

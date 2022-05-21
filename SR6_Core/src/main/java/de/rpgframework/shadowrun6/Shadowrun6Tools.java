@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
@@ -317,6 +318,11 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
+	public static Function<Requirement, String> requirementResolver(Locale loc) {
+		return (r) -> getRequirementString(r, loc);
+	}
+	
+	//-------------------------------------------------------------------
 	public static String getRequirementString(Requirement req, Locale loc) {
 		if (req instanceof ExistenceRequirement) {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
@@ -457,9 +463,9 @@ public class Shadowrun6Tools {
 				if (negated) return !model.getMetatype().getId().equals(req.getKey());
 				return model.getMetatype().getId().equals(req.getKey());
 			case MAGIC_RESO:
-				logger.log(Level.WARNING, "Check for magic/Reso "+item);
 				return model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType()==item;
 			default:
+				System.err.println("Shadowrun6Tool: Todo: isRequirementMet for "+type+" = "+item);
 				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type+" = "+item);
 			}			
 		} else if (req instanceof AnyRequirement) {

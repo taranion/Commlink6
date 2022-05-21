@@ -172,7 +172,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	 */
 	@Override
 	public void setResponsiveMode(WindowMode value) {
-		logger.log(Level.WARNING,"setResponsiveMode({})", value);
+		logger.log(Level.WARNING,"setResponsiveMode({0})", value);
 		selection.setShowHeadings(value!=WindowMode.MINIMAL);
 	}
 

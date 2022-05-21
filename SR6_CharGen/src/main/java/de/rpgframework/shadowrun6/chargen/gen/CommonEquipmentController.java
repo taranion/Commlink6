@@ -158,7 +158,14 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		}
 		
 		// Check requirements of carried item
-		//Shadowrun6Tools.areRequirementsMet(getModel(), carried.get());
+		if (!getModel().getRuleValueAsBoolean(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS)) {
+			poss = Shadowrun6Tools.areRequirementsMet(getModel(), value, decisions);
+			if (!poss.get())
+				return poss;
+			// Shadowrun6Tools.areRequirementsMet(getModel(), carried.get());
+		} else {
+			logger.log(Level.DEBUG, "IGNORE_GEAR_REQUIREMENTS = true");
+		}
 		
 		return Possible.TRUE;
 	}

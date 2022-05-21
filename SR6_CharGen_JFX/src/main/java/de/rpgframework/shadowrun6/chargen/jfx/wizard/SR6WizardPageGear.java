@@ -27,6 +27,7 @@ import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemTemplateFilterNode;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
@@ -35,6 +36,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -61,6 +63,9 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	private NumberUnitBackHeader backHeaderKarma;
 	private NumberUnitBackHeader backHeaderNuyen;
 	private NumberUnitBackHeader backHeaderEssence;
+	
+	// Shall character requirements be ignored
+	private CheckBox cbIgnoreRequirements;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageGear(Wizard wizard, SR6CharacterController charGen) {
@@ -96,6 +101,8 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), charGen.getEquipmentController()));
 		
 		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
+		
+		cbIgnoreRequirements = new CheckBox(ResourceI18N.get(RES, "page.gear.rule.ignoreGearRequirements"));		
 	}
 	
 	//-------------------------------------------------------------------
@@ -115,6 +122,8 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 //		} else {
 			super.setBackHeader(new HBox(backHeaderKarma, backHeaderNuyen, backHeaderEssence));
 //		}
+			
+		setBackContent(cbIgnoreRequirements);
 		
 		// Information about spent PP
 		Label hdConverted = new Label(ResourceI18N.get(RES, "page.gear.converted"));
@@ -145,6 +154,12 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 				layout.setTitle(null);
 			}
 		});
+		
+		cbIgnoreRequirements.selectedProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "User chose cbIgnoreGearRequirements = "+n);
+			charGen.getModel().setRuleValue(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS, String.valueOf(n));
+			charGen.runProcessors();
+		});
 	}
 
 	//-------------------------------------------------------------------
@@ -157,6 +172,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 //		MagicOrResonanceType morType = charGen.getModel().getMagicOrResonanceType();
 //		activeProperty().set( morType!=null && morType.usesSpells()); 
 		selection.refresh();
+		cbIgnoreRequirements.setSelected(charGen.getModel().getRuleValueAsBoolean(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS));
 		
 		lbConverted.setText( String.valueOf(charGen.getEquipmentController().getConvertedKarma()) );
 		lbConvNuyen.setText( String.valueOf(charGen.getEquipmentController().getConvertedKarma()*charGen.getEquipmentController().getConversionRateKarma()) );

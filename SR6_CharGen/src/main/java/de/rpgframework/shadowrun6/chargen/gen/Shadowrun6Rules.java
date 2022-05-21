@@ -21,11 +21,18 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 		/** Use the priority magic plus any points added by Karma */
 		MAGIC_PLUS_KARMA,
 		/** Use the magic rating with any adjustments */
-		FINAL_MAGIC,
+		FINAL_MAGIC
+		;
+		public String getName(Locale loc) {
+			return RES.getString("rule.chargen_prio_adept_pp."+name().toLowerCase(), loc);
+		}
+		public String toString() {
+			return RES.getString("rule.chargen_prio_adept_pp."+name().toLowerCase());
+		}
 	}
 	
 	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule("CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
-	public static Rule CHARGEN_PRIO_ADEPT_PP    = new Rule("CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.FINAL_MAGIC);
+	public static Rule CHARGEN_PRIO_ADEPT_PP    = new Rule("CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.PRIO_MAGIC);
 	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule("CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule ALLOW_TRANSHUMANISM      = new Rule("ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
 
@@ -36,9 +43,13 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_ALLOW_INITIATION,
 				CHARGEN_MAX_KARMA_REMAIN,
 				CHARGEN_MAX_NUYEN_REMAIN,
-				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
 				CAREER_PAY_GEAR,
-				ALLOW_TRANSHUMANISM
+				IGNORE_GEAR_REQUIREMENTS,
+				
+				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
+				CHARGEN_PRIO_ADEPT_PP,
+				CHARGEN_BUY_SPELLS_KARMA,
+				ALLOW_TRANSHUMANISM,
 		};
 	}
 	
