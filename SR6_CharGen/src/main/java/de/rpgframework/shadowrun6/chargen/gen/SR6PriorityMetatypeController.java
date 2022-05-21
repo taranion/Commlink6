@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,12 +8,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.classification.Gender;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
-import de.rpgframework.genericrpg.data.Choice;
-import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.BodyType;
@@ -37,16 +38,14 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 	private Map<SR6MetaType, MetaTypeOption> availableOptions;
 	private static Random random = new Random();
 
+	static {
+		logger = System.getLogger(ControllerImpl.class.getPackageName()+".meta");
+	}
+	
 	//-------------------------------------------------------------------
 	public SR6PriorityMetatypeController(SR6CharacterController parent) {
 		super(parent);
 		availableOptions  = new HashMap<SR6MetaType,MetaTypeOption>();
-	}
-
-	@Override
-	public void decide(SR6MetaType decideFor, Choice choice, Decision decision) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	//-------------------------------------------------------------------
@@ -59,9 +58,14 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 		return ret;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#getKarmaCost(de.rpgframework.shadowrun.MetaType)
+	 */
 	@Override
 	public int getKarmaCost(SR6MetaType type) {
-		// TODO Auto-generated method stub
+		if (availableOptions.containsKey(type))
+			return availableOptions.get(type).getAdditionalKarmaKost();
 		return 0;
 	}
 
@@ -74,6 +78,32 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 		if (!availableOptions.containsKey(type))
 			return false;
 		return true;
+	}
+
+	//-------------------------------------------------------------------
+	@Override
+	public void roll() {
+		// Gender
+		float gauss = (float)random.nextGaussian();
+		boolean isDiverse = (gauss<-1.2 || gauss>1.2);
+		if (isDiverse) {
+			getModel().setGender(Gender.DIVERSE);
+		} else {
+			getModel().setGender( (gauss>=0.0f)?Gender.MALE:Gender.FEMALE ); 
+		}
+
+		// Meta
+		gauss = (float)random.nextGaussian();
+		boolean useVariants = (gauss<-1 || gauss>1);
+		logger.log(Level.WARNING, "Roll {0} means useVariants={1}", gauss, useVariants);
+		logger.log(Level.WARNING, "PRE: "+ availableOptions.keySet());
+		List<SR6MetaType> pick = availableOptions.keySet().stream().filter(m -> (useVariants?(m.getVariantOf()!=null || m.isMetahuman()==false):(m.getVariantOf()==null && m.isMetahuman()))).collect(Collectors.toList());
+		logger.log(Level.WARNING, "POST: "+ pick);
+		SR6MetaType toSelect = pick.get(random.nextInt(pick.size()));
+		logger.log(Level.WARNING, "Selected "+toSelect);
+		
+		select(toSelect);
+		
 	}
 	
 	//-------------------------------------------------------------------
@@ -109,6 +139,7 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 			if (!canBeSelected(value))
 				return false;
 
+			logger.log(Level.INFO, "Select "+value);
 			getModel().setMetatype(value);
 			randomizeSizeWeight();
 
@@ -164,7 +195,7 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 				}
 				
 				if (meta.getKarma() != 0) {
-					logger.log(Level.INFO, "Pay {0} Karma for metatype '{1}'", meta.getKarma(), meta.getId());
+					logger.log(Level.INFO, "Pay {0} Karma for metatype ''{1}''", meta.getKarma(), meta.getId());
 					model.setKarmaFree(model.getKarmaFree() - meta.getKarma());
 				}
 				// Add more modifications

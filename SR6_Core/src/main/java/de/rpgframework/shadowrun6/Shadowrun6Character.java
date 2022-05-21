@@ -49,11 +49,14 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		// You can have multiple times knowledge or language
 		// but other skills are unique
 		SkillType type = value.getModifyable().getType();
-		if (skills.contains(value) && !(type==SkillType.KNOWLEDGE || type==SkillType.LANGUAGE))
-			return value;
-//		removeSkillValue(value);
-		skills.add(value);
-		return value;
+		if (skills.contains(value) && !(type==SkillType.KNOWLEDGE || type==SkillType.LANGUAGE)) {
+			throw new RuntimeException("Hab ich schon");
+			//return value;
+		}
+		
+		return super.addSkillValue(value);
+//		skills.add(value);
+//		return value;
 	}
 
 	//-------------------------------------------------------------------

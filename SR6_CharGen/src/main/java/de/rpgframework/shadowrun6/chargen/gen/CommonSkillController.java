@@ -183,6 +183,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	@Override
 	public OperationResult<SR6SkillValue> select(SR6Skill data, Decision...decisions) {
 		logger.log(Level.DEBUG, "ENTER select("+data+")");
+		if (data==null) throw new NullPointerException();
 		try {
 			// Ensure selecting this skill is allowed 
 			Possible possible = canBeSelected(data, decisions);

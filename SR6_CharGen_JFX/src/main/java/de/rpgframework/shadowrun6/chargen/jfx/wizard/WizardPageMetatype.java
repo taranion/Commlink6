@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.prelle.javafx.CloseType;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.NodeWithTitle;
 import org.prelle.javafx.ResponsiveControlManager;
@@ -19,6 +20,9 @@ import org.prelle.javafx.WizardPage;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.classification.Gender;
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.ControllerEvent;
+import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.jfx.DataItemSpinnerPane;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.BodyType;
@@ -46,7 +50,7 @@ import javafx.util.StringConverter;
  * @author prelle
  *
  */
-public class WizardPageMetatype extends WizardPage {
+public class WizardPageMetatype extends WizardPage implements ControllerListener {
 	
 	private final static Logger logger = System.getLogger(WizardPageMetatype.class.getPackageName());
 	
@@ -64,6 +68,10 @@ public class WizardPageMetatype extends WizardPage {
 	private FlowPane customNode1;
 	private NumberUnitBackHeader backHeader;
 	
+	private Comparator<SR6MetaType> comparator;
+	/* When TRUE asynchronous updates are happening and user events shall be ignored */
+	private boolean updating;
+	
 	//-------------------------------------------------------------------
 	public WizardPageMetatype(Wizard wizard, GeneratorWrapper charGen) {
 		super(wizard);
@@ -79,6 +87,22 @@ public class WizardPageMetatype extends WizardPage {
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
+		comparator = new Comparator<SR6MetaType>() {
+			public int compare(SR6MetaType meta1, SR6MetaType meta2) {
+				if (meta1.getId().equals("human")) return -1;
+				if (meta2.getId().equals("human")) return +1;
+				if (meta1.getVariantOf()!=null && meta1.getVariantOf().getId().equals("human") && (!meta2.getId().equals("human"))) return -1;
+				if (meta2.getVariantOf()!=null && meta2.getVariantOf().getId().equals("human") && (!meta1.getId().equals("human"))) return +1;
+				String comp1 = meta1.getName();
+				if (meta1.getVariantOf()!=null)
+					comp1 = meta1.getVariantOf().getName()+" / "+comp1;
+				String comp2 = meta2.getName();
+				if (meta2.getVariantOf()!=null)
+					comp2 = meta2.getVariantOf().getName()+" / "+comp2;
+				return comp1.compareTo(comp2);
+			};
+		};
+		
 		contentPane = new DataItemSpinnerPane<SR6MetaType>();
 		contentPane.setId("species");
 		contentPane.setImageConverter(new Function<SR6MetaType,Image>(){
@@ -123,21 +147,7 @@ public class WizardPageMetatype extends WizardPage {
 		List<SR6MetaType> items = Shadowrun6Core.getItemList(SR6MetaType.class).stream()
 				.filter(p -> charGen.showDataItem(p))
 				.collect(Collectors.toList());
-		Collections.sort(items, new Comparator<SR6MetaType>() {
-			public int compare(SR6MetaType meta1, SR6MetaType meta2) {
-				if (meta1.getId().equals("human")) return -1;
-				if (meta2.getId().equals("human")) return +1;
-				if (meta1.getVariantOf()!=null && meta1.getVariantOf().getId().equals("human") && (!meta2.getId().equals("human"))) return -1;
-				if (meta2.getVariantOf()!=null && meta2.getVariantOf().getId().equals("human") && (!meta1.getId().equals("human"))) return +1;
-				String comp1 = meta1.getName();
-				if (meta1.getVariantOf()!=null)
-					comp1 = meta1.getVariantOf().getName()+" / "+comp1;
-				String comp2 = meta2.getName();
-				if (meta2.getVariantOf()!=null)
-					comp2 = meta2.getVariantOf().getName()+" / "+comp2;
-				return comp1.compareTo(comp2);
-			}
-		});
+		Collections.sort(items, comparator);
 		
 		contentPane.setItems(items);
 		contentPane.setShowDecisionColumn(false);
@@ -213,34 +223,27 @@ public class WizardPageMetatype extends WizardPage {
 	}
 	
 	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
 	private void initInteractivity() {
 		contentPane.selectedItemProperty().addListener( (ov,o,n) -> {
+			if (updating) return;
 			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
 			if (ctrl==null) {
 				logger.log(Level.ERROR, charGen.getClass()+".getMetatypeController returns null  (internal "+charGen.getWrapped()+" ) of "+charGen);
 			} else
 			ctrl.select(n);
-			ctrl.randomizeSizeWeight();
-//			ctrl.rollGender();
 			refresh();
 		});
 		
-		btnRoll.setOnAction(ev -> {
-			logger.log(Level.INFO, "Roll");
-			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
-			ctrl.roll();
-//			ctrl.rollEyes();
-//			ctrl.rollGender();
-//			ctrl.rollHair();
-			ctrl.randomizeSizeWeight();
-			refresh();
-		});
+		btnRoll.setOnAction(ev -> roll());
+		setOnExtraActionHandler( button -> onExtraAction(button));
 		
 		cbGender.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> charGen.getModel().setGender(n));
 		cbSpecialBody.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			charGen.getMetatypeController().selectBodyType(n);
 		});
 		tfSize.textProperty().addListener( (ov,o,n) -> {
+			if (updating) return;
 			try {
 				int size = Integer.parseInt(n);
 				charGen.getModel().setSize(size);
@@ -251,6 +254,7 @@ public class WizardPageMetatype extends WizardPage {
 			}
 		});
 		tfWeight.textProperty().addListener( (ov,o,n) -> {
+			if (updating) return;
 			try {
 				int weight = Integer.parseInt(n);
 				charGen.getModel().setWeight(weight);
@@ -269,47 +273,46 @@ public class WizardPageMetatype extends WizardPage {
 	@Override
 	public void pageVisited() {
 		logger.log(Level.INFO, "pageVisited");
+		refresh();
 	}
 	
 	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
 	private void refresh() {
-		Shadowrun6Character model = charGen.getModel();
-		backHeader.setValue(model.getKarmaFree());
-		cbGender.setValue(model.getGender());
-//		tfHair.setText(charGen.getModel().getHairColor());
-//		tfEyes.setText(charGen.getModel().getEyeColor());
-//		tfSkin.setText(charGen.getModel().getSkinColor());
+		updating = true;
 		try {
-			tfSize.setText(String.valueOf(model.getSize()));
-			tfWeight.setText(String.valueOf(model.getWeight()));
-		} catch (Exception e) {
-			logger.log(Level.WARNING, "Found invalid data in textfields: "+e);
+			Shadowrun6Character model = charGen.getModel();
+			backHeader.setValue(model.getKarmaFree());
+			cbGender.setValue(model.getGender());
+			try {
+				tfSize.setText(String.valueOf(model.getSize()));
+				tfWeight.setText(String.valueOf(model.getWeight()));
+			} catch (Exception e) {
+				logger.log(Level.WARNING, "Found invalid data in textfields: " + e);
+			}
+
+			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
+			List<SR6MetaType> items =ctrl.getAvailable().stream().map(mo -> (SR6MetaType)mo.getResolved())
+					.filter(p -> charGen.showDataItem(p))
+					.collect(Collectors.toList());
+			Collections.sort(items, comparator);
+			contentPane.setItems(items);
+
+			if (model.getMetatype() != contentPane.getSelectedItem()) {
+				contentPane.setSelectedItem(model.getMetatype());
+			}
+
+			// Only metahumans can use body type
+			if (model.getMetatype() != null) {
+				cbSpecialBody.setDisable(!model.getMetatype().isMetahuman());
+				if (!model.getMetatype().isMetahuman()) {
+					cbSpecialBody.setValue(BodyType.METAHUMAN);
+				}
+			}
+		} finally {
+			updating = false;
 		}
 	}
-
-//	//-------------------------------------------------------------------
-//	private void refreshDataTab() {
-//		logger.log(Level.INFO, "set data of "+spinner.getValue().getId());
-//		// Data
-//		List<String> attr = spinner.getValue().getModifications().stream()
-//				.filter(m -> (m instanceof ValueModification))
-//				.map( r -> SplitterTools.getModificationString(r))
-//				.collect(Collectors.toList());
-//		List<String> other = spinner.getValue().getModifications().stream()
-//				.filter(m -> !(m instanceof ValueModification))
-//				.map( r -> SplitterTools.getModificationString(r))
-//				.collect(Collectors.toList());
-//		Label leftLabel = new Label(String.join("\n", attr));
-//		leftLabel.setWrapText(true);
-//		Label rightLabel = new Label(String.join("\n", other));
-//		rightLabel.setWrapText(true);
-////		HBox columns = new HBox(20,leftLabel, rightLabel);
-//		TilePane columns = new TilePane(Orientation.HORIZONTAL, 20, 10, leftLabel, rightLabel);
-//		columns.setPrefColumns(2);
-//		ScrollPane dataScroll = new ScrollPane(columns);
-//		dataScroll.setMaxHeight(Double.MAX_VALUE);
-//		tabData.setContent(dataScroll);
-//	}
 	
 	//-------------------------------------------------------------------
 	/**
@@ -323,6 +326,44 @@ public class WizardPageMetatype extends WizardPage {
 			customNode1.setStyle("-fx-max-width: 40em");
 		} else {
 			customNode1.setStyle("-fx-max-width: 12em");
+		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ControllerListener#handleControllerEvent(de.rpgframework.genericrpg.chargen.ControllerEvent, java.lang.Object[])
+	 */
+	@Override
+	public void handleControllerEvent(ControllerEvent type, Object... param) {
+		if (type==BasicControllerEvents.CHARACTER_CHANGED) 
+			refresh();
+		
+		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
+			refresh();
+//			bxLine.setManaged(charGen.getAdeptPowerController().canBuyPowerPoints());
+//			bxLine.setVisible(charGen.getAdeptPowerController().canBuyPowerPoints());
+		}
+	}
+	
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	private void roll() {
+		logger.log(Level.INFO, "Roll");
+		IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
+		ctrl.roll();
+		ctrl.randomizeSizeWeight();
+		refresh();
+
+	}
+	
+	//-------------------------------------------------------------------
+	private void onExtraAction(CloseType button) {
+		switch (button) {
+		case RANDOMIZE:
+			roll();
+			break;
+		default:
+			logger.log(Level.WARNING, "ToDo: handle "+button);
 		}
 	}
 

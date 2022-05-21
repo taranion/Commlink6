@@ -3,14 +3,11 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map.Entry;
-
-import javax.management.RuntimeErrorException;
+import java.util.Random;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
@@ -23,7 +20,6 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.CreatePoints;
@@ -39,7 +35,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator implements PriorityAttributeGenerator {
 
-	private final static Logger logger = System.getLogger(PrioritySR6AttributeGenerator.class.getPackageName());
+	private final static Logger logger = System.getLogger(PrioritySR6AttributeGenerator.class.getPackageName()+".attrib");
 	
 	private int adjustmentPoints;
 	private int attributePoints;
@@ -728,6 +724,76 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	public String getColumn1() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	//-------------------------------------------------------------------
+	@Override
+	public void roll() {
+		logger.log(Level.INFO, "ENTER roll()");
+		try {
+			Random random = new Random();
+			SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+			// Build a list of racial and special attributes - add special attributes twice for probability
+			List<ShadowrunAttribute> specials = new ArrayList<>(allowedAdjust);
+			for (ShadowrunAttribute attr : allowedAdjust) {
+				if (attr.isSpecial())
+					specials.add(attr);
+			}
+				
+			// Now spend points
+			spendSpecial:
+			while (adjustmentPoints>0) {			
+				// Try to find attribute to increase with special points
+				// Make max. 5 attempts
+				int attempts = 5;
+				while (attempts>0) {
+					attempts --;
+					int ran = random.nextInt(specials.size());
+					ShadowrunAttribute attr = specials.get(ran);
+					AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
+					if (canBeIncreasedPoints(aVal).get()) {
+						settings.perAttrib.get(attr).points1++;
+						adjustmentPoints--;
+						logger.log(Level.INFO, "Increased "+attr+" with adjustment points to "+settings.perAttrib.get(attr));
+						break;
+					}
+				}
+				if (attempts==0 && adjustmentPoints>0) {
+					logger.log(Level.WARNING, "Failed to find something to increase with adjustment points");
+					break spendSpecial;
+				}
+			}
+			
+		// Now spend regular points
+		spendRegular:
+		while (attributePoints>0) {			
+			// Try to find attribute to increase with special points
+			// Make max. 5 attempts
+			int attempts = 5;
+			while (attempts>0) {
+				attempts --;
+				int ran = random.nextInt(ShadowrunAttribute.primaryValues().length);
+				ShadowrunAttribute attr = ShadowrunAttribute.primaryValues()[ran];
+				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
+				if (canBeIncreasedPoints2(aVal).get()) {
+					settings.perAttrib.get(attr).points2++;
+					attributePoints--;
+					logger.log(Level.INFO, "Increased "+attr+" with attribute points to "+settings.perAttrib.get(attr));
+					break;
+				}
+			}
+			if (attempts==0 && attributePoints>0) {
+				logger.log(Level.WARNING, "Failed to find something to increase with attribute points");
+				break spendRegular;
+			}
+		}
+			
+			parent.runProcessors();
+			
+		} finally {
+			logger.log(Level.INFO, "LEAVE roll()");
+		}
+		
 	}
 
 }
