@@ -26,7 +26,7 @@
            <itemmod type="QUALITY" ref="toxin_resistance"/>
 		</modifications>
 	</metatype>
-	<metatype id="hanuman" variantof="dwarf" size="120" weight="48" karma="5">
+	<metatype id="hanuman" variantof="dwarf" size="120" weight="49" karma="5">
 		<modifications>
            <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="STRENGTH"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
