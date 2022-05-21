@@ -266,50 +266,26 @@ public class Shadowrun6Tools {
 			DataItemModification valMod = (DataItemModification)mod;
 			String what = type.name();
 			DataItem resolved = type.resolve(valMod.getKey());
-			switch (type) {
-			case QUALITY:
-				Quality qual = Shadowrun6Core.getItem(Quality.class, valMod.getKey());
-				if (qual==null) {
-					return "Unknown quality '"+valMod.getKey()+"'";
-				}
-				return qual.getName(Locale.getDefault());
-//			case CULTURE_LORE:
-//				if (valMod.getConnectedChoice()!=null) {
-//					Choice choice = data.getChoice(valMod.getConnectedChoice());
-//					if (choice==null) {
-//						return "Unknown choice "+valMod.getConnectedChoice();
-//					}
-//					return "???"+choice.getChooseFrom()+"???";
-//				}
-//				
-//				CultureLore cultlore = type.resolve(valMod.getKey());
-//				if (cultlore==null) {
-//					Logging.logger.log(Level.WARNING, "Found unknown cultlore '"+valMod.getKey()+"' in valuemod of "+data);
-//					return "Unknown cultlore '"+valMod.getKey()+"'";
-//				}
-//				return "Kulturkunde "+cultlore.getName();
-//			case LANGUAGE:
-//				if (valMod.getConnectedChoice()!=null) {
-//					Choice choice = data.getChoice(valMod.getConnectedChoice());
-//					if (choice==null) {
-//						return "Unknown choice "+valMod.getConnectedChoice();
-//					}
-//					return "???"+choice.getChooseFrom()+"???";
-//				}
-//				
-//				Language lang = type.resolve(valMod.getKey());
-//				if (lang==null) {
-//					Logging.logger.log(Level.WARNING, "Found unknown skill '"+valMod.getKey()+"' in valuemod of "+data);
-//					return "Unknown language '"+valMod.getKey()+"'";
-//				}
-//				return "Sprache "+lang.getName();
-//			case POWER:
-//				Power power = SplitterMondCore.getItem(Power.class, valMod.getKey());
-//				if (power==null) {
-//					return "Unbekannte Kraft '"+valMod.getKey()+"'";
-//				}
-//				return power.getName(Locale.getDefault());
+			
+			if (resolved!=null) {
+				if (valMod.getDecisions().isEmpty())				
+					return resolved.getName(Locale.getDefault());
+				return resolved.getName(Locale.getDefault())+"(..)";
 			}
+			
+//			switch (type) {
+//			case QUALITY:
+//				Quality qual = Shadowrun6Core.getItem(Quality.class, valMod.getKey());
+//				if (qual==null) {
+//					return "Unknown quality '"+valMod.getKey()+"'";
+//				}
+//				if (valMod.getDecisions().isEmpty())				
+//					return qual.getName(Locale.getDefault());
+//				return qual.getName(Locale.getDefault())+"(..)";
+//				
+//			case CRITTER_POWER:
+//			}
+			logger.log(Level.ERROR, "Not supported yet: "+type);
 			return "ToDo: "+type;
 		}
 

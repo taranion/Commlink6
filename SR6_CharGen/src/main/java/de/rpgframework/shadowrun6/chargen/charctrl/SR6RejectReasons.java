@@ -13,5 +13,8 @@ public interface SR6RejectReasons extends IRejectReasons {
 	
 	public final static String TODO_ATTRIB_REMAIN_ADJUST = "impossible.remainingAdjustmentPoints";
 	public final static String TODO_ATTRIB_REMAIN_ATTRIB = "impossible.remainingAttributePoints";
+	
+	public final static String TODO_SKILL_REMAIN_POINTS  = "impossible.remainingSkillPoints";
+	public final static String TODO_SKILL_REMAIN_POINTS2 = "impossible.remainingKnowledgePoints";
 
 }

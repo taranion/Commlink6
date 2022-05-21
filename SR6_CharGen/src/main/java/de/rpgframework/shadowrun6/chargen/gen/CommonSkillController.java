@@ -36,6 +36,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	public final static String I18N_SKILL_AUTOSELECT = "skill.error.isAutoSelected";
 
 	protected List<SR6Skill> available;
+	protected List<SR6Skill> allowed;
 	protected Shadowrun6Character model;
 
 	//-------------------------------------------------------------------
@@ -44,6 +45,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		model = parent.getModel();
 		
 		available = new ArrayList<>();
+		allowed   = new ArrayList<>();
 	}
 
 	//-------------------------------------------------------------------

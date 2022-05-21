@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.UUID;
 
 import de.rpgframework.genericrpg.NumericalValueWith3PoolsController;
@@ -22,6 +23,7 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
@@ -34,6 +36,7 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -402,6 +405,11 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 		available.clear();
 		
 		for (SR6Skill skill : Shadowrun6Core.getItemList(SR6Skill.class)) {
+			// If it is restricted, don't add it
+			if (skill.isRestricted() && !allowed.contains(skill)) {
+				continue;
+			}
+			
 			// If it is a knowledge skill or not present yet, it is available
 			if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE)
 				available.add(skill);
@@ -467,9 +475,10 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 			// Reset values
 			points1   = 0;
 			points2 = model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed();
+			todos.clear();
 			normalToDos.clear();
 			knowledgeToDos.clear();
-			updateAvailable();
+			allowed.clear();
 			
 			// Ensure auto-added native skill
 			ensureExistanceOfNativeLanguage();
@@ -516,15 +525,22 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 						if (mod.getSet()==ValueType.MAX) {
 							logger.log(Level.INFO, "Maximum of skill {0} is now {1}", key, getMaximum(val));
 						}
+					} else if (tmp instanceof AllowModification) {
+						AllowModification mod = (AllowModification)tmp;
+						SR6Skill key = mod.getResolvedKey();
+						logger.log(Level.INFO, "Allow skill {0}", mod.getKey());
+						if (key!=null)
+							allowed.add(key);
 					} else {
 						logger.log(Level.WARNING, "ToDo: handle "+tmp);
+						System.err.println("PrioritySR6SkillGenerator: ToDo: handle "+tmp);
 						unprocessed.add(tmp);
 					}
 				} else {
-					logger.log(Level.WARNING, "ToDo: handle "+tmp);
 					unprocessed.add(tmp);
 				}
 			}
+			updateAvailable();
 			
 			Shadowrun6Character model = parent.getModel();
 			SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
@@ -620,6 +636,18 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 						logger.log(Level.DEBUG, "Found auto-added skill {0}", val);
 					}
 				}
+			}
+			
+			// Validate that there are no skill points left
+			logger.log(Level.DEBUG, "Finish with {0} skill points and {1} knowledge skill points and {2} Karma", points1, points2, getModel().getKarmaFree());
+			
+			if (points1>0) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_SKILL_REMAIN_POINTS, points1));
+				logger.log(Level.WARNING, "Have {0} skill points left", points1);
+			}
+			if (points2>0) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_SKILL_REMAIN_POINTS2, points2));
+				logger.log(Level.WARNING, "Have {0} languages/knowledge skills left", points2);
 			}
 		} catch (Exception e) {
 			
@@ -747,6 +775,76 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public List<Choice> getChoicesToDecide(SR6Skill value) {
 		return value.getChoices();
+	}
+	
+	//-------------------------------------------------------------------
+	@Override
+	public void roll() {
+		logger.log(Level.INFO, "ENTER roll()");
+		try {
+			Random random = new Random();
+			SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+//			// Build a list of racial and special attributes - add special attributes twice for probability
+//			List<ShadowrunAttribute> specials = new ArrayList<>(allowedAdjust);
+//			for (ShadowrunAttribute attr : allowedAdjust) {
+//				if (attr.isSpecial())
+//					specials.add(attr);
+//			}
+//				
+//			// Now spend points
+//			spendSpecial:
+//			while (adjustmentPoints>0) {			
+//				// Try to find attribute to increase with special points
+//				// Make max. 5 attempts
+//				int attempts = 5;
+//				while (attempts>0) {
+//					attempts --;
+//					int ran = random.nextInt(specials.size());
+//					ShadowrunAttribute attr = specials.get(ran);
+//					AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
+//					if (canBeIncreasedPoints(aVal).get()) {
+//						settings.perAttrib.get(attr).points1++;
+//						adjustmentPoints--;
+//						logger.log(Level.INFO, "Increased "+attr+" with adjustment points to "+settings.perAttrib.get(attr));
+//						break;
+//					}
+//				}
+//				if (attempts==0 && adjustmentPoints>0) {
+//					logger.log(Level.WARNING, "Failed to find something to increase with adjustment points");
+//					break spendSpecial;
+//				}
+//			}
+//			
+//		// Now spend regular points
+//		spendRegular:
+//		while (attributePoints>0) {			
+//			// Try to find attribute to increase with special points
+//			// Make max. 5 attempts
+//			int attempts = 5;
+//			while (attempts>0) {
+//				attempts --;
+//				int ran = random.nextInt(ShadowrunAttribute.primaryValues().length);
+//				ShadowrunAttribute attr = ShadowrunAttribute.primaryValues()[ran];
+//				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
+//				if (canBeIncreasedPoints2(aVal).get()) {
+//					settings.perAttrib.get(attr).points2++;
+//					attributePoints--;
+//					logger.log(Level.INFO, "Increased "+attr+" with attribute points to "+settings.perAttrib.get(attr));
+//					break;
+//				}
+//			}
+//			if (attempts==0 && attributePoints>0) {
+//				logger.log(Level.WARNING, "Failed to find something to increase with attribute points");
+//				break spendRegular;
+//			}
+//		}
+//			
+//			parent.runProcessors();
+			
+		} finally {
+			logger.log(Level.INFO, "LEAVE roll()");
+		}
+		
 	}
 
 }

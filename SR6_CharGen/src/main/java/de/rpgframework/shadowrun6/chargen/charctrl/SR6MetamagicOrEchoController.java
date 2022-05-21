@@ -3,7 +3,6 @@ package de.rpgframework.shadowrun6.chargen.charctrl;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -14,7 +13,6 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.requirements.Requirement;
@@ -145,7 +143,6 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	 */
 	@Override
 	public Possible canBeSelected(MetamagicOrEcho value, Decision... decisions) {
-		logger.log(Level.WARNING, "canBeSelected {0}, {1}", value, Arrays.toString( decisions ));
 		// Check if all requirements are met
 		List<Requirement> notMet = new ArrayList<>();
 		for (Requirement req : value.getRequirements()) {

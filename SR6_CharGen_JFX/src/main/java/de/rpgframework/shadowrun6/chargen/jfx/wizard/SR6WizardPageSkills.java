@@ -49,6 +49,20 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSkills#initInteractivity()
+	 */
+	@Override
+	protected void initInteractivity() {
+		super.initInteractivity();
+		
+		setOnExtraActionHandler( button -> onExtraAction(button));
+
+//		table.useExpertModeProperty().bind(tsExpertMode.selectedProperty());
+//		tsExpertMode.visibleProperty().bind(table.expertModeAvailableProperty());
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAttributes#getTableForController(de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator)
 	 */
 	@Override
@@ -113,6 +127,17 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 			}
 		}
 		
+	}
+	
+	//-------------------------------------------------------------------
+	private void onExtraAction(CloseType button) {
+		switch (button) {
+		case RANDOMIZE:
+			charGen.getSkillController().roll();
+			break;
+		default:
+			logger.log(Level.WARNING, "ToDo: handle "+button);
+		}
 	}
 
 }

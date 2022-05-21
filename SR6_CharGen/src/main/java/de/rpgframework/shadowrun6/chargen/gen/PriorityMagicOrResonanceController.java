@@ -125,6 +125,9 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			SR6PrioritySettings sett = (SR6PrioritySettings) model.getCharGenSettings(SR6PrioritySettings.class);
 			sett.mysticAdeptMaxPoints = points;
 			sett.mysticAdeptPowerPoints = Math.max(points, sett.mysticAdeptPowerPoints);
+			
+			// Add modifications from choice
+			unprocessed.addAll(type.getModifications());
 
 			return unprocessed;
 		} finally {
