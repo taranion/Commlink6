@@ -3,7 +3,6 @@ package de.rpgframework.shadowrun6.chargen.charctrl;
 import java.lang.System.Logger.Level;
 import java.util.UUID;
 
-import de.rpgframework.shadowrun.LicenseType;
 import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
@@ -65,7 +64,7 @@ public abstract class CommonSINController extends ControllerImpl<de.rpgframework
 		sin.setName(name);
 		sin.setUniqueId(UUID.randomUUID());
 		getModel().addSIN(sin);
-		logger.log(Level.INFO, "Added new SIN ''{0}'' of quality", name, quality);
+		logger.log(Level.WARNING, "Added new SIN ''{0}'' of quality {1}", name, quality);
 		
 		parent.runProcessors();
 		return sin;
@@ -89,7 +88,7 @@ public abstract class CommonSINController extends ControllerImpl<de.rpgframework
 		sin.setUniqueId(UUID.randomUUID());
 		getModel().addSIN(sin);
 		}
-		logger.log(Level.INFO, "Added {0} new SINs of quality", count, quality);
+		logger.log(Level.INFO, "Added {0} new SINs of quality {1}", count, quality);
 		
 		parent.runProcessors();
 		return ret;
@@ -116,7 +115,7 @@ public abstract class CommonSINController extends ControllerImpl<de.rpgframework
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.SINController#canCreateNewLicense(de.rpgframework.shadowrun.LicenseType, de.rpgframework.shadowrun.SIN, de.rpgframework.shadowrun.SIN.FakeRating)
 	 */
 	@Override
-	public boolean canCreateNewLicense(LicenseType type, SIN sin, FakeRating quality) {
+	public boolean canCreateNewLicense(SIN sin, FakeRating quality) {
 		int cost = quality.getValue() *200;
 		return getModel().getNuyen()>=cost;
 	}
@@ -126,17 +125,16 @@ public abstract class CommonSINController extends ControllerImpl<de.rpgframework
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.SINController#createNewLicense(de.rpgframework.shadowrun.LicenseType, de.rpgframework.shadowrun.SIN, de.rpgframework.shadowrun.SIN.FakeRating, java.lang.String)
 	 */
 	@Override
-	public LicenseValue createNewLicense(LicenseType type, SIN sin, FakeRating quality, String name) {
-		if (!canCreateNewLicense(type, sin, quality)) {
+	public LicenseValue createNewLicense(SIN sin, FakeRating quality, String name) {
+		if (!canCreateNewLicense(sin, quality)) {
 			return null;
 		}
 		
-		LicenseValue ret = new LicenseValue();
-		ret.setRating(quality);
-		ret.setType(type);
+		LicenseValue ret = new LicenseValue(name, quality);
 		if (sin!=null) {
 			ret.setSIN(sin.getUniqueId());
 		}
+		logger.log(Level.INFO, "Added new license ''{0}'' of quality", name, quality);
 		getModel().addLicense(ret);
 		
 		parent.runProcessors();

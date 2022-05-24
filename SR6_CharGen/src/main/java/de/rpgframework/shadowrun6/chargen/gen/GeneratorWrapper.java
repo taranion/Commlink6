@@ -126,6 +126,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	public void removeListener(ControllerListener listener) {
 		wrapped.removeListener(listener);
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#hasListener(de.rpgframework.genericrpg.chargen.ControllerListener)
+	 */
+	@Override
+	public boolean hasListener(ControllerListener callback) {
+		return wrapped.hasListener(callback);
+	}
 	
 	//-------------------------------------------------------------------
 	public SR6CharacterGenerator getWrapped() {

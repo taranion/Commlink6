@@ -32,15 +32,13 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> implements IMetatypeController<SR6MetaType> {
+
+	private final static Logger logger = System.getLogger(SR6PriorityMetatypeController.class.getPackageName()+".meta");
 	
 	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PriorityCharacterGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
 
 	private Map<SR6MetaType, MetaTypeOption> availableOptions;
 	private static Random random = new Random();
-
-	static {
-		logger = System.getLogger(ControllerImpl.class.getPackageName()+".meta");
-	}
 	
 	//-------------------------------------------------------------------
 	public SR6PriorityMetatypeController(SR6CharacterController parent) {
@@ -190,6 +188,7 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 				MetaTypeOption opt = availableOptions.get(meta);
 				if (opt==null) {
 					logger.log(Level.ERROR, "Metatype is not allowed: "+meta);
+					System.err.println("Metatype is not allowed: "+meta);
 				} else {
 					unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), opt.getSpecialAttributePoints()));
 				}

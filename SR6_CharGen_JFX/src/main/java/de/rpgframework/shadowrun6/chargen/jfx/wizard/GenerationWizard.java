@@ -25,6 +25,7 @@ import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageContacts;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPagePriority;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSpells;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSINs;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
@@ -66,6 +67,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageGear gear;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 	private WizardPageContacts contacts;
+	private WizardPageSINs sins;
 	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
 		String name = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName());
 		String desc = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName()+".desc");
@@ -104,6 +106,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case METAECHO     : ret.add(metaEchoes); break;
 			case GEAR         : ret.add(   gear); break;
 			case CONTACTS     : ret.add(contacts); break;
+			case SIN_LICENSE  : ret.add(   sins); break;
 			case NAME         : ret.add(   name); break;
 			default:
 				logger.log(Level.ERROR,"Unsupported page type "+type);
@@ -135,6 +138,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		gear   = new SR6WizardPageGear(this, wrapper);
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		contacts = new SR6WizardPageContacts(this, wrapper.getWrapped());
+		sins   = new WizardPageSINs(this, wrapper);
 		name   = new WizardPageName<>(this, wrapper);
 		
 		getPages().add(chargen);
@@ -195,6 +199,15 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 				}
 			}
 			getPages().addAll(getPageList());
+		}
+		
+		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
+			for (WizardPage page : getPages()) {
+				if (page instanceof ControllerListener && !wrapper.hasListener(attrib)) {
+					logger.log(Level.WARNING, "Page {0} is a ControllerListener but not registered", page.getClass());
+					((ControllerListener)page).handleControllerEvent(type, param);
+				}
+			}
 		}
 		
 //		logger.log(Level.DEBUG, "Pages now");

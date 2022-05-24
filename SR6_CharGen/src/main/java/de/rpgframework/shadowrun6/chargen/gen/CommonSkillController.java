@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
@@ -199,6 +200,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 			SR6SkillValue ret = model.getSkillValue(data);
 			if (ret==null || data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE) {
 				ret = new SR6SkillValue(data, 1);
+				ret.setUuid(UUID.randomUUID());
 				model.addSkillValue(ret);
 			}
 			logger.log(Level.DEBUG, "Added skill {0} to model", data);

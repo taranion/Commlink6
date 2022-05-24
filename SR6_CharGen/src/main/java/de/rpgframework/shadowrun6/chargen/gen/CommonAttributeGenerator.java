@@ -40,12 +40,12 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	}
 
 	//-------------------------------------------------------------------
-	private List<ShadowrunAttribute> getMaximizedAttributes() {
+	protected List<ShadowrunAttribute> getMaximizedAttributes() {
 		List<ShadowrunAttribute> maxed = new ArrayList<ShadowrunAttribute>();
 		Shadowrun6Character model = parent.getModel();
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
-			PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
-			if (per.getSum() >= model.getAttribute(key).getMaximum())
+			AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(key);
+			if (aVal.getModifiedValue() >= model.getAttribute(key).getMaximum())
 				maxed.add(key);
 		}
 		return maxed;
@@ -57,9 +57,8 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 			return false;
 
 		Collection<ShadowrunAttribute> alreadyMaxed = getMaximizedAttributes();
-		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 		// Only allow to max an attribute, if there isn't one already
-		if ((per.getSum()+1)>=getMaximumValue(key) && key.isPrimary()) {
+		if ((getModel().getAttribute(key).getModifiedValue()+1)>=getMaximumValue(key) && key.isPrimary()) {
 			if (logger.isLoggable(Level.TRACE))
 				logger.log(Level.TRACE, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed+" of "+numAttributesToMax);
 			return alreadyMaxed.size()>=numAttributesToMax;

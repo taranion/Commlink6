@@ -46,7 +46,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements NumericalValueWith3PoolsController<SR6Skill, SR6SkillValue> {
+public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements NumericalValueWith3PoolsController<SR6Skill, SR6SkillValue> {
 
 	public final static String I18N_SKILLTYPE   = "skill.error.wrongSkillType";
 	public final static String I18N_SPEC_LEVEL  = "skill.error.wrongSpecLevel";
@@ -55,7 +55,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 	private List<ToDoElement> knowledgeToDos;
 
 	//-------------------------------------------------------------------
-	public PrioritySR6SkillGenerator(SR6CharacterGenerator parent) {
+	public SR6PrioritySkillGenerator(SR6CharacterGenerator parent) {
 		super(parent);
 		normalToDos    = new ArrayList<>();
 		knowledgeToDos = new ArrayList<>();
@@ -456,6 +456,8 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 					return val;
 				}
 			}
+			logger.log(Level.ERROR, "Did not detected "+key+" | "+uuid+" in "+model.getSkillValues());
+
 		} else {
 			return model.getSkillValue(Shadowrun6Core.getSkill(prioritySettingsId));
 		}
@@ -553,7 +555,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 				SR6Skill key = sVal.getResolved();
 				
 				PerSkillPoints per = entry.getValue();
-				logger.log(Level.DEBUG, key+" = "+per.toString());
+				logger.log(Level.DEBUG, entry.getKey()+" = "+per.toString());
 				/* 
 				 * Pay skill points 
 				 */
@@ -617,6 +619,11 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 				SR6SkillValue val = getFromPrioritySettings(entry.getKey());
 				if (val==null) {
 					SR6Skill skill = getSkillFromPrioritySettings(entry.getKey());
+					if (skill==null) {
+						logger.log(Level.ERROR, "No skill '"+entry.getKey()+"'");
+						System.err.println( "No skill '"+entry.getKey()+"'");
+						System.exit(1);
+					}
 					val = new SR6SkillValue(skill, 0);
 					model.addSkillValue(val);
 					logger.log(Level.DEBUG, "  Add skill value to char: "+entry.getKey());
@@ -629,8 +636,7 @@ public class PrioritySR6SkillGenerator extends CommonSkillGenerator implements N
 				if (!usedSkills.contains(val)) {
 					// If not auto-added skill, remove it
 					if (!val.isAutoAdded()) {
-						logger.log(Level.WARNING,
-								"Skill {0} was found in character, but not in skill generator settings", val);
+						logger.log(Level.WARNING, "Skill {0}/{1} was found in character, but not in skill generator settings", val, val.getUuid());
 						model.getSkillValues().remove(val);
 					} else {
 						logger.log(Level.DEBUG, "Found auto-added skill {0}", val);

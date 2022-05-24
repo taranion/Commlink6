@@ -47,6 +47,13 @@ public class SR6AdeptPowerGenerator extends SR6AdeptPowerController {
 
 		// Regular adepts get free power points matching their magic attribute
 		if (!model.getMagicOrResonanceType().paysPowers()) {
+			ret = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
+			
+			logger.log(Level.INFO, "Regular adept - get {0,number,integer} power points from MAGIC", ret);
+			return ret;
+		}
+		if (model.getMagicOrResonanceType().paysPowers()) {
+			// Mystic adepts
 			switch (chosen) {
 			case MAGIC_PLUS_KARMA:
 				ret += settings.perAttrib.get(ShadowrunAttribute.MAGIC).points3;
@@ -63,11 +70,6 @@ public class SR6AdeptPowerGenerator extends SR6AdeptPowerController {
 			case FINAL_MAGIC:
 				ret = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
 			}
-			
-			logger.log(Level.INFO, "Regular adept - get {0,number,integer} power points from MAGIC", ret);
-			return ret;
-		}
-		if (model.getMagicOrResonanceType().paysPowers()) {
 			ret += settings.mysticAdeptPowerPoints;
 			logger.log(Level.INFO, "Mystic adept - get {0,number,integer} power points from MAGIC", ret);
 

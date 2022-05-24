@@ -469,13 +469,10 @@ public class Shadowrun6Tools {
 					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, model, decisions).get();
 					VariableResolver resolver = new VariableResolver(item, model);
 					logger.log(Level.WARNING, "ToDo: Resolve "+tmp.getFormula());
-					SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf( ((FormulaImpl)tmp.getFormula()).toString().substring(1));
-					FormulaTool.resolve(itemAttr, (FormulaImpl)tmp.getFormula(), resolver);
+					SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf( ((FormulaImpl)tmp.getFormula()).getAsString().substring(1));
+					String raw = FormulaTool.resolve(itemAttr, (FormulaImpl)tmp.getFormula(), resolver);
+					min = Integer.valueOf(raw);
 				}
-				SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf(req.getKey().substring(1));
-				
-//				FormulaTool.resolve(itemAttr, (FormulaImpl)tmp.getFormula(), new VariableResolver((CarriedItem)requiredFor, model));
-				System.exit(1);
 			}
 			Object item = ShadowrunReference.resolve(type, req.getKey());
 			if (item==null && !("CHOICE".equals(req.getKey()))) {

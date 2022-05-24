@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6SINGenerator extends CommonSINController {
+
+	private final static Logger logger = System.getLogger(SR6SINGenerator.class.getPackageName());
 
 	//-------------------------------------------------------------------
 	/**

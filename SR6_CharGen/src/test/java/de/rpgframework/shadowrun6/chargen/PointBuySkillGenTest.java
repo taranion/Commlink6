@@ -81,6 +81,7 @@ public class PointBuySkillGenTest {
 			public Shadowrun6Character getModel() {return model;}
 			public void addListener(ControllerListener callback) {}
 			public void removeListener(ControllerListener callback) {}
+			public boolean hasListener(ControllerListener callback) {return false;}
 			public Collection<ControllerListener> getListener() {
 				return null;
 			}

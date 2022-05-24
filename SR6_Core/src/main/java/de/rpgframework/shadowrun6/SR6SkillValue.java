@@ -27,16 +27,18 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 	//-------------------------------------------------------------------
 	public SR6SkillValue(SR6Skill skill, int val) {
 		super(skill,val);
+		if (skill==null) throw new NullPointerException();
 	}
 
 	//-------------------------------------------------------------------
 	public SR6SkillValue(SR6SkillValue toClone) {
 		super(toClone);
+		if (resolved==null) throw new NullPointerException();
 	}
 
 	//-------------------------------------------------------------------
 	public String toString() {
-		return ref+"(distr="+value+")";
+		return ref+"/"+resolved+"(distr="+value+")";
 	}
 
 	//-------------------------------------------------------------------

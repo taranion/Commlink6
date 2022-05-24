@@ -21,7 +21,6 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.Contact;
-import de.rpgframework.shadowrun.LicenseType;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
@@ -98,6 +97,7 @@ public class SR6ArchetypeTest {
 		while (val.getModifiedValue()<target) {
 			assertTrue("May not increase "+val.getModifyable()+" to "+(val.getModifier()+1), attribs.canBeIncreased(val).get());
 			assertTrue("Failed raising from "+val.getModifiedValue(), attribs.increase(val).wasSuccessful());
+			System.out.println("Increased "+val.getModifyable()+" to "+val.getModifiedValue());
 		}
 		return true;
 	}
@@ -108,8 +108,8 @@ public class SR6ArchetypeTest {
 	public void test01Adept() throws Exception {
 		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
-		prio.setPriority(PriorityType.METATYPE, Priority.B);
-		prio.setPriority(PriorityType.MAGIC, Priority.C);
+		prio.setPriority(PriorityType.METATYPE, Priority.C);
+		prio.setPriority(PriorityType.MAGIC, Priority.B);
 		prio.setPriority(PriorityType.SKILLS, Priority.D);
 		prio.setPriority(PriorityType.RESOURCES, Priority.E);
 		assertEquals(50, model.getKarmaFree());
@@ -657,7 +657,6 @@ public class SR6ArchetypeTest {
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
 		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "datajack"));
-		System.exit(1);
 		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"));
 		OperationResult<CarriedItem<ItemTemplate>> toner = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner").getChoices().get(0), "1"));
@@ -709,13 +708,13 @@ public class SR6ArchetypeTest {
 		
 		SINController sinCtrl = charGen.getSINController();
 		SIN sin1 =sinCtrl.createNewSIN("Someone",FakeRating.SUPERFICIALLY_PLAUSIBLE);
-		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin1, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Concealed Carry License");
-		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin1, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Cyberware License");
-		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin1, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Driver's License");
+		sinCtrl.createNewLicense(sin1, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Concealed Carry License");
+		sinCtrl.createNewLicense(sin1, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Cyberware License");
+		sinCtrl.createNewLicense(sin1, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Driver's License");
 		SIN sin2 =sinCtrl.createNewSIN("Someone",FakeRating.GOOD_MATCH);
-		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin2, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Concealed Carry License");
-		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin2, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Cyberware License");
-		sinCtrl.createNewLicense(LicenseType.CONCEALED_CARRY, sin2, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Driver's License");
+		sinCtrl.createNewLicense(sin2, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Concealed Carry License");
+		sinCtrl.createNewLicense(sin2, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Cyberware License");
+		sinCtrl.createNewLicense(sin2, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Driver's License");
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "flashlight")).wasSuccessful() );
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "gecko_tape_gloves")).wasSuccessful() );
 		OperationResult<CarriedItem<ItemTemplate>> glasses = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "glasses"),

@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -50,6 +51,42 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonAttributeGenerator#getMaximizedAttributes()
+	 */
+	@Override
+	protected List<ShadowrunAttribute> getMaximizedAttributes() {
+		List<ShadowrunAttribute> maxed = new ArrayList<ShadowrunAttribute>();
+		Shadowrun6Character model = parent.getModel();
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+			PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
+			if (per.getSum() >= model.getAttribute(key).getMaximum())
+				maxed.add(key);
+		}
+		return maxed;
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonAttributeGenerator#isAnotherAttributeAlreadyMaxed(ShadowrunAttribute)
+	 */
+	@Override
+	protected boolean isAnotherAttributeAlreadyMaxed(ShadowrunAttribute key) {
+		if (key.isSpecial())
+			return false;
+
+		Collection<ShadowrunAttribute> alreadyMaxed = getMaximizedAttributes();
+		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
+		// Only allow to max an attribute, if there isn't one already
+		if ((per.getSum()+1)>=getMaximumValue(key) && key.isPrimary()) {
+			if (logger.isLoggable(Level.TRACE))
+				logger.log(Level.TRACE, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed+" of "+numAttributesToMax);
+			return alreadyMaxed.size()>=numAttributesToMax;
+		}
+		return false;
 	}
 
 	//-------------------------------------------------------------------
@@ -602,6 +639,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 					logger.log(Level.DEBUG, "Consume "+mod);
 					getModel().getAttribute(attr).addModification(mod);
 					if (mod.getSet()==ValueType.MAX) {
+						logger.log(Level.INFO, "Consume "+mod+" and set max. value of {0} to {1}", attr, mod.getValue());
 						// Optional: Allow adjustment points on lowered maximum
 						if (mod.getValue()>6 || getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))
 							allowedAdjust.add(attr);					
@@ -624,7 +662,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 				allowedAdjust.add(ShadowrunAttribute.RESONANCE);
 			
 			logger.log(Level.DEBUG, "Start with "+adjustmentPoints+" adjust and "+attributePoints+" attrib points");
-			logger.log(Level.DEBUG, "Adjustment points may be used for "+allowedAdjust);
+			logger.log(Level.INFO, "Adjustment points may be used for "+allowedAdjust);
 			
 			ensureMaximumSet();
 			validateAdjustmentpoints();

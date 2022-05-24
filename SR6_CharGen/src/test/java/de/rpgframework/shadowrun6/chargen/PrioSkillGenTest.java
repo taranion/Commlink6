@@ -45,7 +45,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
-import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -57,7 +57,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class PrioSkillGenTest {
 	
 	private Shadowrun6Character model;
-	private PrioritySR6SkillGenerator ctrl;
+	private SR6PrioritySkillGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
 
@@ -84,6 +84,7 @@ public class PrioSkillGenTest {
 			public Shadowrun6Character getModel() {return model;}
 			public void addListener(ControllerListener callback) {}
 			public void removeListener(ControllerListener callback) {}
+			public boolean hasListener(ControllerListener callback) {return false;}
 			public Collection<ControllerListener> getListener() {
 				return null;
 			}
@@ -133,7 +134,7 @@ public class PrioSkillGenTest {
 			@Override
 			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
-		ctrl  = new PrioritySR6SkillGenerator(charGen);
+		ctrl  = new SR6PrioritySkillGenerator(charGen);
 		charGen.runProcessors();
 	}
 	

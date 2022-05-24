@@ -159,15 +159,15 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		
 		// Check requirements of carried item
 		if (!getModel().getRuleValueAsBoolean(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS)) {
-			poss = Shadowrun6Tools.areRequirementsMet(getModel(), value, decisions);
-			if (!poss.get())
+			Possible poss2 = Shadowrun6Tools.areRequirementsMet(getModel(), value, decisions);
+			if (!poss2.get())
 				return poss;
 			// Shadowrun6Tools.areRequirementsMet(getModel(), carried.get());
 		} else {
 			logger.log(Level.DEBUG, "IGNORE_GEAR_REQUIREMENTS = true");
 		}
 		
-		return Possible.TRUE;
+		return poss;
 	}
 
 	//-------------------------------------------------------------------
@@ -188,7 +188,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 		logger.log(Level.TRACE, "ENTER select({0}, {1}", value, List.of(decisions));
 		try {
 			Possible poss = canBeSelected(value, variantID, decisions);
-			if (!poss.get()) {
+			if (!poss.getRequireDecisions()) {
 				logger.log(Level.ERROR, "Trying to select {0} which may not be selected: {1}", value, poss.toString());
 				return new OperationResult<>(poss);
 			}
@@ -196,6 +196,12 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			PieceOfGearVariant<SR6VariantMode> variant = null;
 			if (variantID!=null) {
 				variant = value.getVariant(variantID);
+			}
+
+			poss =  GenericRPGTools.areAllDecisionsPresent(value, variantID, decisions);
+			if (!poss.get()) {
+				logger.log(Level.ERROR, "Trying to select {0} but decisions are missing: {1}", value, poss.toString());
+				return new OperationResult<>(poss);
 			}
 			
 			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, variant, getModel(), decisions);

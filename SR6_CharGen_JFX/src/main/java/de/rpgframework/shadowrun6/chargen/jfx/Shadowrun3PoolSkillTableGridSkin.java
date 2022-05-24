@@ -25,7 +25,7 @@ import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.SkinProperties;
 import de.rpgframework.shadowrun6.SR6SkillValue;
-import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySkillGenerator;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
@@ -106,9 +106,9 @@ public class Shadowrun3PoolSkillTableGridSkin extends SkinBase<Shadowrun2PoolSki
 	}
 
 	//-------------------------------------------------------------------
-	private PrioritySR6SkillGenerator getController() {
+	private SR6PrioritySkillGenerator getController() {
 		if (getSkinnable().getController()==null) return null;
-		return (PrioritySR6SkillGenerator) getSkinnable().getController().getSkillController();
+		return (SR6PrioritySkillGenerator) getSkinnable().getController().getSkillController();
 	}
 	
 	//-------------------------------------------------------------------
