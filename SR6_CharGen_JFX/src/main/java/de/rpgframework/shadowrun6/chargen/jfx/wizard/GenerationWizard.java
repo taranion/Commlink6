@@ -203,7 +203,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
 			for (WizardPage page : getPages()) {
-				if (page instanceof ControllerListener && !wrapper.hasListener(attrib)) {
+				if (page instanceof ControllerListener && !wrapper.hasListener((ControllerListener) page)) {
 					logger.log(Level.WARNING, "Page {0} is a ControllerListener but not registered", page.getClass());
 					((ControllerListener)page).handleControllerEvent(type, param);
 				}

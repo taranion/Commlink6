@@ -87,7 +87,7 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 	//-------------------------------------------------------------------
 	@Override
 	public void roll() {
-		
+		logger.log(Level.ERROR, "roll() not implemented");
 	}
 
 }

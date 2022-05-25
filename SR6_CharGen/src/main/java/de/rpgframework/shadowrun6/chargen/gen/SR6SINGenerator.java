@@ -30,6 +30,16 @@ public class SR6SINGenerator extends CommonSINController {
 		// TODO Auto-generated constructor stub
 	}
 
+	//-------------------------------------------------------------------
+	@Override
+	public void roll() {
+		logger.log(Level.ERROR, "roll() not implemented");
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
+	 */
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
