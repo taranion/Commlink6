@@ -39,6 +39,9 @@ public class ApplyQualityModifications implements ProcessingStep {
 				DataItemModification mod = (DataItemModification)tmp;
 				Quality item = Shadowrun6Core.getItem(Quality.class, mod.getKey());
 				QualityValue value = model.getQuality(mod.getKey());
+				if (item==null) {
+					logger.log(Level.ERROR, "Cannot apply modification "+tmp+" - no such quality {0}", mod.getKey());
+				}
 				if (value==null) {
 					value = new QualityValue(item, 0);
 					// Handle decisions

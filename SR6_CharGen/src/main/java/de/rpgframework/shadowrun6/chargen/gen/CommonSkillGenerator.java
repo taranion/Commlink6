@@ -218,10 +218,10 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			return new Possible(I18N_NOT_SELECTED);
 		}
 		
-		// Is skill already at maximum
-		if (value.getDistributed()>=getMaximum(value)) {
-			return new Possible(I18N_SKILL_IS_MAXED);
-		}
+		// Is the new value acceptable
+		Possible allowed = wouldNewValueBeOkay(value);
+		if (!allowed.get())
+			return allowed;
 		
 		// Are there enough points		
 		if (points2<1){
@@ -293,10 +293,10 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			return Possible.FALSE;
 		}
 		
-		// Is skill already at maximum
-		if (value.getDistributed()>=getMaximum(value)) {
-			return new Possible(I18N_SKILL_IS_MAXED);
-		}
+		// Is the new value acceptable
+		Possible allowed = wouldNewValueBeOkay(value);
+		if (!allowed.get())
+			return allowed;
 		
 		if (points1<1){
 			return new Possible(I18N_NOT_RAISED_POINT1);
@@ -357,14 +357,6 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		if (logger.isLoggable(Level.TRACE))
 			logger.log(Level.TRACE, "ENTER decreasePoints({0})", value.getModifyable().getId());
 
-		
-		try {
-			throw new RuntimeException("Trace");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		try {
 			Possible allowed = canBeDecreasedPoints(value);
 			if (!allowed.get())

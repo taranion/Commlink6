@@ -630,6 +630,9 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 					} else if (mod.getResolvedKey()==CreatePoints.ATTRIBUTES) {
 						attributePoints = mod.getValue();
 						logger.log(Level.INFO, "Consume "+mod+" and set attribute points to "+attributePoints);
+					} else if (mod.getResolvedKey()==CreatePoints.MAXED_OUT_ATTRIBUTES) {
+						numAttributesToMax = Math.max(numAttributesToMax, mod.getValue());
+						logger.log(Level.INFO, "Consume "+mod+" and set number of maxed out attrubutes to "+numAttributesToMax);
 					} else {
 						unprocessed.add(mod);
 					}

@@ -134,6 +134,7 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		switch (button) {
 		case RANDOMIZE:
 			charGen.getSkillController().roll();
+			refresh();
 			break;
 		default:
 			logger.log(Level.WARNING, "ToDo: handle "+button);

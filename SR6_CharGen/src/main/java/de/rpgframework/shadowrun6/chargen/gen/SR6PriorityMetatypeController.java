@@ -187,11 +187,14 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 			} else {
 				MetaTypeOption opt = availableOptions.get(meta);
 				if (opt==null) {
-					logger.log(Level.ERROR, "Metatype is not allowed: "+meta);
-					System.err.println("Metatype is not allowed: "+meta);
-				} else {
-					unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), opt.getSpecialAttributePoints()));
+					MetaType newMeta = availableOptions.keySet().iterator().next();
+					logger.log(Level.ERROR, "Metatype ''{0}'' is not allowed - use ''{1}'' instead", meta.getId(), newMeta.getId());
+					getModel().setMetatype(newMeta);
+					opt = availableOptions.get(newMeta);
+					meta = newMeta;
 				}
+				
+				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), opt.getSpecialAttributePoints()));				
 				
 				if (meta.getKarma() != 0) {
 					logger.log(Level.INFO, "Pay {0} Karma for metatype ''{1}''", meta.getKarma(), meta.getId());

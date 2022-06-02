@@ -53,7 +53,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private WizardPageGenerator<ShadowrunAttribute ,Shadowrun6Character, CommonSR6CharacterGenerator> chargen;
 //	private WizardPageProfiles profiles;
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
-	private WizardPageMetatype race;
+	private SR6WizardPageMetatype race;
 	private WizardPageLifePath1 lifepath1;
 	private SR6WizardPageChangeling surge;
 	private SR6WizardPageMagicOrResonance magic;
@@ -124,7 +124,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 				Shadowrun6Rules.values(),
 				nameGetter);
 		prios  = new WizardPagePriority<>(this, wrapper.getWrapped(), new SR6PriorityTable( (type,prio) -> Shadowrun6Core.getPriorityTableEntry(type, prio)));
-		race   = new WizardPageMetatype(this, wrapper);
+		race   = new SR6WizardPageMetatype(this, wrapper);
 		lifepath1 = new WizardPageLifePath1(this, wrapper);
 		surge  = new SR6WizardPageChangeling(this, wrapper);
 		magic  = new SR6WizardPageMagicOrResonance(this, wrapper);
@@ -159,8 +159,9 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 				
 				CloseType type = FlexibleApplication.getInstance().showAlertAndCall(AlertType.CONFIRMATION, "Really cancel?", "Do you really want to quit?");
 				logger.log(Level.WARNING, "User confirmed cancellation: "+type);
-				if (type==CloseType.OK || type==CloseType.YES)
+				if (type==CloseType.OK || type==CloseType.YES) {
 					return Boolean.TRUE;
+				}
 				return Boolean.FALSE;
 			}
 		});

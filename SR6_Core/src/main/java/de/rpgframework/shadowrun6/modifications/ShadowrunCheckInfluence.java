@@ -18,5 +18,6 @@ public enum ShadowrunCheckInfluence implements CheckInfluence {
 	EDGE_COST_MALUS,
 	/** Value refers to cost of Edge boosts for checks */
 	EDGE_BOOST,
+	OTHER
 	
 }

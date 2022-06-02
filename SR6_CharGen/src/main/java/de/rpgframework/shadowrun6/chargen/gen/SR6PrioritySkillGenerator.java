@@ -429,6 +429,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		}
 		if (missingNative) {
 			SR6SkillValue val = new SR6SkillValue(Shadowrun6Core.getSkill("language"),4);
+			val.setUuid(UUID.randomUUID());
 			val.addDecision(new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), RES.getString("label.native_language")));
 			val.addModification(nat);
 			model.addSkillValue(val);
@@ -449,7 +450,12 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 	private SR6SkillValue getFromPrioritySettings(String prioritySettingsId) {
 		if (prioritySettingsId.contains("/")) {
 			String key = prioritySettingsId.substring(0, prioritySettingsId.indexOf("/"));
-			UUID uuid = UUID.fromString(prioritySettingsId.substring(prioritySettingsId.indexOf("/")+1));
+			String uuid_s = prioritySettingsId.substring(prioritySettingsId.indexOf("/")+1);
+			if (uuid_s==null)
+				logger.log(Level.ERROR, "NPE for id "+prioritySettingsId);
+			if ("null".equals(uuid_s))
+				logger.log(Level.ERROR, "Pseudo NULL for id "+prioritySettingsId);
+			UUID uuid = UUID.fromString(uuid_s);
 			SR6Skill skill = Shadowrun6Core.getSkill(key);
 			for (SR6SkillValue val : model.getSkillValues()) {
 				if (val.getSkill()==skill && val.getUuid()!=null && val.getUuid().equals(uuid)) {
@@ -481,6 +487,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			normalToDos.clear();
 			knowledgeToDos.clear();
 			allowed.clear();
+			maxLimit = 1;
 			
 			// Ensure auto-added native skill
 			ensureExistanceOfNativeLanguage();
@@ -547,6 +554,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			Shadowrun6Character model = parent.getModel();
 			SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
 			for (Entry<String, PerSkillPoints> entry : settings.perSkill.entrySet()) {
+				logger.log(Level.ERROR, "--->", entry.getKey());
 				SR6SkillValue sVal = getFromPrioritySettings(entry.getKey());
 				if (sVal==null) {
 					logger.log(Level.ERROR, "Cannot find SkillValue for ''{0}'' from PrioritySettings", entry.getKey());
@@ -628,6 +636,10 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					model.addSkillValue(val);
 					logger.log(Level.DEBUG, "  Add skill value to char: "+entry.getKey());
 				}
+				if (val.getSkill()==null) {
+					logger.log(Level.WARNING, "Found SR6SkillValue without skill: "+val);
+					continue;
+				}
 				val.setDistributed(entry.getValue().getSum());
 				usedSkills.add(val);
 			}
@@ -656,7 +668,8 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				logger.log(Level.WARNING, "Have {0} languages/knowledge skills left", points2);
 			}
 		} catch (Exception e) {
-			
+			logger.log(Level.ERROR, "Error",e);
+			System.exit(1);
 		} finally {
 			logger.log(Level.TRACE, "STOP : Skills");
 		}
@@ -790,63 +803,46 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		try {
 			Random random = new Random();
 			SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
-//			// Build a list of racial and special attributes - add special attributes twice for probability
-//			List<ShadowrunAttribute> specials = new ArrayList<>(allowedAdjust);
-//			for (ShadowrunAttribute attr : allowedAdjust) {
-//				if (attr.isSpecial())
-//					specials.add(attr);
-//			}
-//				
-//			// Now spend points
-//			spendSpecial:
-//			while (adjustmentPoints>0) {			
-//				// Try to find attribute to increase with special points
-//				// Make max. 5 attempts
-//				int attempts = 5;
-//				while (attempts>0) {
-//					attempts --;
-//					int ran = random.nextInt(specials.size());
-//					ShadowrunAttribute attr = specials.get(ran);
-//					AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
-//					if (canBeIncreasedPoints(aVal).get()) {
-//						settings.perAttrib.get(attr).points1++;
-//						adjustmentPoints--;
-//						logger.log(Level.INFO, "Increased "+attr+" with adjustment points to "+settings.perAttrib.get(attr));
-//						break;
-//					}
-//				}
-//				if (attempts==0 && adjustmentPoints>0) {
-//					logger.log(Level.WARNING, "Failed to find something to increase with adjustment points");
-//					break spendSpecial;
-//				}
-//			}
-//			
-//		// Now spend regular points
-//		spendRegular:
-//		while (attributePoints>0) {			
-//			// Try to find attribute to increase with special points
-//			// Make max. 5 attempts
-//			int attempts = 5;
-//			while (attempts>0) {
-//				attempts --;
-//				int ran = random.nextInt(ShadowrunAttribute.primaryValues().length);
-//				ShadowrunAttribute attr = ShadowrunAttribute.primaryValues()[ran];
-//				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
-//				if (canBeIncreasedPoints2(aVal).get()) {
-//					settings.perAttrib.get(attr).points2++;
-//					attributePoints--;
-//					logger.log(Level.INFO, "Increased "+attr+" with attribute points to "+settings.perAttrib.get(attr));
-//					break;
-//				}
-//			}
-//			if (attempts==0 && attributePoints>0) {
-//				logger.log(Level.WARNING, "Failed to find something to increase with attribute points");
-//				break spendRegular;
-//			}
-//		}
-//			
-//			parent.runProcessors();
+//			updateAvailable();
 			
+			// Now spend points
+			while (points1>0) {	
+				// Decide if to increase existing or add new
+				int dice = random.nextInt(5);
+				List<SR6SkillValue> actionSkills = model.getSkillValues(SkillType.regularValues());
+				if (dice==0 || actionSkills.size()<2) {
+					// Add new
+					int ran = random.nextInt(available.size());
+					SR6Skill toAdd = available.get(ran);
+					if (canBeSelected(toAdd).get()) {
+						SR6SkillValue val = new SR6SkillValue(toAdd,1);
+						PerSkillPoints points = new PerSkillPoints();
+						points.points1=1;
+						settings.put(val, points);
+						model.addSkillValue(val);
+						logger.log(Level.INFO, "Added skill ''{0}'' with value 1", toAdd.getId());
+						points1--;
+						updateAvailable();
+					} else {
+						logger.log(Level.ERROR, "Picked a skill I cannot select: "+toAdd+" with "+points1);
+					}
+				} else {
+					// Raise existing
+					int ran = random.nextInt(actionSkills.size());
+					SR6SkillValue toInc = actionSkills.get(ran);
+					if (canBeIncreasedPoints(toInc).get()) {
+						PerSkillPoints val = settings.get(toInc);
+						toInc.setDistributed( toInc.getDistributed()+1);
+						val.points1++;
+						logger.log(Level.INFO, "Increased ''{0}'' to {1}", toInc.getKey(), val.getSum());
+						points1--;
+					} else {
+						logger.log(Level.ERROR, "Picked a skill I cannot increase: "+toInc+" with "+points1);
+					}
+				}
+			}
+			
+			parent.runProcessors();
 		} finally {
 			logger.log(Level.INFO, "LEAVE roll()");
 		}

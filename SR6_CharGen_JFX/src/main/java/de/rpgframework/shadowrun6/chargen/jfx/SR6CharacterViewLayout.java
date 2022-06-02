@@ -141,6 +141,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			if (close==CloseType.CANCEL) {
 				//			getApplication().closeAppLayout();
 				logger.log(Level.INFO, "call historyBack()");
+				dontShowConfirmationDialog = true;
 				getApplication().closeScreen(this);
 				return;
 			}
@@ -184,14 +185,16 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 				super.control = wrapper;
 				logger.log(Level.INFO, "Generator to continue with: {0}", charGen.getClass().getSimpleName());
 				charGen.setModel(model, handle);
+				refreshController();
 			} catch (Exception e) {
 				logger.log(Level.ERROR, "Error creating generator '" + model.getCharGenUsed(), e);
 				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2,
 						"Internal error creating character generator instance");
-				showAnyException(e, model);
+				showAnyException(e, model, 
+						ResourceI18N.get(UI, "error.title"),
+						ResourceI18N.get(UI, "error.continuingCreation"));
 				return;
 			}
-			refreshController();
 		} finally {
 			logger.log(Level.INFO, "LEAVE: Continue creation");
 		}

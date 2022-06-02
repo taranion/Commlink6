@@ -50,11 +50,11 @@ import javafx.util.StringConverter;
  * @author prelle
  *
  */
-public class WizardPageMetatype extends WizardPage implements ControllerListener {
+public class SR6WizardPageMetatype extends WizardPage implements ControllerListener {
 	
-	private final static Logger logger = System.getLogger(WizardPageMetatype.class.getPackageName());
+	private final static Logger logger = System.getLogger(SR6WizardPageMetatype.class.getPackageName());
 	
-	private final static ResourceBundle RES = ResourceBundle.getBundle(WizardPageMetatype.class.getName());
+	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageMetatype.class.getName());
 
 	private GeneratorWrapper charGen;
 	
@@ -73,7 +73,7 @@ public class WizardPageMetatype extends WizardPage implements ControllerListener
 	private boolean updating;
 	
 	//-------------------------------------------------------------------
-	public WizardPageMetatype(Wizard wizard, GeneratorWrapper charGen) {
+	public SR6WizardPageMetatype(Wizard wizard, GeneratorWrapper charGen) {
 		super(wizard);
 		this.charGen = charGen;
 		setTitle(ResourceI18N.get(RES, "page.title"));
@@ -113,7 +113,7 @@ public class WizardPageMetatype extends WizardPage implements ControllerListener
 								:
 								"images/metatypes/metatype_"+value.getVariantOf().getId()+"_"+value.getId()+".jpg";
 				InputStream in = CommonShadowrunJFXResourceHook.class.getResourceAsStream(name);
-				System.err.println("Search for "+name+" = "+in);
+				System.err.println(getClass()+": Search for "+name+" = "+in);
 				if (in!=null) {
 					Image img = new Image(in);
 					if (img.isError()) {
@@ -149,6 +149,7 @@ public class WizardPageMetatype extends WizardPage implements ControllerListener
 				.filter(p -> charGen.showDataItem(p))
 				.collect(Collectors.toList());
 		Collections.sort(items, comparator);
+		logger.log(Level.WARNING, "Available: "+items);
 		
 		contentPane.setItems(items);
 		contentPane.setShowDecisionColumn(false);
@@ -293,8 +294,8 @@ public class WizardPageMetatype extends WizardPage implements ControllerListener
 				logger.log(Level.WARNING, "Found invalid data in textfields: " + e);
 			}
 
-			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
-			List<SR6MetaType> items =ctrl.getAvailable().stream().map(mo -> (SR6MetaType)mo.getResolved())
+			List<SR6MetaType> items = ((IMetatypeController<SR6MetaType>)charGen.getMetatypeController()).getAvailable().stream()
+					.map(mo -> (SR6MetaType)mo.getResolved())
 					.filter(p -> charGen.showDataItem(p))
 					.collect(Collectors.toList());
 			Collections.sort(items, comparator);
