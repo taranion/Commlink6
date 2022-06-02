@@ -8,4 +8,149 @@
 			<valmod type="ATTRIBUTE" ref="ESSENCE_HOLE" value="100" />
 		</modifications>
 	</quality>
+	<quality id="bravado" karma="6" pos="true" type="NORMAL" />
+	<quality id="critter_dominator" karma="10" pos="true" type="NORMAL" />
+	<quality id="critter_trainer" karma="10" pos="true" type="NORMAL" />
+	<quality id="cyberjack_maximization" karma="12" pos="true" type="NORMAL">
+		<requires>
+			<valuereq type="GEAR" ref="cyberjack" apply="CHARACTER"/>
+		</requires>
+		<modifications>
+			<itemmod type="RULE" ref="ADD_2_TWO_LOWEST_CYBERJACK_ATTRIBUTES"/>
+		</modifications>
+	</quality>
+	<quality id="cyborg" karma="5" pos="true" type="NORMAL" max="10">
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="1"/>
+			<valuereq type="QUALITY" ref="augmentation_acclimation" apply="CHARACTER" value="10"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="ESSENCE_HOLE" value="100" />
+		</modifications>
+	</quality>
+	<quality id="discreet_smuggler"  karma="7" pos="true" type="NORMAL" />
+	<quality id="extended_overdrive" karma="6" pos="true" type="NORMAL" max="99"/>
+	<quality id="focused_ambition"   karma="6" pos="true" type="NORMAL"/>
+	<quality id="inspire_competence" karma="11" pos="true" type="NORMAL" />
+	<quality id="many_talents" karma="18" pos="true" type="NORMAL">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="MAXED_OUT_ATTRIBUTES" value="2"/>
+		</modifications>
+	</quality>
+	<quality id="many_skills" karma="18" pos="true" type="NORMAL">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="MAXED_OUT_SKILLS" value="2"/>
+		</modifications>
+	</quality>
+	<quality id="martial_arts_prodigy" karma="14" pos="true" type="NORMAL">
+		<modifications>
+			<itemmod type="RULE" ref="MARTIAL_ARTS_PRODIGY"/>
+		</modifications>
+	</quality>
+	<quality id="maximum_overdrive"  karma="7" pos="true" type="NORMAL" />
+	<quality id="more_machine_than_metahuman" karma="5" pos="true" type="NORMAL">
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2"/>
+		</requires>
+	</quality>
+	<quality id="muscles" karma="6" pos="true" type="NORMAL">
+		<modifications>
+			<checkmod type="SKILL" ref="con" value="0" what="USAGE"/>
+			<checkmod type="SKILL" ref="influence" value="0" what="USAGE"/>
+		</modifications>
+	</quality>
+	<quality id="polyglot" karma="4" pos="true" type="NORMAL">
+		<modifications>
+			<itemmod type="RULE" ref="MARTIAL_ARTS_PRODIGY"/>
+		</modifications>
+	</quality>
+	<quality id="relentless_tracker" karma="6" pos="true" type="NORMAL">
+		<modifications>
+			<checkmod type="SKILL" ref="outdoors" value="0" what="EDGE"/>
+		</modifications>
+	</quality>
+	<quality id="rote_alchemist" karma="10" pos="true" type="NORMAL">
+		<modifications>
+			<checkmod type="SKILL" ref="enchanting" value="0" what="OTHER"/>
+		</modifications>
+	</quality>
+	<quality id="software_optimization" karma="10" pos="true" type="NORMAL">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="1" apply="ACTIVE_GEAR"/>
+		</modifications>
+	</quality>
+	<quality id="soothing_static" karma="4" pos="true" type="NORMAL">
+		<modifications>
+			<checkmod type="SKILL" ref="cracking" value="0"  what="EDGE_COST_MALUS"/>
+			<checkmod type="SKILL" ref="electronics" value="0"  what="EDGE_COST_MALUS"/>
+		</modifications>
+	</quality>
+	<quality id="spell_components" karma="12" pos="true" type="NORMAL">
+		<modifications>
+			<checkmod type="SKILL" ref="sorcery" value="0" what="OTHER"/>
+		</modifications>
+	</quality>
+	<quality id="team_player"  karma="10" pos="true" type="NORMAL" />
+	<quality id="teflon_coated"  karma="12" pos="true" type="NORMAL" />
+	
+	<!-- Negative qualities -->
+	<quality id="all_business" karma="8" pos="false" type="NORMAL">
+		<modifications>
+			<itemmod type="RULE" ref="MAX_3_CONTACT_LOYALTY"/>
+			<checkmod type="SKILL" ref="influence" value="0" what="EDGE" cond="true"/>
+		</modifications>
+	</quality>
+	<quality id="bad_back"      karma="12" pos="false" type="NORMAL"/>
+	<quality id="borrowed_time" karma="25" pos="false" type="NORMAL"/>
+	<quality id="bounty"        karma="10" pos="false" type="NORMAL"/>
+	<quality id="chronic_pain"  karma="15" pos="false" type="NORMAL"/>
+	<quality id="combat_junkie" karma="6"  pos="false" type="NORMAL"/>
+	<quality id="cyber_psychosis" karma="8" pos="false" type="NORMAL" max="3">
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="1"/>
+		</requires>
+	</quality>
+	<quality id="finesse"       karma="7" pos="false" type="NORMAL"/>
+	<quality id="gear_acquisition_syndrome" karma="6" pos="false" type="NORMAL" max="3"/>
+	<quality id="glitchy"       karma="12" pos="false" type="NORMAL"/>
+	<quality id="gourmand"      karma="5"  pos="false" type="NORMAL"/>
+	<quality id="hooder"        karma="12" pos="false" type="NORMAL" max="3">
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="MONTHLY_COST" value="1000"/>
+		</modifications>
+	</quality>
+	<quality id="hunted"        karma="5"  pos="false" type="NORMAL" max="5"/>
+	<quality id="indecisive"    karma="11"  pos="false" type="NORMAL"/>
+	<quality id="injury_prone"  karma="15"  pos="false" type="NORMAL"/>
+	<quality id="killer"        karma="4"   pos="false" type="NORMAL"/>
+	<quality id="limited_attributes" karma="5" pos="false" type="NORMAL">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="MAXED_OUT_ATTRIBUTES" value="0"/>
+		</modifications>
+	</quality>
+	<quality id="limited_skills" karma="5" pos="false" type="NORMAL">
+		<modifications>
+			<valmod type="CREATION_POINTS" ref="MAXED_OUT_SKILLS" value="0"/>
+		</modifications>
+	</quality>
+	<quality id="momentous_misfortune" karma="25" pos="false" type="NORMAL"/>
+	<quality id="non_lethal"     karma="5"   pos="false" type="NORMAL"/>
+	<quality id="stim_patch_allergy" karma="10" pos="false" type="NORMAL"/>
+   <quality id="toxin_susceptibility" karma="10" pos="false" type="NORMAL">
+     <choices>
+       <choice type="TEXT" uuid="05ed2489-d0af-485b-658a-61fbd064ed9d"/>
+     </choices>
+   </quality>
+	<quality id="trust_issues" karma="10" pos="false" type="NORMAL">
+		<modifications>
+			<checkmod type="SKILL" ref="con"       value="0" what="USAGE"/>
+			<checkmod type="SKILL" ref="influence" value="0" what="USAGE"/>
+		</modifications>
+	</quality>
+	<quality id="twitchy" karma="5" pos="false" type="NORMAL">
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="COMPOSURE" value="$INITIATIVE_DICE_PHYSICAL"/>
+		</modifications>
+	</quality>
+	
 </qualities>
