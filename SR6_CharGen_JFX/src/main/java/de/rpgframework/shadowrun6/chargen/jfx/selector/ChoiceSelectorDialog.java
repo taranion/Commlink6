@@ -46,6 +46,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -62,7 +63,7 @@ import javafx.util.StringConverter;
  */
 public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDataItemValue<T> > extends ManagedDialog implements BiFunction<T, List<Choice>, Decision[]> {
 	
-	private final static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(ChoiceSelectorDialog.class.getName());
+	private final static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(ChoiceSelectorDialog.class.getPackageName()+".Selectors");
 	
 	private final static Logger logger = System.getLogger(ChoiceSelectorDialog.class.getPackageName());
 
@@ -213,6 +214,14 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		case ATTRIBUTE:
 			ret.add( handleATTRIBUTE(item, choice));
 			break;
+		case ITEM_ATTRIBUTE:
+			if (choice.getTypeReference()!=null) {
+				SR6ItemAttribute attrib = SR6ItemAttribute.valueOf(choice.getTypeReference());
+				ret.add( handleITEMATTRIBUTEValues(item, choice));
+			} else {
+				ret.add( handleITEMATTRIBUTE(item, choice));
+			}
+			break;
 		case MENTOR_SPIRIT:
 			ret.add( handleMENTOR_SPIRIT(item, choice) );
 			break;
@@ -290,6 +299,57 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.name()));
+			updateButtons(); 
+		 });
+		content.getChildren().add(cbSub);
+		return cbSub;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleITEMATTRIBUTE(ComplexDataItem item, Choice choice) {
+		ChoiceBox<SR6ItemAttribute> cbSub = new ChoiceBox<>();
+		cbSub.setConverter(new StringConverter<SR6ItemAttribute>() {
+			public SR6ItemAttribute fromString(String value) { return null;}
+			public String toString(SR6ItemAttribute value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			cbSub.getItems().addAll(
+					List.of(SR6ItemAttribute.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
+					);			
+		} else {
+			cbSub.getItems().addAll(SR6ItemAttribute.values());
+		}
+		Collections.sort(cbSub.getItems(), new Comparator<SR6ItemAttribute>() {
+			public int compare(SR6ItemAttribute o1, SR6ItemAttribute o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.name()));
+			updateButtons(); 
+		 });
+		content.getChildren().add(cbSub);
+		return cbSub;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleITEMATTRIBUTEValues(ComplexDataItem item, Choice choice) {
+		ChoiceBox<String> cbSub = new ChoiceBox<>();
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			cbSub.getItems().addAll(List.of(choice.getChoiceOptions()));
+		} else {
+			throw new IllegalArgumentException("Only use this method with choice options");
+		}
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n));
 			updateButtons(); 
 		 });
 		content.getChildren().add(cbSub);

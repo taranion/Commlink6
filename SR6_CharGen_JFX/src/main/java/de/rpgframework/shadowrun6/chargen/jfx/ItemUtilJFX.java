@@ -15,7 +15,9 @@ import org.prelle.javafx.JavaFXConstants;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -156,6 +158,83 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
+	public static VBox getItemInfoNode(ItemTemplate item, ShadowrunCharacter model) {
+		VBox box = new VBox(10);
+		box.setStyle("-fx-spacing:0.5em; ");
+		box.setMaxWidth(Double.MAX_VALUE);
+
+		switch (item.getItemType()) {
+		case WEAPON_CLOSE_COMBAT:
+		case WEAPON_RANGED:
+		case WEAPON_FIREARMS:
+		case WEAPON_SPECIAL:
+			box.getChildren().add(getWeaponNode(item));
+			break;
+//		case BIOWARE:
+//		case CYBERWARE:
+//			box.getChildren().add(getAugmentationNode(item));
+//			break;
+//		case ARMOR:
+//			box.getChildren().add(getArmorNode(item));
+//			break;
+//		case VEHICLES:
+//		case DRONE_MICRO:
+//		case DRONE_MINI:
+//		case DRONE_SMALL:
+//		case DRONE_MEDIUM:
+//		case DRONE_LARGE:
+//			box.getChildren().add(getVehicleNode(item));
+//			break;
+//		case ELECTRONICS:
+//			ItemSubType st = item.getDefaultUsage().getSubtype();
+//			if (st==null)
+//				st = item.getSubtype(null);
+//			if (st==null) {
+//				logger.warn("No subtype found for "+item);
+//				System.err.println("No subtype found for "+item);
+//			}
+//			if (st!=null) {
+//				switch (st) {
+//				case COMMLINK:
+//				case RIGGER_CONSOLE:
+//					box.getChildren().add(getMatrixDeviceNode(item));
+//					break;
+//				case CYBERDECK:
+//					box.getChildren().add(getCyberdeckNode(item));
+//					break;
+//				default:
+//					logger.warn("No special display for "+ItemType.ELECTRONICS+"/"+item.getSubtype(ItemType.ELECTRONICS));
+//				}
+//			}
+//			break;
+		default:
+			logger.log(Level.WARNING,"No special display for "+item.getItemType());
+//			VBox modBox = new VBox(3);
+//			for (Modification mod : item.getModifications()) {
+//				modBox.getChildren().add(new Label(ShadowrunTools.getModificationString(mod)));
+//			}
+//			box.getChildren().add(modBox);
+		}
+
+//		// WiFi
+//		if (!item.getWiFiAdvantageStrings().isEmpty()) {
+//			box.getChildren().add(getWiFiAdvantagesNode(item));
+//		}
+//		
+//		// Requirements
+//		for (Requirement req : item.getRequirements()) {
+//			if (!ShadowrunTools.isRequirementMet(req, model)) {
+//				Label notMet = new Label(ShadowrunTools.getRequirementString(req));
+//				notMet.setStyle("-fx-text-fill: textcolor-stopper");
+//				box.getChildren().add(notMet);
+//			}
+//		}
+		
+
+		return box;
+	}
+
+	//-------------------------------------------------------------------
 	private static Label getItemAttributeLabel(CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
 		Label ret = new Label("?");
 		Object obj = null;
@@ -172,9 +251,11 @@ public class ItemUtilJFX {
 			ret.setText(obj.toString());
 			break;
 		case FIREMODES:
-			obj = item.getAsObject(attr).getModifiedValue();
-			List<FireMode> fmodes = (List<FireMode>)obj;
-			ret.setText(String.join(",", fmodes.stream().map(m -> m.getName(Locale.getDefault())).collect(Collectors.toList())));
+			if (item.getAsObject(attr)!=null) {
+				obj = item.getAsObject(attr).getModifiedValue();
+				List<FireMode> fmodes = (List<FireMode>)obj;
+				ret.setText(String.join(",", fmodes.stream().map(m -> m.getName(Locale.getDefault())).collect(Collectors.toList())));
+			}
 			break;
 		case ARMOR:
 		case BODY:
@@ -198,6 +279,81 @@ public class ItemUtilJFX {
 		}
 		
 		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private static GridPane getWeaponNode(ItemTemplate item) {
+		int COL_DMG  = 0;
+		int COL_AR   = 1;
+		int COL_MODE = 2;
+		int COL_AMMO = 3;
+		int COL_AVAIL= 4;
+		int COL_COST = 5;
+
+		Label heaAcc  = new Label(SR6ItemAttribute.ATTACK_RATING.getShortName());
+		Label heaDmg  = new Label(SR6ItemAttribute.DAMAGE.getShortName());
+		Label heaMode = new Label(SR6ItemAttribute.FIREMODES.getShortName());
+		Label heaAmmo = new Label(SR6ItemAttribute.AMMUNITION.getShortName());
+		Label heaAvail= new Label(SR6ItemAttribute.AVAILABILITY.getShortName());
+		Label heaCost = new Label(SR6ItemAttribute.PRICE.getShortName());
+
+		heaAcc  .getStyleClass().add("table-head");
+		heaDmg  .getStyleClass().add("table-head");
+		heaMode .getStyleClass().add("table-head");
+		heaAmmo .getStyleClass().add("table-head");
+		heaAvail.getStyleClass().add("table-head");
+		heaCost .getStyleClass().add("table-head");
+
+		heaAcc .setMaxWidth(Double.MAX_VALUE);
+		heaDmg .setMaxWidth(Double.MAX_VALUE);
+		heaMode.setMaxWidth(Double.MAX_VALUE);
+		heaAmmo.setMaxWidth(Double.MAX_VALUE);
+		heaAvail.setMaxWidth(Double.MAX_VALUE);
+		heaCost.setMaxWidth(Double.MAX_VALUE);
+
+		heaAcc .setAlignment(Pos.CENTER);
+		heaDmg .setAlignment(Pos.CENTER);
+		heaMode.setAlignment(Pos.CENTER);
+		heaAmmo.setAlignment(Pos.CENTER);
+		heaAvail.setAlignment(Pos.CENTER);
+		heaCost.setAlignment(Pos.CENTER);
+
+		GridPane grid = new GridPane();
+		grid.setId("weapon-stats");
+		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Damage
+		grid.getColumnConstraints().add(new ColumnConstraints( 80)); // Attack Rating
+		grid.getColumnConstraints().add(new ColumnConstraints(100)); // Mode
+		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Ammo
+		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Availability
+		grid.getColumnConstraints().add(new ColumnConstraints( 60)); // Cost
+		grid.add(heaAcc , COL_AR, 0);
+		grid.add(heaDmg , COL_DMG , 0);
+		grid.add(heaMode, COL_MODE, 0);
+		grid.add(heaAmmo, COL_AMMO, 0);
+		grid.add(heaAvail, COL_AVAIL, 0);
+		grid.add(heaCost, COL_COST, 0);
+
+		// Data
+		Label lblAcc  = new Label(Shadowrun6Tools.getAttackRatingString(item.getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue()));
+		Label lblDmg  = new Label(((Damage)item.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).toString());
+		Label lblMod  = new Label(String.join(", ", ((List<FireMode>)item.getAttribute(SR6ItemAttribute.FIREMODES).getValue()).stream().map(fm -> fm.getName(Locale.getDefault())).collect(Collectors.toList())));
+//		Label lblAmm  = new Label(String.join(", ", item.getWeaponData().getAmmunitionNames()));
+		Label lblAvail= new Label( ((Availability)item.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue()).toString());
+		Label lblCost = new Label(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+		grid.add(lblAcc, COL_AR, 1);
+		grid.add(lblDmg, COL_DMG , 1);
+		grid.add(lblMod, COL_MODE, 1);
+//		grid.add(lblAmm, COL_AMMO, 1);
+		grid.add(lblAvail, COL_AVAIL, 1);
+		grid.add(lblCost, COL_COST, 1);
+		GridPane.setHalignment(lblAcc, HPos.CENTER);
+		GridPane.setHalignment(lblDmg, HPos.CENTER);
+		GridPane.setHalignment(lblMod, HPos.CENTER);
+//		GridPane.setHalignment(lblAmm, HPos.CENTER);
+		GridPane.setHalignment(lblAvail, HPos.CENTER);
+		GridPane.setHalignment(lblCost, HPos.CENTER);
+
+		return grid;
 	}
 
 	//-------------------------------------------------------------------
