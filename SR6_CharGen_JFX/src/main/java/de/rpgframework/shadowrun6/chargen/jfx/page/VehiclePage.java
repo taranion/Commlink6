@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.chargen.jfx.page;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -13,32 +14,27 @@ import org.prelle.javafx.layout.FlexGridPane;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
-import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
-import de.rpgframework.shadowrun6.chargen.jfx.section.EssenceSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.items.ItemType;
-import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
-import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import javafx.scene.control.Label;
 
 /**
  * @author prelle
  *
  */
-public class AugmentationPage extends Page {
+public class VehiclePage extends Page {
 
-	private final static Logger logger = System.getLogger(AugmentationPage.class.getPackageName());
+	private final static Logger logger = System.getLogger(VehiclePage.class.getPackageName());
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
-	private EssenceSection secTrans;
-	private GearSection secCyber;
-	private GearSection secBio;
+	private GearSection secVehicles;
+	private GearSection secDrones;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -46,8 +42,8 @@ public class AugmentationPage extends Page {
 	private GenericDescriptionVBox descBox ;
 
 	//-------------------------------------------------------------------
-	public AugmentationPage() {
-		super(ResourceI18N.get(RES, "page.augmentation.title"));
+	public VehiclePage() {
+		super(ResourceI18N.get(RES, "page.vehicles.title"));
 		initComponents();
 		initLayout();
 		initInteractivity();
@@ -55,66 +51,47 @@ public class AugmentationPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		initEssence();
-		initCyberware();
-		initBioware();
+		initOther();
+		initElectro();
 		
 		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------
-	private void initCyberware() {
-		secCyber = new GearSection(
-				ResourceI18N.get(RES, "page.augmentation.section.cyberware"),
-				item -> 
-					(item.getResolved().getItemType()==ItemType.CYBERWARE 
-					|| 
-					(item.getResolved().getItemType()==ItemType.ACCESSORY && item.getVariant()!=null && (
-							item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE
-							||
-							item.getVariant().getUsages().stream().anyMatch(us -> us.getMode()==CarryMode.IMPLANTED)
-							))
-					)
+	private void initElectro() {
+		secVehicles = new GearSection(
+				ResourceI18N.get(RES, "page.vehicles.section.vehicles"),
+				ItemType.vehicleTypes()
 				);
-		secCyber.setMaxHeight(Double.MAX_VALUE);
-		FlexGridPane.setMinWidth(secCyber, 4);
-		FlexGridPane.setMinHeight(secCyber, 6);
-		FlexGridPane.setMediumWidth(secCyber, 5);
-		FlexGridPane.setMediumHeight(secCyber, 6);
-		FlexGridPane.setMaxWidth(secCyber, 5);
-		FlexGridPane.setMaxHeight(secCyber, 9);
+		secVehicles.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secVehicles, 4);
+		FlexGridPane.setMinHeight(secVehicles, 6);
+		FlexGridPane.setMediumWidth(secVehicles, 6);
+		FlexGridPane.setMediumHeight(secVehicles, 9);
+		FlexGridPane.setMaxWidth(secVehicles, 6);
+		FlexGridPane.setMaxHeight(secVehicles, 12);
 	}
 	
 	//-------------------------------------------------------------------
-	private void initBioware() {
-		secBio = new GearSection(
-				ResourceI18N.get(RES, "page.augmentation.section.bioware"),
-				ItemType.BIOWARE
+	private void initOther() {
+		secDrones = new GearSection(
+				ResourceI18N.get(RES, "page.vehicles.section.drones"),
+				ItemType.droneTypes()
 				);
-		secBio.setMaxHeight(Double.MAX_VALUE);
-		FlexGridPane.setMinWidth(secBio, 4);
-		FlexGridPane.setMinHeight(secBio, 6);
-		FlexGridPane.setMediumWidth(secBio, 5);
-		FlexGridPane.setMediumHeight(secBio, 6);
-		FlexGridPane.setMaxWidth(secBio, 5);
-		FlexGridPane.setMaxHeight(secBio, 9);
-	}
-	
-	//-------------------------------------------------------------------
-	private void initEssence() {
-		secTrans = new EssenceSection(ResourceI18N.get(RES, "page.augmentation.section.essence"));
-		secTrans.setMaxHeight(Double.MAX_VALUE);
-		FlexGridPane.setMinWidth(secTrans, 4);
-		FlexGridPane.setMinHeight(secTrans, 4);
-		FlexGridPane.setMediumWidth(secTrans, 4);
-		FlexGridPane.setMediumHeight(secTrans, 4);
+		secDrones.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secDrones, 4);
+		FlexGridPane.setMinHeight(secDrones, 6);
+		FlexGridPane.setMediumWidth(secDrones, 6);
+		FlexGridPane.setMediumHeight(secDrones, 9);
+		FlexGridPane.setMaxWidth(secDrones, 6);
+		FlexGridPane.setMaxHeight(secDrones, 12);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secTrans, secCyber, secBio);
+		flex.getChildren().addAll(secVehicles,secDrones);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -123,9 +100,8 @@ public class AugmentationPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-		secCyber.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
-		secBio  .showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
-		secTrans.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secDrones.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secVehicles.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
 	//-------------------------------------------------------------------
@@ -156,17 +132,15 @@ public class AugmentationPage extends Page {
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
-		secCyber.updateController(ctrl);
-		secBio  .updateController(ctrl);
-		secTrans.updateController(ctrl);
+		secVehicles.updateController(ctrl);
+		secDrones.updateController(ctrl);
 		refresh();
 	}
 	
 	//-------------------------------------------------------------------
 	public void refresh() {
-		secCyber.refresh();
-		secBio  .refresh();
-		secTrans.refresh();
+		secVehicles.refresh();
+		secDrones.refresh();
 	}
 
 }

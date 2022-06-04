@@ -13,9 +13,12 @@ import org.prelle.javafx.layout.FlexGridPane;
 import com.onexip.flexboxfx.FlexBox;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.section.AppearanceSection;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -41,6 +44,7 @@ public class MatrixPage extends Page {
 //	private SkillSection secNormal;
 //	private SkillSection secKnowl;
 //	private SkillSection secLang;
+	private MetamagicOrEchoSection secMeta;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -57,6 +61,7 @@ public class MatrixPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
+		initMetamagic();
 		initBaseData();
 //		initKnowledge();
 //		initLanguage();
@@ -75,11 +80,25 @@ public class MatrixPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
+	private void initMetamagic() {
+		secMeta = new MetamagicOrEchoSection(
+				ResourceI18N.get(RES, "page.matrix.section.echoes"),
+				r -> Shadowrun6Tools.getRequirementString((Requirement)r, Locale.getDefault()), 
+				MetamagicOrEcho.Type.ECHO
+				);
+		secMeta.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secMeta, 4);
+		FlexGridPane.setMinHeight(secMeta, 6);
+		FlexGridPane.setMediumWidth(secMeta, 5);
+		FlexGridPane.setMediumHeight(secMeta, 8);
+	}
+	
+	//-------------------------------------------------------------------
 	private void initLayout() {
 		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-//		flex.getChildren().addAll(secNormal, secKnowl, secLang);
+		flex.getChildren().addAll(secMeta);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -109,7 +128,7 @@ public class MatrixPage extends Page {
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
-//		secKnowl.updateController(ctrl);
+		secMeta.updateController(ctrl);
 //		secLang.updateController(ctrl);
 //		secNormal.updateController(ctrl);
 		refresh();
@@ -117,7 +136,7 @@ public class MatrixPage extends Page {
 	
 	//-------------------------------------------------------------------
 	public void refresh() {
-//		secNormal.refresh();
+		secMeta.refresh();
 //		secLang.refresh();
 //		secKnowl.refresh();
 	}

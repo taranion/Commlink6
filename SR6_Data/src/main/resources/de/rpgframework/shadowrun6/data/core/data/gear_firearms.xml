@@ -14,14 +14,13 @@
       <weapon dmg="4S(e)" attack="9,9,,," mode="SS" ammo="4(m)" skill="firearms" spec="firearms/tasers"/>
    </item>
 	<item id="yamaha_pulsar_2" avail="1" price="350" type="WEAPON_FIREARMS" subtype="TASERS">
-		<!--usage mode="NORMAL" />
-		<usage mode="MOUNTED" slot="MOUNTED_HOLDOUT" volume="1" />
-		<usage mode="IMPLANTED"  /-->
 		<modifications>
 			<itemmod type="HOOK" ref="TOP" />
 		</modifications>
 		<weapon dmg="4S(e)" attack="9,9,,," mode="SS" ammo="4(m)" skill="firearms" spec="firearms/tasers" />
-		<weapon dmg="3S" attack="6,,,," skill="close_combat" spec="close_combat/clubs" />
+		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+			<weapon dmg="3S" attack="6,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+		</alternate>
 	</item>
    <!-- Holdouts -->
    <item id="fichetti_tiffani_needler" avail="2" price="435" type="WEAPON_FIREARMS" subtype="HOLDOUTS">

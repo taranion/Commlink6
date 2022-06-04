@@ -12,7 +12,7 @@
         <Logger name="xml" level="warn" />
         <Logger name="prelle.jfx" level="warn" />
         <Logger name="rpgframework" level="debug" />
-        <Logger name="de.rpgframework.genericrpg.items" level="INFO" />
+        <Logger name="de.rpgframework.genericrpg.items" level="WARN" />
         <Logger name="shadowrun6" level="debug" />
     </Loggers>
 </Configuration>

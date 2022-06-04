@@ -3,6 +3,7 @@ package org.prelle.rpgframework.shadowrun6.data;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 import java.util.Locale;
@@ -11,10 +12,11 @@ import java.util.UUID;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.items.Availability;
@@ -23,7 +25,10 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 /**
@@ -54,6 +59,7 @@ public class SR6CarriedItemTest {
 		assertNotNull(axe);
 		
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(axe, null);
+		SR6GearTool.recalculate("", null, item);
 		assertNotNull(item);
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
 		assertEquals(4, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
@@ -99,11 +105,12 @@ public class SR6CarriedItemTest {
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null);
 		Decision decision = new Decision(UUID.fromString("adeb159c-6ca3-407b-8641-c76f9b29a49c"), "9");
 		item.setDecisions(List.of(decision));
+		SR6GearTool.recalculate("", null, item);
 		
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
 		assertEquals(3, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
 		assertEquals(Legality.RESTRICTED, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
-		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
+		assertNotNull("No PRICE set",item.getAsValue(SR6ItemAttribute.PRICE));
 		assertEquals(190, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		assertNotNull(item.getAsObject(SR6ItemAttribute.DAMAGE));
 		assertEquals(5, ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getValue());
@@ -131,6 +138,7 @@ public class SR6CarriedItemTest {
 		assertNotNull(temp);
 		
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null);
+		SR6GearTool.recalculate("", null, item);
 		assertNotNull(item);
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
 		assertEquals(1, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
@@ -149,6 +157,33 @@ public class SR6CarriedItemTest {
 		assertEquals(Shadowrun6Core.getSkill("firearms").getSpecialization("tasers"), (SkillSpecialization<SR6Skill>)item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getModifiedValue());
 		
 		//item.get
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * 	<item id="combat_axe" avail="4" price="500" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+	 *	  <equip mode="NORMAL"/>
+	 *	  <weapon dmg="5P" attack="9,,,," skill="close_combat" spec="close_combat/blades" />
+	 *  </item>
+	 */
+	@Test
+	public void testVehicle() {
+		ItemTemplate honda = Shadowrun6Core.getItem(ItemTemplate.class, "honda_spirit");
+		assertNotNull(honda);
+		ItemAttributeDefinition def = honda.getAttribute(SR6ItemAttribute.BODY);
+		assertNotNull(def);
+		assertTrue("BODY should be an integer type",def.isInteger());
+		
+		CarriedItem<ItemTemplate> item = GearTool.buildItem(honda, null).get();
+		assertNotNull(item);
+		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
+		assertEquals(2, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
+		assertEquals(ItemType.VEHICLES, item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue());
+		assertEquals(ItemSubType.CARS, item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue());
+		assertEquals(Legality.LEGAL, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
+		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(13000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals(10, item.getAsValue(SR6ItemAttribute.BODY).getModifiedValue());
 	}
 
 }

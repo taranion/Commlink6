@@ -50,6 +50,8 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	HAS_RATING,
 	/* For accessories: Where to attach it */
 	HOOK,
+	ITEMTYPE,
+	ITEMSUBTYPE,
 	
 //	/** Maximum rating of embedded items */
 	MAX_SENSOR_RATING,
@@ -85,7 +87,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 
 	//-------------------------------------------------------------------
 	private SR6ItemAttribute() {
-		converter = new IntegerConverter();
+		//converter = new IntegerConverter();
 	}
 
 	//-------------------------------------------------------------------
@@ -128,6 +130,9 @@ public enum SR6ItemAttribute implements IItemAttribute {
 			System.err.println("Missing "+e.getKey()+" in "+RES.getBaseBundleName());
 			return e.getKey();
 		}
+	}
+	public String getShortName() {
+		return getShortName(Locale.getDefault());
 	}
 
 	//-------------------------------------------------------------------

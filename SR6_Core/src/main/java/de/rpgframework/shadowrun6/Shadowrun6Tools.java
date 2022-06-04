@@ -45,6 +45,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
+import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -304,6 +305,11 @@ public class Shadowrun6Tools {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
 			String prefix = (tmp.isNegate())?(RES.getString("require.negate")+" "):"";
 			switch ((ShadowrunReference)tmp.getType()) {
+			case GEAR:
+				ItemTemplate gear = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				if (gear==null)
+					return "Unknown "+tmp.getKey();
+				return prefix+gear.getName(loc);
 			case MAGIC_RESO:
 				MagicOrResonanceType morType = Shadowrun6Core.getItem(MagicOrResonanceType.class, tmp.getKey());
 				if (morType==null)
@@ -353,6 +359,11 @@ public class Shadowrun6Tools {
 			case SKILL:
 				item = ShadowrunReference.resolve(type, req.getKey());
 				return item.getName(loc)+" "+tmp.getRawValue()+"+";			
+			case QUALITY:
+				DataItem qual = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				if (qual==null)
+					return "Unknown "+tmp.getKey();
+				return qual.getName(loc);
 			}
 		} else if (req instanceof AnyRequirement) {
 			AnyRequirement any = (AnyRequirement)req;
@@ -422,6 +433,7 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
 	public static boolean isRequirementMet(Shadowrun6Character model, ComplexDataItem requiredFor, Requirement req, Decision[] decisions) {
 		if (req.getApply()!=null && req.getApply()!=ApplyTo.CHARACTER) return true;
 		
@@ -440,6 +452,14 @@ public class Shadowrun6Tools {
 				return model.getMetatype().getId().equals(req.getKey());
 			case MAGIC_RESO:
 				return model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType()==item;
+			case GEAR:
+				// Character needs to have a specific gear
+				for (CarriedItem<ItemTemplate> gear : model.getCarriedItems()) {
+					if (gear.getModifyable().getId().equals(req.getKey())) {
+						return true;
+					}						
+				}
+				return false;
 			default:
 				System.err.println("Shadowrun6Tool: Todo: isRequirementMet for "+type+" = "+item);
 				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type+" = "+item);
@@ -571,5 +591,20 @@ public class Shadowrun6Tools {
 		
 		throw new IllegalArgumentException("Cannot instantiate "+tmp.getClass());
 	}
+	
+	//-------------------------------------------------------------------
+	public static String getAttackRatingString(int[] attackRating) {
+		if (attackRating==null) return "ERROR";
+		String[] ratings = new String[attackRating.length];
+		for (int i=0; i<ratings.length; i++) {
+			int val = attackRating[i];
+			if (val>0)
+				ratings[i] = String.valueOf(val);
+			else
+				ratings[i] = "-";
+		}
+		return String.join("/", ratings);
+	}
+
 	
 }

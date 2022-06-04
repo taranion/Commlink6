@@ -5,6 +5,7 @@ import java.lang.System.Logger.Level;
 import java.util.List;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -36,18 +37,26 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
 	private List<ItemType> allowedTypes;
+	private Predicate<CarriedItem<ItemTemplate>> filter;
 
 	private SR6CharacterController control;
 	private ShadowrunCharacter model;
 
 	//-------------------------------------------------------------------
-	/**
-	 * @param title
-	 */
 	public GearSection(String title, ItemType...types) {
 		super(title);
 		allowedTypes = List.of(types);
-		list.setCellFactory(lv -> new CarriedItemListCell( () -> control.getEquipmentController()));
+		list.setCellFactory(lv -> new CarriedItemListCell( control));
+		filter = item -> allowedTypes.contains(item.getResolved().getItemType());
+		
+		refresh();
+	}
+
+	//-------------------------------------------------------------------
+	public GearSection(String title, Predicate<CarriedItem<ItemTemplate>> filter) {
+		super(title);
+		this.filter = filter;
+		list.setCellFactory(lv -> new CarriedItemListCell( control));
 		
 		refresh();
 	}
@@ -93,6 +102,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		for (CarriedItem<ItemTemplate> tmp :data2) {
 			if (tmp.getResolved()==null) {
 				System.err.println("No resolved item '"+tmp.getKey()+"' for item "+tmp.getUuid());
+				logger.log(Level.ERROR, "No resolved item '"+tmp.getKey()+"' for item "+tmp.getUuid());
 				continue;
 			}
 			if (tmp.getResolved().getItemType()==null) {
@@ -103,8 +113,11 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		
 		List<CarriedItem<ItemTemplate>> data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItems())
 			.stream()
-			.filter(item -> allowedTypes.contains(item.getResolved().getItemType()))
+			.filter(filter)
 			.collect(Collectors.toList());
+		for (CarriedItem goo : data) {
+			System.out.println("..."+goo.getKey());
+		}
 		list.getItems().setAll(data);
 	}
 

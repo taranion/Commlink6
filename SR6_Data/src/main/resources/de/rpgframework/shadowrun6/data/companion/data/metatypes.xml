@@ -31,7 +31,7 @@
            <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="STRENGTH"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="INTUITION" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
-           <itemmod type="QUALITY" ref="low-light_vision"/>
+           <itemmod type="QUALITY" ref="thermographic_vision"/>
            <itemmod type="QUALITY" ref="monkey_paws"/>
            <itemmod type="QUALITY" ref="functional_tail">
            	 <decision choice="b237c0da-1eb1-4070-879a-22bc2899c106" value="prehensile"/>
@@ -167,7 +167,6 @@
           <itemmod type="QUALITY" ref="fangs"/>
           <itemmod type="QUALITY" ref="low-light_vision"/>
           <itemmod type="QUALITY" ref="mad_eyes"/>
-          <itemmod type="QUALITY" ref="poor_self_control"/>
 		</modifications>
 	</metatype>
 	<metatype id="ogre" variantof="ork" size="170" weight="101" karma="5">
@@ -186,8 +185,10 @@
          <valmod type="ATTRIBUTE" ref="AGILITY"   value="7" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="7" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" when="CREATION"/>
-          <itemmod type="QUALITY" ref="low-light_vision"/>
-           <itemmod type="QUALITY" ref="striking_skin"/>
+         <itemmod type="QUALITY" ref="goring_horns"/>
+         <itemmod type="QUALITY" ref="low-light_vision"/>
+         <itemmod type="QUALITY" ref="striking_skin"/>
+         <itemmod type="QUALITY" ref="mad_eyes"/>
 		</modifications>
 	</metatype>
 	<metatype id="satyr" variantof="ork" size="160" weight="69" karma="10">
@@ -230,7 +231,9 @@
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" when="CREATION"/>
          <valmod type="QUALITY"   ref="built_tough" value="2"/>
-         <itemmod type="QUALITY"  ref="dermal_alt_bark"/>
+         <itemmod type="QUALITY"  ref="dermal_alteration">
+         	<decision choice="0180ba51-5b30-471d-bdba-5e2482b8440d" value="bark"/>
+         </itemmod>
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
 		</modifications>
 	</metatype>

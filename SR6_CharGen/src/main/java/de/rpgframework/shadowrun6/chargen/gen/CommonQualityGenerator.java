@@ -93,8 +93,14 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		// Check if all requirements are met
 		List<Requirement> notMet = new ArrayList<>();
 		for (Requirement req : value.getRequirements()) {
-			if (!Shadowrun6Tools.isRequirementMet(model, value, req, decisions)) {
-				notMet.add(req);
+			try {
+				if (!Shadowrun6Tools.isRequirementMet(model, value, req, decisions)) {
+					notMet.add(req);
+				}
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Error in quality "+value.getId(),e);
+				e.printStackTrace();
+				System.exit(1);
 			}
 		}
 		if (notMet.size()>0) {
@@ -120,7 +126,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			}
 		}
 		
-		if (karma>model.getKarmaFree()) {
+		if (value.isPositive() && karma>model.getKarmaFree()) {
 			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
 
@@ -157,9 +163,9 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			return new Possible(Severity.WARNING, RES, SR6RejectReasons.IMPOSS_MISSING_DECISIONS,names);
 		}
 		
-		// Is Karma gain >20
+		// Is Karma gain >20 and there is no chance to prevent gaining to much Karma
 		int cost = value.getKarmaCost();
-		if (!value.isPositive() && ((karmaGain+cost)>20)) 
+		if (!value.isPositive() && ((karmaGain+cost)>20) && numberOfQualities>4) 
 			return new Possible(Severity.STOPPER, RES, SR6RejectReasons.IMPOSS_QUALITY_KARMAGAIN);
 		
 		// No more than 6 user-selected qualities

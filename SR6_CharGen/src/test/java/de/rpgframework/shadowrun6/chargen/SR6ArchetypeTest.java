@@ -6,7 +6,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -55,6 +57,7 @@ import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 /**
@@ -657,7 +660,7 @@ public class SR6ArchetypeTest {
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
 		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "datajack"));
-		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"));
+//		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"));
 		OperationResult<CarriedItem<ItemTemplate>> toner = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner").getChoices().get(0), "1"));
 		OperationResult<CarriedItem<ItemTemplate>> enhan = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "reaction_enhancers"),
@@ -771,6 +774,14 @@ public class SR6ArchetypeTest {
 		
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);
+		
+		
+		List<CarriedItem> list = model.getCarriedItems().stream()
+			.filter(item -> ((ItemTemplate)item.getResolved()).getItemType()==ItemType.CYBERWARE)
+			.collect(Collectors.toList());
+		for (CarriedItem goo : list) {
+			System.out.println("..."+goo.getKey());
+		}
 	}
 	
 	//-------------------------------------------------------------------

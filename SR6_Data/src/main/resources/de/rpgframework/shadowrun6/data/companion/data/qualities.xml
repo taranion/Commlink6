@@ -13,7 +13,7 @@
 	<quality id="critter_trainer" karma="10" pos="true" type="NORMAL" />
 	<quality id="cyberjack_maximization" karma="12" pos="true" type="NORMAL">
 		<requires>
-			<valuereq type="GEAR" ref="cyberjack" apply="CHARACTER"/>
+			<datareq type="GEAR" ref="cyberjack" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<itemmod type="RULE" ref="ADD_2_TWO_LOWEST_CYBERJACK_ATTRIBUTES"/>

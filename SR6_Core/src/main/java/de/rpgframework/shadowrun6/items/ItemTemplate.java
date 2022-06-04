@@ -2,7 +2,6 @@ package de.rpgframework.shadowrun6.items;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.prelle.simplepersist.AttribConvert;
@@ -10,6 +9,7 @@ import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.ElementList;
 import org.prelle.simplepersist.ElementListUnion;
 
+import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
@@ -91,6 +91,8 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		
 		
 		setAttribute(SR6ItemAttribute.PRICE, super.price);
+		setAttribute(SR6ItemAttribute.ITEMTYPE, type);
+		setAttribute(SR6ItemAttribute.ITEMSUBTYPE, subtype);
 
 		if (availability!=null) 
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);

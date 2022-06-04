@@ -38,9 +38,11 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CombatPage;
+import de.rpgframework.shadowrun6.chargen.jfx.page.GearPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.MagicPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.MatrixPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage;
+import de.rpgframework.shadowrun6.chargen.jfx.page.VehiclePage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -63,6 +65,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private AugmentationPage pgAugment;
 	private MagicPage pgMagic;
 	private MatrixPage pgMatrix;
+	private VehiclePage pgVehicles;
+	private GearPage pgGear;
 	
 	private Label lbMode;
 	
@@ -101,7 +105,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgAugment= new AugmentationPage();
 		pgMagic  = new MagicPage();
 		pgMatrix = new MatrixPage();
-		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix);
+		pgVehicles = new VehiclePage();
+		pgGear   = new GearPage();
+		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear);
 	}
 
 	//-------------------------------------------------------------------
@@ -220,6 +226,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgAugment.setController(control);
 		pgMagic.setController(control);
 		pgMatrix.setController(control);
+		pgVehicles.setController(control);
+		pgGear.setController(control);
 		control.setAllowRunProcessor(true);
 		control.runProcessors();
 	}
@@ -242,6 +250,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			pgAugment.refresh();
 			pgMagic.refresh();
 			pgMatrix.refresh();
+			pgVehicles.refresh();
+			pgGear.refresh();
 		}
 //		Page page = getVisiblePage();
 //		if (page!=null && page instanceof ControllerListener) {
