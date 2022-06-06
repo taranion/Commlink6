@@ -25,4 +25,5 @@ public enum SR6RuleFlag implements RuleFlag {
 	 */
 	POLYGLOT,
 	MAX_3_CONTACT_LOYALTY,
+	DECK_5000_PER_KARMA
 }

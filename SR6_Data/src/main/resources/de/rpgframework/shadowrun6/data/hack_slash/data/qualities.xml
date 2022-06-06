@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="at_home_in_the_matrix" karma="15" pos="true" type="NORMAL" />
+   <quality id="brilliant_heuristics"  karma="10" pos="true" type="NORMAL" />
+   <quality id="data_anomaly"          karma= "5" pos="true" type="NORMAL" />
+   <quality id="datahaven_membership"  karma= "5" pos="true" type="NORMAL" hasLevel="true">
+     <choices>
+       <choice type="TEXT" uuid="35ed2489-d0af-485b-b58a-61fbd064ed9c"/>
+     </choices>
+   </quality>
+   <quality id="deck_builder"         	karma="6" pos="true" type="NORMAL">
+     <modifications>
+       <itemmod type="RULE" ref="DECK_5000_PER_KARMA" />
+     </modifications>
+   </quality>
+   <quality id="fade_to_black"   	  karma="3" pos="true" type="NORMAL" />
+   <quality id="fractal_blast"     	  karma="9" pos="true" type="NORMAL" />
+   <quality id="golden_screwdriver"   karma="5" pos="true" type="NORMAL" />
+   <quality id="hacker_combo"         karma="10" pos="true" type="NORMAL">
+     <choices>
+       <choice type="ACTION" ref="MARRIX" uuid="51283af1-cc3d-481f-9e4b-96fc5ac1824e"/>
+       <choice type="ACTION" ref="MATRIX" uuid="91c5cccf-01d3-4f58-b585-1710a2e8a8c4"/>
+       <choice type="TEXT" uuid="2fc3a55c-14cf-43c1-b7db-8ae3e16f32b9"/>
+     </choices>
+   </quality>
+   <quality id="hold_the_door"     	  karma="9" pos="true" type="NORMAL" />
+   <quality id="icu"   	              karma="3" pos="true" type="NORMAL" />
+   <quality id="impenetrable_logic"   karma="7" pos="true" type="NORMAL" />
+   <quality id="jack_jockey"     	  karma="11" pos="true" type="NORMAL" />
+   <quality id="loner" 	              karma="5" pos="true" type="NORMAL" />
+   <quality id="matrix_attribute_adv" karma="15" pos="true" type="NORMAL" multi="true" max="3">
+     <choices>
+       <choice type="ITEM_ATTRIBUTE" options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL" uuid="684fc8ad-4256-4229-b6b6-5ff67123917d"/>
+     </choices>
+     <modifications>
+       <valmod type="ITEM_ATTRIBUTE" ref="CHOICE" choice="684fc8ad-4256-4229-b6b6-5ff67123917d" value="1" />
+     </modifications>
+   </quality>
+   <quality id="natural_hacker"   	  karma="15" pos="true" type="NORMAL" >
+   	<requires>
+   		<valuereq type="ATTRIBUTE" ref="RESONANCE" value="1" apply="CHARACTER"/>
+   	</requires>
+   </quality>
+   <quality id="online_fame"          karma="3" pos="true" type="NORMAL" max="6">
+     <modifications>
+       <checkmod type="SKILL" ref="influence" value="$LEVEL" what="BONUS"/>
+       <checkmod type="SKILL" ref="con" value="$LEVEL" what="BONUS"/>
+     </modifications>
+   </quality>
+   <quality id="profiler"             karma="7" pos="true" type="NORMAL" />
+   <quality id="quick_config"         karma="3" pos="true" type="NORMAL" />
+   <quality id="reverberant"          karma="5" pos="true" type="NORMAL" />
+   <quality id="satisfaction"         karma="3" pos="true" type="NORMAL" />
+   <quality id="surgical_strike"      karma="11" pos="true" type="NORMAL" />
+   <quality id="voider_of_warranties" karma="13" pos="true" type="NORMAL" />
+	
+   <quality id="achilles_heel"        karma="12" pos="false" type="NORMAL" multi="true" >
+   	<choices>
+   		<choice type="TEXT" uuid="381fefe1-0404-4457-b090-0f96f3df69b3"/>
+   	</choices>
+   </quality>
+	<quality id="binary_mentality" karma="10" pos="false" type="NORMAL">
+		<choices>
+			<choice type="SKILL" options="electronics,cracking" uuid="45076e89-c3dd-4757-a618-587950ba3801" />
+		</choices>
+	</quality>
+   <quality id="buddy_system"         karma="7" pos="false" type="NORMAL" />
+   <quality id="bull_in_ceramics"     karma="8" pos="false" type="NORMAL" />
+   <quality id="compulsive_archivist" karma="8" pos="false" type="NORMAL" />
+   <quality id="curiosity_killed_the_cat" karma="5" pos="false" type="NORMAL" max="3"/>
+   <quality id="data_liberator"       karma="2" pos="false" type="NORMAL" />
+   <quality id="defective_attribute"  karma="7" pos="false" type="NORMAL">
+     <choices>
+       <choice type="ITEM_ATTRIBUTE" options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL" uuid="dbe00747-5b23-47bf-81c8-e05f00ab70da"/>
+     </choices>
+   </quality>
+   <quality id="like_a_boss"          karma="5" pos="false" type="NORMAL" />
+   <quality id="mode_lock"            karma="7" pos="false" type="NORMAL">
+     <choices>
+       <choice type="TEXT" uuid="dbe00747-5b23-47bf-81c8-e05f00ab70da"/>
+     </choices>
+   </quality>
+   <quality id="program_dependency"   karma="2" pos="false" type="NORMAL">
+     <choices>
+       <choice type="PROGRAM" ref="baby_monitor" uuid="33ed9bd8-e319-4062-b228-4e6b9fa961a1"/>
+     </choices>
+   </quality>
+   <quality id="simsense_dependency"  karma="16" pos="false" type="NORMAL" />
+   <quality id="resonance_burn"   	  karma="13" pos="true" type="NORMAL" >
+   	<requires>
+   		<datareq type="MAGIC_RESO" ref="technomancer" apply="CHARACTER"/>
+   	</requires>
+   </quality>
+   <quality id="sloppy_coder"         karma="3" pos="false" type="NORMAL" />
+   <quality id="wanted_by_god"        karma="5" pos="false" type="NORMAL" max="4"/>
+   
+</qualities>
