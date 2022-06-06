@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sprites>
+  <sprite id="assassin"/>
+  <sprite id="defender"/>
+  <sprite id="modular"/>
+  <sprite id="music"/>
+  <sprite id="primal"/>
+</sprites>

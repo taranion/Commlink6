@@ -85,6 +85,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
 	SPIRIT(Spirit.class),
 	SPRITE(Sprite.class),
+	SPRITE_POWER("SpritePower"),
 	SUBSELECT("Subselect"), // Subselect
 	TEXT("TEXT"),
 	;

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+   <metaecho id="aura_link" type="ECHO">
+   	<requires>
+   		<datareq type="METAECHO" ref="skin_link" apply="CHARACTER"/>
+   	</requires>
+   </metaecho>
+   <metaecho id="cyberadept"   type="ECHO"/>
+   <metaecho id="data_structure_encoding" type="ECHO">
+   	<requires>
+   		<datareq type="METAECHO" ref="skin_link" apply="CHARACTER"/>
+   	</requires>
+   </metaecho>
+   <metaecho id="dissonant_scream" type="ECHO"/>
+   <metaecho id="hybrid_sprites" type="ECHO"/>
+   <metaecho id="living_command_console" type="ECHO">
+   	<requires>
+   		<datareq type="METAECHO" ref="living_network" apply="CHARACTER"/>
+   		<datareq type="METAECHO" ref="machine_mind" apply="CHARACTER"/>
+   	</requires>
+     <modifications>
+       <!--itemmod type="GEAR" ref="rcc" variant="echo_living_command_console">
+       	<decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="$SUBMERSION"/>
+       </itemmod-->
+     </modifications>
+   </metaecho>
+   <metaecho id="living_host" type="ECHO">
+   	<requires>
+   		<datareq type="METAECHO" ref="transcendent_network" apply="CHARACTER"/>
+   	</requires>
+   </metaecho>
+   <metaecho id="machine_mastermind" type="ECHO">
+   	<requires>
+   		<datareq type="METAECHO" ref="machine_mind" apply="CHARACTER"/>
+   	</requires>
+   </metaecho>
+   <metaecho id="mega_sprite"       type="ECHO" />
+   <metaecho id="matrix_amplifier"  type="ECHO"/>
+   <metaecho id="new_sprite_type"   type="ECHO">
+     <modifications>
+       <allowmod type="SPRITE" ref="assassin" />
+       <allowmod type="SPRITE" ref="defender" />
+       <allowmod type="SPRITE" ref="modular" />
+       <allowmod type="SPRITE" ref="primal" />
+     </modifications>
+   </metaecho>
+   <metaecho id="resonance_power" type="ECHO" max="99">
+   	<choices>
+   		<choice type="SPRITE_POWER" uuid="3c8ed47a-3eac-4094-af88-7f7e407bb6be" />
+   	</choices>
+   </metaecho>
+   <metaecho id="software_emulator" type="ECHO">
+   	<requires>
+   		<datareq type="METAECHO" ref="living_network" apply="CHARACTER"/>
+   	</requires>
+   </metaecho>
+   <metaecho id="sprite_conduit"  type="ECHO"/>
+   <metaecho id="sprite_link"  type="ECHO"/>
+   <metaecho id="sprite_symbiosis" type="ECHO">
+   	<requires>
+   		<datareq type="METAECHO" ref="sprite_conduit" apply="CHARACTER"/>
+   	</requires>
+   </metaecho>
+   <metaecho id="syntax_error"  type="ECHO"/>
+   <metaecho id="transcendent_network"  type="ECHO">
+   	<requires>
+   		<datareq type="METAECHO" ref="living_network" apply="CHARACTER"/>
+   	</requires>
+   </metaecho>
+</metaechoes>

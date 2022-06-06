@@ -18,8 +18,6 @@ import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.items.AlternateUsage;
-import de.rpgframework.genericrpg.items.CarriedItemProcessor;
-import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.IUsageMode;
@@ -53,6 +51,8 @@ import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureList;
 import de.rpgframework.shadowrun.Spirit;
 import de.rpgframework.shadowrun.SpiritList;
+import de.rpgframework.shadowrun.Sprite;
+import de.rpgframework.shadowrun.SpriteList;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.TraditionList;
 import de.rpgframework.shadowrun6.ActionList;
@@ -75,7 +75,6 @@ import de.rpgframework.shadowrun6.items.ItemTemplateList;
 import de.rpgframework.shadowrun6.items.SR6AlternateUsage;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
-import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.items.SR6UsageMode;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
@@ -232,6 +231,10 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" actions");
 			list = Shadowrun6Core.loadDataItems(ComplexFormList.class, ComplexForm.class, set, clazz, "hack_slash/data/complexforms.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" complex forms");
+			list = Shadowrun6Core.loadDataItems(SpriteList.class, Sprite.class, set, clazz, "hack_slash/data/sprites.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" sprites");
+			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
