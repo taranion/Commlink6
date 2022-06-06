@@ -56,6 +56,8 @@ import de.rpgframework.shadowrun.SpriteList;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.TraditionList;
 import de.rpgframework.shadowrun6.ActionList;
+import de.rpgframework.shadowrun6.DataStructure;
+import de.rpgframework.shadowrun6.DataStructureList;
 import de.rpgframework.shadowrun6.MetaTypeList;
 import de.rpgframework.shadowrun6.NPCList;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -233,6 +235,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" complex forms");
 			list = Shadowrun6Core.loadDataItems(SpriteList.class, Sprite.class, set, clazz, "hack_slash/data/sprites.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" sprites");
+			list = Shadowrun6Core.loadDataItems(DataStructureList.class, DataStructure.class, set, clazz, "hack_slash/data/datastructures.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" data structures");
 			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 

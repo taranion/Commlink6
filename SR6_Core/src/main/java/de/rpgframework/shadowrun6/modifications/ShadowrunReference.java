@@ -29,6 +29,7 @@ import de.rpgframework.shadowrun.Spirit;
 import de.rpgframework.shadowrun.Sprite;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
+import de.rpgframework.shadowrun6.DataStructure;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6Spell;
@@ -57,6 +58,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ATTRIBUTE(new AttributeConverter()),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
+	DATA_STRUCTURE(DataStructure.class),
 	ELEMENT("Element"),
 	GEAR(ItemTemplate.class),
 	HOOK(ItemHook.class, 0),
