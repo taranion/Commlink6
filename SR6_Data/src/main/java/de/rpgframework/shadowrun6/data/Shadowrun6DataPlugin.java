@@ -226,6 +226,13 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-complete.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" complete PACKs");
 
+			logger.log(Level.INFO, "START -------------------------------HACK&SLASH------------------------------------------");
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "HACK_SLASH", "hack_slash.i18n", Locale.ENGLISH);
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "hack_slash/data/actions.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" actions");
+			list = Shadowrun6Core.loadDataItems(ComplexFormList.class, ComplexForm.class, set, clazz, "hack_slash/data/complexforms.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" complex forms");
+
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());

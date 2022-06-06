@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+  <action cat="MATRIX" id="calibration"     illegal="false" skill="cracking"    type="MAJOR" access="USER/ADMIN"/>
+  <action cat="MATRIX" id="delayed_command" illegal="true"  skill="cracking"    type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
+  <action cat="MATRIX" id="denial_of_service" illegal="true" skill="electronics" type="MAJOR" access="OUTSIDER"/>
+  <action cat="MATRIX" id="device_lock"     illegal="true"  skill="cracking"    type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
+  <action cat="MATRIX" id="garbage_in"      illegal="true"  skill="cracking"    type="MAJOR" access="USER/ADMIN"/>
+  <action cat="MATRIX" id="known_exploit"   illegal="true"  skill="cracking"    type="MAJOR" access="USER/ADMIN" iattr="SLEAZE"/>
+  <action cat="MATRIX" id="masquerade"      illegal="true"  skill="cracking"    type="MAJOR" access="USER/ADMIN"/>
+  <action cat="MATRIX" id="metahuman_in_the_middle" illegal="true"  skill="cracking" type="MAJOR" access="OUTSIDER"/>
+  <action cat="MATRIX" id="modify_icon"     illegal="true"  skill="electronics" type="MAJOR" access="ADMIN"/>
+  <action cat="MATRIX" id="popup"           illegal="true"  skill="cracking"    type="MAJOR" access="OUTSIDER"/>
+  <action cat="MATRIX" id="squelch"         illegal="true"  skill="electronics" type="MAJOR" access="OUTSIDER"/>
+  <action cat="MATRIX" id="subvert_infra"   illegal="true"  skill="electronics" type="MAJOR" access="ADMIN"/>
+  <action cat="MATRIX" id="threat_analysis" illegal="false" skill="electronics" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
+  <action cat="MATRIX" id="virtual_aim"     illegal="false"                     type="MINOR" access="OUTSIDER"/>
+  <action cat="MATRIX" id="watchdog"        illegal="true"  skill="cracking"    type="MINOR" access="USER/ADMIN"/>
+
+  <action type="EDGE" cat="MATRIX" cost="1" apply="MATRIX" id="batch_execution" /> 
+  <action type="EDGE" cat="MATRIX" cost="1" apply="MATRIX" id="intervene" /> 
+  <action type="EDGE" cat="MATRIX" cost="2" apply="MATRIX" id="paint_target" /> 
+  
+  <!-- Optional Rules -->
+  <action cat="MATRIX" id="computer_virus" illegal="true" skill="cracking"    type="MAJOR" access="OUTSIDER/USER/ADMIN"  opt="true"/>
+  <action cat="MATRIX" id="enhance"        illegal="true" skill="electronics" type="MINOR" access="USER/ADMIN" opt="true" />
+  <action cat="MATRIX" id="ic_slicer"      illegal="true" skill="cracking"    type="MAJOR" access="USER/ADMIN" opt="true" iattr="ATTACK"/>
+  <action cat="MATRIX" id="keyboard_commando" illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER" opt="true" />
+  <action cat="MATRIX" id="password_sequencer" illegal="true" skill="cracking" type="MINOR" access="OUTSIDER" opt="true" />
+  <action cat="MATRIX" id="skull_and_crossbones" illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" opt="true" />
+  <action cat="MATRIX" id="we_are_in"      illegal="true" skill="cracking" type="MAJOR" access="USER/ADMIN" opt="true" />
+</actions>
