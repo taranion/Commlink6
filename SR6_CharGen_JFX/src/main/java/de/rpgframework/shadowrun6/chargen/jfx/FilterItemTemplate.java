@@ -58,7 +58,8 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 		 */
 		cbType = new ChoiceBox<ItemType>();
 		cbType.getItems().add(null);
-		cbType.getItems().addAll(allowed);
+		if (allowed!=null)
+			cbType.getItems().addAll(allowed);
 		Collections.sort(cbType.getItems(), new Comparator<ItemType>() {
 			public int compare(ItemType o1, ItemType o2) {
 				if (o1==null) return -1;
@@ -125,9 +126,11 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 				cbSubtype.getItems().setAll(appear);
 			}
 		} else {
-			input = input.stream()
+			if (allowed!=null) {
+				input = input.stream()
 					.filter(data -> List.of(allowed).contains(data.getItemType()))
 					.collect(Collectors.toList());
+			}
 			logger.log(Level.INFO, "After filter cbType={0} remain {1} items", cbType, input.size());
 			if (cbType.getValue()!=lastType || lastType==null) {
 				List<ItemSubType> appear = new ArrayList<>();

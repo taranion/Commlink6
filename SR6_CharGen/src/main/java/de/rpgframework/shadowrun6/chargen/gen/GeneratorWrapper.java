@@ -25,6 +25,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IPANController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
 import de.rpgframework.shadowrun.chargen.charctrl.ISpellController;
@@ -393,6 +394,14 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public IRitualController getRitualController() {
 		return wrapped.getRitualController();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getPANController()
+	 */
+	public IPANController getPANController() {
+		return wrapped.getPANController();
 	}
 
 }

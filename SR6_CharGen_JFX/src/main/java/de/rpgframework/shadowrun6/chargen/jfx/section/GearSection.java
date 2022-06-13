@@ -17,18 +17,8 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.jfx.ComplexDataItemListSection;
-import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
-import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
-import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
-import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
-import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
-import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
@@ -65,6 +55,16 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	//-------------------------------------------------------------------
 	public GearSection(String title, Predicate<CarriedItem<ItemTemplate>> filter) {
 		super(title);
+		this.filter = filter;
+		list.setCellFactory(lv -> new CarriedItemListCell( control));
+		
+		refresh();
+	}
+
+	//-------------------------------------------------------------------
+	public GearSection(String title, Predicate<CarriedItem<ItemTemplate>> filter, ItemType...types) {
+		super(title);
+		allowedTypes = types;
 		this.filter = filter;
 		list.setCellFactory(lv -> new CarriedItemListCell( control));
 		

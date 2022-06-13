@@ -3,6 +3,8 @@
  */
 package de.rpgframework.shadowrun6.items;
 
+import java.util.List;
+
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
@@ -203,5 +205,5 @@ public enum ItemSubType {
 		return Shadowrun6Core.getI18nResources().getString("itemsubtype."+this.name().toLowerCase());
 	}
 
-	
+	public static List<ItemSubType> matrixDevices() { return List.of(COMMLINK, CYBERDECK, RIGGER_CONSOLE. TAC_NET);}
 }

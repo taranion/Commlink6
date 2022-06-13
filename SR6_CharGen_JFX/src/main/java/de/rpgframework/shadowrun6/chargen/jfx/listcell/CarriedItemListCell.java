@@ -1,5 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.jfx.listcell;
 
+import org.prelle.javafx.JavaFXConstants;
+
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -23,6 +25,7 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 	public CarriedItemListCell(SR6CharacterController control) {
 		super(() -> control.getEquipmentController());
 		this.charCtrl = control;
+		name.getStyleClass().add(JavaFXConstants.STYLE_HEADING4);
 	}
 
 	//-------------------------------------------------------------------
@@ -44,7 +47,8 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		
 		if (item!=null) {
 			Node data = ItemUtilJFX.getItemInfoNode(item, charCtrl);
-			bxCenter.getChildren().add(bxCenter.getChildren().indexOf(bxActions), data);
+			if (data!=null)
+				bxCenter.getChildren().add(bxCenter.getChildren().indexOf(bxActions), data);
 			
 			lbValue.setText("\u00A5"+item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		}

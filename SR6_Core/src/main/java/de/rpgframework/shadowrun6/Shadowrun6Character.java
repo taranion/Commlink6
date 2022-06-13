@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.prelle.simplepersist.Element;
 import org.prelle.simplepersist.ElementList;
@@ -84,9 +85,17 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	@Override
 	public String getShortDescription() {
 		SR6MetaType meta = getMetatype();
-				
-		String p1 = (meta!=null)?meta.getName():"?";
-		return p1;
+		StringBuffer buf = new StringBuffer();
+		if (gender!=null) {
+			buf.append(gender+" ");
+		}
+		if (meta!=null) {
+			buf.append(meta.getName(Locale.getDefault())+" ");
+		}
+		if (getMagicOrResonanceType()!=null) {
+			buf.append(getMagicOrResonanceType().getName(Locale.getDefault())+"");
+		}
+		return buf.toString();
 	}
 
 	//-------------------------------------------------------------------

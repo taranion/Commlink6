@@ -8,6 +8,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
+import de.rpgframework.shadowrun.chargen.charctrl.IPANController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
 import de.rpgframework.shadowrun.chargen.charctrl.SINController;
@@ -33,6 +34,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected IEquipmentController equipment;
 	protected SINController sins;
 	protected SR6LifestyleController lifestyles;
+	protected IPANController pan;
 	
 	//-------------------------------------------------------------------
 	public SR6CharacterControllerImpl() {
@@ -150,6 +152,14 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	@Override
 	public SINController getSINController() {
 		return sins;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getPANController()
+	 */
+	public IPANController getPANController() {
+		return pan;
 	}
 
 	//-------------------------------------------------------------------

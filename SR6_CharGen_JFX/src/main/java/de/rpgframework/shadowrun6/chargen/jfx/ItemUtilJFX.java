@@ -15,15 +15,16 @@ import org.prelle.javafx.JavaFXConstants;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
-import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -34,6 +35,9 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /**
@@ -53,25 +57,6 @@ public class ItemUtilJFX {
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");
 		box.setMaxWidth(Double.MAX_VALUE);
-
-		//		// Rating
-		//		if (item.getItem().hasRating()) {
-		//			Label lbRat = new Label(UI.getString("label.rating"));
-		//			ChoiceBox<Integer> cbRating = new ChoiceBox<Integer>();
-		//			for (int i=1; i<=item.getItem().getMaximumRating(); i++) {
-		//				if (ctrl.canBuyLevel(item, i))
-		//					cbRating.getItems().add(i);
-		//			}
-		//			cbRating.getSelectionModel().select( (Integer)item.getRating() );
-		//			HBox line = new HBox(5);
-		//			line.getChildren().addAll(lbRat, cbRating);
-		//			box.getChildren().add(line);
-		//			
-		//			cbRating.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-		//				logger.debug("Change rating of "+item+" from "+o+" to "+n);
-		//				ctrl.changeRating(item, n);
-		//			});
-		//		}
 
 		ItemTemplate raw = item.getModifyable();
 		try {
@@ -103,6 +88,30 @@ public class ItemUtilJFX {
 			case DRONE_LARGE: case DRONE_MEDIUM: case DRONE_MICRO: case DRONE_MINI: case DRONE_SMALL:
 				box.getChildren().add(getVehicleNode(item,model));
 				break;
+			case ELECTRONICS:
+				ItemSubType st = raw.getItemSubtype();
+//				if (st==null)
+//					st = item.getSubtype(null);
+				if (st==null) {
+					logger.log(Level.ERROR, "No subtype found for "+item);
+					System.err.println("No subtype found for "+item);
+				}
+				if (st!=null) {
+					switch (st) {
+					case COMMLINK:
+					case RIGGER_CONSOLE:
+					case CYBERDECK:
+						box.getChildren().add(getMatrixDeviceNode(item,model));
+						break;
+					default:
+						logger.log(Level.WARNING,"No special display for "+ItemType.ELECTRONICS+"/"+st);
+					}
+				}
+				break;
+			case CYBERWARE:
+			case BIOWARE:
+				box.getChildren().add(getAugmentationNode(item,model));
+				break;
 			default:
 				logger.log(Level.ERROR,"No special handling for "+raw.getItemType()+"/"+raw.getItemSubtype()+": "+raw.getId());
 			}
@@ -121,7 +130,7 @@ public class ItemUtilJFX {
 			item.getEffectiveAccessories().forEach(sub -> accessNames.add(sub.getNameWithRating()));
 			//			lblAccessories.setText(String.join(", ", item.getAccessories()));
 			Label heaModif = new Label(ResourceI18N.get(UI,"label.accessories")+": ");
-			heaModif.setStyle("-fx-text-fill: textcolor-highlight-primary; -fx-font-weight: bold;");
+			heaModif.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 
 			FlowPane flow = new FlowPane();
 			flow.getChildren().add(heaModif);
@@ -134,9 +143,6 @@ public class ItemUtilJFX {
 			}
 			box.getChildren().add(flow);
 			VBox.setMargin(flow, new Insets(5, 0, 5, 0));
-			//			layout.getChildren().add(lblAccessories);
-			//			lblAccessories.setText(UI.getString("label.accessory")+": "+String.join(", ", accessNames));
-			//			VBox.setMargin(lblAccessories, new Insets(5, 0, 5, 0));
 		}
 
 		/*
@@ -185,28 +191,28 @@ public class ItemUtilJFX {
 //		case DRONE_LARGE:
 //			box.getChildren().add(getVehicleNode(item));
 //			break;
-//		case ELECTRONICS:
-//			ItemSubType st = item.getDefaultUsage().getSubtype();
+		case ELECTRONICS:
+			ItemSubType st = item.getItemSubtype();
 //			if (st==null)
 //				st = item.getSubtype(null);
-//			if (st==null) {
-//				logger.warn("No subtype found for "+item);
-//				System.err.println("No subtype found for "+item);
-//			}
-//			if (st!=null) {
-//				switch (st) {
-//				case COMMLINK:
-//				case RIGGER_CONSOLE:
-//					box.getChildren().add(getMatrixDeviceNode(item));
-//					break;
-//				case CYBERDECK:
-//					box.getChildren().add(getCyberdeckNode(item));
-//					break;
-//				default:
-//					logger.warn("No special display for "+ItemType.ELECTRONICS+"/"+item.getSubtype(ItemType.ELECTRONICS));
-//				}
-//			}
-//			break;
+			if (st==null) {
+				logger.log(Level.ERROR, "No subtype found for "+item);
+				System.err.println("No subtype found for "+item);
+			}
+			if (st!=null) {
+				switch (st) {
+				case COMMLINK:
+				case RIGGER_CONSOLE:
+					box.getChildren().add(getMatrixDeviceNode(item));
+					break;
+				case CYBERDECK:
+					box.getChildren().add(getCyberdeckNode(item));
+					break;
+				default:
+					logger.log(Level.WARNING,"No special display for "+ItemType.ELECTRONICS+"/"+st);
+				}
+			}
+			break;
 		default:
 			logger.log(Level.WARNING,"No special display for "+item.getItemType());
 //			VBox modBox = new VBox(3);
@@ -243,6 +249,18 @@ public class ItemUtilJFX {
 			obj = item.getAsObject(attr).getModifiedValue();
 			ret.setText(Shadowrun6Tools.getAttackRatingString( (int[])obj));
 			break;
+		case ESSENCECOST:
+			if (item.getAsObject(attr)!=null) {
+				float fVal = item.getAsObject(attr).getModifiedValue();
+				ret.setText( String.format("%.2f", fVal));
+			}
+			break;
+		case QUALITY:
+			if (item.getAsObject(attr)!=null) {
+				obj = item.getAsObject(attr).getModifiedValue();
+				ret.setText( ((AugmentationQuality)obj).getName());
+			}
+			break;
 		case ACCELERATION:
 		case DAMAGE:
 		case HANDLING:
@@ -258,12 +276,22 @@ public class ItemUtilJFX {
 			}
 			break;
 		case ARMOR:
+		case ATTACK:
 		case BODY:
+		case CONCURRENT_PROGRAMS:
+		case DATA_PROCESSING:
+		case DEVICE_RATING:
+		case FIREWALL:
 		case PILOT:
 		case SEATS:
 		case SENSORS:
+		case SLEAZE:
 		case TOPSPEED:
-			ret.setText(String.valueOf(item.getAsValue(attr).getModifiedValue()));
+			if (item.getAsValue(attr)==null) {
+				ret.setText("-");
+			} else {
+				ret.setText(String.valueOf(item.getAsValue(attr).getModifiedValue()));
+			}
 			break;
 		default:
 			logger.log(Level.ERROR, "Don't know how to handle "+attr);
@@ -278,6 +306,16 @@ public class ItemUtilJFX {
 			}
 		}
 		
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private static Label getItemAttributeLabel(ItemTemplate item, SR6ItemAttribute attr) {
+		Label ret = new Label("?");
+		if (item!=null) {
+			Object obj = item.getAttribute(attr).getValue();
+			ret.setText(String.valueOf(obj));
+		}
 		return ret;
 	}
 
@@ -358,8 +396,6 @@ public class ItemUtilJFX {
 
 	//-------------------------------------------------------------------
 	private static Node getWeaponNode(CarriedItem<ItemTemplate> item, Shadowrun6Character model) {
-		ItemTemplate raw = item.getModifyable();
-		
 		VBox layout = new VBox();
 		layout.setStyle("-fx-spacing: 0.5em");
 		layout.setMaxWidth(Double.MAX_VALUE);
@@ -429,6 +465,210 @@ public class ItemUtilJFX {
 
 		layout.getChildren().add(grid);
 		return layout;
+	}
+
+	//-------------------------------------------------------------------
+	private static Node getMatrixDeviceNode(CarriedItem<ItemTemplate> item, Shadowrun6Character model) {
+		VBox layout = new VBox();
+		layout.setStyle("-fx-spacing: 0.5em");
+		layout.setMaxWidth(Double.MAX_VALUE);
+
+		int COL_DEV  = 0;
+		int COL_ATT  = 1;
+		int COL_SLZ  = 2;
+		int COL_FIR  = 4;
+		int COL_PRO  = 3;
+		int COL_PRG  = 5;
+
+		Label heaDev  = new Label(SR6ItemAttribute.DEVICE_RATING.getShortName());
+		Label heaAtt  = new Label(SR6ItemAttribute.ATTACK.getShortName());
+		Label heaSlz  = new Label(SR6ItemAttribute.SLEAZE.getShortName());
+		Label heaFir  = new Label(SR6ItemAttribute.FIREWALL.getShortName());
+		Label heaPro  = new Label(SR6ItemAttribute.DATA_PROCESSING.getShortName());
+		Label heaPrg  = new Label(SR6ItemAttribute.CONCURRENT_PROGRAMS.getShortName());
+
+		heaDev .getStyleClass().add("table-head");
+		heaAtt .getStyleClass().add("table-head");
+		heaSlz .getStyleClass().add("table-head");
+		heaFir .getStyleClass().add("table-head");
+		heaPro .getStyleClass().add("table-head");
+		heaPrg .getStyleClass().add("table-head");
+
+		heaDev .setMaxWidth(Double.MAX_VALUE);
+		heaAtt .setMaxWidth(Double.MAX_VALUE);
+		heaSlz .setMaxWidth(Double.MAX_VALUE);
+		heaFir .setMaxWidth(Double.MAX_VALUE);
+		heaPro .setMaxWidth(Double.MAX_VALUE);
+		heaPrg .setMaxWidth(Double.MAX_VALUE);
+
+		heaDev .setAlignment(Pos.CENTER);
+		heaAtt .setAlignment(Pos.CENTER);
+		heaSlz .setAlignment(Pos.CENTER);
+		heaFir .setAlignment(Pos.CENTER);
+		heaPro .setAlignment(Pos.CENTER);
+		heaPrg .setAlignment(Pos.CENTER);
+
+		GridPane grid = new GridPane();
+		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Device Rating
+		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Attack
+		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Sleaze
+		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Firewall
+		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Data processing
+		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Programs
+		grid.add(heaDev, COL_DEV, 0);
+		grid.add(heaAtt, COL_ATT , 0);
+		grid.add(heaSlz, COL_SLZ, 0);
+		grid.add(heaFir, COL_FIR, 0);
+		grid.add(heaPro, COL_PRO, 0);
+		grid.add(heaPrg, COL_PRG, 0);
+
+		Label lblRat = getItemAttributeLabel(item, SR6ItemAttribute.DEVICE_RATING);
+		Label lblAtt = getItemAttributeLabel(item, SR6ItemAttribute.ATTACK);
+		Label lblSlz = getItemAttributeLabel(item, SR6ItemAttribute.SLEAZE);
+		Label lblFir = getItemAttributeLabel(item, SR6ItemAttribute.FIREWALL);
+		Label lblPro = getItemAttributeLabel(item, SR6ItemAttribute.DATA_PROCESSING);
+		Label lblPrg = getItemAttributeLabel(item, SR6ItemAttribute.CONCURRENT_PROGRAMS);
+		grid.add(lblRat, COL_DEV, 1);
+		grid.add(lblAtt, COL_ATT , 1);
+		grid.add(lblSlz, COL_SLZ, 1);
+		grid.add(lblFir, COL_FIR, 1);
+		grid.add(lblPro, COL_PRO, 1);
+		grid.add(lblPrg, COL_PRG, 1);
+		GridPane.setHalignment(lblRat, HPos.CENTER);
+		GridPane.setHalignment(lblAtt, HPos.CENTER);
+		GridPane.setHalignment(lblSlz, HPos.CENTER);
+		GridPane.setHalignment(lblFir, HPos.CENTER);
+		GridPane.setHalignment(lblPro, HPos.CENTER);
+		GridPane.setHalignment(lblPrg, HPos.CENTER);
+
+		layout.getChildren().add(grid);
+		return layout;
+	}
+
+	//-------------------------------------------------------------------
+	private static GridPane getMatrixDeviceNode(ItemTemplate item) {
+		int COL_DEV  = 0;
+//		int COL_ATT  = 1;
+//		int COL_SLZ  = 2;
+		int COL_FIR  = 4;
+		int COL_PRO  = 3;
+		int COL_PRG  = 5;
+
+		Label heaDev  = new Label(SR6ItemAttribute.DEVICE_RATING.getShortName());
+//		Label heaAtt  = new Label(ItemAttribute.ATTACK.getShortName());
+//		Label heaSlz  = new Label(ItemAttribute.SLEAZE.getShortName());
+		Label heaFir  = new Label(SR6ItemAttribute.FIREWALL.getShortName());
+		Label heaPro  = new Label(SR6ItemAttribute.DATA_PROCESSING.getShortName());
+		Label heaPrg  = new Label(SR6ItemAttribute.CONCURRENT_PROGRAMS.getShortName());
+
+		heaDev .getStyleClass().add("table-head");
+//		heaAtt .getStyleClass().add("table-head");
+//		heaSlz .getStyleClass().add("table-head");
+		heaFir .getStyleClass().add("table-head");
+		heaPro .getStyleClass().add("table-head");
+		heaPrg .getStyleClass().add("table-head");
+
+		heaDev .setMaxWidth(Double.MAX_VALUE);
+//		heaAtt .setMaxWidth(Double.MAX_VALUE);
+//		heaSlz .setMaxWidth(Double.MAX_VALUE);
+		heaFir .setMaxWidth(Double.MAX_VALUE);
+		heaPro .setMaxWidth(Double.MAX_VALUE);
+		heaPrg .setMaxWidth(Double.MAX_VALUE);
+
+		heaDev .setAlignment(Pos.CENTER);
+//		heaAtt .setAlignment(Pos.CENTER);
+//		heaSlz .setAlignment(Pos.CENTER);
+		heaFir .setAlignment(Pos.CENTER);
+		heaPro .setAlignment(Pos.CENTER);
+		heaPrg .setAlignment(Pos.CENTER);
+
+		GridPane grid = new GridPane();
+		//		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Accuracy
+		grid.add(heaDev , COL_DEV , 0);
+//		grid.add(heaAtt , COL_ATT , 0);
+//		grid.add(heaSlz , COL_SLZ , 0);
+		grid.add(heaFir , COL_FIR , 0);
+		grid.add(heaPro , COL_PRO , 0);
+		grid.add(heaPrg , COL_PRG , 0);
+
+		// Data
+		Label lblDev = getItemAttributeLabel(item, SR6ItemAttribute.DEVICE_RATING);
+		Label lblFir = getItemAttributeLabel(item, SR6ItemAttribute.FIREWALL);
+		Label lblPro = getItemAttributeLabel(item, SR6ItemAttribute.DATA_PROCESSING);
+		Label lblPrg = getItemAttributeLabel(item, SR6ItemAttribute.CONCURRENT_PROGRAMS);
+		grid.add(lblDev, COL_DEV , 1);
+		grid.add(lblFir, COL_FIR , 1);
+		grid.add(lblPro, COL_PRO , 1);
+		grid.add(lblPrg, COL_PRG , 1);
+		GridPane.setHalignment(heaDev, HPos.CENTER);
+
+		return grid;
+	}
+
+	//-------------------------------------------------------------------
+	private static GridPane getCyberdeckNode(ItemTemplate item) {
+		int COL_DEV  = 0;
+		int COL_ATT  = 1;
+		int COL_PRO  = 2;
+
+		Label heaDev  = new Label(SR6ItemAttribute.DEVICE_RATING.getShortName());
+		Label heaAtt  = new Label(SR6ItemAttribute.ATTACK.getShortName()+"/"+SR6ItemAttribute.SLEAZE.getShortName());
+		Label heaPro  = new Label(SR6ItemAttribute.CONCURRENT_PROGRAMS.getShortName());
+
+		heaDev .getStyleClass().add("table-head");
+		heaAtt .getStyleClass().add("table-head");
+		heaPro .getStyleClass().add("table-head");
+
+		heaDev .setMaxWidth(Double.MAX_VALUE);
+		heaAtt .setMaxWidth(Double.MAX_VALUE);
+		heaPro .setMaxWidth(Double.MAX_VALUE);
+
+		heaDev .setAlignment(Pos.CENTER);
+		heaAtt .setAlignment(Pos.CENTER);
+		heaPro .setAlignment(Pos.CENTER);
+
+		GridPane grid = new GridPane();
+		//		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Accuracy
+		grid.add(heaDev , COL_DEV , 0);
+		grid.add(heaAtt , COL_ATT , 0);
+		grid.add(heaPro , COL_PRO , 0);
+
+		// Data
+		Label lblDev = getItemAttributeLabel(item, SR6ItemAttribute.DEVICE_RATING);
+		Label lblAtt = getItemAttributeLabel(item, SR6ItemAttribute.ATTACK);
+		Label lblPro = getItemAttributeLabel(item, SR6ItemAttribute.SLEAZE);
+		lblDev .setMaxWidth(Double.MAX_VALUE);
+		lblAtt .setMaxWidth(Double.MAX_VALUE);
+		lblPro .setMaxWidth(Double.MAX_VALUE);
+		lblDev .setAlignment(Pos.CENTER);
+		lblAtt .setAlignment(Pos.CENTER);
+		lblPro .setAlignment(Pos.CENTER);
+		grid.add(lblDev, COL_DEV , 1);
+		grid.add(lblAtt, COL_ATT , 1);
+		grid.add(lblPro, COL_PRO , 1);
+		GridPane.setHalignment(heaDev, HPos.CENTER);
+
+		return grid;
+	}
+
+	//-------------------------------------------------------------------
+	private static Node getAugmentationNode(CarriedItem item, ShadowrunCharacter model) {
+		if (item==null)
+			throw new NullPointerException("Empty item");
+		
+		Label heaQual  = new Label(SR6ItemAttribute.QUALITY.getShortName());
+		Label heaEss   = new Label(SR6ItemAttribute.ESSENCECOST.getShortName());
+		
+		Label lblQual= getItemAttributeLabel(item, SR6ItemAttribute.QUALITY);
+		Label lblEss = getItemAttributeLabel(item, SR6ItemAttribute.ESSENCECOST);
+		
+		Region spacing = new Region();
+		spacing.setMaxWidth(Double.MAX_VALUE);
+		
+		HBox line = new HBox(5, heaQual, lblQual, spacing, heaEss, lblEss);
+		HBox.setHgrow(spacing, Priority.ALWAYS);
+		
+		return line;
 	}
 
 	//-------------------------------------------------------------------

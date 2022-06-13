@@ -60,7 +60,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	// Vehicle Pilot
 	PILOT,
 	PRICE,
-//	QUALITY,
+	QUALITY,
 	RANGE,
 	RATING,
 	SEATS,

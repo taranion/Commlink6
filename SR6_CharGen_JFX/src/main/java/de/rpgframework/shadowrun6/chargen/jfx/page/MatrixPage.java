@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import org.prelle.javafx.Mode;
 import org.prelle.javafx.OptionalNodePane;
@@ -13,10 +14,14 @@ import org.prelle.javafx.layout.FlexGridPane;
 import com.onexip.flexboxfx.FlexBox;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.section.AppearanceSection;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
+import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
@@ -27,7 +32,12 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SkillSection;
+import de.rpgframework.shadowrun6.items.ItemSubType;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -41,19 +51,19 @@ public class MatrixPage extends Page {
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
-//	private SkillSection secNormal;
-//	private SkillSection secKnowl;
-//	private SkillSection secLang;
+	private GearSection secDevices, secSoftware;
 	private MetamagicOrEchoSection secMeta;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
 	
 	private GenericDescriptionVBox descBox ;
+	private Predicate<CarriedItem<ItemTemplate>> filter;
 
 	//-------------------------------------------------------------------
 	public MatrixPage() {
 		super(ResourceI18N.get(RES, "page.matrix.title"));
+		filter = carried -> carried.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()==ItemType.ELECTRONICS && ItemSubType.matrixDevices().contains(carried.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue());
 		initComponents();
 		initLayout();
 		initInteractivity();
@@ -61,22 +71,20 @@ public class MatrixPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
+		initDevices();
 		initMetamagic();
-		initBaseData();
-//		initKnowledge();
-//		initLanguage();
-		
+		initSoftware();
 		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------
-	private void initBaseData() {
-//		secNormal = new SkillSection(ResourceI18N.get(RES, "page.skills.section.normal"), SkillType.ACTION);
-//		secNormal.setMaxHeight(Double.MAX_VALUE);
-//		FlexGridPane.setMinWidth(secNormal, 4);
-//		FlexGridPane.setMinHeight(secNormal, 6);
-//		FlexGridPane.setMediumWidth(secNormal, 8);
-//		FlexGridPane.setMediumHeight(secNormal, 4);
+	private void initDevices() {
+		secDevices = new GearSection(ResourceI18N.get(RES, "page.matrix.section.devices"), filter, ItemType.ELECTRONICS);
+		secDevices.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secDevices, 4);
+		FlexGridPane.setMinHeight(secDevices, 6);
+		FlexGridPane.setMediumWidth(secDevices, 6);
+		FlexGridPane.setMediumHeight(secDevices, 6);
 	}
 	
 	//-------------------------------------------------------------------
@@ -94,11 +102,21 @@ public class MatrixPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
+	private void initSoftware() {
+		secSoftware = new GearSection(ResourceI18N.get(RES, "page.matrix.section.software"), ItemType.SOFTWARE);
+		secSoftware.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secSoftware, 4);
+		FlexGridPane.setMinHeight(secSoftware, 6);
+		FlexGridPane.setMediumWidth(secSoftware, 6);
+		FlexGridPane.setMediumHeight(secSoftware, 6);
+	}
+	
+	//-------------------------------------------------------------------
 	private void initLayout() {
 		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secMeta);
+		flex.getChildren().addAll(secDevices,secMeta, secSoftware);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -107,18 +125,18 @@ public class MatrixPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-//		secNormal.selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
-//		secKnowl.selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
-//		secLang .selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
+		secDevices.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secSoftware.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
 	//-------------------------------------------------------------------
-	private void showDescription(SR6SkillValue n) {
+	private void showDescription(ComplexDataItemValue<? extends ComplexDataItem> n) {
+		logger.log(Level.INFO, "Show description "+n);
 		if (n==null) {
-			layout.setOptional(new Label("Langer Text"));
+			layout.setOptional(null);
 		} else {
-			descBox.setData(n.getModifyable());
-			layout.setOptional(descBox);
+			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setTitle(n.getModifyable().getName());
 		}
 	}
 	
@@ -129,16 +147,16 @@ public class MatrixPage extends Page {
 			throw new NullPointerException("controller is null");
 		
 		secMeta.updateController(ctrl);
-//		secLang.updateController(ctrl);
-//		secNormal.updateController(ctrl);
+		secDevices.updateController(ctrl);
+		secSoftware.updateController(ctrl);
 		refresh();
 	}
 	
 	//-------------------------------------------------------------------
 	public void refresh() {
+		secDevices.refresh();
 		secMeta.refresh();
-//		secLang.refresh();
-//		secKnowl.refresh();
+		secSoftware.refresh();
 	}
 
 }

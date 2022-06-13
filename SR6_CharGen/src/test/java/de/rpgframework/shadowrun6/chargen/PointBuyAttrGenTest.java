@@ -36,6 +36,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IPANController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
 import de.rpgframework.shadowrun.chargen.charctrl.SINController;
@@ -125,6 +126,7 @@ public class PointBuyAttrGenTest {
 			public SINController getSINController() { return null;}
 			public IContactController getContactController() { return null;}
 			public SR6LifestyleController getLifestyleController() { return null;}
+			public IPANController getPANController() { return null;}
 			@Override
 			public String getName() {
 				// TODO Auto-generated method stub

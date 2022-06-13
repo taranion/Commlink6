@@ -3,6 +3,6 @@
   "includes":[
   ]},
   "bundles":[
-    {"name":"de.rpgframework.shadowrun6.core.18n.core"}
+    {"name":"de.rpgframework.shadowrun6.18n.core"}
   ]
 }
