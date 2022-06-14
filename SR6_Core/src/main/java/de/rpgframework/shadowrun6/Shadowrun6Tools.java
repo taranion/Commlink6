@@ -38,6 +38,7 @@ import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
+import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
@@ -409,6 +410,11 @@ public class Shadowrun6Tools {
 			}
 			logger.log(Level.DEBUG, "resolve gear");
 			SR6ResolveTemplatesStep resolver = new SR6ResolveTemplatesStep();
+			logger.log(Level.DEBUG, "resolve lifestyles");
+			for (SR6Lifestyle tmp : model.getLifestyles()) {
+				LifestyleQuality resolved = Shadowrun6Core.getItem(LifestyleQuality.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
 
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
 				resolver.process("", model, tmp, List.of());

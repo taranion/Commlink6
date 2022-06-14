@@ -4,12 +4,15 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -42,8 +45,8 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IContactController#canCreateContact()
 	 */
 	@Override
-	public boolean canCreateContact() {
-		return pointsLeft>=2;
+	public Possible canCreateContact() {
+		return new Possible(pointsLeft>=2);
 	}
 
 	//-------------------------------------------------------------------
@@ -51,10 +54,11 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IContactController#createContact()
 	 */
 	@Override
-	public Contact createContact() {
-		if (!canCreateContact()) {
+	public OperationResult<Contact> createContact() {
+		Possible poss = canCreateContact();
+		if (!poss.get()) {
 			logger.log(Level.ERROR, "Trying to create a contact, which is not allowed");
-			return null;
+			return new OperationResult<>(poss);
 		}
 		
 		Contact contact = new Contact();
@@ -63,7 +67,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 		
 		parent.runProcessors();
 		
-		return contact;
+		return new OperationResult<Contact>(contact);
 	}
 
 	//-------------------------------------------------------------------
@@ -84,11 +88,39 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IContactController#canIncreaseRating(de.rpgframework.shadowrun.Contact)
 	 */
 	@Override
-	public boolean canIncreaseRating(Contact con) {
-		int max = Math.min(8, getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue());
-		if (con.getRating()>=max)
-			return false;
-		return pointsLeft>0;
+	public Possible canIncreaseRating(Contact con) {
+		// No matter what rules: Cannot be higher than 8
+		if (con.getRating()>=8) {
+			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+		}
+		Shadowrun6Character model = getModel();
+		
+		if (model.getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
+			int karmaNeeded = 0;
+			// Apply extended contact rules
+			int sum = con.getLoyalty() + con.getRating();
+			// SSDR on 01.06.2022: "I would sayit does, an augmented bonus to an attribute counts as that attribute in essentially every way, except karma cost for advancing"
+			int maxWithoutKarma = model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue() * 2;
+			// If the sum is already at normal max, you need Karma to increase the maximum
+			if (sum>=maxWithoutKarma) {
+				if (model.getKarmaFree()<1)
+					return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+				karmaNeeded = 1;
+			}
+			// Either max not reached or max can be increased
+			if (pointsLeft==0 && model.getKarmaFree()<(1+karmaNeeded)) {
+				return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+			}
+			
+		} else {
+			// Core rules
+			int max = Math.min(8, getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue());
+			if (con.getLoyalty()>=max)
+				return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+			if (pointsLeft<1)
+				return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+		}
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------
@@ -97,8 +129,9 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 */
 	@Override
 	public boolean increaseRating(Contact con) {
-		if (!canIncreaseRating(con)) {
-			logger.log(Level.ERROR, "Tried to increase contact rating although not possible");
+		Possible poss = canIncreaseRating(con);
+		if (!poss.get()) {
+			logger.log(Level.ERROR, "Tried to increase contact rating although not possible: "+poss.getMostSevere());
 			return false;
 		}
 		
@@ -114,8 +147,10 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IContactController#canDecreaseRating(de.rpgframework.shadowrun.Contact)
 	 */
 	@Override
-	public boolean canDecreaseRating(Contact con) {
-		return con.getRating()>1;
+	public Possible canDecreaseRating(Contact con) {
+		if (con.getRating()<=1)
+			return new Possible(IRejectReasons.IMPOSS_MIN_LEVEL_REACHED);
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------
@@ -124,7 +159,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 */
 	@Override
 	public boolean decreaseRating(Contact con) {
-		if (!canDecreaseRating(con)) {
+		if (!canDecreaseRating(con).get()) {
 			logger.log(Level.ERROR, "Tried to decrease contact rating although not possible");
 			return false;
 		}
@@ -141,11 +176,39 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IContactController#canIncreaseLoyalty(de.rpgframework.shadowrun.Contact)
 	 */
 	@Override
-	public boolean canIncreaseLoyalty(Contact con) {
-		int max = Math.min(8, getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue());
-		if (con.getLoyalty()>=max)
-			return false;
-		return pointsLeft>0;
+	public Possible canIncreaseLoyalty(Contact con) {
+		// No matter what rules: Cannot be higher than 8
+		if (con.getLoyalty()>=8) {
+			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+		}
+		Shadowrun6Character model = getModel();
+		
+		if (model.getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
+			int karmaNeeded = 0;
+			// Apply extended contact rules
+			int sum = con.getLoyalty() + con.getRating();
+			// SSDR on 01.06.2022: "I would sayit does, an augmented bonus to an attribute counts as that attribute in essentially every way, except karma cost for advancing"
+			int maxWithoutKarma = model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue() * 2;
+			// If the sum is already at normal max, you need Karma to increase the maximum
+			if (sum>=maxWithoutKarma) {
+				if (model.getKarmaFree()<1)
+					return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+				karmaNeeded = 1;
+			}
+			// Either max not reached or max can be increased
+			if (pointsLeft==0 && model.getKarmaFree()<(1+karmaNeeded)) {
+				return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+			}
+			
+		} else {
+			// Core rules
+			int max = Math.min(8, getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue());
+			if (con.getLoyalty()>=max)
+				return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+			if (pointsLeft<1)
+				return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+		}
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------
@@ -154,8 +217,9 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 */
 	@Override
 	public boolean increaseLoyalty(Contact con) {
-		if (!canIncreaseLoyalty(con)) {
-			logger.log(Level.ERROR, "Tried to increase contact loyalty although not possible");
+		Possible poss = canIncreaseLoyalty(con);
+		if (!poss.get()) {
+			logger.log(Level.ERROR, "Tried to increase contact loyalty although not possible: "+poss.getMostSevere());
 			return false;
 		}
 		
@@ -171,8 +235,10 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IContactController#canDecreaseLoyalty(de.rpgframework.shadowrun.Contact)
 	 */
 	@Override
-	public boolean canDecreaseLoyalty(Contact con) {
-		return con.getLoyalty()>1;
+	public Possible canDecreaseLoyalty(Contact con) {
+		if (con.getLoyalty()<=1)
+			return new Possible(IRejectReasons.IMPOSS_MIN_LEVEL_REACHED);
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------
@@ -181,7 +247,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 */
 	@Override
 	public boolean decreaseLoyalty(Contact con) {
-		if (!canDecreaseLoyalty(con)) {
+		if (!canDecreaseLoyalty(con).get()) {
 			logger.log(Level.ERROR, "Tried to decrease contact loyalty although not possible");
 			return false;
 		}
@@ -212,16 +278,43 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			
 			// Calculate points left
 			pointsLeft = getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue() * 6;
+			logger.log(Level.INFO, "Have {0} points to spend on contacts", pointsLeft);
 			
 			// Now pay contacts
+			int karmaRequired = 0;
+			int perContactMax = getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue()*2;
 			for (Contact tmp : getModel().getContacts()) {
+				// is sum higher than allowed
+				if ((tmp.getLoyalty()+tmp.getRating())>perContactMax) {
+					if (getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
+						int pay = (tmp.getLoyalty() + tmp.getRating()) - perContactMax;
+						logger.log(Level.INFO, "Pay {0} karma {for cap increase of (R={2}/L={3})", pay,
+								tmp.getName(), tmp.getRating(), tmp.getLoyalty());
+						karmaRequired += pay;
+					} else {
+						tmp.setRating(Math.min(getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue(), tmp.getRating()));
+						tmp.setLoyalty(Math.min(getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue(), tmp.getLoyalty()));
+						logger.log(Level.INFO, "Cap values of {0} to (R={1}/L={2})", tmp.getName(), tmp.getRating(), tmp.getLoyalty());
+					}
+				}
 				int cost = tmp.getLoyalty() + tmp.getRating();
 				logger.log(Level.INFO, "Pay {0} contact points {1} (R={2}/L={3})", cost, tmp.getName(),tmp.getRating(), tmp.getLoyalty());
 				pointsLeft -= cost;
 			}
 			
+			if (pointsLeft<0 && getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
+				logger.log(Level.INFO, "Pay {0} karma for more contact points", Math.abs(pointsLeft));
+				karmaRequired += Math.abs(pointsLeft);
+				pointsLeft=0;
+			}
+			// Pay Karma
+			getModel().setKarmaFree( getModel().getKarmaFree() - karmaRequired );
+			
 			if (pointsLeft>0) {
 				todos.add(new ToDoElement(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.TODO_CONTACT_POINTS_LEFT, pointsLeft));
+			}
+			if (pointsLeft<0) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, IRejectReasons.TODO_TOO_MANY_CONTACT_POINTS, Math.abs(pointsLeft)));
 			}
 			
 		} finally {

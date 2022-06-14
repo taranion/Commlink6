@@ -35,6 +35,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule CHARGEN_PRIO_ADEPT_PP    = new Rule("CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.PRIO_MAGIC);
 	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule("CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule ALLOW_TRANSHUMANISM      = new Rule("ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule CHARGEN_EXTENDED_CONTACT = new Rule("CHARGEN_EXTENDED_CONTACT", Rule.Type.BOOLEAN, RES, "false");
 
 	
 	//-------------------------------------------------------------------
@@ -50,6 +51,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_PRIO_ADEPT_PP,
 				CHARGEN_BUY_SPELLS_KARMA,
 				ALLOW_TRANSHUMANISM,
+				CHARGEN_EXTENDED_CONTACT,
 		};
 	}
 	

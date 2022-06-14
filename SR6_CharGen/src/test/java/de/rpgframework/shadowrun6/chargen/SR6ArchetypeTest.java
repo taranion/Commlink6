@@ -319,18 +319,20 @@ public class SR6ArchetypeTest {
 		
 		// Contacts
 		IContactController contacts = charGen.getContactController();
-		Contact ganger = contacts.createContact();
+		Contact ganger = contacts.createContact().get();
 		assertNotNull(ganger);
-		ganger.setName("First Nations Ganger");
+		ganger.setName("Brian");
+		ganger.setTypeName("First Nations Ganger");
 		contacts.increaseLoyalty(ganger);
-		Contact secretary = contacts.createContact();
-		secretary.setName("Salish Government Secretary");
+		Contact secretary = contacts.createContact().get();
+		secretary.setName("Eno");
+		secretary.setTypeName("Salish Government Secretary");
 		contacts.increaseRating(secretary);
 		contacts.increaseLoyalty(secretary);
-		Contact sensei = contacts.createContact();
+		Contact sensei = contacts.createContact().get();
 		sensei.setName("Sensei");
 		contacts.increaseLoyalty(sensei);
-		Contact squatter = contacts.createContact();
+		Contact squatter = contacts.createContact().get();
 		squatter.setName("Squatter");
 		
 		model.setName("Adept");
@@ -496,16 +498,16 @@ public class SR6ArchetypeTest {
 		
 		// Contacts
 		IContactController contacts = charGen.getContactController();
-		Contact c1 = contacts.createContact();
-		c1.setName("Corporate Wage Mage");
+		Contact c1 = contacts.createContact().get();
+		c1.setTypeName("Corporate Wage Mage");
 		contacts.increaseLoyalty(c1);
 		contacts.increaseRating(c1);
-		Contact c2 = contacts.createContact();
-		c2.setName("Crimson Crush Ganger");
+		Contact c2 = contacts.createContact().get();
+		c2.setTypeName("Crimson Crush Ganger");
 		contacts.increaseLoyalty(c2);
 		contacts.increaseRating(c2);
-		Contact c3 = contacts.createContact();
-		c3.setName("Talismonger");
+		Contact c3 = contacts.createContact().get();
+		c3.setTypeName("Talismonger");
 		contacts.increaseLoyalty(c3);
 		contacts.increaseRating(c3);
 		

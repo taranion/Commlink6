@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6;
 
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,13 +68,17 @@ public class SR6Lifestyle extends Lifestyle {
 
 	//-------------------------------------------------------------------
 	public int getLifestylePoints() {
-		int sum 
-			= getNeighborHood().getLifestylePoints()
-			+ getNecessities().getLifestylePoints()
-			+ getComforts().getLifestylePoints()
-			+ getSecurity().getLifestylePoints()
-			+ getEntertainment().getLifestylePoints()
-			+ getSpace().getLifestylePoints();
+		int sum = 0;
+		try {
+			sum = getNeighborHood().getLifestylePoints()
+				+ getNecessities().getLifestylePoints()
+				+ getComforts().getLifestylePoints()
+				+ getSecurity().getLifestylePoints()
+				+ getEntertainment().getLifestylePoints()
+				+ getSpace().getLifestylePoints();
+		} catch (Exception e) {
+			System.getLogger(getClass().getPackageName()).log(Level.ERROR, "Lifestyle broken: "+super.getKey(),e);
+		}
 		
 		for (String id : qualities) {
 			Quality qual = Shadowrun6Core.getItem(Quality.class, id);
