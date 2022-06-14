@@ -1,0 +1,194 @@
+package de.rpgframework.shadowrun6.chargen.jfx.page;
+
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import org.prelle.javafx.Mode;
+import org.prelle.javafx.OptionalNodePane;
+import org.prelle.javafx.Page;
+import org.prelle.javafx.layout.FlexGridPane;
+
+import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun.Contact;
+import de.rpgframework.shadowrun.ContactType;
+import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.SIN;
+import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
+import de.rpgframework.shadowrun.chargen.jfx.section.ContactSection;
+import de.rpgframework.shadowrun.chargen.jfx.section.LicenseSection;
+import de.rpgframework.shadowrun.chargen.jfx.section.LifestyleSection;
+import de.rpgframework.shadowrun.chargen.jfx.section.SINSection;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
+import de.rpgframework.shadowrun6.items.ItemType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+
+/**
+ * @author prelle
+ *
+ */
+public class LifePage extends Page {
+
+	private final static Logger logger = System.getLogger(LifePage.class.getPackageName());
+	
+	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
+	
+	private transient SR6CharacterController ctrl;
+	
+	private SINSection secSINs;
+	private LifestyleSection secLifestyles;
+	private LicenseSection secLicenses;
+	private ContactSection secContacts;
+	
+	private FlexGridPane flex;
+	private OptionalNodePane layout;
+	
+	private GenericDescriptionVBox descBox ;
+	
+	/** Shall extended contact rules from the 6WC be used? */
+	private CheckBox cbExtended;
+
+	//-------------------------------------------------------------------
+	public LifePage() {
+		super(ResourceI18N.get(RES, "page.life.title"));
+		initComponents();
+		initLayout();
+		initInteractivity();
+	}
+	
+	//-------------------------------------------------------------------
+	private void initComponents() {
+		initSINs();
+		initLicences();
+		initContacts();
+		initLifestyles();
+		
+		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+	}
+	
+	//-------------------------------------------------------------------
+	private void initSINs() {
+		secSINs = new SINSection(ResourceI18N.get(RES, "page.life.section.sins"));
+		secSINs.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secSINs, 4);
+		FlexGridPane.setMinHeight(secSINs, 6);
+//		FlexGridPane.setMediumWidth(secSINs, 6);
+//		FlexGridPane.setMediumHeight(secSINs, 9);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initLicences() {
+		secLicenses = new LicenseSection(ResourceI18N.get(RES, "page.life.section.licenses"));
+		secLicenses.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secLicenses, 4);
+		FlexGridPane.setMinHeight(secLicenses, 6);
+		FlexGridPane.setMediumWidth(secLicenses, 6);
+		FlexGridPane.setMediumHeight(secLicenses, 9);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initContacts() {
+		secContacts = new ContactSection(ResourceI18N.get(RES, "page.life.section.contacts"));
+		secContacts.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secContacts, 4);
+		FlexGridPane.setMinHeight(secContacts, 6);
+		FlexGridPane.setMediumWidth(secContacts, 5);
+		FlexGridPane.setMediumHeight(secContacts, 9);
+		
+		cbExtended = new CheckBox(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT.getName(Locale.getDefault()));
+		secContacts.setSecondaryContent(cbExtended);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initLifestyles() {
+		secLifestyles = new LifestyleSection(ResourceI18N.get(RES, "page.life.section.lifestyles"));
+		secLifestyles.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secLifestyles, 4);
+		FlexGridPane.setMinHeight(secLifestyles, 6);
+		//FlexGridPane.setMediumWidth(secLifestyles, 6);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initLayout() {
+		flex = new FlexGridPane();
+		flex.setSpacing(20);
+		flex.getChildren().addAll(secContacts, secSINs, secLicenses, secLifestyles);
+		
+		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
+		setContent(layout);
+		super.setMode(Mode.REGULAR);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initInteractivity() {
+//		secSINs.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+//		secElectro.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secLifestyles.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secContacts.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+	}
+
+	//-------------------------------------------------------------------
+	private void showDescription(ComplexDataItemValue<? extends ComplexDataItem> n) {
+		logger.log(Level.INFO, "Show description "+n);
+		if (n==null) {
+			layout.setOptional(null);
+		} else {
+			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setTitle(n.getModifyable().getName());
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void showDescription(Contact n) {
+		logger.log(Level.INFO, "Show contact type "+n);
+		if (n==null || n.getType()==null) {
+			layout.setOptional(null);
+		} else {
+			ContactType t = n.getType();
+			GenericDescriptionVBox<?> desc = new GenericDescriptionVBox<>( null);
+			desc.setData(t.getName(Locale.getDefault()), null, t.getDescription(Locale.getDefault()));
+			layout.setOptional( desc);
+			layout.setTitle(t.getName(Locale.getDefault()));
+		}
+	}
+	
+	//-------------------------------------------------------------------
+	public void setController(SR6CharacterController ctrl) {
+		logger.log(Level.INFO, "setController");
+		if (ctrl==null)
+			throw new NullPointerException("controller is null");
+		this.ctrl = ctrl;
+		
+		secContacts.updateController(ctrl);
+		secSINs.updateController(ctrl);
+		secLicenses.updateController(ctrl);
+		secLifestyles.updateController(ctrl);
+		
+		if (ctrl.getClass().getSimpleName().contains("Generator")) {
+			secContacts.setMode(Mode.BACKDROP);
+		} else {
+			secContacts.setMode(Mode.REGULAR);
+		}
+
+		refresh();
+	}
+	
+	//-------------------------------------------------------------------
+	public void refresh() {
+		secContacts.refresh();
+		secSINs.refresh();
+		secLicenses.refresh();
+		secLifestyles.refresh();
+	}
+
+}

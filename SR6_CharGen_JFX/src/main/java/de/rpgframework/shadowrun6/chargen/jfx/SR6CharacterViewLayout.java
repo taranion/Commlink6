@@ -39,6 +39,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CombatPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.GearPage;
+import de.rpgframework.shadowrun6.chargen.jfx.page.LifePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.MagicPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.MatrixPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage;
@@ -48,6 +49,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -67,8 +69,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private MatrixPage pgMatrix;
 	private VehiclePage pgVehicles;
 	private GearPage pgGear;
+	private LifePage pgLife;
 	
 	private Label lbMode;
+	private Label lbKarma, lbNuyen;
 	
 	//-------------------------------------------------------------------
 	/**
@@ -95,6 +99,16 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		lbMode.setManaged(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		lbMode.setVisible(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 
+		lbKarma = new Label("?");
+		lbKarma.setStyle("-fx-text-fill: accent; -fx-font-weight: bold");		
+		lbNuyen = new Label("?");
+		lbNuyen.setStyle("-fx-text-fill: accent; -fx-font-weight: bold");		
+		Label hdKarma = new Label("Karma");
+		Label hdNuyen = new Label("Nuyen");
+		VBox bxCenter = new VBox(5, lbKarma, hdKarma, lbNuyen, hdNuyen);
+		VBox.setMargin(lbNuyen, new Insets(10, 0, 0, 0));
+		bxCenter.setAlignment(Pos.CENTER);
+		extraNodesCenterProperty().add(bxCenter);
 	}
 	
 	//-------------------------------------------------------------------
@@ -107,7 +121,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgMatrix = new MatrixPage();
 		pgVehicles = new VehiclePage();
 		pgGear   = new GearPage();
-		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear);
+		pgLife   = new LifePage();
+		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear, pgLife);
 	}
 
 	//-------------------------------------------------------------------
@@ -215,6 +230,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		logger.log(Level.INFO, "ToDo: Edit "+model);
 		this.handle = handle;
 		
+		refreshSidebar();
 	}
 
 	//-------------------------------------------------------------------
@@ -228,8 +244,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgMatrix.setController(control);
 		pgVehicles.setController(control);
 		pgGear.setController(control);
+		pgLife.setController(control);
 		control.setAllowRunProcessor(true);
 		control.runProcessors();
+		refreshSidebar();
 	}
 
 	//-------------------------------------------------------------------
@@ -252,13 +270,28 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			pgMatrix.refresh();
 			pgVehicles.refresh();
 			pgGear.refresh();
+			pgLife.refresh();
 		}
 //		Page page = getVisiblePage();
 //		if (page!=null && page instanceof ControllerListener) {
 //			((ControllerListener)page).handleControllerEvent(type, param);
 //		}
+		
+		refreshSidebar();
 	}
 
+	//-------------------------------------------------------------------
+	private void refreshSidebar() {
+		if (control==null || control.getModel()==null) return;
+		lbKarma.setText( String.valueOf( control.getModel().getKarmaFree() ));
+		int nuyen = control.getModel().getNuyen();
+		if (nuyen>=10000) {
+			lbNuyen.setText( (nuyen/1000)+"k");
+		} else {
+			lbNuyen.setText( String.valueOf(nuyen) );
+		}
+	}
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see org.prelle.javafx.ResponsiveControl#setResponsiveMode(org.prelle.javafx.WindowMode)
