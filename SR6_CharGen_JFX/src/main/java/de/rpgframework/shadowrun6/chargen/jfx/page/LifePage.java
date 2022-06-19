@@ -2,7 +2,6 @@ package de.rpgframework.shadowrun6.chargen.jfx.page;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -19,17 +18,14 @@ import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SIN;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
+import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.chargen.jfx.section.ContactSection;
-import de.rpgframework.shadowrun.chargen.jfx.section.LicenseSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.LifestyleSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.SINSection;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
-import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
-import de.rpgframework.shadowrun6.items.ItemType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
@@ -47,7 +43,6 @@ public class LifePage extends Page {
 	
 	private SINSection secSINs;
 	private LifestyleSection secLifestyles;
-	private LicenseSection secLicenses;
 	private ContactSection secContacts;
 	
 	private FlexGridPane flex;
@@ -69,7 +64,6 @@ public class LifePage extends Page {
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initSINs();
-		initLicences();
 		initContacts();
 		initLifestyles();
 		
@@ -82,18 +76,8 @@ public class LifePage extends Page {
 		secSINs.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secSINs, 4);
 		FlexGridPane.setMinHeight(secSINs, 6);
-//		FlexGridPane.setMediumWidth(secSINs, 6);
-//		FlexGridPane.setMediumHeight(secSINs, 9);
-	}
-	
-	//-------------------------------------------------------------------
-	private void initLicences() {
-		secLicenses = new LicenseSection(ResourceI18N.get(RES, "page.life.section.licenses"));
-		secLicenses.setMaxHeight(Double.MAX_VALUE);
-		FlexGridPane.setMinWidth(secLicenses, 4);
-		FlexGridPane.setMinHeight(secLicenses, 6);
-		FlexGridPane.setMediumWidth(secLicenses, 6);
-		FlexGridPane.setMediumHeight(secLicenses, 9);
+		FlexGridPane.setMediumWidth(secSINs, 6);
+		FlexGridPane.setMediumHeight(secSINs, 9);
 	}
 	
 	//-------------------------------------------------------------------
@@ -122,7 +106,7 @@ public class LifePage extends Page {
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secContacts, secSINs, secLicenses, secLifestyles);
+		flex.getChildren().addAll(secContacts, secSINs, secLifestyles);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -131,7 +115,7 @@ public class LifePage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-//		secSINs.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secSINs.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 //		secElectro.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secLifestyles.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secContacts.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
@@ -161,6 +145,20 @@ public class LifePage extends Page {
 			layout.setTitle(t.getName(Locale.getDefault()));
 		}
 	}
+
+	//-------------------------------------------------------------------
+	private void showDescription(SIN n) {
+		logger.log(Level.INFO, "Show SIN "+n);
+		if (n==null ) {
+			layout.setOptional(null);
+		} else {
+			FakeRating rating = n.getQuality();
+			GenericDescriptionVBox<?> desc = new GenericDescriptionVBox<>( null);
+			desc.setData(rating.name(), null, n.getDescription());
+			layout.setOptional( desc);
+			layout.setTitle(rating.name());
+		}
+	}
 	
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
@@ -171,7 +169,6 @@ public class LifePage extends Page {
 		
 		secContacts.updateController(ctrl);
 		secSINs.updateController(ctrl);
-		secLicenses.updateController(ctrl);
 		secLifestyles.updateController(ctrl);
 		
 		if (ctrl.getClass().getSimpleName().contains("Generator")) {
@@ -187,7 +184,6 @@ public class LifePage extends Page {
 	public void refresh() {
 		secContacts.refresh();
 		secSINs.refresh();
-		secLicenses.refresh();
 		secLifestyles.refresh();
 	}
 
