@@ -149,9 +149,9 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			.stream()
 			.filter(filter)
 			.collect(Collectors.toList());
-		for (CarriedItem goo : data) {
-			System.out.println("..."+goo.getKey());
-		}
+//		for (CarriedItem goo : data) {
+//			System.out.println("..."+goo.getKey());
+//		}
 		list.getItems().setAll(data);
 	}
 

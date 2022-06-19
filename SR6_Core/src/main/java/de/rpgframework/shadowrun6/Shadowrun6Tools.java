@@ -24,6 +24,8 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
+import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
@@ -397,6 +399,17 @@ public class Shadowrun6Tools {
 				SR6Skill resolved = Shadowrun6Core.getItem(SR6Skill.class, tmp.getKey());
 				if (resolved==null) logger.log(Level.ERROR, "Character {} contains unknown skill '{}'", model.getName(), tmp.getKey());
 				tmp.setResolved(resolved);
+				// Specs
+				for (SkillSpecializationValue<SR6Skill> v : tmp.getSpecializations()) {
+					if (v.getResolved()==null) {
+						SkillSpecialization<SR6Skill> spec = resolved.getSpecialization(v.getKey());
+						if (spec==null) {
+							logger.log(Level.ERROR, "Character {} contains unknown skill specialization '{}'", model.getName(), v.getKey());
+						} else {
+							v.setResolved(spec);
+						}
+					}
+				}
 			}
 			logger.log(Level.DEBUG, "resolve adept powers");
 			for (AdeptPowerValue tmp : model.getAdeptPowers()) {

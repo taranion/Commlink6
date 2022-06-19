@@ -51,7 +51,6 @@ public class SkillSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		logger.log(Level.WARNING, "Skills = "+Shadowrun6Core.getSkills(type));
 		table = new SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue>(Shadowrun6Core.getSkills(type));
 		table.setMaxHeight(Double.MAX_VALUE);
 		btnAdd = new Button(null, new SymbolIcon("add"));
@@ -80,6 +79,7 @@ public class SkillSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void refresh() {
+		logger.log(Level.WARNING, "refresh");
 		table.refresh();
 	}
 

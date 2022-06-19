@@ -367,8 +367,11 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			per.points1--;
 			logger.log(Level.INFO, "decrease points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points1, per.getSum());
-
-			getCharacterController().runProcessors();
+			if (per.getSum()==0) {
+				deselect(value);
+			} else {
+				getCharacterController().runProcessors();
+			}
 			return new OperationResult<SR6SkillValue>(value);
 		} finally {
 			if (logger.isLoggable(Level.TRACE))

@@ -23,6 +23,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.Contact;
+import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
@@ -315,6 +316,8 @@ public class SR6ArchetypeTest {
 		// Lifestyle
 		OperationResult<SR6Lifestyle> lifeRes = charGen.getLifestyleController().select(Shadowrun6Core.getItem(LifestyleQuality.class, "low"));
 		assertTrue(lifeRes.wasSuccessful());
+		lifeRes.get().setPrimary(true);
+		lifeRes.get().setName("Room in a shared appartment");
 		lifeRes.get().setSIN(model.getSINs().get(0).getUniqueId());
 		
 		// Contacts
@@ -323,17 +326,20 @@ public class SR6ArchetypeTest {
 		assertNotNull(ganger);
 		ganger.setName("Brian");
 		ganger.setTypeName("First Nations Ganger");
+		ganger.setType(ContactType.CRIMINAL);
 		contacts.increaseLoyalty(ganger);
 		Contact secretary = contacts.createContact().get();
 		secretary.setName("Eno");
 		secretary.setTypeName("Salish Government Secretary");
 		contacts.increaseRating(secretary);
 		contacts.increaseLoyalty(secretary);
+		ganger.setType(ContactType.GOVERNMENT);
 		Contact sensei = contacts.createContact().get();
 		sensei.setName("Sensei");
 		contacts.increaseLoyalty(sensei);
 		Contact squatter = contacts.createContact().get();
 		squatter.setName("Squatter");
+		squatter.setType(ContactType.STREET);
 		
 		model.setName("Adept");
 		
@@ -494,6 +500,8 @@ public class SR6ArchetypeTest {
 		// Lifestyle
 		OperationResult<SR6Lifestyle> lifeRes = charGen.getLifestyleController().select(Shadowrun6Core.getItem(LifestyleQuality.class, "low"));
 		assertTrue(lifeRes.wasSuccessful());
+		lifeRes.get().setPrimary(true);
+		lifeRes.get().setName("Appartment in decaying megahousing");
 		lifeRes.get().setSIN(model.getSINs().get(0).getUniqueId());
 		
 		// Contacts
@@ -502,14 +510,17 @@ public class SR6ArchetypeTest {
 		c1.setTypeName("Corporate Wage Mage");
 		contacts.increaseLoyalty(c1);
 		contacts.increaseRating(c1);
+		c1.setType(ContactType.CORPORATE);
 		Contact c2 = contacts.createContact().get();
 		c2.setTypeName("Crimson Crush Ganger");
 		contacts.increaseLoyalty(c2);
 		contacts.increaseRating(c2);
+		c2.setType(ContactType.CRIMINAL);
 		Contact c3 = contacts.createContact().get();
 		c3.setTypeName("Talismonger");
 		contacts.increaseLoyalty(c3);
 		contacts.increaseRating(c3);
+		c3.setType(ContactType.MAGIC);
 		
 //		ItemTemplate bow = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
 //		// Try to add bow without rating
@@ -649,8 +660,37 @@ public class SR6ArchetypeTest {
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Corporate Security Tactics") ));
 		assertEquals(0, skills.getPointsLeft2());
 		
+		// Contacts
+		IContactController contCtrl = charGen.getContactController();
+		Contact c1 = contCtrl.createContact().get();
+		c1.setTypeName("Beat Cop");
+		contCtrl.increaseLoyalty(c1);
+		contCtrl.increaseLoyalty(c1);
+		contCtrl.increaseLoyalty(c1);
+		contCtrl.increaseRating(c1);
+		c1.setType(ContactType.GOVERNMENT);
+		Contact c2 = contCtrl.createContact().get();
+		c2.setTypeName("Corporate Secretary");
+		contCtrl.increaseLoyalty(c2);
+		contCtrl.increaseLoyalty(c2);
+		contCtrl.increaseRating(c2);
+		contCtrl.increaseRating(c2);
+		c2.setType(ContactType.CORPORATE);
+		Contact c3 = contCtrl.createContact().get();
+		c3.setTypeName("Fixer");
+		contCtrl.increaseLoyalty(c3);
+		contCtrl.increaseLoyalty(c3);
+		contCtrl.increaseLoyalty(c3);
+		contCtrl.increaseRating(c3);
+		contCtrl.increaseRating(c3);
+		contCtrl.increaseRating(c3);
+		contCtrl.increaseRating(c3);
+		contCtrl.increaseRating(c3);
+		c3.setType(ContactType.CRIMINAL);
+		
 		// Augmentations
 		IEquipmentController equip = charGen.getEquipmentController();
+		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
@@ -767,6 +807,13 @@ public class SR6ArchetypeTest {
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator").getChoices().get(0), "6")).wasSuccessful() );
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_predator_vi")).wasSuccessful() );
+		
+		// Lifestyle
+		OperationResult<SR6Lifestyle> lifeRes = charGen.getLifestyleController().select(Shadowrun6Core.getItem(LifestyleQuality.class, "middle"));
+		assertTrue(lifeRes.wasSuccessful());
+		lifeRes.get().setPrimary(true);
+		lifeRes.get().setName("Small appartment");
+		lifeRes.get().setSIN(model.getSINs().get(0).getUniqueId());
 		
 		model.setName("Covert-Ops Specialist");
 		

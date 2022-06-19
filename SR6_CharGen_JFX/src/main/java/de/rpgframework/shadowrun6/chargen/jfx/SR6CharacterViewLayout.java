@@ -203,10 +203,20 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 				SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator(model.getCharGenUsed(), model,
 						handle);
 				wrapper.setWrapped(charGen);
+				wrapper.addListener(this);
 				super.control = wrapper;
 				logger.log(Level.INFO, "Generator to continue with: {0}", charGen.getClass().getSimpleName());
 				charGen.setModel(model, handle);
 				refreshController();
+//				pgBasic.refresh();
+//				pgSkills.refresh();
+//				pgCombat.refresh();
+				pgAugment.refresh();
+//				pgMagic.refresh();
+//				pgMatrix.refresh();
+//				pgVehicles.refresh();
+//				pgGear.refresh();
+				pgLife.refresh();
 			} catch (Exception e) {
 				logger.log(Level.ERROR, "Error creating generator '" + model.getCharGenUsed(), e);
 				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2,
@@ -256,9 +266,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
-		logger.log(Level.DEBUG, "RCV "+type);
+		logger.log(Level.WARNING, "RCV "+type);
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
 			control = (SR6CharacterController) param[0];
+			control.addListener(this);
 			refreshController();
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {

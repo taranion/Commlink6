@@ -326,7 +326,8 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			int nuyen = model.getNuyen();
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
 				if (!tmp.isAutoAdded()) {
-					logger.log(Level.INFO, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue(),
+					if (logger.isLoggable(Level.TRACE))
+					logger.log(Level.TRACE, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue(),
 							tmp.getNameWithRating());
 					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 					nuyen -= cost;

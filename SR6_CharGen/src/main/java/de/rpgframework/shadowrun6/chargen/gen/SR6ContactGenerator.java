@@ -310,6 +310,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			// Pay Karma
 			getModel().setKarmaFree( getModel().getKarmaFree() - karmaRequired );
 			
+			logger.log(Level.INFO, "Contact points remaining: {0}", pointsLeft);
 			if (pointsLeft>0) {
 				todos.add(new ToDoElement(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.TODO_CONTACT_POINTS_LEFT, pointsLeft));
 			}

@@ -60,7 +60,7 @@ public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
 		}
 		
 		if (changed) {
-			logger.log(Level.WARNING, "Resolve "+model.getKey()+"/"+model.getVariantID()+" to "+resolved+"/"+variant);
+//			logger.log(Level.WARNING, "Resolve "+model.getKey()+"/"+model.getVariantID()+" to "+resolved+"/"+variant);
 			if (variant!=null) {
 				((CarriedItem<ItemTemplate>)model).setResolved(resolved, variant);
 			} else {

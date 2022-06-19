@@ -554,7 +554,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			Shadowrun6Character model = parent.getModel();
 			SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
 			for (Entry<String, PerSkillPoints> entry : settings.perSkill.entrySet()) {
-				logger.log(Level.ERROR, "--->", entry.getKey());
+				logger.log(Level.DEBUG, "---> {0}", entry.getKey());
 				SR6SkillValue sVal = getFromPrioritySettings(entry.getKey());
 				if (sVal==null) {
 					logger.log(Level.ERROR, "Cannot find SkillValue for ''{0}'' from PrioritySettings", entry.getKey());
