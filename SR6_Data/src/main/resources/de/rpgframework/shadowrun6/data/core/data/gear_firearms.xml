@@ -481,7 +481,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
       </modifications>
-      <weapon attack="9,10,8,," ammo="5(c)" dmg="1P" mode="SS" skill="exotic_weapons"/>
+      <weapon attack="9,10,8,," ammo="5(c)" dmg="1P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/air" />
    </item>
    <item avail="11R" price="1200" id="parashield_dart_rifle" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
       <modifications>

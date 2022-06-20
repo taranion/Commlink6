@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="cyberdeck_core" type="CYBERDECK" subtype="CORE">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d4" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+    	<attrdef id="PRICE"        value="$RATING" table="5000,10000,15000,20000,50000,150000"/>
+   	<attrdef id="AVAILABILITY" value="$RATING I" />
+   	<attrdef id="CONCURRENT_PROGRAMS" value="$RATING"/>
+      <modifications>
+         <valmod type="HOOK" ref="CORE_SLOTS" value="$RATING*3"/>
+      </modifications>
+   </item>
+   <item id="attack_module" type="CYBERDECK" subtype="CORE">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d5" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+   	</choices>
+    	<attrdef id="PRICE"        value="$RATING" table="2000,4000,6000,8000,25000,30000,35000,40000,90000"/>
+    	<attrdef id="AVAILABILITY" value="$RATING I"/>
+      <usage mode="EMBEDDED" value="$RATING/3" slot="CORE_SLOTS"/>
+      <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK" value="$RATING"/>
+      </modifications>
+   </item>
+   <item id="sleaze_module" type="CYBERDECK" subtype="CORE">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d6" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+   	</choices>
+    	<attrdef id="PRICE"        value="$RATING" table="2000,4000,6000,8000,25000,30000,35000,40000,90000"/>
+    	<attrdef id="AVAILABILITY" value="$RATING I"/>
+      <usage mode="EMBEDDED" value="$RATING/3" slot="CORE_SLOTS"/>
+      <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="SLEAZE" value="$RATING"/>
+      </modifications>
+   </item>
+   
+   <item id="breadbox_case" type="CYBERDECK" subtype="CASES">
+    	<attrdef id="PRICE"        value="0"/>
+    	<attrdef id="AVAILABILITY" value="2I"/>
+      <modifications>
+         <valmod type="HOOK" ref="CASE_MODS" value="99"/>
+         <itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+         <itemmod type="HOOK" ref="CYBERHACK"/>
+      </modifications>
+   </item>
+   <item id="briefcase" type="CYBERDECK" subtype="CASES" reqVariant="y">
+    	<attrdef id="PRICE"        value="200"/>
+    	<attrdef id="AVAILABILITY" value="2I"/>
+   	<variant id="deck_only">
+   		<modifications>
+         	<valmod type="HOOK" ref="CASE_MODS" value="12"/>
+         	<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+   		</modifications>
+   	</variant>
+   	<variant id="deck_plus_hack">
+   		<modifications>
+         	<valmod type="HOOK" ref="CASE_MODS" value="6"/>
+         	<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+         	<itemmod type="HOOK" ref="CYBERHACK"/>
+   		</modifications>
+   	</variant>
+   </item>
+   <item id="commlink_case" type="CYBERDECK" subtype="CASES" >
+    	<attrdef id="PRICE"        value="100"/>
+    	<attrdef id="AVAILABILITY" value="2I"/>
+  		<modifications>
+        	<valmod type="HOOK" ref="CASE_MODS" value="4"/>
+        	<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+  		</modifications>
+   </item>
+   <item id="gonzo_case" type="CYBERDECK" subtype="CASES" reqVariant="y">
+    	<attrdef id="AVAILABILITY" value="5I"/>
+  		<modifications>
+        	<valmod type="HOOK" ref="CASE_MODS" value="2"/>
+  		</modifications>
+   	<variant id="deck">
+    		<attrdef id="PRICE"        value="1000"/>
+   		<modifications>
+         	<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+   		</modifications>
+   	</variant>
+   	<variant id="hack">
+    		<attrdef id="PRICE"        value="5000"/>
+   		<modifications>
+         	<itemmod type="HOOK" ref="CYBERHACK"/>
+   		</modifications>
+   	</variant>
+   </item>
+   <item id="keytar_case" type="CYBERDECK" subtype="CASES" reqVariant="y">
+    	<attrdef id="AVAILABILITY" value="3I"/>
+   	<variant id="deck">
+    		<attrdef id="PRICE"        value="1000"/>
+   		<modifications>
+         	<valmod type="HOOK" ref="CASE_MODS" value="10"/>
+         	<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+   		</modifications>
+   	</variant>
+   	<variant id="deck_plus_hack">
+    		<attrdef id="PRICE"        value="5000"/>
+   		<modifications>
+          	<valmod type="HOOK" ref="CASE_MODS" value="4"/>
+         	<itemmod type="HOOK" ref="CYBERHACK"/>
+        		<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+   		</modifications>
+   	</variant>
+   	<variant id="deck_plus_hack_no_synth">
+    		<attrdef id="PRICE"        value="5000"/>
+   		<modifications>
+          	<valmod type="HOOK" ref="CASE_MODS" value="8"/>
+         	<itemmod type="HOOK" ref="CYBERHACK"/>
+        		<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+   		</modifications>
+   	</variant>
+   </item>
+   
+   <item id="rcc_case" type="CYBERDECK" subtype="CASES" reqVariant="y">
+    	<attrdef id="PRICE"        value="500"/>
+    	<attrdef id="AVAILABILITY" value="4I"/>
+   	<variant id="deck">
+   		<modifications>
+         	<valmod type="HOOK" ref="CASE_MODS" value="8"/>
+         	<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+   		</modifications>
+   	</variant>
+   	<variant id="deck_plus_rcc">
+   		<modifications>
+         	<valmod type="HOOK" ref="CASE_MODS" value="2"/>
+         	<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+        		 <itemmod type="HOOK" ref="RCC"/>
+   		</modifications>
+   	</variant>
+   	<variant id="deck_plus_hack">
+   		<modifications>
+         	<itemmod type="HOOK" ref="CYBERHACK"/>
+   		</modifications>
+   	</variant>
+   </item>
+   
+   <item id="wearable_case" type="CYBERDECK" subtype="CASES">
+    	<attrdef id="PRICE"        value="500"/>
+    	<attrdef id="AVAILABILITY" value="4I"/>
+  		<modifications>
+        	<itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
+  		</modifications>
+   	<variant id="armor">
+			<attrdef id="HOOK" value="ARMOR" />
+   	</variant>
+   </item>
+   
+   <!-- Case modifications -->
+   <item id="additional_jacks" price="250" avail="2I" type="CYBERDECK" subtype="CASE_MODS">
+      <usage mode="EMBEDDED" value="1" slot="CASE_MODS"/>
+   </item>
+   <item id="built_in_accessory" type="CYBERDECK" subtype="CASE_MODS">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d7" type="ITEM_ATTRIBUTE" ref="SIZE" options="2,3,4"/>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d8" type="TEXT" />
+   	</choices>
+      <usage mode="EMBEDDED" value="$SIZE" slot="CASE_MODS"/>
+   </item>
+   <item id="dart_launcher" avail="2I" type="CYBERDECK" subtype="CASE_MODS">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d9" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+   	</choices>
+      <usage mode="EMBEDDED"  value="$SIZE" slot="CASE_MODS"/>
+    	<attrdef id="SIZE"      value="$RATING"/>
+    	<attrdef id="PRICE"     value="$RATING" table="2500,3000,3500,4000,4500,5000,5500,6000,6500"/>
+      <alternate id="dart_launcher" mode="WEAPON" type="WEAPON_RANGED" subtype="THROWING">
+      	<weapon attack="8,8,,," ammo="5(c)" dmg="4S(e)" mode="SS" skill="exotic_weapons" spec="exotic_weapons/air" />
+    		<attrdef id="AMMUNITION"      value="$RATING"/>
+      </alternate>
+   </item>
+   <item id="gonzo_hardening" price="2000" avail="4I" type="CYBERDECK" subtype="CASE_MODS">
+      <usage mode="EMBEDDED" value="2" slot="CASE_MODS"/>
+   </item>
+   <item id="hardening_case" price="1000" avail="2I" type="CYBERDECK" subtype="CASE_MODS">
+      <usage mode="EMBEDDED" value="1" slot="CASE_MODS"/>
+   </item>
+   <item id="shock_shield" type="CYBERDECK" subtype="CASE_MODS">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d7" type="ITEM_ATTRIBUTE" ref="SIZE" options="1,2,3,4,5"/>
+   	</choices>
+      <usage mode="EMBEDDED" value="$SIZE+3" slot="CASE_MODS"/>
+      <alternate id="weapon" mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+      	<weapon attack="8,,,," ammo="1(c)" dmg="4S(e)" mode="SS" skill="exotic_weapons" spec="exotic_weapons/other" />
+    	<attrdef id="DAMAGE"     value="(4+2*$SIZE)S"/>
+      </alternate>
+   </item>
+   
+   <!-- Optional Components -->
+   <item id="internal_program_slot" price="2000" avail="2I" type="CYBERDECK" subtype="CORE_OPTIONAL" count="y">
+      <usage mode="EMBEDDED" value="1" slot="CORE_SLOTS"/>
+      <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="$RATING*3"/>
+      </modifications>
+   </item>
+   <item id="dedicated_program_slot" avail="3I" type="CYBERDECK" subtype="CORE_OPTIONAL" count="y">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597da" type="PROGRAM" />
+   	</choices>
+      <usage mode="EMBEDDED" value="0.5" slot="CORE_SLOTS"/>
+    	<attrdef id="PRICE" value="1000"/>
+      <modifications>
+         <embed  type="PROGRAM" ref="CHOICE" choice="fcc63c09-5af7-4f00-a2d9-d7c0972597da" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+      </modifications>
+   </item>
+   <item id="response_increase" avail="5I" type="CYBERDECK" subtype="CORE_OPTIONAL">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597db" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+   	</choices>
+      <usage mode="EMBEDDED" value="$RATING*2" slot="CORE_SLOTS"/>
+    	<attrdef id="PRICE" value="$RATING*10000"/>
+      <modifications>
+         	<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX" value="$RATING"/>
+      </modifications>
+   </item>
+   <item id="reality_filter" avail="4I" price="10000" type="CYBERDECK" subtype="CORE_OPTIONAL">
+      <usage mode="EMBEDDED" value="2" slot="CORE_SLOTS"/>
+   </item>
+   <item id="turbo_charger" avail="4I" type="CYBERDECK" subtype="CORE_OPTIONAL">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597db" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+   	</choices>
+      <usage mode="EMBEDDED" value="1" slot="CORE_SLOTS"/>
+    	<attrdef id="PRICE" value="$RATING*5000"/>
+   </item>
+   
+   <!-- Accessories -->
+   <item id="external_program_carrier" price="150" avail="1" type="CYBERDECK" subtype="ACCESSORY" >
+      <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="1"/>
+      </modifications>
+   </item>
+   <item id="cyberjack_booster" avail="4I" type="CYBERDECK" subtype="ACCESSORY" reqVariant="y">
+   	<choices>
+   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597dc" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
+   	</choices>
+      <!--usage mode="EMBEDDED" value="$RATING*2" slot="CORE_SLOTS"/-->
+    	<attrdef id="PRICE" value="$RATING*5000"/>
+    	<attrdef id="AVAILABILITY" value="(4+($RATING*2))I"/>
+    	<variant id="data_processing">
+     		<modifications>
+         	<valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="$RATING"/>
+      	</modifications>
+    	</variant>
+    	<variant id="firewall">
+     		<modifications>
+         	<valmod type="ITEM_ATTRIBUTE" ref="FIREWALL" value="$RATING"/>
+      	</modifications>
+    	</variant>
+    	<variant id="matrix_initiative">
+     		<modifications>
+         	<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX" value="$RATING"/>
+      	</modifications>
+    	</variant>
+   </item>
+   
+   
+</items>

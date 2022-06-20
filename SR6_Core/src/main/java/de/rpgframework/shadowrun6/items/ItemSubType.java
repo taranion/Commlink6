@@ -94,6 +94,11 @@ public enum ItemSubType {
 	SECURITY,
 	BREAKING,
 	TAC_NET,
+	//
+	CORE,
+	CASES,
+	CASE_MODS,
+	CORE_OPTIONAL,
 	// Software
 	BASIC_PROGRAM,
 	HACKING_PROGRAM,

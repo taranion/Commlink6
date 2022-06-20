@@ -66,6 +66,13 @@ public enum ItemType {
 			ItemSubType.BREAKING,
 			ItemSubType.TAC_NET
 			),
+	/** Hack&Slash custom cyberdecks */
+	CYBERDECK(
+			ItemSubType.CORE,
+			ItemSubType.CASES,
+			ItemSubType.CASE_MODS,
+			ItemSubType.CORE_OPTIONAL
+			),
 	SOFTWARE(
 			ItemSubType.AUTOSOFT,
 			ItemSubType.BASIC_PROGRAM,

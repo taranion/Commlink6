@@ -37,6 +37,7 @@ public enum ItemHook implements Hook {
 	HELMET_ACCESSORY(true),
 	COMMLINK,
 	CYBERDECK,
+	RCC,
 	HEADWARE_IMPLANT(true),
 	CYBEREYE_IMPLANT(true),
 	CYBEREAR_IMPLANT(true),
@@ -70,6 +71,12 @@ public enum ItemHook implements Hook {
 	INSTRUMENT_SLOT(true),
 	INSTRUMENT_WEAPON(true),
 	PROCAM_SLOT(true),
+	/** For cyberdecks: number core slots = Rating*3*/
+	CORE_SLOTS(true),
+	/** Custom Cyberdeck case modifications */ 
+	CASE_MODS(true),
+	CUSTOM_CYBERDECK(false),
+	CYBERHACK(false)
 	;
 	
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
