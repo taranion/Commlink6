@@ -93,5 +93,14 @@
    </quality>
    <quality id="sloppy_coder"         karma="3" pos="false" type="NORMAL" />
    <quality id="wanted_by_god"        karma="5" pos="false" type="NORMAL" max="4"/>
+
+   <quality id="paragon"	           karma="10" pos="true" type="NORMAL" >
+   	<choices>
+   		<choice type="PARAGON" uuid="b69f8371-fa0e-435c-b344-8fc6d64e1fb3" />
+   	</choices>
+   	<requires>
+   		<valuereq type="ATTRIBUTE" ref="RESONANCE" value="1" apply="CHARACTER"/>
+   	</requires>
+   </quality>
    
 </qualities>

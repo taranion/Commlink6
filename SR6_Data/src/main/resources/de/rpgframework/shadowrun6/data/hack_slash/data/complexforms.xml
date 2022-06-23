@@ -24,4 +24,10 @@
    <complexform id="technoregeneration" dur="PERMANENT" fad="HITS"/>
    <complexform id="threat_analyzer"    dur="SUSTAINED" fad="HITS"/>
    <complexform id="unravel_encryption" dur="PERMANENT" fad="RATING"/>
+   
+   <!-- Accessed by streams -->
+   <complexform id="loto"               dur="IMMEDIATE" fad="4" selectable="false"/>
+   <complexform id="hyperthreading"     dur="VARIES"    fad="VARIES" selectable="false"/>
+   <complexform id="control_virtual_life" dur="SUSTAINED" fad="5" selectable="false"/>
+   
 </complexforms>

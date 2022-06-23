@@ -16,6 +16,7 @@ import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
@@ -56,6 +57,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ALLERGY_ALLERGEN("Allergen"),
 	ALLERGY_SEVERITY("Severity"),
 	ATTRIBUTE(new AttributeConverter()),
+	COMPLEX_FORM(ComplexForm.class),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
 	DATA_STRUCTURE(DataStructure.class),
@@ -71,6 +73,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	MENTOR_SPIRIT(MentorSpirit.class),
 	METAECHO(MetamagicOrEcho.class),
 	METATYPE(SR6MetaType.class),
+	PARAGON(MentorSpirit.class),
 	POOL("Pool"), // Derived values like defense pool
 	PROGRAM("Program"), // 
 	// All Resistance tests

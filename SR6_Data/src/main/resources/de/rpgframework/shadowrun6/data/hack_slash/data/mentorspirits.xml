@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mentorspirits>
+	<mentorspirit id="zero_one" type="PARAGON">
+	<similar>world_tree</similar>
+		<modifications>
+		</modifications>
+	</mentorspirit>
+
+	<mentorspirit id="architect" type="PARAGON">
+		<modifications>
+		</modifications>
+	</mentorspirit>
+
+	<mentorspirit id="black_hat" type="PARAGON">
+		<modifications>
+		</modifications>
+	</mentorspirit>
+
+	<mentorspirit id="delphi" type="PARAGON">
+		<modifications>
+		</modifications>
+	</mentorspirit>
+
+	<mentorspirit id="shooter" type="PARAGON">
+		<modifications>
+		</modifications>
+	</mentorspirit>
+
+</mentorspirits>

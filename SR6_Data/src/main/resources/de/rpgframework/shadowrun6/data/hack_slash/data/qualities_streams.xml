@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="machinists" karma="20" type="STREAM" pos="true" >
+   	<modifications>
+     		<allowmod type="COMPLEX_FORM" ref="loto"/>
+     </modifications>
+   </quality>
+   <quality id="sourceror" karma="20" type="STREAM" pos="true">
+   	<modifications>
+     		<allowmod type="COMPLEX_FORM" ref="hyperthreading"/>
+     </modifications>
+   </quality>
+   <quality id="technoshaman" karma="20" type="STREAM" pos="true">
+   	<modifications>
+     		<allowmod type="COMPLEX_FORM" ref="control_virtual_life"/>
+     </modifications>
+   </quality>
+</qualities>
