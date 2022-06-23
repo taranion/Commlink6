@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metatypes>
+    <metatype id="pilot-ai" ai="true">
+        <modifications>
+            <valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="7" set="MAX" when="CREATION"/>
+            <valmod type="ITEM_ATTRIBUTE" ref="ATTACK"          value="7" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="LOGIC"            value="5" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="INTUITION"        value="8" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="CHARISMA"         value="5" set="MAX" when="CREATION"/>
+            <valmod type="QUALITY"       ref="pilot_origins"    value="1"/>
+            <itemmod type="QUALITY"      ref="sensor_upgrade"   />
+        </modifications>
+    </metatype>
+
+    <metatype id="agent-ai" ai="true">
+        <modifications>
+            <valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="8" set="MAX" when="CREATION"/>
+            <valmod type="ITEM_ATTRIBUTE" ref="ATTACK"          value="7" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="LOGIC"            value="6" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="EDGE"             value="7" set="MAX" when="CREATION"/>
+            <itemmod type="QUALITY"      ref="photographic_memory"   />
+        </modifications>
+    </metatype>
+
+    <metatype id="deep_foundation_ai" ai="true">
+        <modifications>
+            <valmod type="ITEM_ATTRIBUTE" ref="FIREWALL"        value="7" set="MAX" when="CREATION"/>
+            <valmod type="ITEM_ATTRIBUTE" ref="ATTACK"          value="7" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="WILLPOWER"        value="7" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="LOGIC"            value="7" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="CHARISMA"         value="5" set="MAX" when="CREATION"/>
+            <itemmod type="QUALITY"      ref="photographic_memory"   />
+            <itemmod type="QUALITY"      ref="real_world_naivete"   />
+        </modifications>
+    </metatype>
+
+    <metatype id="realms_ai" ai="true">
+        <modifications>
+            <valmod type="ITEM_ATTRIBUTE" ref="SLEAZE"          value="8" set="MAX" when="CREATION"/>
+            <valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="5" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="WILLPOWER"        value="5" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="INTUITION"        value="7" set="MAX" when="CREATION"/>
+            <valmod type="ATTRIBUTE"     ref="CHARISMA"         value="7" set="MAX" when="CREATION"/>
+            <itemmod type="QUALITY"      ref="hello_world"   />
+            <itemmod type="QUALITY"      ref="photographic_memory"   />
+            <itemmod type="QUALITY"      ref="real_world_naivete"   />
+        </modifications>
+    </metatype>
+
+</metatypes>

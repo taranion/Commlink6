@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<critterpowers>
+    <critterpower id="authority"           type="RESONANCE" action="AUTO"  range="SELF"  dur="ALWAYS" />
+    <critterpower id="entropic_conversion" type="RESONANCE" action="MAJOR" range="SELF"  dur="INSTANTANEOUS" />
+    <critterpower id="fnord"               type="RESONANCE" action="AUTO"  range="SELF"  dur="INSTANTANEOUS" />
+    <critterpower id="malleable_icon"      type="RESONANCE" action="AUTO"  range="SELF"  dur="ALWAYS" />
+    <critterpower id="munge"               type="RESONANCE" action="MAJOR" range="TOUCH" dur="PERMANENT" />
+    <critterpower id="munge_spark"         type="RESONANCE" action="MINOR" range="TOUCH" dur="INSTANTANEOUS" />
+    <critterpower id="noiseless"           type="RESONANCE" action="AUTO"  range="SELF"  dur="ALWAYS" />
+    <critterpower id="primal_rage"         type="RESONANCE" action="AUTO"  range="SELF"  dur="ALWAYS" />
+    <critterpower id="noisestorm"          type="RESONANCE" action="MAJOR" range="TOUCH" dur="INSTANTANEOUS" />
+    <critterpower id="psychotropic_biofeedback" type="RESONANCE" action="MAJOR" range="TOUCH" dur="INSTANTANEOUS" />
+    <critterpower id="virtual_processing"  type="RESONANCE" action="AUTO"  range="SELF"  dur="ALWAYS" />
+</critterpowers>

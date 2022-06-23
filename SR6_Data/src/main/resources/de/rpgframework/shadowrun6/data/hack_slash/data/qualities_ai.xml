@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="chatty"                karma="12" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="designer"              karma= "6" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="hello_world"           karma= "8" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="inherent_program"      karma= "7" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="improved_restoration"  karma= "7" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="low_profile"           karma="10" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="multi_processing"      karma="11" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="pilot_origins"         karma= "8" pos="true" type="VIRTUAL_LIFE" max="3"/>
+   <quality id="redundancy"            karma= "8" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="sapper"                karma= "6" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="sensor_upgrade"        karma= "5" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="snooper"               karma= "8" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="virtual_stability"     karma= "5" pos="true" type="VIRTUAL_LIFE" />
+	
+   <quality id="cascading_failure"     karma= "9" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="corruptor"             karma="10" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="doomscrolling"         karma= "4" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="easily_exploitable"    karma= "8" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="fragmentation"         karma="18" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="invalid_references"    karma= "5" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="out_of_memory_exception" karma= "3" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="persnickety_renter"    karma= "6" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="real_world_naivete"    karma= "8" pos="false" type="VIRTUAL_LIFE" />
+</qualities>

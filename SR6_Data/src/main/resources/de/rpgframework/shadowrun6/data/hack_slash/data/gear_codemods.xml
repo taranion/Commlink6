@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="5" id="attribute_augmentation" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD">
+		<choices>
+			<choice uuid="bbd33968-1962-416e-9b50-a77f262ad56f" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ATTRIBUTE" options="MENTAL"/>
+		</choices>
+		<attrdef id="PRICE"       value="$RATING*34000"/>
+	   <attrdef id="ESSENCECOST" value="$RATING*0.5"/>
+   	<flag>CODEMOD</flag>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="CHOICE" choice="c155d3ee-720c-4c47-91d7-daae0b2fd48f" value="$RATING"/>
+		</modifications>
+   </item>
+   <item avail="4" id="asdf_augmentation" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD">
+		<choices>
+			<choice uuid="bbd33968-1962-416e-9b50-a77f262ad56f" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ITEM_ATTRIBUTE" options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL"/>
+		</choices>
+		<attrdef id="PRICE"       value="$RATING*12000"/>
+	   <attrdef id="ESSENCECOST" value="$RATING*0.2"/>
+   	<flag>CODEMOD</flag>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="CHOICE" choice="c155d3ee-720c-4c47-91d7-daae0b2fd48f" value="$RATING"/>
+		</modifications>
+   </item>
+   <item avail="5" id="attribute_overclocking" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD">
+		<choices>
+			<choice uuid="bbd33968-1962-416e-9b50-a77f262ad56f" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
+			<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ATTRIBUTE" options="MENTAL"/>
+		</choices>
+		<attrdef id="PRICE"       value="$RATING*9000"/>
+	   <attrdef id="ESSENCECOST" value="$RATING*0.25"/>
+   	<flag>CODEMOD</flag>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="CHOICE" choice="c155d3ee-720c-4c47-91d7-daae0b2fd48f" value="$RATING"/>
+		</modifications>
+   </item>
+   <item avail="4" id="asdf_overclocking" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD">
+		<choices>
+			<choice uuid="bbd33968-1962-416e-9b50-a77f262ad56f" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
+			<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ITEM_ATTRIBUTE" options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL"/>
+		</choices>
+		<attrdef id="PRICE"       value="$RATING*5000"/>
+	   <attrdef id="ESSENCECOST" value="$RATING*0.1"/>
+   	<flag>CODEMOD</flag>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="CHOICE" choice="c155d3ee-720c-4c47-91d7-daae0b2fd48f" value="$RATING"/>
+		</modifications>
+   </item>
+   <item avail="5L" id="quantum_processor" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD">
+		<choices>
+			<choice uuid="bbd33968-1962-416e-9b50-a77f262ad56f" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
+		</choices>
+		<attrdef id="PRICE"       value="$RATING*40000"/>
+	   <attrdef id="ESSENCECOST" value="$RATING*0.5"/>
+   	<flag>CODEMOD</flag>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_MATRIX" value="$RATING"/>
+		</modifications>
+   </item>
+
+   <!-- Core Codemods -->
+
+</items>

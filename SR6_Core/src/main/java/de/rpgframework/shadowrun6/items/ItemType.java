@@ -47,6 +47,13 @@ public enum ItemType {
 			ItemSubType.COMMLINK,
 			ItemSubType.CYBERDECK
 			),
+	CODEMODS(
+			ItemSubType.ATTRIBUTE_CODEMOD,
+			ItemSubType.CORE_CODEMOD,
+			ItemSubType.PROCESSOR,
+			ItemSubType.IO,
+			ItemSubType.DIGITAL_WEAPON
+			),
 	TOOLS(
 			ItemSubType.TOOLS
 			),

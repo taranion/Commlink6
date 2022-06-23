@@ -243,6 +243,14 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "hack_slash/data/gear_customcyber.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" custom cyberdeck items");
+			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "hack_slash/data/critterpower.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" technocritter qualities");
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_ai.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" vitual lifeform qualities");
+			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "hack_slash/data/metatypes.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" AI types");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"hack_slash/data/gear_codemods.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" codemods");
 
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
