@@ -543,6 +543,18 @@ public class Shadowrun6Tools {
 				if (min>0 && val<min) return false;
 				//if (max>0 && val>min) return false;
 				return true;
+			case QUALITY:
+				if ("CHOICE".equals(tmp.getKey())) {
+					return true;
+				}
+				if (model.getQuality(tmp.getKey())==null) {
+					return false;
+				}
+				val = model.getQuality(tmp.getKey()).getModifiedValue();
+				if (max!=Integer.MAX_VALUE && val>max) return false;
+				if (min>0 && val<min) return false;
+				//if (max>0 && val>min) return false;
+				return true;
 			default:
 				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type);
 			}			

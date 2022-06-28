@@ -4,15 +4,20 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.List;
 import java.util.Locale;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
+import org.controlsfx.control.ToggleSwitch;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.public_skins.GridPaneTableViewSkin.HeaderLine;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.rules.AttributeTable.Mode;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.charctrl.ISkillController;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunSkillTable;
@@ -22,17 +27,28 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6SkillTablePrioSkin;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 /**
  * @author prelle
  *
  */
 public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValue, Shadowrun6Character> {
+	
+	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
 
 	private final static Logger logger = System.getLogger(SR6WizardPageSkills.class.getPackageName());
+
+	private ToggleSwitch tsExpertMode;
+	private Label lbPoints, lbPoints2;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageSkills(Wizard wizard, SR6CharacterGenerator charGen) {
@@ -44,9 +60,22 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		bxDescription.setResolver( req -> Shadowrun6Tools.getRequirementString(req, Locale.getDefault()));
 		
 		table.setActionCallback(sVal -> openActionDialog(sVal));
-		table.setSelectedListModifier(data -> injectHeader(data));
+		//table.setSelectedListModifier(data -> injectHeader(data));
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSkills#initComponents()
+	 */
+	protected void initComponents() {
+		super.initComponents();
+		tsExpertMode = new ToggleSwitch("Expert");
+		lbPoints = new Label("?");
+		lbPoints2 = new Label("?");
+		lbPoints.setStyle("-fx-text-fill: -fx-text-base-color");
+		lbPoints2.setStyle("-fx-text-fill: -fx-text-base-color");
+	}
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSkills#initInteractivity()
@@ -59,6 +88,30 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 
 //		table.useExpertModeProperty().bind(tsExpertMode.selectedProperty());
 //		tsExpertMode.visibleProperty().bind(table.expertModeAvailableProperty());
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSkills#getGeneratorLine()
+	 */
+	@Override
+	protected Pane getGeneratorLine() {
+		ISkillController<SR6Skill, SR6SkillValue> skillCtrl = charGen.getSkillController();
+		if (skillCtrl instanceof SR6PrioritySkillGenerator) {
+			tsExpertMode = new ToggleSwitch("Expert");
+			tsExpertMode.visibleProperty().bind(table.expertModeAvailableProperty());
+			lbPoints = new Label("?");
+			lbPoints2 = new Label("?");
+			lbPoints.setStyle("-fx-text-fill: -fx-text-base-color");
+			lbPoints2.setStyle("-fx-text-fill: -fx-text-base-color");
+			Label hdPoints1 = new Label(ResourceI18N.get(RES, "page.skills.head.points")+":");
+			Label hdPoints2 = new Label(ResourceI18N.get(RES, "page.skills.head.points2")+":");
+			
+			HBox line = new HBox(5, tsExpertMode, hdPoints1, lbPoints, hdPoints2, lbPoints2);
+			HBox.setMargin(hdPoints2, new Insets(0,0,0,10));
+			return line;
+		}
+		return null;
 	}
 
 	//-------------------------------------------------------------------
@@ -139,6 +192,16 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		default:
 			logger.log(Level.WARNING, "ToDo: handle "+button);
 		}
+	}
+	
+	//-------------------------------------------------------------------
+	protected void refresh() {
+		super.refresh();
+		ISkillController<SR6Skill, SR6SkillValue> skillCtrl = charGen.getSkillController();
+		if (skillCtrl instanceof SR6PrioritySkillGenerator) {
+			lbPoints .setText( String.valueOf( ((SR6PrioritySkillGenerator)skillCtrl).getPointsLeft()));
+			lbPoints2.setText( String.valueOf( ((SR6PrioritySkillGenerator)skillCtrl).getPointsLeft2()));
+		}		
 	}
 
 }

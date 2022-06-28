@@ -352,4 +352,26 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 		return false;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith1PoolController#getPoints(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints(SR6SkillValue key) {
+		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+		PerSkillPoints val = settings.perSkill.get(key);
+		return val.points1;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith2PoolsController#getPoints2(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints2(SR6SkillValue key) {
+		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+		PerSkillPoints val = settings.perSkill.get(key);
+		return val.points2;
+	}
+
 }

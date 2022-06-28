@@ -836,4 +836,26 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith2PoolsController#getPoints2(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints2(AttributeValue<ShadowrunAttribute> key) {
+		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+		PerAttributePoints val = settings.perAttrib.get(key.getModifyable());
+		return val.points2;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith1PoolController#getPoints(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints(AttributeValue<ShadowrunAttribute> key) {
+		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+		PerAttributePoints val = settings.perAttrib.get(key.getModifyable());
+		return val.points1;
+	}
+
 }

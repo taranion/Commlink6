@@ -23,6 +23,7 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
+import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -693,6 +694,28 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	public String getColumn3() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith2PoolsController#getPoints2(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints2(AttributeValue<ShadowrunAttribute> key) {
+		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+		PerAttributePoints val = settings.perAttrib.get(key.getModifyable());
+		return val.points2;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith1PoolController#getPoints(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints(AttributeValue<ShadowrunAttribute> key) {
+		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+		PerAttributePoints val = settings.perAttrib.get(key.getModifyable());
+		return val.points1;
 	}
 
 }

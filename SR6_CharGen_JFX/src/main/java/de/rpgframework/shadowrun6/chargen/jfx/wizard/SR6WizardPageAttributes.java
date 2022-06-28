@@ -5,6 +5,7 @@ import java.lang.System.Logger.Level;
 
 import org.prelle.javafx.Wizard;
 
+import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;

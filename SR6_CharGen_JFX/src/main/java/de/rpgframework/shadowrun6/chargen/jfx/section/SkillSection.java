@@ -2,21 +2,37 @@ package de.rpgframework.shadowrun6.chargen.jfx.section;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.Arrays;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
+import org.controlsfx.control.ToggleSwitch;
+import org.prelle.javafx.CloseType;
+import org.prelle.javafx.FlexibleApplication;
+import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.Section;
 import org.prelle.javafx.SymbolIcon;
 
+import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.NumericalValueWith1PoolController;
 import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.jfx.rules.SkillTable;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.jfx.ShadowrunSkillTable;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -24,12 +40,16 @@ import javafx.scene.layout.VBox;
  *
  */
 public class SkillSection extends Section {
+
+	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(ShadowrunSkillTable.class.getName());
 	
 	protected Logger logger = System.getLogger(getClass().getPackageName());
 
 	private SR6CharacterController control;
 	private SkillType[] type;
 
+	private ToggleSwitch tsExpertMode;
+	private Label lbPoints;
 	private SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue> table;
 	protected Button btnAdd;
 	protected Button btnDel;
@@ -51,16 +71,29 @@ public class SkillSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		table = new SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue>(Shadowrun6Core.getSkills(type));
+		table = new SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue>();
 		table.setMaxHeight(Double.MAX_VALUE);
 		btnAdd = new Button(null, new SymbolIcon("add"));
 		btnDel = new Button(null, new SymbolIcon("delete"));
 		getButtons().addAll(btnAdd, btnDel);
 	}
+	
+	private void initLine() {
+		tsExpertMode = new ToggleSwitch("Expert");
+		lbPoints = new Label("?");
+		lbPoints.setStyle("-fx-text-fill: -fx-text-base-color");
+
+		Label hdPoints1 = new Label(ResourceI18N.get(RES, "head.points")+":");
+		
+		HBox line = new HBox(5, tsExpertMode, hdPoints1, lbPoints);
+		VBox layout = new VBox(5, line, table);
+		setContent(layout);		
+	}
 
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		setContent(table);
+		//setContent(table);
+		initLine();
 		
 		CheckBox cb1 = new CheckBox("Configuration Setting 1");
 		CheckBox cb2 = new CheckBox("Configuration Setting 2");
@@ -73,14 +106,23 @@ public class SkillSection extends Section {
 		btnAdd.setOnAction(ev -> onAdd());
 		btnDel.setOnAction(ev -> onDelete(table.getSelectionModel().getSelectedItem()));
 		btnDel.setDisable(true);
-		
+		table.useExpertModeProperty().bind(tsExpertMode.selectedProperty());
 		table.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> btnDel.setDisable(n==null || !control.getSkillController().canBeDeselected(n).get()));
+		table.setActionCallback( v -> openActionDialog(v));
 	}
 
 	//-------------------------------------------------------------------
 	public void refresh() {
 		logger.log(Level.WARNING, "refresh");
-		table.refresh();
+		if (control!=null && control.getSkillController()!=null) {
+			SR6SkillController skCtrl = control.getSkillController();
+			table.setData(
+					control.getSkillController().getSelected().stream().filter(sv -> Arrays.asList(type).contains(sv.getModifyable().getType())).collect(Collectors.toList())
+					);
+			if (skCtrl instanceof NumericalValueWith1PoolController) {
+				lbPoints.setText(String.valueOf(((NumericalValueWith1PoolController<?,?>)skCtrl).getPointsLeft()));
+			}
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -96,7 +138,9 @@ public class SkillSection extends Section {
 		if (control.getModel()==null) throw new NullPointerException("Controller has NULL as model");
 		table.setModel(control.getModel());
 		table.setController(control.getSkillController());
-		refresh();
+		table.setData(
+				control.getSkillController().getSelected().stream().filter(sv -> Arrays.asList(type).contains(sv.getModifyable().getType())).collect(Collectors.toList())
+				);
 	}
 
 	//-------------------------------------------------------------------
@@ -112,6 +156,16 @@ public class SkillSection extends Section {
 			table.refresh();
 		} else
 			logger.log(Level.WARNING, "deselecting {0} failed", item);
+	}
+
+	//-------------------------------------------------------------------
+	private CloseType openActionDialog(SR6SkillValue sVal) {
+		logger.log(Level.INFO, "openActionDialog({0})", sVal);
+		
+		SRSkillSettingsPane pane = new SRSkillSettingsPane(sVal, control.getSkillController());
+		ManagedDialog dialog = new ManagedDialog("Settings", pane, CloseType.OK);
+		CloseType close = FlexibleApplication.getInstance().showAlertAndCall(dialog, null);
+		return close;
 	}
 
 }

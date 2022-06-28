@@ -63,9 +63,9 @@ public class SkillPage extends Page {
 		secNormal.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secNormal, 4);
 		FlexGridPane.setMinHeight(secNormal, 6);
-		FlexGridPane.setMediumWidth(secNormal, 8);
+		FlexGridPane.setMediumWidth(secNormal, 7);
 		FlexGridPane.setMediumHeight(secNormal, 6);
-		FlexGridPane.setMaxWidth(secNormal, 8);
+		FlexGridPane.setMaxWidth(secNormal, 7);
 		FlexGridPane.setMaxHeight(secNormal, 8);
 	}
 	
@@ -116,6 +116,7 @@ public class SkillPage extends Page {
 			layout.setOptional(new Label("Langer Text"));
 		} else {
 			descBox.setData(n.getModifyable());
+			layout.setTitle(n.getModifyable().getName());
 			layout.setOptional(descBox);
 		}
 	}

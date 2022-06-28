@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -59,6 +60,34 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		super(parent);
 		normalToDos    = new ArrayList<>();
 		knowledgeToDos = new ArrayList<>();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
+	 */
+	@Override
+	public List<SR6SkillValue> getSelected() {
+		SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
+		for (Entry<String, PerSkillPoints> entry : settings.perSkill.entrySet()) {
+			
+		}
+		logger.log(Level.DEBUG, "getSelected() returns {0} entries", model.getSkillValues().size());
+		
+		List<SR6SkillValue> selected = model.getSkillValues();
+		// Sort by type and name
+		Collections.sort(selected, new Comparator<SR6SkillValue>() {
+			public int compare(SR6SkillValue o1, SR6SkillValue o2) {
+				SkillType t1 = o1.getModifyable().getType();
+				SkillType t2 = o2.getModifyable().getType();
+				boolean b1 = t1==SkillType.KNOWLEDGE || t1==SkillType.LANGUAGE;
+				boolean b2 = t2==SkillType.KNOWLEDGE || t2==SkillType.LANGUAGE;
+				if (b1 && !b2) return 1;
+				if (!b1 && b2) return -1;
+				if (b1 && b2 && (t1!=t2)) return t1.compareTo(t2);
+				return o1.getName(Locale.getDefault()).compareTo(o2.getName(Locale.getDefault()));
+			}});
+		return selected;
 	}
 	
 	//-------------------------------------------------------------------
@@ -514,7 +543,6 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 								unprocessed.add(mod);
 							}						
 						} else {
-							logger.log(Level.WARNING, "ToDo: handle "+mod);
 							unprocessed.add(tmp);
 						}					
 					}
@@ -677,22 +705,23 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		return unprocessed;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith1PoolController#getColumn1()
+	 */
 	@Override
 	public String getColumn1() {
-		// TODO Auto-generated method stub
-		return "Col 1";
+		return RES.getString("column.points1");
 	}
 
 	@Override
 	public String getColumn2() {
-		// TODO Auto-generated method stub
-		return "Col 2";
+		return RES.getString("column.points2");
 	}
 
 	@Override
 	public String getColumn3() {
-		// TODO Auto-generated method stub
-		return "Col 3";
+		return RES.getString("column.points3");
 	}
 
 	//-------------------------------------------------------------------
@@ -847,6 +876,36 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			logger.log(Level.INFO, "LEAVE roll()");
 		}
 		
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith1PoolController#getPoints(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints(SR6SkillValue key) {
+		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+		PerSkillPoints val = settings.get(key);
+		if (val==null) {
+			logger.log(Level.ERROR, "Cannot determine points1 for not present SkillValue {0}", key);
+			return -1;
+		}
+		return val.points1;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith2PoolsController#getPoints2(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints2(SR6SkillValue key) {
+		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+		PerSkillPoints val = settings.get(key);
+		if (val==null) {
+			logger.log(Level.ERROR, "Cannot determine points2 for not present SkillValue {0}", key);
+			return -1;
+		}
+		return val.points2;
 	}
 
 }
