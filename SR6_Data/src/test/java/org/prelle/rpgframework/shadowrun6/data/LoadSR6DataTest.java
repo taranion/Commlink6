@@ -31,6 +31,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.WeaponData;
 
@@ -181,6 +182,17 @@ public class LoadSR6DataTest {
 		}
 		System.out.println(buf.toString());
 		System.out.println(de.toString());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadVehicles() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "mitsubishi_nightsky");
+		assertNotNull(item);
+		
+		assertEquals(259000, (Integer)item.getAttribute(SR6ItemAttribute.PRICE).getValue(), 0);
+		assertEquals(18, (Integer)item.getAttribute(SR6ItemAttribute.BODY).getValue(), 0);
+		assertEquals(4, ((OnRoadOffRoadValue)item.getAttribute(SR6ItemAttribute.HANDLING).getValue()).getOnRoad(), 0);
 	}
 
 }

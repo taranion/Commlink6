@@ -296,6 +296,9 @@ public enum ItemType {
     public static boolean isWeapon(ItemType type) {
     	return getWeaponTypes().contains(type);
     }
+    public static boolean isVehicle(ItemType type) {
+    	return Arrays.asList(vehicleTypes()).contains(type) || Arrays.asList(droneTypes()).contains(type);
+    }
 
     public static List<ItemSubType> getWeaponSubTypes() {
     	List<ItemSubType> ret = new ArrayList<ItemSubType>();

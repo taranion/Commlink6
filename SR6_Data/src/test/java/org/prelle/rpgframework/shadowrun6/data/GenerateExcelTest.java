@@ -45,6 +45,9 @@ public class GenerateExcelTest {
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );
+		System.err.println("Found "+Shadowrun6Core.getDataSets().size()+" datasets");
+		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(2) );
+		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(1) );
 		
 		wb = new XSSFWorkbook();
 	}
