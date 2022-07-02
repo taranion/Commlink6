@@ -1,11 +1,21 @@
 package de.rpgframework.eden.roll20.sr6;
 
 import java.lang.System.Logger;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+
+import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.data.PageReference;
+import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SpellFeatureReference;
 import de.rpgframework.shadowrun6.SR6Spell;
-import de.rpgframework.shadowrun6.roll20.FVTTSpell;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 /**
  * @author prelle
@@ -15,17 +25,13 @@ public class Converter {
 	
 	private final static Logger logger = System.getLogger(Converter.class.getPackageName());
 
-//	//-------------------------------------------------------------------
-//	public static ItemData<FVTTAdeptPower> convertAdeptPower(AdeptPower item, Locale loc) {
-//		FVTTAdeptPower data = new FVTTAdeptPower();
-//		// Definition fields
-//		data.genesisID   = item.getId();
-//		data.activation	 = item.getActivation().name().toLowerCase();
-//		data.cost        = item.getCostForLevel(1);
-//
-//		return new ItemData<FVTTAdeptPower>(item.getName(loc), "adeptpower", data);
-//	}
-//
+	//-------------------------------------------------------------------
+	public static void convertAdeptPower(AdeptPower item, Locale loc, Row row) {
+		int x = 4;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getActivation().name().toLowerCase());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1));
+	}
+
 //	//-------------------------------------------------------------------
 //	public static ItemData<FVTTCritterPower> convert(CritterPower item, Locale loc) {
 //		FVTTCritterPower data = new FVTTCritterPower();
@@ -48,37 +54,49 @@ public class Converter {
 //
 //		return ret;
 //	}
-//
-//	//-------------------------------------------------------------------
-//	public static ItemData<FVTTGear> convert(ItemTemplate tmp, Locale loc) {
-//		FVTTGear data = new FVTTGear();
-//		if (ItemType.isWeapon(tmp.getItemType()))
-//			data = new FVTTWeapon();
-//		// Definition fields
-//		data.genesisID  = tmp.getId();
-//		if (tmp.getItemType()!=null)
-//			data.type       = tmp.getItemType().name();
-//		if (tmp.getItemSubtype()!=null)
-//			data.subtype    = tmp.getItemSubtype().name();
-//		if (tmp.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-//			data.availDef   = tmp.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue();
-//		if (tmp.getAttribute(SR6ItemAttribute.SKILL)!=null)
-//			data.skill      = tmp.getAttribute(SR6ItemAttribute.SKILL).getRawValue();
-//		if (tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)!=null)
-//			data.skillSpec  = tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION).getRawValue();
-//
-//		if ((data instanceof FVTTWeapon) && tmp.getAttribute(SR6ItemAttribute.DAMAGE)!=null) {
-//			((FVTTWeapon)data).dmgDef     = tmp.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue();
-//			try {
-//				((FVTTWeapon)data).dmg        = ((Damage)tmp.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getModifiedValue();
-//			} catch (IllegalStateException e) {
-//				logger.log(Level.ERROR, "Error converting {}: {}", tmp.getId(), e.toString());
-//			}
-//		}
-//
-//		return new ItemData<FVTTGear>(tmp.getName(loc), "gear", data);
-//	}
-//
+
+	//-------------------------------------------------------------------
+	public static void convertWeapon(ItemTemplate item, Locale loc, Row row) {
+		int x = 4;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
+		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+		else x++;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+		if (item.getAttribute(SR6ItemAttribute.SKILL)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.SKILL).getRawValue());
+		else x++;
+		if (item.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION).getRawValue());
+		else x++;
+		if (item.getAttribute(SR6ItemAttribute.DAMAGE)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue());
+		else x++;
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertVehicle(ItemTemplate item, Locale loc, Row row) {
+		int x = 4;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
+		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+		else x++;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.HANDLING).getRawValue());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.ACCELERATION).getRawValue());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL).getRawValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.TOPSPEED).getRawValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.BODY).getRawValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.ARMOR).getRawValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PILOT).getRawValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.SENSORS).getRawValue());
+		if (item.getAttribute(SR6ItemAttribute.SEATS)!=null)
+			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.SEATS).getRawValue());
+		else x++;
+	}
+
 //	//-------------------------------------------------------------------
 //	public static ItemData<FVTTGear> convert(CarriedItem<ItemTemplate> val, Locale loc) {
 //		ItemData<FVTTGear> ret = convert(val.getModifyable(), loc);
@@ -99,19 +117,16 @@ public class Converter {
 ////
 ////		return ret;
 ////	}
-//
-//	//-------------------------------------------------------------------
-//	public static ItemData<FVTTQuality> convertQuality(Quality item, Locale loc) {
-//		FVTTQuality fVal = new FVTTQuality();
-//		// Definition fields
-//		fVal.genesisID = item.getId();
-//		fVal.category  = item.getType().name();
-//		fVal.level     = item.getMax()>0;
-//		fVal.positive  = item.isPositive();
-//
-//		return new ItemData<FVTTQuality>(item.getName(loc), "quality", fVal);
-//	}
-//
+
+	//-------------------------------------------------------------------
+	public static void convertQuality(Quality item, Locale loc, Row row) {
+		int x=4;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getType().name().toLowerCase());
+		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.isPositive());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getMax());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getKarmaCost());
+	}
+
 //	//-------------------------------------------------------------------
 //	public static ItemData<FVTTQuality> convertQuality(QualityValue val, Locale loc) {
 //		ItemData<FVTTQuality> ret = convertQuality(val.getModifyable(), loc);
@@ -124,27 +139,29 @@ public class Converter {
 //	}
 
 	//-------------------------------------------------------------------
-	public static FVTTSpell convertSpell(SR6Spell item, Locale loc) {
-		FVTTSpell spell = new FVTTSpell();
-
-		spell.genesisID = item.getId();
-		spell.category  = item.getCategory().name().toLowerCase();
-		spell.duration  = item.getDuration().name().toLowerCase();
-		spell.drain     = item.getDrain();
-		spell.range     = item.getRange().name().toLowerCase();
-		spell.type      = item.getType().name().toLowerCase();
+	public static void convertSpell(SR6Spell item, Locale loc, Row row) {
+		int x=4;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getCategory().name().toLowerCase());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().name().toLowerCase());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getDrain());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getRange().name().toLowerCase());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getType().name().toLowerCase());
 		if (item.getDamage()!=null)
-			spell.damage    = item.getDamage().name().toLowerCase();
-		spell.isOpposed = item.isOpposed();
-		spell.withEssence = item.isEssence();
-		spell.wild      = item.isWild();
-		for (SpellFeatureReference ref : item.getFeatures()) {
-			switch (ref.getFeature().getId()) {
-			case "sense_multi": spell.multiSense=true; break; 
-			}
-		}
+			row.createCell(x++, CellType.STRING).setCellValue(item.getDamage().name().toLowerCase());
+		else
+			x++;
+//		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.isOpposed());
+//		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.isEssence());
+//		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.isWild());
 
-		return spell;
+		List<String> feats = new ArrayList();
+		for (SpellFeatureReference ref : item.getFeatures()) {
+			feats.add(ref.getFeature().getId());
+		}
+		row.createCell(x++, CellType.STRING).setCellValue(String.join(", ", feats));
+
+		// Description
+		
 	}
 
 //	//-------------------------------------------------------------------

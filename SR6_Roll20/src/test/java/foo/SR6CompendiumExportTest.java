@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
 
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,7 +22,6 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import de.rpgframework.eden.roll20.sr6.Compendium;
 import de.rpgframework.eden.roll20.sr6.Shadowrun6CompendiumFactory;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.PageReference;
@@ -33,6 +34,8 @@ import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
  */
 public class SR6CompendiumExportTest {
 
+	private static Workbook workbook;
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @throws java.lang.Exception
@@ -42,6 +45,10 @@ public class SR6CompendiumExportTest {
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
+		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(2));
+		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(1));
+		
+		workbook = new XSSFWorkbook();
 	}
 
 	//-------------------------------------------------------------------
@@ -66,24 +73,15 @@ public class SR6CompendiumExportTest {
 		Function<Collection<PageReference>,Locale[]> callback = (references) -> new Locale[] {Locale.ENGLISH};
 		
 		List<DataSet> sets = Shadowrun6Core.getDataSets();
-		sets.remove(1);
-		Gson gson = (new GsonBuilder()).setPrettyPrinting().create();
-//		System.out.println(gson.toJson(modShallow));
-		Compendium modDeep = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, false);
+//		sets.remove(1);
+		Workbook modDeep = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, false);
 		assertNotNull(modDeep);
-		byte[] data = modDeep.fos.toByteArray();
-		assertNotNull(data);
-		assertTrue(data.length>0);
-		byte[] zip = modDeep.fos.toByteArray();
-		File file = new File("/tmp/shadowrun6.zip");
-		if (file.exists())
-			file.delete();
+		File file = new File("compendium.xlsx");
 		FileOutputStream fos = new FileOutputStream(file);
-		fos.write(zip);
+		modDeep.write(fos);
 		fos.close();
 		System.out.println("Written to "+file.getAbsolutePath());
-		System.exit(1);
-		assertEquals(2,data.length);
+		//System.exit(1);
 	}
 
 //	//-------------------------------------------------------------------
