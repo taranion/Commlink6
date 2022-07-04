@@ -94,14 +94,14 @@
    		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="1"/>
    		<attrdef id="PRICE" value="1000"/>
    		<attrdef id="AVAILABILITY" value="2"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    	<variant id="bodyware">
    		<usage mode="IMPLANTED" />
    		<attrdef id="PRICE" value="1000"/>
    		<attrdef id="AVAILABILITY" value="2"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    	<modifications>
    		<checkmod type="SKILL" ref="perception" value="1" what="EDGE" cond="true"/>
@@ -114,7 +114,7 @@
    		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="1"/>
    		<attrdef id="PRICE" value="800"/>
    		<attrdef id="AVAILABILITY" value="2"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    	<variant id="bodyware">
    		<usage mode="IMPLANTED" />
@@ -122,7 +122,7 @@
    		<attrdef id="PRICE" value="1000"/>
    		<attrdef id="AVAILABILITY" value="2"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    </item>
    <item avail="2" price="500" id="low_light_vision" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
@@ -131,14 +131,14 @@
    	<variant id="cybereye">
    		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="1500"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    	<variant id="bodyware">
    		<usage mode="IMPLANTED" />
   		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="1500"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    </item>
    <item avail="2" price="2000" id="smartlink"  type="ACCESSORY" subtype="VISION_ENHANCEMENT">
@@ -148,14 +148,14 @@
    		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="3"/>
     		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3L"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    	<variant id="bodyware">
    		<usage mode="IMPLANTED" />
    		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3L"/>
    		<attrdef id="ESSENCECOST" value="0.2"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    </item>
    
@@ -166,14 +166,14 @@
    		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="1"/>
    		<attrdef id="PRICE" value="1500"/>
    		<attrdef id="AVAILABILITY" value="2"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    	<variant id="bodyware">
    		<usage mode="IMPLANTED" />
    		<attrdef id="PRICE" value="1500"/>
    		<attrdef id="AVAILABILITY" value="2"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    </item>
    <item avail="1" price="300" id="ultrasound_link" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
@@ -187,14 +187,14 @@
    		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    	<variant id="bodyware">
    		<usage mode="IMPLANTED" />
    		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    </item>
    <item avail="1" price="250" id="vision_magnification" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
@@ -204,14 +204,14 @@
    		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="2000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    	<variant id="bodyware">
    		<usage mode="IMPLANTED" />
    		<attrdef id="PRICE" value="2000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
       <modifications>
          <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="0,0,2,2,2"/>
@@ -270,13 +270,13 @@
    	<variant id="cyberear">
 		  	<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="4000"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    	<variant id="bodyware">
 		  	<usage mode="IMPLANTED" />
    		<attrdef id="PRICE" value="400"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    </item>
    <item avail="3" price="250" id="select_sound_filter" type="ACCESSORY" subtype="AUDIO_ENHANCEMENT">
@@ -293,7 +293,7 @@
 			</choices>
    		<attrdef id="PRICE" value="$RATING*3500"/>
    		<attrdef id="AVAILABILITY" value="4"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    	<variant id="bodyware">
    		<usage mode="IMPLANTED"/>
@@ -303,7 +303,7 @@
    		<attrdef id="PRICE" value="$RATING*3500"/>
    		<attrdef id="AVAILABILITY" value="4"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    </item>
    <item avail="2" price="1000" id="spatial_recognizer" subtype="AUDIO_ENHANCEMENT" type="ACCESSORY">
@@ -312,14 +312,14 @@
    		<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    	<variant id="bodyware">
    		<usage mode="IMPLANTED"/>
    		<attrdef id="PRICE" value="400"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
-   		<flag>AUGMENTATION</flag>
+   		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
    </item>
 

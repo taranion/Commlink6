@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.GearTool;
@@ -193,6 +194,15 @@ public class LoadSR6DataTest {
 		assertEquals(259000, (Integer)item.getAttribute(SR6ItemAttribute.PRICE).getValue(), 0);
 		assertEquals(18, (Integer)item.getAttribute(SR6ItemAttribute.BODY).getValue(), 0);
 		assertEquals(4, ((OnRoadOffRoadValue)item.getAttribute(SR6ItemAttribute.HANDLING).getValue()).getOnRoad(), 0);
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void augmentationItem() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner");
+		assertNotNull(item);
+		
+		CarriedItem<ItemTemplate> carried = GearTool.buildItem(item, null, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "BETA")).get();
 	}
 
 }

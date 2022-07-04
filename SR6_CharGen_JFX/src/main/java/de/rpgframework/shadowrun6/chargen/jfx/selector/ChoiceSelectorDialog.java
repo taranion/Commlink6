@@ -41,6 +41,7 @@ import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -222,6 +223,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				ret.add( handleITEMATTRIBUTE(item, choice));
 			}
 			break;
+		case AUGMENTATION_QUALITY:
+			ret.add( handleAUGMENTATIONQUALITY(item, choice));
+			break;
 		case MENTOR_SPIRIT:
 			ret.add( handleMENTOR_SPIRIT(item, choice) );
 			break;
@@ -350,6 +354,38 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n));
+			updateButtons(); 
+		 });
+		content.getChildren().add(cbSub);
+		return cbSub;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleAUGMENTATIONQUALITY(ComplexDataItem item, Choice choice) {
+		ChoiceBox<AugmentationQuality> cbSub = new ChoiceBox<>();
+		cbSub.setConverter(new StringConverter<AugmentationQuality>() {
+			public AugmentationQuality fromString(String value) { return null;}
+			public String toString(AugmentationQuality value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			cbSub.getItems().addAll(
+					List.of(AugmentationQuality.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
+					);			
+		} else {
+			cbSub.getItems().addAll(AugmentationQuality.values());
+		}
+		Collections.sort(cbSub.getItems(), new Comparator<AugmentationQuality>() {
+			public int compare(AugmentationQuality o1, AugmentationQuality o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.name()));
 			updateButtons(); 
 		 });
 		content.getChildren().add(cbSub);

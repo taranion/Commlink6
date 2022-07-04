@@ -80,7 +80,7 @@
 		<variant id="cyberimplantweapon">
 			<usage mode="EMBEDDED" slot="IMPLANTWEAPON_ACCESSORY" />
 			<attrdef id="PRICE" value="1000"/>
-	 		<flag>AUGMENTATION</flag>
+	 		<flags><flag>AUGMENTATION</flag></flags>
 	 		<modifications>
 	 			<valmod type="ITEM_ATTRIBUTE" ref="ESSENCECOST" value="0.1"/>
 	 			<valmod type="ITEM_ATTRIBUTE" ref="SIZE" value="1"/>
@@ -118,7 +118,7 @@
 		<variant id="cyberimplantweapon">
 			<usage mode="EMBEDDED" slot="IMPLANTWEAPON_ACCESSORY" />
 			<attrdef id="PRICE" value="1000"/>
-	 		<flag>AUGMENTATION</flag>
+	 		<flags><flag>AUGMENTATION</flag></flags>
 	 		<modifications>
 	 			<valmod type="ITEM_ATTRIBUTE" ref="ESSENCECOST" value="0.1"/>
 	 			<valmod type="ITEM_ATTRIBUTE" ref="SIZE" value="2"/>

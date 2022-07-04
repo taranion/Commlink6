@@ -36,6 +36,8 @@ public class InstallCompendium {
     	Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
+		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(2) );
+		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(1) );
 
          Path target = Paths.get("/home/prelle/.local/share/FoundryVTT/Data/modules/shadowrun6-data");
 
@@ -52,7 +54,6 @@ public class InstallCompendium {
 
     public static void unzipFolder(Path target) throws IOException {
 		List<DataSet> sets = Shadowrun6Core.getDataSets();
-		sets.remove(1);
 		Function<Collection<PageReference>,Locale[]> callback = (references) -> new Locale[] {Locale.ENGLISH};
 		Module modDeep = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, false);
 		assertNotNull(modDeep);

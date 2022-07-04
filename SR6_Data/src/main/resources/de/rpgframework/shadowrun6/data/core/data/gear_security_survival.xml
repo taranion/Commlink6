@@ -71,7 +71,7 @@
      		<usage mode="IMPLANTED" value="0.5" />
       	<usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
       	<attrdef id="PRICE" value="3000"/>
- 			<flag>AUGMENTATION</flag>
+ 			<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    </item>
    <item avail="2" price="50"   id="microwire"         subtype="GRAPPLE_GUN" type="SURVIVAL"/>

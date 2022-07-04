@@ -28,6 +28,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.Spirit;
 import de.rpgframework.shadowrun.Sprite;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.DataStructure;
@@ -57,6 +58,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ALLERGY_ALLERGEN("Allergen"),
 	ALLERGY_SEVERITY("Severity"),
 	ATTRIBUTE(new AttributeConverter()),
+	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
 	COMPLEX_FORM(ComplexForm.class),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
@@ -149,6 +151,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public static <T> T resolve(ShadowrunReference type, String key) {
+		if (key==null) throw new NullPointerException(type+" not set");
 		if (type.typeClass!=null) {
 			return (T) Shadowrun6Core.getItem(type.typeClass, key);
 		} else if (type.enumType!=null) {
@@ -163,7 +166,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-1:");
 				ivte.printStackTrace();
 			} catch (Exception e) {
-				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-1:");
+				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-2:");
 				e.printStackTrace();
 			}
 		} else if (type.resolver!=null) {
@@ -178,7 +181,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 			} catch (ReferenceException e) {
 				throw new ReferenceException(type, key);
 			} catch (Exception e) {
-				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-2:");
+				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-3:");
 				e.printStackTrace();
 			}
 		}

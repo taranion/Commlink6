@@ -52,6 +52,7 @@ public class ItemUtilJFX {
 
 	//-------------------------------------------------------------------
 	public static Node getItemInfoNode(CarriedItem<ItemTemplate> item, SR6CharacterController ctrl) {
+		logger.log(Level.WARNING, "create InfoNode for "+item);
 		Shadowrun6Character model = ctrl.getModel();
 
 		VBox box = new VBox(10);
@@ -666,6 +667,7 @@ public class ItemUtilJFX {
 		spacing.setMaxWidth(Double.MAX_VALUE);
 		
 		HBox line = new HBox(5, heaQual, lblQual, spacing, heaEss, lblEss);
+		line.setStyle("-fx-max-width: 18em");
 		HBox.setHgrow(spacing, Priority.ALWAYS);
 		
 		return line;

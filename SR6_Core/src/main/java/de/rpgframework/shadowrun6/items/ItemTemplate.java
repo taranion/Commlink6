@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.items;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
@@ -10,6 +11,7 @@ import org.prelle.simplepersist.ElementList;
 import org.prelle.simplepersist.ElementListUnion;
 
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
@@ -21,6 +23,7 @@ import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -28,6 +31,10 @@ import de.rpgframework.shadowrun.persist.AvailabilityConverter;
  */
 @DataItemTypeKey(id = "item")
 public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6PieceOfGearVariant,SR6AlternateUsage> {
+	
+	public static String FLAG_AUGMENTATION = "AUGMENTATION";
+	public static UUID CHOICE_AUGMENTATION_QUALITY = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170c");
+	
 
 	@Attribute(name="avail",required=false)
 	@AttribConvert(AvailabilityConverter.class)
@@ -132,6 +139,12 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				}
 				
 			}
+		}
+
+		// If it has an AUGMENTATION flag, add that decision
+		if (flags.contains(ItemTemplate.FLAG_AUGMENTATION) && this.getChoice(ItemTemplate.CHOICE_AUGMENTATION_QUALITY)==null) {
+			Choice choice = new Choice(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, ShadowrunReference.AUGMENTATION_QUALITY);
+			choices.add(choice);
 		}
 		
 		super.validate();

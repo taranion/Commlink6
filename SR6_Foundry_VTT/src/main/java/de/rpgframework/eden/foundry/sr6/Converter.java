@@ -2,6 +2,7 @@ package de.rpgframework.eden.foundry.sr6;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.List;
 import java.util.Locale;
 
 import de.rpgframework.foundry.ActorData;
@@ -17,6 +18,7 @@ import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeatureReference;
 import de.rpgframework.shadowrun.SpellValue;
+import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -92,7 +94,21 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static ItemData<FVTTGear> convert(ItemTemplate tmp, Locale loc) {
+	private static FVTTWeapon.FireMode toVTTMode(List<FireMode> modes) {
+		FVTTWeapon.FireMode ret = new FVTTWeapon.FireMode();
+		for (FireMode tmp : modes) {
+			switch (tmp) {
+			case SINGLE_SHOT: ret.SS = true;
+			case BURST_FIRE : ret.BF = true;
+			case FULL_AUTO  : ret.FA = true;
+			case SEMI_AUTOMATIC: ret.SA = true;
+			}
+		}
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public static ItemData<FVTTGear> convertGear(ItemTemplate tmp, Locale loc) {
 		FVTTGear data = new FVTTGear();
 		if (ItemType.isWeapon(tmp.getItemType()))
 			data = new FVTTWeapon();
@@ -110,7 +126,14 @@ public class Converter {
 			data.skillSpec  = tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION).getRawValue();
 
 		if ((data instanceof FVTTWeapon) && tmp.getAttribute(SR6ItemAttribute.DAMAGE)!=null) {
-			((FVTTWeapon)data).dmgDef     = tmp.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue();
+			((FVTTWeapon)data).dmgDef       = tmp.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue();
+			try {
+				((FVTTWeapon)data).attackRating = tmp.getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue();
+			} catch (IllegalStateException e) {
+				logger.log(Level.ERROR, "Error converting {}: {}", tmp.getId(), e.toString());
+			}
+			if (tmp.getAttribute(SR6ItemAttribute.FIREMODES)!=null)
+				((FVTTWeapon)data).modes        = toVTTMode(tmp.getAttribute(SR6ItemAttribute.FIREMODES).getValue());
 			try {
 				((FVTTWeapon)data).dmg        = ((Damage)tmp.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getModifiedValue();
 			} catch (IllegalStateException e) {
@@ -122,8 +145,8 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static ItemData<FVTTGear> convert(CarriedItem<ItemTemplate> val, Locale loc) {
-		ItemData<FVTTGear> ret = convert(val.getModifyable(), loc);
+	public static ItemData<FVTTGear> convertGear(CarriedItem<ItemTemplate> val, Locale loc) {
+		ItemData<FVTTGear> ret = convertGear(val.getModifyable(), loc);
 		FVTTGear fVal = ret.getData();
 		// Value fields
 //		fVal.customName = val.get;
@@ -299,7 +322,7 @@ public class Converter {
 		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
 		data.getGear().forEach(tmp -> {
-			foundry.addItem(convert(tmp,loc));});
+			foundry.addItem(convertGear(tmp,loc));});
 
 		return foundry;
 	}

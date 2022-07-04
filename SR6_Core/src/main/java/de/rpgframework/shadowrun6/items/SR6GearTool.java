@@ -1,7 +1,6 @@
 package de.rpgframework.shadowrun6.items;
 
 import java.lang.System.Logger;
-import java.util.Arrays;
 
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.GearTool;
@@ -20,6 +19,7 @@ public class SR6GearTool extends GearTool {
 	};
 
 	public static CarriedItemProcessor[] SR6_PHASE2_STEPS = new CarriedItemProcessor[] {
+			new HandleAugmentationGradeStep(),
 			new AddUpPricesStep()
 	};
 

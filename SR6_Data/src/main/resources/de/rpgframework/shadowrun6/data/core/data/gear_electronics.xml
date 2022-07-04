@@ -218,7 +218,7 @@
 	      <usage mode="IMPLANTED" value="0.2"/>
 			<attrdef id="PRICE" value="4000" />
 			<attrdef id="AVAILABILITY" value="4L" />
- 			<flag>AUGMENTATION</flag>   	
+ 			<flags><flag>AUGMENTATION</flag></flags>  	
    	</variant>
    </item>
    <item avail="1" price="200"  id="trid_projector" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">

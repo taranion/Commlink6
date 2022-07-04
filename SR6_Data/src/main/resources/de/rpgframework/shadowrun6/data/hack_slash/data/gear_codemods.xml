@@ -4,7 +4,7 @@
 		<choices>
 			<choice uuid="bbd33968-1962-416e-9b50-a77f262ad56f" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" />
 		</choices>
-		<flag>CODEMOD</flag>
+		<flags><flag>CODEMOD</flag></flags>
 		<variant id="mental">
 			<choices>
 				<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ATTRIBUTE" options="MENTAL" />
@@ -35,7 +35,7 @@
 			<choice uuid="bbd33968-1962-416e-9b50-a77f262ad56f" type="ITEM_ATTRIBUTE" ref="RATING"
 				options="1,2,3,4,5,6,7,8" />
 		</choices>
-		<flag>CODEMOD</flag>
+		<flags><flag>CODEMOD</flag></flags>
 		<variant id="mental">
 			<choices>
 				<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ATTRIBUTE" options="MENTAL" />
@@ -66,7 +66,7 @@
 		</choices>
 		<attrdef id="PRICE" value="$RATING*40000" />
 		<attrdef id="ESSENCECOST" value="$RATING*0.5" />
-		<flag>CODEMOD</flag>
+		<flags><flag>CODEMOD</flag></flags>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="INITIATIVE_MATRIX" value="$RATING" />
 		</modifications>

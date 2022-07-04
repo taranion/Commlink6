@@ -168,6 +168,7 @@ public class Shadowrun6CompendiumFactory {
 		createQualities  (module, zipOut, sets, localeCallback, shallow);
 		createSpells     (module, zipOut, localeCallback, shallow);
 		createWeapons    (module, zipOut, localeCallback, shallow);
+		createArmor      (module, zipOut, localeCallback, shallow);
 		createVehicle    (module, zipOut, localeCallback, shallow);
 		createGrunts     (module, zipOut, localeCallback, shallow);
 		createCritter    (module, zipOut, localeCallback, shallow);
@@ -283,7 +284,7 @@ public class Shadowrun6CompendiumFactory {
 		
 		StringBuffer buf = new StringBuffer();
 		Gson gson = new GsonBuilder().create();
-		for (ASpell spell : Shadowrun6Core.getItemList(ASpell.class)) {
+		for (SR6Spell spell : Shadowrun6Core.getItemList(SR6Spell.class)) {
 			Locale[] locales = localeCallback.apply(spell.getPageReferences());
 //			logger.log(Level.INFO, "Locales = "+Arrays.toString(locales));
 			for (Locale loc : locales) {
@@ -374,7 +375,7 @@ public class Shadowrun6CompendiumFactory {
 				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".src", createSourceText(tmp, loc));
 			}
 			
-			ItemData<FVTTGear> entry = Converter.convert(tmp, locales[0]);
+			ItemData<FVTTGear> entry = Converter.convertGear(tmp, locales[0]);
 //			entry._id  = tmp.getId();
 			entry._id  = createRandomID();
 			
@@ -384,6 +385,46 @@ public class Shadowrun6CompendiumFactory {
 		
 		
     	ZipEntry zipEntry = new ZipEntry("packs/weapons.db");
+    	zipOut.putNextEntry(zipEntry);
+    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createArmor(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
+		Pack pack = new Pack();
+		pack.setName("shadowrun6-armor");
+		pack.setLabel("Armor & Clothing");
+		pack.setEntity("Item");
+		pack.setPath("packs/armor.db");
+		pack.setSystem("shadowrun6-eden");
+		module.getPacks().add(pack);
+		
+		if (shallow)
+			return;
+		
+		StringBuffer buf = new StringBuffer();
+		Gson gson = new GsonBuilder().create();
+		for (ItemTemplate tmp : Shadowrun6Core.getItemList(ItemTemplate.class)) {
+			if (tmp.getItemType()!=ItemType.ARMOR)
+					continue;
+			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
+			for (Locale loc : locales) {
+				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".desc", tmp.getDescription(loc));
+				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".name", tmp.getName(loc));
+				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".src", createSourceText(tmp, loc));
+			}
+			
+			ItemData<FVTTGear> entry = Converter.convertGear(tmp, locales[0]);
+//			entry._id  = tmp.getId();
+			entry._id  = createRandomID();
+			
+			buf.append(gson.toJson(entry));
+			buf.append('\n');
+		}
+		
+		
+    	ZipEntry zipEntry = new ZipEntry("packs/armor.db");
     	zipOut.putNextEntry(zipEntry);
     	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
 		return;
