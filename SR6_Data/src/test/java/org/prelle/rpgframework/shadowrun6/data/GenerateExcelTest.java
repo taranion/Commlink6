@@ -95,8 +95,10 @@ public class GenerateExcelTest {
 	private void createCell(Row row, ItemTemplate item, int col, SR6ItemAttribute attr, StringValueConverter<?> conv) {
 		Cell cell = row.createCell(col, CellType.STRING);
 		ItemAttributeDefinition dmgDef = item.getAttribute(attr);
-		if (dmgDef==null)
-			throw new NullPointerException("No damage definition for "+item);
+		if (dmgDef==null) {
+			return ;
+			//throw new NullPointerException("No "+attr+" definition for "+item);
+		}
 		Formula form = dmgDef.getFormula();
 		if (form.isResolved()) {
 			if (form.isObject()) {

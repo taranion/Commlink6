@@ -14,6 +14,7 @@ import org.junit.Test;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -54,7 +55,7 @@ public class EquipmentTests {
 		ItemTemplate ares = Shadowrun6Core.getItem(ItemTemplate.class, "ares_light_fire_70");
 		assertNotNull(ares);
 		
-		CarriedItem<ItemTemplate> ref = new CarriedItem<ItemTemplate>(ares, null);
+		CarriedItem<ItemTemplate> ref = new CarriedItem<ItemTemplate>(ares, null, CarryMode.CARRIED);
 		List<ItemTemplate> list = ItemUtil.getEmbeddableIn(ref, ItemHook.BARREL);
 		System.out.println("#########################\nEmbeddable in BARREL of "+ares+" are:");
 		for (ItemTemplate tmp : list) {
@@ -66,7 +67,7 @@ public class EquipmentTests {
 		ares = Shadowrun6Core.getItem(ItemTemplate.class, "ares_alpha");
 		assertNotNull(ares);
 		
-		ref = new CarriedItem<ItemTemplate>(ares, null);
+		ref = new CarriedItem<ItemTemplate>(ares, null, CarryMode.EMBEDDED);
 		list = ItemUtil.getEmbeddableIn(ref, ItemHook.BARREL);
 		System.out.println("#########################\nEmbeddable in BARREL of "+ares+" are:");
 		for (ItemTemplate tmp : list) {
@@ -85,11 +86,11 @@ public class EquipmentTests {
 		ItemTemplate tempImage = Shadowrun6Core.getItem(ItemTemplate.class, "image_link");
 		
 		Decision dec = new Decision(tempContacts.getChoices().get(0).getUUID(), "3");
-		CarriedItem<ItemTemplate> ref = new CarriedItem<ItemTemplate>(tempContacts, null);
+		CarriedItem<ItemTemplate> ref = new CarriedItem<ItemTemplate>(tempContacts, null, CarryMode.CARRIED);
 		ref.addDecision(dec);
-		ref.addAccessory(new CarriedItem<ItemTemplate>(tempLowLV, null), ItemHook.OPTICAL);
-		ref.addAccessory(new CarriedItem<ItemTemplate>(tempFlare, null), ItemHook.OPTICAL);
-		ref.addAccessory(new CarriedItem<ItemTemplate>(tempImage, null), ItemHook.OPTICAL);
+		ref.addAccessory(new CarriedItem<ItemTemplate>(tempLowLV, null, CarryMode.EMBEDDED), ItemHook.OPTICAL);
+		ref.addAccessory(new CarriedItem<ItemTemplate>(tempFlare, null, CarryMode.EMBEDDED), ItemHook.OPTICAL);
+		ref.addAccessory(new CarriedItem<ItemTemplate>(tempImage, null, CarryMode.EMBEDDED), ItemHook.OPTICAL);
 		
 		OperationResult<List<Modification>> mods = SR6GearTool.recalculate("", null, ref);
 		assertTrue(mods.wasSuccessful());
@@ -110,20 +111,19 @@ public class EquipmentTests {
 	 */
 	@Test
 	public void test03() {
-		CarriedItem<ItemTemplate> ref = GearTool.buildItem(Shadowrun6Core.getItem(ItemTemplate.class, "datajack"), model).get();
-		System.out.println("DUMP1\n"+ref.dump());
-		
+		CarriedItem<ItemTemplate> ref = GearTool.buildItem(Shadowrun6Core.getItem(ItemTemplate.class,"datajack"), CarryMode.IMPLANTED, model, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")).get();
+//		System.out.println("DUMP1\n"+ref.dump());
 		
 		OperationResult<List<Modification>> mods = SR6GearTool.recalculate("", null, ref);
 		assertTrue(mods.wasSuccessful());
 		List<Modification> list = mods.get();
-		for (Modification val : list) {
-			System.out.println("  = "+val);
-		}
-		
-		System.out.println("DUMP2\n"+ref.dump());
+//		for (Modification val : list) {
+//			System.out.println("  = "+val);
+//		}
+//		
+//		System.out.println("DUMP2\n"+ref.dump());
 		
 		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
-		assertEquals(1075, attr.getModifiedValue());
+		assertEquals(1000, attr.getModifiedValue());
 	}
 }

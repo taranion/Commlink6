@@ -32,8 +32,11 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 @DataItemTypeKey(id = "item")
 public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6PieceOfGearVariant,SR6AlternateUsage> {
 	
-	public static String FLAG_AUGMENTATION = "AUGMENTATION";
-	public static UUID CHOICE_AUGMENTATION_QUALITY = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170c");
+	public final static String FLAG_AUGMENTATION = "AUGMENTATION";
+	public final static UUID UUID_AUGMENTATION_QUALITY = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170c");
+	public final static Choice CHOICE_AUGMENTATION_QUALITY = new Choice(
+			ItemTemplate.UUID_AUGMENTATION_QUALITY, 
+			ShadowrunReference.AUGMENTATION_QUALITY); 
 	
 
 	@Attribute(name="avail",required=false)
@@ -59,6 +62,13 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	public ItemTemplate() {
 		shortcuts = new ArrayList<>();
 	}
+
+//	//-------------------------------------------------------------------
+//	public Choice getChoice(UUID uuid) {
+//		if (UUID_AUGMENTATION_QUALITY.equals(uuid)) 
+//			return CHOICE_AUGMENTATION_QUALITY;
+//		return super.getChoice(uuid);
+//	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -142,9 +152,15 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		}
 
 		// If it has an AUGMENTATION flag, add that decision
-		if (flags.contains(ItemTemplate.FLAG_AUGMENTATION) && this.getChoice(ItemTemplate.CHOICE_AUGMENTATION_QUALITY)==null) {
-			Choice choice = new Choice(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, ShadowrunReference.AUGMENTATION_QUALITY);
-			choices.add(choice);
+		if (flags.contains(ItemTemplate.FLAG_AUGMENTATION) && this.getChoice(ItemTemplate.UUID_AUGMENTATION_QUALITY)==null) {
+			addChoice(CHOICE_AUGMENTATION_QUALITY);
+		}
+		if (variants!=null) {
+			for (SR6PieceOfGearVariant variant : variants) {
+				if (variant.hasFlag(FLAG_AUGMENTATION) && variant.getChoice(UUID_AUGMENTATION_QUALITY)==null) {
+					variant.addChoice(CHOICE_AUGMENTATION_QUALITY);
+				}
+			}
 		}
 		
 		super.validate();

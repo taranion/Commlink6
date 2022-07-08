@@ -15,6 +15,7 @@ import org.junit.Test;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.shadowrun.DamageElement;
@@ -58,7 +59,7 @@ public class SR6CarriedItemTest {
 		ItemTemplate axe = Shadowrun6Core.getItem(ItemTemplate.class, "combat_axe");
 		assertNotNull(axe);
 		
-		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(axe, null);
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(axe, null, CarryMode.CARRIED);
 		SR6GearTool.recalculate("", null, item);
 		assertNotNull(item);
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
@@ -102,7 +103,7 @@ public class SR6CarriedItemTest {
 		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
 		assertNotNull(temp);
 		
-		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null);
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
 		Decision decision = new Decision(UUID.fromString("adeb159c-6ca3-407b-8641-c76f9b29a49c"), "9");
 		item.setDecisions(List.of(decision));
 		SR6GearTool.recalculate("", null, item);
@@ -137,7 +138,7 @@ public class SR6CarriedItemTest {
 		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "defiance_super_shock");
 		assertNotNull(temp);
 		
-		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null);
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
 		SR6GearTool.recalculate("", null, item);
 		assertNotNull(item);
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
@@ -174,7 +175,7 @@ public class SR6CarriedItemTest {
 		assertNotNull(def);
 		assertTrue("BODY should be an integer type",def.isInteger());
 		
-		CarriedItem<ItemTemplate> item = GearTool.buildItem(honda, null).get();
+		CarriedItem<ItemTemplate> item = GearTool.buildItem(honda, CarryMode.CARRIED, null).get();
 		assertNotNull(item);
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
 		assertEquals(2, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());

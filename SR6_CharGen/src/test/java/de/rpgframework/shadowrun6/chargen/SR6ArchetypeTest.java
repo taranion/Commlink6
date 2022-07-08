@@ -20,6 +20,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.Contact;
@@ -714,17 +715,17 @@ public class SR6ArchetypeTest {
 		assertNotNull(poss);
 		assertNotNull("Missing variant not detected" , poss.getMostSevere());
 		assertTrue("Should be marked selectable, although variant not selected" , poss.get());
-		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious");
+		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious", CarryMode.IMPLANTED);
 		assertTrue(poss.toString(), poss.get());
-		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious");
+		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious", CarryMode.IMPLANTED);
 		assertTrue (hand.getError(), hand.wasSuccessful());
 		hand.get().setCustomName("Obvious left hand");
 		OperationResult<CarriedItem<ItemTemplate>> shock = equip.embed(hand.get(), ItemHook.CYBERLIMB_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "shock_limb"), null);
 		assertTrue (shock.getError(), shock.wasSuccessful());
 		shock.get().setCustomName("Shock Hand");
-		OperationResult<CarriedItem<ItemTemplate>> imageLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), "bodyware");
+		OperationResult<CarriedItem<ItemTemplate>> imageLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), "bodyware", CarryMode.IMPLANTED);
 		assertTrue (imageLink.getError(), imageLink.wasSuccessful());
-		OperationResult<CarriedItem<ItemTemplate>> smartLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "smartlink"), "bodyware");
+		OperationResult<CarriedItem<ItemTemplate>> smartLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "smartlink"), "bodyware", CarryMode.IMPLANTED);
 		assertTrue (smartLink.getError(), smartLink.wasSuccessful());
 		
 		//Gear

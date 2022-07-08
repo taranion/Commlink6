@@ -14,7 +14,9 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -33,8 +35,8 @@ public class ProblemItemTest {
 	//-------------------------------------------------------------------
 	@BeforeClass
 	public static void beforeClass() {
-		System.setProperty("logdir", "C:\\Users\\stefa");
-//		System.setProperty("logdir", "/tmp");
+//		System.setProperty("logdir", "C:\\Users\\stefa");
+		System.setProperty("logdir", "/tmp");
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );		
@@ -53,7 +55,7 @@ public class ProblemItemTest {
 		assertEquals("RATING",choice.getTypeReference());
 		
 		// New create an item
-		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, null, new Decision(choice, "7"));
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.CARRIED, null, new Decision(choice, "7"));
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
@@ -77,7 +79,7 @@ public class ProblemItemTest {
 		assertEquals(0, item.getChoices().size());
 		
 		// New create an item
-		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, null);
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.CARRIED, null);
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
@@ -105,7 +107,7 @@ public class ProblemItemTest {
 		assertEquals("RATING",choice.getTypeReference());
 		
 		// New create an item
-		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, null, new Decision(choice, "7"));
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.EMBEDDED, null, new Decision(choice, "7"));
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
@@ -122,7 +124,7 @@ public class ProblemItemTest {
 	public void loadItemWithTables() {
 		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "cyberjack");
 		assertNotNull(item);
-		assertEquals(1, item.getChoices().size());
+		assertEquals(2, item.getChoices().size());
 		Choice choice = item.getChoices().get(0);
 		assertNotNull(choice);
 		
@@ -130,7 +132,7 @@ public class ProblemItemTest {
 		assertEquals("RATING",choice.getTypeReference());
 		
 		// New create an item
-		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, null, new Decision(choice, "4"));
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.IMPLANTED, null, new Decision(choice, "4"), new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
 		assertTrue(result.isPresent());
 		CarriedItem<ItemTemplate> carried = result.get();
 		assertNotNull("CarriedItem not created",carried);
@@ -142,6 +144,33 @@ public class ProblemItemTest {
 		assertEquals(95000, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		assertEquals(new Availability(4, Legality.RESTRICTED, false), carried.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue());
 
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadImplantedWithEssence() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "datalock");
+		assertNotNull(item);
+		assertEquals(2, item.getChoices().size());
+
+		Choice choice = item.getChoices().get(0);
+		assertNotNull(choice);
+		assertEquals(ShadowrunReference.ITEM_ATTRIBUTE,choice.getChooseFrom());
+		assertEquals("RATING",choice.getTypeReference());
+
+		Choice choice2 = item.getChoices().get(1);
+		assertNotNull(choice2);
+		assertEquals(ShadowrunReference.AUGMENTATION_QUALITY,choice2.getChooseFrom());
+		
+		// New create an item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.IMPLANTED, null, new Decision(choice, "4"), new Decision(choice2, "BETA"));
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+		
+		assertEquals(4, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
+		assertEquals(AugmentationQuality.BETA, carried.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue());
+		assertEquals(0.07f, carried.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue(), 0.0);
 	}
 
 }

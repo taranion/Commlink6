@@ -79,8 +79,8 @@ public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	public void validate() {
 		super.validate();
 		// If it has an AUGMENTATION flag, add that decision
-		if (flags.contains(ItemTemplate.FLAG_AUGMENTATION) && this.getChoice(ItemTemplate.CHOICE_AUGMENTATION_QUALITY)==null) {
-			Choice choice = new Choice(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, ShadowrunReference.AUGMENTATION_QUALITY);
+		if (flags.contains(ItemTemplate.FLAG_AUGMENTATION) && this.getChoice(ItemTemplate.UUID_AUGMENTATION_QUALITY)==null) {
+			Choice choice = new Choice(ItemTemplate.UUID_AUGMENTATION_QUALITY, ShadowrunReference.AUGMENTATION_QUALITY);
 //			choice.setChoiceOptions("STANDARD,ALPHA,BETA,DELTA,USED");
 			choices.add(choice);
 		}

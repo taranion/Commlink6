@@ -27,6 +27,7 @@ import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
@@ -505,7 +506,8 @@ public class Shadowrun6Tools {
 				logger.log(Level.WARNING, "ToDo: check unresolved requirement "+req.getKey()+":"+tmp.getFormula()+" for "+requiredFor.getClass());
 				if (requiredFor.getClass()==ItemTemplate.class) {
 					logger.log(Level.WARNING, "Special handling for ItemTemplates");
-					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, model, decisions).get();
+					CarryMode mode = ((ItemTemplate) requiredFor).getUsages().get(0).getMode();
+					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, mode, model, decisions).get();
 					VariableResolver resolver = new VariableResolver(item, model);
 					logger.log(Level.WARNING, "ToDo: Resolve "+tmp.getFormula());
 					SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf( ((FormulaImpl)tmp.getFormula()).getAsString().substring(1));

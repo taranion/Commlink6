@@ -4,6 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
@@ -18,10 +19,12 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.OperationMode;
+import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.items.Availability;
@@ -31,9 +34,15 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemHook;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
+import de.rpgframework.shadowrun6.items.SR6AlternateUsage;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
+import de.rpgframework.shadowrun6.items.SR6UsageMode;
 import de.rpgframework.shadowrun6.items.WeaponData;
 
 /**
@@ -77,9 +86,22 @@ public class LoadSR6DataTest {
 //		ItemTemplate bow = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
 //		assertNotNull(bow);
 		
-		ItemTemplate riot = Shadowrun6Core.getItem(ItemTemplate.class, "riot_shield");
-		assertNotNull(riot);
-		assertEquals(1, riot.getAttacks().size());
+//		ItemTemplate riot = Shadowrun6Core.getItem(ItemTemplate.class, "riot_shield");
+//		assertNotNull(riot);
+//		assertEquals(1, riot.getAttacks().size());
+//		
+//		ItemTemplate rig = Shadowrun6Core.getItem(ItemTemplate.class, "control_rig");
+//		assertNotNull(rig);
+//		assertEquals(4, ((Availability)rig.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue()).getValue());
+//		assertEquals(Legality.RESTRICTED, ((Availability)rig.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue()).getLegality());
+		
+		ItemTemplate mount = Shadowrun6Core.getItem(ItemTemplate.class, "weapon_mount_heavy");
+		assertNotNull(mount);
+		ItemAttributeDefinition def = mount.getAttribute(SR6ItemAttribute.AVAILABILITY);
+		System.out.println("LoadSR6DataTest: "+def);
+		System.out.println("LoadSR6DataTest: "+def.getValue());
+		assertEquals(5, ((Availability)def.getValue()).getValue());
+		assertEquals(Legality.FORBIDDEN, ((Availability)mount.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue()).getLegality());
 	}
 
 	//-------------------------------------------------------------------
@@ -136,7 +158,7 @@ public class LoadSR6DataTest {
 		assertTrue(usages.stream().map( p -> p.getSkill()).anyMatch( sk -> (sk.getId().equals("firearms"))));
 		assertTrue(usages.stream().map( p -> p.getSkill()).anyMatch( sk -> (sk.getId().equals("close_combat"))));
 		
-		CarriedItem carried = new CarriedItem(item, null);
+		CarriedItem carried = new CarriedItem(item, null, CarryMode.CARRIED);
 		ItemAttributeObjectValue<SR6ItemAttribute> dmg = carried.getAsObject(SR6ItemAttribute.DAMAGE);
 	}
 
@@ -151,10 +173,17 @@ public class LoadSR6DataTest {
 		assertEquals(25, attrDef.getFormula().getAsInteger());
 		assertEquals(25, attrDef.getDistributed());
 		
-		OperationResult<CarriedItem<ItemTemplate>> item = GearTool.buildItem(temp, temp.getVariant("bodyware"), null);
+//		OperationResult<CarriedItem<ItemTemplate>> item = GearTool.buildItem(temp, temp.getVariant("bodyware"), null);
+//		// Quality selection missing
+//		assertFalse(item.wasSuccessful());
+		OperationResult<CarriedItem<ItemTemplate>> item =  GearTool.buildItem(temp, CarryMode.IMPLANTED, temp.getVariant("bodyware"), null, new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, "BETA"));
+		// Quality selection missing
 		assertTrue(item.wasSuccessful());
 		item.get().getAsObject(SR6ItemAttribute.AVAILABILITY);
 		item.get().getAsValue(SR6ItemAttribute.PRICE);
+		assertEquals(0.07f, item.get().getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue(), 0f);
+		
+		System.out.println(temp.dump());
 	}
 	
 	//-------------------------------------------------------------------
@@ -198,11 +227,70 @@ public class LoadSR6DataTest {
 
 	//-------------------------------------------------------------------
 	@Test
-	public void augmentationItem() {
-		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner");
+	public void augmentationSimple() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "datajack");
 		assertNotNull(item);
+		assertFalse(item.requiresVariant());
 		
-		CarriedItem<ItemTemplate> carried = GearTool.buildItem(item, null, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "BETA")).get();
+		assertEquals(1000, (Integer)item.getAttribute(SR6ItemAttribute.PRICE).getValue(), 0);
+		assertEquals(2, ((Availability)item.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue()).getValue());
+		assertEquals(1, item.getUsages().size());
+		Usage usage = item.getUsages().get(0);
+		assertEquals(CarryMode.IMPLANTED, usage.getMode());
+		assertEquals(0.1f, usage.getSize(), 0);
+		assertTrue(item.hasFlag(ItemTemplate.FLAG_AUGMENTATION));
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void augmentationChoices() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "skilljack");
+		assertNotNull(item);
+		assertFalse(item.requiresVariant());
+		
+		assertEquals(4, ((Availability)item.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue()).getValue());
+		ItemAttributeDefinition priceDef = item.getAttribute(SR6ItemAttribute.PRICE);
+		assertNotNull(priceDef);
+		assertNotNull(priceDef.getFormula());
+		assertFalse(priceDef.getFormula().isResolved());
+		
+		assertEquals(1, item.getUsages().size());
+		Usage usage = item.getUsages().get(0);
+		assertEquals(CarryMode.IMPLANTED, usage.getMode());
+		assertFalse(usage.getFormula().isResolved());
+		assertEquals(0.0f, usage.getSize(), 0);
+		assertTrue(item.hasFlag(ItemTemplate.FLAG_AUGMENTATION));
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void augmentationVariants() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "bone_lacing");
+		assertNotNull(item);
+		assertTrue(item.requiresVariant());
+		// Some attributes should not be present without variant
+		assertNull( item.getAttribute(SR6ItemAttribute.AVAILABILITY) );
+		assertEquals(3, item.getVariants().size());
+		
+		SR6PieceOfGearVariant variant = item.getVariants().iterator().next();
+		assertEquals("plastic",variant.getId());
+		assertEquals(3, ((Availability)variant.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue()).getValue());
+		assertEquals(Legality.RESTRICTED, ((Availability)variant.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue()).getLegality());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void augmentationAlternate() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "cyberskull");
+		assertNotNull(item);
+		assertTrue(item.requiresVariant());
+		
+		assertEquals(1, item.getAlternates().size());
+		SR6AlternateUsage alt = item.getAlternates().get(0);
+		assertEquals("cyberjaw",alt.getId());
+		assertEquals(SR6UsageMode.WEAPON, alt.getUsageMode());
+		assertEquals(ItemType.WEAPON_CLOSE_COMBAT, alt.getType());
+		assertEquals(ItemSubType.UNARMED, alt.getSubtype());
 	}
 
 }

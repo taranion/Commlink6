@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
@@ -113,7 +114,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 */
 	@Override
 	public Possible canBeSelected(ItemTemplate value, Decision... decisions) {
-		return canBeSelected(value, null, decisions);
+		return canBeSelected(value, null, CarryMode.CARRIED, decisions);
 	}
 	
 	//-------------------------------------------------------------------
@@ -121,7 +122,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canBeSelected(ItemTemplate, String, Decision[])
 	 */
 	@Override
-	public Possible canBeSelected(ItemTemplate value, String variantID, Decision... decisions) {
+	public Possible canBeSelected(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
 		// Ensure all choices are made
 		Possible poss =  GenericRPGTools.areAllDecisionsPresent(value, variantID, decisions);
 		if (!poss.get())
@@ -138,9 +139,9 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			if (variant==null) {
 				return new Possible(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
 			}
-			carried = GearTool.buildItem(value, variant, getModel(), decisions);
+			carried = GearTool.buildItem(value, mode, variant, getModel(), decisions);
 		} else {		
-			carried = GearTool.buildItem(value, getModel(), decisions);
+			carried = GearTool.buildItem(value, mode, getModel(), decisions);
 		}
 		// Check availability
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
@@ -176,7 +177,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, Decision... decisions) {
-		return select(value, null, decisions);
+		return select(value, null, CarryMode.CARRIED, decisions);
 	}
 
 	//-------------------------------------------------------------------
@@ -184,10 +185,10 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#select(ItemTemplate, String, Decision[])
 	 */
 	@Override
-	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variantID, Decision... decisions) {
+	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
 		logger.log(Level.TRACE, "ENTER select({0}, {1}", value, List.of(decisions));
 		try {
-			Possible poss = canBeSelected(value, variantID, decisions);
+			Possible poss = canBeSelected(value, variantID, mode, decisions);
 			if (!poss.getRequireDecisions()) {
 				logger.log(Level.ERROR, "Trying to select {0} which may not be selected: {1}", value, poss.toString());
 				return new OperationResult<>(poss);
@@ -204,7 +205,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				return new OperationResult<>(poss);
 			}
 			
-			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, variant, getModel(), decisions);
+			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, mode, variant, getModel(), decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
 			logger.log(Level.INFO, "Add {0} to model", item.getKey());
@@ -286,7 +287,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 					if (mod.getReferenceType()==ShadowrunReference.GEAR) {
 						ItemTemplate template = mod.getResolvedKey();
 						Decision[] dec = new Decision[mod.getDecisions().size()];
-						OperationResult<CarriedItem<ItemTemplate>> carry = GearTool.buildItem(template, getModel(), mod.getDecisions().toArray(dec));
+						OperationResult<CarriedItem<ItemTemplate>> carry = GearTool.buildItem(template, CarryMode.EMBEDDED, getModel(), mod.getDecisions().toArray(dec));
 						carry.get().addModification(mod);
 						logger.log(Level.DEBUG, "add {0}", template);
 						model.addCarriedItem(carry.get());
@@ -438,7 +439,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_EMBEDDABLE, value.getName(), slot, container.getNameWithRating());
 		}
 		
-		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, getModel(), decisions);
+		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, getModel(), decisions);
 		if (res.hasError()) {
 			return new Possible(State.IMPOSSIBLE, res.getMessages().toString());
 		}
@@ -470,7 +471,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				return new OperationResult<>();
 			}
 			
-			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, getModel(), decisions);
+			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, getModel(), decisions);
 			logger.log(Level.ERROR, "ToDo: really embed");
 			if (res.wasSuccessful()) {
 				container.addAccessory(res.get(), slot);

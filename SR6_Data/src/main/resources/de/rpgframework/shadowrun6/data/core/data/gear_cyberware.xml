@@ -356,7 +356,7 @@
       </modifications>
    </item>
    
-    <!-- Cyberlimbs -->^
+    <!-- Cyberlimbs -->
     <item avail="5" id="cyberskull" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
     	<usage mode="IMPLANTED" value="0.75"/>
  		<flags><flag>AUGMENTATION</flag></flags>

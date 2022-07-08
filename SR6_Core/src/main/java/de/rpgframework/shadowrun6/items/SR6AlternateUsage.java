@@ -68,4 +68,20 @@ public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
 		}
 		return List.of();
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the type
+	 */
+	public ItemType getType() {
+		return type;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the subtype
+	 */
+	public ItemSubType getSubtype() {
+		return subtype;
+	}
 }

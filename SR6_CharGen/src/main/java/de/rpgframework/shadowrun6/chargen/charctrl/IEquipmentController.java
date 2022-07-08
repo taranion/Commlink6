@@ -8,6 +8,7 @@ import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 
@@ -28,7 +29,7 @@ public interface IEquipmentController extends
 	 * @return Selection allowed or not
 	 * @throws IllegalArgumentException Thrown if a decision is missing or invalid
 	 */
-	public Possible canBeSelected(ItemTemplate value, String variant, Decision... decisions);
+	public Possible canBeSelected(ItemTemplate value, String variant, CarryMode mode, Decision... decisions);
 	
 	//-------------------------------------------------------------------
 	/**
@@ -39,7 +40,7 @@ public interface IEquipmentController extends
 	 * @return value instance of selected item
 	 * @throws IllegalArgumentException Thrown if a decision is missing or invalid
 	 */
-	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variant, Decision... decisions);
+	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variant, CarryMode mode, Decision... decisions);
 
 
 	//-------------------------------------------------------------------

@@ -87,6 +87,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 
 	//-------------------------------------------------------------------
 	private SR6ItemAttribute() {
+		// Having a default int converter breaks ENUMs
 		converter = new IntegerConverter();
 	}
 
