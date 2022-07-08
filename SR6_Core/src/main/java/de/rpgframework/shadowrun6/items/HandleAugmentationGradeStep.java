@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.modification.ApplyableValueModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
+import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -62,16 +63,24 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 				ItemAttributeObjectValue<SR6ItemAttribute> availAttr = model.getAsObject(SR6ItemAttribute.AVAILABILITY);
 				switch (quality) {
 				case USED:
-//					model.setAttribute(SR6ItemAttribute.ESSENCECOST, new ItemAttributeFloatValue<SR6ItemAttribute>(SR6ItemAttribute.ESSENCECOST, def.getFormula().getAsFloat()*1.1f));
-					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), priceAttr.getDistributed()/2));
-//					model.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeFloatValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, def.getFormula().getAsFloat()*0.5f));
-//					model.setAttribute(SR6ItemAttribute.AVAILABILITY, new ItemAttributeFloatValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, def.getFormula().getAsFloat()*0.5f));
+					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
+					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), priceAttr.getDistributed()/2, quality));
+					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), -1, quality));
+					break;
+				case ALPHA:
+					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-200), quality));
+					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*1.2f), quality));
+					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +1, quality));
 					break;
 				case BETA:
-					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-300)));
-					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*1.5f)));
-//					model.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeFloatValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, def.getFormula().getAsFloat()*0.5f));
-//					model.setAttribute(SR6ItemAttribute.AVAILABILITY, new ItemAttributeFloatValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, def.getFormula().getAsFloat()*0.5f));
+					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-300), quality));
+					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*1.5f), quality));
+					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +2, quality));
+					break;
+				case DELTA:
+					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-500), quality));
+					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*2.5f), quality));
+					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +3, quality));
 					break;
 				}
 //				System.exit(1);

@@ -717,15 +717,15 @@ public class SR6ArchetypeTest {
 		assertTrue("Should be marked selectable, although variant not selected" , poss.get());
 		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious", CarryMode.IMPLANTED);
 		assertTrue(poss.toString(), poss.get());
-		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious", CarryMode.IMPLANTED);
+		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious", CarryMode.IMPLANTED, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
 		assertTrue (hand.getError(), hand.wasSuccessful());
 		hand.get().setCustomName("Obvious left hand");
 		OperationResult<CarriedItem<ItemTemplate>> shock = equip.embed(hand.get(), ItemHook.CYBERLIMB_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "shock_limb"), null);
 		assertTrue (shock.getError(), shock.wasSuccessful());
 		shock.get().setCustomName("Shock Hand");
-		OperationResult<CarriedItem<ItemTemplate>> imageLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), "bodyware", CarryMode.IMPLANTED);
+		OperationResult<CarriedItem<ItemTemplate>> imageLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), "bodyware", CarryMode.IMPLANTED, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
 		assertTrue (imageLink.getError(), imageLink.wasSuccessful());
-		OperationResult<CarriedItem<ItemTemplate>> smartLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "smartlink"), "bodyware", CarryMode.IMPLANTED);
+		OperationResult<CarriedItem<ItemTemplate>> smartLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "smartlink"), "bodyware", CarryMode.IMPLANTED, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
 		assertTrue (smartLink.getError(), smartLink.wasSuccessful());
 		
 		//Gear

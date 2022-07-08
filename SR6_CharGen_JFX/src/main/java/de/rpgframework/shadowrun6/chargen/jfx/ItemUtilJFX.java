@@ -251,8 +251,8 @@ public class ItemUtilJFX {
 			ret.setText(Shadowrun6Tools.getAttackRatingString( (int[])obj));
 			break;
 		case ESSENCECOST:
-			if (item.getAsObject(attr)!=null) {
-				float fVal = item.getAsObject(attr).getModifiedValue();
+			if (item.getAsFloat(attr)!=null) {
+				float fVal = item.getAsFloat(attr).getModifiedValue();
 				ret.setText( String.format("%.2f", fVal));
 			}
 			break;

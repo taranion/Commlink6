@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ChoiceOption;
@@ -128,6 +129,9 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		
 		if (value.isPositive() && karma>model.getKarmaFree()) {
 			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
+		}
+		if (!value.isPositive() && (karmaGain+karma)>20) {
+			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_QUALITY_KARMAGAIN, karma);
 		}
 
 		/* If a quality resolves to a ComplexDataItem, check for choices there too */
@@ -266,6 +270,17 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 					unprocessed.add(mod);
 				}
 			}
+			
+			// Error conditions
+			if (karmaGain>20) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_KARMAGAIN));
+				logger.log(Level.WARNING, "Gained more than 20 Karma ({0})", karmaGain);
+			}
+			if (numberOfQualities>6) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_TOO_MANY));
+				logger.log(Level.WARNING, "Added more than 6 qualities ({0})", numberOfQualities);
+			}
+			
 			
 			return unprocessed;
 		} finally {

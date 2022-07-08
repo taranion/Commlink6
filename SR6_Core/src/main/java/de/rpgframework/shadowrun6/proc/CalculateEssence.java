@@ -8,6 +8,7 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -44,10 +45,10 @@ public class CalculateEssence implements ProcessingStep {
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(item.getResolved().getItemType())) {
 					logger.log(Level.INFO, "Test "+item.getKey()+" with "+item.getResolved().getItemType());
-					ItemAttributeObjectValue<SR6ItemAttribute> aVal = item.getAsObject(SR6ItemAttribute.ESSENCECOST);
+					ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
 					logger.log(Level.INFO, "  essence = "+aVal);
 					if (aVal==null) continue;
-					float essence = item.getAsObject(SR6ItemAttribute.ESSENCECOST).getModifiedValue(); 
+					float essence = aVal.getModifiedValue(); 
 					logger.log(Level.INFO,"* "+item.getNameWithoutRating()+" = "+essence);
 					essenceCost += essence;
 				}
