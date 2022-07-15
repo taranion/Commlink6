@@ -3,7 +3,9 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement;
@@ -34,8 +36,10 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -67,6 +71,13 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	@Override
 	public List<ItemTemplate> getAvailable() {
 		return Shadowrun6Core.getItemList(ItemTemplate.class);
+	}
+
+	//-------------------------------------------------------------------
+	public List<ItemTemplate> getAvailable(CarryMode mode, ItemType...types) {
+		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
+		list = list.stream().filter(new ItemTypeFilter(mode, types)).collect(Collectors.toList());
+		return list;
 	}
 
 	//-------------------------------------------------------------------
@@ -139,9 +150,9 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			if (variant==null) {
 				return new Possible(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
 			}
-			carried = GearTool.buildItem(value, mode, variant, getModel(), decisions);
+			carried = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
 		} else {		
-			carried = GearTool.buildItem(value, mode, getModel(), decisions);
+			carried = GearTool.buildItem(value, mode, getModel(), true, decisions);
 		}
 		// Check availability
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
@@ -205,7 +216,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				return new OperationResult<>(poss);
 			}
 			
-			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, mode, variant, getModel(), decisions);
+			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
 			logger.log(Level.INFO, "Add {0} to model", item.getKey());
@@ -287,7 +298,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 					if (mod.getReferenceType()==ShadowrunReference.GEAR) {
 						ItemTemplate template = mod.getResolvedKey();
 						Decision[] dec = new Decision[mod.getDecisions().size()];
-						OperationResult<CarriedItem<ItemTemplate>> carry = GearTool.buildItem(template, CarryMode.EMBEDDED, getModel(), mod.getDecisions().toArray(dec));
+						OperationResult<CarriedItem<ItemTemplate>> carry = GearTool.buildItem(template, CarryMode.EMBEDDED, getModel(), true, mod.getDecisions().toArray(dec));
 						carry.get().addModification(mod);
 						logger.log(Level.DEBUG, "add {0}", template);
 						model.addCarriedItem(carry.get());
@@ -351,6 +362,36 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	public float getSelectionCost(ItemTemplate data) {
 		// TODO Auto-generated method stub
 		return data.getAttribute(SR6ItemAttribute.PRICE).getDistributed();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public String getSelectionCostString(ItemTemplate data) {
+		int cost = data.getAttribute(SR6ItemAttribute.PRICE).getDistributed();
+		if (cost==0) {
+			String raw = data.getAttribute(SR6ItemAttribute.PRICE).getRawValue();
+			String[] table = data.getAttribute(SR6ItemAttribute.PRICE).getLookupTable();
+			if (data.requiresVariant()) {
+				int min = Integer.MAX_VALUE;
+				for (SR6PieceOfGearVariant variant : data.getVariants()) {
+					if (variant.getAttribute(SR6ItemAttribute.PRICE)!=null) {
+						int t = variant.getAttribute(SR6ItemAttribute.PRICE).getDistributed();
+						min = Math.min(min, t);
+					}
+				}
+				return String.valueOf(min)+"+";
+			}
+			String rtg = Shadowrun6Core.getI18nResources().getString("label.rating.short");
+			if (raw.equals("$RATING") && table!=null)
+				return table[0]+"+";
+			if (raw.indexOf("$RATING")>-1)
+				raw = raw.replace("$RATING", rtg);
+			return raw;
+		}
+		return String.valueOf(cost);
 	}
 
 	//-------------------------------------------------------------------
@@ -439,7 +480,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_EMBEDDABLE, value.getName(), slot, container.getNameWithRating());
 		}
 		
-		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, getModel(), decisions);
+		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, getModel(), true, decisions);
 		if (res.hasError()) {
 			return new Possible(State.IMPOSSIBLE, res.getMessages().toString());
 		}
@@ -471,7 +512,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 				return new OperationResult<>();
 			}
 			
-			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, getModel(), decisions);
+			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, getModel(), true, decisions);
 			logger.log(Level.ERROR, "ToDo: really embed");
 			if (res.wasSuccessful()) {
 				container.addAccessory(res.get(), slot);

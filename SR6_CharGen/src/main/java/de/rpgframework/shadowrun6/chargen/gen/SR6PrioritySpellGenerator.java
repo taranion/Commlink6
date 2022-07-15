@@ -14,7 +14,6 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ASpell;
-import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -199,6 +198,15 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	public float getSelectionCost(SR6Spell data) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public String getSelectionCostString(SR6Spell data) {
+		return String.valueOf(getSelectionCostString(data));
 	}
 
 	//-------------------------------------------------------------------

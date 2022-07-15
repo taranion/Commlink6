@@ -5,24 +5,19 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.Possible.State;
-import de.rpgframework.genericrpg.chargen.CharacterController;
+import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.LifestyleQuality;
-import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
-import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
@@ -164,6 +159,19 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 		return data.getCost();
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public String getSelectionCostString(LifestyleQuality data) {
+		return String.valueOf(data.getCost());
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl#getToDos()
+	 */
 	@Override
 	public List<ToDoElement> getToDos() {
 		return List.of();

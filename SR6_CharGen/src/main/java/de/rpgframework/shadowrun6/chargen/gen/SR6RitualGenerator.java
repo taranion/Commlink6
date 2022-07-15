@@ -204,6 +204,15 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public String getSelectionCostString(Ritual data) {
+		return String.valueOf(getSelectionCostString(data));
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
 	@Override

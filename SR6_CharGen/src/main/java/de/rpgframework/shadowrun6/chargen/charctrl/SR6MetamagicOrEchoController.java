@@ -258,6 +258,15 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public String getSelectionCostString(MetamagicOrEcho data) {
+		return String.valueOf(getSelectionCostString(data));
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeIncreased(de.rpgframework.genericrpg.NumericalValue)
 	 */
 	@Override

@@ -11,6 +11,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 
 /**
  * @author prelle
@@ -19,6 +20,9 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 public interface IEquipmentController extends 
 	ComplexDataItemController<ItemTemplate, CarriedItem<ItemTemplate>>, 
 	NumericalValueController<ItemTemplate, CarriedItem<ItemTemplate>> {
+
+	//-------------------------------------------------------------------
+	public List<ItemTemplate> getAvailable(CarryMode mode, ItemType...types);
 	
 	//-------------------------------------------------------------------
 	/**

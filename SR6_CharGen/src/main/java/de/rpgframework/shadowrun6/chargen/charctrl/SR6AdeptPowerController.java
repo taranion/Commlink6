@@ -3,7 +3,6 @@ package de.rpgframework.shadowrun6.chargen.charctrl;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -377,6 +376,15 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	@Override
 	public float getSelectionCost(AdeptPower data) {
 		return data.getCost();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public String getSelectionCostString(AdeptPower data) {
+		return String.valueOf(getSelectionCostString(data));
 	}
 
 	//-------------------------------------------------------------------

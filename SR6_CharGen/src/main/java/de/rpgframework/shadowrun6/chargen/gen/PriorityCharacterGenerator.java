@@ -118,7 +118,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		magicReso = new PriorityMagicOrResonanceController(this);
 		skills    = new SR6PrioritySkillGenerator(this);
 		qualities = new CommonQualityGenerator(this);
-		equipment = new CommonEquipmentController(this);
+		equipment = new SR6EquipmentGenerator(this);
 		spells    = new SR6PrioritySpellGenerator(this);
 		rituals   = new SR6RitualGenerator(this);
 		adeptPowers = new SR6AdeptPowerGenerator(this);

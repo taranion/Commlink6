@@ -389,4 +389,13 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		return 0;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public String getSelectionCostString(SR6Skill data) {
+		return String.valueOf(getSelectionCostString(data));
+	}
+
 }
