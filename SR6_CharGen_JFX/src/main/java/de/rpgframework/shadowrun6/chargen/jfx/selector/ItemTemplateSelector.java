@@ -1,12 +1,17 @@
 package de.rpgframework.shadowrun6.chargen.jfx.selector;
 
 import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.util.Arrays;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import org.prelle.javafx.OptionalNodePane;
 
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.Selector;
@@ -39,14 +44,17 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 	private CheckBox cbIgnoreRequirements;
 
 	//-------------------------------------------------------------------
-	public ItemTemplateSelector(SR6CharacterController charGen, ItemType...allowed) {
+	public ItemTemplateSelector(SR6CharacterController charGen, CarryMode carry, Predicate<ItemTemplate> templateFilter) {
 		super(charGen.getEquipmentController(),
+				templateFilter,
 				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),
-				new FilterItemTemplate(allowed));
+				new FilterItemTemplate(carry, null));
 		this.charGen = charGen;
 		listPossible.setCellFactory( lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController()));
 		
 		genericDescr= new ItemTemplatePane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		
+		logger.log(Level.WARNING, "Show filter for item types");
 	}
 
 }

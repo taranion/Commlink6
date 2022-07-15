@@ -80,6 +80,10 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				VariableResolver resolver = new VariableResolver(model, charac);
 
 				String foo = FormulaTool.resolve(SR6ItemAttribute.CAPACITY, (FormulaImpl) form, resolver);
+				if (foo==null) {
+					logger.log(Level.WARNING, "Cannot apply stock modification {0} because CAPACITY not resolved", mod);
+					return;
+				} 
 //				logger.log(Level.INFO, indent+"foo="+foo);
 				int capacity = Integer.parseInt(foo);
 				slot = new AvailableSlot(hook, capacity);
@@ -116,7 +120,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			return;
 		}
 		logger.log(Level.WARNING, "ToDo: DataItemModification "+mod);
-		model.addModification(mod);
+//		model.addModification(mod);
 	}
 
 }

@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import org.prelle.javafx.Mode;
 import org.prelle.javafx.OptionalNodePane;
@@ -13,6 +14,7 @@ import org.prelle.javafx.layout.FlexGridPane;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Quality;
@@ -21,7 +23,9 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.EssenceSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import javafx.scene.control.Label;
@@ -64,18 +68,19 @@ public class AugmentationPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initCyberware() {
-		secCyber = new GearSection(
-				ResourceI18N.get(RES, "page.augmentation.section.cyberware"),
-				item -> 
-					(item.getResolved().getItemType()==ItemType.CYBERWARE 
-					|| 
-					(item.getResolved().getItemType()==ItemType.ACCESSORY && item.getVariant()!=null && (
-							item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE
-							||
-							item.getVariant().getUsages().stream().anyMatch(us -> us.getMode()==CarryMode.IMPLANTED)
-							))
-					)
-				);
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> 
+			(item.getResolved().getItemType()==ItemType.CYBERWARE 
+			|| 
+			(item.getResolved().getItemType()==ItemType.ACCESSORY && item.getVariant()!=null && (
+				item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE
+				||
+				item.getVariant().getUsages().stream().anyMatch(us -> us.getMode()==CarryMode.IMPLANTED)
+				))
+			);
+			
+		
+		secCyber = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.cyberware"), CarryMode.IMPLANTED, selectFilter, showFilter);
 		secCyber.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secCyber, 4);
 		FlexGridPane.setMinHeight(secCyber, 6);
@@ -87,10 +92,17 @@ public class AugmentationPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initBioware() {
-		secBio = new GearSection(
-				ResourceI18N.get(RES, "page.augmentation.section.bioware"),
-				ItemType.BIOWARE
-				);
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.BIOWARE); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> 
+			(item.getResolved().getItemType()==ItemType.BIOWARE 
+			|| 
+			(item.getResolved().getItemType()==ItemType.ACCESSORY && item.getVariant()!=null && (
+				item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE
+				||
+				item.getVariant().getUsages().stream().anyMatch(us -> us.getMode()==CarryMode.IMPLANTED)
+				))
+			);
+		secBio = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.bioware"), CarryMode.IMPLANTED, selectFilter, showFilter);
 		secBio.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secBio, 4);
 		FlexGridPane.setMinHeight(secBio, 6);

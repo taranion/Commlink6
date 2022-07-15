@@ -507,7 +507,7 @@ public class Shadowrun6Tools {
 				if (requiredFor.getClass()==ItemTemplate.class) {
 					logger.log(Level.WARNING, "Special handling for ItemTemplates");
 					CarryMode mode = ((ItemTemplate) requiredFor).getUsages().get(0).getMode();
-					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, mode, model, decisions).get();
+					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, mode, model, false, decisions).get();
 					VariableResolver resolver = new VariableResolver(item, model);
 					logger.log(Level.WARNING, "ToDo: Resolve "+tmp.getFormula());
 					SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf( ((FormulaImpl)tmp.getFormula()).getAsString().substring(1));

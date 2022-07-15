@@ -35,6 +35,8 @@ import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.items.AGearData;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.jfx.GenericDescriptionVBox;
@@ -46,8 +48,11 @@ import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -70,6 +75,8 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	private FlexibleApplication app;
 	private ComplexDataItemController<T,V> ctrl;
+	/* Only relevant for ItemTemplates */
+	private CarryMode carry;
 	
 	private OptionalNodePane optional;
 	private GenericDescriptionVBox<DataItem> bxDesc;
@@ -78,6 +85,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private NavigButtonControl btnCtrl;
 	
 	private T item;
+	private SR6PieceOfGearVariant selectedVariant;
 	private List<Choice> choices;
 	private Map<Choice, Decision> decisions = new LinkedHashMap<>();
 	
@@ -89,9 +97,15 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	
 	//-------------------------------------------------------------------
 	public ChoiceSelectorDialog(FlexibleApplication app, ComplexDataItemController<T,V> ctrl) {
+		this(app, ctrl, null);
+	}
+	
+	//-------------------------------------------------------------------
+	public ChoiceSelectorDialog(FlexibleApplication app, ComplexDataItemController<T,V> ctrl, CarryMode carry) {
 		super("Select",null, CloseType.CANCEL, CloseType.OK);
 		this.app = app;
 		this.ctrl = ctrl;
+		this.carry = carry;
 		
 		content = new VBox(10);
 		bxDesc  = new GenericDescriptionVBox<>(null);
@@ -132,6 +146,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		logger.log(Level.WARNING, "updateButtons with "+ctrl);
 		
 		Possible possible = ctrl.canBeSelected(item, getDecisions() );
+		if (item instanceof ItemTemplate && ctrl instanceof IEquipmentController) {
+			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
+			possible = ((IEquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, CarryMode.CARRIED, getDecisions() );
+		}
 		logger.log(Level.INFO, "canBeSelected returns "+possible);
 		// Set status
 		ToDoElement problem = possible.getMostSevere();
@@ -181,6 +199,11 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			explain.setWrapText(true);
 			content.getChildren().add(explain);
 
+			// Eventually prepare variants
+			if ((item instanceof ItemTemplate) && !((ItemTemplate)item).getVariants().isEmpty()) {
+				processVariants( (ItemTemplate)item );
+			}
+			
 			for (Choice choice : choices) {
 				processChoice(item,choice, null);
 			}
@@ -197,6 +220,27 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		} finally {
 			logger.log(Level.INFO, "LEAVE apply({0}, {1} with {2})", item, choices, closed);
 		}
+	}
+
+	// -------------------------------------------------------------------
+	private void processVariants(ItemTemplate template) {
+		logger.log(Level.INFO, "variants detected");
+		addLabel(ResourceI18N.get(RES, "label.variant"));
+		ChoiceBox<SR6PieceOfGearVariant> cbVariants = new ChoiceBox<>();
+		cbVariants.getItems().addAll(template.getVariants());
+		cbVariants.setConverter(new StringConverter<SR6PieceOfGearVariant>() {
+			public SR6PieceOfGearVariant fromString(String value) { return null;}
+			public String toString(SR6PieceOfGearVariant value) {
+				if (value==null) return "-";
+				return template.getVariantName(value, Locale.getDefault());
+			}
+		});
+		cbVariants.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose variant {0}", n);
+			selectedVariant = n;
+			updateButtons(); 
+		 });
+		content.getChildren().add(cbVariants);
 	}
 
 	// -------------------------------------------------------------------

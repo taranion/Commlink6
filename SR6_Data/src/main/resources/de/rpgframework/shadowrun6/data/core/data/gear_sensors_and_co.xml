@@ -98,6 +98,7 @@
    	</variant>
    	<variant id="bodyware">
    		<usage mode="IMPLANTED" />
+  		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="1000"/>
    		<attrdef id="AVAILABILITY" value="2"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>

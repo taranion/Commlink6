@@ -37,6 +37,7 @@ public class SR6MetaType extends MetaType {
 	 */
 	@Override
 	public MetaType getVariantOf() {
+		if (variantOf==null) return null;
 		return ShadowrunReference.resolve(ShadowrunReference.METATYPE, variantOf);
 	}
 

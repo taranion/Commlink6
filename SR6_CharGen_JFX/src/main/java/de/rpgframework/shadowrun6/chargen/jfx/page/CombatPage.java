@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import org.prelle.javafx.Mode;
 import org.prelle.javafx.OptionalNodePane;
@@ -11,14 +12,18 @@ import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
+import de.rpgframework.shadowrun6.items.CarriedItemItemTypeFilter;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import javafx.scene.control.Label;
 
 /**
@@ -61,9 +66,10 @@ public class CombatPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initRangedWeapons() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_RANGED, ItemType.WEAPON_SPECIAL); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_RANGED, ItemType.WEAPON_SPECIAL); 
 		secRanged = new GearSection(
-				ResourceI18N.get(RES, "page.combat.section.ranged"),
-				ItemType.WEAPON_FIREARMS, ItemType.WEAPON_RANGED, ItemType.WEAPON_SPECIAL
+				ResourceI18N.get(RES, "page.combat.section.ranged"), selectFilter, showFilter
 				);
 		secRanged.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secRanged, 4);
@@ -76,9 +82,10 @@ public class CombatPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initMeleeWeapons() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_CLOSE_COMBAT); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_CLOSE_COMBAT); 
 		secMelee = new GearSection(
-				ResourceI18N.get(RES, "page.combat.section.melee"),
-				ItemType.WEAPON_CLOSE_COMBAT
+				ResourceI18N.get(RES, "page.combat.section.melee"), selectFilter, showFilter
 				);
 		secMelee.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secMelee, 4);
@@ -91,9 +98,10 @@ public class CombatPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initArmor() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ARMOR); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ARMOR); 
 		secArmor = new GearSection(
-				ResourceI18N.get(RES, "page.combat.section.armor"),
-				ItemType.ARMOR
+				ResourceI18N.get(RES, "page.combat.section.armor"), selectFilter, showFilter
 				);
 		secArmor.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secArmor, 4);
@@ -106,9 +114,10 @@ public class CombatPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initAmmunition() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
 		secAmmo = new GearSection(
-				ResourceI18N.get(RES, "page.combat.section.ammo"),
-				ItemType.AMMUNITION
+				ResourceI18N.get(RES, "page.combat.section.ammo"), selectFilter, showFilter
 				);
 		secAmmo.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secAmmo, 4);

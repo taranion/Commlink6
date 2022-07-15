@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,10 +36,10 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.Damage;
-import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6AlternateUsage;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -176,7 +178,7 @@ public class LoadSR6DataTest {
 //		OperationResult<CarriedItem<ItemTemplate>> item = GearTool.buildItem(temp, temp.getVariant("bodyware"), null);
 //		// Quality selection missing
 //		assertFalse(item.wasSuccessful());
-		OperationResult<CarriedItem<ItemTemplate>> item =  GearTool.buildItem(temp, CarryMode.IMPLANTED, temp.getVariant("bodyware"), null, new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, "BETA"));
+		OperationResult<CarriedItem<ItemTemplate>> item =  GearTool.buildItem(temp, CarryMode.IMPLANTED, temp.getVariant("bodyware"), null, true, new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, "BETA"));
 		// Quality selection missing
 		assertTrue(item.wasSuccessful());
 		item.get().getAsObject(SR6ItemAttribute.AVAILABILITY);
@@ -291,6 +293,50 @@ public class LoadSR6DataTest {
 		assertEquals(SR6UsageMode.WEAPON, alt.getUsageMode());
 		assertEquals(ItemType.WEAPON_CLOSE_COMBAT, alt.getType());
 		assertEquals(ItemSubType.UNARMED, alt.getSubtype());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testImageLink() {
+		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
+//		System.out.println("Before filter: "+list.size()+" items");
+		int b = list.size();
+		list = list.stream().filter(new ItemTypeFilter(CarryMode.IMPLANTED)).collect(Collectors.toList());
+//		System.out.println("After filter: "+list.size()+" items (mode IMPLANTED)");
+		int a1 = list.size();
+		list = list.stream().filter(new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE)).collect(Collectors.toList());
+//		System.out.println("After filter:2 "+list.size()+" items (mode IMPLANTED)");
+		int a2 = list.size();
+		assertTrue( a1 < b);
+		assertTrue( a2 < a1);
+		
+//		for (ItemTemplate temp : list) {
+//			if (temp.getUsage(CarryMode.IMPLANTED)!=null) {
+//				System.out.println(temp.getId()+" : "+temp.getItemType());
+//			} else {
+//				SR6PieceOfGearVariant var = (SR6PieceOfGearVariant) temp.getVariant(CarryMode.IMPLANTED);
+//				System.out.println(temp.getId()+"/"+var.getId()+" : "+var.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue());
+//			}
+//		}
+		
+		ItemTemplate tmp = Shadowrun6Core.getItem(ItemTemplate.class, "image_link");
+		assertEquals(ItemType.ACCESSORY, tmp.getItemType());
+		assertNull(tmp.getItemType(CarryMode.CARRIED));
+		assertNotNull(tmp.getItemType(CarryMode.EMBEDDED));
+		assertEquals(ItemType.ACCESSORY, tmp.getItemType(CarryMode.EMBEDDED));
+		assertEquals(ItemType.CYBERWARE, tmp.getItemType(CarryMode.IMPLANTED));
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testItemTemplateFilter() {
+		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
+		list = list.stream().filter(new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE)).collect(Collectors.toList());
+		
+		Optional<ItemTemplate> result = list.stream().filter(item -> item.getId().equals("cyberarm")).findFirst();
+		assertTrue("Cyberarm not found",result.isPresent());
+		assertNotNull("Cyberarm not found",result.get());
+		
 	}
 
 }

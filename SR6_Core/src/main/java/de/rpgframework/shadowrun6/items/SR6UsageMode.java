@@ -21,6 +21,7 @@ public enum SR6UsageMode implements IUsageMode {
 	 * can be used as such. 
 	 */
 	WEAPON,
+	ARMOR,
 	/**
 	 * Item duplicates as drone or vehicle
 	 */

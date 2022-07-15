@@ -1,19 +1,29 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.function.Predicate;
 
+import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
+import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.NavigationPane;
 import org.prelle.javafx.Page;
 import org.prelle.javafx.ResponsiveControl;
 import org.prelle.javafx.ResponsiveControlManager;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Region;
@@ -32,6 +42,8 @@ public class TestApplication extends FlexibleApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Locale.setDefault(Locale.ENGLISH);
+		System.setProperty("logdir","/tmp");
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );
 		launch(args);
@@ -57,8 +69,6 @@ public class TestApplication extends FlexibleApplication {
     public void start(Stage stage) throws Exception {
 		stage.setMaxWidth(2400);
 //		stage.setMaxHeight(900);
-		stage.setMinWidth(400);
-		stage.setMinHeight(560);
 		super.start(stage);
 		
 		Scene scene = stage.getScene();
@@ -76,6 +86,13 @@ public class TestApplication extends FlexibleApplication {
 		ResponsiveControlManager.setBreakpoints(800, 1000);
 		ResponsiveControlManager.manageResponsiveControls((Region) scene.getRoot());
 		ResponsiveControlManager.initialize((Region) scene.getRoot());
-     }
+		stage.setMinWidth(1400);
+		stage.setMinHeight(860);
+		
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE); 
+		ItemTemplateSelector selector = new ItemTemplateSelector(chargen, CarryMode.IMPLANTED, selectFilter);
+		ManagedDialog dialog = new ManagedDialog("Select an item", selector, CloseType.OK, CloseType.CANCEL);
+		CloseType closed = FlexibleApplication.getInstance().showAndWait(dialog);
+    }
 
 }

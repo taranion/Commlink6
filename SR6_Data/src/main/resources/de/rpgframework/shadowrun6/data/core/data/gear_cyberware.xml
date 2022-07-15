@@ -267,13 +267,16 @@
 			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
       <usage mode="IMPLANTED" value="0.3" />
-      <attrdef id="ESSENCECOST" value="RATING*0.3"/>
-      <attrdef id="PRICE" value="RATING*4000"/>
+      <attrdef id="ESSENCECOST" value="$RATING*0.3"/>
+      <attrdef id="PRICE" value="$RATING*4000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
           <itemmod type="QUALITY" ref="dermal_deposits" remove="true"/>
       </modifications>
      	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<attrdef id="DAMAGE" value="$RATING"/>
+     	</alternate>
+     	<alternate mode="ARMOR" type="ARMOR" subtype="ARMOR_BODY">
      		<attrdef id="DEFENSE_PHYSICAL" value="$RATING"/>
      	</alternate>
    </item>
@@ -399,28 +402,70 @@
     		</modifications>
     	</variant>
     </item>
-    <item id="cyberarm" avail="4" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
-    	<usage mode="IMPLANTED" value="1"/>
+    <item id="cyberarm" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
  		<flags><flag>AUGMENTATION</flag></flags>
- 		<modifications>
+    	<variant id="fullarm_synthetic">
+    		<usage mode="IMPLANTED" value="1"/>
+    		<attrdef id="PRICE" value="20000"/>
+    		<attrdef id="AVAILABILITY" value="4"/>
+    		<modifications>
   			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
   			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
  			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
- 		</modifications>    	
-    	<variant id="synthetic">
-    		<attrdef id="PRICE" value="20000"/>
-    		<modifications>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="8"/>
     		</modifications>
     	</variant>
-    	<variant id="obvious">
+    	<variant id="fullarm_obvious">
+    		<usage mode="IMPLANTED" value="1"/>
     		<attrdef id="PRICE" value="15000"/>
+    		<attrdef id="AVAILABILITY" value="4"/>
     		<modifications>
+  			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
+  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
+ 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="15"/>
     		</modifications>
     	</variant>
+    	<variant id="forearm_synthetic">
+	    	<usage mode="IMPLANTED" value="0.45"/>
+    		<attrdef id="PRICE" value="12000"/>
+    		<attrdef id="AVAILABILITY" value="3"/>
+    		<modifications>
+  			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5"/>
+  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
+ 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+    			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="5"/>
+    		</modifications>
+    	</variant>
+    	<variant id="forearm_obvious">
+	    	<usage mode="IMPLANTED" value="0.45"/>
+    		<attrdef id="PRICE" value="10000"/>
+    		<attrdef id="AVAILABILITY" value="3"/>
+    		<modifications>
+  			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5"/>
+  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
+ 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+    			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="10"/>
+    		</modifications>
+    	</variant>
+    	<variant id="hand_synthetic">
+	    	<usage mode="IMPLANTED" value="0.25"/>
+    		<attrdef id="PRICE" value="5000"/>
+    		<attrdef id="AVAILABILITY" value="3"/>
+    		<modifications>
+    			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="2"/>
+    		</modifications>
+    	</variant>
+    	<variant id="hand_obvious">
+    		<usage mode="IMPLANTED" value="0.25"/>
+    		<attrdef id="PRICE" value="6000"/>
+    		<attrdef id="AVAILABILITY" value="3"/>
+    		<modifications>
+    			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="4"/>
+    		</modifications>
+    	</variant>
     </item>
-    <item id="cyberforearm" avail="3" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
+    <!--item id="cyberforearm" avail="3" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
     	<usage mode="IMPLANTED" value="0.45"/>
  		<flags><flag>AUGMENTATION</flag></flags>
  		<modifications>
@@ -456,7 +501,7 @@
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="4"/>
     		</modifications>
     	</variant>
-    </item>
+    </item-->
     <item id="cyberleg" avail="4" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
     	<usage mode="IMPLANTED" value="1"/>
  		<flags><flag>AUGMENTATION</flag></flags>

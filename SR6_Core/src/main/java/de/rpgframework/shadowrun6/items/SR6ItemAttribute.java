@@ -8,6 +8,7 @@ import org.prelle.simplepersist.StringValueConverter;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.IItemAttribute;
+import de.rpgframework.genericrpg.persist.EnumConverter;
 import de.rpgframework.genericrpg.persist.FloatConverter;
 import de.rpgframework.genericrpg.persist.IntegerArrayConverter;
 import de.rpgframework.genericrpg.persist.IntegerConverter;
@@ -50,7 +51,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	HAS_RATING,
 	/* For accessories: Where to attach it */
 	HOOK,
-	ITEMTYPE,
+	ITEMTYPE( new EnumConverter(ItemType.class)),
 	ITEMSUBTYPE,
 	
 //	/** Maximum rating of embedded items */

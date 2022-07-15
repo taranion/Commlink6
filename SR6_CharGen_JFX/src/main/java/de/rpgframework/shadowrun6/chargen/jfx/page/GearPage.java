@@ -5,6 +5,7 @@ import java.lang.System.Logger.Level;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import org.prelle.javafx.Mode;
 import org.prelle.javafx.OptionalNodePane;
@@ -14,13 +15,18 @@ import org.prelle.javafx.layout.FlexGridPane;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
+import de.rpgframework.shadowrun6.items.CarriedItemItemTypeFilter;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import javafx.scene.control.Label;
 
 /**
@@ -59,9 +65,10 @@ public class GearPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initElectro() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS); 
 		secElectro = new GearSection(
-				ResourceI18N.get(RES, "page.gear.section.electro"),
-				ItemType.ELECTRONICS
+				ResourceI18N.get(RES, "page.gear.section.electro"),selectFilter, showFilter
 				);
 		secElectro.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secElectro, 4);
@@ -74,9 +81,10 @@ public class GearPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initOther() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.BIOLOGY); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.BIOLOGY); 
 		secOther = new GearSection(
-				ResourceI18N.get(RES, "page.gear.section.other"),
-				ItemType.SURVIVAL, ItemType.BIOLOGY
+				ResourceI18N.get(RES, "page.gear.section.other"), selectFilter, showFilter
 				);
 		secOther.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secOther, 4);

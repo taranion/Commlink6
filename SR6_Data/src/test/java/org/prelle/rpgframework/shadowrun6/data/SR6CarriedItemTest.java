@@ -175,7 +175,7 @@ public class SR6CarriedItemTest {
 		assertNotNull(def);
 		assertTrue("BODY should be an integer type",def.isInteger());
 		
-		CarriedItem<ItemTemplate> item = GearTool.buildItem(honda, CarryMode.CARRIED, null).get();
+		CarriedItem<ItemTemplate> item = GearTool.buildItem(honda, CarryMode.CARRIED, null, true).get();
 		assertNotNull(item);
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
 		assertEquals(2, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
@@ -186,5 +186,15 @@ public class SR6CarriedItemTest {
 		assertEquals(13000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		assertEquals(10, item.getAsValue(SR6ItemAttribute.BODY).getModifiedValue());
 	}
-
+	
+	@Test
+	public void testWithoutChoices() {
+		ItemTemplate honda = Shadowrun6Core.getItem(ItemTemplate.class, "dermal_plating");
+		assertNotNull(honda);
+		
+		CarriedItem<ItemTemplate> item = SR6GearTool.buildItem(honda, CarryMode.IMPLANTED, null, false).get();
+		assertNotNull(item);
+		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
+		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
+	}
 }

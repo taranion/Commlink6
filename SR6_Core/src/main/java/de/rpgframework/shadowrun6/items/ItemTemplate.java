@@ -10,7 +10,6 @@ import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.ElementList;
 import org.prelle.simplepersist.ElementListUnion;
 
-import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
@@ -116,7 +115,16 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		
 		/* If there is no USAGE assume a NORMAL mode and no slot */
 		if (usages.isEmpty()) {
-			usages.add(new Usage(CarryMode.CARRIED));
+			if (requireVariant) {
+				// Ensure all variants have a USAGE mode
+				for (SR6PieceOfGearVariant variant : variants) {
+					if (variant.getUsages()==null || variant.getUsages().isEmpty()) {
+						variant.addUsage(new Usage(CarryMode.CARRIED));
+					}
+				}
+			} else {
+				usages.add(new Usage(CarryMode.CARRIED));
+			}
 		}
 //		if (variants.isEmpty()) {
 //			SR6PieceOfGearVariant add = new SR6PieceOfGearVariant(SR6VariantMode.NORMAL);
@@ -157,6 +165,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		}
 		if (variants!=null) {
 			for (SR6PieceOfGearVariant variant : variants) {
+				variant.setParentItem(this);
 				if (variant.hasFlag(FLAG_AUGMENTATION) && variant.getChoice(UUID_AUGMENTATION_QUALITY)==null) {
 					variant.addChoice(CHOICE_AUGMENTATION_QUALITY);
 				}
@@ -177,9 +186,22 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	//-------------------------------------------------------------------
 	/**
 	 * @return the type
+	 * @deprecated Use getItemType(CarryMode)
 	 */
 	public ItemType getItemType() {
 		return type;
+	}
+
+	//-------------------------------------------------------------------
+	public ItemType getItemType(CarryMode carry) {
+		if (getUsage(carry)!=null) return type;
+		SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) getVariant(carry);
+		if (variant!=null && variant.getUsage(carry)!=null) {
+			if (variant.getAttribute(SR6ItemAttribute.ITEMTYPE)!=null)
+				return variant.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue();
+			return type;
+		}
+		return null;
 	}
 
 	//-------------------------------------------------------------------
@@ -193,9 +215,22 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	//-------------------------------------------------------------------
 	/**
 	 * @return the subtype
+	 * @deprecated Use getItemSubtype(CarryMode)
 	 */
 	public ItemSubType getItemSubtype() {
 		return subtype;
+	}
+
+	//-------------------------------------------------------------------
+	public ItemSubType getItemSubtype(CarryMode carry) {
+		if (getUsage(carry)!=null) return subtype;
+		SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) getVariant(carry);
+		if (variant!=null && variant.getUsage(carry)!=null) {
+			if (variant.getAttribute(SR6ItemAttribute.ITEMSUBTYPE)!=null)
+				return variant.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+			return subtype;
+		}
+		return null;
 	}
 
 	//-------------------------------------------------------------------

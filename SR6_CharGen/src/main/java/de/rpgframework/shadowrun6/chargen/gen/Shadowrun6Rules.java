@@ -33,6 +33,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	
 	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule("CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_PRIO_ADEPT_PP    = new Rule("CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.PRIO_MAGIC);
+	public static Rule CHARGEN_ALLOW_LEGAL_AVAIL7PLUS = new Rule("CHARGEN_ALLOW_LEGAL_AVAIL7PLUS", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule("CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule ALLOW_TRANSHUMANISM      = new Rule("ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_EXTENDED_CONTACT = new Rule("CHARGEN_EXTENDED_CONTACT", Rule.Type.BOOLEAN, RES, "false");
@@ -50,6 +51,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
 				CHARGEN_PRIO_ADEPT_PP,
 				CHARGEN_BUY_SPELLS_KARMA,
+				CHARGEN_ALLOW_LEGAL_AVAIL7PLUS,
 				ALLOW_TRANSHUMANISM,
 				CHARGEN_EXTENDED_CONTACT,
 		};

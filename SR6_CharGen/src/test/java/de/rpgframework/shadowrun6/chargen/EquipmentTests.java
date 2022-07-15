@@ -111,7 +111,7 @@ public class EquipmentTests {
 	 */
 	@Test
 	public void test03() {
-		CarriedItem<ItemTemplate> ref = GearTool.buildItem(Shadowrun6Core.getItem(ItemTemplate.class,"datajack"), CarryMode.IMPLANTED, model, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")).get();
+		CarriedItem<ItemTemplate> ref = GearTool.buildItem(Shadowrun6Core.getItem(ItemTemplate.class,"datajack"), CarryMode.IMPLANTED, model, true, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")).get();
 //		System.out.println("DUMP1\n"+ref.dump());
 		
 		OperationResult<List<Modification>> mods = SR6GearTool.recalculate("", null, ref);

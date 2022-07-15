@@ -17,6 +17,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.section.AppearanceSection;
@@ -34,9 +35,11 @@ import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SkillSection;
+import de.rpgframework.shadowrun6.items.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -79,7 +82,9 @@ public class MatrixPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initDevices() {
-		secDevices = new GearSection(ResourceI18N.get(RES, "page.matrix.section.devices"), filter, ItemType.ELECTRONICS);
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS); 
+		secDevices = new GearSection(ResourceI18N.get(RES, "page.matrix.section.devices"), selectFilter, showFilter);
 		secDevices.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secDevices, 4);
 		FlexGridPane.setMinHeight(secDevices, 6);
@@ -103,7 +108,9 @@ public class MatrixPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initSoftware() {
-		secSoftware = new GearSection(ResourceI18N.get(RES, "page.matrix.section.software"), ItemType.SOFTWARE);
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.EMBEDDED, ItemType.SOFTWARE); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.SOFTWARE); 
+		secSoftware = new GearSection(ResourceI18N.get(RES, "page.matrix.section.software"), selectFilter, showFilter);
 		secSoftware.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secSoftware, 4);
 		FlexGridPane.setMinHeight(secSoftware, 6);
