@@ -13,12 +13,18 @@ import java.util.stream.Collectors;
 import org.prelle.javafx.JavaFXConstants;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.items.AGearData;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
+import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.items.Damage;
@@ -26,6 +32,7 @@ import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -165,11 +172,57 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
-	public static VBox getItemInfoNode(ItemTemplate item, ShadowrunCharacter model) {
+	public static VBox getItemInfoNode(ItemTemplate item, ShadowrunCharacter model, CarryMode carry) {
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");
 		box.setMaxWidth(Double.MAX_VALUE);
+		
+		int nextCol = 0;
 
+		GridPane table = new GridPane();
+
+		Choice chRating = item.getChoice("RATING");
+		int[] ratings = null;
+		if (chRating!=null) {
+			ratings = new int[chRating.getChoiceOptions().length];
+			int pos=0;
+			for (String t : chRating.getChoiceOptions())
+				ratings[pos++] = Integer.parseInt(t);
+		}
+		
+		List<AGearData> possibilities = item.getPossibilities(carry);
+		if (possibilities.isEmpty())
+			throw new IllegalArgumentException("CarryMode "+carry+" is not possible in "+item.getId());
+
+		if (possibilities.size() > 1) {
+			Label heaName = new Label(ResourceI18N.get(UI, "label.variant"));
+			heaName.getStyleClass().add("table-head");
+			heaName.setAlignment(Pos.CENTER);
+			heaName .setMaxWidth(Double.MAX_VALUE);
+			table.add(heaName, nextCol, 0);
+			for (int i = 0; i < possibilities.size(); i++) {
+				Label lbName = new Label();
+				lbName.setAlignment(Pos.CENTER_LEFT);
+				AGearData data = possibilities.get(i);
+				if (data instanceof SR6PieceOfGearVariant) {
+					lbName.setText(((SR6PieceOfGearVariant) data).getName(Locale.getDefault()));
+				} else {
+					lbName.setText( ResourceI18N.get(UI, "label.variant.standard"));
+				}
+				table.add(lbName, nextCol, 1 + i);
+			}
+			nextCol++;
+		}		
+		
+		// Flags to mark what details have been already added
+		boolean augment = false;
+		boolean matrix  = false;
+		if (item.hasFlag(ItemTemplate.FLAG_AUGMENTATION)) {
+			addAugmentationColumns(item, model, carry, table, possibilities);
+			augment = true;
+		}
+		
+		
 		switch (item.getItemType()) {
 		case WEAPON_CLOSE_COMBAT:
 		case WEAPON_RANGED:
@@ -223,6 +276,52 @@ public class ItemUtilJFX {
 //			box.getChildren().add(modBox);
 		}
 
+		nextCol = table.getColumnCount();
+		Label heaAvail  = new Label(SR6ItemAttribute.AVAILABILITY.getShortName());
+		heaAvail.getStyleClass().add("table-head");
+		heaAvail.setAlignment(Pos.CENTER);
+		heaAvail .setMaxWidth(Double.MAX_VALUE);
+		Label heaPrice = new Label(SR6ItemAttribute.PRICE.getShortName());
+		heaPrice.getStyleClass().add("table-head");
+		heaPrice.setAlignment(Pos.CENTER);
+		heaPrice .setMaxWidth(Double.MAX_VALUE);
+		
+		table.add(heaAvail, nextCol  , 0);
+		table.add(heaPrice, nextCol+1, 0);
+		
+		if (possibilities.size() > 0) {
+			for (int i = 0; i < possibilities.size(); i++) {
+				// Availability
+				Label lbAvail = new Label();
+				lbAvail.setAlignment(Pos.CENTER);
+				lbAvail .setMaxWidth(Double.MAX_VALUE);
+				GridPane.setMargin(lbAvail, new Insets(0, 5, 0, 5));
+				AGearData data = possibilities.get(i);
+				ItemAttributeDefinition def = data.getAttribute(SR6ItemAttribute.AVAILABILITY);
+				if (def==null)
+					def = item.getAttribute(SR6ItemAttribute.AVAILABILITY);
+				if (def !=null) {
+					lbAvail.setText( translateVariables( def.getRawValue(), def.getLookupTable() ));
+				}
+				// Price
+				Label lbPrice = new Label();
+				lbPrice.setAlignment(Pos.CENTER_RIGHT);
+				lbPrice .setMaxWidth(Double.MAX_VALUE);
+				GridPane.setMargin(lbPrice, new Insets(0, 5, 0, 5));
+				data = possibilities.get(i);
+				def = data.getAttribute(SR6ItemAttribute.PRICE);
+				if (def !=null) {
+					lbPrice.setText( translateVariables( def.getRawValue(), def.getLookupTable() ));
+				}
+				table.add(lbAvail, nextCol, 1 + i);
+				table.add(lbPrice, nextCol+1, 1 + i);
+			}			
+		}
+
+		
+		box.getChildren().add(table);
+
+		
 //		// WiFi
 //		if (!item.getWiFiAdvantageStrings().isEmpty()) {
 //			box.getChildren().add(getWiFiAdvantagesNode(item));
@@ -241,6 +340,40 @@ public class ItemUtilJFX {
 		return box;
 	}
 
+	//-------------------------------------------------------------------
+	private static String translateVariables(String raw, String[] table) {
+		String rtg = Shadowrun6Core.getI18nResources().getString("label.rating.short");
+		if (raw.equals("$RATING") && table!=null)
+			return table[0]+"+";
+		if (raw.indexOf("$RATING")>-1)
+			raw = raw.replace("$RATING", rtg);
+		return raw;
+	}
+
+	//-------------------------------------------------------------------
+	private static String makeAttributeValueString(ItemTemplate data, SR6ItemAttribute attrib) {
+		ItemAttributeDefinition def = data.getAttribute(attrib);
+		
+		String raw = data.getAttribute(attrib).getRawValue();
+		String[] table = data.getAttribute(attrib).getLookupTable();
+		if (data.requiresVariant()) {
+			int min = Integer.MAX_VALUE;
+			for (SR6PieceOfGearVariant variant : data.getVariants()) {
+				if (variant.getAttribute(attrib)!=null) {
+					int t = variant.getAttribute(attrib).getDistributed();
+					min = Math.min(min, t);
+				}
+			}
+			return String.valueOf(min)+"+";
+		}
+		String rtg = Shadowrun6Core.getI18nResources().getString("label.rating.short");
+		if (raw.equals("$RATING") && table!=null)
+			return table[0]+"+";
+		if (raw.indexOf("$RATING")>-1)
+			raw = raw.replace("$RATING", rtg);
+		return raw;
+	}
+	
 	//-------------------------------------------------------------------
 	private static Label getItemAttributeLabel(CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
 		Label ret = new Label("?");
@@ -671,6 +804,57 @@ public class ItemUtilJFX {
 		HBox.setHgrow(spacing, Priority.ALWAYS);
 		
 		return line;
+	}
+
+	//-------------------------------------------------------------------
+	private static void addAugmentationColumns(ItemTemplate item, ShadowrunCharacter model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
+		if (item==null)
+			throw new NullPointerException("Empty item");
+		
+		int COL_ESS  = 0;
+		int COL_CAP  = 1;
+
+		Label heaDev  = new Label(SR6ItemAttribute.ESSENCECOST.getShortName());
+		Label heaPrg  = new Label(SR6ItemAttribute.SIZE.getShortName());
+
+		heaDev .getStyleClass().add("table-head");
+		heaPrg .getStyleClass().add("table-head");
+
+		heaDev .setMaxWidth(Double.MAX_VALUE);
+		heaPrg .setMaxWidth(Double.MAX_VALUE);
+
+		heaDev .setAlignment(Pos.CENTER);
+		heaPrg .setAlignment(Pos.CENTER);
+		
+		int startCol = table.getColumnCount();
+		table.add(heaDev, startCol+COL_ESS, 0);
+		table.add(heaPrg, startCol+COL_CAP, 0);
+		
+		// Now add data
+		for (int i = 0; i < possibilities.size(); i++) {
+			// Essence
+			Label lbAvail = new Label();
+			lbAvail.setAlignment(Pos.CENTER);
+			lbAvail .setMaxWidth(Double.MAX_VALUE);
+			GridPane.setMargin(lbAvail, new Insets(0, 5, 0, 5));
+			
+			float essence = 0f;
+			AGearData data = possibilities.get(i);
+			ItemAttributeDefinition def = data.getAttribute(SR6ItemAttribute.ESSENCECOST);
+			if (def==null)
+				def = item.getAttribute(SR6ItemAttribute.ESSENCECOST);
+			Usage usage = data.getUsage(carry);
+			if (usage==null)
+				usage = item.getUsage(carry);
+			logger.log(Level.WARNING, "Essence "+def);
+			logger.log(Level.WARNING, "Usage   "+usage);
+			if (usage!=null && usage.getRawValue()!=null) {
+				lbAvail.setText( translateVariables( usage.getRawValue(), null ));
+			} else if (def !=null) {
+				lbAvail.setText( translateVariables( def.getRawValue(), def.getLookupTable() ));
+			}
+			table.add(lbAvail, startCol+COL_ESS, i+1);
+		}
 	}
 
 	//-------------------------------------------------------------------

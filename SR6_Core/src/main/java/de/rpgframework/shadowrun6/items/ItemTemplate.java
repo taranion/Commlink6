@@ -14,9 +14,13 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
+import de.rpgframework.genericrpg.items.AGearData;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.IGearTypeData;
+import de.rpgframework.genericrpg.items.IItemAttribute;
+import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.PieceOfGear;
+import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -32,6 +36,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6PieceOfGearVariant,SR6AlternateUsage> {
 	
 	public final static String FLAG_AUGMENTATION = "AUGMENTATION";
+	public final static String FLAG_MATRIX_DEVICE = "MATRIX_DEVICE";
 	public final static UUID UUID_AUGMENTATION_QUALITY = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170c");
 	public final static Choice CHOICE_AUGMENTATION_QUALITY = new Choice(
 			ItemTemplate.UUID_AUGMENTATION_QUALITY, 
@@ -60,6 +65,18 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
 		shortcuts = new ArrayList<>();
+	}
+	
+	//-------------------------------------------------------------------
+	public ItemAttributeDefinition getAttribute(IItemAttribute attrib, SR6PieceOfGearVariant variant) {
+		ItemAttributeDefinition def = null;
+		if (variant!=null) {
+			def = variant.getAttribute(attrib);
+			if (def!=null)
+				return def;
+		}
+		
+		return cache.get(attrib);
 	}
 
 //	//-------------------------------------------------------------------
@@ -244,6 +261,19 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	//-------------------------------------------------------------------
 	public boolean requiresVariant() {
 		return requireVariant;
+	}
+
+	//-------------------------------------------------------------------
+	public List<AGearData> getPossibilities(CarryMode carry) {
+		List<AGearData> ret = new ArrayList<>();
+		if (getUsage(carry)!=null && !requiresVariant()) 
+			ret.add(this);
+		for (SR6PieceOfGearVariant variant : getVariants()) {
+			if (variant.getUsage(carry)!=null || getUsage(carry)!=null) {
+				ret.add(variant);
+			}
+		}
+		return ret;
 	}
 
 }

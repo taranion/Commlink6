@@ -52,7 +52,7 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 		this.charGen = charGen;
 		listPossible.setCellFactory( lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController()));
 		
-		genericDescr= new ItemTemplatePane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		genericDescr= new ItemTemplatePane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),carry);
 		
 		logger.log(Level.WARNING, "Show filter for item types");
 	}

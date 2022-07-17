@@ -9,6 +9,7 @@ import org.prelle.javafx.JavaFXConstants;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.AdeptPower;
@@ -26,18 +27,26 @@ import javafx.scene.layout.HBox;
 public class ItemTemplatePane extends GenericDescriptionVBox<ItemTemplate> {
 
 	private Node perTypeStats;
+	private CarryMode carry;
 
 	// -------------------------------------------------------------------
-	public ItemTemplatePane(Function<Requirement, String> requirementResolver) {
+	public ItemTemplatePane(Function<Requirement, String> requirementResolver, CarryMode carry) {
 		super(requirementResolver);
+		this.carry = carry;
 	}
 
-	public ItemTemplatePane(Function<Requirement, String> requirementResolver, ItemTemplate item) {
+	//-------------------------------------------------------------------
+	public ItemTemplatePane(Function<Requirement, String> requirementResolver, ItemTemplate item, CarryMode carry) {
 		super(requirementResolver, item);
+		this.carry = carry;
 		setData(item);
 	}
 
-	// -------------------------------------------------------------------
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.GenericDescriptionVBox#setData(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
 	public void setData(ItemTemplate data) {
 		super.setData(data);
 
@@ -46,7 +55,7 @@ public class ItemTemplatePane extends GenericDescriptionVBox<ItemTemplate> {
 		}
 
 		if (data != null) {
-			perTypeStats = ItemUtilJFX.getItemInfoNode(data, null);
+			perTypeStats = ItemUtilJFX.getItemInfoNode(data, null, carry);
 			if (perTypeStats != null) {
 				super.inner.getChildren().add(2, perTypeStats);
 			}
