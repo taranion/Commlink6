@@ -658,7 +658,8 @@ public class ItemUtilJFX {
 				lbAvail.setText(translateVariables(def.getRawValue(), def.getLookupTable()));
 			}
 		} else {
-			lbAvail.setText(translateVariables(def.getRawValue(), def.getLookupTable()));
+			if (def!=null)
+				lbAvail.setText(translateVariables(def.getRawValue(), def.getLookupTable()));
 		}
 		return lbAvail;
 	}
