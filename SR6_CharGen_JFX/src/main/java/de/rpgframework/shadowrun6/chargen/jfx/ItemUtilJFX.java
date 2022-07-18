@@ -206,6 +206,8 @@ public class ItemUtilJFX {
 				AGearData data = possibilities.get(i);
 				if (data instanceof SR6PieceOfGearVariant) {
 					lbName.setText(((SR6PieceOfGearVariant) data).getName(Locale.getDefault()));
+				} else if (data instanceof ItemTemplate) {
+					lbName.setText( ((ItemTemplate)data).getName(Locale.getDefault()));
 				} else {
 					lbName.setText( ResourceI18N.get(UI, "label.variant.standard"));
 				}
@@ -217,63 +219,17 @@ public class ItemUtilJFX {
 		// Flags to mark what details have been already added
 		boolean augment = false;
 		boolean matrix  = false;
-		if (item.hasFlag(ItemTemplate.FLAG_AUGMENTATION)) {
+		if (item.isAugmentation()) {
 			addAugmentationColumns(item, model, carry, table, possibilities);
 			augment = true;
 		}
+		if (item.isMatrixDevice()) {
+			addMatrixDeviceColumns(item, model, carry, table, possibilities);
+			matrix = true;
+		}
 		
-		
-		switch (item.getItemType()) {
-		case WEAPON_CLOSE_COMBAT:
-		case WEAPON_RANGED:
-		case WEAPON_FIREARMS:
-		case WEAPON_SPECIAL:
-			box.getChildren().add(getWeaponNode(item));
-			break;
-//		case BIOWARE:
-//		case CYBERWARE:
-//			box.getChildren().add(getAugmentationNode(item));
-//			break;
-//		case ARMOR:
-//			box.getChildren().add(getArmorNode(item));
-//			break;
-//		case VEHICLES:
-//		case DRONE_MICRO:
-//		case DRONE_MINI:
-//		case DRONE_SMALL:
-//		case DRONE_MEDIUM:
-//		case DRONE_LARGE:
-//			box.getChildren().add(getVehicleNode(item));
-//			break;
-		case ELECTRONICS:
-			ItemSubType st = item.getItemSubtype();
-//			if (st==null)
-//				st = item.getSubtype(null);
-			if (st==null) {
-				logger.log(Level.ERROR, "No subtype found for "+item);
-				System.err.println("No subtype found for "+item);
-			}
-			if (st!=null) {
-				switch (st) {
-				case COMMLINK:
-				case RIGGER_CONSOLE:
-					box.getChildren().add(getMatrixDeviceNode(item));
-					break;
-				case CYBERDECK:
-					box.getChildren().add(getCyberdeckNode(item));
-					break;
-				default:
-					logger.log(Level.WARNING,"No special display for "+ItemType.ELECTRONICS+"/"+st);
-				}
-			}
-			break;
-		default:
+		if (!augment && !matrix) {
 			logger.log(Level.WARNING,"No special display for "+item.getItemType());
-//			VBox modBox = new VBox(3);
-//			for (Modification mod : item.getModifications()) {
-//				modBox.getChildren().add(new Label(ShadowrunTools.getModificationString(mod)));
-//			}
-//			box.getChildren().add(modBox);
 		}
 
 		nextCol = table.getColumnCount();
@@ -680,63 +636,96 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
-	private static GridPane getMatrixDeviceNode(ItemTemplate item) {
+	private static Label createLabelWithValue(ItemTemplate item, CarryMode carry, AGearData data, SR6ItemAttribute attrib) {
+		Label lbAvail = new Label();
+		lbAvail.setAlignment(Pos.CENTER);
+		lbAvail .setMaxWidth(Double.MAX_VALUE);
+		GridPane.setMargin(lbAvail, new Insets(0, 5, 0, 5));
+		
+		ItemAttributeDefinition def = data.getAttribute(attrib);
+		logger.log(Level.WARNING, "Def1 {0}", def);
+		if (def==null)
+			def = item.getAttribute(attrib);
+		logger.log(Level.WARNING, "Def2 {0}", def);
+		if (attrib == SR6ItemAttribute.ESSENCECOST) {
+			Usage usage = data.getUsage(carry);
+			if (usage == null)
+				usage = item.getUsage(carry);
+			logger.log(Level.WARNING, "Def3 {0}", usage);
+			if (usage != null && usage.getRawValue() != null) {
+				lbAvail.setText(translateVariables(usage.getRawValue(), null));
+			} else if (def != null) {
+				lbAvail.setText(translateVariables(def.getRawValue(), def.getLookupTable()));
+			}
+		} else {
+			lbAvail.setText(translateVariables(def.getRawValue(), def.getLookupTable()));
+		}
+		return lbAvail;
+	}
+
+	//-------------------------------------------------------------------
+	private static void addMatrixDeviceColumns(ItemTemplate item, ShadowrunCharacter model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
+		if (item==null)
+			throw new NullPointerException("Empty item");
+
 		int COL_DEV  = 0;
-//		int COL_ATT  = 1;
-//		int COL_SLZ  = 2;
+		int COL_ATT  = 1;
+		int COL_SLZ  = 2;
 		int COL_FIR  = 4;
 		int COL_PRO  = 3;
 		int COL_PRG  = 5;
 
-		Label heaDev  = new Label(SR6ItemAttribute.DEVICE_RATING.getShortName());
-//		Label heaAtt  = new Label(ItemAttribute.ATTACK.getShortName());
-//		Label heaSlz  = new Label(ItemAttribute.SLEAZE.getShortName());
-		Label heaFir  = new Label(SR6ItemAttribute.FIREWALL.getShortName());
-		Label heaPro  = new Label(SR6ItemAttribute.DATA_PROCESSING.getShortName());
-		Label heaPrg  = new Label(SR6ItemAttribute.CONCURRENT_PROGRAMS.getShortName());
+		Label heaDev  = new Label(SR6ItemAttribute.DEVICE_RATING.getShortName()+" ");
+		Label heaAtt  = new Label(SR6ItemAttribute.ATTACK.getShortName()+" ");
+		Label heaSlz  = new Label(SR6ItemAttribute.SLEAZE.getShortName()+" ");
+		Label heaFir  = new Label(SR6ItemAttribute.FIREWALL.getShortName()+" ");
+		Label heaPro  = new Label(SR6ItemAttribute.DATA_PROCESSING.getShortName()+" ");
+		Label heaPrg  = new Label(SR6ItemAttribute.CONCURRENT_PROGRAMS.getShortName()+" ");
 
 		heaDev .getStyleClass().add("table-head");
-//		heaAtt .getStyleClass().add("table-head");
-//		heaSlz .getStyleClass().add("table-head");
+		heaAtt .getStyleClass().add("table-head");
+		heaSlz .getStyleClass().add("table-head");
 		heaFir .getStyleClass().add("table-head");
 		heaPro .getStyleClass().add("table-head");
 		heaPrg .getStyleClass().add("table-head");
 
 		heaDev .setMaxWidth(Double.MAX_VALUE);
-//		heaAtt .setMaxWidth(Double.MAX_VALUE);
-//		heaSlz .setMaxWidth(Double.MAX_VALUE);
+		heaAtt .setMaxWidth(Double.MAX_VALUE);
+		heaSlz .setMaxWidth(Double.MAX_VALUE);
 		heaFir .setMaxWidth(Double.MAX_VALUE);
 		heaPro .setMaxWidth(Double.MAX_VALUE);
 		heaPrg .setMaxWidth(Double.MAX_VALUE);
 
 		heaDev .setAlignment(Pos.CENTER);
-//		heaAtt .setAlignment(Pos.CENTER);
-//		heaSlz .setAlignment(Pos.CENTER);
+		heaAtt .setAlignment(Pos.CENTER);
+		heaSlz .setAlignment(Pos.CENTER);
 		heaFir .setAlignment(Pos.CENTER);
 		heaPro .setAlignment(Pos.CENTER);
 		heaPrg .setAlignment(Pos.CENTER);
 
-		GridPane grid = new GridPane();
-		//		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Accuracy
-		grid.add(heaDev , COL_DEV , 0);
-//		grid.add(heaAtt , COL_ATT , 0);
-//		grid.add(heaSlz , COL_SLZ , 0);
-		grid.add(heaFir , COL_FIR , 0);
-		grid.add(heaPro , COL_PRO , 0);
-		grid.add(heaPrg , COL_PRG , 0);
+		int startCol = table.getColumnCount();
+		boolean hasA = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.ATTACK)!=null);
+		boolean hasS = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.SLEAZE)!=null);
+		boolean hasD = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.DATA_PROCESSING)!=null);
+		boolean hasF = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.FIREWALL)!=null);
+		table.add(heaDev , startCol+COL_DEV , 0);
+		if (hasA) table.add(heaAtt , startCol+COL_ATT , 0);
+		if (hasS) table.add(heaSlz , startCol+COL_SLZ , 0);
+		if (hasD) table.add(heaFir , startCol+COL_FIR , 0);
+		if (hasF) table.add(heaPro , startCol+COL_PRO , 0);
+		table.add(heaPrg , startCol+COL_PRG , 0);
 
-		// Data
-		Label lblDev = getItemAttributeLabel(item, SR6ItemAttribute.DEVICE_RATING);
-		Label lblFir = getItemAttributeLabel(item, SR6ItemAttribute.FIREWALL);
-		Label lblPro = getItemAttributeLabel(item, SR6ItemAttribute.DATA_PROCESSING);
-		Label lblPrg = getItemAttributeLabel(item, SR6ItemAttribute.CONCURRENT_PROGRAMS);
-		grid.add(lblDev, COL_DEV , 1);
-		grid.add(lblFir, COL_FIR , 1);
-		grid.add(lblPro, COL_PRO , 1);
-		grid.add(lblPrg, COL_PRG , 1);
-		GridPane.setHalignment(heaDev, HPos.CENTER);
-
-		return grid;
+		
+		// Now add data
+		for (int i = 0; i < possibilities.size(); i++) {
+			AGearData data = possibilities.get(i);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.DEVICE_RATING), startCol+COL_DEV, i+1);
+			if (hasA) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.ATTACK), startCol+COL_ATT, i+1);
+			if (hasS) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.SLEAZE), startCol+COL_SLZ, i+1);
+			if (hasD) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.DATA_PROCESSING), startCol+COL_PRO, i+1);
+			if (hasF) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.FIREWALL), startCol+COL_FIR, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.CONCURRENT_PROGRAMS), startCol+COL_PRG, i+1);
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -811,49 +800,47 @@ public class ItemUtilJFX {
 		if (item==null)
 			throw new NullPointerException("Empty item");
 		
+		boolean hasE = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.ESSENCECOST)!=null);
+		boolean hasC = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.CAPACITY)!=null);
+		boolean hasS = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.SIZE)!=null);
+
 		int COL_ESS  = 0;
-		int COL_CAP  = 1;
+		int COL_CAP  = (hasE)?(COL_ESS+1):COL_ESS;
+		int COL_SIZ  = (hasC)?(COL_CAP+1):COL_CAP;
 
 		Label heaDev  = new Label(SR6ItemAttribute.ESSENCECOST.getShortName());
+		Label heaCap = new Label(SR6ItemAttribute.CAPACITY.getShortName());
 		Label heaPrg  = new Label(SR6ItemAttribute.SIZE.getShortName());
 
 		heaDev .getStyleClass().add("table-head");
 		heaPrg .getStyleClass().add("table-head");
+		heaCap .getStyleClass().add("table-head");
 
 		heaDev .setMaxWidth(Double.MAX_VALUE);
 		heaPrg .setMaxWidth(Double.MAX_VALUE);
+		heaCap .setMaxWidth(Double.MAX_VALUE);
 
 		heaDev .setAlignment(Pos.CENTER);
 		heaPrg .setAlignment(Pos.CENTER);
+		heaCap .setAlignment(Pos.CENTER);
 		
 		int startCol = table.getColumnCount();
-		table.add(heaDev, startCol+COL_ESS, 0);
-		table.add(heaPrg, startCol+COL_CAP, 0);
+		logger.log(Level.ERROR, "ESS={0} CAP={1} SIZ={2}", hasE, hasC, hasS);
+		logger.log(Level.ERROR, "ESS={0} CAP={1} SIZ={2}", COL_ESS, COL_CAP, COL_SIZ);
+		logger.log(Level.ERROR, "Before "+table.getColumnCount());
+		if (hasE) table.add(heaDev, startCol+COL_ESS, 0);
+		if (hasC) table.add(heaCap, startCol+COL_CAP, 0);
+		if (hasS) table.add(heaPrg, startCol+COL_SIZ, 0);
+		logger.log(Level.ERROR, "After "+table.getColumnCount());
 		
 		// Now add data
 		for (int i = 0; i < possibilities.size(); i++) {
-			// Essence
-			Label lbAvail = new Label();
-			lbAvail.setAlignment(Pos.CENTER);
-			lbAvail .setMaxWidth(Double.MAX_VALUE);
-			GridPane.setMargin(lbAvail, new Insets(0, 5, 0, 5));
-			
-			float essence = 0f;
 			AGearData data = possibilities.get(i);
-			ItemAttributeDefinition def = data.getAttribute(SR6ItemAttribute.ESSENCECOST);
-			if (def==null)
-				def = item.getAttribute(SR6ItemAttribute.ESSENCECOST);
-			Usage usage = data.getUsage(carry);
-			if (usage==null)
-				usage = item.getUsage(carry);
-			logger.log(Level.WARNING, "Essence "+def);
-			logger.log(Level.WARNING, "Usage   "+usage);
-			if (usage!=null && usage.getRawValue()!=null) {
-				lbAvail.setText( translateVariables( usage.getRawValue(), null ));
-			} else if (def !=null) {
-				lbAvail.setText( translateVariables( def.getRawValue(), def.getLookupTable() ));
-			}
-			table.add(lbAvail, startCol+COL_ESS, i+1);
+			logger.log(Level.ERROR, "A "+data.getAttribute(SR6ItemAttribute.CAPACITY));
+			logger.log(Level.ERROR, "  A "+createLabelWithValue(item,carry,data,SR6ItemAttribute.CAPACITY));
+			if (hasE) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.ESSENCECOST), startCol+COL_ESS, i+1);
+			if (hasC) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.CAPACITY), startCol+COL_CAP, i+1);
+			if (hasS) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.SIZE), startCol+COL_SIZ, i+1);
 		}
 	}
 

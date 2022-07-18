@@ -79,13 +79,14 @@
      	<usage mode="IMPLANTED"/>
 		<attrdef id="DATA_PROCESSING" value="$RATING+3"/>
 		<attrdef id="FIREWALL"      value="$RATING+2"/>
+		<attrdef id="DEVICE_RATING" value="$RATING"/>
 		<attrdef id="AVAILABILITY"  value="$RATING" table="3L,3L,3L,4L,5L,6L"/>
 		<attrdef id="ESSENCECOST"   value="$RATING" table="1,1.5,2,2.3,2.6,3"/>
 		<attrdef id="PRICE"         value="$RATING" table="45000,65000,80000,95000,140000,210000"/>
 		<attrdef id="AVAILABILITY"  value="$RATING" table="3L,3L,3L,4L,5L,6L"/>
- 		<flags><flag>AUGMENTATION</flag><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>AUGMENTATION</flag><flag>MATRIX_DEVICE</flag></flags>
 		<modifications>
-			<valmod type="ATTRIBUTE" ref="INITIATIVE_MATRIX" value="$RATING" table="1,1,1,2,2,3"/>
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX" value="$RATING" table="1,1,1,2,2,3"/>
 		</modifications>
    </item>
    <item avail="2" price="1000" id="datajack" type="CYBERWARE" subtype="CYBER_HEADWARE">

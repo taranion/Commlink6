@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.items;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import org.prelle.simplepersist.AttribConvert;
@@ -61,6 +62,8 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	
 	@Attribute(name="reqVariant")
 	private boolean requireVariant;
+	
+	private transient boolean treatAsVirtualVariant;
 
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
@@ -192,6 +195,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		super.validate();
 	}
 
+	
 //	//-------------------------------------------------------------------
 //	public List<SR6GearUsage> getAlternates() {
 //		if (alternates.isEmpty()) {
@@ -267,13 +271,46 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	public List<AGearData> getPossibilities(CarryMode carry) {
 		List<AGearData> ret = new ArrayList<>();
 		if (getUsage(carry)!=null && !requiresVariant()) 
-			ret.add(this);
+			ret.add(ItemUtil.calculateVirtualItem(this, null, carry));
 		for (SR6PieceOfGearVariant variant : getVariants()) {
-			if (variant.getUsage(carry)!=null || getUsage(carry)!=null) {
-				ret.add(variant);
+			if (variant.getUsage(carry)!=null || (getUsage(carry)!=null && requiresVariant())) {
+				ret.add(ItemUtil.calculateVirtualItem(this, variant, carry));
 			}
 		}
 		return ret;
 	}
 
+	//-------------------------------------------------------------------
+	public boolean isAugmentation() {
+		ItemAttributeDefinition attr = getAttribute(SR6ItemAttribute.ITEMTYPE);
+		return hasFlag(FLAG_AUGMENTATION) || attr.getValue()==ItemType.CYBERWARE || attr.getValue()==ItemType.BIOWARE;
+	}
+
+	//-------------------------------------------------------------------
+	public boolean isMatrixDevice() {
+		ItemAttributeDefinition attr = getAttribute(SR6ItemAttribute.ITEMTYPE);
+		ItemSubType sub = getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+		return hasFlag(FLAG_MATRIX_DEVICE) || attr.getValue()==ItemType.ELECTRONICS &&
+				( sub==ItemSubType.COMMLINK ||  sub==ItemSubType.CYBERDECK ||  sub==ItemSubType.RIGGER_CONSOLE  ||  sub==ItemSubType.TAC_NET );
+	}
+
+}
+
+class VariantItemTemplate extends ItemTemplate {
+
+	SR6PieceOfGearVariant variant;
+	
+	public VariantItemTemplate(SR6PieceOfGearVariant variant) {
+		this.variant = variant;
+	}
+
+	//--------------------------------------------------------------------
+	public String getName(Locale locale) {
+		if (parentItem!=null) {
+			String key = parentItem.getTypeString()+"."+parentItem.getId().toLowerCase()+".variant."+id.toLowerCase();
+			return getLocalizedString(locale, key);
+		}
+		String key = getTypeString()+"."+id.toLowerCase();
+		return getLocalizedString(locale, key);
+	}
 }

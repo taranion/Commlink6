@@ -711,13 +711,13 @@ public class SR6ArchetypeTest {
 		OperationResult<CarriedItem<ItemTemplate>> wired = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "wired_reflexes"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "wired_reflexes").getChoices().get(0), "1"));
 
-		Possible poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"));
+		Possible poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm"));
 		assertNotNull(poss);
 		assertNotNull("Missing variant not detected" , poss.getMostSevere());
 		assertTrue("Should be marked selectable, although variant not selected" , poss.get());
-		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious", CarryMode.IMPLANTED);
+		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm"), "hand_obvious", CarryMode.IMPLANTED);
 		assertTrue(poss.toString(), poss.get());
-		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberhand"), "obvious", CarryMode.IMPLANTED, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm"), "hand_obvious", CarryMode.IMPLANTED, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
 		assertTrue (hand.getError(), hand.wasSuccessful());
 		hand.get().setCustomName("Obvious left hand");
 		OperationResult<CarriedItem<ItemTemplate>> shock = equip.embed(hand.get(), ItemHook.CYBERLIMB_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "shock_limb"), null);
@@ -749,7 +749,7 @@ public class SR6ArchetypeTest {
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "jammer_direct").getChoices().get(0), "6")).wasSuccessful() );
 		OperationResult<CarriedItem<ItemTemplate>> micro = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "directional_microphone"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "directional_microphone").getChoices().get(0), "3"));
-		assertTrue( equip.embed(micro.get(), ItemHook.AUDIO, Shadowrun6Core.getItem(ItemTemplate.class, "select_sound_filter"), null).wasSuccessful() );
+		assertTrue( equip.embed(micro.get(), ItemHook.AUDIO, Shadowrun6Core.getItem(ItemTemplate.class, "select_sound_filter"), null, new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "select_sound_filter").getChoices().get(0).getUUID(), "2")).wasSuccessful() );
 		assertTrue( equip.embed(micro.get(), ItemHook.AUDIO, Shadowrun6Core.getItem(ItemTemplate.class, "audio_enhancement"), null).wasSuccessful() );
 		
 		SINController sinCtrl = charGen.getSINController();
@@ -804,7 +804,7 @@ public class SR6ArchetypeTest {
 		for (int i=2; i<=5; i++) equip.increase(tranq.get());
 		OperationResult<CarriedItem<ItemTemplate>> ultra = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "handheld_housing"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "handheld_housing").getChoices().get(0), "2"));
-		assertTrue( equip.embed(ultra.get(), ItemHook.SENSOR_HOUSING, Shadowrun6Core.getItem(ItemTemplate.class, "sensor_array"), null).wasSuccessful() );
+		assertTrue( equip.embed(ultra.get(), ItemHook.SENSOR_HOUSING, Shadowrun6Core.getItem(ItemTemplate.class, "sensor_array"), null, new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "sensor_array").getChoices().get(0), "5")).wasSuccessful() );
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator").getChoices().get(0), "6")).wasSuccessful() );
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_predator_vi")).wasSuccessful() );
