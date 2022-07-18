@@ -63,21 +63,25 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 				ItemAttributeObjectValue<SR6ItemAttribute> availAttr = model.getAsObject(SR6ItemAttribute.AVAILABILITY);
 				switch (quality) {
 				case USED:
+					if (essenceAttr!=null)
 					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
 					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), priceAttr.getDistributed()/2, quality));
 					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), -1, quality));
 					break;
 				case ALPHA:
+					if (essenceAttr!=null)
 					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-200), quality));
 					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*1.2f), quality));
 					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +1, quality));
 					break;
 				case BETA:
+					if (essenceAttr!=null)
 					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-300), quality));
 					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*1.5f), quality));
 					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +2, quality));
 					break;
 				case DELTA:
+					if (essenceAttr!=null)
 					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-500), quality));
 					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*2.5f), quality));
 					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +3, quality));

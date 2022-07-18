@@ -15,10 +15,12 @@ import org.prelle.javafx.ResponsiveControlManager;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -93,6 +95,16 @@ public class TestApplication extends FlexibleApplication {
 		ItemTemplateSelector selector = new ItemTemplateSelector(chargen, CarryMode.IMPLANTED, selectFilter);
 		ManagedDialog dialog = new ManagedDialog("Select an item", selector, CloseType.OK, CloseType.CANCEL);
 		CloseType closed = FlexibleApplication.getInstance().showAndWait(dialog);
+		if (closed==CloseType.CANCEL)
+			System.exit(0);
+		
+		ItemTemplate item = selector.getSelected();
+		ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dialog2 = new ChoiceSelectorDialog<>(getInstance(), chargen.getEquipmentController(), CarryMode.IMPLANTED);
+		dialog2.apply(item, item.getChoices());
+		closed = FlexibleApplication.getInstance().showAndWait(dialog2);
+		if (closed==CloseType.CANCEL)
+			System.exit(0);
+		
     }
 
 }

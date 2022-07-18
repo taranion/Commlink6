@@ -28,14 +28,16 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ChoiceOption;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.items.AGearData;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -43,14 +45,19 @@ import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
+import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -144,6 +151,22 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	//-------------------------------------------------------------------
 	private void updateButtons() {
 		logger.log(Level.WARNING, "updateButtons with "+ctrl);
+		
+		// Special handling for gear
+		if (item instanceof ItemTemplate) {
+			// Build item so far as possible
+			Shadowrun6Character lifeform = ctrl.getModel();
+			OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem( (ItemTemplate)item, carry, selectedVariant, lifeform, true, getDecisions());
+			logger.log(Level.INFO, "Trying to build returned "+result);
+			if (result.wasSuccessful()) {
+				CarriedItem<ItemTemplate> carried = result.get();
+				@SuppressWarnings("rawtypes")
+				CharacterController c1 = ctrl.getCharacterController();
+				SR6CharacterController charGen = (SR6CharacterController)c1;
+				Node info = ItemUtilJFX.getItemInfoNode(carried, charGen);
+				logger.log(Level.INFO, "Got info node "+info);
+			}
+		}
 		
 		Possible possible = ctrl.canBeSelected(item, getDecisions() );
 		if (item instanceof ItemTemplate && ctrl instanceof IEquipmentController) {
