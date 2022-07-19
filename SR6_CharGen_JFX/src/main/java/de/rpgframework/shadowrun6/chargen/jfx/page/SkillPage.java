@@ -54,7 +54,7 @@ public class SkillPage extends Page {
 		initKnowledge();
 		initLanguage();
 		
-		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		descBox = new GenericDescriptionVBox((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------

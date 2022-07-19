@@ -50,7 +50,7 @@ public class WizardPageLifePath1 extends WizardPage {
 	
 	private ChoiceBox<MagicOrResonanceType> cbMoRType;
 	private OptionalNodePane layout;
-	private GenericDescriptionVBox<MagicOrResonanceType> bxDescription;
+	private GenericDescriptionVBox bxDescription;
 	private transient MagicOrResonanceType current;
 	
 	/* For aspected magicians */
@@ -60,7 +60,7 @@ public class WizardPageLifePath1 extends WizardPage {
 	private ChoiceBox<Tradition> cbTradition;
 	private TitledComponent tcTradition;
 	private TitledComponent tcAspect;
-	protected GenericDescriptionVBox<Tradition> descTradition;	
+	protected GenericDescriptionVBox descTradition;	
 	
 	private TextField tfNationality;
 	private TextField tfLanguage;
@@ -87,7 +87,7 @@ public class WizardPageLifePath1 extends WizardPage {
 	private void initComponents() {
 		cbMoRType = new ChoiceBox<MagicOrResonanceType>();
 		cbMoRType.getItems().addAll(charGen.getMagicOrResonanceController().getAvailable());
-		bxDescription = new GenericDescriptionVBox<>(null);
+		bxDescription = new GenericDescriptionVBox(null);
 		
 		cbMoRType.setConverter(new StringConverter<MagicOrResonanceType>() {
 			public String toString(MagicOrResonanceType type) { return (type!=null)?type.getName():"-";}
@@ -110,7 +110,7 @@ public class WizardPageLifePath1 extends WizardPage {
 			}
 			public Tradition fromString(String string) { return null; }
 		});
-		descTradition = new GenericDescriptionVBox<>(null);
+		descTradition = new GenericDescriptionVBox(null);
 		
 		/* For aspected magicians */
 		cbAspectSkill = new ChoiceBox<>();

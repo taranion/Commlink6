@@ -16,7 +16,6 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ContactType;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.chargen.jfx.section.ContactSection;
@@ -69,7 +68,7 @@ public class LifePage extends Page {
 		initContacts();
 		initLifestyles();
 		
-		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		descBox = new GenericDescriptionVBox((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------
@@ -130,7 +129,7 @@ public class LifePage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
@@ -142,7 +141,7 @@ public class LifePage extends Page {
 			layout.setOptional(null);
 		} else {
 			ContactType t = n.getType();
-			GenericDescriptionVBox<?> desc = new GenericDescriptionVBox<>( null);
+			GenericDescriptionVBox desc = new GenericDescriptionVBox( null);
 			desc.setData(t.getName(Locale.getDefault()), null, t.getDescription(Locale.getDefault()));
 			layout.setOptional( desc);
 			layout.setTitle(t.getName(Locale.getDefault()));
@@ -156,7 +155,7 @@ public class LifePage extends Page {
 			layout.setOptional(null);
 		} else {
 			FakeRating rating = n.getQuality();
-			GenericDescriptionVBox<?> desc = new GenericDescriptionVBox<>( null);
+			GenericDescriptionVBox desc = new GenericDescriptionVBox( null);
 			desc.setData(rating.name(), null, n.getDescription());
 			layout.setOptional( desc);
 			layout.setTitle(rating.name());

@@ -2,7 +2,6 @@ package de.rpgframework.shadowrun6.chargen.jfx.page;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -18,10 +17,10 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.items.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -45,7 +44,7 @@ public class VehiclePage extends Page {
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
 	
-	private GenericDescriptionVBox descBox ;
+	private SR6CharacterController ctrl;
 
 	//-------------------------------------------------------------------
 	public VehiclePage() {
@@ -59,8 +58,6 @@ public class VehiclePage extends Page {
 	private void initComponents() {
 		initOther();
 		initElectro();
-		
-		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------
@@ -112,27 +109,38 @@ public class VehiclePage extends Page {
 		secVehicles.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
+//	//-------------------------------------------------------------------
+//	private void showDescription(ComplexDataItemValue<? extends ComplexDataItem> n) {
+//		logger.log(Level.INFO, "Show description "+n);
+//		if (n==null) {
+//			layout.setOptional(null);
+//		} else {
+//			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+//			layout.setTitle(n.getModifyable().getName());
+//		}
+//	}
+
 	//-------------------------------------------------------------------
-	private void showDescription(ComplexDataItemValue<? extends ComplexDataItem> n) {
+	private void showDescription(CarriedItem<ItemTemplate> n) {
 		logger.log(Level.INFO, "Show description "+n);
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new CarriedItemDescriptionPane( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), ctrl, n));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
 
-	//-------------------------------------------------------------------
-	private void showDescription(ComplexDataItem n) {
-		logger.log(Level.INFO, "Show description "+n);
-		if (n==null) {
-			layout.setOptional(null);
-		} else {
-			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
-			layout.setTitle(n.getName());
-		}
-	}
+//	//-------------------------------------------------------------------
+//	private void showDescription(ComplexDataItem n) {
+//		logger.log(Level.INFO, "Show description "+n);
+//		if (n==null) {
+//			layout.setOptional(null);
+//		} else {
+//			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
+//			layout.setTitle(n.getName());
+//		}
+//	}
 	
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
@@ -140,6 +148,7 @@ public class VehiclePage extends Page {
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
+		this.ctrl = ctrl;
 		secVehicles.updateController(ctrl);
 		secDrones.updateController(ctrl);
 		refresh();

@@ -12,13 +12,12 @@ import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.items.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -44,7 +43,7 @@ public class CombatPage extends Page {
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
 	
-	private GenericDescriptionVBox descBox ;
+	private SR6CharacterController ctrl;
 
 	//-------------------------------------------------------------------
 	public CombatPage() {
@@ -60,8 +59,6 @@ public class CombatPage extends Page {
 		initMeleeWeapons();
 		initArmor();
 		initAmmunition();
-		
-		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------
@@ -149,12 +146,13 @@ public class CombatPage extends Page {
 	}
 
 	//-------------------------------------------------------------------
-	private void showDescription(ComplexDataItemValue n) {
+	private void showDescription(CarriedItem<ItemTemplate> n) {
+		logger.log(Level.INFO, "Show description "+n);
 		if (n==null) {
-			layout.setOptional(new Label("Langer Text"));
+			layout.setOptional(null);
 		} else {
-			descBox.setData(n.getModifyable());
-			layout.setOptional(descBox);
+			layout.setOptional( new CarriedItemDescriptionPane( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), ctrl, n));
+			layout.setTitle(n.getModifyable().getName());
 		}
 	}
 	
@@ -164,6 +162,7 @@ public class CombatPage extends Page {
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
+		this.ctrl = ctrl;
 		secRanged.updateController(ctrl);
 		secMelee.updateController(ctrl);
 		secArmor.updateController(ctrl);

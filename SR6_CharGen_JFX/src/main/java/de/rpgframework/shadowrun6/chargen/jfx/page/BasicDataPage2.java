@@ -5,31 +5,20 @@ import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.Page;
-import org.prelle.javafx.Section;
 import org.prelle.javafx.layout.FlexGridPane;
-
-import com.onexip.flexboxfx.FlexBox;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.GenericDescriptionVBox;
-import de.rpgframework.jfx.RPGFrameworkJavaFX;
 import de.rpgframework.jfx.section.AppearanceSection;
-import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.TextFlow;
 
 /**
  * @author prelle
@@ -116,7 +105,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		FlexGridPane.setMinHeight(secQualities, 7);
 		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
 			if (n!=null) {
-				layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+				layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
 				layout.setTitle(n.getModifyable().getName());
 			}
 		});

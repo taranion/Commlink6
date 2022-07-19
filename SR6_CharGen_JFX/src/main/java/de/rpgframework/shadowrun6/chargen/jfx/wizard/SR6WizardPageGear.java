@@ -61,7 +61,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	private Button btnInc;
 	
 	protected ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>> selection;
-	protected GenericDescriptionVBox<ItemTemplate> bxDescription;
+	protected GenericDescriptionVBox bxDescription;
 	protected OptionalNodePane layout;
 	private NumberUnitBackHeader backHeaderKarma;
 	private NumberUnitBackHeader backHeaderNuyen;
@@ -98,7 +98,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		selection.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell( () -> charGen.getEquipmentController()));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		
-		bxDescription = new GenericDescriptionVBox<ItemTemplate>(null);
+		bxDescription = new GenericDescriptionVBox(null);
 		
 		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection, ItemType.PACK));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), charGen.getEquipmentController()));

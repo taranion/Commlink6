@@ -37,7 +37,7 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 	protected SR6CharacterController charGen;
 	
 	protected ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>> selection;
-	protected GenericDescriptionVBox<ItemTemplate> bxDescription;
+	protected GenericDescriptionVBox bxDescription;
 	protected OptionalNodePane layout;
 	
 	// Shall character requirements be ignored

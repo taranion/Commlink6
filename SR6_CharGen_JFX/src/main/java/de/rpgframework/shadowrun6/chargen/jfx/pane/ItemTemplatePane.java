@@ -24,7 +24,7 @@ import javafx.scene.layout.HBox;
  * @author prelle
  *
  */
-public class ItemTemplatePane extends GenericDescriptionVBox<ItemTemplate> {
+public class ItemTemplatePane extends GenericDescriptionVBox {
 
 	private Node perTypeStats;
 	private CarryMode carry;
@@ -47,7 +47,7 @@ public class ItemTemplatePane extends GenericDescriptionVBox<ItemTemplate> {
 	 * @see de.rpgframework.jfx.GenericDescriptionVBox#setData(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public void setData(ItemTemplate data) {
+	public void setData(DataItem data) {
 		super.setData(data);
 
 		if (perTypeStats != null) {
@@ -55,7 +55,7 @@ public class ItemTemplatePane extends GenericDescriptionVBox<ItemTemplate> {
 		}
 
 		if (data != null) {
-			perTypeStats = ItemUtilJFX.getItemInfoNode(data, null, carry);
+			perTypeStats = ItemUtilJFX.getItemInfoNode((ItemTemplate)data, null, carry);
 			if (perTypeStats != null) {
 				super.inner.getChildren().add(2, perTypeStats);
 			}

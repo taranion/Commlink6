@@ -60,7 +60,7 @@ public class GearPage extends Page {
 		initOther();
 		initElectro();
 		
-		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		descBox = new GenericDescriptionVBox((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------
@@ -118,7 +118,7 @@ public class GearPage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
@@ -129,7 +129,7 @@ public class GearPage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
+			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
 			layout.setTitle(n.getName());
 		}
 	}

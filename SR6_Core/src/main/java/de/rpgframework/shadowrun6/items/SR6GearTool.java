@@ -20,6 +20,7 @@ public class SR6GearTool extends GearTool {
 
 	public static CarriedItemProcessor[] SR6_PHASE2_STEPS = new CarriedItemProcessor[] {
 			new DetermineStandardEssenceStep(),
+			new DeriveCapacityAttributeStep(),
 			new HandleAugmentationGradeStep(),
 			new AddUpPricesStep()
 	};

@@ -36,6 +36,7 @@ import de.rpgframework.genericrpg.data.ChoiceOption;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.data.DataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
@@ -45,11 +46,9 @@ import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
-import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
@@ -86,7 +85,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private CarryMode carry;
 	
 	private OptionalNodePane optional;
-	private GenericDescriptionVBox<DataItem> bxDesc;
+	private GenericDescriptionVBox bxDesc;
 	private VBox content;
 	private Label lbProblem;
 	private NavigButtonControl btnCtrl;
@@ -115,7 +114,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		this.carry = carry;
 		
 		content = new VBox(10);
-		bxDesc  = new GenericDescriptionVBox<>(null);
+		bxDesc  = new GenericDescriptionVBox(null);
 		optional= new OptionalNodePane(content, bxDesc);
 		lbProblem = new Label();
 		lbProblem.setStyle("-fx-text-fill: -fx-accent");
@@ -131,6 +130,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private void showHelpFor(DataItem item) {
 		bxDesc.setData(item);
 		optional.setTitle(item.getName());
+	}
+
+	//-------------------------------------------------------------------
+	private void showHelpFor(DataItemValue item) {
+		bxDesc.setData(item);
+		optional.setTitle(item.getNameWithoutRating());
 	}
 
 	//-------------------------------------------------------------------
@@ -163,7 +168,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				@SuppressWarnings("rawtypes")
 				CharacterController c1 = ctrl.getCharacterController();
 				SR6CharacterController charGen = (SR6CharacterController)c1;
-				Node info = ItemUtilJFX.getItemInfoNode(carried, charGen);
+				Node info = ItemUtilJFX.getItemInfoNode(carried, charGen, true);
 				logger.log(Level.INFO, "Got info node "+info);
 			}
 		}

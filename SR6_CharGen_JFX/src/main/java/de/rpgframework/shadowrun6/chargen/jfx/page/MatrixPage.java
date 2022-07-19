@@ -31,6 +31,7 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
@@ -60,7 +61,7 @@ public class MatrixPage extends Page {
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
 	
-	private GenericDescriptionVBox descBox ;
+	private SR6CharacterController ctrl;
 	private Predicate<CarriedItem<ItemTemplate>> filter;
 
 	//-------------------------------------------------------------------
@@ -77,7 +78,6 @@ public class MatrixPage extends Page {
 		initDevices();
 		initMetamagic();
 		initSoftware();
-		descBox = new GenericDescriptionVBox<>((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------
@@ -134,6 +134,18 @@ public class MatrixPage extends Page {
 	private void initInteractivity() {
 		secDevices.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secSoftware.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secMeta.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+	}
+
+	//-------------------------------------------------------------------
+	private void showDescription(CarriedItem<ItemTemplate> n) {
+		logger.log(Level.INFO, "Show description "+n);
+		if (n==null) {
+			layout.setOptional(null);
+		} else {
+			layout.setOptional( new CarriedItemDescriptionPane( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), ctrl, n));
+			layout.setTitle(n.getModifyable().getName());
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -142,7 +154,7 @@ public class MatrixPage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
@@ -153,6 +165,7 @@ public class MatrixPage extends Page {
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
+		this.ctrl = ctrl;
 		secMeta.updateController(ctrl);
 		secDevices.updateController(ctrl);
 		secSoftware.updateController(ctrl);

@@ -122,7 +122,7 @@ public class BasicDataPage extends Page implements IShadowrunCharacterController
 		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
 			System.getLogger("shadowrun6").log(Level.INFO, "ShowHelpFor "+n);
 			if (n!=null) {
-				layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+				layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
 			}
 		});
 //		((QualitySection)secQualities).updateController(ctrl);

@@ -14,10 +14,15 @@ import org.prelle.javafx.JavaFXConstants;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.items.AAvailableSlot;
 import de.rpgframework.genericrpg.items.AGearData;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
+import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
@@ -28,6 +33,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -58,75 +64,116 @@ public class ItemUtilJFX {
 	private static PropertyResourceBundle UI = (PropertyResourceBundle) ResourceBundle.getBundle(Shadowrun6Tools.class.getName());
 
 	//-------------------------------------------------------------------
-	public static Node getItemInfoNode(CarriedItem<ItemTemplate> item, SR6CharacterController ctrl) {
+	private static void addColumn(GridPane table, CarriedItem<ItemTemplate> carried, SR6ItemAttribute attrib, int width) {
+		ItemAttributeValue<?> raw = carried.getAttributeRaw(attrib);
+		if (raw==null)
+			return;
+		logger.log(Level.WARNING, "addColumn("+attrib+") = "+raw);
+		
+		int x = table.getColumnCount();
+		Label header  = new Label(attrib.getShortName());
+		header.getStyleClass().add("table-head");
+		header.setMaxWidth(Double.MAX_VALUE);
+		header.setAlignment(Pos.CENTER);
+
+		table.getColumnConstraints().add(new ColumnConstraints(width));
+		table.add(header, x, 0);
+		
+		Label value= getItemAttributeLabel(carried, attrib);
+		table.add(value, x, 1);
+		GridPane.setHalignment(value, HPos.CENTER);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param detailed Include augmentation, price and availability
+	 */
+	public static Node getItemInfoNode(CarriedItem<ItemTemplate> item, SR6CharacterController ctrl, boolean detailed) {
 		logger.log(Level.WARNING, "create InfoNode for "+item);
-		Shadowrun6Character model = ctrl.getModel();
+		Shadowrun6Character model = null; // ctrl.getModel();
+		CarryMode carry = item.getCarryMode();
+		
+		GridPane table = new GridPane();
+
+		// Weapons
+		addColumn(table, item, SR6ItemAttribute.ATTACK_RATING, 90);
+		addColumn(table, item, SR6ItemAttribute.DAMAGE, 50);
+		addColumn(table, item, SR6ItemAttribute.FIREMODES, 100);
+		addColumn(table, item, SR6ItemAttribute.AMMUNITION, 50);
+		// Armor
+		addColumn(table, item, SR6ItemAttribute.DEFENSE_PHYSICAL, 40);
+		addColumn(table, item, SR6ItemAttribute.DEFENSE_SOCIAL, 50);
+		// Vehicle
+		addColumn(table, item, SR6ItemAttribute.HANDLING, 50);
+		addColumn(table, item, SR6ItemAttribute.ACCELERATION, 50);
+		addColumn(table, item, SR6ItemAttribute.TOPSPEED, 50);
+		addColumn(table, item, SR6ItemAttribute.BODY    , 50);
+		addColumn(table, item, SR6ItemAttribute.ARMOR   , 40);
+		addColumn(table, item, SR6ItemAttribute.PILOT   , 40);
+		addColumn(table, item, SR6ItemAttribute.SENSORS , 40);
+		addColumn(table, item, SR6ItemAttribute.SEATS   , 40);
+		// Matrix Device
+		addColumn(table, item, SR6ItemAttribute.DEVICE_RATING, 40);
+		addColumn(table, item, SR6ItemAttribute.ATTACK, 50);
+		addColumn(table, item, SR6ItemAttribute.SLEAZE, 50);
+		addColumn(table, item, SR6ItemAttribute.FIREWALL, 50);
+		addColumn(table, item, SR6ItemAttribute.DATA_PROCESSING, 50);
+		addColumn(table, item, SR6ItemAttribute.CONCURRENT_PROGRAMS, 40);
+		// Generic
+		if (detailed) {
+			// Augmentations
+			addColumn(table, item, SR6ItemAttribute.ESSENCECOST, 50);
+			addColumn(table, item, SR6ItemAttribute.CAPACITY, 40);
+			addColumn(table, item, SR6ItemAttribute.AVAILABILITY , 40);
+			addColumn(table, item, SR6ItemAttribute.PRICE , 60);
+		}
+
+		
+		VBox box = new VBox(10);
+		box.setStyle("-fx-spacing:0.5em; ");
+		box.setMaxWidth(Double.MAX_VALUE);
+		ItemTemplate raw = item.getModifyable();
+
+		/*
+		 * Accessories
+		 */
+		//		logger.warn(item.dump());
+		//		logger.debug("Accessories of "+item+" are "+item.getAccessories());
+		if (!item.getEffectiveAccessories().isEmpty()) {
+			List<String> accessNames = new ArrayList<String>();
+			item.getEffectiveAccessories().forEach(sub -> accessNames.add(sub.getNameWithRating()));
+			//			lblAccessories.setText(String.join(", ", item.getAccessories()));
+			Label heaModif = new Label(ResourceI18N.get(UI,"label.accessories")+": ");
+			heaModif.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+
+			FlowPane flow = new FlowPane();
+			flow.getChildren().add(heaModif);
+			Iterator<String> it = accessNames.iterator();
+			while (it.hasNext()) {
+				Label lbl = new Label(it.next());
+				if (it.hasNext())
+					lbl.setText(lbl.getText()+",  ");
+				flow.getChildren().add(lbl);
+			}
+			box.getChildren().add(flow);
+			VBox.setMargin(flow, new Insets(5, 0, 5, 0));
+		}
+		
+		box.getChildren().add(table);
+
+		return table;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param detailed Include augmentation, price and availability
+	 */
+	public static Node getAccessoryInfoNode(CarriedItem<ItemTemplate> item, SR6CharacterController ctrl, boolean detailed) {
+		logger.log(Level.WARNING, "create InfoNode for "+item);
 
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");
 		box.setMaxWidth(Double.MAX_VALUE);
-
-		ItemTemplate raw = item.getModifyable();
-		try {
-			switch (raw.getItemType()) {
-//			case AMMUNITION:
-//				int units = item.getCount()*10;
-//				switch (raw.getItemSubtype()) {
-//				case AMMUNITION:
-//					if (item.getChoice()!=null)
-//						box.getChildren().add(new Label(ResourceI18N.format(UI, "iteminfonode.ammo", units, ((AmmunitionType)item.getChoice()).getName())));
-//					break;
-//				case ROCKETS:
-//				} 
-//				break;
-//			case ARMOR:
-//				box.getChildren().add(getArmorNode(item,model));
-//				break;
-			case WEAPON_CLOSE_COMBAT:
-			case WEAPON_RANGED:
-			case WEAPON_FIREARMS:
-			case WEAPON_SPECIAL:
-				box.getChildren().add(getWeaponNode(item,model));
-				break;
-//			case BIOWARE:
-//			case CYBERWARE:
-//				box.getChildren().add(getAugmentationNode(item, ctrl.getEquipmentController()));
-//				break;
-			case VEHICLES:
-			case DRONE_LARGE: case DRONE_MEDIUM: case DRONE_MICRO: case DRONE_MINI: case DRONE_SMALL:
-				box.getChildren().add(getVehicleNode(item,model));
-				break;
-			case ELECTRONICS:
-				ItemSubType st = raw.getItemSubtype();
-//				if (st==null)
-//					st = item.getSubtype(null);
-				if (st==null) {
-					logger.log(Level.ERROR, "No subtype found for "+item);
-					System.err.println("No subtype found for "+item);
-				}
-				if (st!=null) {
-					switch (st) {
-					case COMMLINK:
-					case RIGGER_CONSOLE:
-					case CYBERDECK:
-						box.getChildren().add(getMatrixDeviceNode(item,model));
-						break;
-					default:
-						logger.log(Level.WARNING,"No special display for "+ItemType.ELECTRONICS+"/"+st);
-					}
-				}
-				break;
-			case CYBERWARE:
-			case BIOWARE:
-				box.getChildren().add(getAugmentationNode(item,model));
-				break;
-			default:
-				logger.log(Level.ERROR,"No special handling for "+raw.getItemType()+"/"+raw.getItemSubtype()+": "+raw.getId());
-			}
-		} catch (Exception e) {
-			box.getChildren().add(new Label("ERROR: "+e));
-			logger.log(Level.ERROR,"Failed getting item data",e);
-		}
 
 		/*
 		 * Accessories
@@ -335,9 +382,17 @@ public class ItemUtilJFX {
 		Label ret = new Label("?");
 		Object obj = null;
 		switch (attr) {
+		case AVAILABILITY:
+			obj = item.getAsObject(attr).getModifiedValue();
+			ret.setText(String.valueOf( (Availability)obj));
+			break;
 		case ATTACK_RATING:
 			obj = item.getAsObject(attr).getModifiedValue();
 			ret.setText(Shadowrun6Tools.getAttackRatingString( (int[])obj));
+			break;
+		case PRICE:
+			int ny = item.getAsValue(attr).getModifiedValue();
+			ret.setText( ny+" \u00A5");
 			break;
 		case ESSENCECOST:
 			if (item.getAsFloat(attr)!=null) {
@@ -368,6 +423,8 @@ public class ItemUtilJFX {
 		case ARMOR:
 		case ATTACK:
 		case BODY:
+		case CAPACITY:
+		case CARGO:
 		case CONCURRENT_PROGRAMS:
 		case DATA_PROCESSING:
 		case DEVICE_RATING:
@@ -383,6 +440,20 @@ public class ItemUtilJFX {
 				ret.setText(String.valueOf(item.getAsValue(attr).getModifiedValue()));
 			}
 			break;
+		case DEFENSE_PHYSICAL:
+		case DEFENSE_SOCIAL:
+		case DEFENSE_MATRIX:
+			if (item.getAsValue(attr)==null) {
+				ret.setText("-");
+			} else {
+				int v = item.getAsValue(attr).getModifiedValue();
+				if (v<0)
+					ret.setText(String.valueOf(v));
+				else
+					ret.setText("+"+String.valueOf(v));
+			}
+			break;
+			
 		default:
 			logger.log(Level.ERROR, "Don't know how to handle "+attr);
 		}
@@ -485,76 +556,14 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
-	private static Node getWeaponNode(CarriedItem<ItemTemplate> item, Shadowrun6Character model) {
-		VBox layout = new VBox();
-		layout.setStyle("-fx-spacing: 0.5em");
-		layout.setMaxWidth(Double.MAX_VALUE);
+	private static void addWeaponColumns(CarriedItem<ItemTemplate> carried, Shadowrun6Character model, GridPane table) {
+		if (carried==null)
+			throw new NullPointerException("Empty item");
 
-		int COL_ACCU = 0;
-		int COL_DMG  = 1;
-		int COL_MODE = 2;
-		int COL_AMMO = 3;
-		int COL_POOL = 4;
-
-		Label heaAcc  = new Label(SR6ItemAttribute.ATTACK_RATING.getShortName());
-		Label heaDmg  = new Label(SR6ItemAttribute.DAMAGE.getShortName());
-		Label heaMode = new Label(SR6ItemAttribute.FIREMODES.getShortName());
-		Label heaAmmo = new Label(SR6ItemAttribute.AMMUNITION.getShortName());
-		Label heaPool = new Label(ResourceI18N.get(UI,"label.pool"));
-
-		heaAcc .getStyleClass().add("table-head");
-		heaDmg .getStyleClass().add("table-head");
-		heaMode.getStyleClass().add("table-head");
-		heaAmmo.getStyleClass().add("table-head");
-		heaPool.getStyleClass().add("table-head");
-
-		heaAcc .setMaxWidth(Double.MAX_VALUE);
-		heaDmg .setMaxWidth(Double.MAX_VALUE);
-		heaMode.setMaxWidth(Double.MAX_VALUE);
-		heaAmmo.setMaxWidth(Double.MAX_VALUE);
-		heaPool.setMaxWidth(Double.MAX_VALUE);
-
-		heaAcc .setAlignment(Pos.CENTER);
-		heaDmg .setAlignment(Pos.CENTER);
-		heaMode.setAlignment(Pos.CENTER);
-		heaAmmo.setAlignment(Pos.CENTER);
-		heaPool.setAlignment(Pos.CENTER);
-
-		GridPane grid = new GridPane();
-		grid.getColumnConstraints().add(new ColumnConstraints( 90)); // Attack Rating
-		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Damage
-		grid.getColumnConstraints().add(new ColumnConstraints(100)); // Mode
-		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Ammo
-		grid.getColumnConstraints().add(new ColumnConstraints( 40)); // Pool
-		grid.add(heaAcc , COL_ACCU, 0);
-		grid.add(heaDmg , COL_DMG , 0);
-		grid.add(heaMode, COL_MODE, 0);
-		grid.add(heaAmmo, COL_AMMO, 0);
-		grid.add(heaPool, COL_POOL, 0);
-
-		Label lblAcc = getItemAttributeLabel(item, SR6ItemAttribute.ATTACK_RATING);
-		Label lblDmg = getItemAttributeLabel(item, SR6ItemAttribute.DAMAGE);
-		Label lblMod = getItemAttributeLabel(item, SR6ItemAttribute.FIREMODES);
-		Label lblAmm = getItemAttributeLabel(item, SR6ItemAttribute.AMMUNITION);
-//		if (raw.getWeaponData().getSpecialization()!=null)
-//			lblSkil.setText(lblSkil.getText()+"/"+raw.getWeaponData().getSpecialization().getName());
-//		Label lblPool = new Label(String.valueOf(Shadowrun6Tools.getWeaponPool(model, item)));
-		Label lblPool = new Label("Pool?");
-//		Tooltip tt = new Tooltip(Shadowrun6Tools.getWeaponPoolExplanation(model, item));
-//		lblPool.setTooltip(tt);
-		grid.add(lblAcc, COL_ACCU, 1);
-		grid.add(lblDmg, COL_DMG , 1);
-		grid.add(lblMod, COL_MODE, 1);
-		grid.add(lblAmm, COL_AMMO, 1);
-		grid.add(lblPool, COL_POOL, 1);
-		GridPane.setHalignment(lblAcc, HPos.CENTER);
-		GridPane.setHalignment(lblDmg, HPos.CENTER);
-		GridPane.setHalignment(lblMod, HPos.CENTER);
-		GridPane.setHalignment(lblAmm, HPos.CENTER);
-		GridPane.setHalignment(lblPool, HPos.CENTER);
-
-		layout.getChildren().add(grid);
-		return layout;
+		addColumn(table, carried, SR6ItemAttribute.ATTACK_RATING, 90);
+		addColumn(table, carried, SR6ItemAttribute.DAMAGE, 50);
+		addColumn(table, carried, SR6ItemAttribute.FIREMODES, 100);
+		addColumn(table, carried, SR6ItemAttribute.AMMUNITION, 50);
 	}
 
 	//-------------------------------------------------------------------
@@ -661,6 +670,38 @@ public class ItemUtilJFX {
 			if (def!=null)
 				lbAvail.setText(translateVariables(def.getRawValue(), def.getLookupTable()));
 		}
+		return lbAvail;
+	}
+
+	//-------------------------------------------------------------------
+	private static Label createLabelWithValue(CarriedItem<ItemTemplate> item, SR6ItemAttribute attrib) {
+		Label lbAvail = new Label();
+		lbAvail.setAlignment(Pos.CENTER);
+		lbAvail .setMaxWidth(Double.MAX_VALUE);
+		GridPane.setMargin(lbAvail, new Insets(0, 5, 0, 5));
+		
+		ItemAttributeValue val = item.getAttributeRaw(attrib);
+		if (val==null)
+			return lbAvail;		
+		logger.log(Level.WARNING, "Def1 {0}", val);
+				
+		StringBuffer buf = new StringBuffer();
+		if (val instanceof ItemAttributeFloatValue) {
+			ItemAttributeFloatValue fVal = (ItemAttributeFloatValue)val;
+			buf.append( String.format("%2.2f", fVal.getDistributed()) );
+			if (fVal.getFloatModifier()!=0f) {
+				buf.append(" ("+fVal.getModifiedValue()+")");
+			}
+		} else if (val instanceof ItemAttributeNumericalValue) {
+			ItemAttributeNumericalValue fVal = (ItemAttributeNumericalValue)val;
+			buf.append( String.format("%2d", fVal.getDistributed()) );
+			if (fVal.getModifier()!=0) {
+				buf.append(" ("+fVal.getModifiedValue()+")");
+			}
+		} else {
+			logger.log(Level.WARNING, "ToDo: Deal with "+val.getClass());
+		}
+		lbAvail.setText(buf.toString());
 		return lbAvail;
 	}
 
@@ -846,12 +887,49 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
-	private static Node getVehicleNode(CarriedItem item, ShadowrunCharacter model) {
-		if (item==null)
+	private static void addAugmentationColumns(CarriedItem<ItemTemplate> carried, Shadowrun6Character model, GridPane table) {
+		if (carried==null)
 			throw new NullPointerException("Empty item");
-		VBox layout = new VBox();
-		layout.setStyle("-fx-spacing: 0.5em");
-		layout.setMaxWidth(Double.MAX_VALUE);
+		
+		boolean hasE = carried.getAttributeRaw(SR6ItemAttribute.ESSENCECOST)!=null;
+		boolean hasC = carried.getAttributeRaw(SR6ItemAttribute.CAPACITY)!=null;
+		boolean hasS = carried.getAttributeRaw(SR6ItemAttribute.SIZE)!=null;
+		
+		int COL_ESS  = 0;
+		int COL_CAP  = (hasE)?(COL_ESS+1):COL_ESS;
+		int COL_SIZ  = (hasC)?(COL_CAP+1):COL_CAP;
+
+		Label heaDev  = new Label(SR6ItemAttribute.ESSENCECOST.getShortName());
+		Label heaCap = new Label(SR6ItemAttribute.CAPACITY.getShortName());
+		Label heaPrg  = new Label(SR6ItemAttribute.SIZE.getShortName());
+
+		heaDev .getStyleClass().add("table-head");
+		heaPrg .getStyleClass().add("table-head");
+		heaCap .getStyleClass().add("table-head");
+
+		heaDev .setMaxWidth(Double.MAX_VALUE);
+		heaPrg .setMaxWidth(Double.MAX_VALUE);
+		heaCap .setMaxWidth(Double.MAX_VALUE);
+
+		heaDev .setAlignment(Pos.CENTER);
+		heaPrg .setAlignment(Pos.CENTER);
+		heaCap .setAlignment(Pos.CENTER);
+		
+		int startCol = table.getColumnCount();
+		if (hasE) table.add(heaDev, startCol+COL_ESS, 0);
+		if (hasC) table.add(heaCap, startCol+COL_CAP, 0);
+		if (hasS) table.add(heaPrg, startCol+COL_SIZ, 0);
+		
+		if (hasE) table.add(createLabelWithValue(carried, SR6ItemAttribute.ESSENCECOST), startCol+COL_ESS, 1);
+		if (hasC) table.add(createLabelWithValue(carried, SR6ItemAttribute.CAPACITY), startCol+COL_CAP, 1);
+		if (hasS) table.add(createLabelWithValue(carried, SR6ItemAttribute.SIZE), startCol+COL_SIZ, 1);
+	}
+
+	//-------------------------------------------------------------------
+	private static void addVehicleColumns(CarriedItem carried, Shadowrun6Character model, GridPane table) {
+		if (carried==null)
+			throw new NullPointerException("Empty item");
+		boolean hasS = carried.getAttributeRaw(SR6ItemAttribute.SEATS)!=null;
 
 		int COL_HAND = 0;
 		int COL_ACCL = 1;
@@ -903,34 +981,35 @@ public class ItemUtilJFX {
 		heaAmmo.setAlignment(Pos.CENTER);
 		heaSeat.setAlignment(Pos.CENTER);
 
-		GridPane grid = new GridPane();
-		grid.getColumnConstraints().add(new ColumnConstraints( 60)); // Handling
-		grid.getColumnConstraints().add(new ColumnConstraints( 60)); // Acceleration
-		grid.getColumnConstraints().add(new ColumnConstraints( 60)); // Speed
-		grid.getColumnConstraints().add(new ColumnConstraints( 50)); // Body
-		grid.getColumnConstraints().add(new ColumnConstraints( 40)); // Armor
-		grid.getColumnConstraints().add(new ColumnConstraints( 40)); // Pilot
-		grid.getColumnConstraints().add(new ColumnConstraints( 40)); // Sensor
-		grid.getColumnConstraints().add(new ColumnConstraints( 40)); // Seats
-		grid.add(heaHand, COL_HAND, 0);
-		grid.add(heaAccl, COL_ACCL, 0);
-		grid.add(heaSpdI, COL_SPDI, 0);
-		grid.add(heaSpd , COL_SPED, 0);
-		grid.add(heaBody, COL_BODY , 0);
-		grid.add(heaArmr, COL_ARMR, 0);
-		grid.add(heaPilt, COL_PILT  , 0);
-		grid.add(heaAmmo, COL_SENS, 0);
-		grid.add(heaSeat, COL_SEAT, 0);
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Handling
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Acceleration
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Speed
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Body
+		table.getColumnConstraints().add(new ColumnConstraints( 40)); // Armor
+		table.getColumnConstraints().add(new ColumnConstraints( 40)); // Pilot
+		table.getColumnConstraints().add(new ColumnConstraints( 40)); // Sensor
+		if (hasS)
+			table.getColumnConstraints().add(new ColumnConstraints( 40)); // Seats
+		table.add(heaHand, COL_HAND, 0);
+		table.add(heaAccl, COL_ACCL, 0);
+		table.add(heaSpdI, COL_SPDI, 0);
+		table.add(heaSpd , COL_SPED, 0);
+		table.add(heaBody, COL_BODY , 0);
+		table.add(heaArmr, COL_ARMR, 0);
+		table.add(heaPilt, COL_PILT  , 0);
+		table.add(heaAmmo, COL_SENS, 0);
+		if (hasS)
+			table.add(heaSeat, COL_SEAT, 0);
 
-		Label lblHand= getItemAttributeLabel(item, SR6ItemAttribute.HANDLING);
-		Label lblAcc = getItemAttributeLabel(item, SR6ItemAttribute.ACCELERATION);
-		Label lblSpdI= getItemAttributeLabel(item, SR6ItemAttribute.SPEED_INTERVAL);
-		Label lblSpd = getItemAttributeLabel(item, SR6ItemAttribute.TOPSPEED);
-		Label lblRea = getItemAttributeLabel(item, SR6ItemAttribute.BODY);
-		Label lblMod = getItemAttributeLabel(item, SR6ItemAttribute.ARMOR);
-		Label lblRC  = getItemAttributeLabel(item, SR6ItemAttribute.PILOT);
-		Label lblAmm = getItemAttributeLabel(item, SR6ItemAttribute.SENSORS);
-		Label lblSea = getItemAttributeLabel(item, SR6ItemAttribute.SEATS);
+		Label lblHand= getItemAttributeLabel(carried, SR6ItemAttribute.HANDLING);
+		Label lblAcc = getItemAttributeLabel(carried, SR6ItemAttribute.ACCELERATION);
+		Label lblSpdI= getItemAttributeLabel(carried, SR6ItemAttribute.SPEED_INTERVAL);
+		Label lblSpd = getItemAttributeLabel(carried, SR6ItemAttribute.TOPSPEED);
+		Label lblRea = getItemAttributeLabel(carried, SR6ItemAttribute.BODY);
+		Label lblMod = getItemAttributeLabel(carried, SR6ItemAttribute.ARMOR);
+		Label lblRC  = getItemAttributeLabel(carried, SR6ItemAttribute.PILOT);
+		Label lblAmm = getItemAttributeLabel(carried, SR6ItemAttribute.SENSORS);
+		Label lblSea = getItemAttributeLabel(carried, SR6ItemAttribute.SEATS);
 //		Skill skill = ShadowrunTools.getSkillForVehicle(item.getItem());
 //		if (skill==null)
 //			logger.warn("Failed to detect skill for "+item.getItem().getType());
@@ -939,15 +1018,15 @@ public class ItemUtilJFX {
 //		//			lblSkil.setText(lblSkil.getText()+"/"+item.getItem().getWeaponData().getSpecialization().getName());
 //		Label lblPool = new Label( (skill!=null)?(String.valueOf(model.getSkillPool(skill))):"TODO"); //String.valueOf(ShadowrunTools.getWeaponPool(model, item)));
 //		logger.warn("Which skill is required for vehicle?");
-		grid.add(lblHand, COL_HAND, 1);
-		grid.add(lblAcc , COL_ACCL, 1);
-		grid.add(lblSpdI, COL_SPDI, 1);
-		grid.add(lblSpd, COL_SPED, 1);
-		grid.add(lblRea, COL_BODY , 1);
-		grid.add(lblMod, COL_ARMR, 1);
-		grid.add(lblRC , COL_PILT  , 1);
-		grid.add(lblAmm, COL_SENS, 1);
-		grid.add(lblSea, COL_SEAT, 1);
+		table.add(lblHand, COL_HAND, 1);
+		table.add(lblAcc , COL_ACCL, 1);
+		table.add(lblSpdI, COL_SPDI, 1);
+		table.add(lblSpd, COL_SPED, 1);
+		table.add(lblRea, COL_BODY , 1);
+		table.add(lblMod, COL_ARMR, 1);
+		table.add(lblRC , COL_PILT  , 1);
+		table.add(lblAmm, COL_SENS, 1);
+		table.add(lblSea, COL_SEAT, 1);
 		GridPane.setHalignment(lblHand, HPos.CENTER);
 		GridPane.setHalignment(lblAcc , HPos.CENTER);
 		GridPane.setHalignment(lblSpd , HPos.CENTER);
@@ -957,9 +1036,6 @@ public class ItemUtilJFX {
 		GridPane.setHalignment(lblRC , HPos.CENTER);
 		GridPane.setHalignment(lblAmm, HPos.CENTER);
 		GridPane.setHalignment(lblSea, HPos.CENTER);
-
-		layout.getChildren().add(grid);
-		return layout;
 	}
 
 }

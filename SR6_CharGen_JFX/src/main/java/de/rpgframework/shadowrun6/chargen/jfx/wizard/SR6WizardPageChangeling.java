@@ -50,7 +50,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	
 	private Function<Requirement,String> requirementResolver;
 	private ComplexDataItemControllerNode<Quality, QualityValue> selection;
-	private GenericDescriptionVBox<Quality> bxDescription;
+	private GenericDescriptionVBox bxDescription;
 	private OptionalNodePane layout;
 	private NumberUnitBackHeader backHeader;
 

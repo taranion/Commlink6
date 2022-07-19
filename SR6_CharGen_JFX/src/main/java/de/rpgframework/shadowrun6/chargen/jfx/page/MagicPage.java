@@ -17,7 +17,6 @@ import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.chargen.jfx.pane.SpellDescriptionPane;
 import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
@@ -148,7 +147,7 @@ public class MagicPage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox<Quality>( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}

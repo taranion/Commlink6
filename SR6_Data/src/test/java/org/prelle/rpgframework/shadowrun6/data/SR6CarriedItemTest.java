@@ -12,6 +12,7 @@ import java.util.UUID;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -31,6 +32,7 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 
 /**
  * @author prelle
@@ -158,6 +160,26 @@ public class SR6CarriedItemTest {
 		assertEquals(Shadowrun6Core.getSkill("firearms").getSpecialization("tasers"), (SkillSpecialization<SR6Skill>)item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getModifiedValue());
 		
 		//item.get
+	}
+	
+	//-------------------------------------------------------------------
+	@Test
+	public void testCapacityFromSlots() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm");
+		assertNotNull(temp);
+		SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) temp.getVariant("forearm_obvious");
+		
+		OperationResult<CarriedItem<ItemTemplate>> res = SR6GearTool.buildItem(temp, CarryMode.IMPLANTED, variant, null, false, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")); 
+		assertNotNull(res);
+		CarriedItem<ItemTemplate> item = res.get();
+		assertNotNull(item);
+		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
+		assertEquals(3, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
+		assertEquals(Legality.LEGAL, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
+		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(10000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertNotNull("CAPACITY not calculated",item.getAsValue(SR6ItemAttribute.CAPACITY));
+		assertEquals(10, item.getAsValue(SR6ItemAttribute.CAPACITY).getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------
