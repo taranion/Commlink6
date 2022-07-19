@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -132,36 +133,11 @@ public class ItemUtilJFX {
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");
 		box.setMaxWidth(Double.MAX_VALUE);
-		ItemTemplate raw = item.getModifyable();
-
-		/*
-		 * Accessories
-		 */
-		//		logger.warn(item.dump());
-		//		logger.debug("Accessories of "+item+" are "+item.getAccessories());
-		if (!item.getEffectiveAccessories().isEmpty()) {
-			List<String> accessNames = new ArrayList<String>();
-			item.getEffectiveAccessories().forEach(sub -> accessNames.add(sub.getNameWithRating()));
-			//			lblAccessories.setText(String.join(", ", item.getAccessories()));
-			Label heaModif = new Label(ResourceI18N.get(UI,"label.accessories")+": ");
-			heaModif.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-
-			FlowPane flow = new FlowPane();
-			flow.getChildren().add(heaModif);
-			Iterator<String> it = accessNames.iterator();
-			while (it.hasNext()) {
-				Label lbl = new Label(it.next());
-				if (it.hasNext())
-					lbl.setText(lbl.getText()+",  ");
-				flow.getChildren().add(lbl);
-			}
-			box.getChildren().add(flow);
-			VBox.setMargin(flow, new Insets(5, 0, 5, 0));
-		}
 		
 		box.getChildren().add(table);
+		box.getChildren().add(getAccessoryInfoNode(item, ctrl, detailed));
 
-		return table;
+		return box;
 	}
 
 	//-------------------------------------------------------------------
@@ -203,9 +179,12 @@ public class ItemUtilJFX {
 		/*
 		 * WiFi Advantages
 		 */
-//		if (!item.getWiFiAdvantageStringRecursivly().isEmpty()) {
-//			box.getChildren().add(getWiFiAdvantagesNode(item));
-//		}
+		if (detailed) {
+			Collection<String> wifi = Shadowrun6Tools.getWiFiAdvantageStrings(item, Locale.getDefault());
+			if (!wifi.isEmpty()) {
+				box.getChildren().add(getWiFiAdvantagesNode(wifi));
+			}
+		}
 
 		/*
 		 * Modifications
@@ -351,6 +330,21 @@ public class ItemUtilJFX {
 		if (raw.indexOf("$RATING")>-1)
 			raw = raw.replace("$RATING", rtg);
 		return raw;
+	}
+
+	//-------------------------------------------------------------------
+	private static Node getWiFiAdvantagesNode(Collection<String> wifi) {
+		Label heaWifi = new Label(ResourceI18N.get(UI,"label.wifiadvantage")+": ");
+		heaWifi.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+
+		Label lblWifi = new Label(String.join(",\n", wifi));
+		lblWifi.setWrapText(true);
+//		lblWifi.setStyle("-fx-max-width: 24em");
+
+		VBox flow = new VBox();
+		flow.getChildren().addAll(heaWifi, lblWifi);
+		VBox.setMargin(flow, new Insets(5, 0, 5, 0));
+		return flow;
 	}
 
 	//-------------------------------------------------------------------

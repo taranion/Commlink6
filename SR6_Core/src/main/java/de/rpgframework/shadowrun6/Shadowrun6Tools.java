@@ -5,6 +5,7 @@ import java.lang.System.Logger.Level;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -637,6 +638,17 @@ public class Shadowrun6Tools {
 				ratings[i] = "-";
 		}
 		return String.join("/", ratings);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * Give the advantages of this item and non-recursively walk through all
+	 * embedded items and return their advantages as well
+	 */
+	public static Collection<String> getWiFiAdvantageStrings(CarriedItem<ItemTemplate> carried, Locale locale) {
+		List<String> ret = new ArrayList<>();
+		ret.addAll( carried.getResolved().getWiFiAdvantageStrings(carried.getCarryMode(), carried.getVariant(), locale) );
+		return ret;
 	}
 
 	

@@ -2,8 +2,11 @@ package de.rpgframework.shadowrun6.items;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringTokenizer;
 import java.util.UUID;
 
 import org.prelle.simplepersist.AttribConvert;
@@ -27,6 +30,7 @@ import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -38,10 +42,11 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	
 	public final static String FLAG_AUGMENTATION = "AUGMENTATION";
 	public final static String FLAG_MATRIX_DEVICE = "MATRIX_DEVICE";
+	private static String FLAG_NOWIFI = "NOWIFI"; 
 	public final static UUID UUID_AUGMENTATION_QUALITY = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170c");
 	public final static Choice CHOICE_AUGMENTATION_QUALITY = new Choice(
 			ItemTemplate.UUID_AUGMENTATION_QUALITY, 
-			ShadowrunReference.AUGMENTATION_QUALITY); 
+			ShadowrunReference.AUGMENTATION_QUALITY);
 	
 
 	@Attribute(name="avail",required=false)
@@ -62,8 +67,6 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	
 	@Attribute(name="reqVariant")
 	private boolean requireVariant;
-	
-	private transient boolean treatAsVirtualVariant;
 
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
@@ -242,6 +245,18 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		return subtype;
 	}
 
+//	//-------------------------------------------------------------------
+//	public boolean isType(List<ItemType> values) {
+//		return values
+//		if (values.contains(this.type))
+//			return true;
+//		for (UseAs use : usedAs) {
+//			if (values.contains(use.getType()))
+//				return true;
+//		}
+//		return false;
+//	}
+
 	//-------------------------------------------------------------------
 	public ItemSubType getItemSubtype(CarryMode carry) {
 		if (getUsage(carry)!=null) return subtype;
@@ -260,6 +275,31 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	 */
 	public void setItemSubtype(ItemSubType subtype) {
 		this.subtype = subtype;
+	}
+
+	//-------------------------------------------------------------------
+	public Collection<String> getWiFiAdvantageStrings(CarryMode carry, PieceOfGearVariant variant, Locale locale) {
+		List<String> ret = new ArrayList<>();
+		
+		String key = "item."+id+".wifi";
+		String multiLine = getLocalizedString(locale, key);
+		if (!multiLine.equals(key)) {
+			StringTokenizer tok = new StringTokenizer(multiLine,"\n");
+			while (tok.hasMoreTokens())
+				ret.add(tok.nextToken());
+		}
+		// For firearms, add general wireless functionality
+		ItemType type = getItemType(carry);
+		List<ItemType> firearms = Arrays.asList(ItemType.WEAPON_FIREARMS, ItemType.WEAPON_SPECIAL);
+		if (firearms.contains(type) && !hasFlag(ItemTemplate.FLAG_NOWIFI)) {
+			StringTokenizer tok = new StringTokenizer(Shadowrun6Core.getI18nResources().getString("wireless.firearms_general", locale),"\n");
+			while (tok.hasMoreTokens())
+				ret.add(tok.nextToken());
+		}
+		
+		// TODO: Variant
+		
+		return ret;
 	}
 
 	//-------------------------------------------------------------------

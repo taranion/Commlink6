@@ -481,7 +481,7 @@ public class Shadowrun6CompendiumFactory {
 		Pack pack = new Pack();
 		pack.setName("shadowrun6-vehicles");
 		pack.setLabel("Vehicles");
-		pack.setEntity("Actor");
+		pack.setEntity("Item");
 		pack.setPath("packs/vehicles.db");
 		pack.setSystem("shadowrun6-eden");
 		module.getPacks().add(pack);
