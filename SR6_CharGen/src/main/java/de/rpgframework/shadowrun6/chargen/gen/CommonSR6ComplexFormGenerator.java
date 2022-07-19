@@ -219,7 +219,7 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 	 */
 	@Override
 	public String getSelectionCostString(ComplexForm data) {
-		return String.valueOf(getSelectionCostString(data));
+		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------

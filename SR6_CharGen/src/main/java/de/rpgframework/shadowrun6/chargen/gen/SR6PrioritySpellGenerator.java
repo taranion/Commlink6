@@ -206,7 +206,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 */
 	@Override
 	public String getSelectionCostString(SR6Spell data) {
-		return String.valueOf(getSelectionCostString(data));
+		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------

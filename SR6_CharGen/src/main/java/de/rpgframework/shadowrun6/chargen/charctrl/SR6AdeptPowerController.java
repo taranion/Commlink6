@@ -384,7 +384,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	 */
 	@Override
 	public String getSelectionCostString(AdeptPower data) {
-		return String.valueOf(getSelectionCostString(data));
+		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------
