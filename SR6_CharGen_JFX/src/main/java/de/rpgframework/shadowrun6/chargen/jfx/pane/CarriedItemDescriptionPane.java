@@ -1,0 +1,54 @@
+package de.rpgframework.shadowrun6.chargen.jfx.pane;
+
+import java.util.function.Function;
+
+import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import javafx.scene.Node;
+import javafx.scene.layout.VBox;
+
+/**
+ * @author prelle
+ *
+ */
+public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
+
+	private SR6CharacterController ctrl;
+	private VBox extra;
+	
+	//-------------------------------------------------------------------
+	public CarriedItemDescriptionPane(Function<Requirement,String> requirementResolver, SR6CharacterController ctrl) {
+		super(requirementResolver);
+		this.ctrl = ctrl;
+	}
+	
+	//-------------------------------------------------------------------
+	public CarriedItemDescriptionPane(Function<Requirement,String> requirementResolver, SR6CharacterController ctrl, CarriedItem<ItemTemplate> item) {
+		super(requirementResolver);
+		this.ctrl = ctrl;
+		setData(item);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.GenericDescriptionVBox#initLayout()
+	 */
+	protected void initLayout() {
+		super.initLayout();
+		extra = new VBox(5);
+		inner.getChildren().add(0, extra);
+	}
+	
+	//-------------------------------------------------------------------
+	public void setData(CarriedItem<ItemTemplate> data) {
+		super.setData(data);
+		extra.getChildren().clear();
+		
+		Node node = ItemUtilJFX.getItemInfoNode(data, ctrl, true);
+		extra.getChildren().add(node);
+	}
+}
