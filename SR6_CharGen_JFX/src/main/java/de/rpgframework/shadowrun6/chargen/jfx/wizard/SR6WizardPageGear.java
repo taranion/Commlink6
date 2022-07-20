@@ -94,7 +94,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.available"));
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.selected"));
 		
-		selection.setAvailableCellFactory(lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController()));
+		selection.setAvailableCellFactory(lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController(), null));
 		selection.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell( () -> charGen.getEquipmentController()));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		

@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.items;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 
@@ -8,10 +9,12 @@ import org.prelle.simplepersist.StringValueConverter;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.IItemAttribute;
+import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.persist.EnumConverter;
 import de.rpgframework.genericrpg.persist.FloatConverter;
 import de.rpgframework.genericrpg.persist.IntegerArrayConverter;
 import de.rpgframework.genericrpg.persist.IntegerConverter;
+import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
@@ -95,6 +98,17 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	//-------------------------------------------------------------------
 	private SR6ItemAttribute(StringValueConverter<? extends Object> conv) {
 		converter = conv;
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.items.IItemAttribute#calculateModifiedValue(java.lang.Object, java.util.List)
+	 */
+	public <T> T calculateModifiedValue(Object base, List<Modification> mods) {
+		if (this==AVAILABILITY)
+			return (T) SR6GearTool.calculateModifiedValue((Availability) base, mods);
+		System.err.println("SR6ItemAttribute: Don't know how to calculate modified value for "+this);
+		return (T)base;
 	}
 
 	//-------------------------------------------------------------------

@@ -36,7 +36,8 @@ import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SkillSection;
-import de.rpgframework.shadowrun6.items.CarriedItemItemTypeFilter;
+import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
+import de.rpgframework.shadowrun6.filter.MatrixDeviceFilter;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -83,7 +84,7 @@ public class MatrixPage extends Page {
 	//-------------------------------------------------------------------
 	private void initDevices() {
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new MatrixDeviceFilter(); 
 		secDevices = new GearSection(ResourceI18N.get(RES, "page.matrix.section.devices"), selectFilter, showFilter);
 		secDevices.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secDevices, 4);

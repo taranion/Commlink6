@@ -197,7 +197,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
-		logger.log(Level.TRACE, "ENTER select({0}, {1}", value, List.of(decisions));
+		logger.log(Level.TRACE, "ENTER select({0}, {1}", value, mode);
 		try {
 			Possible poss = canBeSelected(value, variantID, mode, decisions);
 			if (!poss.getRequireDecisions()) {
@@ -225,7 +225,7 @@ public class CommonEquipmentController extends ControllerImpl<ItemTemplate> impl
 			parent.runProcessors();
 			return new OperationResult<CarriedItem<ItemTemplate>>(item);
 		} finally {
-			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, List.of(decisions));
+			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, mode);
 		}
 	}
 

@@ -37,7 +37,6 @@ public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
 			if (resolved == null) {
 				logger.log(Level.ERROR, indent+"Item {0} refers to unknown item template ''{1}''", model.getUuid(),
 						model.getKey());
-//				System.exit(1);
 				return new OperationResult<>();
 			}
 			changed = true;
@@ -47,7 +46,6 @@ public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
 			if (variant==null) {
 				logger.log(Level.ERROR, indent+"Item {0} refers to unknown variant ''{1}'' of template {2}", model.getUuid(),
 						model.getVariantID(), model.getKey());
-				System.exit(1);
 				return new OperationResult<>();
 			}
 			changed = true;

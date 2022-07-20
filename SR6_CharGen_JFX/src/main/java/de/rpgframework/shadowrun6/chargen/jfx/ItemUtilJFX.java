@@ -15,11 +15,9 @@ import org.prelle.javafx.JavaFXConstants;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.Choice;
-import de.rpgframework.genericrpg.items.AAvailableSlot;
 import de.rpgframework.genericrpg.items.AGearData;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
@@ -34,10 +32,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.items.Damage;
-import de.rpgframework.shadowrun6.items.ItemHook;
-import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import javafx.geometry.HPos;
@@ -376,6 +371,10 @@ public class ItemUtilJFX {
 		Label ret = new Label("?");
 		Object obj = null;
 		switch (attr) {
+		case AMMUNITION:
+			obj = item.getAsObject(attr).getModifiedValue();
+			ret.setText(String.valueOf( (List)obj));
+			break;
 		case AVAILABILITY:
 			obj = item.getAsObject(attr).getModifiedValue();
 			ret.setText(String.valueOf( (Availability)obj));
@@ -454,6 +453,13 @@ public class ItemUtilJFX {
 		
 		if (obj!=null) {
 			if (!item.getAsObject(attr).getModifications().isEmpty()) {
+				logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
+				ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+				Tooltip tooltip = new Tooltip();
+				ret.setTooltip(tooltip);
+			}
+		} else {
+			if (item.getAsValue(attr)!=null && !item.getAsValue(attr).getModifications().isEmpty()) {
 				logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
 				ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 				Tooltip tooltip = new Tooltip();

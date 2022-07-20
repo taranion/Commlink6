@@ -35,6 +35,7 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 	private final static ResourceBundle RES = ResourceBundle.getBundle(ItemTemplateSelector.class.getPackageName()+".Selectors");
 
 	protected SR6CharacterController charGen;
+	protected CarryMode carry;
 	
 	protected ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>> selection;
 	protected GenericDescriptionVBox bxDescription;
@@ -44,13 +45,14 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 	private CheckBox cbIgnoreRequirements;
 
 	//-------------------------------------------------------------------
-	public ItemTemplateSelector(SR6CharacterController charGen, CarryMode carry, Predicate<ItemTemplate> templateFilter) {
+	public ItemTemplateSelector(SR6CharacterController charGen, CarryMode mode, Predicate<ItemTemplate> templateFilter) {
 		super(charGen.getEquipmentController(),
 				templateFilter,
 				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),
-				new FilterItemTemplate(carry, null));
+				new FilterItemTemplate(mode, null));
+		this.carry = mode;
 		this.charGen = charGen;
-		listPossible.setCellFactory( lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController()));
+		listPossible.setCellFactory( lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController(), carry));
 		
 		genericDescr= new ItemTemplatePane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),carry);
 		

@@ -1,11 +1,14 @@
-package de.rpgframework.shadowrun6.items;
+package de.rpgframework.shadowrun6.filter;
 
-import java.lang.System.Logger;
 import java.util.List;
 import java.util.function.Predicate;
 
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 
 /**
  * @author prelle

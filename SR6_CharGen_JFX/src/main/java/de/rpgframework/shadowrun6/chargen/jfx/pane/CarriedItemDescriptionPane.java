@@ -1,7 +1,9 @@
 package de.rpgframework.shadowrun6.chargen.jfx.pane;
 
+import java.lang.System.Logger.Level;
 import java.util.function.Function;
 
+import de.rpgframework.genericrpg.data.DataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
@@ -45,10 +47,19 @@ public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
 	
 	//-------------------------------------------------------------------
 	public void setData(CarriedItem<ItemTemplate> data) {
+		System.getLogger(CarriedItemDescriptionPane.class.getPackageName()).log(Level.WARNING, "setData");
 		super.setData(data);
 		extra.getChildren().clear();
 		
 		Node node = ItemUtilJFX.getItemInfoNode(data, ctrl, true);
 		extra.getChildren().add(node);
+	}
+	
+	//-------------------------------------------------------------------
+	public void setData(DataItemValue<?> data) {
+		if (data instanceof CarriedItem)
+			setData( (CarriedItem)data );
+		else
+			super.setData(data);
 	}
 }

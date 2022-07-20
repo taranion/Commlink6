@@ -22,8 +22,9 @@ import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
-import de.rpgframework.shadowrun6.items.CarriedItemItemTypeFilter;
+import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
@@ -45,7 +46,7 @@ public class GearPage extends Page {
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
 	
-	private GenericDescriptionVBox descBox ;
+	private SR6CharacterController ctrl;
 
 	//-------------------------------------------------------------------
 	public GearPage() {
@@ -59,8 +60,6 @@ public class GearPage extends Page {
 	private void initComponents() {
 		initOther();
 		initElectro();
-		
-		descBox = new GenericDescriptionVBox((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 	}
 	
 	//-------------------------------------------------------------------
@@ -113,26 +112,37 @@ public class GearPage extends Page {
 	}
 
 	//-------------------------------------------------------------------
-	private void showDescription(ComplexDataItemValue<? extends ComplexDataItem> n) {
+	private void showDescription(CarriedItem<ItemTemplate> n) {
 		logger.log(Level.INFO, "Show description "+n);
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new CarriedItemDescriptionPane( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), ctrl, n));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
 
-	//-------------------------------------------------------------------
-	private void showDescription(ComplexDataItem n) {
-		logger.log(Level.INFO, "Show description "+n);
-		if (n==null) {
-			layout.setOptional(null);
-		} else {
-			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
-			layout.setTitle(n.getName());
-		}
-	}
+//	//-------------------------------------------------------------------
+//	private void showDescription(ComplexDataItemValue<? extends ComplexDataItem> n) {
+//		logger.log(Level.INFO, "Show description "+n);
+//		if (n==null) {
+//			layout.setOptional(null);
+//		} else {
+//			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+//			layout.setTitle(n.getModifyable().getName());
+//		}
+//	}
+//
+//	//-------------------------------------------------------------------
+//	private void showDescription(ComplexDataItem n) {
+//		logger.log(Level.INFO, "Show description "+n);
+//		if (n==null) {
+//			layout.setOptional(null);
+//		} else {
+//			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
+//			layout.setTitle(n.getName());
+//		}
+//	}
 	
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
@@ -140,6 +150,7 @@ public class GearPage extends Page {
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
+		this.ctrl = ctrl;
 		secElectro.updateController(ctrl);
 		secOther.updateController(ctrl);
 		refresh();

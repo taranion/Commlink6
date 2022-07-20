@@ -19,7 +19,7 @@
     <Logger name="de.rpgframework.jfx.pages" level="DEBUG"/>
     <Logger name="de.rpgframework.genericrpg" level="WARN"/>
     <Logger name="de.rpgframework.genericrpg.chargen" level="WARN"/>
-    <Logger name="de.rpgframework.genericrpg.items" level="ERROR"/>
+    <Logger name="de.rpgframework.genericrpg.items" level="INFO"/>
     <Logger name="de.rpgframework.genericrpg.items.formula" level="WARN"/>
     <Logger name="de.rpgframework.shadowrun" level="INFO"/>
     <Logger name="de.rpgframework.shadowrun.chargen.gen" level="WARN"/>

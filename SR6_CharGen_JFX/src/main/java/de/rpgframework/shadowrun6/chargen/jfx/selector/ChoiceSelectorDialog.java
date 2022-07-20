@@ -53,8 +53,10 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -114,7 +116,8 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		this.carry = carry;
 		
 		content = new VBox(10);
-		bxDesc  = new GenericDescriptionVBox(null);
+		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
+		bxDesc  = (ctrl instanceof IEquipmentController)?(new CarriedItemDescriptionPane(null, (SR6CharacterController)charCtrl )):(new GenericDescriptionVBox(null));
 		optional= new OptionalNodePane(content, bxDesc);
 		lbProblem = new Label();
 		lbProblem.setStyle("-fx-text-fill: -fx-accent");
@@ -162,23 +165,30 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			// Build item so far as possible
 			Shadowrun6Character lifeform = ctrl.getModel();
 			OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem( (ItemTemplate)item, carry, selectedVariant, lifeform, true, getDecisions());
-			logger.log(Level.INFO, "Trying to build returned "+result);
-			if (result.wasSuccessful()) {
+			logger.log(Level.WARNING, "Trying to build "+carry+" returned "+result);
+			if (result.get()!=null) {
+				logger.log(Level.WARNING, "with item");
 				CarriedItem<ItemTemplate> carried = result.get();
+				logger.log(Level.WARNING, "item has mode "+carried.getCarryMode());
 				@SuppressWarnings("rawtypes")
 				CharacterController c1 = ctrl.getCharacterController();
 				SR6CharacterController charGen = (SR6CharacterController)c1;
-				Node info = ItemUtilJFX.getItemInfoNode(carried, charGen, true);
-				logger.log(Level.INFO, "Got info node "+info);
-			}
+//				Node info = ItemUtilJFX.getItemInfoNode(carried, charGen, true);
+//				logger.log(Level.INFO, "Got info node "+info);
+				logger.log(Level.WARNING, "Update description: "+bxDesc);
+				bxDesc.setData(carried);
+			} else
+				logger.log(Level.WARNING, "Not successful");
 		}
 		
-		Possible possible = ctrl.canBeSelected(item, getDecisions() );
+		Possible possible = null;
 		if (item instanceof ItemTemplate && ctrl instanceof IEquipmentController) {
 			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
-			possible = ((IEquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, CarryMode.CARRIED, getDecisions() );
+			possible = ((IEquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, carry, getDecisions() );
+		} else {
+			possible = ctrl.canBeSelected(item, getDecisions() );
 		}
-		logger.log(Level.INFO, "canBeSelected returns "+possible);
+		logger.log(Level.INFO, "canBeSelected({0}) returns "+possible, carry);
 		// Set status
 		ToDoElement problem = possible.getMostSevere();
 		if (problem==null) {
@@ -221,6 +231,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			decisions.clear();
 
 			setTitle(ResourceI18N.format(RES, "title", item.getName()));
+			bxDesc.setData(item);
 			content.getChildren().clear();
 			// Minimal intro text
 			Label explain = new Label(ResourceI18N.get(RES, "explain"));

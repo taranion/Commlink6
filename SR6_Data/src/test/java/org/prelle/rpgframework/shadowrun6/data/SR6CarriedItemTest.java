@@ -19,8 +19,12 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
+import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
+import de.rpgframework.genericrpg.items.formula.FormulaTool;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -33,6 +37,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -180,6 +185,39 @@ public class SR6CarriedItemTest {
 		assertEquals(10000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		assertNotNull("CAPACITY not calculated",item.getAsValue(SR6ItemAttribute.CAPACITY));
 		assertEquals(10, item.getAsValue(SR6ItemAttribute.CAPACITY).getModifiedValue());
+	}
+	
+	//-------------------------------------------------------------------
+	@Test
+	public void testEssence() {
+		ItemAttributeFloatValue<SR6ItemAttribute> essenceAttr = new ItemAttributeFloatValue<SR6ItemAttribute>(SR6ItemAttribute.ESSENCECOST, 0.6f);
+		ValueModification mod = new ValueModification(
+				ShadowrunReference.ITEM_ATTRIBUTE, 
+				SR6ItemAttribute.ESSENCECOST.name(), 
+				Math.round(essenceAttr.getDistributed()*-300), 
+				AugmentationQuality.BETA
+				);
+		essenceAttr.addModification(mod);
+		assertEquals(0.42f, essenceAttr.getModifiedValue(), 0f);
+		
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "reaction_enhancers");
+		assertNotNull(temp);
+		
+		OperationResult<CarriedItem<ItemTemplate>> res = SR6GearTool.buildItem(temp, CarryMode.IMPLANTED, null, null, false, 
+				new Decision(temp.getChoice("RATING"), "2"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "BETA")
+				); 
+		assertNotNull(res);
+		CarriedItem<ItemTemplate> item = res.get();
+		assertNotNull(item);
+		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
+		// Unmodified for Betaware, availability would be 4, but 6 is correct
+		assertEquals(6, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
+		assertEquals(Legality.RESTRICTED, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
+		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(45000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertNotNull("ESSENCE not calculated",item.getAsFloat(SR6ItemAttribute.ESSENCECOST));
+		assertEquals(0.42f, item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue(), 0.0f);
 	}
 
 	//-------------------------------------------------------------------
