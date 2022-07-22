@@ -11,6 +11,8 @@ import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.Quality;
@@ -26,6 +28,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.foundry.ActionSkills.ActionSkillValue;
 import de.rpgframework.shadowrun6.foundry.FVTTAdeptPower;
+import de.rpgframework.shadowrun6.foundry.FVTTComplexForm;
 import de.rpgframework.shadowrun6.foundry.FVTTCritter;
 import de.rpgframework.shadowrun6.foundry.FVTTCritterPower;
 import de.rpgframework.shadowrun6.foundry.FVTTGear;
@@ -56,6 +59,7 @@ public class Converter {
 		data.genesisID   = item.getId();
 		data.activation	 = item.getActivation().name().toLowerCase();
 		data.cost        = item.getCostForLevel(1);
+		data.hasLevel    = item.hasLevel();
 
 		return new ItemData<FVTTAdeptPower>(item.getName(loc), "adeptpower", data);
 	}
@@ -216,6 +220,27 @@ public class Converter {
 	//-------------------------------------------------------------------
 	public static ItemData<FVTTSpell> convertSpell(SpellValue<SR6Spell> item, Locale loc) {
 		return convertSpell(item.getModifyable(), loc);
+	}
+
+	//-------------------------------------------------------------------
+	public static ItemData<FVTTComplexForm> convertComplexForm(ComplexForm item, Locale loc) {
+		FVTTComplexForm spell = new FVTTComplexForm();
+
+		spell.genesisID = item.getId();
+		spell.duration  = item.getDuration().name().toLowerCase();
+		spell.fading    = item.getFading();
+
+		ItemData<FVTTComplexForm> foundry = new ItemData<FVTTComplexForm>(item.getName(loc), "complexform", spell);
+		return foundry;
+	}
+
+	//-------------------------------------------------------------------
+	public static ItemData<FVTTComplexForm> convertComplexForm(ComplexFormValue item, Locale loc) {
+		ItemData<FVTTComplexForm> ret = convertComplexForm(item.getModifyable(), loc);
+		if (item.getDecisions()!=null && !item.getDecisions().isEmpty())
+			ret.getData().choice = item.getDecisions().get(0).getValue();
+		
+		return ret;
 	}
 
 	//-------------------------------------------------------------------

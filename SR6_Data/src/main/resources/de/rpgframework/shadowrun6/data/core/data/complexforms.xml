@@ -18,12 +18,12 @@
    	</choices>
    </complexform>
    <complexform id="mirrored_persona" dur="SUSTAINED" fad="3" />
-   <complexform id="pulse_storm"      dur="IMMEDIATE" fad="3"/>
+   <complexform id="pulse_storm"      dur="INSTANTANEOUS" fad="3"/>
    <complexform id="puppeteer"        dur="SUSTAINED" fad="5"/>
    <complexform id="resonance_channel"  dur="SUSTAINED" fad="2"/>
-   <complexform id="resonance_spike"  dur="IMMEDIATE" fad="4"/>
+   <complexform id="resonance_spike"  dur="INSTANTANEOUS" fad="4"/>
    <complexform id="resonance_veil"   dur="SUSTAINED" fad="4"/>
-   <complexform id="static_bomb"      dur="IMMEDIATE" fad="6"/>
+   <complexform id="static_bomb"      dur="INSTANTANEOUS" fad="6"/>
    <complexform id="static_veil"      dur="SUSTAINED" fad="3"/>
    <complexform id="stitches"         dur="PERMANENT" fad="4"/>
    <complexform id="tattletale"       dur="PERMANENT" fad="3"/>

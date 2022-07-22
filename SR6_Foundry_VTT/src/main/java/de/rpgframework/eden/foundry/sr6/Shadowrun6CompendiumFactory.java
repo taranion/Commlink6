@@ -31,9 +31,11 @@ import de.rpgframework.foundry.ItemData;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.PageReference;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.reality.Player;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.Quality;
@@ -41,6 +43,7 @@ import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.foundry.FVTTAdeptPower;
+import de.rpgframework.shadowrun6.foundry.FVTTComplexForm;
 import de.rpgframework.shadowrun6.foundry.FVTTCritterPower;
 import de.rpgframework.shadowrun6.foundry.FVTTGear;
 import de.rpgframework.shadowrun6.foundry.FVTTQuality;
@@ -167,6 +170,7 @@ public class Shadowrun6CompendiumFactory {
 		createCritterPowers(module, zipOut, localeCallback, shallow);
 		createQualities  (module, zipOut, sets, localeCallback, shallow);
 		createSpells     (module, zipOut, localeCallback, shallow);
+		createComplexForms(module, zipOut, localeCallback, shallow);
 		createWeapons    (module, zipOut, localeCallback, shallow);
 		createArmor      (module, zipOut, localeCallback, shallow);
 		createVehicle    (module, zipOut, localeCallback, shallow);
@@ -300,6 +304,42 @@ public class Shadowrun6CompendiumFactory {
 		}
 		
     	ZipEntry zipEntry = new ZipEntry("packs/spells.db");
+    	zipOut.putNextEntry(zipEntry);
+    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createComplexForms(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
+		Pack pack = new Pack();
+		pack.setName("shadowrun6-complexforms");
+		pack.setLabel("Complex Forms");
+		pack.setEntity("Item");
+		pack.setPath("packs/complexforms.db");
+		pack.setSystem("shadowrun6-eden");
+		module.getPacks().add(pack);
+		
+		if (shallow)
+			return;
+		
+		StringBuffer buf = new StringBuffer();
+		Gson gson = new GsonBuilder().create();
+		for (ComplexForm spell : Shadowrun6Core.getItemList(ComplexForm.class)) {
+			Locale[] locales = localeCallback.apply(spell.getPageReferences());
+//			logger.log(Level.INFO, "Locales = "+Arrays.toString(locales));
+			for (Locale loc : locales) {
+				module.addTranslation(loc.getLanguage(), "complexform."+spell.getId()+".desc", spell.getDescription(loc));
+				module.addTranslation(loc.getLanguage(), "complexform."+spell.getId()+".name", spell.getName(loc));
+				module.addTranslation(loc.getLanguage(), "complexform."+spell.getId()+".src", createSourceText(spell, loc));
+			}
+			
+			ItemData<FVTTComplexForm> entry = Converter.convertComplexForm(spell, locales[0]);
+			entry._id  = createRandomID();
+			buf.append(gson.toJson(entry));
+			buf.append('\n');
+		}
+		
+    	ZipEntry zipEntry = new ZipEntry("packs/complexforms.db");
     	zipOut.putNextEntry(zipEntry);
     	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
 		return;
@@ -481,7 +521,7 @@ public class Shadowrun6CompendiumFactory {
 		Pack pack = new Pack();
 		pack.setName("shadowrun6-vehicles");
 		pack.setLabel("Vehicles");
-		pack.setEntity("Item");
+		pack.setEntity("Actor");
 		pack.setPath("packs/vehicles.db");
 		pack.setSystem("shadowrun6-eden");
 		module.getPacks().add(pack);
@@ -492,7 +532,7 @@ public class Shadowrun6CompendiumFactory {
 		StringBuffer buf = new StringBuffer();
 		Gson gson = new GsonBuilder().create();
 		for (ItemTemplate tmp : Shadowrun6Core.getItemList(ItemTemplate.class)) {
-			if (tmp.getItemType()!=ItemType.VEHICLES)
+			if (tmp.getItemType(CarryMode.CARRIED)!=ItemType.VEHICLES)
 				continue;
 			
 			Locale[] locales = localeCallback.apply(tmp.getPageReferences());

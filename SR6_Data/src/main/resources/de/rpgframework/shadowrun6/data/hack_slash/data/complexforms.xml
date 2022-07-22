@@ -4,7 +4,7 @@
    <complexform id="attack_attribution" dur="SUSTAINED" fad="HITS" />
    <complexform id="bubble_shield"      dur="SUSTAINED" fad="HITS"/>
    <complexform id="btl_irl"            dur="SUSTAINED" fad="4"/>
-   <complexform id="cyber_spike"        dur="IMMEDIATE" fad="HITS" />
+   <complexform id="cyber_spike"        dur="INSTANTANEOUS" fad="HITS" />
    <complexform id="cyberjack_overclock" dur="SUSTAINED" fad="HITS" />
    <complexform id="cyberware_stamina"  dur="SUSTAINED" fad="3"/>
    <complexform id="data_bomb_eater"    dur="SUSTAINED" fad="3"/>
@@ -12,7 +12,7 @@
    <complexform id="enhance_autosoft"   dur="SUSTAINED" fad="HITS"/>
    <complexform id="enlighten_automaton" dur="SUSTAINED" fad="HITS"/>
    <complexform id="host_emulator"      dur="SUSTAINED" fad="6"/>
-   <complexform id="ic_pick"            dur="IMMEDIATE" fad="4"/>
+   <complexform id="ic_pick"            dur="INSTANTANEOUS" fad="4"/>
    <complexform id="machine_merge"      dur="SUSTAINED" fad="HITS"/>
    <complexform id="marionette"         dur="SUSTAINED" fad="6"/>
    <complexform id="primed_charge"      dur="SUSTAINED" fad="HITS"/>
@@ -26,7 +26,7 @@
    <complexform id="unravel_encryption" dur="PERMANENT" fad="RATING"/>
    
    <!-- Accessed by streams -->
-   <complexform id="loto"               dur="IMMEDIATE" fad="4" selectable="false"/>
+   <complexform id="loto"               dur="INSTANTANEOUS" fad="4" selectable="false"/>
    <complexform id="hyperthreading"     dur="VARIES"    fad="VARIES" selectable="false"/>
    <complexform id="control_virtual_life" dur="SUSTAINED" fad="5" selectable="false"/>
    
