@@ -433,18 +433,6 @@ public class Shadowrun6Tools {
 
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
 				resolver.process("", model, tmp, List.of());
-//				ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
-//				if (resolved==null) {
-//					logger.log(Level.ERROR, "Item {0} refers to unknown item template ''{1}''", tmp.getUuid(), tmp.getKey());
-//					System.exit(1);
-//					continue;
-//				}
-//				if (tmp.getVariantID()!=null) {
-//					PieceOfGearVariant variant = resolved.getVariant(tmp.getVariantID());
-//					tmp.setResolved(resolved, variant);
-//				} else {
-//					tmp.setResolved(resolved);
-//				}
 				SR6GearTool.recalculate("", model, tmp);
 			}
 

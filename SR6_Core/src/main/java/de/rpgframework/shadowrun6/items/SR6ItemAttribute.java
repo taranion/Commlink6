@@ -53,9 +53,9 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	HANDLING,
 //	HAS_RATING,
 	/* For accessories: Where to attach it */
-	HOOK,
+	HOOK( new EnumConverter(ItemHook.class)),
 	ITEMTYPE( new EnumConverter(ItemType.class)),
-	ITEMSUBTYPE,
+	ITEMSUBTYPE( new EnumConverter(ItemSubType.class)),
 	
 //	/** Maximum rating of embedded items */
 	MAX_SENSOR_RATING,

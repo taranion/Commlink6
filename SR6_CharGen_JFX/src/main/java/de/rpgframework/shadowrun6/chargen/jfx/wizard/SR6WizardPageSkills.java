@@ -86,8 +86,8 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		
 		setOnExtraActionHandler( button -> onExtraAction(button));
 
-//		table.useExpertModeProperty().bind(tsExpertMode.selectedProperty());
-//		tsExpertMode.visibleProperty().bind(table.expertModeAvailableProperty());
+		table.useExpertModeProperty().bind(tsExpertMode.selectedProperty());
+		tsExpertMode.visibleProperty().bind(table.expertModeAvailableProperty());
 	}
 	
 	//-------------------------------------------------------------------

@@ -1,9 +1,12 @@
 package de.rpgframework.shadowrun6;
 
+import java.lang.System.Logger.Level;
+
 import org.prelle.simplepersist.Element;
 
 import de.rpgframework.genericrpg.data.DataErrorException;
-import de.rpgframework.genericrpg.data.PageReference;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
+import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.shadowrun.ANPC;
@@ -52,6 +55,17 @@ public class SR6NPC extends ANPC<ShadowrunAttribute, SR6Skill, SR6SkillValue, SR
 					throw new DataErrorException(res,
 							"Error in NPC '" + id + "': No spell with id '" + tmp.getKey() + "' found");
 				tmp.setResolved(res);
+			}
+			// Validate skill specs
+			for (SkillSpecializationValue<SR6Skill> spec : tmp.getSpecializations()) {
+				SkillSpecialization<SR6Skill> resolvedSpec = tmp.getResolved().getSpecialization(spec.getKey());
+				if (resolvedSpec==null && spec.getKey().indexOf("/")>0) {
+					resolvedSpec = tmp.getResolved().getSpecialization(spec.getKey().substring(spec.getKey().indexOf("/")+1));
+				}
+				if (resolvedSpec==null)
+					throw new DataErrorException(tmp.getModifyable(),
+							"Error in NPC '" + id + "': No Skill specialization'" + spec.getKey() + "' found");
+				spec.setResolved(resolvedSpec);
 			}
 		}
 		// Validate spell references

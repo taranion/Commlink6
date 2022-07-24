@@ -270,9 +270,7 @@
    </item>
    <item avail="2" price="10" id="security_tag" subtype="RFID" type="ELECTRONICS" count="y">
    	<attrdef id="DEVICE_RATING" value="3"/>
-   </item>
-   <item avail="2" price="10" id="stealth_tag"  subtype="RFID" type="ELECTRONICS" count="y">
-   	<attrdef id="DEVICE_RATING" value="3"/>
+   	<variant id="stealth_tag"/>
    </item>
    <item avail="2" price="40" id="sensor_tag"   subtype="RFID" type="ELECTRONICS" count="y">
    	<attrdef id="DEVICE_RATING" value="2"/>
@@ -287,19 +285,17 @@
    	</choices>
    	<attrdef id="PRICE" value="$RATING*150"/>
    </item>
-   <item avail="4L" price="200" id="jammer_area" subtype="COMMUNICATION" type="ELECTRONICS">
+   <item avail="4L" price="200" id="jammer" subtype="COMMUNICATION" type="ELECTRONICS" reqVariant="y">
    	<choices>
    		<choice uuid="720ed738-46d2-4124-bd6f-5ed62025be20" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
    	</choices>
    	<attrdef id="PRICE" value="$RATING*200"/>
+   	<variant id="area"/>
+   	<variant id="direct"/>
    </item>
-   <item avail="4L" price="200" id="jammer_direct" subtype="COMMUNICATION" type="ELECTRONICS">
-   	<choices>
-   		<choice uuid="720ed738-46d2-4124-bd6f-5ed62025be20" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
-   	</choices>
-   	<attrdef id="PRICE" value="$RATING*200"/>
+   <item avail="1" price="100" id="micro-transceiver" subtype="COMMUNICATION" type="ELECTRONICS" count="y">
+   	<attrdef id="DEVICE_RATING" value="2"/>
    </item>
-   <item avail="1" price="100" id="micro-transceiver" subtype="COMMUNICATION" type="ELECTRONICS" count="y"/>
    <item avail="3" price="450" id="tag_eraser" subtype="COMMUNICATION" type="ELECTRONICS"/>
    <item avail="3" price="50"  id="white_noise_generator" subtype="COMMUNICATION" type="ELECTRONICS">
    	<choices>

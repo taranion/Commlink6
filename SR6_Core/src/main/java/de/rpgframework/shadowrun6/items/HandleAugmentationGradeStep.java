@@ -50,7 +50,7 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 				AugmentationQuality quality = AugmentationQuality.STANDARD;
 				Decision dec = model.getDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY);
 				if (dec==null) {
-					logger.log(Level.WARNING, "Item {0}/{1} misses decision for CHOICE_AUGMENTATION_QUALITY {2}", model.getUuid(), model.getKey(), ItemTemplate.UUID_AUGMENTATION_QUALITY);
+					logger.log(Level.DEBUG, "Item {0}/{1} misses decision for CHOICE_AUGMENTATION_QUALITY {2}", model.getUuid(), model.getKey(), ItemTemplate.UUID_AUGMENTATION_QUALITY);
 					OperationResult<List<Modification>> ret = new OperationResult<List<Modification>>(unprocessed);
 					ret.addMessage(new ToDoElement(Severity.WARNING, "Missing choice for AUGMENTATION_QUALITY"));
 					return ret;

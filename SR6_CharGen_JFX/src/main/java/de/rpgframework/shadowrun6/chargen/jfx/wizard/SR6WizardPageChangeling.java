@@ -84,7 +84,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 					public IShadowrunCharacterController getCharacterController() {
 						return charGen;
 					}}, 
-				null));
+				null, true));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), selection.getController()));
 		

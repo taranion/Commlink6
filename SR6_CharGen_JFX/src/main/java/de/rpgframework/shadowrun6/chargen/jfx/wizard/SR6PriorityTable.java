@@ -43,9 +43,10 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 		super();
 		this.resolver = resolver;
 		
-		if (ResponsiveControlManager.getCurrentMode()==WindowMode.MINIMAL) {
-			refreshMinimal();
-		}
+//		if (ResponsiveControlManager.getCurrentMode()==WindowMode.MINIMAL) {
+//			refreshMinimal();
+//		}
+		setResponsiveMode(ResponsiveControlManager.getCurrentMode());
 	}
 	
 

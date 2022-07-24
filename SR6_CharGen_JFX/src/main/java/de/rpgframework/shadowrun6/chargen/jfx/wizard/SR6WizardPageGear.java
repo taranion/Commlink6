@@ -31,6 +31,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemTemplateFilterNode;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -61,7 +62,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	private Button btnInc;
 	
 	protected ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>> selection;
-	protected GenericDescriptionVBox bxDescription;
+	protected CarriedItemDescriptionPane bxDescription;
 	protected OptionalNodePane layout;
 	private NumberUnitBackHeader backHeaderKarma;
 	private NumberUnitBackHeader backHeaderNuyen;
@@ -98,7 +99,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		selection.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell( () -> charGen.getEquipmentController()));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		
-		bxDescription = new GenericDescriptionVBox(null);
+		bxDescription = new CarriedItemDescriptionPane(Shadowrun6Tools.requirementResolver(Locale.getDefault()), charGen);
 		
 		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection, ItemType.PACK));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), charGen.getEquipmentController()));

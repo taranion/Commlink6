@@ -173,7 +173,10 @@ public class Shadowrun6CompendiumFactory {
 		createComplexForms(module, zipOut, localeCallback, shallow);
 		createWeapons    (module, zipOut, localeCallback, shallow);
 		createArmor      (module, zipOut, localeCallback, shallow);
-		createVehicle    (module, zipOut, localeCallback, shallow);
+		createVehicleItemsDrones(module, zipOut, localeCallback, shallow);
+		
+		createVehicleActors(module, zipOut, localeCallback, shallow);
+		createDroneActors(module, zipOut, localeCallback, shallow);
 		createGrunts     (module, zipOut, localeCallback, shallow);
 		createCritter    (module, zipOut, localeCallback, shallow);
 		
@@ -517,12 +520,53 @@ public class Shadowrun6CompendiumFactory {
 //	}
 
 	//-------------------------------------------------------------------
-	private static void createVehicle(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
+	private static void createVehicleItemsDrones(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
+		Pack pack = new Pack();
+		pack.setName("shadowrun6-gear-drones");
+		pack.setLabel("Drones");
+		pack.setEntity("Item");
+		pack.setPath("packs/drone-items.db");
+		pack.setSystem("shadowrun6-eden");
+		module.getPacks().add(pack);
+		
+		if (shallow)
+			return;
+		
+		StringBuffer buf = new StringBuffer();
+		Gson gson = new GsonBuilder().create();
+		for (ItemTemplate tmp : Shadowrun6Core.getItemList(ItemTemplate.class)) {
+			ItemType type = tmp.getItemType(CarryMode.CARRIED);
+			if (type==null || !List.of(ItemType.droneTypes()).contains(type))
+					continue;
+			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
+			for (Locale loc : locales) {
+				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".desc", tmp.getDescription(loc));
+				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".name", tmp.getName(loc));
+				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".src", createSourceText(tmp, loc));
+			}
+			
+			ItemData<FVTTGear> entry = Converter.convertGear(tmp, locales[0]);
+//			entry._id  = tmp.getId();
+			entry._id  = createRandomID();
+			
+			buf.append(gson.toJson(entry));
+			buf.append('\n');
+		}
+		
+		
+    	ZipEntry zipEntry = new ZipEntry("packs/drone-items.db");
+    	zipOut.putNextEntry(zipEntry);
+    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createVehicleActors(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
 		Pack pack = new Pack();
 		pack.setName("shadowrun6-vehicles");
 		pack.setLabel("Vehicles");
 		pack.setEntity("Actor");
-		pack.setPath("packs/vehicles.db");
+		pack.setPath("packs/vehicle-actors.db");
 		pack.setSystem("shadowrun6-eden");
 		module.getPacks().add(pack);
 		
@@ -543,14 +587,51 @@ public class Shadowrun6CompendiumFactory {
 			}
 			ActorData<?> entry = Converter.convertActor(tmp, locales[0]);
 			entry._id  = createRandomID();
-//			entry._id  = tmp.getId();
-//			entry.flags.core.sheetClass="shadowrun6-eden.Shadowrun6ActorSheetVehicleCompendium";
 			
 			buf.append(gson.toJson(entry));
 			buf.append('\n');
 		}
 		
-    	ZipEntry zipEntry = new ZipEntry("packs/vehicles.db");
+    	ZipEntry zipEntry = new ZipEntry("packs/vehicle-actors.db");
+    	zipOut.putNextEntry(zipEntry);
+    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createDroneActors(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
+		Pack pack = new Pack();
+		pack.setName("shadowrun6-drones");
+		pack.setLabel("Drones");
+		pack.setEntity("Actor");
+		pack.setPath("packs/drone-actors.db");
+		pack.setSystem("shadowrun6-eden");
+		module.getPacks().add(pack);
+		
+		if (shallow)
+			return;
+		
+		StringBuffer buf = new StringBuffer();
+		Gson gson = new GsonBuilder().create();
+		for (ItemTemplate tmp : Shadowrun6Core.getItemList(ItemTemplate.class)) {
+			ItemType type = tmp.getItemType(CarryMode.CARRIED);
+			if (type==null || !List.of(ItemType.droneTypes()).contains(type))
+				continue;
+			
+			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
+			for (Locale loc : locales) {
+				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".desc", tmp.getDescription(loc));
+				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".name", tmp.getName(loc));
+				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".src", createSourceText(tmp, loc));
+			}
+			ActorData<?> entry = Converter.convertActor(tmp, locales[0]);
+			entry._id  = createRandomID();
+			
+			buf.append(gson.toJson(entry));
+			buf.append('\n');
+		}
+		
+    	ZipEntry zipEntry = new ZipEntry("packs/drone-actors.db");
     	zipOut.putNextEntry(zipEntry);
     	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
 		return;

@@ -7,10 +7,10 @@
          </itemmod-->
          <itemmod type="GEAR" ref="hermes_ikon" apply="CHARACTER"/>
          <itemmod type="GEAR" ref="meta_link" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="stealth_tag" apply="CHARACTER"/>
+         <itemmod type="GEAR" ref="security_tag" variant="stealth_tag" apply="CHARACTER"/>
          <itemmod type="GEAR" ref="bug_scanner" apply="CHARACTER"/>
          <itemmod type="GEAR" ref="tag_eraser" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="jammer_area" apply="CHARACTER"><decision choice="720ed738-46d2-4124-bd6f-5ed62025be20" value="6"/></itemmod>
+         <itemmod type="GEAR" ref="jammer" variant="area" apply="CHARACTER"><decision choice="720ed738-46d2-4124-bd6f-5ed62025be20" value="6"/></itemmod>
          <itemmod type="GEAR" ref="micro-transceiver" apply="CHARACTER"/>
          <itemmod type="GEAR" ref="plastic_straps" apply="CHARACTER"/>
          <itemmod type="GEAR" ref="miniwelder" apply="CHARACTER"/>

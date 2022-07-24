@@ -482,8 +482,10 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			String uuid_s = prioritySettingsId.substring(prioritySettingsId.indexOf("/")+1);
 			if (uuid_s==null)
 				logger.log(Level.ERROR, "NPE for id "+prioritySettingsId);
-			if ("null".equals(uuid_s))
+			if ("null".equals(uuid_s)) {
 				logger.log(Level.ERROR, "Pseudo NULL for id "+prioritySettingsId);
+				return null;
+			}
 			UUID uuid = UUID.fromString(uuid_s);
 			SR6Skill skill = Shadowrun6Core.getSkill(key);
 			for (SR6SkillValue val : model.getSkillValues()) {
@@ -697,7 +699,6 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			}
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Error",e);
-			System.exit(1);
 		} finally {
 			logger.log(Level.TRACE, "STOP : Skills");
 		}

@@ -10,6 +10,7 @@ import de.rpgframework.foundry.ItemData;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
@@ -28,6 +29,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.foundry.ActionSkills.ActionSkillValue;
 import de.rpgframework.shadowrun6.foundry.FVTTAdeptPower;
+import de.rpgframework.shadowrun6.foundry.FVTTBodyware;
 import de.rpgframework.shadowrun6.foundry.FVTTComplexForm;
 import de.rpgframework.shadowrun6.foundry.FVTTCritter;
 import de.rpgframework.shadowrun6.foundry.FVTTCritterPower;
@@ -35,6 +37,7 @@ import de.rpgframework.shadowrun6.foundry.FVTTGear;
 import de.rpgframework.shadowrun6.foundry.FVTTNPCActor;
 import de.rpgframework.shadowrun6.foundry.FVTTQuality;
 import de.rpgframework.shadowrun6.foundry.FVTTSpell;
+import de.rpgframework.shadowrun6.foundry.FVTTVehicle;
 import de.rpgframework.shadowrun6.foundry.FVTTVehicleActor;
 import de.rpgframework.shadowrun6.foundry.FVTTWeapon;
 import de.rpgframework.shadowrun6.foundry.GeneralActor;
@@ -114,16 +117,22 @@ public class Converter {
 	//-------------------------------------------------------------------
 	public static ItemData<FVTTGear> convertGear(ItemTemplate tmp, Locale loc) {
 		FVTTGear data = new FVTTGear();
-		if (ItemType.isWeapon(tmp.getItemType()))
+		if (ItemType.isWeapon(tmp.getItemType(CarryMode.CARRIED)))
 			data = new FVTTWeapon();
+		if (ItemType.isVehicle(tmp.getItemType(CarryMode.CARRIED)))
+			data = new FVTTVehicle();
 		// Definition fields
 		data.genesisID  = tmp.getId();
-		if (tmp.getItemType()!=null)
-			data.type       = tmp.getItemType().name();
-		if (tmp.getItemSubtype()!=null)
-			data.subtype    = tmp.getItemSubtype().name();
+		if (tmp.getItemType(CarryMode.CARRIED)!=null)
+			data.type       = tmp.getItemType(CarryMode.CARRIED).name();
+		if (tmp.getItemSubtype(CarryMode.CARRIED)!=null)
+			data.subtype    = tmp.getItemSubtype(CarryMode.CARRIED).name();
 		if (tmp.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
 			data.availDef   = tmp.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue();
+		if (tmp.getAttribute(SR6ItemAttribute.PRICE)!=null) {
+			if (tmp.getAttribute(SR6ItemAttribute.PRICE).isInteger())
+				data.price      = tmp.getAttribute(SR6ItemAttribute.PRICE).getValue();
+		}
 		if (tmp.getAttribute(SR6ItemAttribute.SKILL)!=null)
 			data.skill      = tmp.getAttribute(SR6ItemAttribute.SKILL).getRawValue();
 		if (tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)!=null)
@@ -143,6 +152,16 @@ public class Converter {
 			} catch (IllegalStateException e) {
 				logger.log(Level.ERROR, "Error converting {}: {}", tmp.getId(), e.toString());
 			}
+		}
+		// Vehicles
+		if (data instanceof FVTTVehicle) {
+			((FVTTVehicle)data).handlOn = tmp.getAttribute(SR6ItemAttribute.HANDLING).getDistributed();
+			((FVTTVehicle)data).bod = tmp.getAttribute(SR6ItemAttribute.BODY).getDistributed();
+			((FVTTVehicle)data).arm = tmp.getAttribute(SR6ItemAttribute.ARMOR).getDistributed();
+			((FVTTVehicle)data).pil = tmp.getAttribute(SR6ItemAttribute.PILOT).getDistributed();
+			((FVTTVehicle)data).sen = tmp.getAttribute(SR6ItemAttribute.SENSORS).getDistributed();
+			if (tmp.getAttribute(SR6ItemAttribute.SEATS)!=null)
+			((FVTTVehicle)data).sea = tmp.getAttribute(SR6ItemAttribute.SEATS).getDistributed();
 		}
 
 		return new ItemData<FVTTGear>(tmp.getName(loc), "gear", data);
@@ -245,9 +264,7 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	public static ActorData<? extends FVTTGear> convertActor(ItemTemplate item, Locale loc) {
-		FVTTVehicleActor actor = new FVTTVehicleActor();
-
-		ActorData foundry = new ActorData(item.getName(loc), "vehicle", actor);
+		ActorData foundry = convertVehicleActor(item, loc); //new ActorData(item.getName(loc), "vehicle", actor);
 		return foundry;
 	}
 
@@ -294,10 +311,10 @@ public class Converter {
 		fvtt.modifier = val.getModifier();
 		
 		for (SkillSpecializationValue<SR6Skill> spec : val.getSpecializations()) {
-			if (spec.getDistributed()==1)
-				fvtt.specialization = spec.getKey();
 			if (spec.getDistributed()==2)
-				fvtt.expertise = spec.getKey();
+				fvtt.specialization = spec.getResolved().getId();
+			if (spec.getDistributed()==3)
+				fvtt.expertise = spec.getResolved().getId();
 		}
 	}
 
@@ -361,6 +378,23 @@ public class Converter {
 		fillSkills(foundry.data, data);
 		
 		
+		return foundry;
+	}
+
+	//-------------------------------------------------------------------
+	private static ActorData<FVTTVehicleActor> convertVehicleActor(ItemTemplate data, Locale loc) {
+		FVTTVehicleActor actor = new FVTTVehicleActor();
+		
+		ActorData<FVTTVehicleActor> foundry = new ActorData<FVTTVehicleActor>(data.getName(loc), "Vehicle", actor);
+
+//		fillAttributes(foundry.data, data);
+//		fillSkills(foundry.data, data);
+//		
+//		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
+//		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
+//		data.getGear().forEach(tmp -> {
+//			foundry.addItem(convertGear(tmp,loc));});
+
 		return foundry;
 	}
 

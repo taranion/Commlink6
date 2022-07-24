@@ -17,7 +17,7 @@
 		<skills>
 			<skillval ref="close_combat" value="4"/>
 			<skillval ref="firearms"     value="2">
-				<skillspec ref="firearms/shotgun" value="2"/>
+				<skillspec ref="firearms/shotguns" value="2"/>
 			</skillval>
 			<skillval ref="influence"    value="4"/>
 		</skills>

@@ -459,11 +459,22 @@ public class ItemUtilJFX {
 				ret.setTooltip(tooltip);
 			}
 		} else {
-			if (item.getAsValue(attr)!=null && !item.getAsValue(attr).getModifications().isEmpty()) {
-				logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
-				ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-				Tooltip tooltip = new Tooltip();
-				ret.setTooltip(tooltip);
+			switch (attr) {
+			case ESSENCECOST:
+				if (item.getAsFloat(attr)!=null && !item.getAsFloat(attr).getModifications().isEmpty()) {
+					logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
+					ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+					Tooltip tooltip = new Tooltip();
+					ret.setTooltip(tooltip);
+				}
+				break;
+			default:
+				if (item.getAsValue(attr)!=null && !item.getAsValue(attr).getModifications().isEmpty()) {
+					logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
+					ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+					Tooltip tooltip = new Tooltip();
+					ret.setTooltip(tooltip);
+				}
 			}
 		}
 		

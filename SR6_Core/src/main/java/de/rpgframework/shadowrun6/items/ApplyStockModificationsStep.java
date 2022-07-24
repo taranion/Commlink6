@@ -81,7 +81,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 
 				String foo = FormulaTool.resolve(SR6ItemAttribute.CAPACITY, (FormulaImpl) form, resolver);
 				if (foo==null) {
-					logger.log(Level.WARNING, "Cannot apply stock modification {0} because CAPACITY not resolved", mod);
+					logger.log(Level.WARNING, model.getKey()+"Cannot apply stock modification {0} because CAPACITY not resolved", mod);
 					return;
 				} 
 //				logger.log(Level.INFO, indent+"foo="+foo);

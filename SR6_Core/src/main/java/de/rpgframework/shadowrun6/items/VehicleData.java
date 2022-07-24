@@ -292,7 +292,6 @@ public class VehicleData implements IGearTypeData {
 	 */
 	@Override
 	public void copyToAttributes(AGearData copyTo) {
-		System.out.println("copyToAttributes of "+copyTo.getId());
 		if (acceleration!=null) copyTo.setAttribute(SR6ItemAttribute.ACCELERATION, acceleration);
 		if (armor   !=null) copyTo.setAttribute(SR6ItemAttribute.ARMOR, armor);
 		if (body    !=null) copyTo.setAttribute(SR6ItemAttribute.BODY, body);

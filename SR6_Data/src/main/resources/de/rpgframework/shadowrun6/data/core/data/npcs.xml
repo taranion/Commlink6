@@ -75,7 +75,7 @@
 			<skillval ref="close_combat" value="3"/>
 			<skillval ref="firearms"     value="2"/>
 			<skillval ref="influence"    value="3">
-				<skillspec ref="influence/intimidation" />
+				<skillspec ref="intimidation" />
 			</skillval>
 			<skillval ref="perception"   value="1"/>
 			<skillval ref="piloting"     value="2"/>
@@ -139,7 +139,7 @@
 			<skillval ref="close_combat" value="4"/>
 			<skillval ref="firearms"     value="3"/>
 			<skillval ref="influence"    value="5">
-				<skillspec ref="influence/intimidation" />
+				<skillspec ref="intimidation" />
 			</skillval>
 			<skillval ref="perception"   value="3"/>
 		</skills>
@@ -273,7 +273,7 @@
 			<skillval ref="con"          value="3"/>
 			<skillval ref="firearms"     value="4"/>
 			<skillval ref="influence"    value="4">
-				<skillspec ref="influence/intimidation" />
+				<skillspec ref="intimidation" />
 			</skillval>
 			<skillval ref="perception"   value="4"/>
 			<skillval ref="piloting"     value="1"/>
@@ -302,10 +302,10 @@
 			<skillval ref="astral"       value="2"/>
 			<skillval ref="athletics"    value="4"/>
 			<skillval ref="close_combat" value="5">
-				<skillspec ref="close_combat/blades" value="2" />
+				<skillspec ref="blades" value="2" />
 			</skillval>
 			<skillval ref="outdoors"     value="2">
-				<skillspec ref="outdoors/tracking" value="2" />
+				<skillspec ref="tracking_urban" value="2" />
 			</skillval>
 			<skillval ref="perception"   value="4"/>
 			<skillval ref="stealth"      value="5"/>
