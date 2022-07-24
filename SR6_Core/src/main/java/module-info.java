@@ -1,6 +1,7 @@
 module de.rpgframework.shadowrun6.core {
 	exports de.rpgframework.shadowrun6;
 	exports de.rpgframework.shadowrun6.generators;
+	exports de.rpgframework.shadowrun6.filter;
 	exports de.rpgframework.shadowrun6.items;
 	exports de.rpgframework.shadowrun6.log;
 	exports de.rpgframework.shadowrun6.persist;
