@@ -1,0 +1,14 @@
+de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage
+de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage
+de.rpgframework.shadowrun6.chargen.jfx.pane.AttributeTable
+de.rpgframework.shadowrun6.chargen.jfx.selector.Selectors
+de.rpgframework.shadowrun6.chargen.jfx.wizard.SR6PriorityTable
+de.rpgframework.shadowrun6.chargen.jfx.wizard.SR6WizardPageChangeling
+de.rpgframework.shadowrun6.chargen.jfx.wizard.SR6WizardPageMetatype
+de.rpgframework.shadowrun6.chargen.jfx.wizard.SR6WizardPages
+de.rpgframework.shadowrun6.chargen.jfx.wizard.SR6WizardPageSkills
+de.rpgframework.shadowrun6.chargen.jfx.wizard.WizardPageLifePath1
+de.rpgframework.shadowrun6.chargen.jfx.wizard.WizardPageMetatype
+de.rpgframework.shadowrun6.chargen.jfx.CharacterOverview
+de.rpgframework.shadowrun6.chargen.jfx.Filters
+de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout
