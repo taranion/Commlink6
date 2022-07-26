@@ -3,12 +3,18 @@ package de.rpgframework.shadowrun6.items;
 import java.lang.System.Logger;
 import java.util.List;
 
+import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.DataErrorException;
+import de.rpgframework.genericrpg.data.Lifeform;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.Legality;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -42,4 +48,15 @@ public class SR6GearTool extends GearTool {
 		
 		return ret;
 	}
+	
+	//-------------------------------------------------------------------
+	public static <I extends IItemAttribute> OperationResult<List<Modification>> recalculate(String indent, Lifeform user, CarriedItem<?> item) {
+		try {
+			return GearTool.recalculate(indent, user, item);
+		} catch (DataErrorException e) {
+			if (e.getReferenceError()!=null) e.getReferenceError().setType(ShadowrunReference.GEAR);
+			throw e;
+		}
+	}
+
 }

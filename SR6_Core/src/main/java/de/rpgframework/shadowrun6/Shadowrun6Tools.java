@@ -22,6 +22,7 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.CommonCharacter;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
@@ -50,7 +51,6 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
-import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -435,7 +435,10 @@ public class Shadowrun6Tools {
 				resolver.process("", model, tmp, List.of());
 				SR6GearTool.recalculate("", model, tmp);
 			}
-
+		} catch (DataErrorException e) {
+			logger.log(Level.ERROR, "Failed resolving reference {1} ''{2}'' in character {0}", model.getName(), e.getReferenceError().getType(), e.getReferenceError().getReference(), e);
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Failed resolving references in character {0}", model.getName(),e);
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE resolveChar");
 		}
