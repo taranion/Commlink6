@@ -5,7 +5,7 @@
 
 	<groupId>de.rpgframework</groupId>
 	<artifactId>shadowrun6-master</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>Shadowrun6 Master</name>
 	<packaging>pom</packaging>
 
@@ -26,7 +26,7 @@
 		<log4j.version>2.17.2</log4j.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
-		<revision>0.0.1-SNAPSHOT</revision>
+		<revision>0.0.2-SNAPSHOT</revision>
 	</properties>
 
 	<modules>
@@ -90,27 +90,22 @@
 				<version>${revision}</version>
 			</dependency>
 
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
 		   <dependency>
 			   <groupId>org.apache.logging.log4j</groupId>
 			   <artifactId>log4j-api</artifactId>
 			   <version>${log4j.version}</version>
 		   </dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-simple</artifactId>
-				<version>${slf4j.version}</version>
-				<scope>test</scope>
-			</dependency>
 		   <dependency>
 			   <groupId>org.apache.logging.log4j</groupId>
 			   <artifactId>log4j-core</artifactId>
 			   <version>${log4j.version}</version>
-			   <scope>test</scope>
+			   <scope>runtime</scope>
+		   </dependency>
+		   <dependency>
+			   <groupId>org.apache.logging.log4j</groupId>
+			   <artifactId>log4j-jpl</artifactId>
+			   <version>${log4j.version}</version>
+			   <scope>runtime</scope>
 		   </dependency>
 			<dependency>
 				<groupId>junit</groupId>
