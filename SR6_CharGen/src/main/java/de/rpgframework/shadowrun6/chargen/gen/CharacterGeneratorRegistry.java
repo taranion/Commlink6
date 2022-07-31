@@ -24,9 +24,9 @@ public class CharacterGeneratorRegistry {
 	static {
 		generators = new LinkedHashMap<String,Class<? extends SR6CharacterGenerator>>();
 		addGenerator(PriorityCharacterGenerator.class);
-		addGenerator(SumToTenCharacterGenerator.class);
-		addGenerator(PointBuyCharacterGenerator.class);
-		addGenerator(LifePathCharacterGenerator.class);
+//		addGenerator(SumToTenCharacterGenerator.class);
+//		addGenerator(PointBuyCharacterGenerator.class);
+//		addGenerator(LifePathCharacterGenerator.class);
 	}
 
 	//-------------------------------------------------------------------
