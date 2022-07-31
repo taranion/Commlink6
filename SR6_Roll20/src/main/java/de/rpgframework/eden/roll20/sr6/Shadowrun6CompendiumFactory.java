@@ -271,11 +271,18 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
 		head.createCell(4, CellType.STRING).setCellValue("data-itemtype");
 		head.createCell(5, CellType.STRING).setCellValue("data-itemsubtype");
-		head.createCell(6, CellType.STRING).setCellValue("Availability");
-		head.createCell(7, CellType.STRING).setCellValue("Price");
+		head.createCell(6, CellType.STRING).setCellValue("availability");
+		head.createCell(7, CellType.STRING).setCellValue("cost");
 		head.createCell(8, CellType.STRING).setCellValue("data-skill");
 		head.createCell(9, CellType.STRING).setCellValue("data-skillspec");
 		head.createCell(10, CellType.STRING).setCellValue("Damage");
+		head.createCell(11, CellType.STRING).setCellValue("close");
+		head.createCell(12, CellType.STRING).setCellValue("near");
+		head.createCell(13, CellType.STRING).setCellValue("medium");
+		head.createCell(14, CellType.STRING).setCellValue("far");
+		head.createCell(15, CellType.STRING).setCellValue("extreme");
+		head.createCell(16, CellType.STRING).setCellValue("firing_modes");
+		head.createCell(17, CellType.STRING).setCellValue("ammo");
 		
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {

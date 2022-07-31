@@ -73,6 +73,11 @@ public class Converter {
 		if (item.getAttribute(SR6ItemAttribute.DAMAGE)!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue());
 		else x++;
+		if (item.getAttribute(SR6ItemAttribute.ATTACK_RATING)!=null) {
+			item.getAttribute(SR6ItemAttribute.ATTACK_RATING);
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue());
+		}
+		else x+=5;
 	}
 
 	//-------------------------------------------------------------------
