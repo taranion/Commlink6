@@ -144,10 +144,10 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	
 	//-------------------------------------------------------------------
 	public void setWrapped(SR6CharacterGenerator newCtrl) {
-		logger.log(Level.INFO, "#################Generator changed to "+newCtrl+"\n\n\n");
+//		logger.log(Level.INFO, "#################Generator changed to "+newCtrl+"\n\n\n");
 		// Move all existing listener to new controller
 		if (wrapped!=null) {
-			logger.log(Level.INFO, "#################Generator had {0} listener", wrapped.getListener().size());
+//			logger.log(Level.INFO, "#################Generator had {0} listener", wrapped.getListener().size());
 			for (ControllerListener callback : new ArrayList<>(wrapped.getListener())) {
 				newCtrl.addListener(callback);
 				wrapped.removeListener(callback);
@@ -155,7 +155,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 		}
 		wrapped = newCtrl;
 		wrapped.fireEvent(BasicControllerEvents.GENERATOR_CHANGED, newCtrl);
-		logger.log(Level.INFO, "#################Call setModel()");
+//		logger.log(Level.INFO, "#################Call setModel()");
 		newCtrl.setModel(cached, cachedHandle);
 	}
 
@@ -284,8 +284,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	 */
 	@Override
 	public void finish() {
-		// TODO Auto-generated method stub
-		
+		wrapped.finish();
 	}
 
 	//-------------------------------------------------------------------

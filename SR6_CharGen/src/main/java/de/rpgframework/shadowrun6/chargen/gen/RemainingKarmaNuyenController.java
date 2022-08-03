@@ -46,10 +46,13 @@ public class RemainingKarmaNuyenController extends ControllerImpl<Object> implem
 		Shadowrun6Character model = getModel();
 		logger.log(Level.INFO, "Have {0} Karma and {1} Nuyen remaining", model.getKarmaFree(), model.getNuyen());
 		if (model.getKarmaFree()>5) {
-			todos.add(new ToDoElement(Severity.WARNING, RES, IRejectReasons.TODO_LOOSE_KARMA, model.getKarmaFree()));
+			todos.add(new ToDoElement(Severity.WARNING, RES, IRejectReasons.TODO_LOOSE_KARMA, model.getKarmaFree()-5));
+		}
+		if (model.getKarmaFree()<0) {
+			todos.add(new ToDoElement(Severity.STOPPER, RES, IRejectReasons.TODO_NEGATIVE_KARMA, Math.abs(model.getKarmaFree())));
 		}
 		if (model.getNuyen()>5000) {
-			todos.add(new ToDoElement(Severity.WARNING, RES, IRejectReasons.TODO_LOOSE_NUYEN, model.getNuyen()));
+			todos.add(new ToDoElement(Severity.WARNING, RES, IRejectReasons.TODO_LOOSE_NUYEN, model.getNuyen()-5000));
 		} else if (model.getNuyen()<0) {
 			todos.add(new ToDoElement(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.TODO_NEGATIVE_NUYEN, model.getNuyen()));
 		}

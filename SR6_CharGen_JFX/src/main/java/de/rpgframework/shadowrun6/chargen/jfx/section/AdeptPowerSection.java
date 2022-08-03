@@ -13,6 +13,7 @@ import de.rpgframework.jfx.section.ListSection;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
+import de.rpgframework.shadowrun.chargen.jfx.listcell.AdeptPowerValueListCell;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6AdeptPowerController;
 import javafx.geometry.Insets;
@@ -45,7 +46,7 @@ public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 	//-------------------------------------------------------------------
 	private void initComponents() {
 //		list.setStyle("-fx-min-height: 10em; -fx-pref-height: 30em; -fx-pref-width: 25em"); 
-//		list.setCellFactory(cell -> new SpellValueListCell<T>(control));
+		list.setCellFactory(cell -> new AdeptPowerValueListCell( () -> control.getAdeptPowerController()));
 		
 		lbUnspent = new Label("?");
 		lbUnspent.getStyleClass().add(JavaFXConstants.STYLE_HEADING4);

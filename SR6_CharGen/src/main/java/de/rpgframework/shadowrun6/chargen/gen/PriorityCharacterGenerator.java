@@ -132,6 +132,13 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	// --------------------------------------------------------------------
 	@Override
 	protected void setupProcessChain() {
+		System.err.println("PriorityCharacterGenerator.setupProcessChain");
+		try {
+			throw new RuntimeException("Trace");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (logger.isLoggable(Level.DEBUG))
 			logger.log(Level.DEBUG, "ENTER: setupProcessChain()");
 		try {
@@ -167,6 +174,17 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			if (logger.isLoggable(Level.DEBUG))
 				logger.log(Level.DEBUG, "LEAVE: setupProcessChain()");
 		}
+	}
+
+	// -------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#finish()
+	 */
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		logger.log(Level.WARNING, "TODO: finish");
+
 	}
 
 	//-------------------------------------------------------------------

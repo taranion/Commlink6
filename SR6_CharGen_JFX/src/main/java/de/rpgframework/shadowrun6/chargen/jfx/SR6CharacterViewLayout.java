@@ -3,17 +3,14 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
-import org.prelle.javafx.Mode;
-import org.prelle.javafx.ResponsiveControl;
 import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
-
-import com.google.gson.Gson;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.CharacterHandle;
@@ -21,6 +18,8 @@ import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
@@ -34,7 +33,6 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CombatPage;
@@ -47,6 +45,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.page.VehiclePage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -73,6 +72,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	
 	private Label lbMode;
 	private Label lbKarma, lbNuyen;
+	
+	private VBox bxHoverToDo;
 	
 	//-------------------------------------------------------------------
 	/**
@@ -109,6 +110,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		VBox.setMargin(lbNuyen, new Insets(10, 0, 0, 0));
 		bxCenter.setAlignment(Pos.CENTER);
 		extraNodesCenterProperty().add(bxCenter);
+		
+		bxHoverToDo = new VBox(5);
+		bxHoverToDo.setId("todos");
+		bxHoverToDo.getStyleClass().addAll("hover","todos");
 	}
 	
 	//-------------------------------------------------------------------
@@ -206,17 +211,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 				wrapper.addListener(this);
 				super.control = wrapper;
 				logger.log(Level.INFO, "Generator to continue with: {0}", charGen.getClass().getSimpleName());
-				charGen.setModel(model, handle);
 				refreshController();
-//				pgBasic.refresh();
-//				pgSkills.refresh();
-//				pgCombat.refresh();
-				pgAugment.refresh();
-//				pgMagic.refresh();
-//				pgMatrix.refresh();
-//				pgVehicles.refresh();
-//				pgGear.refresh();
-				pgLife.refresh();
+				refreshPages();
 			} catch (Exception e) {
 				logger.log(Level.ERROR, "Error creating generator '" + model.getCharGenUsed(), e);
 				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2,
@@ -226,9 +222,12 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 						ResourceI18N.get(UI, "error.continuingCreation"));
 				return;
 			}
+			
+			logger.log(Level.WARNING, "ToDo: open wizard");
 		} finally {
 			logger.log(Level.INFO, "LEAVE: Continue creation");
 		}
+		
 	}
 
 	//-------------------------------------------------------------------
@@ -261,6 +260,37 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	}
 
 	//-------------------------------------------------------------------
+	private void refreshPages() {
+		pgBasic.refresh();
+		pgSkills.refresh();
+		pgCombat.refresh();
+		pgAugment.refresh();
+		pgMagic.refresh();
+		pgMatrix.refresh();
+		pgVehicles.refresh();
+		pgGear.refresh();
+		pgLife.refresh();
+		
+		bxHoverToDo.getChildren().clear();
+		if (control.getToDos().isEmpty()) {
+			setHoverNode(null);
+		} else {
+			ToDoElement.Severity worst = Severity.INFO;
+			for (ToDoElement todo : control.getToDos()) {
+				if (todo.getSeverity().ordinal()<worst.ordinal())
+					worst = todo.getSeverity();
+				Label hover = new Label(todo+"");
+				hover.setWrapText(true);
+				hover.setStyle("-fx-text-fill: textcolor-"+todo.getSeverity().name().toLowerCase());
+				bxHoverToDo.getChildren().add(hover);
+			}
+			bxHoverToDo.getStyleClass().setAll("todos", "todos-"+worst.name().toLowerCase());
+			System.err.println("SR6CharacterViewLayout: bxHoverToDo="+bxHoverToDo.getStyleClass());
+			setHoverNode(new Group(bxHoverToDo));
+		}
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ControllerListener#handleControllerEvent(de.rpgframework.genericrpg.chargen.ControllerEvent, java.lang.Object[])
 	 */
@@ -273,15 +303,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			refreshController();
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
-			pgBasic.refresh();
-			pgSkills.refresh();
-			pgCombat.refresh();
-			pgAugment.refresh();
-			pgMagic.refresh();
-			pgMatrix.refresh();
-			pgVehicles.refresh();
-			pgGear.refresh();
-			pgLife.refresh();
+			refreshPages();
 		}
 //		Page page = getVisiblePage();
 //		if (page!=null && page instanceof ControllerListener) {
