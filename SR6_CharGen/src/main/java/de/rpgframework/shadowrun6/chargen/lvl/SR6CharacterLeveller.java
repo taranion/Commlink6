@@ -1,0 +1,127 @@
+package de.rpgframework.shadowrun6.chargen.lvl;
+
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+
+import de.rpgframework.character.CharacterHandle;
+import de.rpgframework.genericrpg.chargen.RecommendingController;
+import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.proc.GetModificationsFromGear;
+import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
+import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
+import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
+import de.rpgframework.shadowrun6.proc.CalculateEssence;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
+
+/**
+ * @author prelle
+ *
+ */
+public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
+
+	private final static Logger logger = System.getLogger(SR6CharacterLeveller.class.getPackageName());
+
+	private boolean setupDone;
+
+	//-------------------------------------------------------------------
+	/**
+	 */
+	public SR6CharacterLeveller() {
+		// TODO Auto-generated constructor stub
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param model
+	 * @param handle
+	 * @param charGenSettingsClazz
+	 */
+	public SR6CharacterLeveller(Shadowrun6Character model, CharacterHandle handle, Class<? extends CommonSR6GeneratorSettings> charGenSettingsClazz) {
+		super(model, handle, charGenSettingsClazz);
+		// TODO Auto-generated constructor stub
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRecommendingControllerFor(java.lang.Object)
+	 */
+	@Override
+	public <T> RecommendingController<T> getRecommendingControllerFor(T item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl#createPartialController()
+	 */
+	@Override
+	protected void createPartialController() {
+		attributes= new SR6AttributeLeveller(this);
+		skills    = new SR6SkillLeveller(this);
+		qualities = new SR6QualityLeveller(this);
+		equipment = new SR6EquipmentLeveller(this);
+		spells    = new SR6SpellLeveller(this);
+		rituals   = new SR6RitualLeveller(this);
+		adeptPowers = new SR6AdeptPowerLeveller(this);
+		complex   = new SR6ComplexFormLeveller(this);
+		metaEcho  = new SR6MetamagicOrEchoController(this);
+		sins      = new SR6SINLeveller(this);
+		lifestyles= new SR6LifestyleLeveller(this);
+		contacts  = new SR6ContactLeveller(this);
+		
+		setupProcessChain();
+	}
+
+	// --------------------------------------------------------------------
+	private void setupProcessChain() {
+		if (logger.isLoggable(Level.DEBUG))
+			logger.log(Level.DEBUG, "ENTER: setupProcessChain()");
+		try {
+			if (setupDone) {
+				return;
+			}
+
+			processChain.add(new ResetModifications(model));
+			processChain.add(new GetModificationsFromMetaType(model));
+			processChain.add(new ApplyQualityModifications(model));
+			processChain.add(new GetModificationsFromQualities(model));
+//			processChain.add(new ResetGenerator(this));
+			processChain.add(qualities);
+			processChain.add(attributes);
+			processChain.add(skills);
+			processChain.add(spells);
+			processChain.add(rituals);
+			processChain.add(adeptPowers);
+			processChain.add(new GetModificationsFromGear(model));
+			processChain.add(equipment);
+			processChain.add(complex);
+			processChain.add(metaEcho);
+			processChain.add(sins);
+			processChain.add(lifestyles);
+			processChain.add(contacts);
+//			processChain.add(new RemainingKarmaNuyenController(this));
+			processChain.add(new CalculateEssence(model));
+
+			setupDone = true;
+		} finally {
+			if (logger.isLoggable(Level.DEBUG))
+				logger.log(Level.DEBUG, "LEAVE: setupProcessChain()");
+		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterControllerImpl#updateEffectiveRules()
+	 */
+	@Override
+	protected void updateEffectiveRules() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -13,7 +13,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.cells.ComplexDataItemListCell;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentGenerator;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import javafx.scene.layout.VBox;
 
@@ -43,7 +43,7 @@ public class ItemTemplateListCell extends ComplexDataItemListCell<ItemTemplate> 
 			lbName.setText(item.getName());
 			lbSource.setText(String.join(", ", GenericCore.getBestPageReferenceShortNames(item, Locale.getDefault())));
 			if (controlProv!=null && controlProv.get()!=null) {
-				Possible poss = ((CommonEquipmentController)controlProv.get()).canBeSelected(item, null, carry);
+				Possible poss = ((CommonEquipmentGenerator)controlProv.get()).canBeSelected(item, null, carry);
 				lbName.setDisable(!poss.get());
 				lbSource.setStyle(poss.get()?"":"-fx-text-fill: highlight");
 				setUserData(!poss.get());

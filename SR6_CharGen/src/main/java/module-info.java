@@ -1,12 +1,13 @@
 module de.rpgframework.shadowrun6.chargen {
 	exports de.rpgframework.shadowrun6.chargen.charctrl;
 	exports de.rpgframework.shadowrun6.chargen.gen;
+	exports de.rpgframework.shadowrun6.chargen.lvl;
 
-	requires de.rpgframework.core;
-	requires de.rpgframework.rules;
-	requires de.rpgframework.shadowrun6.core;
-	requires de.rpgframework.shadowrun6.data;
-	requires shadowrun.common;
-	requires shadowrun.common.chargen;
+	requires transitive de.rpgframework.core;
+	requires transitive de.rpgframework.rules;
+	requires transitive de.rpgframework.shadowrun6.core;
+	requires transitive de.rpgframework.shadowrun6.data;
+	requires transitive shadowrun.common;
+	requires transitive shadowrun.common.chargen;
 	requires simple.persist;
 }

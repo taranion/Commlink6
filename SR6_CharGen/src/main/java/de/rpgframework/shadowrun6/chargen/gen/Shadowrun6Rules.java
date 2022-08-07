@@ -37,6 +37,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule("CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule ALLOW_TRANSHUMANISM      = new Rule("ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_EXTENDED_CONTACT = new Rule("CHARGEN_EXTENDED_CONTACT", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule("MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
 
 	
 	//-------------------------------------------------------------------

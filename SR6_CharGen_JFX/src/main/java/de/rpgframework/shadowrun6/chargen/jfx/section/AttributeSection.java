@@ -9,6 +9,7 @@ import org.prelle.javafx.Section;
 import de.rpgframework.jfx.rules.AttributeTable.Mode;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
+import de.rpgframework.shadowrun.chargen.jfx.LevellingAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTable;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -19,6 +20,7 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
+import de.rpgframework.shadowrun6.chargen.lvl.SR6AttributeLeveller;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
@@ -79,6 +81,8 @@ public class AttributeSection extends Section {
 		} else if (attrib instanceof SR6PointBuyAttributeGenerator) {
  			System.err.println("AttributeSection: change controller to Point Buy");
 			table = new PointBuyAttributeTable<>(ctrl);
+		} else if (attrib instanceof SR6AttributeLeveller) {
+			table = new LevellingAttributeTable<>(ctrl);
 		} else {
 			System.err.println("AttributeSection: change controller to Karma");
 			logger.log(Level.ERROR, "Don't support controller "+model.getCharGenUsed());

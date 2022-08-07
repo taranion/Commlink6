@@ -1,13 +1,20 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
+import java.io.ByteArrayInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.rpgframework.ResourceI18N;
+import de.rpgframework.character.Attachment;
+import de.rpgframework.character.Attachment.Format;
+import de.rpgframework.character.Attachment.Type;
 import de.rpgframework.character.CharacterHandle;
+import de.rpgframework.character.CharacterProvider;
 import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.core.BabylonEventBus;
@@ -15,21 +22,27 @@ import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.CharacterGenerator;
+import de.rpgframework.jfx.CharacterHandleBox;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.jfx.pages.CharactersOverviewPage;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
+import javafx.scene.image.Image;
 
 /**
  * @author prelle
  *
  */
 public class SR6CharactersOverviewPage extends CharactersOverviewPage {
-	
+
 	private final static Logger logger = System.getLogger(SR6CharactersOverviewPage.class.getPackageName());
 
 
@@ -61,13 +74,86 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	}
 
 	//-------------------------------------------------------------------
+	protected void styleCharacterHandleBox(CharacterHandle charac, CharacterHandleBox card) {
+		CharacterProvider prov = CharacterProviderLoader.getCharacterProvider();
+		byte[] imageBytes = null;
+		try {
+			Attachment attach = prov.getFirstAttachment(charac, Type.CHARACTER, Format.IMAGE);
+			if (attach!=null) {
+				imageBytes = attach.getData();
+			}
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Failed loading image attachment",e);
+		}
+		if (imageBytes==null) {		
+			card.setImage(new Image(SR6CharactersOverviewPage.class.getResourceAsStream("Person.png")));
+		} else {
+			card.setImage(new Image(new ByteArrayInputStream(imageBytes)));
+		}
+		
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#createCharacterController(de.rpgframework.character.RuleSpecificCharacterObject)
 	 */
 	@Override
-	protected CharacterController<?, ?> createCharacterController(RuleSpecificCharacterObject<?,?,?> model) {
-		// TODO Auto-generated method stub
-		return null;
+	protected CharacterController<?, ?> createCharacterController(RuleSpecificCharacterObject<?,?,?> rawModel, CharacterHandle handle) {
+		logger.log(Level.INFO, "ENTER: create Character Controller");
+		try {
+		Shadowrun6Character model = (Shadowrun6Character) rawModel;
+		
+		if (model.isInCareerMode()) {
+			logger.log(Level.ERROR, "ToDo: Create Karma Leveller");
+			Class<? extends CommonSR6GeneratorSettings> settings = null;
+			if (model.getCharGenUsed() != null) {
+				if (model.getCharGenUsed().equals("prio")) {
+					settings = SR6PrioritySettings.class;
+				}
+				if (settings== null) {
+					logger.log(Level.ERROR, "Don't know how to get settings class for '{0}'",model.getCharGenUsed());
+					throw new NullPointerException("Don't know how to get settings class for '"+model.getCharGenUsed()+"'");
+				}
+			}
+			
+			SR6CharacterLeveller leveller = new SR6CharacterLeveller(model, handle, settings);
+			//System.exit(1);
+			return leveller;
+		} else {
+
+			GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
+			logger.log(Level.INFO, "ToDo: Detect previously used generator: {0}", model.getCharGenUsed());
+			try {
+				logger.log(Level.DEBUG, "JSON = " + model.getChargenSettingsJSON());
+				if (model.getCharGenUsed() == null) {
+					throw new NullPointerException(ResourceI18N.get(RES, "error.no_chargen_in_character"));
+				}
+//			switch (model.getCharGenUsed()) {
+//			case "prio":
+//				model.setCharGenSettings( (new Gson()).fromJson(model.getChargenSettingsJSON(), SR6PrioritySettings.class) );
+//				break;
+//			default:
+//				logger.log(Level.ERROR, "Don't know how to read settings from "+model.getCharGenUsed());
+//				System.exit(1);
+//			}
+
+				SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator(model.getCharGenUsed(), model,
+						handle);
+				wrapper.setWrapped(charGen);
+				logger.log(Level.INFO, "Return "+wrapper);
+				return wrapper;
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Error creating generator '" + model.getCharGenUsed(), e);
+				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2,
+						"Internal error creating character generator instance");
+				showAnyException(e, model, ResourceI18N.get(RES, "error.title"),
+						ResourceI18N.get(RES, "error.continuingCreation"));
+				return null;
+			}
+		}
+		} finally {
+			logger.log(Level.INFO, "LEAVE: create Character Controller");
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -78,7 +164,10 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	protected CharacterViewLayout createCharacterAppLayout(CharacterController<?, ?> control) {
 		logger.log(Level.DEBUG, "ENTER: createCharacterViewLayout");
 		try {
-			return new SR6CharacterViewLayout();
+			SR6CharacterViewLayout ret = new SR6CharacterViewLayout();
+			if (control!=null)
+				ret.setController((SR6CharacterController) control);
+			return ret;
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE: createCharacterViewLayout");			
 		}
@@ -110,13 +199,13 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 			Shadowrun6Character rawChar = Shadowrun6Core.decode(raw);
 			Shadowrun6Tools.resolveChar(rawChar);
 			return rawChar;
-//		} catch (Exception e) {
-//			logger.log(Level.ERROR, "Failed parsing XML for char",e);
-//			StringWriter mess = new StringWriter();
-//			mess.append("Failed loading character\n\n");
-//			e.printStackTrace(new PrintWriter(mess));
-//			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, mess.toString());
-//			return null;
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Failed parsing XML for char",e);
+			StringWriter mess = new StringWriter();
+			mess.append("Failed loading character\n\n");
+			e.printStackTrace(new PrintWriter(mess));
+			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, mess.toString());
+			return null;
 		} finally {
 			logger.log(Level.INFO, "LEAVE loadRuleSpecific");
 		}

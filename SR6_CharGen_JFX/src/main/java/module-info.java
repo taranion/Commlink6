@@ -11,9 +11,9 @@ module de.rpgframework.shadowrun6.chargen.jfx {
 	requires de.rpgframework.core;
 	requires de.rpgframework.javafx;
 	requires de.rpgframework.rules;
-	requires de.rpgframework.shadowrun6.core;
+	requires transitive de.rpgframework.shadowrun6.core;
 	requires de.rpgframework.shadowrun6.data;
-	requires de.rpgframework.shadowrun6.chargen;
+	requires transitive de.rpgframework.shadowrun6.chargen;
 	requires javafx.base;
 	requires javafx.controls;
 	requires javafx.extensions;

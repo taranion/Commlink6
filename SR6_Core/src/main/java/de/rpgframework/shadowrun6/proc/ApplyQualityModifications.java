@@ -9,6 +9,7 @@ import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -53,7 +54,13 @@ public class ApplyQualityModifications implements ProcessingStep {
 					model.addQuality(value);
 					logger.log(Level.DEBUG, "Add quality {0} to character", item);
 				}
+				// Mark as auto-added
 				value.addModification(mod);
+				
+				if (item.hasLevel()) {
+					logger.log(Level.DEBUG, " Level is now distr={0}   mod={1} = "+value.getName(), value.getDistributed(), value.getModifier());
+					logger.log(Level.DEBUG, "  result="+value);
+				}
 			}
 		} else {
 			throw new IllegalArgumentException("Not a QUALITY modiciation");

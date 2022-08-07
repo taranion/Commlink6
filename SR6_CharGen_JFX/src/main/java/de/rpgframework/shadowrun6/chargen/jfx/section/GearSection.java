@@ -127,7 +127,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	 */
 	@SuppressWarnings("unchecked")
 	public void refresh() {
-		logger.log(Level.DEBUG, "refresh");
+//		logger.log(Level.DEBUG, "refresh");
 		
 		if (model==null) return;
 		List<CarriedItem<ItemTemplate>> data2 = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItems());

@@ -53,7 +53,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;

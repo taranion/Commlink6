@@ -35,6 +35,7 @@ import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
+import de.rpgframework.shadowrun6.chargen.jfx.page.CareerPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CombatPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.GearPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.LifePage;
@@ -69,6 +70,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private VehiclePage pgVehicles;
 	private GearPage pgGear;
 	private LifePage pgLife;
+	private CareerPage pgCareer;
 	
 	private Label lbMode;
 	private Label lbKarma, lbNuyen;
@@ -89,7 +91,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		lbMode = new Label("Creation Mode");
+		lbMode = new Label("Unknown Mode");
 		lbMode.getStyleClass().add(JavaFXConstants.STYLE_HEADING3);
 		lbMode.setStyle("-fx-text-fill: accent; -fx-font-style: italic");
 		lbMode.setMaxWidth(Double.MAX_VALUE);
@@ -127,6 +129,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgVehicles = new VehiclePage();
 		pgGear   = new GearPage();
 		pgLife   = new LifePage();
+		pgCareer = new CareerPage();
 		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear, pgLife);
 	}
 
@@ -183,45 +186,43 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	public void continueCreation(Shadowrun6Character model, CharacterHandle handle) {
 		logger.log(Level.INFO, "ENTER: Continue creation");
 		this.handle = handle;
+		
+		if (this.control==null)
+			throw new IllegalStateException("No controller set");
 
 		try {
 			Label tmp = new Label(model.getName());
 			tmp.getStyleClass().add(JavaFXConstants.STYLE_HEADING2);
 			super.pages.setHeader(tmp);
 
-			GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
-			logger.log(Level.INFO, "ToDo: Detect previously used generator: {0}", model.getCharGenUsed());
-			try {
-				logger.log(Level.DEBUG, "JSON = "+model.getChargenSettingsJSON());
-				if (model.getCharGenUsed()==null) {
-					throw new NullPointerException(ResourceI18N.get(UI, "error.no_chargen_in_character"));
-				}
-//				switch (model.getCharGenUsed()) {
-//				case "prio":
-//					model.setCharGenSettings( (new Gson()).fromJson(model.getChargenSettingsJSON(), SR6PrioritySettings.class) );
-//					break;
-//				default:
-//					logger.log(Level.ERROR, "Don't know how to read settings from "+model.getCharGenUsed());
-//					System.exit(1);
+			control.addListener(this);
+			refreshController();
+			refreshPages();
+		
+//			GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
+//			logger.log(Level.INFO, "ToDo: Detect previously used generator: {0}", model.getCharGenUsed());
+//			try {
+//				logger.log(Level.DEBUG, "JSON = "+model.getChargenSettingsJSON());
+//				if (model.getCharGenUsed()==null) {
+//					throw new NullPointerException(ResourceI18N.get(UI, "error.no_chargen_in_character"));
 //				}
-				
-				SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator(model.getCharGenUsed(), model,
-						handle);
-				wrapper.setWrapped(charGen);
-				wrapper.addListener(this);
-				super.control = wrapper;
-				logger.log(Level.INFO, "Generator to continue with: {0}", charGen.getClass().getSimpleName());
-				refreshController();
-				refreshPages();
-			} catch (Exception e) {
-				logger.log(Level.ERROR, "Error creating generator '" + model.getCharGenUsed(), e);
-				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2,
-						"Internal error creating character generator instance");
-				showAnyException(e, model, 
-						ResourceI18N.get(UI, "error.title"),
-						ResourceI18N.get(UI, "error.continuingCreation"));
-				return;
-			}
+//				SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator(model.getCharGenUsed(), model,
+//						handle);
+//				wrapper.setWrapped(charGen);
+//				wrapper.addListener(this);
+//				super.control = wrapper;
+//				logger.log(Level.INFO, "Generator to continue with: {0}", charGen.getClass().getSimpleName());
+//				refreshController();
+//				refreshPages();
+//			} catch (Exception e) {
+//				logger.log(Level.ERROR, "Error creating generator '" + model.getCharGenUsed(), e);
+//				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2,
+//						"Internal error creating character generator instance");
+//				showAnyException(e, model, 
+//						ResourceI18N.get(UI, "error.title"),
+//						ResourceI18N.get(UI, "error.continuingCreation"));
+//				return;
+//			}
 			
 			logger.log(Level.WARNING, "ToDo: open wizard");
 		} finally {
@@ -236,10 +237,21 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void edit(Shadowrun6Character model, CharacterHandle handle) {
-		logger.log(Level.INFO, "ToDo: Edit "+model);
+		logger.log(Level.INFO, "ENTER: Edit "+model);
 		this.handle = handle;
+		control.addListener(this);
 		
-		refreshSidebar();
+		getPages().addAll(pgCareer);
+		
+		try {
+			refreshController();
+			refreshSidebar();
+			refreshPages();
+			refreshToDos();
+			control.runProcessors();
+		} finally {
+			logger.log(Level.INFO, "LEAVE: Edit " + model);
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -254,23 +266,15 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgVehicles.setController(control);
 		pgGear.setController(control);
 		pgLife.setController(control);
+		pgCareer.setController(control);
 		control.setAllowRunProcessor(true);
 		control.runProcessors();
 		refreshSidebar();
 	}
 
 	//-------------------------------------------------------------------
-	private void refreshPages() {
-		pgBasic.refresh();
-		pgSkills.refresh();
-		pgCombat.refresh();
-		pgAugment.refresh();
-		pgMagic.refresh();
-		pgMatrix.refresh();
-		pgVehicles.refresh();
-		pgGear.refresh();
-		pgLife.refresh();
-		
+	private void refreshToDos() {
+		logger.log(Level.INFO, "refreshToDos");
 		bxHoverToDo.getChildren().clear();
 		if (control.getToDos().isEmpty()) {
 			setHoverNode(null);
@@ -288,6 +292,26 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			System.err.println("SR6CharacterViewLayout: bxHoverToDo="+bxHoverToDo.getStyleClass());
 			setHoverNode(new Group(bxHoverToDo));
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private void refreshPages() {
+		if (control.getModel().isInCareerMode()) {
+			lbMode.setText(ResourceI18N.get(UI, "label.mode.career"));
+		} else {
+			lbMode.setText(ResourceI18N.get(UI, "label.mode.chargen"));
+		}
+		
+		pgBasic.refresh();
+		pgSkills.refresh();
+		pgCombat.refresh();
+		pgAugment.refresh();
+		pgMagic.refresh();
+		pgMatrix.refresh();
+		pgVehicles.refresh();
+		pgGear.refresh();
+		pgLife.refresh();
+		pgCareer.refresh();
 	}
 
 	//-------------------------------------------------------------------
@@ -311,6 +335,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 //		}
 		
 		refreshSidebar();
+		refreshToDos();
 	}
 
 	//-------------------------------------------------------------------

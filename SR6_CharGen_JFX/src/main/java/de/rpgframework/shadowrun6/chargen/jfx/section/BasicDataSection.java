@@ -15,7 +15,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -116,7 +115,6 @@ public class BasicDataSection extends Section {
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
 		System.getLogger(BasicDataSection.class.getPackageName()).log(Level.INFO, "updateController to "+ctrl);
-		System.err.println("updateController to "+ctrl);
 		this.control = ctrl;
 		refresh();
 	}
@@ -132,6 +130,9 @@ public class BasicDataSection extends Section {
 		cbMetatype.setValue(model.getMetatype());
 		cbMOR.setValue(model.getMagicOrResonanceType());
 		tfHeat.setText(String.valueOf(model.getHeat()));
+		
+		cbMetatype.setDisable(model.isInCareerMode());
+		cbMOR.setDisable(model.isInCareerMode());
 	}
 
 }

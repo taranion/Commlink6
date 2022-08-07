@@ -101,7 +101,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 //		((QualitySection)secQualities).updateController(ctrl);
 		FlexGridPane.setMinWidth(secQualities, 4);
-		FlexGridPane.setMediumWidth(secQualities, 5);
+		FlexGridPane.setMediumWidth(secQualities, 6);
 		FlexGridPane.setMinHeight(secQualities, 7);
 		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
 			if (n!=null) {
@@ -138,6 +138,8 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		secAttrib.refresh();
 		secQualities.refresh();
 		secPortrait.refresh();
+		
+		FlexGridPane.setMediumWidth(secAttrib, control.getModel().isInCareerMode()?6:9);
 	}
 	
 }
