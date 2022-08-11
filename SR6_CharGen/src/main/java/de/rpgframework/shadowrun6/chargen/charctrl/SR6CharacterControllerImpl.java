@@ -31,7 +31,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected SR6SpellController spells;
 	protected IRitualController rituals;
 	protected IMetamagicOrEchoController metaEcho;
-	protected IEquipmentController equipment;
+	protected ISR6EquipmentController equipment;
 	protected SINController sins;
 	protected SR6LifestyleController lifestyles;
 	protected IPANController pan;
@@ -141,7 +141,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getEquipmentController()
 	 */
 	@Override
-	public IEquipmentController getEquipmentController() {
+	public ISR6EquipmentController getEquipmentController() {
 		return equipment;
 	}
 

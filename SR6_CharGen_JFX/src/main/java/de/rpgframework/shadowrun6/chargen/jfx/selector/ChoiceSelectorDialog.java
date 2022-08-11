@@ -51,7 +51,7 @@ import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
+import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
@@ -117,7 +117,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
-		bxDesc  = (ctrl instanceof IEquipmentController)?(new CarriedItemDescriptionPane(null, (SR6CharacterController)charCtrl )):(new GenericDescriptionVBox(null));
+		bxDesc  = (ctrl instanceof ISR6EquipmentController)?(new CarriedItemDescriptionPane(null, (SR6CharacterController)charCtrl )):(new GenericDescriptionVBox(null));
 		optional= new OptionalNodePane(content, bxDesc);
 		lbProblem = new Label();
 		lbProblem.setStyle("-fx-text-fill: -fx-accent");
@@ -182,9 +182,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		}
 		
 		Possible possible = null;
-		if (item instanceof ItemTemplate && ctrl instanceof IEquipmentController) {
+		if (item instanceof ItemTemplate && ctrl instanceof ISR6EquipmentController) {
 			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
-			possible = ((IEquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, carry, getDecisions() );
+			possible = ((ISR6EquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, carry, getDecisions() );
 		} else {
 			possible = ctrl.canBeSelected(item, getDecisions() );
 		}

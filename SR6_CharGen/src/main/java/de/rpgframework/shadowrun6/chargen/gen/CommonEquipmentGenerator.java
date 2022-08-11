@@ -49,7 +49,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#select(ItemTemplate, String, Decision[])
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#select(ItemTemplate, String, Decision[])
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
@@ -175,7 +175,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#getConvertedKarma()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#getConvertedKarma()
 	 */
 	@Override
 	public int getConvertedKarma() {
@@ -184,7 +184,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#getConversionRateKarma()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#getConversionRateKarma()
 	 */
 	@Override
 	public int getConversionRateKarma() {
@@ -193,7 +193,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canIncreaseConversion()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canIncreaseConversion()
 	 */
 	@Override
 	public boolean canIncreaseConversion() {
@@ -203,7 +203,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#increaseConversion()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#increaseConversion()
 	 */
 	@Override
 	public boolean increaseConversion() {
@@ -222,7 +222,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canDecreaseConversion()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canDecreaseConversion()
 	 */
 	@Override
 	public boolean canDecreaseConversion() {
@@ -232,7 +232,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#decreaseConversion()
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#decreaseConversion()
 	 */
 	@Override
 	public boolean decreaseConversion() {
@@ -247,6 +247,16 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 		
 		parent.runProcessors();
 		return true;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController#canChangeCount(de.rpgframework.genericrpg.items.CarriedItem, int)
+	 */
+	@Override
+	public boolean canChangeCount(CarriedItem<ItemTemplate> item, int newCount) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

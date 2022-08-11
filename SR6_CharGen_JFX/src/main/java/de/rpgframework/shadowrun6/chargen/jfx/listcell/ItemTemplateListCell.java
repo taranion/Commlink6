@@ -1,7 +1,5 @@
 package de.rpgframework.shadowrun6.chargen.jfx.listcell;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.function.Supplier;
 
@@ -10,10 +8,9 @@ import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.GenericCore;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.cells.ComplexDataItemListCell;
+import de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentGenerator;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import javafx.scene.layout.VBox;
 
@@ -43,7 +40,7 @@ public class ItemTemplateListCell extends ComplexDataItemListCell<ItemTemplate> 
 			lbName.setText(item.getName());
 			lbSource.setText(String.join(", ", GenericCore.getBestPageReferenceShortNames(item, Locale.getDefault())));
 			if (controlProv!=null && controlProv.get()!=null) {
-				Possible poss = ((CommonEquipmentGenerator)controlProv.get()).canBeSelected(item, null, carry);
+				Possible poss = ((IEquipmentController)controlProv.get()).canBeSelected(item, null, carry);
 				lbName.setDisable(!poss.get());
 				lbSource.setStyle(poss.get()?"":"-fx-text-fill: highlight");
 				setUserData(!poss.get());

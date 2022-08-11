@@ -2,7 +2,6 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.io.IOException;
 import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,7 +32,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
+import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
@@ -319,7 +318,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getEquipmentController()
 	 */
 	@Override
-	public IEquipmentController getEquipmentController() {
+	public ISR6EquipmentController getEquipmentController() {
 		return wrapped.getEquipmentController();
 	}
 

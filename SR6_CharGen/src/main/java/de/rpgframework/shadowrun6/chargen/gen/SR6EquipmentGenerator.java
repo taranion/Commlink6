@@ -34,7 +34,7 @@ public class SR6EquipmentGenerator extends CommonEquipmentGenerator {
 	
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canBeSelected(ItemTemplate, String, Decision[])
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeSelected(ItemTemplate, String, Decision[])
 	 */
 	@Override
 	public Possible canBeSelected(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {

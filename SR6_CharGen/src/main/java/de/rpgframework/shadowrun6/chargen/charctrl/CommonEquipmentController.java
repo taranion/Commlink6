@@ -37,7 +37,7 @@ import de.rpgframework.shadowrun6.items.SR6VariantMode;
  * @author prelle
  *
  */
-public abstract class CommonEquipmentController extends ControllerImpl<ItemTemplate> implements IEquipmentController {
+public abstract class CommonEquipmentController extends ControllerImpl<ItemTemplate> implements ISR6EquipmentController {
 	
 	//-------------------------------------------------------------------
 	public CommonEquipmentController(SR6CharacterController parent) {
@@ -118,7 +118,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canBeSelected(ItemTemplate, String, Decision[])
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeSelected(ItemTemplate, String, Decision[])
 	 */
 	@Override
 	public Possible canBeSelected(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
@@ -181,7 +181,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#select(ItemTemplate, String, Decision[])
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#select(ItemTemplate, String, Decision[])
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
@@ -362,16 +362,16 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#getEmbeddableIn(CarriedItem, ItemHook)
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#getEmbeddableIn(CarriedItem, ItemHook)
 	 */
 	@Override
-	public List<ItemTemplate> getEmbeddableIn(CarriedItem ref, ItemHook slot) {
+	public List<ItemTemplate> getEmbeddableIn(CarriedItem<ItemTemplate> ref, ItemHook slot) {
 		return ItemUtil.getEmbeddableIn(ref, slot);
 	}
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canBeEmbedded(CarriedItem, ItemHook, ItemTemplate, Decision[])
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeEmbedded(CarriedItem, ItemHook, ItemTemplate, Decision[])
 	 */
 	@Override
 	public Possible canBeEmbedded(CarriedItem container, ItemHook slot, ItemTemplate value, String variant, Decision... decisions) {
@@ -399,7 +399,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#embed(CarriedItem, ItemHook, ItemTemplate, Decision[])
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#embed(CarriedItem, ItemHook, ItemTemplate, Decision[])
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem container, ItemHook slot, ItemTemplate value, String variant, Decision... decisions) {

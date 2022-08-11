@@ -49,7 +49,7 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
+import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
@@ -267,7 +267,7 @@ public class SR6ArchetypeTest {
 		assertEquals(0.5f, adept.getUnsedPowerPoints(), 0f);
 		
 		// Equipment
-		IEquipmentController equip = charGen.getEquipmentController();
+		ISR6EquipmentController equip = charGen.getEquipmentController();
 		poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest"));
 		assertNotNull(poss);
 		assertTrue( poss.toString(), poss.get());
@@ -478,7 +478,7 @@ public class SR6ArchetypeTest {
 		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "levitate")).wasSuccessful() );
 		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "physical_barrier")).wasSuccessful() );
 	
-		IEquipmentController equip = charGen.getEquipmentController();
+		ISR6EquipmentController equip = charGen.getEquipmentController();
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
@@ -690,7 +690,7 @@ public class SR6ArchetypeTest {
 		c3.setType(ContactType.CRIMINAL);
 		
 		// Augmentations
-		IEquipmentController equip = charGen.getEquipmentController();
+		ISR6EquipmentController equip = charGen.getEquipmentController();
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
@@ -955,7 +955,7 @@ public class SR6ArchetypeTest {
 		assertTrue( spells.select(Shadowrun6Core.getItem(SR6Spell.class, "trid_phantasm")).wasSuccessful() );
 
 		// Gear
-		IEquipmentController equip = charGen.getEquipmentController();
+		ISR6EquipmentController equip = charGen.getEquipmentController();
 		Possible poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "armor_vest"));
 		assertNotNull(poss);
 		assertTrue( poss.toString(), poss.get());

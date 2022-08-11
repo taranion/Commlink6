@@ -41,7 +41,7 @@ import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
+import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
@@ -109,7 +109,7 @@ public class PrioSkillGenTest {
 			public IMetatypeController getMetatypeController() {return null;}
 			public IAttributeController getAttributeController() {return null;}
 			public IQualityController getQualityController() { return null;}
-			public IEquipmentController getEquipmentController() { return null;}
+			public ISR6EquipmentController getEquipmentController() { return null;}
 			public IAdeptPowerController getAdeptPowerController() { return null;}
 			public SR6SpellController getSpellController() { return null;}
 			public IRitualController getRitualController() { return null;}

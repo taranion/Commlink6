@@ -11,25 +11,19 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
-import de.rpgframework.shadowrun.items.Availability;
-import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
-import de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController;
+import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 
 /**
  * @author prelle
  *
  */
-public class SR6EquipmentLeveller extends CommonEquipmentController implements IEquipmentController {
+public class SR6EquipmentLeveller extends CommonEquipmentController implements ISR6EquipmentController {
 
 	//-------------------------------------------------------------------
 	/**
@@ -42,7 +36,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 	
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IEquipmentController#canBeSelected(ItemTemplate, String, Decision[])
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeSelected(ItemTemplate, String, Decision[])
 	 */
 	@Override
 	public Possible canBeSelected(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
@@ -109,6 +103,12 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		return unprocessed;
+	}
+
+	@Override
+	public boolean canChangeCount(CarriedItem<ItemTemplate> item, int newCount) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
