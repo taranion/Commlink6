@@ -45,7 +45,7 @@ public class SR6CompendiumExportTest {
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(2));
+		//Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(2));
 		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(1));
 		
 		workbook = new XSSFWorkbook();

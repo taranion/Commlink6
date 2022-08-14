@@ -27,9 +27,16 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	public static void convertAdeptPower(AdeptPower item, Locale loc, Row row) {
-		int x = 4;
+		int x = 5;
 		row.createCell(x++, CellType.STRING).setCellValue(item.getActivation().name().toLowerCase());
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1));
+		row.createCell(x++, CellType.STRING).setCellValue(item.getActivation().getName(Locale.ENGLISH));
+		if (item.hasLevel()) {
+			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1)+" PP / level");
+			
+		} else {
+			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1)+" PP");
+		}
 	}
 
 //	//-------------------------------------------------------------------
@@ -145,25 +152,39 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	public static void convertSpell(SR6Spell item, Locale loc, Row row) {
-		int x=4;
-		row.createCell(x++, CellType.STRING).setCellValue(item.getCategory().name().toLowerCase());
+		List<String> feats = new ArrayList<>(); 
+		List<String> featNames = new ArrayList<>();
+		for (SpellFeatureReference feat :  item.getFeatures()) {
+			feats.add(feat.getKey());
+			featNames.add(feat.getNameWithoutRating());
+		}
+		
+		int x=5;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getType().name().toLowerCase());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getRange().name().toLowerCase());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().name().toLowerCase());
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getDrain());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getRange().name().toLowerCase());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getType().name().toLowerCase());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getCategory().name().toLowerCase());
+		row.createCell(x++, CellType.STRING).setCellValue(String.join(", ", feats));
+		row.createCell(x++, CellType.STRING).setCellValue("skill");
 		if (item.getDamage()!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getDamage().name().toLowerCase());
+		else
+			x++;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getCategory().getName(Locale.ENGLISH));
+		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().getName(Locale.ENGLISH));
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getDrain());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getRange().getName(Locale.ENGLISH));
+		row.createCell(x++, CellType.STRING).setCellValue(item.getType().getName(Locale.ENGLISH));
+		if (item.getDamage()!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getDamage().getName(Locale.ENGLISH));
 		else
 			x++;
 //		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.isOpposed());
 //		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.isEssence());
 //		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.isWild());
 
-		List<String> feats = new ArrayList();
-		for (SpellFeatureReference ref : item.getFeatures()) {
-			feats.add(ref.getFeature().getId());
-		}
-		row.createCell(x++, CellType.STRING).setCellValue(String.join(", ", feats));
+		row.createCell(x++, CellType.STRING).setCellValue(String.join(", ", featNames));
 
 		// Description
 		
