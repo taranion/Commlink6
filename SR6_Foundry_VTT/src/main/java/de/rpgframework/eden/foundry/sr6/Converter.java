@@ -11,6 +11,8 @@ import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.modification.EmbedModification;
+import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
@@ -21,6 +23,7 @@ import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeatureReference;
 import de.rpgframework.shadowrun.SpellValue;
+import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -29,7 +32,6 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.foundry.ActionSkills.ActionSkillValue;
 import de.rpgframework.shadowrun6.foundry.FVTTAdeptPower;
-import de.rpgframework.shadowrun6.foundry.FVTTBodyware;
 import de.rpgframework.shadowrun6.foundry.FVTTComplexForm;
 import de.rpgframework.shadowrun6.foundry.FVTTCritter;
 import de.rpgframework.shadowrun6.foundry.FVTTCritterPower;
@@ -43,8 +45,11 @@ import de.rpgframework.shadowrun6.foundry.FVTTWeapon;
 import de.rpgframework.shadowrun6.foundry.GeneralActor;
 import de.rpgframework.shadowrun6.foundry.LifeformActor;
 import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 /**
@@ -127,6 +132,12 @@ public class Converter {
 			data.type       = tmp.getItemType(CarryMode.CARRIED).name();
 		if (tmp.getItemSubtype(CarryMode.CARRIED)!=null)
 			data.subtype    = tmp.getItemSubtype(CarryMode.CARRIED).name();
+		// If necessary, consult IMPLANTED
+		if (data.type==null && tmp.getItemType(CarryMode.IMPLANTED)!=null) 
+			data.type       = tmp.getItemType(CarryMode.IMPLANTED).name();
+		if (data.subtype==null && tmp.getItemSubtype(CarryMode.IMPLANTED)!=null) 
+			data.subtype       = tmp.getItemSubtype(CarryMode.IMPLANTED).name();
+		
 		if (tmp.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
 			data.availDef   = tmp.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue();
 		if (tmp.getAttribute(SR6ItemAttribute.PRICE)!=null) {
@@ -137,20 +148,22 @@ public class Converter {
 			data.skill      = tmp.getAttribute(SR6ItemAttribute.SKILL).getRawValue();
 		if (tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)!=null)
 			data.skillSpec  = tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION).getRawValue();
+		if (tmp.getAttribute(SR6ItemAttribute.ESSENCECOST)!=null)
+			data.essence   = tmp.getAttribute(SR6ItemAttribute.ESSENCECOST).getDistributed();
 
 		if ((data instanceof FVTTWeapon) && tmp.getAttribute(SR6ItemAttribute.DAMAGE)!=null) {
 			((FVTTWeapon)data).dmgDef       = tmp.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue();
 			try {
 				((FVTTWeapon)data).attackRating = tmp.getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue();
 			} catch (IllegalStateException e) {
-				logger.log(Level.ERROR, "Error converting {}: {}", tmp.getId(), e.toString());
+				logger.log(Level.ERROR, "Error converting {0}: {1}", tmp.getId(), e.toString());
 			}
 			if (tmp.getAttribute(SR6ItemAttribute.FIREMODES)!=null)
 				((FVTTWeapon)data).modes        = toVTTMode(tmp.getAttribute(SR6ItemAttribute.FIREMODES).getValue());
 			try {
 				((FVTTWeapon)data).dmg        = ((Damage)tmp.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getModifiedValue();
 			} catch (IllegalStateException e) {
-				logger.log(Level.ERROR, "Error converting {}: {}", tmp.getId(), e.toString());
+				logger.log(Level.ERROR, "Error converting {0}: {1}", tmp.getId(), e.toString());
 			}
 		}
 		// Vehicles
@@ -169,11 +182,65 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	public static ItemData<FVTTGear> convertGear(CarriedItem<ItemTemplate> val, Locale loc) {
-		ItemData<FVTTGear> ret = convertGear(val.getModifyable(), loc);
-		FVTTGear fVal = ret.getData();
-		// Value fields
-//		fVal.customName = val.get;
-//		fVal.explain = val.getDescription();
+		ItemTemplate tmp = val.getResolved();
+		
+		FVTTGear data = new FVTTGear();
+		try {
+			if (ItemType.isWeapon(val.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue()))
+				data = new FVTTWeapon();
+			if (ItemType.isVehicle(val.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue()))
+				data = new FVTTVehicle();
+			// Definition fields
+			data.genesisID  = tmp.getId();
+			data.type       = ((ItemType)val.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue()).name();
+			data.subtype    = ((ItemSubType)val.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue()).name();
+			if (val.getAsObject(SR6ItemAttribute.AVAILABILITY)!=null)
+				data.availDef   = ((Availability)val.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getName(loc);
+			data.price   = val.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+//		if (val.getAsObject(SR6ItemAttribute.SKILL)!=null)
+//			data.availDef   = ((Availability)val.getAsObject(SR6ItemAttribute.SKILL).getModifiedValue()).getName(loc);
+			
+			
+			if (tmp.getAttribute(SR6ItemAttribute.SKILL)!=null)
+				data.skill      = tmp.getAttribute(SR6ItemAttribute.SKILL).getRawValue();
+			if (tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)!=null)
+				data.skillSpec  = tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION).getRawValue();
+			if (val.getAsFloat(SR6ItemAttribute.ESSENCECOST)!=null)
+				data.essence   = (int) val.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
+
+			if ((data instanceof FVTTWeapon) && tmp.getAttribute(SR6ItemAttribute.DAMAGE)!=null) {
+				((FVTTWeapon)data).dmgDef       = tmp.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue();
+				try {
+					((FVTTWeapon)data).attackRating = tmp.getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue();
+				} catch (IllegalStateException e) {
+					logger.log(Level.ERROR, "Error converting {}: {}", tmp.getId(), e.toString());
+				}
+				if (tmp.getAttribute(SR6ItemAttribute.FIREMODES)!=null)
+					((FVTTWeapon)data).modes        = toVTTMode(tmp.getAttribute(SR6ItemAttribute.FIREMODES).getValue());
+				try {
+					((FVTTWeapon)data).dmg        = ((Damage)tmp.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getModifiedValue();
+				} catch (IllegalStateException e) {
+					logger.log(Level.ERROR, "Error converting {}: {}", tmp.getId(), e.toString());
+				}
+			}
+			// Vehicles
+			if (data instanceof FVTTVehicle) {
+				((FVTTVehicle)data).handlOn = tmp.getAttribute(SR6ItemAttribute.HANDLING).getDistributed();
+				((FVTTVehicle)data).bod = tmp.getAttribute(SR6ItemAttribute.BODY).getDistributed();
+				((FVTTVehicle)data).arm = tmp.getAttribute(SR6ItemAttribute.ARMOR).getDistributed();
+				((FVTTVehicle)data).pil = tmp.getAttribute(SR6ItemAttribute.PILOT).getDistributed();
+				((FVTTVehicle)data).sen = tmp.getAttribute(SR6ItemAttribute.SENSORS).getDistributed();
+				if (tmp.getAttribute(SR6ItemAttribute.SEATS)!=null)
+				((FVTTVehicle)data).sea = tmp.getAttribute(SR6ItemAttribute.SEATS).getDistributed();
+			}
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Failed converting carried item for "+tmp.getId()+": "+e);
+			e.printStackTrace();
+			System.exit(1);
+		}
+
+		ItemData<FVTTGear> ret = new ItemData<FVTTGear>(tmp.getName(loc), "gear", data);
+		ret.name = val.getNameWithRating(loc);
 
 		return ret;
 	}
@@ -342,6 +409,36 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
+	private static void fillVehicleAttributes(FVTTVehicleActor actor, ItemTemplate item) {
+		actor.handlOn  = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.HANDLING).getValue()).getOnRoad();		
+		actor.handlOff = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.HANDLING).getValue()).getOffRoad();		
+		actor.accOn    = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.ACCELERATION).getValue()).getOnRoad();		
+		actor.accOff   = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.ACCELERATION).getValue()).getOffRoad();		
+		actor.spdiOn   = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL).getValue()).getOnRoad();		
+		actor.spdiOff  = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL).getValue()).getOffRoad();		
+		actor.tspd     = item.getAttribute(SR6ItemAttribute.TOPSPEED).getDistributed();
+		actor.bod      = item.getAttribute(SR6ItemAttribute.BODY).getDistributed();
+		actor.arm      = item.getAttribute(SR6ItemAttribute.ARMOR).getDistributed();
+		actor.pil      = item.getAttribute(SR6ItemAttribute.PILOT).getDistributed();
+		actor.sen      = item.getAttribute(SR6ItemAttribute.SENSORS).getDistributed();
+		if (item.getAttribute(SR6ItemAttribute.SEATS)!=null)
+			actor.sea      = item.getAttribute(SR6ItemAttribute.SEATS).getDistributed();
+		//actor.vtype    = item.getAttribute(SR6ItemAttribute.VEHICLE_TYPE).getValue();
+	}
+
+	//-------------------------------------------------------------------
+	private static void fillAccessories(ActorData actor, ItemTemplate item, Locale loc) {
+		for (Modification mod : item.getModifications()) {
+			System.err.println("fillAccessories("+item.getId()+"): "+mod);
+			if (mod instanceof EmbedModification) {
+				EmbedModification embed = (EmbedModification)mod;
+				logger.log(Level.INFO, "Embed "+embed.getKey()+" into "+item.getId());
+				actor.addItem( convertGear(item, loc));
+			}
+		}
+	}
+
+	//-------------------------------------------------------------------
 	public static ActorData<? extends GeneralActor> convertActor(SR6NPC item, Locale loc) {
 		switch (item.getType()) {
 		case CRITTER:
@@ -364,6 +461,7 @@ public class Converter {
 		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
 		data.getGear().forEach(tmp -> {
+			SR6GearTool.recalculate("", data, tmp);
 			foundry.addItem(convertGear(tmp,loc));});
 
 		return foundry;
@@ -372,10 +470,21 @@ public class Converter {
 	//-------------------------------------------------------------------
 	private static ActorData<FVTTNPCActor> convertNPCActor(SR6NPC data, Locale loc) {
 		FVTTNPCActor actor = new FVTTNPCActor();
+		actor.genesisID = data.getId();
 
 		ActorData<FVTTNPCActor> foundry = new ActorData<FVTTNPCActor>(data.getName(loc), "NPC", actor);
 		fillAttributes(foundry.data, data);
 		fillSkills(foundry.data, data);
+		
+		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
+		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
+		data.getSpells().forEach(tmp -> foundry.addItem(convertSpell(tmp,loc)));
+		data.getGear().forEach(tmp -> {
+			SR6GearTool.recalculate("", data, tmp);
+			ItemData<FVTTGear> converted = convertGear(tmp, loc);
+			converted.getData().usedForPool=true;
+			foundry.addItem(convertGear(tmp,loc));
+		});
 		
 		
 		return foundry;
@@ -384,16 +493,16 @@ public class Converter {
 	//-------------------------------------------------------------------
 	private static ActorData<FVTTVehicleActor> convertVehicleActor(ItemTemplate data, Locale loc) {
 		FVTTVehicleActor actor = new FVTTVehicleActor();
+		actor.genesisID = data.getId();
 		
 		ActorData<FVTTVehicleActor> foundry = new ActorData<FVTTVehicleActor>(data.getName(loc), "Vehicle", actor);
 
-//		fillAttributes(foundry.data, data);
+		fillVehicleAttributes(foundry.data, data);
+		fillAccessories(foundry, data, loc);
 //		fillSkills(foundry.data, data);
 //		
 //		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 //		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
-//		data.getGear().forEach(tmp -> {
-//			foundry.addItem(convertGear(tmp,loc));});
 
 		return foundry;
 	}

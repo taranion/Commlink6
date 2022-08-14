@@ -1,5 +1,8 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import de.rpgframework.genericrpg.items.Hook;
+import de.rpgframework.genericrpg.items.PieceOfGear;
+import de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -14,6 +17,7 @@ public interface SR6CharacterController extends IShadowrunCharacterController<SR
 	public SR6SkillController getSkillController();
 
 	public ISR6EquipmentController getEquipmentController();
+//	public <T extends PieceOfGear<?,?,?,?>, H extends Hook> IEquipmentController<T,H> getEquipmentController();
 
 	public SR6LifestyleController getLifestyleController();
 	

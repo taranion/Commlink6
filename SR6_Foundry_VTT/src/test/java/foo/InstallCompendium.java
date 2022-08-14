@@ -36,7 +36,7 @@ public class InstallCompendium {
     	Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(2) );
+		//Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(2) );
 		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(1) );
 
          Path target = Paths.get("/home/prelle/.local/share/FoundryVTT/Data/modules/shadowrun6-data");

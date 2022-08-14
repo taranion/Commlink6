@@ -5,8 +5,6 @@ import java.lang.System.Logger.Level;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
-import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -15,6 +13,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
+import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**

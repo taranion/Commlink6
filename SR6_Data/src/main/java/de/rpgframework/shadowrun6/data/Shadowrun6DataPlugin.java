@@ -123,6 +123,7 @@ public class Shadowrun6DataPlugin  {
 		alreadyInitialized = true;
 		logger.log(Level.INFO, "START -------------------------------Core-----------------------------------------------");
 		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN);
+		
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;

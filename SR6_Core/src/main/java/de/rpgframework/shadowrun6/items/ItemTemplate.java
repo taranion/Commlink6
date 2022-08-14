@@ -225,6 +225,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				return variant.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue();
 			return type;
 		}
+		if (usages==null || usages.isEmpty()) return type;
 		return null;
 	}
 
@@ -266,6 +267,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				return variant.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
 			return subtype;
 		}
+		if (usages==null || usages.isEmpty()) return subtype;
 		return null;
 	}
 

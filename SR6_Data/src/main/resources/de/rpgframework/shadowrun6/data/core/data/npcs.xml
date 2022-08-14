@@ -22,7 +22,7 @@
 			</skillval>
 		</skills>
 		<gear>
-<!-- 			<item ref="commlink"/> -->
+ 			<item ref="meta_link"/>
 			<item ref="club"/>
 		</gear>
 	</npc>
@@ -52,7 +52,7 @@
 			<spellval ref="cleansing_heal"/>
 		</spells>
 		<gear>
-<!-- 			<item ref="commlink"/> -->
+			<item ref="meta_link"/>
 		</gear>
 	</npc>
 	
@@ -86,6 +86,7 @@
 			</item>
 		</geardef>
 		<gear>
+			<item ref="meta_link"/>
 			<item ref="gang_leathers"/> 
 			<item ref="bike_chain"/> 
 			<item ref="streetline_special"/> 
@@ -114,6 +115,7 @@
 		</skills>
 		<gear>
 			<item ref="armor_clothing"/> 
+			<item ref="sony_emporer"/>
 			<item ref="club"/> 
 			<item ref="beretta_201T"/> 
 		</gear>
@@ -145,8 +147,9 @@
 		</skills>
 		<gear>
 			<item ref="armor_clothing"/> 
-			<item ref="knucks"/> 
+			<item ref="sony_emporer"/>
 			<item ref="beretta_101T"/> 
+			<item ref="knucks"/> 
 		</gear>
 	</npc>
 	<npc id="data_harvester" rating="2" type="GRUNT">
@@ -179,7 +182,12 @@
 			</item>
 		</geardef>
 		<gear>
+			<item ref="cyberjack">
+				<decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="1"/>
+			</item> 
 			<item ref="gang_leathers"/> 
+			<item ref="renraku_sensei"/>
+			<item ref="erika_mcd6"/>
 			<item ref="combat_knife"/> 
 			<item ref="fichetti_security_600"/> 
 		</gear>
@@ -213,6 +221,8 @@
 		</skills>
 		<gear>
 			<item ref="armor_vest"/> 
+			<item ref="renraku_sensei"/>
+			<item ref="jazz" count="2"/>
 			<item ref="colt_america_l36"/> 
 			<item ref="stun_baton"/> 
 		</gear>

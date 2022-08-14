@@ -2,6 +2,7 @@ package org.prelle.rpgframework.shadowrun6.data;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -21,12 +22,16 @@ import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
+import de.rpgframework.genericrpg.modification.DataItemModification;
+import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.Legality;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
@@ -67,8 +72,9 @@ public class SR6CarriedItemTest {
 		assertNotNull(axe);
 		
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(axe, null, CarryMode.CARRIED);
-		SR6GearTool.recalculate("", null, item);
 		assertNotNull(item);
+		OperationResult<List<Modification>> modR = SR6GearTool.recalculate("", null, item);
+		assertTrue(modR.wasSuccessful());
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
 		assertEquals(4, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
 		assertEquals(Legality.LEGAL, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
@@ -113,7 +119,8 @@ public class SR6CarriedItemTest {
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
 		Decision decision = new Decision(UUID.fromString("adeb159c-6ca3-407b-8641-c76f9b29a49c"), "9");
 		item.setDecisions(List.of(decision));
-		SR6GearTool.recalculate("", null, item);
+		OperationResult<List<Modification>> modR = SR6GearTool.recalculate("", null, item);
+		assertTrue(modR.wasSuccessful());
 		
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
 		assertEquals(3, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
@@ -257,4 +264,41 @@ public class SR6CarriedItemTest {
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
 		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
 	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testItemWithCharMods() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "bone_lacing");
+		assertNotNull(temp);
+		assertEquals("No. modifications wrong in ItemTemplate.",1, temp.getModifications().size());
+		
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, temp.getVariant("aluminium"), CarryMode.IMPLANTED);
+		assertEquals("No. modifications wrong in CI.",5, item.getModifications().size());
+		Decision decision = new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, AugmentationQuality.STANDARD.name());
+		item.setDecisions(List.of(decision));
+		assertEquals("No. modifications wrong in CI.",5, item.getModifications().size());
+		OperationResult<List<Modification>> modR = SR6GearTool.recalculate("", null, item);
+		assertEquals("No. modifications wrong in CI.",5, item.getModifications().size());
+		assertTrue(modR.wasSuccessful());
+		assertFalse(modR.get().isEmpty());
+		assertTrue( modR.get().contains( new DataItemModification(ShadowrunReference.RULE, SR6RuleFlag.UNARMED_DAMAGE_IS_PHYSICAL.name())));
+		assertTrue( modR.get().contains( new DataItemModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESIST_DAMAGE.name())));
+		assertEquals("No. modifications wrong.",5, modR.get().size());
+		
+		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
+		assertEquals(3, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
+		assertEquals(Legality.RESTRICTED, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
+		assertNotNull("No PRICE set",item.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(190, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertNotNull(item.getAsObject(SR6ItemAttribute.DAMAGE));
+		assertEquals(5, ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getValue());
+		assertEquals(DamageType.PHYSICAL, ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getType());
+		assertNotNull(item.getAsObject(SR6ItemAttribute.ATTACK_RATING));
+		assertArrayEquals(new int[]{5,9,2,0,0}, (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
+		assertNotNull(item.getAsObject(SR6ItemAttribute.SKILL));
+		assertEquals(Shadowrun6Core.getSkill("athletics"), (SR6Skill)item.getAsObject(SR6ItemAttribute.SKILL).getModifiedValue());
+		assertNotNull(item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION));
+		assertEquals(Shadowrun6Core.getSkill("athletics").getSpecialization("archery"), (SkillSpecialization<SR6Skill>)item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getModifiedValue());
+	}
+
 }

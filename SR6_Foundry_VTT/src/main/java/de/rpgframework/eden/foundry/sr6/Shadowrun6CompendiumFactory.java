@@ -81,7 +81,7 @@ public class Shadowrun6CompendiumFactory {
 		String imgPath = "images/"+type+"/" + id + ".webp";
 		String imgPath2= "images/"+type+"/" + id + ".jpg";
 		Path path = Paths.get(IMGROOT, imgPath);
-		Path path2 = Paths.get(IMGROOT, imgPath);
+		Path path2 = Paths.get(IMGROOT, imgPath2);
 		if (Files.exists(path)) {
 //			logger.warn("Found image "+path);
 			FileInputStream fins = new FileInputStream(path.toFile());
@@ -116,7 +116,7 @@ public class Shadowrun6CompendiumFactory {
 		} else {
 			logger.log(Level.WARNING,"Missing token "+tokPath);
 			if (Files.exists(path)) {
-				logger.log(Level.WARNING,"Use image alternative "+path);
+				logger.log(Level.WARNING,"Use token image alternative "+path);
 				FileInputStream fins = new FileInputStream(path.toFile());
 				entry.token.img = "modules/shadowrun6-data/" + path;
 				ZipEntry zipEntry = new ZipEntry(tokPath);
@@ -581,13 +581,14 @@ public class Shadowrun6CompendiumFactory {
 			
 			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
 			for (Locale loc : locales) {
-				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".desc", tmp.getDescription(loc));
-				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".name", tmp.getName(loc));
-				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".src", createSourceText(tmp, loc));
+				module.addTranslation(loc.getLanguage(), "vehicle."+tmp.getId()+".desc", tmp.getDescription(loc));
+				module.addTranslation(loc.getLanguage(), "vehicle."+tmp.getId()+".name", tmp.getName(loc));
+				module.addTranslation(loc.getLanguage(), "vehicle."+tmp.getId()+".src", createSourceText(tmp, loc));
 			}
 			ActorData<?> entry = Converter.convertActor(tmp, locales[0]);
 			entry._id  = createRandomID();
 			
+			addImages(zipOut, "vehicle", tmp.getId(), entry);
 			buf.append(gson.toJson(entry));
 			buf.append('\n');
 		}
@@ -666,51 +667,8 @@ public class Shadowrun6CompendiumFactory {
 			
 			ActorData<? extends GeneralActor> entry = Converter.convertActor(tmp, locales[0]);
 			entry._id = createRandomID();
-//			entry.flags.core.sheetClass="shadowrun6-eden.Shadowrun6ActorSheetVehicleCompendium";
-			
-//			FVTTNPCActor data = new FVTTNPCActor();
-//			data.attributes.bod.base = tmp.getAttribute(ShadowrunAttribute.BODY).getDistributed();
-//			data.attributes.bod.mod  = tmp.getAttribute(ShadowrunAttribute.BODY).getModifier();
-//			data.attributes.agi.base = tmp.getAttribute(ShadowrunAttribute.AGILITY).getDistributed();
-//			data.attributes.agi.mod  = tmp.getAttribute(ShadowrunAttribute.AGILITY).getModifier();
-//			data.attributes.rea.base = tmp.getAttribute(ShadowrunAttribute.REACTION).getDistributed();
-//			data.attributes.rea.mod  = tmp.getAttribute(ShadowrunAttribute.REACTION).getModifier();
-//			data.attributes.str.base = tmp.getAttribute(ShadowrunAttribute.STRENGTH).getDistributed();
-//			data.attributes.str.mod  = tmp.getAttribute(ShadowrunAttribute.STRENGTH).getModifier();
-//			data.attributes.wil.base = tmp.getAttribute(ShadowrunAttribute.WILLPOWER).getDistributed();
-//			data.attributes.wil.mod  = tmp.getAttribute(ShadowrunAttribute.WILLPOWER).getModifier();
-//			data.attributes.log.base = tmp.getAttribute(ShadowrunAttribute.LOGIC).getDistributed();
-//			data.attributes.log.mod  = tmp.getAttribute(ShadowrunAttribute.LOGIC).getModifier();
-//			data.attributes.inn.base = tmp.getAttribute(ShadowrunAttribute.INTUITION).getDistributed();
-//			data.attributes.inn.mod  = tmp.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
-//			data.attributes.cha.base = tmp.getAttribute(ShadowrunAttribute.CHARISMA).getDistributed();
-//			data.attributes.cha.mod  = tmp.getAttribute(ShadowrunAttribute.CHARISMA).getModifier();
-//			data.attributes.mag.base = tmp.getAttribute(ShadowrunAttribute.MAGIC).getDistributed();
-//			data.attributes.mag.mod  = tmp.getAttribute(ShadowrunAttribute.MAGIC).getModifier();
-//			data.attributes.res.base = tmp.getAttribute(ShadowrunAttribute.RESONANCE).getDistributed();
-//			data.attributes.res.mod  = tmp.getAttribute(ShadowrunAttribute.RESONANCE).getModifier();
-//			
-//			for (SR6SkillValue val : tmp.getSkillValues()) {
-//				if ((val.getModifyable().getId().equals("language") || val.getModifyable().getId().equals("knowledge"))) {
-//					continue;
-//				} else {
-//					FVTTSkill fVal = new FVTTSkill();
-//					fVal.genesisID = val.getModifyable().getId();
-//					fVal.points    = val.getDistributed();
-//					fVal.modifier  = val.getModifier();
-//
-//					Item<FVTTSkill> item = new Item<FVTTSkill>(val.getName(Locale.ENGLISH), "skill", fVal);
-//					entry.addItems(item);
-//				}
-//			}
-////			data.accOff = spell.getAttribute(SR6ItemAttribute.)
-////			data.genesisID = spell.getId();
-////			data.category  = spell.getCategory().name();
-////			data.drain = spell.getDrain();
-////			data.type  = spell.getType().name();
-////			data.range = spell.getRange().name();
-//			entry.data = data;
-			
+
+			addImages(zipOut, "npc", tmp.getId(), entry);
 			buf.append(gson.toJson(entry));
 			buf.append('\n');
 		}
