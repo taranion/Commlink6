@@ -1,4 +1,4 @@
-module de.rpgframework.shadowrun6.core {
+open module de.rpgframework.shadowrun6.core {
 	exports de.rpgframework.shadowrun6;
 	exports de.rpgframework.shadowrun6.generators;
 	exports de.rpgframework.shadowrun6.filter;

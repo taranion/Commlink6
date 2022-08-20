@@ -1,4 +1,4 @@
-module de.rpgframework.shadowrun6.data {
+open module de.rpgframework.shadowrun6.data {
 	exports de.rpgframework.shadowrun6.data;
 
 	requires de.rpgframework.core;
