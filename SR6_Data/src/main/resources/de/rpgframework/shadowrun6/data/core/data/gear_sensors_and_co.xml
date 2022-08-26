@@ -17,16 +17,22 @@
 		</choices>
    </item>
 
-   <item avail="1" price="50" id="binoculars" type="ELECTRONICS" subtype="IMAGING">
-		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
-		</choices>
-		<attrdef id="PRICE" value="$RATING*50"/>
-		<modifications>
-			<valmod type="HOOK" ref="OPTICAL" value="$RATING"/>
-		</modifications>
+   <item avail="1" price="50" id="binoculars" type="ELECTRONICS" subtype="IMAGING" reqVariant="y">
+   	<variant id="electronic">
+			<choices>
+				<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			</choices>
+			<attrdef id="PRICE" value="$RATING*50"/>
+			<modifications>
+				<valmod type="HOOK" ref="IMAGING" value="$RATING"/>
+			</modifications>
+		</variant>
+		<variant id="optical">
+			<modifications>
+				<valmod type="HOOK" ref="OPTICAL" value="0"/>
+			</modifications>
+		</variant>
    </item>
-   <item avail="1" price="50" id="binoculars_optical" subtype="OPTICAL" type="ELECTRONICS"/>
    <item avail="1" price="100" id="camera" type="ELECTRONICS" subtype="IMAGING">
 		<choices>
 			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>

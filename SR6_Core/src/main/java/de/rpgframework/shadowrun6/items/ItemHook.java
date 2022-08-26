@@ -26,7 +26,8 @@ public enum ItemHook implements Hook {
 	IMPLANTWEAPON_ACCESSORY,
 	
 	ELECTRONIC_ACCESSORY,
-	OPTICAL(true),
+	IMAGING(true),
+	OPTICAL,
 	AUDIO(true),
 	SENSOR_HOUSING(true),
 	SENSOR_FUNCTION(true),
