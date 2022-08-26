@@ -670,7 +670,11 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					logger.log(Level.WARNING, "Found SR6SkillValue without skill: "+val);
 					continue;
 				}
-				val.setDistributed(entry.getValue().getSum());
+				if (val.getSpecializations().isEmpty()) {
+					val.setDistributed(entry.getValue().getSum());					
+				} else {
+					val.setDistributed(entry.getValue().getSum()-1);
+				}
 				usedSkills.add(val);
 			}
 			// Reverse check: all skills in model should be in usedSkills

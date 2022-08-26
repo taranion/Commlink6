@@ -374,12 +374,18 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeEmbedded(CarriedItem, ItemHook, ItemTemplate, Decision[])
 	 */
 	@Override
-	public Possible canBeEmbedded(CarriedItem container, ItemHook slot, ItemTemplate value, String variant, Decision... decisions) {
+	public Possible canBeEmbedded(CarriedItem container, ItemHook slot, ItemTemplate value, String variantID, Decision... decisions) {
 		if (!getEmbeddableIn(container, slot).contains(value)) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_EMBEDDABLE, value.getName(), slot, container.getNameWithRating());
 		}
 		
-		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, getModel(), true, decisions);
+		OperationResult<CarriedItem<ItemTemplate>> res = null;
+		if (variantID!=null) {
+			SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) value.getVariant(variantID);
+			res = GearTool.buildItem(value, CarryMode.EMBEDDED, variant, getModel(), true, decisions);
+		} else {
+			res = GearTool.buildItem(value, CarryMode.EMBEDDED,  getModel(), true, decisions);
+		}
 		if (res.hasError()) {
 			return new Possible(State.IMPOSSIBLE, res.getMessages().toString());
 		}
@@ -402,19 +408,25 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#embed(CarriedItem, ItemHook, ItemTemplate, Decision[])
 	 */
 	@Override
-	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem container, ItemHook slot, ItemTemplate value, String variant, Decision... decisions) {
+	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem container, ItemHook slot, ItemTemplate value, String variantID, Decision... decisions) {
 		logger.log(Level.TRACE, "ENTER embed {0} into {1}", value, container);
 		try {
-			Possible poss = canBeEmbedded(container, slot, value, variant, decisions);
+			Possible poss = canBeEmbedded(container, slot, value, variantID, decisions);
 			if (!poss.get()) {
 				logger.log(Level.WARNING, "Trying to embed, which isn't possible: "+poss.getMostSevere());
 				return new OperationResult<>();
 			}
 			
-			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, getModel(), true, decisions);
+			SR6PieceOfGearVariant variant = null;
+			if (variantID!=null)
+				variant = (SR6PieceOfGearVariant) value.getVariant(variantID);
+			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, variant, getModel(), true, decisions);
 			logger.log(Level.ERROR, "ToDo: really embed");
 			if (res.wasSuccessful()) {
 				container.addAccessory(res.get(), slot);
+			} else {
+				logger.log(Level.ERROR, "Error building item: "+res.getMessages());
+				System.exit(1);
 			}
 			logger.log(Level.ERROR, "ToDo: recalculate item after embedding");
 			GearTool.recalculate("", getModel(), container);

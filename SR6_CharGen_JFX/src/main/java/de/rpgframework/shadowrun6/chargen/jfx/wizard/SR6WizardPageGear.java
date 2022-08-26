@@ -124,10 +124,11 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 
 		Region buf = new Region();
 		buf.setMaxWidth(Double.MAX_VALUE);
-		HBox backHeader = new HBox(10, new HBox(backHeaderKarma, backHeaderNuyen, backHeaderEssence), buf, new SymbolIcon("setting"));
+		HBox box = new HBox(backHeaderKarma, backHeaderNuyen, backHeaderEssence);
+		HBox backHeader = new HBox(10, box, buf, new SymbolIcon("setting"));
 		HBox.setHgrow(buf, Priority.ALWAYS);
-		backHeader.setMaxWidth(Double.MAX_VALUE);
-		HBox.setMargin(new HBox(backHeaderKarma, backHeaderNuyen, backHeaderEssence), new Insets(0,0,0,10));
+		//backHeader.setMaxWidth(Double.MAX_VALUE);
+		HBox.setMargin(box, new Insets(0,0,0,10));
 		HBox.setMargin(backHeader.getChildren().get(2), new Insets(0,10,0,0));
 
 //		if (ResponsiveControlManager.getCurrentMode()==WindowMode.EXPANDED) {

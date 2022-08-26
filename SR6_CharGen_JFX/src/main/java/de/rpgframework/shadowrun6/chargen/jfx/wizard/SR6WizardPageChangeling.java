@@ -103,11 +103,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		backHeader = new NumberUnitBackHeader("Karma");
 		backHeader.setValue(charGen.getModel().getKarmaFree());
 		HBox.setMargin(backHeader, new Insets(0,10,0,10));
-		if (ResponsiveControlManager.getCurrentMode()==WindowMode.EXPANDED) {
-			super.setBackHeader(null);
-		} else {
-			super.setBackHeader(backHeader);
-		}
+		super.setBackHeader(backHeader);
 	}
 	
 	//-------------------------------------------------------------------

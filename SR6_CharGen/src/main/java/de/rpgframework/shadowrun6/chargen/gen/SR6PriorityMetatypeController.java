@@ -3,6 +3,8 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -20,6 +22,7 @@ import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetaTypeOption;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -134,8 +137,10 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 	public boolean select(SR6MetaType value) {
 		logger.log(Level.DEBUG, "ENTER select("+value+")");
 		try {
-			if (!canBeSelected(value))
+			if (!canBeSelected(value)) {
+				logger.log(Level.ERROR,"Trying to select {0} which is not allowed", value.getId());
 				return false;
+			}
 
 			logger.log(Level.INFO, "Select "+value);
 			getModel().setMetatype(value);
@@ -143,6 +148,9 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 
 			parent.runProcessors();
 			return true;
+		} catch (Exception e) {
+			logger.log(Level.ERROR,"Error setting metatype",e);
+			return false;
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE select("+value+")");
 		}
@@ -160,6 +168,7 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 
 		try {
 			availableOptions.clear();
+			todos.clear();
 			
 			for (Modification mod : previous) {
 				if (mod.getReferenceType()==ShadowrunReference.METATYPE) {
@@ -187,11 +196,28 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 			} else {
 				MetaTypeOption opt = availableOptions.get(meta);
 				if (opt==null) {
-					MetaType newMeta = availableOptions.keySet().iterator().next();
-					logger.log(Level.ERROR, "Metatype ''{0}'' is not allowed - use ''{1}'' instead", meta.getId(), newMeta.getId());
-					getModel().setMetatype(newMeta);
-					opt = availableOptions.get(newMeta);
-					meta = newMeta;
+					List<MetaType> metas = new ArrayList<>(availableOptions.keySet());
+					Collections.sort(metas, new Comparator<MetaType>() {
+						public int compare(MetaType o1, MetaType o2) {
+							if (o1.getVariantOf()!=null && o2.getVariantOf()!=null)
+								return o1.getVariantOf().getName().compareTo(o2.getVariantOf().getName());
+							if (o1.getVariantOf()!=null && o2.getVariantOf()==null)
+								return o1.getVariantOf().getName().compareTo(o2.getName());
+							if (o1.getVariantOf()==null && o2.getVariantOf()!=null)
+								return o1.getName().compareTo(o2.getVariantOf().getName());
+							return o1.getName().compareTo(o2.getName());
+						}
+					});
+//					MetaType newMeta = metas.iterator().next();
+//					logger.log(Level.ERROR, "Metatype ''{0}'' is not allowed - use ''{1}'' instead", meta.getId(), newMeta.getId());
+//					getModel().setMetatype(newMeta);
+//					opt = availableOptions.get(newMeta);
+//					meta = newMeta;
+					logger.log(Level.ERROR, "Metatype ''{0}'' is not allowed", meta.getId());
+					todos.add(new ToDoElement(Severity.STOPPER, IRejectReasons.TODO_METATYPE_NOT_ALLOWED));
+					getModel().setMetatype(null);
+					meta = null;
+					return unprocessed;
 				}
 				
 				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), opt.getSpecialAttributePoints()));				
