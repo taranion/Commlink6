@@ -226,15 +226,15 @@
    <item id="bone_lacing" type="CYBERWARE" subtype="CYBER_BODYWARE" reqVariant="y">
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL"/>
+      	<itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" apply="CHARACTER"/>
       </modifications>
    	<variant id="plastic">
    		<usage mode="IMPLANTED" value="0.5"/>
    		<attrdef id="AVAILABILITY" value="3L"/>
    		<attrdef id="PRICE" value="8000"/>
    		<modifications>
-   			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1"/>
-   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1"/>
+   			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1"  apply="CHARACTER"/>
+   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" apply="UNARMED"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,,,," apply="UNARMED"/>
    		</modifications>
@@ -244,8 +244,8 @@
    		<attrdef id="AVAILABILITY" value="4L"/>
    		<attrdef id="PRICE" value="18000"/>
    		<modifications>
-   			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="2"/>
-   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1"/>
+   			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="2" apply="CHARACTER"/>
+   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="2" apply="UNARMED"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,,,," apply="UNARMED"/>
    		</modifications>
@@ -255,8 +255,8 @@
    		<attrdef id="AVAILABILITY" value="6L"/>
    		<attrdef id="PRICE" value="30000"/>
    		<modifications>
-   			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="2"/>
-   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2"/>
+   			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="2" apply="CHARACTER"/>
+   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" apply="CHARACTER"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="2" apply="UNARMED"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="3,,,," apply="UNARMED"/>
    		</modifications>

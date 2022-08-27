@@ -25,6 +25,7 @@ public class SR6GearTool extends GearTool {
 	public final static Logger logger = System.getLogger(ApplyStockModificationsStep.class.getPackageName());
 
 	public static CarriedItemProcessor[] SR6_PHASE1_STEPS = new CarriedItemProcessor[] {
+			new GetModificationsStep(),
 			new SR6ResolveFormulasStep(),
 			new ApplyStockModificationsStep(),
 			new SR6ResolveTemplatesStep()

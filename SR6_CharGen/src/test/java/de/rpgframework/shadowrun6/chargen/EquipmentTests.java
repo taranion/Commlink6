@@ -18,11 +18,15 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.items.Availability;
+import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemHook;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -125,5 +129,35 @@ public class EquipmentTests {
 		
 		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
 		assertEquals(1000, attr.getModifiedValue());
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * Make sure there are modifications to the character
+	 */
+	@Test
+	public void testBoneLacing() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class,"bone_lacing");
+		CarriedItem<ItemTemplate> ref = GearTool.buildItem(item, CarryMode.IMPLANTED, item.getVariant("titanium"), model, true, 
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "ALPHA")).get();
+		
+		OperationResult<List<Modification>> mods = SR6GearTool.recalculate("", null, ref);
+		assertTrue(mods.wasSuccessful());
+		List<Modification> list = mods.get();
+		for (Modification val : list) {
+			System.out.println("  = "+val);
+		}
+		
+//		System.out.println("DUMP2\n"+ref.dump());
+		
+		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
+		assertEquals(36000, attr.getModifiedValue());
+		assertEquals(1.2f, ref.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue(), 0.0);
+		assertEquals(ItemType.CYBERWARE, ref.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue());
+		assertEquals(ItemSubType.CYBER_BODYWARE, ref.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue());
+		assertEquals(7, ((Availability)ref.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
+		assertEquals(Legality.RESTRICTED, ((Availability)ref.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
+		assertEquals(5, ref.getCharacterModifications().size());
+		assertEquals(0, ref.getModifications().size());
 	}
 }

@@ -12,14 +12,12 @@ import de.rpgframework.genericrpg.items.AAvailableSlot;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.Formula;
-import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -31,10 +29,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	final static Logger logger = SR6GearTool.logger;
 
 	//-------------------------------------------------------------------
-	/**
-	 */
 	public ApplyStockModificationsStep() {
-		// TODO Auto-generated constructor stub
 	}
 
 	//-------------------------------------------------------------------
@@ -45,10 +40,21 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	public OperationResult<List<Modification>> process(String indent, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
 		for (Modification tmp : model.getModifications()) {
-			if (tmp.getApplyTo()==ApplyTo.CHARACTER) {
-				unprocessed.add(tmp);
-//				if (logger.isLoggable(Level.DEBUG)) logger.log(Level.DEBUG, indent+"found modification for character: "+tmp);
-			} else {
+			if (tmp.getApplyTo()!=null) {
+				switch (tmp.getApplyTo()) {
+				case CHARACTER:
+				case POINTS:
+				case RULES:
+				case UNARMED:
+					logger.log(Level.INFO, "Add character modification: "+tmp);
+					model.addCharacterModification(tmp);
+					continue;
+				case ACTIVE_GEAR:
+					continue;
+				default:
+					logger.log(Level.ERROR, "Don't know how to handle {0}", tmp.getApplyTo());
+				}
+			}
 				if (tmp instanceof ValueModification) {
 					applyModification(indent, charac, model, (ValueModification) tmp);
 				} else if (tmp instanceof DataItemModification) {
@@ -56,7 +62,6 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				} else {
 					logger.log(Level.ERROR, "Unsupported modification: "+tmp);
 				}
-			}
 			
 		}
 		
@@ -93,14 +98,20 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			model.addSlot(slot);
 //			logger.log(Level.TRACE, indent+"Added slot {0} with capacity {1}", hook, slot.getCapacity());
 			return;
+		case ITEM_ATTRIBUTE:
+			logger.log(Level.INFO, "Found modification "+mod);
+			model.addModification(mod);
+			return;
+		default:
+			logger.log(Level.WARNING, "Found Modification  for character:"+mod);
+			model.addCharacterModification(mod);
+			return;
 		}
-		logger.log(Level.WARNING, "ToDo: ValueModification "+mod);
-		model.addModification(mod);
 	}
 
 	//-------------------------------------------------------------------
 	private void applyModification(String indent, Lifeform charac, CarriedItem<?> model, DataItemModification mod) {
-		if (mod.getApplyTo()==ApplyTo.CHARACTER) {
+		if (mod.getApplyTo()==ApplyTo.CHARACTER || mod.getApplyTo()==ApplyTo.UNARMED) {
 			model.addCharacterModification(mod);
 			logger.log(Level.WARNING, "Ignore for now "+mod);
 			return;
