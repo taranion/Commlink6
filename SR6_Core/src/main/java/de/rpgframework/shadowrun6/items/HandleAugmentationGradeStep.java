@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.modification.ApplyableValueModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
@@ -42,7 +43,7 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 	 * @see de.rpgframework.genericrpg.items.CarriedItemProcessor#process(java.lang.String, de.rpgframework.genericrpg.data.Lifeform, de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
 	@Override
-	public OperationResult<List<Modification>> process(String indent, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
+	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
 			ItemTemplate templ = (ItemTemplate) model.getResolved();
 			SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) model.getVariant();
 			if (templ.hasFlag(ItemTemplate.FLAG_AUGMENTATION) || (variant!=null && variant.hasFlag(ItemTemplate.FLAG_AUGMENTATION))) {

@@ -631,6 +631,10 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				/* Pay karma */
 				if (per.points3>0) {
 					int pay = per.getKarmaInvestSR6();
+					// Knowledge skills are cheaper
+					if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE) {
+						pay = (pay/5)*3;
+					}
 					model.setKarmaFree( model.getKarmaFree() - pay );
 					logger.log(Level.DEBUG, "  Pay {0} karma for {1}", pay, key);
 				}

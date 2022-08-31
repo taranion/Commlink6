@@ -410,9 +410,9 @@
     		<attrdef id="PRICE" value="20000"/>
     		<attrdef id="AVAILABILITY" value="4"/>
     		<modifications>
-  			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
-  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
+  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
+ 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="8"/>
     		</modifications>
     	</variant>
@@ -421,9 +421,9 @@
     		<attrdef id="PRICE" value="15000"/>
     		<attrdef id="AVAILABILITY" value="4"/>
     		<modifications>
-  			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
-  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
+  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
+ 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="15"/>
     		</modifications>
     	</variant>
@@ -443,9 +443,9 @@
     		<attrdef id="PRICE" value="10000"/>
     		<attrdef id="AVAILABILITY" value="3"/>
     		<modifications>
-  			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5"/>
-  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5" apply="CHARACTER"/>
+  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2" apply="CHARACTER"/>
+ 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2" apply="CHARACTER"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="10"/>
     		</modifications>
     	</variant>
@@ -528,7 +528,7 @@
     
     <item id="attribute_increase" type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13"/>
 			<choice uuid="d5c88f1f-eb6f-4057-b9d0-b65c212747e6" type="ATTRIBUTE" options="AGILITY,STRENGTH"/>
 		</choices>
 		<usage mode="EMBEDDED" value="$RATING" slot="CYBERLIMB_IMPLANT"/>
@@ -637,6 +637,7 @@
    <item avail="2" price="1500" id="cyberjaw" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
       <usage mode="EMBEDDED" value="1" slot="HEADWARE_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.1"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
       <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
       	<weapon  dmg="5P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed"/>
       </alternate>
@@ -644,6 +645,7 @@
    <item avail="2" price="2500" id="hardening" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.1"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
       <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
       	<weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
       </alternate>
@@ -651,6 +653,7 @@
    <item avail="3" price="5000" id="shock_limb" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.25"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
       <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
       	<weapon  dmg="4S(e)" attack="5,,,," skill="close_combat" spec="close_combat/unarmed"/>
       </alternate>
@@ -661,6 +664,7 @@
       <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       	<weapon  dmg="4S(e)" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>
+ 		<flags><flag>AUGMENTATION</flag></flags>
       <variant id="retractable">
 	      <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
    	   <usage mode="IMPLANTED" value="0.25"/>
@@ -673,6 +677,7 @@
       <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       	<weapon  dmg="4S(e)" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>
+ 		<flags><flag>AUGMENTATION</flag></flags>
       <variant id="retractable">
 	      <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
    	   <usage mode="IMPLANTED" value="0.25"/>
@@ -682,6 +687,7 @@
    <item avail="3I" price="3000" id="spurs" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.15"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
       <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       	<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>

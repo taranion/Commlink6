@@ -11,6 +11,7 @@ import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -35,7 +36,7 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 	 * @see de.rpgframework.genericrpg.items.CarriedItemProcessor#process(java.lang.String, de.rpgframework.genericrpg.data.Lifeform, de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
 	@Override
-	public OperationResult<List<Modification>> process(String indent, Lifeform charac, CarriedItem<?> model,
+	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
 		for (CarriedItem<? extends PieceOfGear> carried : model.getAccessories()) {
 			ItemAttributeNumericalValue<SR6ItemAttribute> aVal = carried.getAsValue(SR6ItemAttribute.PRICE);

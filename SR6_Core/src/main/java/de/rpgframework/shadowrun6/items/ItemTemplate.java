@@ -71,6 +71,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
 		shortcuts = new ArrayList<>();
+		super.refType = ShadowrunReference.ITEM_ATTRIBUTE;
 	}
 	
 	//-------------------------------------------------------------------

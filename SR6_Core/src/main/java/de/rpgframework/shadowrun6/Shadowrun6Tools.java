@@ -432,7 +432,7 @@ public class Shadowrun6Tools {
 			}
 
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
-				resolver.process("", model, tmp, List.of());
+				resolver.process("", ShadowrunReference.ITEM_ATTRIBUTE, model, tmp, List.of());
 				SR6GearTool.recalculate("", model, tmp);
 			}
 		} catch (DataErrorException e) {
@@ -503,7 +503,7 @@ public class Shadowrun6Tools {
 					VariableResolver resolver = new VariableResolver(item, model);
 					logger.log(Level.WARNING, "ToDo: Resolve "+tmp.getFormula());
 					SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf( ((FormulaImpl)tmp.getFormula()).getAsString().substring(1));
-					String raw = FormulaTool.resolve(itemAttr, (FormulaImpl)tmp.getFormula(), resolver);
+					String raw = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, (FormulaImpl)tmp.getFormula(), resolver);
 					min = Integer.valueOf(raw);
 				}
 			}

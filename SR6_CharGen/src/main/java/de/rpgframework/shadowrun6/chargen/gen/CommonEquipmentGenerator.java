@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -44,7 +45,14 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, Decision... decisions) {
-		return select(value, null, CarryMode.CARRIED, decisions);
+		CarryMode mode = CarryMode.CARRIED;
+		if (value.getUsages()!=null && value.getUsages().size()>0) {
+			if (value.getUsages().size()==1)
+				mode = value.getUsages().get(0).getMode();
+			else if (value.getUsages().stream().map(u->u.getMode()).collect(Collectors.toList()).contains(CarryMode.IMPLANTED))
+				throw new IllegalArgumentException("More than one possible CarryMode - use other select() method");
+		}
+		return select(value, null, mode, decisions);
 	}
 
 	//-------------------------------------------------------------------

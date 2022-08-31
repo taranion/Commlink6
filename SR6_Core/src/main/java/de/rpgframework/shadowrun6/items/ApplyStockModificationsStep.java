@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -25,104 +26,82 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class ApplyStockModificationsStep implements CarriedItemProcessor {
-	
+
 	final static Logger logger = SR6GearTool.logger;
 
-	//-------------------------------------------------------------------
+	// -------------------------------------------------------------------
 	public ApplyStockModificationsStep() {
 	}
 
-	//-------------------------------------------------------------------
+	// -------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.items.CarriedItemProcessor#process(java.lang.String, de.rpgframework.genericrpg.data.Lifeform, de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
+	 * @see de.rpgframework.genericrpg.items.CarriedItemProcessor#process(java.lang.String,
+	 *      de.rpgframework.genericrpg.data.Lifeform,
+	 *      de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
 	@Override
-	public OperationResult<List<Modification>> process(String indent, Lifeform charac, CarriedItem<?> model,
-			List<Modification> unprocessed) {
-		for (Modification tmp : model.getModifications()) {
-			if (tmp.getApplyTo()!=null) {
-				switch (tmp.getApplyTo()) {
-				case CHARACTER:
-				case POINTS:
-				case RULES:
-				case UNARMED:
-					logger.log(Level.INFO, "Add character modification: "+tmp);
-					model.addCharacterModification(tmp);
-					continue;
-				case ACTIVE_GEAR:
-					continue;
-				default:
-					logger.log(Level.ERROR, "Don't know how to handle {0}", tmp.getApplyTo());
-				}
-			}
-				if (tmp instanceof ValueModification) {
-					applyModification(indent, charac, model, (ValueModification) tmp);
-				} else if (tmp instanceof DataItemModification) {
-					applyModification(indent, charac, model, (DataItemModification) tmp);
-				} else {
-					logger.log(Level.ERROR, "Unsupported modification: "+tmp);
-				}
-			
-		}
+	@SuppressWarnings("rawtypes")
+	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac,
+			CarriedItem<?> model, List<Modification> unprocessed) {
 		
+		// Read all modifications that are meant for this item		
+		for (Modification tmp : model.getModifications()) {
+			logger.log(Level.DEBUG, "Process {0}", tmp);
+			if (tmp instanceof ValueModification) {
+				applyModification(indent, charac, model, (ValueModification) tmp);
+			} else if (tmp instanceof DataItemModification) {
+				applyModification(indent, charac, model, (DataItemModification) tmp);
+			} else {
+				logger.log(Level.ERROR, "Unsupported modification: " + tmp);
+			}
+
+		}
+
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 
-	//-------------------------------------------------------------------
+	// -------------------------------------------------------------------
+	@SuppressWarnings("rawtypes")
 	private void applyModification(String indent, Lifeform charac, CarriedItem<?> model, ValueModification mod) {
-		if (mod.getApplyTo()==ApplyTo.CHARACTER) {
-			logger.log(Level.WARNING, "Ignore for now "+mod);
+		if (mod.getApplyTo() == ApplyTo.CHARACTER) {
+			logger.log(Level.WARNING, "Ignore for now " + mod);
 			model.addCharacterModification(mod);
 			return;
 		}
+		
 		switch ((ShadowrunReference) mod.getReferenceType()) {
 		case HOOK:
 			ItemHook hook = mod.getResolvedKey();
 			Formula form = mod.getFormula();
-//			logger.log(Level.INFO, indent+"form="+form+" / "+form.isResolved());
-			AAvailableSlot<ItemHook> slot = null;
-			if (!form.isResolved()) {
-				VariableResolver resolver = new VariableResolver(model, charac);
-
-				String foo = FormulaTool.resolve(SR6ItemAttribute.CAPACITY, (FormulaImpl) form, resolver);
-				if (foo==null) {
-					logger.log(Level.WARNING, model.getKey()+"Cannot apply stock modification {0} because CAPACITY not resolved", mod);
-					return;
-				} 
-//				logger.log(Level.INFO, indent+"foo="+foo);
-				int capacity = Integer.parseInt(foo);
-				slot = new AvailableSlot(hook, capacity);
-			} else {
-				slot = new AvailableSlot(hook, mod.getValue());
-			}
+			AAvailableSlot<ItemHook> slot = new AvailableSlot(hook, mod.getValue());
 			model.addSlot(slot);
-//			logger.log(Level.TRACE, indent+"Added slot {0} with capacity {1}", hook, slot.getCapacity());
+			logger.log(Level.INFO, indent+"Added slot {0} with capacity {1}", hook, slot.getCapacity());
 			return;
 		case ITEM_ATTRIBUTE:
-			logger.log(Level.INFO, "Found modification "+mod);
+			logger.log(Level.INFO, "Found modification " + mod);
 			model.addModification(mod);
 			return;
 		default:
-			logger.log(Level.WARNING, "Found Modification  for character:"+mod);
-			model.addCharacterModification(mod);
+			logger.log(Level.WARNING, "Don't know how to deal with:" + mod);
 			return;
 		}
 	}
 
-	//-------------------------------------------------------------------
+	// -------------------------------------------------------------------
+	@SuppressWarnings("rawtypes")
 	private void applyModification(String indent, Lifeform charac, CarriedItem<?> model, DataItemModification mod) {
-		if (mod.getApplyTo()==ApplyTo.CHARACTER || mod.getApplyTo()==ApplyTo.UNARMED) {
+		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addCharacterModification(mod);
-			logger.log(Level.WARNING, "Ignore for now "+mod);
+			logger.log(Level.WARNING, "Ignore for now " + mod);
 			return;
 		}
-		
+
 		Decision[] decs = new Decision[mod.getDecisions().size()];
 		decs = mod.getDecisions().toArray(decs);
 		switch ((ShadowrunReference) mod.getReferenceType()) {
 		case HOOK:
 			ItemHook hook = mod.getResolvedKey();
-			logger.log(Level.INFO, indent+"Add slot {0} without capacity ", hook);
+			logger.log(Level.INFO, indent + "Add slot {0} without capacity ", hook);
 			AAvailableSlot<ItemHook> slot = new AvailableSlot(hook);
 			model.addSlot(slot);
 			return;
@@ -130,7 +109,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			model.addCharacterModification(mod);
 			return;
 		}
-		logger.log(Level.WARNING, "ToDo: DataItemModification "+mod);
+		logger.log(Level.WARNING, "ToDo: DataItemModification " + mod);
 //		model.addModification(mod);
 	}
 

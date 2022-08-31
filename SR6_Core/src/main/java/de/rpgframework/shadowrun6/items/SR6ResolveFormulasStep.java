@@ -22,7 +22,9 @@ import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.persist.IntegerConverter;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * Do special handling of attributes not present in Generic RPGFramework
@@ -89,7 +91,7 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 	private void doMagic(Lifeform user, CarriedItem<?> model, FormulaImpl formula, ItemAttributeDefinition val) {
 		IItemAttribute attrib = val.getModifyable();
 		if (!formula.isResolved()) {
-			String resolvedString = FormulaTool.resolve(attrib, formula, new VariableResolver(model, user));
+			String resolvedString = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, formula, new VariableResolver(model, user));
 			if (resolvedString!=null) {
 				applyResolved(model, resolvedString, formula, val);
 //			} else {
@@ -112,7 +114,7 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public OperationResult<List<Modification>> process(String indent, Lifeform user, CarriedItem<?> model, List<Modification> unprocessed) {
+	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform user, CarriedItem<?> model, List<Modification> unprocessed) {
 		OperationResult<List<Modification>> ret = new OperationResult<>(unprocessed);
 		
 		ItemTemplate template = (ItemTemplate) model.getResolved();

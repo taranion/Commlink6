@@ -439,7 +439,8 @@ public class PrioAttrGenTest {
 		assertEquals(3, model.getAttribute(ShadowrunAttribute.LOGIC    ).getDistributed());
 		assertEquals(3, model.getAttribute(ShadowrunAttribute.INTUITION).getDistributed());
 		assertEquals(8, model.getAttribute(ShadowrunAttribute.CHARISMA ).getDistributed());
-		assertEquals(6, model.getAttribute(ShadowrunAttribute.MAGIC    ).getDistributed());
+		assertEquals(6, model.getAttribute(ShadowrunAttribute.MAGIC    ).getModifiedValue());
+		assertEquals(2, model.getAttribute(ShadowrunAttribute.MAGIC    ).getDistributed());
 		assertEquals(5, model.getAttribute(ShadowrunAttribute.EDGE     ).getDistributed());
 	}
 	

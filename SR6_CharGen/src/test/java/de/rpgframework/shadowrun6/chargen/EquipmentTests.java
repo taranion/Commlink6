@@ -160,4 +160,36 @@ public class EquipmentTests {
 		assertEquals(5, ref.getCharacterModifications().size());
 		assertEquals(0, ref.getModifications().size());
 	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * Make sure there are modifications to the character
+	 */
+	@Test
+	public void testCyberjack() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class,"cyberjack");
+		CarriedItem<ItemTemplate> ref = GearTool.buildItem(item, CarryMode.IMPLANTED, null, model, true, 
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"),
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "cyberjack").getChoices().get(0), "6")).get();
+		
+		OperationResult<List<Modification>> mods = SR6GearTool.recalculate("", null, ref);
+		assertTrue(mods.wasSuccessful());
+		List<Modification> list = mods.get();
+		for (Modification val : list) {
+			System.out.println("U  = "+val);
+		}
+		for (Modification val : ref.getCharacterModifications()) {
+			System.out.println("C  = "+val);
+		}
+		for (Modification val : ref.getModifications()) {
+			System.out.println("I  = "+val);
+		}
+		
+//		System.out.println("DUMP2\n"+ref.dump());
+		
+		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
+		assertEquals(210000, attr.getModifiedValue());
+		assertEquals(1, ref.getCharacterModifications().size());
+		assertEquals(0, ref.getModifications().size());
+	}
 }

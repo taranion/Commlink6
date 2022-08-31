@@ -51,7 +51,7 @@
       <attrdef id="PRICE" value="$RATING*31000"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="$RATING" />
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="$RATING" apply="CHARACTER"/>
       </modifications>
    </item>
    <item id="muscle_toner" avail="4L" price="32000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
@@ -62,7 +62,7 @@
       <attrdef id="PRICE" value="$RATING*32000"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-         <valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING" apply="CHARACTER"/>
       </modifications>
    </item>
    <item id="orthoskin" avail="4L" price="6000" type="BIOWARE" subtype="BIOWARE_STANDARD">
@@ -197,7 +197,7 @@
    </item>
    <item id="reflex_recorder" avail="5" price="14000" type="BIOWARE" subtype="BIOWARE_CULTURED">
 		<choices>
-			<choice uuid="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" type="SKILL" ref="CHOICE" options="athletics,firearms,"/>
+			<choice uuid="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" type="SKILL" ref="CHOICE" options="athletics,close_combat,exotic_weapons,firearms,piloting,stealth"/>
 		</choices>
       <usage mode="IMPLANTED" value="0.1"/>
       <flags><flag>AUGMENTATION</flag></flags>

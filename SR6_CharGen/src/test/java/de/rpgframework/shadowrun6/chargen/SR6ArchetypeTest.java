@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.junit.Before;
@@ -720,7 +721,9 @@ public class SR6ArchetypeTest {
 		OperationResult<CarriedItem<ItemTemplate>> hand = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm"), "hand_obvious", CarryMode.IMPLANTED, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
 		assertTrue (hand.getError(), hand.wasSuccessful());
 		hand.get().setCustomName("Obvious left hand");
-		OperationResult<CarriedItem<ItemTemplate>> shock = equip.embed(hand.get(), ItemHook.CYBERLIMB_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "shock_limb"), null);
+		OperationResult<CarriedItem<ItemTemplate>> shock = equip.embed(hand.get(), ItemHook.CYBERLIMB_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "shock_limb"), null,
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				);
 		assertTrue (shock.getError(), shock.wasSuccessful());
 		shock.get().setCustomName("Shock Hand");
 		OperationResult<CarriedItem<ItemTemplate>> imageLink = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), "bodyware", CarryMode.IMPLANTED, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
@@ -1030,7 +1033,7 @@ public class SR6ArchetypeTest {
 		assertTrue(equip.embed(deck.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful());
 
 		OperationResult<CarriedItem<ItemTemplate>> comm = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "transys_avalon"));
-		assertTrue(deck.wasSuccessful());
+		assertTrue(comm.wasSuccessful());
 		assertTrue(equip.embed(comm.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful());
 
 		OperationResult<CarriedItem<ItemTemplate>> ares = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_light_fire_75"));
@@ -1058,6 +1061,258 @@ public class SR6ArchetypeTest {
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+		
+		// Try to reload it again
+		Shadowrun6Core.decode(raw);
+	}
+	
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	@Test
+	public void test07StreetSamurai() throws Exception {
+		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
+		prio.setPriority(PriorityType.ATTRIBUTE, Priority.B);
+		prio.setPriority(PriorityType.METATYPE, Priority.C);
+		prio.setPriority(PriorityType.MAGIC, Priority.E);
+		prio.setPriority(PriorityType.SKILLS, Priority.D);
+		prio.setPriority(PriorityType.RESOURCES, Priority.A);
+		assertEquals(50, model.getKarmaFree());
+		
+		SR6MetaType troll = Shadowrun6Core.getItem(SR6MetaType.class, "troll");
+		charGen.getMetatypeController().canBeSelected(troll);
+		charGen.getMetatypeController().select(troll);
+		
+		model.setName("Street Samurai");
+		// Select adept
+		charGen.getMagicOrResonanceController().select(Shadowrun6Core.getItem(MagicOrResonanceType.class, "mundane"));
+		
+		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
+		raiseAttributeTo(ShadowrunAttribute.EDGE     , 5);
+		raiseAttributeTo(ShadowrunAttribute.BODY     , 7);
+		raiseAttributeTo(ShadowrunAttribute.AGILITY  , 3);
+		raiseAttributeTo(ShadowrunAttribute.REACTION , 3);
+		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 7);
+		raiseAttributeTo(ShadowrunAttribute.WILLPOWER, 1);
+		raiseAttributeTo(ShadowrunAttribute.LOGIC    , 2);
+		raiseAttributeTo(ShadowrunAttribute.INTUITION, 4);
+		raiseAttributeTo(ShadowrunAttribute.CHARISMA , 2);
+		
+		IQualityController qualities = charGen.getQualityController();
+		OperationResult<QualityValue> res = qualities.select(Shadowrun6Core.getItem(Quality.class, "ambidextrous"));
+		assertTrue("Should not fail: "+res,res.wasSuccessful());
+		assertEquals(46, model.getKarmaFree());
+		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "aptitude"), 
+				new Decision(Shadowrun6Core.getItem(Quality.class, "aptitude").getChoices().get(0).getUUID(),"close_combat")
+				);
+		assertEquals(34, model.getKarmaFree());
+		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "dependents"), new Decision(Shadowrun6Core.getItem(Quality.class, "dependents").getChoices().get(0).getUUID(),"Siblings"));
+		assertTrue(res.wasSuccessful());
+		assertTrue(qualities.increase(res.get()).wasSuccessful());
+		assertEquals(42, model.getKarmaFree());
+		assertTrue( qualities.select(Shadowrun6Core.getItem(Quality.class, "high_pain_tolerance")).wasSuccessful() );
+		assertEquals(35, model.getKarmaFree());
+		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(Quality.class, "honorbound").getChoices().get(0).getUUID(),"Bushido"));
+		assertTrue("Should not fail: "+res,res.wasSuccessful());
+		assertEquals(45, model.getKarmaFree());
+		
+		// Skills -------------------------------------------
+		SR6SkillGenerator skills = (SR6SkillGenerator) charGen.getSkillController();
+		assertEquals(16, skills.getPointsLeft());
+		OperationResult<SR6SkillValue> sVal = skills.select(Shadowrun6Core.getSkill("close_combat"));
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 2
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 3
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 4
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 5
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 6
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 7
+		assertEquals(9, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
+		
+		sVal = skills.select(Shadowrun6Core.getSkill("firearms"));
+		assertNotNull(sVal);
+		assertTrue(sVal.getError(), sVal.isPresent());
+		skills.increase(sVal.get()); // 2
+		skills.increase(sVal.get()); // 3
+		skills.increase(sVal.get()); // 4
+		assertEquals(5, skills.getPointsLeft());
+		
+		sVal = skills.select(Shadowrun6Core.getSkill("perception"));
+		skills.increase(sVal.get()); // 2
+		skills.increase(sVal.get()); // 3
+		assertEquals(2, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
+		
+		sVal = skills.select(Shadowrun6Core.getSkill("stealth"));
+		skills.increase(sVal.get()); // 2
+		assertEquals(45, model.getKarmaFree());
+		skills.increase(sVal.get()); // 3
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(30, model.getKarmaFree());
+		
+		SR6SkillValue tmp = model.getSkillValue(Shadowrun6Core.getSkill("close_combat"));
+		assertTrue( skills.select(tmp, Shadowrun6Core.getSkill("close_combat").getSpecialization("blades"), false).wasSuccessful() );
+		assertEquals(25, model.getKarmaFree());
+		tmp = model.getSkillValue(Shadowrun6Core.getSkill("firearms"));
+		assertTrue( skills.select(tmp, Shadowrun6Core.getSkill("firearms").getSpecialization("pistols_heavy"), false).wasSuccessful() );
+		assertEquals(20, model.getKarmaFree());
+
+		// Knowledge and language
+		assertEquals(2, skills.getPointsLeft2());
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Urban Brawl")) );
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Japanese History") ));
+		assertEquals(0, skills.getPointsLeft2());
+		assertEquals(20, model.getKarmaFree());
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Bushido") ));
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("language"), new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), "Or'Zet") ));
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("language"), new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), "Japanese") ));
+		assertEquals(11, model.getKarmaFree());
+		assertEquals(0, skills.getPointsLeft2());
+//		assertEquals(4, model.getSkillValues(SkillType.LANGUAGE).get(0).getDistributed());
+//		model.getSkillValues(SkillType.LANGUAGE).get(0).addDecision(new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), "English"));;
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(0, skills.getPointsLeft2());
+		
+		// Contacts
+		IContactController contacts = charGen.getContactController();
+		assertEquals(12, contacts.getPointsLeft());
+		Contact c1 = contacts.createContact().get();
+		c1.setTypeName("Corporate Executive");
+		contacts.increaseRating(c1);
+//		contacts.increaseLoyalty(c1);
+		c1.setType(ContactType.CORPORATE);
+		Contact c2 = contacts.createContact().get();
+		c2.setTypeName("Martial Arts Instructor");
+		//contacts.increaseLoyalty(c2);
+		contacts.increaseRating(c2);
+		c2.setType(ContactType.STREET);
+		Contact c3 = contacts.createContact().get();
+		c3.setTypeName("Squatter");
+		c3.setType(ContactType.STREET);
+		Contact c4 = contacts.createContact().get();
+		c4.setTypeName("Urban Brawler");
+		contacts.increaseRating(c4);
+		contacts.increaseLoyalty(c4);
+		c4.setType(ContactType.STREET);
+		assertEquals(0, contacts.getPointsLeft());
+		
+		// Augmentations
+		ISR6EquipmentController equip = charGen.getEquipmentController();
+		OperationResult<CarriedItem<ItemTemplate>> lacing = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "bone_lacing"), "titanium", CarryMode.IMPLANTED, 
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		OperationResult<CarriedItem<ItemTemplate>> arm = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm"), "fullarm_obvious", CarryMode.IMPLANTED, 
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(equip.embed(
+				arm.get(), 
+				ItemHook.CYBERLIMB_IMPLANT, 
+				Shadowrun6Core.getItem(ItemTemplate.class, "attribute_increase"), 
+				null,
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"),
+				new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "AGILITY"),
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "3")
+				).wasSuccessful()
+				);
+		assertTrue(equip.embed(
+				arm.get(), 
+				ItemHook.CYBERLIMB_IMPLANT, 
+				Shadowrun6Core.getItem(ItemTemplate.class, "attribute_increase"), 
+				null,
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"),
+				new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "STRENGTH"),
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "8")
+				).wasSuccessful()
+				);
+		assertTrue(equip.embed(
+				arm.get(), 
+				ItemHook.CYBERLIMB_IMPLANT, 
+				Shadowrun6Core.getItem(ItemTemplate.class, "cyber_holster"), 
+				null,
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.embed(
+				arm.get(), 
+				ItemHook.CYBERLIMB_IMPLANT, 
+				Shadowrun6Core.getItem(ItemTemplate.class, "cyber_slide"), 
+				null,
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.embed(
+				arm.get(), 
+				ItemHook.CYBERLIMB_IMPLANT, 
+				Shadowrun6Core.getItem(ItemTemplate.class, "spurs"), 
+				"retractable",
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.embed(
+				arm.get(), 
+				ItemHook.CYBERLIMB_IMPLANT, 
+				Shadowrun6Core.getItem(ItemTemplate.class, "smuggling_compartment"), 
+				"cyberlimb",
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.select(
+				Shadowrun6Core.getItem(ItemTemplate.class, "dermal_plating"), null, CarryMode.IMPLANTED, 
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "3"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.select( 
+				Shadowrun6Core.getItem(ItemTemplate.class, "muscle_augmentation"), null, CarryMode.IMPLANTED, 
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "3"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.select(
+				Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner"), null, CarryMode.IMPLANTED,  
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "2"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.select(
+				Shadowrun6Core.getItem(ItemTemplate.class, "platelet_factories"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.select(
+				Shadowrun6Core.getItem(ItemTemplate.class, "reflex_recorder"),
+				new Decision(UUID.fromString("3cf6d9ac-dc8c-4d51-8058-b769eac72f50"), "close_combat"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.select(
+				Shadowrun6Core.getItem(ItemTemplate.class, "reflex_recorder"),
+				new Decision(UUID.fromString("3cf6d9ac-dc8c-4d51-8058-b769eac72f50"), "firearms"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		assertTrue(equip.select(
+				Shadowrun6Core.getItem(ItemTemplate.class, "sleep_regulator"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				).wasSuccessful()
+				);
+		OperationResult<CarriedItem<ItemTemplate>> wired = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "wired_reflexes"),
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "1"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
+				);
+		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_roadmaster")).wasSuccessful());
+		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_jacket")).wasSuccessful());
+
+		SINController sinCtrl = charGen.getSINController();
+		SIN sin =sinCtrl.createNewSIN("Name it", FakeRating.SUPERFICIALLY_PLAUSIBLE);
+		sinCtrl.createNewLicense(sin, FakeRating.HIGHLY_PLAUSIBLE, "Concealed Carry");
+		sinCtrl.createNewLicense(sin, FakeRating.HIGHLY_PLAUSIBLE, "Driver");
+		sinCtrl.createNewLicense(sin, FakeRating.HIGHLY_PLAUSIBLE, "Cyberware");
+		OperationResult<CarriedItem<ItemTemplate>> comm = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "transys_avalon") );
+		assertTrue(comm.wasSuccessful());
+		assertTrue(equip.embed(comm.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful());
+		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "katana")).wasSuccessful());
+		
+		byte[] raw = Shadowrun6Core.encode(model);
+		String xml = new String(raw);
+//		System.out.println(xml);
 		
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);

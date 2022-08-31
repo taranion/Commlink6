@@ -10,6 +10,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
@@ -26,7 +27,7 @@ public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public OperationResult<List<Modification>> process(String indent, Lifeform charac, CarriedItem<?> model,
+	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
 		
 		boolean changed = false;
@@ -54,7 +55,7 @@ public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
 		// Depth first 
 		// Since setResolved() triggers recalculation, resolve children first
 		for (CarriedItem<ItemTemplate> child : ((CarriedItem<ItemTemplate>)model).getAccessories()) {
-			OperationResult<List<Modification>> sub = this.process(indent+"", charac, child, unprocessed);
+			OperationResult<List<Modification>> sub = this.process(indent+"", ref, charac, child, unprocessed);
 		}
 		
 		if (changed) {

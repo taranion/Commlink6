@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
+import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -32,6 +33,7 @@ import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -117,6 +119,26 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	}
 	
 	//-------------------------------------------------------------------
+	private List<CarryMode> getAllowedModes(ItemTemplate value, PieceOfGearVariant<SR6VariantMode> variant) {
+		List<CarryMode> ret = new ArrayList<>();
+		for (Usage usage : value.getUsages()) {
+			if (!ret.contains(usage.getMode()))
+				ret.add(usage.getMode());
+		}
+		
+		if (variant!=null) {
+			for (Usage usage : variant.getUsages()) {
+				if (!ret.contains(usage.getMode()))
+					ret.add(usage.getMode());
+			}
+		}
+		
+		if (ret.isEmpty())
+			ret.add(CarryMode.CARRIED);
+		return ret;
+	}
+	
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeSelected(ItemTemplate, String, Decision[])
 	 */
@@ -131,17 +153,24 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			return new Possible(Possible.State.DECISIONS_MISSING, IRejectReasons.IMPOSS_MUST_CHOOSE_VARIANT);
 		}
 		
+		// Check variant
+		PieceOfGearVariant<SR6VariantMode> variant = null;
+		if (variantID!=null) {
+			variant = value.getVariant(variantID);
+			if (variant==null) {
+				return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
+			}
+		}
+		
+		// Compare carry mode
+		List<CarryMode> allowed = getAllowedModes(value, variant);
+		if (mode!=null && !allowed.contains(mode)) {
+			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_INVALID_CARRYMODE, mode.name(), String.valueOf(allowed));
+		}
+		
 		// Try to build item
 		OperationResult<CarriedItem<ItemTemplate>> carried = null;
-		if (variantID!=null) {
-			PieceOfGearVariant<SR6VariantMode> variant = value.getVariant(variantID);
-			if (variant==null) {
-				return new Possible(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
-			}
-			carried = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
-		} else {		
-			carried = GearTool.buildItem(value, mode, getModel(), true, decisions);
-		}
+		carried = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
 		// Check availability
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
 			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
@@ -429,7 +458,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 				System.exit(1);
 			}
 			logger.log(Level.ERROR, "ToDo: recalculate item after embedding");
-			GearTool.recalculate("", getModel(), container);
+			GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
 			logger.log(Level.INFO, "Embedded {0} into {1}", value.getId()+"/"+variant, container.getKey());
 			
 			parent.runProcessors();

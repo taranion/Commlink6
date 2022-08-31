@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 
 /**
  * If no capacity is set and there is exactly one slot that has a capacity, use
@@ -37,7 +38,7 @@ public class DeriveCapacityAttributeStep implements CarriedItemProcessor {
 	 *      de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
 	@Override
-	public OperationResult<List<Modification>> process(String indent, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
+	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
 		ItemAttributeNumericalValue<SR6ItemAttribute> capVal = model.getAsValue(SR6ItemAttribute.CAPACITY);
 		List<AAvailableSlot<? extends Hook>> slotsWithCap = model.getSlots().stream().filter(s -> s.getHook().hasCapacity()).collect(Collectors.toUnmodifiableList());
 		if (capVal==null && slotsWithCap.size()==1) {

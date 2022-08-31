@@ -10,9 +10,15 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.PieceOfGear;
+import de.rpgframework.genericrpg.items.formula.FormulaTool;
+import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -30,6 +36,16 @@ public class GetModificationsFromGear implements ProcessingStep {
 	}
 
 	//-------------------------------------------------------------------
+	private List<Modification> calculateModifications(CarriedItem<ItemTemplate> item) {
+		OperationResult<List<Modification>> modResult = SR6GearTool.recalculate("", model, item);
+		if (modResult.hasError()) {
+			logger.log(Level.WARNING, "Problem with {0}: {1}", item.getKey(), modResult.getError());
+			return new ArrayList<>();
+		}
+		return modResult.get();
+	}
+	
+	//-------------------------------------------------------------------
 	/**
 	 * @see org.prelle.shadowrun6.proc.CharacterProcessor#process(org.prelle.shadowrun5.ShadowrunCharacter, java.util.List)
 	 */
@@ -41,17 +57,37 @@ public class GetModificationsFromGear implements ProcessingStep {
 		try {
 			for (CarriedItem<? extends PieceOfGear> item : model.getCarriedItems()) {
 				logger.log(Level.DEBUG, "--item "+item.getKey());
-				OperationResult<List<Modification>> modResult = SR6GearTool.recalculate("", model, item);
-				if (modResult.hasError()) {
-					logger.log(Level.WARNING, "Problem with {0}: {1}", item.getKey(), modResult.getError());
-					continue;
-				}
-				for (Modification mod : modResult.get()) {
-					if (mod.getApplyTo()==ApplyTo.CHARACTER) {
-						logger.log(Level.DEBUG, "Add modifications from gear {0}: {1}", item.getKey(), mod);
-						unprocessed.add(mod);
+				for (Modification mod : item.getCharacterModifications()) {
+					logger.log(Level.INFO, "--item "+item.getKey()+": "+mod);
+					if (mod instanceof ValueModification) {
+						ValueModification vMod = ((ValueModification)mod);
+						logger.log(Level.INFO, "--item "+item.getKey()+": 1-> "+vMod.hasFormula());
+						if (vMod.hasFormula()) {
+							logger.log(Level.INFO, "--item "+item.getKey()+": 2-> "+vMod.getFormula().isResolved());
+							if (!vMod.getFormula().isResolved()) {
+								logger.log(Level.INFO, "--item "+item.getKey()+": 3-> Todo: Resolve "+vMod.getFormula());
+								String resolved = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, vMod.getFormula(), new VariableResolver(item, model));
+								logger.log(Level.INFO, "--item "+item.getKey()+": 4-> Resolved = "+resolved);
+								
+								System.exit(1);
+							}
+						}
+						
+						
 					}
+					unprocessed.add(mod);
 				}
+//				OperationResult<List<Modification>> modResult = SR6GearTool.recalculate("", model, item);
+//				if (modResult.hasError()) {
+//					logger.log(Level.WARNING, "Problem with {0}: {1}", item.getKey(), modResult.getError());
+//					continue;
+//				}
+//				for (Modification mod : modResult.get()) {
+//					if (mod.getApplyTo()==ApplyTo.CHARACTER) {
+//						logger.log(Level.DEBUG, "Add modifications from gear {0}: {1}", item.getKey(), mod);
+//						unprocessed.add(mod);
+//					}
+//				}
 			}
 		} finally {
 			logger.log(Level.TRACE, "LEAVE : process() ends with "+unprocessed.size()+" modifications still to process");
