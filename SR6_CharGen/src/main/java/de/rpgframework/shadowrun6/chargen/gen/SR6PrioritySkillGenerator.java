@@ -30,6 +30,7 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -155,7 +156,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
-		return new Possible(new ValueRequirement(ShadowrunReference.ATTRIBUTE, "KARMA", karma));
+		return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
 	}
 
 	//-------------------------------------------------------------------
@@ -447,23 +448,6 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			}
 		}
 	}
-
-	//-------------------------------------------------------------------
-	private void ensureExistanceOfNativeLanguage() {
-		ValueModification nat = new ValueModification(ShadowrunReference.SKILL, "language",0);
-		boolean missingNative=true;
-		for (SR6SkillValue tmp : model.getSkillValues()) {
-			if (tmp.getSkill()==Shadowrun6Core.getSkill("language") && tmp.getModifiedValue()==4)
-				missingNative=false;
-		}
-		if (missingNative) {
-			SR6SkillValue val = new SR6SkillValue(Shadowrun6Core.getSkill("language"),4);
-			val.setUuid(UUID.randomUUID());
-			val.addDecision(new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), RES.getString("label.native_language")));
-			val.addModification(nat);
-			model.addSkillValue(val);
-		}
-	}
 	
 	//-------------------------------------------------------------------
 	private SR6Skill getSkillFromPrioritySettings(String prioritySettingsId) {
@@ -509,7 +493,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 	public List<Modification> process(List<Modification> previous) {
 		List<Modification> unprocessed = new ArrayList<>();
 		
-		logger.log(Level.TRACE, "START: Skills");
+		logger.log(Level.INFO, "START: Skills");
 		try {
 			// Reset values
 			points1   = 0;

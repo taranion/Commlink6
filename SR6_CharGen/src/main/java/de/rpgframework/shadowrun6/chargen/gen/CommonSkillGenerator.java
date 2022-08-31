@@ -5,17 +5,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * Points 1 = Skill Points
@@ -33,6 +38,8 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	public final static String I18N_NOT_RAISED_POINT2 = "skill.error.notRaisedWithPoints2";
 	public final static String I18N_NOT_RAISED_KARMA = "skill.error.notRaisedWithKarma";
 	public final static String I18N_NOT_AVAILABLE_SPEC = "skill.error.specNotAvailable";
+	
+	public final static UUID NATIVE_LANGUAGE = UUID.fromString("1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b");
 
 	protected int points1;
 	protected int points2;
@@ -44,6 +51,23 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	public CommonSkillGenerator(SR6CharacterController parent) {
 		super(parent);
+	}
+
+	//-------------------------------------------------------------------
+	protected void ensureExistanceOfNativeLanguage() {
+		ValueModification nat = new ValueModification(ShadowrunReference.SKILL, "language",0);
+		boolean missingNative=true;
+		for (SR6SkillValue tmp : model.getSkillValues()) {
+			if (tmp.getSkill()==Shadowrun6Core.getSkill("language") && tmp.getModifiedValue()==4)
+				missingNative=false;
+		}
+		if (missingNative) {
+			SR6SkillValue val = new SR6SkillValue(Shadowrun6Core.getSkill("language"),4);
+			val.setUuid(NATIVE_LANGUAGE);
+			val.addDecision(new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), RES.getString("label.native_language")));
+			val.addModification(nat);
+			model.addSkillValue(val);
+		}
 	}
 
 	//-------------------------------------------------------------------

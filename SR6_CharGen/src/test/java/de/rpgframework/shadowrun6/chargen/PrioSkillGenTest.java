@@ -26,6 +26,7 @@ import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
@@ -46,8 +47,8 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -144,11 +145,11 @@ public class PrioSkillGenTest {
 	@Test
 	public void testIdle() {
 		assertEquals(0, ctrl.getPointsLeft());
-		assertEquals(0, ctrl.getPointsLeft2());
+		assertEquals(model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed(), ctrl.getPointsLeft2());
 		assertEquals(0, ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
 		
-		assertTrue("There should be no skillvalues", model.getSkillValues().isEmpty() );
+		assertEquals("There should be no skillvalues except native language", 1, model.getSkillValues().size() );
 	}
 
 	//-------------------------------------------------------------------
@@ -185,7 +186,7 @@ public class PrioSkillGenTest {
 	@Test
 	public void testSelect() {
 		// Inject 1 skill point
-		ValueModification mod = new ValueModification(ShadowrunReference.SKILL, "XXXX", 1, ApplyTo.POINTS, null);
+		ValueModification mod = new ValueModification(ShadowrunReference.CREATION_POINTS, "SKILLS", 1, ApplyTo.POINTS, null);
 		preMods.add(mod);
 		charGen.runProcessors();
 		assertEquals(1, ctrl.getPointsLeft());
@@ -208,11 +209,13 @@ public class PrioSkillGenTest {
 	@Test
 	public void testExistingValue0() {
 		// Add points
-		ValueModification mod = new ValueModification(ShadowrunReference.SKILL, "XXXX", 12, ApplyTo.POINTS, null);
+		ValueModification mod = new ValueModification(ShadowrunReference.CREATION_POINTS, "SKILLS", 12, ApplyTo.POINTS, null);
 		preMods.add(mod);
 		charGen.runProcessors();
 
-		SR6SkillValue val = ctrl.select(Shadowrun6Core.getSkill("athletics")).get();
+		OperationResult<SR6SkillValue> res = ctrl.select(Shadowrun6Core.getSkill("athletics"));
+		assertTrue(res.getError(), res.wasSuccessful());
+		SR6SkillValue val = res.get();
 		assertEquals(1,val.getDistributed());
 		
 		assertEquals(11, ctrl.getPointsLeft());
