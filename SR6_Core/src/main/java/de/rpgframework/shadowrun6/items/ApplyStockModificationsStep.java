@@ -101,9 +101,15 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		switch ((ShadowrunReference) mod.getReferenceType()) {
 		case HOOK:
 			ItemHook hook = mod.getResolvedKey();
-			logger.log(Level.INFO, indent + "Add slot {0} without capacity ", hook);
-			AAvailableSlot<ItemHook> slot = new AvailableSlot(hook);
-			model.addSlot(slot);
+			if (hook==ItemHook.SOFTWARE && model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS)!=null) {
+				logger.log(Level.INFO, indent + "Add slot {0} and take capacity from CONCURRENT_PROGRAMS ", hook);
+				AAvailableSlot<ItemHook> slot = new AvailableSlot(hook, model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS).getDistributed());
+				model.addSlot(slot);
+			} else {
+				logger.log(Level.INFO, indent + "Add slot {0} without capacity ", hook);
+				AAvailableSlot<ItemHook> slot = new AvailableSlot(hook);
+				model.addSlot(slot);
+			}
 			return;
 		case GEAR:
 			model.addCharacterModification(mod);

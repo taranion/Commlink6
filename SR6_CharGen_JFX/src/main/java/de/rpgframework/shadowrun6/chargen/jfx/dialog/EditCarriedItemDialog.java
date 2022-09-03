@@ -128,10 +128,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 
 		// Kommlinks/Rigger Consoles/Decks/Tac-Nets
 		case ELECTRONIC_ACCESSORY: index= 3; break;
-		case SOFTWARE_DRONE      : index= 5; break; 
 		case SOFTWARE            : index= 8; break;
-		case SOFTWARE_RIGGER     : index= 9; break;
-		case SOFTWARE_TACNET     : index=10; break;
 
 		// Devices
 		// note: OPTICAL uses slot 8, see Firearms

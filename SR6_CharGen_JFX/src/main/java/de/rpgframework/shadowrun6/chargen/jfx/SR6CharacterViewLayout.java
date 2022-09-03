@@ -33,6 +33,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.jfx.dialog.SR6MatrixDevicePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CareerPage;
@@ -66,7 +67,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private CombatPage pgCombat;
 	private AugmentationPage pgAugment;
 	private MagicPage pgMagic;
-	private MatrixPage pgMatrix;
+	//private MatrixPage pgMatrix;
+	private SR6MatrixDevicePage pgMatrix;
 	private VehiclePage pgVehicles;
 	private GearPage pgGear;
 	private LifePage pgLife;
@@ -125,7 +127,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgCombat = new CombatPage();
 		pgAugment= new AugmentationPage();
 		pgMagic  = new MagicPage();
-		pgMatrix = new MatrixPage();
+		pgMatrix = new SR6MatrixDevicePage(); //MatrixPage();
 		pgVehicles = new VehiclePage();
 		pgGear   = new GearPage();
 		pgLife   = new LifePage();

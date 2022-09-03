@@ -2,7 +2,12 @@
 <items>
     <!-- Basic Program -->
 	<item avail="1" price="60" id="browse" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="basic">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		</variant>
+		<variant id="cyberdeck">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		</variant>
 	</item> 
 	<item avail="1" price="60" id="baby_monitor" type="SOFTWARE" subtype="BASIC_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
@@ -101,7 +106,7 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE_DRONE"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
 	</item> 
 	<item avail="1" price="500" id="electronic_warfare" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
@@ -110,7 +115,7 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE_DRONE"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
 	</item> 
 	<item avail="1" price="500" id="evasion" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
@@ -119,7 +124,7 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE_DRONE"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
 	</item> 
 	<item avail="1" price="500" id="stealth_auto" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
@@ -128,7 +133,7 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE_DRONE"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
 	</item> 
 	<item avail="1" price="500" id="targeting" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
@@ -138,7 +143,7 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE_DRONE"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
 	</item> 
 
  	<!-- OTHER -->

@@ -30,6 +30,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 
 /**
  * @author prelle
@@ -191,5 +192,20 @@ public class EquipmentTests {
 		assertEquals(210000, attr.getModifiedValue());
 		assertEquals(1, ref.getCharacterModifications().size());
 		assertEquals(0, ref.getModifications().size());
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * Make sure there are modifications to the character
+	 */
+	@Test
+	public void testMatrixDevice() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class,"transys_avalon");
+		CarriedItem<ItemTemplate> ref = GearTool.buildItem(item, CarryMode.CARRIED, null, model, true).get();
+		
+		OperationResult<List<Modification>> mods = SR6GearTool.recalculate("", null, ref);
+		assertTrue(mods.wasSuccessful());
+		assertTrue(ref.hasFlag("MATRIX_DEVICE"));
+//		assertTrue(ref.hasFlag(SR6ItemFlag.MATRIX_DEVICE));
 	}
 }

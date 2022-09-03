@@ -150,6 +150,15 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				usages.add(new Usage(CarryMode.CARRIED));
 			}
 		}
+		
+		// Validate flags
+		for (String flag : getFlags()) {
+			try {
+				SR6ItemFlag.valueOf(flag);
+			} catch (IllegalArgumentException e) {
+				throw new DataErrorException(this, "No such flag '"+flag+"'");
+			}
+		}
 //		if (variants.isEmpty()) {
 //			SR6PieceOfGearVariant add = new SR6PieceOfGearVariant(SR6VariantMode.NORMAL);
 //			variants.add(add);
@@ -190,6 +199,15 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		if (variants!=null) {
 			for (SR6PieceOfGearVariant variant : variants) {
 				variant.setParentItem(this);
+				// Validate flags
+				for (String flag : variant.getFlags()) {
+					try {
+						SR6ItemFlag.valueOf(flag);
+					} catch (IllegalArgumentException e) {
+						throw new DataErrorException(this, "No such flag '"+flag+"' (in variant)");
+					}
+				}
+				
 				if (variant.hasFlag(FLAG_AUGMENTATION) && variant.getChoice(UUID_AUGMENTATION_QUALITY)==null) {
 					variant.addChoice(CHOICE_AUGMENTATION_QUALITY);
 				}

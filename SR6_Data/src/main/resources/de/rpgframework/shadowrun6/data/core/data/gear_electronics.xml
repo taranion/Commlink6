@@ -5,36 +5,44 @@
 		<modifications>
 			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
 			<itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
 		</modifications>
 		<matrix d="1" f="0" programs="0" devrat="1" />
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
 	</item>
    <item avail="2" price="700" id="sony_emporer" type="ELECTRONICS" subtype="COMMLINK">
 		<usage mode="CARRIED"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
       <matrix d="1" f="1" programs="1" devrat="2"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="2" price="1000" id="renraku_sensei" type="ELECTRONICS" subtype="COMMLINK">
 		<usage mode="CARRIED"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
       <matrix d="2" f="0" programs="1" devrat="3" />
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="2" price="2500" id="erika_elite" type="ELECTRONICS" subtype="COMMLINK">
 		<usage mode="CARRIED"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
       <matrix d="2" f="1" programs="2" devrat="4"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="3" price="5000" id="hermes_ikon" type="ELECTRONICS" subtype="COMMLINK">
 		<usage mode="CARRIED"/>
@@ -42,9 +50,11 @@
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
       <matrix d="3" f="0" programs="2" devrat="5"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="3" price="8000" id="transys_avalon" subtype="COMMLINK" type="ELECTRONICS">
 		<usage mode="CARRIED"/>
@@ -52,9 +62,11 @@
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
       <matrix d="3" f="1" programs="3" devrat="6"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
 
 	<!-- Cyberdecks -->
@@ -62,49 +74,67 @@
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
       </modifications>
       <matrix a="4" s="3" programs="2" devrat="1"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="3I" price="61500" id="spinrad_falcon" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
       </modifications>
       <matrix a="5" s="4" programs="4" devrat="2"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="3I" price="95000" id="mct_360" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
       </modifications>
       <matrix a="6" s="5" programs="6" devrat="3"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="4I" price="107000" id="renraku_kitsune" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
       </modifications>
       <matrix a="7" s="6" programs="8" devrat="4"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
 	<item avail="5I" price="172500" id="shiawase_cyber6" type="ELECTRONICS" subtype="CYBERDECK">
 		<modifications>
 			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY" />
 			<itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
 		</modifications>
 	    <matrix a="8" s="7" programs="10" devrat="5"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
 	</item>
    <item avail="6I" price="410600" id="fairlight_excalibur" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
       </modifications>
       <matrix a="9" s="8" programs="12" devrat="6"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    
    <!-- Rigger consoles -->
@@ -112,91 +142,111 @@
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
       <matrix d="3" f="2" devrat="1" />
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="3L" price="8000" id="allegiance_control_center" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
       <matrix d="3" f="3" devrat="2" />
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="3L" price="16000" id="essy_motors_drone_master" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
       <matrix d="4" f="4" devrat="3"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="4L" price="32000" id="horizons_overseer" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
       <matrix d="5" f="4" devrat="4" />
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="5L" price="34000" id="maersk_spider" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
       <matrix d="4" f="5" devrat="4" />
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="5L" price="66000" id="vulcan_liegelord" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
       <matrix d="6" f="5" devrat="5"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="6L" price="68000" id="proteus_poseidon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
       <matrix d="5" f="6" devrat="5"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="7L" price="75000" id="transys_eidolon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
       <matrix d="6" f="5" devrat="6"/>
    </item>
    <item avail="8L" price="95000" id="ares_red_dog_series" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
       <matrix d="7" f="6" devrat="6"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="9L" price="140000" id="aztechnology_tlaloc" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <itemmod type="HOOK" ref="SOFTWARE" />
-         <itemmod type="HOOK" ref="SOFTWARE_DRONE" />
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
       </modifications>
       <matrix d="8" f="7" devrat="6"/>
- 		<flags><flag>MATRIXDEVICE</flag></flags>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    
    <!-- Accessories -->

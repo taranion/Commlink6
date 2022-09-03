@@ -1030,12 +1030,34 @@ public class SR6ArchetypeTest {
 
 		OperationResult<CarriedItem<ItemTemplate>> deck = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "shiawase_cyber6"));
 		assertTrue(deck.wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "armor"), null).wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "browse"), null).wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "configurator"), null).wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "edit"), null).wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "exploit"), null).wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "overclock"), null).wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "signal_scrubber"), null).wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "stealth"), null).wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "toolbox"), null).wasSuccessful());
+		assertTrue(equip.embed(deck.get(), ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "trace"), null).wasSuccessful());
 		assertTrue(equip.embed(deck.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful());
 
 		OperationResult<CarriedItem<ItemTemplate>> comm = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "transys_avalon"));
 		assertTrue(comm.wasSuccessful());
 		assertTrue(equip.embed(comm.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful());
 
+		// To be sure: try ti find matrix devices
+		List<CarriedItem<ItemTemplate>> matrixDevices = model.getCarriedItems()
+				.stream()
+				.filter(ci -> ci.hasFlag(ItemTemplate.FLAG_MATRIX_DEVICE))
+				.collect(Collectors.toList());
+		matrixDevices.forEach(ci -> System.out.println("SR6ArchetypeTest.test04Decker: Matrix device is "+ci));
+		assertTrue("Cyberjack not detected as matrix device",matrixDevices.contains(jack.get()));
+		assertTrue("Cyberdeck not detected as matrix device",matrixDevices.contains(deck.get()));
+		assertTrue("Commlink not detected as matrix device",matrixDevices.contains(comm.get()));
+
+		assertEquals("Did not correctly find matrix devices", 3, matrixDevices.size());
+		
 		OperationResult<CarriedItem<ItemTemplate>> ares = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_light_fire_75"));
 		assertTrue(ares.wasSuccessful());
 
