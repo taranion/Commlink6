@@ -8,9 +8,11 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.controlsfx.control.ToggleSwitch;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.ManagedDialog;
+import org.prelle.javafx.Mode;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -19,14 +21,15 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.ComplexDataItemListSection;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
-import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun.chargen.charctrl.ShadowrunRules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemType;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -44,6 +47,9 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 
 	private SR6CharacterController control;
 	private ShadowrunCharacter model;
+	
+	private ToggleSwitch cbRuleNegativeNuyen;
+	private ToggleSwitch cbRulePayGear;
 
 	//-------------------------------------------------------------------
 	public GearSection(String title, CarryMode carry, Predicate<ItemTemplate> selectFilter, Predicate<CarriedItem<ItemTemplate>> showFilter) {
@@ -53,12 +59,36 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		this.filter = showFilter;
 		this.templateFilter = selectFilter;
 		
+		initSecondaryContent();
 		refresh();
 	}
 
 	//-------------------------------------------------------------------
 	public GearSection(String title, Predicate<ItemTemplate> selectFilter, Predicate<CarriedItem<ItemTemplate>> showFilter) {
 		this(title, CarryMode.CARRIED, selectFilter, showFilter);
+	}
+
+	//-------------------------------------------------------------------
+	private void initSecondaryContent() {
+		cbRuleNegativeNuyen = new ToggleSwitch("Allow negative Nuyen during chargen");
+		cbRulePayGear       = new ToggleSwitch("Pay gear in career");
+		cbRuleNegativeNuyen.setContentDisplay(ContentDisplay.LEFT);
+		cbRulePayGear.setContentDisplay(ContentDisplay.RIGHT);
+		
+		cbRuleNegativeNuyen.selectedProperty().addListener( (ov,o,n) -> {
+			if (model!=null) model.setRuleValue(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN, String.valueOf(n));
+		});
+		cbRulePayGear.selectedProperty().addListener( (ov,o,n) -> {
+			if (model!=null) model.setRuleValue(ShadowrunRules.CAREER_PAY_GEAR, String.valueOf(n));
+		});
+		
+		setMode(Mode.BACKDROP);
+		
+		VBox bxRules = new VBox(10);
+		bxRules.getChildren().add(cbRuleNegativeNuyen);
+		bxRules.getChildren().add(cbRulePayGear);
+		setSecondaryContent(bxRules);
+
 	}
 
 	//-------------------------------------------------------------------
@@ -111,6 +141,10 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	protected void onDelete(CarriedItem<ItemTemplate> item) {
 		// TODO Auto-generated method stub
 		logger.log(Level.WARNING, "ToDo: onDelete");
+		
+		if (control.getEquipmentController().deselect(item)) {
+			refresh();
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -151,6 +185,11 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 //			System.out.println("..."+goo.getKey());
 //		}
 		list.getItems().setAll(data);
+		
+		// Secondary content
+		cbRuleNegativeNuyen.setSelected(model.getRuleValueAsBoolean(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN));
+		cbRulePayGear.setSelected(model.getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR));
+
 	}
 
 }

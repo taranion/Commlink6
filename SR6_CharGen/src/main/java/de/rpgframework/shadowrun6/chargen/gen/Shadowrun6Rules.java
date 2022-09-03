@@ -55,6 +55,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_ALLOW_LEGAL_AVAIL7PLUS,
 				ALLOW_TRANSHUMANISM,
 				CHARGEN_EXTENDED_CONTACT,
+				CHARGEN_NEGATIVE_NUYEN,
 		};
 	}
 	

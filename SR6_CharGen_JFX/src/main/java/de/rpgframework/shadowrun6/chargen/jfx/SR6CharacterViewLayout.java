@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
+import org.prelle.javafx.Mode;
 import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
 
@@ -89,6 +90,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		initPages();
 		
 		setOnBackAction(ev -> closeRequested( ));
+		
+//		pages.setSecondaryContent(new Label("Zweiter Content"));
+//		pages.setSecondaryHeader(new Label("Zweiter Title"));
+//		pages.setMode(Mode.BACKDROP);
 	}
 	
 	//-------------------------------------------------------------------
