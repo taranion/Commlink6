@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen;
+package de.rpgframework.shadowrun6.chargen.gen;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

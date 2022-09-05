@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerP
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import javafx.scene.control.Label;
@@ -28,7 +29,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 
 	private final static Logger logger = System.getLogger(BasicDataPage2.class.getPackageName());
 	
-	private final static ResourceBundle RES = ResourceBundle.getBundle(BasicDataPage.class.getName());
+	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 
 	private SR6CharacterController control;
 	

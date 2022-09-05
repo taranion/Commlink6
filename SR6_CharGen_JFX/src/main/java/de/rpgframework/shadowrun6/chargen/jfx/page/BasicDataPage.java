@@ -15,12 +15,12 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.RPGFrameworkJavaFX;
 import de.rpgframework.jfx.section.AppearanceSection;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import javafx.scene.control.Label;
@@ -34,7 +34,7 @@ import javafx.scene.text.TextFlow;
  */
 public class BasicDataPage extends Page implements IShadowrunCharacterControllerProvider<SR6CharacterController> {
 	
-	private final static ResourceBundle RES = ResourceBundle.getBundle(BasicDataPage.class.getName());
+	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 
 	private SR6CharacterController control;
 	

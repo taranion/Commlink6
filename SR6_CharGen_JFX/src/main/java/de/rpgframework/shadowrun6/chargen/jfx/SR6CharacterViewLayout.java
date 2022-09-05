@@ -34,7 +34,6 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.jfx.dialog.SR6MatrixDevicePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CareerPage;
@@ -42,7 +41,8 @@ import de.rpgframework.shadowrun6.chargen.jfx.page.CombatPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.GearPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.LifePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.MagicPage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.MatrixPage;
+import de.rpgframework.shadowrun6.chargen.jfx.page.ResonancePage;
+import de.rpgframework.shadowrun6.chargen.jfx.page.SR6MatrixDevicePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.VehiclePage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
@@ -68,7 +68,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private CombatPage pgCombat;
 	private AugmentationPage pgAugment;
 	private MagicPage pgMagic;
-	//private MatrixPage pgMatrix;
+	private ResonancePage pgResonance;
 	private SR6MatrixDevicePage pgMatrix;
 	private VehiclePage pgVehicles;
 	private GearPage pgGear;
@@ -132,12 +132,13 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgCombat = new CombatPage();
 		pgAugment= new AugmentationPage();
 		pgMagic  = new MagicPage();
-		pgMatrix = new SR6MatrixDevicePage(); //MatrixPage();
+		pgResonance= new ResonancePage();
+		pgMatrix = new SR6MatrixDevicePage(); 
 		pgVehicles = new VehiclePage();
 		pgGear   = new GearPage();
 		pgLife   = new LifePage();
 		pgCareer = new CareerPage();
-		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear, pgLife);
+		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife);
 	}
 
 	//-------------------------------------------------------------------

@@ -15,6 +15,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -27,7 +28,7 @@ import javafx.util.StringConverter;
  */
 public class BasicDataSection extends Section {
 	
-	private final static ResourceBundle RES = PropertyResourceBundle.getBundle(BasicDataPage.class.getName());
+	private final static ResourceBundle RES = PropertyResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
 	private SR6CharacterController control;
 

@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen;
+package de.rpgframework.shadowrun6.chargen.gen;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -51,8 +51,8 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuySettings;
+import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -60,10 +60,10 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PointBuyAttrGenTest {
+public class PrioAttrGenTest {
 	
 	private Shadowrun6Character model;
-	private SR6PointBuyAttributeGenerator ctrl;
+	private PrioritySR6AttributeGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
 	
@@ -81,7 +81,7 @@ public class PointBuyAttrGenTest {
 	@Before
 	public void setup() {
 		model = new Shadowrun6Character();
-		model.setCharGenSettings(new SR6PointBuySettings());
+		model.setCharGenSettings(new SR6PrioritySettings());
 		preMods.clear();
 		karma = 0;
 		charGen = new SR6CharacterGenerator() {
@@ -101,9 +101,8 @@ public class PointBuyAttrGenTest {
 			}
 			public void setAllowRunProcessor(boolean value) {}
 			public void runProcessors() {
-				System.getLogger(PointBuyAttrGenTest.class.getPackageName()).log(Level.DEBUG,"---------------");
+				System.getLogger(PrioAttrGenTest.class.getPackageName()).log(Level.DEBUG,"---------------");
 				model.setKarmaFree(karma);
-				model.getCharGenSettings(SR6PointBuySettings.class).characterPoints=100;
 				ctrl.process(preMods);
 			}
 			public boolean save(byte[] data) throws IOException {
@@ -144,21 +143,17 @@ public class PointBuyAttrGenTest {
 			@Override
 			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
-		ctrl  = new SR6PointBuyAttributeGenerator(charGen);
+		ctrl  = new PrioritySR6AttributeGenerator(charGen);
 		charGen.runProcessors();
 	}
 	
 	//-------------------------------------------------------------------
 	@Test
 	public void testIdle() {
-		assertEquals(1, ctrl.getPointsLeft());
-		assertEquals(4, ctrl.getPointsLeft2());
+		assertEquals(0, ctrl.getPointsLeft());
+		assertEquals(0, ctrl.getPointsLeft2());
 		assertEquals(0, ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
-		assertEquals(0, ctrl.getCPConvertedToSpecial());
-		assertEquals(0, ctrl.getCPConvertedToAttrib());
-		assertEquals(0, ctrl.getCreatedSpecial());
-		assertEquals(0, ctrl.getCreatedAttrib());
 	}
 
 	//-------------------------------------------------------------------
@@ -169,14 +164,17 @@ public class PointBuyAttrGenTest {
 	public void testNonExisting() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.REACTION);
 		
+		assertEquals(0, ctrl.getPointsLeft());
+		assertEquals(0, ctrl.getPointsLeft2());
+		assertEquals(0, ctrl.getPointsLeft3());
+		
 		// Increasing or decreasing should not be possible
 		assertFalse(ctrl.canBeDecreased(val).get());
-		assertTrue (ctrl.canBeIncreased(val).get()); // By free attribute points
+		assertFalse(ctrl.canBeIncreased(val).get());
 		assertFalse(ctrl.canBeDecreasedPoints(val).get());
 		assertFalse(ctrl.canBeIncreasedPoints(val).get());
-		assertTrue (ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.EDGE)).get()); // One special adjustment point
 		assertFalse(ctrl.canBeDecreasedPoints2(val).get());
-		assertTrue (ctrl.canBeIncreasedPoints2(val).get()); // 4 attribute points
+		assertFalse(ctrl.canBeIncreasedPoints2(val).get());
 		assertFalse(ctrl.canBeDecreasedPoints3(val).get());
 		assertFalse(ctrl.canBeIncreasedPoints3(val).get());
 		// attempting it should fail
@@ -185,13 +183,13 @@ public class PointBuyAttrGenTest {
 		assertTrue(ctrl.decreasePoints(val).hasError());
 		assertTrue(ctrl.increasePoints(val).hasError());
 		assertTrue(ctrl.decreasePoints2(val).hasError());
-		assertFalse(ctrl.increasePoints2(val).hasError());
+		assertTrue(ctrl.increasePoints2(val).hasError());
 		assertTrue(ctrl.decreasePoints3(val).hasError());
 		assertTrue(ctrl.increasePoints3(val).hasError());
 		
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.BODY    ).getModifiedValue());
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.AGILITY ).getModifiedValue());
-		assertEquals(2, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue());
+		assertEquals(1, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue());
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue());
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue());
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.LOGIC    ).getModifiedValue());
@@ -207,7 +205,12 @@ public class PointBuyAttrGenTest {
 	public void testSpecialAdjustmentPoints() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.EDGE);
 		assertFalse(ctrl.canBeDecreasedPoints(val).get());
-		assertTrue(ctrl.canBeIncreasedPoints(val).get());
+		assertFalse(ctrl.canBeIncreasedPoints(val).get());
+		
+		// Add points
+		ValueModification mod = new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 1);
+		preMods.add(mod);
+		charGen.runProcessors();
 
 		// By default the only special attribute available is EDGE
 		assertFalse(ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.BODY     )).get());
@@ -222,7 +225,7 @@ public class PointBuyAttrGenTest {
 		assertFalse(ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.MAGIC    )).get());
 		assertFalse(ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).get());
 		
-		// Increasing MAGIC should not work (no magic user)
+		// Increasing MAGIC should not work
 		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increasePoints(model.getAttribute(ShadowrunAttribute.MAGIC));
 		assertNotNull(result);
 		assertTrue(result.hasError());
@@ -235,26 +238,11 @@ public class PointBuyAttrGenTest {
 		assertNotNull(result.get());
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(0, ctrl.getPointsLeft());
-		assertEquals(0, ctrl.getCPConvertedToSpecial());
-		assertEquals(0, ctrl.getCPConvertedToAttrib());
 		
 		// Increasing another one should fail (No more free adjustment points)
 		result = ctrl.increasePoints(val);
 		assertNotNull(result);
-		assertTrue(result.wasSuccessful());
-		assertEquals(4, ctrl.getCPConvertedToSpecial());
-		assertEquals(0, ctrl.getCPConvertedToAttrib());
-		assertEquals(1, ctrl.getCreatedSpecial());
-		assertEquals(0, ctrl.getCreatedAttrib());
-		assertEquals(3,result.get().getDistributed());
-		
-		// Decrease EDGE again
-		result = ctrl.decreasePoints(val);
-		assertNotNull(result);
-		assertFalse(result.hasError());
-		assertNotNull(result.get());
-		assertEquals(2,result.get().getDistributed());
-		assertEquals(0, ctrl.getPointsLeft());
+		assertTrue(result.hasError());
 		
 		// Decrease EDGE again
 		result = ctrl.decreasePoints(val);
@@ -263,13 +251,20 @@ public class PointBuyAttrGenTest {
 		assertNotNull(result.get());
 		assertEquals(1,result.get().getDistributed());
 		assertEquals(1, ctrl.getPointsLeft());
+
 	}
 	
 	//-------------------------------------------------------------------
 	@Test
 	public void testAttributePoints() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.BODY);
-		assertEquals(4, ctrl.getPointsLeft2());
+		assertFalse(ctrl.canBeDecreasedPoints2(val).get());
+		assertFalse(ctrl.canBeIncreasedPoints2(val).get());
+		
+		// Add points
+		ValueModification mod = new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 1);
+		preMods.add(mod);
+		charGen.runProcessors();
 
 		// All primary attributes should be raisable
 		assertTrue (ctrl.canBeIncreasedPoints2(model.getAttribute(ShadowrunAttribute.BODY     )).get());
@@ -288,13 +283,13 @@ public class PointBuyAttrGenTest {
 		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increasePoints2(model.getAttribute(ShadowrunAttribute.MAGIC));
 		assertNotNull(result);
 		assertTrue(result.hasError());
-		assertEquals(4, ctrl.getPointsLeft2());
+		assertEquals(1, ctrl.getPointsLeft2());
 		
 		// Increasing EDGE should not work
 		result = ctrl.increasePoints2(model.getAttribute(ShadowrunAttribute.EDGE));
 		assertNotNull(result);
 		assertTrue(result.hasError());
-		assertEquals(4, ctrl.getPointsLeft2());
+		assertEquals(1, ctrl.getPointsLeft2());
 		
 		// Increasing BODY should work
 		result = ctrl.increasePoints2(val);
@@ -302,38 +297,28 @@ public class PointBuyAttrGenTest {
 		assertFalse(result.hasError());
 		assertNotNull(result.get());
 		assertEquals(2,result.get().getDistributed());
-		assertEquals(3, ctrl.getPointsLeft2());
+		assertEquals(0, ctrl.getPointsLeft2());
 		
-		// Increasing 4x more (should convert the first CP)
-		result = ctrl.increasePoints2(val);
-		result = ctrl.increasePoints2(val);
-		result = ctrl.increasePoints2(val);
+		// Increasing another one should fail (No more free attribute points)
 		result = ctrl.increasePoints2(val);
 		assertNotNull(result);
-		assertFalse(result.hasError());
-		assertEquals(0, ctrl.getCPConvertedToSpecial());
-		assertEquals(2, ctrl.getCPConvertedToAttrib());
-		assertEquals(0, ctrl.getCreatedSpecial());
-		assertEquals(1, ctrl.getCreatedAttrib());
-		assertEquals(6,result.get().getDistributed());
+		assertTrue(result.hasError());
 		
 		// Decrease BODY again
 		result = ctrl.decreasePoints2(val);
 		assertNotNull(result);
 		assertFalse(result.hasError());
 		assertNotNull(result.get());
-		assertEquals(5,result.get().getDistributed());
-		assertEquals(0, ctrl.getPointsLeft2());
-		assertEquals(0, ctrl.getCPConvertedToSpecial());
-		assertEquals(0, ctrl.getCPConvertedToAttrib());
-		assertEquals(0, ctrl.getCreatedSpecial());
-		assertEquals(0, ctrl.getCreatedAttrib());
+		assertEquals(1,result.get().getDistributed());
+		assertEquals(1, ctrl.getPointsLeft2());
 	}
 	
 	//-------------------------------------------------------------------
 	@Test
 	public void testKarma() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.BODY);
+		assertFalse(ctrl.canBeDecreasedPoints2(val).get());
+		assertFalse(ctrl.canBeIncreasedPoints2(val).get());
 		assertEquals(0, ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
 		
@@ -374,7 +359,7 @@ public class PointBuyAttrGenTest {
 		assertFalse(result.hasError());
 		assertNotNull(result.get());
 		assertEquals(2,result.get().getDistributed());
-		assertEquals(4, ctrl.getPointsLeft2());
+		assertEquals(0, ctrl.getPointsLeft2());
 		assertEquals(30, ctrl.getPointsLeft3());
 		
 		// Increasing BODY again
@@ -397,31 +382,34 @@ public class PointBuyAttrGenTest {
 	@Test
 	public void testReductionOnExceed() {
 		Shadowrun6Character model = charGen.getModel();
-		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);		
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);		
 		settings.perAttrib.put(ShadowrunAttribute.BODY, new PerAttributePoints(2,2,1));
 		karma = 50;
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));
+		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, "BODY", 4, ApplyWhen.ALLCREATE, ValueType.MAX));
 		charGen.runProcessors();
-		assertEquals(8, ctrl.getPointsLeft());
+		// Although 2 adjustment points are spent, they should be taken into account
+		// since only EGDE may be used for adjustmentpoints on humans
+		assertEquals(10, ctrl.getPointsLeft()); 
 		assertEquals(8, ctrl.getPointsLeft2());
-		assertEquals(20, ctrl.getPointsLeft3());
-		assertEquals(6, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
+		assertEquals(30, ctrl.getPointsLeft3());// Pay 20 karma to raise from 3 to 4, leaves 30
+		assertEquals(4, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
 		
 		// One more adjustment point, should exceed maximum
 		settings.perAttrib.put(ShadowrunAttribute.BODY, new PerAttributePoints(3,2,1));
 		charGen.runProcessors();
-		assertEquals(7, ctrl.getPointsLeft());
+		assertEquals(10, ctrl.getPointsLeft());
 		assertEquals(8, ctrl.getPointsLeft2());
-		assertEquals(50, ctrl.getPointsLeft3());
-		assertEquals(6, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
+		assertEquals(30, ctrl.getPointsLeft3()); 
+		assertEquals(4, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
 	}
 	
 	//-------------------------------------------------------------------
 	@Test
 	public void testComplex() {
 		Shadowrun6Character model = charGen.getModel();
-		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);		
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);		
 		settings.perAttrib.put(ShadowrunAttribute.BODY     , new PerAttributePoints(0,0,1));
 		settings.perAttrib.put(ShadowrunAttribute.AGILITY  , new PerAttributePoints(3,2,1));
 		settings.perAttrib.put(ShadowrunAttribute.REACTION , new PerAttributePoints(0,2,0));
@@ -451,7 +439,27 @@ public class PointBuyAttrGenTest {
 		assertEquals(3, model.getAttribute(ShadowrunAttribute.LOGIC    ).getDistributed());
 		assertEquals(3, model.getAttribute(ShadowrunAttribute.INTUITION).getDistributed());
 		assertEquals(8, model.getAttribute(ShadowrunAttribute.CHARISMA ).getDistributed());
-		assertEquals(6, model.getAttribute(ShadowrunAttribute.MAGIC    ).getDistributed());
+		assertEquals(6, model.getAttribute(ShadowrunAttribute.MAGIC    ).getModifiedValue());
+		assertEquals(2, model.getAttribute(ShadowrunAttribute.MAGIC    ).getDistributed());
 		assertEquals(5, model.getAttribute(ShadowrunAttribute.EDGE     ).getDistributed());
+	}
+	
+	//-------------------------------------------------------------------
+	@Test
+	public void testIncreaseEdge6Times() {
+		Shadowrun6Character model = charGen.getModel();
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);		
+		karma = 50;
+		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
+		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));
+		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, "EDGE", 7, ApplyWhen.ALLCREATE, ValueType.MAX));
+		charGen.runProcessors();
+		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
+		assertEquals(7, model.getAttribute(ShadowrunAttribute.EDGE).getDistributed());
 	}
 }

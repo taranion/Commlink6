@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.KnowledgeSkillSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SkillSection;
 import javafx.scene.control.Label;
@@ -27,8 +28,9 @@ import javafx.scene.control.Label;
 public class SkillPage extends Page {
 
 	private final static Logger logger = System.getLogger(SkillPage.class.getPackageName());
-	
-	private final static ResourceBundle RES = ResourceBundle.getBundle(SkillPage.class.getName());
+
+//	private final static ResourceBundle RES = ResourceBundle.getBundle(BasicDataPage.class.getPackageName()+".Pages");
+	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
 	private SkillSection secNormal;
 	private KnowledgeSkillSection secKnowl;

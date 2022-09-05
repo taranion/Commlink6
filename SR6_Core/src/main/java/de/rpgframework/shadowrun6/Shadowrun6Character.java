@@ -174,8 +174,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	}
 
 	//-------------------------------------------------------------------
-	public List<CarriedItem<ItemTemplate>> getCarriedItems(ItemType types) {		
-		CarriedItemItemTypeFilter filter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_CLOSE_COMBAT);
+	public List<CarriedItem<ItemTemplate>> getCarriedItems(ItemType... types) {
+		CarriedItemItemTypeFilter filter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, types);
 		return getCarriedItems().stream()
 			.filter(filter)
 			.collect(Collectors.toList())
