@@ -46,7 +46,7 @@ public class WizardPageLifePath1 extends WizardPage {
 	protected static PropertyResourceBundle UI = (PropertyResourceBundle) ResourceBundle
 			.getBundle(WizardPageLifePath1.class.getName());
 
-	protected IShadowrunCharacterGenerator<?, ?, ?> charGen;
+	protected IShadowrunCharacterGenerator<?, ?, ?,?> charGen;
 	
 	private ChoiceBox<MagicOrResonanceType> cbMoRType;
 	private OptionalNodePane layout;

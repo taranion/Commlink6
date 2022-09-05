@@ -5,7 +5,6 @@ import java.lang.System.Logger.Level;
 
 import org.prelle.javafx.Wizard;
 
-import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
@@ -13,6 +12,7 @@ import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAttributes;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
@@ -44,10 +44,10 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 	 */
 	@Override
 	protected ShadowrunAttributeTable<SR6Skill, SR6SkillValue, Shadowrun6Character> getTableForController(
-			IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, Shadowrun6Character> controller) {
+			IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, ?, Shadowrun6Character> controller) {
 		logger.log(Level.INFO, "getTableForController("+controller+")");
 		// TODO Auto-generated method stub
-		IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, Shadowrun6Character> realCtrl = controller;
+		IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, ?, Shadowrun6Character> realCtrl = controller;
 		if (controller instanceof GeneratorWrapper) {
 			realCtrl = ((GeneratorWrapper)controller).getWrapped();
 		}

@@ -2,7 +2,6 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
@@ -19,6 +18,7 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 public class ResetGenerator implements ProcessingStep {
@@ -64,7 +64,7 @@ public class ResetGenerator implements ProcessingStep {
 			val.clearModifications();
 		}
 		// Remove all auto-added items
-		for (CarriedItem<?> item : model.getCarriedItems()) {
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 			if (item.isAutoAdded()) {
 				model.removeCarriedItem(item);
 			}

@@ -10,7 +10,6 @@ import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.jfx.pane.ContactDetailPane;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageContacts;
-import javafx.scene.Node;
 
 /**
  * @author prelle
@@ -21,7 +20,7 @@ public class SR6WizardPageContacts extends WizardPageContacts {
 	private final static Logger logger = System.getLogger(SR6WizardPageContacts.class.getPackageName());
 
 	//-------------------------------------------------------------------
-	public SR6WizardPageContacts(Wizard wizard, IShadowrunCharacterController<?, ?, ?> charGen) {
+	public SR6WizardPageContacts(Wizard wizard, IShadowrunCharacterController<?, ?, ?,?> charGen) {
 		super(wizard, charGen);
 	}
 	

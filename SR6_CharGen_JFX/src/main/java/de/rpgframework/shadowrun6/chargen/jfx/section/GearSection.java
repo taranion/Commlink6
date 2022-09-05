@@ -177,10 +177,14 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			}
 		}
 		
-		List<CarriedItem<ItemTemplate>> data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItems())
+		
+		List<CarriedItem<ItemTemplate>> data = model.getCarriedItems();
+		if (filter!=null) { 
+			data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItems())
 			.stream()
 			.filter(filter)
 			.collect(Collectors.toList());
+		}
 //		for (CarriedItem goo : data) {
 //			System.out.println("..."+goo.getKey());
 //		}

@@ -19,7 +19,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 
 	//-------------------------------------------------------------------
-	protected SR6QualityLeveller(IShadowrunCharacterController<?, ?, Shadowrun6Character> parent) {
+	protected SR6QualityLeveller(IShadowrunCharacterController<?, ?, ?,Shadowrun6Character> parent) {
 		super(parent);
 	}
 

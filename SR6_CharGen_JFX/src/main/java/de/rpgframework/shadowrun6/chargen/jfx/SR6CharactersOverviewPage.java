@@ -98,7 +98,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#createCharacterController(de.rpgframework.character.RuleSpecificCharacterObject)
 	 */
 	@Override
-	protected CharacterController<?, ?> createCharacterController(RuleSpecificCharacterObject<?,?,?> rawModel, CharacterHandle handle) {
+	protected CharacterController<?, ?> createCharacterController(RuleSpecificCharacterObject<?,?,?,?> rawModel, CharacterHandle handle) {
 		logger.log(Level.INFO, "ENTER: create Character Controller");
 		try {
 		Shadowrun6Character model = (Shadowrun6Character) rawModel;
@@ -192,7 +192,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#loadRuleSpecific(de.rpgframework.character.CharacterHandle)
 	 */
 	@Override
-	protected RuleSpecificCharacterObject<?,?,?> loadRuleSpecific(byte[] raw) throws Exception {
+	protected RuleSpecificCharacterObject<?,?,?,?> loadRuleSpecific(byte[] raw) throws Exception {
 		logger.log(Level.INFO, "ENTER loadRuleSpecific");
 		
 		try {

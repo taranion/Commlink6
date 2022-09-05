@@ -32,7 +32,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 	/**
 	 * @param parent
 	 */
-	public PriorityMagicOrResonanceController(IShadowrunCharacterGenerator<?, ?, ?> parent) {
+	public PriorityMagicOrResonanceController(IShadowrunCharacterGenerator<?, ?, ?,?> parent) {
 		super(parent);
 		available = new LinkedHashMap<>();
 	}

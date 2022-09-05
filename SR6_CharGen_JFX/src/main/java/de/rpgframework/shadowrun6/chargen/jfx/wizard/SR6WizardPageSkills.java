@@ -120,10 +120,10 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 	 */
 	@Override
 	protected ShadowrunSkillTable<SR6Skill,SR6SkillValue, Shadowrun6Character> getTableForController(
-			IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, Shadowrun6Character> controller) {
+			IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, ?, Shadowrun6Character> controller) {
 		logger.log(Level.INFO, "getTableForController("+controller+")");
 		// TODO Auto-generated method stub
-		IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, Shadowrun6Character> realCtrl = controller;
+		IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, ?, Shadowrun6Character> realCtrl = controller;
 		if (controller instanceof GeneratorWrapper) {
 			realCtrl = ((GeneratorWrapper)controller).getWrapped();
 		}

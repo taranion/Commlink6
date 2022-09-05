@@ -55,7 +55,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 	private ChoiceBox<Tradition> cbTradition;
 
 	//-------------------------------------------------------------------
-	public SR6WizardPageMagicOrResonance(Wizard wizard, IShadowrunCharacterGenerator<?, ?, ?> charGen) {
+	public SR6WizardPageMagicOrResonance(Wizard wizard, IShadowrunCharacterGenerator<?, ?, ?,?> charGen) {
 		super(wizard, charGen);
 		
 		System.err.println("SR6WizardPageMagicOrResonance: "+charGen.getModel().getCharGenUsed());
@@ -144,7 +144,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 	}
 
 	//-------------------------------------------------------------------
-	protected void updateChoiceConfigNode(MagicOrResonanceType type, ShadowrunCharacter<?, ?> model) {
+	protected void updateChoiceConfigNode(MagicOrResonanceType type, ShadowrunCharacter<?, ?,?,?> model) {
 		if (model.getTradition()!=null) {
 			descTradition.setData(model.getTradition());
 		}

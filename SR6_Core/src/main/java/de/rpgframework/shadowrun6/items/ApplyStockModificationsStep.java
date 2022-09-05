@@ -73,7 +73,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		case HOOK:
 			ItemHook hook = mod.getResolvedKey();
 			Formula form = mod.getFormula();
-			AAvailableSlot<ItemHook> slot = new AvailableSlot(hook, mod.getValue());
+			AAvailableSlot<ItemHook,ItemTemplate> slot = new AvailableSlot(hook, mod.getValue());
 			model.addSlot(slot);
 			logger.log(Level.INFO, indent+"Added slot {0} with capacity {1}", hook, slot.getCapacity());
 			return;
@@ -103,11 +103,11 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			ItemHook hook = mod.getResolvedKey();
 			if (hook==ItemHook.SOFTWARE && model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS)!=null) {
 				logger.log(Level.INFO, indent + "Add slot {0} and take capacity from CONCURRENT_PROGRAMS ", hook);
-				AAvailableSlot<ItemHook> slot = new AvailableSlot(hook, model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS).getDistributed());
+				AvailableSlot slot = new AvailableSlot(hook, model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS).getDistributed());
 				model.addSlot(slot);
 			} else {
 				logger.log(Level.INFO, indent + "Add slot {0} without capacity ", hook);
-				AAvailableSlot<ItemHook> slot = new AvailableSlot(hook);
+				AvailableSlot slot = new AvailableSlot(hook);
 				model.addSlot(slot);
 			}
 			return;

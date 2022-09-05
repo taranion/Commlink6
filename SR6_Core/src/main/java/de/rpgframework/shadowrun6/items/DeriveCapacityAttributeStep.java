@@ -40,7 +40,7 @@ public class DeriveCapacityAttributeStep implements CarriedItemProcessor {
 	@Override
 	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
 		ItemAttributeNumericalValue<SR6ItemAttribute> capVal = model.getAsValue(SR6ItemAttribute.CAPACITY);
-		List<AAvailableSlot<? extends Hook>> slotsWithCap = model.getSlots().stream().filter(s -> s.getHook().hasCapacity()).collect(Collectors.toUnmodifiableList());
+		List<AAvailableSlot<? extends Hook, ?>> slotsWithCap = model.getSlots().stream().filter(s -> s.getHook().hasCapacity()).collect(Collectors.toUnmodifiableList());
 		if (capVal==null && slotsWithCap.size()==1) {
 			int cap = Math.round(slotsWithCap.get(0).getCapacity());
 			logger.log(Level.DEBUG, "set CAPACITY to {0}",cap);

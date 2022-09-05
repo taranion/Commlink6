@@ -584,7 +584,7 @@ public class Shadowrun6Tools {
 	}
 	
 	//-------------------------------------------------------------------
-	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, CommonCharacter<?, ?, ?> model) {
+	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, CommonCharacter<?, ?, ?,?> model) {
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
 			if ("CHOICE".equals( clone.getKey() )) {

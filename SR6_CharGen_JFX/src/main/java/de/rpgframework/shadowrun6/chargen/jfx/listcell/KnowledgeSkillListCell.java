@@ -141,7 +141,7 @@ public class KnowledgeSkillListCell extends ListCell<SR6SkillValue> {
 			setGraphic(null);			
 		} else {
 			IShadowrunCharacterController ctrl = controlProvider.getCharacterController();
-			ShadowrunCharacter<?, ?> model = (ShadowrunCharacter<?, ?>) ctrl.getModel();
+			ShadowrunCharacter<?, ?,?,?> model = (ShadowrunCharacter<?, ?,?,?>) ctrl.getModel();
 			ISkillController charGen = ctrl.getSkillController();
 			
 			

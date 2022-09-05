@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import org.prelle.simplepersist.Element;
 import org.prelle.simplepersist.ElementList;
@@ -12,18 +13,23 @@ import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.classification.Gender;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.Tradition;
+import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 
 /**
  * @author prelle
  *
  */
 @Root(name="sr6char")
-public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillValue> implements RuleSpecificCharacterObject<ShadowrunAttribute, SR6Skill, SR6SkillValue> {
+public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillValue, ItemTemplate, SR6Spell> implements RuleSpecificCharacterObject<ShadowrunAttribute, SR6Skill, SR6SkillValue, ItemTemplate> {
 
 	@Element
 	private PowerLevel powerLevel;
@@ -165,6 +171,16 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public void removeLifestyle(SR6Lifestyle value) {
 		lifestyles.remove(value);
+	}
+
+	//-------------------------------------------------------------------
+	public List<CarriedItem<ItemTemplate>> getCarriedItems(ItemType types) {		
+		CarriedItemItemTypeFilter filter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_CLOSE_COMBAT);
+		return getCarriedItems().stream()
+			.filter(filter)
+			.collect(Collectors.toList())
+			;
+		
 	}
 
 }

@@ -259,7 +259,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	 * @see de.rpgframework.genericrpg.modification.ModifiedObjectType#instantiateModification(de.rpgframework.genericrpg.modification.Modification, de.rpgframework.genericrpg.data.ComplexDataItemValue, de.rpgframework.genericrpg.data.CommonCharacter)
 	 */
 	@Override
-	public Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, CommonCharacter<?, ?, ?> model) {
+	public Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, CommonCharacter<?, ?, ?,?> model) {
 		return Shadowrun6Tools.instantiateModification(tmp, value, model );
 	}
 	
