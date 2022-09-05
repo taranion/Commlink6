@@ -86,7 +86,7 @@ public class TestApplication extends FlexibleApplication {
         screen.handleControllerEvent(BasicControllerEvents.GENERATOR_CHANGED, chargen);
 		openScreen(screen);
 		ResponsiveControlManager.setBreakpoints(800, 1000);
-		ResponsiveControlManager.manageResponsiveControls((Region) scene.getRoot());
+		ResponsiveControlManager.manageResponsiveControls(scene);
 		ResponsiveControlManager.initialize((Region) scene.getRoot());
 		stage.setMinWidth(1400);
 		stage.setMinHeight(860);
