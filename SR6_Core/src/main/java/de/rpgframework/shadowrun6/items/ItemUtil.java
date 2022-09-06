@@ -7,16 +7,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.data.ApplyTo;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.Usage;
-import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -163,5 +164,27 @@ public class ItemUtil {
 		}
 		
 		return virtual;
+	}
+	
+	//-------------------------------------------------------------------
+	/**	 * 
+	 * @param item
+	 * @return Value >0, if a decision has been made
+	 */
+	public static int getRating(CarriedItem<ItemTemplate> item) {
+		Decision dec = item.getDecision(ItemTemplate.UUID_RATING); 
+		if (dec!=null) {
+			return Integer.parseInt( dec.getValue() );
+		}
+		return 0;
+	}
+	
+	//-------------------------------------------------------------------
+	public static AugmentationQuality getBodytechQuality(CarriedItem<ItemTemplate> item) {
+		Decision dec = item.getDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY); 
+		if (dec!=null) {
+			return AugmentationQuality.valueOf( dec.getValue() );
+		}
+		return null;
 	}
 }

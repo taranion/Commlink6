@@ -6,8 +6,12 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -864,4 +868,225 @@ public class Shadowrun6Tools {
 		return String.join("\n",getSkillPoolCalculation(model, skill, skill.getAttribute(), special).stream().map(pool -> pool.value+" "+pool.source+(pool.hitAugmentLimit?"*":" ") ).collect(Collectors.toList()));
 	}
 	
+	//-------------------------------------------------------------------
+	@SuppressWarnings("incomplete-switch")
+	public static String getInitiativeString(Shadowrun6Character model, ShadowrunAttribute iniAttribute) {
+		String base = model.getAttribute(iniAttribute).toString();
+		switch (iniAttribute) {
+		case INITIATIVE_PHYSICAL:
+			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL).getModifiedValue());
+		case INITIATIVE_MATRIX:
+			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue());
+//		case INITIATIVE_MATRIX_VR_COLD:
+//			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD).getModifiedValue());
+//		case INITIATIVE_MATRIX_VR_HOT:
+//			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT).getModifiedValue());
+		case INITIATIVE_ASTRAL:
+			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_ASTRAL).getModifiedValue());
+		}
+		return ""+base;
+	}
+
+	//-------------------------------------------------------------------
+	public static String getDrainString(SR6Spell spell) {
+		if (spell.getDrain()<0)
+			return RES.getString("label.drain.short")+" "+spell.getDrain();
+		if (spell.getDrain()>0)
+			return RES.getString("label.drain.short")+" +"+spell.getDrain();
+		return RES.getString("label.drain.short");
+	}
+	
+	//-------------------------------------------------------------------
+	public static int[] getMonitorArray(ShadowrunCharacter model, ShadowrunAttribute attr) {
+		int add = 0;
+//		int add = model.getAttribute(attr).getModifiedValue();
+//		add = Math.round( (float)add / 2.0f);
+		if (attr==ShadowrunAttribute.BODY && model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR)!=null)
+			add+=model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getModifiedValue();
+		if (attr==ShadowrunAttribute.WILLPOWER && model.getAttribute(ShadowrunAttribute.STUN_MONITOR)!=null)
+			add+=model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getModifiedValue();
+		int[] ret = new int[add];
+
+		int start = 0;
+		int every = 3;
+		if (model.hasAdeptPower("pain_resistance")) {
+			start+=model.getAdeptPower("pain_resistance").getModifiedValue();
+		}
+
+		for (int i=start; i<ret.length; i++) {
+			ret[i] = - ((i+1-start)/every);
+			if (attr==ShadowrunAttribute.BODY && model.hasQuality("high_pain_tolerance")) {
+				if (ret[i]<0)
+					ret[i]++;
+			}
+			if (attr==ShadowrunAttribute.BODY && model.hasQuality("low_pain_tolerance")) {
+				ret[i]*=2;;
+			}
+		}
+		logger.log(Level.DEBUG, "array for "+attr+": "+Arrays.toString(ret));
+
+		return ret;
+	}
+
+	//--------------------------------------------------------------------
+	/**
+	 * Prepare a single section from a multicolumn table with sections
+	 * @param <T> Data type
+	 * @param <C> Column type. 
+	 * @param <S> Section type. Should implement comparable
+	 * @param data Data to sort
+	 * @param section Section to return
+	 * @param detectColumn Method to detect column
+	 * @param detectSection Method to detect section
+	 * @return
+	 */
+	public static <T,C,S> Map<C, List<T>> sortToColumns(List<T> data, S section, Function<T,C> detectColumn, Function<T,S> detectSection) {
+		List<T> allSorted = new ArrayList<>(data);
+		// Sort by sections
+		Collections.sort(allSorted, new Comparator<T>() {
+			@SuppressWarnings("unchecked")
+			public int compare(T o1, T o2) {
+				S section1 = detectSection.apply(o1);
+				S section2 = detectSection.apply(o2);
+				if (section1==null && section2==null) return 0;
+				if (section1==null && section2!=null) return +1;
+				if (section1!=null && section2==null) return -1;
+				if (section instanceof Comparable) {
+					return ((Comparable<S>)section1).compareTo(section2);
+				} else
+					return String.valueOf(section1).compareTo(String.valueOf(section2));
+			}
+		});
+		
+		Map<C, List<T>> ret = new HashMap<>();
+		for (T item : data) {
+			// Ignore data from unwanted section
+			if (section!=detectSection.apply(item))
+				continue;
+			// Sort to matching column
+			C column = detectColumn.apply(item);
+			List<T> list = ret.get(column);
+			if (list==null) {
+				list = new ArrayList<>();
+				ret.put(column, list);
+			}
+			list.add(item);
+		}
+		
+		return ret;
+	}
+	
+	//--------------------------------------------------------------------
+	/**
+	 * @param <T>
+	 * @param <C>
+	 * @param data
+	 * @param columns
+	 * @param minRows
+	 * @param detectCategory
+	 * @param categoryCompare
+	 * @return
+	 */
+	public static <T,C> List<Object>[] getAsBalancedCategoryTable(List<T> data, int columns, int minRows, Function<T, C> detectCategory, Comparator<C> categoryCompare) {
+		Map<C, List<Object>> listsByCategory = new HashMap<>();
+		// Sort all data into categorized lists
+		for (T item : data) {
+			C category = detectCategory.apply(item);
+			List<Object> list = listsByCategory.get(category);
+			if (list==null) {
+				list = new ArrayList<>();
+				list.add(category); // Add header to list
+				listsByCategory.put(category, list);
+			}
+			list.add(item);
+		}
+		
+		// Make a first guess for required rows
+		int totalItems = data.size()+listsByCategory.size();
+		int rowsFirstAssumption = totalItems/columns;
+		if ((totalItems%columns)>0)
+			rowsFirstAssumption++;
+		int guessedRows = Math.max(minRows, rowsFirstAssumption);
+		
+		List<C> categories = new ArrayList<>(listsByCategory.keySet());
+		Collections.sort(categories, categoryCompare);
+		@SuppressWarnings("unchecked")
+		Class<C> categoryClass = (Class<C>) categories.get(0).getClass();
+
+		// Prepare result
+		@SuppressWarnings("unchecked")
+		List<Object>[] resultLists = new ArrayList[columns];
+		for (int i=0; i<columns; i++)
+			resultLists[i] = new ArrayList<>();
+
+		/*
+		 * Try several iterations
+		 */
+		int rows = guessedRows;
+		outer:
+		while ( (rows-guessedRows)<4 ) {
+			int maxItems = rows*columns;
+			// Build a combined list of all categories
+			List<Object> all = new ArrayList<Object>();
+			categories.forEach(cat -> all.addAll(listsByCategory.get(cat)));
+			
+			/*
+			 * Ensure that there is no category at a column end.
+			 * If so, fill an empty line there
+			 */
+			for (int col=0; col<columns; col++) {
+				int colEnd = ((col+1)*rows)-1;
+				Object item = (colEnd<all.size())?all.get(colEnd):null;
+				if (item!=null && categoryClass.isInstance(item)) {
+					// Last element in column was a category header
+					// Inject an empty line here
+					all.add(colEnd, null);
+				}
+			}
+			// If after all eventually injects the number of items does
+			// not exceed maximum, we are okay
+			if (all.size()<=maxItems) {
+				// Fill into result lists
+				for (int i=0; i<columns; i++) {
+					int to = Math.min( ((i+1)*rows), all.size());
+					if (i*rows <= to)
+						resultLists[i].addAll(all.subList(i*rows, to));
+				}
+				break outer;
+			}
+			// Otherwise try with a row more
+			rows++;
+		}
+		
+		return resultLists;
+	}
+	
+	//--------------------------------------------------------------------
+	/**
+	 * @param <T>
+	 * @param <C>
+	 * @param data
+	 * @param columns
+	 * @param minRows
+	 * @param detectCategory
+	 * @param categoryCompare
+	 * @return
+	 */
+	public static <T,C> List<Object> getAsBalancedCategoryList(List<T> data, int columns, int minRows, Function<T, C> detectCategory, Comparator<C> categoryCompare) {
+		List<Object>[] raw = getAsBalancedCategoryTable(data, columns, minRows, detectCategory, categoryCompare);
+		List<Object> ret = new ArrayList<>();
+		while (true) {
+			for (int i=0; i<columns; i++) {
+				if (raw[i].isEmpty()) {
+					if (i==0)
+						return ret;
+					else
+						ret.add(null);
+				} else {
+					ret.add(raw[i].remove(0));
+				}
+			}
+		}
+	}
+
 }

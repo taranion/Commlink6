@@ -44,6 +44,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	public final static String FLAG_MATRIX_DEVICE = "MATRIX_DEVICE";
 	private static String FLAG_NOWIFI = "NOWIFI"; 
 	public final static UUID UUID_AUGMENTATION_QUALITY = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170c");
+	public final static UUID UUID_RATING = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d");
 	public final static Choice CHOICE_AUGMENTATION_QUALITY = new Choice(
 			ItemTemplate.UUID_AUGMENTATION_QUALITY, 
 			ShadowrunReference.AUGMENTATION_QUALITY);

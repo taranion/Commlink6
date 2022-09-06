@@ -12,6 +12,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
+import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributesStep;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
@@ -105,6 +106,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 			processChain.add(contacts);
 //			processChain.add(new RemainingKarmaNuyenController(this));
 			processChain.add(new CalculateEssence(model));
+			processChain.add(new CalculateDerivedAttributesStep(model));
 
 			setupDone = true;
 		} finally {

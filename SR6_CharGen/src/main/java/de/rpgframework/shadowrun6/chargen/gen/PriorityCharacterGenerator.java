@@ -19,6 +19,7 @@ import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
+import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributesStep;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
@@ -163,6 +164,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(contacts);
 			processChain.add(new RemainingKarmaNuyenController(this));
 			processChain.add(new CalculateEssence(model));
+			processChain.add(new CalculateDerivedAttributesStep(model));
 
 			setupDone = true;
 		} finally {
