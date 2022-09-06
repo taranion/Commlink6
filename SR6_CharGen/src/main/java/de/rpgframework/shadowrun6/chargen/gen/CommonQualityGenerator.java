@@ -28,7 +28,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
-import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
+import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 
 /**
  * @author prelle
@@ -226,7 +226,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			for (Modification tmp : previous) {
 				if (tmp.getReferenceType()==ShadowrunReference.QUALITY) {
 					logger.log(Level.INFO, "Consume "+tmp);
-					ApplyQualityModifications.applyModification(model, tmp);
+					ApplyModificationsGeneric.applyModification(model, tmp);
 				} else {
 					unprocessed.add(tmp);
 				}

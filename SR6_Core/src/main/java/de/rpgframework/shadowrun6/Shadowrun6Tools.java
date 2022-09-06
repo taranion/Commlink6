@@ -54,8 +54,10 @@ import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
+import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -64,8 +66,10 @@ import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
-import de.rpgframework.shadowrun6.proc.ApplyQualityModifications;
+import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
+import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
+import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
@@ -93,18 +97,19 @@ public class Shadowrun6Tools {
 		ResetModifications.class,
 //		new ResolveChoicesInReferences(),
 		GetModificationsFromMetaType.class,
-		ApplyQualityModifications.class,
+		ApplyModificationsGeneric.class,
 //		new GetModificationsFromMagicOrResonance(),
-//		new GetModificationsFromQualities(),
+		GetModificationsFromQualities.class,
 //		new ApplyAdeptPowerModifications(),
 ////		new GetModificationsFromPowers(),
 //		new RecalculateEquipment(),
 ////		new FixDeprecatedRecursiveAccessories(),
 //		new FixOldWeaponType(),
-//		new GetModificationsFromEquipment(),
+		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),
 //		new GetModificationsFromFoci(),
 //		new ApplyAdeptPowerModifications(),
+		ApplyModificationsGeneric.class,
 //		new GetModificationsFromPowers(),
 //		new GetModificationsFromTechniques(),
 //		new ApplyCarriedItemModifications(),
@@ -115,7 +120,7 @@ public class Shadowrun6Tools {
 ////		new ApplySINModifications(),
 //		new ConnectSignatureManeuvers(),
 //		new ApplyRelevanceAndEdgeMods(),
-//		new CalculateDerivedAttributes(),
+		CalculateDerivedAttributes.class,
 		CalculateEssence.class
 //		new CalculatePersona(),
 	);
@@ -1087,6 +1092,53 @@ public class Shadowrun6Tools {
 				}
 			}
 		}
+	}
+	//-------------------------------------------------------------------
+	public static List<SR6SkillValue> getAllSkillValues(Shadowrun6Character model, SkillType... types) {
+		List<SkillType> filter = Arrays.asList(types);
+		if (filter.isEmpty())
+			filter = Arrays.asList(SkillType.regularValues());
+
+		List<SR6SkillValue> ret = new ArrayList<>();
+		for (SR6Skill skill : Shadowrun6Core.getSkills()) {
+			if (!filter.contains(skill.getType()))
+				continue;
+			switch (skill.getType()) {
+			case COMBAT:
+			case MAGIC:
+			case PHYSICAL:
+			case RESONANCE:
+			case SOCIAL:
+			case TECHNICAL:
+			case VEHICLE:
+				SR6SkillValue val = model.getSkillValue(skill);
+				if (val==null) {
+					if (skill.isUseUntrained()) {
+						val = new SR6SkillValue(skill, 0);
+					} else
+						val = new SR6SkillValue(skill, -1);
+				}
+				ret.add(val);
+				break;
+			case LANGUAGE:
+			case KNOWLEDGE:
+				break;
+			case ACTION:
+			case NOT_SET:
+				break;
+			}
+		}
+
+		for (SR6SkillValue val : model.getSkillValues()) {
+			SkillType tmpType = val.getModifyable().getType();
+			if (!filter.contains(tmpType))
+				continue;
+			if (Arrays.asList(SkillType.individualValues()).contains(tmpType)) {
+				ret.add(val);
+			}
+		}
+
+		return ret;
 	}
 
 }

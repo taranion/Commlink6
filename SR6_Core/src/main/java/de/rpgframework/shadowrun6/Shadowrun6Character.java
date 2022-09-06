@@ -38,6 +38,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	@ElementList(entry="lifestyle", type = SR6Lifestyle.class, inline = false)
 	private List<SR6Lifestyle> lifestyles;
 	
+	private transient Persona persona;
+	
 	//-------------------------------------------------------------------
 	public Shadowrun6Character() {
 		gender = Gender.MALE;
@@ -181,6 +183,22 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			.collect(Collectors.toList())
 			;
 		
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the persona
+	 */
+	public Persona getPersona() {
+		return persona;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param persona the persona to set
+	 */
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
 }

@@ -28,7 +28,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author stefa
  *
  */
-public class CalculateDerivedAttributesStep implements ProcessingStep {
+public class CalculateDerivedAttributes implements ProcessingStep {
 
 	private final static Logger logger = System.getLogger("shadowrun6.proc");
 	
@@ -37,7 +37,7 @@ public class CalculateDerivedAttributesStep implements ProcessingStep {
 	//-------------------------------------------------------------------
 	/**
 	 */
-	public CalculateDerivedAttributesStep(Shadowrun6Character model) {
+	public CalculateDerivedAttributes(Shadowrun6Character model) {
 		this.model = model;
 	}
 

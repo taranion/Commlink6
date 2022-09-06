@@ -1,9 +1,10 @@
-package de.rpgframework.shadowrun6.chargen.jfx.page;
+package de.rpgframework.shadlexowrun6.chargen.jfx.page;
 
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -17,8 +18,11 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.section.IconSection;
+import de.rpgframework.shadowrun.ShadowrunAction.Category;
 import de.rpgframework.shadowrun.chargen.jfx.pages.AMatrixDevicePage;
 import de.rpgframework.shadowrun.chargen.jfx.section.PersonaSection;
+import de.rpgframework.shadowrun6.Shadowrun6Action;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
@@ -54,6 +58,7 @@ public class SR6MatrixDevicePage extends AMatrixDevicePage<ItemTemplate, ItemHoo
 		super();
 		initColumn1();
 		initColumn2();
+		initActions();
 		initPrivateLayout();
 		refresh();
 	}
@@ -77,22 +82,12 @@ public class SR6MatrixDevicePage extends AMatrixDevicePage<ItemTemplate, ItemHoo
 		HBox bxDevice = new HBox(10, hdDevice, cbDevice);
 		
 		// Active Programs
-		secPrograms = new IconSection<ItemTemplate, CarriedItem<ItemTemplate>>(item -> resolveIcon(item), ResourceI18N.get(RES, "page.matrix.section.activePrograms")) {
+		secPrograms = new IconSection<ItemTemplate, CarriedItem<ItemTemplate>>(item -> resolveIcon(item), ResourceI18N.get(RES, "page.matrix.section.activePrograms"));			
+		secPrograms.setOnAddAction(ev -> {});
+		((IconSection<ItemTemplate, CarriedItem<ItemTemplate>>)secPrograms).getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			description.setData(n);
+		});
 
-			@Override
-			protected void onAdd() {
-				// TODO Auto-generated method stub
-				logger.log(Level.WARNING, "ToDo: onAdd");
-			}
-
-			@Override
-			protected void onDelete(ItemTemplate item) {
-				// TODO Auto-generated method stub
-				logger.log(Level.WARNING, "ToDo: onDelete");
-				
-			}
-			
-		};
 		((IconSection<ItemTemplate, CarriedItem<ItemTemplate>>)secPrograms).showHelpForProperty().addListener( (ov,o,n) -> description.setData(n));
 		
 		Predicate<ItemTemplate> selectFilter = null;
@@ -121,6 +116,20 @@ public class SR6MatrixDevicePage extends AMatrixDevicePage<ItemTemplate, ItemHoo
 		
 		bxColumn2 = new VBox(20, secPersona);		
 	}
+	
+	private void initActions() {
+		secActions.setAll( 
+				Shadowrun6Core.getItemList(Shadowrun6Action.class)
+				.stream()
+				.filter( act -> act.getCategory()==Category.MATRIX)
+				.sorted(new Comparator<Shadowrun6Action>() {
+					public int compare(Shadowrun6Action o1, Shadowrun6Action o2) {
+						return o1.getName().compareTo(o2.getName());
+					}
+				})
+				.collect(Collectors.toList())
+				);		
+	}
 
 	//-------------------------------------------------------------------
 	private void initPrivateLayout() {
@@ -132,11 +141,14 @@ public class SR6MatrixDevicePage extends AMatrixDevicePage<ItemTemplate, ItemHoo
 //		
 //		FlexGridPane.setMinWidth(bxColumn2, 5);
 //		FlexGridPane.setMinHeight(bxColumn2, 10);
-		
-		//flex.getChildren().addAll(bxColumn1, ivDeepDive, bxColumn2);
-		grid.add(bxColumn1, 0, 0);
+//		
+//		FlexGridPane flex = new FlexGridPane();
+//		flex.getChildren().addAll(bxColumn1, ivDeepDive, bxColumn2);
+//		content.setContent(flex);
+		grid.add(bxColumn1, 0, 0, 1,2);
 		grid.add(ivDeepDive, 1, 0);
 		grid.add(bxColumn2, 2, 0);
+		grid.add(secActions, 1, 1, 2,1);
 		GridPane.setValignment(ivDeepDive, VPos.TOP);
 		
 		//HBox inflex = new HBox(20, bxColumn1, ivDeepDive, bxColumn2);
@@ -196,6 +208,18 @@ public class SR6MatrixDevicePage extends AMatrixDevicePage<ItemTemplate, ItemHoo
 		secPrograms.refresh();
 		secAccessories.refresh();
 		secPersona.refresh();
+		
+		secActions.setAll( 
+				Shadowrun6Core.getItemList(Shadowrun6Action.class)
+				.stream()
+				.filter( act -> act.getCategory()==Category.MATRIX)
+				.sorted(new Comparator<Shadowrun6Action>() {
+					public int compare(Shadowrun6Action o1, Shadowrun6Action o2) {
+						return o1.getName().compareTo(o2.getName());
+					}
+				})
+				.collect(Collectors.toList())
+				);
 	}
 
 	//-------------------------------------------------------------------

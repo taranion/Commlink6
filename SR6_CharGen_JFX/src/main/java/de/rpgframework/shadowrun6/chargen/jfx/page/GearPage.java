@@ -2,10 +2,10 @@ package de.rpgframework.shadowrun6.chargen.jfx.page;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.prelle.javafx.Mode;
 import org.prelle.javafx.OptionalNodePane;
@@ -13,12 +13,12 @@ import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.genericrpg.data.ComplexDataItem;
-import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.jfx.GenericDescriptionVBox;
-import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.ShadowrunAction.Category;
+import de.rpgframework.shadowrun.chargen.jfx.section.ShadowrunActionSection;
+import de.rpgframework.shadowrun6.Shadowrun6Action;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
@@ -29,6 +29,7 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 
 /**
  * @author prelle
@@ -75,7 +76,7 @@ public class GearPage extends Page {
 		FlexGridPane.setMediumWidth(secElectro, 6);
 		FlexGridPane.setMediumHeight(secElectro, 9);
 		FlexGridPane.setMaxWidth(secElectro, 8);
-		FlexGridPane.setMaxHeight(secElectro, 12);
+		FlexGridPane.setMaxHeight(secElectro, 9);
 	}
 	
 	//-------------------------------------------------------------------
@@ -91,16 +92,27 @@ public class GearPage extends Page {
 		FlexGridPane.setMediumWidth(secOther, 5);
 		FlexGridPane.setMediumHeight(secOther, 9);
 		FlexGridPane.setMaxWidth(secOther, 5);
-		FlexGridPane.setMaxHeight(secOther, 12);
+		FlexGridPane.setMaxHeight(secOther, 9);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
+		ShadowrunActionSection secActions = new ShadowrunActionSection("Actions");
+		secActions.setAll( 
+				Shadowrun6Core.getItemList(Shadowrun6Action.class)
+				.stream()
+				.filter( act -> act.getCategory()==Category.MATRIX)
+				.collect(Collectors.toList())
+				);
+		FlexGridPane.setMinWidth(secActions, 8);
+		FlexGridPane.setMinHeight(secActions, 6);
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secOther, secElectro);
+		flex.getChildren().addAll(secOther, secElectro, secActions);
+		ScrollPane scroll = new ScrollPane(flex);
+		scroll.setFitToWidth(true);
 		
-		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
+		layout = new OptionalNodePane(scroll, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
