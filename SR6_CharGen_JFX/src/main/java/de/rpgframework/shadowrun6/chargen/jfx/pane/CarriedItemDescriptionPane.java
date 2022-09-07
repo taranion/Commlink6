@@ -43,6 +43,8 @@ public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
 		super.initLayout();
 		extra = new VBox(5);
 		inner.getChildren().add(0, extra);
+		setStyle("-fx-max-width: 20em");
+
 	}
 	
 	//-------------------------------------------------------------------
