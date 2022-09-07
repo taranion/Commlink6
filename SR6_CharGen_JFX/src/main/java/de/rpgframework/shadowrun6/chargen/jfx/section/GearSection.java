@@ -19,7 +19,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.jfx.ComplexDataItemListSection;
+import de.rpgframework.jfx.section.ComplexDataItemListSection;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.charctrl.ShadowrunRules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -163,32 +163,15 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	public void refresh() {
 //		logger.log(Level.DEBUG, "refresh");
 		
-		if (model==null) return;
-		List<CarriedItem<ItemTemplate>> data2 = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItems());
-		for (CarriedItem<ItemTemplate> tmp :data2) {
-			if (tmp.getResolved()==null) {
-				System.err.println("No resolved item '"+tmp.getKey()+"' for item "+tmp.getUuid());
-				logger.log(Level.ERROR, "No resolved item '"+tmp.getKey()+"' for item "+tmp.getUuid());
-				continue;
-			}
-			if (tmp.getResolved().getItemType()==null) {
-				System.err.println("No item type for item "+tmp.getKey()+" UUID "+tmp.getUuid());
-				System.exit(1);
-			}
-		}
-		
-		
-		List<CarriedItem<ItemTemplate>> data = model.getCarriedItems();
-		if (filter!=null) { 
+		// If  a model and a filter exists, update automatically
+		if (model!=null && filter!=null) {
+			List<CarriedItem<ItemTemplate>> data = null;
 			data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItems())
 			.stream()
 			.filter(filter)
 			.collect(Collectors.toList());
+			list.getItems().setAll(data);
 		}
-//		for (CarriedItem goo : data) {
-//			System.out.println("..."+goo.getKey());
-//		}
-		list.getItems().setAll(data);
 		
 		// Secondary content
 		cbRuleNegativeNuyen.setSelected(model.getRuleValueAsBoolean(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN));
