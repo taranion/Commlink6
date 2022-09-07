@@ -27,9 +27,9 @@ import javafx.scene.layout.HBox;
  */
 public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 
-	private final static Logger logger = System.getLogger(QualitySection.class.getPackageName());
+	private final static Logger logger = System.getLogger(AdeptPowerSection.class.getPackageName());
 
-	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(QualitySection.class.getPackageName()+".Selection");
+	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(AdeptPowerSection.class.getPackageName()+".Section");
 
 	private IShadowrunCharacterController control;
 	private ShadowrunCharacter model;
@@ -56,8 +56,8 @@ public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 
 	// -------------------------------------------------------------------
 	private void initLayout() {
-		Label hdPPTotal = new Label(ResourceI18N.get(RES, "adeptpowerssection.ppTotal"));
-		Label hdPPUnspent = new Label(ResourceI18N.get(RES, "adeptpowerssection.ppUnspent"));
+		Label hdPPTotal = new Label(ResourceI18N.get(RES, "section.adeptpowers.ppTotal"));
+		Label hdPPUnspent = new Label(ResourceI18N.get(RES, "section.adeptpowers.ppUnspent"));
 		HBox headerNode = new HBox(5, hdPPTotal, lbTotal, hdPPUnspent, lbUnspent);
 		HBox.setMargin(hdPPUnspent, new Insets(0,0,0,5));
 		headerNode.setAlignment(Pos.CENTER_LEFT);

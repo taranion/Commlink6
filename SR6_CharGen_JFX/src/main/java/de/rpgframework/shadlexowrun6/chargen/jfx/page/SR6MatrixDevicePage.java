@@ -3,106 +3,134 @@ package de.rpgframework.shadlexowrun6.chargen.jfx.page;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.prelle.javafx.JavaFXConstants;
+import org.prelle.javafx.Mode;
+import org.prelle.javafx.OptionalNodePane;
+import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.jfx.ComplexDataItemListSection;
+import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.section.IconSection;
 import de.rpgframework.shadowrun.ShadowrunAction.Category;
-import de.rpgframework.shadowrun.chargen.jfx.pages.AMatrixDevicePage;
+import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun.chargen.jfx.section.PersonaSection;
+import de.rpgframework.shadowrun.chargen.jfx.section.ShadowrunActionSection;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
+import de.rpgframework.shadowrun6.chargen.jfx.section.AccessoriesSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.ActiveProgramsSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
-import de.rpgframework.shadowrun6.items.AvailableSlot;
-import de.rpgframework.shadowrun6.items.ItemHook;
+import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import javafx.geometry.VPos;
+import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 /**
  * @author prelle
  *
  */
-public class SR6MatrixDevicePage extends AMatrixDevicePage<ItemTemplate, ItemHook, AvailableSlot> {
+public class SR6MatrixDevicePage extends Page {
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 
 	private final static Logger logger = System.getLogger(SR6MatrixDevicePage.class.getPackageName());
 	
-	private VBox bxColumn1;
 	private ChoiceBox<CarriedItem<ItemTemplate>> cbDevice;
-	private VBox bxColumn2;
+	protected ActiveProgramsSection secPrograms;
+	protected AccessoriesSection secAccessories;
+	protected ImageView ivDeepDive;
+	protected PersonaSection secPersona;
+	protected ShadowrunActionSection secActions;
+	
+	private FlexGridPane flex;
+	private OptionalNodePane layout;
+	
+	private SR6CharacterController ctrl;
 
 	//-------------------------------------------------------------------
 	public SR6MatrixDevicePage() {
-		super();
-		initColumn1();
-		initColumn2();
+		super("Matrix");
+		initComponents();
+		initLayout();
+		initInteractivity();
+	}
+	
+	//-------------------------------------------------------------------
+	private void initComponents() {
+		initPrograms();
+		initImage();
+		initPersona();
+		initAccessories();
 		initActions();
-		initPrivateLayout();
-		refresh();
+	}
+	
+	//-------------------------------------------------------------------
+	private void initAccessories() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.BIOLOGY); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.BIOLOGY); 
+		secAccessories = new AccessoriesSection(
+				ResourceI18N.get(RES, "page.gear.section.other"), selectFilter, showFilter
+				);
+		secAccessories.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secAccessories, 4);
+		FlexGridPane.setMinHeight(secAccessories, 6);
+	}
+
+
+	//--------------------------------------------------------------------
+	private void initImage() {
+		ivDeepDive = new ImageView();
+		ivDeepDive.setPreserveRatio(true);
+		
+		InputStream is = CommonShadowrunJFXResourceHook.class.getResourceAsStream("images/DeckerDeepDive.png");
+		if (is!=null) {
+			Image img = new Image(is);
+			ivDeepDive.setImage(img);
+			ivDeepDive.setFitWidth(350);
+		} else {
+			logger.log(Level.ERROR, "Missing image images/DeckerDeepDive.png");
+		}
+		FlexGridPane.setMaxWidth(ivDeepDive, 5);
+		FlexGridPane.setMaxHeight(ivDeepDive, 6);
 	}
 
 	//-------------------------------------------------------------------
-	private void initColumn1() {
-		cbDevice = new ChoiceBox<>();
-		cbDevice.setConverter(new StringConverter<CarriedItem<ItemTemplate>>() {
-			@Override
-			public String toString(CarriedItem<ItemTemplate> item) {
-				return (item==null)?"?": item.getNameWithoutRating(Locale.getDefault());
-			}
-			@Override
-			public CarriedItem<ItemTemplate> fromString(String arg0) { return null;}
-		});
-		//cbDevice.getItems().add(selectedItem);
-		cbDevice.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> deviceChanged(n));
-		
-		Label hdDevice = new Label(ResourceI18N.get(RES, "page.matrix.heading.device"));
-		hdDevice.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-		HBox bxDevice = new HBox(10, hdDevice, cbDevice);
-		
-		// Active Programs
-		secPrograms = new IconSection<ItemTemplate, CarriedItem<ItemTemplate>>(item -> resolveIcon(item), ResourceI18N.get(RES, "page.matrix.section.activePrograms"));			
-		secPrograms.setOnAddAction(ev -> {});
-		((IconSection<ItemTemplate, CarriedItem<ItemTemplate>>)secPrograms).getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			description.setData(n);
-		});
-
-		((IconSection<ItemTemplate, CarriedItem<ItemTemplate>>)secPrograms).showHelpForProperty().addListener( (ov,o,n) -> description.setData(n));
-		
-		Predicate<ItemTemplate> selectFilter = null;
-		Predicate<CarriedItem<ItemTemplate>> showFilter = null;
-		secAccessories = new GearSection(ResourceI18N.get(RES, "page.matrix.section.accessories"), CarryMode.EMBEDDED, selectFilter, showFilter);
-		
-		bxColumn1 = new VBox(20, bxDevice, secPrograms, secAccessories);
-		//bxColumn1.setPrefWidth(400);
-		secAccessories.showHelpForProperty().addListener( (ov,o,n) -> {
-			description.setData(n);
-		});
+	private void initPrograms() {
+		secPrograms = new ActiveProgramsSection( ResourceI18N.get(RES, "page.matrix.section.activePrograms"), null, null);			
+//		secPrograms.setOnAddAction(ev -> {});
+		FlexGridPane.setMinWidth(secPrograms, 4);
+		FlexGridPane.setMinHeight(secPrograms, 4);
+		FlexGridPane.setMediumWidth(secPrograms, 6);
+		FlexGridPane.setMediumHeight(secPrograms, 4);
 	}
 
 	//-------------------------------------------------------------------
-	private void initColumn2() {
+	private void initPersona() {
 		Label hdDefRating = new Label(ResourceI18N.get(RES, "page.matrix.section.persona.defenseRating"));
 		Label hdDefPool   = new Label(ResourceI18N.get(RES, "page.matrix.section.persona.defensePool"));
 		GridPane ruleSpec = new GridPane();
@@ -113,11 +141,14 @@ public class SR6MatrixDevicePage extends AMatrixDevicePage<ItemTemplate, ItemHoo
 		
 		secPersona = new PersonaSection(ResourceI18N.get(RES, "page.matrix.section.persona"));
 		secPersona.setRuleSpecificNode(ruleSpec);
-		
-		bxColumn2 = new VBox(20, secPersona);		
+
+		FlexGridPane.setMinWidth(secPersona, 4);
+		FlexGridPane.setMinHeight(secPersona, 6);
 	}
 	
+	//-------------------------------------------------------------------
 	private void initActions() {
+		secActions = new ShadowrunActionSection(ResourceI18N.get(RES, "page.matrix.section.actions"));
 		secActions.setAll( 
 				Shadowrun6Core.getItemList(Shadowrun6Action.class)
 				.stream()
@@ -129,30 +160,66 @@ public class SR6MatrixDevicePage extends AMatrixDevicePage<ItemTemplate, ItemHoo
 				})
 				.collect(Collectors.toList())
 				);		
+		FlexGridPane.setMinWidth(secActions, 4);
+		FlexGridPane.setMinHeight(secActions, 8);
+		FlexGridPane.setMediumWidth(secActions, 6);
+		FlexGridPane.setMediumHeight(secActions, 9);
+		FlexGridPane.setMaxWidth(secActions, 10);
+		FlexGridPane.setMaxHeight(secActions, 5);
 	}
 
 	//-------------------------------------------------------------------
-	private void initPrivateLayout() {
-//		FlexGridPane.setMinWidth(bxColumn1, 5);
-//		FlexGridPane.setMinHeight(bxColumn1, 10);
-//		
-//		FlexGridPane.setMinWidth(ivDeepDive, 5);
-//		FlexGridPane.setMinHeight(ivDeepDive, 10);
-//		
-//		FlexGridPane.setMinWidth(bxColumn2, 5);
-//		FlexGridPane.setMinHeight(bxColumn2, 10);
-//		
-//		FlexGridPane flex = new FlexGridPane();
-//		flex.getChildren().addAll(bxColumn1, ivDeepDive, bxColumn2);
-//		content.setContent(flex);
-		grid.add(bxColumn1, 0, 0, 1,2);
-		grid.add(ivDeepDive, 1, 0);
-		grid.add(bxColumn2, 2, 0);
-		grid.add(secActions, 1, 1, 2,1);
-		GridPane.setValignment(ivDeepDive, VPos.TOP);
+	private void initLayout() {		
+		flex = new FlexGridPane();
+		flex.setSpacing(20);
+		flex.getChildren().addAll(secPrograms,ivDeepDive,secPersona,secAccessories, secActions);
+		ScrollPane scroll = new ScrollPane(flex);
+		scroll.setFitToWidth(true);
 		
-		//HBox inflex = new HBox(20, bxColumn1, ivDeepDive, bxColumn2);
-		content.setContent(grid);
+		layout = new OptionalNodePane(scroll, new Label("Select something to get a description"));
+		layout.setUseScrollPane(true);
+		setContent(layout);
+		super.setMode(Mode.REGULAR);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initInteractivity() {
+		secPrograms.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secAccessories.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secPrograms.selectedDeviceProperty().addListener( (ov,o,n) -> secAccessories.setDevice(n));
+	}
+
+	//-------------------------------------------------------------------
+	private void showDescription(CarriedItem<ItemTemplate> n) {
+		logger.log(Level.INFO, "Show description "+n);
+		if (n==null) {
+			layout.setOptional(null);
+		} else {
+			layout.setOptional( new CarriedItemDescriptionPane( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), ctrl, n));
+			layout.setTitle(n.getModifyable().getName());
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void showDescription(ComplexDataItemValue<? extends ComplexDataItem> n) {
+		logger.log(Level.INFO, "Show description "+n);
+		if (n==null) {
+			layout.setOptional(null);
+		} else {
+			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setTitle(n.getModifyable().getName());
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void showDescription(ComplexDataItem n) {
+		logger.log(Level.INFO, "Show description "+n);
+		if (n==null) {
+			layout.setOptional(null);
+		} else {
+			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
+			layout.setTitle(n.getName());
+		}
 	}
 	
 	//-------------------------------------------------------------------
@@ -161,65 +228,67 @@ public class SR6MatrixDevicePage extends AMatrixDevicePage<ItemTemplate, ItemHoo
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		
-		super.setController(ctrl);
+		secPrograms.updateController(ctrl);
 
-		List<CarriedItem<ItemTemplate>> matrixDevices = ctrl.getModel().getCarriedItems()
-			.stream()
-			.filter(ci -> ci.hasFlag(ItemTemplate.FLAG_MATRIX_DEVICE))
-			.collect(Collectors.toList());
-		cbDevice.getItems().setAll(matrixDevices);
+		//super.setController(ctrl);
+
+//		List<CarriedItem<ItemTemplate>> matrixDevices = ctrl.getModel().getCarriedItems()
+//			.stream()
+//			.filter(ci -> ci.hasFlag(ItemTemplate.FLAG_MATRIX_DEVICE))
+//			.collect(Collectors.toList());
+//		cbDevice.getItems().setAll(matrixDevices);
 		((GearSection)secAccessories).updateController(ctrl);
-		if (cbDevice.getValue()==null && !matrixDevices.isEmpty())
-			cbDevice.setValue(matrixDevices.get(0));
-//		secDevices.updateController(ctrl);
-//		secSoftware.updateController(ctrl);
-		refresh();
+//		if (cbDevice.getValue()==null && !matrixDevices.isEmpty())
+//			cbDevice.setValue(matrixDevices.get(0));
+////		secDevices.updateController(ctrl);
+////		secSoftware.updateController(ctrl);
+//		refresh();
 	}
 	
 	//-------------------------------------------------------------------
 	private void deviceChanged(CarriedItem<ItemTemplate> device) {
 		logger.log(Level.DEBUG, "Device changed to "+device);
 		
-		AvailableSlot slot = device.getSlot(ItemHook.SOFTWARE);
-		logger.log(Level.DEBUG, "Slot = "+slot);
-		
-		if (slot!=null) {
-			secPrograms.setSlots((int)slot.getCapacity());
-			logger.log(Level.WARNING, "Embedded in slot = "+slot.getAllEmbeddedItems());
-			secPrograms.getItems().setAll(slot.getAllEmbeddedItems());
-		} else
-			secPrograms.setSlots(0);
-		
-		AvailableSlot accessories = device.getSlot(ItemHook.ELECTRONIC_ACCESSORY);
-		if (accessories!=null) {
-			secAccessories.setData( accessories.getAllEmbeddedItems());
-			secAccessories.setVisible(true);
-		} else {
-			// No external accessories
-			secAccessories.setData(new ArrayList<>());
-			secAccessories.setVisible(false);
-		}
+//		AvailableSlot slot = device.getSlot(ItemHook.SOFTWARE);
+//		logger.log(Level.DEBUG, "Slot = "+slot);
+//		
+//		if (slot!=null) {
+//			secPrograms.setSlots((int)slot.getCapacity());
+//			logger.log(Level.WARNING, "Embedded in slot = "+slot.getAllEmbeddedItems());
+//			secPrograms.getItems().setAll(slot.getAllEmbeddedItems());
+//		} else
+//			secPrograms.setSlots(0);
+//		
+//		AvailableSlot accessories = device.getSlot(ItemHook.ELECTRONIC_ACCESSORY);
+//		if (accessories!=null) {
+//			secAccessories.setData( accessories.getAllEmbeddedItems());
+//			secAccessories.setVisible(true);
+//		} else {
+//			// No external accessories
+//			secAccessories.setData(new ArrayList<>());
+//			secAccessories.setVisible(false);
+//		}
 		
 	}
 
 	//--------------------------------------------------------------------
 	public void refresh()  {
 		logger.log(Level.INFO, "refresh");
-		secPrograms.refresh();
-		secAccessories.refresh();
-		secPersona.refresh();
-		
-		secActions.setAll( 
-				Shadowrun6Core.getItemList(Shadowrun6Action.class)
-				.stream()
-				.filter( act -> act.getCategory()==Category.MATRIX)
-				.sorted(new Comparator<Shadowrun6Action>() {
-					public int compare(Shadowrun6Action o1, Shadowrun6Action o2) {
-						return o1.getName().compareTo(o2.getName());
-					}
-				})
-				.collect(Collectors.toList())
-				);
+//		secPrograms.refresh();
+//		secAccessories.refresh();
+//		secPersona.refresh();
+//		
+//		secActions.setAll( 
+//				Shadowrun6Core.getItemList(Shadowrun6Action.class)
+//				.stream()
+//				.filter( act -> act.getCategory()==Category.MATRIX)
+//				.sorted(new Comparator<Shadowrun6Action>() {
+//					public int compare(Shadowrun6Action o1, Shadowrun6Action o2) {
+//						return o1.getName().compareTo(o2.getName());
+//					}
+//				})
+//				.collect(Collectors.toList())
+//				);
 	}
 
 	//-------------------------------------------------------------------

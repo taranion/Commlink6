@@ -265,6 +265,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgAugment.setController(control);
 		pgMagic.setController(control);
 		pgMatrix.setController(control);
+		pgResonance.setController(control);
 		pgVehicles.setController(control);
 		pgGear.setController(control);
 		pgLife.setController(control);
@@ -310,6 +311,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgAugment.refresh();
 		pgMagic.refresh();
 		pgMatrix.refresh();
+		pgResonance.refresh();
 		pgVehicles.refresh();
 		pgGear.refresh();
 		pgLife.refresh();

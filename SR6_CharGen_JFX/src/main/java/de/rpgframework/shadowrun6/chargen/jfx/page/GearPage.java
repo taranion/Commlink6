@@ -97,18 +97,9 @@ public class GearPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		ShadowrunActionSection secActions = new ShadowrunActionSection("Actions");
-		secActions.setAll( 
-				Shadowrun6Core.getItemList(Shadowrun6Action.class)
-				.stream()
-				.filter( act -> act.getCategory()==Category.MATRIX)
-				.collect(Collectors.toList())
-				);
-		FlexGridPane.setMinWidth(secActions, 8);
-		FlexGridPane.setMinHeight(secActions, 6);
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secOther, secElectro, secActions);
+		flex.getChildren().addAll(secOther, secElectro);
 		ScrollPane scroll = new ScrollPane(flex);
 		scroll.setFitToWidth(true);
 		

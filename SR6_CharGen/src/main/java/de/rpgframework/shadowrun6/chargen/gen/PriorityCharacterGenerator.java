@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
+import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
@@ -145,6 +146,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			createPartialController();
 
 			processChain.add(new ResetModifications(model));
+			processChain.add(new EnsureAttributePresence(model));
 			processChain.add(new ResetGenerator(this));
 			processChain.add(prioCtrl);
 			processChain.add(meta);

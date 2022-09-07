@@ -45,8 +45,8 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	private Predicate<CarriedItem<ItemTemplate>> filter;
 	private Predicate<ItemTemplate> templateFilter;
 
-	private SR6CharacterController control;
-	private ShadowrunCharacter model;
+	protected SR6CharacterController control;
+	protected ShadowrunCharacter model;
 	
 	private ToggleSwitch cbRuleNegativeNuyen;
 	private ToggleSwitch cbRulePayGear;
