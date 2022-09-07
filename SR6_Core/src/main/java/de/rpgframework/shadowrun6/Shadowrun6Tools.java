@@ -21,6 +21,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Choice;
@@ -36,6 +37,7 @@ import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
@@ -58,6 +60,7 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
+import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -69,6 +72,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
+import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
@@ -95,6 +99,7 @@ public class Shadowrun6Tools {
 
 	public final static List<Class<? extends ProcessingStep>> RECALCULATE_STEPS = Arrays.asList(
 		ResetModifications.class,
+		EnsureAttributePresence.class,
 //		new ResolveChoicesInReferences(),
 		GetModificationsFromMetaType.class,
 		ApplyModificationsGeneric.class,
@@ -157,6 +162,22 @@ public class Shadowrun6Tools {
 		}
 		
 		return steps;
+	}
+	//-------------------------------------------------------------------
+	public static void runProcessors(Shadowrun6Character model) {
+		List<ProcessingStep> processChain = getCharacterProcessingSteps(model);
+		try {
+			logger.log(Level.DEBUG, "\n\nSTART: runProcessors: "+processChain.size()+"-------------------------------------------------------");
+			List<Modification> unprocessed = new ArrayList<>();
+			for (ProcessingStep processor : processChain) {
+				unprocessed = processor.process(unprocessed);
+				logger.log(Level.DEBUG, "------ after "+processor.getClass().getSimpleName()+"     "+unprocessed);
+			}
+			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
+			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Failed calculating character",e);
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -1139,6 +1160,128 @@ public class Shadowrun6Tools {
 		}
 
 		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public static List<PoolCalculation> getWeaponPoolCalculation(Shadowrun6Character model, CarriedItem item) {
+//		if (item.getResolved().getWeaponData()==null) {
+//			throw new IllegalArgumentException(item.getName()+" is not a weapon but a "+item.getItem().getTypes()+" and of type "+item.getItem().getClass());
+//		}
+		
+		SR6Skill skill = (SR6Skill) item.getAsObject(SR6ItemAttribute.SKILL).getValue();
+		SR6SkillValue sVal = model.getSkillValue(skill);
+		
+		List<PoolCalculation> ret = new ArrayList<>();
+		String special = null;
+		
+//		// Find the correct specialization
+//		if (skill.getId().equals("exotic_weapons")) {
+//			// Without skill, you cannot use the weapon
+//			if (sVal==null) {
+//				ret.add(new PoolCalculation(0, RES.format("explain.missing_exotic_skill", item.getResolved().getName())));
+//				return ret;
+//			}
+//			// Find matching specialization
+//			SkillSpecializationValue spec = null;
+//			for (SkillSpecializationValue tmp : sVal.getSkillSpecializations()) {
+//				if (tmp.getSpecial().getExoticItem()==item.getResolved() || tmp.getSpecial()==item.getResolved().getWeaponData().getSpecialization()) {
+//					spec = tmp;
+//					break;
+//				}
+//			}
+//			// Without specialization, the weapon cannot be used
+//			if (spec==null) {
+//				ret.add(new PoolCalculation(0, RES.format( "explain.missing_exotic_specialization", item.getResolved().getName())+": "+sVal));				
+//				return ret;
+//			}
+//			// Specialization found
+//			special = spec.getSpecial().getId();
+//		} else {		
+//			SkillSpecialization required = item.getItem().getWeaponData().getSpecialization();
+//			if (required!=null) {
+//				special = required.getId();
+//			}
+//		}
+		logger.log(Level.ERROR, "getWeaponPoolCalculation not finished yet");
+
+		
+		ret.addAll( getSkillPoolCalculation(model, skill, skill.getAttribute(), special) );		
+		
+		/*
+		 * Add eventually existing focus
+		 */
+//		if (item.getUsedFocus()!=null) {
+//			FocusValue focus = item.getUsedFocus();
+//			if (focus.getModifyable().getChoice()==ChoiceType.MELEE_WEAPON) {
+//				ret.add( new PoolCalculation(focus.getLevel(), focus.getName()));
+//			}
+//		}
+//		
+//		/*
+//		 * Add eventually existing item attunement
+//		 */
+//		if (item.getItemAttunement()!=null) {
+//			MetamagicOrEchoValue meta = item.getItemAttunement();
+////			if (focus.getChoice()==item) {
+//				ret.add( new PoolCalculation(model.getInitiateSubmersionLevel(), meta.getName()));
+////			}
+//		}
+		
+		return ret;
+	}
+
+	//--------------------------------------------------------------------
+	public static int getWeaponPool(Shadowrun6Character model, CarriedItem item) {
+		return (int)getWeaponPoolCalculation(model, item).stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+	}
+
+	//--------------------------------------------------------------------
+	public static String getWeaponPoolExplanation(Shadowrun6Character model, CarriedItem item) {
+		return String.join("\n",getWeaponPoolCalculation(model, item).stream().map(pool -> pool.value+" "+pool.source+(pool.hitAugmentLimit?"*":" ") ).collect(Collectors.toList()));
+	}
+
+	//-------------------------------------------------------------------
+	/*
+	 * Called from Shadowrun6_Print
+	 */
+	public static Damage getWeaponDamage(ShadowrunCharacter model, CarriedItem item) {
+//		if (item.getResolved().getWeaponData()==null) {
+//			throw new IllegalArgumentException(item.getName()+" is not a weapon but a "+item.getItem().getTypes()+" and of type "+item.getItem().getClass());
+//		}
+
+//		return ((Damage)model.getItem("unarmed").getAsValue(ItemAttribute.DAMAGE));
+		
+		Damage damage = (Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
+//		if (damage.isAddStrength()) {
+//			AttributeValue val = model.getAttribute(Attribute.STRENGTH);
+//			int strHalf = Math.round( val.getModifiedValue() / 2.0f);
+//			Damage damage2 = new Damage();
+//			damage2.setValue(damage.getValue() + strHalf);
+//			damage2.setType(damage.getType());
+//			damage2.setModifications(damage.getModifications());
+//			return damage2;
+//		}
+		return damage;
+	}
+
+	//-------------------------------------------------------------------
+	public static String getItemAttributeString(ShadowrunCharacter model, CarriedItem item, SR6ItemAttribute attr) {
+		switch (attr) {
+		case FIREMODES:
+			return String.valueOf(item.getAsObject(attr));
+		case SKILL:
+			return ((SR6Skill)item.getAsObject(attr).getValue()).getName();
+		case PRICE:
+			return String.valueOf(item.getAsObject(attr));
+		case AMMUNITION:
+			return String.valueOf(item.getAsObject(attr).getValue());
+		default:
+			ItemAttributeNumericalValue val = item.getAsValue(attr);
+			if (val.getModifier()==0)
+				return String.valueOf(val.getDistributed());
+			else
+				return val.getDistributed()+" ("+val.getModifiedValue()+")";
+		}
 	}
 
 }
