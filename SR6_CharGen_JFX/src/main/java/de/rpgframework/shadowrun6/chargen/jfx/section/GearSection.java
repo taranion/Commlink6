@@ -162,9 +162,10 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	@SuppressWarnings("unchecked")
 	public void refresh() {
 //		logger.log(Level.DEBUG, "refresh");
+		if (model==null) return;
 		
 		// If  a model and a filter exists, update automatically
-		if (model!=null && filter!=null) {
+		if (filter!=null) {
 			List<CarriedItem<ItemTemplate>> data = null;
 			data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItems())
 			.stream()

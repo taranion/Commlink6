@@ -1,80 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ammotypes>
-    <ammotype id="regular" cmult="1">
-      <modifications>
-      </modifications>
-    </ammotype>
+	<ammotype id="regular" cmult="1">
+		<modifications>
+		</modifications>
+	</ammotype>
 
 	<ammotype id="apds" cmult="3">
-	  <modifications>
-	    <itemattrmod attr="ATTACK_RATING" val="2"/>
-        <itemattrmod attr="DAMAGE" val="-1"/>
-	  </modifications>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-1"/>
+		</modifications>
 	</ammotype>
-	
-    <ammotype id="explosive" cmult="2">
-      <modifications>
-        <itemattrmod attr="DAMAGE" val="1"/>
-      </modifications>
-    </ammotype>
-    
-    <ammotype id="flechette" cmult="1.5">
-      <modifications>
-        <itemattrmod attr="ATTACK_RATING" val="1"/>
-        <itemattrmod attr="DAMAGE" val="-1"/>
-      </modifications>
-    </ammotype>
-    
-    <ammotype id="gel" cmult="1.5">
-      <modifications>
-        <dmgtypemod type="STUN"/>
-      </modifications>
-    </ammotype>
-    
-    <ammotype id="stick_n_shock" cmult="2">
-      <modifications>
-        <itemattrmod attr="DAMAGE" val="-1"/>
-       <dmgtypemod type="STUN"/>
-      </modifications>
-    </ammotype>
-    
-    <!-- Caseless -->
-    <ammotype id="regular_caseless" cmult="2">
-        <modifications>
-        </modifications>
-    </ammotype>
 
-    <ammotype id="apds_caseless" cmult="6">
-      <modifications>
-        <itemattrmod attr="ATTACK_RATING" val="2"/>
-        <itemattrmod attr="DAMAGE" val="-1"/>
-      </modifications>
-    </ammotype>
-    
-    <ammotype id="explosive_caseless" cmult="4">
-      <modifications>
-        <itemattrmod attr="DAMAGE" val="1"/>
-      </modifications>
-    </ammotype>
-    
-    <ammotype id="flechette_caseless" cmult="3">
-      <modifications>
-        <itemattrmod attr="ATTACK_RATING" val="1"/>
-        <itemattrmod attr="DAMAGE" val="-1"/>
-      </modifications>
-    </ammotype>
-    
-    <ammotype id="gel_caseless" cmult="3">
-      <modifications>
-        <dmgtypemod type="STUN"/>
-      </modifications>
-    </ammotype>
-    
-    <ammotype id="stick_n_shock_caseless" cmult="4">
-      <modifications>
-        <itemattrmod attr="DAMAGE" val="-1"/>
-       <dmgtypemod type="STUN"/>
-      </modifications>
-    </ammotype>
-    
+	<ammotype id="explosive" cmult="2">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1"/>
+		</modifications>
+	</ammotype>
+
+	<ammotype id="flechette" cmult="1.5">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-1"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-1"/>
+		</modifications>
+	</ammotype>
+
+	<ammotype id="gel" cmult="1.5">
+		<modifications>
+			<itemmod type="RULE" ref="PHYSICAL_DAMAGE_IS_STUN"/>
+		</modifications>
+	</ammotype>
+
+	<ammotype id="stick_n_shock" cmult="2">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-1"/>
+			<itemmod type="RULE" ref="PHYSICAL_DAMAGE_IS_STUN"/>
+		</modifications>
+	</ammotype>
+
 </ammotypes>

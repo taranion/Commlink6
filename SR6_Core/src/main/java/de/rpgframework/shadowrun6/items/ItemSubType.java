@@ -112,6 +112,8 @@ public enum ItemSubType {
 	AUTOSOFT,
 	SKILLSOFT,
 	TACNET_PROGRAM,
+	ESOFT,
+	COMMLINK_APP,
 	OTHER_PROGRAMS,
 	// Accessories
 	ACCESSORY,

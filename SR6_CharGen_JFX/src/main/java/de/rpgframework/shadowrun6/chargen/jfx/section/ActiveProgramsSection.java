@@ -212,6 +212,12 @@ public class ActiveProgramsSection extends GearSection {
 //		logger.log(Level.INFO, "Stream = "+is);
 		if (is==null) {
 			logger.log(Level.ERROR, "Missing icon for program: "+file);
+//			try {
+//				throw new RuntimeException("Trace");
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			return null;
 		} else {
 			return new Image(is);

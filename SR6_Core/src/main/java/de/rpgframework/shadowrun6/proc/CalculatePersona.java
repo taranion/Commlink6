@@ -102,15 +102,15 @@ public class CalculatePersona implements ProcessingStep {
 		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX, 
 				model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()+
 				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()));
-//		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD, 
-//				model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()+
-//				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()));
-//		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT, 
-//				model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()+
-//				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()));
+		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD, 
+				model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()+
+				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()));
+		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT, 
+				model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()+
+				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()));
 		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX));
-//		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD));
-//		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT));
+		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD));
+		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT));
 		
 		// Matrix condition monitor
 		persona.setMonitor(getTechnomancerMonitorArray(model));
@@ -216,12 +216,12 @@ public class CalculatePersona implements ProcessingStep {
 		 */
 		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX));
 		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX));
-//		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD, 
-//				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()+
-//				persona.getDataProcessing().getModifiedValue()));
-//		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT, 
-//				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()+
-//				persona.getDataProcessing().getModifiedValue()));
+		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD, 
+				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()+
+				persona.getDataProcessing().getModifiedValue()));
+		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT, 
+				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()+
+				persona.getDataProcessing().getModifiedValue()));
 		
 		// Matrix condition monitor
 		persona.setMonitor(getNormalMonitorArray(persona.getDeviceRating()));

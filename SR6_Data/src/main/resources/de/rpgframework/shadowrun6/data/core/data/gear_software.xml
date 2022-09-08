@@ -2,6 +2,9 @@
 <items>
     <!-- Basic Program -->
 	<item avail="1" price="60" id="browse" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<modifications>
+			<checkmod type="ACTION" ref="matrix_search" value="1" what="EDGE" apply="CHARACTER"/>
+		</modifications>
 		<variant id="basic">
 			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
 		</variant>
@@ -16,6 +19,9 @@
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	</item> 
 	<item avail="1" price="60" id="edit" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<modifications>
+			<checkmod type="ACTION" ref="edit_file" value="1" what="EDGE" apply="CHARACTER"/>
+		</modifications>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	</item> 
 	<item avail="1" price="60" id="encryption" type="SOFTWARE" subtype="BASIC_PROGRAM">
@@ -118,6 +124,15 @@
 		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
 	</item> 
 	<item avail="1" price="500" id="evasion" type="SOFTWARE" subtype="AUTOSOFT">
+		<choices>
+			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
+	</item> 
+	<item avail="1" price="500" id="maneuvering" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
 			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
 		</choices>

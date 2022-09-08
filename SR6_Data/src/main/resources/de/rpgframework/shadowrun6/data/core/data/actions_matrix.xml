@@ -33,7 +33,7 @@
   <action cat="MATRIX" id="tarpit"         illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" iattr="ATTACK"/>
   <action cat="MATRIX" id="trace_icon"     illegal="true" skill="electronics" type="MAJOR" access="ADMIN" attr="INTUITION"/>
   <!-- Technomancer only -->
-  <action cat="MATRIX" id="compile_sprite" illegal="true" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
-  <action cat="MATRIX" id="register_sprite" illegal="true" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
-  <action cat="MATRIX" id="decompile_sprite" illegal="true" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
+  <action cat="RESONANCE" id="compile_sprite" illegal="true" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
+  <action cat="RESONANCE" id="register_sprite" illegal="true" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
+  <action cat="RESONANCE" id="decompile_sprite" illegal="true" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
 </actions>

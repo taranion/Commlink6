@@ -377,6 +377,9 @@ public class Shadowrun6Tools {
 				if (gear==null)
 					return "Unknown "+tmp.getKey();
 				return prefix+gear.getName(loc);
+			case ITEMSUBTYPE:
+				ItemSubType subtype = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				return prefix+subtype.getName();
 			case MAGIC_RESO:
 				MagicOrResonanceType morType = Shadowrun6Core.getItem(MagicOrResonanceType.class, tmp.getKey());
 				if (morType==null)
@@ -411,6 +414,7 @@ public class Shadowrun6Tools {
 //				}
 //				return master.getName(loc);
 			default:
+				System.err.println("Shadowrun6Tools: Making cleartext of "+tmp.getType()+" existance req. not supported");
 				Logging.logger.log(Level.ERROR, "Making cleartext of "+tmp.getType()+" existance req. not supported");
 			}
 		} else if (req instanceof ValueRequirement) {
@@ -1294,7 +1298,6 @@ public class Shadowrun6Tools {
 				bestSum= sum;
 			}
 		}
-		logger.log(Level.WARNING, "ToDo: getBestMatrixDF");
 		return bestDF;
 	}
 	

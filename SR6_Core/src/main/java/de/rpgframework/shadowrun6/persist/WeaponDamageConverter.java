@@ -26,12 +26,16 @@ public class WeaponDamageConverter implements StringValueConverter<Damage> {
 //			v = v.substring(0, v.length()-3).trim();
 //		}
 
-		if (v.endsWith("P"))
+		if (v.endsWith("P")) {
 			ret.setType(DamageType.PHYSICAL);
-		else if (v.endsWith("S"))
+			v = v.substring(0, v.length()-1);
+		} else if (v.endsWith("S")) {
 			ret.setType(DamageType.STUN);
-		v = v.substring(0, v.length()-1);
-
+			v = v.substring(0, v.length()-1);
+		} else {
+			ret.setType(DamageType.NO_CHANGE);			
+		}
+		
 		ret.setValue(Integer.parseInt(v.trim()));
 		return ret;
 	}

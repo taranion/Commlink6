@@ -14,7 +14,7 @@
   <action type="MAJOR" cat="OTHER"  time="INITIATIVE" id="pick_updown"/> 
   <action type="MAJOR" cat="COMBAT" time="INITIATIVE" id="ready_weapon"/> 
   <action type="MAJOR" cat="COMBAT" time="INITIATIVE" id="reload_weapon"/> 
-  <action type="MAJOR" cat="MATRIX" time="INITIATIVE" id="rigger_jump_in"/> 
+  <action type="MAJOR" cat="DRIVING" time="INITIATIVE" id="rigger_jump_in"/> 
   <action type="MAJOR" cat="POSITION" time="INITIATIVE" id="sprint"/> 
   <action type="MAJOR" cat="MAGIC"  time="INITIATIVE" id="summon_spirit"/> 
   <action type="MAJOR" cat="OTHER"  time="INITIATIVE" id="use_simple"/> 

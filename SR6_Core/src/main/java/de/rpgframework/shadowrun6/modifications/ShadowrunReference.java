@@ -38,6 +38,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -57,6 +58,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ADEPT_POWER(AdeptPower.class),
 	ALLERGY_ALLERGEN("Allergen"),
 	ALLERGY_SEVERITY("Severity"),
+	AMMUNITION_TYPE(AmmunitionType.class),
 	ATTRIBUTE(new AttributeConverter()),
 	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
 	COMPLEX_FORM(ComplexForm.class),

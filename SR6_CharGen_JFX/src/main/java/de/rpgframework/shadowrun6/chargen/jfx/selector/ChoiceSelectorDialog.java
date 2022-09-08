@@ -51,12 +51,14 @@ import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
+import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -117,7 +119,11 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
-		bxDesc  = (ctrl instanceof ISR6EquipmentController)?(new CarriedItemDescriptionPane(null, (SR6CharacterController)charCtrl )):(new GenericDescriptionVBox(null));
+		bxDesc  = (ctrl instanceof ISR6EquipmentController)
+					?
+					(new CarriedItemDescriptionPane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), (SR6CharacterController)charCtrl ))
+					:
+					(new GenericDescriptionVBox(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault())));
 		optional= new OptionalNodePane(content, bxDesc);
 		lbProblem = new Label();
 		lbProblem.setStyle("-fx-text-fill: -fx-accent");
@@ -305,6 +311,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			} else {
 				ret.add( handleITEMATTRIBUTE(item, choice));
 			}
+			break;
+		case AMMUNITION_TYPE:
+			ret.add( handleAMMUNITION_TYPE(item, choice) );
 			break;
 		case AUGMENTATION_QUALITY:
 			ret.add( handleAUGMENTATIONQUALITY(item, choice));
@@ -516,6 +525,33 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				}
 			}
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleAMMUNITION_TYPE(ComplexDataItem item, Choice choice) {
+		ChoiceBox<AmmunitionType> cbAmmoType = new ChoiceBox<>();
+		cbAmmoType.setConverter(new StringConverter<AmmunitionType>() {
+			public AmmunitionType fromString(String value) { return null;}
+			public String toString(AmmunitionType value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		cbAmmoType.getItems().addAll(Shadowrun6Core.getItemList(AmmunitionType.class));
+		Collections.sort(cbAmmoType.getItems(), new Comparator<AmmunitionType>() {
+			public int compare(AmmunitionType o1, AmmunitionType o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbAmmoType.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+			
+			updateButtons(); 
+			showHelpFor(n);
+		 });
+		content.getChildren().add(cbAmmoType);
+		
+		return cbAmmoType;
 	}
 	
 	//-------------------------------------------------------------------
