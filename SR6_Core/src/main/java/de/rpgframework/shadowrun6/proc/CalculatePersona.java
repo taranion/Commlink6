@@ -42,7 +42,7 @@ public class CalculatePersona implements ProcessingStep {
 	public List<Modification> process(List<Modification> previous) {
 		List<Modification> unprocessed = new ArrayList<>(previous);
 
-		logger.log(Level.TRACE,"START: process");
+		logger.log(Level.INFO,"START: process");
 		try {
 			// Ensure a persona is present
 			Persona persona = model.getPersona();
@@ -65,7 +65,7 @@ public class CalculatePersona implements ProcessingStep {
 				calculateNonTechnomancer(model, persona);
 			}
 		} finally {
-			logger.log(Level.TRACE,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
+			logger.log(Level.INFO,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
 		}
 		return unprocessed;
 	}

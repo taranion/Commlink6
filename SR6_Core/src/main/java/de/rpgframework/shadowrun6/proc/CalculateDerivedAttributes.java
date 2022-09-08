@@ -19,9 +19,11 @@ import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCore;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -155,19 +157,19 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			 */
 			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX);
 			val.setDistributed(0);
-//			val.clearModifications();
-//			CarriedItem bestDF = Shadowrun6Tools.getBestMatrixDF(model);
-//			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
-//				// Technomancers
-//				addNaturalModifier(val,model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(), ShadowrunAttribute.LOGIC);
-//				addNaturalModifier(val,model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ShadowrunAttribute.INTUITION);
+			val.clearModifications();
+			CarriedItem bestDF = Shadowrun6Tools.getBestMatrixDF(model);
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+				// Technomancers
+				addNaturalModifier(val,ShadowrunAttribute.LOGIC);
+				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
 //			} else if (bestDF!=null) {
 //				// With commlink
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.INITIATIVE_MATRIX, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue(), ModificationType.RELATIVE, Attribute.REACTION));
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.INITIATIVE_MATRIX, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
-//			} 
-//			logger.log(Level.DEBUG, " Base INI Matrix = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue()+" d6");
-//			// Minor actions (Matrix)
+//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, SR6ItemAttribute.INITIATIVE_MATRIX, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue(), ModificationType.RELATIVE, Attribute.REACTION));
+//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, SR6ItemAttribute.INITIATIVE_MATRIX, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
+			} 
+			logger.log(Level.DEBUG, " Base INI Matrix = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue()+" d6");
+			// Minor actions (Matrix)
 //			val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_MATRIX);
 //			val.setDistributed(1 + model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue());
 //			logger.log(Level.DEBUG, "                 = "+val.getDisplayString()+"   "+val.getModifications());
@@ -175,33 +177,33 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			/*
 			 * matrix initiative (VR, cold sim)
 			 */
-//			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD);
-//			val.setDistributed(0);
-//			val.clearModifications();
-//			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
-//				// Technomancers
-//				addNaturalModifier(val,model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(), Attribute.LOGIC);
-//				addNaturalModifier(val,model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), Attribute.INTUITION);
+			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD);
+			val.setDistributed(0);
+			val.clearModifications();
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+				// Technomancers
+				addNaturalModifier(val,ShadowrunAttribute.LOGIC);
+				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
 //			} else if (bestDF!=null) {
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.INITIATIVE_MATRIX_VR_COLD, bestDF.getAsValue(ItemAttribute.DATA_PROCESSING).getModifiedValue(), ModificationType.RELATIVE, ItemAttribute.DATA_PROCESSING));
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.INITIATIVE_MATRIX_VR_COLD, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
-//			} 
+//				addNaturalModifier(val, bestDF.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue(), ModificationType.RELATIVE, SR6ItemAttribute.DATA_PROCESSING));
+//				val.addModification(new AttributeModification(ValueType.NATURAL, ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
+			} 
 //			logger.log(Level.DEBUG, " Base INI Matrix VR = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD).getModifiedValue()+" d6");
-//
-//			/*
-//			 * matrix initiative (VR, cold sim)
-//			 */
-//			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT);
-//			val.setDistributed(0);
-//			val.clearModifications();
-//			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
-//				// Technomancers
-//				addNaturalModifier(val,model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(), Attribute.LOGIC);
-//				addNaturalModifier(val,model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), Attribute.INTUITION);
+
+			/*
+			 * matrix initiative (VR, cold sim)
+			 */
+			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT);
+			val.setDistributed(0);
+			val.clearModifications();
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+				// Technomancers
+				addNaturalModifier(val,ShadowrunAttribute.LOGIC);
+				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
 //			} else if (bestDF!=null) {
 //				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.INITIATIVE_MATRIX_VR_HOT, bestDF.getAsValue(ItemAttribute.DATA_PROCESSING).getModifiedValue(), ModificationType.RELATIVE, ItemAttribute.DATA_PROCESSING));
 //				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.INITIATIVE_MATRIX_VR_HOT, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
-//			} 
+			} 
 //			logger.log(Level.DEBUG, " Base INI Matrix VR Hot = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT).getModifiedValue()+" d6");
 
 			/*

@@ -118,14 +118,14 @@ public class Persona {
 	public String getInitiativeStringVR() {		
 		System.out.println("Attributes2 = "+attributes2);
 		return RES.format("label.ini", 
-//				attributes2.get(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD).getModifiedValue(), 
+				attributes2.get(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD).getModifiedValue(), 
 				attributes2.get(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue()+1);
 	}
 
 	//--------------------------------------------------------------------
 	public String getInitiativeStringVRHot() {		
 		return RES.format("label.ini", 
-//				attributes2.get(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT).getModifiedValue(), 
+				attributes2.get(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT).getModifiedValue(), 
 				attributes2.get(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue()+2);
 	}
 

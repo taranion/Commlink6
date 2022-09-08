@@ -87,6 +87,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			DataItemModification mod = (DataItemModification) check;
 			switch ((ShadowrunReference) mod.getReferenceType()) {
 			case ATTRIBUTE:
+			case ACTION:
 				return ApplyTo.CHARACTER;
 			case ITEM_ATTRIBUTE:
 			case HOOK:
