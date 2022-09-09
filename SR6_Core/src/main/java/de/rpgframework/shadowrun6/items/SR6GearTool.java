@@ -30,6 +30,7 @@ public class SR6GearTool extends GearTool {
 	public static CarriedItemProcessor[] SR6_PHASE1_STEPS = new CarriedItemProcessor[] {
 			new GetModificationsStep(),
 			new SR6ResolveFormulasStep(),
+			new ApplyAmmunitionTypeStep(),
 			new ApplyStockModificationsStep(),
 			new SR6ResolveTemplatesStep()
 	};

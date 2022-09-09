@@ -23,6 +23,7 @@ import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import javafx.scene.control.Label;
 
 /**
@@ -112,7 +113,7 @@ public class CombatPage extends Page {
 	//-------------------------------------------------------------------
 	private void initAmmunition() {
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = ItemUtil.AMMUNITION_FILTER;
 		secAmmo = new GearSection(
 				ResourceI18N.get(RES, "page.combat.section.ammo"), selectFilter, showFilter
 				);

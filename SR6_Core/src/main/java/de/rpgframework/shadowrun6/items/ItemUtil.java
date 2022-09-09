@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.data.ApplyTo;
@@ -19,6 +20,7 @@ import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -29,6 +31,8 @@ public class ItemUtil {
 	
 	private final static Logger logger = System.getLogger(ItemUtil.class.getPackageName());
 
+	public static Predicate<CarriedItem<ItemTemplate>> AMMUNITION_FILTER = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
+	
 	//-------------------------------------------------------------------
 	public static List<ItemTemplate> getEmbeddableIn(CarriedItem ref, ItemHook slot) {
 		List<ItemTemplate> ret = new ArrayList<>();

@@ -163,6 +163,13 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
+	public String getSelectedVariant() {
+		if (selectedVariant!=null)
+			return selectedVariant.getId();
+		return null;
+	}
+
+	//-------------------------------------------------------------------
 	private void updateButtons() {
 		logger.log(Level.WARNING, "updateButtons with "+ctrl);
 		

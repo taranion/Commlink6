@@ -36,25 +36,12 @@ public class CarriedItemItemTypeFilter implements Predicate<CarriedItem<ItemTemp
 	 */
 	@Override
 	public boolean test(CarriedItem<ItemTemplate> item) {
-		ItemTemplate temp = item.getModifyable();
-		if (temp==null) {
-			System.getLogger(CarriedItemItemTypeFilter.class.getPackageName()).log(System.Logger.Level.WARNING, "CarriedItem {0} refers to unknown item {1}", item.getUuid(), item.getKey());
-			return false;
-		}
-		SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant)item.getVariant();
+		ItemType foundType = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
 		
-		boolean hasCarryMode = temp.getUsage(mode)!=null || temp.getVariant(mode)!=null;
-		if (!hasCarryMode) return false;
+		boolean hasCarryMode = mode==null;
+		if (mode!=null && item.getCarryMode()==mode) hasCarryMode=true;
 		
-		boolean typeMatches = true;
-		if (validTypes!=null) {
-			typeMatches = (temp.getUsage(mode)!=null && validTypes.contains( temp.getItemType() ));
-			if (!typeMatches && variant!=null) {
-				if (variant.getAttribute(SR6ItemAttribute.ITEMTYPE)!=null) {
-					typeMatches = (variant.getUsage(mode)!=null && validTypes.contains(variant.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue() ));
-				}
-			}
-		}
+		boolean typeMatches = validTypes.contains(foundType);
 		
 		return hasCarryMode && typeMatches;
 	}

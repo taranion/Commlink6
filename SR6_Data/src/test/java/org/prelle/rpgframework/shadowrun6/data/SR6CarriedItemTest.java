@@ -333,4 +333,17 @@ public class SR6CarriedItemTest {
 		assertEquals(18000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void testAmmunition() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, temp.getVariant("caseless"), CarryMode.CARRIED);
+		item.addDecision(new Decision(UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3"),"apds"));
+		SR6GearTool.recalculate("", null, item);
+
+		assertNotNull("No PRICE set",item.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(30, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+	}
 }

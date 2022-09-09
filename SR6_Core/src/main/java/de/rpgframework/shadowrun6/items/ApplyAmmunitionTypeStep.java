@@ -23,14 +23,14 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class AddUpPricesStep implements CarriedItemProcessor {
+public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
 	
 	final static Logger logger = SR6GearTool.logger;
 
 	//-------------------------------------------------------------------
 	/**
 	 */
-	public AddUpPricesStep() {
+	public ApplyAmmunitionTypeStep() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -43,18 +43,37 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 			List<Modification> unprocessed) {
 
 		ItemAttributeNumericalValue<SR6ItemAttribute> attrib = model.getAsValue(SR6ItemAttribute.PRICE);
-		
-		// Add prices of accessories
-		for (CarriedItem<? extends PieceOfGear> carried : model.getAccessories()) {
-			ItemAttributeNumericalValue<SR6ItemAttribute> aVal = carried.getAsValue(SR6ItemAttribute.PRICE);
-			if (aVal==null) {
-				logger.log(Level.ERROR, "No attribute PRICE set for item "+carried.getKey()+"/"+carried.getUuid());
-				return new OperationResult<List<Modification>>();
+
+		// Apply ammunition type modifier
+		// Search choice for item type first
+		ItemTemplate item = (ItemTemplate) model.getResolved();
+		Optional<Choice> ammoTypeChoice = item.getChoices()
+			.stream()
+			.filter(c -> c.getChooseFrom()==ShadowrunReference.AMMUNITION_TYPE)
+			.findFirst();
+		if (ammoTypeChoice.isPresent()) {
+			Decision dec = model.getDecision(ammoTypeChoice.get().getUUID());
+			if (dec==null) {
+				logger.log(Level.ERROR, "Item {0} should have an ammunition type decision {1}, but there isn't one", model.getKey(), ammoTypeChoice.get().getUUID());
+			} else {
+				AmmunitionType type = Shadowrun6Core.getItem(AmmunitionType.class, dec.getValue());
+				if (type==null) {
+					logger.log(Level.ERROR, "Choice for unknown ammunition type ''{0}''", dec.getValue());
+				} else {
+					int target = (int) (attrib.getDistributed() * type.getCostMultiplier());
+					int diff = target - attrib.getDistributed();
+					logger.log(Level.DEBUG, "Ammo type ''{0}'' multiplies with {1}, therefore add {2} Nuyen", dec.getValue(), type.getCostMultiplier(), diff);
+					attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), diff) );
+					
+					if (logger.isLoggable(Level.INFO)) {
+						for (Modification mod : type.getModifications()) {
+							logger.log(Level.INFO, "Add modification "+mod);
+						}
+					}
+					unprocessed.addAll(type.getModifications());
+				}
+				
 			}
-			int cost = aVal.getModifiedValue();
-			logger.log(Level.INFO, "Increase cost by {0} from {1}", cost, carried.getKey());
-			attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), cost) );
-			
 		}
 		
 		return new OperationResult<List<Modification>>(unprocessed);

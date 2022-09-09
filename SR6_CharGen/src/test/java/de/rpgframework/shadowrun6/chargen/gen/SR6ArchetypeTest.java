@@ -1060,6 +1060,17 @@ public class SR6ArchetypeTest {
 		
 		OperationResult<CarriedItem<ItemTemplate>> ares = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_light_fire_75"));
 		assertTrue(ares.wasSuccessful());
+		ares = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine"), "cased", CarryMode.CARRIED, new Decision(UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3"), "regular") );
+		assertTrue(ares.wasSuccessful());
+		equip.increase(ares.get());
+		equip.increase(ares.get());
+		equip.increase(ares.get());
+		equip.increase(ares.get());
+		equip.increase(ares.get());
+		equip.increase(ares.get());
+		equip.increase(ares.get());
+		equip.increase(ares.get());
+		equip.increase(ares.get());
 
 		//		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "datajack"));
 ////		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"));

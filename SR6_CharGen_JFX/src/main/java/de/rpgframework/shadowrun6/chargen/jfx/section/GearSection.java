@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.chargen.jfx.section;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.Arrays;
 import java.util.List;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
@@ -28,6 +29,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.VBox;
 
@@ -109,16 +111,17 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			logger.log(Level.WARNING, "Select with decisions");
 			ItemTemplate selected = selector.getSelected();
 			OperationResult<CarriedItem<ItemTemplate>> result = null;
-			// Eventually show variant dialog
-			if (!selected.getVariants().isEmpty()) {
-				System.err.println("GearSection.onAdd: need to handle variants");
-				logger.log(Level.WARNING, "need to handle variants");
-			}
 			// Eventually show decision dialog
 			if (!selected.getChoices().isEmpty()) {
 				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(FlexibleApplication.getInstance(), control.getEquipmentController(), carry);
 				Decision[] dec = dia2.apply(selected, selected.getChoices());
-				result = control.getEquipmentController().select(selector.getSelected(), dec);
+				if (dec!=null) {
+					// Not cancelled
+					String variantID = dia2.getSelectedVariant();
+					logger.log(Level.DEBUG, "After dialog: variant   = "+variantID);
+					logger.log(Level.DEBUG, "After dialog: decisions = "+Arrays.toString(dec));
+					result = control.getEquipmentController().select(selector.getSelected(), variantID, carry, dec);
+				}
 			} else {
 				logger.log(Level.WARNING, "Select without decisions");
 				result = control.getEquipmentController().select(selector.getSelected());
@@ -162,6 +165,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	@SuppressWarnings("unchecked")
 	public void refresh() {
 //		logger.log(Level.DEBUG, "refresh");
+		logger.log(Level.WARNING, "GearSection("+getTitle()+": "+filter);
 		if (model==null) return;
 		
 		// If  a model and a filter exists, update automatically
@@ -171,6 +175,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			.stream()
 			.filter(filter)
 			.collect(Collectors.toList());
+			logger.log(Level.WARNING, "GearSection("+getTitle()+": have "+data.size()+" items");
 			list.getItems().setAll(data);
 		}
 		
