@@ -167,8 +167,8 @@ public class VehicleTools {
 	}
 
 	//---------------------------------------------------------
-	public static List<CarriedItem> getVehicleWeapons(Shadowrun6Character model, CarriedItem vehicle) {
-		List<CarriedItem> list = new ArrayList<>();
+	public static List<CarriedItem<ItemTemplate>> getVehicleWeapons(Shadowrun6Character model, CarriedItem vehicle) {
+		List<CarriedItem<ItemTemplate>> list = new ArrayList<>();
 		logger.log(Level.WARNING, "TODO: getVehicleWeapons not implemented yet");
 		// Ensure it is a drone or vehicle
 //		if (!vehicle.getItem().isType(Arrays.asList(ItemType.droneTypes())) && !vehicle.getItem().isType(ItemType.VEHICLES))

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
@@ -16,10 +18,13 @@ import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -152,7 +157,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			
 			/* Expand PACKs */
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
-				if (tmp.getModifyable().getItemType()==ItemType.PACK) {
+				if (getItemType(tmp)==ItemType.PACK) {
 					logger.log(Level.WARNING, "ToDo: handle PACK "+tmp);
 				}
 			}
@@ -170,6 +175,13 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 							tmp.getNameWithRating());
 					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 					nuyen -= cost;
+				}
+				
+				// If it is an weapon, check if ammunition is present, warn otherwise
+				if (getItemType(tmp)==ItemType.WEAPON_FIREARMS) {
+					if (Shadowrun6Tools.getAmmunitionsFor(model, tmp).isEmpty()) {
+						todos.add(new ToDoElement(Severity.INFO, IRejectReasons.RES, IRejectReasons.TODO_NO_AMMUNITION, tmp.getNameWithoutRating()));
+					}
 				}
 			}
 			model.setNuyen(nuyen);

@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -42,8 +43,10 @@ public class CalculateEssence implements ProcessingStep {
 
 			float essenceCost = 0.0f;
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-				if (Arrays.asList(ItemType.bodytechTypes()).contains(item.getResolved().getItemType())) {
-					logger.log(Level.INFO, "Test "+item.getKey()+" with "+item.getResolved().getItemType());
+				logger.log(Level.WARNING, "Item type of "+item+" is "+item.getAttributeRaw(SR6ItemAttribute.ITEMTYPE));
+				ItemType type = Shadowrun6Tools.getItemType(item);
+				if (Arrays.asList(ItemType.bodytechTypes()).contains(type)) {
+					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
 					ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
 					logger.log(Level.INFO, "  essence = "+aVal);
 					if (aVal==null) continue;

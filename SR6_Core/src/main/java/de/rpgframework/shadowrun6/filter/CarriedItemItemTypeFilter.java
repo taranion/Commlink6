@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.filter;
 
+import java.lang.System.Logger.Level;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -36,6 +37,10 @@ public class CarriedItemItemTypeFilter implements Predicate<CarriedItem<ItemTemp
 	 */
 	@Override
 	public boolean test(CarriedItem<ItemTemplate> item) {
+		if (item.getAsObject(SR6ItemAttribute.ITEMTYPE)==null) {
+			System.getLogger(CarriedItemItemTypeFilter.class.getPackageName()).log(Level.WARNING, "No ITEMTYPE in "+item.getKey());
+			return false;
+		}
 		ItemType foundType = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
 		
 		boolean hasCarryMode = mode==null;

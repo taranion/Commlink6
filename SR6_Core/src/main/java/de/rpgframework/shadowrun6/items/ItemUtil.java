@@ -81,7 +81,7 @@ public class ItemUtil {
 	
 	//-------------------------------------------------------------------
 	public static boolean isRequirementMet(CarriedItem<ItemTemplate> container, ItemTemplate item, Requirement tmp) {
-		if (tmp.getApply()!=ApplyTo.DATA_ITEM) return true;
+		if (tmp.getApply()!=ApplyTo.DATA_ITEM && !(tmp instanceof AnyRequirement)) return true;
 		if (tmp instanceof AnyRequirement) {
 			AnyRequirement req = (AnyRequirement)tmp;
 			for (Requirement part : req.getOptionList()) {
@@ -96,6 +96,10 @@ public class ItemUtil {
 			switch (type) {
 			case GEAR:
 				return container.getModifyable().getId().equals(key);
+			case ITEMTYPE:
+				return container.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue()==type.resolve(key);
+			case ITEMSUBTYPE:
+				return container.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue()==type.resolve(key);
 			default:
 				System.err.println("ItemUtil: TODO: check existence of "+req.getType());
 				logger.log(Level.ERROR, "TODO: check existence of "+req.getType());

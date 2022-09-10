@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-    <item id="ammo_arrow"  price="2" avail="1" type="AMMUNITION" subtype="BOWS" count="y">
+    <item id="ammo_arrow"  price="2" avail="1" type="AMMUNITION" subtype="BOWS" count="y" units="">
 		<choices>
 			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/>
 		</choices>
@@ -8,7 +8,7 @@
 		<attrdef id="PRICE" value="$RATING*2"/>
 		<attrdef id="AVAILABILITY" value="$RATING/3"/>
     </item>
-    <item id="ammo_injection_arrow"  price="20" avail="1" type="AMMUNITION" subtype="BOWS" count="y">
+    <item id="ammo_injection_arrow"  price="20" avail="1" type="AMMUNITION" subtype="BOWS" count="y" units="10">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/>
 		</choices>
@@ -17,10 +17,10 @@
 		<attrdef id="AVAILABILITY" value="4"/>
     </item>
 
-    <item id="ammo_bolt"          price="5" avail="2" type="AMMUNITION" subtype="CROSSBOWS" count="y" />
-    <item id="ammo_injection_bolt" price="50" avail="4" type="AMMUNITION" subtype="CROSSBOWS" count="y" />
+    <item id="ammo_bolt"          price="5" avail="2" type="AMMUNITION" subtype="CROSSBOWS" count="y" units="10"/>
+    <item id="ammo_injection_bolt" price="50" avail="4" type="AMMUNITION" subtype="CROSSBOWS" count="y" units="10"/>
 
-	<item id="ammo_holdout_light_machine" avail="1" count="y" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
+	<item id="ammo_holdout_light_machine" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
 		<choices>
 			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
 		</choices>
@@ -33,14 +33,15 @@
 				<datareq type="ITEMSUBTYPE" ref="MACHINE_PISTOLS" apply="DATA_ITEM"/>
 			</selreq>
 		</requires>
-		<variant id="cased">
-			<attrdef id="PRICE" value="5"/>
-		</variant>
 		<variant id="caseless">
 			<attrdef id="PRICE" value="10"/>
+			<requires>
+				<datareq type="ITEMFLAG" ref="USES_CASELESS" apply="DATA_ITEM"/>
+			</requires>
+			<flags><flag>USES_CASELESS</flag></flags>
 		</variant>
 	</item>
-	<item id="ammo_heavy_smg" avail="1" count="y" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
+	<item id="ammo_heavy_smg" avail="1" price="10" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
 		<choices>
 			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
 		</choices>		
@@ -51,9 +52,6 @@
 				<datareq type="ITEMSUBTYPE" ref="SUBMACHINE_GUNS" apply="DATA_ITEM"/>
 			</selreq>
 		</requires>
-		<variant id="cased">
-			<attrdef id="PRICE" value="10"/>
-		</variant>
 		<variant id="caseless">
 			<attrdef id="PRICE" value="20"/>
 		</variant>

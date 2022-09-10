@@ -43,6 +43,7 @@ import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.persist.ItemAttributeConverter;
 import de.rpgframework.shadowrun6.persist.LifestyleQualityConverter;
 import de.rpgframework.shadowrun6.persist.RuleFlagConverter;
@@ -69,6 +70,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	GEAR(ItemTemplate.class),
 	HOOK(ItemHook.class, 0),
 	ITEM_ATTRIBUTE(new ItemAttributeConverter()),
+	ITEMFLAG(SR6ItemFlag.class,0),
 	ITEMTYPE(ItemType.class,0),
 	ITEMSUBTYPE(ItemSubType.class,0),
 	LIFESTYLE(new LifestyleQualityConverter()),

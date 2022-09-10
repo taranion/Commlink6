@@ -26,6 +26,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.items.ItemHook;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
@@ -44,6 +45,16 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	//-------------------------------------------------------------------
 	public CommonEquipmentController(SR6CharacterController parent) {
 		super(parent);
+	}
+	
+	//-------------------------------------------------------------------
+	public static ItemType getItemType(CarriedItem<ItemTemplate> model) {
+		return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+	}
+	
+	//-------------------------------------------------------------------
+	public static ItemSubType getItemSubType(CarriedItem<ItemTemplate> model) {
+		return model.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
 	}
 
 	//-------------------------------------------------------------------

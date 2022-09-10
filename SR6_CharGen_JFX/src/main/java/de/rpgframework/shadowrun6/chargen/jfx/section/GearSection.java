@@ -16,6 +16,7 @@ import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.Mode;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -29,7 +30,6 @@ import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.VBox;
 
@@ -94,6 +94,17 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	}
 
 	//-------------------------------------------------------------------
+	@Override
+	protected void selectionChanged(CarriedItem<ItemTemplate> old, CarriedItem<ItemTemplate> neu) {
+		if (neu==null) {
+			btnDel.setDisable(true);
+		} else {
+			Possible possible = control.getEquipmentController().canBeDeselected(neu);
+			btnDel.setDisable( !possible.get() );
+		}
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.jfx.section.ListSection#onAdd()
 	 */
@@ -108,11 +119,11 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		CloseType closed = FlexibleApplication.getInstance().showAndWait(dialog);
 		logger.log(Level.WARNING, "closed "+closed);
 		if (closed==CloseType.OK) {
-			logger.log(Level.WARNING, "Select with decisions");
 			ItemTemplate selected = selector.getSelected();
 			OperationResult<CarriedItem<ItemTemplate>> result = null;
 			// Eventually show decision dialog
-			if (!selected.getChoices().isEmpty()) {
+			if (!selected.getChoices().isEmpty() || !selected.getVariants().isEmpty()) {
+				logger.log(Level.WARNING, "Select with choices or variants");
 				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(FlexibleApplication.getInstance(), control.getEquipmentController(), carry);
 				Decision[] dec = dia2.apply(selected, selected.getChoices());
 				if (dec!=null) {
@@ -126,12 +137,13 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 				logger.log(Level.WARNING, "Select without decisions");
 				result = control.getEquipmentController().select(selector.getSelected());
 			}
-			if (result.wasSuccessful()) {
-				logger.log(Level.WARNING, "Successful");
-				refresh();
-			} else {
-				logger.log(Level.WARNING, "Failed: "+result.getError());
-
+			if (result != null) {
+				if (result.wasSuccessful()) {
+					logger.log(Level.WARNING, "Successful");
+					refresh();
+				} else {
+					logger.log(Level.WARNING, "Failed: " + result.getError());
+				}
 			}
 		}
 	}
@@ -175,7 +187,6 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			.stream()
 			.filter(filter)
 			.collect(Collectors.toList());
-			logger.log(Level.WARNING, "GearSection("+getTitle()+": have "+data.size()+" items");
 			list.getItems().setAll(data);
 		}
 		

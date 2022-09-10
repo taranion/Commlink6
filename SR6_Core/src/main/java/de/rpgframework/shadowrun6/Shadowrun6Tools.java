@@ -9,9 +9,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -38,6 +40,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
@@ -60,12 +63,15 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
+import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -1317,5 +1323,133 @@ public class Shadowrun6Tools {
 		logger.log(Level.WARNING, "ToDo: getBestRCC");
 		return ret;
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * Get a list of all ammunitions from the inventory, that can be used
+	 * with a given weapon.
+	 * 
+	 * @param model  Character
+	 * @param weapon Weapon
+	 * @return
+	 */
+	public static List<CarriedItem<ItemTemplate>> getAmmunitionsFor(Shadowrun6Character model, CarriedItem<ItemTemplate> weapon) {
+		List<CarriedItem<ItemTemplate>> ret = new ArrayList<>();
+		boolean caseless = weapon.hasFlag(SR6ItemFlag.USES_CASELESS);
+		for (CarriedItem<ItemTemplate> ammo : model.getCarriedItems(ItemUtil.AMMUNITION_FILTER)) {
+			boolean ammoIsCaseless = ammo.getVariantID()!=null && ammo.getVariantID().equals("caseless");
+			// Determine if ammunition is allowed for this weapon
+			for (Requirement req : ammo.getRequirements()) {
+				boolean isMet = ItemUtil.isRequirementMet(weapon, ammo.getResolved(), req);
+				logger.log(Level.INFO, "Ammo "+ammo+" mets requirement = "+isMet);
+				if (isMet) {
+					// Check cased vs. caseless
+					if (caseless && ammoIsCaseless)
+						ret.add(ammo);
+					else if (!caseless && !ammoIsCaseless)
+						ret.add(ammo);
+				}
+			}
+		}
+		
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * 
+	 * @param model
+	 * @param weapon
+	 * @return
+	 */
+	public static TreeMap<AmmunitionType, Map<SR6ItemAttribute, ItemAttributeValue<SR6ItemAttribute>>> getAmmunitionTypes(Shadowrun6Character model, CarriedItem<ItemTemplate> weapon) {
+		TreeMap<AmmunitionType, Map<SR6ItemAttribute, ItemAttributeValue<SR6ItemAttribute>>> ret = new TreeMap<>();
+		for (CarriedItem<ItemTemplate> ammo : model.getCarriedItems(ItemUtil.AMMUNITION_FILTER)) {
+			// Determine if ammunition is allowed for this weapon
+		}
+		
+		return ret;
+	}
+	
+	//-------------------------------------------------------------------
+	public static ItemType getItemType(CarriedItem<ItemTemplate> model) {
+		return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+	}
+	
+	//-------------------------------------------------------------------
+	public static ItemSubType getItemSubType(CarriedItem<ItemTemplate> model) {
+		return model.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+	}
+	
+	//---------------------------------------------------------
+	public static String getAccessoryString(CarriedItem<ItemTemplate> item) {
+		class Counted {
+			CarriedItem inst;
+			int count;
+			public Counted(CarriedItem item) {
+				inst = item;
+				count=1;
+			}
+			public String toString() {
+				if (count==1) return inst.getNameWithoutRating();
+				return inst.getNameWithoutRating()+" ("+count+"x)";
+			}
+		}
+		Map<ItemTemplate, Counted> map = new LinkedHashMap<>();
+		List<String> list = new ArrayList<>();
+		item.getEffectiveAccessories().forEach( ci -> {
+			ItemSubType sub = ItemSubType.ACCESSORY;
+			if (ci!=null &&  getItemSubType(ci)!=null)
+				sub = getItemSubType(ci);
+			else {
+				if (getItemType(ci)!=null && getItemSubType(ci)!=null) {
+					sub = getItemSubType(ci);
+				} else
+					logger.log(Level.WARNING, "No subtype set for "+ci+" / "+getItemType(ci)+" / "+getItemSubType(ci));
+			}
+//			switch (sub) {
+//			case HACKING_PROGRAM:
+//			case BASIC_PROGRAM:
+//			case RIGGER_PROGRAM:
+//			case AUTOSOFT:
+//			case SKILLSOFT:
+//				break;
+//			default:
+//				// Don't print hardpoints
+//				if (ci.getItem().getId().startsWith("hardpoint"))
+//					return;
+//				if (ci.getItem().getId().startsWith("modslot_"))
+//					return;
+//				if (ci.getItem().getId().startsWith("improved_"))
+//					return;
+//				if (ci.getItem().getId().startsWith("enhanced_"))
+//					return;
+//				if (ci.getItem().getId().startsWith("weapon_mount"))
+//					return;
+				// Sum up
+				if (map.containsKey(ci.getResolved())) {
+					map.get(ci.getResolved()).count++;
+				} else {
+					map.put(ci.getResolved(), new Counted(ci));
+				}
+//			}
+		});
+		map.values().forEach(c-> list.add(c.toString()));
+		
+		String mods = String.join(", ", list);
+		return mods;
+	}
+
+//	//---------------------------------------------------------
+//	public static String getEnhancementString(CarriedItem item) {
+//		List<String> list = new ArrayList<>();
+//		item.getEnhancements().forEach( mod -> {
+//			ItemEnhancement enh = mod.getModifyable();
+//			list.add(enh.getName());
+//		});
+//		
+//		String mods = String.join(", ", list);
+//		return mods;
+//	}
 
 }

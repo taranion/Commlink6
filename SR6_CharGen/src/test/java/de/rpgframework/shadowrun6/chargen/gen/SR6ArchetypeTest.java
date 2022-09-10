@@ -50,6 +50,7 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
@@ -1060,17 +1061,21 @@ public class SR6ArchetypeTest {
 		
 		OperationResult<CarriedItem<ItemTemplate>> ares = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_light_fire_75"));
 		assertTrue(ares.wasSuccessful());
-		ares = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine"), "cased", CarryMode.CARRIED, new Decision(UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3"), "regular") );
-		assertTrue(ares.wasSuccessful());
-		equip.increase(ares.get());
-		equip.increase(ares.get());
-		equip.increase(ares.get());
-		equip.increase(ares.get());
-		equip.increase(ares.get());
-		equip.increase(ares.get());
-		equip.increase(ares.get());
-		equip.increase(ares.get());
-		equip.increase(ares.get());
+		System.exit(1);
+		OperationResult<CarriedItem<ItemTemplate>> ammo = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine"), "cased", CarryMode.CARRIED, new Decision(UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3"), "regular") );
+		assertTrue(ammo.wasSuccessful());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		ammo = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ammo_heavy_smg"), "cased", CarryMode.CARRIED, new Decision(UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3"), "regular") );
+		
+		Shadowrun6Tools.getAmmunitionsFor(model, ares.get());
 
 		//		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "datajack"));
 ////		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"));

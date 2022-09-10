@@ -26,10 +26,12 @@ import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.Usage;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -49,7 +51,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	public final static Choice CHOICE_AUGMENTATION_QUALITY = new Choice(
 			ItemTemplate.UUID_AUGMENTATION_QUALITY, 
 			ShadowrunReference.AUGMENTATION_QUALITY);
-	
+	public final static SR6PieceOfGearVariant CASELESS_FIREARM = new SR6PieceOfGearVariant("caseless", "firearm.variant.caseless");
 
 	@Attribute(name="avail",required=false)
 	@AttribConvert(AvailabilityConverter.class)
@@ -69,6 +71,12 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	
 	@Attribute(name="reqVariant")
 	private boolean requireVariant;
+	
+	//-------------------------------------------------------------------
+	static {
+		CASELESS_FIREARM.addFlags(List.of(SR6ItemFlag.USES_CASELESS.name()));
+		//CASELESS_FIREARM.addModifications(List.of(new DataItemModification(ShadowrunReference.RULE, SR6RuleFlag.CASELESS_AMMO.name())));
+	}
 
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
@@ -139,7 +147,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		if (availability!=null) 
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);
 		
-		/* If there is no USAGE assume a NORMAL mode and no slot */
+		/* If there is no USAGE assume a CARRIED mode and no slot */
 		if (usages.isEmpty()) {
 			if (requireVariant) {
 				// Ensure all variants have a USAGE mode
@@ -192,6 +200,23 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				}
 				
 			}
+		}
+		
+		// If it is a firearm, add a variant for caseless ammunition
+		// - unless a flag forbids that
+		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS) {
+			if (!flags.contains(SR6ItemFlag.NO_CASELESS_AMMO.name())) {
+				// This weapon qualifies for an added 'caseless' variant 
+				// unless it already has variants
+				if (variants==null) {
+					variants = List.of(CASELESS_FIREARM);
+				} else if (variants.isEmpty()) {
+					variants.add(CASELESS_FIREARM);
+				} else {
+					logger.log(Level.WARNING, "Would add CASELESS variant to {0}, but that weapon already has variants: {1}", id, variants);
+				}
+			}
+			
 		}
 
 		// If it has an AUGMENTATION flag, add that decision
@@ -323,11 +348,6 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		// TODO: Variant
 		
 		return ret;
-	}
-
-	//-------------------------------------------------------------------
-	public boolean requiresVariant() {
-		return requireVariant;
 	}
 
 	//-------------------------------------------------------------------
