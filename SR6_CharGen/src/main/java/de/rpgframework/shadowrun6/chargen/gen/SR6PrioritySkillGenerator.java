@@ -380,7 +380,12 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				logger.log(Level.ERROR, "Trying to increase a skill that may not be increased");
 				return new OperationResult<>(allowed);
 			}
-			
+
+			if (value.getDistributed()==0) {
+				logger.log(Level.DEBUG, "Don't increase, but select");
+				return select(value.getModifyable());
+			}
+
 			PerSkillPoints per = getPerSkill(value);
 			if (per==null) {
 				logger.log(Level.ERROR, "No PerSkillPoints found for {0}",value);
@@ -880,8 +885,8 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
 		PerSkillPoints val = settings.get(key);
 		if (val==null) {
-			logger.log(Level.ERROR, "Cannot determine points1 for not present SkillValue {0}", key);
-			return -1;
+//			logger.log(Level.ERROR, "Cannot determine points1 for not present SkillValue {0}", key);
+			return 0; //-1;
 		}
 		return val.points1;
 	}
@@ -895,8 +900,8 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
 		PerSkillPoints val = settings.get(key);
 		if (val==null) {
-			logger.log(Level.ERROR, "Cannot determine points2 for not present SkillValue {0}", key);
-			return -1;
+//			logger.log(Level.ERROR, "Cannot determine points2 for not present SkillValue {0}", key);
+			return 0;//-1;
 		}
 		return val.points2;
 	}

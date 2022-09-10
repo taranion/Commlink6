@@ -173,8 +173,6 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		if (logger.isLoggable(Level.TRACE))
 			logger.log(Level.TRACE, "ENTER increase({0})", ref);
 		try {
-			SR6Skill key = ref.getModifyable();
-			
 			Possible allowed = canBeIncreasedPoints(ref);
 			if (allowed.get()) {
 				return increasePoints(ref);
@@ -237,10 +235,11 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	@Override
 	public Possible canBeIncreasedPoints2(SR6SkillValue value) {
-		if (!model.getSkillValues().contains(value)) {
-			// Value not present in character
-			return new Possible(I18N_NOT_SELECTED);
-		}
+		// Increasing something not present, auto-selects it
+//		if (!model.getSkillValues().contains(value)) {
+//			// Value not present in character
+//			return new Possible(I18N_NOT_SELECTED);
+//		}
 		
 		// Is the new value acceptable
 		Possible allowed = wouldNewValueBeOkay(value);
@@ -268,6 +267,10 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 				return new OperationResult<>(allowed);
 			}
 
+			if (value.getDistributed()==0) {
+				logger.log(Level.DEBUG, "Don't increase, but select");
+				return select(value.getModifyable());
+			}
 			PerSkillPoints per = getPerSkill(value);
 			// Do increase
 			per.points2++;
@@ -358,6 +361,10 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 				return new OperationResult<>(allowed);
 			}
 
+			if (value.getDistributed()==0) {
+				logger.log(Level.DEBUG, "Don't increase, but select");
+				return select(value.getModifyable());
+			}
 			PerSkillPoints per = getPerSkill(value);
 			// Do increase
 			per.points1++;

@@ -3,7 +3,9 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,7 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
@@ -39,6 +42,8 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	protected List<SR6Skill> available;
 	protected List<SR6Skill> allowed;
 	protected Shadowrun6Character model;
+	
+	protected Map<SR6Skill, SR6SkillValue> mapAutoSkillValues;
 
 	//-------------------------------------------------------------------
 	public CommonSkillController(SR6CharacterController parent) {
@@ -47,6 +52,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		
 		available = new ArrayList<>();
 		allowed   = new ArrayList<>();
+		mapAutoSkillValues = new HashMap<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -67,10 +73,11 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	 */
 	@Override
 	public Possible canBeIncreased(SR6SkillValue value) {
-		if (!model.getSkillValues().contains(value)) {
-			// Value not present in character
-			return new Possible(I18N_NOT_SELECTED);
-		}
+		// Since "All Skills" view in SKillTable, this does not work anymore
+//		if (!model.getSkillValues().contains(value)) {
+//			// Value not present in character
+//			return new Possible(I18N_NOT_SELECTED);
+//		}
 		
 		return new Possible(value.getDistributed()<getMaximum(value), I18N_SKILL_IS_MAXED);
 	}
@@ -150,6 +157,33 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	@Override
 	public List<SR6SkillValue> getSelected() {
 		return model.getSkillValues();
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.ISkillController#getAll()
+	 */
+	@Override
+	public List<SR6SkillValue> getAll() {
+		List<SR6SkillValue> ret = new ArrayList<>(); 
+		for (SR6Skill key : Shadowrun6Core.getItemList(SR6Skill.class)) {
+			// Check if skill is already selected
+			SR6SkillValue sVal = model.getSkillValue(key);
+			if (sVal==null) {
+				// Check if it is already present in the map
+				sVal = mapAutoSkillValues.get(key);
+				if (sVal==null) {
+					// If not, create it - if allowed
+					if (key.isRestricted() && !allowed.contains(key))
+						continue;					
+					sVal = new SR6SkillValue(key, 0);
+					mapAutoSkillValues.put(key, sVal);
+				}
+			}
+			if (sVal!=null)
+				ret.add(sVal);
+		}
+		return ret;
 	}
 
 	//-------------------------------------------------------------------

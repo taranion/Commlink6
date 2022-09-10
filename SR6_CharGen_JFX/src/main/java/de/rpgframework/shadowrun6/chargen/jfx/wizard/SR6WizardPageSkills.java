@@ -88,6 +88,8 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 
 		table.useExpertModeProperty().bind(tsExpertMode.selectedProperty());
 		tsExpertMode.visibleProperty().bind(table.expertModeAvailableProperty());
+		
+		showAllSkillsProperty().addListener( (ov,o,n) -> refresh());
 	}
 	
 	//-------------------------------------------------------------------
