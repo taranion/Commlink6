@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item id="mems_basic_harness_standalone" avail="2" cost="300">
+         <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="0" social="0" />
+        <modifications>
+            <itemhookmod capacity="10" hook="ARMOR_MEMS"/>
+        </modifications>
+    </item>
+    <item id="ares_bug_stomper" avail="9I" cost="55000">
+    	<useas type="ARMOR" subtype="ARMOR_BODY" />
+        <armor rating="8" social="-10" />
+        <modifications>
+            <itemhookmod capacity="12" hook="ARMOR"/>
+            <itemhookmod capacity="4" hook="ARMOR_REACTIVE"/>
+        </modifications>
+    </item>
+    <item id="ballistic_mask" avail="2" cost="200">
+        <useas type="ARMOR" subtype="ARMOR_HELMET"/>
+        <armor rating="1" social="-2" add="true"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="HELMET_ACCESSORY"/>
+        </modifications>
+    </item>
+    <item id="basic_duty_cold" avail="2" cost="550">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="1" social="-2"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="cold_resistance" rating="1" included="true"/>
+        </modifications>
+    </item>
+    <item id="basic_duty_fire" avail="2" cost="550">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="1" social="-2"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="fire_resistance" rating="1" included="true"/>
+        </modifications>
+    </item>
+    <item id="basic_duty_chemical" avail="2" cost="550">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="1" social="-2"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="chemical_protection" rating="1" included="true"/>
+        </modifications>
+    </item>
+    <item id="mil_spec_armor_light" avail="9I" cost="17000">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="8" social="-6" dr="1"/>
+        <modifications>
+            <itemhookmod capacity="10" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="mil_spec_armor_medium" avail="9I" cost="22000">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="9" social="-7" dr="2"/>
+        <modifications>
+            <itemhookmod capacity="12" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="mil_spec_armor_heavy" avail="9I" cost="27000">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="10" social="-8" dr="3"/>
+        <modifications>
+            <itemhookmod capacity="14" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="mil_spec_helmet" avail="9I" cost="12000">
+        <useas type="ARMOR" subtype="ARMOR_HELMET"/>
+        <armor rating="2" social="-4" add="true"/>
+        <modifications>
+            <itemhookmod capacity="8" hook="HELMET_ACCESSORY"/>
+        </modifications>
+    </item>
+    <item id="mems_tactical_armor_vest" avail="2" cost="900">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="3" social="-2" />
+        <modifications>
+            <itemhookmod capacity="20" hook="ARMOR_MEMS"/>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="murder_armor" avail="4L" cost="5000">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="4" social="+2"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="parashield_mystic_tough" avail="6L" cost="11000">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="4" social="-2" />
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="mystic_weave" rating="2" included="true"/>
+        </modifications>
+    </item>
+    <item id="securetech_aas" avail="3" cost="500">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="1" social="-1" add="true"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="securetech_skinshield" avail="3" cost="3000">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="0"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="concealable_holster"  included="true"/>
+            <accessorymod hook="ARMOR" item="ruthenium_armor"  rating="2" included="true"/>
+        </modifications>
+    </item>
+    <item id="security_armor" avail="7L" cost="12500">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="6" social="-6" dr="1"/>
+        <modifications>
+            <itemhookmod capacity="10" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="securetech_invisishield" avail="3" cost="5000">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="0" add="true"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+        </modifications>
+    </item>
+
+	<!--  Style Armor -->
+    <item id="armante_suitdress" avail="7" cost="5000">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="+10"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="av_big_game_hunter_cold" avail="3" cost="3500">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="4" social="-4"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="cold_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_big_game_hunter_fire" avail="3" cost="3500">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="4" social="-4"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="fire_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_big_game_hunter_chemical" avail="3" cost="3500">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="4" social="-4"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="chemical_protection" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_globetrotter_cold" avail="1" cost="600">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="+1"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="cold_resistance" rating="2" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_globetrotter_fire" avail="1" cost="600">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="+1"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="fire_resistance" rating="2" included="true"/>
+        </modifications>
+    </item>
+    
+    <item id="av_rapid_transit_basic_cold" avail="1" cost="200">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="2" social="-1"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="cold_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_rapid_transit_basic_fire" avail="1" cost="200">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="2" social="-1"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="fire_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_rapid_transit_basic_chemical" avail="1" cost="200">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="2" social="-1"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="chemical_protection" rating="3" included="true"/>
+        </modifications>
+    </item>
+    
+    <item id="av_rapid_transit_elite_cold" avail="2" cost="300">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="0"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="cold_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_rapid_transit_elite_fire" avail="2" cost="300">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="0"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="fire_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_rapid_transit_elite_chemical" avail="2" cost="300">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="0"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="chemical_protection" rating="3" included="true"/>
+        </modifications>
+    </item>
+    
+    <item id="av_rapid_transit_platinum_cold" avail="2" cost="400">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="1"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="cold_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_rapid_transit_platinum_fire" avail="2" cost="400">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="1"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="fire_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_rapid_transit_platinum_chemical" avail="2" cost="400">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="1"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="chemical_protection" rating="3" included="true"/>
+        </modifications>
+    </item>
+    
+    <item id="av_rapid_transit_diamond_cold" avail="2" cost="500">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="2"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="cold_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_rapid_transit_diamond_fire" avail="2" cost="500">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="2"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="fire_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_rapid_transit_diamond_chemical" avail="2" cost="500">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="2"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="chemical_protection" rating="3" included="true"/>
+        </modifications>
+    </item>
+    
+    <item id="av_wild_hunt_cold" avail="2" cost="500">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="3" social="-2"/>
+        <modifications>
+            <itemhookmod capacity="8" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="cold_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    <item id="av_wild_hunt_fire" avail="2" cost="500">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="3" social="-2"/>
+        <modifications>
+            <itemhookmod capacity="8" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="fire_resistance" rating="3" included="true"/>
+        </modifications>
+    </item>
+    
+    <item id="cyclewear" avail="3" cost="500">
+        <useas type="ARMOR" subtype="ARMOR_BODY"/>
+        <armor rating="3" social="-5"/>
+        <modifications>
+            <itemhookmod capacity="8" hook="ARMOR"/>
+        </modifications>
+    </item>
+    
+    <item id="mortimer_greatcoats" avail="5" cost="2500">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="4" social="+4"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="mortimer_berwick_suit" avail="6" cost="2300">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="+4"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="mortimer_crimson_sky_suit" avail="6" cost="2600">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="+5"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="mortimer_summit_suit" avail="5" cost="2400">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="+4"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="nightshade_moonsilver_dress_suit" avail="6" cost="2800">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="+6"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="realeather_armor" avail="4" cost="3000">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="+5"/>
+        <modifications>
+            <itemhookmod capacity="2" hook="ARMOR"/>
+        </modifications>
+    </item>
+    
+    <item id="vi_ace_of_cups" avail="5" cost="1500">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="4" social="3"/>
+        <modifications>
+            <itemhookmod capacity="8" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="vi_ace_of_swords" avail="4" cost="1000">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="2"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="quick_draw_scabbard" included="true"/>
+        </modifications>
+    </item>
+    <item id="vi_ace_of_wands" avail="5" cost="1400">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="4"/>
+        <modifications>
+            <itemhookmod capacity="9" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="gear_access" included="true"/>
+        </modifications>
+    </item>
+    <item id="vi_ace_of_coins" avail="5" cost="2100">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="6"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+        </modifications>
+    </item>
+    <item id="vi_ace_of_spades" avail="4" cost="1100">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="3"/>
+        <modifications>
+            <itemhookmod capacity="8" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="concealable_holster" included="true"/>
+        </modifications>
+    </item>
+    <item id="vi_ace_of_clubs" avail="4" cost="1200">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="3"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="concealable_holster" included="true"/>
+        </modifications>
+    </item>
+    <item id="vi_ace_of_hearts" avail="4" cost="1300">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="4"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="concealable_holster" included="true"/>
+        </modifications>
+    </item>
+    <item id="vi_ace_of_diamonds" avail="4" cost="1400">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="4" social="3"/>
+        <modifications>
+            <itemhookmod capacity="7" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="hidden_pocket" included="true"/>
+        </modifications>
+    </item>
+    <item id="vi_steampunk" avail="4" cost="4500">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="4" social="4"/>
+        <modifications>
+            <itemhookmod capacity="10" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="renraku_sensei" included="true"/>
+        </modifications>
+    </item>
+    <item id="vi_synergist" avail="4" cost="1900">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="3"/>
+        <modifications>
+            <itemhookmod capacity="4" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="concealable_holster" included="true"/>
+        </modifications>
+    </item>
+    <item id="vi_actioneer_buisness" avail="4" cost="1500">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="2" social="2"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="concealable_holster" included="true"/>
+        </modifications>
+    </item>
+    <item id="vi_sleeping_tiger" avail="4" cost="4500">
+        <useas type="ARMOR" subtype="ARMOR_SOCIAL"/>
+        <armor rating="3" social="5"/>
+        <modifications>
+            <itemhookmod capacity="6" hook="ARMOR"/>
+            <accessorymod hook="ARMOR" item="concealable_holster"  included="true"/>
+            <accessorymod hook="ARMOR" item="electrochromic_feature" included="true"/>
+		</modifications>
+    </item>
+</items>

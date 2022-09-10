@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ammotypes>
+    <ammotype id="handloaded_ammo" cmult="1.5">
+      <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,1,1"/>
+      </modifications>
+    </ammotype>
+
+    <ammotype id="match-grade_ammo" cmult="4">
+      <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,2,3,3,2"/>
+        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-1"/>
+      </modifications>
+    </ammotype>
+    
+	<ammotype id="revo_rounds" cmult="2" wild="true">
+	  <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,-1,-1,-2,-2"/>
+        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="+1"/>
+        <itemmod type="RULE" ref="CONVERT_ONE_DIE_TO_WILD" apply="DATA_ITEM"/>
+	  </modifications>
+	</ammotype>
+</ammotypes>

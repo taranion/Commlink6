@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item id="mems_basic_harness" avail="2" cost="300">
+        <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="10" />
+        <armor rating="0" social="0" />
+        <modifications>
+            <itemhookmod capacity="20" hook="ARMOR_MEMS"/>
+        </modifications>
+    </item>
+
+   <item id="concealable_ammo_pouch" avail="2L" cost="100" multi="y">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+   </item>
+   <item id="concealable_ammo_pouch_selaed" avail="2L" cost="200" multi="y">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+   </item>
+   <item id="drag_handle" avail="2" cost="75">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+   </item>
+   <item id="gear_access" avail="2" cost="250" multi="y">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+   </item>
+   <item id="hidden_pocket" avail="2" cost="200" multi="y">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+   </item>
+   <item id="holster" avail="1" cost="50">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+   </item>
+   <item id="gel_weave" avail="6I" cost="5000" rate="true" maxrat="4" ratemul="PRICE CAPACITY DAMAGE_REDUCTION">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+      <modifications>
+          <itemattrmod attr="DAMAGE_REDUCTION" val="1"/>
+      </modifications>
+   </item>
+   <item id="mystic_weave" avail="6L" cost="10000" rate="true" maxrat="4" ratemul="PRICE CAPACITY">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+   </item>
+   <item id="programmable_camouflage" avail="2" cost="75" >
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+   </item>
+   <item id="reactive_armor_plates" avail="9I" cost="2500" rate="true" maxrat="4" ratemul="PRICE CAPACITY DAMAGE_REDUCTION" multi="y">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_REACTIVE" cap="1"/>
+      <modifications>
+          <itemattrmod attr="DAMAGE_REDUCTION" val="1"/>
+      </modifications>
+   </item>
+   <item id="ruthenium_armor" avail="8I" cost="1500" rate="true" maxrat="4" ratemul="PRICE">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="6"/>
+   </item>
+   <item id="shockweave" avail="3L" cost="1000" rate="true" maxrat="6" ratemul="PRICE">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="4"/>
+   </item>
+   <item id="thermal_dissipation" avail="2" cost="250" rate="true" maxrat="2" ratemul="PRICE">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+   </item>
+   <item id="toughweave" avail="9I" cost="15000" rate="true" maxrat="3" ratemul="PRICE CAPACITY DAMAGE_REDUCTION">
+      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+      <modifications>
+          <itemattrmod attr="DAMAGE_REDUCTION" val="1"/>
+      </modifications>
+   </item>
+</items>
