@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <!-- p.65 Underbarrel weapon attachment mount -->
+   <item id="under_shotgun" avail="3I" cost="350" modslot="0" >
+     <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER_WEAPON_MOUNT"/>
+      <weapon dmg="4P" attack="6,10,5,," mode="SS" ammo="5(m)" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+   <item id="under_grenade_launcher" avail="4I" cost="1350" modslot="0" >
+     <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER_WEAPON_MOUNT"/>
+      <weapon dmg="0P" attack="4,9,7,2," mode="SS" ammo="5(m)" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+   </item>
+   <item id="under_micro_combat_chainsaw" avail="3I" cost="900" modslot="0" >
+     <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER_WEAPON_MOUNT"/>
+      <weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/chainsaws" />
+   </item>
+   <item id="under_micro_bolo_launcher" avail="3I" cost="800" modslot="0" >
+     <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER_WEAPON_MOUNT"/>
+      <weapon dmg="4S" attack="7,9,,," mode="SS" ammo="2" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+   </item>
+   <item id="under_grapple_gun_launcher" avail="2" cost="200" modslot="0" >
+     <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER_WEAPON_MOUNT"/>
+      <weapon dmg="0S" attack="2,4,8,," mode="SS" ammo="1" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+   </item>
+   <!-- p.60 Weapon security system -->
+   <item id="wss_ap_spikes" avail="3I" cost="100">
+     <useas type="ACCESSORY" subtype="WEAPON_SECURITY" slot="WEAPON_SECURITY"/>
+      <weapon dmg="3P" attack="5,,,," skill="close_combat" spec="close_combat/unarmed"/>
+   </item>
+   <item id="wss_taser_shock" avail="3L" cost="150">
+     <useas type="ACCESSORY" subtype="WEAPON_SECURITY" slot="WEAPON_SECURITY"/>
+      <weapon dmg="4S" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
+   </item>
+   <item id="wss_explosive" avail="4I" cost="200">
+     <useas type="ACCESSORY" subtype="WEAPON_SECURITY" slot="WEAPON_SECURITY"/>
+      <weapon dmg="10P" attack=",,,," skill="close_combat" spec="close_combat/unarmed"/>
+   </item>
+   <item id="wss_rfid_tracker" avail="2" cost="75">
+     <useas type="ACCESSORY" subtype="WEAPON_SECURITY" slot="WEAPON_SECURITY"/>
+   </item>
+   
+</items>
