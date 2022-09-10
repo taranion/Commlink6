@@ -1,7 +1,11 @@
 package de.rpgframework.shadowrun6.data;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,6 +22,7 @@ import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.items.AlternateUsage;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.IUsageMode;
@@ -66,12 +71,15 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.SR6SpellList;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.SkillList;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.AmmunitionTypeList;
 import de.rpgframework.shadowrun6.items.ItemHook;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemTemplateList;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6AlternateUsage;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
@@ -218,8 +226,13 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" rule presets");
 
+			logger.log(Level.INFO, "START -------------------------------FIRING_SQUAD---------------------------------------");
+			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FSQUAD", "firing_squad.i18n", Locale.ENGLISH);
+			list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, core, clazz,"core/data/ammunition_types.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
-			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH);
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH);
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities-metagenetic.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" metagenic qualities");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities-infected.xml");
@@ -273,6 +286,61 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.ERROR, "Failed loading data",e);
 			System.exit(1);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	public static byte[] getPlaceholderGraphic(CarriedItem<ItemTemplate> item) {
+		List<String> filenames = new ArrayList<>();
+		// Build possible filenames
+		if (item.getResolved()!=null) {
+			filenames.add(item.getResolved().getId()+".png");
+			filenames.add(item.getResolved().getId()+".jpg");
+		}
+		ItemType type = Shadowrun6Tools.getItemType(item);
+		ItemSubType subtype = Shadowrun6Tools.getItemSubType(item);
+		filenames.add(type+"_"+subtype+".png");
+		filenames.add(type+"_"+subtype+".jpg");
+		filenames.add(type+".png");
+		filenames.add(type+".jpg");
+		// See which image is available
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		for (String file : filenames) {
+			InputStream ins = clazz.getResourceAsStream("placeholder/"+file);
+			if (ins!=null) {
+				try {
+					return ins.readAllBytes();
+				} catch (IOException e) {
+					logger.log(Level.ERROR ,"Failed accessing resource "+file+": "+e);
+				}
+			}
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	public static URL getPlaceholderGraphicURL(CarriedItem<ItemTemplate> item) {
+		List<String> filenames = new ArrayList<>();
+		// Build possible filenames
+		if (item.getResolved()!=null) {
+			filenames.add(item.getResolved().getId()+".png");
+			filenames.add(item.getResolved().getId()+".jpg");
+		}
+		ItemType type = Shadowrun6Tools.getItemType(item);
+		ItemSubType subtype = Shadowrun6Tools.getItemSubType(item);
+		filenames.add(type+"_"+subtype+".png");
+		filenames.add(type+"_"+subtype+".jpg");
+		filenames.add(type+".png");
+		filenames.add(type+".jpg");
+		// See which image is available
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		for (String file : filenames) {
+			logger.log(Level.ERROR, "Check "+file);
+			URL ins = clazz.getResource("placeholder/"+file);
+			if (ins!=null) {
+				return ins;
+			}
+		}
+		return null;
 	}
 	
 }
