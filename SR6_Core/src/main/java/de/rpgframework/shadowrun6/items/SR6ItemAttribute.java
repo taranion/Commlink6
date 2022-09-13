@@ -50,6 +50,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	DEVICE_RATING,
 	ESSENCECOST(new FloatConverter()),
 	FIREMODES,
+	FORCE,
 	HANDLING,
 //	HAS_RATING,
 	/* For accessories: Where to attach it */

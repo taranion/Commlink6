@@ -1,9 +1,12 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.chargen.Rule;
+import de.rpgframework.genericrpg.chargen.Rule.EffectOn;
 import de.rpgframework.shadowrun.chargen.charctrl.ShadowrunRules;
 
 /**
@@ -31,32 +34,31 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 		}
 	}
 	
-	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule("CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
-	public static Rule CHARGEN_PRIO_ADEPT_PP    = new Rule("CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.PRIO_MAGIC);
-	public static Rule CHARGEN_ALLOW_LEGAL_AVAIL7PLUS = new Rule("CHARGEN_ALLOW_LEGAL_AVAIL7PLUS", Rule.Type.BOOLEAN, RES, "false");
-	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule("CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
-	public static Rule ALLOW_TRANSHUMANISM      = new Rule("ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
-	public static Rule CHARGEN_EXTENDED_CONTACT = new Rule("CHARGEN_EXTENDED_CONTACT", Rule.Type.BOOLEAN, RES, "false");
-	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule("MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
+	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule(EffectOn.CHARGEN,"CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule CHARGEN_PRIO_ADEPT_PP    = new Rule(EffectOn.CHARGEN,"CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.PRIO_MAGIC);
+	public static Rule CHARGEN_ALLOW_LEGAL_AVAIL7PLUS = new Rule(EffectOn.CHARGEN,"CHARGEN_ALLOW_LEGAL_AVAIL7PLUS", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule(EffectOn.CHARGEN,"CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule ALLOW_TRANSHUMANISM      = new Rule(EffectOn.COMMON,"ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule CHARGEN_EXTENDED_CONTACT = new Rule(EffectOn.COMMON,"CHARGEN_EXTENDED_CONTACT", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule(EffectOn.COMMON,"MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
 
 	
 	//-------------------------------------------------------------------
 	public static Rule[] values() {
-		return new Rule[] {
-				CHARGEN_ALLOW_INITIATION,
-				CHARGEN_MAX_KARMA_REMAIN,
-				CHARGEN_MAX_NUYEN_REMAIN,
-				CAREER_PAY_GEAR,
-				IGNORE_GEAR_REQUIREMENTS,
-				
+		Rule[] sr6 = new Rule[] {
 				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
 				CHARGEN_PRIO_ADEPT_PP,
 				CHARGEN_BUY_SPELLS_KARMA,
 				CHARGEN_ALLOW_LEGAL_AVAIL7PLUS,
 				ALLOW_TRANSHUMANISM,
 				CHARGEN_EXTENDED_CONTACT,
-				CHARGEN_NEGATIVE_NUYEN,
+				MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP,							
 		};
+		
+		List<Rule> merged = new ArrayList<>();
+		merged.addAll(List.of(ShadowrunRules.values()));
+		merged.addAll(List.of(sr6));
+		return merged.toArray(new Rule[merged.size()]);
 	}
 	
 	//-------------------------------------------------------------------

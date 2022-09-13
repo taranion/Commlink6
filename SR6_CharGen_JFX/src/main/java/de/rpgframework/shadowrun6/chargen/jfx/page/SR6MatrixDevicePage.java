@@ -1,4 +1,4 @@
-package de.rpgframework.shadlexowrun6.chargen.jfx.page;
+package de.rpgframework.shadowrun6.chargen.jfx.page;
 
 import java.io.InputStream;
 import java.lang.System.Logger;

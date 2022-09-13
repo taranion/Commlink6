@@ -1,10 +1,16 @@
 package de.rpgframework.shadowrun6.items;
 
+import java.util.Locale;
+
+import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.genericrpg.items.ItemFlag;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+
 /**
  * @author prelle
  *
  */
-public enum SR6ItemFlag {
+public enum SR6ItemFlag implements ItemFlag {
 
 	// Item is subject to augmentation quality changes
 	AUGMENTATION,
@@ -14,7 +20,32 @@ public enum SR6ItemFlag {
 	NO_CASELESS_AMMO,
 	// This weapon uses caseless ammunition
 	USES_CASELESS,
+	// Power Plays
+	CHEAP_KNOCK_OFF,
 	// From the dice pool, convert one die to a wild die
 	CONVERT_ONE_DIE_TO_WILD,
+	;
+	
+	
+	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.items.ItemFlag#getName()
+	 */
+	@Override
+	public String getName() {
+		return getName(Locale.getDefault());
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.items.ItemFlag#getName(java.util.Locale)
+	 */
+	@Override
+	public String getName(Locale loc) {
+		return RES.getString("itemflag."+this.name().toLowerCase(), loc);
+	}
+
 	
 }

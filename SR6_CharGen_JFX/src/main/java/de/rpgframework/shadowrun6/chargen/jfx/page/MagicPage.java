@@ -13,12 +13,16 @@ import org.prelle.javafx.layout.FlexGridPane;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun.Focus;
+import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.chargen.jfx.pane.SpellDescriptionPane;
+import de.rpgframework.shadowrun.chargen.jfx.section.FocusSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.RitualSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.SpellSection;
@@ -27,6 +31,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AdeptPowerSection;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.scene.control.Label;
 
 /**
@@ -39,10 +44,13 @@ public class MagicPage extends Page {
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 	
+	private SR6CharacterController control;
+	
 	private AdeptPowerSection secAdeptPowers;
 	private SpellSection<SR6Spell> secSpells;
 	private MetamagicOrEchoSection secMeta;
 	private RitualSection secRituals;
+	private FocusSection secFoci;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -61,6 +69,7 @@ public class MagicPage extends Page {
 		initSpells();
 		initMetamagic();
 		initRituals();
+		initFoci();
 	}
 	
 	//-------------------------------------------------------------------
@@ -114,11 +123,28 @@ public class MagicPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
+	private void initFoci() {
+		secFoci = new FocusSection() {
+			@Override
+			protected Decision[] requestUserDecisions(Focus value) {
+				logger.log(Level.DEBUG, "Present choice dialog");
+				ChoiceSelectorDialog<Focus, FocusValue> dialog = new ChoiceSelectorDialog<>(control.getFocusController());
+				Decision[] dec = dialog.apply(value, value.getChoices());
+				return null;
+			}};
+		secFoci.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secFoci, 4);
+		FlexGridPane.setMinHeight(secFoci, 6);
+		FlexGridPane.setMediumWidth(secFoci, 5);
+		FlexGridPane.setMediumHeight(secFoci, 8);
+	}
+	
+	//-------------------------------------------------------------------
 	private void initLayout() {
 		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secAdeptPowers, secSpells, secMeta, secRituals);
+		flex.getChildren().addAll(secAdeptPowers, secSpells, secMeta, secRituals, secFoci);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -139,6 +165,7 @@ public class MagicPage extends Page {
 		secAdeptPowers.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secMeta.showHelpForProperty().addListener( (ov,o,n) -> showDescription((MetamagicOrEchoValue)n));
 		secRituals.showHelpForProperty().addListener( (ov,o,n) -> showDescription((RitualValue)n));
+		secFoci.showHelpForProperty().addListener( (ov,o,n) -> showDescription((FocusValue)n));
 	}
 
 	//-------------------------------------------------------------------
@@ -157,11 +184,13 @@ public class MagicPage extends Page {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
+		this.control = ctrl;
 		
 		secAdeptPowers.updateController(ctrl);
 		secSpells.updateController(ctrl);
 		secMeta.updateController(ctrl);
 		secRituals.updateController(ctrl);
+		secFoci.updateController(ctrl);
 		refresh();
 	}
 	
@@ -170,6 +199,8 @@ public class MagicPage extends Page {
 		secAdeptPowers.refresh();
 		secSpells.refresh();
 		secMeta.refresh();
+		secRituals.refresh();
+		secFoci.refresh();
 	}
 
 }

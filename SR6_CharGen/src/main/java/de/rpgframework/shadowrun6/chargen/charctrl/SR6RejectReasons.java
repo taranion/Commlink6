@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 
 /**
@@ -20,5 +21,11 @@ public interface SR6RejectReasons extends IRejectReasons {
 	
 	public final static String TODO_QUALITY_TOO_MANY     = "impossible.tooManyQualities";
 	public final static String TODO_QUALITY_KARMAGAIN    = "impossible.gainedMoreThan20Karma";
+	// Cannot bind more foci than MAGIC
+	public final static String IMPOSS_TOO_MANY_FOCI      = "impossible.cannotBindMoreFoci";
+	// Force of focus may not be higher than MAGIC
+	public final static String IMPOSS_FOCUS_EXCEEDS_MAGIC= "impossible.focusExceedsMagic";
+	// Sum of force of all foci exceeds MAGICx5
+	public final static String IMPOSS_SUM_FORCE_EXCEEDS_MAX= "impossible.sumForceExceedsMax";
 
 }

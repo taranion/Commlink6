@@ -4,7 +4,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.genericrpg.requirements.Requirement;
@@ -34,7 +33,7 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 	protected void initComponents() {
 		super.initComponents();
 		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
-		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), charGen.getQualityController()));
+		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getQualityController()));
 		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
 		
 		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());

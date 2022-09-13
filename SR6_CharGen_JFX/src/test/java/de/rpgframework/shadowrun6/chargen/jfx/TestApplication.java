@@ -99,7 +99,7 @@ public class TestApplication extends FlexibleApplication {
 			System.exit(0);
 		
 		ItemTemplate item = selector.getSelected();
-		ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dialog2 = new ChoiceSelectorDialog<>(getInstance(), chargen.getEquipmentController(), CarryMode.IMPLANTED);
+		ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dialog2 = new ChoiceSelectorDialog<>(chargen.getEquipmentController(), CarryMode.IMPLANTED);
 		dialog2.apply(item, item.getChoices());
 		closed = FlexibleApplication.getInstance().showAndWait(dialog2);
 		if (closed==CloseType.CANCEL)

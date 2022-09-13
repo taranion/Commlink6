@@ -18,7 +18,9 @@ import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
+import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
@@ -131,6 +133,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		sins      = new SR6SINGenerator(this);
 		lifestyles= new SR6LifestyleGenerator(this);
 		contacts  = new SR6ContactGenerator(this);
+		foci      = new SR6CommonFocusController(this);
+		qPaths    = new CommonQualityPathController(this);
 	}
 
 	// --------------------------------------------------------------------
@@ -152,6 +156,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(meta);
 			processChain.add(magicReso);
 			processChain.add(qualities);
+			processChain.add(qPaths);
 			processChain.add(attributes);
 			processChain.add(skills);
 			processChain.add(spells);
@@ -159,6 +164,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(adeptPowers);
 			processChain.add(new GetModificationsFromGear(model));
 			processChain.add(equipment);
+			processChain.add(foci);
 			processChain.add(complex);
 			processChain.add(metaEcho);
 			processChain.add(sins);

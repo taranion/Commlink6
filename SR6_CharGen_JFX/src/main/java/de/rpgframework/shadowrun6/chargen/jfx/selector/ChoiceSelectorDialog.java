@@ -43,9 +43,13 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.Spirit;
+import de.rpgframework.shadowrun.Sprite;
+import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -54,19 +58,20 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
-import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.FocusValueDescriptionPane;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -83,7 +88,6 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	
 	private final static Logger logger = System.getLogger(ChoiceSelectorDialog.class.getPackageName());
 
-	private FlexibleApplication app;
 	private ComplexDataItemController<T,V> ctrl;
 	/* Only relevant for ItemTemplates */
 	private CarryMode carry;
@@ -98,6 +102,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private SR6PieceOfGearVariant selectedVariant;
 	private List<Choice> choices;
 	private Map<Choice, Decision> decisions = new LinkedHashMap<>();
+	private List<SR6ItemFlag> selectedFlasgs = new ArrayList<>();
 	
 	private List<Node> toDeleteOnMentorSpirit = new ArrayList<>();
 	/** Choice to reflect the decision of the player to use the magician or adept advantages */
@@ -106,24 +111,28 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private BooleanProperty useBothAdvantages = new SimpleBooleanProperty(false);
 	
 	//-------------------------------------------------------------------
-	public ChoiceSelectorDialog(FlexibleApplication app, ComplexDataItemController<T,V> ctrl) {
-		this(app, ctrl, null);
+	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl) {
+		this(ctrl, null);
 	}
 	
 	//-------------------------------------------------------------------
-	public ChoiceSelectorDialog(FlexibleApplication app, ComplexDataItemController<T,V> ctrl, CarryMode carry) {
+	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl, CarryMode carry) {
 		super("Select",null, CloseType.CANCEL, CloseType.OK);
-		this.app = app;
 		this.ctrl = ctrl;
 		this.carry = carry;
 		
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
-		bxDesc  = (ctrl instanceof ISR6EquipmentController)
-					?
-					(new CarriedItemDescriptionPane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), (SR6CharacterController)charCtrl ))
-					:
-					(new GenericDescriptionVBox(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault())));
+		if (ctrl instanceof ISR6EquipmentController) {
+			logger.log(Level.INFO, "Use special info pane for CarriedItem");
+			bxDesc = new CarriedItemDescriptionPane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), (SR6CharacterController)charCtrl );
+		} else if (ctrl instanceof IFocusController) {
+			logger.log(Level.INFO, "Use special info pane for FocusValue");
+			bxDesc = new FocusValueDescriptionPane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), (SR6CharacterController)charCtrl );
+		} else {
+			logger.log(Level.INFO, "Use generic description pane");
+			bxDesc = new GenericDescriptionVBox(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		}
 		optional= new OptionalNodePane(content, bxDesc);
 		lbProblem = new Label();
 		lbProblem.setStyle("-fx-text-fill: -fx-accent");
@@ -137,6 +146,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	private void showHelpFor(DataItem item) {
+		System.err.println("ChoiceSelector: showHelpFor("+item.getId()+") on "+bxDesc);
 		bxDesc.setData(item);
 		optional.setTitle(item.getName());
 	}
@@ -198,10 +208,11 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		if (item instanceof ItemTemplate && ctrl instanceof ISR6EquipmentController) {
 			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
 			possible = ((ISR6EquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, carry, getDecisions() );
+			logger.log(Level.INFO, "canBeSelected({0}) returns "+possible, carry);
 		} else {
 			possible = ctrl.canBeSelected(item, getDecisions() );
+			logger.log(Level.INFO, "canBeSelected() returns "+possible);
 		}
-		logger.log(Level.INFO, "canBeSelected({0}) returns "+possible, carry);
 		// Set status
 		ToDoElement problem = possible.getMostSevere();
 		if (problem==null) {
@@ -257,14 +268,22 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 			
 			for (Choice choice : choices) {
-				processChoice(item,choice, null);
+				String forceTitle = null;
+				if (choice.getUUID().equals(ItemTemplate.UUID_RATING)) forceTitle=ResourceI18N.get(RES, "label.rating");
+				processChoice(item,choice, forceTitle);
+			}
+			
+			if (item instanceof ItemTemplate) {
+				for (SR6ItemFlag flag : item.getUserSelectableFlags(SR6ItemFlag.class)) {
+					processFlag((ItemTemplate) item, flag);
+				}
 			}
 
 			btnCtrl = new NavigButtonControl();
-			btnCtrl.initialize(app, this);
+			btnCtrl.initialize(FlexibleApplication.getInstance(), this);
 			btnCtrl.setDisabled(CloseType.OK, true);
 			updateButtons();
-			closed = app.showAlertAndCall(this, btnCtrl);
+			closed = FlexibleApplication.getInstance().showAlertAndCall(this, btnCtrl);
 			logger.log(Level.DEBUG, "Closed with "+closed);
 			if (closed==CloseType.CANCEL)
 				return null;
@@ -296,6 +315,24 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	// -------------------------------------------------------------------
+	private void processFlag(ItemTemplate item, SR6ItemFlag flag) {
+		logger.log(Level.DEBUG, "Flag "+flag);
+		System.err.println("ChoiceSelectorDialog: Flag "+flag);
+		CheckBox checkBox = new CheckBox(flag.getName());
+		checkBox.selectedProperty().addListener( (ov,o,n) -> {
+			if (n) {
+				logger.log(Level.DEBUG, "Selected flag {0}", n);
+				selectedFlasgs.add(flag);
+			} else {
+				logger.log(Level.DEBUG, "Deselected flag {0} again", n);
+				selectedFlasgs.remove(flag);
+			}
+			updateButtons(); 
+		 });
+		content.getChildren().add(checkBox);
+	}
+
+	// -------------------------------------------------------------------
 	private List<Node>  processChoice(ComplexDataItem item, Choice choice, String forceTitle) {
 		logger.log(Level.DEBUG, "Choice " + choice);
 		List<Node> ret = new ArrayList<>();
@@ -308,6 +345,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				forceTitle)
 				);
 		switch ((ShadowrunReference) choice.getChooseFrom()) {
+		case ADEPT_POWER:
+			ret.add( handleGeneric(item, choice, AdeptPower.class));
+			break;
 		case ATTRIBUTE:
 			ret.add( handleATTRIBUTE(item, choice));
 			break;
@@ -330,6 +370,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			break;
 		case SKILL:
 			ret.add( handleSKILL(item, choice) );
+			break;
+		case SPIRIT:
+			ret.add( handleGeneric(item, choice, Spirit.class));
+			break;
+		case SPRITE:
+			ret.add( handleGeneric(item, choice, Sprite.class));
 			break;
 		case SUBSELECT:
 			ret.add( handleSUBSELECT(item, choice) );
@@ -532,6 +578,33 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				}
 			}
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private <T extends DataItem> Node handleGeneric(ComplexDataItem item, Choice choice, Class<T> cls) {
+		ChoiceBox<T> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<T>() {
+			public T fromString(String value) { return null;}
+			public String toString(T value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		choicebox.getItems().addAll(Shadowrun6Core.getItemList(cls));
+		Collections.sort(choicebox.getItems(), new Comparator<T>() {
+			public int compare(T o1, T o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+			
+			updateButtons(); 
+			showHelpFor(n);
+		 });
+		content.getChildren().add(choicebox);
+		
+		return choicebox;
 	}
 
 	//-------------------------------------------------------------------

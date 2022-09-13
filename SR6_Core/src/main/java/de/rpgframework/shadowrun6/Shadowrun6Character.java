@@ -37,6 +37,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	private int heat;
 	@ElementList(entry="lifestyle", type = SR6Lifestyle.class, inline = false)
 	private List<SR6Lifestyle> lifestyles;
+	@ElementList(entry="qpath", type = QualityPathValue.class, inline = false)
+	private List<QualityPathValue> qpaths;
 	
 	private transient Persona persona;
 	
@@ -44,6 +46,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	public Shadowrun6Character() {
 		gender = Gender.MALE;
 		lifestyles = new ArrayList<>();
+		qpaths = new ArrayList<>();
 		
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			attributes.add(new AttributeValue<ShadowrunAttribute>(key, 1));
@@ -199,6 +202,22 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	 */
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	//-------------------------------------------------------------------
+	public List<QualityPathValue> getQualityPaths() {
+		return qpaths;
+	}
+
+	//-------------------------------------------------------------------
+	public void addQualityPath(QualityPathValue value) {
+		if (!qpaths.contains(value))
+			qpaths.add(value);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeQualityPath(QualityPathValue value) {
+		qpaths.remove(value);
 	}
 
 }

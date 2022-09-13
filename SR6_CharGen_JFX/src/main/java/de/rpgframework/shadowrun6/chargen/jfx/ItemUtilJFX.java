@@ -23,6 +23,7 @@ import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.Usage;
+import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
@@ -64,7 +65,7 @@ public class ItemUtilJFX {
 		ItemAttributeValue<?> raw = carried.getAttributeRaw(attrib);
 		if (raw==null)
 			return;
-		logger.log(Level.WARNING, "addColumn("+attrib+") = "+raw);
+//		logger.log(Level.WARNING, "addColumn("+attrib+") = "+raw);
 		
 		int x = table.getColumnCount();
 		Label header  = new Label(attrib.getShortName());
@@ -78,6 +79,22 @@ public class ItemUtilJFX {
 		Label value= getItemAttributeLabel(carried, attrib);
 		table.add(value, x, 1);
 		GridPane.setHalignment(value, HPos.CENTER);
+	}
+
+	//-------------------------------------------------------------------
+	private static void addColumn(GridPane table, String title, String value, int width) {
+		int x = table.getColumnCount();
+		Label header  = new Label(title);
+		header.getStyleClass().add("table-head");
+		header.setMaxWidth(Double.MAX_VALUE);
+		header.setAlignment(Pos.CENTER);
+
+		table.getColumnConstraints().add(new ColumnConstraints(width));
+		table.add(header, x, 0);
+		
+		Label value2= new Label(value);
+		table.add(value2, x, 1);
+		GridPane.setHalignment(value2, HPos.CENTER);
 	}
 
 	//-------------------------------------------------------------------
@@ -131,6 +148,27 @@ public class ItemUtilJFX {
 		
 		box.getChildren().add(table);
 		box.getChildren().add(getAccessoryInfoNode(item, ctrl, detailed));
+
+		return box;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param detailed Include augmentation, price and availability
+	 */
+	public static Node getItemInfoNode(FocusValue item, SR6CharacterController ctrl) {
+		logger.log(Level.WARNING, "create InfoNode for "+item);
+		
+		GridPane table = new GridPane();
+		// Weapons
+		addColumn(table, ResourceI18N.get(UI, "label.karma"), String.valueOf(item.getCostKarma()), 90);
+		addColumn(table, ResourceI18N.get(UI, "label.nuyen"), String.valueOf(item.getCostNuyen()+" \u00A5"), 90);
+		
+		VBox box = new VBox(10);
+		box.setStyle("-fx-spacing:0.5em; ");
+		box.setMaxWidth(Double.MAX_VALUE);
+		
+		box.getChildren().add(table);
 
 		return box;
 	}

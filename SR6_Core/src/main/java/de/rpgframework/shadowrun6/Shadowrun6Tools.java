@@ -61,6 +61,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellValue;
+import de.rpgframework.shadowrun.proc.GetModificationsFromFoci;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
@@ -108,7 +109,7 @@ public class Shadowrun6Tools {
 //		new FixOldWeaponType(),
 		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),
-//		new GetModificationsFromFoci(),
+		GetModificationsFromFoci.class,
 //		new ApplyAdeptPowerModifications(),
 		ApplyModificationsGeneric.class,
 //		new GetModificationsFromPowers(),
@@ -465,6 +466,12 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve qualities");
 			for (QualityValue tmp : model.getQualities()) {
 				Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+
+			logger.log(Level.DEBUG, "resolve quality paths");
+			for (QualityPathValue tmp : model.getQualityPaths()) {
+				QualityPath resolved = Shadowrun6Core.getItem(QualityPath.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 

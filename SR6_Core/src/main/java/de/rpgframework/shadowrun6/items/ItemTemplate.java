@@ -51,7 +51,6 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	public final static Choice CHOICE_AUGMENTATION_QUALITY = new Choice(
 			ItemTemplate.UUID_AUGMENTATION_QUALITY, 
 			ShadowrunReference.AUGMENTATION_QUALITY);
-	public final static SR6PieceOfGearVariant CASELESS_FIREARM = new SR6PieceOfGearVariant("caseless", "firearm.variant.caseless");
 
 	@Attribute(name="avail",required=false)
 	@AttribConvert(AvailabilityConverter.class)
@@ -71,12 +70,6 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	
 	@Attribute(name="reqVariant")
 	private boolean requireVariant;
-	
-	//-------------------------------------------------------------------
-	static {
-		CASELESS_FIREARM.addFlags(List.of(SR6ItemFlag.USES_CASELESS.name()));
-		//CASELESS_FIREARM.addModifications(List.of(new DataItemModification(ShadowrunReference.RULE, SR6RuleFlag.CASELESS_AMMO.name())));
-	}
 
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
@@ -202,19 +195,12 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			}
 		}
 		
-		// If it is a firearm, add a variant for caseless ammunition
-		// - unless a flag forbids that
+		// If it is a firearm, mark it that the user may select to use caseless 
+		// ammo with it
 		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS) {
 			if (!flags.contains(SR6ItemFlag.NO_CASELESS_AMMO.name())) {
-				// This weapon qualifies for an added 'caseless' variant 
-				// unless it already has variants
-				if (variants==null) {
-					variants = List.of(CASELESS_FIREARM);
-				} else if (variants.isEmpty()) {
-					variants.add(CASELESS_FIREARM);
-				} else {
-					logger.log(Level.WARNING, "Would add CASELESS variant to {0}, but that weapon already has variants: {1}", id, variants);
-				}
+				addUserSelectableFlag(SR6ItemFlag.USES_CASELESS);
+				addUserSelectableFlag(SR6ItemFlag.CHEAP_KNOCK_OFF);
 			}
 			
 		}

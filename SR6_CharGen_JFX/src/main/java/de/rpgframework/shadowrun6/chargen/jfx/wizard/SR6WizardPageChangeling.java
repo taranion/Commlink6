@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
@@ -86,7 +85,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 					}}, 
 				null, true));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
-		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), selection.getController()));
+		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
 		
 		bxDescription = new GenericDescriptionVBox(requirementResolver);
 	}

@@ -37,6 +37,8 @@ import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormList;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerList;
+import de.rpgframework.shadowrun.Focus;
+import de.rpgframework.shadowrun.FocusList;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.LifestyleQualityList;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -61,6 +63,8 @@ import de.rpgframework.shadowrun.TraditionList;
 import de.rpgframework.shadowrun6.ActionList;
 import de.rpgframework.shadowrun6.MetaTypeList;
 import de.rpgframework.shadowrun6.NPCList;
+import de.rpgframework.shadowrun6.QualityPath;
+import de.rpgframework.shadowrun6.QualityPathList;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Ritual;
@@ -146,6 +150,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" rituals");
 			list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, core, clazz, "core/data/adeptpowers.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
+			list = Shadowrun6Core.loadDataItems(FocusList.class, Focus.class, core, clazz, "core/data/foci.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" foci");
 			list = Shadowrun6Core.loadDataItems(ComplexFormList.class, ComplexForm.class, core, clazz, "core/data/complexforms.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" complex forms");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, core, clazz, "core/data/qualities.xml");
@@ -227,9 +233,12 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" rule presets");
 
 			logger.log(Level.INFO, "START -------------------------------FIRING_SQUAD---------------------------------------");
-			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FSQUAD", "firing_squad.i18n", Locale.ENGLISH);
-			list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, core, clazz,"core/data/ammunition_types.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FIRING_SQUAD", "firing_squad.i18n", Locale.ENGLISH);
+//			list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"firing_squad/data/ammunition_types.xml");
+//			logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+			list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"firing_squad/data/quality_paths.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
+//			System.exit(1);
 
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH);

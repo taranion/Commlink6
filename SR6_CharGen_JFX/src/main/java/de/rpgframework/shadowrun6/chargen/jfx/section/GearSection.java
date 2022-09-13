@@ -30,6 +30,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.VBox;
 
@@ -122,9 +123,13 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			ItemTemplate selected = selector.getSelected();
 			OperationResult<CarriedItem<ItemTemplate>> result = null;
 			// Eventually show decision dialog
-			if (!selected.getChoices().isEmpty() || !selected.getVariants().isEmpty()) {
-				logger.log(Level.WARNING, "Select with choices or variants");
-				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(FlexibleApplication.getInstance(), control.getEquipmentController(), carry);
+			boolean needToAsk = !selected.getChoices().isEmpty();
+			needToAsk |= !selected.getVariants().isEmpty();
+			if ( model.getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS)) 
+				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
+			if (needToAsk) {
+				logger.log(Level.WARNING, "Select with choices or variants or flags");
+				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry);
 				Decision[] dec = dia2.apply(selected, selected.getChoices());
 				if (dec!=null) {
 					// Not cancelled
@@ -177,7 +182,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	@SuppressWarnings("unchecked")
 	public void refresh() {
 //		logger.log(Level.DEBUG, "refresh");
-		logger.log(Level.WARNING, "GearSection("+getTitle()+": "+filter);
+//		logger.log(Level.WARNING, "GearSection("+getTitle()+": "+filter);
 		if (model==null) return;
 		
 		// If  a model and a filter exists, update automatically

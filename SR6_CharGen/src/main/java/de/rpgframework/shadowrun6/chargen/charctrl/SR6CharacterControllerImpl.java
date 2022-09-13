@@ -7,6 +7,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
+import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IPANController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
@@ -35,6 +36,8 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected SINController sins;
 	protected SR6LifestyleController lifestyles;
 	protected IPANController pan;
+	protected IFocusController foci;
+	protected IQualityPathController qPaths;
 	
 	//-------------------------------------------------------------------
 	public SR6CharacterControllerImpl() {
@@ -171,4 +174,21 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 		return lifestyles;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getFocusController()
+	 */
+	@Override
+	public IFocusController getFocusController() {
+		return foci;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getQualityPathController()
+	 */
+	@Override
+	public IQualityPathController getQualityPathController() {
+		return qPaths;
+	}
 }

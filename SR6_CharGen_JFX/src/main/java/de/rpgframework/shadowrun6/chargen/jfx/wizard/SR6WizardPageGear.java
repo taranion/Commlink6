@@ -102,7 +102,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		bxDescription = new CarriedItemDescriptionPane(Shadowrun6Tools.requirementResolver(Locale.getDefault()), charGen);
 		
 		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection, ItemType.PACK));
-		selection.setOptionCallback(new ChoiceSelectorDialog<>(FlexibleApplication.getInstance(), charGen.getEquipmentController()));
+		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getEquipmentController()));
 		
 		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
 		
