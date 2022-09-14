@@ -51,4 +51,12 @@ public class QualityPath extends ComplexDataItem {
 			step.validate();
 		}
 	}
+
+	//-------------------------------------------------------------------
+	public QualityPathStep getStep(String stepID) {
+		for (QualityPathStep step : steps) {
+			if (step.getId().equals(stepID)) return step;
+		}
+		return null;
+	}
 }

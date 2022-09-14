@@ -64,7 +64,6 @@ public class VisualQualityPathPane extends Group {
 		};
 		
 		selectionModel.selectedItemProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.INFO, "CHange from "+o+" to "+n);
 			if (o!=null) {
 				Circle old = dotsByStep.get(o);
 				if (old!=null)
@@ -139,6 +138,7 @@ public class VisualQualityPathPane extends Group {
 			for (PathNode node : nodes) {
 				double x = node.x * WIDTH_UNIT + WIDTH_UNIT/2;
 				double y = node.y * 100;
+				System.err.println("VisualQualityPathPane: x="+x);
 				Circle dot = new Circle(x, y, 10, Color.TRANSPARENT);
 				dot.setStroke(Color.WHEAT);
 				dot.setStrokeWidth(2);
@@ -200,7 +200,11 @@ public class VisualQualityPathPane extends Group {
 				}
 			}
 		}
+		// Change preferred width
+		
+		System.err.println("VisualQualityPathPane: bounds="+getLayoutBounds());
 	}
+	
 	/**
 	 * Evaluate the cubic curve at a parameter 0<=t<=1, returns a Point2D
 	 * @param c the CubicCurve 

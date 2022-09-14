@@ -36,5 +36,18 @@ public class QualityPathValue extends ComplexDataItemValue<QualityPath> {
 	public List<QualityPathStepValue> getStepsTaken() {
 		return stepsTaken;
 	}
+
+	//-------------------------------------------------------------------
+	public QualityPathStepValue getStepTaken(QualityPathStep step) {
+		for (QualityPathStepValue val : stepsTaken) {
+			if (val.getResolved()==step) return val;
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	public boolean hasStepTaken(QualityPathStep step) {
+		return stepsTaken.stream().map(sv -> sv.getResolved()).anyMatch(s -> s==step);
+	}
 	
 }

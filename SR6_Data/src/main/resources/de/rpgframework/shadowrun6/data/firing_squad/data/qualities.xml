@@ -1,68 +1,91 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
-   <quality id="always_late" 	      karma="2" type="NEGATIVE" >
+   <quality id="always_late" 	      karma="2" pos="false" >
      <modifications>
-       <edgemod skill="influence"/>
+       <checkmod type="SKILL" ref="influence" value="-1" cond="y"/>
      </modifications>
    </quality>
-   <quality id="bad_memories"	      karma="3" type="NEGATIVE" select="NAME" >
-     <modifications>
-       <relevancemod topic="COMBAT"/>
-       <edgemod skill="firearms"/>
-       <edgemod skill="close_combat"/>
-       <edgemod skill="exotic_weapons"/>
-     </modifications>
-   </quality>
-   <quality id="compulsion"    		  karma="2" type="NEGATIVE" max="6" multi="true" select="NAME"/>
-   <quality id="flashbacks" 	      karma="6" type="NEGATIVE" >
+   <quality id="bad_memories"	      karma="3" pos="FALSE" >
+   	<choices>
+   		<choice uuid="58b2700b-918d-4746-83a2-ccc189f1cb1b" type="TEXT"/>
+   	</choices>
      <modifications>
        <relevancemod topic="COMBAT"/>
+       <checkmod type="SKILL" ref="firearms" value="-1" what="EDGE"/>
+       <checkmod type="SKILL" ref="close_combat" value="-1" what="EDGE"/>
+       <checkmod type="SKILL" ref="exotic_weapons" value="-1" what="EDGE"/>
      </modifications>
    </quality>
-   <quality id="maybe_you_missed_something"   karma="2" type="NEGATIVE" />
-   <quality id="phobia_common"        karma="12" type="NEGATIVE" multi="true" select="NAME" />
-   <quality id="phobia_uncommon"      karma="9"  type="NEGATIVE" multi="true" select="NAME" />
-   <quality id="phobia_rare"       	  karma="6"  type="NEGATIVE" multi="true" select="NAME" />
-   <quality id="phobia_very_rare"  	  karma="3"  type="NEGATIVE" multi="true" select="NAME" />
+   <quality id="compulsion"  karma="2" pos="FALSE" max="5" multi="true">
+   	<choices>
+   		<choice uuid="58b2700b-918d-4746-83a2-ccc189f1cb1b" type="TEXT"/>
+   		<!--choice uuid="0375764d-c7f9-44a9-bc2d-02ee1d9d129a" type="SUBSELECT">
+	         <subOption id="lvl1" cost="2"/>
+         	<subOption id="lvl2" cost="4"/>
+         	<subOption id="lvl3" cost="6"/>
+         	<subOption id="lvl4" cost="8"/>
+         	<subOption id="lvl5" cost="10"/>
+   		</choice-->
+   	</choices>
+   </quality>
+   <quality id="flashbacks" 	      karma="6" pos="FALSE" >
+     <modifications>
+       <relevancemod topic="COMBAT"/>
+     </modifications>
+   </quality>
+   <quality id="maybe_you_missed_something"   karma="2" pos="FALSE" />
+   <quality id="phobia" karma="3" pos="FALSE" multi="true">
+		<choices>
+			<choice type="SUBSELECT" ref="object" uuid="55a6dda7-7565-4108-9a04-65b7607081df">
+				<subOption id="very_rare" cost="3" />
+				<subOption id="rare"      cost="6" />
+				<subOption id="uncommon"  cost="9" />
+				<subOption id="common"    cost="12" />
+			</choice>
+			<choice type="TEXT" ref="object" uuid="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" />
+		</choices>
+   </quality>
    
    <!-- Quality paths -->
-   <quality id="broken_code"          karma="0" type="NEGATIVE" path="true" >
-     <requires>
-     	<qualreq ref="honorbound"/>
-     </requires>
+   <quality id="broken_code"          karma="0" pos="FALSE" type="QUALITY_PATH" >
+     <!--requires>
+     	<datareq type="QUALITY" ref="honorbound" apply="CHARACTER"/>
+     </requires-->
      <modifications>
-     	<edgemod stype="SOCIAL" type="USAGE" />
+     	<checkmod type="SKILL" ref="SOCIAL" value="1" what="REPLACE_WITH_WILD"/>
      </modifications>
    </quality>
-   <quality id="penitent"             karma="0" type="NEGATIVE" path="true" >
-     <requires>
-     	<qualreq ref="broken_code"/>
-     </requires>
+   <quality id="penitent"             karma="0" pos="FALSE" type="QUALITY_PATH" >
+     <!--requires>
+     	<datareq type="QUALITY" ref="broken_code" apply="CHARACTER"/>
+     </requires-->
    </quality>
-   <quality id="rebound"              karma="0" type="NEGATIVE" path="true" >
-     <requires>
-     	<qualreq ref="broken_code"/>
-     </requires>
+   <quality id="rebound"              karma="0" pos="FALSE" type="QUALITY_PATH" >
+     <!--requires>
+     	<datareq type="QUALITY" ref="broken_code"/>
+     </requires-->
    </quality>
-   <quality id="no_code"              karma="0" type="NEGATIVE" path="true" >
-     <requires>
-     	<qualreq ref="broken_code"/>
-     </requires>
+   <quality id="no_code"              karma="0" pos="FALSE" type="QUALITY_PATH" >
+     <!--requires>
+     	<datareq type="QUALITY" ref="broken_code"/>
+     </requires-->
      <modifications>
-     	<edgemod stype="SOCIAL" type="USAGE" />
+     	<checkmod type="SKILL" ref="SOCIAL" value="1" WHAT="NOT_EARN_EDGE"/>
      </modifications>
    </quality>
-   <quality id="double_sure"          karma="0" type="NEGATIVE" path="true" />
-   <quality id="reconditioning"       karma="0" type="NEGATIVE" path="true" />
-   <quality id="violence_prone"       karma="0" type="NEGATIVE" path="true" />
-   <quality id="heedless"             karma="0" type="NEGATIVE" path="true" />
-   <quality id="coping"               karma="0" type="NEGATIVE" path="true" />
-   <quality id="selective_numbing"    karma="0" type="NEGATIVE" path="true" >
+   <quality id="double_sure"          karma="0" pos="FALSE" type="QUALITY_PATH" />
+   <quality id="reconditioning"       karma="0" pos="FALSE" type="QUALITY_PATH" />
+   <quality id="violence_prone"       karma="0" pos="FALSE" type="QUALITY_PATH" />
+   <quality id="heedless"             karma="0" pos="FALSE" type="QUALITY_PATH" />
+   <quality id="coping"               karma="0" pos="FALSE" type="QUALITY_PATH" />
+   <quality id="selective_numbing"    karma="0" pos="FALSE" type="QUALITY_PATH" >
      <modifications>
-     	<edgemod stype="SOCIAL" type="USAGE" />
+     	<checkmod type="ATTRIBUTE" ref="COMPOSURE" value="2" WHAT="DICE" />
+     	<checkmod type="SKILL" ref="SOCIAL" value="1" WHAT="NOT_EARN_EDGE"/>
+     	<checkmod type="SKILL" ref="SOCIAL" value="1" WHAT="NOT_SPEND_EDGE"/>
      </modifications>
    </quality>
-   <quality id="state_of_zen"         karma="0" type="NEGATIVE" path="true" />
-   <quality id="pacifist"    		  karma="5" type="NEGATIVE" max="4" />
+   <quality id="state_of_zen"         karma="0" pos="FALSE" type="QUALITY_PATH" />
+   <quality id="pacifist"    		  karma="5" pos="FALSE" max="4" />
    
 </qualities>

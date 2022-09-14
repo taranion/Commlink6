@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
    <item avail="2" price="300"    id="biomonitor"       subtype="BIOTECH" type="BIOLOGY"/>
+   <item avail="1" price="5000"   id="docwagon_contract"    subtype="BIOTECH" type="BIOLOGY" count="y">
+		<choices>
+			<choice uuid="c64bc34b-1a42-49eb-877b-5da76837a4e1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6">
+				<subOption id="basic"       cost="500" />
+				<subOption id="gold"        cost="2500" />
+				<subOption id="platin"      cost="5000" />
+				<subOption id="superplatin" cost="10000" />
+			</choice>
+		</choices>
+		<variant id="monthly">
+			<attrdef id="PRICE" value="$RATING"/>
+		</variant>	   
+		<variant id="yearly">
+			<attrdef id="PRICE" value="$RATING*10"/>
+		</variant>	   
+   </item>
    <item avail="1" price="5000"   id="docwagon_basic_year"    subtype="BIOTECH" type="BIOLOGY"/>
    <item avail="1" price="25000"  id="docwagon_gold_year"   subtype="BIOTECH" type="BIOLOGY"/>
    <item avail="1" price="50000"  id="docwagon_platinum_year"     subtype="BIOTECH" type="BIOLOGY"/>

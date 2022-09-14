@@ -236,6 +236,8 @@ public class Shadowrun6DataPlugin  {
 			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FIRING_SQUAD", "firing_squad.i18n", Locale.ENGLISH);
 //			list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"firing_squad/data/ammunition_types.xml");
 //			logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz,"firing_squad/data/qualities.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 			list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"firing_squad/data/quality_paths.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
 //			System.exit(1);

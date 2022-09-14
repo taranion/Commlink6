@@ -19,6 +19,11 @@ public enum ShadowrunCheckInfluence implements CheckInfluence {
 	EDGE_COST_MALUS,
 	/** Value refers to cost of Edge boosts for checks */
 	EDGE_BOOST,
+	/** Replace one die with a wild die */
+	REPLACE_WITH_WILD,
+	/** Cannot earn edge in that test */
+	NOT_EARN_EDGE,
+	NOT_SPEND_EDGE,
 	OTHER
 	
 }

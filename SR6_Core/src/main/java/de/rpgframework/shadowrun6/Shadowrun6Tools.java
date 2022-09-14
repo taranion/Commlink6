@@ -327,10 +327,11 @@ public class Shadowrun6Tools {
 					Logging.logger.log(Level.WARNING, "Found unknown quality '"+valMod.getKey()+"' in valuemod of "+data);
 					return "Unknown quality '"+valMod.getKey()+"'";
 				}
+				String prefix = (valMod.isRemove())?"- ":"";
 				if (valMod.getValue()>0) {
-					return quality.getName()+" +"+valMod.getValue();
+					return prefix+quality.getName()+" +"+valMod.getValue();
 				} else {
-					return quality.getName()+" "+valMod.getValue();
+					return prefix+quality.getName()+" "+valMod.getValue();
 				}
 			default:
 				return "Unknown value type "+type;
@@ -342,10 +343,11 @@ public class Shadowrun6Tools {
 			String what = type.name();
 			DataItem resolved = type.resolve(valMod.getKey());
 			
+			String prefix = valMod.isRemove()?"- ":"";
 			if (resolved!=null) {
 				if (valMod.getDecisions().isEmpty())				
-					return resolved.getName(Locale.getDefault());
-				return resolved.getName(Locale.getDefault())+"(..)";
+					return prefix+resolved.getName(Locale.getDefault());
+				return prefix+resolved.getName(Locale.getDefault())+"(..)";
 			}
 			
 //			switch (type) {
