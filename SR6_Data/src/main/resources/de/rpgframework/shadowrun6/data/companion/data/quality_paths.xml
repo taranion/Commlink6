@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qpaths>
+	<qpath id="critter_bond">
+		<step id="initial_bond" level="0">
+			<requires>
+				<datareq type="QUALITY" ref="critter_trainer" apply="CHARACTER"/>
+			</requires>
+			<choices>
+				<choice uuid="" type="SUBSELECT" ref="crittertype">
+					<subOption id="mundane_herbivore">
+						<modifications>
+							<valmod type="QUALITY" ref="dependents" value="1">
+								<decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Critter"/> 
+							</valmod>
+						</modifications>
+					</subOption>
+					<subOption id="mundane_carnivore">
+						<modifications>
+							<valmod type="QUALITY" ref="dependents" value="2">
+								<decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Critter"/> 
+							</valmod>
+						</modifications>
+					</subOption>
+					<subOption id="awakened_emerged">
+						<modifications>
+							<valmod type="QUALITY" ref="dependents" value="3">
+								<decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Critter"/> 
+							</valmod>
+						</modifications>
+					</subOption>
+				</choice>
+			</choices>
+			<nextSteps>
+				<next>greater_bond</next>
+			</nextSteps>
+			<modifications>
+				<!--itemmod type="QUALITY" ref="broken_code"/-->
+			</modifications>
+		</step>
+		<step id="greater_bond" level="1">
+			<nextSteps>
+				<next>permanent_improvement</next>
+			</nextSteps>
+			<modifications>
+				<!--itemmod type="QUALITY" ref="permanent_improvement"/-->
+			</modifications>
+		</step>
+		<step id="permanent_improvement" level="2">
+			<nextSteps>
+				<next>lost</next>
+				<next>saying_goodbye</next>
+			</nextSteps>
+			<modifications>
+				<!--itemmod type="QUALITY" ref="greater_bond"/-->
+			</modifications>
+		</step>
+		<step id="lost" level="3">
+			<nextSteps>
+				<next>permanent_improvement</next>
+				<next>saying_goodbye</next>
+			</nextSteps>
+			<modifications>
+				<!--itemmod type="QUALITY" ref="greater_bond"/-->
+			</modifications>
+		</step>
+		<step id="broken_trust" level="3">
+			<nextSteps>
+				<next>permanent_improvement</next>
+				<next>saying_goodbye</next>
+			</nextSteps>
+			<modifications>
+				<!--itemmod type="QUALITY" ref="greater_bond"/-->
+			</modifications>
+		</step>
+		<step id="saying_goodbye" level="4">
+			<modifications>
+				<!--itemmod type="QUALITY" ref="greater_bond"/-->
+			</modifications>
+		</step>
+	</qpath>
+</qpaths>

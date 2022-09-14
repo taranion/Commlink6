@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.QualityPathsSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.SR6QualitySection;
 import javafx.scene.control.Label;
 
 /**
@@ -38,7 +39,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	private AppearanceSection secPortrait;
 	private FlexGridPane flex;
 	private AttributeSection secAttrib;
-	private QualitySection secQualities;
+	private SR6QualitySection secQualities;
 	private QualityPathsSection secQualPaths;
 	
 	private OptionalNodePane layout;
@@ -102,13 +103,11 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	
 	//-------------------------------------------------------------------
 	private void initQualities() {
-		secQualities = new QualitySection(
-				ResourceI18N.get(RES, "page.basicdata.section.qualities.title"),
-				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
-//		((QualitySection)secQualities).updateController(ctrl);
+		secQualities = new SR6QualitySection();
 		FlexGridPane.setMinWidth(secQualities, 4);
+		FlexGridPane.setMinHeight(secQualities, 6);
 		FlexGridPane.setMediumWidth(secQualities, 6);
-		FlexGridPane.setMinHeight(secQualities, 7);
+		FlexGridPane.setMediumHeight(secQualities, 7);
 		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
 			if (n!=null) {
 				layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
@@ -122,7 +121,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		secQualPaths= new QualityPathsSection();
 //		((QualitySection)secQualities).updateController(ctrl);
 		FlexGridPane.setMinWidth(secQualPaths, 4);
-		FlexGridPane.setMediumWidth(secQualPaths, 6);
+		FlexGridPane.setMediumWidth(secQualPaths, 4);
 		FlexGridPane.setMinHeight(secQualPaths, 5);
 		secQualPaths.showHelpForProperty().addListener( (ov,o,n) -> {
 			if (n!=null) {

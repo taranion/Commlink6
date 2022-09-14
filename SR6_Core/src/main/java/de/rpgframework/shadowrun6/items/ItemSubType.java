@@ -141,6 +141,7 @@ public enum ItemSubType {
 	FOCI_SPIRIT,
 	FOCI_WEAPON,
 	MAGICAL_FORMULA,
+	ALCHEMICAL,
 	MAGICAL_SUPPLIES,
 	// Vehicles
 	BIKES,

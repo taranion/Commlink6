@@ -15,8 +15,12 @@ import org.prelle.javafx.Section;
 import org.prelle.javafx.SymbolIcon;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.core.BabylonEventBus;
+import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.NumericalValueWith1PoolController;
 import de.rpgframework.genericrpg.chargen.CharacterController;
+import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.rules.SkillTable;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
@@ -27,8 +31,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -145,7 +149,18 @@ public class SkillSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void onAdd() {
-		logger.log(Level.WARNING, "ToDo: onAdd");
+		SR6Skill lang = Shadowrun6Core.getSkill("language") ;
+		ChoiceSelectorDialog<SR6Skill, SR6SkillValue> dialog = new ChoiceSelectorDialog<SR6Skill, SR6SkillValue>(control.getSkillController());
+		Decision[] dec = dialog.apply(lang, lang.getChoices());
+		if (dec!=null) {
+			OperationResult<SR6SkillValue> result = control.getSkillController().select(lang, dec);
+			if (result.wasSuccessful()) {
+				table.getItems().add(result.get());
+				table.refresh();
+			} else {
+				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
+			}
+		}
 	}
 
 	//-------------------------------------------------------------------

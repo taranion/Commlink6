@@ -3,6 +3,8 @@ package de.rpgframework.shadowrun6.chargen.jfx.section;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 
+import de.rpgframework.core.BabylonEventBus;
+import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
@@ -48,13 +50,17 @@ public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements
 	 */
 	@Override
 	protected void onAdd() {
-		logger.log(Level.DEBUG, "onAdd");
-		SR6Skill skill = Shadowrun6Core.getSkill("knowledge");
-		ChoiceSelectorDialog<SR6Skill, SR6SkillValue> dialog = new ChoiceSelectorDialog<>(control.getSkillController());
-		Decision[] decisions = dialog.apply(skill, skill.getChoices());
-		OperationResult<SR6SkillValue> sVal = control.getSkillController().select(skill, decisions);
-		if (sVal.wasSuccessful()) {
-			list.getItems().add(sVal.get());
+		SR6Skill know = Shadowrun6Core.getSkill("language") ;
+		ChoiceSelectorDialog<SR6Skill, SR6SkillValue> dialog = new ChoiceSelectorDialog<SR6Skill, SR6SkillValue>(control.getSkillController());
+		Decision[] dec = dialog.apply(know, know.getChoices());
+		if (dec!=null) {
+			OperationResult<SR6SkillValue> result = control.getSkillController().select(know, dec);
+			if (result.wasSuccessful()) {
+				list.getItems().add(result.get());
+				list.refresh();
+			} else {
+				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
+			}
 		}
 	}
 

@@ -217,6 +217,7 @@ public enum ItemType {
 //			ItemSubType.FOCI_SPIRIT,
 //			ItemSubType.FOCI_WEAPON,
 //			ItemSubType.MAGICAL_FORMULA,
+			ItemSubType.ALCHEMICAL,
 			ItemSubType.MAGICAL_SUPPLIES
 			),
 	// Vehicle Modifications

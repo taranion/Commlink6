@@ -43,6 +43,7 @@ public class GearPage extends Page {
 	
 	private GearSection secElectro;
 	private GearSection secOther;
+	private GearSection secAlchemical;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -61,6 +62,7 @@ public class GearPage extends Page {
 	private void initComponents() {
 		initOther();
 		initElectro();
+		initAlchemical();
 	}
 	
 	//-------------------------------------------------------------------
@@ -96,10 +98,24 @@ public class GearPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
+	private void initAlchemical() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.MAGICAL); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.MAGICAL); 
+		secAlchemical = new GearSection(
+				ResourceI18N.get(RES, "page.gear.section.magical"), selectFilter, showFilter
+				);
+		secAlchemical.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secAlchemical, 4);
+		FlexGridPane.setMinHeight(secAlchemical, 4);
+		FlexGridPane.setMediumWidth(secAlchemical, 5);
+		FlexGridPane.setMediumHeight(secAlchemical, 6);
+	}
+	
+	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secOther, secElectro);
+		flex.getChildren().addAll(secOther, secElectro, secAlchemical);
 		ScrollPane scroll = new ScrollPane(flex);
 		scroll.setFitToWidth(true);
 		
@@ -112,6 +128,7 @@ public class GearPage extends Page {
 	private void initInteractivity() {
 		secOther.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secElectro.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secAlchemical.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
 	//-------------------------------------------------------------------
@@ -156,6 +173,7 @@ public class GearPage extends Page {
 		this.ctrl = ctrl;
 		secElectro.updateController(ctrl);
 		secOther.updateController(ctrl);
+		secAlchemical.updateController(ctrl);
 		refresh();
 	}
 	
@@ -163,6 +181,7 @@ public class GearPage extends Page {
 	public void refresh() {
 		secElectro.refresh();
 		secOther.refresh();
+		secAlchemical.refresh();
 	}
 
 }

@@ -23,6 +23,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.SR6QualitySection;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -117,8 +118,7 @@ public class BasicDataPage extends Page implements IShadowrunCharacterController
 	
 	//-------------------------------------------------------------------
 	private void initQualities() {
-		secQualities = new QualitySection(ResourceI18N.get(RES, "page.basicdata.section.qualities.title"),
-				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		secQualities = new SR6QualitySection();
 		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
 			System.getLogger("shadowrun6").log(Level.INFO, "ShowHelpFor "+n);
 			if (n!=null) {

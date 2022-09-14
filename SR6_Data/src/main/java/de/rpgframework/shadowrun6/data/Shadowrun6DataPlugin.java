@@ -250,6 +250,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" infected qualities");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "companion/data/qualities.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+			list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"companion/data/quality_paths.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
 			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "companion/data/critterpower.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "companion/data/metatypes.xml");
