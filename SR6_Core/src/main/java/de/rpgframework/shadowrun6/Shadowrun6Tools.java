@@ -232,6 +232,7 @@ public class Shadowrun6Tools {
 //		}
 		return "SplitterTools.getChoiceString("+choice.getChooseFrom()+")";
 	}
+	
 	//-------------------------------------------------------------------
 	public static String getModificationSourceString(Object source) {
 		if (source==null)

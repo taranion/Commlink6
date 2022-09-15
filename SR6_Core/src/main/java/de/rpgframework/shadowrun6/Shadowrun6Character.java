@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -44,6 +45,13 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	private List<SR6Lifestyle> lifestyles;
 	@ElementList(entry="qpath", type = QualityPathValue.class, inline = false)
 	private List<QualityPathValue> qpaths;
+	@ElementList(entry="martialartref", type=MartialArtsValue.class)
+	protected List<MartialArtsValue> martialArts;
+	@ElementList(entry="techniqueref", type=TechniqueValue.class)
+	protected List<TechniqueValue> techniques;
+	@ElementList(entry="maneuvers", type=SignatureManeuver.class)
+	protected List<SignatureManeuver> maneuvers;
+
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
 	
@@ -56,6 +64,9 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		qpaths = new ArrayList<>();
 		relevanceMods = new ArrayList<>();
 		edgeMods  = new ArrayList<>();
+		techniques = new ArrayList<>();
+		martialArts = new ArrayList<>();
+		maneuvers = new ArrayList<>();
 		
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			attributes.add(new AttributeValue<ShadowrunAttribute>(key, 1));
@@ -283,6 +294,99 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			}
 		}
 		return false;
+	}
+
+	//-------------------------------------------------------------------
+	public List<MartialArtsValue> getMartialArts() {
+		ArrayList<MartialArtsValue> ret = new ArrayList<>(martialArts);
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public void addMartialArt(MartialArtsValue ref) {
+		if (!martialArts.contains(ref))
+			martialArts.add(ref);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeMartialArt(MartialArtsValue ref) {
+		martialArts.remove(ref);
+		// Remove all techniques belonging to that martial art
+		for (TechniqueValue tech : getTechniques()) {
+			if (tech.getMartialArt()==ref.getResolved())
+				removeTechnique(tech);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	public boolean hasTechnique(Technique ref) {
+		for (TechniqueValue tech : techniques) {
+			if (ref==tech.getResolved())
+				return true;
+		}
+		// Is it a key technique of a style?
+		for (MartialArtsValue style : martialArts) {
+			if (style.getResolved().getSignatureTechnique()==ref)
+				return true;
+		}
+		
+		return false;
+	}
+
+	//-------------------------------------------------------------------
+	public List<TechniqueValue> getTechniques() {
+		ArrayList<TechniqueValue> ret = new ArrayList<>(techniques);
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public List<TechniqueValue> getTechniquesAll() {
+		ArrayList<TechniqueValue> ret = new ArrayList<>(techniques);
+		// Add signature techniques
+		for (MartialArtsValue style : martialArts) {
+			ret.add(new TechniqueValue(style.getResolved().getSignatureTechnique(), style.getResolved()));
+		}
+		
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public List<TechniqueValue> getTechniques(MartialArts learnedIn) {
+		ArrayList<TechniqueValue> ret = new ArrayList<>();
+		ret.add(new TechniqueValue(learnedIn.getSignatureTechnique(), learnedIn));
+		for (TechniqueValue tech : techniques) {
+			if (tech.getMartialArt()==learnedIn)
+				ret.add(tech);
+		}
+		
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public void addTechnique(TechniqueValue ref) {
+		if (!techniques.contains(ref))
+			techniques.add(ref);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeTechnique(TechniqueValue ref) {
+		techniques.remove(ref);
+	}
+
+	//-------------------------------------------------------------------
+	public void addSignatureManeuver(SignatureManeuver ref) {
+		if (!maneuvers.contains(ref))
+			maneuvers.add(ref);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeSignatureManeuver(SignatureManeuver ref) {
+		maneuvers.remove(ref);
+	}
+
+	//-------------------------------------------------------------------
+	public List<SignatureManeuver> getSignatureManeuvers() {
+		return new ArrayList<SignatureManeuver>(maneuvers);
 	}
 
 }
