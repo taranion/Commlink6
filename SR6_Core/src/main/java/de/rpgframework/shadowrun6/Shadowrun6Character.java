@@ -15,7 +15,10 @@ import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.modification.CheckModification;
+import de.rpgframework.genericrpg.modification.RelevanceModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.ShadowrunAction;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
@@ -23,6 +26,8 @@ import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -39,6 +44,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	private List<SR6Lifestyle> lifestyles;
 	@ElementList(entry="qpath", type = QualityPathValue.class, inline = false)
 	private List<QualityPathValue> qpaths;
+	protected transient List<CheckModification> edgeMods;
+	protected transient List<RelevanceModification> relevanceMods;
 	
 	private transient Persona persona;
 	
@@ -47,6 +54,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		gender = Gender.MALE;
 		lifestyles = new ArrayList<>();
 		qpaths = new ArrayList<>();
+		relevanceMods = new ArrayList<>();
+		edgeMods  = new ArrayList<>();
 		
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			attributes.add(new AttributeValue<ShadowrunAttribute>(key, 1));
@@ -218,6 +227,62 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public void removeQualityPath(QualityPathValue value) {
 		qpaths.remove(value);
+	}
+
+	//-------------------------------------------------------------------
+	public void clearRelevanceModifications() {
+		relevanceMods.clear();
+	}
+
+	//-------------------------------------------------------------------
+	public void addRelevanceModification(RelevanceModification mod) {
+		relevanceMods.add(mod);
+	}
+
+	//-------------------------------------------------------------------
+	public List<RelevanceModification> getRelevanceModifications(RelevanceType type) {
+		return relevanceMods.stream().filter( mod -> (mod.getType().equals(type))).collect(Collectors.toList());
+	}
+
+	//-------------------------------------------------------------------
+	public void clearEdgeModifications() {
+		edgeMods.clear();
+	}
+
+	//-------------------------------------------------------------------
+	public void addEdgeModification(CheckModification mod) {
+		edgeMods.add(mod);
+	}
+
+	//-------------------------------------------------------------------
+	public List<CheckModification> getEdgeModifications(ShadowrunCheckInfluence... types) {
+		return edgeMods.stream().filter( mod -> List.of(types).contains(mod.getWhat())).collect(Collectors.toList());
+	}
+	
+	//---------------------------------------------------------
+	public int getCostOfAction(ShadowrunAction action) {
+		int cost = action.getCost();
+		for (CheckModification mod : edgeMods) {
+			if (mod.getReferenceType()==ShadowrunReference.ACTION && mod.getResolvedKey()==action && mod.getWhat()==ShadowrunCheckInfluence.EDGE_BOOST) {
+				if (mod.getValue()<0)
+					cost += mod.getValue();
+				else
+					cost = mod.getValue();
+			}
+		}
+		if (cost<1)
+			cost=1;
+		return cost;
+	}
+	
+	//---------------------------------------------------------
+	public boolean isCostModified(ShadowrunAction action) {
+		for (CheckModification mod : edgeMods) {
+			if (mod.getReferenceType()==ShadowrunReference.ACTION && mod.getResolvedKey()==action && mod.getWhat()==ShadowrunCheckInfluence.EDGE_BOOST) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
