@@ -201,7 +201,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			/*
 			 * Defensive
 			 */
-			val = model.getAttribute(ShadowrunAttribute.DEFENSIVE_POOL);
+			val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_PHYSICAL);
 			val.setDistributed(0);
 			addNaturalModifier(val, ShadowrunAttribute.REACTION);
 			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
@@ -210,7 +210,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			/*
 			 * Defensive Combat Direct
 			 */
-			val = model.getAttribute(ShadowrunAttribute.DEFENSIVE_POOL_COMBAT_DIRECT);
+			val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_COMBAT_DIRECT);
 			val.setDistributed(0);
 			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
 			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
@@ -219,7 +219,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			/*
 			 * Defensive Combat Indirect
 			 */
-			val = model.getAttribute(ShadowrunAttribute.DEFENSIVE_POOL_COMBAT_INDIRECT);
+			val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_COMBAT_INDIRECT);
 			val.setDistributed(0);
 			addNaturalModifier(val, ShadowrunAttribute.REACTION);
 			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
