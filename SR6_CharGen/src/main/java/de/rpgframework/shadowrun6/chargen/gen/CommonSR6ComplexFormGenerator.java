@@ -91,8 +91,7 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 	 */
 	@Override
 	public List<Choice> getChoicesToDecide(ComplexForm value) {
-		// TODO Auto-generated method stub
-		return null;
+		return value.getChoices();
 	}
 
 	//-------------------------------------------------------------------

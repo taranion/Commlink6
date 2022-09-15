@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
-   <quality id="always_late" 	      karma="2" pos="false" >
+   <quality id="always_late" 	      karma="2" pos="false" type="NORMAL" >
      <modifications>
        <checkmod type="SKILL" ref="influence" value="-1" cond="y"/>
      </modifications>
    </quality>
-   <quality id="bad_memories"	      karma="3" pos="FALSE" >
+   <quality id="bad_memories"	      karma="3" pos="FALSE" type="NORMAL">
    	<choices>
    		<choice uuid="58b2700b-918d-4746-83a2-ccc189f1cb1b" type="TEXT"/>
    	</choices>
@@ -16,7 +16,7 @@
        <checkmod type="SKILL" ref="exotic_weapons" value="-1" what="EDGE"/>
      </modifications>
    </quality>
-   <quality id="compulsion"  karma="2" pos="FALSE" max="5" multi="true">
+   <quality id="compulsion"  karma="2" pos="FALSE" max="5" multi="true" type="NORMAL">
    	<choices>
    		<choice uuid="58b2700b-918d-4746-83a2-ccc189f1cb1b" type="TEXT"/>
    		<!--choice uuid="0375764d-c7f9-44a9-bc2d-02ee1d9d129a" type="SUBSELECT">
@@ -28,13 +28,13 @@
    		</choice-->
    	</choices>
    </quality>
-   <quality id="flashbacks" 	      karma="6" pos="FALSE" >
+   <quality id="flashbacks" 	      karma="6" pos="FALSE" type="NORMAL">
      <modifications>
        <relevancemod topic="COMBAT"/>
      </modifications>
    </quality>
-   <quality id="maybe_you_missed_something"   karma="2" pos="FALSE" />
-   <quality id="phobia" karma="3" pos="FALSE" multi="true">
+   <quality id="maybe_you_missed_something"   karma="2" pos="FALSE" type="NORMAL"/>
+   <quality id="phobia" karma="3" pos="FALSE" multi="true" type="NORMAL">
 		<choices>
 			<choice type="SUBSELECT" ref="object" uuid="55a6dda7-7565-4108-9a04-65b7607081df">
 				<subOption id="very_rare" cost="3" />
@@ -86,6 +86,6 @@
      </modifications>
    </quality>
    <quality id="state_of_zen"         karma="0" pos="FALSE" type="QUALITY_PATH" />
-   <quality id="pacifist"    		  karma="5" pos="FALSE" max="4" />
+   <quality id="pacifist"    		  karma="5" pos="FALSE" max="4"  type="NORMAL" />
    
 </qualities>

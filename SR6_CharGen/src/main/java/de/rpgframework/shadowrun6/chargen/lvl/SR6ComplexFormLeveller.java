@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.lvl;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +33,8 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6ComplexFormLeveller extends ControllerImpl<ComplexForm> implements IComplexFormController {
+
+	protected static Logger logger = System.getLogger(SR6ComplexFormLeveller.class.getPackageName()+".cplxform");
 
 	public final static MultiLanguageResourceBundle RES = SR6CharacterGenerator.RES;
 

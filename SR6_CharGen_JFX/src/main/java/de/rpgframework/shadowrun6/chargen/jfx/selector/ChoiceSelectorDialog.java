@@ -43,6 +43,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
@@ -63,6 +64,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.FocusValueDescriptionPane;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
@@ -351,6 +353,15 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		case ATTRIBUTE:
 			ret.add( handleATTRIBUTE(item, choice));
 			break;
+		case AMMUNITION_TYPE:
+			ret.add( handleAMMUNITION_TYPE(item, choice) );
+			break;
+		case AUGMENTATION_QUALITY:
+			ret.add( handleAUGMENTATIONQUALITY(item, choice));
+			break;
+		case GEAR:
+			ret.add( handleGEAR(item, choice));
+			break;
 		case ITEM_ATTRIBUTE:
 			if (choice.getTypeReference()!=null) {
 				SR6ItemAttribute attrib = SR6ItemAttribute.valueOf(choice.getTypeReference());
@@ -359,17 +370,14 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				ret.add( handleITEMATTRIBUTE(item, choice));
 			}
 			break;
-		case AMMUNITION_TYPE:
-			ret.add( handleAMMUNITION_TYPE(item, choice) );
-			break;
-		case AUGMENTATION_QUALITY:
-			ret.add( handleAUGMENTATIONQUALITY(item, choice));
-			break;
 		case MENTOR_SPIRIT:
 			ret.add( handleMENTOR_SPIRIT(item, choice) );
 			break;
 		case SKILL:
 			ret.add( handleSKILL(item, choice) );
+			break;
+		case SPELL_CATEGORY:
+			ret.add( handleSPELL_CATEGORY(item, choice) );
 			break;
 		case SPIRIT:
 			ret.add( handleGeneric(item, choice, Spirit.class));
@@ -754,6 +762,79 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			updateButtons(); 
 		});
 		return tfDescr;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleGEAR(ComplexDataItem item, Choice choice) {
+		ChoiceBox<CarriedItem<ItemTemplate>> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<CarriedItem<ItemTemplate>>() {
+			public CarriedItem<ItemTemplate> fromString(String value) { return null;}
+			public String toString(CarriedItem<ItemTemplate> value) {
+				if (value==null) return "-";
+				return value.getNameWithRating();
+			}
+		});
+		List<CarriedItem<ItemTemplate>> items = ((Shadowrun6Character)ctrl.getModel()).getCarriedItems();
+		// Eventually sort
+		if (choice.getTypeReference()!=null) {
+			logger.log(Level.DEBUG, "Reduce gear to select from to "+choice.getTypeReference());
+			System.err.println("Reduce gear to select from to "+choice.getTypeReference());
+			switch (choice.getTypeReference()) {
+			case "MELEE":
+				items = items.stream().filter(i -> i.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.WEAPON_CLOSE_COMBAT).collect(Collectors.toList());
+				break;
+			default:
+				logger.log(Level.WARNING, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
+			}
+		}
+		choicebox.getItems().addAll(items);
+		
+		Collections.sort(choicebox.getItems(), new Comparator<CarriedItem<ItemTemplate>>() {
+			public int compare(CarriedItem<ItemTemplate> o1, CarriedItem<ItemTemplate> o2) {
+				return Collator.getInstance().compare(o1.getNameWithRating(), o2.getNameWithRating());
+			}});
+		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getUuid().toString()));
+			
+			updateButtons(); 
+			showHelpFor(n);
+		 });
+		content.getChildren().add(choicebox);
+		
+		return choicebox;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleSPELL_CATEGORY(ComplexDataItem item, Choice choice) {
+		ChoiceBox<ASpell.Category> cbSub = new ChoiceBox<>();
+		cbSub.setConverter(new StringConverter<ASpell.Category>() {
+			public ASpell.Category fromString(String value) { return null;}
+			public String toString(ASpell.Category value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			cbSub.getItems().addAll(
+					List.of(ASpell.Category.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
+					);			
+		} else {
+			cbSub.getItems().addAll(ASpell.Category.values());
+		}
+		Collections.sort(cbSub.getItems(), new Comparator<ASpell.Category>() {
+			public int compare(ASpell.Category o1, ASpell.Category o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.name()));
+			updateButtons(); 
+		 });
+		content.getChildren().add(cbSub);
+		return cbSub;
 	}
 	
 }

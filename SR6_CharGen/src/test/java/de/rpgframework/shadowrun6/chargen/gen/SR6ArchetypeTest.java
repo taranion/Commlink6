@@ -1350,7 +1350,7 @@ public class SR6ArchetypeTest {
 		
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
-//		System.out.println(xml);
+		System.out.println(xml);
 		
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);
