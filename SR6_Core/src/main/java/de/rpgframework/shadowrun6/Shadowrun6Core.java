@@ -8,6 +8,7 @@ import java.lang.System.Logger.Level;
 import java.nio.charset.Charset;
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -127,7 +128,7 @@ public class Shadowrun6Core extends GenericCore {
 
 	//-------------------------------------------------------------------
 	public static List<SR6Skill> getSkills(SkillType... types) {
-		List<SkillType> allowed = List.of(types);
+		List<SkillType> allowed = (types.length!=0)?List.of(types):Arrays.asList(SkillType.values());
 		List<SR6Skill> ret = getItemList(SR6Skill.class).stream().filter(sk -> allowed.contains(sk.getType())).collect(Collectors.toList());
 		Collections.sort(ret, new Comparator<SR6Skill>() {
 			public int compare(SR6Skill arg0, SR6Skill arg1) {
