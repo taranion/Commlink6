@@ -1460,5 +1460,23 @@ public class Shadowrun6Tools {
 //		String mods = String.join(", ", list);
 //		return mods;
 //	}
+	
+	// -------------------------------------------------------------------
+	public static List<DataItem> getInfluences(ComplexDataItemValue<?> val) {
+		List<DataItem> ret = new ArrayList<>();
+		for (Modification mod : val.getModifications()) {
+			if (mod.isConditional()) {
+				if (mod.getSource() == null) {
+					System.err.println("Shadowrun6Tools.getInfluences: No source for Modification " + mod);
+				} else if (!(mod.getSource() instanceof DataItem)) {
+					System.err.println("Shadowrun6Tools.getInfluences: Source of SkillModification " + mod
+							+ " is of type " + mod.getSource().getClass());
+				} else {
+					ret.add((DataItem) mod.getSource());
+				}
+			}
+		}
+		return ret;
+	}
 
 }
