@@ -212,7 +212,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	@Override
 	public Possible canBeDeselected(MetamagicOrEchoValue value) {
 		// Is it selected?
-		if (getSelected().contains(value)) {
+		if (!getSelected().contains(value)) {
 			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 		return Possible.TRUE;
