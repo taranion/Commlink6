@@ -25,7 +25,13 @@ public enum SR6ItemFlag implements ItemFlag {
 	// From the dice pool, convert one die to a wild die
 	CONVERT_ONE_DIE_TO_WILD,
 	// Is marked to be the primary item of its kind by the user
-	PRIMARY
+	PRIMARY,
+	/* 
+	 * CarriedItems flagged with this shall not be taken into account
+	 * (for defense rating calculations)
+	 * AUTO FLAG - not to be used by user
+	 */
+	IGNORE_FOR_CALCULATIONS,
 	;
 	
 	

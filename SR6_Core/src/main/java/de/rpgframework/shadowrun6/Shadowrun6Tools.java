@@ -1480,4 +1480,46 @@ public class Shadowrun6Tools {
 		return ret;
 	}
 
+	//---------------------------------------------------------
+	public static CarriedItem<ItemTemplate> getPrimaryArmor(Shadowrun6Character model) {
+		CarriedItem<ItemTemplate> bestArmor = null;
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
+				continue;
+			item.setPrimary(false);
+			item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
+			// If no previous selection or armor is better, use it
+			if (bestArmor==null || item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()> bestArmor.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue() )
+				bestArmor = item;
+			// Gear pieces that add armor are also allowed
+//			if (item.getItem().getArmorData()!=null && item.getItem().getArmorData().addsToMain())
+//				item.setIgnoredForCalculations(false);
+			logger.log(Level.DEBUG,"*  "+item.getNameWithRating()+" \t"+item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()+": ignored="+item.hasAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS));
+		}
+		if (bestArmor!=null) {
+			bestArmor.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
+			bestArmor.setPrimary(true);
+			return bestArmor;
+		}
+		return null;
+	}
+
+	//---------------------------------------------------------
+	public static CarriedItem<ItemTemplate> getPrimaryRangedWeapon(Shadowrun6Character model) {
+		List<CarriedItem<ItemTemplate>> weapons = model.getCarriedItems(ItemType.WEAPON_RANGED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_FIREARMS);
+		for (CarriedItem item : weapons) {
+			if (item.isPrimary()) return item;
+		}
+		return weapons.isEmpty()?null:weapons.get(0);
+	}
+
+	//---------------------------------------------------------
+	public static CarriedItem<ItemTemplate> getPrimaryMeleeWeapon(Shadowrun6Character model) {
+		List<CarriedItem<ItemTemplate>> weapons = model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT);
+		for (CarriedItem item : weapons) {
+			if (item.isPrimary()) return item;
+		}
+		return weapons.isEmpty()?null:weapons.get(0);
+	}
+
 }
