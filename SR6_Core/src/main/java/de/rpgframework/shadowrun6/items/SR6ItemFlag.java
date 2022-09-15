@@ -24,6 +24,8 @@ public enum SR6ItemFlag implements ItemFlag {
 	CHEAP_KNOCK_OFF,
 	// From the dice pool, convert one die to a wild die
 	CONVERT_ONE_DIE_TO_WILD,
+	// Is marked to be the primary item of its kind by the user
+	PRIMARY
 	;
 	
 	
