@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +7,10 @@ import java.util.Locale;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.Rule.EffectOn;
-import de.rpgframework.shadowrun.chargen.charctrl.ShadowrunRules;
+import de.rpgframework.shadowrun.ShadowrunRules;
 
 /**
- * @author stefa
+ * @author prelle
  *
  */
 public interface Shadowrun6Rules extends ShadowrunRules {
@@ -41,6 +41,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule ALLOW_TRANSHUMANISM      = new Rule(EffectOn.COMMON,"ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_EXTENDED_CONTACT = new Rule(EffectOn.COMMON,"CHARGEN_EXTENDED_CONTACT", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule(EffectOn.COMMON,"MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
+	public static Rule ADD_STRENGTH_TO_MELEE_AR = new Rule(EffectOn.COMMON,"ADD_STRENGTH_TO_MELEE_AR", Rule.Type.BOOLEAN, RES, "true");
 
 	
 	//-------------------------------------------------------------------
@@ -52,7 +53,8 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_ALLOW_LEGAL_AVAIL7PLUS,
 				ALLOW_TRANSHUMANISM,
 				CHARGEN_EXTENDED_CONTACT,
-				MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP,							
+				MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP,	
+				ADD_STRENGTH_TO_MELEE_AR,
 		};
 		
 		List<Rule> merged = new ArrayList<>();

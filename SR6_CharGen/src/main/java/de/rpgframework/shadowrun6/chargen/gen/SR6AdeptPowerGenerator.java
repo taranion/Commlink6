@@ -9,9 +9,10 @@ import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
+import de.rpgframework.shadowrun6.Shadowrun6Rules.PRIORITY_MAGIC;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6AdeptPowerController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.gen.Shadowrun6Rules.PRIORITY_MAGIC;
 
 /**
  * @author prelle

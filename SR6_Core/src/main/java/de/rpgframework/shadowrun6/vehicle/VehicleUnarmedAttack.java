@@ -14,9 +14,9 @@ public class VehicleUnarmedAttack {
 	
 	private VehicleOperationMode operationMode;
 	private int attackRating;
-	private List<PoolCalculation> attackRatingCalc;
+	private List<PoolCalculation<Integer>> attackRatingCalc;
 	private int pool;
-	private List<PoolCalculation> poolCalc;
+	private List<PoolCalculation<Integer>> poolCalc;
 	private Damage damage;
 
 	//---------------------------------------------------------
@@ -46,7 +46,7 @@ public class VehicleUnarmedAttack {
 	/**
 	 * @return the attackRatingCalc
 	 */
-	public List<PoolCalculation> getAttackRatingCalculation() {
+	public List<PoolCalculation<Integer>> getAttackRatingCalculation() {
 		return attackRatingCalc;
 	}
 
@@ -54,7 +54,7 @@ public class VehicleUnarmedAttack {
 	/**
 	 * @param attackRatingCalc the attackRatingCalc to set
 	 */
-	public void setAttackRating(List<PoolCalculation> attackRatingCalc) {
+	public void setAttackRating(List<PoolCalculation<Integer>> attackRatingCalc) {
 		this.attackRatingCalc = attackRatingCalc;
 	}
 
@@ -78,7 +78,7 @@ public class VehicleUnarmedAttack {
 	/**
 	 * @return the poolCalc
 	 */
-	public List<PoolCalculation> getPoolCalculation() {
+	public List<PoolCalculation<Integer>> getPoolCalculation() {
 		return poolCalc;
 	}
 
@@ -86,7 +86,7 @@ public class VehicleUnarmedAttack {
 	/**
 	 * @param poolCalc the poolCalc to set
 	 */
-	public void setPool(List<PoolCalculation> poolCalc) {
+	public void setPool(List<PoolCalculation<Integer>> poolCalc) {
 		this.poolCalc = poolCalc;
 	}
 

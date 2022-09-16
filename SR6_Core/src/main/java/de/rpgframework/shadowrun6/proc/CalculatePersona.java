@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun6.Persona;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 
@@ -123,7 +124,7 @@ public class CalculatePersona implements ProcessingStep {
 		/*
 		 * Find the best cyberdeck
 		 */
-		CarriedItem bestAS = null;
+		CarriedItem<ItemTemplate> bestAS = null;
 		int bestSum = 0;
 		for (CarriedItem item : model.getCarriedItems()) {
 			if (!item.hasAttribute(SR6ItemAttribute.ATTACK))
@@ -134,8 +135,11 @@ public class CalculatePersona implements ProcessingStep {
 			int s = item.getAsValue(SR6ItemAttribute.SLEAZE).getModifiedValue();
 			int sum = a+s;
 			if (sum>bestSum) {
+				// Previous best is not best anymor
+				if (bestAS!=null) bestAS.setPrimary(false);
 				bestAS = item;
 				bestSum= sum;
+				bestAS.setPrimary(true);
 				persona.setAttribute(item.getAsValue(SR6ItemAttribute.ATTACK));
 				persona.setAttribute(item.getAsValue(SR6ItemAttribute.SLEAZE));
 			}
@@ -149,19 +153,14 @@ public class CalculatePersona implements ProcessingStep {
 		}
 		if (bestAS!=null)
 			bestAccessDevice = bestAS;
-		for (CarriedItem item : model.getCarriedItems()) {
-			if (!item.hasAttribute(SR6ItemAttribute.ATTACK))
-				continue;
-			item.setPrimary(bestAS==item);
-		}
 		logger.log(Level.INFO, "best device for AS: "+bestAS);
 
 		/*
 		 * Find the best commlink or cyber jack
 		 */
-		CarriedItem bestDF = null;
+		CarriedItem<ItemTemplate> bestDF = null;
 		bestSum = 0;
-		for (CarriedItem item : model.getCarriedItems()) {
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 			if (!item.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
 				continue;
 			logger.log(Level.INFO, "  consider for DF: "+item);
@@ -169,8 +168,13 @@ public class CalculatePersona implements ProcessingStep {
 			int f = item.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
 			int sum = d+f;
 			if (sum>bestSum) {
+				// Previous best DF is not primary anymore
+				if (bestDF!=null) {
+					bestDF.setPrimary(false);
+				}
 				bestDF = item;
 				bestSum= sum;
+				bestDF.setPrimary(true);
 				persona.setAttribute(item.getAsValue(SR6ItemAttribute.DATA_PROCESSING));
 				persona.setAttribute(item.getAsValue(SR6ItemAttribute.FIREWALL));
 			}
@@ -184,11 +188,6 @@ public class CalculatePersona implements ProcessingStep {
 		}
 		if (bestAS!=null)
 			bestAccessDevice = bestAS;
-		for (CarriedItem item : model.getCarriedItems()) {
-			if (!item.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
-				continue;
-			item.setPrimary(bestAS==item);
-		}
 		logger.log(Level.INFO, "best device for DF: "+bestDF);
 		logger.log(Level.INFO, "best access device: "+bestAccessDevice);
 

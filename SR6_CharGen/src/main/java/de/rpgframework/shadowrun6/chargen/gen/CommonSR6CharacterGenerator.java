@@ -18,6 +18,7 @@ import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 

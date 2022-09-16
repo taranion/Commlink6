@@ -8,14 +8,22 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -150,15 +158,15 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX);
 			val.setDistributed(0);
 			val.clearModifications();
-			CarriedItem bestDF = Shadowrun6Tools.getBestMatrixDF(model);
+			CarriedItem<ItemTemplate> bestDF = Shadowrun6Tools.getBestMatrixDF(model);
 			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
 				// Technomancers
 				addNaturalModifier(val,ShadowrunAttribute.LOGIC);
 				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
-//			} else if (bestDF!=null) {
-//				// With commlink
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, SR6ItemAttribute.INITIATIVE_MATRIX, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue(), ModificationType.RELATIVE, Attribute.REACTION));
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, SR6ItemAttribute.INITIATIVE_MATRIX, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
+			} else if (bestDF!=null) {
+				// With commlink
+				addNaturalModifier(val,ShadowrunAttribute.REACTION);
+				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
 			} 
 			logger.log(Level.DEBUG, " Base INI Matrix = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue()+" d6");
 			// Minor actions (Matrix)
@@ -176,11 +184,11 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 				// Technomancers
 				addNaturalModifier(val,ShadowrunAttribute.LOGIC);
 				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
-//			} else if (bestDF!=null) {
-//				addNaturalModifier(val, bestDF.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue(), ModificationType.RELATIVE, SR6ItemAttribute.DATA_PROCESSING));
-//				val.addModification(new AttributeModification(ValueType.NATURAL, ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
+			} else if (bestDF!=null) {
+				addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
+				addNaturalModifier(val, ShadowrunAttribute.INTUITION);
 			} 
-//			logger.log(Level.DEBUG, " Base INI Matrix VR = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD).getModifiedValue()+" d6");
+			logger.log(Level.DEBUG, " Base INI Matrix VR = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD).getModifiedValue()+" d6");
 
 			/*
 			 * matrix initiative (VR, cold sim)
@@ -192,11 +200,11 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 				// Technomancers
 				addNaturalModifier(val,ShadowrunAttribute.LOGIC);
 				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
-//			} else if (bestDF!=null) {
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.INITIATIVE_MATRIX_VR_HOT, bestDF.getAsValue(ItemAttribute.DATA_PROCESSING).getModifiedValue(), ModificationType.RELATIVE, ItemAttribute.DATA_PROCESSING));
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.INITIATIVE_MATRIX_VR_HOT, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
+			} else if (bestDF!=null) {
+				addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
+				addNaturalModifier(val, ShadowrunAttribute.INTUITION);
 			} 
-//			logger.log(Level.DEBUG, " Base INI Matrix VR Hot = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT).getModifiedValue()+" d6");
+			logger.log(Level.DEBUG, " Base INI Matrix VR Hot = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT).getModifiedValue()+" d6");
 
 			/*
 			 * Defensive
@@ -331,21 +339,22 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			 * Defense rating
 			 * First of all find the highest normal armor
 			 */
-			CarriedItem<ItemTemplate> bestArmor = null;
+			Shadowrun6Tools.flagItemWithHighestAttribute(model, SR6ItemAttribute.DEFENSE_PHYSICAL, SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
+//			CarriedItem<ItemTemplate> bestArmor = null;
 //			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-//				if (!item.hasAttribute(ItemAttribute.ARMOR) || item.isType(ItemType.VEHICLES) || item.isType(Arrays.asList(ItemType.droneTypes())))
+//				if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
 //					continue;
-//				item.setIgnoredForCalculations(true);
+//				item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
 //				// If no previous selection or armor is better, use it
-//				if (bestArmor==null || item.getAsValue(ItemAttribute.ARMOR).getModifiedValue()> bestArmor.getAsValue(ItemAttribute.ARMOR).getModifiedValue() )
+//				if (bestArmor==null || item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()> bestArmor.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue() )
 //					bestArmor = item;
-//				// Gear pieces that add armor are also allowed
-//				if (item.getItem().getArmorData()!=null && item.getItem().getArmorData().addsToMain())
-//					item.setIgnoredForCalculations(false);
+////				// Gear pieces that add armor are also allowed
+////				if (item.getResolved().getArmorData()!=null && item.getItem().getArmorData().addsToMain())
+////					item.setIgnoredForCalculations(false);
 //				logger.log(Level.DEBUG, "*  "+item.getNameWithRating()+" \t"+item.getAsValue(ItemAttribute.ARMOR).getModifiedValue()+": ignored="+item.isIgnoredForCalculations());
 //			}
 //			if (bestArmor!=null)
-//				bestArmor.setIgnoredForCalculations(false);
+//				bestArmor.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
 //			for (CarriedItem item : model.getItems(false)) {
 //				if (!item.hasAttribute(ItemAttribute.ARMOR) || item.isType(ItemType.VEHICLES) || item.isType(Arrays.asList(ItemType.droneTypes())))
 //					continue;
@@ -360,12 +369,12 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 //			}
 			logger.log(Level.DEBUG, "  Base Defensive rating = "+defRating);
 
-			for (CarriedItem item : model.getCarriedItems()) {
-//				if (!item.hasAttribute(ItemAttribute.ARMOR) || item.isIgnoredForCalculations() || item.isType(ItemType.VEHICLES) || item.isType(Arrays.asList(ItemType.droneTypes())))
-//					continue;
-//				ItemAttributeNumericalValue armorAtt = item.getAsValue(ItemAttribute.ARMOR);
-//				defRating += armorAtt.getModifiedValue();
-//				logger.log(Level.DEBUG, "  Add Defensive rating = "+armorAtt.getModifiedValue()+" from "+item.getNameWithRating());
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+				if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
+					continue;
+				ItemAttributeNumericalValue<SR6ItemAttribute> armorAtt = item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL);
+				defRating += armorAtt.getModifiedValue();
+				logger.log(Level.DEBUG, "  Add Defensive rating = "+armorAtt.getModifiedValue()+" from "+item.getNameWithRating());
 			}
 			val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
 			logger.log(Level.INFO, "Defensive rating = "+defRating+" = "+val);
@@ -398,38 +407,45 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 //					}
 //				}
 //			}
-//			
-//			/*
-//			 * Add strength to attack rating of all melee weapons (Errata 09.2021)
-//			 */
-//			int[] strengthAR = new int[] {model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue(),0,0,0,0};
-//			ItemAttributeModification iMod = new ItemAttributeModification(ItemAttribute.ATTACK_RATING, strengthAR);
-//			iMod.setSource(ShadowrunAttribute.STRENGTH);
-//			Skill melee = ShadowrunCore.getSkill("close_combat");
-//			SkillSpecialization unarmed = melee.getSpecialization("unarmed");
-//			for (CarriedItem item : model.getItemsRecursive(true, ItemType.weaponTypes())) {
-//				if (item.getItem().getWeaponData()!=null && item.getItem().getWeaponData().getSkill()==melee && item.getItem().getWeaponData().getSpecialization()!=unarmed) {
-//					item.getAttribute(ItemAttribute.ATTACK_RATING).addModification(iMod);
-//					logger.log(Level.DEBUG, "Added "+iMod+" to "+item);
+			
+			/*
+			 * Add strength to attack rating of all melee weapons (Errata 09.2021)
+			 */
+			if (model.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
+				int[] strengthAR = new int[] { model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue(), 0, 0,
+						0, 0 };
+//				ValueModification iMod = new ValueModification(
+//						ShadowrunReference.ITEM_ATTRIBUTE,
+//						SR6ItemAttribute.ATTACK_RATING.name(), 
+//						strengthAR,
+//						ShadowrunAttribute.STRENGTH);
+//				SR6Skill melee = Shadowrun6Core.getSkill("close_combat");
+//				SkillSpecialization<SR6Skill> unarmed = melee.getSpecialization("unarmed");
+//				for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.weaponTypes())) {
+//					SR6Skill skill = item.getAsObject(SR6ItemAttribute.SKILL).getValue();
+//					SkillSpecialization<SR6Skill> spec = item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getValue();
+//					if (skill==melee && spec != unarmed) {
+//						item.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(iMod);
+//						logger.log(Level.DEBUG, "Added " + iMod + " to " + item);
+//					}
 //				}
+			}
+			
+			/*
+			 * Unarmed attacks
+			 */
+			int attRat = model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue()+ model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue();
+//			logger.log(Level.INFO, "AR = "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING));
+//			logger.log(Level.INFO, "AR = "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifications());
+//			logger.log(Level.INFO, "AR = "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue());
+//			if (model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue()>0) {
+//				logger.log(Level.INFO, "Add "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue()+" to unarmed attack rating");
+//				attRat += model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue(); 
 //			}
-//
-//			
-//			/*
-//			 * Unarmed attacks
-//			 */
-//			int attRat = model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue()+ model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue();
-////			logger.log(Level.INFO, "AR = "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING));
-////			logger.log(Level.INFO, "AR = "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifications());
-////			logger.log(Level.INFO, "AR = "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue());
-////			if (model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue()>0) {
-////				logger.log(Level.INFO, "Add "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue()+" to unarmed attack rating");
-////				attRat += model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue(); 
-////			}
-//			
-//			for (CarriedItem item : model.getItems(true)) {
-//				if (item.getItem().getId().startsWith("unarmed")) {
-//					item.setAttributeOverride(ItemAttribute.ATTACK_RATING, new int[] {attRat,0,0,0,0});
+			
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+				if (item.getKey().startsWith("unarmed")) {
+//					item.setAttributeOverride(SR6ItemAttribute.ATTACK_RATING, new int[] {attRat,0,0,0,0});
 //					// Apply eventually unarmed AR modifiers
 //					ItemAttributeObjectValue oVal = item.getAsObject(ItemAttribute.ATTACK_RATING);
 //					for (Modification mod : model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifications()) {
@@ -458,8 +474,8 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 //					}
 //					
 //					logger.log(Level.DEBUG, "Set Unarmed attack with attack rating "+Arrays.toString((int[])item.getAsObject(ItemAttribute.ATTACK_RATING).getModifiedValue())+" and current damage "+dmg);
-//				}
-//			}
+				}
+			}
 
 		} finally {
 			logger.log(Level.TRACE,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
@@ -468,8 +484,17 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	}
 
 	//-------------------------------------------------------------------
-	private void addNaturalModifier(AttributeValue val, ShadowrunAttribute attr) {
-		val.addModification( new ValueModification(ShadowrunReference.ATTRIBUTE, attr.name(), model.getAttribute(attr).getModifiedValue(), attr) );
+	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, ShadowrunAttribute attr) {
+		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), model.getAttribute(attr).getModifiedValue(), attr);
+		valMod.setSource(attr);
+		val.addModification( valMod );
+	}
+
+	//-------------------------------------------------------------------
+	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
+		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), item.getAsValue(attr).getModifiedValue(), attr);
+		valMod.setSource(attr);
+		val.addModification( valMod );
 	}
 
 }

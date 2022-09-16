@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
@@ -19,8 +20,10 @@ import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
+import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
+import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -195,4 +198,5 @@ public class ItemUtil {
 		}
 		return null;
 	}
+
 }

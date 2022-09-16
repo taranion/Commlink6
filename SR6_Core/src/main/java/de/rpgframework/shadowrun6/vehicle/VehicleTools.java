@@ -3,23 +3,31 @@ package de.rpgframework.shadowrun6.vehicle;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
+import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
-import de.rpgframework.shadowrun.ShadowrunCore;
+import de.rpgframework.shadowrun.DamageElement;
+import de.rpgframework.shadowrun.DamageType;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.items.ItemSubType;
+import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.VehicleData;
+import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
 
 /**
  * @author prelle
@@ -30,69 +38,74 @@ public class VehicleTools {
 	private final static Logger logger = System.getLogger("shadowrun6");
 
 	//---------------------------------------------------------
-	public static VehicleUnarmedAttack getVehicleUnarmed(Shadowrun6Character model, CarriedItem vehicle, VehicleOperationMode mode) {
+	public static VehicleUnarmedAttack getVehicleUnarmed(Shadowrun6Character model, CarriedItem<ItemTemplate> vehicle, VehicleOperationMode mode) {
 		logger.log(Level.WARNING, "TODO: getVehicleUnarmed not implemented yet");
 		// Collect some necessary data
-//		CarriedItem simrig = model.getItem("control_rig");
-//		int simRigRating = (simrig==null)?0:simrig.getRating();
-//		CarriedItem rcc = Shadowrun6Tools.getBestRCC(model);
-//		CarriedItem simSenseOverdrive = model.getItem("simsense_overdrive");
-//		
-//		Skill pilotSkill = Shadowrun6Core.getSkill("piloting");
-//		String spec = (Shadowrun6Tools.getSpecializationForVehicle(vehicle.getItem())!=null)?Shadowrun6Tools.getSpecializationForVehicle(vehicle.getItem()).getId():null;
-//		List<Shadowrun6Tools.PoolCalculation> driverPilotPool = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, pilotSkill, spec);
-//		if (mode==VehicleOperationMode.AUTONOMOUS) {
-//			CarriedItem autosoft = vehicle.getEmbeddedItem("maneuvering");
-//			driverPilotPool.clear();
-//			if (autosoft == null)
-//				driverPilotPool.add(new Shadowrun6Tools.PoolCalculation(-1, ShadowrunCore.getItem("maneuvering").getName()));
-//			else
-//				driverPilotPool.add(new Shadowrun6Tools.PoolCalculation(autosoft.getRating(), autosoft.getNameWithRating()));
-//		} else if (mode==VehicleOperationMode.RCC) {
-//			if (rcc==null) return null;
-//			CarriedItem autosoft = rcc.getEmbeddedItem("maneuvering");
-//			driverPilotPool.clear();
-//			if (autosoft == null)
-//				driverPilotPool.add(new Shadowrun6Tools.PoolCalculation(-1, ShadowrunCore.getItem("maneuvering").getName()));
-//			else
-//				driverPilotPool.add(new Shadowrun6Tools.PoolCalculation(autosoft.getRating(), autosoft.getNameWithRating()));			
-//		}
-//		
-//		int sensor = vehicle.getAsValue(ItemAttribute.SENSORS).getModifiedValue();
-//		int body   = vehicle.getAsValue(ItemAttribute.BODY).getModifiedValue();
-//		int armor  = vehicle.getAsValue(ItemAttribute.ARMOR).getModifiedValue();
-//		int pilot  = vehicle.getAsValue(ItemAttribute.PILOT).getModifiedValue();
-//		
-//		VehicleUnarmedAttack ret = new VehicleUnarmedAttack(mode);
-//		// Damage is (Body / 2, rounded up, +1 for each current Speed Interval)
-//		// Physical damage
-//		int dmg= Math.round(body/2.0f);
-//		ret.setDamage(new Damage(dmg, false, Damage.Type.PHYSICAL, WeaponDamageType.NORMAL));
-//		
-//		switch (mode) {
-//		case DRIVING:
-//			// The Attack Rating of a vehicle is Piloting of the driver + Sensor.
-//			List<Shadowrun6Tools.PoolCalculation> arPool = new ArrayList<>(driverPilotPool);
-//			arPool.add(new Shadowrun6Tools.PoolCalculation(sensor, ItemAttribute.SENSORS.getName()));
-//			int ar = (int)arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-//			ret.setAttackRating(ar);
-//			ret.setAttackRating(arPool);
-////			logger.info("Unarmed: "+vehicle.getName()+": AR   driven "+arPool);
-//			// The attempt to hit another being or vehicle is an Opposed test
-//			// — Piloting + Reaction vs. 
-//			List<Shadowrun6Tools.PoolCalculation> attPool = new ArrayList<>(driverPilotPool);
-//			attPool.addAll(Shadowrun6Tools.getAttributePoolCalculation(model, Attribute.REACTION));
+		CarriedItem<ItemTemplate> simrig = model.getCarriedItem("control_rig");
+		int simRigRating = (simrig==null)?0:ItemUtil.getRating(simrig);
+		CarriedItem<ItemTemplate> rcc = Shadowrun6Tools.getBestRCC(model);
+		CarriedItem<ItemTemplate> simSenseOverdrive = model.getCarriedItem("simsense_overdrive");
+		
+		SR6Skill pilotSkill = Shadowrun6Core.getSkill("piloting");
+		String spec = (getSpecializationForVehicle(vehicle.getResolved())!=null)?getSpecializationForVehicle(vehicle.getResolved()).getId():null;
+		List<PoolCalculation<Integer>> driverPilotPool = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, pilotSkill, spec);
+		if (mode==VehicleOperationMode.AUTONOMOUS) {
+			CarriedItem<ItemTemplate> autosoft = vehicle.getAccessory("maneuvering");
+			driverPilotPool.clear();
+			if (autosoft == null)
+				driverPilotPool.add(new PoolCalculation<Integer>(-1, Shadowrun6Core.getItem(ItemTemplate.class,"maneuvering").getName()));
+			else
+				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoft), autosoft.getNameWithRating()));
+		} else if (mode==VehicleOperationMode.RCC) {
+			if (rcc==null) return null;
+			CarriedItem<ItemTemplate> autosoft = rcc.getAccessory("maneuvering");
+			driverPilotPool.clear();
+			if (autosoft == null)
+				driverPilotPool.add(new PoolCalculation<Integer>(-1, Shadowrun6Core.getItem(ItemTemplate.class,"maneuvering").getName()));
+			else
+				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoft), autosoft.getNameWithRating()));			
+		}
+		
+		int sensor = vehicle.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue();
+		int body   = vehicle.getAsValue(SR6ItemAttribute.BODY).getModifiedValue();
+		int armor  = vehicle.getAsValue(SR6ItemAttribute.ARMOR).getModifiedValue();
+		int pilot  = vehicle.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue();
+		
+		ToIntFunction<PoolCalculation<Integer>> pcInt = new ToIntFunction<PoolCalculation<Integer>>() {
+			public int applyAsInt(PoolCalculation<Integer> pc) {
+				return pc.value;
+			}
+		};
+		VehicleUnarmedAttack ret = new VehicleUnarmedAttack(mode);
+		// Damage is (Body / 2, rounded up, +1 for each current Speed Interval)
+		// Physical damage
+		int dmg= Math.round(body/2.0f);
+		ret.setDamage(new Damage(dmg, DamageType.PHYSICAL, DamageElement.REGULAR));
+		
+		switch (mode) {
+		case DRIVING:
+			// The Attack Rating of a vehicle is Piloting of the driver + Sensor.
+			List<PoolCalculation<Integer>> arPool = new ArrayList<>(driverPilotPool);
+			arPool.add(new PoolCalculation<Integer>(sensor, SR6ItemAttribute.SENSORS.getName()));
+			int ar = (int)arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+			ret.setAttackRating(ar);
+			ret.setAttackRating(arPool);
+			logger.log(Level.INFO,"Unarmed: "+vehicle.getNameWithoutRating()+": AR   driven "+arPool);
+//			 The attempt to hit another being or vehicle is an Opposed test
+//			 — Piloting + Reaction vs. 
+			List<PoolCalculation<Integer>> attPool = new ArrayList<>(driverPilotPool);
+			attPool.addAll(Shadowrun6Tools.getAttributePoolCalculation(model, ShadowrunAttribute.REACTION));
 //			//logger.debug("Unarmed(MANUAL  ): "+vehicle.getName()+"::  "+attPool);
-//			int dice = (int)attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-//			ret.setPool(dice);
-//			ret.setPool(attPool);
-//			return ret;
-//		case JUMPED_IN:
+			int dice = (int)attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+			ret.setPool(dice);
+			ret.setPool(attPool);
+			break;
+		case JUMPED_IN:
 //			// The Attack Rating of a vehicle is Piloting of the driver + Sensor.
 //			// Assume rating of simrig is added
 //			if (simrig==null)
 //				return null;
-//			arPool = new ArrayList<>(driverPilotPool);
+			arPool = new ArrayList<>(driverPilotPool);
 //			arPool.add(new Shadowrun6Tools.PoolCalculation(sensor, ItemAttribute.SENSORS.getName()));
 //			arPool.add(new Shadowrun6Tools.PoolCalculation(simRigRating, simrig.getNameWithRating()));
 //			ar = (int)arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
@@ -114,9 +127,9 @@ public class VehicleTools {
 //			ret.setPool(dice);
 //			ret.setPool(attPool);
 //			logger.info("Unarmed(JUMPED ): "+vehicle.getName()+"::  "+attPool);
-//			return ret;
-//		case AUTONOMOUS:
-//			arPool = new ArrayList<>(driverPilotPool);
+			break;
+		case AUTONOMOUS:
+			arPool = new ArrayList<>(driverPilotPool);
 //			arPool.add(new Shadowrun6Tools.PoolCalculation(sensor, ItemAttribute.SENSORS.getName()));
 //			ar = (int) arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
 //			ret.setAttackRating(ar);
@@ -130,9 +143,9 @@ public class VehicleTools {
 //			ret.setPool(dice);
 //			ret.setPool(attPool);
 //			//logger.info("Unarmed(AUTONOM): "+vehicle.getName()+"::  "+attPool);
-//			return ret;
-//		case RCC:
-//			arPool = new ArrayList<>(driverPilotPool);
+			break;
+		case RCC:
+			arPool = new ArrayList<>(driverPilotPool);
 //			arPool.add(new Shadowrun6Tools.PoolCalculation(sensor, ItemAttribute.SENSORS.getName()));
 //			ar = (int) arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
 //			ret.setAttackRating(ar);
@@ -146,10 +159,10 @@ public class VehicleTools {
 //			//logger.info("Unarmed(RCC    ): "+vehicle.getName()+"::  "+attPool);
 //			ret.setPool(dice);
 //			ret.setPool(attPool);
-//			return ret;
-//		}
+			break;
+		}
 		
-		return null;
+		return ret;
 	}
 
 	//---------------------------------------------------------
@@ -640,6 +653,83 @@ public class VehicleTools {
 			
 			String mods = String.join(", ", list);
 			return mods;
+		}
+
+		//-------------------------------------------------------------------
+		public static SkillSpecialization getSpecializationForVehicle(ItemTemplate item) {
+			SR6Skill pilot = Shadowrun6Core.getSkill("piloting");
+			if (pilot==null)
+				return null;
+//			if (item.isNoSpecialization())
+//				return null;
+			
+			ItemType typeI = item.getItemType(CarryMode.CARRIED);
+			switch (typeI) {
+			case VEHICLES:
+				switch (item.getItemSubtype(CarryMode.CARRIED)) {
+				case BIKES:
+				case ATVS:
+				case CARS:
+				case TRUCKS:
+				case VANS:
+				case BUS:
+				case TRACKED:
+				case SPECIAL_VEHICLES:			
+				case WALKER:
+					return pilot.getSpecialization("ground_craft") ;
+				case HOVERCRAFT:
+				case PWC:
+				case BOATS:
+				case SHIPS:
+				case SUBMARINES:
+					return pilot.getSpecialization("watercraft") ;
+				case FIXED_WING:
+				case ROTORCRAFT:
+				case LAV:
+				case LTAV:
+				case GRAV:			
+				case SPACECRAFT:
+				case VTOL:
+					return pilot.getSpecialization("aircraft") ;
+				default:
+				}
+				break;
+			case DRONE_MICRO:
+			case DRONE_MINI:
+			case DRONE_SMALL:
+			case DRONE_MEDIUM:
+			case DRONE_LARGE:
+				VehicleType type = item.getTypeData(VehicleData.class).getType();
+				if (type==null) {
+					logger.log(Level.ERROR,"Cannot detect skill for drone without type");
+					return null;
+				}
+				switch (type) {
+				case GROUND:
+					return pilot.getSpecialization("ground_craft") ;
+				case AIR:
+					return pilot.getSpecialization("aircraft") ;
+				case WATER:
+					return pilot.getSpecialization("watercraft") ;
+				}
+//				switch (item.getSubtype()) {
+//				case BIKES:
+//				case CARS:
+//				case TRUCKS:
+//					return ShadowrunCore.getSkill("pilot_ground_craft");
+//				case BOATS:
+//				case SUBMARINES:
+//					return ShadowrunCore.getSkill("pilot_watercraft");
+//				case FIXED_WING:
+//				case ROTORCRAFT:
+//				case VTOL:
+//					return ShadowrunCore.getSkill("pilot_aircraft");
+//				default:
+//				}
+
+			default:
+			}
+			return null;
 		}
 	
 }

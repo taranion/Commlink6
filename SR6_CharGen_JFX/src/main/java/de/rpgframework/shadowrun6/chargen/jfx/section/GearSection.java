@@ -23,7 +23,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.section.ComplexDataItemListSection;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
-import de.rpgframework.shadowrun.chargen.charctrl.ShadowrunRules;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;

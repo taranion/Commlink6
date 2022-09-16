@@ -1299,10 +1299,10 @@ public class Shadowrun6Tools {
 	/*
 	 * Find the best commlink or cyber jack
 	 */
-	public static CarriedItem getBestMatrixDF(Shadowrun6Character model) {
-		CarriedItem bestDF = null;
+	public static CarriedItem<ItemTemplate> getBestMatrixDF(Shadowrun6Character model) {
+		CarriedItem<ItemTemplate> bestDF = null;
 		int bestSum = 0;
-		for (CarriedItem item : model.getCarriedItems(ItemType.ELECTRONICS)) {
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.ELECTRONICS)) {
 			if (!item.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
 				continue;
 			logger.log(Level.INFO,"  consider for DF: "+item);
@@ -1321,16 +1321,15 @@ public class Shadowrun6Tools {
 	/**
 	 * Determine the most powerful RCC available
 	 */
-	public static CarriedItem getBestRCC(Shadowrun6Character model) {
-		CarriedItem ret = null;
-		for (CarriedItem item : model.getCarriedItems(ItemType.ELECTRONICS)) {
+	public static CarriedItem<ItemTemplate> getBestRCC(Shadowrun6Character model) {
+		CarriedItem<ItemTemplate> ret = null;
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.ELECTRONICS)) {
 			// Only evaluate RIGGER_CONSOLEs
-//			if (!item.getItem().isSubtype(ItemSubType.RIGGER_CONSOLE, ItemType.ELECTRONICS))
-//				continue;
-//			if (ret==null || ret.getAsValue(ItemAttribute.DEVICE_RATING).getModifiedValue()<item.getAsValue(ItemAttribute.DEVICE_RATING).getModifiedValue())
-//				ret = item;
+			if (getItemSubType(item)!=ItemSubType.RIGGER_CONSOLE)
+				continue;
+			if (ret==null || ret.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue()<item.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue())
+				ret = item;
 		}
-		logger.log(Level.WARNING, "ToDo: getBestRCC");
 		return ret;
 	}
 
@@ -1478,6 +1477,27 @@ public class Shadowrun6Tools {
 			}
 		}
 		return ret;
+	}
+
+	//---------------------------------------------------------
+	public static CarriedItem<ItemTemplate> flagItemWithHighestAttribute(Shadowrun6Character model, SR6ItemAttribute attrib, SR6ItemFlag flag, boolean set) {
+		CarriedItem<ItemTemplate> best = null;
+		int highest=Integer.MIN_VALUE;
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+			if (!item.hasAttribute(attrib))
+				continue;
+			
+			int val = item.getAsValue(attrib).getModifiedValue();
+			// If no previous selection item is better, use it
+			if (best==null || val>highest) {
+				// Old best remove flag
+				if (best!=null) best.setAutoFlag(flag, !set);
+				best = item;
+				best.setAutoFlag(flag, set);
+			}
+			logger.log(Level.DEBUG,"*  "+item.getNameWithRating()+" \t"+item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()+": ignored="+item.hasAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS));
+		}
+		return best;
 	}
 
 	//---------------------------------------------------------
