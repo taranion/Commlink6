@@ -73,6 +73,7 @@ import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -514,6 +515,12 @@ public class Shadowrun6Tools {
 			}
 
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
+				if (tmp.getResolved()==null) {
+					tmp.setResolved(Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey()));
+					if (tmp.getVariantID()!=null && tmp.getVariant()==null) {
+						tmp.setVariant( tmp.getResolved().getVariant(tmp.getCarryMode()) );
+					}
+				}
 				resolver.process("", ShadowrunReference.ITEM_ATTRIBUTE, model, tmp, List.of());
 				SR6GearTool.recalculate("", model, tmp);
 			}
@@ -1382,11 +1389,20 @@ public class Shadowrun6Tools {
 	
 	//-------------------------------------------------------------------
 	public static ItemType getItemType(CarriedItem<ItemTemplate> model) {
+		if (!model.hasAttribute(SR6ItemAttribute.ITEMTYPE)) {
+			logger.log(Level.WARNING, "No ITEMTYPE for "+model.getKey());
+			System.exit(1);
+			return null;
+		}
 		return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
 	}
 	
 	//-------------------------------------------------------------------
 	public static ItemSubType getItemSubType(CarriedItem<ItemTemplate> model) {
+		if (!model.hasAttribute(SR6ItemAttribute.ITEMSUBTYPE)) {
+			logger.log(Level.WARNING, "No ITEMSUBTYPE for "+model.getKey());
+			return null;
+		}
 		return model.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
 	}
 	
