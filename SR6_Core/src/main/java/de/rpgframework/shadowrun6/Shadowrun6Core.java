@@ -16,6 +16,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterIOException;
@@ -45,12 +46,15 @@ public class Shadowrun6Core extends GenericCore {
 	
 	private static PriorityTable prioTable;
 	
+	private static GsonBuilder gson;
+	
 	//-------------------------------------------------------------------
 	static {
 		i18NResources = new MultiLanguageResourceBundle(Shadowrun6Core.class.getPackageName()+".i18n.core", Locale.ENGLISH, Locale.GERMAN);
 		prioTable   = new PriorityTable();
 		GearTool.setPerRPGStatsPhase1(RoleplayingSystem.SHADOWRUN6, SR6GearTool.SR6_PHASE1_STEPS);
 		GearTool.setPerRPGStatsPhase2(RoleplayingSystem.SHADOWRUN6, SR6GearTool.SR6_PHASE2_STEPS);
+		gson = new GsonBuilder().setPrettyPrinting();
 	}
 
 	//-------------------------------------------------------------------
@@ -162,7 +166,10 @@ public class Shadowrun6Core extends GenericCore {
 		try {
 			String json = (new Gson()).toJson(character.getCharGenSettings(Object.class));
 			character.setChargenSettingsJSON(json);
-			logger.log(Level.INFO, json);
+			if (logger.isLoggable(Level.TRACE)) {
+				json = gson.create().toJson(character.getCharGenSettings(Object.class));
+				logger.log(Level.TRACE, json);				
+			}
 			StringWriter out = new StringWriter();
 			serializer.write(character, out);
 			return out.toString().getBytes(Charset.forName("UTF-8"));

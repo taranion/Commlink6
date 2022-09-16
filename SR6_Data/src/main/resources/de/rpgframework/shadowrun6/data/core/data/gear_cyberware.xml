@@ -327,8 +327,8 @@
 		<attrdef id="PRICE" value="$RATING*30000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<valmod type="ATTRIBUTE" ref="AGILITY" value="$RATING"/>
-      	<valmod type="ATTRIBUTE" ref="STRENGTH" value="$RATING"/>
+      	<valmod type="ATTRIBUTE" ref="AGILITY" value="$RATING" set="AUGMENTED"/>
+      	<valmod type="ATTRIBUTE" ref="STRENGTH" value="$RATING" set="AUGMENTED"/>
       </modifications>
    </item>
    <item avail="4L" price="15000" id="reaction_enhancers" type="CYBERWARE" subtype="CYBER_BODYWARE">
@@ -426,9 +426,9 @@
     		<attrdef id="PRICE" value="20000"/>
     		<attrdef id="AVAILABILITY" value="4"/>
     		<modifications>
-  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
-  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" set="AUGMENTED" value="1" apply="CHARACTER"/>
+  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
+ 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="8"/>
     		</modifications>
     	</variant>
@@ -437,9 +437,9 @@
     		<attrdef id="PRICE" value="15000"/>
     		<attrdef id="AVAILABILITY" value="4"/>
     		<modifications>
-  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
-  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" set="AUGMENTED" value="1" apply="CHARACTER"/>
+  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
+ 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="15"/>
     		</modifications>
     	</variant>
@@ -448,9 +448,9 @@
     		<attrdef id="PRICE" value="12000"/>
     		<attrdef id="AVAILABILITY" value="3"/>
     		<modifications>
-  			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5"/>
-  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" set="AUGMENTED" value="0.5" apply="CHARACTER"/>
+  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
+ 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="5"/>
     		</modifications>
     	</variant>
@@ -459,9 +459,9 @@
     		<attrdef id="PRICE" value="10000"/>
     		<attrdef id="AVAILABILITY" value="3"/>
     		<modifications>
-  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5" apply="CHARACTER"/>
-  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2" apply="CHARACTER"/>
- 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2" apply="CHARACTER"/>
+  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" set="AUGMENTED" value="0.5" apply="CHARACTER"/>
+  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
+ 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="10"/>
     		</modifications>
     	</variant>
@@ -489,8 +489,8 @@
     		<attrdef id="PRICE" value="20000"/>
     		<modifications>
   				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
-  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2"/>
+ 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="10"/>
     		</modifications>
     	</variant>
@@ -499,8 +499,8 @@
     		<attrdef id="PRICE" value="15000"/>
     		<modifications>
   				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
-  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2"/>
+ 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="20"/>
     		</modifications>
     	</variant>
@@ -509,8 +509,8 @@
     		<attrdef id="PRICE" value="12000"/>
     		<modifications>
   			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5"/>
-  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2"/>
+ 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="6"/>
     		</modifications>
     	</variant>
@@ -519,8 +519,8 @@
     		<attrdef id="PRICE" value="10000"/>
     		<modifications>
   			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5"/>
-  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICAL" value="2"/>
- 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICAL" value="2"/>
+  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2"/>
+ 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="12"/>
     		</modifications>
     	</variant>
@@ -552,7 +552,7 @@
 		<attrdef id="PRICE"        value="$RATING*5000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
 		<modifications>
-			<valmod type="ATTRIBUTE" ref="CHOICE" choice="d5c88f1f-eb6f-4057-b9d0-b65c212747e6" value="$RATING"/>
+			<valmod type="ATTRIBUTE" ref="CHOICE" choice="d5c88f1f-eb6f-4057-b9d0-b65c212747e6" set="ARTIFICIAL" value="$RATING" apply="CHARACTER"/>
 		</modifications>
     </item>
     <item id="armor_increase" type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT">

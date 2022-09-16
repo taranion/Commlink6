@@ -21,6 +21,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
+import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
+import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
@@ -163,6 +165,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
 			processChain.add(new GetModificationsFromGear(model));
+			processChain.add(new ApplyModificationsGeneric(model));
 			processChain.add(equipment);
 			processChain.add(foci);
 			processChain.add(complex);
@@ -170,6 +173,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(sins);
 			processChain.add(lifestyles);
 			processChain.add(contacts);
+			processChain.add(new CalculateAttributePools(model, Locale.getDefault()));
 			processChain.add(new RemainingKarmaNuyenController(this));
 			processChain.add(new CalculateEssence(model));
 			processChain.add(new CalculateDerivedAttributes(model));

@@ -58,7 +58,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 			for (CarriedItem<? extends PieceOfGear> item : model.getCarriedItems()) {
 				logger.log(Level.DEBUG, "--item "+item.getKey());
 				for (Modification mod : item.getCharacterModifications()) {
-					logger.log(Level.INFO, "--item "+item.getKey()+": "+mod);
+					logger.log(Level.INFO, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());
 					if (mod instanceof ValueModification) {
 						ValueModification vMod = ((ValueModification)mod);
 						logger.log(Level.INFO, "--item "+item.getKey()+": 1-> "+vMod.hasFormula());

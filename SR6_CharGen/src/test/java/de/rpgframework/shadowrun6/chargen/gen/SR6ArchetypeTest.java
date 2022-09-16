@@ -1061,8 +1061,7 @@ public class SR6ArchetypeTest {
 		
 		OperationResult<CarriedItem<ItemTemplate>> ares = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_light_fire_75"));
 		assertTrue(ares.wasSuccessful());
-		System.exit(1);
-		OperationResult<CarriedItem<ItemTemplate>> ammo = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine"), "cased", CarryMode.CARRIED, new Decision(UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3"), "regular") );
+		OperationResult<CarriedItem<ItemTemplate>> ammo = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine"), null, CarryMode.CARRIED, new Decision(UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3"), "regular") );
 		assertTrue(ammo.wasSuccessful());
 		equip.increase(ammo.get());
 		equip.increase(ammo.get());
@@ -1235,6 +1234,17 @@ public class SR6ArchetypeTest {
 		
 		// Augmentations
 		ISR6EquipmentController equip = charGen.getEquipmentController();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
+		equip.increaseConversion();
 		OperationResult<CarriedItem<ItemTemplate>> lacing = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "bone_lacing"), "titanium", CarryMode.IMPLANTED, 
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
 		OperationResult<CarriedItem<ItemTemplate>> arm = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm"), "fullarm_obvious", CarryMode.IMPLANTED, 
@@ -1348,9 +1358,13 @@ public class SR6ArchetypeTest {
 		assertTrue(equip.embed(comm.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful());
 		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "katana")).wasSuccessful());
 		
+		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.STRENGTH);
+		System.out.println("Strength = "+aVal.getDisplayString());
+		System.out.println("Strength = "+aVal.getModifications());
+		
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
-		System.out.println(xml);
+//		System.out.println(xml);
 		
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);

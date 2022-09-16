@@ -40,7 +40,7 @@
    </quality>
    <quality id="double_jointed"   	  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <valmod type="SKILL" ref="athletics" value="1" set="EDGE_BONUS"/>
+       <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
      </modifications>
    </quality>
    <quality id="elemental_resistance" karma="12" pos="true" type="NORMAL">
@@ -61,8 +61,8 @@
    </quality>
    <quality id="first_impression"     karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <valmod type="SKILL" ref="con" value="1" set="EDGE_BONUS"/>
-       <valmod type="SKILL" ref="influence" value="1" set="EDGE_BONUS"/>
+       <checkmod type="SKILL" ref="con" value="2" what="EDGE"/>
+       <checkmod type="SKILL" ref="influence" value="2" what="EDGE"/>
        <relevancemod topic="SOCIAL"/>
      </modifications>
    </quality>
@@ -73,7 +73,7 @@
    </quality>
    <quality id="gearhead" 		  	  karma="10" pos="true" type="NORMAL" >
      <modifications>
-       <valmod type="SKILL" ref="engineering" value="1" set="EDGE_BONUS"/>
+       <checkmod type="SKILL" ref="engineering" value="1" what="EDGE"/>
      </modifications>
    </quality>
    <quality id="guts" 		  		  karma="12" pos="true" type="NORMAL" />
@@ -92,8 +92,8 @@
    		<choice type="TEXT" uuid="2cef71b7-7af8-4def-a788-d73903c776e9"/>
    	</choices>
      <modifications>
-       <valmod type="SKILL" ref="outdoors" value="1" set="EDGE_BONUS"/>
-       <valmod type="SKILL" ref="perception" value="1" set="EDGE_BONUS"/>
+       <checkmod type="SKILL" ref="outdoors" value="1" what="EDGE_ONLY_TEST"/>
+       <checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST"/>
      </modifications>
    </quality>
    <quality id="human-looking" 		  karma="6" pos="true" type="NORMAL">
@@ -112,7 +112,7 @@
    </quality>
    <quality id="juryrigger" 		  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <valmod type="SKILL" ref="engineering" value="1" set="EDGE_BONUS"/>
+       <checkmod type="SKILL" ref="engineering" value="1" what="EDGE_ONLY_TEST"/>
      </modifications>
    </quality>
    <quality id="long_reach"  		  karma="12" pos="true" type="NORMAL" >
@@ -135,7 +135,7 @@
    </quality>
    <quality id="photographic_memory"  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <valmod type="ATTRIBUTE" ref="MEMORY" value="1" set="EDGE_BONUS"/>
+       <checkmod type="ATTRIBUTE" ref="MEMORY" value="1" what="EDGE_ONLY_TEST"/>
      </modifications>
    </quality>
    <quality id="quick_healer" 		  karma="8" pos="true" type="NORMAL" />
@@ -145,7 +145,7 @@
    		<choice type="SPIRIT" uuid="e19ecf4c-1508-406e-9a40-70cf09907bc3"/>
    	</choices>
      <modifications>
-       <valmod type="SKILL" ref="conjuring" value="1" set="EDGE_BONUS"/>
+       <checkmod type="SKILL" ref="conjuring" value="1" what="EDGE"/>
      </modifications>
    </quality>
    <quality id="sprite_affinity"      karma="14" pos="true" type="NORMAL" multi="true">
@@ -153,19 +153,19 @@
    		<choice type="SPRITE" uuid="c073da22-050d-4349-8c6c-3519c2a7368d"/>
    	</choices>
      <modifications>
-       <valmod type="SKILL" ref="tasking" value="1" set="EDGE_BONUS"/>
+       <checkmod type="SKILL" ref="tasking" value="1" what="EDGE"/>
      </modifications>
    </quality>
    <quality id="thermographic_vision" karma="8" pos="true" type="NORMAL" />
    <quality id="toughness" 			  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1" set="EDGE_BONUS"/>
+       <checkmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1" what="EDGE_ONLY_TEST"/>
        <relevancemod topic="COMBAT"/>
      </modifications>
    </quality>
    <quality id="toxin_resistance"     karma="12" pos="true" type="NORMAL">
      <modifications>
-       <valmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" set="EDGE_BONUS"/>
+       <checkmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" what="EDGE_ONLY_TEST"/>
      </modifications>
    </quality>
 	<quality id="will_to_live" karma="8" pos="true" type="NORMAL" max="3">
@@ -206,7 +206,7 @@
    <quality id="bad_rep" 	 	      karma="8" pos="false" type="NORMAL" >
      <modifications>
        <relevancemod topic="SOCIAL"/>
-       <valmod type="SKILL" ref="influence" value="1" set="EDGE_USAGE"/>
+       <checkmod type="SKILL" ref="influence" value="1" what="NOT_SPEND_EDGE"/>
      </modifications>
    </quality>
    <quality id="combat_paralysis"  	  karma="8" pos="false" type="NORMAL" >
@@ -296,8 +296,10 @@
    		<choice type="TEXT" uuid="93911833-2a2c-418b-b610-4894779879bf"/>
    	</choices>
      <modifications>
-       <valmod type="SKILL" ref="con" value="0" set="EDGE_USAGE" />
-       <valmod type="SKILL" ref="influence" value="0" set="EDGE_USAGE" />
+       <checkmod type="SKILL" ref="con" value="0" what="NOT_EARN_EDGE" />
+       <checkmod type="SKILL" ref="con" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="SKILL" ref="influence" value="0" what="NOT_EARN_EDGE" />
+       <checkmod type="SKILL" ref="influence" value="0" what="NOT_SPEND_EDGE" />
      </modifications>
    </quality>
    <quality id="spirit_bane"	      karma="12" pos="false" type="NORMAL" multi="true">
@@ -305,7 +307,7 @@
    		<choice type="SPIRIT" uuid="281aba04-1bd9-4d84-b6f4-f7bb97d217f0"/>
    	</choices>
      <modifications>
-       <valmod type="SKILL" ref="conjuring" value="1" set="EDGE_BONUS"/>
+       <checkmod type="SKILL" ref="conjuring" value="1" what="OTHER"/>
      </modifications>
    </quality>
    <quality id="sprite_bane"      karma="12" pos="false" type="NORMAL" multi="true">
@@ -313,30 +315,32 @@
    		<choice type="SPRITE" uuid="75f01ecc-60f3-4b5b-98de-c80008ebffec"/>
    	</choices>
      <modifications>
-       <valmod type="SKILL" ref="tasking" value="1" set="EDGE_BONUS"/>
+       <checkmod type="SKILL" ref="tasking" value="1" what="OTHER"/>
      </modifications>
    </quality>
    <quality id="uncouth"	      	  karma="6" pos="false" type="NORMAL" >
      <modifications>
-       <valmod type="SKILL" ref="con" value="0" set="EDGE_USAGE" />
-       <valmod type="SKILL" ref="influence" value="0" set="EDGE_USAGE" />
+       <checkmod type="SKILL" ref="con" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="SKILL" ref="influence" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="ATTRIBUTE" ref="CHARISMA" value="0" what="NOT_SPEND_EDGE" />
      </modifications>
    </quality>
    <quality id="uneducated"           karma="6" pos="false" type="NORMAL" >
      <modifications>
-       <valmod type="SKILL" ref="biotech" value="0" set="EDGE_USAGE" />
-       <valmod type="SKILL" ref="cracking" value="0" set="EDGE_USAGE" />
-       <valmod type="SKILL" ref="electronics" value="0" set="EDGE_USAGE" />
-       <valmod type="SKILL" ref="engineering" value="0" set="EDGE_USAGE" />
+       <checkmod type="SKILL" ref="biotech" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="SKILL" ref="cracking" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="SKILL" ref="electronics" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="SKILL" ref="engineering" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="ATTRIBUTE" ref="LOGIC" value="0" what="NOT_SPEND_EDGE" />
      </modifications>
    </quality>
    <quality id="unsteady_hands"	      karma="4" pos="false" type="NORMAL" >
      <modifications>
-       <valmod type="SKILL" ref="athletics" value="0" set="EDGE_USAGE" />
-       <valmod type="SKILL" ref="close_combat" value="0" set="EDGE_USAGE" />
-       <valmod type="SKILL" ref="exotic_weapons" value="0" set="EDGE_USAGE" />
-       <valmod type="SKILL" ref="firearms" value="0" set="EDGE_USAGE" />
-       <valmod type="SKILL" ref="stealth" value="0" set="EDGE_USAGE" cond="true" />
+       <checkmod type="SKILL" ref="athletics" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="SKILL" ref="close_combat" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="SKILL" ref="exotic_weapons" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="SKILL" ref="firearms" value="0" what="NOT_SPEND_EDGE" />
+       <checkmod type="SKILL" ref="stealth" value="0" what="NOT_SPEND_EDGE" cond="true" />
      </modifications>
    </quality>
    <quality id="weak_immune_system"   karma="8" pos="false" type="NORMAL" />

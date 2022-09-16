@@ -39,7 +39,7 @@
    	<usage mode="IMPLANTED" value="0.2"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<valmod type="ATTRIBUTE" ref="AGILITY"  value="1" cond="y"/>
+      	<valmod type="ATTRIBUTE" ref="AGILITY"  value="1" cond="y" set="AUGMENTED"/>
         	<checkmod type="SKILL" ref="athletics" value="1" cond="y" what="EDGE"/>
       </modifications>
    </item>
@@ -51,7 +51,7 @@
       <attrdef id="PRICE" value="$RATING*31000"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="$RATING" apply="CHARACTER"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="$RATING"  set="AUGMENTED" apply="CHARACTER"/>
       </modifications>
    </item>
    <item id="muscle_toner" avail="4L" price="32000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
@@ -62,7 +62,7 @@
       <attrdef id="PRICE" value="$RATING*32000"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-         <valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING" apply="CHARACTER"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING"  set="AUGMENTED" apply="CHARACTER"/>
       </modifications>
    </item>
    <item id="orthoskin" avail="4L" price="6000" type="BIOWARE" subtype="BIOWARE_STANDARD">

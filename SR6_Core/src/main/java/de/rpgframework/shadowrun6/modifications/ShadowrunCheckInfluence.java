@@ -14,6 +14,8 @@ public enum ShadowrunCheckInfluence implements CheckInfluence {
 	REDUCE_THRESHOLD,
 	/** Edge gained by a test */
 	EDGE,
+	/** Edge gained only for use in that test */
+	EDGE_ONLY_TEST,
 	/** Can test be made at all */
 	USAGE,
 	EDGE_COST_MALUS,

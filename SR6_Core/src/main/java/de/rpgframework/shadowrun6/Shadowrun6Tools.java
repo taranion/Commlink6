@@ -78,6 +78,7 @@ import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
+import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.CalculatePersona;
@@ -123,6 +124,7 @@ public class Shadowrun6Tools {
 ////		new ApplySINModifications(),
 //		new ConnectSignatureManeuvers(),
 //		new ApplyRelevanceAndEdgeMods(),
+		CalculateAttributePools.class,
 		CalculateDerivedAttributes.class,
 		CalculateEssence.class,
 		CalculatePersona.class
@@ -770,7 +772,7 @@ public class Shadowrun6Tools {
 		for (Modification mod : aVal.getModifications()) {
 			if (mod.getReferenceType()==ShadowrunReference.ATTRIBUTE && mod instanceof ValueModification) {
 				ValueModification sMod = (ValueModification)mod;
-				if (!sMod.isConditional() && sMod.getSet()!=ValueType.MAX && sMod.getSet()!=ValueType.ARTIFICAL) {
+				if (!sMod.isConditional() && sMod.getSet()!=ValueType.MAX && sMod.getSet()!=ValueType.ARTIFICIAL) {
 					int val = Math.min(augAllowed, sMod.getValue());
 					if (sMod.getSet()==ValueType.NATURAL)
 						val = sMod.getValue();
@@ -835,7 +837,7 @@ public class Shadowrun6Tools {
 			for (Modification mod : sVal.getModifications()) {
 				if (mod.getReferenceType()==ShadowrunReference.SKILL && mod instanceof ValueModification) {
 					ValueModification sMod = (ValueModification)mod;
-					if (sMod.getResolvedKey()==skill && !sMod.isConditional() && sMod.getSet()!=ValueType.ARTIFICAL && sMod.getSet()!=ValueType.MAX) {
+					if (sMod.getResolvedKey()==skill && !sMod.isConditional() && sMod.getSet()!=ValueType.ARTIFICIAL && sMod.getSet()!=ValueType.MAX) {
 						int val = Math.min(augAllowed, sMod.getValue());
 						// Mark modifiers being capped with augmentation limit
 						PoolCalculation calc = new PoolCalculation(val, Shadowrun6Tools.getModificationSourceString(sMod.getSource()));

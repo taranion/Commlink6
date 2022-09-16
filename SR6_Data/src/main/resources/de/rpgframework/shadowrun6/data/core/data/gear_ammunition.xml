@@ -20,7 +20,7 @@
     <item id="ammo_bolt"          price="5" avail="2" type="AMMUNITION" subtype="CROSSBOWS" count="y" units="10"/>
     <item id="ammo_injection_bolt" price="50" avail="4" type="AMMUNITION" subtype="CROSSBOWS" count="y" units="10"/>
 
-	<item id="ammo_holdout_light_machine" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
+	<item id="ammo_holdout_light_machine" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" >
 		<choices>
 			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
 		</choices>

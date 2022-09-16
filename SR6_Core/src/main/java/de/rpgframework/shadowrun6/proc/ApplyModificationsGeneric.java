@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.data.ApplyTo;
+import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -14,6 +16,8 @@ import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -44,10 +48,13 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			DataItemModification mod = (DataItemModification)tmp;
 			switch ((ShadowrunReference) tmp.getReferenceType()) {
 			case ADEPT_POWER: return applyAdeptPower(model, mod);
+			case ATTRIBUTE  : return applyAttribute(model, (ValueModification) mod);
 			case QUALITY    : return applyQuality(model, mod);
+			case RULE       : return applyRule(model, mod);
 			default:
-				logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType());
-				System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType());
+				logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
+				System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
+				System.exit(1);
 			}
 		}
 		return false;
@@ -65,7 +72,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
-				if (tmp.getReferenceType()==ShadowrunReference.QUALITY) {
+				if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getReferenceType()==ShadowrunReference.QUALITY) {
 					applyModification(model, tmp);
 				} else {
 					unprocessed.add(tmp);
@@ -107,6 +114,22 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 	}
 
 	// -------------------------------------------------------------------
+	private static boolean applyAttribute(Shadowrun6Character model, ValueModification mod) {
+		ShadowrunAttribute item = mod.getReferenceType().resolve(mod.getKey());
+		AttributeValue<ShadowrunAttribute> value = model.getAttribute(item);
+		if (item == null) {
+			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such attribute {0}", mod.getKey());
+		}
+		if (value == null) {
+		}
+
+		value.addModification(mod);
+		logger.log(Level.DEBUG, "Added {0} to attribute {1}", mod.getValue(), item);
+
+		return true;
+	}
+
+	// -------------------------------------------------------------------
 	private static boolean applyQuality(Shadowrun6Character model, DataItemModification mod) {
 		Quality item = Shadowrun6Core.getItem(Quality.class, mod.getKey());
 		QualityValue value = model.getQuality(mod.getKey());
@@ -131,6 +154,24 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.DEBUG, " Level is now distr={0}   mod={1} = " + value.getName(), value.getDistributed(),
 					value.getModifier());
 			logger.log(Level.DEBUG, "  result=" + value);
+		}
+		return true;
+	}
+
+	// -------------------------------------------------------------------
+	private static boolean applyRule(Shadowrun6Character model, DataItemModification mod) {
+		SR6RuleFlag item = SR6RuleFlag.valueOf(mod.getKey());
+		//Rule item = Shadowrun6Rules.getRule(mod.getKey());
+		if (item==null) {
+			logger.log(Level.ERROR, "No such rule {0} - source {1}", mod.getKey(), mod.getSource());
+			System.exit(1);
+		}
+		if (mod.isRemove()) {
+			model.clearRuleFlag(item);
+			logger.log(Level.DEBUG, "Clear rule {0} from character", item);
+		} else {
+			model.addRuleFlag(item);
+			logger.log(Level.DEBUG, "Set rule {0} to character", item);
 		}
 		return true;
 	}
