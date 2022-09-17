@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -285,6 +286,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
 			addNaturalModifier(val, ShadowrunAttribute.CHARISMA);
 			logger.log(Level.DEBUG, " Composure = "+val.getModifiedValue());
+			logger.log(Level.DEBUG, "           = "+val.getModifications());
 
 			/*
 			 * Judge intentions
@@ -401,6 +403,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	//-------------------------------------------------------------------
 	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, ShadowrunAttribute attr) {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), model.getAttribute(attr).getModifiedValue(), attr);
+		valMod.setSet(ValueType.NATURAL);
 		valMod.setSource(attr);
 		val.addModification( valMod );
 	}
@@ -408,6 +411,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	//-------------------------------------------------------------------
 	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), item.getAsValue(attr).getModifiedValue(), attr);
+		valMod.setSet(ValueType.NATURAL);
 		valMod.setSource(attr);
 		val.addModification( valMod );
 	}

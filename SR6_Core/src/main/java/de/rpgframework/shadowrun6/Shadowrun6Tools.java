@@ -123,8 +123,8 @@ public class Shadowrun6Tools {
 //		new ConnectSignatureManeuvers(),
 //		new ApplyRelevanceAndEdgeMods(),
 		CalculateEssence.class,
-		CalculateAttributePools.class,
 		CalculateDerivedAttributes.class,
+		CalculateAttributePools.class,
 		CalculateMeleeAndUnarmed.class,
 		CalculatePersona.class
 	);
@@ -261,7 +261,7 @@ public class Shadowrun6Tools {
 			return ((DataItem)source).getName();
 		}
 		logger.log(Level.WARNING,"Missing treatment for modification source: "+source.getClass());
-		return source.getClass().getSimpleName();
+		return "?"+source.getClass().getSimpleName();
 	}
 
 	//-------------------------------------------------------------------

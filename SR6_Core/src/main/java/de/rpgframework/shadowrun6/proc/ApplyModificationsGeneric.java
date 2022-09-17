@@ -62,7 +62,9 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			case LIFESTYLE  : return applyLifestyle(model, mod);
 			case QUALITY    : return applyQuality(model, mod);
 			case RULE       : return applyRule(model, mod);
-			case ITEM_ATTRIBUTE: model.addItemModification(mod); return true;
+			case ITEM_ATTRIBUTE:
+			case ACTION:
+				model.addItemModification(mod); return true;
 			default:
 				logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
 				System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);

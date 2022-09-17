@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lifemods>
+	<lifemod id="it_support" type="adult">
+		<choices>
+			<choice type="ATTRIBUTE" uuid="ea862a41-ce8a-4751-948a-4516d869c75d" options="INTUITION,LOGIC,WILLPOWER"/>
+			<choice type="SKILL" uuid="8b1490ae-f83b-45de-8ba6-6d682b636dd5" options="cracking,electronics,engineering,tasking"/>
+		</choices>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="CHOICE" choice="ea862a41-ce8a-4751-948a-4516d869c75d" value="1"/>
+			<valmod type="SKILL" ref="CHOICE" choice="8b1490ae-f83b-45de-8ba6-6d682b636dd5" value="1"/>
+			<selmod>
+				<valmod type="ATTRIBUTE" ref="EDGE" value="1"/>
+				<valmod type="ATTRIBUTE" ref="RESONANCE" value="1"/>
+				<valmod type="CREATION_POINTS" ref="NUYEN" value="25000"/>		
+			</selmod>
+			<valmod type="CREATION_POINTS" ref="NUYEN" value="25000"/>
+			<valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2"/>
+			<allowmod type="CONTACT_TYPES" ref="academic"/>
+			<allowmod type="CONTACT_TYPES" ref="corporate"/>
+			<allowmod type="CONTACT_TYPES" ref="matrix"/>
+			<selmod>
+				<itemmod type="SKILL" ref="knowledge">
+					<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.maintenance_procedures"/>
+				</itemmod>
+				<itemmod type="SKILL" ref="knowledge">
+					<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.security_systems"/>
+				</itemmod>
+				<itemmod type="SKILL" ref="knowledge">
+					<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.tech_companies"/>
+				</itemmod>
+				<valmod type="SKILL" ref="language" value="1"/>
+			</selmod>
+		</modifications>
+	</lifemod>
+</lifemods>
