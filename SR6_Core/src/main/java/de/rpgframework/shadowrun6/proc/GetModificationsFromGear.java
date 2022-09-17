@@ -54,6 +54,10 @@ public class GetModificationsFromGear implements ProcessingStep {
 		logger.log(Level.TRACE, "ENTER: process");
 		try {
 			for (CarriedItem<? extends PieceOfGear> item : model.getCarriedItems()) {
+				if (item.isDirty()) {
+					SR6GearTool.recalculate("", model, item);
+				}
+				
 				logger.log(Level.DEBUG, "--item "+item.getKey());
 				for (Modification mod : item.getCharacterModifications()) {
 					logger.log(Level.INFO, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());

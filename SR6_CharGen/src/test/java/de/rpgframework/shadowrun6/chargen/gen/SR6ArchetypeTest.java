@@ -1270,7 +1270,7 @@ public class SR6ArchetypeTest {
 				null,
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"),
 				new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "AGILITY"),
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "3")
+				new Decision(ItemTemplate.UUID_RATING, "3")
 				).wasSuccessful()
 				);
 		assertTrue(equip.embed(
@@ -1280,7 +1280,7 @@ public class SR6ArchetypeTest {
 				null,
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"),
 				new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "STRENGTH"),
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "8")
+				new Decision(ItemTemplate.UUID_RATING, "8")
 				).wasSuccessful()
 				);
 		assertTrue(equip.embed(
@@ -1381,7 +1381,7 @@ public class SR6ArchetypeTest {
 		
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
-//		System.out.println(xml);
+		System.out.println(xml);
 		
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);

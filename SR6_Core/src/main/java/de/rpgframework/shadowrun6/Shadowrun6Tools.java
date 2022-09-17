@@ -170,7 +170,7 @@ public class Shadowrun6Tools {
 			List<Modification> unprocessed = new ArrayList<>();
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
-				logger.log(Level.DEBUG, "------ after "+processor.getClass().getSimpleName()+"     "+unprocessed);
+				logger.log(Level.INFO, "------ after "+processor.getClass().getSimpleName()+"     "+unprocessed);
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");

@@ -58,8 +58,10 @@ public class SR6GearTool extends GearTool {
 	public static <I extends IItemAttribute> OperationResult<List<Modification>> recalculate(String indent, Lifeform user, CarriedItem<?> item) {
 		logger.log(Level.INFO, "recalculate "+item.getKey());
 		try {
+			item.setDirty(false);
 			return GearTool.recalculate(indent, ShadowrunReference.ITEM_ATTRIBUTE, user, item);
 		} catch (DataErrorException e) {
+			item.setDirty(true);
 			if (e.getReferenceError()!=null) e.getReferenceError().setType(ShadowrunReference.GEAR);
 			throw e;
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
@@ -66,19 +67,32 @@ public class GetModificationsStep implements CarriedItemProcessor {
 		if (!(check instanceof ValueModification))
 			return check;
 		
-		ValueModification mod = (ValueModification)check;
-		if (mod.getFormula()!=null && !mod.getFormula().isResolved()) {
-			logger.log(Level.INFO, "  requires resolving: "+mod.getFormula());
-			String result = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, (FormulaImpl) mod.getFormula(), new VariableResolver(model, charac));
-			logger.log(Level.INFO, "  resolved to "+result);
-			ValueModification newMod = new ValueModification(mod.getReferenceType(), mod.getKey(), result);
-			newMod.setApplyTo(mod.getApplyTo());
-			newMod.setWhen(mod.getWhen());
-			newMod.setSource(mod.getSource());
-			logger.log(Level.INFO, "Resolve "+mod.getFormula()+" to "+result+" and add "+newMod);
-			return newMod;
+		ValueModification mod = ((ValueModification)check).clone();
+		
+		if ("CHOICE".equals(mod.getKey())) {
+			// Replace REF with decision from choice
+			if (mod.getConnectedChoice()==null) {
+				logger.log(Level.ERROR, "{0} has a CHOICE modification without UUID", model.getKey());
+			} else {
+				Decision dec = model.getDecision(mod.getConnectedChoice());
+				if (dec==null) {
+					logger.log(Level.WARNING, "{0}: Decision {1} for CHOICE mod not made", model.getKey(), mod.getConnectedChoice());					
+				} else {
+					mod.setKey(dec.getValue());
+					logger.log(Level.DEBUG, "{0}: Decision {1} for choice {2}", model.getKey(), dec.getValue(), mod.getConnectedChoice());
+				}
+			}
 		}
-		return check;
+		
+		if (mod.getFormula()!=null && !mod.getFormula().isResolved()) {
+			logger.log(Level.DEBUG, "  requires resolving: "+mod.getFormula());
+			String result = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, (FormulaImpl) mod.getFormula(), new VariableResolver(model, charac));
+			logger.log(Level.DEBUG, "  resolved to "+result);
+			mod.setValue(result);
+			logger.log(Level.DEBUG, "  Resolve "+mod.getFormula()+" to "+result+" and add "+mod);
+		}
+		logger.log(Level.INFO, "Add modification {0}", mod);
+		return mod;
 	}
 
 	//-------------------------------------------------------------------

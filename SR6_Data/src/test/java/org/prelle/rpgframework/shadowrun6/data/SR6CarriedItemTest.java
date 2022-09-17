@@ -346,4 +346,63 @@ public class SR6CarriedItemTest {
 		assertNotNull("No PRICE set",item.getAsValue(SR6ItemAttribute.PRICE));
 		assertEquals(30, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 	}
+
+	//-------------------------------------------------------------------
+	private static int getArtifical(ShadowrunAttribute key, List<Modification> mods) {
+		int sum = 0;
+		for (Modification mod : mods) {
+			if (mod.getReferenceType()!=ShadowrunReference.ATTRIBUTE)
+				continue;
+			ValueModification vMod = (ValueModification)mod;
+			if (vMod.getResolvedKey()!=key)
+				continue;
+			sum += vMod.getValue();
+		}
+		return sum;
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testCyberlimb() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, temp.getVariant("fullarm_obvious"), CarryMode.IMPLANTED);
+		item.addDecision(new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, AugmentationQuality.STANDARD.name()));
+		SR6GearTool.recalculate("", null, item);
+
+		assertNotNull("No PRICE set",item.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(15000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		
+		assertEquals(3, item.getCharacterModifications().size() );
+		// Artificial strength should be 2
+		assertEquals(2, getArtifical(ShadowrunAttribute.STRENGTH, item.getCharacterModifications()));
+		assertEquals(2, getArtifical(ShadowrunAttribute.AGILITY, item.getCharacterModifications()));
+		
+		// Increase STR
+		CarriedItem<ItemTemplate> incSTR = new CarriedItem<ItemTemplate>(Shadowrun6Core.getItem(ItemTemplate.class, "attribute_increase"), null, CarryMode.EMBEDDED);
+		incSTR.addDecision(new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, AugmentationQuality.STANDARD.name()));
+		incSTR.addDecision(new Decision(ItemTemplate.UUID_RATING, "4"));
+		incSTR.addDecision(new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "STRENGTH"));
+		SR6GearTool.recalculate("", null, incSTR);
+		assertEquals(4, getArtifical(ShadowrunAttribute.STRENGTH, incSTR.getCharacterModifications()));
+		
+		item.addAccessory(incSTR, ItemHook.CYBERLIMB_IMPLANT);
+		System.out.println("\n\n--------Recalculate----------");
+		SR6GearTool.recalculate("", null, item);
+		// Artificial strength should be 6
+		assertEquals(6, getArtifical(ShadowrunAttribute.STRENGTH, item.getCharacterModifications()));
+	}
+	
+	//-------------------------------------------------------------------
+	@Test
+	public void testCyberlimbIncrease() {
+		CarriedItem<ItemTemplate> incSTR = new CarriedItem<ItemTemplate>(Shadowrun6Core.getItem(ItemTemplate.class, "attribute_increase"), null, CarryMode.EMBEDDED);
+		incSTR.addDecision(new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, AugmentationQuality.STANDARD.name()));
+		incSTR.addDecision(new Decision(ItemTemplate.UUID_RATING, "4"));
+		incSTR.addDecision(new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "STRENGTH"));
+		SR6GearTool.recalculate("", null, incSTR);
+		assertEquals(4, getArtifical(ShadowrunAttribute.STRENGTH, incSTR.getCharacterModifications()));
+	}
+	
 }
