@@ -263,11 +263,12 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 				} else
 					numberOfQualities++;
 				
-				// Inject modifications from qualities
-				for (Modification mod : val.getEffectiveModifications(model)) {
-					logger.log(Level.DEBUG, "Add modification {0}", mod);
-					unprocessed.add(mod);
-				}
+//				// Inject modifications from qualities
+//				for (Modification mod : val.getEffectiveModifications(model)) {
+//					logger.log(Level.DEBUG, "Add modification {0}", mod);
+//					unprocessed.add(mod);
+//				}
+				// Done in GetModificationsFromQualities
 			}
 			
 			// Error conditions

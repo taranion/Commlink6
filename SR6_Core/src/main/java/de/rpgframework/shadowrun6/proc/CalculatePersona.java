@@ -205,7 +205,7 @@ public class CalculatePersona implements ProcessingStep {
 				persona.getDataProcessing().getModifiedValue() + 
 				persona.getFirewall().getModifiedValue()));
 		// Active program slots
-		if (bestAccessDevice!=null)
+		if (bestAccessDevice!=null && bestAccessDevice.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS)!=null)
 			persona.setAttribute(bestAccessDevice.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS));
 		else
 			persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.CONCURRENT_PROGRAMS,0));

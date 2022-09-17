@@ -7,11 +7,13 @@ import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 
 /**
  * @author prelle
@@ -39,23 +41,24 @@ public class ResetModifications implements ProcessingStep {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
 		System.err.println("ResetModifications");
 
+		model.clearEdgeModifications();
+		model.clearItemModifications();
 		try {
 			// Attributes
 			for (AttributeValue<ShadowrunAttribute> val : model.getAttributes()) {
 				val.clearModifications();
 			}
-			
-			AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR);
-			if (aVal==null) {
-				aVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.PHYSICAL_MONITOR);
-				model.setAttribute(aVal);
-			}
-			aVal.setDistributed(8);
-			aVal.clearModifications();
-			
+						
 			// Skills
 			for (SR6SkillValue val : model.getSkillValues()) {
 				val.clearModifications();
+			}
+
+			// Remove all auto-added items
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+				if (item.isAutoAdded()) {
+					model.removeCarriedItem(item);
+				}
 			}
 			
 			

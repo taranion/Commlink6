@@ -8,31 +8,28 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
- * @author stefa
+ * @author prelle
  *
  */
 public class CalculateDerivedAttributes implements ProcessingStep {
 
-	private final static Logger logger = System.getLogger(CalculateDerivedAttributes.class.getPackageName());
+	private final static Logger logger = System.getLogger(CalculateDerivedAttributes.class.getPackageName()+".derived");
 	
 	private Shadowrun6Character model;
 
@@ -55,8 +52,23 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		logger.log(Level.DEBUG, "START: process");
 		try {
 			DamageType unarmedDamageType = DamageType.STUN;
+			int baseDamage = 3;
 			// Apply attribute modifications
 			for (Modification _mod : previous) {
+				ShadowrunReference ref = (ShadowrunReference) _mod.getReferenceType();
+				if (ref==null) continue;
+				String key = ((DataItemModification)_mod).getKey();
+				switch (ref) {
+				case RULE:
+					SR6RuleFlag flag = ref.resolve(key);
+					switch (flag) {
+					case UNARMED_DAMAGE_IS_PHYSICAL:
+						logger.log(Level.DEBUG, "Consume {0}", _mod);
+						unarmedDamageType = DamageType.PHYSICAL;
+						continue;
+					}
+					break;
+				}
 				
 //				if (_mod instanceof AttributeModification) {
 //					AttributeModification mod = (ShadowrunAttributeModification)_mod;
@@ -83,10 +95,6 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 //						}
 //						item.addAutoModification(mod);
 //					}
-//				} else if (_mod instanceof DamageTypeModification) {
-//					DamageTypeModification mod = (DamageTypeModification)_mod;
-//					logger.log(Level.INFO, "  Set unarmed damage to "+mod.getType()+" from "+mod.getSource());
-//					unarmedDamageType = mod.getType();
 //				} else if (_mod instanceof SpecialRuleModification) {
 //					SpecialRuleModification mod = (SpecialRuleModification)_mod;
 //					switch (mod.getRule()) {
@@ -97,7 +105,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 //						unprocessed.add(_mod);
 //					}
 //				} else
-//					unprocessed.add(_mod);
+					unprocessed.add(_mod);
 			}
 
 			// Set character back to zero
@@ -384,99 +392,6 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 //				}
 //			}
 			val.setDistributed(defRating);
-
-			/*
-			 * Modify all weapons with attack rating
-			 */
-			// Store modifications for attack rating
-			List<Object> sourcesUsed = new ArrayList<>();
-//			for (Modification mod : model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifications()) {
-//				if (sourcesUsed.contains(mod.getSource())) {
-//					logger.log(Level.INFO, "Ignoring the AR modification from the same source appearing a second time");
-//					continue;
-//				}
-//				AttributeModification amod = (ShadowrunAttributeModification)mod;
-//				if (amod.getAttackRating()!=null) {
-//					logger.log(Level.INFO, "Apply global attack rating modification "+amod);
-//					sourcesUsed.add(mod.getSource());
-//					for (CarriedItem item : model.getItemsRecursive(true, ItemType.weaponTypes())) {
-//						ItemAttributeModification iMod = new ItemAttributeModification(ItemAttribute.ATTACK_RATING, amod.getAttackRating());
-//						iMod.setSource(amod.getSource());
-//						item.getAttribute(ItemAttribute.ATTACK_RATING).addModification(iMod);
-//						logger.log(Level.DEBUG, "Added "+iMod+" to "+item);
-//					}
-//				}
-//			}
-			
-			/*
-			 * Add strength to attack rating of all melee weapons (Errata 09.2021)
-			 */
-			if (model.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
-				int[] strengthAR = new int[] { model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue(), 0, 0,
-						0, 0 };
-//				ValueModification iMod = new ValueModification(
-//						ShadowrunReference.ITEM_ATTRIBUTE,
-//						SR6ItemAttribute.ATTACK_RATING.name(), 
-//						strengthAR,
-//						ShadowrunAttribute.STRENGTH);
-//				SR6Skill melee = Shadowrun6Core.getSkill("close_combat");
-//				SkillSpecialization<SR6Skill> unarmed = melee.getSpecialization("unarmed");
-//				for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.weaponTypes())) {
-//					SR6Skill skill = item.getAsObject(SR6ItemAttribute.SKILL).getValue();
-//					SkillSpecialization<SR6Skill> spec = item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getValue();
-//					if (skill==melee && spec != unarmed) {
-//						item.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(iMod);
-//						logger.log(Level.DEBUG, "Added " + iMod + " to " + item);
-//					}
-//				}
-			}
-			
-			/*
-			 * Unarmed attacks
-			 */
-			int attRat = model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue()+ model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue();
-//			logger.log(Level.INFO, "AR = "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING));
-//			logger.log(Level.INFO, "AR = "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifications());
-//			logger.log(Level.INFO, "AR = "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue());
-//			if (model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue()>0) {
-//				logger.log(Level.INFO, "Add "+model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue()+" to unarmed attack rating");
-//				attRat += model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifiedValue(); 
-//			}
-			
-			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-				if (item.getKey().startsWith("unarmed")) {
-//					item.setAttributeOverride(SR6ItemAttribute.ATTACK_RATING, new int[] {attRat,0,0,0,0});
-//					// Apply eventually unarmed AR modifiers
-//					ItemAttributeObjectValue oVal = item.getAsObject(ItemAttribute.ATTACK_RATING);
-//					for (Modification mod : model.getAttribute(ShadowrunAttribute.ATTACK_RATING).getModifications()) {
-//						AttributeModification amod = (ShadowrunAttributeModification)mod;
-//						if (amod.getValue()!=0) {
-//							logger.log(Level.INFO, "Apply unarmed attack rating modification "+amod);
-//							ItemAttributeModification nMod = new ItemAttributeModification(ItemAttribute.ATTACK_RATING, new int[] {amod.getValue(),0,0,0,0});
-//							nMod.setSource(amod.getSource());
-//							item.addAutoModification(nMod);
-//							oVal.addModification(nMod);
-//						}
-//					}
-//					
-//					
-//					// Damage is calculated later on the fly by method ShadowrunTools.getWeaponDamage
-//					Damage dmg = (Damage) item.getAsValue(ItemAttribute.DAMAGE);
-//					dmg.setType(unarmedDamageType);
-//					if (unarmedDamageType!=Type.STUN)
-//						logger.log(Level.INFO, "  Set damage type to "+unarmedDamageType);
-//					// Apply MELEE_DAMAGE
-//					for (Modification mod : model.getAttribute(ShadowrunAttribute.MELEE_DAMAGE).getModifications()) {
-//						ItemAttributeModification itemMod = new ItemAttributeModification(ItemAttribute.DAMAGE, ((ShadowrunAttributeModification)mod).getValue());
-//						itemMod.setSource(mod.getSource());
-//						logger.log(Level.DEBUG, "  add to unarmed damage: "+itemMod);
-//						dmg.addModification(itemMod);
-//					}
-//					
-//					logger.log(Level.DEBUG, "Set Unarmed attack with attack rating "+Arrays.toString((int[])item.getAsObject(ItemAttribute.ATTACK_RATING).getModifiedValue())+" and current damage "+dmg);
-				}
-			}
-
 		} finally {
 			logger.log(Level.TRACE,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
 		}

@@ -52,6 +52,7 @@ public class SR6MetaType extends MetaType {
 		getDescription();
 		
 		for (Modification mod : modifications) {
+			mod.setSource(this);
 			if (mod.getReferenceType()==null) {
 				logger.log(Level.ERROR,"Missing reference type for modification "+mod+" in metatype "+id);
 				continue;

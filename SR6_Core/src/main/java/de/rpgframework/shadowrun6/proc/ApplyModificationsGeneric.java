@@ -4,22 +4,31 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
+import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -49,8 +58,11 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			switch ((ShadowrunReference) tmp.getReferenceType()) {
 			case ADEPT_POWER: return applyAdeptPower(model, mod);
 			case ATTRIBUTE  : return applyAttribute(model, (ValueModification) mod);
+			case GEAR       : return applyGear(model, mod);
+			case LIFESTYLE  : return applyLifestyle(model, mod);
 			case QUALITY    : return applyQuality(model, mod);
 			case RULE       : return applyRule(model, mod);
+			case ITEM_ATTRIBUTE: model.addItemModification(mod); return true;
 			default:
 				logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
 				System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
@@ -72,7 +84,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
-				if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getReferenceType()==ShadowrunReference.QUALITY) {
+				if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED || tmp.getReferenceType()==ShadowrunReference.QUALITY) {
 					applyModification(model, tmp);
 				} else {
 					unprocessed.add(tmp);
@@ -130,6 +142,61 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 	}
 
 	// -------------------------------------------------------------------
+	private static boolean applyGear(Shadowrun6Character model, DataItemModification mod) {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, mod.getKey());
+		SR6PieceOfGearVariant variant = null;
+		if (mod.getVariant()!=null) {
+			variant = (SR6PieceOfGearVariant) item.getVariant(mod.getVariant());
+		}
+		CarryMode carry = CarryMode.CARRIED;
+		if (!item.getUsages().isEmpty()) {
+			carry = item.getUsages().get(0).getMode();
+		}
+		if (variant!=null && !variant.getUsages().isEmpty()) {
+			carry = variant.getUsages().get(0).getMode();
+		}
+		Decision[] dec = mod.getDecisions().toArray(new Decision[mod.getDecisions().size()]);
+		OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem(item, carry, variant, model, false, dec);
+		if (result.hasError()) {
+			logger.log(Level.ERROR, "Failed creating {0}/{1}/{2}: {3}", mod.getKey(), mod.getVariant(), carry, result.getError());
+			return false;
+		}
+		
+		logger.log(Level.INFO, "Put item in inventory: {0}", result.get());
+		model.addCarriedItem(result.get());
+		return true;
+	}
+
+	//-------------------------------------------------------------------
+	private static boolean applyLifestyle(Shadowrun6Character model, DataItemModification mod) {
+		LifestyleQuality item = Shadowrun6Core.getItem(LifestyleQuality.class, mod.getKey());
+		UUID uuidToSet = mod.getId();
+		if (uuidToSet==null) {
+			logger.log(Level.ERROR, "When injecting lifestyles, the modification should have an id='UUID' attribute");
+			return false;
+		}
+		SR6Lifestyle value = model.getLifestyle(uuidToSet);
+		if (value == null) {
+			value = new SR6Lifestyle(item);
+			if (mod instanceof ValueModification) {
+				value.setDistributed( ((ValueModification)mod).getValue() );
+			} else
+				value.setDistributed(1);
+			// Handle decisions
+			for (Decision dec : mod.getDecisions()) {
+				value.addDecision(dec);
+				logger.log(Level.DEBUG, "Add decision {0} to lifestyle {1}", dec, item);
+			}
+
+			model.addLifestyle(value);
+			logger.log(Level.DEBUG, "Add lifestyle {0} to character", item);
+		}
+		// Mark as auto-added
+		value.addModification(mod);
+		return true;
+	}
+
+	//-------------------------------------------------------------------
 	private static boolean applyQuality(Shadowrun6Character model, DataItemModification mod) {
 		Quality item = Shadowrun6Core.getItem(Quality.class, mod.getKey());
 		QualityValue value = model.getQuality(mod.getKey());

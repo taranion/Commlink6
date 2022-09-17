@@ -7,7 +7,6 @@ import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
@@ -17,7 +16,6 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
-import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -59,23 +57,26 @@ public class GetModificationsFromGear implements ProcessingStep {
 				logger.log(Level.DEBUG, "--item "+item.getKey());
 				for (Modification mod : item.getCharacterModifications()) {
 					logger.log(Level.INFO, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());
-					if (mod instanceof ValueModification) {
-						ValueModification vMod = ((ValueModification)mod);
-						logger.log(Level.INFO, "--item "+item.getKey()+": 1-> "+vMod.hasFormula());
-						if (vMod.hasFormula()) {
-							logger.log(Level.INFO, "--item "+item.getKey()+": 2-> "+vMod.getFormula().isResolved());
-							if (!vMod.getFormula().isResolved()) {
-								logger.log(Level.INFO, "--item "+item.getKey()+": 3-> Todo: Resolve "+vMod.getFormula());
-								String resolved = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, vMod.getFormula(), new VariableResolver(item, model));
-								logger.log(Level.INFO, "--item "+item.getKey()+": 4-> Resolved = "+resolved);
-								
-								System.exit(1);
-							}
-						}
-						
-						
-					}
-					unprocessed.add(mod);
+					// TODO:
+					// Shadowrun6Tools.instantiateModification
+					// um CHOICEs (z.B. von Reflex Recorder) mit Entscheidung zu verknüpfen
+					Modification realMod = mod.getReferenceType().instantiateModification(mod, item, model);
+					
+//					if (mod instanceof ValueModification) {
+//						ValueModification vMod = ((ValueModification)mod);
+//						logger.log(Level.INFO, "--item "+item.getKey()+": 1-> "+vMod.hasFormula());
+//						if (vMod.hasFormula()) {
+//							logger.log(Level.INFO, "--item "+item.getKey()+": 2-> "+vMod.getFormula().isResolved());
+//							if (!vMod.getFormula().isResolved()) {
+//								logger.log(Level.INFO, "--item "+item.getKey()+": 3-> Todo: Resolve "+vMod.getFormula());
+//								String resolved = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, vMod.getFormula(), new VariableResolver(item, model));
+//								logger.log(Level.INFO, "--item "+item.getKey()+": 4-> Resolved = "+resolved);
+//								
+//								System.exit(1);
+//							}
+//						}
+//					}
+					unprocessed.add(realMod);
 				}
 //				OperationResult<List<Modification>> modResult = SR6GearTool.recalculate("", model, item);
 //				if (modResult.hasError()) {

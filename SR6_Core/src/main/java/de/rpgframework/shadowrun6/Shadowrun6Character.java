@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.prelle.simplepersist.Element;
@@ -180,11 +182,16 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	}
 
 	//-------------------------------------------------------------------
-	/**
-	 * @return the qualities
-	 */
 	public List<SR6Lifestyle> getLifestyles() {
 		return lifestyles;
+	}
+
+	//-------------------------------------------------------------------
+	public SR6Lifestyle getLifestyle(UUID uuid) {
+		Optional<SR6Lifestyle> opt = lifestyles.stream().filter(ls -> uuid.equals(ls.getUuid())).findFirst();
+		if (opt.isPresent())
+			return opt.get();
+		return null;
 	}
 
 	//-------------------------------------------------------------------

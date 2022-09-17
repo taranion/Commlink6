@@ -110,10 +110,10 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 				if (model.getCharGenUsed().equals("prio")) {
 					settings = SR6PrioritySettings.class;
 				}
-				if (settings== null) {
-					logger.log(Level.ERROR, "Don't know how to get settings class for '{0}'",model.getCharGenUsed());
-					throw new NullPointerException("Don't know how to get settings class for '"+model.getCharGenUsed()+"'");
-				}
+			}
+			if (settings== null) {
+				logger.log(Level.ERROR, "Don't know how to get settings class for '{0}'",model.getCharGenUsed());
+				throw new NullPointerException("Don't know how to get settings class for '"+model.getCharGenUsed()+"'");
 			}
 			
 			SR6CharacterLeveller leveller = new SR6CharacterLeveller(model, handle, settings);

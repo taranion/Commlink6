@@ -13,9 +13,9 @@
 	</power>
    <power id="combat_sense"      cost="0.5" hasLevel="true" act="PASSIVE">
      <modifications>
-        <relevancemod topic="COMBAT" />
-        <!--valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL" value="1"/-->
-        <!--checkmod type="ATTRIBUTE" ref="DEFENSE_POOL" value="1" what="BONUS" cond="y" /-->
+        <valmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL" value="$LEVEL"/>
+        <valmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT" value="$LEVEL"/>
+        <valmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT" value="$LEVEL"/>
      </modifications>
    </power>
    <power id="critical_strike"   cost="1" hasLevel="true" act="PASSIVE">

@@ -73,7 +73,6 @@ import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
-import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -81,9 +80,13 @@ import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
+import de.rpgframework.shadowrun6.proc.CalculateMeleeAndUnarmed;
 import de.rpgframework.shadowrun6.proc.CalculatePersona;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
+import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
+import de.rpgframework.shadowrun6.proc.GetModificationsFromPowers;
+import de.rpgframework.shadowrun6.proc.GetModificationsFromTechniques;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
@@ -99,23 +102,18 @@ public class Shadowrun6Tools {
 	public final static List<Class<? extends ProcessingStep>> RECALCULATE_STEPS = Arrays.asList(
 		ResetModifications.class,
 		EnsureAttributePresence.class,
-//		new ResolveChoicesInReferences(),
 		GetModificationsFromMetaType.class,
 		ApplyModificationsGeneric.class,
-//		new GetModificationsFromMagicOrResonance(),
+		GetModificationsFromMagicOrResonance.class,
 		GetModificationsFromQualities.class,
-//		new ApplyAdeptPowerModifications(),
-////		new GetModificationsFromPowers(),
-//		new RecalculateEquipment(),
-////		new FixDeprecatedRecursiveAccessories(),
-//		new FixOldWeaponType(),
 		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),
 		GetModificationsFromFoci.class,
-//		new ApplyAdeptPowerModifications(),
 		ApplyModificationsGeneric.class,
-//		new GetModificationsFromPowers(),
-//		new GetModificationsFromTechniques(),
+//		new ApplyAdeptPowerModifications(),
+		GetModificationsFromPowers.class,
+		GetModificationsFromTechniques.class,
+		ApplyModificationsGeneric.class,
 //		new ApplyCarriedItemModifications(),
 //		new DistributeAccessoriesToContainers(),
 //		new ApplyAttributeModifications(),
@@ -124,9 +122,10 @@ public class Shadowrun6Tools {
 ////		new ApplySINModifications(),
 //		new ConnectSignatureManeuvers(),
 //		new ApplyRelevanceAndEdgeMods(),
+		CalculateEssence.class,
 		CalculateAttributePools.class,
 		CalculateDerivedAttributes.class,
-		CalculateEssence.class,
+		CalculateMeleeAndUnarmed.class,
 		CalculatePersona.class
 	);
 	
@@ -675,7 +674,7 @@ public class Shadowrun6Tools {
 	}
 	
 	//-------------------------------------------------------------------
-	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, CommonCharacter<?, ?, ?,?> model) {
+	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, Shadowrun6Character model) {
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
 			if ("CHOICE".equals( clone.getKey() )) {

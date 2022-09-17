@@ -227,7 +227,8 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 					model.setKarmaFree(model.getKarmaFree() - meta.getKarma());
 				}
 				// Add more modifications
-				unprocessed.addAll(meta.getModifications());
+//				unprocessed.addAll(meta.getModifications());
+				// Already done in GetModificationsFromMetaType
 			}
 		return unprocessed;
 		} finally {

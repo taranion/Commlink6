@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -113,13 +114,17 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			// Grant MAGIC or Resonance points
 			if (type.usesMagic()) {
 				logger.log(Level.INFO, "Selected " + type.getId() + " grants " + points + " MAGIC");
-				unprocessed.add(
-						new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), points));
+				ValueModification val = new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), points);
+				val.setSet(ValueType.NATURAL);
+				val.setSource(type);
+				unprocessed.add(val);
 				// Only for regular adepts - get power points
 			} else if (type.usesResonance()) {
 				logger.log(Level.INFO, "Selected " + type.getId() + " grants " + points + " RESONANCE");
-				unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(),
-						points));
+				ValueModification val = new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), points);
+				val.setSet(ValueType.NATURAL);
+				val.setSource(type);
+				unprocessed.add(val);
 			}
 			// For mystic adepts
 			SR6PrioritySettings sett = (SR6PrioritySettings) model.getCharGenSettings(SR6PrioritySettings.class);
@@ -127,7 +132,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			sett.mysticAdeptPowerPoints = Math.max(points, sett.mysticAdeptPowerPoints);
 			
 			// Add modifications from choice
-			unprocessed.addAll(type.getModifications());
+//			unprocessed.addAll(type.getModifications());
 
 			return unprocessed;
 		} finally {

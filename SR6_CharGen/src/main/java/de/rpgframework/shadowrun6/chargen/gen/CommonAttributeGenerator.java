@@ -11,6 +11,7 @@ import de.rpgframework.genericrpg.chargen.ai.Recommender;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
@@ -77,7 +78,9 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 		if (value.getModifyable()==ShadowrunAttribute.RESONANCE && ( parent.getModel().getMagicOrResonanceType()==null || !parent.getModel().getMagicOrResonanceType().usesResonance()))
 			return Possible.FALSE;
 		int max = (value.getMaximum()!=0)?value.getMaximum():6;
-		return new Possible(value.getDistributed()<max);
+		if (value.getDistributed()>=max)
+			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------

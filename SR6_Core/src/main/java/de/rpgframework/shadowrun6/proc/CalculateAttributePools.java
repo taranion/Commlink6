@@ -24,7 +24,7 @@ import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
  */
 public class CalculateAttributePools implements ProcessingStep {
 
-	private final static Logger logger = System.getLogger("shadowrun6.proc");
+	private final static Logger logger = System.getLogger(CalculateAttributePools.class.getPackageName());
 	
 	private Shadowrun6Character model;
 	private Locale loc = Locale.getDefault();
@@ -54,8 +54,8 @@ public class CalculateAttributePools implements ProcessingStep {
 
 	//-------------------------------------------------------------------
 	private void calculatePool(AttributeValue<ShadowrunAttribute> aVal) {
-		logger.log(Level.WARNING, "convert: "+aVal.getModifications());
 		Pool<Integer> pool = new Pool<Integer>();
+		aVal.setPool(pool);
 		
 		int augmentedMax = aVal.getDistributed() + 4;
 		
@@ -75,6 +75,9 @@ public class CalculateAttributePools implements ProcessingStep {
 			if (mod.getSet()!=ValueType.AUGMENTED)
 				continue;
 			int value = mod.getValue();
+			if (mod.getSource()==null) {
+				logger.log(Level.WARNING, "No source for modification "+mod);
+			}
 			String name = getNameFor(mod.getSource());
 			PoolCalculation<Integer> toAdd = new PoolCalculation<Integer>(value, name);
 			if (sumAugmentations+value > 4) {
@@ -85,6 +88,7 @@ public class CalculateAttributePools implements ProcessingStep {
 			sumAugmentations += value;
 			pool.addStep(ValueType.NATURAL, toAdd);
 		}
+		logger.log(Level.DEBUG, "NATURAL: {0}",pool.getCalculation(ValueType.NATURAL));
 		
 		/* Artificial */
 		int sumArt = 0;
@@ -95,6 +99,9 @@ public class CalculateAttributePools implements ProcessingStep {
 			if (mod.getSet()!=ValueType.ARTIFICIAL)
 				continue;
 			int value = mod.getValue();
+			if (mod.getSource()==null) {
+				logger.log(Level.WARNING, "No source for modification "+mod);
+			}
 			String name = getNameFor(mod.getSource());
 			PoolCalculation<Integer> toAdd = new PoolCalculation<Integer>(value, name);
 			if (value + sumArt > augmentedMax) {
@@ -105,21 +112,24 @@ public class CalculateAttributePools implements ProcessingStep {
 			sumArt += value;
 			pool.addStep(ValueType.ARTIFICIAL, toAdd);
 		}
-		logger.log(Level.WARNING, "ARTIFICIAL: "+pool.getCalculation(ValueType.ARTIFICIAL));
+		logger.log(Level.DEBUG, "ARTIFICIAL: {0}",pool.getCalculation(ValueType.ARTIFICIAL));
 	}
 
 	//-------------------------------------------------------------------
 	private String getNameFor(Object source) {
+		if (source instanceof ShadowrunAttribute)
+			return ((ShadowrunAttribute)source).getName(loc);
 		if (source instanceof ItemTemplate)
 			return ((ItemTemplate)source).getName(loc);
 		if (source instanceof CarriedItem)
 			return ((CarriedItem<ItemTemplate>)source).getNameWithoutRating(loc);
 		if (source instanceof SR6PieceOfGearVariant)
 			return ((SR6PieceOfGearVariant)source).getName(loc);
-		if (source!=null)
+		if (source!=null) {
+			logger.log(Level.ERROR,"Don't know how to determine name for "+source.getClass());
 			System.err.println("CalculateAttributePools: To Do: "+source.getClass()+" = "+source);
-		
-		System.exit(1);
+			System.exit(1);
+		}
 		return "?"+source+"?";
 	}
 

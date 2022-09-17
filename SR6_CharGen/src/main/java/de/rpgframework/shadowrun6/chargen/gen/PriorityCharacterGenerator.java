@@ -1,33 +1,30 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger.Level;
+import java.lang.reflect.Constructor;
 import java.util.Locale;
 import java.util.function.BiFunction;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
+import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTableEntry;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
-import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
-import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
-import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
-import de.rpgframework.shadowrun6.proc.CalculateEssence;
-import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
-import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
-import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
@@ -150,9 +147,29 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			}
 
 			createPartialController();
+			
+			// First the regular processing steps
+			for (Class<? extends ProcessingStep> cls : Shadowrun6Tools.RECALCULATE_STEPS) {
+				try {
+					Constructor<? extends ProcessingStep> cons = null;
+					try {
+						cons = cls.getConstructor(Shadowrun6Character.class);
+					} catch (NoSuchMethodException nsm) {
+						cons = cls.getConstructor(ShadowrunCharacter.class);						
+					}
+					processChain.add(cons.newInstance(model));
+				} catch (NoSuchMethodException e) {
+					logger.log(Level.ERROR, "Missing constructor <init>(Shadowrun6Character) in "+cls);
+					System.exit(1);
+				} catch (Exception e) {
+					logger.log(Level.ERROR, "Failed instantiating "+cls,e);
+				}
+				
+			}
 
-			processChain.add(new ResetModifications(model));
-			processChain.add(new EnsureAttributePresence(model));
+			// Now add generator specifics on top
+//			processChain.add(new ResetModifications(model));
+//			processChain.add(new EnsureAttributePresence(model));
 			processChain.add(new ResetGenerator(this));
 			processChain.add(prioCtrl);
 			processChain.add(meta);
@@ -164,8 +181,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(spells);
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
-			processChain.add(new GetModificationsFromGear(model));
-			processChain.add(new ApplyModificationsGeneric(model));
+//			processChain.add(new GetModificationsFromGear(model));
+//			processChain.add(new ApplyModificationsGeneric(model));
 			processChain.add(equipment);
 			processChain.add(foci);
 			processChain.add(complex);
@@ -173,10 +190,10 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(sins);
 			processChain.add(lifestyles);
 			processChain.add(contacts);
-			processChain.add(new CalculateAttributePools(model, Locale.getDefault()));
+//			processChain.add(new CalculateAttributePools(model, Locale.getDefault()));
 			processChain.add(new RemainingKarmaNuyenController(this));
-			processChain.add(new CalculateEssence(model));
-			processChain.add(new CalculateDerivedAttributes(model));
+//			processChain.add(new CalculateEssence(model));
+//			processChain.add(new CalculateDerivedAttributes(model));
 
 			setupDone = true;
 		} finally {

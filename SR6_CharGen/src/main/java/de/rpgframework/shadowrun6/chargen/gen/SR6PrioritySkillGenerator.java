@@ -541,6 +541,9 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					if (tmp instanceof ValueModification) {
 						ValueModification mod = (ValueModification)tmp;
 						SR6Skill key = mod.getResolvedKey();
+						if (key==null) {
+							logger.log(Level.ERROR, "Unknown skill ''{0}'' in modification {1}", mod.getKey(), mod);
+						}
 						SR6SkillValue val = model.getSkillValue(key);
 						// If skill is non-existent yet, add it
 						if (val==null) {

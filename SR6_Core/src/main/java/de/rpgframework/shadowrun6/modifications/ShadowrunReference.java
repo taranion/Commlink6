@@ -37,6 +37,7 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
@@ -266,7 +267,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	 */
 	@Override
 	public Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, CommonCharacter<?, ?, ?,?> model) {
-		return Shadowrun6Tools.instantiateModification(tmp, value, model );
+		return Shadowrun6Tools.instantiateModification(tmp, value, (Shadowrun6Character) model );
 	}
 	
 }

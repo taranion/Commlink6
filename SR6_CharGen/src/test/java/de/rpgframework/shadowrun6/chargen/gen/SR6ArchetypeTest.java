@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
@@ -102,7 +103,8 @@ public class SR6ArchetypeTest {
 		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(key);
 		while (val.getModifiedValue()<target) {
-			assertTrue("May not increase "+val.getModifyable()+" to "+(val.getModifier()+1), attribs.canBeIncreased(val).get());
+			Possible poss = attribs.canBeIncreased(val);
+			assertTrue("May not increase "+val.getModifyable()+" to "+(val.getModifiedValue()+1)+":"+poss, poss.get());
 			assertTrue("Failed raising from "+val.getModifiedValue(), attribs.increase(val).wasSuccessful());
 			System.out.println("Increased "+val.getModifyable()+" to "+val.getModifiedValue());
 		}
@@ -127,19 +129,29 @@ public class SR6ArchetypeTest {
 		charGen.getMetatypeController().canBeSelected(human);
 		charGen.getMetatypeController().select(human);
 		
+		
 		// Select adept
 		charGen.getMagicOrResonanceController().select(Shadowrun6Core.getItem(MagicOrResonanceType.class, "adept"));
-		
 		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
+		assertEquals(24, attribs.getPointsLeft2());
+		assertEquals(9, attribs.getPointsLeft());
 		raiseAttributeTo(ShadowrunAttribute.BODY     , 5);
+		assertEquals(20, attribs.getPointsLeft2());
 		raiseAttributeTo(ShadowrunAttribute.AGILITY  , 6);
 		raiseAttributeTo(ShadowrunAttribute.REACTION , 5);
+		assertEquals(11, attribs.getPointsLeft2());
 		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 5);
+		assertEquals(7, attribs.getPointsLeft2());
 		raiseAttributeTo(ShadowrunAttribute.WILLPOWER, 4);
+		assertEquals(4, attribs.getPointsLeft2());
 		raiseAttributeTo(ShadowrunAttribute.LOGIC    , 2);
 		raiseAttributeTo(ShadowrunAttribute.INTUITION, 3);
 		raiseAttributeTo(ShadowrunAttribute.CHARISMA , 2);
+		assertEquals(0, attribs.getPointsLeft2());
+		assertEquals(9, attribs.getPointsLeft());
 		raiseAttributeTo(ShadowrunAttribute.EDGE     , 7);
+		assertEquals(3, attribs.getPointsLeft());
+		assertEquals(3, model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue());
 		raiseAttributeTo(ShadowrunAttribute.MAGIC    , 6);
 		
 		// Qualitites
@@ -886,15 +898,17 @@ public class SR6ArchetypeTest {
 		assertEquals(41, model.getKarmaFree());
 		
 		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
+		assertEquals(12, attribs.getPointsLeft2());
+		assertEquals(4, attribs.getPointsLeft());
 		raiseAttributeTo(ShadowrunAttribute.EDGE     , 4);
-		raiseAttributeTo(ShadowrunAttribute.BODY     , 3);
-		raiseAttributeTo(ShadowrunAttribute.AGILITY  , 1);
-		raiseAttributeTo(ShadowrunAttribute.REACTION , 2);
-		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 1);
 		raiseAttributeTo(ShadowrunAttribute.WILLPOWER, 4);
 		raiseAttributeTo(ShadowrunAttribute.LOGIC    , 6);
 		raiseAttributeTo(ShadowrunAttribute.INTUITION, 5);
+		raiseAttributeTo(ShadowrunAttribute.BODY     , 3);
+		raiseAttributeTo(ShadowrunAttribute.REACTION , 2);
 		raiseAttributeTo(ShadowrunAttribute.CHARISMA , 2);
+		raiseAttributeTo(ShadowrunAttribute.AGILITY  , 1);
+		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 1);
 		
 		// Skills -------------------------------------------
 		SR6SkillGenerator skills = (SR6SkillGenerator) charGen.getSkillController();
@@ -938,18 +952,18 @@ public class SR6ArchetypeTest {
 
 		// Knowledge and language
 		assertEquals(1, skills.getPointsLeft());
-		assertEquals(5, skills.getPointsLeft2());
+		assertEquals(6, skills.getPointsLeft2());
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Data Havens")) );
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Decker Bars") ));
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Hackers") ));
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Matrix Clubs") ));
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Node Security Design") ));
 		assertEquals(1, skills.getPointsLeft());
-		assertEquals(0, skills.getPointsLeft2());
+		assertEquals(1, skills.getPointsLeft2());
 		assertEquals(4, model.getSkillValues(SkillType.LANGUAGE).get(0).getDistributed());
 		model.getSkillValues(SkillType.LANGUAGE).get(0).addDecision(new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), "English"));;
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("language"), new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), "Japanese") ));
-		assertEquals(0, skills.getPointsLeft());
+		assertEquals(1, skills.getPointsLeft());
 		assertEquals(0, skills.getPointsLeft2());
 		
 		// Contacts
@@ -1361,6 +1375,9 @@ public class SR6ArchetypeTest {
 		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.STRENGTH);
 		System.out.println("Strength = "+aVal.getDisplayString());
 		System.out.println("Strength = "+aVal.getModifications());
+		System.out.println("Strength NAT = "+aVal.getPool().getCalculation(ValueType.NATURAL));
+		System.out.println("Strength ART = "+aVal.getPool().getCalculation(ValueType.ARTIFICIAL));
+		System.out.println("Strength ALL = "+aVal.getPool().toString());
 		
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);

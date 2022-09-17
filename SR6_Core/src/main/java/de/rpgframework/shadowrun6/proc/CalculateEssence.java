@@ -92,9 +92,11 @@ public class CalculateEssence implements ProcessingStep {
 //			}
 			int magicMalus = 6 - (int)min;
 			logger.log(Level.INFO,"Magic malus is "+magicMalus);
-			model.getAttribute(ShadowrunAttribute.MAGIC).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus));
-			model.getAttribute(ShadowrunAttribute.RESONANCE).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), -magicMalus));
-			model.getAttribute(ShadowrunAttribute.POWER_POINTS).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.POWER_POINTS.name(), -magicMalus));
+			if (magicMalus!=0) {
+				model.getAttribute(ShadowrunAttribute.MAGIC).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE));
+				model.getAttribute(ShadowrunAttribute.RESONANCE).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), -magicMalus, ShadowrunAttribute.ESSENCE));
+				model.getAttribute(ShadowrunAttribute.POWER_POINTS).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.POWER_POINTS.name(), -magicMalus, ShadowrunAttribute.ESSENCE));
+			}
 			// Also decrease maximum
 //			model.getAttribute(Attribute.MAGIC).addModification(new AttributeModification(ModificationValueType.MAX, Attribute.MAGIC, -magicMalus, ModificationType.RELATIVE, Attribute.ESSENCE));
 //			previous.add(new AttributeModification(ModificationValueType.MAX, Attribute.MAGIC, -magicMalus, ModificationType.RELATIVE, Attribute.ESSENCE));

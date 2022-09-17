@@ -21,6 +21,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.CreatePoints;
@@ -277,7 +278,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		ShadowrunAttribute key = value.getModifyable();		
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 		if (per.getSum()>=getMaximumValue(key))
-			return Possible.FALSE;
+			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 
 		if (isAnotherAttributeAlreadyMaxed(key))
 			return new Possible(false, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
@@ -454,14 +455,14 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 
 		PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 		if (per.getSum()>=getMaximumValue(key))
-			return Possible.FALSE;
+			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 
 		if (isAnotherAttributeAlreadyMaxed(key))
 			return new Possible(false, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
 		
 		int requiredKarma = (per.getSum()+1)*5;
 		if (model.getKarmaFree()<requiredKarma) {
-			return Possible.FALSE;
+			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
 		}
 		return Possible.TRUE;
 	}
