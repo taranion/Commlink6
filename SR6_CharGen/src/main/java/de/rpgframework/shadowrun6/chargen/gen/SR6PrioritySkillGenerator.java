@@ -862,10 +862,14 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					SR6SkillValue toInc = actionSkills.get(ran);
 					if (canBeIncreasedPoints(toInc).get()) {
 						PerSkillPoints val = settings.get(toInc);
-						toInc.setDistributed( toInc.getDistributed()+1);
-						val.points1++;
-						logger.log(Level.INFO, "Increased ''{0}'' to {1}", toInc.getKey(), val.getSum());
-						points1--;
+						if (val==null) {
+							logger.log(Level.ERROR, "Interesting! Skill {0} not in PerSkillPoints", toInc);
+						} else {
+							toInc.setDistributed(toInc.getDistributed() + 1);
+							val.points1++;
+							logger.log(Level.INFO, "Increased ''{0}'' to {1}", toInc.getKey(), val.getSum());
+							points1--;
+						}
 					} else {
 						logger.log(Level.ERROR, "Picked a skill I cannot increase: "+toInc+" with "+points1);
 					}
