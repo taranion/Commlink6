@@ -18,6 +18,14 @@ public class SR6JSONExportPlugin implements CharacterExportPlugin<Shadowrun6Char
     public SR6JSONExportPlugin() {
     }
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.export.CharacterExportPlugin#getFileType()
+	 */
+	public String getFileType() {
+		return ".json";
+	}
+
     //-------------------------------------------------------------------
     /**
      * @see de.rpgframework.genericrpg}.export.ExportPlugin#getRoleplayingSystem()

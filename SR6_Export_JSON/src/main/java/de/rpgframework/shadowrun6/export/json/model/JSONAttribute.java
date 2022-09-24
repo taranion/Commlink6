@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.print.json.model;
+package de.rpgframework.shadowrun6.export.json.model;
 
 public class JSONAttribute {
     public String name;

@@ -36,37 +36,37 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.SignatureManeuver;
+import de.rpgframework.shadowrun6.export.json.model.JSONAdeptPower;
+import de.rpgframework.shadowrun6.export.json.model.JSONArmor;
+import de.rpgframework.shadowrun6.export.json.model.JSONAttribute;
+import de.rpgframework.shadowrun6.export.json.model.JSONAugmentation;
+import de.rpgframework.shadowrun6.export.json.model.JSONCharacter;
+import de.rpgframework.shadowrun6.export.json.model.JSONCloseCombatWeapon;
+import de.rpgframework.shadowrun6.export.json.model.JSONComplexForm;
+import de.rpgframework.shadowrun6.export.json.model.JSONContact;
+import de.rpgframework.shadowrun6.export.json.model.JSONDrone;
+import de.rpgframework.shadowrun6.export.json.model.JSONInitiative;
+import de.rpgframework.shadowrun6.export.json.model.JSONItem;
+import de.rpgframework.shadowrun6.export.json.model.JSONItemAccessory;
+import de.rpgframework.shadowrun6.export.json.model.JSONLicense;
+import de.rpgframework.shadowrun6.export.json.model.JSONLifestyle;
+import de.rpgframework.shadowrun6.export.json.model.JSONLongRangeWeapon;
+import de.rpgframework.shadowrun6.export.json.model.JSONMartialArts;
+import de.rpgframework.shadowrun6.export.json.model.JSONMatrixItem;
+import de.rpgframework.shadowrun6.export.json.model.JSONMetaMagicOrEcho;
+import de.rpgframework.shadowrun6.export.json.model.JSONQuality;
+import de.rpgframework.shadowrun6.export.json.model.JSONRitual;
+import de.rpgframework.shadowrun6.export.json.model.JSONSignatureManeuver;
+import de.rpgframework.shadowrun6.export.json.model.JSONSin;
+import de.rpgframework.shadowrun6.export.json.model.JSONSkill;
+import de.rpgframework.shadowrun6.export.json.model.JSONSkillSpecialization;
+import de.rpgframework.shadowrun6.export.json.model.JSONSpell;
+import de.rpgframework.shadowrun6.export.json.model.JSONVehicle;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
-import de.rpgframework.shadowrun6.print.json.model.JSONAdeptPower;
-import de.rpgframework.shadowrun6.print.json.model.JSONArmor;
-import de.rpgframework.shadowrun6.print.json.model.JSONAttribute;
-import de.rpgframework.shadowrun6.print.json.model.JSONAugmentation;
-import de.rpgframework.shadowrun6.print.json.model.JSONCharacter;
-import de.rpgframework.shadowrun6.print.json.model.JSONCloseCombatWeapon;
-import de.rpgframework.shadowrun6.print.json.model.JSONComplexForm;
-import de.rpgframework.shadowrun6.print.json.model.JSONContact;
-import de.rpgframework.shadowrun6.print.json.model.JSONDrone;
-import de.rpgframework.shadowrun6.print.json.model.JSONInitiative;
-import de.rpgframework.shadowrun6.print.json.model.JSONItem;
-import de.rpgframework.shadowrun6.print.json.model.JSONItemAccessory;
-import de.rpgframework.shadowrun6.print.json.model.JSONLicense;
-import de.rpgframework.shadowrun6.print.json.model.JSONLifestyle;
-import de.rpgframework.shadowrun6.print.json.model.JSONLongRangeWeapon;
-import de.rpgframework.shadowrun6.print.json.model.JSONMartialArts;
-import de.rpgframework.shadowrun6.print.json.model.JSONMatrixItem;
-import de.rpgframework.shadowrun6.print.json.model.JSONMetaMagicOrEcho;
-import de.rpgframework.shadowrun6.print.json.model.JSONQuality;
-import de.rpgframework.shadowrun6.print.json.model.JSONRitual;
-import de.rpgframework.shadowrun6.print.json.model.JSONSignatureManeuver;
-import de.rpgframework.shadowrun6.print.json.model.JSONSin;
-import de.rpgframework.shadowrun6.print.json.model.JSONSkill;
-import de.rpgframework.shadowrun6.print.json.model.JSONSkillSpecialization;
-import de.rpgframework.shadowrun6.print.json.model.JSONSpell;
-import de.rpgframework.shadowrun6.print.json.model.JSONVehicle;
 
 public class JSONSR6ExportService {
 	
@@ -310,7 +310,7 @@ public class JSONSR6ExportService {
             JSONArmor jsonArmor = new JSONArmor();
             jsonArmor.name = carriedItem.getNameWithoutRating(loc);
             jsonArmor.isIgnored = carriedItem.hasFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS);
-            jsonArmor.rating = carriedItem.getAsValue(SR6ItemAttribute.ARMOR).getModifiedValue();
+            jsonArmor.rating = carriedItem.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
             jsonArmor.socialrating =  carriedItem.getAsValue(SR6ItemAttribute.DEFENSE_SOCIAL).getModifiedValue();
             jsonArmor.accessories = getItemAccessories(carriedItem);
             jsonArmor.page = getPageString(carriedItem.getResolved());
@@ -418,7 +418,7 @@ public class JSONSR6ExportService {
         for (Contact connection : character.getContacts()) {
             JSONContact jsonContact = new JSONContact();
             jsonContact.name = connection.getName();
-            jsonContact.type = connection.getType().getName(loc);
+//            jsonContact.type = connection.getType().getName(loc);
             jsonContact.loyalty = connection.getLoyalty();
             jsonContact.influence = connection.getRating();
             jsonContact.description = connection.getDescription();
@@ -436,10 +436,14 @@ public class JSONSR6ExportService {
 //            item.subType = matrixItem.getSubType();
 //            if (matrixItem.getUsedAsSubType()!=null) 
 //            	item.type =  matrixItem.getUsedAsType().name();
-            item.attack = matrixItem.getAsValue(SR6ItemAttribute.ATTACK).getModifiedValue();
-            item.dataProcessing = matrixItem.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue();
-            item.sleaze = matrixItem.getAsValue(SR6ItemAttribute.SLEAZE).getModifiedValue();
-            item.firewall = matrixItem.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
+            if (matrixItem.hasAttribute(SR6ItemAttribute.ATTACK))
+            	item.attack = matrixItem.getAsValue(SR6ItemAttribute.ATTACK).getModifiedValue();
+            if (matrixItem.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
+            	item.dataProcessing = matrixItem.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue();
+            if (matrixItem.hasAttribute(SR6ItemAttribute.SLEAZE))
+            	item.sleaze = matrixItem.getAsValue(SR6ItemAttribute.SLEAZE).getModifiedValue();
+            if (matrixItem.hasAttribute(SR6ItemAttribute.FIREWALL))
+            	item.firewall = matrixItem.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
             if (matrixItem.getResolved()!=null) {
             	item.page = getPageString(matrixItem.getResolved());
 //                item.deviceRating =  matrixItem.getResolved().getDeviceRating();
