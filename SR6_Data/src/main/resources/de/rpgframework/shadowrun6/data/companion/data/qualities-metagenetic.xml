@@ -375,7 +375,7 @@
    <quality id="canine_feline" karma="4" pos="false" type="METAGENIC" cat="AHD" />
    <quality id="cephalopod"    karma="4" pos="false" type="METAGENIC" cat="AHD" />
    <quality id="pachy"         karma="4" pos="false" type="METAGENIC" cat="AHD" />
-    <quality id="asymmetric_deformity" karma="5" pos="true" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA">
+    <quality id="asymmetric_deformity" karma="5" pos="false" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA">
      <choices>
        <choice type="SUBSELECT" ref="variant" uuid="c3250d9c-227c-442e-918e-e328349e8bb1">
          <subOption id="picasso">
@@ -385,12 +385,12 @@
        </choice>
      </choices>
    </quality>
-   <quality id="broad_feet" karma="8" pos="true" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA">
+   <quality id="broad_feet" karma="8" pos="false" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA">
      <modifications>
        <checkmod ref="athletics" type="SKILL" what="EDGE_COST_MALUS" value="1"/>
      </modifications>
    </quality>
-   <quality id="cyclopean_eye" karma="8" pos="true" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA">
+   <quality id="cyclopean_eye" karma="8" pos="false" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA">
      <modifications>
        <checkmod ref="athletics" type="SKILL" what="EDGE" value="-99"/>
      </modifications>
@@ -398,7 +398,7 @@
    		<datareq type="QUALITY" ref="third_eye" negate="true" apply="CHARACTER"/>
    	</requires>
    </quality>
-   <quality id="third_eye" karma="5" pos="true" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA">
+   <quality id="third_eye" karma="5" pos="false" type="METAGENIC" cat="BIOLOGICAL_DYSMORPHIA">
    	<requires>
    		<datareq type="QUALITY" ref="cyclopean_eye" negate="true" apply="CHARACTER"/>
    	</requires>
@@ -410,7 +410,7 @@
        <checkmod type="SKILL" ref="stealth"  value="1" what="USAGE"/>
      </modifications>
    </quality>
-   <quality id="astral_hazing_non_awakened" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_ANOMALIES">
+   <quality id="astral_hazing_non_awakened" karma="8" pos="false" type="METAGENIC" cat="METAGENIC_ANOMALIES">
    	<requires>
    		<selreq>
    			<datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER" />
@@ -418,7 +418,7 @@
    		</selreq>
    	</requires>
    </quality>
-   <quality id="astral_hazing_awakened" karma="15" pos="true" type="METAGENIC" cat="METAGENIC_ANOMALIES">
+   <quality id="astral_hazing_awakened" karma="15" pos="false" type="METAGENIC" cat="METAGENIC_ANOMALIES">
    	<requires>
    		<selreq>
    			<datareq type="MAGIC_RESO" ref="magician" apply="CHARACTER" />
