@@ -3,9 +3,11 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -15,6 +17,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.ComplexDataItemListFilter;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.Quality.QualityCategory;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
 import javafx.geometry.Insets;
@@ -48,8 +51,11 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	
 	private ResourceBundle RES;
 	private List<QualityType> allowedTypes;
+	private List<QualityCategory> allowedCategories;
+	private boolean showSURGE;
 	
 	private ChoiceBox<What> cbWhat;
+	private ChoiceBox<QualityCategory> cbCategory;
 	private Button btnSort;
 	private TextField tfSearch;
 	
@@ -74,6 +80,7 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 		super(parent);
 		this.RES = RES;
 		allowedTypes = List.of(types);
+		allowedCategories = new ArrayList<>();
 		initComponents();
 		initLayout();
 		initInteractivity();
@@ -90,6 +97,14 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 			public What fromString(String arg0) {return null;}
 		});
 		
+		cbCategory = new ChoiceBox<QualityCategory>();
+		cbCategory.getItems().addAll(QualityCategory.values());
+		cbCategory.setValue(null);
+		cbCategory.setConverter(new StringConverter<QualityCategory>() {
+			public String toString(QualityCategory cat) { return (cat!=null)?cat.getName(Locale.getDefault()):"" ;}
+			public QualityCategory fromString(String arg0) {return null;}
+		});
+		
 		btnSort = new Button(null,new SymbolIcon("sort"));
 		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "quality.sort.tooltip")));
 		
@@ -99,13 +114,14 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		HBox line = new HBox(cbWhat, btnSort);
+		HBox line = new HBox(cbWhat, cbCategory, btnSort);
 		HBox.setHgrow(line, Priority.ALWAYS);
 		line.setMaxWidth(Double.MAX_VALUE);
 		cbWhat.setMaxWidth(Double.MAX_VALUE);
 		getChildren().addAll(line, tfSearch);
 		
 		VBox.setMargin(tfSearch, new Insets(5,0,5,0));
+		checkCategoryVisibility();
 	}
 	
 	//-------------------------------------------------------------------
@@ -121,7 +137,11 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 		});
 		
 		cbWhat.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.INFO, "Selection changed");
+			logger.log(Level.INFO, "Selection changed "+n);
+			refreshAvailable();
+		});
+		cbCategory.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "Selection changed "+n);
 			refreshAvailable();
 		});
 		
@@ -131,11 +151,13 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	//-------------------------------------------------------------------
 	private void refreshAvailable() {
 		What n = cbWhat.getValue();
+		QualityCategory c = cbCategory.getValue();
 		final String search = tfSearch.getText().toLowerCase();
 		List<Quality> unfiltered = parent.getController().getAvailable();
 		List<Quality> filtered = unfiltered.stream()
 			.filter(q -> allowedTypes.contains(q.getType()))
 			.filter(q -> (n==What.ALL || (n==What.NEGATIVE && !q.isPositive()) || (n==What.POSITIVE && q.isPositive())))
+			.filter(q -> (c==null || (!allowedCategories.isEmpty() && q.getCategory()==c)))
 			.filter(q -> (search==null || search.isBlank() || q.getName().toLowerCase().contains(search)))
 			.collect(Collectors.toList());
 		logger.log(Level.INFO, "{0} items now", filtered.size());
@@ -156,6 +178,25 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	@Override
 	public void applyFilter() {
 		refreshAvailable();
+	}
+
+	//-------------------------------------------------------------------
+	private void checkCategoryVisibility() {
+		cbCategory.setVisible(!allowedCategories.isEmpty());
+		cbCategory.setManaged(!allowedCategories.isEmpty());
+	}
+
+	//-------------------------------------------------------------------
+	public void setShowSURGE(boolean show, QualityCategory...categories) {
+		if (!show) {
+			allowedTypes.removeAll(List.of(QualityCategory.values()));
+		} else {
+			for (QualityCategory cat : QualityCategory.values()) {
+				if (!allowedCategories.contains(cat)) 
+					allowedCategories.add(cat);
+			}
+		}
+		checkCategoryVisibility();
 	}
 
 }

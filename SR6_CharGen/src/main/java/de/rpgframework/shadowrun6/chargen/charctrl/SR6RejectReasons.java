@@ -21,6 +21,7 @@ public interface SR6RejectReasons extends IRejectReasons {
 	
 	public final static String TODO_QUALITY_TOO_MANY     = "impossible.tooManyQualities";
 	public final static String TODO_QUALITY_KARMAGAIN    = "impossible.gainedMoreThan20Karma";
+	public final static String TODO_QUALITY_KARMASURGE   = "impossible.spentMoreThan30SURGE";
 	// Cannot bind more foci than MAGIC
 	public final static String IMPOSS_TOO_MANY_FOCI      = "impossible.cannotBindMoreFoci";
 	// Force of focus may not be higher than MAGIC

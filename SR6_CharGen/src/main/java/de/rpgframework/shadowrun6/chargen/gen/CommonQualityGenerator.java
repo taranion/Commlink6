@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -40,7 +41,6 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 
 	public final static MultiLanguageResourceBundle RES = SR6CharacterGenerator.RES;
 	
-	private int karmaGain;
 	private int numberOfQualities;
 
 	//-------------------------------------------------------------------
@@ -49,7 +49,6 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	}
 
 	//-------------------------------------------------------------------
-	public int getKarmaGain() { return karmaGain; }
 	public int getNumberOfQualities() { return numberOfQualities; }
 
 	//-------------------------------------------------------------------
@@ -132,6 +131,9 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		if (!value.isPositive() && (karmaGain+karma)>20) {
 			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_QUALITY_KARMAGAIN, karma);
 		}
+		if (value.isPositive() && (karmaSURGE+karma)>30) {
+			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_QUALITY_KARMASURGE, karma);
+		}
 
 		/* If a quality resolves to a ComplexDataItem, check for choices there too */
 		for (Decision dec : decisions) {
@@ -207,6 +209,19 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 //	}
 
 	//-------------------------------------------------------------------
+	private void calculateKarmaSURGE() {
+		karmaSURGE = 0;
+		for (QualityValue val : model.getQualities()) {
+			if (val.isAutoAdded())
+				continue;
+			Quality item = val.getResolved();
+			if (item.getType()!=QualityType.METAGENIC)
+				continue;
+			karmaSURGE += val.getKarmaCost();
+		}
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
@@ -217,6 +232,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 
 		try {
 			karmaGain = 0;
+			karmaSURGE = 0;
 			// Reset
 			todos.clear();
 			numberOfQualities=0;
@@ -263,6 +279,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 				} else
 					numberOfQualities++;
 				
+				calculateKarmaSURGE();
 //				// Inject modifications from qualities
 //				for (Modification mod : val.getEffectiveModifications(model)) {
 //					logger.log(Level.DEBUG, "Add modification {0}", mod);
@@ -275,6 +292,10 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			if (karmaGain>20) {
 				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_KARMAGAIN));
 				logger.log(Level.WARNING, "Gained more than 20 Karma ({0})", karmaGain);
+			}
+			if (karmaSURGE>30) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_KARMASURGE));
+				logger.log(Level.WARNING, "Spent more than 30 Karma ({0}) on SURGE", karmaSURGE);
 			}
 			if (numberOfQualities>6) {
 				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_TOO_MANY));

@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
+import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.WindowMode;
@@ -26,14 +27,19 @@ import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
+import de.rpgframework.shadowrun.chargen.gen.QualityGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.QualityFilterNode;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -48,6 +54,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	private GeneratorWrapper charGen;
 	
 	private Function<Requirement,String> requirementResolver;
+	private Label lbNetKarma;
 	private ComplexDataItemControllerNode<Quality, QualityValue> selection;
 	private GenericDescriptionVBox bxDescription;
 	private OptionalNodePane layout;
@@ -66,12 +73,17 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	}
 	
 	//-------------------------------------------------------------------
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	private void initComponents() {
 		requirementResolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
+		
+		lbNetKarma = new Label("?");
+		lbNetKarma.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 
 		selection = new ComplexDataItemControllerNode<>(charGen.getQualityController());
-		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.METAGENIC));
+		QualityFilterNode filter = new QualityFilterNode(RES, selection, QualityType.METAGENIC);
+		filter.setShowSURGE(true);
+		selection.setFilterNode(filter);
 		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.METAGENIC);
 		selection.setRequirementResolver(requirementResolver);
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "placeholder.available"));
@@ -96,6 +108,10 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		//ResponsiveBox responsive = new ResponsiveBox(selection, bxDescription);
 //		AutoBox responsive = new AutoBox();
 //		responsive.getContent().addAll(selection, bxDescription);
+		Label hdPointsSpent = new Label(ResourceI18N.get(RES, "surge.pointsSpent"));
+		Label lbMax = new Label("/30");
+		HBox line = new HBox(5, hdPointsSpent, lbNetKarma, lbMax);
+		selection.setSelectedListHead(line);
 		setContent(layout);
 
 		// Back header
@@ -124,6 +140,8 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	 */
 	private void refresh() {
 		backHeader.setValue(charGen.getModel().getKarmaFree());
+		
+		lbNetKarma.setText(String.valueOf( ((CommonQualityGenerator)charGen.getQualityController()).getKarmaForSURGE()));
 		BodyType type = charGen.getModel().getBodytype();
 		if (type!=null) {
 			// Enable or disable page
@@ -157,8 +175,10 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
-		if (type==BasicControllerEvents.CHARACTER_CHANGED) 
+		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
+			selection.refresh();
 			refresh();
+		}
 	}
 
 	//-------------------------------------------------------------------
