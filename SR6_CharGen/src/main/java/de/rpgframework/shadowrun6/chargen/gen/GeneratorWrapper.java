@@ -1,7 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.io.IOException;
-import java.lang.System.Logger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -44,8 +43,6 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  *
  */
 public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrapper<ShadowrunAttribute,Shadowrun6Character, SR6CharacterGenerator> {
-
-	private static Logger logger = System.getLogger(GeneratorWrapper.class.getPackageName());
 	
 	private Shadowrun6Character cached;
 	private CharacterHandle cachedHandle;
@@ -214,7 +211,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getMetatypeController()
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public IMetatypeController getMetatypeController() {
 		return wrapped.getMetatypeController();
@@ -337,7 +334,6 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSpellController()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public ISpellController<SR6Spell> getSpellController() {
 		return wrapped.getSpellController();
