@@ -96,7 +96,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 		}
 		Shadowrun6Character model = getModel();
 		
-		if (model.getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
+		if (parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
 			int karmaNeeded = 0;
 			// Apply extended contact rules
 			int sum = con.getLoyalty() + con.getRating();
@@ -184,7 +184,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 		}
 		Shadowrun6Character model = getModel();
 		
-		if (model.getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
+		if (parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
 			int karmaNeeded = 0;
 			// Apply extended contact rules
 			int sum = con.getLoyalty() + con.getRating();
@@ -287,7 +287,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			for (Contact tmp : getModel().getContacts()) {
 				// is sum higher than allowed
 				if ((tmp.getLoyalty()+tmp.getRating())>perContactMax) {
-					if (getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
+					if (parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
 						int pay = (tmp.getLoyalty() + tmp.getRating()) - perContactMax;
 						logger.log(Level.INFO, "Pay {0} karma {for cap increase of (R={2}/L={3})", pay,
 								tmp.getName(), tmp.getRating(), tmp.getLoyalty());
@@ -303,7 +303,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 				pointsLeft -= cost;
 			}
 			
-			if (pointsLeft<0 && getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
+			if (pointsLeft<0 && parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
 				logger.log(Level.INFO, "Pay {0} karma for more contact points", Math.abs(pointsLeft));
 				karmaRequired += Math.abs(pointsLeft);
 				pointsLeft=0;

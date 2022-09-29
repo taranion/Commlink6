@@ -5,9 +5,13 @@ import java.lang.System.Logger.Level;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
+import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
@@ -27,12 +31,12 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 
 	private boolean setupDone;
 
-	//-------------------------------------------------------------------
-	/**
-	 */
-	public SR6CharacterLeveller() {
-		// TODO Auto-generated constructor stub
-	}
+//	//-------------------------------------------------------------------
+//	/**
+//	 */
+//	public SR6CharacterLeveller() {
+//		// TODO Auto-generated constructor stub
+//	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -42,6 +46,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 	 */
 	public SR6CharacterLeveller(Shadowrun6Character model, CharacterHandle handle, Class<? extends CommonSR6GeneratorSettings> charGenSettingsClazz) {
 		super(model, handle, charGenSettingsClazz);
+		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
 		// TODO Auto-generated constructor stub
 	}
 
@@ -115,14 +120,14 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		}
 	}
 
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.CharacterControllerImpl#updateEffectiveRules()
-	 */
-	@Override
-	protected void updateEffectiveRules() {
-		// TODO Auto-generated method stub
-
-	}
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.genericrpg.chargen.CharacterControllerImpl#updateEffectiveRules()
+//	 */
+//	@Override
+//	protected void updateEffectiveRules() {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 }

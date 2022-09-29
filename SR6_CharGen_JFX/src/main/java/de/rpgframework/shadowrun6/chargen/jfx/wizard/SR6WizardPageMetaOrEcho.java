@@ -58,7 +58,7 @@ public class SR6WizardPageMetaOrEcho extends AWizardPageMetaOrEcho {
 		} else if (type!=null && type.usesResonance()) {
 			logger.log(Level.WARNING, type+" can submerse - enable page");
 			activeProperty().set(true);
-		} else if (charGen.getModel().getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_TRANSHUMANISM)) {
+		} else if (charGen.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_TRANSHUMANISM)) {
 			logger.log(Level.WARNING, "Transhumanism allowed enable page");
 			activeProperty().set(true);
 		} else {

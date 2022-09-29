@@ -186,7 +186,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 //		MagicOrResonanceType morType = charGen.getModel().getMagicOrResonanceType();
 //		activeProperty().set( morType!=null && morType.usesSpells()); 
 		selection.refresh();
-		cbIgnoreRequirements.setSelected(charGen.getModel().getRuleValueAsBoolean(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS));
+		cbIgnoreRequirements.setSelected(charGen.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS));
 		
 		lbConverted.setText( String.valueOf(charGen.getEquipmentController().getConvertedKarma()) );
 		lbConvNuyen.setText( String.valueOf(charGen.getEquipmentController().getConvertedKarma()*charGen.getEquipmentController().getConversionRateKarma()) );

@@ -22,6 +22,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
+import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Quality;
@@ -108,6 +109,7 @@ public class PrioQualGenTest {
 			public boolean canBeFinished() {return false;}
 			public void setModel(Shadowrun6Character model, CharacterHandle handle) {}
 			public void finish() {}
+			public RuleController getRuleController() {return null;}
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public IMetatypeController getMetatypeController() {return null;}
 			public IAttributeController getAttributeController() {return null;}

@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleConfiguration;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.chargen.RuleValue;
+import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
@@ -36,13 +37,14 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 
 	// -------------------------------------------------------------------
 	protected CommonSR6CharacterGenerator() {
-		updateEffectiveRules();
+//		updateEffectiveRules();
 	}
 
 	//-------------------------------------------------------------------
 	public CommonSR6CharacterGenerator(Shadowrun6Character model, CharacterHandle handle, Class<?> charGenSettingsClazz) {
 		super(model, handle, charGenSettingsClazz);
-		updateEffectiveRules();
+		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
+//		updateEffectiveRules();
 		createPartialController();
 	}
 
@@ -59,10 +61,11 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 		super.handle= handle;
 		if (model.getMetatype() == null)
 			model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "human"));
+		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
 		setupProcessChain();
 		runProcessors();
 	}
-
+	
 //	// -------------------------------------------------------------------
 //	/**
 //	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#start(de.rpgframework.character.RuleSpecificCharacterObject)
@@ -109,63 +112,6 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 		// TODO Auto-generated method stub
 		logger.log(Level.WARNING, "TODO: finish");
 
-	}
-
-	// -------------------------------------------------------------------
-	protected void updateEffectiveRules() {
-		logger.log(Level.DEBUG, "ENTER updateEffectiveRules for "+this);
-//		try {
-//			throw new RuntimeException("Trace");
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		try {
-			effectiveRules.clear();
-			// Use hardcoded defaults first
-			for (Rule rule : Shadowrun6Rules.values()) {
-				RuleValue rVal = new RuleValue(rule);
-				effectiveRules.put(rule, rVal);
-				logger.log(Level.INFO, "start with "+rVal);
-			}
-
-			// Apply settings from character
-			if (model != null) {
-				for (RuleConfiguration rc : new ArrayList<>(model.getRuleValues())) {
-					Rule rule = Shadowrun6Rules.getRule(rc.getRuleId());
-					// clean up unknown rule settings
-					if (rule == null) {
-						model.getRuleValues().remove(rc);
-					} else {
-						// Overwrite default with setting from char
-						RuleValue rv = getRule(rule);
-						rv.setValue(rule.parseValue(rc.getValueString()));
-						logger.log(Level.INFO, "stored in character: "+rv);
-					}
-				}
-
-				// Now check for chosen rule interpretation
-				// If necessary, overwrite
-				if (model.getStrictness() != null) {
-					RuleInterpretation inter = Shadowrun6Core.getItem(RuleInterpretation.class, model.getStrictness());
-					if (inter == null) {
-						logger.log(Level.ERROR, "Character uses an unknown rule interpretation: " + model.getStrictness());
-					} else {
-						for (RuleConfiguration set : inter.getRules()) {
-							Rule rule = Shadowrun6Rules.getRule(set.getRuleId());
-							RuleValue rv = getRule(rule);
-							rv.setValue(rule.parseValue(set.getValueString()));
-							// If set in strictness, remove from character
-							model.clearRuleValue(rule);
-							rv.setEditable(false);
-							logger.log(Level.INFO, "by strictness: "+rv);
-						}
-					}
-				}
-			}
-		} finally {
-			logger.log(Level.DEBUG, "LEAVE updateEffectiveRules");
-		}
 	}
 
 	//-------------------------------------------------------------------

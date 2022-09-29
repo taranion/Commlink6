@@ -7,7 +7,9 @@ import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.Rule;
+import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.DataItemModification;
@@ -18,6 +20,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -34,12 +37,14 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 	private final static Logger logger = System.getLogger(CalculateMeleeAndUnarmed.class.getPackageName()+".derived");
 	
 	private Shadowrun6Character model;
+	private RuleController ruleCtrl;
 
 	//-------------------------------------------------------------------
 	/**
 	 */
 	public CalculateMeleeAndUnarmed(Shadowrun6Character model) {
 		this.model = model;
+		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
 	}
 
 	//-------------------------------------------------------------------
@@ -80,7 +85,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			/*
 			 * Add strength to attack rating of all melee weapons (Errata 09.2021)
 			 */
-			if (model.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
+			if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
 				int[] strengthAR = new int[] { model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue(), 0, 0,
 						0, 0 };
 //				ValueModification iMod = new ValueModification(

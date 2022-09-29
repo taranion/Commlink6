@@ -543,7 +543,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 					logger.log(Level.INFO, "Consume "+mod);
 					if (mod.getSet()==ValueType.MAX) {
 						// Optional: Allow adjustment points on lowered maximum
-						if (mod.getValue()>6 || getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))
+						if (mod.getValue()>6 || parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))
 							allowedAdjust.add(attr);					
 					}
 //					// Update base

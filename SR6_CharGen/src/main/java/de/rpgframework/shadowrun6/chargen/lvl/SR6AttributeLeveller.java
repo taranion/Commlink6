@@ -93,14 +93,14 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 				// Has been increased this session
 				return Possible.TRUE;
 			// Has been increased in career mode
-			if ( getModel().getRuleValueAsBoolean(ShadowrunRules.CAREER_UNDO_FROM_CAREER) ) {
+			if (  parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_UNDO_FROM_CAREER) ) {
 				return Possible.TRUE;
 			} else {
 				return new Possible(IRejectReasons.IMPOSS_PREVIOUS_SESSION);
 			}
 		} else {
 			// Has been increased in generation mode
-			if ( !getModel().getRuleValueAsBoolean(ShadowrunRules.CAREER_UNDO_FROM_CHARGEN) ) {
+			if ( ! parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_UNDO_FROM_CHARGEN) ) {
 				return new Possible(IRejectReasons.IMPOSS_UNDO_CHARGEN);
 			}
 			if (value.getDistributed()<2) {
@@ -140,7 +140,7 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 
 			// Grant power point for adept
 			if (key == ShadowrunAttribute.MAGIC && model.getMagicOrResonanceType().usesPowers()) {
-				boolean raisePP = model.getRuleValueAsBoolean(Shadowrun6Rules.MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP);
+				boolean raisePP =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP);
 				// There may be a house rule that mystic adepts need to buy PP (instead of
 				// getting them free)
 				if (model.getMagicOrResonanceType().paysPowers() && !raisePP) {
@@ -198,7 +198,7 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 
 			// Remove power point for adept
 			if (key == ShadowrunAttribute.MAGIC && model.getMagicOrResonanceType().usesPowers()) {
-				boolean raisePP = model.getRuleValueAsBoolean(Shadowrun6Rules.MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP);
+				boolean raisePP =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP);
 				// There may be a house rule that mystic adepts need to buy PP (instead of
 				// getting them free)
 				if (model.getMagicOrResonanceType().paysPowers() && !raisePP) {

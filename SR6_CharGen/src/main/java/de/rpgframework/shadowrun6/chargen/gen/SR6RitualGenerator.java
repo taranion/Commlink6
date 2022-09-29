@@ -110,7 +110,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 		}
 		
 		if (freeSpells<1) {
-			boolean karmaAllowed = getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
+			boolean karmaAllowed =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
 			if (karmaAllowed && getModel().getKarmaFree()>=5) {
 				return Possible.TRUE;
 			}
@@ -253,7 +253,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 			if (freeSpells>0) {
 				todos.add(new ToDoElement(Severity.WARNING, "Unused spells"));
 			} else if (byKarma>0) {
-				boolean karmaAllowed = getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
+				boolean karmaAllowed =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
 				if (!karmaAllowed) {
 					todos.add(new ToDoElement(Severity.STOPPER, "Too many spells bought"));
 				}

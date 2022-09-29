@@ -15,6 +15,7 @@ import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleValue;
+import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
@@ -134,6 +135,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	public boolean hasListener(ControllerListener callback) {
 		return wrapped.hasListener(callback);
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getListener()
+	 */
+	@Override
+	public Collection<ControllerListener> getListener() {
+		return wrapped.getListener();
+	}
 	
 	//-------------------------------------------------------------------
 	public SR6CharacterGenerator getWrapped() {
@@ -159,11 +169,11 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getListener()
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRuleController()
 	 */
 	@Override
-	public Collection<ControllerListener> getListener() {
-		return wrapped.getListener();
+	public RuleController getRuleController() {
+		return wrapped.getRuleController();
 	}
 
 	//-------------------------------------------------------------------
@@ -285,23 +295,23 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 		wrapped.finish();
 	}
 
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRule(de.rpgframework.genericrpg.chargen.Rule)
-	 */
-	@Override
-	public RuleValue getRule(Rule rule) {
-		return wrapped.getRule(rule);
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRules()
-	 */
-	@Override
-	public List<RuleValue> getRules() {
-		return wrapped.getRules();
-	}
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRule(de.rpgframework.genericrpg.chargen.Rule)
+//	 */
+//	@Override
+//	public RuleValue getRule(Rule rule) {
+//		return wrapped.getRule(rule);
+//	}
+//
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRules()
+//	 */
+//	@Override
+//	public List<RuleValue> getRules() {
+//		return wrapped.getRules();
+//	}
 
 	//-------------------------------------------------------------------
 	/**

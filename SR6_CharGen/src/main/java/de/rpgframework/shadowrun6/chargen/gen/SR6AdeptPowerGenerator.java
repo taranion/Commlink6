@@ -43,7 +43,7 @@ public class SR6AdeptPowerGenerator extends SR6AdeptPowerController {
 		logger.log(Level.WARNING, "TODO: Handle lowered essence");
 		//if (model.getAttribute(ShadowrunAttribute.ESSENCE))
 		
-		PRIORITY_MAGIC chosen = model.getRuleValueAsEnum(Shadowrun6Rules.CHARGEN_PRIO_ADEPT_PP);
+		PRIORITY_MAGIC chosen =  parent.getRuleController().getRuleValueAsEnum(Shadowrun6Rules.CHARGEN_PRIO_ADEPT_PP);
 		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 
 		// Regular adepts get free power points matching their magic attribute

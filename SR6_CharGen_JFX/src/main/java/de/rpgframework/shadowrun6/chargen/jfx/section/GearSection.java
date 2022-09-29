@@ -125,7 +125,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			// Eventually show decision dialog
 			boolean needToAsk = !selected.getChoices().isEmpty();
 			needToAsk |= !selected.getVariants().isEmpty();
-			if ( model.getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS)) 
+			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS)) 
 				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
 			if (needToAsk) {
 				logger.log(Level.WARNING, "Select with choices or variants or flags");
@@ -196,8 +196,8 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		}
 		
 		// Secondary content
-		cbRuleNegativeNuyen.setSelected(model.getRuleValueAsBoolean(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN));
-		cbRulePayGear.setSelected(model.getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR));
+		cbRuleNegativeNuyen.setSelected( control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN));
+		cbRulePayGear.setSelected( control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR));
 
 	}
 

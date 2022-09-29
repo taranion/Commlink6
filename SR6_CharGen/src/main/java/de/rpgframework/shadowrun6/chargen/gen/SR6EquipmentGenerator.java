@@ -59,7 +59,7 @@ public class SR6EquipmentGenerator extends CommonEquipmentGenerator {
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
 			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
 			if (avail!=null && avail.getValue() >= 7) {
-				boolean allowLegal = getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ALLOW_LEGAL_AVAIL7PLUS);
+				boolean allowLegal = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ALLOW_LEGAL_AVAIL7PLUS);
 				if (!allowLegal || avail.getLegality()!=Legality.LEGAL) {
 					return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH, avail.getValue());
 				}				

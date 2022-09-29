@@ -193,7 +193,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		if (carried.get().getAsValue(SR6ItemAttribute.PRICE) != null) {
 			int nuyen = carried.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			if (nuyen>getModel().getNuyen()) {
-				boolean allowNegative = getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN);
+				boolean allowNegative = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN);
 				if (!allowNegative) {
 					return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());
 				}
@@ -201,7 +201,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		}
 		
 		// Check requirements of carried item
-		if (!getModel().getRuleValueAsBoolean(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS)) {
+		if (!parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS)) {
 			Possible poss2 = Shadowrun6Tools.areRequirementsMet(getModel(), value, decisions);
 			if (!poss2.get())
 				return poss;
