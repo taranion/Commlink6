@@ -36,10 +36,10 @@ public class SR6PrioritySettings extends APrioritySettings implements CommonSR6G
 	//-------------------------------------------------------------------
 	public SR6PrioritySettings() {
 		perSkill = new LinkedHashMap<>();
-		priorities.put(PriorityType.METATYPE, Priority.B);
+		priorities.put(PriorityType.METATYPE, Priority.C);
 		priorities.put(PriorityType.ATTRIBUTE, Priority.A);
 		priorities.put(PriorityType.MAGIC, Priority.E);
-		priorities.put(PriorityType.SKILLS, Priority.C);
+		priorities.put(PriorityType.SKILLS, Priority.B);
 		priorities.put(PriorityType.RESOURCES, Priority.D);
 	}
 	

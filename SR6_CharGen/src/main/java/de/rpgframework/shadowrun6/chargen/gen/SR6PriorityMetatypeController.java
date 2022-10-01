@@ -84,17 +84,17 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 	//-------------------------------------------------------------------
 	@Override
 	public void roll() {
-		// Gender
-		float gauss = (float)random.nextGaussian();
-		boolean isDiverse = (gauss<-1.2 || gauss>1.2);
-		if (isDiverse) {
-			getModel().setGender(Gender.DIVERSE);
-		} else {
-			getModel().setGender( (gauss>=0.0f)?Gender.MALE:Gender.FEMALE ); 
-		}
+//		// Gender
+//		float gauss = (float)random.nextGaussian();
+//		boolean isDiverse = (gauss<-1.2 || gauss>1.2);
+//		if (isDiverse) {
+//			getModel().setGender(Gender.DIVERSE);
+//		} else {
+//			getModel().setGender( (gauss>=0.0f)?Gender.MALE:Gender.FEMALE ); 
+//		}
 
 		// Meta
-		gauss = (float)random.nextGaussian();
+		float gauss = (float)random.nextGaussian();
 		boolean useVariants = (gauss<-1 || gauss>1);
 		logger.log(Level.WARNING, "Roll {0} means useVariants={1}", gauss, useVariants);
 		logger.log(Level.WARNING, "PRE: "+ availableOptions.keySet());
@@ -113,6 +113,15 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 	 */
 	@Override
 	public void randomizeSizeWeight() {
+		// Gender
+		float gauss1 = (float)random.nextGaussian();
+		boolean isDiverse = (gauss1<-1.2 || gauss1>1.2);
+		if (isDiverse) {
+			getModel().setGender(Gender.DIVERSE);
+		} else {
+			getModel().setGender( (gauss1>=0.0f)?Gender.MALE:Gender.FEMALE ); 
+		}
+
 		MetaType value = getModel().getMetatype();
 		if (value==null)
 			return;
