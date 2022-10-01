@@ -143,6 +143,7 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 			}
 
 			logger.log(Level.INFO, "Select "+value);
+			if (getModel().getMetatype()==value) return true;
 			getModel().setMetatype(value);
 			randomizeSizeWeight();
 

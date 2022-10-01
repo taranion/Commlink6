@@ -96,9 +96,9 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			public Tradition fromString(String string) { return null; }
 		});
 		
-		initInteractivity();
-		
 		refresh();
+		
+		initInteractivity();
 	}
 	
 	//-------------------------------------------------------------------

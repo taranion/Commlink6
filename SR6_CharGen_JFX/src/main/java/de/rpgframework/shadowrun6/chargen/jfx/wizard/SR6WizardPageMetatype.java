@@ -79,10 +79,10 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 		setTitle(ResourceI18N.get(RES, "page.title"));
 		initComponents();
 		initLayout();
-		initInteractivity();
 //		refreshDataTab();
 		
 		contentPane.getValueFactory().setValue(charGen.getModel().getMetatype());
+		initInteractivity();
 	}
 	
 	//-------------------------------------------------------------------
