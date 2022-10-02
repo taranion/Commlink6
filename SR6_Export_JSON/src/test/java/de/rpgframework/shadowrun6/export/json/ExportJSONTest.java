@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.print.json;
+package de.rpgframework.shadowrun6.export.json;
 
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
