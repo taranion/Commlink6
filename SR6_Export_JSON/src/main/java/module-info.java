@@ -7,5 +7,5 @@ module de.rpgframework.shadowrun6.export.json  {
 	requires de.rpgframework.shadowrun6.core;
 	requires shadowrun.common;
 	requires com.google.gson;
-	
+	requires java.desktop;
 }

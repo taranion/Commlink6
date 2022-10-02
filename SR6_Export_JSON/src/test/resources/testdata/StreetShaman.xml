@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sr6char gender="MALE" karmaF="29" meta="human" nuyen="3150">
+   <powerLevel>STANDARD</powerLevel>
+   <heat>0</heat>
+   <chargenSettings>{&#x0022;mysticAdeptMaxPoints&#x0022;:4,&#x0022;mysticAdeptPowerPoints&#x0022;:4,&#x0022;usedKarma&#x0022;:0,&#x0022;karmaMod&#x0022;:0,&#x0022;perSkill&#x0022;:{&#x0022;athletics&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;close_combat&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;conjuring&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:5,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;perception&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;sorcery&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:6,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;knowledge/d124931e-fe19-4595-ab25-3330735662cf&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/b28f0bea-b2a4-4d21-92f2-45ca3042be73&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0}},&#x0022;toNuyen&#x0022;:4,&#x0022;toContacts&#x0022;:0,&#x0022;priorities&#x0022;:{&#x0022;METATYPE&#x0022;:&#x0022;C&#x0022;,&#x0022;ATTRIBUTE&#x0022;:&#x0022;B&#x0022;,&#x0022;MAGIC&#x0022;:&#x0022;A&#x0022;,&#x0022;SKILLS&#x0022;:&#x0022;D&#x0022;,&#x0022;RESOURCES&#x0022;:&#x0022;E&#x0022;},&#x0022;perAttrib&#x0022;:{&#x0022;BODY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;AGILITY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;REACTION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;STRENGTH&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;WILLPOWER&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;LOGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;INTUITION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;CHARISMA&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;EDGE&#x0022;:{&#x0022;points1&#x0022;:6,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;MAGIC&#x0022;:{&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;RESONANCE&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}}}</chargenSettings>
+   <type>METAHUMAN</type>
+   <mortype>magician</mortype>
+   <qualities>
+      <quality ref="allergy">
+         <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
+         <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="mild"/>
+         <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="Insect Stings"/>
+      </quality>
+      <quality ref="distinctive_style"/>
+      <quality ref="focused_concentration" value="1"/>
+      <quality ref="mentor_spirit">
+         <decision choice="b69f8371-fa0e-435c-b344-8fc6d64e1fb3" value="cat"/>
+         <decision choice="ee7bc846-f246-47bf-931c-786d5b0ee15b" value="athletics"/>
+      </quality>
+      <quality ref="spirit_affinity">
+         <decision choice="e19ecf4c-1508-406e-9a40-70cf09907bc3" value="beast"/>
+      </quality>
+      <quality ref="spirit_bane">
+         <decision choice="281aba04-1bd9-4d84-b6f4-f7bb97d217f0" value="fire"/>
+      </quality>
+   </qualities>
+   <spells>
+      <spell ref="chaos"/>
+      <spell ref="clairaudience"/>
+      <spell ref="darkness"/>
+      <spell ref="fireball"/>
+      <spell ref="heal"/>
+      <spell ref="levitate"/>
+      <spell ref="stunbolt"/>
+      <spell ref="trid_phantasm"/>
+   </spells>
+   <name>Street Shaman</name>
+   <datasets/>
+   <size>153</size>
+   <weight>71</weight>
+   <attributes>
+      <attributes id="BODY" value="2"/>
+      <attributes id="AGILITY" value="3"/>
+      <attributes id="REACTION" value="2"/>
+      <attributes id="STRENGTH" value="1"/>
+      <attributes id="WILLPOWER" value="5"/>
+      <attributes id="LOGIC" value="2"/>
+      <attributes id="INTUITION" value="3"/>
+      <attributes id="CHARISMA" value="5"/>
+      <attributes id="EDGE" value="7"/>
+      <attributes id="MAGIC" value="2"/>
+      <attributes id="RESONANCE" value="0"/>
+      <attributes id="POWER_POINTS" value="0"/>
+   </attributes>
+   <skills>
+      <skill ref="athletics" value="1"/>
+      <skill ref="conjuring" value="4">
+         <skillspec ref="summoning"/>
+      </skill>
+      <skill ref="close_combat" uuid="b86e97f4-07c8-47b8-bc4b-fc9c16b09cc0" value="2"/>
+      <skill ref="perception" uuid="e0e65d93-0d9a-4250-a0b2-1376bcf10ef5" value="2"/>
+      <skill ref="sorcery" uuid="cb807011-6e17-457d-94bf-a4ca62ebf203" value="5">
+         <skillspec ref="spellcasting"/>
+      </skill>
+      <skill ref="knowledge" uuid="d124931e-fe19-4595-ab25-3330735662cf" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Dive Bars"/>
+      </skill>
+      <skill ref="knowledge" uuid="b28f0bea-b2a4-4d21-92f2-45ca3042be73" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Seattle Shamans"/>
+      </skill>
+   </skills>
+   <charGenUsed>prio</charGenUsed>
+   <items>
+      <item mode="CARRIED" ref="armor_vest" uuid="2cad0a66-35e9-4048-b2e7-d75bc7defe72"/>
+      <item mode="CARRIED" ref="meta_link" uuid="de0f6788-793b-4e80-839e-cb1ed6390ed9"/>
+      <item mode="CARRIED" ref="suzuki_mirage" uuid="d520a8db-1a0f-4854-8cea-b692776f84d2"/>
+   </items>
+</sr6char>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sr6char gender="MALE" karmaF="19" meta="ork" nuyen="1500">
+   <powerLevel>STANDARD</powerLevel>
+   <heat>0</heat>
+   <lifestyles>
+      <lifestyle comfort="low" entert="low" name="Appartment in decaying megahousing" necess="low" neigh="low" prim="true" ref="low" security="low" sin="5aad3823-8255-472b-9f65-61a01e6294f0" space="low" value="1"/>
+   </lifestyles>
+   <chargenSettings>{&#x0022;mysticAdeptMaxPoints&#x0022;:3,&#x0022;mysticAdeptPowerPoints&#x0022;:3,&#x0022;usedKarma&#x0022;:0,&#x0022;karmaMod&#x0022;:0,&#x0022;perSkill&#x0022;:{&#x0022;sorcery&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:7,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;close_combat&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;conjuring&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:5,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;perception&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;stealth&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;knowledge/63d8b1b1-e22d-43c1-8f25-8e0e11d4c508&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/cfbea897-ae92-489c-9708-9fd963c97805&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/154d55a3-6fb9-47ce-8eea-fe09dd7b5bbe&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0}},&#x0022;toNuyen&#x0022;:8,&#x0022;toContacts&#x0022;:0,&#x0022;priorities&#x0022;:{&#x0022;METATYPE&#x0022;:&#x0022;C&#x0022;,&#x0022;ATTRIBUTE&#x0022;:&#x0022;A&#x0022;,&#x0022;MAGIC&#x0022;:&#x0022;B&#x0022;,&#x0022;SKILLS&#x0022;:&#x0022;D&#x0022;,&#x0022;RESOURCES&#x0022;:&#x0022;E&#x0022;},&#x0022;perAttrib&#x0022;:{&#x0022;BODY&#x0022;:{&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;AGILITY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;REACTION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;STRENGTH&#x0022;:{&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:5,&#x0022;points3&#x0022;:0},&#x0022;WILLPOWER&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;LOGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;INTUITION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;CHARISMA&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;EDGE&#x0022;:{&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;MAGIC&#x0022;:{&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;RESONANCE&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}}}</chargenSettings>
+   <type>METAHUMAN</type>
+   <mortype>magician</mortype>
+   <qualities>
+      <quality ref="allergy">
+         <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
+         <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="mild"/>
+         <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="Grass"/>
+      </quality>
+      <quality ref="focused_concentration" value="2"/>
+      <quality ref="ar_vertigo"/>
+      <quality ref="astral_beacon"/>
+      <quality ref="aptitude">
+         <decision choice="05ed2489-d0af-485b-b58a-61fbd064ed9c" value="sorcery"/>
+      </quality>
+      <quality ref="spirit_bane">
+         <decision choice="281aba04-1bd9-4d84-b6f4-f7bb97d217f0" value="spirit_of_water"/>
+      </quality>
+      <quality ref="low-light_vision"/>
+      <quality ref="built_tough"/>
+   </qualities>
+   <spells>
+      <spell ref="armor"/>
+      <spell ref="confusion"/>
+      <spell ref="detect_enemies"/>
+      <spell ref="flamestrike"/>
+      <spell ref="heal"/>
+      <spell ref="ice_storm"/>
+      <spell ref="levitate"/>
+      <spell ref="physical_barrier"/>
+   </spells>
+   <sins>
+      <sin name="Unnamed" quality="ANYONE" uniqueid="5aad3823-8255-472b-9f65-61a01e6294f0"/>
+      <sin name="Unnamed" quality="ANYONE" uniqueid="6ce84b53-bad5-401e-b4fd-8f584fe49a86"/>
+      <sin name="Unnamed" quality="ANYONE" uniqueid="5adee8c0-57a1-469e-b9da-0b17a8107b8c"/>
+   </sins>
+   <contacts>
+      <contact id="5a542e63-9555-4bc5-9be9-e0928505e38d" loy="2" name="Unnamed" rat="2" type="CORPORATE" typename="Corporate Wage Mage"/>
+      <contact id="6ee4e5f2-09ea-4647-8e0f-190ed41669ae" loy="2" name="Unnamed" rat="2" type="CRIMINAL" typename="Crimson Crush Ganger"/>
+      <contact id="a91d34e0-7192-4a1f-b787-df23d6723c89" loy="2" name="Unnamed" rat="2" type="MAGIC" typename="Talismonger"/>
+   </contacts>
+   <name>Combat Mage</name>
+   <datasets/>
+   <rules>
+      <set rule="CHARGEN_BUY_SPELLS_KARMA" to="true"/>
+   </rules>
+   <size>185</size>
+   <weight>126</weight>
+   <attributes>
+      <attributes id="BODY" value="7"/>
+      <attributes id="AGILITY" value="2"/>
+      <attributes id="REACTION" value="4"/>
+      <attributes id="STRENGTH" value="7"/>
+      <attributes id="WILLPOWER" value="5"/>
+      <attributes id="LOGIC" value="3"/>
+      <attributes id="INTUITION" value="3"/>
+      <attributes id="CHARISMA" value="5"/>
+      <attributes id="EDGE" value="3"/>
+      <attributes id="MAGIC" value="3"/>
+      <attributes id="RESONANCE" value="0"/>
+      <attributes id="POWER_POINTS" value="0"/>
+   </attributes>
+   <skills>
+      <skill ref="stealth" value="1"/>
+      <skill ref="sorcery" value="6">
+         <skillspec ref="spellcasting"/>
+      </skill>
+      <skill ref="conjuring" value="4">
+         <skillspec ref="summoning"/>
+      </skill>
+      <skill ref="close_combat" uuid="0e4b1b54-ddc7-4e79-9211-cfed4f250e2b" value="1"/>
+      <skill ref="perception" uuid="12eb83a5-b12c-45d4-9c00-370ffd091523" value="2"/>
+      <skill ref="knowledge" uuid="63d8b1b1-e22d-43c1-8f25-8e0e11d4c508" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Magical History"/>
+      </skill>
+      <skill ref="knowledge" uuid="cfbea897-ae92-489c-9708-9fd963c97805" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Wizzer Gangs"/>
+      </skill>
+      <skill ref="knowledge" uuid="154d55a3-6fb9-47ce-8eea-fe09dd7b5bbe" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Ork Culture"/>
+      </skill>
+   </skills>
+   <charGenUsed>prio</charGenUsed>
+   <items>
+      <item mode="CARRIED" ref="armor_jacket" uuid="8c57e777-8ccd-4c32-aa11-7b86fc1aa65c"/>
+      <item mode="CARRIED" ref="chrysler-nissan_jackrabbit" uuid="c6ffdef0-14ab-4993-b1f5-41c8ad62c12a"/>
+      <item mode="CARRIED" ref="renraku_sensei" uuid="e086767b-17fa-4d62-9be4-0d8ed1906230"/>
+   </items>
+</sr6char>

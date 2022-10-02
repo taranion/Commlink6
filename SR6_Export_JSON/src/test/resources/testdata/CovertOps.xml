@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sr6char gender="MALE" karmaF="21" meta="elf" nuyen="85445">
+   <powerLevel>STANDARD</powerLevel>
+   <heat>0</heat>
+   <lifestyles>
+      <lifestyle comfort="middle" entert="middle" name="Small appartment" necess="middle" neigh="middle" prim="true" ref="middle" security="middle" sin="e5eadfec-7be0-40cd-baea-bed3a02d3f40" space="middle" value="1"/>
+   </lifestyles>
+   <chargenSettings>{&#x0022;mysticAdeptMaxPoints&#x0022;:0,&#x0022;mysticAdeptPowerPoints&#x0022;:0,&#x0022;usedKarma&#x0022;:0,&#x0022;karmaMod&#x0022;:0,&#x0022;perSkill&#x0022;:{&#x0022;athletics&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;close_combat&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;con&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;stealth&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:7,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;engineering&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;perception&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;firearms&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;biotech&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;knowledge/18534f4f-54f6-4837-a44d-cd5f8ad82bfa&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/e9b84835-2aa4-4c66-a1a2-c188eb2267e7&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/adc1fb39-ffc3-4094-8ce7-06c76be775f6&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0}},&#x0022;toNuyen&#x0022;:11,&#x0022;toContacts&#x0022;:0,&#x0022;priorities&#x0022;:{&#x0022;METATYPE&#x0022;:&#x0022;D&#x0022;,&#x0022;ATTRIBUTE&#x0022;:&#x0022;A&#x0022;,&#x0022;MAGIC&#x0022;:&#x0022;E&#x0022;,&#x0022;SKILLS&#x0022;:&#x0022;B&#x0022;,&#x0022;RESOURCES&#x0022;:&#x0022;C&#x0022;},&#x0022;perAttrib&#x0022;:{&#x0022;BODY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;AGILITY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;REACTION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;STRENGTH&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;WILLPOWER&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;LOGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;INTUITION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;CHARISMA&#x0022;:{&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;EDGE&#x0022;:{&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;MAGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;RESONANCE&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}}}</chargenSettings>
+   <type>METAHUMAN</type>
+   <mortype>mundane</mortype>
+   <qualities>
+      <quality ref="addiction" value="3">
+         <decision choice="b7a6a592-e334-43a2-adf4-d92fb59de8cd" value="Nic-stick"/>
+      </quality>
+      <quality ref="aptitude">
+         <decision choice="05ed2489-d0af-485b-b58a-61fbd064ed9c" value="stealth"/>
+      </quality>
+      <quality ref="blandness"/>
+      <quality ref="honorbound">
+         <decision choice="428282c1-c1d2-4d42-94e1-6f5cb5febf2b" value="White Hat"/>
+      </quality>
+      <quality ref="photographic_memory"/>
+      <quality ref="prejudiced">
+         <decision choice="2310ce02-abc3-4d23-b833-b5f5d68c3f21" value="Technomancers"/>
+      </quality>
+      <quality ref="low-light_vision"/>
+   </qualities>
+   <sins>
+      <sin name="Someone" quality="SUPERFICIALLY_PLAUSIBLE" uniqueid="e5eadfec-7be0-40cd-baea-bed3a02d3f40"/>
+      <sin name="Someone" quality="GOOD_MATCH" uniqueid="b56fcd81-e015-49ff-890a-3e2bbf6267dd"/>
+   </sins>
+   <licenses>
+      <licenses name="Concealed Carry License" rating="SUPERFICIALLY_PLAUSIBLE" sin="e5eadfec-7be0-40cd-baea-bed3a02d3f40"/>
+      <licenses name="Cyberware License" rating="SUPERFICIALLY_PLAUSIBLE" sin="e5eadfec-7be0-40cd-baea-bed3a02d3f40"/>
+      <licenses name="Driver's License" rating="SUPERFICIALLY_PLAUSIBLE" sin="e5eadfec-7be0-40cd-baea-bed3a02d3f40"/>
+      <licenses name="Concealed Carry License" rating="SUPERFICIALLY_PLAUSIBLE" sin="b56fcd81-e015-49ff-890a-3e2bbf6267dd"/>
+      <licenses name="Cyberware License" rating="SUPERFICIALLY_PLAUSIBLE" sin="b56fcd81-e015-49ff-890a-3e2bbf6267dd"/>
+      <licenses name="Driver's License" rating="SUPERFICIALLY_PLAUSIBLE" sin="b56fcd81-e015-49ff-890a-3e2bbf6267dd"/>
+   </licenses>
+   <contacts>
+      <contact id="8f205560-d045-4781-ba11-467dcc72476b" loy="4" name="Unnamed" rat="2" type="GOVERNMENT" typename="Beat Cop"/>
+      <contact id="1fea104d-28df-4712-9886-e5e2afa00a60" loy="3" name="Unnamed" rat="3" type="CORPORATE" typename="Corporate Secretary"/>
+      <contact id="c0b61fe5-a4f7-4fa6-801d-ca7f8a758cb9" loy="4" name="Unnamed" rat="6" type="CRIMINAL" typename="Fixer"/>
+   </contacts>
+   <name>Covert-Ops Specialist</name>
+   <datasets/>
+   <size>211</size>
+   <weight>86</weight>
+   <attributes>
+      <attributes id="BODY" value="3"/>
+      <attributes id="AGILITY" value="5"/>
+      <attributes id="REACTION" value="4"/>
+      <attributes id="STRENGTH" value="2"/>
+      <attributes id="WILLPOWER" value="4"/>
+      <attributes id="LOGIC" value="3"/>
+      <attributes id="INTUITION" value="5"/>
+      <attributes id="CHARISMA" value="7"/>
+      <attributes id="EDGE" value="3"/>
+      <attributes id="MAGIC" value="0"/>
+      <attributes id="RESONANCE" value="0"/>
+      <attributes id="POWER_POINTS" value="0"/>
+   </attributes>
+   <skills>
+      <skill ref="stealth" value="6">
+         <skillspec ref="palming"/>
+      </skill>
+      <skill ref="athletics" uuid="85af4dab-118f-4566-97aa-fd454b2f775a" value="2">
+         <skillspec ref="sprinting"/>
+      </skill>
+      <skill ref="close_combat" uuid="c21f1fe8-9bf8-4eed-9e75-0c5e89cb6855" value="2">
+         <skillspec ref="unarmed"/>
+      </skill>
+      <skill ref="con" uuid="43bac1d4-1e25-4b23-a431-73ddbb27e479" value="2">
+         <skillspec ref="impersonation"/>
+      </skill>
+      <skill ref="engineering" uuid="6ee7d349-5374-4df4-8fc0-9abef7365348" value="2">
+         <skillspec ref="lockpicking"/>
+      </skill>
+      <skill ref="perception" uuid="688e78ab-b769-412e-b2b9-3476445e8b31" value="1">
+         <skillspec ref="urban"/>
+      </skill>
+      <skill ref="firearms" uuid="e4633d17-498d-4f07-8724-9a00282d133e" value="2"/>
+      <skill ref="biotech" uuid="05b61d30-f9f7-4e76-9966-6dbd8b16f421" value="1"/>
+      <skill ref="knowledge" uuid="18534f4f-54f6-4837-a44d-cd5f8ad82bfa" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Seattle Johnsons"/>
+      </skill>
+      <skill ref="knowledge" uuid="e9b84835-2aa4-4c66-a1a2-c188eb2267e7" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Seattle Downtown Geography"/>
+      </skill>
+      <skill ref="knowledge" uuid="adc1fb39-ffc3-4094-8ce7-06c76be775f6" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Corporate Security Tactics"/>
+      </skill>
+      <skill ref="language" uuid="f0fc4893-0fcf-4fc8-af8c-5075fa4e905e" value="4">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Native Language "/>
+      </skill>
+   </skills>
+   <charGenUsed>prio</charGenUsed>
+   <items>
+      <item mode="IMPLANTED" ref="cyberarm" uuid="461bf090-d2a2-45bf-bfa6-9d9b5680e1e8" variant="hand_obvious">
+         <customName>Obvious left hand</customName>
+         <accessories>
+            <item mode="EMBEDDED" ref="shock_limb" slot="CYBERLIMB_IMPLANT" uuid="8e795192-cc53-4980-8b64-cf3f57a3916e">
+               <customName>Shock Hand</customName>
+            </item>
+         </accessories>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="image_link" uuid="9dbd017a-e259-4b6e-9fd9-ea75bafc0941" variant="bodyware">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="smartlink" uuid="38a48645-843a-4655-9226-1207fb7490c2" variant="bodyware">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="CARRIED" ref="actioneer_business" uuid="56ecf3db-ff5e-488a-8b74-38a6329f9105"/>
+      <item ref="jammer" uuid="9bcc5baf-1842-4f7d-9595-0955cbed7e04" variant="area">
+         <decision choice="720ed738-46d2-4124-bd6f-5ed62025be20" value="6"/>
+      </item>
+      <item mode="CARRIED" ref="autopicker" uuid="b03ac133-bdf2-4f32-89f5-0933586dd904"/>
+      <item mode="CARRIED" ref="bug_scanner" uuid="273e3626-b7ea-487e-9c6c-9aae09657b8b"/>
+      <item mode="CARRIED" ref="camera" uuid="167d86d1-4eda-4ae9-a04e-1373157a3e6d">
+         <accessories>
+            <item mode="EMBEDDED" ref="low_light_vision" slot="OPTICAL" uuid="1079b6ea-cbe4-4122-bf8c-ec03231fb184"/>
+            <item mode="EMBEDDED" ref="thermographic_vision" slot="OPTICAL" uuid="34aef8b8-983d-4ac5-9e31-474416a26b80"/>
+            <item mode="EMBEDDED" ref="vision_enhancement" slot="OPTICAL" uuid="f43b6ca6-f415-4682-a3ce-59e626e0cc3a"/>
+            <item mode="EMBEDDED" ref="vision_magnification" slot="OPTICAL" uuid="7b1265f4-0af7-4520-9c48-0cc0d23d4588"/>
+         </accessories>
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="4"/>
+      </item>
+      <item mode="CARRIED" ref="climbing_gear" uuid="e86ce2b9-8915-4093-b1e2-e7d44dc3974c"/>
+      <item mode="CARRIED" ref="contacts" uuid="41979daa-ca2b-4085-ad0d-caa229577ffb">
+         <accessories>
+            <item mode="EMBEDDED" ref="image_link" slot="OPTICAL" uuid="8e6ca748-2a59-4b10-9a4c-741e5f1eccbd"/>
+            <item mode="EMBEDDED" ref="thermographic_vision" slot="OPTICAL" uuid="f1472c59-ffd6-405b-85e6-ff9abaa11da8"/>
+         </accessories>
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="3"/>
+      </item>
+      <item ref="jammer" uuid="a74549bc-4712-4c45-8158-bb869826c085" variant="direct">
+         <decision choice="720ed738-46d2-4124-bd6f-5ed62025be20" value="6"/>
+      </item>
+      <item mode="CARRIED" ref="directional_microphone" uuid="e037aae1-6c17-42ad-aa4c-38bceeeb4956">
+         <accessories>
+            <item mode="EMBEDDED" ref="select_sound_filter" slot="AUDIO" uuid="a9001486-7b27-4fd3-908a-2267a854ff3e">
+               <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="2"/>
+            </item>
+            <item mode="EMBEDDED" ref="audio_enhancement" slot="AUDIO" uuid="d2dbbb74-c83a-4bb2-aec0-f8a3dc45dd0a"/>
+         </accessories>
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="3"/>
+      </item>
+      <item mode="CARRIED" ref="flashlight" uuid="7ae2e285-c30e-4092-91eb-b46331c92f6a"/>
+      <item mode="CARRIED" ref="gecko_tape_gloves" uuid="b7ebbe4f-2cc3-4243-9d3b-8c71f8d08e46"/>
+      <item mode="CARRIED" ref="glasses" uuid="06d7bc4b-2504-4b03-8bce-88127c21f545">
+         <accessories>
+            <item mode="EMBEDDED" ref="image_link" slot="OPTICAL" uuid="4ed0d99e-4caf-47fc-ba8a-dc974550b2d2"/>
+            <item mode="EMBEDDED" ref="vision_enhancement" slot="OPTICAL" uuid="4f7bf4d4-2030-4e4b-a986-4b5d40cdfb0a"/>
+         </accessories>
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="2"/>
+      </item>
+      <item count="1" mode="CARRIED" ref="glue_sprayer" uuid="dadcd6ee-31c5-4b8e-86e2-101a185f9746"/>
+      <item mode="CARRIED" ref="honda_spirit" uuid="6de4f6ba-402b-472b-a6b7-b3b85ce3191d"/>
+      <item mode="CARRIED" ref="keycard_copier" uuid="ff76902d-9615-41bf-87ab-141acfb28f8d"/>
+      <item mode="CARRIED" ref="lockpick_set" uuid="e9aebc39-ce28-4e2c-9b47-355b4d168c17"/>
+      <item mode="CARRIED" ref="maglock_passkey" uuid="f3c49a51-ba0a-4cc8-803a-0dd1052681ea">
+         <decision choice="56b520d3-0a66-45dd-ae9c-0cff597895cc" value="3"/>
+      </item>
+      <item count="6" mode="CARRIED" ref="micro-transceiver" uuid="f1858571-f43f-4920-94f7-aee7fd805f13"/>
+      <item mode="CARRIED" ref="monofilament_chainsaw" uuid="df866ed0-b4b4-4fa6-b612-aa1e85d427a9"/>
+      <item mode="CARRIED" ref="rappelling_gloves" uuid="111d5963-fb03-4fe0-90bf-3b61155e44a3"/>
+      <item mode="CARRIED" ref="respirator" uuid="a46e1db1-d1ec-47f5-996d-bbba53dc6219">
+         <decision choice="56b520d3-0a66-45dd-ae9c-0cff597895cc" value="6"/>
+      </item>
+      <item mode="CARRIED" ref="sequencer" uuid="271c592b-42a1-491d-98a4-40a1bdfa8b3a">
+         <decision choice="56b520d3-0a66-45dd-ae9c-0cff597895cc" value="4"/>
+      </item>
+      <item count="10" ref="security_tag" uuid="287df167-fbb6-4dc9-8808-b6b78bd3d6d6" variant="stealth_tag"/>
+      <item count="5" mode="CARRIED" ref="stim_patch" uuid="945894ec-2e12-49cc-943d-57b565a9d582">
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="6"/>
+      </item>
+      <item mode="CARRIED" ref="tag_eraser" uuid="b11cdf9a-1ff3-4170-8cb4-4f542a54086b"/>
+      <item mode="CARRIED" ref="transys_avalon" uuid="a9fa27dc-2cee-401e-9aec-dc91b3b8e5d9">
+         <accessories>
+            <item mode="EMBEDDED" ref="subvocal_microphone" slot="ELECTRONIC_ACCESSORY" uuid="d1834b92-cbd7-4f56-aa6b-fb8f99bb1fc9"/>
+            <item mode="EMBEDDED" ref="trid_projector" slot="ELECTRONIC_ACCESSORY" uuid="80f67cde-6033-4afb-ad43-acd272596db8"/>
+            <item mode="EMBEDDED" ref="trodes" slot="ELECTRONIC_ACCESSORY" uuid="4d40da3a-e41a-4ca3-a8d3-f63e3800f208"/>
+         </accessories>
+      </item>
+      <item count="5" mode="CARRIED" ref="tranq_patch" uuid="bab2ca05-8a6b-4ac9-b7cc-002b559820a4">
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="10"/>
+      </item>
+      <item mode="CARRIED" ref="handheld_housing" uuid="d9cfd180-3e38-4679-aa38-f8f2021a43aa">
+         <accessories>
+            <item mode="EMBEDDED" ref="sensor_array" slot="SENSOR_HOUSING" uuid="411c8b15-1fb9-4095-878f-5e114df445bc">
+               <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="5"/>
+            </item>
+         </accessories>
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="2"/>
+      </item>
+      <item mode="CARRIED" ref="white_noise_generator" uuid="6902f412-71d1-4cbc-9345-eba9e6426b56">
+         <decision choice="720ed738-46d2-4124-bd6f-5ed62025be20" value="6"/>
+      </item>
+      <item mode="CARRIED" ref="ares_predator_vi" uuid="89e63847-3c6d-4b93-a959-5260a0f36a71"/>
+   </items>
+</sr6char>

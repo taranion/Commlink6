@@ -1,15 +1,7 @@
 package de.rpgframework.shadowrun6.export.json;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.PageReference;
@@ -68,6 +60,35 @@ import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static de.rpgframework.shadowrun.ShadowrunAttribute.AGILITY;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.BODY;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.CHARISMA;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.COMPOSURE;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.DEFENSE_POOL_PHYSICAL;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.EDGE;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.INITIATIVE_ASTRAL;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.INITIATIVE_MATRIX;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.INITIATIVE_PHYSICAL;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.INTUITION;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.JUDGE_INTENTIONS;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.LIFT_CARRY;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.LOGIC;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.MAGIC;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.MEMORY;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.POWER_POINTS;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.REACTION;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.RESONANCE;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.STRENGTH;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.WILLPOWER;
+
 public class JSONSR6ExportService {
 	
 	private Locale loc = Locale.getDefault();
@@ -110,11 +131,11 @@ public class JSONSR6ExportService {
         for (SignatureManeuver signatureManeuver : character.getSignatureManeuvers()) {
             JSONSignatureManeuver jsonSignatureManeuver = new JSONSignatureManeuver();
             jsonSignatureManeuver.name = signatureManeuver.getName();
-            if (signatureManeuver.getSkill()!=null)
-            	jsonSignatureManeuver.skill = signatureManeuver.getSkill().getName();
-            else
-            	jsonSignatureManeuver.skill = "No skill set";
-
+            if (signatureManeuver.getSkill()!=null) {
+                jsonSignatureManeuver.skill = signatureManeuver.getSkill().getName();
+            } else {
+                jsonSignatureManeuver.skill = "No skill set";
+            }
             jsonSignatureManeuver.action1Id = signatureManeuver.getAction1().getId();
             jsonSignatureManeuver.action1Name = signatureManeuver.getAction1().getName();
             jsonSignatureManeuver.action2Id = signatureManeuver.getAction2().getId();
@@ -140,9 +161,9 @@ public class JSONSR6ExportService {
 
     private void setInitiatives(JSONCharacter jsonCharacter, Shadowrun6Character character) {
         List<JSONInitiative> jsonInitiativeList = new ArrayList<>();
-        jsonInitiativeList.add(getJsonInitiative(character, ShadowrunAttribute.INITIATIVE_ASTRAL, ShadowrunAttribute.INITIATIVE_DICE_ASTRAL));
-        jsonInitiativeList.add(getJsonInitiative(character, ShadowrunAttribute.INITIATIVE_PHYSICAL, ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL));
-        jsonInitiativeList.add(getJsonInitiative(character, ShadowrunAttribute.INITIATIVE_MATRIX, ShadowrunAttribute.INITIATIVE_DICE_MATRIX));
+        jsonInitiativeList.add(getJsonInitiative(character, INITIATIVE_ASTRAL, ShadowrunAttribute.INITIATIVE_DICE_ASTRAL));
+        jsonInitiativeList.add(getJsonInitiative(character, INITIATIVE_PHYSICAL, ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL));
+        jsonInitiativeList.add(getJsonInitiative(character, INITIATIVE_MATRIX, ShadowrunAttribute.INITIATIVE_DICE_MATRIX));
         jsonInitiativeList.add(getJsonInitiative(character, ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD, ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD));
         jsonInitiativeList.add(getJsonInitiative(character, ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT, ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT));
         jsonCharacter.initiatives = jsonInitiativeList;
@@ -373,7 +394,7 @@ public class JSONSR6ExportService {
 
     private void setLongRangeWeapons(JSONCharacter jsonCharacter, Shadowrun6Character character) {
         List<JSONLongRangeWeapon> jsonLongRangeWeapons = new ArrayList<>();
-        for (CarriedItem longRangeWeapon : getLongRangeWeapons(character)) {
+        for (CarriedItem<ItemTemplate> longRangeWeapon : getLongRangeWeapons(character)) {
             JSONLongRangeWeapon jsonLongRangeWeapon = new JSONLongRangeWeapon();
             jsonLongRangeWeapon.name = longRangeWeapon.getNameWithoutRating(loc);
 //            jsonLongRangeWeapon.type = longRangeWeapon.getUsedAsType().name();
@@ -382,7 +403,7 @@ public class JSONSR6ExportService {
             jsonLongRangeWeapon.pool = Shadowrun6Tools.getWeaponPool(character, longRangeWeapon);
             jsonLongRangeWeapon.damage = Shadowrun6Tools.getWeaponDamage(character, longRangeWeapon).toString();
             jsonLongRangeWeapon.attackRating = Shadowrun6Tools.getAttackRatingString((int[]) longRangeWeapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
-            jsonLongRangeWeapon.mode = (String) longRangeWeapon.getAsObject(SR6ItemAttribute.FIREMODES).getValue();
+//            jsonLongRangeWeapon.mode = (String) longRangeWeapon.getAsObject(SR6ItemAttribute.FIREMODES).getValue();
             jsonLongRangeWeapon.ammunition = Shadowrun6Tools.getItemAttributeString(character, longRangeWeapon, SR6ItemAttribute.AMMUNITION);
 //            jsonLongRangeWeapon.wifi = longRangeWeapon.getWiFiAdvantageStrings();
             jsonLongRangeWeapon.accessories = getItemAccessories(longRangeWeapon);
@@ -448,7 +469,7 @@ public class JSONSR6ExportService {
             	item.page = getPageString(matrixItem.getResolved());
 //                item.deviceRating =  matrixItem.getResolved().getDeviceRating();
                 item.description = getDescription(matrixItem.getResolved());
-                item.concurrentPrograms = matrixItem.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS).getModifiedValue();
+//                item.concurrentPrograms = matrixItem.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS).getModifiedValue();
                 item.programs = getJsonItemList(getProgramsOnDevice(matrixItem));
                 item.accessories = getJsonItemAccessories(getAccessoriesWithoutPrograms(matrixItem));
             }
@@ -461,7 +482,7 @@ public class JSONSR6ExportService {
         List<CarriedItem<ItemTemplate>> items = character.getCarriedItems( ItemType.gearTypes());
         items.addAll(character.getCarriedItems( ItemType.MAGICAL));
         items.removeAll(Shadowrun6Tools.getMatrixItems(character));
-        List<CarriedItem> filteredItems = new ArrayList<>();
+        List<CarriedItem<ItemTemplate>> filteredItems = new ArrayList<>();
 //        for (CarriedItem item : items) {
 //            ItemType type = item.getUsedAsType();
 //            if (type != ItemType.ARMOR) {
@@ -471,23 +492,23 @@ public class JSONSR6ExportService {
         jsonCharacter.items = getJsonItemList(filteredItems);
     }
 
-    private List<JSONItem> getJsonItemList(List<CarriedItem> filteredItems) {
+    private List<JSONItem> getJsonItemList(List<CarriedItem<ItemTemplate>> filteredItems) {
         List<JSONItem> jsonItems = new ArrayList<>();
-        for (CarriedItem item : filteredItems) {
+        for (CarriedItem<ItemTemplate> item : filteredItems) {
             JSONItem jsonItem = getJsonItem(item);
             jsonItems.add(jsonItem);
         }
         return jsonItems;
     }
 
-    private List<JSONItemAccessory> getItemAccessories(CarriedItem item) {
-        Collection<CarriedItem> carriedItemAccessories = new ArrayList(); //item.getUserAddedAccessories();
+    private List<JSONItemAccessory> getItemAccessories(CarriedItem<ItemTemplate> item) {
+        Collection<CarriedItem<ItemTemplate>> carriedItemAccessories = new ArrayList(); //item.getUserAddedAccessories();
         return getJsonItemAccessories(carriedItemAccessories);
     }
 
-    private List<JSONItemAccessory> getJsonItemAccessories(Collection<CarriedItem> carriedItemAccessories) {
+    private List<JSONItemAccessory> getJsonItemAccessories(Collection<CarriedItem<ItemTemplate>> carriedItemAccessories) {
         List<JSONItemAccessory> jsonItemAccessoryList = new ArrayList<>();
-        for (CarriedItem userAddedAccessory : carriedItemAccessories) {
+        for (CarriedItem<ItemTemplate> userAddedAccessory : carriedItemAccessories) {
             JSONItemAccessory jsonItemAccessory = new JSONItemAccessory();
             jsonItemAccessory.name = userAddedAccessory.getNameWithoutRating(loc);
 //            jsonItemAccessory.rating = userAddedAccessory.getRating();
@@ -576,12 +597,18 @@ public class JSONSR6ExportService {
 
     private void setAttributes(JSONCharacter jsonCharacter, Shadowrun6Character character) {
         List<JSONAttribute> jsonAttributes = new ArrayList<>();
-//        Collection<AttributeValue<ShadowrunAttribute>> attributes = character.getAttributes(ShadowrunAttribute.attributesToSave());
-//        attributes.addAll(character.getAttributes(ShadowrunAttribute.derivedValues()));
-//        attributes = attributes.stream().filter(a -> !a.getAttribute().equals(ShadowrunAttribute.INITIATIVE_ASTRAL) && !a.getAttribute().equals(ShadowrunAttribute.INITIATIVE_MATRIX) && !a.getAttribute().equals(ShadowrunAttribute.INITIATIVE_PHYSICAL)).collect(Collectors.toList());
-//        for (AttributeValue<ShadowrunAttribute> attribute : attributes) {
-//            jsonAttributes.add(getJSONAttribute(attribute));
-//        }
+        List<ShadowrunAttribute> shadowrunAttributes = new ArrayList<>(Arrays.asList(attributesToSave()));
+        shadowrunAttributes.addAll(Arrays.asList(derivedValues()));
+        List<AttributeValue<ShadowrunAttribute>> attributes = new ArrayList<>();
+        for (ShadowrunAttribute shadowrunAttribute : shadowrunAttributes) {
+            attributes.add(character.getAttribute(shadowrunAttribute));
+        }
+        attributes = attributes.stream().filter(a -> !a.getModifyable().equals(INITIATIVE_ASTRAL) 
+                && !a.getModifyable().equals(INITIATIVE_MATRIX) 
+                && !a.getModifyable().equals(INITIATIVE_PHYSICAL)).collect(Collectors.toList());
+        for (AttributeValue<ShadowrunAttribute> attribute : attributes) {
+            jsonAttributes.add(getJSONAttribute(attribute));
+        }
         jsonCharacter.attributes = jsonAttributes;
     }
 
@@ -604,6 +631,7 @@ public class JSONSR6ExportService {
         jsonCharacter.gender = character.getGender().toString();
         jsonCharacter.karma = character.getKarmaFree() + character.getKarmaInvested();
         jsonCharacter.freeKarma = character.getKarmaFree();
+        //TODO notes fehlen noch
 //        jsonCharacter.notes = character.getNotes();
         jsonCharacter.nuyen = character.getNuyen();
         jsonCharacter.heat = character.getAttribute(ShadowrunAttribute.HEAT).getModifiedValue();
@@ -630,10 +658,10 @@ public class JSONSR6ExportService {
         return jsonMetaMagicOrEchoList;
     }
 
-    private static List<CarriedItem> getLongRangeWeapons(Shadowrun6Character character) {
-        List<CarriedItem> result = new ArrayList<>();
+    private static List<CarriedItem<ItemTemplate>> getLongRangeWeapons(Shadowrun6Character character) {
+        List<CarriedItem<ItemTemplate>> result = new ArrayList<>();
         List<CarriedItem<ItemTemplate>> items = character.getCarriedItems(ItemType.weaponTypes());
-        for (CarriedItem weapon : items) {
+        for (CarriedItem<ItemTemplate> weapon : items) {
             if (Shadowrun6Tools.getItemType(weapon)!=ItemType.WEAPON_CLOSE_COMBAT) {
                 result.add(weapon);
             }
@@ -641,10 +669,10 @@ public class JSONSR6ExportService {
         return result;
     }
 
-    private static List<CarriedItem> getCloseCombatWeapons(Shadowrun6Character character) {
-        List<CarriedItem> result = new ArrayList<>();
+    private static List<CarriedItem<ItemTemplate>> getCloseCombatWeapons(Shadowrun6Character character) {
+        List<CarriedItem<ItemTemplate>> result = new ArrayList<>();
         List<CarriedItem<ItemTemplate>> items = character.getCarriedItems(ItemType.weaponTypes());
-        for (CarriedItem weapon : items) {
+        for (CarriedItem<ItemTemplate> weapon : items) {
             if (Shadowrun6Tools.getItemType(weapon)==ItemType.WEAPON_CLOSE_COMBAT) {
                 result.add(weapon);
             }
@@ -652,14 +680,14 @@ public class JSONSR6ExportService {
         return result;
     }
 
-    private static List<CarriedItem> getProgramsOnDevice(CarriedItem item) {
+    private static List<CarriedItem<ItemTemplate>> getProgramsOnDevice(CarriedItem<ItemTemplate> item) {
     	return List.of();
 //        Collection<CarriedItem> userAddedAccessories = item.getUserAddedAccessories();
 //        return userAddedAccessories.stream()
 //                .filter(carriedItem -> (carriedItem.isSubType(ItemSubType.BASIC_PROGRAM) || carriedItem.isSubType(ItemSubType.HACKING_PROGRAM))).collect(Collectors.toList());
     }
 
-    private static List<CarriedItem> getAccessoriesWithoutPrograms(CarriedItem item) {
+    private static List<CarriedItem<ItemTemplate>> getAccessoriesWithoutPrograms(CarriedItem<ItemTemplate> item) {
     	return List.of();
 //        Collection<CarriedItem> userAddedAccessories = item.getUserAddedAccessories();
 //        return userAddedAccessories.stream()
@@ -672,5 +700,16 @@ public class JSONSR6ExportService {
 //        } else {
             return "";
 //        }
+    }
+
+    private ShadowrunAttribute[] derivedValues() {
+        return new ShadowrunAttribute[]{INITIATIVE_PHYSICAL, INITIATIVE_MATRIX, INITIATIVE_ASTRAL,
+                DEFENSE_POOL_PHYSICAL, COMPOSURE, JUDGE_INTENTIONS, MEMORY, LIFT_CARRY
+        };
+    }
+
+    private ShadowrunAttribute[] attributesToSave() {
+        return new ShadowrunAttribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,
+                CHARISMA,EDGE,MAGIC,RESONANCE, POWER_POINTS};
     }
 }
