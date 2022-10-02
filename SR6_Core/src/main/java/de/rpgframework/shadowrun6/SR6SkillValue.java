@@ -38,7 +38,7 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 
 	//-------------------------------------------------------------------
 	public String toString() {
-		return ref+"/"+resolved+"(distr="+value+")";
+		return ref+"(distr="+value+")";
 	}
 
 	//-------------------------------------------------------------------

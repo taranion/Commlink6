@@ -5,10 +5,12 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -32,6 +34,8 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 public abstract class CommonSkillController extends ControllerImpl<SR6Skill> implements SR6SkillController, ComplexDataItemController<SR6Skill, SR6SkillValue> {
 	
 	protected final static Logger logger = System.getLogger(CommonSkillController.class.getPackageName()+".skill");
+	
+	private final static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(CommonSkillGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
 	
 	public final static String I18N_RESTRICTED_SKILL = "skill.error.restricted";
 	public final static String I18N_SKILL_IS_MAXED   = "skill.error.isAtMaximum";

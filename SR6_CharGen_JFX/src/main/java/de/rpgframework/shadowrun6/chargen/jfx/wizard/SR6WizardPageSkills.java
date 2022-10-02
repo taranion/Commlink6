@@ -45,7 +45,7 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
 
-	private final static Logger logger = System.getLogger(SR6WizardPageSkills.class.getPackageName());
+	private final static Logger logger = System.getLogger(SR6WizardPageSkills.class.getPackageName()+".skill");
 
 	private ToggleSwitch tsExpertMode;
 	private Label lbPoints, lbPoints2;

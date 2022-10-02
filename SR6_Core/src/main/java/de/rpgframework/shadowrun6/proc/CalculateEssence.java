@@ -25,7 +25,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class CalculateEssence implements ProcessingStep {
 
-	private final static Logger logger = System.getLogger("shadowrun6.proc");
+	private final static Logger logger = System.getLogger(CalculateEssence.class.getPackageName());
 	
 	private Shadowrun6Character model;
 
@@ -43,7 +43,7 @@ public class CalculateEssence implements ProcessingStep {
 
 			float essenceCost = 0.0f;
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-				logger.log(Level.WARNING, "Item type of "+item+" is "+item.getAttributeRaw(SR6ItemAttribute.ITEMTYPE));
+				logger.log(Level.DEBUG, "Item type of {0} is {1}", item, item.getAttributeRaw(SR6ItemAttribute.ITEMTYPE));
 				ItemType type = Shadowrun6Tools.getItemType(item);
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(type)) {
 					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);

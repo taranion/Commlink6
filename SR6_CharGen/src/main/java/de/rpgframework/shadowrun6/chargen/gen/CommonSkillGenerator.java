@@ -10,6 +10,7 @@ import java.util.UUID;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -164,7 +165,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 
 		// Only allow to max an skill, if there isn't one already
 		if ((ref.getDistributed()+1)==maximum && alreadyMaxed.size()>=maxLimit) {
-			return new Possible(I18N_MAX_SKILLS_MAXED);
+			return new Possible(Severity.STOPPER, RES,  I18N_MAX_SKILLS_MAXED, maxLimit);
 		}
 		
 		return Possible.TRUE;

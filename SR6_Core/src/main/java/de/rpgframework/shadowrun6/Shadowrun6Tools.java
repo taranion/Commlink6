@@ -27,7 +27,6 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Choice;
-import de.rpgframework.genericrpg.data.CommonCharacter;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataErrorException;
@@ -82,6 +81,7 @@ import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.CalculateMeleeAndUnarmed;
 import de.rpgframework.shadowrun6.proc.CalculatePersona;
+import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
@@ -125,6 +125,7 @@ public class Shadowrun6Tools {
 		CalculateEssence.class,
 		CalculateDerivedAttributes.class,
 		CalculateAttributePools.class,
+		CalculateSkillPools.class,
 		CalculateMeleeAndUnarmed.class,
 		CalculatePersona.class
 	);

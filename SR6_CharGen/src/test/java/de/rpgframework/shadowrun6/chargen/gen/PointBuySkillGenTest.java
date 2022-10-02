@@ -74,68 +74,14 @@ public class PointBuySkillGenTest {
 		model = new Shadowrun6Character();
 		model.setCharGenSettings(new SR6PointBuySettings());
 		preMods.clear();
-		charGen = new SR6CharacterGenerator() {
-			public String getId() { return "dummy";}
-			public WizardPageType[] getWizardPages() { return null;}
+		charGen = new SR6TestGenerator(model) {
 			public SR6SkillController getSkillController() {
 				return ctrl;
 			}
-			public Shadowrun6Character getModel() {return model;}
-			public void addListener(ControllerListener callback) {}
-			public void removeListener(ControllerListener callback) {}
-			public boolean hasListener(ControllerListener callback) {return false;}
-			public Collection<ControllerListener> getListener() {
-				return null;
-			}
-			public void fireEvent(ControllerEvent type, Object... param) {}
-			public List<ToDoElement> getToDos() {
-				return null;
-			}
-			public void setAllowRunProcessor(boolean value) {}
 			public void runProcessors() {
 				System.out.println("---------------");
 				ctrl.process(preMods);
 			}
-			public boolean save(byte[] data) throws IOException {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			public boolean canBeFinished() {return false;}
-			public void setModel(Shadowrun6Character model, CharacterHandle handle) {}
-			public void finish() {}
-			public RuleController getRuleController() {return null;}
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public IMetatypeController getMetatypeController() {return null;}
-			public IAttributeController getAttributeController() {return null;}
-			public IQualityController getQualityController() { return null;}
-			public ISR6EquipmentController getEquipmentController() { return null;}
-			public IAdeptPowerController getAdeptPowerController() { return null;}
-			public SR6SpellController getSpellController() { return null;}
-			public IRitualController getRitualController() { return null;}
-			public IMetamagicOrEchoController getMetamagicOrEchoController() { return null;}
-			public IComplexFormController getComplexFormController() { return null;}
-			public SINController getSINController() { return null;}
-			public IContactController getContactController() { return null;}
-			public SR6LifestyleController getLifestyleController() { return null;}
-			public IPANController getPANController() { return null;}
-			public IFocusController getFocusController() { return null;}
-			public IQualityPathController getQualityPathController() { return null;}
-			@Override
-			public String getName() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			@Override
-			public String getDescription() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			public RuleValue getRule(Rule rule) {return null;}
-			public List<RuleValue> getRules() { return new ArrayList<>(); }
-			@Override
-			public MagicOrResonanceController getMagicOrResonanceController() {return null;}
-			@Override
-			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
 		ctrl  = new PointBuySR6SkillGenerator(charGen);
 		charGen.runProcessors();
@@ -219,6 +165,7 @@ public class PointBuySkillGenTest {
 		for (int i=2; i<=6; i++) {
 			result = ctrl.increasePoints(val);
 			assertNotNull(result);
+			assertEquals(List.of(), result.getMessages());
 			assertFalse(result.hasError());
 			assertNotNull(result.get());
 			assertEquals(i,result.get().getDistributed());

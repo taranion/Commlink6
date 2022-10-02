@@ -513,7 +513,7 @@ public class Shadowrun3PoolSkillTableGridSkin extends SkinBase<Shadowrun2PoolSki
 		for (SR6SkillValue key : getSkinnable().getController().getModel().getSkillValues()) {
 			PerAttributePoints per = settings.perAttrib.get(key);
 			
-			lblAll.get(key).setText(String.valueOf(key.getDistributed()));
+			lblAll.get(key).setText(String.valueOf(key.getDistributed())+"~");
 			if (lblAdj.get(key)!=null) {
 				lblAdj.get(key).setText(String.valueOf(per.points1));
 				if (toggles.getSelectedToggle()==headBtnAdjust) {

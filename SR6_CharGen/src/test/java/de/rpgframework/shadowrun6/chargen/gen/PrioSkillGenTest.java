@@ -41,6 +41,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
 import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -80,68 +81,14 @@ public class PrioSkillGenTest {
 		model = new Shadowrun6Character();
 		model.setCharGenSettings(new SR6PrioritySettings());
 		preMods.clear();
-		charGen = new SR6CharacterGenerator() {
-			public String getId() { return "dummy";}
-			public WizardPageType[] getWizardPages() { return null;}
+		charGen = new SR6TestGenerator(model) {
 			public SR6SkillController getSkillController() {
 				return ctrl;
 			}
-			public Shadowrun6Character getModel() {return model;}
-			public void addListener(ControllerListener callback) {}
-			public void removeListener(ControllerListener callback) {}
-			public boolean hasListener(ControllerListener callback) {return false;}
-			public Collection<ControllerListener> getListener() {
-				return null;
-			}
-			public void fireEvent(ControllerEvent type, Object... param) {}
-			public List<ToDoElement> getToDos() {
-				return null;
-			}
-			public void setAllowRunProcessor(boolean value) {}
 			public void runProcessors() {
 				System.out.println("---------------");
 				ctrl.process(preMods);
 			}
-			public boolean save(byte[] data) throws IOException {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			public boolean canBeFinished() {return false;}
-			public void setModel(Shadowrun6Character model, CharacterHandle handle) {}
-			public void finish() {}
-			public RuleController getRuleController() {return null;}
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public IMetatypeController getMetatypeController() {return null;}
-			public IAttributeController getAttributeController() {return null;}
-			public IQualityController getQualityController() { return null;}
-			public ISR6EquipmentController getEquipmentController() { return null;}
-			public IAdeptPowerController getAdeptPowerController() { return null;}
-			public SR6SpellController getSpellController() { return null;}
-			public IRitualController getRitualController() { return null;}
-			public IMetamagicOrEchoController getMetamagicOrEchoController() { return null;}
-			public IComplexFormController getComplexFormController() { return null;}
-			public SINController getSINController() { return null;}
-			public IContactController getContactController() { return null;}
-			public SR6LifestyleController getLifestyleController() { return null;}
-			public IPANController getPANController() { return null;}
-			public IFocusController getFocusController() { return null;}
-			public IQualityPathController getQualityPathController() { return null;}
-			@Override
-			public String getName() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			@Override
-			public String getDescription() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			public RuleValue getRule(Rule rule) {return null;}
-			public List<RuleValue> getRules() { return new ArrayList<>(); }
-			@Override
-			public MagicOrResonanceController getMagicOrResonanceController() {return null;}
-			@Override
-			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
 		ctrl  = new SR6PrioritySkillGenerator(charGen);
 		charGen.runProcessors();
@@ -262,6 +209,21 @@ public class PrioSkillGenTest {
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertNull(result.get());
+	}
+	
+	//-------------------------------------------------------------------
+	@Test
+	public void testRoll() {
+		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.SKILLS.name(), 12));
+		charGen.runProcessors();
+		
+		ctrl.roll();
+		assertEquals("Not all points spent",0, ctrl.getPointsLeft());
+		assertEquals(model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed(), ctrl.getPointsLeft2());
+		assertEquals(0, ctrl.getPointsLeft3());
+		assertEquals(0, model.getKarmaFree());
+		
+		assertTrue("There should be more skillvalues than native language", model.getSkillValues().size()>1 );
 	}
 
 }

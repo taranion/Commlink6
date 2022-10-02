@@ -158,17 +158,17 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			logger.log(Level.INFO, "Wizard closed via "+close);
 			//		controller.refresh();
 			if (close==CloseType.FINISH) {
-				wrapper.finish();
-				try {
-					logger.log(Level.DEBUG, "Call save() on "+wrapper.getClass());
-					wrapper.save(Shadowrun6Core.encode(wrapper.getModel()));
+//				wrapper.finish();
+//				try {
+//					logger.log(Level.DEBUG, "Call save() on "+wrapper.getClass());
+//					wrapper.save(Shadowrun6Core.encode(wrapper.getModel()));
 					return;
-				} catch (CharacterIOException e) {
-					super.showCharacterIOException(e, wrapper.getModel());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				} catch (CharacterIOException e) {
+//					super.showCharacterIOException(e, wrapper.getModel());
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			}
 			if (close==CloseType.CANCEL) {
 				//			getApplication().closeAppLayout();

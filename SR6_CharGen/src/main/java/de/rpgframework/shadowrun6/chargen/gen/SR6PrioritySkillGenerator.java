@@ -71,7 +71,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 	public List<SR6SkillValue> getSelected() {
 		SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
 		for (Entry<String, PerSkillPoints> entry : settings.perSkill.entrySet()) {
-			
+			logger.log(Level.DEBUG, "Prio {0}={1}", entry.getKey(), entry.getValue());
 		}
 		logger.log(Level.DEBUG, "getSelected() returns {0} entries", model.getSkillValues().size());
 		
@@ -646,6 +646,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			/*
 			 * Copy from settings to character
 			 */
+			logger.log(Level.DEBUG, "Copy SkillValues to character");
 			List<SR6SkillValue> usedSkills = new ArrayList<>();
 			for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
 				logger.log(Level.DEBUG, "  final "+entry.getKey()+"= "+ entry.getValue());
@@ -764,7 +765,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			
 			SkillSpecializationValue<SR6Skill> ret = new SkillSpecializationValue<>(spec);
 			skillVal.getSpecializations().add(ret);
-			logger.log(Level.INFO, "Select specialization '{0}' in skill '{1}'", spec.getId(), skillVal.getKey());
+			logger.log(Level.INFO, "Select specialization ''{0}'' in skill ''{1}''", spec.getId(), skillVal.getKey());
 			
 			// Now pay
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
@@ -776,8 +777,9 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				settings.get(skillVal).points1++;
 			} else {
 				settings.get(skillVal).karmaSpec++;
-				logger.log(Level.INFO, "Pay with karma "+settings.get(skillVal));
+				logger.log(Level.INFO, "Pay with karma");
 			}
+			logger.log(Level.INFO, "After paying: {0}",settings.get(skillVal));
 			
 			
 			parent.runProcessors();
@@ -837,15 +839,22 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			
 			// Now spend points
 			while (points1>0) {	
+				List<SR6Skill> availWOKnow = new ArrayList<>(available);
+				availWOKnow.remove(Shadowrun6Core.getSkill("knowledge"));
+				availWOKnow.remove(Shadowrun6Core.getSkill("language"));
 				// Decide if to increase existing or add new
 				int dice = random.nextInt(5);
 				List<SR6SkillValue> actionSkills = model.getSkillValues(SkillType.regularValues());
 				if (dice==0 || actionSkills.size()<2) {
 					// Add new
-					int ran = random.nextInt(available.size());
-					SR6Skill toAdd = available.get(ran);
+					int ran = random.nextInt(availWOKnow.size());
+					SR6Skill toAdd = availWOKnow.get(ran);
 					if (canBeSelected(toAdd).get()) {
 						SR6SkillValue val = new SR6SkillValue(toAdd,1);
+						if (!val.getDecisions().isEmpty()) {
+							val.setUuid(UUID.randomUUID());
+							val.addDecision(new Decision(toAdd.getChoices().get(0), toAdd.getName()));
+						}
 						PerSkillPoints points = new PerSkillPoints();
 						points.points1=1;
 						settings.put(val, points);
@@ -873,6 +882,27 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					} else {
 						logger.log(Level.ERROR, "Picked a skill I cannot increase: "+toInc+" with "+points1);
 					}
+				}
+				logger.log(Level.DEBUG, "Remaining {0,number,integer}", points1);
+			}
+			
+			// Now spend points
+			while (points2>0) {	
+				boolean know = random.nextBoolean();
+				SR6Skill toAdd = know?Shadowrun6Core.getSkill("knowledge"):Shadowrun6Core.getSkill("language");
+				if (canBeSelected(toAdd).get()) {
+					SR6SkillValue val = new SR6SkillValue(toAdd,1);
+					val.setUuid(UUID.randomUUID());
+					val.addDecision(new Decision(toAdd.getChoices().get(0), toAdd.getName()));
+					PerSkillPoints points = new PerSkillPoints();
+					points.points2=1;
+					settings.put(val, points);
+					model.addSkillValue(val);
+					logger.log(Level.INFO, "Added skill ''{0}'' with value 1", toAdd.getId());
+					points2--;
+				} else {
+					logger.log(Level.ERROR, "Picked a skill I cannot select: "+toAdd+" with "+points2);
+					break;
 				}
 			}
 			
