@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sr6char gender="MALE" karmaF="11" meta="troll" nuyen="51450">
+   <powerLevel>STANDARD</powerLevel>
+   <heat>0</heat>
+   <chargenSettings>{&#x0022;mysticAdeptMaxPoints&#x0022;:0,&#x0022;mysticAdeptPowerPoints&#x0022;:0,&#x0022;usedKarma&#x0022;:0,&#x0022;karmaMod&#x0022;:0,&#x0022;perSkill&#x0022;:{&#x0022;close_combat&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:7,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;firearms&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:4,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;perception&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;stealth&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:1},&#x0022;knowledge/74bada10-4fa9-422b-a1de-34a9e57d93ae&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/e3883ab4-3f15-4895-a75f-a7570beeae97&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/fc80e68d-7de9-4f8f-b8de-e5bb8ac3ad4e&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:1},&#x0022;language/94fcb145-8b1a-4108-83d4-672ec4487da6&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:1},&#x0022;language/26e0a22c-5b65-41fa-94b7-d756ac76747f&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:1}},&#x0022;toNuyen&#x0022;:0,&#x0022;toContacts&#x0022;:0,&#x0022;priorities&#x0022;:{&#x0022;METATYPE&#x0022;:&#x0022;C&#x0022;,&#x0022;ATTRIBUTE&#x0022;:&#x0022;B&#x0022;,&#x0022;MAGIC&#x0022;:&#x0022;E&#x0022;,&#x0022;SKILLS&#x0022;:&#x0022;D&#x0022;,&#x0022;RESOURCES&#x0022;:&#x0022;A&#x0022;},&#x0022;perAttrib&#x0022;:{&#x0022;BODY&#x0022;:{&#x0022;points1&#x0022;:5,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;AGILITY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;REACTION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;STRENGTH&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:6,&#x0022;points3&#x0022;:0},&#x0022;WILLPOWER&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;LOGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;INTUITION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;CHARISMA&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;EDGE&#x0022;:{&#x0022;points1&#x0022;:4,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;MAGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;RESONANCE&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}}}</chargenSettings>
+   <type>METAHUMAN</type>
+   <mortype>mundane</mortype>
+   <qualities>
+      <quality ref="ambidextrous"/>
+      <quality ref="aptitude">
+         <decision choice="05ed2489-d0af-485b-b58a-61fbd064ed9c" value="close_combat"/>
+      </quality>
+      <quality ref="dependents" value="2">
+         <decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Siblings"/>
+      </quality>
+      <quality ref="high_pain_tolerance"/>
+      <quality ref="honorbound">
+         <decision choice="428282c1-c1d2-4d42-94e1-6f5cb5febf2b" value="Bushido"/>
+      </quality>
+      <quality ref="thermographic_vision"/>
+      <quality ref="built_tough"/>
+      <quality ref="dermal_deposits"/>
+   </qualities>
+   <sins>
+      <sin name="Name it" quality="SUPERFICIALLY_PLAUSIBLE" uniqueid="5285a953-3748-4c1c-9ebd-267a016b0522"/>
+   </sins>
+   <licenses>
+      <licenses name="Concealed Carry" rating="HIGHLY_PLAUSIBLE" sin="5285a953-3748-4c1c-9ebd-267a016b0522"/>
+      <licenses name="Driver" rating="HIGHLY_PLAUSIBLE" sin="5285a953-3748-4c1c-9ebd-267a016b0522"/>
+      <licenses name="Cyberware" rating="HIGHLY_PLAUSIBLE" sin="5285a953-3748-4c1c-9ebd-267a016b0522"/>
+   </licenses>
+   <contacts>
+      <contact id="b7f7a391-0188-451a-9a9d-74ae0f0ea208" loy="1" name="Unnamed" rat="2" type="CORPORATE" typename="Corporate Executive"/>
+      <contact id="57904b30-5cfc-4a76-8fb7-ca4b6e5f872d" loy="1" name="Unnamed" rat="2" type="STREET" typename="Martial Arts Instructor"/>
+      <contact id="a1ed18e3-a3af-4375-8ea0-3fc92f3a8f13" loy="1" name="Unnamed" rat="1" type="STREET" typename="Squatter"/>
+      <contact id="b6a74dae-381c-4512-ba6c-273d40b145b0" loy="2" name="Unnamed" rat="2" type="STREET" typename="Urban Brawler"/>
+   </contacts>
+   <name>Street Samurai</name>
+   <datasets/>
+   <size>268</size>
+   <weight>314</weight>
+   <attributes>
+      <attributes id="BODY" value="7"/>
+      <attributes id="AGILITY" value="3"/>
+      <attributes id="REACTION" value="3"/>
+      <attributes id="STRENGTH" value="7"/>
+      <attributes id="WILLPOWER" value="1"/>
+      <attributes id="LOGIC" value="2"/>
+      <attributes id="INTUITION" value="4"/>
+      <attributes id="CHARISMA" value="2"/>
+      <attributes id="EDGE" value="5"/>
+      <attributes id="MAGIC" value="0"/>
+      <attributes id="RESONANCE" value="0"/>
+      <attributes id="POWER_POINTS" value="0"/>
+   </attributes>
+   <skills>
+      <skill ref="close_combat" value="6">
+         <skillspec ref="blades"/>
+      </skill>
+      <skill ref="firearms" uuid="9642abf6-be78-4c5f-8ce9-96d2eab5ce1c" value="3">
+         <skillspec ref="pistols_heavy"/>
+      </skill>
+      <skill ref="perception" uuid="6ecf8167-0a6c-45db-9683-4483f6eb7b16" value="3"/>
+      <skill ref="stealth" uuid="0bde272a-1131-4bed-bda4-d1613d2ba9b5" value="3"/>
+      <skill ref="knowledge" uuid="74bada10-4fa9-422b-a1de-34a9e57d93ae" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Urban Brawl"/>
+      </skill>
+      <skill ref="knowledge" uuid="e3883ab4-3f15-4895-a75f-a7570beeae97" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Japanese History"/>
+      </skill>
+      <skill ref="knowledge" uuid="fc80e68d-7de9-4f8f-b8de-e5bb8ac3ad4e" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Bushido"/>
+      </skill>
+      <skill ref="language" uuid="94fcb145-8b1a-4108-83d4-672ec4487da6" value="1">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Or'Zet"/>
+      </skill>
+      <skill ref="language" uuid="26e0a22c-5b65-41fa-94b7-d756ac76747f" value="1">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Japanese"/>
+      </skill>
+      <skill ref="language" uuid="1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b" value="4">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Native Language "/>
+      </skill>
+   </skills>
+   <charGenUsed>prio</charGenUsed>
+   <items>
+      <item mode="IMPLANTED" ref="bone_lacing" uuid="c21e098b-821a-458f-ad12-936d23161e06" variant="titanium">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="cyberarm" uuid="e2efb88b-feeb-4352-8558-8ff3bafb1725" variant="fullarm_obvious">
+         <accessories>
+            <item mode="EMBEDDED" ref="attribute_increase" slot="CYBERLIMB_IMPLANT" uuid="ea21a539-d440-4767-ae5e-e3b58ea20f18">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+               <decision choice="d5c88f1f-eb6f-4057-b9d0-b65c212747e6" value="AGILITY"/>
+               <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="3"/>
+            </item>
+            <item mode="EMBEDDED" ref="attribute_increase" slot="CYBERLIMB_IMPLANT" uuid="e7db2705-6300-42a7-a955-a8300c4a427c">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+               <decision choice="d5c88f1f-eb6f-4057-b9d0-b65c212747e6" value="STRENGTH"/>
+               <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="8"/>
+            </item>
+            <item mode="EMBEDDED" ref="cyber_holster" slot="CYBERLIMB_IMPLANT" uuid="e0e00942-03c3-46d4-8bfc-812474788b14">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+            <item mode="EMBEDDED" ref="cyber_slide" slot="CYBERLIMB_IMPLANT" uuid="4a552421-6e6f-45d3-bd3b-9cab65cb573d">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+            <item mode="EMBEDDED" ref="spurs" slot="CYBERLIMB_IMPLANT" uuid="0856e2ce-6ac9-4afe-a9a2-2c17f6c298d6" variant="retractable">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+            <item mode="EMBEDDED" ref="smuggling_compartment" slot="CYBERLIMB_IMPLANT" uuid="8d8a7deb-d34f-4c79-a821-633e80b9e8f8" variant="cyberlimb">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+         </accessories>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="dermal_plating" uuid="0109ff28-d930-4429-94fd-1a190186074f">
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="3"/>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="muscle_augmentation" uuid="57ef9f8f-c03f-4ae3-afe2-62d5857463ed">
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="3"/>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="muscle_toner" uuid="84f7dde9-f848-4479-989d-5116abcb11f1">
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="2"/>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="platelet_factories" uuid="67931c70-fa20-4a1f-9e9a-ab26192703f5">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="reflex_recorder" uuid="1cc6fd21-40df-4a3f-8bdf-88221fab3030">
+         <decision choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="close_combat"/>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="reflex_recorder" uuid="13d30fb5-fcc4-457a-af67-3aebc94b1716">
+         <decision choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="firearms"/>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="sleep_regulator" uuid="5d8dfc3d-ccbe-4c9b-b42c-192f0f351662">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="IMPLANTED" ref="wired_reflexes" uuid="94e21970-6758-4d68-b85f-104f6c5d54b6">
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="1"/>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="CARRIED" ref="ares_roadmaster" uuid="9da31f75-4c4c-4cd8-8b62-fad4d3d15373"/>
+      <item mode="CARRIED" ref="armor_jacket" uuid="4b4c6ad1-b451-465a-87ba-4e319e6256ec"/>
+      <item mode="CARRIED" ref="transys_avalon" uuid="bac0c373-6b8e-4bfb-9e53-f805a3b72ba2">
+         <accessories>
+            <item mode="EMBEDDED" ref="biometric_reader" slot="ELECTRONIC_ACCESSORY" uuid="13777227-55ef-4eb1-9afb-2c8c48a57a5e"/>
+         </accessories>
+      </item>
+      <item mode="CARRIED" ref="katana" uuid="2679413a-1d0a-4a9b-b531-ee715fc9c825"/>
+   </items>
+</sr6char>

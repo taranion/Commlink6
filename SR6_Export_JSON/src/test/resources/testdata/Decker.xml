@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sr6char gender="MALE" karmaF="5" meta="dwarf" nuyen="2400">
+   <powerLevel>STANDARD</powerLevel>
+   <heat>0</heat>
+   <lifestyles>
+      <lifestyle comfort="middle" entert="middle" name="To define" necess="middle" neigh="middle" prim="true" ref="middle" security="middle" space="middle" value="1"/>
+   </lifestyles>
+   <chargenSettings>{&#x0022;mysticAdeptMaxPoints&#x0022;:0,&#x0022;mysticAdeptPowerPoints&#x0022;:0,&#x0022;usedKarma&#x0022;:0,&#x0022;karmaMod&#x0022;:0,&#x0022;perSkill&#x0022;:{&#x0022;cracking&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:8,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;electronics&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:6,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;firearms&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;perception&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:4,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;piloting&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;stealth&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;knowledge/b7843244-28ea-4fbe-94fd-ac2e136a21d2&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/affb26be-c375-4d81-b3c7-a9c447650776&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/6c1cf9ed-415e-4f68-814e-89e962c38693&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/3d6ea001-4623-4035-a3e5-e489be4f1e83&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/9e7bb9cd-b923-4b8d-b3d1-16846069b880&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;language/d54ef4c4-fd54-4d26-b904-4e1d5ff3f152&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}},&#x0022;toNuyen&#x0022;:1,&#x0022;toContacts&#x0022;:0,&#x0022;priorities&#x0022;:{&#x0022;METATYPE&#x0022;:&#x0022;D&#x0022;,&#x0022;ATTRIBUTE&#x0022;:&#x0022;C&#x0022;,&#x0022;MAGIC&#x0022;:&#x0022;E&#x0022;,&#x0022;SKILLS&#x0022;:&#x0022;B&#x0022;,&#x0022;RESOURCES&#x0022;:&#x0022;A&#x0022;},&#x0022;perAttrib&#x0022;:{&#x0022;BODY&#x0022;:{&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;AGILITY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;REACTION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;STRENGTH&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;WILLPOWER&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;LOGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;INTUITION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:1},&#x0022;CHARISMA&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:1},&#x0022;EDGE&#x0022;:{&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;MAGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;RESONANCE&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}}}</chargenSettings>
+   <type>METAHUMAN</type>
+   <mortype>mundane</mortype>
+   <qualities>
+      <quality ref="allergy">
+         <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
+         <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="moderate"/>
+         <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="dairy"/>
+      </quality>
+      <quality ref="analytical_mind"/>
+      <quality ref="aptitude">
+         <decision choice="05ed2489-d0af-485b-b58a-61fbd064ed9c" value="cracking"/>
+      </quality>
+      <quality ref="dependents" value="3">
+         <decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Parent"/>
+      </quality>
+      <quality ref="gearhead"/>
+      <quality ref="hardening"/>
+      <quality ref="toxin_resistance"/>
+      <quality ref="thermographic_vision"/>
+   </qualities>
+   <sins>
+      <sin name="Name it" quality="SUPERFICIALLY_PLAUSIBLE" uniqueid="21d23496-cd0e-4aa3-88f0-48bcc4b317ae"/>
+      <sin name="Name it" quality="ROUGH_MATCH" uniqueid="67afa2a9-1c1a-4784-8acc-9800c9fcbd68"/>
+      <sin name="Name it" quality="ANYONE" uniqueid="65e3d825-b4d3-45a1-b09c-7d01c6aed62f"/>
+   </sins>
+   <licenses>
+      <licenses name="Concealed Carry" rating="HIGHLY_PLAUSIBLE" sin="21d23496-cd0e-4aa3-88f0-48bcc4b317ae"/>
+      <licenses name="Cyberdeck" rating="HIGHLY_PLAUSIBLE" sin="21d23496-cd0e-4aa3-88f0-48bcc4b317ae"/>
+      <licenses name="Cyberware" rating="HIGHLY_PLAUSIBLE" sin="21d23496-cd0e-4aa3-88f0-48bcc4b317ae"/>
+   </licenses>
+   <contacts>
+      <contact id="425fd7d8-3e3e-4e40-9ae8-83e9240ca7e8" loy="2" name="Unnamed" rat="1" type="STREET" typename="Bartender"/>
+      <contact id="6075d20c-7f3f-47b4-9691-dca3919d019e" loy="2" name="Unnamed" rat="1" type="CRIMINAL" typename="Info Broker"/>
+      <contact id="67cc9e61-bb1e-43b6-b2ba-40c56548d318" loy="1" name="Unnamed" rat="2" type="MATRIX" typename="Matrix Ganger"/>
+      <contact id="3db1967a-62db-4098-85ea-8a8ebbfd573c" loy="1" name="Unnamed" rat="2" type="STREET" typename="Electronics Shop Owner"/>
+   </contacts>
+   <name>Decker</name>
+   <datasets/>
+   <size>138</size>
+   <weight>59</weight>
+   <attributes>
+      <attributes id="BODY" value="3"/>
+      <attributes id="AGILITY" value="1"/>
+      <attributes id="REACTION" value="2"/>
+      <attributes id="STRENGTH" value="1"/>
+      <attributes id="WILLPOWER" value="4"/>
+      <attributes id="LOGIC" value="5"/>
+      <attributes id="INTUITION" value="5"/>
+      <attributes id="CHARISMA" value="2"/>
+      <attributes id="EDGE" value="4"/>
+      <attributes id="MAGIC" value="0"/>
+      <attributes id="RESONANCE" value="0"/>
+      <attributes id="POWER_POINTS" value="0"/>
+   </attributes>
+   <skills>
+      <skill ref="cracking" value="7">
+         <skillspec ref="cybercombat"/>
+      </skill>
+      <skill ref="engineering"/>
+      <skill ref="electronics" uuid="1c8516e9-2bc5-4449-b65d-9138c87902b5" value="5">
+         <skillspec ref="computer"/>
+      </skill>
+      <skill ref="firearms" uuid="a73d4fde-752b-4d55-a896-2c27402f39e3" value="2"/>
+      <skill ref="perception" uuid="6b8d71de-cd41-4f0a-859b-82ac8e05b01f" value="4"/>
+      <skill ref="piloting" uuid="c508c82a-eaa3-4132-962d-c6e81a288c3f" value="2"/>
+      <skill ref="stealth" uuid="c3d31b89-3976-4b19-b302-df6076ea1a20" value="1"/>
+      <skill ref="knowledge" uuid="b7843244-28ea-4fbe-94fd-ac2e136a21d2" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Data Havens"/>
+      </skill>
+      <skill ref="knowledge" uuid="affb26be-c375-4d81-b3c7-a9c447650776" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Decker Bars"/>
+      </skill>
+      <skill ref="knowledge" uuid="6c1cf9ed-415e-4f68-814e-89e962c38693" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Hackers"/>
+      </skill>
+      <skill ref="knowledge" uuid="3d6ea001-4623-4035-a3e5-e489be4f1e83" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Matrix Clubs"/>
+      </skill>
+      <skill ref="knowledge" uuid="9e7bb9cd-b923-4b8d-b3d1-16846069b880" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Node Security Design"/>
+      </skill>
+      <skill ref="language" uuid="d54ef4c4-fd54-4d26-b904-4e1d5ff3f152" value="1">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Japanese"/>
+      </skill>
+      <skill ref="language" uuid="1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b" value="4">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Native Language "/>
+      </skill>
+   </skills>
+   <charGenUsed>prio</charGenUsed>
+   <items>
+      <item mode="IMPLANTED" ref="cyberears" uuid="e1788d29-dad8-4cb7-9779-252ca9d42d77">
+         <accessories>
+            <item mode="EMBEDDED" ref="audio_enhancement" slot="CYBEREAR_IMPLANT" uuid="9fe7d378-f928-46c8-9609-51753b251c42" variant="cyberear">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+            <item mode="EMBEDDED" ref="damper" slot="CYBEREAR_IMPLANT" uuid="93747c0d-0660-4b4e-99e9-430f44381436">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+            <item mode="EMBEDDED" ref="select_sound_filter" slot="CYBEREAR_IMPLANT" uuid="16eba65c-314e-4925-9713-176c64b85d26" variant="cyberear">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+               <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="2"/>
+            </item>
+         </accessories>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+         <decision choice="fcc63c09-5af7-4f00-a2d9-d7c0972597d2" value="2"/>
+      </item>
+      <item mode="IMPLANTED" ref="cybereye" uuid="45677766-5876-4f1d-af88-83f4ba156efa">
+         <accessories>
+            <item mode="EMBEDDED" ref="flare_compensation" slot="CYBEREYE_IMPLANT" uuid="62697851-aa51-43cd-b339-c3fc470f5070" variant="cybereye">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+            <item mode="EMBEDDED" ref="low_light_vision" slot="CYBEREYE_IMPLANT" uuid="a8ddfdcf-d889-4c22-9c21-ca6d3bb040eb" variant="cybereye">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+            <item mode="EMBEDDED" ref="smartlink" slot="CYBEREYE_IMPLANT" uuid="c4725880-38e2-4014-bd4f-be4fc44675f9" variant="cybereye">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+            <item mode="EMBEDDED" ref="thermographic_vision" slot="CYBEREYE_IMPLANT" uuid="0057f469-4bc3-4ba2-902d-cb0f2bae886b" variant="cybereye">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+            <item mode="EMBEDDED" ref="vision_enhancement" slot="CYBEREYE_IMPLANT" uuid="f7bae465-36e8-4e0e-9fb8-946667ca9307" variant="cybereye">
+               <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+            </item>
+         </accessories>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+         <decision choice="fcc63c09-5af7-4f00-a2d9-d7c0972597d2" value="4"/>
+      </item>
+      <item mode="IMPLANTED" ref="cyberjack" uuid="f6cb1e83-6cfe-4df9-bd94-b2614a0d91d8">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="6"/>
+      </item>
+      <item ref="jammer" uuid="6c9d6c07-1e8c-48b8-808b-3f9acb12ff7b" variant="area">
+         <decision choice="720ed738-46d2-4124-bd6f-5ed62025be20" value="6"/>
+      </item>
+      <item mode="CARRIED" ref="armor_jacket" uuid="2c24e640-70fa-4bf6-935f-eaed4be32a67"/>
+      <item count="1" mode="CARRIED" ref="data_tap" uuid="298b181e-98e6-45ba-bce8-023becda404d"/>
+      <item mode="CARRIED" ref="shiawase_cyber6" uuid="73286feb-a9a2-4185-8f1d-7b2c8a856ca5">
+         <accessories>
+            <item mode="EMBEDDED" ref="armor" slot="SOFTWARE" uuid="0fb0e9ba-8dfc-408a-87c7-6bec65e02b87"/>
+            <item mode="EMBEDDED" ref="browse" slot="SOFTWARE" uuid="f38c8052-0fda-4a5f-9bc4-36aa0e8d523f"/>
+            <item mode="EMBEDDED" ref="configurator" slot="SOFTWARE" uuid="10f50e70-76b6-4a5b-95f7-86f5f6906676"/>
+            <item mode="EMBEDDED" ref="edit" slot="SOFTWARE" uuid="eb22f20f-399d-4b90-a6f5-eb8072345c99"/>
+            <item mode="EMBEDDED" ref="exploit" slot="SOFTWARE" uuid="ad7a5236-3376-4dda-a209-34924f4d3fd8"/>
+            <item mode="EMBEDDED" ref="overclock" slot="SOFTWARE" uuid="9002c41e-b347-493b-b366-b9fb685feea9"/>
+            <item mode="EMBEDDED" ref="signal_scrubber" slot="SOFTWARE" uuid="359ff90f-d468-4525-862e-7971897d0640"/>
+            <item mode="EMBEDDED" ref="stealth" slot="SOFTWARE" uuid="cd657731-2462-4d38-acd9-e76587aa2c41"/>
+            <item mode="EMBEDDED" ref="toolbox" slot="SOFTWARE" uuid="d0399318-8fdd-4eca-8a38-ecdaab77a0fb"/>
+            <item mode="EMBEDDED" ref="trace" slot="SOFTWARE" uuid="540c6480-8e60-4730-bffa-80fc248f5385"/>
+            <item mode="EMBEDDED" ref="biometric_reader" slot="ELECTRONIC_ACCESSORY" uuid="af67bf3d-cbb9-42d9-8fb4-81289d38b033"/>
+         </accessories>
+      </item>
+      <item mode="CARRIED" ref="transys_avalon" uuid="51447503-c461-42cc-a4c4-58c7530ea26e">
+         <accessories>
+            <item mode="EMBEDDED" ref="biometric_reader" slot="ELECTRONIC_ACCESSORY" uuid="b2499643-4ead-4c2f-a5c6-d53773ae703b"/>
+         </accessories>
+      </item>
+      <item mode="CARRIED" ref="ares_light_fire_75" uuid="85833b82-43cd-446d-b026-f16d0e1b654d"/>
+      <item count="10" mode="CARRIED" ref="ammo_holdout_light_machine" uuid="90e46917-613c-48e8-9c11-67f887f22a14">
+         <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
+      </item>
+      <item mode="EMBEDDED" ref="soundlink" uuid="2f655b32-5cb1-4eb8-a773-41112fa06700"/>
+      <item mode="EMBEDDED" ref="image_link" uuid="4893c405-28c3-4221-9854-c7c41a83e5a8"/>
+      <item mode="EMBEDDED" ref="smartgun_system" uuid="3208354b-53e8-4d91-8804-eba96167fbac"/>
+      <item mode="EMBEDDED" ref="laser_sight" uuid="127e7da9-b98b-4ca4-a6ca-060eeb1ff579"/>
+   </items>
+</sr6char>

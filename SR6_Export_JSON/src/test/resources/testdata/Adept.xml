@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sr6char gender="MALE" karmaF="2" meta="human" nuyen="1070">
+   <powerLevel>STANDARD</powerLevel>
+   <heat>0</heat>
+   <lifestyles>
+      <lifestyle comfort="low" entert="low" name="Room in a shared appartment" necess="low" neigh="low" prim="true" ref="low" security="low" sin="a0c92bbd-c1d0-4aec-9bcc-587f5bd9f5c9" space="low" value="1"/>
+   </lifestyles>
+   <chargenSettings>{&#x0022;mysticAdeptMaxPoints&#x0022;:3,&#x0022;mysticAdeptPowerPoints&#x0022;:3,&#x0022;usedKarma&#x0022;:0,&#x0022;karmaMod&#x0022;:0,&#x0022;perSkill&#x0022;:{&#x0022;athletics&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;biotech&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;close_combat&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:6,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;outdoors&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;perception&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:1},&#x0022;knowledge/c867df6d-da71-4216-9c0d-7e6ebb3611a1&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/eaacc6b7-6893-494f-86bd-76010816cf05&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0}},&#x0022;toNuyen&#x0022;:4,&#x0022;toContacts&#x0022;:0,&#x0022;priorities&#x0022;:{&#x0022;METATYPE&#x0022;:&#x0022;C&#x0022;,&#x0022;ATTRIBUTE&#x0022;:&#x0022;A&#x0022;,&#x0022;MAGIC&#x0022;:&#x0022;B&#x0022;,&#x0022;SKILLS&#x0022;:&#x0022;D&#x0022;,&#x0022;RESOURCES&#x0022;:&#x0022;E&#x0022;},&#x0022;perAttrib&#x0022;:{&#x0022;BODY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;AGILITY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:5,&#x0022;points3&#x0022;:0},&#x0022;REACTION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;STRENGTH&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;WILLPOWER&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;LOGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;INTUITION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;CHARISMA&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;EDGE&#x0022;:{&#x0022;points1&#x0022;:6,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;MAGIC&#x0022;:{&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;RESONANCE&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}}}</chargenSettings>
+   <type>METAHUMAN</type>
+   <mortype>adept</mortype>
+   <qualities>
+      <quality ref="ar_vertigo"/>
+      <quality ref="honorbound">
+         <decision choice="428282c1-c1d2-4d42-94e1-6f5cb5febf2b" value="Code Duello"/>
+      </quality>
+      <quality ref="quick_healer"/>
+      <quality ref="sinner"/>
+      <quality ref="toughness"/>
+      <quality ref="guts"/>
+   </qualities>
+   <adeptPowers>
+      <adeptpower ref="combat_sense" value="2"/>
+      <adeptpower ref="critical_strike" value="2"/>
+      <adeptpower ref="improved_reflexes" value="2"/>
+      <adeptpower ref="killing_hands"/>
+   </adeptPowers>
+   <sins>
+      <sin name="Unnamed" quality="REAL_SIN" uniqueid="a0c92bbd-c1d0-4aec-9bcc-587f5bd9f5c9"/>
+   </sins>
+   <contacts>
+      <contact id="23dbf048-2298-4470-9ed5-47dbe997e124" loy="2" name="Brian" rat="1" type="GOVERNMENT" typename="First Nations Ganger"/>
+      <contact id="731a00b5-715f-4e47-9027-cf054fd4ab1f" loy="2" name="Eno" rat="2" typename="Salish Government Secretary"/>
+      <contact id="f74ed5c7-1883-4fd7-b522-d0d2c2fb16b5" loy="2" name="Sensei" rat="1"/>
+      <contact id="0d88b56e-3b64-4d73-8786-201ed05932c6" loy="1" name="Squatter" rat="1" type="STREET"/>
+   </contacts>
+   <name>Adept</name>
+   <datasets/>
+   <size>194</size>
+   <weight>84</weight>
+   <attributes>
+      <attributes id="BODY" value="5"/>
+      <attributes id="AGILITY" value="6"/>
+      <attributes id="REACTION" value="5"/>
+      <attributes id="STRENGTH" value="5"/>
+      <attributes id="WILLPOWER" value="4"/>
+      <attributes id="LOGIC" value="2"/>
+      <attributes id="INTUITION" value="3"/>
+      <attributes id="CHARISMA" value="2"/>
+      <attributes id="EDGE" value="7"/>
+      <attributes id="MAGIC" value="3"/>
+      <attributes id="RESONANCE" value="0"/>
+      <attributes id="POWER_POINTS" value="0"/>
+   </attributes>
+   <skills>
+      <skill ref="athletics" uuid="da3d3b69-0996-44a7-85f6-c6f0c2becf70" value="2">
+         <skillspec ref="throwing"/>
+      </skill>
+      <skill ref="biotech" uuid="31dc5687-d55e-4c02-9f07-dd3fd83d5841" value="1">
+         <skillspec ref="first_aid"/>
+      </skill>
+      <skill ref="close_combat" uuid="179b0d08-338b-4942-8a5e-1551ca6b17b1" value="5">
+         <skillspec ref="unarmed"/>
+      </skill>
+      <skill ref="outdoors" uuid="837f5c46-a86f-454e-b3a0-1641571cd4bb" value="2"/>
+      <skill ref="perception" uuid="182c065a-1116-4fcc-98fb-85807cea89df" value="3">
+         <skillspec ref="visual"/>
+      </skill>
+      <skill ref="knowledge" uuid="c867df6d-da71-4216-9c0d-7e6ebb3611a1" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Fight Clubs"/>
+      </skill>
+      <skill ref="knowledge" uuid="eaacc6b7-6893-494f-86bd-76010816cf05" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Fort Lewis Geography"/>
+      </skill>
+      <skill ref="language" uuid="4276befa-36ac-4356-a760-7eeff48634e5" value="4">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Native Language "/>
+      </skill>
+   </skills>
+   <charGenUsed>prio</charGenUsed>
+   <items>
+      <item mode="CARRIED" ref="armor_vest" uuid="1a15120c-6d53-4f8f-847d-b320a0ef3573"/>
+      <item mode="CARRIED" ref="contacts" uuid="063142d9-4018-499e-978a-810a69e37535">
+         <accessories>
+            <item mode="EMBEDDED" ref="flare_compensation" slot="OPTICAL" uuid="a3060494-4c95-4d19-9c13-df567b7b51b9"/>
+            <item mode="EMBEDDED" ref="image_link" slot="OPTICAL" uuid="5ea640dc-ccf1-446f-a1d7-5c155be88dd1"/>
+            <item mode="EMBEDDED" ref="low_light_vision" slot="OPTICAL" uuid="1d0056e4-c42d-464e-b02a-13f1780a9050"/>
+            <item mode="EMBEDDED" ref="flare_compensation" slot="OPTICAL" uuid="2a8314b6-1d7b-44bf-9451-df8722c76390"/>
+         </accessories>
+         <decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="3"/>
+      </item>
+      <item mode="CARRIED" ref="sony_emporer" uuid="158eb79b-db31-4082-99a8-c38fb8bb1a8c"/>
+      <item mode="CARRIED" ref="subvocal_microphone" uuid="866ebbcf-0fde-430a-b744-09f93442609f"/>
+      <item mode="CARRIED" ref="trodes" uuid="105dd66a-2310-4c9c-85b4-03b959d9e22e"/>
+      <item mode="CARRIED" ref="bow" uuid="6ddb8c54-a6e4-4d88-823d-ff96e6631ea5">
+         <decision choice="adeb159c-6ca3-407b-8641-c76f9b29a49c" value="5"/>
+         <flag>PRIMARY_RANGED_WEAPON</flag>
+      </item>
+      <item mode="CARRIED" ref="knife" uuid="25bb6241-79ba-4633-9b21-fcdc4c9b8bf0"/>
+      <item mode="CARRIED" ref="shock_gloves" uuid="807a7b92-f491-4a64-9c9b-8117be79492f"/>
+      <item mode="CARRIED" ref="stun_baton" uuid="87e46377-8efb-4ca6-b6f0-7de4c961f340"/>
+      <item mode="CARRIED" ref="sword" uuid="b0e63f82-d98e-4720-acb6-5bd902c43b53"/>
+      <item count="5" mode="CARRIED" ref="throwing_knives" uuid="910e1b9a-b5af-45f0-a7fa-bde28f56543f"/>
+      <item mode="CARRIED" ref="yamaha_growler" uuid="0e718b17-f5de-48f8-9080-382814bd95a5"/>
+   </items>
+</sr6char>
