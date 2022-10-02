@@ -147,10 +147,11 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		super.pages.setHeader(tmp);
 		GeneratorWrapper wrapper = (GeneratorWrapper) charGen; //new GeneratorWrapper(new Shadowrun6Character(), null);
 		
+		logger.log(Level.ERROR, "Inform "+wrapper.getWrapped());
 		handleControllerEvent(BasicControllerEvents.GENERATOR_CHANGED, wrapper);
 		
 //		wrapper.setWrapped(new PriorityCharacterGenerator());
-		logger.log(Level.WARNING, "Create wizard for "+wrapper);
+		logger.log(Level.ERROR, "Create wizard for "+wrapper.getWrapped());
 		GenerationWizard wizard = new GenerationWizard(wrapper);
 		while (true) {
 			CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);

@@ -52,7 +52,7 @@ import javafx.util.StringConverter;
  */
 public class SR6WizardPageMetatype extends WizardPage implements ControllerListener {
 	
-	private final static Logger logger = System.getLogger(SR6WizardPageMetatype.class.getPackageName());
+	private final static Logger logger = System.getLogger(SR6WizardPageMetatype.class.getPackageName()+".meta");
 	
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageMetatype.class.getName());
 
@@ -79,10 +79,10 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 		setTitle(ResourceI18N.get(RES, "page.title"));
 		initComponents();
 		initLayout();
-		initInteractivity();
 //		refreshDataTab();
 		
 		contentPane.getValueFactory().setValue(charGen.getModel().getMetatype());
+		initInteractivity();
 	}
 	
 	//-------------------------------------------------------------------
@@ -122,6 +122,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 					return img;
 				}
 				logger.log(Level.ERROR, "Missing resource "+CommonShadowrunJFXResourceHook.class.getPackage().getName()+" + "+name);
+				System.err.println("Missing resource "+CommonShadowrunJFXResourceHook.class.getPackage().getName()+" + "+name);
 				return null;
 			}});
 		contentPane.setModificationConverter((m) -> Shadowrun6Tools.getModificationString(contentPane.getSelectedItem(),m));
@@ -301,6 +302,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			Collections.sort(items, comparator);
 			contentPane.setItems(items);
 
+			logger.log(Level.DEBUG, "Metatype is {0}",model.getMetatype());
 			if (model.getMetatype() != contentPane.getSelectedItem()) {
 				contentPane.setSelectedItem(model.getMetatype());
 			}
@@ -338,6 +340,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
+		logger.log(Level.ERROR, "RCV "+type);
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) 
 			refresh();
 		
@@ -353,7 +356,6 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	private void roll() {
 		logger.log(Level.INFO, "Roll");
 		IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
-		ctrl.roll();
 		ctrl.randomizeSizeWeight();
 		refresh();
 
@@ -363,7 +365,8 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	private void onExtraAction(CloseType button) {
 		switch (button) {
 		case RANDOMIZE:
-			roll();
+			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
+			ctrl.roll();
 			break;
 		default:
 			logger.log(Level.WARNING, "ToDo: handle "+button);
