@@ -7,6 +7,8 @@ import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.PageReference;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.Contact;
@@ -21,6 +23,7 @@ import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
+import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun6.MartialArtsValue;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -54,8 +57,10 @@ import de.rpgframework.shadowrun6.export.json.model.JSONSkill;
 import de.rpgframework.shadowrun6.export.json.model.JSONSkillSpecialization;
 import de.rpgframework.shadowrun6.export.json.model.JSONSpell;
 import de.rpgframework.shadowrun6.export.json.model.JSONVehicle;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
@@ -91,7 +96,7 @@ import static de.rpgframework.shadowrun.ShadowrunAttribute.WILLPOWER;
 
 public class JSONSR6ExportService {
 	
-	private Locale loc = Locale.getDefault();
+	private final Locale loc = Locale.getDefault();
 
     public String exportCharacter(Shadowrun6Character character) {
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
@@ -184,15 +189,24 @@ public class JSONSR6ExportService {
         for (LicenseValue license : character.getLicenses()) {
             JSONLicense jsonLicense = new JSONLicense();
             jsonLicense.name = license.getName();
-            UUID sin = license.getSIN();
-//            if (sin != null) {
-//                jsonLicense.sin =  character.getSIN(sin).getName();
-//            }
-//            jsonLicense.type = license.getType().getName();
+            UUID sinUUID = license.getSIN();
+            SIN sin = getSIN(character, sinUUID);
+            if (sin != null) {
+                jsonLicense.sin =  sin.getName();
+            }
+            //TODO license type
+//            jsonLicense.type = license.getType();
             jsonLicense.rating = license.getRating().name();
             jsonLicenseList.add(jsonLicense);
         }
         jsonCharacter.licenses = jsonLicenseList;
+    }
+
+    private SIN getSIN(Shadowrun6Character character, UUID sinUUID) {
+        return character.getSINs().stream().filter(s -> s.getUniqueId()
+                        .equals(sinUUID))
+                .findFirst()
+                .orElse(null);
     }
 
     private void setLifestyles(JSONCharacter jsonCharacter, Shadowrun6Character character) {
@@ -240,7 +254,7 @@ public class JSONSR6ExportService {
 
     private void setDrones(JSONCharacter jsonCharacter, Shadowrun6Character character) {
         List<JSONDrone> jsonDroneList = new ArrayList<>();
-        for (CarriedItem item : character.getCarriedItems(ItemType.droneTypes())) {
+        for (CarriedItem<ItemTemplate> item : character.getCarriedItems(ItemType.droneTypes())) {
             JSONDrone drone = new JSONDrone();
             drone.name = item.getNameWithoutRating();
             drone.count = item.getCount();
@@ -294,15 +308,16 @@ public class JSONSR6ExportService {
 
     private void setAugmentations(JSONCharacter jsonCharacter, Shadowrun6Character character) {
         List<JSONAugmentation> jsonAugmentationList = new ArrayList<>();
-        for (CarriedItem item : character.getCarriedItems( ItemType.bodytechTypes())) {
+        for (CarriedItem<ItemTemplate> item : character.getCarriedItems( ItemType.bodytechTypes())) {
             JSONAugmentation jsonAugmentation = new JSONAugmentation();
             jsonAugmentation.name = item.getNameWithoutRating();
+            //TODO itemRating, quality
 //            jsonAugmentation.level = item.getRating() > 0 ? String.valueOf(item.getRating()) : "-";
-//            jsonAugmentation.essence = (float) Shadowrun6Tools.getItemAttribute(character, item, SR6ItemAttribute.ESSENCECOST).getModifiedValue() / 1000.0f;
 //            jsonAugmentation.quality = item.getQuality().name();
+            jsonAugmentation.essence =  item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue() / 1000.0f;
             jsonAugmentation.page = getPageString(item.getResolved());
             jsonAugmentation.description = getDescription(item.getResolved());
-//            jsonAugmentation.accessories = getJsonItemAccessories(item.getUserAddedAccessories());
+            jsonAugmentation.accessories = getJsonItemAccessories(item.getAccessories());
             jsonAugmentationList.add(jsonAugmentation);
         }
         jsonCharacter.augmentations = jsonAugmentationList;
@@ -313,6 +328,7 @@ public class JSONSR6ExportService {
         for (AdeptPowerValue adeptPower : character.getAdeptPowers()) {
             JSONAdeptPower jsonAdeptPower = new JSONAdeptPower();
             jsonAdeptPower.name = adeptPower.getNameWithoutRating();
+            //TODO Adept power levels
 //            if (adeptPower.getModifyable().hasLevels()) {
 //                jsonAdeptPower.level = adeptPower.getModifiedLevel();
 //            }
@@ -327,7 +343,7 @@ public class JSONSR6ExportService {
 
     private void setArmors(JSONCharacter jsonCharacter, Shadowrun6Character character) {
         List<JSONArmor> jsonArmorList = new ArrayList<>();
-        for (CarriedItem carriedItem : character.getCarriedItems(ItemType.ARMOR)) {
+        for (CarriedItem<ItemTemplate> carriedItem : character.getCarriedItems(ItemType.ARMOR)) {
             JSONArmor jsonArmor = new JSONArmor();
             jsonArmor.name = carriedItem.getNameWithoutRating(loc);
             jsonArmor.isIgnored = carriedItem.hasFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS);
@@ -336,18 +352,19 @@ public class JSONSR6ExportService {
             jsonArmor.accessories = getItemAccessories(carriedItem);
             jsonArmor.page = getPageString(carriedItem.getResolved());
             jsonArmor.description = getDescription(carriedItem.getResolved());
-//            jsonArmor.primary = Shadowrun6Tools.isPrimaryItem(character,carriedItem);
+            jsonArmor.primary = carriedItem.isPrimary();
             jsonArmorList.add(jsonArmor);
         }
         jsonCharacter.armors = jsonArmorList;
     }
 
-    private JSONItem getJsonItem(CarriedItem item) {
+    private JSONItem getJsonItem(CarriedItem<ItemTemplate> item) {
         JSONItem jsonItem = new JSONItem();
         jsonItem.name = item.getNameWithoutRating(loc);
-//        jsonItem.type = item.getUsedAsType().name();
-//        jsonItem.subType = item.getUsedAsSubType().name();
+        jsonItem.type = getItemType(item).getName();
+        jsonItem.subType = getItemSubType(item).getName();
         jsonItem.count = item.getCount();
+        //TODO item.getRating()
 //        jsonItem.rating = item.getRating();
         jsonItem.accessories = getItemAccessories(item);
         jsonItem.page = getPageString(item.getResolved());
@@ -362,7 +379,8 @@ public class JSONSR6ExportService {
             jsonComplexForm.name = complexForm.getNameWithoutRating(loc);
             jsonComplexForm.duration = complexForm.getModifyable().getDuration().getName();
             jsonComplexForm.fading = complexForm.getModifyable().getFading();
-//            jsonComplexForm.influences = complexForm.getInfluences().stream().map(DataItem::getNameWithoutRating).collect(Collectors.toList());
+            List<DataItem> influences = Shadowrun6Tools.getInfluences(complexForm);
+            jsonComplexForm.influences = influences.stream().map(DataItem::getName).collect(Collectors.toList());
             jsonComplexForm.page = getPageString(complexForm.getModifyable());
             jsonComplexForm.description = getDescription(complexForm.getModifyable());    
             jsonComplexFormList.add(jsonComplexForm);
@@ -373,16 +391,17 @@ public class JSONSR6ExportService {
 
     private void setCloseCombatWeapons(JSONCharacter jsonCharacter, Shadowrun6Character character) {
         List<JSONCloseCombatWeapon> jsonCloseCombatWeaponList = new ArrayList<>();
-        for (CarriedItem closeCombatWeapon : getCloseCombatWeapons(character)) {
+        for (CarriedItem<ItemTemplate> closeCombatWeapon : getCloseCombatWeapons(character)) {
             JSONCloseCombatWeapon jsonCloseCombatWeapon = new JSONCloseCombatWeapon();
             jsonCloseCombatWeapon.name = closeCombatWeapon.getNameWithoutRating(loc);
-//            jsonCloseCombatWeapon.type = closeCombatWeapon.getUsedAsType().name();
+            jsonCloseCombatWeapon.type = getItemType(closeCombatWeapon).getName();
+            jsonCloseCombatWeapon.subtype = getItemSubType(closeCombatWeapon).getName();
+            //TODO weapon skill
 //            jsonCloseCombatWeapon.skill = closeCombatWeapon.getResolved().getWeaponData().getSkill().getId();
-//            jsonCloseCombatWeapon.subtype = closeCombatWeapon.getUsedAsSubType().name();
             jsonCloseCombatWeapon.pool = Shadowrun6Tools.getWeaponPool(character, closeCombatWeapon);
             jsonCloseCombatWeapon.damage = Shadowrun6Tools.getWeaponDamage(character, closeCombatWeapon).toString();
-            jsonCloseCombatWeapon.attackRating = Shadowrun6Tools.getAttackRatingString((int[]) closeCombatWeapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
-//            jsonCloseCombatWeapon.wifi = closeCombatWeapon.getWiFiAdvantageStrings();
+            jsonCloseCombatWeapon.attackRating = Shadowrun6Tools.getAttackRatingString(closeCombatWeapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
+            jsonCloseCombatWeapon.wifi = Shadowrun6Tools.getWiFiAdvantageStrings(closeCombatWeapon, loc);
             jsonCloseCombatWeapon.accessories = getItemAccessories(closeCombatWeapon);
             jsonCloseCombatWeapon.page = getPageString(closeCombatWeapon.getResolved());
             jsonCloseCombatWeapon.description = getDescription(closeCombatWeapon.getResolved());
@@ -397,15 +416,19 @@ public class JSONSR6ExportService {
         for (CarriedItem<ItemTemplate> longRangeWeapon : getLongRangeWeapons(character)) {
             JSONLongRangeWeapon jsonLongRangeWeapon = new JSONLongRangeWeapon();
             jsonLongRangeWeapon.name = longRangeWeapon.getNameWithoutRating(loc);
-//            jsonLongRangeWeapon.type = longRangeWeapon.getUsedAsType().name();
-//            jsonLongRangeWeapon.subtype = longRangeWeapon.getUsedAsSubType().name();
-//            jsonLongRangeWeapon.skill = longRangeWeapon.getResolved().getWeaponData().getSkill().getId();
+            jsonLongRangeWeapon.type = getItemType(longRangeWeapon).getName();
+            jsonLongRangeWeapon.subtype = getItemSubType(longRangeWeapon).getName();
+            //TODO WeaponSkill
+            //jsonLongRangeWeapon.skill = longRangeWeapon.getResolved().getWeaponData().getSkill().getId();
             jsonLongRangeWeapon.pool = Shadowrun6Tools.getWeaponPool(character, longRangeWeapon);
             jsonLongRangeWeapon.damage = Shadowrun6Tools.getWeaponDamage(character, longRangeWeapon).toString();
-            jsonLongRangeWeapon.attackRating = Shadowrun6Tools.getAttackRatingString((int[]) longRangeWeapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
-//            jsonLongRangeWeapon.mode = (String) longRangeWeapon.getAsObject(SR6ItemAttribute.FIREMODES).getValue();
+            jsonLongRangeWeapon.attackRating = Shadowrun6Tools.getAttackRatingString(longRangeWeapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
+            ItemAttributeObjectValue<SR6ItemAttribute> firemodes = longRangeWeapon.getAsObject(SR6ItemAttribute.FIREMODES);
+            if (firemodes != null) {
+                jsonLongRangeWeapon.mode = ((ArrayList<FireMode>)firemodes.getValue()).stream().map(fm -> fm.getName(loc)).collect(Collectors.joining(","));
+            }
             jsonLongRangeWeapon.ammunition = Shadowrun6Tools.getItemAttributeString(character, longRangeWeapon, SR6ItemAttribute.AMMUNITION);
-//            jsonLongRangeWeapon.wifi = longRangeWeapon.getWiFiAdvantageStrings();
+            jsonLongRangeWeapon.wifi = Shadowrun6Tools.getWiFiAdvantageStrings(longRangeWeapon, loc);
             jsonLongRangeWeapon.accessories = getItemAccessories(longRangeWeapon);
             jsonLongRangeWeapon.page = getPageString(longRangeWeapon.getResolved());
             jsonLongRangeWeapon.description = getDescription(longRangeWeapon.getResolved());
@@ -421,12 +444,12 @@ public class JSONSR6ExportService {
             JSONQuality jsonQuality = new JSONQuality();
             Quality quality = qualityValue.getModifyable();
             jsonQuality.name = quality.getName(loc);
-//            jsonQuality.choice = qualityValue.getNameSecondLine();
+            jsonQuality.choice = qualityValue.getDecisionString(loc);
             jsonQuality.id = quality.getId();
             if (quality.getMax()>0) {
                 jsonQuality.rating = qualityValue.getModifiedValue();
             }
-//            jsonQuality.positive = quality.getType().equals(Quality.QualityType.POSITIVE);
+            jsonQuality.positive = quality.isPositive();
             jsonQuality.page = getPageString(quality);
             jsonQuality.description = getDescription(quality);
             jsonQualities.add(jsonQuality);
@@ -439,7 +462,7 @@ public class JSONSR6ExportService {
         for (Contact connection : character.getContacts()) {
             JSONContact jsonContact = new JSONContact();
             jsonContact.name = connection.getName();
-//            jsonContact.type = connection.getType().getName(loc);
+            jsonContact.type = connection.getTypeName();
             jsonContact.loyalty = connection.getLoyalty();
             jsonContact.influence = connection.getRating();
             jsonContact.description = connection.getDescription();
@@ -454,22 +477,31 @@ public class JSONSR6ExportService {
         for (CarriedItem<ItemTemplate> matrixItem : Shadowrun6Tools.getMatrixItems(character)) {
             JSONMatrixItem item = new JSONMatrixItem();
             item.name = matrixItem.getNameWithoutRating(loc);
-//            item.subType = matrixItem.getSubType();
-//            if (matrixItem.getUsedAsSubType()!=null) 
-//            	item.type =  matrixItem.getUsedAsType().name();
-            if (matrixItem.hasAttribute(SR6ItemAttribute.ATTACK))
-            	item.attack = matrixItem.getAsValue(SR6ItemAttribute.ATTACK).getModifiedValue();
-            if (matrixItem.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
-            	item.dataProcessing = matrixItem.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue();
-            if (matrixItem.hasAttribute(SR6ItemAttribute.SLEAZE))
-            	item.sleaze = matrixItem.getAsValue(SR6ItemAttribute.SLEAZE).getModifiedValue();
-            if (matrixItem.hasAttribute(SR6ItemAttribute.FIREWALL))
-            	item.firewall = matrixItem.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
+            item.subType = getItemSubType(matrixItem);
+            if (getItemSubType(matrixItem) != null) {
+                item.type = getItemType(matrixItem).getName();
+            }
+            if (matrixItem.hasAttribute(SR6ItemAttribute.ATTACK)) {
+                item.attack = matrixItem.getAsValue(SR6ItemAttribute.ATTACK).getModifiedValue();
+            }
+            if (matrixItem.hasAttribute(SR6ItemAttribute.DATA_PROCESSING)) {
+                item.dataProcessing = matrixItem.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue();
+            }
+            if (matrixItem.hasAttribute(SR6ItemAttribute.SLEAZE)) {
+                item.sleaze = matrixItem.getAsValue(SR6ItemAttribute.SLEAZE).getModifiedValue();
+            }
+            if (matrixItem.hasAttribute(SR6ItemAttribute.FIREWALL)) {
+                item.firewall = matrixItem.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
+            }
             if (matrixItem.getResolved()!=null) {
             	item.page = getPageString(matrixItem.getResolved());
+                //TODO item deviceRating
 //                item.deviceRating =  matrixItem.getResolved().getDeviceRating();
                 item.description = getDescription(matrixItem.getResolved());
-//                item.concurrentPrograms = matrixItem.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS).getModifiedValue();
+                ItemAttributeNumericalValue<SR6ItemAttribute> concurrentPrograms = matrixItem.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS);
+                if (concurrentPrograms != null) {
+                    item.concurrentPrograms = concurrentPrograms.getModifiedValue();
+                }
                 item.programs = getJsonItemList(getProgramsOnDevice(matrixItem));
                 item.accessories = getJsonItemAccessories(getAccessoriesWithoutPrograms(matrixItem));
             }
@@ -483,12 +515,12 @@ public class JSONSR6ExportService {
         items.addAll(character.getCarriedItems( ItemType.MAGICAL));
         items.removeAll(Shadowrun6Tools.getMatrixItems(character));
         List<CarriedItem<ItemTemplate>> filteredItems = new ArrayList<>();
-//        for (CarriedItem item : items) {
-//            ItemType type = item.getUsedAsType();
-//            if (type != ItemType.ARMOR) {
-//                filteredItems.add(item);
-//            }
-//        }
+        for (CarriedItem item : items) {
+            ItemType type = getItemType(item);
+            if (type != ItemType.ARMOR) {
+                filteredItems.add(item);
+            }
+        }
         jsonCharacter.items = getJsonItemList(filteredItems);
     }
 
@@ -502,7 +534,7 @@ public class JSONSR6ExportService {
     }
 
     private List<JSONItemAccessory> getItemAccessories(CarriedItem<ItemTemplate> item) {
-        Collection<CarriedItem<ItemTemplate>> carriedItemAccessories = new ArrayList(); //item.getUserAddedAccessories();
+        Collection<CarriedItem<ItemTemplate>> carriedItemAccessories = item.getAccessories();
         return getJsonItemAccessories(carriedItemAccessories);
     }
 
@@ -511,14 +543,15 @@ public class JSONSR6ExportService {
         for (CarriedItem<ItemTemplate> userAddedAccessory : carriedItemAccessories) {
             JSONItemAccessory jsonItemAccessory = new JSONItemAccessory();
             jsonItemAccessory.name = userAddedAccessory.getNameWithoutRating(loc);
+            //TODO item rating
 //            jsonItemAccessory.rating = userAddedAccessory.getRating();
             jsonItemAccessory.description = getDescription(userAddedAccessory.getResolved());
-//            if (userAddedAccessory.getUsedAsType() != null) {
-//                jsonItemAccessory.type = userAddedAccessory.getUsedAsType().name();
-//            }
-//            if (userAddedAccessory.getSubType() != null) {
-//                jsonItemAccessory.subType = userAddedAccessory.getSubType().name();
-//            }
+            if (getItemType(userAddedAccessory) != null) {
+                jsonItemAccessory.type = getItemType(userAddedAccessory).getName();
+            }
+            if (getItemSubType(userAddedAccessory) != null) {
+                jsonItemAccessory.subType = getItemSubType(userAddedAccessory).getName();
+            }
             jsonItemAccessoryList.add(jsonItemAccessory);
         }
         return jsonItemAccessoryList;
@@ -538,7 +571,8 @@ public class JSONSR6ExportService {
             jsonSpell.drain = spell.getDrain();
             jsonSpell.page = getPageString(spell);
             jsonSpell.features = spell.getFeatures().stream().map(f -> f.getFeature().getId()).collect(Collectors.toList());
-//            jsonSpell.influencedBy = spellValue.getInfluences().stream().map(BasePluginData::getName).collect(Collectors.toList());
+            List<DataItem> influences = Shadowrun6Tools.getInfluences(spellValue);
+            jsonSpell.influencedBy = influences.stream().map(DataItem::getName).collect(Collectors.toList());
             jsonSpell.description = getDescription(spell);
             jsonSpells.add(jsonSpell);
         }
@@ -565,7 +599,7 @@ public class JSONSR6ExportService {
 
     private JSONSkill getJSONSkill(SR6SkillValue skillValue, Shadowrun6Character character) {
         JSONSkill jsonSkill = new JSONSkill();
-        jsonSkill.name = skillValue.getName();
+        jsonSkill.name = skillValue.getNameWithoutRating();
         jsonSkill.id = skillValue.getModifyable().getId();
         ShadowrunAttribute attr = skillValue.getModifyable().getAttribute();
         jsonSkill.attribute = attr.getName();
@@ -577,21 +611,24 @@ public class JSONSR6ExportService {
         for (SkillSpecializationValue<SR6Skill> specialization : specializations) {
             JSONSkillSpecialization jsonSpec = new JSONSkillSpecialization();
             ShadowrunAttribute specAttr = attr;
-//            if (specialization.getResolved().getAttribute() != null) {
-//                specAttr = specialization.getSpecial().getAttribute();
-//            }
+            if (specialization.getResolved().getAttribute() != null) {
+                String attrString = specialization.getResolved().getAttribute();
+                if (attrString != null) {
+                    specAttr = ShadowrunAttribute.valueOf(attrString);
+                }
+            }
             jsonSpec.attribute = specAttr.getName();
             jsonSpec.name = specialization.getNameWithoutRating(loc);
-//            jsonSpec.id = specialization.getSpecial().getId();
-//            jsonSpec.expertise = specialization.isExpertise();
-//            jsonSpec.description = getDescription(specialization.getSpecial());
-//            int mod = specialization.isExpertise() ? 3 : 2;
+            jsonSpec.id = specialization.getResolved().getId();
+            jsonSpec.expertise = specialization.getDistributed() == 2;
+            jsonSpec.description = getDescription(specialization.getResolved());
             int mod = specialization.getDistributed();
             jsonSpec.pool = mod + Shadowrun6Tools.getSkillPool(character, skillValue.getModifyable(), specAttr);
             jsonSkillSpecializationList.add(jsonSpec);
         }
         jsonSkill.specializations = jsonSkillSpecializationList;
-//        jsonSkill.influencedBy = skillValue.getInfluences().stream().map(BasePluginData::getName).collect(Collectors.toList());
+        List<DataItem> influences = Shadowrun6Tools.getInfluences(skillValue);
+        jsonSkill.influencedBy = influences.stream().map(DataItem::getName).collect(Collectors.toList());
         return jsonSkill;
     }
 
@@ -680,21 +717,24 @@ public class JSONSR6ExportService {
         return result;
     }
 
+ 
+
     private static List<CarriedItem<ItemTemplate>> getProgramsOnDevice(CarriedItem<ItemTemplate> item) {
-    	return List.of();
-//        Collection<CarriedItem> userAddedAccessories = item.getUserAddedAccessories();
-//        return userAddedAccessories.stream()
-//                .filter(carriedItem -> (carriedItem.isSubType(ItemSubType.BASIC_PROGRAM) || carriedItem.isSubType(ItemSubType.HACKING_PROGRAM))).collect(Collectors.toList());
+        Collection<CarriedItem<ItemTemplate>> userAddedAccessories = item.getAccessories();
+        return userAddedAccessories.stream()
+                .filter(carriedItem -> (Shadowrun6Tools.isSubtype(carriedItem, ItemSubType.BASIC_PROGRAM) || Shadowrun6Tools.isSubtype(carriedItem, ItemSubType.HACKING_PROGRAM))).collect(Collectors.toList());
     }
 
     private static List<CarriedItem<ItemTemplate>> getAccessoriesWithoutPrograms(CarriedItem<ItemTemplate> item) {
-    	return List.of();
-//        Collection<CarriedItem> userAddedAccessories = item.getUserAddedAccessories();
-//        return userAddedAccessories.stream()
-//                .filter(carriedItem -> (!carriedItem.isSubType(ItemSubType.BASIC_PROGRAM) && !carriedItem.isSubType(ItemSubType.HACKING_PROGRAM))).collect(Collectors.toList());
+        Collection<CarriedItem<ItemTemplate>> userAddedAccessories = item.getAccessories();
+        return userAddedAccessories.stream()
+                .filter(carriedItem -> (!Shadowrun6Tools.isSubtype(carriedItem,ItemSubType.BASIC_PROGRAM) 
+                        && !Shadowrun6Tools.isSubtype(carriedItem, ItemSubType.HACKING_PROGRAM)))
+                .collect(Collectors.toList());
     }
     
     private String getDescription(DataItem data) {
+        //TODO custom helptext
 //        if (data.hasCustomHelpText()) {
 //            return data.getCustomHelpText();
 //        } else {
@@ -711,5 +751,13 @@ public class JSONSR6ExportService {
     private ShadowrunAttribute[] attributesToSave() {
         return new ShadowrunAttribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,
                 CHARISMA,EDGE,MAGIC,RESONANCE, POWER_POINTS};
+    }
+
+    private ItemType getItemType(CarriedItem<ItemTemplate> item) {
+        return item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+    }
+
+    private ItemSubType getItemSubType(CarriedItem<ItemTemplate> item) {
+        return item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
     }
 }
