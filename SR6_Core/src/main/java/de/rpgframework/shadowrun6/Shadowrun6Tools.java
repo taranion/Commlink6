@@ -1285,6 +1285,7 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static String getItemAttributeString(ShadowrunCharacter model, CarriedItem item, SR6ItemAttribute attr) {
+		if (!item.hasAttribute(attr)) return "-";
 		switch (attr) {
 		case FIREMODES:
 			return String.valueOf(item.getAsObject(attr));
