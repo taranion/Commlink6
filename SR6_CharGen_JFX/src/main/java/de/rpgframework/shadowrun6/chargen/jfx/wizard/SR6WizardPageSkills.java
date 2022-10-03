@@ -15,6 +15,8 @@ import org.prelle.javafx.Wizard;
 import org.prelle.javafx.public_skins.GridPaneTableViewSkin.HeaderLine;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.rules.AttributeTable.Mode;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.ISkillController;
@@ -25,13 +27,16 @@ import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSkills;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySkillGenerator;
+import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6SkillTablePrioSkin;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -60,6 +65,7 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		bxDescription.setResolver( req -> Shadowrun6Tools.getRequirementString(req, Locale.getDefault()));
 		
 		table.setActionCallback(sVal -> openActionDialog(sVal));
+		knowTable.setActionCallback(sVal -> openActionDialog(sVal));
 		//table.setSelectedListModifier(data -> injectHeader(data));
 	}
 
@@ -74,6 +80,9 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		lbPoints2 = new Label("?");
 		lbPoints.setStyle("-fx-text-fill: -fx-text-base-color");
 		lbPoints2.setStyle("-fx-text-fill: -fx-text-base-color");
+		
+		btnAddKnow.setText("+"+Shadowrun6Core.getSkill("knowledge").getName());
+		btnAddLang.setText("+"+Shadowrun6Core.getSkill("language").getName());
 	}
 	
 	//-------------------------------------------------------------------
@@ -90,6 +99,26 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		tsExpertMode.visibleProperty().bind(table.expertModeAvailableProperty());
 		
 		showAllSkillsProperty().addListener( (ov,o,n) -> refresh());
+	}
+	//-------------------------------------------------------------------
+	protected void addKnowledgeClicked() {
+		SR6Skill skill = Shadowrun6Core.getSkill("knowledge");
+		logger.log(Level.DEBUG, "addClicked for {0}", skill);
+		Decision[] dec = makeDecision(skill);
+		if (dec == null)
+			return;
+		OperationResult<SR6SkillValue> ret = charGen.getSkillController().select(skill, dec);
+		logger.log(Level.WARNING, "Add result was {0}", ret);
+	}
+
+	protected void addLanguageClicked() {
+		SR6Skill skill = Shadowrun6Core.getSkill("language");
+		logger.log(Level.DEBUG, "addClicked for {0}", skill);
+		Decision[] dec = makeDecision(skill);
+		if (dec == null)
+			return;
+		OperationResult<SR6SkillValue> ret = charGen.getSkillController().select(skill, dec);
+		logger.log(Level.WARNING, "Add result was {0}", ret);
 	}
 	
 	//-------------------------------------------------------------------
@@ -115,6 +144,30 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		}
 		return null;
 	}
+	
+//	//-------------------------------------------------------------------
+//	protected HBox getWideGeneratorLine(boolean secondColumn) {
+//		ISkillController<SR6Skill, SR6SkillValue> skillCtrl = charGen.getSkillController();
+//		if (skillCtrl instanceof SR6PrioritySkillGenerator) {
+//			if (secondColumn) {
+//				lbPoints2 = new Label("?");
+//				lbPoints2.setStyle("-fx-text-fill: -fx-text-base-color");
+//				Label hdPoints2 = new Label(ResourceI18N.get(RES, "page.skills.head.points2") + ":");
+//				HBox line = new HBox(5, hdPoints2, lbPoints2);
+//				return line;
+//			} else {
+//				tsExpertMode = new ToggleSwitch("Expert");
+//				tsExpertMode.visibleProperty().bind(table.expertModeAvailableProperty());
+//				lbPoints = new Label("?");
+//				lbPoints.setStyle("-fx-text-fill: -fx-text-base-color");
+//				Label hdPoints1 = new Label(ResourceI18N.get(RES, "page.skills.head.points") + ":");
+//
+//				HBox line = new HBox(5, tsExpertMode, hdPoints1, lbPoints);
+//				return line;
+//			}
+//		}
+//		return null;
+//	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -140,6 +193,17 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 			System.err.println("SR6WizardPageSkills: Don't know what to return for "+realCtrl);
 		}
 		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSkills#makeDecision(de.rpgframework.shadowrun.AShadowrunSkill)
+	 */
+	@Override
+	protected Decision[] makeDecision(SR6Skill skill) {
+		logger.log(Level.WARNING, "overriding makeDecision() in "+getClass());
+		ChoiceSelectorDialog<SR6Skill, SR6SkillValue> dialog = new ChoiceSelectorDialog<>(super.charGen.getSkillController());
+		return dialog.apply(skill, skill.getChoices());
 	}
 
 	//-------------------------------------------------------------------

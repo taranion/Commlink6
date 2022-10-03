@@ -50,7 +50,7 @@ public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements
 	 */
 	@Override
 	protected void onAdd() {
-		SR6Skill know = Shadowrun6Core.getSkill("language") ;
+		SR6Skill know = Shadowrun6Core.getSkill("knowledge") ;
 		ChoiceSelectorDialog<SR6Skill, SR6SkillValue> dialog = new ChoiceSelectorDialog<SR6Skill, SR6SkillValue>(control.getSkillController());
 		Decision[] dec = dialog.apply(know, know.getChoices());
 		if (dec!=null) {
