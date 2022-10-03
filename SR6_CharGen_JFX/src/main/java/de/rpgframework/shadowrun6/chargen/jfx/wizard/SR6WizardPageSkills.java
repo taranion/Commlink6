@@ -83,6 +83,9 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		
 		btnAddKnow.setText("+"+Shadowrun6Core.getSkill("knowledge").getName());
 		btnAddLang.setText("+"+Shadowrun6Core.getSkill("language").getName());
+
+		table.setCellVisibilityFactory( v -> {
+			return !(v.getKey().equals("knowledge") || v.getKey().equals("language"));} );
 	}
 	
 	//-------------------------------------------------------------------
