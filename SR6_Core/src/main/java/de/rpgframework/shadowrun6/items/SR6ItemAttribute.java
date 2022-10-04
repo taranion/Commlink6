@@ -211,4 +211,9 @@ public enum SR6ItemAttribute implements IItemAttribute {
 		return (StringValueConverter<T>) converter;
 	}
 
+	//-------------------------------------------------------------------
+	public static SR6ItemAttribute[] matrixValues() {
+		return new SR6ItemAttribute[] {ATTACK, SLEAZE, DATA_PROCESSING, FIREWALL};
+	}
+
 }

@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -70,6 +71,7 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 		List<ComplexForm> ret = new ArrayList<>();
 		ret.addAll( Shadowrun6Core.getItemList(ComplexForm.class).stream()
 			.filter(cf -> cf.isMultipleSelectable() || getModel().getComplexForm(cf.getId())==null)
+			.sorted( (o1,o2) -> o1.getName().compareTo(o2.getName()))
 			.collect(Collectors.toList())
 		);
 		return ret;

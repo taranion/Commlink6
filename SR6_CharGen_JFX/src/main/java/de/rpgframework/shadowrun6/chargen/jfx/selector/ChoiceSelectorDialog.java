@@ -65,6 +65,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.pane.FocusValueDescriptionPane;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
@@ -370,8 +371,14 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				ret.add( handleITEMATTRIBUTE(item, choice));
 			}
 			break;
+		case MATRIX_ATTRIBUTE:
+			ret.add( handleITEMATTRIBUTE(item, choice, SR6ItemAttribute.matrixValues()));
+			break;
 		case MENTOR_SPIRIT:
 			ret.add( handleMENTOR_SPIRIT(item, choice) );
+			break;
+		case PROGRAM:
+			ret.add( handlePROGRAM(item, choice));
 			break;
 		case SKILL:
 			ret.add( handleSKILL(item, choice) );
@@ -464,6 +471,11 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	private Node handleITEMATTRIBUTE(ComplexDataItem item, Choice choice) {
+		return handleITEMATTRIBUTE(item, choice, SR6ItemAttribute.values());
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleITEMATTRIBUTE(ComplexDataItem item, Choice choice, SR6ItemAttribute[] selectFrom) {
 		ChoiceBox<SR6ItemAttribute> cbSub = new ChoiceBox<>();
 		cbSub.setConverter(new StringConverter<SR6ItemAttribute>() {
 			public SR6ItemAttribute fromString(String value) { return null;}
@@ -479,7 +491,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 					List.of(SR6ItemAttribute.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
 					);			
 		} else {
-			cbSub.getItems().addAll(SR6ItemAttribute.values());
+			cbSub.getItems().addAll(selectFrom);
 		}
 		Collections.sort(cbSub.getItems(), new Comparator<SR6ItemAttribute>() {
 			public int compare(SR6ItemAttribute o1, SR6ItemAttribute o2) {
@@ -796,6 +808,39 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getUuid().toString()));
+			
+			updateButtons(); 
+			showHelpFor(n);
+		 });
+		content.getChildren().add(choicebox);
+		
+		return choicebox;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handlePROGRAM(ComplexDataItem item, Choice choice) {
+		ChoiceBox<ItemTemplate> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<ItemTemplate>() {
+			public ItemTemplate fromString(String value) { return null;}
+			public String toString(ItemTemplate value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		List<ItemTemplate> items = Shadowrun6Core.getItemList(ItemTemplate.class)
+				.stream()
+				.filter(new ItemTypeFilter(CarryMode.EMBEDDED, ItemType.SOFTWARE))
+				.toList();
+		// Eventually sort
+		choicebox.getItems().addAll(items);
+		
+		Collections.sort(choicebox.getItems(), new Comparator<ItemTemplate>() {
+			public int compare(ItemTemplate o1, ItemTemplate o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
 			
 			updateButtons(); 
 			showHelpFor(n);

@@ -62,7 +62,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageSkills skills;
 	private WizardPageSpells<SR6Spell> spells;
 	private WizardPageAdeptPowers powers;
-	private WizardPageComplexForms complexForms;
+	private SR6WizardPageComplexForms complexForms;
 	private SR6WizardPageMetaOrEcho metaEchoes;
 	private SR6WizardPageGear gear;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
@@ -133,7 +133,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());
 		spells = new WizardPageSpells<SR6Spell>(this, wrapper);
 		powers = new SR6WizardPageAdeptPowers(this, wrapper);
-		complexForms = new WizardPageComplexForms(this, wrapper);
+		complexForms = new SR6WizardPageComplexForms(this, wrapper);
 		metaEchoes   = new SR6WizardPageMetaOrEcho(this, wrapper);
 		gear   = new SR6WizardPageGear(this, wrapper);
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));

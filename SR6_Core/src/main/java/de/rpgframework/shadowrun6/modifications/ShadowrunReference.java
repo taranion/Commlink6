@@ -83,7 +83,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	METATYPE(SR6MetaType.class),
 	PARAGON(MentorSpirit.class),
 	POOL("Pool"), // Derived values like defense pool
-	PROGRAM("Program"), // 
+	PROGRAM(ItemTemplate.class), // 
 	// All Resistance tests
 	RESISTANCE(Resistance.class,0),
 	RULE(new RuleFlagConverter()),
@@ -93,7 +93,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILL(key -> Shadowrun6Core.getSkill(key)),
 	SKILLSPECIALIZATION(new SkillSpecializationConverter()),
-	SLOT("ItemHook"),
+	SLOT(ItemHook.class,0),
 	SPELL(SR6Spell.class),
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
 	SPELL_CATEGORY(ASpell.Category.class.getAnnotation(DataItemTypeKey.class).id()),

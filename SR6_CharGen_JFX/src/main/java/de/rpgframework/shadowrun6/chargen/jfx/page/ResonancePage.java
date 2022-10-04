@@ -15,9 +15,10 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.chargen.jfx.section.ComplexFormSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
@@ -25,13 +26,10 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
-import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
-import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
-import de.rpgframework.shadowrun6.filter.MatrixDeviceFilter;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
-import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.scene.control.Label;
 
@@ -71,7 +69,10 @@ public class ResonancePage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initComplexForms() {
-		secCplx = new ComplexFormSection(ResourceI18N.get(RES, "page.resonance.section.complexforms"), r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		secCplx = new ComplexFormSection(
+				ResourceI18N.get(RES, "page.resonance.section.complexforms"), 
+				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),
+				item -> (new ChoiceSelectorDialog<ComplexForm,ComplexFormValue>(ctrl.getComplexFormController()).apply(item, item.getChoices())));
 		secCplx.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secCplx, 4);
 		FlexGridPane.setMinHeight(secCplx, 6);
