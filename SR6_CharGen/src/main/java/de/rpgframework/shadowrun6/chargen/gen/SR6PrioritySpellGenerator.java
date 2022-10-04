@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.chargen.gen.ISpellGenerator;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -29,9 +30,10 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
  * @author prelle
  *
  */
-public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implements SR6SpellController {
+public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implements SR6SpellController, ISpellGenerator<SR6Spell> {
 	
 	private int freeSpells;
+	private int maxFree;
 
 	//-------------------------------------------------------------------
 	protected SR6PrioritySpellGenerator(SR6CharacterController parent) {
@@ -39,9 +41,17 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	}
 
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.ISpellGenerator#getFreeSpells()
+	 */
+	@Override
 	public int getFreeSpells() {
 		return freeSpells;
 	}
+	
+	//-------------------------------------------------------------------
+	public int getMaxFree() { return maxFree; }
+
 
 	//-------------------------------------------------------------------
 	/**
@@ -234,6 +244,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 				}
 				logger.log(Level.INFO, "Have {0} free spells", freeSpells);
 			}
+			maxFree = freeSpells;
 			
 			int byKarma = 0;
 			for (SpellValue<? extends ASpell> val : model.getSpells()) {

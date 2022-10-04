@@ -1,0 +1,92 @@
+package de.rpgframework.shadowrun6.chargen.gen;
+
+import java.lang.System.Logger.Level;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.chargen.RecommendationState;
+import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.ASpell;
+import de.rpgframework.shadowrun.ComplexFormValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.SpellValue;
+import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.chargen.gen.IComplexFormGenerator;
+import de.rpgframework.shadowrun.chargen.gen.ISpellGenerator;
+import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
+import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
+
+/**
+ * @author prelle
+ *
+ */
+public class SR6PriorityComplexFormGenerator extends CommonSR6ComplexFormGenerator implements IComplexFormController, IComplexFormGenerator {
+
+	//-------------------------------------------------------------------
+	protected SR6PriorityComplexFormGenerator(SR6CharacterController parent) {
+		super(parent);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
+	 */
+	@Override
+	public List<Modification> process(List<Modification> previous) {
+		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
+		List<Modification> unprocessed = new ArrayList<>(previous);
+
+		try {
+			todos.clear();
+			free = 0;
+			
+			Shadowrun6Character model = getModel();
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {				
+				SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
+				free = settings.perAttrib.get(ShadowrunAttribute.RESONANCE).base * 2;
+				logger.log(Level.INFO, "Have {0} free complex forms", free);
+			}
+			maxFree = free;
+			
+			int byKarma = 0;
+			for (ComplexFormValue val : model.getComplexForms()) {
+				if (free>0)
+					free--;
+				else {
+					byKarma++;
+					model.setKarmaFree( model.getKarmaFree() -5 );
+					logger.log(Level.INFO, "Pay complex form ''{0}'' with 5 Karma", val.getModifyable().getId());
+				}
+			}
+			
+			// Summary and eventually warn
+			logger.log(Level.INFO, "Have {0} remaining free complex forms", free);
+			if (free>0) {
+				todos.add(new ToDoElement(Severity.WARNING, "Unused complex forms"));
+			} else if (byKarma>0) {
+				boolean karmaAllowed =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
+				if (!karmaAllowed) {
+					todos.add(new ToDoElement(Severity.STOPPER, "Too many complex forms bought"));
+				}
+			}
+			
+			return unprocessed;
+		} finally {
+			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
+		}
+	}
+
+}

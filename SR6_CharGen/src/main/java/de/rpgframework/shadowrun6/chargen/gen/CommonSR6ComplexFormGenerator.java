@@ -17,8 +17,10 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.chargen.gen.IComplexFormGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
@@ -31,9 +33,12 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> implements IComplexFormController {
+public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> implements IComplexFormController, IComplexFormGenerator {
 
 	public final static MultiLanguageResourceBundle RES = SR6CharacterGenerator.RES;
+
+	protected int free;
+	protected int maxFree;
 
 	//-------------------------------------------------------------------
 	/**
@@ -43,6 +48,18 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 		super(parent);
 		// TODO Auto-generated constructor stub
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IComplexFormGenerator#getFree()
+	 */
+	@Override
+	public int getFree() {
+		return free;
+	}
+	
+	//-------------------------------------------------------------------
+	public int getMaxFree() { return maxFree; }
 
 	//-------------------------------------------------------------------
 	/**

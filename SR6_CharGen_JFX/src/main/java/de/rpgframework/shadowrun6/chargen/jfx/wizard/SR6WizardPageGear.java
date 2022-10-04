@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.ResponsiveControlManager;
@@ -22,7 +21,6 @@ import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
-import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
