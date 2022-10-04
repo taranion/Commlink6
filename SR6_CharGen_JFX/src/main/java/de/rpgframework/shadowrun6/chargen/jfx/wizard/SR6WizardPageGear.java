@@ -57,7 +57,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 
 	protected SR6CharacterController charGen;
 	
-	private Label lbConverted, lbConvNuyen;
+	private Label lbIntro,lbConverted, lbConvNuyen;
 	private Button btnDec;
 	private Button btnInc;
 	
@@ -85,6 +85,8 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	
 	//-------------------------------------------------------------------
 	protected void initComponents() {
+		lbIntro     = new Label(ResourceI18N.get(RES, "page.gear.intro"));
+		lbIntro.setWrapText(true);
 		lbConverted = new Label("?");
 		lbConvNuyen = new Label("?");
 		btnDec = new Button("-");
@@ -147,7 +149,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		HBox conversion = new HBox(10, btnDec, lbConverted, btnInc, hdConverted, lbConvNuyen, hdNuyen);
 		conversion.setAlignment(Pos.CENTER_LEFT);
 		
-		VBox col1 = new VBox(10, conversion, selection);
+		VBox col1 = new VBox(10, lbIntro, conversion, selection);
 		
 		
 		layout = new OptionalNodePane(col1, bxDescription);
