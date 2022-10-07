@@ -6,13 +6,13 @@
 				type="ITEM_ATTRIBUTE" ref="RATING"
 				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
 		</choices>
-		<attrdef id="HOOK" value="ARMOR" />
+  		<usage mode="EMBEDDED" slot="ARMOR" value="$RATING"/>
 		<attrdef id="SIZE" value="$RATING" />
 		<attrdef id="PRICE" value="$RATING*250" />
 	</item>
 	<item avail="5" price="3000" id="chemical_seal" type="ACCESSORY"
 		subtype="ARMOR_BODY">
-		<attrdef id="HOOK" value="ARMOR" />
+  		<usage mode="EMBEDDED" slot="ARMOR" value="$RATING"/>
 		<attrdef id="SIZE" value="6" />
 		<requires>
 			<datareq type="GEAR" ref="full_body_armor_with_helmet" apply="DATA_ITEM"/>
@@ -25,7 +25,7 @@
 				type="ITEM_ATTRIBUTE" ref="RATING"
 				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
 		</choices>
-		<attrdef id="HOOK" value="ARMOR" />
+  		<usage mode="EMBEDDED" slot="ARMOR" value="$RATING"/>
 		<attrdef id="SIZE" value="$RATING" />
 		<attrdef id="PRICE" value="$RATING*250" />
 	</item>
@@ -46,14 +46,14 @@
 				type="ITEM_ATTRIBUTE" ref="RATING"
 				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
 		</choices>
-		<attrdef id="HOOK" value="ARMOR" />
+  		<usage mode="EMBEDDED" slot="ARMOR" value="$RATING"/>
 		<attrdef id="SIZE" value="$RATING" />
 		<attrdef id="PRICE" value="$RATING*250" />
 	</item>
 	<item avail="1" price="75" id="electrochromic_feature" type="ACCESSORY" subtype="ARMOR_BODY">
-		<attrdef id="HOOK" value="ARMOR" />
+  		<usage mode="EMBEDDED" slot="ARMOR" value="1"/>
 	</item>
 	<item avail="2" price="150" id="feedback_feature" type="ACCESSORY" subtype="ARMOR_BODY" >
-		<attrdef id="HOOK" value="ARMOR" />
+  		<usage mode="EMBEDDED" slot="ARMOR" value="1"/>
 	</item>
 </items>
