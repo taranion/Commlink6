@@ -170,10 +170,11 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			int nuyen = model.getNuyen();
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
 				if (!tmp.isAutoAdded()) {
-					if (logger.isLoggable(Level.TRACE))
-					logger.log(Level.TRACE, "Pay {0} for {1}", tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue(),
-							tmp.getNameWithRating());
 					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+					if (tmp.getCount()>1)
+						cost *= tmp.getCount();
+					//if (logger.isLoggable(Level.TRACE))
+					logger.log(Level.INFO, "Pay {0} for {1}   (before {2})", cost, tmp.getNameWithRating(), nuyen);
 					nuyen -= cost;
 				}
 				

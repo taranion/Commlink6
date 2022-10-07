@@ -32,6 +32,7 @@ public enum SR6ItemFlag implements ItemFlag {
 	 * AUTO FLAG - not to be used by user
 	 */
 	IGNORE_FOR_CALCULATIONS,
+	CODEMOD,
 	;
 	
 	

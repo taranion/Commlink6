@@ -649,7 +649,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			logger.log(Level.DEBUG, "Copy SkillValues to character");
 			List<SR6SkillValue> usedSkills = new ArrayList<>();
 			for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
-				logger.log(Level.DEBUG, "  final "+entry.getKey()+"= "+ entry.getValue());
+				logger.log(Level.DEBUG, "  final {0} = {1}",String.format("%11s",entry.getKey()), entry.getValue());
 				if (entry.getValue().getSum()==0) continue;
 				SR6SkillValue val = getFromPrioritySettings(entry.getKey());
 				if (val==null) {

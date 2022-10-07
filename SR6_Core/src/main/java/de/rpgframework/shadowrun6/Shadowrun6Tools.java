@@ -52,6 +52,8 @@ import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
+import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
@@ -506,6 +508,11 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve spells");
 			for (SpellValue tmp : model.getSpells()) {
 				SR6Spell resolved = Shadowrun6Core.getItem(SR6Spell.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+			logger.log(Level.DEBUG, "resolve complex forms");
+			for (ComplexFormValue tmp : model.getComplexForms()) {
+				ComplexForm resolved = Shadowrun6Core.getItem(ComplexForm.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve gear");

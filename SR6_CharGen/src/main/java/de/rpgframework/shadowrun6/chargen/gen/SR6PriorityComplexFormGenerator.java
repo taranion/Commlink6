@@ -4,12 +4,16 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.IComplexFormGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
@@ -24,6 +28,29 @@ public class SR6PriorityComplexFormGenerator extends CommonSR6ComplexFormGenerat
 	//-------------------------------------------------------------------
 	protected SR6PriorityComplexFormGenerator(SR6CharacterController parent) {
 		super(parent);
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
+	 */
+	@Override
+	public Possible canBeSelected(ComplexForm value, Decision... decisions) {
+		Possible poss = super.canBeSelected(value, decisions);
+		if (!poss.get())
+			return poss;
+		
+		if (free>0)
+			return Possible.TRUE;
+		
+		// No more free complex forms. Check if buying with Karma is allowed
+		boolean buyWithKarma = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
+		if (buyWithKarma) {
+			if (getModel().getKarmaFree()>=5)
+				return Possible.TRUE;
+			return new Possible(false, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+		} else
+			return new Possible(false, IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 	}
 
 	//-------------------------------------------------------------------

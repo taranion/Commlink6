@@ -25,6 +25,8 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
+import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.LifestyleQuality;
@@ -40,7 +42,9 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunFlags;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
+import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
+import de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
@@ -56,9 +60,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
-import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySpellGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -1528,6 +1529,223 @@ public class SR6ArchetypeTest {
 		
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);
+	}
+	
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	@Test
+	public void test09Technomancer() throws Exception {
+		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
+		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
+		prio.setPriority(PriorityType.METATYPE, Priority.C);
+		prio.setPriority(PriorityType.MAGIC, Priority.B);
+		prio.setPriority(PriorityType.SKILLS, Priority.D);
+		prio.setPriority(PriorityType.RESOURCES, Priority.E);
+		assertEquals(50, model.getKarmaFree());
+		
+		SR6MetaType human = Shadowrun6Core.getItem(SR6MetaType.class, "dwarf");
+		charGen.getMetatypeController().canBeSelected(human);
+		charGen.getMetatypeController().select(human);
+		
+		// Select adept
+		charGen.getMagicOrResonanceController().select(Shadowrun6Core.getItem(MagicOrResonanceType.class, "technomancer"));
+		
+		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
+		raiseAttributeTo(ShadowrunAttribute.EDGE     , 3);
+		raiseAttributeTo(ShadowrunAttribute.RESONANCE, 6);
+		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 5);
+		raiseAttributeTo(ShadowrunAttribute.WILLPOWER, 7);
+		raiseAttributeTo(ShadowrunAttribute.LOGIC    , 5);
+		raiseAttributeTo(ShadowrunAttribute.INTUITION, 5);
+		raiseAttributeTo(ShadowrunAttribute.CHARISMA , 5);
+		raiseAttributeTo(ShadowrunAttribute.BODY     , 5);
+		raiseAttributeTo(ShadowrunAttribute.AGILITY  , 2);
+		raiseAttributeTo(ShadowrunAttribute.REACTION , 2);
+		
+		// Qualitites
+		assertEquals(50, model.getKarmaFree());
+		IQualityController qualities = charGen.getQualityController();
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "allergy"), 
+				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(0).getUUID(),"common"),
+				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(1).getUUID(),"moderate"),
+				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(2).getUUID(),"Grass")
+				);
+		assertNotNull(res);
+		assertTrue(res.wasSuccessful());
+		assertEquals(64, model.getKarmaFree());
+		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "analytical_mind"));
+		assertTrue("Should not fail: "+res,res.wasSuccessful());
+		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "social_stress"), 
+				new Decision(Shadowrun6Core.getItem(Quality.class, "social_stress").getChoices().get(0).getUUID(),"Social gatherings")
+				);
+		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "focused_concentration"));
+		assertTrue("Should not fail: "+res,res.wasSuccessful());
+		res = qualities.increase(res.get());
+		assertTrue("Should not fail: "+res,res.wasSuccessful());
+		assertEquals(45, model.getKarmaFree());
+		
+		// Skills -------------------------------------------
+		SR6SkillGenerator skills = (SR6SkillGenerator) charGen.getSkillController();
+		assertEquals(16, skills.getPointsLeft());
+		OperationResult<SR6SkillValue> sVal = skills.select(Shadowrun6Core.getSkill("cracking"));
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 2
+		skills.increase(sVal.get()); // 3
+		skills.increase(sVal.get()); // 4
+		assertEquals(12, skills.getPointsLeft());
+		sVal = skills.select(Shadowrun6Core.getSkill("electronics"));
+		skills.increase(sVal.get()); // 2
+		skills.increase(sVal.get()); // 3
+		skills.increase(sVal.get()); // 4
+		assertEquals(8, skills.getPointsLeft());
+		sVal = skills.select(Shadowrun6Core.getSkill("tasking"));
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 2
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 3
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 4
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 5
+		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 6
+		assertEquals(2, skills.getPointsLeft());
+
+		sVal = skills.select(Shadowrun6Core.getSkill("con"));
+		skills.increase(sVal.get()); // 2
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(45, model.getKarmaFree());
+		sVal = skills.select(Shadowrun6Core.getSkill("piloting"));
+		skills.increase(sVal.get()); // 2
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(30, model.getKarmaFree());
+		sVal = skills.select(Shadowrun6Core.getSkill("firearms"));
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(25, model.getKarmaFree());
+		sVal = skills.select(Shadowrun6Core.getSkill("stealth"));
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(20, model.getKarmaFree());
+		
+		SR6SkillValue tmp = model.getSkillValue(Shadowrun6Core.getSkill("tasking"));
+		skills.select(tmp, Shadowrun6Core.getSkill("tasking").getSpecialization("compiling"), false);
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(15, model.getKarmaFree());
+		tmp = model.getSkillValue(Shadowrun6Core.getSkill("electronics"));
+		skills.select(tmp, Shadowrun6Core.getSkill("electronics").getSpecialization("computer"), false);
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(10, model.getKarmaFree());
+		tmp = model.getSkillValue(Shadowrun6Core.getSkill("piloting"));
+		skills.select(tmp, Shadowrun6Core.getSkill("piloting").getSpecialization("ground_craft"), false);
+		assertEquals(5, model.getKarmaFree());
+		assertEquals(0, skills.getPointsLeft());
+		tmp = model.getSkillValue(Shadowrun6Core.getSkill("con"));
+		skills.select(tmp, Shadowrun6Core.getSkill("con").getSpecialization("acting"), false);
+		assertEquals(0, model.getKarmaFree());
+		assertEquals(0, skills.getPointsLeft());
+
+		assertEquals(5, skills.getPointsLeft2());
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Commlink Design")) );
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Dragons") ));
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Host Design") ));
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Seattle Gangs") ));
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Tacoma Geography") ));
+		
+		// Complex Forms-------------------------
+		IComplexFormController cforms = charGen.getComplexFormController();
+		assertEquals(6, ((SR6PriorityComplexFormGenerator)cforms).getFree());
+		
+		ComplexForm cform = Shadowrun6Core.getItem(ComplexForm.class, "diffusion");
+		OperationResult<ComplexFormValue> cRes = cforms.select(cform, new Decision(cform.getChoices().get(0).getUUID(), "FIREWALL"));
+		assertTrue(cRes.wasSuccessful());
+		cform = Shadowrun6Core.getItem(ComplexForm.class, "infusion");
+		cRes = cforms.select(cform, new Decision(cform.getChoices().get(0).getUUID(), "ATTACK"));
+		assertTrue(cRes.wasSuccessful());
+		cRes = cforms.select(cform, new Decision(cform.getChoices().get(0).getUUID(), "SLEAZE"));
+		assertTrue(cRes.wasSuccessful());
+		cRes = cforms.select(Shadowrun6Core.getItem(ComplexForm.class, "pulse_storm"));
+		assertTrue(cRes.wasSuccessful());
+		cRes = cforms.select(Shadowrun6Core.getItem(ComplexForm.class, "resonance_spike"));
+		assertTrue(cRes.wasSuccessful());
+		cRes = cforms.select(Shadowrun6Core.getItem(ComplexForm.class, "stitches"));
+		assertTrue(cRes.wasSuccessful());
+		
+		// Contacts--------------------------------------
+		IContactController contCtrl = charGen.getContactController();
+		Contact c1 = contCtrl.createContact().get();
+		c1.setTypeName("Bartender");
+		contCtrl.increaseLoyalty(c1);
+		contCtrl.increaseLoyalty(c1);
+		c1.setType(ContactType.STREET);
+		Contact c2 = contCtrl.createContact().get();
+		c2.setTypeName("Bountry Hunter");
+		contCtrl.increaseRating(c2);
+		contCtrl.increaseLoyalty(c2);
+		contCtrl.increaseLoyalty(c2);
+		contCtrl.increaseLoyalty(c2);
+		contCtrl.increaseLoyalty(c2);
+		c2.setType(ContactType.CORPORATE);
+		Contact c3 = contCtrl.createContact().get();
+		c3.setTypeName("Cab Driver");
+		contCtrl.increaseRating(c3);
+		c3.setType(ContactType.STREET);
+		Contact c4 = contCtrl.createContact().get();
+		c4.setTypeName("Corporate Executive");
+		contCtrl.increaseLoyalty(c4);
+		contCtrl.increaseLoyalty(c4);
+		contCtrl.increaseLoyalty(c4);
+		contCtrl.increaseRating(c4);
+		contCtrl.increaseRating(c4);
+		contCtrl.increaseRating(c4);
+		c4.setType(ContactType.CORPORATE);
+		Contact c5 = contCtrl.createContact().get();
+		c5.setTypeName("Decker");
+		contCtrl.increaseRating(c5);
+		contCtrl.increaseLoyalty(c5);
+		contCtrl.increaseLoyalty(c5);
+		c5.setType(ContactType.MATRIX);
+		Contact c6 = contCtrl.createContact().get();
+		c6.setTypeName("Squatter");
+		contCtrl.increaseLoyalty(c6);
+		c6.setType(ContactType.CRIMINAL);
+		
+		// Lifestyle
+		OperationResult<SR6Lifestyle> lifeRes = charGen.getLifestyleController().select(Shadowrun6Core.getItem(LifestyleQuality.class, "low"));
+		assertTrue(lifeRes.wasSuccessful());
+		lifeRes.get().setPrimary(true);
+		lifeRes.get().setName("Room in a shared appartment");
+//		lifeRes.get().setSIN(model.getSINs().get(0).getUniqueId());
+		
+		// Gear------------------------------
+		ISR6EquipmentController equip = charGen.getEquipmentController();
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "jammer"), "area", null,
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "jammer").getChoices().get(0), "4")).wasSuccessful() );
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "walther_palm_pistol")).wasSuccessful() );
+		OperationResult<CarriedItem<ItemTemplate>> eRes = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_jacket"));
+		assertTrue(eRes.wasSuccessful());
+		equip.embed(eRes.get(), ItemHook.ARMOR, Shadowrun6Core.getItem(ItemTemplate.class, "electricity_resistance"), null, new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "electricity_resistance").getChoices().get(0), "4"));
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "meta_link")).wasSuccessful() );
+		eRes = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "stim_patch"),new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "stim_patch").getChoices().get(0), "4"));
+		assertTrue(eRes.wasSuccessful());
+		assertEquals(100, eRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		int priceBefore = model.getNuyen();
+		equip.increase(eRes.get());
+		assertEquals("Increasing count failed",2, eRes.get().getCount());
+		int priceAfter = priceBefore - 100;
+		assertEquals("Count does not multiply price",priceAfter, model.getNuyen());
+		equip.increase(eRes.get());
+		assertEquals(3, eRes.get().getCount());
+		
+		// Ammo
+		priceBefore = model.getNuyen();
+		OperationResult<CarriedItem<ItemTemplate>> ammo = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine"), null, CarryMode.CARRIED, new Decision(UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3"), "regular") );
+		assertTrue(ammo.wasSuccessful());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		equip.increase(ammo.get());
+		priceAfter = priceBefore - 25;
+		assertEquals("Ammo price wrong",priceAfter, model.getNuyen());
+		
+		model.setName("Technomancer");
+		
+		byte[] raw = Shadowrun6Core.encode(model);
+		String xml = new String(raw);
+		System.out.println(xml);
+
 	}
 	
 	//-------------------------------------------------------------------

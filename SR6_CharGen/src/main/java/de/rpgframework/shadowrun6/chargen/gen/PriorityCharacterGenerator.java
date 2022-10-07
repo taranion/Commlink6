@@ -9,7 +9,9 @@ import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
+import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTableEntry;
 import de.rpgframework.shadowrun.PriorityType;
@@ -22,6 +24,7 @@ import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
@@ -116,12 +119,6 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 	//--------------------------------------------------------------------
 	private void initializeModel() {
-		try {
-			throw new RuntimeException("Initialize Model: "+model.getCharGenSettings(Object.class));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if (model.getCharGenSettings(Object.class) == null) {
 			if (model.getChargenSettingsJSON() != null) {
 				logger.log(Level.INFO, "Restore generator config from {0}", model.getChargenSettingsJSON());
@@ -143,7 +140,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 				model.setKarmaFree(50);
 			}
 		}
-
+		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
 	}
 	
 	//-------------------------------------------------------------------
