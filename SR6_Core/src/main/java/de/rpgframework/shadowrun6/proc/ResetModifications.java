@@ -39,7 +39,6 @@ public class ResetModifications implements ProcessingStep {
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
-		System.err.println("ResetModifications");
 
 		model.clearEdgeModifications();
 		model.clearItemModifications();

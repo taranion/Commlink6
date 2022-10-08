@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.prelle.simplepersist.ElementList;
@@ -19,10 +20,8 @@ public class QualityPath extends ComplexDataItem {
 	private List<QualityPathStep> steps;
 	
 	//-------------------------------------------------------------------
-	/**
-	 */
 	public QualityPath() {
-		// TODO Auto-generated constructor stub
+		steps = new ArrayList<>();
 	}
 	
 	//-------------------------------------------------------------------

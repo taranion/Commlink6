@@ -108,7 +108,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			case HOOK:
 				return ApplyTo.DATA_ITEM;
 			default:
-				logger.log(Level.ERROR, "No processing for reference type: " + mod);
+				logger.log(Level.ERROR, "No processing for reference type: " + mod+" from "+mod.getSource());
 			}
 		} else {
 			logger.log(Level.ERROR, "Don't know how to handle "+ check.getClass());
