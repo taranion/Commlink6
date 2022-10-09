@@ -56,6 +56,7 @@ import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -400,6 +401,11 @@ public class Shadowrun6Tools {
 				if (morType==null)
 					return "Unknown "+tmp.getKey();
 				return prefix+morType.getName(loc);
+			case METAECHO:
+				MetamagicOrEcho metaE = Shadowrun6Core.getItem(MetamagicOrEcho.class, tmp.getKey());
+				if ( metaE==null)
+					return "Unknown "+tmp.getKey();
+				return prefix+ metaE.getName(loc);
 			case METATYPE:
 				SR6MetaType meta = Shadowrun6Core.getItem(SR6MetaType.class, tmp.getKey());
 				if ( meta==null)
@@ -543,7 +549,6 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	@SuppressWarnings("unchecked")
 	public static boolean isRequirementMet(Shadowrun6Character model, ComplexDataItem requiredFor, Requirement req, Decision[] decisions) {
 		if (req.getApply()!=null && req.getApply()!=ApplyTo.CHARACTER) return true;
 		
@@ -562,6 +567,9 @@ public class Shadowrun6Tools {
 				return model.getMetatype().getId().equals(req.getKey());
 			case MAGIC_RESO:
 				return model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType()==item;
+			case METAECHO:
+				if (negated) return !model.hasMetamagicOrEcho(req.getKey());
+				return model.hasMetamagicOrEcho(req.getKey());
 			case GEAR:
 				// Character needs to have a specific gear
 				for (CarriedItem<ItemTemplate> gear : model.getCarriedItems()) {

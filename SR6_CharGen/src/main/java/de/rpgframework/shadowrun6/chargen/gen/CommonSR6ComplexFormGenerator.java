@@ -71,6 +71,7 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 		List<ComplexForm> ret = new ArrayList<>();
 		ret.addAll( Shadowrun6Core.getItemList(ComplexForm.class).stream()
 			.filter(cf -> cf.isMultipleSelectable() || getModel().getComplexForm(cf.getId())==null)
+			.filter(cf -> cf.isFreeSelectable())
 			.sorted( (o1,o2) -> o1.getName().compareTo(o2.getName()))
 			.collect(Collectors.toList())
 		);
@@ -119,7 +120,7 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 	 */
 	@Override
 	public Possible canBeSelected(ComplexForm value, Decision... decisions) {
-		// Ensure spell has not been selected yet
+		// Ensure complex form has not been selected yet
 		for (ComplexFormValue tmp : getSelected()) {
 			if (tmp.getResolved()==value && !value.isMultipleSelectable())
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);

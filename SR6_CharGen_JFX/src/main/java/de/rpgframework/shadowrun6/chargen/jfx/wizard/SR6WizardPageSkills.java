@@ -103,6 +103,7 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		
 		showAllSkillsProperty().addListener( (ov,o,n) -> refresh());
 	}
+	
 	//-------------------------------------------------------------------
 	protected void addKnowledgeClicked() {
 		SR6Skill skill = Shadowrun6Core.getSkill("knowledge");
@@ -114,6 +115,7 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		logger.log(Level.WARNING, "Add result was {0}", ret);
 	}
 
+	//-------------------------------------------------------------------
 	protected void addLanguageClicked() {
 		SR6Skill skill = Shadowrun6Core.getSkill("language");
 		logger.log(Level.DEBUG, "addClicked for {0}", skill);

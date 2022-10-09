@@ -73,7 +73,13 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		case HOOK:
 			ItemHook hook = mod.getResolvedKey();
 			Formula form = mod.getFormula();
-			AAvailableSlot<ItemHook,ItemTemplate> slot = new AvailableSlot(hook, mod.getValue());
+			AAvailableSlot<ItemHook,ItemTemplate> slot = null;
+			if (mod.getRawValue()==null) {
+				logger.log(Level.WARNING, "No value in Hook modification from "+mod.getSource()+" - assume 1");
+				slot = new AvailableSlot(hook,1);
+			} else {
+				slot = new AvailableSlot(hook, mod.getValue());
+			}
 			model.addSlot(slot);
 			logger.log(Level.INFO, indent+"Added slot {0} with capacity {1}", hook, slot.getCapacity());
 			return;

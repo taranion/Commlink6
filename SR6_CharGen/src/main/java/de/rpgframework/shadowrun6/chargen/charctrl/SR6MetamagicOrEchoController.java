@@ -24,6 +24,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -36,9 +37,13 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 
 	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".metaecho");
 	
+	private boolean isCharGen;
+	private int maxGrade = Integer.MAX_VALUE;
+	
 	//-------------------------------------------------------------------
-	public SR6MetamagicOrEchoController(SR6CharacterController parent) {
+	public SR6MetamagicOrEchoController(SR6CharacterController parent, boolean isCharGen) {
 		super(parent);
+		this.isCharGen = isCharGen;
 	}
 
 	//-------------------------------------------------------------------
@@ -158,6 +163,11 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
 		}
 
+		// Is maximum grade reached
+		if (getGrade()>=maxGrade) {
+			return new Possible(false, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+		}
+		
 		// Calculate Karma cost
 		int karma = 10 + getGrade() +1;
 		
@@ -281,6 +291,11 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			return new Possible(IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
 		}
 
+		// Is maximum grade reached
+		if (getGrade()>=maxGrade) {
+			return new Possible(false, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+		}
+
 		// Calculate Karma cost
 		int karma = 10 + getGrade() +1;
 		
@@ -379,7 +394,20 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
 		List<Modification> unprocessed = new ArrayList<>();
 		try {
+			maxGrade = Integer.MAX_VALUE;
 			Shadowrun6Character model = getModel();
+			MagicOrResonanceType mrType = model.getMagicOrResonanceType();
+			if (mrType!=null && isCharGen) {
+				if (mrType.usesMagic()) {
+					maxGrade = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_INITIATION);
+				} else if (mrType.usesResonance()) {
+					maxGrade = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_SUBMERSION);
+				} else {
+					maxGrade = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_TRANSHUMAN);					
+				}
+			}
+			logger.log(Level.ERROR, "Maximum grade is {0}", maxGrade);
+			
 			for (Modification tmp : previous) {
 				if (tmp.getReferenceType()==ShadowrunReference.METAECHO) {
 					DataItemModification mod = (DataItemModification)tmp;

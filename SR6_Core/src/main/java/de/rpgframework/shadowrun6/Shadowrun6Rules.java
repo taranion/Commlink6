@@ -34,6 +34,9 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 		}
 	}
 	
+	public static Rule CHARGEN_MAX_INITIATION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_INITIATION", Rule.Type.INTEGER, RES, "99");
+	public static Rule CHARGEN_MAX_SUBMERSION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_SUBMERSION", Rule.Type.INTEGER, RES, "99");
+	public static Rule CHARGEN_MAX_TRANSHUMAN   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_TRANSHUMAN", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule(EffectOn.CHARGEN,"CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_PRIO_ADEPT_PP    = new Rule(EffectOn.CHARGEN,"CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.PRIO_MAGIC);
 	public static Rule CHARGEN_ALLOW_LEGAL_AVAIL7PLUS = new Rule(EffectOn.CHARGEN,"CHARGEN_ALLOW_LEGAL_AVAIL7PLUS", Rule.Type.BOOLEAN, RES, "false");
@@ -47,6 +50,9 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	//-------------------------------------------------------------------
 	public static Rule[] values() {
 		Rule[] sr6 = new Rule[] {
+				CHARGEN_MAX_INITIATION,
+				CHARGEN_MAX_SUBMERSION,
+				CHARGEN_MAX_TRANSHUMAN,
 				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
 				CHARGEN_PRIO_ADEPT_PP,
 				CHARGEN_BUY_SPELLS_KARMA,
