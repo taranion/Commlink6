@@ -74,7 +74,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		rituals   = new SR6RitualLeveller(this);
 		adeptPowers = new SR6AdeptPowerLeveller(this);
 		complex   = new SR6ComplexFormLeveller(this);
-		metaEcho  = new SR6MetamagicOrEchoController(this);
+		metaEcho  = new SR6MetamagicOrEchoController(this, false);
 		sins      = new SR6SINLeveller(this);
 		lifestyles= new SR6LifestyleLeveller(this);
 		contacts  = new SR6ContactLeveller(this);

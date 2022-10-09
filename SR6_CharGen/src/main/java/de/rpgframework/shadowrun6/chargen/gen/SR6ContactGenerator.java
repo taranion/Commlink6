@@ -2,16 +2,22 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.random.GeneratorVariable;
 import de.rpgframework.shadowrun.Contact;
+import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.generators.ShadowrunNameGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
@@ -25,11 +31,16 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6ContactController;
  */
 public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6ContactController {
 	
+	private static Random random = new Random();
+	
+	private ShadowrunNameGenerator nameGen;
+	
 	private int pointsLeft;
 
+	//-------------------------------------------------------------------
 	protected SR6ContactGenerator(SR6CharacterController parent) {
 		super(parent);
-		// TODO Auto-generated constructor stub
+		nameGen = new ShadowrunNameGenerator();
 	}
 
 	//-------------------------------------------------------------------
@@ -63,6 +74,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 		}
 		
 		Contact contact = new Contact();
+		contact.setType(ContactType.STREET);
 		getModel().addContact(contact);
 		logger.log(Level.INFO, "Added contact");
 		
@@ -90,6 +102,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 */
 	@Override
 	public Possible canIncreaseRating(Contact con) {
+		if (con==null) return Possible.FALSE;
 		// No matter what rules: Cannot be higher than 8
 		if (con.getRating()>=8) {
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
@@ -149,6 +162,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 */
 	@Override
 	public Possible canDecreaseRating(Contact con) {
+		if (con==null) return Possible.FALSE;
 		if (con.getRating()<=1)
 			return new Possible(IRejectReasons.IMPOSS_MIN_LEVEL_REACHED);
 		return Possible.TRUE;
@@ -178,6 +192,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 */
 	@Override
 	public Possible canIncreaseLoyalty(Contact con) {
+		if (con==null) return Possible.FALSE;
 		// No matter what rules: Cannot be higher than 8
 		if (con.getLoyalty()>=8) {
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
@@ -188,7 +203,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			int karmaNeeded = 0;
 			// Apply extended contact rules
 			int sum = con.getLoyalty() + con.getRating();
-			// SSDR on 01.06.2022: "I would sayit does, an augmented bonus to an attribute counts as that attribute in essentially every way, except karma cost for advancing"
+			// SSDR on 01.06.2022: "I would say it does, an augmented bonus to an attribute counts as that attribute in essentially every way, except karma cost for advancing"
 			int maxWithoutKarma = model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue() * 2;
 			// If the sum is already at normal max, you need Karma to increase the maximum
 			if (sum>=maxWithoutKarma) {
@@ -237,6 +252,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	 */
 	@Override
 	public Possible canDecreaseLoyalty(Contact con) {
+		if (con==null) return Possible.FALSE;
 		if (con.getLoyalty()<=1)
 			return new Possible(IRejectReasons.IMPOSS_MIN_LEVEL_REACHED);
 		return Possible.TRUE;
@@ -323,6 +339,35 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");			
 		}
 		return unprocessed;
+	}
+
+	//-------------------------------------------------------------------
+	@Override
+	public void roll() {
+		logger.log(Level.ERROR, "roll() not implemented");
+		
+		// SSDR on 01.06.2022: "I would say it does, an augmented bonus to an attribute counts as that attribute in essentially every way, except karma cost for advancing"
+		int max = getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue();
+		while (pointsLeft>1) {
+			int rating = (pointsLeft==2)?1:(1+random.nextInt(Math.min(max, pointsLeft-1)));
+			pointsLeft -= rating;
+			int loyalty = (pointsLeft==1)?1:(1+random.nextInt(1+ Math.min(max, pointsLeft)));
+			pointsLeft -= loyalty;
+			Contact contact = new Contact();
+			contact.setLoyalty(loyalty);
+			contact.setRating(rating);
+			int type = random.nextInt(ContactType.values().length);
+			contact.setType(ContactType.values()[type]);
+			
+			// Generate a name
+			Map<GeneratorVariable,Integer> variables = new HashMap<>();
+			String name = (String) nameGen.generate(variables);
+			contact.setName(name);
+			
+			logger.log(Level.ERROR, "Generated {0}: {1}", name, contact);
+			getModel().addContact(contact);			
+			logger.log(Level.INFO, "Added contact");
+		}
 	}
 
 }

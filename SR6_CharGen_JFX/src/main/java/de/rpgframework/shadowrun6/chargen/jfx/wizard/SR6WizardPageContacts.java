@@ -5,8 +5,8 @@ import java.lang.System.Logger.Level;
 
 import org.prelle.javafx.Wizard;
 
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.shadowrun.Contact;
-import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.jfx.pane.ContactDetailPane;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageContacts;
@@ -26,7 +26,7 @@ public class SR6WizardPageContacts extends WizardPageContacts {
 	
 	//-------------------------------------------------------------------
 	protected ContactDetailPane getRuleSpecificNode() {
-		return new ContactDetailPane();
+		return new ContactDetailPane(charGen.getContactController());
 	}
 
 	//-------------------------------------------------------------------
@@ -35,11 +35,13 @@ public class SR6WizardPageContacts extends WizardPageContacts {
 	 */
 	@Override
 	public void addClicked() {
-		// TODO Auto-generated method stub
-		logger.log(Level.WARNING, "ToDo: add");
+		logger.log(Level.DEBUG, "addClicked");
 		
-		Contact toAdd = new Contact("Hans", ContactType.GOVERNMENT, "Agent", 3, 2);
-		selection.getItems().add(toAdd);
+		OperationResult<Contact> result = charGen.getContactController().createContact();
+		if (result.wasSuccessful()) {
+			Contact toAdd = result.get();
+			selection.getSelectionModel().select(toAdd);
+		}
 	}
 
 }

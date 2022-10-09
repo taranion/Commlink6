@@ -160,7 +160,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		rituals   = new SR6RitualGenerator(this);
 		adeptPowers = new SR6AdeptPowerGenerator(this);
 		complex   = new SR6PriorityComplexFormGenerator(this);
-		metaEcho  = new SR6MetamagicOrEchoController(this);
+		metaEcho  = new SR6MetamagicOrEchoController(this, true);
 		sins      = new SR6SINGenerator(this);
 		lifestyles= new SR6LifestyleGenerator(this);
 		contacts  = new SR6ContactGenerator(this);
