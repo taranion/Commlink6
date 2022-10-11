@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import de.rpgframework.eden.roll20.sr6.Shadowrun6CompendiumFactory;
+import de.rpgframework.genericrpg.LicenseManager;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.PageReference;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -43,9 +44,11 @@ public class SR6CompendiumExportTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		Locale.setDefault(Locale.ENGLISH);
+		LicenseManager.storeUserLicensedDatasets(List.of("SHADOWRUN6/CORE"));
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		//Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(2));
+		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(3));
+		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(2));
 		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(1));
 		
 		workbook = new XSSFWorkbook();

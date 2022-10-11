@@ -11,6 +11,8 @@ import org.apache.poi.ss.usermodel.Row;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.PageReference;
 import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SpellFeatureReference;
 import de.rpgframework.shadowrun6.SR6Spell;
@@ -188,6 +190,26 @@ public class Converter {
 
 		// Description
 		
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertComplexForm(ComplexForm item, Locale loc, Row row) {
+		int x=5;
+		// data-duration
+		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().name().toLowerCase());
+		// duration
+		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().name().toLowerCase());
+		// data-fading
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getFading());
+		// fading
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getFading());
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertEcho(MetamagicOrEcho item, Locale loc, Row row) {
+		int x=5;
+		// data-rating
+		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.hasLevels());
 	}
 
 //	//-------------------------------------------------------------------

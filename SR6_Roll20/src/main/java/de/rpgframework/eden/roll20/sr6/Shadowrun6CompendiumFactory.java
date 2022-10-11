@@ -26,6 +26,9 @@ import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.PageReference;
 import de.rpgframework.reality.Player;
 import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
+import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -84,6 +87,9 @@ public class Shadowrun6CompendiumFactory {
 //		createCritterPowers(module, zipOut, localeCallback, shallow);
 		createQualities  (module, localeCallback);
 		createSpells     (module, localeCallback);
+		createMetamagic  (module, localeCallback);
+		createComplexForms(module, localeCallback);
+		createEchoes     (module, localeCallback);
 		createWeapons    (module,localeCallback);
 		createVehicles   (module,localeCallback);
 //		createVehicle    (module, zipOut, localeCallback, shallow);
@@ -230,6 +236,135 @@ public class Shadowrun6CompendiumFactory {
 			row.createCell(4, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 
 			Converter.convertSpell((SR6Spell) item, locales[0], row);
+		}
+		for (int i=0; i<20; i++) {
+			if (i==2 || i==4) continue;
+			sheet.autoSizeColumn(i);
+		}
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createMetamagic(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
+		Sheet sheet = workbook.createSheet("Metamagic");
+		int rowNum =0;
+		Row head = sheet.createRow(0);
+		head.createCell(0, CellType.STRING).setCellValue("Name");
+		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(2, CellType.STRING).setCellValue("data-description");
+		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
+		head.createCell(4, CellType.STRING).setCellValue("data-notes");
+
+		head.createCell(5, CellType.STRING).setCellValue("data-rating");
+//		head.createCell(6, CellType.STRING).setCellValue("duration");
+//		head.createCell(7, CellType.STRING).setCellValue("data-fade");
+//		head.createCell(8, CellType.STRING).setCellValue("Fade Value");
+		
+		
+		List<MetamagicOrEcho> list = Shadowrun6Core.getItemList(MetamagicOrEcho.class);
+		list = list.stream().filter(moe -> moe.getType()==Type.METAMAGIC || moe.getType()==Type.METAMAGIC_ADEPT)
+				.sorted(new Comparator<MetamagicOrEcho>() {
+			public int compare(MetamagicOrEcho o1, MetamagicOrEcho o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		}).toList();
+		for (MetamagicOrEcho item : list) {
+			Locale[] locales = localeCallback.apply(item.getPageReferences());
+			
+			Row row = sheet.createRow(++rowNum);
+			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			row.createCell(4, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+
+			Converter.convertEcho((MetamagicOrEcho) item, locales[0], row);
+		}
+		for (int i=0; i<20; i++) {
+			if (i==2 || i==4) continue;
+			sheet.autoSizeColumn(i);
+		}
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createComplexForms(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
+		Sheet sheet = workbook.createSheet("Forms");
+		int rowNum =0;
+		Row head = sheet.createRow(0);
+		head.createCell(0, CellType.STRING).setCellValue("Name");
+		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(2, CellType.STRING).setCellValue("data-description");
+		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
+		head.createCell(4, CellType.STRING).setCellValue("data-notes");
+
+		head.createCell(5, CellType.STRING).setCellValue("data-duration");
+		head.createCell(6, CellType.STRING).setCellValue("duration");
+		head.createCell(7, CellType.STRING).setCellValue("data-fade");
+		head.createCell(8, CellType.STRING).setCellValue("Fade Value");
+		
+		
+		List<ComplexForm> list = Shadowrun6Core.getItemList(ComplexForm.class);
+		Collections.sort(list, new Comparator<ComplexForm>() {
+			public int compare(ComplexForm o1, ComplexForm o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		for (ComplexForm item : list) {
+			Locale[] locales = localeCallback.apply(item.getPageReferences());
+			
+			Row row = sheet.createRow(++rowNum);
+			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			row.createCell(4, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+
+			Converter.convertComplexForm((ComplexForm) item, locales[0], row);
+		}
+		for (int i=0; i<20; i++) {
+			if (i==2 || i==4) continue;
+			sheet.autoSizeColumn(i);
+		}
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createEchoes(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
+		Sheet sheet = workbook.createSheet("Echoes");
+		int rowNum =0;
+		Row head = sheet.createRow(0);
+		head.createCell(0, CellType.STRING).setCellValue("Name");
+		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(2, CellType.STRING).setCellValue("data-description");
+		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
+		head.createCell(4, CellType.STRING).setCellValue("data-notes");
+
+		head.createCell(5, CellType.STRING).setCellValue("data-rating");
+//		head.createCell(5, CellType.STRING).setCellValue("data-duration");
+//		head.createCell(6, CellType.STRING).setCellValue("duration");
+//		head.createCell(7, CellType.STRING).setCellValue("data-fade");
+//		head.createCell(8, CellType.STRING).setCellValue("Fade Value");
+		
+		
+		List<MetamagicOrEcho> list = Shadowrun6Core.getItemList(MetamagicOrEcho.class);
+		list = list.stream().filter(moe -> moe.getType()==Type.ECHO)
+				.sorted(new Comparator<MetamagicOrEcho>() {
+			public int compare(MetamagicOrEcho o1, MetamagicOrEcho o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		}).toList();
+		for (MetamagicOrEcho item : list) {
+			Locale[] locales = localeCallback.apply(item.getPageReferences());
+			
+			Row row = sheet.createRow(++rowNum);
+			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			row.createCell(4, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+
+			Converter.convertEcho((MetamagicOrEcho) item, locales[0], row);
 		}
 		for (int i=0; i<20; i++) {
 			if (i==2 || i==4) continue;
