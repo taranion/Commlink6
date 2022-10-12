@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
@@ -96,7 +97,7 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 		}
 		
 		if (getModel().getKarmaFree()<5)
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
 		
 		return Possible.TRUE;
 	}

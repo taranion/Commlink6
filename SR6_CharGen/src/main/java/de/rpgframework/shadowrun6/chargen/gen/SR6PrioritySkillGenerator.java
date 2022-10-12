@@ -156,7 +156,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
-		return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+		return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 	}
 
 	//-------------------------------------------------------------------

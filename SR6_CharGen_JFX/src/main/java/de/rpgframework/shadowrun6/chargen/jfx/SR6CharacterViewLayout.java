@@ -114,8 +114,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		bxCenter.setAlignment(Pos.CENTER);
 		extraNodesCenterProperty().add(bxCenter);
 		
-		bxHoverToDo = new VBox(5);
+		bxHoverToDo = new VBox(0);
 		bxHoverToDo.setId("todos");
+		bxHoverToDo.setStyle("-fx-max-width: 20em");
 		bxHoverToDo.getStyleClass().addAll("hover","todos");
 	}
 	
@@ -293,7 +294,6 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 				bxHoverToDo.getChildren().add(hover);
 			}
 			bxHoverToDo.getStyleClass().setAll("todos", "todos-"+worst.name().toLowerCase());
-			System.err.println("SR6CharacterViewLayout: bxHoverToDo="+bxHoverToDo.getStyleClass());
 			setHoverNode(new Group(bxHoverToDo));
 		}
 	}

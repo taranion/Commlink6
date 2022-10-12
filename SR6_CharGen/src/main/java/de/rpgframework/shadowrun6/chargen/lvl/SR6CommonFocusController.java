@@ -5,6 +5,7 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
@@ -129,7 +130,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		
 		// Enough Karma for bonding
 		if ( (force*value.getBondingMultiplier())>model.getKarmaFree()) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, force*value.getBondingMultiplier());
 		}
 		
 		// Enough Nuyen for bonding

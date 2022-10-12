@@ -462,7 +462,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		
 		int requiredKarma = (per.getSum()+1)*5;
 		if (model.getKarmaFree()<requiredKarma) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, requiredKarma);
 		}
 		return Possible.TRUE;
 	}

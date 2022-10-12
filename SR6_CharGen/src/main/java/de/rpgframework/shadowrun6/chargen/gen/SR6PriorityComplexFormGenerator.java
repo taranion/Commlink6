@@ -48,7 +48,7 @@ public class SR6PriorityComplexFormGenerator extends CommonSR6ComplexFormGenerat
 		if (buyWithKarma) {
 			if (getModel().getKarmaFree()>=5)
 				return Possible.TRUE;
-			return new Possible(false, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
 		} else
 			return new Possible(false, IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 	}

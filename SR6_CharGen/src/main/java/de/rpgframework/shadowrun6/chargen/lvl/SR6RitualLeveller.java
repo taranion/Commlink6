@@ -102,7 +102,7 @@ public class SR6RitualLeveller extends ControllerImpl<Ritual> implements IRitual
 		}
 		
 		if (getModel().getKarmaFree()<5)
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
 			
 		return Possible.TRUE;
 	}

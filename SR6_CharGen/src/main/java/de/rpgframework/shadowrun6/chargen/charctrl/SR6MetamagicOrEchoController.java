@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
@@ -172,7 +173,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		int karma = 10 + getGrade() +1;
 		
 		if (getModel().getKarmaFree()<karma) {
-			return new Possible(false, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
 		
 		return Possible.TRUE;
@@ -300,7 +301,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		int karma = 10 + getGrade() +1;
 		
 		if (getModel().getKarmaFree()<karma) {
-			return new Possible(false, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
 		return Possible.TRUE;
 	}

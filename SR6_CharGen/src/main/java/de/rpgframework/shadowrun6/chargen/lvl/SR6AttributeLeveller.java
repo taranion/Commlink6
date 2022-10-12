@@ -8,6 +8,7 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
@@ -70,7 +71,7 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 		// Calculate required Karma
 		int required = (value.getDistributed() + 1) * 5;
 		if (getModel().getKarmaFree() < required)
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, required);
 
 		// May not be at maximum yet
 		int maximum = (value.getMaximum()==0)?6:value.getMaximum();

@@ -118,7 +118,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			// If the sum is already at normal max, you need Karma to increase the maximum
 			if (sum>=maxWithoutKarma) {
 				if (model.getKarmaFree()<1)
-					return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+					return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 1);
 				karmaNeeded = 1;
 			}
 			// Either max not reached or max can be increased
@@ -208,7 +208,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			// If the sum is already at normal max, you need Karma to increase the maximum
 			if (sum>=maxWithoutKarma) {
 				if (model.getKarmaFree()<1)
-					return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+					return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 1);
 				karmaNeeded = 1;
 			}
 			// Either max not reached or max can be increased
@@ -329,10 +329,10 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			
 			logger.log(Level.INFO, "Contact points remaining: {0}", pointsLeft);
 			if (pointsLeft>0) {
-				todos.add(new ToDoElement(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.TODO_CONTACT_POINTS_LEFT, pointsLeft));
+				todos.add(new ToDoElement(Severity.WARNING, IRejectReasons.RES, IRejectReasons.TODO_CONTACT_POINTS_LEFT, pointsLeft));
 			}
 			if (pointsLeft<0) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, IRejectReasons.TODO_TOO_MANY_CONTACT_POINTS, Math.abs(pointsLeft)));
+				todos.add(new ToDoElement(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.TODO_TOO_MANY_CONTACT_POINTS, Math.abs(pointsLeft)));
 			}
 			
 		} finally {
