@@ -384,6 +384,7 @@ public class Shadowrun6Tools {
 	
 	//-------------------------------------------------------------------
 	public static String getRequirementString(Requirement req, Locale loc) {
+		try {
 		if (req instanceof ExistenceRequirement) {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
 			String prefix = (tmp.isNegate())?(RES.getString("require.negate")+" "):"";
@@ -466,6 +467,10 @@ public class Shadowrun6Tools {
 		Logging.logger.log(Level.ERROR, "Missing string conversion for "+req.getClass()+" and "+req.getType());
 		System.err.println("Shadowrun6Tool: Missing string conversion for "+req.getClass()+" and "+req.getType());
 		return req.toString();
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Error converting to String: "+req,e);
+			return "ERROR: "+req;
+		}
 	}
 
 	//-------------------------------------------------------------------

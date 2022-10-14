@@ -81,7 +81,6 @@ public class SR6ArchetypeTest {
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-//		SpliMoConfigOptions.attachConfigurationTree(new ConfigContainerImpl(Preferences.userNodeForPackage(ArchetypeTest.class), "unittest"));
 	}
 
 	//-------------------------------------------------------------------
@@ -371,7 +370,9 @@ public class SR6ArchetypeTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void test02CombatMage() throws Exception {
-		model.setRuleValue(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA, "true");
+		model.setStrictness("core");
+		charGen.getRuleController().setRuleValue(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA, Boolean.TRUE);
+		charGen.runProcessors();
 		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
 		prio.setPriority(PriorityType.METATYPE, Priority.C);
@@ -1637,12 +1638,13 @@ public class SR6ArchetypeTest {
 		assertEquals(0, model.getKarmaFree());
 		assertEquals(0, skills.getPointsLeft());
 
-		assertEquals(5, skills.getPointsLeft2());
+		assertEquals(6, skills.getPointsLeft2());
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Commlink Design")) );
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Dragons") ));
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Host Design") ));
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Seattle Gangs") ));
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Tacoma Geography") ));
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Technomancer Hangouts") ));
 		
 		// Complex Forms-------------------------
 		IComplexFormController cforms = charGen.getComplexFormController();

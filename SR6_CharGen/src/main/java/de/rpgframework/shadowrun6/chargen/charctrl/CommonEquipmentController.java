@@ -176,7 +176,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		// Compare carry mode
 		List<CarryMode> allowed = getAllowedModes(value, variant);
 		if (mode!=null && !allowed.contains(mode)) {
-			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_INVALID_CARRYMODE, mode.name(), String.valueOf(allowed));
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_INVALID_CARRYMODE, mode.name(), String.valueOf(allowed));
 		}
 		
 		// Try to build item
@@ -344,6 +344,14 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	public Possible canBeIncreased(CarriedItem<ItemTemplate> value) {
 		if (!value.getModifyable().isCountable())
 			return Possible.FALSE;
+		
+		int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+		if (getModel().getNuyen()<nuyen) {
+			boolean allowNegative = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN);
+			if (!allowNegative) {
+				return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());
+			}
+		}
 		return Possible.TRUE;
 	}
 
@@ -480,6 +488,28 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		} finally {
 			logger.log(Level.TRACE, "LEAVE embed{0}", value);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	public Possible canBeRemoved(CarriedItem<ItemTemplate> container, ItemHook slot, CarriedItem<ItemTemplate> toRemove) {
+		return new Possible( container.getAccessories().contains(toRemove) );
+	}
+
+	//-------------------------------------------------------------------
+	public Possible removeEmbedded(CarriedItem<ItemTemplate> container, ItemHook slot, CarriedItem<ItemTemplate> toRemove) {
+		Possible poss = canBeRemoved(container, slot, toRemove);
+		if (!poss.get()) {
+			logger.log(Level.WARNING, "Tried to remove accessory {0} from {1}, but: {2}", toRemove, container, poss.toString());
+			return poss;
+		}
+		
+		container.removeAccessory(toRemove, slot);
+		logger.log(Level.ERROR, "ToDo: recalculate item after embedding");
+		GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
+		logger.log(Level.INFO, "Remove {0} from {1}", toRemove.getKey(), container.getKey());
+		
+		parent.runProcessors();
+		return Possible.TRUE;
 	}
 
 }

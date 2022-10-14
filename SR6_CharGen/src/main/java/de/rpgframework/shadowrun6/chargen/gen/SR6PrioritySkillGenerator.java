@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import de.rpgframework.genericrpg.NumericalValueWith3PoolsController;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.ValueType;
@@ -502,12 +503,13 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		try {
 			// Reset values
 			points1   = 0;
-			points2 = model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed();
+			points2 = model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue();
 			todos.clear();
 			normalToDos.clear();
 			knowledgeToDos.clear();
 			allowed.clear();
 			maxLimit = 1;
+			logger.log(Level.DEBUG, "Language/Knowledge points: {0}", points2);
 			
 			// Ensure auto-added native skill
 			ensureExistanceOfNativeLanguage();
@@ -576,7 +578,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			Shadowrun6Character model = parent.getModel();
 			SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
 			for (Entry<String, PerSkillPoints> entry : settings.perSkill.entrySet()) {
-				logger.log(Level.DEBUG, "---> {0}", entry.getKey());
+				logger.log(Level.TRACE, "---> {0}", entry.getKey());
 				SR6SkillValue sVal = getFromPrioritySettings(entry.getKey());
 				if (sVal==null) {
 					logger.log(Level.ERROR, "Cannot find SkillValue for ''{0}'' from PrioritySettings", entry.getKey());
@@ -585,7 +587,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				SR6Skill key = sVal.getResolved();
 				
 				PerSkillPoints per = entry.getValue();
-				logger.log(Level.DEBUG, entry.getKey()+" = "+per.toString());
+//				logger.log(Level.DEBUG, entry.getKey()+" = "+per.toString());
 				/* 
 				 * Pay skill points 
 				 */
@@ -732,10 +734,24 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 	 */
 	@Override
 	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec, boolean expertise) {
+		/*
+		 * You cannot acquire more than one specialization in a skill at character creation, 
+		 * and you cannot acquire an expertise.
+		 */		
+		if (expertise) return Possible.FALSE;
+		
+		// Check if there already is one specialization in this skill
+		if (!skillVal.getSpecializations().isEmpty())
+			return Possible.FALSE;
+		
 		List<SkillSpecialization<SR6Skill>> available = getAvailableSpecializations(skillVal);
 		if (!available.contains(spec)) {
 			return new Possible(Severity.STOPPER, RES, I18N_NOT_AVAILABLE_SPEC, skillVal.getKey(), spec.getId(), expertise);
 		}
+		
+		// Need a skill point or 5 Karma
+		if (points1<1 && model.getKarmaFree()<5)
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
 		
 		return Possible.TRUE;
 	}

@@ -286,6 +286,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		for (SkillSpecialization raw : skillVal.getSkill().getSpecializations()) {
 			ret.add(raw);
 		}
+		// Only those not already selected
 		ret = ret.stream().filter(sp -> skillVal.getSpecializations().stream().allMatch(s2 -> !s2.getKey().equals(sp.getId()))).collect(Collectors.toList());
 		
 		return ret;

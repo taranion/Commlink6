@@ -219,7 +219,7 @@ public class PrioSkillGenTest {
 		
 		ctrl.roll();
 		assertEquals("Not all points spent",0, ctrl.getPointsLeft());
-		assertEquals(model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed(), ctrl.getPointsLeft2());
+		assertEquals(model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(), ctrl.getPointsLeft2());
 		assertEquals(0, ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
 		

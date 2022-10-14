@@ -178,7 +178,7 @@ public class SkillSection extends Section {
 		logger.log(Level.INFO, "openActionDialog({0})", sVal);
 		
 		SRSkillSettingsPane pane = new SRSkillSettingsPane(sVal, control.getSkillController());
-		ManagedDialog dialog = new ManagedDialog("Settings", pane, CloseType.OK);
+		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "dialog.specializations.title"), pane, CloseType.OK);
 		CloseType close = FlexibleApplication.getInstance().showAlertAndCall(dialog, null);
 		return close;
 	}

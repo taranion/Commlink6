@@ -174,7 +174,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 					if (tmp.getCount()>1)
 						cost *= tmp.getCount();
 					//if (logger.isLoggable(Level.TRACE))
-					logger.log(Level.INFO, "Pay {0} for {1}   (before {2})", cost, tmp.getNameWithRating(), nuyen);
+					logger.log(Level.INFO, "Pay {0} for {1}   (before {2})", cost, tmp.getKey(), nuyen);
 					nuyen -= cost;
 				}
 				

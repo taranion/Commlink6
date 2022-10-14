@@ -145,7 +145,7 @@ public class SRSkillSettingsPane extends VBox {
 			if (selected) {
 				cb.setDisable( !control.canDeselectSpecialization(data, val).get());
 			} else {
-				cb.setDisable( !control.canSelectSpecialization(data, spec, false).get());
+				cb.setDisable( !control.canSelectSpecialization(data, spec, true).get());
 			}
 		}
 		eventBlocked = false;

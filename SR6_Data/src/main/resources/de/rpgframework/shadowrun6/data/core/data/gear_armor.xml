@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
 
-	<item avail="1" price="10" id="clothing_street" subtype="ARMOR_BODY" type="ARMOR" modonly="true">
+	<item avail="1" price="10" id="clothing_street" subtype="ARMOR_BODY" type="ARMOR">
 	</item>
 
 	<item avail="1" price="10" id="clothing_squatter" subtype="ARMOR_BODY" type="ARMOR">

@@ -54,6 +54,9 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		bxCenter.getChildren().retainAll(line1, sep, bxActions);
 		
 		if (item!=null) {
+			name.setText(item.getNameWithRating());
+			btnEdit.setVisible(true);
+			btnEdit.setManaged(true);
 			Node data = ItemUtilJFX.getItemInfoNode(item, charCtrl, false);
 			if (data!=null)
 				bxCenter.getChildren().add(bxCenter.getChildren().indexOf(bxActions), data);

@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -13,11 +14,15 @@ import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.ScreenManagerProvider;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.jfx.pages.ACarriedItemPage;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.ItemHook;
@@ -25,6 +30,7 @@ import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import javafx.scene.image.Image;
 
 /**
@@ -40,7 +46,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 	private SR6CharacterController control;
 
 	//--------------------------------------------------------------------
-	public EditCarriedItemDialog(SR6CharacterController ctrl, CarriedItem data, ScreenManagerProvider prov) {
+	public EditCarriedItemDialog(SR6CharacterController ctrl, CarriedItem<ItemTemplate> data, ScreenManagerProvider prov) {
 		super(ctrl, data, prov);
 		this.control = ctrl;
 	}
@@ -210,37 +216,40 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 				CloseType.CANCEL, CloseType.OK);
 		CloseType closed = getAppLayout().getApplication().showAlertAndCall(dialog, null);
 		logger.log(Level.INFO, "Closed via "+closed);
-//		if (closed==CloseType.OK) {
-//			for (ItemTemplate master : dialog.getSelection()) {
-//     			logger.log(Level.DEBUG, "add accessory "+master+" to "+selectedItem+" in slot "+slot);
-//     			logger.log(Level.DEBUG, "embed "+master+" in "+selectedItem);
-//     			UseAs usage = master.getUsageFor(slot);
-//     			logger.log(Level.INFO, "use for slot "+slot+" is "+usage);
-//     			ItemType useAs = (usage==null)?master.getNonAccessoryType():usage.getType();
-//     			logger.log(Level.INFO, "ItemType is "+useAs);
-//     			List<SelectionOptionType> options = control.getEquipmentController().getOptions(master, usage);
-//				try {
-//					if (!options.isEmpty()) {
-//						logger.log(Level.INFO, "ask options");
-//						Platform.runLater( () -> {
-//							SelectionOption[] opts = ItemUtilJFX.askOptionsFor( provider, control.getEquipmentController(), master, selectedItem, useAs, selectedItem.getSlot(slot).getFreeCapacity(), usage);
-//							CarriedItem added = control.getEquipmentController().embed(selectedItem, master, slot, opts);
-//							logger.log(Level.INFO, "After adding =============="+selectedItem.getSlot(slot));
-//							afterTryingToAdd(master, added);
-//						});
-//					} else {         			
-//						logger.log(Level.INFO, "dont ask options");
-//	    				CarriedItem added = control.getEquipmentController().embed(selectedItem, master, slot);
-//						afterTryingToAdd(master, added);
-//					}
-//				} catch (Exception e) {
-//					logger.log(Level.ERROR, "Failed asking for Options",e);
-//					StringWriter out = new StringWriter();
-//					e.printStackTrace(new PrintWriter(out));
-//					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE,2,out.toString());
-//				}
-//			}
-//		}
+		if (closed==CloseType.OK) {
+			refresh();
+			ItemTemplate selected = selector.getSelected();
+			CarryMode carry = CarryMode.EMBEDDED;
+			OperationResult<CarriedItem<ItemTemplate>> result = null;
+			// Eventually show decision dialog
+			boolean needToAsk = !selected.getChoices().isEmpty();
+			needToAsk |= !selected.getVariants().isEmpty();
+			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS)) 
+				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
+			if (needToAsk) {
+				logger.log(Level.WARNING, "Select with choices or variants or flags");
+				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry);
+				Decision[] dec = dia2.apply(selected, selected.getChoices());
+				if (dec!=null) {
+					// Not cancelled
+					String variantID = dia2.getSelectedVariant();
+					logger.log(Level.DEBUG, "After dialog: variant   = "+variantID);
+					logger.log(Level.DEBUG, "After dialog: decisions = "+Arrays.toString(dec));
+					result = control.getEquipmentController().embed(selectedItem, slot, selector.getSelected(),variantID, dec);
+				}
+			} else {
+				logger.log(Level.WARNING, "Select without decisions");
+				result = control.getEquipmentController().embed(selectedItem, slot, selector.getSelected(),null);
+			}
+			if (result != null) {
+				if (result.wasSuccessful()) {
+					logger.log(Level.WARNING, "Successful");
+					refresh();
+				} else {
+					logger.log(Level.WARNING, "Failed: " + result.getError());
+				}
+			}
+		}
 	}
 
 	//-------------------------------------------------------------------
