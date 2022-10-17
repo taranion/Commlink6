@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -18,6 +19,7 @@ import org.prelle.javafx.Mode;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
@@ -31,7 +33,10 @@ import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 /**
@@ -73,10 +78,10 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 
 	//-------------------------------------------------------------------
 	private void initSecondaryContent() {
-		cbRuleNegativeNuyen = new ToggleSwitch("Allow negative Nuyen during chargen");
-		cbRulePayGear       = new ToggleSwitch("Pay gear in career");
-		cbRuleNegativeNuyen.setContentDisplay(ContentDisplay.LEFT);
-		cbRulePayGear.setContentDisplay(ContentDisplay.RIGHT);
+		cbRuleNegativeNuyen = new ToggleSwitch();
+		cbRuleNegativeNuyen.setGraphicTextGap(0);
+		cbRulePayGear       = new ToggleSwitch();
+		cbRulePayGear.setGraphicTextGap(0);
 		
 		cbRuleNegativeNuyen.selectedProperty().addListener( (ov,o,n) -> {
 			if (model!=null) model.setRuleValue(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN, String.valueOf(n));
@@ -88,10 +93,19 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		setMode(Mode.BACKDROP);
 		
 		VBox bxRules = new VBox(10);
-		bxRules.getChildren().add(cbRuleNegativeNuyen);
-		bxRules.getChildren().add(cbRulePayGear);
+		bxRules.getChildren().add(makeLabel(cbRuleNegativeNuyen, ShadowrunRules.CHARGEN_NEGATIVE_NUYEN));
+		bxRules.getChildren().add(makeLabel(cbRulePayGear      , ShadowrunRules.CAREER_PAY_GEAR));
 		setSecondaryContent(bxRules);
 
+	}
+
+	//-------------------------------------------------------------------
+	private Label makeLabel(ToggleSwitch ts, Rule rule) {
+		Label lb = new Label(rule.getName(Locale.getDefault()), ts);
+		lb.setWrapText(true);
+		lb.setAlignment(Pos.TOP_LEFT);
+		VBox.setMargin(lb, new Insets(0, 0, 0, -20));
+		return lb;
 	}
 
 	//-------------------------------------------------------------------
@@ -113,7 +127,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	protected void onAdd() {
 		logger.log(Level.WARNING, "ToDo: onAdd "+carry);
 		
-		ItemTemplateSelector selector = new ItemTemplateSelector(control, carry, templateFilter);
+		ItemTemplateSelector selector = new ItemTemplateSelector(control, carry, templateFilter, null, null);
 		if (templateFilter!=null)
 			selector.setBaseFilter(templateFilter);
 		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "section.gear.selector.title"), selector, CloseType.OK, CloseType.CANCEL);
@@ -188,7 +202,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		// If  a model and a filter exists, update automatically
 		if (filter!=null) {
 			List<CarriedItem<ItemTemplate>> data = null;
-			data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItems())
+			data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItemsRecursive())
 			.stream()
 			.filter(filter)
 			.collect(Collectors.toList());
