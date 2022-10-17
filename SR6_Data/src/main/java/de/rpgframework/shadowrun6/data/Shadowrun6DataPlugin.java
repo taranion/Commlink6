@@ -329,6 +329,9 @@ public class Shadowrun6DataPlugin  {
 				} catch (IOException e) {
 					logger.log(Level.ERROR ,"Failed accessing resource "+file+": "+e);
 				}
+			} else {
+				if (filenames.indexOf(file)>=2)
+					logger.log(Level.WARNING, "Failed on ''placeholder/{0}''", file);
 			}
 		}
 		return null;

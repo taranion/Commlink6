@@ -59,6 +59,7 @@ public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
 	
 	//-------------------------------------------------------------------
 	public void setData(DataItemValue<?> data) {
+		System.getLogger(CarriedItemDescriptionPane.class.getPackageName()).log(Level.WARNING, "setData");
 		if (data instanceof CarriedItem)
 			setData( (CarriedItem)data );
 		else

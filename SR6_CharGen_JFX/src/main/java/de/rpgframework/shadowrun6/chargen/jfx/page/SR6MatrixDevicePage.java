@@ -95,12 +95,12 @@ public class SR6MatrixDevicePage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initSoftware() {
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.BIOLOGY); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.EMBEDDED, ItemType.SOFTWARE); 
 		secSoftware = new SoftwareLibrarySection(showFilter);
 		secSoftware.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secSoftware, 4);
 		FlexGridPane.setMinHeight(secSoftware, 6);
-		FlexGridPane.setMediumWidth(secSoftware, 6);
+		FlexGridPane.setMediumHeight(secSoftware, 8);
 	}
 	
 	//-------------------------------------------------------------------
@@ -113,7 +113,6 @@ public class SR6MatrixDevicePage extends Page {
 		secAccessories.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secAccessories, 4);
 		FlexGridPane.setMinHeight(secAccessories, 6);
-		FlexGridPane.setMediumWidth(secAccessories, 6);
 	}
 
 

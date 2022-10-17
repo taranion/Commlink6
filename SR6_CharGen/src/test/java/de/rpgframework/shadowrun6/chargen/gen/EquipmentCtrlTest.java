@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -141,6 +142,10 @@ public class EquipmentCtrlTest {
 		CarriedItem<ItemTemplate> container = res.get();
 		assertEquals("Wrong nuyen paid", 250, model.getNuyen());
 		
+		assertNotNull(container.getSlot(ItemHook.TOP));
+		assertNull(container.getSlot(ItemHook.UNDER));
+		assertTrue(container.getSlot(ItemHook.TOP).getAllEmbeddedItems().isEmpty());
+		
 		ItemTemplate peri = Shadowrun6Core.getItem(ItemTemplate.class, "periscope");
 		ItemTemplate bipod = Shadowrun6Core.getItem(ItemTemplate.class, "bipod");
 		assertNotNull(peri);
@@ -167,6 +172,8 @@ public class EquipmentCtrlTest {
 		assertNotNull(res.get());
 		// Nuyen should be 250 - 70
 		assertEquals("Wrong nuyen paid", 180, model.getNuyen());
+		
+		assertFalse("Item not in slot after embedding", container.getSlot(ItemHook.TOP).getAllEmbeddedItems().isEmpty());
 		
 		
 	}

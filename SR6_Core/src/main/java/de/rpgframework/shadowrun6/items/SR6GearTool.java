@@ -28,6 +28,7 @@ public class SR6GearTool extends GearTool {
 	public final static Logger logger = System.getLogger(SR6GearTool.class.getPackageName());
 
 	public static CarriedItemProcessor[] SR6_PHASE1_STEPS = new CarriedItemProcessor[] {
+			new SR6ModeDetailsStep(),
 			new GetModificationsStep(),
 			new SR6ResolveFormulasStep(),
 			new ApplyAmmunitionTypeStep(),
@@ -42,12 +43,28 @@ public class SR6GearTool extends GearTool {
 			new AddUpPricesStep()
 	};
 
+	//-------------------------------------------------------------------
 	public static Availability calculateModifiedValue(Availability base, List<Modification> mods) {
 		Availability ret = new Availability(base.getValue(), base.getLegality(), false);
 		for (Modification tmp : mods) {
 			if (tmp instanceof ValueModification) {
 				ValueModification mod = (ValueModification)tmp;
 				ret.setValue(ret.getValue() + mod.getValue());
+			}
+		}
+		
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public static int[] calculateModifiedValue(int[] base, List<Modification> mods) {
+		int[] ret = new int[5];
+		for (int i=0; i<base.length; i++)
+			ret[i] = base[i];
+		for (Modification tmp : mods) {
+			logger.log(Level.ERROR, "########TODO: "+tmp);
+			if (tmp instanceof ValueModification) {
+				ValueModification mod = (ValueModification)tmp;				
 			}
 		}
 		

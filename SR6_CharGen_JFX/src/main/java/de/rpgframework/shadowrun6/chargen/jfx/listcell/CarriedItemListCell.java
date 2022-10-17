@@ -4,20 +4,27 @@ import java.lang.System.Logger.Level;
 
 import org.prelle.javafx.ApplicationScreen;
 import org.prelle.javafx.FlexibleApplication;
+import org.prelle.javafx.FlipControl;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.MainScreen;
 import org.prelle.javafx.Page;
 import org.prelle.javafx.ScreenManagerProvider;
 
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.OperationMode;
+import de.rpgframework.genericrpg.items.OperationModeOption;
 import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.chargen.jfx.dialog.EditCarriedItemDialog;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -28,6 +35,8 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 	private SR6CharacterController charCtrl;
 	
 	private Label lbValue;
+	
+	private FlipControl flip;
 
 	//-------------------------------------------------------------------
 	public CarriedItemListCell(SR6CharacterController control) {
@@ -42,6 +51,8 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		
 		lbValue = new Label();
 		bxActions.getChildren().add(lbValue);
+		
+		flip = new FlipControl(Orientation.HORIZONTAL, true);
 	}
 
 	//-------------------------------------------------------------------
@@ -54,14 +65,42 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		bxCenter.getChildren().retainAll(line1, sep, bxActions);
 		
 		if (item!=null) {
+			flip.getItems().setAll(layout);
+			flip.setVisibleIndex(0);
+			
 			name.setText(item.getNameWithRating());
 			btnEdit.setVisible(true);
 			btnEdit.setManaged(true);
 			Node data = ItemUtilJFX.getItemInfoNode(item, charCtrl, false);
-			if (data!=null)
+			if (data!=null) {
 				bxCenter.getChildren().add(bxCenter.getChildren().indexOf(bxActions), data);
+				data.setStyle("item-info-node");
+			}
 			
 			lbValue.setText("\u00A5"+item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+			
+			// Modes
+			if (item.getOperationModes().isEmpty()) {
+				line2.getChildren().clear();
+				setGraphic(layout);
+			} else {
+				Label lbWarning = new Label("Modeswitcher - Not functional yet");
+				GridPane back = new GridPane();
+				int y=0;
+				for (OperationModeOption modeOpt : item.getOperationModes()) {
+					CarriedItem<?> src = modeOpt.getSource();
+					Label lbSrc = new Label(src.getNameWithoutRating());
+					ChoiceBox<OperationMode> cbMode = new ChoiceBox<>();
+					cbMode.getItems().addAll(modeOpt.getModes());
+					back.add(lbSrc , 0, y);
+					back.add(cbMode, 1, y);
+					y++;
+				}
+				//line2.getChildren().setAll(cbMode);
+				flip.getItems().add(back);
+				setGraphic(flip);
+			}
+			
 		}
 	}
 

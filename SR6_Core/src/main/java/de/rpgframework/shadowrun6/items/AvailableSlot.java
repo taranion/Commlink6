@@ -1,5 +1,8 @@
 package de.rpgframework.shadowrun6.items;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+
 import org.prelle.simplepersist.Attribute;
 
 import de.rpgframework.genericrpg.items.AAvailableSlot;
@@ -10,6 +13,8 @@ import de.rpgframework.genericrpg.items.CarriedItem;
  *
  */
 public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
+
+	private final static Logger logger = System.getLogger(AvailableSlot.class.getPackageName());
 
 	@Attribute
 	private ItemHook ref;
@@ -49,7 +54,20 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 
 	//-------------------------------------------------------------------
 	public float getFreeCapacity() {
-		return 1;
+		if (ref.hasCapacity) {
+			float free = capacity;
+			for (CarriedItem<ItemTemplate> accessory : embedded) {
+				if (!accessory.hasAttribute(SR6ItemAttribute.SIZE)) {
+					logger.log(Level.WARNING, "Slot {0} manages capacity. but the item {0} misses a size attribute", ref, accessory.getKey());
+					continue;
+				}
+				float size = accessory.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue();
+				free -= size;
+			}
+			return free;
+		} else {
+			return embedded.isEmpty()?1:0;
+		}
 	}
 
 }

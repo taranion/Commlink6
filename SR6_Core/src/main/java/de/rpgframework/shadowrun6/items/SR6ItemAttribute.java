@@ -110,6 +110,8 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	public <T> T calculateModifiedValue(Object base, List<Modification> mods) {
 		if (this==AVAILABILITY)
 			return (T) SR6GearTool.calculateModifiedValue((Availability) base, mods);
+		if (this==ATTACK_RATING)
+			return (T) SR6GearTool.calculateModifiedValue((int[]) base, mods);
 		if (this!=ITEMSUBTYPE && this!=ITEMTYPE)
 			System.err.println("SR6ItemAttribute: Don't know how to calculate modified value for "+this);
 		return (T)base;

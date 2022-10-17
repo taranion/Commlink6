@@ -170,8 +170,9 @@ public class SR6CarriedItemTest {
 		assertEquals(ApplyTo.CHARACTER, vMod.getApplyTo());
 		assertEquals(ShadowrunAttribute.AGILITY, vMod.getResolvedKey());
 		assertNotNull(vMod.getFormula());
-		assertTrue("Formula not resolved",vMod.getFormula().isResolved());
-		assertEquals(3,vMod.getFormula().getAsInteger());
+		assertEquals(3,vMod.getValue());
+//		assertTrue("Formula not resolved",vMod.getFormula().isResolved());
+//		assertEquals(3,vMod.getFormula().getAsInteger());
 	}
 
 	//-------------------------------------------------------------------
@@ -403,6 +404,31 @@ public class SR6CarriedItemTest {
 		incSTR.addDecision(new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "STRENGTH"));
 		SR6GearTool.recalculate("", null, incSTR);
 		assertEquals(4, getArtifical(ShadowrunAttribute.STRENGTH, incSTR.getCharacterModifications()));
+	}
+	
+	//-------------------------------------------------------------------
+	@Test
+	public void testModes() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "ares_predator_vi");
+		ItemTemplate acc  = Shadowrun6Core.getItem(ItemTemplate.class, "laser_sight");
+		assertNotNull(temp);
+		
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		SR6GearTool.recalculate("", null, item);
+		assertNotNull(item);
+		assertNotNull("Modes missing",item.getOperationModes());
+		assertTrue("Should not have more than WIRELESS yet", item.getOperationModes().size()<2);
+		
+		CarriedItem<ItemTemplate> accItem = new CarriedItem<ItemTemplate>(acc, null, CarryMode.EMBEDDED);
+		SR6GearTool.recalculate("", null, accItem);
+		assertFalse("Should have modes", accItem.getOperationModes().isEmpty());
+
+		item.addAccessory(accItem, ItemHook.TOP);
+		SR6GearTool.recalculate("", null, item);
+		assertNotNull("Modes missing",item.getOperationModes());
+		System.out.println("SR6CarriedItemTest.testModes: "+item.getOperationModes());
+		assertFalse("Should have modes now", item.getOperationModes().size()<2);
+		
 	}
 	
 }

@@ -25,6 +25,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -448,6 +449,24 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			int nuyen = val.getModifiedValue();
 			if (nuyen > getModel().getNuyen()) {
 				return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());			
+			}
+		}
+				
+		// Check if capacity is sufficient
+		CarriedItem<ItemTemplate> toEmbed = res.get();
+		AvailableSlot realSlot = (AvailableSlot) container.getSlot(slot);
+		logger.log(Level.INFO, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
+		logger.log(Level.INFO, "Items in slot={0},  free capacity={1}", realSlot.getAllEmbeddedItems().size(), realSlot.getFreeCapacity());
+		if (slot.hasCapacity()) {
+			float free = realSlot.getFreeCapacity();
+			float required = toEmbed.getAsFloat(SR6ItemAttribute.CAPACITY).getModifiedValue();
+			if (free<required) {
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, required, free);			
+			}
+		} else {
+			if (!realSlot.getAllEmbeddedItems().isEmpty()) {
+				logger.log(Level.INFO, "Cannot embed");
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_SLOT_OCCUPIED, slot.getName());			
 			}
 		}
 		

@@ -32,7 +32,6 @@ public class SoftwareLibrarySection extends GearSection {
 	 */
 	public SoftwareLibrarySection(Predicate<CarriedItem<ItemTemplate>> showFilter) {
 		super(ResourceI18N.get(RES, "section.software.title"), CarryMode.EMBEDDED, selectFilter, showFilter);
-		// TODO Auto-generated constructor stub
 	}
 
 }

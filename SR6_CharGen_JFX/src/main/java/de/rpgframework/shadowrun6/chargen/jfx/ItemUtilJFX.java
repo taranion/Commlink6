@@ -140,6 +140,8 @@ public class ItemUtilJFX {
 			addColumn(table, item, SR6ItemAttribute.AVAILABILITY , 40);
 			addColumn(table, item, SR6ItemAttribute.PRICE , 60);
 		}
+		if (table.getChildren().isEmpty())
+			return null;
 
 		
 		VBox box = new VBox(10);
@@ -178,7 +180,7 @@ public class ItemUtilJFX {
 	 * @param detailed Include augmentation, price and availability
 	 */
 	public static Node getAccessoryInfoNode(CarriedItem<ItemTemplate> item, SR6CharacterController ctrl, boolean detailed) {
-		logger.log(Level.WARNING, "create InfoNode for "+item);
+		logger.log(Level.DEBUG, "create InfoNode for "+item);
 
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");

@@ -9,16 +9,12 @@ import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.NavigationPane;
 import org.prelle.javafx.Page;
-import org.prelle.javafx.ResponsiveControl;
 import org.prelle.javafx.ResponsiveControlManager;
 
-import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
-import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
@@ -92,7 +88,7 @@ public class TestApplication extends FlexibleApplication {
 		stage.setMinHeight(860);
 		
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE); 
-		ItemTemplateSelector selector = new ItemTemplateSelector(chargen, CarryMode.IMPLANTED, selectFilter);
+		ItemTemplateSelector selector = new ItemTemplateSelector(chargen, CarryMode.IMPLANTED, selectFilter, null, null);
 		ManagedDialog dialog = new ManagedDialog("Select an item", selector, CloseType.OK, CloseType.CANCEL);
 		CloseType closed = FlexibleApplication.getInstance().showAndWait(dialog);
 		if (closed==CloseType.CANCEL)

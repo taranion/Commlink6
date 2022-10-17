@@ -91,6 +91,7 @@ import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromPowers;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromTechniques;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
+import de.rpgframework.shadowrun6.proc.SR6PANController;
 
 /**
  * @author prelle

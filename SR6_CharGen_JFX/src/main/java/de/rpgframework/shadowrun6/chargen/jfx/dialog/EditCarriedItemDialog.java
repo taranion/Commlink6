@@ -6,14 +6,18 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.ManagedDialog;
+import org.prelle.javafx.NavigButtonControl;
 import org.prelle.javafx.ScreenManagerProvider;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.core.BabylonEventBus;
+import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -21,9 +25,12 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.jfx.pages.ACarriedItemPage;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
+import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
@@ -49,6 +56,14 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 	public EditCarriedItemDialog(SR6CharacterController ctrl, CarriedItem<ItemTemplate> data, ScreenManagerProvider prov) {
 		super(ctrl, data, prov);
 		this.control = ctrl;
+	}
+
+	//--------------------------------------------------------------------
+	protected void initCompoments() {
+		super.initCompoments();
+		
+		description = new CarriedItemDescriptionPane(Shadowrun6Tools.requirementResolver(Locale.getDefault()), control);
+		description.setStyle("-fx-pref-width: 30em; -fx-max-width: 30em");
 	}
 
 	//--------------------------------------------------------------------
@@ -131,6 +146,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		logger.log(Level.INFO, "refresh");
 		ItemSubType sub = selectedItem.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
 		ItemType type = selectedItem.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+		view.setSubtitle(sub.getName());
 
 		if (selectedItem.getImage() != null) {
 			Image img = new Image(new ByteArrayInputStream(selectedItem.getImage()));
@@ -177,7 +193,13 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 			if (ins != null) {
 				view.setImage(new Image(ins));
 			} else {
-				view.setImage(null);
+				byte[] imgData = Shadowrun6DataPlugin.getPlaceholderGraphic(selectedItem);
+				if (imgData!=null) {
+					view.setImage(new Image(new ByteArrayInputStream(imgData)));
+				} else {				
+					logger.log(Level.WARNING, "You may want to add a placeholder for ''{0}''", imgName);				
+					view.setImage(null);
+				}
 			}
 		}
 		
@@ -209,12 +231,14 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 
 		Predicate<ItemTemplate> templateFilter = i -> data.contains(i);
 		
-		ItemTemplateSelector selector = new ItemTemplateSelector(control, CarryMode.EMBEDDED, templateFilter);
+		ItemTemplateSelector selector = new ItemTemplateSelector(control, CarryMode.EMBEDDED, templateFilter, selectedItem, slot);
 		ManagedDialog dialog = new ManagedDialog(
-				ResourceI18N.get(UI, "dialog.add.accessory.title"), 
+				ResourceI18N.format(UI, "dialog.add.accessory.title", slot.getName()), 
 				selector,
 				CloseType.CANCEL, CloseType.OK);
-		CloseType closed = getAppLayout().getApplication().showAlertAndCall(dialog, null);
+		NavigButtonControl btnCtrl = new NavigButtonControl();
+		selector.setButtonControl(btnCtrl);
+		CloseType closed = getAppLayout().getApplication().showAlertAndCall(dialog, btnCtrl);
 		logger.log(Level.INFO, "Closed via "+closed);
 		if (closed==CloseType.OK) {
 			refresh();
@@ -247,6 +271,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 					refresh();
 				} else {
 					logger.log(Level.WARNING, "Failed: " + result.getError());
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
 				}
 			}
 		}
