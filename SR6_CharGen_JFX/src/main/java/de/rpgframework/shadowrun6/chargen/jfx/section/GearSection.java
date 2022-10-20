@@ -17,6 +17,8 @@ import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.Mode;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.core.BabylonEventBus;
+import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.Rule;
@@ -31,11 +33,11 @@ import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -58,6 +60,10 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	
 	private ToggleSwitch cbRuleNegativeNuyen;
 	private ToggleSwitch cbRulePayGear;
+	
+	/* To be used from child classes, E.g. ActiveProgramsSection */
+	protected CarriedItem<ItemTemplate> addToContainer;
+	protected ItemHook addToHook;
 
 	//-------------------------------------------------------------------
 	public GearSection(String title, CarryMode carry, Predicate<ItemTemplate> selectFilter, Predicate<CarriedItem<ItemTemplate>> showFilter) {
@@ -74,6 +80,12 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	//-------------------------------------------------------------------
 	public GearSection(String title, Predicate<ItemTemplate> selectFilter, Predicate<CarriedItem<ItemTemplate>> showFilter) {
 		this(title, CarryMode.CARRIED, selectFilter, showFilter);
+	}
+
+	//-------------------------------------------------------------------
+	protected void setSelectFilter(Predicate<ItemTemplate> selectFilter) {
+		logger.log(Level.INFO, "Change templateFilter to "+selectFilter);
+		this.templateFilter = selectFilter;
 	}
 
 	//-------------------------------------------------------------------
@@ -111,10 +123,16 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	//-------------------------------------------------------------------
 	@Override
 	protected void selectionChanged(CarriedItem<ItemTemplate> old, CarriedItem<ItemTemplate> neu) {
+		logger.log(Level.ERROR, "Selection changed from "+old+" to "+neu);
 		if (neu==null) {
 			btnDel.setDisable(true);
 		} else {
-			Possible possible = control.getEquipmentController().canBeDeselected(neu);
+			Possible possible = (addToContainer!=null)
+					?
+					control.getEquipmentController().canBeRemoved(addToContainer, addToHook, neu)				
+							:
+					control.getEquipmentController().canBeDeselected(neu);
+			if (!possible.get()) logger.log(Level.WARNING, "Controller {0} says I cannot deselect/remove {1}", control.getEquipmentController(), neu);
 			btnDel.setDisable( !possible.get() );
 		}
 	}
@@ -125,11 +143,11 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	 */
 	@Override
 	protected void onAdd() {
-		logger.log(Level.WARNING, "ToDo: onAdd "+carry);
+		logger.log(Level.INFO, "ENTER: onAdd(carry={0}, container={1}, hook={2}, templateFilter={3}",carry,addToContainer, addToHook, templateFilter);
 		
-		ItemTemplateSelector selector = new ItemTemplateSelector(control, carry, templateFilter, null, null);
-		if (templateFilter!=null)
-			selector.setBaseFilter(templateFilter);
+		ItemTemplateSelector selector = new ItemTemplateSelector(control, carry, templateFilter, addToContainer, addToHook);
+//		if (templateFilter!=null)
+//			selector.setBaseFilter(templateFilter);
 		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "section.gear.selector.title"), selector, CloseType.OK, CloseType.CANCEL);
 		CloseType closed = FlexibleApplication.getInstance().showAndWait(dialog);
 		logger.log(Level.WARNING, "closed "+closed);
@@ -142,7 +160,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS)) 
 				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
 			if (needToAsk) {
-				logger.log(Level.WARNING, "Select with choices or variants or flags");
+				logger.log(Level.WARNING, "Select/Embed with choices or variants or flags");
 				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry);
 				Decision[] dec = dia2.apply(selected, selected.getChoices());
 				if (dec!=null) {
@@ -150,11 +168,22 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 					String variantID = dia2.getSelectedVariant();
 					logger.log(Level.DEBUG, "After dialog: variant   = "+variantID);
 					logger.log(Level.DEBUG, "After dialog: decisions = "+Arrays.toString(dec));
-					result = control.getEquipmentController().select(selector.getSelected(), variantID, carry, dec);
+					if (addToContainer==null) {
+						logger.log(Level.WARNING, "Select with decisions");
+						result = control.getEquipmentController().select(selector.getSelected(), variantID, carry, dec);
+					} else {
+						logger.log(Level.WARNING, "Embed with decisions");
+						result = control.getEquipmentController().embed(addToContainer, addToHook, selector.getSelected(), variantID, dec);
+					}
 				}
 			} else {
-				logger.log(Level.WARNING, "Select without decisions");
-				result = control.getEquipmentController().select(selector.getSelected());
+				if (addToContainer==null) {
+					logger.log(Level.WARNING, "Select without decisions");
+					result = control.getEquipmentController().select(selector.getSelected());
+				} else {
+					logger.log(Level.INFO, "Embed without decisions");
+					result = control.getEquipmentController().embed(addToContainer, addToHook, selected, null);
+				}
 			}
 			if (result != null) {
 				if (result.wasSuccessful()) {
@@ -162,6 +191,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 					refresh();
 				} else {
 					logger.log(Level.WARNING, "Failed: " + result.getError());
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, result.getError());
 				}
 			}
 		}
@@ -174,10 +204,20 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	@Override
 	protected void onDelete(CarriedItem<ItemTemplate> item) {
 		// TODO Auto-generated method stub
-		logger.log(Level.WARNING, "ToDo: onDelete");
 		
-		if (control.getEquipmentController().deselect(item)) {
-			refresh();
+		if (addToContainer!=null) {
+			logger.log(Level.INFO, "onDelete {0} from container {1}", item, addToContainer);
+			Possible poss = control.getEquipmentController().removeEmbedded(addToContainer, addToHook, item);
+			if (poss.get()) {
+				refresh();
+			} else {
+				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, poss.toString());
+			}
+		} else {
+			logger.log(Level.INFO, "onDelete {0} ", item);
+			if (control.getEquipmentController().deselect(item)) {
+				refresh();
+			}
 		}
 	}
 

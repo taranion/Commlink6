@@ -184,8 +184,6 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	private void updateButtons() {
-		logger.log(Level.WARNING, "updateButtons with "+ctrl);
-		
 		// Special handling for gear
 		if (item instanceof ItemTemplate) {
 			// Build item so far as possible
@@ -214,7 +212,6 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			logger.log(Level.INFO, "canBeSelected({0}) returns "+possible, carry);
 		} else {
 			possible = ctrl.canBeSelected(item, getDecisions() );
-			logger.log(Level.INFO, "canBeSelected() returns "+possible);
 		}
 		// Set status
 		ToDoElement problem = possible.getMostSevere();
@@ -301,6 +298,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		logger.log(Level.INFO, "variants detected");
 		addLabel(ResourceI18N.get(RES, "label.variant"));
 		ChoiceBox<SR6PieceOfGearVariant> cbVariants = new ChoiceBox<>();
+		// If no item is required, add a "regular item"
+		if (!template.requiresVariant()) {
+			cbVariants.getItems().add(null);
+		}
 		cbVariants.getItems().addAll(template.getVariants());
 		cbVariants.setConverter(new StringConverter<SR6PieceOfGearVariant>() {
 			public SR6PieceOfGearVariant fromString(String value) { return null;}
@@ -315,6 +316,8 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			updateButtons(); 
 		 });
 		content.getChildren().add(cbVariants);
+		
+		cbVariants.getSelectionModel().select(0);
 	}
 
 	// -------------------------------------------------------------------

@@ -57,11 +57,10 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 		if (ref.hasCapacity) {
 			float free = capacity;
 			for (CarriedItem<ItemTemplate> accessory : embedded) {
-				if (!accessory.hasAttribute(SR6ItemAttribute.SIZE)) {
-					logger.log(Level.WARNING, "Slot {0} manages capacity. but the item {0} misses a size attribute", ref, accessory.getKey());
-					continue;
+				float size = 1.0f;
+				if (accessory.hasAttribute(SR6ItemAttribute.SIZE)) {
+					size = accessory.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue();
 				}
-				float size = accessory.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue();
 				free -= size;
 			}
 			return free;

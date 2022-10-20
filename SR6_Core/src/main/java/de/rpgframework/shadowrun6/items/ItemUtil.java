@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
@@ -19,11 +18,10 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.genericrpg.requirements.ValueRequirement;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
-import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
-import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -37,7 +35,8 @@ public class ItemUtil {
 	public static Predicate<CarriedItem<ItemTemplate>> AMMUNITION_FILTER = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
 	
 	//-------------------------------------------------------------------
-	public static List<ItemTemplate> getEmbeddableIn(CarriedItem ref, ItemHook slot) {
+	public static List<ItemTemplate> getEmbeddableIn(CarriedItem<ItemTemplate> ref, ItemHook slot) {
+		logger.log(Level.INFO, "getEmbeddableIn({0}, {1})", ref, slot);
 		List<ItemTemplate> ret = new ArrayList<>();
 		ret = Shadowrun6Core.getItemList(ItemTemplate.class)
 			.stream()
@@ -46,8 +45,13 @@ public class ItemUtil {
 //			.map( t -> {
 //				if ()
 //				return t;})
+			.sorted((o1, o2) -> o1.getName().compareTo(o2.getName()))
 			.filter(t -> ItemUtil.areRequirementsMet( ref, t))
 			.collect(Collectors.toList());
+		
+//		for (ItemTemplate t : ret) {
+//			logger.log(Level.INFO, "Embeddable "+t);
+//		}
 		return ret;
 	}
 	
@@ -92,10 +96,10 @@ public class ItemUtil {
 			}
 			return false;
 		}
+		ShadowrunReference type = (ShadowrunReference) tmp.getType();
+		String key = tmp.getKey();
 		if (tmp instanceof ExistenceRequirement) {
 			ExistenceRequirement req = (ExistenceRequirement)tmp;
-			ShadowrunReference type = (ShadowrunReference) req.getType();
-			String key = req.getKey();
 			switch (type) {
 			case GEAR:
 				return container.getModifyable().getId().equals(key);
@@ -109,7 +113,15 @@ public class ItemUtil {
 			}
 			return false;
 		}
-		logger.log(Level.INFO, "TODO: check "+tmp);
+		if (tmp instanceof ValueRequirement) {
+			ValueRequirement req = (ValueRequirement)tmp;
+			switch (type) {
+			case ITEM_ATTRIBUTE:
+				SR6ItemAttribute iAttr = SR6ItemAttribute.valueOf(req.getKey());
+				
+			}
+		}
+		logger.log(Level.ERROR, "TODO: check "+tmp+"/"+tmp.getClass());
 		return false;
 	}
 

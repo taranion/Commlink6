@@ -16,6 +16,8 @@ import org.junit.Test;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -27,6 +29,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -174,7 +177,26 @@ public class EquipmentCtrlTest {
 		assertEquals("Wrong nuyen paid", 180, model.getNuyen());
 		
 		assertFalse("Item not in slot after embedding", container.getSlot(ItemHook.TOP).getAllEmbeddedItems().isEmpty());
-		
-		
 	}
+	
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadSoftware() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "mct_360");
+		ItemTemplate needle = Shadowrun6Core.getItem(ItemTemplate.class, "targeting");
+		
+		// New create an item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.CARRIED, null, true);
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+
+		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.NUYEN.name(), 600));
+		charGen.runProcessors();
+		Possible poss = ctrl.canBeEmbedded(result.get(), ItemHook.SOFTWARE, needle, null);
+		System.out.println("poss="+poss);
+		assertTrue(poss.toString(),poss.get());
+	}
+
 }

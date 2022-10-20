@@ -44,6 +44,7 @@ import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -102,6 +103,17 @@ public class SR6MatrixDevicePage extends Page {
 		FlexGridPane.setMinHeight(secSoftware, 6);
 		FlexGridPane.setMediumHeight(secSoftware, 8);
 	}
+
+	//-------------------------------------------------------------------
+	private void initPrograms() {
+		Predicate<ItemTemplate> programFilter = (c) -> c.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.SOFTWARE;
+		secPrograms = new ActiveProgramsSection( ResourceI18N.get(RES, "page.matrix.section.activePrograms"), programFilter, null);			
+//		secPrograms.setOnAddAction(ev -> {});
+		FlexGridPane.setMinWidth(secPrograms, 4);
+		FlexGridPane.setMinHeight(secPrograms, 4);
+		FlexGridPane.setMediumWidth(secPrograms, 6);
+		FlexGridPane.setMediumHeight(secPrograms, 4);
+	}
 	
 	//-------------------------------------------------------------------
 	private void initAccessories() {
@@ -131,16 +143,6 @@ public class SR6MatrixDevicePage extends Page {
 		}
 		FlexGridPane.setMaxWidth(ivDeepDive, 5);
 		FlexGridPane.setMaxHeight(ivDeepDive, 6);
-	}
-
-	//-------------------------------------------------------------------
-	private void initPrograms() {
-		secPrograms = new ActiveProgramsSection( ResourceI18N.get(RES, "page.matrix.section.activePrograms"), null, null);			
-//		secPrograms.setOnAddAction(ev -> {});
-		FlexGridPane.setMinWidth(secPrograms, 4);
-		FlexGridPane.setMinHeight(secPrograms, 4);
-		FlexGridPane.setMediumWidth(secPrograms, 6);
-		FlexGridPane.setMediumHeight(secPrograms, 4);
 	}
 
 	//-------------------------------------------------------------------

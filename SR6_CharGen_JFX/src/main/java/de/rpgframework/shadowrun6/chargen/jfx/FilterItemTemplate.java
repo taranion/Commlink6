@@ -4,7 +4,6 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -77,7 +76,7 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 				if (!existingSub.contains(subtype))
 					existingSub.add(subtype);
 			} else {
-				logger.log(Level.WARNING, "Item {0} from available list has no carry mode {1}", item.getId(), carry);
+				logger.log(Level.TRACE, "Item {0} from available list has no carry mode {1}", item.getId(), carry);
 			}
 		}
 		// Sort them by ordinal

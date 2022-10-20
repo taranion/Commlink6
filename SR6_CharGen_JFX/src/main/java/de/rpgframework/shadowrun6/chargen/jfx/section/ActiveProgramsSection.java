@@ -24,6 +24,7 @@ import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.geometry.Pos;
@@ -55,6 +56,8 @@ public class ActiveProgramsSection extends GearSection {
 	private transient boolean refreshing;
 	private SelectionModel<CarriedItem<ItemTemplate>> selectionModel;
 	private List<IconGridCell<ItemTemplate,CarriedItem<ItemTemplate>>> allCells = new ArrayList<>();
+	
+	private List<ItemTemplate> embeddable = new ArrayList<>();
 	
 	//-------------------------------------------------------------------
 	/**
@@ -133,14 +136,29 @@ public class ActiveProgramsSection extends GearSection {
 
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-		cbDevice.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> refreshPrograms());
+		btnDel.setOnAction(ev -> onDelete(selectionModel.getSelectedItem()));
+
+		cbDevice.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "Matrix device changed to "+n);
+			// Change embededdable
+			if (!refreshing) 
+				embeddable = ItemUtil.getEmbeddableIn(n, ItemHook.SOFTWARE);
+			refreshPrograms();
+			setSelectFilter( t -> {
+				return embeddable.contains(t);
+			});
+		});
 		showHelpFor.unbind();
 		selectionModel.selectedIndexProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.WARNING, "selection index changed to "+n);
 			for (IconGridCell<ItemTemplate,CarriedItem<ItemTemplate>> cell : allCells) {
 				if (cell.getIndex()==(int)o) cell.pseudoClassStateChanged(IconGridCell.PSEUDO_CLASS_SELECTED, false);
 			}
 //			list.getSelectionModel().select((int)n);
 			showHelpFor.set(grid.getItems().get((int)n));
+		});
+		selectionModel.selectedItemProperty().addListener( (ov,o,n) -> {
+			super.selectionChanged(o, n);
 		});
 	}
 
@@ -165,6 +183,7 @@ public class ActiveProgramsSection extends GearSection {
 				if (devices.isEmpty()) cbDevice.setValue(null);
 				else cbDevice.setValue(devices.get(0));
 			}
+			embeddable = ItemUtil.getEmbeddableIn(cbDevice.getValue(), ItemHook.SOFTWARE);
 			
 			// Update programs
 			refreshPrograms();
@@ -181,16 +200,17 @@ public class ActiveProgramsSection extends GearSection {
 		List<CarriedItem<ItemTemplate>> slotted = new ArrayList<>();
 		// Update programs
 		CarriedItem<ItemTemplate> selected = cbDevice.getValue();
+		addToContainer = selected;
 		if (selected==null) {
+			addToHook = null;
 			grid.getItems().clear();			
 			list.getItems().clear();
 		} else {
+			addToHook = ItemHook.SOFTWARE;
 			AvailableSlot slot = selected.getSlot(ItemHook.SOFTWARE);
 			logger.log(Level.DEBUG, "Slot = " + slot);
 
 			if (slot != null) {
-//				secPrograms.setSlots((int)slot.getCapacity());
-				logger.log(Level.WARNING, "Embedded in slot = " + slot.getAllEmbeddedItems());
 				slotted.addAll(slot.getAllEmbeddedItems());
 			} else {
 				logger.log(Level.ERROR, "Item {0} has program slots, but no SOFTWARE slot", selected.getKey());

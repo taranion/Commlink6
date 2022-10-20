@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
+import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
@@ -426,7 +427,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeEmbedded(CarriedItem, ItemHook, ItemTemplate, Decision[])
 	 */
 	@Override
-	public Possible canBeEmbedded(CarriedItem container, ItemHook slot, ItemTemplate value, String variantID, Decision... decisions) {
+	public Possible canBeEmbedded(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, String variantID, Decision... decisions) {
 		if (!getEmbeddableIn(container, slot).contains(value)) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_EMBEDDABLE, value.getName(), slot, container.getNameWithRating());
 		}
@@ -438,8 +439,13 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		} else {
 			res = GearTool.buildItem(value, CarryMode.EMBEDDED,  getModel(), true, decisions);
 		}
-		if (res.hasError()) {
-			return new Possible(State.IMPOSSIBLE, res.getMessages().toString());
+		if (res.hasError()) { 
+			State state = State.POSSIBLE;
+			for (ToDoElement error : res.getMessages()) {
+				if (error.getSeverity()==Severity.STOPPER) state=State.IMPOSSIBLE;
+				if (error.toString().contains("Missing decision") && state.ordinal()<State.DECISIONS_MISSING.ordinal()) state=State.DECISIONS_MISSING;
+			}
+			return new Possible(state, res.getMessages().toString());
 		}
 		
 		ItemAttributeNumericalValue<SR6ItemAttribute> val = res.get().getAsValue(SR6ItemAttribute.PRICE);
@@ -456,10 +462,14 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		CarriedItem<ItemTemplate> toEmbed = res.get();
 		AvailableSlot realSlot = (AvailableSlot) container.getSlot(slot);
 		logger.log(Level.INFO, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
+		if (realSlot==null) throw new NullPointerException("No slot "+slot+" in container "+container);
 		logger.log(Level.INFO, "Items in slot={0},  free capacity={1}", realSlot.getAllEmbeddedItems().size(), realSlot.getFreeCapacity());
 		if (slot.hasCapacity()) {
 			float free = realSlot.getFreeCapacity();
-			float required = toEmbed.getAsFloat(SR6ItemAttribute.CAPACITY).getModifiedValue();
+			float required = 1;
+			if (toEmbed.hasAttribute(SR6ItemAttribute.CAPACITY)) {
+				toEmbed.getAsFloat(SR6ItemAttribute.CAPACITY).getModifiedValue();
+			}
 			if (free<required) {
 				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, required, free);			
 			}
@@ -478,7 +488,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#embed(CarriedItem, ItemHook, ItemTemplate, Decision[])
 	 */
 	@Override
-	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem container, ItemHook slot, ItemTemplate value, String variantID, Decision... decisions) {
+	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, String variantID, Decision... decisions) {
 		logger.log(Level.TRACE, "ENTER embed {0} into {1}", value, container);
 		try {
 			Possible poss = canBeEmbedded(container, slot, value, variantID, decisions);
@@ -522,10 +532,12 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			return poss;
 		}
 		
-		container.removeAccessory(toRemove, slot);
-		logger.log(Level.ERROR, "ToDo: recalculate item after embedding");
-		GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
 		logger.log(Level.INFO, "Remove {0} from {1}", toRemove.getKey(), container.getKey());
+		boolean success = container.removeAccessory(toRemove, slot);
+		if (!success)
+			return Possible.FALSE;
+		logger.log(Level.ERROR, "ToDo: recalculate item after removing embedded");
+		GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
 		
 		parent.runProcessors();
 		return Possible.TRUE;

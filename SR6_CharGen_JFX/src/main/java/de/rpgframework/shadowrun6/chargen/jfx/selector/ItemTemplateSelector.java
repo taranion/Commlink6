@@ -49,7 +49,8 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 		super(charGen.getEquipmentController(),
 				templateFilter,
 				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),
-				new FilterItemTemplate(mode, null));
+				new FilterItemTemplate(mode));
+		logger.log(Level.INFO, "create ItemTemplateSelector (container={0}, hook={1}, carry={2})", container, hook, mode);
 		this.carry = mode;
 		this.charGen = charGen;
 		if (container!=null) {
@@ -60,14 +61,14 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 		
 		// Button control
     	listPossible.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-    		logger.log(Level.INFO, "Selected {0}", n);
+    		logger.log(Level.DEBUG, "Selected {0}", n);
     		Possible poss = null;
     		if (carry==CarryMode.EMBEDDED) {
     			poss = charGen.getEquipmentController().canBeEmbedded(container, hook, n, null);
     		} else {
-       			poss = charGen.getEquipmentController().canBeSelected(n, null);
+       			poss = charGen.getEquipmentController().canBeSelected(n);
     		}
-    		logger.log(Level.INFO, "Selection possible = "+poss);
+    		logger.log(Level.DEBUG, "Selection possible = {0}",poss);
     		if (btnCtrl!=null) {
     			btnCtrl.setDisabled(CloseType.OK, !poss.get());
     		}
