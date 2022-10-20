@@ -16,13 +16,13 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.PrioritySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6AttributeLeveller;
-import javafx.scene.control.CheckBox;
-import javafx.scene.layout.VBox;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * @author prelle
@@ -35,6 +35,8 @@ public class AttributeSection extends Section {
 	private ShadowrunAttributeTable<SR6Skill,SR6SkillValue,Shadowrun6Character> table;
 	
 	private Mode mode = Mode.GENERATE;
+	
+	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4); 
 
 	//-------------------------------------------------------------------
 	public AttributeSection(String title, ScreenManagerProvider provider) {
@@ -51,13 +53,11 @@ public class AttributeSection extends Section {
 //		layout.setStyle("-fx-spacing: 1em;");
 		
 		setContent(table);
-		setMode(org.prelle.javafx.Mode.BACKDROP);
-		
-		
-		CheckBox cb1 = new CheckBox("Configuration Setting 1");
-		CheckBox cb2 = new CheckBox("Configuration Setting 2");
-		VBox back = new VBox(5, cb1, cb2);
-		setSecondaryContent(back);
+//		setMode(org.prelle.javafx.Mode.BACKDROP);
+//		CheckBox cb1 = new CheckBox("Configuration Setting 1");
+//		CheckBox cb2 = new CheckBox("Configuration Setting 2");
+//		VBox back = new VBox(5, cb1, cb2);
+//		setSecondaryContent(back);
 	}
 
 	//-------------------------------------------------------------------
@@ -65,6 +65,9 @@ public class AttributeSection extends Section {
 //		if (getSettingsButton()!=null)
 //			getSettingsButton().setOnAction(ev -> onSettings());
 	}
+
+	//-------------------------------------------------------------------
+	public ReadOnlyIntegerProperty flexWidthProperty() { return flexWidthProperty; }
 
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
@@ -78,6 +81,7 @@ public class AttributeSection extends Section {
 		if (attrib instanceof PrioritySR6AttributeGenerator) {
  			System.err.println("AttributeSection: change controller to Priority");
 			table = new PriorityAttributeTable<>(ctrl);
+			((PriorityAttributeTable)table).useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?9:6));
 		} else if (attrib instanceof SR6PointBuyAttributeGenerator) {
  			System.err.println("AttributeSection: change controller to Point Buy");
 			table = new PointBuyAttributeTable<>(ctrl);

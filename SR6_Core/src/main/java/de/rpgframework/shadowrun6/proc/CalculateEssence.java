@@ -67,11 +67,11 @@ public class CalculateEssence implements ProcessingStep {
 				holeVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0);
 				model.setAttribute(holeVal);
 			}
-			essenceCost += (float)(holeVal.getModifiedValue())/1000.0f;
+			int essenceHole = holeVal.getModifiedValue();
 			
 			if (model.isInCareerMode()) {
 				// Determine the max essence
-				float max = 6000 - model.getEssenceHole();
+//				float max = 6000 - model.getEssenceHole();
 				// Reduce the cost by variable
 				logger.log(Level.WARNING, "ToDo: Calculate essence");
 			} else {
@@ -81,8 +81,10 @@ public class CalculateEssence implements ProcessingStep {
 				int remain = Math.min(6000, Math.round(max - (int)(essenceCost*1000)));
 				essVal.setDistributed(remain);
 				holeVal.setDistributed(0);
-				model.setEssenceHole(0);
+				model.setEssenceCost( (int)(essenceCost*1000));
 				logger.log(Level.INFO, "Essence cost is {0}, hole is {1}, resulting remain essence is {2}", essenceCost, holeVal.getModifiedValue(), remain);
+				essVal.setDistributed(remain);
+				model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE).setDistributed(essenceHole);
 			}
 
 			float min = 6.0f - essenceCost; //Math.min(model.getEssence(), 6.0f-sum);
@@ -90,7 +92,8 @@ public class CalculateEssence implements ProcessingStep {
 //				logger.warn("Fix essence to "+min);
 //				model.setEssence(min);
 //			}
-			int magicMalus = 6 - (int)min;
+			int magicMalus = 5 - (int)min;
+			if (magicMalus<0) magicMalus=0;
 			logger.log(Level.INFO,"Magic malus is "+magicMalus);
 			if (magicMalus!=0) {
 				model.getAttribute(ShadowrunAttribute.MAGIC).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE));

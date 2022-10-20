@@ -152,11 +152,13 @@ public class EssenceSection extends Section {
 		nfTranshumanism.setVisible(allowTransh);
 		hdTranshumanism.setVisible(allowTransh);
 		
+		lbEssenceLost.setText(String.valueOf( ((double)model.getEssenceCost())/1000.0));
 		// Essence 
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ESSENCE);
-		if (val!=null) lbEssenceRemain.setText(String.valueOf(val.getModifiedValue()));
+		System.err.println("EssenceSection = "+val+" / "+val.getModifications());
+		if (val!=null) lbEssenceRemain.setText(String.valueOf(val.getModifiedValue()/1000.0));
 		// Essence hole
 		val = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
-		if (val!=null) lbEssenceHole.setText(String.valueOf(val.getModifiedValue()));
+		if (val!=null) lbEssenceHole.setText(String.valueOf(val.getModifiedValue()/1000.0));
 	}	
 }

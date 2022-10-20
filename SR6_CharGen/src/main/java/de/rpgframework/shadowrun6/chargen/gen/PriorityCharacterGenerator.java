@@ -200,6 +200,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			}
 
 			// Now add generator specifics on top
+			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 //			processChain.add(new ResetModifications(model));
 //			processChain.add(new EnsureAttributePresence(model));
 			processChain.add(new ResetGenerator(this));

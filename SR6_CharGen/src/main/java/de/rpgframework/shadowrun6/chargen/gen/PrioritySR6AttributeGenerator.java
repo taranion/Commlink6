@@ -583,6 +583,8 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		allowedAdjust.add(ShadowrunAttribute.EDGE);
 		numAttributesToMax = 1;
 		for (AttributeValue tmp : getModel().getAttributes()) {
+			if (tmp.getModifyable()==ShadowrunAttribute.ESSENCE || tmp.getModifyable()==ShadowrunAttribute.ESSENCE_HOLE)
+				continue;
 			tmp.clearModifications();
 			tmp.setDistributed(0);
 		}

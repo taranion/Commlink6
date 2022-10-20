@@ -102,7 +102,7 @@ public class ItemUtilJFX {
 	 * @param detailed Include augmentation, price and availability
 	 */
 	public static Node getItemInfoNode(CarriedItem<ItemTemplate> item, SR6CharacterController ctrl, boolean detailed) {
-		logger.log(Level.WARNING, "create InfoNode for "+item);
+		logger.log(Level.DEBUG, "create InfoNode for "+item);
 		Shadowrun6Character model = null; // ctrl.getModel();
 		CarryMode carry = item.getCarryMode();
 		

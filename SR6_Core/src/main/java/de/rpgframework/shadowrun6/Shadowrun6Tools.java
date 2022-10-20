@@ -175,7 +175,7 @@ public class Shadowrun6Tools {
 			List<Modification> unprocessed = new ArrayList<>();
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
-				logger.log(Level.INFO, "------ after "+processor.getClass().getSimpleName()+"     "+unprocessed);
+				logger.log(Level.DEBUG, "------ after {0}     {1}",processor.getClass().getSimpleName(),unprocessed);
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
@@ -481,7 +481,7 @@ public class Shadowrun6Tools {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void resolveChar(Shadowrun6Character model) {
-		logger.log(Level.INFO, "ENTER resolveChar");
+		logger.log(Level.INFO, "ENTER resolveChar("+model.getName()+")");
 		try {
 			logger.log(Level.DEBUG, "resolve qualities");
 			for (QualityValue tmp : model.getQualities()) {
@@ -527,15 +527,17 @@ public class Shadowrun6Tools {
 				ComplexForm resolved = Shadowrun6Core.getItem(ComplexForm.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
-			logger.log(Level.DEBUG, "resolve gear");
-			SR6ResolveTemplatesStep resolver = new SR6ResolveTemplatesStep();
 			logger.log(Level.DEBUG, "resolve lifestyles");
 			for (SR6Lifestyle tmp : model.getLifestyles()) {
 				LifestyleQuality resolved = Shadowrun6Core.getItem(LifestyleQuality.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 
+			logger.log(Level.DEBUG, "resolve gear");
+			SR6ResolveTemplatesStep resolver = new SR6ResolveTemplatesStep();
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
+				if (tmp.getUuid()==null)
+					logger.log(Level.WARNING, "Char {0} Item {1} has no UUID", model.getName(), tmp.getKey());
 				if (tmp.getResolved()==null) {
 					tmp.setResolved(Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey()));
 					if (tmp.getVariantID()!=null && tmp.getVariant()==null) {

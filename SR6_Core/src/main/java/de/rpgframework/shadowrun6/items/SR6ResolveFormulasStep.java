@@ -58,7 +58,7 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 				conv = new IntegerConverter();
 			Object resolved = conv.read(resolvedString);
 
-			logger.log(Level.INFO, val.getModifyable() + ": RAW " + val.getRawValue() + " ==> " + formula + " ==> "
+			logger.log(Level.DEBUG, val.getModifyable() + ": RAW " + val.getRawValue() + " ==> " + formula + " ==> "
 					+ resolved);
 			if (resolved instanceof Integer) {
 				ItemAttributeNumericalValue<?> aVal = new ItemAttributeNumericalValue<>(

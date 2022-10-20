@@ -126,7 +126,7 @@ public class VisualQualityPathPane extends Group {
 			for (PathNode node : nodes) {
 				node.x = x;
 				x+=2;
-				logger.log(Level.INFO, "Node {0} is at {1},{2}", node.step.getId(), node.x, node.y);
+				logger.log(Level.DEBUG, "Node {0} is at {1},{2}", node.step.getId(), node.x, node.y);
 			}
 		}
 	}

@@ -178,7 +178,7 @@ public class SR6MatrixDevicePage extends Page {
 				ret.setText("-");
 			return ret;
 		};
-		secActions = new ShadowrunActionSection(ResourceI18N.get(RES, "page.matrix.section.actions"), resolver);
+		secActions = new ShadowrunActionSection(resolver);
 		secActions.setAll( 
 				Shadowrun6Core.getItemList(Shadowrun6Action.class)
 				.stream()

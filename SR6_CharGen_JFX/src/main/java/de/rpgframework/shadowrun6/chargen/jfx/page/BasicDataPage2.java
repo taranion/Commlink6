@@ -97,8 +97,12 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 //		((AttributeSection)secAttrib).updateController(ctrl);
 		
 		FlexGridPane.setMinWidth(secAttrib, 4);
-		FlexGridPane.setMediumWidth(secAttrib, 9);
+		FlexGridPane.setMediumWidth(secAttrib, 6);
 		FlexGridPane.setMinHeight(secAttrib, 7);
+		secAttrib.flexWidthProperty().addListener( (ov,o,n) -> {
+			FlexGridPane.setMediumWidth(secAttrib, (Integer)n);
+			flex.refresh();
+		});
 	}
 	
 	//-------------------------------------------------------------------
@@ -161,7 +165,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		secQualPaths.refresh();
 		secPortrait.refresh();
 		
-		FlexGridPane.setMediumWidth(secAttrib, control.getModel().isInCareerMode()?6:9);
+		//FlexGridPane.setMediumWidth(secAttrib, control.getModel().isInCareerMode()?6:9);
 	}
 	
 }
