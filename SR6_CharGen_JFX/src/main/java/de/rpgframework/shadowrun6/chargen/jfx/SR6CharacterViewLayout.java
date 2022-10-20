@@ -1,6 +1,5 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
-import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ResourceBundle;
@@ -9,6 +8,7 @@ import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.ResponsiveControlManager;
+import org.prelle.javafx.SymbolIcon;
 import org.prelle.javafx.WindowMode;
 
 import de.rpgframework.ResourceI18N;
@@ -43,7 +43,9 @@ import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -71,6 +73,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	
 	private Label lbMode;
 	private Label lbKarma, lbNuyen;
+	/* For conversions */
+	private Button btnInc, btnDec;
+	private Label lbConvert;
+	private VBox bxConvert;
 	
 	private VBox bxHoverToDo;
 	
@@ -108,8 +114,21 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		lbNuyen = new Label("?");
 		lbNuyen.setStyle("-fx-text-fill: accent; -fx-font-weight: bold");		
 		Label hdKarma = new Label("Karma");
+		hdKarma.setLabelFor(lbKarma);
 		Label hdNuyen = new Label("Nuyen");
-		VBox bxCenter = new VBox(5, lbKarma, hdKarma, lbNuyen, hdNuyen);
+		lbConvert = new Label("?");
+		lbConvert.setStyle("-fx-text-fill: accent; -fx-font-weight: bold");	
+		btnInc = new Button(null, new SymbolIcon("chevronup"));
+		btnInc.setStyle("-fx-font-size: 90%");
+		btnInc.setTooltip(new Tooltip(ResourceI18N.get(UI, "action.conversionIncrease")));
+		btnInc.setOnAction( ev -> control.getEquipmentController().increaseConversion());
+		btnDec = new Button(null, new SymbolIcon("chevrondown"));
+		btnDec.setStyle("-fx-font-size: 90%");
+		btnDec.setTooltip(new Tooltip(ResourceI18N.get(UI, "action.conversionDecrease")));
+		btnDec.setOnAction( ev -> control.getEquipmentController().decreaseConversion());
+		bxConvert = new VBox(0, btnInc, lbConvert, btnDec);
+		bxConvert.setAlignment(Pos.CENTER);
+		VBox bxCenter = new VBox(5, lbNuyen, hdNuyen, bxConvert, lbKarma, hdKarma);
 		VBox.setMargin(lbNuyen, new Insets(10, 0, 0, 0));
 		bxCenter.setAlignment(Pos.CENTER);
 		extraNodesCenterProperty().add(bxCenter);
@@ -353,6 +372,12 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		} else {
 			lbNuyen.setText( String.valueOf(nuyen) );
 		}
+		
+		bxConvert.setVisible(control.getEquipmentController().getConversionRateKarma()>0);
+		bxConvert.setManaged(control.getEquipmentController().getConversionRateKarma()>0);
+		lbConvert.setText(String.valueOf(control.getEquipmentController().getConvertedKarma()));
+		btnInc.setDisable(!control.getEquipmentController().canIncreaseConversion());
+		btnDec.setDisable(!control.getEquipmentController().canDecreaseConversion());
 	}
 	
 	//-------------------------------------------------------------------
