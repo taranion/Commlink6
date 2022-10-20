@@ -208,8 +208,6 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 			list = Shadowrun6Core.loadDataItems(LifestyleQualityList.class, LifestyleQuality.class, core, clazz,"core/data/lifestyles.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" lifestyle qualities");
-			list = Shadowrun6Core.loadDataItems(RitualFeatureList.class, RitualFeature.class, core, clazz,"core/data/ritualfeatures.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" ritual features");
 			list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, core, clazz,"core/data/rituals.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" rituals");
 //			logger.log(Level.ERROR, "Stop here");
