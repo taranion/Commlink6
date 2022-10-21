@@ -39,6 +39,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	public final static String I18N_NOT_RAISED_POINT2 = "skill.error.notRaisedWithPoints2";
 	public final static String I18N_NOT_RAISED_KARMA = "skill.error.notRaisedWithKarma";
 	public final static String I18N_NOT_AVAILABLE_SPEC = "skill.error.specNotAvailable";
+	public final static String I18N_MAX_SKILLS_MAXED = "skill.error.maxSkillsMaxed";
 	
 	public final static UUID NATIVE_LANGUAGE = UUID.fromString("1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b");
 

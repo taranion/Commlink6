@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -35,13 +36,13 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	
 	protected final static Logger logger = System.getLogger(CommonSkillController.class.getPackageName()+".skill");
 	
-	private final static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(CommonSkillGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
+	protected final static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(CommonSkillGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
 	
 	public final static String I18N_RESTRICTED_SKILL = "skill.error.restricted";
 	public final static String I18N_SKILL_IS_MAXED   = "skill.error.isAtMaximum";
 	public final static String I18N_NOT_SELECTED     = "skill.error.notSelected";
-	public final static String I18N_MAX_SKILLS_MAXED = "skill.error.maxSkillsMaxed";
 	public final static String I18N_SKILL_AUTOSELECT = "skill.error.isAutoSelected";
+	public final static String I18N_NOT_AVAILABLE_SPEC = "skill.error.specNotAvailable";
 
 	protected List<SR6Skill> available;
 	protected List<SR6Skill> allowed;
@@ -77,11 +78,9 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	 */
 	@Override
 	public Possible canBeIncreased(SR6SkillValue value) {
-		// Since "All Skills" view in SKillTable, this does not work anymore
-//		if (!model.getSkillValues().contains(value)) {
-//			// Value not present in character
-//			return new Possible(I18N_NOT_SELECTED);
-//		}
+		// Knowledge skills have no level
+		if (value.getModifyable().getType()==SkillType.KNOWLEDGE) 
+			return Possible.FALSE;
 		
 		return new Possible(value.getDistributed()<getMaximum(value), I18N_SKILL_IS_MAXED);
 	}
@@ -92,6 +91,16 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	 */
 	@Override
 	public Possible canBeDecreased(SR6SkillValue value) {
+		// Knowledge skills have no level
+		if (value.getModifyable().getType()==SkillType.KNOWLEDGE) 
+			return Possible.FALSE;
+		// Language skills cannot be decreased below 1
+		if (value.getModifyable().getType()==SkillType.KNOWLEDGE) 
+			return Possible.FALSE;
+		// Is automatically added
+//		if (model.isAutoSkill(val))
+//			return false;
+
 		if (!model.getSkillValues().contains(value)) {
 			// Value not present in character
 			return new Possible(I18N_NOT_SELECTED);
