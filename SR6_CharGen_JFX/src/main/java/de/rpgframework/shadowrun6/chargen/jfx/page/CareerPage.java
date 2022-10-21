@@ -27,6 +27,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.SR6LifestyleListCell;
+import de.rpgframework.shadowrun6.chargen.jfx.section.CreationSection;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
@@ -42,7 +43,7 @@ public class CareerPage extends Page {
 	
 	private transient SR6CharacterController ctrl;
 	
-//	private SINSection secSINs;
+	private CreationSection secCreation;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -57,24 +58,24 @@ public class CareerPage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
-//		initSINs();
+		initCreationInfo();
 	}
 	
-//	//-------------------------------------------------------------------
-//	private void initSINs() {
-//		secSINs = new SINSection(ResourceI18N.get(RES, "page.life.section.sins"));
-//		secSINs.setMaxHeight(Double.MAX_VALUE);
-//		FlexGridPane.setMinWidth(secSINs, 4);
-//		FlexGridPane.setMinHeight(secSINs, 6);
-//		FlexGridPane.setMediumWidth(secSINs, 6);
-//		FlexGridPane.setMediumHeight(secSINs, 9);
-//	}
+	//-------------------------------------------------------------------
+	private void initCreationInfo() {
+		secCreation = new CreationSection();
+		secCreation.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secCreation, 4);
+		FlexGridPane.setMinHeight(secCreation, 6);
+		FlexGridPane.setMediumWidth(secCreation, 6);
+		FlexGridPane.setMediumHeight(secCreation, 4);
+	}
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-//		flex.getChildren().addAll(secContacts, secSINs, secLifestyles);
+		flex.getChildren().addAll(secCreation);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -132,7 +133,7 @@ public class CareerPage extends Page {
 			throw new NullPointerException("controller is null");
 		this.ctrl = ctrl;
 		
-//		secSINs.updateController(ctrl);
+		secCreation.updateController(ctrl);
 //		
 //		if (ctrl.getClass().getSimpleName().contains("Generator")) {
 //			secContacts.setMode(Mode.BACKDROP);
@@ -145,7 +146,7 @@ public class CareerPage extends Page {
 	
 	//-------------------------------------------------------------------
 	public void refresh() {
-//		secSINs.refresh();
+		secCreation.refresh();
 	}
 
 }

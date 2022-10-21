@@ -214,7 +214,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, poss.toString());
 			}
 		} else {
-			logger.log(Level.INFO, "onDelete {0} ", item);
+			logger.log(Level.WARNING, "onDelete {0} ", item);
 			if (control.getEquipmentController().deselect(item)) {
 				refresh();
 			}
@@ -242,12 +242,14 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		// If  a model and a filter exists, update automatically
 		if (filter!=null) {
 			List<CarriedItem<ItemTemplate>> data = null;
+			logger.log(Level.WARNING, "model has "+model.getCarriedItems().size()+" items");
 			data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItemsRecursive())
 			.stream()
 			.filter(filter)
 			.collect(Collectors.toList());
 			list.getItems().setAll(data);
 		}
+		logger.log(Level.WARNING, "list has "+list.getItems().size()+" items");
 		
 		// Secondary content
 		cbRuleNegativeNuyen.setSelected( control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN));

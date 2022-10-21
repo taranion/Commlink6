@@ -24,6 +24,7 @@ import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Choice;
@@ -57,6 +58,7 @@ import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
+import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -66,6 +68,7 @@ import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.proc.GetModificationsFromFoci;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
+import de.rpgframework.shadowrun6.generators.Shadowrun6Generators;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemSubType;
@@ -525,6 +528,11 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve complex forms");
 			for (ComplexFormValue tmp : model.getComplexForms()) {
 				ComplexForm resolved = Shadowrun6Core.getItem(ComplexForm.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+			logger.log(Level.DEBUG, "resolve metamagics or echoes");
+			for (MetamagicOrEchoValue tmp : model.getMetamagicOrEchoes()) {
+				MetamagicOrEcho resolved = Shadowrun6Core.getItem(MetamagicOrEcho.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve lifestyles");

@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.jfx.section;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.controlsfx.control.ToggleSwitch;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.ManagedDialog;
+import org.prelle.javafx.Mode;
 import org.prelle.javafx.Section;
 import org.prelle.javafx.SymbolIcon;
 
@@ -20,9 +22,12 @@ import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.NumericalValueWith1PoolController;
 import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.rules.SkillTable;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunSkillTable;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -32,9 +37,11 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -50,6 +57,7 @@ public class SkillSection extends Section {
 	protected Logger logger = System.getLogger(getClass().getPackageName());
 
 	private SR6CharacterController control;
+	protected ShadowrunCharacter model;
 	private SkillType[] type;
 
 	private ToggleSwitch tsExpertMode;
@@ -57,6 +65,8 @@ public class SkillSection extends Section {
 	private SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue> table;
 	protected Button btnAdd;
 	protected Button btnDel;
+	private ToggleSwitch cbRuleUndoCareer;
+	private ToggleSwitch cbRuleUndoChargen;
 
 	//-------------------------------------------------------------------
 	public SkillSection(String title, SkillType... type) {
@@ -95,14 +105,41 @@ public class SkillSection extends Section {
 	}
 
 	//-------------------------------------------------------------------
+	private void initSecondaryContent() {
+		cbRuleUndoCareer = new ToggleSwitch();
+		cbRuleUndoCareer.setGraphicTextGap(0);
+		cbRuleUndoChargen       = new ToggleSwitch();
+		cbRuleUndoChargen.setGraphicTextGap(0);
+		
+		cbRuleUndoCareer.selectedProperty().addListener( (ov,o,n) -> {
+			if (control!=null) { control.getRuleController().setRuleValue(ShadowrunRules.CAREER_UNDO_FROM_CAREER, n); control.runProcessors(); }
+		});
+		cbRuleUndoChargen.selectedProperty().addListener( (ov,o,n) -> {
+			if (control!=null) { control.getRuleController().setRuleValue(ShadowrunRules.CAREER_UNDO_FROM_CHARGEN, n); control.runProcessors(); }
+		});
+		
+		setMode(Mode.REGULAR);
+		VBox bxRules = new VBox(10);
+		bxRules.getChildren().add(makeLabel(cbRuleUndoChargen, ShadowrunRules.CAREER_UNDO_FROM_CHARGEN));
+		bxRules.getChildren().add(makeLabel(cbRuleUndoCareer , ShadowrunRules.CAREER_UNDO_FROM_CAREER));
+		setSecondaryContent(bxRules);
+
+	}
+
+	//-------------------------------------------------------------------
+	private Label makeLabel(ToggleSwitch ts, Rule rule) {
+		Label lb = new Label(rule.getName(Locale.getDefault()), ts);
+		lb.setWrapText(true);
+		lb.setAlignment(Pos.TOP_LEFT);
+		VBox.setMargin(lb, new Insets(0, 0, 0, -20));
+		return lb;
+	}
+
+	//-------------------------------------------------------------------
 	private void initLayout() {
 		//setContent(table);
 		initLine();
-		
-		CheckBox cb1 = new CheckBox("Configuration Setting 1");
-		CheckBox cb2 = new CheckBox("Configuration Setting 2");
-		VBox back = new VBox(5, cb1, cb2);
-		setSecondaryContent(back);
+		initSecondaryContent();
 	}
 
 	//-------------------------------------------------------------------
@@ -126,6 +163,10 @@ public class SkillSection extends Section {
 			if (skCtrl instanceof NumericalValueWith1PoolController) {
 				lbPoints.setText(String.valueOf(((NumericalValueWith1PoolController<?,?>)skCtrl).getPointsLeft()));
 			}
+			
+			// Secondary content
+			cbRuleUndoCareer.setSelected( control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_UNDO_FROM_CAREER));
+			cbRuleUndoChargen.setSelected( control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_UNDO_FROM_CHARGEN));
 		}
 	}
 
@@ -138,6 +179,7 @@ public class SkillSection extends Section {
 	@SuppressWarnings("rawtypes")
 	public void updateController(CharacterController ctrl) {
 		control = (SR6CharacterController) ctrl;
+		System.err.println("#############SkillSection.updateController with model "+control.getClass());
 		logger.log(Level.INFO, "#############updateController with model "+control.getModel());
 		if (control.getModel()==null) throw new NullPointerException("Controller has NULL as model");
 		table.setModel(control.getModel());
@@ -145,6 +187,10 @@ public class SkillSection extends Section {
 		table.setData(
 				control.getSkillController().getSelected().stream().filter(sv -> Arrays.asList(type).contains(sv.getModifyable().getType())).collect(Collectors.toList())
 				);
+		
+		if (ctrl instanceof SR6CharacterLeveller) {
+			setMode(Mode.BACKDROP);
+		}
 	}
 
 	//-------------------------------------------------------------------

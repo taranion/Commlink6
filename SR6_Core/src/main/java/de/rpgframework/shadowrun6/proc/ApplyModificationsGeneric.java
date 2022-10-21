@@ -10,6 +10,7 @@ import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
@@ -163,8 +164,9 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.ERROR, "Failed creating {0}/{1}/{2}: {3}", mod.getKey(), mod.getVariant(), carry, result.getError());
 			return false;
 		}
+		result.get().setInjectedBy(mod.getSource());
 		
-		logger.log(Level.INFO, "Put item in inventory: {0}", result.get());
+		logger.log(Level.WARNING, "Put item in inventory: {0}   (from {1})", result.get(), mod.getSource());
 		model.addCarriedItem(result.get());
 		return true;
 	}

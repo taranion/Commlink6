@@ -371,7 +371,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 	 */
 	@Override
 	public OperationResult<SR6SkillValue> decrease(SR6SkillValue value) {
-		Possible poss = canBeIncreased(value);
+		Possible poss = canBeDecreased(value);
 		if (!poss.get()) {
 			logger.log(Level.WARNING, "Trying to decrease {0} which is not possible: {1}", value.getKey(), poss);
 			return new OperationResult<>(poss);

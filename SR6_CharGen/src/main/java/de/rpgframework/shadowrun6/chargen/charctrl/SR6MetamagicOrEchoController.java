@@ -121,6 +121,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		List<MetamagicOrEchoValue> list = null;
 		if (type != null && type.usesMagic()) {
 			list = getSelected().stream()
+					.filter(m -> m.getModifyable()!=null)
 					.filter(m -> m.getModifyable().getType() == Type.METAMAGIC || m.getModifyable().getType() == Type.METAMAGIC_ADEPT)
 					.collect(Collectors.toList());
 		} else if (type != null && type.usesResonance()) {
