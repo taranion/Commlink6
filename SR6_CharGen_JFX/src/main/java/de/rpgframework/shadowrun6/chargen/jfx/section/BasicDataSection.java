@@ -10,6 +10,7 @@ import org.prelle.javafx.TitledComponent;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.classification.Gender;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -38,6 +39,7 @@ public class BasicDataSection extends Section {
 	private ChoiceBox<SR6MetaType> cbMetatype;
 	private ChoiceBox<MagicOrResonanceType> cbMOR;
 	private TextField tfHeat;
+	private TextField tfRep;
 	
 	//-------------------------------------------------------------------
 	public BasicDataSection(String title) {
@@ -72,18 +74,22 @@ public class BasicDataSection extends Section {
 			});
 		cbMOR.getItems().addAll(Shadowrun6Core.getItemList(MagicOrResonanceType.class));
 		tfHeat        = new TextField();
-		tfHeat.setPrefColumnCount(3);
+		tfHeat.setPrefColumnCount(2);
+		tfRep        = new TextField();
+		tfRep.setPrefColumnCount(2);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		FlowPane layout = new FlowPane(
-				new TitledComponent(ResourceI18N.get(RES, "label.streetname"),  tfStreetName), 
-				new TitledComponent(ResourceI18N.get(RES, "label.realname"), tfRealName), 
-				new TitledComponent(ResourceI18N.get(RES, "label.gender"), cbGender), 
-				new TitledComponent(ResourceI18N.get(RES, "label.metatype"), cbMetatype), 
-				new TitledComponent(ResourceI18N.get(RES, "label.magicOrResonance"), cbMOR), 
-				new TitledComponent(ResourceI18N.get(RES, "label.heat"), tfHeat));
+				new TitledComponent(ResourceI18N.get(RES, "label.streetname"),  tfStreetName).setTitleMinWidth(120d), 
+				new TitledComponent(ResourceI18N.get(RES, "label.realname"), tfRealName).setTitleMinWidth(120d), 
+				new TitledComponent(ResourceI18N.get(RES, "label.gender"), cbGender).setTitleMinWidth(120d), 
+				new TitledComponent(ResourceI18N.get(RES, "label.metatype"), cbMetatype).setTitleMinWidth(120d), 
+				new TitledComponent(ResourceI18N.get(RES, "label.magicOrResonance"), cbMOR).setTitleMinWidth(120d), 
+				new TitledComponent(ResourceI18N.get(RES, "label.heat"), tfHeat).setTitleMinWidth(60d),
+				new TitledComponent(ResourceI18N.get(RES, "label.reputation"), tfRep)
+				);
 		layout.setPrefWrapLength(300);
 		layout.setVgap(5);
 		layout.setHgap(10);
@@ -97,7 +103,7 @@ public class BasicDataSection extends Section {
 		cbGender.getSelectionModel().selectedItemProperty().addListener((ov,o,n) -> control.getModel().setGender(n));
 		tfHeat.textProperty().addListener( (ov,o,n) -> {
 			try {
-				control.getModel().setHeat(Integer.parseInt(n));
+				control.getModel().getAttribute(ShadowrunAttribute.HEAT).setDistributed(Integer.parseInt(n));
 				tfHeat.getStyleClass().remove("invalid");
 				control.runProcessors();
 			} catch (NumberFormatException nfe) {
@@ -130,7 +136,10 @@ public class BasicDataSection extends Section {
 		cbGender.setValue(model.getGender());
 		cbMetatype.setValue(model.getMetatype());
 		cbMOR.setValue(model.getMagicOrResonanceType());
-		tfHeat.setText(String.valueOf(model.getHeat()));
+		if (model.getAttribute(ShadowrunAttribute.HEAT)!=null)
+			tfHeat.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.HEAT).getDistributed()));
+		if (model.getAttribute(ShadowrunAttribute.REPUTATION)!=null)
+			tfRep.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.REPUTATION).getDistributed()));
 		
 		cbMetatype.setDisable(model.isInCareerMode());
 		cbMOR.setDisable(model.isInCareerMode());

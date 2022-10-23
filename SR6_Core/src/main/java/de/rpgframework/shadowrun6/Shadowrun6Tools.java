@@ -23,6 +23,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.Reward;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.data.ApplyTo;
@@ -1590,6 +1591,30 @@ public class Shadowrun6Tools {
 			if (item.isPrimary()) return item;
 		}
 		return weapons.isEmpty()?null:weapons.get(0);
+	}
+	
+	//---------------------------------------------------------
+	public static void applyReward(Shadowrun6Character model, Reward reward) {
+		logger.log(Level.INFO, "Apply reward ''{0}'' to character", reward.getTitle());
+		model.addReward(reward);
+		
+		if (reward.getExperiencePoints()!=0) {
+			model.setKarmaFree( model.getKarmaFree() + reward.getExperiencePoints() );
+		}
+		if (reward.getMoney()!=0) {
+			model.setNuyen( model.getNuyen() + reward.getMoney() );
+		}
+		ValueModification modHeat = reward.getModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.HEAT.name());
+		if (modHeat!=null) {
+			AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.HEAT);
+			val.setDistributed( val.getDistributed() + modHeat.getValue());
+		}
+		ValueModification modRep = reward.getModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.REPUTATION.name());
+		if (modRep!=null) {
+			AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.REPUTATION);
+			val.setDistributed( val.getDistributed() + modHeat.getValue());
+		}
+		
 	}
 
 }

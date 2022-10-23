@@ -41,8 +41,6 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 
 	@Element
 	private PowerLevel powerLevel;
-	@Element
-	private int heat;
 	@ElementList(entry="lifestyle", type = SR6Lifestyle.class, inline = false)
 	private List<SR6Lifestyle> lifestyles;
 	@ElementList(entry="qpath", type = QualityPathValue.class, inline = false)
@@ -129,22 +127,6 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			buf.append(getMagicOrResonanceType().getName(Locale.getDefault())+"");
 		}
 		return buf.toString();
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @return the heat
-	 */
-	public int getHeat() {
-		return heat;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @param heat the heat to set
-	 */
-	public void setHeat(int heat) {
-		this.heat = Math.max(0,heat);
 	}
 
 	//-------------------------------------------------------------------

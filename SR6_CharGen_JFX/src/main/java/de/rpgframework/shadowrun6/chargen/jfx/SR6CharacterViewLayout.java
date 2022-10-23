@@ -23,11 +23,13 @@ import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
@@ -41,6 +43,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.page.SR6MatrixDevicePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.VehiclePage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
+import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -262,11 +265,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void edit(Shadowrun6Character model, CharacterHandle handle) {
-		logger.log(Level.INFO, "ENTER: Edit "+model);
+		logger.log(Level.WARNING, "ENTER: Edit "+model);
 		this.handle = handle;
 		control.addListener(this);
-		
-		getPages().addAll(pgCareer);
 		
 		try {
 			refreshController();
@@ -275,7 +276,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			refreshToDos();
 			control.runProcessors();
 		} finally {
-			logger.log(Level.INFO, "LEAVE: Edit " + model);
+			logger.log(Level.WARNING, "LEAVE: Edit " + model);
 		}
 	}
 
@@ -295,7 +296,25 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgCareer.setController(control);
 		control.setAllowRunProcessor(true);
 		control.runProcessors();
+		
+		refreshPages();
 		refreshSidebar();
+		
+		MagicOrResonanceType mtype = control.getModel().getMagicOrResonanceType();
+		if (mtype==null) {
+			getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife);
+		} else {
+			if (mtype.usesMagic()) {
+				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear, pgLife);
+			} else if (mtype.usesResonance()) {
+				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife);
+			} else {
+				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife);
+			}
+		}
+		if (control instanceof SR6CharacterLeveller) {
+			getPages().addAll(pgCareer);
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -338,6 +357,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgGear.refresh();
 		pgLife.refresh();
 		pgCareer.refresh();
+
 	}
 
 	//-------------------------------------------------------------------

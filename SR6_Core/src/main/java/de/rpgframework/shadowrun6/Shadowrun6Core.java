@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import org.prelle.simplepersist.SerializationException;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -184,9 +186,12 @@ public class Shadowrun6Core extends GenericCore {
 		String data = new String(rawData, Charset.forName("UTF-8"));
 		try {
 			return serializer.read(Shadowrun6Character.class, data);
+		} catch (SerializationException e) {
+			logger.log(Level.ERROR, "Failed deocding XML from char, line "+e.getLine()+":"+e.getColumn(),e);
+			throw new CharacterIOException(ErrorCode.DECODING_FAILED, "Failed decoding XML: "+e.getMessage(), e);
 		} catch (IOException e) {
 			logger.log(Level.ERROR, "Failed deocding XML from char",e);
-			throw new CharacterIOException(ErrorCode.DECODING_FAILED, "Failed decoding XML", e);
+			throw new CharacterIOException(ErrorCode.DECODING_FAILED, "Failed decoding XML: "+e.getMessage(), e);
 		}
 	}
 

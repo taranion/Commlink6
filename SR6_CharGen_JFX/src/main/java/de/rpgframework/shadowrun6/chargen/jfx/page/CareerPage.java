@@ -5,31 +5,33 @@ import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.prelle.javafx.CloseType;
+import org.prelle.javafx.FlexibleApplication;
+import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.Mode;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.Reward;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.jfx.section.HistoryElementSection;
 import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
-import de.rpgframework.shadowrun.chargen.jfx.section.ContactSection;
-import de.rpgframework.shadowrun.chargen.jfx.section.LifestyleSection;
-import de.rpgframework.shadowrun.chargen.jfx.section.SINSection;
-import de.rpgframework.shadowrun6.SR6Lifestyle;
-import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
-import de.rpgframework.shadowrun6.chargen.jfx.listcell.SR6LifestyleListCell;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.SR6RewardPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CreationSection;
-import javafx.scene.control.CheckBox;
+import javafx.geometry.HPos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 
 /**
  * @author prelle
@@ -44,6 +46,7 @@ public class CareerPage extends Page {
 	private transient SR6CharacterController ctrl;
 	
 	private CreationSection secCreation;
+	private HistoryElementSection secHistory;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -59,6 +62,7 @@ public class CareerPage extends Page {
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initCreationInfo();
+		initHistoryInfo();
 	}
 	
 	//-------------------------------------------------------------------
@@ -67,15 +71,42 @@ public class CareerPage extends Page {
 		secCreation.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secCreation, 4);
 		FlexGridPane.setMinHeight(secCreation, 6);
-		FlexGridPane.setMediumWidth(secCreation, 6);
-		FlexGridPane.setMediumHeight(secCreation, 4);
+		FlexGridPane.setMediumWidth(secCreation, 5);
+		FlexGridPane.setMediumHeight(secCreation, 6);
+	}
+	
+	//-------------------------------------------------------------------
+	private void initHistoryInfo() {
+		secHistory = new HistoryElementSection() {
+			public void onAdd() {
+				logger.log(Level.ERROR, "onAdd");
+				SR6RewardPane box = new SR6RewardPane(null);
+				ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "page.career.reward.add.title"), box, CloseType.OK, CloseType.CANCEL)
+						.setImage(new Image(getClass().getResourceAsStream("Ork1.png")))
+						.setImagePosition(HPos.RIGHT);
+				CloseType close = FlexibleApplication.getInstance().showAlertAndCall(dialog, null);
+				if (close==CloseType.OK) {
+					Reward reward = box.getData();
+					logger.log(Level.WARNING, "Add reward "+reward);
+					Shadowrun6Tools.applyReward(ctrl.getModel(), reward);
+					ctrl.runProcessors();
+					secHistory.setData( GenericRPGTools.convertToHistoryElementList(ctrl.getModel(), false));
+					refresh();
+				}
+			}
+		};
+		secHistory.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secHistory, 5);
+		FlexGridPane.setMinHeight(secHistory, 6);
+		FlexGridPane.setMediumWidth(secHistory, 5);
+		FlexGridPane.setMediumHeight(secHistory, 9);
 	}
 	
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secCreation);
+		flex.getChildren().addAll(secCreation, secHistory);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -134,12 +165,6 @@ public class CareerPage extends Page {
 		this.ctrl = ctrl;
 		
 		secCreation.updateController(ctrl);
-//		
-//		if (ctrl.getClass().getSimpleName().contains("Generator")) {
-//			secContacts.setMode(Mode.BACKDROP);
-//		} else {
-//			secContacts.setMode(Mode.REGULAR);
-//		}
 
 		refresh();
 	}
@@ -147,6 +172,9 @@ public class CareerPage extends Page {
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secCreation.refresh();
+		secHistory.refresh();
+		
+		secHistory.setData( GenericRPGTools.convertToHistoryElementList(ctrl.getModel(), false));
 	}
 
 }
