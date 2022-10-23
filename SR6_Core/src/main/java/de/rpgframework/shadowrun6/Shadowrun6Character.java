@@ -182,8 +182,13 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	}
 
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.ShadowrunCharacter#getLifestyles()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<SR6Lifestyle> getLifestyles() {
-		return lifestyles;
+		return new ArrayList<>(lifestyles);
 	}
 
 	//-------------------------------------------------------------------

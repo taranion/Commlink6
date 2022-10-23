@@ -10,10 +10,13 @@ import org.prelle.javafx.MainScreen;
 import org.prelle.javafx.Page;
 import org.prelle.javafx.ScreenManagerProvider;
 
+import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.OperationMode;
 import de.rpgframework.genericrpg.items.OperationModeOption;
 import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.chargen.jfx.dialog.EditCarriedItemDialog;
@@ -23,6 +26,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -78,6 +82,12 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 			}
 			
 			lbValue.setText("\u00A5"+item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+			
+			ComplexDataItemController<ItemTemplate, CarriedItem<ItemTemplate>> charGen = controlProvider.get();
+			Possible removeable = charGen.canBeDeselected(item);
+			if (!removeable.get()) {
+				lblLock.setTooltip(new Tooltip(Shadowrun6Tools.getModificationSourceString(item.getModifications().get(0).getSource())));
+			}
 			
 			// Modes
 			if (item.getOperationModes().isEmpty()) {

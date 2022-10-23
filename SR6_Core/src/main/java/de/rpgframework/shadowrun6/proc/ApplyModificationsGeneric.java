@@ -165,6 +165,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			return false;
 		}
 		result.get().setInjectedBy(mod.getSource());
+		result.get().addModification(mod);
 		
 		logger.log(Level.WARNING, "Put item in inventory: {0}   (from {1})", result.get(), mod.getSource());
 		model.addCarriedItem(result.get());
@@ -174,13 +175,14 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 	//-------------------------------------------------------------------
 	private static boolean applyLifestyle(Shadowrun6Character model, DataItemModification mod) {
 		LifestyleQuality item = Shadowrun6Core.getItem(LifestyleQuality.class, mod.getKey());
-		UUID uuidToSet = mod.getId();
-		if (uuidToSet==null) {
-			logger.log(Level.ERROR, "When injecting lifestyles, the modification should have an id='UUID' attribute");
-			return false;
-		}
-		SR6Lifestyle value = model.getLifestyle(uuidToSet);
-		if (value == null) {
+//		UUID uuidToSet = mod.getId();
+//		if (uuidToSet==null) {
+//			logger.log(Level.ERROR, "When injecting lifestyles, the modification should have an id='UUID' attribute (from {0})", mod.getSource());
+//			return false;
+//		}
+//		SR6Lifestyle value = model.getLifestyle(uuidToSet);
+//		if (value == null) {
+		SR6Lifestyle 
 			value = new SR6Lifestyle(item);
 			if (mod instanceof ValueModification) {
 				value.setDistributed( ((ValueModification)mod).getValue() );
@@ -191,10 +193,13 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				value.addDecision(dec);
 				logger.log(Level.DEBUG, "Add decision {0} to lifestyle {1}", dec, item);
 			}
+			value.setInjectedBy(mod.getSource());
+			value.setUuid(UUID.randomUUID());
 
+			logger.log(Level.WARNING, "Inject lifestyle: {0}   (from {1})", value, mod.getSource());
 			model.addLifestyle(value);
 			logger.log(Level.DEBUG, "Add lifestyle {0} to character", item);
-		}
+//		}
 		// Mark as auto-added
 		value.addModification(mod);
 		return true;

@@ -9,10 +9,12 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.Lifestyle;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.PowerLevel;
+import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -42,9 +44,17 @@ public class ResetGenerator implements ProcessingStep {
 		Shadowrun6Character model = charGen.getModel();
 		
 		// Remove all items that are auto-injected
-		for (CarriedItem item : model.getCarriedItems()) {
-			if (item.getInjectedBy()!=null)
-				model.removeCarriedItem(item);
+		for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
+			if (tmp.getInjectedBy()!=null) {
+				logger.log(Level.WARNING, "Remove item {0} injected from {1}", tmp.getKey(), tmp.getInjectedBy());
+				model.removeCarriedItem(tmp);
+			}
+		}
+		
+		// Remove all lifestyles that are auto-injected
+		for (SR6Lifestyle tmp : model.getLifestyles()) {
+			if (tmp.getInjectedBy()!=null)
+				model.removeLifestyle(tmp);
 		}
 		
 		model.setKarmaFree(50);
