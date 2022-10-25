@@ -57,7 +57,9 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			else if (value.getUsages().stream().map(u->u.getMode()).collect(Collectors.toList()).contains(CarryMode.IMPLANTED))
 				throw new IllegalArgumentException("More than one possible CarryMode - use other select() method");
 		}
-		return select(value, null, mode, decisions);
+		OperationResult<CarriedItem<ItemTemplate>> res = select(value, null, mode, decisions);
+		parent.runProcessors();
+		return res;
 	}
 
 	//-------------------------------------------------------------------

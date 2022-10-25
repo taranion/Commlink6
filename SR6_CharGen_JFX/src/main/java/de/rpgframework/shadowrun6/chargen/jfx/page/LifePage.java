@@ -77,8 +77,8 @@ public class LifePage extends Page {
 		secSINs.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secSINs, 4);
 		FlexGridPane.setMinHeight(secSINs, 6);
-		FlexGridPane.setMediumWidth(secSINs, 6);
-		FlexGridPane.setMediumHeight(secSINs, 9);
+		FlexGridPane.setMediumWidth(secSINs, 5);
+		FlexGridPane.setMediumHeight(secSINs, 7);
 	}
 	
 	//-------------------------------------------------------------------

@@ -226,10 +226,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 		}
 		
-		if (!possible.get() || (problem!=null && problem.getSeverity()==Severity.WARNING)) {
-			btnCtrl.setDisabled(CloseType.OK, true);
-		} else {
-			btnCtrl.setDisabled(CloseType.OK, false);
+		if (btnCtrl != null) {
+			if (!possible.get() || (problem != null && problem.getSeverity() == Severity.WARNING)) {
+				btnCtrl.setDisabled(CloseType.OK, true);
+			} else {
+				btnCtrl.setDisabled(CloseType.OK, false);
+			}
 		}
 	}
 

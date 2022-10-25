@@ -255,7 +255,6 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			logger.log(Level.INFO, "Add {0} to model", item.getKey());
 			getModel().addCarriedItem(item);
 			
-			parent.runProcessors();
 			return new OperationResult<CarriedItem<ItemTemplate>>(item);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, mode);

@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.lvl;
 
+import java.lang.System.Logger.Level;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
@@ -12,11 +13,13 @@ import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 
 /**
@@ -70,6 +73,59 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		return poss;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#select(ItemTemplate, String, Decision[])
+	 */
+	@Override
+	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
+		logger.log(Level.TRACE, "ENTER select({0}, {1}", value, mode);
+		try {
+			OperationResult<CarriedItem<ItemTemplate>> result = super.select(value, variantID, mode, decisions);
+			if (result.wasSuccessful()) {
+				Shadowrun6Character model = getModel();
+				int nuyen = result.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+				logger.log(Level.INFO, "Buy {0} for {1} nuyen", value.getId(), nuyen);
+				
+				model.setNuyen( model.getNuyen() - nuyen );
+				parent.runProcessors();
+			}
+			
+			return result;
+		} finally {
+			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, mode);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
+	@Override
+	public boolean deselect(CarriedItem<ItemTemplate> value) {
+		logger.log(Level.TRACE, "ENTER deselect({0})", value);
+		try {
+			boolean success = deselect(value);
+			if (!success) {
+				return false;
+			}
+
+			Shadowrun6Character model = getModel();
+			int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+			logger.log(Level.INFO, "Sell {0} for {1} nuyen", value.getKey(), nuyen);
+			
+			model.setNuyen( model.getNuyen() - nuyen );
+			parent.runProcessors();
+			return true;
+		} finally {
+			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController#getConvertedKarma()
+	 */
 	@Override
 	public int getConvertedKarma() {
 		return 0;
