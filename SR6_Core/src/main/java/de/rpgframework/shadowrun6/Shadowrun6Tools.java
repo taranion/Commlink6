@@ -1614,7 +1614,27 @@ public class Shadowrun6Tools {
 			AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.REPUTATION);
 			val.setDistributed( val.getDistributed() + modHeat.getValue());
 		}
-		
 	}
-
+	
+	//---------------------------------------------------------
+	public static void removeReward(Shadowrun6Character model, Reward reward) {
+		logger.log(Level.INFO, "Remove reward ''{0}'' from character", reward.getTitle());
+		if (!model.removeReward(reward)) {
+			logger.log(Level.ERROR, "Trying to remove a reward that the character doesn't have");
+			return;
+		}
+		model.setKarmaFree( model.getKarmaFree() - reward.getExperiencePoints() );
+		model.setNuyen( model.getNuyen() - reward.getMoney() );
+		ValueModification modHeat = reward.getModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.HEAT.name());
+		if (modHeat!=null) {
+			AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.HEAT);
+			val.setDistributed( val.getDistributed() - modHeat.getValue());
+		}
+		ValueModification modRep = reward.getModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.REPUTATION.name());
+		if (modRep!=null) {
+			AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.REPUTATION);
+			val.setDistributed( val.getDistributed() - modHeat.getValue());
+		}		
+	}
+	
 }

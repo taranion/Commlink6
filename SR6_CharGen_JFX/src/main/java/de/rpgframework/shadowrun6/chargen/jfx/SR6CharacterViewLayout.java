@@ -268,6 +268,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		logger.log(Level.WARNING, "ENTER: Edit "+model);
 		this.handle = handle;
 		control.addListener(this);
+		extraButtonsTopProperty().remove(btnFinish);
+		Label tmp = new Label(control.getModel().getName());
+		tmp.getStyleClass().add(JavaFXConstants.STYLE_HEADING2);
+		super.pages.setHeader(tmp);
 		
 		try {
 			refreshController();
@@ -345,6 +349,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		} else {
 			lbMode.setText(ResourceI18N.get(UI, "label.mode.chargen"));
 		}
+		super.pages.getHeader().setText(control.getModel().getName());
 		
 		pgBasic.refresh();
 		pgSkills.refresh();

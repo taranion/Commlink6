@@ -14,6 +14,7 @@ import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.HistoryElement;
 import de.rpgframework.genericrpg.Reward;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
@@ -27,6 +28,7 @@ import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.listcell.SR6HistoryElementListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SR6RewardPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CreationSection;
 import javafx.geometry.HPos;
@@ -94,7 +96,17 @@ public class CareerPage extends Page {
 					refresh();
 				}
 			}
+			public void onDelete(HistoryElement elem) {
+				logger.log(Level.ERROR, "onDelete "+elem);
+				for (Reward reward : elem.getGained()) {
+					Shadowrun6Tools.removeReward(ctrl.getModel(), reward);
+				}
+				ctrl.runProcessors();
+				secHistory.setData( GenericRPGTools.convertToHistoryElementList(ctrl.getModel(), false));
+				refresh();
+			}
 		};
+		secHistory.getListView().setCellFactory( (lv) -> new SR6HistoryElementListCell(RES));
 		secHistory.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secHistory, 5);
 		FlexGridPane.setMinHeight(secHistory, 6);
