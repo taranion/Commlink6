@@ -593,7 +593,7 @@
 		<usage mode="IMPLANTED" value="0.1"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<itemmod type="HOOK" ref="MOUNTED_HOLDOUT"/>
+      	<itemmod type="HOOK" ref="IMPLANT_HOLDOUT"/>
       </modifications>
    </item>
    <item avail="3L" price="3000" id="cyber_light_pistol" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
@@ -601,7 +601,7 @@
 		<usage mode="IMPLANTED" value="0.25"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<itemmod type="HOOK" ref="MOUNTED_PISTOL_LIGHT"/>
+      	<itemmod type="HOOK" ref="IMPLANT_PISTOL_LIGHT"/>
       </modifications>
    </item>
    <item avail="4L" price="3500" id="cyber_machine_pistol" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
@@ -609,7 +609,7 @@
 		<usage mode="IMPLANTED" value="0.5"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<itemmod type="HOOK" ref="MOUNTED_PISTOL_MACHINE"/>
+      	<itemmod type="HOOK" ref="IMPLANT_PISTOL_MACHINE"/>
       </modifications>
    </item>
    <item avail="4L" price="4300" id="cyber_heavy_pistol" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
@@ -617,7 +617,7 @@
 		<usage mode="IMPLANTED" value="0.5"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<itemmod type="HOOK" ref="MOUNTED_PISTOL_HEAVY"/>
+      	<itemmod type="HOOK" ref="IMPLANT_PISTOL_HEAVY"/>
       </modifications>
    </item>
    <item avail="5L" price="4800" id="cyber_smg" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
@@ -625,7 +625,7 @@
 		<usage mode="IMPLANTED" value="1"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<itemmod type="HOOK" ref="MOUNTED_SMG"/>
+      	<itemmod type="HOOK" ref="IMPLANT_SMG"/>
       </modifications>
    </item>
    <item avail="5L" price="4800" id="cyber_shotgun" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
@@ -633,7 +633,7 @@
 		<usage mode="IMPLANTED" value="1.25"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<itemmod type="HOOK" ref="MOUNTED_SHOTGUN"/>
+      	<itemmod type="HOOK" ref="IMPLANT_SHOTGUN"/>
       </modifications>
    </item>
    <item avail="6I" price="24000" id="cyber_launcher" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
@@ -641,7 +641,7 @@
 		<usage mode="IMPLANTED" value="1.5"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<itemmod type="HOOK" ref="MOUNTED_LAUNCHER"/>
+      	<itemmod type="HOOK" ref="IMPLANT_LAUNCHER"/>
       </modifications>
    </item>
    <item avail="1" price="1000" id="external_clip_port" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">

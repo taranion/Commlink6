@@ -200,7 +200,33 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				addUserSelectableFlag(SR6ItemFlag.USES_CASELESS);
 				addUserSelectableFlag(SR6ItemFlag.CHEAP_KNOCK_OFF);
 			}
-			
+			// Also add item hook for mounted weapons
+			if (getUsage(CarryMode.EMBEDDED)==null || !getUsage(CarryMode.EMBEDDED).getSlot().name().startsWith("IMPLANT")) {
+				Usage implantUse = new Usage(CarryMode.EMBEDDED);
+				switch (subtype) {
+				case BLADES:
+				case WHIPS:
+				case CLUBS:
+					implantUse.setSlot(ItemHook.IMPLANT_MELEE); break;
+				case BOWS:
+				case CROSSBOWS:
+					implantUse.setSlot(ItemHook.IMPLANT_RANGED); break;
+				case TASERS:
+				case HOLDOUTS:
+					implantUse.setSlot(ItemHook.IMPLANT_HOLDOUT); break;
+				case PISTOLS_LIGHT  : implantUse.setSlot(ItemHook.IMPLANT_PISTOL_LIGHT); break;
+				case MACHINE_PISTOLS: implantUse.setSlot(ItemHook.IMPLANT_PISTOL_MACHINE); break;
+				case PISTOLS_HEAVY  : implantUse.setSlot(ItemHook.IMPLANT_PISTOL_HEAVY); break;
+				case SUBMACHINE_GUNS: implantUse.setSlot(ItemHook.IMPLANT_SMG); break;
+				case SHOTGUNS: implantUse.setSlot(ItemHook.IMPLANT_SHOTGUN); break;
+				case RIFLE_ASSAULT:
+				case RIFLE_HUNTING:
+				case RIFLE_SNIPER:
+					implantUse.setSlot(ItemHook.IMPLANT_RIFLES); break;
+				case LAUNCHERS: implantUse.setSlot(ItemHook.IMPLANT_LAUNCHER); break;
+				}
+				this.addUsage(implantUse);
+			}
 		}
 
 		// If it has an AUGMENTATION flag, add that decision
