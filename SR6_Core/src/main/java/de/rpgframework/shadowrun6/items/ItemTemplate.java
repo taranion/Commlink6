@@ -14,6 +14,8 @@ import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.ElementList;
 import org.prelle.simplepersist.ElementListUnion;
 
+import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
@@ -27,8 +29,10 @@ import de.rpgframework.genericrpg.items.OperationMode;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.Usage;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -228,6 +232,33 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				this.addUsage(implantUse);
 			}
 		}
+		
+		// If this is a drone, ensure there is a SOFTWARE slot with Pilot/2 round up capacity
+		if (ItemType.isDrone(type) || type.name().contains("DRONE")) {
+			this.countable = true;
+			boolean hasSoftwareSlot = getModifications().stream().anyMatch( mod -> (mod instanceof DataItemModification) && mod.getReferenceType()==ShadowrunReference.HOOK && ((DataItemModification)mod).getKey().equals(ItemHook.SOFTWARE.name()));
+			if (!hasSoftwareSlot) {
+				// Auto-add modification
+				double pilot = 0;
+				if (this.getAttribute(SR6ItemAttribute.PILOT)!=null) {
+					pilot = getAttribute(SR6ItemAttribute.PILOT).getDistributed();
+				} else if (shortcuts.stream().allMatch(sc -> sc instanceof VehicleData)) {
+					VehicleData vdata = (VehicleData) shortcuts.stream().filter(sc -> sc instanceof VehicleData).findFirst().get();
+					pilot = vdata.getPilot();
+				}
+				if (pilot>0) {					
+					ValueModification autoMod = new ValueModification(ShadowrunReference.HOOK, ItemHook.SOFTWARE.name(), (int)Math.round( pilot/2.0d));
+					autoMod.setSet(ValueType.NATURAL);
+					autoMod.setApplyTo(ApplyTo.DATA_ITEM);
+					modifications.add(autoMod);
+//					if (id.contains("cyberspace_designs_quadrotor")) {
+//						System.err.println("Auto-mod "+autoMod);
+//						System.exit(1);
+//					}
+				}
+			}
+		}
+		
 
 		// If it has an AUGMENTATION flag, add that decision
 		if (flags.contains(ItemTemplate.FLAG_AUGMENTATION) && this.getChoice(ItemTemplate.UUID_AUGMENTATION_QUALITY)==null) {

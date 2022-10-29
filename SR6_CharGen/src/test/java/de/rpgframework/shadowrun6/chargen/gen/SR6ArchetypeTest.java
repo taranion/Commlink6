@@ -1122,6 +1122,201 @@ public class SR6ArchetypeTest {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
+	public void test05Rigger() throws Exception {
+		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
+		prio.setPriority(PriorityType.ATTRIBUTE, Priority.C);
+		prio.setPriority(PriorityType.METATYPE, Priority.D);
+		prio.setPriority(PriorityType.MAGIC, Priority.E);
+		prio.setPriority(PriorityType.SKILLS, Priority.B);
+		prio.setPriority(PriorityType.RESOURCES, Priority.A);
+		assertEquals(50, model.getKarmaFree());
+		
+		SR6MetaType human = Shadowrun6Core.getItem(SR6MetaType.class, "human");
+		charGen.getMetatypeController().select(human);
+		
+		// Select adept
+		charGen.getMagicOrResonanceController().select(Shadowrun6Core.getItem(MagicOrResonanceType.class, "mundane"));
+		
+		// Qualitites
+		assertEquals(50, model.getKarmaFree());
+		IQualityController qualities = charGen.getQualityController();
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "aptitude"), 
+				new Decision(Shadowrun6Core.getItem(Quality.class, "aptitude").getChoices().get(0).getUUID(),"piloting")
+				);
+		assertTrue("Should not fail: "+res,res.wasSuccessful());
+		assertTrue( qualities.select(Shadowrun6Core.getItem(Quality.class, "bad_rep")).wasSuccessful() );
+		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "dependents"), new Decision(Shadowrun6Core.getItem(Quality.class, "dependents").getChoices().get(0).getUUID(),"Estranged Child"));
+		assertTrue(res.wasSuccessful());
+		assertTrue( qualities.select(Shadowrun6Core.getItem(Quality.class, "elf_poser")).wasSuccessful() );
+		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "in_debt"), new Decision(Shadowrun6Core.getItem(Quality.class, "dependents").getChoices().get(0).getUUID(),"Estranged Child"));
+		
+		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
+		assertEquals(12, attribs.getPointsLeft2());
+		assertEquals(4, attribs.getPointsLeft());
+		raiseAttributeTo(ShadowrunAttribute.INTUITION, 6);
+		raiseAttributeTo(ShadowrunAttribute.LOGIC    , 4);
+		raiseAttributeTo(ShadowrunAttribute.REACTION , 4);
+		raiseAttributeTo(ShadowrunAttribute.AGILITY  , 3);
+		raiseAttributeTo(ShadowrunAttribute.BODY     , 2);
+		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 2);
+		raiseAttributeTo(ShadowrunAttribute.WILLPOWER, 2);
+		raiseAttributeTo(ShadowrunAttribute.CHARISMA , 1);
+		raiseAttributeTo(ShadowrunAttribute.EDGE     , 4);
+		
+		
+		// Augmentations
+		ISR6EquipmentController equip = charGen.getEquipmentController();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+//		equip.increaseConversion();
+		OperationResult<CarriedItem<ItemTemplate>> rig = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "control_rig"),null, CarryMode.IMPLANTED, 
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"), new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "2"));
+		assertTrue(rig.wasSuccessful());
+		assertNull("Should not have imagelink", model.getCarriedItem("image_link"));
+		OperationResult<CarriedItem<ItemTemplate>> eyesR = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cybereye"),null, CarryMode.IMPLANTED, 
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"), new Decision(UUID.fromString("fcc63c09-5af7-4f00-a2d9-d7c0972597d2"), "5"));
+		assertTrue(eyesR.wasSuccessful());
+		assertNull("Should not have imagelink as non-auto accessory", model.getCarriedItem("image_link"));
+		CarriedItem<ItemTemplate> container = eyesR.get();
+		OperationResult<CarriedItem<ItemTemplate>> flare = equip.embed(container, ItemHook.CYBEREYE_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation"), "cybereye",
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(flare.wasSuccessful());
+		flare = equip.embed(container, ItemHook.CYBEREYE_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "low_light_vision"), "cybereye",
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(flare.wasSuccessful());
+		flare = equip.embed(container, ItemHook.CYBEREYE_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "smartlink"), "cybereye",
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(flare.wasSuccessful());
+		flare = equip.embed(container, ItemHook.CYBEREYE_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "thermographic_vision"), "cybereye",
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(flare.wasSuccessful());
+		
+		OperationResult<CarriedItem<ItemTemplate>> armR = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm"),"fullarm_obvious", CarryMode.IMPLANTED, 
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(armR.wasSuccessful());
+		container = armR.get();
+		flare = equip.embed(container, ItemHook.CYBERLIMB_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "attribute_increase"), null,
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "4"),
+				new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "STRENGTH")
+				);
+		assertTrue(flare.wasSuccessful());
+		flare = equip.embed(container, ItemHook.CYBERLIMB_IMPLANT, Shadowrun6Core.getItem(ItemTemplate.class, "cyber_smg"), null,
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(flare.wasSuccessful());
+		flare = equip.embed(flare.get(), ItemHook.IMPLANT_SMG, Shadowrun6Core.getItem(ItemTemplate.class, "uzi_iv"), null);
+		assertTrue(flare.wasSuccessful());
+		
+		// Gear
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "shop"), new Decision(UUID.fromString("8d33356c-f3d4-4387-a6a2-a9575c449ae7"), "engineering")).wasSuccessful());
+		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_jacket")).wasSuccessful());
+		SINController sinCtrl = charGen.getSINController();
+		SIN sin =sinCtrl.createNewSIN("Name it", FakeRating.SUPERFICIALLY_PLAUSIBLE);
+		assertNotNull(sin);
+		sinCtrl.createNewLicense(sin, FakeRating.SUPERFICIALLY_PLAUSIBLE, "Cyberware license");
+		sinCtrl.createNewLicense(sin, FakeRating.SUPERFICIALLY_PLAUSIBLE, "RCC license");
+		sin =sinCtrl.createNewSIN("Name it", FakeRating.ROUGH_MATCH);
+		assertNotNull(sin);
+		sinCtrl.createNewLicense(sin, FakeRating.ROUGH_MATCH, "Cyberware license");
+		sinCtrl.createNewLicense(sin, FakeRating.ROUGH_MATCH, "RCC license");
+		OperationResult<CarriedItem<ItemTemplate>> rcc = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "proteus_poseidon"),null, CarryMode.CARRIED);
+		assertTrue(rcc.wasSuccessful());
+		container = rcc.get();
+		assertTrue( equip.embed(container, ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful() );
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "clearsight"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5")).wasSuccessful() );
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "electronic_warfare"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5")).wasSuccessful() );
+		// Commlink
+		OperationResult<CarriedItem<ItemTemplate>> comm = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "transys_avalon"),null, CarryMode.CARRIED);
+		assertTrue(comm.wasSuccessful());
+		container = comm.get();
+		assertTrue( equip.embed(container, ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful() );
+
+		// Vehicles
+		// Drone 1
+		OperationResult<CarriedItem<ItemTemplate>> drone1 = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "chrysler-nissan_pursuit_v"),null, CarryMode.CARRIED);
+		assertTrue(drone1.wasSuccessful());
+		container = drone1.get();
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "chrysler-nissan_pursuit_v")
+				).wasSuccessful() );
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "chrysler-nissan_pursuit_v")
+				).wasSuccessful() );
+		// Drone 2
+		OperationResult<CarriedItem<ItemTemplate>> drone2 = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberspace_designs_dalmatian"),null, CarryMode.CARRIED);
+		assertTrue(drone2.wasSuccessful());
+		assertTrue( equip.canBeIncreased(drone2.get()).get());
+		assertTrue( equip.increase(drone2.get()).wasSuccessful() );
+		container = drone2.get();
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")).wasSuccessful() );
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")
+				).wasSuccessful() );
+		// Drone 3
+		OperationResult<CarriedItem<ItemTemplate>> drone3 = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberspace_designs_quadrotor"),null, CarryMode.CARRIED);
+		assertTrue( equip.increase(drone3.get()).wasSuccessful() );
+		assertTrue( equip.increase(drone3.get()).wasSuccessful() );
+		assertTrue( equip.increase(drone3.get()).wasSuccessful() );
+		container = drone3.get();
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")).wasSuccessful() );
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")
+				).wasSuccessful() );
+		// Van
+		assertTrue (equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "gmc_bulldog"),null, CarryMode.CARRIED).wasSuccessful() );		
+		// Drone 4
+		OperationResult<CarriedItem<ItemTemplate>> drone4 = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "gmc_micromachine"),null, CarryMode.CARRIED);
+		assertTrue( equip.increase(drone4.get()).wasSuccessful() );
+		assertTrue( equip.increase(drone4.get()).wasSuccessful() );
+		assertTrue( equip.increase(drone4.get()).wasSuccessful() );
+		assertTrue( equip.increase(drone4.get()).wasSuccessful() );
+		container = drone4.get();
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "gmc_micromachine")
+				).wasSuccessful() );
+		// Drone 5
+		OperationResult<CarriedItem<ItemTemplate>> drone5 = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "gm-nissan_dobermann"),null, CarryMode.CARRIED);
+		assertTrue( equip.increase(drone5.get()).wasSuccessful() );
+		container = drone5.get();
+		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
+				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "gm-nissan_dobermann")
+				).wasSuccessful() );
+		// Mirage
+		assertTrue (equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "suzuki_mirage"),null, CarryMode.CARRIED).wasSuccessful() );		
+		
+		model.setName("Rigger");
+		
+		byte[] raw = Shadowrun6Core.encode(model);
+		String xml = new String(raw);
+		System.out.println(xml);
+		
+		// Try to reload it again
+		Shadowrun6Core.decode(raw);
+	}	
+	
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	@Test
 	public void test07StreetSamurai() throws Exception {
 		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.B);

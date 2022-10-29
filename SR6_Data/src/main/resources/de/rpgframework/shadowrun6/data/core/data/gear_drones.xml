@@ -40,6 +40,9 @@
 	<!-- Small drones -->
 	<item avail="3" price="11000" id="chrysler-nissan_pursuit_v" type="DRONE_SMALL" subtype="GROUND">
 		<vehicle han="3/6" acc="30" spdi="50" tspd="280" bod="4" arm="2" pil="4" sen="3" />
+      <!--modifications>
+         <valmod type="HOOK" ref="SOFTWARE" value="$PILOT/2"/>
+      </modifications-->
 	</item>
 	<item avail="2" price="4500" id="aztechnology_crawler" type="DRONE_SMALL" subtype="GROUND">
 		<vehicle han="3/4" acc="8" spdi="10" tspd="30" bod="6" arm="2" pil="2" sen="2" />

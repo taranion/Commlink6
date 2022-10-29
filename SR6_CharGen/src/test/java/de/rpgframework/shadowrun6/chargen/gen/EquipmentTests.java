@@ -30,7 +30,6 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
-import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 
 /**
  * @author prelle
@@ -92,6 +91,7 @@ public class EquipmentTests {
 		
 		Decision dec = new Decision(tempContacts.getChoices().get(0).getUUID(), "3");
 		CarriedItem<ItemTemplate> ref = new CarriedItem<ItemTemplate>(tempContacts, null, CarryMode.CARRIED);
+		SR6GearTool.recalculate("", null, ref);
 		ref.addDecision(dec);
 		ref.addAccessory(new CarriedItem<ItemTemplate>(tempLowLV, null, CarryMode.EMBEDDED), ItemHook.OPTICAL);
 		ref.addAccessory(new CarriedItem<ItemTemplate>(tempFlare, null, CarryMode.EMBEDDED), ItemHook.OPTICAL);

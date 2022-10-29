@@ -4,7 +4,7 @@
 		<usage mode="CARRIED"/>
 		<modifications>
 			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-			<itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
 		</modifications>
@@ -15,7 +15,7 @@
 		<usage mode="CARRIED"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
@@ -26,7 +26,7 @@
 		<usage mode="CARRIED"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
@@ -37,7 +37,7 @@
 		<usage mode="CARRIED"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
@@ -49,7 +49,7 @@
 		<usage mode="EMBEDDED" slot="COMMLINK"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
@@ -61,7 +61,7 @@
 		<usage mode="EMBEDDED" slot="COMMLINK"/>
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
       </modifications>
@@ -73,7 +73,7 @@
    <item avail="3I" price="24750" id="erika_mcd6" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
@@ -84,7 +84,7 @@
    <item avail="3I" price="61500" id="spinrad_falcon" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
@@ -95,7 +95,7 @@
    <item avail="3I" price="95000" id="mct_360" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
@@ -106,7 +106,7 @@
    <item avail="4I" price="107000" id="renraku_kitsune" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
@@ -117,7 +117,7 @@
 	<item avail="5I" price="172500" id="shiawase_cyber6" type="ELECTRONICS" subtype="CYBERDECK">
 		<modifications>
 			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY" />
-			<itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
@@ -128,7 +128,7 @@
    <item avail="6I" price="410600" id="fairlight_excalibur" type="ELECTRONICS" subtype="CYBERDECK">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING"/>
@@ -141,7 +141,7 @@
    <item avail="1L" price="1400" id="scratch_built_junk" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
@@ -152,7 +152,7 @@
    <item avail="3L" price="8000" id="allegiance_control_center" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
@@ -163,7 +163,7 @@
    <item avail="3L" price="16000" id="essy_motors_drone_master" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
@@ -174,7 +174,7 @@
    <item avail="4L" price="32000" id="horizons_overseer" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
@@ -185,7 +185,7 @@
    <item avail="5L" price="34000" id="maersk_spider" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
@@ -196,7 +196,7 @@
    <item avail="5L" price="66000" id="vulcan_liegelord" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
@@ -207,7 +207,7 @@
    <item avail="6L" price="68000" id="proteus_poseidon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
@@ -218,7 +218,7 @@
    <item avail="7L" price="75000" id="transys_eidolon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
        <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
-         <itemmod type="HOOK" ref="SOFTWARE" />
+         <valmod type="HOOK" ref="SOFTWARE" value="$DEVICE_RATING"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>

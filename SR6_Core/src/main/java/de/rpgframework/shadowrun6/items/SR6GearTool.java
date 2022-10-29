@@ -33,6 +33,7 @@ public class SR6GearTool extends GearTool {
 			new SR6ResolveFormulasStep(),
 			new ApplyAmmunitionTypeStep(),
 			new ApplyStockModificationsStep(),
+			new AddMissingVehicleSlots(),
 			new SR6ResolveTemplatesStep()
 	};
 

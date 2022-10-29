@@ -35,10 +35,7 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 
 	private List<ShadowrunAttribute> metatypeAttribute;
 
-	// -------------------------------------------------------------------
-	/**
-	 * @param parent
-	 */
+	//-------------------------------------------------------------------
 	public SR6AttributeLeveller(SR6CharacterController parent) {
 		super(parent);
 		metatypeAttribute = new ArrayList<>();

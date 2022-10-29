@@ -65,6 +65,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 					// Shadowrun6Tools.instantiateModification
 					// um CHOICEs (z.B. von Reflex Recorder) mit Entscheidung zu verknüpfen
 					Modification realMod = mod.getReferenceType().instantiateModification(mod, item, model);
+					logger.log(Level.INFO, "--item "+item.getKey()+": realMod="+realMod);
 					
 //					if (mod instanceof ValueModification) {
 //						ValueModification vMod = ((ValueModification)mod);

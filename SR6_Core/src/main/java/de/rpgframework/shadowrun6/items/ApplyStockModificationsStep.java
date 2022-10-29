@@ -11,11 +11,10 @@ import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.AAvailableSlot;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.Formula;
-import de.rpgframework.genericrpg.items.formula.FormulaImpl;
-import de.rpgframework.genericrpg.items.formula.FormulaTool;
-import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.DataItemModification;
+import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -46,13 +45,19 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		
 		// Read all modifications that are meant for this item		
 		for (Modification tmp : model.getModifications()) {
-			logger.log(Level.DEBUG, "Process {0}", tmp);
-			if (tmp instanceof ValueModification) {
-				applyModification(indent, charac, model, (ValueModification) tmp);
-			} else if (tmp instanceof DataItemModification) {
-				applyModification(indent, charac, model, (DataItemModification) tmp);
-			} else {
-				logger.log(Level.ERROR, "Unsupported modification: " + tmp);
+			try {
+				logger.log(Level.DEBUG, "Process {0}", tmp);
+				if (tmp instanceof ValueModification) {
+					applyModification(indent, charac, model, (ValueModification) tmp);
+				} else if (tmp instanceof EmbedModification) {
+					embedModification(indent, charac, model, (EmbedModification) tmp);
+				} else if (tmp instanceof DataItemModification) {
+					applyModification(indent, charac, model, (DataItemModification) tmp);
+				} else {
+					logger.log(Level.ERROR, "Unsupported modification: " + tmp);
+				}
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Error processing "+tmp,e);
 			}
 
 		}
@@ -112,9 +117,14 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				AvailableSlot slot = new AvailableSlot(hook, model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS).getDistributed());
 				model.addSlot(slot);
 			} else {
-				logger.log(Level.INFO, indent + "Add slot {0} without capacity ", hook);
-				AvailableSlot slot = new AvailableSlot(hook);
+				if (mod.isRemove()) {
+					logger.log(Level.INFO, indent + "Remove slot {0} from {1}", hook, mod.getSource());
+					model.removeSlot(hook);
+				} else {
+				logger.log(Level.INFO, indent + "Add slot {0} without capacity from {1}", hook, mod.getSource());
+				AvailableSlot slot = (hook.hasCapacity)?(new AvailableSlot(hook)):(new AvailableSlot(hook));
 				model.addSlot(slot);
+				}
 			}
 			return;
 		case GEAR:
@@ -122,6 +132,44 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			return;
 		}
 		logger.log(Level.WARNING, "ToDo: DataItemModification " + mod);
+//		model.addModification(mod);
+	}
+
+	// -------------------------------------------------------------------
+	@SuppressWarnings("rawtypes")
+	private void embedModification(String indent, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
+		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
+			model.addCharacterModification(mod);
+			logger.log(Level.WARNING, "Ignore for now " + mod);
+			return;
+		}
+
+		Decision[] decs = new Decision[mod.getDecisions().size()];
+		decs = mod.getDecisions().toArray(decs);
+		switch ((ShadowrunReference) mod.getReferenceType()) {
+		case GEAR:
+			ItemTemplate templ = mod.getReferenceType().resolve(mod.getKey());
+			ItemHook hook = mod.getHook();
+			logger.log(Level.INFO, "Add instanceof {0} into hook {1} of {2}", mod.getKey(), hook, model.getKey());
+			OperationResult<CarriedItem<ItemTemplate>> carriedR = SR6GearTool.buildItem(templ, CarryMode.EMBEDDED, charac, false, decs);
+			if (carriedR.hasError()) {
+				logger.log(Level.ERROR, "Error embedding {0} into kook {1} of {2}: {3}", mod.getKey(), hook, model.getKey(),carriedR.getError());
+				return;
+			}
+			CarriedItem accessory = carriedR.get();
+			accessory.setInjectedBy(mod.getSource());
+			accessory.addModification(mod);
+			//if (mod.isIncludedInStats())
+			// Check if AvailableSlot already exists - if not, create one
+			AvailableSlot slot = (AvailableSlot) model.getSlot(hook);
+			if (slot==null) {
+				slot = new AvailableSlot(hook);
+				model.addSlot(slot);
+			}
+			slot.addEmbeddedItem(accessory);
+			return;
+		}
+		logger.log(Level.WARNING, "ToDo: EmbedModification " + mod);
 //		model.addModification(mod);
 	}
 

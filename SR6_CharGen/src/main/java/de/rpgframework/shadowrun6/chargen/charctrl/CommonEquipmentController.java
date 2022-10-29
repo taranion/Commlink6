@@ -461,8 +461,10 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		CarriedItem<ItemTemplate> toEmbed = res.get();
 		AvailableSlot realSlot = (AvailableSlot) container.getSlot(slot);
 		logger.log(Level.INFO, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
-		if (realSlot==null) throw new NullPointerException("No slot "+slot+" in container "+container);
-		logger.log(Level.INFO, "Items in slot={0},  free capacity={1}", realSlot.getAllEmbeddedItems().size(), realSlot.getFreeCapacity());
+		if (realSlot==null) { 
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SUCH_SLOT, slot.name(), container.getNameWithoutRating());			
+		}
+		logger.log(Level.INFO, "Items in slot={0},  free capacity={1}  Slot {2} hasCapacity={3}", realSlot.getAllEmbeddedItems().size(), realSlot.getFreeCapacity(), slot.name(), slot.hasCapacity());
 		if (slot.hasCapacity()) {
 			float free = realSlot.getFreeCapacity();
 			float required = 1;
@@ -500,14 +502,12 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			if (variantID!=null)
 				variant = (SR6PieceOfGearVariant) value.getVariant(variantID);
 			OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, variant, getModel(), true, decisions);
-			logger.log(Level.ERROR, "ToDo: really embed");
-			if (res.wasSuccessful()) {
-				container.addAccessory(res.get(), slot);
-			} else {
+			if (!res.wasSuccessful()) {
 				logger.log(Level.ERROR, "Error building item: "+res.getMessages());
-				System.exit(1);
+				return res;
 			}
-			logger.log(Level.ERROR, "ToDo: recalculate item after embedding");
+			container.addAccessory(res.get(), slot);
+			logger.log(Level.DEBUG, "recalculate item after embedding");
 			GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
 			logger.log(Level.INFO, "Embedded {0} into {1}", value.getId()+"/"+variant, container.getKey());
 			

@@ -24,9 +24,9 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -87,7 +87,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				return new OperationResult<>(poss);
 			}
 			
-			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
+			OperationResult<CarriedItem<ItemTemplate>> ret = SR6GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
 			logger.log(Level.INFO, "Add {0} to model", item.getKey());
@@ -134,7 +134,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 						Decision[] dec = new Decision[mod.getDecisions().size()];
 						OperationResult<CarriedItem<ItemTemplate>> carry = GearTool.buildItem(template, CarryMode.EMBEDDED, getModel(), true, mod.getDecisions().toArray(dec));
 						carry.get().addModification(mod);
-						logger.log(Level.DEBUG, "add {0}", template);
+						logger.log(Level.DEBUG, "add {0} due to {1}", template, tmp.getSource());
 						model.addCarriedItem(carry.get());
 					} else
 						unprocessed.add(tmp);

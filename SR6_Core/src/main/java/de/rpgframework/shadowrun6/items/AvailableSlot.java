@@ -59,7 +59,10 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 			for (CarriedItem<ItemTemplate> accessory : embedded) {
 				float size = 1.0f;
 				if (accessory.hasAttribute(SR6ItemAttribute.SIZE)) {
-					size = accessory.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue();
+					if (accessory.isFloat(SR6ItemAttribute.SIZE))
+						size = accessory.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue();
+					else
+						size = accessory.getAsValue(SR6ItemAttribute.SIZE).getModifiedValue();
 				}
 				free -= size;
 			}

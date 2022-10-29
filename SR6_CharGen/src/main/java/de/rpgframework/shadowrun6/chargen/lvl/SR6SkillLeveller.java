@@ -33,12 +33,8 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class SR6SkillLeveller extends CommonSkillController {
 
 	//-------------------------------------------------------------------
-	/**
-	 * @param parent
-	 */
 	public SR6SkillLeveller(SR6CharacterController parent) {
 		super(parent);
-		// TODO Auto-generated constructor stub
 	}
 
 	//-------------------------------------------------------------------
