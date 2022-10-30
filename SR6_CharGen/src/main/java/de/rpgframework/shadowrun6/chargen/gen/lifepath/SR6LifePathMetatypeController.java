@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 
 import java.lang.System.Logger.Level;
 import java.text.Collator;
@@ -26,6 +26,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.gen.LifePathCharacterGenerator;
 
 /**
  * @author prelle

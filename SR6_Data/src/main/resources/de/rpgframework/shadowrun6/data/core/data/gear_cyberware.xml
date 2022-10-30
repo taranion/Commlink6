@@ -215,7 +215,7 @@
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
          <valmod type="HOOK" ref="CYBEREAR_IMPLANT" value="$RATING" table="1,4,8,12,16"/>
-         <embed  type="GEAR" ref="soundlink" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed  type="GEAR" ref="soundlink" intoType="HOOK" intoRef="INTERNAL" included="true" apply="DATA_ITEM"/>
        	<checkmod type="SKILL" ref="perception" value="1" what="EDGE"/>
       </modifications>
    </item>

@@ -20,12 +20,12 @@ import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
-import de.rpgframework.shadowrun.chargen.gen.APrioritySettings;
+import de.rpgframework.shadowrun.chargen.gen.IPrioritySettings;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.SkinProperties;
 import de.rpgframework.shadowrun6.SR6SkillValue;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySkillGenerator;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
@@ -509,9 +509,9 @@ public class Shadowrun3PoolSkillTableGridSkin extends SkinBase<Shadowrun2PoolSki
 		btnDecAllMin.entrySet().forEach(e -> e.getValue().setDisable(!canBeDecreasedMinimal(e.getKey())));
 		btnIncAllMin.entrySet().forEach(e -> e.getValue().setDisable(!canBeIncreasedMinimal(e.getKey())));
 		
-		APrioritySettings settings = (APrioritySettings) model.getCharGenSettings(APrioritySettings.class);
+		IPrioritySettings settings = (IPrioritySettings) model.getCharGenSettings(IPrioritySettings.class);
 		for (SR6SkillValue key : getSkinnable().getController().getModel().getSkillValues()) {
-			PerAttributePoints per = settings.perAttrib.get(key);
+			PerAttributePoints per = settings.perAttrib().get(key);
 			
 			lblAll.get(key).setText(String.valueOf(key.getDistributed())+"~");
 			if (lblAdj.get(key)!=null) {

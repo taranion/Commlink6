@@ -33,7 +33,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
 import javafx.scene.image.Image;
 

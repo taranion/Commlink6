@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
@@ -18,15 +18,11 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
  * @author prelle
  *
  */
-public class SR6AdeptPowerGenerator extends SR6AdeptPowerController {
+public class SR6PriorityAdeptPowerGenerator extends SR6AdeptPowerController {
 
 	//-------------------------------------------------------------------
-	/**
-	 * @param parent
-	 */
-	public SR6AdeptPowerGenerator(SR6CharacterController parent) {
+	public SR6PriorityAdeptPowerGenerator(SR6CharacterController parent) {
 		super(parent);
-		// TODO Auto-generated constructor stub
 	}
 
 	//-------------------------------------------------------------------
@@ -71,7 +67,7 @@ public class SR6AdeptPowerGenerator extends SR6AdeptPowerController {
 			case FINAL_MAGIC:
 				ret = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
 			}
-			ret += settings.mysticAdeptPowerPoints;
+			ret += settings.getMagicForPP();
 			logger.log(Level.INFO, "Mystic adept - get {0,number,integer} power points from MAGIC", ret);
 
 			return ret;

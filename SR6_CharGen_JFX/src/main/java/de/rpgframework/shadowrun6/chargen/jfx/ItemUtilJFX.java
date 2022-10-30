@@ -25,6 +25,7 @@ import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
@@ -140,15 +141,14 @@ public class ItemUtilJFX {
 			addColumn(table, item, SR6ItemAttribute.AVAILABILITY , 40);
 			addColumn(table, item, SR6ItemAttribute.PRICE , 60);
 		}
-		if (table.getChildren().isEmpty())
-			return null;
 
 		
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");
 		box.setMaxWidth(Double.MAX_VALUE);
 		
-		box.getChildren().add(table);
+		if (!table.getChildren().isEmpty())
+			box.getChildren().add(table);
 		box.getChildren().add(getAccessoryInfoNode(item, ctrl, detailed));
 
 		return box;
@@ -413,7 +413,7 @@ public class ItemUtilJFX {
 		switch (attr) {
 		case AMMUNITION:
 			obj = item.getAsObject(attr).getModifiedValue();
-			ret.setText(String.valueOf( (List)obj));
+			ret.setText( String.join(", ", ((List<AmmunitionSlot>)obj).stream().map(a -> a.toString()).toList()) );
 			break;
 		case AVAILABILITY:
 			obj = item.getAsObject(attr).getModifiedValue();

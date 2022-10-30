@@ -47,6 +47,8 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuySR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 
 /**

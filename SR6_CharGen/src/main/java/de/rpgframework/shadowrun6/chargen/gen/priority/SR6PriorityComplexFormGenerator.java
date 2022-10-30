@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import de.rpgframework.shadowrun.chargen.gen.IComplexFormGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6ComplexFormGenerator;
 
 /**
  * @author prelle

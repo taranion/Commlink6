@@ -32,7 +32,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6SkillTablePrioSkin;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;

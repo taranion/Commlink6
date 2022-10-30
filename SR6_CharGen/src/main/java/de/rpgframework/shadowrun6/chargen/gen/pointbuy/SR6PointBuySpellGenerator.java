@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
@@ -21,7 +20,6 @@ import de.rpgframework.shadowrun.chargen.gen.ISpellGenerator;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
@@ -30,13 +28,12 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
  * @author prelle
  *
  */
-public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implements SR6SpellController, ISpellGenerator<SR6Spell> {
+public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implements SR6SpellController, ISpellGenerator<SR6Spell> {
 	
-	private int freeSpells;
-	private int maxFree;
+	private int maxSpells;
 
 	//-------------------------------------------------------------------
-	protected SR6PrioritySpellGenerator(SR6CharacterController parent) {
+	protected SR6PointBuySpellGenerator(SR6CharacterController parent) {
 		super(parent);
 	}
 
@@ -46,11 +43,11 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 */
 	@Override
 	public int getFreeSpells() {
-		return freeSpells;
+		return 0;
 	}
 	
 	//-------------------------------------------------------------------
-	public int getMaxFree() { return maxFree; }
+	public int getMaxFree() { return 0; }
 
 
 	//-------------------------------------------------------------------
@@ -117,12 +114,12 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 		
-		if (freeSpells<1) {
-			boolean karmaAllowed =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
-			if (karmaAllowed && getModel().getKarmaFree()>=5) {
-				return Possible.TRUE;
-			}
-			
+		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+		if (settings.perSpellPayedWithCP.size()>=maxSpells) {
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MAX_COMPLEX_FORMS, maxSpells);
+		}
+		
+		if (settings.characterPoints<2 && parent.getModel().getKarmaFree()<5) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 		}
 			
@@ -149,6 +146,8 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 			}
 			
 			getModel().addSpell(toAdd);
+			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
+			settings.perSpellPayedWithCP.put(toAdd, true);
 			logger.log(Level.INFO, "Added spell {0}", toAdd);
 			
 			parent.runProcessors();
@@ -207,8 +206,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 */
 	@Override
 	public float getSelectionCost(SR6Spell data) {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
 
 	//-------------------------------------------------------------------
@@ -231,40 +229,28 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 
 		try {
 			todos.clear();
-			freeSpells = 0;
 			
 			Shadowrun6Character model = getModel();
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {				
-				SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
+			maxSpells = 0;
+
+			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {
+				maxSpells = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
 				if (model.getMagicOrResonanceType().usesPowers()) {
-					// Mystic adept
-					freeSpells = (settings.mysticAdeptMaxPoints - settings.mysticAdeptPowerPoints) *2;
-				} else {
-					freeSpells = settings.perAttrib.get(ShadowrunAttribute.MAGIC).base * 2;
+					// "mystic adepts subtract PP from Magic for this calculation"
+					maxSpells -= settings.getMagicForPP();
 				}
-				logger.log(Level.INFO, "Have {0} free spells", freeSpells);
 			}
-			maxFree = freeSpells;
+			logger.log(Level.INFO, "May buy up to {0} spells", maxSpells);
 			
-			int byKarma = 0;
 			for (SpellValue<? extends ASpell> val : model.getSpells()) {
-				if (freeSpells>0)
-					freeSpells--;
-				else {
-					byKarma++;
+				Boolean withCP = settings.perSpellPayedWithCP.get(val);
+				if (withCP!=null && withCP) {
+					settings.characterPoints-=2;
+					logger.log(Level.INFO, "Pay spell ''{0}'' with 2 CP", val.getModifyable().getId());
+				} else {
 					model.setKarmaFree( model.getKarmaFree() -5 );
 					logger.log(Level.INFO, "Pay spell ''{0}'' with 5 Karma", val.getModifyable().getId());
-				}
-			}
-			
-			// Summary and eventually warn
-			logger.log(Level.INFO, "Have {0} remaining free spells", freeSpells);
-			if (freeSpells>0) {
-				todos.add(new ToDoElement(Severity.WARNING, "Unused spells"));
-			} else if (byKarma>0) {
-				boolean karmaAllowed =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
-				if (!karmaAllowed) {
-					todos.add(new ToDoElement(Severity.STOPPER, "Too many spells bought"));
 				}
 			}
 			

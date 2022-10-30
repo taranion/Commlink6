@@ -22,7 +22,7 @@ import de.rpgframework.shadowrun.chargen.jfx.wizard.PriorityTable;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;

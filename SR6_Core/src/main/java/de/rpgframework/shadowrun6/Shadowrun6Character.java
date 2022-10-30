@@ -246,7 +246,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 
 	//-------------------------------------------------------------------
 	public List<RelevanceModification> getRelevanceModifications(RelevanceType type) {
-		return relevanceMods.stream().filter( mod -> (mod.getType().equals(type))).collect(Collectors.toList());
+		return relevanceMods.stream().filter( mod -> (mod.getType().equals(type.name()))).collect(Collectors.toList());
 	}
 
 	//-------------------------------------------------------------------

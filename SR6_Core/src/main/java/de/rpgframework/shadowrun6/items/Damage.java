@@ -33,6 +33,7 @@ public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implem
 	public Damage(Damage copy, List<Modification> mods) {
 		super(SR6ItemAttribute.DAMAGE);
 		super.modifications.addAll(mods);
+		value       = copy.value;
 		type        = copy.getType();
 		element     = copy.getElement();
 		modifications.addAll(mods);

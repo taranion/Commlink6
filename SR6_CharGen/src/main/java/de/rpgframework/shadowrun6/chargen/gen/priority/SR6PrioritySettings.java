@@ -1,40 +1,51 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import de.rpgframework.shadowrun.Priority;
+import de.rpgframework.shadowrun.PriorityOption;
 import de.rpgframework.shadowrun.PriorityType;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
-import de.rpgframework.shadowrun.chargen.gen.APrioritySettings;
+import de.rpgframework.shadowrun.chargen.gen.IPrioritySettings;
+import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
 /**
  * @author Stefan Prelle
  *
  */
-public class SR6PrioritySettings extends APrioritySettings implements CommonSR6GeneratorSettings {
+public class SR6PrioritySettings extends CommonSR6GeneratorSettings implements IPrioritySettings {
+
+	/** Selected priorities */
+	public Map<PriorityType, Priority> priorities;
+	/** How points and karma is spent on attribute */
+	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib;
+	
+	public transient Map<PriorityType, List<PriorityOption>> options;
 
 	public int mysticAdeptMaxPoints;
-	public int mysticAdeptPowerPoints;
-	/**
-	 * Karma points converted to Nuyen
-	 */
-	int usedKarma;
 	
 	/** Modifier to apply to customization karma */
 	public int karmaMod;
 	public Map<String, PerSkillPoints> perSkill;
-	
-	private int toNuyen;
-	private int toContacts;
 
 	//-------------------------------------------------------------------
 	public SR6PrioritySettings() {
+		priorities = new LinkedHashMap<PriorityType, Priority>();
+		perAttrib = new LinkedHashMap<>();
+		options   = new LinkedHashMap<PriorityType, List<PriorityOption>>();
+		
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			perAttrib.put(key, new PerAttributePoints());
+		}
 		perSkill = new LinkedHashMap<>();
 		priorities.put(PriorityType.METATYPE, Priority.C);
 		priorities.put(PriorityType.ATTRIBUTE, Priority.A);
@@ -42,6 +53,14 @@ public class SR6PrioritySettings extends APrioritySettings implements CommonSR6G
 		priorities.put(PriorityType.SKILLS, Priority.B);
 		priorities.put(PriorityType.RESOURCES, Priority.D);
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IPrioritySettings#perAttrib()
+	 */
+	@Override
+	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib() { return perAttrib; }
+	public Map<PriorityType, Priority> priorities() { return priorities; }
 	
 	//-------------------------------------------------------------------
 	public String toSkillString() {
@@ -87,16 +106,16 @@ public class SR6PrioritySettings extends APrioritySettings implements CommonSR6G
 		perSkill.remove(id);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IPrioritySettings#setPriorityOptions(de.rpgframework.shadowrun.PriorityType, java.util.List)
+	 */
 	@Override
-	public int getKarmaToNuyen() { return toNuyen; }
-
-	@Override
-	public void setKaramToNuyen(int val) { toNuyen = val; }
-
-	@Override
-	public int getBoughtContactPoints() {return toContacts; }
-
-	@Override
-	public void setBoughtContactPoints(int val) { toContacts = val; }
+	public void setPriorityOptions(PriorityType type, List<PriorityOption> options) {
+		if (options!=null)
+			this.options.put(type, options);
+		else
+			this.options.remove(type);
+	}
 	
 }

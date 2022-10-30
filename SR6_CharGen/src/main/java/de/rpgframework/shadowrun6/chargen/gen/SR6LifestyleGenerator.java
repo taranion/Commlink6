@@ -8,6 +8,7 @@ import java.util.List;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
@@ -88,10 +89,13 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 		return RecommendationState.NEUTRAL;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getChoicesToDecide(de.rpgframework.genericrpg.data.DataItem)
+	 */
 	@Override
 	public List<Choice> getChoicesToDecide(LifestyleQuality value) {
-		// TODO Auto-generated method stub
-		return null;
+		return List.of();
 	}
 
 	//-------------------------------------------------------------------
@@ -138,16 +142,42 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeDeselected(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
 	@Override
 	public Possible canBeDeselected(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!model.getLifestyles().contains(value)) {
+			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
+		}
+		
+		return Possible.TRUE;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
 	@Override
 	public boolean deselect(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return false;
+		logger.log(Level.TRACE, "ENTER deselect({0})", value);
+		try {
+			Possible possible = canBeDeselected(value);
+			if (possible.getState()!=State.POSSIBLE) {
+				logger.log(Level.ERROR, "Trying to deselect a lifestyle that cannot be deselected: {0}",possible.getI18NKey());
+				return false;
+			}
+
+			value.setDistributed(0);
+			model.removeLifestyle(value);
+			logger.log(Level.INFO, "Remove lifestyle ''{0}''", value.getNameWithRating());
+
+			parent.runProcessors();
+			return true;
+		} finally {
+			logger.log(Level.TRACE, "LEAVE select({0})", value);
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -211,6 +241,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	 * Remove all lifestyles that have been added by modifications
 	 */
 	private void cleanUp() {
+		todos.clear();
 		for (SR6Lifestyle life : new ArrayList<>(getModel().getLifestyles())) {
 			if (life.isAutoAdded()) {
 				getModel().removeLifestyle(life);
@@ -256,6 +287,12 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 				model.setNuyen( model.getNuyen() - getLifestyleCost(val));
 			}
 			
+			// Make sure there is at laast one lifestyle
+			if (model.getLifestyles().isEmpty()) {
+				logger.log(Level.WARNING, "No lifestyle found");
+				todos.add(new ToDoElement(Severity.WARNING, IRejectReasons.IMPOSS_NO_LIFESTYLE));
+			}
+			
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
@@ -264,14 +301,26 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 
 	@Override
 	public boolean canBeIncreased(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return false;
+		return parent.getModel().getNuyen() >= value.getCostPerMonth();
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.NumericalDataItemController#increase(de.rpgframework.genericrpg.data.ComplexDataItemValue)
+	 */
 	@Override
 	public boolean increase(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return false;
+		if (!canBeDecreased(value)) {
+			logger.log(Level.ERROR, "Trying to increase lifestyle {0} which is not allowed", value);
+			return false;
+		}
+		
+		value.setDistributed( value.getDistributed() +1 );
+		logger.log(Level.INFO, "Increase paid months for lifestyle {0} to {1}", value, value.getDistributed());
+		
+		parent.runProcessors();
+		
+		return true;
 	}
 
 	//-------------------------------------------------------------------
@@ -283,10 +332,23 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 		return value.getDistributed()>1;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.NumericalDataItemController#decrease(de.rpgframework.genericrpg.data.ComplexDataItemValue)
+	 */
 	@Override
 	public boolean decrease(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return false;
+		if (!canBeDecreased(value)) {
+			logger.log(Level.ERROR, "Trying to decrease lifestyle {0} which is not allowed", value);
+			return false;
+		}
+		
+		value.setDistributed( value.getDistributed() -1 );
+		logger.log(Level.INFO, "Decrease paid months for lifestyle {0} to {1}", value, value.getDistributed());
+		
+		parent.runProcessors();
+		
+		return true;
 	}
 
 }

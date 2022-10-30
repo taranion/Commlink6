@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,14 +9,14 @@ import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
 /**
  * @author prelle
  *
  */
-public class SR6LifePathSettings {
+public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 
-	public PowerLevel variant;
 //	public int characterPoints;
 //	public int cpBoughtSpecial;
 //	public int cpBoughtAttrib;

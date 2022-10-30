@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -28,142 +28,22 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonMetatypeGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
  *
  */
-public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> implements IMetatypeController<SR6MetaType> {
+public class SR6PriorityMetatypeController extends CommonMetatypeGenerator {
 
 	private final static Logger logger = System.getLogger(SR6PriorityMetatypeController.class.getPackageName()+".meta");
 	
-	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PriorityCharacterGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
-
-	private Map<SR6MetaType, MetaTypeOption> availableOptions;
-	private static Random random = new Random();
+	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PriorityCharacterGenerator.class, Locale.ENGLISH, Locale.GERMAN);
 	
 	//-------------------------------------------------------------------
 	public SR6PriorityMetatypeController(SR6CharacterController parent) {
 		super(parent);
-		availableOptions  = new HashMap<SR6MetaType,MetaTypeOption>();
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#getAvailable()
-	 */
-	@Override
-	public List<MetaTypeOption> getAvailable() {
-		List<MetaTypeOption> ret = new ArrayList<>(availableOptions.values());
-		return ret;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#getKarmaCost(de.rpgframework.shadowrun.MetaType)
-	 */
-	@Override
-	public int getKarmaCost(SR6MetaType type) {
-		if (availableOptions.containsKey(type))
-			return availableOptions.get(type).getAdditionalKarmaKost();
-		return 0;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#canBeSelected(de.rpgframework.shadowrun.MetaType)
-	 */
-	@Override
-	public boolean canBeSelected(SR6MetaType type) {
-		if (!availableOptions.containsKey(type))
-			return false;
-		return true;
-	}
-
-	//-------------------------------------------------------------------
-	@Override
-	public void roll() {
-//		// Gender
-//		float gauss = (float)random.nextGaussian();
-//		boolean isDiverse = (gauss<-1.2 || gauss>1.2);
-//		if (isDiverse) {
-//			getModel().setGender(Gender.DIVERSE);
-//		} else {
-//			getModel().setGender( (gauss>=0.0f)?Gender.MALE:Gender.FEMALE ); 
-//		}
-
-		// Meta
-		float gauss = (float)random.nextGaussian();
-		boolean useVariants = (gauss<-1 || gauss>1);
-		logger.log(Level.WARNING, "Roll {0} means useVariants={1}", gauss, useVariants);
-		logger.log(Level.WARNING, "PRE: "+ availableOptions.keySet());
-		List<SR6MetaType> pick = availableOptions.keySet().stream().filter(m -> (useVariants?(m.getVariantOf()!=null || m.isMetahuman()==false):(m.getVariantOf()==null && m.isMetahuman()))).collect(Collectors.toList());
-		logger.log(Level.WARNING, "POST: "+ pick);
-		SR6MetaType toSelect = pick.get(random.nextInt(pick.size()));
-		logger.log(Level.WARNING, "Selected "+toSelect);
-		
-		select(toSelect);
-		
-	}
-	
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#randomizeSizeWeight()
-	 */
-	@Override
-	public void randomizeSizeWeight() {
-		// Gender
-		float gauss1 = (float)random.nextGaussian();
-		boolean isDiverse = (gauss1<-1.2 || gauss1>1.2);
-		if (isDiverse) {
-			getModel().setGender(Gender.DIVERSE);
-		} else {
-			getModel().setGender( (gauss1>=0.0f)?Gender.MALE:Gender.FEMALE ); 
-		}
-
-		MetaType value = getModel().getMetatype();
-		if (value==null)
-			return;
-		// Roll until you get a sensible distribution result
-		for (int i=0; i<10; i++) {
-			float gauss = (float)random.nextGaussian();
-			float diff  = 0.15f*gauss;
-			float diff2 = 0.10f*gauss;
-			getModel().setSize(Math.round(value.getSize()+value.getSize()*diff));
-			getModel().setWeight(Math.round(value.getWeight()+value.getWeight()*diff2));
-			if (gauss>1.0f || gauss<-1.0f)
-				continue;
-			break;
-		}	
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#select(de.rpgframework.shadowrun.MetaType)
-	 */
-	@Override
-	public boolean select(SR6MetaType value) {
-		logger.log(Level.DEBUG, "ENTER select("+value+")");
-		try {
-			if (!canBeSelected(value)) {
-				logger.log(Level.ERROR,"Trying to select {0} which is not allowed", value.getId());
-				return false;
-			}
-
-			logger.log(Level.INFO, "Select "+value);
-			if (getModel().getMetatype()==value) return true;
-			getModel().setMetatype(value);
-			randomizeSizeWeight();
-
-			parent.runProcessors();
-			return true;
-		} catch (Exception e) {
-			logger.log(Level.ERROR,"Error setting metatype",e);
-			return false;
-		} finally {
-			logger.log(Level.DEBUG, "LEAVE select("+value+")");
-		}
 	}
 
 	//-------------------------------------------------------------------
@@ -243,23 +123,6 @@ public class SR6PriorityMetatypeController extends ControllerImpl<SR6MetaType> i
 		return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
-		}
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#selectBodyType(de.rpgframework.shadowrun.BodyType)
-	 */
-	@Override
-	public boolean selectBodyType(BodyType value) {
-		logger.log(Level.DEBUG, "ENTER selectBodyType("+value+")");
-		try {
-			getModel().setBodytype(value);
-
-			parent.runProcessors();
-			return true;
-		} finally {
-			logger.log(Level.DEBUG, "LEAVE selectBodyType("+value+")");
 		}
 	}
 

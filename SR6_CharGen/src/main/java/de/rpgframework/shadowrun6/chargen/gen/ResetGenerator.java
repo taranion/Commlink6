@@ -20,6 +20,10 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -86,6 +90,7 @@ public class ResetGenerator implements ProcessingStep {
 			settings.cpBoughtSpecial = 0;
 			settings.cpToResources = 0;
 			settings.cpToSkills = 0;
+			settings.sumSpellsRituals = 0;
 			switch (level) {
 			case STREET_LEVEL:
 				settings.characterPoints = 80;

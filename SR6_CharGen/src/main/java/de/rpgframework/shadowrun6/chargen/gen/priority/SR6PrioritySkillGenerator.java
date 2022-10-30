@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
@@ -40,6 +40,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**

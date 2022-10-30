@@ -3,17 +3,11 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.List;
-import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
-import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
-import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.PartialController;
-import de.rpgframework.genericrpg.data.Choice;
-import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -32,7 +26,7 @@ public class RemainingKarmaNuyenController extends ControllerImpl<Object> implem
 	protected final static Logger logger = System.getLogger(RemainingKarmaNuyenController.class.getPackageName());
 
 	//-------------------------------------------------------------------
-	protected RemainingKarmaNuyenController(SR6CharacterController parent) {
+	public RemainingKarmaNuyenController(SR6CharacterController parent) {
 		super(parent);
 	}
 

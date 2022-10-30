@@ -15,7 +15,7 @@ import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.gen.PriorityCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;

@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -30,6 +30,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
+import de.rpgframework.shadowrun6.chargen.gen.CommonAttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -263,6 +265,9 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	 */
 	@Override
 	public Possible canBeDecreasedPoints(AttributeValue<ShadowrunAttribute> value) {
+		if (! (parent.getModel().hasCharGenSettings(SR6PrioritySettings.class))) {
+			return Possible.FALSE;
+		}
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(value.getModifyable());
 		return new Possible(per.points1>0);
 	}
@@ -273,6 +278,9 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	 */
 	@Override
 	public Possible canBeIncreasedPoints(AttributeValue<ShadowrunAttribute> value) {
+		if (! (parent.getModel().hasCharGenSettings(SR6PrioritySettings.class))) {
+			return Possible.FALSE;
+		}
 		if (adjustmentPoints<1) return new Possible(false, "zero_adjustment_points");
 
 		ShadowrunAttribute key = value.getModifyable();		
@@ -347,6 +355,9 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	 */
 	@Override
 	public Possible canBeDecreasedPoints2(AttributeValue<ShadowrunAttribute> value) {
+		if (! (parent.getModel().hasCharGenSettings(SR6PrioritySettings.class))) {
+			return Possible.FALSE;
+		}
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(value.getModifyable());
 		return new Possible(per.points2>0);
 	}
@@ -357,6 +368,10 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	 */
 	@Override
 	public Possible canBeIncreasedPoints2(AttributeValue<ShadowrunAttribute> value) {
+		if (! (parent.getModel().hasCharGenSettings(SR6PrioritySettings.class))) {
+//			logger.log(Level.ERROR, "Expect SR6PrioritySettings but got "+parent.getModel().getCharGenSettings(Object.class));
+			return Possible.FALSE;
+		}
 		ShadowrunAttribute key = value.getModifyable();		
 		if (value.getModifyable().isSpecial()) return Possible.FALSE;
 		if (attributePoints<1) return Possible.FALSE;
@@ -435,6 +450,10 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	 */
 	@Override
 	public Possible canBeDecreasedPoints3(AttributeValue<ShadowrunAttribute> value) {
+		if (! (parent.getModel().getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PrioritySettings)) {
+//			logger.log(Level.ERROR, "Expect SR6PrioritySettings but got "+parent.getModel().getCharGenSettings(Object.class));
+			return Possible.FALSE;
+		}
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(value.getModifyable());
 		return new Possible(per.points3>0);
 	}
@@ -453,6 +472,10 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 			return Possible.FALSE;
 		}
 
+		if (! (parent.getModel().getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PrioritySettings)) {
+//			logger.log(Level.ERROR, "Expect SR6PrioritySettings but got "+parent.getModel().getCharGenSettings(Object.class));
+			return Possible.FALSE;
+		}
 		PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 		if (per.getSum()>=getMaximumValue(key))
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);

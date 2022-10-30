@@ -224,7 +224,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			super.pages.setHeader(tmp);
 
 			control.addListener(this);
-			refreshController();
+			refreshController(true);
 			refreshPages();
 		
 //			GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
@@ -274,7 +274,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		super.pages.setHeader(tmp);
 		
 		try {
-			refreshController();
+			refreshController(false);
 			refreshSidebar();
 			refreshPages();
 			refreshToDos();
@@ -285,7 +285,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	}
 
 	//-------------------------------------------------------------------
-	private void refreshController() {
+	private void refreshController(boolean runProcessors) {
 		control.setAllowRunProcessor(false);
 		pgBasic.setController(control);
 		pgSkills.setController(control);
@@ -299,7 +299,6 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgLife.setController(control);
 		pgCareer.setController(control);
 		control.setAllowRunProcessor(true);
-		control.runProcessors();
 		
 		refreshPages();
 		refreshSidebar();
@@ -319,6 +318,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		if (control instanceof SR6CharacterLeveller) {
 			getPages().addAll(pgCareer);
 		}
+		
+		if (runProcessors)
+			control.runProcessors();
 	}
 
 	//-------------------------------------------------------------------
@@ -375,7 +377,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
 			control = (SR6CharacterController) param[0];
 			control.addListener(this);
-			refreshController();
+			refreshController(false);
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
 			refreshPages();

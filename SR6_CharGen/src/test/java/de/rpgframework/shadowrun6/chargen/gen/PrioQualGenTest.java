@@ -50,7 +50,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 

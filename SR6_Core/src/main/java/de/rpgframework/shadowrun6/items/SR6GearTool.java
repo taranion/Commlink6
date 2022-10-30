@@ -6,17 +6,19 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.DataErrorException;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
-import de.rpgframework.genericrpg.items.Formula;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.IItemAttribute;
-import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.items.Availability;
-import de.rpgframework.shadowrun.items.Legality;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -63,12 +65,26 @@ public class SR6GearTool extends GearTool {
 		for (int i=0; i<base.length; i++)
 			ret[i] = base[i];
 		for (Modification tmp : mods) {
-			logger.log(Level.ERROR, "########TODO: "+tmp);
+			logger.log(Level.ERROR, "########calculateModifiedARValue TODO: "+tmp);
 			if (tmp instanceof ValueModification) {
 				ValueModification mod = (ValueModification)tmp;				
 			}
 		}
 		
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public static Damage calculateModifiedValue(Damage base, List<Modification> mods) {
+		Damage ret = new Damage(base, List.of());
+		for (Modification tmp : mods) {
+			logger.log(Level.ERROR, "########calculateModifiedDamageValue: TODO: "+tmp);
+			if (tmp instanceof ValueModification) {
+				ValueModification mod = (ValueModification)tmp;	
+				ret.setValue( ret.getValue() + mod.getValue());
+			}
+		}
+		logger.log(Level.ERROR, "--->Base damage {0} plus {1} = {2}", base, mods, ret);
 		return ret;
 	}
 	
@@ -83,6 +99,91 @@ public class SR6GearTool extends GearTool {
 			if (e.getReferenceError()!=null) e.getReferenceError().setType(ShadowrunReference.GEAR);
 			throw e;
 		}
+	}
+	
+	//-------------------------------------------------------------------
+	public static int getRating(CarriedItem<ItemTemplate> item) {
+		Decision dec = item.getDecision(ItemTemplate.UUID_RATING);
+		if (dec==null) return 0;
+		return Integer.parseInt(dec.getValue());
+	}
+
+	//-------------------------------------------------------------------
+	public static SkillSpecialization<SR6Skill> getSpecializationForVehicle(ItemTemplate item) {
+		SR6Skill pilot = Shadowrun6Core.getSkill("piloting");
+		if (pilot==null)
+			return null;
+//		if (item.isNoSpecialization())
+//			return null;
+		
+		ItemType typeI = item.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue();
+		ItemSubType sub = item.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+		switch (typeI) {
+		case VEHICLES:
+			switch (sub) {
+			case BIKES:
+			case ATVS:
+			case CARS:
+			case TRUCKS:
+			case VANS:
+			case BUS:
+			case TRACKED:
+			case SPECIAL_VEHICLES:			
+			case WALKER:
+				return pilot.getSpecialization("ground_craft") ;
+			case HOVERCRAFT:
+			case PWC:
+			case BOATS:
+			case SHIPS:
+			case SUBMARINES:
+				return pilot.getSpecialization("watercraft") ;
+			case FIXED_WING:
+			case ROTORCRAFT:
+			case LAV:
+			case LTAV:
+			case GRAV:			
+			case SPACECRAFT:
+			case VTOL:
+				return pilot.getSpecialization("aircraft") ;
+			default:
+			}
+			break;
+		case DRONE_MICRO:
+		case DRONE_MINI:
+		case DRONE_SMALL:
+		case DRONE_MEDIUM:
+		case DRONE_LARGE:
+			VehicleType type = item.getAttribute(SR6ItemAttribute.VEHICLE_TYPE).getValue();
+			if (type==null) {
+				logger.log(Level.ERROR,"Cannot detect skill for drone without type");
+				return null;
+			}
+			switch (type) {
+			case GROUND:
+				return pilot.getSpecialization("ground_craft") ;
+			case AIR:
+				return pilot.getSpecialization("aircraft") ;
+			case WATER:
+				return pilot.getSpecialization("watercraft") ;
+			}
+//			switch (item.getSubtype()) {
+//			case BIKES:
+//			case CARS:
+//			case TRUCKS:
+//				return ShadowrunCore.getSkill("pilot_ground_craft");
+//			case BOATS:
+//			case SUBMARINES:
+//				return ShadowrunCore.getSkill("pilot_watercraft");
+//			case FIXED_WING:
+//			case ROTORCRAFT:
+//			case VTOL:
+//				return ShadowrunCore.getSkill("pilot_aircraft");
+//			default:
+//			}
+
+		default:
+		}
+		return null;
 	}
 
 }

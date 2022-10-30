@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger.Level;
 import java.lang.reflect.Constructor;
@@ -28,6 +28,15 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.RemainingKarmaNuyenController;
+import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 
@@ -119,8 +128,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 	//--------------------------------------------------------------------
 	private void initializeModel() {
-		if (model.getCharGenSettings(Object.class) == null) {
-			if (model.getChargenSettingsJSON() != null) {
+		if (model.getCharGenSettings(Object.class) == null  || !(model.getCharGenSettings(Object.class) instanceof SR6PrioritySettings) ) {
+			if (model.getChargenSettingsJSON() != null  && (model.getCharGenSettings(Object.class) instanceof SR6PrioritySettings)) {
 				logger.log(Level.INFO, "Restore generator config from {0}", model.getChargenSettingsJSON());
 				SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 				model.setCharGenSettings(settings);
@@ -157,8 +166,8 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		qualities = new CommonQualityGenerator(this);
 		equipment = new SR6EquipmentGenerator(this);
 		spells    = new SR6PrioritySpellGenerator(this);
-		rituals   = new SR6RitualGenerator(this);
-		adeptPowers = new SR6AdeptPowerGenerator(this);
+		rituals   = new SR6PriorityRitualGenerator(this);
+		adeptPowers = new SR6PriorityAdeptPowerGenerator(this);
 		complex   = new SR6PriorityComplexFormGenerator(this);
 		metaEcho  = new SR6MetamagicOrEchoController(this, true);
 		sins      = new SR6SINGenerator(this);

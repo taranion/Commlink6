@@ -45,6 +45,9 @@ public class CalculateAttributePools implements ProcessingStep {
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		for (ShadowrunAttribute attr : ShadowrunAttribute.values()) {
+			if (attr==ShadowrunAttribute.INITIATIVE_DICE_ASTRAL) {
+				System.err.println("CalculateAttribtePools: "+attr);
+			}
 			calculatePool(model.getAttribute(attr));
 		}
 		return unprocessed;

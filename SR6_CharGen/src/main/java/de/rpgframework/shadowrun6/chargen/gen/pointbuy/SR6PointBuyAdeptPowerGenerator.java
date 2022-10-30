@@ -1,21 +1,17 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 
 import java.lang.System.Logger.Level;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.shadowrun.AdeptPower;
-import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
-import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6AdeptPowerController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 
 /**
  * @author prelle
  *
  */
-public class SR6PointBuyAdeptPowerGenerator extends SR6AdeptPowerGenerator {
+public class SR6PointBuyAdeptPowerGenerator extends SR6AdeptPowerController {
 
 	//-------------------------------------------------------------------
 	/**

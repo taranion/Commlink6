@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -129,7 +129,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			// For mystic adepts
 			SR6PrioritySettings sett = (SR6PrioritySettings) model.getCharGenSettings(SR6PrioritySettings.class);
 			sett.mysticAdeptMaxPoints = points;
-			sett.mysticAdeptPowerPoints = Math.max(points, sett.mysticAdeptPowerPoints);
+			sett.setMagicForPP( Math.max(points, sett.getMagicForPP()) );
 			
 			// Add modifications from choice
 //			unprocessed.addAll(type.getModifications());

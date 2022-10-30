@@ -1,10 +1,12 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 
 import java.lang.System.Logger.Level;
 import java.util.List;
 
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
 
 public class SR6LifePathResetGenerator extends ResetGenerator {
 	

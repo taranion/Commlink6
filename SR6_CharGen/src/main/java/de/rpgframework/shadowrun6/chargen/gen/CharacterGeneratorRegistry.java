@@ -13,8 +13,11 @@ import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.PriorityCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SumToTenCharacterGenerator;
 
 /**
  * @author prelle
@@ -85,7 +88,7 @@ public class CharacterGeneratorRegistry {
 			prios.add(RES.format("chargeninfo.prio.resources", loc, settings.priorities.get(PriorityType.RESOURCES)));
 			ret.add( RES.getString("chargeninfo.prio", loc)+": "+String.join(", ", prios));
 			if (model.getMagicOrResonanceType().usesSpells() && model.getMagicOrResonanceType().usesPowers()) {
-				ret.add( RES.format("chargeninfo.prio.mysadpp", loc, settings.mysticAdeptPowerPoints));
+				ret.add( RES.format("chargeninfo.prio.mysadpp", loc, settings.getMagicForPP()));
 			}
 		}
 		

@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.util.Locale;
 import java.util.function.BiFunction;
@@ -63,7 +63,7 @@ public class SumToTenCharacterGenerator extends PriorityCharacterGenerator {
 
 	//--------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun5.chargen.gen.PriorityCharacterGenerator#createPriorityTableController()
+	 * @see de.rpgframework.shadowrun6.chargen.gen.priority.shadowrun5.chargen.gen.PriorityCharacterGenerator#createPriorityTableController()
 	 */
 	@Override
 	protected PriorityTableController<Shadowrun6Character,SR6PrioritySettings> createPriorityTableController() {

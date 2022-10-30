@@ -21,6 +21,8 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**

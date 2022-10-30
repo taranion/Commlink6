@@ -1,17 +1,38 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 
 import java.lang.System.Logger.Level;
+import java.lang.reflect.Constructor;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
+import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
+import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.genericrpg.data.RuleController;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
-import de.rpgframework.shadowrun6.PowerLevel;
+import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
+import de.rpgframework.shadowrun6.chargen.gen.RemainingKarmaNuyenController;
+import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityRitualGenerator;
+import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
+import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 
 /**
  * @author stefa
@@ -90,14 +111,9 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
 		this.model = model;
 		this.handle= handle;
-		this.setupDone = false;		
-		SR6PointBuySettings settings = new SR6PointBuySettings();
-		settings.variant = PowerLevel.STANDARD;
-//		settings.characterPoints = 100;
-//		model.addRule(Shadowrun6Rules.CHARGEN_ALLOW_INITIATION, "false");
-		model.setCharGenUsed(getId());
-		model.setCharGenSettings(settings);
-		model.setKarmaFree(50);
+		this.setupDone = false;	
+		
+		initializeModel();
 		logger.log(Level.INFO, "----------------Start generator-----------------------" + toString() + "\n\n\n");
 		
 		try {
@@ -122,13 +138,45 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			}
 
 			createPartialController();
-			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
+			
+			// First the regular processing steps
+			for (Class<? extends ProcessingStep> cls : Shadowrun6Tools.RECALCULATE_STEPS) {
+				try {
+					Constructor<? extends ProcessingStep> cons = null;
+					try {
+						cons = cls.getConstructor(Shadowrun6Character.class);
+					} catch (NoSuchMethodException nsm) {
+						cons = cls.getConstructor(ShadowrunCharacter.class);						
+					}
+					processChain.add(cons.newInstance(model));
+				} catch (NoSuchMethodException e) {
+					logger.log(Level.ERROR, "Missing constructor <init>(Shadowrun6Character) in "+cls);
+					System.exit(1);
+				} catch (Exception e) {
+					logger.log(Level.ERROR, "Failed instantiating "+cls,e);
+				}
+				
+			}
 			processChain.add(new ResetGenerator(this));
+			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			processChain.add(meta);
 			processChain.add(magicReso);
 			processChain.add(qualities);
+			processChain.add(qPaths);
 			processChain.add(attributes);
 			processChain.add(skills);
+			processChain.add(spells);
+			processChain.add(rituals);
+			processChain.add(adeptPowers);
+			processChain.add(equipment);
+			processChain.add(foci);
+			processChain.add(complex);
+			processChain.add(metaEcho);
+			processChain.add(sins);
+			processChain.add(lifestyles);
+			processChain.add(contacts);
+			processChain.add(new CalculateAttributePools(model, Locale.getDefault()));
+			processChain.add(new RemainingKarmaNuyenController(this));
 
 			setupDone = true;
 		} finally {
@@ -164,6 +212,26 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		return (PointBuyAttributeGenerator) super.attributes;
 	}
 
+	//--------------------------------------------------------------------
+	private void initializeModel() {
+		if (model.getCharGenSettings(CommonSR6GeneratorSettings.class) == null  || !(model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings) ) {
+			if (model.getChargenSettingsJSON() != null  && (model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings)) {
+				logger.log(Level.INFO, "Restore generator config from {0}", model.getChargenSettingsJSON());
+				SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+				model.setCharGenSettings(settings);
+			} else {
+				logger.log(Level.INFO, "Create new generator config");
+				SR6PointBuySettings settings = new SR6PointBuySettings();
+//		settings.variant = PowerLevel.STANDARD;
+				model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "human"));
+				model.setCharGenUsed(getId());
+				model.setCharGenSettings(settings);
+				model.setKarmaFree(50);
+			}
+		}
+		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
+	}
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl#createPartialController()
@@ -171,10 +239,20 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	@Override
 	protected void createPartialController() {
 		attributes = new SR6PointBuyAttributeGenerator(this);
-		meta = new PointBuyMetatypeController(this);
+		meta       = new PointBuyMetatypeController(this);
 		magicReso = new PointBuyMagicOrResonanceController(this);
 		skills = new PointBuySR6SkillGenerator(this);
 		qualities = new CommonQualityGenerator(this);
-		logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
+		equipment = new SR6EquipmentGenerator(this);
+		spells    = new SR6PointBuySpellGenerator(this);
+		rituals   = new SR6PointBuyRitualGenerator(this);
+		adeptPowers = new SR6PointBuyAdeptPowerGenerator(this);
+		complex   = new SR6PointBuyComplexFormGenerator(this);
+		metaEcho  = new SR6MetamagicOrEchoController(this, true);
+		sins      = new SR6SINGenerator(this);
+		lifestyles= new SR6LifestyleGenerator(this);
+		contacts  = new SR6ContactGenerator(this);
+		foci      = new SR6CommonFocusController(this);
+		qPaths    = new CommonQualityPathController(this);
 	}
 }

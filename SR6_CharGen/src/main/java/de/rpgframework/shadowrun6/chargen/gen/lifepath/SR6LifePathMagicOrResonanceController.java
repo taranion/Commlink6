@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -25,6 +25,7 @@ import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.gen.LifePathCharacterGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**

@@ -66,6 +66,8 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellValue;
+import de.rpgframework.shadowrun.items.AmmunitionSlot;
+import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun.proc.GetModificationsFromFoci;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
@@ -1321,13 +1323,13 @@ public class Shadowrun6Tools {
 		if (!item.hasAttribute(attr)) return "-";
 		switch (attr) {
 		case FIREMODES:
-			return String.valueOf(item.getAsObject(attr));
+			return String.join("," , ((List<FireMode>)item.getAsObject(SR6ItemAttribute.FIREMODES).getValue()).stream().map(fm -> fm.getName(Locale.getDefault())).toList() );
 		case SKILL:
 			return ((SR6Skill)item.getAsObject(attr).getValue()).getName();
 		case PRICE:
 			return String.valueOf(item.getAsObject(attr));
 		case AMMUNITION:
-			return String.valueOf(item.getAsObject(attr).getValue());
+			return String.join(", ", ((List<AmmunitionSlot>)item.getAsObject(attr).getModifiedValue()).stream().map(a -> a.toString()).toList());
 		default:
 			ItemAttributeNumericalValue val = item.getAsValue(attr);
 			if (val.getModifier()==0)

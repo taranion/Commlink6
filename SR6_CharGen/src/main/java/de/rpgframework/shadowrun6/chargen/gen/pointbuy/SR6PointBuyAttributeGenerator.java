@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -28,6 +28,7 @@ import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonAttributeGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -209,7 +210,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	}
 
 	//-------------------------------------------------------------------
-	private void payAdjustment(SR6PrioritySettings settings, ShadowrunAttribute key) {
+	private void payAdjustment(SR6PointBuySettings settings, ShadowrunAttribute key) {
 		AttributeValue aVal = parent.getModel().getAttribute(key);
 		
 		int toPay = aVal.getModifiedValue() - settings.perAttrib.get(key).base;

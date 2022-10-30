@@ -10,6 +10,10 @@ import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathMagicOrResonanceController;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathMetatypeController;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathResetGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
 
 /**
  * @author stefa

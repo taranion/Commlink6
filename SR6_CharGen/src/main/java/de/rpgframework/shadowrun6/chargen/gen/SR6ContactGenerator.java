@@ -22,7 +22,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6ContactController;
 
 /**
@@ -38,7 +37,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 	private int pointsLeft;
 
 	//-------------------------------------------------------------------
-	protected SR6ContactGenerator(SR6CharacterController parent) {
+	public SR6ContactGenerator(SR6CharacterController parent) {
 		super(parent);
 		nameGen = new ShadowrunNameGenerator();
 	}

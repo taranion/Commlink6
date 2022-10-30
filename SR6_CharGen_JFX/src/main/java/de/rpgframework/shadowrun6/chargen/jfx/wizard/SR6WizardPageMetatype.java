@@ -30,7 +30,6 @@ import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6ReferenceTypeConverter;
@@ -276,7 +275,6 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	 */
 	@Override
 	public void pageVisited() {
-		logger.log(Level.INFO, "pageVisited");
 		refresh();
 	}
 	
@@ -294,7 +292,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Found invalid data in textfields: " + e);
 			}
-
+			
 			List<SR6MetaType> items = ((IMetatypeController<SR6MetaType>)charGen.getMetatypeController()).getAvailable().stream()
 					.map(mo -> (SR6MetaType)mo.getResolved())
 					.filter(p -> charGen.showDataItem(p))
@@ -302,7 +300,6 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			Collections.sort(items, comparator);
 			contentPane.setItems(items);
 
-			logger.log(Level.DEBUG, "Metatype is {0}",model.getMetatype());
 			if (model.getMetatype() != contentPane.getSelectedItem()) {
 				contentPane.setSelectedItem(model.getMetatype());
 			}
@@ -340,7 +337,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
-		logger.log(Level.ERROR, "RCV "+type);
+		logger.log(Level.TRACE, "RCV {0}",type);
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) 
 			refresh();
 		

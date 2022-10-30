@@ -78,14 +78,14 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 			Node data = ItemUtilJFX.getItemInfoNode(item, charCtrl, false);
 			if (data!=null) {
 				bxCenter.getChildren().add(bxCenter.getChildren().indexOf(bxActions), data);
-				data.setStyle("item-info-node");
+				data.getStyleClass().add("item-info-node");
 			}
 			
 			lbValue.setText("\u00A5"+item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 			
 			ComplexDataItemController<ItemTemplate, CarriedItem<ItemTemplate>> charGen = controlProvider.get();
 			Possible removeable = charGen.canBeDeselected(item);
-			if (!removeable.get()) {
+			if (!removeable.get() && !item.getModifications().isEmpty()) {
 				lblLock.setTooltip(new Tooltip(Shadowrun6Tools.getModificationSourceString(item.getModifications().get(0).getSource())));
 			}
 			

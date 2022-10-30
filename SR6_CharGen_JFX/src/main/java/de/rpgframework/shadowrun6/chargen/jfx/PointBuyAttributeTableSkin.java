@@ -24,7 +24,7 @@ import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.SkinProperties;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PointBuySettings;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;

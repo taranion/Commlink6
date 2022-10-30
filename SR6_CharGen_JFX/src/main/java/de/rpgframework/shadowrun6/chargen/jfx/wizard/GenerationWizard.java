@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.jfx.wizard.WizardPageGenerator;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageLifestyles;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAdeptPowers;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageComplexForms;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageContacts;
@@ -36,7 +37,8 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import javafx.util.Callback;
 
 /**
@@ -68,6 +70,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
 	private WizardPageContacts contacts;
 	private WizardPageSINs sins;
+	private AWizardPageLifestyles lifestyles;
 	private Function<Class<CommonSR6CharacterGenerator>,String[]> nameGetter = gen -> {
 		String name = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName());
 		String desc = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName()+".desc");
@@ -107,6 +110,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case GEAR         : ret.add(   gear); break;
 			case CONTACTS     : ret.add(contacts); break;
 			case SIN_LICENSE  : ret.add(   sins); break;
+			case LIFESTYLE    : ret.add(lifestyles); break;
 			case NAME         : ret.add(   name); break;
 			default:
 				logger.log(Level.ERROR,"Unsupported page type "+type);
@@ -127,7 +131,14 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		race   = new SR6WizardPageMetatype(this, wrapper);
 		lifepath1 = new WizardPageLifePath1(this, wrapper);
 		surge  = new SR6WizardPageChangeling(this, wrapper);
-		magic  = new SR6WizardPageMagicOrResonance(this, wrapper);
+		magic  = new SR6WizardPageMagicOrResonance(this, wrapper) {
+			protected void refresh() {
+				super.refresh();
+				backHeaderCP.setVisible(charGen.getModel().hasCharGenSettings(SR6PointBuySettings.class));
+				backHeaderCP.setManaged(charGen.getModel().hasCharGenSettings(SR6PointBuySettings.class));
+				backHeaderCP.setValue(charGen.getModel().hasCharGenSettings(SR6PointBuySettings.class)?charGen.getModel().getCharGenSettings(SR6PointBuySettings.class).characterPoints:0	);
+			}
+		};
 		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());
@@ -139,6 +150,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 //		profiles=new WizardPageProfiles(this, wrapper.getWrapped(), new AutoGenerator(wrapper.getWrapped()));
 		contacts = new SR6WizardPageContacts(this, wrapper.getWrapped());
 		sins   = new WizardPageSINs(this, wrapper);
+		lifestyles = new AWizardPageLifestyles(this, wrapper);
 		name   = new WizardPageName<>(this, wrapper);
 		
 		getPages().add(chargen);

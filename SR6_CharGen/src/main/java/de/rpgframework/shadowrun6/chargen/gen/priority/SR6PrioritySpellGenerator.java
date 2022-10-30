@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
@@ -14,47 +14,55 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ASpell;
-import de.rpgframework.shadowrun.Ritual;
-import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
-import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
+import de.rpgframework.shadowrun.chargen.gen.ISpellGenerator;
+import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 
 /**
  * @author prelle
  *
  */
-public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitualController {
+public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implements SR6SpellController, ISpellGenerator<SR6Spell> {
 	
 	private int freeSpells;
+	private int maxFree;
 
 	//-------------------------------------------------------------------
-	protected SR6RitualGenerator(SR6CharacterController parent) {
+	protected SR6PrioritySpellGenerator(SR6CharacterController parent) {
 		super(parent);
 	}
 
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.ISpellGenerator#getFreeSpells()
+	 */
+	@Override
 	public int getFreeSpells() {
 		return freeSpells;
 	}
+	
+	//-------------------------------------------------------------------
+	public int getMaxFree() { return maxFree; }
+
 
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getAvailable()
 	 */
 	@Override
-	public List<Ritual> getAvailable() {
-		List<Ritual> ret = new ArrayList<>(Shadowrun6Core.getItemList(Ritual.class));
-		for (RitualValue tmp : getModel().getRituals()) {
+	public List<SR6Spell> getAvailable() {
+		List<SR6Spell> ret = new ArrayList<>(Shadowrun6Core.getSpells());
+		for (SpellValue<? extends ASpell> tmp : getModel().getSpells()) {
 			ret.remove(tmp.getModifyable());
 		}
-		logger.log(Level.WARNING, "Return "+ret.size()+" available");
 		return ret;
 	}
 
@@ -64,9 +72,9 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<RitualValue> getSelected() {
-		List<RitualValue> ret = new ArrayList<>();
-		getModel().getRituals().forEach( sp -> ret.add((RitualValue) sp));
+	public List<SpellValue<SR6Spell>> getSelected() {
+		List<SpellValue<SR6Spell>> ret = new ArrayList<>();
+		getModel().getSpells().forEach( sp -> ret.add((SpellValue<SR6Spell>) sp));
 		return ret;
 	}
 
@@ -75,7 +83,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public RecommendationState getRecommendationState(Ritual value) {
+	public RecommendationState getRecommendationState(SR6Spell value) {
 		return RecommendationState.NEUTRAL;
 	}
 
@@ -84,7 +92,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItemValue)
 	 */
 	@Override
-	public RecommendationState getRecommendationState(RitualValue value) {
+	public RecommendationState getRecommendationState(SpellValue<SR6Spell> value) {
 		return RecommendationState.NEUTRAL;
 	}
 
@@ -93,7 +101,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getChoicesToDecide(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public List<Choice> getChoicesToDecide(Ritual value) {
+	public List<Choice> getChoicesToDecide(SR6Spell value) {
 		return value.getChoices();
 	}
 
@@ -102,9 +110,9 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public Possible canBeSelected(Ritual value, Decision... decisions) {
+	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
 		// Ensure spell has not been selected yet
-		for (RitualValue tmp : getSelected()) {
+		for (SpellValue<SR6Spell> tmp : getSelected()) {
 			if (tmp.getResolved()==value)
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
@@ -126,7 +134,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#select(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public OperationResult<RitualValue> select(Ritual value, Decision... decisions) {
+	public OperationResult<SpellValue<SR6Spell>> select(SR6Spell value, Decision... decisions) {
 		logger.log(Level.TRACE, "ENTER select({0}, {1})", value, Arrays.toString(decisions));
 		try {
 			Possible poss = canBeSelected(value, decisions);
@@ -135,13 +143,13 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 				return new OperationResult<>(poss);
 			}
 			
-			RitualValue toAdd = new RitualValue(value);
+			SpellValue<SR6Spell> toAdd = new SpellValue<SR6Spell>(value);
 			for (Decision dec : decisions) {
 				toAdd.addDecision(dec);
 			}
 			
-			getModel().addRitual(toAdd);
-			logger.log(Level.INFO, "Added ritual {0}", toAdd);
+			getModel().addSpell(toAdd);
+			logger.log(Level.INFO, "Added spell {0}", toAdd);
 			
 			parent.runProcessors();
 			
@@ -156,7 +164,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeDeselected(de.rpgframework.genericrpg.data.DataItemValue)
 	 */
 	@Override
-	public Possible canBeDeselected(RitualValue value) {
+	public Possible canBeDeselected(SpellValue<SR6Spell> value) {
 		if (!getSelected().contains(value)) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
@@ -173,7 +181,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
 	 */
 	@Override
-	public boolean deselect(RitualValue value) {
+	public boolean deselect(SpellValue<SR6Spell> value) {
 		logger.log(Level.TRACE, "ENTER deselect({0})", value);
 		try {
 			Possible poss = canBeDeselected(value);
@@ -182,8 +190,8 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 				return false;
 			}
 			
-			getModel().removeRitual(value);
-			logger.log(Level.INFO, "Removed ritual {0}", value);
+			getModel().removeSpell(value);
+			logger.log(Level.INFO, "Removed spell {0}", value);
 			
 			parent.runProcessors();
 			
@@ -198,7 +206,7 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(Ritual data) {
+	public float getSelectionCost(SR6Spell data) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -208,8 +216,8 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public String getSelectionCostString(Ritual data) {
-		return String.valueOf(getSelectionCostString(data));
+	public String getSelectionCostString(SR6Spell data) {
+		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------
@@ -230,12 +238,13 @@ public class SR6RitualGenerator extends ControllerImpl<Ritual> implements IRitua
 				SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
 				if (model.getMagicOrResonanceType().usesPowers()) {
 					// Mystic adept
-					freeSpells = (settings.mysticAdeptMaxPoints - settings.mysticAdeptPowerPoints) *2;
+					freeSpells = (settings.mysticAdeptMaxPoints - settings.getMagicForPP()) *2;
 				} else {
 					freeSpells = settings.perAttrib.get(ShadowrunAttribute.MAGIC).base * 2;
 				}
 				logger.log(Level.INFO, "Have {0} free spells", freeSpells);
 			}
+			maxFree = freeSpells;
 			
 			int byKarma = 0;
 			for (SpellValue<? extends ASpell> val : model.getSpells()) {

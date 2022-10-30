@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;

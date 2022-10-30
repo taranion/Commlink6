@@ -9,7 +9,7 @@ import de.rpgframework.shadowrun.chargen.jfx.ShadowrunSkillTableSkin;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 
 /**
  * @author prelle

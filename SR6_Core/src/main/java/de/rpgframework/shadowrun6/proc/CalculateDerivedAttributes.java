@@ -111,7 +111,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 
 			// Set character back to zero
 			//			logger.log(Level.DEBUG, "1. Calculate derived attributes");
-			AttributeValue val = null;
+			AttributeValue<ShadowrunAttribute> val = null;
 
 			/*
 			 * Physical condition monitor
@@ -140,11 +140,14 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			addNaturalModifier(val, ShadowrunAttribute.REACTION);
 			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
 			logger.log(Level.DEBUG, " INI Physical = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL).getModifiedValue()+" d6");
+			// Initiave Dice (Physical)
+			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL);
+			val.setDistributed(1); // Base value without modifiers
+			logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
 			// Minor actions (Physical)
 			val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION);
 			val.setDistributed(1);
 			addNaturalModifier(val,ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL);
-			logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
 
 			/*
 			 * astral initiative
@@ -155,11 +158,15 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			addNaturalModifier(val, ShadowrunAttribute.LOGIC);
 			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
 			logger.log(Level.DEBUG, " Base INI Astral = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_ASTRAL).getModifiedValue()+" d6");
+			// Initiave Dice (Astral)
+			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_ASTRAL);
+			val.setDistributed(2); // Base value without modifiers
+			logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
 			// Minor actions (Astral)
 			val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_ASTRAL);
 			val.setDistributed(1);
-			addNaturalModifier(val, ShadowrunAttribute.INITIATIVE_DICE_ASTRAL);
-			logger.log(Level.DEBUG, "                 = "+val.getDisplayString()+"   "+val.getModifications());
+			addNaturalModifier(val,ShadowrunAttribute.INITIATIVE_DICE_ASTRAL);
+			logger.log(Level.ERROR, "                 = "+val.getDisplayString()+"   "+val.getModifications());
 
 			/*
 			 * matrix initiative (AR)
@@ -178,8 +185,12 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
 			} 
 			logger.log(Level.DEBUG, " Base INI Matrix = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue()+" d6");
+			// Initiave Dice (Matrix Cold)
+			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD);
+			val.setDistributed(2); // Base value without modifiers
+			logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
 			// Minor actions (Matrix)
-//			val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_MATRIX);
+//			val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_);
 //			val.setDistributed(1 + model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue());
 //			logger.log(Level.DEBUG, "                 = "+val.getDisplayString()+"   "+val.getModifications());
 

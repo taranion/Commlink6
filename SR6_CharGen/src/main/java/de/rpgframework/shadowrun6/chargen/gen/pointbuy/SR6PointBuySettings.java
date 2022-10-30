@@ -1,20 +1,23 @@
-package de.rpgframework.shadowrun6.chargen.gen;
+package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
 /**
  * @author prelle
  *
  */
-public class SR6PointBuySettings {
+public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 
 	public PowerLevel variant;
 	public int characterPoints;
@@ -28,6 +31,10 @@ public class SR6PointBuySettings {
 	/** How points and karma is spent on attribute */
 	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib;
 	public Map<SR6SkillValue, PerSkillPoints> perSkill;
+	public Map<SpellValue, Boolean> perSpellPayedWithCP;
+	public Map<RitualValue, Boolean> perRitualPayedWithCP;
+	
+	public transient int sumSpellsRituals;
 
 	//-------------------------------------------------------------------
 	/**
@@ -38,6 +45,8 @@ public class SR6PointBuySettings {
 			perAttrib.put(key, new PerAttributePoints());
 		}
 		perSkill = new LinkedHashMap<>();
+		perSpellPayedWithCP = new LinkedHashMap<>();
+		perRitualPayedWithCP = new LinkedHashMap<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -63,4 +72,5 @@ public class SR6PointBuySettings {
 		}
 		return buf.toString();
 	}
+	
 }

@@ -16,7 +16,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
 
 /**

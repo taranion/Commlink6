@@ -236,7 +236,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 		}
 		
 		CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
-		sett.setKaramToNuyen(sett.getKarmaToNuyen()+1);
+		sett.setKarmaToNuyen(sett.getKarmaToNuyen()+1);
 		logger.log(Level.INFO, "increased Karma converted to Nuyen to {0}", sett.getKarmaToNuyen());
 		
 		parent.runProcessors();
@@ -265,7 +265,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 		}
 		
 		CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
-		sett.setKaramToNuyen(sett.getKarmaToNuyen()-1);
+		sett.setKarmaToNuyen(sett.getKarmaToNuyen()-1);
 		logger.log(Level.INFO, "decreased Karma converted to Nuyen to {0}", sett.getKarmaToNuyen());
 		
 		parent.runProcessors();

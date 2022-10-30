@@ -20,8 +20,8 @@ import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageMagicOrResonance;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.gen.PointBuyCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.SR6PrioritySettings;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -110,16 +110,16 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 		
 		btnDec.setOnAction( ev -> {
 			SR6PrioritySettings prio = charGen.getModel().getCharGenSettings(SR6PrioritySettings.class);
-			if (prio.mysticAdeptPowerPoints>0) prio.mysticAdeptPowerPoints--;
-			lbPower.setText(String.valueOf(prio.mysticAdeptPowerPoints));
-			lbMagic.setText(String.valueOf(prio.mysticAdeptMaxPoints - prio.mysticAdeptPowerPoints));
+			if (prio.getMagicForPP()>0) prio.setMagicForPP( prio.getMagicForPP()-1);
+			lbPower.setText(String.valueOf(prio.getMagicForPP()));
+			lbMagic.setText(String.valueOf(prio.mysticAdeptMaxPoints - prio.getMagicForPP()));
 			lbTotal.setText(String.valueOf(prio.mysticAdeptMaxPoints));
 		});
 		btnInc.setOnAction( ev -> {
 			SR6PrioritySettings prio = charGen.getModel().getCharGenSettings(SR6PrioritySettings.class);
-			if (prio.mysticAdeptPowerPoints<prio.mysticAdeptMaxPoints) prio.mysticAdeptPowerPoints++;
-			lbPower.setText(String.valueOf(prio.mysticAdeptPowerPoints));
-			lbMagic.setText(String.valueOf(prio.mysticAdeptMaxPoints - prio.mysticAdeptPowerPoints));
+			if (prio.getMagicForPP()<prio.mysticAdeptMaxPoints) prio.setMagicForPP( prio.getMagicForPP()+1);
+			lbPower.setText(String.valueOf(prio.getMagicForPP()));
+			lbMagic.setText(String.valueOf(prio.mysticAdeptMaxPoints - prio.getMagicForPP()));
 			lbTotal.setText(String.valueOf(prio.mysticAdeptMaxPoints));
 		});
 	}
@@ -156,8 +156,8 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			if (type==Shadowrun6Core.getItem(MagicOrResonanceType.class, "mysticadept")) {
 				SR6PrioritySettings prio = model.getCharGenSettings(SR6PrioritySettings.class);
 				lbTotal.setText(String.valueOf(prio.mysticAdeptMaxPoints));
-				lbMagic.setText(String.valueOf(prio.mysticAdeptMaxPoints - prio.mysticAdeptPowerPoints));
-				lbPower.setText(String.valueOf(prio.mysticAdeptPowerPoints));
+				lbMagic.setText(String.valueOf(prio.mysticAdeptMaxPoints - prio.getMagicForPP()));
+				lbPower.setText(String.valueOf(prio.getMagicForPP()));
 			} else if (type==Shadowrun6Core.getItem(MagicOrResonanceType.class, "magician")) {
 				SR6PrioritySettings prio = model.getCharGenSettings(SR6PrioritySettings.class);
 			} else if (type==Shadowrun6Core.getItem(MagicOrResonanceType.class, "aspectedmagician")) {
@@ -228,7 +228,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
-			logger.log(Level.WARNING,"RCV {} : {}", type, Arrays.toString(param));
+			logger.log(Level.WARNING,"RCV {0} : {1}", type, Arrays.toString(param));
 			if (param[0] instanceof PointBuyCharacterGenerator) {
 				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith());
 			}

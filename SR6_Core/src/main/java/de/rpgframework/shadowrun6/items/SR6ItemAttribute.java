@@ -112,8 +112,10 @@ public enum SR6ItemAttribute implements IItemAttribute {
 			return (T) SR6GearTool.calculateModifiedValue((Availability) base, mods);
 		if (this==ATTACK_RATING)
 			return (T) SR6GearTool.calculateModifiedValue((int[]) base, mods);
+		if (this==DAMAGE)
+			return (T) SR6GearTool.calculateModifiedValue((Damage) base, mods);
 		if (this!=ITEMSUBTYPE && this!=ITEMTYPE)
-			System.err.println("SR6ItemAttribute: Don't know how to calculate modified value for "+this);
+			System.err.println("SR6ItemAttribute: Don't know how to calculate modified value for "+this+" /"+this.getClass());
 		return (T)base;
 	}
 
