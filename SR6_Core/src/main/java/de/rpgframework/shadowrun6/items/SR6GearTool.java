@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.IItemAttribute;
+import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.items.Availability;
@@ -153,11 +154,26 @@ public class SR6GearTool extends GearTool {
 		case DRONE_SMALL:
 		case DRONE_MEDIUM:
 		case DRONE_LARGE:
-			VehicleType type = item.getAttribute(SR6ItemAttribute.VEHICLE_TYPE).getValue();
-			if (type==null) {
-				logger.log(Level.ERROR,"Cannot detect skill for drone without type");
+			ItemAttributeDefinition vecTypDef = item.getAttribute(SR6ItemAttribute.VEHICLE_TYPE);
+			if (vecTypDef==null) {
+				// No explicit vehicle type given - use subtype for a default
+				switch (sub) {
+				case BIKES:
+				case CARS:
+				case TRUCKS:
+					return pilot.getSpecialization("ground_craft") ;
+				case BOATS:
+				case SUBMARINES:
+					return pilot.getSpecialization("watercraft") ;
+				case FIXED_WING:
+				case ROTORCRAFT:
+				case VTOL:
+					return pilot.getSpecialization("aircraft") ;
+				default:
+				}
 				return null;
 			}
+			VehicleType type = vecTypDef.getValue();
 			switch (type) {
 			case GROUND:
 				return pilot.getSpecialization("ground_craft") ;
@@ -166,20 +182,6 @@ public class SR6GearTool extends GearTool {
 			case WATER:
 				return pilot.getSpecialization("watercraft") ;
 			}
-//			switch (item.getSubtype()) {
-//			case BIKES:
-//			case CARS:
-//			case TRUCKS:
-//				return ShadowrunCore.getSkill("pilot_ground_craft");
-//			case BOATS:
-//			case SUBMARINES:
-//				return ShadowrunCore.getSkill("pilot_watercraft");
-//			case FIXED_WING:
-//			case ROTORCRAFT:
-//			case VTOL:
-//				return ShadowrunCore.getSkill("pilot_aircraft");
-//			default:
-//			}
 
 		default:
 		}

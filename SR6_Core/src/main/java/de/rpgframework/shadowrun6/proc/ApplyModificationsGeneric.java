@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -25,6 +26,8 @@ import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -63,6 +66,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			case LIFESTYLE  : return applyLifestyle(model, mod);
 			case QUALITY    : return applyQuality(model, mod);
 			case RULE       : return applyRule(model, mod);
+			case SKILL		: return applySkill(model, (ValueModification) mod);
 			case ITEM_ATTRIBUTE:
 			case ACTION:
 				model.addItemModification(mod); return true;
@@ -87,8 +91,12 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
-				if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED || tmp.getReferenceType()==ShadowrunReference.QUALITY) {
-					applyModification(model, tmp);
+				if (tmp instanceof AllowModification) {
+					unprocessed.add(tmp);
+				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED || tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE || tmp.getReferenceType()==ShadowrunReference.SKILL || tmp.getReferenceType()==ShadowrunReference.QUALITY) {
+					if (!applyModification(model, tmp)) {
+						unprocessed.add(tmp);
+					}
 				} else {
 					unprocessed.add(tmp);
 				}
@@ -139,7 +147,25 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		}
 
 		value.addModification(mod);
-		logger.log(Level.DEBUG, "Added {0} to attribute {1}", mod.getValue(), item);
+		logger.log(Level.INFO, "Added {0} to attribute {1} ({2}) from {3}", mod.getValue(), item, mod.getSet(), mod.getSource());
+
+		return true;
+	}
+
+	// -------------------------------------------------------------------
+	private static boolean applySkill(Shadowrun6Character model, ValueModification mod) {
+		SR6Skill item = mod.getReferenceType().resolve(mod.getKey());
+		SR6SkillValue value = model.getSkillValue(item);
+		if (item == null) {
+			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such skill {0}", mod.getKey());
+		}
+		if (value == null) {
+			logger.log(Level.ERROR, "applySkill for skill unset: "+mod.getKey());
+			return false;
+		}
+
+		value.addModification(mod);
+		logger.log(Level.INFO, "Added {0} to skill {1} ({2}) from {3}", mod.getValue(), item, mod.getSet(), mod.getSource());
 
 		return true;
 	}

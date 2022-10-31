@@ -1126,7 +1126,7 @@ public class SR6ArchetypeTest {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
-	public void test05Rigger() throws Exception {
+	public void test06Rigger() throws Exception {
 		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.C);
 		prio.setPriority(PriorityType.METATYPE, Priority.D);
@@ -1572,6 +1572,7 @@ public class SR6ArchetypeTest {
 		assertTrue(comm.wasSuccessful());
 		assertTrue(equip.embed(comm.get(), ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful());
 		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "katana")).wasSuccessful());
+//		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_predator_v")).wasSuccessful());
 		
 		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.STRENGTH);
 		System.out.println("Strength = "+aVal.getDisplayString());

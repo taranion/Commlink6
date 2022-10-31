@@ -25,7 +25,6 @@ import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Reward;
 import de.rpgframework.genericrpg.ValueType;
-import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Choice;
@@ -45,8 +44,10 @@ import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
+import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modifyable;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
@@ -71,7 +72,6 @@ import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun.proc.GetModificationsFromFoci;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
-import de.rpgframework.shadowrun6.generators.Shadowrun6Generators;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemSubType;
@@ -81,6 +81,7 @@ import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -97,7 +98,6 @@ import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromPowers;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromTechniques;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
-import de.rpgframework.shadowrun6.proc.SR6PANController;
 
 /**
  * @author prelle
@@ -712,6 +712,8 @@ public class Shadowrun6Tools {
 	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, Shadowrun6Character model) {
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
+			if (clone.getSource()!=null && clone.getSource().toString().equals("titanium") || clone.getSource() instanceof SR6PieceOfGearVariant)
+				throw new RuntimeException("Trace");
 			if ("CHOICE".equals( clone.getKey() )) {
 				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
 				Decision dec = value.getDecision(uuid);
@@ -1515,10 +1517,10 @@ public class Shadowrun6Tools {
 //	}
 	
 	// -------------------------------------------------------------------
-	public static List<DataItem> getInfluences(ComplexDataItemValue<?> val) {
+	public static List<DataItem> getInfluences(Modifyable val) {
 		List<DataItem> ret = new ArrayList<>();
 		for (Modification mod : val.getModifications()) {
-			if (mod.isConditional()) {
+			if (mod.isConditional() || mod instanceof CheckModification) {
 				if (mod.getSource() == null) {
 					System.err.println("Shadowrun6Tools.getInfluences: No source for Modification " + mod);
 				} else if (!(mod.getSource() instanceof DataItem)) {

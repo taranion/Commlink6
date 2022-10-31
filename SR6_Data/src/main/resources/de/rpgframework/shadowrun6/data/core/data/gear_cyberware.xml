@@ -288,7 +288,7 @@
       <attrdef id="PRICE" value="$RATING*4000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-          <itemmod type="QUALITY" ref="dermal_deposits" remove="true"/>
+          <itemmod type="QUALITY" ref="dermal_deposits" remove="true" apply="CHARACTER"/>
       </modifications>
      	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
      		<attrdef id="DAMAGE" value="$RATING"/>
@@ -327,8 +327,8 @@
 		<attrdef id="PRICE" value="$RATING*30000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<valmod type="ATTRIBUTE" ref="AGILITY" value="$RATING" set="AUGMENTED"/>
-      	<valmod type="ATTRIBUTE" ref="STRENGTH" value="$RATING" set="AUGMENTED"/>
+      	<valmod type="ATTRIBUTE" ref="AGILITY" value="$RATING" set="AUGMENTED" apply="CHARACTER"/>
+      	<valmod type="ATTRIBUTE" ref="STRENGTH" value="$RATING" set="AUGMENTED" apply="CHARACTER"/>
       </modifications>
    </item>
    <item avail="4L" price="15000" id="reaction_enhancers" type="CYBERWARE" subtype="CYBER_BODYWARE">
@@ -339,7 +339,7 @@
 		<attrdef id="PRICE" value="$RATING*15000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<valmod type="ATTRIBUTE" ref="REACTION" value="$RATING"/>
+      	<valmod type="ATTRIBUTE" ref="REACTION" value="$RATING" apply="CHARACTER"/>
       </modifications>
    </item>
    <item avail="4" price="20000" id="skillwires" type="CYBERWARE" subtype="CYBER_BODYWARE">
@@ -371,8 +371,8 @@
 		<attrdef id="AVAILABILITY" value="$RATING" table="3L,3L,4L,6L"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-         <valmod type="ATTRIBUTE" ref="REACTION"  value="$RATING"/>
-         <valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_PHYSICAL"  value="$RATING"/>
+         <valmod type="ATTRIBUTE" ref="REACTION"  value="$RATING" apply="CHARACTER"/>
+         <valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_PHYSICAL"  value="$RATING" apply="CHARACTER"/>
       </modifications>
    </item>
    

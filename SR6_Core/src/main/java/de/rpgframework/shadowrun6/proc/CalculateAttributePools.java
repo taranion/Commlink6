@@ -17,12 +17,12 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 
 /**
- * @author stefa
+ * @author prelle
  *
  */
 public class CalculateAttributePools implements ProcessingStep {
 
-	private final static Logger logger = System.getLogger(CalculateAttributePools.class.getPackageName());
+	private final static Logger logger = System.getLogger(CalculateAttributePools.class.getPackageName()+".attr");
 	
 	private Shadowrun6Character model;
 	private Locale loc = Locale.getDefault();
@@ -45,9 +45,6 @@ public class CalculateAttributePools implements ProcessingStep {
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		for (ShadowrunAttribute attr : ShadowrunAttribute.values()) {
-			if (attr==ShadowrunAttribute.INITIATIVE_DICE_ASTRAL) {
-				System.err.println("CalculateAttribtePools: "+attr);
-			}
 			calculatePool(model.getAttribute(attr));
 		}
 		return unprocessed;
@@ -59,7 +56,6 @@ public class CalculateAttributePools implements ProcessingStep {
 		aVal.setPool(pool);
 		
 		int augmentedMax = aVal.getDistributed() + 4;
-		
 		/*
 		 * Natural attribute first
 		 */
@@ -94,6 +90,7 @@ public class CalculateAttributePools implements ProcessingStep {
 			}
 			String name = Shadowrun6Tools.getModificationSourceString(mod.getSource());
 			PoolCalculation<Integer> toAdd = new PoolCalculation<Integer>(value, name);
+			toAdd.augment = true;
 			if (sumAugmentations+value > 4) {
 				value = 4 - sumAugmentations;
 				toAdd.value = value;
@@ -107,7 +104,7 @@ public class CalculateAttributePools implements ProcessingStep {
 				System.exit(1);
 			}
 		}
-		logger.log(Level.DEBUG, "NATURAL: {0}",pool.getCalculation(ValueType.NATURAL));
+		logger.log(Level.INFO, "{0} NATURAL    : {1}",aVal.getModifyable(),pool.getCalculation(ValueType.NATURAL));
 		
 		/* Artificial */
 		int sumArt = 0;
@@ -131,9 +128,9 @@ public class CalculateAttributePools implements ProcessingStep {
 			sumArt += value;
 			pool.addStep(ValueType.ARTIFICIAL, toAdd);
 		}
-		logger.log(Level.DEBUG, "ARTIFICIAL: {0}",pool.getCalculation(ValueType.ARTIFICIAL));
+		logger.log(Level.DEBUG, "{0} ARTIFICIAL : {1}",aVal.getModifyable(), pool.getCalculation(ValueType.ARTIFICIAL));
 		
-		//logger.log(Level.INFO, "{0}: converted {1} to {2}", aVal.getModifyable(), aVal.getModifiedValue(), aVal.getPool().toString());
+		logger.log(Level.INFO, "{0}: converted {1} to {2}", aVal.getModifyable(), aVal.getModifiedValue(), aVal.getPool().toString());
 	}
 
 }

@@ -7,7 +7,7 @@
    </quality>
    <quality id="analytical_mind"  	  karma="3" pos="true" type="NORMAL" >
      <modifications>
-       <checkmod ref="LOGIC" type="ATTRIBUTE" what="EDGE" value="1"/>
+       <checkmod ref="LOGIC" type="ATTRIBUTE" what="EDGE" value="1" apply="CHARACTER"/>
      </modifications>
    </quality>
    
@@ -23,7 +23,7 @@
    <quality id="blandness"        	  karma="8" pos="true" type="NORMAL" />
    <quality id="built_tough"          karma="4" pos="true" type="NORMAL" max="4">
      <modifications>
-       <valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1" set="NATURAL" />
+       <valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1" set="NATURAL" apply="CHARACTER" />
      </modifications>
    </quality>
    <quality id="catlike"          	  karma="12" pos="true" type="NORMAL" >

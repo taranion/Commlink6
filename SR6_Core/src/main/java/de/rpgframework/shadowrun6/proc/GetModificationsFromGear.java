@@ -11,6 +11,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -64,6 +65,11 @@ public class GetModificationsFromGear implements ProcessingStep {
 					// TODO:
 					// Shadowrun6Tools.instantiateModification
 					// um CHOICEs (z.B. von Reflex Recorder) mit Entscheidung zu verknüpfen
+					logger.log(Level.INFO, "--item "+item.getKey()+": preMod="+mod+"    item="+item);
+					if ( item.getKey().equals("bone_lacing")) {
+						logger.log(Level.ERROR, "TRACRE");
+						SR6GearTool.recalculate("", model, item);
+					}
 					Modification realMod = mod.getReferenceType().instantiateModification(mod, item, model);
 					logger.log(Level.INFO, "--item "+item.getKey()+": realMod="+realMod);
 					

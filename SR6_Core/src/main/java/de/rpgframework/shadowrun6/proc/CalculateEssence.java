@@ -46,9 +46,9 @@ public class CalculateEssence implements ProcessingStep {
 				logger.log(Level.DEBUG, "Item type of {0} is {1}", item, item.getAttributeRaw(SR6ItemAttribute.ITEMTYPE));
 				ItemType type = Shadowrun6Tools.getItemType(item);
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(type)) {
-					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
+//					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
 					ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-					logger.log(Level.INFO, "  essence = "+aVal);
+//					logger.log(Level.INFO, "  essence = "+aVal);
 					if (aVal==null) continue;
 					float essence = aVal.getModifiedValue(); 
 					logger.log(Level.INFO,"* "+item.getNameWithoutRating()+" = "+essence);
