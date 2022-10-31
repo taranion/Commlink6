@@ -121,7 +121,7 @@ public class Shadowrun6CompendiumFactory {
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(2, CellType.STRING).setCellValue("data-description");
 		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
 		head.createCell(4, CellType.STRING).setCellValue("notes");
@@ -197,7 +197,7 @@ public class Shadowrun6CompendiumFactory {
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(2, CellType.STRING).setCellValue("data-description");
 		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
 		head.createCell(4, CellType.STRING).setCellValue("data-notes");
@@ -250,7 +250,7 @@ public class Shadowrun6CompendiumFactory {
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(2, CellType.STRING).setCellValue("data-description");
 		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
 		head.createCell(4, CellType.STRING).setCellValue("data-notes");
@@ -293,7 +293,7 @@ public class Shadowrun6CompendiumFactory {
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(2, CellType.STRING).setCellValue("data-description");
 		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
 		head.createCell(4, CellType.STRING).setCellValue("data-notes");
@@ -335,7 +335,7 @@ public class Shadowrun6CompendiumFactory {
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(2, CellType.STRING).setCellValue("data-description");
 		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
 		head.createCell(4, CellType.STRING).setCellValue("data-notes");
@@ -379,7 +379,7 @@ public class Shadowrun6CompendiumFactory {
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(2, CellType.STRING).setCellValue("data-description");
 		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
 		head.createCell(4, CellType.STRING).setCellValue("data-type");
@@ -417,7 +417,7 @@ public class Shadowrun6CompendiumFactory {
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(2, CellType.STRING).setCellValue("data-description");
 		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
 		head.createCell(4, CellType.STRING).setCellValue("data-itemtype");
@@ -514,7 +514,7 @@ public class Shadowrun6CompendiumFactory {
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Source");
+		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(2, CellType.STRING).setCellValue("data-description");
 		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
 		head.createCell(4, CellType.STRING).setCellValue("data-itemtype");
