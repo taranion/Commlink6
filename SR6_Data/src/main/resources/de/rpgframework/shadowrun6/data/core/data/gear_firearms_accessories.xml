@@ -155,10 +155,10 @@
 		    	<datareq apply="ACTIVE_GEAR" type="GEAR" ref="smartlink" />
 		  	</requires>
 			<modifications>
-		  		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2" />
+		  		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING"                      value="2,2,2,2,2" />
 		  		<valmod type="ITEM_ATTRIBUTE" ref="DICEPOOL"           mode="WIRELESS" value="1" />
-		      	<valmod  type="ACTION_BONUS" ref="reload"             mode="WIRELESS" value="MINOR"/>
-		      	<valmod  type="ACTION_BONUS" ref="change_device_mode" mode="WIRELESS" value="MINOR"/>
+		      <valmod type="ACTION_BONUS"   ref="reload"             mode="WIRELESS" value="MINOR"/>
+		      <valmod type="ACTION_BONUS"   ref="change_device_mode" mode="WIRELESS" value="MINOR"/>
 		  	</modifications>
 		</mode>
 	</item>
