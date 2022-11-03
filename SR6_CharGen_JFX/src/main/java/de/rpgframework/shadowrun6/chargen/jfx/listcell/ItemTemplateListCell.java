@@ -1,6 +1,5 @@
 package de.rpgframework.shadowrun6.chargen.jfx.listcell;
 
-import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.function.Supplier;
 
@@ -15,6 +14,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 
 /**
  * @author prelle
@@ -30,6 +30,7 @@ public class ItemTemplateListCell extends ComplexDataItemListCell<ItemTemplate> 
 	public ItemTemplateListCell(Supplier<ComplexDataItemController<ItemTemplate, ? extends ComplexDataItemValue<ItemTemplate>>> controlProv, CarryMode carry) {
 		super(controlProv, Shadowrun6Tools.requirementResolver(Locale.getDefault()));
 		this.carry = carry;
+		layout.setStyle("-fx-max-width: 21.5em");
 	}
 	
 	//-------------------------------------------------------------------
@@ -38,6 +39,7 @@ public class ItemTemplateListCell extends ComplexDataItemListCell<ItemTemplate> 
 		this.carry = CarryMode.EMBEDDED;
 		this.container = container;
 		this.hook      = hook;
+		layout.setStyle("-fx-max-width: 21.5em");
 	}
 
 
@@ -55,11 +57,18 @@ public class ItemTemplateListCell extends ComplexDataItemListCell<ItemTemplate> 
 				if (CarryMode.EMBEDDED==carry) {
 					poss = ((ISR6EquipmentController)controlProv.get()).canBeEmbedded(container, hook, item, null);
 				} else {
-					poss = ((ISR6EquipmentController)controlProv.get()).canBeSelected(item, null, carry);
+					String variant = null;
+					// If the carry mode does not exist in the default item, check all variants
+					if (item.getUsage(carry)==null) {
+						SR6PieceOfGearVariant var = (SR6PieceOfGearVariant) item.getVariant(carry);
+						if (var!=null)
+							variant = var.getId();
+					}
+					poss = ((ISR6EquipmentController)controlProv.get()).canBeSelected(item, variant, carry);
 				}
-				System.getLogger(ItemTemplateListCell.class.getPackageName()).log(Level.INFO, "Poss="+poss);
 				lbName.setDisable(!poss.get());
 				lbSource.setStyle(poss.get()?"":"-fx-text-fill: highlight");
+				lbSource.setWrapText(true);
 				if (!poss.get()) {
 					lbSource.setText(poss.toString());
 				}
