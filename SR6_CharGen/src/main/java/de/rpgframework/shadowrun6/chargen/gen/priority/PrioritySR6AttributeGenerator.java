@@ -334,7 +334,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 			ShadowrunAttribute key = value.getModifyable();
 			Possible allowed = canBeDecreasedPoints(value);
 			if (!allowed.get()) {
-				logger.log(Level.WARNING, "Trying to increase attribute " + key + " with adjustment points, although {0}", allowed.getI18NKey());
+				logger.log(Level.WARNING, "Trying to decrease attribute {0} with adjustment points, although {1}", key, allowed.getI18NKey());
 				return new OperationResult<>(allowed);
 			}
 
@@ -433,9 +433,16 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 			}
 
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
+			logger.log(Level.ERROR, "settings = "+parent.getModel().getCharGenSettings(SR6PrioritySettings.class));
+			if (key==ShadowrunAttribute.AGILITY) {
+				logger.log(Level.ERROR, "AGILITY1 = "+per);
+			}
 			per.points2--;
 			logger.log(Level.INFO, 
 					"Decreased attribute points for " + key + " to " + per.points2 + " - sum is now " + per.getSum());
+			if (key==ShadowrunAttribute.AGILITY) {
+				logger.log(Level.ERROR, "AGILITY2 = "+per);
+			}
 
 			parent.runProcessors();
 			return new OperationResult<>(value);
@@ -608,7 +615,6 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		for (AttributeValue tmp : getModel().getAttributes()) {
 			if (tmp.getModifyable()==ShadowrunAttribute.ESSENCE || tmp.getModifyable()==ShadowrunAttribute.ESSENCE_HOLE)
 				continue;
-			tmp.clearModifications();
 			tmp.setDistributed(0);
 		}
 		
@@ -644,6 +650,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		
 		try {
 			SR6PrioritySettings prioSettings = getModel().getCharGenSettings(SR6PrioritySettings.class);
+			logger.log(Level.ERROR, "settings = "+prioSettings);
 			// Reset
 			reset();
 			
@@ -681,6 +688,16 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 					}
 				} else {
 					unprocessed.add(tmp);
+				}
+			}
+			
+			// Allow adjustment points to be spent on everything where the maximum is >6
+			for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(key);
+				int max = (aVal.getMaximum()>0)?aVal.getMaximum():6 ;
+				if (max>6 || (max<6 && parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))) {
+					allowedAdjust.add(key);					
+					logger.log(Level.WARNING, "max. value of {0} is {1}", key, max);
 				}
 			}
 			
