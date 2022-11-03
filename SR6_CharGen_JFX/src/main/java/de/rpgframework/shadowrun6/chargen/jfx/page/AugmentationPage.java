@@ -69,9 +69,9 @@ public class AugmentationPage extends Page {
 	private void initCyberware() {
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE); 
 		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> 
-			(item.getResolved().getItemType()==ItemType.CYBERWARE 
+			(item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()==ItemType.CYBERWARE 
 			|| 
-			(item.getResolved().getItemType()==ItemType.ACCESSORY && item.getVariant()!=null && (
+			(item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()==ItemType.ACCESSORY && item.getVariant()!=null && (
 				item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE
 				||
 				item.getVariant().getUsages().stream().anyMatch(us -> us.getMode()==CarryMode.IMPLANTED)
