@@ -65,10 +65,14 @@ public class SkillPage extends Page {
 		secNormal.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secNormal, 4);
 		FlexGridPane.setMinHeight(secNormal, 6);
-		FlexGridPane.setMediumWidth(secNormal, 7);
+		FlexGridPane.setMediumWidth(secNormal, 6);
 		FlexGridPane.setMediumHeight(secNormal, 6);
-		FlexGridPane.setMaxWidth(secNormal, 7);
-		FlexGridPane.setMaxHeight(secNormal, 8);
+//		FlexGridPane.setMaxWidth(secNormal, 7);
+//		FlexGridPane.setMaxHeight(secNormal, 8);
+		secNormal.flexWidthProperty().addListener( (ov,o,n) -> {
+			FlexGridPane.setMediumWidth(secNormal, (Integer)n);
+			flex.refresh();
+		});
 	}
 	
 	//-------------------------------------------------------------------

@@ -29,6 +29,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunSkillTable;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -38,7 +39,10 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -67,6 +71,8 @@ public class SkillSection extends Section {
 	protected Button btnDel;
 	private ToggleSwitch cbRuleUndoCareer;
 	private ToggleSwitch cbRuleUndoChargen;
+	
+	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4); 
 
 	//-------------------------------------------------------------------
 	public SkillSection(String title, SkillType... type) {
@@ -143,6 +149,9 @@ public class SkillSection extends Section {
 	}
 
 	//-------------------------------------------------------------------
+	public ReadOnlyIntegerProperty flexWidthProperty() { return flexWidthProperty; }
+
+	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		btnAdd.setOnAction(ev -> onAdd());
 		btnDel.setOnAction(ev -> onDelete(table.getSelectionModel().getSelectedItem()));
@@ -188,8 +197,10 @@ public class SkillSection extends Section {
 				control.getSkillController().getSelected().stream().filter(sv -> Arrays.asList(type).contains(sv.getModifyable().getType())).collect(Collectors.toList())
 				);
 		
+		table.useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?7:6));
 		if (ctrl instanceof SR6CharacterLeveller) {
 			setMode(Mode.BACKDROP);
+		} else {
 		}
 	}
 
