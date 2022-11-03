@@ -153,7 +153,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			logger.log(Level.INFO, "Add instanceof {0} into hook {1} of {2}", mod.getKey(), hook, model.getKey());
 			OperationResult<CarriedItem<ItemTemplate>> carriedR = SR6GearTool.buildItem(templ, CarryMode.EMBEDDED, charac, false, decs);
 			if (carriedR.hasError()) {
-				logger.log(Level.ERROR, "Error embedding {0} into kook {1} of {2}: {3}", mod.getKey(), hook, model.getKey(),carriedR.getError());
+				logger.log(Level.ERROR, "Error embedding {0} into hook {1} of {2}: {3}", mod.getKey(), hook, model.getKey(),carriedR.getError());
 				return;
 			}
 			CarriedItem accessory = carriedR.get();
