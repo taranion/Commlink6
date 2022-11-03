@@ -135,7 +135,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		
 		// Enough Nuyen for bonding
 		if ( (force*value.getNuyenCost())>model.getNuyen()) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, force*value.getNuyenCost(), model.getNuyen());
 		}
 		
 		return Possible.TRUE;
