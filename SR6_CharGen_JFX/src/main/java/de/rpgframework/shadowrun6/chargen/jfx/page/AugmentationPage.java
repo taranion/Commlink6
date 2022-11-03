@@ -13,11 +13,9 @@ import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
-import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
