@@ -407,6 +407,11 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		lbConvert.setText(String.valueOf(control.getEquipmentController().getConvertedKarma()));
 		btnInc.setDisable(!control.getEquipmentController().canIncreaseConversion());
 		btnDec.setDisable(!control.getEquipmentController().canDecreaseConversion());
+		
+		if (control instanceof SR6CharacterGenerator) {
+			// Don't allow finishing, when there is a stopper 
+			btnFinish.setDisable(control.getToDos().stream().anyMatch(td -> td.getSeverity()==Severity.STOPPER));
+		}
 	}
 	
 	//-------------------------------------------------------------------
