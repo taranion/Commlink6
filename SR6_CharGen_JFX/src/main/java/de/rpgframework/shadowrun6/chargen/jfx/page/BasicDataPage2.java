@@ -98,7 +98,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		
 		FlexGridPane.setMinWidth(secAttrib, 4);
 		FlexGridPane.setMediumWidth(secAttrib, 6);
-		FlexGridPane.setMinHeight(secAttrib, 7);
+		FlexGridPane.setMinHeight(secAttrib, 8);
 		secAttrib.flexWidthProperty().addListener( (ov,o,n) -> {
 			FlexGridPane.setMediumWidth(secAttrib, (Integer)n);
 			flex.refresh();
@@ -159,6 +159,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	
 	//-------------------------------------------------------------------
 	public void refresh() {
+		logger.log(Level.WARNING, "refresh");
 		secBaseData.refresh();
 		secAttrib.refresh();
 		secQualities.refresh();
