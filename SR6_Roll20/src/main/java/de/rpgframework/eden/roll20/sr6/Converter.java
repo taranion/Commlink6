@@ -8,8 +8,12 @@ import java.util.Locale;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 
-import de.rpgframework.genericrpg.data.DataItem;
-import de.rpgframework.genericrpg.data.PageReference;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
+import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.Usage;
+import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.ASpell.Range;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
@@ -18,6 +22,7 @@ import de.rpgframework.shadowrun.SpellFeatureReference;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -63,6 +68,59 @@ public class Converter {
 //
 //		return ret;
 //	}
+
+	//-------------------------------------------------------------------
+	private static String mapModifications(ComplexDataItem item) {
+		if (!item.getModifications().isEmpty()) {
+			List<String> modNames = new ArrayList<>();
+			for (Modification tmp : item.getModifications()) {
+				if (tmp instanceof ValueModification) {
+					ValueModification mod = (ValueModification)tmp;
+					switch ((ShadowrunReference)mod.getReferenceType()) {
+					case ATTRIBUTE:
+					case SKILL:
+						modNames.add(mod.getKey()+":"+mod.getRawValue());
+						break;
+					}
+				}
+			}
+			if (modNames.isEmpty()) return null;
+			return  "{"+String.join(", ", modNames)+"}";
+		}
+		return  null;
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertAugmentation(ItemTemplate item, Locale loc, Row row) {
+		int x = 4;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
+		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+		else x++;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+		// Has rating
+		row.createCell(x++, CellType.BOOLEAN).setCellValue( (item.getAttribute(SR6ItemAttribute.PRICE).getRawValue().contains("RATING"))?"true":"false");
+		// Capacity cost
+		Usage usage = item.getUsage(CarryMode.EMBEDDED);
+		if (usage!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(usage.getRawValue());
+		else x++;
+		// Essence cost
+		usage = item.getUsage(CarryMode.IMPLANTED);
+		if (item.getAttribute(SR6ItemAttribute.ESSENCECOST)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.ESSENCECOST).getRawValue());
+		else if (usage!=null) {
+			row.createCell(x++, CellType.STRING).setCellValue(usage.getRawValue());
+		}
+		else x++;
+		// Modifications
+		String mods = mapModifications(item);
+		if (mods!=null) {
+			row.createCell(x++, CellType.STRING).setCellValue(mods);
+		}
+		else x++;
+	}
 
 	//-------------------------------------------------------------------
 	public static void convertWeapon(ItemTemplate item, Locale loc, Row row) {
@@ -152,6 +210,19 @@ public class Converter {
 //		return ret;
 //	}
 
+	private static String map(Range value) {
+		switch (value) {
+		case LINE_OF_SIGHT: return "los";
+		case LINE_OF_SIGHT_AREA: return "los(a)";
+		case SELF: return "self";
+		case SELF_AREA: return "self(a)";
+		case SPECIAL: return "special";
+		case TOUCH: return "touch";
+		default:
+			return value.name().toLowerCase();
+		}
+	}
+	
 	//-------------------------------------------------------------------
 	public static void convertSpell(SR6Spell item, Locale loc, Row row) {
 		List<String> feats = new ArrayList<>(); 
@@ -163,12 +234,12 @@ public class Converter {
 		
 		int x=5;
 		row.createCell(x++, CellType.STRING).setCellValue(item.getType().name().toLowerCase());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getRange().name().toLowerCase());
+		row.createCell(x++, CellType.STRING).setCellValue(map(item.getRange()));
 		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().name().toLowerCase());
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getDrain());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getCategory().name().toLowerCase());
 		row.createCell(x++, CellType.STRING).setCellValue(String.join(", ", feats));
-		row.createCell(x++, CellType.STRING).setCellValue("skill");
+		row.createCell(x++, CellType.STRING).setCellValue("sorcery");
 		if (item.getDamage()!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getDamage().name().toLowerCase());
 		else
