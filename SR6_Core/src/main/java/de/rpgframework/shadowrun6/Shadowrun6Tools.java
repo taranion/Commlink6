@@ -134,10 +134,10 @@ public class Shadowrun6Tools {
 //		new ApplyRelevanceAndEdgeMods(),
 		CalculateEssence.class,
 		CalculateDerivedAttributes.class,
+		CalculatePersona.class,
 		CalculateAttributePools.class,
 		CalculateSkillPools.class,
-		CalculateMeleeAndUnarmed.class,
-		CalculatePersona.class
+		CalculateMeleeAndUnarmed.class
 	);
 	
 	//-------------------------------------------------------------------
@@ -1561,7 +1561,7 @@ public class Shadowrun6Tools {
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
 				continue;
-			item.setPrimary(false);
+			item.removeFlag(SR6ItemFlag.PRIMARY);
 			item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
 			// If no previous selection or armor is better, use it
 			if (bestArmor==null || item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()> bestArmor.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue() )
@@ -1573,7 +1573,7 @@ public class Shadowrun6Tools {
 		}
 		if (bestArmor!=null) {
 			bestArmor.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
-			bestArmor.setPrimary(true);
+			bestArmor.addFlag(SR6ItemFlag.PRIMARY);
 			return bestArmor;
 		}
 		return null;
@@ -1583,7 +1583,7 @@ public class Shadowrun6Tools {
 	public static CarriedItem<ItemTemplate> getPrimaryRangedWeapon(Shadowrun6Character model) {
 		List<CarriedItem<ItemTemplate>> weapons = model.getCarriedItems(ItemType.WEAPON_RANGED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_FIREARMS);
 		for (CarriedItem item : weapons) {
-			if (item.isPrimary()) return item;
+			if (item.hasFlag(SR6ItemFlag.PRIMARY)) return item;
 		}
 		return weapons.isEmpty()?null:weapons.get(0);
 	}
@@ -1592,7 +1592,7 @@ public class Shadowrun6Tools {
 	public static CarriedItem<ItemTemplate> getPrimaryMeleeWeapon(Shadowrun6Character model) {
 		List<CarriedItem<ItemTemplate>> weapons = model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT);
 		for (CarriedItem item : weapons) {
-			if (item.isPrimary()) return item;
+			if (item.hasFlag(SR6ItemFlag.PRIMARY)) return item;
 		}
 		return weapons.isEmpty()?null:weapons.get(0);
 	}

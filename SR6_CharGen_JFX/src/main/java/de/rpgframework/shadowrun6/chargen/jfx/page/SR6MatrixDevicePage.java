@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -38,13 +39,18 @@ import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AccessoriesSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.ActiveProgramsSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.SR6PersonaSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SoftwareLibrarySection;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
+import de.rpgframework.shadowrun6.items.ItemSubType;
+import de.rpgframework.shadowrun6.items.ItemSubTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -63,12 +69,13 @@ public class SR6MatrixDevicePage extends Page {
 
 	private final static Logger logger = System.getLogger(SR6MatrixDevicePage.class.getPackageName());
 	
+	private GearSection secDevices;
 	private ChoiceBox<CarriedItem<ItemTemplate>> cbDevice;
 	private SoftwareLibrarySection secSoftware;
 	protected ActiveProgramsSection secPrograms;
 	protected AccessoriesSection secAccessories;
 	protected ImageView ivDeepDive;
-	protected PersonaSection secPersona;
+	protected SR6PersonaSection secPersona;
 	protected ShadowrunActionSection secActions;
 	
 	private FlexGridPane flex;
@@ -86,12 +93,31 @@ public class SR6MatrixDevicePage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
+		initDevices();
 		initSoftware();
 		initPrograms();
 		initImage();
 		initPersona();
 		initAccessories();
 		initActions();
+	}
+	
+	//-------------------------------------------------------------------
+	private void initDevices() {
+		Predicate<ItemTemplate> selectFilter = new ItemSubTypeFilter(CarryMode.CARRIED, ItemSubType.matrixDevices()); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> 
+			item.hasFlag(SR6ItemFlag.MATRIX_DEVICE)
+			||
+			(List.of( ItemSubType.matrixDevices()).contains(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()) 
+			);
+			
+		
+		secDevices = new GearSection(ResourceI18N.get(RES, "page.matrix.section.devices"), CarryMode.CARRIED, selectFilter, showFilter);
+		secDevices.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secDevices, 4);
+		FlexGridPane.setMinHeight(secDevices, 6);
+		FlexGridPane.setMediumWidth(secDevices, 5);
+		FlexGridPane.setMediumHeight(secDevices, 6);
 	}
 	
 	//-------------------------------------------------------------------
@@ -147,19 +173,10 @@ public class SR6MatrixDevicePage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initPersona() {
-		Label hdDefRating = new Label(ResourceI18N.get(RES, "page.matrix.section.persona.defenseRating"));
-		Label hdDefPool   = new Label(ResourceI18N.get(RES, "page.matrix.section.persona.defensePool"));
-		GridPane ruleSpec = new GridPane();
-		ruleSpec.setHgap(10);
-		ruleSpec.setVgap(5);
-		ruleSpec.add(hdDefRating, 0, 0);
-		ruleSpec.add(hdDefPool  , 0, 1);
-		
-		secPersona = new PersonaSection(ResourceI18N.get(RES, "page.matrix.section.persona"));
-		secPersona.setRuleSpecificNode(ruleSpec);
+		secPersona = new SR6PersonaSection(ResourceI18N.get(RES, "page.matrix.section.persona"));
 
 		FlexGridPane.setMinWidth(secPersona, 4);
-		FlexGridPane.setMinHeight(secPersona, 6);
+		FlexGridPane.setMinHeight(secPersona, 5);
 	}
 	
 	//-------------------------------------------------------------------
@@ -202,7 +219,7 @@ public class SR6MatrixDevicePage extends Page {
 	private void initLayout() {		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secSoftware,secPrograms,ivDeepDive,secPersona,secAccessories, secActions);
+		flex.getChildren().addAll(secDevices,secSoftware,secPrograms,ivDeepDive,secPersona,secAccessories, secActions);
 		ScrollPane scroll = new ScrollPane(flex);
 		scroll.setFitToWidth(true);
 		
@@ -271,9 +288,11 @@ public class SR6MatrixDevicePage extends Page {
 			throw new NullPointerException("controller is null");
 		this.ctrl = ctrl;
 		
+		secDevices.updateController(ctrl);
 		secSoftware.updateController(ctrl);
 		secPrograms.updateController(ctrl);
 		((GearSection)secAccessories).updateController(ctrl);
+		secPersona.updateController(ctrl);
 		secActions.setAll( 
 		Shadowrun6Core.getItemList(Shadowrun6Action.class)
 		.stream()
@@ -290,10 +309,12 @@ public class SR6MatrixDevicePage extends Page {
 	//--------------------------------------------------------------------
 	public void refresh()  {
 		logger.log(Level.INFO, "refresh");
+		secDevices.refresh();
 		secSoftware.refresh();
 		secPrograms.refresh();
 		secAccessories.refresh();
 		secPersona.refresh();
+		secActions.refresh();
 		
 //		secActions.setAll( 
 //				Shadowrun6Core.getItemList(Shadowrun6Action.class)

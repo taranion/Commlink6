@@ -4,13 +4,17 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun6.Persona;
@@ -19,6 +23,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 
 /**
@@ -118,95 +124,111 @@ public class CalculatePersona implements ProcessingStep {
 	}
 
 	//--------------------------------------------------------------------
+	private CarriedItem<ItemTemplate> getBestCyberdeck(Shadowrun6Character model) {
+		// Check if there is a device which is flagged PRIMARY
+		Optional<CarriedItem<ItemTemplate>> opt = model.getCarriedItemsRecursive().stream()
+				.filter(i -> i.hasFlag(SR6ItemFlag.MATRIX_DEVICE)).filter(i -> i.hasFlag(SR6ItemFlag.PRIMARY))
+				.filter(i -> i.hasAttribute(SR6ItemAttribute.ATTACK)).findFirst();
+		if (opt.isPresent()) {
+			return opt.get();
+		} else {
+			CarriedItem<ItemTemplate> bestAS = null;
+			int bestSum = 0;
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+				if (!item.hasAttribute(SR6ItemAttribute.ATTACK))
+					continue;
+				item.removeFlag(SR6ItemFlag.PRIMARY);
+				int a = item.getAsValue(SR6ItemAttribute.ATTACK).getModifiedValue();
+				int s = item.getAsValue(SR6ItemAttribute.SLEAZE).getModifiedValue();
+				int sum = a + s;
+				if (sum > bestSum) {
+					// Previous best is not best anymore
+					bestAS = item;
+					bestSum = sum;
+				}
+			}
+			if (bestAS!=null)
+				bestAS.addFlag(SR6ItemFlag.PRIMARY);
+			
+			return bestAS;
+		}
+	}
+
+	//--------------------------------------------------------------------
+	private CarriedItem<ItemTemplate> getBestAccessDevice(Shadowrun6Character model) {
+		// Check if there is a device which is flagged PRIMARY
+		Optional<CarriedItem<ItemTemplate>> opt = model.getCarriedItemsRecursive().stream()
+				.filter(i -> i.hasFlag(SR6ItemFlag.MATRIX_DEVICE)).filter(i -> i.hasFlag(SR6ItemFlag.PRIMARY))
+				.filter(i -> i.hasAttribute(SR6ItemAttribute.DATA_PROCESSING)).findFirst();
+		if (opt.isPresent()) {
+			return opt.get();
+		} else {
+			CarriedItem<ItemTemplate> best = null;
+			int bestSum = 0;
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+				if (!item.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
+					continue;
+				item.removeFlag(SR6ItemFlag.PRIMARY);
+				int a = item.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue();
+				int s = item.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
+				int sum = a + s;
+				if (sum > bestSum) {
+					// Previous best is not best anymore
+					best = item;
+					bestSum = sum;
+				}
+			}
+			if (best!=null)
+				best.addFlag(SR6ItemFlag.PRIMARY);
+			
+			return best;
+		}
+	}
+
+	//--------------------------------------------------------------------
 	private void calculateNonTechnomancer(Shadowrun6Character model, Persona persona) {
-		CarriedItem bestAccessDevice = null;
-
-		/*
-		 * Find the best cyberdeck
-		 */
-		CarriedItem<ItemTemplate> bestAS = null;
-		int bestSum = 0;
-		for (CarriedItem item : model.getCarriedItems()) {
-			if (!item.hasAttribute(SR6ItemAttribute.ATTACK))
-				continue;
-//			if (logger.isTraceEnabled())
-//				logger.trace("  consider for AS: "+item);
-			int a = item.getAsValue(SR6ItemAttribute.ATTACK).getModifiedValue();
-			int s = item.getAsValue(SR6ItemAttribute.SLEAZE).getModifiedValue();
-			int sum = a+s;
-			if (sum>bestSum) {
-				// Previous best is not best anymor
-				if (bestAS!=null) bestAS.setPrimary(false);
-				bestAS = item;
-				bestSum= sum;
-				bestAS.setPrimary(true);
-				persona.setAttribute(item.getAsValue(SR6ItemAttribute.ATTACK));
-				persona.setAttribute(item.getAsValue(SR6ItemAttribute.SLEAZE));
-			}
-			// Device rating
-			if (item.hasAttribute(SR6ItemAttribute.DEVICE_RATING)) {
-				int dr = item.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue();
-				if (bestAccessDevice==null || dr>bestAccessDevice.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue()) {
-					bestAccessDevice = item;
-				}
-			}
-		}
-		if (bestAS!=null)
-			bestAccessDevice = bestAS;
-		logger.log(Level.INFO, "best device for AS: "+bestAS);
-
-		/*
-		 * Find the best commlink or cyber jack
-		 */
-		CarriedItem<ItemTemplate> bestDF = null;
-		bestSum = 0;
-		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-			if (!item.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
-				continue;
-			logger.log(Level.INFO, "  consider for DF: "+item);
-			int d = item.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue();
-			int f = item.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
-			int sum = d+f;
-			if (sum>bestSum) {
-				// Previous best DF is not primary anymore
-				if (bestDF!=null) {
-					bestDF.setPrimary(false);
-				}
-				bestDF = item;
-				bestSum= sum;
-				bestDF.setPrimary(true);
-				persona.setAttribute(item.getAsValue(SR6ItemAttribute.DATA_PROCESSING));
-				persona.setAttribute(item.getAsValue(SR6ItemAttribute.FIREWALL));
-			}
-			// Device rating
-			if (item.hasAttribute(SR6ItemAttribute.DEVICE_RATING) && bestAS==null) {
-				int dr = item.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue();
-				if (bestAccessDevice==null || dr>bestAccessDevice.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue()) {
-					bestAccessDevice = item;
-				}
-			}
-		}
-		if (bestAS!=null)
-			bestAccessDevice = bestAS;
+		CarriedItem<ItemTemplate> bestDF = getBestAccessDevice(model);
+		CarriedItem<ItemTemplate> bestAS = getBestCyberdeck(model);
 		logger.log(Level.INFO, "best device for DF: "+bestDF);
-		logger.log(Level.INFO, "best access device: "+bestAccessDevice);
+		logger.log(Level.INFO, "best access device: "+bestAS);
 
+		AttributeValue<ShadowrunAttribute> val = null;
+		
 		// Device rating
-		if (bestAccessDevice!=null)
-			persona.setAttribute(bestAccessDevice.getAsValue(SR6ItemAttribute.DEVICE_RATING));
+		if (bestAS!=null)
+			persona.setAttribute(bestAS.getAsValue(SR6ItemAttribute.DEVICE_RATING));
 		else
 			persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.DEVICE_RATING,0));
-		// Attack rating
-		persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.ATTACK_RATING,
+		
+		// Attack rating as attribute
+		val = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_MATRIX);
+		val.setDistributed(0);
+		CalculateDerivedAttributes.addNaturalModifier(val, bestAS, SR6ItemAttribute.ATTACK);
+		CalculateDerivedAttributes.addNaturalModifier(val, bestAS, SR6ItemAttribute.SLEAZE);
+		// Attack rating for persona
+		persona.setAttribute(new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.ATTACK_RATING,
 				persona.getAttack().getModifiedValue() + 
 				persona.getSleaze().getModifiedValue()));
+		
+		// Defense rating as attribute
+		val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_MATRIX);
+		val.setDistributed(0);
+		CalculateDerivedAttributes.addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
+		CalculateDerivedAttributes.addNaturalModifier(val, bestDF, SR6ItemAttribute.FIREWALL);
 		// Defense rating
-		persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.DEFENSE_PHYSICAL,
+		persona.setAttribute(new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DEFENSE_MATRIX,
 				persona.getDataProcessing().getModifiedValue() + 
 				persona.getFirewall().getModifiedValue()));
+		
+		// Defense pool (against Data Spike or Tar Pit) as attribute
+		val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_MATRIX);
+		val.setDistributed(0);
+		CalculateDerivedAttributes.addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
+		CalculateDerivedAttributes.addNaturalModifier(val, bestDF, SR6ItemAttribute.FIREWALL);
+
 		// Active program slots
-		if (bestAccessDevice!=null && bestAccessDevice.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS)!=null)
-			persona.setAttribute(bestAccessDevice.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS));
+		if (bestAS!=null && bestAS.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS)!=null)
+			persona.setAttribute(bestAS.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS));
 		else
 			persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.CONCURRENT_PROGRAMS,0));
 		

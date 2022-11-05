@@ -57,6 +57,8 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		bxActions.getChildren().add(lbValue);
 		
 		flip = new FlipControl(Orientation.HORIZONTAL, true);
+		
+		layout.setStyle("-fx-max-width: 22em");
 	}
 
 	//-------------------------------------------------------------------
@@ -90,26 +92,26 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 			}
 			
 			// Modes
-			if (item.getOperationModes().isEmpty()) {
+//			if (item.getOperationModes().isEmpty()) {
 				line2.getChildren().clear();
 				setGraphic(layout);
-			} else {
-				Label lbWarning = new Label("Modeswitcher - Not functional yet");
-				GridPane back = new GridPane();
-				int y=0;
-				for (OperationModeOption modeOpt : item.getOperationModes()) {
-					CarriedItem<?> src = modeOpt.getSource();
-					Label lbSrc = new Label(src.getNameWithoutRating());
-					ChoiceBox<OperationMode> cbMode = new ChoiceBox<>();
-					cbMode.getItems().addAll(modeOpt.getModes());
-					back.add(lbSrc , 0, y);
-					back.add(cbMode, 1, y);
-					y++;
-				}
-				//line2.getChildren().setAll(cbMode);
-				flip.getItems().add(back);
-				setGraphic(flip);
-			}
+//			} else {
+//				Label lbWarning = new Label("Modeswitcher - Not functional yet");
+//				GridPane back = new GridPane();
+//				int y=0;
+//				for (OperationModeOption modeOpt : item.getOperationModes()) {
+//					CarriedItem<?> src = modeOpt.getSource();
+//					Label lbSrc = new Label(src.getNameWithoutRating());
+//					ChoiceBox<OperationMode> cbMode = new ChoiceBox<>();
+//					cbMode.getItems().addAll(modeOpt.getModes());
+//					back.add(lbSrc , 0, y);
+//					back.add(cbMode, 1, y);
+//					y++;
+//				}
+//				//line2.getChildren().setAll(cbMode);
+//				flip.getItems().add(back);
+//				setGraphic(flip);
+//			}
 			
 		}
 	}

@@ -219,5 +219,5 @@ public enum ItemSubType {
 		return Shadowrun6Core.getI18nResources().getString("itemsubtype."+this.name().toLowerCase());
 	}
 
-	public static List<ItemSubType> matrixDevices() { return List.of(COMMLINK, CYBERDECK, RIGGER_CONSOLE. TAC_NET);}
+	public static ItemSubType[] matrixDevices() { return new ItemSubType[]{COMMLINK, CYBERDECK, RIGGER_CONSOLE, TAC_NET};}
 }

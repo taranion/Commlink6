@@ -419,8 +419,21 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.addModification( valMod );
 	}
 
+//	//-------------------------------------------------------------------
+//	static void addNaturalModifier(Shadowrun6Character model, AttributeValue<ShadowrunAttribute> val, ShadowrunAttribute attr) {
+//		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), model.getAttribute(attr).getModifiedValue(), attr);
+//		valMod.setSet(ValueType.NATURAL);
+//		valMod.setSource(attr);
+//		val.addModification( valMod );
+//	}
+
 	//-------------------------------------------------------------------
-	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
+	static void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
+		if (item==null) return;
+		if (!item.hasAttribute(attr)) {
+			logger.log(Level.ERROR, "Item {0} does not have attribute {1}", item.getKey(), attr);
+			return;
+		}
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), item.getAsValue(attr).getModifiedValue(), attr);
 		valMod.setSet(ValueType.NATURAL);
 		valMod.setSource(attr);

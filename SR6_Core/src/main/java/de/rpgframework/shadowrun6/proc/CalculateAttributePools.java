@@ -45,6 +45,9 @@ public class CalculateAttributePools implements ProcessingStep {
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		for (ShadowrunAttribute attr : ShadowrunAttribute.values()) {
+			if (attr == ShadowrunAttribute.DEFENSE_RATING_MATRIX) {
+				logger.log(Level.WARNING, "HERE");
+			}
 			calculatePool(model.getAttribute(attr));
 		}
 		return unprocessed;
@@ -59,7 +62,8 @@ public class CalculateAttributePools implements ProcessingStep {
 		/*
 		 * Natural attribute first
 		 */
-		pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(aVal.getDistributed(), aVal.getModifyable().getName(loc)));
+		if (aVal.getDistributed()!=0)
+			pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(aVal.getDistributed(), aVal.getModifyable().getName(loc)));
 		// Add all natural modifiers
 		for (Modification tmp : aVal.getModifications()) {
 			if (!(tmp instanceof ValueModification))

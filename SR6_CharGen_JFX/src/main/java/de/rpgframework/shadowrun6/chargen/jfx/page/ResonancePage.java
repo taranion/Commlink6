@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.chargen.jfx.page;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -55,7 +56,7 @@ public class ResonancePage extends Page {
 	//-------------------------------------------------------------------
 	public ResonancePage() {
 		super(ResourceI18N.get(RES, "page.resonance.title"));
-		filter = carried -> carried.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()==ItemType.ELECTRONICS && ItemSubType.matrixDevices().contains(carried.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue());
+		filter = carried -> carried.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()==ItemType.ELECTRONICS && List.of(ItemSubType.matrixDevices()).contains(carried.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue());
 		initComponents();
 		initLayout();
 		initInteractivity();
