@@ -352,7 +352,7 @@ public class JSONSR6ExportService {
             jsonArmor.accessories = getItemAccessories(carriedItem);
             jsonArmor.page = getPageString(carriedItem.getResolved());
             jsonArmor.description = getDescription(carriedItem.getResolved());
-            jsonArmor.primary = carriedItem.isPrimary();
+            jsonArmor.primary = carriedItem.hasFlag(SR6ItemFlag.PRIMARY);
             jsonArmorList.add(jsonArmor);
         }
         jsonCharacter.armors = jsonArmorList;
@@ -405,7 +405,7 @@ public class JSONSR6ExportService {
             jsonCloseCombatWeapon.accessories = getItemAccessories(closeCombatWeapon);
             jsonCloseCombatWeapon.page = getPageString(closeCombatWeapon.getResolved());
             jsonCloseCombatWeapon.description = getDescription(closeCombatWeapon.getResolved());
-            jsonCloseCombatWeapon.primary = closeCombatWeapon.isPrimary();
+            jsonCloseCombatWeapon.primary = closeCombatWeapon.hasFlag(SR6ItemFlag.PRIMARY);
             jsonCloseCombatWeaponList.add(jsonCloseCombatWeapon);
         }
         jsonCharacter.closeCombatWeapons = jsonCloseCombatWeaponList;
@@ -432,7 +432,7 @@ public class JSONSR6ExportService {
             jsonLongRangeWeapon.accessories = getItemAccessories(longRangeWeapon);
             jsonLongRangeWeapon.page = getPageString(longRangeWeapon.getResolved());
             jsonLongRangeWeapon.description = getDescription(longRangeWeapon.getResolved());
-            jsonLongRangeWeapon.primary = longRangeWeapon.isPrimary();
+            jsonLongRangeWeapon.primary = longRangeWeapon.hasFlag(SR6ItemFlag.PRIMARY);
             jsonLongRangeWeapons.add(jsonLongRangeWeapon);
         }
         jsonCharacter.longRangeWeapons = jsonLongRangeWeapons;
