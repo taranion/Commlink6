@@ -46,7 +46,7 @@ public class CalculateAttributePools implements ProcessingStep {
 	public List<Modification> process(List<Modification> unprocessed) {
 		for (ShadowrunAttribute attr : ShadowrunAttribute.values()) {
 			if (attr == ShadowrunAttribute.DEFENSE_RATING_MATRIX) {
-				logger.log(Level.WARNING, "HERE");
+				logger.log(Level.WARNING, "HERE: "+model.getAttribute(attr).getModifications());
 			}
 			calculatePool(model.getAttribute(attr));
 		}
@@ -72,6 +72,10 @@ public class CalculateAttributePools implements ProcessingStep {
 			if (mod.getSet()!=ValueType.NATURAL)
 				continue;
 			int value = mod.getValue();
+			if (mod.getLookupTable() != null && mod.getLookupTable().length >= value) {
+				String lookup = mod.getLookupTable()[value - 1];
+				value = Integer.parseInt(lookup);
+			}
 			if (mod.getSource()==null) {
 				logger.log(Level.WARNING, "No source for modification "+mod);
 			}
@@ -89,7 +93,11 @@ public class CalculateAttributePools implements ProcessingStep {
 			if (mod.getSet()!=ValueType.AUGMENTED)
 				continue;
 			int value = mod.getValue();
-			if (mod.getSource()==null) {
+			if (mod.getLookupTable() != null && mod.getLookupTable().length >= value) {
+				String lookup = mod.getLookupTable()[value - 1];
+				value = Integer.parseInt(lookup);
+			}
+			if (mod.getSource() == null) {
 				logger.log(Level.WARNING, "No source for modification "+mod);
 			}
 			String name = Shadowrun6Tools.getModificationSourceString(mod.getSource());
@@ -108,7 +116,7 @@ public class CalculateAttributePools implements ProcessingStep {
 				System.exit(1);
 			}
 		}
-		logger.log(Level.INFO, "{0} NATURAL    : {1}",aVal.getModifyable(),pool.getCalculation(ValueType.NATURAL));
+		logger.log(Level.DEBUG, "{0} NATURAL    : {1}",aVal.getModifyable(),pool.getCalculation(ValueType.NATURAL));
 		
 		/* Artificial */
 		int sumArt = 0;
@@ -119,6 +127,10 @@ public class CalculateAttributePools implements ProcessingStep {
 			if (mod.getSet()!=ValueType.ARTIFICIAL)
 				continue;
 			int value = mod.getValue();
+			if (mod.getLookupTable()!=null && mod.getLookupTable().length>=value) {
+				String lookup = mod.getLookupTable()[value-1];
+				value = Integer.parseInt(lookup);
+			}
 			if (mod.getSource()==null) {
 				logger.log(Level.WARNING, "No source for modification "+mod);
 			}

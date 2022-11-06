@@ -59,47 +59,16 @@ public class GetModificationsFromGear implements ProcessingStep {
 					SR6GearTool.recalculate("", model, item);
 				}
 				
-				logger.log(Level.DEBUG, "--item "+item.getKey());
 				for (Modification mod : item.getCharacterModifications()) {
 					logger.log(Level.INFO, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());
-					// TODO:
-					// Shadowrun6Tools.instantiateModification
-					// um CHOICEs (z.B. von Reflex Recorder) mit Entscheidung zu verknüpfen
-					logger.log(Level.INFO, "--item "+item.getKey()+": preMod="+mod+"    item="+item);
-					if ( item.getKey().equals("bone_lacing")) {
-						logger.log(Level.ERROR, "TRACRE");
-						SR6GearTool.recalculate("", model, item);
-					}
+					// Make specific instances of the modification (if necessary)
+					// Calls ShadowrunTools.instantiateModification 
+					logger.log(Level.TRACE, "--item {0}: preMod={1} ", item.getKey(), mod);
 					Modification realMod = mod.getReferenceType().instantiateModification(mod, item, model);
-					logger.log(Level.INFO, "--item "+item.getKey()+": realMod="+realMod);
-					
-//					if (mod instanceof ValueModification) {
-//						ValueModification vMod = ((ValueModification)mod);
-//						logger.log(Level.INFO, "--item "+item.getKey()+": 1-> "+vMod.hasFormula());
-//						if (vMod.hasFormula()) {
-//							logger.log(Level.INFO, "--item "+item.getKey()+": 2-> "+vMod.getFormula().isResolved());
-//							if (!vMod.getFormula().isResolved()) {
-//								logger.log(Level.INFO, "--item "+item.getKey()+": 3-> Todo: Resolve "+vMod.getFormula());
-//								String resolved = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, vMod.getFormula(), new VariableResolver(item, model));
-//								logger.log(Level.INFO, "--item "+item.getKey()+": 4-> Resolved = "+resolved);
-//								
-//								System.exit(1);
-//							}
-//						}
-//					}
+					logger.log(Level.TRACE, "--item {0}: realMod={1} ", item.getKey(), realMod);
+
 					unprocessed.add(realMod);
 				}
-//				OperationResult<List<Modification>> modResult = SR6GearTool.recalculate("", model, item);
-//				if (modResult.hasError()) {
-//					logger.log(Level.WARNING, "Problem with {0}: {1}", item.getKey(), modResult.getError());
-//					continue;
-//				}
-//				for (Modification mod : modResult.get()) {
-//					if (mod.getApplyTo()==ApplyTo.CHARACTER) {
-//						logger.log(Level.DEBUG, "Add modifications from gear {0}: {1}", item.getKey(), mod);
-//						unprocessed.add(mod);
-//					}
-//				}
 			}
 		} finally {
 			logger.log(Level.TRACE, "LEAVE : process() ends with "+unprocessed.size()+" modifications still to process");

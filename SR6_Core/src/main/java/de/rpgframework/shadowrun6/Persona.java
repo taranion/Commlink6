@@ -18,8 +18,8 @@ public class Persona {
 	
 	private final static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
 	
-	private Map<SR6ItemAttribute, ItemAttributeValue> attributes;
-	private Map<ShadowrunAttribute, AttributeValue> attributes2;
+	private Map<SR6ItemAttribute, ItemAttributeValue<SR6ItemAttribute>> attributes;
+	private Map<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> attributes2;
 	private String name;
 	private int[] monitor;
 	
@@ -143,6 +143,10 @@ public class Persona {
 	 */
 	public void setMonitor(int[] monitor) {
 		this.monitor = monitor;
+	}
+
+	public AttributeValue<ShadowrunAttribute> getAttribute(ShadowrunAttribute key) {
+		return attributes2.get(key);
 	}
 
 }

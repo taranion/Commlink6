@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.Function;
@@ -133,8 +134,8 @@ public class Shadowrun6Tools {
 //		new ConnectSignatureManeuvers(),
 //		new ApplyRelevanceAndEdgeMods(),
 		CalculateEssence.class,
-		CalculateDerivedAttributes.class,
 		CalculatePersona.class,
+		CalculateDerivedAttributes.class,
 		CalculateAttributePools.class,
 		CalculateSkillPools.class,
 		CalculateMeleeAndUnarmed.class
@@ -712,8 +713,10 @@ public class Shadowrun6Tools {
 	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, Shadowrun6Character model) {
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
-			if (clone.getSource()!=null && clone.getSource().toString().equals("titanium") || clone.getSource() instanceof SR6PieceOfGearVariant)
-				throw new RuntimeException("Trace");
+			if (clone.getLookupTable()!=null) {
+				clone.setValue( clone.getLookupTable()[clone.getValue()-1] );
+				clone.setLookupTable(null);
+			}
 			if ("CHOICE".equals( clone.getKey() )) {
 				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
 				Decision dec = value.getDecision(uuid);
@@ -1345,22 +1348,68 @@ public class Shadowrun6Tools {
 	/*
 	 * Find the best commlink or cyber jack
 	 */
-	public static CarriedItem<ItemTemplate> getBestMatrixDF(Shadowrun6Character model) {
-		CarriedItem<ItemTemplate> bestDF = null;
-		int bestSum = 0;
-		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.ELECTRONICS)) {
-			if (!item.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
-				continue;
-			logger.log(Level.INFO,"  consider for DF: "+item);
-			int d = item.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue();
-			int f = item.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
-			int sum = d+f;
-			if (sum>bestSum) {
-				bestDF = item;
-				bestSum= sum;
+	public static CarriedItem<ItemTemplate> getPrimaryMatrixDF(Shadowrun6Character model) {
+		// Check if there is a device which is flagged PRIMARY
+		Optional<CarriedItem<ItemTemplate>> opt = model.getCarriedItemsRecursive().stream()
+				.filter(i -> i.hasFlag(SR6ItemFlag.MATRIX_DEVICE)).filter(i -> i.hasFlag(SR6ItemFlag.PRIMARY))
+				.filter(i -> i.hasAttribute(SR6ItemAttribute.DATA_PROCESSING)).findFirst();
+		if (opt.isPresent()) {
+			return opt.get();
+		} else {
+			CarriedItem<ItemTemplate> best = null;
+			int bestSum = 0;
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+				if (!item.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
+					continue;
+				item.removeFlag(SR6ItemFlag.PRIMARY);
+				int a = item.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue();
+				int s = item.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
+				int sum = a + s;
+				if (sum > bestSum) {
+					// Previous best is not best anymore
+					best = item;
+					bestSum = sum;
+				}
 			}
+			if (best!=null)
+				best.addFlag(SR6ItemFlag.PRIMARY);
+			
+			return best;
 		}
-		return bestDF;
+	}
+	
+	//--------------------------------------------------------------------
+	/*
+	 * Find the best commlink or cyber jack
+	 */
+	public static CarriedItem<ItemTemplate> getPrimaryMatrixAS(Shadowrun6Character model) {
+		// Check if there is a device which is flagged PRIMARY
+		Optional<CarriedItem<ItemTemplate>> opt = model.getCarriedItemsRecursive().stream()
+				.filter(i -> i.hasFlag(SR6ItemFlag.MATRIX_DEVICE)).filter(i -> i.hasFlag(SR6ItemFlag.PRIMARY))
+				.filter(i -> i.hasAttribute(SR6ItemAttribute.ATTACK)).findFirst();
+		if (opt.isPresent()) {
+			return opt.get();
+		} else {
+			CarriedItem<ItemTemplate> bestAS = null;
+			int bestSum = 0;
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+				if (!item.hasAttribute(SR6ItemAttribute.ATTACK))
+					continue;
+				item.removeFlag(SR6ItemFlag.PRIMARY);
+				int a = item.getAsValue(SR6ItemAttribute.ATTACK).getModifiedValue();
+				int s = item.getAsValue(SR6ItemAttribute.SLEAZE).getModifiedValue();
+				int sum = a + s;
+				if (sum > bestSum) {
+					// Previous best is not best anymore
+					bestAS = item;
+					bestSum = sum;
+				}
+			}
+			if (bestAS!=null)
+				bestAS.addFlag(SR6ItemFlag.PRIMARY);
+			
+			return bestAS;
+		}
 	}
 	
 	//--------------------------------------------------------------------

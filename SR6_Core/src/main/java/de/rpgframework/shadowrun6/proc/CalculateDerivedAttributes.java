@@ -70,201 +70,37 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 					}
 					break;
 				}
-				
-//				if (_mod instanceof AttributeModification) {
-//					AttributeModification mod = (ShadowrunAttributeModification)_mod;
-//					if (mod.getType()==ModificationValueType.MAX) {
-//						unprocessed.add(mod);
-//					} else {
-//						AttributeValue val = model.getAttribute(mod.getAttribute());
-//						logger.log(Level.INFO, "  Add "+mod+" from "+mod.getSource());
-//						val.addModification(mod);
-//					}
-//				} else if (_mod instanceof ItemAttributeModification) {
-//					ItemAttributeModification mod = (ItemAttributeModification)_mod;
-//					for (CarriedItem item : model.getItems(true)) {
-//						logger.trace("check "+mod+" on "+item);
-//						logger.trace("item = "+item.getUsedAsType()+"   "+item.getItem().getNonAccessoryType()+"/"+item.getItem().getSubtype(null)+"   slot="+item.getSlot());
-//						if (mod.getType()!=null && mod.getType()!=item.getUsedAsType())
-//							continue;
-//						if (mod.getSubtype()!=null && mod.getSubtype()!=item.getUsedAsSubType())
-//							continue;
-//						logger.log(Level.INFO, "Apply "+mod+" to "+item);
-//						if (item.getModifications().size()>30) {
-//							logger.fatal("STOP HERE - too many modifications");
-//							System.exit(1);
-//						}
-//						item.addAutoModification(mod);
-//					}
-//				} else if (_mod instanceof SpecialRuleModification) {
-//					SpecialRuleModification mod = (SpecialRuleModification)_mod;
-//					switch (mod.getRule()) {
-//					case CHARISMATIC_DEFENSE:
-//						rules.add(mod.getRule());
-//						break;
-//					default:
-//						unprocessed.add(_mod);
-//					}
-//				} else
-					unprocessed.add(_mod);
+				unprocessed.add(_mod);
 			}
 
 			// Set character back to zero
 			//			logger.log(Level.DEBUG, "1. Calculate derived attributes");
 			AttributeValue<ShadowrunAttribute> val = null;
 
-			/*
-			 * Physical condition monitor
-			 */
-			int phy = Math.round(model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue()/2.0f) + 8;
-			val = model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR);
-			val.setDistributed(phy);
-//			val.clearModifications();
-			logger.log(Level.DEBUG, " Monitor Physical = "+val.getModifiedValue()+"    modifier="+val.getModifier());
+			
+			calculateMonitorPhysical();
+			calculateMonitorStun();
+			calculateInitiativePhysical();
+			calculateInitiativeMatrixAR();
+			calculateInitiativeAstral();
+			calculateInitiativeMatrixVRCold();
+			calculateInitiativeMatrixVRHot();
+			
+			calculateAttackRatingPhysical();
+			calculateAttackRatingAstral();
+			calculateAttackRatingMatrix();
+			
+			calculateDefenseRatingPhysical();
+			calculateDefenseRatingMatrix();
+			calculateDefenseRatingAstral();
 
-			/*
-			 * Stun condition monitor
-			 */
-			int stun = Math.round(model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue()/2.0f) + 8;
-			val = model.getAttribute(ShadowrunAttribute.STUN_MONITOR);
-			val.setDistributed(stun);
-//			val.clearModifications();
-			logger.log(Level.DEBUG, " Monitor Stun     = "+val.getModifiedValue());
-
-			/*
-			 * Physical initiative
-			 */
-			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_PHYSICAL);
-			val.setDistributed(0);
-//			val.clearModifications();
-			addNaturalModifier(val, ShadowrunAttribute.REACTION);
-			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
-			logger.log(Level.DEBUG, " INI Physical = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL).getModifiedValue()+" d6");
-			// Initiave Dice (Physical)
-			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL);
-			val.setDistributed(1); // Base value without modifiers
-			logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
-			// Minor actions (Physical)
-			val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION);
-			val.setDistributed(1);
-			addNaturalModifier(val,ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL);
-
-			/*
-			 * astral initiative
-			 */
-			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_ASTRAL);
-			val.setDistributed(0);
-//			val.clearModifications();
-			addNaturalModifier(val, ShadowrunAttribute.LOGIC);
-			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
-			logger.log(Level.DEBUG, " Base INI Astral = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_ASTRAL).getModifiedValue()+" d6");
-			// Initiave Dice (Astral)
-			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_ASTRAL);
-			val.setDistributed(2); // Base value without modifiers
-			logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
-			// Minor actions (Astral)
-			val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_ASTRAL);
-			val.setDistributed(1);
-			addNaturalModifier(val,ShadowrunAttribute.INITIATIVE_DICE_ASTRAL);
-			logger.log(Level.ERROR, "                 = "+val.getDisplayString()+"   "+val.getModifications());
-
-			/*
-			 * matrix initiative (AR)
-			 */
-			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX);
-			val.setDistributed(0);
-			val.clearModifications();
-			CarriedItem<ItemTemplate> bestDF = Shadowrun6Tools.getBestMatrixDF(model);
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
-				// Technomancers
-				addNaturalModifier(val,ShadowrunAttribute.LOGIC);
-				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
-			} else if (bestDF!=null) {
-				// With commlink
-				addNaturalModifier(val,ShadowrunAttribute.REACTION);
-				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
-			} 
-			logger.log(Level.DEBUG, " Base INI Matrix = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue()+" d6");
-			// Initiave Dice (Matrix Cold)
-			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD);
-			val.setDistributed(2); // Base value without modifiers
-			logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
-			// Minor actions (Matrix)
-//			val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_);
-//			val.setDistributed(1 + model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue());
-//			logger.log(Level.DEBUG, "                 = "+val.getDisplayString()+"   "+val.getModifications());
-
-			/*
-			 * matrix initiative (VR, cold sim)
-			 */
-			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD);
-			val.setDistributed(0);
-			val.clearModifications();
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
-				// Technomancers
-				addNaturalModifier(val,ShadowrunAttribute.LOGIC);
-				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
-			} else if (bestDF!=null) {
-				addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
-				addNaturalModifier(val, ShadowrunAttribute.INTUITION);
-			} 
-			logger.log(Level.DEBUG, " Base INI Matrix VR = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD).getModifiedValue()+" d6");
-
-			/*
-			 * matrix initiative (VR, cold sim)
-			 */
-			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT);
-			val.setDistributed(0);
-			val.clearModifications();
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
-				// Technomancers
-				addNaturalModifier(val,ShadowrunAttribute.LOGIC);
-				addNaturalModifier(val,ShadowrunAttribute.INTUITION);
-			} else if (bestDF!=null) {
-				addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
-				addNaturalModifier(val, ShadowrunAttribute.INTUITION);
-			} 
-			logger.log(Level.DEBUG, " Base INI Matrix VR Hot = "+val.getDisplayString()+" + "+model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT).getModifiedValue()+" d6");
-
-			/*
-			 * Defensive
-			 */
-			val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_PHYSICAL);
-			val.setDistributed(0);
-			addNaturalModifier(val, ShadowrunAttribute.REACTION);
-			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
-			logger.log(Level.DEBUG, " Defensive pool = "+val.getModifiedValue());
-
-			/*
-			 * Defensive Combat Direct
-			 */
-			val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_COMBAT_DIRECT);
-			val.setDistributed(0);
-			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
-			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
-			logger.log(Level.DEBUG, " Defensive pool (Direct) = "+val.getModifiedValue());
-
-			/*
-			 * Defensive Combat Indirect
-			 */
-			val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_COMBAT_INDIRECT);
-			val.setDistributed(0);
-			addNaturalModifier(val, ShadowrunAttribute.REACTION);
-			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
-			logger.log(Level.DEBUG, " Defensive pool (Indirect) = "+val.getModifiedValue());
-
-			/*
-			 * Defensive Pool against toxin damage
-			 */
-			val = model.getAttribute(ShadowrunAttribute.RESIST_TOXIN);
-			val.setDistributed(0);
-			addNaturalModifier(val, ShadowrunAttribute.BODY);
-			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
-			logger.log(Level.DEBUG, " Defensive pool (Toxins) = "+val.getModifiedValue());
-
-			/*
-			 * 
-			 */
+			calculateDefensePoolPhysical();
+			calculateDefensePoolCombatDirect();
+			calculateDefensePoolCombatIndirect();
+			calculateDefensePoolAstral();
+			calculateDefensePoolMatrix();
+			
+			calculateResistToxin();
 			
 			/*
 			 * Drain
@@ -293,18 +129,15 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			 */
 			val = model.getAttribute(ShadowrunAttribute.COMPOSURE);
 			val.setDistributed(0);
-			val.clearModifications();
 			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
 			addNaturalModifier(val, ShadowrunAttribute.CHARISMA);
 			logger.log(Level.DEBUG, " Composure = "+val.getModifiedValue());
-			logger.log(Level.DEBUG, "           = "+val.getModifications());
 
 			/*
 			 * Judge intentions
 			 */
 			val = model.getAttribute(ShadowrunAttribute.JUDGE_INTENTIONS);
 			val.setDistributed(0);
-			val.clearModifications();
 			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
 			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
 			logger.log(Level.DEBUG, " Judge Intentions = "+val.getModifiedValue());
@@ -314,7 +147,6 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			 */
 			val = model.getAttribute(ShadowrunAttribute.LIFT_CARRY);
 			val.setDistributed(0);
-			val.clearModifications();
 			addNaturalModifier(val, ShadowrunAttribute.BODY);
 			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
 			logger.log(Level.DEBUG, " Lift/Carry = "+val.getModifiedValue());
@@ -324,7 +156,6 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			 */
 			val = model.getAttribute(ShadowrunAttribute.MEMORY);
 			val.setDistributed(0);
-			val.clearModifications();
 			addNaturalModifier(val, ShadowrunAttribute.LOGIC);
 			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
 			logger.log(Level.DEBUG, " Memory = "+val.getModifiedValue());
@@ -334,7 +165,6 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			 */
 			val = model.getAttribute(ShadowrunAttribute.RESIST_DAMAGE);
 			val.setDistributed(0);
-//			val.clearModifications();
 			addNaturalModifier(val, ShadowrunAttribute.BODY);
 			logger.log(Level.DEBUG, "Damage Resistance = "+val);
 			
@@ -343,68 +173,10 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			 */
 			val = model.getAttribute(ShadowrunAttribute.DAMAGE_OVERFLOW);
 			val.setDistributed(0);
-			val.clearModifications();
 			addNaturalModifier(val, ShadowrunAttribute.BODY);
 			addNaturalModifier(val, ShadowrunAttribute.BODY);
 			logger.log(Level.DEBUG, " Damage overflow = "+val.getModifiedValue());
 
-			/*
-			 * Alternate cyberlimb attributes
-			 */
-			val = model.getAttribute(ShadowrunAttribute.AGILITY);
-			//logger.log(Level.DEBUG, " Agility alternate = "+val.getAlternateValue());
-			val = model.getAttribute(ShadowrunAttribute.STRENGTH);
-			//logger.log(Level.DEBUG, " Strength alternate = "+val.getAlternateValue());
-
-			/*
-			 * Defense rating
-			 * First of all find the highest normal armor
-			 */
-			Shadowrun6Tools.flagItemWithHighestAttribute(model, SR6ItemAttribute.DEFENSE_PHYSICAL, SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
-//			CarriedItem<ItemTemplate> bestArmor = null;
-//			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-//				if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
-//					continue;
-//				item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
-//				// If no previous selection or armor is better, use it
-//				if (bestArmor==null || item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()> bestArmor.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue() )
-//					bestArmor = item;
-////				// Gear pieces that add armor are also allowed
-////				if (item.getResolved().getArmorData()!=null && item.getItem().getArmorData().addsToMain())
-////					item.setIgnoredForCalculations(false);
-//				logger.log(Level.DEBUG, "*  "+item.getNameWithRating()+" \t"+item.getAsValue(ItemAttribute.ARMOR).getModifiedValue()+": ignored="+item.isIgnoredForCalculations());
-//			}
-//			if (bestArmor!=null)
-//				bestArmor.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
-//			for (CarriedItem item : model.getItems(false)) {
-//				if (!item.hasAttribute(ItemAttribute.ARMOR) || item.isType(ItemType.VEHICLES) || item.isType(Arrays.asList(ItemType.droneTypes())))
-//					continue;
-//				item.setPrimary(bestArmor==item);
-//			}
-
-
-			int defRating = model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue();
-			// Power Plays "Charismatic Defense"
-//			if (rules.contains(Rule.CHARISMATIC_DEFENSE)) {
-//				defRating = model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue();
-//			}
-			logger.log(Level.DEBUG, "  Base Defensive rating = "+defRating);
-
-			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-				if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
-					continue;
-				ItemAttributeNumericalValue<SR6ItemAttribute> armorAtt = item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL);
-				defRating += armorAtt.getModifiedValue();
-				logger.log(Level.DEBUG, "  Add Defensive rating = "+armorAtt.getModifiedValue()+" from "+item.getNameWithRating());
-			}
-			val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
-			logger.log(Level.INFO, "Defensive rating = "+defRating+" = "+val);
-//			if (logger.isTraceEnabled()) {
-//				for (Modification mod : val.getModifications()) {
-//					logger.trace("#### "+mod+"  from "+mod.getSource());
-//				}
-//			}
-			val.setDistributed(defRating);
 		} finally {
 			logger.log(Level.TRACE,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
 		}
@@ -412,10 +184,16 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	}
 
 	//-------------------------------------------------------------------
+	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, int value, Object source) {
+		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), value, source);
+		valMod.setSet(ValueType.NATURAL);
+		val.addModification( valMod );
+	}
+
+	//-------------------------------------------------------------------
 	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, ShadowrunAttribute attr) {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), model.getAttribute(attr).getModifiedValue(), attr);
 		valMod.setSet(ValueType.NATURAL);
-		valMod.setSource(attr);
 		val.addModification( valMod );
 	}
 
@@ -439,5 +217,283 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		valMod.setSource(attr);
 		val.addModification( valMod );
 	}
+
+	//-------------------------------------------------------------------
+	private void calculateMonitorPhysical() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR);
+		val.setDistributed(8);
+		addNaturalModifier(val, Math.round(model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue()/2.0f), ShadowrunAttribute.BODY.getName()+"/2");
+		logger.log(Level.DEBUG, " Monitor Physical = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateMonitorStun() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.STUN_MONITOR);
+		val.setDistributed(8);
+		addNaturalModifier(val, Math.round(model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue()/2.0f), ShadowrunAttribute.WILLPOWER.getName()+"/2");
+		logger.log(Level.DEBUG, " Monitor Stun     = "+val.getModifiedValue());
+	}
+	
+	//-------------------------------------------------------------------
+	private void calculateInitiativePhysical() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.INITIATIVE_PHYSICAL);
+		val.setDistributed(0);
+		addNaturalModifier(val, ShadowrunAttribute.REACTION);
+		addNaturalModifier(val, ShadowrunAttribute.INTUITION);
+		logger.log(Level.DEBUG, " INI Physical Base = "+val.getModifiedValue());
+		// Initiave Dice (Physical)
+		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL);
+		val.setDistributed(1); // Base value without modifiers
+		logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
+		logger.log(Level.DEBUG, " INI Physical D6  = "+val.getModifiedValue());
+	}
+	
+	//-------------------------------------------------------------------
+	private void calculateInitiativeAstral() {
+		AttributeValue<ShadowrunAttribute> 			val = model.getAttribute(ShadowrunAttribute.INITIATIVE_ASTRAL);
+		val.setDistributed(0);
+		addNaturalModifier(val, ShadowrunAttribute.LOGIC);
+		addNaturalModifier(val, ShadowrunAttribute.INTUITION);
+		logger.log(Level.DEBUG, " Base INI Astral = "+val.getModifiedValue());
+		// Initiave Dice (Astral)
+		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_ASTRAL);
+		val.setDistributed(2); // Base value without modifiers
+		logger.log(Level.DEBUG, "              = "+val.getModifiedValue());
+		// Minor actions (Astral)
+		val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_ASTRAL);
+		val.setDistributed(1);
+		addNaturalModifier(val,ShadowrunAttribute.INITIATIVE_DICE_ASTRAL);
+		logger.log(Level.DEBUG, "                 = "+val.getModifiedValue());
+
+	}
+	
+	//-------------------------------------------------------------------
+	private void calculateInitiativeMatrixAR() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX);
+		val.setDistributed(0);
+		CarriedItem<ItemTemplate> bestDF = Shadowrun6Tools.getPrimaryMatrixDF(model);
+		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+			// Technomancers
+			addNaturalModifier(val,ShadowrunAttribute.LOGIC);
+			addNaturalModifier(val,ShadowrunAttribute.INTUITION);
+		} else if (bestDF!=null) {
+			// With commlink
+			addNaturalModifier(val,ShadowrunAttribute.REACTION);
+			addNaturalModifier(val,ShadowrunAttribute.INTUITION);
+		} 		
+		logger.log(Level.DEBUG, " INI Matrix Base  "+val.getModifiedValue());
+		
+		// Initiave Dice (Physical)
+		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX);
+		val.setDistributed(1); // Base value without modifiers
+		logger.log(Level.DEBUG, " INI Matrix D6    "+val.getModifiedValue());
+	}
+	
+	//-------------------------------------------------------------------
+	private void calculateInitiativeMatrixVRCold() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD);
+		val.setDistributed(0);
+		
+		addNaturalModifier(val, ShadowrunAttribute.INTUITION);
+		val.addModifications(model.getPersona().getDataProcessing().getModifications());
+		
+//		CarriedItem<ItemTemplate> bestDF = Shadowrun6Tools.getPrimaryMatrixDF(model);
+//		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+//			// Technomancers
+//			addNaturalModifier(val,ShadowrunAttribute.LOGIC);
+//			addNaturalModifier(val,ShadowrunAttribute.INTUITION);
+//		} else if (bestDF!=null) {
+//			// With commlink
+//			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
+//			addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
+//		} 
+		logger.log(Level.DEBUG, " INI Matrix VR Base  "+val.getModifiedValue());
+		
+		// Initiave Dice (Physical)
+		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD);
+		val.setDistributed(1); // Base value without modifiers
+		val.addModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 1, "VR Cold Sim") );
+		logger.log(Level.DEBUG, " INI Matrix VR D6    "+val.getModifiedValue());
+	}
+	
+	//-------------------------------------------------------------------
+	private void calculateInitiativeMatrixVRHot() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT);
+		val.setDistributed(0);
+		
+		addNaturalModifier(val, ShadowrunAttribute.INTUITION);
+		val.addModifications(model.getPersona().getDataProcessing().getModifications());
+//		CarriedItem<ItemTemplate> bestDF = Shadowrun6Tools.getPrimaryMatrixDF(model);
+//		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+//			// Technomancers
+//			addNaturalModifier(val,ShadowrunAttribute.LOGIC);
+//			addNaturalModifier(val,ShadowrunAttribute.INTUITION);
+//		} else if (bestDF!=null) {
+//			// With commlink
+//			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
+//			addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
+//		} 
+
+		logger.log(Level.DEBUG, " INI Matrix VR Base Hot "+val.getModifiedValue());
+		// Initiave Dice (Physical)
+		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT);
+		val.setDistributed(1); // Base value without modifiers
+		val.addModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 2, "VR Hot Sim") );
+		logger.log(Level.DEBUG, " INI Matrix VR D6 Hot   "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateAttackRatingPhysical() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL);
+		val.setDistributed(0);
+		addNaturalModifier(val,ShadowrunAttribute.STRENGTH);
+		addNaturalModifier(val,ShadowrunAttribute.REACTION);
+		logger.log(Level.DEBUG, " Attack Rating Phyiscal = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateAttackRatingAstral() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL);
+		val.setDistributed(0);
+		addNaturalModifier(val,ShadowrunAttribute.MAGIC);
+		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells() && model.getTradition()!=null) {
+			addNaturalModifier(val,model.getTradition().getTraditionAttribute());
+		}
+		logger.log(Level.DEBUG, " Attack Rating Astral = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateAttackRatingMatrix() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_MATRIX);
+		val.setDistributed(0);
+		addNaturalModifier(val, model.getPersona().getAttack().getModifiedValue(), SR6ItemAttribute.ATTACK);
+		addNaturalModifier(val, model.getPersona().getSleaze().getModifiedValue(), SR6ItemAttribute.SLEAZE);
+
+//		CarriedItem<ItemTemplate> bestAS = Shadowrun6Tools.getPrimaryMatrixAS(model);
+//		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+//			// Technomancers
+//			addNaturalModifier(val,ShadowrunAttribute.CHARISMA);
+//			addNaturalModifier(val,ShadowrunAttribute.INTUITION);
+//		} else if (bestAS!=null) {
+//			// With commlink
+//			addNaturalModifier(val, bestAS, SR6ItemAttribute.ATTACK);
+//			addNaturalModifier(val, bestAS, SR6ItemAttribute.SLEAZE);
+//		} 
+		logger.log(Level.DEBUG, " Attack Rating Matrix = "+val.getModifiedValue()+ "  /  "+val.getModifications());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateDefenseRatingPhysical() {
+		Shadowrun6Tools.flagItemWithHighestAttribute(model, SR6ItemAttribute.DEFENSE_PHYSICAL, SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
+		val.setDistributed(0);
+		addNaturalModifier(val,ShadowrunAttribute.BODY);
+		// Power Plays "Charismatic Defense"
+//		if (rules.contains(Rule.CHARISMATIC_DEFENSE)) {
+//			defRating = model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue();
+//		}
+
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
+				continue;
+			if (item.hasFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS)) 
+				continue;
+			addNaturalModifier(val, item, SR6ItemAttribute.DEFENSE_PHYSICAL);
+		}
+		logger.log(Level.DEBUG, " Defense Rating Phyiscal = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateDefenseRatingMatrix() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_MATRIX);
+		val.setDistributed(0);
+		addNaturalModifier(val, model.getPersona().getDataProcessing().getModifiedValue(), SR6ItemAttribute.DATA_PROCESSING);
+		addNaturalModifier(val, model.getPersona().getFirewall().getModifiedValue(), SR6ItemAttribute.FIREWALL);
+
+//		CarriedItem<ItemTemplate> bestDF = Shadowrun6Tools.getPrimaryMatrixDF(model);
+//		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+//			// Technomancers
+//			addNaturalModifier(val,ShadowrunAttribute.LOGIC);
+//			addNaturalModifier(val,ShadowrunAttribute.WILLPOWER);
+//		} else if (bestDF!=null) {
+//			// With commlink
+//			addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
+//			addNaturalModifier(val, bestDF, SR6ItemAttribute.FIREWALL);
+//		} 
+		logger.log(Level.DEBUG, " Defense Rating Matrix = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateDefenseRatingAstral() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL);
+		val.setDistributed(0);
+		addNaturalModifier(val,ShadowrunAttribute.INTUITION);
+		logger.log(Level.DEBUG, " Defense Rating Astral = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateDefensePoolPhysical() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_PHYSICAL);
+		val.setDistributed(0);
+		addNaturalModifier(val, ShadowrunAttribute.REACTION);
+		addNaturalModifier(val, ShadowrunAttribute.INTUITION);
+		logger.log(Level.DEBUG, " Defensive pool = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateDefensePoolCombatDirect() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_COMBAT_DIRECT);
+		val.setDistributed(0);
+		addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
+		addNaturalModifier(val, ShadowrunAttribute.INTUITION);
+		logger.log(Level.DEBUG, " Defensive pool (Direct) = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateDefensePoolCombatIndirect() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_COMBAT_INDIRECT);
+		val.setDistributed(0);
+		addNaturalModifier(val, ShadowrunAttribute.REACTION);
+		addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
+		logger.log(Level.DEBUG, " Defensive pool (Direct) = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateDefensePoolAstral() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_ASTRAL);
+		val.setDistributed(0);
+		addNaturalModifier(val, ShadowrunAttribute.INTUITION);
+		addNaturalModifier(val, ShadowrunAttribute.LOGIC);
+		logger.log(Level.DEBUG, " Defensive pool Astral = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateDefensePoolMatrix() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_MATRIX);
+		val.setDistributed(0);
+		addNaturalModifier(val, model.getPersona().getDataProcessing().getModifiedValue(), SR6ItemAttribute.DATA_PROCESSING);
+		addNaturalModifier(val, model.getPersona().getFirewall().getModifiedValue(), SR6ItemAttribute.FIREWALL);
+//		CarriedItem<ItemTemplate> bestDF = Shadowrun6Tools.getPrimaryMatrixDF(model);
+//		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+//			// Technomancers
+//			addNaturalModifier(val,ShadowrunAttribute.LOGIC);
+//			addNaturalModifier(val,ShadowrunAttribute.WILLPOWER);
+//		} else if (bestDF!=null) {
+//			// With commlink
+//			addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
+//			addNaturalModifier(val, bestDF, SR6ItemAttribute.FIREWALL);
+//		} 
+		logger.log(Level.DEBUG, " Defense Pool Matrix = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateResistToxin() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.RESIST_TOXIN);
+		val.setDistributed(0);
+		addNaturalModifier(val, ShadowrunAttribute.BODY);
+		addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
+		logger.log(Level.DEBUG, " Defensive pool Toxins = "+val.getModifiedValue());
+	}
+	
 
 }

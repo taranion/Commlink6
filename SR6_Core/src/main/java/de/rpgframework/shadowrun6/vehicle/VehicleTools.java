@@ -54,7 +54,7 @@ public class VehicleTools {
 		String spec = (getSpecializationForVehicle(vehicle.getResolved())!=null)?getSpecializationForVehicle(vehicle.getResolved()).getId():null;
 		List<PoolCalculation<Integer>> driverPilotPool = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, pilotSkill, spec);
 		if (mode==VehicleOperationMode.AUTONOMOUS) {
-			CarriedItem<ItemTemplate> autosoft = vehicle.getAccessory("maneuvering");
+			CarriedItem<ItemTemplate> autosoft = vehicle.getEmbeddedItem("maneuvering");
 			driverPilotPool.clear();
 			if (autosoft == null)
 				driverPilotPool.add(new PoolCalculation<Integer>(-1, Shadowrun6Core.getItem(ItemTemplate.class,"maneuvering").getName()));
@@ -62,7 +62,7 @@ public class VehicleTools {
 				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoft), autosoft.getNameWithRating()));
 		} else if (mode==VehicleOperationMode.RCC) {
 			if (rcc==null) return null;
-			CarriedItem<ItemTemplate> autosoft = rcc.getAccessory("maneuvering");
+			CarriedItem<ItemTemplate> autosoft = rcc.getEmbeddedItem("maneuvering");
 			driverPilotPool.clear();
 			if (autosoft == null)
 				driverPilotPool.add(new PoolCalculation<Integer>(-1, Shadowrun6Core.getItem(ItemTemplate.class,"maneuvering").getName()));

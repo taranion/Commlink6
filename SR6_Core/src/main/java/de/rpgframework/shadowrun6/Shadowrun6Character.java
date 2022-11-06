@@ -1,7 +1,6 @@
 package de.rpgframework.shadowrun6;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -17,7 +16,6 @@ import de.rpgframework.classification.Gender;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.RelevanceModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -29,6 +27,7 @@ import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -51,6 +50,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	protected List<TechniqueValue> techniques;
 	@ElementList(entry="maneuvers", type=SignatureManeuver.class)
 	protected List<SignatureManeuver> maneuvers;
+	@Element
+	private ASDFMapping asdfMap;
 
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
@@ -67,6 +68,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		techniques = new ArrayList<>();
 		martialArts = new ArrayList<>();
 		maneuvers = new ArrayList<>();
+		asdfMap = new ASDFMapping();
 		
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			attributes.add(new AttributeValue<ShadowrunAttribute>(key, 1));
@@ -203,9 +205,6 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	}
 
 	//-------------------------------------------------------------------
-	/**
-	 * @return the persona
-	 */
 	public Persona getPersona() {
 		return persona;
 	}
@@ -216,6 +215,20 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	 */
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	//-------------------------------------------------------------------
+	public SR6ItemAttribute getMatrixAttributeMapping(SR6ItemAttribute value) {
+		if (asdfMap!=null) {
+			switch (value) {
+			case ATTACK: return (asdfMap.getAttack()!=null)?asdfMap.getAttack():value;
+			case SLEAZE: return (asdfMap.getSleaze()!=null)?asdfMap.getSleaze():value;
+			case DATA_PROCESSING: return (asdfMap.getDataProcessing()!=null)?asdfMap.getDataProcessing():value;
+			case FIREWALL: return (asdfMap.getFirewall()!=null)?asdfMap.getFirewall():value;
+			default:
+			}
+		}
+		return value;
 	}
 
 	//-------------------------------------------------------------------
@@ -381,6 +394,14 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public List<SignatureManeuver> getSignatureManeuvers() {
 		return new ArrayList<SignatureManeuver>(maneuvers);
+	}
+
+	//-------------------------------------------------------------------
+	public ASDFMapping getMatrixAttribMap() {
+		if (asdfMap==null) {
+			asdfMap = new ASDFMapping();
+		}
+		return asdfMap;
 	}
 
 }

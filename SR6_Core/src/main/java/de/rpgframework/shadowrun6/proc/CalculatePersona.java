@@ -4,15 +4,14 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
-import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -23,7 +22,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
-import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 
@@ -71,6 +69,8 @@ public class CalculatePersona implements ProcessingStep {
 				// Non-Technomancer
 				calculateNonTechnomancer(model, persona);
 			}
+			
+			logger.log(Level.INFO, "ASDF: {0}  {1}  {2}  {3}", persona.getAttack(), persona.getSleaze(), persona.getDataProcessing(), persona.getFirewall());
 		} finally {
 			logger.log(Level.INFO,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
 		}
@@ -80,118 +80,93 @@ public class CalculatePersona implements ProcessingStep {
 	//--------------------------------------------------------------------
 	private void calculateTechnomancer(Shadowrun6Character model, Persona persona) {
 		persona.setName(RES.getString("label.living_persona"));
+
+		ItemAttributeNumericalValue<SR6ItemAttribute> valD = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DATA_PROCESSING);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valF = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.FIREWALL);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valA = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.ATTACK);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valS = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.SLEAZE);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valR = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DEVICE_RATING);
+
 		// Data Processing = LOGIC
-		persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.DATA_PROCESSING, 
-						model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()));
+		addNaturalModifier(valD, model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(), ShadowrunAttribute.LOGIC);
 		// Firewall = WILLOWER
-		persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.FIREWALL, 
-						model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue()));
+		addNaturalModifier(valF, model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue(), ShadowrunAttribute.WILLPOWER);
 		// Attack = CHARISMA
-		persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.ATTACK, 
-						model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue()));
+		addNaturalModifier(valA, model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue(), ShadowrunAttribute.CHARISMA);
 		// Sleaze = INTUITION
-		persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.SLEAZE, 
-						model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()));
+		addNaturalModifier(valS, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ShadowrunAttribute.INTUITION);
 
 		// Device Rating = RESONANCE
-		persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.DEVICE_RATING, 
-						model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue()));
-		// Attack rating
-		persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.ATTACK_RATING,
-				persona.getAttack().getModifiedValue() + 
-				persona.getSleaze().getModifiedValue()));
-		// Defense rating
-		persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.DEFENSE_PHYSICAL,
-				persona.getDataProcessing().getModifiedValue() + 
-				persona.getFirewall().getModifiedValue()));
-
-		// Initiative
-		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX, 
-				model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()+
-				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()));
-		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD, 
-				model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()+
-				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()));
-		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT, 
-				model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()+
-				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()));
-		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX));
-		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD));
-		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT));
+		addNaturalModifier(valR, model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue(), ShadowrunAttribute.RESONANCE);
 		
 		// Matrix condition monitor
 		persona.setMonitor(getTechnomancerMonitorArray(model));
-	}
-
-	//--------------------------------------------------------------------
-	private CarriedItem<ItemTemplate> getBestCyberdeck(Shadowrun6Character model) {
-		// Check if there is a device which is flagged PRIMARY
-		Optional<CarriedItem<ItemTemplate>> opt = model.getCarriedItemsRecursive().stream()
-				.filter(i -> i.hasFlag(SR6ItemFlag.MATRIX_DEVICE)).filter(i -> i.hasFlag(SR6ItemFlag.PRIMARY))
-				.filter(i -> i.hasAttribute(SR6ItemAttribute.ATTACK)).findFirst();
-		if (opt.isPresent()) {
-			return opt.get();
-		} else {
-			CarriedItem<ItemTemplate> bestAS = null;
-			int bestSum = 0;
-			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-				if (!item.hasAttribute(SR6ItemAttribute.ATTACK))
-					continue;
-				item.removeFlag(SR6ItemFlag.PRIMARY);
-				int a = item.getAsValue(SR6ItemAttribute.ATTACK).getModifiedValue();
-				int s = item.getAsValue(SR6ItemAttribute.SLEAZE).getModifiedValue();
-				int sum = a + s;
-				if (sum > bestSum) {
-					// Previous best is not best anymore
-					bestAS = item;
-					bestSum = sum;
-				}
-			}
-			if (bestAS!=null)
-				bestAS.addFlag(SR6ItemFlag.PRIMARY);
-			
-			return bestAS;
-		}
-	}
-
-	//--------------------------------------------------------------------
-	private CarriedItem<ItemTemplate> getBestAccessDevice(Shadowrun6Character model) {
-		// Check if there is a device which is flagged PRIMARY
-		Optional<CarriedItem<ItemTemplate>> opt = model.getCarriedItemsRecursive().stream()
-				.filter(i -> i.hasFlag(SR6ItemFlag.MATRIX_DEVICE)).filter(i -> i.hasFlag(SR6ItemFlag.PRIMARY))
-				.filter(i -> i.hasAttribute(SR6ItemAttribute.DATA_PROCESSING)).findFirst();
-		if (opt.isPresent()) {
-			return opt.get();
-		} else {
-			CarriedItem<ItemTemplate> best = null;
-			int bestSum = 0;
-			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-				if (!item.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
-					continue;
-				item.removeFlag(SR6ItemFlag.PRIMARY);
-				int a = item.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getModifiedValue();
-				int s = item.getAsValue(SR6ItemAttribute.FIREWALL).getModifiedValue();
-				int sum = a + s;
-				if (sum > bestSum) {
-					// Previous best is not best anymore
-					best = item;
-					bestSum = sum;
-				}
-			}
-			if (best!=null)
-				best.addFlag(SR6ItemFlag.PRIMARY);
-			
-			return best;
-		}
+		
+		persona.setAttribute(valA);
+		persona.setAttribute(valS);
+		persona.setAttribute(valD);
+		persona.setAttribute(valF);
 	}
 
 	//--------------------------------------------------------------------
 	private void calculateNonTechnomancer(Shadowrun6Character model, Persona persona) {
-		CarriedItem<ItemTemplate> bestDF = getBestAccessDevice(model);
-		CarriedItem<ItemTemplate> bestAS = getBestCyberdeck(model);
+		CarriedItem<ItemTemplate> bestDF = Shadowrun6Tools.getPrimaryMatrixDF(model);
+		CarriedItem<ItemTemplate> bestAS = Shadowrun6Tools.getPrimaryMatrixAS(model);
 		logger.log(Level.INFO, "best device for DF: "+bestDF);
 		logger.log(Level.INFO, "best access device: "+bestAS);
 
+		ItemAttributeNumericalValue<SR6ItemAttribute> valD = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DATA_PROCESSING);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valF = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.FIREWALL);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valA = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.ATTACK);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valS = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.SLEAZE);
+
+		// If both devices are selected, check for current attribute distribution
+		// otherwise only do standard
+		if (bestDF==null && bestAS==null) {
+		} else if (bestDF!=null && bestAS==null) {
+			addNaturalModifier(valA, bestDF.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getDistributed(), bestDF);
+			addNaturalModifier(valA, bestDF.getAsValue(SR6ItemAttribute.FIREWALL).getDistributed(), bestDF);
+		} else if (bestDF==null && bestAS!=null) {
+			addNaturalModifier(valA, bestAS.getAsValue(SR6ItemAttribute.ATTACK).getDistributed(), bestAS);
+			addNaturalModifier(valA, bestAS.getAsValue(SR6ItemAttribute.SLEAZE).getDistributed(), bestAS);
+		} else {
+			SR6ItemAttribute attrD = model.getMatrixAttributeMapping(SR6ItemAttribute.DATA_PROCESSING);
+			SR6ItemAttribute attrF = model.getMatrixAttributeMapping(SR6ItemAttribute.FIREWALL);
+			SR6ItemAttribute attrA = model.getMatrixAttributeMapping(SR6ItemAttribute.ATTACK);
+			SR6ItemAttribute attrS = model.getMatrixAttributeMapping(SR6ItemAttribute.SLEAZE);
+			
+			if (attrD==SR6ItemAttribute.SLEAZE || attrD==SR6ItemAttribute.ATTACK)
+				addNaturalModifier(valD, bestAS.getAsValue(attrD).getDistributed(), bestAS);
+			else
+				addNaturalModifier(valD, bestDF.getAsValue(attrD).getDistributed(), bestDF);
+			
+			if (attrF==SR6ItemAttribute.SLEAZE || attrF==SR6ItemAttribute.ATTACK)
+				addNaturalModifier(valF, bestAS.getAsValue(attrF).getDistributed(), bestAS);
+			else
+				addNaturalModifier(valF, bestDF.getAsValue(attrF).getDistributed(), bestDF);
+			
+			if (attrA==SR6ItemAttribute.SLEAZE || attrA==SR6ItemAttribute.ATTACK)
+				addNaturalModifier(valA, bestAS.getAsValue(attrA).getDistributed(), bestAS);
+			else
+				addNaturalModifier(valA, bestDF.getAsValue(attrA).getDistributed(), bestDF);
+			
+			if (attrS==SR6ItemAttribute.SLEAZE || attrS==SR6ItemAttribute.ATTACK)
+				addNaturalModifier(valS, bestAS.getAsValue(attrS).getDistributed(), bestAS);
+			else
+				addNaturalModifier(valS, bestDF.getAsValue(attrS).getDistributed(), bestDF);
+			
+		}
+		persona.setAttribute(valA);
+		persona.setAttribute(valS);
+		persona.setAttribute(valD);
+		persona.setAttribute(valF);
+		
+		List<Modification> allItemMods = new ArrayList<>();
+		if (bestAS!=null) allItemMods.addAll(bestAS.getModifications());
+		if (bestDF!=null) allItemMods.addAll(bestDF.getModifications());
+		for (Modification mod : allItemMods) {
+			logger.log(Level.WARNING, "TODO: item mod "+mod);
+		}
 		AttributeValue<ShadowrunAttribute> val = null;
 		
 		// Device rating
@@ -200,31 +175,6 @@ public class CalculatePersona implements ProcessingStep {
 		else
 			persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.DEVICE_RATING,0));
 		
-		// Attack rating as attribute
-		val = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_MATRIX);
-		val.setDistributed(0);
-		CalculateDerivedAttributes.addNaturalModifier(val, bestAS, SR6ItemAttribute.ATTACK);
-		CalculateDerivedAttributes.addNaturalModifier(val, bestAS, SR6ItemAttribute.SLEAZE);
-		// Attack rating for persona
-		persona.setAttribute(new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.ATTACK_RATING,
-				persona.getAttack().getModifiedValue() + 
-				persona.getSleaze().getModifiedValue()));
-		
-		// Defense rating as attribute
-		val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_MATRIX);
-		val.setDistributed(0);
-		CalculateDerivedAttributes.addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
-		CalculateDerivedAttributes.addNaturalModifier(val, bestDF, SR6ItemAttribute.FIREWALL);
-		// Defense rating
-		persona.setAttribute(new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DEFENSE_MATRIX,
-				persona.getDataProcessing().getModifiedValue() + 
-				persona.getFirewall().getModifiedValue()));
-		
-		// Defense pool (against Data Spike or Tar Pit) as attribute
-		val = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_MATRIX);
-		val.setDistributed(0);
-		CalculateDerivedAttributes.addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
-		CalculateDerivedAttributes.addNaturalModifier(val, bestDF, SR6ItemAttribute.FIREWALL);
 
 		// Active program slots
 		if (bestAS!=null && bestAS.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS)!=null)
@@ -232,17 +182,6 @@ public class CalculatePersona implements ProcessingStep {
 		else
 			persona.setAttribute(new ItemAttributeNumericalValue(SR6ItemAttribute.CONCURRENT_PROGRAMS,0));
 		
-		/*
-		 * Initiative (CRB 179)
-		 */
-		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX));
-		persona.setAttribute(model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX));
-		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD, 
-				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()+
-				persona.getDataProcessing().getModifiedValue()));
-		persona.setAttribute(new AttributeValue(ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT, 
-				model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue()+
-				persona.getDataProcessing().getModifiedValue()));
 		
 		// Matrix condition monitor
 		persona.setMonitor(getNormalMonitorArray(persona.getDeviceRating()));
@@ -281,6 +220,26 @@ public class CalculatePersona implements ProcessingStep {
 		}
 
 		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private void addNaturalModifier(ItemAttributeNumericalValue<SR6ItemAttribute> val, int value, Object source) {
+		ValueModification valMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, val.getModifyable().name(), value, source);
+		valMod.setSet(ValueType.NATURAL);
+		val.addModification( valMod );
+	}
+
+	//-------------------------------------------------------------------
+	static void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
+		if (item==null) return;
+		if (!item.hasAttribute(attr)) {
+			logger.log(Level.ERROR, "Item {0} does not have attribute {1}", item.getKey(), attr);
+			return;
+		}
+		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), item.getAsValue(attr).getModifiedValue(), attr);
+		valMod.setSet(ValueType.NATURAL);
+		valMod.setSource(attr);
+		val.addModification( valMod );
 	}
 
 }

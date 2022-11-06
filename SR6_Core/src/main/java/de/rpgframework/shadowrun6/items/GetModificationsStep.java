@@ -10,6 +10,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
+import de.rpgframework.genericrpg.items.OperationMode;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
@@ -45,6 +46,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 		switch (apply) {
 		case CHARACTER:
 		case UNARMED:
+		case PERSONA:
 			model.addCharacterModification(realMod);
 			break;
 		case ACTIVE_GEAR:
@@ -133,6 +135,10 @@ public class GetModificationsStep implements CarriedItemProcessor {
 		}
 		if (model.getVariant() != null) {
 			model.getVariant().getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
+		}
+		
+		for (OperationMode mode : model.getActiveOperationModes(true)) {
+			mode.getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
 		}
 
 		return new OperationResult<List<Modification>>(unprocessed);
