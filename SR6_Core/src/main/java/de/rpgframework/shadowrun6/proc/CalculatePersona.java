@@ -165,7 +165,7 @@ public class CalculatePersona implements ProcessingStep {
 		if (bestAS!=null) allItemMods.addAll(bestAS.getModifications());
 		if (bestDF!=null) allItemMods.addAll(bestDF.getModifications());
 		for (Modification mod : allItemMods) {
-			logger.log(Level.WARNING, "TODO: item mod "+mod);
+			logger.log(Level.INFO, "TODO: item mod "+mod);
 		}
 		AttributeValue<ShadowrunAttribute> val = null;
 		

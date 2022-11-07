@@ -356,8 +356,12 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL);
 		val.setDistributed(0);
 		addNaturalModifier(val,ShadowrunAttribute.MAGIC);
-		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells() && model.getTradition()!=null) {
-			addNaturalModifier(val,model.getTradition().getTraditionAttribute());
+		if (model.getMagicOrResonanceType()!=null) { 
+			if (model.getMagicOrResonanceType().usesSpells() && model.getTradition()!=null) {
+				addNaturalModifier(val,model.getTradition().getTraditionAttribute());
+			} else if (model.getMagicOrResonanceType().usesPowers() ) {
+				addNaturalModifier(val,ShadowrunAttribute.BODY);
+			}
 		}
 		logger.log(Level.DEBUG, " Attack Rating Astral = "+val.getModifiedValue());
 	}
@@ -425,7 +429,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 
 	//-------------------------------------------------------------------
 	private void calculateDefenseRatingAstral() {
-		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL);
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_ASTRAL);
 		val.setDistributed(0);
 		addNaturalModifier(val,ShadowrunAttribute.INTUITION);
 		logger.log(Level.DEBUG, " Defense Rating Astral = "+val.getModifiedValue());

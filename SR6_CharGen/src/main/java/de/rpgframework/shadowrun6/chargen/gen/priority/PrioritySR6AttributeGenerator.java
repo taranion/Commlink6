@@ -612,11 +612,6 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		allowedAdjust.clear();
 		allowedAdjust.add(ShadowrunAttribute.EDGE);
 		numAttributesToMax = 1;
-		for (AttributeValue tmp : getModel().getAttributes()) {
-			if (tmp.getModifyable()==ShadowrunAttribute.ESSENCE || tmp.getModifyable()==ShadowrunAttribute.ESSENCE_HOLE)
-				continue;
-			tmp.setDistributed(0);
-		}
 		
 		for (Entry<ShadowrunAttribute,PerAttributePoints> entry : getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.entrySet()) {
 			switch (entry.getKey()) {
@@ -697,7 +692,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 				int max = (aVal.getMaximum()>0)?aVal.getMaximum():6 ;
 				if (max>6 || (max<6 && parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))) {
 					allowedAdjust.add(key);					
-					logger.log(Level.WARNING, "max. value of {0} is {1}", key, max);
+					logger.log(Level.DEBUG, "max. value of {0} is {1}", key, max);
 				}
 			}
 			

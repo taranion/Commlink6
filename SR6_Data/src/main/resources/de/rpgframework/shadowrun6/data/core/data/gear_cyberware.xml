@@ -103,6 +103,8 @@
  		<flags><flag>AUGMENTATION</flag><flag>MATRIX_DEVICE</flag></flags>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX" value="$RATING" table="1,1,1,2,2,3"/>
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX_VR_COLD" value="$RATING" table="1,1,1,2,2,3"/>
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX_VR_HOT" value="$RATING" table="1,1,1,2,2,3"/>
 		</modifications>
    </item>
    <item avail="2" price="1000" id="datajack" type="CYBERWARE" subtype="CYBER_HEADWARE">

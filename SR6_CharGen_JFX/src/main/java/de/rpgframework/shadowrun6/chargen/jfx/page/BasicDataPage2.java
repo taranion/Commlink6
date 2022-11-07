@@ -159,7 +159,6 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	
 	//-------------------------------------------------------------------
 	public void refresh() {
-		logger.log(Level.WARNING, "refresh");
 		secBaseData.refresh();
 		secAttrib.refresh();
 		secQualities.refresh();

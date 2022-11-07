@@ -29,7 +29,6 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.SkillType;
-import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunSkillTable;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -163,7 +162,6 @@ public class SkillSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void refresh() {
-		logger.log(Level.WARNING, "refresh");
 		if (control!=null && control.getSkillController()!=null) {
 			SR6SkillController skCtrl = control.getSkillController();
 			table.setData(

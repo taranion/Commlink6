@@ -7,6 +7,7 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Lifestyle;
@@ -107,6 +108,14 @@ public class ResetGenerator implements ProcessingStep {
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			if (level==PowerLevel.PRIME_RUNNER)
 				model.setKarmaFree(100);
+		}
+		
+		// Ensure there is a device for unused software
+		CarriedItem<ItemTemplate> item = model.getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+		if (item==null) {
+			item = new CarriedItem<ItemTemplate>(Shadowrun6Core.getItem(ItemTemplate.class,"meta_link"), null, CarryMode.CARRIED);
+			item.setUuid(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+			model.addCarriedItem(item);
 		}
 		
 		return unprocessed;

@@ -695,11 +695,11 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			
 			if (points1>0) {
 				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_SKILL_REMAIN_POINTS, points1));
-				logger.log(Level.WARNING, "Have {0} skill points left", points1);
+				logger.log(Level.INFO, "Have {0} skill points left", points1);
 			}
 			if (points2>0) {
 				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_SKILL_REMAIN_POINTS2, points2));
-				logger.log(Level.WARNING, "Have {0} languages/knowledge skills left", points2);
+				logger.log(Level.INFO, "Have {0} languages/knowledge skills left", points2);
 			}
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Error",e);

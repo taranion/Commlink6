@@ -30,12 +30,14 @@ public class ItemTemplateListCell extends ComplexDataItemListCell<ItemTemplate> 
 	public ItemTemplateListCell(Supplier<ComplexDataItemController<ItemTemplate, ? extends ComplexDataItemValue<ItemTemplate>>> controlProv, CarryMode carry) {
 		super(controlProv, Shadowrun6Tools.requirementResolver(Locale.getDefault()));
 		this.carry = carry;
+		if (carry==CarryMode.EMBEDDED) throw new NullPointerException("Use constructor with container for "+carry);
 		layout.setStyle("-fx-max-width: 21.5em");
 	}
 	
 	//-------------------------------------------------------------------
 	public ItemTemplateListCell(Supplier<ComplexDataItemController<ItemTemplate, ? extends ComplexDataItemValue<ItemTemplate>>> controlProv, CarriedItem<ItemTemplate> container, ItemHook hook) {
 		super(controlProv, Shadowrun6Tools.requirementResolver(Locale.getDefault()));
+		if (container==null) throw new NullPointerException("Container");
 		this.carry = CarryMode.EMBEDDED;
 		this.container = container;
 		this.hook      = hook;

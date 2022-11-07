@@ -34,7 +34,7 @@
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active">
 	   	<modifications>
-	   		<valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="1"/>
+	   		<valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="1" apply="PERSONA"/>
 	   	</modifications>
 	   </mode>
 	</item> 
@@ -42,7 +42,7 @@
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active">
 	   	<modifications>
-	   		<valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="2"/>
+	   		<valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="2" apply="DATA_ITEM"/>
 	   	</modifications>
 	   </mode>
 	</item> 
@@ -52,7 +52,7 @@
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<mode id="active">
 			<modifications>
-				<valmod type="ITEM_ATTRIBUTE" ref="DEFENSE_MATRIX" value="2" />
+				<valmod type="ITEM_ATTRIBUTE" ref="DEFENSE_MATRIX" value="2" apply="PERSONA"/>
 			</modifications>
 		</mode>
 	</item> 

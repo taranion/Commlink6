@@ -52,6 +52,8 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 		if (container!=null) {
 			listPossible.setCellFactory( lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController(), container, hook));
 		} else {
+			if (mode==CarryMode.EMBEDDED)
+				throw new NullPointerException("CarryMode is EMBEDDED, but container is NULL");
 			listPossible.setCellFactory( lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController(), carry));	
 		}
 		

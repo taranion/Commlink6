@@ -961,10 +961,10 @@ public class Shadowrun6Tools {
 			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL).getModifiedValue());
 		case INITIATIVE_MATRIX:
 			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getModifiedValue());
-//		case INITIATIVE_MATRIX_VR_COLD:
-//			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD).getModifiedValue());
-//		case INITIATIVE_MATRIX_VR_HOT:
-//			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT).getModifiedValue());
+		case INITIATIVE_MATRIX_VR_COLD:
+			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD).getModifiedValue());
+		case INITIATIVE_MATRIX_VR_HOT:
+			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT).getModifiedValue());
 		case INITIATIVE_ASTRAL:
 			return RES.format("label.ini", base, model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_ASTRAL).getModifiedValue());
 		}

@@ -416,18 +416,18 @@ public class SR6CarriedItemTest {
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
 		SR6GearTool.recalculate("", null, item);
 		assertNotNull(item);
-		assertNotNull("Modes missing",item.getOperationModes());
-		assertTrue("Should not have more than WIRELESS yet", item.getOperationModes().size()<2);
+		assertNotNull("Modes missing",item.getOperationModes(true));
+		assertTrue("Should not have more than WIRELESS yet", item.getOperationModes(true).size()<2);
 		
 		CarriedItem<ItemTemplate> accItem = new CarriedItem<ItemTemplate>(acc, null, CarryMode.EMBEDDED);
 		SR6GearTool.recalculate("", null, accItem);
-		assertFalse("Should have modes", accItem.getOperationModes().isEmpty());
+		assertFalse("Should have modes", accItem.getOperationModes(true).isEmpty());
 
 		item.addAccessory(accItem, ItemHook.TOP);
 		SR6GearTool.recalculate("", null, item);
-		assertNotNull("Modes missing",item.getOperationModes());
-		System.out.println("SR6CarriedItemTest.testModes: "+item.getOperationModes());
-		assertFalse("Should have modes now", item.getOperationModes().size()<2);
+		assertNotNull("Modes missing",item.getOperationModes(true));
+		System.out.println("SR6CarriedItemTest.testModes: "+item.getOperationModes(true));
+		assertFalse("Should have 2+ modes now, but was "+item.getOperationModes(true).get(0).getModes().size(), item.getOperationModes(true).get(0).getModes().size()<2);
 		
 	}
 	
