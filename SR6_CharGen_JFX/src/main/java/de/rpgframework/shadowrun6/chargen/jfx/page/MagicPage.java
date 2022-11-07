@@ -31,6 +31,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AdeptPowerSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection.Type;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.scene.control.Label;
 
@@ -51,6 +53,7 @@ public class MagicPage extends Page {
 	private MetamagicOrEchoSection secMeta;
 	private RitualSection secRituals;
 	private FocusSection secFoci;
+	private CombatSection secCombat;
 	
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -70,6 +73,7 @@ public class MagicPage extends Page {
 		initMetamagic();
 		initRituals();
 		initFoci();
+		initCombat();
 	}
 	
 	//-------------------------------------------------------------------
@@ -123,6 +127,14 @@ public class MagicPage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
+	private void initCombat() {
+		secCombat = new CombatSection(Type.ASTRAL);
+		FlexGridPane.setMinWidth(secCombat, 6);
+		FlexGridPane.setMinHeight(secCombat, 6);
+		FlexGridPane.setMediumWidth(secCombat, 8);
+	}
+	
+	//-------------------------------------------------------------------
 	private void initFoci() {
 		secFoci = new FocusSection() {
 			@Override
@@ -144,7 +156,7 @@ public class MagicPage extends Page {
 		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secAdeptPowers, secSpells, secMeta, secRituals, secFoci);
+		flex.getChildren().addAll(secAdeptPowers, secSpells, secMeta, secCombat, secRituals, secFoci);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -201,6 +213,7 @@ public class MagicPage extends Page {
 		secMeta.refresh();
 		secRituals.refresh();
 		secFoci.refresh();
+		secCombat.setData(control.getModel());
 	}
 
 }
