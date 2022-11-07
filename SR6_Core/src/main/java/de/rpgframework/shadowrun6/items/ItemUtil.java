@@ -33,7 +33,12 @@ public class ItemUtil {
 	private final static Logger logger = System.getLogger(ItemUtil.class.getPackageName());
 
 	public static Predicate<CarriedItem<ItemTemplate>> AMMUNITION_FILTER = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
-	
+	public static Predicate<CarriedItem<ItemTemplate>> MATRIXDEVICES_FILTER = item -> 
+		item.hasFlag(SR6ItemFlag.MATRIX_DEVICE)
+		||
+		(List.of( ItemSubType.matrixDevices()).contains(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()) 
+				);
+
 	//-------------------------------------------------------------------
 	public static List<ItemTemplate> getEmbeddableIn(CarriedItem<ItemTemplate> ref, ItemHook slot) {
 		logger.log(Level.INFO, "getEmbeddableIn({0}, {1})", ref, slot);

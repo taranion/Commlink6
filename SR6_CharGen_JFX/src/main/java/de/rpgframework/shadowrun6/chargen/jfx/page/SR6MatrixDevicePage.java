@@ -38,6 +38,8 @@ import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AccessoriesSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.ActiveProgramsSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection.Type;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SR6PersonaSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SoftwareLibrarySection;
@@ -48,6 +50,7 @@ import de.rpgframework.shadowrun6.items.ItemSubTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
@@ -76,6 +79,7 @@ public class SR6MatrixDevicePage extends Page {
 	protected AccessoriesSection secAccessories;
 	protected ImageView ivDeepDive;
 	protected SR6PersonaSection secPersona;
+	protected CombatSection secCombat;
 	protected ShadowrunActionSection secActions;
 	
 	private FlexGridPane flex;
@@ -98,6 +102,7 @@ public class SR6MatrixDevicePage extends Page {
 		initPrograms();
 		initImage();
 		initPersona();
+		initCombat();
 		initAccessories();
 		initActions();
 	}
@@ -105,14 +110,8 @@ public class SR6MatrixDevicePage extends Page {
 	//-------------------------------------------------------------------
 	private void initDevices() {
 		Predicate<ItemTemplate> selectFilter = new ItemSubTypeFilter(CarryMode.CARRIED, ItemSubType.matrixDevices()); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> 
-			item.hasFlag(SR6ItemFlag.MATRIX_DEVICE)
-			||
-			(List.of( ItemSubType.matrixDevices()).contains(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()) 
-			);
-			
 		
-		secDevices = new GearSection(ResourceI18N.get(RES, "page.matrix.section.devices"), CarryMode.CARRIED, selectFilter, showFilter);
+		secDevices = new GearSection(ResourceI18N.get(RES, "page.matrix.section.devices"), CarryMode.CARRIED, selectFilter, ItemUtil.MATRIXDEVICES_FILTER);
 		secDevices.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secDevices, 4);
 		FlexGridPane.setMinHeight(secDevices, 6);
@@ -122,11 +121,11 @@ public class SR6MatrixDevicePage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initSoftware() {
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.EMBEDDED, ItemType.SOFTWARE); 
-		secSoftware = new SoftwareLibrarySection(showFilter);
+		secSoftware = new SoftwareLibrarySection();
 		secSoftware.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secSoftware, 4);
 		FlexGridPane.setMinHeight(secSoftware, 6);
+		FlexGridPane.setMediumWidth(secSoftware, 6);
 		FlexGridPane.setMediumHeight(secSoftware, 8);
 	}
 
@@ -180,6 +179,14 @@ public class SR6MatrixDevicePage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
+	private void initCombat() {
+		secCombat = new CombatSection(Type.MATRIX);
+		FlexGridPane.setMinWidth(secCombat, 6);
+		FlexGridPane.setMinHeight(secCombat, 6);
+		FlexGridPane.setMediumWidth(secCombat, 8);
+	}
+	
+	//-------------------------------------------------------------------
 	private void initActions() {
 		Function<ShadowrunAction, Node> resolver = (act) -> {
 			Label ret = new Label();
@@ -219,7 +226,7 @@ public class SR6MatrixDevicePage extends Page {
 	private void initLayout() {		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secDevices,secSoftware,secPrograms,ivDeepDive,secPersona,secAccessories, secActions);
+		flex.getChildren().addAll(secDevices,secSoftware,secPrograms,ivDeepDive,secPersona,secCombat,secAccessories, secActions);
 		ScrollPane scroll = new ScrollPane(flex);
 		scroll.setFitToWidth(true);
 		
@@ -304,6 +311,7 @@ public class SR6MatrixDevicePage extends Page {
 		})
 		.collect(Collectors.toList())
 		);
+		secCombat.setData(ctrl.getModel());
 	}
 
 	//--------------------------------------------------------------------
@@ -315,6 +323,7 @@ public class SR6MatrixDevicePage extends Page {
 		secAccessories.refresh();
 		secPersona.refresh();
 		secActions.refresh();
+		secCombat.setData(ctrl.getModel());
 		
 //		secActions.setAll( 
 //				Shadowrun6Core.getItemList(Shadowrun6Action.class)

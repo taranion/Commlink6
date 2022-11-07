@@ -54,6 +54,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	public final static Choice CHOICE_AUGMENTATION_QUALITY = new Choice(
 			ItemTemplate.UUID_AUGMENTATION_QUALITY, 
 			ShadowrunReference.AUGMENTATION_QUALITY);
+	public final static UUID UUID_UNUSED_SOFTWARE_DEVICE = UUID.fromString("8fc8c01e-3023-4ba6-9d02-99ba6fcd6979");
 	
 	public final static OperationMode MODE_WIRELESS_ON = new OperationMode("WIRELESS");
 

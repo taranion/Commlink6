@@ -465,6 +465,8 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SUCH_SLOT, slot.name(), container.getNameWithoutRating());			
 		}
 		logger.log(Level.INFO, "Items in slot={0},  free capacity={1}  Slot {2} hasCapacity={3}", realSlot.getAllEmbeddedItems().size(), realSlot.getFreeCapacity(), slot.name(), slot.hasCapacity());
+		if (container.getUuid().equals(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE))
+			return Possible.TRUE;
 		if (slot.hasCapacity()) {
 			float free = realSlot.getFreeCapacity();
 			float required = 1;
@@ -472,7 +474,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 				toEmbed.getAsFloat(SR6ItemAttribute.CAPACITY).getModifiedValue();
 			}
 			if (free<required) {
-				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, required, free);			
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, required, slot.getName(), container.getNameWithoutRating(), free);			
 			}
 		} else {
 			if (!realSlot.getAllEmbeddedItems().isEmpty()) {
