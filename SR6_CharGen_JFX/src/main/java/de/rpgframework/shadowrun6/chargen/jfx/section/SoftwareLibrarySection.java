@@ -300,13 +300,19 @@ public class SoftwareLibrarySection extends GearSection {
 		for (CarriedItem<ItemTemplate> matrixDev : devices) {
 			if (matrixDev.getUuid().equals(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE)) continue;
 			if (matrixDev.getSlot(ItemHook.SOFTWARE)==null) continue;
-			TreeTableColumn<ProgramRow, Boolean> column = new TreeTableColumn<>(matrixDev.getNameWithoutRating());
-			column.setUserData(matrixDev);
-			column.setCellValueFactory(p -> new SimpleBooleanProperty(isUnused(p.getValue().getValue(), column)));
-			column.setCellFactory(p -> new ProgramRowDeviceCell(p, control));
-			makeHeaderWrappable(column);
-			newColumns.add(column);
-			logger.log(Level.WARNING, "Column {0} has data {1}", column, matrixDev);
+			int capacity = (int) matrixDev.getSlot(ItemHook.SOFTWARE).getCapacity();
+			TreeTableColumn<ProgramRow, Boolean> realColumn = new TreeTableColumn<>(String.valueOf(capacity));
+			TreeTableColumn<ProgramRow, Boolean> columnDevName = new TreeTableColumn<>(matrixDev.getNameWithoutRating());
+			realColumn.setMinWidth(85);
+			columnDevName.getColumns().add(realColumn);
+			
+			realColumn.setUserData(matrixDev);
+			realColumn.setCellValueFactory(p -> new SimpleBooleanProperty(isUnused(p.getValue().getValue(), realColumn)));
+			realColumn.setCellFactory(p -> new ProgramRowDeviceCell(p, control));
+			makeHeaderWrappable(columnDevName);				
+			newColumns.add(columnDevName);
+			
+			logger.log(Level.WARNING, "Column {0} has data {1}", realColumn, matrixDev);
 		}
 		treeTable.getColumns().setAll(colName, colUnused);
 		treeTable.getColumns().addAll(newColumns);
