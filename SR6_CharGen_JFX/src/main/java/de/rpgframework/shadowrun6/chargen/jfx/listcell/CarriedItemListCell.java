@@ -39,8 +39,6 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 	private SR6CharacterController charCtrl;
 	
 	private Label lbValue;
-	
-	private FlipControl flip;
 
 	//-------------------------------------------------------------------
 	public CarriedItemListCell(SR6CharacterController control) {
@@ -56,9 +54,7 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		lbValue = new Label();
 		bxActions.getChildren().add(lbValue);
 		
-		flip = new FlipControl(Orientation.HORIZONTAL, true);
-		
-		layout.setStyle("-fx-max-width: 22em");
+		//layout.setStyle("-fx-max-width: 22em");
 	}
 
 	//-------------------------------------------------------------------
@@ -71,9 +67,6 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		bxCenter.getChildren().retainAll(line1, sep, bxActions);
 		
 		if (item!=null) {
-			flip.getItems().setAll(layout);
-			flip.setVisibleIndex(0);
-			
 			name.setText(item.getNameWithRating());
 			btnEdit.setVisible(true);
 			btnEdit.setManaged(true);
@@ -91,28 +84,8 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 				lblLock.setTooltip(new Tooltip(Shadowrun6Tools.getModificationSourceString(item.getModifications().get(0).getSource())));
 			}
 			
-			// Modes
-//			if (item.getOperationModes().isEmpty()) {
-				line2.getChildren().clear();
-				setGraphic(layout);
-//			} else {
-//				Label lbWarning = new Label("Modeswitcher - Not functional yet");
-//				GridPane back = new GridPane();
-//				int y=0;
-//				for (OperationModeOption modeOpt : item.getOperationModes()) {
-//					CarriedItem<?> src = modeOpt.getSource();
-//					Label lbSrc = new Label(src.getNameWithoutRating());
-//					ChoiceBox<OperationMode> cbMode = new ChoiceBox<>();
-//					cbMode.getItems().addAll(modeOpt.getModes());
-//					back.add(lbSrc , 0, y);
-//					back.add(cbMode, 1, y);
-//					y++;
-//				}
-//				//line2.getChildren().setAll(cbMode);
-//				flip.getItems().add(back);
-//				setGraphic(flip);
-//			}
-			
+			line2.getChildren().clear();
+			setGraphic(layout);
 		}
 	}
 
