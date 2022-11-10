@@ -5,7 +5,6 @@ import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.prelle.javafx.Mode;
 import org.prelle.javafx.OptionalNodePane;
@@ -15,19 +14,17 @@ import org.prelle.javafx.layout.FlexGridPane;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.shadowrun.ShadowrunAction.Category;
-import de.rpgframework.shadowrun.chargen.jfx.section.ShadowrunActionSection;
-import de.rpgframework.shadowrun6.Shadowrun6Action;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 
@@ -68,17 +65,32 @@ public class GearPage extends Page {
 	//-------------------------------------------------------------------
 	private void initElectro() {
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS); 
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS) {
+			public boolean test(CarriedItem<ItemTemplate> item) {
+				boolean isElectronic = super.test(item);
+				if (!isElectronic) return false;
+				ItemSubType foundType = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+				switch (foundType) {
+				case COMMLINK:
+				case CYBERDECK:
+				case RIGGER_CONSOLE:
+				case TAC_NET:
+					return false;
+				default:
+					return true;
+				}
+			}
+		}; 
 		secElectro = new GearSection(
 				ResourceI18N.get(RES, "page.gear.section.electro"),selectFilter, showFilter
 				);
 		secElectro.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secElectro, 4);
 		FlexGridPane.setMinHeight(secElectro, 6);
-		FlexGridPane.setMediumWidth(secElectro, 6);
+		FlexGridPane.setMediumWidth(secElectro, 5);
 		FlexGridPane.setMediumHeight(secElectro, 9);
-		FlexGridPane.setMaxWidth(secElectro, 8);
-		FlexGridPane.setMaxHeight(secElectro, 9);
+//		FlexGridPane.setMaxWidth(secElectro, 8);
+//		FlexGridPane.setMaxHeight(secElectro, 9);
 	}
 	
 	//-------------------------------------------------------------------
