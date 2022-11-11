@@ -40,6 +40,7 @@ import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
@@ -209,6 +210,19 @@ public class SR6CarriedItemTest {
 		assertEquals(Shadowrun6Core.getSkill("firearms").getSpecialization("tasers"), (SkillSpecialization<SR6Skill>)item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getModifiedValue());
 		
 		//item.get
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadItemWithSlots() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "transys_avalon");
+		assertNotNull(temp);
+		
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		SR6GearTool.recalculate("", null, item);
+		assertNotNull(item);
+
+		assertNotNull("Item misses slot", item.getSlot(ItemHook.ELECTRONIC_ACCESSORY));
 	}
 	
 	//-------------------------------------------------------------------

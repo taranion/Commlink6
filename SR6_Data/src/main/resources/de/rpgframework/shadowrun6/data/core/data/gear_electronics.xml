@@ -3,7 +3,7 @@
 	<item avail="2" price="100" id="meta_link" type="ELECTRONICS" subtype="COMMLINK">
 		<usage mode="CARRIED"/>
 		<modifications>
-			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
          <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
@@ -14,7 +14,7 @@
    <item avail="2" price="700" id="sony_emporer" type="ELECTRONICS" subtype="COMMLINK">
 		<usage mode="CARRIED"/>
        <modifications>
-         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
          <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
@@ -25,7 +25,7 @@
    <item avail="2" price="1000" id="renraku_sensei" type="ELECTRONICS" subtype="COMMLINK">
 		<usage mode="CARRIED"/>
        <modifications>
-         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
          <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
@@ -36,7 +36,7 @@
    <item avail="2" price="2500" id="erika_elite" type="ELECTRONICS" subtype="COMMLINK">
 		<usage mode="CARRIED"/>
        <modifications>
-         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
          <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
@@ -48,7 +48,7 @@
 		<usage mode="CARRIED"/>
 		<usage mode="EMBEDDED" slot="COMMLINK"/>
        <modifications>
-         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
          <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
@@ -60,7 +60,7 @@
 		<usage mode="CARRIED"/>
 		<usage mode="EMBEDDED" slot="COMMLINK"/>
       <modifications>
-         <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
          <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP"/>
