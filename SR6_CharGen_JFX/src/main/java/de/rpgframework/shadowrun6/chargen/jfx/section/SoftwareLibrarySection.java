@@ -130,7 +130,7 @@ public class SoftwareLibrarySection extends GearSection {
 		}
 	}
 
-	private final static Predicate<ItemTemplate> SELECT_FILTER = (c) -> c.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.SOFTWARE;
+	private final static Predicate<ItemTemplate> SELECT_FILTER = (c) -> c.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.SOFTWARE && c.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue()!=ItemSubType.SKILLSOFT ;
 	private final static Predicate<CarriedItem<ItemTemplate>> SHOW_FILTER = new CarriedItemItemTypeFilter(CarryMode.EMBEDDED, ItemType.SOFTWARE);
 		
 	private List<CarriedItem<ItemTemplate>> currentlyShowing;
@@ -166,6 +166,15 @@ public class SoftwareLibrarySection extends GearSection {
 		root = new TreeItem<>();
 		treeTable.setRoot(root);
 		setContent(treeTable);
+		
+		// Interactivity
+		showHelpFor.unbind();
+		treeTable.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			if (n==null || n.getValue()==null)
+				showHelpFor.set(null);
+			else
+				showHelpFor.set(n.getValue().program);
+		});
 	}
 
 	//-------------------------------------------------------------------
@@ -184,6 +193,7 @@ public class SoftwareLibrarySection extends GearSection {
 		if (model==null) return;
 		if (root==null) return;
 		addToContainer = model.getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+		addToHook = ItemHook.SOFTWARE;
 		colUnused.setUserData(addToContainer);
 		
 		List<CarriedItem<ItemTemplate>> data = null;

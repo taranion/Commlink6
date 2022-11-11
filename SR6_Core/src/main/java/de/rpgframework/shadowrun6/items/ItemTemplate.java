@@ -135,6 +135,9 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		if (type==null) throw new DataErrorException(this, "sort type not set for '"+id+"'");
 		if (subtype==null) throw new DataErrorException(this, "sort subtype not set for '"+id+"'");
 		
+		if (id.equals("transys_avalon")) {
+			logger.log(Level.WARNING, "Trace from here");
+		}
 		
 		setAttribute(SR6ItemAttribute.PRICE, super.price);
 		setAttribute(SR6ItemAttribute.ITEMTYPE, type);
@@ -165,14 +168,6 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				throw new DataErrorException(this, "No such flag '"+flag+"'");
 			}
 		}
-//		if (variants.isEmpty()) {
-//			SR6PieceOfGearVariant add = new SR6PieceOfGearVariant(SR6VariantMode.NORMAL);
-//			variants.add(add);
-//		}
-//		if (alternates.isEmpty()) {
-//			SR6AlternateUsage add = new SR6AlternateUsage(SR6UsageMode.PRIMARY);
-//			alternates.add(add);
-//		}
 
 		// TODO
 		// Make a implant version of every weapon
@@ -417,6 +412,14 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		ItemSubType sub = getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
 		return hasFlag(FLAG_MATRIX_DEVICE) || attr.getValue()==ItemType.ELECTRONICS &&
 				( sub==ItemSubType.COMMLINK ||  sub==ItemSubType.CYBERDECK ||  sub==ItemSubType.RIGGER_CONSOLE  ||  sub==ItemSubType.TAC_NET );
+	}
+	
+	//-------------------------------------------------------------------
+	protected Choice getHardcodedChoice(UUID uuid) {
+		if (CHOICE_AUGMENTATION_QUALITY.getUUID().equals(uuid))
+			return CHOICE_AUGMENTATION_QUALITY;
+			
+		return null;
 	}
 
 }

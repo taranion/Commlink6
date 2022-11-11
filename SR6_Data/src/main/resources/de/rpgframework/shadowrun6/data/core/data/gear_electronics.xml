@@ -59,7 +59,7 @@
    <item avail="3" price="8000" id="transys_avalon" subtype="COMMLINK" type="ELECTRONICS">
 		<usage mode="CARRIED"/>
 		<usage mode="EMBEDDED" slot="COMMLINK"/>
-       <modifications>
+      <modifications>
          <itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY"/>
          <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC"/>

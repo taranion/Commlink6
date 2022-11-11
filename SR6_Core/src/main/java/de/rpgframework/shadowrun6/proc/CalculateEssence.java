@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -45,7 +46,7 @@ public class CalculateEssence implements ProcessingStep {
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				logger.log(Level.DEBUG, "Item type of {0} is {1}", item, item.getAttributeRaw(SR6ItemAttribute.ITEMTYPE));
 				ItemType type = Shadowrun6Tools.getItemType(item);
-				if (Arrays.asList(ItemType.bodytechTypes()).contains(type)) {
+				if (Arrays.asList(ItemType.bodytechTypes()).contains(type) || (item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE)) {
 //					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
 					ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
 //					logger.log(Level.INFO, "  essence = "+aVal);
@@ -82,7 +83,7 @@ public class CalculateEssence implements ProcessingStep {
 				essVal.setDistributed(remain);
 				holeVal.setDistributed(0);
 				model.setEssenceCost( (int)(essenceCost*1000));
-				logger.log(Level.INFO, "Essence cost is {0}, hole is {1}, resulting remain essence is {2}", essenceCost, holeVal.getModifiedValue(), remain);
+				logger.log(Level.WARNING, "Essence cost is {0}, hole is {1}, resulting remain essence is {2}", essenceCost, holeVal.getModifiedValue(), remain);
 				essVal.setDistributed(remain);
 				model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE).setDistributed(essenceHole);
 			}

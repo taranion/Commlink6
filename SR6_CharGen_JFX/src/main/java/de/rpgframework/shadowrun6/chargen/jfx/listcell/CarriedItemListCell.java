@@ -36,6 +36,7 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 	private SR6CharacterController charCtrl;
 	
 	private Label lbValue;
+	private Label lbEssence;
 
 	//-------------------------------------------------------------------
 	public CarriedItemListCell(SR6CharacterController control) {
@@ -49,6 +50,7 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		super.initLayout();
 		
 		lbValue = new Label();
+		lbEssence = new Label();
 		bxActions.getChildren().add(lbValue);
 		bxCenter.getChildren().remove(tiles);
 
@@ -58,6 +60,8 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		HBox.setHgrow(buf, Priority.SOMETIMES);
 		bxActions.getChildren().add(buf);
 
+		bxActions.getChildren().add(lbEssence);
+		
 		// Put Increase/decrease buttons in actions line and make them smaller
 		tiles.setStyle("-fx-padding: -6px 0 0 0;");
 		lblVal.getStyleClass().remove(JavaFXConstants.STYLE_HEADING2);
@@ -88,6 +92,13 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 			}
 
 			lbValue.setText("\u00A5" + item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+			// Essence
+			lbEssence.setManaged(item.hasAttribute(SR6ItemAttribute.ESSENCECOST));
+			lbEssence.setVisible(item.hasAttribute(SR6ItemAttribute.ESSENCECOST));
+			if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
+				lbEssence.setText( item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue()+"");
+			}
+			// Countable
 			if (item.getResolved().isCountable()) {
 				lblVal.setText(String.valueOf(item.getCount()));
 				tiles.setVisible(true);

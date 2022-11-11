@@ -46,14 +46,15 @@ public class CombatSection extends Section {
 	private Label lbAttackRating, lbDefenseRating;
 	private Label lbDefensePool;
 	private Label lbResistDamage;
+	private Label lbDevMon, lbStnMon, lbPhyMon;
 	private Label lbIni, lbIniVR;
 	
 	private GridPane gridAttack, gridDefense;
 	
 	private Label lbDmgAttack1, lbDmgAttack2;
 	private Label lbPoolAttack1, lbPoolAttack2;
-	private Label hdDevMon, lbStnMon, lbPhyMon;
-	private HBox bxDevMon, bxStnMon, bxPhyMon;
+//	private Label hdDevMon, lbStnMon, lbPhyMon;
+//	private HBox bxDevMon, bxStnMon, bxPhyMon;
 
 	//-------------------------------------------------------------------
 	public CombatSection(Type type) {
@@ -86,6 +87,12 @@ public class CombatSection extends Section {
 		lbDefensePool.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		lbResistDamage = new Label("?");
 		lbResistDamage.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		lbDevMon = new Label("?");
+		lbDevMon.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		lbPhyMon = new Label("?");
+		lbPhyMon.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		lbStnMon = new Label("?");
+		lbStnMon.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 	}
 
 	//-------------------------------------------------------------------
@@ -119,15 +126,12 @@ public class CombatSection extends Section {
 			break;
 		}
 		
-		if (type == Type.MATRIX) {
-			Label hdStnMon = new Label(ShadowrunAttribute.STUN_MONITOR.getName());
-			hdDevMon.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-			bxStnMon = new HBox(2);
-			colDefense.getChildren().addAll(hdStnMon, bxStnMon);
-		}
-		Label hdPhyMon = new Label(ShadowrunAttribute.PHYSICAL_MONITOR.getName()); hdPhyMon.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-		bxPhyMon = new HBox(2);
-		colDefense.getChildren().addAll(hdPhyMon, bxPhyMon);
+		Label hdStnMon = new Label(ShadowrunAttribute.STUN_MONITOR.getName());
+		Label hdPhyMon = new Label(ShadowrunAttribute.PHYSICAL_MONITOR.getName()); 
+		gridDefense.add(hdStnMon      , 0, 5);
+		gridDefense.add(lbStnMon      , 1, 5);
+		gridDefense.add(hdPhyMon      , 0, 6);
+		gridDefense.add(lbPhyMon      , 1, 6);
 		
 		
 		// All
@@ -172,13 +176,13 @@ public class CombatSection extends Section {
 		// Defense
 		Label hdDefensePool = new Label(ShadowrunAttribute.DEFENSE_POOL_MATRIX.getName());
 		Label hdResistDamage= new Label(ShadowrunAttribute.RESIST_DAMAGE.getName());
+		Label hdDevMon = new Label(ResourceI18N.get(RES, "section.combat.matrix.device_monitor")); hdDevMon.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		gridDefense.add(hdDefensePool, 0, 0);
 		gridDefense.add(lbDefensePool, 1, 0);
 		gridDefense.add(hdResistDamage, 0, 1);
 		gridDefense.add(lbResistDamage, 1, 1);
-		hdDevMon = new Label(ResourceI18N.get(RES, "section.combat.matrix.device_monitor")); hdDevMon.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-		bxDevMon = new HBox(2);
-		colDefense.getChildren().addAll(hdDevMon, bxDevMon);
+		gridDefense.add(hdDevMon      , 0, 2);
+		gridDefense.add(lbDevMon      , 1, 2);
 	}
 
 	//-------------------------------------------------------------------
@@ -294,23 +298,9 @@ public class CombatSection extends Section {
 		lbResistDamage.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.RESIST_DAMAGE_MATRIX).getPool().toExplainString()) );
 		
 		// Device Monitor
-		bxDevMon.getChildren().clear();
-		for (int i=0; i<model.getPersona().getMonitor().length; i++) {
-			CheckBox cb = new CheckBox();
-			bxDevMon.getChildren().add(cb);
-		}
-		// Stun Monitor
-		bxStnMon.getChildren().clear();
-		for (int i=0; i<model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getModifiedValue(); i++) {
-			CheckBox cb = new CheckBox();
-			bxStnMon.getChildren().add(cb);
-		}
-		// Stun Monitor
-		bxPhyMon.getChildren().clear();
-		for (int i=0; i<model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getModifiedValue(); i++) {
-			CheckBox cb = new CheckBox();
-			bxPhyMon.getChildren().add(cb);
-		}
+		lbDevMon.setText(String.valueOf(model.getPersona().getMonitor().length));
+		lbStnMon.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getModifiedValue()));
+		lbPhyMon.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getModifiedValue()));
 		
 		
 	}

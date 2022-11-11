@@ -264,6 +264,18 @@ public class LoadSR6DataTest {
 		assertTrue(item.hasFlag(ItemTemplate.FLAG_AUGMENTATION));
 	}
 
+//	//-------------------------------------------------------------------
+//	@Test
+//	public void softwareTypes() {
+//		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "transys_avalon");
+//		assertNotNull(item);
+//		assertFalse(item.requiresVariant());		
+//		
+//		assertEquals(2, item.getUsages().size());
+//		assertTrue("no software types set",item.getAttribute(SR6ItemAttribute.SOFTWARE_TYPES)!=null);
+////		assertEquals(2, item.getAttribute(SR6ItemAttribute.SOFTWARE_TYPES).getValue());
+//	}
+
 	//-------------------------------------------------------------------
 	@Test
 	public void augmentationVariants() {

@@ -116,7 +116,7 @@ public class SR6MatrixDevicePage extends Page {
 		FlexGridPane.setMinWidth(secDevices, 4);
 		FlexGridPane.setMinHeight(secDevices, 6);
 		FlexGridPane.setMediumWidth(secDevices, 5);
-		FlexGridPane.setMediumHeight(secDevices, 6);
+		FlexGridPane.setMediumHeight(secDevices, 8);
 	}
 	
 	//-------------------------------------------------------------------
@@ -127,6 +127,7 @@ public class SR6MatrixDevicePage extends Page {
 		FlexGridPane.setMinHeight(secSoftware, 6);
 		FlexGridPane.setMediumWidth(secSoftware, 6);
 		FlexGridPane.setMediumHeight(secSoftware, 8);
+		FlexGridPane.setMaxWidth(secSoftware, 7);
 	}
 
 	//-------------------------------------------------------------------
@@ -226,7 +227,8 @@ public class SR6MatrixDevicePage extends Page {
 	private void initLayout() {		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secDevices,secSoftware,secPrograms,ivDeepDive,secPersona,secCombat,secAccessories, secActions);
+		// No ivDeepDive, secPrograms, 
+		flex.getChildren().addAll(secDevices,secSoftware,secAccessories,secPersona,secCombat, secActions);
 		ScrollPane scroll = new ScrollPane(flex);
 		scroll.setFitToWidth(true);
 		
@@ -239,6 +241,7 @@ public class SR6MatrixDevicePage extends Page {
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		secPrograms.showHelpForProperty().addListener( (ov,o,n) -> {showDescription(n); clearExceptPrograms(); });
+		secSoftware.showHelpForProperty().addListener( (ov,o,n) -> {showDescription(n); clearExceptPrograms(); });
 		secAccessories.showHelpForProperty().addListener( (ov,o,n) -> {showDescription(n); clearExceptAccessories();});
 		secPrograms.selectedDeviceProperty().addListener( (ov,o,n) -> secAccessories.setDevice(n));
 	}

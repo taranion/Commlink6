@@ -230,7 +230,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> select(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
-		logger.log(Level.TRACE, "ENTER select({0}, {1}", value, mode);
+		logger.log(Level.WARNING, "ENTER select({0}, {1}", value, mode);
 		try {
 			Possible poss = canBeSelected(value, variantID, mode, decisions);
 			if (!poss.getRequireDecisions()) {
@@ -460,13 +460,17 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		// Check if capacity is sufficient
 		CarriedItem<ItemTemplate> toEmbed = res.get();
 		AvailableSlot realSlot = (AvailableSlot) container.getSlot(slot);
-		logger.log(Level.INFO, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
+		logger.log(Level.WARNING, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
 		if (realSlot==null) { 
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SUCH_SLOT, slot.name(), container.getNameWithoutRating());			
 		}
 		logger.log(Level.INFO, "Items in slot={0},  free capacity={1}  Slot {2} hasCapacity={3}", realSlot.getAllEmbeddedItems().size(), realSlot.getFreeCapacity(), slot.name(), slot.hasCapacity());
 		if (container.getUuid().equals(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE))
 			return Possible.TRUE;
+		
+		// Special handling for software: check types
+		
+		
 		if (slot.hasCapacity()) {
 			float free = realSlot.getFreeCapacity();
 			float required = 1;

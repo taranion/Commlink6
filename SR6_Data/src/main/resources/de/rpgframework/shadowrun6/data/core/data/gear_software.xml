@@ -165,19 +165,19 @@
 		<choices>
 			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
 		</choices>
-		<usage mode="EMBEDDED" slot="SKILLJACK"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	</item> 
    <item avail="2" price="100" id="mapsoft" type="SOFTWARE" subtype="OTHER_PROGRAMS">
 		<choices>
 			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
 		</choices>
-		<usage mode="EMBEDDED" slot="SKILLJACK"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	</item> 
    <item avail="2" price="150" id="shopsoft"  type="SOFTWARE" subtype="OTHER_PROGRAMS">
 		<choices>
 			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
 		</choices>
-		<usage mode="EMBEDDED" slot="SKILLJACK"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	</item> 
    <item avail="4" price="5000" id="activesoft"  type="SOFTWARE" subtype="SKILLSOFT">
 		<choices>

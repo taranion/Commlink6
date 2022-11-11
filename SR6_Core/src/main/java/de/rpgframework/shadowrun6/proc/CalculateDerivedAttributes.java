@@ -281,11 +281,14 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			addNaturalModifier(val,ShadowrunAttribute.REACTION);
 			addNaturalModifier(val,ShadowrunAttribute.INTUITION);
 		} 		
+		model.getPersona().setAttribute(val);
 		logger.log(Level.DEBUG, " INI Matrix Base  "+val.getModifiedValue());
 		
 		// Initiave Dice (Physical)
 		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX);
 		val.setDistributed(1); // Base value without modifiers
+		
+		model.getPersona().setAttribute(val);
 		logger.log(Level.DEBUG, " INI Matrix D6    "+val.getModifiedValue());
 	}
 	
@@ -307,12 +310,14 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 //			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
 //			addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
 //		} 
+		model.getPersona().setAttribute(val);
 		logger.log(Level.DEBUG, " INI Matrix VR Base  "+val.getModifiedValue());
 		
 		// Initiave Dice (Physical)
 		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD);
 		val.setDistributed(1); // Base value without modifiers
 		val.addModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 1, "VR Cold Sim") );
+		model.getPersona().setAttribute(val);
 		logger.log(Level.DEBUG, " INI Matrix VR D6    "+val.getModifiedValue());
 	}
 	
@@ -333,12 +338,14 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 //			addNaturalModifier(val, ShadowrunAttribute.INTUITION);
 //			addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
 //		} 
+		model.getPersona().setAttribute(val);
 
 		logger.log(Level.DEBUG, " INI Matrix VR Base Hot "+val.getModifiedValue());
 		// Initiave Dice (Physical)
 		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT);
 		val.setDistributed(1); // Base value without modifiers
 		val.addModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 2, "VR Hot Sim") );
+		model.getPersona().setAttribute(val);
 		logger.log(Level.DEBUG, " INI Matrix VR D6 Hot   "+val.getModifiedValue());
 	}
 

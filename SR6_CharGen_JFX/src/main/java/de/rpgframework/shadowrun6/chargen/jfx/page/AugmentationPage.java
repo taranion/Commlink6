@@ -22,6 +22,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.EssenceSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
+import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
@@ -66,16 +67,14 @@ public class AugmentationPage extends Page {
 	//-------------------------------------------------------------------
 	private void initCyberware() {
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> 
-			(item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()==ItemType.CYBERWARE 
-			|| 
-			(item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()==ItemType.ACCESSORY && item.getVariant()!=null && (
-				item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE
-				||
-				item.getVariant().getUsages().stream().anyMatch(us -> us.getMode()==CarryMode.IMPLANTED)
-				))
-			);
-			
+		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> {
+			ItemType type = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+			// All items that directly classify as CYBERWARE
+			if (type==ItemType.CYBERWARE && item.getCarryMode()==CarryMode.IMPLANTED) return true;
+			// or that are usually an accessory and now come in a BODYWARE variant
+			//if (type==ItemType.ACCESSORY)
+			return item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE;
+		};
 		
 		secCyber = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.cyberware"), CarryMode.IMPLANTED, selectFilter, showFilter);
 		secCyber.setMaxHeight(Double.MAX_VALUE);
@@ -90,15 +89,7 @@ public class AugmentationPage extends Page {
 	//-------------------------------------------------------------------
 	private void initBioware() {
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.BIOWARE); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> 
-			(item.getResolved().getItemType()==ItemType.BIOWARE 
-			|| 
-			(item.getResolved().getItemType()==ItemType.ACCESSORY && item.getVariant()!=null && (
-				item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE
-				||
-				item.getVariant().getUsages().stream().anyMatch(us -> us.getMode()==CarryMode.IMPLANTED)
-				))
-			);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.IMPLANTED, ItemType.BIOWARE);
 		secBio = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.bioware"), CarryMode.IMPLANTED, selectFilter, showFilter);
 		secBio.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secBio, 4);

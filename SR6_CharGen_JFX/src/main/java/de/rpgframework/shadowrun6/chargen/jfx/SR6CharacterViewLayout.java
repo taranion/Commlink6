@@ -346,6 +346,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 
 	//-------------------------------------------------------------------
 	private void refreshPages() {
+		logger.log(Level.INFO, "refreshPages");
 		if (control.getModel().isInCareerMode()) {
 			lbMode.setText(ResourceI18N.get(UI, "label.mode.career"));
 		} else {

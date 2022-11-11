@@ -102,7 +102,7 @@
    		<attrdef id="AVAILABILITY" value="2"/>
    		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
-   	<variant id="bodyware">
+   	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
   		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="1000"/>
@@ -123,10 +123,10 @@
    		<attrdef id="AVAILABILITY" value="2"/>
    		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
-   	<variant id="bodyware">
+   	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
   		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
-   		<attrdef id="PRICE" value="1000"/>
+   		<attrdef id="PRICE" value="800"/>
    		<attrdef id="AVAILABILITY" value="2"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
    		<flags><flag>AUGMENTATION</flag></flags>
@@ -140,7 +140,7 @@
    		<attrdef id="PRICE" value="1500"/>
    		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
-   	<variant id="bodyware">
+   	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
   		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="1500"/>
@@ -157,8 +157,9 @@
    		<attrdef id="AVAILABILITY" value="3L"/>
    		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
-   	<variant id="bodyware">
+   	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
+  		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3L"/>
    		<attrdef id="ESSENCECOST" value="0.2"/>
@@ -175,8 +176,9 @@
    		<attrdef id="AVAILABILITY" value="2"/>
    		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
-   	<variant id="bodyware">
+   	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
+ 		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="1500"/>
    		<attrdef id="AVAILABILITY" value="2"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
@@ -196,8 +198,9 @@
    		<attrdef id="AVAILABILITY" value="3"/>
    		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
-   	<variant id="bodyware">
+   	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
+ 		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
@@ -213,8 +216,9 @@
    		<attrdef id="AVAILABILITY" value="3"/>
    		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>   	
-   	<variant id="bodyware">
+   	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
+ 		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="2000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
@@ -281,6 +285,7 @@
    	</variant>   	
    	<variant id="bodyware">
 		  	<usage mode="IMPLANTED" />
+ 		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="400"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
    		<flags><flag>AUGMENTATION</flag></flags>
@@ -307,6 +312,7 @@
 			<choices>
 				<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 			</choices>
+ 		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="$RATING*3500"/>
    		<attrdef id="AVAILABILITY" value="4"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
@@ -323,6 +329,7 @@
    	</variant>   	
    	<variant id="bodyware">
    		<usage mode="IMPLANTED"/>
+ 		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="400"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>

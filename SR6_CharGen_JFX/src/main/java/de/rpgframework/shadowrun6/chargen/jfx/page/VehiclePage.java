@@ -12,11 +12,8 @@ import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.genericrpg.data.ComplexDataItem;
-import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
@@ -56,17 +53,18 @@ public class VehiclePage extends Page {
 	
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		initOther();
-		initElectro();
+		initDrones();
+		initVehicles();
 	}
 	
 	//-------------------------------------------------------------------
-	private void initElectro() {
+	private void initVehicles() {
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.VEHICLES); 
 		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.VEHICLES); 
 		secVehicles = new GearSection(
 				ResourceI18N.get(RES, "page.vehicles.section.vehicles"), selectFilter, showFilter
 				);
+		secVehicles.setId("vehicles");
 		secVehicles.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secVehicles, 4);
 		FlexGridPane.setMinHeight(secVehicles, 6);
@@ -77,12 +75,13 @@ public class VehiclePage extends Page {
 	}
 	
 	//-------------------------------------------------------------------
-	private void initOther() {
+	private void initDrones() {
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.droneTypes()); 
 		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.droneTypes()); 
 		secDrones = new GearSection(
 				ResourceI18N.get(RES, "page.vehicles.section.drones"), selectFilter, showFilter
 				);
+		secDrones.setId("drones");
 		secDrones.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secDrones, 4);
 		FlexGridPane.setMinHeight(secDrones, 6);

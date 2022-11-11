@@ -45,7 +45,7 @@ public class AddMissingVehicleSlots implements CarriedItemProcessor {
 		
 		ItemType type = model.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
 		if (ItemType.isVehicle(type)) {
-			logger.log(Level.WARNING, "TODO: add vehicle slots");
+			logger.log(Level.WARNING, "TODO: add vehicle slots to {0}", type);
 		}
 
 		return new OperationResult<List<Modification>>(unprocessed);
