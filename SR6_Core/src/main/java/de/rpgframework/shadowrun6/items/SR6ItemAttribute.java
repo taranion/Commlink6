@@ -108,6 +108,8 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	 * @see de.rpgframework.genericrpg.items.IItemAttribute#calculateModifiedValue(java.lang.Object, java.util.List)
 	 */
 	public <T> T calculateModifiedValue(Object base, List<Modification> mods) {
+		if (mods.isEmpty())
+			return (T)base;
 		if (this==AVAILABILITY)
 			return (T) SR6GearTool.calculateModifiedValue((Availability) base, mods);
 		if (this==ATTACK_RATING)

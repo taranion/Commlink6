@@ -475,7 +475,10 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			float free = realSlot.getFreeCapacity();
 			float required = 1;
 			if (toEmbed.hasAttribute(SR6ItemAttribute.CAPACITY)) {
-				toEmbed.getAsFloat(SR6ItemAttribute.CAPACITY).getModifiedValue();
+				if (toEmbed.isFloat(SR6ItemAttribute.CAPACITY))
+					required = toEmbed.getAsFloat(SR6ItemAttribute.CAPACITY).getModifiedValue();
+				else
+					required = toEmbed.getAsValue(SR6ItemAttribute.CAPACITY).getModifiedValue();
 			}
 			if (free<required) {
 				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, required, slot.getName(), container.getNameWithoutRating(), free);			

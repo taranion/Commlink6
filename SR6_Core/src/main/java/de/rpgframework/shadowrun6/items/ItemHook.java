@@ -25,9 +25,9 @@ public enum ItemHook implements Hook {
 	// Especially for cyberimplant weapons
 	IMPLANTWEAPON_ACCESSORY,
 	
-	ELECTRONIC_ACCESSORY,
+	ELECTRONIC_ACCESSORY(true),
 	IMAGING(true),
-	OPTICAL,
+	OPTICAL(true),
 	AUDIO(true),
 	SENSOR_HOUSING(true),
 	SENSOR_FUNCTION(true),

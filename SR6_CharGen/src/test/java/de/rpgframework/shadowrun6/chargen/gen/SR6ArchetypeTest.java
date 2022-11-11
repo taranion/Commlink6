@@ -722,14 +722,23 @@ public class SR6ArchetypeTest {
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
 		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
+		assertTrue(equip.increaseConversion());
 		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "datajack"));
 //		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "image_link"));
 		OperationResult<CarriedItem<ItemTemplate>> toner = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner"),
-				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner").getChoices().get(0), "1"));
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner").getChoices().get(0), "1"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(toner.wasSuccessful());
 		OperationResult<CarriedItem<ItemTemplate>> enhan = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "reaction_enhancers"),
-				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "reaction_enhancers").getChoices().get(0), "1"));
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "reaction_enhancers").getChoices().get(0), "1"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(enhan.wasSuccessful());
 		OperationResult<CarriedItem<ItemTemplate>> wired = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "wired_reflexes"),
-				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "wired_reflexes").getChoices().get(0), "1"));
+				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "wired_reflexes").getChoices().get(0), "1"),
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertTrue(wired.wasSuccessful());
 
 		Possible poss = equip.canBeSelected(Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm"));
 		assertNotNull(poss);
@@ -826,7 +835,7 @@ public class SR6ArchetypeTest {
 		for (int i=2; i<=5; i++) equip.increase(tranq.get());
 		OperationResult<CarriedItem<ItemTemplate>> ultra = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "handheld_housing"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "handheld_housing").getChoices().get(0), "2"));
-		assertTrue( equip.embed(ultra.get(), ItemHook.SENSOR_HOUSING, Shadowrun6Core.getItem(ItemTemplate.class, "sensor_array"), null, new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "sensor_array").getChoices().get(0), "5")).wasSuccessful() );
+//		assertTrue( equip.embed(ultra.get(), ItemHook.SENSOR_HOUSING, Shadowrun6Core.getItem(ItemTemplate.class, "sensor_array"), null, new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "sensor_array").getChoices().get(0), "5")).wasSuccessful() );
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator"),
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "white_noise_generator").getChoices().get(0), "6")).wasSuccessful() );
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_predator_vi")).wasSuccessful() );
