@@ -9,6 +9,7 @@ import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.Pool;
 import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -52,16 +53,20 @@ public class CalculateSkillPools implements ProcessingStep {
 
 	//-------------------------------------------------------------------
 	private void calculatePool(SR6SkillValue sVal) {
-		Pool<Integer> pool = null;
+		Pool<Integer> pool = new Pool<Integer>();
+		sVal.setPool(pool);
 		// Clone pool for attribute, if possible
 		ShadowrunAttribute attr = sVal.getSkill().getAttribute();
 		if (attr!=null) {
-			pool = (Pool<Integer>) model.getAttribute(attr).getPool().clone();
+//			pool = (Pool<Integer>) model.getAttribute(attr).getPool().clone();
+			AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attr);
+			pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(
+					Math.max(aVal.getModifiedValue(ValueType.NATURAL), aVal.getModifiedValue(ValueType.NATURAL)), 
+					attr.getName(loc)));
 		}
-		if (pool==null) {
-			pool = new Pool<Integer>();
-		}
-		sVal.setPool(pool);
+//		if (pool==null) {
+//			pool = new Pool<Integer>();
+//		}
 		
 		int augmentedMax = sVal.getDistributed() + 4;
 		
@@ -138,7 +143,7 @@ public class CalculateSkillPools implements ProcessingStep {
 		}
 		logger.log(Level.DEBUG, "ARTIFICIAL: {0}",pool.getCalculation(ValueType.ARTIFICIAL));
 		
-		logger.log(Level.INFO, "{0}: converted {1} to {2}", sVal.getModifyable(), sVal.getModifiedValue(), sVal.getPool().toString());
+		logger.log(Level.WARNING, "{0}: converted {1} to {2}", sVal.getModifyable(), sVal.getModifiedValue(), sVal.getPool().toString());
 	}
 
 }
