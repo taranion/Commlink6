@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.proc;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,20 +43,21 @@ public class CalculateEssence implements ProcessingStep {
 		logger.log(Level.TRACE, "ENTER: process");
 		try {
 
-			float essenceCost = 0.0f;
+			BigDecimal essenceCostBD = new BigDecimal(0);
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				logger.log(Level.DEBUG, "Item type of {0} is {1}", item, item.getAttributeRaw(SR6ItemAttribute.ITEMTYPE));
 				ItemType type = Shadowrun6Tools.getItemType(item);
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(type) || (item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE)) {
 //					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
 					ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-//					logger.log(Level.INFO, "  essence = "+aVal);
+					logger.log(Level.WARNING, "  essence = {0} for {1}",aVal, item.getKey());
 					if (aVal==null) continue;
-					float essence = aVal.getModifiedValue(); 
+					double essence = aVal.getModifiedValueDouble(); 
 					logger.log(Level.INFO,"* "+item.getNameWithoutRating()+" = "+essence);
-					essenceCost += essence;
+					essenceCostBD = essenceCostBD.add(aVal.getModifiedValueBigDecimal());
 				}
 			}
+			int essenceCost = essenceCostBD.multiply(new BigDecimal(1000)).intValue();
 			
 			// Ensure presence of attributes
 			AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);
@@ -63,36 +65,38 @@ public class CalculateEssence implements ProcessingStep {
 				essVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE, 6000);
 				model.setAttribute(essVal);
 			}
+			essVal.clearModifications();
 			AttributeValue<ShadowrunAttribute> holeVal = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
 			if (holeVal==null) {
 				holeVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0);
 				model.setAttribute(holeVal);
 			}
-			int essenceHole = holeVal.getModifiedValue();
 			
-			if (model.isInCareerMode()) {
-				// Determine the max essence
-//				float max = 6000 - model.getEssenceHole();
-				// Reduce the cost by variable
-				logger.log(Level.WARNING, "ToDo: Calculate essence");
-			} else {
-				// Max essence to substract from is 6 plus additional essence hole
-				float max = 6000 + holeVal.getModifiedValue();
-				
-				int remain = Math.min(6000, Math.round(max - (int)(essenceCost*1000)));
-				essVal.setDistributed(remain);
-				holeVal.setDistributed(0);
-				model.setEssenceCost( (int)(essenceCost*1000));
-				logger.log(Level.WARNING, "Essence cost is {0}, hole is {1}, resulting remain essence is {2}", essenceCost, holeVal.getModifiedValue(), remain);
-				essVal.setDistributed(remain);
-				model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE).setDistributed(essenceHole);
+			// Max essence to substract from is 6 plus additional essence hole
+			int max = 6000 - holeVal.getModifiedValue();
+			if (model.isInCareerMode() && model.getEssenceMaximum()>0) {
+				max = model.getEssenceMaximum() + holeVal.getModifiedValue();
 			}
+			
+			int newEssence = max - essenceCost;
+			// The new essence cannot be higher than the essence maximum
+			// If in theory it would, the difference is the new essence hole
+			if (newEssence > max) {
+				int newHole = newEssence - max;
+				holeVal.setDistributed( newHole);
+				essVal.setDistributed(6000 - max );
+			} else {
+				// No hole
+				holeVal.setDistributed(0);
+				essVal.setDistributed( newEssence );
+				model.setEssenceMaximum( newEssence);
+			}
+			
+			float remain = essVal.getModifiedValue() / 1000f;
+			logger.log(Level.WARNING, "Essence cost is {0}, hole is {1}, resulting remain essence is {2}", essenceCost, holeVal.getModifiedValue(), remain);
 
-			float min = 6.0f - essenceCost; //Math.min(model.getEssence(), 6.0f-sum);
-//			if (min!=model.getEssence()) {
-//				logger.warn("Fix essence to "+min);
-//				model.setEssence(min);
-//			}
+			double min = 6.0f - essenceCost; //Math.min(model.getEssence(), 6.0f-sum);
+
 			int magicMalus = 5 - (int)min;
 			if (magicMalus<0) magicMalus=0;
 			logger.log(Level.INFO,"Magic malus is "+magicMalus);

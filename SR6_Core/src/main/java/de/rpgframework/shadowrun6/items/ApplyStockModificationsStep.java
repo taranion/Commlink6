@@ -57,7 +57,8 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 					logger.log(Level.ERROR, "Unsupported modification: " + tmp);
 				}
 			} catch (Exception e) {
-				logger.log(Level.ERROR, "Error processing "+tmp,e);
+				logger.log(Level.ERROR, "Error processing "+tmp+" from "+tmp.getSource(),e);
+				System.exit(1);
 			}
 
 		}
