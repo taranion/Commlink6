@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
@@ -83,11 +84,34 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		try {
 			OperationResult<CarriedItem<ItemTemplate>> result = super.select(value, variantID, mode, decisions);
 			if (result.wasSuccessful()) {
+				CarriedItem<ItemTemplate> item = result.get();
 				Shadowrun6Character model = getModel();
-				int nuyen = result.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+				int nuyen = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 				logger.log(Level.INFO, "Buy {0} for {1} nuyen", value.getId(), nuyen);
-				
 				model.setNuyen( model.getNuyen() - nuyen );
+				
+				// Pay essence
+				if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
+					double essenceCost = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
+					int essHole = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE).getModifiedValue();
+					if (essHole>0) {
+						double essHole2 = (double)essHole / 2.0;
+						if (essHole2>essenceCost) {
+							// Pay fully by reducing essence hole
+							essHole2 -= essenceCost;
+							logger.log(Level.INFO, "Fully pay {0} essence by reducing essence hole to {1}", essenceCost, essHole2);
+							model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE).setDistributed((int)(essHole2*1000));
+							essenceCost = 0;
+						} else if (essHole2>0){
+							double orig = essenceCost;
+							essenceCost -= essHole2;
+							logger.log(Level.INFO, "Partially pay {0} essence by reducing essence hole to 0 and pay remaining {1}", orig, essenceCost);
+						} else {
+							logger.log(Level.INFO, "Pay {0} ", essenceCost);
+						}
+					}
+				}
+				
 				parent.runProcessors();
 			}
 			
