@@ -82,6 +82,7 @@ public class SoftwareLibrarySection extends GearSection {
 			button.getStyleClass().add("install-button");
 			setAlignment(Pos.CENTER);
 		}
+		@SuppressWarnings("unchecked")
 		@Override
 		public void updateItem(Boolean item, boolean empty) {
 			super.updateItem(item, empty);
@@ -178,6 +179,7 @@ public class SoftwareLibrarySection extends GearSection {
 	}
 
 	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
 	private boolean isUnused(ProgramRow row, TreeTableColumn<ProgramRow, Boolean> col) {
 		if (row.program==null) return true;
 		CarriedItem<ItemTemplate> device = (CarriedItem<ItemTemplate>) col.getUserData();
@@ -189,6 +191,7 @@ public class SoftwareLibrarySection extends GearSection {
 	/**
 	 * @see org.prelle.javafx.Section#refresh()
 	 */
+	@SuppressWarnings("unchecked")
 	public void refresh() {
 		if (model==null) return;
 		if (root==null) return;
@@ -249,7 +252,6 @@ public class SoftwareLibrarySection extends GearSection {
 		}
 		List<ItemSubType> subtypes = new ArrayList<ItemSubType>(byType.keySet());
 		Collections.sort(subtypes, (s1,s2) -> Integer.compare(s1.ordinal(), s2.ordinal()));
-		System.err.println("SoftwareLibrary.refresh: "+subtypes);
 		
 		for (ItemSubType key : subtypes) {
 			TreeItem<ProgramRow> item = new TreeItem<ProgramRow>(new ProgramRow(key));

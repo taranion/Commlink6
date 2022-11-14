@@ -6,10 +6,12 @@ import java.util.Map.Entry;
 
 import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.PowerLevel;
+import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
@@ -30,7 +32,7 @@ public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 	public int boughtComplex;
 	/** How points and karma is spent on attribute */
 	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib;
-	public Map<SR6SkillValue, PerSkillPoints> perSkill;
+	public Map<String, PerSkillPoints> perSkill;
 	public Map<SpellValue, Boolean> perSpellPayedWithCP;
 	public Map<RitualValue, Boolean> perRitualPayedWithCP;
 	
@@ -66,11 +68,21 @@ public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 		StringBuffer buf = new StringBuffer();
 		buf.append("\nCharacter Points remaining: "+characterPoints);
 		buf.append("\nCP converted to skills: "+cpToSkills);
-		for (Entry<SR6SkillValue,PerSkillPoints> ent : perSkill.entrySet()) {
+		for (Entry<String,PerSkillPoints> ent : perSkill.entrySet()) {
 			if (ent.getValue().getSum()>0)
-				buf.append(String.format("\n%10s : %s", ent.getKey().getSkill(), ent.getValue().toString()));
+				buf.append(String.format("\n%10s : %s", ent.getKey(), ent.getValue().toString()));
 		}
 		return buf.toString();
+	}
+	
+	//-------------------------------------------------------------------
+	public void put(SR6SkillValue sVal, PerSkillPoints per) {
+		SR6Skill skill = sVal.getModifyable();
+		String id = skill.getId();
+		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
+			id+="/"+sVal.getUuid();
+		} 
+		perSkill.put(id, per);
 	}
 	
 }

@@ -135,6 +135,17 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			return settings.perSkill.get(value);
 		}
 	}
+	
+	//-------------------------------------------------------------------
+	protected void setPerSkill(SR6SkillValue value, PerSkillPoints per) {
+		try {
+			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+			settings.put(value, per);
+		} catch (ClassCastException cce) {
+			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+			settings.put(value, per);
+		}
+	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -325,10 +336,11 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	@Override
 	public Possible canBeIncreasedPoints(SR6SkillValue value) {
-		if (!model.getSkillValues().contains(value)) {
-			// Value not present in character
-			return Possible.FALSE;
-		}
+//		if (!model.getSkillValues().contains(value)) {
+//			return canBeSelected(value.getModifyable());
+//			// Value not present in character
+////			return Possible.FALSE;
+//		}
 		
 		// Is the new value acceptable
 		Possible allowed = wouldNewValueBeOkay(value);

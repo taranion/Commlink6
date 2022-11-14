@@ -343,6 +343,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 	 */
 	@Override
 	public Possible canBeIncreasedPoints3(SR6SkillValue key) {
+//		logger.log(Level.WARNING, "canBeIncreasedPoints3("+key+")");
 		int karma = getIncreaseCost(key);
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
@@ -360,7 +361,10 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		if (per==null)
 			return new Possible(I18N_NOT_SELECTED);
 		
-		return new Possible(per.points3>0, I18N_NOT_RAISED_KARMA);
+		if (per.points3==0)
+			return new Possible(I18N_NOT_RAISED_KARMA);
+		
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------
@@ -383,15 +387,15 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				return new OperationResult<>(allowed);
 			}
 
-			if (value.getDistributed()==0) {
-				logger.log(Level.DEBUG, "Don't increase, but select");
-				return select(value.getModifyable());
-			}
+//			if (value.getDistributed()==0) {
+//				logger.log(Level.DEBUG, "Don't increase, but select");
+//				return select(value.getModifyable());
+//			}
 
 			PerSkillPoints per = getPerSkill(value);
 			if (per==null) {
-				logger.log(Level.ERROR, "No PerSkillPoints found for {0}",value);
-				return new OperationResult<>();
+				per = new PerSkillPoints();
+				setPerSkill(value, per);
 			}
 
 			// Do increase
@@ -420,19 +424,30 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public OperationResult<SR6SkillValue> decreasePoints3(SR6SkillValue value) {
 		Possible allowed = canBeDecreasedPoints3(value);
-		if (!allowed.get()) 
+		if (!allowed.get()) {
+			logger.log(Level.ERROR, "Trying to decrease spent Karma, though not allowed: {0}", value);
 			return new OperationResult<>(allowed);
+		}
 		
 		if (value==null) {
 			logger.log(Level.ERROR, "Trying to decrease a skill not previously selected");
 			return new OperationResult<>(new Possible(I18N_NOT_SELECTED));
 		}
+
+		PerSkillPoints per = getPerSkill(value);
+		if (per==null) {
+			logger.log(Level.ERROR, "No PerSkillPoints found for {0}",value);
+			return new OperationResult<>();
+		}
 		
-		// Do increase
+		// Do decrease
 		value.setDistributed(value.getDistributed()-1);
+		per.points3--;
 		// Return karma
 		int karma = getIncreaseCost(value);
 		model.setKarmaFree(model.getKarmaFree() + karma);
+		
+		parent.runProcessors();
 		
 		return new OperationResult<SR6SkillValue>(value);
 	}
@@ -588,7 +603,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				SR6Skill key = sVal.getResolved();
 				
 				PerSkillPoints per = entry.getValue();
-//				logger.log(Level.DEBUG, entry.getKey()+" = "+per.toString());
+				logger.log(Level.DEBUG, entry.getKey()+" = "+per.toString());
 				/* 
 				 * Pay skill points 
 				 */
@@ -958,6 +973,21 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			return 0;//-1;
 		}
 		return val.points2;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith3PoolsController#getPoints3(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints3(SR6SkillValue key) {
+		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+		PerSkillPoints val = settings.get(key);
+		if (val==null) {
+//			logger.log(Level.ERROR, "Cannot determine points2 for not present SkillValue {0}", key);
+			return 0;//-1;
+		}
+		return val.points3;
 	}
 
 }

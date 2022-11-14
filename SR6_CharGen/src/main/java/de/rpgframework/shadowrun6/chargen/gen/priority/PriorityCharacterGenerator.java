@@ -39,6 +39,7 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
+import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 
 /**
  * @author prelle
@@ -234,6 +235,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(contacts);
 			processChain.add(new CalculateAttributePools(model, Locale.getDefault()));
 			processChain.add(new RemainingKarmaNuyenController(this));
+			processChain.add(new CalculateSkillPools(model, Locale.getDefault()));
 //			processChain.add(new CalculateEssence(model));
 //			processChain.add(new CalculateDerivedAttributes(model));
 

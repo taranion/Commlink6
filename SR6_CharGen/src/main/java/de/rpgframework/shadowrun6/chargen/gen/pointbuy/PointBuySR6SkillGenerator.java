@@ -87,7 +87,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			else if (points2>0)
 				per.points2=1;
 				
-			settings.perSkill.put(result.get(), per);
+			settings.perSkill.put(result.get().getKey(), per);
 			
 			getCharacterController().runProcessors();
 			return result;
