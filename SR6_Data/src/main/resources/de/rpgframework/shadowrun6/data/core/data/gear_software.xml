@@ -1,50 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
     <!-- Basic Program -->
-	<item avail="1" price="60" id="browse" type="SOFTWARE" subtype="BASIC_PROGRAM">
+	<item avail="1" price="60" id="browse" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<modifications>
 			<checkmod type="ACTION" ref="matrix_search" value="1" what="EDGE" apply="CHARACTER"/>
 		</modifications>
 		<variant id="basic">
 			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
 		</variant>
-		<variant id="cyberdeck">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		<variant id="rcc">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
 		</variant>
 	</item> 
 	<item avail="1" price="60" id="baby_monitor" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="basic">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		</variant>
+		<variant id="rcc">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+		</variant>
 	</item> 
 	<item avail="1" price="60" id="configurator" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="basic">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		</variant>
+		<variant id="rcc">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+		</variant>
 	</item> 
 	<item avail="1" price="60" id="edit" type="SOFTWARE" subtype="BASIC_PROGRAM">
 		<modifications>
 			<checkmod type="ACTION" ref="edit_file" value="1" what="EDGE" apply="CHARACTER"/>
 		</modifications>
-		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="basic">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		</variant>
+		<variant id="rcc">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+		</variant>
 	</item> 
 	<item avail="1" price="60" id="encryption" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="basic">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		</variant>
+		<variant id="rcc">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+		</variant>
 	</item> 
 	<item avail="1" price="60" id="signal_scrubber" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="basic">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		</variant>
+		<variant id="rcc">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+		</variant>
 	</item> 
 	<item avail="1" price="60" id="toolbox" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active">
 	   	<modifications>
 	   		<valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="1" apply="PERSONA"/>
 	   	</modifications>
 	   </mode>
+		<variant id="basic">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		</variant>
+		<variant id="rcc">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+		</variant>
 	</item> 
 	<item avail="1" price="60" id="virtual_machine" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active">
 	   	<modifications>
 	   		<valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="2" apply="DATA_ITEM"/>
 	   	</modifications>
 	   </mode>
+		<variant id="basic">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		</variant>
+		<variant id="rcc">
+			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+		</variant>
 	</item> 
 	
 	<!-- Hacking Program -->

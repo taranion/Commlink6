@@ -214,7 +214,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		}
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), item.getAsValue(attr).getModifiedValue(), attr);
 		valMod.setSet(ValueType.NATURAL);
-		valMod.setSource(attr);
+		valMod.setSource(item);
 		val.addModification( valMod );
 	}
 
