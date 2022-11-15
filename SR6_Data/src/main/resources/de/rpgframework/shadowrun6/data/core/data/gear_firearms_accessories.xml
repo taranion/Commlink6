@@ -44,6 +44,7 @@
       <usage mode="EMBEDDED" slot="UNDER"/>
       <variant id="cyberimplant">
 	      <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="8"/>
+   		<attrdef id="ITEMTYPE" value="CYBERWARE"/>
 			<attrdef id="PRICE" value="6000" />
 			<attrdef id="AVAILABILITY" value="5I" />
  			<flags><flag>AUGMENTATION</flag></flags>  	
