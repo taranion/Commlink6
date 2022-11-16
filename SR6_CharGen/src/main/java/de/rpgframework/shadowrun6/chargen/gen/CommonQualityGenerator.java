@@ -126,13 +126,13 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		}
 		
 		if (value.isPositive() && karma>model.getKarmaFree()) {
-			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
+			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
 		if (!value.isPositive() && (karmaGain+karma)>20) {
-			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_QUALITY_KARMAGAIN, karma);
+			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_QUALITY_KARMAGAIN, karma);
 		}
-		if (value.isPositive() && (karmaSURGE+karma)>30) {
-			return new Possible(Severity.WARNING, RES, IRejectReasons.IMPOSS_QUALITY_KARMASURGE, karma);
+		if (value.getType()==QualityType.METAGENIC && (karmaSURGE+Math.abs(karma))>30) {
+			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_QUALITY_KARMASURGE, karmaSURGE);
 		}
 
 		/* If a quality resolves to a ComplexDataItem, check for choices there too */
