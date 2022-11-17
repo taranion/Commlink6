@@ -19,6 +19,7 @@ public class SR6WizardPageComplexForms extends WizardPageComplexForms {
 		super(wizard, charGen);
 	}
 	
+	//-------------------------------------------------------------------
 	protected void initComponents() {
 		super.initComponents();
 		selection.setOptionCallback( (item,list) -> {

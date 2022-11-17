@@ -337,7 +337,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
-		logger.log(Level.TRACE, "RCV {0}",type);
+		logger.log(Level.WARNING, "RCV {0}",type);
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) 
 			refresh();
 		

@@ -208,14 +208,13 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
-		if (type==BasicControllerEvents.CHARACTER_CHANGED) 
+		logger.log(Level.WARNING, "RCV {0}",type);
+		if (type==BasicControllerEvents.CHARACTER_CHANGED || type==BasicControllerEvents.GENERATOR_CHANGED) {
 			refresh();
+		}
 		
-		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
-			refresh();
 //			bxLine.setManaged(charGen.getAdeptPowerController().canBuyPowerPoints());
 //			bxLine.setVisible(charGen.getAdeptPowerController().canBuyPowerPoints());
-		}
 	}
 
 	//-------------------------------------------------------------------

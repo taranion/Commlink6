@@ -6,10 +6,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.Wizard;
 
-import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -18,8 +16,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 
 /**
  * @author prelle
