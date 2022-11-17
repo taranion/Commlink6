@@ -139,6 +139,8 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	 * Enable or disable page
 	 */
 	private void refresh() {
+		System.err.println("SR6WizardPageChangeling.refresh1 "+charGen.getWrapped());
+		System.err.println("SR6WizardPageChangeling.refresh2 "+((CommonQualityGenerator)charGen.getQualityController()).getKarmaForSURGE());
 		backHeader.setValue(charGen.getModel().getKarmaFree());
 		
 		lbNetKarma.setText(String.valueOf( ((CommonQualityGenerator)charGen.getQualityController()).getKarmaForSURGE()));
@@ -175,7 +177,8 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
-		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
+		logger.log(Level.WARNING, "RCV {0}",type);
+		if (type==BasicControllerEvents.CHARACTER_CHANGED || type==BasicControllerEvents.GENERATOR_CHANGED) {
 			selection.refresh();
 			refresh();
 		}
