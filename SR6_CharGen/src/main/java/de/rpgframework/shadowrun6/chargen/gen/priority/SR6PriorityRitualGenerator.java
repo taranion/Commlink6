@@ -86,7 +86,6 @@ public class SR6PriorityRitualGenerator extends CommonRitualController implement
 	 */
 	@Override
 	public float getSelectionCost(Ritual data) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -96,7 +95,7 @@ public class SR6PriorityRitualGenerator extends CommonRitualController implement
 	 */
 	@Override
 	public String getSelectionCostString(Ritual data) {
-		return String.valueOf(getSelectionCostString(data));
+		return "0";
 	}
 
 	//-------------------------------------------------------------------
