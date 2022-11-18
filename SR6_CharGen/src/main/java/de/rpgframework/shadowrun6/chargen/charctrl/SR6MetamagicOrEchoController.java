@@ -461,4 +461,13 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		return unprocessed;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(MetamagicOrEchoValue value) {
+		return value.getDistributed();
+	}
+
 }

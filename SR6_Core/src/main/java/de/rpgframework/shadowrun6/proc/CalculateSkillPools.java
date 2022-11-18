@@ -143,7 +143,7 @@ public class CalculateSkillPools implements ProcessingStep {
 		}
 		logger.log(Level.DEBUG, "ARTIFICIAL: {0}",pool.getCalculation(ValueType.ARTIFICIAL));
 		
-		logger.log(Level.WARNING, "{0}: converted {1} to {2}", sVal.getModifyable(), sVal.getModifiedValue(), sVal.getPool().toString());
+		logger.log(Level.DEBUG, "{0}: converted {1} to {2}", sVal.getModifyable(), sVal.getModifiedValue(), sVal.getPool().toString());
 	}
 
 }

@@ -156,7 +156,6 @@ public class EssenceSection extends Section {
 		// Essence 
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ESSENCE);
 		if (val != null) {
-			System.err.println("EssenceSection = " + val + " / " + val.getModifications());
 			if (val != null)
 				lbEssenceRemain.setText(String.valueOf(val.getModifiedValue() / 1000.0));
 			// Essence hole

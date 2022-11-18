@@ -289,7 +289,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 			
 			// Make sure there is at laast one lifestyle
 			if (model.getLifestyles().isEmpty()) {
-				logger.log(Level.WARNING, "No lifestyle found");
+				logger.log(Level.DEBUG, "No lifestyle found");
 				todos.add(new ToDoElement(Severity.WARNING, IRejectReasons.IMPOSS_NO_LIFESTYLE));
 			}
 			

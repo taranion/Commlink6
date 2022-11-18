@@ -14,7 +14,6 @@ import java.util.UUID;
 
 import de.rpgframework.genericrpg.NumericalValueWith3PoolsController;
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.ValueType;
@@ -413,7 +412,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 
 			return new OperationResult<SR6SkillValue>(value);
 		} finally {
-			logger.log(Level.TRACE, "LEAVE: increasePoints3({0})", value.getKey());
+			logger.log(Level.INFO, "LEAVE: increasePoints3({0})", value.getKey());
 		}
 	}
 
@@ -988,6 +987,20 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			return 0;//-1;
 		}
 		return val.points3;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(SR6SkillValue key) {
+		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+		PerSkillPoints val = settings.get(key);
+		if (val==null) {
+			return 0;//-1;
+		}
+		return val.getSum();
 	}
 
 }

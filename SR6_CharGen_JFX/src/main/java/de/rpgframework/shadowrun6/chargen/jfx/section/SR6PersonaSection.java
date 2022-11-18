@@ -132,8 +132,8 @@ public class SR6PersonaSection extends PersonaSection<Shadowrun6Character> {
 				logger.log(Level.WARNING, "Found matrix item with either ATTACK nor DATA_PROCESSING: {0}", item);
 			}
 		}
-		logger.log(Level.WARNING, "refresh with asItems={0} and dfItems={1}", asItems, dfItems);
-		logger.log(Level.WARNING, "refresh with primaryAS={0} and primaryDF={1}", primaryAS, primaryDF);
+		logger.log(Level.DEBUG, "refresh with asItems={0} and dfItems={1}", asItems, dfItems);
+		logger.log(Level.DEBUG, "refresh with primaryAS={0} and primaryDF={1}", primaryAS, primaryDF);
 		
 		// Update, if necessary
 		if (!cbASDevice.getItems().containsAll(asItems)) {

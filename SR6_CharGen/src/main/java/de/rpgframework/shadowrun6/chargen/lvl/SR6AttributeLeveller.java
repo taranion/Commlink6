@@ -264,5 +264,14 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 
 		return unprocessed;
 	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(AttributeValue<ShadowrunAttribute> value) {
+		return value.getDistributed();
+	}
 
 }

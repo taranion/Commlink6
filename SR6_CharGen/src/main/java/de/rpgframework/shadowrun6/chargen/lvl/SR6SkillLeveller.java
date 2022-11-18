@@ -440,4 +440,13 @@ public class SR6SkillLeveller extends CommonSkillController {
 		return unprocessed;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(SR6SkillValue value) {
+		return value.getDistributed();
+	}
+
 }

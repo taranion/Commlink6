@@ -1,18 +1,13 @@
 package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.util.Locale;
-import java.util.function.BiFunction;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
-import de.rpgframework.shadowrun.Priority;
-import de.rpgframework.shadowrun.PriorityTableEntry;
-import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.SumToTenPriorityTableController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
  * @author prelle

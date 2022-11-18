@@ -3,7 +3,6 @@ package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -23,7 +22,6 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
-import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
@@ -700,6 +698,17 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith1PoolController#getPoints(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints(AttributeValue<ShadowrunAttribute> key) {
+		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+		PerAttributePoints val = settings.perAttrib.get(key.getModifyable());
+		return val.points1;
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.genericrpg.NumericalValueWith2PoolsController#getPoints2(de.rpgframework.genericrpg.NumericalValue)
 	 */
 	@Override
@@ -714,10 +723,21 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	 * @see de.rpgframework.genericrpg.NumericalValueWith1PoolController#getPoints(de.rpgframework.genericrpg.NumericalValue)
 	 */
 	@Override
-	public int getPoints(AttributeValue<ShadowrunAttribute> key) {
+	public int getPoints3(AttributeValue<ShadowrunAttribute> key) {
 		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
 		PerAttributePoints val = settings.perAttrib.get(key.getModifyable());
-		return val.points1;
+		return val.points3;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(AttributeValue<ShadowrunAttribute> key) {
+		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+		PerAttributePoints val = settings.perAttrib.get(key.getModifyable());
+		return val.getSum();
 	}
 
 }

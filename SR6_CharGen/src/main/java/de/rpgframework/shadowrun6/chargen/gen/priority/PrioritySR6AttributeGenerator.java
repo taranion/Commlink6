@@ -32,6 +32,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.chargen.gen.CommonAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -895,6 +896,26 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
 		PerAttributePoints val = settings.perAttrib.get(key.getModifyable());
 		return val.points1;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueWith1PoolController#getPoints(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getPoints3(AttributeValue<ShadowrunAttribute> key) {
+		SR6PrioritySettings settings = parent.getModel().getCharGenSettings(SR6PrioritySettings.class);
+		PerAttributePoints val = settings.perAttrib.get(key.getModifyable());
+		return val.points3;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(AttributeValue<ShadowrunAttribute> value) {
+		return value.getModifiedValue();
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.lvl.AQualityLeveller;
 import de.rpgframework.shadowrun6.Shadowrun6Character;

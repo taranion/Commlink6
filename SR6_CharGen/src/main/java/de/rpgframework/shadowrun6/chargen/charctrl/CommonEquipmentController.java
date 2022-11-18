@@ -551,4 +551,13 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		return Possible.TRUE;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(CarriedItem<ItemTemplate> value) {
+		return value.getDistributed();
+	}
+
 }

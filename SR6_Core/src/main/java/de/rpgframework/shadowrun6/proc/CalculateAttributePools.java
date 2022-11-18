@@ -45,9 +45,6 @@ public class CalculateAttributePools implements ProcessingStep {
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		for (ShadowrunAttribute attr : ShadowrunAttribute.values()) {
-			if (attr == ShadowrunAttribute.DEFENSE_RATING_MATRIX) {
-				logger.log(Level.WARNING, "HERE: "+model.getAttribute(attr).getModifications());
-			}
 			calculatePool(model.getAttribute(attr));
 		}
 		return unprocessed;

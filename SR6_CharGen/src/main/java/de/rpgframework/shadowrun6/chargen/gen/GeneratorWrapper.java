@@ -157,16 +157,17 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 		logger.log(Level.ERROR, "#################Generator changed to "+newCtrl+"\n\n\n");
 		// Move all existing listener to new controller
 		if (wrapped!=null) {
-//			logger.log(Level.INFO, "#################Generator had {0} listener", wrapped.getListener().size());
+			logger.log(Level.WARNING, "#################Generator had {0} listener", wrapped.getListener().size());
+			System.err.println("#################Generator had "+wrapped.getListener().size()+" listener");
 			for (ControllerListener callback : new ArrayList<>(wrapped.getListener())) {
 				newCtrl.addListener(callback);
 				wrapped.removeListener(callback);
 			}
 		}
 		wrapped = newCtrl;
+		logger.log(Level.INFO, "#################Call setModel()");
 		newCtrl.setModel(cached, cachedHandle);
 		wrapped.fireEvent(BasicControllerEvents.GENERATOR_CHANGED, newCtrl);
-//		logger.log(Level.INFO, "#################Call setModel()");
 	}
 
 	//-------------------------------------------------------------------

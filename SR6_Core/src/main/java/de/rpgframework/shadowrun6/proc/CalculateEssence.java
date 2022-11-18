@@ -93,7 +93,7 @@ public class CalculateEssence implements ProcessingStep {
 			}
 			
 			float remain = essVal.getModifiedValue() / 1000f;
-			logger.log(Level.WARNING, "Essence cost is {0}, hole is {1}, resulting remain essence is {2}", essenceCost, holeVal.getModifiedValue(), remain);
+			logger.log(Level.DEBUG, "Essence cost is {0}, hole is {1}, resulting remain essence is {2}", essenceCost, holeVal.getModifiedValue(), remain);
 
 			double min = 6.0f - essenceCost; //Math.min(model.getEssence(), 6.0f-sum);
 

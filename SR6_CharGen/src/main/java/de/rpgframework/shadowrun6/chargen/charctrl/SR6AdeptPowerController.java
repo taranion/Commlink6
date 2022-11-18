@@ -432,4 +432,13 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		return false;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(AdeptPowerValue value) {
+		return value.getModifiedValue();
+	}
+
 }

@@ -6,13 +6,10 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import de.rpgframework.genericrpg.NumericalValueWith2PoolsController;
-import de.rpgframework.genericrpg.NumericalValueWith3PoolsController;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.chargen.RecommendationState;
-import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
@@ -23,6 +20,7 @@ import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -185,8 +183,8 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 				}
 			}
 
-			for (Entry<SR6SkillValue,PerSkillPoints> entry : settings.perSkill.entrySet()) {
-				SR6Skill key = entry.getKey().getModifyable();
+			for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
+				SR6Skill key = Shadowrun6Core.getSkill( entry.getKey() );
 				PerSkillPoints per = entry.getValue();
 				if (per == null) {
 					logger.log(Level.WARNING, "No data for " + key);
@@ -222,9 +220,9 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			 * Copy from settings to character
 			 */
 			List<SR6SkillValue> usedSkills = new ArrayList<>();
-			for (Entry<SR6SkillValue,PerSkillPoints> entry : settings.perSkill.entrySet()) {
-				if (entry.getValue().getSum()==0) continue;
-				SR6SkillValue val = entry.getKey();
+			for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
+				if (entry.getValue().getSum()==0) continue;				
+				SR6SkillValue val = model.getSkillValue( Shadowrun6Core.getSkill( entry.getKey()) );
 				if (!model.getSkillValues().contains(val)) {
 					model.addSkillValue(val);
 				}
@@ -294,7 +292,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public Possible canBeDecreasedPoints2(SR6SkillValue key) {
 		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
-		PerSkillPoints per = settings.perSkill.get(key);
+		PerSkillPoints per = settings.perSkill.get(key.getKey());
 		if (per==null)
 			return new Possible(I18N_NOT_SELECTED);
 		return new Possible(per.points3>0, I18N_NOT_RAISED_KARMA);
@@ -360,7 +358,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public int getPoints(SR6SkillValue key) {
 		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
-		PerSkillPoints val = settings.perSkill.get(key);
+		PerSkillPoints val = settings.perSkill.get(key.getKey());
 		return val.points1;
 	}
 
@@ -371,8 +369,22 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public int getPoints2(SR6SkillValue key) {
 		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
-		PerSkillPoints val = settings.perSkill.get(key);
+		PerSkillPoints val = settings.perSkill.get(key.getKey());
 		return val.points2;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(SR6SkillValue key) {
+		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+		PerSkillPoints val = settings.perSkill.get(key.getKey());
+		if (val==null) {
+			return 0;//-1;
+		}
+		return val.getSum();
 	}
 
 }
