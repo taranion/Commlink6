@@ -39,6 +39,12 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.ISpellGenerator#usesFreeSpells()
+	 */
+	public boolean usesFreeSpells() { return true; }
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.ISpellGenerator#getFreeSpells()
 	 */
 	@Override

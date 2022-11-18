@@ -33,6 +33,15 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 	}
 
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IRitualGenerator#usesFreeRituals()
+	 */
+	@Override
+	public boolean usesFreeRituals() {
+		return true;
+	}
+
+	//-------------------------------------------------------------------
 	public Possible canBeSelectedCP(Ritual value, Decision... decisions) {
 		// Ensure spell has not been selected yet
 		for (RitualValue tmp : getSelected()) {

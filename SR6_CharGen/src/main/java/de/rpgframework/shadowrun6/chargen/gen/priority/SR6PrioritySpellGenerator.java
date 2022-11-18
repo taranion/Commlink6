@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ASpell;
+import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -39,6 +40,12 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	protected SR6PrioritySpellGenerator(SR6CharacterController parent) {
 		super(parent);
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.ISpellGenerator#usesFreeSpells()
+	 */
+	public boolean usesFreeSpells() { return true; }
 
 	//-------------------------------------------------------------------
 	/**
@@ -247,6 +254,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 			maxFree = freeSpells;
 			
 			int byKarma = 0;
+			// Count Spells
 			for (SpellValue<? extends ASpell> val : model.getSpells()) {
 				if (freeSpells>0)
 					freeSpells--;
@@ -256,9 +264,19 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 					logger.log(Level.INFO, "Pay spell ''{0}'' with 5 Karma", val.getModifyable().getId());
 				}
 			}
+			// Count rituals
+			for (RitualValue val : model.getRituals()) {
+				if (freeSpells>0)
+					freeSpells--;
+				else {
+					byKarma++;
+					model.setKarmaFree( model.getKarmaFree() -5 );
+					logger.log(Level.INFO, "Pay ritual ''{0}'' with 5 Karma", val.getModifyable().getId());
+				}
+			}
 			
 			// Summary and eventually warn
-			logger.log(Level.INFO, "Have {0} remaining free spells", freeSpells);
+			logger.log(Level.INFO, "Have {0} remaining free spells and rituals", freeSpells);
 			if (freeSpells>0) {
 				todos.add(new ToDoElement(Severity.WARNING, "Unused spells"));
 			} else if (byKarma>0) {

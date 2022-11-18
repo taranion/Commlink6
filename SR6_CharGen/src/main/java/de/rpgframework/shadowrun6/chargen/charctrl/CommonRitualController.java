@@ -12,10 +12,10 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualValue;
-import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
+import de.rpgframework.shadowrun.chargen.gen.IRitualGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
-public abstract class CommonRitualController extends ControllerImpl<Ritual> implements IRitualController {
+public abstract class CommonRitualController extends ControllerImpl<Ritual> implements IRitualGenerator {
 
 	//-------------------------------------------------------------------
 	public CommonRitualController(SR6CharacterController parent) {

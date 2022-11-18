@@ -15,7 +15,8 @@ import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
-import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
+import de.rpgframework.shadowrun.chargen.gen.IRitualGenerator;
+import de.rpgframework.shadowrun.chargen.gen.ISpellGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonRitualController;
@@ -25,9 +26,9 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
  * @author prelle
  *
  */
-public class SR6PriorityRitualGenerator extends CommonRitualController implements IRitualController {
+public class SR6PriorityRitualGenerator extends CommonRitualController implements IRitualGenerator {
 	
-	private int freeSpells;
+	private int freeLeft;
 
 	//-------------------------------------------------------------------
 	public SR6PriorityRitualGenerator(SR6CharacterController parent) {
@@ -35,8 +36,12 @@ public class SR6PriorityRitualGenerator extends CommonRitualController implement
 	}
 
 	//-------------------------------------------------------------------
-	public int getFreeSpells() {
-		return freeSpells;
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IRitualGenerator#usesFreeRituals()
+	 */
+	@Override
+	public boolean usesFreeRituals() {
+		return true;
 	}
 
 	//-------------------------------------------------------------------
@@ -51,7 +56,7 @@ public class SR6PriorityRitualGenerator extends CommonRitualController implement
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 		
-		if (freeSpells<1) {
+		if (freeLeft<1) {
 			boolean karmaAllowed =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
 			if (karmaAllowed && getModel().getKarmaFree()>=5) {
 				return Possible.TRUE;
@@ -109,41 +114,12 @@ public class SR6PriorityRitualGenerator extends CommonRitualController implement
 
 		try {
 			todos.clear();
-			freeSpells = 0;
+			freeLeft = ((ISpellGenerator<?>)parent.getSpellController()).getFreeSpells();
 			
 			Shadowrun6Character model = getModel();
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells() && model.hasCharGenSettings(SR6PrioritySettings.class)) {				
-				SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
-				if (model.getMagicOrResonanceType().usesPowers()) {
-					// Mystic adept
-					freeSpells = (settings.mysticAdeptMaxPoints - settings.getMagicForPP()) *2;
-				} else {
-					freeSpells = settings.perAttrib.get(ShadowrunAttribute.MAGIC).base * 2;
-				}
-				logger.log(Level.INFO, "Have {0} free spells", freeSpells);
-			}
-			
-			int byKarma = 0;
-			for (SpellValue<? extends ASpell> val : model.getSpells()) {
-				if (freeSpells>0)
-					freeSpells--;
-				else {
-					byKarma++;
-					model.setKarmaFree( model.getKarmaFree() -5 );
-					logger.log(Level.INFO, "Pay spell ''{0}'' with 5 Karma", val.getModifyable().getId());
-				}
-			}
 			
 			// Summary and eventually warn
-			logger.log(Level.INFO, "Have {0} remaining free spells", freeSpells);
-			if (freeSpells>0) {
-				todos.add(new ToDoElement(Severity.WARNING, "Unused spells"));
-			} else if (byKarma>0) {
-				boolean karmaAllowed =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
-				if (!karmaAllowed) {
-					todos.add(new ToDoElement(Severity.STOPPER, "Too many spells bought"));
-				}
-			}
+			logger.log(Level.INFO, "Have {0} remaining free spells", freeLeft);
 			
 			return unprocessed;
 		} finally {
