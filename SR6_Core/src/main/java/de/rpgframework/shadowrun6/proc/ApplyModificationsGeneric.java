@@ -192,7 +192,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		result.get().setInjectedBy(mod.getSource());
 		result.get().addModification(mod);
 		
-		logger.log(Level.WARNING, "Put item in inventory: {0}   (from {1})", result.get(), mod.getSource());
+		logger.log(Level.DEBUG, "Put item in inventory: {0}   (from {1})", result.get(), mod.getSource());
 		model.addCarriedItem(result.get());
 		return true;
 	}

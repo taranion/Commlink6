@@ -6,14 +6,20 @@ import java.util.Locale;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
+import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.PowerLevel;
+import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathMagicOrResonanceController;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathMetatypeController;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathResetGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 
 /**
  * @author stefa
@@ -99,6 +105,30 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 			logger.log(Level.ERROR, "Failed on process chain", e);
 		}
 		
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#initializeModel()
+	 */
+	@Override
+	protected void initializeModel() {
+//		if (model.getCharGenSettings(CommonSR6GeneratorSettings.class) == null  || !(model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings) ) {
+//			if (model.getChargenSettingsJSON() != null  && (model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings)) {
+//				logger.log(Level.INFO, "Restore generator config from {0}", model.getChargenSettingsJSON());
+//				SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+//				model.setCharGenSettings(settings);
+//			} else {
+//				logger.log(Level.INFO, "Create new generator config");
+//				SR6PointBuySettings settings = new SR6PointBuySettings();
+////		settings.variant = PowerLevel.STANDARD;
+//				model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "human"));
+//				model.setCharGenUsed(getId());
+//				model.setCharGenSettings(settings);
+//				model.setKarmaFree(50);
+//			}
+//		}
+		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
 	}
 
 	//-------------------------------------------------------------------

@@ -56,6 +56,15 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 	// --------------------------------------------------------------------
 	protected abstract void setupProcessChain();
 
+	protected abstract void initializeModel();
+
+	//-------------------------------------------------------------------
+	@Override
+	public void setModel(Shadowrun6Character data) {
+		super.setModel(data);
+		initializeModel();
+	}
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#setModel(de.rpgframework.character.RuleSpecificCharacterObject)

@@ -51,12 +51,16 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	
 	//-------------------------------------------------------------------
 	public static ItemType getItemType(CarriedItem<ItemTemplate> model) {
-		return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+		if (model.hasAttribute(SR6ItemAttribute.ITEMTYPE))
+			return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+		return null;
 	}
 	
 	//-------------------------------------------------------------------
 	public static ItemSubType getItemSubType(CarriedItem<ItemTemplate> model) {
-		return model.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+		if (model.hasAttribute(SR6ItemAttribute.ITEMSUBTYPE))
+			return model.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+		return null;
 	}
 
 	//-------------------------------------------------------------------

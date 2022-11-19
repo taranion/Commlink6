@@ -212,8 +212,12 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		return (PointBuyAttributeGenerator) super.attributes;
 	}
 
-	//--------------------------------------------------------------------
-	private void initializeModel() {
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#initializeModel()
+	 */
+	@Override
+	protected void initializeModel() {
 		if (model.getCharGenSettings(CommonSR6GeneratorSettings.class) == null  || !(model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings) ) {
 			if (model.getChargenSettingsJSON() != null  && (model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings)) {
 				logger.log(Level.INFO, "Restore generator config from {0}", model.getChargenSettingsJSON());

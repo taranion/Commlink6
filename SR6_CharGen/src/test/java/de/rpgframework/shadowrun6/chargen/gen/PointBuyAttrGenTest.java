@@ -92,6 +92,7 @@ public class PointBuyAttrGenTest {
 			public WizardPageType[] getWizardPages() { return null;}
 			public SR6SkillController getSkillController() { return null;}
 			public Shadowrun6Character getModel() {return model;}
+			public void setModel(Shadowrun6Character data) {model=data;}
 			public void addListener(ControllerListener callback) {}
 			public void removeListener(ControllerListener callback) {}
 			public boolean hasListener(ControllerListener callback) {return false;}

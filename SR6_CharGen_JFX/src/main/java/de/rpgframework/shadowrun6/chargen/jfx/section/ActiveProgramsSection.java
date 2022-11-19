@@ -164,7 +164,6 @@ public class ActiveProgramsSection extends GearSection {
 
 	//-------------------------------------------------------------------
 	public void refresh() {
-		System.err.println("ActivePrograms.refresh: model="+model);
 		if (model==null) return;
 		if (refreshing) return;
 		
