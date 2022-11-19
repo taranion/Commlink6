@@ -110,6 +110,10 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 			return wrapped.getModel();
 		return cached;
 	}
+	@Override
+	public void setModel(Shadowrun6Character data) {
+		wrapped.setModel(data);
+	}
 
 	//-------------------------------------------------------------------
 	/**

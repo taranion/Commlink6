@@ -102,6 +102,7 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 		// TODO Auto-generated method stub
 		return model;
 	}
+	public void setModel(Shadowrun6Character data) {model=data;}
 
 	//-------------------------------------------------------------------
 	/**

@@ -25,6 +25,7 @@ import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.jfx.CharacterHandleBox;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.jfx.pages.CharactersOverviewPage;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -209,6 +210,13 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		} finally {
 			logger.log(Level.INFO, "LEAVE loadRuleSpecific");
 		}
+	}
+	
+	//-------------------------------------------------------------------
+	protected void exportClicked(CharacterHandle handle) {
+		Shadowrun6Character charac = (Shadowrun6Character) handle.getCharacter();
+		System.err.println("SR6CharactersOverviewPage: "+charac.getName()+" with "+charac.getAttribute(ShadowrunAttribute.ESSENCE));
+		super.exportClicked(handle);
 	}
 
 }

@@ -48,8 +48,6 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
-import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -86,6 +84,7 @@ public class PrioQualGenTest {
 				return null;
 			}
 			public Shadowrun6Character getModel() {return model;}
+			public void setModel(Shadowrun6Character data) {model=data;}
 			public void addListener(ControllerListener callback) {}
 			public void removeListener(ControllerListener callback) {}
 			public boolean hasListener(ControllerListener callback) {return false;}

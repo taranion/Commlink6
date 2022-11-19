@@ -36,7 +36,6 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
@@ -127,8 +126,12 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		return new PriorityTableController<Shadowrun6Character,SR6PrioritySettings>(this, SR6PrioritySettings.class, resolver);
 	}
 
-	//--------------------------------------------------------------------
-	private void initializeModel() {
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#initializeModel()
+	 */
+	@Override
+	protected void initializeModel() {
 		if (model.getCharGenSettings(Object.class) == null  || !(model.getCharGenSettings(Object.class) instanceof SR6PrioritySettings) ) {
 			if (model.getChargenSettingsJSON() != null  && (model.getCharGenSettings(Object.class) instanceof SR6PrioritySettings)) {
 				logger.log(Level.INFO, "Restore generator config from {0}", model.getChargenSettingsJSON());
