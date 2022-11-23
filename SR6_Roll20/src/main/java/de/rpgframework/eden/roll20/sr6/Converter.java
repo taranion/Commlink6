@@ -1,6 +1,7 @@
 package de.rpgframework.eden.roll20.sr6;
 
 import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -9,6 +10,8 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 
 import de.rpgframework.genericrpg.data.ComplexDataItem;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -19,8 +22,11 @@ import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.SpellFeatureReference;
+import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -91,8 +97,29 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
+	private static String mapModifications(ComplexDataItemValue item) {
+		if (!item.getModifications().isEmpty()) {
+			List<String> modNames = new ArrayList<>();
+			for (Modification tmp : item.getModifications()) {
+				if (tmp instanceof ValueModification) {
+					ValueModification mod = (ValueModification)tmp;
+					switch ((ShadowrunReference)mod.getReferenceType()) {
+					case ATTRIBUTE:
+					case SKILL:
+						modNames.add(mod.getKey()+":"+mod.getRawValue());
+						break;
+					}
+				}
+			}
+			if (modNames.isEmpty()) return null;
+			return  "{"+String.join(", ", modNames)+"}";
+		}
+		return  null;
+	}
+
+	//-------------------------------------------------------------------
 	public static void convertAugmentation(ItemTemplate item, Locale loc, Row row) {
-		int x = 4;
+		int x = 5;
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
@@ -123,6 +150,33 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
+	public static void convertAugmentation(CarriedItem<ItemTemplate> item, Locale loc, Row row) {
+		int x = 5;
+		row.createCell(x++, CellType.STRING).setCellValue( ((ItemType)item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()).name());
+		row.createCell(x++, CellType.STRING).setCellValue( ((ItemSubType)item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()).name());
+		if (item.hasAttribute(SR6ItemAttribute.AVAILABILITY))
+			row.createCell(x++, CellType.STRING).setCellValue( ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).toString() );
+		else x++;
+		row.createCell(x++, CellType.NUMERIC).setCellValue( item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		// Has rating
+		row.createCell(x++, CellType.BOOLEAN).setCellValue( (item.getResolved().getAttribute(SR6ItemAttribute.PRICE).getRawValue().contains("RATING"))?"true":"false");
+		// Capacity cost
+		if (item.hasAttribute(SR6ItemAttribute.CAPACITY))
+			row.createCell(x++, CellType.STRING).setCellValue( item.getAsValue(SR6ItemAttribute.CAPACITY).getModifiedValue() );
+		else x++;
+		// Essence cost
+		if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST))
+			row.createCell(x++, CellType.STRING).setCellValue( String.format("%1.2f", item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue() ));
+		else x++;
+		// Modifications
+		String mods = mapModifications(item);
+		if (mods!=null) {
+			row.createCell(x++, CellType.STRING).setCellValue(mods);
+		}
+		else x++;
+	}
+
+	//-------------------------------------------------------------------
 	public static void convertWeapon(ItemTemplate item, Locale loc, Row row) {
 		int x = 4;
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
@@ -141,8 +195,16 @@ public class Converter {
 			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue());
 		else x++;
 		if (item.getAttribute(SR6ItemAttribute.ATTACK_RATING)!=null) {
-			item.getAttribute(SR6ItemAttribute.ATTACK_RATING);
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.DAMAGE).getRawValue());
+			try {
+				int[] ar = item.getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue();
+				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[0]);
+				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[1]);
+				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[2]);
+				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[3]);
+				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[4]);
+			} catch (Exception e) {
+				logger.log(Level.WARNING, "Error: "+e);
+			}
 		}
 		else x+=5;
 	}
