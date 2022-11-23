@@ -21,11 +21,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 @DataItemTypeKey(id = "variant")
 //@IgnoreMissingAttributes("id")
 public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
-	
-	@Attribute
-	private ItemHook slot;
-	@Attribute
-	private float size;
+
 	/**
 	 * Can the gear only be picked by modifications (TRUE) or
 	 * can the user freely select it (FALSE)
@@ -46,17 +42,6 @@ public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	//-------------------------------------------------------------------
 	public SR6PieceOfGearVariant(SR6VariantMode mode) {
 		this.mode = mode;
-	}
-
-	//-------------------------------------------------------------------
-	public SR6PieceOfGearVariant(SR6VariantMode mode, ItemHook slot) {
-		this(mode);
-		this.slot = slot;
-	}
-
-	//-------------------------------------------------------------------
-	public ItemHook getSlot() {
-		return slot;
 	}
 
 	//-------------------------------------------------------------------
