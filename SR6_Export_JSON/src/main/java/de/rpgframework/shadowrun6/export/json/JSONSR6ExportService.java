@@ -1,7 +1,37 @@
 package de.rpgframework.shadowrun6.export.json;
 
+import static de.rpgframework.shadowrun.ShadowrunAttribute.AGILITY;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.BODY;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.CHARISMA;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.COMPOSURE;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.DEFENSE_POOL_PHYSICAL;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.EDGE;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.INITIATIVE_ASTRAL;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.INITIATIVE_MATRIX;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.INITIATIVE_PHYSICAL;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.INTUITION;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.JUDGE_INTENTIONS;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.LIFT_CARRY;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.LOGIC;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.MAGIC;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.MEMORY;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.POWER_POINTS;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.REACTION;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.RESONANCE;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.STRENGTH;
+import static de.rpgframework.shadowrun.ShadowrunAttribute.WILLPOWER;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.PageReference;
@@ -18,13 +48,13 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun6.MartialArtsValue;
+import de.rpgframework.shadowrun6.SR6Ritual;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
@@ -60,39 +90,9 @@ import de.rpgframework.shadowrun6.export.json.model.JSONVehicle;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
-import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
-import static de.rpgframework.shadowrun.ShadowrunAttribute.AGILITY;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.BODY;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.CHARISMA;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.COMPOSURE;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.DEFENSE_POOL_PHYSICAL;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.EDGE;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.INITIATIVE_ASTRAL;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.INITIATIVE_MATRIX;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.INITIATIVE_PHYSICAL;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.INTUITION;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.JUDGE_INTENTIONS;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.LIFT_CARRY;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.LOGIC;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.MAGIC;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.MEMORY;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.POWER_POINTS;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.REACTION;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.RESONANCE;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.STRENGTH;
-import static de.rpgframework.shadowrun.ShadowrunAttribute.WILLPOWER;
 
 public class JSONSR6ExportService {
 	
@@ -241,7 +241,7 @@ public class JSONSR6ExportService {
         List<JSONRitual> jsonRitualList = new ArrayList<>();
         for (RitualValue ritualValue : character.getRituals()) {
             JSONRitual jsonRitual = new JSONRitual();
-            Ritual ritual = ritualValue.getModifyable();
+            SR6Ritual ritual = (SR6Ritual) ritualValue.getModifyable();
             jsonRitual.name = ritual.getName();
             jsonRitual.features = ritual.getFeatures().stream().map(r -> r.getResolved().getName()).collect(Collectors.toList());
             jsonRitual.threshold = ritual.getThreshold();

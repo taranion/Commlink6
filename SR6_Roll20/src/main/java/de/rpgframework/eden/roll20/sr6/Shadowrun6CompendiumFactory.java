@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.function.Function;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -32,6 +33,8 @@ import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.Ritual;
+import de.rpgframework.shadowrun6.SR6Ritual;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.items.ItemSubType;
@@ -92,6 +95,7 @@ public class Shadowrun6CompendiumFactory {
 //		createCritterPowers(module, zipOut, localeCallback, shallow);
 		createQualities  (module, localeCallback);
 		createSpells     (module, localeCallback);
+		createRituals    (module, localeCallback);
 		createMetamagic  (module, localeCallback);
 		createComplexForms(module, localeCallback);
 		createEchoes     (module, localeCallback);
@@ -404,7 +408,50 @@ public class Shadowrun6CompendiumFactory {
 
 	//-------------------------------------------------------------------
 	public static String pretty(String original) {
-		return original.replace("\u2022 ", "");
+		original = original.replace("\u2022 ", "").trim();		
+		if (original.startsWith("<br/>"))
+			original = original.substring(5);
+		if (original.endsWith("<br/>"))
+			original = original.substring(0, original.length()-5);
+		return original;
+	}
+
+	//-------------------------------------------------------------------
+	private static String extractDescripton(String original) {
+		int costIndex = original.indexOf("<br/><b>Cost");
+		if (costIndex==0)
+			costIndex = original.indexOf("<br/> <b>Cost");
+		int bonusIndex = original.indexOf("<br/><b>Bonus");
+		if (costIndex>0)
+			return original.substring(0, costIndex);
+		if (bonusIndex>0)
+			return original.substring(0, bonusIndex);
+		System.err.println("Fail for: "+original);
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	private static String extractGameEffect(String original) {
+		String needle = "<b>Game Effect:</b> ";
+		int costIndex = original.indexOf(needle);
+		if (costIndex>0)
+			return original.substring(costIndex+needle.length(), original.length());
+		System.err.println("Fail for "+original);
+		return original;
+	}
+
+	//-------------------------------------------------------------------
+	private static String getCostText(Quality qual) {
+		StringBuffer buf = new StringBuffer();
+//		if (qual.isPositive()) {
+//			buf.append("<b>Cost:</b>");
+//		} else {
+//			buf.append("<b>Bonus:</b>");
+//		}
+		buf.append(" "+qual.getKarmaCost()+" Karma");
+		if (qual.hasLevel())
+			buf.append(" per level");
+		return buf.toString();
 	}
 
 	//-------------------------------------------------------------------
@@ -420,6 +467,8 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(5, CellType.STRING).setCellValue("data-positive");
 		head.createCell(6, CellType.STRING).setCellValue("data-maxLevel");
 		head.createCell(7, CellType.STRING).setCellValue("data-karma");
+		head.createCell(8, CellType.STRING).setCellValue("data-game_effect");
+		head.createCell(9, CellType.STRING).setCellValue("data-cost_text");
 		
 		List<Quality> list = Shadowrun6Core.getItemList(Quality.class);
 		Collections.sort(list, new Comparator<Quality>() {
@@ -433,13 +482,16 @@ public class Shadowrun6CompendiumFactory {
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
 			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+			row.createCell(2, CellType.STRING).setCellValue(pretty(extractDescripton(pretty(item.getDescription(locales[0])))));
 			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			row.createCell(8, CellType.STRING).setCellValue(extractGameEffect(pretty(item.getDescription(locales[0]))));
+			row.createCell(9, CellType.STRING).setCellValue(getCostText(item));
 			Converter.convertQuality(item, locales[0], row);
 		}
 		
 		for (int i=0; i<14; i++) {
-			if (i==2 || i==4) continue;
+			if (i==2 || i==4 || i==8) continue;
 			sheet.autoSizeColumn(i);
 		}
 		return;
@@ -480,7 +532,7 @@ public class Shadowrun6CompendiumFactory {
 				Row row = sheet.createRow(++rowNum);
 				row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
 				row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-				row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+				row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
 				row.createCell(3, CellType.STRING).setCellValue(item.getId());
 
 				Converter.convertAugmentation(item, locales[0], row);
@@ -526,14 +578,14 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(7, CellType.STRING).setCellValue("cost");
 		head.createCell(8, CellType.STRING).setCellValue("data-skill");
 		head.createCell(9, CellType.STRING).setCellValue("data-skillspec");
-		head.createCell(10, CellType.STRING).setCellValue("Damage");
-		head.createCell(11, CellType.STRING).setCellValue("close");
-		head.createCell(12, CellType.STRING).setCellValue("near");
-		head.createCell(13, CellType.STRING).setCellValue("medium");
-		head.createCell(14, CellType.STRING).setCellValue("far");
-		head.createCell(15, CellType.STRING).setCellValue("extreme");
-		head.createCell(16, CellType.STRING).setCellValue("firing_modes");
-		head.createCell(17, CellType.STRING).setCellValue("ammo");
+		head.createCell(10, CellType.STRING).setCellValue("data-dv");
+		head.createCell(11, CellType.STRING).setCellValue("data-close");
+		head.createCell(12, CellType.STRING).setCellValue("data-near");
+		head.createCell(13, CellType.STRING).setCellValue("data-medium");
+		head.createCell(14, CellType.STRING).setCellValue("data-far");
+		head.createCell(15, CellType.STRING).setCellValue("data-extreme");
+		head.createCell(16, CellType.STRING).setCellValue("data-firing_modes");
+		head.createCell(17, CellType.STRING).setCellValue("data-ammo");
 		
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
@@ -552,7 +604,7 @@ public class Shadowrun6CompendiumFactory {
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
 			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
 			row.createCell(3, CellType.STRING).setCellValue(item.getId());
 
 			Converter.convertWeapon(item, locales[0], row);
@@ -565,51 +617,43 @@ public class Shadowrun6CompendiumFactory {
 		return;
 	}
 
-//	//-------------------------------------------------------------------
-//	private static void createRituals(Module module, ZipOutputStream zipOut, boolean shallow) throws IOException {
-//		Pack pack = new Pack();
-//		pack.setName("shadowrun6-rituals");
-//		pack.setLabel("Rituals");
-//		pack.setEntity("Item");
-//		pack.setPath("packs/rituals.db");
-//		pack.setSystem("shadowrun6-eden");
-//		module.getPacks().add(pack);
-//		
-//		if (shallow)
-//			return;
-//		
-//		StringBuffer buf = new StringBuffer();
-//		Gson gson = new GsonBuilder().create();
-//		for (Ritual spell : Shadowrun6Core.getItemList(Ritual.class)) {
-//			
-//			module.addTranslation("de", "spell."+spell.getId()+".desc", spell.getDescription(Locale.GERMAN));
-//			module.addTranslation("de", "spell."+spell.getId()+".name", spell.getName(Locale.GERMAN));
-//			module.addTranslation("de", "spell."+spell.getId()+".src", createSourceText(spell, Locale.GERMAN));
-//			module.addTranslation("en", "spell."+spell.getId()+".desc", spell.getDescription(Locale.ENGLISH));
-//			module.addTranslation("en", "spell."+spell.getId()+".name", spell.getName(Locale.ENGLISH));
-//			module.addTranslation("en", "spell."+spell.getId()+".src", createSourceText(spell, Locale.ENGLISH));
-//			CompendiumEntry entry = new CompendiumEntry();
-//			entry._id = spell.getId();
-//			entry.name = spell.getName(Locale.ENGLISH);
-//			entry.type = "spell";
-//			
-//			FVTTRitual data = new FVTTRitual();
-//			data.genesisID = spell.getId();
-//			data.category  = spell.getCategory().name();
-//			data.drain = spell.getDrain();
-//			data.type  = spell.getType().name();
-//			data.range = spell.getRange().name();
-//			entry.data = data;
-//			
-//			buf.append(gson.toJson(entry));
-//			buf.append('\n');
-//		}
-//		
-//    	ZipEntry zipEntry = new ZipEntry("packs/spells.db");
-//    	zipOut.putNextEntry(zipEntry);
-//    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
-//		return;
-//	}
+	//-------------------------------------------------------------------
+	private static void createRituals(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
+		Sheet sheet = workbook.createSheet("Rituals");
+		int rowNum =0;
+		Row head = sheet.createRow(0);
+		head.createCell(0, CellType.STRING).setCellValue("Name");
+		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(2, CellType.STRING).setCellValue("data-description");
+		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
+		head.createCell(4, CellType.STRING).setCellValue("data-threshold");
+		head.createCell(5, CellType.STRING).setCellValue("data-features");
+		
+		
+		List<SR6Ritual> list = Shadowrun6Core.getItemList(SR6Ritual.class);
+		Collections.sort(list, new Comparator<SR6Ritual>() {
+			public int compare(SR6Ritual o1, SR6Ritual o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		for (SR6Ritual item : list) {
+			Locale[] locales = localeCallback.apply(item.getPageReferences());
+			
+			Row row = sheet.createRow(++rowNum);
+			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+
+			Converter.convertRitual(item, locales[0], row);
+		}
+		
+		for (int i=0; i<11; i++) {
+			if (i==2) continue;
+			sheet.autoSizeColumn(i);
+		}
+		return;
+	}
 
 	//-------------------------------------------------------------------
 	private static void createVehicles(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
@@ -648,7 +692,7 @@ public class Shadowrun6CompendiumFactory {
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
 			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
 			row.createCell(3, CellType.STRING).setCellValue(item.getId());
 
 			Converter.convertVehicle(item, locales[0], row);

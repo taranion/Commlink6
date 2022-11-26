@@ -21,8 +21,10 @@ import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.RitualFeatureReference;
 import de.rpgframework.shadowrun.SpellFeatureReference;
 import de.rpgframework.shadowrun.items.Availability;
+import de.rpgframework.shadowrun6.SR6Ritual;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -324,7 +326,22 @@ public class Converter {
 		// Description
 		
 	}
-
+	
+	//-------------------------------------------------------------------
+	public static void convertRitual(SR6Ritual item, Locale loc, Row row) {
+		List<String> feats = new ArrayList<>(); 
+		List<String> featNames = new ArrayList<>();
+		for (RitualFeatureReference feat :  item.getFeatures()) {
+			feats.add(feat.getKey());
+			System.out.println("Ritual "+item+"  feature="+feat.getKey()+"   ="+feat.getModifyable());
+			featNames.add(feat.getModifyable().getName(loc));
+		}
+		
+		int x=4;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getThreshold());
+		row.createCell(x++, CellType.STRING).setCellValue(String.join(", ", featNames));
+	}
+	
 	//-------------------------------------------------------------------
 	public static void convertComplexForm(ComplexForm item, Locale loc, Row row) {
 		int x=5;
