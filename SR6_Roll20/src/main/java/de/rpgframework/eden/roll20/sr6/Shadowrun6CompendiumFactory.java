@@ -444,11 +444,11 @@ public class Shadowrun6CompendiumFactory {
 	private static String getCostText(Quality qual) {
 		StringBuffer buf = new StringBuffer();
 //		if (qual.isPositive()) {
-//			buf.append("<b>Cost:</b>");
+//			buf.append("<b>Cost:</b> ");
 //		} else {
-//			buf.append("<b>Bonus:</b>");
+//			buf.append("<b>Bonus:</b> ");
 //		}
-		buf.append(" "+qual.getKarmaCost()+" Karma");
+		buf.append(qual.getKarmaCost()+" Karma");
 		if (qual.hasLevel())
 			buf.append(" per level");
 		return buf.toString();
