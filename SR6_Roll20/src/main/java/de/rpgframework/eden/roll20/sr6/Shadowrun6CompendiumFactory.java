@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.function.Function;
-import java.util.zip.ZipOutputStream;
 
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -34,7 +33,6 @@ import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Ritual;
-import de.rpgframework.shadowrun6.SR6Ritual;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.items.ItemSubType;
@@ -614,13 +612,13 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(5, CellType.STRING).setCellValue("data-features");
 		
 		
-		List<SR6Ritual> list = Shadowrun6Core.getItemList(SR6Ritual.class);
-		Collections.sort(list, new Comparator<SR6Ritual>() {
-			public int compare(SR6Ritual o1, SR6Ritual o2) {
+		List<Ritual> list = Shadowrun6Core.getItemList(Ritual.class);
+		Collections.sort(list, new Comparator<Ritual>() {
+			public int compare(Ritual o1, Ritual o2) {
 				return o1.getName().compareTo(o2.getName());
 			}
 		});
-		for (SR6Ritual item : list) {
+		for (Ritual item : list) {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 			
 			Row row = sheet.createRow(++rowNum);

@@ -21,10 +21,10 @@ import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualFeatureReference;
 import de.rpgframework.shadowrun.SpellFeatureReference;
 import de.rpgframework.shadowrun.items.Availability;
-import de.rpgframework.shadowrun6.SR6Ritual;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -339,7 +339,7 @@ public class Converter {
 	}
 	
 	//-------------------------------------------------------------------
-	public static void convertRitual(SR6Ritual item, Locale loc, Row row) {
+	public static void convertRitual(Ritual item, Locale loc, Row row) {
 		List<String> feats = new ArrayList<>(); 
 		List<String> featNames = new ArrayList<>();
 		for (RitualFeatureReference feat :  item.getFeatures()) {

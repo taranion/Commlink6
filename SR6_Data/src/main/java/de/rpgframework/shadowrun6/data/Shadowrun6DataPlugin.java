@@ -71,8 +71,6 @@ import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.QualityPathList;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
-import de.rpgframework.shadowrun6.SR6Ritual;
-import de.rpgframework.shadowrun6.SR6RitualList;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
@@ -150,7 +148,7 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
 			list = Shadowrun6Core.loadDataItems(RitualFeatureList.class, RitualFeature.class, core, clazz, "core/data/ritualfeatures.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" ritual features");
-			list = Shadowrun6Core.loadDataItems(SR6RitualList.class, SR6Ritual.class, core, clazz, "core/data/rituals.xml");
+			list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, core, clazz, "core/data/rituals.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" rituals");
 			list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, core, clazz, "core/data/adeptpowers.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");

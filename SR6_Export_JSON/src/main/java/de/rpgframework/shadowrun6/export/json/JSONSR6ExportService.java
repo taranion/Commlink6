@@ -48,13 +48,13 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun6.MartialArtsValue;
-import de.rpgframework.shadowrun6.SR6Ritual;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
@@ -241,7 +241,7 @@ public class JSONSR6ExportService {
         List<JSONRitual> jsonRitualList = new ArrayList<>();
         for (RitualValue ritualValue : character.getRituals()) {
             JSONRitual jsonRitual = new JSONRitual();
-            SR6Ritual ritual = (SR6Ritual) ritualValue.getModifyable();
+            Ritual ritual = ritualValue.getModifyable();
             jsonRitual.name = ritual.getName();
             jsonRitual.features = ritual.getFeatures().stream().map(r -> r.getResolved().getName()).collect(Collectors.toList());
             jsonRitual.threshold = ritual.getThreshold();
