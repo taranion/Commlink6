@@ -42,10 +42,10 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	public static void convertAdeptPower(AdeptPower item, Locale loc, Row row) {
-		int x = 5;
-		row.createCell(x++, CellType.STRING).setCellValue(item.getActivation().name().toLowerCase());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1));
+		int x = 4;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getActivation().name().toLowerCase());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getActivation().getName(Locale.ENGLISH));
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1));
 		if (item.hasLevel()) {
 			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1)+" PP / level");
 			
@@ -233,6 +233,17 @@ public class Converter {
 		else x++;
 	}
 
+	//-------------------------------------------------------------------
+	public static void convertOtherGear(ItemTemplate item, Locale loc, Row row) {
+		int x = 4;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
+		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+		else x++;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+	}
+
 //	//-------------------------------------------------------------------
 //	public static ItemData<FVTTGear> convert(CarriedItem<ItemTemplate> val, Locale loc) {
 //		ItemData<FVTTGear> ret = convert(val.getModifyable(), loc);
@@ -344,20 +355,16 @@ public class Converter {
 	
 	//-------------------------------------------------------------------
 	public static void convertComplexForm(ComplexForm item, Locale loc, Row row) {
-		int x=5;
+		int x=4;
 		// data-duration
 		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().name().toLowerCase());
-		// duration
-		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().name().toLowerCase());
 		// data-fading
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getFading());
-		// fading
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getFading());
 	}
 
 	//-------------------------------------------------------------------
 	public static void convertEcho(MetamagicOrEcho item, Locale loc, Row row) {
-		int x=5;
+		int x=4;
 		// data-rating
 		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.hasLevels());
 	}
