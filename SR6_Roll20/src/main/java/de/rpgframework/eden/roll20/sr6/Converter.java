@@ -344,7 +344,6 @@ public class Converter {
 		List<String> featNames = new ArrayList<>();
 		for (RitualFeatureReference feat :  item.getFeatures()) {
 			feats.add(feat.getKey());
-			System.out.println("Ritual "+item+"  feature="+feat.getKey()+"   ="+feat.getModifyable());
 			featNames.add(feat.getModifyable().getName(loc));
 		}
 		
