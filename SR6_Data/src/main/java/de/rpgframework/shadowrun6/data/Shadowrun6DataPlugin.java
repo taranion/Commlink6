@@ -136,7 +136,7 @@ public class Shadowrun6DataPlugin  {
 		double count = 0;
 		alreadyInitialized = true;
 		logger.log(Level.INFO, "START -------------------------------Core-----------------------------------------------");
-		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN);
+		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"));
 		
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
@@ -208,8 +208,6 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 			list = Shadowrun6Core.loadDataItems(LifestyleQualityList.class, LifestyleQuality.class, core, clazz,"core/data/lifestyles.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" lifestyle qualities");
-			list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, core, clazz,"core/data/rituals.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" rituals");
 //			logger.log(Level.ERROR, "Stop here");
 //			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, core, clazz,"core/data/magicOrResonance.xml");

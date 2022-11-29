@@ -57,8 +57,8 @@ public class LoadSR6DataTest {
 	@BeforeClass
 	public static void beforeClass() {
 //		System.setProperty("logdir", "C:\\Users\\stefa");
-		System.setProperty("logdir", "/tmp");
-		Locale.setDefault(Locale.ENGLISH);
+		System.setProperty("logdir", "/home/prelle/commlink-logs");
+		Locale.setDefault(Locale.GERMAN);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );		
 	}

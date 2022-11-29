@@ -114,55 +114,56 @@
      	<!--  ToDo Resist ingested toxins -->
      </modifications>
    </quality>
-   <quality id="dermal_alteration"     karma="3" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
+   
+   <quality id="bark" karma="4" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
+     <modifications>
+	     <!--valmod type="POOL" ref="DEFENSE_RATING" value="2" set="NATURAL"/-->
+     </modifications>
+   </quality>
+   <quality id="blubber" karma="3" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
+     <modifications>
+		     	<!--  ToDo ? Kälteangriffe -->
+     </modifications>
+   </quality>
+   <quality id="camouflage" karma="7" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
      <choices>
        <choice type="SUBSELECT" ref="variant" uuid="0180ba51-5b30-471d-bdba-5e2482b8440d">
-         <subOption id="bark"    cost="1">
-		     <modifications>
-		     	<!--valmod type="POOL" ref="DEFENSE_RATING" value="2" set="NATURAL"/-->
-     		  </modifications>
-         </subOption>
-         <subOption id="blubber" >
-		     <modifications>
-		     	<!--  ToDo ? Kälteangriffe -->
-     		  </modifications>
-         </subOption>
-         <subOption id="camouflage_basic" cost="2">
+         <subOption id="basic">
 		     <modifications>
      		    <checkmod ref="stealth" type="SKILL" what="BONUS" value="1"/>
      		  </modifications>
          </subOption>
-         <subOption id="camouflage_dynamic" cost="7">
+         <subOption id="dynamic" cost="3">
 		     <modifications>
      		    <checkmod ref="stealth" type="SKILL" what="BONUS" value="1"/>
-     		  </modifications>
-         </subOption>
-         <subOption id="dragon" >
-		     <modifications>
-     			<!--  ToDo ? Feuerangriff -->
-     		  </modifications>
-         </subOption>
-         <subOption id="granite" cost="12">
-		     <modifications>
-     	<!--valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="4"/-->
-     	<!-- ToDo Critterpower Hardened Armor -->
-     		  </modifications>
-         </subOption>
-         <subOption id="rhino" cost="5">
-		     <modifications>
-     	<!--valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="3"/-->
-     		  </modifications>
-         </subOption>
-         <subOption id="thorns" cost="2">
-		     <modifications>
-     	<!--ToDo: AR+1 in Close Combat-->
-     	<!--ToDo: Physical damage-->
-     	<!--ToDo: -1 physical activities-->
-     	<!--ToDo: Cloth +20%-->
      		  </modifications>
          </subOption>
        </choice>
      </choices>
+   </quality>
+   <quality id="dragon" karma="3" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
+     <modifications>
+     			<!--  ToDo ? Feuerangriff -->
+     </modifications>
+   </quality>
+   <quality id="granite" karma="15" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
+     <modifications>
+     	<!--valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="4"/-->
+     	<!-- ToDo Critterpower Hardened Armor -->
+     </modifications>
+   </quality>
+   <quality id="rhino" karma="8" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
+     <modifications>
+     	<!--valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="3"/-->
+     </modifications>
+   </quality>
+   <quality id="thorns" karma="5" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
+     <modifications>
+     	<!--ToDo: AR+1 in Close Combat-->
+     	<!--ToDo: Physical damage-->
+     	<!--ToDo: -1 physical activities-->
+     	<!--ToDo: Cloth +20%-->
+     </modifications>
    </quality>
    
    <quality id="broadened_auditory_spectrum" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" multi="y">
