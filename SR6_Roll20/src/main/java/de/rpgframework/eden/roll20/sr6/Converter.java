@@ -235,13 +235,30 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	public static void convertOtherGear(ItemTemplate item, Locale loc, Row row) {
-		int x = 4;
+		int x = 5;
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
 		else x++;
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertArmor(ItemTemplate item, Locale loc, Row row) {
+		int x = 5;
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
+		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+		else x++;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+		if (item.getAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL)!=null)
+			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL).getRawValue());
+		else x++;
+		if (item.getAttribute(SR6ItemAttribute.DEFENSE_SOCIAL)!=null)
+			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.DEFENSE_SOCIAL).getRawValue());
+		else x++;
 	}
 
 //	//-------------------------------------------------------------------
