@@ -16,16 +16,20 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.ASpell.Duration;
 import de.rpgframework.shadowrun.ASpell.Range;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualFeatureReference;
+import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureReference;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -291,28 +295,63 @@ public class Converter {
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getKarmaCost());
 	}
 
-//	//-------------------------------------------------------------------
-//	public static ItemData<FVTTQuality> convertQuality(QualityValue val, Locale loc) {
-//		ItemData<FVTTQuality> ret = convertQuality(val.getModifyable(), loc);
-//		FVTTQuality fVal = ret.getData();
-//		// Value fields
-//		fVal.value = val.getModifiedValue();
-//		fVal.explain = val.getDescription();
-//
-//		return ret;
-//	}
-
+	//-------------------------------------------------------------------
 	private static String map(Range value) {
 		switch (value) {
-		case LINE_OF_SIGHT: return "los";
-		case LINE_OF_SIGHT_AREA: return "los(a)";
-		case SELF: return "self";
-		case SELF_AREA: return "self(a)";
-		case SPECIAL: return "special";
-		case TOUCH: return "touch";
+		case LINE_OF_SIGHT: return "LOS";
+		case LINE_OF_SIGHT_AREA: return "LOS(A)";
+		case SELF: return "SELF";
+		case SELF_AREA: return "SELF(A)";
+		case SPECIAL: return "SPECIAL";
+		case TOUCH: return "T";
 		default:
 			return value.name().toLowerCase();
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String map(Duration value) {
+		switch (value) {
+		case INSTANTANEOUS: return "Instant";
+		case SUSTAINED: return "Sustained";
+		case LIMITED: return "Limited";
+		case PERMANENT: return "Permanent";
+		case SPECIAL: return "Special";
+		default:
+			return value.name().toUpperCase();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String map(DamageType value) {
+		switch (value) {
+		case STUN: return "Stun";
+		case PHYSICAL: return "Physical";
+		case PHYSICAL_SPECIAL: return "Physical, Special";
+		case STUN_SPECIAL: return "Stun, Special";
+		default:
+			return value.name();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String map(SpellFeature value) {
+		switch (value.getId()) {
+		case "area": return "Area";
+		case "indirect": return "Indirect Combat";
+		case "direct": return "Direct Combat";
+		case "sense_single": return "Single-Sense";
+		case "sense_multi": return "Multi-Sense";
+		default:
+		return value.getId();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String upFirst(String value) {
+		StringBuffer buf = new StringBuffer(value);
+		buf.setCharAt(0, Character.toUpperCase(value.charAt(0)));
+		return buf.toString();
 	}
 	
 	//-------------------------------------------------------------------
@@ -320,20 +359,20 @@ public class Converter {
 		List<String> feats = new ArrayList<>(); 
 		List<String> featNames = new ArrayList<>();
 		for (SpellFeatureReference feat :  item.getFeatures()) {
-			feats.add(feat.getKey());
+			feats.add(map(feat.getFeature()));
 			featNames.add(feat.getNameWithoutRating());
 		}
 		
 		int x=5;
 		row.createCell(x++, CellType.STRING).setCellValue(item.getType().name().toLowerCase());
 		row.createCell(x++, CellType.STRING).setCellValue(map(item.getRange()));
-		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().name().toLowerCase());
+		row.createCell(x++, CellType.STRING).setCellValue(map(item.getDuration()));
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getDrain());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getCategory().name().toLowerCase());
+		row.createCell(x++, CellType.STRING).setCellValue(upFirst(item.getCategory().name().toLowerCase()));
 		row.createCell(x++, CellType.STRING).setCellValue(String.join(", ", feats));
 		row.createCell(x++, CellType.STRING).setCellValue("sorcery");
 		if (item.getDamage()!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getDamage().name().toLowerCase());
+			row.createCell(x++, CellType.STRING).setCellValue(map(item.getDamage()));
 		else
 			x++;
 		row.createCell(x++, CellType.STRING).setCellValue(item.getCategory().getName(Locale.ENGLISH));
