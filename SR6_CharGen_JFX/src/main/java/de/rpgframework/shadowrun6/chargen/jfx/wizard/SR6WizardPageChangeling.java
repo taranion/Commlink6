@@ -178,6 +178,9 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.log(Level.WARNING, "RCV {0}",type);
+		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
+			selection.setController(charGen.getQualityController());
+		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED || type==BasicControllerEvents.GENERATOR_CHANGED) {
 			selection.refresh();
 			refresh();
