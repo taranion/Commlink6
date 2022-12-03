@@ -66,7 +66,7 @@ public class ItemUtilJFX {
 		ItemAttributeValue<?> raw = carried.getAttributeRaw(attrib);
 		if (raw==null)
 			return;
-//		logger.log(Level.WARNING, "addColumn("+attrib+") = "+raw);
+		logger.log(Level.WARNING, "addColumn("+attrib+") = "+raw);
 		
 		int x = table.getColumnCount();
 		Label header  = new Label(attrib.getShortName());
@@ -493,10 +493,14 @@ public class ItemUtilJFX {
 		
 		if (obj!=null) {
 			if (!item.getAsObject(attr).getModifications().isEmpty()) {
-				logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
 				ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 				Tooltip tooltip = new Tooltip();
 				ret.setTooltip(tooltip);
+				logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
+//				switch (attr) {
+//				case ATTACK_RATING:
+//					tooltip.setText("?");
+//				}
 			}
 		} else {
 			switch (attr) {
@@ -510,7 +514,7 @@ public class ItemUtilJFX {
 				break;
 			default:
 				if (item.getAsValue(attr)!=null && !item.getAsValue(attr).getModifications().isEmpty()) {
-					logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
+					logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr+" / "+item.getAsValue(attr).getModifications());
 					ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 					Tooltip tooltip = new Tooltip();
 					ret.setTooltip(tooltip);

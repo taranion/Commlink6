@@ -65,7 +65,8 @@ public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implem
 		StringBuffer buf = new StringBuffer();
 		buf.append(String.valueOf(getModifiedValue()));
 
-		buf.append(type.getShortName());
+		if (type!=null)
+			buf.append(type.getShortName());
 
 		if (element!=null && element!=DamageElement.REGULAR) {
 			buf.append("("+element.getShortName()+")");

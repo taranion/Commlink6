@@ -2,17 +2,20 @@ package de.rpgframework.shadowrun6.items;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
-import de.rpgframework.genericrpg.items.PieceOfGear;
+import de.rpgframework.genericrpg.items.ItemAttributeValue;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -65,12 +68,25 @@ public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
 					logger.log(Level.DEBUG, "Ammo type ''{0}'' multiplies with {1}, therefore add {2} Nuyen", dec.getValue(), type.getCostMultiplier(), diff);
 					attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), diff) );
 					
-					if (logger.isLoggable(Level.INFO)) {
-						for (Modification mod : type.getModifications()) {
-							logger.log(Level.INFO, "Add modification "+mod);
-						}
+					List<Modification> passUp = new ArrayList<>();
+					for (Modification mod : type.getModifications()) {
+						logger.log(Level.INFO, "Add modification {0} -> {1}",mod.getApplyTo(),mod);
+						if (mod.getApplyTo()==null || mod.getApplyTo()==ApplyTo.DATA_ITEM) {
+							if (mod.getReferenceType()==ShadowrunReference.ITEM_ATTRIBUTE) {
+								ValueModification valMod = (ValueModification)mod;
+								SR6ItemAttribute key = valMod.getResolvedKey();
+								ItemAttributeValue<SR6ItemAttribute> attrib2 = (ItemAttributeValue<SR6ItemAttribute>) model.getAttributeRaw(key);
+								if (attrib2==null) {
+									logger.log(Level.ERROR, "####"+ valMod.getRawValue());
+									model.setAttribute(key, attrib);
+								}
+								logger.log(Level.DEBUG, "Add modification {0} to {1}", mod, attrib2);
+								attrib2.addModification(mod);
+							}
+						} else
+							passUp.add(mod);
 					}
-					unprocessed.addAll(type.getModifications());
+					unprocessed.addAll(passUp);
 				}
 				
 			}

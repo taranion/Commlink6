@@ -206,8 +206,6 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 			list = Shadowrun6Core.loadDataItems(LifestyleQualityList.class, LifestyleQuality.class, core, clazz,"core/data/lifestyles.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" lifestyle qualities");
-//			logger.log(Level.ERROR, "Stop here");
-//			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, core, clazz,"core/data/magicOrResonance.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic or resonance entries");
 			Shadowrun6Core.loadPriorityTableEntries(core, clazz.getResourceAsStream("core/data/priorities.xml"));
@@ -220,6 +218,8 @@ public class Shadowrun6DataPlugin  {
 			
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/critters_awakened.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" awakened critters");
+//			logger.log(Level.ERROR, "Stop here");
+//			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/contacts.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
 			list = Shadowrun6Core.loadDataItems(SpiritList.class, Spirit.class, core, clazz, "core/data/spirits.xml");
