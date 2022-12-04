@@ -13,16 +13,20 @@ import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.CheckBox;
+import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -44,7 +48,7 @@ public class CombatSection extends Section {
 	
 	private Type type;
 	private Label lbAttackRating, lbDefenseRating;
-	private Label lbDefensePool;
+	private Label lbDefensePool, lbFullDefense;
 	private Label lbResistDamage;
 	private Label lbDevMon, lbStnMon, lbPhyMon;
 	private Label lbIni, lbIniVR;
@@ -85,6 +89,8 @@ public class CombatSection extends Section {
 		
 		lbDefensePool = new Label("?");
 		lbDefensePool.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		lbFullDefense = new Label("?");
+		lbFullDefense.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		lbResistDamage = new Label("?");
 		lbResistDamage.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		lbDevMon = new Label("?");
@@ -102,11 +108,12 @@ public class CombatSection extends Section {
 		ivSilhoette.setPreserveRatio(true);
 
 		// Attack column
-		Label hdAttacks = new Label(ResourceI18N.get(RES, "section.combat.attacks")); hdAttacks.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		Label hdAttacks = new Label(ResourceI18N.get(RES, "section.combat.attacks")); hdAttacks.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);		
 		gridAttack = new GridPane();
-		gridAttack.setVgap(5); gridAttack.setHgap(5);
-		VBox colAttack = new VBox(10, lbAttackRating, hdAttacks, gridAttack);
+		gridAttack.setVgap(5); gridAttack.setHgap(10);
+		VBox colAttack = new VBox(0, lbAttackRating, hdAttacks, gridAttack);
 		colAttack.setAlignment(Pos.TOP_LEFT);
+		VBox.setMargin(hdAttacks, new Insets(5, 0, 0, 0));
 		
 		// Defense column
 		gridDefense = new GridPane();
@@ -124,6 +131,13 @@ public class CombatSection extends Section {
 		case MATRIX:
 			initMatrix(colAttack, colDefense);
 			break;
+		}
+		// Center column content of attack grid
+		for (Node child : gridAttack.getChildren()) {
+			int x = GridPane.getColumnIndex(child);
+			int y = GridPane.getRowIndex(child);
+			if (x==0) continue;
+			GridPane.setConstraints(child, x, y, 1, 1, HPos.CENTER, VPos.CENTER);
 		}
 		
 		Label hdStnMon = new Label(ShadowrunAttribute.STUN_MONITOR.getName());
@@ -158,6 +172,8 @@ public class CombatSection extends Section {
 		gridIni.add(lbIniVR, 2,1);
 		colAttack.getChildren().add(1, gridIni);
 		
+		Label hdDV   = new Label(SR6ItemAttribute.DAMAGE.getShortName());
+		Label hdPool = new Label(ResourceI18N.get(RES, "section.combat.pool"));
 		
 		Label hdDataSpike = new Label(Shadowrun6Core.getItem(Shadowrun6Action.class, "data_spike").getName());
 		Label hdTarPit    = new Label(Shadowrun6Core.getItem(Shadowrun6Action.class, "tarpit").getName());
@@ -166,23 +182,28 @@ public class CombatSection extends Section {
 		lbPoolAttack1 = new Label("?"); lbPoolAttack1.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		lbPoolAttack2    = new Label("?"); lbPoolAttack2   .getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		
-		gridAttack.add(hdDataSpike    , 0, 0);
-		gridAttack.add(lbDmgAttack1 , 1, 0);
-		gridAttack.add(lbPoolAttack1, 2, 0);
-		gridAttack.add(hdTarPit       , 0, 1);
-		gridAttack.add(lbDmgAttack2    , 1, 1);
-		gridAttack.add(lbPoolAttack2   , 2, 1);
+		gridAttack.add(hdDV , 1, 0);
+		gridAttack.add(hdPool , 2, 0);
+		gridAttack.add(hdDataSpike  , 0, 1);
+		gridAttack.add(lbDmgAttack1 , 1, 1);
+		gridAttack.add(lbPoolAttack1, 2, 1);
+		gridAttack.add(hdTarPit     , 0, 2);
+		gridAttack.add(lbDmgAttack2 , 1, 2);
+		gridAttack.add(lbPoolAttack2, 2, 2);
 		
 		// Defense
 		Label hdDefensePool = new Label(ShadowrunAttribute.DEFENSE_POOL_MATRIX.getName());
+		Label hdFullDefense = new Label("- "+ResourceI18N.get(RES, "section.combat.fulldefense"));
 		Label hdResistDamage= new Label(ShadowrunAttribute.RESIST_DAMAGE.getName());
 		Label hdDevMon = new Label(ResourceI18N.get(RES, "section.combat.matrix.device_monitor")); hdDevMon.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		gridDefense.add(hdDefensePool, 0, 0);
 		gridDefense.add(lbDefensePool, 1, 0);
-		gridDefense.add(hdResistDamage, 0, 1);
-		gridDefense.add(lbResistDamage, 1, 1);
-		gridDefense.add(hdDevMon      , 0, 2);
-		gridDefense.add(lbDevMon      , 1, 2);
+		gridDefense.add(hdFullDefense, 0, 1);
+		gridDefense.add(lbFullDefense, 1, 1);
+		gridDefense.add(hdResistDamage, 0, 2);
+		gridDefense.add(lbResistDamage, 1, 2);
+		gridDefense.add(hdDevMon      , 0, 3);
+		gridDefense.add(lbDevMon      , 1, 3);
 	}
 
 	//-------------------------------------------------------------------
@@ -195,20 +216,24 @@ public class CombatSection extends Section {
 		gridIni.add(lbIni  , 1,0);
 		colAttack.getChildren().add(1, gridIni);
 		
+		Label hdDV   = new Label(SR6ItemAttribute.DAMAGE.getShortName());
+		Label hdPool = new Label(ResourceI18N.get(RES, "section.combat.pool"));
+
 		Label hdUnarmed = new Label(ResourceI18N.get(RES, "label.unarmed"));
 		Label hdCasting = new Label(ResourceI18N.get(RES, "label.spellcasting"));
 		lbDmgAttack1 = new Label("?"); lbDmgAttack1.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-
 		lbDmgAttack2    = new Label("?"); lbDmgAttack2   .getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		lbPoolAttack1 = new Label("?"); lbPoolAttack1.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		lbPoolAttack2    = new Label("?"); lbPoolAttack2   .getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		
-		gridAttack.add(hdUnarmed    , 0, 0);
-		gridAttack.add(lbDmgAttack1 , 1, 0);
-		gridAttack.add(lbPoolAttack1, 2, 0);
-		gridAttack.add(hdCasting       , 0, 1);
-		gridAttack.add(lbDmgAttack2    , 1, 1);
-		gridAttack.add(lbPoolAttack2   , 2, 1);
+		gridAttack.add(hdDV   , 1, 0);
+		gridAttack.add(hdPool , 2, 0);
+		gridAttack.add(hdUnarmed    , 0, 1);
+		gridAttack.add(lbDmgAttack1 , 1, 1);
+		gridAttack.add(lbPoolAttack1, 2, 1);
+		gridAttack.add(hdCasting    , 0, 2);
+		gridAttack.add(lbDmgAttack2 , 1, 2);
+		gridAttack.add(lbPoolAttack2, 2, 2);
 	}
 	
 	//-------------------------------------------------------------------
@@ -227,6 +252,8 @@ public class CombatSection extends Section {
 			showMatrixUV(model);
 			break;
 		}
+		lbStnMon.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getModifiedValue()));
+		lbPhyMon.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getModifiedValue()));
 	}
 
 	//-------------------------------------------------------------------
@@ -288,10 +315,14 @@ public class CombatSection extends Section {
 		lbDmgAttack2.setText("1*");
 		lbPoolAttack1.setText( ""+
 		Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("cracking"), "cybercombat"));
+		lbPoolAttack2.setText( ""+
+		Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("cracking"), "cybercombat"));
 		
 		// Defense
 		lbDefensePool.setText(model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_MATRIX).getPool().toString() );
 		lbDefensePool.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_MATRIX).getPool().toExplainString()) );
+		lbFullDefense.setText(model.getAttribute(ShadowrunAttribute.FULL_DEFENSE_POOL_MATRIX).getPool().toString() );
+		lbFullDefense.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.FULL_DEFENSE_POOL_MATRIX).getPool().toExplainString()) );
 		
 		// Resist Matrix Damage
 		lbResistDamage.setText(model.getAttribute(ShadowrunAttribute.RESIST_DAMAGE_MATRIX).getPool().toString() );
@@ -299,10 +330,6 @@ public class CombatSection extends Section {
 		
 		// Device Monitor
 		lbDevMon.setText(String.valueOf(model.getPersona().getMonitor().length));
-		lbStnMon.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getModifiedValue()));
-		lbPhyMon.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getModifiedValue()));
-		
-		
 	}
 
 	//-------------------------------------------------------------------
