@@ -70,7 +70,7 @@
      	<datareq type="QUALITY" ref="broken_code"/>
      </requires-->
      <modifications>
-     	<checkmod type="SKILL" ref="SOCIAL" value="1" WHAT="NOT_EARN_EDGE"/>
+     	<checkmod type="SKILL" ref="SOCIAL" value="1" what="NOT_EARN_EDGE"/>
      </modifications>
    </quality>
    <quality id="double_sure"          karma="0" pos="FALSE" type="QUALITY_PATH" />
@@ -80,9 +80,9 @@
    <quality id="coping"               karma="0" pos="FALSE" type="QUALITY_PATH" />
    <quality id="selective_numbing"    karma="0" pos="FALSE" type="QUALITY_PATH" >
      <modifications>
-     	<checkmod type="ATTRIBUTE" ref="COMPOSURE" value="2" WHAT="DICE" />
-     	<checkmod type="SKILL" ref="SOCIAL" value="1" WHAT="NOT_EARN_EDGE"/>
-     	<checkmod type="SKILL" ref="SOCIAL" value="1" WHAT="NOT_SPEND_EDGE"/>
+     	<checkmod type="ATTRIBUTE" ref="COMPOSURE" value="2" what="DICE" />
+     	<checkmod type="SKILL" ref="SOCIAL" value="1" what="NOT_EARN_EDGE"/>
+     	<checkmod type="SKILL" ref="SOCIAL" value="1" what="NOT_SPEND_EDGE"/>
      </modifications>
    </quality>
    <quality id="state_of_zen"         karma="0" pos="FALSE" type="QUALITY_PATH" />

@@ -69,9 +69,9 @@ public class SR6PersonaSection extends PersonaSection<Shadowrun6Character> {
 		grid.setVgap(5);
 		grid.setHgap(10);
 		grid.add(hdAccess  , 0, 0);
-		grid.add(cbASDevice, 1, 0);
+		grid.add(cbDFDevice, 1, 0);
 		grid.add(hdDeck    , 0, 1);
-		grid.add(cbDFDevice, 1, 1);
+		grid.add(cbASDevice, 1, 1);
 		GridPane.setFillWidth(cbASDevice, true);
 		GridPane.setFillWidth(cbDFDevice, true);
 		

@@ -56,38 +56,64 @@
 			<attrdef id="PRICE" value="20"/>
 		</variant>
 	</item>
-	<!--item id="ammo_rifles" price="20" avail="2L" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
+	<item id="ammo_rifles" price="20" avail="2L" count="y" units="20" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>		
+		<attrdef id="DAMAGE" value="0"/>
 		<requires>
-			<itemsubtypereq type="RIFLE_ASSAULT,RIFLE_HUNTING,RIFLE_SNIPER" />
+			<selreq>
+				<datareq type="ITEMSUBTYPE" ref="RIFLE_ASSAULT" apply="DATA_ITEM"/>
+				<datareq type="ITEMSUBTYPE" ref="RIFLE_HUNTING" apply="DATA_ITEM"/>
+				<datareq type="ITEMSUBTYPE" ref="RIFLE_SNIPER"  apply="DATA_ITEM"/>
+			</selreq>
+		</requires>
+		<variant id="caseless">
+			<attrdef id="PRICE" value="40"/>
+		</variant>
+	</item>
+	<item id="ammo_taser" price="10" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>		
+		<attrdef id="DAMAGE" value="0"/>
+		<requires>
+			<datareq type="ITEMSUBTYPE" ref="TASERS" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="caseless">
+			<attrdef id="PRICE" value="20"/>
+		</variant>
+	</item>
+	<item id="ammo_darts" price="5" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
+		<attrdef id="DAMAGE" value="0"/>
+		<requires>
+			<datareq type="ITEMSUBTYPE" ref="TASERS" apply="DATA_ITEM"/>
 		</requires>
 	</item>
-	<item id="ammo_taser" price="10" avail="1" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
+	<item id="ammo_cannon" price="10" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
+		<attrdef id="DAMAGE" value="0"/>
 		<requires>
-			<itemsubtypereq type="TASERS" />
+				<datareq type="ITEMSUBTYPE" ref="ASSAULT_CANNON" apply="DATA_ITEM"/>
 		</requires>
 	</item>
-	<item id="ammo_darts" price="5" avail="1" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
-        <requires>
-            <itemsubtypereq type="OTHER_SPECIAL" />
-        </requires>
+	<item id="ammo_machine_gun" price="15" avail="2L" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
+		<attrdef id="DAMAGE" value="0"/>
+		<requires>
+			<selreq>
+				<datareq type="ITEMSUBTYPE" ref="LMG" apply="DATA_ITEM"/>
+				<datareq type="ITEMSUBTYPE" ref="MMG" apply="DATA_ITEM"/>
+				<datareq type="ITEMSUBTYPE" ref="HMG" apply="DATA_ITEM"/>
+			</selreq>
+		</requires>
 	</item>
-	<item id="ammo_cannon" price="10" avail="1" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
-        <requires>
-            <itemsubtypereq type="ASSAULT_CANNON" />
-        </requires>
-	</item>
-	<item id="ammo_machine_gun" price="15" avail="2L" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
-        <requires>
-            <itemsubtypereq type="LMG,MMG,HMG" />
-        </requires>
-	</item>
-	<item id="ammo_dmso" price="10" avail="1" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
+	<!--item id="ammo_dmso" price="10" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" reqVariant="true">
+		<requires>
+			<selreq>
+				<datareq type="ITEMSUBTYPE" ref="LMG" apply="DATA_ITEM"/>
+				<datareq type="ITEMSUBTYPE" ref="MMG" apply="DATA_ITEM"/>
+				<datareq type="ITEMSUBTYPE" ref="HMG" apply="DATA_ITEM"/>
+			</selreq>
+		</requires>
         <requires>
            <itemsubtypereq  type="HOLDOUTS,PISTOLS_LIGHT,MACHINE_PISTOLS,PISTOLS_HEAVY" />
         </requires>

@@ -117,18 +117,18 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	 */
 	@Override
 	public String getShortDescription() {
+		List<String> names = new ArrayList<>();
 		SR6MetaType meta = getMetatype();
-		StringBuffer buf = new StringBuffer();
-		if (gender!=null) {
-			buf.append(gender+" ");
-		}
 		if (meta!=null) {
-			buf.append(meta.getName(Locale.getDefault())+" ");
+			names.add(meta.getName(Locale.getDefault()));
 		}
 		if (getMagicOrResonanceType()!=null) {
-			buf.append(getMagicOrResonanceType().getName(Locale.getDefault())+"");
+			names.add(getMagicOrResonanceType().getName(Locale.getDefault()));
 		}
-		return buf.toString();
+		if (gender!=null) {
+			names.add(gender.getName(Locale.getDefault()));
+		}
+		return String.join(", ", names);
 	}
 
 	//-------------------------------------------------------------------

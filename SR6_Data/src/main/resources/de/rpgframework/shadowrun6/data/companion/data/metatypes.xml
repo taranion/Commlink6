@@ -231,9 +231,7 @@
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" when="CREATION"/>
          <valmod type="QUALITY"   ref="built_tough" value="2"/>
-         <itemmod type="QUALITY"  ref="dermal_alteration">
-         	<decision choice="0180ba51-5b30-471d-bdba-5e2482b8440d" value="bark"/>
-         </itemmod>
+         <itemmod type="QUALITY"  ref="bark" />
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
 		</modifications>
 	</metatype>
