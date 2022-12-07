@@ -2,138 +2,220 @@
 <items>
     <!-- Basic Program -->
 	<item avail="1" price="60" id="browse" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<modifications>
 			<checkmod type="ACTION" ref="matrix_search" value="1" what="EDGE" apply="CHARACTER"/>
 		</modifications>
-		<variant id="basic">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
 		<variant id="rcc">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+			<requires>
+				<valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/>
+			</requires>
 		</variant>
 	</item> 
-	<item avail="1" price="60" id="baby_monitor" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<variant id="basic">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+	<item avail="1" price="60" id="baby_monitor" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
 		<variant id="rcc">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
-	<item avail="1" price="60" id="configurator" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<variant id="basic">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+	<item avail="1" price="60" id="configurator" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
 		<variant id="rcc">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
-	<item avail="1" price="60" id="edit" type="SOFTWARE" subtype="BASIC_PROGRAM">
+	<item avail="1" price="60" id="edit" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<modifications>
 			<checkmod type="ACTION" ref="edit_file" value="1" what="EDGE" apply="CHARACTER"/>
 		</modifications>
-		<variant id="basic">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
 		<variant id="rcc">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
-	<item avail="1" price="60" id="encryption" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<variant id="basic">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+	<item avail="1" price="60" id="encryption" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
 		<variant id="rcc">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
-	<item avail="1" price="60" id="signal_scrubber" type="SOFTWARE" subtype="BASIC_PROGRAM">
-		<variant id="basic">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+	<item avail="1" price="60" id="signal_scrubber" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
 		<variant id="rcc">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
-	<item avail="1" price="60" id="toolbox" type="SOFTWARE" subtype="BASIC_PROGRAM">
+	<item avail="1" price="60" id="toolbox" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active">
 	   	<modifications>
 	   		<valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="1" apply="PERSONA"/>
 	   	</modifications>
 	   </mode>
-		<variant id="basic">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
 		<variant id="rcc">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
-	<item avail="1" price="60" id="virtual_machine" type="SOFTWARE" subtype="BASIC_PROGRAM">
+	<item avail="1" price="60" id="virtual_machine" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active">
 	   	<modifications>
 	   		<valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="2" apply="DATA_ITEM"/>
 	   	</modifications>
 	   </mode>
-		<variant id="basic">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="BASIC"/>
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
 		<variant id="rcc">
-			<usage mode="EMBEDDED" slot="SOFTWARE" type="RCC"/>
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
 	
 	<!-- Hacking Program -->
-	<item avail="4I" price="250" id="armor" type="SOFTWARE" subtype="HACKING_PROGRAM">
+	<item avail="4I" price="250" id="armor" type="SOFTWARE" subtype="HACKING_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<mode id="active">
 			<modifications>
 				<valmod type="ITEM_ATTRIBUTE" ref="DEFENSE_MATRIX" value="2" apply="PERSONA"/>
 			</modifications>
 		</mode>
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="biofeedback" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="biofeedback_filter" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="blackout"  type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="decryption" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="defuse" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="exploit" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="fork" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="lockdown" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="overclock" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="stealth" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 	<item avail="4I" price="250" id="trace" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
 	</item> 
 
 	 <!-- Autosofts -->
@@ -144,7 +226,8 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item> 
 	<item avail="1" price="500" id="electronic_warfare" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
@@ -153,7 +236,8 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item> 
 	<item avail="1" price="500" id="evasion" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
@@ -163,7 +247,8 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item> 
 	<item avail="1" price="500" id="maneuvering" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
@@ -173,7 +258,8 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item> 
 	<item avail="1" price="500" id="stealth_auto" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
@@ -182,7 +268,8 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item> 
 	<item avail="1" price="500" id="targeting" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
@@ -192,7 +279,8 @@
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
 		<attrdef id="SIZE" value="1"/>
-		<usage mode="EMBEDDED" slot="SOFTWARE" type="AUTOSOFT"/>
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item> 
 
  	<!-- OTHER -->

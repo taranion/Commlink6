@@ -43,16 +43,18 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac,
 			CarriedItem<?> model, List<Modification> unprocessed) {
 		
+		@SuppressWarnings("unchecked")
+		CarriedItem<ItemTemplate> model2 = (CarriedItem<ItemTemplate>) model;
 		// Read all modifications that are meant for this item		
 		for (Modification tmp : model.getModifications()) {
 			try {
 				logger.log(Level.DEBUG, "Process {0}", tmp);
 				if (tmp instanceof ValueModification) {
-					applyModification(indent, charac, model, (ValueModification) tmp);
+					applyModification(indent, charac, model2, (ValueModification) tmp);
 				} else if (tmp instanceof EmbedModification) {
-					embedModification(indent, charac, model, (EmbedModification) tmp);
+					embedModification(indent, charac, model2, (EmbedModification) tmp);
 				} else if (tmp instanceof DataItemModification) {
-					applyModification(indent, charac, model, (DataItemModification) tmp);
+					applyModification(indent, charac, model2, (DataItemModification) tmp);
 				} else {
 					logger.log(Level.ERROR, "Unsupported modification: " + tmp);
 				}
@@ -66,42 +68,43 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 
-	// -------------------------------------------------------------------
-	@SuppressWarnings("rawtypes")
-	private void applyModification(String indent, Lifeform charac, CarriedItem<?> model, ValueModification mod) {
-		if (mod.getApplyTo() == ApplyTo.CHARACTER) {
-			logger.log(Level.WARNING, "Ignore for now " + mod);
-			model.addCharacterModification(mod);
-			return;
-		}
-		
-		switch ((ShadowrunReference) mod.getReferenceType()) {
-		case HOOK:
-			ItemHook hook = mod.getResolvedKey();
-			Formula form = mod.getFormula();
-			AAvailableSlot<ItemHook,ItemTemplate> slot = null;
-			if (mod.getRawValue()==null) {
-				logger.log(Level.WARNING, "No value in Hook modification from "+mod.getSource()+" - assume 1");
-				slot = new AvailableSlot(hook,1);
-			} else {
-				slot = new AvailableSlot(hook, mod.getValue());
-			}
-			model.addSlot(slot);
-			logger.log(Level.INFO, indent+"Added slot {0} with capacity {1}", hook, slot.getCapacity());
-			return;
-		case ITEM_ATTRIBUTE:
-			logger.log(Level.INFO, "Found modification " + mod);
-			model.addModification(mod);
-			return;
-		default:
-			logger.log(Level.WARNING, "Don't know how to deal with:" + mod);
-			return;
-		}
-	}
+//	// -------------------------------------------------------------------
+//	@SuppressWarnings("rawtypes")
+//	private void applyModification(Lifeform charac, CarriedItem<ItemTemplate> model, ValueModification mod) {
+//		if (mod.getApplyTo() == ApplyTo.CHARACTER) {
+//			logger.log(Level.WARNING, "Ignore for now " + mod);
+//			model.addCharacterModification(mod);
+//			return;
+//		}
+//		
+//		switch ((ShadowrunReference) mod.getReferenceType()) {
+//		case HOOK:
+//			ItemHook hook = mod.getResolvedKey();
+//			Formula form = mod.getFormula();
+//			AAvailableSlot<ItemHook,ItemTemplate> slot = null;
+//			if (mod.getRawValue()==null) {
+//				logger.log(Level.WARNING, "No value in Hook modification from "+mod.getSource()+" - assume 1");
+//				slot = new AvailableSlot(hook,1);
+//			} else {
+//				slot = new AvailableSlot(hook, mod.getValue());
+//			}
+//			model.addSlot(slot);
+//			logger.log(Level.INFO, "Added slot {0} with capacity {1}", hook, slot.getCapacity());
+//			return;
+//		case ITEM_ATTRIBUTE:
+//			logger.log(Level.INFO, "Found modification " + mod);
+//			ItemUtil.addOrSetItemAttribute(model, mod);
+//			model.addModification(mod);
+//			return;
+//		default:
+//			logger.log(Level.WARNING, "Don't know how to deal with:" + mod);
+//			return;
+//		}
+//	}
 
 	// -------------------------------------------------------------------
 	@SuppressWarnings("rawtypes")
-	private void applyModification(String indent, Lifeform charac, CarriedItem<?> model, DataItemModification mod) {
+	private void applyModification(String indent, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addCharacterModification(mod);
 			logger.log(Level.WARNING, "Ignore for now " + mod);
@@ -131,8 +134,16 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		case GEAR:
 			model.addCharacterModification(mod);
 			return;
+		case ITEM_ATTRIBUTE:
+			if (mod instanceof ValueModification) {
+				ItemUtil.addOrSetItemAttribute(model, (ValueModification)mod);
+			} else {
+				logger.log(Level.ERROR, "Not implemented: "+mod.getClass());
+			}
+			return;
 		}
 		logger.log(Level.WARNING, "ToDo: DataItemModification " + mod);
+		System.err.println("ApplyStockModification: unsipported modification type: "+mod.getReferenceType());
 //		model.addModification(mod);
 	}
 

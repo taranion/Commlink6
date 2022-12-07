@@ -12,6 +12,8 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
+import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -40,6 +42,29 @@ public class ItemUtil {
 				);
 
 	//-------------------------------------------------------------------
+	public static void addOrSetItemAttribute(CarriedItem<ItemTemplate> ref, ValueModification mod) {
+		if (mod.getReferenceType()!=ShadowrunReference.ITEM_ATTRIBUTE)
+			throw new IllegalArgumentException("Only for ITEM_ATTRIBUTE modifications, but got "+mod.getReferenceType());
+		SR6ItemAttribute attr = mod.getResolvedKey();
+		ItemAttributeValue<?> val = ref.getAttributeRaw(attr);
+		if (val!=null) {
+			logger.log(Level.DEBUG, "Add modification to existing attribute: {0}",mod);
+			val.addModification(mod);
+			return;
+		}
+		
+		ItemAttributeObjectValue<SR6ItemAttribute> objVal;
+		switch (attr) {
+		case SOFTWARE_TYPES:
+			objVal = new ItemAttributeObjectValue<>(attr, List.of(mod.getValueAsKeys()));
+			ref.setAttribute(attr, objVal);
+			return;
+		default:
+			logger.log(Level.ERROR, "Unsuported item attribute {0}", attr);
+		}
+	}
+
+	//-------------------------------------------------------------------
 	public static List<ItemTemplate> getEmbeddableIn(CarriedItem<ItemTemplate> ref, ItemHook slot) {
 		logger.log(Level.INFO, "getEmbeddableIn({0}, {1})", ref, slot);
 		List<ItemTemplate> ret = new ArrayList<>();
@@ -51,7 +76,7 @@ public class ItemUtil {
 //				if ()
 //				return t;})
 			.sorted((o1, o2) -> o1.getName().compareTo(o2.getName()))
-			.filter(t -> ItemUtil.areRequirementsMet( ref, t))
+			.filter(t -> ItemUtil.areRequirementsMet( ref, t, (SR6PieceOfGearVariant) ref.getVariant())==null)
 			.collect(Collectors.toList());
 		
 //		for (ItemTemplate t : ret) {
@@ -80,15 +105,22 @@ public class ItemUtil {
 	}
 	
 	//-------------------------------------------------------------------
-	public static boolean areRequirementsMet(CarriedItem<ItemTemplate> container, ItemTemplate item) {
+	/**
+	 * @return Requirement not met
+	 */
+	public static Requirement areRequirementsMet(CarriedItem<ItemTemplate> container, ItemTemplate item, SR6PieceOfGearVariant variant) {
 		for (Requirement tmp : item.getRequirements()) {
-//			switch (tmp.getApply()) {
-//			case 
-//			}
 			if (!isRequirementMet(container, item, tmp))
-				return false;
+				return tmp;
 		}
-		return true;
+		if (variant!=null) {
+			for (Requirement tmp : variant.getRequirements()) {
+				if (!isRequirementMet(container, item, tmp))
+					return tmp;
+			}
+		}
+		
+		return null;
 	}
 	
 	//-------------------------------------------------------------------
@@ -123,10 +155,22 @@ public class ItemUtil {
 			switch (type) {
 			case ITEM_ATTRIBUTE:
 				SR6ItemAttribute iAttr = SR6ItemAttribute.valueOf(req.getKey());
-				
+				if (!container.hasAttribute(iAttr))
+					return false;
+				ItemAttributeValue<?> rawAttr = container.getAttributeRaw(iAttr);
+				if (rawAttr==null) 
+					return false;
+				switch (iAttr) {
+				case SOFTWARE_TYPES:
+					return ((List<SoftwareTypes>)((ItemAttributeObjectValue)rawAttr).getValue()).contains( SoftwareTypes.valueOf( req.getRawValue() ));
+				default:
+					logger.log(Level.ERROR, "TODO: support requirement check for item attribut {0}", iAttr);
+				}
+				return false;
 			}
 		}
 		logger.log(Level.ERROR, "TODO: check "+tmp+"/"+tmp.getClass());
+		System.err.println("TODO: support requirement check for "+tmp+"/"+tmp.getClass());
 		return false;
 	}
 

@@ -40,7 +40,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 		ApplyTo apply = realMod.getApplyTo();
 		if (apply==null) {
 			apply = guessModificationTarget(realMod, model);
-			logger.log(Level.INFO, "Guess modification {0} is applied to {1}", realMod, apply);
+//			logger.log(Level.INFO, "Guess modification {0} is applied to {1}", realMod, apply);
 		}
 		
 		switch (apply) {
