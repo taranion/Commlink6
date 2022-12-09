@@ -52,7 +52,7 @@ public class Shadowrun6Core extends GenericCore {
 	
 	//-------------------------------------------------------------------
 	static {
-		i18NResources = new MultiLanguageResourceBundle(Shadowrun6Core.class.getPackageName()+".i18n.core", Locale.ENGLISH, Locale.GERMAN);
+		i18NResources = new MultiLanguageResourceBundle(Shadowrun6Core.class.getPackageName()+".i18n.core", Locale.ENGLISH, Locale.GERMAN, Locale.FRANCE, Locale.forLanguageTag("pt"));
 		prioTable   = new PriorityTable();
 		GearTool.setPerRPGStatsPhase1(RoleplayingSystem.SHADOWRUN6, SR6GearTool.SR6_PHASE1_STEPS);
 		GearTool.setPerRPGStatsPhase2(RoleplayingSystem.SHADOWRUN6, SR6GearTool.SR6_PHASE2_STEPS);

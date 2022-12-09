@@ -39,6 +39,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.SpinnerValueFactory.ListSpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -298,9 +299,11 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 					.filter(p -> charGen.showDataItem(p))
 					.collect(Collectors.toList());
 			Collections.sort(items, comparator);
+			if (items.contains(null))
+				items.remove(null);
 			contentPane.setItems(items);
 
-			if (model.getMetatype() != contentPane.getSelectedItem()) {
+			if (items.contains(model.getMetatype()) && model.getMetatype() != contentPane.getSelectedItem()) {
 				contentPane.setSelectedItem(model.getMetatype());
 			}
 

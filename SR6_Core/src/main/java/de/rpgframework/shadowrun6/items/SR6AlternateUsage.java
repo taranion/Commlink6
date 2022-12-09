@@ -17,7 +17,7 @@ import de.rpgframework.genericrpg.items.AlternateUsage;
  * @author prelle
  *
  */
-@DataItemTypeKey(id="usage")
+@DataItemTypeKey(id="alternate")
 @IgnoreMissingAttributes("id")
 public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
 	

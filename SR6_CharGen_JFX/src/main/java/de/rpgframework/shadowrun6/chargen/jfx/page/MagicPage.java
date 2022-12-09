@@ -156,7 +156,7 @@ public class MagicPage extends Page {
 		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secAdeptPowers, secSpells, secMeta, secCombat, secRituals, secFoci);
+		flex.getChildren().addAll(secAdeptPowers, secSpells, secMeta, secRituals, secFoci);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);

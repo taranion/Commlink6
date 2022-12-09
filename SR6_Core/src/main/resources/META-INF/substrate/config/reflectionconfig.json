@@ -44,16 +44,6 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"de.rpgframework.shadowrun6.SR6Ritual",
-  "allDeclaredFields":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"de.rpgframework.shadowrun6.SR6RitualList",
-  "allDeclaredFields":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
   "name":"de.rpgframework.shadowrun6.SR6Skill",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]

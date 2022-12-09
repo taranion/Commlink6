@@ -40,7 +40,7 @@
 			<relevancemod topic="MAGICAL" />
 		</modifications>
 	</metaecho>
-	<metaecho id="spell_shapening" type="METAMAGIC">
+	<metaecho id="spell_shaping" type="METAMAGIC">
 		<modifications>
 			<relevancemod topic="MAGICAL" />
 		</modifications>

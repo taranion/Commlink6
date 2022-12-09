@@ -100,6 +100,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			calculateDefensePoolAstral();
 			calculateDefensePoolMatrix();
 			
+			calculateResistMatrixDamage();
 			calculateResistToxin();
 			
 			/*
@@ -484,17 +485,22 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.setDistributed(0);
 		addNaturalModifier(val, model.getPersona().getDataProcessing().getModifiedValue(), SR6ItemAttribute.DATA_PROCESSING);
 		addNaturalModifier(val, model.getPersona().getFirewall().getModifiedValue(), SR6ItemAttribute.FIREWALL);
-//		CarriedItem<ItemTemplate> bestDF = Shadowrun6Tools.getPrimaryMatrixDF(model);
-//		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
-//			// Technomancers
-//			addNaturalModifier(val,ShadowrunAttribute.LOGIC);
-//			addNaturalModifier(val,ShadowrunAttribute.WILLPOWER);
-//		} else if (bestDF!=null) {
-//			// With commlink
-//			addNaturalModifier(val, bestDF, SR6ItemAttribute.DATA_PROCESSING);
-//			addNaturalModifier(val, bestDF, SR6ItemAttribute.FIREWALL);
-//		} 
 		logger.log(Level.DEBUG, " Defense Pool Matrix = "+val.getModifiedValue());
+
+		val = model.getAttribute(ShadowrunAttribute.FULL_DEFENSE_POOL_MATRIX);
+		val.setDistributed(0);
+		addNaturalModifier(val, model.getPersona().getDataProcessing().getModifiedValue(), SR6ItemAttribute.DATA_PROCESSING);
+		addNaturalModifier(val, model.getPersona().getFirewall().getModifiedValue(), SR6ItemAttribute.FIREWALL);
+		addNaturalModifier(val, model.getPersona().getFirewall().getModifiedValue(), SR6ItemAttribute.FIREWALL);
+		logger.log(Level.DEBUG, " Full Defense Pool Matrix = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateResistMatrixDamage() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.RESIST_DAMAGE_MATRIX);
+		val.setDistributed(0);
+		addNaturalModifier(val, model.getPersona().getFirewall().getModifiedValue(), SR6ItemAttribute.FIREWALL);
+		logger.log(Level.DEBUG, " Defensive pool Matrix damafe = "+val.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------

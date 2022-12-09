@@ -71,8 +71,6 @@ import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.QualityPathList;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
-import de.rpgframework.shadowrun6.SR6Ritual;
-import de.rpgframework.shadowrun6.SR6RitualList;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
@@ -136,7 +134,7 @@ public class Shadowrun6DataPlugin  {
 		double count = 0;
 		alreadyInitialized = true;
 		logger.log(Level.INFO, "START -------------------------------Core-----------------------------------------------");
-		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN);
+		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"));
 		
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
@@ -150,7 +148,7 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
 			list = Shadowrun6Core.loadDataItems(RitualFeatureList.class, RitualFeature.class, core, clazz, "core/data/ritualfeatures.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" ritual features");
-			list = Shadowrun6Core.loadDataItems(SR6RitualList.class, SR6Ritual.class, core, clazz, "core/data/rituals.xml");
+			list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, core, clazz, "core/data/rituals.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" rituals");
 			list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, core, clazz, "core/data/adeptpowers.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
@@ -208,10 +206,6 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 			list = Shadowrun6Core.loadDataItems(LifestyleQualityList.class, LifestyleQuality.class, core, clazz,"core/data/lifestyles.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" lifestyle qualities");
-			list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, core, clazz,"core/data/rituals.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" rituals");
-//			logger.log(Level.ERROR, "Stop here");
-//			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, core, clazz,"core/data/magicOrResonance.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic or resonance entries");
 			Shadowrun6Core.loadPriorityTableEntries(core, clazz.getResourceAsStream("core/data/priorities.xml"));
@@ -224,6 +218,8 @@ public class Shadowrun6DataPlugin  {
 			
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/critters_awakened.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" awakened critters");
+//			logger.log(Level.ERROR, "Stop here");
+//			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/contacts.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
 			list = Shadowrun6Core.loadDataItems(SpiritList.class, Spirit.class, core, clazz, "core/data/spirits.xml");

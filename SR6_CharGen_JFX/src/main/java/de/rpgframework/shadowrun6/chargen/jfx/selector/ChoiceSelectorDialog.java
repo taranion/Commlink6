@@ -188,6 +188,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		if (item instanceof ItemTemplate) {
 			// Build item so far as possible
 			Shadowrun6Character lifeform = ctrl.getModel();
+			if (getDecisions().length>0) {
+				logger.log(Level.WARNING, "Mit decision");
+			}
 			OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem( (ItemTemplate)item, carry, selectedVariant, lifeform, true, getDecisions());
 			logger.log(Level.WARNING, "Trying to build "+carry+" returned "+result);
 			if (result.get()!=null) {

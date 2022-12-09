@@ -274,7 +274,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	 */
 	@Override
 	public String getSelectionCostString(MetamagicOrEcho data) {
-		return String.valueOf(getSelectionCostString(data));
+		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------

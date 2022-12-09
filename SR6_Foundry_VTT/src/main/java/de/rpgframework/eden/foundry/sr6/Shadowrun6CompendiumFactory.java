@@ -621,9 +621,9 @@ public class Shadowrun6CompendiumFactory {
 			
 			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
 			for (Locale loc : locales) {
-				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".desc", tmp.getDescription(loc));
-				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".name", tmp.getName(loc));
-				module.addTranslation(loc.getLanguage(), "item."+tmp.getId()+".src", createSourceText(tmp, loc));
+				module.addTranslation(loc.getLanguage(), "vehicle."+tmp.getId()+".desc", tmp.getDescription(loc));
+				module.addTranslation(loc.getLanguage(), "vehicle."+tmp.getId()+".name", tmp.getName(loc));
+				module.addTranslation(loc.getLanguage(), "vehicle."+tmp.getId()+".src", createSourceText(tmp, loc));
 			}
 			ActorData<?> entry = Converter.convertActor(tmp, locales[0]);
 			entry._id  = createRandomID();

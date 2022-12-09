@@ -189,10 +189,12 @@
       <usage mode="IMPLANTED" value="0.3"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-        <!--itemmod type="GEAR" ref="ocular_drone_vehicle"/-->
         <valmod type="HOOK" ref="CYBEREYE_IMPLANT" value="4"/>
         <embed  type="GEAR" ref="image_link" intoType="HOOK" intoRef="INTERNAL" included="true"/>
       </modifications>
+      <alternate mode="VEHICLE" type="DRONE_MINI" subtype="AIR">
+			<vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" />
+      </alternate>
    </item>
    
    <item avail="5I" price="20000" id="retinal_duplication" type="CYBERWARE" subtype="CYBER_EYEWARE">

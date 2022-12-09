@@ -143,7 +143,7 @@ public class CombatPage extends Page {
 		
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secRanged, secMelee, secArmor, secCombat,secAmmo);
+		flex.getChildren().addAll(secRanged, secMelee, secArmor, secAmmo);
 		
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
