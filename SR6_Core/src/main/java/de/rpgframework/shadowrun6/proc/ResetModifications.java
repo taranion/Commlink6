@@ -8,12 +8,17 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.items.AvailableSlot;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemUtil;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 
 /**
  * @author prelle
@@ -71,6 +76,21 @@ public class ResetModifications implements ProcessingStep {
 				}
 			}
 			
+			
+			// Ensure there is a device for unused software
+			CarriedItem<ItemTemplate> item = model.getSoftwareLibrary();
+			if (item==null) {
+				item = SR6GearTool.buildItem(ItemUtil.SOFTWARE_LIBRARY_ITEM, CarryMode.CARRIED, null, false).get();
+				//item = new CarriedItem<ItemTemplate>(ItemUtil.SOFTWARE_LIBRARY_ITEM, null, CarryMode.CARRIED);
+				item.setUuid(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+				model.setSoftwareLibrary(item);
+				SR6GearTool.recalculate("", model, item);
+				//item.addSlot(new AvailableSlot(ItemHook.SOFTWARE, 99));
+				if (item.getSlot(ItemHook.SOFTWARE)==null) {
+					logger.log(Level.ERROR, "Missing software slot");
+					System.exit(1);
+				}
+			}
 			
 			return unprocessed;
 		} finally {

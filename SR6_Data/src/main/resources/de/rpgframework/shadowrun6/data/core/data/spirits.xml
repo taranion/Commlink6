@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<spirits>
-  <spirit id="air" />
-  <spirit id="beasts" />
-  <spirit id="earth" />
-  <spirit id="fire" />
-  <spirit id="kin" />
-  <spirit id="water" />
-</spirits>
+<npcs>
+  <npc id="spirit_air" type="SPIRIT">
+  	<attributes>
+  		<attribute id="BODY"      value="+2"/>
+  		<attribute id="AGILITY"   value="+3"/>
+  		<attribute id="REACTION"  value="+4"/>
+  		<attribute id="STRENGTH"  value="-3"/>
+  		<attribute id="WILLPOWER" value="0"/>
+  		<attribute id="LOGIC"     value="0"/>
+  		<attribute id="INTUITION" value="0"/>
+  		<attribute id="CHARISMA"  value="0"/>
+  		<attribute id="MAGIC"     value="0"/>
+  		<attribute id="ESSENCE"   value="0"/>
+  	</attributes>
+	<skills>
+			<skillval ref="astral"       value="0"/>
+			<skillval ref="athletics"    value="0"/>
+			<skillval ref="close_combat" value="0"/>
+			<skillval ref="exotic_weapons"    value="0">
+				<skillspec ref="exotic_weapons/air" />
+			</skillval>
+			<skillval ref="perception"   value="0"/>
+	</skills>
+		<critterpowers>
+			<critterpowerval ref="accident"/>
+			<critterpowerval ref="astral_form" />
+			<critterpowerval ref="concealment" />
+			<critterpowerval ref="confusion" />
+			<critterpowerval ref="engulf" />
+			<critterpowerval ref="materialization" />
+			<critterpowerval ref="movement" />
+			<critterpowerval ref="sapience" />
+			<critterpowerval ref="search" />
+		</critterpowers>
+  </npc>
+  <npc id="spirit_beasts" type="SPIRIT">
+  	<attributes>
+  		<attribute id="BODY"      value="+2"/>
+  		<attribute id="AGILITY"   value="+1"/>
+  		<attribute id="REACTION"  value="0"/>
+  		<attribute id="STRENGTH"  value="+2"/>
+  		<attribute id="WILLPOWER" value="0"/>
+  		<attribute id="LOGIC"     value="0"/>
+  		<attribute id="INTUITION" value="0"/>
+  		<attribute id="CHARISMA"  value="0"/>
+  		<attribute id="MAGIC"     value="0"/>
+  		<attribute id="ESSENCE"   value="0"/>
+  	</attributes>
+  </npc>
+  <npc id="spirit_earth"  type="SPIRIT">
+  	<attributes>
+  		<attribute id="BODY"      value="+4"/>
+  		<attribute id="AGILITY"   value="-2"/>
+  		<attribute id="REACTION"  value="-1"/>
+  		<attribute id="STRENGTH"  value="+4"/>
+  		<attribute id="WILLPOWER" value="0"/>
+  		<attribute id="LOGIC"     value="-1"/>
+  		<attribute id="INTUITION" value="0"/>
+  		<attribute id="CHARISMA"  value="0"/>
+  		<attribute id="MAGIC"     value="0"/>
+  		<attribute id="ESSENCE"   value="0"/>
+  	</attributes>
+  </npc>
+  <npc id="spirit_fire"   type="SPIRIT">
+  	<attributes>
+  		<attribute id="BODY"      value="+1"/>
+  		<attribute id="AGILITY"   value="+2"/>
+  		<attribute id="REACTION"  value="+3"/>
+  		<attribute id="STRENGTH"  value="-2"/>
+  		<attribute id="WILLPOWER" value="0"/>
+  		<attribute id="LOGIC"     value="0"/>
+  		<attribute id="INTUITION" value="+1"/>
+  		<attribute id="CHARISMA"  value="0"/>
+  		<attribute id="MAGIC"     value="0"/>
+  		<attribute id="ESSENCE"   value="0"/>
+  	</attributes>
+  </npc>
+  <npc id="spirit_kin"    type="SPIRIT">
+  	<attributes>
+  		<attribute id="BODY"      value="+1"/>
+  		<attribute id="AGILITY"   value="0"/>
+  		<attribute id="REACTION"  value="+2"/>
+  		<attribute id="STRENGTH"  value="-2"/>
+  		<attribute id="WILLPOWER" value="0"/>
+  		<attribute id="LOGIC"     value="0"/>
+  		<attribute id="INTUITION" value="+1"/>
+  		<attribute id="CHARISMA"  value="0"/>
+  		<attribute id="MAGIC"     value="0"/>
+  		<attribute id="ESSENCE"   value="0"/>
+  	</attributes>
+  </npc>
+  <npc id="spirit_water"  type="SPIRIT">
+  	<attributes>
+  		<attribute id="BODY"      value="0"/>
+  		<attribute id="AGILITY"   value="+1"/>
+  		<attribute id="REACTION"  value="+2"/>
+  		<attribute id="STRENGTH"  value="0"/>
+  		<attribute id="WILLPOWER" value="0"/>
+  		<attribute id="LOGIC"     value="0"/>
+  		<attribute id="INTUITION" value="0"/>
+  		<attribute id="CHARISMA"  value="0"/>
+  		<attribute id="MAGIC"     value="0"/>
+  		<attribute id="ESSENCE"   value="0"/>
+  	</attributes>
+  </npc>
+</npcs>

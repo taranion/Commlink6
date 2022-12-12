@@ -56,10 +56,6 @@ import de.rpgframework.shadowrun.RitualList;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureList;
-import de.rpgframework.shadowrun.Spirit;
-import de.rpgframework.shadowrun.SpiritList;
-import de.rpgframework.shadowrun.Sprite;
-import de.rpgframework.shadowrun.SpriteList;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.TraditionList;
 import de.rpgframework.shadowrun6.ActionList;
@@ -86,7 +82,9 @@ import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemTemplateList;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6AlternateUsage;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6UsageMode;
@@ -135,6 +133,8 @@ public class Shadowrun6DataPlugin  {
 		alreadyInitialized = true;
 		logger.log(Level.INFO, "START -------------------------------Core-----------------------------------------------");
 		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"));
+		ItemUtil.SOFTWARE_LIBRARY_ITEM.assignToDataSet(core);
+		SR6GearTool.recalculate("", null, ItemUtil.SOFTWARE_LIBRARY);
 		
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
@@ -211,8 +211,6 @@ public class Shadowrun6DataPlugin  {
 			Shadowrun6Core.loadPriorityTableEntries(core, clazz.getResourceAsStream("core/data/priorities.xml"));
 			list = Shadowrun6Core.loadDataItems(TraditionList.class, Tradition.class, core, clazz,"core/data/traditions.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic traditions");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz, "core/data/critterweapons.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" critter weapons");
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
 			
@@ -221,9 +219,13 @@ public class Shadowrun6DataPlugin  {
 //			logger.log(Level.ERROR, "Stop here");
 //			System.exit(1);
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/contacts.xml"));
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
-			list = Shadowrun6Core.loadDataItems(SpiritList.class, Spirit.class, core, clazz, "core/data/spirits.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" Contacts");
+			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz, "core/data/spirits.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" spirits");
+			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, core, clazz, "core/data/spritepower.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" sprite powers");
+			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz, "core/data/sprites.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" sprites");
 			list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, core, clazz.getResourceAsStream("core/data/mentorspirits.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
 			
@@ -265,7 +267,7 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" actions");
 			list = Shadowrun6Core.loadDataItems(ComplexFormList.class, ComplexForm.class, set, clazz, "hack_slash/data/complexforms.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" complex forms");
-			list = Shadowrun6Core.loadDataItems(SpriteList.class, Sprite.class, set, clazz, "hack_slash/data/sprites.xml");
+			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, set, clazz, "hack_slash/data/sprites.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" sprites");
 			list = Shadowrun6Core.loadDataItems(DataStructureList.class, DataStructure.class, set, clazz, "hack_slash/data/datastructures.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" data structures");

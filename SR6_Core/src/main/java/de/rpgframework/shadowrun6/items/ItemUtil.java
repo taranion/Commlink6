@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.items;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
@@ -36,11 +38,29 @@ public class ItemUtil {
 
 	public static Predicate<CarriedItem<ItemTemplate>> AMMUNITION_FILTER = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
 	public static Predicate<CarriedItem<ItemTemplate>> MATRIXDEVICES_FILTER = item -> 
-		item.hasFlag(SR6ItemFlag.MATRIX_DEVICE)
-		||
-		(List.of( ItemSubType.matrixDevices()).contains(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()) 
+			item.hasFlag(SR6ItemFlag.MATRIX_DEVICE)
+			||
+			(List.of( ItemSubType.matrixDevices()).contains(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue())
+				||
+				item.getResolved()==ItemUtil.SOFTWARE_LIBRARY_ITEM
 				);
 
+	public static ItemTemplate SOFTWARE_LIBRARY_ITEM = new ItemTemplate();
+	public static CarriedItem<ItemTemplate> SOFTWARE_LIBRARY;
+	
+	
+	static {
+		ItemAttributeDefinition def = new ItemAttributeDefinition(SR6ItemAttribute.SOFTWARE_TYPES);
+		String tmp = Arrays.toString(SoftwareTypes.values());
+		def.setRawValue(tmp.substring(1, tmp.length()-1));
+		SOFTWARE_LIBRARY_ITEM.setAttribute(def);
+		SOFTWARE_LIBRARY_ITEM.setId("software_library");
+		SOFTWARE_LIBRARY_ITEM.addModifications(List.of(new ValueModification(ShadowrunReference.HOOK, ItemHook.SOFTWARE.name(), "99")));
+		
+		SOFTWARE_LIBRARY =  new CarriedItem<ItemTemplate>(SOFTWARE_LIBRARY_ITEM, null, CarryMode.VIRTUAL);
+		SOFTWARE_LIBRARY.addSlot(new AvailableSlot(ItemHook.SOFTWARE, 99));
+	}
+		
 	//-------------------------------------------------------------------
 	public static void addOrSetItemAttribute(CarriedItem<ItemTemplate> ref, ValueModification mod) {
 		if (mod.getReferenceType()!=ShadowrunReference.ITEM_ATTRIBUTE)

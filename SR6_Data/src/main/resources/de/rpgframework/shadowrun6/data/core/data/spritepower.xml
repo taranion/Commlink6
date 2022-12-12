@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<critterpowers>
+    <critterpower id="camouflage"  />
+    <critterpower id="cookie"      />
+    <critterpower id="diagnostics" />
+    <critterpower id="electron_storm" />
+    <critterpower id="hash"      />
+    <critterpower id="override"      />
+    <critterpower id="phantom"      />
+    <critterpower id="stability"      />
+    <critterpower id="suppression"      />
+    <critterpower id="trap"      />
+    <critterpower id="watermark"      />
+</critterpowers>

@@ -27,13 +27,12 @@ import de.rpgframework.shadowrun.Resistance;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
-import de.rpgframework.shadowrun.Spirit;
-import de.rpgframework.shadowrun.Sprite;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.DataStructure;
 import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
@@ -97,8 +96,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SPELL(SR6Spell.class),
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
 	SPELL_CATEGORY(ASpell.Category.class.getAnnotation(DataItemTypeKey.class).id()),
-	SPIRIT(Spirit.class),
-	SPRITE(Sprite.class),
+	SPIRIT(SR6NPC.class),
+	SPRITE(SR6NPC.class),
 	SPRITE_POWER("SpritePower"),
 	SUBSELECT("Subselect"), // Subselect
 	TEXT("TEXT"),
