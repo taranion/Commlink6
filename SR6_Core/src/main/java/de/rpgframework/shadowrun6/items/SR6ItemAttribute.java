@@ -27,6 +27,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	
 	ACCELERATION,
 	AMMUNITION,
+	AMMUNITION_CLASS( new EnumConverter(AmmunitionClass.class)),
 	// Vehicle Armor
 	ARMOR,
 	ATTACK_RATING(new IntegerArrayConverter()),
