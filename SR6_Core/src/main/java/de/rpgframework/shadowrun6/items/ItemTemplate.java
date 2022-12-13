@@ -69,6 +69,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	@ElementListUnion({
 		@ElementList(entry="weapon", type = WeaponData.class, inline = true),
 		@ElementList(entry="armor", type=ArmorData.class, inline=true),
+		@ElementList(entry="ammo", type=AmmunitionData.class, inline=true),
 		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
 		@ElementList(entry="vehicle", type=VehicleData.class, inline=true),
 	})
