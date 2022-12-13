@@ -40,6 +40,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -69,6 +70,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	DATA_STRUCTURE(DataStructure.class),
 	ELEMENT("Element"),
 	GEAR(ItemTemplate.class),
+	GEARMOD(SR6ItemEnhancement.class),
 	HOOK(ItemHook.class, 0),
 	ITEM_ATTRIBUTE(new ItemAttributeConverter()),
 	ITEMFLAG(SR6ItemFlag.class,0),
