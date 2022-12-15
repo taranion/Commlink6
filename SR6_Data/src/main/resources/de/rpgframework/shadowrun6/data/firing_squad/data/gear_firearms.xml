@@ -10,9 +10,10 @@
    </item>
    
    <!-- Light pistols -->
-   <item id="colt_agent_special" avail="3" price="400" modslot="0" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" >
+   <item id="colt_agent_special" avail="3" price="400" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" >
       <weapon dmg="3P" attack="10,8,,," mode="SS/SA" ammo="8(c)" skill="firearms" spec="firearms/pistols_light"/>
       <attrdef id="AMMUNITION_CLASS" value="HEAVY"/>
+      <attrdef id="MODIFICATION_SLOTS" value="HEAVY"/>
    </item>
 	<item id="colt_agent_special_laser_sight" avail="1" price="50" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
 		<usage mode="EMBEDDED" slot="INTERNAL" />
@@ -289,7 +290,8 @@
 	  </modifications>
       <weapon dmg="3P" mode="BF/FA" attack="4,12,10,," ammo="100(belt)" skill="firearms" spec="firearms/machine_guns"/>
    </item>
-   <item id="ingram_black_knight" avail="3L" price="9200" modslot="0" type="WEAPON_FIREARMS" subtype="HMG">
+   <item id="ingram_black_knight" avail="3L" price="9200" type="WEAPON_FIREARMS" subtype="HMG">
+      <attrdef id="MODIFICATION_SLOTS" value="0"/>
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
@@ -302,7 +304,8 @@
       </modifications>
       <weapon dmg="6P" mode="BF/FA" attack="1,10,11,8,8" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
    </item>
-   <item id="ingram_grey_knight" avail="5L" price="7500" modslot="0" type="WEAPON_FIREARMS" subtype="MMG">
+   <item id="ingram_grey_knight" avail="5L" price="7500" type="WEAPON_FIREARMS" subtype="MMG">
+      <attrdef id="MODIFICATION_SLOTS" value="0"/>
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
@@ -314,27 +317,30 @@
       </modifications>
       <weapon dmg="5P" mode="BF/FA" attack="2,10,10,8,6" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
    </item>
-   <item id="ingram_white_knight_mod1" avail="4L" price="5650" modslot="0" type="WEAPON_FIREARMS" subtype="LMG">
-      <modifications>
-         <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="BARREL"/>
-         <itemmod type="HOOK" ref="UNDER"/>
-         <itemmod type="HOOK" ref="STOCK"/>
-         <itemmod type="GEARMOD" ref="smartgun_system_internal"/>
-         <itemmod type="GEARMOD" ref="folding_stock"/>
-      </modifications>
-      <weapon dmg="4P" mode="SA/BF/FA" attack="2,11,12,8,2" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
-   </item>
-   <item id="ingram_white_knight_mod2" avail="3L" price="7500" modslot="0" type="WEAPON_FIREARMS" subtype="LMG">
-      <modifications>
-         <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="BARREL"/>
-         <itemmod type="HOOK" ref="UNDER"/>
-         <itemmod type="HOOK" ref="STOCK"/>
-         <itemmod type="GEARMOD" ref="smartgun_system_internal"/>
-         <itemmod type="GEARMOD" ref="folding_stock"/>
-      </modifications>
+   <item id="ingram_white_knight" avail="3L" price="7500" type="WEAPON_FIREARMS" subtype="LMG" reqVariant="true">
+      <attrdef id="MODIFICATION_SLOTS" value="0"/>
       <weapon dmg="3P" mode="SS/SA/BF" attack="4,10,10,4," ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <itemmod type="GEARMOD" ref="smartgun_system_internal"/>
+         <itemmod type="GEARMOD" ref="folding_stock"/>
+      </modifications>
+      
+      <variant id="model1">
+      	<attrdef id="AVAILABILITY" value="4L"/>
+      	<attrdef id="PRICE" value="5650"/>
+      	<weapon dmg="4P" mode="SA/BF/FA" attack="2,11,12,8,2" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+      </variant>
+      <variant id="model2">
+      	<attrdef id="PRICE" value="7500"/>
+      	<weapon dmg="3P" mode="SS/SA/BF" attack="4,10,10,4," ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+     		<alternate id="long_barrel">
+       		<weapon dmg="4P" mode="SA/BF/FA" attack="2,11,12,8,2" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+      	</alternate>
+      </variant>
    </item>
    <item id="shiawase_arms_nemesis_ii" avail="4L" price="4550" type="WEAPON_FIREARMS" subtype="LMG">
       <modifications>
@@ -396,7 +402,8 @@
    <item id="horizon_flynn_dcom_garotte" avail="4" price="200" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
       <weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
    </item>
-   <item id="narcojet_hornet" avail="3" price="500" modslot="3" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+   <item id="narcojet_hornet" avail="3" price="500" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+      <attrdef id="MODIFICATION_SLOTS" value="3"/>
       <weapon dmg="0P" mode="SS" attack="6,8,10,," ammo="9(m)" skill="exotic_weapons" spec="exotic_weapons/air"/>
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
