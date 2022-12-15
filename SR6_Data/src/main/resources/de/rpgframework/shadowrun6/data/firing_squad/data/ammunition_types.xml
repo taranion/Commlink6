@@ -17,7 +17,8 @@
 	  <modifications>
         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,-1,-1,-2,-2"/>
         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="+1"/>
-        <itemmod type="RULE" ref="CONVERT_ONE_DIE_TO_WILD" apply="DATA_ITEM"/>
+        <checkmod type="SKILL" ref="firearms" value="1" what="REPLACE_WITH_WILD"  apply="DATA_ITEM"/>
+        <!--itemmod type="RULE" ref="CONVERT_ONE_DIE_TO_WILD" apply="DATA_ITEM"/-->
 	  </modifications>
 	</ammotype>
 </ammotypes>
