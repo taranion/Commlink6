@@ -41,6 +41,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.Technique;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.ItemHook;
@@ -105,6 +106,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SPRITE(SR6NPC.class),
 	SPRITE_POWER("SpritePower"),
 	SUBSELECT(new ReturnIdAsResultConverter()), // Subselect
+	TECHNIQUE(Technique.class),
 	TEXT("TEXT"),
 	;
 	

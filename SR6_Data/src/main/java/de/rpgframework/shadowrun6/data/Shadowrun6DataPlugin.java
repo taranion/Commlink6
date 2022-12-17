@@ -75,6 +75,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.SkillList;
+import de.rpgframework.shadowrun6.Technique;
+import de.rpgframework.shadowrun6.TechniqueList;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.AmmunitionTypeList;
 import de.rpgframework.shadowrun6.items.ItemEnhancementList;
@@ -267,10 +269,11 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"firing_squad/data/gear_electronics.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" electronic items");
+			list = Shadowrun6Core.loadDataItems(TechniqueList.class, Technique.class, set, clazz,"firing_squad/data/techniques.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art techniques");
 
 //			ShadowrunCore.loadTechniques    (FSQUAD, clazz.getResourceAsStream("firing_squad/data/techniques.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
 //			ShadowrunCore.loadMartialArts   (FSQUAD, clazz.getResourceAsStream("firing_squad/data/martialarts.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
-//			ShadowrunCore.loadEquipment     (FSQUAD, clazz.getResourceAsStream("firing_squad/data/gear_ammunition.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
 			System.exit(1);
 
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
