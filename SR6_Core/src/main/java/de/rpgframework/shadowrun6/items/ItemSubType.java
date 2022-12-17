@@ -65,6 +65,8 @@ public enum ItemSubType {
 	MISSILES,
 	// ARMOR
 	ARMOR_BODY,
+	ARMOR_SOCIAL,
+	ARMOR_CLOTHES,
 	ARMOR_HELMET,
 	ARMOR_SHIELD,
 	// Cyberware

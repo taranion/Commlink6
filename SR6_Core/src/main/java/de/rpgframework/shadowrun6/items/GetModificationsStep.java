@@ -108,6 +108,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			case SKILL:
 				return ApplyTo.CHARACTER;
 			case ITEM_ATTRIBUTE:
+			case GEAR:
 			case HOOK:
 				return ApplyTo.DATA_ITEM;
 			default:

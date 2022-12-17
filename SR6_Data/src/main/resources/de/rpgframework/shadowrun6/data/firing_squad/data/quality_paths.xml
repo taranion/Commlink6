@@ -39,7 +39,7 @@
 	<qpath id="once_bitten">
 		<step id="immediate_aftermath" level="0">
 			<choices>
-				<choice uuid="bfbfc52f-a174-4fa5-bc14-994b9f11ffc8" type="QUALITY" options="phobia,bad_memories"/>
+				<choice uuid="bfbfc52f-a174-4fa5-bc14-994b9f11ffc8" type="QUALITY" ref="CHOICE" options="phobia,bad_memories"/>
 			</choices>
 			<modifications>
 				<itemmod type="QUALITY" ref="CHOICE" choice="bfbfc52f-a174-4fa5-bc14-994b9f11ffc8"/>

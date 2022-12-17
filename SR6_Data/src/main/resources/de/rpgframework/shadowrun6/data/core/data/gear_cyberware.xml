@@ -3,7 +3,7 @@
    <item avail="2" price="300"    id="biomonitor"       subtype="BIOTECH" type="BIOLOGY"/>
    <item avail="1" price="5000"   id="docwagon_contract"    subtype="BIOTECH" type="BIOLOGY" count="y">
 		<choices>
-			<choice uuid="c64bc34b-1a42-49eb-877b-5da76837a4e1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6">
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6">
 				<subOption id="basic"       cost="500" />
 				<subOption id="gold"        cost="2500" />
 				<subOption id="platin"      cost="5000" />
@@ -25,7 +25,7 @@
    <item avail="1" price="50"    id="first_aid_kit"      subtype="BIOTECH" type="BIOLOGY" count="y"/>
    <item avail="3" price="250"   id="medkit"    subtype="BIOTECH" type="BIOLOGY" count="y">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
 		<attrdef id="PRICE" value="$RATING*250"/>
    </item>
@@ -549,7 +549,7 @@
     <item id="attribute_increase" type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13"/>
-			<choice uuid="d5c88f1f-eb6f-4057-b9d0-b65c212747e6" type="ATTRIBUTE" options="AGILITY,STRENGTH"/>
+			<choice uuid="d5c88f1f-eb6f-4057-b9d0-b65c212747e6" type="ATTRIBUTE" ref="CHOICE" options="AGILITY,STRENGTH"/>
 		</choices>
 		<usage mode="EMBEDDED" value="$RATING" slot="CYBERLIMB_IMPLANT"/>
 		<attrdef id="AVAILABILITY" value="$RATING"/>    

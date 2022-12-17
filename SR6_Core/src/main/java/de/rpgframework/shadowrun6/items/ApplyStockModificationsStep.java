@@ -2,17 +2,17 @@ package de.rpgframework.shadowrun6.items;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
+import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
-import de.rpgframework.genericrpg.items.AAvailableSlot;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.genericrpg.items.Formula;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -43,12 +43,14 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac,
 			CarriedItem<?> model, List<Modification> unprocessed) {
 		
-		@SuppressWarnings("unchecked")
+		logger.log(Level.WARNING, "Decisions are "+model.getDecisions());
+		
+		@SuppressWarnings("unchecked")		
 		CarriedItem<ItemTemplate> model2 = (CarriedItem<ItemTemplate>) model;
 		// Read all modifications that are meant for this item		
 		for (Modification tmp : model.getModifications()) {
 			try {
-				logger.log(Level.DEBUG, "Process {0}", tmp);
+				logger.log(Level.WARNING, "Process {0}", tmp);
 				if (tmp instanceof ValueModification) {
 					applyModification(indent, charac, model2, (ValueModification) tmp);
 				} else if (tmp instanceof EmbedModification) {
@@ -62,7 +64,28 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				logger.log(Level.ERROR, "Error processing "+tmp+" from "+tmp.getSource(),e);
 				System.exit(1);
 			}
-
+		}
+		
+		for (Modification tmp : new ArrayList<>(unprocessed)) {
+			try {
+				logger.log(Level.WARNING, "Process {0}", tmp);
+				boolean processed = false;
+				if (tmp instanceof ValueModification) {
+					processed = applyModification(indent, charac, model2, (ValueModification) tmp);
+				} else if (tmp instanceof EmbedModification) {
+					processed = embedModification(indent, charac, model2, (EmbedModification) tmp);
+				} else if (tmp instanceof DataItemModification) {
+					processed = applyModification(indent, charac, model2, (DataItemModification) tmp);
+				} else {
+					logger.log(Level.ERROR, "Unsupported modification: " + tmp);
+				}
+				if (processed) {
+					unprocessed.remove(tmp);
+				}
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Error processing "+tmp+" from "+tmp.getSource(),e);
+				System.exit(1);
+			}
 		}
 
 		return new OperationResult<List<Modification>>(unprocessed);
@@ -104,11 +127,11 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 
 	// -------------------------------------------------------------------
 	@SuppressWarnings("rawtypes")
-	private void applyModification(String indent, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
+	private boolean applyModification(String indent, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addCharacterModification(mod);
 			logger.log(Level.WARNING, "Ignore for now " + mod);
-			return;
+			return false;
 		}
 
 		Decision[] decs = new Decision[mod.getDecisions().size()];
@@ -130,43 +153,65 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				model.addSlot(slot);
 				}
 			}
-			return;
+			return true;
 		case GEAR:
 			model.addCharacterModification(mod);
-			return;
+			return true;
 		case ITEM_ATTRIBUTE:
 			if (mod instanceof ValueModification) {
 				ItemUtil.addOrSetItemAttribute(model, (ValueModification)mod);
+				return true;
 			} else {
 				logger.log(Level.ERROR, "Not implemented: "+mod.getClass());
+				return false;
 			}
-			return;
 		}
 		logger.log(Level.WARNING, "ToDo: DataItemModification " + mod);
 		System.err.println("ApplyStockModification: unsipported modification type: "+mod.getReferenceType());
 //		model.addModification(mod);
+		return false;
 	}
 
 	// -------------------------------------------------------------------
 	@SuppressWarnings("rawtypes")
-	private void embedModification(String indent, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
+	private boolean embedModification(String indent, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
+		logger.log(Level.WARNING, "Before processing "+mod+" Decisions are "+model.getDecisions());
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addCharacterModification(mod);
 			logger.log(Level.WARNING, "Ignore for now " + mod);
-			return;
+			return false;
 		}
 
+		// Merge the decisions of the modifications and the item itself
+		logger.log(Level.WARNING, "Embed "+mod+" with decisions="+mod.getDecisions());
 		Decision[] decs = new Decision[mod.getDecisions().size()];
 		decs = mod.getDecisions().toArray(decs);
 		switch ((ShadowrunReference) mod.getReferenceType()) {
 		case GEAR:
 			ItemTemplate templ = mod.getReferenceType().resolve(mod.getKey());
+			if ("CHOICE".equals(mod.getKey())) {
+				Choice choice = model.getChoiceMapRecursivly().get( mod.getConnectedChoice() );
+				logger.log(Level.WARNING, "Search choice "+choice+" in decisions "+mod.getDecisions());
+				// Use the decision instead of the key
+				for (Decision d : model.getDecisions()) {
+					logger.log(Level.WARNING, "Compare {0} with {1}", d.getChoiceUUID(), mod.getConnectedChoice());
+					if (d.getChoiceUUID().equals(mod.getConnectedChoice())) {
+						templ = mod.getReferenceType().resolve(d.getValue());
+						logger.log(Level.WARNING, "CHOICE was "+templ);
+						break;
+					}
+				}
+				if (templ==null) {
+					logger.log(Level.ERROR, "Could not find a (valid) decision for CHOICE "+mod.getConnectedChoice());
+					return true;
+				}
+			}
 			ItemHook hook = mod.getHook();
-			logger.log(Level.INFO, "Add instanceof {0} into hook {1} of {2}", mod.getKey(), hook, model.getKey());
+			logger.log(Level.INFO, "Add instanceof {0} into hook {1} of {2} - with {3} decisions", templ.getId(), hook, model.getKey(), decs.length);
 			OperationResult<CarriedItem<ItemTemplate>> carriedR = SR6GearTool.buildItem(templ, CarryMode.EMBEDDED, charac, false, decs);
 			if (carriedR.hasError()) {
 				logger.log(Level.ERROR, "Error embedding {0} into hook {1} of {2}: {3}", mod.getKey(), hook, model.getKey(),carriedR.getError());
-				return;
+				return true;
 			}
 			CarriedItem accessory = carriedR.get();
 			accessory.setInjectedBy(mod.getSource());
@@ -182,10 +227,11 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				model.addSlot(slot);
 			}
 			slot.addEmbeddedItem(accessory);
-			return;
+			return true;
 		}
 		logger.log(Level.WARNING, "ToDo: EmbedModification " + mod);
 //		model.addModification(mod);
+		return false;
 	}
 
 }

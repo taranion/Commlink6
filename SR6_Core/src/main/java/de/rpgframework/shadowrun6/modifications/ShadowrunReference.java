@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
@@ -31,6 +32,7 @@ import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.DataStructure;
+import de.rpgframework.shadowrun6.ReturnIdAsResultConverter;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -64,6 +66,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	AMMUNITION_TYPE(AmmunitionType.class),
 	ATTRIBUTE(new AttributeConverter()),
 	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
+	CARRIED("CarriedItem"),
 	COMPLEX_FORM(ComplexForm.class),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
@@ -101,7 +104,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SPIRIT(SR6NPC.class),
 	SPRITE(SR6NPC.class),
 	SPRITE_POWER("SpritePower"),
-	SUBSELECT("Subselect"), // Subselect
+	SUBSELECT(new ReturnIdAsResultConverter()), // Subselect
 	TEXT("TEXT"),
 	;
 	

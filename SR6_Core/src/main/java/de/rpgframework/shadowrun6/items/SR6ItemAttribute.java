@@ -34,12 +34,16 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	/** Boolean: is this item subject to augmentation grade changes */
 	AUGMENTATION,
 	AVAILABILITY(new AvailabilityConverter()),
+	BLAST_GZ(new WeaponDamageConverter()),
+	BLAST_CLOSE(new WeaponDamageConverter()),
+	BLAST_NEAR(new WeaponDamageConverter()),
+	BLAST_RANGE,
 	// Vehicle Body
 	BODY,
 	// Vehicle Cargo Factor (CF)
 	CARGO,
 	CAPACITY,
-//	CONCEALABILITY,
+	CONCEALABILITY,
 	DAMAGE(new WeaponDamageConverter()),
 	DEFENSE_MATRIX,
 	// Defense Rating against physical attacks
@@ -62,7 +66,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	/** Maximum rating of embedded items */
 	MAX_SENSOR_RATING,
 	MAX_SKILLSOFT_RATING,
-//	MODIFICATION_SLOTS,
+	MODIFICATION_SLOTS,
 	// Vehicle Pilot
 	PILOT,
 	PRICE,

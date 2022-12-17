@@ -20,8 +20,8 @@ public class ArmorData implements IGearTypeData {
 	private int social;
 	@Attribute(name="dr")
 	private int damageReduction;
-//	@Attribute(name="add")
-//	private boolean addsToMain;
+	@Attribute(name="add")
+	private boolean addsToMain;
 
 	//-------------------------------------------------------------------
 	/**
@@ -75,10 +75,9 @@ public class ArmorData implements IGearTypeData {
 		copyTo.setAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL, rating);
 		copyTo.setAttribute(SR6ItemAttribute.DEFENSE_SOCIAL, social);
 		copyTo.setAttribute(SR6ItemAttribute.DAMAGE_REDUCTION, damageReduction);
-		
-//		if (addsToMain) {
-//			System.getLogger("shadowrun6.data").log(Level.WARNING, "ToDo: copy Attributes: addsToMain is ignored");
-//		}
+		if (addsToMain) {
+			copyTo.getFlags().add(SR6ItemFlag.CUMULATIVE.name());
+		}
 	}
 
 }

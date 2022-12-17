@@ -31,7 +31,7 @@
    <item id="gel_weave" avail="6I" price="5000" type="ACCESSORY" subtype="ARMOR_BODY">
       <usage mode="EMBEDDED" slot="ARMOR" value="$RATING*2" />
 		<choices>
-			<choice uuid="adeb159c-6ca3-407b-8641-c76f9b29a49c" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/> 
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/> 
 		</choices>
 		<attrdef id="PRICE" value="$RATING*5000"/>
       <modifications>
@@ -41,7 +41,7 @@
    <item id="mystic_weave" avail="6L" price="10000" type="ACCESSORY" subtype="ARMOR_BODY">
       <usage mode="EMBEDDED" slot="ARMOR" value="$RATING*2" />
 		<choices>
-			<choice uuid="adeb159c-6ca3-407b-8641-c76f9b29a49c" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/> 
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/> 
 		</choices>
 		<attrdef id="PRICE" value="$RATING*5000"/>
 		<attrdef id="DAMAGE_REDUCTION" value="$RATING"/>
@@ -58,21 +58,21 @@
    </item>
    <item id="ruthenium_armor" avail="8I" price="1500" type="ACCESSORY" subtype="ARMOR_BODY">
 		<choices>
-			<choice uuid="adeb159c-6ca3-407b-8641-c76f9b29a49c" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/> 
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/> 
 		</choices>
       <usage mode="EMBEDDED" slot="ARMOR" value="6" />
 		<attrdef id="PRICE" value="$RATING*1500"/>
    </item>
    <item id="shockweave" avail="3L" price="1000" type="ACCESSORY" subtype="ARMOR_BODY">
 		<choices>
-			<choice uuid="adeb159c-6ca3-407b-8641-c76f9b29a49c" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/> 
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/> 
 		</choices>
       <usage mode="EMBEDDED" slot="ARMOR" value="4" />
 		<attrdef id="PRICE" value="$RATING*1000"/>
    </item>
    <item id="thermal_dissipation" avail="2" price="250" type="ACCESSORY" subtype="ARMOR_BODY">
 		<choices>
-			<choice uuid="adeb159c-6ca3-407b-8641-c76f9b29a49c" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/> 
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/> 
 		</choices>
       <usage mode="EMBEDDED" slot="ARMOR" value="3" />
 		<attrdef id="PRICE" value="$RATING*250"/>
@@ -80,7 +80,7 @@
    <item id="toughweave" avail="9I" price="15000" type="ACCESSORY" subtype="ARMOR_BODY">
       <usage mode="EMBEDDED" slot="ARMOR" value="$RATING*3" />
 		<choices>
-			<choice uuid="adeb159c-6ca3-407b-8641-c76f9b29a49c" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/> 
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/> 
 		</choices>
 		<attrdef id="DAMAGE_REDUCTION" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*15000"/>

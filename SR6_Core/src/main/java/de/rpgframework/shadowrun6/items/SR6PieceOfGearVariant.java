@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.prelle.simplepersist.Attribute;
+import org.prelle.simplepersist.ElementList;
+import org.prelle.simplepersist.ElementListUnion;
 import org.prelle.simplepersist.IgnoreMissingAttributes;
 
 import de.rpgframework.genericrpg.data.Choice;
@@ -28,6 +30,14 @@ public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	 */
 	@Attribute(name="modonly")
 	private boolean modOnly;
+
+	@ElementListUnion({
+		@ElementList(entry="weapon", type = WeaponData.class, inline = true),
+		@ElementList(entry="armor", type=ArmorData.class, inline=true),
+		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
+		@ElementList(entry="vehicle", type=VehicleData.class, inline=true),
+	})
+	private List<IGearTypeData> shortcuts = new ArrayList<>(); 
 
 	//-------------------------------------------------------------------
 	public SR6PieceOfGearVariant() {

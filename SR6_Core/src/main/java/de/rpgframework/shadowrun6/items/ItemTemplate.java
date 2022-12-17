@@ -174,6 +174,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		
 		// Validate hook identifier in modifications
 		for (Modification tmp : getModifications()) {
+			tmp.validate();
 			if (tmp instanceof EmbedModification) {
 				try {
 					((EmbedModification)tmp).getHook();
