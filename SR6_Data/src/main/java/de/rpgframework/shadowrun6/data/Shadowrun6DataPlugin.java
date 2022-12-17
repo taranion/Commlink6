@@ -263,10 +263,11 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" MEMS accessories");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"firing_squad/data/gear_armor.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"firing_squad/data/gear_electronics.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" electronic items");
 
 //			ShadowrunCore.loadTechniques    (FSQUAD, clazz.getResourceAsStream("firing_squad/data/techniques.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
 //			ShadowrunCore.loadMartialArts   (FSQUAD, clazz.getResourceAsStream("firing_squad/data/martialarts.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
-//			ShadowrunCore.loadEquipment     (FSQUAD, clazz.getResourceAsStream("firing_squad/data/gear_armor.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
 //			ShadowrunCore.loadEquipment     (FSQUAD, clazz.getResourceAsStream("firing_squad/data/gear_electronics.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
 //			ShadowrunCore.loadEquipment     (FSQUAD, clazz.getResourceAsStream("firing_squad/data/gear_ammunition.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
 //			ShadowrunCore.loadQualities     (FSQUAD, clazz.getResourceAsStream("firing_squad/data/qualities.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources()); 
