@@ -158,12 +158,14 @@
 	</item>
 	<item id="pulse" avail="7I" price="3500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
 		<weapon dmg="1S" mode="SS" attack="8,10,,," ammo="20(c)" skill="exotic_weapons" spec="exotic_weapons/emitter"  wild="true"/>
+      <attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
 	</item>
 	<item id="hell_turtle" avail="6I" price="3500" type="WEAPON_SPECIAL" subtype="THROWERS">
 		<modifications>
 			<itemmod type="GEARMOD" ref="smartgun_system_internal" />
 		</modifications>
 		<weapon dmg="3P" mode="SS" attack="6,10,,," ammo="15(c)/150(belt)" skill="exotic_weapons" spec="exotic_weapons/spray"  wild="true"/>
+      <attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
 	</item>
 	<item id="honey_badger" avail="6I" price="7500" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
 		<modifications>

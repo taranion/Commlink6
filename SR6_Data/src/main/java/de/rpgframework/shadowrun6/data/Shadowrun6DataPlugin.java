@@ -242,6 +242,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
 			list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"firing_squad/data/ammunition_types.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"firing_squad/data/gear_ammunition.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunitions");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz,"firing_squad/data/qualities.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 			list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"firing_squad/data/quality_paths.xml");
@@ -268,9 +270,7 @@ public class Shadowrun6DataPlugin  {
 
 //			ShadowrunCore.loadTechniques    (FSQUAD, clazz.getResourceAsStream("firing_squad/data/techniques.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
 //			ShadowrunCore.loadMartialArts   (FSQUAD, clazz.getResourceAsStream("firing_squad/data/martialarts.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
-//			ShadowrunCore.loadEquipment     (FSQUAD, clazz.getResourceAsStream("firing_squad/data/gear_electronics.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
 //			ShadowrunCore.loadEquipment     (FSQUAD, clazz.getResourceAsStream("firing_squad/data/gear_ammunition.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
-//			ShadowrunCore.loadQualities     (FSQUAD, clazz.getResourceAsStream("firing_squad/data/qualities.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources()); 
 			System.exit(1);
 
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
