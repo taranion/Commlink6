@@ -61,6 +61,8 @@ import de.rpgframework.shadowrun.TraditionList;
 import de.rpgframework.shadowrun6.ActionList;
 import de.rpgframework.shadowrun6.DataStructure;
 import de.rpgframework.shadowrun6.DataStructureList;
+import de.rpgframework.shadowrun6.MartialArts;
+import de.rpgframework.shadowrun6.MartialArtsList;
 import de.rpgframework.shadowrun6.MetaTypeList;
 import de.rpgframework.shadowrun6.NPCList;
 import de.rpgframework.shadowrun6.QualityPath;
@@ -271,9 +273,9 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" electronic items");
 			list = Shadowrun6Core.loadDataItems(TechniqueList.class, Technique.class, set, clazz,"firing_squad/data/techniques.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art techniques");
+			list = Shadowrun6Core.loadDataItems(MartialArtsList.class, MartialArts.class, set, clazz,"firing_squad/data/martialarts.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art styles");
 
-//			ShadowrunCore.loadTechniques    (FSQUAD, clazz.getResourceAsStream("firing_squad/data/techniques.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
-//			ShadowrunCore.loadMartialArts   (FSQUAD, clazz.getResourceAsStream("firing_squad/data/martialarts.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
 			System.exit(1);
 
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
