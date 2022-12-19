@@ -66,7 +66,6 @@ public class ItemUtilJFX {
 		ItemAttributeValue<?> raw = carried.getAttributeRaw(attrib);
 		if (raw==null)
 			return;
-		logger.log(Level.WARNING, "addColumn("+attrib+") = "+raw);
 		
 		int x = table.getColumnCount();
 		Label header  = new Label(attrib.getShortName());

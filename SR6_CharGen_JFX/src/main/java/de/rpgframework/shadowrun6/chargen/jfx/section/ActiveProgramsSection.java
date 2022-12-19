@@ -182,7 +182,7 @@ public class ActiveProgramsSection extends GearSection {
 				if (devices.isEmpty()) cbDevice.setValue(null);
 				else cbDevice.setValue(devices.get(0));
 			}
-			embeddable = ItemUtil.getEmbeddableIn(cbDevice.getValue(), ItemHook.SOFTWARE);
+			embeddable = (cbDevice.getValue()!=null)?ItemUtil.getEmbeddableIn(cbDevice.getValue(), ItemHook.SOFTWARE):List.of();
 			
 			// Update programs
 			refreshPrograms();

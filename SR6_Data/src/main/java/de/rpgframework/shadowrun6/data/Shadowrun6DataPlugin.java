@@ -276,7 +276,7 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(MartialArtsList.class, MartialArts.class, set, clazz,"firing_squad/data/martialarts.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art styles");
 
-			System.exit(1);
+//			System.exit(1);
 
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH);
@@ -309,8 +309,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" data structures");
 			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
-			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+//			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities.xml");
+//			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "hack_slash/data/gear_customcyber.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" custom cyberdeck items");
 			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "hack_slash/data/critterpower.xml");
@@ -319,12 +319,12 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" vitual lifeform qualities");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "hack_slash/data/metatypes.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" AI types");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"hack_slash/data/gear_codemods.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" codemods");
-			list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,"hack_slash/data/mentorspirits.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" paragons");
-			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_streams.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" streams");
+//			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"hack_slash/data/gear_codemods.xml");
+//			logger.log(Level.DEBUG, "Loaded "+list.size()+" codemods");
+//			list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,"hack_slash/data/mentorspirits.xml");
+//			logger.log(Level.DEBUG, "Loaded "+list.size()+" paragons");
+//			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_streams.xml");
+//			logger.log(Level.DEBUG, "Loaded "+list.size()+" streams");
 
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());

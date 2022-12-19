@@ -32,6 +32,7 @@ import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
@@ -183,7 +184,7 @@ public class EquipmentCtrlTest {
 	//-------------------------------------------------------------------
 	@Test
 	public void loadSoftware() {
-		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "mct_360");
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "maersk_spider");
 		ItemTemplate needle = Shadowrun6Core.getItem(ItemTemplate.class, "targeting");
 		
 		// New create an item
@@ -195,6 +196,12 @@ public class EquipmentCtrlTest {
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.NUYEN.name(), 600));
 		charGen.runProcessors();
 		Possible poss = ctrl.canBeEmbedded(result.get(), ItemHook.SOFTWARE, needle, null);
+		assertTrue(poss.toString(),poss.get());
+		
+		// Check that it can be assigned to library as well
+		// ResetModifications creates SoftwareLibrary
+		(new ResetModifications(model)).process(ItemUtil.SOFTWARE_LIBRARY_ITEM.getModifications());
+		poss = ctrl.canBeEmbedded(model.getSoftwareLibrary(), ItemHook.SOFTWARE, needle, null);
 		assertTrue(poss.toString(),poss.get());
 	}
 

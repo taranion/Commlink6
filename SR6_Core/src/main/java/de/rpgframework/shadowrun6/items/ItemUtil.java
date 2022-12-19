@@ -87,6 +87,7 @@ public class ItemUtil {
 	//-------------------------------------------------------------------
 	public static List<ItemTemplate> getEmbeddableIn(CarriedItem<ItemTemplate> ref, ItemHook slot) {
 		logger.log(Level.INFO, "getEmbeddableIn({0}, {1})", ref, slot);
+		if (ref==null) throw new NullPointerException("ref");
 		List<ItemTemplate> ret = new ArrayList<>();
 		ret = Shadowrun6Core.getItemList(ItemTemplate.class)
 			.stream()
