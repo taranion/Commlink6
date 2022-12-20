@@ -1,35 +1,218 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item id="shadowrunner_starter_pack" price="25000" type="PACK" subtype="COMPLETE_PACK">
+
+   <item id="starterpack" price="25000" type="PACK" subtype="COMPLETE_PACK" >
       <modifications>
-         <!--itemmod type="GEAR" ref="fake_sin">
-         	<decision uuid="" ref="4"/>
-         </itemmod-->
-         <itemmod type="GEAR" ref="hermes_ikon" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="meta_link" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="security_tag" variant="stealth_tag" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="bug_scanner" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="tag_eraser" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="jammer" variant="area" apply="CHARACTER"><decision choice="720ed738-46d2-4124-bd6f-5ed62025be20" value="6"/></itemmod>
-         <itemmod type="GEAR" ref="micro-transceiver" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="plastic_straps" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="miniwelder" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="miniwelder_fuel" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="miniwelder_fuel" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="gas_mask" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="respirator" apply="CHARACTER"><decision choice="56b520d3-0a66-45dd-ae9c-0cff597895cc" value="6"/></itemmod>
-         <itemmod type="GEAR" ref="climbing_gear" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="survival_kit" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="flashlight" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="gecko_tape_gloves" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="grapple_gun" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="biomonitor" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="stim_patch" apply="CHARACTER"><decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="6"/></itemmod>
-         <itemmod type="GEAR" ref="stim_patch" apply="CHARACTER"><decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="6"/></itemmod>
-         <itemmod type="GEAR" ref="trauma_patch" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="trauma_patch" apply="CHARACTER"/>
-         <itemmod type="LIFESTYLE" ref="low" apply="CHARACTER"/>
-         <itemmod type="GEAR" ref="trid_projector" apply="CHARACTER"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="respirator"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></itemmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="jammer" variant ="area"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></itemmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="grapple_gun" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="standard_rope" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="gas_mask" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="gecko_tape_gloves" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="mapsoft" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="climbing_gear" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="hermes_ikon" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="meta_link" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="micro-transceiver" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="miniwelder" />
+         <valmod type="GEAR" apply="CHARACTER" ref="miniwelder_fuel" value="2" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="plastic_straps" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="tag_eraser" />
+         <valmod type="GEAR" apply="CHARACTER" ref="security_tag" variant ="stealth_tag" value="10" />
+         <valmod type="GEAR" apply="CHARACTER" ref="stim_patch" value="2"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></valmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="survival_kit" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="flashlight" />
+         <valmod type="GEAR" apply="CHARACTER" ref="trauma_patch" value="2" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="trid_projector" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
+         <!--itemmod type="SIN" apply="CHARACTER" ref="fake_sin"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/></itemmod>
+         <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/></valmod-->
+         <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
       </modifications>
-   </item>
+   </item> 
+
+   <item id="dirt_poor" price="8000" type="PACK" subtype="COMPLETE_PACK" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="defiance_super_shock" id="c65eaf0a-a374-4126-8b60-8fe2053e68e8" />
+             <embed  type="GEAR" intoId="c65eaf0a-a374-4126-8b60-8fe2053e68e8" ref="hidden_arm_slide" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="ammo_taser"><decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/></itemmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="shock_gloves" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor_vest" id="d2a86369-8c3b-4c7e-968c-36cb782f305d" />
+             <embed  type="GEAR" intoId="d2a86369-8c3b-4c7e-968c-36cb782f305d" ref="chemical_protection" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="d2a86369-8c3b-4c7e-968c-36cb782f305d" ref="cold_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="d2a86369-8c3b-4c7e-968c-36cb782f305d" ref="electricity_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="d2a86369-8c3b-4c7e-968c-36cb782f305d" ref="fire_resistance" intoType="HOOK" intoRef="ARMOR"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="c12bf51f-7521-43bd-ba07-cf581a05c484"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
+             <embed  type="GEAR" intoId="c12bf51f-7521-43bd-ba07-cf581a05c484" ref="flare_compensation" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="c12bf51f-7521-43bd-ba07-cf581a05c484" ref="image_link" intoType="HOOK" intoRef="OPTICAL"/>
+             <selmod>
+             <embed  type="GEAR" intoId="c12bf51f-7521-43bd-ba07-cf581a05c484" ref="low_light_vision" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="c12bf51f-7521-43bd-ba07-cf581a05c484" ref="thermographic_vision" intoType="HOOK" intoRef="OPTICAL"/>
+             </selmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="micro-transceiver" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="sony_emporer" />
+         <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
+      </modifications>
+   </item> 
+
+   <item id="full_magician" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
+         <valmod type="GEAR" apply="CHARACTER" ref="throwing_knives" value="4" />
+         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" value="2" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor_jacket" id="75211f9b-6625-4694-a10f-8bec741313bf" />
+             <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" ref="chemical_protection" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" ref="cold_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" ref="electricity_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" ref="fire_resistance" intoType="HOOK" intoRef="ARMOR"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="magical_lodge_materials"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></itemmod>
+         <valmod type="GEAR" apply="CHARACTER" ref="reagents_per_dram" value="100" />
+         <valmod type="GEAR" apply="CHARACTER" ref="stim_patch" value="10"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></valmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="mage-sight-goggles" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="periscope" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars_optical" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="49a400ab-3726-44be-b36e-c4348dc5fce9"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
+             <embed  type="GEAR" intoId="49a400ab-3726-44be-b36e-c4348dc5fce9" ref="flare_compensation" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="49a400ab-3726-44be-b36e-c4348dc5fce9" ref="image_link" intoType="HOOK" intoRef="OPTICAL"/>
+             <selmod>
+             <embed  type="GEAR" intoId="49a400ab-3726-44be-b36e-c4348dc5fce9" ref="low_light_vision" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="49a400ab-3726-44be-b36e-c4348dc5fce9" ref="thermographic_vision" intoType="HOOK" intoRef="OPTICAL"/>
+             </selmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="chrysler-nissan_jackrabbit" id="e7938824-ea2b-458d-b364-ebe843a61313" />
+             <embed  type="GEAR" intoId="e7938824-ea2b-458d-b364-ebe843a61313" ref="maneuvering" intoType="HOOK" intoRef="SOFTWARE"/>
+         <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
+         <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" remove="y" />
+      </modifications>
+   </item> 
+
+   <item id="close_combat" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="combat_axe" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="katana" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="polearm" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="telescopic_staff" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="combat_knife" />
+         <valmod type="GEAR" apply="CHARACTER" ref="throwing_knives" value="4" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor_vest" id="26426400-cabd-420d-a21c-b2ce51ceebed" />
+             <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" ref="chemical_protection" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" ref="cold_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" ref="electricity_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" ref="fire_resistance" intoType="HOOK" intoRef="ARMOR"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="weapon_focus"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
+      </modifications>
+   </item> 
+
+   <item id="face" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="shock_gloves" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="crossbow_collapsible_light" id="01da8b52-3a04-403a-b269-3740e5418b76" />
+             <embed  type="GEAR" intoId="01da8b52-3a04-403a-b269-3740e5418b76" ref="concealable_holster" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+         <valmod type="GEAR" apply="CHARACTER" ref="ammo_injection_bolt" value="5"><decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/></valmod>
+         <valmod type="GEAR" apply="CHARACTER" ref="narcoject" value="5" />
+         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" value="2" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="flash_pak" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="armante_suitdress" id="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" />
+             <embed  type="GEAR" intoId="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" ref="electrochromic_feature" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" ref="hidden_pocket" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" ref="chemical_protection" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" ref="electricity_resistance" intoType="HOOK" intoRef="ARMOR"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="actioneer_business" id="4e99806d-ce84-467f-b9a7-a61d8b693cf4" />
+             <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" ref="electrochromic_feature" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" ref="hidden_pocket" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" ref="chemical_protection" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" ref="cold_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" ref="electricity_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" ref="fire_resistance" intoType="HOOK" intoRef="ARMOR"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="lined_coat" id="438a8240-5392-4c04-b697-588d92c0470b" />
+             <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" ref="electrochromic_feature" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" ref="hidden_pocket" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" ref="chemical_protection" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" ref="cold_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" ref="electricity_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" ref="fire_resistance" intoType="HOOK" intoRef="ARMOR"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="cellular_glove_molder"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/></itemmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="keycard_copier" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="lockpick_set" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="kit" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="white_noise_generator" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="b5dc0a69-4aba-47c0-97eb-afb530f07041"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
+             <embed  type="GEAR" intoId="b5dc0a69-4aba-47c0-97eb-afb530f07041" ref="flare_compensation" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="b5dc0a69-4aba-47c0-97eb-afb530f07041" ref="image_link" intoType="HOOK" intoRef="OPTICAL"/>
+             <selmod>
+             <embed  type="GEAR" intoId="b5dc0a69-4aba-47c0-97eb-afb530f07041" ref="low_light_vision" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="b5dc0a69-4aba-47c0-97eb-afb530f07041" ref="thermographic_vision" intoType="HOOK" intoRef="OPTICAL"/>
+             </selmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="earbuds" id="f7200ba0-8918-4428-83bb-1661256b4453"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
+             <embed  type="GEAR" intoId="f7200ba0-8918-4428-83bb-1661256b4453" ref="audio_enhancement" intoType="HOOK" intoRef="AUDIO"/>
+             <embed  type="GEAR" intoId="f7200ba0-8918-4428-83bb-1661256b4453" ref="select_sound_filter" intoType="HOOK" intoRef="AUDIO"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="33160458-39bf-4b37-b9fe-7235db42a165"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/></itemmod>
+             <embed  type="GEAR" intoId="33160458-39bf-4b37-b9fe-7235db42a165" ref="ultrasound_link" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="33160458-39bf-4b37-b9fe-7235db42a165" ref="vision_enhancement" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="33160458-39bf-4b37-b9fe-7235db42a165" ref="vision_magnification" intoType="HOOK" intoRef="OPTICAL"/>
+         <valmod type="GEAR" apply="CHARACTER" ref="credstick_standard" value="3" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="credstick_silver" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="credstick_gold" />
+      </modifications>
+   </item> 
+
+   <item id="gunslinger" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="ruger_super_warhawk" id="8c273080-e5b3-4179-ad90-f1c769e9ba66" />
+             <embed  type="GEAR" intoId="8c273080-e5b3-4179-ad90-f1c769e9ba66" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL"/>
+             <embed  type="GEAR" intoId="8c273080-e5b3-4179-ad90-f1c769e9ba66" ref="quick_draw_holster" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+             <embed  type="GEAR" intoId="8c273080-e5b3-4179-ad90-f1c769e9ba66" ref="speed_loader" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+         <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10"><decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/></valmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" />
+             <embed  type="GEAR" intoId="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" ref="quick_draw_holster" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+             <embed  type="GEAR" intoId="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" ref="spare_clip" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+         <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10"><decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/></valmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="rudger_redhawk" id="90d6c6fd-cfc7-40f6-afe8-c96d202b6a4d" />
+             <embed  type="GEAR" intoId="90d6c6fd-cfc7-40f6-afe8-c96d202b6a4d" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL"/>
+             <embed  type="GEAR" intoId="90d6c6fd-cfc7-40f6-afe8-c96d202b6a4d" ref="hidden_arm_slide" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+             <embed  type="GEAR" intoId="90d6c6fd-cfc7-40f6-afe8-c96d202b6a4d" ref="speed_loader" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+         <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10"><decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/></valmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="ares_light_fire_75" id="5e485857-314c-4ec8-894a-977041abb904" />
+             <embed  type="GEAR" intoId="5e485857-314c-4ec8-894a-977041abb904" ref="hidden_arm_slide" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+             <embed  type="GEAR" intoId="5e485857-314c-4ec8-894a-977041abb904" ref="spare_clip" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+         <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10"><decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/></valmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="mossberg_cmdt" id="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" />
+             <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL"/>
+             <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL"/>
+             <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" ref="shock_pad" intoType="HOOK" intoRef="STOCK"/>
+             <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" ref="spare_clip" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+         <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10"><decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/></valmod>
+         <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10"><decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/></valmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="cavalier_arms_crocket_ebr" id="8b3d153f-5236-4da0-8fef-7ed952c0890e" />
+             <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL"/>
+             <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" ref="silencer" intoType="HOOK" intoRef="BARREL"/>
+             <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" ref="spare_clip" intoType="HOOK" intoRef="FIREARMS_EXTERNAL"/>
+         <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="12"><decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/></valmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="lined_coat" id="9f833414-4de4-4894-804a-43069f8dcfe8" />
+             <embed  type="GEAR" intoId="9f833414-4de4-4894-804a-43069f8dcfe8" ref="chemical_protection" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="9f833414-4de4-4894-804a-43069f8dcfe8" ref="cold_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="9f833414-4de4-4894-804a-43069f8dcfe8" ref="electricity_resistance" intoType="HOOK" intoRef="ARMOR"/>
+             <embed  type="GEAR" intoId="9f833414-4de4-4894-804a-43069f8dcfe8" ref="fire_resistance" intoType="HOOK" intoRef="ARMOR"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="f44b7a45-93c3-409b-9a23-b8d9a7faee32"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
+             <embed  type="GEAR" intoId="f44b7a45-93c3-409b-9a23-b8d9a7faee32" ref="image_link" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="f44b7a45-93c3-409b-9a23-b8d9a7faee32" ref="smartlink" intoType="HOOK" intoRef="OPTICAL"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="earbuds" id="4a8a85d7-5da6-414c-bcc0-2648b2fc5538"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
+             <embed  type="GEAR" intoId="4a8a85d7-5da6-414c-bcc0-2648b2fc5538" ref="audio_enhancement" intoType="HOOK" intoRef="AUDIO"/>
+             <embed  type="GEAR" intoId="4a8a85d7-5da6-414c-bcc0-2648b2fc5538" ref="spatial_recognizer" intoType="HOOK" intoRef="AUDIO"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="6d45d24f-14af-4cf9-bacb-6c6e083ccb13"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/></itemmod>
+             <embed  type="GEAR" intoId="6d45d24f-14af-4cf9-bacb-6c6e083ccb13" ref="flare_compensation" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="6d45d24f-14af-4cf9-bacb-6c6e083ccb13" ref="vision_enhancement" intoType="HOOK" intoRef="OPTICAL"/>
+             <embed  type="GEAR" intoId="6d45d24f-14af-4cf9-bacb-6c6e083ccb13" ref="vision_magnification" intoType="HOOK" intoRef="OPTICAL"/>
+      </modifications>
+   </item> 
+
 </items>
