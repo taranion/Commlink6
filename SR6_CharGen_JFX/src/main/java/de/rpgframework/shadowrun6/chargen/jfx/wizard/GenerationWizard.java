@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.function.Function;
 
 import org.prelle.javafx.AlertType;
@@ -12,6 +13,7 @@ import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
@@ -47,6 +49,8 @@ import javafx.util.Callback;
  *
  */
 public class GenerationWizard extends Wizard implements ControllerListener {
+	
+	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
 
 	private final static Logger logger = System.getLogger(GenerationWizard.class.getName());
 	
@@ -172,7 +176,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			public Boolean call(Wizard param) {
 				logger.log(Level.WARNING, "ToDo: ask user to confirm cancellation");
 				
-				CloseType type = FlexibleApplication.getInstance().showAlertAndCall(AlertType.CONFIRMATION, "Really cancel?", "Do you really want to quit?");
+				CloseType type = FlexibleApplication.getInstance().showAlertAndCall(AlertType.CONFIRMATION, ResourceI18N.get(RES, "confirm.cancel.title"), ResourceI18N.get(RES, "confirm.cancel.mess"));
 				logger.log(Level.WARNING, "User confirmed cancellation: "+type);
 				if (type==CloseType.OK || type==CloseType.YES) {
 					return Boolean.TRUE;
