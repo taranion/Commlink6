@@ -139,7 +139,7 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 	 */
 	@Override
 	public String getSelectionCostString(Ritual data) {
-		return String.valueOf(getSelectionCostString(data));
+		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------

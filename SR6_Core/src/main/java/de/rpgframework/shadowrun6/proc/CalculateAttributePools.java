@@ -143,7 +143,7 @@ public class CalculateAttributePools implements ProcessingStep {
 		}
 		logger.log(Level.DEBUG, "{0} ARTIFICIAL : {1}",aVal.getModifyable(), pool.getCalculation(ValueType.ARTIFICIAL));
 		
-		logger.log(Level.INFO, "{0}: converted {1} to {2}", aVal.getModifyable(), aVal.getModifiedValue(), aVal.getPool().toString());
+		logger.log(Level.DEBUG, "{0}: converted {1} to {2}", aVal.getModifyable(), aVal.getModifiedValue(), aVal.getPool().toString());
 	}
 
 }

@@ -80,6 +80,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ITEMFLAG(SR6ItemFlag.class,0),
 	ITEMTYPE(ItemType.class,0),
 	ITEMSUBTYPE(ItemSubType.class,0),
+	LICENSE("License"),
 	LIFESTYLE(new LifestyleQualityConverter()),
 	MAGIC_RESO(MagicOrResonanceType.class),
 	MATRIX_ATTRIBUTE(new ItemAttributeConverter()),

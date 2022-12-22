@@ -62,7 +62,7 @@
          <valmod type="GEAR" apply="CHARACTER" ref="throwing_knives" value="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" value="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade" value="2" />
          <itemmod type="GEAR" apply="CHARACTER" ref="armor_jacket" id="75211f9b-6625-4694-a10f-8bec741313bf" />
              <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" ref="chemical_protection" intoType="HOOK" intoRef="ARMOR"/>
              <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" ref="cold_resistance" intoType="HOOK" intoRef="ARMOR"/>

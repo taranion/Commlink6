@@ -218,7 +218,12 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 		TitledComponent tcTrad = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.tradition"), cbTradition);
 		TitledComponent tcDist = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.distribute"), mysticGrid);
 		
-		return new VBox(10, tcTrad, tcDist, descTradition);
+		VBox ret = new VBox(10, tcTrad, tcDist, descTradition);
+		if (charGen.getModel().getCharGenUsed()!=null && charGen.getModel().getCharGenUsed().equals("pointbuy")) {
+			ret.getChildren().remove(tcDist);
+		}
+		
+		return ret;
 	}
 
 	//-------------------------------------------------------------------

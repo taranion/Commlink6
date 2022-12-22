@@ -63,6 +63,16 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		normalToDos    = new ArrayList<>();
 		knowledgeToDos = new ArrayList<>();
 	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator#getPerSkill(de.rpgframework.shadowrun6.SR6SkillValue)
+	 */
+	@Override
+	protected PerSkillPoints getPerSkill(SR6SkillValue value) {
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+		return settings.get(value);
+	}
 
 	//-------------------------------------------------------------------
 	/**
