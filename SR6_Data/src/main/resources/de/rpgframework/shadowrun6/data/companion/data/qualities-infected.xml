@@ -225,7 +225,7 @@
 			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" />
 		</modifications>
 	</quality>
-	<quality id="lopu_garou" karma="30" pos="true" type="INFECTED">
+	<quality id="loup_garou" karma="30" pos="true" type="INFECTED">
 		<requires>
 			<datareq type="METATYPE" ref="human" apply="CHARACTER"/>
 		</requires>
@@ -272,7 +272,7 @@
 			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" />
 		</modifications>
 	</quality>
-	<quality id="nibliinaabe" karma="32" pos="true" type="INFECTED">
+	<quality id="nibiinaabe" karma="32" pos="true" type="INFECTED">
 		<requires>
 			<datareq type="METATYPE" ref="merrow" apply="CHARACTER"/>
 		</requires>
