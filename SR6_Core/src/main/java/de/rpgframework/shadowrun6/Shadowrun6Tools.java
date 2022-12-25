@@ -456,6 +456,9 @@ public class Shadowrun6Tools {
 				if (tmp.getMaxValue()>0) {
 					return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" <="+tmp.getMaxValue();			
 				}
+				if ("$RATING".equals(tmp.getRawValue())) {
+					return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" >= "+RES.getString("label.rating", loc);
+				}
 				return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" "+tmp.getValue()+"+";			
 			case SKILL:
 				item = ShadowrunReference.resolve(type, req.getKey());
