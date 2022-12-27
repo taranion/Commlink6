@@ -74,7 +74,7 @@
          <valmod type="GEAR" apply="CHARACTER" ref="stim_patch" value="10"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="mage-sight-goggles" />
          <itemmod type="GEAR" apply="CHARACTER" ref="periscope" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars_optical" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" variant="optical"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="49a400ab-3726-44be-b36e-c4348dc5fce9"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
              <embed  type="GEAR" intoId="49a400ab-3726-44be-b36e-c4348dc5fce9" ref="flare_compensation" intoType="HOOK" intoRef="OPTICAL"/>
              <embed  type="GEAR" intoId="49a400ab-3726-44be-b36e-c4348dc5fce9" ref="image_link" intoType="HOOK" intoRef="OPTICAL"/>
@@ -104,7 +104,7 @@
              <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" ref="electricity_resistance" intoType="HOOK" intoRef="ARMOR"/>
              <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" ref="fire_resistance" intoType="HOOK" intoRef="ARMOR"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="weapon_focus"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
+         <itemmod type="FOCUS" apply="CHARACTER" ref="weapon_focus"><decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></itemmod>
       </modifications>
    </item> 
 
@@ -118,7 +118,7 @@
          <valmod type="GEAR" apply="CHARACTER" ref="narcoject" value="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" value="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade" value="2" />
          <itemmod type="GEAR" apply="CHARACTER" ref="flash_pak" />
          <itemmod type="GEAR" apply="CHARACTER" ref="armante_suitdress" id="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" />
              <embed  type="GEAR" intoId="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" ref="electrochromic_feature" intoType="HOOK" intoRef="ARMOR"/>

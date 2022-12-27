@@ -210,6 +210,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_drones.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_magical.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic gear");
 			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, core, clazz,"core/data/metamagics.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" metamagics");
 			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, core, clazz,"core/data/echoes.xml");
@@ -296,7 +298,7 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" metatypes");
 			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, core, clazz,"companion/data/transhumanism.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" transhumanisms");
-			//list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-complete.xml");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-complete.xml");
 //			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/SR6C_Packs_WIP_1.xml");
 			//logger.log(Level.DEBUG, "Loaded "+list.size()+" complete PACKs");
 

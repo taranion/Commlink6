@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.CritterPower;
+import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
@@ -73,6 +74,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	CRITTER_POWER(CritterPower.class),
 	DATA_STRUCTURE(DataStructure.class),
 	ELEMENT("Element"),
+	FOCUS(Focus.class),
 	GEAR(ItemTemplate.class),
 	GEARMOD(SR6ItemEnhancement.class),
 	HOOK(ItemHook.class, 0),
