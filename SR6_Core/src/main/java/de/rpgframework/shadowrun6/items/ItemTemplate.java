@@ -191,6 +191,8 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			}
 		}
 		
+		validateModificationSlots();
+		
 		// If it is a firearm, mark it that the user may select to use caseless 
 		// ammo with it
 		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS) {
@@ -313,6 +315,54 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		} // End of ammunition check
 	}
 
+	private void validateModificationSlots() {
+		switch (type) {
+		case WEAPON_CLOSE_COMBAT:
+			setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 2);
+			break;
+		case WEAPON_RANGED:
+			if (subtype==ItemSubType.THROWING) {
+				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0);
+			} else {
+				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 2);
+			}
+			break;
+		case WEAPON_FIREARMS:
+			switch (subtype) {
+			case TASERS       : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 2); break;
+			case HOLDOUTS     : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0); break;
+			case PISTOLS_LIGHT: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 3); break;
+			case PISTOLS_HEAVY: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 3); break;
+			case MACHINE_PISTOLS: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 3); break;
+			case SUBMACHINE_GUNS: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			case SHOTGUNS     : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 5); break;
+			case RIFLE_SNIPER : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 5); break;
+			case RIFLE_HUNTING: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 5); break;
+			case RIFLE_ASSAULT: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 6); break;
+			case LMG          : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			case MMG          : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			case HMG          : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			case ASSAULT_CANNON: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			}
+			break;
+		case WEAPON_SPECIAL:
+			if (subtype==ItemSubType.LAUNCHERS) {
+				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0);
+			} else {
+				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 2);
+			}
+			break;
+		case AMMUNITION:
+			switch (subtype) {
+			case GRENADES:       
+			case AMMUNITION: 
+				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 1); 
+				break;
+			}
+			break;
+		} 
+	}
+	
 	
 //	//-------------------------------------------------------------------
 //	public List<SR6GearUsage> getAlternates() {

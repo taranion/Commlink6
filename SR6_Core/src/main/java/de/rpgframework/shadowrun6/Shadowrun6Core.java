@@ -25,8 +25,10 @@ import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.character.CharacterIOException.ErrorCode;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.DataSet;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericCore;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTable;
 import de.rpgframework.shadowrun.PriorityTableEntry;
@@ -34,7 +36,9 @@ import de.rpgframework.shadowrun.PriorityTableEntryList;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellFeature;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 
 /**
  * @author prelle
@@ -193,6 +197,27 @@ public class Shadowrun6Core extends GenericCore {
 			logger.log(Level.ERROR, "Failed deocding XML from char",e);
 			throw new CharacterIOException(ErrorCode.DECODING_FAILED, "Failed decoding XML: "+e.getMessage(), e);
 		}
+	}
+
+
+	//-------------------------------------------------------------------
+	public static List<SR6ItemEnhancement> getItemEnhancements(Shadowrun6Character model, ItemTemplate target) {
+		List<SR6ItemEnhancement> ret = new ArrayList<SR6ItemEnhancement>();
+		outer:
+		for (SR6ItemEnhancement tmp : getItemList(SR6ItemEnhancement.class)) {
+//			logger.info("Check "+tmp.getName());
+			for (Requirement req : tmp.getRequirements()) {
+//				logger.info("  Requires "+req);
+				if (!Shadowrun6Tools.isRequirementMet(model,target, req, new Decision[0])) {
+//					logger.warn("  Not met: "+req);
+					continue outer;
+				}
+			}
+			ret.add(tmp);
+		}
+
+		//Collections.sort(ret);
+		return ret;
 	}
 
 }

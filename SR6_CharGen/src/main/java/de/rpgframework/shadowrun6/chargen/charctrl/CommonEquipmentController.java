@@ -9,15 +9,18 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
+import de.rpgframework.genericrpg.items.AItemEnhancement;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.requirements.Requirement;
@@ -35,6 +38,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -574,6 +578,15 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	@Override
 	public int getValue(CarriedItem<ItemTemplate> value) {
 		return value.getDistributed();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#getItemEnhancementController(de.rpgframework.genericrpg.items.CarriedItem)
+	 */
+	@Override
+	public ComplexDataItemController<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>> getItemEnhancementController(CarriedItem<ItemTemplate> toModify) {
+		return 	new CommonItemEnhancementController(parent, toModify);
 	}
 
 }

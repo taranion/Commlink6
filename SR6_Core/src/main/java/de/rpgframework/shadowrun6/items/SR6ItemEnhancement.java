@@ -3,14 +3,14 @@ package de.rpgframework.shadowrun6.items;
 import org.prelle.simplepersist.Attribute;
 
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
-import de.rpgframework.shadowrun.items.AItemEnhancement;
+import de.rpgframework.shadowrun.items.AShadowrunItemEnhancement;
 
 /**
  * @author Stefan
  *
  */
 @DataItemTypeKey(id="itemmod")
-public class SR6ItemEnhancement extends AItemEnhancement {
+public class SR6ItemEnhancement extends AShadowrunItemEnhancement {
 
 	@Attribute
 	protected ItemType type;

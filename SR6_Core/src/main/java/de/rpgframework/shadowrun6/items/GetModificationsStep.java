@@ -8,8 +8,10 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
+import de.rpgframework.genericrpg.items.AItemEnhancement;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
+import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.items.OperationMode;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
@@ -136,6 +138,11 @@ public class GetModificationsStep implements CarriedItemProcessor {
 		}
 		if (model.getVariant() != null) {
 			model.getVariant().getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
+		}
+		// Get modifications from enhancements
+		for (ItemEnhancementValue<AItemEnhancement> enh : model.getEnhancements()) {
+			SR6ItemEnhancement real = (SR6ItemEnhancement) enh.getResolved();
+			real.getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
 		}
 		
 		for (OperationMode mode : model.getActiveOperationModes(true)) {

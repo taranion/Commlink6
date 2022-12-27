@@ -23,12 +23,15 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemEnhancementValue;
+import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.jfx.pages.ACarriedItemPage;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemEnhancementSelector;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.AvailableSlot;
@@ -37,8 +40,12 @@ import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.util.Callback;
 
 /**
  * @author Stefan Prelle
@@ -203,18 +210,25 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 			}
 		}
 		
-//		switch (sub) {
-////		case WEAPON_CLOSE_COMBAT:
-////		case WEAPON_RANGED:
-////		case WEAPON_FIREARMS:
-//		case AMMUNITION: // to enable modifications for grenades
-////		case WEAPON_SPECIAL:
-//			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
-//			view.getList(2).setAll(selectedItem.getEnhancements());
-//			view.setCellFactory(2, (lv)-> new ItemEnhancementValueObjectListCell(selectedItem,control.getEquipmentController()));
-//			view.setOnAddAction(2, ev -> addModificationClicked());
-//			break;
-//		}
+		switch (type) {
+		case WEAPON_CLOSE_COMBAT:
+		case WEAPON_RANGED:
+		case WEAPON_FIREARMS:
+		case AMMUNITION: // to enable modifications for grenades
+		case WEAPON_SPECIAL:
+			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
+			view.getList(2).setAll(selectedItem.getEnhancements());
+			view.setCellFactory(2, new Callback<ListView<Object>, ListCell<?>>() {
+				
+				@Override
+				public ListCell<?> call(ListView<Object> lv) {
+					ListCell<?> cell = new ComplexDataItemValueListCell<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>>( () -> control.getEquipmentController().getItemEnhancementController(selectedItem));
+					return cell;
+				}
+			});
+			view.setOnAddAction(2, ev -> addModificationClicked());
+			break;
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -286,29 +300,41 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		return (item) -> item.getAsValue(SR6ItemAttribute.PRICE);
 	}
 
-//	//-------------------------------------------------------------------
-//	private void addModificationClicked() {
-//		logger.log(Level.INFO, "addModificationClicked");
-//		
-//		List<ItemEnhancement> data = control.getEquipmentController().getAvailableEnhancementsFor(selectedItem);
+	//-------------------------------------------------------------------
+	private void addModificationClicked() {
+		logger.log(Level.WARNING, "addModificationClicked");
+		
+		//List<SR6ItemEnhancement> data = control.getEquipmentController().getAvailableEnhancementsFor(selectedItem);
+
+		//Predicate<ItemTemplate> templateFilter = i -> data.contains(i);
+		ItemEnhancementSelector selector = new ItemEnhancementSelector(control.getEquipmentController(), selectedItem, null);
+		ManagedDialog dialog = new ManagedDialog(
+				ResourceI18N.get(UI, "dialog.add.modification.title"), 
+				selector,
+				CloseType.CANCEL, CloseType.OK);
+		NavigButtonControl btnCtrl = new NavigButtonControl();
+		selector.setButtonControl(btnCtrl);
+		CloseType closed = getAppLayout().getApplication().showAlertAndCall(dialog, btnCtrl);
 //		SelectPluginDataDialog<ItemEnhancement> dialog = new SelectPluginDataDialog<ItemEnhancement>(
 //				ResourceI18N.get(UI, "dialog.add.enhancement.title"), 
 //				data,
 //				lv -> new ItemEnhancementListCell(control.getCharacter(), control.getEquipmentController(), selectedItem),
 //				CloseType.CANCEL, CloseType.OK);
 //		CloseType closed = provider.getScreenManager().showAlertAndCall(dialog, dialog.getButtonControl());
-//		logger.log(Level.INFO, "Closed via "+closed);
-//		if (closed==CloseType.OK) {
-//			for (ItemEnhancement master : dialog.getSelection()) {
-//     			logger.log(Level.DEBUG, "add modification "+master+" to "+selectedItem);
-//     			ItemEnhancementValue result = control.getEquipmentController().modify(selectedItem, master);
-//     			logger.log(Level.DEBUG, "embedding "+master+" in "+selectedItem+" returned "+result);
-//     			if (result==null) {
-//     				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 0, ResourceI18N.format(UI, "dialog.add.enhancement.fail", master.getName()));
-//     			}
+		logger.log(Level.INFO, "Closed via "+closed);
+		if (closed==CloseType.OK) {
+			SR6ItemEnhancement master = selector.getSelected();
+//			for (SR6ItemEnhancement master : dialog.getSelection()) {
+     			logger.log(Level.DEBUG, "add modification "+master+" to "+selectedItem);
+     			OperationResult<ItemEnhancementValue<SR6ItemEnhancement>> result = control.getEquipmentController().getItemEnhancementController(selectedItem).select(master);
+     			logger.log(Level.DEBUG, "embedding "+master+" in "+selectedItem+" returned "+result);
+    			view.getList(2).setAll(selectedItem.getEnhancements());
+     			if (result.hasError()) {
+     				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 0, ResourceI18N.format(UI, "dialog.add.enhancement.fail", master.getName(), result.getError()));
+     			}
 //			}
-//		}
-//	}
+		}
+	}
 
 
 }
