@@ -8,8 +8,8 @@ import java.util.Locale;
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
 
-import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
+import de.rpgframework.shadowrun.ATechnique;
 import de.rpgframework.shadowrun6.persist.TechniqueCategoryConverter;
 
 /**
@@ -17,7 +17,7 @@ import de.rpgframework.shadowrun6.persist.TechniqueCategoryConverter;
  *
  */
 @DataItemTypeKey(id="technique")
-public class Technique extends ComplexDataItem {
+public class Technique extends ATechnique {
 
 	public enum Category {
 		GENERAL,
@@ -39,6 +39,7 @@ public class Technique extends ComplexDataItem {
 
 	//-------------------------------------------------------------------
 	public Technique() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 

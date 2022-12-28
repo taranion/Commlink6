@@ -23,7 +23,8 @@ public class SR6ModeDetailsStep implements CarriedItemProcessor {
 	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType refType, Lifeform charac,
 			CarriedItem<?> model, List<Modification> unprocessed) {
 		OperationResult<List<Modification>> ret = new OperationResult<>(unprocessed);
-		
+		if (model.getAsObject(SR6ItemAttribute.ITEMTYPE)==null)
+			return ret;
 		ItemType type = model.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
 		switch (type) {
 		case WEAPON_CLOSE_COMBAT:

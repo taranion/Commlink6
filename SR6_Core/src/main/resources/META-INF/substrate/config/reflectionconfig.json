@@ -14,6 +14,21 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.MartialArts",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.MartialArtsList",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.MartialArtsValue",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.MetaTypeList",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -74,6 +89,31 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.Technique",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.TechniqueList",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.TechniqueValue",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.items.AmmunitionClass",
+  "allDeclaredFields":true,
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.items.AmmunitionData",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.items.ArmorData",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -87,6 +127,16 @@
   "name":"de.rpgframework.shadowrun6.items.ItemSubType",
   "allDeclaredFields":true,
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.items.SR6ItemEnhancement",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.items.ItemEnhancementList",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"de.rpgframework.shadowrun6.items.ItemTemplate",
@@ -172,6 +222,10 @@
 },
 {
   "name":"de.rpgframework.shadowrun6.persist.SkillSpecializationConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.persist.TechniqueCategoryConverter",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {

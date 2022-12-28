@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-
-	<item id="ammo_battery_pulse" cost="100" avail="7I" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
-        <requires>
-            <itemsubtypereq type="OTHER_SPECIAL" />
-        </requires>
+	<item id="ammo_battery_pulse" price="100" avail="7I" type="AMMUNITION" subtype="AMMUNITION" count="y">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<attrdef id="DAMAGE" value="0"/>
+		<attrdef id="ATTACK_RATING" value="0,0,0,0,0"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="BATTERY" apply="DATA_ITEM"/>
+		</requires>
 	</item>
 
-	<item id="ammo_battery_laser" cost="100" avail="6I" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
-        <requires>
-            <itemsubtypereq type="OTHER_SPECIAL" />
-        </requires>
+	<item id="ammo_battery_laser" price="100" avail="6I" type="AMMUNITION" subtype="AMMUNITION" count="y">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<attrdef id="DAMAGE" value="0"/>
+		<attrdef id="ATTACK_RATING" value="0,0,0,0,0"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="BATTERY" apply="DATA_ITEM"/>
+		</requires>
 	</item>
 
-	<item id="ammo_hornet_gas" cost="20" avail="2" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
-        <requires>
-            <itemsubtypereq type="OTHER_SPECIAL" />
-        </requires>
+	<item id="ammo_hornet_gas" price="20" avail="2" type="AMMUNITION" subtype="AMMUNITION" count="y">
+      <requires>
+			<datareq type="GEAR" ref="narcojet_hornet" apply="DATA_ITEM"/>
+      </requires>
 	</item>
 
-	<item id="ammo_blazer" cost="60" avail="3L" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
-        <requires>
-            <itemsubtypereq type="THROWERS" />
-        </requires>
+	<item id="ammo_blazer" price="60" avail="3L" type="AMMUNITION" subtype="AMMUNITION" count="y">
+      <requires>
+			<datareq type="GEAR" ref="shiawase_blazer" apply="DATA_ITEM"/>
+      </requires>
 	</item>
 
-	<item id="ammo_hell_turtle" cost="60" avail="3L" choice="AMMUNITION_TYPE" count="y">
-		<useas type="AMMUNITION" subtype="AMMUNITION" />
-        <requires>
-            <itemsubtypereq type="THROWERS" />
-        </requires>
+	<item id="ammo_hell_turtle" price="60" avail="3L" type="AMMUNITION" subtype="AMMUNITION" count="y">
+		<requires>
+			<datareq type="GEAR" ref="hell_turtle" apply="DATA_ITEM"/>
+		</requires>
 	</item>
 
 </items>

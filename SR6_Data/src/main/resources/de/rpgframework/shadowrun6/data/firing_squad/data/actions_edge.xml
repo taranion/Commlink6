@@ -32,6 +32,6 @@
   <action type="EDGE" cat="COMBAT" cost="2" apply="ATTACK" id="weapon_flash" /> 
   <action type="EDGE" cat="COMBAT" cost="1" apply="MELEE"  id="weapon_spread" /> 
   <action type="EDGE" cat="COMBAT" cost="3" apply="MELEE"  id="yielding_force" /> 
-  <action type="BOOST" cat="BOOST" cost="4" apply="MELEE"  id="i_saw_it_in_a_trid_once" time="INITIATIVE" /> 
-  <action type="BOOST" cat="BOOST" cost="5" apply="MELEE"  id="recover" time="ANYTIME" /> 
+  <action type="BOOST" cat="COMBAT" cost="4" apply="MELEE"  id="i_saw_it_in_a_trid_once" time="INITIATIVE" /> 
+  <action type="BOOST" cat="COMBAT" cost="5" apply="MELEE"  id="recover" time="ANYTIME" /> 
 </actions>

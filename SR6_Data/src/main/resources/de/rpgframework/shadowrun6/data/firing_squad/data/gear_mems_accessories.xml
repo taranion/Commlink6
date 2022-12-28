@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item id="mems_ammo_pouch_small" avail="2" cost="75" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="1"/>
+   <item id="mems_ammo_pouch" avail="2" price="75" count="y" type="ACCESSORY" subtype="ARMOR_BODY" reqVariant="y">
+      <usage mode="EMBEDDED" slot="ARMOR_MEMS" value="1"/>
+      <variant id="small">
         <modifications>
-            <accessorymod hook="ARMOR" item="gear_access" included="true"/>
+            <embed type="GEAR" ref="gear_access" intoType="HOOK" intoRef="ARMOR" included="true"/>
         </modifications>
+      </variant>
+      <variant id="large">
+      </variant>
    </item>
-   <item id="mems_ammo_pouch_large" avail="2" cost="85" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="1"/>
+   <item id="mems_scabbard" avail="2" price="100" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR_MEMS" value="2"/>
    </item>
-   <item id="mems_scabbard" avail="2" cost="100" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="2"/>
+   <item id="mems_holster" avail="2" price="100" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR_MEMS" value="3"/>
    </item>
-   <item id="mems_holster" avail="2" cost="100" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="3"/>
+   <item id="mems_equipment_pouch" avail="2" price="50" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR_MEMS" value="2"/>
    </item>
-   <item id="mems_equipment_pouch" avail="2" cost="50" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="2"/>
+   <item id="mems_medkit_pouch" avail="2" price="200" count="y" type="ACCESSORY" subtype="ARMOR_BODY" reqVariant="y"> 
+      <variant id="small">
+      	<usage mode="EMBEDDED" slot="ARMOR_MEMS" value="2"/>
+      </variant>
+      <variant id="large">
+      	<usage mode="EMBEDDED" slot="ARMOR_MEMS" value="3"/>
+      </variant>
    </item>
-   <item id="mems_medkit_pouch_s" avail="2" cost="200" multi="y"> <!-- this is the large size for medkits 4-6 -->
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="3"/>
+   <item id="mems_quickdraw_holster" avail="2" price="200" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR_MEMS" value="3"/>
    </item>
-   <item id="mems_medkit_pouch_l" avail="2" cost="200" multi="y"> <!-- this is the small size for medkits 1-3 -->
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="2"/>
+   <item id="mems_shotgun_shell_ammo_holster" avail="2" price="75" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR_MEMS" value="2"/>
    </item>
-   <item id="mems_quickdraw_holster" avail="2" cost="200" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="3"/>
-   </item>
-   <item id="mems_shotgun_shell_ammo_holster" avail="2" cost="75" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="2"/>
-   </item>
-   <item id="mems_tactical_sling_mount" avail="2" cost="75" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_MEMS" cap="2"/>
+   <item id="mems_tactical_sling_mount" avail="2" price="75" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR_MEMS" value="2"/>
    </item>
 </items>

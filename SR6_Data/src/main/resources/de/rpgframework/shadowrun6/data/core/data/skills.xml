@@ -45,6 +45,7 @@
         <skillspec id="computer"/>
         <skillspec id="hardware"/>
         <skillspec id="software"/>
+        <skillspec id="complex_forms"/>
     </skill>
     <skill id="enchanting"  attr="MAGIC" type="MAGIC" untr="n" restrict="y">
         <skillspec id="alchemy"/>

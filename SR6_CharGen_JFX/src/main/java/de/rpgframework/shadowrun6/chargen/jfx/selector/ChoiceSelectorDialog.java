@@ -5,6 +5,7 @@ import java.lang.System.Logger.Level;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -15,6 +16,7 @@ import java.util.Map.Entry;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.prelle.javafx.CloseType;
@@ -47,11 +49,11 @@ import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
+import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.Spirit;
-import de.rpgframework.shadowrun.Sprite;
 import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
+import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -357,7 +359,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				);
 		switch ((ShadowrunReference) choice.getChooseFrom()) {
 		case ADEPT_POWER:
-			ret.add( handleGeneric(item, choice, AdeptPower.class));
+			ret.add( handleGeneric(item, choice, AdeptPower.class, null));
 			break;
 		case ATTRIBUTE:
 			ret.add( handleATTRIBUTE(item, choice));
@@ -367,6 +369,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			break;
 		case AUGMENTATION_QUALITY:
 			ret.add( handleAUGMENTATIONQUALITY(item, choice));
+			break;
+		case CARRIED:
+			ret.add( handleCARRIED(item, choice));
 			break;
 		case GEAR:
 			ret.add( handleGEAR(item, choice));
@@ -395,10 +400,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			ret.add( handleSPELL_CATEGORY(item, choice) );
 			break;
 		case SPIRIT:
-			ret.add( handleGeneric(item, choice, Spirit.class));
+			ret.add( handleGeneric(item, choice, SR6NPC.class, npc -> npc.getType()==NPCType.SPIRIT));
 			break;
 		case SPRITE:
-			ret.add( handleGeneric(item, choice, Sprite.class));
+			ret.add( handleGeneric(item, choice, SR6NPC.class, npc -> npc.getType()==NPCType.SPRITE));
 			break;
 		case SUBSELECT:
 			ret.add( handleSUBSELECT(item, choice) );
@@ -609,7 +614,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
-	private <T extends DataItem> Node handleGeneric(ComplexDataItem item, Choice choice, Class<T> cls) {
+	private <T extends DataItem> Node handleGeneric(ComplexDataItem item, Choice choice, Class<T> cls, Predicate<T> filter) {
 		ChoiceBox<T> choicebox = new ChoiceBox<>();
 		choicebox.setConverter(new StringConverter<T>() {
 			public T fromString(String value) { return null;}
@@ -618,7 +623,11 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				return value.getName();
 			}
 		});
-		choicebox.getItems().addAll(Shadowrun6Core.getItemList(cls));
+		Collection<T> list = Shadowrun6Core.getItemList(cls);
+		if (filter!=null) {
+			list = list.stream().filter(filter).collect(Collectors.toList());
+		}
+		choicebox.getItems().addAll(list);
 		Collections.sort(choicebox.getItems(), new Comparator<T>() {
 			public int compare(T o1, T o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
@@ -749,10 +758,18 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				if (value==null) return "-";
 				String name = item.getChoiceOptionStrings(choice, value, Locale.getDefault())[0];
 				if (value.getCost()!=0) {
-					if ( Math.round(value.getCost())==value.getCost()) {
-						name+=" (+"+((int)(value.getCost()))+" Karma)";
+					if (item instanceof ItemTemplate) {
+						if ( Math.round(value.getCost())==value.getCost()) {
+							name+=" (+"+((int)(value.getCost()))+" Nuyen)";
+						} else {
+							name+=" ("+value.getCost()+" Nuyen)";
+						}						
 					} else {
-						name+=" ("+value.getCost()+" Karma)";
+						if ( Math.round(value.getCost())==value.getCost()) {
+							name+=" (+"+((int)(value.getCost()))+" Karma)";
+						} else {
+							name+=" ("+value.getCost()+" Karma)";
+						}
 					}
 				}
 				return name;
@@ -786,6 +803,60 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	private Node handleGEAR(ComplexDataItem item, Choice choice) {
+		ChoiceBox<ItemTemplate> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<ItemTemplate>() {
+			public ItemTemplate fromString(String value) { return null;}
+			public String toString(ItemTemplate value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		List<ItemTemplate> items = new ArrayList<>();
+		// If options are given, use those
+		if (choice.getChoiceOptions()!=null && choice.getChoiceOptions().length>0) {
+			List<ItemTemplate> overwrite = new ArrayList<>();
+			for (String key : choice.getChoiceOptions()) {
+				ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, key);
+				if (resolved==null)
+					throw new NullPointerException("No such gear '"+key+"'");
+				overwrite.add(resolved);
+			}
+			items.clear();
+			items.addAll(overwrite);
+		}
+		
+		// Eventually sort
+		if (choice.getTypeReference()!=null) {
+			logger.log(Level.DEBUG, "Reduce gear to select from to "+choice.getTypeReference());
+			System.err.println("Reduce gear to select from to "+choice.getTypeReference());
+			switch (choice.getTypeReference()) {
+			case "MELEE":
+				items = items.stream().filter(i -> i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.WEAPON_CLOSE_COMBAT).collect(Collectors.toList());
+				break;
+			default:
+				logger.log(Level.WARNING, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
+			}
+		}
+		choicebox.getItems().addAll(items);
+		
+		Collections.sort(choicebox.getItems(), new Comparator<ItemTemplate>() {
+			public int compare(ItemTemplate o1, ItemTemplate o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+			
+			updateButtons(); 
+			showHelpFor(n);
+		 });
+		content.getChildren().add(choicebox);
+		
+		return choicebox;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleCARRIED(ComplexDataItem item, Choice choice) {
 		ChoiceBox<CarriedItem<ItemTemplate>> choicebox = new ChoiceBox<>();
 		choicebox.setConverter(new StringConverter<CarriedItem<ItemTemplate>>() {
 			public CarriedItem<ItemTemplate> fromString(String value) { return null;}
@@ -795,6 +866,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 		});
 		List<CarriedItem<ItemTemplate>> items = ((Shadowrun6Character)ctrl.getModel()).getCarriedItems();
+		
 		// Eventually sort
 		if (choice.getTypeReference()!=null) {
 			logger.log(Level.DEBUG, "Reduce gear to select from to "+choice.getTypeReference());

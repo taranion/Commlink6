@@ -67,9 +67,18 @@ public class SR6GearTool extends GearTool {
 			ret[i] = base[i];
 		for (Modification tmp : mods) {
 			if (tmp instanceof ValueModification) {
-				ValueModification mod = (ValueModification)tmp;			
-				for (int i=0; i<base.length; i++) {
-					ret[i] += mod.getValue();
+				ValueModification mod = (ValueModification)tmp;	
+				String[] keys = mod.getValueAsKeys();
+				if (keys.length==1) {
+					for (int i=0; i<base.length; i++) {
+						ret[i] += mod.getValue();
+					}
+				} else {
+					for (int i=0; i<Math.min(base.length,keys.length); i++) {
+						if (!keys[i].isBlank()) { 
+							ret[i] += Integer.parseInt(keys[i].trim());
+						}
+					}
 				}
 			} else {
 				logger.log(Level.ERROR, "########calculateModifiedARValue TODO: "+tmp);

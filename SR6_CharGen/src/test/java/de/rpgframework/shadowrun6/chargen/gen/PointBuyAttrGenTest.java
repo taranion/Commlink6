@@ -158,9 +158,9 @@ public class PointBuyAttrGenTest {
 	//-------------------------------------------------------------------
 	@Test
 	public void testIdle() {
-		assertEquals(1, ctrl.getPointsLeft());
-		assertEquals(4, ctrl.getPointsLeft2());
-		assertEquals(0, ctrl.getPointsLeft3());
+		assertEquals("Idle adjustment points wrong",1, ctrl.getPointsLeft());
+		assertEquals("Idle attribute points wrong",4, ctrl.getPointsLeft2());
+		assertEquals("Idle Karma conversion", ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
 		assertEquals(0, ctrl.getCPConvertedToSpecial());
 		assertEquals(0, ctrl.getCPConvertedToAttrib());
@@ -407,8 +407,9 @@ public class PointBuyAttrGenTest {
 		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);		
 		settings.perAttrib.put(ShadowrunAttribute.BODY, new PerAttributePoints(2,2,1));
 		karma = 50;
-		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
-		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));
+		settings.cpBoughtSpecial = 8;
+//		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
+//		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));
 		charGen.runProcessors();
 		assertEquals(8, ctrl.getPointsLeft());
 		assertEquals(8, ctrl.getPointsLeft2());

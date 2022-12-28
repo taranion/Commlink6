@@ -9,7 +9,7 @@
     <metatype id="elf" size="190" weight="80">
         <modifications>
            <valmod ref="AGILITY"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
-           <valmod ref="CHARISMA" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="CHARISMA" type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <itemmod ref="low-light_vision" type="QUALITY"/>
          </modifications>
     </metatype>

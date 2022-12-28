@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerato
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -104,15 +105,6 @@ public class ResetGenerator implements ProcessingStep {
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			if (level==PowerLevel.PRIME_RUNNER)
 				model.setKarmaFree(100);
-		}
-		
-		// Ensure there is a device for unused software
-		CarriedItem<ItemTemplate> item = model.getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
-		if (item==null) {
-			item = new CarriedItem<ItemTemplate>(Shadowrun6Core.getItem(ItemTemplate.class,"meta_link"), null, CarryMode.CARRIED);
-			item.setUuid(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
-			model.addCarriedItem(item);
-			SR6GearTool.recalculate("", model, item);
 		}
 		
 		return unprocessed;

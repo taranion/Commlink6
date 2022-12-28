@@ -10,7 +10,6 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
-import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
@@ -21,7 +20,6 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
  */
 public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 
-	public PowerLevel variant;
 	public int characterPoints;
 	public int cpBoughtSpecial;
 	public int cpBoughtAttrib;
@@ -73,6 +71,16 @@ public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 				buf.append(String.format("\n%10s : %s", ent.getKey(), ent.getValue().toString()));
 		}
 		return buf.toString();
+	}
+	
+	//-------------------------------------------------------------------
+	public PerSkillPoints get(SR6SkillValue sVal) {
+		SR6Skill skill = sVal.getModifyable();
+		String id = skill.getId();
+		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
+			id+="/"+sVal.getUuid();
+		} 
+		return perSkill.get(id);
 	}
 	
 	//-------------------------------------------------------------------

@@ -32,6 +32,7 @@ import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
@@ -141,14 +142,14 @@ public class EquipmentCtrlTest {
 		// Set enough nuyen
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.NUYEN.name(), 600));
 		charGen.runProcessors();
-		OperationResult<CarriedItem<ItemTemplate>> res = ctrl.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_light_fire_70"));
+		OperationResult<CarriedItem<ItemTemplate>> res = ctrl.select(Shadowrun6Core.getItem(ItemTemplate.class, "beretta_101T"));
 		assertTrue(res.wasSuccessful());
 		CarriedItem<ItemTemplate> container = res.get();
-		assertEquals("Wrong nuyen paid", 250, model.getNuyen());
+		assertEquals("Wrong nuyen paid", 340, model.getNuyen());
 		
 		assertNotNull(container.getSlot(ItemHook.TOP));
 		assertNull(container.getSlot(ItemHook.UNDER));
-		assertTrue(container.getSlot(ItemHook.TOP).getAllEmbeddedItems().isEmpty());
+		assertTrue("Unexpected embedded items in TOP slot: "+container.getSlot(ItemHook.TOP).getAllEmbeddedItems(),container.getSlot(ItemHook.TOP).getAllEmbeddedItems().isEmpty());
 		
 		ItemTemplate peri = Shadowrun6Core.getItem(ItemTemplate.class, "periscope");
 		ItemTemplate bipod = Shadowrun6Core.getItem(ItemTemplate.class, "bipod");
@@ -174,17 +175,16 @@ public class EquipmentCtrlTest {
 		res = ctrl.embed(container, ItemHook.TOP, peri, null);
 		assertTrue(res.wasSuccessful());
 		assertNotNull(res.get());
-		// Nuyen should be 250 - 70
-		assertEquals("Wrong nuyen paid", 180, model.getNuyen());
+		// Nuyen should be 340 - 70
+		assertEquals("Wrong nuyen paid", 270, model.getNuyen());
 		
 		assertFalse("Item not in slot after embedding", container.getSlot(ItemHook.TOP).getAllEmbeddedItems().isEmpty());
 	}
-	
 
 	//-------------------------------------------------------------------
 	@Test
 	public void loadSoftware() {
-		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "mct_360");
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "maersk_spider");
 		ItemTemplate needle = Shadowrun6Core.getItem(ItemTemplate.class, "targeting");
 		
 		// New create an item
@@ -196,8 +196,37 @@ public class EquipmentCtrlTest {
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.NUYEN.name(), 600));
 		charGen.runProcessors();
 		Possible poss = ctrl.canBeEmbedded(result.get(), ItemHook.SOFTWARE, needle, null);
-		System.out.println("poss="+poss);
 		assertTrue(poss.toString(),poss.get());
+		
+		// Check that it can be assigned to library as well
+		// ResetModifications creates SoftwareLibrary
+		(new ResetModifications(model)).process(ItemUtil.SOFTWARE_LIBRARY_ITEM.getModifications());
+		poss = ctrl.canBeEmbedded(model.getSoftwareLibrary(), ItemHook.SOFTWARE, needle, null);
+		assertTrue(poss.toString(),poss.get());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadSoftwareTypes() {
+		// Set enough nuyen
+		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.NUYEN.name(), 60000));
+		charGen.runProcessors();
+		
+		ItemTemplate contRaw = Shadowrun6Core.getItem(ItemTemplate.class, "allegiance_control_center");
+		ItemTemplate itemRaw = Shadowrun6Core.getItem(ItemTemplate.class, "browse");
+		
+		// Prepare container
+		OperationResult<CarriedItem<ItemTemplate>> result = ctrl.select(contRaw, null, CarryMode.CARRIED);
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> container = result.get();
+
+		// Test wrong variant
+		Possible poss = ctrl.canBeEmbedded(container, ItemHook.SOFTWARE, itemRaw, "basic");
+		assertFalse("Should not be possible to embed 'basic' variant in typed slot: "+poss, poss.get());
+
+		// Test correct variant
+		poss = ctrl.canBeEmbedded(container, ItemHook.SOFTWARE, itemRaw, "rcc");
+		assertTrue("Should be possible to embed 'rcc' variant in typed slot: "+poss+"/"+poss.getUnfulfilledRequirements(), poss.get());
 	}
 
 }

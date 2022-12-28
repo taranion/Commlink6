@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -23,6 +24,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
+import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.DamageElement;
@@ -43,6 +45,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -443,6 +446,32 @@ public class SR6CarriedItemTest {
 		System.out.println("SR6CarriedItemTest.testModes: "+item.getOperationModes(true));
 		assertFalse("Should have 2+ modes now, but was "+item.getOperationModes(true).get(0).getModes().size(), item.getOperationModes(true).get(0).getModes().size()<2);
 		
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testModifications() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "ares_predator_vi");
+		assertNotNull(temp);
+		
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		SR6GearTool.recalculate("", null, item);
+		assertNotNull(item);
+		assertNotNull(item.getAsObject(SR6ItemAttribute.ATTACK_RATING));
+		int[] expect = new int[] {10,10,8,0,0};
+		int[] real   = (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
+		assertTrue("Expect "+Arrays.toString(expect)+" but got "+Arrays.toString(real), Arrays.equals(expect, real));
+		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(750, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		
+		// Add modification
+		SR6ItemEnhancement foregrip = Shadowrun6Core.getItem(SR6ItemEnhancement.class, "foregrip");
+		assertNotNull(foregrip);
+		item.addEnhancement(new ItemEnhancementValue<SR6ItemEnhancement>(foregrip));
+		SR6GearTool.recalculate("", null, item);
+		expect = new int[] {11,12,9,0,0};
+		real   = (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
+		assertTrue("Expect "+Arrays.toString(expect)+" but got "+Arrays.toString(real), Arrays.equals(expect, real));
 	}
 	
 }

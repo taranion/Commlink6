@@ -30,9 +30,11 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.RemainingCPAreNuyenStep;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityRitualGenerator;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
+import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 
 /**
  * @author stefa
@@ -48,7 +50,9 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	public static String TODO_ATTRIB_TOO_MANY_CP_CONV_REG  = "pointbuy.todo.attrib.too_many_regular";
 	public static String TODO_ATTRIB_TOO_MANY_CP_CONV_SPEC = "pointbuy.todo.attrib.too_many_special";
 	
-
+	private RemainingCPAreNuyenStep cpToNuyenStep;
+	
+	
 	private boolean setupDone;
 
 	//-------------------------------------------------------------------
@@ -158,7 +162,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 				
 			}
 			processChain.add(new ResetGenerator(this));
-			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
+//			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			processChain.add(meta);
 			processChain.add(magicReso);
 			processChain.add(qualities);
@@ -168,6 +172,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			processChain.add(spells);
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
+			processChain.add(cpToNuyenStep);
 			processChain.add(equipment);
 			processChain.add(foci);
 			processChain.add(complex);
@@ -177,6 +182,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			processChain.add(contacts);
 			processChain.add(new CalculateAttributePools(model, Locale.getDefault()));
 			processChain.add(new RemainingKarmaNuyenController(this));
+			processChain.add(new CalculateSkillPools(model, Locale.getDefault()));
 
 			setupDone = true;
 		} finally {
@@ -247,6 +253,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		magicReso = new PointBuyMagicOrResonanceController(this);
 		skills = new PointBuySR6SkillGenerator(this);
 		qualities = new CommonQualityGenerator(this);
+		cpToNuyenStep = new RemainingCPAreNuyenStep(this);
 		equipment = new SR6EquipmentGenerator(this);
 		spells    = new SR6PointBuySpellGenerator(this);
 		rituals   = new SR6PointBuyRitualGenerator(this);

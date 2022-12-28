@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.rpgframework.character.CharacterIOException;
+import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -78,6 +79,12 @@ public class PointBuyGenTest {
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.EDGE).getModifiedValue());
 		assertEquals(90, settings.characterPoints);
 
+		/*
+		 * We know we’re going to want that to
+		 * be higher, so 5 special attribute points costs us 20
+		 * more character points, bringing our total spent to
+		 * 30. 
+		 */
 		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue());
 		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
@@ -85,6 +92,12 @@ public class PointBuyGenTest {
  		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
  		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
 		assertEquals(70, settings.characterPoints);
+		/* 
+		 * We get one free special attribute point, which
+		 * can be used to raise our Edge to 2, but we’ll spend
+		 * another 4 CP to raise it up to 3 (total CP currently
+		 * spent is 34).
+		 */
 		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.EDGE)).wasSuccessful());
 		assertEquals(66, settings.characterPoints);
 		
@@ -129,6 +142,8 @@ public class PointBuyGenTest {
 		
 		/* 
 		 * Skills
+		 * Having spent 66 of our 100 CPs, we’ll dump the remaining 34
+		 * points into buying 17 skill points.
 		 */
 		PointBuySR6SkillGenerator skill = (PointBuySR6SkillGenerator) charGen.getSkillController();
 		assertEquals(12, skill.getPointsLeft());
@@ -147,6 +162,8 @@ public class PointBuyGenTest {
 		assertTrue(skill.increase(model.getSkillValue(cracking)).wasSuccessful()); // 3
 		assertTrue(skill.increase(model.getSkillValue(cracking)).wasSuccessful()); // 4
 		assertTrue(skill.increase(model.getSkillValue(cracking)).wasSuccessful()); // 5
+		Possible poss = skill.canBeIncreased(model.getSkillValue(cracking));
+		assertTrue(poss.toString(), poss.get());
 		assertTrue(skill.increase(model.getSkillValue(cracking)).wasSuccessful()); // 6
 		assertEquals( 2, skill.getPointsLeft());
 		assertEquals(34, settings.characterPoints);
@@ -183,6 +200,11 @@ public class PointBuyGenTest {
 		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 4
 		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 5
 		assertEquals(2, settings.characterPoints);
+		// Specialization
+		poss = skill.canSelectSpecialization(model.getSkillValue(tasking), tasking.getSpecialization("compiling"), false);
+		assertTrue(poss.toString(), poss.get());
+		skill.select(model.getSkillValue(tasking), tasking.getSpecialization("compiling"), false);
+		assertEquals(0, settings.characterPoints);
 
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);

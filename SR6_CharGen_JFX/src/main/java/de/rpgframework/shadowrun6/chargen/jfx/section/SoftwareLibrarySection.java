@@ -92,7 +92,8 @@ public class SoftwareLibrarySection extends GearSection {
 				ProgramRow p = getTableRow().getItem();
 				CarriedItem<ItemTemplate> dev = (CarriedItem<ItemTemplate>) getTableColumn().getUserData();
 				// No buttons for devices without software slot
-				if (dev.getSlot(ItemHook.SOFTWARE)==null) {
+				if (dev==null || dev.getSlot(ItemHook.SOFTWARE)==null) {
+					logger.log(Level.WARNING, "No SOFTWARE slot for {0}",dev);
 					setGraphic(null);
 					return;
 				}	
@@ -143,6 +144,8 @@ public class SoftwareLibrarySection extends GearSection {
 	private TreeTableColumn<ProgramRow, String> colName;
 	private TreeTableColumn<ProgramRow, Boolean> colUnused;
 	
+	private static boolean initializeDone;
+	
 	//-------------------------------------------------------------------
 	public SoftwareLibrarySection() {
 		super(ResourceI18N.get(RES, "section.software.title"), CarryMode.EMBEDDED, SELECT_FILTER, SHOW_FILTER);
@@ -157,7 +160,7 @@ public class SoftwareLibrarySection extends GearSection {
 		treeTable.setShowRoot(false);
 		
 		colName   = new TreeTableColumn<>("Name");
-		colUnused = new TreeTableColumn<>("Unused");		
+		colUnused = new TreeTableColumn<>(ResourceI18N.get(RES, "section.software.unused"));		
 		treeTable.getColumns().add(colName);
 		treeTable.getColumns().add(colUnused);
 		colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue().getName()));
@@ -183,7 +186,11 @@ public class SoftwareLibrarySection extends GearSection {
 	private boolean isUnused(ProgramRow row, TreeTableColumn<ProgramRow, Boolean> col) {
 		if (row.program==null) return true;
 		CarriedItem<ItemTemplate> device = (CarriedItem<ItemTemplate>) col.getUserData();
-		if (device!=null && device.getAccessories().contains(row.program)) return true;
+		if (device!=null && (device==model.getSoftwareLibrary() || device.getAccessories().contains(row.program))) {
+			logger.log(Level.INFO, "isUnused({0}) = {1} = true", row.program, col.getUserData());
+			return true;
+		}
+		logger.log(Level.INFO, "isUnused({0}) = {1} = false", row.program, col.getUserData());
 		return false;
 	}
 
@@ -195,7 +202,7 @@ public class SoftwareLibrarySection extends GearSection {
 	public void refresh() {
 		if (model==null) return;
 		if (root==null) return;
-		addToContainer = model.getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+		addToContainer = model.getSoftwareLibrary();
 		addToHook = ItemHook.SOFTWARE;
 		colUnused.setUserData(addToContainer);
 		
@@ -209,6 +216,9 @@ public class SoftwareLibrarySection extends GearSection {
 				.filter(ItemUtil.MATRIXDEVICES_FILTER)
 				.collect(Collectors.toList());
 		
+		System.err.println("SoftwareLibrarySection.refresh: devices="+devices);
+		System.err.println("SoftwareLibrarySection.refresh: data="+data);
+		initializeDone = false;
 		if (programsChanged(data)) {
 			refreshPrograms(data);
 		}
@@ -216,6 +226,7 @@ public class SoftwareLibrarySection extends GearSection {
 			refreshDevices(devices);
 		}
 		treeTable.refresh();
+		initializeDone = true;
 	}
 
 	//-------------------------------------------------------------------
@@ -260,7 +271,8 @@ public class SoftwareLibrarySection extends GearSection {
 			Collections.sort(list, (c1,c2) -> c1.getNameWithRating().compareTo(c2.getNameWithRating()));
 			list.forEach(ci -> {
 				ProgramRow progRow = new ProgramRow(ci);
-				progRow.group.selectedToggleProperty().addListener( (ov,o,n) -> installationDeviceChanged(progRow, o,n));
+				progRow.group.selectedToggleProperty().addListener( (ov,o,n) -> {
+					if (SoftwareLibrarySection.initializeDone) installationDeviceChanged(progRow, o,n);});
 				item.getChildren().add(new TreeItem<ProgramRow>(progRow));});
 		}
 		currentlyShowing = data;
@@ -283,23 +295,25 @@ public class SoftwareLibrarySection extends GearSection {
 		Possible possRemove = control.getEquipmentController().canBeRemoved(fromDevice, ItemHook.SOFTWARE, program);
 		Possible possInstall = control.getEquipmentController().canBeEmbedded(toDevice, ItemHook.SOFTWARE, program.getModifyable(), program.getVariantID(), program.getDecisions().toArray(new Decision[program.getDecisions().size()]));
 		if (!possRemove.get()) {
-			logger.log(Level.WARNING, "Trying to uninstall, but {0}", possRemove);
-			control.runProcessors();
-			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, possRemove.toString());
+			logger.log(Level.WARNING, "Trying to uninstall {1} from {2}, but {0}", possRemove, program, fromDevice);
+//			control.runProcessors();
+//			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, possRemove.toString());
 			return;
 		}
 		if (!possInstall.get()) {
 			logger.log(Level.WARNING, "Trying to install, but {0}", possInstall);
-			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, possInstall.toString());
-			control.runProcessors();
+//			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, possInstall.toString());
+//			control.runProcessors();
 			return;
 		}
 		
 		Possible poss = control.getEquipmentController().removeEmbedded(fromDevice, ItemHook.SOFTWARE, program);
 		if (poss.get()) {
 			logger.log(Level.WARNING, "Uninstall successful - now add to "+toDevice);
-			// Deinstallation successful - add to target device
-			toDevice.addAccessory(program, ItemHook.SOFTWARE);			
+			// Deinstallation successful - change CARRY mode
+			program.setCarryMode(CarryMode.VIRTUAL);
+//			// Deinstallation successful - add to target device
+//			toDevice.addAccessory(program, ItemHook.SOFTWARE);			
 		}
 		control.runProcessors();
 	}
@@ -307,9 +321,12 @@ public class SoftwareLibrarySection extends GearSection {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private void refreshDevices(List<CarriedItem<ItemTemplate>> devices) {
+		List<CarriedItem<ItemTemplate>> devices2 = new ArrayList<>(devices);
+		devices2.add(0,model.getSoftwareLibrary());
+		
 		// Calculate list of matrix device columns
 		List<TreeTableColumn<ProgramRow, Boolean>> newColumns = new ArrayList<>();
-		for (CarriedItem<ItemTemplate> matrixDev : devices) {
+		for (CarriedItem<ItemTemplate> matrixDev : devices2) {
 			if (matrixDev.getUuid().equals(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE)) continue;
 			if (matrixDev.getSlot(ItemHook.SOFTWARE)==null) continue;
 			int capacity = (int) matrixDev.getSlot(ItemHook.SOFTWARE).getCapacity();

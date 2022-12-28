@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.UUID;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -198,6 +199,30 @@ public class ProblemItemTest {
 		assertTrue("Expected "+Arrays.toString(expAR)+" but got "+Arrays.toString(modAR),Arrays.equals(expAR, expAR));
 		
 //		assertEquals(-1, carried.getAsValue(SR6ItemAttribute.DAMAGE).getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadArmorWithComplexChoices() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "av_rapid_transit");
+
+		Choice choice = item.getChoice(UUID.fromString("dbb18bb4-89a4-4535-bede-3077ee600bc1"));
+		assertNotNull(choice);
+		assertEquals(ShadowrunReference.GEAR,choice.getChooseFrom());
+		assertNotNull(choice.getChoiceOptions());
+		assertEquals(3,choice.getChoiceOptions().length);
+
+		Choice choice2 = item.getChoice(UUID.fromString("dbb18bb4-89a4-4435-bede-3077ee600bc5"));
+		assertNotNull(choice2);
+		assertEquals(ShadowrunReference.SUBSELECT,choice2.getChooseFrom());
+		
+		// New create an item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.CARRIED, null, true, 
+				new Decision(choice, "fire_resistance"),
+				new Decision(choice2, "platinum"));
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
 	}
 
 }

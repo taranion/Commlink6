@@ -84,7 +84,8 @@ public enum ItemType {
 			ItemSubType.AUTOSOFT,
 			ItemSubType.BASIC_PROGRAM,
 			ItemSubType.HACKING_PROGRAM,
-			ItemSubType.SKILLSOFT
+			ItemSubType.SKILLSOFT,
+			ItemSubType.TAC_NET
 			),
 	NANOWARE(
 			ItemSubType.NANOWARE_HARD,

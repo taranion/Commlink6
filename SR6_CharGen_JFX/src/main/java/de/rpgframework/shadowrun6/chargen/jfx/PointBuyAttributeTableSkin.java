@@ -35,6 +35,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -562,6 +563,9 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		SR6PointBuySettings settings = (SR6PointBuySettings) model.getCharGenSettings(SR6PointBuySettings.class);
 
 		lbPoints.setText(settings.characterPoints+"/"+getController().getPointsLeft()+"/"+getController().getPointsLeft2());
+		lbPoints.setTooltip(new Tooltip(ResourceI18N.format(RES, "sr6pointbuy.tooltip", settings.characterPoints, 
+				getController().getPointsLeft(), getController().getPointsLeft2())
+				));
 		lbKarma .setText(String.valueOf(getController().getPointsLeft3()));
 		
 		lblRec.entrySet().forEach(e -> {

@@ -19,6 +19,6 @@ public enum SoftwareTypes {
 	// Available on RCCs
 	RCC,
 	SKILLSOFT,
-	TACNET
+	TAC_APP
 	
 }

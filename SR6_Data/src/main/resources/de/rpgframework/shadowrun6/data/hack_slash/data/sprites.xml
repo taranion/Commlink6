@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sprites>
-  <sprite id="assassin"/>
-  <sprite id="defender"/>
-  <sprite id="modular"/>
-  <sprite id="music"/>
-  <sprite id="primal"/>
-</sprites>
+<npcs>
+  <npc id="assassin" type="SPRITE"/>
+  <npc id="defender" type="SPRITE"/>
+  <npc id="modular" type="SPRITE"/>
+  <npc id="music" type="SPRITE"/>
+  <npc id="primal" type="SPRITE"/>
+</npcs>

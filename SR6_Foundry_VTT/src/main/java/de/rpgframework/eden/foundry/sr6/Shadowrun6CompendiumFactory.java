@@ -654,7 +654,7 @@ public class Shadowrun6CompendiumFactory {
 		StringBuffer buf = new StringBuffer();
 		Gson gson = new GsonBuilder().create();
 		for (SR6NPC tmp : Shadowrun6Core.getItemList(SR6NPC.class)) {
-			if (tmp.getType()!=NPCType.GRUNT)
+			if (tmp.getType()!=NPCType.GRUNT && tmp.getType()!=NPCType.SPIRIT)
 				continue;
 			
 			Locale[] locales = localeCallback.apply(tmp.getPageReferences());

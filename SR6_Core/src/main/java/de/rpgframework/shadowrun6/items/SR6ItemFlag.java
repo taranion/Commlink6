@@ -22,6 +22,8 @@ public enum SR6ItemFlag implements ItemFlag {
 	USES_CASELESS,
 	// Power Plays
 	CHEAP_KNOCK_OFF,
+	// The value of this (armor) is added to the main armor
+	CUMULATIVE,
 	// From the dice pool, convert one die to a wild die
 	CONVERT_ONE_DIE_TO_WILD,
 	// Is marked to be the primary item of its kind by the user

@@ -80,6 +80,10 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 		int max = (value.getMaximum()!=0)?value.getMaximum():6;
 		if (value.getDistributed()>=max)
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+		if ((value.getDistributed()+1)==max) {
+			if (isAnotherAttributeAlreadyMaxed(value.getModifyable()))
+				return Possible.FALSE;
+		}
 		return Possible.TRUE;
 	}
 

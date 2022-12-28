@@ -123,7 +123,7 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 					break;
 				}
 				
-				unprocessed.addAll(type.getModifications());
+				//unprocessed.addAll(type.getModifications());
 			}
 
 			return unprocessed;

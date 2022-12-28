@@ -1,8 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sprites>
-  <sprite id="courier"/>
-  <sprite id="crack"/>
-  <sprite id="data"/>
-  <sprite id="fault"/>
-  <sprite id="machine"/>
-</sprites>
+<npcs>
+	<npc id="courier" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="1" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING"/>
+  			<attrdef id="SLEAZE"   value="$RATING+3"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+1"/>
+  			<attrdef id="FIREWALL" value="$RATING+2"/>
+		</itemattr>
+		<critterpowers>
+			<critterpowerval ref="cookie"/>
+			<critterpowerval ref="hash" />
+		</critterpowers>
+	</npc>
+  <npc id="crack" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="2" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING"/>
+  			<attrdef id="SLEAZE"   value="$RATING+3"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+2"/>
+  			<attrdef id="FIREWALL" value="$RATING+1"/>
+		</itemattr>
+		<critterpowers>
+			<critterpowerval ref="phantom"/>
+			<critterpowerval ref="suppression" />
+		</critterpowers>
+	</npc>
+  <npc id="data" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="4" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING-1"/>
+  			<attrdef id="SLEAZE"   value="$RATING"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+4"/>
+  			<attrdef id="FIREWALL" value="$RATING+1"/>
+		</itemattr>
+		<critterpowers>
+			<critterpowerval ref="camouflage"/>
+			<critterpowerval ref="watermark" />
+		</critterpowers>
+	</npc>
+  <npc id="fault" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="1" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING+3"/>
+  			<attrdef id="SLEAZE"   value="$RATING"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+1"/>
+  			<attrdef id="FIREWALL" value="$RATING+2"/>
+		</itemattr>
+		<critterpowers>
+			<critterpowerval ref="electron_storm"/>
+			<critterpowerval ref="trap" />
+		</critterpowers>
+	</npc>
+  <npc id="machine" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="3" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING+1"/>
+  			<attrdef id="SLEAZE"   value="$RATING"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+3"/>
+  			<attrdef id="FIREWALL" value="$RATING+2"/>
+		</itemattr>
+		<critterpowers>
+			<critterpowerval ref="diagnostics"/>
+			<critterpowerval ref="override" />
+			<critterpowerval ref="stability" />
+		</critterpowers>
+	</npc>
+</npcs>

@@ -9,17 +9,21 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
+import de.rpgframework.genericrpg.items.AItemEnhancement;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.Usage;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -34,6 +38,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -435,13 +440,22 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_EMBEDDABLE, value.getName(), slot, container.getNameWithRating());
 		}
 		
-		OperationResult<CarriedItem<ItemTemplate>> res = null;
+		// Check for variant
+		SR6PieceOfGearVariant variant = null;
 		if (variantID!=null) {
-			SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) value.getVariant(variantID);
-			res = GearTool.buildItem(value, CarryMode.EMBEDDED, variant, getModel(), true, decisions);
-		} else {
-			res = GearTool.buildItem(value, CarryMode.EMBEDDED,  getModel(), true, decisions);
+			variant = (SR6PieceOfGearVariant) value.getVariant(variantID);
+			if (variant==null) {
+				return new Possible(IRejectReasons.IMPOSS_MUST_CHOOSE_VARIANT);
+			}
 		}
+		
+		// Check requirements
+		Requirement unmet = ItemUtil.areRequirementsMet(container, value, variant);
+		if (unmet!=null) {
+			return new Possible(unmet);
+		}
+		
+		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, variant, getModel(), true, decisions);
 		if (res.hasError()) { 
 			State state = State.POSSIBLE;
 			for (ToDoElement error : res.getMessages()) {
@@ -450,6 +464,8 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			}
 			return new Possible(state, res.getMessages().toString());
 		}
+		CarriedItem<ItemTemplate> toEmbed = res.get();
+		
 		
 		ItemAttributeNumericalValue<SR6ItemAttribute> val = res.get().getAsValue(SR6ItemAttribute.PRICE);
 		if (val==null) {
@@ -462,7 +478,6 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		}
 				
 		// Check if capacity is sufficient
-		CarriedItem<ItemTemplate> toEmbed = res.get();
 		AvailableSlot realSlot = (AvailableSlot) container.getSlot(slot);
 		logger.log(Level.WARNING, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
 		if (realSlot==null) { 
@@ -475,7 +490,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		// Special handling for software: check types
 		
 		
-		if (slot.hasCapacity()) {
+		if (slot.hasCapacity() && realSlot.getCapacity()<99) {
 			float free = realSlot.getFreeCapacity();
 			float required = 1;
 			if (toEmbed.hasAttribute(SR6ItemAttribute.CAPACITY)) {
@@ -533,6 +548,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 	//-------------------------------------------------------------------
 	public Possible canBeRemoved(CarriedItem<ItemTemplate> container, ItemHook slot, CarriedItem<ItemTemplate> toRemove) {
+		if (container==ItemUtil.SOFTWARE_LIBRARY && slot==ItemHook.SOFTWARE) return Possible.TRUE;
 		return new Possible( container.getAccessories().contains(toRemove) );
 	}
 
@@ -562,6 +578,15 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	@Override
 	public int getValue(CarriedItem<ItemTemplate> value) {
 		return value.getDistributed();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#getItemEnhancementController(de.rpgframework.genericrpg.items.CarriedItem)
+	 */
+	@Override
+	public ComplexDataItemController<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>> getItemEnhancementController(CarriedItem<ItemTemplate> toModify) {
+		return 	new CommonItemEnhancementController(parent, toModify);
 	}
 
 }

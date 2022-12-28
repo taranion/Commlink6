@@ -1,216 +1,231 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item avail="4L" cost="450" id="ares_gunfighter_scabbard">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   <item avail="4L" price="450" id="ares_gunfighter_scabbard" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
    </item>
-   <item avail="2L" cost="25" id="ammo_pouch" multi="y">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   <item avail="2L" price="25" id="ammo_pouch" count="y" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
    </item>
-   <item avail="2L" cost="50" id="ammo_sling" multi="y">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   <item avail="2L" price="50" id="ammo_sling" count="y" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
    </item>
-   <item avail="3L" cost="250" id="armored_retention_holster" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   <item avail="3L" price="250" id="armored_retention_holster" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
-         <itemsubtypereq type="HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY"/>
+      	<selreq>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="HOLDOUTS"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_LIGHT"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_HEAVY"/>
+      	</selreq>
       </requires>
    </item>
-   <item avail="3I" cost="75" id="bayonet_standard" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+   <item avail="3I" price="75" id="bayonet_standard" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="UNDER"/>
+      <usage mode="EMBEDDED" slot="BARREL"/>
       <weapon  dmg="2P" attack="5,2,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
-   <item avail="4I" cost="90" id="bayonet_retractable" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+   <item avail="4I" price="90" id="bayonet_retractable" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="UNDER"/>
+      <usage mode="EMBEDDED" slot="BARREL"/>
       <weapon  dmg="2P" attack="5,2,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
-   <item avail="2" cost="225" id="concealbale_quickdraw_holster" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="RANGED_EXTERNAL"/>
+   <item avail="2" price="225" id="concealbale_quickdraw_holster" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
-       <anyreq>	  
-         <itemsubtypereq type="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY,MACHINE_PISTOLS"/>
-         <itemreq item="crossbow_collapsible_light"/>
-       </anyreq>
+      	<selreq>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="TASERS"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="HOLDOUTS"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_LIGHT"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_HEAVY"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="MACHINE_PISTOLS"/>
+      		<datareq type="GEAR" ref="crossbow_collapsible_light" apply="DATA_ITEM" />
+      	</selreq>
       </requires>
       <modifications>
-         <itemattrmod attr="CONCEALABILITY" val="1"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="1"/>
       </modifications>
    </item>
-   <item avail="3I" cost="75" id="detachable_drum_magazine" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
+   <item avail="3I" price="75" id="detachable_drum_magazine" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="UNDER"/>
+      <usage mode="EMBEDDED" slot="BARREL"/>
       <modifications>
-         <itemattrmod attr="AMMUNITION" val="-98" />
+         <valmod type="ITEM_ATTRIBUTE" ref="AMMUNITION" value="-98" />
       </modifications>
    </item>
-   <item avail="4L" cost="25" id="extended_clip" maxrat="2" rate="true" ratemul="PRICE"  multi="y">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   <item avail="4L" price="25" id="extended_clip" count="y" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2" />
+		</choices> 
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
+      <attrdef id="PRICE" value="$RATING*25"/>
    </item>
-   <item avail="3I" cost="75" id="flashlight_low-light" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+   <item avail="3I" price="75" id="flashlight_low-light" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="UNDER"/>
+      <usage mode="EMBEDDED" slot="BARREL"/>
+      <usage mode="EMBEDDED" slot="TOP"/>
       <modifications>
-         <edgemod type="BONUS" skill="firearms"/>
+         <checkmod type="SKILL" ref="firearms" value="1" what="EDGE"/>
       </modifications>
    </item>
-   <item avail="1" cost="100" id="flashlight_thermographic" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
+   <item avail="1" price="100" id="flashlight_thermographic" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="UNDER"/>
+      <usage mode="EMBEDDED" slot="BARREL"/>
+      <usage mode="EMBEDDED" slot="TOP"/>
       <modifications>
-         <edgemod type="BONUS" skill="firearms"/>
+         <checkmod type="SKILL" ref="firearms" value="1" what="EDGE"/>
       </modifications>
    </item>
-   <item avail="4L" cost="350" id="guncam">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+   <item avail="4L" price="350" id="guncam" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="TOP"/>
+      <usage mode="EMBEDDED" slot="BARREL"/>
+      <usage mode="EMBEDDED" slot="UNDER"/>
       <modifications>
-         <itemhookmod capacity="2" hook="OPTICAL"/>
+         <valmod type="HOOK" ref="OPTICAL" value="2"/>
       </modifications>
    </item>
-   <item avail="2" cost="180" id="hip_bad_bracing_system">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="STOCK"/>
+   <item avail="2" price="180" id="hip_bad_bracing_system" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="STOCK"/>
       <modifications>
-         <itemattrmod attr="ATTACK_RATING" objVal="+2,+1,-1,-2,-4" />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,+1,-1,-2,-4" />
       </modifications>
    </item>
-   <item avail="1" cost="80" id="laser_sight_low_power">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+   <item avail="1" price="80" id="laser_sight_low_power" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="TOP"/>
+      <usage mode="EMBEDDED" slot="UNDER"/>
       <modifications>
-         <itemattrmod attr="ATTACK_RATING" objVal="1,1,,,"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,,,"/>
       </modifications>
    </item>
-   <item avail="1" cost="125" id="laser_sight_standard">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+   <item avail="1" price="125" id="laser_sight_standard" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="TOP"/>
+      <usage mode="EMBEDDED" slot="UNDER"/>
       <modifications>
-         <itemattrmod attr="ATTACK_RATING" objVal="1,1,1,,"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,,"/>
       </modifications>
    </item>
-   <item avail="1" cost="200" id="laser_sight_high_power">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+   <item avail="1" price="200" id="laser_sight_high_power" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="TOP"/>
+      <usage mode="EMBEDDED" slot="UNDER"/>
       <modifications>
-         <itemattrmod attr="ATTACK_RATING" objVal="1,1,1,1,1"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,1,1"/>
       </modifications>
    </item>
-   <item avail="4I" cost="250" id="machine_gun_blast_shield_small">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+   <item avail="4I" price="250" id="machine_gun_blast_shield" type="ACCESSORY" subtype="WEAPON_ACCESSORY" reqVariant="y">
+      <usage mode="EMBEDDED" slot="BARREL"/>
+      <usage mode="EMBEDDED" slot="TOP"/>
+      <usage mode="EMBEDDED" slot="UNDER"/>
       <requires>
-      	<anyreq>
-        	<itemsubtypereq type="LMG"/>
-         	<itemsubtypereq type="MMG"/>
-         </anyreq>
+      	<selreq>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="LMG"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="MMG"/>
+         </selreq>
+      </requires>
+      <variant id="small">
+      	<modifications>
+         	<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" set="AUGMENTED" value="1"/>
+      	</modifications>
+      </variant>
+      <variant id="large">
+      	<modifications>
+         	<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" set="AUGMENTED" value="2"/>
+      	</modifications>
+      </variant>
+   </item>
+   <item avail="2" price="115" id="quick_draw_quiver" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="RANGED_EXTERNAL"/>
+      <usage mode="CARRIED" />
+      <requires>
+      	<selreq>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="BOWS"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="CROSSBOWS"/>
+         </selreq>
       </requires>
       <modifications>
-         <attrmod attr="DEFENSE_RATING" type="NATURAL" val="1"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,1,1"/>
       </modifications>
    </item>
-   <item avail="4I" cost="350" id="machine_gun_blast_shield_large">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="BARREL"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+   <item avail="2" price="160" id="quick_draw_scabbard" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
+      <usage mode="CARRIED" />
       <requires>
-      	<anyreq>
-        	<itemsubtypereq type="HMG"/>
-         	<itemsubtypereq type="MMG"/>
-         </anyreq>
-      </requires>
-      <modifications>
-         <attrmod attr="DEFENSE_RATING" type="NATURAL" val="2"/>
-      </modifications>
-   </item>
-   <item avail="2" cost="115" id="quick_draw_quiver" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="RANGED_EXTERNAL"/>
-      <requires>
-      	<anyreq>
-        	<itemsubtypereq type="BOWS"/>
-         	<itemsubtypereq type="CROSSBOWS"/>
-         </anyreq>
-      </requires>
-      <modifications>
-         <itemattrmod attr="ATTACK_RATING" objVal="1,1,1,1,1"/>
-      </modifications>
-   </item>
-   <item avail="2" cost="160" id="quick_draw_scabbard" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
-      <requires>
-         <itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+     		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
       </requires>
    </item>
-   <item avail="2" cost="115" id="ranger_arms_eagle_eye" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="TOP"/>
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER"/>
+   <item avail="2" price="115" id="ranger_arms_eagle_eye" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="TOP"/>
+      <usage mode="EMBEDDED" slot="UNDER"/>
       <requires>
-         <itemtypereq type="WEAPON_FIREARMS"/>
+     		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
        </requires>
       <modifications>
-        <itemattrmod attr="ATTACK_RATING" objVal="-4,-5,+4,+3,+2"/>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-4,-5,+4,+3,+2"/>
       </modifications>
    </item>
-   <item avail="3" cost="50" id="regular_sling">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   <item avail="3" price="50" id="regular_sling" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
-         <itemsubtypereq type="SUBMACHINE_GUNS,RIFLE_ASSAULT,SHOTGUNS"/>
+      	<selreq>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="SUBMACHINE_GUNS"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_ASSAULT"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="SHOTGUNS"/>
+         </selreq>
       </requires>
    </item>
-   <item avail="4L" cost="75" id="tactical_sling">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   <item avail="4L" price="75" id="tactical_sling" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
-         <itemsubtypereq type="SUBMACHINE_GUNS,RIFLE_ASSAULT,SHOTGUNS"/>
+      	<selreq>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="SUBMACHINE_GUNS"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_ASSAULT"/>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="SHOTGUNS"/>
+         </selreq>
       </requires>
    </item>
-   <item avail="4" cost="1000" id="ruthenium_rifle_sheath" modonly="yes">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
-      <useas type="ACCESSORY" subtype="ACCESSORY" slot="MELEE_EXTERNAL"/>
+   <item avail="4" price="1000" id="ruthenium_rifle_sheath" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="yes">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
+      <usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
    </item>
 
 	<!-- Special weapon accessories -->
-   <item avail="4" cost="750" id="colt_arms_arm-brace" modonly="yes">
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="FIREARMS_EXTERNAL"/>
+   <item avail="4" price="750" id="colt_arms_arm-brace" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="yes">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
-         <itemreq item="colt_arms_m24"/>
+      	<datareq type="GEAR" ref="colt_arms_m24"/>
       </requires>
       <modifications>
-        <itemattrmod attr="ATTACK_RATING" objVal="0,+1,+1,0,0"/>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="0,+1,+1,0,0"/>
       </modifications>
-      <accessory/>
    </item>
 
 	<!-- Melee weapon accessories -->
-   <item avail="2" cost="50" id="concealable_sheath_acc" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
+   <item avail="2" price="50" id="concealable_sheath_acc" type="ACCESSORY" subtype="WEAPON_ACCESSORY" >
+		<usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
+      <usage mode="CARRIED"/>
       <requires>
-		 <itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+      	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
       </requires>
       <modifications>
-         <itemattrmod attr="CONCEALABILITY" val="1"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="1"/>
       </modifications>
    </item>
-   <item avail="2" cost="115" id="melee_quick_draw_sheath_acc" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
+   <item avail="2" price="115" id="melee_quick_draw_sheath_acc" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
+      <usage mode="CARRIED"/>
       <requires>
-         <itemtypereq type="WEAPON_CLOSE_COMBAT"/>
+     		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
       </requires>
    </item>
-   <item avail="2" cost="125" id="melee_hidden_arm_slide_acc" >
-      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="MELEE_EXTERNAL"/>
+   <item avail="2" price="125" id="melee_hidden_arm_slide_acc" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
       <requires>
-         <anyreq>
-		 <itemtypereq type="WEAPON_CLOSE_COMBAT"/>
-		 <itemreq item="throwing_knives"/>
-		 <itemreq item="throwing_stars"/>
-         </anyreq>
+      	<selreq>
+      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
+      		<datareq type="GEAR" ref="throwing_knives"/>
+      		<valuereq type="GEAR" ref="throwing_stars"/>
+         </selreq>
       </requires>
       <modifications>
-         <itemattrmod attr="CONCEALABILITY" val="1"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="1"/>
       </modifications>
    </item>
    

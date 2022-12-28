@@ -44,6 +44,7 @@ import de.rpgframework.shadowrun6.foundry.FVTTVehicleActor;
 import de.rpgframework.shadowrun6.foundry.FVTTWeapon;
 import de.rpgframework.shadowrun6.foundry.GeneralActor;
 import de.rpgframework.shadowrun6.foundry.LifeformActor;
+import de.rpgframework.shadowrun6.foundry.LifeformActor.Type;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -471,6 +472,20 @@ public class Converter {
 	private static ActorData<FVTTNPCActor> convertNPCActor(SR6NPC data, Locale loc) {
 		FVTTNPCActor actor = new FVTTNPCActor();
 		actor.genesisID = data.getId();
+		switch (data.getType()) {
+		case GRUNT:
+		case CONTACT:
+			actor.type = Type.NPC; break;
+		case CRITTER: 
+		case CRITTER_AWAKENED: 
+			actor.type = Type.CRITTER; break;
+		case SPIRIT:  actor.type = Type.SPIRIT; break;
+		case SPRITE:  actor.type = Type.SPRITE; break;
+		}
+		
+		actor.movement.walk = 5;
+		actor.movement.sprint = 10;
+		actor.movement.perHit = 1;
 
 		ActorData<FVTTNPCActor> foundry = new ActorData<FVTTNPCActor>(data.getName(loc), "NPC", actor);
 		fillAttributes(foundry.data, data);

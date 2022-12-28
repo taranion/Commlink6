@@ -2,111 +2,120 @@
 <items>
 
 	<!-- Explosives (p.262) -->
-	<item avail="4L" cost="100" id="stun_grenade" count="y">
-		<useas type="AMMUNITION" subtype="GRENADES" />
+	<item avail="4L" price="100" id="stun_grenade" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo gz="10S" close="8S" near="6S" blast="15" />
 	</item>
-	<item avail="4I" cost="150" id="fragmentation_grenade" count="y">
-		<useas type="AMMUNITION" subtype="GRENADES" />
+	<item avail="4I" price="150" id="fragmentation_grenade" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo gz="16P" close="12P" near="8P" blast="20" />
 	</item>
-	<item avail="4I" cost="150" id="high_explosive_grenade" count="y">
-		<useas type="AMMUNITION" subtype="GRENADES" />
+	<item avail="4I" price="150" id="high_explosive_grenade" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo gz="16P" close="10P" near="4P" blast="15" />
 	</item>
-	<item avail="4I" cost="50" id="gas_grenade" count="y">
-		<useas type="AMMUNITION" subtype="GRENADES" />
+	<item avail="4I" price="50" id="gas_grenade" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo />
 	</item>
-	<item avail="4I" cost="50" id="smoke_grenade" count="y">
-		<useas type="AMMUNITION" subtype="GRENADES" />
+	<item avail="4I" price="50" id="smoke_grenade" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo />
 	</item>
-	<item avail="4I" cost="125" id="flash_pak" count="y">
-		<useas type="AMMUNITION" subtype="GRENADES" />
+	<item avail="4I" price="125" id="flash_pak" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo blast="10" />
 	</item>
 
     <!-- Rockets (p.264) -->
-    <item avail="5I" cost="2800" id="anti-vehicle_rocket" count="y">
-        <useas type="AMMUNITION" subtype="ROCKETS" />
-        <ammo gz="12P" close="8P" near="4P" blast="10" />
+    <item avail="5I" price="2800" id="anti-vehicle" count="y" type="AMMUNITION" subtype="ROCKETS" reqVariant="y">
+    	<ammo gz="12P" close="8P" near="4P" blast="10" />
+      <variant id="rocket"></variant>
+      <variant id="missile">
+      	<choices>
+				<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" />
+        	</choices>
+        	<attrdef id="PRICE" value="2800+($RATING*500)"/>
+        	<modifications>
+        		<checkmod type="SKILL" ref="firearms" value="$RATING" what="DICE"/>
+        		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+        	</modifications>
+        </variant>
     </item>
-    <item avail="5I" cost="2000" id="fragmentation_rocket" count="y">
-        <useas type="AMMUNITION" subtype="ROCKETS" />
+    <item avail="5I" price="2000" id="fragmentation" count="y" type="AMMUNITION" subtype="ROCKETS" reqVariant="y">
         <ammo gz="16P" close="12P" near="8P" blast="30" />
+      <variant id="rocket"></variant>
+      <variant id="missile">
+      	<choices>
+				<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" />
+        	</choices>
+        	<attrdef id="PRICE" value="2000+($RATING*500)"/>
+        	<modifications>
+        		<checkmod type="SKILL" ref="firearms" value="$RATING" what="DICE"/>
+        		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+        	</modifications>
+        </variant>
     </item>
-    <item avail="5I" cost="2100" id="high_explosive_rocket" count="y">
-        <useas type="AMMUNITION" subtype="ROCKETS" />
+    <item avail="5I" price="2100" id="high_explosive" count="y" type="AMMUNITION" subtype="ROCKETS" reqVariant="y">
         <ammo gz="16P" close="10P" near="4P" blast="20" />
+      <variant id="rocket"></variant>
+      <variant id="missile">
+      	<choices>
+				<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" />
+        	</choices>
+        	<attrdef id="PRICE" value="2100+($RATING*500)"/>
+        	<modifications>
+        		<checkmod type="SKILL" ref="firearms" value="$RATING" what="DICE"/>
+        		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+        	</modifications>
+        </variant>
     </item>
-    <item avail="4I" cost="750" id="gas_rocket" count="y">
-        <useas type="AMMUNITION" subtype="ROCKETS" />
-        <ammo/>
+    <item avail="4I" price="750" id="gas_rocket" count="y" type="AMMUNITION" subtype="ROCKETS" reqVariant="y">
+      <variant id="rocket"></variant>
+      <variant id="missile">
+      	<choices>
+				<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" />
+        	</choices>
+        	<attrdef id="PRICE" value="750+($RATING*500)"/>
+        	<modifications>
+        		<checkmod type="SKILL" ref="firearms" value="$RATING" what="DICE"/>
+        		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+        	</modifications>
+        </variant>
     </item>
-    <item avail="4I" cost="120" id="smoke_rocket" count="y">
-        <useas type="AMMUNITION" subtype="ROCKETS" />
-        <ammo />
+    <item avail="4I" price="120" id="smoke_rocket" count="y" type="AMMUNITION" subtype="ROCKETS" reqVariant="y">
+      <variant id="rocket"></variant>
+      <variant id="missile">
+      	<choices>
+				<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" />
+        	</choices>
+        	<attrdef id="PRICE" value="1200+($RATING*500)"/>
+        	<modifications>
+        		<checkmod type="SKILL" ref="firearms" value="$RATING" what="DICE"/>
+        		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+        	</modifications>
+        </variant>
     </item>
 
-    <!-- Missiles (p.264) -->
-    <item avail="5I" cost="500" id="anti-vehicle_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
-        <useas type="AMMUNITION" subtype="MISSILES" cost="2800"/>
-        <ammo gz="12P" close="8P" near="4P" blast="10" />
-        <modifications>
-         <itemattrmod attr="ATTACK_RATING" val="2"/>
-        </modifications>
+    
+    <item avail="4I" id="conventional_explosives" count="y" price="0" type="AMMUNITION" subtype="EXPLOSIVES">
+     	<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" />
+     	</choices>
+		<attrdef id="AVAILABILITY" value="$RATING" table="1I,1I,1I,2I,2I,2I,3I,3I,3I,4I,4I,4I,5I,5I,5I,6I,6I,6I,7I,7I"/>
+		<attrdef id="PRICE"  value="$RATING" table="10,20,30,200,250,300,700,800,900,2500,2750,3000,6500,7000,7500,16000,17000,18000,95000,100000"/>
     </item>
-    <item avail="5I" cost="2000" id="fragmentation_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
-        <useas type="AMMUNITION" subtype="ROCKETS" cost="2800" />
-        <ammo gz="16P" close="12P" near="8P" blast="30" />
-        <modifications>
-         <itemattrmod attr="ATTACK_RATING" val="2"/>
-        </modifications>
+    <item avail="4I" id="plastic_explosives" count="y" price="0" type="AMMUNITION" subtype="EXPLOSIVES">
+     	<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" />
+     	</choices>
+		<attrdef id="AVAILABILITY" value="$RATING" table="1I,1I,1I,2I,2I,2I,3I,3I,3I,4I,4I,4I,5I,5I,5I,6I,6I,6I,7I,7I"/>
+		<attrdef id="PRICE"  value="$RATING" table="10,20,30,200,250,300,700,800,900,2500,2750,3000,6500,7000,7500,16000,17000,18000,95000,100000"/>
     </item>
-    <item avail="5I" cost="2100" id="high_explosive_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
-        <useas type="AMMUNITION" subtype="ROCKETS" cost="2800" />
-        <ammo gz="16P" close="10P" near="4P" blast="20" />
-        <modifications>
-         <itemattrmod attr="ATTACK_RATING" val="2"/>
-        </modifications>
-    </item>
-    <item avail="4I" cost="750" id="gas_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
-        <useas type="AMMUNITION" subtype="ROCKETS" cost="2800" />
-        <ammo/>
-        <modifications>
-         <itemattrmod attr="ATTACK_RATING" val="2"/>
-        </modifications>
-    </item>
-    <item avail="4I" cost="120" id="smoke_missile" rate="y" maxrat="6" ratemul="PRICE" count="y">
-        <useas type="AMMUNITION" subtype="ROCKETS" cost="2800" />
-        <ammo />
-        <modifications>
-         <itemattrmod attr="ATTACK_RATING" val="2"/>
-        </modifications>
+    <item avail="4I" id="foam_explosives" count="y" price="0" type="AMMUNITION" subtype="EXPLOSIVES">
+     	<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" />
+     	</choices>
+		<attrdef id="AVAILABILITY" value="$RATING" table="1I,1I,1I,2I,2I,2I,3I,3I,3I,4I,4I,4I,5I,5I,5I,6I,6I,6I,7I,7I"/>
+		<attrdef id="PRICE"  value="$RATING" table="10,20,30,200,250,300,700,800,900,2500,2750,3000,6500,7000,7500,16000,17000,18000,95000,100000"/>
     </item>
     
-    <!-- Explosives p.264 -->
-    <item avail="4I" id="conventional_explosives" rate="y" maxrat="20" ratemul="PRICE" count="y" cost="0">
-        <useas type="AMMUNITION" subtype="EXPLOSIVES" />
-        <pricetable>10,10,10,50,50,50,100,100,100,250,250,250,500,500,500,1000,1000,5000,5000</pricetable>
-        <ammo />
-    </item>
-    <item avail="4I" id="plastic_explosives" rate="y" maxrat="20" ratemul="PRICE" count="y" cost="0">
-        <useas type="AMMUNITION" subtype="EXPLOSIVES" />
-        <pricetable>10,10,10,50,50,50,100,100,100,250,250,250,500,500,500,1000,1000,5000,5000</pricetable>
-        <ammo />
-    </item>
-    <item avail="4I" id="foam_explosives" rate="y" maxrat="20" ratemul="PRICE" count="y" cost="0">
-        <useas type="AMMUNITION" subtype="EXPLOSIVES" />
-        <pricetable>10,10,10,50,50,50,100,100,100,250,250,250,500,500,500,1000,1000,5000,5000</pricetable>
-        <ammo />
-    </item>
-    
-    <item avail="4I" id="detonator_cap" count="y" cost="75">
-        <useas type="AMMUNITION" subtype="EXPLOSIVES" />
-        <ammo />
-    </item>
+    <item avail="4I" id="detonator_cap" count="y" price="75" type="AMMUNITION" subtype="EXPLOSIVES">
+     </item>
     
     
 </items>

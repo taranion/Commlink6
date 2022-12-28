@@ -83,8 +83,8 @@ public class SR6NPC extends ANPC<ShadowrunAttribute, SR6Skill, SR6SkillValue, SR
 		// Validate gear definitions
 		if (gearDef != null) {
 			for (ItemTemplate tmp : gearDef) {
-				tmp.assignToDataSet(this.datasets.get(0));
 				tmp.setParentItem(this);
+				tmp.assignToDataSet(this.datasets.get(0));
 			}
 		}
 		

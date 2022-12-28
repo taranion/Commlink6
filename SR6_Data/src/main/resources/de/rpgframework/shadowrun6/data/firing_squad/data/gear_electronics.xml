@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item id="mtoc_mark1" avail="8L" cost="25000" devrat="3">
-     <useas type="ACCESSORY"   subtype="TAC_NET" cap="0" slot="VEHICLE_ELECTRONICS" cost="800"/>
-     <useas type="ELECTRONICS" subtype="TAC_NET"       />
+   <item id="mtoc_mark1" avail="8L" price="25000" type="ELECTRONICS" subtype="TAC_NET">
        <modifications>
-         <itemhookmod hook="SOFTWARE_TACNET" capacity="2"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="2"/>
       </modifications>
-      <cyberdeck d="4" f="3"/>
+      <matrix d="4" f="3" devrat="3"/>
+		<attrdef id="SOFTWARE_TYPES" value="TAC_APP"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
-   <item id="mtoc_mark2" avail="9I" cost="65000" devrat="5">
-     <useas type="ACCESSORY"   subtype="TAC_NET" cap="0" slot="VEHICLE_ELECTRONICS" cost="800"/>
-     <useas type="ELECTRONICS" subtype="TAC_NET"       />
+   <item id="mtoc_mark2" avail="9I" price="65000" type="ELECTRONICS" subtype="TAC_NET">
        <modifications>
-         <itemhookmod hook="SOFTWARE_TACNET" capacity="4"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="4"/>
       </modifications>
-      <cyberdeck d="6" f="5"/>
+      <matrix d="6" f="5" devrat="5"/>
+		<attrdef id="SOFTWARE_TYPES" value="TAC_APP"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
-   <item id="mtoc_mark3" avail="12I" cost="95000" devrat="7">
-     <useas type="ACCESSORY"   subtype="TAC_NET" cap="0" slot="VEHICLE_ELECTRONICS" cost="800"/>
-     <useas type="ELECTRONICS" subtype="TAC_NET"       />
+   <item id="mtoc_mark3" avail="12I" price="95000" type="ELECTRONICS" subtype="TAC_NET">
        <modifications>
-         <itemhookmod hook="SOFTWARE_TACNET" capacity="6"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="6"/>
       </modifications>
-      <cyberdeck d="7" f="6"/>
+      <matrix d="7" f="6" devrat="7"/>
+		<attrdef id="SOFTWARE_TYPES" value="TAC_APP"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    
    <!-- Accessories -->
-   <item id="artillery_barrage" avail="5I" cost="200">
-       <useas type="ACCESSORY" subtype="TACNET_PROGRAM" slot="SOFTWARE_TACNET" cap="1"  />
+   <item id="artillery_barrage" avail="5I" price="200" type="SOFTWARE" subtype="TAC_APP">
+   	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
    </item>
-   <item id="co-pilot" avail="3I" cost="200">
-       <useas type="ACCESSORY" subtype="TACNET_PROGRAM" slot="SOFTWARE_TACNET" cap="1"  />
+   <item id="co-pilot" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
+   	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
    </item>
-   <item id="door_gunner" avail="5I" cost="200">
-       <useas type="ACCESSORY" subtype="TACNET_PROGRAM" slot="SOFTWARE_TACNET" cap="1"  />
+   <item id="door_gunner" avail="5I" price="200" type="SOFTWARE" subtype="TAC_APP">
+   	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
    </item>
-   <item id="ecm_warrior_ii" avail="4I" cost="200">
-       <useas type="ACCESSORY" subtype="TACNET_PROGRAM" slot="SOFTWARE_TACNET" cap="1"  />
+   <item id="ecm_warrior_ii" avail="4I" price="200" type="SOFTWARE" subtype="TAC_APP">
+   	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
    </item>
-   <item id="junk_wall" avail="2I" cost="200">
-       <useas type="ACCESSORY" subtype="TACNET_PROGRAM" slot="SOFTWARE_TACNET" cap="1"  />
+   <item id="junk_wall" avail="2I" price="200" type="SOFTWARE" subtype="TAC_APP">SOFTWARE
+   	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
    </item>
-   <item id="mobile_medic" avail="3I" cost="200">
-       <useas type="ACCESSORY" subtype="TACNET_PROGRAM" slot="SOFTWARE_TACNET" cap="1"  />
+   <item id="mobile_medic" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
+   	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
    </item>
-   <item id="sneak_sneak" avail="3I" cost="200">
-       <useas type="ACCESSORY" subtype="TACNET_PROGRAM" slot="SOFTWARE_TACNET" cap="1"  />
+   <item id="sneak_sneak" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
+   	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
    </item>
-   <item id="team_leader" avail="3I" cost="200">
-       <useas type="ACCESSORY" subtype="TACNET_PROGRAM" slot="SOFTWARE_TACNET" cap="1"  />
+   <item id="team_leader" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
+   	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
    </item>
-   <item id="target_artist" avail="3I" cost="200">
-       <useas type="ACCESSORY" subtype="TACNET_PROGRAM" slot="SOFTWARE_TACNET" cap="1"  />
+   <item id="target_artist" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
+   	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
    </item>
 </items>

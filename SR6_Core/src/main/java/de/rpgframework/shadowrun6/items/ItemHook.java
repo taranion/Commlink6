@@ -12,6 +12,7 @@ public enum ItemHook implements Hook {
 
 	MELEE_EXTERNAL,
 	FIREARMS_EXTERNAL,
+	RANGED_EXTERNAL,
 	BARREL,
 	INTERNAL, // Only used for auto-added
 	SMARTGUN,

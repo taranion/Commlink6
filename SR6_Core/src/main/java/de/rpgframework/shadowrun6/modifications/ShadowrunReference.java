@@ -13,12 +13,14 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.CritterPower;
+import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
@@ -27,20 +29,22 @@ import de.rpgframework.shadowrun.Resistance;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
-import de.rpgframework.shadowrun.Spirit;
-import de.rpgframework.shadowrun.Sprite;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.DataStructure;
+import de.rpgframework.shadowrun6.ReturnIdAsResultConverter;
 import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.Technique;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -64,17 +68,21 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	AMMUNITION_TYPE(AmmunitionType.class),
 	ATTRIBUTE(new AttributeConverter()),
 	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
+	CARRIED("CarriedItem"),
 	COMPLEX_FORM(ComplexForm.class),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
 	DATA_STRUCTURE(DataStructure.class),
 	ELEMENT("Element"),
+	FOCUS(Focus.class),
 	GEAR(ItemTemplate.class),
+	GEARMOD(SR6ItemEnhancement.class),
 	HOOK(ItemHook.class, 0),
 	ITEM_ATTRIBUTE(new ItemAttributeConverter()),
 	ITEMFLAG(SR6ItemFlag.class,0),
 	ITEMTYPE(ItemType.class,0),
 	ITEMSUBTYPE(ItemSubType.class,0),
+	LICENSE("License"),
 	LIFESTYLE(new LifestyleQualityConverter()),
 	MAGIC_RESO(MagicOrResonanceType.class),
 	MATRIX_ATTRIBUTE(new ItemAttributeConverter()),
@@ -97,10 +105,11 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SPELL(SR6Spell.class),
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
 	SPELL_CATEGORY(ASpell.Category.class.getAnnotation(DataItemTypeKey.class).id()),
-	SPIRIT(Spirit.class),
-	SPRITE(Sprite.class),
+	SPIRIT(SR6NPC.class),
+	SPRITE(SR6NPC.class),
 	SPRITE_POWER("SpritePower"),
-	SUBSELECT("Subselect"), // Subselect
+	SUBSELECT(new ReturnIdAsResultConverter()), // Subselect
+	TECHNIQUE(Technique.class),
 	TEXT("TEXT"),
 	;
 	

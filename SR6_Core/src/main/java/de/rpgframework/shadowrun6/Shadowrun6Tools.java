@@ -40,6 +40,7 @@ import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
@@ -82,7 +83,6 @@ import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
-import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -456,7 +456,15 @@ public class Shadowrun6Tools {
 				if (tmp.getMaxValue()>0) {
 					return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" <="+tmp.getMaxValue();			
 				}
-				return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" "+tmp.getValue()+"+";			
+				if ("$RATING".equals(tmp.getRawValue())) {
+					return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" >= "+RES.getString("label.rating", loc);
+				}
+				return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" "+tmp.getValue()+"+";
+			case ITEM_ATTRIBUTE:
+				SR6ItemAttribute iAttr = SR6ItemAttribute.valueOf(tmp.getKey());
+				if (iAttr==SR6ItemAttribute.ITEMTYPE) return ItemType.valueOf(tmp.getRawValue()).getName();
+				if (iAttr==SR6ItemAttribute.ITEMSUBTYPE) return ItemSubType.valueOf(tmp.getRawValue()).getName();
+				break;
 			case SKILL:
 				item = ShadowrunReference.resolve(type, req.getKey());
 				return item.getName(loc)+" "+tmp.getRawValue()+"+";			
@@ -572,6 +580,8 @@ public class Shadowrun6Tools {
 	public static boolean isRequirementMet(Shadowrun6Character model, ComplexDataItem requiredFor, Requirement req, Decision[] decisions) {
 		if (req.getApply()!=null && req.getApply()!=ApplyTo.CHARACTER) return true;
 		
+		try {
+		
 		if (req instanceof ExistenceRequirement) {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
 			boolean negated = tmp.isNegate();
@@ -611,10 +621,18 @@ public class Shadowrun6Tools {
 			return false;
 		} else if (req instanceof ValueRequirement) {
 			ValueRequirement tmp = (ValueRequirement)req;
-			ShadowrunReference type = (ShadowrunReference)tmp.getType();			
+			ShadowrunReference type = (ShadowrunReference)tmp.getType();
+//			switch (type) {
+//			case ITEM_ATTRIBUTE:
+//				SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf(tmp.getKey());
+//				switch (itemAttr) {
+//				case ITEMTYPE:
+//					ItemType iType = ItemType.valueOf(tmp.getRawValue());
+//				}
+//			}
 			int min = -1;
 			int max = Integer.MAX_VALUE;
-			if (tmp.getFormula().isResolved()) {
+			if (tmp.getFormula().isResolved() && tmp.getFormula().isInteger()) {
 				if (tmp.getRawValue()!=null) {
 					min = tmp.getValue();
 				} else {
@@ -623,14 +641,15 @@ public class Shadowrun6Tools {
 			} else {
 				logger.log(Level.WARNING, "ToDo: check unresolved requirement "+req.getKey()+":"+tmp.getFormula()+" for "+requiredFor.getClass());
 				if (requiredFor.getClass()==ItemTemplate.class) {
-					logger.log(Level.WARNING, "Special handling for ItemTemplates");
 					CarryMode mode = ((ItemTemplate) requiredFor).getUsages().get(0).getMode();
 					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, mode, model, false, decisions).get();
 					VariableResolver resolver = new VariableResolver(item, model);
-					logger.log(Level.WARNING, "ToDo: Resolve "+tmp.getFormula());
-					SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf( ((FormulaImpl)tmp.getFormula()).getAsString().substring(1));
-					String raw = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, (FormulaImpl)tmp.getFormula(), resolver);
-					min = Integer.valueOf(raw);
+					if (((FormulaImpl)tmp.getFormula()).getAsString().startsWith("$")) {
+						logger.log(Level.WARNING, "ToDo: Resolve "+tmp.getFormula());
+						SR6ItemAttribute itemAttr = SR6ItemAttribute.valueOf( ((FormulaImpl)tmp.getFormula()).getAsString().substring(1));
+						String raw = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, (FormulaImpl)tmp.getFormula(), resolver);
+						min = Integer.valueOf(raw);
+					}
 				}
 			}
 			Object item = ShadowrunReference.resolve(type, req.getKey());
@@ -663,6 +682,26 @@ public class Shadowrun6Tools {
 				if (min>0 && val<min) return false;
 				//if (max>0 && val>min) return false;
 				return true;
+			case ITEM_ATTRIBUTE:
+				if ("CHOICE".equals(tmp.getKey())) {
+					return true;
+				}
+				SR6ItemAttribute iAttr = tmp.getType().resolve(tmp.getKey());
+				if (requiredFor instanceof ItemTemplate) {
+					ItemAttributeDefinition def = ((ItemTemplate)requiredFor).getAttribute(iAttr);
+					if (def==null) return false;
+					switch (iAttr) {
+					case ITEMSUBTYPE:
+					case ITEMTYPE:
+						return tmp.getRawValue().equals(def.getRawValue());
+					default:
+						logger.log(Level.WARNING, "TODO: Compare "+tmp.getRawValue()+" with "+def.getRawValue());
+					}
+				} else {
+					logger.log(Level.WARNING, "Don't know how to check item attribute "+tmp+" for "+requiredFor);
+					return false;
+				}
+				return false;
 			case QUALITY:
 				if ("CHOICE".equals(tmp.getKey())) {
 					return true;
@@ -681,6 +720,12 @@ public class Shadowrun6Tools {
 		}
 		System.err.println("Shadowrun6Tool: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
 		logger.log(Level.WARNING,"ToDo: Requirement checking not supported for "+req.getClass()+" and "+req.getType());
+		return false;
+		
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Error checking requirement "+req,e);
+			e.printStackTrace();
+		}
 		return false;
 	}
 

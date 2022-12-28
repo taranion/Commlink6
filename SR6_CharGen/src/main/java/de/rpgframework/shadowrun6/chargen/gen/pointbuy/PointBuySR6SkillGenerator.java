@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.Map.Entry;
 
 import de.rpgframework.genericrpg.NumericalValueWith2PoolsController;
@@ -16,6 +17,7 @@ import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.SkillType;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -23,6 +25,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -39,6 +42,16 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 	//-------------------------------------------------------------------
 	public PointBuySR6SkillGenerator(SR6CharacterGenerator parent) {
 		super(parent);
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator#getPerSkill(de.rpgframework.shadowrun6.SR6SkillValue)
+	 */
+	@Override
+	protected PerSkillPoints getPerSkill(SR6SkillValue value) {
+		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+		return settings.perSkill.get(value.getKey());
 	}
 
 	//-------------------------------------------------------------------
@@ -86,6 +99,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 				per.points2=1;
 				
 			settings.perSkill.put(result.get().getKey(), per);
+			logger.log(Level.DEBUG, "Added to PointBuy settings: {0}={1}", result.get().getKey(), per);
 			
 			getCharacterController().runProcessors();
 			return result;
@@ -123,6 +137,42 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 //		logger.log(Level.WARNING, "Could not raise with any method");
 //		return new OperationResult<>();
 //	}
+	
+	//-------------------------------------------------------------------
+	private SR6Skill getSkillFromPrioritySettings(String prioritySettingsId) {
+		if (prioritySettingsId.contains("/")) {
+			String key = prioritySettingsId.substring(0, prioritySettingsId.indexOf("/"));
+			return Shadowrun6Core.getSkill(key);
+		} else {
+			return Shadowrun6Core.getSkill(prioritySettingsId);
+		}
+	}
+	
+	//-------------------------------------------------------------------
+	private SR6SkillValue getFromPointBuySettings(String prioritySettingsId) {
+		if (prioritySettingsId.contains("/")) {
+			String key = prioritySettingsId.substring(0, prioritySettingsId.indexOf("/"));
+			String uuid_s = prioritySettingsId.substring(prioritySettingsId.indexOf("/")+1);
+			if (uuid_s==null)
+				logger.log(Level.ERROR, "NPE for id "+prioritySettingsId);
+			if ("null".equals(uuid_s)) {
+				logger.log(Level.ERROR, "Pseudo NULL for id "+prioritySettingsId);
+				return null;
+			}
+			UUID uuid = UUID.fromString(uuid_s);
+			SR6Skill skill = Shadowrun6Core.getSkill(key);
+			for (SR6SkillValue val : model.getSkillValues()) {
+				if (val.getSkill()==skill && val.getUuid()!=null && val.getUuid().equals(uuid)) {
+					return val;
+				}
+			}
+			logger.log(Level.ERROR, "Did not detected "+key+" | "+uuid+" in "+model.getSkillValues());
+
+		} else {
+			return model.getSkillValue(Shadowrun6Core.getSkill(prioritySettingsId));
+		}
+		return null;
+	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -139,6 +189,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
 
 			// Reset values
+			maxLimit = 1;
 			settings.cpToSkills = 0;
 			points1   = 12;
 			points2   = settings.characterPoints/2;
@@ -219,14 +270,32 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			/*
 			 * Copy from settings to character
 			 */
+			logger.log(Level.DEBUG, "Copy SkillValues to character");
 			List<SR6SkillValue> usedSkills = new ArrayList<>();
 			for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
-				if (entry.getValue().getSum()==0) continue;				
-				SR6SkillValue val = model.getSkillValue( Shadowrun6Core.getSkill( entry.getKey()) );
-				if (!model.getSkillValues().contains(val)) {
+				logger.log(Level.DEBUG, "  final {0} = {1}",String.format("%11s",entry.getKey()), entry.getValue());
+				if (entry.getValue().getSum()==0) continue;
+				SR6SkillValue val = getFromPointBuySettings(entry.getKey());
+				if (val==null) {
+					SR6Skill skill = getSkillFromPrioritySettings(entry.getKey());
+					if (skill==null) {
+						logger.log(Level.ERROR, "No skill '"+entry.getKey()+"'");
+						System.err.println( "No skill '"+entry.getKey()+"'");
+						System.exit(1);
+					}
+					val = new SR6SkillValue(skill, 0);
 					model.addSkillValue(val);
+					logger.log(Level.DEBUG, "  Add skill value to char: "+entry.getKey());
 				}
-				val.setDistributed(entry.getValue().getSum());
+				if (val.getSkill()==null) {
+					logger.log(Level.WARNING, "Found SR6SkillValue without skill: "+val);
+					continue;
+				}
+				if (val.getSpecializations().isEmpty()) {
+					val.setDistributed(entry.getValue().getSum());					
+				} else {
+					val.setDistributed(entry.getValue().getSum()-1);
+				}
 				usedSkills.add(val);
 			}
 			// Reverse check: all skills in model should be in usedSkills
@@ -310,26 +379,44 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 		return null;
 	}
 
-	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
-		return Possible.FALSE;
-	}
+//	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
+//		return Possible.FALSE;
+//	}
 
-	public Possible canDeselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
-		return Possible.FALSE;
-	}
-	public OperationResult<SR6SkillValue> selectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
-		return new OperationResult<>();
-	}
-
-	public OperationResult<SR6SkillValue> deselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
-		return new OperationResult<>();
-	}
+//	public Possible canDeselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
+//		return Possible.FALSE;
+//	}
+//	public OperationResult<SR6SkillValue> selectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
+//		return new OperationResult<>();
+//	}
+//
+//	public OperationResult<SR6SkillValue> deselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
+//		return new OperationResult<>();
+//	}
 
 	@Override
 	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec,
 			boolean expertise) {
-		// TODO Auto-generated method stub
-		return null;
+		/*
+		 * You cannot acquire more than one specialization in a skill at character creation, 
+		 * and you cannot acquire an expertise.
+		 */		
+		if (expertise) return Possible.FALSE;
+		
+		// Check if there already is one specialization in this skill
+		if (!skillVal.getSpecializations().isEmpty())
+			return Possible.FALSE;
+		
+		List<SkillSpecialization<SR6Skill>> available = getAvailableSpecializations(skillVal);
+		if (!available.contains(spec)) {
+			return new Possible(Severity.STOPPER, RES, I18N_NOT_AVAILABLE_SPEC, skillVal.getKey(), spec.getId(), expertise);
+		}
+		
+		// Need a skill point or 5 Karma
+		if (points1<1 && model.getKarmaFree()<5)
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
+		
+		return Possible.TRUE;
 	}
 
 	@Override
@@ -338,17 +425,62 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 		return null;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.ISkillController#select(de.rpgframework.shadowrun.AShadowrunSkillValue, de.rpgframework.genericrpg.data.SkillSpecialization, boolean)
+	 */
 	@Override
 	public OperationResult<SkillSpecializationValue<SR6Skill>> select(SR6SkillValue skillVal,
 			SkillSpecialization<SR6Skill> spec, boolean expertise) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.log(Level.TRACE, "ENTER: select({0}, {1}, {2})", skillVal.getKey(), spec, expertise);
+		try {
+			Possible poss = canSelectSpecialization(skillVal, spec, expertise);
+			if (!poss.get()) {
+				logger.log(Level.WARNING, "Tried to select a specialization, which is not allowed because: "+poss.getMostSevere());
+				return new OperationResult<>(poss);
+			}
+			
+			SkillSpecializationValue<SR6Skill> ret = new SkillSpecializationValue<>(spec);
+			skillVal.getSpecializations().add(ret);
+			logger.log(Level.INFO, "Select specialization ''{0}'' in skill ''{1}''", spec.getId(), skillVal.getKey());
+			
+			// Now pay
+			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+			if (settings.get(skillVal)==null) {
+				settings.put(skillVal, new PerSkillPoints());
+			}
+			if (points1>0) {
+				logger.log(Level.INFO, "Pay with skill points");
+				settings.get(skillVal).points1++;
+			} else {
+				settings.get(skillVal).karmaSpec++;
+				logger.log(Level.INFO, "Pay with karma");
+			}
+			logger.log(Level.INFO, "After paying: {0}",settings.get(skillVal));
+			
+			
+			parent.runProcessors();
+			
+			return new OperationResult<>(ret);
+		} finally {
+			logger.log(Level.TRACE, "LEAVE: select({0}, {1}, {2})", skillVal.getKey(), spec, expertise);
+		}
 	}
 
 	@Override
 	public boolean deselect(SR6SkillValue skillVal, SkillSpecializationValue<SR6Skill> spec) {
-		// TODO Auto-generated method stub
-		return false;
+		logger.log(Level.DEBUG, "ENTER: deselect({0}, {1}",skillVal, spec);
+		try {
+			Possible poss = canDeselectSpecialization(skillVal, spec);
+			if (!poss.get())
+				return false;
+			
+			skillVal.getSpecializations().remove(spec);
+			
+			return true;
+		} finally {
+			logger.log(Level.DEBUG, "LEAVE: deselect({0}, {1}",skillVal, spec);
+		}
 	}
 
 	//-------------------------------------------------------------------

@@ -9,8 +9,8 @@ import java.util.MissingResourceException;
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
 
-import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
+import de.rpgframework.shadowrun.AMartialArts;
 import de.rpgframework.shadowrun6.Technique.Category;
 import de.rpgframework.shadowrun6.persist.TechniqueCategoryConverter;
 
@@ -19,7 +19,7 @@ import de.rpgframework.shadowrun6.persist.TechniqueCategoryConverter;
  *
  */
 @DataItemTypeKey(id="martialart")
-public class MartialArts extends ComplexDataItem {
+public class MartialArts extends AMartialArts {
 	
 	@Attribute(name="cat")
 	@AttribConvert(TechniqueCategoryConverter.class)
@@ -30,6 +30,7 @@ public class MartialArts extends ComplexDataItem {
 
 	//-------------------------------------------------------------------
 	public MartialArts() {
+		super();
 	}
 
 	//-------------------------------------------------------------------

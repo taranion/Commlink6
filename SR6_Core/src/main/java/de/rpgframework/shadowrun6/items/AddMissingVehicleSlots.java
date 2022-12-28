@@ -42,6 +42,8 @@ public class AddMissingVehicleSlots implements CarriedItemProcessor {
 	@SuppressWarnings("rawtypes")
 	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac,
 			CarriedItem<?> model, List<Modification> unprocessed) {
+		if (model.getAsObject(SR6ItemAttribute.ITEMTYPE)==null)
+			return new OperationResult<List<Modification>>(unprocessed);
 		
 		ItemType type = model.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
 //		if (ItemType.isVehicle(type)) {

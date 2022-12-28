@@ -8,7 +8,7 @@
    </power>
    <power id="attribute_boost"   cost="0.25" hasLevel="true" act="MAJOR_ACTION">
 		<choices>
-			<choice type="ATTRIBUTE" uuid="1ec3bdd5-f9da-4ad2-8d44-9120529830e2" options="BODY,AGILITY,REACTION,STRENGTH" />
+			<choice type="ATTRIBUTE" ref="CHOICE" uuid="1ec3bdd5-f9da-4ad2-8d44-9120529830e2" options="BODY,AGILITY,REACTION,STRENGTH" />
 		</choices>
 	</power>
    <power id="combat_sense"      cost="0.5" hasLevel="true" act="PASSIVE">
@@ -33,7 +33,7 @@
    </power>
    <power id="improved_ability"  cost="0.5" hasLevel="true" act="PASSIVE">
 		<choices>
-			<choice type="SKILL" uuid="05054102-0183-482a-9e2b-84bc8d5f153f" options="athletics,biotech,con,conjuring,cracking,electronics,engineering,influence,outdoors,perception,piloting,stealth" />
+			<choice type="SKILL" ref="CHOICE" uuid="05054102-0183-482a-9e2b-84bc8d5f153f" options="athletics,biotech,con,conjuring,cracking,electronics,engineering,influence,outdoors,perception,piloting,stealth" />
 		</choices>
      <modifications>
         <valmod type="SKILL" ref="CHOICE" choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="1" />
@@ -44,7 +44,7 @@
    </power>
    <power id="improved_ability_combat"  cost="1" hasLevel="true" act="PASSIVE">
 		<choices>
-			<choice type="SKILL" uuid="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" options="close_combat,exotic_weapons,firearms" />
+			<choice type="SKILL" ref="CHOICE" uuid="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" options="close_combat,exotic_weapons,firearms" />
 		</choices>
      <modifications>
         <valmod type="SKILL" ref="CHOICE" choice="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" value="1" set="AUGMENTED"/>
@@ -55,7 +55,7 @@
    </power>
    <power id="improved_physical_attribute" cost="1" hasLevel="true" act="PASSIVE">
 		<choices>
-			<choice type="ATTRIBUTE" uuid="7282ba2c-fe33-4220-8fce-2ed77e0a3068" options="BODY,AGILITY,REACTION,STRENGTH" />
+			<choice type="ATTRIBUTE" ref="CHOICE" uuid="7282ba2c-fe33-4220-8fce-2ed77e0a3068" options="BODY,AGILITY,REACTION,STRENGTH" />
 		</choices>
      <modifications>
         <valmod type="ATTRIBUTE" ref="CHOICE" choice="7282ba2c-fe33-4220-8fce-2ed77e0a3068" value="1" set="AUGMENTED"/>
@@ -69,7 +69,7 @@
    </power>
    <power id="improved_sense"  cost="0.25" act="PASSIVE">
 		<choices>
-			<choice type="SENSE" uuid="220e6dfd-a76d-4c7e-97e1-dfdbdca464ef" />
+			<choice type="SENSE" ref="CHOICE" uuid="220e6dfd-a76d-4c7e-97e1-dfdbdca464ef" />
 		</choices>
    </power>
    <power id="killing_hands"   cost="0.5"  act="MINOR_ACTION"/>

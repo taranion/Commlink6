@@ -1,63 +1,88 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-    <item id="mems_basic_harness" avail="2" cost="300">
-        <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="10" />
+    <item id="mems_basic_harness" avail="2" price="300" type="ACCESSORY" subtype="ARMOR_BODY">
+        <usage mode="EMBEDDED" slot="ARMOR" value="10" />
         <armor rating="0" social="0" />
         <modifications>
-            <itemhookmod capacity="20" hook="ARMOR_MEMS"/>
+            <valmod type="HOOK" value="20" ref="ARMOR_MEMS"/>
         </modifications>
     </item>
 
-   <item id="concealable_ammo_pouch" avail="2L" cost="100" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+   <item id="concealable_ammo_pouch" avail="2L" price="100" count="y" type="ACCESSORY" subtype="ARMOR_BODY" reqVariant="y">
+      <usage mode="EMBEDDED" slot="ARMOR" value="3" />
+      <variant id="regular">
+      </variant>
+      <variant id="sealed">
+      	<attrdef id="PRICE" value="200"/>
+      </variant>
    </item>
-   <item id="concealable_ammo_pouch_selaed" avail="2L" cost="200" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+   <item id="drag_handle" avail="2" price="75" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="2" />
    </item>
-   <item id="drag_handle" avail="2" cost="75">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+   <item id="gear_access" avail="2" price="250" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="3" />
    </item>
-   <item id="gear_access" avail="2" cost="250" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+   <item id="hidden_pocket" avail="2" price="200" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="2" />
    </item>
-   <item id="hidden_pocket" avail="2" cost="200" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+   <item id="holster" avail="1" price="50" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="3" />
    </item>
-   <item id="holster" avail="1" cost="50">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
-   </item>
-   <item id="gel_weave" avail="6I" cost="5000" rate="true" maxrat="4" ratemul="PRICE CAPACITY DAMAGE_REDUCTION">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+   <item id="gel_weave" avail="6I" price="5000" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="$RATING*2" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/> 
+		</choices>
+		<attrdef id="PRICE" value="$RATING*5000"/>
       <modifications>
-          <itemattrmod attr="DAMAGE_REDUCTION" val="1"/>
+      	<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE_REDUCTION" value="1"/>
       </modifications>
    </item>
-   <item id="mystic_weave" avail="6L" cost="10000" rate="true" maxrat="4" ratemul="PRICE CAPACITY">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+   <item id="mystic_weave" avail="6L" price="10000" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="$RATING*2" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/> 
+		</choices>
+		<attrdef id="PRICE" value="$RATING*5000"/>
+		<attrdef id="DAMAGE_REDUCTION" value="$RATING"/>
    </item>
-   <item id="programmable_camouflage" avail="2" cost="75" >
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
+   <item id="programmable_camouflage" avail="2" price="75" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="2" />
    </item>
-   <item id="reactive_armor_plates" avail="9I" cost="2500" rate="true" maxrat="4" ratemul="PRICE CAPACITY DAMAGE_REDUCTION" multi="y">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="2"/>
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR_REACTIVE" cap="1"/>
+   <item id="reactive_armor_plates" avail="9I" price="2500" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="$RATING*2" />
+      <usage mode="EMBEDDED" slot="ARMOR_REACTIVE" value="1" />
       <modifications>
-          <itemattrmod attr="DAMAGE_REDUCTION" val="1"/>
+      	<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE_REDUCTION" value="1"/>
       </modifications>
    </item>
-   <item id="ruthenium_armor" avail="8I" cost="1500" rate="true" maxrat="4" ratemul="PRICE">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="6"/>
+   <item id="ruthenium_armor" avail="8I" price="1500" type="ACCESSORY" subtype="ARMOR_BODY">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/> 
+		</choices>
+      <usage mode="EMBEDDED" slot="ARMOR" value="6" />
+		<attrdef id="PRICE" value="$RATING*1500"/>
    </item>
-   <item id="shockweave" avail="3L" cost="1000" rate="true" maxrat="6" ratemul="PRICE">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="4"/>
+   <item id="shockweave" avail="3L" price="1000" type="ACCESSORY" subtype="ARMOR_BODY">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/> 
+		</choices>
+      <usage mode="EMBEDDED" slot="ARMOR" value="4" />
+		<attrdef id="PRICE" value="$RATING*1000"/>
    </item>
-   <item id="thermal_dissipation" avail="2" cost="250" rate="true" maxrat="2" ratemul="PRICE">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
+   <item id="thermal_dissipation" avail="2" price="250" type="ACCESSORY" subtype="ARMOR_BODY">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/> 
+		</choices>
+      <usage mode="EMBEDDED" slot="ARMOR" value="3" />
+		<attrdef id="PRICE" value="$RATING*250"/>
    </item>
-   <item id="toughweave" avail="9I" cost="15000" rate="true" maxrat="3" ratemul="PRICE CAPACITY DAMAGE_REDUCTION">
-      <useas type="ACCESSORY" subtype="ARMOR_BODY" slot="ARMOR" cap="3"/>
-      <modifications>
-          <itemattrmod attr="DAMAGE_REDUCTION" val="1"/>
-      </modifications>
+   <item id="toughweave" avail="9I" price="15000" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="$RATING*3" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/> 
+		</choices>
+		<attrdef id="DAMAGE_REDUCTION" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*15000"/>
    </item>
 </items>
