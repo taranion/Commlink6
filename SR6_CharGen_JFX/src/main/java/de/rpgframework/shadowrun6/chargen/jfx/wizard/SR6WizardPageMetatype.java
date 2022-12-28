@@ -54,7 +54,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	
 	private final static Logger logger = System.getLogger(SR6WizardPageMetatype.class.getPackageName()+".meta");
 	
-	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageMetatype.class.getName());
+	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageGear.class.getPackageName()+".SR6WizardPages");
 
 	private GeneratorWrapper charGen;
 	
@@ -215,14 +215,14 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 		}
 
 		// Back header
-		backHeader = new NumberUnitBackHeader("Karma");
+		backHeader = new NumberUnitBackHeader(ResourceI18N.get(RES, "label.karma"));
 		backHeader.setValue(charGen.getModel().getKarmaFree());
 		HBox.setMargin(backHeader, new Insets(0,10,0,10));
-		if (ResponsiveControlManager.getCurrentMode()==WindowMode.EXPANDED) {
-			super.setBackHeader(null);
-		} else {
+//		if (ResponsiveControlManager.getCurrentMode()==WindowMode.EXPANDED) {
+//			super.setBackHeader(null);
+//		} else {
 			super.setBackHeader(backHeader);
-		}
+//		}
 	}
 	
 	//-------------------------------------------------------------------
