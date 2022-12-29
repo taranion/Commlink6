@@ -134,7 +134,7 @@
       <requires>
          <selreq apply="DATA_ITEM">
           <datareq type="GEAR" ref="ares_light_fire_70" apply="DATA_ITEM"/>
-          <datareq type="GEAR" ref="ares_light_fire_70" apply="DATA_ITEM"/>
+          <datareq type="GEAR" ref="ares_light_fire_75" apply="DATA_ITEM"/>
          </selreq>
       </requires>
    </item>
