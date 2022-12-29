@@ -92,10 +92,10 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			logger.log(Level.INFO, "Selected skill {0}", data.getId());
 			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 			PerSkillPoints per = new PerSkillPoints();
-			if (points1>0)
+			if (points1>0 || (settings.cpToSkills<20 && settings.characterPoints>=2))
 				per.points1=1;
-			else if (points2>0)
-				per.points2=1;
+			else
+				per.points3=1;
 
 			settings.perSkill.put(result.get().getKey(), per);
 			logger.log(Level.DEBUG, "Added to PointBuy settings: {0}={1}", result.get().getKey(), per);
@@ -261,12 +261,12 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 					}
 					if (toPay>0 && points2>0) {
 						int payHere = Math.min(points2, toPay);
-						logger.log(Level.DEBUG, "Pay {0} with SP converted from CP for {1}", payHere, key);
+						logger.log(Level.DEBUG, "Pay {0} SP with converted CP for {1}: {2}", payHere, key, per);
 						points2 -= payHere;
 						toPay   -= payHere;
 						skillsFromCP += payHere;
 						settings.cpToSkills += payHere;
-						settings.characterPoints -= payHere;
+						settings.characterPoints -= payHere*2;
 					}
 					if (toPay>0) {
 						logger.log(Level.WARNING, "More skill points invested in {0} than possible - reduce it", key);

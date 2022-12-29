@@ -45,7 +45,7 @@ import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
  *
  */
 @GeneratorId("prio")
-public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator 
+public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	implements IPriorityGenerator<Shadowrun6Character, SR6PrioritySettings> {
 
 	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PriorityCharacterGenerator.class,
@@ -113,11 +113,11 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	@Override
 	public WizardPageType[] getWizardPages() {
 		return new WizardPageType[] { WizardPageType.PRIORITIES, WizardPageType.METATYPE,
-				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED, 
+				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
 				WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
 				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,
-				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO, 
-				WizardPageType.GEAR, WizardPageType.SIN_LICENSE, WizardPageType.LIFESTYLE, 
+				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO,
+				WizardPageType.GEAR, WizardPageType.SIN_LICENSE, WizardPageType.LIFESTYLE,
 				WizardPageType.CONTACTS, WizardPageType.NAME, };
 	}
 
@@ -155,7 +155,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		}
 		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl#createPartialController()
@@ -192,7 +192,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			}
 
 			createPartialController();
-			
+
 			// First the regular processing steps
 			for (Class<? extends ProcessingStep> cls : Shadowrun6Tools.RECALCULATE_STEPS) {
 				try {
@@ -200,7 +200,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 					try {
 						cons = cls.getConstructor(Shadowrun6Character.class);
 					} catch (NoSuchMethodException nsm) {
-						cons = cls.getConstructor(ShadowrunCharacter.class);						
+						cons = cls.getConstructor(ShadowrunCharacter.class);
 					}
 					processChain.add(cons.newInstance(model));
 				} catch (NoSuchMethodException e) {
@@ -209,11 +209,11 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 				} catch (Exception e) {
 					logger.log(Level.ERROR, "Failed instantiating "+cls,e);
 				}
-				
+
 			}
 
 			processChain.add(new ResetGenerator(this));
-			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
+//			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			// Now add generator specifics on top
 //			processChain.add(new ResetModifications(model));
 //			processChain.add(new EnsureAttributePresence(model));
@@ -257,14 +257,14 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	public void finish() {
 		// TODO Auto-generated method stub
 		logger.log(Level.WARNING, "TODO: finish");
-		
+
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> attr = model.getAttribute(key);
 			//attr.setDistributed(attr.)
 			attr.setStart(attr.getDistributed());
 		}
-		
-		
+
+
 		// ToDo: Resolve PACKS
 		logger.log(Level.WARNING, "TODO: resolve PACKs");
 		model.setInCareerMode(true);
@@ -283,11 +283,11 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
 		this.model = model;
 		this.handle= handle;
-		this.setupDone = false;	
-		
+		this.setupDone = false;
+
 		initializeModel();
 		logger.log(Level.INFO, "----------------Start generator-----------------------" + toString() + "\n\n\n");
-		
+
 		try {
 			setupProcessChain();
 		} catch (Exception e) {
@@ -301,7 +301,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	 * @see de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator#getSettings()
 	 */
 	@Override
-	public SR6PrioritySettings getSettings() {		
+	public SR6PrioritySettings getSettings() {
 		return model.getCharGenSettings(SR6PrioritySettings.class);
 	}
 

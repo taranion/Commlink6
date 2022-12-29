@@ -613,7 +613,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 					if (requiredAttrib>0) {
 						if (attrib>0) {
 							int pay = Math.min(attrib, requiredAttrib);
-							logger.log(Level.INFO, "  Pay {0} free attribute points for {1}", pay, key);
+							logger.log(Level.INFO, "  Pay {0} of {2} free attribute points for {1}", pay, key, attrib);
 							attrib -= pay;
 							requiredAttrib -= pay;
 						}

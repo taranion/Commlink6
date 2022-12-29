@@ -27,7 +27,7 @@ import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
  *
  */
 public class PointBuyGenTest {
-	
+
 	private Shadowrun6Character model;
 	private PointBuyCharacterGenerator charGen;
 
@@ -36,7 +36,7 @@ public class PointBuyGenTest {
 	public static void setupClass() {
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -46,7 +46,7 @@ public class PointBuyGenTest {
 		charGen = new PointBuyCharacterGenerator();
 		charGen.setModel(model, null);
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
@@ -55,13 +55,13 @@ public class PointBuyGenTest {
 		assertEquals(50, model.getKarmaFree());
 		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 		assertEquals(100, settings.characterPoints);
-		
+
 		SR6MetaType human = Shadowrun6Core.getItem(SR6MetaType.class, "human");
 		assertNotNull("Metatype 'human' not found", human);
 		assertNotNull("No metatype controller found", charGen.getMetatypeController());
 		charGen.getMetatypeController().canBeSelected(human);
 		charGen.getMetatypeController().select(human);
-		
+
 		// Select Technomancer
 		assertEquals(0, model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue());
 		assertEquals(0, model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue());
@@ -69,8 +69,8 @@ public class PointBuyGenTest {
 		assertEquals(90, settings.characterPoints);
 		assertEquals(0, model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue());
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue());
-		
-		/* 
+
+		/*
 		 * Attributes
 		 */
 		SR6PointBuyAttributeGenerator attrib = (SR6PointBuyAttributeGenerator) charGen.getAttributeController();
@@ -83,7 +83,7 @@ public class PointBuyGenTest {
 		 * We know we’re going to want that to
 		 * be higher, so 5 special attribute points costs us 20
 		 * more character points, bringing our total spent to
-		 * 30. 
+		 * 30.
 		 */
 		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue());
@@ -92,7 +92,7 @@ public class PointBuyGenTest {
  		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
  		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).wasSuccessful());
 		assertEquals(70, settings.characterPoints);
-		/* 
+		/*
 		 * We get one free special attribute point, which
 		 * can be used to raise our Edge to 2, but we’ll spend
 		 * another 4 CP to raise it up to 3 (total CP currently
@@ -100,12 +100,12 @@ public class PointBuyGenTest {
 		 */
 		assertTrue(attrib.increasePoints(model.getAttribute(ShadowrunAttribute.EDGE)).wasSuccessful());
 		assertEquals(66, settings.characterPoints);
-		
+
 		/*
-		 * For our attributes, we end up with Body 1, Agility 1, Reaction 4, Strength 1, 
+		 * For our attributes, we end up with Body 1, Agility 1, Reaction 4, Strength 1,
 		 * Willpower 5, Logic 6, Intuition 5, Charisma 5. This requires 20 attribute
-		 * points. Since we get four for free, we only need to buy 16 attribute 
-		 * points for 32 CPs. 
+		 * points. Since we get four for free, we only need to buy 16 attribute
+		 * points for 32 CPs.
 		 */
 		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.REACTION)).wasSuccessful()); // 2
 		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.REACTION)).wasSuccessful()); // 3
@@ -128,9 +128,9 @@ public class PointBuyGenTest {
 		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.CHARISMA)).wasSuccessful()); // 4
 		assertTrue(attrib.increasePoints2(model.getAttribute(ShadowrunAttribute.CHARISMA)).wasSuccessful()); // 5
 		assertEquals(34, settings.characterPoints);
-		
+
 		/*
-		 *  We’ll spend 10 of our Karma to raise our Body to 2, and 25 more 
+		 *  We’ll spend 10 of our Karma to raise our Body to 2, and 25 more
 		 *  to raise our Agility up to 3.
 		 */
 		assertEquals(50, model.getKarmaFree());
@@ -139,8 +139,8 @@ public class PointBuyGenTest {
 		assertTrue(attrib.increasePoints3(model.getAttribute(ShadowrunAttribute.AGILITY)).wasSuccessful()); // 3
 		assertEquals(15, model.getKarmaFree());
 		assertEquals(34, settings.characterPoints);
-		
-		/* 
+
+		/*
 		 * Skills
 		 * Having spent 66 of our 100 CPs, we’ll dump the remaining 34
 		 * points into buying 17 skill points.
@@ -181,7 +181,9 @@ public class PointBuyGenTest {
 		SR6Skill perception = Shadowrun6Core.getItem(SR6Skill.class, "perception");
 		assertNotNull(perception);
 		assertTrue(skill.select(perception).wasSuccessful());
+		assertEquals(26, settings.characterPoints);
 		assertTrue(skill.increase(model.getSkillValue(perception)).wasSuccessful()); // 2
+		assertEquals(24, settings.characterPoints);
 		assertTrue(skill.increase(model.getSkillValue(perception)).wasSuccessful()); // 3
 		assertEquals(22, settings.characterPoints);
 		// Stealth
@@ -204,11 +206,11 @@ public class PointBuyGenTest {
 		poss = skill.canSelectSpecialization(model.getSkillValue(tasking), tasking.getSpecialization("compiling"), false);
 		assertTrue(poss.toString(), poss.get());
 		skill.select(model.getSkillValue(tasking), tasking.getSpecialization("compiling"), false);
-		assertEquals(0, settings.characterPoints);
+		assertEquals("Specialization not detected",0, settings.characterPoints);
 
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
 	}
-	
+
 }
