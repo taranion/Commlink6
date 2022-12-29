@@ -44,18 +44,18 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 @DataItemTypeKey(id = "item")
 public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6PieceOfGearVariant,SR6AlternateUsage> {
-	
+
 	public final static String FLAG_AUGMENTATION = "AUGMENTATION";
 	public final static String FLAG_MATRIX_DEVICE = "MATRIX_DEVICE";
-	private static String FLAG_NOWIFI = "NOWIFI"; 
+	private static String FLAG_NOWIFI = "NOWIFI";
 	public final static UUID UUID_AUGMENTATION_QUALITY = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170c");
 	public final static UUID UUID_RATING = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d");
 	public final static UUID UUID_AMMUNITION_TYPE = UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3");
 	public final static Choice CHOICE_AUGMENTATION_QUALITY = new Choice(
-			ItemTemplate.UUID_AUGMENTATION_QUALITY, 
+			ItemTemplate.UUID_AUGMENTATION_QUALITY,
 			ShadowrunReference.AUGMENTATION_QUALITY);
 	public final static UUID UUID_UNUSED_SOFTWARE_DEVICE = UUID.fromString("8fc8c01e-3023-4ba6-9d02-99ba6fcd6979");
-	
+
 	public final static OperationMode MODE_WIRELESS_ON = new OperationMode("WIRELESS");
 
 	@Attribute(name="avail",required=false)
@@ -73,14 +73,14 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
 		@ElementList(entry="vehicle", type=VehicleData.class, inline=true),
 	})
-	private List<IGearTypeData> shortcuts; 
+	private List<IGearTypeData> shortcuts;
 
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
 		shortcuts = new ArrayList<>();
 		super.refType = ShadowrunReference.ITEM_ATTRIBUTE;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public ItemAttributeDefinition getAttribute(IItemAttribute attrib, SR6PieceOfGearVariant variant) {
 		ItemAttributeDefinition def = null;
@@ -89,13 +89,13 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			if (def!=null)
 				return def;
 		}
-		
+
 		return cache.get(attrib);
 	}
 
 //	//-------------------------------------------------------------------
 //	public Choice getChoice(UUID uuid) {
-//		if (UUID_AUGMENTATION_QUALITY.equals(uuid)) 
+//		if (UUID_AUGMENTATION_QUALITY.equals(uuid))
 //			return CHOICE_AUGMENTATION_QUALITY;
 //		return super.getChoice(uuid);
 //	}
@@ -125,7 +125,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			logger.log(Level.WARNING, "ToDo: Usage: "+usage);
 			ret.addAll(usage.getAttacks());
 		}
-		
+
 		return ret;
 	}
 
@@ -135,14 +135,14 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 //		attributes.clear();
 		if (type==null) throw new DataErrorException(this, "sort type not set for '"+id+"'");
 		if (subtype==null) throw new DataErrorException(this, "sort subtype not set for '"+id+"'");
-		
+
 		setAttribute(SR6ItemAttribute.PRICE, super.price);
 		setAttribute(SR6ItemAttribute.ITEMTYPE, type);
 		setAttribute(SR6ItemAttribute.ITEMSUBTYPE, subtype);
 
-		if (availability!=null) 
+		if (availability!=null)
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);
-		
+
 		/* If there is no USAGE assume a CARRIED mode and no slot */
 		if (usages.isEmpty()) {
 			if (requireVariant) {
@@ -156,7 +156,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				usages.add(new Usage(CarryMode.CARRIED));
 			}
 		}
-		
+
 		// Validate flags
 		for (String flag : getFlags()) {
 			try {
@@ -170,8 +170,8 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		// Make a implant version of every weapon
 		// for that remove normal accessory slots and replace them with
 		// implant versions
-		
-		
+
+
 		// Validate hook identifier in modifications
 		for (Modification tmp : getModifications()) {
 			tmp.validate();
@@ -187,13 +187,14 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 					e.printStackTrace();
 					throw new DataErrorException(this, "Internal error: "+e.getMessage());
 				}
-				
+
 			}
 		}
-		
+
 		validateModificationSlots();
-		
-		// If it is a firearm, mark it that the user may select to use caseless 
+		validateAutosoftsForVehicles();
+
+		// If it is a firearm, mark it that the user may select to use caseless
 		// ammo with it
 		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS) {
 			// Auto-detect ammunition class, if necessary
@@ -230,7 +231,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				this.addUsage(implantUse);
 			}
 		}
-		
+
 		// If this is a drone, ensure there is a SOFTWARE slot with Pilot/2 round up capacity
 		if (ItemType.isDrone(type) || type.name().contains("DRONE")) {
 			this.countable = true;
@@ -244,7 +245,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 					VehicleData vdata = (VehicleData) shortcuts.stream().filter(sc -> sc instanceof VehicleData).findFirst().get();
 					pilot = vdata.getPilot();
 				}
-				if (pilot>0) {					
+				if (pilot>0) {
 					ValueModification autoMod = new ValueModification(ShadowrunReference.HOOK, ItemHook.SOFTWARE.name(), (int)Math.round( pilot/2.0d));
 					autoMod.setSet(ValueType.NATURAL);
 					autoMod.setApplyTo(ApplyTo.DATA_ITEM);
@@ -256,7 +257,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				}
 			}
 		}
-		
+
 
 		// If it has an AUGMENTATION flag, add that decision
 		if (flags.contains(ItemTemplate.FLAG_AUGMENTATION) && this.getChoice(ItemTemplate.UUID_AUGMENTATION_QUALITY)==null) {
@@ -273,16 +274,16 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 						throw new DataErrorException(this, "No such flag '"+flag+"' (in variant)");
 					}
 				}
-				
+
 				if (variant.hasFlag(FLAG_AUGMENTATION) && variant.getChoice(UUID_AUGMENTATION_QUALITY)==null) {
 					variant.addChoice(CHOICE_AUGMENTATION_QUALITY);
 				}
 			}
 		}
-		
+
 		super.validate();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void validateAmmunitionClass() {
 		if (getAttribute(SR6ItemAttribute.AMMUNITION_CLASS)==null) {
@@ -291,11 +292,11 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		case HOLDOUTS:
 		case PISTOLS_LIGHT:
 		case MACHINE_PISTOLS:
-			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.LIGHT); 
+			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.LIGHT);
 			break;
 		case PISTOLS_HEAVY:
 		case SUBMACHINE_GUNS:
-			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.HEAVY); 
+			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.HEAVY);
 			break;
 		case SHOTGUNS: this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.SHOTGUN); break;
 		case RIFLE_ASSAULT:
@@ -305,7 +306,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		case LMG:
 		case MMG:
 		case HMG:
-			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.MACHINE_GUN); 
+			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.MACHINE_GUN);
 			break;
 		case ASSAULT_CANNON:
 			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.ASSAULT_CANNON); break;
@@ -354,16 +355,22 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			break;
 		case AMMUNITION:
 			switch (subtype) {
-			case GRENADES:       
-			case AMMUNITION: 
-				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 1); 
+			case GRENADES:
+			case AMMUNITION:
+				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 1);
 				break;
 			}
 			break;
-		} 
+		}
 	}
-	
-	
+
+	//-------------------------------------------------------------------
+	private void validateAutosoftsForVehicles() {
+		if (ItemType.isVehicle(type) && getAttribute(SR6ItemAttribute.SOFTWARE_TYPES)==null) {
+			setAttribute(SR6ItemAttribute.SOFTWARE_TYPES, SoftwareTypes.AUTOSOFT);
+		}
+	}
+
 //	//-------------------------------------------------------------------
 //	public List<SR6GearUsage> getAlternates() {
 //		if (alternates.isEmpty()) {
@@ -447,7 +454,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	//-------------------------------------------------------------------
 	public Collection<String> getWiFiAdvantageStrings(CarryMode carry, PieceOfGearVariant variant, Locale locale) {
 		List<String> ret = new ArrayList<>();
-		
+
 		String key = "item."+id+".wifi";
 		String multiLine = getLocalizedString(locale, key);
 		if (!multiLine.equals(key)) {
@@ -463,16 +470,16 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			while (tok.hasMoreTokens())
 				ret.add(tok.nextToken());
 		}
-		
+
 		// TODO: Variant
-		
+
 		return ret;
 	}
 
 	//-------------------------------------------------------------------
 	public List<AGearData> getPossibilities(CarryMode carry) {
 		List<AGearData> ret = new ArrayList<>();
-		if (getUsage(carry)!=null && !requiresVariant()) 
+		if (getUsage(carry)!=null && !requiresVariant())
 			ret.add(ItemUtil.calculateVirtualItem(this, null, carry));
 		for (SR6PieceOfGearVariant variant : getVariants()) {
 			if (variant.getUsage(carry)!=null || (getUsage(carry)!=null && requiresVariant())) {
@@ -495,12 +502,12 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		return hasFlag(FLAG_MATRIX_DEVICE) || attr.getValue()==ItemType.ELECTRONICS &&
 				( sub==ItemSubType.COMMLINK ||  sub==ItemSubType.CYBERDECK ||  sub==ItemSubType.RIGGER_CONSOLE  ||  sub==ItemSubType.TAC_NET );
 	}
-	
+
 	//-------------------------------------------------------------------
 	protected Choice getHardcodedChoice(UUID uuid) {
 		if (CHOICE_AUGMENTATION_QUALITY.getUUID().equals(uuid))
 			return CHOICE_AUGMENTATION_QUALITY;
-			
+
 		return null;
 	}
 
@@ -509,7 +516,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 class VariantItemTemplate extends ItemTemplate {
 
 	SR6PieceOfGearVariant variant;
-	
+
 	public VariantItemTemplate(SR6PieceOfGearVariant variant) {
 		this.variant = variant;
 	}
