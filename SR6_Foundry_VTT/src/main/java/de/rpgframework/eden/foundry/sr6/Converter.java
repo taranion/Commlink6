@@ -58,7 +58,7 @@ import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
  *
  */
 public class Converter {
-	
+
 	private final static Logger logger = System.getLogger(Converter.class.getPackageName());
 
 	//-------------------------------------------------------------------
@@ -134,11 +134,11 @@ public class Converter {
 		if (tmp.getItemSubtype(CarryMode.CARRIED)!=null)
 			data.subtype    = tmp.getItemSubtype(CarryMode.CARRIED).name();
 		// If necessary, consult IMPLANTED
-		if (data.type==null && tmp.getItemType(CarryMode.IMPLANTED)!=null) 
+		if (data.type==null && tmp.getItemType(CarryMode.IMPLANTED)!=null)
 			data.type       = tmp.getItemType(CarryMode.IMPLANTED).name();
-		if (data.subtype==null && tmp.getItemSubtype(CarryMode.IMPLANTED)!=null) 
+		if (data.subtype==null && tmp.getItemSubtype(CarryMode.IMPLANTED)!=null)
 			data.subtype       = tmp.getItemSubtype(CarryMode.IMPLANTED).name();
-		
+
 		if (tmp.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
 			data.availDef   = tmp.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue();
 		if (tmp.getAttribute(SR6ItemAttribute.PRICE)!=null) {
@@ -184,7 +184,7 @@ public class Converter {
 	//-------------------------------------------------------------------
 	public static ItemData<FVTTGear> convertGear(CarriedItem<ItemTemplate> val, Locale loc) {
 		ItemTemplate tmp = val.getResolved();
-		
+
 		FVTTGear data = new FVTTGear();
 		try {
 			if (ItemType.isWeapon(val.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue()))
@@ -200,8 +200,8 @@ public class Converter {
 			data.price   = val.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 //		if (val.getAsObject(SR6ItemAttribute.SKILL)!=null)
 //			data.availDef   = ((Availability)val.getAsObject(SR6ItemAttribute.SKILL).getModifiedValue()).getName(loc);
-			
-			
+
+
 			if (tmp.getAttribute(SR6ItemAttribute.SKILL)!=null)
 				data.skill      = tmp.getAttribute(SR6ItemAttribute.SKILL).getRawValue();
 			if (tmp.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)!=null)
@@ -296,7 +296,7 @@ public class Converter {
 		spell.data.wild      = item.isWild();
 		for (SpellFeatureReference ref : item.getFeatures()) {
 			switch (ref.getFeature().getId()) {
-			case "sense_multi": spell.data.multiSense=true; break; 
+			case "sense_multi": spell.data.multiSense=true; break;
 			}
 		}
 
@@ -326,7 +326,7 @@ public class Converter {
 		ItemData<FVTTComplexForm> ret = convertComplexForm(item.getModifyable(), loc);
 		if (item.getDecisions()!=null && !item.getDecisions().isEmpty())
 			ret.getData().choice = item.getDecisions().get(0).getValue();
-		
+
 		return ret;
 	}
 
@@ -377,7 +377,7 @@ public class Converter {
 			return;
 		fvtt.points = val.getDistributed();
 		fvtt.modifier = val.getModifier();
-		
+
 		for (SkillSpecializationValue<SR6Skill> spec : val.getSpecializations()) {
 			if (spec.getDistributed()==2)
 				fvtt.specialization = spec.getResolved().getId();
@@ -411,12 +411,12 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	private static void fillVehicleAttributes(FVTTVehicleActor actor, ItemTemplate item) {
-		actor.handlOn  = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.HANDLING).getValue()).getOnRoad();		
-		actor.handlOff = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.HANDLING).getValue()).getOffRoad();		
-		actor.accOn    = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.ACCELERATION).getValue()).getOnRoad();		
-		actor.accOff   = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.ACCELERATION).getValue()).getOffRoad();		
-		actor.spdiOn   = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL).getValue()).getOnRoad();		
-		actor.spdiOff  = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL).getValue()).getOffRoad();		
+		actor.handlOn  = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.HANDLING).getValue()).getOnRoad();
+		actor.handlOff = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.HANDLING).getValue()).getOffRoad();
+		actor.accOn    = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.ACCELERATION).getValue()).getOnRoad();
+		actor.accOff   = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.ACCELERATION).getValue()).getOffRoad();
+		actor.spdiOn   = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL).getValue()).getOnRoad();
+		actor.spdiOff  = ((OnRoadOffRoadValue) item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL).getValue()).getOffRoad();
 		actor.tspd     = item.getAttribute(SR6ItemAttribute.TOPSPEED).getDistributed();
 		actor.bod      = item.getAttribute(SR6ItemAttribute.BODY).getDistributed();
 		actor.arm      = item.getAttribute(SR6ItemAttribute.ARMOR).getDistributed();
@@ -458,7 +458,7 @@ public class Converter {
 		ActorData<FVTTCritter> foundry = new ActorData<FVTTCritter>(data.getName(loc), "Critter", actor);
 		fillAttributes(foundry.data, data);
 		fillSkills(foundry.data, data);
-		
+
 		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
 		data.getGear().forEach(tmp -> {
@@ -476,13 +476,13 @@ public class Converter {
 		case GRUNT:
 		case CONTACT:
 			actor.type = Type.NPC; break;
-		case CRITTER: 
-		case CRITTER_AWAKENED: 
+		case CRITTER:
+		case CRITTER_AWAKENED:
 			actor.type = Type.CRITTER; break;
 		case SPIRIT:  actor.type = Type.SPIRIT; break;
 		case SPRITE:  actor.type = Type.SPRITE; break;
 		}
-		
+
 		actor.movement.walk = 5;
 		actor.movement.sprint = 10;
 		actor.movement.perHit = 1;
@@ -490,7 +490,7 @@ public class Converter {
 		ActorData<FVTTNPCActor> foundry = new ActorData<FVTTNPCActor>(data.getName(loc), "NPC", actor);
 		fillAttributes(foundry.data, data);
 		fillSkills(foundry.data, data);
-		
+
 		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
 		data.getSpells().forEach(tmp -> foundry.addItem(convertSpell(tmp,loc)));
@@ -500,8 +500,8 @@ public class Converter {
 			converted.getData().usedForPool=true;
 			foundry.addItem(convertGear(tmp,loc));
 		});
-		
-		
+
+
 		return foundry;
 	}
 
@@ -509,13 +509,13 @@ public class Converter {
 	private static ActorData<FVTTVehicleActor> convertVehicleActor(ItemTemplate data, Locale loc) {
 		FVTTVehicleActor actor = new FVTTVehicleActor();
 		actor.genesisID = data.getId();
-		
+
 		ActorData<FVTTVehicleActor> foundry = new ActorData<FVTTVehicleActor>(data.getName(loc), "Vehicle", actor);
 
 		fillVehicleAttributes(foundry.data, data);
 		fillAccessories(foundry, data, loc);
 //		fillSkills(foundry.data, data);
-//		
+//
 //		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 //		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
 
