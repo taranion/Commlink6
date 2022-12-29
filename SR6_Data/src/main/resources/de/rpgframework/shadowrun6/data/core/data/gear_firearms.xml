@@ -424,12 +424,12 @@
    <item avail="4L" price="4175" id="ingram_valiant" type="WEAPON_FIREARMS" subtype="LMG">
       <modifications>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
-         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
-         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
       </modifications>
       <weapon attack="2,11,12,7,3" ammo="50(c)/100(belt)" dmg="4P" mode="SA/BF/FA"  skill="firearms" spec="firearms/machine_guns"/>
    </item>

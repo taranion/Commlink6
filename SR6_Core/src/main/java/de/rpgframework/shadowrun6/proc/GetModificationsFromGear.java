@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.core.BabylonEventBus;
+import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.PieceOfGear;
@@ -54,21 +56,32 @@ public class GetModificationsFromGear implements ProcessingStep {
 
 		logger.log(Level.TRACE, "ENTER: process");
 		try {
+			Throwable lastException = null;
 			for (CarriedItem<? extends PieceOfGear> item : model.getCarriedItems()) {
-				if (item.isDirty()) {
-					SR6GearTool.recalculate("", model, item);
-				}
-				
-				for (Modification mod : item.getCharacterModifications()) {
-					logger.log(Level.INFO, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());
-					// Make specific instances of the modification (if necessary)
-					// Calls ShadowrunTools.instantiateModification 
-					logger.log(Level.TRACE, "--item {0}: preMod={1} ", item.getKey(), mod);
-					Modification realMod = mod.getReferenceType().instantiateModification(mod, item, model);
-					logger.log(Level.TRACE, "--item {0}: realMod={1} ", item.getKey(), realMod);
+				try {
+					if (item.isDirty()) {
+						SR6GearTool.recalculate("", model, item);
+					}
+					
+					for (Modification mod : item.getCharacterModifications()) {
+						logger.log(Level.INFO, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());
+						// Make specific instances of the modification (if necessary)
+						// Calls ShadowrunTools.instantiateModification 
+						logger.log(Level.TRACE, "--item {0}: preMod={1} ", item.getKey(), mod);
+						Modification realMod = mod.getReferenceType().instantiateModification(mod, item, model);
+						logger.log(Level.TRACE, "--item {0}: realMod={1} ", item.getKey(), realMod);
 
-					unprocessed.add(realMod);
-				}
+						unprocessed.add(realMod);
+					}
+				} catch (Exception e) {
+					logger.log(Level.ERROR, "Error processing item {0} of {1}: {2}", item.getKey(), model.getName(), e.toString());
+					logger.log(Level.ERROR, "Error was",e);
+					lastException = e;
+				}				
+			}
+			// If there was an error, inform user
+			if (lastException!=null) {
+				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Error processing gear of "+model.getName(), lastException);
 			}
 		} finally {
 			logger.log(Level.TRACE, "LEAVE : process() ends with "+unprocessed.size()+" modifications still to process");

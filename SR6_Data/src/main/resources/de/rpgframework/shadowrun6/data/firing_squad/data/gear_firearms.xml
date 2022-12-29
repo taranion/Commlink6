@@ -277,7 +277,6 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
-         <itemmod type="HOOK" ref="STOCK"/>
       </modifications>
       <weapon dmg="7P" mode="FA" attack="1,10,10,10,8" ammo="100(belt)" skill="firearms" spec="firearms/machine_guns"/>
    </item>

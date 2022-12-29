@@ -472,6 +472,7 @@ public class SR6CarriedItemTest {
 		expect = new int[] {11,12,9,0,0};
 		real   = (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
 		assertTrue("Expect "+Arrays.toString(expect)+" but got "+Arrays.toString(real), Arrays.equals(expect, real));
+		assertEquals(1000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 	}
 	
 }

@@ -33,11 +33,11 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  *
  */
 public abstract class CommonSkillController extends ControllerImpl<SR6Skill> implements SR6SkillController, ComplexDataItemController<SR6Skill, SR6SkillValue> {
-	
+
 	protected final static Logger logger = System.getLogger(CommonSkillController.class.getPackageName()+".skill");
-	
+
 	protected final static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(CommonSkillGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
-	
+
 	public final static String I18N_RESTRICTED_SKILL = "skill.error.restricted";
 	public final static String I18N_SKILL_IS_MAXED   = "skill.error.isAtMaximum";
 	public final static String I18N_NOT_SELECTED     = "skill.error.notSelected";
@@ -47,14 +47,14 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	protected List<SR6Skill> available;
 	protected List<SR6Skill> allowed;
 	protected Shadowrun6Character model;
-	
+
 	protected Map<SR6Skill, SR6SkillValue> mapAutoSkillValues;
 
 	//-------------------------------------------------------------------
 	public CommonSkillController(SR6CharacterController parent) {
 		super(parent);
 		model = parent.getModel();
-		
+
 		available = new ArrayList<>();
 		allowed   = new ArrayList<>();
 		mapAutoSkillValues = new HashMap<>();
@@ -79,9 +79,9 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	@Override
 	public Possible canBeIncreased(SR6SkillValue value) {
 		// Knowledge skills have no level
-		if (value.getModifyable().getType()==SkillType.KNOWLEDGE) 
+		if (value.getModifyable().getType()==SkillType.KNOWLEDGE)
 			return Possible.FALSE;
-		
+
 		return new Possible(value.getDistributed()<getMaximum(value), I18N_SKILL_IS_MAXED);
 	}
 
@@ -92,10 +92,10 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	@Override
 	public Possible canBeDecreased(SR6SkillValue value) {
 		// Knowledge skills have no level
-		if (value.getModifyable().getType()==SkillType.KNOWLEDGE) 
+		if (value.getModifyable().getType()==SkillType.KNOWLEDGE)
 			return Possible.FALSE;
 		// Language skills cannot be decreased below 1
-		if (value.getModifyable().getType()==SkillType.KNOWLEDGE) 
+		if (value.getModifyable().getType()==SkillType.KNOWLEDGE)
 			return Possible.FALSE;
 		// Is automatically added
 //		if (model.isAutoSkill(val))
@@ -120,11 +120,11 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 //			logger.log(Level.WARNING, "Trying to increase {0} which cannot be increased: {1}", ref.getSkill().getId(), allowed);
 //			return false;
 //		}
-//	
+//
 //		// Change model
 //		ref.setDistributed(ref.getDistributed()+1);
 //		logger.log(Level.INFO, "Increase skill "+ref.getModifyable().getId()+" to "+ref.getDistributed());
-//		
+//
 //		return true;
 //	}
 //
@@ -171,15 +171,19 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	public List<SR6SkillValue> getSelected() {
 		return model.getSkillValues();
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.ISkillController#getAll()
 	 */
 	@Override
 	public List<SR6SkillValue> getAll() {
-		List<SR6SkillValue> ret = new ArrayList<>(); 
+		List<SR6SkillValue> ret = new ArrayList<>();
 		for (SR6Skill key : Shadowrun6Core.getItemList(SR6Skill.class)) {
+			if (key.isRestricted() && !allowed.contains(key)) {
+				mapAutoSkillValues.remove(key);
+				continue;
+			}
 			// Check if skill is already selected
 			SR6SkillValue sVal = model.getSkillValue(key);
 			if (sVal==null) {
@@ -187,8 +191,6 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 				sVal = mapAutoSkillValues.get(key);
 				if (sVal==null) {
 					// If not, create it - if allowed
-					if (key.isRestricted() && !allowed.contains(key))
-						continue;					
 					sVal = new SR6SkillValue(key, 0);
 					mapAutoSkillValues.put(key, sVal);
 				}
@@ -196,6 +198,8 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 			if (sVal!=null)
 				ret.add(sVal);
 		}
+		logger.log(Level.INFO, "getAll() returns {0}",ret);
+		logger.log(Level.INFO, "allowed are {0}",allowed);
 		return ret;
 	}
 
@@ -208,7 +212,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		if (skill.isRestricted() && !available.contains(skill)) {
 			return new Possible(I18N_RESTRICTED_SKILL);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -222,7 +226,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		// If the skill has modifications, it should not be deletable
 		if (value.getModifier()>0 || value.isAutoAdded())
 			return new Possible(I18N_SKILL_AUTOSELECT);
-		
+
 		return Possible.TRUE;
 	}
 
@@ -235,13 +239,13 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		logger.log(Level.DEBUG, "ENTER select("+data+")");
 		if (data==null) throw new NullPointerException();
 		try {
-			// Ensure selecting this skill is allowed 
+			// Ensure selecting this skill is allowed
 			Possible possible = canBeSelected(data, decisions);
 			if (!possible.get()) {
 				logger.log(Level.WARNING, "Tried to select a skill that is not valid to select: "+possible);
 				return new OperationResult<>(possible);
 			}
-			
+
 			// Now add skill to character
 			// It may be already present due to modifications
 			SR6SkillValue ret = model.getSkillValue(data);
@@ -251,14 +255,14 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 				model.addSkillValue(ret);
 			}
 			logger.log(Level.DEBUG, "Added skill {0} to model", data);
-			
+
 			for (Decision dec : decisions) {
 				ret.addDecision(dec);
 			}
-			
-			return new OperationResult<SR6SkillValue>(ret);			
+
+			return new OperationResult<SR6SkillValue>(ret);
 		} finally {
-			logger.log(Level.DEBUG, "LEAVE select("+data+")");			
+			logger.log(Level.DEBUG, "LEAVE select("+data+")");
 		}
 	}
 
@@ -270,36 +274,36 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	public boolean deselect(SR6SkillValue value) {
 		logger.log(Level.DEBUG, "ENTER deselect("+value+")");
 		try {
-			// Ensure selecting this skill is allowed 
+			// Ensure selecting this skill is allowed
 			Possible possible = canBeDeselected(value);
 			if (!possible.get()) {
 				logger.log(Level.WARNING, "Tried to deselect a skill that is not valid to deselect: "+possible);
 				return false;
 			}
-			
+
 			// Now remove skill from character
 			model.removeSkillValue(value);
-			
+
 			return true;
 		} finally {
-			logger.log(Level.DEBUG, "LEAVE deselect("+value+")");			
+			logger.log(Level.DEBUG, "LEAVE deselect("+value+")");
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.ISkillController#getAvailableSpecializations()
 	 */
 	public List<SkillSpecialization<SR6Skill>> getAvailableSpecializations(SR6SkillValue skillVal) {
-		List<SkillSpecialization<SR6Skill>> ret = new ArrayList<>(); 
+		List<SkillSpecialization<SR6Skill>> ret = new ArrayList<>();
 		for (SkillSpecialization raw : skillVal.getSkill().getSpecializations()) {
 			ret.add(raw);
 		}
 		// Only those not already selected
 		ret = ret.stream().filter(sp -> skillVal.getSpecializations().stream().allMatch(s2 -> !s2.getKey().equals(sp.getId()))).collect(Collectors.toList());
-		
+
 		return ret;
-		
+
 	}
 
 	//-------------------------------------------------------------------

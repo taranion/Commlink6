@@ -152,7 +152,7 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 			return new OperationResult<>(poss);
 		}
 		
-		ItemEnhancementValue<SR6ItemEnhancement> iVal = new ItemEnhancementValue<SR6ItemEnhancement>(value);
+		ItemEnhancementValue<SR6ItemEnhancement> iVal = new ItemEnhancementValue<SR6ItemEnhancement>(value);		
 		toModify.addEnhancement(iVal);
 		logger.log(Level.INFO, "Added ItemEnhancement {0} to {1}", iVal, toModify);
 		
@@ -168,8 +168,7 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 	 */
 	@Override
 	public Possible canBeDeselected(ItemEnhancementValue<SR6ItemEnhancement> value) {
-		// TODO Auto-generated method stub
-		return null;
+		return (toModify.getEnhancements().contains(value))?Possible.TRUE:Possible.FALSE; 
 	}
 
 	//-------------------------------------------------------------------
@@ -178,7 +177,12 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 	 */
 	@Override
 	public boolean deselect(ItemEnhancementValue<SR6ItemEnhancement> value) {
-		// TODO Auto-generated method stub
+		logger.log(Level.INFO, "Deselect "+value);
+		Possible poss = canBeDeselected(value);
+		if (!poss.get()) {
+			logger.log(Level.WARNING, "Trying to deselect an ItemEnhancement that may not be deselected: "+poss);
+			return false;
+		}
 		
 		toModify.removeEnhancement(value);
 		logger.log(Level.INFO, "Removed ItemEnhancement {0} from {1}", value, toModify);

@@ -88,6 +88,17 @@
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
    
+   <item avail="4L" price="5000" id="cyberdeck" type="CYBERWARE" subtype="CYBER_HEADWARE">
+  		<usage mode="EMBEDDED" slot="HEADWARE_IMPLANT" value="4"/>
+   	<flags><flag>AUGMENTATION</flag></flags>
+   	<variant id="bodyware">
+	   	<usage mode="IMPLANTED"/>
+	   	<attrdef id="ESSENCECOST" value="0.4"/>
+   	</variant>
+     <modifications>
+         <itemmod type="HOOK" ref="CYBERDECK"/>
+     </modifications>
+   </item>
    <item id="cyberjack" type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
 			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>

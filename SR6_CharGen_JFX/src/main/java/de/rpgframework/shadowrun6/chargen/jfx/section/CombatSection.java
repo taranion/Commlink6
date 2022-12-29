@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.jfx.section;
 
 import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
@@ -25,7 +26,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -270,10 +270,18 @@ public class CombatSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void showPhysical(Shadowrun6Character model) {
-		lbAttackRating.setText(model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool().toString() );
-		lbAttackRating.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool().toExplainString()) );
-		lbDefenseRating.setText(model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL).getPool().toString() );
-		lbDefenseRating.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL).getPool().toExplainString()) );
+		if (model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool()!=null) {
+			lbAttackRating.setText(model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool().toString() );
+			lbAttackRating.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool().toExplainString()) );
+		} else {
+			logger.log(Level.ERROR, "No ATTACK_RATING_PHYSICAL pool calculated");
+		}
+		if (model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL).getPool()!=null) {
+			lbDefenseRating.setText(model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL).getPool().toString() );
+			lbDefenseRating.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL).getPool().toExplainString()) );
+		} else {
+			logger.log(Level.ERROR, "No DEFENSE_RATING_PHYSICAL pool calculated");
+		}
 	}
 
 	//-------------------------------------------------------------------

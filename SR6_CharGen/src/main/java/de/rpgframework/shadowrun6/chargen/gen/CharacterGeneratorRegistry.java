@@ -33,7 +33,7 @@ public class CharacterGeneratorRegistry {
 		generators = new LinkedHashMap<String,Class<? extends SR6CharacterGenerator>>();
 		addGenerator(PriorityCharacterGenerator.class);
 		addGenerator(SumToTenCharacterGenerator.class);
-//		addGenerator(PointBuyCharacterGenerator.class);
+		addGenerator(PointBuyCharacterGenerator.class);
 //		addGenerator(LifePathCharacterGenerator.class);
 	}
 

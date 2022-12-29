@@ -5,71 +5,44 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.rpgframework.character.CharacterHandle;
-import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ValueType;
-import de.rpgframework.genericrpg.chargen.ControllerEvent;
-import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.chargen.RecommendingController;
-import de.rpgframework.genericrpg.chargen.Rule;
-import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.genericrpg.data.ApplyWhen;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
-import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
-import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
-import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
-import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
-import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
-import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
-import de.rpgframework.shadowrun.chargen.charctrl.IPANController;
-import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
-import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
-import de.rpgframework.shadowrun.chargen.charctrl.SINController;
-import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
-import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
-import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 import de.rpgframework.shadowrun6.chargen.gen.priority.PrioritySR6AttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
  *
  */
 public class PrioAttrGenTest {
-	
+
 	private Shadowrun6Character model;
 	private PrioritySR6AttributeGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
-	
+
 	private transient int karma = 0;
 
 	//-------------------------------------------------------------------
@@ -77,7 +50,7 @@ public class PrioAttrGenTest {
 	public static void setupClass() {
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -91,13 +64,14 @@ public class PrioAttrGenTest {
 			public void runProcessors() {
 				System.getLogger(PrioAttrGenTest.class.getPackageName()).log(Level.DEBUG,"---------------");
 				model.setKarmaFree(karma);
+				(new ResetModifications(model)).process(preMods);
 				ctrl.process(preMods);
 			}
 		};
 		ctrl  = new PrioritySR6AttributeGenerator(charGen);
 		charGen.runProcessors();
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testIdle() {
@@ -114,11 +88,11 @@ public class PrioAttrGenTest {
 	@Test
 	public void testNonExisting() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.REACTION);
-		
+
 		assertEquals(0, ctrl.getPointsLeft());
 		assertEquals(0, ctrl.getPointsLeft2());
 		assertEquals(0, ctrl.getPointsLeft3());
-		
+
 		// Increasing or decreasing should not be possible
 		assertFalse(ctrl.canBeDecreased(val).get());
 		assertFalse(ctrl.canBeIncreased(val).get());
@@ -137,7 +111,7 @@ public class PrioAttrGenTest {
 		assertTrue(ctrl.increasePoints2(val).hasError());
 		assertTrue(ctrl.decreasePoints3(val).hasError());
 		assertTrue(ctrl.increasePoints3(val).hasError());
-		
+
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.BODY    ).getModifiedValue());
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.AGILITY ).getModifiedValue());
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue());
@@ -150,14 +124,14 @@ public class PrioAttrGenTest {
 		assertEquals(0, model.getAttribute(ShadowrunAttribute.MAGIC    ).getModifiedValue());
 		assertEquals(0, model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testSpecialAdjustmentPoints() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.EDGE);
 		assertFalse(ctrl.canBeDecreasedPoints(val).get());
 		assertFalse(ctrl.canBeIncreasedPoints(val).get());
-		
+
 		// Add points
 		ValueModification mod = new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 1);
 		preMods.add(mod);
@@ -175,13 +149,13 @@ public class PrioAttrGenTest {
 		assertTrue (ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.EDGE     )).get());
 		assertFalse(ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.MAGIC    )).get());
 		assertFalse(ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).get());
-		
+
 		// Increasing MAGIC should not work
 		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increasePoints(model.getAttribute(ShadowrunAttribute.MAGIC));
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertEquals(1, ctrl.getPointsLeft());
-		
+
 		// Increasing EDGE should work
 		result = ctrl.increasePoints(val);
 		assertNotNull(result);
@@ -189,12 +163,12 @@ public class PrioAttrGenTest {
 		assertNotNull(result.get());
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(0, ctrl.getPointsLeft());
-		
+
 		// Increasing another one should fail (No more free adjustment points)
 		result = ctrl.increasePoints(val);
 		assertNotNull(result);
 		assertTrue(result.hasError());
-		
+
 		// Decrease EDGE again
 		result = ctrl.decreasePoints(val);
 		assertNotNull(result);
@@ -204,14 +178,14 @@ public class PrioAttrGenTest {
 		assertEquals(1, ctrl.getPointsLeft());
 
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testAttributePoints() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.BODY);
 		assertFalse(ctrl.canBeDecreasedPoints2(val).get());
 		assertFalse(ctrl.canBeIncreasedPoints2(val).get());
-		
+
 		// Add points
 		ValueModification mod = new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 1);
 		preMods.add(mod);
@@ -229,19 +203,19 @@ public class PrioAttrGenTest {
 		assertFalse(ctrl.canBeIncreasedPoints2(model.getAttribute(ShadowrunAttribute.EDGE     )).get());
 		assertFalse(ctrl.canBeIncreasedPoints2(model.getAttribute(ShadowrunAttribute.MAGIC    )).get());
 		assertFalse(ctrl.canBeIncreasedPoints2(model.getAttribute(ShadowrunAttribute.RESONANCE)).get());
-		
+
 		// Increasing MAGIC should not work
 		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increasePoints2(model.getAttribute(ShadowrunAttribute.MAGIC));
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertEquals(1, ctrl.getPointsLeft2());
-		
+
 		// Increasing EDGE should not work
 		result = ctrl.increasePoints2(model.getAttribute(ShadowrunAttribute.EDGE));
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertEquals(1, ctrl.getPointsLeft2());
-		
+
 		// Increasing BODY should work
 		result = ctrl.increasePoints2(val);
 		assertNotNull(result);
@@ -249,12 +223,12 @@ public class PrioAttrGenTest {
 		assertNotNull(result.get());
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(0, ctrl.getPointsLeft2());
-		
+
 		// Increasing another one should fail (No more free attribute points)
 		result = ctrl.increasePoints2(val);
 		assertNotNull(result);
 		assertTrue(result.hasError());
-		
+
 		// Decrease BODY again
 		result = ctrl.decreasePoints2(val);
 		assertNotNull(result);
@@ -263,7 +237,7 @@ public class PrioAttrGenTest {
 		assertEquals(1,result.get().getDistributed());
 		assertEquals(1, ctrl.getPointsLeft2());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testKarma() {
@@ -272,7 +246,7 @@ public class PrioAttrGenTest {
 		assertFalse(ctrl.canBeIncreasedPoints2(val).get());
 		assertEquals(0, ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
-		
+
 		// Add points
 		karma = 50;
 		charGen.runProcessors();
@@ -291,19 +265,19 @@ public class PrioAttrGenTest {
 		assertTrue (ctrl.canBeIncreasedPoints3(model.getAttribute(ShadowrunAttribute.EDGE     )).get());
 		assertFalse(ctrl.canBeIncreasedPoints3(model.getAttribute(ShadowrunAttribute.MAGIC    )).get());
 		assertFalse(ctrl.canBeIncreasedPoints3(model.getAttribute(ShadowrunAttribute.RESONANCE)).get());
-		
+
 		// Increasing MAGIC should not work
 		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increasePoints3(model.getAttribute(ShadowrunAttribute.MAGIC));
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertEquals(50, ctrl.getPointsLeft3());
-		
+
 		// Increasing EDGE should work (from 1 to 2 for 10 Karma)
 		result = ctrl.increasePoints3(model.getAttribute(ShadowrunAttribute.EDGE));
 		assertNotNull(result);
 		assertFalse(result.hasError());
 		assertEquals(40, ctrl.getPointsLeft3());
-		
+
 		// Increasing BODY should work
 		result = ctrl.increasePoints3(val);
 		assertNotNull(result);
@@ -312,14 +286,14 @@ public class PrioAttrGenTest {
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(0, ctrl.getPointsLeft2());
 		assertEquals(30, ctrl.getPointsLeft3());
-		
+
 		// Increasing BODY again
 		result = ctrl.increasePoints3(val);
 		assertNotNull(result);
 		assertFalse(result.hasError());
 		assertEquals(3,result.get().getDistributed());
 		assertEquals(15, ctrl.getPointsLeft3());
-		
+
 		// Decrease BODY again
 		result = ctrl.decreasePoints3(val);
 		assertNotNull(result);
@@ -328,39 +302,39 @@ public class PrioAttrGenTest {
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(30, ctrl.getPointsLeft3());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testReductionOnExceed() {
 		Shadowrun6Character model = charGen.getModel();
-		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);		
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 		settings.perAttrib.put(ShadowrunAttribute.BODY, new PerAttributePoints(2,2,1));
 		karma = 50;
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));
 		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, "BODY", 4, ApplyWhen.ALLCREATE, ValueType.MAX));
 		charGen.runProcessors();
-		// Although 2 adjustment points are spent, they should be taken into account
+		// Although 2 adjustment points are spent, they should not be taken into account
 		// since only EGDE may be used for adjustmentpoints on humans
-		assertEquals(10, ctrl.getPointsLeft()); 
+		assertEquals(10, ctrl.getPointsLeft());
 		assertEquals(8, ctrl.getPointsLeft2());
 		assertEquals(30, ctrl.getPointsLeft3());// Pay 20 karma to raise from 3 to 4, leaves 30
 		assertEquals(4, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
-		
+
 		// One more adjustment point, should exceed maximum
 		settings.perAttrib.put(ShadowrunAttribute.BODY, new PerAttributePoints(3,2,1));
 		charGen.runProcessors();
 		assertEquals(10, ctrl.getPointsLeft());
 		assertEquals(8, ctrl.getPointsLeft2());
-		assertEquals(30, ctrl.getPointsLeft3()); 
+		assertEquals(30, ctrl.getPointsLeft3());
 		assertEquals(4, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testComplex() {
 		Shadowrun6Character model = charGen.getModel();
-		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);		
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 		settings.perAttrib.put(ShadowrunAttribute.BODY     , new PerAttributePoints(0,0,1));
 		settings.perAttrib.put(ShadowrunAttribute.AGILITY  , new PerAttributePoints(3,2,1));
 		settings.perAttrib.put(ShadowrunAttribute.REACTION , new PerAttributePoints(0,2,0));
@@ -394,12 +368,12 @@ public class PrioAttrGenTest {
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.MAGIC    ).getDistributed());
 		assertEquals(5, model.getAttribute(ShadowrunAttribute.EDGE     ).getDistributed());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testIncreaseEdge6Times() {
 		Shadowrun6Character model = charGen.getModel();
-		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);		
+		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 		karma = 50;
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));

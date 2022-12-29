@@ -68,12 +68,15 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 	//--------------------------------------------------------------------
 	protected void initCompoments() {
 		super.initCompoments();
-		
+
 		description = new CarriedItemDescriptionPane(Shadowrun6Tools.requirementResolver(Locale.getDefault()), control);
 		description.setStyle("-fx-pref-width: 30em; -fx-max-width: 30em");
 	}
 
-	//--------------------------------------------------------------------
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.jfx.pages.ACarriedItemPage#getIndexFor(de.rpgframework.genericrpg.items.AAvailableSlot)
+	 */
 	protected int getIndexFor(AvailableSlot slot) {
 		boolean large = false;
 		int index = -1;
@@ -82,7 +85,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 
 		// Melee weapons
 		// Slot 2 is used for modifications
-		case MELEE_EXTERNAL    : index= 9; break; 
+		case MELEE_EXTERNAL    : index= 9; break;
 		// Firearms
 		// Slot 2 is used for modifications
 		case UNDER             : index= 3; break;
@@ -90,7 +93,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case STOCK             : index= 4; break;
 		// case INTERNAL          : index= 4; break; // This slot is no longer used
 		case WEAPON_SECURITY   : index= 5; break; // Overlaps with SIDE_R, ideally choice of WEAPON_SECURITY should be a mod inside the modification, not a new slot
-		case SIDE_R            : index= 5; break; 
+		case SIDE_R            : index= 5; break;
 		case SIDE_L            : index= 6; break;
 		// case SMARTGUN          : index= 6; break; // This slot is no longer used
 		case OPTICAL           : index= 8; break; // Created by smartgun_system, also affects ELECTRONICS OPTICAL
@@ -100,21 +103,21 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case BARREL            : index=11; break;
 
 		// Armor
-		case ARMOR             : index= 2; break;		
-		case ARMOR_REACTIVE    : index= 3; break;		
-		case ARMOR_ADDITION    : index= 4; break;		
-		case ARMOR_MEMS        : index= 8; break;		
-		case HELMET_ACCESSORY  : index= 9; break;		
+		case ARMOR             : index= 2; break;
+		case ARMOR_REACTIVE    : index= 3; break;
+		case ARMOR_ADDITION    : index= 4; break;
+		case ARMOR_MEMS        : index= 8; break;
+		case HELMET_ACCESSORY  : index= 9; break;
 
 		// Cyberware
-		case HEADWARE_IMPLANT   : index= 2; break;		
-		case SKILLJACK          : index= 3; break;		
-		case CYBERLIMB_IMPLANT  : index= 4; break;		
-		case CYBEREYE_IMPLANT   : index= 8; break;		
-		case CYBEREAR_IMPLANT   : index= 9; break;		
+		case HEADWARE_IMPLANT   : index= 2; break;
+		case SKILLJACK          : index= 3; break;
+		case CYBERLIMB_IMPLANT  : index= 4; break;
+		case CYBEREYE_IMPLANT   : index= 8; break;
+		case CYBEREAR_IMPLANT   : index= 9; break;
 
 		// Vehicles
-//		case VEHICLE_PROTECTION : index= 3; break; 
+//		case VEHICLE_PROTECTION : index= 3; break;
 		case VEHICLE_CHASSIS    : index= 2; break;
 		case VEHICLE_ELECTRONICS: index= 3; break;
 		case VEHICLE_POWERTRAIN : index= 4; break;
@@ -131,10 +134,10 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 
 		// Devices
 		// note: OPTICAL uses slot 8, see Firearms
-		case AUDIO             : index= 9; break;		
+		case AUDIO             : index= 9; break;
 		case SENSOR_HOUSING    : index= 2; break;
-		case SENSOR_FUNCTION   : index= 3; break; 
-		
+		case SENSOR_FUNCTION   : index= 3; break;
+
 		// Instruments
 		case INSTRUMENT_SLOT  : index= 2; break;
 		case INSTRUMENT_WEAPON: index= 9; break;
@@ -143,13 +146,13 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		// note: OPTICAL uses slot 8, see Firearms
 		case PROCAM_SLOT      : index= 3; break;
 		}
-		
+
 		return index;
 	}
 
 	//--------------------------------------------------------------------
 	protected void updateImage()  {
-		
+
 		logger.log(Level.INFO, "refresh");
 		ItemSubType sub = selectedItem.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
 		ItemType type = selectedItem.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
@@ -203,13 +206,13 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 				byte[] imgData = Shadowrun6DataPlugin.getPlaceholderGraphic(selectedItem);
 				if (imgData!=null) {
 					view.setImage(new Image(new ByteArrayInputStream(imgData)));
-				} else {				
-					logger.log(Level.WARNING, "You may want to add a placeholder for ''{0}''", imgName);				
+				} else {
+					logger.log(Level.WARNING, "You may want to add a placeholder for ''{0}''", imgName);
 					view.setImage(null);
 				}
 			}
 		}
-		
+
 		switch (type) {
 		case WEAPON_CLOSE_COMBAT:
 		case WEAPON_RANGED:
@@ -218,12 +221,12 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case WEAPON_SPECIAL:
 			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
 			view.getList(2).setAll(selectedItem.getEnhancements());
-			view.setCellFactory(2, new Callback<ListView<Object>, ListCell<?>>() {
-				
+			view.setCellFactory(2, new Callback<ListView<Object>, ListCell<Object>>() {
+
 				@Override
-				public ListCell<?> call(ListView<Object> lv) {
+				public ListCell<Object> call(ListView<Object> lv) {
 					ListCell<?> cell = new ComplexDataItemValueListCell<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>>( () -> control.getEquipmentController().getItemEnhancementController(selectedItem));
-					return cell;
+					return (ListCell<Object>) cell;
 				}
 			});
 			view.setOnAddAction(2, ev -> addModificationClicked());
@@ -239,15 +242,15 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 	@Override
 	protected void addClicked(ItemHook slot) {
 		logger.log(Level.INFO, "addClicked(--"+slot+")");
-		
+
 		List<ItemTemplate> data = control.getEquipmentController().getEmbeddableIn(selectedItem, slot);
 		logger.log(Level.INFO, "getEmbeddableIn("+selectedItem+") returns "+data.size()+" elements");
 
 		Predicate<ItemTemplate> templateFilter = i -> data.contains(i);
-		
+
 		ItemTemplateSelector selector = new ItemTemplateSelector(control, CarryMode.EMBEDDED, templateFilter, selectedItem, slot);
 		ManagedDialog dialog = new ManagedDialog(
-				ResourceI18N.format(UI, "dialog.add.accessory.title", slot.getName()), 
+				ResourceI18N.format(UI, "dialog.add.accessory.title", slot.getName()),
 				selector,
 				CloseType.CANCEL, CloseType.OK);
 		NavigButtonControl btnCtrl = new NavigButtonControl();
@@ -262,7 +265,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 			// Eventually show decision dialog
 			boolean needToAsk = !selected.getChoices().isEmpty();
 			needToAsk |= !selected.getVariants().isEmpty();
-			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS)) 
+			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS))
 				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
 			if (needToAsk) {
 				logger.log(Level.WARNING, "Select with choices or variants or flags");
@@ -303,20 +306,20 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 	//-------------------------------------------------------------------
 	private void addModificationClicked() {
 		logger.log(Level.WARNING, "addModificationClicked");
-		
+
 		//List<SR6ItemEnhancement> data = control.getEquipmentController().getAvailableEnhancementsFor(selectedItem);
 
 		//Predicate<ItemTemplate> templateFilter = i -> data.contains(i);
 		ItemEnhancementSelector selector = new ItemEnhancementSelector(control.getEquipmentController(), selectedItem, null);
 		ManagedDialog dialog = new ManagedDialog(
-				ResourceI18N.get(UI, "dialog.add.modification.title"), 
+				ResourceI18N.get(UI, "dialog.add.modification.title"),
 				selector,
 				CloseType.CANCEL, CloseType.OK);
 		NavigButtonControl btnCtrl = new NavigButtonControl();
 		selector.setButtonControl(btnCtrl);
 		CloseType closed = getAppLayout().getApplication().showAlertAndCall(dialog, btnCtrl);
 //		SelectPluginDataDialog<ItemEnhancement> dialog = new SelectPluginDataDialog<ItemEnhancement>(
-//				ResourceI18N.get(UI, "dialog.add.enhancement.title"), 
+//				ResourceI18N.get(UI, "dialog.add.enhancement.title"),
 //				data,
 //				lv -> new ItemEnhancementListCell(control.getCharacter(), control.getEquipmentController(), selectedItem),
 //				CloseType.CANCEL, CloseType.OK);
@@ -329,6 +332,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
      			OperationResult<ItemEnhancementValue<SR6ItemEnhancement>> result = control.getEquipmentController().getItemEnhancementController(selectedItem).select(master);
      			logger.log(Level.DEBUG, "embedding "+master+" in "+selectedItem+" returned "+result);
     			view.getList(2).setAll(selectedItem.getEnhancements());
+    			refresh();
      			if (result.hasError()) {
      				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 0, ResourceI18N.format(UI, "dialog.add.enhancement.fail", master.getName(), result.getError()));
      			}

@@ -49,13 +49,13 @@ import javafx.util.Callback;
  *
  */
 public class GenerationWizard extends Wizard implements ControllerListener {
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
 
 	private final static Logger logger = System.getLogger(GenerationWizard.class.getName());
-	
+
 	private GeneratorWrapper wrapper;
-	
+
 	private WizardPageGenerator<ShadowrunAttribute ,Shadowrun6Character, CommonSR6CharacterGenerator> chargen;
 //	private WizardPageProfiles profiles;
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
@@ -66,7 +66,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageQualities qualities;
 	private SR6WizardPageAttributes attrib;
 	private SR6WizardPageSkills skills;
-	private WizardPageSpells<SR6Spell> spells;
+	private SR6WizardPageSpells spells;
 	private WizardPageRituals rituals;
 	private WizardPageAdeptPowers powers;
 	private SR6WizardPageComplexForms complexForms;
@@ -80,7 +80,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		String name = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName());
 		String desc = SR6CharacterGenerator.RES.getString("chargen."+gen.getSimpleName()+".desc");
 		return new String[]{name,desc};
-	}; 
+	};
 
 	//-------------------------------------------------------------------
 	public GenerationWizard(GeneratorWrapper charGen) {
@@ -88,13 +88,13 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		setTitle("Unreplaced Wizard Title");
 		setPlain(false);
 		this.wrapper = charGen;
-		
+
 		initPages();
 		initInteractivtiy();
 		setShowProgress(false);
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private List<WizardPage> getPageList() {
 		List<WizardPage> ret = new ArrayList<>();
@@ -124,11 +124,11 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		}
 		return ret;
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private void initPages() {
-		chargen= new WizardPageGenerator(this, wrapper, 
+		chargen= new WizardPageGenerator(this, wrapper,
 				CharacterGeneratorRegistry.getGenerators(),
 				Shadowrun6Core.getItemList(RuleInterpretation.class),
 				Shadowrun6Rules.values(),
@@ -148,7 +148,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());
-		spells = new WizardPageSpells<SR6Spell>(this, wrapper);
+		spells = new SR6WizardPageSpells(this, wrapper);
 		rituals = new WizardPageRituals(this, wrapper);
 		powers = new SR6WizardPageAdeptPowers(this, wrapper);
 		complexForms = new SR6WizardPageComplexForms(this, wrapper);
@@ -159,23 +159,23 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		sins   = new WizardPageSINs(this, wrapper);
 		lifestyles = new AWizardPageLifestyles(this, wrapper);
 		name   = new WizardPageName<>(this, wrapper);
-		
+
 		getPages().add(chargen);
 		getPages().addAll(getPageList());
 		logger.log(Level.WARNING, "Pages: "+getPages());
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivtiy() {
 		wrapper.addListener(this);
 		canBeFinishedCallback = (wizard) -> wrapper.canBeFinished(); // new Callback<Wizard, Boolean>() {
-		
+
 		setConfirmCancelCallback(new Callback<Wizard, Boolean>() {
 
 			@Override
 			public Boolean call(Wizard param) {
 				logger.log(Level.WARNING, "ToDo: ask user to confirm cancellation");
-				
+
 				CloseType type = FlexibleApplication.getInstance().showAlertAndCall(AlertType.CONFIRMATION, ResourceI18N.get(RES, "confirm.cancel.title"), ResourceI18N.get(RES, "confirm.cancel.mess"));
 				logger.log(Level.WARNING, "User confirmed cancellation: "+type);
 				if (type==CloseType.OK || type==CloseType.YES) {
@@ -184,7 +184,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 				return Boolean.FALSE;
 			}
 		});
-		
+
 		addExtraButton(CloseType.RANDOMIZE, ev -> {
 			if (getCurrentPage().getOnExtraActionHandler()!=null) {
 				getCurrentPage().getOnExtraActionHandler().accept(CloseType.RANDOMIZE);
@@ -209,7 +209,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 					wrapper.removeListener((ControllerListener) page);
 				}
 			}
-			
+
 			getPages().retainAll(chargen);
 			logger.log(Level.INFO, "Add pages for new generator");
 			for (WizardPage page : getPageList()) {
@@ -220,7 +220,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			}
 			getPages().addAll(getPageList());
 		}
-		
+
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
 			for (WizardPage page : getPages()) {
 				if (page instanceof ControllerListener && !wrapper.hasListener((ControllerListener) page)) {
@@ -229,7 +229,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 				}
 			}
 		}
-		
+
 //		logger.log(Level.DEBUG, "Pages now");
 //		for (WizardPage page : getPages()) {
 //			logger.log(Level.DEBUG, "- "+page);

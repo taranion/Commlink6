@@ -33,11 +33,11 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class ItemUtil {
-	
+
 	private final static Logger logger = System.getLogger(ItemUtil.class.getPackageName());
 
-	public static Predicate<CarriedItem<ItemTemplate>> AMMUNITION_FILTER = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
-	public static Predicate<CarriedItem<ItemTemplate>> MATRIXDEVICES_FILTER = item -> 
+	public static Predicate<CarriedItem<ItemTemplate>> AMMUNITION_FILTER = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION);
+	public static Predicate<CarriedItem<ItemTemplate>> MATRIXDEVICES_FILTER = item ->
 			item.hasFlag(SR6ItemFlag.MATRIX_DEVICE)
 			||
 			(List.of( ItemSubType.matrixDevices()).contains(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue())
@@ -47,8 +47,8 @@ public class ItemUtil {
 
 	public static ItemTemplate SOFTWARE_LIBRARY_ITEM = new ItemTemplate();
 	public static CarriedItem<ItemTemplate> SOFTWARE_LIBRARY;
-	
-	
+
+
 	static {
 		ItemAttributeDefinition def = new ItemAttributeDefinition(SR6ItemAttribute.SOFTWARE_TYPES);
 		String tmp = Arrays.toString(SoftwareTypes.values());
@@ -56,11 +56,11 @@ public class ItemUtil {
 		SOFTWARE_LIBRARY_ITEM.setAttribute(def);
 		SOFTWARE_LIBRARY_ITEM.setId("software_library");
 		SOFTWARE_LIBRARY_ITEM.addModifications(List.of(new ValueModification(ShadowrunReference.HOOK, ItemHook.SOFTWARE.name(), "99")));
-		
+
 		SOFTWARE_LIBRARY =  new CarriedItem<ItemTemplate>(SOFTWARE_LIBRARY_ITEM, null, CarryMode.VIRTUAL);
 		SOFTWARE_LIBRARY.addSlot(new AvailableSlot(ItemHook.SOFTWARE, 99));
 	}
-		
+
 	//-------------------------------------------------------------------
 	public static void addOrSetItemAttribute(CarriedItem<ItemTemplate> ref, ValueModification mod) {
 		if (mod.getReferenceType()!=ShadowrunReference.ITEM_ATTRIBUTE)
@@ -72,7 +72,7 @@ public class ItemUtil {
 			val.addModification(mod);
 			return;
 		}
-		
+
 		ItemAttributeObjectValue<SR6ItemAttribute> objVal;
 		switch (attr) {
 		case SOFTWARE_TYPES:
@@ -99,13 +99,13 @@ public class ItemUtil {
 			.sorted((o1, o2) -> o1.getName().compareTo(o2.getName()))
 			.filter(t -> ItemUtil.areRequirementsMet( ref, t, (SR6PieceOfGearVariant) ref.getVariant())==null)
 			.collect(Collectors.toList());
-		
+
 //		for (ItemTemplate t : ret) {
 //			logger.log(Level.INFO, "Embeddable "+t);
 //		}
 		return ret;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public static boolean hasHookRequirement(ItemTemplate item, ItemHook hook) {
 		// Test main item
@@ -124,7 +124,7 @@ public class ItemUtil {
 		}
 		return false;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @return Requirement not met
@@ -140,10 +140,10 @@ public class ItemUtil {
 					return tmp;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public static boolean isRequirementMet(CarriedItem<ItemTemplate> container, ItemTemplate item, Requirement tmp) {
 		if (tmp.getApply()!=ApplyTo.DATA_ITEM && !(tmp instanceof AnyRequirement)) return true;
@@ -179,11 +179,15 @@ public class ItemUtil {
 				if (!container.hasAttribute(iAttr))
 					return false;
 				ItemAttributeValue<?> rawAttr = container.getAttributeRaw(iAttr);
-				if (rawAttr==null) 
+				if (rawAttr==null)
 					return false;
 				switch (iAttr) {
 				case SOFTWARE_TYPES:
-					return ((List<SoftwareTypes>)((ItemAttributeObjectValue)rawAttr).getValue()).contains( SoftwareTypes.valueOf( req.getRawValue() ));
+					Object x = ((ItemAttributeObjectValue)rawAttr).getValue();
+					if (x instanceof List)
+						return ((List<SoftwareTypes>)x).contains( SoftwareTypes.valueOf( req.getRawValue() ));
+					else
+						return ((SoftwareTypes)x)==SoftwareTypes.valueOf( req.getRawValue() );
 				default:
 					logger.log(Level.ERROR, "TODO: support requirement check for item attribut {0}", iAttr);
 				}
@@ -206,7 +210,7 @@ public class ItemUtil {
 	 */
 	public static ItemTemplate calculateVirtualItem(ItemTemplate item, SR6PieceOfGearVariant variant, CarryMode carry) {
 		if (item.requiresVariant() && variant==null) throw new NullPointerException("Variant must be chosen");
-		
+
 		ItemTemplate virtual = (variant!=null)?(new VariantItemTemplate(variant)):(new ItemTemplate());
 		virtual.setId(item.getId());
 		virtual.assignToDataSet(item.getAssignedDataSets().iterator().next());
@@ -215,22 +219,22 @@ public class ItemUtil {
 		}
 		virtual.addModifications( item.getModifications() );
 		virtual.addFlags(item.getFlags());
-		
+
 		Usage usage = item.getUsage(carry);
 		Usage variantUsage = (variant!=null)?variant.getUsage(carry):null;
 		if (variantUsage!=null)
 			virtual.addUsage(variantUsage);
-		else if (usage!=null) 
+		else if (usage!=null)
 			virtual.addUsage(usage);
 		else
 			throw new IllegalArgumentException("No usage "+carry+" for "+item.getId()+"/"+variant);
-		
-		Usage actual = virtual.getUsage(carry);		
+
+		Usage actual = virtual.getUsage(carry);
 		if (carry==CarryMode.IMPLANTED) {
 			if (actual.getFormula()!=null)
 				virtual.setAttribute(SR6ItemAttribute.ESSENCECOST, actual.getFormula());
 		}
-		
+
 		// Copy variant attributes
 		if (variant!=null) {
 			virtual.setParentItem(item);
@@ -241,7 +245,7 @@ public class ItemUtil {
 			virtual.addModifications( variant.getModifications() );
 			virtual.addFlags(variant.getFlags());
 		}
-		
+
 		// If only one hook is present, use it as CAPACITY
 		long hooks = virtual.getModifications().stream()
 			.filter(m -> m instanceof ValueModification)
@@ -255,26 +259,26 @@ public class ItemUtil {
 			ItemAttributeDefinition attr = new ItemAttributeDefinition(SR6ItemAttribute.CAPACITY, FormulaTool.tokenize(vMod.getRawValue()));
 			virtual.setAttribute(attr);
 		}
-		
+
 		return virtual;
 	}
-	
+
 	//-------------------------------------------------------------------
-	/**	 * 
+	/**	 *
 	 * @param item
 	 * @return Value >0, if a decision has been made
 	 */
 	public static int getRating(CarriedItem<ItemTemplate> item) {
-		Decision dec = item.getDecision(ItemTemplate.UUID_RATING); 
+		Decision dec = item.getDecision(ItemTemplate.UUID_RATING);
 		if (dec!=null) {
 			return Integer.parseInt( dec.getValue() );
 		}
 		return 0;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public static AugmentationQuality getBodytechQuality(CarriedItem<ItemTemplate> item) {
-		Decision dec = item.getDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY); 
+		Decision dec = item.getDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY);
 		if (dec!=null) {
 			return AugmentationQuality.valueOf( dec.getValue() );
 		}

@@ -40,24 +40,24 @@ import javafx.util.StringConverter;
  *
  */
 public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
-	
+
 	/* For mystic adepts */
 	private Label lbTotal;
 	private Label lbMagic;
 	private Label lbPower;
 	private Button btnDec;
 	private Button btnInc;
-	
+
 	/* For aspected magicians */
 	private ChoiceBox<SR6Skill> cbAspectSkill;
-	
+
 	/* For (aspected) magicians and mystic adepts*/
 	private ChoiceBox<Tradition> cbTradition;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageMagicOrResonance(Wizard wizard, IShadowrunCharacterGenerator<?, ?, ?,?> charGen) {
 		super(wizard, charGen);
-		
+
 		System.err.println("SR6WizardPageMagicOrResonance: "+charGen.getModel().getCharGenUsed());
 		if (charGen.getModel().getCharGenUsed()!=null && charGen.getModel().getCharGenUsed().equals("pointbuy")) {
 			lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith());
@@ -95,19 +95,19 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			}
 			public Tradition fromString(String string) { return null; }
 		});
-		
+
 		refresh();
-		
+
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		cbTradition.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			charGen.getMagicOrResonanceController().selectTradition(n);
 			descTradition.setData(n);
 		});
-		
+
 		btnDec.setOnAction( ev -> {
 			SR6PrioritySettings prio = charGen.getModel().getCharGenSettings(SR6PrioritySettings.class);
 			if (prio.getMagicForPP()>0) prio.setMagicForPP( prio.getMagicForPP()-1);
@@ -122,6 +122,12 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			lbMagic.setText(String.valueOf(prio.mysticAdeptMaxPoints - prio.getMagicForPP()));
 			lbTotal.setText(String.valueOf(prio.mysticAdeptMaxPoints));
 		});
+
+		cbAspectSkill.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "Change aspect skill to "+n);
+			charGen.getModel().setAspectSkill(n);
+			charGen.runProcessors();
+		});
 	}
 
 	//-------------------------------------------------------------------
@@ -131,16 +137,16 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 	@Override
 	protected Node getChoiceConfigNode(MagicOrResonanceType type) {
 		if (type==null) return null;
-		
+
 		switch (type.getId()) {
 		case "mysticadept": return initMysticAdeptNode();
 		case "magician"   : return initMagicianNode();
 		case "aspectedmagician": return initAspectedMagicianNode();
 		}
-		
+
 		return null;
-		
-		
+
+
 	}
 
 	//-------------------------------------------------------------------
@@ -149,7 +155,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			descTradition.setData(model.getTradition());
 		}
 		cbTradition.setValue(model.getTradition());
-		
+
 		Object obj = model.getCharGenSettings(Object.class);
 		if (obj instanceof SR6PrioritySettings) {
 			logger.log(Level.WARNING, "------------------>Priority");
@@ -166,27 +172,27 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 		} else {
 			logger.log(Level.WARNING, "------------------>"+obj);
 		}
-		
-		
+
+
 	}
-	
+
 	//-------------------------------------------------------------------
 	private Node initMagicianNode() {
 		/* Spell users */
 		TitledComponent tcTrad = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.tradition"), cbTradition);
-		
+
 		return new VBox(10, tcTrad, descTradition);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private Node initAspectedMagicianNode() {
 		/* Spell users */
 		TitledComponent tcTrad   = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.tradition"), cbTradition);
 		TitledComponent tcAspect = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.aspect"), cbAspectSkill);
-		
+
 		return new VBox(10, tcAspect, tcTrad, descTradition);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private Node initMysticAdeptNode() {
 		/* Mystic adept */
@@ -199,7 +205,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			lbTotal.setMaxWidth(Double.MAX_VALUE);
 		}
 		GridPane mysticGrid = new GridPane();
-		mysticGrid.setStyle("-fx-vgap: 0.5em; -fx-hgap: 1em;"); 
+		mysticGrid.setStyle("-fx-vgap: 0.5em; -fx-hgap: 1em;");
 		mysticGrid.add(hdMagician, 0, 0, 2,1);
 		try {
 			mysticGrid.add(   lbTotal, 2, 0);
@@ -214,15 +220,15 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		TitledComponent tcTrad = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.tradition"), cbTradition);
 		TitledComponent tcDist = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.distribute"), mysticGrid);
-		
+
 		VBox ret = new VBox(10, tcTrad, tcDist, descTradition);
 		if (charGen.getModel().getCharGenUsed()!=null && charGen.getModel().getCharGenUsed().equals("pointbuy")) {
 			ret.getChildren().remove(tcDist);
 		}
-		
+
 		return ret;
 	}
 
@@ -263,9 +269,9 @@ class MagicOrResonanceCellWith extends ListCell<MagicOrResonanceType> {
 		lblKarma = new Label();
 		lblKarma.setStyle("-fx-font-size:150%");
 		lblHeading.getStyleClass().add("base");
-		
+
 		vlayout = new VBox(5, lblHeading, lblSecond);
-		
+
 		layout = new HBox(10);
 		layout.getChildren().addAll(vlayout, lblKarma);
 		layout.setAlignment(Pos.CENTER);

@@ -25,7 +25,7 @@ public enum ItemHook implements Hook {
 	STOCK,
 	// Especially for cyberimplant weapons
 	IMPLANTWEAPON_ACCESSORY,
-	
+
 	ELECTRONIC_ACCESSORY(true),
 	IMAGING(true),
 	OPTICAL(true),
@@ -57,7 +57,7 @@ public enum ItemHook implements Hook {
 	IMPLANT_MACHINEGUN,
 	IMPLANT_LAUNCHER,
 	VEHICLE_BODY(true), // Should be HARDPOINTS
-	VEHICLE_CHASSIS(true), 
+	VEHICLE_CHASSIS(true),
 	VEHICLE_CF (true),
 	VEHICLE_POWERTRAIN(true),
 	VEHICLE_ELECTRONICS(true),
@@ -73,26 +73,26 @@ public enum ItemHook implements Hook {
 	PROCAM_SLOT(true),
 	/** For cyberdecks: number core slots = Rating*3*/
 	CORE_SLOTS(true),
-	/** Custom Cyberdeck case modifications */ 
+	/** Custom Cyberdeck case modifications */
 	CASE_MODS(true),
 	CUSTOM_CYBERDECK(false),
 	CYBERHACK(false)
 	;
-	
+
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
 
 	boolean hasCapacity;
-	
+
 	//-------------------------------------------------------------------
 	private ItemHook() {
 		hasCapacity = false;
 	}
-	
+
 	//-------------------------------------------------------------------
 	private ItemHook(boolean cap) {
 		hasCapacity = cap;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.items.Hook#getName()
@@ -101,7 +101,7 @@ public enum ItemHook implements Hook {
 	public String getName() {
 		return RES.getString("itemhook."+this.name().toLowerCase());
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.items.Hook#hasCapacity()

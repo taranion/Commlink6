@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +30,9 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
  *
  */
 public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implements SR6SpellController, ISpellGenerator<SR6Spell> {
-	
+
+	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".spells");
+
 	private int maxSpells;
 
 	//-------------------------------------------------------------------
@@ -41,7 +44,7 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.ISpellGenerator#usesFreeSpells()
 	 */
-	public boolean usesFreeSpells() { return true; }
+	public boolean usesFreeSpells() { return false; }
 
 	//-------------------------------------------------------------------
 	/**
@@ -49,11 +52,19 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 */
 	@Override
 	public int getFreeSpells() {
-		return 0;
+		return getMaxFree() - parent.getModel().getSpells().size();
 	}
-	
+
 	//-------------------------------------------------------------------
-	public int getMaxFree() { return 0; }
+	public int getMaxFree() {
+//		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+//		int magic = parent.getModel().getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
+//		if (parent.getModel().getMagicOrResonanceType().paysPowers()) {
+//			magic -= settings.getMagicForPP();
+//		}
+//		return magic*2;
+		return maxSpells;
+	}
 
 
 	//-------------------------------------------------------------------
@@ -119,16 +130,16 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 			if (tmp.getResolved()==value)
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
-		
+
 		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
 		if (settings.perSpellPayedWithCP.size()>=maxSpells) {
-			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MAX_COMPLEX_FORMS, maxSpells);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MAX_SPELLS, maxSpells);
 		}
-		
+
 		if (settings.characterPoints<2 && parent.getModel().getKarmaFree()<5) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 		}
-			
+
 		return Possible.TRUE;
 	}
 
@@ -145,19 +156,19 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return new OperationResult<>(poss);
 			}
-			
+
 			SpellValue<SR6Spell> toAdd = new SpellValue<SR6Spell>(value);
 			for (Decision dec : decisions) {
 				toAdd.addDecision(dec);
 			}
-			
+
 			getModel().addSpell(toAdd);
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 			settings.perSpellPayedWithCP.put(toAdd, true);
 			logger.log(Level.INFO, "Added spell {0}", toAdd);
-			
+
 			parent.runProcessors();
-			
+
 			return new OperationResult<>(poss);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1})", value, Arrays.toString(decisions));
@@ -173,11 +184,11 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 		if (!getSelected().contains(value)) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
-		
+
 		if (value.isAutoAdded()) {
 			return new Possible(IRejectReasons.IMPOSS_AUTO_ADDED);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -194,12 +205,12 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return false;
 			}
-			
+
 			getModel().removeSpell(value);
 			logger.log(Level.INFO, "Removed spell {0}", value);
-			
+
 			parent.runProcessors();
-			
+
 			return true;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
@@ -235,20 +246,23 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 
 		try {
 			todos.clear();
-			
+
 			Shadowrun6Character model = getModel();
 			maxSpells = 0;
 
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {
-				maxSpells = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
-				if (model.getMagicOrResonanceType().usesPowers()) {
+				logger.log(Level.INFO, "Magic = "+model.getAttribute(ShadowrunAttribute.MAGIC));
+				logger.log(Level.INFO, " mods = "+model.getAttribute(ShadowrunAttribute.MAGIC).getModifications());
+				int magic = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
+				if (model.getMagicOrResonanceType().paysPowers()) {
 					// "mystic adepts subtract PP from Magic for this calculation"
-					maxSpells -= settings.getMagicForPP();
+					magic -= settings.getMagicForPP();
 				}
+				maxSpells= magic*2;
 			}
 			logger.log(Level.INFO, "May buy up to {0} spells", maxSpells);
-			
+
 			for (SpellValue<? extends ASpell> val : model.getSpells()) {
 				Boolean withCP = settings.perSpellPayedWithCP.get(val);
 				if (withCP!=null && withCP) {
@@ -259,7 +273,7 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 					logger.log(Level.INFO, "Pay spell ''{0}'' with 5 Karma", val.getModifyable().getId());
 				}
 			}
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");

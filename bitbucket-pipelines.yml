@@ -3,7 +3,7 @@ image: maven:3.8.6-openjdk-18
 pipelines:
   default:
     - step:
-#        caches:
-#          - maven
+        caches:
+          - maven
         script: 
-          - mvn -B -U -s settings.xml clean deploy -DskipTests=true
+          - mvn -B -U -s settings.xml clean deploy

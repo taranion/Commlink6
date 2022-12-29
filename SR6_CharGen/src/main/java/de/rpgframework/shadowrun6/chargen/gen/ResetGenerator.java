@@ -30,7 +30,7 @@ public class ResetGenerator implements ProcessingStep {
 	protected final static Logger logger = System.getLogger(ResetGenerator.class.getPackageName()+".reset");
 
 	protected SR6CharacterGenerator charGen;
-	
+
 	//-------------------------------------------------------------------
 	public ResetGenerator(SR6CharacterGenerator charGen) {
 		this.charGen = charGen;
@@ -44,7 +44,7 @@ public class ResetGenerator implements ProcessingStep {
 	public List<Modification> process(List<Modification> unprocessed) {
 		// Reset all attributes
 		Shadowrun6Character model = charGen.getModel();
-		
+
 		// Remove all items that are auto-injected
 		for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
 			if (tmp.getInjectedBy()!=null) {
@@ -52,13 +52,13 @@ public class ResetGenerator implements ProcessingStep {
 				model.removeCarriedItem(tmp);
 			}
 		}
-		
+
 		// Remove all lifestyles that are auto-injected
 		for (SR6Lifestyle tmp : model.getLifestyles()) {
 			if (tmp.getInjectedBy()!=null)
 				model.removeLifestyle(tmp);
 		}
-		
+
 		model.setKarmaFree(50);
 		model.setKarmaInvested(0);
 		PowerLevel level = model.getPowerLevel();
@@ -66,7 +66,7 @@ public class ResetGenerator implements ProcessingStep {
 			level=PowerLevel.STANDARD;
 			model.setPowerLevel(level);
 		}
-		
+
 		if (charGen instanceof LifePathCharacterGenerator) {
 			SR6LifePathSettings settings = model.getCharGenSettings(SR6LifePathSettings.class);
 			switch (level) {
@@ -78,7 +78,7 @@ public class ResetGenerator implements ProcessingStep {
 				break;
 			default:
 				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), 8));
-				break;				
+				break;
 			}
 		} else if (charGen instanceof PointBuyCharacterGenerator) {
 			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
@@ -98,15 +98,16 @@ public class ResetGenerator implements ProcessingStep {
 				break;
 			default:
 				settings.characterPoints = 100;
-				break;				
+				break;
 			}
 			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
+			logger.log(Level.INFO, "MAGIC0 = "+model.getAttribute(ShadowrunAttribute.MAGIC));
 		} else {
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			if (level==PowerLevel.PRIME_RUNNER)
 				model.setKarmaFree(100);
 		}
-		
+
 		return unprocessed;
 	}
 
