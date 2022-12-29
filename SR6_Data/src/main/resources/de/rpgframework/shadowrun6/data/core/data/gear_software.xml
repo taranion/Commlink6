@@ -9,28 +9,17 @@
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
-		<variant id="rcc">
-			<requires>
-				<valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/>
-			</requires>
-		</variant>
 	</item> 
 	<item avail="1" price="60" id="baby_monitor" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
-		</variant>
 	</item> 
 	<item avail="1" price="60" id="configurator" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
-		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
 	<item avail="1" price="60" id="edit" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
@@ -40,9 +29,6 @@
 		</modifications>
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
-		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
 	<item avail="1" price="60" id="encryption" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
@@ -113,18 +99,12 @@
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
-		</variant>
 	</item> 
 	<item avail="4I" price="250" id="biofeedback_filter" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
-		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
 	<item avail="4I" price="250" id="blackout"  type="SOFTWARE" subtype="HACKING_PROGRAM">
@@ -133,18 +113,12 @@
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
-		</variant>
 	</item> 
 	<item avail="4I" price="250" id="decryption" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
-		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
 	<item avail="4I" price="250" id="defuse" type="SOFTWARE" subtype="HACKING_PROGRAM">
@@ -153,18 +127,12 @@
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
-		</variant>
 	</item> 
 	<item avail="4I" price="250" id="exploit" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
-		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
 	<item avail="4I" price="250" id="fork" type="SOFTWARE" subtype="HACKING_PROGRAM">
@@ -173,9 +141,6 @@
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
-		</variant>
 	</item> 
 	<item avail="4I" price="250" id="lockdown" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
@@ -183,18 +148,12 @@
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
-		</variant>
 	</item> 
 	<item avail="4I" price="250" id="overclock" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
-		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
 	<item avail="4I" price="250" id="stealth" type="SOFTWARE" subtype="HACKING_PROGRAM">
@@ -212,9 +171,6 @@
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
-		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item> 
 
