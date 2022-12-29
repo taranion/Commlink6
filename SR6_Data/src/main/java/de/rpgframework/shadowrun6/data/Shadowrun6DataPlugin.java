@@ -131,7 +131,7 @@ public class Shadowrun6DataPlugin  {
 	 * @see de.rpgframework.RulePlugin#init()
 	 */
 //	@Override
-	public void init() {
+	public synchronized void init() {
 		if (alreadyInitialized)
 			return;
 		double totalPlugins = 23.0;
