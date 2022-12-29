@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sr6char gender="MALE" karmaF="21" meta="elf" nuyen="85445">
    <powerLevel>STANDARD</powerLevel>
-   <heat>0</heat>
    <lifestyles>
       <lifestyle comfort="middle" entert="middle" name="Small appartment" necess="middle" neigh="middle" prim="true" ref="middle" security="middle" sin="e5eadfec-7be0-40cd-baea-bed3a02d3f40" space="middle" value="1"/>
    </lifestyles>

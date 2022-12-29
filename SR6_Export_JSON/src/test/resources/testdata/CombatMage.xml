@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sr6char gender="MALE" karmaF="19" meta="ork" nuyen="1500">
    <powerLevel>STANDARD</powerLevel>
-   <heat>0</heat>
    <lifestyles>
       <lifestyle comfort="low" entert="low" name="Appartment in decaying megahousing" necess="low" neigh="low" prim="true" ref="low" security="low" sin="5aad3823-8255-472b-9f65-61a01e6294f0" space="low" value="1"/>
    </lifestyles>
