@@ -310,6 +310,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 					logger.log(Level.WARNING, "Found SR6SkillValue without skill: "+val);
 					continue;
 				}
+				// Reduce final value by one if there was a specialization
 				if (val.getSpecializations().isEmpty()) {
 					val.setDistributed(entry.getValue().getSum());
 				} else {
@@ -594,17 +595,17 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			if (settings.get(skillVal)==null) {
 				settings.put(skillVal, new PerSkillPoints());
 			}
-//			if (points1>0) {
-//				logger.log(Level.INFO, "Pay with free skill points");
-//				settings.get(skillVal).points1++;
+			if (points1>0 || (settings.cpToSkills<20 && settings.characterPoints>=2)) {
+				logger.log(Level.INFO, "Pay with free skill points");
+				settings.get(skillVal).points1++;
 //			} else if (points2>0) {
 //				logger.log(Level.INFO, "Pay with converted skill points");
 //				settings.get(skillVal).points1++;
-//			} else {
-//				settings.get(skillVal).karmaSpec++;
-//				logger.log(Level.INFO, "Pay with karma");
-//			}
-//			logger.log(Level.INFO, "After paying: {0}",settings.get(skillVal));
+			} else {
+				settings.get(skillVal).karmaSpec++;
+				logger.log(Level.INFO, "Pay with karma");
+			}
+			logger.log(Level.INFO, "After paying: {0}",settings.get(skillVal));
 
 			parent.runProcessors();
 
