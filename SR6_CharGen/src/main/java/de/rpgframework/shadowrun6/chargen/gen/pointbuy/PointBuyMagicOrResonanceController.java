@@ -10,8 +10,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceOption;
@@ -20,6 +22,8 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -94,35 +98,40 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 				int cpCost = type.getCost();
 				logger.log(Level.INFO, "Chose '"+type.getId()+"' for "+cpCost+" CP");
 				settings.characterPoints -= cpCost;
-				
+
 				switch (type.getId()) {
 				case "magician":
 					// Start with 1 point in MAGIC
 					unprocessed.add(
-							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1));
+							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1, type, ValueType.NATURAL));
 					break;
 				case "adept":
 					// Start with 1 point in MAGIC
 					unprocessed.add(
-							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1));
+							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1, type, ValueType.NATURAL));
 					break;
 				case "mysticadept":
 					// Start with 1 point in MAGIC
 					unprocessed.add(
-							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1));
+							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1, type, ValueType.NATURAL));
 					break;
-				case "aspectdmagician":
+				case "aspectedmagician":
 					// Start with 2 point in MAGIC
 					unprocessed.add(
-							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 2));
+							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 2, type, ValueType.NATURAL));
+					SR6Skill skill =  ((Shadowrun6Character)model).getAspectSkill();
+					if (skill!=null) {
+						AllowModification allow = new AllowModification(ShadowrunReference.SKILL, model.getAspectSkillId());
+						allow.setSource(type);
+						unprocessed.add(allow);
+					}
 					break;
 				case "technomancer":
 					// Start with 1 point in RESONANCE
-					unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE,
-							ShadowrunAttribute.RESONANCE.name(), 1));
+					unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), 1, type, ValueType.NATURAL));
 					break;
 				}
-				
+
 				//unprocessed.addAll(type.getModifications());
 			}
 

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -16,6 +17,8 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -130,7 +133,17 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			SR6PrioritySettings sett = (SR6PrioritySettings) model.getCharGenSettings(SR6PrioritySettings.class);
 			sett.mysticAdeptMaxPoints = points;
 			sett.setMagicForPP( Math.max(points, sett.getMagicForPP()) );
-			
+
+			// For aspected magicians
+			if ("aspectedmagician".equals(type.getId())) {
+				SR6Skill skill =  ((Shadowrun6Character)model).getAspectSkill();
+				if (skill!=null) {
+					AllowModification allow = new AllowModification(ShadowrunReference.SKILL, model.getAspectSkillId());
+					allow.setSource(type);
+					unprocessed.add(allow);
+				}
+			}
+
 			// Add modifications from choice
 //			unprocessed.addAll(type.getModifications());
 

@@ -3,8 +3,8 @@ package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import de.rpgframework.genericrpg.NumericalValueWith2PoolsController;
 import de.rpgframework.genericrpg.Possible;
@@ -25,7 +25,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -196,6 +195,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			skillsFromCP   = 0;
 //			pointsLangAndKnow = 0;
 			available.clear();
+			allowed.clear();
 			todos.clear();
 
 			for (Modification tmp : previous) {
@@ -207,6 +207,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 							logger.log(Level.ERROR, "AllowMod for unknown skill {0}", mod.getKey());
 						} else {
 							logger.log(Level.DEBUG, "Allow skill {0} from {1}", mod.getKey(), mod.getSource());
+							this.allowed.add(skill);
 							this.available.add(skill);
 						}
 					} else {
@@ -234,6 +235,10 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 				}
 			}
 
+			// Be sure to remove all skills that are not allowed
+			removeRestrictedSkills();
+
+
 			for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
 				SR6Skill key = Shadowrun6Core.getSkill( entry.getKey() );
 				PerSkillPoints per = entry.getValue();
@@ -241,6 +246,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 					logger.log(Level.WARNING, "No data for " + key);
 					continue;
 				}
+
 				/*
 				 * Pay skilll points
 				 */
@@ -324,6 +330,28 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 		}
 
 		return unprocessed;
+	}
+
+	//-------------------------------------------------------------------
+	private void removeRestrictedSkills() {
+		logger.log(Level.DEBUG, "Check for existing restricted skills: "+model.getSkillValues());
+		for (SR6SkillValue sVal : new ArrayList<>(model.getSkillValues())) {
+			SR6Skill skill = sVal.getResolved();
+			if (skill.isRestricted() && !allowed.contains(skill)) {
+				logger.log(Level.INFO, "Skill {0} is not allowed anymore - remove it from character", skill);
+				model.removeSkillValue(sVal);
+			}
+		}
+
+		SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
+		for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
+			SR6SkillValue val = getFromPointBuySettings(entry.getKey());
+			SR6Skill skill = val.getResolved();
+			if (skill.isRestricted() && !allowed.contains(skill)) {
+				logger.log(Level.INFO, "Skill {0} is not allowed anymore - remove it from PointBuy settings", skill);
+				settings.perSkill.remove(entry.getKey());
+			}
+		}
 	}
 
 	//-------------------------------------------------------------------
