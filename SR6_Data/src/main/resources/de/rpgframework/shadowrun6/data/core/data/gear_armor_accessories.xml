@@ -2,9 +2,7 @@
 <items>
 	<item avail="3" price="250" id="chemical_protection" type="ACCESSORY" subtype="ARMOR_BODY">
 		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d"
-				type="ITEM_ATTRIBUTE" ref="RATING"
-				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
 		</choices>
   		<usage mode="EMBEDDED" slot="ARMOR" value="$RATING"/>
 		<attrdef id="SIZE" value="$RATING" />
@@ -21,9 +19,7 @@
 	<item avail="3" price="250" id="cold_resistance" type="ACCESSORY"
 		subtype="ARMOR_BODY">
 		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d"
-				type="ITEM_ATTRIBUTE" ref="RATING"
-				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
 		</choices>
   		<usage mode="EMBEDDED" slot="ARMOR" value="$RATING"/>
 		<attrdef id="SIZE" value="$RATING" />
@@ -32,9 +28,7 @@
 	<item avail="3" price="250" id="fire_resistance" type="ACCESSORY"
 		subtype="ARMOR_BODY">
 		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d"
-				type="ITEM_ATTRIBUTE" ref="RATING"
-				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
 		</choices>
 		<attrdef id="HOOK" value="ARMOR" />
 		<attrdef id="SIZE" value="$RATING" />
@@ -42,9 +36,7 @@
 	</item>
 	<item avail="3" price="250" id="electricity_resistance" type="ACCESSORY" subtype="ARMOR_BODY">
 		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d"
-				type="ITEM_ATTRIBUTE" ref="RATING"
-				options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14" />
 		</choices>
   		<usage mode="EMBEDDED" slot="ARMOR" value="$RATING"/>
 		<attrdef id="SIZE" value="$RATING" />

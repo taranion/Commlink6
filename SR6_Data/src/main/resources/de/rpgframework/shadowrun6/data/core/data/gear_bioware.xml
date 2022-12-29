@@ -2,7 +2,7 @@
 <items>
    <item id="adrenaline_pump" avail="5I" price="55000" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.75"/>
       <attrdef id="PRICE" value="$RATING*55000"/>
@@ -16,7 +16,7 @@
    </item>
    <item id="bone_density_augmentation" avail="4L" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.3"/>
       <attrdef id="PRICE" value="$RATING*5000"/>
@@ -45,7 +45,7 @@
    </item>
    <item id="muscle_augmentation" avail="4L" price="31000" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.2"/>
       <attrdef id="PRICE" value="$RATING*31000"/>
@@ -56,7 +56,7 @@
    </item>
    <item id="muscle_toner" avail="4L" price="32000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.2"/>
       <attrdef id="PRICE" value="$RATING*32000"/>
@@ -67,7 +67,7 @@
    </item>
    <item id="orthoskin" avail="4L" price="6000" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.25"/>
       <attrdef id="PRICE" value="$RATING*6000"/>
@@ -98,7 +98,7 @@
    </item>
    <item id="symbiotes" avail="4" price="3500" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.2"/>
       <attrdef id="PRICE" value="$RATING*3500"/>
@@ -110,7 +110,7 @@
    </item>
    <item id="synthacardium" avail="3" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.1"/>
       <attrdef id="PRICE" value="$RATING*30000"/>
@@ -121,7 +121,7 @@
    </item>
    <item id="tailored_pheremones" avail="4L" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.2"/>
       <attrdef id="PRICE" value="$RATING*31000"/>
@@ -133,7 +133,7 @@
    </item>
    <item id="toxin_etractor" avail="4" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.2"/>
       <attrdef id="PRICE" value="$RATING*4800"/>
@@ -144,7 +144,7 @@
    </item>
    <item id="tracheal_filter" avail="4" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.1"/>
       <attrdef id="PRICE" value="$RATING*4500"/>
@@ -157,7 +157,7 @@
    <!-- Cultured Bioware -->
    <item id="cerebral_booster" avail="5" type="BIOWARE" subtype="BIOWARE_CULTURED">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.2"/>
       <attrdef id="PRICE" value="$RATING*31500"/>
@@ -168,7 +168,7 @@
    </item>
    <item id="damage_compensator" avail="5L" type="BIOWARE" subtype="BIOWARE_CULTURED">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.1"/>
       <attrdef id="PRICE" value="$RATING*2000"/>
@@ -178,7 +178,7 @@
    </item>
    <item id="mnemonic_enhancer" avail="5" type="BIOWARE" subtype="BIOWARE_CULTURED">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.1"/>
       <attrdef id="PRICE" value="$RATING*9000"/>
@@ -211,7 +211,7 @@
    </item>
    <item id="synaptic_booster" avail="5L" type="BIOWARE" subtype="BIOWARE_CULTURED">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.5"/>
       <attrdef id="PRICE" value="$RATING*95000"/>

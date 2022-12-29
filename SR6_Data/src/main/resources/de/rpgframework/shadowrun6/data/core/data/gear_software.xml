@@ -221,7 +221,7 @@
 	 <!-- Autosofts -->
 	<item avail="1" price="500" id="clearsight" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
 		</choices>
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
@@ -231,7 +231,7 @@
 	</item> 
 	<item avail="1" price="500" id="electronic_warfare" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
 		</choices>
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
@@ -241,7 +241,7 @@
 	</item> 
 	<item avail="1" price="500" id="evasion" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
 			<choice uuid="355a3a45-39fc-4376-8667-661c9873dfdb" type="GEAR" ref="VEHICLE" />
 		</choices>
 		<attrdef id="AVAILABILITY" value="$RATING"/>
@@ -252,7 +252,7 @@
 	</item> 
 	<item avail="1" price="500" id="maneuvering" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
 			<choice uuid="355a3a45-39fc-4376-8667-661c9873dfdb" type="GEAR" ref="VEHICLE" />
 		</choices>
 		<attrdef id="AVAILABILITY" value="$RATING"/>
@@ -263,7 +263,8 @@
 	</item> 
 	<item avail="1" price="500" id="stealth_auto" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="355a3a45-39fc-4376-8667-661c9873dfdb" type="GEAR" ref="VEHICLE" />
 		</choices>
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
@@ -273,7 +274,7 @@
 	</item> 
 	<item avail="1" price="500" id="targeting" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
 			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="GEAR" ref="WEAPON" />
 		</choices>
 		<attrdef id="AVAILABILITY" value="$RATING"/>
@@ -304,7 +305,7 @@
 	</item> 
    <item avail="4" price="5000" id="activesoft"  type="SOFTWARE" subtype="SKILLSOFT">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="mundane" />
 		</choices>
 		<attrdef id="PRICE" value="$RATING*5000"/>
@@ -328,7 +329,7 @@
 	</item> 
    <item avail="1" price="1500" id="linguasoft" type="SOFTWARE" subtype="SKILLSOFT" >
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="mundane" />
 		</choices>
 		<attrdef id="PRICE" value="$RATING*1500"/>
@@ -340,7 +341,7 @@
 	</item> 
    <item avail="1" price="400" id="tutorsoft" type="SOFTWARE" subtype="OTHER_PROGRAMS">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="mundane" />
 		</choices>
 		<attrdef id="PRICE" value="$RATING*400"/>

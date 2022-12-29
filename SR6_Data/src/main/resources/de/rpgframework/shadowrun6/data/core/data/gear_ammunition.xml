@@ -2,7 +2,7 @@
 <items>
     <item id="ammo_arrow"  price="2" avail="1" type="AMMUNITION" subtype="BOWS" count="y" units="">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/>
 		</choices>
 		<attrdef id="DAMAGE" value="0"/>
 		<attrdef id="PRICE" value="$RATING*2"/>

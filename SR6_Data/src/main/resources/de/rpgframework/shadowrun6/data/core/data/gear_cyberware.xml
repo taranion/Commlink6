@@ -34,13 +34,13 @@
    <item avail="3" price="20"    id="chem_patch"        subtype="SLAP_PATCHES" type="BIOLOGY" count="y"/>
    <item avail="3" price="25"    id="stim_patch"   subtype="SLAP_PATCHES" type="BIOLOGY" count="y">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
 		<attrdef id="PRICE" value="$RATING*25"/>
    </item>
    <item avail="3" price="10"    id="tranq_patch"  subtype="SLAP_PATCHES" type="BIOLOGY" count="y">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
 		</choices>
 		<attrdef id="PRICE" value="$RATING*$RATING*10"/>
    </item>
@@ -60,7 +60,7 @@
    </item>
    <item avail="4L" price="30000" id="control_rig" type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
      	<usage mode="IMPLANTED"/>
 		<attrdef id="PRICE" value="$RATING*30000"/>
@@ -101,7 +101,7 @@
    </item>
    <item id="cyberjack" type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
      	<usage mode="IMPLANTED"/>
 		<attrdef id="DATA_PROCESSING" value="$RATING+3"/>
@@ -124,7 +124,7 @@
    </item>
    <item avail="4" id="datalock" type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
 		</choices>
 		<attrdef id="PRICE" value="$RATING*1000"/>
       <usage mode="IMPLANTED" value="0.1"/>
@@ -132,7 +132,7 @@
    </item>
    <item avail="3" price="4000" id="olfactory_booster"  type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
 		<attrdef id="PRICE" value="$RATING*4000"/>
       <usage mode="IMPLANTED" value="0.2"/>
@@ -140,7 +140,7 @@
    </item>
    <item avail="4" price="20000" id="skilljack" type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.1"/>
 		<attrdef id="PRICE" value="$RATING*20000"/>
@@ -152,7 +152,7 @@
    </item>
    <item avail="3" id="taste_booster" type="CYBERWARE" subtype="CYBER_HEADWARE" >
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
       <usage mode="IMPLANTED" value="0.2"/>
 		<attrdef id="PRICE" value="$RATING*3000"/>
@@ -172,7 +172,7 @@
    </item>
    <item avail="4L" price="5000" id="voice_modulator" type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
       <usage mode="IMPLANTED" value="0.2"/>
 		<attrdef id="PRICE" value="$RATING*5000"/>
@@ -182,7 +182,7 @@
     <!-- Eyeware --> 
    <item id="cybereye" type="CYBERWARE" subtype="CYBER_EYEWARE">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d2" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5"/>
    	</choices>
       <usage mode="IMPLANTED"/>
    	<attrdef id="ESSENCECOST"  value="$RATING*0.1" />
@@ -210,7 +210,7 @@
    
    <item avail="5I" price="20000" id="retinal_duplication" type="CYBERWARE" subtype="CYBER_EYEWARE">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d2" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
    	</choices>
       <usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="1"/>
       <usage mode="IMPLANTED" value="0.1"/>
@@ -221,7 +221,7 @@
     <!--  Earware -->
    <item id="cyberears" type="CYBERWARE" subtype="CYBER_EARWARE">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d2" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5"/>
    	</choices>
       <usage mode="IMPLANTED"/>
    	<attrdef id="ESSENCECOST"  value="$RATING*0.1" />
@@ -296,7 +296,7 @@
    
    <item avail="4L" id="dermal_plating"  type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
       <usage mode="IMPLANTED" value="0.3" />
       <attrdef id="ESSENCECOST" value="$RATING*0.3"/>
@@ -327,7 +327,7 @@
    </item-->
    <item avail="2" id="internal_air_tank" type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
 		<attrdef id="PRICE" value="$RATING*4500"/>
       <usage mode="IMPLANTED" value="0.25" />
@@ -336,7 +336,7 @@
    </item>
    <item avail="3L" id="muscle_replacement" type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
 		<usage mode="IMPLANTED" value="$RATING*0.7"/>
 		<attrdef id="PRICE" value="$RATING*30000"/>
@@ -348,7 +348,7 @@
    </item>
    <item avail="4L" price="15000" id="reaction_enhancers" type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
 		<usage mode="IMPLANTED" value="$RATING*0.3"/>
 		<attrdef id="PRICE" value="$RATING*15000"/>
@@ -359,7 +359,7 @@
    </item>
    <item avail="4" price="20000" id="skillwires" type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
 		<usage mode="IMPLANTED" value="$RATING*0.1"/>
 		<attrdef id="PRICE" value="$RATING*20000"/>
@@ -379,7 +379,7 @@
    </item>
    <item id="wired_reflexes"  type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
 		<usage mode="IMPLANTED" value="$RATING" />
 		<attrdef id="PRICE" value="$RATING" table="40000,150000,250000,450000"/>
@@ -592,7 +592,7 @@
    </item>
    <item avail="4" price="2500" id="hydraulic_jacks" type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY" >
 		<choices>
-			<choice uuid="66b37416-6996-48b8-87f0-17b28dc44df1" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
 		</choices>
 		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="$RATING"/>
  		<flags><flag>AUGMENTATION</flag></flags>
