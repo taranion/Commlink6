@@ -48,19 +48,19 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public abstract class CommonEquipmentController extends ControllerImpl<ItemTemplate> implements ISR6EquipmentController {
-	
+
 	//-------------------------------------------------------------------
 	public CommonEquipmentController(SR6CharacterController parent) {
 		super(parent);
 	}
-	
+
 	//-------------------------------------------------------------------
 	public static ItemType getItemType(CarriedItem<ItemTemplate> model) {
 		if (model.hasAttribute(SR6ItemAttribute.ITEMTYPE))
 			return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
 		return null;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public static ItemSubType getItemSubType(CarriedItem<ItemTemplate> model) {
 		if (model.hasAttribute(SR6ItemAttribute.ITEMSUBTYPE))
@@ -72,7 +72,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	public static Possible checkDecisionsAndRequirements(Shadowrun6Character model, ItemTemplate data, String variantID, Decision...decisions) {
 		Possible p1 = Shadowrun6Tools.areRequirementsMet(model, data, decisions);
 		Possible p2 = GenericRPGTools.areAllDecisionsPresent(data, variantID, decisions);
-		
+
 		return new Possible(p1, p2);
 	}
 
@@ -139,7 +139,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	public Possible canBeSelected(ItemTemplate value, Decision... decisions) {
 		return canBeSelected(value, null, CarryMode.CARRIED, decisions);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private List<CarryMode> getAllowedModes(ItemTemplate value, PieceOfGearVariant<SR6VariantMode> variant) {
 		List<CarryMode> ret = new ArrayList<>();
@@ -147,19 +147,19 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			if (!ret.contains(usage.getMode()))
 				ret.add(usage.getMode());
 		}
-		
+
 		if (variant!=null) {
 			for (Usage usage : variant.getUsages()) {
 				if (!ret.contains(usage.getMode()))
 					ret.add(usage.getMode());
 			}
 		}
-		
+
 		if (ret.isEmpty())
 			ret.add(CarryMode.CARRIED);
 		return ret;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeSelected(ItemTemplate, String, Decision[])
@@ -170,11 +170,11 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		Possible poss =  GenericRPGTools.areAllDecisionsPresent(value, variantID, decisions);
 		if (!poss.get())
 			return poss;
-		
+
 		if (value.requiresVariant() && variantID==null) {
 			return new Possible(Possible.State.DECISIONS_MISSING, IRejectReasons.IMPOSS_MUST_CHOOSE_VARIANT);
 		}
-		
+
 		// Check variant
 		PieceOfGearVariant<SR6VariantMode> variant = null;
 		if (variantID!=null) {
@@ -183,13 +183,13 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 				return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
 			}
 		}
-		
+
 		// Compare carry mode
 		List<CarryMode> allowed = getAllowedModes(value, variant);
 		if (mode!=null && !allowed.contains(mode)) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_INVALID_CARRYMODE, mode.name(), String.valueOf(allowed));
 		}
-		
+
 		// Try to build item
 		OperationResult<CarriedItem<ItemTemplate>> carried = null;
 		carried = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
@@ -210,7 +210,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 				}
 			}
 		}
-		
+
 		// Check requirements of carried item
 		if (!parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS)) {
 			Possible poss2 = Shadowrun6Tools.areRequirementsMet(getModel(), value, decisions);
@@ -220,7 +220,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		} else {
 			logger.log(Level.DEBUG, "IGNORE_GEAR_REQUIREMENTS = true");
 		}
-		
+
 		return poss;
 	}
 
@@ -257,13 +257,13 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 				logger.log(Level.ERROR, "Trying to select {0} but decisions are missing: {1}", value, poss.toString());
 				return new OperationResult<>(poss);
 			}
-			
+
 			OperationResult<CarriedItem<ItemTemplate>> ret = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
 			logger.log(Level.INFO, "Add {0} to model", item.getKey());
 			getModel().addCarriedItem(item);
-			
+
 			return new OperationResult<CarriedItem<ItemTemplate>>(item);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, mode);
@@ -299,7 +299,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 			logger.log(Level.INFO, "Remove {0} from model", value.toString());
 			getModel().removeCarriedItem(value);
-			
+
 			parent.runProcessors();
 			return true;
 		} finally {
@@ -354,7 +354,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	public Possible canBeIncreased(CarriedItem<ItemTemplate> value) {
 		if (!value.getModifyable().isCountable())
 			return Possible.FALSE;
-		
+
 		int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 		if (getModel().getNuyen()<nuyen) {
 			boolean allowNegative = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN);
@@ -390,10 +390,10 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			logger.log(Level.WARNING, "Trying to increase count on item where not allowed");
 			return new OperationResult<>(poss);
 		}
-		
+
 		value.setCount( value.getCount()+1 );
 		logger.log(Level.INFO, "Increase count of {0} to {1}", value, value.getCount());
-		
+
 		parent.runProcessors();
 		return new OperationResult<>(value);
 	}
@@ -410,17 +410,17 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			logger.log(Level.WARNING, "Trying to increase count on item where not allowed");
 			return new OperationResult<>(poss);
 		}
-		
+
 		value.setCount( value.getCount()-1 );
 		logger.log(Level.INFO, "Decrease count of {0} to {1}", value, value.getCount());
 		if (value.getCount()==0) {
 			getModel().removeCarriedItem(value);
 		}
-		
+
 		parent.runProcessors();
 		return new OperationResult<>(value);
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#getEmbeddableIn(CarriedItem, ItemHook)
@@ -439,7 +439,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		if (!getEmbeddableIn(container, slot).contains(value)) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_EMBEDDABLE, value.getName(), slot, container.getNameWithRating());
 		}
-		
+
 		// Check for variant
 		SR6PieceOfGearVariant variant = null;
 		if (variantID!=null) {
@@ -448,15 +448,15 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 				return new Possible(IRejectReasons.IMPOSS_MUST_CHOOSE_VARIANT);
 			}
 		}
-		
+
 		// Check requirements
 		Requirement unmet = ItemUtil.areRequirementsMet(container, value, variant);
 		if (unmet!=null) {
 			return new Possible(unmet);
 		}
-		
+
 		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, variant, getModel(), true, decisions);
-		if (res.hasError()) { 
+		if (res.hasError()) {
 			State state = State.POSSIBLE;
 			for (ToDoElement error : res.getMessages()) {
 				if (error.getSeverity()==Severity.STOPPER) state=State.IMPOSSIBLE;
@@ -465,31 +465,31 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			return new Possible(state, res.getMessages().toString());
 		}
 		CarriedItem<ItemTemplate> toEmbed = res.get();
-		
-		
+
+
 		ItemAttributeNumericalValue<SR6ItemAttribute> val = res.get().getAsValue(SR6ItemAttribute.PRICE);
 		if (val==null) {
 			logger.log(Level.ERROR, "No PRICE attribute after building "+res.get());
 		} else {
 			int nuyen = val.getModifiedValue();
 			if (nuyen > getModel().getNuyen()) {
-				return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());			
+				return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());
 			}
 		}
-				
+
 		// Check if capacity is sufficient
 		AvailableSlot realSlot = (AvailableSlot) container.getSlot(slot);
 		logger.log(Level.WARNING, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
-		if (realSlot==null) { 
-			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SUCH_SLOT, slot.name(), container.getNameWithoutRating());			
+		if (realSlot==null) {
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SUCH_SLOT, slot.name(), container.getNameWithoutRating());
 		}
 		logger.log(Level.INFO, "Items in slot={0},  free capacity={1}  Slot {2} hasCapacity={3}", realSlot.getAllEmbeddedItems().size(), realSlot.getFreeCapacity(), slot.name(), slot.hasCapacity());
 		if (container.getUuid().equals(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE))
 			return Possible.TRUE;
-		
+
 		// Special handling for software: check types
-		
-		
+
+
 		if (slot.hasCapacity() && realSlot.getCapacity()<99) {
 			float free = realSlot.getFreeCapacity();
 			float required = 1;
@@ -500,15 +500,15 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 					required = toEmbed.getAsValue(SR6ItemAttribute.CAPACITY).getModifiedValue();
 			}
 			if (free<required) {
-				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, required, slot.getName(), container.getNameWithoutRating(), free);			
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, required, slot.getName(), container.getNameWithoutRating(), free);
 			}
-		} else {
+		} else if (!slot.hasCapacity()) {
 			if (!realSlot.getAllEmbeddedItems().isEmpty()) {
 				logger.log(Level.INFO, "Cannot embed");
-				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_SLOT_OCCUPIED, slot.getName());			
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_SLOT_OCCUPIED, slot.getName());
 			}
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -525,7 +525,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 				logger.log(Level.WARNING, "Trying to embed, which isn't possible: "+poss.getMostSevere());
 				return new OperationResult<>();
 			}
-			
+
 			SR6PieceOfGearVariant variant = null;
 			if (variantID!=null)
 				variant = (SR6PieceOfGearVariant) value.getVariant(variantID);
@@ -538,7 +538,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			logger.log(Level.DEBUG, "recalculate item after embedding");
 			GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
 			logger.log(Level.INFO, "Embedded {0} into {1}", value.getId()+"/"+variant, container.getKey());
-			
+
 			parent.runProcessors();
 			return res;
 		} finally {
@@ -559,14 +559,14 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			logger.log(Level.WARNING, "Tried to remove accessory {0} from {1}, but: {2}", toRemove, container, poss.toString());
 			return poss;
 		}
-		
+
 		logger.log(Level.INFO, "Remove {0} from {1}", toRemove.getKey(), container.getKey());
 		boolean success = container.removeAccessory(toRemove, slot);
 		if (!success)
 			return Possible.FALSE;
 		logger.log(Level.ERROR, "ToDo: recalculate item after removing embedded");
 		GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
-		
+
 		parent.runProcessors();
 		return Possible.TRUE;
 	}
