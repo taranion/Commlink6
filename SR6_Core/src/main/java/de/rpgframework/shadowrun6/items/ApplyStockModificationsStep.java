@@ -148,9 +148,16 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 					logger.log(Level.INFO, indent + "Remove slot {0} from {1}", hook, mod.getSource());
 					model.removeSlot(hook);
 				} else {
-				logger.log(Level.INFO, indent + "Add slot {0} without capacity from {1}", hook, mod.getSource());
-				AvailableSlot slot = (hook.hasCapacity)?(new AvailableSlot(hook)):(new AvailableSlot(hook));
-				model.addSlot(slot);
+					if (hook.hasCapacity) {
+						ValueModification valMod = (ValueModification)mod;
+						logger.log(Level.INFO, indent + "Add slot {0} with capacity {1} from {2}", hook, valMod.getValue(), mod.getSource());
+						AvailableSlot slot = new AvailableSlot(hook, valMod.getValue());
+						model.addSlot(slot);
+					} else {
+						logger.log(Level.INFO, indent + "Add slot {0} without capacity from {1}", hook, mod.getSource());
+						AvailableSlot slot = new AvailableSlot(hook);
+						model.addSlot(slot);
+					}
 				}
 			}
 			return true;
