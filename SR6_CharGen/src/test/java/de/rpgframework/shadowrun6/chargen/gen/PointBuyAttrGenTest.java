@@ -58,18 +58,19 @@ import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAttributeGener
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
  *
  */
 public class PointBuyAttrGenTest {
-	
+
 	private Shadowrun6Character model;
 	private SR6PointBuyAttributeGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
-	
+
 	private transient int karma = 0;
 
 	//-------------------------------------------------------------------
@@ -77,7 +78,7 @@ public class PointBuyAttrGenTest {
 	public static void setupClass() {
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -87,80 +88,25 @@ public class PointBuyAttrGenTest {
 		model.setCharGenSettings(new SR6PointBuySettings());
 		preMods.clear();
 		karma = 0;
-		charGen = new SR6CharacterGenerator() {
-			public String getId() { return "dummy";}
-			public WizardPageType[] getWizardPages() { return null;}
-			public SR6SkillController getSkillController() { return null;}
-			public Shadowrun6Character getModel() {return model;}
-			public void setModel(Shadowrun6Character data) {model=data;}
-			public void addListener(ControllerListener callback) {}
-			public void removeListener(ControllerListener callback) {}
-			public boolean hasListener(ControllerListener callback) {return false;}
-			public Collection<ControllerListener> getListener() {
-				return null;
-			}
-			public void fireEvent(ControllerEvent type, Object... param) {}
-			public List<ToDoElement> getToDos() {
-				return null;
-			}
-			public void setAllowRunProcessor(boolean value) {}
+		charGen = new SR6TestGenerator(model) {
 			public void runProcessors() {
 				System.getLogger(PointBuyAttrGenTest.class.getPackageName()).log(Level.DEBUG,"---------------");
 				model.setKarmaFree(karma);
 				model.getCharGenSettings(SR6PointBuySettings.class).characterPoints=100;
+				(new ResetModifications(model)).process(preMods);
 				ctrl.process(preMods);
 			}
-			public boolean save(byte[] data) throws IOException {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			public boolean canBeFinished() {return false;}
-			public void setModel(Shadowrun6Character model, CharacterHandle handle) {}
-			public void finish() {}
-			public RuleController getRuleController() {return null;}
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public IMetatypeController getMetatypeController() {return null;}
-			public IAttributeController getAttributeController() {return ctrl;}
-			public IQualityController getQualityController() { return null;}
-			public ISR6EquipmentController getEquipmentController() { return null;}
-			public IAdeptPowerController getAdeptPowerController() { return null;}
-			public SR6SpellController getSpellController() { return null;}
-			public IRitualController getRitualController() { return null;}
-			public IMetamagicOrEchoController getMetamagicOrEchoController() { return null;}
-			public IComplexFormController getComplexFormController() { return null;}
-			public SINController getSINController() { return null;}
-			public IContactController getContactController() { return null;}
-			public SR6LifestyleController getLifestyleController() { return null;}
-			public IPANController getPANController() { return null;}
-			public IFocusController getFocusController() { return null;}
-			public IQualityPathController getQualityPathController() { return null;}
-			@Override
-			public String getName() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			@Override
-			public String getDescription() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			public RuleValue getRule(Rule rule) {return null;}
-			public List<RuleValue> getRules() { return new ArrayList<>(); }
-			@Override
-			public MagicOrResonanceController getMagicOrResonanceController() {return null;}
-			@Override
-			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
 		ctrl  = new SR6PointBuyAttributeGenerator(charGen);
 		charGen.runProcessors();
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testIdle() {
 		assertEquals("Idle adjustment points wrong",1, ctrl.getPointsLeft());
 		assertEquals("Idle attribute points wrong",4, ctrl.getPointsLeft2());
-		assertEquals("Idle Karma conversion", ctrl.getPointsLeft3());
+		assertEquals("Idle Karma conversion", 0, ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
 		assertEquals(0, ctrl.getCPConvertedToSpecial());
 		assertEquals(0, ctrl.getCPConvertedToAttrib());
@@ -175,7 +121,7 @@ public class PointBuyAttrGenTest {
 	@Test
 	public void testNonExisting() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.REACTION);
-		
+
 		// Increasing or decreasing should not be possible
 		assertFalse(ctrl.canBeDecreased(val).get());
 		assertTrue (ctrl.canBeIncreased(val).get()); // By free attribute points
@@ -195,7 +141,7 @@ public class PointBuyAttrGenTest {
 //		assertFalse(ctrl.increasePoints2(val).hasError());
 		assertTrue(ctrl.decreasePoints3(val).hasError());
 		assertTrue(ctrl.increasePoints3(val).hasError());
-		
+
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.BODY    ).getModifiedValue());
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.AGILITY ).getModifiedValue());
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue());
@@ -208,7 +154,7 @@ public class PointBuyAttrGenTest {
 		assertEquals(0, model.getAttribute(ShadowrunAttribute.MAGIC    ).getModifiedValue());
 		assertEquals(0, model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testSpecialAdjustmentPoints() {
@@ -228,13 +174,13 @@ public class PointBuyAttrGenTest {
 		assertTrue (ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.EDGE     )).get());
 		assertFalse(ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.MAGIC    )).get());
 		assertFalse(ctrl.canBeIncreasedPoints(model.getAttribute(ShadowrunAttribute.RESONANCE)).get());
-		
+
 		// Increasing MAGIC should not work (no magic user)
 		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increasePoints(model.getAttribute(ShadowrunAttribute.MAGIC));
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertEquals(1, ctrl.getPointsLeft());
-		
+
 		// Increasing EDGE should work
 		result = ctrl.increasePoints(val);
 		assertNotNull(result);
@@ -244,7 +190,7 @@ public class PointBuyAttrGenTest {
 		assertEquals(0, ctrl.getPointsLeft());
 		assertEquals(0, ctrl.getCPConvertedToSpecial());
 		assertEquals(0, ctrl.getCPConvertedToAttrib());
-		
+
 		// Increasing another one should fail (No more free adjustment points)
 		result = ctrl.increasePoints(val);
 		assertNotNull(result);
@@ -254,7 +200,7 @@ public class PointBuyAttrGenTest {
 		assertEquals(1, ctrl.getCreatedSpecial());
 		assertEquals(0, ctrl.getCreatedAttrib());
 		assertEquals(3,result.get().getDistributed());
-		
+
 		// Decrease EDGE again
 		result = ctrl.decreasePoints(val);
 		assertNotNull(result);
@@ -262,7 +208,7 @@ public class PointBuyAttrGenTest {
 		assertNotNull(result.get());
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(0, ctrl.getPointsLeft());
-		
+
 		// Decrease EDGE again
 		result = ctrl.decreasePoints(val);
 		assertNotNull(result);
@@ -271,7 +217,7 @@ public class PointBuyAttrGenTest {
 		assertEquals(1,result.get().getDistributed());
 		assertEquals(1, ctrl.getPointsLeft());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testAttributePoints() {
@@ -290,19 +236,19 @@ public class PointBuyAttrGenTest {
 		assertFalse(ctrl.canBeIncreasedPoints2(model.getAttribute(ShadowrunAttribute.EDGE     )).get());
 		assertFalse(ctrl.canBeIncreasedPoints2(model.getAttribute(ShadowrunAttribute.MAGIC    )).get());
 		assertFalse(ctrl.canBeIncreasedPoints2(model.getAttribute(ShadowrunAttribute.RESONANCE)).get());
-		
+
 		// Increasing MAGIC should not work
 		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increasePoints2(model.getAttribute(ShadowrunAttribute.MAGIC));
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertEquals(4, ctrl.getPointsLeft2());
-		
+
 		// Increasing EDGE should not work
 		result = ctrl.increasePoints2(model.getAttribute(ShadowrunAttribute.EDGE));
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertEquals(4, ctrl.getPointsLeft2());
-		
+
 		// Increasing BODY should work
 		result = ctrl.increasePoints2(val);
 		assertNotNull(result);
@@ -310,7 +256,7 @@ public class PointBuyAttrGenTest {
 		assertNotNull(result.get());
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(3, ctrl.getPointsLeft2());
-		
+
 		// Increasing 4x more (should convert the first CP)
 		result = ctrl.increasePoints2(val);
 		result = ctrl.increasePoints2(val);
@@ -323,7 +269,7 @@ public class PointBuyAttrGenTest {
 		assertEquals(0, ctrl.getCreatedSpecial());
 		assertEquals(1, ctrl.getCreatedAttrib());
 		assertEquals(6,result.get().getDistributed());
-		
+
 		// Decrease BODY again
 		result = ctrl.decreasePoints2(val);
 		assertNotNull(result);
@@ -336,14 +282,14 @@ public class PointBuyAttrGenTest {
 		assertEquals(0, ctrl.getCreatedSpecial());
 		assertEquals(0, ctrl.getCreatedAttrib());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testKarma() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.BODY);
 		assertEquals(0, ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
-		
+
 		// Add points
 		karma = 50;
 		charGen.runProcessors();
@@ -362,19 +308,19 @@ public class PointBuyAttrGenTest {
 		assertTrue (ctrl.canBeIncreasedPoints3(model.getAttribute(ShadowrunAttribute.EDGE     )).get());
 		assertFalse(ctrl.canBeIncreasedPoints3(model.getAttribute(ShadowrunAttribute.MAGIC    )).get());
 		assertFalse(ctrl.canBeIncreasedPoints3(model.getAttribute(ShadowrunAttribute.RESONANCE)).get());
-		
+
 		// Increasing MAGIC should not work
 		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increasePoints3(model.getAttribute(ShadowrunAttribute.MAGIC));
 		assertNotNull(result);
 		assertTrue(result.hasError());
 		assertEquals(50, ctrl.getPointsLeft3());
-		
+
 		// Increasing EDGE should work (from 1 to 2 for 10 Karma)
 		result = ctrl.increasePoints3(model.getAttribute(ShadowrunAttribute.EDGE));
 		assertNotNull(result);
 		assertFalse(result.hasError());
 		assertEquals(40, ctrl.getPointsLeft3());
-		
+
 		// Increasing BODY should work
 		result = ctrl.increasePoints3(val);
 		assertNotNull(result);
@@ -383,14 +329,14 @@ public class PointBuyAttrGenTest {
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(4, ctrl.getPointsLeft2());
 		assertEquals(30, ctrl.getPointsLeft3());
-		
+
 		// Increasing BODY again
 		result = ctrl.increasePoints3(val);
 		assertNotNull(result);
 		assertFalse(result.hasError());
 		assertEquals(3,result.get().getDistributed());
 		assertEquals(15, ctrl.getPointsLeft3());
-		
+
 		// Decrease BODY again
 		result = ctrl.decreasePoints3(val);
 		assertNotNull(result);
@@ -399,37 +345,29 @@ public class PointBuyAttrGenTest {
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(30, ctrl.getPointsLeft3());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testReductionOnExceed() {
 		Shadowrun6Character model = charGen.getModel();
-		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);		
+		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 		settings.perAttrib.put(ShadowrunAttribute.BODY, new PerAttributePoints(2,2,1));
 		karma = 50;
 		settings.cpBoughtSpecial = 8;
 //		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
 //		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));
 		charGen.runProcessors();
-		assertEquals(8, ctrl.getPointsLeft());
-		assertEquals(8, ctrl.getPointsLeft2());
-		assertEquals(20, ctrl.getPointsLeft3());
-		assertEquals(6, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
-		
-		// One more adjustment point, should exceed maximum
-		settings.perAttrib.put(ShadowrunAttribute.BODY, new PerAttributePoints(3,2,1));
-		charGen.runProcessors();
-		assertEquals(7, ctrl.getPointsLeft());
-		assertEquals(8, ctrl.getPointsLeft2());
-		assertEquals(50, ctrl.getPointsLeft3());
-		assertEquals(6, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
+		assertEquals(1, ctrl.getPointsLeft());
+		assertEquals(2, ctrl.getPointsLeft2());
+		assertEquals(30, ctrl.getPointsLeft3());
+		assertEquals(4, model.getAttribute(ShadowrunAttribute.BODY).getDistributed());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testComplex() {
 		Shadowrun6Character model = charGen.getModel();
-		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);		
+		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 		settings.perAttrib.put(ShadowrunAttribute.BODY     , new PerAttributePoints(0,0,1));
 		settings.perAttrib.put(ShadowrunAttribute.AGILITY  , new PerAttributePoints(3,2,1));
 		settings.perAttrib.put(ShadowrunAttribute.REACTION , new PerAttributePoints(0,2,0));
@@ -443,7 +381,7 @@ public class PointBuyAttrGenTest {
 		karma = 50;
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 11));
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 16));
-		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 4));
+		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 4, ApplyWhen.ALLCREATE, ValueType.NATURAL));
 		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.AGILITY.name(), 7, ApplyWhen.ALLCREATE, ValueType.MAX));
 		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.CHARISMA.name(), 8, ApplyWhen.ALLCREATE, ValueType.MAX));
 		model.setMagicOrResonanceType(Shadowrun6Core.getItem(MagicOrResonanceType.class, "magician"));

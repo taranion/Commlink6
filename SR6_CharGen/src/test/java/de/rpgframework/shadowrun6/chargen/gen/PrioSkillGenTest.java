@@ -55,13 +55,14 @@ import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
  *
  */
 public class PrioSkillGenTest {
-	
+
 	private Shadowrun6Character model;
 	private SR6PrioritySkillGenerator ctrl;
 	private SR6CharacterGenerator charGen;
@@ -72,7 +73,7 @@ public class PrioSkillGenTest {
 	public static void setupClass() {
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -87,13 +88,14 @@ public class PrioSkillGenTest {
 			}
 			public void runProcessors() {
 				System.out.println("---------------");
+				(new ResetModifications(model)).process(preMods);
 				ctrl.process(preMods);
 			}
 		};
 		ctrl  = new SR6PrioritySkillGenerator(charGen);
 		charGen.runProcessors();
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testIdle() {
@@ -101,7 +103,7 @@ public class PrioSkillGenTest {
 		assertEquals(model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed(), ctrl.getPointsLeft2());
 		assertEquals(0, ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
-		
+
 		assertEquals("There should be no skillvalues except native language", 1, model.getSkillValues().size() );
 	}
 
@@ -131,7 +133,7 @@ public class PrioSkillGenTest {
 		assertTrue(ctrl.decreasePoints3(val).hasError());
 		assertTrue(ctrl.increasePoints3(val).hasError());
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * Test if a selection is successful when enough skill points are present
@@ -143,7 +145,7 @@ public class PrioSkillGenTest {
 		preMods.add(mod);
 		charGen.runProcessors();
 		assertEquals(1, ctrl.getPointsLeft());
-		
+
 		OperationResult<SR6SkillValue> selected = ctrl.select(Shadowrun6Core.getSkill("athletics"));
 		assertNotNull(selected);
 		assertFalse(selected.hasError());
@@ -153,7 +155,7 @@ public class PrioSkillGenTest {
 		assertEquals(1,selected.get().getDistributed());
 		assertEquals(0, ctrl.getPointsLeft());
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * Test to increase or decrease a skill present in the character with a value
@@ -170,13 +172,13 @@ public class PrioSkillGenTest {
 		assertTrue(res.getError(), res.wasSuccessful());
 		SR6SkillValue val = res.get();
 		assertEquals(1,val.getDistributed());
-		
+
 		assertEquals(11, ctrl.getPointsLeft());
 		// Decreasing with points should be possible
 		assertTrue(ctrl.canBeDecreasedPoints(val).get());
 		// Since 11 points are left, increasing should be possible as well
 		assertTrue(ctrl.canBeIncreasedPoints(val).get());
-		
+
 		// Increasing with skill points should work
 		OperationResult<SR6SkillValue> result = ctrl.increasePoints(val);
 		assertNotNull(result);
@@ -184,7 +186,7 @@ public class PrioSkillGenTest {
 		assertNotNull(result.get());
 		assertEquals(2,result.get().getDistributed());
 		assertEquals(10, ctrl.getPointsLeft());
-		
+
 		// Decreasing again
 		result = ctrl.decreasePoints(val);
 		assertNotNull(result);
@@ -192,7 +194,7 @@ public class PrioSkillGenTest {
 		assertNotNull(result.get());
 		assertEquals(1,result.get().getDistributed());
 		assertEquals(11, ctrl.getPointsLeft());
-		
+
 		// Reach limit of 6
 		for (int i=2; i<=6; i++) {
 			result = ctrl.increasePoints(val);
@@ -202,7 +204,7 @@ public class PrioSkillGenTest {
 			assertEquals(i,result.get().getDistributed());
 			assertEquals(12-i, ctrl.getPointsLeft());
 		}
-		
+
 		// Increasing with skill points should not work anymore, since the maximum is reached
 		assertFalse(ctrl.canBeIncreasedPoints(val).get());
 		result = ctrl.increasePoints(val);
@@ -210,19 +212,19 @@ public class PrioSkillGenTest {
 		assertTrue(result.hasError());
 		assertNull(result.get());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testRoll() {
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.SKILLS.name(), 12));
 		charGen.runProcessors();
-		
+
 		ctrl.roll();
 		assertEquals("Not all points spent",0, ctrl.getPointsLeft());
-		assertEquals(model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(), ctrl.getPointsLeft2());
 		assertEquals(0, ctrl.getPointsLeft3());
 		assertEquals(0, model.getKarmaFree());
-		
+		assertEquals("Should have spent all skill points",0, ctrl.getPointsLeft2());
+
 		assertTrue("There should be more skillvalues than native language", model.getSkillValues().size()>1 );
 	}
 
