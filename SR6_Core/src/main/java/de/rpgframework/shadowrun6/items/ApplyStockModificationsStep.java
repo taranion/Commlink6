@@ -42,15 +42,15 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	@SuppressWarnings("rawtypes")
 	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac,
 			CarriedItem<?> model, List<Modification> unprocessed) {
-		
-		logger.log(Level.WARNING, "Decisions are "+model.getDecisions());
-		
-		@SuppressWarnings("unchecked")		
+
+		logger.log(Level.DEBUG, "Decisions are {0}",model.getDecisions());
+
+		@SuppressWarnings("unchecked")
 		CarriedItem<ItemTemplate> model2 = (CarriedItem<ItemTemplate>) model;
-		// Read all modifications that are meant for this item		
+		// Read all modifications that are meant for this item
 		for (Modification tmp : model.getModifications()) {
 			try {
-				logger.log(Level.WARNING, "Process {0}", tmp);
+				logger.log(Level.DEBUG, "Process {0}", tmp);
 				if (tmp instanceof ValueModification) {
 					applyModification(indent, charac, model2, (ValueModification) tmp);
 				} else if (tmp instanceof EmbedModification) {
@@ -65,7 +65,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				System.exit(1);
 			}
 		}
-		
+
 		for (Modification tmp : new ArrayList<>(unprocessed)) {
 			try {
 				logger.log(Level.WARNING, "Process {0}", tmp);
@@ -99,7 +99,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 //			model.addCharacterModification(mod);
 //			return;
 //		}
-//		
+//
 //		switch ((ShadowrunReference) mod.getReferenceType()) {
 //		case HOOK:
 //			ItemHook hook = mod.getResolvedKey();
@@ -175,7 +175,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	// -------------------------------------------------------------------
 	@SuppressWarnings("rawtypes")
 	private boolean embedModification(String indent, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
-		logger.log(Level.WARNING, "Before processing "+mod+" Decisions are "+model.getDecisions());
+		logger.log(Level.DEBUG, "Before processing "+mod+" Decisions are "+model.getDecisions());
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addCharacterModification(mod);
 			logger.log(Level.WARNING, "Ignore for now " + mod);
@@ -183,7 +183,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		}
 
 		// Merge the decisions of the modifications and the item itself
-		logger.log(Level.WARNING, "Embed "+mod+" with decisions="+mod.getDecisions());
+		logger.log(Level.DEBUG, "Embed "+mod+" with decisions="+mod.getDecisions());
 		Decision[] decs = new Decision[mod.getDecisions().size()];
 		decs = mod.getDecisions().toArray(decs);
 		switch ((ShadowrunReference) mod.getReferenceType()) {
@@ -191,7 +191,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			ItemTemplate templ = mod.getReferenceType().resolve(mod.getKey());
 			if ("CHOICE".equals(mod.getKey())) {
 				Choice choice = model.getChoiceMapRecursivly().get( mod.getConnectedChoice() );
-				logger.log(Level.WARNING, "Search choice "+choice+" in decisions "+mod.getDecisions());
+				logger.log(Level.DEBUG, "Search choice "+choice+" in decisions "+mod.getDecisions());
 				// Use the decision instead of the key
 				for (Decision d : model.getDecisions()) {
 					logger.log(Level.WARNING, "Compare {0} with {1}", d.getChoiceUUID(), mod.getConnectedChoice());
@@ -202,7 +202,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 					}
 				}
 				if (templ==null) {
-					logger.log(Level.ERROR, "Could not find a (valid) decision for CHOICE "+mod.getConnectedChoice());
+					logger.log(Level.DEBUG, "Could not find a (valid) decision for CHOICE "+mod.getConnectedChoice());
 					return true;
 				}
 			}

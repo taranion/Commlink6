@@ -490,36 +490,38 @@ public class ItemUtilJFX {
 			logger.log(Level.ERROR, "Don't know how to handle "+attr);
 		}
 		
-		if (obj!=null) {
-			if (!item.getAsObject(attr).getModifications().isEmpty()) {
-				ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-				Tooltip tooltip = new Tooltip();
-				ret.setTooltip(tooltip);
-				logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
+//		if (obj!=null) {
+//			if (!item.getAsObject(attr).getModifications().isEmpty()) {
+//				ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+//				Tooltip tooltip = new Tooltip();
+//				ret.setTooltip(tooltip);
 //				switch (attr) {
 //				case ATTACK_RATING:
 //					tooltip.setText("?");
+//					break;
+//				default:
+//					logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
 //				}
-			}
-		} else {
-			switch (attr) {
-			case ESSENCECOST:
-				if (item.getAsFloat(attr)!=null && !item.getAsFloat(attr).getModifications().isEmpty()) {
-					logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
-					ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-					Tooltip tooltip = new Tooltip();
-					ret.setTooltip(tooltip);
-				}
-				break;
-			default:
-				if (item.getAsValue(attr)!=null && !item.getAsValue(attr).getModifications().isEmpty()) {
-					logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr+" / "+item.getAsValue(attr).getModifications());
-					ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-					Tooltip tooltip = new Tooltip();
-					ret.setTooltip(tooltip);
-				}
-			}
-		}
+//			}
+//		} else {
+//			switch (attr) {
+//			case ESSENCECOST:
+//				if (item.getAsFloat(attr)!=null && !item.getAsFloat(attr).getModifications().isEmpty()) {
+//					logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr);
+//					ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+//					Tooltip tooltip = new Tooltip();
+//					ret.setTooltip(tooltip);
+//				}
+//				break;
+//			default:
+//				if (item.getAsValue(attr)!=null && !item.getAsValue(attr).getModifications().isEmpty()) {
+//					logger.log(Level.WARNING, "Don't know how to make tooltips for "+attr+" / "+item.getAsValue(attr).getModifications());
+//					ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+//					Tooltip tooltip = new Tooltip();
+//					ret.setTooltip(tooltip);
+//				}
+//			}
+//		}
 		
 		return ret;
 	}

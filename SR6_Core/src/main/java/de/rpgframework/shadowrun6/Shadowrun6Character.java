@@ -55,9 +55,9 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
-	
+
 	private transient Persona persona;
-	
+
 	//-------------------------------------------------------------------
 	public Shadowrun6Character() {
 		gender = Gender.MALE;
@@ -69,13 +69,23 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		martialArts = new ArrayList<>();
 		maneuvers = new ArrayList<>();
 		asdfMap = new ASDFMapping();
-		
+
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			attributes.add(new AttributeValue<ShadowrunAttribute>(key, 1));
 		}
 		setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.MAGIC, 0));
 		setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.RESONANCE, 0));
 		setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0));
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.ShadowrunCharacter#getAspectSkill()
+	 */
+	@Override
+	public SR6Skill getAspectSkill() {
+		if (this.getAspectSkillId()==null) return null;
+		return Shadowrun6Core.getSkill(getAspectSkillId());
 	}
 
 	//-------------------------------------------------------------------
@@ -87,7 +97,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			throw new RuntimeException("Hab ich schon");
 			//return value;
 		}
-		
+
 		return super.addSkillValue(value);
 //		skills.add(value);
 //		return value;
@@ -101,7 +111,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	public RoleplayingSystem getRules() {
 		return RoleplayingSystem.SHADOWRUN6;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.ShadowrunCharacter#getMetatype()
@@ -201,7 +211,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			.filter(filter)
 			.collect(Collectors.toList())
 			;
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -276,7 +286,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	public List<CheckModification> getEdgeModifications(ShadowrunCheckInfluence... types) {
 		return edgeMods.stream().filter( mod -> List.of(types).contains(mod.getWhat())).collect(Collectors.toList());
 	}
-	
+
 	//---------------------------------------------------------
 	public int getCostOfAction(ShadowrunAction action) {
 		int cost = action.getCost();
@@ -292,7 +302,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			cost=1;
 		return cost;
 	}
-	
+
 	//---------------------------------------------------------
 	public boolean isCostModified(ShadowrunAction action) {
 		for (CheckModification mod : edgeMods) {
@@ -336,7 +346,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			if (style.getResolved().getSignatureTechnique()==ref)
 				return true;
 		}
-		
+
 		return false;
 	}
 
@@ -353,7 +363,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		for (MartialArtsValue style : martialArts) {
 			ret.add(new TechniqueValue(style.getResolved().getSignatureTechnique(), style.getResolved()));
 		}
-		
+
 		return ret;
 	}
 
@@ -365,7 +375,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			if (tech.getMartialArt()==learnedIn)
 				ret.add(tech);
 		}
-		
+
 		return ret;
 	}
 

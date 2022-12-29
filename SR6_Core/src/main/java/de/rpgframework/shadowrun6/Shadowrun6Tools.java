@@ -37,12 +37,14 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
+import de.rpgframework.genericrpg.items.AItemEnhancement;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
+import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
@@ -82,6 +84,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
@@ -187,7 +190,7 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
 		} catch (Exception e) {
-			logger.log(Level.ERROR, "Failed calculating character",e);
+			logger.log(Level.ERROR, "Failed calculating character "+model.getName(),e);
 		}
 	}
 
@@ -563,6 +566,9 @@ public class Shadowrun6Tools {
 					if (tmp.getVariantID()!=null && tmp.getVariant()==null) {
 						tmp.setVariant( tmp.getResolved().getVariant(tmp.getCarryMode()) );
 					}
+				}
+				for (ItemEnhancementValue<AItemEnhancement> eVal : tmp.getEnhancements()) {
+					eVal.setResolved( Shadowrun6Core.getItem(SR6ItemEnhancement.class, eVal.getKey()));
 				}
 				resolver.process("", ShadowrunReference.ITEM_ATTRIBUTE, model, tmp, List.of());
 				SR6GearTool.recalculate("", model, tmp);

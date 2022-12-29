@@ -50,7 +50,7 @@ public class CalculateEssence implements ProcessingStep {
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(type) || (item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE)) {
 //					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
 					ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-					logger.log(Level.WARNING, "  essence = {0} for {1}",aVal, item.getKey());
+					logger.log(Level.DEBUG, "  essence = {0} for {1}",aVal, item.getKey());
 					if (aVal==null) continue;
 					double essence = aVal.getModifiedValueDouble(); 
 					logger.log(Level.INFO,"* "+item.getNameWithoutRating()+" = "+essence);

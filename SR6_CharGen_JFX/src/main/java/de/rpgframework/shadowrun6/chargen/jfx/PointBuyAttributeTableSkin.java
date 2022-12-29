@@ -56,11 +56,11 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 	private Label lbPoints, lbKarma;
 	private GridPane grid;
 	private VBox layout;
-	
+
 	private Label headDecOut, headAdjust, headAttrib, headKarma, headIncOut, headResult;
 	private ToggleButton headBtnAdjust, headBtnAttrib, headBtnKarma;
 	private ToggleGroup toggles = new ToggleGroup();
-	
+
 	private Map<ShadowrunAttribute, Label>  lblRec = new HashMap<>();
 	private Map<ShadowrunAttribute, Label>  lblNam = new HashMap<>();
 
@@ -79,7 +79,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 	private Map<ShadowrunAttribute, Label>  lblAll = new HashMap<>();
 	private Map<ShadowrunAttribute, Button> btnIncAll = new HashMap<>();
 	private Map<ShadowrunAttribute, Button> btnIncAllMin = new HashMap<>();
-	
+
 	private Map<ShadowrunAttribute, List<Control>> allPerAttr = new HashMap<>();
 
 	private MapChangeListener<Object, Object> propertiesMapListener = c -> {
@@ -101,7 +101,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		initLayout();
 		initInteractivity();
 		updateLayout();
-		
+
 		toggles.selectToggle(headBtnAttrib);
 		refresh();
 	}
@@ -111,16 +111,16 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		if (getSkinnable().getController()==null) return null;
 		return (PointBuyAttributeGenerator) getSkinnable().getController().getAttributeController();
 	}
-	
+
 	//-------------------------------------------------------------------
-	private Button createButton(Map<ShadowrunAttribute,Button> map, 
+	private Button createButton(Map<ShadowrunAttribute,Button> map,
 			ShadowrunAttribute key, String icon, int x, int y) {
 		Button btn = new Button(null, new SymbolIcon(icon));
 		map.put(key, btn);
 		GridPane.setMargin(btn, new Insets(5,10,5,10));
-		
+
 		grid.add(btn, x, y);
-		
+
 		// In allPer
 		List<Control> list = allPerAttr.get(key);
 		if (list==null) {
@@ -130,9 +130,9 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		list.add(btn);
 		return btn;
 	}
-	
+
 	//-------------------------------------------------------------------
-	private Label createLabel(Map<ShadowrunAttribute,Label> map, 
+	private Label createLabel(Map<ShadowrunAttribute,Label> map,
 			ShadowrunAttribute key, int x, int y) {
 		Label lab = new Label("?");
 		lab.setMaxWidth(Double.MAX_VALUE);
@@ -141,7 +141,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		map.put(key, lab);
 //		GridPane.setMargin(lab, new Insets(0,5,0,5));
 		grid.add(lab, x, y);
-		
+
 		// In allPer
 		List<Control> list = allPerAttr.get(key);
 		if (list==null) {
@@ -149,19 +149,19 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 			allPerAttr.put(key, list);
 		}
 		list.add(lab);
-		
+
 		return lab;
 	}
-	
+
 	//-------------------------------------------------------------------
-	private void createName(Map<ShadowrunAttribute,Label> map, 
+	private void createName(Map<ShadowrunAttribute,Label> map,
 			ShadowrunAttribute key, int x, int y) {
 		Label lab = new Label(key.getName());
-		lab.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);			
+		lab.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		map.put(key, lab);
-		
+
 		grid.add(lab, x, y);
-		
+
 		// In allPer
 		List<Control> list = allPerAttr.get(key);
 		if (list==null) {
@@ -170,14 +170,14 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		}
 		list.add(lab);
 	}
-	
+
 	//-------------------------------------------------------------------
-	private void createRecomLabel(Map<ShadowrunAttribute,Label> map, 
+	private void createRecomLabel(Map<ShadowrunAttribute,Label> map,
 			ShadowrunAttribute key, int x, int y) {
 		Label lab = new Label(null, new SymbolIcon("favorite"));
 		map.put(key, lab);
-		
-		
+
+
 		// In allPer
 		List<Control> list = allPerAttr.get(key);
 		if (list==null) {
@@ -187,7 +187,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		list.add(lab);
 		grid.add(lab, x, y);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private Label createHeading(String key, int x, int y, int span) {
 		Label lab = new Label( (key!=null)?ResourceI18N.get(RES, key):"");
@@ -197,7 +197,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		grid.add(lab, x, y, span,1);
 		return lab;
 	}
-	
+
 	//-------------------------------------------------------------------
 	private ToggleButton createToggle(String key) {
 		ToggleButton lab = new ToggleButton( (key!=null)?ResourceI18N.get(RES, key):"");
@@ -206,7 +206,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		lab.setToggleGroup(toggles);
 		return lab;
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		tsExpertMode = new ToggleSwitch("Expert");
@@ -216,11 +216,11 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 
 		lbPoints.setStyle("-fx-text-fill: -fx-text-base-color");
 		lbKarma .setStyle("-fx-text-fill: -fx-text-base-color");
-		
+
 		grid = new GridPane();
 //		grid.setVgap(5);
 		grid.setGridLinesVisible(false);
-		
+
 		int y=0;
 		createHeading("head.attribute", 1, y, 1);
 		headDecOut=createHeading(null, 2, y, 1);
@@ -232,13 +232,13 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		headKarma.setPadding(new Insets(0, 5, 0, 5));
 		headIncOut=createHeading(null, 12, y, 1);
 		headResult=createHeading("head.result", 13, y, 3);
-		
+
 		headBtnAdjust = createToggle("head.adjust.short");
 		headBtnAttrib = createToggle("head.attrib.short");
 		headBtnKarma  = createToggle("head.karma.short");
 		y++;
-		
-		
+
+
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			int x=0;
 			createRecomLabel(lblRec, key, x++, y);
@@ -246,12 +246,12 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 
 			// Outer DEC button
 			createButton(btnDecAllMin, key, "remove", x++, y);
-			
+
 			// Adjustment points
 			createButton(btnDecAdj, key, "remove", x++, y);
 			createLabel (lblAdj, key, x++, y);
 			createButton(btnIncAdj, key, "add", x++, y);
-			
+
 			// Attribute points
 			switch (key) {
 			case MAGIC:
@@ -263,15 +263,15 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 				createLabel(lblPnt, key, x++, y);
 				createButton(btnIncPnt, key, "add", x++, y);
 			}
-			
+
 			// Karma
 			createButton(btnDecKar, key, "remove", x++, y);
 			createLabel (lblKar, key, x++, y);
 			createButton(btnIncKar, key, "add", x++, y);
-			
+
 			// Outer INC button
 			createButton(btnIncAllMin, key, "add", x++, y);
-			
+
 			// All-in-one
 			createButton(btnDecAll, key, "remove", x++, y);
 			createLabel (lblAll, key, x++, y);
@@ -279,7 +279,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 
 			y++;
 		}
-		
+
 //		grid.getColumnConstraints().add(new ColumnConstraints());
 //		grid.getColumnConstraints().add(new ColumnConstraints(200,300,400));
 //		for (int i=0; i<11; i++) {
@@ -289,31 +289,31 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 //		}
 		logger.log(Level.DEBUG, "After initComponents() grid has "+grid.getChildrenUnmodifiable().size()+" children");
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		Label hdAttrib = new Label(ResourceI18N.get(RES, "head.attrib")+":");
 		Label hdKarma  = new Label(ResourceI18N.get(RES, "head.karma")+":");
-		
+
 		HBox line = new HBox(5, tsExpertMode, hdAttrib, lbPoints, hdKarma, lbKarma);
 		HBox.setMargin(hdAttrib, new Insets(0,0,0,10));
 		HBox.setMargin(hdKarma, new Insets(0,0,0,10));
-		
+
 		layout = new VBox(5, line, grid);
-		getChildren().add(layout);		
+		getChildren().add(layout);
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private AttributeValue<ShadowrunAttribute> value(ShadowrunAttribute key) {
 		return ((ShadowrunCharacter)getController().getModel()).getAttribute(key);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		getSkinnable().useExpertModeProperty().addListener( (ov,o,n) -> updateLayout());
 		tsExpertMode.selectedProperty().bindBidirectional(getSkinnable().useExpertModeProperty());
-		
+
 		btnDecAdj.entrySet().forEach(e -> e.getValue().setOnAction(ev -> {getController().decreasePoints(value(e.getKey())); refresh();}));
 		btnIncAdj.entrySet().forEach(e -> e.getValue().setOnAction(ev -> {getController().increasePoints(value(e.getKey())); refresh();}));
 		btnDecPnt.entrySet().forEach(e -> e.getValue().setOnAction(ev -> {getController().decreasePoints2(value(e.getKey())); refresh();}));
@@ -324,26 +324,30 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		btnIncAll.entrySet().forEach(e -> e.getValue().setOnAction(ev -> {getController().increase(getSkinnable().getController().getModel().getAttribute(e.getKey())); refresh();}));
 		btnDecAllMin.entrySet().forEach(e -> e.getValue().setOnAction(ev -> {decreaseMinimal(e.getKey()); refresh();}));
 		btnIncAllMin.entrySet().forEach(e -> e.getValue().setOnAction(ev -> {increaseMinimal(e.getKey()); refresh();}));
-		
+
 		getSkinnable().showMagicProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "showMagic changed from {0} to {1}",o,n);
 			for (Control ctrl : allPerAttr.get(ShadowrunAttribute.MAGIC)) {
 				ctrl.setVisible(true);
 				ctrl.setManaged(true);
+				updateLayout();
 			}
 		});
 		getSkinnable().showResonanceProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "showReso changed from {0} to {1}",o,n);
 			for (Control ctrl : allPerAttr.get(ShadowrunAttribute.RESONANCE)) {
 				ctrl.setVisible(true);
 				ctrl.setManaged(true);
 			}
+			updateLayout();
 		});
-		
-		
+
+
         final ObservableMap<Object, Object> properties = getSkinnable().getProperties();
         properties.remove(SkinProperties.REFRESH);
         properties.remove(SkinProperties.WINDOW_MODE);
         properties.addListener(propertiesMapListener);
-        
+
         toggles.selectedToggleProperty().addListener( (ov,o,n) -> {
         	logger.log(Level.DEBUG, "Toggle changed to {}",n);
         	refresh();
@@ -353,9 +357,9 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 
 	//-------------------------------------------------------------------
 	private void updateLayout() {
-		logger.log(Level.INFO, "updateLayout");
+		logger.log(Level.DEBUG, "updateLayout");
 		removeAll();
-		
+
 		boolean expertMode = getSkinnable().isUseExpertMode();
 		boolean enoughSpace= ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL;
 
@@ -371,13 +375,13 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 				updateLayoutExpertMinimal();
 			}
 		}
-		
+
 		if (getController()!=null) {
 			refresh();
 		}
 		logger.log(Level.DEBUG, "After updateLayout() grid has "+grid.getChildrenUnmodifiable().size()+" children");
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void removeAll() {
 //		grid.getChildren().retainAll(lblNam.values());
@@ -398,20 +402,20 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		grid.getChildren().removeAll(btnIncAll.values());
 		grid.getChildren().removeAll(btnDecAllMin.values());
 		grid.getChildren().removeAll(btnIncAllMin.values());
-		
+
 		grid.getColumnConstraints().clear();
-		logger.log(Level.INFO, "  removeAll() done");
+		logger.log(Level.DEBUG, "  removeAll() done");
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void updateLayoutSimple() {
-		logger.log(Level.INFO, "updateLayoutSimple");
+		logger.log(Level.DEBUG, "updateLayoutSimple");
 		boolean showMagic  = getSkinnable().isShowMagic();
 		boolean showReson  = getSkinnable().isShowResonance();
-		
+
 		int y=0;
 		grid.add(headResult, 2, y, 3,1);
-		
+
 		lblNam.get(ShadowrunAttribute.MAGIC).setVisible(showMagic);
 		lblNam.get(ShadowrunAttribute.RESONANCE).setVisible(showReson);
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
@@ -428,11 +432,11 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 				grid.add(lblRec.get(key), 0, y);
 				grid.add(lblNam.get(key), 1, y);
 			}
-			
+
 			grid.add(btnDecAll.get(key), 2, y);
 			grid.add(   lblAll.get(key), 3, y);
 			grid.add(btnIncAll.get(key), 4, y);
-			
+
 			btnDecAll.get(key).setVisible(getController()!=null);
 			btnIncAll.get(key).setVisible(getController()!=null);
 		}
@@ -440,16 +444,16 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		grid.getColumnConstraints().add(new ColumnConstraints(150));
 		grid.getColumnConstraints().add(new ColumnConstraints()); // Dec
 		grid.getColumnConstraints().add(new ColumnConstraints(50)); // Value
-		
+
 		grid.setGridLinesVisible(true);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void updateLayoutExpertMinimal() {
 		logger.log(Level.INFO, "updateLayoutExpertMinimal");
 		boolean showMagic  = getSkinnable().isShowMagic();
 		boolean showReson  = getSkinnable().isShowResonance();
-		
+
 		int y=0;
 		grid.add(headDecOut   , 2, y, 1,1);
 		grid.add(headBtnAdjust, 3, y, 1,1);
@@ -474,7 +478,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 				grid.add(lblRec.get(key), 0, y);
 				grid.add(lblNam.get(key), 1, y);
 			}
-			
+
 			grid.add(btnDecAllMin.get(key), 2, y);
 			grid.add(      lblAdj.get(key), 3, y);
 			if (key!=ShadowrunAttribute.MAGIC && key!=ShadowrunAttribute.RESONANCE && key!=ShadowrunAttribute.EDGE)
@@ -482,11 +486,11 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 			grid.add(      lblKar.get(key), 5, y);
 			grid.add(btnIncAllMin.get(key), 6, y);
 			grid.add(      lblAll.get(key), 7, y);
-			
+
 			GridPane.setFillWidth(lblPnt.get(key), true);
 			GridPane.setFillHeight(lblPnt.get(key), true);
 			GridPane.setFillWidth(lblKar.get(key), true);
-			
+
 			btnDecAllMin.get(key).setVisible(getController()!=null);
 			btnIncAllMin.get(key).setVisible(getController()!=null);
 		}
@@ -494,16 +498,16 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		grid.getColumnConstraints().add(new ColumnConstraints());
 		grid.getColumnConstraints().add(new ColumnConstraints()); // Dec
 		grid.getColumnConstraints().add(new ColumnConstraints(45)); // Adjust
-		grid.getColumnConstraints().add(new ColumnConstraints(45)); // 
-		grid.getColumnConstraints().add(new ColumnConstraints(45)); // 
+		grid.getColumnConstraints().add(new ColumnConstraints(45)); //
+		grid.getColumnConstraints().add(new ColumnConstraints(45)); //
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void updateLayoutExpertNormal() {
 		logger.log(Level.INFO, "updateLayoutExpertNormal");
 		boolean showMagic  = getSkinnable().isShowMagic();
 		boolean showReson  = getSkinnable().isShowResonance();
-		
+
 		int y=0;
 		grid.add(headAdjust, 2, y, 3,1);
 		grid.add(headAttrib, 5, y, 3,1);
@@ -526,7 +530,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 				grid.add(lblRec.get(key), 0, y);
 				grid.add(lblNam.get(key), 1, y);
 			}
-			
+
 			grid.add(btnDecAdj.get(key), 2, y);
 			grid.add(   lblAdj.get(key), 3, y);
 			grid.add(btnIncAdj.get(key), 4, y);
@@ -552,28 +556,28 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		grid.getColumnConstraints().add(new ColumnConstraints(40)); // Adjust
 		grid.getColumnConstraints().add(new ColumnConstraints()); // IncAdj
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private void refresh() {
-		logger.log(Level.INFO, "refresh with "+grid.getChildrenUnmodifiable().size()+" children");
+		logger.log(Level.DEBUG, "refresh with "+grid.getChildrenUnmodifiable().size()+" children");
 		if (getSkinnable().getController()==null) return;
 		@SuppressWarnings("rawtypes")
 		ShadowrunCharacter model = (ShadowrunCharacter) getSkinnable().getController().getModel();
 		SR6PointBuySettings settings = (SR6PointBuySettings) model.getCharGenSettings(SR6PointBuySettings.class);
 
 		lbPoints.setText(settings.characterPoints+"/"+getController().getPointsLeft()+"/"+getController().getPointsLeft2());
-		lbPoints.setTooltip(new Tooltip(ResourceI18N.format(RES, "sr6pointbuy.tooltip", settings.characterPoints, 
+		lbPoints.setTooltip(new Tooltip(ResourceI18N.format(RES, "sr6pointbuy.tooltip", settings.characterPoints,
 				getController().getPointsLeft(), getController().getPointsLeft2())
 				));
 		lbKarma .setText(String.valueOf(getController().getPointsLeft3()));
-		
+
 		lblRec.entrySet().forEach(e -> {
 			if (getController()==null) return;
 			RecommendationState state = getController().getRecommendationState(e.getKey());
 			e.getValue().setVisible(state!=null && state!=RecommendationState.NEUTRAL);
 			});
-		
+
 		btnDecAdj.entrySet().forEach(e -> e.getValue().setDisable(!getController().canBeDecreasedPoints(value(e.getKey())).get()));
 		btnIncAdj.entrySet().forEach(e -> e.getValue().setDisable(!getController().canBeIncreasedPoints(value(e.getKey())).get()));
 		btnDecAdj.entrySet().forEach(e -> e.getValue().setVisible (getController().canBeDecreasedPoints(value(e.getKey())).get()));
@@ -586,11 +590,11 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		btnIncAll.entrySet().forEach(e -> e.getValue().setDisable(!getController().canBeIncreased(value(e.getKey())).get()));
 		btnDecAllMin.entrySet().forEach(e -> e.getValue().setDisable(!canBeDecreasedMinimal(e.getKey())));
 		btnIncAllMin.entrySet().forEach(e -> e.getValue().setDisable(!canBeIncreasedMinimal(e.getKey())));
-		
+
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> val = model.getAttribute(key);
 			PerAttributePoints per = settings.perAttrib.get(key);
-			
+
 			lblAll.get(key).setText(String.valueOf(val.getDistributed()));
 			if (lblAdj.get(key)!=null) {
 				lblAdj.get(key).setText(String.valueOf(per.points1));
@@ -628,7 +632,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 				return getController().canBeDecreasedPoints3(value(attribute)).get();
 			}
 		}
-		
+
 		return getController().canBeDecreased(value(attribute)).get();
 	}
 
@@ -662,7 +666,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 
 		getController().decrease(value(attribute)).get();
 	}
-	
+
 	// -------------------------------------------------------------------
 	private void increaseMinimal(ShadowrunAttribute attribute) {
 		if (getSkinnable().isUseExpertMode()) {

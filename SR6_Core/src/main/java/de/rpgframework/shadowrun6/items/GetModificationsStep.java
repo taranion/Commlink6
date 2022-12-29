@@ -143,6 +143,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 		for (ItemEnhancementValue<AItemEnhancement> enh : model.getEnhancements()) {
 			SR6ItemEnhancement real = (SR6ItemEnhancement) enh.getResolved();
 			real.getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
+			model.getAsValue(SR6ItemAttribute.PRICE).addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), real.getPrice(), real));
 		}
 		
 		for (OperationMode mode : model.getActiveOperationModes(true)) {
