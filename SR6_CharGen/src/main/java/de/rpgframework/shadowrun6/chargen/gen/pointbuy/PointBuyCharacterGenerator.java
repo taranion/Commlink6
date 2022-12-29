@@ -40,19 +40,19 @@ import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
  * @author stefa
  *
  */
-@GeneratorId("karma")
+@GeneratorId("pointbuy")
 public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  implements ISR6PointBuyGenerator {
 
 	static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PointBuyCharacterGenerator.class,
 			Locale.ENGLISH, Locale.GERMAN);
-	
+
 	public static String TODO_SKILLS_TOO_MANY_CP_CONVERTED = "pointbuy.todo.skills.too_many_converted";
 	public static String TODO_ATTRIB_TOO_MANY_CP_CONV_REG  = "pointbuy.todo.attrib.too_many_regular";
 	public static String TODO_ATTRIB_TOO_MANY_CP_CONV_SPEC = "pointbuy.todo.attrib.too_many_special";
-	
+
 	private RemainingCPAreNuyenStep cpToNuyenStep;
-	
-	
+
+
 	private boolean setupDone;
 
 	//-------------------------------------------------------------------
@@ -82,8 +82,8 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	@Override
 	public WizardPageType[] getWizardPages() {
 		return new WizardPageType[] { WizardPageType.METATYPE,
-				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED, 
-				WizardPageType.QUALITIES, 
+				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
+				WizardPageType.QUALITIES,
 				WizardPageType.ATTRIBUTES,
 				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,
 				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.NAME, };
@@ -115,11 +115,11 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
 		this.model = model;
 		this.handle= handle;
-		this.setupDone = false;	
-		
+		this.setupDone = false;
+
 		initializeModel();
 		logger.log(Level.INFO, "----------------Start generator-----------------------" + toString() + "\n\n\n");
-		
+
 		try {
 			setupProcessChain();
 		} catch (Exception e) {
@@ -142,7 +142,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			}
 
 			createPartialController();
-			
+
 			// First the regular processing steps
 			for (Class<? extends ProcessingStep> cls : Shadowrun6Tools.RECALCULATE_STEPS) {
 				try {
@@ -150,7 +150,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 					try {
 						cons = cls.getConstructor(Shadowrun6Character.class);
 					} catch (NoSuchMethodException nsm) {
-						cons = cls.getConstructor(ShadowrunCharacter.class);						
+						cons = cls.getConstructor(ShadowrunCharacter.class);
 					}
 					processChain.add(cons.newInstance(model));
 				} catch (NoSuchMethodException e) {
@@ -159,7 +159,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 				} catch (Exception e) {
 					logger.log(Level.ERROR, "Failed instantiating "+cls,e);
 				}
-				
+
 			}
 			processChain.add(new ResetGenerator(this));
 //			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
