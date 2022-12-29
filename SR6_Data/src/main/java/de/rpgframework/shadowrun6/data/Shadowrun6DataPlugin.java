@@ -125,7 +125,7 @@ public class Shadowrun6DataPlugin  {
 		Persister.putContext(Persister.PREFIX_KEY_ABSTRACT+"."+ASkillValue.class.getName(), SR6SkillValue.class);
 		Persister.putContext(Persister.PREFIX_KEY_ABSTRACT+"."+ASpell.class.getName(), SR6Spell.class);
 	}
-	
+
 	//--------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.RulePlugin#init()
@@ -141,7 +141,7 @@ public class Shadowrun6DataPlugin  {
 		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"));
 		ItemUtil.SOFTWARE_LIBRARY_ITEM.assignToDataSet(core);
 		SR6GearTool.recalculate("", null, ItemUtil.SOFTWARE_LIBRARY);
-		
+
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
@@ -225,7 +225,7 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic traditions");
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/npcs.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" NPCs");
-			
+
 			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, core, clazz.getResourceAsStream("core/data/critters_awakened.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" awakened critters");
 //			logger.log(Level.ERROR, "Stop here");
@@ -240,7 +240,7 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" sprites");
 			list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, core, clazz.getResourceAsStream("core/data/mentorspirits.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
-			
+
 			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" rule presets");
 
@@ -399,5 +399,5 @@ public class Shadowrun6DataPlugin  {
 		}
 		return null;
 	}
-	
+
 }
