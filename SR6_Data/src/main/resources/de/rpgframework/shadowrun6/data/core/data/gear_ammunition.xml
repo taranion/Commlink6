@@ -61,9 +61,6 @@
 		</variant>
 	</item>
 	<item id="ammo_taser" price="10" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION">
-		<choices>
-			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
-		</choices>
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="TASER" apply="DATA_ITEM"/>
@@ -76,6 +73,9 @@
 		</requires>
 	</item>
 	<item id="ammo_cannon" price="50" avail="4I" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON" apply="DATA_ITEM"/>
@@ -85,6 +85,9 @@
 		</variant>
 	</item>
 	<item id="ammo_machine_gun" price="15" avail="2L" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" >
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MACHINE_GUN" apply="DATA_ITEM"/>
@@ -100,6 +103,9 @@
         </requires>
 	</item>
 	<item id="ammo_shotgun" price="15" avail="2L" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="SHOTGUN" apply="DATA_ITEM"/>
