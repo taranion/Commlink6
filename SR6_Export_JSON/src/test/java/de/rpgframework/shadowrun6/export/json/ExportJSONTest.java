@@ -35,7 +35,7 @@ public class ExportJSONTest {
 	@Test
 	public void printTest() throws IOException {
 		SR6JSONExportPlugin plugin = new SR6JSONExportPlugin();
-	
+
 
 		String name = "Adept";
 //		name = "CombatMage";
@@ -59,7 +59,6 @@ public class ExportJSONTest {
 		fos.flush();
 		fos.close();
 		System.out.println(Files.readString(file.toPath()));
-		System.exit(0);
 	}
 
 }

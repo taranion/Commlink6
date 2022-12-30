@@ -86,12 +86,12 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Failed loading image attachment",e);
 		}
-		if (imageBytes==null) {		
+		if (imageBytes==null) {
 			card.setImage(new Image(SR6CharactersOverviewPage.class.getResourceAsStream("Person.png")));
 		} else {
 			card.setImage(new Image(new ByteArrayInputStream(imageBytes)));
 		}
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -103,7 +103,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		logger.log(Level.INFO, "ENTER: create Character Controller");
 		try {
 		Shadowrun6Character model = (Shadowrun6Character) rawModel;
-		
+
 		if (model.isInCareerMode()) {
 			logger.log(Level.ERROR, "ToDo: Create Karma Leveller");
 			Class<? extends CommonSR6GeneratorSettings> settings = null;
@@ -116,7 +116,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 				logger.log(Level.ERROR, "Don't know how to get settings class for '{0}'",model.getCharGenUsed());
 				throw new NullPointerException("Don't know how to get settings class for '"+model.getCharGenUsed()+"'");
 			}
-			
+
 			SR6CharacterLeveller leveller = new SR6CharacterLeveller(model, handle, settings);
 			//System.exit(1);
 			return leveller;
@@ -125,7 +125,19 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 			GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
 			logger.log(Level.INFO, "ToDo: Detect previously used generator: {0}", model.getCharGenUsed());
 			try {
-				logger.log(Level.DEBUG, "JSON = " + model.getChargenSettingsJSON());
+				String json = model.getChargenSettingsJSON();
+				logger.log(Level.ERROR, "JSON = {0}",json);
+				if (model.getCharGenUsed() == null && json!=null) {
+					if (json.startsWith("{\"priorities\"")) {
+						logger.log(Level.ERROR, "Guessing PriorityGenerator as previously used generator");
+						model.setCharGenUsed("prio");
+						BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, ResourceI18N.get(RES, "error.no_chargen_in_character")+"\nThere are hints that the priority generator has been used, so I assume this now.");
+					} else if (json.startsWith("{\"characterPoints\"")) {
+						logger.log(Level.ERROR, "Guessing Point Buy as previously used generator");
+						model.setCharGenUsed("pointbuy");
+						BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, ResourceI18N.get(RES, "error.no_chargen_in_character")+"\nThere are hints that the point buy generator has been used, so I assume this now.");
+					}
+				}
 				if (model.getCharGenUsed() == null) {
 					throw new NullPointerException(ResourceI18N.get(RES, "error.no_chargen_in_character"));
 				}
@@ -146,9 +158,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 			} catch (Exception e) {
 				logger.log(Level.ERROR, "Error creating generator '" + model.getCharGenUsed(), e);
 				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2,
-						"Internal error creating character generator instance");
-				showAnyException(e, model, ResourceI18N.get(RES, "error.title"),
-						ResourceI18N.get(RES, "error.continuingCreation"));
+						"Internal error creating character generator instance", e);
 				return null;
 			}
 		}
@@ -170,7 +180,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 				ret.setController((SR6CharacterController) control);
 			return ret;
 		} finally {
-			logger.log(Level.DEBUG, "LEAVE: createCharacterViewLayout");			
+			logger.log(Level.DEBUG, "LEAVE: createCharacterViewLayout");
 		}
 	}
 
@@ -195,7 +205,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 	@Override
 	protected RuleSpecificCharacterObject<?,?,?,?> loadRuleSpecific(byte[] raw) throws Exception {
 		logger.log(Level.INFO, "ENTER loadRuleSpecific");
-		
+
 		try {
 			Shadowrun6Character rawChar = Shadowrun6Core.decode(raw);
 			Shadowrun6Tools.resolveChar(rawChar);
@@ -211,7 +221,7 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 			logger.log(Level.INFO, "LEAVE loadRuleSpecific");
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	protected void exportClicked(CharacterHandle handle) {
 		Shadowrun6Character charac = (Shadowrun6Character) handle.getCharacter();

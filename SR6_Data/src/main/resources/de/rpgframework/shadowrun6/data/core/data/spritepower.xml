@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <critterpowers>
-    <critterpower id="camouflage"  />
-    <critterpower id="cookie"      />
-    <critterpower id="diagnostics" />
-    <critterpower id="electron_storm" />
-    <critterpower id="hash"      />
-    <critterpower id="override"      />
-    <critterpower id="phantom"      />
-    <critterpower id="stability"      />
-    <critterpower id="suppression"      />
-    <critterpower id="trap"      />
-    <critterpower id="watermark"      />
+    <critterpower id="camouflage"   type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS"/>
+    <critterpower id="cookie"       type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS"/>
+    <critterpower id="diagnostics"  type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS"/>
+    <critterpower id="electron_storm" type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS" />/>
+    <critterpower id="hash"       type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS"/>
+    <critterpower id="override"      type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS" />
+    <critterpower id="phantom"       type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS"/>
+    <critterpower id="stability"      type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS" />
+    <critterpower id="suppression"     type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS"  />
+    <critterpower id="trap"      type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS" />
+    <critterpower id="watermark"     type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS"  />
 </critterpowers>

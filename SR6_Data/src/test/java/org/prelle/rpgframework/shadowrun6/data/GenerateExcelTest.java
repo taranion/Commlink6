@@ -35,9 +35,9 @@ import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
  *
  */
 public class GenerateExcelTest {
-	
+
 	private static Workbook wb;
-	
+
 	//-------------------------------------------------------------------
 	@BeforeClass
 	public static void beforeClass() {
@@ -46,12 +46,12 @@ public class GenerateExcelTest {
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init( );
 		System.err.println("Found "+Shadowrun6Core.getDataSets().size()+" datasets");
-		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(2) );
-		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(1) );
-		
+//		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(2) );
+//		Shadowrun6Core.removeDataSet( Shadowrun6Core.getDataSets().get(1) );
+
 		wb = new XSSFWorkbook();
 	}
-	
+
 	//-------------------------------------------------------------------
 	@AfterClass
 	public static void afterClass() {
@@ -68,13 +68,13 @@ public class GenerateExcelTest {
 	public void generateWeaponSheet() {
 		Sheet sheet = wb.createSheet("Weapons");
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
-		
+
 		int rowNum=0;
 		for (ItemTemplate item : list) {
 			Row row = sheet.createRow(rowNum++);
 			Cell cell = row.createCell(0);
 			cell.setCellValue(item.getName());
-			
+
 			// Availability
 			createCell(row, item, 1, SR6ItemAttribute.AVAILABILITY, new AvailabilityConverter());
 			createCell(row, item, 2, SR6ItemAttribute.PRICE, null);
@@ -83,7 +83,7 @@ public class GenerateExcelTest {
 			if (item.getAttribute(SR6ItemAttribute.ATTACK_RATING)!=null)
 				createCell(row, item, 4, SR6ItemAttribute.ATTACK_RATING, new IntegerArrayConverter());
 		}
-		
+
 		sheet.autoSizeColumn(0);
 		sheet.autoSizeColumn(1);
 		sheet.autoSizeColumn(2);
@@ -124,5 +124,5 @@ public class GenerateExcelTest {
 			cell.setCellValue(dmgDef.getRawValue());
 		}
 	}
-	
+
 }

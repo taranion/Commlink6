@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sr6char gender="MALE" karmaF="5" meta="dwarf" nuyen="2400">
    <powerLevel>STANDARD</powerLevel>
-   <heat>0</heat>
    <lifestyles>
       <lifestyle comfort="middle" entert="middle" name="To define" necess="middle" neigh="middle" prim="true" ref="middle" security="middle" space="middle" value="1"/>
    </lifestyles>
