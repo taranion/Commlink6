@@ -11,7 +11,7 @@ import org.prelle.simplepersist.Root;
  *
  */
 @Root(name="lifemods")
-@ElementList(entry="lifemods",type=LifepathModule.class,inline=true)
+@ElementList(entry="lifemod",type=LifepathModule.class,inline=true)
 public class LifepathModuleList extends ArrayList<LifepathModule> {
 
 	private static final long serialVersionUID = -8959073625177058674L;

@@ -61,6 +61,8 @@ import de.rpgframework.shadowrun.TraditionList;
 import de.rpgframework.shadowrun6.ActionList;
 import de.rpgframework.shadowrun6.DataStructure;
 import de.rpgframework.shadowrun6.DataStructureList;
+import de.rpgframework.shadowrun6.LifepathModule;
+import de.rpgframework.shadowrun6.LifepathModuleList;
 import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.MartialArtsList;
 import de.rpgframework.shadowrun6.MetaTypeList;
@@ -296,11 +298,13 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" critter power");
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "companion/data/metatypes.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" metatypes");
-			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, core, clazz,"companion/data/transhumanism.xml");
+			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz,"companion/data/transhumanism.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" transhumanisms");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-complete.xml");
 //			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/SR6C_Packs_WIP_1.xml");
 			//logger.log(Level.DEBUG, "Loaded "+list.size()+" complete PACKs");
+			list = Shadowrun6Core.loadDataItems(LifepathModuleList.class, LifepathModule.class, set, clazz,"companion/data/lifepath.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" lifepath modules");
 
 //			logger.log(Level.INFO, "START -------------------------------HACK&SLASH------------------------------------------");
 //			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "HACK_SLASH", "hack_slash.i18n", Locale.ENGLISH);

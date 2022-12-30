@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -70,6 +71,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ATTRIBUTE(new AttributeConverter()),
 	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
 	CARRIED("CarriedItem"),
+	CONTACT_TYPES(ContactType.class,0),
 	COMPLEX_FORM(ComplexForm.class),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),

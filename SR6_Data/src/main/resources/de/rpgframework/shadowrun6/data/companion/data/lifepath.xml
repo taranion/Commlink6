@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <lifemods>
-	<lifemod id="it_support" type="adult">
+	<lifemod id="it_support" type="ADULT">
+		<requires>
+			<datareq type="LIFEMOD" ref="technical_school"/>
+		</requires>
 		<choices>
 			<choice type="ATTRIBUTE" uuid="ea862a41-ce8a-4751-948a-4516d869c75d" options="INTUITION,LOGIC,WILLPOWER"/>
 			<choice type="SKILL" uuid="8b1490ae-f83b-45de-8ba6-6d682b636dd5" options="cracking,electronics,engineering,tasking"/>
@@ -11,13 +14,13 @@
 			<selmod>
 				<valmod type="ATTRIBUTE" ref="EDGE" value="1"/>
 				<valmod type="ATTRIBUTE" ref="RESONANCE" value="1"/>
-				<valmod type="CREATION_POINTS" ref="NUYEN" value="25000"/>		
+				<valmod type="CREATION_POINTS" ref="NUYEN" value="25000"/>
 			</selmod>
 			<valmod type="CREATION_POINTS" ref="NUYEN" value="25000"/>
 			<valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2"/>
-			<allowmod type="CONTACT_TYPES" ref="academic"/>
-			<allowmod type="CONTACT_TYPES" ref="corporate"/>
-			<allowmod type="CONTACT_TYPES" ref="matrix"/>
+			<allowmod type="CONTACT_TYPES" ref="ACADEMIC"/>
+			<allowmod type="CONTACT_TYPES" ref="CORPORATE"/>
+			<allowmod type="CONTACT_TYPES" ref="MATRIX"/>
 			<selmod>
 				<itemmod type="SKILL" ref="knowledge">
 					<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.maintenance_procedures"/>
