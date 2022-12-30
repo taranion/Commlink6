@@ -8,7 +8,6 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
-import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -18,7 +17,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
  *
  */
 public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
-	
+
 	final static Logger logger = SR6GearTool.logger;
 
 	//-------------------------------------------------------------------
@@ -27,16 +26,16 @@ public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
+	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
-		
+
 		boolean changed = false;
 		ItemTemplate resolved = (ItemTemplate) model.getResolved();
 		SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) model.getVariant();
 		if (resolved == null) {
 			resolved = Shadowrun6Core.getItem(ItemTemplate.class, model.getKey());
 			if (resolved == null) {
-				logger.log(Level.ERROR, indent+"Item {0} refers to unknown item template ''{1}''", model.getUuid(),
+				logger.log(Level.ERROR, "Item {0} refers to unknown item template ''{1}''", model.getUuid(),
 						model.getKey());
 				return new OperationResult<>();
 			}
@@ -45,19 +44,19 @@ public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
 		if (model.getVariantID()!=null && model.getVariant()==null) {
 			variant = (SR6PieceOfGearVariant) resolved.getVariant(model.getVariantID());
 			if (variant==null) {
-				logger.log(Level.ERROR, indent+"Item {0} refers to unknown variant ''{1}'' of template {2}", model.getUuid(),
+				logger.log(Level.ERROR, "Item {0} refers to unknown variant ''{1}'' of template {2}", model.getUuid(),
 						model.getVariantID(), model.getKey());
 				return new OperationResult<>();
 			}
 			changed = true;
 		}
-		
-		// Depth first 
+
+		// Depth first
 		// Since setResolved() triggers recalculation, resolve children first
 		for (CarriedItem<ItemTemplate> child : ((CarriedItem<ItemTemplate>)model).getAccessories()) {
-			OperationResult<List<Modification>> sub = this.process(indent+"", ref, charac, child, unprocessed);
+			OperationResult<List<Modification>> sub = this.process(strict, ref, charac, child, unprocessed);
 		}
-		
+
 		if (changed) {
 //			logger.log(Level.WARNING, "Resolve "+model.getKey()+"/"+model.getVariantID()+" to "+resolved+"/"+variant);
 			if (variant!=null) {
@@ -66,7 +65,7 @@ public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
 				((CarriedItem<ItemTemplate>)model).setResolved(resolved);
 			}
 		}
-		
+
 		return new OperationResult<> (unprocessed);
 	}
 

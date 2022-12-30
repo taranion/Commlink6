@@ -11,17 +11,13 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
-import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
-import de.rpgframework.genericrpg.items.formula.FormulaTool;
-import de.rpgframework.genericrpg.modification.ApplyableValueModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
-import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -30,7 +26,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class HandleAugmentationGradeStep implements CarriedItemProcessor {
-	
+
 	final static Logger logger = SR6GearTool.logger;
 
 	//-------------------------------------------------------------------
@@ -43,7 +39,7 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 	 * @see de.rpgframework.genericrpg.items.CarriedItemProcessor#process(java.lang.String, de.rpgframework.genericrpg.data.Lifeform, de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
 	@Override
-	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
+	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
 			ItemTemplate templ = (ItemTemplate) model.getResolved();
 			SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) model.getVariant();
 			if (templ.hasFlag(ItemTemplate.FLAG_AUGMENTATION) || (variant!=null && variant.hasFlag(ItemTemplate.FLAG_AUGMENTATION))) {
@@ -59,7 +55,7 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 				logger.log(Level.DEBUG, "Found {0} in {1}", dec.getValue(), model.getKey());
 				quality = AugmentationQuality.valueOf(dec.getValue());
 				model.setAttribute(SR6ItemAttribute.QUALITY, new ItemAttributeObjectValue<>(SR6ItemAttribute.QUALITY, quality));
-				
+
 				ItemAttributeFloatValue<SR6ItemAttribute> essenceAttr = model.getAsFloat(SR6ItemAttribute.ESSENCECOST);
 				ItemAttributeNumericalValue<SR6ItemAttribute> priceAttr = model.getAsValue(SR6ItemAttribute.PRICE);
 				ItemAttributeObjectValue<SR6ItemAttribute> availAttr = model.getAsObject(SR6ItemAttribute.AVAILABILITY);
@@ -91,7 +87,7 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 				}
 //				System.exit(1);
 			}
-		
+
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 

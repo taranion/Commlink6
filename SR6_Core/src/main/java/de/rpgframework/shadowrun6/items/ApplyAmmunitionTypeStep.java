@@ -15,7 +15,6 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
-import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -27,7 +26,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
-	
+
 	final static Logger logger = SR6GearTool.logger;
 
 	//-------------------------------------------------------------------
@@ -42,7 +41,7 @@ public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
 	 * @see de.rpgframework.genericrpg.items.CarriedItemProcessor#process(java.lang.String, de.rpgframework.genericrpg.data.Lifeform, de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
 	@Override
-	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
+	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
 
 		ItemAttributeNumericalValue<SR6ItemAttribute> attrib = model.getAsValue(SR6ItemAttribute.PRICE);
@@ -67,7 +66,7 @@ public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
 					int diff = target - attrib.getDistributed();
 					logger.log(Level.DEBUG, "Ammo type ''{0}'' multiplies with {1}, therefore add {2} Nuyen", dec.getValue(), type.getCostMultiplier(), diff);
 					attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), diff) );
-					
+
 					List<Modification> passUp = new ArrayList<>();
 					for (Modification mod : type.getModifications()) {
 						logger.log(Level.INFO, "Add modification {0} -> {1}",mod.getApplyTo(),mod);
@@ -88,10 +87,10 @@ public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
 					}
 					unprocessed.addAll(passUp);
 				}
-				
+
 			}
 		}
-		
+
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 

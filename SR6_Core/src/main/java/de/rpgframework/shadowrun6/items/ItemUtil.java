@@ -17,7 +17,6 @@ import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
-import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
@@ -79,8 +78,17 @@ public class ItemUtil {
 			objVal = new ItemAttributeObjectValue<>(attr, List.of(mod.getValueAsKeys()));
 			ref.setAttribute(attr, objVal);
 			return;
+		case ATTACK_RATING:
+			try {
+				objVal = new ItemAttributeObjectValue<>(attr, SR6ItemAttribute.ATTACK_RATING.getConverter().read(mod.getRawValue()));
+				ref.setAttribute(attr, objVal);
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Error converting {0} to ATTACK_RATING int[] (from {1})", mod.getRawValue(), mod);
+				e.printStackTrace();
+			}
+			return;
 		default:
-			logger.log(Level.ERROR, "Unsuported item attribute {0}", attr);
+			logger.log(Level.ERROR, "Unsuported addOrSetItemAttribute {0} with {1}  val={2}", attr, mod.getRawValue(), val);
 		}
 	}
 

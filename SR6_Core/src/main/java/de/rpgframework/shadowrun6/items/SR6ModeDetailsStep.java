@@ -20,7 +20,7 @@ public class SR6ModeDetailsStep implements CarriedItemProcessor {
 	 * @see de.rpgframework.genericrpg.items.CarriedItemProcessor#process(java.lang.String, de.rpgframework.genericrpg.modification.ModifiedObjectType, de.rpgframework.genericrpg.data.Lifeform, de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
 	@Override
-	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType refType, Lifeform charac,
+	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType refType, Lifeform charac,
 			CarriedItem<?> model, List<Modification> unprocessed) {
 		OperationResult<List<Modification>> ret = new OperationResult<>(unprocessed);
 		if (model.getAsObject(SR6ItemAttribute.ITEMTYPE)==null)
@@ -35,7 +35,7 @@ public class SR6ModeDetailsStep implements CarriedItemProcessor {
 			break;
 		default:
 		}
-		
+
 		return ret;
 	}
 

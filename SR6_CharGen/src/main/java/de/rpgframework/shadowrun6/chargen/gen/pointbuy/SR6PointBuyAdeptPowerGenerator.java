@@ -13,6 +13,8 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
  */
 public class SR6PointBuyAdeptPowerGenerator extends SR6AdeptPowerController {
 
+	private int maxPP;
+
 	//-------------------------------------------------------------------
 	/**
 	 * @param parent
@@ -22,9 +24,18 @@ public class SR6PointBuyAdeptPowerGenerator extends SR6AdeptPowerController {
 	}
 
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController#canBuyPowerPoints()
+	 */
+	@Override
+	public boolean canBuyPowerPoints() {
+		return true;
+	}
+
+	//-------------------------------------------------------------------
 	public boolean canIncreasePowerPoints() {
 		SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
-		
+
 		return false;
 	}
 
@@ -54,9 +65,9 @@ public class SR6PointBuyAdeptPowerGenerator extends SR6AdeptPowerController {
 		try {
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
-			
-			
-			
+
+
+
 			return previous;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");

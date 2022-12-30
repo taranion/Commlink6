@@ -11,7 +11,6 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
-import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
@@ -32,7 +31,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6ResolveFormulasStep implements CarriedItemProcessor {
-	
+
 	final static Logger logger = SR6GearTool.logger;
 
 	//-------------------------------------------------------------------
@@ -41,7 +40,7 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 	public SR6ResolveFormulasStep() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	private void applyResolved(CarriedItem<?> model, String resolvedString, FormulaImpl formula, ItemAttributeDefinition val) {
 		IItemAttribute attrib = val.getModifyable();
 		if (val.getLookupTable()!=null) {
@@ -85,7 +84,7 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 //					+ "' using " + attrib.getConverter() + " of attribute " + attrib));
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings({ "rawtypes" })
 	private void doMagic(Lifeform user, CarriedItem<?> model, FormulaImpl formula, ItemAttributeDefinition val) {
@@ -114,15 +113,15 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform user, CarriedItem<?> model, List<Modification> unprocessed) {
+	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform user, CarriedItem<?> model, List<Modification> unprocessed) {
 		OperationResult<List<Modification>> ret = new OperationResult<>(unprocessed);
-		
+
 		ItemTemplate template = (ItemTemplate) model.getResolved();
 		if (template==null) {
 			logger.log(Level.ERROR, "No resolved template for ''{0}'' in item {1}", model.getKey(), model.getUuid());
 			System.exit(1);
 		}
-		
+
 		// Copy attributes from <usage>
 		Usage usage = template.getUsage(model.getCarryMode());
 //		logger.log(Level.ERROR, "Main usage for mode "+model.getCarryMode()+" is "+usage);
@@ -133,7 +132,7 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 			ItemAttributeDefinition val = new ItemAttributeDefinition(SR6ItemAttribute.ESSENCECOST, usage.getFormula());
 			doMagic(user, model, (FormulaImpl) usage.getFormula(), val);
 		}
-		
+
 		return ret;
 	}
 

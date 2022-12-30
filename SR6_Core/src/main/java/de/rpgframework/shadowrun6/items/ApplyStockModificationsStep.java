@@ -40,7 +40,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
-	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac,
+	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac,
 			CarriedItem<?> model, List<Modification> unprocessed) {
 
 		logger.log(Level.DEBUG, "Decisions are {0}",model.getDecisions());
@@ -52,11 +52,11 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			try {
 				logger.log(Level.DEBUG, "Process {0}", tmp);
 				if (tmp instanceof ValueModification) {
-					applyModification(indent, charac, model2, (ValueModification) tmp);
+					applyModification(strict, charac, model2, (ValueModification) tmp);
 				} else if (tmp instanceof EmbedModification) {
-					embedModification(indent, charac, model2, (EmbedModification) tmp);
+					embedModification(strict, charac, model2, (EmbedModification) tmp);
 				} else if (tmp instanceof DataItemModification) {
-					applyModification(indent, charac, model2, (DataItemModification) tmp);
+					applyModification(strict, charac, model2, (DataItemModification) tmp);
 				} else {
 					logger.log(Level.ERROR, "Unsupported modification: " + tmp);
 				}
@@ -71,11 +71,11 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				logger.log(Level.WARNING, "Process {0}", tmp);
 				boolean processed = false;
 				if (tmp instanceof ValueModification) {
-					processed = applyModification(indent, charac, model2, (ValueModification) tmp);
+					processed = applyModification(strict, charac, model2, (ValueModification) tmp);
 				} else if (tmp instanceof EmbedModification) {
-					processed = embedModification(indent, charac, model2, (EmbedModification) tmp);
+					processed = embedModification(strict, charac, model2, (EmbedModification) tmp);
 				} else if (tmp instanceof DataItemModification) {
-					processed = applyModification(indent, charac, model2, (DataItemModification) tmp);
+					processed = applyModification(strict, charac, model2, (DataItemModification) tmp);
 				} else {
 					logger.log(Level.ERROR, "Unsupported modification: " + tmp);
 				}
@@ -127,7 +127,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 
 	// -------------------------------------------------------------------
 	@SuppressWarnings("rawtypes")
-	private boolean applyModification(String indent, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
+	private boolean applyModification(boolean strict, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addCharacterModification(mod);
 			logger.log(Level.WARNING, "Ignore for now " + mod);
@@ -140,21 +140,21 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		case HOOK:
 			ItemHook hook = mod.getResolvedKey();
 			if (hook==ItemHook.SOFTWARE && model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS)!=null) {
-				logger.log(Level.INFO, indent + "Add slot {0} and take capacity from CONCURRENT_PROGRAMS ", hook);
+				logger.log(Level.INFO, "Add slot {0} and take capacity from CONCURRENT_PROGRAMS ", hook);
 				AvailableSlot slot = new AvailableSlot(hook, model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS).getDistributed());
 				model.addSlot(slot);
 			} else {
 				if (mod.isRemove()) {
-					logger.log(Level.INFO, indent + "Remove slot {0} from {1}", hook, mod.getSource());
+					logger.log(Level.INFO, "Remove slot {0} from {1}", hook, mod.getSource());
 					model.removeSlot(hook);
 				} else {
 					if (hook.hasCapacity) {
 						ValueModification valMod = (ValueModification)mod;
-						logger.log(Level.INFO, indent + "Add slot {0} with capacity {1} from {2}", hook, valMod.getValue(), mod.getSource());
+						logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2}", hook, valMod.getValue(), mod.getSource());
 						AvailableSlot slot = new AvailableSlot(hook, valMod.getValue());
 						model.addSlot(slot);
 					} else {
-						logger.log(Level.INFO, indent + "Add slot {0} without capacity from {1}", hook, mod.getSource());
+						logger.log(Level.INFO, "Add slot {0} without capacity from {1}", hook, mod.getSource());
 						AvailableSlot slot = new AvailableSlot(hook);
 						model.addSlot(slot);
 					}
@@ -181,7 +181,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 
 	// -------------------------------------------------------------------
 	@SuppressWarnings("rawtypes")
-	private boolean embedModification(String indent, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
+	private boolean embedModification(boolean strict, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
 		logger.log(Level.DEBUG, "Before processing "+mod+" Decisions are "+model.getDecisions());
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addCharacterModification(mod);
@@ -227,8 +227,10 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			// Check if AvailableSlot already exists - if not, create one
 			AvailableSlot slot = (AvailableSlot) model.getSlot(hook);
 			if (slot==null) {
-				if (hook.hasCapacity) {
-					logger.log(Level.ERROR, "Item {0} has an <embed> for a not existing slot {1}, but cannot auto-create slot since no capacity is given", mod.getKey(), hook);
+				if (hook.hasCapacity && strict) {
+					logger.log(Level.ERROR, "Item {0} (from {1}) has an <embed> for a not existing slot {2}, but cannot auto-create slot since no capacity is given",
+							mod.getKey(), mod.getSource(), hook);
+					return false;
 				}
 				slot = new AvailableSlot(hook);
 				model.addSlot(slot);
