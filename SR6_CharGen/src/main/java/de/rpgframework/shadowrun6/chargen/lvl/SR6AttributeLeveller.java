@@ -253,6 +253,10 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 				ValueModification mod = (ValueModification) _mod;
 				ShadowrunAttribute key = mod.getResolvedKey();
 				AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
+				if (val==null) {
+					logger.log(Level.ERROR, "Found a modification {0} for not existing attribute {1} ´", mod, key);
+					continue;
+				}
 				logger.log(Level.DEBUG, "Add modification {0} to {1}", mod, key);
 				val.addModification(mod);
 				if (mod.getSet() == ValueType.MAX && mod.getValue() > 6)
@@ -264,7 +268,7 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 
 		return unprocessed;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
