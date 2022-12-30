@@ -7,23 +7,15 @@ import java.util.List;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
-import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
-import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.Usage;
-import de.rpgframework.genericrpg.modification.ApplyableValueModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
-import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.items.AugmentationQuality;
-import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * Take the base essence and nuyen cost and multiply with augmentation grade factor
@@ -31,7 +23,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class DetermineStandardEssenceStep implements CarriedItemProcessor {
-	
+
 	final static Logger logger = SR6GearTool.logger;
 
 	//-------------------------------------------------------------------
@@ -45,7 +37,7 @@ public class DetermineStandardEssenceStep implements CarriedItemProcessor {
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
-	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
+	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
 			ItemTemplate templ = (ItemTemplate) model.getResolved();
 			SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) model.getVariant();
 			if (templ.hasFlag(ItemTemplate.FLAG_AUGMENTATION) || (variant!=null && variant.hasFlag(ItemTemplate.FLAG_AUGMENTATION))) {
@@ -77,13 +69,13 @@ public class DetermineStandardEssenceStep implements CarriedItemProcessor {
 					if (usage.getFormula()!=null && usage.getSize()!=0.0f)
 						essence = usage.getSize();
 				}
-				
+
 				ItemAttributeFloatValue<SR6ItemAttribute> val = new ItemAttributeFloatValue<>(SR6ItemAttribute.ESSENCECOST);
 				val.setDistributed(essence);
 				model.setAttribute(SR6ItemAttribute.ESSENCECOST, val);
 				logger.log(Level.DEBUG, "Set ESSENCECOST to "+val.getDistributed());
 			}
-		
+
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 

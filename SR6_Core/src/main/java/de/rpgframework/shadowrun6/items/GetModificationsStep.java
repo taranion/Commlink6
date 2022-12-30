@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -38,13 +39,13 @@ public class GetModificationsStep implements CarriedItemProcessor {
 	@SuppressWarnings("rawtypes")
 	private void decideModification(Modification check, List<Modification> unprocessed, CarriedItem<?> model, Lifeform charac) {
 		Modification realMod = instantiateModification(check, model, charac);
-		
+
 		ApplyTo apply = realMod.getApplyTo();
 		if (apply==null) {
 			apply = guessModificationTarget(realMod, model);
 //			logger.log(Level.INFO, "Guess modification {0} is applied to {1}", realMod, apply);
 		}
-		
+
 		switch (apply) {
 		case CHARACTER:
 		case UNARMED:
@@ -70,9 +71,9 @@ public class GetModificationsStep implements CarriedItemProcessor {
 	private Modification instantiateModification(Modification check, CarriedItem<?> model, Lifeform charac) {
 		if (!(check instanceof ValueModification))
 			return check;
-		
+
 		ValueModification mod = ((ValueModification)check).clone();
-		
+
 		if ("CHOICE".equals(mod.getKey())) {
 			// Replace REF with decision from choice
 			if (mod.getConnectedChoice()==null) {
@@ -80,14 +81,14 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			} else {
 				Decision dec = model.getDecision(mod.getConnectedChoice());
 				if (dec==null) {
-					logger.log(Level.WARNING, "{0}: Decision {1} for CHOICE mod not made", model.getKey(), mod.getConnectedChoice());					
+					logger.log(Level.WARNING, "{0}: Decision {1} for CHOICE mod not made", model.getKey(), mod.getConnectedChoice());
 				} else {
 					mod.setKey(dec.getValue());
 					logger.log(Level.DEBUG, "{0}: Decision {1} for choice {2}", model.getKey(), dec.getValue(), mod.getConnectedChoice());
 				}
 			}
 		}
-		
+
 		if (mod.getFormula()!=null && !mod.getFormula().isResolved()) {
 			logger.log(Level.DEBUG, "  requires resolving: "+mod.getFormula());
 			String result = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, (FormulaImpl) mod.getFormula(), new VariableResolver(model, charac));
@@ -116,6 +117,8 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			default:
 				logger.log(Level.ERROR, "No processing for reference type: " + mod+" from "+mod.getSource());
 			}
+		} else if (check instanceof ModificationChoice ){
+			return ApplyTo.DATA_ITEM;
 		} else {
 			logger.log(Level.ERROR, "Don't know how to handle "+ check.getClass());
 		}
@@ -130,7 +133,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
-	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
+	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
 
 		if (model.getResolved() != null) {
@@ -145,7 +148,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			real.getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
 			model.getAsValue(SR6ItemAttribute.PRICE).addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), real.getPrice(), real));
 		}
-		
+
 		for (OperationMode mode : model.getActiveOperationModes(true)) {
 			mode.getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
 		}

@@ -38,7 +38,7 @@ public class AddChemicalPriceStep implements CarriedItemProcessor {
 	 *      de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
 	@Override
-	public OperationResult<List<Modification>> process(String indent, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
+	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
 		Decision dec = model.getDecision(ItemTemplate.UUID_CHEMICAL_CHOICE);
 		if (dec!=null) {
 			ItemTemplate chemical = Shadowrun6Core.getItem(ItemTemplate.class, dec.getValue());

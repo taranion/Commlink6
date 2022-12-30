@@ -32,7 +32,7 @@ public class SR6EquipmentGenerator extends CommonEquipmentGenerator {
 		super(parent);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeSelected(ItemTemplate, String, Decision[])
@@ -42,7 +42,7 @@ public class SR6EquipmentGenerator extends CommonEquipmentGenerator {
 		Possible poss = super.canBeSelected(value, variantID, mode, decisions);
 		if (!poss.get())
 			return poss;
-		
+
 		// Try to build item
 		OperationResult<CarriedItem<ItemTemplate>> carried = null;
 		if (variantID!=null) {
@@ -50,9 +50,9 @@ public class SR6EquipmentGenerator extends CommonEquipmentGenerator {
 			if (variant==null) {
 				return new Possible(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
 			}
-			carried = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
-		} else {		
-			carried = GearTool.buildItem(value, mode, getModel(), true, decisions);
+			carried = GearTool.buildItem(value, mode, variant, getModel(), false, decisions);
+		} else {
+			carried = GearTool.buildItem(value, mode, getModel(), false, decisions);
 		}
 
 		// Check availability
@@ -62,10 +62,10 @@ public class SR6EquipmentGenerator extends CommonEquipmentGenerator {
 				boolean allowLegal = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ALLOW_LEGAL_AVAIL7PLUS);
 				if (!allowLegal || avail.getLegality()!=Legality.LEGAL) {
 					return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH, avail.getValue());
-				}				
+				}
 			}
 		}
-		
+
 		return poss;
 	}
 

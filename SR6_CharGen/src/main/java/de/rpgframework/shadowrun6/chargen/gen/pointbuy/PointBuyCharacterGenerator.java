@@ -86,7 +86,9 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 				WizardPageType.QUALITIES,
 				WizardPageType.ATTRIBUTES,
 				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,
-				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.NAME, };
+				WizardPageType.POWERS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO,
+				WizardPageType.GEAR, WizardPageType.SIN_LICENSE, WizardPageType.LIFESTYLE,
+				WizardPageType.CONTACTS, WizardPageType.NAME, };
 	}
 
 	//-------------------------------------------------------------------

@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
+import org.prelle.simplepersist.Element;
 import org.prelle.simplepersist.ElementList;
 import org.prelle.simplepersist.ElementListUnion;
 
@@ -76,6 +77,9 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	})
 	private List<IGearTypeData> shortcuts;
 
+	@Element(name="geardef")
+	protected ItemTemplateList gearDef;
+
 	//-------------------------------------------------------------------
 	public ItemTemplate() {
 		shortcuts = new ArrayList<>();
@@ -131,6 +135,19 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	}
 
 	//-------------------------------------------------------------------
+	private ItemTemplate resolveItem(String key) {
+		if (gearDef==null) return null;
+
+		for (ItemTemplate tmp : gearDef) {
+			if (tmp.getId().equals(key)) {
+				tmp.validate();
+				return tmp;
+			}
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
 	@Override
 	public void validate() {
 //		attributes.clear();
@@ -164,6 +181,14 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				SR6ItemFlag.valueOf(flag);
 			} catch (IllegalArgumentException e) {
 				throw new DataErrorException(this, "No such flag '"+flag+"'");
+			}
+		}
+
+		// Validate gear definitions
+		if (gearDef != null) {
+			for (ItemTemplate tmp : gearDef) {
+				tmp.setParentItem(this);
+				tmp.assignToDataSet(this.datasets.get(0));
 			}
 		}
 

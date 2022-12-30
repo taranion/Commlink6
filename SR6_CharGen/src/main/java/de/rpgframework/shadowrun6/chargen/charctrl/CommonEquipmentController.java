@@ -192,7 +192,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 		// Try to build item
 		OperationResult<CarriedItem<ItemTemplate>> carried = null;
-		carried = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
+		carried = GearTool.buildItem(value, mode, variant, getModel(), false, decisions);
 		// Check availability
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
 			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
