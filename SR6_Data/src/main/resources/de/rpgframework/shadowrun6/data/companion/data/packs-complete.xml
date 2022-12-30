@@ -1601,24 +1601,12 @@
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="5">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye"> -->
-                <!-- <decision choice="UUID tbe" value="flash_pak"/> -->
-                <!-- </itemmod> -->
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye"> -->
-                <!-- <decision choice="UUID tbe" value="flash_pak"/> -->
-                <!-- </itemmod> -->
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye"> -->
-                <!-- <decision choice="UUID tbe" value="flash_pak"/> -->
-                <!-- </itemmod> -->
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye"> -->
-                <!-- <decision choice="UUID tbe" value="smoke_grenade"/> -->
-                <!-- </itemmod> -->
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye"> -->
-                <!-- <decision choice="UUID tbe" value="smoke_grenade"/> -->
-                <!-- </itemmod> -->
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye"> -->
-                <!-- <decision choice="UUID tbe" value="smoke_grenade"/> -->
-                <!-- </itemmod> -->
+         <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye" variant ="flash_pak" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye" variant ="flash_pak" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye" variant ="flash_pak" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye" variant ="grenade" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye" variant ="grenade" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="horizon_flying_eye" variant ="grenade" />
          <itemmod type="GEAR" apply="CHARACTER" ref="gmc_micromachine" />
          <itemmod type="GEAR" apply="CHARACTER" ref="kit">
                 <decision choice="8d33356c-f3d4-4387-a6a2-a9575c449ae7" value="engineering"/>

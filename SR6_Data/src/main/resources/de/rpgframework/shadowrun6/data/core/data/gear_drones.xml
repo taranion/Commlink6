@@ -28,13 +28,28 @@
 		<vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" />
 		<variant id="grenade">
 			<attrdef id="PRICE" value="2500" />
+    		<modifications>
+				<embed type="GEAR" ref="smoke_grenade" variant="mini" intoType="HOOK" intoRef="VEHICLE_BODY"/>
+    		</modifications>
+		</variant>
+		<variant id="flash_pak">
+			<attrdef id="PRICE" value="2500" />
+    		<modifications>
+				<embed type="GEAR" ref="flash_pak" intoType="HOOK" intoRef="VEHICLE_BODY"/>
+    		</modifications>
 		</variant>
 	</item>
 	<item avail="2" price="2100" id="mct_hornet" type="DRONE_MINI" subtype="AIR">
 		<vehicle han="3" acc="20" spdi="15" tspd="35" bod="1" arm="0" pil="2" sen="2" />
-<!-- 		<modifications> -->
-<!-- 			<embed type="GEAR" ref="hornet_injector_mount" intoType="HOOK" intoRef="VEHICLE_BODY"/> -->
-<!-- 		</modifications> -->
+			<geardef>
+				<item id="mct_hornet_stinger" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+				<weapon dmg="1P" attack="5,,,," skill="close_combat" spec="close_combat/blades" /> 
+					<!-- Rules state the existance of the injector, but no data given. Using damage 1P as parashield darts and attack rating 4, to be below AR 6 of a knife -->
+				</item>
+			</geardef>
+		<modifications>
+			<!-- <embed type="GEAR" ref="mct_hornet_stinger" intoType="HOOK" intoRef="VEHICLE_BODY"/> -->
+		</modifications>
 	</item>
 
 	<!-- Small drones -->
