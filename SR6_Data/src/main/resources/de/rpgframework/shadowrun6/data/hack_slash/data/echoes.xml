@@ -19,8 +19,8 @@
    		<datareq type="METAECHO" ref="machine_mind" apply="CHARACTER"/>
    	</requires>
      <modifications>
-       <!--itemmod type="GEAR" ref="rcc" variant="echo_living_command_console">
-       	<decision choice="66b37416-6996-48b8-87f0-17b28dc44df1" value="$SUBMERSION"/>
+       <!--itemmod type="GEAR" ref="rigger_command_console" variant="echo_living_command_console">
+       	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="$RESONANCE"/>
        </itemmod-->
      </modifications>
    </metaecho>
@@ -33,6 +33,11 @@
    	<requires>
    		<datareq type="METAECHO" ref="machine_mind" apply="CHARACTER"/>
    	</requires>
+     <modifications>
+       <itemmod type="GEAR" ref="control_rig" variant="echo_machine_mind">
+       	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+       </itemmod>
+     </modifications>
    </metaecho>
    <metaecho id="mega_sprite"       type="ECHO" />
    <metaecho id="matrix_amplifier"  type="ECHO"/>

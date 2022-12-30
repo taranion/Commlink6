@@ -310,6 +310,10 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			break;
 		case ASSAULT_CANNON:
 			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.ASSAULT_CANNON); break;
+		case DMSO:
+			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.DMSO); break;
+		case DART:
+			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.INJECTION_DART); break;
 		default:
 			logger.log(Level.WARNING, "No autodetection of ammunition for firearm {0}",subtype);
 		}

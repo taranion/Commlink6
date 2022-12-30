@@ -64,7 +64,7 @@
 
 	<item id="bow" price="100" type="WEAPON_RANGED" subtype="BOWS">
 		<choices>
-			<choice uuid="adeb159c-6ca3-407b-8641-c76f9b29a49c" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/> 
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/> 
 		</choices>
 		<requires>
 			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="$RATING" apply="CHARACTER"/>

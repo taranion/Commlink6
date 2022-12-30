@@ -2,7 +2,7 @@
 <items>
    <item id="cyberdeck_core" type="CYBERDECK" subtype="CORE">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d4" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
    	</choices>
     	<attrdef id="PRICE"        value="$RATING" table="5000,10000,15000,20000,50000,150000"/>
    	<attrdef id="AVAILABILITY" value="$RATING I" />
@@ -13,7 +13,7 @@
    </item>
    <item id="attack_module" type="CYBERDECK" subtype="CORE">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d5" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
    	</choices>
     	<attrdef id="PRICE"        value="$RATING" table="2000,4000,6000,8000,25000,30000,35000,40000,90000"/>
     	<attrdef id="AVAILABILITY" value="$RATING I"/>
@@ -24,7 +24,7 @@
    </item>
    <item id="sleaze_module" type="CYBERDECK" subtype="CORE">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d6" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
    	</choices>
     	<attrdef id="PRICE"        value="$RATING" table="2000,4000,6000,8000,25000,30000,35000,40000,90000"/>
     	<attrdef id="AVAILABILITY" value="$RATING I"/>
@@ -160,7 +160,7 @@
    </item>
    <item id="dart_launcher" avail="2I" type="CYBERDECK" subtype="CASE_MODS">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d9" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
    	</choices>
       <usage mode="EMBEDDED"  value="$SIZE" slot="CASE_MODS"/>
     	<attrdef id="SIZE"      value="$RATING"/>
@@ -206,7 +206,7 @@
    </item>
    <item id="response_increase" avail="5I" type="CYBERDECK" subtype="CORE_OPTIONAL">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597db" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
    	</choices>
       <usage mode="EMBEDDED" value="$RATING*2" slot="CORE_SLOTS"/>
     	<attrdef id="PRICE" value="$RATING*10000"/>
@@ -219,7 +219,7 @@
    </item>
    <item id="turbo_charger" avail="4I" type="CYBERDECK" subtype="CORE_OPTIONAL">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597db" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
    	</choices>
       <usage mode="EMBEDDED" value="1" slot="CORE_SLOTS"/>
     	<attrdef id="PRICE" value="$RATING*5000"/>
@@ -233,7 +233,7 @@
    </item>
    <item id="cyberjack_booster" avail="4I" type="CYBERDECK" subtype="ACCESSORY" reqVariant="y">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597dc" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
    	</choices>
       <!--usage mode="EMBEDDED" value="$RATING*2" slot="CORE_SLOTS"/-->
     	<attrdef id="PRICE" value="$RATING*5000"/>

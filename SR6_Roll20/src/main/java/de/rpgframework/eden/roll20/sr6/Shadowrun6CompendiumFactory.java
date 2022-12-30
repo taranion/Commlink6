@@ -118,6 +118,8 @@ public class Shadowrun6CompendiumFactory {
 				ItemSubType.ASSAULT_CANNON,
 				ItemSubType.LAUNCHERS,
 				ItemSubType.THROWERS,
+				ItemSubType.DMSO,
+				ItemSubType.DART,				
 				ItemSubType.OTHER_SPECIAL
 				);
 		createVehicles   (module,localeCallback);

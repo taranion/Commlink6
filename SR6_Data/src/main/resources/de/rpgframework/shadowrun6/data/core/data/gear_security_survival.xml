@@ -2,14 +2,14 @@
 <items>
    <!-- Security Devices -->
    <item avail="2" price="10"  id="lock"                 subtype="SECURITY" type="ELECTRONICS">
-   	<choices><choice uuid="56b520d3-0a66-45dd-ae9c-0cff597895cc" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" /></choices>
+   	<choices><choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" /></choices>
    	<attrdef id="PRICE" value="$RATING*10"/>
    </item>
    <item avail="1" price="20"  id="metal_restraints"     subtype="SECURITY" type="ELECTRONICS" count="y"/>
    <item avail="2" price="50"  id="plasteel_restraints"  subtype="SECURITY" type="ELECTRONICS" count="y"/>
    <item avail="1" price="5"   id="plastic_straps"       subtype="SECURITY" type="ELECTRONICS" count="y"/>
    <item avail="3" price="100" id="maglock"              subtype="SECURITY" type="ELECTRONICS">
-   	<choices><choice uuid="56b520d3-0a66-45dd-ae9c-0cff597895cc" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9" /></choices>
+   	<choices><choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9" /></choices>
    	<attrdef id="PRICE" value="$RATING*100"/>
    </item>
    <item avail="3" price="250" id="containment_manacles" subtype="SECURITY" type="ELECTRONICS" count="y"/>
@@ -19,21 +19,21 @@
    <!-- Breaking and Entering -->
    <item avail="4L" price="500" id="autopicker"       	subtype="BREAKING" type="ELECTRONICS"/>
    <item avail="6I" price="500" id="cellular_glove_molder"  subtype="BREAKING" type="ELECTRONICS">
-   	<choices><choice uuid="56b520d3-0a66-45dd-ae9c-0cff597895cc" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" /></choices>
+   	<choices><choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" /></choices>
    	<attrdef id="PRICE" value="$RATING*500"/>
    </item>
    <item avail="1" price="20"  id="chisel"               subtype="BREAKING" type="ELECTRONICS"/>
    <item avail="4I" price="600" id="keycard_copier"  		subtype="BREAKING" type="ELECTRONICS"/>
    <item avail="2L"  price="250" id="lockpick_set"       subtype="BREAKING" type="ELECTRONICS"/>
    <item avail="3I" price="2000" id="maglock_passkey" 	subtype="BREAKING" type="ELECTRONICS">
-   	<choices><choice uuid="56b520d3-0a66-45dd-ae9c-0cff597895cc" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" /></choices>
+   	<choices><choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" /></choices>
    	<attrdef id="PRICE" value="$RATING*2000"/>
    </item>
    <item avail="1" price="250" id="miniwelder"           subtype="BREAKING" type="ELECTRONICS"/>
    <item avail="1" price="80"  id="miniwelder_fuel"      subtype="BREAKING" type="ELECTRONICS" count="y"/>
    <item avail="3" price="500" id="monofilament_chainsaw" subtype="BREAKING" type="ELECTRONICS"/>
    <item avail="4i" price="250" id="sequencer"  			subtype="BREAKING" type="ELECTRONICS">
-   	<choices><choice uuid="56b520d3-0a66-45dd-ae9c-0cff597895cc" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" /></choices>
+   	<choices><choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" /></choices>
    	<attrdef id="PRICE" value="$RATING*250"/>
    </item>
    
@@ -44,7 +44,7 @@
    
    <!-- Survival gear -->
    <item avail="4" price="150"  id="chemsuit"       		subtype="SURVIVAL_GEAR" type="SURVIVAL">
-   	<choices><choice uuid="56b520d3-0a66-45dd-ae9c-0cff597895cc" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" /></choices>
+   	<choices><choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" /></choices>
    	<attrdef id="PRICE" value="$RATING*150"/>
    </item>
    <item avail="1" price="200"  id="climbing_gear"     subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
@@ -59,7 +59,7 @@
    <item avail="1" price="25"   id="microflares"       subtype="SURVIVAL_GEAR" type="SURVIVAL" count="y"/>
    <item avail="1" price="50"   id="rappelling_gloves" subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
    <item avail="1" price="50"   id="respirator"  		 subtype="SURVIVAL_GEAR" type="SURVIVAL">
-   	<choices><choice uuid="56b520d3-0a66-45dd-ae9c-0cff597895cc" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" /></choices>
+   	<choices><choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" /></choices>
    	<attrdef id="PRICE" value="$RATING*50"/>
    </item>
    <item avail="2" price="200"  id="survival_kit"      subtype="SURVIVAL_GEAR" type="SURVIVAL"/>

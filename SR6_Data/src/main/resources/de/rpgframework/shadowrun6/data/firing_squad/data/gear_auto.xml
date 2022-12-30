@@ -25,7 +25,7 @@
       <weapon  dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
    <item id="cavalier_parashield_dartgun" avail="0" cost="0" modonly="true">
-      <useas  type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL"/>
+      <useas  type="WEAPON_SPECIAL" subtype="DART"/>
       <weapon  dmg="1P" mode="SS/SA" attack="10,8,,," ammo="6(c)" skill="exotic_weapons" spec="exotic_weapons/air"/>
    </item>
    <item id="weapon_commlink" avail="0" cost="0" modonly="true"> <!-- only for backward compatibility, use itemenhancement -->

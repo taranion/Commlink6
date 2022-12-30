@@ -134,6 +134,8 @@ public enum ItemType {
 	WEAPON_SPECIAL(
 			ItemSubType.LAUNCHERS,
 			ItemSubType.THROWERS,
+			ItemSubType.DMSO,
+			ItemSubType.DART,
 			ItemSubType.OTHER_SPECIAL
 			),
 	AMMUNITION(
