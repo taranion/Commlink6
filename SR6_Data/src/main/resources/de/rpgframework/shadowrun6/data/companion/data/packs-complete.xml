@@ -41,7 +41,7 @@
                 <!-- </valmod> -->
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
       </modifications>
-   </item> 
+   </item>
 
    <item id="dirt_poor" price="8000" type="PACK" subtype="COMPLETE_PACK" >
       <modifications>
@@ -75,15 +75,15 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="sony_emporer" />
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
       </modifications>
-   </item> 
+   </item>
 
    <item id="full_magician" price="50000" type="PACK" subtype="COMPLETE_PACK" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <valmod type="GEAR" apply="CHARACTER" ref="throwing_knives" value="4" />
-         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant ="standard" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant ="standard" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" variant ="standard" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant ="STANDARD" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant ="STANDARD" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" variant ="STANDARD" value="2" />
          <itemmod type="GEAR" apply="CHARACTER" ref="armor_jacket" id="75211f9b-6625-4694-a10f-8bec741313bf" />
              <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
@@ -124,7 +124,7 @@
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" remove="y"/>
       </modifications>
-   </item> 
+   </item>
 
    <item id="close_combat" price="50000" type="PACK" subtype="COMPLETE_PACK" >
       <modifications>
@@ -154,7 +154,7 @@
                 <!-- <decision choice="de69a2e0-1d0a-4a14-8c88-08f5b3377dad" value="MELEE"/> -->
                 <!-- </itemmod> -->
       </modifications>
-   </item> 
+   </item>
 
    <item id="face" price="50000" type="PACK" subtype="COMPLETE_PACK" >
       <modifications>
@@ -164,9 +164,9 @@
              <embed  type="GEAR" intoId="01da8b52-3a04-403a-b269-3740e5418b76" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_injection_bolt" value="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="narcoject" value="5" />
-         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant ="standard" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant ="standard" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" variant ="standard" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant ="STANDARD" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant ="STANDARD" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" variant ="STANDARD" value="2" />
          <itemmod type="GEAR" apply="CHARACTER" ref="flash_pak" />
          <itemmod type="GEAR" apply="CHARACTER" ref="armante_suitdress" id="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" />
              <embed  type="GEAR" intoId="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" intoType="HOOK" intoRef="ARMOR" ref="electrochromic_feature" />
@@ -242,7 +242,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="credstick_silver" />
          <itemmod type="GEAR" apply="CHARACTER" ref="credstick_gold" />
       </modifications>
-   </item> 
+   </item>
 
    <item id="gunslinger" price="50000" type="PACK" subtype="COMPLETE_PACK" >
       <modifications>
@@ -339,42 +339,39 @@
              <embed  type="GEAR" intoId="6d45d24f-14af-4cf9-bacb-6c6e083ccb13" intoType="HOOK" intoRef="OPTICAL" ref="vision_enhancement" />
              <embed  type="GEAR" intoId="6d45d24f-14af-4cf9-bacb-6c6e083ccb13" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
       </modifications>
-   </item> 
+   </item>
 
    <item id="cybered_covered" price="150000" type="PACK" subtype="COMPLETE_PACK" >
-    <!-- <attrdef id="ESSENCE" value="3.63" /> -->
+    	<attrdef id="ESSENCECOST" value="3.63" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberarm" id="fca51877-b11d-4c9a-95f3-4c2dc0262b32" variant ="fullarm_synthetic">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="fca51877-b11d-4c9a-95f3-4c2dc0262b32" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="fca51877-b11d-4c9a-95f3-4c2dc0262b32" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="shock_limb">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="fca51877-b11d-4c9a-95f3-4c2dc0262b32" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="spurs">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="skin_pocket">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="wired_reflexes">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="voice_modulator">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <valmod type="GEAR" apply="CHARACTER" ref="throwing_stars" value="4" />
          <itemmod type="GEAR" apply="CHARACTER" ref="crossbow_collapsible_light" id="d79d206b-4881-4631-911f-4288e475e2ab" />
              <embed  type="GEAR" intoId="d79d206b-4881-4631-911f-4288e475e2ab" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-         <valmod type="GEAR" apply="CHARACTER" ref="ammo_injection_bolt" value="6">
-                <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
-                </valmod>
          <valmod type="GEAR" apply="CHARACTER" ref="narcoject" value="6" />
          <itemmod type="GEAR" apply="CHARACTER" ref="telescopic_staff" />
          <itemmod type="GEAR" apply="CHARACTER" ref="chameleon_suit" />
@@ -423,18 +420,18 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="stealth_rope" />
          <itemmod type="GEAR" apply="CHARACTER" ref="catalyst_stick" />
       </modifications>
-   </item> 
+   </item>
 
    <item id="decker" price="275000" type="PACK" subtype="COMPLETE_PACK" >
-    <!-- <attrdef id="ESSENCE" value="3.4" /> -->
+    	<attrdef id="ESSENCECOST" value="3.4" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberjack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="renraku_kitsune" id="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" />
              <!-- <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> -->
@@ -512,62 +509,62 @@
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" remove="y"/>
       </modifications>
-   </item> 
+   </item>
 
    <item id="cyborg" price="450000" type="PACK" subtype="COMPLETE_PACK" >
-    <!-- <attrdef id="ESSENCE" value="5.9" /> -->
+    	<attrdef id="ESSENCECOST" value="5.9" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberskull" id="c102efc3-a955-4800-941a-45b8f396d62f" variant ="obvious">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </itemmod>
              <embed  type="GEAR" intoId="c102efc3-a955-4800-941a-45b8f396d62f" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="armor">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybertorso" id="dd8e2e41-5710-4db2-8fd7-d9f79cda92b9" variant ="obvious">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </itemmod>
              <embed  type="GEAR" intoId="dd8e2e41-5710-4db2-8fd7-d9f79cda92b9" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="armor">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
              <embed  type="GEAR" intoId="dd8e2e41-5710-4db2-8fd7-d9f79cda92b9" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="smuggling_compartment">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberarm" id="74d32e34-7a5a-4cc6-be94-deec560a0921" variant ="fullarm_obvious">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </itemmod>
              <embed  type="GEAR" intoId="74d32e34-7a5a-4cc6-be94-deec560a0921" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
              <embed  type="GEAR" intoId="74d32e34-7a5a-4cc6-be94-deec560a0921" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="strength">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
-             <embed  type="GEAR" intoId="74d32e34-7a5a-4cc6-be94-deec560a0921" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="gyro_mount">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+             <embed  type="GEAR" ref="gyro_mount" variant="cyberimplant" intoId="74d32e34-7a5a-4cc6-be94-deec560a0921" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberarm" id="b414a9ee-a0fb-42a0-9799-a996ed279338" variant ="fullarm_obvious">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </itemmod>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="strength">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="external_clip_port">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="silencer" variant ="cyberimplantweapon">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="cyber_heavy_pistol">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="ares_predator_vi" />
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="spare_clip_predator" />
@@ -576,77 +573,77 @@
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="spare_clip_predator" />
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="spare_clip_predator" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberleg" id="d8733145-f652-4d92-9044-5f9b212cf17d" variant ="fullleg_obvious">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="strength">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="armor">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="cyber_holster">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="hydraulic_jacks">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberleg" id="fbfa8222-ecaa-4b45-af10-58c19e790cb6" variant ="fullleg_obvious">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="strength">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="armor">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="cyber_holster">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="hydraulic_jacks">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="c9165242-d8b2-42b5-a52c-bc182dfacffb">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_enhancement">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberears" id="e8df5da1-f2c2-462c-b216-9a601fcec765">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="e8df5da1-f2c2-462c-b216-9a601fcec765" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="damper">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_viper_slivergun" id="d579e371-1208-4c2a-a37d-b717bde0c8e3" />
              <embed  type="GEAR" intoId="d579e371-1208-4c2a-a37d-b717bde0c8e3" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant ="INTERNAL" />
@@ -713,64 +710,64 @@
          <valmod type="GEAR" apply="CHARACTER" ref="cram" value="20" />
          <valmod type="GEAR" apply="CHARACTER" ref="jazz" value="4" />
       </modifications>
-   </item> 
+   </item>
 
    <item id="samurai" price="275000" type="PACK" subtype="COMPLETE_PACK" >
-    <!-- <attrdef id="ESSENCE" value="5.9" /> -->
+    	<attrdef id="ESSENCECOST" value="5.9" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="wired_reflexes">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="reaction_enhancers">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="bone_lacing" variant ="aluminium">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="muscle_replacement">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="cdcd184e-e855-49ff-9afd-0d84478065af">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_enhancement">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberears" id="d76fcc74-dafb-4339-adbd-24957b84f8e1">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="d76fcc74-dafb-4339-adbd-24957b84f8e1" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="damper">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d76fcc74-dafb-4339-adbd-24957b84f8e1" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="audio_enhancement">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d76fcc74-dafb-4339-adbd-24957b84f8e1" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="balance_augmenter">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d76fcc74-dafb-4339-adbd-24957b84f8e1" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="spatial_recognizer">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="stun_baton" />
          <itemmod type="GEAR" apply="CHARACTER" ref="katana" />
@@ -863,7 +860,7 @@
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- </valmod> -->
       </modifications>
-   </item> 
+   </item>
 
    <item id="vat_job" price="275000" type="PACK" subtype="COMPLETE_PACK" >
     <!-- <attrdef id="ESSENCE" value="5.17" /> -->
@@ -871,29 +868,29 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="adrenaline_pump">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="bone_density_augmentation">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="muscle_augmentation">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="muscle_toner">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="synaptic_booster">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="skin_pocket">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="reflex_recorder">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 <decision choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="exotic_weapons"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="monofilament_whip" />
@@ -946,14 +943,14 @@
              <embed  type="GEAR" intoId="ae66a692-0143-453c-8ede-358a7e5b9187" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
              <embed  type="GEAR" intoId="ae66a692-0143-453c-8ede-358a7e5b9187" intoType="HOOK" intoRef="OPTICAL" ref="smartlink" />
          <valmod type="GEAR" apply="CHARACTER" ref="flash_pak" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade" variant ="standard" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" variant ="standard" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant ="standard" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade" variant ="STANDARD" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade_thermal" variant ="STANDARD" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant ="STANDARD" value="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="stim_patch" value="10">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 </valmod>
       </modifications>
-   </item> 
+   </item>
 
    <item id="weapons_specialist" price="275000" type="PACK" subtype="COMPLETE_PACK" >
     <!-- <attrdef id="ESSENCE" value="3.95" /> -->
@@ -961,49 +958,49 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberears" id="cbbb97cb-39b9-43bf-8bfe-38970183e054">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="cbbb97cb-39b9-43bf-8bfe-38970183e054" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="damper">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="1784c719-0e93-4c52-94d0-974af4813ca4">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="1784c719-0e93-4c52-94d0-974af4813ca4" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="1784c719-0e93-4c52-94d0-974af4813ca4" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="1784c719-0e93-4c52-94d0-974af4813ca4" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="1784c719-0e93-4c52-94d0-974af4813ca4" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="wired_reflexes">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="muscle_toner">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="reflex_recorder">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 <decision choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="athletics"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="reflex_recorder">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 <decision choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="close_combat"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="reflex_recorder">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 <decision choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="exotic_weapons"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="reflex_recorder">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 <decision choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="firearms"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="forearm_snap_blades" />
@@ -1016,9 +1013,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="defiance_super_shock" id="a689a92f-ffbf-4e07-9f6f-0a08f402e2f1" />
              <embed  type="GEAR" intoId="a689a92f-ffbf-4e07-9f6f-0a08f402e2f1" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant ="INTERNAL" />
              <embed  type="GEAR" intoId="a689a92f-ffbf-4e07-9f6f-0a08f402e2f1" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="ammo_taser">
-                <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
-                </itemmod>
+         <itemmod type="GEAR" apply="CHARACTER" ref="ammo_taser"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="walther_palm_pistol" id="bfa68994-0151-4c54-b913-2eb42a4a2aeb" />
          <itemmod type="GEAR" apply="CHARACTER" ref="concealable_holster" id="bfa68994-0151-4c54-b913-2eb42a4a2aeb" />
              <embed  type="GEAR" intoId="bfa68994-0151-4c54-b913-2eb42a4a2aeb" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant ="INTERNAL" />
@@ -1165,7 +1160,7 @@
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" remove="y"/>
       </modifications>
-   </item> 
+   </item>
 
    <item id="max_decker" price="450000" type="PACK" subtype="COMPLETE_PACK" >
     <!-- <attrdef id="ESSENCE" value="5.0" /> -->
@@ -1173,39 +1168,39 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cerebral_booster">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberjack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="0eb4d4d9-99d3-4961-9009-182749c640b7">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_enhancement">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="b63e92cd-3b97-4100-98b6-ad2285484bd0">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="b63e92cd-3b97-4100-98b6-ad2285484bd0" intoType="HOOK" intoRef="CYBERDECK" ref="shiawase_cyber6" id="6cd08dcc-8c3e-4ef5-be47-8667882f751e" />
              <!-- <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> -->
@@ -1280,7 +1275,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 </itemmod>
       </modifications>
-   </item> 
+   </item>
 
    <item id="transport_rigger" price="450000" type="PACK" subtype="COMPLETE_PACK" >
     <!-- <attrdef id="ESSENCE" value="4.0" /> -->
@@ -1288,27 +1283,27 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cerebral_booster">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="control_rig">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="32c3560b-5cae-4c73-9d10-e34297da55db">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="32c3560b-5cae-4c73-9d10-e34297da55db" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="32c3560b-5cae-4c73-9d10-e34297da55db" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="32c3560b-5cae-4c73-9d10-e34297da55db" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="32c3560b-5cae-4c73-9d10-e34297da55db" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" />
              <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="BARREL" ref="silencer" />
@@ -1358,7 +1353,7 @@
                 </embed>
              <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet_stinger"/>
+                <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_roadmaster" id="9a481409-5d90-4aef-83f6-9b76a8f8dc88" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
@@ -1422,7 +1417,7 @@
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" remove="y"/>
       </modifications>
-   </item> 
+   </item>
 
    <item id="drone_rigger" price="450000" type="PACK" subtype="COMPLETE_PACK" >
     <!-- <attrdef id="ESSENCE" value="2.9" /> -->
@@ -1430,27 +1425,27 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cerebral_booster">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="control_rig">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="d295f89d-5d81-4bfa-a470-d537a44a2968">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="d295f89d-5d81-4bfa-a470-d537a44a2968" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d295f89d-5d81-4bfa-a470-d537a44a2968" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d295f89d-5d81-4bfa-a470-d537a44a2968" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="d295f89d-5d81-4bfa-a470-d537a44a2968" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_crusader_ii" id="808fd6d8-e8ad-4108-b015-4ebe316253ef" />
              <embed  type="GEAR" intoId="808fd6d8-e8ad-4108-b015-4ebe316253ef" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
@@ -1634,29 +1629,29 @@
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" remove="y"/>
       </modifications>
-   </item> 
+   </item>
 
    <item id="augmented_for_firearms" price="25000" type="PACK" subtype="COMPLETE_PACK" >
     <!-- <attrdef id="ESSENCE" value="0.41" /> -->
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="2d33b744-a9a9-4693-9839-9692a2e20fd2">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="2d33b744-a9a9-4693-9839-9692a2e20fd2" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="2d33b744-a9a9-4693-9839-9692a2e20fd2" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="2d33b744-a9a9-4693-9839-9692a2e20fd2" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
              <embed  type="GEAR" intoId="2d33b744-a9a9-4693-9839-9692a2e20fd2" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="standard"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="reflex_recorder">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="used"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 <decision choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="firearms"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="da3af0cd-9453-494a-8497-1c94c3890314" />
@@ -1696,6 +1691,6 @@
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
       </modifications>
-   </item> 
+   </item>
 
 </items>

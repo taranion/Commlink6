@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.modifications;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.function.Function;
 
 import org.prelle.simplepersist.AttribConvert;
@@ -181,7 +182,13 @@ public enum ShadowrunReference implements ModifiedObjectType {
 			} catch (InvocationTargetException ivte) {
 				Throwable ee = ivte.getTargetException();
 				if (ee instanceof IllegalArgumentException) {
-					throw new ReferenceException(type, key);
+					try {
+						String valid = Arrays.toString( (Object[]) type.enumType.getMethod("values").invoke(type.enumType));
+						throw new ReferenceException(valid,type, key);
+					} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
+						e.printStackTrace();
+						throw new ReferenceException(type, key);
+					}
 				}
 				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-1:");
 				ivte.printStackTrace();
