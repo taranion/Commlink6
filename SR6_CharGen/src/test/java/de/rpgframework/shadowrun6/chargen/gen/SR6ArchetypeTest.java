@@ -1190,11 +1190,11 @@ public class SR6ArchetypeTest {
 //		equip.increaseConversion();
 //		equip.increaseConversion();
 		OperationResult<CarriedItem<ItemTemplate>> rig = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "control_rig"),null, CarryMode.IMPLANTED,
-				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"), new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "2"));
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"), new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "2"));
 		assertTrue(rig.wasSuccessful());
 		assertNull("Should not have imagelink", model.getCarriedItem("image_link"));
 		OperationResult<CarriedItem<ItemTemplate>> eyesR = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cybereye"),null, CarryMode.IMPLANTED,
-				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"), new Decision(UUID.fromString("fcc63c09-5af7-4f00-a2d9-d7c0972597d2"), "5"));
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"), new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"));
 		assertTrue(eyesR.wasSuccessful());
 		assertNull("Should not have imagelink as non-auto accessory", model.getCarriedItem("image_link"));
 		CarriedItem<ItemTemplate> container = eyesR.get();
@@ -1244,9 +1244,9 @@ public class SR6ArchetypeTest {
 		container = rcc.get();
 		assertTrue( equip.embed(container, ItemHook.ELECTRONIC_ACCESSORY, Shadowrun6Core.getItem(ItemTemplate.class, "biometric_reader"), null).wasSuccessful() );
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "clearsight"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5")).wasSuccessful() );
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5")).wasSuccessful() );
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "electronic_warfare"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5")).wasSuccessful() );
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5")).wasSuccessful() );
 		// Commlink
 		OperationResult<CarriedItem<ItemTemplate>> comm = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "transys_avalon"),null, CarryMode.CARRIED);
 		assertTrue(comm.wasSuccessful());
@@ -1259,17 +1259,17 @@ public class SR6ArchetypeTest {
 		assertTrue(drone1.wasSuccessful());
 		container = drone1.get();
 		Possible poss = equip.canBeEmbedded(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "chrysler-nissan_pursuit_v")
 				);
 		assertTrue(poss.toString(), poss.get());
 		OperationResult<CarriedItem<ItemTemplate>> embed =  equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "chrysler-nissan_pursuit_v")
 				);
 		assertTrue(embed.getError(), embed.wasSuccessful() );
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "chrysler-nissan_pursuit_v")
 				).wasSuccessful() );
 		// Drone 2
@@ -1279,10 +1279,10 @@ public class SR6ArchetypeTest {
 		assertTrue( equip.increase(drone2.get()).wasSuccessful() );
 		container = drone2.get();
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")).wasSuccessful() );
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")
 				).wasSuccessful() );
 		// Drone 3
@@ -1292,10 +1292,10 @@ public class SR6ArchetypeTest {
 		assertTrue( equip.increase(drone3.get()).wasSuccessful() );
 		container = drone3.get();
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")).wasSuccessful() );
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")
 				).wasSuccessful() );
 		// Van
@@ -1308,7 +1308,7 @@ public class SR6ArchetypeTest {
 		assertTrue( equip.increase(drone4.get()).wasSuccessful() );
 		container = drone4.get();
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "gmc_micromachine")
 				).wasSuccessful() );
 		// Drone 5
@@ -1316,7 +1316,7 @@ public class SR6ArchetypeTest {
 		assertTrue( equip.increase(drone5.get()).wasSuccessful() );
 		container = drone5.get();
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "5"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "gm-nissan_dobermann")
 				).wasSuccessful() );
 		// Mirage
@@ -1532,19 +1532,19 @@ public class SR6ArchetypeTest {
 				);
 		assertTrue(equip.select(
 				Shadowrun6Core.getItem(ItemTemplate.class, "dermal_plating"), null, CarryMode.IMPLANTED,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "3"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "3"),
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
 				).wasSuccessful()
 				);
 		assertTrue(equip.select(
 				Shadowrun6Core.getItem(ItemTemplate.class, "muscle_augmentation"), null, CarryMode.IMPLANTED,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "3"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "3"),
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
 				).wasSuccessful()
 				);
 		assertTrue(equip.select(
 				Shadowrun6Core.getItem(ItemTemplate.class, "muscle_toner"), null, CarryMode.IMPLANTED,
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "2"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "2"),
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
 				).wasSuccessful()
 				);
@@ -1571,7 +1571,7 @@ public class SR6ArchetypeTest {
 				).wasSuccessful()
 				);
 		OperationResult<CarriedItem<ItemTemplate>> wired = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "wired_reflexes"),
-				new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "1"),
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "1"),
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
 				);
 		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_roadmaster")).wasSuccessful());
