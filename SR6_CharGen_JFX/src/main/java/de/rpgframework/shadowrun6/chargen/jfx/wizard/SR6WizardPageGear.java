@@ -48,24 +48,24 @@ import javafx.scene.layout.VBox;
  *
  */
 public class SR6WizardPageGear extends WizardPage implements ControllerListener{
-	
+
 	private final static Logger logger = System.getLogger(SR6WizardPageGear.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageGear.class.getPackageName()+".SR6WizardPages");
 
 	protected SR6CharacterController charGen;
-	
+
 	private Label lbIntro,lbConverted, lbConvNuyen;
 	private Button btnDec;
 	private Button btnInc;
-	
+
 	protected ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>> selection;
 	protected CarriedItemDescriptionPane bxDescription;
 	protected OptionalNodePane layout;
 	private NumberUnitBackHeader backHeaderKarma;
 	private NumberUnitBackHeader backHeaderNuyen;
 	private NumberUnitBackHeader backHeaderEssence;
-	
+
 	// Shall character requirements be ignored
 	private CheckBox cbIgnoreRequirements;
 
@@ -77,10 +77,10 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		initComponents();
 		initLayout();
 		initInteractivity();
-		
+
 		charGen.addListener(this);
 	}
-	
+
 	//-------------------------------------------------------------------
 	protected void initComponents() {
 		lbIntro     = new Label(ResourceI18N.get(RES, "page.gear.intro"));
@@ -89,26 +89,26 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		lbConvNuyen = new Label("?");
 		btnDec = new Button("-");
 		btnInc = new Button("+");
-		
+
 		selection = new ComplexDataItemControllerNode<>(charGen.getEquipmentController());
-		
+
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.available"));
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.selected"));
-		
+
 		selection.setAvailableCellFactory(lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController(), null));
 		selection.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell( () -> charGen.getEquipmentController()));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
-		
+
 		bxDescription = new CarriedItemDescriptionPane(Shadowrun6Tools.requirementResolver(Locale.getDefault()), charGen);
-		
+
 		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection, ItemType.PACK));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getEquipmentController()));
-		
+
 		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
-		
-		cbIgnoreRequirements = new CheckBox(ResourceI18N.get(RES, "page.gear.rule.ignoreGearRequirements"));		
+
+		cbIgnoreRequirements = new CheckBox(ResourceI18N.get(RES, "page.gear.rule.ignoreGearRequirements"));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		// Current Karma
@@ -136,9 +136,9 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 //		} else {
 			super.setBackHeader(backHeader);
 //		}
-			
+
 		setBackContent(cbIgnoreRequirements);
-		
+
 		// Information about spent PP
 		Label hdConverted = new Label(ResourceI18N.get(RES, "page.gear.converted"));
 		Label hdNuyen     = new Label(ResourceI18N.get(RES, "page.gear.nuyen"));
@@ -146,15 +146,15 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		hdNuyen.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		HBox conversion = new HBox(10, btnDec, lbConverted, btnInc, hdConverted, lbConvNuyen, hdNuyen);
 		conversion.setAlignment(Pos.CENTER_LEFT);
-		
+
 		VBox col1 = new VBox(10, lbIntro, conversion, selection);
-		
-		
+
+
 		layout = new OptionalNodePane(col1, bxDescription);
 		layout.setId("optional-spells");
 		setContent(layout);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		btnDec.setOnAction(ev -> charGen.getEquipmentController().decreaseConversion());
@@ -168,7 +168,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 				layout.setTitle(null);
 			}
 		});
-		
+
 		cbIgnoreRequirements.selectedProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.INFO, "User chose cbIgnoreGearRequirements = "+n);
 			charGen.getModel().setRuleValue(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS, String.valueOf(n));
@@ -178,20 +178,20 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 
 	//-------------------------------------------------------------------
 	protected void refresh() {
-		logger.log(Level.WARNING, "refresh");
+		logger.log(Level.TRACE, "refresh");
 		backHeaderKarma.setValue(charGen.getModel().getKarmaFree());
 		backHeaderNuyen.setValue(charGen.getModel().getNuyen());
 		btnDec.setDisable(!charGen.getEquipmentController().canDecreaseConversion());
 		btnInc.setDisable(!charGen.getEquipmentController().canIncreaseConversion());
 //		MagicOrResonanceType morType = charGen.getModel().getMagicOrResonanceType();
-//		activeProperty().set( morType!=null && morType.usesSpells()); 
+//		activeProperty().set( morType!=null && morType.usesSpells());
 		selection.refresh();
 		cbIgnoreRequirements.setSelected(charGen.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS));
-		
+
 		lbConverted.setText( String.valueOf(charGen.getEquipmentController().getConvertedKarma()) );
 		lbConvNuyen.setText( String.valueOf(charGen.getEquipmentController().getConvertedKarma()*charGen.getEquipmentController().getConversionRateKarma()) );
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see org.prelle.javafx.WizardPage#pageVisited()

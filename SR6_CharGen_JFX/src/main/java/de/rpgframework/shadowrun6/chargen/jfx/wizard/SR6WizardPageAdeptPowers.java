@@ -4,39 +4,94 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
+import org.prelle.javafx.SymbolIcon;
 import org.prelle.javafx.Wizard;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
+import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
+import de.rpgframework.shadowrun.chargen.charctrl.ISkillController;
+import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAdeptPowers;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuySR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAdeptPowerGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.PriorityCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityAdeptPowerGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.AdeptPowerFilterNode;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6SkillTablePrioSkin;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import javafx.geometry.Insets;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 /**
  * @author prelle
  *
  */
 public class SR6WizardPageAdeptPowers extends WizardPageAdeptPowers {
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
+
+	protected NumberUnitBackHeader backHeaderCP;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageAdeptPowers(Wizard wizard, GeneratorWrapper charGen) {
 		super(wizard, charGen);
 	}
-	
+
 	//-------------------------------------------------------------------
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void initComponents() {
 		super.initComponents();
 		selection.setFilterNode(new AdeptPowerFilterNode(RES, selection));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getAdeptPowerController()));
 //		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
-		
+
 		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
 		bxDescription = new GenericDescriptionVBox(resolver);
+	}
+
+	//-------------------------------------------------------------------
+	@Override
+	protected void initBackHeader() {
+		super.initBackHeader();
+
+		backHeaderCP = new NumberUnitBackHeader(ResourceI18N.get(RES, "label.pointbuy.cp"));
+		backHeaderCP.setVisible(true);
+		HBox.setMargin(backHeaderCP, new Insets(0,10,0,10));
+
+		Region buf = new Region();
+		buf.setMaxWidth(Double.MAX_VALUE);
+		HBox box = new HBox(backHeaderKarma, backHeaderCP);
+		HBox backHeader = new HBox(10, box, buf, new SymbolIcon("setting"));
+		HBox.setHgrow(buf, Priority.ALWAYS);
+		//backHeader.setMaxWidth(Double.MAX_VALUE);
+		HBox.setMargin(box, new Insets(0,0,0,10));
+		HBox.setMargin(backHeader.getChildren().get(2), new Insets(0,10,0,0));
+		super.setBackHeader(backHeader);
+	}
+	//-------------------------------------------------------------------
+	protected void refresh() {
+		super.refresh();
+
+		IShadowrunCharacterGenerator<?, ?, ?, ?> real = (charGen instanceof GeneratorWrapper)?((GeneratorWrapper)charGen).getWrapped():(IShadowrunCharacterGenerator<?, ?, ?, ?>) charGen;
+		IAdeptPowerController skillCtrl = charGen.getAdeptPowerController();
+		if (skillCtrl instanceof SR6PriorityAdeptPowerGenerator) {
+			backHeaderCP.setVisible(false);
+		} else if (skillCtrl instanceof SR6PointBuyAdeptPowerGenerator) {
+			backHeaderCP.setValue( ((PointBuyCharacterGenerator)real).getSettings().characterPoints );
+			backHeaderCP.setVisible(true);
+			lbValue.setText(String.valueOf(((PointBuyCharacterGenerator)real).getSettings().boughtPP  ));
+		}
 	}
 
 }

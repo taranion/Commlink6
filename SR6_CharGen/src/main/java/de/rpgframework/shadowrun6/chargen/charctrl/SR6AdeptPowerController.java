@@ -29,11 +29,11 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
  *
  */
 public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implements IAdeptPowerController {
-	
-	protected static Logger logger = System.getLogger(SR6AdeptPowerController.class.getPackageName());
+
+	protected static Logger logger = System.getLogger(SR6AdeptPowerController.class.getPackageName()+".adept");
 
 	protected final static MultiLanguageResourceBundle RES = SR6CharacterGenerator.RES;
-	
+
 	protected float freePoints;
 
 	//-------------------------------------------------------------------
@@ -98,15 +98,15 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	public Possible canBeSelected(AdeptPower value, Decision... decisions) {
 		// Check if all choices have been made and all requirements are fulfilled
 		Possible poss = Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
-		if (!poss.get()) 
+		if (!poss.get())
 			return poss;
-		
+
 		// Ensure enough power points are present
 		float cost = value.getCostForLevel(1);
 		if (cost>freePoints) {
 			return new Possible(Severity.STOPPER, RES, IRejectReasons.IMPOSS_NOT_ENOUGH_PPOINTS);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -123,13 +123,13 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 				logger.log(Level.WARNING, "Trying to select ''{0}'' which cannot be selected: {1}", data.getId(), poss);
 				return new OperationResult<>(poss);
 			}
-			
+
 			AdeptPowerValue value = new AdeptPowerValue(data, data.hasLevel()?1:0);
 			getModel().addAdeptPower(value);
 			logger.log(Level.INFO, "Selected ''{0}''", value);
-			
+
 			parent.runProcessors();
-			
+
 			return new OperationResult<AdeptPowerValue>(value);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1})", data, List.of(decisions));
@@ -145,11 +145,11 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		// Power must exist in model
 		if (!getModel().getAdeptPowers().contains(value))
 			return new Possible(Severity.INFO, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_PRESENT);
-		
+
 		// Power may not be auto-added
 		if (value.isAutoAdded())
 			return new Possible(Severity.INFO, IRejectReasons.RES, IRejectReasons.IMPOSS_AUTO_ADDED);
-		
+
 		return Possible.TRUE;
 	}
 
@@ -166,12 +166,12 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 				logger.log(Level.WARNING, "Trying to deselect ''{0}'' which cannot be selected: {1}", value.getKey(), poss);
 				return false;
 			}
-			
+
 			getModel().removeAdeptPower(value);
 			logger.log(Level.INFO, "Deselected ''{0}''", value);
-			
+
 			parent.runProcessors();
-			
+
 			return true;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
@@ -193,7 +193,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		if (item.getMaxLevel()!=0 && item.getMaxLevel()<=value.getModifiedValue()) {
 			return new Possible(Severity.STOPPER, RES, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 		}
-		
+
 		// Determine the difference in power cost and ensure enough power points are present
 		float costBefore = item.getCostForLevel(value.getDistributed());
 		float costAfter = item.getCostForLevel(value.getDistributed()+1);
@@ -201,7 +201,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		if (cost>freePoints) {
 			return new Possible(Severity.STOPPER, RES, IRejectReasons.IMPOSS_NOT_ENOUGH_PPOINTS);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -220,7 +220,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		if (item.getMaxLevel()!=0 && value.getDistributed()==0) {
 			return new Possible(Severity.STOPPER, RES, IRejectReasons.IMPOSS_MIN_LEVEL_REACHED);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -237,12 +237,12 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 				logger.log(Level.WARNING, "Trying to increase ''{0}'' which cannot be increased: {1}", value.getModifyable().getId(), poss);
 				return new OperationResult<>(poss);
 			}
-			
-			value.setDistributed( value.getDistributed() +1);			
+
+			value.setDistributed( value.getDistributed() +1);
 			logger.log(Level.INFO, "Increased ''{0}'' to {1}", value, value.getDistributed());
-			
+
 			parent.runProcessors();
-			
+
 			return new OperationResult<AdeptPowerValue>(value);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE increase({0})", value);
@@ -262,12 +262,12 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 				logger.log(Level.WARNING, "Trying to decrease ''{0}'' which cannot be decreased: {1}", value.getModifyable().getId(), poss);
 				return new OperationResult<>(poss);
 			}
-			
-			value.setDistributed( value.getDistributed() -1);			
+
+			value.setDistributed( value.getDistributed() -1);
 			logger.log(Level.INFO, "Decreased ''{0}'' to {1}", value, value.getDistributed());
-			
+
 			parent.runProcessors();
-			
+
 			return new OperationResult<AdeptPowerValue>(value);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE decrease({0})", value);
@@ -277,7 +277,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	//-------------------------------------------------------------------
 	protected int determineMaxFreePoints() {
 		Shadowrun6Character model = getModel();
-		
+
 		return model.getAttribute(ShadowrunAttribute.POWER_POINTS).getModifiedValue();
 	}
 
@@ -287,10 +287,10 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 
 		try {
 			todos.clear();
-			
+
 			Shadowrun6Character model = getModel();
 			freePoints = determineMaxFreePoints();
-			
+
 			/*
 			 * Count invested power points
 			 */
@@ -304,7 +304,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 				logger.log(Level.INFO, "Pay {0} PP for ''{1}''", cost, val.getKey());
 				freePoints -= cost;
 			}
-			
+
 			// Summary and eventually warn
 			logger.log(Level.INFO, "Have {0} remaining power points", freePoints);
 			if (freePoints>0) {
@@ -329,14 +329,14 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		try {
 			todos.clear();
 			allocatePP();
-			
+
 			Shadowrun6Character model = getModel();
-			
+
 			for (AdeptPowerValue val : model.getAdeptPowers()) {
 				// Apply modifications
 				unprocessed.addAll(val.getModifications());
 			}
-			
+
 			// Summary and eventually warn
 			logger.log(Level.INFO, "Have {0} remaining power points", freePoints);
 			if (freePoints>0) {
@@ -344,7 +344,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 			} else if (freePoints<0) {
 				todos.add(new ToDoElement(Severity.STOPPER, "Too many power points used"));
 			}
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
