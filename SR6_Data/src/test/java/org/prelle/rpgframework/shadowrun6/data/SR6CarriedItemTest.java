@@ -475,4 +475,18 @@ public class SR6CarriedItemTest {
 		assertEquals(1000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void testChemical() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "gas_grenade");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		item.addDecision(new Decision(ItemTemplate.UUID_CHEMICAL_CHOICE, "neuro_stun_x"));
+		SR6GearTool.recalculate("", null, item);
+		assertNotNull(item);
+		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(2050, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+	}
+
 }

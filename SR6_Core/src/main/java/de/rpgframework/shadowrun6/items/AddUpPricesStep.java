@@ -24,7 +24,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class AddUpPricesStep implements CarriedItemProcessor {
-	
+
 	final static Logger logger = SR6GearTool.logger;
 
 	//-------------------------------------------------------------------
@@ -43,7 +43,11 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 			List<Modification> unprocessed) {
 
 		ItemAttributeNumericalValue<SR6ItemAttribute> attrib = model.getAsValue(SR6ItemAttribute.PRICE);
-		
+		if (attrib==null) {
+			logger.log(Level.WARNING, "Item {0} has no price", model.getKey());
+			return new OperationResult<List<Modification>>(unprocessed);
+		}
+
 		// Add prices of accessories
 		for (CarriedItem<? extends PieceOfGear> carried : model.getAccessories()) {
 			ItemAttributeNumericalValue<SR6ItemAttribute> aVal = carried.getAsValue(SR6ItemAttribute.PRICE);
@@ -53,9 +57,9 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 			}
 			int cost = aVal.getModifiedValue();
 			logger.log(Level.INFO, "Increase cost by {0} from {1}", cost, carried.getKey());
-			attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), cost) );			
+			attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), cost) );
 		}
-		
+
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 

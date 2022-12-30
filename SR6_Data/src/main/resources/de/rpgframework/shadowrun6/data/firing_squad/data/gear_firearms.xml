@@ -8,7 +8,7 @@
          <itemmod type="HOOK" ref="BARREL"/>
       </modifications>
    </item>
-   
+
    <!-- Light pistols -->
    <item id="colt_agent_special" avail="3" price="400" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" >
       <weapon dmg="3P" attack="10,8,,," mode="SS/SA" ammo="8(c)" skill="firearms" spec="firearms/pistols_light"/>
@@ -45,7 +45,7 @@
       </modifications>
       <weapon dmg="2P" attack="10,8,5,," mode="SA" ammo="15(c)" skill="firearms" spec="firearms/pistols_light"/>
    </item>
-   
+
    <!-- Heavy pistols -->
    <item id="cavalier_marshal" avail="2L" price="650" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
       <modifications>
@@ -78,7 +78,7 @@
       	<weapon  dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>
    </item>
-   
+
    <!-- Machine pistols -->
    <item id="colt_arms_m24" avail="4L" price="720" type="WEAPON_FIREARMS" subtype="MACHINE_PISTOLS">
       <modifications>
@@ -95,7 +95,7 @@
       </modifications>
       <weapon dmg="2P" attack="10,8,8," mode="BF/FA" ammo="15(c)" skill="firearms" spec="firearms/machine_pistols"/>
    </item>
-   
+
    <!-- SMGs -->
    <item id="cavalier_parashield_emergency_responder" avail="3L" price="800" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
       <modifications>
@@ -156,13 +156,13 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
-         <itemmod type="HOOK" ref="STOCK"/>		 
+         <itemmod type="HOOK" ref="STOCK"/>
          <itemmod type="GEARMOD" ref="foregrip"/>
          <itemmod type="GEARMOD" ref="smartgun_system_internal"/>
       </modifications>
       <weapon dmg="5P" mode="SA/BF/FA" attack="5,11,7,," ammo="12(c)/32(d)" skill="firearms" spec="firearms/shotguns"/>
    </item>
-   
+
    <!-- Rifles -->
    <item id="izom_artemis" avail="4L" price="1800" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
       <modifications>
@@ -269,7 +269,7 @@
       </modifications>
       <weapon dmg="5P" mode="FA" attack="4,8,8,6,4" ammo="48(c)" skill="firearms" spec="firearms/rifles"/>
    </item>
-   
+
    <!-- Machine guns -->
    <item id="ares_m22A1" avail="6I" price="15000" type="WEAPON_FIREARMS" subtype="HMG">
       <modifications>
@@ -285,7 +285,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
-         <itemmod type="HOOK" ref="STOCK"/>      
+         <itemmod type="HOOK" ref="STOCK"/>
 	  </modifications>
       <weapon dmg="3P" mode="BF/FA" attack="4,12,10,," ammo="100(belt)" skill="firearms" spec="firearms/machine_guns"/>
    </item>
@@ -327,7 +327,7 @@
          <itemmod type="GEARMOD" ref="smartgun_system_internal"/>
          <itemmod type="GEARMOD" ref="folding_stock"/>
       </modifications>
-      
+
       <variant id="model1">
       	<attrdef id="AVAILABILITY" value="4L"/>
       	<attrdef id="PRICE" value="5650"/>
@@ -363,7 +363,7 @@
       </modifications>
       <weapon dmg="7P" mode="SA" attack="1,9,11,9,5" ammo="15(c)" skill="firearms" spec="firearms/assault_cannons"/>
    </item>
-   
+
    <!-- Exotic Weapons -->
    <item id="ares_charybdis" avail="5L" price="6000" type="WEAPON_SPECIAL" subtype="THROWERS">
       <weapon dmg="6S" mode="SS" attack="10,12,8,," ammo="0" skill="exotic_weapons" spec="exotic_weapons/spray"/>
@@ -413,12 +413,12 @@
    <item id="shiawase_blazer" avail="4L" price="2500" type="WEAPON_SPECIAL" subtype="THROWERS">
       <weapon dmg="6P" mode="SS" attack="14,12,10,," ammo="5(m)" skill="exotic_weapons" spec="exotic_weapons/spray"/>
    </item>
-   
+
    <!-- Launchers -->
    <item id="krime_thumper" avail="3L" price="1500" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
       <weapon dmg="0P" mode="SA" attack=",8,7,5," ammo="3(m)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
    </item>
-   
+
     <!-- Explosives Special -->
 
    <item id="sungard_jewelry" avail="5L" price="2000" type="AMMUNITION" subtype="GRENADES">
@@ -442,51 +442,38 @@
 
 	<item id="paint_grenade" avail="3L" price="50" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo blast="2" />
-	</item>
-	<item id="paint_grenade_large" avail="3L" price="75" count="y" type="AMMUNITION" subtype="GRENADES">
-		<ammo  blast="5" />
+		<variant id="large">
+			<attrdef id="PRICE" value="75"/>
+			<ammo  blast="5" />
+		</variant>
+		<variant id="mini">
+			<attrdef id="PRICE" value="75"/>
+			<ammo blast="1" />
+		</variant>
 	</item>
 	<item id="chemical_grenade" avail="4I" price="200" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo gz="6P" close="4P" near="2P" blast="15" />
+		<variant id="mini"/>
 	</item>
 	<item id="cryo_grenade" avail="5I" price="200" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo gz="6S" close="4S" near="2S" blast="15" />
+		<variant id="mini"/>
 	</item>
 	<item id="glitter_grenade" avail="3L" price="100" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo blast="20" />
+		<variant id="mini"/>
 	</item>
 	<item id="incendiary_grenade" avail="4I" price="200" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo gz="6P" close="4P" near="2P" blast="15" />
+		<variant id="mini"/>
 	</item>
 	<item id="nano_grenade" avail="7I" price="1000" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo  />
+		<variant id="mini"/>
 	</item>
 	<item id="zapper_grenade" avail="4I" price="200" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo gz="6S(e)" close="4S" near="2S" blast="15" />
+		<variant id="mini"/>
 	</item>
-   
-    <!-- Explosives Mini -->
 
-	<item id="paint_grenade_mini" avail="3L" price="75" count="y" type="AMMUNITION" subtype="GRENADES_MINI">
-		<ammo blast="1" />
-	</item>
-	<item id="chemical_grenade_mini" avail="4I" price="200" count="y" type="AMMUNITION" subtype="GRENADES_MINI">
-		<ammo gz="6P" close="4P" near="2P" blast="15" />
-	</item>
-	<item id="cryo_grenade_mini" avail="5I" price="200" count="y" type="AMMUNITION" subtype="GRENADES_MINI">
-		<ammo gz="6S" close="4S" near="2S" blast="15" />
-	</item>
-	<item id="glitter_grenade_mini" avail="3L" price="100" count="y" type="AMMUNITION" subtype="GRENADES_MINI">
-		<ammo blast="20" />
-	</item>
-	<item id="incendiary_grenade_mini" avail="4I" price="200" count="y" type="AMMUNITION" subtype="GRENADES_MINI">
-		<ammo gz="6P" close="4P" near="2P" blast="15" />
-	</item>
-	<item id="nano_grenade_mini" avail="7I" price="1000" count="y" type="AMMUNITION" subtype="GRENADES_MINI">
-		<ammo  />
-	</item>
-	<item id="zapper_grenade_mini" avail="4I" price="200" count="y" type="AMMUNITION" subtype="GRENADES_MINI">
-		<ammo gz="6S(e)" close="4S" near="2S" blast="15" />
-	</item>
-  
 </items>
