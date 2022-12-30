@@ -563,7 +563,7 @@
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="external_clip_port">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
                 </embed>
-             <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="cyber_silencer">
+             <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="silencer" variant ="cyberimplantweapon">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="alpha"/>
                 </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="cyber_heavy_pistol">
