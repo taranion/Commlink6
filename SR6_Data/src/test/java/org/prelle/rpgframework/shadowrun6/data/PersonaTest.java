@@ -36,7 +36,7 @@ import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
  *
  */
 public class PersonaTest {
-	
+
 	//-------------------------------------------------------------------
 	@BeforeClass
 	public static void beforeClass() {
@@ -44,7 +44,7 @@ public class PersonaTest {
 		System.setProperty("logdir", "/tmp");
 		Locale.setDefault(Locale.ENGLISH);
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
-		plugin.init( );		
+		plugin.init( );
 	}
 
 	//-------------------------------------------------------------------
@@ -57,13 +57,13 @@ public class PersonaTest {
 		assertTrue(prog1CI.getModifications().isEmpty());
 		assertNotNull(prog1CI.getCharacterModifications());
 		assertTrue("Mode not activated yet - should not have modifications",prog1CI.getCharacterModifications().isEmpty());
-		
+
 		prog1CI.setMode(prog1CI.getOperationModes(false).get(0).getModes().get(0), true);
 		SR6GearTool.recalculate("", null, prog1CI);
 		assertNotNull(prog1CI.getCharacterModifications());
 		assertFalse("Mode activated now- should have modifications",prog1CI.getCharacterModifications().isEmpty());
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testPersona() {
@@ -74,25 +74,25 @@ public class PersonaTest {
 		CarriedItem<ItemTemplate> deckCI = SR6GearTool.buildItem(deck, CarryMode.CARRIED, null, true).get();
 		deckCI.addFlag(SR6ItemFlag.PRIMARY);
 		ItemTemplate jack = Shadowrun6Core.getItem(ItemTemplate.class, "cyberjack");
-		CarriedItem<ItemTemplate> jackCI = SR6GearTool.buildItem(jack, CarryMode.IMPLANTED, null, true, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"), new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "6")).get();
+		CarriedItem<ItemTemplate> jackCI = SR6GearTool.buildItem(jack, CarryMode.IMPLANTED, null, true, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"), new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "6")).get();
 		jackCI.addFlag(SR6ItemFlag.PRIMARY);
 		deckCI.addAccessory(prog1CI, ItemHook.SOFTWARE);
 		SR6GearTool.recalculate("", null, deckCI);
-		
+
 		Shadowrun6Character model = new Shadowrun6Character();
 		model.addCarriedItem(jackCI);
 		model.addCarriedItem(deckCI);
-		
-		
+
+
 		System.out.println("testPersona: runProcessor----------------------");
 		Shadowrun6Tools.runProcessors(model);
-		
+
 		assertNotNull(model.getPersona());
 		assertEquals(8, model.getPersona().getAttack().getModifiedValue());
 		assertEquals(7, model.getPersona().getSleaze().getModifiedValue());
 		assertEquals(9, model.getPersona().getDataProcessing().getModifiedValue());
 		assertEquals(8, model.getPersona().getFirewall().getModifiedValue());
-		
+
 		// Reorganize matrix attributes
 		model.getMatrixAttribMap().setAttack(SR6ItemAttribute.DATA_PROCESSING);
 		model.getMatrixAttribMap().setDataProcessing(SR6ItemAttribute.ATTACK);
