@@ -32,7 +32,7 @@
    <item id="walther_palm_pistol" avail="2" price="325" type="WEAPON_FIREARMS" subtype="HOLDOUTS">
       <weapon dmg="2P" attack="12,7,,," mode="SS/BF" ammo="6(b)" skill="firearms" spec="firearms/holdouts"/>
    </item>
-   
+
    <!-- Light Pistols -->
    <item id="ares_light_fire_70" avail="3L" price="350" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT">
       <modifications>
@@ -90,7 +90,7 @@
       </modifications>
       <weapon ammo="8(cy)" attack="7,10,7,," dmg="3P" mode="SA/BF" skill="firearms" spec="firearms/pistols_light"/>
    </item>
-   
+
    <!-- Machine Pistols -->
    <item id="ares_crusader_ii" avail="4L" price="520" type="WEAPON_FIREARMS" subtype="MACHINE_PISTOLS">
       <modifications>
@@ -119,7 +119,7 @@
       </modifications>
       <weapon attack="8,8,6,," ammo="30(c)" dmg="2P" mode="SA/FA" skill="firearms" spec="firearms/machine_pistols"/>
    </item>
-   
+
    <!-- Heavy Pistols -->
    <item avail="2L" price="750" id="ares_predator_vi" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
       <modifications>
@@ -169,7 +169,7 @@
       </modifications>
       <weapon attack="8,11,8,," ammo="6(cy)" dmg="4P" mode="SA" skill="firearms" spec="firearms/pistols_heavy"/>
    </item>
-   
+
    <!-- Submachine Guns -->
    <item avail="2L" price="730" id="colt_cobra_tz100" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
       <modifications>
@@ -253,7 +253,7 @@
       </modifications>
       <weapon attack="8,8,7,," ammo="24(c)" dmg="3P" mode="SA/BF/FA" skill="firearms" spec="firearms/submachine_guns"/>
    </item>
-   
+
    <!-- Shotguns -->
    <item avail="2L" price="330" id="defiance_t250" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
        <modifications>
@@ -296,7 +296,7 @@
       </modifications>
       <weapon attack="9,8,4,," ammo="8(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/shotguns"/>
    </item>
-   
+
    <!-- Rifles -->
    <item avail="3L" price="12000" id="remington_900" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
       <modifications>
@@ -373,7 +373,7 @@
     	</alternate>
       <alternate id="shotgun" mode="WEAPON" type="WEAPON_FIREARMS" subtype="LAUNCHERS">
      		<usage mode="EMBEDDED"/>
-     		 <weapon attack="4,11,7,1," ammo="4(c)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers"/>      
+     		 <weapon attack="4,11,7,1," ammo="4(c)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
       </alternate>
    </item>
    <item avail="4I" price="11000" id="ares_desert_strike" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
@@ -419,7 +419,7 @@
       </modifications>
       <weapon attack="1,8,11,16,14" ammo="10(c)" dmg="6P" mode="SA" skill="firearms" spec="firearms/rifles"/>
    </item>
-   
+
    <!-- Machine Guns -->
    <item avail="4L" price="4175" id="ingram_valiant" type="WEAPON_FIREARMS" subtype="LMG">
       <modifications>
@@ -446,10 +446,10 @@
    </item>
    <item avail="5L" price="8000" id="rpk_hmg" type="WEAPON_FIREARMS" subtype="HMG">
       <modifications>
-          <embed type="GEAR" ref="tripod" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-         <itemmod type="HOOK" ref="UNDER"/>
+          <embed type="GEAR" ref="tripod" intoType="HOOK" intoRef="UNDER" included="true"/>
       </modifications>
       <requires>
       	<valuereq type="ATTRIBUTE" ref="STRENGTH" value="5" apply="CHARACTER"/>
@@ -468,7 +468,7 @@
       </requires>
       <weapon attack="1,9,12,8,6" ammo="15(c)" dmg="7P" mode="SA" skill="firearms" spec="firearms/machine_guns"/>
    </item>
-   
+
    <!-- Exotic Weapons -->
    <item avail="3L" price="560" id="ares_s3_super_squirt" type="WEAPON_SPECIAL" subtype="DMSO">
       <modifications>
@@ -528,5 +528,5 @@
       </modifications>
       <weapon attack=",5,9,10,8" ammo="2(ml)" dmg="0P" mode="SS" skill="exotic_weapons" />
    </item>
-   
+
 </items>
