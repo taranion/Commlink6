@@ -1,6 +1,12 @@
 image: maven:3.8.6-openjdk-18
 
 pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Build and test
+          script:
+            - mvn -B -s settings.xml clean install
   default:
     - step:
         script: 

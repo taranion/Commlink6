@@ -12,10 +12,10 @@
 		</choices>
 		<variant id="monthly">
 			<attrdef id="PRICE" value="$RATING"/>
-		</variant>	   
+		</variant>
 		<variant id="yearly">
 			<attrdef id="PRICE" value="$RATING*10"/>
-		</variant>	   
+		</variant>
    </item>
    <item avail="1" price="5000"   id="docwagon_basic_year"    subtype="BIOTECH" type="BIOLOGY"/>
    <item avail="1" price="25000"  id="docwagon_gold_year"   subtype="BIOTECH" type="BIOLOGY"/>
@@ -45,7 +45,7 @@
 		<attrdef id="PRICE" value="$RATING*$RATING*10"/>
    </item>
    <item avail="3" price="500"   id="trauma_patch"      subtype="SLAP_PATCHES" type="BIOLOGY" count="y"/>
-   
+
    <!-- Headware -->
    <item avail="2" price="2000" id="commlink" type="CYBERWARE" subtype="CYBER_HEADWARE">
   		<usage mode="EMBEDDED" slot="HEADWARE_IMPLANT" value="2"/>
@@ -87,7 +87,7 @@
      	<usage mode="IMPLANTED" value="0"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
-   
+
    <item avail="4L" price="5000" id="cyberdeck" type="CYBERWARE" subtype="CYBER_HEADWARE">
   		<usage mode="EMBEDDED" slot="HEADWARE_IMPLANT" value="4"/>
    	<flags><flag>AUGMENTATION</flag></flags>
@@ -178,8 +178,8 @@
 		<attrdef id="PRICE" value="$RATING*5000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
-   
-    <!-- Eyeware --> 
+
+    <!-- Eyeware -->
    <item id="cybereye" type="CYBERWARE" subtype="CYBER_EYEWARE">
    	<choices>
    		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5"/>
@@ -194,7 +194,7 @@
          <embed  type="GEAR" ref="image_link" intoType="HOOK" intoRef="INTERNAL" included="true" apply="DATA_ITEM"/>
       </modifications>
    </item>
-   
+
    <item avail="3" price="6000" id="ocular_drone" type="CYBERWARE" subtype="CYBER_EYEWARE">
       <usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="6"/>
       <usage mode="IMPLANTED" value="0.3"/>
@@ -207,7 +207,7 @@
 			<vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" />
       </alternate>
    </item>
-   
+
    <item avail="5I" price="20000" id="retinal_duplication" type="CYBERWARE" subtype="CYBER_EYEWARE">
    	<choices>
    		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
@@ -217,7 +217,7 @@
    	<attrdef id="PRICE"        value="$RATING*20000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
-   
+
     <!--  Earware -->
    <item id="cyberears" type="CYBERWARE" subtype="CYBER_EARWARE">
    	<choices>
@@ -252,7 +252,7 @@
       <usage mode="IMPLANTED" value="0.1"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
-   
+
 	<!-- Bodyware -->
    <item id="bone_lacing" type="CYBERWARE" subtype="CYBER_BODYWARE" reqVariant="y">
  		<flags><flag>AUGMENTATION</flag></flags>
@@ -293,7 +293,7 @@
    		</modifications>
    	</variant>
    </item>
-   
+
    <item avail="4L" id="dermal_plating"  type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
@@ -390,7 +390,7 @@
          <valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_PHYSICAL"  value="$RATING" apply="CHARACTER"/>
       </modifications>
    </item>
-   
+
     <!-- Cyberlimbs -->
     <item avail="5" id="cyberskull" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
     	<usage mode="IMPLANTED" value="0.75"/>
@@ -398,7 +398,7 @@
  		<modifications>
   			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
   			<itemmod type="GEAR" ref="cyberjaw"/>
- 		</modifications>    	
+ 		</modifications>
     	<variant id="synthetic">
     		<attrdef id="PRICE" value="15000"/>
     		<modifications>
@@ -420,7 +420,7 @@
  		<flags><flag>AUGMENTATION</flag></flags>
  		<modifications>
   			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
- 		</modifications>    	
+ 		</modifications>
     	<variant id="synthetic">
     		<attrdef id="PRICE" value="25000"/>
     		<modifications>
@@ -556,14 +556,14 @@
     		</modifications>
     	</variant>
     </item>
-    
+
     <item id="attribute_increase" type="ACCESSORY" subtype="CYBER_LIMB_ENHANCEMENT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13"/>
 			<choice uuid="d5c88f1f-eb6f-4057-b9d0-b65c212747e6" type="ATTRIBUTE" ref="CHOICE" options="AGILITY,STRENGTH"/>
 		</choices>
 		<usage mode="EMBEDDED" value="$RATING" slot="CYBERLIMB_IMPLANT"/>
-		<attrdef id="AVAILABILITY" value="$RATING"/>    
+		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE"        value="$RATING*5000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
 		<modifications>
@@ -576,7 +576,7 @@
 		</choices>
  		<flags><flag>AUGMENTATION</flag></flags>
 		<usage mode="EMBEDDED" value="$RATING" slot="CYBERLIMB_IMPLANT"/>
-		<attrdef id="AVAILABILITY" value="$RATING L"/>    
+		<attrdef id="AVAILABILITY" value="$RATING L"/>
 		<attrdef id="PRICE"        value="$RATING*5000"/>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$RATING"/>
@@ -662,9 +662,10 @@
    <item avail="1" price="1000" id="external_clip_port" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
 		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="1"/>
 		<usage mode="IMPLANTED" value="0.1"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
    </item>
 	<!-- Cyber weapon silencer and laser sight are variants of base silencer and laser sight, see gear_firearms_accessories.xml -->
-   
+
     <!-- Cyberlimb implant weapons -->
    <item avail="2" price="1500" id="cyberjaw" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
       <usage mode="EMBEDDED" value="1" slot="HEADWARE_IMPLANT"/>

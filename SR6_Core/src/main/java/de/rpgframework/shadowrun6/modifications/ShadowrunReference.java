@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.modifications;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.function.Function;
 
 import org.prelle.simplepersist.AttribConvert;
@@ -19,6 +20,7 @@ import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -33,6 +35,7 @@ import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.DataStructure;
+import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.ReturnIdAsResultConverter;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
@@ -69,6 +72,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ATTRIBUTE(new AttributeConverter()),
 	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
 	CARRIED("CarriedItem"),
+	CONTACT_TYPES(ContactType.class,0),
 	COMPLEX_FORM(ComplexForm.class),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
@@ -83,6 +87,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ITEMTYPE(ItemType.class,0),
 	ITEMSUBTYPE(ItemSubType.class,0),
 	LICENSE("License"),
+	LIFEMOD(LifepathModule.class),
 	LIFESTYLE(new LifestyleQualityConverter()),
 	MAGIC_RESO(MagicOrResonanceType.class),
 	MATRIX_ATTRIBUTE(new ItemAttributeConverter()),
@@ -91,7 +96,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	METATYPE(SR6MetaType.class),
 	PARAGON(MentorSpirit.class),
 	POOL("Pool"), // Derived values like defense pool
-	PROGRAM(ItemTemplate.class), // 
+	PROGRAM(ItemTemplate.class), //
 	// All Resistance tests
 	RESISTANCE(Resistance.class,0),
 	RULE(new RuleFlagConverter()),
@@ -112,38 +117,38 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	TECHNIQUE(Technique.class),
 	TEXT("TEXT"),
 	;
-	
+
 	Class<? extends DataItem> typeClass;
 	String typeId;
 	Class<? extends Enum<?>> enumType;
 	StringValueConverter<? extends Object> converter;
 	Function<String, ? extends DataItem> resolver;
-	
+
 	//-------------------------------------------------------------------
 	ShadowrunReference(StringValueConverter<? extends Object> conv) {
 		converter = conv;
 	}
-	
+
 	//-------------------------------------------------------------------
 	ShadowrunReference(Function<String, ? extends DataItem> resolv) {
 		resolver = resolv;
 	}
-	
+
 	//-------------------------------------------------------------------
 	ShadowrunReference(String type) {
 		this.typeId = type;
 	}
-	
+
 	//-------------------------------------------------------------------
 	ShadowrunReference(Class<? extends DataItem> cls) {
 		this.typeClass = cls;
 	}
-	
+
 	//-------------------------------------------------------------------
 	ShadowrunReference(Class<? extends Enum<?>> enumType, int x) {
 		this.enumType = enumType;
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("rawtypes")
 	private static StringValueConverter getConverter(Class cls, String enumName) {
@@ -161,9 +166,9 @@ public enum ShadowrunReference implements ModifiedObjectType {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;		
+		return null;
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public static <T> T resolve(ShadowrunReference type, String key) {
@@ -177,7 +182,13 @@ public enum ShadowrunReference implements ModifiedObjectType {
 			} catch (InvocationTargetException ivte) {
 				Throwable ee = ivte.getTargetException();
 				if (ee instanceof IllegalArgumentException) {
-					throw new ReferenceException(type, key);
+					try {
+						String valid = Arrays.toString( (Object[]) type.enumType.getMethod("values").invoke(type.enumType));
+						throw new ReferenceException(valid,type, key);
+					} catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
+						e.printStackTrace();
+						throw new ReferenceException(type, key);
+					}
 				}
 				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-1:");
 				ivte.printStackTrace();
@@ -203,7 +214,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 		}
 		throw new ReferenceException(type, key);
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public static <T> T[] resolveAll(ShadowrunReference type) {
@@ -214,7 +225,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 			throw new IllegalArgumentException("ALL not supported for "+type);
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public static <T> T[] resolveVariable(ShadowrunReference type, String varName) {
@@ -229,7 +240,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 			throw new IllegalArgumentException("Variables of type "+type+" not supported");
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.modification.ModifiedObjectType#resolve(java.lang.String)
@@ -249,7 +260,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	public <T extends DataItem> T resolveAsDataItem(String key) {
 		return (T)ShadowrunReference.resolve(this, key);
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.modification.ModifiedObjectType#resolveAny()
@@ -259,7 +270,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	public <T> T[] resolveAny() {
 		return (T[])ShadowrunReference.resolveAll(this);
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.modification.ModifiedObjectType#resolveAny()
@@ -278,5 +289,5 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	public Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, CommonCharacter<?, ?, ?,?> model) {
 		return Shadowrun6Tools.instantiateModification(tmp, value, (Shadowrun6Character) model );
 	}
-	
+
 }

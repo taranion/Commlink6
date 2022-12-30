@@ -1,10 +1,8 @@
 package de.rpgframework.shadowrun6;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.MissingResourceException;
 
 import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
@@ -20,7 +18,7 @@ import de.rpgframework.shadowrun6.persist.TechniqueCategoryConverter;
  */
 @DataItemTypeKey(id="martialart")
 public class MartialArts extends AMartialArts {
-	
+
 	@Attribute(name="cat")
 	@AttribConvert(TechniqueCategoryConverter.class)
 	private List<Category> categories;

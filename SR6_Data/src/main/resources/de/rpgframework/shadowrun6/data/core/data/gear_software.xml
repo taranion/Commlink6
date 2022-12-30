@@ -9,19 +9,30 @@
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+		<variant id="rcc">
+			<requires>
+				<valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/>
+			</requires>
+		</variant>
+	</item>
 	<item avail="1" price="60" id="baby_monitor" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
+	</item>
 	<item avail="1" price="60" id="configurator" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
+	</item>
 	<item avail="1" price="60" id="edit" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<modifications>
@@ -30,7 +41,10 @@
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+		<variant id="rcc">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		</variant>
+	</item>
 	<item avail="1" price="60" id="encryption" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<variant id="regular">
@@ -39,7 +53,7 @@
 		<variant id="rcc">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="1" price="60" id="signal_scrubber" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<variant id="regular">
@@ -48,7 +62,7 @@
 		<variant id="rcc">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="1" price="60" id="toolbox" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active">
@@ -62,7 +76,7 @@
 		<variant id="rcc">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="1" price="60" id="virtual_machine" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active">
@@ -76,8 +90,8 @@
 		<variant id="rcc">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
-	
+	</item>
+
 	<!-- Hacking Program -->
 	<item avail="4I" price="250" id="armor" type="SOFTWARE" subtype="HACKING_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
@@ -92,70 +106,70 @@
 		<variant id="rcc">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="biofeedback" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="biofeedback_filter" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="blackout"  type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="decryption" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="defuse" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="exploit" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="fork" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="lockdown" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="overclock" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="stealth" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
@@ -165,14 +179,14 @@
 		<variant id="rcc">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 	<item avail="4I" price="250" id="trace" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
-	</item> 
+	</item>
 
 	 <!-- Autosofts -->
 	<item avail="1" price="500" id="clearsight" type="SOFTWARE" subtype="AUTOSOFT">
@@ -184,7 +198,7 @@
 		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
-	</item> 
+	</item>
 	<item avail="1" price="500" id="electronic_warfare" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
@@ -194,7 +208,7 @@
 		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SOFTWARE" />
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
-	</item> 
+	</item>
 	<item avail="1" price="500" id="evasion" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
@@ -205,7 +219,7 @@
 		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SOFTWARE" />
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
-	</item> 
+	</item>
 	<item avail="1" price="500" id="maneuvering" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
@@ -216,7 +230,7 @@
 		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
-	</item> 
+	</item>
 	<item avail="1" price="500" id="stealth_auto" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
@@ -227,7 +241,7 @@
 		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
-	</item> 
+	</item>
 	<item avail="1" price="500" id="targeting" type="SOFTWARE" subtype="AUTOSOFT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
@@ -238,7 +252,7 @@
 		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
-	</item> 
+	</item>
 
  	<!-- OTHER -->
    <item avail="2" price="150" id="datasoft" type="SOFTWARE" subtype="OTHER_PROGRAMS">
@@ -246,19 +260,19 @@
 			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
 		</choices>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
-	</item> 
+	</item>
    <item avail="2" price="100" id="mapsoft" type="SOFTWARE" subtype="OTHER_PROGRAMS">
 		<choices>
 			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
 		</choices>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
-	</item> 
+	</item>
    <item avail="2" price="150" id="shopsoft"  type="SOFTWARE" subtype="OTHER_PROGRAMS">
 		<choices>
 			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
 		</choices>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
-	</item> 
+	</item>
    <item avail="4" price="5000" id="activesoft"  type="SOFTWARE" subtype="SKILLSOFT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
@@ -282,7 +296,7 @@
        <modifications>
          <itemmod type="SKILL" ref="CHOICE" choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" />
        </modifications>
-	</item> 
+	</item>
    <item avail="1" price="1500" id="linguasoft" type="SOFTWARE" subtype="SKILLSOFT" >
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
@@ -294,7 +308,7 @@
       <modifications>
          <valmod type="SKILL" ref="CHOICE" choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="$RATING" set="ARTIFICIAL"/>
        </modifications>
-	</item> 
+	</item>
    <item avail="1" price="400" id="tutorsoft" type="SOFTWARE" subtype="OTHER_PROGRAMS">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
