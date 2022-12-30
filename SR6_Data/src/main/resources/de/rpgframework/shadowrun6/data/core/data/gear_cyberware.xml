@@ -663,6 +663,7 @@
 		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="1"/>
 		<usage mode="IMPLANTED" value="0.1"/>
    </item>
+	<!-- Cyber weapon silencer and laser sight are variants of base silencer and laser sight, see gear_firearms_accessories.xml -->
    
     <!-- Cyberlimb implant weapons -->
    <item avail="2" price="1500" id="cyberjaw" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
