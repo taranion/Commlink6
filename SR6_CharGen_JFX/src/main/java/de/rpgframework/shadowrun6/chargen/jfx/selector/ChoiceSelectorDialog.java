@@ -65,6 +65,7 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.FocusValueDescriptionPane;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
@@ -88,44 +89,44 @@ import javafx.util.StringConverter;
  *
  */
 public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDataItemValue<T> > extends ManagedDialog implements BiFunction<T, List<Choice>, Decision[]> {
-	
+
 	private final static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(ChoiceSelectorDialog.class.getPackageName()+".Selectors");
-	
+
 	private final static Logger logger = System.getLogger(ChoiceSelectorDialog.class.getPackageName());
 
 	private ComplexDataItemController<T,V> ctrl;
 	/* Only relevant for ItemTemplates */
 	private CarryMode carry;
-	
+
 	private OptionalNodePane optional;
 	private GenericDescriptionVBox bxDesc;
 	private VBox content;
 	private Label lbProblem;
 	private NavigButtonControl btnCtrl;
-	
+
 	private T item;
 	private SR6PieceOfGearVariant selectedVariant;
 	private List<Choice> choices;
 	private Map<Choice, Decision> decisions = new LinkedHashMap<>();
 	private List<SR6ItemFlag> selectedFlasgs = new ArrayList<>();
-	
+
 	private List<Node> toDeleteOnMentorSpirit = new ArrayList<>();
 	/** Choice to reflect the decision of the player to use the magician or adept advantages */
 	private Choice magicianOrAdept = new Choice(CommonQualityGenerator.MENTOR_SPIRIT_ADVANTAGES, ShadowrunReference.MAGIC_RESO);
 	private BooleanProperty chooseAdeptAdvantages = new SimpleBooleanProperty(false);
 	private BooleanProperty useBothAdvantages = new SimpleBooleanProperty(false);
-	
+
 	//-------------------------------------------------------------------
 	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl) {
 		this(ctrl, null);
 	}
-	
+
 	//-------------------------------------------------------------------
 	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl, CarryMode carry) {
 		super("Select",null, CloseType.CANCEL, CloseType.OK);
 		this.ctrl = ctrl;
 		this.carry = carry;
-		
+
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
 		if (ctrl instanceof ISR6EquipmentController) {
@@ -141,9 +142,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		optional= new OptionalNodePane(content, bxDesc);
 		lbProblem = new Label();
 		lbProblem.setStyle("-fx-text-fill: -fx-accent");
-		
+
 		setContent(new VBox(10,optional, lbProblem));
-		
+
 		Shadowrun6Character model = ctrl.getModel();
 		chooseAdeptAdvantages.setValue( model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers());
 		useBothAdvantages.set(model.hasRuleFlag(SR6RuleFlag.MENTOR_SPIRIT_BOTH_ADVANTAGES));
@@ -209,7 +210,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			} else
 				logger.log(Level.WARNING, "Not successful");
 		}
-		
+
 		Possible possible = null;
 		if (item instanceof ItemTemplate && ctrl instanceof ISR6EquipmentController) {
 			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
@@ -221,7 +222,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		// Set status
 		ToDoElement problem = possible.getMostSevere();
 		if (problem==null) {
-			lbProblem.setText(null);			
+			lbProblem.setText(null);
 		} else {
 			lbProblem.setText(problem.getMessage(Locale.getDefault()));
 			switch (problem.getSeverity()) {
@@ -230,7 +231,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			case INFO   : lbProblem.setStyle("-fx-text-fill: --fx-text-base-color"); break;
 			}
 		}
-		
+
 		if (btnCtrl != null) {
 			if (!possible.get() || (problem != null && problem.getSeverity() == Severity.WARNING)) {
 				btnCtrl.setDisabled(CloseType.OK, true);
@@ -247,7 +248,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		content.getChildren().add(lbName);
 		return lbName;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see java.util.function.BiFunction#apply(java.lang.Object, java.lang.Object)
@@ -273,13 +274,14 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			if ((item instanceof ItemTemplate) && !((ItemTemplate)item).getVariants().isEmpty()) {
 				processVariants( (ItemTemplate)item );
 			}
-			
+
 			for (Choice choice : choices) {
 				String forceTitle = null;
 				if (choice.getUUID().equals(ItemTemplate.UUID_RATING)) forceTitle=ResourceI18N.get(RES, "label.rating");
+				if (choice.getUUID().equals(ItemTemplate.UUID_CHEMICAL_CHOICE)) forceTitle=ResourceI18N.get(RES, "label.chemical");
 				processChoice(item,choice, forceTitle);
 			}
-			
+
 			if (item instanceof ItemTemplate) {
 				for (SR6ItemFlag flag : item.getUserSelectableFlags(SR6ItemFlag.class)) {
 					processFlag((ItemTemplate) item, flag);
@@ -320,10 +322,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbVariants.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose variant {0}", n);
 			selectedVariant = n;
-			updateButtons(); 
+			updateButtons();
 		 });
 		content.getChildren().add(cbVariants);
-		
+
 		cbVariants.getSelectionModel().select(0);
 	}
 
@@ -340,7 +342,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				logger.log(Level.DEBUG, "Deselected flag {0} again", n);
 				selectedFlasgs.remove(flag);
 			}
-			updateButtons(); 
+			updateButtons();
 		 });
 		content.getChildren().add(checkBox);
 	}
@@ -349,7 +351,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private List<Node>  processChoice(ComplexDataItem item, Choice choice, String forceTitle) {
 		logger.log(Level.DEBUG, "Choice " + choice);
 		List<Node> ret = new ArrayList<>();
-		
+
 		ret.add( addLabel(
 				(forceTitle==null)
 				?
@@ -433,7 +435,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbSub.getItems().addAll(
 					Shadowrun6Core.getItemList(SR6Skill.class).stream().filter(s -> ids.contains(s.getId())).collect(Collectors.toList())
-					);			
+					);
 		} else {
 			cbSub.getItems().addAll(Shadowrun6Core.getItemList(SR6Skill.class));
 		}
@@ -444,7 +446,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
-			updateButtons(); 
+			updateButtons();
 			showHelpFor(n); });
 		content.getChildren().add(cbSub);
 		return cbSub;
@@ -465,7 +467,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbSub.getItems().addAll(
 					List.of(ShadowrunAttribute.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
-					);			
+					);
 		} else {
 			cbSub.getItems().addAll(ShadowrunAttribute.primaryValues());
 		}
@@ -476,7 +478,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.name()));
-			updateButtons(); 
+			updateButtons();
 		 });
 		content.getChildren().add(cbSub);
 		return cbSub;
@@ -502,7 +504,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbSub.getItems().addAll(
 					List.of(SR6ItemAttribute.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
-					);			
+					);
 		} else {
 			cbSub.getItems().addAll(selectFrom);
 		}
@@ -513,7 +515,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.name()));
-			updateButtons(); 
+			updateButtons();
 		 });
 		content.getChildren().add(cbSub);
 		return cbSub;
@@ -532,7 +534,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n));
-			updateButtons(); 
+			updateButtons();
 		 });
 		content.getChildren().add(cbSub);
 		return cbSub;
@@ -553,7 +555,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbSub.getItems().addAll(
 					List.of(AugmentationQuality.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
-					);			
+					);
 		} else {
 			cbSub.getItems().addAll(AugmentationQuality.values());
 		}
@@ -564,7 +566,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.name()));
-			updateButtons(); 
+			updateButtons();
 		 });
 		content.getChildren().add(cbSub);
 		return cbSub;
@@ -635,12 +637,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
-			
-			updateButtons(); 
+
+			updateButtons();
 			showHelpFor(n);
 		 });
 		content.getChildren().add(choicebox);
-		
+
 		return choicebox;
 	}
 
@@ -662,15 +664,15 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbAmmoType.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
-			
-			updateButtons(); 
+
+			updateButtons();
 			showHelpFor(n);
 		 });
 		content.getChildren().add(cbAmmoType);
-		
+
 		return cbAmmoType;
 	}
-	
+
 	//-------------------------------------------------------------------
 	private Node handleMENTOR_SPIRIT(ComplexDataItem item, Choice choice) {
 		ChoiceBox<MentorSpirit> cbMentor = new ChoiceBox<>();
@@ -686,7 +688,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbMentor.getItems().addAll(
 					Shadowrun6Core.getItemList(MentorSpirit.class).stream().filter(s -> ids.contains(s.getId())).collect(Collectors.toList())
-					);			
+					);
 		} else {
 			cbMentor.getItems().addAll(Shadowrun6Core.getItemList(MentorSpirit.class));
 		}
@@ -697,17 +699,17 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbMentor.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
-			
+
 			// Clear content from previous mentor spirit selection
 			if (o!=null && !o.getChoices().isEmpty()) {
 				choices.removeAll(o.getChoices());
 				o.getChoices().forEach(c -> decisions.remove(o));
-			}			
+			}
 			content.getChildren().removeAll(toDeleteOnMentorSpirit);
-			
+
 			// Memorize current GUI elements
 			List<Node> current = new ArrayList<Node>(content.getChildren());
-			
+
 			// Populate with generic decisions
 			logger.log(Level.INFO, "Choices of Mentor spirit: "+n.getChoices());
 			for (Choice tmpChoice : n.getChoices()) {
@@ -716,17 +718,17 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 			populateMagicianChoices(n);
 			populateAdeptChoices(n);
-			
+
 			// Compare with now updated
 			List<Node> updated = new ArrayList<Node>(content.getChildren());
 			toDeleteOnMentorSpirit  = updated.stream().filter(i -> !current.contains(i)).collect(Collectors.toList());
 
-			
-			updateButtons(); 
+
+			updateButtons();
 			showHelpFor(n);
 		 });
 		content.getChildren().add(cbMentor);
-		
+
 		Shadowrun6Character model = ctrl.getModel();
 		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers() && model.getMagicOrResonanceType().usesSpells()) {
 			addLabel(ResourceI18N.get(RES, "choice.magician_adept"));
@@ -745,7 +747,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				chooseAdeptAdvantages.setValue (n!=null && n.usesPowers());
 			});
 		}
-		
+
 		return cbMentor;
 	}
 
@@ -763,7 +765,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 							name+=" (+"+((int)(value.getCost()))+" Nuyen)";
 						} else {
 							name+=" ("+value.getCost()+" Nuyen)";
-						}						
+						}
 					} else {
 						if ( Math.round(value.getCost())==value.getCost()) {
 							name+=" (+"+((int)(value.getCost()))+" Karma)";
@@ -778,12 +780,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		for (ChoiceOption opt : choice.getSubOptions()) {
 			logger.log(Level.DEBUG, "  sub option "+opt);
 			cbSub.getItems().add(opt);
-			
+
 		}
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
-			updateButtons(); 
+			updateButtons();
 			showHelpFor(n); });
 		content.getChildren().add(cbSub);
 		return cbSub;
@@ -796,7 +798,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		tfDescr.textProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n));
-			updateButtons(); 
+			updateButtons();
 		});
 		return tfDescr;
 	}
@@ -824,7 +826,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			items.clear();
 			items.addAll(overwrite);
 		}
-		
+
 		// Eventually sort
 		if (choice.getTypeReference()!=null) {
 			logger.log(Level.DEBUG, "Reduce gear to select from to "+choice.getTypeReference());
@@ -833,12 +835,16 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			case "MELEE":
 				items = items.stream().filter(i -> i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.WEAPON_CLOSE_COMBAT).collect(Collectors.toList());
 				break;
+			case "CHEMICALS":
+				items = Shadowrun6Core.getItemList(ItemTemplate.class);
+				items = items.stream().filter(i -> i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.CHEMICALS && i.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue()==ItemSubType.INDUSTRIAL_CHEMICALS).collect(Collectors.toList());
+				break;
 			default:
 				logger.log(Level.WARNING, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
 			}
 		}
 		choicebox.getItems().addAll(items);
-		
+
 		Collections.sort(choicebox.getItems(), new Comparator<ItemTemplate>() {
 			public int compare(ItemTemplate o1, ItemTemplate o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
@@ -846,12 +852,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
-			
-			updateButtons(); 
+
+			updateButtons();
 			showHelpFor(n);
 		 });
 		content.getChildren().add(choicebox);
-		
+
 		return choicebox;
 	}
 
@@ -866,7 +872,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 		});
 		List<CarriedItem<ItemTemplate>> items = ((Shadowrun6Character)ctrl.getModel()).getCarriedItems();
-		
+
 		// Eventually sort
 		if (choice.getTypeReference()!=null) {
 			logger.log(Level.DEBUG, "Reduce gear to select from to "+choice.getTypeReference());
@@ -880,7 +886,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 		}
 		choicebox.getItems().addAll(items);
-		
+
 		Collections.sort(choicebox.getItems(), new Comparator<CarriedItem<ItemTemplate>>() {
 			public int compare(CarriedItem<ItemTemplate> o1, CarriedItem<ItemTemplate> o2) {
 				return Collator.getInstance().compare(o1.getNameWithRating(), o2.getNameWithRating());
@@ -888,12 +894,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getUuid().toString()));
-			
-			updateButtons(); 
+
+			updateButtons();
 			showHelpFor(n);
 		 });
 		content.getChildren().add(choicebox);
-		
+
 		return choicebox;
 	}
 
@@ -913,7 +919,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				.toList();
 		// Eventually sort
 		choicebox.getItems().addAll(items);
-		
+
 		Collections.sort(choicebox.getItems(), new Comparator<ItemTemplate>() {
 			public int compare(ItemTemplate o1, ItemTemplate o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
@@ -921,12 +927,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
-			
-			updateButtons(); 
+
+			updateButtons();
 			showHelpFor(n);
 		 });
 		content.getChildren().add(choicebox);
-		
+
 		return choicebox;
 	}
 
@@ -945,7 +951,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbSub.getItems().addAll(
 					List.of(ASpell.Category.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
-					);			
+					);
 		} else {
 			cbSub.getItems().addAll(ASpell.Category.values());
 		}
@@ -956,10 +962,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.name()));
-			updateButtons(); 
+			updateButtons();
 		 });
 		content.getChildren().add(cbSub);
 		return cbSub;
 	}
-	
+
 }

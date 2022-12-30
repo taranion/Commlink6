@@ -62,7 +62,6 @@ public enum ItemSubType {
 //	AMMO_DMSO,
 //	AMMO_CANNONS,
 	GRENADES,
-	GRENADES_MINI,
 	ROCKETS,
 	MISSILES,
 	// ARMOR
@@ -171,7 +170,7 @@ public enum ItemSubType {
 	WALKER,
 	SPACECRAFT,
 	VEHICLE_ACCESSORY,
-	MOD_TRAILER,	
+	MOD_TRAILER,
 	// START: for backward compatability
 	MICRODRONES,
 	MINIDRONES,
@@ -214,11 +213,11 @@ public enum ItemSubType {
 	EXOTIC_METAGENETICS,
 	TRANSGENETICS,
 	MICRO_ENVIRONADAPT,
-	COMPLEMENTAL_GENETICS, 
+	COMPLEMENTAL_GENETICS,
 	// PACKS
 	COMPLETE_PACK
     ;
-	
+
 	//-------------------------------------------------------------------
 	public String getName() {
 		return Shadowrun6Core.getI18nResources().getString("itemsubtype."+this.name().toLowerCase());

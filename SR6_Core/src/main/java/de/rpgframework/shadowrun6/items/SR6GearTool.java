@@ -27,7 +27,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6GearTool extends GearTool {
-	
+
 	public final static Logger logger = System.getLogger(SR6GearTool.class.getPackageName());
 
 	public static CarriedItemProcessor[] SR6_PHASE1_STEPS = new CarriedItemProcessor[] {
@@ -44,7 +44,8 @@ public class SR6GearTool extends GearTool {
 //			new DetermineStandardEssenceStep(),
 			new DeriveCapacityAttributeStep(),
 			new HandleAugmentationGradeStep(),
-			new AddUpPricesStep()
+			new AddUpPricesStep(),
+			new AddChemicalPriceStep()
 	};
 
 	//-------------------------------------------------------------------
@@ -56,7 +57,7 @@ public class SR6GearTool extends GearTool {
 				ret.setValue(ret.getValue() + mod.getValue());
 			}
 		}
-		
+
 		return ret;
 	}
 
@@ -67,7 +68,7 @@ public class SR6GearTool extends GearTool {
 			ret[i] = base[i];
 		for (Modification tmp : mods) {
 			if (tmp instanceof ValueModification) {
-				ValueModification mod = (ValueModification)tmp;	
+				ValueModification mod = (ValueModification)tmp;
 				String[] keys = mod.getValueAsKeys();
 				if (keys.length==1) {
 					for (int i=0; i<base.length; i++) {
@@ -75,7 +76,7 @@ public class SR6GearTool extends GearTool {
 					}
 				} else {
 					for (int i=0; i<Math.min(base.length,keys.length); i++) {
-						if (!keys[i].isBlank()) { 
+						if (!keys[i].isBlank()) {
 							ret[i] += Integer.parseInt(keys[i].trim());
 						}
 					}
@@ -84,7 +85,7 @@ public class SR6GearTool extends GearTool {
 				logger.log(Level.ERROR, "########calculateModifiedARValue TODO: "+tmp);
 			}
 		}
-		
+
 		return ret;
 	}
 
@@ -94,14 +95,14 @@ public class SR6GearTool extends GearTool {
 		for (Modification tmp : mods) {
 			logger.log(Level.ERROR, "########calculateModifiedDamageValue: TODO: "+tmp);
 			if (tmp instanceof ValueModification) {
-				ValueModification mod = (ValueModification)tmp;	
+				ValueModification mod = (ValueModification)tmp;
 				ret.setValue( ret.getValue() + mod.getValue());
 			}
 		}
 		logger.log(Level.ERROR, "--->Base damage {0} plus {1} = {2}", base, mods, ret);
 		return ret;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public static <I extends IItemAttribute> OperationResult<List<Modification>> recalculate(String indent, Lifeform user, CarriedItem<?> item) {
 		logger.log(Level.INFO, "recalculate "+item.getKey());
@@ -114,7 +115,7 @@ public class SR6GearTool extends GearTool {
 			throw e;
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	public static int getRating(CarriedItem<ItemTemplate> item) {
 		Decision dec = item.getDecision(ItemTemplate.UUID_RATING);
@@ -129,7 +130,7 @@ public class SR6GearTool extends GearTool {
 			return null;
 //		if (item.isNoSpecialization())
 //			return null;
-		
+
 		ItemType typeI = item.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue();
 		ItemSubType sub = item.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
 		switch (typeI) {
@@ -142,7 +143,7 @@ public class SR6GearTool extends GearTool {
 			case VANS:
 			case BUS:
 			case TRACKED:
-			case SPECIAL_VEHICLES:			
+			case SPECIAL_VEHICLES:
 			case WALKER:
 				return pilot.getSpecialization("ground_craft") ;
 			case HOVERCRAFT:
@@ -155,7 +156,7 @@ public class SR6GearTool extends GearTool {
 			case ROTORCRAFT:
 			case LAV:
 			case LTAV:
-			case GRAV:			
+			case GRAV:
 			case SPACECRAFT:
 			case VTOL:
 				return pilot.getSpecialization("aircraft") ;
