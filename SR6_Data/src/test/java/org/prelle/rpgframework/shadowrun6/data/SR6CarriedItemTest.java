@@ -122,7 +122,7 @@ public class SR6CarriedItemTest {
 		assertNotNull(temp);
 
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
-		Decision decision = new Decision(UUID.fromString("adeb159c-6ca3-407b-8641-c76f9b29a49c"), "9");
+		Decision decision = new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "9");
 		item.setDecisions(List.of(decision));
 		OperationResult<List<Modification>> modR = SR6GearTool.recalculate("", null, item);
 		assertTrue(modR.wasSuccessful());
@@ -151,7 +151,7 @@ public class SR6CarriedItemTest {
 
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.IMPLANTED);
 		Decision dec1 = new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD");
-		Decision dec2 = new Decision(UUID.fromString("66b37416-6996-48b8-87f0-17b28dc44df1"), "3");
+		Decision dec2 = new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "3");
 		item.setDecisions(List.of(dec1, dec2));
 		OperationResult<List<Modification>> modR = SR6GearTool.recalculate("", null, item);
 		assertTrue(modR.wasSuccessful());
