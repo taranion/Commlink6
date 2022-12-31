@@ -86,8 +86,10 @@ public class SR6WizardPageAdeptPowers extends WizardPageAdeptPowers {
 		IShadowrunCharacterGenerator<?, ?, ?, ?> real = (charGen instanceof GeneratorWrapper)?((GeneratorWrapper)charGen).getWrapped():(IShadowrunCharacterGenerator<?, ?, ?, ?>) charGen;
 		IAdeptPowerController skillCtrl = charGen.getAdeptPowerController();
 		if (skillCtrl instanceof SR6PriorityAdeptPowerGenerator) {
+			hdConvert.setText(ResourceI18N.get(WizardPageAdeptPowers.RES, "page.adeptpowers.convert"));
 			backHeaderCP.setVisible(false);
 		} else if (skillCtrl instanceof SR6PointBuyAdeptPowerGenerator) {
+			hdConvert.setText(ResourceI18N.get(RES, "page.adeptpowers.convertCP"));
 			backHeaderCP.setValue( ((PointBuyCharacterGenerator)real).getSettings().characterPoints );
 			backHeaderCP.setVisible(true);
 			lbValue.setText(String.valueOf(((PointBuyCharacterGenerator)real).getSettings().boughtPP  ));
