@@ -24,6 +24,7 @@ import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.SkinProperties;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
@@ -53,7 +54,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 			.getBundle(ShadowrunAttributeTable.class.getName());
 
 	private ToggleSwitch tsExpertMode;
-	private Label lbPoints, lbKarma;
+	private Label lbPoints1, lbPoints2;
 	private GridPane grid;
 	private VBox layout;
 
@@ -211,11 +212,11 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 	private void initComponents() {
 		tsExpertMode = new ToggleSwitch("Expert");
 
-		lbPoints = new Label("?");
-		lbKarma  = new Label("?");
+		lbPoints1 = new Label("?");
+		lbPoints2 = new Label("?");
 
-		lbPoints.setStyle("-fx-text-fill: -fx-text-base-color");
-		lbKarma .setStyle("-fx-text-fill: -fx-text-base-color");
+		lbPoints1.setStyle("-fx-text-fill: -fx-text-base-color");
+		lbPoints2.setStyle("-fx-text-fill: -fx-text-base-color");
 
 		grid = new GridPane();
 //		grid.setVgap(5);
@@ -292,12 +293,12 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		Label hdAttrib = new Label(ResourceI18N.get(RES, "head.attrib")+":");
-		Label hdKarma  = new Label(ResourceI18N.get(RES, "head.karma")+":");
+		Label hdPoints1 = new Label(ResourceI18N.get(RES, "head.adjust")+":");
+		Label hdPoints2 = new Label(ResourceI18N.get(RES, "head.attrib")+":");
 
-		HBox line = new HBox(5, tsExpertMode, hdAttrib, lbPoints, hdKarma, lbKarma);
-		HBox.setMargin(hdAttrib, new Insets(0,0,0,10));
-		HBox.setMargin(hdKarma, new Insets(0,0,0,10));
+		HBox line = new HBox(5, tsExpertMode, hdPoints1, lbPoints1, hdPoints2, lbPoints2);
+		HBox.setMargin(hdPoints1, new Insets(0,0,0,10));
+		HBox.setMargin(hdPoints2, new Insets(0,0,0,10));
 
 		layout = new VBox(5, line, grid);
 		getChildren().add(layout);
@@ -566,11 +567,13 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		ShadowrunCharacter model = (ShadowrunCharacter) getSkinnable().getController().getModel();
 		SR6PointBuySettings settings = (SR6PointBuySettings) model.getCharGenSettings(SR6PointBuySettings.class);
 
-		lbPoints.setText(settings.characterPoints+"/"+getController().getPointsLeft()+"/"+getController().getPointsLeft2());
-		lbPoints.setTooltip(new Tooltip(ResourceI18N.format(RES, "sr6pointbuy.tooltip", settings.characterPoints,
+		String label1 = String.format("%d+%d /12", getController().getPointsLeft(), ((SR6PointBuyAttributeGenerator)getController()).getCreatedSpecial());
+		String label2 = String.format("%d+%d /20", getController().getPointsLeft2(), ((SR6PointBuyAttributeGenerator)getController()).getCreatedAttrib());
+		lbPoints1.setText(label1);
+		lbPoints1.setTooltip(new Tooltip(ResourceI18N.format(RES, "sr6pointbuy.tooltip", settings.characterPoints,
 				getController().getPointsLeft(), getController().getPointsLeft2())
 				));
-		lbKarma .setText(String.valueOf(getController().getPointsLeft3()));
+		lbPoints2.setText(label2);
 
 		lblRec.entrySet().forEach(e -> {
 			if (getController()==null) return;

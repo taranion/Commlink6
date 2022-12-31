@@ -40,7 +40,6 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 		logger.log(Level.DEBUG, "Created with charGen="+charGen);
 		if (getContent()==null) {
 			logger.log(Level.ERROR, "No content");
-			System.err.println("SR6WizardPageAttributes<init>: No content");
 		}
 
 	}
@@ -58,7 +57,7 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 		HBox.setHgrow(buf, Priority.ALWAYS);
 		//backHeader.setMaxWidth(Double.MAX_VALUE);
 		HBox.setMargin(box, new Insets(0,0,0,10));
-		HBox.setMargin(backHeader.getChildren().get(2), new Insets(0,10,0,0));
+
 		super.setBackHeader(backHeader);
 	}
 
