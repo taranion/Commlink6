@@ -30,7 +30,7 @@ public class SR6PointBuyComplexFormGenerator extends CommonSR6ComplexFormGenerat
 	protected SR6PointBuyComplexFormGenerator(SR6CharacterController parent) {
 		super(parent);
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
@@ -40,17 +40,17 @@ public class SR6PointBuyComplexFormGenerator extends CommonSR6ComplexFormGenerat
 		Possible poss = super.canBeSelected(value, decisions);
 		if (!poss.get())
 			return poss;
-		
+
 		if (free>0)
 			return Possible.TRUE;
-		
+
 		// Buy no more than RESONANCE*2
 		int max = getModel().getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue()*2;
 		int cnt = getModel().getComplexForms().size();
-		if ( cnt > max) {
+		if ( cnt >= max) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MAX_COMPLEX_FORMS, max);
 		}
-		
+
 		// No more free complex forms. Evtl. buy with karma
 		if (getModel().getKarmaFree()>=5)
 			return Possible.TRUE;
@@ -69,37 +69,33 @@ public class SR6PointBuyComplexFormGenerator extends CommonSR6ComplexFormGenerat
 		try {
 			todos.clear();
 			free = 0;
-			
+
 			Shadowrun6Character model = getModel();
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {				
-				SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
-				free = settings.perAttrib.get(ShadowrunAttribute.RESONANCE).base;
+			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+				free = model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue()*2;
 				logger.log(Level.INFO, "Have {0} free complex forms", free);
 			}
 			maxFree = free;
-			
-			int byKarma = 0;
+
 			for (ComplexFormValue val : model.getComplexForms()) {
-				if (free>0)
-					free--;
-				else {
-					byKarma++;
+				free--;
+
+				if (settings.characterPoints>=2) {
+					settings.characterPoints-=2;
+					logger.log(Level.INFO, "Pay complex form ''{0}'' with 2 CP", val.getModifyable().getId());
+				} else {
 					model.setKarmaFree( model.getKarmaFree() -5 );
 					logger.log(Level.INFO, "Pay complex form ''{0}'' with 5 Karma", val.getModifyable().getId());
 				}
 			}
-			
+
 			// Summary and eventually warn
 			logger.log(Level.INFO, "Have {0} remaining free complex forms", free);
-			if (free>0) {
-				todos.add(new ToDoElement(Severity.WARNING, "Unused complex forms"));
-			} else if (byKarma>0) {
-				boolean karmaAllowed =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
-				if (!karmaAllowed) {
-					todos.add(new ToDoElement(Severity.STOPPER, "Too many complex forms bought"));
-				}
+			if (free<0) {
+				todos.add(new ToDoElement(Severity.STOPPER, "Too many complex forms bought"));
 			}
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");

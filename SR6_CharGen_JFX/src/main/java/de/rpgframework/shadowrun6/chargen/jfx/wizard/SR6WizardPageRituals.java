@@ -39,9 +39,7 @@ public class SR6WizardPageRituals extends WizardPageRituals {
 	//-------------------------------------------------------------------
 	@Override
 	protected void initBackHeader() {
-		backHeaderKarma = new NumberUnitBackHeader(ResourceI18N.get(RES, "label.karma"));
-		backHeaderKarma.setValue(charGen.getModel().getKarmaFree());
-		HBox.setMargin(backHeaderKarma, new Insets(0,10,0,10));
+		super.initBackHeader();
 		backHeaderCP = new NumberUnitBackHeader(ResourceI18N.get(RES, "label.pointbuy.cp"));
 		backHeaderCP.setVisible(true);
 		HBox.setMargin(backHeaderCP, new Insets(0,10,0,10));
