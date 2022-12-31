@@ -87,18 +87,16 @@ public abstract class CommonRitualController extends ControllerImpl<Ritual> impl
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return new OperationResult<>(poss);
 			}
-			
+
 			RitualValue toAdd = new RitualValue(value);
 			for (Decision dec : decisions) {
 				toAdd.addDecision(dec);
 			}
-			
+
 			getModel().addRitual(toAdd);
 			logger.log(Level.INFO, "Added ritual {0}", toAdd);
-			
-			parent.runProcessors();
-			
-			return new OperationResult<>(poss);
+
+			return new OperationResult<>(toAdd);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1})", value, Arrays.toString(decisions));
 		}
@@ -117,12 +115,12 @@ public abstract class CommonRitualController extends ControllerImpl<Ritual> impl
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return false;
 			}
-			
+
 			getModel().removeRitual(value);
 			logger.log(Level.INFO, "Removed ritual {0}", value);
-			
+
 			parent.runProcessors();
-			
+
 			return true;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE deselect({0})", value);

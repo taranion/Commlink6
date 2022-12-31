@@ -52,20 +52,17 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 */
 	@Override
 	public int getFreeSpells() {
-		return getMaxFree() - parent.getModel().getSpells().size();
+		return getMaxFree() - parent.getModel().getSpells().size() - parent.getModel().getRituals().size();
 	}
 
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.ISpellGenerator#getMaxFree()
+	 */
+	@Override
 	public int getMaxFree() {
-//		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
-//		int magic = parent.getModel().getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
-//		if (parent.getModel().getMagicOrResonanceType().paysPowers()) {
-//			magic -= settings.getMagicForPP();
-//		}
-//		return magic*2;
 		return maxSpells;
 	}
-
 
 	//-------------------------------------------------------------------
 	/**
@@ -84,7 +81,6 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<SpellValue<SR6Spell>> getSelected() {
 		List<SpellValue<SR6Spell>> ret = new ArrayList<>();
@@ -264,6 +260,7 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 			logger.log(Level.INFO, "May buy up to {0} spells", maxSpells);
 
 			for (SpellValue<? extends ASpell> val : model.getSpells()) {
+
 				Boolean withCP = settings.perSpellPayedWithCP.get(val);
 				if (withCP!=null && withCP) {
 					settings.characterPoints-=2;
