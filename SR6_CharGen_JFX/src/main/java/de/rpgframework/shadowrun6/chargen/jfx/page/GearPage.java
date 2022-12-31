@@ -35,16 +35,16 @@ import javafx.scene.control.ScrollPane;
 public class GearPage extends Page {
 
 	private final static Logger logger = System.getLogger(GearPage.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private GearSection secElectro;
 	private GearSection secOther;
 	private GearSection secAlchemical;
-	
+
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
-	
+
 	private SR6CharacterController ctrl;
 
 	//-------------------------------------------------------------------
@@ -54,17 +54,17 @@ public class GearPage extends Page {
 		initLayout();
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initOther();
 		initElectro();
 		initAlchemical();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initElectro() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS); 
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS);
 		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS) {
 			public boolean test(CarriedItem<ItemTemplate> item) {
 				boolean isElectronic = super.test(item);
@@ -80,7 +80,7 @@ public class GearPage extends Page {
 					return true;
 				}
 			}
-		}; 
+		};
 		secElectro = new GearSection(
 				ResourceI18N.get(RES, "page.gear.section.electro"),selectFilter, showFilter
 				);
@@ -92,11 +92,11 @@ public class GearPage extends Page {
 //		FlexGridPane.setMaxWidth(secElectro, 8);
 //		FlexGridPane.setMaxHeight(secElectro, 9);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initOther() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.BIOLOGY); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.BIOLOGY); 
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.BIOLOGY, ItemType.PACK);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.BIOLOGY, ItemType.PACK);
 		secOther = new GearSection(
 				ResourceI18N.get(RES, "page.gear.section.other"), selectFilter, showFilter
 				);
@@ -108,11 +108,11 @@ public class GearPage extends Page {
 		FlexGridPane.setMaxWidth(secOther, 5);
 		FlexGridPane.setMaxHeight(secOther, 9);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initAlchemical() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.MAGICAL); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.MAGICAL); 
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.MAGICAL);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.MAGICAL);
 		secAlchemical = new GearSection(
 				ResourceI18N.get(RES, "page.gear.section.magical"), selectFilter, showFilter
 				);
@@ -122,7 +122,7 @@ public class GearPage extends Page {
 		FlexGridPane.setMediumWidth(secAlchemical, 5);
 		FlexGridPane.setMediumHeight(secAlchemical, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
@@ -130,12 +130,12 @@ public class GearPage extends Page {
 		flex.getChildren().addAll(secOther, secElectro, secAlchemical);
 		ScrollPane scroll = new ScrollPane(flex);
 		scroll.setFitToWidth(true);
-		
+
 		layout = new OptionalNodePane(scroll, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		secOther.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
@@ -175,20 +175,20 @@ public class GearPage extends Page {
 //			layout.setTitle(n.getName());
 //		}
 //	}
-	
+
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
-		
+
 		this.ctrl = ctrl;
 		secElectro.updateController(ctrl);
 		secOther.updateController(ctrl);
 		secAlchemical.updateController(ctrl);
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secElectro.refresh();
