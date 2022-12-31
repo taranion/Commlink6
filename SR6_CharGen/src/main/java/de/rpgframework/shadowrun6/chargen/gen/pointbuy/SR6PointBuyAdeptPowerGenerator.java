@@ -97,15 +97,26 @@ public class SR6PointBuyAdeptPowerGenerator extends SR6AdeptPowerController {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
 		try {
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
+			settings.ppCP=0;
+			settings.ppKarma=0;
 			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
 
 			getModel().getAttribute(ShadowrunAttribute.POWER_POINTS).setDistributed(settings.boughtPP);
 			freePoints = settings.boughtPP;
 			MagicOrResonanceType type = getModel().getMagicOrResonanceType();
 			if (type!=null) {
-				int cp = (type.paysPowers()?8:4) * settings.boughtPP;
-				logger.log(Level.INFO, "Spend {0} CP for {1} Power points", cp, settings.boughtPP);
+				int perPP = (type.paysPowers()?8:4);
+				int max = settings.characterPoints / perPP;
+				int cp = Math.min(max, settings.boughtPP);
+				int karma = settings.boughtPP - cp;
+
+				logger.log(Level.INFO, "Spend {0} CP for {1} Power points", cp*perPP, cp);
 				settings.characterPoints -= cp;
+				settings.ppCP++;
+
+				logger.log(Level.INFO, "Spend {0} Karma for {1} Power points", karma*5, karma);
+				settings.characterPoints -= cp;
+				settings.ppKarma++;
 			}
 
 			// Distribute

@@ -247,6 +247,8 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 			maxSpells = 0;
 
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
+			settings.spellsCP=0;
+			settings.spellsKarma=0;
 			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {
 				logger.log(Level.INFO, "Magic = "+model.getAttribute(ShadowrunAttribute.MAGIC));
 				logger.log(Level.INFO, " mods = "+model.getAttribute(ShadowrunAttribute.MAGIC).getModifications());
@@ -264,9 +266,11 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 				Boolean withCP = settings.perSpellPayedWithCP.get(val);
 				if (withCP!=null && withCP) {
 					settings.characterPoints-=2;
+					settings.spellsCP++;
 					logger.log(Level.INFO, "Pay spell ''{0}'' with 2 CP", val.getModifyable().getId());
 				} else {
 					model.setKarmaFree( model.getKarmaFree() -5 );
+					settings.spellsKarma++;
 					logger.log(Level.INFO, "Pay spell ''{0}'' with 5 Karma", val.getModifyable().getId());
 				}
 			}

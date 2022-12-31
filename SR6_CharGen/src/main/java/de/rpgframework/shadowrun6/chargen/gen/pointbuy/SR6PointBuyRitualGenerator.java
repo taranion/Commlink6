@@ -205,9 +205,11 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 				logger.log(Level.INFO, "perRitualPayedWithCP = "+settings.perRitualPayedWithCP);
 				if (payedWithCP!=null && payedWithCP) {
 					settings.characterPoints -= 2;
+					settings.spellsCP++;
 					logger.log(Level.INFO, "Pay ritual ''{0}'' with 2 CP", val.getModifyable().getId());
 				} else {
 					model.setKarmaFree( model.getKarmaFree() -5 );
+					settings.spellsKarma++;
 					logger.log(Level.INFO, "Pay ritual ''{0}'' with 5 Karma", val.getModifyable().getId());
 				}
 			}

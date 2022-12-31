@@ -16,7 +16,6 @@ import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.IComplexFormGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6ComplexFormGenerator;
 
@@ -72,6 +71,8 @@ public class SR6PointBuyComplexFormGenerator extends CommonSR6ComplexFormGenerat
 
 			Shadowrun6Character model = getModel();
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
+			settings.cformsCP=0;
+			settings.cformsKarma=0;
 			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
 				free = model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue()*2;
 				logger.log(Level.INFO, "Have {0} free complex forms", free);
@@ -84,9 +85,11 @@ public class SR6PointBuyComplexFormGenerator extends CommonSR6ComplexFormGenerat
 				if (settings.characterPoints>=2) {
 					settings.characterPoints-=2;
 					logger.log(Level.INFO, "Pay complex form ''{0}'' with 2 CP", val.getModifyable().getId());
+					settings.cformsCP++;
 				} else {
 					model.setKarmaFree( model.getKarmaFree() -5 );
 					logger.log(Level.INFO, "Pay complex form ''{0}'' with 5 Karma", val.getModifyable().getId());
+					settings.cformsKarma++;
 				}
 			}
 
