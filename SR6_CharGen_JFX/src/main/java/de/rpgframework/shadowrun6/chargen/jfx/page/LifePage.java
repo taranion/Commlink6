@@ -37,20 +37,20 @@ import javafx.scene.control.Label;
 public class LifePage extends Page {
 
 	private final static Logger logger = System.getLogger(LifePage.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private transient SR6CharacterController ctrl;
-	
+
 	private SINSection secSINs;
 	private LifestyleSection<SR6Lifestyle> secLifestyles;
 	private ContactSection secContacts;
-	
+
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
-	
+
 	private GenericDescriptionVBox descBox ;
-	
+
 	/** Shall extended contact rules from the 6WC be used? */
 	private CheckBox cbExtended;
 
@@ -61,16 +61,17 @@ public class LifePage extends Page {
 		initLayout();
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initSINs();
 		initContacts();
 		initLifestyles();
-		
-		descBox = new GenericDescriptionVBox((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+
+		descBox = new GenericDescriptionVBox(Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initSINs() {
 		secSINs = new SINSection(ResourceI18N.get(RES, "page.life.section.sins"));
@@ -80,7 +81,7 @@ public class LifePage extends Page {
 		FlexGridPane.setMediumWidth(secSINs, 5);
 		FlexGridPane.setMediumHeight(secSINs, 7);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initContacts() {
 		secContacts = new ContactSection(ResourceI18N.get(RES, "page.life.section.contacts"));
@@ -89,11 +90,11 @@ public class LifePage extends Page {
 		FlexGridPane.setMinHeight(secContacts, 6);
 		FlexGridPane.setMediumWidth(secContacts, 5);
 		FlexGridPane.setMediumHeight(secContacts, 9);
-		
+
 		cbExtended = new CheckBox(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT.getName(Locale.getDefault()));
 		secContacts.setSecondaryContent(cbExtended);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLifestyles() {
 		secLifestyles = new LifestyleSection<SR6Lifestyle>(ResourceI18N.get(RES, "page.life.section.lifestyles"));
@@ -103,18 +104,18 @@ public class LifePage extends Page {
 		FlexGridPane.setMinHeight(secLifestyles, 6);
 		//FlexGridPane.setMediumWidth(secLifestyles, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
 		flex.getChildren().addAll(secContacts, secSINs, secLifestyles);
-		
+
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		secSINs.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
@@ -129,7 +130,8 @@ public class LifePage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new GenericDescriptionVBox( Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()), n.getModifyable()));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
@@ -141,7 +143,10 @@ public class LifePage extends Page {
 			layout.setOptional(null);
 		} else {
 			ContactType t = n.getType();
-			GenericDescriptionVBox desc = new GenericDescriptionVBox( null);
+			GenericDescriptionVBox desc = new GenericDescriptionVBox(
+					Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault())
+					);
 			desc.setData(t.getName(Locale.getDefault()), null, t.getDescription(Locale.getDefault()));
 			layout.setOptional( desc);
 			layout.setTitle(t.getName(Locale.getDefault()));
@@ -155,24 +160,25 @@ public class LifePage extends Page {
 			layout.setOptional(null);
 		} else {
 			FakeRating rating = n.getQuality();
-			GenericDescriptionVBox desc = new GenericDescriptionVBox( null);
+			GenericDescriptionVBox desc = new GenericDescriptionVBox( Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 			desc.setData(rating.name(), null, n.getDescription());
 			layout.setOptional( desc);
 			layout.setTitle(rating.name());
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		this.ctrl = ctrl;
-		
+
 		secContacts.updateController(ctrl);
 		secSINs.updateController(ctrl);
 		secLifestyles.updateController(ctrl);
-		
+
 		if (ctrl.getClass().getSimpleName().contains("Generator")) {
 			secContacts.setMode(Mode.BACKDROP);
 		} else {
@@ -181,7 +187,7 @@ public class LifePage extends Page {
 
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secContacts.refresh();

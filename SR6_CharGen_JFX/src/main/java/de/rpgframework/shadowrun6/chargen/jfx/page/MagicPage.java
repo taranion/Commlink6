@@ -14,7 +14,6 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.FocusValue;
@@ -43,18 +42,18 @@ import javafx.scene.control.Label;
 public class MagicPage extends Page {
 
 	private final static Logger logger = System.getLogger(MagicPage.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private SR6CharacterController control;
-	
+
 	private AdeptPowerSection secAdeptPowers;
 	private SpellSection<SR6Spell> secSpells;
 	private MetamagicOrEchoSection secMeta;
 	private RitualSection secRituals;
 	private FocusSection secFoci;
 	private CombatSection secCombat;
-	
+
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
 
@@ -65,7 +64,7 @@ public class MagicPage extends Page {
 		initLayout();
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initPowers();
@@ -75,7 +74,7 @@ public class MagicPage extends Page {
 		initFoci();
 		initCombat();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initPowers() {
 		secAdeptPowers = new AdeptPowerSection(ResourceI18N.get(RES, "page.magic.section.adeptpowers"));
@@ -85,12 +84,13 @@ public class MagicPage extends Page {
 		FlexGridPane.setMediumWidth(secAdeptPowers, 5);
 		FlexGridPane.setMediumHeight(secAdeptPowers, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initSpells() {
 		secSpells = new SpellSection<SR6Spell>(
 				ResourceI18N.get(RES, "page.magic.section.spells"),
-				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault())
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault())
 				);
 		secSpells.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secSpells, 4);
@@ -98,12 +98,13 @@ public class MagicPage extends Page {
 		FlexGridPane.setMediumWidth(secSpells, 5);
 		FlexGridPane.setMediumHeight(secSpells, 8);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initMetamagic() {
 		secMeta = new MetamagicOrEchoSection(
 				ResourceI18N.get(RES, "page.magic.section.metamagic"),
-				r -> Shadowrun6Tools.getRequirementString((Requirement)r, Locale.getDefault()), 
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
 				MetamagicOrEcho.Type.METAMAGIC
 				);
 		secMeta.setMaxHeight(Double.MAX_VALUE);
@@ -112,12 +113,13 @@ public class MagicPage extends Page {
 		FlexGridPane.setMediumWidth(secMeta, 5);
 		FlexGridPane.setMediumHeight(secMeta, 8);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initRituals() {
 		secRituals = new RitualSection(
 				ResourceI18N.get(RES, "page.magic.section.rituals"),
-				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault())
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault())
 				);
 		secRituals.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secRituals, 4);
@@ -125,7 +127,7 @@ public class MagicPage extends Page {
 		FlexGridPane.setMediumWidth(secRituals, 5);
 		FlexGridPane.setMediumHeight(secRituals, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initCombat() {
 		secCombat = new CombatSection(Type.ASTRAL);
@@ -133,10 +135,10 @@ public class MagicPage extends Page {
 		FlexGridPane.setMinHeight(secCombat, 6);
 		FlexGridPane.setMediumWidth(secCombat, 8);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initFoci() {
-		secFoci = new FocusSection() {
+		secFoci = new FocusSection(Shadowrun6Tools.requirementResolver(Locale.getDefault()), Shadowrun6Tools.modificationResolver(Locale.getDefault())) {
 			@Override
 			protected Decision[] requestUserDecisions(Focus value) {
 				logger.log(Level.DEBUG, "Present choice dialog");
@@ -150,19 +152,19 @@ public class MagicPage extends Page {
 		FlexGridPane.setMediumWidth(secFoci, 5);
 		FlexGridPane.setMediumHeight(secFoci, 8);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		
+
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
 		flex.getChildren().addAll(secAdeptPowers, secSpells, secMeta, secRituals, secFoci);
-		
+
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		secSpells.showHelpForProperty().addListener( (ov,o,n) -> {
@@ -186,18 +188,20 @@ public class MagicPage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new GenericDescriptionVBox(
+					Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()), n.getModifyable()));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		this.control = ctrl;
-		
+
 		secAdeptPowers.updateController(ctrl);
 		secSpells.updateController(ctrl);
 		secMeta.updateController(ctrl);
@@ -205,7 +209,7 @@ public class MagicPage extends Page {
 		secFoci.updateController(ctrl);
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secAdeptPowers.refresh();

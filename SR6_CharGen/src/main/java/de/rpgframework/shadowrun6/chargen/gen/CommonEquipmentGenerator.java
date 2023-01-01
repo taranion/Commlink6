@@ -41,7 +41,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	private int conversionRate = 2000;
-	
+
 	//-------------------------------------------------------------------
 	public CommonEquipmentGenerator(SR6CharacterController parent) {
 		super(parent);
@@ -89,13 +89,13 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				logger.log(Level.ERROR, "Trying to select {0} but decisions are missing: {1}", value, poss.toString());
 				return new OperationResult<>(poss);
 			}
-			
+
 			OperationResult<CarriedItem<ItemTemplate>> ret = SR6GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
 			logger.log(Level.INFO, "Add {0} to model", item.getKey());
 			getModel().addCarriedItem(item);
-			
+
 			parent.runProcessors();
 			return new OperationResult<CarriedItem<ItemTemplate>>(item);
 		} finally {
@@ -116,7 +116,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			model.setNuyen(0);
 			conversionRate = 2000;
 			todos.clear();
-			
+
 			List<Modification> unprocessed = new ArrayList<>();
 			for (Modification tmp : previous) {
 				if (tmp instanceof ValueModification) {
@@ -146,7 +146,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 					unprocessed.add(tmp);
 				}
 			}
-			
+
 			CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
 			if (sett.getKarmaToNuyen()>0) {
 				int rate = 2000;
@@ -155,20 +155,20 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				model.setNuyen( model.getNuyen() + add);
 				model.setKarmaFree( model.getKarmaFree() - sett.getKarmaToNuyen());
 			}
-			
+
 			logger.log(Level.INFO, "{0} Nuyen available", model.getNuyen());
-			
-			
-			
+
+
+
 			/* Expand PACKs */
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
 				if (getItemType(tmp)==ItemType.PACK) {
 					logger.log(Level.WARNING, "ToDo: handle PACK "+tmp);
 				}
 			}
-			
-			
-			
+
+
+
 			/*
 			 * Walk through all items and pay for them
 			 */
@@ -184,7 +184,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 					logger.log(Level.INFO, "Pay {0} for {1}   (before {2})", cost, tmp.getKey(), nuyen);
 					nuyen -= cost;
 				}
-				
+
 				// If it is an weapon, check if ammunition is present, warn otherwise
 				if (getItemType(tmp)==ItemType.WEAPON_FIREARMS) {
 					if (Shadowrun6Tools.getAmmunitionsFor(model, tmp).isEmpty()) {
@@ -194,7 +194,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			}
 			model.setNuyen(nuyen);
 			logger.log(Level.INFO, "Nuyen remaining: {0}", model.getNuyen());
-			
+
 			return unprocessed;
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE");
@@ -239,11 +239,11 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			logger.log(Level.ERROR, "Trying to increase Karma -> Nuyen conversion although not allowed");
 			return false;
 		}
-		
+
 		CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
 		sett.setKarmaToNuyen(sett.getKarmaToNuyen()+1);
 		logger.log(Level.INFO, "increased Karma converted to Nuyen to {0}", sett.getKarmaToNuyen());
-		
+
 		parent.runProcessors();
 		return true;
 	}
@@ -268,11 +268,11 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			logger.log(Level.ERROR, "Trying to decrease Karma -> Nuyen conversion although not allowed");
 			return false;
 		}
-		
+
 		CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
 		sett.setKarmaToNuyen(sett.getKarmaToNuyen()-1);
 		logger.log(Level.INFO, "decreased Karma converted to Nuyen to {0}", sett.getKarmaToNuyen());
-		
+
 		parent.runProcessors();
 		return true;
 	}
@@ -283,8 +283,9 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	 */
 	@Override
 	public boolean canChangeCount(CarriedItem<ItemTemplate> item, int newCount) {
-		// TODO Auto-generated method stub
-		return false;
+//		if (!item.getResolved().isCountable()) return false;
+
+		return true;
 	}
 
 }

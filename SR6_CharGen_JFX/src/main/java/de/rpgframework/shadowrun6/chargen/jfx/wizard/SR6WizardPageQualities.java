@@ -2,16 +2,13 @@ package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Quality.QualityType;
-import de.rpgframework.shadowrun.chargen.gen.QualityGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageQualities;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
@@ -27,7 +24,7 @@ import javafx.scene.layout.HBox;
  *
  */
 public class SR6WizardPageQualities extends AWizardPageQualities {
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
 
 	private Label lbNumber;
@@ -36,7 +33,7 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 	public SR6WizardPageQualities(Wizard wizard, GeneratorWrapper charGen) {
 		super(wizard, charGen);
 	}
-	
+
 	//-------------------------------------------------------------------
 	protected void initComponents() {
 		super.initComponents();
@@ -46,11 +43,12 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getQualityController()));
 		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
-		
-		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
-		bxDescription = new GenericDescriptionVBox(resolver);
+
+		bxDescription = new GenericDescriptionVBox(
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 	}
-	
+
 	//-------------------------------------------------------------------
 	protected void initLayout() {
 		super.initLayout();
@@ -65,5 +63,5 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 		super.refresh();
 		lbNumber.setText(String.valueOf( ((CommonQualityGenerator)charGen.getQualityController()).getNumberOfQualities()));
 	}
-	
+
 }

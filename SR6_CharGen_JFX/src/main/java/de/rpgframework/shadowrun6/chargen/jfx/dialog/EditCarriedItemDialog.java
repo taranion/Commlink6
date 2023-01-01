@@ -24,8 +24,8 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemEnhancementValue;
-import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun.ShadowrunRules;
+import de.rpgframework.shadowrun.chargen.jfx.listcell.ItemEnhancementValueListCell;
 import de.rpgframework.shadowrun.chargen.jfx.pages.ACarriedItemPage;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -219,13 +219,15 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case WEAPON_FIREARMS:
 		case AMMUNITION: // to enable modifications for grenades
 		case WEAPON_SPECIAL:
+			logger.log(Level.WARNING, "Show modifications for "+type);
 			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
 			view.getList(2).setAll(selectedItem.getEnhancements());
 			view.setCellFactory(2, new Callback<ListView<Object>, ListCell<Object>>() {
 
 				@Override
 				public ListCell<Object> call(ListView<Object> lv) {
-					ListCell<?> cell = new ComplexDataItemValueListCell<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>>( () -> control.getEquipmentController().getItemEnhancementController(selectedItem));
+					ListCell<?> cell =  new ItemEnhancementValueListCell<SR6ItemEnhancement>(control, selectedItem, (c) -> refresh());
+//					ListCell<?> cell = new ComplexDataItemValueListCell<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>>( () -> control.getEquipmentController().getItemEnhancementController(selectedItem));
 					return (ListCell<Object>) cell;
 				}
 			});

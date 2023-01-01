@@ -7,13 +7,10 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 import org.prelle.javafx.CloseType;
-import org.prelle.javafx.OptionalNodePane;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.jfx.ComplexDataItemControllerNode;
-import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.Selector;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -29,14 +26,14 @@ import javafx.scene.control.CheckBox;
  *
  */
 public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<ItemTemplate>> {
-	
+
 	private final static Logger logger = System.getLogger(ItemTemplateSelector.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(ItemTemplateSelector.class.getPackageName()+".Selectors");
 
 	protected SR6CharacterController charGen;
 	protected CarryMode carry;
-	
+
 	// Shall character requirements be ignored
 	private CheckBox cbIgnoreRequirements;
 
@@ -44,7 +41,8 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 	public ItemTemplateSelector(SR6CharacterController charGen, CarryMode mode, Predicate<ItemTemplate> templateFilter, CarriedItem<ItemTemplate> container, ItemHook hook) {
 		super(charGen.getEquipmentController(),
 				templateFilter,
-				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
 				new FilterItemTemplate(mode));
 		logger.log(Level.INFO, "create ItemTemplateSelector (container={0}, hook={1}, carry={2})", container, hook, mode);
 		this.carry = mode;
@@ -54,9 +52,9 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 		} else {
 			if (mode==CarryMode.EMBEDDED)
 				throw new NullPointerException("CarryMode is EMBEDDED, but container is NULL");
-			listPossible.setCellFactory( lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController(), carry));	
+			listPossible.setCellFactory( lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController(), carry));
 		}
-		
+
 		// Button control
     	listPossible.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
     		logger.log(Level.DEBUG, "Selected {0}", n);
@@ -72,9 +70,9 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
     		}
     	});
 
-		
+
 		genericDescr= new ItemTemplatePane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),carry);
-		
+
 		logger.log(Level.WARNING, "Show filter for item types");
 	}
 

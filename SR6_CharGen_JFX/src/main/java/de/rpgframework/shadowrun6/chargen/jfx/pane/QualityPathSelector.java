@@ -1,13 +1,13 @@
 package de.rpgframework.shadowrun6.chargen.jfx.pane;
 
-import java.util.function.Function;
+import java.util.Locale;
 
 import org.prelle.javafx.ResponsiveControl;
 
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.Selector;
 import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.QualityPathValue;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.Pane;
@@ -17,19 +17,19 @@ import javafx.scene.layout.Pane;
  *
  */
 public class QualityPathSelector extends Selector<QualityPath, QualityPathValue> implements ResponsiveControl {
-	
+
 	private QualityPathDescriptionPane descr;
-	
+
 	//-------------------------------------------------------------------
-	public QualityPathSelector(IQualityPathController ctrl, Function<Requirement,String> resolver) {
-		super(ctrl, resolver, null);
+	public QualityPathSelector(IQualityPathController ctrl) {
+		super(ctrl, Shadowrun6Tools.requirementResolver(Locale.getDefault()), Shadowrun6Tools.modificationResolver(Locale.getDefault()), null);
 		if (descr==null)
 			descr = new QualityPathDescriptionPane();
 		listPossible.setCellFactory(lv -> new ListCell<QualityPath>() {
 			public void updateItem(QualityPath item, boolean empty) {
 				super.updateItem(item, empty);
 				if (empty) {
-					setText(null);					
+					setText(null);
 				} else {
 					setText(item.getName());
 				}
