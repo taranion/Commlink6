@@ -37,17 +37,17 @@ import javafx.scene.text.TextFlow;
 public class QualityPathPage extends Page {
 
 	private final static Logger logger = System.getLogger(QualityPathPage.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private SR6CharacterController control;
 	private QualityPathValue selected;
-		
+
 	private AutoBox flex;
 	private TextFlow pathDescr;
 	private VisualQualityPathPane visual;
 	private OptionalNodePane layout;
-	
+
 	private CheckBox[] checkBoxes;
 	private HBox[] infoNodes;
 
@@ -59,18 +59,18 @@ public class QualityPathPage extends Page {
 		initComponents();
 		initLayout();
 		initInteractivity();
-		
+
 		showDescription(selected.getResolved());
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		pathDescr = new TextFlow();
 		RPGFrameworkJavaFX.parseMarkupAndFillTextFlow(pathDescr, selected.getModifyable().getDescription());
 		visual = new VisualQualityPathPane();
 		visual.setData(selected.getResolved());
-		
+
 		checkBoxes = new CheckBox[selected.getResolved().getSteps().size()];
 		infoNodes  = new HBox[checkBoxes.length];
 		for (int i=0; i<checkBoxes.length; i++) {
@@ -88,7 +88,7 @@ public class QualityPathPage extends Page {
 			infoNodes[i] = new HBox(20);
 			logger.log(Level.WARNING, "Modifications of "+step.getId()+" = "+step.getModifications());
 			infoNodes[i].getChildren().add(getRequirementBox(step));
-			infoNodes[i].getChildren().add(getModificationBox(step));			
+			infoNodes[i].getChildren().add(getModificationBox(step));
 		}
 	}
 
@@ -97,9 +97,9 @@ public class QualityPathPage extends Page {
 		VBox boxes = new VBox(5);
 		for (CheckBox tmp : checkBoxes) {
 			boxes.getChildren().add(tmp);
-			boxes.getChildren().add(infoNodes[ List.of(checkBoxes).indexOf(tmp)]);			
+			boxes.getChildren().add(infoNodes[ List.of(checkBoxes).indexOf(tmp)]);
 		}
-		
+
 		VBox bxDescAndVisual = new VBox(20, pathDescr,visual);
 		bxDescAndVisual.setStyle("-fx-min-width: 20em");
 		bxDescAndVisual.setStyle("-fx-pref-width: 20em");
@@ -111,12 +111,12 @@ public class QualityPathPage extends Page {
 		flex.setSpacing(20);
 		flex.getContent().addAll(bxDescAndVisual, boxes);
 //		flex.setBreakpoint(WindowMode.MINIMAL);
-		
+
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		visual.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
@@ -130,11 +130,13 @@ public class QualityPathPage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
+			layout.setOptional( new GenericDescriptionVBox(
+					Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()), n));
 			layout.setTitle(n.getName());
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		Shadowrun6Character model = control.getModel();
@@ -156,7 +158,7 @@ public class QualityPathPage extends Page {
 		control.getQualityPathController().select(selected, step);
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void deselectStep(QualityPathStep step) {
 		QualityPathStepValue stepVal = selected.getStepTaken(step);
@@ -164,18 +166,18 @@ public class QualityPathPage extends Page {
 	}
 
 	//-------------------------------------------------------------------
-	private VBox getRequirementBox(QualityPathStep item) {		
+	private VBox getRequirementBox(QualityPathStep item) {
 		return RPGFrameworkJavaFX.getRequirementsBox(
-				item, 
+				item,
 				req -> Shadowrun6Tools.isRequirementMet(control.getModel(), item, req,new Decision[0]),
 				Shadowrun6Tools.requirementResolver(Locale.getDefault())
 				);
 	}
 
 	//-------------------------------------------------------------------
-	private VBox getModificationBox(QualityPathStep item) {		
+	private VBox getModificationBox(QualityPathStep item) {
 		return RPGFrameworkJavaFX.getModificationsBox(
-				item, 
+				item,
 				m -> Shadowrun6Tools.getModificationString(item, m)
 				);
 	}

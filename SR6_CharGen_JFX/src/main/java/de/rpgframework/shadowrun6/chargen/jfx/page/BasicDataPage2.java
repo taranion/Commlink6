@@ -30,46 +30,46 @@ import javafx.scene.control.Label;
 public class BasicDataPage2 extends Page implements IShadowrunCharacterControllerProvider<SR6CharacterController> {
 
 	private final static Logger logger = System.getLogger(BasicDataPage2.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 
 	private SR6CharacterController control;
-	
+
 	private BasicDataSection secBaseData;
 	private AppearanceSection secPortrait;
 	private FlexGridPane flex;
 	private AttributeSection secAttrib;
 	private SR6QualitySection secQualities;
 	private QualityPathsSection secQualPaths;
-	
+
 	private OptionalNodePane layout;
-	
+
 	//-------------------------------------------------------------------
 	public BasicDataPage2() {
 		super(ResourceI18N.get(RES, "page.basicdata.title"));
 		logger.log(Level.DEBUG, "init<>");
 		// Flow 1
 		initBaseData();
-		initPortrait();	
-		
+		initPortrait();
+
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
 		flex.getChildren().addAll(secBaseData, secPortrait);
-		
+
 		// Flow 2
 		initAttributes();
 		initQualities();
 		flex.getChildren().addAll(secAttrib, secQualities);
-		
+
 		initQualityPaths();
 		flex.getChildren().addAll(secQualPaths);
-		
+
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 //		setTitle("Basics");
-		
+
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initBaseData() {
 		secBaseData = new BasicDataSection(ResourceI18N.get(RES, "page.basicdata.section.basic.title"));
@@ -79,7 +79,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		FlexGridPane.setMediumWidth(secBaseData, 5);
 		FlexGridPane.setMediumHeight(secBaseData, 4);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initPortrait() {
 		secPortrait = new AppearanceSection();
@@ -90,12 +90,12 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		FlexGridPane.setMinHeight(secPortrait, 7);
 		FlexGridPane.setMediumHeight(secPortrait, 4);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initAttributes() {
 		secAttrib = new AttributeSection(ResourceI18N.get(RES, "page.basicdata.section.attributes.title"), null);
 //		((AttributeSection)secAttrib).updateController(ctrl);
-		
+
 		FlexGridPane.setMinWidth(secAttrib, 4);
 		FlexGridPane.setMediumWidth(secAttrib, 6);
 		FlexGridPane.setMinHeight(secAttrib, 8);
@@ -104,7 +104,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 			flex.refresh();
 		});
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initQualities() {
 		secQualities = new SR6QualitySection();
@@ -114,12 +114,13 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		FlexGridPane.setMediumHeight(secQualities, 7);
 		secQualities.showHelpForProperty().addListener( (ov,o,n) -> {
 			if (n!=null) {
-				layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+				layout.setOptional( new GenericDescriptionVBox( Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+						Shadowrun6Tools.modificationResolver(Locale.getDefault()), n.getModifyable()));
 				layout.setTitle(n.getModifyable().getName());
 			}
 		});
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initQualityPaths() {
 		secQualPaths= new QualityPathsSection();
@@ -129,12 +130,13 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		FlexGridPane.setMinHeight(secQualPaths, 5);
 		secQualPaths.showHelpForProperty().addListener( (ov,o,n) -> {
 			if (n!=null) {
-				layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+				layout.setOptional( new GenericDescriptionVBox( Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+						Shadowrun6Tools.modificationResolver(Locale.getDefault()), n.getModifyable()));
 				layout.setTitle(n.getModifyable().getName());
 			}
 		});
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
@@ -148,7 +150,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		((QualityPathsSection)secQualPaths).updateController(ctrl);
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.CharacterControllerProvider#getCharacterController()
@@ -156,7 +158,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	public SR6CharacterController getCharacterController() {
 		return control;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secBaseData.refresh();
@@ -164,8 +166,8 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		secQualities.refresh();
 		secQualPaths.refresh();
 		secPortrait.refresh();
-		
+
 		//FlexGridPane.setMediumWidth(secAttrib, control.getModel().isInCareerMode()?6:9);
 	}
-	
+
 }

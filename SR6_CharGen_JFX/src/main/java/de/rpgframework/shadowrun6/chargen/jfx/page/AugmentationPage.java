@@ -37,16 +37,16 @@ import javafx.scene.control.Label;
 public class AugmentationPage extends Page {
 
 	private final static Logger logger = System.getLogger(AugmentationPage.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private EssenceSection secTrans;
 	private GearSection secCyber;
 	private GearSection secBio;
-	
+
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
-	
+
 	private SR6CharacterController ctrl;
 
 	//-------------------------------------------------------------------
@@ -56,17 +56,17 @@ public class AugmentationPage extends Page {
 		initLayout();
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initEssence();
 		initCyberware();
 		initBioware();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initCyberware() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE); 
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE);
 		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> {
 			ItemType type = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
 			// All items that directly classify as CYBERWARE
@@ -75,7 +75,7 @@ public class AugmentationPage extends Page {
 			//if (type==ItemType.ACCESSORY)
 			return item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE;
 		};
-		
+
 		secCyber = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.cyberware"), CarryMode.IMPLANTED, selectFilter, showFilter);
 		secCyber.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secCyber, 4);
@@ -85,10 +85,10 @@ public class AugmentationPage extends Page {
 		FlexGridPane.setMaxWidth(secCyber, 5);
 		FlexGridPane.setMaxHeight(secCyber, 9);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initBioware() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.BIOWARE); 
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.BIOWARE);
 		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.IMPLANTED, ItemType.BIOWARE);
 		secBio = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.bioware"), CarryMode.IMPLANTED, selectFilter, showFilter);
 		secBio.setMaxHeight(Double.MAX_VALUE);
@@ -99,7 +99,7 @@ public class AugmentationPage extends Page {
 		FlexGridPane.setMaxWidth(secBio, 5);
 		FlexGridPane.setMaxHeight(secBio, 9);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initEssence() {
 		secTrans = new EssenceSection(ResourceI18N.get(RES, "page.augmentation.section.essence"));
@@ -109,18 +109,18 @@ public class AugmentationPage extends Page {
 		FlexGridPane.setMediumWidth(secTrans, 4);
 		FlexGridPane.setMediumHeight(secTrans, 4);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
 		flex.getChildren().addAll(secTrans, secCyber, secBio);
-		
+
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		secCyber.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
@@ -145,24 +145,26 @@ public class AugmentationPage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n));
+			layout.setOptional( new GenericDescriptionVBox(
+					Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()), n));
 			layout.setTitle(n.getName());
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
-		
+
 		this.ctrl = ctrl;
 		secCyber.updateController(ctrl);
 		secBio  .updateController(ctrl);
 		secTrans.updateController(ctrl);
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secCyber.refresh();

@@ -16,7 +16,6 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
@@ -41,15 +40,15 @@ import javafx.scene.control.Label;
 public class ResonancePage extends Page {
 
 	private final static Logger logger = System.getLogger(ResonancePage.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private ComplexFormSection secCplx;
 	private MetamagicOrEchoSection secMeta;
-	
+
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
-	
+
 	private SR6CharacterController ctrl;
 	private Predicate<CarriedItem<ItemTemplate>> filter;
 
@@ -61,18 +60,19 @@ public class ResonancePage extends Page {
 		initLayout();
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initComplexForms();
 		initMetamagic();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComplexForms() {
 		secCplx = new ComplexFormSection(
-				ResourceI18N.get(RES, "page.resonance.section.complexforms"), 
-				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),
+				ResourceI18N.get(RES, "page.resonance.section.complexforms"),
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
 				item -> (new ChoiceSelectorDialog<ComplexForm,ComplexFormValue>(ctrl.getComplexFormController()).apply(item, item.getChoices())));
 		secCplx.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secCplx, 4);
@@ -80,12 +80,13 @@ public class ResonancePage extends Page {
 		FlexGridPane.setMediumWidth(secCplx, 6);
 		FlexGridPane.setMediumHeight(secCplx, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initMetamagic() {
 		secMeta = new MetamagicOrEchoSection(
 				ResourceI18N.get(RES, "page.resonance.section.echoes"),
-				r -> Shadowrun6Tools.getRequirementString((Requirement)r, Locale.getDefault()), 
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
 				MetamagicOrEcho.Type.ECHO
 				);
 		secMeta.setMaxHeight(Double.MAX_VALUE);
@@ -94,19 +95,19 @@ public class ResonancePage extends Page {
 		FlexGridPane.setMediumWidth(secMeta, 5);
 		FlexGridPane.setMediumHeight(secMeta, 8);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		
+
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
 		flex.getChildren().addAll(secCplx,secMeta);
-		
+
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		secCplx.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
@@ -130,23 +131,25 @@ public class ResonancePage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new GenericDescriptionVBox(
+					Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()), n.getModifyable()));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
-		
+
 		this.ctrl = ctrl;
 		secMeta.updateController(ctrl);
 		secCplx.updateController(ctrl);
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secCplx.refresh();

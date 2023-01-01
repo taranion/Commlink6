@@ -31,14 +31,14 @@ public class SkillPage extends Page {
 
 //	private final static ResourceBundle RES = ResourceBundle.getBundle(BasicDataPage.class.getPackageName()+".Pages");
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private SkillSection secNormal;
 	private KnowledgeSkillSection secKnowl;
 	private SkillSection secLang;
-	
+
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
-	
+
 	private GenericDescriptionVBox descBox ;
 
 	//-------------------------------------------------------------------
@@ -49,16 +49,18 @@ public class SkillPage extends Page {
 		initInteractivity();
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initBaseData();
 		initKnowledge();
 		initLanguage();
-		
-		descBox = new GenericDescriptionVBox((r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+
+		descBox = new GenericDescriptionVBox(
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initBaseData() {
 		secNormal = new SkillSection(ResourceI18N.get(RES, "page.skills.section.normal"), SkillType.COMBAT, SkillType.RESONANCE, SkillType.PHYSICAL, SkillType.SOCIAL, SkillType.TECHNICAL, SkillType.MAGIC);
@@ -74,18 +76,18 @@ public class SkillPage extends Page {
 			flex.refresh();
 		});
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initKnowledge() {
 		secKnowl = new KnowledgeSkillSection(ResourceI18N.get(RES, "page.skills.section.knowledge"));
 //		secKnowl.setMaxHeight(Double.MAX_VALUE);
-//		secKnowl.setStyle("-fx-min-height: 10em; -fx-pref-height: 30em; -fx-max-width: 15em"); 
+//		secKnowl.setStyle("-fx-min-height: 10em; -fx-pref-height: 30em; -fx-max-width: 15em");
 		FlexGridPane.setMinWidth(secKnowl, 4);
 		FlexGridPane.setMediumWidth(secKnowl, 4);
 		FlexGridPane.setMaxWidth(secKnowl, 5);
 		FlexGridPane.setMinHeight(secKnowl, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLanguage() {
 		secLang = new SkillSection(ResourceI18N.get(RES, "page.skills.section.language"), SkillType.LANGUAGE);
@@ -96,19 +98,19 @@ public class SkillPage extends Page {
 		FlexGridPane.setMinHeight(secLang, 6);
 		FlexGridPane.setMediumHeight(secLang, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		
+
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
 		flex.getChildren().addAll(secNormal, secKnowl, secLang);
-		
+
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		secNormal.selectedSkillProperty().addListener( (ov,o,n) -> showDescription(n));
@@ -126,19 +128,19 @@ public class SkillPage extends Page {
 			layout.setOptional(descBox);
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
-		
+
 		secKnowl.updateController(ctrl);
 		secLang.updateController(ctrl);
 		secNormal.updateController(ctrl);
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secNormal.refresh();

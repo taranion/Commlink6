@@ -4,7 +4,6 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.OptionalNodePane;
@@ -17,7 +16,6 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
@@ -27,10 +25,8 @@ import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
-import de.rpgframework.shadowrun.chargen.gen.QualityGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
-import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
@@ -39,21 +35,19 @@ import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
  *
  */
 public class SR6WizardPageChangeling extends WizardPage implements ControllerListener{
-	
+
 	private final static Logger logger = System.getLogger(SR6WizardPageChangeling.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageChangeling.class.getName());
 
 	private GeneratorWrapper charGen;
-	
-	private Function<Requirement,String> requirementResolver;
+
 	private Label lbNetKarma;
 	private ComplexDataItemControllerNode<Quality, QualityValue> selection;
 	private GenericDescriptionVBox bxDescription;
@@ -68,15 +62,13 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		initComponents();
 		initLayout();
 		initInteractivity();
-		
+
 		charGen.addListener(this);
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings({ "rawtypes" })
 	private void initComponents() {
-		requirementResolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
-		
 		lbNetKarma = new Label("?");
 		lbNetKarma.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 
@@ -85,23 +77,26 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		filter.setShowSURGE(true);
 		selection.setFilterNode(filter);
 		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.METAGENIC);
-		selection.setRequirementResolver(requirementResolver);
+		selection.setRequirementResolver(Shadowrun6Tools.requirementResolver(Locale.getDefault()));
+		selection.setModificationResolver(Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "placeholder.available"));
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "placeholder.selected"));
-		
+
 		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController()));
 		selection.setSelectedCellFactory(lv -> new QualityValueListCell(
 				new IShadowrunCharacterControllerProvider<IShadowrunCharacterController>() {
 					public IShadowrunCharacterController getCharacterController() {
 						return charGen;
-					}}, 
+					}},
 				null, true));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
-		
-		bxDescription = new GenericDescriptionVBox(requirementResolver);
+
+		bxDescription = new GenericDescriptionVBox(
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		layout = new OptionalNodePane(selection, bxDescription);
@@ -120,7 +115,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		HBox.setMargin(backHeader, new Insets(0,10,0,10));
 		super.setBackHeader(backHeader);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		selection.showHelpForProperty().addListener( (ov,o,n) -> {
@@ -142,7 +137,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		System.err.println("SR6WizardPageChangeling.refresh1 "+charGen.getWrapped());
 		System.err.println("SR6WizardPageChangeling.refresh2 "+((CommonQualityGenerator)charGen.getQualityController()).getKarmaForSURGE());
 		backHeader.setValue(charGen.getModel().getKarmaFree());
-		
+
 		lbNetKarma.setText(String.valueOf( ((CommonQualityGenerator)charGen.getQualityController()).getKarmaForSURGE()));
 		BodyType type = charGen.getModel().getBodytype();
 		if (type!=null) {
@@ -160,7 +155,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			activeProperty().set(false);
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see org.prelle.javafx.WizardPage#pageVisited()

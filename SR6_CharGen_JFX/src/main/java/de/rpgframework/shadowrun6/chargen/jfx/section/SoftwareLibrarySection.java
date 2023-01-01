@@ -52,7 +52,7 @@ public class SoftwareLibrarySection extends GearSection {
 	private final static Logger logger = System.getLogger(SoftwareLibrarySection.class.getPackageName());
 
 	private final static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SoftwareLibrarySection.class.getPackageName()+".Section");
-	
+
 	static class ProgramRow {
 		ItemSubType type;
 		CarriedItem<ItemTemplate> program;
@@ -75,7 +75,7 @@ public class SoftwareLibrarySection extends GearSection {
 		private ImageView iView;
 		private ProgramRow row;
 		private SR6CharacterController control;
-		
+
 		public ProgramRowDeviceCell(TreeTableColumn<ProgramRow, Boolean> p, SR6CharacterController ctrl) {
 			this.control = ctrl;
 			button = new ToggleButton("x");
@@ -96,19 +96,19 @@ public class SoftwareLibrarySection extends GearSection {
 					logger.log(Level.WARNING, "No SOFTWARE slot for {0}",dev);
 					setGraphic(null);
 					return;
-				}	
-				
+				}
+
 				if (p!=row && row!=null)
 					row.group.getToggles().remove(button);
 				if (p!=null && !p.group.getToggles().contains(button))
 					p.group.getToggles().add(button);
 				row = p;
-				
+
 				if (p==null || p.program==null) {
 					setGraphic(null);
 					return;
 				}
-				
+
 				// Can it be installed here?
 				CarriedItem<ItemTemplate> program = p.program;
 				if (dev.getAccessories().contains(program)) {
@@ -122,7 +122,7 @@ public class SoftwareLibrarySection extends GearSection {
 						logger.log(Level.WARNING, "Cannot install {0} on {1} because {2}", program, dev,
 								possInstall.toString());
 				}
-				
+
 				setGraphic(button);
 				if (dev!=null) {
 					button.setUserData(dev);
@@ -134,33 +134,33 @@ public class SoftwareLibrarySection extends GearSection {
 
 	private final static Predicate<ItemTemplate> SELECT_FILTER = (c) -> c.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.SOFTWARE && c.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue()!=ItemSubType.SKILLSOFT ;
 	private final static Predicate<CarriedItem<ItemTemplate>> SHOW_FILTER = new CarriedItemItemTypeFilter(CarryMode.EMBEDDED, ItemType.SOFTWARE);
-		
+
 	private List<CarriedItem<ItemTemplate>> currentlyShowing;
 	private List<CarriedItem<ItemTemplate>> cacheDevices;
-	
+
 	private TreeTableView<ProgramRow> treeTable;
 	private TreeItem<ProgramRow> root;
-	
+
 	private TreeTableColumn<ProgramRow, String> colName;
 	private TreeTableColumn<ProgramRow, Boolean> colUnused;
-	
+
 	private static boolean initializeDone;
-	
+
 	//-------------------------------------------------------------------
 	public SoftwareLibrarySection() {
 		super(ResourceI18N.get(RES, "section.software.title"), CarryMode.EMBEDDED, SELECT_FILTER, SHOW_FILTER);
 		initTreeTable();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initTreeTable() {
 		currentlyShowing = new ArrayList<>();
 		cacheDevices     = new ArrayList<>();
 		treeTable = new TreeTableView<>();
 		treeTable.setShowRoot(false);
-		
+
 		colName   = new TreeTableColumn<>("Name");
-		colUnused = new TreeTableColumn<>(ResourceI18N.get(RES, "section.software.unused"));		
+		colUnused = new TreeTableColumn<>(ResourceI18N.get(RES, "section.software.unused"));
 		treeTable.getColumns().add(colName);
 		treeTable.getColumns().add(colUnused);
 		colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue().getName()));
@@ -170,7 +170,7 @@ public class SoftwareLibrarySection extends GearSection {
 		root = new TreeItem<>();
 		treeTable.setRoot(root);
 		setContent(treeTable);
-		
+
 		// Interactivity
 		showHelpFor.unbind();
 		treeTable.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
@@ -205,7 +205,7 @@ public class SoftwareLibrarySection extends GearSection {
 		addToContainer = model.getSoftwareLibrary();
 		addToHook = ItemHook.SOFTWARE;
 		colUnused.setUserData(addToContainer);
-		
+
 		List<CarriedItem<ItemTemplate>> data = null;
 		data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItemsRecursive())
 		.stream()
@@ -215,9 +215,9 @@ public class SoftwareLibrarySection extends GearSection {
 				.stream()
 				.filter(ItemUtil.MATRIXDEVICES_FILTER)
 				.collect(Collectors.toList());
-		
-		System.err.println("SoftwareLibrarySection.refresh: devices="+devices);
-		System.err.println("SoftwareLibrarySection.refresh: data="+data);
+
+//		System.err.println("SoftwareLibrarySection.refresh: devices="+devices);
+//		System.err.println("SoftwareLibrarySection.refresh: data="+data);
 		initializeDone = false;
 		if (programsChanged(data)) {
 			refreshPrograms(data);
@@ -259,11 +259,11 @@ public class SoftwareLibrarySection extends GearSection {
 				list = new ArrayList<>();
 				byType.put(key, list);
 			}
-			list.add(tmp);			
+			list.add(tmp);
 		}
 		List<ItemSubType> subtypes = new ArrayList<ItemSubType>(byType.keySet());
 		Collections.sort(subtypes, (s1,s2) -> Integer.compare(s1.ordinal(), s2.ordinal()));
-		
+
 		for (ItemSubType key : subtypes) {
 			TreeItem<ProgramRow> item = new TreeItem<ProgramRow>(new ProgramRow(key));
 			treeTable.getRoot().getChildren().add(item);
@@ -276,7 +276,7 @@ public class SoftwareLibrarySection extends GearSection {
 				item.getChildren().add(new TreeItem<ProgramRow>(progRow));});
 		}
 		currentlyShowing = data;
-		
+
 		root.setExpanded(true);
 	}
 
@@ -291,7 +291,7 @@ public class SoftwareLibrarySection extends GearSection {
 		if (toDevice==fromDevice) return;
 		CarriedItem<ItemTemplate> program = progRow.program;
 		logger.log(Level.WARNING, "User wants to remove ''{0}'' from {1} and install it on {2}", program.getKey(), fromDevice, toDevice);
-		
+
 		Possible possRemove = control.getEquipmentController().canBeRemoved(fromDevice, ItemHook.SOFTWARE, program);
 		Possible possInstall = control.getEquipmentController().canBeEmbedded(toDevice, ItemHook.SOFTWARE, program.getModifyable(), program.getVariantID(), program.getDecisions().toArray(new Decision[program.getDecisions().size()]));
 		if (!possRemove.get()) {
@@ -306,14 +306,14 @@ public class SoftwareLibrarySection extends GearSection {
 //			control.runProcessors();
 			return;
 		}
-		
+
 		Possible poss = control.getEquipmentController().removeEmbedded(fromDevice, ItemHook.SOFTWARE, program);
 		if (poss.get()) {
 			logger.log(Level.WARNING, "Uninstall successful - now add to "+toDevice);
 			// Deinstallation successful - change CARRY mode
 			program.setCarryMode(CarryMode.VIRTUAL);
 //			// Deinstallation successful - add to target device
-//			toDevice.addAccessory(program, ItemHook.SOFTWARE);			
+//			toDevice.addAccessory(program, ItemHook.SOFTWARE);
 		}
 		control.runProcessors();
 	}
@@ -323,7 +323,7 @@ public class SoftwareLibrarySection extends GearSection {
 	private void refreshDevices(List<CarriedItem<ItemTemplate>> devices) {
 		List<CarriedItem<ItemTemplate>> devices2 = new ArrayList<>(devices);
 		devices2.add(0,model.getSoftwareLibrary());
-		
+
 		// Calculate list of matrix device columns
 		List<TreeTableColumn<ProgramRow, Boolean>> newColumns = new ArrayList<>();
 		for (CarriedItem<ItemTemplate> matrixDev : devices2) {
@@ -334,19 +334,19 @@ public class SoftwareLibrarySection extends GearSection {
 			TreeTableColumn<ProgramRow, Boolean> columnDevName = new TreeTableColumn<>(matrixDev.getNameWithoutRating());
 			realColumn.setMinWidth(85);
 			columnDevName.getColumns().add(realColumn);
-			
+
 			realColumn.setUserData(matrixDev);
 			realColumn.setCellValueFactory(p -> new SimpleBooleanProperty(isUnused(p.getValue().getValue(), realColumn)));
 			realColumn.setCellFactory(p -> new ProgramRowDeviceCell(p, control));
-			makeHeaderWrappable(columnDevName);				
+			makeHeaderWrappable(columnDevName);
 			newColumns.add(columnDevName);
-			
+
 			logger.log(Level.WARNING, "Column {0} has data {1}", realColumn, matrixDev);
 		}
 		treeTable.getColumns().setAll(colName, colUnused);
 		treeTable.getColumns().addAll(newColumns);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void makeHeaderWrappable(TreeTableColumn<?,?> col) {
 	    Label label = new Label(col.getText());

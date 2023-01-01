@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
@@ -23,6 +24,7 @@ import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.LifePathCharacterGenerator;
 import javafx.scene.control.Button;
@@ -47,21 +49,21 @@ public class WizardPageLifePath1 extends WizardPage {
 			.getBundle(WizardPageLifePath1.class.getName());
 
 	protected IShadowrunCharacterGenerator<?, ?, ?,?> charGen;
-	
+
 	private ChoiceBox<MagicOrResonanceType> cbMoRType;
 	private OptionalNodePane layout;
 	private GenericDescriptionVBox bxDescription;
 	private transient MagicOrResonanceType current;
-	
+
 	/* For aspected magicians */
 	private ChoiceBox<SR6Skill> cbAspectSkill;
-	
+
 	/* For (aspected) magicians and mystic adepts*/
 	private ChoiceBox<Tradition> cbTradition;
 	private TitledComponent tcTradition;
 	private TitledComponent tcAspect;
-	protected GenericDescriptionVBox descTradition;	
-	
+	protected GenericDescriptionVBox descTradition;
+
 	private TextField tfNationality;
 	private TextField tfLanguage;
 	private Label lbQuality1, lbQuality2;
@@ -75,11 +77,11 @@ public class WizardPageLifePath1 extends WizardPage {
 		initComponents();
 		initLayout();
 		initInteractivity();
-		
+
 		if (ResponsiveControlManager.getCurrentMode()==WindowMode.MINIMAL) {
 			cbMoRType.setValue(charGen.getModel().getMagicOrResonanceType());
 		}
-		
+
 		refresh();
 	}
 
@@ -87,13 +89,15 @@ public class WizardPageLifePath1 extends WizardPage {
 	private void initComponents() {
 		cbMoRType = new ChoiceBox<MagicOrResonanceType>();
 		cbMoRType.getItems().addAll(charGen.getMagicOrResonanceController().getAvailable());
-		bxDescription = new GenericDescriptionVBox(null);
-		
+		bxDescription = new GenericDescriptionVBox(
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
+
 		cbMoRType.setConverter(new StringConverter<MagicOrResonanceType>() {
 			public String toString(MagicOrResonanceType type) { return (type!=null)?type.getName():"-";}
 			public MagicOrResonanceType fromString(String arg0) {return null;}
 		});
-		
+
 		/* For (aspected) magicians and mystic adepts */
 		cbTradition = new ChoiceBox<>();
 		cbTradition.getItems().addAll(Shadowrun6Core.getItemList(Tradition.class));
@@ -110,8 +114,10 @@ public class WizardPageLifePath1 extends WizardPage {
 			}
 			public Tradition fromString(String string) { return null; }
 		});
-		descTradition = new GenericDescriptionVBox(null);
-		
+		descTradition = new GenericDescriptionVBox(
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
+
 		/* For aspected magicians */
 		cbAspectSkill = new ChoiceBox<>();
 		cbAspectSkill.getItems().addAll(Shadowrun6Core.getSkill("sorcery"), Shadowrun6Core.getSkill("conjuring"), Shadowrun6Core.getSkill("enchanting"));
@@ -123,18 +129,18 @@ public class WizardPageLifePath1 extends WizardPage {
 			public SR6Skill fromString(String string) { return null; }
 		});
 
-		
+
 		tfNationality = new TextField();
 		tfNationality.setPrefColumnCount(7);
 		tfLanguage    = new TextField();
 		tfLanguage.setPrefColumnCount(7);
-		
+
 		lbQuality1 = new Label("?");
 		lbQuality2 = new Label();
 		btnQuality1= new Button(ResourceI18N.get(UI, "wizard.page.lifepath1.button_quality"));
 		btnQuality2= new Button(ResourceI18N.get(UI, "wizard.page.lifepath1.button_quality"));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		TitledComponent tcMagOrRes    = new TitledComponent(ResourceI18N.get(UI, "wizard.page.lifepath1.mortype"), cbMoRType);
@@ -144,7 +150,7 @@ public class WizardPageLifePath1 extends WizardPage {
 		TitledComponent tcLanguage    = new TitledComponent(ResourceI18N.get(UI, "wizard.page.lifepath1.language"), tfLanguage);
 		FlowPane flow1 = new FlowPane(10,10,tcMagOrRes, tcAspect, tcTradition);
 		FlowPane flow2 = new FlowPane(10,10,tcNationality, tcLanguage);
-		
+
 		Label head1 = new Label(ResourceI18N.get(UI, "wizard.page.lifepath1.quality1"));
 		Label head2 = new Label(ResourceI18N.get(UI, "wizard.page.lifepath1.quality2"));
 		head1.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
@@ -158,11 +164,11 @@ public class WizardPageLifePath1 extends WizardPage {
 		grid.add(head2      , 0, 2, 2,1);
 		grid.add(lbQuality2 , 0, 3);
 		grid.add(btnQuality2, 1, 3);
-		
+
 		VBox box = new VBox(10, flow1, flow2, grid, descTradition);
 		ScrollPane scroll = new ScrollPane(box);
 		scroll.setFitToWidth(true);
-		
+
 		layout = new OptionalNodePane(scroll, bxDescription);
 		setContent(layout);
 	}
@@ -175,12 +181,12 @@ public class WizardPageLifePath1 extends WizardPage {
 			bxDescription.setData(n);
 			refresh();
 		});
-		
+
 		cbTradition.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			descTradition.setData(n);
 			charGen.getMagicOrResonanceController().selectTradition(n);
 		});
-		
+
 		tfLanguage.textProperty().addListener( (ov,o,n) -> {
 			((LifePathCharacterGenerator)charGen).setNativeLanguage(n);
 		});
@@ -193,7 +199,7 @@ public class WizardPageLifePath1 extends WizardPage {
 	private void refresh() {
 		Shadowrun6Character model = (Shadowrun6Character) charGen.getModel();
 		cbMoRType.setValue(model.getMagicOrResonanceType());
-		
+
 		if (model.getMagicOrResonanceType()==null) {
 			tcTradition.setVisible(false);
 			tcTradition.setManaged(true);
@@ -209,13 +215,13 @@ public class WizardPageLifePath1 extends WizardPage {
 			tcAspect.setVisible(model.getMagicOrResonanceType().isAspected());
 			tcAspect.setManaged(model.getMagicOrResonanceType().isAspected());
 		}
-		
+
 		if (model.getTradition()!=null) {
 			descTradition.setData(model.getTradition());
 		}
 		cbTradition.setValue(model.getTradition());
-		
-		
+
+
 	}
 
 	//-------------------------------------------------------------------

@@ -4,11 +4,9 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 import org.prelle.javafx.Wizard;
 
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageMetaOrEcho;
@@ -39,8 +37,9 @@ public class SR6WizardPageMetaOrEcho extends AWizardPageMetaOrEcho {
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getMetamagicOrEchoController()));
 //		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
 
-		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
-		bxDescription = new GenericDescriptionVBox(resolver);
+		bxDescription = new GenericDescriptionVBox(
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 	}
 
 	//-------------------------------------------------------------------

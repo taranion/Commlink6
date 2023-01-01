@@ -1,5 +1,7 @@
 package de.rpgframework.shadowrun6.items;
 
+import java.util.Locale;
+
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -100,6 +102,11 @@ public enum ItemHook implements Hook {
 	@Override
 	public String getName() {
 		return RES.getString("itemhook."+this.name().toLowerCase());
+	}
+
+	//-------------------------------------------------------------------
+	public String getName(Locale loc) {
+		return RES.getString("itemhook."+this.name().toLowerCase(), loc);
 	}
 
 	//-------------------------------------------------------------------

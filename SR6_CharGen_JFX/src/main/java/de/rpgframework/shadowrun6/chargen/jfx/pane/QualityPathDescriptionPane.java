@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
  *
  */
 public class QualityPathDescriptionPane extends ADescriptionPane<QualityPath> {
-	
+
 	private GenericDescriptionVBox descr;
 	private GenericDescriptionVBox stepDescr;
 	private VisualQualityPathPane visual;
@@ -27,14 +27,18 @@ public class QualityPathDescriptionPane extends ADescriptionPane<QualityPath> {
 		getStyleClass().add("description-pane");
 		visual = new VisualQualityPathPane();
 		descr = new GenericDescriptionVBox(
-				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault())
+				);
 		stepDescr = new GenericDescriptionVBox(
-				r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
-		
-		HBox inner = new HBox(20);		
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault())
+				);
+
+		HBox inner = new HBox(20);
 		inner.getChildren().add(visual);
 		inner.getChildren().add(new VBox(10,descr,stepDescr));
-		
+
 		visual.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> setStepData(n));
 		getChildren().add(inner);
 	}

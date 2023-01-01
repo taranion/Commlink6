@@ -17,7 +17,8 @@ public class SR6QualitySection extends QualitySection {
 
 	//-------------------------------------------------------------------
 	public SR6QualitySection() {
-		super(Shadowrun6Tools.requirementResolver(Locale.getDefault()));
+		super(Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 	}
 
 	//-------------------------------------------------------------------

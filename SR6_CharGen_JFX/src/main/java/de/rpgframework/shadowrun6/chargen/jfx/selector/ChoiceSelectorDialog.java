@@ -137,7 +137,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			bxDesc = new FocusValueDescriptionPane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), (SR6CharacterController)charCtrl );
 		} else {
 			logger.log(Level.INFO, "Use generic description pane");
-			bxDesc = new GenericDescriptionVBox(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+			bxDesc = new GenericDescriptionVBox(
+					Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 		}
 		optional= new OptionalNodePane(content, bxDesc);
 		lbProblem = new Label();

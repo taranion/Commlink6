@@ -2,13 +2,11 @@ package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 import org.prelle.javafx.SymbolIcon;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
@@ -48,8 +46,9 @@ public class SR6WizardPageAdeptPowers extends WizardPageAdeptPowers {
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getAdeptPowerController()));
 //		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
 
-		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
-		bxDescription = new GenericDescriptionVBox(resolver);
+		bxDescription = new GenericDescriptionVBox(
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 	}
 
 	//-------------------------------------------------------------------

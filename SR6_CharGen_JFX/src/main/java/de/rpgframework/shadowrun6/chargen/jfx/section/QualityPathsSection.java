@@ -2,7 +2,6 @@ package de.rpgframework.shadowrun6.chargen.jfx.section;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
@@ -20,7 +19,6 @@ import de.rpgframework.jfx.section.ListSection;
 import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.QualityPathValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.page.QualityPathPage;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.QualityPathSelector;
@@ -58,7 +56,7 @@ public class QualityPathsSection extends ListSection<QualityPathValue> {
 	@Override
 	protected void onAdd() {
 		// TODO Auto-generated method stub
-		QualityPathSelector selector = new QualityPathSelector(control.getQualityPathController(), r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		QualityPathSelector selector = new QualityPathSelector(control.getQualityPathController());
 		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "section.qualitypaths.selector.title"), selector, CloseType.OK, CloseType.CANCEL);
 		CloseType closed = FlexibleApplication.getInstance().showAndWait(dialog);
 		logger.log(Level.WARNING, "closed "+closed);
@@ -98,7 +96,7 @@ public class QualityPathsSection extends ListSection<QualityPathValue> {
 	 */
 	public void refresh() {
 		if (model==null) return;
-		
+
 		list.getItems().setAll(model.getQualityPaths());
 	}
 

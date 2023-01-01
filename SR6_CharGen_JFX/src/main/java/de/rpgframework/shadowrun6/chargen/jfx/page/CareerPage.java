@@ -42,14 +42,14 @@ import javafx.scene.image.Image;
 public class CareerPage extends Page {
 
 	private final static Logger logger = System.getLogger(CareerPage.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private transient SR6CharacterController ctrl;
-	
+
 	private CreationSection secCreation;
 	private HistoryElementSection secHistory;
-	
+
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
 
@@ -60,13 +60,13 @@ public class CareerPage extends Page {
 		initLayout();
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initCreationInfo();
 		initHistoryInfo();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initCreationInfo() {
 		secCreation = new CreationSection();
@@ -76,7 +76,7 @@ public class CareerPage extends Page {
 		FlexGridPane.setMediumWidth(secCreation, 5);
 		FlexGridPane.setMediumHeight(secCreation, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initHistoryInfo() {
 		secHistory = new HistoryElementSection() {
@@ -113,18 +113,18 @@ public class CareerPage extends Page {
 		FlexGridPane.setMediumWidth(secHistory, 5);
 		FlexGridPane.setMediumHeight(secHistory, 9);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
 		flex.getChildren().addAll(secCreation, secHistory);
-		
+
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 //		secSINs.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
@@ -136,7 +136,8 @@ public class CareerPage extends Page {
 		if (n==null) {
 			layout.setOptional(null);
 		} else {
-			layout.setOptional( new GenericDescriptionVBox( r->Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), n.getModifyable()));
+			layout.setOptional( new GenericDescriptionVBox(Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()), n.getModifyable()));
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
@@ -148,7 +149,8 @@ public class CareerPage extends Page {
 			layout.setOptional(null);
 		} else {
 			ContactType t = n.getType();
-			GenericDescriptionVBox desc = new GenericDescriptionVBox( null);
+			GenericDescriptionVBox desc = new GenericDescriptionVBox(Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 			desc.setData(t.getName(Locale.getDefault()), null, t.getDescription(Locale.getDefault()));
 			layout.setOptional( desc);
 			layout.setTitle(t.getName(Locale.getDefault()));
@@ -162,30 +164,31 @@ public class CareerPage extends Page {
 			layout.setOptional(null);
 		} else {
 			FakeRating rating = n.getQuality();
-			GenericDescriptionVBox desc = new GenericDescriptionVBox( null);
+			GenericDescriptionVBox desc = new GenericDescriptionVBox( Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 			desc.setData(rating.name(), null, n.getDescription());
 			layout.setOptional( desc);
 			layout.setTitle(rating.name());
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
 		this.ctrl = ctrl;
-		
+
 		secCreation.updateController(ctrl);
 
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secCreation.refresh();
 		secHistory.refresh();
-		
+
 		secHistory.setData( GenericRPGTools.convertToHistoryElementList(ctrl.getModel(), false));
 	}
 

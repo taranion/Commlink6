@@ -78,6 +78,7 @@ import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -247,7 +248,7 @@ public class Shadowrun6Tools {
 //				return "Wähle eine Fertigkeit außer "+String.join(", ", except);
 //			return String.join(" oder ", positive);
 //		}
-		return "SplitterTools.getChoiceString("+choice.getChooseFrom()+")";
+		return "Shadowrun6Tools.getChoiceString("+choice.getChooseFrom()+")";
 	}
 
 	//-------------------------------------------------------------------
@@ -277,6 +278,93 @@ public class Shadowrun6Tools {
 		}
 		logger.log(Level.WARNING,"Missing treatment for modification source: "+source.getClass());
 		return "?"+source.getClass().getSimpleName();
+	}
+
+	//-------------------------------------------------------------------
+	public static Function<Modification, String> modificationResolver(Locale loc) {
+		return (m) -> getModificationString(m, loc);
+	}
+
+	//-------------------------------------------------------------------
+	public static String getModificationString(Modification mod, Locale loc) {
+		String ret = getModificationStringWithoutCond(mod, loc);
+		if (mod.isConditional()) {
+			return ret+" ("+RES.getString("modification.conditional", loc)+")";
+		}
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private static String getModificationStringWithoutCond(Modification mod, Locale loc) {
+		logger.log(Level.ERROR, "explain "+mod);
+		try {
+			ShadowrunReference type = (ShadowrunReference) mod.getReferenceType();
+			if (mod instanceof ValueModification) {
+				ValueModification valMod = (ValueModification)mod;
+				String what = type.name();
+				switch (type) {
+				case ATTRIBUTE:
+					String attrName = null;
+					if (valMod.getConnectedChoice()!=null) {
+						attrName = RES.getString("choice.attribute", loc);
+					} else {
+						attrName = ShadowrunAttribute.valueOf(valMod.getKey()).getName(loc);
+					}
+
+					if (valMod.getValue()>0) {
+						if (valMod.getSet()==ValueType.MAX)
+							return attrName+" "+valMod.getValue();
+						return attrName+" +"+valMod.getValue();
+					} else {
+						return attrName+" "+valMod.getValue();
+					}
+				case HOOK:
+					return RES.format("modification.hook.withCap", loc, valMod.getRawValue(),ItemHook.valueOf(valMod.getKey()).getName(loc));
+				case ITEM_ATTRIBUTE:
+					String iattrName = SR6ItemAttribute.valueOf(valMod.getKey()).getName(loc);
+					if (valMod.getFormula().isObject()) {
+						return iattrName+" "+valMod.getRawValue();
+					} else if (valMod.getFormula().isInteger() || valMod.getFormula().isFloat()) {
+						if (valMod.getValue()>0) {
+							if (valMod.getSet()==ValueType.MAX)
+								return iattrName+" "+valMod.getValue();
+							return iattrName+" +"+valMod.getValue();
+						} else {
+							return iattrName+" "+valMod.getValue();
+						}
+					}
+					return iattrName+" "+valMod.getRawValue();
+				case SKILL:
+					String skillName = null;
+					if (valMod.getConnectedChoice()!=null) {
+						skillName = RES.getString("choice.skill", loc);
+					} else {
+						SR6Skill skill = Shadowrun6Core.getSkill(valMod.getKey());
+						if (skill==null) {
+							Logging.logger.log(Level.WARNING, "Found unknown skill '"+valMod.getKey()+"' in valuemod of "+valMod);
+							skillName = "Unknown skill '"+valMod.getKey()+"'";
+						} else {
+							skillName = Shadowrun6Core.getSkill(valMod.getKey()).getName(loc);
+						}
+					}
+
+					if (valMod.getValue()>0) {
+						return skillName+" +"+valMod.getValue();
+					} else {
+						return skillName+" "+valMod.getValue();
+					}
+				default:
+					logger.log(Level.ERROR, "Don't know how to display "+mod);
+					return "Unknown value type "+type;
+				}
+			}
+
+			logger.log(Level.ERROR, "Don't know how to display "+mod);
+			return String.valueOf(mod);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return String.valueOf(mod);
+		}
 	}
 
 	//-------------------------------------------------------------------
