@@ -404,10 +404,10 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> decrease(CarriedItem<ItemTemplate> value) {
-		logger.log(Level.TRACE, "dencrease {0}", value);
+		logger.log(Level.TRACE, "decrease {0}", value);
 		Possible poss = canBeDecreased(value);
 		if (!poss.get()) {
-			logger.log(Level.WARNING, "Trying to increase count on item where not allowed");
+			logger.log(Level.WARNING, "Trying to decrease count on item where not allowed");
 			return new OperationResult<>(poss);
 		}
 

@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +33,13 @@ import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
  *
  */
 public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhancement>
-		implements 
+		implements
 		ComplexDataItemController<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>> {
 
+	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".enhance");
+
 	private CarriedItem<ItemTemplate> toModify;
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 */
@@ -54,14 +57,14 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 		// TODO Auto-generated method stub
 		return unprocessed;
 	}
-	
+
 	//-------------------------------------------------------------------
 	private List<SR6ItemEnhancement> getEnhancementsIn() {
 		List<SR6ItemEnhancement> ret = new ArrayList<SR6ItemEnhancement>();
 		for (ItemEnhancementValue<AItemEnhancement> tmp : toModify.getEnhancements()) {
 			ret.add((SR6ItemEnhancement) tmp.getModifyable());
 		}
-		
+
 		return ret;
 	}
 
@@ -77,7 +80,7 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 				continue;
 			if (enh.isSelectableByModificationOnly())
 				continue;
-			
+
 			ret.add(enh);
 		}
 		logger.log(Level.WARNING, "STOP : getAvailableEnhancementsFor returns "+ret.size()+" elements");
@@ -135,7 +138,7 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 		// Enough space
 		if (val.getModifiedValue() < (toModify.getModificationSlotsUsed()+value.getSize()))
 			return new Possible(IRejectReasons.IMPOSS_CAPACITY);
-		
+
 		return Possible.TRUE;
 	}
 
@@ -151,14 +154,14 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 			logger.log(Level.WARNING, "Trying to select an ItemEnhancement that may not be selected: "+poss);
 			return new OperationResult<>(poss);
 		}
-		
-		ItemEnhancementValue<SR6ItemEnhancement> iVal = new ItemEnhancementValue<SR6ItemEnhancement>(value);		
+
+		ItemEnhancementValue<SR6ItemEnhancement> iVal = new ItemEnhancementValue<SR6ItemEnhancement>(value);
 		toModify.addEnhancement(iVal);
 		logger.log(Level.INFO, "Added ItemEnhancement {0} to {1}", iVal, toModify);
-		
+
 		SR6GearTool.recalculate("", getModel(), toModify);
 		parent.runProcessors();
-		
+
 		return new OperationResult<ItemEnhancementValue<SR6ItemEnhancement>>(iVal);
 	}
 
@@ -168,7 +171,10 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 	 */
 	@Override
 	public Possible canBeDeselected(ItemEnhancementValue<SR6ItemEnhancement> value) {
-		return (toModify.getEnhancements().contains(value))?Possible.TRUE:Possible.FALSE; 
+		boolean found = toModify.getEnhancements().contains(value);
+		if (found) return Possible.TRUE;
+		logger.log(Level.WARNING, "Enhancement {0} is not part of {1}", value, toModify.getEnhancements());
+		return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
 	}
 
 	//-------------------------------------------------------------------
@@ -183,14 +189,15 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 			logger.log(Level.WARNING, "Trying to deselect an ItemEnhancement that may not be deselected: "+poss);
 			return false;
 		}
-		
+
 		toModify.removeEnhancement(value);
 		logger.log(Level.INFO, "Removed ItemEnhancement {0} from {1}", value, toModify);
-		
+
 		SR6GearTool.recalculate("", getModel(), toModify);
+		logger.log(Level.INFO, "Done recalculating {0}", toModify);
 		parent.runProcessors();
-		
-		return false;
+
+		return true;
 	}
 
 	//-------------------------------------------------------------------

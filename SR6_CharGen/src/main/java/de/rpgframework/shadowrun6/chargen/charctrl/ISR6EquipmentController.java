@@ -20,7 +20,7 @@ public interface ISR6EquipmentController extends IEquipmentController<ItemTempla
 
 	//-------------------------------------------------------------------
 	public List<ItemTemplate> getAvailable(CarryMode mode, ItemType...types);
-		
+
 	public ComplexDataItemController<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>> getItemEnhancementController(CarriedItem<ItemTemplate> toModify);
-	
+
 }

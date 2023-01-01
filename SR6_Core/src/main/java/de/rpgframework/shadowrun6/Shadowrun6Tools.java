@@ -733,7 +733,6 @@ public class Shadowrun6Tools {
 					max = tmp.getMaxValue();
 				}
 			} else {
-				logger.log(Level.WARNING, "ToDo: check unresolved requirement "+req.getKey()+":"+tmp.getFormula()+" for "+requiredFor.getClass());
 				if (requiredFor.getClass()==ItemTemplate.class) {
 					CarryMode mode = ((ItemTemplate) requiredFor).getUsages().get(0).getMode();
 					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, mode, model, false, decisions).get();
@@ -744,7 +743,8 @@ public class Shadowrun6Tools {
 						String raw = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, (FormulaImpl)tmp.getFormula(), resolver);
 						min = Integer.valueOf(raw);
 					}
-				}
+				} else
+					logger.log(Level.WARNING, "ToDo: check unresolved requirement "+req.getKey()+":"+tmp.getFormula()+" for "+requiredFor.getClass());
 			}
 			Object item = ShadowrunReference.resolve(type, req.getKey());
 			if (item==null && !("CHOICE".equals(req.getKey()))) {
