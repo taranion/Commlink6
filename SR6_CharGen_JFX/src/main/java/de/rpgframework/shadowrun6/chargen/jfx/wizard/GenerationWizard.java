@@ -67,7 +67,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageAttributes attrib;
 	private SR6WizardPageSkills skills;
 	private SR6WizardPageSpells spells;
-	private WizardPageRituals rituals;
+	private SR6WizardPageRituals rituals;
 	private WizardPageAdeptPowers powers;
 	private SR6WizardPageComplexForms complexForms;
 	private SR6WizardPageMetaOrEcho metaEchoes;
@@ -149,7 +149,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());
 		spells = new SR6WizardPageSpells(this, wrapper);
-		rituals = new WizardPageRituals(this, wrapper);
+		rituals = new SR6WizardPageRituals(this, wrapper);
 		powers = new SR6WizardPageAdeptPowers(this, wrapper);
 		complexForms = new SR6WizardPageComplexForms(this, wrapper);
 		metaEchoes   = new SR6WizardPageMetaOrEcho(this, wrapper);

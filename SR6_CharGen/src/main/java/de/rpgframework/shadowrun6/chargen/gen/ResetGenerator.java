@@ -67,7 +67,11 @@ public class ResetGenerator implements ProcessingStep {
 			model.setPowerLevel(level);
 		}
 
-		if (charGen instanceof LifePathCharacterGenerator) {
+		SR6CharacterGenerator real = charGen;
+		if (charGen instanceof GeneratorWrapper)
+			real = ((GeneratorWrapper)charGen).getWrapped();
+
+		if (real instanceof LifePathCharacterGenerator) {
 			SR6LifePathSettings settings = model.getCharGenSettings(SR6LifePathSettings.class);
 			switch (level) {
 			case STREET_LEVEL:
@@ -80,7 +84,7 @@ public class ResetGenerator implements ProcessingStep {
 				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), 8));
 				break;
 			}
-		} else if (charGen instanceof PointBuyCharacterGenerator) {
+		} else if (real instanceof PointBuyCharacterGenerator) {
 			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 			settings.perAttrib.get(ShadowrunAttribute.MAGIC).base=0;
 			settings.perAttrib.get(ShadowrunAttribute.RESONANCE).base=0;

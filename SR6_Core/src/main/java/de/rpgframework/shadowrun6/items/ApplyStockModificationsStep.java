@@ -16,6 +16,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -57,6 +58,10 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 					embedModification(strict, charac, model2, (EmbedModification) tmp);
 				} else if (tmp instanceof DataItemModification) {
 					applyModification(strict, charac, model2, (DataItemModification) tmp);
+				} else if (tmp instanceof ModificationChoice) {
+					if (strict) {
+						logger.log(Level.ERROR, "Unsupported modification: " + tmp);
+					}
 				} else {
 					logger.log(Level.ERROR, "Unsupported modification: " + tmp);
 				}
@@ -201,10 +206,10 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				logger.log(Level.DEBUG, "Search choice "+choice+" in decisions "+mod.getDecisions());
 				// Use the decision instead of the key
 				for (Decision d : model.getDecisions()) {
-					logger.log(Level.WARNING, "Compare {0} with {1}", d.getChoiceUUID(), mod.getConnectedChoice());
+//					logger.log(Level.WARNING, "Compare {0} with {1}", d.getChoiceUUID(), mod.getConnectedChoice());
 					if (d.getChoiceUUID().equals(mod.getConnectedChoice())) {
 						templ = mod.getReferenceType().resolve(d.getValue());
-						logger.log(Level.WARNING, "CHOICE was "+templ);
+//						logger.log(Level.WARNING, "CHOICE was "+templ);
 						break;
 					}
 				}

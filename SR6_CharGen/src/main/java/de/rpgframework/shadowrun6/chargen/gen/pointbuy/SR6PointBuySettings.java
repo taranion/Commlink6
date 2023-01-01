@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
@@ -33,7 +34,14 @@ public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 	public Map<String, PerSkillPoints> perSkill;
 	public Map<SpellValue, Boolean> perSpellPayedWithCP;
 	public Map<RitualValue, Boolean> perRitualPayedWithCP;
-	
+	public Map<ComplexFormValue, Boolean> perCFormPayedWithCP;
+	public int ppCP;
+	public int ppKarma;
+	public int spellsCP;
+	public int spellsKarma;
+	public int cformsCP;
+	public int cformsKarma;
+
 	public transient int sumSpellsRituals;
 
 	//-------------------------------------------------------------------
@@ -47,6 +55,7 @@ public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 		perSkill = new LinkedHashMap<>();
 		perSpellPayedWithCP = new LinkedHashMap<>();
 		perRitualPayedWithCP = new LinkedHashMap<>();
+		perCFormPayedWithCP  = new LinkedHashMap<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -60,7 +69,7 @@ public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 		}
 		return buf.toString();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public String toSkillString() {
 		StringBuffer buf = new StringBuffer();
@@ -72,25 +81,25 @@ public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 		}
 		return buf.toString();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public PerSkillPoints get(SR6SkillValue sVal) {
 		SR6Skill skill = sVal.getModifyable();
 		String id = skill.getId();
 		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
 			id+="/"+sVal.getUuid();
-		} 
+		}
 		return perSkill.get(id);
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void put(SR6SkillValue sVal, PerSkillPoints per) {
 		SR6Skill skill = sVal.getModifyable();
 		String id = skill.getId();
 		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
 			id+="/"+sVal.getUuid();
-		} 
+		}
 		perSkill.put(id, per);
 	}
-	
+
 }

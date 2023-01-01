@@ -14,6 +14,21 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.LifepathModule",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.LifepathModule$Type",
+  "allDeclaredFields":true,
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.LifepathModuleList",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.MartialArts",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]

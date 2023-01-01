@@ -12,9 +12,11 @@ import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.PriorityType;
+import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.PriorityCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SumToTenCharacterGenerator;
@@ -40,7 +42,7 @@ public class CharacterGeneratorRegistry {
 	//-------------------------------------------------------------------
 	private static void addGenerator(Class<? extends SR6CharacterGenerator> clazz) {
 		GeneratorId anno = clazz.getAnnotation(GeneratorId.class);
-		if (anno==null) 
+		if (anno==null)
 			throw new RuntimeException(clazz+" needs a @GeneratorId");
 		generators.put(anno.value(), clazz);
 	}
@@ -52,7 +54,7 @@ public class CharacterGeneratorRegistry {
 
 	//-------------------------------------------------------------------
 	public static SR6CharacterGenerator getGenerator(String id, Shadowrun6Character model, CharacterHandle handle) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException  {
-		
+
 		Class<? extends SR6CharacterGenerator> clazz = generators.get(id);
 		if (clazz==null)
 			throw new NoSuchElementException("Unknown generator: "+id);
@@ -62,7 +64,7 @@ public class CharacterGeneratorRegistry {
 	//---------------------------------------------------------
 	public static List<String> getGenerationInfoStrings(Shadowrun6Character model, Locale loc) {
 		List<String> ret = new ArrayList<>();
-		
+
 		// Character Generator
 		SR6CharacterGenerator charGen = null;
 		Class<? extends SR6CharacterGenerator> clazz = null;
@@ -76,7 +78,7 @@ public class CharacterGeneratorRegistry {
 			}
 		} else
 			ret.add(RES.getString("chargeninfo.no_generator", loc));
-		
+
 		// Depending on rule system
 		if (clazz==PriorityCharacterGenerator.class || clazz==SumToTenCharacterGenerator.class) {
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
@@ -91,14 +93,30 @@ public class CharacterGeneratorRegistry {
 				ret.add( RES.format("chargeninfo.prio.mysadpp", loc, settings.getMagicForPP()));
 			}
 		}
-		
+		if (clazz==PointBuyCharacterGenerator.class) {
+			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+			ret.add(RES.format("chargeninfo.pointbuy.adjust", loc, settings.cpBoughtSpecial, settings.cpBoughtSpecial/4));
+			ret.add(RES.format("chargeninfo.pointbuy.attrib", loc, settings.cpBoughtAttrib, settings.cpBoughtAttrib/2));
+			ret.add(RES.format("chargeninfo.pointbuy.skill", loc, settings.cpToSkills, settings.cpToSkills/2));
+			ret.add(RES.format("chargeninfo.pointbuy.ppoints", loc, settings.ppCP , settings.ppKarma));
+			int karma=0, cp=0;
+			for (Boolean b : settings.perSpellPayedWithCP.values())
+				if (b) cp++; else karma++;
+			for (Boolean b : settings.perRitualPayedWithCP.values())
+				if (b) cp++; else karma++;
+			if (model.getMagicOrResonanceType().usesSpells()) {
+				ret.add(RES.format("chargeninfo.pointbuy.spells", loc, cp, karma));
+			}
+			ret.add(RES.format("chargeninfo.pointbuy.resrc", loc, settings.cpToResources, settings.cpToResources*20000));
+		}
+
 		// Karma to nuyen
 		CommonSR6GeneratorSettings settings = model.getCharGenSettings(CommonSR6GeneratorSettings.class);
 		if (settings!=null) {
 			ret.add( RES.format("chargeninfo.conversion.nuyen", loc, settings.getKarmaToNuyen()));
 			ret.add( RES.format("chargeninfo.conversion.contacts", loc, settings.getBoughtContactPoints()));
 		}
-		
+
 		return ret;
 	}
 

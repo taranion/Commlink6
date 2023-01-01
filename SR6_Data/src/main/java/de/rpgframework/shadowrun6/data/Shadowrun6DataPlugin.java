@@ -59,8 +59,6 @@ import de.rpgframework.shadowrun.SpellFeatureList;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.TraditionList;
 import de.rpgframework.shadowrun6.ActionList;
-import de.rpgframework.shadowrun6.DataStructure;
-import de.rpgframework.shadowrun6.DataStructureList;
 import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.LifepathModuleList;
 import de.rpgframework.shadowrun6.MartialArts;
@@ -107,7 +105,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class Shadowrun6DataPlugin  {
 
-	private static Logger logger = System.getLogger("shadowrun6.data");
+	private static Logger logger = System.getLogger("de.rpgframework.shadowrun6.data");
 
 	private static boolean alreadyInitialized = false;
 
@@ -302,7 +300,7 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" transhumanisms");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-complete.xml");
 //			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/SR6C_Packs_WIP_1.xml");
-			//logger.log(Level.DEBUG, "Loaded "+list.size()+" complete PACKs");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" complete PACKs");
 			list = Shadowrun6Core.loadDataItems(LifepathModuleList.class, LifepathModule.class, set, clazz,"companion/data/lifepath.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" lifepath modules");
 

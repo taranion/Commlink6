@@ -7,18 +7,14 @@ import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
-import de.rpgframework.shadowrun.ComplexForm;
-import de.rpgframework.shadowrun.ComplexFormValue;
-import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
-import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageComplexForms;
+import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageRituals;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityComplexFormGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyRitualGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityRitualGenerator;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -28,24 +24,16 @@ import javafx.scene.layout.Region;
  * @author prelle
  *
  */
-public class SR6WizardPageComplexForms extends WizardPageComplexForms {
+public class SR6WizardPageRituals extends WizardPageRituals {
 
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
 
 	protected NumberUnitBackHeader backHeaderCP;
 
 	//-------------------------------------------------------------------
-	public SR6WizardPageComplexForms(Wizard wizard, IShadowrunCharacterController<?, ?, ?, ?> charGen) {
+	public SR6WizardPageRituals(Wizard wizard, SR6CharacterController charGen) {
 		super(wizard, charGen);
-	}
-
-	//-------------------------------------------------------------------
-	protected void initComponents() {
-		super.initComponents();
-		selection.setOptionCallback( (item,list) -> {
-			ChoiceSelectorDialog<ComplexForm, ComplexFormValue> dialog = new ChoiceSelectorDialog<>(charGen.getComplexFormController());
-			return dialog.apply(item, list);
-		});
+		// TODO Auto-generated constructor stub
 	}
 
 	//-------------------------------------------------------------------
@@ -70,12 +58,12 @@ public class SR6WizardPageComplexForms extends WizardPageComplexForms {
 	//-------------------------------------------------------------------
 	protected void refresh() {
 		super.refresh();
-		IComplexFormController spellCtrl = charGen.getComplexFormController();
+		IRitualController spellCtrl = charGen.getRitualController();
 		SR6CharacterGenerator real = (SR6CharacterGenerator) charGen;
 		if (charGen instanceof GeneratorWrapper)
 			real = ((GeneratorWrapper)charGen).getWrapped();
 
-		if (spellCtrl instanceof SR6PriorityComplexFormGenerator) {
+		if (spellCtrl instanceof SR6PriorityRitualGenerator) {
 			backHeaderCP.setVisible(false);
 		} else
 		if (real instanceof ISR6PointBuyGenerator) {

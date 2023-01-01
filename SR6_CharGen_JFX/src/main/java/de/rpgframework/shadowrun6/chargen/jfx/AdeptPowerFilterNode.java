@@ -29,18 +29,18 @@ import javafx.scene.layout.VBox;
  *
  */
 public class AdeptPowerFilterNode extends ComplexDataItemListFilter<AdeptPower,AdeptPowerValue> {
-	
+
 	private final static Logger logger = System.getLogger(AdeptPowerFilterNode.class.getPackageName());
-	
+
 	private enum Sort {
 		NAME,
 		COST
 	}
-	
+
 	private ResourceBundle RES;
 	private Button btnSort;
 	private TextField tfSearch;
-	
+
 	private Comparator<AdeptPower> compareByName = new Comparator<AdeptPower>() {
 		public int compare(AdeptPower q1, AdeptPower q2) {
 			return Collator.getInstance().compare(q1.getName(), q2.getName());
@@ -54,7 +54,7 @@ public class AdeptPowerFilterNode extends ComplexDataItemListFilter<AdeptPower,A
 			return c;
 		}
 	};
-	
+
 	private Sort currentSort = Sort.NAME;
 
 	//-------------------------------------------------------------------
@@ -66,26 +66,26 @@ public class AdeptPowerFilterNode extends ComplexDataItemListFilter<AdeptPower,A
 		initInteractivity();
 		refreshAvailable();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		btnSort = new Button(null,new SymbolIcon("sort"));
-		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "AdeptPower.sort.tooltip")));
-		
+		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "pages.adeptpowers.sort.tooltip")));
+
 		tfSearch = new TextField();
-		tfSearch.setPromptText(ResourceI18N.get(RES, "AdeptPower.search.prompt"));
+		tfSearch.setPromptText(ResourceI18N.get(RES, "page.adeptpowers.search.prompt"));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		HBox line = new HBox(btnSort);
 		HBox.setHgrow(line, Priority.ALWAYS);
 		line.setMaxWidth(Double.MAX_VALUE);
 		getChildren().addAll(line, tfSearch);
-		
+
 		VBox.setMargin(tfSearch, new Insets(5,0,5,0));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		btnSort.setOnAction(ev -> {
@@ -97,10 +97,10 @@ public class AdeptPowerFilterNode extends ComplexDataItemListFilter<AdeptPower,A
 
 			refreshAvailable();
 		});
-		
+
 		tfSearch.textProperty().addListener( (ov,o,n) -> refreshAvailable());
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void refreshAvailable() {
 		final String search = tfSearch.getText().toLowerCase();
@@ -111,7 +111,7 @@ public class AdeptPowerFilterNode extends ComplexDataItemListFilter<AdeptPower,A
 //		logger.log(Level.INFO, "{0} items now", filtered.size());
 //		logger.log(Level.DEBUG, "byName ="+compareByName);
 //		logger.log(Level.DEBUG, "byKarma="+compareByKarma);
-		
+
 		switch (currentSort) {
 		case NAME : Collections.sort(filtered, compareByName); break;
 		case COST: Collections.sort(filtered, compareByKarma); break;
