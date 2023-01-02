@@ -15,6 +15,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathMagicOrResonanceController;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathMetatypeController;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathResetGenerator;
@@ -30,7 +31,7 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 
 	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(LifePathCharacterGenerator.class,
 			Locale.ENGLISH, Locale.GERMAN);
-	
+
 	private boolean setupDone;
 
 	//-------------------------------------------------------------------
@@ -58,8 +59,8 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 		return new WizardPageType[] {
 				WizardPageType.METATYPE,
 				WizardPageType.SR6_LIFEPATH1,
-				WizardPageType.MAGIC_OR_RESONANCE, 
-				WizardPageType.SURGE, 
+				WizardPageType.MAGIC_OR_RESONANCE,
+				WizardPageType.SURGE,
 				WizardPageType.INFECTED};
 	}
 
@@ -89,7 +90,7 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
 		this.model = model;
 		this.handle= handle;
-		this.setupDone = false;		
+		this.setupDone = false;
 		SR6LifePathSettings settings = new SR6LifePathSettings();
 		settings.variant = PowerLevel.STANDARD;
 //		model.addRule(Shadowrun6Rules.CHARGEN_ALLOW_INITIATION, "false");
@@ -97,14 +98,14 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 		model.setCharGenSettings(settings);
 		model.setKarmaFree(50);
 		logger.log(Level.INFO, "----------------Start generator-----------------------" + toString() + "\n\n\n");
-		
+
 		try {
 			setupProcessChain();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			logger.log(Level.ERROR, "Failed on process chain", e);
 		}
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -141,6 +142,7 @@ public class LifePathCharacterGenerator extends CommonSR6CharacterGenerator {
 		meta = new SR6LifePathMetatypeController(this);
 		magicReso = new SR6LifePathMagicOrResonanceController(this);
 //		skill = new PointBuySR6SkillGenerator(this);
+		martial   = new SR6MartialArtsController(this);
 		logger.log(Level.INFO, "meta = " + getMetatypeController() + "  of " + this);
 
 	}

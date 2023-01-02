@@ -12,15 +12,18 @@ import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection;
-import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection.Type;
+import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.MartialArtsSection;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -35,7 +38,7 @@ import javafx.scene.control.Label;
 public class CombatPage extends Page {
 
 	private final static Logger logger = System.getLogger(CombatPage.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 
 	private GearSection secRanged;
@@ -43,10 +46,11 @@ public class CombatPage extends Page {
 	private GearSection secArmor;
 	private GearSection secAmmo;
 	protected CombatSection secCombat;
+	private MartialArtsSection secMartial;
 
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
-	
+
 	private SR6CharacterController ctrl;
 
 	//-------------------------------------------------------------------
@@ -56,7 +60,7 @@ public class CombatPage extends Page {
 		initLayout();
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		initRangedWeapons();
@@ -64,8 +68,9 @@ public class CombatPage extends Page {
 		initArmor();
 		initCombat();
 		initAmmunition();
+		initMartialArts();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initCombat() {
 		secCombat = new CombatSection(Type.PHYSICAL);
@@ -73,11 +78,11 @@ public class CombatPage extends Page {
 		FlexGridPane.setMinHeight(secCombat, 6);
 		FlexGridPane.setMediumWidth(secCombat, 8);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initRangedWeapons() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_RANGED, ItemType.WEAPON_SPECIAL); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_RANGED, ItemType.WEAPON_SPECIAL); 
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_RANGED, ItemType.WEAPON_SPECIAL);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_RANGED, ItemType.WEAPON_SPECIAL);
 		secRanged = new GearSection(
 				ResourceI18N.get(RES, "page.combat.section.ranged"), selectFilter, showFilter
 				);
@@ -89,11 +94,11 @@ public class CombatPage extends Page {
 		FlexGridPane.setMaxWidth(secRanged, 5);
 		FlexGridPane.setMaxHeight(secRanged, 7);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initMeleeWeapons() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_CLOSE_COMBAT); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_CLOSE_COMBAT); 
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_CLOSE_COMBAT);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.WEAPON_CLOSE_COMBAT);
 		secMelee = new GearSection(
 				ResourceI18N.get(RES, "page.combat.section.melee"), selectFilter, showFilter
 				);
@@ -105,11 +110,11 @@ public class CombatPage extends Page {
 		FlexGridPane.setMaxWidth(secMelee, 4);
 		FlexGridPane.setMaxHeight(secMelee, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initArmor() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ARMOR); 
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ARMOR); 
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ARMOR);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ARMOR);
 		secArmor = new GearSection(
 				ResourceI18N.get(RES, "page.combat.section.armor"), selectFilter, showFilter
 				);
@@ -121,10 +126,10 @@ public class CombatPage extends Page {
 		FlexGridPane.setMaxWidth(secArmor, 4);
 		FlexGridPane.setMaxHeight(secArmor, 6);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initAmmunition() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION); 
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION);
 		Predicate<CarriedItem<ItemTemplate>> showFilter = ItemUtil.AMMUNITION_FILTER;
 		secAmmo = new GearSection(
 				ResourceI18N.get(RES, "page.combat.section.ammo"), selectFilter, showFilter
@@ -137,25 +142,40 @@ public class CombatPage extends Page {
 		FlexGridPane.setMaxWidth(secAmmo, 5);
 		FlexGridPane.setMaxHeight(secAmmo, 7);
 	}
-	
+
+	//-------------------------------------------------------------------
+	private void initMartialArts() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.AMMUNITION);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = ItemUtil.AMMUNITION_FILTER;
+		secMartial = new MartialArtsSection();
+		secMartial.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secMartial, 4);
+		FlexGridPane.setMinHeight(secMartial, 6);
+		FlexGridPane.setMediumWidth(secMartial, 5);
+		FlexGridPane.setMediumHeight(secMartial, 6);
+		FlexGridPane.setMaxWidth(secMartial, 5);
+		FlexGridPane.setMaxHeight(secMartial, 7);
+	}
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		
+
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secRanged, secMelee, secArmor, secAmmo);
-		
+		flex.getChildren().addAll(secRanged, secMelee, secArmor, secAmmo, secMartial);
+
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		secRanged.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secMelee.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secArmor.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secAmmo.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secMartial.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
 	//-------------------------------------------------------------------
@@ -168,21 +188,36 @@ public class CombatPage extends Page {
 			layout.setTitle(n.getModifyable().getName());
 		}
 	}
-	
+
+	//-------------------------------------------------------------------
+	private void showDescription(ComplexDataItemValue<?> n) {
+		logger.log(Level.INFO, "Show description "+n);
+		if (n==null) {
+			layout.setOptional(null);
+		} else {
+			layout.setOptional( new GenericDescriptionVBox(
+					Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+					Shadowrun6Tools.modificationResolver(Locale.getDefault()),
+					n.getResolved()));
+			layout.setTitle(n.getModifyable().getName());
+		}
+	}
+
 	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
 			throw new NullPointerException("controller is null");
-		
+
 		this.ctrl = ctrl;
 		secRanged.updateController(ctrl);
 		secMelee.updateController(ctrl);
 		secArmor.updateController(ctrl);
 		secAmmo.updateController(ctrl);
+		secMartial.updateController(ctrl);
 		refresh();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void refresh() {
 		secRanged.refresh();
@@ -190,6 +225,7 @@ public class CombatPage extends Page {
 		secArmor.refresh();
 		secAmmo.refresh();
 		secCombat.setData(ctrl.getModel());
+		secMartial.refresh();
 	}
 
 }

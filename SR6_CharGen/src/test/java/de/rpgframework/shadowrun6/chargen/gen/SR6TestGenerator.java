@@ -30,6 +30,7 @@ import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
+import de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -41,7 +42,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  *
  */
 public class SR6TestGenerator implements SR6CharacterGenerator {
-	
+
 	private Shadowrun6Character model;
 	private RuleController ruleCtrl;
 
@@ -50,7 +51,7 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 	 */
 	public SR6TestGenerator(Shadowrun6Character model) {
 		this.model = model;
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -412,6 +413,12 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 	public void finish() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public IMartialArtsController getMartialArtsController() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

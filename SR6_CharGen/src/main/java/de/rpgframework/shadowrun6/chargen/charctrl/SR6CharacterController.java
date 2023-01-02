@@ -20,5 +20,7 @@ public interface SR6CharacterController extends IShadowrunCharacterController<SR
 	public SR6LifestyleController getLifestyleController();
 
 	public IQualityPathController getQualityPathController();
-	
+
+	public IMartialArtsController getMartialArtsController();
+
 }

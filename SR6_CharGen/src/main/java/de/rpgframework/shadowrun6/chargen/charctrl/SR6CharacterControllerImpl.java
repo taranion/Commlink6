@@ -22,7 +22,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  */
 public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl<ShadowrunAttribute,Shadowrun6Character	>
 		implements SR6CharacterController {
-	
+
 	protected IAttributeController attributes;
 	protected SR6SkillController skills;
 	protected IQualityController qualities;
@@ -38,23 +38,24 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected IPANController pan;
 	protected IFocusController foci;
 	protected IQualityPathController qPaths;
-	
+	protected IMartialArtsController martial;
+
 	//-------------------------------------------------------------------
 	public SR6CharacterControllerImpl() {
 		// Moved to child controller/generators
 		//createPartialController();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public SR6CharacterControllerImpl(Shadowrun6Character model, CharacterHandle handle, Class<?> charGenSettingsClazz) {
 		super(model,handle);
 		model.readCharGenSettings(charGenSettingsClazz);
 		createPartialController();
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
-	 * Called by constructor to setup partial controllers 
+	 * Called by constructor to setup partial controllers
 	 */
 	abstract protected void createPartialController();
 
@@ -102,7 +103,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	public IContactController getContactController() {
 		return contacts;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getAdeptPowerController()
@@ -111,7 +112,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	public IAdeptPowerController getAdeptPowerController() {
 		return adeptPowers;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getSpellController()
@@ -120,7 +121,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	public SR6SpellController getSpellController() {
 		return spells;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getRitualController()
@@ -129,7 +130,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	public IRitualController getRitualController() {
 		return rituals;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getMetamagicOrEchoController()
@@ -138,7 +139,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	public IMetamagicOrEchoController getMetamagicOrEchoController() {
 		return metaEcho;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getEquipmentController()
@@ -191,4 +192,14 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	public IQualityPathController getQualityPathController() {
 		return qPaths;
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getMartialArtsController()
+	 */
+	@Override
+	public IMartialArtsController getMartialArtsController() {
+		return martial;
+	}
+
 }
