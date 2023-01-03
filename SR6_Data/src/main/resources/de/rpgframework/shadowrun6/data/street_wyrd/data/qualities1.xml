@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="innate_talent"      pos="true" karma="0" type="ADEPT_WAY" selectable="n" />
+   <quality id="focused_channeling" pos="true" karma="0" type="ADEPT_WAY" selectable="n">
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="6c21c77c-9cb0-4258-9048-777e92a3f08b" options="BODY,AGILITY"/>
+   	</choices>
+   	<modifications>
+   		<itemmod type="DRAIN_ADEPT" ref="CHOICE:6c21c77c-9cb0-4258-9048-777e92a3f08b"/>
+   	</modifications>
+   </quality>
+   <quality id="spark_of_brilliance" pos="true" karma="0" type="ADEPT_WAY" selectable="n">
+   	<choices>
+   		<choice type="SKILL" uuid="e26e2313-adf9-494e-82be-62387e0d4efd" />
+   	</choices>
+   	<modifications>
+   		<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
+   	</modifications>
+   </quality>
+
+   <quality id="arcane_resilience" pos="true" karma="7" type="NORMAL">
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="6c21c77c-9cb0-4258-9048-777e92a3f08c" options="LOGIC,INTUITION,CHARISMA"/>
+   	</choices>
+   	<modifications>
+   		<itemmod type="DRAIN_MAGE" ref="CHOICE:6c21c77c-9cb0-4258-9048-777e92a3f08c"/>
+   	</modifications>
+   </quality>
+   <quality id="scholastic_mage" pos="true" karma="1" type="NORMAL" >
+     <modifications>
+     		<itemmod type="RULE" ref="KNOWLEDGE_COST2_AT_GEN"/>
+     </modifications>
+   </quality>
+   <quality id="shamanic_mask" pos="true" karma="4" type="NORMAL" >
+      <modifications>
+     		<checkmod type="SKILL" ref="MAGIC" what="EDGE_ONLY_TEST" value="1"/>
+      </modifications>
+   </quality>
+   <quality id="pusillanimous_summoner" pos="false" karma="8" type="NORMAL"  />
+   <quality id="possession_tradition" pos="false" karma="10" type="NORMAL"  />
+   <quality id="representation1" pos="false" karma="5" type="NORMAL" />
+   <quality id="representation2" pos="false" karma="8" type="NORMAL" />
+
+   <quality id="close_minded_summoner" pos="false" karma="3" type="NORMAL" max="5"/>
+   <quality id="addiction_blood" pos="false" karma="0" type="NORMAL" max="6"/>
+
+</qualities>

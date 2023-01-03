@@ -78,6 +78,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
 	DATA_STRUCTURE(DataStructure.class),
+	DRAIN_MAGE(new AttributeConverter()),
+	DRAIN_ADEPT(new AttributeConverter()),
 	ELEMENT("Element"),
 	FOCUS(Focus.class),
 	GEAR(ItemTemplate.class),
