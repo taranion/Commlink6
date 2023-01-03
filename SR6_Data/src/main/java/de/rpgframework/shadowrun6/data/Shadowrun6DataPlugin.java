@@ -290,16 +290,17 @@ public class Shadowrun6DataPlugin  {
 //			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "street_wyrd/data/qualities2.xml");
 //			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "street_wyrd/data/metamagics.xml");
 //			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "street_wyrd/data/metamagics2.xml");
-//			list = Shadowrun6Core.loadDataItems(TraditionList.class, Tradition.class, set, clazz,"street_wyrd/data/traditions.xml");
-//			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic traditions");
-//			list = Shadowrun6Core.loadDataItems(SpellFeatureList.class, SpellFeature.class, set, clazz,"street_wyrd/data/spellfeatures.xml");
-//			logger.log(Level.DEBUG, "Loaded "+list.size()+" spell features");
-//			list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"street_wyrd/data/spells.xml");
-//			logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
+			list = Shadowrun6Core.loadDataItems(TraditionList.class, Tradition.class, set, clazz,"street_wyrd/data/traditions.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic traditions");
+			list = Shadowrun6Core.loadDataItems(SpellFeatureList.class, SpellFeature.class, set, clazz,"street_wyrd/data/spellfeatures.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" spell features");
+			list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"street_wyrd/data/spells.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
 //			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, set, clazz,"street_wyrd/data/spirits.xml");
 //			logger.log(Level.DEBUG, "Loaded "+list.size()+" spirits");
 //			list = Shadowrun6Core.loadDataItems(FocusList.class, Focus.class, set, clazz, "street_wyrd/data/foci.xml");
 //			logger.log(Level.DEBUG, "Loaded "+list.size()+" foci");
+			//System.exit(1);
 
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH, Locale.GERMAN);
