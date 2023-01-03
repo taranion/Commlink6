@@ -2,13 +2,9 @@ package de.rpgframework.shadowrun6.chargen.jfx.section;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import org.controlsfx.control.ToggleSwitch;
 import org.prelle.javafx.CloseType;
@@ -19,19 +15,13 @@ import org.prelle.javafx.Mode;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.Rule;
-import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.jfx.Selector;
 import de.rpgframework.jfx.section.ListSection;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.ShadowrunRules;
-import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.MartialArtsValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.listcell.MartialArtsValueListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.MartialArtsSelector;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
-import de.rpgframework.shadowrun6.items.ItemTemplate;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -58,6 +48,8 @@ public class MartialArtsSection extends ListSection<MartialArtsValue> {
 	public MartialArtsSection() {
 		super(ResourceI18N.get(RES, "section.martialarts.title"));
 		initSecondaryContent();
+
+		list.setCellFactory(lv -> new MartialArtsValueListCell( () -> control.getMartialArtsController()));
 	}
 
 	//-------------------------------------------------------------------

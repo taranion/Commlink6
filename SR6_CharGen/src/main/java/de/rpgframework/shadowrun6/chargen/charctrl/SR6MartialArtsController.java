@@ -7,23 +7,18 @@ import java.util.Date;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.ATechnique;
 import de.rpgframework.shadowrun.ShadowrunRules;
-import de.rpgframework.shadowrun.TechniqueValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.MartialArtsValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Technique;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -50,16 +45,6 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 			ret.remove(tmp.getResolved());
 		}
 		return ret;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMartialArtsController#getAvailableTechniques(de.rpgframework.shadowrun.AMartialArtsValue)
-	 */
-	@Override
-	public List<ATechnique> getAvailableTechniques(MartialArtsValue style) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	//-------------------------------------------------------------------
@@ -205,46 +190,6 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMartialArtsController#canBeSelected(de.rpgframework.shadowrun.AMartialArtsValue, de.rpgframework.shadowrun.ATechnique)
-	 */
-	@Override
-	public Possible canBeSelected(MartialArtsValue learnedIn, Technique data) {
-		// TODO Auto-generated method stub
-		return Possible.FALSE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMartialArtsController#canBeDeselected(de.rpgframework.shadowrun.TechniqueValue)
-	 */
-	@Override
-	public Possible canBeDeselected(TechniqueValue<Technique> data) {
-		// TODO Auto-generated method stub
-		return Possible.FALSE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMartialArtsController#select(de.rpgframework.shadowrun.AMartialArtsValue, de.rpgframework.shadowrun.ATechnique)
-	 */
-	@Override
-	public TechniqueValue<Technique> select(MartialArtsValue learnedIn, Technique data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMartialArtsController#deselect(de.rpgframework.shadowrun.TechniqueValue)
-	 */
-	@Override
-	public boolean deselect(TechniqueValue<Technique> data) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	//-------------------------------------------------------------------
-	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
 	@Override
@@ -293,6 +238,15 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 	@Override
 	public String getSelectionCostString(MartialArts data) {
 		return "7";
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController#getTechniqueController(de.rpgframework.shadowrun6.MartialArtsValue)
+	 */
+	@Override
+	public ITechniqueController getTechniqueController(MartialArtsValue style) {
+		return new CommonTechniqueController(parent, style);
 	}
 
 }

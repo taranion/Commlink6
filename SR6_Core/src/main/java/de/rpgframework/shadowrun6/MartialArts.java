@@ -40,6 +40,11 @@ public class MartialArts extends AMartialArts {
 	}
 
 	//-------------------------------------------------------------------
+	public String getSignatureTechniqueID() {
+		return signatureTechniqueID;
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @return the signatureTechnique
 	 */

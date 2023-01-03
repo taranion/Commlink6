@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <martialarts>
-  <martialart cat="MOBILITY,STRIKING,WEAPON"  id="52blocks"    sign="elbows_tight" /> 
-  <martialart cat="GRAPPLING"          id="aikido"      sign="sacrifice_throw" /> 
-  <martialart cat="STRIKING, WEAPON"   id="arnis"       sign="two_weapon_fighting" /> 
-  <martialart cat="WEAPON"             id="bartitsu"    sign="parry" /> 
-  <martialart cat="MOBILITY,STRIKING"  id="boxing"      sign="mean_right_hook" /> 
-  <martialart cat="MOBILITY,STRIKING"  id="capoeira"    sign="feint" /> 
-  <martialart cat="STRIKING"             id="chakram_fighting"           sign="pin" /> 
-  <martialart cat="GRAPPLING,MOBILITY" id="close_quarters_combat"      sign="releasing_talons" /> 
-  <martialart cat="WEAPON"             id="european_fencing_longsword" sign="half_sword" /> 
-  <martialart cat="WEAPON"             id="european_fencing_rapier"    sign="ballestra" /> 
-  <martialart cat="GRAPPLING,STRIKING" id="jeet_kune_do"               sign="sweep_the_leg" /> 
-  <martialart cat="WEAPON"             id="jogo_do_pao" sign="threatening_edge" /> 
-  <martialart cat="GRAPPLING"          id="jujutsu"     sign="joint_lock" /> 
-  <martialart cat="STRIKING"           id="karate"      sign="tameshiwari" /> 
-  <martialart cat="WEAPON"             id="kenjutsu"    sign="iaijutsu" /> 
-  <martialart cat="MOBILITY,STRIKING" id="kickboxing"  sign="kick_attack" /> 
-  <martialart cat="MOBILITY,STRIKING"  id="kung_fu"     sign="drunken_boxing" /> 
-  <martialart cat="MOBILITY,WEAPON"    id="kung_fu_18"  sign="tricking" /> 
-  <martialart cat="WEAPON"             id="kyujutsu"    sign="pin" /> 
-  <martialart cat="MOBILITY,STRIKING"  id="ninjutsu"    sign="dim_mak" /> 
-  <martialart cat="GRAPPLING,RANGED"   id="okichitaw"   sign="close_quarter_firearms" /> 
-  <martialart cat="MOBILITY"           id="parkour"     sign="rolling_clouds" /> 
-  <martialart cat="STRIKING"           id="tae_kwon_do" sign="flying_kick" /> 
-  <martialart cat="WEAPON"             id="the_cowboy_way" sign="entanglement" /> 
-  <martialart cat="GRAPPLING"          id="wrestling"   sign="sacrifice_throw" /> 
-  
+  <martialart cat="MOBILITY,STRIKING,WEAPON"  id="52blocks"    sign="elbows_tight" />
+  <martialart cat="GRAPPLING"          id="aikido"      sign="sacrifice_throw" />
+  <martialart cat="STRIKING, WEAPON"   id="arnis"       sign="two_weapon_fighting" />
+  <martialart cat="WEAPON"             id="bartitsu"    sign="parry" />
+  <martialart cat="MOBILITY,STRIKING"  id="boxing"      sign="mean_right_hook" />
+  <martialart cat="MOBILITY,STRIKING"  id="capoeira"    sign="feint" />
+  <martialart cat="STRIKING"             id="chakram_fighting"           sign="pin" />
+  <martialart cat="GRAPPLING,MOBILITY" id="close_quarters_combat"      sign="releasing_talons" />
+  <martialart cat="WEAPON"             id="european_fencing_longsword" sign="half_sword" />
+  <martialart cat="WEAPON"             id="european_fencing_rapier"    sign="ballestra" />
+  <martialart cat="GRAPPLING,STRIKING" id="jeet_kune_do"               sign="sweep_the_leg" />
+  <martialart cat="WEAPON"             id="jogo_do_pao" sign="threatening_edge" />
+  <martialart cat="GRAPPLING"          id="jujutsu"     sign="joint_lock" />
+  <martialart cat="STRIKING"           id="karate"      sign="tameshiwari" />
+  <martialart cat="WEAPON"             id="kenjutsu"    sign="iaijutsu" />
+  <martialart cat="MOBILITY,STRIKING" id="kickboxing"  sign="kick_attack" />
+  <martialart cat="MOBILITY,STRIKING"  id="kung_fu"     sign="drunken_boxing" />
+  <martialart cat="MOBILITY,WEAPON"    id="kung_fu_18"  sign="tricking" />
+  <martialart cat="WEAPON"             id="kyujutsu"    sign="pin" />
+  <martialart cat="MOBILITY,STRIKING"  id="ninjutsu"    sign="dim_mak" />
+  <martialart cat="GRAPPLING,RANGED"   id="okichitaw"   sign="close_quarter_firearms" />
+  <martialart cat="MOBILITY"           id="parkour"     sign="rolling_clouds" />
+  <martialart cat="STRIKING"           id="tae_kwon_do" sign="flying_kick" />
+  <martialart cat="WEAPON"             id="the_cowboy_way" sign="entanglement" />
+  <martialart cat="GRAPPLING"          id="wrestling"   sign="sacrifice_throw" />
+
   <!-- Sixth World Martial Arts -->
-  <martialart cat="MOBILITY,STRIKING,WEAPON"  id="careomeleg" sign="bending_of_the_reed_melee" /> 
-  <martialart cat="MOBILITY,RANGED"    id="gun_kata" sign="close_quarter_firearms_handguns" /> 
-  <martialart cat="GRAPPLING,STRIKING" id="hapsum_do" sign="meridian_strike" /> 
-  <martialart cat="GRAPPLING,RANGED,STRIKING" id="lone_star_tactical" sign="multi_opponent_combat" /> 
-  <martialart cat="GRAPPLING,RANGED,STRIKING" id="knight_errant_tactical" sign="releasing_talons" /> 
-  <martialart cat="GRAPPLING,MOBILITY,STRIKING" id="oni_ryu_taijutsu" sign="oaken_stance" /> 
-  <martialart cat="STRIKING,WEAPON"    id="sangre_y_acero" sign="iron_limbs" /> 
-  <martialart cat="GRAPPLING,RANGED,STRIKING" id="wildcat" sign="releasing_talons" /> 
-  
-  
+  <martialart cat="MOBILITY,STRIKING,WEAPON"  id="carromeleg" sign="bending_of_the_reed_melee" />
+  <martialart cat="MOBILITY,RANGED"    id="gun_kata" sign="close_quarter_firearms_handguns" />
+  <martialart cat="GRAPPLING,STRIKING" id="hapsum_do" sign="meridian_strike" />
+  <martialart cat="GRAPPLING,RANGED,STRIKING" id="lone_star_tactical" sign="multi_opponent_combat" />
+  <martialart cat="GRAPPLING,RANGED,STRIKING" id="knight_errant_tactical" sign="releasing_talons" />
+  <martialart cat="GRAPPLING,MOBILITY,STRIKING" id="oni_ryu_taijutsu" sign="oaken_stance" />
+  <martialart cat="STRIKING,WEAPON"    id="sangre_y_acero" sign="iron_limbs" />
+  <martialart cat="GRAPPLING,RANGED,STRIKING" id="wildcat" sign="releasing_talons" />
+
+
 </martialarts>
