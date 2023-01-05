@@ -27,6 +27,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
@@ -179,6 +180,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		contacts  = new SR6ContactGenerator(this);
 		foci      = new SR6CommonFocusController(this);
 		qPaths    = new CommonQualityPathController(this);
+		martial   = new SR6MartialArtsController(this);
 	}
 
 	// --------------------------------------------------------------------

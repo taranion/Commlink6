@@ -36,6 +36,7 @@ import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.DataStructure;
 import de.rpgframework.shadowrun6.LifepathModule;
+import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.ReturnIdAsResultConverter;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
@@ -90,6 +91,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	LIFEMOD(LifepathModule.class),
 	LIFESTYLE(new LifestyleQualityConverter()),
 	MAGIC_RESO(MagicOrResonanceType.class),
+	MARTIAL_ART(MartialArts.class),
 	MATRIX_ATTRIBUTE(new ItemAttributeConverter()),
 	MENTOR_SPIRIT(MentorSpirit.class),
 	METAECHO(MetamagicOrEcho.class),

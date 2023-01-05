@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.core.BabylonEventBus;
+import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Reward;
@@ -62,7 +64,6 @@ import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
-import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
@@ -496,26 +497,17 @@ public class Shadowrun6Tools {
 			case ITEMSUBTYPE:
 				ItemSubType subtype = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
 				return prefix+subtype.getName();
+			case ADEPT_POWER:
 			case MAGIC_RESO:
-				MagicOrResonanceType morType = Shadowrun6Core.getItem(MagicOrResonanceType.class, tmp.getKey());
-				if (morType==null)
-					return "Unknown "+tmp.getKey();
-				return prefix+morType.getName(loc);
+			case MARTIAL_ART:
 			case METAECHO:
-				MetamagicOrEcho metaE = Shadowrun6Core.getItem(MetamagicOrEcho.class, tmp.getKey());
-				if ( metaE==null)
-					return "Unknown "+tmp.getKey();
-				return prefix+ metaE.getName(loc);
 			case METATYPE:
-				SR6MetaType meta = Shadowrun6Core.getItem(SR6MetaType.class, tmp.getKey());
-				if ( meta==null)
-					return "Unknown "+tmp.getKey();
-				return prefix+ meta.getName(loc);
 			case QUALITY:
-				Quality qual = Shadowrun6Core.getItem(Quality.class, tmp.getKey());
-				if (qual==null)
+			case TECHNIQUE:
+				DataItem data = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				if (data==null)
 					return "Unknown "+tmp.getKey();
-				return prefix+qual.getName(loc);
+				return prefix+data.getName(loc);
 			case SKILL:
 				String value = (req instanceof ValueRequirement)?((ValueRequirement)req).getRawValue():"";
 				if ("CHOICE".equals(tmp.getKey())) {
@@ -559,7 +551,9 @@ public class Shadowrun6Tools {
 			case SKILL:
 				item = ShadowrunReference.resolve(type, req.getKey());
 				return item.getName(loc)+" "+tmp.getRawValue()+"+";
+			case ADEPT_POWER:
 			case QUALITY:
+			case TECHNIQUE:
 				DataItem qual = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
 				if (qual==null)
 					return "Unknown "+tmp.getKey();
@@ -660,6 +654,23 @@ public class Shadowrun6Tools {
 				}
 				resolver.process(false, ShadowrunReference.ITEM_ATTRIBUTE, model, tmp, List.of());
 				SR6GearTool.recalculate("", model, tmp);
+			}
+
+			logger.log(Level.DEBUG, "resolve martial arts");
+			for (MartialArtsValue tmp : model.getMartialArts()) {
+				MartialArts resolved = Shadowrun6Core.getItem(MartialArts.class, tmp.getKey());
+				tmp.setResolved(resolved);
+				Technique resolved2 = Shadowrun6Core.getItem(Technique.class, resolved.getSignatureTechniqueID());
+				if (resolved2==null) {
+					logger.log(Level.ERROR, "Failed resolving reference {1} ''{2}'' in character {0}", model.getName(), ShadowrunReference.MARTIAL_ART, resolved.getSignatureTechniqueID(), null);
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, "Data error for martial art "+resolved);
+				}
+
+			}
+			logger.log(Level.DEBUG, "resolve martial arts");
+			for (TechniqueValue tmp : model.getTechniquesAll()) {
+				Technique resolved = Shadowrun6Core.getItem(Technique.class, tmp.getKey());
+				tmp.setResolved(resolved);
 			}
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed resolving reference {1} ''{2}'' in character {0}", model.getName(), e.getReferenceError().getType(), e.getReferenceError().getReference(), e);
@@ -1827,6 +1838,30 @@ public class Shadowrun6Tools {
 			AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.REPUTATION);
 			val.setDistributed( val.getDistributed() - modHeat.getValue());
 		}
+	}
+
+
+	//-------------------------------------------------------------------
+	public static <T extends DataItem> List<T> filterByPluginSelection(List<T> unfiltered, Shadowrun6Character model) {
+//		if (model.getPluginMode()==PluginMode.ALL)
+			return unfiltered;
+//		List<T> filtered = new ArrayList<T>();
+//		for (T tmp : unfiltered) {
+//			if (tmp.getPlugin().getID().equals("CORE")) {
+//				filtered.add(tmp);
+//			} else if (model.getPluginMode()==PluginMode.LANGUAGE || model.getPluginMode()==null) {
+//				if (tmp.getPlugin().getLanguages().contains(Locale.getDefault().getLanguage())) {
+//					filtered.add(tmp);
+//				}
+//			} else {
+//				// Selected
+//				if (model.getPermittedPlugins()!=null && model.getPermittedPlugins().contains(tmp.getPlugin().getID())) {
+//					filtered.add(tmp);
+//				}
+//			}
+//
+//		}
+//		return filtered;
 	}
 
 }

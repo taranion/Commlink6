@@ -32,9 +32,9 @@ import javafx.scene.text.Text;
  *
  */
 public class VisualQualityPathPane extends Group {
-	
+
 	private final static int WIDTH_UNIT = 60;
-	
+
 	private final static Logger logger = System.getLogger(VisualQualityPathPane.class.getPackageName());
 
 	private class PathNode {
@@ -45,13 +45,13 @@ public class VisualQualityPathPane extends Group {
 			y=lvl;
 		}
 	}
-	
+
 	private QualityPath data;
 	private Map<Integer,List<PathNode>> nodesPerLevel = new LinkedHashMap<>();
 	private Map<String,PathNode> nodesByID = new HashMap<>();
 	private Map<QualityPathStep, Circle> dotsByStep = new HashMap<>();
 	private SelectionModel<QualityPathStep> selectionModel;
-	
+
 	//-------------------------------------------------------------------
 	public VisualQualityPathPane() {
 		selectionModel = new SingleSelectionModel<QualityPathStep>() {
@@ -62,7 +62,7 @@ public class VisualQualityPathPane extends Group {
 				return data.getSteps().size();
 			}
 		};
-		
+
 		selectionModel.selectedItemProperty().addListener( (ov,o,n) -> {
 			if (o!=null) {
 				Circle old = dotsByStep.get(o);
@@ -76,12 +76,12 @@ public class VisualQualityPathPane extends Group {
 			}
 		});
 	}
-	
+
 	//-------------------------------------------------------------------
 	public SelectionModel<QualityPathStep> getSelectionModel() {
 		return selectionModel;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setData(QualityPath path) {
 		this.data = path;
@@ -108,9 +108,9 @@ public class VisualQualityPathPane extends Group {
 			nodes.add(node);
 			maxWidth = Math.max(maxWidth, nodes.size());
 		}
-		
+
 		int width = maxWidth + (maxWidth-1);
-		
+
 		// Now that each node has an Y position and we know how many
 		// nodes there a per Y-level, distribute the nodes per level evenly
 		// ...X...   ..X..   .X.
@@ -130,7 +130,7 @@ public class VisualQualityPathPane extends Group {
 			}
 		}
 	}
-	
+
 	private void redraw() {
 		getChildren().clear();
 		for (int lvl=0; lvl<nodesPerLevel.size(); lvl++) {
@@ -150,7 +150,7 @@ public class VisualQualityPathPane extends Group {
 					});
 				dotsByStep.put(node.step, dot);
 				getChildren().add(dot);
-				
+
 				// Node name
 				Text text = new Text(x+12,y, node.step.getName());
 				text.setStroke(Color.WHITE);
@@ -160,7 +160,7 @@ public class VisualQualityPathPane extends Group {
 				shadow.setSpread(1.0);
 				text.setEffect(shadow);
 				getChildren().add(text);
-				
+
 				// Lines
 				List<String> foo = node.step.getNextSteps();
 				for (String next : foo) {
@@ -169,7 +169,7 @@ public class VisualQualityPathPane extends Group {
 						logger.log(Level.ERROR, "QualityPath ''{0}'': No such next node ''{1}''", data.getId(), next);
 						continue;
 					}
-					
+
 					double ex = endNode.x * WIDTH_UNIT + WIDTH_UNIT/2;
 					double ey = endNode.y * 100;
 //					Line line = new Line(x, y, ex, ey);
@@ -178,7 +178,7 @@ public class VisualQualityPathPane extends Group {
 					if (ex>x) {
 						line.setControlX1(x+(ex-x)/2);
 					} else if (ex<x) {
-						line.setControlX1(x-(x-ex)/2);						
+						line.setControlX1(x-(x-ex)/2);
 					}
 					line.setStrokeWidth(3);
 					line.setStroke(Color.WHEAT);
@@ -196,20 +196,19 @@ public class VisualQualityPathPane extends Group {
 				    arrowEnd.setStrokeWidth(3);
 					getChildren().add(line);
 					getChildren().add(arrowEnd);
-					
+
 				}
 			}
 		}
 		// Change preferred width
-		
-		System.err.println("VisualQualityPathPane: bounds="+getLayoutBounds());
+
 	}
-	
+
 	/**
 	 * Evaluate the cubic curve at a parameter 0<=t<=1, returns a Point2D
-	 * @param c the CubicCurve 
+	 * @param c the CubicCurve
 	 * @param t param between 0 and 1
-	 * @return a Point2D 
+	 * @return a Point2D
 	 */
 	private Point2D eval(CubicCurve c, float t){
 	    Point2D p=new Point2D(Math.pow(1-t,3)*c.getStartX()+
@@ -225,9 +224,9 @@ public class VisualQualityPathPane extends Group {
 
 	/**
 	 * Evaluate the tangent of the cubic curve at a parameter 0<=t<=1, returns a Point2D
-	 * @param c the CubicCurve 
+	 * @param c the CubicCurve
 	 * @param t param between 0 and 1
-	 * @return a Point2D 
+	 * @return a Point2D
 	 */
 	private Point2D evalDt(CubicCurve c, float t){
 	    Point2D p=new Point2D(-3*Math.pow(1-t,2)*c.getStartX()+
@@ -239,7 +238,7 @@ public class VisualQualityPathPane extends Group {
 	            3*((1-t)*2*t-t*t)*c.getControlY2()+
 	            3*Math.pow(t, 2)*c.getEndY());
 	    return p;
-	}	
+	}
 }
 
 class Arrow extends Group {

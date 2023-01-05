@@ -33,6 +33,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -44,9 +45,9 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
  *
  */
 public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrapper<ShadowrunAttribute,Shadowrun6Character, SR6CharacterGenerator> {
-	
+
 	private final static Logger logger = System.getLogger(GeneratorWrapper.class.getPackageName());
-	
+
 	private Shadowrun6Character cached;
 	private CharacterHandle cachedHandle;
 	private SR6CharacterGenerator wrapped;
@@ -92,7 +93,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	public WizardPageType[] getWizardPages() {
 		return wrapped.getWizardPages();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public boolean canBeFinished() {
 		if (wrapped instanceof CharacterGenerator)
@@ -150,12 +151,12 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	public Collection<ControllerListener> getListener() {
 		return wrapped.getListener();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public SR6CharacterGenerator getWrapped() {
 		return wrapped;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setWrapped(SR6CharacterGenerator newCtrl) {
 		logger.log(Level.ERROR, "#################Generator changed to "+newCtrl+"\n\n\n");
@@ -191,7 +192,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	public void fireEvent(ControllerEvent type, Object...param) {
 		wrapped.fireEvent(type, param);
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void setAllowRunProcessor(boolean value) {
 		wrapped.setAllowRunProcessor(value);
@@ -433,6 +434,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	 */
 	public IQualityPathController getQualityPathController() {
 		return wrapped.getQualityPathController();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getMartialArtsController()
+	 */
+	@Override
+	public IMartialArtsController getMartialArtsController() {
+		return wrapped.getMartialArtsController();
 	}
 
 }

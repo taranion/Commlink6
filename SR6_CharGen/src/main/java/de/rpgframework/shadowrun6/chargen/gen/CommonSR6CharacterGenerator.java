@@ -2,22 +2,13 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.ArrayList;
-import java.util.List;
 
 import de.rpgframework.character.CharacterHandle;
-import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
-import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
-import de.rpgframework.genericrpg.chargen.Rule;
-import de.rpgframework.genericrpg.chargen.RuleConfiguration;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
-import de.rpgframework.genericrpg.chargen.RuleValue;
 import de.rpgframework.genericrpg.data.RuleController;
-import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
@@ -64,7 +55,7 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 		super.setModel(data);
 		initializeModel();
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#setModel(de.rpgframework.character.RuleSpecificCharacterObject)
@@ -79,7 +70,7 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 		setupProcessChain();
 		runProcessors();
 	}
-	
+
 //	// -------------------------------------------------------------------
 //	/**
 //	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#start(de.rpgframework.character.RuleSpecificCharacterObject)

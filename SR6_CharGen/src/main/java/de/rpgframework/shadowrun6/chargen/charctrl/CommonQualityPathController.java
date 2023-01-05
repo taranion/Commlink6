@@ -82,8 +82,7 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	 */
 	@Override
 	public List<Choice> getChoicesToDecide(QualityPath value) {
-		// TODO Auto-generated method stub
-		return null;
+		return List.of();
 	}
 
 	//-------------------------------------------------------------------
@@ -106,11 +105,13 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 			logger.log(Level.WARNING, "Trying to select quality path ''{0}'', but that is not allowed due to: {1}", value.getId(), poss.getMostSevere());
 			return new OperationResult<>(poss);
 		}
-		
+
 		QualityPathValue qVal = new QualityPathValue(value);
 		getModel().addQualityPath(qVal);
 		logger.log(Level.INFO, "Added quality path: "+value);
-		
+
+		parent.runProcessors();
+
 		return new OperationResult<QualityPathValue>(qVal);
 	}
 
@@ -131,8 +132,17 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	 */
 	@Override
 	public boolean deselect(QualityPathValue value) {
-		// TODO Auto-generated method stub
-		return false;
+		Possible poss = canBeDeselected(value);
+		if (!poss.get()) {
+			logger.log(Level.WARNING, "Trying to deselect quality path ''{0}'', but that is not allowed due to: {1}", value.getKey(), poss.getMostSevere());
+			return false;
+		}
+
+		getModel().removeQualityPath(value);
+		logger.log(Level.INFO, "Removed quality path: "+value);
+
+		parent.runProcessors();
+		return true;
 	}
 
 	//-------------------------------------------------------------------
@@ -141,7 +151,6 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	 */
 	@Override
 	public float getSelectionCost(QualityPath data) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -151,8 +160,7 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	 */
 	@Override
 	public String getSelectionCostString(QualityPath data) {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------
@@ -161,7 +169,7 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	 */
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
-		// TODO Auto-generated method stub
+		logger.log(Level.DEBUG, "process");
 		return unprocessed;
 	}
 
@@ -181,13 +189,13 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 			logger.log(Level.WARNING, "cannot select "+step+" , because already selected");
 			return Possible.FALSE;
 		}
-		
+
 		// Find possible next steps from current position
 		List<QualityPathStep> possible = new ArrayList<>();
 		if (path.getStepsTaken().isEmpty()) {
 			// If no steps has taken yet, the first is the only one
 			possible.add( path.getResolved().getSteps().get(0));
-		} else {		
+		} else {
 			// Find the last step taken and check its next steps
 			QualityPathStepValue lastV = path.getStepsTaken().get(path.getStepsTaken().size()-1);
 			for (String stepID : lastV.getResolved().getNextSteps()) {
@@ -199,20 +207,20 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 				}
 			}
 		}
-		
+
 		// Now that we know possible next steps, check if requested step is among them
 		if (!possible.contains(step)) {
 			logger.log(Level.WARNING, "cannot select "+step+" , because not among next steps ("+possible+")");
 			return new Possible(IRejectReasons.IMPOSS_NOT_AVAILABLE);
 		}
-		
+
 		// Check if requirements - if present - are met
 		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), step, decisions);
 		if (!poss.get()) {
 			logger.log(Level.WARNING, "cannot select "+step+" , because requirement not met. "+poss);
 			return poss;
 		}
-		
+
 		// TODo: Check for enough Karma
 		return Possible.TRUE;
 	}
@@ -229,11 +237,15 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 			logger.log(Level.WARNING, "Trying to select unselectable quality path ''{0}'': {1}", step.getId(), poss.toString());
 			return new OperationResult<>(poss);
 		}
-		
+
 		QualityPathStepValue stepVal = new QualityPathStepValue(step);
 		path.addStepTaken(stepVal);
 		logger.log(Level.INFO, "Took step on quality path ''{0}'': {1}", path.getResolved().getId(), step.getId());
-		
+
+		// Pay
+		//parent.getQualityController().getSelectionCost(null);
+
+
 		return new OperationResult<>(stepVal);
 	}
 

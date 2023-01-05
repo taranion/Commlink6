@@ -7,47 +7,20 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.rpgframework.character.CharacterHandle;
-import de.rpgframework.genericrpg.ToDoElement;
-import de.rpgframework.genericrpg.chargen.ControllerEvent;
-import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.chargen.RecommendingController;
-import de.rpgframework.genericrpg.chargen.Rule;
-import de.rpgframework.genericrpg.chargen.RuleValue;
-import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
-import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
-import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
-import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
-import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
-import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
-import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
-import de.rpgframework.shadowrun.chargen.charctrl.IPANController;
-import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
-import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
-import de.rpgframework.shadowrun.chargen.charctrl.SINController;
-import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
-import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
-import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -57,7 +30,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class PrioQualGenTest {
-	
+
 	private Shadowrun6Character model;
 	private CommonQualityGenerator ctrl;
 	private SR6CharacterGenerator charGen;
@@ -68,7 +41,7 @@ public class PrioQualGenTest {
 	public static void setupClass() {
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -77,25 +50,7 @@ public class PrioQualGenTest {
 		model = new Shadowrun6Character();
 		model.setCharGenSettings(new SR6PrioritySettings());
 		preMods.clear();
-		charGen = new SR6CharacterGenerator() {
-			public String getId() { return "dummy";}
-			public WizardPageType[] getWizardPages() { return null;}
-			public SR6SkillController getSkillController() {
-				return null;
-			}
-			public Shadowrun6Character getModel() {return model;}
-			public void setModel(Shadowrun6Character data) {model=data;}
-			public void addListener(ControllerListener callback) {}
-			public void removeListener(ControllerListener callback) {}
-			public boolean hasListener(ControllerListener callback) {return false;}
-			public Collection<ControllerListener> getListener() {
-				return null;
-			}
-			public void fireEvent(ControllerEvent type, Object... param) {}
-			public List<ToDoElement> getToDos() {
-				return null;
-			}
-			public void setAllowRunProcessor(boolean value) {}
+		charGen = new SR6TestGenerator(model) {
 			public void runProcessors() {
 				System.out.println("---------------");
 				(new ResetGenerator(charGen)).process(List.of());
@@ -105,54 +60,18 @@ public class PrioQualGenTest {
 				// TODO Auto-generated method stub
 				return false;
 			}
-			public boolean canBeFinished() {return false;}
-			public void setModel(Shadowrun6Character model, CharacterHandle handle) {}
-			public void finish() {}
-			public RuleController getRuleController() {return null;}
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public IMetatypeController getMetatypeController() {return null;}
-			public IAttributeController getAttributeController() {return null;}
-			public IQualityController getQualityController() { return ctrl;}
-			public ISR6EquipmentController getEquipmentController() { return null;}
-			public IAdeptPowerController getAdeptPowerController() { return null;}
-			public SR6SpellController getSpellController() { return null;}
-			public IRitualController getRitualController() { return null;}
-			public IMetamagicOrEchoController getMetamagicOrEchoController() { return null;}
-			public IComplexFormController getComplexFormController() { return null;}
-			public SINController getSINController() { return null;}
-			public IContactController getContactController() { return null;}
-			public SR6LifestyleController getLifestyleController() { return null;}
-			public IPANController getPANController() { return null;}
-			public IFocusController getFocusController() { return null;}
-			public IQualityPathController getQualityPathController() { return null;}
-			@Override
-			public String getName() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			@Override
-			public String getDescription() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			public RuleValue getRule(Rule rule) {return null;}
-			public List<RuleValue> getRules() { return new ArrayList<>(); }
-			@Override
-			public MagicOrResonanceController getMagicOrResonanceController() {return null;}
-			@Override
-			public <T> RecommendingController<T> getRecommendingControllerFor(T item) {return null;}
 		};
 		ctrl  = new CommonQualityGenerator(charGen);
 		charGen.runProcessors();
 	}
-	
+
 	//-------------------------------------------------------------------
 	@Test
 	public void testIdle() {
 		assertEquals(0, ctrl.getKarmaGain());
 		assertEquals(0, ctrl.getNumberOfQualities());
 		assertEquals(50, model.getKarmaFree());
-		
+
 		assertTrue("There should be no qualitiies", model.getQualities().isEmpty() );
 	}
 
@@ -170,7 +89,7 @@ public class PrioQualGenTest {
 		assertFalse(ctrl.decrease(val).wasSuccessful());
 		assertFalse(ctrl.increase(val).wasSuccessful());
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * Test if a selection is successful when enough skill points are present
@@ -182,7 +101,7 @@ public class PrioQualGenTest {
 //		preMods.add(mod);
 //		charGen.runProcessors();
 //		assertEquals(1, ctrl.getPointsLeft());
-		
+
 		OperationResult<QualityValue> selected = ctrl.select(Shadowrun6Core.getItem(Quality.class,"built_tough"));
 		assertNotNull(selected);
 		assertFalse(selected.hasError());
@@ -192,7 +111,7 @@ public class PrioQualGenTest {
 		assertEquals(1,selected.get().getDistributed());
 		assertEquals(46, model.getKarmaFree());
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * Test if a selection is successful when enough skill points are present
@@ -200,7 +119,7 @@ public class PrioQualGenTest {
 	@Test
 	public void testSelectDetectMax6() {
 		charGen.runProcessors();
-		
+
 		ctrl.select(Shadowrun6Core.getItem(Quality.class,"sinner"));
 		ctrl.select(Shadowrun6Core.getItem(Quality.class,"ork_poser"));
 		assertEquals(2,ctrl.getNumberOfQualities());
@@ -215,7 +134,7 @@ public class PrioQualGenTest {
 		assertFalse(selected.toString(), selected.wasSuccessful());
 		assertFalse(selected.getError().isBlank());
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * Test if a selection is successful when enough skill points are present
@@ -224,7 +143,7 @@ public class PrioQualGenTest {
 	public void testSelectDetectMax6WithMods() {
 		preMods.add( new ValueModification(ShadowrunReference.QUALITY, "built_tough", 2) );
 		charGen.runProcessors();
-		
+
 		assertEquals(0,ctrl.getNumberOfQualities());
 		ctrl.select(Shadowrun6Core.getItem(Quality.class,"sinner"));
 		ctrl.select(Shadowrun6Core.getItem(Quality.class,"ork_poser"));
