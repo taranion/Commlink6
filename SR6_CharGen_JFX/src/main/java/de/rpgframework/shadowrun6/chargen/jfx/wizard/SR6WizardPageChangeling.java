@@ -44,7 +44,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 
 	private final static Logger logger = System.getLogger(SR6WizardPageChangeling.class.getPackageName());
 
-	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageChangeling.class.getName());
+	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
 
 	private GeneratorWrapper charGen;
 
@@ -58,7 +58,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	public SR6WizardPageChangeling(Wizard wizard, GeneratorWrapper charGen) {
 		super(wizard);
 		this.charGen = charGen;
-		setTitle(ResourceI18N.get(RES, "page.title"));
+		setTitle(ResourceI18N.get(RES, "page.surge.title"));
 		initComponents();
 		initLayout();
 		initInteractivity();
@@ -79,8 +79,8 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.METAGENIC);
 		selection.setRequirementResolver(Shadowrun6Tools.requirementResolver(Locale.getDefault()));
 		selection.setModificationResolver(Shadowrun6Tools.modificationResolver(Locale.getDefault()));
-		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "placeholder.available"));
-		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "placeholder.selected"));
+		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "page.surge.placeholder.available"));
+		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.surge.placeholder.selected"));
 
 		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController()));
 		selection.setSelectedCellFactory(lv -> new QualityValueListCell(
@@ -103,7 +103,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		//ResponsiveBox responsive = new ResponsiveBox(selection, bxDescription);
 //		AutoBox responsive = new AutoBox();
 //		responsive.getContent().addAll(selection, bxDescription);
-		Label hdPointsSpent = new Label(ResourceI18N.get(RES, "surge.pointsSpent"));
+		Label hdPointsSpent = new Label(ResourceI18N.get(RES, "page.surge.pointsSpent"));
 		Label lbMax = new Label("/30");
 		HBox line = new HBox(5, hdPointsSpent, lbNetKarma, lbMax);
 		selection.setSelectedListHead(line);
@@ -134,8 +134,6 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	 * Enable or disable page
 	 */
 	private void refresh() {
-		System.err.println("SR6WizardPageChangeling.refresh1 "+charGen.getWrapped());
-		System.err.println("SR6WizardPageChangeling.refresh2 "+((CommonQualityGenerator)charGen.getQualityController()).getKarmaForSURGE());
 		backHeader.setValue(charGen.getModel().getKarmaFree());
 
 		lbNetKarma.setText(String.valueOf( ((CommonQualityGenerator)charGen.getQualityController()).getKarmaForSURGE()));

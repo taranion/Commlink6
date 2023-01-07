@@ -98,10 +98,11 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 		});
 
 		cbCategory = new ChoiceBox<QualityCategory>();
+		cbCategory.getItems().add(null);
 		cbCategory.getItems().addAll(QualityCategory.values());
 		cbCategory.setValue(null);
 		cbCategory.setConverter(new StringConverter<QualityCategory>() {
-			public String toString(QualityCategory cat) { return (cat!=null)?cat.getName(Locale.getDefault()):"" ;}
+			public String toString(QualityCategory cat) { return (cat!=null)?cat.getName(Locale.getDefault()):ResourceI18N.get(RES, "quality.category.all") ;}
 			public QualityCategory fromString(String arg0) {return null;}
 		});
 
