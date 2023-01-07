@@ -51,15 +51,15 @@ import javafx.util.StringConverter;
  *
  */
 public class SR6WizardPageMetatype extends WizardPage implements ControllerListener {
-	
+
 	private final static Logger logger = System.getLogger(SR6WizardPageMetatype.class.getPackageName()+".meta");
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageGear.class.getPackageName()+".SR6WizardPages");
 
 	private GeneratorWrapper charGen;
-	
+
 	private DataItemSpinnerPane<SR6MetaType> contentPane;
-	
+
 	private ChoiceBox<Gender> cbGender;
 	private Button btnRoll;
 	private TextField tfSize;
@@ -67,11 +67,11 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	private ChoiceBox<BodyType> cbSpecialBody;
 	private FlowPane customNode1;
 	private NumberUnitBackHeader backHeader;
-	
+
 	private Comparator<SR6MetaType> comparator;
 	/* When TRUE asynchronous updates are happening and user events shall be ignored */
 	private boolean updating;
-	
+
 	//-------------------------------------------------------------------
 	public SR6WizardPageMetatype(Wizard wizard, GeneratorWrapper charGen) {
 		super(wizard);
@@ -80,11 +80,11 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 		initComponents();
 		initLayout();
 //		refreshDataTab();
-		
+
 		contentPane.getValueFactory().setValue(charGen.getModel().getMetatype());
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		comparator = new Comparator<SR6MetaType>() {
@@ -102,11 +102,11 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 				return comp1.compareTo(comp2);
 			};
 		};
-		
+
 		contentPane = new DataItemSpinnerPane<SR6MetaType>();
 		contentPane.setId("species");
 		contentPane.setImageConverter(new Function<SR6MetaType,Image>(){
-			public Image apply(SR6MetaType value) {	
+			public Image apply(SR6MetaType value) {
 				String name = (value.getVariantOf()==null)
 						?
 								"images/metatypes/metatype_"+value.getId()+".jpg"
@@ -144,17 +144,17 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			logger.log(Level.WARNING, "ToDo: make decision");
 //			SplitterJFXUtil.openDecisionDialog(r, c, null);
 		});
-		
+
 		List<SR6MetaType> items = ((IMetatypeController<SR6MetaType>)charGen.getMetatypeController()).getAvailable().stream()
 				.map(mo -> (SR6MetaType)mo.getResolved())
 				.filter(p -> charGen.showDataItem(p))
 				.collect(Collectors.toList());
 		Collections.sort(items, comparator);
 		logger.log(Level.WARNING, "Available: "+items);
-		
+
 		contentPane.setItems(items);
 		contentPane.setShowDecisionColumn(false);
-		
+
 		/*
 		 * Custom node
 		 */
@@ -173,7 +173,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 		tfSize.setPrefColumnCount(3);
 		tfWeight = new TextField();
 		tfWeight.setPrefColumnCount(3);
-		
+
 		cbSpecialBody = new ChoiceBox<BodyType>();
 		cbSpecialBody.getItems().addAll(BodyType.values());
 		cbSpecialBody.setConverter(new StringConverter<BodyType>() {
@@ -185,28 +185,28 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 		});
 		cbSpecialBody.setValue(BodyType.METAHUMAN);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void addToCustom(Node node, String prop) {
 		Label ret = new Label(ResourceI18N.get(RES, prop));
 		ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-		
+
 		customNode1.getChildren().add(new VBox(5, ret, node));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		setContent(contentPane);
-		
+
 		customNode1 = new FlowPane(10, 10);
 		addToCustom(cbGender, "label.gender");
 		addToCustom(new HBox(5, tfSize, new Label("cm")), "label.size");
 		addToCustom(new HBox(5, tfWeight, new Label("kg")), "label.weight");
 		addToCustom(cbSpecialBody, "label.bodytype");
-		
+
 		VBox cust = new VBox(10, btnRoll, customNode1);
 		contentPane.setCustomNode1(new NodeWithTitle(ResourceI18N.get(RES,"tab.custom"), cust));
-		
+
 		// Be smaller in larger screens, but higher on smaller screens
 		if (ResponsiveControlManager.getCurrentMode()==WindowMode.MINIMAL) {
 			customNode1.setStyle("-fx-max-width: 40em");
@@ -224,7 +224,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			super.setBackHeader(backHeader);
 //		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private void initInteractivity() {
@@ -238,10 +238,10 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			ctrl.select(n);
 			refresh();
 		});
-		
+
 		btnRoll.setOnAction(ev -> roll());
 		setOnExtraActionHandler( button -> onExtraAction(button));
-		
+
 		cbGender.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> charGen.getModel().setGender(n));
 		cbSpecialBody.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			charGen.getMetatypeController().selectBodyType(n);
@@ -269,7 +269,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			}
 		});
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see org.prelle.javafx.WizardPage#pageVisited()
@@ -278,7 +278,20 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	public void pageVisited() {
 		refresh();
 	}
-	
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see org.prelle.javafx.WizardPage#pageLeft()
+	 */
+	@Override
+	public void pageLeft() {
+		// Ensure model is set
+		Shadowrun6Character model = charGen.getModel();
+		if (model.getMetatype()==null || model.getMetatype()!=contentPane.getSelectedItem()) {
+			charGen.getMetatypeController().select(contentPane.getSelectedItem());
+		}
+	}
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private void refresh() {
@@ -293,7 +306,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Found invalid data in textfields: " + e);
 			}
-			
+
 			List<SR6MetaType> items = ((IMetatypeController<SR6MetaType>)charGen.getMetatypeController()).getAvailable().stream()
 					.map(mo -> (SR6MetaType)mo.getResolved())
 					.filter(p -> charGen.showDataItem(p))
@@ -318,7 +331,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			updating = false;
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see org.prelle.javafx.WizardPage#setResponsiveMode(org.prelle.javafx.WindowMode)
@@ -326,7 +339,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	@Override
 	public void setResponsiveMode(WindowMode value) {
 		super.setResponsiveMode(value);
-		
+
 		if (value==WindowMode.MINIMAL) {
 			customNode1.setStyle("-fx-max-width: 40em");
 		} else {
@@ -341,16 +354,16 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.log(Level.WARNING, "RCV {0}",type);
-		if (type==BasicControllerEvents.CHARACTER_CHANGED) 
+		if (type==BasicControllerEvents.CHARACTER_CHANGED)
 			refresh();
-		
+
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
 			refresh();
 //			bxLine.setManaged(charGen.getAdeptPowerController().canBuyPowerPoints());
 //			bxLine.setVisible(charGen.getAdeptPowerController().canBuyPowerPoints());
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private void roll() {
@@ -360,7 +373,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 		refresh();
 
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void onExtraAction(CloseType button) {
 		switch (button) {

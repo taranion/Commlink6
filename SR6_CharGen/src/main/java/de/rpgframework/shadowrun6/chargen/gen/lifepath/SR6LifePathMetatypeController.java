@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetaTypeOption;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -33,7 +34,7 @@ import de.rpgframework.shadowrun6.chargen.gen.LifePathCharacterGenerator;
  *
  */
 public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> implements IMetatypeController<SR6MetaType> {
-	
+
 	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(LifePathCharacterGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
 
 	private List<MetaTypeOption> available;
@@ -58,7 +59,7 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 	@Override
 	public void decide(SR6MetaType decideFor, Choice choice, Decision decision) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	//-------------------------------------------------------------------
@@ -87,7 +88,7 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 	public boolean canBeSelected(SR6MetaType type) {
 		return true;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController#randomizeSizeWeight()
@@ -107,7 +108,7 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 			if (gauss>1.0f || gauss<-1.0f)
 				continue;
 			break;
-		}	
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -150,7 +151,8 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 			// Add modifications from selection
 			MetaType meta = getModel().getMetatype();
 			if (meta == null) {
-				todos.add(new ToDoElement(Severity.STOPPER, RES, "generror.metatype_not_selected"));
+				logger.log(Level.ERROR, "No metatype selected yet");
+				todos.add(new ToDoElement(Severity.STOPPER, RES, IRejectReasons.TODO_METATYPE_NOT_SELECTED));
 			} else {
 				if (meta.getKarma() != 0) {
 					logger.log(Level.INFO, "Pay {0} Karma for metatype '{1}'", meta.getKarma(), meta.getId());
