@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<traditions>
+	<!-- Ancient -->
+   <tradition id="egyptian"    drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="roman_greek" drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="norse"       drain1="WILLPOWER" drain2="CHARISMA" />
+	<!-- Abrahamic -->
+   <tradition id="islamic"     drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="qabbalists"  drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="christian"   drain1="WILLPOWER" drain2="CHARISMA" />
+	<!-- Karma -->
+   <tradition id="buddhism"    drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="zoroastric"  drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="path_of_the_wheel"  drain1="WILLPOWER" drain2="CHARISMA" />
+	<!-- Animists -->
+   <tradition id="shaman"      drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="shinto"      drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="wuxing"      drain1="WILLPOWER" drain2="CHARISMA" />
+	<!-- Animal spirits -->
+   <tradition id="aztec"       drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="sioux"       drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="red_magic"   drain1="WILLPOWER" drain2="CHARISMA" />
+	<!-- Gaia -->
+   <tradition id="drudic"      drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="witchcraft"  drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="witchcraft_street" drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="wicca"       drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="green"       drain1="WILLPOWER" drain2="CHARISMA" />
+   
+   <!-- Scientific -->
+   <tradition id="hermetic"    drain1="WILLPOWER" drain2="LOGIC" />
+   <tradition id="chaos"       drain1="WILLPOWER" drain2="LOGIC" />
+   <tradition id="black"       drain1="WILLPOWER" drain2="LOGIC" />
+   <tradition id="qabbalists_secular"  drain1="WILLPOWER" drain2="LOGIC" />
+   <!-- Folk -->
+   <tradition id="practical_theurgy"  drain1="WILLPOWER" drain2="LOGIC" />
+   <tradition id="romani"      drain1="WILLPOWER" drain2="LOGIC" />
+   <tradition id="storyteller" drain1="WILLPOWER" drain2="LOGIC" />
+   
+   
+</traditions>
