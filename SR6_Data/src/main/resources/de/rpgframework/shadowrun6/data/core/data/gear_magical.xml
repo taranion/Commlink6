@@ -36,7 +36,7 @@
 <!--        <relevancemod topic="MAGICAL"/> -->
 <!--      </modifications> -->
 <!--    </item> -->
-   
+
 <!--    <item id="power_focus"     avail="1" cost="18000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_POWER"> -->
 <!--      <focus karma="6" /> -->
 <!--      <modifications> -->
@@ -85,8 +85,14 @@
 <!--    <item id="weapon_focus"  avail="1" cost="7000" maxrat="24" rate="true" ratemul="AVAIL PRICE MODIFIER" type="MAGICAL" subtype="FOCI_WEAPON"> -->
 <!--      <focus karma="3" choice="WEAPON" /> -->
 <!--    </item> -->
-   
-   <item id="magical_lodge_materials" avail="1" cost="500" maxrat="24" rate="true" ratemul="AVAIL PRICE" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y"/>
-   <item id="reagents_per_dram" avail="2" cost="50" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y"/>
+
+   <item id="magical_lodge_materials" avail="1" price="500" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+   	</choices>
+   	<attrdef id="AVAILABILITY" value="$RATING"/>
+   	<attrdef id="PRICE" value="50*$RATING"/>
+   </item>
+   <item id="reagents_per_dram" avail="2" price="50" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y"/>
 
 </items>

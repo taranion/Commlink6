@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -107,6 +108,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private T item;
 	private SR6PieceOfGearVariant selectedVariant;
 	private List<Choice> choices;
+	private Map<SR6PieceOfGearVariant, List<Node>> perVariantChoices = new HashMap<>();
 	private Map<Choice, Decision> decisions = new LinkedHashMap<>();
 	private List<SR6ItemFlag> selectedFlasgs = new ArrayList<>();
 
@@ -322,11 +324,50 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 		});
 		cbVariants.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.DEBUG, "Chose variant {0}", n);
+			logger.log(Level.INFO, "Chose variant {0}", n);
 			selectedVariant = n;
+			// Hide old variant nodes
+			if (perVariantChoices.containsKey(o)) {
+				logger.log(Level.DEBUG, "Hide all UI elements for old variant {0}", o);
+				for (Node node : perVariantChoices.get(o)) {
+					node.setVisible(false);
+					node.setManaged(false);
+					if (node instanceof ChoiceBox) ((ChoiceBox)node).getSelectionModel().clearSelection();
+				}
+			}
+			// Show new variant nodes
+			if (perVariantChoices.containsKey(n)) {
+				logger.log(Level.DEBUG, "Show all UI elements for selected variant {0}", o);
+				for (Node node : perVariantChoices.get(n)) {
+					node.setVisible(true);
+					node.setManaged(true);
+				}
+			}
 			updateButtons();
 		 });
 		content.getChildren().add(cbVariants);
+
+		// Make a list of choices that only exists in a variant
+		for (SR6PieceOfGearVariant variant : template.getVariants()) {
+			if (variant.getChoices()!=null && !variant.getChoices().isEmpty()) {
+				List<Node> allVariantNodes = new ArrayList<>();
+				// Prepare UI components
+				for (Choice choice : variant.getChoices()) {
+					String forceTitle = null;
+					if (choice.getUUID().equals(ItemTemplate.UUID_RATING)) forceTitle=ResourceI18N.get(RES, "label.rating");
+					if (choice.getUUID().equals(ItemTemplate.UUID_CHEMICAL_CHOICE)) forceTitle=ResourceI18N.get(RES, "label.chemical");
+					List<Node> list = processChoice(item,choice, forceTitle);
+					logger.log(Level.INFO, "Variant choice returned "+list);
+					allVariantNodes.addAll(list);
+				}
+				perVariantChoices.put(variant, allVariantNodes);
+				// Per default hide all variant nodes
+				for (Node node : allVariantNodes) {
+					node.setVisible(false);
+					node.setManaged(false);
+				}
+			}
+		}
 
 		cbVariants.getSelectionModel().select(0);
 	}
