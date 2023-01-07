@@ -105,7 +105,19 @@
         	</modifications>
         </variant>
     </item>
-
+    <item avail="4I" price="120" id="smoke_rocket_thermal" count="y" type="AMMUNITION" subtype="ROCKETS" reqVariant="y">
+      <variant id="rocket"></variant>
+      <variant id="missile">
+      	<choices>
+				<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" />
+        	</choices>
+        	<attrdef id="PRICE" value="1200+($RATING*500)"/>
+        	<modifications>
+        		<checkmod type="SKILL" ref="firearms" value="$RATING" what="DICE"/>
+        		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+        	</modifications>
+        </variant>
+    </item>
 
     <item avail="4I" id="conventional_explosives" count="y" price="0" type="AMMUNITION" subtype="EXPLOSIVES">
      	<choices>
