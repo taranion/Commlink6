@@ -317,14 +317,6 @@
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
-   <!--item avail="3" price="3000" id="grapple_gun" type="CYBERWARE" subtype="CYBER_BODYWARE">
-      <usage mode="IMPLANTED" value="0.5" />
-      <usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
- 		<flags><flag>AUGMENTATION</flag></flags>
-      <modifications>
-          <itemmod type="GEAR" ref="grapple_gun" />
-      </modifications>
-   </item-->
    <item avail="2" id="internal_air_tank" type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
@@ -597,10 +589,6 @@
 		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="$RATING"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
-   <!--item avail="2" price="6000" id="smuggling_compartment" subtype="CYBER_LIMB_ACCESSORY" type="ACCESSORY">
-		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="5"/>
- 		<flags><flag>AUGMENTATION</flag></flags>
-   </item-->
 
 	<!-- Cyber implant firearms -->
    <item avail="3L" price="2000" id="cyber_holdout" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">

@@ -43,21 +43,18 @@
 		<vehicle han="3" acc="20" spdi="15" tspd="35" bod="1" arm="0" pil="2" sen="2" />
 			<geardef>
 				<item id="mct_hornet_stinger" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
-				<weapon dmg="1P" attack="5,,,," skill="close_combat" spec="close_combat/blades" /> 
-					<!-- Rules state the existance of the injector, but no data given. Using damage 1P as parashield darts and attack rating 4, to be below AR 6 of a knife -->
+					<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/blades" /> 
+				<!-- Rules state the existence of the injector, but no data given. Using damage 1P as parashield darts and attack rating 4, to be below AR 6 of a knife -->
 				</item>
 			</geardef>
 		<modifications>
-			<!-- <embed type="GEAR" ref="mct_hornet_stinger" intoType="HOOK" intoRef="VEHICLE_BODY"/> -->
+			<!-- embed type="GEAR" ref="mct_hornet_stinger" intoType="HOOK" intoRef="VEHICLE_BODY"/ -->
 		</modifications>
 	</item>
 
 	<!-- Small drones -->
 	<item avail="3" price="11000" id="chrysler-nissan_pursuit_v" type="DRONE_SMALL" subtype="GROUND">
 		<vehicle han="3/6" acc="30" spdi="50" tspd="280" bod="4" arm="2" pil="4" sen="3" />
-      <!--modifications>
-         <valmod type="HOOK" ref="SOFTWARE" value="$PILOT/2"/>
-      </modifications-->
 	</item>
 	<item avail="2" price="4500" id="aztechnology_crawler" type="DRONE_SMALL" subtype="GROUND">
 		<vehicle han="3/4" acc="8" spdi="10" tspd="30" bod="6" arm="2" pil="2" sen="2" />
@@ -97,9 +94,6 @@
    </item>
 	<item avail="2" price="4500" id="nissan_samurai" type="DRONE_MEDIUM" subtype="ANTHRO">
 		<vehicle han="3/4" acc="10" spdi="10" tspd="30" bod="6" arm="6" pil="3" sen="2" type="GROUND" />
-<!-- 		<alternate id="spurs" mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES"> -->
-<!-- 	      <weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/> -->
-<!-- 		</alternate> -->
 		<modifications>
 			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_BODY"/>
 		</modifications>

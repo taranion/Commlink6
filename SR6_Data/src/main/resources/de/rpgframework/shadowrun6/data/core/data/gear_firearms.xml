@@ -63,7 +63,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <!--embed type="GEAR" ref="removable_stock" intoType="HOOK" intoRef="STOCK" included="true"/-->
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
       <weapon ammo="21(c)" dmg="2P" attack="9,8,6,," mode="SA/FA" skill="firearms" spec="firearms/pistols_light"/>
    </item>
@@ -107,7 +107,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="STOCK"/>
-<!--          <accessorymod hook="STOCK" item="folding_stock"/> -->
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
       <weapon attack="10,9,8,," ammo="35(c)" dmg="2P" mode="SA/BF" skill="firearms" spec="firearms/machine_pistols"/>
    </item>
@@ -176,7 +176,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="STOCK"/>
-<!--          <accessorymod hook="STOCK" item="folding_stock"/> -->
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
       <weapon attack="9,9,6,," ammo="32(c)" dmg="3P" mode="SA/FA" skill="firearms" spec="firearms/submachine_guns"/>
    </item>
@@ -185,7 +185,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="STOCK"/>
-<!--          <accessorymod hook="STOCK" item="folding_stock"/> -->
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
       </modifications>
       <weapon attack="10,10,7,," ammo="32(c)" dmg="3P" mode="SA/FA" skill="firearms" spec="firearms/submachine_guns"/>
@@ -197,7 +197,7 @@
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
-<!--          <accessorymod hook="STOCK" item="folding_stock"/> -->
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
       <weapon attack="10,10,7,," ammo="32(c)" dmg="3P" mode="SA/FA" skill="firearms" spec="firearms/submachine_guns"/>
    </item>
@@ -217,7 +217,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="STOCK"/>
-<!--          <accessorymod hook="STOCK" item="folding_stock"/> -->
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
 <!--          <moditemmod ref="smartgun_system_internal"/> -->
          <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
       </modifications>
@@ -238,7 +238,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="STOCK"/>
-<!--          <accessorymod hook="STOCK" item="folding_stock"/> -->
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
 <!--          <moditemmod ref="smartgun_system_internal"/> -->
       </modifications>
       <weapon attack="10,10,7,," ammo="30(c)" dmg="3P" mode="SA/BF" skill="firearms" spec="firearms/submachine_guns"/>
@@ -248,7 +248,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="STOCK"/>
-<!--          <accessorymod hook="STOCK" item="folding_stock"/> -->
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
       </modifications>
       <weapon attack="8,8,7,," ammo="24(c)" dmg="3P" mode="SA/BF/FA" skill="firearms" spec="firearms/submachine_guns"/>
@@ -357,24 +357,26 @@
       <weapon attack="3,11,10,6,1" ammo="35(c)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
    </item>
    <item avail="5L" price="3200" id="yamaha_raiden" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
-      <modifications>
+		<weapon attack="4,11,10,7,2" ammo="60(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+			<geardef>
+				<item id="raiden_shotgun" mode="WEAPON" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+					<usage mode="EMBEDDED"/>
+					<weapon attack="7,9,8,," ammo="2(b)" dmg="4P" mode="SS/SA" skill="firearms" spec="firearms/shotguns"/>
+				</item>
+				<item id="raiden_launcher" mode="WEAPON" type="WEAPON_FIREARMS" subtype="LAUNCHERS">
+					<usage mode="EMBEDDED"/>
+					<weapon attack="4,11,7,1," ammo="4(c)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
+				</item>
+			</geardef>
+		<modifications>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <!--moditemmod ref="smartgun_system_internal"/-->
          <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
-         <!--itemmod item="yamaha_raiden_shotgun"/>
-         <itemmod item="yamaha_raiden_launcher"/-->
+         <!-- embed type="GEAR" ref="raiden_shotgun" intoType="HOOK" intoRef="UNDER" included="true"/ -->
+         <!-- embed type="GEAR" ref="raiden_launcher" intoType="HOOK" intoRef="UNDER" included="true"/ -->		 
       </modifications>
-      <weapon attack="4,11,10,7,2" ammo="60(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
-      <alternate id="shotgun" mode="WEAPON" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
-      	<usage mode="EMBEDDED"/>
-      	<weapon attack="7,9,8,," ammo="2(b)" dmg="4P" mode="SS/SA" skill="firearms" spec="firearms/shotguns"/>
-    	</alternate>
-      <alternate id="shotgun" mode="WEAPON" type="WEAPON_FIREARMS" subtype="LAUNCHERS">
-     		<usage mode="EMBEDDED"/>
-     		 <weapon attack="4,11,7,1," ammo="4(c)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
-      </alternate>
    </item>
    <item avail="4I" price="11000" id="ares_desert_strike" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
       <modifications>

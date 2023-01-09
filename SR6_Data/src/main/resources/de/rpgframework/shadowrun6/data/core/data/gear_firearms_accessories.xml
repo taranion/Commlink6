@@ -36,8 +36,7 @@
    <item avail="3" price="500" id="gas-vent_system" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="BARREL"/>
       <modifications>
-<!-- 		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2" /> -->
-<!--          <itemattrmod attr="ATTACK_RATING" val="2" cond="y"/> -->
+<!-- 		<valmod type="ITEM_ATTRIBUTE" ref="RECOIL" value="2,2,2" /> -->
       </modifications>
    </item>
    <item avail="3" price="1400" id="gyro_mount" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
@@ -53,16 +52,20 @@
    <item avail="2" price="350" id="hidden_arm_slide" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage slot="FIREARMS_EXTERNAL"/>
       <modifications>
-<!--          <itemattrmod attr="CONCEALABILITY" val="1"/> -->
+ 		<valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="1" />
       </modifications>
       <requires>
-<!--          <itemsubtypereq type="TASERS,HOLDOUTS,PISTOLS_LIGHT"/> -->
+		<selreq>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="TASERS"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="HOLDOUTS"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_LIGHT"/>
+		</selreq>	  
       </requires>
    </item>
    <item avail="1" price="350" id="imaging_scope" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="TOP"/>
       <modifications>
-<!--          <itemhookmod capacity="3" hook="OPTICAL"/> -->
+ 			<valmod type="HOOK" ref="OPTICAL" value="3"/>
       </modifications>
    </item>
 	<item id="laser_sight" avail="1" price="125" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
@@ -123,16 +126,34 @@
    <item avail="2" price="50" id="shock_pad" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="STOCK"/>
       <modifications>
-<!--          <itemattrmod attr="ATTACK_RATING" val="1" cond="y"/> -->
+ 		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1" />	  
       </modifications>
       <requires>
-<!--          <itemsubtypereq type="RIFLE_ASSAULT,RIFLE_HUNTING,RIFLE_SNIPER,SHOTGUNS"/> -->
+		<selreq>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_ASSAULT"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_HUNTING"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_SNIPER"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="SHOTGUNS"/>
+		</selreq>	  
       </requires>
    </item>
    <item avail="4" price="500" id="silencer" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="BARREL"/>
       <requires>
-<!--          <itemsubtypereq type="TASERS,HOLDOUTS,PISTOLS_LIGHT,PISTOLS_HEAVY,SUBMACHINE_GUNS,LMG,MMG,HMG,ASSAULT_CANNON,RIFLE_ASSAULT,RIFLE_HUNTING,RIFLE_SNIPER"/> -->
+		<selreq>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="TASERS"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="HOLDOUTS"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_LIGHT"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_HEAVY"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="SUBMACHINE_GUNS"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="LMG"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="MMG"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="HMG"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="ASSAULT_CANNON"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_ASSAULT"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_HUNTING"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_SNIPER"/>
+		</selreq>	  
       </requires>
 		<variant id="cyberimplantweapon">
 			<usage mode="EMBEDDED" slot="IMPLANTWEAPON_ACCESSORY" />
@@ -189,26 +210,26 @@
    <item avail="2" price="5" id="spare_clip"  type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
-<!--          <itemtypereq type="WEAPON_FIREARMS"/> -->
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
       </requires>
    </item>
    <item avail="2" price="30" id="spare_clip_predator" type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y" >
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
-<!--          <itemreq item="ares_predator_vi"/> -->
+			<datareq type="GEAR" ref="ares_predator_vi" apply="DATA_ITEM"/>
       </requires>
    </item>
    <item avail="1" price="25" id="speed_loader" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
-<!--          <itemtypereq type="WEAPON_FIREARMS"/> -->
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
       </requires>
    </item>
    <item avail="2" price="30" id="folding_stock" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="STOCK"/>
-      <modifications>
-<!--          <itemattrmod attr="CONCEALABILITY" val="1"/> -->
-      </modifications>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="1" />
+		</modifications>
    </item>
    <item avail="2" price="500" id="tripod" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="UNDER"/>
