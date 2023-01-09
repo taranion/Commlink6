@@ -3,6 +3,28 @@
   "includes":[
   ]},
   "bundles":[
-    {"name":"de.rpgframework.shadowrun6.18n.core"}
+    {
+      "name":"de.rpgframework.shadowrun6.i18n.core",
+      "locales":[
+        "de",
+        "en",
+        "fr",
+        "pt"
+      ]
+    },
+    {
+      "name":"de.rpgframework.shadowrun6.Shadowrun6Rules",
+      "locales":[
+        "de",
+        "en"
+      ]
+    },
+    {
+      "name":"de.rpgframework.shadowrun6.Shadowrun6Tools",
+      "locales":[
+        "de",
+        "en"
+      ]
+    }
   ]
 }
