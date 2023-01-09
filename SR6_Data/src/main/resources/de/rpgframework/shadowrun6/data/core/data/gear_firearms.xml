@@ -97,9 +97,8 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
-<!--          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/> -->
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
-      </modifications>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+	 </modifications>
       <weapon attack="9,9,7,," ammo="40(c)" dmg="2P" mode="SA/BF" skill="firearms" spec="firearms/machine_pistols"/>
    </item>
    <item id="ceska_black_scorpion" avail="3L" price="510" type="WEAPON_FIREARMS" subtype="MACHINE_PISTOLS">
@@ -125,8 +124,8 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
-      </modifications>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+	  </modifications>
       <weapon attack="10,10,8,," ammo="15(c)" dmg="3P" mode="SA/BF" skill="firearms" spec="firearms/pistols_heavy"/>
    </item>
    <item avail="4L" price="610" id="ares_viper_slivergun" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
@@ -158,7 +157,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
       </modifications>
       <weapon attack="11,9,7,," ammo="14(c)" dmg="3P" mode="SA" skill="firearms" spec="firearms/pistols_heavy"/>
    </item>
@@ -218,7 +217,7 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
       </modifications>
       <weapon attack="10,11,8,," ammo="28(c)" dmg="3P" mode="SA/BF" skill="firearms" spec="firearms/submachine_guns"/>
@@ -227,7 +226,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
       </modifications>
@@ -239,7 +238,7 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
-<!--          <moditemmod ref="smartgun_system_internal"/> -->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
       </modifications>
       <weapon attack="10,10,7,," ammo="30(c)" dmg="3P" mode="SA/BF" skill="firearms" spec="firearms/submachine_guns"/>
    </item>
@@ -328,7 +327,7 @@
       <modifications>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="TOP"/>
-          <!--moditemmod ref="smartgun_system_internal"/-->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
       </modifications>
       <weapon attack="4,10,9,7,2" ammo="42(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
          <alternate id="grenade_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
@@ -372,7 +371,7 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
-         <!--moditemmod ref="smartgun_system_internal"/-->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
          <!-- embed type="GEAR" ref="raiden_shotgun" intoType="HOOK" intoRef="UNDER" included="true"/ -->
          <!-- embed type="GEAR" ref="raiden_launcher" intoType="HOOK" intoRef="UNDER" included="true"/ -->		 
@@ -415,7 +414,7 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <!--moditemmod ref="smartgun_system_internal"/-->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <embed type="GEAR" ref="bipod" intoType="HOOK" intoRef="UNDER" included="true"/>
          <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
       </modifications>
@@ -460,7 +459,7 @@
    </item>
    <item avail="6I" price="10000" id="panther_xxl" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
       <modifications>
-         <!--moditemmod ref="smartgun_system_internal"/-->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
@@ -495,7 +494,7 @@
    </item>
     <item avail="3I" price="5900" id="ares_antioch-2" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
       <modifications>
-         <!--moditemmod ref="smartgun_system_internal"/-->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
@@ -524,7 +523,7 @@
    </item>
    <item avail="5I" price="9000" id="onotari_interceptor" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
       <modifications>
-         <!--moditemmod ref="smartgun_system_internal"/-->
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
