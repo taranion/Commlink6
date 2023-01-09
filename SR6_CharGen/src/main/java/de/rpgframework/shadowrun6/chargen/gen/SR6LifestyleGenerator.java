@@ -31,7 +31,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> implements SR6LifestyleController {
-	
+
 	protected final static Logger logger = System.getLogger(SR6LifestyleGenerator.class.getPackageName()+".quality");
 
 	protected Shadowrun6Character model;
@@ -59,7 +59,10 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	 */
 	@Override
 	public List<LifestyleQuality> getAvailable() {
-		return Shadowrun6Core.getItemList(LifestyleQuality.class);
+		List<LifestyleQuality> list = Shadowrun6Core.getItemList(LifestyleQuality.class);
+		list.remove(Shadowrun6Core.getItem(LifestyleQuality.class, "z_zone"));
+		list.remove(Shadowrun6Core.getItem(LifestyleQuality.class, "aaa_zone"));
+		return list;
 	}
 
 	//-------------------------------------------------------------------
@@ -151,7 +154,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 		if (!model.getLifestyles().contains(value)) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -210,9 +213,9 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	@Override
 	public void roll() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	//-------------------------------------------------------------------
 	private static int getNuyenForLP(int lp) {
 		logger.log(Level.DEBUG, "Get for "+lp);
@@ -248,7 +251,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 			}
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
@@ -275,24 +278,24 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 				} else
 					unprocessed.add(tmp);
 			}
-			
+
 			// Pay Nuyen for lifestyles
 			for (SR6Lifestyle val : model.getLifestyles()) {
 				int lp = val.getLifestylePoints();
 				if (val.isAutoAdded()) {
 					logger.log(Level.DEBUG, "Don't pay for auto-added lifestyle {0}", val.getKey());
 					continue;
-				} 
+				}
 				logger.log(Level.DEBUG, "Pay {1} for lifestyle {1}", val.getNameWithRating(), getLifestyleCost(val));
 				model.setNuyen( model.getNuyen() - getLifestyleCost(val));
 			}
-			
+
 			// Make sure there is at laast one lifestyle
 			if (model.getLifestyles().isEmpty()) {
 				logger.log(Level.DEBUG, "No lifestyle found");
 				todos.add(new ToDoElement(Severity.WARNING, IRejectReasons.IMPOSS_NO_LIFESTYLE));
 			}
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
@@ -314,12 +317,12 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 			logger.log(Level.ERROR, "Trying to increase lifestyle {0} which is not allowed", value);
 			return false;
 		}
-		
+
 		value.setDistributed( value.getDistributed() +1 );
 		logger.log(Level.INFO, "Increase paid months for lifestyle {0} to {1}", value, value.getDistributed());
-		
+
 		parent.runProcessors();
-		
+
 		return true;
 	}
 
@@ -342,12 +345,12 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 			logger.log(Level.ERROR, "Trying to decrease lifestyle {0} which is not allowed", value);
 			return false;
 		}
-		
+
 		value.setDistributed( value.getDistributed() -1 );
 		logger.log(Level.INFO, "Decrease paid months for lifestyle {0} to {1}", value, value.getDistributed());
-		
+
 		parent.runProcessors();
-		
+
 		return true;
 	}
 
