@@ -399,15 +399,12 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		Shadowrun6Tools.flagItemWithHighestAttribute(model, SR6ItemAttribute.DEFENSE_PHYSICAL, SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
 		val.setDistributed(0);
+		// Power Plays "Charismatic Defense"
 		if (model.hasRuleFlag(SR6RuleFlag.CHARISMATIC_DEFENSE)) {
 			addNaturalModifier(val,ShadowrunAttribute.CHARISMA);
 		} else {
 			addNaturalModifier(val,ShadowrunAttribute.BODY);
 		}
-		// Power Plays "Charismatic Defense"
-//		if (rules.contains(Rule.CHARISMATIC_DEFENSE)) {
-//			defRating = model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue();
-//		}
 
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
