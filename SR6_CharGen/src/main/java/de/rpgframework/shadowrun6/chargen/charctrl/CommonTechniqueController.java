@@ -16,6 +16,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.MartialArtsValue;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -132,8 +133,9 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 		if (model.isInCareerMode()) {
 			logger.log(Level.INFO, "Add technique '%s' for 5 Karma and 1500 Nuyen", data.getId());
 			// Pay karma
-			model.setKarmaFree(model.getKarmaFree() -5);
-			model.setKarmaInvested(model.getKarmaInvested() +5);
+			int cost = (int)getSelectionCost(data);
+			model.setKarmaFree(model.getKarmaFree() -cost);
+			model.setKarmaInvested(model.getKarmaInvested() +cost);
 			// Pay Nuyen
 			model.setNuyen(model.getNuyen() -1500);
 
@@ -213,8 +215,9 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 			if (mod!=null) {
 				// Had been added in career
 				// Grant karma
-				model.setKarmaFree(model.getKarmaFree() +5);
-				model.setKarmaInvested(model.getKarmaInvested() -5);
+				int cost = (int)getSelectionCost(data.getResolved());
+				model.setKarmaFree(model.getKarmaFree() +cost);
+				model.setKarmaInvested(model.getKarmaInvested() -cost);
 				// Grant Nuyen
 				model.setNuyen(model.getNuyen() + mod.getExpCost());
 				// Remove from history
@@ -233,6 +236,8 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 	 */
 	@Override
 	public float getSelectionCost(Technique data) {
+		if (getModel().hasRuleFlag(SR6RuleFlag.MARTIAL_ARTS_PRODIGY))
+			return 3;
 		return 5;
 	}
 

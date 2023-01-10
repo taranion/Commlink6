@@ -10,7 +10,7 @@
        <checkmod ref="LOGIC" type="ATTRIBUTE" what="EDGE" value="1" apply="CHARACTER"/>
      </modifications>
    </quality>
-   
+
    <quality id="aptitude"         	  karma="12" pos="true" type="NORMAL">
      <choices>
        <choice type="SKILL" uuid="05ed2489-d0af-485b-b58a-61fbd064ed9c"/>
@@ -84,7 +84,7 @@
    </quality>
    <quality id="high_pain_tolerance"  karma="7" pos="true" type="NORMAL">
      <modifications>
-       <!--itemmod type="RULE" ref="PAIN_TOLERANCE_LOWER_MOD"/--> 
+       <itemmod type="RULE" ref="PAIN_TOLERANCE_LOWER_MOD"/>
      </modifications>
    </quality>
    <quality id="home_ground" 		  karma="10" pos="true" type="NORMAL" multi="true">
@@ -173,7 +173,7 @@
 			<valmod type="ATTRIBUTE" ref="DAMAGE_OVERFLOW" value="1" />
 		</modifications>
 	</quality>
-	
+
    <quality id="addiction"    karma="2" pos="false" type="NORMAL" max="6" multi="true">
    	<choices>
    		<choice type="TEXT" uuid="b7a6a592-e334-43a2-adf4-d92fb59de8cd"/>
@@ -285,7 +285,7 @@
        <relevancemod topic="MATRIX"/>
      </modifications>
    </quality>
-   
+
    <quality id="sinner"	              karma="8" pos="false" type="NORMAL" >
      <modifications>
         <itemmod type="SIN" ref="REAL_SIN"/>

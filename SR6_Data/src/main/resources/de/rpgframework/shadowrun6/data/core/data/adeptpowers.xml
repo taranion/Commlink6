@@ -28,7 +28,7 @@
    <power id="enhanced_perception" cost="0.5" act="PASSIVE" />
    <power id="enhanced_accuracy" cost="0.5" act="PASSIVE">
      <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2"/>        
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2"/>
      </modifications>
    </power>
    <power id="improved_ability"  cost="0.5" hasLevel="true" act="PASSIVE">
@@ -82,7 +82,7 @@
    </power>
    <power id="pain_resistance" cost="0.25" hasLevel="true" act="PASSIVE">
      <modifications>
-       <!--valmod type="RULE" ref="PAIN_TOLERANCE_IGNORE_BOX" value="1"/-->
+       <valmod type="RULE" ref="PAIN_TOLERANCE_IGNORE_BOX" value="1"/>
      </modifications>
    </power>
    <power id="rapid_healing"   cost="0.5" hasLevel="true" act="PASSIVE"/>
