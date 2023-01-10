@@ -305,9 +305,6 @@
       <modifications>
           <itemmod type="QUALITY" ref="dermal_deposits" remove="true" apply="CHARACTER"/>
       </modifications>
-     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
-     		<attrdef id="DAMAGE" value="$RATING"/>
-     	</alternate>
      	<alternate mode="ARMOR" type="ARMOR" subtype="ARMOR_BODY">
      		<attrdef id="DEFENSE_PHYSICAL" value="$RATING"/>
      	</alternate>
@@ -571,8 +568,10 @@
 		<attrdef id="AVAILABILITY" value="$RATING L"/>
 		<attrdef id="PRICE"        value="$RATING*5000"/>
 		<modifications>
-			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$RATING"/>
 		</modifications>
+		<alternate mode="ARMOR" type="ARMOR" subtype="ARMOR_BODY">
+			<attrdef id="DEFENSE_PHYSICAL" value="$RATING"/>
+		</alternate>
     </item>
    <item avail="5L" price="3000" id="cyber_slide" type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY">
 		<usage mode="EMBEDDED" value="3" slot="CYBERLIMB_IMPLANT"/>
