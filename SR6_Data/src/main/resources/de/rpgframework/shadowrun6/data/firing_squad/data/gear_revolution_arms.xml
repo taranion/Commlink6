@@ -94,8 +94,8 @@
 			<itemmod type="HOOK" ref="BARREL" />
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="UNDER" />
-         <itemmod type="HOOK" ref="STOCK"/>
-			<itemmod type="GEARMOD" ref="smartgun_system_internal" />
+            <itemmod type="HOOK" ref="STOCK"/>
+            <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
 		<weapon dmg="5P" mode="SA/BF/FA" attack="5,9,10,9,1" ammo="40(c)" skill="firearms" spec="firearms/rifles"  wild="true"/>
 	</item>
@@ -162,7 +162,7 @@
 	</item>
 	<item id="hell_turtle" avail="6I" price="3500" type="WEAPON_SPECIAL" subtype="THROWERS">
 		<modifications>
-			<itemmod type="GEARMOD" ref="smartgun_system_internal" />
+           <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
 		<weapon dmg="3P" mode="SS" attack="6,10,,," ammo="15(c)/150(belt)" skill="exotic_weapons" spec="exotic_weapons/spray"  wild="true"/>
       <attrdef id="AMMUNITION_CLASS" value="BATTERY"/>

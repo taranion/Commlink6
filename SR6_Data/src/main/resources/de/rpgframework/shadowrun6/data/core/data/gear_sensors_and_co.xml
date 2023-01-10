@@ -350,7 +350,7 @@
    </item>
     <item avail="1" price="250" id="wall-mounted_housing" type="ELECTRONICS" subtype="SENSOR">
   		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
   		<attrdef id="MAX_SENSOR_RATING" value="6"/>
   		<attrdef id="PRICE" value="$RATING*250"/>
@@ -370,6 +370,19 @@
 			<valmod type="HOOK" ref="SENSOR_FUNCTION" value="$RATING"/>
       </modifications>
    </item>
+
+    <item avail="3" price="2000" id="single_sensor" type="ELECTRONICS" subtype="SENSOR">
+  		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
+		</choices>
+		<usage mode="EMBEDDED" slot="SENSOR_HOUSING" value="$RATING"/>
+  		<attrdef id="MAX_SENSOR_RATING" value="$RATING"/>
+  		<attrdef id="PRICE" value="$RATING*100"/>
+      <modifications>
+			<valmod type="HOOK" ref="SENSOR_FUNCTION" value="1"/>
+      </modifications>
+   </item>
+
    
 <!--     <item id="atmosphere_sensor" price="0" type="ELECTRONICS" subtype="SENSOR"> -->
 <!--   		<choices> -->

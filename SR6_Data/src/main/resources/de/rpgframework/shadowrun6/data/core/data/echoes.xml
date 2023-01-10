@@ -32,8 +32,7 @@
    <metaecho id="overclocking" type="ECHO" max="1">
      <modifications>
        <valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX" value="1" />
-       <!-- Already included by adding additional dice -->
-       <!-- attrmod attr="MINOR_ACTION_MATRIX" val="1" cond="true" type="AUGMENTED"/-->
+       <!-- Additional minor action is automatically added from the addtional added die -->
      </modifications>
    </metaecho>
    <metaecho id="resonance_link" type="ECHO" />

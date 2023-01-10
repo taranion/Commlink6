@@ -68,9 +68,9 @@
    <item avail="3" price="500"  id="grapple_gun"       subtype="GRAPPLE_GUN" type="SURVIVAL">
    	<usage mode="CARRIED"/>
    	<variant id="cyberware">
-     		<usage mode="IMPLANTED" value="0.5" />
+		<usage mode="IMPLANTED" value="0.5" />
       	<usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
-      	<attrdef id="PRICE" value="3000"/>
+      	<attrdef id="PRICE" value="5000"/>
  			<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    </item>

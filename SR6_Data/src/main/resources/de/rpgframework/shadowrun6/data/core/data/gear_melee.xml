@@ -58,7 +58,6 @@
       <weapon dmg="4S(e)" attack="5,,,,"  skill="close_combat" spec="close_combat/unarmed"/>
    </item>
    <item id="monofilament_whip" avail="6I" price="1300" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
-      <!--useas type="ACCESSORY" subtype="INSTRUMENT_WEAPON" slot="INSTRUMENT_WEAPON" cap="1" avail="8I" price="1300"/-->
       <weapon dmg="6P" attack="14,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
    </item>
 

@@ -74,7 +74,7 @@
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
          <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$RATING"/>
-         <itemmod type="QUALITY" ref="dermal_deposits" remove="true"/>
+         <itemmod type="QUALITY" ref="dermal_deposits" remove="true" apply="CHARACTER"/>
       </modifications>
    </item>
    <item id="platelet_factories" avail="4" price="17000" type="BIOWARE" subtype="BIOWARE_STANDARD">
@@ -104,8 +104,7 @@
       <attrdef id="PRICE" value="$RATING*3500"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<!-- Dicepool modifier for healing checks -->
-         <!-- checkmod type="ATTRIBUTE" ref="HEALING" value="$RATING"/-->
+        <!-- checkmod type="ATTRIBUTE" ref="HEALING" value="$RATING"/-->
       </modifications>
    </item>
    <item id="synthacardium" avail="3" type="BIOWARE" subtype="BIOWARE_STANDARD">

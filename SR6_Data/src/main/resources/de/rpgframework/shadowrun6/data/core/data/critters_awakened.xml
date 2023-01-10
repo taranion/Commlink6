@@ -27,18 +27,16 @@
 		<critterpowers>
 			<critterpowerval ref="armor" value="4"/>
 			<critterpowerval ref="dual_natured" />
-			<critterpowerval ref="enhanced_senses">
-			  
-			</critterpowerval>
+			<critterpowerval ref="enhanced_senses" />
 			<critterpowerval ref="fear" />
 			<critterpowerval ref="immunity" />
 			<critterpowerval ref="natural_weapon" />
 			<critterpowerval ref="paralyzing_howl" />
 		</critterpowers>
 		<geardef>
-		   <item id="barghest_claws" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+			<item id="barghest_claws" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
 				<weapon dmg="3P" attack="10,,,," skill="close_combat" spec="close_combat/blades" />
-   		</item>
+    		</item>
 		</geardef>
 		<gear>
 			<item ref="barghest_claws"/>

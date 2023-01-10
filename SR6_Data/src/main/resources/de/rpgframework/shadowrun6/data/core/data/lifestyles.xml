@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <lifestyles>
-    <lifestyle id="z_zone"  lp="1"/>
+    <lifestyle id="z_zone"   cost="0"	   lp="-1"/>
     <lifestyle id="street"   cost="0"      lp="0"/>
     <lifestyle id="squatter" cost="500"    lp="1"/>
     <lifestyle id="low"      cost="2000"   lp="2"/>
     <lifestyle id="middle"   cost="5000"   lp="3"/>
     <lifestyle id="high"     cost="10000"  lp="4"/>
     <lifestyle id="luxury"   cost="100000" lp="6"/>
-    <lifestyle id="aaa_zone"  lp="7"/>
+    <lifestyle id="aaa_zone" cost="100000" lp="7"/>
 </lifestyles>

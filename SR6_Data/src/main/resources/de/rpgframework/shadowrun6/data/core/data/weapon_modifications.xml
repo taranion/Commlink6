@@ -1,14 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <itemenhancements>
-
-	<itemenhancement id="smartgun_system_internal" avail="1L" price="500">
-		<requires>
-			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
-		</requires>
-      <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2" cond="true"/>
-         <valmod type="HOOK" ref="OPTICAL" value="1" />
-      </modifications>
-	</itemenhancement>
-
 </itemenhancements>
