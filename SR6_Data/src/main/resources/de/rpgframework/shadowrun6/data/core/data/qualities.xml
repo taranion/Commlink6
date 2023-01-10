@@ -34,7 +34,7 @@
    <quality id="dermal_deposits"  	  karma="7" pos="true" type="NORMAL" >
      <modifications>
        <valmod type="ATTRIBUTE" ref="MELEE_DAMAGE" value="1" set="NATURAL" />
-       <!--itemmod type="GEAR" ref="dermal_deposits" /-->
+       <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" set="NATURAL" />
        <itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" />
      </modifications>
    </quality>
@@ -84,7 +84,7 @@
    </quality>
    <quality id="high_pain_tolerance"  karma="7" pos="true" type="NORMAL">
      <modifications>
-       <!--itemmod type="RULE" ref="PAIN_TOLERANCE_HIGH"/--> 
+       <!--itemmod type="RULE" ref="PAIN_TOLERANCE_LOWER_MOD"/--> 
      </modifications>
    </quality>
    <quality id="home_ground" 		  karma="10" pos="true" type="NORMAL" multi="true">
@@ -107,7 +107,7 @@
    </quality>
    <quality id="indomitable" 		  karma="12" pos="true" type="NORMAL" >
      <modifications>
-<!--        <valmod type="SKILL" ref="outdoors" edge="COST"/> -->
+			<checkmod type="ATTRIBUTE" ref="WILLPOWER" value="-1" what="EDGE_BOOST" />
      </modifications>
    </quality>
    <quality id="juryrigger" 		  karma="12" pos="true" type="NORMAL" >
@@ -124,8 +124,8 @@
    <quality id="magic_resistance"     karma="8" pos="true" type="NORMAL">
      <modifications>
        <relevancemod topic="MAGICAL"/>
-       <!--valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_COMBAT_DIRECT" value="1" set="EDGE_BONUS"/>
-       <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_COMBAT_INDIRECT" value="1" set="EDGE_BONUS"/-->
+		<!--checkmod ref="RESIST_MAGIC" type="ATTRIBUTE" what="EDGE" value="1" apply="CHARACTER"/-->
+		<!--checkmod ref="MAGIC_HEALING" type="ATTRIBUTE" what="ESSENCE" value="-2" apply="CHARACTER"/-->
      </modifications>
    </quality>
    <quality id="mentor_spirit" 		  karma="10" pos="true" type="NORMAL" >

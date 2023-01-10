@@ -74,7 +74,7 @@
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
          <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$RATING"/>
-         <itemmod type="QUALITY" ref="dermal_deposits" remove="true"/>
+         <itemmod type="QUALITY" ref="dermal_deposits" remove="true" apply="CHARACTER"/>
       </modifications>
    </item>
    <item id="platelet_factories" avail="4" price="17000" type="BIOWARE" subtype="BIOWARE_STANDARD">
