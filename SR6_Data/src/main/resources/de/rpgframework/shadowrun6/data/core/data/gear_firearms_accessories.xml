@@ -180,7 +180,7 @@
       	<usage mode="CARRIED" />
 			<vehicle bod="3" arm="3" pil="3" sen="3"/>
 			<modifications>
-				<!--embed type="GEAR" ref="LINK" link="$$UUID" intoType="HOOK" intoRef="INTERNAL"/-->
+				<embed type="GEAR" ref="LINK" link="$$UUID" intoType="HOOK" intoRef="INTERNAL"/>
 				<valmod type="HOOK" ref="AUTOSOFT" value="3"/>
 			</modifications>      	
       </alternate>

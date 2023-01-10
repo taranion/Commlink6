@@ -104,7 +104,6 @@
       <attrdef id="PRICE" value="$RATING*3500"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<!-- Dicepool modifier for healing checks -->
         <!-- checkmod type="ATTRIBUTE" ref="HEALING" value="$RATING"/-->
       </modifications>
    </item>
