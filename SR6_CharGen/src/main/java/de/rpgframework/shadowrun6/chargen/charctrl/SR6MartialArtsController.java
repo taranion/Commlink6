@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.MartialArtsValue;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -137,8 +138,9 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 		if (model.isInCareerMode()) {
 			logger.log(Level.INFO, "Add martial art '%s' for 7 Karma and 2500 Nuyen", data.getId());
 			// Pay karma
-			model.setKarmaFree(model.getKarmaFree() -7);
-			model.setKarmaInvested(model.getKarmaInvested() +7);
+			int cost = (int)getSelectionCost(data);
+			model.setKarmaFree(model.getKarmaFree() -cost);
+			model.setKarmaInvested(model.getKarmaInvested() +cost);
 			// Pay Nuyen
 			model.setNuyen(model.getNuyen() -2500);
 
@@ -174,8 +176,9 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 			if (mod!=null) {
 				// Had been added in career
 				// Grant karma
-				model.setKarmaFree(model.getKarmaFree() +7);
-				model.setKarmaInvested(model.getKarmaInvested() -7);
+				int cost = (int)getSelectionCost(data.getResolved());
+				model.setKarmaFree(model.getKarmaFree() +cost);
+				model.setKarmaInvested(model.getKarmaInvested() -cost);
 				// Grant Nuyen
 				model.setNuyen(model.getNuyen() + mod.getExpCost());
 				// Remove from history
@@ -228,6 +231,8 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 	 */
 	@Override
 	public float getSelectionCost(MartialArts data) {
+		if (getModel().hasRuleFlag(SR6RuleFlag.MARTIAL_ARTS_PRODIGY))
+			return 5;
 		return 7;
 	}
 
@@ -237,7 +242,7 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 	 */
 	@Override
 	public String getSelectionCostString(MartialArts data) {
-		return "7";
+		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------
