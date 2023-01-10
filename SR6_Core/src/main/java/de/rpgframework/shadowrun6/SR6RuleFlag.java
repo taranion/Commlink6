@@ -16,6 +16,10 @@ public enum SR6RuleFlag implements RuleFlag {
 	UNARMED_DAMAGE_IS_PHYSICAL,
 	// Physical damage gets converted to stun damage
 	PHYSICAL_DAMAGE_IS_STUN,
+	/* Lower effects of damage */
+	PAIN_TOLERANCE_LOWER_MOD,
+	/* Ignore damage box before calculating modifiers */
+	PAIN_TOLERANCE_IGNORE_BOX,
 	/* Use CHA for defense rating */
 	CHARISMATIC_DEFENSE,
 	MENTOR_SPIRIT_BOTH_ADVANTAGES,
