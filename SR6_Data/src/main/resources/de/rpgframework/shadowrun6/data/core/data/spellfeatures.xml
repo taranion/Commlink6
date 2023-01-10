@@ -1,25 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <features>
-<!--     <feature id="active" /> -->
     <feature id="area" />
-<!--     <feature id="damaging" /> -->
     <feature id="direct" />
-<!--     <feature id="directional" /> -->
-<!--     <feature id="elemental" /> -->
-<!--     <feature id="environmental" /> -->
-<!--     <feature id="essence" /> -->
-<!--     <feature id="extended" /> -->
-<!--     <feature id="illusion_mana" /> -->
-<!--     <feature id="illusion_physical" /> -->
     <feature id="indirect" />
-<!--     <feature id="mental" /> -->
-<!--     <feature id="obvious" /> -->
-<!--     <feature id="passive" /> -->
-<!--     <feature id="physical" /> -->
-<!--     <feature id="psychic" /> -->
-<!--     <feature id="realistic" /> -->
     <feature id="sense_single" />
     <feature id="sense_multi" />
-    <!--  Move to shadowspells -->
-<!--     <feature id="negative" /> -->
 </features>
