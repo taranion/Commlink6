@@ -11,7 +11,6 @@ import org.prelle.javafx.NavigButtonControl;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
-import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.Selector;
 import de.rpgframework.jfx.cells.ComplexDataItemListCell;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -48,9 +47,7 @@ public class SkillSelector extends Selector<SR6Skill,SR6SkillValue> {
 		// Button control
     	listPossible.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
     		logger.log(Level.DEBUG, "Selected {0}", n);
-    		logger.log(Level.DEBUG, "Selected2 {0}", n.getDescription());
     		Possible poss = ctrl.getSkillController().canBeSelected(n);
-    		logger.log(Level.DEBUG, "Selection possible = {0}",poss);
     		if (btnCtrl!=null) {
     			btnCtrl.setDisabled(CloseType.OK, !poss.get());
     		}

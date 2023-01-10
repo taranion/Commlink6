@@ -235,6 +235,14 @@ public class SkillSection extends Section {
 			if (closed==CloseType.OK) {
 				OperationResult<SR6SkillValue> res = control.getSkillController().select(selector.getSelected());
 				logger.log(Level.INFO, "Result was {0}",res);
+				if (!res.wasSuccessful()) {
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, res.toString());
+					return;
+				}
+				// If this was the exotic weapons, immediately select a specialization
+				if (res.wasSuccessful() && selector.getSelected().getId().equals("exotic_weapons")) {
+					openActionDialog(res.get());
+				}
 			}
 		}
 	}
