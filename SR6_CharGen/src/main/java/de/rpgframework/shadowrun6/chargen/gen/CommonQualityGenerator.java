@@ -36,11 +36,11 @@ import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
  *
  */
 public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character> implements IQualityController {
-	
-	private final static Logger logger = System.getLogger(CommonQualityGenerator.class.getPackageName());
+
+	private final static Logger logger = System.getLogger(CommonQualityGenerator.class.getPackageName()+".quality");
 
 	public final static MultiLanguageResourceBundle RES = SR6CharacterGenerator.RES;
-	
+
 	private int numberOfQualities;
 
 	//-------------------------------------------------------------------
@@ -60,13 +60,13 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		Possible poss = super.canBeIncreased(value);
 		if (!poss.get())
 			return poss;
-		
+
 		// For previously not user-selected qualities, ensure limit is not reached yet
 		if (value.getDistributed()==0 && numberOfQualities>=6) {
 			// Already 6 qualities
 			return new Possible(Severity.STOPPER, RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -105,15 +105,15 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		if (notMet.size()>0) {
 			return new Possible(notMet, (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
 		}
-		
-		
+
+
 		int karma = value.getKarmaCost();
 		List<Choice> requiredChoices = value.getChoices();
 		for (Decision dec : decisions) {
 			logger.log(Level.INFO, "Decision "+dec);
 			if (dec==null) continue;
 			Choice choice = value.getChoice( dec.getChoiceUUID() );
-			// If we found 
+			// If we found
 			if (choice!=null) requiredChoices.remove(choice);
 			if (choice!=null && choice.getChooseFrom()==ShadowrunReference.SUBSELECT) {
 				ChoiceOption subOpt = choice.getSubOption(dec.getValue());
@@ -124,7 +124,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 				}
 			}
 		}
-		
+
 		if (value.isPositive() && karma>model.getKarmaFree()) {
 			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
@@ -157,28 +157,28 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 					requiredChoices.add(tmpC);
 				}
 			}
-		}		
+		}
 
 		// If there are decisions open, don't allow selection
 		if (!requiredChoices.isEmpty()) {
 			// Convert open decisions into names or at least identifiers
 			List<String> names = new ArrayList<>();
-			requiredChoices.forEach(c -> names.add( 
+			requiredChoices.forEach(c -> names.add(
 					(c.getChooseFrom()==ShadowrunReference.SUBSELECT)?value.getChoiceName(c, Locale.getDefault()):String.valueOf(c.getChooseFrom())));
-			return new Possible(Severity.WARNING, RES, SR6RejectReasons.IMPOSS_MISSING_DECISIONS,names);
+			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_MISSING_DECISIONS,names);
 		}
-		
+
 		// Is Karma gain >20 and there is no chance to prevent gaining to much Karma
 		int cost = value.getKarmaCost();
-		if (!value.isPositive() && ((karmaGain+cost)>20) && numberOfQualities>4) 
-			return new Possible(Severity.STOPPER, RES, SR6RejectReasons.IMPOSS_QUALITY_KARMAGAIN);
-		
+		if (!value.isPositive() && ((karmaGain+cost)>20) && numberOfQualities>4)
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_QUALITY_KARMAGAIN);
+
 		// No more than 6 user-selected qualities
 		if (numberOfQualities>=6) {
-			// Already 6 qualities 
-			return new Possible(Severity.STOPPER, RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6);
+			// Already 6 qualities
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -189,7 +189,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 //	@Override
 //	public OperationResult<QualityValue> select(Quality value, Decision... decisions) {
 //		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER select");
-//		
+//
 //		try {
 //			Possible possible = canBeSelected(value, decisions);
 //			if (!possible.get()) {
@@ -201,7 +201,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 //				logger.log(Level.WARNING, "User tries to select {0} but that is not possible because of {1}", value, possible.getI18NKey());
 //				return new OperationResult<>(possible);
 //			}
-//			
+//
 //			return super.select(value, decisions);
 //		} finally {
 //			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE select");
@@ -247,7 +247,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 					unprocessed.add(tmp);
 				}
 			}
-			
+
 			// Pay or grant Karma for qualities
 			for (QualityValue val : model.getQualities()) {
 				Quality item = val.getModifyable();
@@ -271,14 +271,14 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 						karmaGain += cost;
 					}
 				}
-				
+
 				if (val.isAutoAdded()) {
 					if (val.getDistributed()>0) {
 						numberOfQualities++;
 					}
 				} else
 					numberOfQualities++;
-				
+
 				calculateKarmaSURGE();
 //				// Inject modifications from qualities
 //				for (Modification mod : val.getEffectiveModifications(model)) {
@@ -287,7 +287,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 //				}
 				// Done in GetModificationsFromQualities
 			}
-			
+
 			// Error conditions
 			if (karmaGain>20) {
 				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_KARMAGAIN));
@@ -301,8 +301,8 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_TOO_MANY));
 				logger.log(Level.WARNING, "Added more than 6 qualities ({0})", numberOfQualities);
 			}
-			
-			
+
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
