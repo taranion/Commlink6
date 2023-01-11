@@ -555,6 +555,10 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			return new Possible(Severity.STOPPER, RES, I18N_NOT_AVAILABLE_SPEC, skillVal.getKey(), spec.getId(), expertise);
 		}
 
+		// If this is Exotic Weapons, no Karma/Points are needed
+		if (skillVal.getKey().equals("exotic_weapons"))
+			return Possible.TRUE;
+
 		// Need a skill point or 5 Karma
 		if (points1<1 && model.getKarmaFree()<5)
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
