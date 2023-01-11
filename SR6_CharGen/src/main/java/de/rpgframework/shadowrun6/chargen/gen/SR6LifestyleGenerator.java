@@ -32,7 +32,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> implements SR6LifestyleController {
 
-	protected final static Logger logger = System.getLogger(SR6LifestyleGenerator.class.getPackageName()+".quality");
+	protected final static Logger logger = System.getLogger(SR6LifestyleGenerator.class.getPackageName()+".lifestyle");
 
 	protected Shadowrun6Character model;
 
