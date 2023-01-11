@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -37,10 +38,10 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		implements IMetamagicOrEchoController {
 
 	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".metaecho");
-	
+
 	private boolean isCharGen;
 	private int maxGrade = Integer.MAX_VALUE;
-	
+
 	//-------------------------------------------------------------------
 	public SR6MetamagicOrEchoController(SR6CharacterController parent, boolean isCharGen) {
 		super(parent);
@@ -62,7 +63,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	 */
 	@Override
 	public List<MetamagicOrEcho> getAvailable() {
-		MagicOrResonanceType type = getModel().getMagicOrResonanceType();		
+		MagicOrResonanceType type = getModel().getMagicOrResonanceType();
 		if (type!=null && type.usesMagic()) {
 			return Shadowrun6Core.getItemList(MetamagicOrEcho.class).stream()
 					.filter(p -> parent.showDataItem(p))
@@ -169,14 +170,24 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		if (getGrade()>=maxGrade) {
 			return new Possible(false, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 		}
-		
+
 		// Calculate Karma cost
 		int karma = 10 + getGrade() +1;
-		
+
 		if (getModel().getKarmaFree()<karma) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
-		
+
+		// Check if initiation/immersion/transhumanism is allowed (for chargen)
+		if (isCharGen) {
+			if (value.getType()==Type.TRANSHUMANISM && !parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_TRANSHUMANISM)) {
+				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
+			}
+			if (value.getType()!=Type.TRANSHUMANISM && !parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_ALLOW_INITIATION)) {
+				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
+			}
+		}
+
 		return Possible.TRUE;
 	}
 
@@ -206,7 +217,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			int karma = 10 + getGrade() +1;
 			getModel().addMetamagicOrEcho(selected);
 			logger.log(Level.INFO, "Add metamagic/echo '" + value.getId() + "' for " + karma + " karma");
-			Shadowrun6Character model = getModel(); 
+			Shadowrun6Character model = getModel();
 			model.setKarmaFree( model.getKarmaFree() - karma);
 			model.setKarmaInvested( model.getKarmaInvested() + karma);
 
@@ -245,11 +256,11 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			}
 
 			int karma = 10 + getGrade();
-			Shadowrun6Character model = getModel(); 
+			Shadowrun6Character model = getModel();
 			model.removeMetamagicOrEcho(value);
 			model.setKarmaFree( model.getKarmaFree() + karma);
 			model.setKarmaInvested( model.getKarmaInvested() - karma);
-			
+
 			logger.log(Level.INFO, "Remove metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
 
 			parent.runProcessors();
@@ -287,7 +298,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		if (!getModel().getMetamagicOrEchoes().contains(value)) {
 			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
-		
+
 		MetamagicOrEcho item = value.getModifyable();
 		if (!item.hasLevel()) {
 			return new Possible(IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
@@ -300,7 +311,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 
 		// Calculate Karma cost
 		int karma = 10 + getGrade() +1;
-		
+
 		if (getModel().getKarmaFree()<karma) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
@@ -317,12 +328,12 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		if (!getModel().getMetamagicOrEchoes().contains(value)) {
 			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
-		
+
 		MetamagicOrEcho item = value.getModifyable();
 		if (!item.hasLevel()) {
 			return new Possible(IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
 		}
-		
+
 		if (value.getDistributed()<1) {
 			return new Possible(false, IRejectReasons.IMPOSS_MIN_LEVEL_REACHED);
 		}
@@ -347,7 +358,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			value.setDistributed(value.getDistributed()+1);
 
 			logger.log(Level.INFO, "Increased metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
-			Shadowrun6Character model = getModel(); 
+			Shadowrun6Character model = getModel();
 			model.setKarmaFree( model.getKarmaFree() - karma);
 			model.setKarmaInvested( model.getKarmaInvested() + karma);
 
@@ -376,7 +387,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			int karma = 10 + getGrade() +1;
 
 			logger.log(Level.INFO, "Decreased metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
-			Shadowrun6Character model = getModel(); 
+			Shadowrun6Character model = getModel();
 			model.setKarmaFree( model.getKarmaFree() + karma);
 			model.setKarmaInvested( model.getKarmaInvested() - karma);
 
@@ -405,11 +416,11 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 				} else if (mrType.usesResonance()) {
 					maxGrade = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_SUBMERSION);
 				} else {
-					maxGrade = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_TRANSHUMAN);					
+					maxGrade = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_TRANSHUMAN);
 				}
 			}
 			logger.log(Level.ERROR, "Maximum grade is {0}", maxGrade);
-			
+
 			for (Modification tmp : previous) {
 				if (tmp.getReferenceType()==ShadowrunReference.METAECHO) {
 					DataItemModification mod = (DataItemModification)tmp;
@@ -428,7 +439,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 				}
 				unprocessed.add(tmp);
 			}
-			
+
 			// Pay karma and apply modifications
 			int payNext = 11;
 			int grade = 0;
@@ -453,7 +464,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 					unprocessed.add(copy);
 				}
 			}
-			
+
 			logger.log(Level.INFO, "Initiation/Submersion grade = "+grade);
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
