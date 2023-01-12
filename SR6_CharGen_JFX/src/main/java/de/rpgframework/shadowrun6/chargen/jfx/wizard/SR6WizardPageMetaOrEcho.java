@@ -9,6 +9,7 @@ import org.prelle.javafx.Wizard;
 
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageMetaOrEcho;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -21,7 +22,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
  */
 public class SR6WizardPageMetaOrEcho extends AWizardPageMetaOrEcho {
 
-	private final static Logger logger = System.getLogger(SR6WizardPageMetaOrEcho.class.getPackageName());
+	private final static Logger logger = System.getLogger(SR6WizardPageMetaOrEcho.class.getPackageName()+".metaecho");
 
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageMetaOrEcho.class.getPackageName()+".SR6WizardPages");
 
@@ -51,10 +52,10 @@ public class SR6WizardPageMetaOrEcho extends AWizardPageMetaOrEcho {
 		super.refresh();
 
 		MagicOrResonanceType type = charGen.getModel().getMagicOrResonanceType();
-		if (type!=null && type.usesMagic()) {
+		if (type!=null && type.usesMagic() && charGen.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_ALLOW_INITIATION)) {
 			logger.log(Level.DEBUG, type+" can initiate - enable page");
 			activeProperty().set(true);
-		} else if (type!=null && type.usesResonance()) {
+		} else if (type!=null && type.usesResonance() && charGen.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_ALLOW_INITIATION)) {
 			logger.log(Level.DEBUG, type+" can submerse - enable page");
 			activeProperty().set(true);
 		} else if (charGen.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_TRANSHUMANISM)) {
