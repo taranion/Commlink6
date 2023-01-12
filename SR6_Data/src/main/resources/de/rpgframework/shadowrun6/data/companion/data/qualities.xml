@@ -92,7 +92,7 @@
 	</quality>
 	<quality id="team_player"  karma="10" pos="true" type="NORMAL" />
 	<quality id="teflon_coated"  karma="12" pos="true" type="NORMAL" />
-	
+
 	<!-- Negative qualities -->
 	<quality id="all_business" karma="8" pos="false" type="NORMAL">
 		<modifications>
@@ -114,7 +114,7 @@
 	<quality id="gear_acquisition_syndrome" karma="6" pos="false" type="NORMAL" max="3"/>
 	<quality id="glitchy"       karma="12" pos="false" type="NORMAL"/>
 	<quality id="gourmand"      karma="5"  pos="false" type="NORMAL"/>
-	<quality id="hooder"        karma="12" pos="false" type="NORMAL" max="3">
+	<quality id="hooder"        karma="5"  pos="false" type="NORMAL" max="3">
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="MONTHLY_COST" value="1000"/>
 		</modifications>
@@ -152,5 +152,5 @@
 			<valmod type="ATTRIBUTE" ref="COMPOSURE" value="$INITIATIVE_DICE_PHYSICAL"/>
 		</modifications>
 	</quality>
-	
+
 </qualities>
