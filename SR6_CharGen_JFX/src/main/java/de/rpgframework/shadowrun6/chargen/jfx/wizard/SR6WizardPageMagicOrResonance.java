@@ -58,7 +58,6 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 	public SR6WizardPageMagicOrResonance(Wizard wizard, IShadowrunCharacterGenerator<?, ?, ?,?> charGen) {
 		super(wizard, charGen);
 
-		System.err.println("SR6WizardPageMagicOrResonance: "+charGen.getModel().getCharGenUsed());
 		if (charGen.getModel().getCharGenUsed()!=null && charGen.getModel().getCharGenUsed().equals("pointbuy")) {
 			lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith());
 		}

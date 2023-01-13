@@ -13,6 +13,7 @@ import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.Mode;
+import org.prelle.javafx.NavigButtonControl;
 import org.prelle.javafx.Section;
 import org.prelle.javafx.SymbolIcon;
 
@@ -37,6 +38,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.SkillSelector;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
@@ -56,7 +58,7 @@ import javafx.scene.layout.VBox;
 public class SkillSection extends Section {
 
 	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(ShadowrunSkillTable.class.getName());
-	
+
 	protected Logger logger = System.getLogger(getClass().getPackageName());
 
 	private SR6CharacterController control;
@@ -70,8 +72,8 @@ public class SkillSection extends Section {
 	protected Button btnDel;
 	private ToggleSwitch cbRuleUndoCareer;
 	private ToggleSwitch cbRuleUndoChargen;
-	
-	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4); 
+
+	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4);
 
 	//-------------------------------------------------------------------
 	public SkillSection(String title, SkillType... type) {
@@ -96,17 +98,17 @@ public class SkillSection extends Section {
 		btnDel = new Button(null, new SymbolIcon("delete"));
 		getButtons().addAll(btnAdd, btnDel);
 	}
-	
+
 	private void initLine() {
 		tsExpertMode = new ToggleSwitch("Expert");
 		lbPoints = new Label("?");
 		lbPoints.setStyle("-fx-text-fill: -fx-text-base-color");
 
 		Label hdPoints1 = new Label(ResourceI18N.get(RES, "head.points")+":");
-		
+
 		HBox line = new HBox(5, tsExpertMode, hdPoints1, lbPoints);
 		VBox layout = new VBox(5, line, table);
-		setContent(layout);		
+		setContent(layout);
 	}
 
 	//-------------------------------------------------------------------
@@ -115,14 +117,14 @@ public class SkillSection extends Section {
 		cbRuleUndoCareer.setGraphicTextGap(0);
 		cbRuleUndoChargen       = new ToggleSwitch();
 		cbRuleUndoChargen.setGraphicTextGap(0);
-		
+
 		cbRuleUndoCareer.selectedProperty().addListener( (ov,o,n) -> {
 			if (control!=null) { control.getRuleController().setRuleValue(ShadowrunRules.CAREER_UNDO_FROM_CAREER, n); control.runProcessors(); }
 		});
 		cbRuleUndoChargen.selectedProperty().addListener( (ov,o,n) -> {
 			if (control!=null) { control.getRuleController().setRuleValue(ShadowrunRules.CAREER_UNDO_FROM_CHARGEN, n); control.runProcessors(); }
 		});
-		
+
 		setMode(Mode.REGULAR);
 		VBox bxRules = new VBox(10);
 		bxRules.getChildren().add(makeLabel(cbRuleUndoChargen, ShadowrunRules.CAREER_UNDO_FROM_CHARGEN));
@@ -170,7 +172,7 @@ public class SkillSection extends Section {
 			if (skCtrl instanceof NumericalValueWith1PoolController) {
 				lbPoints.setText(String.valueOf(((NumericalValueWith1PoolController<?,?>)skCtrl).getPointsLeft()));
 			}
-			
+
 			// Secondary content
 			cbRuleUndoCareer.setSelected( control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_UNDO_FROM_CAREER));
 			cbRuleUndoChargen.setSelected( control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_UNDO_FROM_CHARGEN));
@@ -194,7 +196,7 @@ public class SkillSection extends Section {
 		table.setData(
 				control.getSkillController().getSelected().stream().filter(sv -> Arrays.asList(type).contains(sv.getModifyable().getType())).collect(Collectors.toList())
 				);
-		
+
 		table.useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?7:6));
 		if (ctrl instanceof SR6CharacterLeveller) {
 			setMode(Mode.BACKDROP);
@@ -204,16 +206,43 @@ public class SkillSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void onAdd() {
-		SR6Skill lang = Shadowrun6Core.getSkill("language") ;
-		ChoiceSelectorDialog<SR6Skill, SR6SkillValue> dialog = new ChoiceSelectorDialog<SR6Skill, SR6SkillValue>(control.getSkillController());
-		Decision[] dec = dialog.apply(lang, lang.getChoices());
-		if (dec!=null) {
-			OperationResult<SR6SkillValue> result = control.getSkillController().select(lang, dec);
-			if (result.wasSuccessful()) {
-				table.getItems().add(result.get());
-				table.refresh();
-			} else {
-				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
+		if (type.length==1 && type[0]==SkillType.LANGUAGE) {
+			SR6Skill lang = Shadowrun6Core.getSkill("language") ;
+			ChoiceSelectorDialog<SR6Skill, SR6SkillValue> dialog = new ChoiceSelectorDialog<SR6Skill, SR6SkillValue>(control.getSkillController());
+			Decision[] dec = dialog.apply(lang, lang.getChoices());
+			if (dec!=null) {
+				OperationResult<SR6SkillValue> result = control.getSkillController().select(lang, dec);
+				if (result.wasSuccessful()) {
+					table.getItems().add(result.get());
+					table.refresh();
+				} else {
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
+				}
+			}
+		} else {
+			SkillSelector selector = new SkillSelector(control, (skill) -> {
+				switch (skill.getType()) {
+				case LANGUAGE: case KNOWLEDGE: return false;
+				default:
+					return true;
+				}
+			});
+			NavigButtonControl btnCtrl = new NavigButtonControl();
+			selector.setButtonControl(btnCtrl);
+			ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(SkillSelector.RES, "selector.skill.title"), selector, CloseType.OK, CloseType.CANCEL);
+			CloseType closed = FlexibleApplication.getInstance().showAlertAndCall(dialog, btnCtrl);
+			logger.log(Level.INFO, "Closed via {0}",closed);
+			if (closed==CloseType.OK) {
+				OperationResult<SR6SkillValue> res = control.getSkillController().select(selector.getSelected());
+				logger.log(Level.INFO, "Result was {0}",res);
+				if (!res.wasSuccessful()) {
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, res.toString());
+					return;
+				}
+				// If this was the exotic weapons, immediately select a specialization
+				if (res.wasSuccessful() && selector.getSelected().getId().equals("exotic_weapons")) {
+					openActionDialog(res.get());
+				}
 			}
 		}
 	}
@@ -231,7 +260,7 @@ public class SkillSection extends Section {
 	//-------------------------------------------------------------------
 	private CloseType openActionDialog(SR6SkillValue sVal) {
 		logger.log(Level.INFO, "openActionDialog({0})", sVal);
-		
+
 		SRSkillSettingsPane pane = new SRSkillSettingsPane(sVal, control.getSkillController());
 		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "dialog.specializations.title"), pane, CloseType.OK);
 		CloseType close = FlexibleApplication.getInstance().showAlertAndCall(dialog, null);

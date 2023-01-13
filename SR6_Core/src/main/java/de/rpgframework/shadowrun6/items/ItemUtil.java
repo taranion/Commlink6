@@ -87,8 +87,10 @@ public class ItemUtil {
 				e.printStackTrace();
 			}
 			return;
+		case CONCEALABILITY:
+			return;
 		default:
-			logger.log(Level.ERROR, "Unsuported addOrSetItemAttribute {0} with {1}  val={2}", attr, mod.getRawValue(), val);
+			logger.log(Level.WARNING, "Unsuported addOrSetItemAttribute {0} with {1}  val={2}", attr, mod.getRawValue(), val);
 		}
 	}
 

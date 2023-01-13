@@ -435,8 +435,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	@Override
 	public float getSelectionCost(SR6Skill data) {
-		// TODO Auto-generated method stub
-		return 0;
+		return 5;
 	}
 
 	//-------------------------------------------------------------------
@@ -445,7 +444,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	@Override
 	public String getSelectionCostString(SR6Skill data) {
-		return String.valueOf(getSelectionCostString(data));
+		return String.valueOf(getSelectionCost(data));
 	}
 
 }
