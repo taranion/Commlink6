@@ -109,7 +109,7 @@
       	<weapon  dmg="1P" mode="SS/SA" attack="10,8,,," ammo="6(c)" skill="exotic_weapons" spec="exotic_weapons/air"/>
       </alternate>
    </item>
-   <item id="shiawase_arms_tactical_model_71A" avail="4L" price="900" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
+   <item id="shiawase_arms_tactical_model_71a" avail="4L" price="900" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
@@ -271,7 +271,7 @@
    </item>
 
    <!-- Machine guns -->
-   <item id="ares_m22A1" avail="6I" price="15000" type="WEAPON_FIREARMS" subtype="HMG">
+   <item id="ares_m22a1" avail="6I" price="15000" type="WEAPON_FIREARMS" subtype="HMG">
       <modifications>
          <itemmod type="HOOK" ref="STOCK"/>
          <itemmod type="HOOK" ref="TOP"/>

@@ -264,8 +264,8 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-	  		<!--  TODO: Find out how to add AlternateUsages -->
-         <!--itemmod item="firearm_in_melee" /-->
+		 <!-- TODO: Find out how to add AlternateUsages -->
+         <!-- itemmod type="GEAR" ref="firearm_in_melee" /-->
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="metahuman_adaption" avail="3" price="200">
@@ -295,7 +295,6 @@
 	  </requires>
 	  <modifications>
 	  		<checkmod type="SKILL" ref="ANY" value="1" what="REPLACE_WITH_WILD" apply="DATA_ITEM"/>
-         <!-- <specrulemod ref="ATTACK_REPLACE_WITH_1_WILD_DIE" /> -->
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="no_stock" avail="1" price="50">
@@ -592,21 +591,6 @@
 	<itemenhancement id="glowcoat" avail="2" price="40">
 	  <requires>
     	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
-	  </requires>
-	</itemenhancement>
-	<itemenhancement id="concealable_sheath" avail="2" price="50">
-	  <requires>
-   	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
-	  </requires>
-	</itemenhancement>
-	<itemenhancement id="melee_quick_draw_sheath" avail="2" price="115" >
-	  <requires>
-   	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
-	  </requires>
-	</itemenhancement>
-	<itemenhancement id="melee_hidden_arm_slide" avail="2" price="125">
-	  <requires>
-    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="BLADES"/>
 	  </requires>
 	</itemenhancement>
 	<itemenhancement id="dynamic_tension_system" avail="3" price="200">

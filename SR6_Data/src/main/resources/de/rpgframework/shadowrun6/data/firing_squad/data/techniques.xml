@@ -47,7 +47,6 @@
     <modifications><checkmod type="ACTION" ref="block" value="1" what="EDGE_ONLY_TEST" cond="with_weapon"/></modifications>
   </technique> 
   <technique cat="WEAPON"   id="pin" /> 
-  <technique cat=""   id="precision_strike" />  <!-- for compatibility with old characters -->
   <technique cat="WEAPON"   id="precision_strike_blades" /> 
   <technique cat="WEAPON"   id="precision_strike_clubs" /> 
   <technique cat="WEAPON"   id="precision_strike_exotic" /> 
