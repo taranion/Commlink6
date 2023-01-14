@@ -101,7 +101,7 @@
    <item id="tonfa" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
       <weapon  dmg="3S" attack="6,,,," skill="close_combat" spec="close_combat/clubs"/>
    </item>
-   <item id="urban_tribe_tomahawk_mkII" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+   <item id="urban_tribe_tomahawk_mkii" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="2P" attack="10,9,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
    <item id="xiphos_tactical_gladius" avail="4" price="300" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">

@@ -19,8 +19,9 @@
    <quality id="compulsion"  karma="2" pos="FALSE" max="5" multi="true" type="NORMAL">
    	<choices>
    		<choice uuid="58b2700b-918d-4746-83a2-ccc189f1cb1b" type="TEXT"/>
-   		<!--choice uuid="0375764d-c7f9-44a9-bc2d-02ee1d9d129a" type="SUBSELECT">
-	         <subOption id="lvl1" cost="2"/>
+		<!--choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="QUALITY?_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/ OR-->
+		<!--choice uuid="0375764d-c7f9-44a9-bc2d-02ee1d9d129a" type="SUBSELECT">
+	        <subOption id="lvl1" cost="2"/>
          	<subOption id="lvl2" cost="4"/>
          	<subOption id="lvl3" cost="6"/>
          	<subOption id="lvl4" cost="8"/>

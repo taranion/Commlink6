@@ -28,10 +28,6 @@
       <useas  type="WEAPON_SPECIAL" subtype="DART"/>
       <weapon  dmg="1P" mode="SS/SA" attack="10,8,,," ammo="6(c)" skill="exotic_weapons" spec="exotic_weapons/air"/>
    </item>
-   <item id="weapon_commlink" avail="0" cost="0" modonly="true"> <!-- only for backward compatibility, use itemenhancement -->
-      <useas type="ACCESSORY"   subtype="COMMLINK" cap="0" slot="FIREARMS_EXTERNAL"/>
-      <cyberdeck d="1" f="2" programs="0"/>
-   </item>
    <item id="izom_artemis_launcher" avail="0" cost="0" modonly="true" modslot="0" >
       <useas type="WEAPON_SPECIAL"   subtype="LAUNCHERS" />
       <weapon attack="3,9,5,1," ammo="1(m)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers"/>

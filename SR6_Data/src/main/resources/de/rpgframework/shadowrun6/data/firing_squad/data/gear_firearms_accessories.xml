@@ -181,11 +181,7 @@
          </selreq>
       </requires>
    </item>
-   <item avail="4" price="1000" id="ruthenium_rifle_sheath" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="yes">
-      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
-      <usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
-   </item>
-
+   
 	<!-- Special weapon accessories -->
    <item avail="4" price="750" id="colt_arms_arm-brace" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="yes">
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
@@ -198,7 +194,7 @@
    </item>
 
 	<!-- Melee weapon accessories -->
-   <item avail="2" price="50" id="concealable_sheath_acc" type="ACCESSORY" subtype="WEAPON_ACCESSORY" >
+   <item avail="2" price="50" id="concealable_sheath" type="ACCESSORY" subtype="WEAPON_ACCESSORY" >
 		<usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
       <usage mode="CARRIED"/>
       <requires>
@@ -208,14 +204,14 @@
          <valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="1"/>
       </modifications>
    </item>
-   <item avail="2" price="115" id="melee_quick_draw_sheath_acc" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+   <item avail="2" price="115" id="melee_quick_draw_sheath" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
 		<usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
       <usage mode="CARRIED"/>
       <requires>
      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
       </requires>
    </item>
-   <item avail="2" price="125" id="melee_hidden_arm_slide_acc" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+   <item avail="2" price="125" id="melee_hidden_arm_slide" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
       <requires>
       	<selreq>
