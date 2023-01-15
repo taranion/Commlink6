@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,7 +37,7 @@ import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 public class SR6CompendiumExportTest {
 
 	private static Workbook workbook;
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @throws java.lang.Exception
@@ -47,10 +48,10 @@ public class SR6CompendiumExportTest {
 		LicenseManager.storeUserLicensedDatasets(List.of("SHADOWRUN6/CORE"));
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(3));
+//		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(3));
 		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(2));
 		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(1));
-		
+
 		workbook = new XSSFWorkbook();
 	}
 
@@ -74,7 +75,7 @@ public class SR6CompendiumExportTest {
 	@Test
 	public void testAllUS() throws IOException {
 		Function<Collection<PageReference>,Locale[]> callback = (references) -> new Locale[] {Locale.ENGLISH};
-		
+
 		List<DataSet> sets = Shadowrun6Core.getDataSets();
 //		sets.remove(1);
 		Workbook modDeep = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, false);
@@ -84,6 +85,8 @@ public class SR6CompendiumExportTest {
 		modDeep.write(fos);
 		fos.close();
 		System.out.println("Written to "+file.getAbsolutePath());
+
+		Desktop.getDesktop().open(file);
 		//System.exit(1);
 	}
 
@@ -91,7 +94,7 @@ public class SR6CompendiumExportTest {
 //	@Test
 //	public void testAllDE() throws IOException {
 //		Function<Collection<PageReference>,Locale[]> callback = (references) -> new Locale[] {Locale.GERMAN};
-//		
+//
 //		List<DataSet> sets = Shadowrun6Core.getDataSets();
 //		Module modShallow = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, true);
 //		assertNotNull(modShallow);

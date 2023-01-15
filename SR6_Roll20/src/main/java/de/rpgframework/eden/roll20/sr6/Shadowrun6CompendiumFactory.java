@@ -3,6 +3,7 @@ package de.rpgframework.eden.roll20.sr6;
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
 
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -27,12 +30,16 @@ import de.rpgframework.genericrpg.data.PageReference;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.reality.Player;
+import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
+import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Ritual;
+import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.items.ItemSubType;
@@ -55,7 +62,7 @@ public class Shadowrun6CompendiumFactory {
 	private final static String VALIDCHARS2 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	private final static String VALIDCHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
 	private final static Random RANDOM = new Random();
-	
+
 	private final static String createRandomID() {
 		StringBuffer buf = new StringBuffer();
 		for (int i=0; i<16; i++) {
@@ -63,7 +70,7 @@ public class Shadowrun6CompendiumFactory {
 		}
 		return buf.toString();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private static String createSourceText(DataItem item, Locale loc) {
 		List<String> elements = new ArrayList<>();
@@ -73,12 +80,12 @@ public class Shadowrun6CompendiumFactory {
 			if (!ref.getLanguage().equals(language))
 				continue;
 			if (shorted) {
-				elements.add( ref.getProduct().getShortName(Locale.getDefault())+" "+ref.getPage() );				
+				elements.add( ref.getProduct().getShortName(Locale.getDefault())+" "+ref.getPage() );
 			} else {
 				elements.add( ref.getProduct().getName(Locale.getDefault())+" "+ref.getPage() );
 			}
 		}
-		
+
 		return String.join(", ", elements);
 	}
 
@@ -88,17 +95,27 @@ public class Shadowrun6CompendiumFactory {
 		if (localeCallback==null)
 			throw new NullPointerException("localeCallback");
 		Workbook module = new XSSFWorkbook();
-		
+
+		createGrunts     (module, localeCallback, false);
+		createGrunts     (module, localeCallback, true);
 		createAdeptPowers(module, localeCallback);
+		createAdeptPowersBlob(module, localeCallback);
 //		createCritterPowers(module, zipOut, localeCallback, shallow);
 		createQualities  (module, localeCallback);
-		createSpells     (module, localeCallback);
-		createRituals    (module, localeCallback);
-		createMetamagic  (module, localeCallback);
-		createComplexForms(module, localeCallback);
-		createEchoes     (module, localeCallback);
-		createWeapons    (module,localeCallback, "Melee", ItemSubType.BLADES, ItemSubType.CLUBS, ItemSubType.WHIPS, ItemSubType.UNARMED, ItemSubType.OTHER_CLOSE);
-		createWeapons    (module,localeCallback, "Range", 
+		createQualitiesBlobs(module, localeCallback);
+		createSpells     (module, localeCallback, false);
+		createSpells     (module, localeCallback, true);
+		createRituals    (module, localeCallback, false);
+		createRituals    (module, localeCallback, true);
+		createMetamagic  (module, localeCallback, false);
+		createMetamagic  (module, localeCallback, true);
+		createComplexForms(module, localeCallback, false);
+		createComplexForms(module, localeCallback, true);
+		createEchoes     (module, localeCallback, false);
+		createEchoes     (module, localeCallback, true);
+		createWeapons    (module,localeCallback, false, "Melee", ItemSubType.BLADES, ItemSubType.CLUBS, ItemSubType.WHIPS, ItemSubType.UNARMED, ItemSubType.OTHER_CLOSE);
+		createWeapons    (module,localeCallback, true, "Melee", ItemSubType.BLADES, ItemSubType.CLUBS, ItemSubType.WHIPS, ItemSubType.UNARMED, ItemSubType.OTHER_CLOSE);
+		createWeapons    (module,localeCallback, false, "Ranged",
 				ItemSubType.BOWS,
 				ItemSubType.CROSSBOWS,
 				ItemSubType.THROWING,
@@ -119,17 +136,45 @@ public class Shadowrun6CompendiumFactory {
 				ItemSubType.LAUNCHERS,
 				ItemSubType.THROWERS,
 				ItemSubType.DMSO,
-				ItemSubType.DART,				
+				ItemSubType.DART,
 				ItemSubType.OTHER_SPECIAL
 				);
-		createVehicles   (module,localeCallback);
-		createAugmentations(module,localeCallback);
-		createArmor      (module,localeCallback);
-		createOtherGear  (module,localeCallback);
+		createWeapons    (module,localeCallback, true, "Ranged",
+				ItemSubType.BOWS,
+				ItemSubType.CROSSBOWS,
+				ItemSubType.THROWING,
+				ItemSubType.TASERS,
+				ItemSubType.HOLDOUTS,
+				ItemSubType.PISTOLS_LIGHT,
+				ItemSubType.MACHINE_PISTOLS,
+				ItemSubType.PISTOLS_HEAVY,
+				ItemSubType.SUBMACHINE_GUNS,
+				ItemSubType.SHOTGUNS,
+				ItemSubType.RIFLE_ASSAULT,
+				ItemSubType.RIFLE_HUNTING,
+				ItemSubType.RIFLE_SNIPER,
+				ItemSubType.LMG,
+				ItemSubType.MMG,
+				ItemSubType.HMG,
+				ItemSubType.ASSAULT_CANNON,
+				ItemSubType.LAUNCHERS,
+				ItemSubType.THROWERS,
+				ItemSubType.DMSO,
+				ItemSubType.DART,
+				ItemSubType.OTHER_SPECIAL
+				);
+		createVehicles   (module,localeCallback, false);
+		createAugmentations(module,localeCallback, false);
+		createAugmentations(module,localeCallback, true);
+		createArmor      (module,localeCallback, false);
+		createArmor      (module,localeCallback, true);
+		createOtherGear  (module,localeCallback, false);
+		createOtherGear  (module,localeCallback, true);
 //		createVehicle    (module, zipOut, localeCallback, shallow);
-//		createGrunts     (module, localeCallback);
+		createCritterPowers(module, localeCallback, false);
+		createCritterPowers(module, localeCallback, true);
 //		createCritter    (module, zipOut, localeCallback, shallow);
-		
+
 //		for (Language lang : module.getLanguages()) {
 //        	ZipEntry zipEntry = new ZipEntry(lang.getPath());
 //        	zipOut.putNextEntry(zipEntry);
@@ -151,19 +196,19 @@ public class Shadowrun6CompendiumFactory {
 
 	//-------------------------------------------------------------------
 	private static void createAdeptPowers(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Powers");
+		Sheet sheet = workbook.createSheet("Powers");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
-		head.createCell(4, CellType.STRING).setCellValue("data-activation");
-		head.createCell(5, CellType.STRING).setCellValue("data-activation_text");
-		head.createCell(6, CellType.STRING).setCellValue("data-cost");
-		head.createCell(7, CellType.STRING).setCellValue("data-cost_text");
-		head.createCell(8, CellType.STRING).setCellValue("data-name");
-		
+		head.createCell(1, CellType.STRING).setCellValue("data-name");
+		head.createCell(2, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3, CellType.STRING).setCellValue("data-description");
+		head.createCell(4, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(5, CellType.STRING).setCellValue("data-activation");
+		head.createCell(6, CellType.STRING).setCellValue("data-activation_text");
+		head.createCell(7, CellType.STRING).setCellValue("data-cost");
+		head.createCell(8, CellType.STRING).setCellValue("data-cost_text");
+
 		List<AdeptPower> list = Shadowrun6Core.getItemList(AdeptPower.class);
 		Collections.sort(list, new Comparator<AdeptPower>() {
 			public int compare(AdeptPower o1, AdeptPower o2) {
@@ -172,88 +217,159 @@ public class Shadowrun6CompendiumFactory {
 		});
 		for (AdeptPower item : list) {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			row.createCell(1, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(4, CellType.STRING).setCellValue(item.getId());
 
-			Converter.convertAdeptPower( item, locales[0], row);
-			row.createCell(8, CellType.STRING).setCellValue(item.getName(locales[0]));
+			Converter.convertAdeptPower( item, locales[0], row, 5);
 		}
-		
+
 		for (int i=0; i<14; i++) {
-			if (i==2 || i==4) continue;
+			if (i==3 ) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 		return;
 	}
 
-//	//-------------------------------------------------------------------
-//	private static void createCritterPowers(Module module, ZipOutputStream zipOut, Function<Collection<PageReference>,Locale[]> localeCallback, boolean shallow) throws IOException {
-//		Pack pack = new Pack();
-//		pack.setName("shadowrun6-critterpowers");
-//		pack.setLabel("Critter Powers");
-//		pack.setEntity("Item");
-//		pack.setPath("packs/critterpowers.db");
-//		pack.setSystem("shadowrun6-eden");
-//		module.getPacks().add(pack);
-//		
-//		if (shallow)
-//			return;
-//		
-//		StringBuffer buf = new StringBuffer();
-//		Gson gson = new GsonBuilder().create();
-//		for (CritterPower tmp : Shadowrun6Core.getItemList(CritterPower.class)) {
-//			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
-//			for (Locale loc : locales) {
-//				module.addTranslation(loc.getLanguage(), "critterpower."+tmp.getId()+".desc", tmp.getDescription(loc));
-//				module.addTranslation(loc.getLanguage(), "critterpower."+tmp.getId()+".name", tmp.getName(loc));
-//				module.addTranslation(loc.getLanguage(), "critterpower."+tmp.getId()+".src", createSourceText(tmp, loc));
-//			}
-//			ItemData<FVTTCritterPower> entry = Converter.convert(tmp, locales[0]);
-////			entry._id  = tmp.getId();
-//			entry._id  = createRandomID();
-//			buf.append(gson.toJson(entry));
-//			buf.append('\n');
-//		}
-//		
-//    	ZipEntry zipEntry = new ZipEntry("packs/critterpowers.db");
-//    	zipOut.putNextEntry(zipEntry);
-//    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
-//		return;
-//	}
-
 	//-------------------------------------------------------------------
-	private static void createSpells(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Spells");
+	private static void createAdeptPowersBlob(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
+		Sheet sheet = workbook.createSheet("Blobs|Powers");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
-		head.createCell(4, CellType.STRING).setCellValue("data-notes");
+		head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		head.createCell(2, CellType.STRING).setCellValue("data-name");
+		head.createCell(3, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(4, CellType.STRING).setCellValue("data-description");
+		head.createCell(5, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(6, CellType.STRING).setCellValue("data-activation");
+		head.createCell(7, CellType.STRING).setCellValue("data-activation_text");
+		head.createCell(8, CellType.STRING).setCellValue("data-cost");
+		head.createCell(9, CellType.STRING).setCellValue("data-cost_text");
 
-		head.createCell(5, CellType.STRING).setCellValue("data-type");
-		head.createCell(6, CellType.STRING).setCellValue("data-range");
-		head.createCell(7, CellType.STRING).setCellValue("data-duration");
-		head.createCell(8, CellType.STRING).setCellValue("data-drain");
-		head.createCell(9, CellType.STRING).setCellValue("data-category");
-		head.createCell(10, CellType.STRING).setCellValue("data-effect_type");
-		head.createCell(11, CellType.STRING).setCellValue("data-skill");
-		head.createCell(12, CellType.STRING).setCellValue("data-damage");
-		
-		head.createCell(13, CellType.STRING).setCellValue("data-category_text");
-		head.createCell(14, CellType.STRING).setCellValue("data-duration_text");
-		head.createCell(15, CellType.STRING).setCellValue("data-drain_text");
-		head.createCell(16, CellType.STRING).setCellValue("data-range_text");
-		head.createCell(17, CellType.STRING).setCellValue("data-type_text");
-		head.createCell(18, CellType.STRING).setCellValue("data-damage_text");
-		head.createCell(19, CellType.STRING).setCellValue("data-features_text");
-		head.createCell(20, CellType.STRING).setCellValue("data-name");
-		
+		List<AdeptPower> list = Shadowrun6Core.getItemList(AdeptPower.class);
+		Collections.sort(list, new Comparator<AdeptPower>() {
+			public int compare(AdeptPower o1, AdeptPower o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		for (AdeptPower item : list) {
+			Locale[] locales = localeCallback.apply(item.getPageReferences());
+
+			Row row = sheet.createRow(++rowNum);
+			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1, CellType.STRING).setCellValue("Powers:"+item.getName(locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(3, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(4, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(5, CellType.STRING).setCellValue(item.getId());
+
+			Converter.convertAdeptPower( item, locales[0], row, 6);
+		}
+
+		for (int i=0; i<14; i++) {
+			if (i==4) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
+			sheet.autoSizeColumn(i);
+		}
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createCritterPowers(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Critterpower");
+		int rowNum =0;
+		int blobOffset = blob?1:0;
+		Row head = sheet.createRow(0);
+		head.createCell(0, CellType.STRING).setCellValue("Name");
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-type");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-action");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-range");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-duration");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-level");
+
+		List<CritterPower> list = Shadowrun6Core.getItemList(CritterPower.class);
+		list = list.stream().filter(p -> p.getType()!=ASpell.Type.RESONANCE).collect(Collectors.toList());
+		Collections.sort(list, new Comparator<CritterPower>() {
+			public int compare(CritterPower o1, CritterPower o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		for (CritterPower item : list) {
+			Locale[] locales = localeCallback.apply(item.getPageReferences());
+
+			Row row = sheet.createRow(++rowNum);
+			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			if (blob) {
+				row.createCell(1, CellType.STRING).setCellValue("Spells:"+item.getName(locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
+
+			Converter.convertCritterPower((CritterPower) item, locales[0], row, 5+blobOffset);
+		}
+		for (int i=0; i<21; i++) {
+			if (i==(3+blobOffset)) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
+			sheet.autoSizeColumn(i);
+		}
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createSpells(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		Sheet sheet = workbook.createSheet(blob?("Blobs|Spells"):"Spells");
+		int rowNum =0;
+		int blobOffset = blob?1:0;
+		Row head = sheet.createRow(0);
+		head.createCell(0, CellType.STRING).setCellValue("Name");
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-notes");
+
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-type");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-range");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-duration");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-drain");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-category");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-effect_type");
+		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-skill");
+		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-damage");
+
+		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-category_text");
+		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-duration_text");
+		head.createCell(16+blobOffset, CellType.STRING).setCellValue("data-drain_text");
+		head.createCell(17+blobOffset, CellType.STRING).setCellValue("data-range_text");
+		head.createCell(18+blobOffset, CellType.STRING).setCellValue("data-type_text");
+		head.createCell(19+blobOffset, CellType.STRING).setCellValue("data-damage_text");
+		head.createCell(20+blobOffset, CellType.STRING).setCellValue("data-features_text");
+
 		List<SR6Spell> list = Shadowrun6Core.getItemList(SR6Spell.class);
 		Collections.sort(list, new Comparator<SR6Spell>() {
 			public int compare(SR6Spell o1, SR6Spell o2) {
@@ -262,41 +378,47 @@ public class Shadowrun6CompendiumFactory {
 		});
 		for (SR6Spell item : list) {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
-			row.createCell(4, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			if (blob) {
+				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo("Spells:"+item.getName(locales[0]), item, locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
+			row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 
-			Converter.convertSpell((SR6Spell) item, locales[0], row);
-			row.createCell(20, CellType.STRING).setCellValue(item.getName(locales[0]));
+			Converter.convertSpell((SR6Spell) item, locales[0], row, 6+blobOffset);
 		}
 		for (int i=0; i<21; i++) {
-			if (i==2 || i==4) continue;
+			if (i==(3+blobOffset) || i==(5+blobOffset)) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 		return;
 	}
 
 	//-------------------------------------------------------------------
-	private static void createMetamagic(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Metamagic");
+	private static void createMetamagic(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Metamagic");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
+		int blobOffset = blob?1:0;
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
 
-		head.createCell(4, CellType.STRING).setCellValue("data-rating");
-//		head.createCell(6, CellType.STRING).setCellValue("duration");
-//		head.createCell(7, CellType.STRING).setCellValue("data-fade");
-//		head.createCell(8, CellType.STRING).setCellValue("Fade Value");
-		head.createCell(5, CellType.STRING).setCellValue("data-name");
-		
-		
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-rating");
+
 		List<MetamagicOrEcho> list = Shadowrun6Core.getItemList(MetamagicOrEcho.class);
 		list = list.stream().filter(moe -> moe.getType()==Type.METAMAGIC || moe.getType()==Type.METAMAGIC_ADEPT)
 				.sorted(new Comparator<MetamagicOrEcho>() {
@@ -306,38 +428,47 @@ public class Shadowrun6CompendiumFactory {
 		}).toList();
 		for (MetamagicOrEcho item : list) {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			if (blob) {
+				row.createCell(1, CellType.STRING).setCellValue("Metamagic:"+item.getName(locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
 
-			Converter.convertEcho((MetamagicOrEcho) item, locales[0], row);
-			row.createCell(5, CellType.STRING).setCellValue(item.getName(locales[0]));
+			Converter.convertEcho((MetamagicOrEcho) item, locales[0], row, 5+blobOffset);
 		}
 		for (int i=0; i<20; i++) {
-			if (i==2 || i==4) continue;
+			if (i==(3+blobOffset) ) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 		return;
 	}
 
 	//-------------------------------------------------------------------
-	private static void createComplexForms(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Forms");
+	private static void createComplexForms(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		int blobOffset = blob?1:0;
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+Converter.getCategoryName(ComplexForm.class));
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
 
-		head.createCell(4, CellType.STRING).setCellValue("data-duration");
-		head.createCell(5, CellType.STRING).setCellValue("data-fade");
-		head.createCell(6, CellType.STRING).setCellValue("data-name");
-		
-		
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-duration");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-fade");
+
 		List<ComplexForm> list = Shadowrun6Core.getItemList(ComplexForm.class);
 		Collections.sort(list, new Comparator<ComplexForm>() {
 			public int compare(ComplexForm o1, ComplexForm o2) {
@@ -346,35 +477,45 @@ public class Shadowrun6CompendiumFactory {
 		});
 		for (ComplexForm item : list) {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			if (blob) {
+				row.createCell(1, CellType.STRING).setCellValue("Spells:"+item.getName(locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
 
-			Converter.convertComplexForm((ComplexForm) item, locales[0], row);
-			row.createCell(6, CellType.STRING).setCellValue(item.getName(locales[0]));
+			Converter.convertComplexForm((ComplexForm) item, locales[0], row, 5);
 		}
 		for (int i=0; i<20; i++) {
-			if (i==2 || i==4) continue;
+			if (i==(3+blobOffset) ) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 		return;
 	}
 
 	//-------------------------------------------------------------------
-	private static void createEchoes(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Echoes");
+	private static void createEchoes(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Echoes");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
+		int blobOffset = blob?1:0;
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
-		head.createCell(4, CellType.STRING).setCellValue("data-rating");
-		head.createCell(5, CellType.STRING).setCellValue("data-name");
-		
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(5, CellType.STRING).setCellValue("data-rating");
+
 		List<MetamagicOrEcho> list = Shadowrun6Core.getItemList(MetamagicOrEcho.class);
 		list = list.stream().filter(moe -> moe.getType()==Type.ECHO)
 				.sorted(new Comparator<MetamagicOrEcho>() {
@@ -384,18 +525,23 @@ public class Shadowrun6CompendiumFactory {
 		}).toList();
 		for (MetamagicOrEcho item : list) {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
-
-			Converter.convertEcho((MetamagicOrEcho) item, locales[0], row);
-			row.createCell(5, CellType.STRING).setCellValue(item.getName(locales[0]));
+			if (blob) {
+				row.createCell(1, CellType.STRING).setCellValue("Echoes:"+item.getName(locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
+			Converter.convertEcho((MetamagicOrEcho) item, locales[0], row, 5);
 		}
 		for (int i=0; i<20; i++) {
-			if (i==2 || i==4) continue;
+			if (i==(3+blobOffset) ) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 		return;
@@ -403,7 +549,7 @@ public class Shadowrun6CompendiumFactory {
 
 	//-------------------------------------------------------------------
 	public static String pretty(String original) {
-		original = original.replace("\u2022 ", "").trim();		
+		original = original.replace("\u2022 ", "").trim();
 		if (original.startsWith("<br/>"))
 			original = original.substring(5);
 		if (original.endsWith("<br/>"))
@@ -426,7 +572,7 @@ public class Shadowrun6CompendiumFactory {
 	}
 
 	//-------------------------------------------------------------------
-	private static String extractGameEffect(String original) {
+	static String extractGameEffect(String original) {
 		String needle = "<b>Game Effect:</b> ";
 		int costIndex = original.indexOf(needle);
 		if (costIndex>0)
@@ -436,7 +582,7 @@ public class Shadowrun6CompendiumFactory {
 	}
 
 	//-------------------------------------------------------------------
-	private static String getCostText(Quality qual) {
+	static String getCostText(Quality qual) {
 		StringBuffer buf = new StringBuffer();
 //		if (qual.isPositive()) {
 //			buf.append("<b>Cost:</b> ");
@@ -455,17 +601,17 @@ public class Shadowrun6CompendiumFactory {
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
-		head.createCell(4, CellType.STRING).setCellValue("data-type");
-		head.createCell(5, CellType.STRING).setCellValue("data-positive");
-		head.createCell(6, CellType.STRING).setCellValue("data-maxLevel");
-		head.createCell(7, CellType.STRING).setCellValue("data-karma");
-		head.createCell(8, CellType.STRING).setCellValue("data-game_effect");
-		head.createCell(9, CellType.STRING).setCellValue("data-cost_text");
-		head.createCell(10, CellType.STRING).setCellValue("data-name");
-		
+		head.createCell(1, CellType.STRING).setCellValue("data-name");
+		head.createCell(2, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3, CellType.STRING).setCellValue("data-description");
+		head.createCell(4, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(5, CellType.STRING).setCellValue("data-type");
+		head.createCell(6, CellType.STRING).setCellValue("data-positive");
+		head.createCell(7, CellType.STRING).setCellValue("data-maxLevel");
+		head.createCell(8, CellType.STRING).setCellValue("data-karma");
+		head.createCell(9, CellType.STRING).setCellValue("data-game_effect");
+		head.createCell(10, CellType.STRING).setCellValue("data-cost_text");
+
 		List<Quality> list = Shadowrun6Core.getItemList(Quality.class);
 		Collections.sort(list, new Comparator<Quality>() {
 			public int compare(Quality o1, Quality o2) {
@@ -474,46 +620,100 @@ public class Shadowrun6CompendiumFactory {
 		});
 		for (Quality item : list) {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(pretty(extractDescripton(pretty(item.getDescription(locales[0])))));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
-			row.createCell(8, CellType.STRING).setCellValue(extractGameEffect(pretty(item.getDescription(locales[0]))));
-			row.createCell(9, CellType.STRING).setCellValue(getCostText(item));
-			Converter.convertQuality(item, locales[0], row);
-			row.createCell(10, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3, CellType.STRING).setCellValue(pretty(extractDescripton(pretty(item.getDescription(locales[0])))));
+			row.createCell(4, CellType.STRING).setCellValue(item.getId());
+			Converter.convertQuality(item, locales[0], row, 5);
 		}
-		
+
 		for (int i=0; i<14; i++) {
-			if (i==2 || i==4 || i==8) continue;
+			if (i==3 || i==9) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 		return;
 	}
 
 	//-------------------------------------------------------------------
-	private static void createAugmentations(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Augmentations");
+	private static void createQualitiesBlobs(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
+		Sheet sheet = workbook.createSheet("Blobs|Qualities");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
-		head.createCell(4, CellType.STRING).setCellValue("data-variantID");
-		head.createCell(5, CellType.STRING).setCellValue("data-itemtype");
-		head.createCell(6, CellType.STRING).setCellValue("data-itemsubtype");
-		head.createCell(7, CellType.STRING).setCellValue("data-availability");
-		head.createCell(8, CellType.STRING).setCellValue("data-price");
-		head.createCell(9, CellType.STRING).setCellValue("data-has_rating");
-		head.createCell(10, CellType.STRING).setCellValue("data-capacity_cost");
-		head.createCell(11, CellType.STRING).setCellValue("data-essence_cost");
-		head.createCell(12, CellType.STRING).setCellValue("data-modification");
-		head.createCell(13, CellType.STRING).setCellValue("data-name");
-		
+		head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		head.createCell(2, CellType.STRING).setCellValue("data-name");
+		head.createCell(3, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(4, CellType.STRING).setCellValue("data-description");
+		head.createCell(5, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(6, CellType.STRING).setCellValue("data-type");
+		head.createCell(7, CellType.STRING).setCellValue("data-positive");
+		head.createCell(8, CellType.STRING).setCellValue("data-maxLevel");
+		head.createCell(9, CellType.STRING).setCellValue("data-karma");
+		head.createCell(10, CellType.STRING).setCellValue("data-game_effect");
+		head.createCell(11, CellType.STRING).setCellValue("data-cost_text");
+
+		List<Quality> list = Shadowrun6Core.getItemList(Quality.class);
+		Collections.sort(list, new Comparator<Quality>() {
+			public int compare(Quality o1, Quality o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		for (Quality item : list) {
+			Locale[] locales = localeCallback.apply(item.getPageReferences());
+
+			Row row = sheet.createRow(++rowNum);
+			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1, CellType.STRING).setCellValue("Qualities:"+item.getName(locales[0]));
+			row.createCell(2, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(3, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(4, CellType.STRING).setCellValue(pretty(extractDescripton(pretty(item.getDescription(locales[0])))));
+			row.createCell(5, CellType.STRING).setCellValue(item.getId());
+			Converter.convertQuality(item, locales[0], row, 6);
+		}
+
+		for (int i=0; i<14; i++) {
+			if (i==4 || i==10) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
+			sheet.autoSizeColumn(i);
+		}
+		return;
+	}
+
+	//-------------------------------------------------------------------
+	private static void createAugmentations(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		int blobOffset = blob?1:0;
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Augmentations");
+		int rowNum =0;
+		Row head = sheet.createRow(0);
+		head.createCell(0, CellType.STRING).setCellValue("Name");
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-type");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-app_commlinkVariantID");
+
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-availability");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-cost_text");
+		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-has_rating");
+		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-capacity_cost");
+		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-essence_cost");
+		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-modification");
+
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
 			public int compare(ItemTemplate o1, ItemTemplate o2) {
@@ -525,16 +725,21 @@ public class Shadowrun6CompendiumFactory {
 			if (!subs.contains(item.getItemType()))
 				continue;
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			if (item.getVariants().isEmpty() || !item.requiresVariant()) {
 				Row row = sheet.createRow(++rowNum);
 				row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-				row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-				row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
-				row.createCell(3, CellType.STRING).setCellValue(item.getId());
+				if (blob) {
+					String first = Converter.getCategoryPage(item,locales[0]);
+					row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
+				}
+				row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+				row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+				row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-augment");
+				row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getId());
 
-				Converter.convertAugmentation(item, locales[0], row);
-				row.createCell(13, CellType.STRING).setCellValue(item.getName(locales[0]));
+				Converter.convertAugmentation(item, locales[0], row, 6+blobOffset);
 			} else {
 				for (SR6PieceOfGearVariant variant : item.getVariants()) {
 					CarryMode mode = variant.getUsages().isEmpty()
@@ -546,48 +751,61 @@ public class Shadowrun6CompendiumFactory {
 					SR6GearTool.recalculate("", null, carried);
 					Row row = sheet.createRow(++rowNum);
 					row.createCell(0, CellType.STRING).setCellValue(carried.getNameWithoutRating(locales[0]));
-					row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-					row.createCell(2, CellType.STRING).setCellValue(item.getDescription(locales[0]));
-					row.createCell(3, CellType.STRING).setCellValue(item.getId());
-					row.createCell(4, CellType.STRING).setCellValue(variant.getId());
-					Converter.convertAugmentation(carried, locales[0], row);
-					row.createCell(13, CellType.STRING).setCellValue(item.getName(locales[0]));
+					if (blob) {
+						String first = Converter.getCategoryPage(item,locales[0]);
+						row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
+					}
+					row.createCell(1+blobOffset, CellType.STRING).setCellValue(carried.getNameWithoutRating(locales[0]));
+					row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+					row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+					row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-augment");
+					row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getId());
+					Converter.convertAugmentation(carried, locales[0], row, 6+blobOffset);
 				}
 			}
 		}
-		
-		for (int i=0; i<12; i++) {
-			if (i==2) continue;
+
+		for (int i=0; i<20; i++) {
+			if (i==3+blobOffset) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 		return;
 	}
 
 	//-------------------------------------------------------------------
-	private static void createWeapons(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, String category, ItemSubType...subtypes) throws IOException {
-		Sheet sheet = workbook.createSheet("!"+category);
+	private static void createWeapons(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob, String category, ItemSubType...subtypes) throws IOException {
+		int blobOffset = blob?1:0;
+			Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+category);
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
-		head.createCell(4, CellType.STRING).setCellValue("data-itemtype");
-		head.createCell(5, CellType.STRING).setCellValue("data-itemsubtype");
-		head.createCell(6, CellType.STRING).setCellValue("data-availability");
-		head.createCell(7, CellType.STRING).setCellValue("data-price");
-		head.createCell(8, CellType.STRING).setCellValue("data-skill");
-		head.createCell(9, CellType.STRING).setCellValue("data-skillspec");
-		head.createCell(10, CellType.STRING).setCellValue("data-dv");
-		head.createCell(11, CellType.STRING).setCellValue("data-close");
-		head.createCell(12, CellType.STRING).setCellValue("data-near");
-		head.createCell(13, CellType.STRING).setCellValue("data-medium");
-		head.createCell(14, CellType.STRING).setCellValue("data-far");
-		head.createCell(15, CellType.STRING).setCellValue("data-extreme");
-		head.createCell(16, CellType.STRING).setCellValue("data-firing_modes");
-		head.createCell(17, CellType.STRING).setCellValue("data-ammo");
-		head.createCell(18, CellType.STRING).setCellValue("data-name");
-		
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-type");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-availability");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-cost");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost_text");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-skill");
+		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-skillspec");
+		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-dv");
+		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-close");
+		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-near");
+		head.createCell(16+blobOffset, CellType.STRING).setCellValue("data-medium");
+		head.createCell(17+blobOffset, CellType.STRING).setCellValue("data-far");
+		head.createCell(18+blobOffset, CellType.STRING).setCellValue("data-extreme");
+		head.createCell(19+blobOffset, CellType.STRING).setCellValue("data-firing_modes");
+		head.createCell(20+blobOffset, CellType.STRING).setCellValue("data-ammo");
+
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
 			public int compare(ItemTemplate o1, ItemTemplate o2) {
@@ -601,38 +819,50 @@ public class Shadowrun6CompendiumFactory {
 			if (!subs.contains(item.getItemSubtype()))
 				continue;
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			if (blob) {
+				String first = Converter.getCategoryPage(item,locales[0]);
+				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue( (item.getItemType()==ItemType.WEAPON_CLOSE_COMBAT)?"weapon-melee":"weapon-ranged");
+			row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getId());
 
-			Converter.convertWeapon(item, locales[0], row);
-			row.createCell(18, CellType.STRING).setCellValue(item.getName(locales[0]));
+			Converter.convertWeapon(item, locales[0], row,6+blobOffset);
 		}
-		
-		for (int i=0; i<11; i++) {
-			if (i==2 || i==4) continue;
+
+		for (int i=0; i<20; i++) {
+			if (i==(3+blobOffset) || (blob && i==1) ) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 		return;
 	}
 
 	//-------------------------------------------------------------------
-	private static void createRituals(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Rituals");
+	private static void createRituals(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Rituals");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
+		int blobOffset = blob?1:0;
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
-		head.createCell(4, CellType.STRING).setCellValue("data-threshold");
-		head.createCell(5, CellType.STRING).setCellValue("data-features");
-		head.createCell(6, CellType.STRING).setCellValue("data-name");
-		
-		
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-threshold");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-features");
+
+
 		List<Ritual> list = Shadowrun6Core.getItemList(Ritual.class);
 		Collections.sort(list, new Comparator<Ritual>() {
 			public int compare(Ritual o1, Ritual o2) {
@@ -641,33 +871,39 @@ public class Shadowrun6CompendiumFactory {
 		});
 		for (Ritual item : list) {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			if (blob) {
+				row.createCell(1, CellType.STRING).setCellValue("Rituals:"+item.getName(locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
 
-			Converter.convertRitual(item, locales[0], row);
-			row.createCell(6, CellType.STRING).setCellValue(item.getName(locales[0]));
+			Converter.convertRitual(item, locales[0], row, 5+blobOffset);
 		}
-		
+
 		for (int i=0; i<11; i++) {
-			if (i==2) continue;
+			if (i==3+blobOffset) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 		return;
 	}
 
 	//-------------------------------------------------------------------
-	private static void createVehicles(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Vehicles");
+	private static void createVehicles(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Vehicles");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
 		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
+		head.createCell(3, CellType.STRING).setCellValue("data-app_commlinkID");
 		head.createCell(4, CellType.STRING).setCellValue("data-itemtype");
 		head.createCell(5, CellType.STRING).setCellValue("data-type");
 		head.createCell(6, CellType.STRING).setCellValue("data-availability");
@@ -682,7 +918,7 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(15, CellType.STRING).setCellValue("data-sensor");
 		head.createCell(16, CellType.STRING).setCellValue("data-seat");
 		head.createCell(17, CellType.STRING).setCellValue("data-name");
-		
+
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
 			public int compare(ItemTemplate o1, ItemTemplate o2) {
@@ -693,7 +929,7 @@ public class Shadowrun6CompendiumFactory {
 			if (!ItemType.isVehicle(item.getItemType()))
 					continue;
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
 			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
@@ -703,7 +939,7 @@ public class Shadowrun6CompendiumFactory {
 			Converter.convertVehicle(item, locales[0], row);
 			row.createCell(17, CellType.STRING).setCellValue(item.getName(locales[0]));
 		}
-		
+
 		for (int i=0; i<11; i++) {
 			if (i==2) continue;
 			sheet.autoSizeColumn(i);
@@ -711,22 +947,27 @@ public class Shadowrun6CompendiumFactory {
 	}
 
 	//-------------------------------------------------------------------
-	private static void createArmor(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Armor");
+	private static void createArmor(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		int blobOffset = blob?1:0;
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Armor");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
-		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
-		head.createCell(4, CellType.STRING).setCellValue("data-name");
-		head.createCell(5, CellType.STRING).setCellValue("data-itemtype");
-		head.createCell(6, CellType.STRING).setCellValue("data-type");
-		head.createCell(7, CellType.STRING).setCellValue("data-availability");
-		head.createCell(8, CellType.STRING).setCellValue("data-price");
-		head.createCell(9, CellType.STRING).setCellValue("data-defense");
-		head.createCell(10, CellType.STRING).setCellValue("data-social");
-		
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-type");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-availability");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-cost");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost_text");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-defense");
+		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-social");
+
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
 			public int compare(ItemTemplate o1, ItemTemplate o2) {
@@ -741,41 +982,59 @@ public class Shadowrun6CompendiumFactory {
 			if (item.getItemType()!=ItemType.ARMOR && item.getItemType()!=ItemType.ARMOR_ADDITION  &&item.getItemSubtype()!=ItemSubType.ARMOR_BODY)
 				continue;
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
-			row.createCell(4, CellType.STRING).setCellValue(item.getName(locales[0]));
+			if (blob) {
+				String first = Converter.getCategoryPage(item,locales[0]);
+				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-armor");
+			row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getId());
 
-			Converter.convertArmor(item, locales[0], row);
+			Converter.convertArmor(item, locales[0], row, 6+blobOffset);
 		}
-		
+
 		for (int i=0; i<11; i++) {
-			if (i==2) continue;
+			if ((i==1 && blob) || i==(3+blobOffset)) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 	}
 
 	//-------------------------------------------------------------------
-	private static void createOtherGear(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-		Sheet sheet = workbook.createSheet("!Gear");
+	private static void createOtherGear(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		int blobOffset = blob?1:0;
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Gear");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-genesisID");
-		head.createCell(4, CellType.STRING).setCellValue("data-name");
-		head.createCell(5, CellType.STRING).setCellValue("data-itemtype");
-		head.createCell(6, CellType.STRING).setCellValue("data-type");
-		head.createCell(7, CellType.STRING).setCellValue("data-availability");
-		head.createCell(8, CellType.STRING).setCellValue("data-price");
-		
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-type");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-availability");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-cost");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost_text");
+
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
 			public int compare(ItemTemplate o1, ItemTemplate o2) {
+				int cmp = Integer.compare(o1.getItemType().ordinal(), o2.getItemType().ordinal());
+				if (cmp!=0) return cmp;
+				cmp = Integer.compare(o1.getItemSubtype().ordinal(), o2.getItemSubtype().ordinal());
+				if (cmp!=0) return cmp;
 				return o1.getName().compareTo(o2.getName());
 			}
 		});
@@ -786,106 +1045,110 @@ public class Shadowrun6CompendiumFactory {
 				continue;
 			if (item.getItemType()==ItemType.ARMOR || item.getItemType()==ItemType.ARMOR_ADDITION  || item.getItemSubtype()==ItemSubType.ARMOR_BODY )
 				continue;
+			if (item.getItemType()==ItemType.SOFTWARE)
+				continue;
+			if (item.getItemType()==ItemType.CYBERWARE || item.getItemType()==ItemType.BIOWARE)
+				continue;
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
-			
+
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
-			row.createCell(4, CellType.STRING).setCellValue(item.getName(locales[0]));
+			if (blob) {
+				String first = Converter.getCategoryPage(item,locales[0]);
+				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-misc");
+			row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getId());
 
-			Converter.convertOtherGear(item, locales[0], row);
+			Converter.convertOtherGear(item, locales[0], row, 6+blobOffset);
 		}
-		
+
 		for (int i=0; i<11; i++) {
-			if (i==2) continue;
+			if (i==(3+blobOffset) ) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 	}
 
 	//-------------------------------------------------------------------
-	private static void createGrunts(Module module, Function<Collection<PageReference>,Locale[]> localeCallback) throws IOException {
-//		Pack pack = new Pack();
-//		pack.setName("shadowrun6-grunts");
-//		pack.setLabel("Grunts");
-//		pack.setEntity("Actor");
-//		pack.setPath("packs/grunts.db");
-//		pack.setSystem("shadowrun6-eden");
-//		module.getPacks().add(pack);
-//		
-//		if (shallow)
-//			return;
-//		
-//		StringBuffer buf = new StringBuffer();
-//		Gson gson = new GsonBuilder().create();
-//		for (SR6NPC tmp : Shadowrun6Core.getItemList(SR6NPC.class)) {
-//			if (tmp.getType()!=NPCType.GRUNT)
-//				continue;
-//			
-//			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
-//			for (Locale loc : locales) {
-//				module.addTranslation(loc.getLanguage(), "npc."+tmp.getId()+".name", tmp.getName(loc));
-//				module.addTranslation(loc.getLanguage(), "npc."+tmp.getId()+".src", createSourceText(tmp, loc));
-//				if (!tmp.getDescription(loc).endsWith(".desc"))
-//					module.addTranslation(loc.getLanguage(), "npc."+tmp.getId()+".desc", tmp.getDescription(loc));
+	private static void createGrunts(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"NPCs");
+		int rowNum =0;
+		Row head = sheet.createRow(0);
+		int blobOffset = blob?1:0;
+		head.createCell(0, CellType.STRING).setCellValue("Name");
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-Category");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("data-sub_type");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-rating");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-body_base");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-body_modified");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-agility_base");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-agility_modified");
+		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-reaction_base");
+		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-reaction_modified");
+		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-strength_base");
+		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-strength_modified");
+		head.createCell(16+blobOffset, CellType.STRING).setCellValue("data-willpower_base");
+		head.createCell(17+blobOffset, CellType.STRING).setCellValue("data-willpower_modified");
+		head.createCell(18+blobOffset, CellType.STRING).setCellValue("data-logic_base");
+		head.createCell(19+blobOffset, CellType.STRING).setCellValue("data-logic_modified");
+		head.createCell(20+blobOffset, CellType.STRING).setCellValue("data-intuition_base");
+		head.createCell(21+blobOffset, CellType.STRING).setCellValue("data-intuition_modified");
+		head.createCell(22+blobOffset, CellType.STRING).setCellValue("data-charisma_base");
+		head.createCell(23+blobOffset, CellType.STRING).setCellValue("data-charisma_modified");
+
+		head.createCell(24+blobOffset, CellType.STRING).setCellValue("data-edge");
+		head.createCell(25+blobOffset, CellType.STRING).setCellValue("data-essence");
+		head.createCell(26+blobOffset, CellType.STRING).setCellValue("data-magic");
+
+		List<SR6NPC> list = Shadowrun6Core.getItemList(SR6NPC.class);
+		list = list.stream().filter(n -> n.getType()==NPCType.GRUNT).toList();
+//		Collections.sort(list, new Comparator<SR6NPC>() {
+//			public int compare(SR6NPC o1, SR6NPC o2) {
+//				return o1.getName().compareTo(o2.getName());
 //			}
-//			
-//			ActorData<? extends GeneralActor> entry = Converter.convertActor(tmp, locales[0]);
-//			entry._id = createRandomID();
-////			entry.flags.core.sheetClass="shadowrun6-eden.Shadowrun6ActorSheetVehicleCompendium";
-//			
-////			FVTTNPCActor data = new FVTTNPCActor();
-////			data.attributes.bod.base = tmp.getAttribute(ShadowrunAttribute.BODY).getDistributed();
-////			data.attributes.bod.mod  = tmp.getAttribute(ShadowrunAttribute.BODY).getModifier();
-////			data.attributes.agi.base = tmp.getAttribute(ShadowrunAttribute.AGILITY).getDistributed();
-////			data.attributes.agi.mod  = tmp.getAttribute(ShadowrunAttribute.AGILITY).getModifier();
-////			data.attributes.rea.base = tmp.getAttribute(ShadowrunAttribute.REACTION).getDistributed();
-////			data.attributes.rea.mod  = tmp.getAttribute(ShadowrunAttribute.REACTION).getModifier();
-////			data.attributes.str.base = tmp.getAttribute(ShadowrunAttribute.STRENGTH).getDistributed();
-////			data.attributes.str.mod  = tmp.getAttribute(ShadowrunAttribute.STRENGTH).getModifier();
-////			data.attributes.wil.base = tmp.getAttribute(ShadowrunAttribute.WILLPOWER).getDistributed();
-////			data.attributes.wil.mod  = tmp.getAttribute(ShadowrunAttribute.WILLPOWER).getModifier();
-////			data.attributes.log.base = tmp.getAttribute(ShadowrunAttribute.LOGIC).getDistributed();
-////			data.attributes.log.mod  = tmp.getAttribute(ShadowrunAttribute.LOGIC).getModifier();
-////			data.attributes.inn.base = tmp.getAttribute(ShadowrunAttribute.INTUITION).getDistributed();
-////			data.attributes.inn.mod  = tmp.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
-////			data.attributes.cha.base = tmp.getAttribute(ShadowrunAttribute.CHARISMA).getDistributed();
-////			data.attributes.cha.mod  = tmp.getAttribute(ShadowrunAttribute.CHARISMA).getModifier();
-////			data.attributes.mag.base = tmp.getAttribute(ShadowrunAttribute.MAGIC).getDistributed();
-////			data.attributes.mag.mod  = tmp.getAttribute(ShadowrunAttribute.MAGIC).getModifier();
-////			data.attributes.res.base = tmp.getAttribute(ShadowrunAttribute.RESONANCE).getDistributed();
-////			data.attributes.res.mod  = tmp.getAttribute(ShadowrunAttribute.RESONANCE).getModifier();
-////			
-////			for (SR6SkillValue val : tmp.getSkillValues()) {
-////				if ((val.getModifyable().getId().equals("language") || val.getModifyable().getId().equals("knowledge"))) {
-////					continue;
-////				} else {
-////					FVTTSkill fVal = new FVTTSkill();
-////					fVal.genesisID = val.getModifyable().getId();
-////					fVal.points    = val.getDistributed();
-////					fVal.modifier  = val.getModifier();
-////
-////					Item<FVTTSkill> item = new Item<FVTTSkill>(val.getName(Locale.ENGLISH), "skill", fVal);
-////					entry.addItems(item);
-////				}
-////			}
-//////			data.accOff = spell.getAttribute(SR6ItemAttribute.)
-//////			data.genesisID = spell.getId();
-//////			data.category  = spell.getCategory().name();
-//////			data.drain = spell.getDrain();
-//////			data.type  = spell.getType().name();
-//////			data.range = spell.getRange().name();
-////			entry.data = data;
-//			
-//			buf.append(gson.toJson(entry));
-//			buf.append('\n');
-//		}
-//		
-//    	ZipEntry zipEntry = new ZipEntry("packs/grunts.db");
-//    	zipOut.putNextEntry(zipEntry);
-//    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
-//		return;
+//		});
+		for (SR6NPC item : list) {
+			Locale[] locales = localeCallback.apply(item.getPageReferences());
+
+			Row row = sheet.createRow(++rowNum);
+			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			if (blob) {
+				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo("NPCs:"+item.getName(locales[0]), item, locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue("NPCs");
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(item.getType().name());
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
+			row.createCell(6+blobOffset, CellType.STRING).setCellValue(item.getId());
+
+			Converter.convertGrunt(item, locales[0], row, 7+blobOffset);
+			if (!blob) {
+				Converter.convertGruntBlobs(item, locales[0]);
+			}
+		}
+
+		for (int i=0; i<11; i++) {
+			if (i==(5+blobOffset) ) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
+			sheet.autoSizeColumn(i);
+		}
 	}
 
 //	//-------------------------------------------------------------------
@@ -897,17 +1160,17 @@ public class Shadowrun6CompendiumFactory {
 //		pack.setPath("packs/critter.db");
 //		pack.setSystem("shadowrun6-eden");
 //		module.getPacks().add(pack);
-//		
+//
 //		if (shallow)
 //			return;
-//		
+//
 //		StringBuffer buf = new StringBuffer();
 //		Gson gson = new GsonBuilder().create();
 //		for (SR6NPC tmp : Shadowrun6Core.getItemList(SR6NPC.class)) {
 //			if (tmp.getType()!=NPCType.CRITTER && tmp.getType()!=NPCType.CRITTER_AWAKENED)
 //				continue;
 //			logger.log(Level.WARNING, "Critter "+tmp.getName()+" "+tmp.getType());
-//			
+//
 //			Locale[] locales = localeCallback.apply(tmp.getPageReferences());
 //			for (Locale loc : locales) {
 //				module.addTranslation(loc.getLanguage(), "critter."+tmp.getId()+".name", tmp.getName(loc));
@@ -915,15 +1178,15 @@ public class Shadowrun6CompendiumFactory {
 //				if (!tmp.getDescription(loc).endsWith(".desc"))
 //					module.addTranslation(loc.getLanguage(), "critter."+tmp.getId()+".desc", tmp.getDescription(loc));
 //			}
-//			
+//
 //			ActorData<? extends GeneralActor> entry = Converter.convertActor(tmp, locales[0]);
 //			entry._id = createRandomID();
-//			
+//
 //			addImages(zipOut, "critter", tmp.getId(), entry);
 //			buf.append(gson.toJson(entry));
 //			buf.append('\n');
 //		}
-//		
+//
 //    	ZipEntry zipEntry = new ZipEntry("packs/critter.db");
 //    	zipOut.putNextEntry(zipEntry);
 //    	zipOut.write(buf.toString().getBytes(Charset.forName("UTF-8")));
