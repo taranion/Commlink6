@@ -44,6 +44,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -328,6 +329,66 @@ public class Converter {
 			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
 		else x++;
 		row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()));
+		row.createCell(x++, CellType.BOOLEAN).setCellValue( item.getChoice(ItemTemplate.UUID_RATING)!=null);
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertDevice(ItemTemplate item, Locale loc, Row row, int x) {
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
+		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
+		row.createCell(x++, CellType.STRING).setCellValue("Devices");
+		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+		else x++;
+		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
+		else x++;
+		row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()));
+		switch (item.getItemSubtype()) {
+		case COMMLINK:
+			row.createCell(x++, CellType.STRING).setCellValue( "Commlink"); break;
+		case CYBERDECK:
+			row.createCell(x++, CellType.STRING).setCellValue( "Cyberdeck"); break;
+		case RIGGER_CONSOLE:
+			row.createCell(x++, CellType.STRING).setCellValue( "Command Console"); break;
+		case TAC_NET:
+			row.createCell(x++, CellType.STRING).setCellValue( "M-TOC"); break;
+		default:
+			if ("cyberjack".equals(item.getId())) {
+				row.createCell(x++, CellType.STRING).setCellValue( "Cyberjack");
+			} else if ("control_rig".equals(item.getId())) {
+				row.createCell(x++, CellType.STRING).setCellValue( "Control Rig");
+			} else
+				x++;
+		}
+		row.createCell(x++, CellType.BOOLEAN).setCellValue( item.getChoice(ItemTemplate.UUID_RATING)!=null);
+		if (item.getAttribute(SR6ItemAttribute.DEVICE_RATING)!=null) {
+			if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
+				row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.DEVICE_RATING).getValue());
+			else
+				row.createCell(x++, CellType.STRING).setCellValue( item.getAttribute(SR6ItemAttribute.DEVICE_RATING).getRawValue());
+		} else x++;
+		if (item.getAttribute(SR6ItemAttribute.ATTACK)!=null)
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.ATTACK).getValue());
+		else x++;
+		if (item.getAttribute(SR6ItemAttribute.SLEAZE)!=null)
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.SLEAZE).getValue());
+		else x++;
+		if (item.getAttribute(SR6ItemAttribute.DATA_PROCESSING)!=null) {
+			if (item.getAttribute(SR6ItemAttribute.DATA_PROCESSING).getFormula().isResolved())
+				row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.DATA_PROCESSING).getValue());
+			else
+				row.createCell(x++, CellType.STRING).setCellValue( item.getAttribute(SR6ItemAttribute.DATA_PROCESSING).getRawValue());
+		} else x++;
+		if (item.getAttribute(SR6ItemAttribute.FIREWALL)!=null) {
+			if (item.getAttribute(SR6ItemAttribute.FIREWALL).getFormula().isResolved())
+				row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.FIREWALL).getValue());
+			else
+				row.createCell(x++, CellType.STRING).setCellValue( item.getAttribute(SR6ItemAttribute.FIREWALL).getRawValue());
+		} else x++;
+		if (item.getAttribute(SR6ItemAttribute.CONCURRENT_PROGRAMS)!=null)
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.CONCURRENT_PROGRAMS).getValue());
+		else x++;
 	}
 
 	//-------------------------------------------------------------------
@@ -568,23 +629,24 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
+	private static int createNormalAndModified(SR6NPC item, Row row, ShadowrunAttribute attr, int x) {
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(attr).getDistributed());
+		if (item.getAttribute(attr).getModifier()>0)
+			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(attr).getModifiedValue());
+		else x++;
+		return x;
+	}
+
+	//-------------------------------------------------------------------
 	private static void convertLifeform(SR6NPC item, Locale loc, Row row, int x) {
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.BODY).getDistributed());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.BODY).getModifiedValue());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.AGILITY).getDistributed());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.AGILITY).getModifiedValue());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.REACTION).getDistributed());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.STRENGTH).getDistributed());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.WILLPOWER).getDistributed());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.LOGIC).getDistributed());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.INTUITION).getDistributed());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.CHARISMA).getDistributed());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue());
+		x = createNormalAndModified(item, row, ShadowrunAttribute.BODY, x);
+		x = createNormalAndModified(item, row, ShadowrunAttribute.AGILITY, x);
+		x = createNormalAndModified(item, row, ShadowrunAttribute.REACTION, x);
+		x = createNormalAndModified(item, row, ShadowrunAttribute.STRENGTH, x);
+		x = createNormalAndModified(item, row, ShadowrunAttribute.WILLPOWER, x);
+		x = createNormalAndModified(item, row, ShadowrunAttribute.LOGIC, x);
+		x = createNormalAndModified(item, row, ShadowrunAttribute.INTUITION, x);
+		x = createNormalAndModified(item, row, ShadowrunAttribute.CHARISMA, x);
 
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.EDGE).getModifiedValue());
 //		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.ESSENCE).getModifiedValue());
