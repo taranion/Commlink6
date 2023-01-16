@@ -3,33 +3,44 @@ package de.rpgframework.eden.roll20.sr6;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.ASpell.Duration;
 import de.rpgframework.shadowrun.ASpell.Range;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
+import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualFeatureReference;
+import de.rpgframework.shadowrun.RitualValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureReference;
+import de.rpgframework.shadowrun.SpellValue;
+import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.Availability;
+import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Spell;
-import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -41,45 +52,80 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class Converter {
-	
+
 	private final static Logger logger = System.getLogger(Converter.class.getPackageName());
 
+	private static Map<String, List<String>> mapBelongs = new HashMap<>();
+
 	//-------------------------------------------------------------------
-	public static void convertAdeptPower(AdeptPower item, Locale loc, Row row) {
-		int x = 4;
+	private static void addBlob(String key, DataItem item, Locale loc) {
+		List<String> list = mapBelongs.get(key);
+		if (list==null) {
+			list = new ArrayList<>();
+			mapBelongs.put(key, list);
+		}
+		String toAdd = getCategoryPage(item, loc);
+		list.add(toAdd);
+
+		logger.log(Level.ERROR, "Add "+key+"  "+toAdd);
+	}
+
+	//-------------------------------------------------------------------
+	static String getCategoryPage(DataItem item, Locale loc) {
+		if (item instanceof SR6NPC) {
+			SR6NPC npc = (SR6NPC)item;
+			switch (npc.getType()) {
+			case GRUNT: return "NPCs:"+npc.getName(loc);
+			}
+		}
+		if (item instanceof ItemTemplate) {
+			ItemTemplate temp = (ItemTemplate)item;
+			switch (temp.getItemType()) {
+			case WEAPON_FIREARMS: case WEAPON_RANGED: case WEAPON_SPECIAL: return "Ranged:"+temp.getName(loc);
+			case WEAPON_CLOSE_COMBAT: return "Melee:"+temp.getName(loc);
+			case SOFTWARE: return "Programs:"+temp.getName(loc);
+			default:
+				return "Gear:"+temp.getName(loc);
+			}
+		}
+		System.err.println("Converter.getCategoryPage: No category support for "+item);
+		return item.toString();
+	}
+
+	//-------------------------------------------------------------------
+	public static String getCategoryName(Class<? extends DataItem> cls) {
+		if (cls==SR6NPC.class) {
+			throw new IllegalArgumentException("Does not work here - depends on instance type");
+		}
+		if (cls==ComplexForm.class) return "Forms";
+		System.err.println("Converter.getCategoryPage: No category support for "+cls);
+		return "??";
+	}
+
+	//-------------------------------------------------------------------
+	public static String makeBelongsTo(String first, DataItem keyItem, Locale loc) {
+		List<String> list = mapBelongs.get(keyItem.toString());
+		if (list==null) return first;
+
+		List<String> ret = new ArrayList<>();
+		ret.add(first);
+		ret.addAll(list);
+		return String.join(",", ret);
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertAdeptPower(AdeptPower item, Locale loc, Row row, int col) {
+		int x = col;
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getActivation().name().toLowerCase());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getActivation().getName(Locale.ENGLISH));
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1));
 		if (item.hasLevel()) {
 			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1)+" PP / level");
-			
+
 		} else {
 			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getCostForLevel(1)+" PP");
 		}
 	}
-
-//	//-------------------------------------------------------------------
-//	public static ItemData<FVTTCritterPower> convert(CritterPower item, Locale loc) {
-//		FVTTCritterPower data = new FVTTCritterPower();
-//		// Definition fields
-//		data.genesisID   = item.getId();
-//		data.action 	 = item.getAction().name().toLowerCase();
-//		data.duration    = item.getDuration().name().toLowerCase();
-//		data.range       = item.getRange().name().toLowerCase();
-//		data.type        = item.getType().name().toLowerCase();
-//
-//		return new ItemData<FVTTCritterPower>(item.getName(loc), "critterpower", data);
-//	}
-//
-//	//-------------------------------------------------------------------
-//	public static ItemData<FVTTCritterPower> convert(CritterPowerValue val, Locale loc) {
-//		ItemData<FVTTCritterPower> ret = convert(val.getModifyable(), loc);
-//		FVTTCritterPower fVal = ret.getData();
-//		// Value fields
-////		fVal.rating = val.get
-//
-//		return ret;
-//	}
 
 	//-------------------------------------------------------------------
 	private static String mapModifications(ComplexDataItem item) {
@@ -124,14 +170,22 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static void convertAugmentation(ItemTemplate item, Locale loc, Row row) {
-		int x = 5;
+	public static void convertAugmentation(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
+		x++; // Variant
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
 		else x++;
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+		// Nuyen
+		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved()) {
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
+		} else x++;
+		if (item.getAttribute(SR6ItemAttribute.PRICE).getLookupTable()!=null) {
+			row.createCell(x++, CellType.STRING).setCellValue("TABLE");
+		} else
+			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+
 		// Has rating
 		row.createCell(x++, CellType.BOOLEAN).setCellValue( (item.getAttribute(SR6ItemAttribute.PRICE).getRawValue().contains("RATING"))?"true":"false");
 		// Capacity cost
@@ -156,14 +210,19 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static void convertAugmentation(CarriedItem<ItemTemplate> item, Locale loc, Row row) {
-		int x = 5;
+	public static void convertAugmentation(CarriedItem<ItemTemplate> item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue( ((ItemType)item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()).name());
 		row.createCell(x++, CellType.STRING).setCellValue( ((ItemSubType)item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()).name());
+		if (item.getVariantID()!=null)
+			row.createCell(x++, CellType.STRING).setCellValue( item.getVariantID() );
+		else x++;
+
 		if (item.hasAttribute(SR6ItemAttribute.AVAILABILITY))
 			row.createCell(x++, CellType.STRING).setCellValue( ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).toString() );
 		else x++;
+		// Nuyen
 		row.createCell(x++, CellType.NUMERIC).setCellValue( item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		row.createCell(x++, CellType.STRING).setCellValue( prettyRating(item.getResolved().getAttribute(SR6ItemAttribute.PRICE).getRawValue()+" \u00A5"));
 		// Has rating
 		row.createCell(x++, CellType.BOOLEAN).setCellValue( (item.getResolved().getAttribute(SR6ItemAttribute.PRICE).getRawValue().contains("RATING"))?"true":"false");
 		// Capacity cost
@@ -183,14 +242,23 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static void convertWeapon(ItemTemplate item, Locale loc, Row row) {
-		int x = 4;
+	private static String prettyRating(String input) {
+		return input.replace("$RATING", "Rating");
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertWeapon(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
 		else x++;
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+		// Nuyen
+		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
+		else x++;
+		row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()+" \u00A5"));
+
 		if (item.getAttribute(SR6ItemAttribute.SKILL)!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.SKILL).getRawValue());
 		else x++;
@@ -213,6 +281,18 @@ public class Converter {
 			}
 		}
 		else x+=5;
+		// Firemodes
+		if (item.getAttribute(SR6ItemAttribute.FIREMODES)!=null) {
+			List<FireMode> modes = item.getAttribute(SR6ItemAttribute.FIREMODES).getValue();
+			List<String> names = modes.stream().map(m -> map(m)).collect(Collectors.toList());
+			row.createCell(x++, CellType.STRING).setCellValue(String.join("/", names));
+		} else x++;
+		// Ammunition
+		if (item.getAttribute(SR6ItemAttribute.AMMUNITION)!=null) {
+			List<AmmunitionSlot> modes = item.getAttribute(SR6ItemAttribute.AMMUNITION).getValue();
+			List<String> names = modes.stream().map(m -> map(m)).collect(Collectors.toList());
+			row.createCell(x++, CellType.STRING).setCellValue(String.join("/", names));
+		} else x++;
 	}
 
 	//-------------------------------------------------------------------
@@ -238,25 +318,30 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static void convertOtherGear(ItemTemplate item, Locale loc, Row row) {
-		int x = 5;
+	public static void convertOtherGear(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
 		else x++;
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
+		else x++;
+		row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()));
 	}
 
 	//-------------------------------------------------------------------
-	public static void convertArmor(ItemTemplate item, Locale loc, Row row) {
-		int x = 5;
+	public static void convertArmor(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
 		else x++;
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
+		else x++;
+		row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()));
+
 		if (item.getAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL)!=null)
 			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL).getRawValue());
 		else x++;
@@ -287,12 +372,13 @@ public class Converter {
 ////	}
 
 	//-------------------------------------------------------------------
-	public static void convertQuality(Quality item, Locale loc, Row row) {
-		int x=4;
+	public static void convertQuality(Quality item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getType().name().toLowerCase());
 		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.isPositive());
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getMax());
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getKarmaCost());
+		row.createCell(x++, CellType.STRING).setCellValue(Shadowrun6CompendiumFactory.extractGameEffect(Shadowrun6CompendiumFactory.pretty(item.getDescription(loc))));
+		row.createCell(x++, CellType.STRING).setCellValue(Shadowrun6CompendiumFactory.getCostText(item));
 	}
 
 	//-------------------------------------------------------------------
@@ -317,6 +403,7 @@ public class Converter {
 		case LIMITED: return "Limited";
 		case PERMANENT: return "Permanent";
 		case SPECIAL: return "Special";
+		case ALWAYS: return "Always";
 		default:
 			return value.name().toUpperCase();
 		}
@@ -348,22 +435,70 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
+	private static String map(FireMode value) {
+		switch (value) {
+		case BURST_FIRE: return "BF";
+		case FULL_AUTO: return "FA";
+		case SEMI_AUTOMATIC: return "SA";
+		case SINGLE_SHOT: return "SS";
+		default:
+		return value.name();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String map(AmmunitionSlot value) {
+		switch (value.getType()) {
+		case BELT: return value.getAmount()+"(b)";
+		case BREAK_ACTION: return value.getAmount()+"(ba)";
+		case CLIP: return value.getAmount()+"(c)";
+		case CYLINDER: return value.getAmount()+"(cy)";
+		case DRUM: return value.getAmount()+"(d)";
+		case MAGAZINE: return value.getAmount()+"(m)";
+		case MUZZLE_LOADER: return value.getAmount()+"(ml)";
+		default:
+		return value.getType().name();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String map(ASpell.Type value) {
+		switch (value) {
+		case MANA: return "M";
+		case PHYSICAL: return "P";
+		case RESONANCE: return "R";
+		default:
+		return value.name();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String map(CritterPower.Action value) {
+		switch (value) {
+		case MAJOR: return "Major";
+		case MINOR: return "Minor";
+		case AUTO: return "Auto";
+		default:
+		return value.name();
+		}
+	}
+
+	//-------------------------------------------------------------------
 	private static String upFirst(String value) {
 		StringBuffer buf = new StringBuffer(value);
 		buf.setCharAt(0, Character.toUpperCase(value.charAt(0)));
 		return buf.toString();
 	}
-	
+
 	//-------------------------------------------------------------------
-	public static void convertSpell(SR6Spell item, Locale loc, Row row) {
-		List<String> feats = new ArrayList<>(); 
+	public static void convertSpell(SR6Spell item, Locale loc, Row row, int x) {
+		List<String> feats = new ArrayList<>();
 		List<String> featNames = new ArrayList<>();
 		for (SpellFeatureReference feat :  item.getFeatures()) {
 			feats.add(map(feat.getFeature()));
 			featNames.add(feat.getNameWithoutRating());
 		}
-		
-		int x=5;
+
 		row.createCell(x++, CellType.STRING).setCellValue(item.getType().name().toLowerCase());
 		row.createCell(x++, CellType.STRING).setCellValue(map(item.getRange()));
 		row.createCell(x++, CellType.STRING).setCellValue(map(item.getDuration()));
@@ -391,26 +526,24 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(String.join(", ", featNames));
 
 		// Description
-		
+
 	}
-	
+
 	//-------------------------------------------------------------------
-	public static void convertRitual(Ritual item, Locale loc, Row row) {
-		List<String> feats = new ArrayList<>(); 
+	public static void convertRitual(Ritual item, Locale loc, Row row, int x) {
+		List<String> feats = new ArrayList<>();
 		List<String> featNames = new ArrayList<>();
 		for (RitualFeatureReference feat :  item.getFeatures()) {
 			feats.add(feat.getKey());
 			featNames.add(feat.getModifyable().getName(loc));
 		}
-		
-		int x=4;
+
 		row.createCell(x++, CellType.STRING).setCellValue(item.getThreshold());
 		row.createCell(x++, CellType.STRING).setCellValue(String.join(", ", featNames));
 	}
-	
+
 	//-------------------------------------------------------------------
-	public static void convertComplexForm(ComplexForm item, Locale loc, Row row) {
-		int x=4;
+	public static void convertComplexForm(ComplexForm item, Locale loc, Row row, int x) {
 		// data-duration
 		row.createCell(x++, CellType.STRING).setCellValue(item.getDuration().name().toLowerCase());
 		// data-fading
@@ -418,10 +551,62 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static void convertEcho(MetamagicOrEcho item, Locale loc, Row row) {
-		int x=4;
+	public static void convertEcho(MetamagicOrEcho item, Locale loc, Row row, int x) {
 		// data-rating
 		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.hasLevels());
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertCritterPower(CritterPower item, Locale loc, Row row, int x) {
+		List<String> feats = new ArrayList<>();
+
+		row.createCell(x++, CellType.STRING).setCellValue(map(item.getType()));
+		row.createCell(x++, CellType.STRING).setCellValue(map(item.getAction()));
+		row.createCell(x++, CellType.STRING).setCellValue(map(item.getRange()));
+		row.createCell(x++, CellType.STRING).setCellValue(map(item.getDuration()));
+		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.hasLevel());
+	}
+
+	//-------------------------------------------------------------------
+	private static void convertLifeform(SR6NPC item, Locale loc, Row row, int x) {
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.BODY).getDistributed());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.BODY).getModifiedValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.AGILITY).getDistributed());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.AGILITY).getModifiedValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.REACTION).getDistributed());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.STRENGTH).getDistributed());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.WILLPOWER).getDistributed());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.LOGIC).getDistributed());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.INTUITION).getDistributed());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.CHARISMA).getDistributed());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue());
+
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.EDGE).getModifiedValue());
+//		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.ESSENCE).getModifiedValue());
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertGrunt(SR6NPC item, Locale loc, Row row, int x) {
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getRating());
+		convertLifeform(item, loc, row, x);
+	}
+
+	//-------------------------------------------------------------------
+	public static void convertGruntBlobs(SR6NPC item, Locale loc) {
+		for (SpellValue<SR6Spell> spell : item.getSpells()) {
+			String key = spell.getResolved().toString();
+			addBlob(key, item, loc);
+		}
+		for (CarriedItem tmp : item.getGear()) {
+			String key = tmp.getResolved().toString();
+			addBlob(key, item, loc);
+		}
 	}
 
 //	//-------------------------------------------------------------------
@@ -473,7 +658,7 @@ public class Converter {
 //			return;
 //		fvtt.points = val.getDistributed();
 //		fvtt.modifier = val.getModifier();
-//		
+//
 //		for (SkillSpecializationValue<SR6Skill> spec : val.getSpecializations()) {
 //			if (spec.getDistributed()==1)
 //				fvtt.specialization = spec.getKey();
@@ -524,7 +709,7 @@ public class Converter {
 //		ActorData<FVTTCritter> foundry = new ActorData<FVTTCritter>(data.getName(loc), "Critter", actor);
 //		fillAttributes(foundry.data, data);
 //		fillSkills(foundry.data, data);
-//		
+//
 //		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 //		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
 //		data.getGear().forEach(tmp -> {
@@ -540,8 +725,8 @@ public class Converter {
 //		ActorData<FVTTNPCActor> foundry = new ActorData<FVTTNPCActor>(data.getName(loc), "NPC", actor);
 //		fillAttributes(foundry.data, data);
 //		fillSkills(foundry.data, data);
-//		
-//		
+//
+//
 //		return foundry;
 //	}
 
