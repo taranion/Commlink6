@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 
 /**
  * @author prelle
@@ -29,6 +30,7 @@ public class NPCParser {
 
 	private final static String VAR_EXPECTED_ATTRIBUTES = "ATTRIBUTES";
 	private final static String VAR_SKILL_LINE = "SKILL";
+	private final static String VAR_GEAR_LINE = "GEAR";
 
 	/** What is expected next */
 	private enum State {
@@ -97,12 +99,19 @@ public class NPCParser {
 			}
 			parseSkillLine(npc, memory, line);
 			return;
+		case GEAR:
+			if (line.contains(":")) {
+				parseHeading(npc, memory, line);
+				return;
+			}
+			parseGearLine(npc, memory, line);
+			return;
 		default:
 			if (line.contains(":")) {
 				parseHeading(npc, memory, line);
 				return;
 			}
-			System.err.println("parseLine: Don't know what to do in state "+memory.state+" with "+line);
+			System.err.println("NPCParser.parseLine: Don't know what to do in state "+memory.state+" with "+line);
 		}
 		return;
 	}
@@ -247,7 +256,7 @@ public class NPCParser {
 					name.append(" "+t);
 				}
 			} else if (foundName && foundValue) {
-				System.err.println("NPCParser.parseSkill: Ignored token: "+t);
+//				System.err.println("NPCParser.parseSkill: Ignored token: "+t);
 				if (t.startsWith("(")) t=t.substring(1);
 				if (t.endsWith(")")) t=t.substring(0, t.length()-1);
 				if (!foundSpecName) {
@@ -281,6 +290,39 @@ public class NPCParser {
 		}
 
 		return foundName && foundValue;
+	}
+
+	//-------------------------------------------------------------------
+	private static void parseGearLine(SR6NPC npc, ParsingState runner, String line) {
+		String fullLine = (runner.memory.containsKey(VAR_SKILL_LINE))?(runner.memory.get(VAR_SKILL_LINE)+" "+line):line;
+
+		String[] splitted = fullLine.split(",");
+		System.out.println("PCParser.parseGearLine: Array: "+Arrays.toString(splitted));
+		List<String> unsuccessful = new ArrayList<>();
+		for (String perSkill : splitted) {
+			System.out.println("PCParser.parseGearLine: "+perSkill);
+			boolean successful = parseSkill(npc, runner, perSkill);
+			if (!successful) {
+				unsuccessful.add(perSkill);
+			}
+		}
+		if (unsuccessful.isEmpty()) {
+			runner.memory.remove(VAR_SKILL_LINE);
+		} else {
+			System.out.println("NPCParser.parseSkillLine: Unsuccessful on "+unsuccessful);
+			runner.memory.put(VAR_SKILL_LINE, String.join(",", unsuccessful));
+		}
+	}
+
+
+	//-------------------------------------------------------------------
+	private static ItemTemplate findGearNamed(String name, Locale loc) {
+		for (ItemTemplate skill : Shadowrun6Core.getItemList(ItemTemplate.class)) {
+			if (skill.getName(loc).equalsIgnoreCase(name))
+				return skill;
+		}
+		System.err.println("NPCParser.findGearNamed("+name+", "+loc+") failed");
+		return null;
 	}
 
 }
