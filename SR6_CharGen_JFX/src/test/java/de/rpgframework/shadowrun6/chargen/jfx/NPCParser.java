@@ -3,6 +3,8 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -15,6 +17,9 @@ import java.util.StringTokenizer;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -28,6 +33,8 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
  */
 public class NPCParser {
 
+	private final static Logger logger = System.getLogger(NPCParser.class.getPackageName());
+
 	private final static String VAR_EXPECTED_ATTRIBUTES = "ATTRIBUTES";
 	private final static String VAR_SKILL_LINE = "SKILL";
 	private final static String VAR_GEAR_LINE = "GEAR";
@@ -39,13 +46,13 @@ public class NPCParser {
 		ATTRIBUTE_VALUES,
 		DERIVED_ATTRIBUTE_NAMES,
 		DERIVED_ATTRIBUTE_VALUES,
-		SKILLS,
-		GEAR,
-		WEAPONS
+		TYPED_LINE
 	}
 
 	static class ParsingState {
 		public State state = State.NAME;
+		public String lineType = null;
+		public StringBuffer lineBuf = new StringBuffer();
 		public Map<String, Object> memory = new LinkedHashMap<>();
 	}
 
@@ -55,6 +62,8 @@ public class NPCParser {
 		BufferedReader read= new BufferedReader(new StringReader(rawData));
 
 		SR6NPC ret = new SR6NPC();
+		ret.setType(NPCType.GRUNT);
+		ret.getType();
 		ParsingState state = new ParsingState();
 		try {
 			while (true) {
@@ -92,52 +101,79 @@ public class NPCParser {
 			parseAttributeValues(npc, memory, line);
 			memory.state = State.DERIVED_ATTRIBUTE_NAMES;
 			return;
-		case SKILLS:
-			if (line.contains(":")) {
-				parseHeading(npc, memory, line);
-				return;
-			}
-			parseSkillLine(npc, memory, line);
+		case DERIVED_ATTRIBUTE_NAMES:
+//			parseAttributeValues(npc, memory, line);
+			memory.state = State.DERIVED_ATTRIBUTE_VALUES;
 			return;
-		case GEAR:
-			if (line.contains(":")) {
-				parseHeading(npc, memory, line);
-				return;
-			}
-			parseGearLine(npc, memory, line);
+		case DERIVED_ATTRIBUTE_VALUES:
+			//parseAttributeValues(npc, memory, line);
+			memory.state = State.TYPED_LINE;
 			return;
+//		case SKILLS:
+//			if (line.contains(":")) {
+//				parseHeading(npc, memory, line);
+//				return;
+//			}
+//			parseSkillLine(npc, memory, line);
+//			return;
+//		case GEAR:
+//			if (line.contains(":")) {
+//				parseHeading(npc, memory, line);
+//				return;
+//			}
+//			parseGearLine(npc, memory, line);
+//			return;
 		default:
 			if (line.contains(":")) {
-				parseHeading(npc, memory, line);
+				if (memory.lineType!=null) {
+					parseLineType(npc, memory);
+				}
+				memory.lineBuf = new StringBuffer();
+				String[] pair = parseFirstLine(line);
+				memory.lineType = pair[0];
+				memory.lineBuf.append(pair[1]);
 				return;
+			} else {
+				// Add to existing line
+				memory.lineBuf.append(" "+line);
 			}
-			System.err.println("NPCParser.parseLine: Don't know what to do in state "+memory.state+" with "+line);
 		}
 		return;
 	}
 
 	//-------------------------------------------------------------------
-	private static void parseHeading(SR6NPC npc, ParsingState memory, String line) {
-		State oldState = memory.state;
-		updateState(memory, line.substring(0, line.indexOf(":")).toLowerCase().trim());
-		State newState = memory.state;
-		if (newState!=oldState) {
-			parseLine(npc, memory, line.substring(line.indexOf(":")+1));
-			return;
-		} else {
-			System.err.println("State did not change");
+	private static String[] parseFirstLine(String line) {
+		String type = line.substring(0, line.indexOf(":")).toLowerCase().trim();
+		String cont = line.substring(line.indexOf(":")+1).trim();
+		return new String[] {type,cont};
+	}
+
+	//-------------------------------------------------------------------
+	private static void parseLineType(SR6NPC npc, ParsingState memory) {
+		logger.log(Level.ERROR, "parseLineType for "+memory.lineBuf+" of type "+memory.lineType);
+
+		TODO: line my contain commas between "(" and ")"
+
+		String[] elements = memory.lineBuf.toString().split(",");
+		logger.log(Level.ERROR, Arrays.toString(elements));
+		switch(memory.lineType) {
+		case "skills": parseSkills(npc, memory, elements); break;
+		case "gear"  : parseGearLine(npc, memory, elements); break;
+		default:
+			logger.log(Level.WARNING, "Don't know how to parse: '"+memory.lineType+"'");
+			System.exit(1);
 		}
 	}
 
 	//-------------------------------------------------------------------
 	private static void updateState(ParsingState runner, String category) {
-		switch (category) {
-		case "skills": runner.state = State.SKILLS; return;
-		case "gear": runner.state = State.GEAR; return;
-		case "weapons": runner.state = State.WEAPONS; return;
-		default:
+//		switch (category) {
+//		case "skills": runner.state = State.SKILLS; return;
+//		case "gear": runner.state = State.GEAR; return;
+//		case "weapons": runner.state = State.WEAPONS; return;
+//		default:
 			System.err.println("updateState: unknown '"+category+"'");
-		}
+//		}
 	}
 
 	//-------------------------------------------------------------------
@@ -185,14 +221,11 @@ public class NPCParser {
 	}
 
 	//-------------------------------------------------------------------
-	private static void parseSkillLine(SR6NPC npc, ParsingState runner, String line) {
-		String fullLine = (runner.memory.containsKey(VAR_SKILL_LINE))?(runner.memory.get(VAR_SKILL_LINE)+" "+line):line;
-
-		String[] splitted = fullLine.split(",");
-		System.out.println("PCParser.parseSkillLine: Array: "+Arrays.toString(splitted));
+	private static void parseSkills(SR6NPC npc, ParsingState runner, String[] splitted) {
+		logger.log(Level.DEBUG, "Array: "+Arrays.toString(splitted));
 		List<String> unsuccessful = new ArrayList<>();
 		for (String perSkill : splitted) {
-			System.out.println("PCParser.parseSkillLine: "+perSkill);
+			logger.log(Level.DEBUG, "parseSkillLine: "+perSkill);
 			boolean successful = parseSkill(npc, runner, perSkill);
 			if (!successful) {
 				unsuccessful.add(perSkill);
@@ -201,7 +234,7 @@ public class NPCParser {
 		if (unsuccessful.isEmpty()) {
 			runner.memory.remove(VAR_SKILL_LINE);
 		} else {
-			System.out.println("NPCParser.parseSkillLine: Unsuccessful on "+unsuccessful);
+			logger.log(Level.WARNING, "parseSkillLine: Unsuccessful on "+unsuccessful);
 			runner.memory.put(VAR_SKILL_LINE, String.join(",", unsuccessful));
 		}
 	}
@@ -282,7 +315,7 @@ public class NPCParser {
 			}
 		}
 		if (foundSpecName && foundSpecValue) {
-			System.err.println("NPCParser.parseSkill: Find spec: "+specName);
+			logger.log(Level.INFO,"Find spec: "+specName);
 			SkillSpecialization<SR6Skill> spec = findSkillSpecNamed(sVal.getResolved(), specName.toString(), Locale.ENGLISH);
 			if (spec!=null) {
 				sVal.getSpecializations().add(new SkillSpecializationValue<>(spec, specVal));
@@ -293,36 +326,60 @@ public class NPCParser {
 	}
 
 	//-------------------------------------------------------------------
-	private static void parseGearLine(SR6NPC npc, ParsingState runner, String line) {
-		String fullLine = (runner.memory.containsKey(VAR_SKILL_LINE))?(runner.memory.get(VAR_SKILL_LINE)+" "+line):line;
-
-		String[] splitted = fullLine.split(",");
-		System.out.println("PCParser.parseGearLine: Array: "+Arrays.toString(splitted));
+	private static void parseGearLine(SR6NPC npc, ParsingState runner, String[] splitted) {
 		List<String> unsuccessful = new ArrayList<>();
-		for (String perSkill : splitted) {
-			System.out.println("PCParser.parseGearLine: "+perSkill);
-			boolean successful = parseSkill(npc, runner, perSkill);
+		for (String perGear : splitted) {
+			String key = perGear;
+//			if (perGear.indexOf("(")>0) {
+//				key = perGear.substring(0, perGear.indexOf("("));
+//			}
+			logger.log(Level.WARNING, "Parse gear: ''{0}''", key);
+			boolean successful = parseGear(npc, runner, perGear);
 			if (!successful) {
-				unsuccessful.add(perSkill);
+				unsuccessful.add(perGear);
 			}
 		}
 		if (unsuccessful.isEmpty()) {
-			runner.memory.remove(VAR_SKILL_LINE);
+			runner.memory.remove(VAR_GEAR_LINE);
 		} else {
-			System.out.println("NPCParser.parseSkillLine: Unsuccessful on "+unsuccessful);
-			runner.memory.put(VAR_SKILL_LINE, String.join(",", unsuccessful));
+			logger.log(Level.WARNING, "Unsuccessful in gear: ''{0}''", unsuccessful);
+			runner.memory.put(VAR_GEAR_LINE, String.join(",", unsuccessful));
 		}
 	}
 
 
 	//-------------------------------------------------------------------
 	private static ItemTemplate findGearNamed(String name, Locale loc) {
-		for (ItemTemplate skill : Shadowrun6Core.getItemList(ItemTemplate.class)) {
-			if (skill.getName(loc).equalsIgnoreCase(name))
-				return skill;
+		logger.log(Level.DEBUG, "Search gear "+name);
+		for (ItemTemplate raw : Shadowrun6Core.getItemList(ItemTemplate.class)) {
+			if (raw.getName(loc).equalsIgnoreCase(name)) {
+				logger.log(Level.INFO, "Found gear "+raw);
+				return raw;
+			}
 		}
-		System.err.println("NPCParser.findGearNamed("+name+", "+loc+") failed");
+		logger.log(Level.WARNING, "Searching gear ''{0}'' failed", name);
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	private static boolean parseGear(SR6NPC npc, ParsingState runner, String line) {
+		String key = line;
+		String extra = null;
+		if (line.contains("(")) {
+			int pos = line.indexOf("(");
+			key = line.substring(0, pos).trim();
+			extra = line.substring(pos+1, line.indexOf(")"));
+		}
+
+		CarriedItem<ItemTemplate> cooked = null;
+			ItemTemplate raw = findGearNamed(key, Locale.ENGLISH);
+			if (raw!=null) {
+				cooked = new CarriedItem<ItemTemplate>(raw, null, CarryMode.CARRIED);
+				npc.getGear().add(cooked);
+				return true;
+			}
+
+		return false;
 	}
 
 }
