@@ -20,6 +20,8 @@ import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6NPC;
@@ -42,6 +44,7 @@ public class NPCParser {
 	private final static String VAR_EXPECTED_ATTRIBUTES = "ATTRIBUTES";
 	private final static String VAR_SKILL_LINE = "SKILL";
 	private final static String VAR_GEAR_LINE = "GEAR";
+	private final static String VAR_APOWER_LINE = "APOWER";
 
 	/** What is expected next */
 	private enum State {
@@ -58,10 +61,16 @@ public class NPCParser {
 		public String lineType = null;
 		public StringBuffer lineBuf = new StringBuffer();
 		public Map<String, Object> memory = new LinkedHashMap<>();
+		public List<String> errors = new ArrayList<>();
+	}
+
+	static class Result {
+		public SR6NPC npc;
+		public List<String> errors;
 	}
 
 	//-------------------------------------------------------------------
-	public static SR6NPC parse(String rawData) {
+	public static Result parse(String rawData) {
 		StringBuffer buf = new StringBuffer(rawData);
 		BufferedReader read= new BufferedReader(new StringReader(rawData));
 
@@ -78,12 +87,18 @@ public class NPCParser {
 				if (line.isBlank()) continue;
 				parseLine(ret, state, line);
 			}
+			if (!state.lineBuf.isEmpty()) {
+				parseLineType(ret, state);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return ret;
+		Result ret2 = new Result();
+		ret2.npc = ret;
+		ret2.errors = state.errors;
+		return ret2;
 	}
 
 	//-------------------------------------------------------------------
@@ -140,8 +155,12 @@ public class NPCParser {
 			} else {
 				// Add to existing line
 				memory.lineBuf.append(" "+line);
+				// If in "weapons" mode, append a comma
+				if (memory.lineType.equals("weapons"))
+					memory.lineBuf.append(",");
 			}
 		}
+
 		return;
 	}
 
@@ -181,22 +200,22 @@ public class NPCParser {
 
 	//-------------------------------------------------------------------
 	private static void parseLineType(SR6NPC npc, ParsingState memory) {
-		logger.log(Level.ERROR, "parseLineType for "+memory.lineBuf+" of type "+memory.lineType);
+		logger.log(Level.INFO, "-------------parseLineType for "+memory.lineBuf+" of type "+memory.lineType);
 
 		//TODO: line my contain commas between "(" and ")"
 
 		//String[] elements = memory.lineBuf.toString().split(",");
 		String[] elements = splitWithBrackets(memory.lineBuf.toString());
-		logger.log(Level.ERROR, Arrays.toString(elements));
+		logger.log(Level.DEBUG, Arrays.toString(elements));
 		switch(memory.lineType) {
-		case "skills": parseSkills(npc, memory, elements); break;
-		case "gear"  : parseGearLine(npc, memory, elements); break;
-		case "powers":
-			logger.log(Level.WARNING, "Don't know how to parse: '"+memory.lineType+"'");
-			break;
+		case "augmentations": parseGearLine(npc, memory, elements, CarryMode.IMPLANTED); break;
+		case "skills" : parseSkills(npc, memory, elements); break;
+		case "gear"   : parseGearLine(npc, memory, elements); break;
+		case "powers" : parseAdeptPowerLine(npc, memory, elements); break;
+		case "weapons": parseGearLine(npc, memory, elements); break;
 		default:
 			logger.log(Level.WARNING, "Don't know how to parse: '"+memory.lineType+"'");
-			System.exit(1);
+			memory.errors.add("Don't know how to parse: '"+memory.lineType+"'");
 		}
 	}
 
@@ -261,7 +280,11 @@ public class NPCParser {
 						Integer.parseInt(t.substring( p1+1, p2))
 						));
 			} else {
-				aVal.setDistributed( Integer.parseInt(t));
+				try {
+					aVal.setDistributed( Integer.parseInt(t));
+				} catch (NumberFormatException e) {
+					aVal.setDistributed( (int)(Float.parseFloat(t)*1000));
+				}
 			}
 		}
 	}
@@ -271,9 +294,10 @@ public class NPCParser {
 		logger.log(Level.DEBUG, "Array: "+Arrays.toString(splitted));
 		List<String> unsuccessful = new ArrayList<>();
 		for (String perSkill : splitted) {
-			logger.log(Level.DEBUG, "parseSkillLine: "+perSkill);
+			logger.log(Level.INFO, "parseSkillLine: "+perSkill);
 			boolean successful = parseSkill(npc, runner, perSkill);
 			if (!successful) {
+				runner.errors.add("Unknown skill: "+perSkill);
 				unsuccessful.add(perSkill);
 			}
 		}
@@ -291,7 +315,7 @@ public class NPCParser {
 			if (skill.getName(loc).equalsIgnoreCase(name))
 				return skill;
 		}
-		System.err.println("NPCParser.findSkillNamed("+name+", "+loc+") failed");
+		logger.log(Level.ERROR, "NPCParser.findSkillNamed("+name+", "+loc+") failed");
 		return null;
 	}
 
@@ -301,7 +325,7 @@ public class NPCParser {
 			if (spec.getName(loc).equalsIgnoreCase(name))
 				return (SkillSpecialization<SR6Skill>) spec;
 		}
-		System.err.println("NPCParser.findSkillSpecNamed("+skill+","+name+", "+loc+") failed");
+		logger.log(Level.WARNING,"findSkillSpecNamed("+skill+","+name+", "+loc+") failed");
 		return null;
 	}
 
@@ -329,7 +353,10 @@ public class NPCParser {
 			} else if (foundName && !foundValue) {
 				// Either another part of skill name or an integer value
 				try {
-					value = Integer.parseInt(t);
+					if (t.indexOf("(")>0) {
+						value = Integer.parseInt(t.substring(0, t.indexOf("(")));
+					} else
+						value = Integer.parseInt(t);
 					foundValue = true;
 				} catch (NumberFormatException e) {
 					name.append(" "+t);
@@ -372,17 +399,16 @@ public class NPCParser {
 	}
 
 	//-------------------------------------------------------------------
-	private static void parseGearLine(SR6NPC npc, ParsingState runner, String[] splitted) {
+	private static void parseGearLine(SR6NPC npc, ParsingState runner, String[] splitted, CarryMode...mode) {
 		List<String> unsuccessful = new ArrayList<>();
 		for (String perGear : splitted) {
 			String key = perGear;
-//			if (perGear.indexOf("(")>0) {
-//				key = perGear.substring(0, perGear.indexOf("("));
-//			}
-			logger.log(Level.WARNING, "Parse gear: ''{0}''", key);
-			boolean successful = parseGear(npc, runner, perGear);
+			logger.log(Level.DEBUG, "Parse gear: ''{0}''", key);
+			CarryMode carryMode = (mode.length==0)?CarryMode.CARRIED:mode[0];
+			boolean successful = parseGear(npc, runner, perGear, carryMode);
 			if (!successful) {
 				unsuccessful.add(perGear);
+				runner.errors.add("Unknown gear: "+key);
 			}
 		}
 		if (unsuccessful.isEmpty()) {
@@ -396,16 +422,21 @@ public class NPCParser {
 
 	//-------------------------------------------------------------------
 	private static ItemTemplate findGearNamed(String name, Locale loc, String extra) {
-		logger.log(Level.DEBUG, "Search gear "+name);
+		logger.log(Level.WARNING, "Search gear "+name);
 
-		if ("commlink".equals(name) && extra.contains("Device Rating")) {
-			int pos = extra.indexOf("Device Rating") + "Device Rating".length();
-			int rating = Integer.parseInt(extra.substring(pos).trim());
-			for (ItemTemplate raw : Shadowrun6Core.getItemList(ItemTemplate.class)) {
-				if (raw.getItemSubtype()==ItemSubType.COMMLINK && raw.getAttribute(SR6ItemAttribute.DEVICE_RATING).getDistributed()==rating) {
-					logger.log(Level.INFO, "Substituted ''{0}'' with "+raw);
-					return raw;
+		if ("commlink".equalsIgnoreCase(name)) {
+			if (extra.contains("Device Rating")) {
+				int pos = extra.indexOf("Device Rating") + "Device Rating".length();
+				int rating = Integer.parseInt(extra.substring(pos).trim());
+				for (ItemTemplate raw : Shadowrun6Core.getItemList(ItemTemplate.class)) {
+					if (raw.getItemSubtype()==ItemSubType.COMMLINK && raw.getAttribute(SR6ItemAttribute.DEVICE_RATING).getDistributed()==rating) {
+						logger.log(Level.INFO, "Substituted ''{0}'' with "+raw);
+						return raw;
+					}
 				}
+			} else {
+				logger.log(Level.WARNING, "Found generic 'commlink' but no device rating in: "+name);
+				return null;
 			}
 		}
 
@@ -421,7 +452,7 @@ public class NPCParser {
 	}
 
 	//-------------------------------------------------------------------
-	private static boolean parseGear(SR6NPC npc, ParsingState runner, String line) {
+	private static boolean parseGear(SR6NPC npc, ParsingState runner, String line, CarryMode carryMode) {
 		String key = line;
 		String extra = "";
 		if (line.contains("(")) {
@@ -429,13 +460,100 @@ public class NPCParser {
 			key = line.substring(0, pos).trim();
 			extra = line.substring(pos+1, line.indexOf(")"));
 		}
+		if (line.contains("[")) {
+			int pos = line.indexOf("[");
+			key = line.substring(0, pos).trim();
+			extra = line.substring(pos+1, line.indexOf("]"));
+		}
+		key = key.trim();
 
 		CarriedItem<ItemTemplate> cooked = null;
 			ItemTemplate raw = findGearNamed(key, Locale.ENGLISH, extra);
 			if (raw!=null) {
-				cooked = new CarriedItem<ItemTemplate>(raw, null, CarryMode.CARRIED);
+				cooked = new CarriedItem<ItemTemplate>(raw, null, carryMode);
 				logger.log(Level.WARNING, "Found gear: ''{0}'' for {1} and extra ''{2}''", raw, line, extra);
 				npc.getGear().add(cooked);
+				return true;
+			}
+
+		return false;
+	}
+
+	//-------------------------------------------------------------------
+	private static void parseAdeptPowerLine(SR6NPC npc, ParsingState runner, String[] splitted) {
+		List<String> unsuccessful = new ArrayList<>();
+		for (String per : splitted) {
+			String key = per;
+			logger.log(Level.DEBUG, "Parse adept power: ''{0}''", key);
+			boolean successful = parseAdeptPower(npc, runner, per);
+			if (!successful) {
+				runner.errors.add("Unsuccessful in adept power: '"+per+"'");
+				unsuccessful.add(per);
+			}
+		}
+		if (unsuccessful.isEmpty()) {
+			runner.memory.remove(VAR_APOWER_LINE);
+		} else {
+			logger.log(Level.WARNING, "Unsuccessful in adept power: ''{0}''", unsuccessful);
+			runner.memory.put(VAR_APOWER_LINE, String.join(",", unsuccessful));
+		}
+	}
+
+
+	//-------------------------------------------------------------------
+	private static AdeptPower findAdeptPowerNamed(String name, Locale loc, String extra) {
+		logger.log(Level.DEBUG, "Search adept power "+name);
+
+		for (AdeptPower raw : Shadowrun6Core.getItemList(AdeptPower.class)) {
+			if (raw.getName(loc).equalsIgnoreCase(name)) {
+				logger.log(Level.INFO, "Found adept power "+raw);
+				return raw;
+			}
+		}
+
+//		// Try to replace Skill names
+//		for (SR6Skill skill : Shadowrun6Core.getItemList(SR6Skill.class)) {
+//			if (name.contains(skill.getName(loc))) {
+//				// Replace by general meaning
+//				String replWith = "Ability";
+//				if (loc==Locale.GERMAN) replWith="Fertigkeit";
+//				String newName = name.replace(skill.getName(loc), replWith);
+//				logger.log(Level.WARNING, "Replacing {0} with {1}", skill.getName(loc), replWith);
+//				AdeptPower test = findAdeptPowerNamed(newName, loc, extra);
+//				if (test!=null) return test;
+//			}
+//		}
+
+		logger.log(Level.WARNING, "Searching adept power ''{0}'' failed", name);
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	private static boolean parseAdeptPower(SR6NPC npc, ParsingState runner, String line) {
+		String key = line;
+		String extra = "";
+		if (line.contains("(")) {
+			int pos = line.indexOf("(");
+			key = line.substring(0, pos).trim();
+			extra = line.substring(pos+1, line.indexOf(")"));
+		}
+		// Check for rating
+		String[] elements = key.split(" ");
+		int rat = -1;
+		try {
+			rat = Integer.parseInt( elements[elements.length-1]);
+			elements = Arrays.copyOf(elements, elements.length-1);
+//			System.arraycopy(elements, 0, elements, 0, elements.length-2);
+			key = String.join(" ", elements);
+		} catch (NumberFormatException nfe) {}
+
+		key = key.trim();
+		AdeptPowerValue cooked = null;
+		AdeptPower raw = findAdeptPowerNamed(key, Locale.ENGLISH, extra);
+			if (raw!=null) {
+				cooked = (raw.hasLevel())?(new AdeptPowerValue(raw, rat)):(new AdeptPowerValue(raw));
+				logger.log(Level.WARNING, "Found adept power: ''{0}'' for {1} and extra ''{2}''", raw, line, extra);
+				npc.addAdeptPower(cooked);
 				return true;
 			}
 

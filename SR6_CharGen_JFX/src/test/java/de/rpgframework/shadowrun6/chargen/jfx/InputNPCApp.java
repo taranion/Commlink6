@@ -7,6 +7,7 @@ import java.util.Locale;
 import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.shadowrun6.SR6NPC;
+import de.rpgframework.shadowrun6.chargen.jfx.NPCParser.Result;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -53,10 +54,13 @@ public class InputNPCApp extends Application {
 			public void paste() {
 				super.paste();
 				System.out.println("Pasted "+taBuffer.getText());
-				SR6NPC npc = NPCParser.parse(taBuffer.getText());
+				Result res = NPCParser.parse(taBuffer.getText());
+				SR6NPC npc = res.npc;
 				StringWriter out = new StringWriter();
 				try {
 					persist.write(npc, out);
+					out.append("\n"+String.join("\n", res.errors)+"\n");
+
 					taXML.setText(out.toString());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
