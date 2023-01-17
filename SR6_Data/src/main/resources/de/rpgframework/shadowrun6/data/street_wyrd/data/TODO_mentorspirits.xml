@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mentorspirits>
+  <mentorspirit id="dackel" lang="de">
+    <modifications>
+      <qualitymod ref="will_to_live"/>
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="perception" />
+    </magician>
+    <adept>
+      <powermod ref="iron_will" value="1"/>
+      <powermod ref="cool_resolve" value="1"/>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="squirrel" lang="de">
+    <modifications>
+      <edgemod type="COST" skill="athletics" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+      <powermod ref="freefall" value="1"/>
+      <powermod ref="great_leap" value="1"/>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="magpie" lang="de" >
+    <modifications>
+      <edgemod type="COST" skill="stealth" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="MANIPULATION" />
+    </magician>
+    <adept>
+      <powermod ref="nimble_fingers" value="1"/>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="connoisseur" lang="de">
+    <modifications>
+      <skillmod type="KNOWLEDGE" val="1" />
+      <skillmod type="KNOWLEDGE" val="1" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="HEALTH" />
+    </magician>
+    <adept>
+      <powermod ref="improved_sense" choice="TASTE"/>
+      <powermod ref="improved_sense" choice="TOUCH"/>
+      <powermod ref="improved_sense" choice="SMELL"/>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="big_mama" lang="de">
+    <modifications>
+      <edgemod type="COST" skill="biotech" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="HEALTH" />
+    </magician>
+    <adept>
+      <powermod ref="empathic_healing" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="jester" lang="de">
+    <modifications>
+      <edgemod type="COST" skill="con" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="ILLUSION" />
+    </magician>
+    <adept>
+      <selmod uuid="25d96a27-33d4-4540-8ec6-2ab82d983a2b">
+	      <powermod ref="empathic_sense" value="1" />
+	      <powermod ref="enthralling_performance" value="1" />
+	  </selmod>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="klabautermann" >
+    <modifications>
+    	<selmod uuid="abe1ba17-cd19-4d8d-9443-bef9f897d566">
+     	 <edgemod type="COST" skill="engineering" />
+      		<edgemod type="COST" skill="piloting" />
+    	</selmod>
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+        <powermod ref="danger_sense" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="panthier" >
+    <modifications>
+      <edgemod type="COST" skill="close_combat" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+        <powermod ref="elemental_strike" value="1" />
+    </adept>
+  </mentorspirit>
+  
+  
+  <mentorspirit id="rotkaeppchen_wyrd" >
+    <modifications>
+      <selmod uuid="c69ee48b-fd9a-4f36-b05b-3fb2bc2f6680">
+        <edgemod type="COST" skill="con" />
+        <edgemod type="COST" skill="influence" />
+      </selmod>
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+      <powermod ref="vocal_control" />
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="shepherd_dog" >
+    <modifications>
+      <edgemod type="COST" skill="influence" />
+      <qualitymod ref="honorbound"/>
+    </modifications>
+    <magician>
+      <edgemod type="COST" cat="COMBAT" />
+    </magician>
+    <adept>
+      <powermod ref="combat_sense" value="1"/>
+    </adept>
+  </mentorspirit>
+  
+  <mentorspirit id="vigilant" >
+    <modifications>
+      <edgemod type="COST" skill="exotic_weapons" />
+      <edgemod type="COST" skill="firearms" />
+      <edgemod type="COST" skill="athletics" />
+    </modifications>
+    <magician>
+      <edgemod type="COST" skill="conjuring" />
+    </magician>
+    <adept>
+      <powermod ref="counterstrike" value="1"/>
+    </adept>
+  </mentorspirit>
+</mentorspirits>

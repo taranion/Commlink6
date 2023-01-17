@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spirits>
+  <spirit id="spirit_plants" />
+  <spirit id="spirit_guardian" />
+  <spirit id="spirit_guidance" />
+  <spirit id="spirit_task" />
+</spirits>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="artisans_way" karma="20" type="ADEPT_WAY" >
+     <modifications>
+       <qualitymod ref="innate_talent"/>
+       <qualitymod ref="focused_channeling" choice="LOGIC"/>
+       <qualitymod ref="spark_of_brilliance" choice="biotech,cracking,electronics,engineering,piloting"/>
+     </modifications>
+   </quality>
+   <quality id="artists_way" karma="20" type="ADEPT_WAY" >
+     <modifications>
+       <qualitymod ref="innate_talent"/>
+       <qualitymod ref="focused_channeling" choice="CHARISMA"/>
+       <qualitymod ref="spark_of_brilliance" choice="athletics,con,influence"/>
+     </modifications>
+   </quality>
+   <quality id="athletes_ways" karma="20" type="ADEPT_WAY" >
+     <modifications>
+       <qualitymod ref="innate_talent"/>
+       <qualitymod ref="focused_channeling" choice="AGILITY,REACTION,STRENGTH"/>
+       <qualitymod ref="spark_of_brilliance" choice="athletics"/>
+     </modifications>
+   </quality>
+   <quality id="beasts_way" karma="20" type="ADEPT_WAY" >
+     <modifications>
+       <qualitymod ref="innate_talent"/>
+       <qualitymod ref="focused_channeling" choice="INTUITION"/>
+       <selmod uuid="e60f95b9-075c-4cb9-8259-d3a9f1bbb092">
+       	 <qualitymod ref="spark_of_brilliance" choice="outdoors,perception"/>
+       	 <specrulemod ref="MENTOR_SPIRIT_BOTH"/>
+       </selmod>
+     </modifications>
+   </quality>
+   <quality id="burnouts_way" karma="20" type="ADEPT_WAY" >
+     <modifications>
+       <qualitymod ref="innate_talent"/>
+       <qualitymod ref="focused_channeling" choice="AGILITY,REACTION,STRENGTH"/>
+     </modifications>
+   </quality>
+   <quality id="invisible_way" karma="20" type="ADEPT_WAY" >
+     <modifications>
+       <qualitymod ref="innate_talent"/>
+       <qualitymod ref="focused_channeling" choice="AGILITY"/>
+       <qualitymod ref="spark_of_brilliance" choice="stealth,perception"/>
+     </modifications>
+   </quality>
+   <quality id="magicians_way" karma="20" type="ADEPT_WAY" >
+     <modifications>
+       <qualitymod ref="innate_talent"/>
+       <qualitymod ref="focused_channeling" choice="LOGIC,CHARISMA"/>
+       <selmod uuid="fed1906b-51e9-481a-818f-1e63c6641b93">
+       	 <qualitymod ref="spark_of_brilliance" choice="astral,conjuring,enchanting,sorcery"/>
+       	 <specrulemod ref="MENTOR_SPIRIT_BOTH"/>
+       </selmod>
+     </modifications>
+   </quality>
+   <quality id="speakers_way" karma="20" type="ADEPT_WAY" >
+     <modifications>
+       <qualitymod ref="innate_talent"/>
+       <qualitymod ref="focused_channeling" choice="CHARISMA"/>
+       <qualitymod ref="spark_of_brilliance" choice="con,influence"/>
+     </modifications>
+   </quality>
+   <quality id="warriors_way" karma="20" type="ADEPT_WAY" >
+     <modifications>
+       <qualitymod ref="innate_talent"/>
+       <qualitymod ref="focused_channeling" choice="AGILITY,REACTION,STRENGTH"/>
+       <qualitymod ref="spark_of_brilliance" choice="close_combat,firearms"/>
+     </modifications>
+   </quality>
+   
+</qualities>
