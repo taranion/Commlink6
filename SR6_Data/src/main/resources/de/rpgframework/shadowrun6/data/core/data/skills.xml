@@ -95,10 +95,11 @@
     <skill id="outdoors"  attr="INTUITION" type="PHYSICAL" untr="y">
         <skillspec id="navigation"/>
         <skillspec id="survival"/>
-        <skillspec id="tracking_woods"/>
-        <skillspec id="tracking_desert"/>
-        <skillspec id="tracking_urban"/>
-        <skillspec id="tracking_other"/>
+        <skillspec id="tracking"/>
+        <skillspec id="woods"/>
+        <skillspec id="desert"/>
+        <skillspec id="urban"/>
+        <skillspec id="other"/>
     </skill>
     <skill id="perception"  attr="INTUITION" type="PHYSICAL" untr="y">
         <skillspec id="visual"/>
