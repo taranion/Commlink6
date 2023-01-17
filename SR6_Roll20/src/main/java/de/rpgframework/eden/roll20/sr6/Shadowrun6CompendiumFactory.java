@@ -66,8 +66,6 @@ public class Shadowrun6CompendiumFactory {
 
 	//-------------------------------------------------------------------
 	private static String capitalize(String name) {
-		if (name.contains(","))
-			System.err.println(name);
 		name = name.replace(',', ' ');
 
 		char[] chars = name.toCharArray();
