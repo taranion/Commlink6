@@ -19,13 +19,17 @@ import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -149,16 +153,47 @@ public class NPCParser {
 	}
 
 	//-------------------------------------------------------------------
+	private static String[] splitWithBrackets(String line) {
+		List<String> ret = new ArrayList<>();
+		int bracketLevel = 0;
+		StringBuffer current = new StringBuffer();
+		for (int i=0; i<line.length(); i++) {
+			char c = line.charAt(i);
+			if (c=='(' || c=='[') {
+				bracketLevel++;
+				current.append(c);
+			} else if (c==')' || c==']') {
+				bracketLevel--;
+				if (bracketLevel<0) bracketLevel=0;
+				current.append(c);
+			} else if (c==',' && bracketLevel==0) {
+				ret.add(current.toString().trim());
+				current = new StringBuffer();
+			} else {
+				current.append(c);
+			}
+		}
+		if (!current.toString().isBlank())
+			ret.add(current.toString());
+
+		return ret.toArray(new String[ret.size()]);
+	}
+
+	//-------------------------------------------------------------------
 	private static void parseLineType(SR6NPC npc, ParsingState memory) {
 		logger.log(Level.ERROR, "parseLineType for "+memory.lineBuf+" of type "+memory.lineType);
 
-		TODO: line my contain commas between "(" and ")"
+		//TODO: line my contain commas between "(" and ")"
 
-		String[] elements = memory.lineBuf.toString().split(",");
+		//String[] elements = memory.lineBuf.toString().split(",");
+		String[] elements = splitWithBrackets(memory.lineBuf.toString());
 		logger.log(Level.ERROR, Arrays.toString(elements));
 		switch(memory.lineType) {
 		case "skills": parseSkills(npc, memory, elements); break;
 		case "gear"  : parseGearLine(npc, memory, elements); break;
+		case "powers":
+			logger.log(Level.WARNING, "Don't know how to parse: '"+memory.lineType+"'");
+			break;
 		default:
 			logger.log(Level.WARNING, "Don't know how to parse: '"+memory.lineType+"'");
 			System.exit(1);
@@ -216,7 +251,18 @@ public class NPCParser {
 				aVal = new AttributeValue<ShadowrunAttribute>(attr);
 				npc.addAttribute(aVal);
 			}
-			aVal.setDistributed( Integer.parseInt(t));
+			int p1 = t.indexOf("(");
+			int p2 = t.indexOf(")");
+			if (p1>0) {
+				aVal.setDistributed( Integer.parseInt(t.substring(0, p1)));
+				aVal.addModification(new ValueModification(
+						ShadowrunReference.ATTRIBUTE,
+						attr.name(),
+						Integer.parseInt(t.substring( p1+1, p2))
+						));
+			} else {
+				aVal.setDistributed( Integer.parseInt(t));
+			}
 		}
 	}
 
@@ -349,8 +395,21 @@ public class NPCParser {
 
 
 	//-------------------------------------------------------------------
-	private static ItemTemplate findGearNamed(String name, Locale loc) {
+	private static ItemTemplate findGearNamed(String name, Locale loc, String extra) {
 		logger.log(Level.DEBUG, "Search gear "+name);
+
+		if ("commlink".equals(name) && extra.contains("Device Rating")) {
+			int pos = extra.indexOf("Device Rating") + "Device Rating".length();
+			int rating = Integer.parseInt(extra.substring(pos).trim());
+			for (ItemTemplate raw : Shadowrun6Core.getItemList(ItemTemplate.class)) {
+				if (raw.getItemSubtype()==ItemSubType.COMMLINK && raw.getAttribute(SR6ItemAttribute.DEVICE_RATING).getDistributed()==rating) {
+					logger.log(Level.INFO, "Substituted ''{0}'' with "+raw);
+					return raw;
+				}
+			}
+		}
+
+
 		for (ItemTemplate raw : Shadowrun6Core.getItemList(ItemTemplate.class)) {
 			if (raw.getName(loc).equalsIgnoreCase(name)) {
 				logger.log(Level.INFO, "Found gear "+raw);
@@ -364,7 +423,7 @@ public class NPCParser {
 	//-------------------------------------------------------------------
 	private static boolean parseGear(SR6NPC npc, ParsingState runner, String line) {
 		String key = line;
-		String extra = null;
+		String extra = "";
 		if (line.contains("(")) {
 			int pos = line.indexOf("(");
 			key = line.substring(0, pos).trim();
@@ -372,9 +431,10 @@ public class NPCParser {
 		}
 
 		CarriedItem<ItemTemplate> cooked = null;
-			ItemTemplate raw = findGearNamed(key, Locale.ENGLISH);
+			ItemTemplate raw = findGearNamed(key, Locale.ENGLISH, extra);
 			if (raw!=null) {
 				cooked = new CarriedItem<ItemTemplate>(raw, null, CarryMode.CARRIED);
+				logger.log(Level.WARNING, "Found gear: ''{0}'' for {1} and extra ''{2}''", raw, line, extra);
 				npc.getGear().add(cooked);
 				return true;
 			}
