@@ -317,6 +317,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	public List<Quality> getAvailable() {
 		return Shadowrun6Core.getItemList(Quality.class).stream()
 				.filter(p -> parent.showDataItem(p))
+				.filter(p -> p.isFreeSelectable())
 				.filter(p -> !model.hasQuality(p.getId()) || p.isMulti())
 				.collect(Collectors.toList());
 	}
