@@ -4,11 +4,17 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.prelle.javafx.JavaFXConstants;
+import org.prelle.javafx.ResponsiveControlManager;
+import org.prelle.javafx.WindowMode;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Quality.QualityType;
+import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
+import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
+import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
+import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageQualities;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
@@ -40,9 +46,15 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 		lbNumber = new Label("?");
 		lbNumber.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 
-		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
+//		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getQualityController()));
 		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
+
+		QualityFilterNode filter = new QualityFilterNode(RES, selection, QualityType.NORMAL, QualityType.ADEPT_WAY);
+		selection.setFilterNode(filter);
+		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL || qv.getModifyable().getType()==QualityType.ADEPT_WAY);
+		selection.setRequirementResolver(Shadowrun6Tools.requirementResolver(Locale.getDefault()));
+		selection.setModificationResolver(Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 
 		bxDescription = new GenericDescriptionVBox(
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
