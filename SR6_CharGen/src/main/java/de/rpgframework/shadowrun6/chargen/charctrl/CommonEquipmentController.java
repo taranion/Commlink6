@@ -81,7 +81,10 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 */
 	@Override
 	public List<ItemTemplate> getAvailable() {
-		return Shadowrun6Core.getItemList(ItemTemplate.class);
+		return Shadowrun6Core.getItemList(ItemTemplate.class).stream()
+				.filter(p -> parent.showDataItem(p))
+				.filter(p -> !p.isModOnly())
+				.collect(Collectors.toList());
 	}
 
 	//-------------------------------------------------------------------
