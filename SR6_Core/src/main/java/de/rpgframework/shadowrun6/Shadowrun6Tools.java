@@ -64,6 +64,7 @@ import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.CritterPower;
+import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
@@ -637,6 +638,11 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve metamagics or echoes");
 			for (MetamagicOrEchoValue tmp : model.getMetamagicOrEchoes()) {
 				MetamagicOrEcho resolved = Shadowrun6Core.getItem(MetamagicOrEcho.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+			logger.log(Level.DEBUG, "resolve critter powers");
+			for (CritterPowerValue tmp : model.getCritterPowers()) {
+				CritterPower resolved = Shadowrun6Core.getItem(CritterPower.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve lifestyles");
