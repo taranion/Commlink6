@@ -6,6 +6,7 @@ import java.lang.System.Logger.Level;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -124,7 +125,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 				System.err.println("Missing resource "+CommonShadowrunJFXResourceHook.class.getPackage().getName()+" + "+name);
 				return null;
 			}});
-		contentPane.setModificationConverter((m) -> Shadowrun6Tools.getModificationString(contentPane.getSelectedItem(),m));
+		contentPane.setModificationConverter((m) -> Shadowrun6Tools.getModificationString(contentPane.getSelectedItem(),m, Locale.getDefault()));
 		contentPane.setReferenceTypeConverter(new SR6ReferenceTypeConverter<>());
 		contentPane.setNameConverter( meta -> {
 			if (meta==null) return "-";
