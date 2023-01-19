@@ -4,17 +4,11 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.prelle.javafx.JavaFXConstants;
-import org.prelle.javafx.ResponsiveControlManager;
-import org.prelle.javafx.WindowMode;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Quality.QualityType;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
-import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
-import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageQualities;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
