@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
    <quality id="innate_talent"      pos="true" karma="0" type="ADEPT_WAY" selectable="n" />
-   <quality id="focused_channeling" pos="true" karma="0" type="ADEPT_WAY" selectable="n">
-   	<choices>
-   		<choice type="ATTRIBUTE" uuid="6c21c77c-9cb0-4258-9048-777e92a3f08b" options="BODY,AGILITY"/>
-   	</choices>
-   	<modifications>
-   		<itemmod type="DRAIN_ADEPT" ref="CHOICE:6c21c77c-9cb0-4258-9048-777e92a3f08b"/>
-   	</modifications>
-   </quality>
-   <quality id="spark_of_brilliance" pos="true" karma="0" type="ADEPT_WAY" selectable="n">
-   	<choices>
-   		<choice type="SKILL" uuid="e26e2313-adf9-494e-82be-62387e0d4efd" />
-   	</choices>
-   	<modifications>
-   		<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
-   	</modifications>
-   </quality>
 
    <quality id="arcane_resilience" pos="true" karma="7" type="NORMAL">
    	<choices>

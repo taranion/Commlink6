@@ -28,7 +28,7 @@
    </quality>
    <quality id="catlike"          	  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <checkmod ref="athletics" type="SKILL" what="BONUS" value="1"/>
+       <checkmod ref="athletics" type="SKILL" what="BONUS" value="1" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="dermal_deposits"  	  karma="7" pos="true" type="NORMAL" >
@@ -40,7 +40,7 @@
    </quality>
    <quality id="double_jointed"   	  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
+       <checkmod type="SKILL" ref="athletics" value="1" what="EDGE" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="elemental_resistance" karma="12" pos="true" type="NORMAL">
@@ -61,8 +61,8 @@
    </quality>
    <quality id="first_impression"     karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <checkmod type="SKILL" ref="con" value="2" what="EDGE"/>
-       <checkmod type="SKILL" ref="influence" value="2" what="EDGE"/>
+       <checkmod type="SKILL" ref="con" value="2" what="EDGE" apply="CHARACTER"/>
+       <checkmod type="SKILL" ref="influence" value="2" what="EDGE" apply="CHARACTER"/>
        <relevancemod topic="SOCIAL"/>
      </modifications>
    </quality>
@@ -73,7 +73,7 @@
    </quality>
    <quality id="gearhead" 		  	  karma="10" pos="true" type="NORMAL" >
      <modifications>
-       <checkmod type="SKILL" ref="engineering" value="1" what="EDGE"/>
+       <checkmod type="SKILL" ref="engineering" value="1" what="EDGE" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="guts" 		  		  karma="12" pos="true" type="NORMAL" />
@@ -92,8 +92,8 @@
    		<choice type="TEXT" uuid="2cef71b7-7af8-4def-a788-d73903c776e9"/>
    	</choices>
      <modifications>
-       <checkmod type="SKILL" ref="outdoors" value="1" what="EDGE_ONLY_TEST"/>
-       <checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST"/>
+       <checkmod type="SKILL" ref="outdoors" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER"/>
+       <checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="human-looking" 		  karma="6" pos="true" type="NORMAL">
@@ -107,12 +107,12 @@
    </quality>
    <quality id="indomitable" 		  karma="12" pos="true" type="NORMAL" >
      <modifications>
-			<checkmod type="ATTRIBUTE" ref="WILLPOWER" value="-1" what="EDGE_BOOST" />
+			<checkmod type="ATTRIBUTE" ref="WILLPOWER" value="-1" what="EDGE_BOOST" apply="CHARACTER" />
      </modifications>
    </quality>
    <quality id="juryrigger" 		  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <checkmod type="SKILL" ref="engineering" value="1" what="EDGE_ONLY_TEST"/>
+       <checkmod type="SKILL" ref="engineering" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="long_reach"  		  karma="12" pos="true" type="NORMAL" >
@@ -135,7 +135,7 @@
    </quality>
    <quality id="photographic_memory"  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <checkmod type="ATTRIBUTE" ref="MEMORY" value="1" what="EDGE_ONLY_TEST"/>
+       <checkmod type="ATTRIBUTE" ref="MEMORY" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="quick_healer" 		  karma="8" pos="true" type="NORMAL" />
@@ -145,7 +145,7 @@
    		<choice type="SPIRIT" uuid="e19ecf4c-1508-406e-9a40-70cf09907bc3"/>
    	</choices>
      <modifications>
-       <checkmod type="SKILL" ref="conjuring" value="1" what="EDGE"/>
+       <checkmod type="SKILL" ref="conjuring" value="1" what="EDGE" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="sprite_affinity"      karma="14" pos="true" type="NORMAL" multi="true">

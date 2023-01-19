@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+	<quality id="artisans_way" pos="true" karma="20" type="ADEPT_WAY" >
+   	<choices>
+   		<choice type="SKILL" uuid="e26e2313-adf9-494e-82be-62387e0d4efd" options="biotech,cracking,electronics,engineering,piloting"/>
+   	</choices>
+     <modifications>
+     		<itemmod type="QUALITY" ref="innate_talent"/>
+   		<itemmod type="DRAIN_ADEPT" ref="LOGIC"/>
+			<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="artists_way" pos="true" karma="20" type="ADEPT_WAY" >
+   	<choices>
+   		<choice type="SKILL" uuid="e26e2313-adf9-494e-82be-62387e0d4efd" options="athletics,con,influence"/>
+   	</choices>
+      <modifications>
+         <itemmod type="QUALITY" ref="innate_talent"/>
+   		<itemmod type="DRAIN_ADEPT" ref="CHARISMA"/>
+			<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
+      </modifications>
+   </quality>
+   <quality id="athletes_ways" pos="true" karma="20" type="ADEPT_WAY" >
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="6c21c77c-9cb0-4258-9048-777e92a3f08b" options="AGILITY,REACTION,STRENGTH"/>
+   	</choices>
+      <modifications>
+       	<itemmod type="QUALITY" ref="innate_talent"/>
+   		<itemmod type="DRAIN_ADEPT" ref="CHOICE:6c21c77c-9cb0-4258-9048-777e92a3f08b"/>
+			<checkmod type="SKILL" ref="athletics" what="REPLACE_WITH_WILD" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="beasts_way" pos="true" karma="20" type="ADEPT_WAY" >
+   	<choices>
+   		<choice type="SKILL" uuid="e26e2313-adf9-494e-82be-62387e0d4efd" options="outdoors,perception"/>
+   	</choices>
+     <modifications>
+       	<itemmod type="QUALITY" ref="innate_talent"/>
+   		<itemmod type="DRAIN_ADEPT" ref="INTUITION"/>
+       <selmod>
+			<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
+       	<itemmod type="RULE" ref="MENTOR_SPIRIT_BOTH"/>
+       </selmod>
+     </modifications>
+   </quality>
+   <quality id="burnouts_way" pos="true" karma="20" type="ADEPT_WAY" >
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="6c21c77c-9cb0-4258-9048-777e92a3f08b" options="AGILITY,REACTION,STRENGTH"/>
+   	</choices>
+      <modifications>
+       	<itemmod type="QUALITY" ref="innate_talent"/>
+   		<itemmod type="DRAIN_ADEPT" ref="CHOICE:6c21c77c-9cb0-4258-9048-777e92a3f08b"/>
+      </modifications>
+   </quality>
+   <quality id="invisible_way" pos="true" karma="20" type="ADEPT_WAY" >
+   	<choices>
+   		<choice type="SKILL" uuid="e26e2313-adf9-494e-82be-62387e0d4efd" options="stealth,perception"/>
+   	</choices>
+     	<modifications>
+       	<itemmod type="QUALITY" ref="innate_talent"/>
+   		<itemmod type="DRAIN_ADEPT" ref="AGILITY"/>
+			<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
+     	</modifications>
+   </quality>
+   <quality id="magicians_way" pos="true" karma="20" type="ADEPT_WAY" >
+   	<choices>
+   		<choice type="SKILL" uuid="e26e2313-adf9-494e-82be-62387e0d4efd" options="astral,conjuring,enchanting,sorcery"/>
+   	</choices>
+     <modifications>
+        	<itemmod type="QUALITY" ref="innate_talent"/>
+         <selmod uuid="fed1906b-51e9-481a-818f-1e63c6641b93">
+			 	<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
+       		<itemmod type="RULE" ref="MENTOR_SPIRIT_BOTH"/>
+       	</selmod>
+     </modifications>
+   </quality>
+   <quality id="speakers_way" pos="true" karma="20" type="ADEPT_WAY" >
+   	<choices>
+   		<choice type="SKILL" uuid="e26e2313-adf9-494e-82be-62387e0d4efd" options="con,influence"/>
+   	</choices>
+     <modifications>
+       	<itemmod type="QUALITY" ref="innate_talent"/>
+   		<itemmod type="DRAIN_ADEPT" ref="CHARISMA"/>
+			<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="warriors_way" pos="true" karma="20" type="ADEPT_WAY" >
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="6c21c77c-9cb0-4258-9048-777e92a3f08b" options="AGILITY,REACTION,STRENGTH"/>
+   		<choice type="SKILL" uuid="e26e2313-adf9-494e-82be-62387e0d4efd" options="close_combat,firearms"/>
+   	</choices>
+	   <modifications>
+       	<itemmod type="QUALITY" ref="innate_talent"/>
+   		<itemmod type="DRAIN_ADEPT" ref="CHOICE:6c21c77c-9cb0-4258-9048-777e92a3f08b"/>
+			<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
+     </modifications>
+   </quality>
+
+</qualities>
