@@ -146,8 +146,7 @@ public class Shadowrun6Tools {
 		CalculateDerivedAttributes.class,
 		CalculateAttributePools.class,
 		CalculateSkillPools.class,
-		CalculateMeleeAndUnarmed.class,
-		ApplyRelevanceAndEdgeMods.class
+		CalculateMeleeAndUnarmed.class
 	);
 
 	//-------------------------------------------------------------------
