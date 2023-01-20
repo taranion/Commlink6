@@ -23,6 +23,7 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ComplexForm;
@@ -69,6 +70,7 @@ import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 
 /**
  * @author prelle
@@ -365,6 +367,12 @@ public class SR6ArchetypeTest {
 		String xml = new String(raw);
 		System.out.println(xml);
 
+		List<CheckModification> edgeMods = model.getEdgeModifications(ShadowrunCheckInfluence.values());
+		if (!edgeMods.isEmpty()) {
+			System.out.println("Edge Generators");
+			edgeMods.forEach(mod -> System.out.println("-> "+mod));
+		}
+
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);
 	}
@@ -552,6 +560,12 @@ public class SR6ArchetypeTest {
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+
+		List<CheckModification> edgeMods = model.getEdgeModifications(ShadowrunCheckInfluence.values());
+		if (!edgeMods.isEmpty()) {
+			System.out.println("Edge Generators");
+			edgeMods.forEach(mod -> System.out.println("-> "+mod));
+		}
 
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);
@@ -862,6 +876,12 @@ public class SR6ArchetypeTest {
 		for (CarriedItem goo : list) {
 			System.out.println("..."+goo.getKey());
 		}
+
+		List<CheckModification> edgeMods = model.getEdgeModifications(ShadowrunCheckInfluence.values());
+		if (!edgeMods.isEmpty()) {
+			System.out.println("Edge Generators");
+			edgeMods.forEach(mod -> System.out.println("-> "+mod));
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -1127,6 +1147,12 @@ public class SR6ArchetypeTest {
 		String xml = new String(raw);
 		System.out.println(xml);
 
+		List<CheckModification> edgeMods = model.getEdgeModifications(ShadowrunCheckInfluence.values());
+		if (!edgeMods.isEmpty()) {
+			System.out.println("Edge Generators");
+			edgeMods.forEach(mod -> System.out.println("-> "+mod));
+		}
+
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);
 	}
@@ -1327,6 +1353,12 @@ public class SR6ArchetypeTest {
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+
+		List<CheckModification> edgeMods = model.getEdgeModifications(ShadowrunCheckInfluence.values());
+		if (!edgeMods.isEmpty()) {
+			System.out.println("Edge Generators");
+			edgeMods.forEach(mod -> System.out.println("-> "+mod));
+		}
 
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);
@@ -1599,6 +1631,12 @@ public class SR6ArchetypeTest {
 		String xml = new String(raw);
 		System.out.println(xml);
 
+		List<CheckModification> edgeMods = model.getEdgeModifications(ShadowrunCheckInfluence.values());
+		if (!edgeMods.isEmpty()) {
+			System.out.println("Edge Generators");
+			edgeMods.forEach(mod -> System.out.println("-> "+mod));
+		}
+
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);
 	}
@@ -1741,6 +1779,12 @@ public class SR6ArchetypeTest {
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+
+		List<CheckModification> edgeMods = model.getEdgeModifications(ShadowrunCheckInfluence.values());
+		if (!edgeMods.isEmpty()) {
+			System.out.println("Edge Generators");
+			edgeMods.forEach(mod -> System.out.println("-> "+mod));
+		}
 
 		// Try to reload it again
 		Shadowrun6Core.decode(raw);
@@ -1961,6 +2005,12 @@ public class SR6ArchetypeTest {
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+
+		List<CheckModification> edgeMods = model.getEdgeModifications(ShadowrunCheckInfluence.values());
+		if (!edgeMods.isEmpty()) {
+			System.out.println("Edge Generators");
+			edgeMods.forEach(mod -> System.out.println("-> "+mod));
+		}
 
 	}
 
