@@ -245,6 +245,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		if (item == null) {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());
 		}
+
 		if (value == null) {
 			value = new QualityValue(item, 0);
 			// Handle decisions

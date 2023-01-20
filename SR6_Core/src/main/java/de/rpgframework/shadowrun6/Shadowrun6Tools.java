@@ -871,9 +871,13 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, Shadowrun6Character model) {
+	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, int multiplier, Shadowrun6Character model) {
+		logger.log(Level.WARNING, "instantiate "+tmp);
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
+			if (multiplier>1) {
+				clone.setValue( clone.getValue()*multiplier );
+			}
 			if (clone.getLookupTable()!=null) {
 				clone.setValue( clone.getLookupTable()[clone.getValue()-1] );
 				clone.setLookupTable(null);
