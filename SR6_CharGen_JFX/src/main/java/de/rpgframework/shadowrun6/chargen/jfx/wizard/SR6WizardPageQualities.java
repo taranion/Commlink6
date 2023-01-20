@@ -40,9 +40,15 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 		lbNumber = new Label("?");
 		lbNumber.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 
-		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
+//		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getQualityController()));
 		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
+
+		QualityFilterNode filter = new QualityFilterNode(RES, selection, QualityType.NORMAL, QualityType.ADEPT_WAY);
+		selection.setFilterNode(filter);
+		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL || qv.getModifyable().getType()==QualityType.ADEPT_WAY);
+		selection.setRequirementResolver(Shadowrun6Tools.requirementResolver(Locale.getDefault()));
+		selection.setModificationResolver(Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 
 		bxDescription = new GenericDescriptionVBox(
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),

@@ -287,7 +287,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "street_wyrd/data/qualities1.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
-//			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "street_wyrd/data/qualities2.xml");
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "street_wyrd/data/qualities2.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities (Adept Ways)");
 //			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "street_wyrd/data/metamagics.xml");
 //			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "street_wyrd/data/metamagics2.xml");
 			list = Shadowrun6Core.loadDataItems(TraditionList.class, Tradition.class, set, clazz,"street_wyrd/data/traditions.xml");
@@ -300,7 +301,6 @@ public class Shadowrun6DataPlugin  {
 //			logger.log(Level.DEBUG, "Loaded "+list.size()+" spirits");
 //			list = Shadowrun6Core.loadDataItems(FocusList.class, Focus.class, set, clazz, "street_wyrd/data/foci.xml");
 //			logger.log(Level.DEBUG, "Loaded "+list.size()+" foci");
-			//System.exit(1);
 
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH, Locale.GERMAN);

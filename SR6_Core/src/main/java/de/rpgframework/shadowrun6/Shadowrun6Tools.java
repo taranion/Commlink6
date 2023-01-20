@@ -63,6 +63,8 @@ import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
+import de.rpgframework.shadowrun.CritterPower;
+import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
@@ -92,6 +94,7 @@ import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
+import de.rpgframework.shadowrun6.proc.ApplyRelevanceAndEdgeMods;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
@@ -143,7 +146,8 @@ public class Shadowrun6Tools {
 		CalculateDerivedAttributes.class,
 		CalculateAttributePools.class,
 		CalculateSkillPools.class,
-		CalculateMeleeAndUnarmed.class
+		CalculateMeleeAndUnarmed.class,
+		ApplyRelevanceAndEdgeMods.class
 	);
 
 	//-------------------------------------------------------------------
@@ -319,6 +323,8 @@ public class Shadowrun6Tools {
 					} else {
 						return attrName+" "+valMod.getValue();
 					}
+				case CRITTER_POWER:
+					return ((CritterPower)valMod.getResolvedKey()).getName(loc)+" "+valMod.getValue();
 				case HOOK:
 					return RES.format("modification.hook.withCap", loc, valMod.getRawValue(),ItemHook.valueOf(valMod.getKey()).getName(loc));
 				case ITEM_ATTRIBUTE:
@@ -369,7 +375,7 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static String getModificationString(ComplexDataItem data, Modification mod) {
+	public static String getModificationString(ComplexDataItem data, Modification mod, Locale loc) {
 		ShadowrunReference type = (ShadowrunReference) mod.getReferenceType();
 		if (mod instanceof ValueModification) {
 			ValueModification valMod = (ValueModification)mod;
@@ -393,11 +399,13 @@ public class Shadowrun6Tools {
 
 				if (valMod.getValue()>0) {
 					if (valMod.getSet()==ValueType.MAX)
-						return ShadowrunAttribute.valueOf(valMod.getKey()).getName()+" "+valMod.getValue();
-					return ShadowrunAttribute.valueOf(valMod.getKey()).getName()+" +"+valMod.getValue();
+						return ShadowrunAttribute.valueOf(valMod.getKey()).getName(loc)+" "+valMod.getValue();
+					return ShadowrunAttribute.valueOf(valMod.getKey()).getName(loc)+" +"+valMod.getValue();
 				} else {
-					return ShadowrunAttribute.valueOf(valMod.getKey()).getName()+" "+valMod.getValue();
+					return ShadowrunAttribute.valueOf(valMod.getKey()).getName(loc)+" "+valMod.getValue();
 				}
+			case CRITTER_POWER:
+				return ((CritterPower)valMod.getResolvedKey()).getName(loc)+" "+valMod.getValue();
 			case SKILL:
 				if (valMod.getConnectedChoice()!=null) {
 					Choice choice = data.getChoice(valMod.getConnectedChoice());
@@ -420,9 +428,9 @@ public class Shadowrun6Tools {
 					return "Unknown skill '"+valMod.getKey()+"'";
 				}
 				if (valMod.getValue()>0) {
-					return skill.getName()+" +"+valMod.getValue();
+					return skill.getName(loc)+" +"+valMod.getValue();
 				} else {
-					return skill.getName()+" "+valMod.getValue();
+					return skill.getName(loc)+" "+valMod.getValue();
 				}
 			case QUALITY:
 				if (valMod.getConnectedChoice()!=null) {
@@ -436,9 +444,9 @@ public class Shadowrun6Tools {
 				}
 				String prefix = (valMod.isRemove())?"- ":"";
 				if (valMod.getValue()>0) {
-					return prefix+quality.getName()+" +"+valMod.getValue();
+					return prefix+quality.getName(loc)+" +"+valMod.getValue();
 				} else {
-					return prefix+quality.getName()+" "+valMod.getValue();
+					return prefix+quality.getName(loc)+" "+valMod.getValue();
 				}
 			default:
 				return "Unknown value type "+type;
@@ -453,8 +461,8 @@ public class Shadowrun6Tools {
 			String prefix = valMod.isRemove()?"- ":"";
 			if (resolved!=null) {
 				if (valMod.getDecisions().isEmpty())
-					return prefix+resolved.getName(Locale.getDefault());
-				return prefix+resolved.getName(Locale.getDefault())+"(..)";
+					return prefix+resolved.getName(loc);
+				return prefix+resolved.getName(loc)+"(..)";
 			}
 
 //			switch (type) {
@@ -630,6 +638,11 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve metamagics or echoes");
 			for (MetamagicOrEchoValue tmp : model.getMetamagicOrEchoes()) {
 				MetamagicOrEcho resolved = Shadowrun6Core.getItem(MetamagicOrEcho.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+			logger.log(Level.DEBUG, "resolve critter powers");
+			for (CritterPowerValue tmp : model.getCritterPowers()) {
+				CritterPower resolved = Shadowrun6Core.getItem(CritterPower.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve lifestyles");
@@ -1864,4 +1877,9 @@ public class Shadowrun6Tools {
 //		return filtered;
 	}
 
+	public static List<CheckModification> getEdgeGenerators(Shadowrun6Character model) {
+		List<CheckModification> ret = new ArrayList<>();
+
+		return ret;
+	}
 }

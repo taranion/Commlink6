@@ -178,7 +178,7 @@ public class QualityPathPage extends Page {
 	private VBox getModificationBox(QualityPathStep item) {
 		return RPGFrameworkJavaFX.getModificationsBox(
 				item,
-				m -> Shadowrun6Tools.getModificationString(item, m)
+				m -> Shadowrun6Tools.getModificationString(item, m, Locale.getDefault())
 				);
 	}
 

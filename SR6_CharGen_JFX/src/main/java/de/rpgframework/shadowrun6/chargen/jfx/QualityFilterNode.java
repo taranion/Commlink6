@@ -52,9 +52,9 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	private ResourceBundle RES;
 	private List<QualityType> allowedTypes;
 	private List<QualityCategory> allowedCategories;
-	private boolean showSURGE;
 
 	private ChoiceBox<What> cbWhat;
+	private ChoiceBox<QualityType> cbType;
 	private ChoiceBox<QualityCategory> cbCategory;
 	private Button btnSort;
 	private TextField tfSearch;
@@ -97,12 +97,21 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 			public What fromString(String arg0) {return null;}
 		});
 
+		cbType = new ChoiceBox<QualityType>();
+		cbType.getItems().add(null);
+		cbType.getItems().addAll(allowedTypes);
+		cbType.setValue(null);
+		cbType.setConverter(new StringConverter<QualityType>() {
+			public String toString(QualityType type) { return (type==null)?QualityType.getAllName(Locale.getDefault()):type.getName();}
+			public QualityType fromString(String arg0) {return null;}
+		});
+
 		cbCategory = new ChoiceBox<QualityCategory>();
 		cbCategory.getItems().add(null);
 		cbCategory.getItems().addAll(QualityCategory.values());
 		cbCategory.setValue(null);
 		cbCategory.setConverter(new StringConverter<QualityCategory>() {
-			public String toString(QualityCategory cat) { return (cat!=null)?cat.getName(Locale.getDefault()):ResourceI18N.get(RES, "quality.category.all") ;}
+			public String toString(QualityCategory cat) { return (cat!=null)?cat.getName(Locale.getDefault()):QualityCategory.getAllName(Locale.getDefault()) ;}
 			public QualityCategory fromString(String arg0) {return null;}
 		});
 
@@ -115,7 +124,7 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		HBox line = new HBox(cbWhat, cbCategory, btnSort);
+		HBox line = new HBox(2,cbWhat, cbType, cbCategory, btnSort);
 		HBox.setHgrow(line, Priority.ALWAYS);
 		line.setMaxWidth(Double.MAX_VALUE);
 		cbWhat.setMaxWidth(Double.MAX_VALUE);
@@ -141,6 +150,10 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 			logger.log(Level.INFO, "Selection changed "+n);
 			refreshAvailable();
 		});
+		cbType.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "Selection changed "+n);
+			refreshAvailable();
+		});
 		cbCategory.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.INFO, "Selection changed "+n);
 			refreshAvailable();
@@ -153,11 +166,13 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	private void refreshAvailable() {
 		What n = cbWhat.getValue();
 		QualityCategory c = cbCategory.getValue();
+		QualityType restrictType = cbType.getValue();
 		final String search = tfSearch.getText().toLowerCase();
 		List<Quality> unfiltered = parent.getController().getAvailable();
 		List<Quality> filtered = unfiltered.stream()
 			.filter(q -> allowedTypes.contains(q.getType()))
 			.filter(q -> (n==What.ALL || (n==What.NEGATIVE && !q.isPositive()) || (n==What.POSITIVE && q.isPositive())))
+			.filter(q -> (restrictType==null || restrictType==q.getType()))
 			.filter(q -> (c==null || (!allowedCategories.isEmpty() && q.getCategory()==c)))
 			.filter(q -> (search==null || search.isBlank() || q.getName().toLowerCase().contains(search)))
 			.collect(Collectors.toList());
@@ -185,6 +200,8 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 	private void checkCategoryVisibility() {
 		cbCategory.setVisible(!allowedCategories.isEmpty());
 		cbCategory.setManaged(!allowedCategories.isEmpty());
+		cbType.setVisible(allowedTypes.size()>1);
+		cbType.setManaged(allowedTypes.size()>1);
 	}
 
 	//-------------------------------------------------------------------

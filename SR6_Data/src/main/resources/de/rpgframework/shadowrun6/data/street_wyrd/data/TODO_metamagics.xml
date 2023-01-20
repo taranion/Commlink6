@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+	<!-- Adept metamagic -->
+	<metaecho id="animal_attunement" type="METAMAGIC_ADEPT">
+		<requires>
+			<powerreq ref="animal_empathy"/>
+		</requires>
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+	</metaecho>
+	<metaecho id="astral_projection" type="METAMAGIC_ADEPT">
+		<requires>
+			<powerreq ref="astral_perception"/>
+		</requires>
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+	</metaecho>
+	<metaecho id="finding_your_way" type="METAMAGIC_ADEPT" multi="yes" select="ADEPT_WAY">
+	</metaecho>
+	<metaecho id="infusion" type="METAMAGIC_ADEPT">
+		<requires>
+			<powerreq ref="adept_centering"/>
+		</requires>
+	</metaecho>
+	<metaecho id="item_attunement" type="METAMAGIC_ADEPT" multi="yes" select="CARRIED_ITEM">
+		<modifications>
+			<skillmod name="INITIATE_GRADE" val="1" cond="true"/>
+		</modifications>
+	</metaecho>
+	<metaecho id="virtuoso" type="METAMAGIC_ADEPT" multi="yes">
+		<requires>
+			<powerreq ref="enthralling_performance"/>
+		</requires>
+	</metaecho>
+	
+	<!-- Mage metamagic -->
+	<!--  Metaplanar Studies -->
+	<metaecho id="cleansing" type="METAMAGIC" />
+	<metaecho id="divination" type="METAMAGIC" />
+	<metaecho id="durable_astral_form" type="METAMAGIC" />
+	<metaecho id="extended_masking" type="METAMAGIC" >
+		<requires>
+			<metaechoreq ref="masking"/>
+		</requires>
+	</metaecho>
+	<metaecho id="improved_astral_form" type="METAMAGIC" />
+	<metaecho id="paradigm_shift" type="METAMAGIC" />
+	    <!--  Should enable selection of a new tradition -->
+	<metaecho id="psychometry" type="METAMAGIC" />
+	<metaecho id="sensing" type="METAMAGIC" />
+	<!--  Practical Conjuration -->
+	<metaecho id="channeling" type="METAMAGIC" />
+	<metaecho id="exorcism" type="METAMAGIC" />
+	<metaecho id="invocation" type="METAMAGIC" />
+	<metaecho id="master_summoner" type="METAMAGIC" />
+	<!--  Apotropaic Magic -->
+	<metaecho id="absorption" type="METAMAGIC" >
+		<requires>
+			<metaechoreq ref="masking"/>
+		</requires>
+	</metaecho>
+	<metaecho id="reflection" type="METAMAGIC" >
+		<requires>
+			<metaechoreq ref="shielding"/>
+		</requires>
+	</metaecho>
+	<metaecho id="severing" type="METAMAGIC" >
+		<requires>
+			<metaechoreq ref="shielding"/>
+		</requires>
+	</metaecho>
+	
+	<!-- Enchanting -->
+	<metaecho id="resilient_artificing" type="METAMAGIC" />
+	
+	<!-- Applied Thaumaturgy -->
+	<metaecho id="advanced_rites" type="METAMAGIC" />
+	<metaecho id="efficient_ritual" type="METAMAGIC" />
+	<metaecho id="sympathetic_linking" type="METAMAGIC" />
+
+	<!-- Blood -->
+	<metaecho id="sacrifice" type="METAMAGIC" />
+	
+</metaechoes>

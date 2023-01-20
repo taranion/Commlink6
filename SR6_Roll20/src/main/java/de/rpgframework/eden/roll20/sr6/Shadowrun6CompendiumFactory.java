@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -63,12 +64,21 @@ public class Shadowrun6CompendiumFactory {
 	private final static String VALIDCHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
 	private final static Random RANDOM = new Random();
 
-	private final static String createRandomID() {
-		StringBuffer buf = new StringBuffer();
-		for (int i=0; i<16; i++) {
-			buf.append(VALIDCHARS.charAt(RANDOM.nextInt(VALIDCHARS.length())));
-		}
-		return buf.toString();
+	//-------------------------------------------------------------------
+	private static String capitalize(String name) {
+		name = name.replace(',', ' ');
+
+		char[] chars = name.toCharArray();
+		  boolean found = false;
+		  for (int i = 0; i < chars.length; i++) {
+		    if (!found && Character.isLetter(chars[i])) {
+		      chars[i] = Character.toUpperCase(chars[i]);
+		      found = true;
+		    } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
+		      found = false;
+		    }
+		  }
+		  return String.valueOf(chars);
 	}
 
 	//-------------------------------------------------------------------
@@ -168,6 +178,8 @@ public class Shadowrun6CompendiumFactory {
 		createAugmentations(module,localeCallback, true);
 		createArmor      (module,localeCallback, false);
 		createArmor      (module,localeCallback, true);
+		createDevices    (module,localeCallback, false);
+		createDevices    (module,localeCallback, true);
 		createOtherGear  (module,localeCallback, false);
 		createOtherGear  (module,localeCallback, true);
 //		createVehicle    (module, zipOut, localeCallback, shallow);
@@ -219,8 +231,8 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
+			row.createCell(1, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 			row.createCell(4, CellType.STRING).setCellValue(item.getId());
@@ -264,9 +276,9 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue("Powers:"+item.getName(locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
+			row.createCell(1, CellType.STRING).setCellValue("Powers:"+capitalize(item.getName(locales[0])));
+			row.createCell(2, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(3, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(4, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 			row.createCell(5, CellType.STRING).setCellValue(item.getId());
@@ -316,11 +328,11 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
-				row.createCell(1, CellType.STRING).setCellValue("Spells:"+item.getName(locales[0]));
+				row.createCell(1, CellType.STRING).setCellValue("Spells:"+capitalize(item.getName(locales[0])));
 			}
-			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
@@ -380,11 +392,11 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
-				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo("Spells:"+item.getName(locales[0]), item, locales[0]));
+				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo("Spells:"+capitalize(item.getName(locales[0])), item, locales[0]));
 			}
-			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
@@ -430,11 +442,11 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
-				row.createCell(1, CellType.STRING).setCellValue("Metamagic:"+item.getName(locales[0]));
+				row.createCell(1, CellType.STRING).setCellValue("Metamagic:"+capitalize(item.getName(locales[0])));
 			}
-			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
@@ -479,11 +491,11 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
-				row.createCell(1, CellType.STRING).setCellValue("Spells:"+item.getName(locales[0]));
+				row.createCell(1, CellType.STRING).setCellValue("Spells:"+capitalize(item.getName(locales[0])));
 			}
-			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
@@ -527,11 +539,11 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
-				row.createCell(1, CellType.STRING).setCellValue("Echoes:"+item.getName(locales[0]));
+				row.createCell(1, CellType.STRING).setCellValue("Echoes:"+capitalize(item.getName(locales[0])));
 			}
-			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
@@ -567,8 +579,8 @@ public class Shadowrun6CompendiumFactory {
 			return original.substring(0, costIndex);
 		if (bonusIndex>0)
 			return original.substring(0, bonusIndex);
-		System.err.println("Fail for: "+original);
-		return null;
+//		System.err.println("Fail for: "+original);
+		return "";
 	}
 
 	//-------------------------------------------------------------------
@@ -620,10 +632,13 @@ public class Shadowrun6CompendiumFactory {
 		});
 		for (Quality item : list) {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
+			if (item.getDescription(locales[0])==null) {
+				logger.log(Level.ERROR, "No description for "+item);
+			}
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
+			row.createCell(1, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3, CellType.STRING).setCellValue(pretty(extractDescripton(pretty(item.getDescription(locales[0])))));
 			row.createCell(4, CellType.STRING).setCellValue(item.getId());
@@ -668,9 +683,9 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
-			row.createCell(1, CellType.STRING).setCellValue("Qualities:"+item.getName(locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
+			row.createCell(1, CellType.STRING).setCellValue("Qualities:"+capitalize(item.getName(locales[0])));
+			row.createCell(2, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(3, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(4, CellType.STRING).setCellValue(pretty(extractDescripton(pretty(item.getDescription(locales[0])))));
 			row.createCell(5, CellType.STRING).setCellValue(item.getId());
@@ -728,12 +743,12 @@ public class Shadowrun6CompendiumFactory {
 
 			if (item.getVariants().isEmpty() || !item.requiresVariant()) {
 				Row row = sheet.createRow(++rowNum);
-				row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+				row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 				if (blob) {
 					String first = Converter.getCategoryPage(item,locales[0]);
 					row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
 				}
-				row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+				row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 				row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 				row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
 				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-augment");
@@ -789,22 +804,23 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
 		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
 		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-type");
-		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
-		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
-		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
-		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-availability");
-		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-cost");
-		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost_text");
-		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-skill");
-		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-skillspec");
-		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-dv");
-		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-close");
-		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-near");
-		head.createCell(16+blobOffset, CellType.STRING).setCellValue("data-medium");
-		head.createCell(17+blobOffset, CellType.STRING).setCellValue("data-far");
-		head.createCell(18+blobOffset, CellType.STRING).setCellValue("data-extreme");
-		head.createCell(19+blobOffset, CellType.STRING).setCellValue("data-firing_modes");
-		head.createCell(20+blobOffset, CellType.STRING).setCellValue("data-ammo");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-Category");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-availability");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-cost_text");
+		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-skill");
+		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-skillspec");
+		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-dv");
+		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-close");
+		head.createCell(16+blobOffset, CellType.STRING).setCellValue("data-near");
+		head.createCell(17+blobOffset, CellType.STRING).setCellValue("data-medium");
+		head.createCell(18+blobOffset, CellType.STRING).setCellValue("data-far");
+		head.createCell(19+blobOffset, CellType.STRING).setCellValue("data-extreme");
+		head.createCell(20+blobOffset, CellType.STRING).setCellValue("data-firing_modes");
+		head.createCell(21+blobOffset, CellType.STRING).setCellValue("data-ammo");
 
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
@@ -821,18 +837,19 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
 				String first = Converter.getCategoryPage(item,locales[0]);
 				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
 			}
-			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue( (item.getItemType()==ItemType.WEAPON_CLOSE_COMBAT)?"weapon-melee":"weapon-ranged");
-			row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getId());
+			row.createCell(5+blobOffset, CellType.STRING).setCellValue( (item.getItemType()==ItemType.WEAPON_CLOSE_COMBAT)?"Melee":"Ranged");
+			row.createCell(6+blobOffset, CellType.STRING).setCellValue(item.getId());
 
-			Converter.convertWeapon(item, locales[0], row,6+blobOffset);
+			Converter.convertWeapon(item, locales[0], row,7+blobOffset);
 		}
 
 		for (int i=0; i<20; i++) {
@@ -873,11 +890,11 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
-				row.createCell(1, CellType.STRING).setCellValue("Rituals:"+item.getName(locales[0]));
+				row.createCell(1, CellType.STRING).setCellValue("Rituals:"+capitalize(item.getName(locales[0])));
 			}
-			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue(item.getId());
@@ -931,13 +948,13 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
 			row.createCell(3, CellType.STRING).setCellValue(item.getId());
 
 			Converter.convertVehicle(item, locales[0], row);
-			row.createCell(17, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(17, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 		}
 
 		for (int i=0; i<11; i++) {
@@ -984,12 +1001,12 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
 				String first = Converter.getCategoryPage(item,locales[0]);
 				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
 			}
-			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-armor");
@@ -1027,6 +1044,7 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-availability");
 		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-cost");
 		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost_text");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-rating");
 
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
@@ -1049,15 +1067,27 @@ public class Shadowrun6CompendiumFactory {
 				continue;
 			if (item.getItemType()==ItemType.CYBERWARE || item.getItemType()==ItemType.BIOWARE)
 				continue;
+			switch (item.getItemSubtype()) {
+			case COMMLINK:
+			case CYBERDECK:
+			case RIGGER_CONSOLE:
+			case TAC_NET:
+				continue;
+			default:
+				if ("cyberjack".equals(item.getId()))
+					continue;
+				if ("control_rig".equals(item.getId()))
+					continue;
+			}
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
 				String first = Converter.getCategoryPage(item,locales[0]);
 				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
 			}
-			row.createCell(1+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-misc");
@@ -1068,6 +1098,101 @@ public class Shadowrun6CompendiumFactory {
 
 		for (int i=0; i<11; i++) {
 			if (i==(3+blobOffset) ) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
+			sheet.autoSizeColumn(i);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static void createDevices(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		int blobOffset = blob?1:0;
+		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Devices");
+		int rowNum =0;
+		Row head = sheet.createRow(0);
+		head.createCell(0, CellType.STRING).setCellValue("Name");
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-type");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-Category");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-availability");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-cost_text");
+		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-device_type");
+		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-rating");
+		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-device_rating");
+		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-dattack");
+		head.createCell(16+blobOffset, CellType.STRING).setCellValue("data-sleaze");
+		head.createCell(17+blobOffset, CellType.STRING).setCellValue("data-data_processing");
+		head.createCell(18+blobOffset, CellType.STRING).setCellValue("data-firewall");
+		head.createCell(19+blobOffset, CellType.STRING).setCellValue("data-active_program_slots");
+
+		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
+		Collections.sort(list, new Comparator<ItemTemplate>() {
+			public int compare(ItemTemplate o1, ItemTemplate o2) {
+				int cmp = Integer.compare(o1.getItemType().ordinal(), o2.getItemType().ordinal());
+				if (cmp!=0) return cmp;
+				cmp = Integer.compare(o1.getItemSubtype().ordinal(), o2.getItemSubtype().ordinal());
+				if (cmp!=0) return cmp;
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		for (ItemTemplate item : list) {
+			switch (item.getItemSubtype()) {
+			case COMMLINK:
+			case CYBERDECK:
+			case RIGGER_CONSOLE:
+			case TAC_NET:
+				break;
+			default:
+				if ("cyberjack".equals(item.getId()))
+					break;
+				if ("control_rig".equals(item.getId()))
+					break;
+				continue;
+			}
+			Locale[] locales = localeCallback.apply(item.getPageReferences());
+
+			Row row = sheet.createRow(++rowNum);
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
+			if (blob) {
+				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo("Devices:"+capitalize(item.getName(locales[0])), item, locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+			switch (item.getItemSubtype()) {
+			case COMMLINK:
+				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-commlink"); break;
+			case CYBERDECK:
+				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-cyberdeck"); break;
+			case RIGGER_CONSOLE:
+				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-command_console"); break;
+			case TAC_NET:
+				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-mtoc"); break;
+			default:
+				if ("cyberjack".equals(item.getId())) {
+					row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-cyberjack");
+				} else if ("control_rig".equals(item.getId())) {
+					row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-control_rig");
+				}
+			}
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-misc");
+			row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getId());
+
+			Converter.convertDevice(item, locales[0], row, 6+blobOffset);
+		}
+
+		for (int i=0; i<20; i++) {
+			if (i==(2+blobOffset) || i==(3+blobOffset)) {
 				sheet.setColumnWidth(i, 5000);
 				continue;
 			};
@@ -1092,7 +1217,7 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-description");
 		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
 
-		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-rating");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-pr");
 		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-body_base");
 		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-body_modified");
 		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-agility_base");
@@ -1125,13 +1250,13 @@ public class Shadowrun6CompendiumFactory {
 			Locale[] locales = localeCallback.apply(item.getPageReferences());
 
 			Row row = sheet.createRow(++rowNum);
-			row.createCell(0, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			if (blob) {
-				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo("NPCs:"+item.getName(locales[0]), item, locales[0]));
+				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo("NPCs:"+capitalize(item.getName(locales[0])), item, locales[0]));
 			}
 			row.createCell(1+blobOffset, CellType.STRING).setCellValue("NPCs");
-			row.createCell(2+blobOffset, CellType.STRING).setCellValue(item.getType().name());
-			row.createCell(3+blobOffset, CellType.STRING).setCellValue(item.getName(locales[0]));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(item.getType().name().toLowerCase());
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
 			row.createCell(4+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
 			row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getDescription(locales[0]));
 			row.createCell(6+blobOffset, CellType.STRING).setCellValue(item.getId());

@@ -45,10 +45,11 @@ public class SR6CompendiumExportTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		Locale.setDefault(Locale.ENGLISH);
+		LicenseManager.storeGlobalLicenses(List.of("SHADOWRUN6/CORE","SHADOWRUN6/COMPANION","SHADOWRUN6/FIRING_SQUAD"));
 		LicenseManager.storeUserLicensedDatasets(List.of("SHADOWRUN6/CORE"));
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-//		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(3));
+		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(3));
 		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(2));
 		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(1));
 

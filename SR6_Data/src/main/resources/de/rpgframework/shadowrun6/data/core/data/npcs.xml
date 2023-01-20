@@ -55,7 +55,7 @@
 			<item ref="meta_link"/>
 		</gear>
 	</npc>
-	
+
 	<npc id="go_ganger" rating="1" type="GRUNT">
 		<attributes>
 			<attribute id="BODY"      value="2" />
@@ -87,9 +87,9 @@
 		</geardef>
 		<gear>
 			<item ref="meta_link"/>
-			<item ref="gang_leathers"/> 
-			<item ref="bike_chain"/> 
-			<item ref="streetline_special"/> 
+			<item ref="gang_leathers"/>
+			<item ref="bike_chain"/>
+			<item ref="streetline_special"/>
 		</gear>
 	</npc>
 	<npc id="debt_collector" rating="1" type="GRUNT">
@@ -114,13 +114,13 @@
 			<skillval ref="perception"   value="3"/>
 		</skills>
 		<gear>
-			<item ref="armor_clothing"/> 
+			<item ref="armor_clothing"/>
 			<item ref="sony_emporer"/>
-			<item ref="club"/> 
-			<item ref="beretta_201T"/> 
+			<item ref="club"/>
+			<item ref="beretta_201T"/>
 		</gear>
 	</npc>
-	
+
 	<!-- 2 -->
 	<npc id="brute" rating="2" type="GRUNT">
 		<attributes>
@@ -146,10 +146,10 @@
 			<skillval ref="perception"   value="3"/>
 		</skills>
 		<gear>
-			<item ref="armor_clothing"/> 
+			<item ref="armor_clothing"/>
 			<item ref="sony_emporer"/>
-			<item ref="beretta_101T"/> 
-			<item ref="knucks"/> 
+			<item ref="beretta_101T"/>
+			<item ref="knucks"/>
 		</gear>
 	</npc>
 	<npc id="data_harvester" rating="2" type="GRUNT">
@@ -184,15 +184,15 @@
 		<gear>
 			<item ref="cyberjack">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-			</item> 
-			<item ref="gang_leathers"/> 
+			</item>
+			<item ref="gang_leathers"/>
 			<item ref="renraku_sensei"/>
 			<item ref="erika_mcd6"/>
-			<item ref="combat_knife"/> 
-			<item ref="fichetti_security_600"/> 
+			<item ref="combat_knife"/>
+			<item ref="fichetti_security_600"/>
 		</gear>
 	</npc>
-	
+
 	<!-- 3 -->
 	<npc id="lone_star_patrol" rating="3" type="GRUNT">
 		<attributes>
@@ -220,11 +220,11 @@
 			<skillval ref="piloting"     value="4"/>
 		</skills>
 		<gear>
-			<item ref="armor_vest"/> 
+			<item ref="armor_vest"/>
 			<item ref="renraku_sensei"/>
 			<item ref="jazz" count="2"/>
-			<item ref="colt_america_l36"/> 
-			<item ref="stun_baton"/> 
+			<item ref="colt_america_l36"/>
+			<item ref="stun_baton"/>
 		</gear>
 	</npc>
 	<npc id="securityrigger" rating="3" type="GRUNT">
@@ -255,12 +255,12 @@
 			<skillval ref="stealth"      value="2"/>
 		</skills>
 		<gear>
-			<item ref="armor_vest"/> 
-			<item ref="ares_light_fire_70"/> 
-			<item ref="telescopic_staff"/> 
+			<item ref="armor_vest"/>
+			<item ref="ares_light_fire_70"/>
+			<item ref="telescopic_staff"/>
 		</gear>
 	</npc>
-	
+
 	<!-- 4 -->
 	<npc id="soldato" rating="4" type="GRUNT">
 		<attributes>
@@ -289,9 +289,9 @@
 			<skillval ref="piloting"     value="1"/>
 		</skills>
 		<gear>
-			<item ref="armor_clothing"/> 
-			<item ref="sap"/> 
-			<item ref="beretta_101T"/> 
+			<item ref="armor_clothing"/>
+			<item ref="sap"/>
+			<item ref="beretta_101T"/>
 		</gear>
 	</npc>
 	<npc id="blademaster" rating="4" type="GRUNT">
@@ -315,16 +315,22 @@
 				<skillspec ref="blades" value="2" />
 			</skillval>
 			<skillval ref="outdoors"     value="2">
-				<skillspec ref="tracking_urban" value="2" />
+				<skillspec ref="tracking" value="2" />
 			</skillval>
 			<skillval ref="perception"   value="4"/>
 			<skillval ref="stealth"      value="5"/>
 		</skills>
+	   <adeptpowers>
+      	<adeptpowerval ref="astral_perception"/>
+      	<adeptpowerval ref="improved_reflexes" value="1"/>
+   	</adeptpowers>
 		<gear>
-			<item ref="katana"/> 
+      	<item mode="CARRIED" ref="armor_vest" uuid="3071a720-8b99-4177-a428-76f1ab2c0df1"/>
+      	<item mode="CARRIED" ref="erika_elite" uuid="55df17f1-14f8-41a7-bcf5-ec4513662676"/>
+      	<item mode="CARRIED" ref="katana" uuid="adbf2ae1-2200-4dab-b36f-47c1348db764"/>
 		</gear>
 	</npc>
-	
+
 	<!-- 5 -->
 	<npc id="combat_mage" rating="5" type="GRUNT">
 		<attributes>
@@ -356,9 +362,9 @@
 			<skillval ref="stealth"      value="2"/>
 		</skills>
 		<gear>
-			<item ref="colt_america_l36"/> 
-			<item ref="stun_baton"/> 
+			<item ref="colt_america_l36"/>
+			<item ref="stun_baton"/>
 		</gear>
 	</npc>
-	
+
 </npcs>
