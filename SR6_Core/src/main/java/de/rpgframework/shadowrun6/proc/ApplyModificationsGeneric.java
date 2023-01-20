@@ -19,6 +19,8 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
+import de.rpgframework.shadowrun.CritterPower;
+import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
@@ -39,9 +41,9 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class ApplyModificationsGeneric implements ProcessingStep {
-	
+
 	private final static Logger logger = System.getLogger(ApplyModificationsGeneric.class.getPackageName());
-	
+
 	private Shadowrun6Character model;
 
 	//-------------------------------------------------------------------
@@ -61,6 +63,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			switch ((ShadowrunReference) tmp.getReferenceType()) {
 			case ADEPT_POWER: return applyAdeptPower(model, mod);
 			case ATTRIBUTE  : return applyAttribute(model, (ValueModification) mod);
+			case CRITTER_POWER: return applyCritterPower(model, mod);
 			case GEAR       : return applyGear(model, mod);
 			case LIFESTYLE  : return applyLifestyle(model, mod);
 			case QUALITY    : return applyQuality(model, mod);
@@ -72,7 +75,6 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			default:
 				logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
 				System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
-				System.exit(1);
 			}
 		}
 		return false;
@@ -90,9 +92,15 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
+				logger.log(Level.INFO, "process "+tmp);
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
-				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED || tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE || tmp.getReferenceType()==ShadowrunReference.SKILL || tmp.getReferenceType()==ShadowrunReference.QUALITY) {
+				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
+						|| tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE
+						|| tmp.getReferenceType()==ShadowrunReference.SKILL
+						|| tmp.getReferenceType()==ShadowrunReference.QUALITY
+						|| tmp.getReferenceType()==ShadowrunReference.CRITTER_POWER
+						) {
 					if (!applyModification(model, tmp)) {
 						unprocessed.add(tmp);
 					}
@@ -191,7 +199,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		}
 		result.get().setInjectedBy(mod.getSource());
 		result.get().addModification(mod);
-		
+
 		logger.log(Level.DEBUG, "Put item in inventory: {0}   (from {1})", result.get(), mod.getSource());
 		model.addCarriedItem(result.get());
 		return true;
@@ -207,7 +215,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 //		}
 //		SR6Lifestyle value = model.getLifestyle(uuidToSet);
 //		if (value == null) {
-		SR6Lifestyle 
+		SR6Lifestyle
 			value = new SR6Lifestyle(item);
 			if (mod instanceof ValueModification) {
 				value.setDistributed( ((ValueModification)mod).getValue() );
@@ -253,6 +261,35 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 
 		if (item.hasLevel()) {
 			logger.log(Level.DEBUG, " Level is now distr={0}   mod={1} = " + value.getName(), value.getDistributed(),
+					value.getModifier());
+			logger.log(Level.DEBUG, "  result=" + value);
+		}
+		return true;
+	}
+
+	//-------------------------------------------------------------------
+	private static boolean applyCritterPower(Shadowrun6Character model, DataItemModification mod) {
+		CritterPower item = Shadowrun6Core.getItem(CritterPower.class, mod.getKey());
+		CritterPowerValue value = model.getCritterPower(mod.getKey());
+		if (item == null) {
+			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());
+		}
+		if (value == null) {
+			value = new CritterPowerValue(item, 0);
+			// Handle decisions
+			for (Decision dec : mod.getDecisions()) {
+				value.addDecision(dec);
+				logger.log(Level.DEBUG, "Add decision {0} to critter power {1}", dec, item);
+			}
+
+			model.addCritterPower(value);
+			logger.log(Level.DEBUG, "Add critter power {0} to character", item);
+		}
+		// Mark as auto-added
+		value.addModification(mod);
+
+		if (item.hasLevel()) {
+			logger.log(Level.INFO, " Level is now distr={0}   mod={1} = " + value.getName(), value.getDistributed(),
 					value.getModifier());
 			logger.log(Level.DEBUG, "  result=" + value);
 		}

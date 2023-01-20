@@ -78,7 +78,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		sins      = new SR6SINLeveller(this);
 		lifestyles= new SR6LifestyleLeveller(this);
 		contacts  = new SR6ContactLeveller(this);
-		
+
 		setupProcessChain();
 	}
 

@@ -49,11 +49,11 @@ public class Shadowrun6Core extends GenericCore {
 	private static Logger logger = System.getLogger("shadowrun6");
 
 	private static MultiLanguageResourceBundle i18NResources;
-	
+
 	private static PriorityTable prioTable;
-	
+
 	private static GsonBuilder gson;
-	
+
 	//-------------------------------------------------------------------
 	static {
 		i18NResources = new MultiLanguageResourceBundle(Shadowrun6Core.class.getPackageName()+".i18n.core", Locale.ENGLISH, Locale.GERMAN, Locale.FRANCE, Locale.forLanguageTag("pt"));
@@ -98,7 +98,7 @@ public class Shadowrun6Core extends GenericCore {
 		return prioTable.get(type).get(prio);
 	}
 
-	
+
 	//
 //	//-------------------------------------------------------------------
 //	public static <E extends DataItem> void loadDataItems(Class<? extends List<E>> cls, DataSet plugin, InputStream in) {
@@ -174,7 +174,7 @@ public class Shadowrun6Core extends GenericCore {
 			character.setChargenSettingsJSON(json);
 			if (logger.isLoggable(Level.TRACE)) {
 				json = gson.create().toJson(character.getCharGenSettings(Object.class));
-				logger.log(Level.TRACE, json);				
+				logger.log(Level.TRACE, json);
 			}
 			StringWriter out = new StringWriter();
 			serializer.write(character, out);
