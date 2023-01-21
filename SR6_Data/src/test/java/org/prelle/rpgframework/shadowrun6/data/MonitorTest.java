@@ -1,33 +1,23 @@
 package org.prelle.rpgframework.shadowrun6.data;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
-import de.rpgframework.shadowrun6.items.ItemSubType;
-import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemType;
-import de.rpgframework.shadowrun6.items.ItemUtil;
-import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
-import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 
 /**
  * @author prelle
@@ -78,6 +68,28 @@ public class MonitorTest {
 		assertNotNull(val);
 		System.out.println(val.getPool().toExplainString());
 		assertEquals(13, val.getModifiedValue());
+
+		int[] expect = new int[] {0,0,-1,-1,-1,-2,-2,-2,-3,-3,-3,-4,-5};
+		int[] calc   = Shadowrun6Tools.getMonitorArray(model, ShadowrunAttribute.BODY);
+		assertEquals("Last element in row rule not applied",-5, calc[12]);
+		assertArrayEquals(expect, calc);
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testQualitiesByMetaWithAddedLevel() {
+		// Being a troll grants "Built tough 2"
+		model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "troll"));
+		Shadowrun6Tools.runProcessors(model);
+		QualityValue qVal = model.getQuality("built_tough");
+		qVal.setDistributed(2);
+
+		Shadowrun6Tools.runProcessors(model);
+
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR);
+		assertNotNull(val);
+		System.out.println(val.getPool().toExplainString());
+		assertEquals(15, val.getModifiedValue());
 	}
 
 }

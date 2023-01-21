@@ -198,7 +198,7 @@ public class CalculatePersona implements ProcessingStep {
 	/**
 	 * CRB 189: Their Matrix Condition Monitor is (Logic/2, rounded up) + 8.
 	 */
-	public static int[] getTechnomancerMonitorArray(ShadowrunCharacter model) {
+	public static int[] getTechnomancerMonitorArray(Shadowrun6Character model) {
 		return Shadowrun6Tools.getMonitorArray(model, ShadowrunAttribute.WILLPOWER);
 	}
 
