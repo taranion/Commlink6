@@ -1146,14 +1146,12 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static int[] getMonitorArray(ShadowrunCharacter model, ShadowrunAttribute attr) {
+	public static int[] getMonitorArray(Shadowrun6Character model, ShadowrunAttribute attr) {
 		int add = 0;
-//		int add = model.getAttribute(attr).getModifiedValue();
-//		add = Math.round( (float)add / 2.0f);
 		if (attr==ShadowrunAttribute.BODY && model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR)!=null)
-			add+=model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getModifiedValue();
+			add=model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getModifiedValue();
 		if (attr==ShadowrunAttribute.WILLPOWER && model.getAttribute(ShadowrunAttribute.STUN_MONITOR)!=null)
-			add+=model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getModifiedValue();
+			add=model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getModifiedValue();
 		int[] ret = new int[add];
 
 		int start = 0;
@@ -1164,14 +1162,19 @@ public class Shadowrun6Tools {
 
 		for (int i=start; i<ret.length; i++) {
 			ret[i] = - ((i+1-start)/every);
-			if (attr==ShadowrunAttribute.BODY && model.hasQuality("high_pain_tolerance")) {
+			if (attr==ShadowrunAttribute.BODY && model.hasRuleFlag(SR6RuleFlag.PAIN_TOLERANCE_LOWER_MOD)) {
 				if (ret[i]<0)
 					ret[i]++;
 			}
-			if (attr==ShadowrunAttribute.BODY && model.hasQuality("low_pain_tolerance")) {
-				ret[i]*=2;;
+			if (attr==ShadowrunAttribute.BODY && model.hasRuleFlag(SR6RuleFlag.PAIN_TOLERANCE_DOUBLE_MOD)) {
+				ret[i]*=2;
 			}
 		}
+		// Ensure that even for rows smaller than 3 the last box means a higher malus
+		if ((add % 3)!=0) {
+			ret[add-1] = ret[add-1]-1;
+		}
+
 		logger.log(Level.DEBUG, "array for "+attr+": "+Arrays.toString(ret));
 
 		return ret;

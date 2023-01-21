@@ -37,7 +37,8 @@ public class SR6GearTool extends GearTool {
 			new ApplyAmmunitionTypeStep(),
 			new ApplyStockModificationsStep(),
 			new AddMissingVehicleSlots(),
-			new SR6ResolveTemplatesStep()
+			new SR6ResolveTemplatesStep(),
+			new CreateAlternatesStep()
 	};
 
 	public static CarriedItemProcessor[] SR6_PHASE2_STEPS = new CarriedItemProcessor[] {

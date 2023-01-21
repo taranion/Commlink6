@@ -59,7 +59,7 @@
         <selreq>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_RANGED"/>
-			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_SPECIAL"/>			
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_SPECIAL"/>
         </selreq>
 	  </requires>
 	</itemenhancement>
@@ -85,7 +85,7 @@
         <selreq>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_RANGED"/>
-			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_SPECIAL"/>			
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_SPECIAL"/>
         </selreq>
 	  </requires>
 	</itemenhancement>
@@ -264,8 +264,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-		 <!-- TODO: Find out how to add AlternateUsages -->
-         <!-- itemmod type="GEAR" ref="firearm_in_melee" /-->
+	  	<itemmod type="ITEMFLAG" ref="MELEE_HARDENING_ALTERNATE"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="metahuman_adaption" avail="3" price="200">
@@ -566,7 +565,7 @@
 	  		<valmod type="ITEM_ATTRIBUTE" ref="FIREWALL" value="1" apply="PERSONA"/>
 	  </modifications>
 	</itemenhancement>
-	
+
 	<!--  Page 66: Melee weapon modifications -->
 	<itemenhancement id="flashing_blade" avail="4L" price="150">
 	  <requires>
@@ -598,7 +597,7 @@
     	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="BOWS"/>
 	  </requires>
 	</itemenhancement>
-	
+
 	<!-- p.38 Grenade modifications -->
 	<itemenhancement id="directional_mine_modification" avail="2" price="100">
 	  <requires>

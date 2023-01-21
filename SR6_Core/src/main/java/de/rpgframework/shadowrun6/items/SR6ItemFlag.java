@@ -28,18 +28,20 @@ public enum SR6ItemFlag implements ItemFlag {
 	CONVERT_ONE_DIE_TO_WILD,
 	// Is marked to be the primary item of its kind by the user
 	PRIMARY,
-	/* 
+	/*
 	 * CarriedItems flagged with this shall not be taken into account
 	 * (for defense rating calculations)
 	 * AUTO FLAG - not to be used by user
 	 */
 	IGNORE_FOR_CALCULATIONS,
 	CODEMOD,
+	/** Firing Squad p.61: Add alternate usage as melee weapon */
+	MELEE_HARDENING_ALTERNATE,
 	;
-	
-	
+
+
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.items.ItemFlag#getName()
@@ -58,5 +60,5 @@ public enum SR6ItemFlag implements ItemFlag {
 		return RES.getString("itemflag."+this.name().toLowerCase(), loc);
 	}
 
-	
+
 }

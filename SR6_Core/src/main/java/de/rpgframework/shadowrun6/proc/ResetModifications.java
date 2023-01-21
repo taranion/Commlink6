@@ -25,9 +25,9 @@ import de.rpgframework.shadowrun6.items.SR6GearTool;
  *
  */
 public class ResetModifications implements ProcessingStep {
-	
+
 	private final static Logger logger = System.getLogger(ResetModifications.class.getPackageName());
-	
+
 	private Shadowrun6Character model;
 
 	//-------------------------------------------------------------------
@@ -52,7 +52,7 @@ public class ResetModifications implements ProcessingStep {
 			for (AttributeValue<ShadowrunAttribute> val : model.getAttributes()) {
 				val.clearModifications();
 			}
-						
+
 			// Skills
 			for (SR6SkillValue val : model.getSkillValues()) {
 				val.clearModifications();
@@ -64,8 +64,8 @@ public class ResetModifications implements ProcessingStep {
 					model.removeCarriedItem(item);
 				}
 			}
-			
-			
+
+
 			// Remove all auto-qualities or quality levels
 			for (QualityValue val : new ArrayList<>(model.getQualities())) {
 				boolean remove = val.isRemoveOnReset();
@@ -75,8 +75,8 @@ public class ResetModifications implements ProcessingStep {
 					model.removeQuality(val);
 				}
 			}
-			
-			
+
+
 			// Ensure there is a device for unused software
 			CarriedItem<ItemTemplate> item = model.getSoftwareLibrary();
 			if (item==null) {
@@ -91,7 +91,7 @@ public class ResetModifications implements ProcessingStep {
 					System.exit(1);
 				}
 			}
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
