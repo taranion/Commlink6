@@ -16,17 +16,16 @@
        <checkmod type="SKILL" ref="exotic_weapons" value="-1" what="EDGE"/>
      </modifications>
    </quality>
-   <quality id="compulsion"  karma="2" pos="FALSE" max="5" multi="true" type="NORMAL">
-   	<choices>
-   		<choice uuid="58b2700b-918d-4746-83a2-ccc189f1cb1b" type="TEXT"/>
-		<!--choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="QUALITY?_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/ OR-->
-		<!--choice uuid="0375764d-c7f9-44a9-bc2d-02ee1d9d129a" type="SUBSELECT">
-	        <subOption id="lvl1" cost="2"/>
-         	<subOption id="lvl2" cost="4"/>
-         	<subOption id="lvl3" cost="6"/>
-         	<subOption id="lvl4" cost="8"/>
-         	<subOption id="lvl5" cost="10"/>
-   		</choice-->
+   <quality id="compulsion"  karma="2" pos="FALSE" type="NORMAL">
+    	<choices>
+       <choice type="SUBSELECT" ref="time_spent" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc6">
+         <subOption id="level1" cost="0"/>
+         <subOption id="level2" cost="2"/>
+         <subOption id="level3" cost="4"/>
+         <subOption id="level4" cost="6"/>
+         <subOption id="level5" cost="8"/>
+         <subOption id="level6" cost="10"/>
+       </choice>
    	</choices>
    </quality>
    <quality id="flashbacks" 	      karma="6" pos="FALSE" type="NORMAL">
@@ -46,7 +45,7 @@
 			<choice type="TEXT" ref="object" uuid="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" />
 		</choices>
    </quality>
-   
+
    <!-- Quality paths -->
    <quality id="broken_code"          karma="0" pos="FALSE" type="QUALITY_PATH" >
      <!--requires>
@@ -88,5 +87,5 @@
    </quality>
    <quality id="state_of_zen"         karma="0" pos="FALSE" type="QUALITY_PATH" />
    <quality id="pacifist"    		  karma="5" pos="FALSE" max="4"  type="NORMAL" />
-   
+
 </qualities>
