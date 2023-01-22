@@ -875,12 +875,14 @@ public class Shadowrun6Tools {
 		logger.log(Level.WARNING, "instantiate "+tmp);
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
-			if (multiplier>1) {
-				clone.setValue( clone.getValue()*multiplier );
-			}
 			if (clone.getLookupTable()!=null) {
+				if (clone.getValue()>clone.getLookupTable().length) {
+					logger.log(Level.ERROR, "Modification {0}, multiplier {1} is outside table", tmp, multiplier);
+				}
 				clone.setValue( clone.getLookupTable()[clone.getValue()-1] );
 				clone.setLookupTable(null);
+			} else if (multiplier>1) {
+				clone.setValue( clone.getValue()*multiplier );
 			}
 			if ("CHOICE".equals( clone.getKey() )) {
 				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
