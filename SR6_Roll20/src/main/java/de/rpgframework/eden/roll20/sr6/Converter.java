@@ -48,6 +48,7 @@ import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
+import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -300,18 +301,49 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static void convertVehicle(ItemTemplate item, Locale loc, Row row) {
-		int x = 4;
+	/**
+	 * 			head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-Category");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-availability");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-cost_text");
+		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-drone_type");
+		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-handling_onroad");
+		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-handling_offroad");
+		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-acceleration");
+		head.createCell(16+blobOffset, CellType.STRING).setCellValue("data-speed_base");
+		head.createCell(17+blobOffset, CellType.STRING).setCellValue("data-speed_base_offroad");
+		head.createCell(18+blobOffset, CellType.STRING).setCellValue("data-speed_max");
+		head.createCell(19+blobOffset, CellType.STRING).setCellValue("data-speed_max_offroad");
+		head.createCell(20+blobOffset, CellType.STRING).setCellValue("data-body_base");
+		head.createCell(21+blobOffset, CellType.STRING).setCellValue("data-armor_base");
+		head.createCell(22+blobOffset, CellType.STRING).setCellValue("data-pilot_base");
+		head.createCell(23+blobOffset, CellType.STRING).setCellValue("data-sensor_base");
+		head.createCell(24+blobOffset, CellType.STRING).setCellValue("data-seats");
+	 */
+	public static void convertVehicle(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
+		if (ItemType.isDrone(item.getItemType())) {
+			row.createCell(x++, CellType.STRING).setCellValue("Drone");
+		} else {
+			row.createCell(x++, CellType.STRING).setCellValue("Vehicle");
+		}
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue(formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY),loc));
 		else x++;
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.HANDLING).getRawValue());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.ACCELERATION).getRawValue());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL).getRawValue());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.TOPSPEED).getRawValue());
+		// Nuyen
+		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
+		else x++;
+		row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()+" \u00A5"));
+		row.createCell(x++, CellType.NUMERIC).setCellValue(mapAsDroneType(item.getItemType(), item.getItemSubtype()));
+
+		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.ACCELERATION));
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.ACCELERATION).getRawValue());
+		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL));
+		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.TOPSPEED));
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.BODY).getRawValue());
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.ARMOR).getRawValue());
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PILOT).getRawValue());
@@ -319,6 +351,20 @@ public class Converter {
 		if (item.getAttribute(SR6ItemAttribute.SEATS)!=null)
 			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.SEATS).getRawValue());
 		else x++;
+	}
+
+	//-------------------------------------------------------------------
+	private static int convertOnRoadOffRoad(ItemTemplate item, Locale loc, Row row, int x, ItemAttributeDefinition def) {
+		if (def.isInteger()) {
+			int onOff = (Integer)def.getValue();
+			row.createCell(x++, CellType.NUMERIC).setCellValue( onOff);
+			row.createCell(x++, CellType.NUMERIC).setCellValue( onOff);
+		} else {
+			OnRoadOffRoadValue onOff = def.getValue();
+			row.createCell(x++, CellType.NUMERIC).setCellValue( onOff.getOnRoad());
+			row.createCell(x++, CellType.NUMERIC).setCellValue( onOff.getOffRoad());
+		}
+		return x;
 	}
 
 	//-------------------------------------------------------------------
@@ -544,6 +590,44 @@ public class Converter {
 		case AUTO: return "Auto";
 		default:
 		return value.name();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String mapAsDroneType(ItemType type, ItemSubType sub) {
+		switch (sub) {
+		case BIKES: return "Bike";
+		case ATVS: return "ATV";
+		case CARS: return "Car";
+		case TRUCKS: return "Truck";
+		case VANS: return "Van";
+		case TRACKED: return "Tracked";
+		case HOVERCRAFT: return "Hovercraft";
+		case PWC: return "PWC";
+		case BOATS: return "Boat";
+		case SHIPS: return "Ship";
+		case SUBMARINES: return "Submarine";
+		case FIXED_WING: return "Fixed Wing Aircraft";
+		case ROTORCRAFT: return "Rotorcraft";
+		case VTOL: return "VTOL/VSTOL";
+		case LTAV: return "LTAV";
+		case LAV: return "LAV";
+		case GRAV: return "Gravity";
+		case MOD_TRAILER: return "Trailer";
+		case MICRODRONES: return "Microdrone";
+		case MINIDRONES: return "Minidrone";
+		case SMALL_DRONES: return "Small Drone";
+		case MEDIUM_DRONES: return "Medium Drone";
+		case LARGE_DRONES: return "Large Drone";
+		default:
+			switch (type) {
+			case DRONE_MICRO: return "Micro Drone";
+			case DRONE_MINI: return "Mini Drone";
+			case DRONE_SMALL: return "Small Drone";
+			case DRONE_MEDIUM: return "Medium Drone";
+			case DRONE_LARGE: return "Large Drone";
+			}
+			return "?"+sub.getName()+"?";
 		}
 	}
 
