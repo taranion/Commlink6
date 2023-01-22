@@ -17,6 +17,8 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -39,6 +41,7 @@ import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.items.ItemSubType;
@@ -176,7 +179,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		x++; // Variant
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue( formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY),loc));
 		else x++;
 		// Nuyen
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved()) {
@@ -219,7 +222,7 @@ public class Converter {
 		else x++;
 
 		if (item.hasAttribute(SR6ItemAttribute.AVAILABILITY))
-			row.createCell(x++, CellType.STRING).setCellValue( ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).toString() );
+			row.createCell(x++, CellType.STRING).setCellValue( formatAvailability(item.getAsObject(SR6ItemAttribute.AVAILABILITY), loc) );
 		else x++;
 		// Nuyen
 		row.createCell(x++, CellType.NUMERIC).setCellValue( item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
@@ -252,7 +255,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue(formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY),loc));
 		else x++;
 		// Nuyen
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
@@ -322,9 +325,9 @@ public class Converter {
 	public static void convertOtherGear(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
-		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
-		else x++;
+		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null) {
+			row.createCell(x++, CellType.STRING).setCellValue(formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY), loc));
+		} else x++;
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
 			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
 		else x++;
@@ -338,7 +341,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		row.createCell(x++, CellType.STRING).setCellValue("Devices");
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue( formatAvailability( item.getAttribute(SR6ItemAttribute.AVAILABILITY), loc));
 		else x++;
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
 			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
@@ -396,7 +399,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue(formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY),loc));
 		else x++;
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
 			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
@@ -542,6 +545,43 @@ public class Converter {
 		default:
 		return value.name();
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String formatAvailability(ItemAttributeDefinition def, Locale loc) {
+		StringBuffer buf = new StringBuffer();
+		if (def.getFormula().isResolved()) {
+			Availability avail = def.getValue();
+			if (avail.isAddToAvailability())
+				buf.append("+");
+			buf.append(avail.getValue());
+			switch (avail.getLegality()) {
+			case FORBIDDEN: buf.append("(I)"); break;
+			case RESTRICTED: buf.append("(L)"); break;
+			}
+			return buf.toString();
+		} else {
+			String val = def.getRawValue().trim();
+			if (val.endsWith("L"))
+				return val.substring(0, val.length()-2)+"(L)";
+			if (val.endsWith("I"))
+				return val.substring(0, val.length()-2)+"(I)";
+			return def.getRawValue();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String formatAvailability(ItemAttributeObjectValue def, Locale loc) {
+		StringBuffer buf = new StringBuffer();
+			Availability avail = (Availability) def.getModifiedValue();
+			if (avail.isAddToAvailability())
+				buf.append("+");
+			buf.append(avail.getValue());
+			switch (avail.getLegality()) {
+			case FORBIDDEN: buf.append("(I)"); break;
+			case RESTRICTED: buf.append("(L)"); break;
+			}
+			return buf.toString();
 	}
 
 	//-------------------------------------------------------------------
