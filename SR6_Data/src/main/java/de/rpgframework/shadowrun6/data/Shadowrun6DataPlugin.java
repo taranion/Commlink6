@@ -289,7 +289,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "street_wyrd/data/qualities2.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities (Adept Ways)");
-//			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "street_wyrd/data/metamagics.xml");
+			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "street_wyrd/data/metamagics.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" metamagics for adepts");
 //			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "street_wyrd/data/metamagics2.xml");
 			list = Shadowrun6Core.loadDataItems(TraditionList.class, Tradition.class, set, clazz,"street_wyrd/data/traditions.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" magic traditions");

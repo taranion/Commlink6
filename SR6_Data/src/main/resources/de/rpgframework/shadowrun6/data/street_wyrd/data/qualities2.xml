@@ -37,7 +37,7 @@
      <modifications>
        	<itemmod type="QUALITY" ref="innate_talent"/>
    		<itemmod type="DRAIN_ADEPT" ref="INTUITION"/>
-       <selmod>
+       <selmod uuid="d4400bf0-b64a-4209-875e-a6d2cb1bb2a9">
 			<checkmod type="SKILL" ref="CHOICE" choice="e26e2313-adf9-494e-82be-62387e0d4efd" what="REPLACE_WITH_WILD" value="1"/>
        	<itemmod type="RULE" ref="MENTOR_SPIRIT_BOTH"/>
        </selmod>
