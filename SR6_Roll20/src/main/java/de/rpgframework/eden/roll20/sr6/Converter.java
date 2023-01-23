@@ -301,27 +301,6 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	/**
-	 * 			head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
-		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
-		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-Category");
-		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-availability");
-		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost");
-		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-cost_text");
-		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-drone_type");
-		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-handling_onroad");
-		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-handling_offroad");
-		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-acceleration");
-		head.createCell(16+blobOffset, CellType.STRING).setCellValue("data-speed_base");
-		head.createCell(17+blobOffset, CellType.STRING).setCellValue("data-speed_base_offroad");
-		head.createCell(18+blobOffset, CellType.STRING).setCellValue("data-speed_max");
-		head.createCell(19+blobOffset, CellType.STRING).setCellValue("data-speed_max_offroad");
-		head.createCell(20+blobOffset, CellType.STRING).setCellValue("data-body_base");
-		head.createCell(21+blobOffset, CellType.STRING).setCellValue("data-armor_base");
-		head.createCell(22+blobOffset, CellType.STRING).setCellValue("data-pilot_base");
-		head.createCell(23+blobOffset, CellType.STRING).setCellValue("data-sensor_base");
-		head.createCell(24+blobOffset, CellType.STRING).setCellValue("data-seats");
-	 */
 	public static void convertVehicle(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
@@ -351,6 +330,11 @@ public class Converter {
 		if (item.getAttribute(SR6ItemAttribute.SEATS)!=null)
 			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.SEATS).getRawValue());
 		else x++;
+
+		int phys = Math.round(item.getAttribute(SR6ItemAttribute.BODY).getDistributed()/2.0f) +8;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(phys);
+		int matr = Math.round(item.getAttribute(SR6ItemAttribute.SENSORS).getDistributed()/2.0f) +8;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(matr);
 	}
 
 	//-------------------------------------------------------------------

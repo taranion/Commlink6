@@ -947,6 +947,8 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(22+blobOffset, CellType.STRING).setCellValue("data-pilot_base");
 		head.createCell(23+blobOffset, CellType.STRING).setCellValue("data-sensor_base");
 		head.createCell(24+blobOffset, CellType.STRING).setCellValue("data-seats");
+		head.createCell(25+blobOffset, CellType.STRING).setCellValue("data-physical");
+		head.createCell(26+blobOffset, CellType.STRING).setCellValue("data-matrix");
 
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
@@ -974,7 +976,7 @@ public class Shadowrun6CompendiumFactory {
 			Converter.convertVehicle(item, locales[0], row, 6+blobOffset);
 		}
 
-		for (int i=0; i<11; i++) {
+		for (int i=0; i<28; i++) {
 			if (i==(3+blobOffset) || (blob && i==1) ) {
 				sheet.setColumnWidth(i, 5000);
 				continue;
