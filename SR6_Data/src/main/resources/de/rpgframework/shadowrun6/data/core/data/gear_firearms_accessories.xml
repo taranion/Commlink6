@@ -46,7 +46,7 @@
    		<attrdef id="ITEMTYPE" value="CYBERWARE"/>
 			<attrdef id="PRICE" value="6000" />
 			<attrdef id="AVAILABILITY" value="5I" />
- 			<flags><flag>AUGMENTATION</flag></flags>  	
+ 			<flags><flag>AUGMENTATION</flag></flags>
       </variant>
    </item>
    <item avail="2" price="350" id="hidden_arm_slide" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
@@ -59,7 +59,7 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="TASERS"/>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="HOLDOUTS"/>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_LIGHT"/>
-		</selreq>	  
+		</selreq>
       </requires>
    </item>
    <item avail="1" price="350" id="imaging_scope" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
@@ -97,8 +97,8 @@
    <item avail="3" price="70" id="periscope" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="TOP"/>
 		<variant id="standalone" >
-			<attrdef id="ITEMTYPE" value="ELECTRONICS"/>	
-			<attrdef id="ITEMSUBTYPE" value="IMAGING"/>			
+			<attrdef id="ITEMTYPE" value="ELECTRONICS"/>
+			<attrdef id="ITEMSUBTYPE" value="IMAGING"/>
 			<attrdef id="AVAILABILITY" value="2"/>
 			<attrdef id="PRICE" value="50"/>
 		</variant>
@@ -106,8 +106,8 @@
    <item avail="2" price="70" id="periscope" lang="de" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="TOP"/>
 		<variant id="standalone" >
-			<attrdef id="ITEMTYPE" value="ELECTRONICS"/>	
-			<attrdef id="ITEMSUBTYPE" value="IMAGING"/>			
+			<attrdef id="ITEMTYPE" value="ELECTRONICS"/>
+			<attrdef id="ITEMSUBTYPE" value="IMAGING"/>
 			<attrdef id="AVAILABILITY" value="2"/>
 			<attrdef id="PRICE" value="70"/>
 		</variant>
@@ -126,7 +126,7 @@
    <item avail="2" price="50" id="shock_pad" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="STOCK"/>
       <modifications>
- 		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1" />	  
+ 		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1" />
       </modifications>
       <requires>
 		<selreq>
@@ -134,7 +134,7 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_HUNTING"/>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_SNIPER"/>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="SHOTGUNS"/>
-		</selreq>	  
+		</selreq>
       </requires>
    </item>
    <item avail="4" price="500" id="silencer" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
@@ -153,7 +153,7 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_ASSAULT"/>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_HUNTING"/>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_SNIPER"/>
-		</selreq>	  
+		</selreq>
       </requires>
 		<variant id="cyberimplantweapon">
 			<usage mode="EMBEDDED" slot="IMPLANTWEAPON_ACCESSORY" />
@@ -182,7 +182,7 @@
 			<modifications>
 				<embed type="GEAR" ref="LINK" link="$$UUID" intoType="HOOK" intoRef="INTERNAL"/>
 				<valmod type="HOOK" ref="AUTOSOFT" value="3"/>
-			</modifications>      	
+			</modifications>
       </alternate>
    </item>
 	<item id="smartgun_system" avail="2L" price="200" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
@@ -207,7 +207,10 @@
 		  	</modifications>
 		</mode>
 	</item>
-   <item avail="2" price="5" id="spare_clip"  type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+   <item avail="2" price="5" id="spare_clip"  type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y">
+   	<choices>
+   		<choice uuid="82e2d01d-002c-4af8-be85-cf33368e0a96" type="GEAR" ref="PARENT_OR_ALTERNATES"/>
+   	</choices>
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
@@ -236,5 +239,5 @@
       <modifications>
       </modifications>
    </item>
-   
+
 </items>
