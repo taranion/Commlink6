@@ -207,6 +207,7 @@ public class MagicPage extends Page {
 		secMeta.updateController(ctrl);
 		secRituals.updateController(ctrl);
 		secFoci.updateController(ctrl);
+		secMeta.setOptionCallback(new ChoiceSelectorDialog<>(control.getMetamagicOrEchoController()));
 		refresh();
 	}
 
