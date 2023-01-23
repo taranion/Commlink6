@@ -271,7 +271,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
 			if (needToAsk) {
 				logger.log(Level.WARNING, "Select with choices or variants or flags");
-				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry);
+				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry, selectedItem);
 				Decision[] dec = dia2.apply(selected, selected.getChoices());
 				if (dec!=null) {
 					// Not cancelled

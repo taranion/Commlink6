@@ -41,6 +41,7 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
@@ -106,6 +107,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private NavigButtonControl btnCtrl;
 
 	private T item;
+	private DataItemValue context;
 	private SR6PieceOfGearVariant selectedVariant;
 	private List<Choice> choices;
 	private Map<SR6PieceOfGearVariant, List<Node>> perVariantChoices = new HashMap<>();
@@ -125,9 +127,15 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl, CarryMode carry) {
+		this(ctrl, carry, null);
+	}
+
+	//-------------------------------------------------------------------
+	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl, CarryMode carry, DataItemValue context) {
 		super("Select",null, CloseType.CANCEL, CloseType.OK);
 		this.ctrl = ctrl;
 		this.carry = carry;
+		this.context = context;
 
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
@@ -198,7 +206,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			if (getDecisions().length>0) {
 				logger.log(Level.WARNING, "Mit decision");
 			}
-			OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem( (ItemTemplate)item, carry, selectedVariant, lifeform, true, getDecisions());
+			OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem( (ItemTemplate)item, carry, selectedVariant, lifeform, true, (IReferenceResolver)context, getDecisions());
 			logger.log(Level.WARNING, "Trying to build "+carry+" returned "+result);
 			if (result.get()!=null) {
 				logger.log(Level.WARNING, "with item");
@@ -873,7 +881,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		// Eventually sort
 		if (choice.getTypeReference()!=null) {
 			logger.log(Level.DEBUG, "Reduce gear to select from to "+choice.getTypeReference());
-			System.err.println("Reduce gear to select from to "+choice.getTypeReference());
+			System.err.println("ChoiceSelectorDialog: Reduce gear to select from to "+choice.getTypeReference());
 			switch (choice.getTypeReference()) {
 			case "MELEE":
 				items = items.stream().filter(i -> i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.WEAPON_CLOSE_COMBAT).collect(Collectors.toList());
@@ -881,6 +889,15 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			case "CHEMICALS":
 				items = Shadowrun6Core.getItemList(ItemTemplate.class);
 				items = items.stream().filter(i -> i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.CHEMICALS && i.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue()==ItemSubType.INDUSTRIAL_CHEMICALS).collect(Collectors.toList());
+				break;
+			case "PARENT_OR_ALTERNATES":
+				logger.log(Level.WARNING, "TODO: Check this for item detection");
+				System.err.println("ChoiceSelectorDialog: TODO: Check this for item detection");
+				if (context!=null && context.getResolved() instanceof ItemTemplate) {
+					ItemTemplate temp = (ItemTemplate)context.getResolved();
+					items.add(temp);
+					items.addAll(temp.getGearSubDefinitions());
+				}
 				break;
 			default:
 				logger.log(Level.WARNING, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
@@ -893,7 +910,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}});
 		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			logger.log(Level.WARNING, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
 
 			updateButtons();
