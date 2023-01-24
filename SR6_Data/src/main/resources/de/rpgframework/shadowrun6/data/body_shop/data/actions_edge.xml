@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+  <action type="EDGE" cat="OTHER" cost="2" apply="COMBAT" id="oh_thats_replaceable" /> 
+</actions>

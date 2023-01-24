@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="anti_tamper" type="ELECTRONICS" subtype="CYBERNETIC_RESTRAINT">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+   </item>
+
+   <item id="casemodding" avail="1" type="CYBERWARE" subtype="COSMETIC">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+   	</choices>
+		<usage mode="EMBEDDED" value="0" slot="CYBERLIMB_IMPLANT"/>
+    	<attrdef id="PRICE"        value="$RATING*250" />
+      <modifications>
+         <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_SOCIAL" value="2*$RATING"/>
+      </modifications>
+   </item>
+   <item id="cosmetic_implants" avail="1" price="1000" type="CYBERWARE" subtype="COSMETIC">
+   	  <usage mode="IMPLANTED" value="0.2"/>
+      <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+ 	  <flags><flag>AUGMENTATION</flag></flags>
+      <modifications>
+         <checkmod type="SKILL" ref="con" value="1" what="EDGE_TEST_ONLY"/>
+      </modifications>
+   </item>
+   <item id="electrochromatic_hair" avail="2" price="3000" type="CYBERWARE" subtype="COSMETIC">
+   	  <usage mode="IMPLANTED" value="0.1"/>
+      <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
+ 	  <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="false_face" avail="6L" price="20000" type="CYBERWARE" subtype="COSMETIC">
+   	  <usage mode="IMPLANTED" value="0.5"/>
+      <usage mode="EMBEDDED" value="8" slot="CYBERLIMB_IMPLANT"/>
+ 	  <flags><flag>AUGMENTATION</flag></flags>
+      <modifications>
+         <checkmod type="SKILLSPECIALIZATION" ref="con/disguise" value="2" what="DICE"/>
+         <checkmod type="SKILLSPECIALIZATION" ref="con/impersonation" value="2" what="DICE"/>
+         <checkmod type="SKILL" ref="con" value="1" what="EDGE_TEST_ONLY"/>
+      </modifications>
+   </item>
+   <item id="flex_hands" avail="4I" price="1500" type="CYBERWARE" subtype="COSMETIC">
+   	  <usage mode="IMPLANTED" value="0.15"/>
+   </item>
+   <item id="keypad_sequencing_finders" avail="4I" type="CYBERWARE" subtype="COSMETIC">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+   	  <usage mode="IMPLANTED" value="0.3"/>
+      <usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
+    	<attrdef id="PRICE"        value="$RATING*1000" />
+ 	  <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="metagenic_cosmetic_alteration" avail="4I" type="CYBERWARE" subtype="COSMETIC">
+   	<choices>
+   		<choice uuid="a01cc24c-d606-4c13-8e92-1b7d7c1b176a" type="QUALITY" 
+   		  options="camouflage,insulating_coat,quills,bone_spikes"/>
+   	</choices>
+      <usage mode="EMBEDDED" value="3" slot="CYBERLIMB_IMPLANT"/>
+ 	  <flags>
+ 	  	<flag>AUGMENTATION</flag>
+ 	  	<flag>NUYEN_COST_KARMA1000</flag>
+ 	  	<flag>ESSENCE_COST_KARMA_10</flag>
+ 	  </flags>
+   </item>
+   <item id="morphing_fingerprints" avail="5I" type="CYBERWARE" subtype="COSMETIC">
+     <choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	  </choices>
+   	  <usage mode="IMPLANTED" value="0.2"/>
+      <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+    	<attrdef id="PRICE"        value="$RATING*10000" />
+ 	  <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="sensor_dazzler" avail="4I" price="10000" type="CYBERWARE" subtype="COSMETIC">
+   	  <usage mode="IMPLANTED" value="0.3"/>
+      <usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
+ 	  <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="skin_toner" avail="2" price="2000" type="CYBERWARE" subtype="COSMETIC">
+   	  <usage mode="IMPLANTED" value="0.5"/>
+ 	  <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="chameleon_processor" avail="6L" price="8000" type="CYBERWARE" subtype="COSMETIC">
+   	  <requires>
+   	    <datareq type="CARRIED" ref="skin_toner"/>
+   	  </requires>
+   	  <usage mode="IMPLANTED" value="0.3"/>
+      <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+ 	  <flags><flag>AUGMENTATION</flag></flags>
+      <modifications>
+         <checkmod type="SKILL" ref="stealth" value="1" what="EDGE_TEST_ONLY"/>
+      </modifications>
+   </item>
+</items>

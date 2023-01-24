@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<item id="eye_light_system" availability="1" price="500" type="CYBERWARE" subtype="EYEWARE">
+   		<usage mode="IMPLANTED" value="0.2"/>
+    	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+        <modifications>
+        	<checkmod type="SKILL" ref="perception" value="1" what="EDGE_TEST_ONLY" cond="y"/>
+      	</modifications>
+   	</item>
+	<item id="microscopic_lenses" availability="2" price="1000" type="CYBERWARE" subtype="EYEWARE">
+   		<usage mode="IMPLANTED" value="0.2"/>
+    	<usage mode="EMBEDDED" value="3" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="rolling_video_recorder" availability="1" price="500" type="CYBERWARE" subtype="EYEWARE">
+    	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="single_cybereye" type="CYBERWARE" subtype="EYEWARE">
+   		<choices>
+   			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5"/>
+   		</choices>
+      	<usage mode="IMPLANTED"/>
+   		<attrdef id="ESSENCECOST"  value="$RATING*0.05" />
+   		<attrdef id="PRICE"        value="$RATING" table="500,2000,3000,5000,8000"/>
+   		<attrdef id="AVAILABILITY" value="$RATING" table="2,2,3,3,3"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+      	<modifications>
+        	<valmod type="HOOK" ref="CYBEREYE_IMPLANT" value="$RATING" table="0,2,4,6,8"/>
+         	<embed  type="GEAR" ref="image_link" intoType="HOOK" intoRef="INTERNAL" included="true" apply="DATA_ITEM"/>
+      	</modifications>
+   	</item>
+	<item id="spider_eyes" availability="3" price="2000" type="CYBERWARE" subtype="EYEWARE">
+   		<usage mode="IMPLANTED" value="0.2"/>
+    	<usage mode="EMBEDDED" value="2" slot="HEADWARE_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+        <modifications>
+        	<checkmod type="SKILL" ref="perception" value="1" what="EDGE_BOOST" cond="y"/>
+        	<checkmod type="SKILL" ref="perception" value="1" what="EDGE_TEST_ONLY" cond="y"/>
+      	</modifications>
+   	</item>
+</items>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<item id="active_control_rig" availability="3" type="CYBERWARE" subtype="HEADWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
+		</choices>
+   		<usage mode="IMPLANTED" value="0.8*$RATING"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="attention_coprocessor" availability="4L" type="CYBERWARE" subtype="HEADWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+   		<usage mode="IMPLANTED" value="0.3*$RATING"/>
+    	<usage mode="EMBEDDED" value="$RATING" slot="HEADWARE_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="cranial_sculpting" availability="3" price="2500" type="CYBERWARE" subtype="HEADWARE">
+   		<usage mode="IMPLANTED" value="0.3"/>
+    	<usage mode="EMBEDDED" value="2" slot="HEADWARE_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="dream_link" availability="4" price="1000" type="CYBERWARE" subtype="HEADWARE">
+   		<usage mode="IMPLANTED" value="0.1"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="infrasound_emitter" type="CYBERWARE" subtype="HEADWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+   		<usage mode="IMPLANTED" value="0.1*$RATING"/>
+    	<usage mode="EMBEDDED" value="$RATING" slot="HEADWARE_IMPLANT"/>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*5000"/>
+  		<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="math_spu" availability="4" price="2500" type="CYBERWARE" subtype="HEADWARE">
+   		<usage mode="IMPLANTED" value="0.1"/>
+    	<usage mode="EMBEDDED" value="1" slot="HEADWARE_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+        <modifications>
+        	<checkmod type="SKILL" ref="cracking" value="1" what="EDCE_COST"/>
+        	<checkmod type="SKILL" ref="electronics" value="1" what="EDCE_COST"/>
+      	</modifications>
+   	</item>
+	<item id="matrix_visualizer" availability="4" price="2500" type="CYBERWARE" subtype="HEADWARE">
+   		<usage mode="IMPLANTED" value="0.1"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="radar_sensor" availability="6L" price="15000" type="CYBERWARE" subtype="HEADWARE">
+   		<usage mode="IMPLANTED" value="1.0"/>
+    	<usage mode="EMBEDDED" value="4" slot="HEADWARE_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+</items>
