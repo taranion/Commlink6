@@ -504,6 +504,10 @@ public class Shadowrun6Tools {
 				ItemSubType subtype = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
 				return prefix+subtype.getName();
 			case ADEPT_POWER:
+				DataItem data2 = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				if (data2==null)
+					return "Unknown "+tmp.getKey();
+				return prefix+"Adeptenkraft "+data2.getName(loc);
 			case MAGIC_RESO:
 			case MARTIAL_ART:
 			case METAECHO:
@@ -704,6 +708,9 @@ public class Shadowrun6Tools {
 			ShadowrunReference type = (ShadowrunReference)tmp.getType();
 			DataItem item = ShadowrunReference.resolve(type, req.getKey());
 			switch (type) {
+			case ADEPT_POWER:
+				if (negated) return !model.hasAdeptPower(req.getKey());
+				return model.hasAdeptPower(req.getKey());
 			case QUALITY:
 				if (negated) return !model.hasQuality(req.getKey());
 				return model.hasQuality(req.getKey());
@@ -728,6 +735,7 @@ public class Shadowrun6Tools {
 				System.err.println("Shadowrun6Tool: Todo: isRequirementMet for "+type+" = "+item);
 				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type+" = "+item);
 			}
+			return false;
 		} else if (req instanceof AnyRequirement) {
 			AnyRequirement any = (AnyRequirement)req;
 			for (Requirement tmp : any.getOptionList()) {
