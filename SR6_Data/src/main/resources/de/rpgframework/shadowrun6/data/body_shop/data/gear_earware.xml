@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-	<item id="antennae" availability="1" price="1000" type="CYBERWARE" subtype="EARWARE">
+	<item id="antennae" avail="1" price="1000" type="CYBERWARE" subtype="CYBER_EYEWARE">
    		<usage mode="IMPLANTED" value="0.2"/>
     	<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    	</item>
-	<item id="increased_spectrum_hearing" availability="3" price="1000" type="CYBERWARE" subtype="EARWARE">
+	<item id="increased_spectrum_hearing" avail="3" price="1000" type="CYBERWARE" subtype="CYBER_EYEWARE">
    		<usage mode="IMPLANTED" value="0.1"/>
     	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
         <modifications>
-        	<checkmod type="SKILL" ref="perception" value="1" what="EDCE_COST"/>
+        	<checkmod type="SKILL" ref="perception" value="1" what="EDGE_COST_MALUS"/>
       	</modifications>
    	</item>
-	<item id="orientation_system" availability="2" price="500" type="CYBERWARE" subtype="EARWARE">
+	<item id="orientation_system" avail="2" price="500" type="CYBERWARE" subtype="CYBER_EYEWARE">
    		<usage mode="IMPLANTED" value="0.2"/>
     	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    	</item>
-	<item id="perfect_pitch" availability="1" price="500" type="CYBERWARE" subtype="EARWARE">
+	<item id="perfect_pitch" avail="1" price="500" type="CYBERWARE" subtype="CYBER_EYEWARE">
    		<usage mode="IMPLANTED" value="0.2"/>
     	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
         <modifications>
-        	<checkmod type="SKILL_SPECIALIZATION" ref="con/performance" value="1" what="EDGE_TEST_ONLY"/>
+        	<checkmod type="SKILLSPECIALIZATION" ref="con/performance" value="1" what="EDGE_ONLY_TEST"/>
       	</modifications>
    	</item>
-	<item id="rolling_audio_recorder" availability="1" price="500" type="CYBERWARE" subtype="EARWARE">
+	<item id="rolling_audio_recorder" avail="1" price="500" type="CYBERWARE" subtype="CYBER_EYEWARE">
     	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    	</item>
-	<item id="translation_ear" availability="4" price="4000" type="CYBERWARE" subtype="EARWARE">
+	<item id="translation_ear" avail="4" price="4000" type="CYBERWARE" subtype="CYBER_EYEWARE">
    		<usage mode="IMPLANTED" value="0.1"/>
     	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    	</item>
-	<item id="vestibular_stabilizer" availability="1" price="1000" type="CYBERWARE" subtype="EARWARE">
+	<item id="vestibular_stabilizer" avail="1" price="1000" type="CYBERWARE" subtype="CYBER_EYEWARE">
    		<usage mode="IMPLANTED" value="0.1"/>
     	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>

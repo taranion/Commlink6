@@ -21,7 +21,7 @@
       <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
  	  <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-         <checkmod type="SKILL" ref="con" value="1" what="EDGE_TEST_ONLY"/>
+         <checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST"/>
       </modifications>
    </item>
    <item id="electrochromatic_hair" avail="2" price="3000" type="CYBERWARE" subtype="COSMETIC">
@@ -36,7 +36,7 @@
       <modifications>
          <checkmod type="SKILLSPECIALIZATION" ref="con/disguise" value="2" what="DICE"/>
          <checkmod type="SKILLSPECIALIZATION" ref="con/impersonation" value="2" what="DICE"/>
-         <checkmod type="SKILL" ref="con" value="1" what="EDGE_TEST_ONLY"/>
+         <checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST"/>
       </modifications>
    </item>
    <item id="flex_hands" avail="4I" price="1500" type="CYBERWARE" subtype="COSMETIC">
@@ -53,7 +53,7 @@
    </item>
    <item id="metagenic_cosmetic_alteration" avail="4I" type="CYBERWARE" subtype="COSMETIC">
    	<choices>
-   		<choice uuid="a01cc24c-d606-4c13-8e92-1b7d7c1b176a" type="QUALITY" 
+   		<choice uuid="a01cc24c-d606-4c13-8e92-1b7d7c1b176a" type="QUALITY"
    		  options="camouflage,insulating_coat,quills,bone_spikes"/>
    	</choices>
       <usage mode="EMBEDDED" value="3" slot="CYBERLIMB_IMPLANT"/>
@@ -89,7 +89,7 @@
       <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
  	  <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-         <checkmod type="SKILL" ref="stealth" value="1" what="EDGE_TEST_ONLY"/>
+         <checkmod type="SKILL" ref="stealth" value="1" what="EDGE_ONLY_TEST"/>
       </modifications>
    </item>
 </items>

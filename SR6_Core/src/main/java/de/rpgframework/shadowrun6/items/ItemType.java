@@ -16,7 +16,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 public enum ItemType {
 
 	ACCESSORY(
-			ItemSubType.ACCESSORY, 
+			ItemSubType.ACCESSORY,
 			ItemSubType.MODIFICATION,
 			ItemSubType.VISION_ENHANCEMENT,
 			ItemSubType.AUDIO_ENHANCEMENT,
@@ -30,8 +30,8 @@ public enum ItemType {
 	ARMOR(ItemSubType.ARMOR_BODY, ItemSubType.ARMOR_HELMET, ItemSubType.ARMOR_SHIELD),
 	ARMOR_ADDITION,
 	BIOWARE(
-//			ItemSubType.BIOWARE_COSMETICS, 
-			ItemSubType.BIOWARE_STANDARD, 
+//			ItemSubType.BIOWARE_COSMETICS,
+			ItemSubType.BIOWARE_STANDARD,
 			ItemSubType.BIOWARE_CULTURED,
 			ItemSubType.BIOWARE_IMPLANT_WEAPON
 //			ItemSubType.SYMBIONTS
@@ -45,7 +45,9 @@ public enum ItemType {
 			ItemSubType.CYBER_IMPLANT_WEAPON,
 			ItemSubType.CYBER_LIMBS,
 			ItemSubType.COMMLINK,
-			ItemSubType.CYBERDECK
+			ItemSubType.CYBERDECK,
+			ItemSubType.CYBERNETIC_RESTRAINT,
+			ItemSubType.COSMETIC
 			),
 	CODEMODS(
 			ItemSubType.ATTRIBUTE_CODEMOD,
@@ -247,7 +249,7 @@ public enum ItemType {
 				ItemSubType.MOD_MISC,
 				ItemSubType.MOD_PILOT
 				),
-		MOD_HARD(					
+		MOD_HARD(
 				ItemSubType.MOD_MOUNT,
 				ItemSubType.MOD_RACK,
 				ItemSubType.MOD_OTHERS
@@ -263,7 +265,7 @@ public enum ItemType {
 //    public String getName() {
 //        return Resource.get(ShadowrunCore.getI18nResources(),"itemtype."+name().toLowerCase());
 //    }
-	
+
 	//-------------------------------------------------------------------
 	public String getName() {
 		return Shadowrun6Core.getI18nResources().getString("itemtype."+this.name().toLowerCase());

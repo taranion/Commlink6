@@ -354,6 +354,26 @@ public class Shadowrun6DataPlugin  {
 ////			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_streams.xml");
 ////			logger.log(Level.DEBUG, "Loaded "+list.size()+" streams");
 
+			logger.log(Level.INFO, "START -------------------------------BODY SHOP-------------------------------------------");
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "BODY_SHOP", "body_shop.i18n", Locale.ENGLISH);
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "body_shop/data/actions.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" actions");
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "body_shop/data/actions_edge.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
+			list = Shadowrun6Core.loadDataItems(TechniqueList.class, Technique.class, set, clazz,"body_shop/data/techniques.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art techniques");
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz,"body_shop/data/qualities.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_cosmetic.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" cosmetic cyberware");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_earware.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_eyeware.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_headware.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
+
+			System.exit(1);
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());

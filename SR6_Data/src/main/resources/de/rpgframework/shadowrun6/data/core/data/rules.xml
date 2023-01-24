@@ -2,7 +2,7 @@
 <interpretations>
 	<interpretation id="core" lang="en">
 		<rules>
-			<set rule="CHARGEN_ALLOW_INITIATION" to="false"/> 
+			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
 			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="false"/>
 			<set rule="CHARGEN_BUY_SPELLS_KARMA" to="true"/>
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="5"/>
@@ -12,7 +12,7 @@
 	</interpretation>
 	<interpretation id="core_seattle" lang="en">
 		<rules>
-			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/> 
+			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
 			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="false"/>
 			<set rule="CHARGEN_BUY_SPELLS_KARMA" to="false"/>
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="5"/>
@@ -22,19 +22,19 @@
 	</interpretation>
 	<interpretation id="srm" lang="en" restrict="prio">
 		<rules>
-			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/> 
-			<set rule="CHARGEN_MAX_INITIATION" to="1"/> 
-			<set rule="CHARGEN_MAX_SUBMERSION" to="2"/> 
-			<set rule="CHARGEN_MAX_TRANSHUMAN" to="1"/> 
-			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="false"/> 
+			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
+			<set rule="CHARGEN_MAX_INITIATION" to="1"/>
+			<set rule="CHARGEN_MAX_SUBMERSION" to="2"/>
+			<set rule="CHARGEN_MAX_TRANSHUMAN" to="1"/>
+			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="false"/>
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="5"/>
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
 		</rules>
 	</interpretation>
 	<interpretation id="core" lang="de">
 		<rules>
-			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/> 
-			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="true"/> 
+			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
+			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="true"/>
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="0"/>
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
 		</rules>

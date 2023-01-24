@@ -37,6 +37,12 @@ public enum SR6ItemFlag implements ItemFlag {
 	CODEMOD,
 	/** Firing Squad p.61: Add alternate usage as melee weapon */
 	MELEE_HARDENING_ALTERNATE,
+
+	// For Body Shop
+	/** Nuyen base cost is Karma of selection multiplied with 1000 */
+	NUYEN_COST_KARMA1000,
+	/** Essence base cost is Karma divided by 10 */
+	ESSENCE_COST_KARMA_10
 	;
 
 
