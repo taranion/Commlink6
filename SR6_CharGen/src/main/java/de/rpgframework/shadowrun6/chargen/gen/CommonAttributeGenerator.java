@@ -12,7 +12,6 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
-import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -22,11 +21,11 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
  *
  */
 public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunAttribute> implements IAttributeController {
-	
+
 	protected List<ShadowrunAttribute> allowedAdjust = new ArrayList<>();
 
 	protected int numAttributesToMax = 1;
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 */
@@ -51,7 +50,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 		}
 		return maxed;
 	}
-	
+
 	//-------------------------------------------------------------------
 	protected boolean isAnotherAttributeAlreadyMaxed(ShadowrunAttribute key) {
 		if (key.isSpecial())
@@ -104,10 +103,10 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	public RecommendationState getRecommendationState(ShadowrunAttribute item) {
 		Recommender recommender = getModel().getRecommender();
 		// No recommender set, means no recommendation
-		if (recommender==null) {		
+		if (recommender==null) {
 			return RecommendationState.NEUTRAL;
 		}
-		
+
 		return recommender.getRecommendationState(item);
 	}
 
@@ -116,7 +115,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IAttributeController#isRacialAttribute(de.rpgframework.shadowrun.ShadowrunAttribute)
 	 */
 	@Override
-	public boolean isRacialAttribute(ShadowrunAttribute key) {		
+	public boolean isRacialAttribute(ShadowrunAttribute key) {
 		return allowedAdjust.contains(key);
 	}
 

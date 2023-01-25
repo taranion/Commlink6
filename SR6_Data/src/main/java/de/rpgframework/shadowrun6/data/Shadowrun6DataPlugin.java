@@ -373,7 +373,6 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_headware.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
 
-			System.exit(1);
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());

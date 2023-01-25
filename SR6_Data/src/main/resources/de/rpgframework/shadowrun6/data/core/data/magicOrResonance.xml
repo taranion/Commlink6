@@ -2,7 +2,7 @@
 <magicresons>
 	<magicreson id="mundane" />
 
-	<magicreson id="magician" magic="true" spells="true" cost="10">
+	<magicreson id="magician" magic="true" spells="true" cost="60">
 		<modifications>
 			<allowmod type="SKILL" ref="astral" />
 			<allowmod type="SKILL" ref="conjuring" />
@@ -11,7 +11,7 @@
 		</modifications>
 	</magicreson>
 
-	<magicreson id="mysticadept" magic="true" spells="true" powers="true" paysPowers="true" cost="10">
+	<magicreson id="mysticadept" magic="true" spells="true" powers="true" paysPowers="true" cost="75">
 		<modifications>
 			<allowmod type="SKILL" ref="conjuring" />
 			<allowmod type="SKILL" ref="enchanting" />
@@ -19,18 +19,18 @@
 		</modifications>
 	</magicreson>
 
-	<magicreson id="technomancer" resonance="true" cost="10">
+	<magicreson id="technomancer" resonance="true" cost="45">
 		<modifications>
 			<allowmod type="SKILL" ref="tasking" />
 		</modifications>
 	</magicreson>
 
-	<magicreson id="adept" magic="true" powers="true" paysPowers="false" cost="10">
+	<magicreson id="adept" magic="true" powers="true" paysPowers="false" cost="45">
 		<modifications>
 		</modifications>
 	</magicreson>
 
-	<magicreson id="aspectedmagician" magic="true" spells="true" aspected="true" cost="10">
+	<magicreson id="aspectedmagician" magic="true" spells="true" aspected="true" cost="45">
 		<modifications>
 			<allowmod type="SKILL" ref="astral" />
 		</modifications>

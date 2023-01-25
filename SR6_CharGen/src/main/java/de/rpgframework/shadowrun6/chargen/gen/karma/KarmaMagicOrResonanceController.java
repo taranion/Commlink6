@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
+package de.rpgframework.shadowrun6.chargen.gen.karma;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -31,9 +31,9 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PointBuyMagicOrResonanceController extends MagicOrResonanceController {
+public class KarmaMagicOrResonanceController extends MagicOrResonanceController {
 
-	private final static Logger logger = System.getLogger(PointBuyMagicOrResonanceController.class.getPackageName());
+	private final static Logger logger = System.getLogger(KarmaMagicOrResonanceController.class.getPackageName());
 
 	private List<MagicOrResonanceType> available;
 
@@ -41,7 +41,7 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 	/**
 	 * @param parent
 	 */
-	public PointBuyMagicOrResonanceController(IShadowrunCharacterGenerator parent) {
+	public KarmaMagicOrResonanceController(IShadowrunCharacterGenerator parent) {
 		super(parent);
 		// Build available
 		available  = new ArrayList<>(Shadowrun6Core.getItemList(MagicOrResonanceType.class));
@@ -92,12 +92,13 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 		List<Modification> unprocessed = previous;
 
 		try {
-			SR6PointBuySettings settings = (SR6PointBuySettings) model.getCharGenSettings(SR6PointBuySettings.class);
+			SR6KarmaSettings settings = (SR6KarmaSettings) model.getCharGenSettings(SR6KarmaSettings.class);
 			MagicOrResonanceType type = model.getMagicOrResonanceType();
 			if (type != null) {
-				int cpCost = (type.usesMagic()||type.usesResonance())?10:0;
-				logger.log(Level.INFO, "Chose '"+type.getId()+"' for "+cpCost+" CP");
-				settings.characterPoints -= cpCost;
+				int karmaCost = type.getCost();
+				logger.log(Level.INFO, "Chose '"+type.getId()+"' for "+karmaCost+" Karma");
+				model.setKarmaFree( model.getKarmaFree() - karmaCost);
+				model.setKarmaInvested( model.getKarmaInvested() + karmaCost);
 
 				switch (type.getId()) {
 				case "magician":
@@ -116,9 +117,9 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1, type, ValueType.NATURAL));
 					break;
 				case "aspectedmagician":
-					// Start with 2 point in MAGIC
+					// Start with 1 point in MAGIC
 					unprocessed.add(
-							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 2, type, ValueType.NATURAL));
+							new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1, type, ValueType.NATURAL));
 					SR6Skill skill =  ((Shadowrun6Character)model).getAspectSkill();
 					if (skill!=null) {
 						AllowModification allow = new AllowModification(ShadowrunReference.SKILL, model.getAspectSkillId());

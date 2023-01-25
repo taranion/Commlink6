@@ -16,6 +16,8 @@ import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
@@ -106,6 +108,21 @@ public class ResetGenerator implements ProcessingStep {
 			}
 			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
 			logger.log(Level.INFO, "MAGIC0 = "+model.getAttribute(ShadowrunAttribute.MAGIC));
+		} else if (real instanceof KarmaCharacterGenerator) {
+			SR6KarmaSettings settings = model.getCharGenSettings(SR6KarmaSettings.class);
+			switch (level) {
+			case STREET_LEVEL:
+				settings.startKarma = 800;
+				break;
+			case EILTE:
+				settings.startKarma = 1200;
+				break;
+			default:
+				settings.startKarma = 1000;
+				break;
+			}
+			logger.log(Level.INFO, "Start with {0} Karma", settings.startKarma);
+			model.setKarmaFree(settings.startKarma);
 		} else {
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			if (level==PowerLevel.PRIME_RUNNER)
