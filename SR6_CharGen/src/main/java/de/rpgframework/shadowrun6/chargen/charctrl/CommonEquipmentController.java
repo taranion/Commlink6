@@ -481,7 +481,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 		// Check if capacity is sufficient
 		AvailableSlot realSlot = (AvailableSlot) container.getSlot(slot);
-		logger.log(Level.WARNING, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
+		logger.log(Level.INFO, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
 		if (realSlot==null) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SUCH_SLOT, slot.name(), container.getNameWithoutRating());
 		}

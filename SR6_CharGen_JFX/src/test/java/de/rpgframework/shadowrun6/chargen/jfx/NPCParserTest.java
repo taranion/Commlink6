@@ -78,7 +78,7 @@ public class NPCParserTest {
 				+ "Reaction, +2I, +2 ID)\n"
 				+ "Weapons:\n"
 				+ "Colt America L36 [Light Pistol, DV 2P, SA, Attack Ratings 8/8/6/—/—]\n"
-				+ "Stun baton [Club, DV 5Se, Attack Ratings 6/—/—/—/— ";
+				+ "Stun baton [Club, DV 5Se, Attack Ratings 6/—/—/—/— ]";
 		Result result = NPCParser.parse(rawData);
 		SR6NPC npc = result.npc;
 		StringWriter out = new StringWriter();

@@ -489,4 +489,20 @@ public class SR6CarriedItemTest {
 		assertEquals(2050, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void testRuleMeleeHardening() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "ares_light_fire_70");
+		assertNotNull(temp);
+		SR6ItemEnhancement harden = Shadowrun6Core.getItem(SR6ItemEnhancement.class, "melee_hardening");
+		assertNotNull(harden);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		// Add melee hardening modification
+		item.addEnhancement(new ItemEnhancementValue<SR6ItemEnhancement>(harden));
+		SR6GearTool.recalculate("", null, item);
+		assertNotNull(item);
+		assertTrue("No alternates found",item.getAlternates().size()>0);
+	}
+
 }

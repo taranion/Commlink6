@@ -17,6 +17,8 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -39,12 +41,14 @@ import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
+import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -176,7 +180,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		x++; // Variant
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue( formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY),loc));
 		else x++;
 		// Nuyen
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved()) {
@@ -219,7 +223,7 @@ public class Converter {
 		else x++;
 
 		if (item.hasAttribute(SR6ItemAttribute.AVAILABILITY))
-			row.createCell(x++, CellType.STRING).setCellValue( ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).toString() );
+			row.createCell(x++, CellType.STRING).setCellValue( formatAvailability(item.getAsObject(SR6ItemAttribute.AVAILABILITY), loc) );
 		else x++;
 		// Nuyen
 		row.createCell(x++, CellType.NUMERIC).setCellValue( item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
@@ -252,7 +256,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue(formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY),loc));
 		else x++;
 		// Nuyen
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
@@ -297,18 +301,28 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static void convertVehicle(ItemTemplate item, Locale loc, Row row) {
-		int x = 4;
+	public static void convertVehicle(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
+		if (ItemType.isDrone(item.getItemType())) {
+			row.createCell(x++, CellType.STRING).setCellValue("Drone");
+		} else {
+			row.createCell(x++, CellType.STRING).setCellValue("Vehicle");
+		}
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue(formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY),loc));
 		else x++;
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.HANDLING).getRawValue());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.ACCELERATION).getRawValue());
-		row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL).getRawValue());
-		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.TOPSPEED).getRawValue());
+		// Nuyen
+		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
+			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
+		else x++;
+		row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()+" \u00A5"));
+		row.createCell(x++, CellType.NUMERIC).setCellValue(mapAsDroneType(item.getItemType(), item.getItemSubtype()));
+
+		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.ACCELERATION));
+		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.ACCELERATION).getRawValue());
+		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL));
+		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.TOPSPEED));
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.BODY).getRawValue());
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.ARMOR).getRawValue());
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.PILOT).getRawValue());
@@ -316,15 +330,34 @@ public class Converter {
 		if (item.getAttribute(SR6ItemAttribute.SEATS)!=null)
 			row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.SEATS).getRawValue());
 		else x++;
+
+		int phys = Math.round(item.getAttribute(SR6ItemAttribute.BODY).getDistributed()/2.0f) +8;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(phys);
+		int matr = Math.round(item.getAttribute(SR6ItemAttribute.SENSORS).getDistributed()/2.0f) +8;
+		row.createCell(x++, CellType.NUMERIC).setCellValue(matr);
+	}
+
+	//-------------------------------------------------------------------
+	private static int convertOnRoadOffRoad(ItemTemplate item, Locale loc, Row row, int x, ItemAttributeDefinition def) {
+		if (def.isInteger()) {
+			int onOff = (Integer)def.getValue();
+			row.createCell(x++, CellType.NUMERIC).setCellValue( onOff);
+			row.createCell(x++, CellType.NUMERIC).setCellValue( onOff);
+		} else {
+			OnRoadOffRoadValue onOff = def.getValue();
+			row.createCell(x++, CellType.NUMERIC).setCellValue( onOff.getOnRoad());
+			row.createCell(x++, CellType.NUMERIC).setCellValue( onOff.getOffRoad());
+		}
+		return x;
 	}
 
 	//-------------------------------------------------------------------
 	public static void convertOtherGear(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
-		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
-		else x++;
+		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null) {
+			row.createCell(x++, CellType.STRING).setCellValue(formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY), loc));
+		} else x++;
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
 			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
 		else x++;
@@ -338,7 +371,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		row.createCell(x++, CellType.STRING).setCellValue("Devices");
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue( formatAvailability( item.getAttribute(SR6ItemAttribute.AVAILABILITY), loc));
 		else x++;
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
 			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
@@ -396,7 +429,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
 		if (item.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue(formatAvailability(item.getAttribute(SR6ItemAttribute.AVAILABILITY),loc));
 		else x++;
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getFormula().isResolved())
 			row.createCell(x++, CellType.NUMERIC).setCellValue( (int)item.getAttribute(SR6ItemAttribute.PRICE).getValue());
@@ -542,6 +575,81 @@ public class Converter {
 		default:
 		return value.name();
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String mapAsDroneType(ItemType type, ItemSubType sub) {
+		switch (sub) {
+		case BIKES: return "Bike";
+		case ATVS: return "ATV";
+		case CARS: return "Car";
+		case TRUCKS: return "Truck";
+		case VANS: return "Van";
+		case TRACKED: return "Tracked";
+		case HOVERCRAFT: return "Hovercraft";
+		case PWC: return "PWC";
+		case BOATS: return "Boat";
+		case SHIPS: return "Ship";
+		case SUBMARINES: return "Submarine";
+		case FIXED_WING: return "Fixed Wing Aircraft";
+		case ROTORCRAFT: return "Rotorcraft";
+		case VTOL: return "VTOL/VSTOL";
+		case LTAV: return "LTAV";
+		case LAV: return "LAV";
+		case GRAV: return "Gravity";
+		case MOD_TRAILER: return "Trailer";
+		case MICRODRONES: return "Microdrone";
+		case MINIDRONES: return "Minidrone";
+		case SMALL_DRONES: return "Small Drone";
+		case MEDIUM_DRONES: return "Medium Drone";
+		case LARGE_DRONES: return "Large Drone";
+		default:
+			switch (type) {
+			case DRONE_MICRO: return "Micro Drone";
+			case DRONE_MINI: return "Mini Drone";
+			case DRONE_SMALL: return "Small Drone";
+			case DRONE_MEDIUM: return "Medium Drone";
+			case DRONE_LARGE: return "Large Drone";
+			}
+			return "?"+sub.getName()+"?";
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String formatAvailability(ItemAttributeDefinition def, Locale loc) {
+		StringBuffer buf = new StringBuffer();
+		if (def.getFormula().isResolved()) {
+			Availability avail = def.getValue();
+			if (avail.isAddToAvailability())
+				buf.append("+");
+			buf.append(avail.getValue());
+			switch (avail.getLegality()) {
+			case FORBIDDEN: buf.append("(I)"); break;
+			case RESTRICTED: buf.append("(L)"); break;
+			}
+			return buf.toString();
+		} else {
+			String val = def.getRawValue().trim();
+			if (val.endsWith("L"))
+				return val.substring(0, val.length()-2)+"(L)";
+			if (val.endsWith("I"))
+				return val.substring(0, val.length()-2)+"(I)";
+			return def.getRawValue();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static String formatAvailability(ItemAttributeObjectValue def, Locale loc) {
+		StringBuffer buf = new StringBuffer();
+			Availability avail = (Availability) def.getModifiedValue();
+			if (avail.isAddToAvailability())
+				buf.append("+");
+			buf.append(avail.getValue());
+			switch (avail.getLegality()) {
+			case FORBIDDEN: buf.append("(I)"); break;
+			case RESTRICTED: buf.append("(L)"); break;
+			}
+			return buf.toString();
 	}
 
 	//-------------------------------------------------------------------

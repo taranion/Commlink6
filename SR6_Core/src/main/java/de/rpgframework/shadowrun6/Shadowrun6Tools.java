@@ -94,7 +94,6 @@ import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
-import de.rpgframework.shadowrun6.proc.ApplyRelevanceAndEdgeMods;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
@@ -146,8 +145,7 @@ public class Shadowrun6Tools {
 		CalculateDerivedAttributes.class,
 		CalculateAttributePools.class,
 		CalculateSkillPools.class,
-		CalculateMeleeAndUnarmed.class,
-		ApplyRelevanceAndEdgeMods.class
+		CalculateMeleeAndUnarmed.class
 	);
 
 	//-------------------------------------------------------------------
@@ -506,6 +504,10 @@ public class Shadowrun6Tools {
 				ItemSubType subtype = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
 				return prefix+subtype.getName();
 			case ADEPT_POWER:
+				DataItem data2 = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				if (data2==null)
+					return "Unknown "+tmp.getKey();
+				return prefix+"Adeptenkraft "+data2.getName(loc);
 			case MAGIC_RESO:
 			case MARTIAL_ART:
 			case METAECHO:
@@ -706,6 +708,9 @@ public class Shadowrun6Tools {
 			ShadowrunReference type = (ShadowrunReference)tmp.getType();
 			DataItem item = ShadowrunReference.resolve(type, req.getKey());
 			switch (type) {
+			case ADEPT_POWER:
+				if (negated) return !model.hasAdeptPower(req.getKey());
+				return model.hasAdeptPower(req.getKey());
 			case QUALITY:
 				if (negated) return !model.hasQuality(req.getKey());
 				return model.hasQuality(req.getKey());
@@ -730,6 +735,7 @@ public class Shadowrun6Tools {
 				System.err.println("Shadowrun6Tool: Todo: isRequirementMet for "+type+" = "+item);
 				logger.log(Level.WARNING, "Todo: isRequirementMet for "+type+" = "+item);
 			}
+			return false;
 		} else if (req instanceof AnyRequirement) {
 			AnyRequirement any = (AnyRequirement)req;
 			for (Requirement tmp : any.getOptionList()) {
@@ -873,12 +879,18 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, Shadowrun6Character model) {
+	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, int multiplier, Shadowrun6Character model) {
+		logger.log(Level.WARNING, "instantiate "+tmp);
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
 			if (clone.getLookupTable()!=null) {
+				if (clone.getValue()>clone.getLookupTable().length) {
+					logger.log(Level.ERROR, "Modification {0}, multiplier {1} is outside table", tmp, multiplier);
+				}
 				clone.setValue( clone.getLookupTable()[clone.getValue()-1] );
 				clone.setLookupTable(null);
+			} else if (multiplier>1) {
+				clone.setValue( clone.getValue()*multiplier );
 			}
 			if ("CHOICE".equals( clone.getKey() )) {
 				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
@@ -1144,14 +1156,12 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static int[] getMonitorArray(ShadowrunCharacter model, ShadowrunAttribute attr) {
+	public static int[] getMonitorArray(Shadowrun6Character model, ShadowrunAttribute attr) {
 		int add = 0;
-//		int add = model.getAttribute(attr).getModifiedValue();
-//		add = Math.round( (float)add / 2.0f);
 		if (attr==ShadowrunAttribute.BODY && model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR)!=null)
-			add+=model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getModifiedValue();
+			add=model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getModifiedValue();
 		if (attr==ShadowrunAttribute.WILLPOWER && model.getAttribute(ShadowrunAttribute.STUN_MONITOR)!=null)
-			add+=model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getModifiedValue();
+			add=model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getModifiedValue();
 		int[] ret = new int[add];
 
 		int start = 0;
@@ -1162,14 +1172,19 @@ public class Shadowrun6Tools {
 
 		for (int i=start; i<ret.length; i++) {
 			ret[i] = - ((i+1-start)/every);
-			if (attr==ShadowrunAttribute.BODY && model.hasQuality("high_pain_tolerance")) {
+			if (attr==ShadowrunAttribute.BODY && model.hasRuleFlag(SR6RuleFlag.PAIN_TOLERANCE_LOWER_MOD)) {
 				if (ret[i]<0)
 					ret[i]++;
 			}
-			if (attr==ShadowrunAttribute.BODY && model.hasQuality("low_pain_tolerance")) {
-				ret[i]*=2;;
+			if (attr==ShadowrunAttribute.BODY && model.hasRuleFlag(SR6RuleFlag.PAIN_TOLERANCE_DOUBLE_MOD)) {
+				ret[i]*=2;
 			}
 		}
+		// Ensure that even for rows smaller than 3 the last box means a higher malus
+		if ((add % 3)!=0) {
+			ret[add-1] = ret[add-1]-1;
+		}
+
 		logger.log(Level.DEBUG, "array for "+attr+": "+Arrays.toString(ret));
 
 		return ret;

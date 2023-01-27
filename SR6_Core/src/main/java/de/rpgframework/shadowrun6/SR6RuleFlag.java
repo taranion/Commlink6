@@ -18,8 +18,11 @@ public enum SR6RuleFlag implements RuleFlag {
 	PHYSICAL_DAMAGE_IS_STUN,
 	/* Lower effects of damage */
 	PAIN_TOLERANCE_LOWER_MOD,
+	/* Double effects of damage */
+	PAIN_TOLERANCE_DOUBLE_MOD,
 	/* Ignore damage box before calculating modifiers */
 	PAIN_TOLERANCE_IGNORE_BOX,
+
 	// Apply Adept and Magican effects of the mentor spirit
 	MENTOR_SPIRIT_BOTH,
 	/* Use CHA for defense rating */
@@ -36,5 +39,7 @@ public enum SR6RuleFlag implements RuleFlag {
 	POLYGLOT,
 	MAX_3_CONTACT_LOYALTY,
 	DECK_5000_PER_KARMA,
-	KNOWLEDGE_COST2_AT_GEN
+	KNOWLEDGE_COST2_AT_GEN,
+
+
 }

@@ -459,7 +459,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 				}
 				// Add modifications
 				for (Modification mod : val.getModifications()) {
-					Modification copy = Shadowrun6Tools.instantiateModification(mod, val, model);
+					Modification copy = Shadowrun6Tools.instantiateModification(mod, val, val.getDistributed(), model);
 					logger.log(Level.DEBUG, "Add modification "+copy);
 					unprocessed.add(copy);
 				}

@@ -174,6 +174,7 @@ public class Shadowrun6CompendiumFactory {
 				ItemSubType.OTHER_SPECIAL
 				);
 		createVehicles   (module,localeCallback, false);
+		createVehicles   (module,localeCallback, true);
 		createAugmentations(module,localeCallback, false);
 		createAugmentations(module,localeCallback, true);
 		createArmor      (module,localeCallback, false);
@@ -914,27 +915,40 @@ public class Shadowrun6CompendiumFactory {
 
 	//-------------------------------------------------------------------
 	private static void createVehicles(Workbook workbook, Function<Collection<PageReference>,Locale[]> localeCallback, boolean blob) throws IOException {
+		int blobOffset = blob?1:0;
 		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Vehicles");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
 		head.createCell(0, CellType.STRING).setCellValue("Name");
-		head.createCell(1, CellType.STRING).setCellValue("Sourcebook");
-		head.createCell(2, CellType.STRING).setCellValue("data-description");
-		head.createCell(3, CellType.STRING).setCellValue("data-app_commlinkID");
-		head.createCell(4, CellType.STRING).setCellValue("data-itemtype");
-		head.createCell(5, CellType.STRING).setCellValue("data-type");
-		head.createCell(6, CellType.STRING).setCellValue("data-availability");
-		head.createCell(7, CellType.STRING).setCellValue("data-price");
-		head.createCell(8, CellType.STRING).setCellValue("data-hand");
-		head.createCell(9, CellType.STRING).setCellValue("data-acc");
-		head.createCell(10, CellType.STRING).setCellValue("data-spdi");
-		head.createCell(11, CellType.STRING).setCellValue("data-speed");
-		head.createCell(12, CellType.STRING).setCellValue("data-body");
-		head.createCell(13, CellType.STRING).setCellValue("data-armor");
-		head.createCell(14, CellType.STRING).setCellValue("data-pilot");
-		head.createCell(15, CellType.STRING).setCellValue("data-sensor");
-		head.createCell(16, CellType.STRING).setCellValue("data-seat");
-		head.createCell(17, CellType.STRING).setCellValue("data-name");
+		if (blob) {
+			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
+		}
+		head.createCell(1+blobOffset, CellType.STRING).setCellValue("data-name");
+		head.createCell(2+blobOffset, CellType.STRING).setCellValue("Sourcebook");
+		head.createCell(3+blobOffset, CellType.STRING).setCellValue("data-description");
+		head.createCell(4+blobOffset, CellType.STRING).setCellValue("data-type");
+		head.createCell(5+blobOffset, CellType.STRING).setCellValue("data-app_commlinkID");
+		head.createCell(6+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemtype");
+		head.createCell(7+blobOffset, CellType.STRING).setCellValue("data-app_commlinkItemsubtype");
+		head.createCell(8+blobOffset, CellType.STRING).setCellValue("data-Category");
+		head.createCell(9+blobOffset, CellType.STRING).setCellValue("data-availability");
+		head.createCell(10+blobOffset, CellType.STRING).setCellValue("data-cost");
+		head.createCell(11+blobOffset, CellType.STRING).setCellValue("data-cost_text");
+		head.createCell(12+blobOffset, CellType.STRING).setCellValue("data-drone_type");
+		head.createCell(13+blobOffset, CellType.STRING).setCellValue("data-handling_onroad");
+		head.createCell(14+blobOffset, CellType.STRING).setCellValue("data-handling_offroad");
+		head.createCell(15+blobOffset, CellType.STRING).setCellValue("data-acceleration");
+		head.createCell(16+blobOffset, CellType.STRING).setCellValue("data-speed_base");
+		head.createCell(17+blobOffset, CellType.STRING).setCellValue("data-speed_base_offroad");
+		head.createCell(18+blobOffset, CellType.STRING).setCellValue("data-speed_max");
+		head.createCell(19+blobOffset, CellType.STRING).setCellValue("data-speed_max_offroad");
+		head.createCell(20+blobOffset, CellType.STRING).setCellValue("data-body_base");
+		head.createCell(21+blobOffset, CellType.STRING).setCellValue("data-armor_base");
+		head.createCell(22+blobOffset, CellType.STRING).setCellValue("data-pilot_base");
+		head.createCell(23+blobOffset, CellType.STRING).setCellValue("data-sensor_base");
+		head.createCell(24+blobOffset, CellType.STRING).setCellValue("data-seats");
+		head.createCell(25+blobOffset, CellType.STRING).setCellValue("data-physical");
+		head.createCell(26+blobOffset, CellType.STRING).setCellValue("data-matrix");
 
 		List<ItemTemplate> list = Shadowrun6Core.getItemList(ItemTemplate.class);
 		Collections.sort(list, new Comparator<ItemTemplate>() {
@@ -949,16 +963,24 @@ public class Shadowrun6CompendiumFactory {
 
 			Row row = sheet.createRow(++rowNum);
 			row.createCell(0, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
-			row.createCell(1, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
-			row.createCell(2, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
-			row.createCell(3, CellType.STRING).setCellValue(item.getId());
+			if (blob) {
+				String first = Converter.getCategoryPage(item,locales[0]);
+				row.createCell(1, CellType.STRING).setCellValue(Converter.makeBelongsTo(first, item, locales[0]));
+			}
+			row.createCell(1+blobOffset, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
+			row.createCell(2+blobOffset, CellType.STRING).setCellValue(createSourceText(item, locales[0]));
+			row.createCell(3+blobOffset, CellType.STRING).setCellValue(pretty(item.getDescription(locales[0])));
+			row.createCell(4+blobOffset, CellType.STRING).setCellValue( "drone");
+			row.createCell(5+blobOffset, CellType.STRING).setCellValue(item.getId());
 
-			Converter.convertVehicle(item, locales[0], row);
-			row.createCell(17, CellType.STRING).setCellValue(capitalize(item.getName(locales[0])));
+			Converter.convertVehicle(item, locales[0], row, 6+blobOffset);
 		}
 
-		for (int i=0; i<11; i++) {
-			if (i==2) continue;
+		for (int i=0; i<28; i++) {
+			if (i==(3+blobOffset) || (blob && i==1) ) {
+				sheet.setColumnWidth(i, 5000);
+				continue;
+			};
 			sheet.autoSizeColumn(i);
 		}
 	}
@@ -969,6 +991,7 @@ public class Shadowrun6CompendiumFactory {
 		Sheet sheet = workbook.createSheet((blob?"Blobs|":"")+"Armor");
 		int rowNum =0;
 		Row head = sheet.createRow(0);
+		head.createCell(0, CellType.STRING).setCellValue("Name");
 		if (blob) {
 			head.createCell(1, CellType.STRING).setCellValue("belongs_to");
 		}

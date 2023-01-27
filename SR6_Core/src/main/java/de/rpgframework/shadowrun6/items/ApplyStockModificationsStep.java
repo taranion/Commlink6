@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -177,9 +178,12 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				logger.log(Level.ERROR, "Not implemented: "+mod.getClass());
 				return false;
 			}
+		case ITEMFLAG:
+			model.setAutoFlag((Enum)mod.getResolvedKey(), true);
+			return true;
 		}
 		logger.log(Level.WARNING, "ToDo: DataItemModification " + mod);
-		System.err.println("ApplyStockModification: unsipported modification type: "+mod.getReferenceType());
+		System.err.println("ApplyStockModification: unsupported modification type: "+mod.getReferenceType());
 //		model.addModification(mod);
 		return false;
 	}
@@ -202,7 +206,8 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		case GEAR:
 			ItemTemplate templ = mod.getReferenceType().resolve(mod.getKey());
 			if ("CHOICE".equals(mod.getKey())) {
-				Choice choice = model.getChoiceMapRecursivly().get( mod.getConnectedChoice() );
+				Shadowrun6Character sr6char = (charac instanceof Shadowrun6Character)?(Shadowrun6Character) charac:null;
+				Choice choice = model.getChoiceMapRecursivly(sr6char).get( mod.getConnectedChoice() );
 				logger.log(Level.DEBUG, "Search choice "+choice+" in decisions "+mod.getDecisions());
 				// Use the decision instead of the key
 				for (Decision d : model.getDecisions()) {

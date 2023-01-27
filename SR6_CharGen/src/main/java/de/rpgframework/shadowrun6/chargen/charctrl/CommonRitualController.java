@@ -112,7 +112,7 @@ public abstract class CommonRitualController extends ControllerImpl<Ritual> impl
 		try {
 			Possible poss = canBeDeselected(value);
 			if (!poss.getRequireDecisions()) {
-				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
+				logger.log(Level.WARNING, "Trying to deselect a ritual which cannot be deselected: {0}",poss);
 				return false;
 			}
 

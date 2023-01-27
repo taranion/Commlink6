@@ -20,6 +20,7 @@ import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
+import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.items.AGearData;
 import de.rpgframework.genericrpg.items.CarryMode;
@@ -44,7 +45,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 @DataItemTypeKey(id = "item")
-public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6PieceOfGearVariant,SR6AlternateUsage> {
+public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6PieceOfGearVariant,SR6AlternateUsage> implements IReferenceResolver {
 
 	public final static String FLAG_AUGMENTATION = "AUGMENTATION";
 	public final static String FLAG_MATRIX_DEVICE = "MATRIX_DEVICE";
@@ -135,7 +136,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	}
 
 	//-------------------------------------------------------------------
-	private ItemTemplate resolveItem(String key) {
+	public ItemTemplate resolveItem(String key) {
 		if (gearDef==null) return null;
 
 		for (ItemTemplate tmp : gearDef) {
@@ -145,6 +146,13 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			}
 		}
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	public List<ItemTemplate> getGearSubDefinitions() {
+		if (gearDef==null) return List.of();
+
+		return gearDef;
 	}
 
 	//-------------------------------------------------------------------
@@ -200,6 +208,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 
 		// Validate hook identifier in modifications
 		for (Modification tmp : getModifications()) {
+			tmp.setSource(this);
 			tmp.validate();
 			if (tmp instanceof EmbedModification) {
 				try {

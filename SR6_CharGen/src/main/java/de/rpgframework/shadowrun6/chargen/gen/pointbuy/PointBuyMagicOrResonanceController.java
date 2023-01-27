@@ -95,7 +95,7 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 			SR6PointBuySettings settings = (SR6PointBuySettings) model.getCharGenSettings(SR6PointBuySettings.class);
 			MagicOrResonanceType type = model.getMagicOrResonanceType();
 			if (type != null) {
-				int cpCost = type.getCost();
+				int cpCost = (type.usesMagic()||type.usesResonance())?10:0;
 				logger.log(Level.INFO, "Chose '"+type.getId()+"' for "+cpCost+" CP");
 				settings.characterPoints -= cpCost;
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="dying_cyberware" karma="5" pos="false" type="NORMAL">
+     <choices>
+       <choice type="CARRIED" ref="ItemType:CYBERWARE" uuid="35ed2489-d0af-485b-b58a-61fbd064ed9d"/>
+     </choices>
+   </quality>
+</qualities>

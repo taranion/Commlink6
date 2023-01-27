@@ -3,6 +3,7 @@ open module de.rpgframework.shadowrun6.chargen {
 	exports de.rpgframework.shadowrun6.chargen.gen;
 	exports de.rpgframework.shadowrun6.chargen.gen.priority;
 	exports de.rpgframework.shadowrun6.chargen.gen.pointbuy;
+	exports de.rpgframework.shadowrun6.chargen.gen.karma;
 	exports de.rpgframework.shadowrun6.chargen.gen.lifepath;
 	exports de.rpgframework.shadowrun6.chargen.lvl;
 
