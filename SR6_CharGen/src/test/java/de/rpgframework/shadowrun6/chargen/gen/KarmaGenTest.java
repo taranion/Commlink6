@@ -182,11 +182,7 @@ public class KarmaGenTest {
 		assertEquals(0, model.getKarmaFree());
 		assertTrue(charGen.getQualityController().select(Shadowrun6Core.getItem(Quality.class, "sinner")).wasSuccessful()); // 8
 		assertEquals(8, model.getKarmaFree());
-		OperationResult<QualityValue>  res = charGen.getQualityController().select(Shadowrun6Core.getItem(Quality.class, "allergy"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(0).getUUID(),"rare"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(1).getUUID(),"mild"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(2).getUUID(),"Stim Patches")
-				);
+		OperationResult<QualityValue>  res = charGen.getQualityController().select(Shadowrun6Core.getItem(Quality.class, "stim_patch_allergy"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(18, model.getKarmaFree());
 
