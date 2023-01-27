@@ -16,10 +16,12 @@ import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.Tradition;
+import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageMagicOrResonance;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import javafx.geometry.HPos;
@@ -58,8 +60,13 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 	public SR6WizardPageMagicOrResonance(Wizard wizard, IShadowrunCharacterGenerator<?, ?, ?,?> charGen) {
 		super(wizard, charGen);
 
-		if (charGen.getModel().getCharGenUsed()!=null && charGen.getModel().getCharGenUsed().equals("pointbuy")) {
-			lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith());
+		if (charGen.getModel().getCharGenUsed()!=null) {
+			if (charGen.getModel().getCharGenUsed().equals("pointbuy")) {
+				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith("page.mortypecell.cost", charGen.getMagicOrResonanceController()));
+			} else if (charGen.getModel().getCharGenUsed().equals("karma")) {
+				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith("page.mortypecell.karma", charGen.getMagicOrResonanceController()));
+			} else
+				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith("page.mortypecell", charGen.getMagicOrResonanceController()));
 		}
 
 		/* For mystic adepts */
@@ -240,7 +247,9 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
 			logger.log(Level.WARNING,"RCV {0} : {1}", type, Arrays.toString(param));
 			if (param[0] instanceof PointBuyCharacterGenerator) {
-				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith());
+				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith("page.mortypecell.cost", charGen.getMagicOrResonanceController()));
+			} else if (param[0] instanceof KarmaCharacterGenerator) {
+				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith("page.mortypecell.karma",charGen.getMagicOrResonanceController()));
 			}
 			refresh();
 		} else {
@@ -253,7 +262,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 class MagicOrResonanceCellWith extends ListCell<MagicOrResonanceType> {
 
 	protected static PropertyResourceBundle SR6UI = (PropertyResourceBundle) ResourceBundle
-			.getBundle(SR6WizardPageMagicOrResonance.class.getName());
+			.getBundle(SR6WizardPageMagicOrResonance.class.getPackageName()+".SR6WizardPages");
 
 	private HBox layout;
 	private VBox vlayout;
@@ -261,8 +270,13 @@ class MagicOrResonanceCellWith extends ListCell<MagicOrResonanceType> {
 	private Label lblSecond;
 	private Label lblKarma;
 
+	private String i18nKey;
+	private IMagicOrResonanceController ctrl;
+
 	//--------------------------------------------------------------------
-	public MagicOrResonanceCellWith() {
+	public MagicOrResonanceCellWith(String i18nKey, IMagicOrResonanceController ctrl) {
+		this.i18nKey = i18nKey;
+		this.ctrl    = ctrl;
 		lblHeading = new Label();
 		lblSecond = new Label();
 		lblKarma = new Label();
@@ -293,10 +307,8 @@ class MagicOrResonanceCellWith extends ListCell<MagicOrResonanceType> {
 		} else {
 			setGraphic(layout);
 			lblHeading.setText(item.getName());
-			int cost =0;
-			if (item.usesMagic() || item.usesResonance())
-				cost = 10;
-			lblKarma.setText( ResourceI18N.format(SR6UI, "mortypecell.cost", cost) );
+			int cost = ctrl.getCost(item);
+			lblKarma.setText( ResourceI18N.format(SR6UI, i18nKey, cost) );
 		}
 	}
 }

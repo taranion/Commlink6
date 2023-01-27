@@ -9,6 +9,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
+import de.rpgframework.shadowrun.chargen.jfx.KarmaAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.PriorityAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAttributes;
@@ -17,6 +18,7 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
 import javafx.geometry.Insets;
@@ -79,6 +81,8 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 			return new PriorityAttributeTable<>(controller);
 		} else if (realCtrl instanceof PointBuyCharacterGenerator) {
 			return new PointBuyAttributeTable<>(controller);
+		} else if (realCtrl instanceof KarmaCharacterGenerator) {
+			return new KarmaAttributeTable<>(controller);
 		}
 		logger.log(Level.ERROR, "Don't know what to return for "+realCtrl);
 		return null;
@@ -100,6 +104,9 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 			backHeaderCP.setVisible(true);
 			backHeaderCP.setManaged(true);
 			backHeaderCP.setValue( ((PointBuyCharacterGenerator)realCtrl).getSettings().characterPoints );
+		} else {
+			backHeaderCP.setVisible(false);
+			backHeaderCP.setManaged(false);
 		}
 	}
 

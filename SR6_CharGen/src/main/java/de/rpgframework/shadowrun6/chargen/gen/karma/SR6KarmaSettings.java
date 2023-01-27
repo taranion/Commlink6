@@ -1,12 +1,13 @@
 package de.rpgframework.shadowrun6.chargen.gen.karma;
 
+import de.rpgframework.shadowrun.chargen.gen.IKarmaSettings;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
 /**
  * @author prelle
  *
  */
-public class SR6KarmaSettings extends CommonSR6GeneratorSettings {
+public class SR6KarmaSettings extends CommonSR6GeneratorSettings implements IKarmaSettings {
 
 	public int startKarma;
 	public int attrib;

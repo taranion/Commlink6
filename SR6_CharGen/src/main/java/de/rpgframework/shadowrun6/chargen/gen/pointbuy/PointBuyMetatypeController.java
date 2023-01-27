@@ -22,7 +22,7 @@ import de.rpgframework.shadowrun6.chargen.gen.priority.PriorityCharacterGenerato
  *
  */
 public class PointBuyMetatypeController extends CommonMetatypeGenerator {
-	
+
 	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PriorityCharacterGenerator.class, Locale.ENGLISH, Locale.GERMAN);
 
 //	private List<SR6MetaType> availableOptions;
@@ -41,20 +41,20 @@ public class PointBuyMetatypeController extends CommonMetatypeGenerator {
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 		List<Modification> unprocessed = new ArrayList<>();
-		
+
 		availableOptions.clear();
 		for (SR6MetaType meta : Shadowrun6Core.getItemList(SR6MetaType.class)) {
 			MetaTypeOption opt = new MetaTypeOption(meta, meta.getKarma());
 			opt.setSpecialAttributePoints(0);
 			availableOptions.put(meta, opt);
 		}
-		
+
 		for (Modification mod : previous) {
 			unprocessed.add(mod);
 		}
-		
+
 		Shadowrun6Character model = parent.getModel();
-		logger.log(Level.WARNING, "Available metatype options: "+availableOptions);
+		logger.log(Level.DEBUG, "Available metatype options: "+availableOptions);
 		SR6MetaType selected = model.getMetatype();
 		logger.log(Level.DEBUG, "  selected: "+selected);
 
@@ -78,7 +78,7 @@ public class PointBuyMetatypeController extends CommonMetatypeGenerator {
 				// Applying modification is a special CharacterProcessor from Core
 			}
 		}
-		
+
 		return unprocessed;
 	}
 

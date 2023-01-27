@@ -16,6 +16,7 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.chargen.gen.KarmaAttributeGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -26,9 +27,9 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator implements NumericalValueController<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> {
+public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator implements KarmaAttributeGenerator {
 
-	public final static String I18N_NOT_SPECIAL_OR_RACIAL = "attrib.adjust.noSpecialAttribute";
+//	public final static String I18N_NOT_SPECIAL_OR_RACIAL = "attrib.adjust.noSpecialAttribute";
 
 	private final static Logger logger = System.getLogger(SR6KarmaAttributeGenerator.class.getPackageName()+".attrib");
 

@@ -6,17 +6,13 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
-import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.MagicOrResonanceOption;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.Tradition;
@@ -140,6 +136,15 @@ public class KarmaMagicOrResonanceController extends MagicOrResonanceController 
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE process()");
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController#getCost(de.rpgframework.shadowrun.MagicOrResonanceType)
+	 */
+	@Override
+	public int getCost(MagicOrResonanceType morType) {
+		return morType.getCost();
 	}
 
 }

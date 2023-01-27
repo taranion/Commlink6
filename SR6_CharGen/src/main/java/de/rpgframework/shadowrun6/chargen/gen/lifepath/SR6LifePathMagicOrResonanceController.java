@@ -33,13 +33,13 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6LifePathMagicOrResonanceController extends MagicOrResonanceController {
-	
+
 	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(LifePathCharacterGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
-	
+
 	private final static Logger logger = System.getLogger(SR6LifePathMagicOrResonanceController.class.getPackageName());
 
 	protected List<MagicOrResonanceType> available;
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @param parent
@@ -54,7 +54,7 @@ public class SR6LifePathMagicOrResonanceController extends MagicOrResonanceContr
 			}
 		});
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController#getAvailable()
@@ -92,14 +92,14 @@ public class SR6LifePathMagicOrResonanceController extends MagicOrResonanceContr
 	public List<Modification> process(List<Modification> previous) {
 		logger.log(Level.WARNING,"process()");
 		List<Modification> unprocessed = new ArrayList<>(previous);
-		
-		
+
+
 		MagicOrResonanceType type = model.getMagicOrResonanceType();
 		if (type==null) {
 			type = Shadowrun6Core.getItem(MagicOrResonanceType.class, "mundane");
 			model.setMagicOrResonanceType(type);
 		}
-		
+
 		logger.log(Level.INFO, "BORN THIS WAY: "+type);
 		switch (type.getId()) {
 		case "technomancer":
@@ -114,11 +114,17 @@ public class SR6LifePathMagicOrResonanceController extends MagicOrResonanceContr
 			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 2));
 			break;
 		case "mundane":
-			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.EDGE.name(), 1)); 
+			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.EDGE.name(), 1));
 			break;
 		}
-		
+
 		return unprocessed;
+	}
+
+	@Override
+	public int getCost(MagicOrResonanceType morType) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

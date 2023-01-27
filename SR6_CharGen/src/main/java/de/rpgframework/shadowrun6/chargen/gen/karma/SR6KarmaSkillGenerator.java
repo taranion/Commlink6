@@ -195,8 +195,12 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 				int karma = 0;
 				switch (val.getSkill().getType()) {
 				case LANGUAGE:
-					// Pay specializations
-					karma += val.getSpecializations().size()*5;
+					// Pay language levels other than native
+					if (val.getDistributed()<4) {
+						karma += val.getDistributed()*3;
+						logger.log(Level.INFO, "Pay {0} for language {1}", karma, val.getKey(), val.getDistributed());
+					}
+					break;
 				case KNOWLEDGE:
 					// No specializations for Knowledge
 					karma+=3;
