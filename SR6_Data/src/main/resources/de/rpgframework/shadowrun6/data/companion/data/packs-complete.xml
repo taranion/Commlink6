@@ -120,6 +120,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="chrysler-nissan_jackrabbit" id="e7938824-ea2b-458d-b364-ebe843a61313" />
              <embed  type="GEAR" intoId="e7938824-ea2b-458d-b364-ebe843a61313" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="chrysler-nissan_jackrabbit"/>
                 </embed>
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" remove="y"/>
@@ -1255,10 +1256,10 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="mct_hornet"/>
                 </embed>
-             <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+             <!-- <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet_stinger"/> -->
-                </embed>
+                <!-- </embed> -->
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_roadmaster" id="9a481409-5d90-4aef-83f6-9b76a8f8dc88" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="hardpoint_conceal_large" /> -->
@@ -1593,7 +1594,7 @@
          <valmod type="GEAR" apply="CHARACTER" ref="miniwelder_fuel" value="2" />
          <itemmod type="GEAR" apply="CHARACTER" ref="plastic_straps" />
          <itemmod type="GEAR" apply="CHARACTER" ref="tag_eraser" />
-         <valmod type="GEAR" apply="CHARACTER" ref="stealth_tag" variant ="stealth_tag" value="10" />
+         <valmod type="GEAR" apply="CHARACTER" ref="security_tag" variant ="stealth_tag" value="10" />
          <valmod type="GEAR" apply="CHARACTER" ref="stim_patch" value="2">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 </valmod>
@@ -1623,19 +1624,19 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="armor_vest" id="d2a86369-8c3b-4c7e-968c-36cb782f305d" />
              <embed  type="GEAR" intoId="d2a86369-8c3b-4c7e-968c-36cb782f305d" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d2a86369-8c3b-4c7e-968c-36cb782f305d" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d2a86369-8c3b-4c7e-968c-36cb782f305d" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d2a86369-8c3b-4c7e-968c-36cb782f305d" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="c12bf51f-7521-43bd-ba07-cf581a05c484">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="c12bf51f-7521-43bd-ba07-cf581a05c484" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
              <embed  type="GEAR" intoId="c12bf51f-7521-43bd-ba07-cf581a05c484" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
            <selmod>
@@ -1658,25 +1659,25 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="lined_coat" />
              <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="75211f9b-6625-4694-a10f-8bec741313bf" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="magical_lodge_materials">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 </itemmod>
          <valmod type="GEAR" apply="CHARACTER" ref="reagents_per_dram" value="30" />
          <itemmod type="GEAR" apply="CHARACTER" ref="mage-sight-goggles" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars_optical" variant ="optical" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" variant ="optical" />
          <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="49a400ab-3726-44be-b36e-c4348dc5fce9">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="49a400ab-3726-44be-b36e-c4348dc5fce9" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
          <itemmod type="GEAR" apply="CHARACTER" ref="chrysler-nissan_jackrabbit" id="e7938824-ea2b-458d-b364-ebe843a61313" />
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
@@ -1695,16 +1696,16 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="armor_vest" id="26426400-cabd-420d-a21c-b2ce51ceebed" />
              <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="26426400-cabd-420d-a21c-b2ce51ceebed" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
          <!-- <itemmod type="GEAR" apply="CHARACTER" ref="weapon_focus"> -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
@@ -1731,40 +1732,40 @@
              <embed  type="GEAR" intoId="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" intoType="HOOK" intoRef="ARMOR" ref="hidden_pocket" />
              <embed  type="GEAR" intoId="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="bfb1d053-4ada-4c59-8fc9-ec78fa348ad1" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="actioneer_business" id="4e99806d-ce84-467f-b9a7-a61d8b693cf4" />
              <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" intoType="HOOK" intoRef="ARMOR" ref="electrochromic_feature" />
              <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" intoType="HOOK" intoRef="ARMOR" ref="hidden_pocket" />
              <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="4e99806d-ce84-467f-b9a7-a61d8b693cf4" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="lined_coat" id="438a8240-5392-4c04-b697-588d92c0470b" />
              <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" intoType="HOOK" intoRef="ARMOR" ref="electrochromic_feature" />
              <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" intoType="HOOK" intoRef="ARMOR" ref="hidden_pocket" />
              <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="438a8240-5392-4c04-b697-588d92c0470b" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cellular_glove_molder">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 </itemmod>
@@ -1776,7 +1777,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="white_noise_generator" />
          <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="b5dc0a69-4aba-47c0-97eb-afb530f07041">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="b5dc0a69-4aba-47c0-97eb-afb530f07041" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
              <embed  type="GEAR" intoId="b5dc0a69-4aba-47c0-97eb-afb530f07041" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
            <selmod>
@@ -1785,14 +1786,14 @@
            </selmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="earbuds" id="f7200ba0-8918-4428-83bb-1661256b4453">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="f7200ba0-8918-4428-83bb-1661256b4453" intoType="HOOK" intoRef="AUDIO" ref="audio_enhancement" />
              <embed  type="GEAR" intoId="f7200ba0-8918-4428-83bb-1661256b4453" intoType="HOOK" intoRef="AUDIO" ref="select_sound_filter">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="33160458-39bf-4b37-b9fe-7235db42a165">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="33160458-39bf-4b37-b9fe-7235db42a165" intoType="HOOK" intoRef="OPTICAL" ref="ultrasound_link" />
              <embed  type="GEAR" intoId="33160458-39bf-4b37-b9fe-7235db42a165" intoType="HOOK" intoRef="OPTICAL" ref="vision_enhancement" />
              <embed  type="GEAR" intoId="33160458-39bf-4b37-b9fe-7235db42a165" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
@@ -1801,7 +1802,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="credstick_gold" />
          <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="00818f70-c7d6-4384-bdbf-47d9c31800fa">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </embed>
+                </itemmod>
          <!-- <itemmod type="GEAR" apply="CHARACTER" ref="single_sensor"> -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
                 <!-- <decision choice="UUID tbe" value="ultrasonic"/> -->
@@ -1861,29 +1862,29 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="lined_coat" id="9f833414-4de4-4894-804a-43069f8dcfe8" />
              <embed  type="GEAR" intoId="9f833414-4de4-4894-804a-43069f8dcfe8" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="9f833414-4de4-4894-804a-43069f8dcfe8" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="9f833414-4de4-4894-804a-43069f8dcfe8" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="9f833414-4de4-4894-804a-43069f8dcfe8" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="f44b7a45-93c3-409b-9a23-b8d9a7faee32">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="f44b7a45-93c3-409b-9a23-b8d9a7faee32" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
              <embed  type="GEAR" intoId="f44b7a45-93c3-409b-9a23-b8d9a7faee32" intoType="HOOK" intoRef="OPTICAL" ref="smartlink" />
          <itemmod type="GEAR" apply="CHARACTER" ref="earbuds" id="4a8a85d7-5da6-414c-bcc0-2648b2fc5538">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="4a8a85d7-5da6-414c-bcc0-2648b2fc5538" intoType="HOOK" intoRef="AUDIO" ref="audio_enhancement" />
              <embed  type="GEAR" intoId="4a8a85d7-5da6-414c-bcc0-2648b2fc5538" intoType="HOOK" intoRef="AUDIO" ref="spatial_recognizer" />
          <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="6d45d24f-14af-4cf9-bacb-6c6e083ccb13">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="6d45d24f-14af-4cf9-bacb-6c6e083ccb13" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
              <embed  type="GEAR" intoId="6d45d24f-14af-4cf9-bacb-6c6e083ccb13" intoType="HOOK" intoRef="OPTICAL" ref="vision_enhancement" />
              <embed  type="GEAR" intoId="6d45d24f-14af-4cf9-bacb-6c6e083ccb13" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
@@ -1896,17 +1897,17 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberarm" id="fca51877-b11d-4c9a-95f3-4c2dc0262b32" variant ="fullarm_synthetic">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="fca51877-b11d-4c9a-95f3-4c2dc0262b32" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="fca51877-b11d-4c9a-95f3-4c2dc0262b32" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="shock_limb">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="fca51877-b11d-4c9a-95f3-4c2dc0262b32" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="spurs">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="skin_pocket">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
                 </itemmod>
@@ -1929,16 +1930,16 @@
              <embed  type="GEAR" intoId="59d26881-fb55-441e-b99e-a3d462789dca" intoType="HOOK" intoRef="ARMOR" ref="hidden_pocket" />
              <embed  type="GEAR" intoId="59d26881-fb55-441e-b99e-a3d462789dca" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="59d26881-fb55-441e-b99e-a3d462789dca" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="59d26881-fb55-441e-b99e-a3d462789dca" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="7ef8dd9e-2b0b-4aff-86c2-26984ab35d88">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="7ef8dd9e-2b0b-4aff-86c2-26984ab35d88" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
              <embed  type="GEAR" intoId="7ef8dd9e-2b0b-4aff-86c2-26984ab35d88" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
            <selmod>
@@ -1947,11 +1948,11 @@
            </selmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="earbuds" id="6b64e43d-af89-4d90-a926-dd9e2c003bde">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="6b64e43d-af89-4d90-a926-dd9e2c003bde" intoType="HOOK" intoRef="AUDIO" ref="audio_enhancement" />
              <embed  type="GEAR" intoId="6b64e43d-af89-4d90-a926-dd9e2c003bde" intoType="HOOK" intoRef="AUDIO" ref="select_sound_filter">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="lockpick_set" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cellular_glove_molder">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
@@ -2012,16 +2013,16 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="lined_coat" id="63b3907e-9204-41b1-87a5-f8d8d78e383b" />
              <embed  type="GEAR" intoId="63b3907e-9204-41b1-87a5-f8d8d78e383b" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="63b3907e-9204-41b1-87a5-f8d8d78e383b" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="63b3907e-9204-41b1-87a5-f8d8d78e383b" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="63b3907e-9204-41b1-87a5-f8d8d78e383b" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
          <itemmod type="GEAR" apply="CHARACTER" ref="white_noise_generator">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
@@ -2035,12 +2036,12 @@
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="2f5306c3-806d-40c4-8fcb-bf932e7dd86f">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="2f5306c3-806d-40c4-8fcb-bf932e7dd86f" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
              <embed  type="GEAR" intoId="2f5306c3-806d-40c4-8fcb-bf932e7dd86f" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
          <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="cdfdc878-8ef6-4f1c-a50a-0cead8de1126">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="cdfdc878-8ef6-4f1c-a50a-0cead8de1126" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
              <embed  type="GEAR" intoId="cdfdc878-8ef6-4f1c-a50a-0cead8de1126" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
              <embed  type="GEAR" intoId="cdfdc878-8ef6-4f1c-a50a-0cead8de1126" intoType="HOOK" intoRef="OPTICAL" ref="vision_enhancement" />
@@ -2060,130 +2061,130 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberskull" id="c102efc3-a955-4800-941a-45b8f396d62f" variant ="obvious">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="c102efc3-a955-4800-941a-45b8f396d62f" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="armor">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybertorso" id="dd8e2e41-5710-4db2-8fd7-d9f79cda92b9" variant ="obvious">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="dd8e2e41-5710-4db2-8fd7-d9f79cda92b9" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="armor">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="dd8e2e41-5710-4db2-8fd7-d9f79cda92b9" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="smuggling_compartment">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberarm" id="74d32e34-7a5a-4cc6-be94-deec560a0921" variant ="fullarm_obvious">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="74d32e34-7a5a-4cc6-be94-deec560a0921" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="74d32e34-7a5a-4cc6-be94-deec560a0921" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="strength">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="74d32e34-7a5a-4cc6-be94-deec560a0921" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="gyro_mount" variant ="cyberimplant">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberarm" id="b414a9ee-a0fb-42a0-9799-a996ed279338" variant ="fullarm_obvious">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="strength">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="external_clip_port">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="silencer" variant ="cyberimplantweapon">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="cyber_heavy_pistol">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="ares_predator_vi" />
              <embed  type="GEAR" intoId="b414a9ee-a0fb-42a0-9799-a996ed279338" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="spare_clip_predator" count="5" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberleg" id="d8733145-f652-4d92-9044-5f9b212cf17d" variant ="fullleg_obvious">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="strength">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="armor">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="cyber_holster">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d8733145-f652-4d92-9044-5f9b212cf17d" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="hydraulic_jacks">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberleg" id="fbfa8222-ecaa-4b45-af10-58c19e790cb6" variant ="fullleg_obvious">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="agility">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="strength">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="attribute_increase" variant ="armor">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="cyber_holster">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="fbfa8222-ecaa-4b45-af10-58c19e790cb6" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="hydraulic_jacks">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="c9165242-d8b2-42b5-a52c-bc182dfacffb">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_enhancement">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="c9165242-d8b2-42b5-a52c-bc182dfacffb" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberears" id="e8df5da1-f2c2-462c-b216-9a601fcec765">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="e8df5da1-f2c2-462c-b216-9a601fcec765" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="damper">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_viper_slivergun" id="d579e371-1208-4c2a-a37d-b717bde0c8e3" />
              <embed  type="GEAR" intoId="d579e371-1208-4c2a-a37d-b717bde0c8e3" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant ="internal" />
              <embed  type="GEAR" intoId="d579e371-1208-4c2a-a37d-b717bde0c8e3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="3" />
@@ -2213,26 +2214,26 @@
              <embed  type="GEAR" intoId="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" />
              <embed  type="GEAR" intoId="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="armor_jacket" id="5a5c6ec9-37de-42b8-b52a-1a88288fdfba" />
              <embed  type="GEAR" intoId="5a5c6ec9-37de-42b8-b52a-1a88288fdfba" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="5a5c6ec9-37de-42b8-b52a-1a88288fdfba" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="5a5c6ec9-37de-42b8-b52a-1a88288fdfba" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="5a5c6ec9-37de-42b8-b52a-1a88288fdfba" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="flash_pak" />
       </modifications>
    </item>
@@ -2259,41 +2260,41 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="cdcd184e-e855-49ff-9afd-0d84478065af">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_enhancement">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="cdcd184e-e855-49ff-9afd-0d84478065af" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberears" id="d76fcc74-dafb-4339-adbd-24957b84f8e1">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="d76fcc74-dafb-4339-adbd-24957b84f8e1" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="damper">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d76fcc74-dafb-4339-adbd-24957b84f8e1" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="audio_enhancement">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d76fcc74-dafb-4339-adbd-24957b84f8e1" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="balance_augmenter">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d76fcc74-dafb-4339-adbd-24957b84f8e1" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="spatial_recognizer">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="stun_baton" />
          <itemmod type="GEAR" apply="CHARACTER" ref="katana" />
          <itemmod type="GEAR" apply="CHARACTER" ref="rudger_redhawk" id="29537962-1b87-403f-bb76-bd53d14b8921" />
@@ -2345,22 +2346,22 @@
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
-         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade_mini" variant ="mini" value="2" />
-         <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade_mini" variant ="mini" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant ="mini" value="2" />
+         <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant ="mini" value="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade" variant ="mini" value="2" />
          <itemmod type="GEAR" apply="CHARACTER" ref="armor_jacket" id="5ec487e1-6964-4603-a7fa-426c454085df" />
              <embed  type="GEAR" intoId="5ec487e1-6964-4603-a7fa-426c454085df" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="5ec487e1-6964-4603-a7fa-426c454085df" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="5ec487e1-6964-4603-a7fa-426c454085df" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="5ec487e1-6964-4603-a7fa-426c454085df" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
          <valmod type="GEAR" apply="CHARACTER" ref="flash_pak" value="3" />
          <!-- <valmod type="GEAR" apply="CHARACTER" ref="fake_license" value="2"> -->
@@ -2423,20 +2424,20 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="lined_coat" id="ba285307-3130-49e5-bc04-c9526f3c1fbb" />
              <embed  type="GEAR" intoId="ba285307-3130-49e5-bc04-c9526f3c1fbb" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="ba285307-3130-49e5-bc04-c9526f3c1fbb" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="ba285307-3130-49e5-bc04-c9526f3c1fbb" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="ba285307-3130-49e5-bc04-c9526f3c1fbb" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
          <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="ae66a692-0143-453c-8ede-358a7e5b9187">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="ae66a692-0143-453c-8ede-358a7e5b9187" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
              <embed  type="GEAR" intoId="ae66a692-0143-453c-8ede-358a7e5b9187" intoType="HOOK" intoRef="OPTICAL" ref="smartlink" />
          <valmod type="GEAR" apply="CHARACTER" ref="flash_pak" value="2" />
@@ -2454,26 +2455,26 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberears" id="cbbb97cb-39b9-43bf-8bfe-38970183e054">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="cbbb97cb-39b9-43bf-8bfe-38970183e054" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="damper">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="1784c719-0e93-4c52-94d0-974af4813ca4">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="1784c719-0e93-4c52-94d0-974af4813ca4" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="1784c719-0e93-4c52-94d0-974af4813ca4" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="1784c719-0e93-4c52-94d0-974af4813ca4" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="1784c719-0e93-4c52-94d0-974af4813ca4" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="wired_reflexes">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
@@ -2567,32 +2568,32 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="lined_coat" id="87883e85-e822-43f8-ade5-d557caf08669" />
              <embed  type="GEAR" intoId="87883e85-e822-43f8-ade5-d557caf08669" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="87883e85-e822-43f8-ade5-d557caf08669" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="87883e85-e822-43f8-ade5-d557caf08669" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="87883e85-e822-43f8-ade5-d557caf08669" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
          <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_with_helmet" id="8820f080-b3ab-43e6-90d5-eda0fd55446e" />
              <embed  type="GEAR" intoId="8820f080-b3ab-43e6-90d5-eda0fd55446e" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" />
              <embed  type="GEAR" intoId="8820f080-b3ab-43e6-90d5-eda0fd55446e" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="8820f080-b3ab-43e6-90d5-eda0fd55446e" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="8820f080-b3ab-43e6-90d5-eda0fd55446e" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ballistic_shield" id="e8816f09-3f50-431c-8d2a-e4148a88ab47" />
              <embed  type="GEAR" intoId="e8816f09-3f50-431c-8d2a-e4148a88ab47" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="conventional_explosives">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="12"/>
                 </itemmod>
@@ -2636,28 +2637,28 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="0eb4d4d9-99d3-4961-9009-182749c640b7">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_enhancement">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="0eb4d4d9-99d3-4961-9009-182749c640b7" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="b63e92cd-3b97-4100-98b6-ad2285484bd0">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="b63e92cd-3b97-4100-98b6-ad2285484bd0" intoType="HOOK" intoRef="CYBERDECK" ref="shiawase_cyber6" id="6cd08dcc-8c3e-4ef5-be47-8667882f751e" />
              <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" />
              <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="browse" />
@@ -2693,31 +2694,31 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="armor_vest" id="b3ebf745-9256-4316-bb9a-9c274715aa43" />
              <embed  type="GEAR" intoId="b3ebf745-9256-4316-bb9a-9c274715aa43" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b3ebf745-9256-4316-bb9a-9c274715aa43" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b3ebf745-9256-4316-bb9a-9c274715aa43" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b3ebf745-9256-4316-bb9a-9c274715aa43" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="data_tap" />
          <itemmod type="GEAR" apply="CHARACTER" ref="earbuds" id="3ba4218f-dbfe-4043-9f52-78eb181ff08d">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="3ba4218f-dbfe-4043-9f52-78eb181ff08d" intoType="HOOK" intoRef="AUDIO" ref="audio_enhancement" />
              <embed  type="GEAR" intoId="3ba4218f-dbfe-4043-9f52-78eb181ff08d" intoType="HOOK" intoRef="AUDIO" ref="select_sound_filter">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="kit">
                 <decision choice="8d33356c-f3d4-4387-a6a2-a9575c449ae7" value="electronics"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="mct_gnat" id="ed581fef-26d2-4bae-93e4-46700a039828" />
              <embed  type="GEAR" intoId="ed581fef-26d2-4bae-93e4-46700a039828" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="white_noise_generator">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
                 </itemmod>
@@ -2739,19 +2740,19 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="32c3560b-5cae-4c73-9d10-e34297da55db">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="32c3560b-5cae-4c73-9d10-e34297da55db" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="32c3560b-5cae-4c73-9d10-e34297da55db" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="32c3560b-5cae-4c73-9d10-e34297da55db" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="32c3560b-5cae-4c73-9d10-e34297da55db" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" />
              <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="BARREL" ref="silencer" />
              <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
@@ -2765,16 +2766,16 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="armor_jacket" id="e266daa9-bc75-4e4b-9970-f58236676c52" />
              <embed  type="GEAR" intoId="e266daa9-bc75-4e4b-9970-f58236676c52" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="e266daa9-bc75-4e4b-9970-f58236676c52" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="e266daa9-bc75-4e4b-9970-f58236676c52" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="e266daa9-bc75-4e4b-9970-f58236676c52" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
          <itemmod type="GEAR" apply="CHARACTER" ref="maersk_spider" id="53fd12c3-a42a-4f7b-8900-a89c62121de3" />
              <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="armor" variant ="rcc" />
@@ -2785,19 +2786,19 @@
              <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="virtual_machine" variant ="rcc" />
              <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="mct_hornet"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="mct_hornet"/>
-                </itemmod>
-             <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </embed>
+             <!-- <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet_stinger"/> -->
-                </itemmod>
+                <!-- </embed> -->
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_roadmaster" id="9a481409-5d90-4aef-83f6-9b76a8f8dc88" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="hardpoint_conceal_large" /> -->
@@ -2890,19 +2891,19 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="d295f89d-5d81-4bfa-a470-d537a44a2968">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="d295f89d-5d81-4bfa-a470-d537a44a2968" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d295f89d-5d81-4bfa-a470-d537a44a2968" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d295f89d-5d81-4bfa-a470-d537a44a2968" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="d295f89d-5d81-4bfa-a470-d537a44a2968" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="thermographic_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_crusader_ii" id="808fd6d8-e8ad-4108-b015-4ebe316253ef" />
              <embed  type="GEAR" intoId="808fd6d8-e8ad-4108-b015-4ebe316253ef" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
              <embed  type="GEAR" intoId="808fd6d8-e8ad-4108-b015-4ebe316253ef" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
@@ -2918,16 +2919,16 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="armor_vest" id="c56274cc-3b32-41c3-a5d4-ef8e0bfd5093" />
              <embed  type="GEAR" intoId="c56274cc-3b32-41c3-a5d4-ef8e0bfd5093" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="c56274cc-3b32-41c3-a5d4-ef8e0bfd5093" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="0"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="c56274cc-3b32-41c3-a5d4-ef8e0bfd5093" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="c56274cc-3b32-41c3-a5d4-ef8e0bfd5093" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
          <itemmod type="GEAR" apply="CHARACTER" ref="proteus_poseidon" id="b1732dc4-a551-4042-928a-96a054dd54a5" />
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="armor" variant ="rcc" />
@@ -2938,39 +2939,39 @@
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="virtual_machine" variant ="rcc" />
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="horizon_flying_eye"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="mct-nissan_roto_drone"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="steel_lynx_combat_drone"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="horizon_flying_eye"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="mct-nissan_roto_drone"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="rpk_hmg"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="armtech_mgl12"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="b1732dc4-a551-4042-928a-96a054dd54a5" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="ak_97"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="gmc_bulldog" id="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" />
              <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
              <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_BODY" ref="hardpoint_conceal_huge" /> -->
@@ -3001,10 +3002,10 @@
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="stick_n_shock"/>
                 </valmod>
-             <embed  type="GEAR" intoId="6687bbba-8a84-4d5d-89a1-dcb6beb42f03" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_turret_heavy" id="1729f6a7-891c-4fc6-913c-ccd6dae98818" />
-             <embed  type="GEAR" intoId="1729f6a7-891c-4fc6-913c-ccd6dae98818" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="armtech_mgl12" id="22806a88-823e-492c-98cc-fd4dfe58f7c6" />
-             <embed  type="GEAR" intoId="22806a88-823e-492c-98cc-fd4dfe58f7c6" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
-             <embed  type="GEAR" intoId="22806a88-823e-492c-98cc-fd4dfe58f7c6" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
+             <!-- <embed  type="GEAR" intoId="6687bbba-8a84-4d5d-89a1-dcb6beb42f03" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_turret_heavy" id="1729f6a7-891c-4fc6-913c-ccd6dae98818" /> -->
+             <!-- <embed  type="GEAR" intoId="1729f6a7-891c-4fc6-913c-ccd6dae98818" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="armtech_mgl12" id="22806a88-823e-492c-98cc-fd4dfe58f7c6" /> -->
+             <!-- <embed  type="GEAR" intoId="22806a88-823e-492c-98cc-fd4dfe58f7c6" intoType="HOOK" intoRef="TOP" ref="smartgun_system" /> -->
+             <!-- <embed  type="GEAR" intoId="22806a88-823e-492c-98cc-fd4dfe58f7c6" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" /> -->
          <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant ="mini" value="12" />
          <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant ="mini" value="12" />
          <valmod type="GEAR" apply="CHARACTER" ref="high_explosive_grenade" variant ="mini" value="12" />
@@ -3079,19 +3080,19 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="2d33b744-a9a9-4693-9839-9692a2e20fd2">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </embed>
+                </itemmod>
              <embed  type="GEAR" intoId="2d33b744-a9a9-4693-9839-9692a2e20fd2" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="flare_compensation">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="2d33b744-a9a9-4693-9839-9692a2e20fd2" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="low_light_vision">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="2d33b744-a9a9-4693-9839-9692a2e20fd2" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="smartlink">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
              <embed  type="GEAR" intoId="2d33b744-a9a9-4693-9839-9692a2e20fd2" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="vision_magnification">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
-                </itemmod>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="reflex_recorder">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 <decision choice="3cf6d9ac-dc8c-4d51-8058-b769eac72f50" value="firearms"/>
