@@ -14,13 +14,14 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.shadowrun.Contact;
+import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
+import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.ISkillController;
 import de.rpgframework.shadowrun.chargen.charctrl.ISpellController;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -32,6 +33,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 
 /**
  * @author prelle
@@ -185,6 +187,48 @@ public class KarmaGenTest {
 		OperationResult<QualityValue>  res = charGen.getQualityController().select(Shadowrun6Core.getItem(Quality.class, "stim_patch_allergy"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(18, model.getKarmaFree());
+
+		// Contacts
+		IContactController contacts = charGen.getContactController();
+		assertEquals(24, contacts.getPointsLeft());
+		Contact c1 = contacts.createContact().get();
+		c1.setTypeName("Konzernsektretärin");
+		contacts.increaseRating(c1);
+		contacts.increaseLoyalty(c1);
+		contacts.increaseLoyalty(c1);
+		contacts.increaseLoyalty(c1);
+		c1.setType(ContactType.CORPORATE);
+		Contact c2 = contacts.createContact().get();
+		c2.setTypeName("Schieber");
+		contacts.increaseRating(c2);
+		contacts.increaseRating(c2);
+		contacts.increaseRating(c2);
+		contacts.increaseLoyalty(c2);
+		c2.setType(ContactType.CRIMINAL);
+		Contact c3 = contacts.createContact().get();
+		c3.setTypeName("Straßendoc");
+		contacts.increaseRating(c3);
+		contacts.increaseLoyalty(c3);
+		contacts.increaseLoyalty(c3);
+		contacts.increaseLoyalty(c3);
+		c3.setType(ContactType.MEDICAL);
+		Contact c4 = contacts.createContact().get();
+		c4.setTypeName("Taliskrämer");
+		contacts.increaseRating(c4);
+		contacts.increaseRating(c4);
+		contacts.increaseLoyalty(c4);
+		contacts.increaseLoyalty(c4);
+		c4.setType(ContactType.MAGIC);
+		assertEquals(0, contacts.getPointsLeft());
+
+		// Ressources
+		SR6EquipmentGenerator equip = (SR6EquipmentGenerator) charGen.getEquipmentController();
+		for (int i=0; i<18; i++) {
+			assertTrue("Could not increase conversion above "+equip.getConvertedKarma() ,equip.increaseConversion());
+		}
+		equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "starterpack"));
+
+		model.setName("Ex DocWagon Heal-Mage");
 
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);

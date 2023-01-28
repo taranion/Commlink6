@@ -95,6 +95,7 @@ public class KarmaMagicOrResonanceController extends MagicOrResonanceController 
 				logger.log(Level.INFO, "Chose '"+type.getId()+"' for "+karmaCost+" Karma");
 				model.setKarmaFree( model.getKarmaFree() - karmaCost);
 				model.setKarmaInvested( model.getKarmaInvested() + karmaCost);
+				settings.morType = karmaCost;
 
 				switch (type.getId()) {
 				case "magician":

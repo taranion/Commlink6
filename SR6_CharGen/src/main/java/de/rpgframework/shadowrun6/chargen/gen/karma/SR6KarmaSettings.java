@@ -10,9 +10,13 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 public class SR6KarmaSettings extends CommonSR6GeneratorSettings implements IKarmaSettings {
 
 	public int startKarma;
+	public int meta;
+	public int morType;
 	public int attrib;
 	public int skills;
 	public int spells;
+	public int cforms;
+
 
 	//-------------------------------------------------------------------
 	/**

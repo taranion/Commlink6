@@ -14,7 +14,9 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonMetatypeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.PriorityCharacterGenerator;
 
 /**
@@ -75,7 +77,11 @@ public class PointBuyMetatypeController extends CommonMetatypeGenerator {
 					logger.log(Level.INFO, "Pay "+karma+" for metatype "+selected.getId());
 					model.setKarmaFree(model.getKarmaFree()-karma);
 				}
-				// Applying modification is a special CharacterProcessor from Core
+				String genID = ((SR6CharacterGenerator)parent).getId();
+				if ("karma".equals(genID)) {
+					SR6KarmaSettings settings = parent.getModel().getCharGenSettings(SR6KarmaSettings.class);
+					settings.meta = selected.getKarma();
+				}
 			}
 		}
 

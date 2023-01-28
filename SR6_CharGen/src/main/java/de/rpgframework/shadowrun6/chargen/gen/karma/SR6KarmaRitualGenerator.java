@@ -168,17 +168,17 @@ public class SR6KarmaRitualGenerator extends CommonRitualController implements I
 			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {
 				int magic = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
 				maxSpellsAndRituals= magic*2;
-				settings.spells++;
 			}
 			logger.log(Level.INFO, "May buy up to {0} spells and rituals", maxSpellsAndRituals);
 
 			// Pay Karma
 			int karmaNeeded = model.getRituals().size()*5;
 			logger.log(Level.INFO, "Pay {0} Karma for rituals", karmaNeeded);
+			settings.spells += karmaNeeded;
 			model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
 			model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
 
-			// Ensure not enough spells
+			// Ensure not overbought spells
 			if ((model.getSpells().size() + model.getRituals().size())>maxSpellsAndRituals) {
 				todos.add(new ToDoElement(Severity.STOPPER, RES, SR6RejectReasons.TODO_SPELLS_TOO_MANY));
 			}

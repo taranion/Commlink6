@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
@@ -32,7 +33,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 
-	private int skillsFromCP;
+	private int freeLangKnow;
 
 	//-------------------------------------------------------------------
 	public SR6KarmaSkillGenerator(SR6CharacterGenerator parent) {
@@ -144,7 +145,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			settings.skills = 0;
 			points1   = 0;
 			points2   = 0;
-			skillsFromCP   = 0;
+			freeLangKnow   = model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(ValueType.NATURAL);
 //			pointsLangAndKnow = 0;
 			available.clear();
 			allowed.clear();
@@ -217,6 +218,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 				logger.log(Level.INFO, "Pay {0} for {1} with {2} specializations", karma, val.getKey(), val.getSpecializations().size());
 				model.setKarmaFree( model.getKarmaFree() -karma);
 				model.setKarmaInvested( model.getKarmaInvested() +karma);
+				settings.skills += karma;
 			}
 
 		} catch (Exception e) {

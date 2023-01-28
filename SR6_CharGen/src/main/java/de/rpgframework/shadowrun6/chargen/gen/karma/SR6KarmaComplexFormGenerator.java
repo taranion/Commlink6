@@ -79,21 +79,22 @@ public class SR6KarmaComplexFormGenerator extends CommonSR6ComplexFormGenerator 
 			max = 0;
 
 			SR6KarmaSettings settings = parent.getModel().getCharGenSettings(SR6KarmaSettings.class);
-			settings.spells=0;
+			settings.cforms=0;
 			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {
-				int magic = model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue();
-				max= magic*2;
+				int reso = model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue();
+				max= reso*2;
 			}
 			logger.log(Level.INFO, "May buy up to {0} complex forms", max);
 
 			// Pay Karma
 			int karmaNeeded = model.getComplexForms().size()*5;
 			logger.log(Level.INFO, "Pay {0} Karma for complex forms", karmaNeeded);
+			settings.cforms = karmaNeeded;
 			model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
 			model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
 
 			// Ensure not enough complex forms
-			if ((model.getSpells().size() + model.getRituals().size())>max) {
+			if ((model.getComplexForms().size())>max) {
 				todos.add(new ToDoElement(Severity.STOPPER, RES, SR6RejectReasons.TODO_CFORMS_TOO_MANY));
 			}
 
