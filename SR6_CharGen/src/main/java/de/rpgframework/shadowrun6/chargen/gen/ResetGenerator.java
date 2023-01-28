@@ -110,7 +110,6 @@ public class ResetGenerator implements ProcessingStep {
 			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
 			logger.log(Level.INFO, "MAGIC0 = "+model.getAttribute(ShadowrunAttribute.MAGIC));
 		} else if (real instanceof KarmaCharacterGenerator) {
-			model.setKarmaFree(50);
 			SR6KarmaSettings settings = model.getCharGenSettings(SR6KarmaSettings.class);
 			switch (level) {
 			case STREET_LEVEL:
@@ -126,6 +125,7 @@ public class ResetGenerator implements ProcessingStep {
 			logger.log(Level.INFO, "Start with {0} Karma", settings.startKarma);
 			model.setKarmaFree(settings.startKarma);
 		} else {
+			model.setKarmaFree(50);
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			if (level==PowerLevel.PRIME_RUNNER)
 				model.setKarmaFree(100);

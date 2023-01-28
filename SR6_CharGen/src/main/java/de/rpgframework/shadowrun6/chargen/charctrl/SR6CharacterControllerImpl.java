@@ -1,5 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import java.util.Locale;
+
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -39,6 +41,8 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected IFocusController foci;
 	protected IQualityPathController qPaths;
 	protected IMartialArtsController martial;
+
+	protected Locale locale = Locale.getDefault();
 
 	//-------------------------------------------------------------------
 	public SR6CharacterControllerImpl() {

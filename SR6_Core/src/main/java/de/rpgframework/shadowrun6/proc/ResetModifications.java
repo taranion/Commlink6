@@ -14,7 +14,6 @@ import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemUtil;

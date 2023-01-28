@@ -154,7 +154,7 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static List<ProcessingStep> getCharacterProcessingSteps(Shadowrun6Character model) {
+	public static List<ProcessingStep> getCharacterProcessingSteps(Shadowrun6Character model, Locale loc) {
 		List<ProcessingStep> steps = new ArrayList<>();
 		for (Class<? extends ProcessingStep> cls : RECALCULATE_STEPS) {
 			Constructor<? extends ProcessingStep> cons =  null;
@@ -174,19 +174,26 @@ public class Shadowrun6Tools {
 
 			if (cons!=null) {
 				try {
-					steps.add( cons.newInstance(model));
+					if (cons.getParameterCount()==2)
+						steps.add( cons.newInstance(model, loc));
+					else
+						steps.add( cons.newInstance(model));
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					logger.log(Level.ERROR, "Error instantiating "+cls);
 					e.printStackTrace();
+					System.exit(0);
 				}
+			} else {
+				logger.log(Level.ERROR, "No constructor for "+cls);
+				System.exit(1);
 			}
 		}
 
 		return steps;
 	}
 	//-------------------------------------------------------------------
-	public static void runProcessors(Shadowrun6Character model) {
-		List<ProcessingStep> processChain = getCharacterProcessingSteps(model);
+	public static void runProcessors(Shadowrun6Character model, Locale loc) {
+		List<ProcessingStep> processChain = getCharacterProcessingSteps(model, loc);
 		try {
 			logger.log(Level.DEBUG, "\n\nSTART: runProcessors: "+processChain.size()+"-------------------------------------------------------");
 			List<Modification> unprocessed = new ArrayList<>();

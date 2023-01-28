@@ -14,7 +14,6 @@ import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun6.Persona;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;

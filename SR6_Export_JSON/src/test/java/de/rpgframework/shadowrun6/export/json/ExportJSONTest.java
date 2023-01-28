@@ -48,7 +48,7 @@ public class ExportJSONTest {
 		Shadowrun6Character character = Shadowrun6Core.decode(data);
 		System.out.println("Loaded "+character.getName());
 		Shadowrun6Tools.resolveChar(character);
-		Shadowrun6Tools.runProcessors(character);
+		Shadowrun6Tools.runProcessors(character, Locale.getDefault());
 
 		byte[] pdfData = plugin.createExport(character);
 		System.out.println("Exported JSON with "+pdfData.length+" bytes");

@@ -85,7 +85,7 @@ public class PersonaTest {
 
 
 		System.out.println("testPersona: runProcessor----------------------");
-		Shadowrun6Tools.runProcessors(model);
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 
 		assertNotNull(model.getPersona());
 		assertEquals(8, model.getPersona().getAttack().getModifiedValue());
@@ -96,7 +96,7 @@ public class PersonaTest {
 		// Reorganize matrix attributes
 		model.getMatrixAttribMap().setAttack(SR6ItemAttribute.DATA_PROCESSING);
 		model.getMatrixAttribMap().setDataProcessing(SR6ItemAttribute.ATTACK);
-		Shadowrun6Tools.runProcessors(model);
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 		assertEquals(9, model.getPersona().getAttack().getModifiedValue());
 		assertEquals(7, model.getPersona().getSleaze().getModifiedValue());
 		assertEquals(8, model.getPersona().getDataProcessing().getModifiedValue());

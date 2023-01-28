@@ -135,7 +135,7 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 
 			createPartialController();
 
-			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
+			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model, locale));
 			processChain.add(new ResetGenerator(this));
 			processChain.add(meta);
 			processChain.add(magicReso);
