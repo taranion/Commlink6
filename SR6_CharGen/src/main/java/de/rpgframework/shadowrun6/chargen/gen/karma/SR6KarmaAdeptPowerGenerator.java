@@ -81,9 +81,13 @@ public class SR6KarmaAdeptPowerGenerator extends SR6AdeptPowerController {
 			SR6KarmaSettings settings = getModel().getCharGenSettings(SR6KarmaSettings.class);
 
 			int finalMagic = getModel().getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue(ValueType.NATURAL);
-			getModel().getAttribute(ShadowrunAttribute.POWER_POINTS).setDistributed(finalMagic);
-
-			freePoints = finalMagic;
+			if (getModel().getMagicOrResonanceType()!=null && getModel().getMagicOrResonanceType().usesPowers()) {
+				getModel().getAttribute(ShadowrunAttribute.POWER_POINTS).setDistributed(finalMagic);
+				freePoints = finalMagic;
+			} else {
+				freePoints = 0;
+				getModel().getAttribute(ShadowrunAttribute.POWER_POINTS).setDistributed(0);
+			}
 
 			// Distribute
 			previous = super.process(previous);
