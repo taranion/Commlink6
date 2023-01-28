@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<npcs>
+  <npc id="spirit_plants"    type="SPIRIT" />
+  <npc id="spirit_guardian"  type="SPIRIT" />
+  <npc id="spirit_guidance"  type="SPIRIT" />
+  <npc id="spirit_task"      type="SPIRIT" />
+</npcs>

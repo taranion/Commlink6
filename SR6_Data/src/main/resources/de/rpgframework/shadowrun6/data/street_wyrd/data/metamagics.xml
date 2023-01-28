@@ -99,4 +99,11 @@
 		</requires>
 	</metaecho>
 
+	<metaecho id="great_form_channeling" type="METAMAGIC" >
+		<requires>
+			<datareq type="METAECHO" ref="invocation"/>
+			<datareq type="METAECHO" ref="channeling"/>
+		</requires>
+	</metaecho>
+
 </metaechoes>

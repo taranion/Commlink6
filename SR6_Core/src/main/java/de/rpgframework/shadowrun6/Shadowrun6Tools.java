@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
@@ -1878,6 +1879,11 @@ public class Shadowrun6Tools {
 		}
 	}
 
+
+	//-------------------------------------------------------------------
+	public static <T extends DataItem> Predicate<T> filterByLanguage(Class<T> cls, Locale loc) {
+		return (item) -> item.getLanguage()==null || item.getLanguage().equals(loc.getLanguage());
+	}
 
 	//-------------------------------------------------------------------
 	public static <T extends DataItem> List<T> filterByPluginSelection(List<T> unfiltered, Shadowrun6Character model) {

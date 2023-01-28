@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mentorspirits>
+	<mentorspirit id="dachshund" lang="de">
+		<similarNames>
+		<similar>einzelgaenger</similar>
+		<similar>film_noir_detective</similar>
+		</similarNames>
+   	<modifications>
+			<valmod type="QUALITY" ref="will_to_live" value="1" />
+    	</modifications>
+    	<magician>
+			<checkmod type="SKILL" ref="perception" value="-1" what="EDGE_BOOST" />
+    	</magician>
+    	<adept>
+			<valmod type="ADEPT_POWER" ref="iron_will" value="1" />
+			<valmod type="ADEPT_POWER" ref="cool_resolve" value="1" />
+    	</adept>
+  </mentorspirit>
+
+  <mentorspirit id="squirrel" lang="de">
+		<similarNames>
+		<similar>ratatosk</similar>
+		<similar>wirbelwind</similar>
+		</similarNames>
+    <modifications>
+			<checkmod type="SKILL" ref="athletics" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+			<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+			<valmod type="ADEPT_POWER" ref="freefall" value="1" />
+			<valmod type="ADEPT_POWER" ref="great_leap" value="1" />
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="magpie" lang="de" >
+		<similarNames>
+		<similar>dieb</similar>
+		<similar>impulsivitaet</similar>
+		</similarNames>
+    	<modifications>
+			<checkmod type="SKILL" ref="stealth" value="-1" what="EDGE_BOOST" />
+    	</modifications>
+    <magician>
+			<checkmod type="SPELL" ref="MANIPULATION" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+			<valmod type="ADEPT_POWER" ref="nimble_fingers" value="1" />
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="connoisseur" lang="de">
+		<similarNames>
+		<similar>bacchus</similar>
+		<similar>schwein</similar>
+		</similarNames>
+    <modifications>
+			<itemmod type="SKILL" ref="knowledge">
+				<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.suitable_skill"/>
+			</itemmod>
+			<itemmod type="SKILL" ref="knowledge">
+				<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.suitable_skill"/>
+			</itemmod>
+    </modifications>
+    <magician>
+			<checkmod type="SPELL" ref="HEALTH" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+			<itemmod type="ADEPT_POWER" ref="improved_sense">
+				<decision choice="220e6dfd-a76d-4c7e-97e1-dfdbdca464ef" value="TASTE"/>
+			</itemmod>
+			<itemmod type="ADEPT_POWER" ref="improved_sense">
+				<decision choice="220e6dfd-a76d-4c7e-97e1-dfdbdca464ef" value="TOUCH"/>
+			</itemmod>
+			<itemmod type="ADEPT_POWER" ref="improved_sense">
+				<decision choice="220e6dfd-a76d-4c7e-97e1-dfdbdca464ef" value="SMELL"/>
+			</itemmod>
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="big_mama" lang="de">
+		<similarNames>
+		<similar>gaia</similar>
+		<similar>glucke</similar>
+		<similar>mitgefuehl</similar>
+		<similar>ptesan-wi</similar>
+		<similar>jungfrau_maria</similar>
+		</similarNames>
+    <modifications>
+			<checkmod type="SKILL" ref="biotech" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+			<checkmod type="SPELL" ref="HEALTH" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+    	<itemmod type="ADEPT_POWER" ref="empathic_healing"/>
+    </adept>
+  </mentorspirit>
+
+	<mentorspirit id="jester" lang="de">
+		<similarNames>
+		<similar>eulenspiegel</similar>
+		<similar>unruhestifter</similar>
+		</similarNames>
+    	<modifications>
+			<checkmod type="SKILL" ref="con" value="-1" what="EDGE_BOOST" />
+			<checkmod type="ATTRIBUTE" ref="JUDGE_INTENTIONS" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+			<checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+      <selmod uuid="25d96a27-33d4-4540-8ec6-2ab82d983a2b">
+    		<itemmod type="ADEPT_POWER" ref="empathic_sense"/>
+    		<itemmod type="ADEPT_POWER" ref="enthralling_performance"/>
+	  </selmod>
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="klabautermann" lang="de" >
+		<similarNames>
+		<similar>kobold</similar>
+		<similar>sirene</similar>
+		</similarNames>
+    	<modifications>
+    		<selmod uuid="abe1ba17-cd19-4d8d-9443-bef9f897d566">
+    			<checkmod type="SKILL" ref="engineering" value="-1" what="EDGE_BOOST" />
+    			<checkmod type="SKILL" ref="piloting" value="-1" what="EDGE_BOOST" />
+    		</selmod>
+    	</modifications>
+    	<magician>
+			<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
+     	</magician>
+    	<adept>
+    		<itemmod type="ADEPT_POWER" ref="danger_sense"/>
+     	</adept>
+  </mentorspirit>
+
+  <mentorspirit id="panthier" lang="de" >
+		<similarNames>
+		<similar>tatzelwurm</similar>
+		<similar>zerstörung</similar>
+		</similarNames>
+    <modifications>
+			<checkmod type="SKILL" ref="close_combat" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+			<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+    		<itemmod type="ADEPT_POWER" ref="elemental_strike"/>
+    </adept>
+  </mentorspirit>
+
+
+  <mentorspirit id="rotkaeppchen_wyrd" lang="de" >
+		<similarNames>
+		<similar>hilfsbereitschaft</similar>
+		<similar>idealist</similar>
+		</similarNames>
+    <modifications>
+			<checkmod type="SKILL" ref="perception" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+			<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+      <selmod uuid="abe1ba17-cd19-4d8d-9443-bef9f897d567">
+    		<itemmod type="ADEPT_POWER" ref="animal_empathy"/>
+    		<itemmod type="ADEPT_POWER" ref="empathic_sense"/>
+      </selmod>
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="shepherd_dog" lang="de" >
+		<similarNames>
+		<similar>pfadfinder</similar>
+		<similar>tugend</similar>
+		</similarNames>
+    <modifications>
+			<checkmod type="SKILL" ref="influence" value="-1" what="EDGE_BOOST" />
+    		<itemmod type="QUALITY" ref="honorbound"/>
+    </modifications>
+    <magician>
+			<checkmod type="SPELL" ref="COMBAT" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+			<valmod type="ADEPT_POWER" ref="combat_sense" value="1" />
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="vigilant" lang="de" >
+		<similarNames>
+		<similar>buergerwehr</similar>
+		<similar>selbstjustiz</similar>
+		</similarNames>
+    <modifications>
+			<checkmod type="SKILL" ref="exotic_weapons" value="-1" what="EDGE_BOOST" />
+			<checkmod type="SKILL" ref="firearms" value="-1" what="EDGE_BOOST" />
+			<checkmod type="SKILL" ref="athletics" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+			<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+    		<itemmod type="ADEPT_POWER" ref="counterstrike"/>
+    </adept>
+  </mentorspirit>
+</mentorspirits>
