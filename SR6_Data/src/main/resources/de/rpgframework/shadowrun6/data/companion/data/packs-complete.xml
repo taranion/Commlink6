@@ -14,9 +14,9 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="standard_rope" />
          <itemmod type="GEAR" apply="CHARACTER" ref="gas_mask" />
          <itemmod type="GEAR" apply="CHARACTER" ref="gecko_tape_gloves" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="mapsoft" />
          <itemmod type="GEAR" apply="CHARACTER" ref="climbing_gear" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="hermes_ikon" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="hermes_ikon" id="dafa952f-ccc5-4bc6-8c08-ed372e409d02" />
+         <embed type="GEAR" ref="mapsoft" intoId="dafa952f-ccc5-4bc6-8c08-ed372e409d02" intoType="HOOK" intoRef="SOFTWARE"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="meta_link" />
          <itemmod type="GEAR" apply="CHARACTER" ref="micro-transceiver" />
          <itemmod type="GEAR" apply="CHARACTER" ref="miniwelder" />
