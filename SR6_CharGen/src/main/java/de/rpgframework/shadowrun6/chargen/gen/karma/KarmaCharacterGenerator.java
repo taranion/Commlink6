@@ -1,16 +1,13 @@
 package de.rpgframework.shadowrun6.chargen.gen.karma;
 
 import java.lang.System.Logger.Level;
-import java.lang.reflect.Constructor;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
-import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.RuleController;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -32,8 +29,6 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyMetatypeController;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
-import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
-import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 
 /**
  * @author stefa
