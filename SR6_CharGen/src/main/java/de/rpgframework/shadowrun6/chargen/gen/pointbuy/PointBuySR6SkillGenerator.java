@@ -83,7 +83,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 	public OperationResult<SR6SkillValue> select(SR6Skill data, Decision...decisions) {
 		logger.log(Level.DEBUG, "ENTER select("+data+")");
 		try {
-			OperationResult<SR6SkillValue> result = super.select(data, decision);
+			OperationResult<SR6SkillValue> result = super.select(data, decisions);
 			if (result.hasError()) {
 				logger.log(Level.DEBUG, "Selecting {0} failed, because {1}",data.getId(), result.getMessages());
 				return result;
