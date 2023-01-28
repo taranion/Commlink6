@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.gen.karma;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
@@ -20,20 +21,18 @@ import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
- * Points 1 = Free skill points
- * Points 2 = (convertible) Skill points from Character Points
- * Points 3 = Karma
+ * Points 1 = Free skill points for languages/knowledges
+ * Points 2 = Karma
  * @author prelle
  *
  */
 public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
-
-	private int freeLangKnow;
 
 	//-------------------------------------------------------------------
 	public SR6KarmaSkillGenerator(SR6CharacterGenerator parent) {
@@ -59,6 +58,11 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 		Possible allowed = super.canBeSelected(skill);
 		if (!allowed.get()) return allowed;
 
+		// As long as there are free points for skills/languages, ignore Karma
+		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
+			if (points1>0) return Possible.TRUE;
+		}
+
 		// Has the user enough karma
 		int pay = (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE)?3:5;
 		if (model.getKarmaFree()>=pay) return Possible.TRUE;
@@ -74,7 +78,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 	public OperationResult<SR6SkillValue> select(SR6Skill data, Decision...decisions) {
 		logger.log(Level.DEBUG, "ENTER select("+data+")");
 		try {
-			OperationResult<SR6SkillValue> result = super.select(data);
+			OperationResult<SR6SkillValue> result = super.select(data, decisions);
 			if (result.hasError()) {
 				logger.log(Level.DEBUG, "Selecting {0} failed, because {1}",data.getId(), result.getMessages());
 				return result;
@@ -143,10 +147,8 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			// Reset values
 			maxLimit = 1;
 			settings.skills = 0;
-			points1   = 0;
-			points2   = 0;
-			freeLangKnow   = model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(ValueType.NATURAL);
-//			pointsLangAndKnow = 0;
+			points1   = model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(ValueType.NATURAL);;
+			points2   = model.getKarmaFree();
 			available.clear();
 			allowed.clear();
 			todos.clear();
@@ -166,23 +168,6 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 					} else {
 						unprocessed.add(mod);
 					}
-//				if (tmp instanceof ValueModification) {
-//					ValueModification mod = (ValueModification)tmp;
-//					if (ApplyTo.POINTS==mod.getApplyTo()) {
-//						ShadowrunReference ref = (ShadowrunReference)mod.getReferenceType();
-//						switch (ref) {
-//						case SKILL:
-//							logger.log(Level.DEBUG, "Add "+mod.getValue()+" skill points from "+tmp.getSource());
-//							pointsSkills += mod.getValue();
-//							break;
-//						case SKILL_KNOWLEDGE:
-//							logger.log(Level.DEBUG, "Add "+mod.getValue()+" knowledge skill points from "+tmp.getSource());
-//							pointsLangAndKnow += mod.getValue();
-//							break;
-//						default:
-//							unprocessed.add(mod);
-//						}
-//					}
 				} else {
 					unprocessed.add(tmp);
 				}
@@ -191,6 +176,8 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			// Be sure to remove all skills that are not allowed
 			removeRestrictedSkills();
 
+			// Ensure native language is present
+			ensureNativeLanguage();
 
 			for (SR6SkillValue val : model.getSkillValues()) {
 				int karma = 0;
@@ -198,13 +185,27 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 				case LANGUAGE:
 					// Pay language levels other than native
 					if (val.getDistributed()<4) {
-						karma += val.getDistributed()*3;
-						logger.log(Level.INFO, "Pay {0} for language {1}", karma, val.getKey(), val.getDistributed());
+						int canPayFree = Math.min(points1, val.getDistributed());
+						int needKarmaPay = val.getDistributed() - canPayFree;
+						if (canPayFree>0) {
+							logger.log(Level.INFO, "Pay {0} free language level for {1}", canPayFree, val.getKey());
+						}
+						points1-=canPayFree;
+						karma += needKarmaPay*3;
+						if (karma>0) {
+							logger.log(Level.INFO, "Pay {0} for language {1}", karma, val.getDecision(UUID.fromString("a7103ee4-31fa-435d-ac42-08f7d4d1e80c")));
+						}
 					}
 					break;
 				case KNOWLEDGE:
 					// No specializations for Knowledge
-					karma+=3;
+					if (points1>0) {
+						points1--;
+						logger.log(Level.INFO, "Pay one free knowledge skill for {0}", val.getDecision(UUID.fromString("89ebc659-ba06-4732-b347-6b832842a55b")));
+					} else {
+						karma+=3;
+						logger.log(Level.INFO, "Pay {0} for {1} with {2} specializations", karma, val.getKey(), val.getSpecializations().size());
+					}
 					break;
 				default:
 					// Pay specialization (should be max. 1)
@@ -214,8 +215,8 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 					for (int i=from+1; i<=upTo; i++) {
 						karma += i*5;
 					}
+					logger.log(Level.INFO, "Pay {0} for {1} with {2} specializations", karma, val.getKey(), val.getSpecializations().size());
 				}
-				logger.log(Level.INFO, "Pay {0} for {1} with {2} specializations", karma, val.getKey(), val.getSpecializations().size());
 				model.setKarmaFree( model.getKarmaFree() -karma);
 				model.setKarmaInvested( model.getKarmaInvested() +karma);
 				settings.skills += karma;
@@ -243,30 +244,40 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 	}
 
 	//-------------------------------------------------------------------
+	private void ensureNativeLanguage() {
+		logger.log(Level.DEBUG, "Check for existing native language: "+model.getSkillValues());
+		for (SR6SkillValue sVal : new ArrayList<>(model.getSkillValues())) {
+			if (NATIVE_LANGUAGE.equals(sVal.getUuid()))
+				return;
+		}
+		// If you got here, there is no native language yet
+		SR6SkillValue lang = new SR6SkillValue(Shadowrun6Core.getSkill("language"), 4);
+		lang.setUuid(NATIVE_LANGUAGE);
+		model.addSkillValue(lang);
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityPointBuySkillController#canBeIncreasedPoints(de.rpgframework.shadowrun.AShadowrunSkill)
 	 */
 	@Override
-	public Possible canBeIncreasedPoints(SR6SkillValue key) {
-		Possible allowed = wouldNewValueBeOkay(key);
-		if (!allowed.get())
-			return allowed;
+	public Possible canBeIncreasedPoints(SR6SkillValue val) {
+		SR6Skill skill = val.getResolved();
+		if (skill.getType()!=SkillType.LANGUAGE) {
+			return Possible.FALSE;
+		}
 
-		// Are there enough free points?
+//		// Only one specialization is allowed
+//		if (val.getModifiedValue(ValueType.NATURAL)>2)
+//			return Possible.FALSE;
+
 		if (points1>0)
 			return Possible.TRUE;
-		if (points2>0)
+
+		if (model.getKarmaFree()>=3)
 			return Possible.TRUE;
 
-//		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
-//		// Every conversion costs 2 CP
-//		if (settings.characterPoints < 2)
-//			return new Possible("skill.points.notEnoughCP");
-//		// Only 20 attribute points may be generated from CP
-//		if (skillsFromCP >= 20)
-//			return new Possible("skill.points.already20CP");
-
-		return Possible.TRUE;
+		return Possible.FALSE;
 	}
 
 	//-------------------------------------------------------------------
@@ -431,7 +442,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 	 */
 	@Override
 	public int getPoints(SR6SkillValue key) {
-		return 0;
+		return points1;
 	}
 
 	//-------------------------------------------------------------------
@@ -440,7 +451,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 	 */
 	@Override
 	public int getPoints2(SR6SkillValue key) {
-		return 0;
+		return model.getKarmaFree();
 	}
 
 	//-------------------------------------------------------------------

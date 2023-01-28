@@ -14,12 +14,14 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.ISkillController;
@@ -175,6 +177,17 @@ public class KarmaGenTest {
 		assertEquals(15,increaseSkill("close_combat", 2));
 		assertEquals(15,increaseSkill("piloting", 2));
 		assertEquals(50,increaseSkill("perception", 4));
+		assertEquals(5, model.getKarmaFree());
+
+		// Free languages and knowledge skills
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(SR6SkillController.DEC_KNOWLEDGE, "Magietheorie")) );
+		assertEquals(5, model.getKarmaFree());
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(SR6SkillController.DEC_KNOWLEDGE, "Medizin")) );
+		assertEquals(5, model.getKarmaFree());
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(SR6SkillController.DEC_KNOWLEDGE, "Psychologie")) );
+		assertEquals(5, model.getKarmaFree());
+		model.getSkillValues(SkillType.LANGUAGE).get(0).addDecision(new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), "English"));;
+		assertNotNull( skills.select(Shadowrun6Core.getSkill("language"), new Decision(SR6SkillController.DEC_LANGUAGE, "Or'zet") ));
 		assertEquals(5, model.getKarmaFree());
 
 		// Qualities

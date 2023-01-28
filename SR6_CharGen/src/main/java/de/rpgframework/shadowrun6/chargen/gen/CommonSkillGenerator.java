@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -42,8 +41,6 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	public final static String I18N_NOT_RAISED_KARMA = "skill.error.notRaisedWithKarma";
 	public final static String I18N_NOT_AVAILABLE_SPEC = "skill.error.specNotAvailable";
 	public final static String I18N_MAX_SKILLS_MAXED = "skill.error.maxSkillsMaxed";
-
-	public final static UUID NATIVE_LANGUAGE = UUID.fromString("1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b");
 
 	protected int points1;
 	protected int points2;
