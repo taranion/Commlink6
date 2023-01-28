@@ -161,7 +161,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 						if (skill==null) {
 							logger.log(Level.ERROR, "AllowMod for unknown skill {0}", mod.getKey());
 						} else {
-							logger.log(Level.DEBUG, "Allow skill {0} from {1}", mod.getKey(), mod.getSource());
+							logger.log(Level.INFO, "Allow skill {0} from {1}", mod.getKey(), mod.getSource());
 							this.allowed.add(skill);
 							this.available.add(skill);
 						}

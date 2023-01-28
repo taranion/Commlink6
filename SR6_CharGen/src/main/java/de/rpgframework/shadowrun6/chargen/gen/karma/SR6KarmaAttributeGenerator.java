@@ -163,13 +163,6 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 	}
 
 	//-------------------------------------------------------------------
-	private void reset() {
-		for (AttributeValue<?> tmp : getModel().getAttributes()) {
-			tmp.clearModifications();
-		}
-	}
-
-	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
@@ -183,8 +176,6 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 			todos.clear();
 			SR6KarmaSettings settings = getModel().getCharGenSettings(SR6KarmaSettings.class);
 			settings.attrib=0;
-			// Reset
-			reset();
 
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
@@ -230,6 +221,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 			logger.log(Level.INFO, "MAGIC = "+model.getAttribute(ShadowrunAttribute.MAGIC));
 			for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 				AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
+				logger.log(Level.INFO, "--"+val);
 				int karmaNeeded = 0;
 				int upTo = val.getModifiedValue(ValueType.NATURAL);
 				for (int i=2; i<=upTo; i++) {

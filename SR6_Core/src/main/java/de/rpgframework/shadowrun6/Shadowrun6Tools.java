@@ -159,14 +159,17 @@ public class Shadowrun6Tools {
 		for (Class<? extends ProcessingStep> cls : RECALCULATE_STEPS) {
 			Constructor<? extends ProcessingStep> cons =  null;
 			try {
-				cons = cls.getConstructor(ShadowrunCharacter.class);
+				cons = cls.getConstructor(Shadowrun6Character.class, Locale.class);
 			} catch (Exception e) {
 			}
 			if (cons==null) {
-				try {
-					cons = cls.getConstructor(Shadowrun6Character.class);
-				} catch (Exception e) {
-				}
+				try { cons = cls.getConstructor(ShadowrunCharacter.class, Locale.class);	} catch (Exception e) { }
+			}
+			if (cons==null) {
+				try { cons = cls.getConstructor(Shadowrun6Character.class);	} catch (Exception e) { }
+			}
+			if (cons==null) {
+				try { cons = cls.getConstructor(ShadowrunCharacter.class);	} catch (Exception e) { }
 			}
 
 			if (cons!=null) {
