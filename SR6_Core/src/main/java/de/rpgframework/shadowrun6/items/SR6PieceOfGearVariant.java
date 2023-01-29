@@ -44,11 +44,11 @@ public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	public SR6PieceOfGearVariant() {
 	}
 
-	//-------------------------------------------------------------------
-	public SR6PieceOfGearVariant(String id, String globalI18NKey) {
-		this.id = id;
-		setGlobalI18NKey(globalI18NKey);
-	}
+//	//-------------------------------------------------------------------
+//	public SR6PieceOfGearVariant(String id, String globalI18NKey) {
+//		this.id = id;
+//		setGlobalI18NKey(globalI18NKey);
+//	}
 
 	//-------------------------------------------------------------------
 	public SR6PieceOfGearVariant(SR6VariantMode mode) {

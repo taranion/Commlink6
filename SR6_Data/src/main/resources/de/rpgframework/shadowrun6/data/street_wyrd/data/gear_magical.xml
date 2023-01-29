@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Other Gear -->
+
+	<item id="free_dive_deep_breath_mask" avail="6L" price="150" type="SURVIVAL" subtype="SURVIVAL_GEAR" />
+    <!--item id="improvised_throwing_weapon" avail="0" price="0" modonly="true">
+      <useas type="WEAPON_RANGED" subtype="THROWING"/>
+      <weapon dmg="1S" attack="0,0,0,,"  skill="athletics" spec="athletics/throwing"/>
+    </item-->
+
+<!-- Preparations -->
+
+<!-- Ideally the preparations would have 4 rates: Potency 4-8, Magic 4-8, Long lasting yes/no, number of charges. This could look like
+	<item id="acid_on_demand" avail="6L" price="600" type="MAGICAL" subtype="PREPARATION" choice="POTENCY" choice="MAGIC" choice="DURATION" choice="CHARGES" choice="NAME" count="y"/>
+
+	To avoid too many changes to code, preparations are setup following these guidelines:
+	1) It is assumed that potency is equal to magic. This is used as the rating. Costs are 100 for potency plus 50 for magic. As rating starts at 4, costs are -600 (4x150)
+	2) Diffence between duration in weeks and duration in months is handled by creating two items for each preparation, one with base one with extended duration.
+	3) Charges are handled by making preparations countable. From Genesis view it makes no difference if someone has 2 times a preparation or one preparation with 2 charges
+
+	choice="NAME" should allow the user to enter the purchase date, to be able to calculate active potency based on purchase potency and time, however does not work yet.
+
+-->
+
+<!-- Preparations with base duration (weeks) -->
+
+	<item id="acid_on_demand" avail="6L" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="4,5,6,7,8" i18n="potency"/>
+			<choice uuid="96afe3d6-adf9-4e78-829c-b25f2c7f6b76" type="ATTRIBUTE" ref="MAGIC" options="4,5,6,7,8"/>
+			<choice uuid="96afe3d6-adf9-4e78-829c-b25f2c7f6b77" type="TEXT" ref="DATE" i18n="shelflife"/>
+		</choices>
+      <attrdef id="PRICE" value="600 + (($RATING-4)*100) + (($MAGIC-4)*50) "/>
+      <alchemy spell="acid_stream" trigger="verbal" />
+      <variant id="extended">
+        <attrdef id="PRICE" value="(600 + ( ($RATING-4) *100) + ( ( $MAGIC-4)*50 ) ) *4 "/>
+      </variant>
+    </item>
+
+    <!--
+	<item id="acid_wash" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="0" />
+    </item>
+	<item id="arcane_taser" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="arcane_taser_plus" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="0" />
+    </item>
+	<item id="aura_obscura" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-300" />
+    </item>
+	<item id="bean_counter_bean" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="bench_clearer" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="boom_stick" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="boom_stick_extreme" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="0" />
+    </item>
+	<item id="boost_pill_speed" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="boost_pill_power" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="boost_pill_stamina" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="boost_pill_reflex" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="bruce_lee_keychain" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-525" />
+    </item>
+	<item id="climbing_gear_prep" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="cold_as_ice" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="deep_breath_disc" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="disco_distraction" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="doctors_right_hand" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="dont_piss_off" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="0" />
+    </item>
+	<item id="door_what_door" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="dream_weaver" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="drop_it" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="duvall_special" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="150" />
+    </item>
+	<item id="emergency_exit" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="finger_of_death" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="firestick" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="float_switch" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="four_eyes" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="frigid_lance" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-500" />
+    </item>
+	<item id="frigid_rain" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="gap_in_their_shields" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="get_into_rythm" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="go_juice" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="i_am_good" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="0" />
+    </item>
+	<item id="infostick_9" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="infostick_12" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="infostick_13" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="instant_decorator1" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="instant_decorator2" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="50" />
+    </item>
+	<item id="instant_decorator3" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="150" />
+    </item>
+	<item id="instant_garden" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="instant_ice_rink" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="instant_makeover" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="instant_outfit" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="instant_rejuvenation" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="instant_shield" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="instant_wall" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="0" />
+    </item>
+	<item id="instant_window3" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-300" />
+    </item>
+	<item id="instant_window6" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="instant_window9" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="instant_window12" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="its_not_paranoia" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="lie_detector" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="long_range_headphones" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="long_range_legerdemain" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="long_range_lenses" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-500" />
+    </item>
+	<item id="louisville_slumberer" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-300" />
+    </item>
+	<item id="magic_nozzle_hose" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="magic_nozzle_tsunami" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="magic_window" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="magiczap_marble" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="magiczap_marble_plus" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="manabenzoate" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="mana_bread" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="manadyne_MB_10" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="manadyne_PB_10" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="manadyne_MB_100" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="manadyne_PB_100" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="mojo_scanner" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="no_job_to_small" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="no_job_to_big" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="0" />
+    </item>
+	<item id="one_less" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="pain_stick" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="pay_no_attention" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-450" />
+    </item>
+	<item id="petspy" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="plant_superfood" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="privacy_pill" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="private_eye" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="private_property" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="private_property_no_pets" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="remodeling_ring" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="remote_slapping_clout" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="remote_slapping_blast" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="runflat" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="runflat_four" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="satans_nut" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="150" />
+    </item>
+	<item id="secret_handshake" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="secret_handshake_cant" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="sizzler" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="100" />
+    </item>
+	<item id="sleeping_powder" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="slowing_competition" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="spell_shield" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="snack_stoppers" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="stump_remover" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="strain_breaker" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="super_epipen" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="superbinder3" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-300" />
+    </item>
+	<item id="superbinder6" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-250" />
+    </item>
+	<item id="superbinder9" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-200" />
+    </item>
+	<item id="superbinder12" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="sway_the_masses" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="trade_in_tonic1" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="trade_in_tonic2" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="trade_in_tonic3" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-50" />
+    </item>
+	<item id="translation_lenses" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-100" />
+    </item>
+	<item id="twinsies" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="uv_cleanstick" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="-150" />
+    </item>
+	<item id="wizarding_wall" avail="6L" price="150"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION" price="100" />
+    </item>
+-->
+<!-- Preparations with extended duration (months) -->
+	<!-- German rules clarify that costs are (base + power & magic)x4 and not (basex4) + power & magic. As rating starts at 4, costs are -2400 (4x600) -->
+
+<!--
+	<item id="acid_on_demand_ext" avail="6L" price="600" rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="0" />
+    </item>
+	<item id="acid_wash_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="0" />
+    </item>
+	<item id="arcane_taser_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="arcane_taser_plus_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="0" />
+    </item>
+	<item id="aura_obscura_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1200" />
+    </item>
+	<item id="bean_counter_bean_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="bench_clearer_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="boom_stick_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="boom_stick_extreme_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="0" />
+    </item>
+	<item id="boost_pill_speed_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="boost_pill_power_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="boost_pill_stamina_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="boost_pill_reflex_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="bruce_lee_keychain_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-2100" />
+    </item>
+	<item id="climbing_gear_prep_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="cold_as_ice_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="deep_breath_disc_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="disco_distraction_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="doctors_right_hand_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="dont_piss_off_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="0" />
+    </item>
+	<item id="door_what_door_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="dream_weaver_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="drop_it_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="duvall_special_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="600" />
+    </item>
+	<item id="emergency_exit_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="finger_of_death_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="firestick_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="float_switch_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="four_eyes_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="frigid_lance_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-2000" />
+    </item>
+	<item id="frigid_rain_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="gap_in_their_shields_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="get_into_rythm_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="go_juice_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="i_am_good_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="0" />
+    </item>
+	<item id="infostick_9_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="infostick_12_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="infostick_13_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="instant_decorator1_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="instant_decorator2_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="200" />
+    </item>
+	<item id="instant_decorator3_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="600" />
+    </item>
+	<item id="instant_garden_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="instant_ice_rink_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="instant_makeover_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="instant_outfit_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="instant_rejuvenation_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="instant_shield_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="instant_wall_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="0" />
+    </item>
+	<item id="instant_window3_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1200" />
+    </item>
+	<item id="instant_window6_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="instant_window9_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="instant_window12_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="its_not_paranoia_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="lie_detector_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="long_range_headphones_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="long_range_legerdemain_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="long_range_lenses_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-2000" />
+    </item>
+	<item id="louisville_slumberer_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1200" />
+    </item>
+	<item id="magic_nozzle_hose_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="magic_nozzle_tsunami_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="magic_window_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="magiczap_marble_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="magiczap_marble_plus_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="manabenzoate_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="mana_bread_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="manadyne_MB_10_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="manadyne_PB_10_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="manadyne_MB_100_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="manadyne_PB_100_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="mojo_scanner_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="no_job_to_small_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="no_job_to_big_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="0" />
+    </item>
+	<item id="one_less_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="pain_stick_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="pay_no_attention_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1800" />
+    </item>
+	<item id="petspy_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="plant_superfood_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="privacy_pill_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="private_eye_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="private_property_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="private_property_no_pets_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="remodeling_ring_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="remote_slapping_clout_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="remote_slapping_blast_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="runflat_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="runflat_four_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="satans_nut_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="secret_handshake_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="secret_handshake_cant_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="sizzler_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="400" />
+    </item>
+	<item id="sleeping_powder_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="slowing_competition_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="spell_shield_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="snack_stoppers_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="stump_remover_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="strain_breaker_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="super_epipen_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="superbinder3_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1200" />
+    </item>
+	<item id="superbinder6_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-1000" />
+    </item>
+	<item id="superbinder9_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-800" />
+    </item>
+	<item id="superbinder12_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="sway_the_masses_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="trade_in_tonic1_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="trade_in_tonic2_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="trade_in_tonic3_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-200" />
+    </item>
+	<item id="translation_lenses_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+	<item id="twinsies_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="uv_cleanstick_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-600" />
+    </item>
+	<item id="wizarding_wall_ext" avail="6L" price="600"  rate="true" minrat="4" maxrat="8" ratemul="BASEPRICE" count="y">
+        <useas type="MAGICAL" subtype="PREPARATION_EXTENDED" price="-400" />
+    </item>
+ -->
+</items>

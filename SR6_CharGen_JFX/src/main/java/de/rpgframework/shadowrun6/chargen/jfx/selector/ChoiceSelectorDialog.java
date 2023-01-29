@@ -254,7 +254,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
-	private Node addLabel(String title) {
+	private Label addLabel(String title) {
 		Label lbName = new Label(title);
 		lbName.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		content.getChildren().add(lbName);
@@ -291,6 +291,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				String forceTitle = null;
 				if (choice.getUUID().equals(ItemTemplate.UUID_RATING)) forceTitle=ResourceI18N.get(RES, "label.rating");
 				if (choice.getUUID().equals(ItemTemplate.UUID_CHEMICAL_CHOICE)) forceTitle=ResourceI18N.get(RES, "label.chemical");
+				if (choice.getI18nKey()!=null) forceTitle=null;
 				processChoice(item,choice, forceTitle);
 			}
 
@@ -327,8 +328,17 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbVariants.setConverter(new StringConverter<SR6PieceOfGearVariant>() {
 			public SR6PieceOfGearVariant fromString(String value) { return null;}
 			public String toString(SR6PieceOfGearVariant value) {
-				if (value==null) return "-";
-				return template.getVariantName(value, Locale.getDefault());
+				if (value==null) return ResourceI18N.get(RES, "variant.regular");
+				String name = template.getVariantName(value, Locale.getDefault());
+				if (name.startsWith(template.getTypeString())) {
+					ItemSubType sub = template.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+					if (sub==null) {
+						name = template.getLocalizedString(Locale.getDefault(), "variant."+value.getId());
+					} else {
+						name = template.getLocalizedString(Locale.getDefault(), "variant."+sub.name().toLowerCase()+"."+value.getId());
+					}
+				}
+				return name;
 			}
 		});
 		cbVariants.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
@@ -403,19 +413,24 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		logger.log(Level.DEBUG, "Choice " + choice);
 		List<Node> ret = new ArrayList<>();
 
-		ret.add( addLabel(
+		Label label = addLabel(
 				(forceTitle==null)
 				?
 				item.getChoiceName(choice, Locale.getDefault())
 				:
-				forceTitle)
-				);
+				forceTitle);
+		ret.add(label);
 		switch ((ShadowrunReference) choice.getChooseFrom()) {
 		case ADEPT_POWER:
 			ret.add( handleGeneric(item, choice, AdeptPower.class, null));
 			break;
 		case ATTRIBUTE:
-			ret.add( handleATTRIBUTE(item, choice));
+			if (choice.getTypeReference()==null) {
+				ret.add( handleATTRIBUTE(item, choice));
+			} else {
+				label.setText(ShadowrunAttribute.valueOf(choice.getTypeReference()).getName());
+				ret.add( handleATTRIBUTEValues(item, choice));
+			}
 			break;
 		case AMMUNITION_TYPE:
 			ret.add( handleAMMUNITION_TYPE(item, choice) );
@@ -513,15 +528,17 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				return value.getName();
 			}
 		});
+		logger.log(Level.DEBUG, "handleATTRIBUTE: ref={0}  options={1}", choice.getTypeReference(), (choice.getChoiceOptions()!=null)?Arrays.toString(choice.getChoiceOptions()):"[]");
 		// All but only given options?
 		if (choice.getChoiceOptions()!=null) {
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbSub.getItems().addAll(
-					List.of(ShadowrunAttribute.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
-					);
+				List.of(ShadowrunAttribute.values()).stream().filter(s -> ids.contains(s.name())).collect(Collectors.toList())
+				);
 		} else {
 			cbSub.getItems().addAll(ShadowrunAttribute.primaryValues());
 		}
+
 		Collections.sort(cbSub.getItems(), new Comparator<ShadowrunAttribute>() {
 			public int compare(ShadowrunAttribute o1, ShadowrunAttribute o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
@@ -529,6 +546,28 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.name()));
+			updateButtons();
+		 });
+		content.getChildren().add(cbSub);
+		return cbSub;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleATTRIBUTEValues(ComplexDataItem item, Choice choice) {
+		ChoiceBox<String> cbSub = new ChoiceBox<>();
+//		cbSub.setConverter(new StringConverter<ShadowrunAttribute>() {
+//			public ShadowrunAttribute fromString(String value) { return null;}
+//			public String toString(ShadowrunAttribute value) {
+//				if (value==null) return "-";
+//				return value.getName();
+//			}
+//		});
+		logger.log(Level.DEBUG, "handleATTRIBUTEValues: ref={0}  options={1}", choice.getTypeReference(), (choice.getChoiceOptions()!=null)?Arrays.toString(choice.getChoiceOptions()):"[]");
+		cbSub.getItems().addAll( List.of(choice.getChoiceOptions()) );
+
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n));
 			updateButtons();
 		 });
 		content.getChildren().add(cbSub);

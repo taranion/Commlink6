@@ -75,6 +75,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		@ElementList(entry="ammo", type=AmmunitionData.class, inline=true),
 		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
 		@ElementList(entry="vehicle", type=VehicleData.class, inline=true),
+		@ElementList(entry="alchemy", type=AlchemyData.class, inline=true),
 	})
 	private List<IGearTypeData> shortcuts;
 
