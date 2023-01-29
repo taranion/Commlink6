@@ -428,7 +428,8 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			if (choice.getTypeReference()==null) {
 				ret.add( handleATTRIBUTE(item, choice));
 			} else {
-				label.setText(ShadowrunAttribute.valueOf(choice.getTypeReference()).getName());
+				if (!"CHOICE".equals(choice.getTypeReference()))
+					label.setText(ShadowrunAttribute.valueOf(choice.getTypeReference()).getName());
 				ret.add( handleATTRIBUTEValues(item, choice));
 			}
 			break;
@@ -555,13 +556,17 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	//-------------------------------------------------------------------
 	private Node handleATTRIBUTEValues(ComplexDataItem item, Choice choice) {
 		ChoiceBox<String> cbSub = new ChoiceBox<>();
-//		cbSub.setConverter(new StringConverter<ShadowrunAttribute>() {
-//			public ShadowrunAttribute fromString(String value) { return null;}
-//			public String toString(ShadowrunAttribute value) {
-//				if (value==null) return "-";
-//				return value.getName();
-//			}
-//		});
+		cbSub.setConverter(new StringConverter<String>() {
+			public String fromString(String value) { return null;}
+			public String toString(String value) {
+				if (value==null) return "-";
+				try {
+					return  ShadowrunAttribute.valueOf(value).getName() ;
+				} catch (Exception e) {
+				}
+				return value;
+			}
+		});
 		logger.log(Level.DEBUG, "handleATTRIBUTEValues: ref={0}  options={1}", choice.getTypeReference(), (choice.getChoiceOptions()!=null)?Arrays.toString(choice.getChoiceOptions()):"[]");
 		cbSub.getItems().addAll( List.of(choice.getChoiceOptions()) );
 

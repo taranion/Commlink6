@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.Usage;
@@ -88,6 +89,11 @@ public class ItemUtil {
 			}
 			return;
 		case CONCEALABILITY:
+			return;
+		case PRICE2:
+			val = new ItemAttributeNumericalValue<SR6ItemAttribute>(attr, Integer.valueOf(mod.getRawValue()));
+			ref.setAttribute(attr, val);
+			logger.log(Level.DEBUG, "Set new item attribute "+val);
 			return;
 		default:
 			logger.log(Level.WARNING, "Unsuported addOrSetItemAttribute {0} with {1}  val={2}", attr, mod.getRawValue(), val);

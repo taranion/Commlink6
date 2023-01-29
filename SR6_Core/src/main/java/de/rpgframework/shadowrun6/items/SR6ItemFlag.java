@@ -12,6 +12,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
  */
 public enum SR6ItemFlag implements ItemFlag {
 
+	// Item has magic, potency and shelf life choices
+	ALCHEMICAL_PREPARATION,
 	// Item is subject to augmentation quality changes
 	AUGMENTATION,
 	// Item is considered a matrix device
