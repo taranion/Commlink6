@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
+import de.rpgframework.shadowrun.chargen.charctrl.ICritterPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
@@ -443,6 +444,14 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public IMartialArtsController getMartialArtsController() {
 		return wrapped.getMartialArtsController();
+	}
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getCritterPowerController()
+	 */
+	@Override
+	public ICritterPowerController getCritterPowerController() {
+		return wrapped.getCritterPowerController();
 	}
 
 }
