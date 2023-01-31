@@ -276,11 +276,11 @@ public class Converter {
 		if (item.getAttribute(SR6ItemAttribute.ATTACK_RATING)!=null) {
 			try {
 				int[] ar = item.getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue();
-				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[0]);
-				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[1]);
-				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[2]);
-				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[3]);
-				row.createCell(x++, CellType.NUMERIC).setCellValue(ar[4]);
+				if (ar[0]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[0]);
+				if (ar[1]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[1]);
+				if (ar[2]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[2]);
+				if (ar[3]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[3]);
+				if (ar[4]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[4]);
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Error: "+e);
 			}
