@@ -33,7 +33,6 @@ import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualFeatureReference;
-import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureReference;
@@ -41,13 +40,13 @@ import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
-import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.SR6NPC;
+import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
-import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -252,6 +251,13 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
+	private static String mapDataSkill(ItemTemplate item, Locale loc) {
+		String id = item.getAttribute(SR6ItemAttribute.SKILL).getRawValue();
+		SR6Skill skill = Shadowrun6Core.getSkill(id);
+		return skill.getName(loc);
+	}
+
+	//-------------------------------------------------------------------
 	public static void convertWeapon(ItemTemplate item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemType().name());
 		row.createCell(x++, CellType.STRING).setCellValue(item.getItemSubtype().name());
@@ -265,7 +271,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()+" \u00A5"));
 
 		if (item.getAttribute(SR6ItemAttribute.SKILL)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.SKILL).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue(mapDataSkill(item,loc));
 		else x++;
 		if (item.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)!=null)
 			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION).getRawValue());
@@ -276,11 +282,11 @@ public class Converter {
 		if (item.getAttribute(SR6ItemAttribute.ATTACK_RATING)!=null) {
 			try {
 				int[] ar = item.getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue();
-				if (ar[0]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[0]);
-				if (ar[1]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[1]);
-				if (ar[2]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[2]);
-				if (ar[3]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[3]);
-				if (ar[4]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[4]);
+				if (ar[0]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[0]); else x++;
+				if (ar[1]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[1]); else x++;
+				if (ar[2]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[2]); else x++;
+				if (ar[3]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[3]); else x++;
+				if (ar[4]>0) row.createCell(x++, CellType.NUMERIC).setCellValue(ar[4]); else x++;
 			} catch (Exception e) {
 				logger.log(Level.WARNING, "Error: "+e);
 			}
