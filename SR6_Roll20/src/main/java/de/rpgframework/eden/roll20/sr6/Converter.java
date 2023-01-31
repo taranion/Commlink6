@@ -325,7 +325,7 @@ public class Converter {
 		row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()+" \u00A5"));
 		row.createCell(x++, CellType.NUMERIC).setCellValue(mapAsDroneType(item.getItemType(), item.getItemSubtype()));
 
-		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.ACCELERATION));
+		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.HANDLING));
 		row.createCell(x++, CellType.NUMERIC).setCellValue(item.getAttribute(SR6ItemAttribute.ACCELERATION).getRawValue());
 		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.SPEED_INTERVAL));
 		x = convertOnRoadOffRoad(item, loc, row, x, item.getAttribute(SR6ItemAttribute.TOPSPEED));
