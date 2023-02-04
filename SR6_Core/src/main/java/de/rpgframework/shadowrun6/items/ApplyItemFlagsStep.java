@@ -39,7 +39,6 @@ public class ApplyItemFlagsStep implements CarriedItemProcessor {
 
 	//-------------------------------------------------------------------
 	private void applyALCHEMICAL_PREPARATION(CarriedItem<ItemTemplate> model) {
-		System.err.println("Apply ALCHEMICAL_PREPARATION");
 		Decision decPotency = model.getDecision(ItemTemplate.UUID_RATING);
 		Decision decMagic   = model.getDecisionByRef("MAGIC");
 		int potency = Math.max(0, (decPotency!=null)?(decPotency.getValueAsInt()-4) : 0);
