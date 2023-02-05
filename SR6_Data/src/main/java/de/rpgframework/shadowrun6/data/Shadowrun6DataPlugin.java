@@ -243,9 +243,13 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" sprites");
 			list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, core, clazz.getResourceAsStream("core/data/mentorspirits.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
-
 			list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" rule presets");
+			//---------Seattle
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear-seattle.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" gear pieces for Seattle Edition");
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, core, clazz, "core/data/qualities-seattle.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities for Seattle Edition");
 
 			logger.log(Level.INFO, "START -------------------------------FIRING_SQUAD---------------------------------------");
 			DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FIRING_SQUAD", "firing_squad.i18n", Locale.ENGLISH, Locale.GERMAN);
