@@ -10,6 +10,7 @@ import de.rpgframework.genericrpg.Pool;
 import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -23,7 +24,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 public class CalculateAttributePools implements ProcessingStep {
 
 	private final static Logger logger = System.getLogger(CalculateAttributePools.class.getPackageName()+".attr");
-	
+
 	private Shadowrun6Character model;
 	private Locale loc = Locale.getDefault();
 
@@ -54,7 +55,7 @@ public class CalculateAttributePools implements ProcessingStep {
 	private void calculatePool(AttributeValue<ShadowrunAttribute> aVal) {
 		Pool<Integer> pool = new Pool<Integer>();
 		aVal.setPool(pool);
-		
+
 		int augmentedMax = aVal.getDistributed() + 4;
 		/*
 		 * Natural attribute first
@@ -64,6 +65,8 @@ public class CalculateAttributePools implements ProcessingStep {
 		// Add all natural modifiers
 		for (Modification tmp : aVal.getModifications()) {
 			if (!(tmp instanceof ValueModification))
+				continue;
+			if (tmp instanceof CheckModification)
 				continue;
 			ValueModification mod = (ValueModification)tmp;
 			if (mod.getSet()!=ValueType.NATURAL)
@@ -86,6 +89,8 @@ public class CalculateAttributePools implements ProcessingStep {
 		for (Modification tmp : aVal.getModifications()) {
 			if (!(tmp instanceof ValueModification))
 				continue;
+			if (tmp instanceof CheckModification)
+				continue;
 			ValueModification mod = (ValueModification)tmp;
 			if (mod.getSet()!=ValueType.AUGMENTED)
 				continue;
@@ -107,18 +112,20 @@ public class CalculateAttributePools implements ProcessingStep {
 			}
 			sumAugmentations += value;
 			pool.addStep(ValueType.NATURAL, toAdd);
-			
+
 			if (name.startsWith("?")) {
 				System.err.println("Unknown modification source "+mod.getSource()+" for "+mod+" in attribute "+aVal);
 				System.exit(1);
 			}
 		}
 		logger.log(Level.DEBUG, "{0} NATURAL    : {1}",aVal.getModifyable(),pool.getCalculation(ValueType.NATURAL));
-		
+
 		/* Artificial */
 		int sumArt = 0;
 		for (Modification tmp : aVal.getModifications()) {
 			if (!(tmp instanceof ValueModification))
+				continue;
+			if (tmp instanceof CheckModification)
 				continue;
 			ValueModification mod = (ValueModification)tmp;
 			if (mod.getSet()!=ValueType.ARTIFICIAL)
@@ -142,7 +149,7 @@ public class CalculateAttributePools implements ProcessingStep {
 			pool.addStep(ValueType.ARTIFICIAL, toAdd);
 		}
 		logger.log(Level.DEBUG, "{0} ARTIFICIAL : {1}",aVal.getModifyable(), pool.getCalculation(ValueType.ARTIFICIAL));
-		
+
 		logger.log(Level.DEBUG, "{0}: converted {1} to {2}", aVal.getModifyable(), aVal.getModifiedValue(), aVal.getPool().toString());
 	}
 
