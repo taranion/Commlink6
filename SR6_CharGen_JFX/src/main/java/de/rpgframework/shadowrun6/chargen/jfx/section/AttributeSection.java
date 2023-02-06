@@ -35,10 +35,10 @@ public class AttributeSection extends Section {
 	private final static Logger logger = System.getLogger(AttributeSection.class.getPackageName());
 
 	private ShadowrunAttributeTable<SR6Skill,SR6SkillValue,Shadowrun6Character> table;
-	
+
 	private Mode mode = Mode.GENERATE;
-	
-	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4); 
+
+	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4);
 
 	//-------------------------------------------------------------------
 	public AttributeSection(String title, ScreenManagerProvider provider) {
@@ -53,7 +53,7 @@ public class AttributeSection extends Section {
 	private void initLayoutNormal() {
 //		HBox layout = new HBox(table);
 //		layout.setStyle("-fx-spacing: 1em;");
-		
+
 		setContent(table);
 //		setMode(org.prelle.javafx.Mode.BACKDROP);
 //		CheckBox cb1 = new CheckBox("Configuration Setting 1");
@@ -73,30 +73,27 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
-		logger.log(Level.DEBUG, "updateController");
-		
 		Shadowrun6Character model = ctrl.getModel();
 
 		IAttributeController attrib = ctrl.getAttributeController();
-//		table.setModel(ctrl.getModel());
-//		table.setMode(AttributeTable.Mode.GENERATE);
+		logger.log(Level.DEBUG, "updateController to {0}", attrib.getClass().getSimpleName());
 		if (attrib instanceof PrioritySR6AttributeGenerator) {
- 			System.err.println("AttributeSection: change controller to Priority");
+// 			System.err.println("AttributeSection: change controller to Priority");
 			table = new PriorityAttributeTable<>(ctrl);
 			((PriorityAttributeTable)table).useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?9:6));
 		} else if (attrib instanceof SR6PointBuyAttributeGenerator) {
- 			System.err.println("AttributeSection: change controller to Point Buy");
+// 			System.err.println("AttributeSection: change controller to Point Buy");
 			table = new PointBuyAttributeTable<>(ctrl);
 		} else if (attrib instanceof SR6KarmaAttributeGenerator) {
- 			System.err.println("AttributeSection: change controller to Karma");
+// 			System.err.println("AttributeSection: change controller to Karma");
 			table = new KarmaAttributeTable<>(ctrl);
 		} else if (attrib instanceof SR6AttributeLeveller) {
 			table = new LevellingAttributeTable<>(ctrl);
 		} else {
-			System.err.println("AttributeSection: change controller to Karma");
+			System.err.println("AttributeSection: change controller to unsupported");
 			logger.log(Level.ERROR, "Don't support controller "+model.getCharGenUsed());
 		}
-		
+
 		MagicOrResonanceType mor = model.getMagicOrResonanceType();
 		if (mor != null) {
 			table.setShowMagic(mor.usesMagic());
@@ -108,7 +105,7 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void refresh() {
-		logger.log(Level.DEBUG, "refresh");
+		logger.log(Level.DEBUG, "refresh: "+table.getSkin());
 		table.refresh();
 //		derived.refresh();
 	}
@@ -121,7 +118,7 @@ public class AttributeSection extends Section {
 //	//-------------------------------------------------------------------
 //	private void onSettings() {
 //		CharacterLeveller ctrl = (CharacterLeveller) control;
-//		
+//
 //		VBox content = new VBox(20);
 //		for (ConfigOption<?> opt : ctrl.getAttributeController().getConfigOptions()) {
 //			CheckBox cb = new CheckBox(opt.getName());
@@ -129,7 +126,7 @@ public class AttributeSection extends Section {
 //			cb.selectedProperty().addListener( (ov,o,n) -> ((ConfigOption<Boolean>)opt).set((Boolean)n));
 //			content.getChildren().add(cb);
 //		}
-//		
+//
 //		getManagerProvider().getScreenManager().showAlertAndCall(AlertType.NOTIFICATION, Resource.get(RES,  "dialog.settings.title"), content);
 //	}
 
