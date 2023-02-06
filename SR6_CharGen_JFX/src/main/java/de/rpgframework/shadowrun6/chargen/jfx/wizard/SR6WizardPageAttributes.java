@@ -32,7 +32,7 @@ import javafx.scene.layout.Region;
  */
 public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6SkillValue, Shadowrun6Character> {
 
-	private final static Logger logger = System.getLogger(SR6WizardPageAttributes.class.getPackageName());
+	private final static Logger logger = System.getLogger(SR6WizardPageAttributes.class.getPackageName()+".attr");
 
 	protected NumberUnitBackHeader backHeaderCP;
 
@@ -90,6 +90,7 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 
 	// -------------------------------------------------------------------
 	protected void refresh() {
+		logger.log(Level.INFO, "refresh");
 		super.refresh();
 
 		IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, ?, Shadowrun6Character> realCtrl = charGen;
