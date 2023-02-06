@@ -944,9 +944,10 @@ public class Shadowrun6Tools {
 		}
 		if (tmp instanceof DataItemModification) {
 			DataItemModification clone = ((DataItemModification)tmp).clone();
-			if ("CHOICE".equals( clone.getKey() ) && (tmp instanceof ValueModification)) {
-				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
+			if ("CHOICE".equals( clone.getKey() )) {
+				UUID uuid =  ((DataItemModification) tmp).getConnectedChoice();
 				Decision dec = value.getDecision(uuid);
+				logger.log(Level.WARNING, "instantiate "+clone.getKey()+" with UUID {0} and decision {1}", uuid,dec);
 				if (dec!=null) {
 					clone.setKey( dec.getValue());
 				} else {
