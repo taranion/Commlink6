@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.modifications;
 
+import java.lang.System.Logger.Level;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,7 +15,6 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.ReferenceException;
-import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ASpell;
@@ -48,11 +48,11 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.Technique;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
-import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.persist.ItemAttributeConverter;
 import de.rpgframework.shadowrun6.persist.LifestyleQualityConverter;
@@ -74,6 +74,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
 	CARRIED("CarriedItem"),
 	CONTACT_TYPES(ContactType.class,0),
+	CONTACT("Contact"),
 	COMPLEX_FORM(ComplexForm.class),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
@@ -205,6 +206,9 @@ public enum ShadowrunReference implements ModifiedObjectType {
 		} else {
 			if (type==ShadowrunReference.TEXT)
 				return (T)key;
+			if (type==ShadowrunReference.CARRIED) {
+				System.getLogger("de.rpgframework.shadowrun6").log(Level.WARNING, "TODO: resolve "+key);
+			}
 			if (type.converter==null)
 				throw new RuntimeException("Neither class, nor enumType nor converter  class nor StringConverter set for type "+type);
 			try {

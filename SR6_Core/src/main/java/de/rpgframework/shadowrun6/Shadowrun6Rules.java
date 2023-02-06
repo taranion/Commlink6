@@ -29,11 +29,8 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 		public String getName(Locale loc) {
 			return RES.getString("rule.chargen_prio_adept_pp."+name().toLowerCase(), loc);
 		}
-		public String toString() {
-			return RES.getString("rule.chargen_prio_adept_pp."+name().toLowerCase());
-		}
 	}
-	
+
 	public static Rule CHARGEN_MAX_INITIATION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_INITIATION", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_MAX_SUBMERSION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_SUBMERSION", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_MAX_TRANSHUMAN   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_TRANSHUMAN", Rule.Type.INTEGER, RES, "99");
@@ -46,7 +43,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule(EffectOn.COMMON,"MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
 	public static Rule ADD_STRENGTH_TO_MELEE_AR = new Rule(EffectOn.COMMON,"ADD_STRENGTH_TO_MELEE_AR", Rule.Type.BOOLEAN, RES, "true");
 
-	
+
 	//-------------------------------------------------------------------
 	public static Rule[] values() {
 		Rule[] sr6 = new Rule[] {
@@ -59,16 +56,16 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_ALLOW_LEGAL_AVAIL7PLUS,
 				ALLOW_TRANSHUMANISM,
 				CHARGEN_EXTENDED_CONTACT,
-				MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP,	
+				MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP,
 				ADD_STRENGTH_TO_MELEE_AR,
 		};
-		
+
 		List<Rule> merged = new ArrayList<>();
 		merged.addAll(List.of(ShadowrunRules.values()));
 		merged.addAll(List.of(sr6));
 		return merged.toArray(new Rule[merged.size()]);
 	}
-	
+
 	//-------------------------------------------------------------------
 	static Rule getRule(String id) {
 		for (Rule tmp : values()) {

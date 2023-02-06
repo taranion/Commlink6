@@ -25,6 +25,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
+import de.rpgframework.genericrpg.Pool;
 import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Reward;
@@ -66,6 +67,8 @@ import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
+import de.rpgframework.shadowrun.Focus;
+import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
@@ -606,12 +609,14 @@ public class Shadowrun6Tools {
 		try {
 			logger.log(Level.DEBUG, "resolve qualities");
 			for (QualityValue tmp : model.getQualities()) {
+				tmp.setCharacter(model);
 				Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 
 			logger.log(Level.DEBUG, "resolve quality paths");
 			for (QualityPathValue tmp : model.getQualityPaths()) {
+				tmp.setCharacter(model);
 				QualityPath resolved = Shadowrun6Core.getItem(QualityPath.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
@@ -635,31 +640,37 @@ public class Shadowrun6Tools {
 			}
 			logger.log(Level.DEBUG, "resolve adept powers");
 			for (AdeptPowerValue tmp : model.getAdeptPowers()) {
+				tmp.setCharacter(model);
 				AdeptPower resolved = Shadowrun6Core.getItem(AdeptPower.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve spells");
 			for (SpellValue tmp : model.getSpells()) {
+				tmp.setCharacter(model);
 				SR6Spell resolved = Shadowrun6Core.getItem(SR6Spell.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve complex forms");
 			for (ComplexFormValue tmp : model.getComplexForms()) {
+				tmp.setCharacter(model);
 				ComplexForm resolved = Shadowrun6Core.getItem(ComplexForm.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve metamagics or echoes");
 			for (MetamagicOrEchoValue tmp : model.getMetamagicOrEchoes()) {
+				tmp.setCharacter(model);
 				MetamagicOrEcho resolved = Shadowrun6Core.getItem(MetamagicOrEcho.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve critter powers");
 			for (CritterPowerValue tmp : model.getCritterPowers()) {
+				tmp.setCharacter(model);
 				CritterPower resolved = Shadowrun6Core.getItem(CritterPower.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve lifestyles");
 			for (SR6Lifestyle tmp : model.getLifestyles()) {
+				tmp.setCharacter(model);
 				LifestyleQuality resolved = Shadowrun6Core.getItem(LifestyleQuality.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
@@ -667,6 +678,7 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve gear");
 			SR6ResolveTemplatesStep resolver = new SR6ResolveTemplatesStep();
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
+				tmp.setCharacter(model);
 				if (tmp.getUuid()==null)
 					logger.log(Level.WARNING, "Char {0} Item {1} has no UUID", model.getName(), tmp.getKey());
 				if (tmp.getResolved()==null) {
@@ -684,6 +696,7 @@ public class Shadowrun6Tools {
 
 			logger.log(Level.DEBUG, "resolve martial arts");
 			for (MartialArtsValue tmp : model.getMartialArts()) {
+				tmp.setCharacter(model);
 				MartialArts resolved = Shadowrun6Core.getItem(MartialArts.class, tmp.getKey());
 				tmp.setResolved(resolved);
 				Technique resolved2 = Shadowrun6Core.getItem(Technique.class, resolved.getSignatureTechniqueID());
@@ -693,9 +706,18 @@ public class Shadowrun6Tools {
 				}
 
 			}
-			logger.log(Level.DEBUG, "resolve martial arts");
+
+			logger.log(Level.DEBUG, "resolve martial arts techniques");
 			for (TechniqueValue tmp : model.getTechniquesAll()) {
+				tmp.setCharacter(model);
 				Technique resolved = Shadowrun6Core.getItem(Technique.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+
+			logger.log(Level.DEBUG, "resolve foci");
+			for (FocusValue tmp : model.getFoci()) {
+				tmp.setCharacter(model);
+				Focus resolved = Shadowrun6Core.getItem(Focus.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 		} catch (DataErrorException e) {
@@ -910,14 +932,19 @@ public class Shadowrun6Tools {
 					clone.setKey( dec.getValue());
 				} else {
 					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value);
+					System.err.println("Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value);
 				}
+			}
+			if ("$LEVEL".equals(clone.getRawValue())) {
+				logger.log(Level.DEBUG, "Replace $LEVEL with {0}", multiplier);
+				clone.setValue(multiplier);
 			}
 
 			return clone;
 		}
 		if (tmp instanceof DataItemModification) {
 			DataItemModification clone = ((DataItemModification)tmp).clone();
-			if ("CHOICE".equals( clone.getKey() )) {
+			if ("CHOICE".equals( clone.getKey() ) && (tmp instanceof ValueModification)) {
 				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
 				Decision dec = value.getDecision(uuid);
 				if (dec!=null) {
@@ -985,47 +1012,49 @@ public class Shadowrun6Tools {
 
 	}
 
+//	//--------------------------------------------------------------------
+//	public static Pool<Integer> getAttributeModifierCalculation(Shadowrun6Character model, ShadowrunAttribute attrib) {
+//		 Pool<Integer> ret = new  Pool<Integer>();
+//		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attrib);
+//		// Now add modifiers from the attribute
+//		int augAllowed = 4;
+//		if (attrib.name().startsWith("DEFENSIVE_POOL")) {
+//			augAllowed = 99;
+//		}
+//		for (Modification mod : aVal.getModifications()) {
+//			if (mod.getReferenceType()==ShadowrunReference.ATTRIBUTE && mod instanceof ValueModification) {
+//				ValueModification sMod = (ValueModification)mod;
+//				if (!sMod.isConditional() && sMod.getSet()!=ValueType.MAX && sMod.getSet()!=ValueType.ARTIFICIAL) {
+//					int val = Math.min(augAllowed, sMod.getValue());
+//					if (sMod.getSet()==ValueType.NATURAL)
+//						val = sMod.getValue();
+//					// Mark modifiers being capped with augmentation limit
+//					PoolCalculation<Integer> calc = new PoolCalculation<Integer>(val, Shadowrun6Tools.getModificationSourceString(sMod.getSource()));
+//					// Augmentation limit is only valid if not NATURAL
+//					if (sMod.getSet()!=ValueType.NATURAL)
+//						calc.hitLimit = val<sMod.getValue();
+//					ret.addStep(ValueType.NATURAL, calc);
+//					augAllowed -= val;
+//				}
+//			}
+//		}
+//
+//		return ret;
+//	}
+
 	//--------------------------------------------------------------------
-	public static List<PoolCalculation<Integer>> getAttributeModifierCalculation(Shadowrun6Character model, ShadowrunAttribute attrib) {
-		List<PoolCalculation<Integer>> ret = new ArrayList<>();
+	public static Pool<Integer> getAttributePoolCalculation(Shadowrun6Character model, ShadowrunAttribute attrib) {
 		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attrib);
-		// Now add modifiers from the attribute
-		int augAllowed = 4;
-		if (attrib.name().startsWith("DEFENSIVE_POOL")) {
-			augAllowed = 99;
-		}
-		for (Modification mod : aVal.getModifications()) {
-			if (mod.getReferenceType()==ShadowrunReference.ATTRIBUTE && mod instanceof ValueModification) {
-				ValueModification sMod = (ValueModification)mod;
-				if (!sMod.isConditional() && sMod.getSet()!=ValueType.MAX && sMod.getSet()!=ValueType.ARTIFICIAL) {
-					int val = Math.min(augAllowed, sMod.getValue());
-					if (sMod.getSet()==ValueType.NATURAL)
-						val = sMod.getValue();
-					// Mark modifiers being capped with augmentation limit
-					PoolCalculation<Integer> calc = new PoolCalculation<Integer>(val, Shadowrun6Tools.getModificationSourceString(sMod.getSource()));
-					// Augmentation limit is only valid if not NATURAL
-					if (sMod.getSet()!=ValueType.NATURAL)
-						calc.hitLimit = val<sMod.getValue();
-					ret.add(calc);
-					augAllowed -= val;
-				}
-			}
-		}
-
-		return ret;
-	}
-
-	//--------------------------------------------------------------------
-	public static List<PoolCalculation<Integer>> getAttributePoolCalculation(Shadowrun6Character model, ShadowrunAttribute attrib) {
-		List<PoolCalculation<Integer>> ret = new ArrayList<>();
-		// Add the unmodified attribute
-		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attrib);
-		if (aVal.getDistributed()>0)
-			ret.add(new PoolCalculation<Integer>(aVal.getDistributed(), aVal.getModifyable().getName()));
-		// Now add modifiers from the attribute
-		ret.addAll(getAttributeModifierCalculation(model, attrib));
-
-		return ret;
+		return aVal.getPool();
+//		Pool<Integer> ret = new Pool<>();
+//		// Add the unmodified attribute
+//		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attrib);
+//		if (aVal.getDistributed()>0)
+//			ret.addStep(ValueType.NATURAL,new PoolCalculation<Integer>(aVal.getDistributed(), aVal.getModifyable().getName()));
+//		// Now add modifiers from the attribute
+//		ret.addAll(getAttributeModifierCalculation(model, attrib));
+//
+//		return ret;
 	}
 
 	//--------------------------------------------------------------------
@@ -1035,8 +1064,8 @@ public class Shadowrun6Tools {
 	 * @param special IDs of specializations to use (only use highest)
 	 * @return
 	 */
-	public static List<PoolCalculation<Integer>> getSkillPoolCalculationWithoutAttribute(Shadowrun6Character model, SR6Skill skill, String...special) {
-		List<PoolCalculation<Integer>> ret = new ArrayList<>();
+	private static Pool<Integer> getSkillPoolCalculationWithoutAttribute(Shadowrun6Character model, SR6Skill skill, String...special) {
+		Pool<Integer> ret = new Pool<Integer>();
 
 		// Add the unmodified skill
 		SR6SkillValue     sVal = model.getSkillValue(skill);
@@ -1044,13 +1073,13 @@ public class Shadowrun6Tools {
 			// Skill not present
 			if (!skill.isUseUntrained()) {
 				RES.format("explain.skill_not_untrained", skill.getName());
-				ret.add(new PoolCalculation<Integer>(0, RES.format("explain.skill_not_untrained", skill.getName())));
+				ret.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(0, RES.format("explain.skill_not_untrained", skill.getName())));
 				return ret;
 			} else {
-				ret.add(new PoolCalculation<Integer>(-1, RES.format("explain.untrained_skill", skill.getName())));
+				ret.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(-1, RES.format("explain.untrained_skill", skill.getName())));
 			}
 		} else {
-			ret.add(new PoolCalculation<Integer>(sVal.getDistributed(), Shadowrun6Core.getI18nResources().format( "explain.skillpoints", skill.getName())));
+			ret.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(sVal.getDistributed(), Shadowrun6Core.getI18nResources().format( "explain.skillpoints", skill.getName())));
 //			if (sVal.getAlternativePoints()>sVal.getDistributed()) {
 //				ret.clear();
 //				ret.add(new PoolCalculation(sVal.getAlternativePoints(), Resource.format(ShadowrunCore.getI18nResources(), "explain.skillpoints.alternative",
@@ -1067,7 +1096,7 @@ public class Shadowrun6Tools {
 						// Mark modifiers being capped with augmentation limit
 						PoolCalculation calc = new PoolCalculation(val, Shadowrun6Tools.getModificationSourceString(sMod.getSource()));
 						calc.hitLimit = val<sMod.getValue();
-						ret.add(calc);
+						ret.addStep(ValueType.AUGMENTED, calc);
 						augAllowed -= val;
 					}
 				}
@@ -1088,10 +1117,10 @@ public class Shadowrun6Tools {
 				}
 //				if (bestSpec != null && !skill.getId().contains("exotic")) {
 //					if (bestSpec.isExpertise()) {
-//						ret.add(new PoolCalculation(3,
-//								Resource.format(CORE, "explain.expertise", bestSpec.getSpecial().getName())));
+//						ret.addStep(ValueType.NATURAL, new PoolCalculation(3,
+//								ResourceI18N.format(CORE, "explain.expertise", bestSpec.getSpecial().getName())));
 //					} else {
-//						ret.add(new PoolCalculation(2,
+//						ret.addStep(ValueType.NATURAL, new PoolCalculation(2,
 //								Resource.format(CORE, "explain.specialization", bestSpec.getSpecial().getName())));
 //					}
 //				}
@@ -1102,41 +1131,32 @@ public class Shadowrun6Tools {
 	}
 
 	//--------------------------------------------------------------------
+	public static Pool<Integer> getSkillPool(Shadowrun6Character model, SR6Skill skill, String...special) {
+		return getSkillPool(model, skill, skill.getAttribute(), special);
+	}
+
+	//--------------------------------------------------------------------
 	/**
 	 * @param skill
 	 * @param useAttrib  Attribute to use
 	 * @param special IDs of specializations to use (only use highest)
 	 * @return
 	 */
-	public static List<PoolCalculation<Integer>> getSkillPoolCalculation(Shadowrun6Character model, SR6Skill skill, ShadowrunAttribute useAttrib, String...special) {
-		List<PoolCalculation<Integer>> ret = new ArrayList<>();
+	public static Pool<Integer> getSkillPool(Shadowrun6Character model, SR6Skill skill, ShadowrunAttribute useAttrib, String...special) {
+		Pool<Integer> ret = new Pool<Integer>();
 		ret.addAll(getSkillPoolCalculationWithoutAttribute(model, skill, special));
 		// Add the attribute
-		ret.addAll(getAttributePoolCalculation(model, useAttrib));
-
+		if (useAttrib!=null) {
+			ret.addAll(getAttributePoolCalculation(model, useAttrib));
+		}
 
 		return ret;
 	}
 
-	//--------------------------------------------------------------------
-	public static int getSkillPool(Shadowrun6Character model, SR6Skill skill, String... special) {
-		return (int)getSkillPoolCalculation(model, skill, skill.getAttribute(), special).stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-	}
-
-	//--------------------------------------------------------------------
-	public static int getSkillPool(Shadowrun6Character model, SR6Skill skill, ShadowrunAttribute useAttrib, String... special) {
-		return (int)getSkillPoolCalculation(model, skill, useAttrib, special).stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-	}
-
-	//--------------------------------------------------------------------
-	public static int getSkillPoolWithoutAttribute(Shadowrun6Character model, SR6Skill skill, String... special) {
-		return (int)getSkillPoolCalculationWithoutAttribute(model, skill, special).stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-	}
-
-	//--------------------------------------------------------------------
-	public static String getSkillPoolExplanation(Shadowrun6Character model, SR6Skill skill, String... special) {
-		return String.join("\n",getSkillPoolCalculation(model, skill, skill.getAttribute(), special).stream().map(pool -> pool.value+" "+pool.source+(pool.hitLimit?"*":" ") ).collect(Collectors.toList()));
-	}
+//	//--------------------------------------------------------------------
+//	public static Pool<Integer> getSkillPool(Shadowrun6Character model, SR6Skill skill, String... special) {
+//		return getSkillPool(model, skill, skill.getAttribute(), special);
+//	}
 
 	//-------------------------------------------------------------------
 	@SuppressWarnings("incomplete-switch")
@@ -1410,16 +1430,16 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static List<PoolCalculation<Integer>> getWeaponPoolCalculation(Shadowrun6Character model, CarriedItem item) {
-//		if (item.getResolved().getWeaponData()==null) {
-//			throw new IllegalArgumentException(item.getName()+" is not a weapon but a "+item.getItem().getTypes()+" and of type "+item.getItem().getClass());
-//		}
+	public static Pool<Integer> getWeaponPoolCalculation(Shadowrun6Character model, CarriedItem item) {
+		Pool<Integer> pool = new Pool<Integer>();
 
 		SR6Skill skill = (SR6Skill) item.getAsObject(SR6ItemAttribute.SKILL).getValue();
-		SR6SkillValue sVal = model.getSkillValue(skill);
+		SkillSpecialization<SR6Skill> spec = (SkillSpecialization<SR6Skill>) item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getValue();
+		if (spec!=null)
+			pool = getSkillPool(model, skill, spec.getId());
+		else
+			pool = getSkillPool(model, skill);
 
-		List<PoolCalculation<Integer>> ret = new ArrayList<>();
-		String special = null;
 		logger.log(Level.WARNING, "ToDo: getWeaponPoolCalculation");
 
 //		// Find the correct specialization
@@ -1453,7 +1473,7 @@ public class Shadowrun6Tools {
 		logger.log(Level.ERROR, "getWeaponPoolCalculation not finished yet");
 
 
-		ret.addAll( getSkillPoolCalculation(model, skill, skill.getAttribute(), special) );
+//		ret.addAll( getSkillPoolCalculation(model, skill, skill.getAttribute(), special) );
 
 		/*
 		 * Add eventually existing focus
@@ -1475,17 +1495,17 @@ public class Shadowrun6Tools {
 ////			}
 //		}
 
-		return ret;
+		return pool;
 	}
 
 	//--------------------------------------------------------------------
 	public static int getWeaponPool(Shadowrun6Character model, CarriedItem item) {
-		return (int)getWeaponPoolCalculation(model, item).stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+		return (int)getWeaponPoolCalculation(model, item).getNatural();
 	}
 
 	//--------------------------------------------------------------------
 	public static String getWeaponPoolExplanation(Shadowrun6Character model, CarriedItem item) {
-		return String.join("\n",getWeaponPoolCalculation(model, item).stream().map(pool -> pool.value+" "+pool.source+(pool.hitLimit?"*":" ") ).collect(Collectors.toList()));
+		return getWeaponPoolCalculation(model, item).toExplainString();
 	}
 
 	//-------------------------------------------------------------------
@@ -1913,4 +1933,5 @@ public class Shadowrun6Tools {
 
 		return ret;
 	}
+
 }
