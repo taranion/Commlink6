@@ -84,7 +84,7 @@ public class QualityPathsSection extends ListSection<QualityPathValue> {
 
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
-		logger.log(Level.DEBUG, "updateController");
+//		logger.log(Level.DEBUG, "updateController");
 		this.control = ctrl;
 		model = ctrl.getModel();
 		refresh();

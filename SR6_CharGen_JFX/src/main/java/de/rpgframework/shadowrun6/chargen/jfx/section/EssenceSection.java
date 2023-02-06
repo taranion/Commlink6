@@ -44,17 +44,17 @@ public class EssenceSection extends Section {
 	private Label lbEssenceHole;
 	private Label lbEssenceLost;
 	private Label lbEssenceRemain;
-	
+
 	private NumericalValueField<Quality,QualityValue> nfAcclimation;
 	private NumericalValueField<MetamagicOrEcho,MetamagicOrEchoValue> nfTranshumanism;
-	
+
 	private GridPane grid;
 
 	private SR6CharacterController control;
 	private ShadowrunCharacter model;
 	private ObjectProperty<ComplexDataItem> showHelpFor = new SimpleObjectProperty<>();
-	
-	
+
+
 	//-------------------------------------------------------------------
 	public EssenceSection(String title) {
 		super.setId(title);
@@ -120,11 +120,9 @@ public class EssenceSection extends Section {
 	 * @see org.prelle.javafx.Section#refresh()
 	 */
 	public void refresh() {
-		logger.log(Level.DEBUG, "refresh");
-		
 		//Acclimation
-		Quality acclimQual = Shadowrun6Core.getItem(Quality.class, "augmentation_acclimation"); 
-		NumericalValueController<Quality, QualityValue> qCtrl = control.getQualityController();		
+		Quality acclimQual = Shadowrun6Core.getItem(Quality.class, "augmentation_acclimation");
+		NumericalValueController<Quality, QualityValue> qCtrl = control.getQualityController();
 		QualityValue qVal = model.getQuality("augmentation_acclimation");
 		if (acclimQual!=null) {
 			if (qVal==null) {
@@ -133,7 +131,7 @@ public class EssenceSection extends Section {
 			nfAcclimation.setData(qVal, new SimpleObjectProperty<NumericalValueController<Quality, QualityValue>>(qCtrl));
 			nfAcclimation.setUserData(acclimQual);
 		}
-		
+
 		// Transhumanism
 		MetamagicOrEcho transhum = Shadowrun6Core.getItem(MetamagicOrEcho.class, "transhumanism");
 		NumericalValueController<MetamagicOrEcho, MetamagicOrEchoValue> tCtrl = control.getMetamagicOrEchoController();
@@ -151,9 +149,9 @@ public class EssenceSection extends Section {
 			allowTransh = Boolean.parseBoolean( conf.getValueString() );
 		nfTranshumanism.setVisible(allowTransh);
 		hdTranshumanism.setVisible(allowTransh);
-		
+
 		lbEssenceLost.setText(String.valueOf( ((double)model.getEssenceCost())/1000.0));
-		// Essence 
+		// Essence
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ESSENCE);
 		if (val != null) {
 			if (val != null)
@@ -163,5 +161,5 @@ public class EssenceSection extends Section {
 			if (val != null)
 				lbEssenceHole.setText(String.valueOf(val.getModifiedValue() / 1000.0));
 		}
-	}	
+	}
 }

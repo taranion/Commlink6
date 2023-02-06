@@ -26,7 +26,7 @@ import javafx.beans.property.ReadOnlyObjectProperty;
  */
 @SuppressWarnings("rawtypes")
 public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements IShadowrunCharacterControllerProvider<IShadowrunCharacterController> {
-	
+
 	protected Logger logger = System.getLogger(getClass().getPackageName());
 
 	private SR6CharacterController control;
@@ -34,9 +34,9 @@ public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements
 	//-------------------------------------------------------------------
 	public KnowledgeSkillSection(String title) {
 		super(title);
-		
+
 		list.setCellFactory(cell -> new KnowledgeSkillListCell(this, null));
-		
+
 		list.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			if (n!=null) {
 				btnDel.setDisable( !control.getSkillController().canBeDeselected(n).get() );
@@ -96,7 +96,7 @@ public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements
 	//-------------------------------------------------------------------
 	public void updateController(CharacterController ctrl) {
 		control = (SR6CharacterController) ctrl;
-		logger.log(Level.INFO, "#############updateController with model "+control.getModel());
+//		logger.log(Level.INFO, "#############updateController with model "+control.getModel());
 		if (control.getModel()==null) throw new NullPointerException("Controller has NULL as model");
 //		table.setModel(control.getModel());
 //		table.setController(control.getSkillController());
