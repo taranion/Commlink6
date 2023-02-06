@@ -45,6 +45,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 	 */
 	@Override
 	protected PerSkillPoints getPerSkill(SR6SkillValue value) {
+		System.err.println("SR6KarmaSkillGenerator.getPerSkill:"+value);
 		return null;
 	}
 
@@ -118,9 +119,40 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			logger.log(Level.ERROR, "Trying to increase skill {0} which is not allowed: "+poss);
 			return new OperationResult<>(poss);
 		}
+		if (!model.getSkillValues().contains(ref)) {
+			model.addSkillValue(ref);
+		}
 
 		ref.setDistributed( ref.getDistributed() +1);
 		logger.log(Level.INFO, "Increased skill {0} to {1}", ref.getKey(), ref.getModifiedValue(ValueType.NATURAL));
+		// Pay karma
+		int karma = ref.getModifiedValue(ValueType.NATURAL);
+		model.setKarmaFree( model.getKarmaFree() -karma );
+		model.setKarmaInvested( model.getKarmaInvested() +karma);
+
+		parent.runProcessors();
+
+		return new OperationResult<SR6SkillValue>(ref);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#decrease(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public OperationResult<SR6SkillValue> decrease(SR6SkillValue ref) {
+		Possible poss = canBeDecreased(ref);
+		if (!poss.get()) {
+			logger.log(Level.ERROR, "Trying to decrease skill {0} which is not allowed: "+poss);
+			return new OperationResult<>(poss);
+		}
+
+		ref.setDistributed( ref.getDistributed() -1);
+		logger.log(Level.INFO, "Decreased skill {0} to {1}", ref.getKey(), ref.getModifiedValue(ValueType.NATURAL));
+		if (ref.getModifiedValue()<=0) {
+			model.removeSkillValue(ref);
+		}
+
 		// Pay karma
 		int karma = ref.getModifiedValue(ValueType.NATURAL);
 		model.setKarmaFree( model.getKarmaFree() -karma );
@@ -159,7 +191,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 					if (mod.getReferenceType()==ShadowrunReference.SKILL) {
 						SR6Skill skill = mod.getResolvedKey();
 						if (skill==null) {
-							logger.log(Level.ERROR, "AllowMod for unknown skill {0}", mod.getKey());
+							logger.log(Level.ERROR, "AllowMod for unknown skill {0} from {1}", mod.getKey(), mod.getSource());
 						} else {
 							logger.log(Level.INFO, "Allow skill {0} from {1}", mod.getKey(), mod.getSource());
 							this.allowed.add(skill);
