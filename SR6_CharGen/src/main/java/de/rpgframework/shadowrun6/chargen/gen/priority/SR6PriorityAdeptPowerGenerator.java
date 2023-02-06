@@ -8,6 +8,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Rules.PRIORITY_MAGIC;
@@ -29,31 +30,33 @@ public class SR6PriorityAdeptPowerGenerator extends SR6AdeptPowerController {
 	protected int determineMaxFreePoints() {
 		Shadowrun6Character model = getModel();
 		logger.log(Level.INFO, "MOR = "+model.getMagicOrResonanceType());
-		if (model.getMagicOrResonanceType()==null) 
+		if (model.getMagicOrResonanceType()==null)
 			return 0;
-		if (!model.getMagicOrResonanceType().usesPowers()) 
+		if (!model.getMagicOrResonanceType().usesPowers())
 			return 0;
-		
+
 		int ret = 0;
 		// TODO: Check essence
 		logger.log(Level.WARNING, "TODO: Handle lowered essence");
 		//if (model.getAttribute(ShadowrunAttribute.ESSENCE))
-		
+
 		PRIORITY_MAGIC chosen =  parent.getRuleController().getRuleValueAsEnum(Shadowrun6Rules.CHARGEN_PRIO_ADEPT_PP);
 		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 
 		// Regular adepts get free power points matching their magic attribute
 		if (!model.getMagicOrResonanceType().paysPowers()) {
 			ret = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
-			
+
 			logger.log(Level.INFO, "Regular adept - get {0,number,integer} power points from MAGIC", ret);
 			return ret;
 		}
 		if (model.getMagicOrResonanceType().paysPowers()) {
+			logger.log(Level.INFO, "per={0}  rule={1}", settings.perAttrib.get(ShadowrunAttribute.MAGIC), chosen.name());
 			// Mystic adepts
 			switch (chosen) {
 			case MAGIC_PLUS_KARMA:
-				ret += settings.perAttrib.get(ShadowrunAttribute.MAGIC).points3;
+				ret = ((PerAttributePoints)settings.perAttrib.get(ShadowrunAttribute.MAGIC)).points3;
+				break;
 				// Now add priority with next case
 			case PRIO_MAGIC:
 				switch (settings.priorities.get(PriorityType.MAGIC)) {
@@ -72,7 +75,7 @@ public class SR6PriorityAdeptPowerGenerator extends SR6AdeptPowerController {
 
 			return ret;
 		}
-		
+
 		return 0;
 	}
 
@@ -88,14 +91,14 @@ public class SR6PriorityAdeptPowerGenerator extends SR6AdeptPowerController {
 		try {
 			todos.clear();
 			allocatePP();
-			
+
 			Shadowrun6Character model = getModel();
-			
+
 			for (AdeptPowerValue val : model.getAdeptPowers()) {
 				// Apply modifications
 				unprocessed.addAll(val.getModifications());
 			}
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");

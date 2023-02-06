@@ -929,6 +929,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			switch (choice.getTypeReference()) {
 			case "MELEE":
 				items = items.stream().filter(i -> i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.WEAPON_CLOSE_COMBAT).collect(Collectors.toList());
+				System.err.println("ChoiceSelectorDialog: items = "+items);
 				break;
 			case "CHEMICALS":
 				items = Shadowrun6Core.getItemList(ItemTemplate.class);

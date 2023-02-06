@@ -772,7 +772,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 				}
 
 				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(key);
-				logger.log(Level.WARNING, "Current aVal={0}/{1}  sumWithout={2}  sum={3}", aVal.getModifiedValue(), aVal.getModifier(), per.getSumWithoutBase(), per.getSum());
+				logger.log(Level.DEBUG, "Current aVal={0}/{1}  sumWithout={2}  sum={3}", aVal.getModifiedValue(), aVal.getModifier(), per.getSumWithoutBase(), per.getSum());
 				aVal.setDistributed(per.getSum());
 			}
 			logger.log(Level.DEBUG, "Finish with {0} adjust and {1} attrib points and {2} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());

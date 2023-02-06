@@ -21,12 +21,14 @@ import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.RitualValue;
+import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.chargen.jfx.pane.SpellDescriptionPane;
 import de.rpgframework.shadowrun.chargen.jfx.section.FocusSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.RitualSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.SpellSection;
 import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.WorldType;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -92,7 +94,17 @@ public class MagicPage extends Page {
 				ResourceI18N.get(RES, "page.magic.section.spells"),
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 				Shadowrun6Tools.modificationResolver(Locale.getDefault())
-				);
+				) {
+			public void refresh() {
+				super.refresh();
+
+				cbTradition.getItems().setAll(Shadowrun6Core.getItemList(Tradition.class));
+
+				if (model!=null)
+					cbTradition.setValue(model.getTradition());
+			}
+
+		};
 		secSpells.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secSpells, 4);
 		FlexGridPane.setMinHeight(secSpells, 6);

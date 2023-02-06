@@ -17,11 +17,11 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.WorldType;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection;
-import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection.Type;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.MartialArtsSection;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
@@ -73,7 +73,7 @@ public class CombatPage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initCombat() {
-		secCombat = new CombatSection(Type.PHYSICAL);
+		secCombat = new CombatSection(WorldType.PHYSICAL);
 		FlexGridPane.setMinWidth(secCombat, 6);
 		FlexGridPane.setMinHeight(secCombat, 6);
 		FlexGridPane.setMediumWidth(secCombat, 8);
@@ -162,7 +162,7 @@ public class CombatPage extends Page {
 
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secRanged, secMelee, secArmor, secAmmo, secMartial);
+		flex.getChildren().addAll(secCombat,secRanged, secMelee, secArmor, secAmmo, secMartial);
 
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);

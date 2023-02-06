@@ -206,6 +206,9 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(qPaths);
 			processChain.add(attributes);
 			processChain.add(skills);
+			// Re-run those steps to recalculate after skills and attributes have been copied over from priority settings
+			processChain.add(new CalculateAttributePools(model, locale));
+			processChain.add(new CalculateSkillPools(model, locale));
 			processChain.add(spells);
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
@@ -219,7 +222,6 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(lifestyles);
 			processChain.add(contacts);
 			processChain.add(new RemainingKarmaNuyenController(this));
-			processChain.add(new CalculateAttributePools(model));
 
 			setupDone = true;
 		} finally {

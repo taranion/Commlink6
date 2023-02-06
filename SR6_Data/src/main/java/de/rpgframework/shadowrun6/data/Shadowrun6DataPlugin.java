@@ -334,10 +334,10 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(LifepathModuleList.class, LifepathModule.class, set, clazz,"companion/data/lifepath.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" lifepath modules");
 
-//			logger.log(Level.INFO, "START -------------------------------HACK&SLASH------------------------------------------");
-//			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "HACK_SLASH", "hack_slash.i18n", Locale.ENGLISH);
-//			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "hack_slash/data/actions.xml");
-//			logger.log(Level.DEBUG, "Loaded "+list.size()+" actions");
+			logger.log(Level.INFO, "START -------------------------------HACK&SLASH------------------------------------------");
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "HACK_SLASH", "hack_slash.i18n", Locale.ENGLISH);
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "hack_slash/data/actions.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" actions");
 //			list = Shadowrun6Core.loadDataItems(ComplexFormList.class, ComplexForm.class, set, clazz, "hack_slash/data/complexforms.xml");
 //			logger.log(Level.DEBUG, "Loaded "+list.size()+" complex forms");
 //			list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, set, clazz, "hack_slash/data/sprites.xml");
