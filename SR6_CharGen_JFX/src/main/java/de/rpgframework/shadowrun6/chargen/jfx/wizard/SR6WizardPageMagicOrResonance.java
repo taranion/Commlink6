@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
+import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageMagicOrResonance;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -49,6 +50,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 	private Label lbPower;
 	private Button btnDec;
 	private Button btnInc;
+	private TitledComponent tcDist;
 
 	/* For aspected magicians */
 	private ChoiceBox<SR6Skill> cbAspectSkill;
@@ -228,7 +230,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 		}
 
 		TitledComponent tcTrad = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.tradition"), cbTradition);
-		TitledComponent tcDist = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.distribute"), mysticGrid);
+		tcDist = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.distribute"), mysticGrid);
 
 		VBox ret = new VBox(10, tcTrad, tcDist, descTradition);
 		if (charGen.getModel().getCharGenUsed()!=null && charGen.getModel().getCharGenUsed().equals("pointbuy")) {
@@ -248,8 +250,15 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			logger.log(Level.WARNING,"RCV {0} : {1}", type, Arrays.toString(param));
 			if (param[0] instanceof PointBuyCharacterGenerator) {
 				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith("page.mortypecell.cost", charGen.getMagicOrResonanceController()));
+				tcDist.setVisible(false);
+				tcDist.setManaged(false);
 			} else if (param[0] instanceof KarmaCharacterGenerator) {
 				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith("page.mortypecell.karma",charGen.getMagicOrResonanceController()));
+				tcDist.setVisible(false);
+				tcDist.setManaged(false);
+			} else if (param[0] instanceof IPriorityGenerator) {
+				tcDist.setVisible(true);
+				tcDist.setManaged(true);
 			}
 			refresh();
 		} else {
