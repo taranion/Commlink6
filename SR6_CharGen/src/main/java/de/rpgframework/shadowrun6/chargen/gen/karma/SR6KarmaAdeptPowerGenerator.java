@@ -31,7 +31,7 @@ public class SR6KarmaAdeptPowerGenerator extends SR6AdeptPowerController {
 	 */
 	@Override
 	public boolean canBuyPowerPoints() {
-		return true;
+		return false;
 	}
 
 	//-------------------------------------------------------------------
