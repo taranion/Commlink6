@@ -2,7 +2,7 @@
 <items>
 
 <!-- Complete Character Packs US -->
-   <item id="starterpack" price="25000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="starterpack" price="25000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="respirator">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
@@ -43,7 +43,7 @@
       </modifications>
    </item>
 
-   <item id="dirt_poor" price="8000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="dirt_poor" price="8000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="defiance_super_shock" id="c65eaf0a-a374-4126-8b60-8fe2053e68e8" />
              <embed  type="GEAR" intoId="c65eaf0a-a374-4126-8b60-8fe2053e68e8" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
@@ -77,7 +77,7 @@
       </modifications>
    </item>
 
-   <item id="full_magician" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="full_magician" price="50000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <valmod type="GEAR" apply="CHARACTER" ref="throwing_knives" value="4" />
@@ -127,7 +127,7 @@
       </modifications>
    </item>
 
-   <item id="close_combat" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="close_combat" price="50000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="combat_axe" />
@@ -157,7 +157,7 @@
       </modifications>
    </item>
 
-   <item id="face" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="face" price="50000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="shock_gloves" />
@@ -245,7 +245,7 @@
       </modifications>
    </item>
 
-   <item id="gunslinger" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="gunslinger" price="50000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="ruger_super_warhawk" id="8c273080-e5b3-4179-ad90-f1c769e9ba66" />
@@ -324,7 +324,7 @@
       </modifications>
    </item>
 
-   <item id="cybered_covered" price="150000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="cybered_covered" price="150000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="3.63" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -406,7 +406,7 @@
       </modifications>
    </item>
 
-   <item id="decker" price="275000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="decker" price="275000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="3.4" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -492,7 +492,7 @@
       </modifications>
    </item>
 
-   <item id="cyborg" price="450000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="cyborg" price="450000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="5.9" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -679,7 +679,7 @@
       </modifications>
    </item>
 
-   <item id="samurai" price="275000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="samurai" price="275000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="5.9" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -811,7 +811,7 @@
       </modifications>
    </item>
 
-   <item id="vat_job" price="275000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="vat_job" price="275000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="5.17" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -893,7 +893,7 @@
       </modifications>
    </item>
 
-   <item id="weapons_specialist" price="275000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="weapons_specialist" price="275000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="3.95" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -1077,7 +1077,7 @@
       </modifications>
    </item>
 
-   <item id="max_decker" price="450000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="max_decker" price="450000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="5.0" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -1186,7 +1186,7 @@
       </modifications>
    </item>
 
-   <item id="transport_rigger" price="450000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="transport_rigger" price="450000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="4.0" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -1324,7 +1324,7 @@
       </modifications>
    </item>
 
-   <item id="drone_rigger" price="450000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="drone_rigger" price="450000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="2.9" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -1516,7 +1516,7 @@
       </modifications>
    </item>
 
-   <item id="augmented_for_firearms" price="25000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="augmented_for_firearms" price="25000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="0.41" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="2d33b744-a9a9-4693-9839-9692a2e20fd2">
@@ -1571,7 +1571,7 @@
    </item>
 
 <!-- Complete Character Packs DE -->
-   <item id="starterpack" lang="de" price="25000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="starterpack" lang="de" price="25000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="respirator">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
@@ -1614,7 +1614,7 @@
       </modifications>
    </item>
 
-   <item id="dirt_poor" lang="de" price="8000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="dirt_poor" lang="de" price="8000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="defiance_super_shock" id="c65eaf0a-a374-4126-8b60-8fe2053e68e8" />
              <embed  type="GEAR" intoId="c65eaf0a-a374-4126-8b60-8fe2053e68e8" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
@@ -1649,7 +1649,7 @@
       </modifications>
    </item>
 
-   <item id="full_magician" lang="de" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="full_magician" lang="de" price="50000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="throwing_knives" />
@@ -1685,7 +1685,7 @@
       </modifications>
    </item>
 
-   <item id="close_combat" lang="de" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="close_combat" lang="de" price="50000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="combat_axe" />
@@ -1715,7 +1715,7 @@
       </modifications>
    </item>
 
-   <item id="face" lang="de" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="face" lang="de" price="50000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="shock_gloves" />
@@ -1813,7 +1813,7 @@
       </modifications>
    </item>
 
-   <item id="gunslinger" lang="de" price="50000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="gunslinger" lang="de" price="50000" type="PACK" subtype="PACK_COMPLETE" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
          <itemmod type="GEAR" apply="CHARACTER" ref="ruger_super_warhawk" id="8c273080-e5b3-4179-ad90-f1c769e9ba66" />
@@ -1891,7 +1891,7 @@
       </modifications>
    </item>
 
-   <item id="cybered_covered" lang="de" price="150000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="cybered_covered" lang="de" price="150000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="3.63" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -1970,7 +1970,7 @@
       </modifications>
    </item>
 
-   <item id="decker" lang="de" price="274000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="decker" lang="de" price="274000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="3.4" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -2055,7 +2055,7 @@
       </modifications>
    </item>
 
-   <item id="cyborg" lang="de" price="450000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="cyborg" lang="de" price="450000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="5.9" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -2238,7 +2238,7 @@
       </modifications>
    </item>
 
-   <item id="samurai" lang="de" price="275000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="samurai" lang="de" price="275000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="5.9" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -2371,7 +2371,7 @@
       </modifications>
    </item>
 
-   <item id="vat_job" lang="de" price="275000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="vat_job" lang="de" price="275000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="4.56" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -2448,7 +2448,7 @@
       </modifications>
    </item>
 
-   <item id="weapons_specialist" lang="de" price="275000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="weapons_specialist" lang="de" price="275000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="3.71" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -2615,7 +2615,7 @@
       </modifications>
    </item>
 
-   <item id="max_decker" lang="de" price="450000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="max_decker" lang="de" price="450000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="4.8" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -2725,7 +2725,7 @@
       </modifications>
    </item>
 
-   <item id="transport_rigger" lang="de" price="450000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="transport_rigger" lang="de" price="450000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="4.0" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -2876,7 +2876,7 @@
       </modifications>
    </item>
 
-   <item id="drone_rigger" lang="de" price="450000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="drone_rigger" lang="de" price="450000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="2.9" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="starterpack" />
@@ -3074,7 +3074,7 @@
       </modifications>
    </item>
 
-   <item id="augmented_for_firearms" lang="de" price="25000" type="PACK" subtype="COMPLETE_PACK" >
+   <item id="augmented_for_firearms" lang="de" price="25000" type="PACK" subtype="PACK_COMPLETE" >
     <attrdef id="ESSENCECOST" value="0.43" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="cybereye" id="2d33b744-a9a9-4693-9839-9692a2e20fd2">

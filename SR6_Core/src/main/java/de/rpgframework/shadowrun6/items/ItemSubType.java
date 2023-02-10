@@ -217,7 +217,10 @@ public enum ItemSubType {
 	MICRO_ENVIRONADAPT,
 	COMPLEMENTAL_GENETICS,
 	// PACKS
-	COMPLETE_PACK
+	PACK_COMPLETE,
+	PACK_WEAPON,
+	PACK_AUGMENT,
+	PACK_VEHICLE
     ;
 
 	//-------------------------------------------------------------------
