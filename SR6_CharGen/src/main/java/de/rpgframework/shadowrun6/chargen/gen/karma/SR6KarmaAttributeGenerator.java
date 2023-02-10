@@ -16,6 +16,7 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.chargen.gen.KarmaAttributeGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -26,9 +27,9 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator implements NumericalValueController<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> {
+public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator implements KarmaAttributeGenerator {
 
-	public final static String I18N_NOT_SPECIAL_OR_RACIAL = "attrib.adjust.noSpecialAttribute";
+//	public final static String I18N_NOT_SPECIAL_OR_RACIAL = "attrib.adjust.noSpecialAttribute";
 
 	private final static Logger logger = System.getLogger(SR6KarmaAttributeGenerator.class.getPackageName()+".attrib");
 
@@ -162,13 +163,6 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 	}
 
 	//-------------------------------------------------------------------
-	private void reset() {
-		for (AttributeValue<?> tmp : getModel().getAttributes()) {
-			tmp.clearModifications();
-		}
-	}
-
-	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
@@ -182,8 +176,6 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 			todos.clear();
 			SR6KarmaSettings settings = getModel().getCharGenSettings(SR6KarmaSettings.class);
 			settings.attrib=0;
-			// Reset
-			reset();
 
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
@@ -226,7 +218,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 			logger.log(Level.INFO, "Start with {0} karma", getModel().getKarmaFree());
 			// Reduce points
 			Shadowrun6Character model = parent.getModel();
-			logger.log(Level.INFO, "MAGIC = "+model.getAttribute(ShadowrunAttribute.MAGIC));
+//			logger.log(Level.INFO, "MAGIC = "+model.getAttribute(ShadowrunAttribute.MAGIC));
 			for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 				AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
 				int karmaNeeded = 0;

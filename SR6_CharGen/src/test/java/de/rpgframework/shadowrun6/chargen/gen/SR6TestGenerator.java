@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
+import de.rpgframework.shadowrun.chargen.charctrl.ICritterPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
@@ -418,6 +419,14 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 	@Override
 	public IMartialArtsController getMartialArtsController() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController#getCritterPowerController()
+	 */
+	@Override
+	public ICritterPowerController getCritterPowerController() {
 		return null;
 	}
 

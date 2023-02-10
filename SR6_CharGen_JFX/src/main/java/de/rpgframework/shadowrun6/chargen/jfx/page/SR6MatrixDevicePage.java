@@ -17,6 +17,7 @@ import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.Pool;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -31,13 +32,13 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.WorldType;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AccessoriesSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.ActiveProgramsSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection;
-import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection.Type;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SR6PersonaSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SoftwareLibrarySection;
@@ -176,7 +177,7 @@ public class SR6MatrixDevicePage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initCombat() {
-		secCombat = new CombatSection(Type.MATRIX);
+		secCombat = new CombatSection(WorldType.MATRIX);
 		FlexGridPane.setMinWidth(secCombat, 6);
 		FlexGridPane.setMinHeight(secCombat, 6);
 		FlexGridPane.setMediumWidth(secCombat, 8);
@@ -191,9 +192,8 @@ public class SR6MatrixDevicePage extends Page {
 			if (act.getSkill()!=null) {
 				SR6Skill skill = Shadowrun6Core.getSkill(act.getSkill());
 				ShadowrunAttribute attr = (act.getAttribute()!=null)?act.getAttribute():skill.getAttribute();
-				Shadowrun6Tools.getSkillPoolCalculation(ctrl.getModel(), skill, attr);
-				int val = Shadowrun6Tools.getSkillPool(ctrl.getModel(), skill);
-				ret.setText( String.valueOf(val));
+				Pool<Integer> pool = Shadowrun6Tools.getSkillPool(ctrl.getModel(), skill, attr);
+				ret.setText( pool.toString());
 			} else
 				ret.setText("-");
 			return ret;
@@ -223,7 +223,7 @@ public class SR6MatrixDevicePage extends Page {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
 		// No ivDeepDive, secPrograms,
-		flex.getChildren().addAll(secDevices,secSoftware,secAccessories,secPersona,secCombat, secActions);
+		flex.getChildren().addAll(secCombat, secDevices,secSoftware,secAccessories,secPersona,secActions);
 		ScrollPane scroll = new ScrollPane(flex);
 		scroll.setFitToWidth(true);
 

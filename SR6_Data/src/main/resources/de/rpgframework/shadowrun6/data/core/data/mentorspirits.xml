@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mentorspirits>
 	<mentorspirit id="bear">
-		<similar>strength</similar>
-		<similar>protection</similar>
+		<similarNames>
+			<similar>strength</similar>
+			<similar>protection</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="-1" what="EDGE_BOOST" />
 		</modifications>
@@ -15,10 +17,12 @@
 	</mentorspirit>
 
 	<mentorspirit id="cat">
+		<similarNames>
 		<similar>mystery</similar>
 		<similar>stealth</similar>
+		</similarNames>
 		<choices>
-			<choice type="SKILL" uuid="ee7bc846-f246-47bf-931c-786d5b0ee15b" options="athletics,stealth"/>  
+			<choice type="SKILL" uuid="ee7bc846-f246-47bf-931c-786d5b0ee15b" options="athletics,stealth"/>
 		</choices>
 		<modifications>
 			<checkmod type="SKILL" ref="CHOICE" choice="ee7bc846-f246-47bf-931c-786d5b0ee15b" value="-1" what="EDGE_BOOST" />
@@ -32,8 +36,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="coyote">
+		<similarNames>
 		<similar>deception</similar>
 		<similar>mischief</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="con" value="-1" what="EDGE_BOOST" />
 		</modifications>
@@ -46,8 +52,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="dog">
+		<similarNames>
 		<similar>friendship</similar>
 		<similar>loyalty</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="outdoors" value="-1" what="EDGE_BOOST" />
 		</modifications>
@@ -60,8 +68,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="dragonslayer">
+		<similarNames>
 		<similar>heroism</similar>
 		<similar>adventure</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="influence" value="-1" what="EDGE_BOOST" />
 		</modifications>
@@ -74,8 +84,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="eagle">
+		<similarNames>
 		<similar>nature</similar>
 		<similar>warding</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="perception" value="-1" what="EDGE_BOOST" />
 			<itemmod type="QUALITY" ref="allergy">
@@ -93,10 +105,12 @@
 	</mentorspirit>
 
 	<mentorspirit id="firebringer">
+		<similarNames>
 		<similar>invention</similar>
 		<similar>generosity</similar>
+		</similarNames>
 		<choices>
-			<choice type="SKILL" uuid="9b909b3d-ddcb-46b4-838e-4d182a721d14" options="engineering,enchanting"/>  
+			<choice type="SKILL" uuid="9b909b3d-ddcb-46b4-838e-4d182a721d14" options="engineering,enchanting"/>
 		</choices>
 		<modifications>
 			<checkmod type="SKILL" ref="CHOICE" choice="9b909b3d-ddcb-46b4-838e-4d182a721d14" value="-1" what="EDGE_BOOST" />
@@ -110,8 +124,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="mountain">
+		<similarNames>
 		<similar>endurance</similar>
 		<similar>stubbornness</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="outdoors" value="-1" what="EDGE_BOOST" />
 		</modifications>
@@ -124,8 +140,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="rat">
+		<similarNames>
 		<similar>survival</similar>
 		<similar>scavenging</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="stealth" value="-1" what="EDGE_BOOST" />
 		</modifications>
@@ -138,8 +156,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="sea">
+		<similarNames>
 		<similar>chaos</similar>
 		<similar>greed</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="athletics" value="-1" what="EDGE_BOOST" cond="y"/>
 		</modifications>
@@ -154,8 +174,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="seducer">
+		<similarNames>
 		<similar>seductress</similar>
 		<similar>temptation</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="con" value="-1" what="EDGE_BOOST"/>
 		</modifications>
@@ -168,8 +190,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="shark">
+		<similarNames>
 		<similar>hunger</similar>
 		<similar>violence</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="close_combat" value="-1" what="EDGE_BOOST" cond="y"/>
 		</modifications>
@@ -182,11 +206,13 @@
 	</mentorspirit>
 
 	<mentorspirit id="snake">
+		<similarNames>
 		<similar>knowledge</similar>
 		<similar>curiosity</similar>
+		</similarNames>
 		<choices>
-			<choice type="TEXT" uuid="210b2d71-2d9c-4c87-914f-f7df4768c7d8"/>  
-			<choice type="TEXT" uuid="06e4c414-493a-40c4-8b55-821591eba5d0"/>  
+			<choice type="TEXT" uuid="210b2d71-2d9c-4c87-914f-f7df4768c7d8"/>
+			<choice type="TEXT" uuid="06e4c414-493a-40c4-8b55-821591eba5d0"/>
 		</choices>
 		<modifications>
 			<valmod type="SKILL" ref="knowledge" value="1">
@@ -205,8 +231,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="thunderbird">
+		<similarNames>
 		<similar>anger</similar>
 		<similar>war</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="influence" value="-1" what="EDGE_BOOST"/>
 		</modifications>
@@ -219,8 +247,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="wise_warrior">
+		<similarNames>
 		<similar>duty</similar>
 		<similar>wisdom</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="influence" value="-1" what="EDGE_BOOST"/>
 		</modifications>
@@ -233,8 +263,10 @@
 	</mentorspirit>
 
 	<mentorspirit id="wolf">
+		<similarNames>
 		<similar>fellowship</similar>
 		<similar>hunting</similar>
+		</similarNames>
 		<modifications>
 			<checkmod type="SKILL" ref="sorcery" value="-1" what="EDGE_BOOST" cond="y"/>
 		</modifications>

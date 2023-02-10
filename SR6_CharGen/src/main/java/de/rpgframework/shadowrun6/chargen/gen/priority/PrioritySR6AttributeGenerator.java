@@ -49,6 +49,11 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	//-------------------------------------------------------------------
 	public PrioritySR6AttributeGenerator(SR6CharacterController parent) {
 		super(parent);
+		Shadowrun6Character model = parent.getModel();
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+			PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
+			per.base=1;
+		}
 //		try {
 //			throw new RuntimeException("Trace "+this);
 //		} catch (Exception e) {
@@ -473,9 +478,9 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	public Possible canBeIncreasedPoints3(AttributeValue<ShadowrunAttribute> value) {
 		ShadowrunAttribute key = value.getModifyable();
 		Shadowrun6Character model = parent.getModel();
-		if (key==ShadowrunAttribute.RESONANCE && ( model.getMagicOrResonanceType()==null || model.getMagicOrResonanceType().usesResonance()))
+		if (key==ShadowrunAttribute.RESONANCE && ( model.getMagicOrResonanceType()==null || !model.getMagicOrResonanceType().usesResonance()))
 			return Possible.FALSE;
-		if (key==ShadowrunAttribute.MAGIC && (model.getMagicOrResonanceType()==null || model.getMagicOrResonanceType().usesMagic())) {
+		if (key==ShadowrunAttribute.MAGIC && (model.getMagicOrResonanceType()==null || !model.getMagicOrResonanceType().usesMagic())) {
 			return Possible.FALSE;
 		}
 
@@ -765,6 +770,10 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 					logger.log(Level.INFO, "  pay {0} Karma for {1}", karma, key);
 					getModel().setKarmaFree( getModel().getKarmaFree() - karma);
 				}
+
+				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(key);
+				logger.log(Level.DEBUG, "Current aVal={0}/{1}  sumWithout={2}  sum={3}", aVal.getModifiedValue(), aVal.getModifier(), per.getSumWithoutBase(), per.getSum());
+				aVal.setDistributed(per.getSum());
 			}
 			logger.log(Level.DEBUG, "Finish with {0} adjust and {1} attrib points and {2} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());
 

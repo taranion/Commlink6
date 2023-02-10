@@ -50,7 +50,7 @@ public class ResetGenerator implements ProcessingStep {
 		// Remove all items that are auto-injected
 		for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
 			if (tmp.getInjectedBy()!=null) {
-				logger.log(Level.WARNING, "Remove item {0} injected from {1}", tmp.getKey(), tmp.getInjectedBy());
+				logger.log(Level.DEBUG, "Remove item {0} injected from {1}", tmp.getKey(), tmp.getInjectedBy());
 				model.removeCarriedItem(tmp);
 			}
 		}
@@ -61,7 +61,6 @@ public class ResetGenerator implements ProcessingStep {
 				model.removeLifestyle(tmp);
 		}
 
-		model.setKarmaFree(50);
 		model.setKarmaInvested(0);
 		PowerLevel level = model.getPowerLevel();
 		if (level==null) {
@@ -74,6 +73,7 @@ public class ResetGenerator implements ProcessingStep {
 			real = ((GeneratorWrapper)charGen).getWrapped();
 
 		if (real instanceof LifePathCharacterGenerator) {
+			model.setKarmaFree(50);
 			SR6LifePathSettings settings = model.getCharGenSettings(SR6LifePathSettings.class);
 			switch (level) {
 			case STREET_LEVEL:
@@ -87,6 +87,7 @@ public class ResetGenerator implements ProcessingStep {
 				break;
 			}
 		} else if (real instanceof PointBuyCharacterGenerator) {
+			model.setKarmaFree(50);
 			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 			settings.perAttrib.get(ShadowrunAttribute.MAGIC).base=0;
 			settings.perAttrib.get(ShadowrunAttribute.RESONANCE).base=0;
@@ -124,6 +125,7 @@ public class ResetGenerator implements ProcessingStep {
 			logger.log(Level.INFO, "Start with {0} Karma", settings.startKarma);
 			model.setKarmaFree(settings.startKarma);
 		} else {
+			model.setKarmaFree(50);
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			if (level==PowerLevel.PRIME_RUNNER)
 				model.setKarmaFree(100);

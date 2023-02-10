@@ -58,24 +58,28 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 	 * @return TRUE when modification was processed
 	 */
 	public static boolean applyModification(Shadowrun6Character model, Modification tmp) {
-		if (tmp instanceof DataItemModification) {
-			DataItemModification mod = (DataItemModification)tmp;
-			switch ((ShadowrunReference) tmp.getReferenceType()) {
-			case ADEPT_POWER: return applyAdeptPower(model, mod);
-			case ATTRIBUTE  : return applyAttribute(model, (ValueModification) mod);
-			case CRITTER_POWER: return applyCritterPower(model, mod);
-			case GEAR       : return applyGear(model, mod);
-			case LIFESTYLE  : return applyLifestyle(model, mod);
-			case QUALITY    : return applyQuality(model, mod);
-			case RULE       : return applyRule(model, mod);
-			case SKILL		: return applySkill(model, (ValueModification) mod);
-			case ITEM_ATTRIBUTE:
-			case ACTION:
-				model.addItemModification(mod); return true;
-			default:
-				logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
-				System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
+		try {
+			if (tmp instanceof DataItemModification) {
+				DataItemModification mod = (DataItemModification)tmp;
+				switch ((ShadowrunReference) tmp.getReferenceType()) {
+				case ADEPT_POWER: return applyAdeptPower(model, mod);
+				case ATTRIBUTE  : return applyAttribute(model, (ValueModification) mod);
+				case CRITTER_POWER: return applyCritterPower(model, mod);
+				case GEAR       : return applyGear(model, mod);
+				case LIFESTYLE  : return applyLifestyle(model, mod);
+				case QUALITY    : return applyQuality(model, mod);
+				case RULE       : return applyRule(model, mod);
+				case SKILL		: return applySkill(model, (ValueModification) mod);
+				case ITEM_ATTRIBUTE:
+				case ACTION:
+					model.addItemModification(mod); return true;
+				default:
+					logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
+					System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
+				}
 			}
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Error applying "+tmp+" from "+tmp.getSource(),e);
 		}
 		return false;
 	}
@@ -92,7 +96,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
-				logger.log(Level.INFO, "process "+tmp);
+				logger.log(Level.DEBUG, "process "+tmp);
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
 				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
@@ -145,7 +149,14 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 
 	// -------------------------------------------------------------------
 	private static boolean applyAttribute(Shadowrun6Character model, ValueModification mod) {
-		ShadowrunAttribute item = mod.getReferenceType().resolve(mod.getKey());
+		ShadowrunAttribute item = null;
+		if ("CHOICE".equals(mod.getKey())) {
+			UUID uuid = mod.getConnectedChoice();
+			Decision dec = mod.getDecision(uuid);
+			item = mod.getReferenceType().resolve(dec.getValue());
+		} else {
+			item = mod.getReferenceType().resolve(mod.getKey());
+		}
 		AttributeValue<ShadowrunAttribute> value = model.getAttribute(item);
 		if (item == null) {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such attribute {0}", mod.getKey());

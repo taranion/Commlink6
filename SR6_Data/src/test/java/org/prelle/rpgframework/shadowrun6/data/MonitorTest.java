@@ -44,7 +44,7 @@ public class MonitorTest {
 		model.getAttribute(ShadowrunAttribute.BODY).setDistributed(5);
 //		model.setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.BODY, 5));
 
-		Shadowrun6Tools.runProcessors(model);
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 	}
 
 	//-------------------------------------------------------------------
@@ -62,7 +62,7 @@ public class MonitorTest {
 	public void testQualitiesByMeta() {
 		// Being a troll grants "Built tough 2"
 		model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "troll"));
-		Shadowrun6Tools.runProcessors(model);
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR);
 		assertNotNull(val);
@@ -80,11 +80,11 @@ public class MonitorTest {
 	public void testQualitiesByMetaWithAddedLevel() {
 		// Being a troll grants "Built tough 2"
 		model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "troll"));
-		Shadowrun6Tools.runProcessors(model);
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 		QualityValue qVal = model.getQuality("built_tough");
 		qVal.setDistributed(2);
 
-		Shadowrun6Tools.runProcessors(model);
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR);
 		assertNotNull(val);

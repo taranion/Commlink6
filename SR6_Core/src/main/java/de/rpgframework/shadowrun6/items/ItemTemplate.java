@@ -75,6 +75,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		@ElementList(entry="ammo", type=AmmunitionData.class, inline=true),
 		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
 		@ElementList(entry="vehicle", type=VehicleData.class, inline=true),
+		@ElementList(entry="alchemy", type=AlchemyData.class, inline=true),
 	})
 	private List<IGearTypeData> shortcuts;
 
@@ -165,6 +166,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		setAttribute(SR6ItemAttribute.PRICE, super.price);
 		setAttribute(SR6ItemAttribute.ITEMTYPE, type);
 		setAttribute(SR6ItemAttribute.ITEMSUBTYPE, subtype);
+		super.validate();
 
 		if (availability!=null)
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);
@@ -316,7 +318,6 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			}
 		}
 
-		super.validate();
 	}
 
 	//-------------------------------------------------------------------

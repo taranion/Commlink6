@@ -18,6 +18,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CritterPowerController;
 
 /**
  * @author prelle
@@ -34,6 +35,7 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 	// -------------------------------------------------------------------
 	protected CommonSR6CharacterGenerator() {
 //		updateEffectiveRules();
+		super.critter = new SR6CritterPowerController(this);
 	}
 
 	//-------------------------------------------------------------------

@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.chargen.jfx.page;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -20,18 +21,20 @@ import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.RitualValue;
+import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.chargen.jfx.pane.SpellDescriptionPane;
 import de.rpgframework.shadowrun.chargen.jfx.section.FocusSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.RitualSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.SpellSection;
 import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.WorldType;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AdeptPowerSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection;
-import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection.Type;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.scene.control.Label;
 
@@ -91,7 +94,17 @@ public class MagicPage extends Page {
 				ResourceI18N.get(RES, "page.magic.section.spells"),
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 				Shadowrun6Tools.modificationResolver(Locale.getDefault())
-				);
+				) {
+			public void refresh() {
+				super.refresh();
+
+				cbTradition.getItems().setAll(Shadowrun6Core.getItemList(Tradition.class));
+
+				if (model!=null)
+					cbTradition.setValue(model.getTradition());
+			}
+
+		};
 		secSpells.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secSpells, 4);
 		FlexGridPane.setMinHeight(secSpells, 6);
@@ -130,7 +143,7 @@ public class MagicPage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initCombat() {
-		secCombat = new CombatSection(Type.ASTRAL);
+		secCombat = new CombatSection(WorldType.ASTRAL);
 		FlexGridPane.setMinWidth(secCombat, 6);
 		FlexGridPane.setMinHeight(secCombat, 6);
 		FlexGridPane.setMediumWidth(secCombat, 8);
@@ -141,10 +154,11 @@ public class MagicPage extends Page {
 		secFoci = new FocusSection(Shadowrun6Tools.requirementResolver(Locale.getDefault()), Shadowrun6Tools.modificationResolver(Locale.getDefault())) {
 			@Override
 			protected Decision[] requestUserDecisions(Focus value) {
-				logger.log(Level.DEBUG, "Present choice dialog");
+				logger.log(Level.WARNING, "Present choice dialog");
 				ChoiceSelectorDialog<Focus, FocusValue> dialog = new ChoiceSelectorDialog<>(control.getFocusController());
 				Decision[] dec = dialog.apply(value, value.getChoices());
-				return null;
+				logger.log(Level.WARNING, "decisions: "+Arrays.toString(dec));
+				return dec;
 			}};
 		secFoci.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secFoci, 4);
@@ -158,7 +172,7 @@ public class MagicPage extends Page {
 
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secAdeptPowers, secSpells, secMeta, secRituals, secFoci);
+		flex.getChildren().addAll(secCombat,secAdeptPowers, secSpells, secMeta, secRituals, secFoci);
 
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);

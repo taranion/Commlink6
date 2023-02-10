@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.PriorityCharacterGenerator;
@@ -110,6 +111,16 @@ public class CharacterGeneratorRegistry {
 				ret.add(RES.format("chargeninfo.pointbuy.spells", loc, cp, karma));
 			}
 			ret.add(RES.format("chargeninfo.pointbuy.resrc", loc, settings.cpToResources, settings.cpToResources*20000));
+		}
+		if (clazz==KarmaCharacterGenerator.class) {
+			SR6KarmaSettings settings = model.getCharGenSettings(SR6KarmaSettings.class);
+			ret.add(RES.format("chargeninfo.karma.meta", loc, settings.meta));
+			ret.add(RES.format("chargeninfo.karma.mortype", loc, settings.morType));
+			ret.add(RES.format("chargeninfo.karma.attrib", loc, settings.attrib));
+			ret.add(RES.format("chargeninfo.karma.skill", loc, settings.skills));
+			ret.add(RES.format("chargeninfo.karma.spell", loc, settings.spells));
+			ret.add(RES.format("chargeninfo.karma.cform", loc, settings.cforms));
+			//ret.add(RES.format("chargeninfo.karma.resrc", loc, settings.cpToResources, settings.cpToResources*20000));
 		}
 
 		// Karma to nuyen

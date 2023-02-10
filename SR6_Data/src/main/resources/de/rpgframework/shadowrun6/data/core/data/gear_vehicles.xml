@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-<!-- Vehicle Accessories -->   
+<!-- Vehicle Accessories -->
    <item avail="2"  price="1000" id="rigger_interface"  type="MOD_ELEC" subtype="MOD_MISC">
    	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS"/>
    </item>
@@ -38,13 +38,13 @@
    <item avail="2"  price="12000" id="suzuki_mirage" subtype="BIKES" type="VEHICLES">
       <vehicle han="2/6" acc="29" spdi="30" tspd="260" bod="4" arm="2" pil="1" sen="1" sea="1" />
    </item>
-   
+
 <!-- Cars -->
    <item avail="2"  price="11000" id="chrysler-nissan_jackrabbit" subtype="CARS" type="VEHICLES">
-      <vehicle han="3/5" acc="20" spdi="10" tspd="160" bod="8" arm="4" pil="2" sen="1" sea="3"/>
+      <vehicle han="3/5" acc="20" spdi="15" tspd="160" bod="8" arm="4" pil="2" sen="1" sea="3"/>
    </item>
    <item avail="2"  price="13000" id="honda_spirit" subtype="CARS" type="VEHICLES">
-      <vehicle han="4/5" acc="15" spdi="20" tspd="150" bod="10" arm="3" pil="1" sen="1" sea="2"/>
+      <vehicle han="4/5" acc="15" spdi="20" tspd="150" bod="10" arm="3" pil="1" sen="1" sea="4"/>
    </item>
    <item avail="3"  price="115000" id="eurocar_westwind_x80" subtype="CARS" type="VEHICLES">
       <vehicle han="2/6" acc="24" spdi="30" tspd="250" bod="6" arm="1" pil="4" sen="3" sea="2"/>
@@ -61,10 +61,10 @@
    <item avail="3"  price="259000" id="mitsubishi_nightsky" subtype="CARS" type="VEHICLES">
       <vehicle han="4/6" acc="10" spdi="10" tspd="160" bod="18" arm="10" pil="3" sen="4" sea="8"/>
    </item>
-   
+
 <!-- Trucks and Vans -->
    <item avail="2"  price="25000" id="toyota_gopher" type="VEHICLES" subtype="TRUCKS">
-      <vehicle han="4/4" acc="15" spdi="15" tspd="160" bod="12" arm="6" pil="1" sen="1" sea="4"/>
+      <vehicle han="4/4" acc="15" spdi="15" tspd="150" bod="12" arm="6" pil="1" sen="1" sea="4"/>
    </item>
    <item avail="2"  price="35000" id="gmc_bulldog" type="VEHICLES" subtype="VANS">
       <vehicle han="5/7" acc="10" spdi="10" tspd="140" bod="16" arm="12" pil="2" sen="3" sea="10"/>
@@ -75,26 +75,26 @@
    <item avail="2"  price="68000" id="ares_roadmaster" type="VEHICLES" subtype="VANS">
       <vehicle han="5/7" acc="8" spdi="10" tspd="120" bod="18" arm="16" pil="2" sen="2" sea="12"/>
    </item>
-   
+
 <!-- Boats -->
    <item avail="2"  price="25000" id="samuvani_criscraft_otter" type="VEHICLES" subtype="BOATS">
       <vehicle han="4" acc="10" spdi="15" tspd="90" bod="6" arm="4" pil="2" sen="2" sea="6"/>
    </item>
    <item avail="3"  price="39000" id="aztechnology_sunrunner_nightrunner" type="VEHICLES" subtype="BOATS">
-      <vehicle han="4" acc="20" spdi="20" tspd="120" bod="8" arm="3" pil="3" sen="3" sea="5"/>
+      <vehicle han="4" acc="20" spdi="20" tspd="120" bod="10" arm="8" pil="3" sen="3" sea="5"/>
    </item>
    <item avail="4"  price="113000" id="gmc_riverrine" type="VEHICLES" subtype="BOATS">
       <vehicle han="4" acc="15" spdi="15" tspd="100" bod="14" arm="12" pil="4" sen="4" sea="8"/>
    </item>
-   
+
 <!-- Submarines -->
    <item avail="2"  price="15000" id="proteus_lamprey" type="VEHICLES" subtype="SUBMARINES">
       <vehicle han="3" acc="13" spdi="10" tspd="60" bod="2" arm="1" pil="2" sen="1" sea="4"/>
    </item>
    <item avail="3"  price="110000" id="ynt_delfin" type="VEHICLES" subtype="SUBMARINES">
-      <vehicle han="4" acc="20" spdi="20" tspd="120" bod="8" arm="3" pil="3" sen="3" sea="5"/>
+      <vehicle han="5" acc="18" spdi="10" tspd="70" bod="6" arm="12" pil="3" sen="3" sea="3"/>
    </item>
-   
+
 <!-- Fixed wing aircrafts -->
    <item avail="2"  price="20000" id="artemis_industries_nightwing" type="VEHICLES" subtype="FIXED_WING">
       <vehicle han="4" acc="15" spdi="25" tspd="150" bod="2" arm="0" pil="1" sen="1" sea="1"/>
@@ -105,10 +105,10 @@
    <item avail="2"  price="300000" id="mct-sikorsky-bell_seahawk" type="VEHICLES" subtype="FIXED_WING">
       <vehicle han="5" acc="30" spdi="50" tspd="500" bod="12" arm="4" pil="2" sen="2" sea="8"/>
    </item>
-   
+
 <!-- Rotorcraft -->
    <item avail="2"  price="360000" id="ares_dragon" type="VEHICLES" subtype="ROTORCRAFT">
-      <vehicle han="4" acc="10" spdi="30" tspd="260" bod="16" arm="10" pil="2" sen="3" sea="16"/>
+      <vehicle han="4" acc="10" spdi="30" tspd="260" bod="22" arm="10" pil="2" sen="3" sea="16"/>
    </item>
    <item avail="4"  price="423000" id="mct-sikorsky-bell_wolfhound" type="VEHICLES" subtype="ROTORCRAFT">
       <vehicle han="3" acc="20" spdi="40" tspd="320" bod="12" arm="14" pil="4" sen="4" sea="8"/>
@@ -116,7 +116,7 @@
    <item avail="3"  price="93000" id="northrup_wasp" type="VEHICLES" subtype="ROTORCRAFT">
       <vehicle han="3" acc="25" spdi="30" tspd="330" bod="10" arm="8" pil="3" sen="3" sea="2"/>
    </item>
-    
+
 <!-- VTOL/VSTOL -->
    <item avail="2"  price="350000" id="federated_boeing_commuter" type="VEHICLES" subtype="VTOL">
       <vehicle han="3" acc="35" spdi="60" tspd="420" bod="16" arm="10" pil="2" sen="2" sea="10"/>

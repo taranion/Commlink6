@@ -290,6 +290,8 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 			lbPoints2.setText( String.valueOf( ((PointBuySR6SkillGenerator)skillCtrl).getConvertiblePoints() ));
 			backHeaderCP.setValue( ((ISR6PointBuyGenerator)charGen).getSettings().characterPoints );
 			backHeaderCP.setVisible(true);
+		} else {
+			backHeaderCP.setVisible(false);
 		}
 	}
 

@@ -266,7 +266,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 						model.setKarmaFree(model.getKarmaFree() - cost);
 						karmaGain -= cost;
 					} else {
-						logger.log(Level.INFO, "Get {0} Karma for ''{1}''", cost, item.getId());
+						logger.log(Level.INFO, "Get {0} Karma for ''{1}''  (previous {2})", cost, item.getId(), model.getKarmaFree());
 						model.setKarmaFree(model.getKarmaFree() + cost);
 						karmaGain += cost;
 					}

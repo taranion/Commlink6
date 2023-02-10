@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.PageReference;
@@ -95,7 +96,7 @@ import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 
 public class JSONSR6ExportService {
-	
+
 	private final Locale loc = Locale.getDefault();
 
     public String exportCharacter(Shadowrun6Character character) {
@@ -382,7 +383,7 @@ public class JSONSR6ExportService {
             List<DataItem> influences = Shadowrun6Tools.getInfluences(complexForm);
             jsonComplexForm.influences = influences.stream().map(DataItem::getName).collect(Collectors.toList());
             jsonComplexForm.page = getPageString(complexForm.getModifyable());
-            jsonComplexForm.description = getDescription(complexForm.getModifyable());    
+            jsonComplexForm.description = getDescription(complexForm.getModifyable());
             jsonComplexFormList.add(jsonComplexForm);
         }
 
@@ -604,7 +605,7 @@ public class JSONSR6ExportService {
         ShadowrunAttribute attr = skillValue.getModifyable().getAttribute();
         jsonSkill.attribute = attr.getName();
         jsonSkill.rating = skillValue.getDistributed();
-        jsonSkill.pool = Shadowrun6Tools.getSkillPool(character, skillValue.getModifyable());
+        jsonSkill.pool = Shadowrun6Tools.getSkillPool(character, skillValue.getModifyable()).getValue(ValueType.AUGMENTED);
         jsonSkill.description = getDescription(skillValue.getModifyable());
         List<SkillSpecializationValue<SR6Skill>> specializations = skillValue.getSpecializations();
         List<JSONSkillSpecialization> jsonSkillSpecializationList = new ArrayList<>();
@@ -623,7 +624,7 @@ public class JSONSR6ExportService {
             jsonSpec.expertise = specialization.getDistributed() == 2;
             jsonSpec.description = getDescription(specialization.getResolved());
             int mod = specialization.getDistributed();
-            jsonSpec.pool = mod + Shadowrun6Tools.getSkillPool(character, skillValue.getModifyable(), specAttr);
+            jsonSpec.pool = mod + Shadowrun6Tools.getSkillPool(character, skillValue.getModifyable(), specAttr).getValue(ValueType.AUGMENTED);
             jsonSkillSpecializationList.add(jsonSpec);
         }
         jsonSkill.specializations = jsonSkillSpecializationList;
@@ -640,8 +641,8 @@ public class JSONSR6ExportService {
         for (ShadowrunAttribute shadowrunAttribute : shadowrunAttributes) {
             attributes.add(character.getAttribute(shadowrunAttribute));
         }
-        attributes = attributes.stream().filter(a -> !a.getModifyable().equals(INITIATIVE_ASTRAL) 
-                && !a.getModifyable().equals(INITIATIVE_MATRIX) 
+        attributes = attributes.stream().filter(a -> !a.getModifyable().equals(INITIATIVE_ASTRAL)
+                && !a.getModifyable().equals(INITIATIVE_MATRIX)
                 && !a.getModifyable().equals(INITIATIVE_PHYSICAL)).collect(Collectors.toList());
         for (AttributeValue<ShadowrunAttribute> attribute : attributes) {
             jsonAttributes.add(getJSONAttribute(attribute));
@@ -717,7 +718,7 @@ public class JSONSR6ExportService {
         return result;
     }
 
- 
+
 
     private static List<CarriedItem<ItemTemplate>> getProgramsOnDevice(CarriedItem<ItemTemplate> item) {
         Collection<CarriedItem<ItemTemplate>> userAddedAccessories = item.getAccessories();
@@ -728,11 +729,11 @@ public class JSONSR6ExportService {
     private static List<CarriedItem<ItemTemplate>> getAccessoriesWithoutPrograms(CarriedItem<ItemTemplate> item) {
         Collection<CarriedItem<ItemTemplate>> userAddedAccessories = item.getAccessories();
         return userAddedAccessories.stream()
-                .filter(carriedItem -> (!Shadowrun6Tools.isSubtype(carriedItem,ItemSubType.BASIC_PROGRAM) 
+                .filter(carriedItem -> (!Shadowrun6Tools.isSubtype(carriedItem,ItemSubType.BASIC_PROGRAM)
                         && !Shadowrun6Tools.isSubtype(carriedItem, ItemSubType.HACKING_PROGRAM)))
                 .collect(Collectors.toList());
     }
-    
+
     private String getDescription(DataItem data) {
         //TODO custom helptext
 //        if (data.hasCustomHelpText()) {

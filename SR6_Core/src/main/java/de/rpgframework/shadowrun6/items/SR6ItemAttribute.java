@@ -24,7 +24,7 @@ import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
  *
  */
 public enum SR6ItemAttribute implements IItemAttribute {
-	
+
 	ACCELERATION,
 	AMMUNITION,
 	AMMUNITION_CLASS( new EnumConverter(AmmunitionClass.class)),
@@ -62,7 +62,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	HOOK( new EnumConverter(ItemHook.class)),
 	ITEMTYPE( new EnumConverter(ItemType.class)),
 	ITEMSUBTYPE( new EnumConverter(ItemSubType.class)),
-	
+
 //	/** Maximum rating of embedded items */
 	MAX_SENSOR_RATING,
 	MAX_SKILLSOFT_RATING,
@@ -70,7 +70,9 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	// Vehicle Pilot
 	PILOT,
 	PRICE,
-	// 
+	/** Used for two-step price calculations - e.g. Infostick alchemical preparation */
+	PRICE2,
+	//
 	SOFTWARE_TYPES( new EnumConverter(SoftwareTypes.class)),
 	QUALITY,
 	RANGE,
@@ -92,7 +94,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	FIREWALL,
 	CONCURRENT_PROGRAMS,
 	;
-	
+
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
 
 	private StringValueConverter<? extends Object> converter;
@@ -107,7 +109,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	private SR6ItemAttribute(StringValueConverter<? extends Object> conv) {
 		converter = conv;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.items.IItemAttribute#calculateModifiedValue(java.lang.Object, java.util.List)
@@ -175,7 +177,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	public SR6ItemAttribute resolve(String key) {
 		return SR6ItemAttribute.valueOf(key);
 	}
-	
+
 //	//-------------------------------------------------------------------
 //	/**
 //	 * @see de.rpgframework.genericrpg.data.IItemAttribute#resolve(java.lang.String)

@@ -93,16 +93,16 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 	public Possible canBeSelected(Focus value, Decision... decisions) {
 		// Ensure all decisions are present
 		Possible poss = GenericRPGTools.areAllDecisionsPresent(value, decisions);
-		if (!poss.get() || poss.getState()==State.DECISIONS_MISSING) 
+		if (!poss.get() || poss.getState()==State.DECISIONS_MISSING)
 			return poss;
-		
+
 		Shadowrun6Character model = getModel();
-		
+
 		/*
 		 * General rules: (CRB 154)
 		 * - You can’t bond more foci than your Magic attribute,
-		 * - no focus Force may exceed your magic Attribute (new in Seattle Edition) 
-		 * - and the maximum Force of all your bonded foci 
+		 * - no focus Force may exceed your magic Attribute (new in Seattle Edition)
+		 * - and the maximum Force of all your bonded foci
 		 *   can’t exceed your Magic x 5.
 		 */
 
@@ -114,30 +114,30 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		}
 
 		// Determine rating
-		Decision decForce = GenericRPGTools.getDecision(Focus.FORCE_UUID, decisions); 
+		Decision decForce = GenericRPGTools.getDecision(Focus.FORCE_UUID, decisions);
 		int force = Integer.parseInt(decForce.getValue());
 		// No focus may exceed MAG attribute
 		if (force>magic) {
 			// No. foci larger than magic attribute
-			return new Possible(SR6RejectReasons.IMPOSS_FOCUS_EXCEEDS_MAGIC);			
+			return new Possible(SR6RejectReasons.IMPOSS_FOCUS_EXCEEDS_MAGIC);
 		}
-		
+
 		// maximum force
 		if (force>forcePool) {
 			// Sum of force of all foci exceeds Magic*5
-			return new Possible(SR6RejectReasons.IMPOSS_SUM_FORCE_EXCEEDS_MAX);			
+			return new Possible(SR6RejectReasons.IMPOSS_SUM_FORCE_EXCEEDS_MAX);
 		}
-		
+
 		// Enough Karma for bonding
 		if ( (force*value.getBondingMultiplier())>model.getKarmaFree()) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, force*value.getBondingMultiplier());
 		}
-		
+
 		// Enough Nuyen for bonding
 		if ( (force*value.getNuyenCost())>model.getNuyen()) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, force*value.getNuyenCost(), model.getNuyen());
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -152,16 +152,17 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 			logger.log(Level.ERROR, "Trying to select focus, but "+poss);
 			return new OperationResult<>(poss);
 		}
-		
-		Decision decForce = GenericRPGTools.getDecision(Focus.FORCE_UUID, decisions); 
+
+		Decision decForce = GenericRPGTools.getDecision(Focus.FORCE_UUID, decisions);
 		int force = Integer.parseInt(decForce.getValue());
 
 		FocusValue val = new FocusValue(value, force);
 		for (Decision dec : decisions) {
 			val.addDecision(dec);
 		}
+		getModel().addFocus(val);
 		logger.log(Level.INFO, "Selected focus "+val);
-		
+
 		parent.runProcessors();
 		return new OperationResult<FocusValue>(val);
 	}
@@ -189,7 +190,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 			logger.log(Level.ERROR, "Trying to deselect focus, but "+poss);
 			return false;
 		}
-		
+
 		getModel().removeFocus(value);
 		logger.log(Level.INFO,"Deselected focus "+value);
 
@@ -226,17 +227,17 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		Shadowrun6Character model = getModel();
 		try {
 			forcePool = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue()*5;
-			
+
 //			// Pay karma for selected foci - Nuyen are paid in EquipmentController
 			for (FocusValue focus : model.getFoci()) {
 //				int karma = focus.getCostKarma();
 //				logger.info("Pay "+karma+" Karma for force "+focus.getLevel()+" focus "+focus);
 //				model.setKarmaFree(model.getKarmaFree()-karma);
-//				
+//
 				forcePool -= focus.getLevel();
 			}
 		} finally {
-			logger.log(Level.TRACE,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");			
+			logger.log(Level.TRACE,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
 		}
 		return unprocessed;
 	}

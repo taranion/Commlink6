@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<item id="ballistic_hood" avail="2" price="300" type="ACCESSORY" subtype="ARMOR_BODY">
+  		<usage mode="EMBEDDED" slot="ARMOR" value="0"/>
+  		<attrdef id="PRICE" value="$$PRICE*1.05"/>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="DEFENSE_PHYSICAL" value="1" />
+		</modifications>
+	</item>
+	<item id="disposable_cloak" avail="1" price="5" type="ARMOR" subtype="ARMOR_BODY">
+	</item>
+	<item id="armorweave_cloak" avail="2" price="200" type="ARMOR" subtype="ARMOR_BODY">
+		<armor rating="1"  />
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+		</modifications>
+	</item>
+	<item id="tres_chick_cloak" avail="2" price="5000" type="ARMOR" subtype="ARMOR_BODY">
+		<armor rating="1" />
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="5" />
+		</modifications>
+	</item>
+	<item id="water_repellent_coating" avail="1" price="100" type="ACCESSORY" subtype="ARMOR_BODY">
+  		<usage mode="EMBEDDED" slot="ARMOR" value="0"/>
+	</item>
+
+   <item  id="mapmaster_sensor_fob" avail="3" price="300" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+   	<attrdef id="DEVICE_RATING" value="3"/>
+   	<attrdef id="PRICE" value="$RATING*300"/>
+   	<usage mode="CARRIED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
+   </item>
+	<item avail="5" price="3500" id="mapmaster_drone" type="DRONE_MINI" subtype="AIR">
+		<vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" />
+	</item>
+</items>

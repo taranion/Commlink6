@@ -255,6 +255,7 @@ public class SR6KarmaSpellGenerator extends ControllerImpl<SR6Spell> implements 
 			// Pay Karma
 			int karmaNeeded = model.getSpells().size()*5;
 			logger.log(Level.INFO, "Pay {0} Karma for spells", karmaNeeded);
+			settings.spells = karmaNeeded;
 			model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
 			model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
 

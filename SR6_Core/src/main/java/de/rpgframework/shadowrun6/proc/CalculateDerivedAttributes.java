@@ -223,9 +223,8 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	private void calculateMonitorPhysical() {
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR);
 		val.setDistributed(8);
-		logger.log(Level.WARNING, " Monitor Physical BODY = "+model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue());
 		addNaturalModifier(val, Math.round(model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue()/2.0f), ShadowrunAttribute.BODY.getName()+"/2");
-		logger.log(Level.WARNING, " Monitor Physical = "+val.getModifiedValue());
+		logger.log(Level.DEBUG, " Monitor Physical = "+val.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------

@@ -36,6 +36,9 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
+import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuySR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.SkillSelector;
@@ -67,6 +70,7 @@ public class SkillSection extends Section {
 
 	private ToggleSwitch tsExpertMode;
 	private Label lbPoints;
+	private HBox line;
 	private SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue> table;
 	protected Button btnAdd;
 	protected Button btnDel;
@@ -106,7 +110,7 @@ public class SkillSection extends Section {
 
 		Label hdPoints1 = new Label(ResourceI18N.get(RES, "head.points")+":");
 
-		HBox line = new HBox(5, tsExpertMode, hdPoints1, lbPoints);
+		line = new HBox(5, tsExpertMode, hdPoints1, lbPoints);
 		VBox layout = new VBox(5, line, table);
 		setContent(layout);
 	}
@@ -188,7 +192,7 @@ public class SkillSection extends Section {
 	@SuppressWarnings("rawtypes")
 	public void updateController(CharacterController ctrl) {
 		control = (SR6CharacterController) ctrl;
-		System.err.println("#############SkillSection.updateController with model "+control.getClass());
+		System.err.println("#############SkillSection.updateController with model "+control.getSkillController().getClass());
 		logger.log(Level.INFO, "#############updateController with model "+control.getModel());
 		if (control.getModel()==null) throw new NullPointerException("Controller has NULL as model");
 		table.setModel(control.getModel());
@@ -198,6 +202,14 @@ public class SkillSection extends Section {
 				);
 
 		table.useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?7:6));
+		if (control.getSkillController() instanceof SR6PrioritySkillGenerator
+				|| control.getSkillController() instanceof PointBuySR6SkillGenerator) {
+			line.setVisible(true);
+			line.setManaged(true);
+		} else {
+			line.setVisible(false);
+			line.setManaged(false);
+		}
 		if (ctrl instanceof SR6CharacterLeveller) {
 			setMode(Mode.BACKDROP);
 		} else {

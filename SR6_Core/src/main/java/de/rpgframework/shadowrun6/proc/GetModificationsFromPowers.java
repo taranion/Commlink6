@@ -10,7 +10,6 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPower.Activation;
 import de.rpgframework.shadowrun.AdeptPowerValue;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 
@@ -19,11 +18,11 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
  *
  */
 public class GetModificationsFromPowers implements ProcessingStep {
-	
+
 	protected static final Logger logger = System.getLogger(GetModificationsFromPowers.class.getPackageName()+".adeptpower");
-	
+
 	private Shadowrun6Character model;
-	
+
 	//-------------------------------------------------------------------
 	public GetModificationsFromPowers(Shadowrun6Character model) {
 		this.model = model;
@@ -43,47 +42,48 @@ public class GetModificationsFromPowers implements ProcessingStep {
 			for (AdeptPowerValue ref :model.getAdeptPowers()) {
 				AdeptPower power = ref.getModifyable();
 				logger.log(Level.DEBUG, "add from power "+power.getId()+" / "+ref+" / dec="+ref.getDecisions());
+				logger.log(Level.DEBUG, "ToDo: "+power.getModifications());
+				System.err.println("GetModificationsFromPowers: "+power.getModifications()+"  value="+ref.getModifiedValue());
 				// Calculate modifications
 				ref.clearModifications();
-				
-				if (power.getChoices().isEmpty()) {
-					logger.log(Level.INFO, " - "+ref.getModifyable().getId()+" has modifications: "+ref.getModifications());
-					for (Modification mod : ref.getModifications()) {
-						mod.setSource(ref.getModifyable());
-					}
+
+//				if (power.getChoices().isEmpty()) {
+//					logger.log(Level.INFO, " - "+ref.getModifyable().getId()+" has modifications: "+ref.getModifications());
+//					for (Modification mod : power.getModifications()) {
+//						mod.setSource(ref.getModifyable());
+//					}
 //					logger.log(Level.DEBUG, " - add modifications: "+ref.getModifications());
-					unprocessed.addAll(ref.getModifications());
-					continue;
-				}
-				
+//					unprocessed.addAll(ref.getModifications());
+//					continue;
+//				}
+
 //				if (power.needsChoice() && ref.getChoice()==null) {
 //					ref.setChoice(ShadowrunTools.resolveChoiceType(power.getSelectFrom(), ref.getChoiceReference(), model));
 //					logger.log(Level.DEBUG, "resolve "+power.getSelectFrom()+" '"+ref.getChoiceReference()+"' to "+ref.getChoice());
 //				}
-				int multiplier = (ref.getModifyable().getMaxLevel()>1)?ref.getModifiedValue():1;
+				int multiplier = ref.getModifiedValue(); //(ref.getModifyable().getMaxLevel()>1)?ref.getModifiedValue():1;
 				if (multiplier==0) {
 					logger.log(Level.WARNING,"Strange! Found AdeptPower with value 0 that should have at least 1 - ignore it: "+ref);
 //					continue;
 				}
-				for (Modification mod : ref.getModifyable().getModifications()) {
-					logger.log(Level.WARNING, "ToDo: "+mod);
+				for (Modification mod : power.getModifications()) {
 					try {
-//						Modification realMod = Shadowrun6Tools.instantiateModification(mod, ref.getChoice(), multiplier);
-//						logger.log(Level.DEBUG, "  instantiated mod "+realMod+" with multiplier "+multiplier);
-//						if (ref.getModifyable().getActivation()!=Activation.PASSIVE) {
-//							if (realMod instanceof AttributeModification)
-//								((AttributeModification)realMod).setConditional(true);
+						Modification realMod = Shadowrun6Tools.instantiateModification(mod, ref, multiplier, model);
+						logger.log(Level.DEBUG, " add "+realMod);
+						if (ref.getModifyable().getActivation()!=Activation.PASSIVE) {
+//							if (realMod instanceof DataItemModification)
+//								((DataItemModification)realMod).setConditional(true);
 //							else if (realMod instanceof SkillModification)
 //								((SkillModification)realMod).setConditional(true);
-//						}
-//						ref.addModification(realMod);
+						}
+						ref.addModification(realMod);
 					} catch (Exception e) {
 						logger.log(Level.ERROR, "Problem calculating modifications for adept power: "+ref,e);
 					}
 				}
-				
-				
-				
+
+
+
 				if (ref.getModifications()!=null && !ref.getModifications().isEmpty()) {
 					logger.log(Level.DEBUG, " - "+ref.getModifyable().getId()+" has modifications: "+ref.getModifications());
 					for (Modification mod : ref.getModifications()) {

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Other Gear -->
+
+	<item id="free_dive_deep_breath_mask" avail="6L" price="150" type="SURVIVAL" subtype="SURVIVAL_GEAR" />
+    <!--item id="improvised_throwing_weapon" avail="0" price="0" modonly="true">
+      <useas type="WEAPON_RANGED" subtype="THROWING"/>
+      <weapon dmg="1S" attack="0,0,0,,"  skill="athletics" spec="athletics/throwing"/>
+    </item-->
+
+
+	<item id="acid_on_demand" avail="6L" price="600" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+      <alchemy spell="acid_stream" trigger="verbal" />
+    </item>
+	<item id="acid_wash" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="toxic_wave" trigger="verbal" />
+    </item>
+	<item id="arcane_taser" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="lightning_bolt" trigger="somatic" />
+    </item>
+	<item id="arcane_taser_plus" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="lightning_ball" trigger="verbal" />
+    </item>
+	<item id="aura_obscura" avail="6L" price="300"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="false_impression" trigger="material" />
+    </item>
+	<item id="bean_counter_bean" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="scrutinize" trigger="material" />
+    </item>
+	<item id="bench_clearer" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="stunball" trigger="somatic,delayed_verbal" />
+    </item>
+	<item id="boomstick" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="thunderstruck" trigger="verbal" />
+   </item>
+	<item id="boomstick_extreme" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="thunderstruck" trigger="verbal,increased_area" />
+    </item>
+	<item id="boost_pill" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+		<choices>
+			<choice uuid="96afe3d6-adf9-4e78-829c-b25f2c7f6b78" type="ATTRIBUTE" options="BODY,STRENGTH,AGILITY,REACTION"/>
+		</choices>
+      <alchemy spell="increase_attribute" trigger="material" />
+    </item>
+	<item id="bruce_lee_keychain" avail="6L" price="75"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="punch" trigger="verbal" />
+    </item>
+	<item id="climbing_gear_prep" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="gecko_crawl" trigger="verbal" />
+    </item>
+	<item id="cold_as_ice" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="icy_veins" trigger="verbal,somatic" />
+    </item>
+	<item id="deep_breath_disc" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="oxygenate" trigger="material" />
+    </item>
+	<item id="disco_distraction" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="chaff" trigger="verbal" />
+    </item>
+	<item id="doctors_right_hand" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="diagnose" trigger="verbal" />
+    </item>
+	<item id="doctors_right_hand" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="anaphylaxis" trigger="material" />
+    </item>
+	<item id="door_what_door" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="corrode" trigger="somatic" />
+    </item>
+	<item id="dream_weaver" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="dreams" trigger="verbal" />
+    </item>
+	<item id="drop_it" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="hot_potato" trigger="verbal" />
+    </item>
+	<item id="duvall_special" avail="6L" price="750"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="napalm" trigger="delayed_verbal,increase_area,somatic" />
+   </item>
+	<item id="emergency_exit" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="catfall" trigger="verbal" />
+    </item>
+	<item id="finger_of_death" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="death_touch" trigger="delayed_verbal" />
+    </item>
+	<item id="firestick" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="flamestrike" trigger="verbal" />
+    </item>
+	<item id="float_switch" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="levitate" trigger="somatic,verbal" />
+    </item>
+	<item id="four_eyes" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="catalog" trigger="verbal" />
+    </item>
+	<item id="frigid_lance" avail="6L" price="100"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="ice_spear" trigger="verbal" />
+    </item>
+	<item id="frigid_rain" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="ice_storm" trigger="verbal" />
+    </item>
+	<item id="gap_in_their_shields" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="mana_window" trigger="material" />
+    </item>
+	<item id="get_into_rythm" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="lokis_musical_number" trigger="somatic" />
+    </item>
+	<item id="go_juice" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="increase_reflexes" trigger="material" />
+    </item>
+	<item id="i_am_that_good" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="mob_mind" trigger="verbal,somatic" />
+    </item>
+	<item id="infostick" avail="6L" price="350" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+		<choices>
+       <choice type="SUBSELECT" ref="resist" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5" i18n="objectresistance">
+         <subOption id="objres1" />
+         <subOption id="objres2" cost="50" />
+         <subOption id="objres3" cost="100" />
+       </choice>
+		</choices>
+      <alchemy spell="analyze_device" trigger="verbal" />
+    </item>
+	<item id="instant_decorator" avail="6L" price="550" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+		<choices>
+      	<choice type="SUBSELECT" ref="size" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5">
+         	<subOption id="studio" />
+         	<subOption id="bedroom2" cost="100"/>
+         	<subOption id="bedroom4" cost="200"/>
+       	</choice>
+		</choices>
+      <alchemy spell="phantomscape" trigger="verbal" />
+    </item>
+	<item id="instant_garden" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="rosebush" trigger="material" />
+    </item>
+	<item id="instant_ice_rink" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="ice_sheet" trigger="material" />
+   </item>
+	<item id="instant_makeover" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="makeover" trigger="verbal,somatic" />
+    </item>
+	<item id="instant_outfit" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="fashion" trigger="material" />
+   </item>
+	<item id="instant_rejuvenation" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="healthy_glow" trigger="material" />
+   </item>
+	<item id="instant_shield" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="armor" trigger="verbal" />
+   </item>
+	<item id="instant_wall" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="physical_barrier" trigger="verbal" />
+   </item>
+	<item id="instant_window" avail="6L" price="300" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+		<choices>
+       	<choice type="SUBSELECT" ref="resist" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5" i18n="objectresistance">
+         	<subOption id="objres1" />
+         	<subOption id="objres4" cost="50" />
+         	<subOption id="objres7" cost="100" />
+         	<subOption id="objres10" cost="150" />
+       	</choice>
+		</choices>
+      <alchemy spell="looking_glass" trigger="verbal" />
+    </item>
+	<item id="its_not_paranoia" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="combat_sense" trigger="somatic" />
+   </item>
+	<item id="lie_detector" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="analyze_truth" trigger="contact,verbal" />
+   </item>
+	<item id="long_range_headphones" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="clairaudience" trigger="somatic,verbal" />
+   </item>
+	<item id="long_range_legerdemain" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="magic_fingers" trigger="verbal" />
+   </item>
+	<item id="long_range_lenses" avail="6L" price="100"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="clairvoyance" trigger="verbal" />
+   </item>
+	<item id="louisville_slumberer" avail="6L" price="300"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="stunbolt" trigger="verbal" />
+   </item>
+	<item id="magic_nozzle_hose" avail="6L" price="450" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+      <alchemy spell="hose" trigger="verbal" />
+    </item>
+	<item id="magic_nozzle_tsunami" avail="6L" price="550" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+      <alchemy spell="tsunami" trigger="verbal" />
+    </item>
+	<item id="magic_window" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="astral_window" trigger="verbal" />
+   </item>
+	<item id="magiczap_marble" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="disrupt" trigger="contact" />
+   </item>
+	<item id="magiczap_marble_plus" avail="6L" price="460"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="ectomagic_pilse" trigger="contact" />
+   </item>
+	<item id="manabenzoate" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="preserve" trigger="verbal,somatic" />
+   </item>
+	<item id="mana_bread" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="nutrition" trigger="verbal" />
+   </item>
+	<item id="manadyne_MB_10" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="manabolt" trigger="verbal,somatic" />
+   </item>
+	<item id="manadyne_PB_10" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="powerbolt" trigger="verbal,somatic" />
+   </item>
+	<item id="manadyne_MB_100" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="manaball" trigger="verbal,somatic" />
+   </item>
+	<item id="manadyne_PB_100" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="powerball" trigger="verbal,somatic" />
+   </item>
+	<item id="mojo_scanner" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="analyze_magic" trigger="verbal,somatic" />
+   </item>
+	<item id="no_job_to_small" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="wreck" trigger="verbal" />
+   </item>
+	<item id="no_job_to_big" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="demolish" trigger="verbal" />
+   </item>
+	<item id="one_less_in_the_world" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="slay" trigger="verbal" />
+   </item>
+	<item id="pain_stick" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="agony" trigger="verbal,somatic" />
+   </item>
+	<item id="pay_no_attention" avail="6L" price="150"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="disregard" trigger="verbal" />
+   </item>
+	<item id="petspy" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="animal_sende" trigger="material" />
+   </item>
+	<item id="plant_superfood" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="vine" trigger="verbal" />
+   </item>
+	<item id="privacy_pill" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="mindlink" trigger="material" />
+   </item>
+	<item id="private_eye" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="passenger" trigger="material" />
+   </item>
+	<item id="private_property" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="foreboding" trigger="verbal" />
+   </item>
+	<item id="private_property_no_pets" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="disquit" trigger="verbal,somatic" />
+   </item>
+	<item id="remodeling_ring" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="ram" trigger="verbal" />
+   </item>
+	<item id="remote_slapping_clout" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="clout" trigger="verbal,somatic" />
+   </item>
+	<item id="remote_slapping_blast" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="blast" trigger="verbal,somatic" />
+   </item>
+	<item id="runflat" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="melt" trigger="verbal" />
+   </item>
+	<item id="runflat_four" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="sludge" trigger="verbal" />
+   </item>
+	<item id="satans_nut" avail="6L" price="750"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="hellblast" trigger="verbal" />
+   </item>
+	<item id="secret_handshake" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="babble" trigger="verbal" />
+   </item>
+	<item id="secret_handshake_cant" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="thieves_cant" trigger="verbal" />
+   </item>
+	<item id="sizzler" avail="6L" price="700"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="fireball" trigger="delayed_verbal,somatic" />
+   </item>
+	<item id="sleeping_powder" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="knockout" trigger="verbal,somatic" />
+   </item>
+	<item id="slowing_competition" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+		<choices>
+			<choice uuid="96afe3d6-adf9-4e78-829c-b25f2c7f6b78" type="ATTRIBUTE" />
+		</choices>
+      <alchemy spell="decrease_attribute" trigger="material" />
+   </item>
+	<item id="spell_shield" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="mana_barrier" trigger="verbal,somatic" />
+   </item>
+	<item id="snack_stoppers" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="fast" trigger="material" />
+   </item>
+	<item id="stump_remover" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="rot" trigger="verbal,somatic" />
+   </item>
+	<item id="strain_breaker" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="trea" trigger="verbal,somatic" />
+   </item>
+	<item id="super_epipen" avail="6L" price="400"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="ephidrine" trigger="material" />
+   </item>
+	<item id="superbinder" avail="6L" price="300"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+		<choices>
+       	<choice type="SUBSELECT" ref="resist" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5" i18n="objectresistance">
+         	<subOption id="objres1" />
+         	<subOption id="objres4" cost="50" />
+         	<subOption id="objres7" cost="100" />
+         	<subOption id="objres10" cost="150" />
+       	</choice>
+		</choices>
+      <alchemy spell="glue" trigger="verbal" />
+    </item>
+	<item id="sway_the_masses" avail="6L" price="550"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="mob_mood" trigger="verbal,somatic" />
+   </item>
+	<item id="trade_in_tonic" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="vehicle_mask" trigger="material" />
+		<choices>
+       	<choice type="SUBSELECT" ref="size" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5" >
+         	<subOption id="car" />
+         	<subOption id="truck" cost="50" />
+         	<subOption id="tractor" cost="100" />
+       	</choice>
+		</choices>
+   </item>
+	<item id="translation_lenses" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="translate" trigger="somatic,verbal" />
+   </item>
+	<item id="twinsies" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="double_image" trigger="verbal" />
+   </item>
+	<item id="uv_cleanstick" avail="6L" price="450"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="sterilize" trigger="material" />
+   </item>
+	<item id="wizarding_wall" avail="6L" price="700"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+      <alchemy spell="manascape" trigger="verbal" />
+   </item>
+</items>

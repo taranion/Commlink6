@@ -1,16 +1,13 @@
 package de.rpgframework.shadowrun6.chargen.gen.karma;
 
 import java.lang.System.Logger.Level;
-import java.lang.reflect.Constructor;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
-import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.RuleController;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -32,8 +29,6 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyMetatypeController;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
-import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
-import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 
 /**
  * @author stefa
@@ -135,26 +130,8 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 
 			createPartialController();
 
-			// First the regular processing steps
-			for (Class<? extends ProcessingStep> cls : Shadowrun6Tools.RECALCULATE_STEPS) {
-				try {
-					Constructor<? extends ProcessingStep> cons = null;
-					try {
-						cons = cls.getConstructor(Shadowrun6Character.class);
-					} catch (NoSuchMethodException nsm) {
-						cons = cls.getConstructor(ShadowrunCharacter.class);
-					}
-					processChain.add(cons.newInstance(model));
-				} catch (NoSuchMethodException e) {
-					logger.log(Level.ERROR, "Missing constructor <init>(Shadowrun6Character) in "+cls);
-					System.exit(1);
-				} catch (Exception e) {
-					logger.log(Level.ERROR, "Failed instantiating "+cls,e);
-				}
-
-			}
+			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model, locale));
 			processChain.add(new ResetGenerator(this));
-//			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			processChain.add(meta);
 			processChain.add(magicReso);
 			processChain.add(qualities);
@@ -171,9 +148,7 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 			processChain.add(sins);
 			processChain.add(lifestyles);
 			processChain.add(contacts);
-			processChain.add(new CalculateAttributePools(model, Locale.getDefault()));
 			processChain.add(new RemainingKarmaNuyenController(this));
-			processChain.add(new CalculateSkillPools(model, Locale.getDefault()));
 
 			setupDone = true;
 		} finally {
@@ -186,6 +161,7 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 	//-------------------------------------------------------------------
 	@Override
 	public void runProcessors() {
+		logger.log(Level.ERROR, "-------------runProcessors-----------------------");
 		SR6KarmaSettings settings = getModel().getCharGenSettings(SR6KarmaSettings.class);
 		settings.startKarma = 1000;
 		super.runProcessors();

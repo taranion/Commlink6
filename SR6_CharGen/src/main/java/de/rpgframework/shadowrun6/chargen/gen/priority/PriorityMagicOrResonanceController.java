@@ -153,4 +153,13 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController#getCost(de.rpgframework.shadowrun.MagicOrResonanceType)
+	 */
+	@Override
+	public int getCost(MagicOrResonanceType morType) {
+		return 0;
+	}
+
 }

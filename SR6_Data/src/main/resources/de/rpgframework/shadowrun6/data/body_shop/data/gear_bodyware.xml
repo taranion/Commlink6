@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<item id="auto_injector" avail="1" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE">
+    	<choices>
+           <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
+    	</choices>
+   	<usage mode="IMPLANTED" value="0.05"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<variant id="expanded">
+ 			<attrdef id="PRICE" value="750"/>
+ 		</variant>
+   </item>
+	<item id="kill_switch" avail="4I" price="750" type="CYBERWARE" subtype="CYBER_BODYWARE">
+    	<choices>
+           <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
+    	</choices>
+   	<usage mode="IMPLANTED"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="biomonitor_cyber" avail="3" price="5000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="0.1"/>
+		<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="biowaste_storage" avail="4" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7"/>
+		</choices>
+   	<usage mode="IMPLANTED" value="0.1*$RATING"/>
+		<usage mode="EMBEDDED" value="$RATING" slot="CYBERLIMB_IMPLANT"/>
+ 		<attrdef id="PRICE" value="$RATING*500"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="cyberfins" avail="4" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="0.1"/>
+		<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="cybergills" avail="2" price="2000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="0.25"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="cybertails" avail="4" price="2000" type="CYBERWARE" subtype="CYBER_BODYWARE" reqVariant="y">
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<!-- TODO: A user with a cybertail pays ten percent extra for any worn or fitted clothing -->
+ 		<variant id="balance">
+			<usage mode="IMPLANTED" value="0.25"/>
+ 		</variant>
+ 		<variant id="prehensile">
+			<usage mode="IMPLANTED" value="0.5"/>
+ 			<attrdef id="PRICE" value="5000"/>
+ 		</variant>
+ 		<variant id="swimming">
+			<usage mode="IMPLANTED" value="0.25"/>
+ 		</variant>
+ 		<variant id="thagomizer">
+			<usage mode="IMPLANTED" value="0.5"/>
+ 			<attrdef id="PRICE" value="5000"/>
+ 			<attrdef id="AVAILABILITY" value="5I"/>
+ 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+				<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/tail" />
+ 			</alternate>
+ 		</variant>
+ 			<alternate mode="WEAPON" type="WEAPON_RANGED" subtype="OTHER_CLOSE">
+				<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/tail" />
+ 			</alternate>
+   </item>
+	<item id="cyberwings" avail="6L" price="50000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="2.0"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<modifications>
+ 			<!-- TODO: Movement flight -->
+ 		</modifications>
+   </item>
+	<item id="foot_anchor" avail="6L" price="50000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="2.0"/>
+		<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="gastric_pulverizer" avail="2" price="2000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="0.2"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="grey_mana_armor" avail="5L" price="10000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+ 		<attrdef id="PRICE" value="$RATING*10000"/>
+   	<usage mode="IMPLANTED" value="0.1*$RATING"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<requires>
+ 			<datareq type="GEAR" ref="dermal_plating"/>
+ 		</requires>
+ 		<modifications>
+ 			<valmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL" value="$RATING"/>
+ 		</modifications>
+   </item>
+	<item id="internal_router" avail="2" price="2000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+		<usage mode="IMPLANTED" value="$RATING*0.2"/>
+ 		<attrdef id="PRICE" value="$RATING*2000"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<modifications>
+ 			<valmod type="ATTRIBUTE" ref="DEFENSE_POOL_MATRIX" value="$RATING" apply="CHARACTER"/>
+ 		</modifications>
+   </item>
+	<item id="magnetic_system" avail="4" price="1000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="0.25"/>
+		<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="move_by_wire" avail="4I" price="125000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
+		</choices>
+		<usage mode="IMPLANTED" value="3"/>
+ 		<attrdef id="PRICE" value="$RATING" table="125000,205000"/>
+ 		<attrdef id="ESSENCECOST" value="$RATING" table="3,4"/>
+ 		<attrdef id="AVAILABILITY" value="$RATING" table="4I,6I"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<modifications>
+ 			<valmod type="ATTRIBUTE" ref="REACTION" value="$RATING*2" apply="CHARACTER"/>
+ 			<valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING*2" apply="CHARACTER"/>
+ 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION"  value="$RATING*2" apply="CHARACTER"/>
+ 		</modifications>
+   </item>
+	<item id="nutrition_storage_system" avail="2" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<usage mode="IMPLANTED" value="$RATING*0.1"/>
+ 		<attrdef id="PRICE" value="$RATING*500" />
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="retractable_claws" avail="4" price="2000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="0.2"/>
+		<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+				<weapon dmg="2P" attack="4,,,," skill="close_combat" spec="close_combat/blades" />
+ 			</alternate>
+   </item>
+	<item id="skill_hardwires" avail="4" price="8000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+			<choice uuid="45ba07c3-69e3-44b9-9ab9-0d0337c2d10e" type="SKILL" ref="PHYSICAL"/>
+		</choices>
+		<usage mode="IMPLANTED" value="$RATING*0.05"/>
+ 		<attrdef id="PRICE" value="$RATING*8000" />
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<modifications>
+ 			<valmod type="ATTRIBUTE" ref="REACTION" value="$RATING*2" apply="CHARACTER"/>
+ 			<valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING*2" apply="CHARACTER"/>
+ 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION"  value="$RATING*2" apply="CHARACTER"/>
+ 		</modifications>
+   </item>
+	<item id="speed_boster" avail="4I" price="25000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
+		</choices>
+		<usage mode="IMPLANTED" value="$RATING*0.5"/>
+ 		<attrdef id="PRICE" value="$RATING*25000"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<modifications>
+ 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION"  value="$RATING" apply="CHARACTER"/>
+ 		</modifications>
+   </item>
+	<item id="touch_link" avail="1" price="250" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="0.1"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+</items>

@@ -332,10 +332,10 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 
 			Shadowrun6Character model = getModel();
 
-			for (AdeptPowerValue val : model.getAdeptPowers()) {
-				// Apply modifications
-				unprocessed.addAll(val.getModifications());
-			}
+//			for (AdeptPowerValue val : model.getAdeptPowers()) {
+//				// Apply modifications
+//				unprocessed.addAll(val.getModifications());
+//			}
 
 			// Summary and eventually warn
 			logger.log(Level.INFO, "Have {0} remaining power points", freePoints);

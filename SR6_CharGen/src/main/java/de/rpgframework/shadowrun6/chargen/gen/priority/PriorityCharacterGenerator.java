@@ -196,29 +196,9 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			createPartialController();
 
 			// First the regular processing steps
-			for (Class<? extends ProcessingStep> cls : Shadowrun6Tools.RECALCULATE_STEPS) {
-				try {
-					Constructor<? extends ProcessingStep> cons = null;
-					try {
-						cons = cls.getConstructor(Shadowrun6Character.class);
-					} catch (NoSuchMethodException nsm) {
-						cons = cls.getConstructor(ShadowrunCharacter.class);
-					}
-					processChain.add(cons.newInstance(model));
-				} catch (NoSuchMethodException e) {
-					logger.log(Level.ERROR, "Missing constructor <init>(Shadowrun6Character) in "+cls);
-					System.exit(1);
-				} catch (Exception e) {
-					logger.log(Level.ERROR, "Failed instantiating "+cls,e);
-				}
-
-			}
-
+			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model, locale));
 			processChain.add(new ResetGenerator(this));
-//			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model));
 			// Now add generator specifics on top
-//			processChain.add(new ResetModifications(model));
-//			processChain.add(new EnsureAttributePresence(model));
 			processChain.add(prioCtrl);
 			processChain.add(meta);
 			processChain.add(magicReso);
@@ -226,6 +206,9 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(qPaths);
 			processChain.add(attributes);
 			processChain.add(skills);
+			// Re-run those steps to recalculate after skills and attributes have been copied over from priority settings
+			processChain.add(new CalculateAttributePools(model, locale));
+			processChain.add(new CalculateSkillPools(model, locale));
 			processChain.add(spells);
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
@@ -238,11 +221,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(sins);
 			processChain.add(lifestyles);
 			processChain.add(contacts);
-			processChain.add(new CalculateAttributePools(model, Locale.getDefault()));
 			processChain.add(new RemainingKarmaNuyenController(this));
-			processChain.add(new CalculateSkillPools(model, Locale.getDefault()));
-//			processChain.add(new CalculateEssence(model));
-//			processChain.add(new CalculateDerivedAttributes(model));
 
 			setupDone = true;
 		} finally {

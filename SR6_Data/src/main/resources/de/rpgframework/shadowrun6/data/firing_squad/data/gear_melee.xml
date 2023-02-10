@@ -28,7 +28,7 @@
    <item id="trench_knife" avail="3" price="100" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
-   
+
    <!-- Clubs -->
    <item id="long_tooth" avail="4" price="300" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
       <weapon  dmg="4S" attack="8,4,,," skill="close_combat" spec="close_combat/clubs"/>
@@ -76,7 +76,7 @@
      		<attrdef id="SKILL_SPECIALIZATION" value="close_combat/blades"/>
       </variant>
    </item>
-   
+
    <!-- Exotic Melee -->
    <item id="ash_arms_combat_chainsaw" avail="3" price="1000" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
       <weapon  dmg="4P" attack="10,,,," skill="exotic_weapons" spec="exotic_weapons/chainsaws"/>
@@ -90,7 +90,7 @@
    </item>
    <item id="bates_brown_combat_boots" avail="2" price="200" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
       <weapon  dmg="3S" skill="close_combat" spec="close_combat/unarmed"/>
-     	<attrdef id="ATTACK_RATING" value="($STRENGTH*2),,,,"/>
+     	<attrdef id="ATTACK_RATING" value="(&amp;STRENGTH*2),,,,"/>
    </item>
    <item id="manriki_chain" avail="2" price="150" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
       <weapon  dmg="4S" attack="5,6,,," skill="exotic_weapons" spec="exotic_weapons/whips"/>
@@ -107,7 +107,7 @@
    <item id="xiphos_tactical_gladius" avail="4" price="300" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="3P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
-   
+
    <!-- Zoe heritage -->
    <item id="bearded_axe" avail="3L" price="600" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="3P" attack="11,,,," skill="close_combat" spec="close_combat/blades"/>
@@ -193,7 +193,7 @@
         <itemmod type="GEARMOD" ref="metahuman_adaption_close"/>
       </modifications>
    </item>
-   
+
    <!-- Projectiles -->"
    <item id="crossbow_collapsible_light" avail="3L" price="300" type="WEAPON_RANGED" subtype="CROSSBOWS">
       <weapon dmg="2P" mode="SS" attack="6,8,2,," ammo="4(m)" skill="athletics" spec="athletics/archery"/>
@@ -216,5 +216,5 @@
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
    </item>
-   
+
 </items>

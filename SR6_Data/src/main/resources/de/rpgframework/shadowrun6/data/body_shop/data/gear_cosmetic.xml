@@ -4,6 +4,10 @@
    	<choices>
    		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
    	</choices>
+		<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
+    	<usage mode="EMBEDDED" value="1" slot="CYBEREYE_IMPLANT"/>
+    	<usage mode="EMBEDDED" value="1" slot="CYBEREAR_IMPLANT"/>
+    	<usage mode="EMBEDDED" value="1" slot="HEADWARE_IMPLANT"/>
    </item>
 
    <item id="casemodding" avail="1" type="CYBERWARE" subtype="COSMETIC">
@@ -42,7 +46,7 @@
    <item id="flex_hands" avail="4I" price="1500" type="CYBERWARE" subtype="COSMETIC">
    	  <usage mode="IMPLANTED" value="0.15"/>
    </item>
-   <item id="keypad_sequencing_finders" avail="4I" type="CYBERWARE" subtype="COSMETIC">
+   <item id="keypad_sequencing_fingers" avail="4I" type="CYBERWARE" subtype="COSMETIC">
    	<choices>
    		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
    	</choices>

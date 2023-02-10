@@ -15,8 +15,6 @@ import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.classification.Gender;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.data.DataErrorException;
-import de.rpgframework.genericrpg.data.ReferenceError;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.RelevanceModification;

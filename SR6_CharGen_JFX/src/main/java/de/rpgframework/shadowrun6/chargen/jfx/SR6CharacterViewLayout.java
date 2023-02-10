@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.prelle.javafx.CloseType;
@@ -240,7 +241,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	@Override
 	public void resetCharacter(Shadowrun6Character model, CharacterHandle handle) {
 		logger.log(Level.DEBUG, "resetCharacter");
-		Shadowrun6Tools.runProcessors(model);
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 		try {
 			handle.setCharacter(model);
 		} catch (IOException e) {

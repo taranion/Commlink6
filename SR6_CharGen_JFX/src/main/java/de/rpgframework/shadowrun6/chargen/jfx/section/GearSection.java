@@ -50,17 +50,17 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	private final static Logger logger = System.getLogger(GearSection.class.getPackageName());
 
 	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private CarryMode carry = CarryMode.CARRIED;
 	private Predicate<CarriedItem<ItemTemplate>> filter;
 	private Predicate<ItemTemplate> templateFilter;
 
 	protected SR6CharacterController control;
 	protected ShadowrunCharacter model;
-	
+
 	private ToggleSwitch cbRuleNegativeNuyen;
 	private ToggleSwitch cbRulePayGear;
-	
+
 	/* To be used from child classes, E.g. ActiveProgramsSection */
 	protected CarriedItem<ItemTemplate> addToContainer;
 	protected ItemHook addToHook;
@@ -72,7 +72,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		list.setCellFactory(lv -> new CarriedItemListCell( control));
 		this.filter = showFilter;
 		this.templateFilter = selectFilter;
-		
+
 		initSecondaryContent();
 		refresh();
 	}
@@ -94,16 +94,16 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		cbRuleNegativeNuyen.setGraphicTextGap(0);
 		cbRulePayGear       = new ToggleSwitch();
 		cbRulePayGear.setGraphicTextGap(0);
-		
+
 		cbRuleNegativeNuyen.selectedProperty().addListener( (ov,o,n) -> {
 			if (model!=null) model.setRuleValue(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN, String.valueOf(n));
 		});
 		cbRulePayGear.selectedProperty().addListener( (ov,o,n) -> {
 			if (model!=null) model.setRuleValue(ShadowrunRules.CAREER_PAY_GEAR, String.valueOf(n));
 		});
-		
+
 		setMode(Mode.BACKDROP);
-		
+
 		VBox bxRules = new VBox(10);
 		bxRules.getChildren().add(makeLabel(cbRuleNegativeNuyen, ShadowrunRules.CHARGEN_NEGATIVE_NUYEN));
 		bxRules.getChildren().add(makeLabel(cbRulePayGear      , ShadowrunRules.CAREER_PAY_GEAR));
@@ -129,7 +129,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		} else {
 			Possible possible = (addToContainer!=null)
 					?
-					control.getEquipmentController().canBeRemoved(addToContainer, addToHook, neu)				
+					control.getEquipmentController().canBeRemoved(addToContainer, addToHook, neu)
 							:
 					control.getEquipmentController().canBeDeselected(neu);
 			if (!possible.get()) logger.log(Level.WARNING, "Controller {0} says I cannot deselect/remove {1}", control.getEquipmentController(), neu);
@@ -144,23 +144,22 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	@Override
 	protected void onAdd() {
 		logger.log(Level.INFO, "ENTER: onAdd(carry={0}, container={1}, hook={2}, templateFilter={3}",carry,addToContainer, addToHook, templateFilter);
-		
+
 		ItemTemplateSelector selector = new ItemTemplateSelector(control, carry, templateFilter, addToContainer, addToHook);
 //		if (templateFilter!=null)
 //			selector.setBaseFilter(templateFilter);
 		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "section.gear.selector.title"), selector, CloseType.OK, CloseType.CANCEL);
 		CloseType closed = FlexibleApplication.getInstance().showAndWait(dialog);
-		logger.log(Level.WARNING, "closed "+closed);
 		if (closed==CloseType.OK) {
 			ItemTemplate selected = selector.getSelected();
 			OperationResult<CarriedItem<ItemTemplate>> result = null;
 			// Eventually show decision dialog
 			boolean needToAsk = !selected.getChoices().isEmpty();
 			needToAsk |= !selected.getVariants().isEmpty();
-			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS)) 
+			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS))
 				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
 			if (needToAsk) {
-				logger.log(Level.WARNING, "Select/Embed with choices or variants or flags");
+				logger.log(Level.DEBUG, "Select/Embed with choices or variants or flags");
 				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry);
 				Decision[] dec = dia2.apply(selected, selected.getChoices());
 				if (dec!=null) {
@@ -204,7 +203,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	@Override
 	protected void onDelete(CarriedItem<ItemTemplate> item) {
 		// TODO Auto-generated method stub
-		
+
 		if (addToContainer!=null) {
 			logger.log(Level.INFO, "onDelete {0} from container {1}", item, addToContainer);
 			Possible poss = control.getEquipmentController().removeEmbedded(addToContainer, addToHook, item);
@@ -223,7 +222,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
-		logger.log(Level.DEBUG, "updateController");
+//		logger.log(Level.DEBUG, "updateController");
 		this.control = ctrl;
 		model = ctrl.getModel();
 		refresh();
@@ -238,7 +237,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 //		logger.log(Level.DEBUG, "refresh");
 //		logger.log(Level.WARNING, "GearSection("+getTitle()+": "+filter);
 		if (model==null) return;
-		
+
 		// If  a model and a filter exists, update automatically
 		if (filter!=null) {
 			List<CarriedItem<ItemTemplate>> data = null;
@@ -248,7 +247,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			.collect(Collectors.toList());
 			list.getItems().setAll(data);
 		}
-		
+
 		// Secondary content
 		cbRuleNegativeNuyen.setSelected( control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN));
 		cbRulePayGear.setSelected( control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR));

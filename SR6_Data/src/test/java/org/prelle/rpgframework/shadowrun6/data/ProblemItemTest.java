@@ -226,4 +226,97 @@ public class ProblemItemTest {
 		assertNotNull("CarriedItem not created",carried);
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void loadAlchemy() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "acid_on_demand");
+		assertNotNull("acid_on_demand (Street Wyrd) not found", item);
+
+		Choice choice = item.getChoice(ItemTemplate.UUID_RATING);
+		assertNotNull(choice);
+		assertEquals(ShadowrunReference.ITEM_ATTRIBUTE,choice.getChooseFrom());
+		assertNotNull(choice.getChoiceOptions());
+		assertEquals(5,choice.getChoiceOptions().length);
+
+		Choice choice2 = item.getChoice(UUID.fromString("96afe3d6-adf9-4e78-829c-b25f2c7f6b76"));
+		assertNotNull(choice2);
+		assertEquals(ShadowrunReference.ATTRIBUTE,choice2.getChooseFrom());
+
+		Choice choice3 = item.getChoice(UUID.fromString("96afe3d6-adf9-4e78-829c-b25f2c7f6b77"));
+		assertNotNull(choice3);
+		assertEquals(ShadowrunReference.TEXT,choice3.getChooseFrom());
+
+		// New normal item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.CARRIED, null,null, true,
+				new Decision(choice, "5"),
+				new Decision(choice2, "6"),
+				new Decision(choice3, "1 Week old")
+				);
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+		assertEquals(600 + (5-4)*100 + (6-4)*50, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+
+		// Extended potency variant item
+		assertNotNull("Variant 'extended' not found:"+item.getVariants(),item.getVariant("extended"));
+		OperationResult<CarriedItem<ItemTemplate>> result2 = GearTool.buildItem(item, CarryMode.CARRIED, item.getVariant("extended"),null, true,
+				new Decision(choice, "5"),
+				new Decision(choice2, "6"),
+				new Decision(choice3, "1 Week old")
+				);
+		assertTrue(result2.isPresent());
+		CarriedItem<ItemTemplate> carried2 = result2.get();
+		assertNotNull("CarriedItem not created",carried2);
+		assertEquals( (600 + (5-4)*100 + (6-4)*50)*4, carried2.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadAlchemyInfoStick() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "infostick");
+		assertNotNull("infostick (Street Wyrd) not found", item);
+
+		Choice choice = item.getChoice(ItemTemplate.UUID_RATING);
+		assertNotNull(choice);
+		assertEquals(ShadowrunReference.ITEM_ATTRIBUTE,choice.getChooseFrom());
+		assertNotNull(choice.getChoiceOptions());
+		assertEquals(5,choice.getChoiceOptions().length);
+
+		Choice choice2 = item.getChoice(UUID.fromString("96afe3d6-adf9-4e78-829c-b25f2c7f6b76"));
+		assertNotNull(choice2);
+		assertEquals(ShadowrunReference.ATTRIBUTE,choice2.getChooseFrom());
+
+		Choice choice3 = item.getChoice(UUID.fromString("96afe3d6-adf9-4e78-829c-b25f2c7f6b77"));
+		assertNotNull(choice3);
+		assertEquals(ShadowrunReference.TEXT,choice3.getChooseFrom());
+
+		Choice choice4 = item.getChoice(UUID.fromString("dbb18bb4-89a4-4435-bede-3077ee600bc5"));
+		assertNotNull(choice4);
+		assertEquals(ShadowrunReference.SUBSELECT,choice4.getChooseFrom());
+
+		// New normal item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.CARRIED, null,null, true,
+				new Decision(choice4, "objres3"),
+				new Decision(choice, "5"),
+				new Decision(choice2, "6"),
+				new Decision(choice3, "1 Week old")
+				);
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+//		assertEquals(450, carried.getAsValue(SR6ItemAttribute.PRICE2).getModifiedValue());
+		assertEquals(450 + (5-4)*100 + (6-4)*50, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+
+//		// Extended potency variant item
+//		OperationResult<CarriedItem<ItemTemplate>> result2 = GearTool.buildItem(item, CarryMode.CARRIED, item.getVariant("extended"),null, true,
+//				new Decision(choice, "5"),
+//				new Decision(choice2, "6"),
+//				new Decision(choice3, "1 Week old")
+//				);
+//		assertTrue(result2.isPresent());
+//		CarriedItem<ItemTemplate> carried2 = result2.get();
+//		assertNotNull("CarriedItem not created",carried2);
+//		assertEquals( (450 + (5-4)*100 + (6-4)*50)*4, carried2.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+	}
+
 }

@@ -3,7 +3,6 @@ package de.rpgframework.shadowrun6.vehicle;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -12,6 +11,7 @@ import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.PoolCalculation;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
@@ -49,10 +49,10 @@ public class VehicleTools {
 		int simRigRating = (simrig==null)?0:ItemUtil.getRating(simrig);
 		CarriedItem<ItemTemplate> rcc = Shadowrun6Tools.getBestRCC(model);
 		CarriedItem<ItemTemplate> simSenseOverdrive = model.getCarriedItem("simsense_overdrive");
-		
+
 		SR6Skill pilotSkill = Shadowrun6Core.getSkill("piloting");
 		String spec = (getSpecializationForVehicle(vehicle.getResolved())!=null)?getSpecializationForVehicle(vehicle.getResolved()).getId():null;
-		List<PoolCalculation<Integer>> driverPilotPool = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, pilotSkill, spec);
+		List<PoolCalculation<Integer>> driverPilotPool = Shadowrun6Tools.getSkillPool(model, pilotSkill,(ShadowrunAttribute)null, spec).getCalculation(ValueType.ARTIFICIAL);
 		if (mode==VehicleOperationMode.AUTONOMOUS) {
 			CarriedItem<ItemTemplate> autosoft = vehicle.getEmbeddedItem("maneuvering");
 			driverPilotPool.clear();
@@ -67,14 +67,14 @@ public class VehicleTools {
 			if (autosoft == null)
 				driverPilotPool.add(new PoolCalculation<Integer>(-1, Shadowrun6Core.getItem(ItemTemplate.class,"maneuvering").getName()));
 			else
-				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoft), autosoft.getNameWithRating()));			
+				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoft), autosoft.getNameWithRating()));
 		}
-		
+
 		int sensor = vehicle.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue();
 		int body   = vehicle.getAsValue(SR6ItemAttribute.BODY).getModifiedValue();
 		int armor  = vehicle.getAsValue(SR6ItemAttribute.ARMOR).getModifiedValue();
 		int pilot  = vehicle.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue();
-		
+
 		ToIntFunction<PoolCalculation<Integer>> pcInt = new ToIntFunction<PoolCalculation<Integer>>() {
 			public int applyAsInt(PoolCalculation<Integer> pc) {
 				return pc.value;
@@ -85,7 +85,7 @@ public class VehicleTools {
 		// Physical damage
 		int dmg= Math.round(body/2.0f);
 		ret.setDamage(new Damage(dmg, DamageType.PHYSICAL, DamageElement.REGULAR));
-		
+
 		switch (mode) {
 		case DRIVING:
 			// The Attack Rating of a vehicle is Piloting of the driver + Sensor.
@@ -96,9 +96,9 @@ public class VehicleTools {
 			ret.setAttackRating(arPool);
 			logger.log(Level.INFO,"Unarmed: "+vehicle.getNameWithoutRating()+": AR   driven "+arPool);
 //			 The attempt to hit another being or vehicle is an Opposed test
-//			 — Piloting + Reaction vs. 
+//			 — Piloting + Reaction vs.
 			List<PoolCalculation<Integer>> attPool = new ArrayList<>(driverPilotPool);
-			attPool.addAll(Shadowrun6Tools.getAttributePoolCalculation(model, ShadowrunAttribute.REACTION));
+			//attPool.addAll(Shadowrun6Tools.getAttributePoolCalculation(model, ShadowrunAttribute.REACTION));
 //			//logger.debug("Unarmed(MANUAL  ): "+vehicle.getName()+"::  "+attPool);
 			int dice = (int)attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
 			ret.setPool(dice);
@@ -117,7 +117,7 @@ public class VehicleTools {
 //			ret.setAttackRating(arPool);
 ////			logger.info("Unarmed: "+vehicle.getName()+": Rigged "+arPool);
 //			// The attempt to hit another being or vehicle is an Opposed test
-//			// — Piloting + Reaction vs. 
+//			// — Piloting + Reaction vs.
 //			attPool = new ArrayList<>(driverPilotPool);
 //			attPool.addAll(Shadowrun6Tools.getAttributePoolCalculation(model, Attribute.INTUITION));
 //			if (simSenseOverdrive!=null) {
@@ -165,7 +165,7 @@ public class VehicleTools {
 //			ret.setPool(attPool);
 			break;
 		}
-		
+
 		return ret;
 	}
 
@@ -190,10 +190,10 @@ public class VehicleTools {
 		// Ensure it is a drone or vehicle
 //		if (!vehicle.getItem().isType(Arrays.asList(ItemType.droneTypes())) && !vehicle.getItem().isType(ItemType.VEHICLES))
 //			return list;
-//		
-//		vehicle.getEffectiveAccessories().forEach( ci -> {		
+//
+//		vehicle.getEffectiveAccessories().forEach( ci -> {
 //			// Add all mounted weapons
-//			// Medium 
+//			// Medium
 //			AvailableSlot slot = ci.getSlot(ItemHook.VEHICLE_WEAPON);
 //			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
 //				list.add(slot.getAllEmbeddedItems().get(0));
@@ -205,7 +205,7 @@ public class VehicleTools {
 //			slot = ci.getSlot(ItemHook.VEHICLE_WEAPON_SMALL);
 //			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
 //				list.add(slot.getAllEmbeddedItems().get(0));
-//	
+//
 //			switch (ci.getUsedAsType()) {
 //			case WEAPON_CLOSE_COMBAT:
 //			case WEAPON_FIREARMS:
@@ -215,7 +215,7 @@ public class VehicleTools {
 //				break;
 //			}
 //		});
-		
+
 		return list;
 	}
 
@@ -224,14 +224,14 @@ public class VehicleTools {
 		 * Get the dice pools for using the weapon in a drone
 		 * Rigged = Riggers skill with replaced physical attribute plus implanted
 		 *          simrig rating
-		 * RCC    = 
+		 * RCC    =
 		 */
 		public static DronePool getDroneWeaponPool(Shadowrun6Character model, CarriedItem drone, CarriedItem rcc, CarriedItem weapon) {
 			// Collect some necessary data
 			logger.log(Level.WARNING, "TODO: getDroneWeaponPool not implemented yet");
 //			CarriedItem rig = model.getItem("control_rig");
 //			int rigRating = (rig==null)?0:rig.getRating();
-//			
+//
 			DronePool pool = new DronePool();
 //			/*
 //			 *  Rigged
@@ -247,12 +247,12 @@ public class VehicleTools {
 //					pool.rigged += Math.min(maxBonusRemain, rigRating);
 //				}
 //			}
-//			
+//
 //			/*
 //			 * Driven (using Gunnery)
 //			 */
 //			pool.manual = Shadowrun6Tools.getSkillPool(model, skill, "gunnery");
-//			
+//
 //			/*
 //			 * RCC
 //			 * Requires targeting autosoft on RCC
@@ -320,12 +320,12 @@ public class VehicleTools {
 //				// If the drone does not have the [Weapon] Targeting autosoft, then use Sensor rating – 1.
 //				pool.autonomous = drone.getAsValue(ItemAttribute.SENSORS).getModifiedValue()-1;
 //			}
-//			// German special rules: if the local autosoft is better, the 
+//			// German special rules: if the local autosoft is better, the
 //			//   rcc controlled drone may use this instead
 //			if (rccAutosoft!=null && autosoft!=null && autosoft.getRating()>rccAutosoft.getRating()) {
-//				pool.viaRCC = drone.getAsValue(ItemAttribute.SENSORS).getModifiedValue() + autosoft.getRating(); 
+//				pool.viaRCC = drone.getAsValue(ItemAttribute.SENSORS).getModifiedValue() + autosoft.getRating();
 //			}
-	
+
 			return pool;
 		}
 
@@ -336,10 +336,10 @@ public class VehicleTools {
 				throw new IllegalArgumentException("Item does not have a BODY attribute");
 			int add = 8 + Math.round(val.getModifiedValue()/2.0f);
 			int[] ret = new int[add];
-		
+
 			int start = 0;
 			int every = 3;
-		
+
 			for (int i=start; i<ret.length; i++) {
 				ret[i] = - ((i+1-start)/every);
 			}
@@ -362,18 +362,18 @@ public class VehicleTools {
 				logger.log(Level.ERROR,"{0} is neither a vehicle, nor a drone", drone);
 				return null;
 			}
-			
+
 			// Collect some necessary data
 			CarriedItem<ItemTemplate> ctrlRig = model.getCarriedItem("control_rig");
 			int rigRating = (ctrlRig==null)?0:SR6GearTool.getRating( ctrlRig);
 			CarriedItem<ItemTemplate> rcc = Shadowrun6Tools.getBestRCC(model);
 			CarriedItem<ItemTemplate> simSenseOverdrive = model.getCarriedItem("simsense_overdrive");
-			
+
 			DronePool pool = new DronePool();
 			SR6Skill pilotSkill = Shadowrun6Core.getSkill("piloting");
 			SkillSpecialization<SR6Skill> spec = SR6GearTool.getSpecializationForVehicle(drone.getResolved());
 			String specS = (spec!=null)?spec.getId():null;
-			List<PoolCalculation<Integer>> pilotPool = Shadowrun6Tools.getSkillPoolCalculation(model, pilotSkill, ShadowrunAttribute.REACTION, specS);
+			List<PoolCalculation<Integer>> pilotPool = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.REACTION, specS).getCalculation(ValueType.ARTIFICIAL);
 
 			logger.log(Level.WARNING, "TODO: getDronePool not implemented yet");
 			switch (action) {
@@ -386,7 +386,7 @@ public class VehicleTools {
 					// Use INTUITION instead REACTION (jumped in attribte)
 					int modifier = (model.getSkillValue(pilotSkill)!=null)?model.getSkillValue(pilotSkill).getModifier():0;
 					int maxRigBonus = Math.min( (4-modifier), rigRating);
-					pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.INTUITION, (spec!=null)?spec.getId():null) + maxRigBonus;
+					pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.INTUITION, (spec!=null)?spec.getId():null).getValue(ValueType.AUGMENTED) + maxRigBonus;
 					if (simSenseOverdrive!=null) {
 						int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
 						pool.rigged += Math.min(maxAdd, SR6GearTool.getRating( simSenseOverdrive ));
@@ -416,13 +416,13 @@ public class VehicleTools {
 				// Manually driven
 //				spec = Shadowrun6Tools.getSpecializationForVehicle(drone.getItem());
 //				String specS = (spec!=null)?spec.getId():null;
-				pilotPool = Shadowrun6Tools.getSkillPoolCalculation(model, Shadowrun6Core.getSkill("perception"), ShadowrunAttribute.INTUITION);
+				pilotPool = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("perception"), ShadowrunAttribute.INTUITION).getCalculation(ValueType.ARTIFICIAL);
 				pool.manual = (int)pilotPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
 
 				// Jumped in (dont make an assumption about specializations)
 				if (ctrlRig!=null) {
 					// Use INTUITION instead REACTION (jumped in attribte)
-					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("perception"), (String)null);
+					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("perception"), (ShadowrunAttribute)null).getValue(ValueType.AUGMENTED);
 					if (Locale.getDefault()!=Locale.GERMAN) {
 						int modifier = (model.getSkillValue(Shadowrun6Core.getSkill("perception"))!=null)?model.getSkillValue(Shadowrun6Core.getSkill("perception")).getModifier():0;
 						int cappedRigBonus = Math.min( (4-modifier), rigRating);
@@ -457,7 +457,7 @@ public class VehicleTools {
 			case CRACKING:
 				// Jumped in
 				if (ctrlRig!=null) {
-					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("cracking"), "electronic_warfare") + rigRating;
+					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("cracking"), (ShadowrunAttribute)null, "electronic_warfare").getValue(ValueType.AUGMENTED) + rigRating;
 				} else {
 					// Jumped in impossible without rig
 					pool.rigged = 0;
@@ -483,7 +483,7 @@ public class VehicleTools {
 				// Jumped in
 				if (ctrlRig!=null) {
 					String specID = (SR6GearTool.getSpecializationForVehicle(drone.getResolved())!=null)?SR6GearTool.getSpecializationForVehicle(drone.getResolved()).getId():null;
-					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.LOGIC,specID) + rigRating;
+					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.LOGIC,specID).getValue(ValueType.AUGMENTED) + rigRating;
 					// Question: does this include SimRig rating? German says "bei Proben, bei denen es um das Steuern eines Fahrzeugs geht"
 					//    while US says: "all tests involving the operation of a vehicle"
 					if (Locale.getDefault()!=Locale.GERMAN) {
@@ -521,7 +521,7 @@ public class VehicleTools {
 					// Use INTUITION instead REACTION (jumped in attribte)
 					int modifier = (model.getSkillValue(pilotSkill)!=null)?model.getSkillValue(pilotSkill).getModifier():0;
 					int maxRigBonus = Math.min( (4-modifier), rigRating);
-					pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.INTUITION, (spec!=null)?spec.getId():null) + maxRigBonus;
+					pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.INTUITION, (spec!=null)?spec.getId():null).getValue(ValueType.AUGMENTED) + maxRigBonus;
 					if (simSenseOverdrive!=null) {
 						int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
 						pool.rigged += Math.min(maxAdd, SR6GearTool.getRating( simSenseOverdrive ));
@@ -531,7 +531,7 @@ public class VehicleTools {
 					pool.rigged = 0;
 				}
 
-				
+
 				// Via RCC: Requires pilot maneuver on rcc
 				if (rcc==null) {
 					pool.viaRCC = 0;
@@ -553,10 +553,10 @@ public class VehicleTools {
 				// "the Defense Rating for vehicles is Piloting of the driver + Armor"
 				int armor = drone.getAsValue(SR6ItemAttribute.ARMOR).getModifiedValue();
 				// Driven
-				pool.manual = Shadowrun6Tools.getSkillPoolWithoutAttribute(model, pilotSkill, "maneuvering") + armor;
+				pool.manual = Shadowrun6Tools.getSkillPool(model, pilotSkill, (ShadowrunAttribute)null,"maneuvering").getValue(ValueType.AUGMENTED) + armor;
 				// Jumped in
 				if (ctrlRig!=null) {
-					pool.rigged = Shadowrun6Tools.getSkillPoolWithoutAttribute(model, pilotSkill, "maneuvering") + armor;
+					pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, (ShadowrunAttribute)null, "maneuvering").getValue(ValueType.AUGMENTED) + armor;
 					int modifier = (model.getSkillValue(pilotSkill)!=null)?model.getSkillValue(pilotSkill).getModifier():0;
 					int cappedRigBonus = Math.min( (4-modifier), rigRating);
 					pool.rigged += cappedRigBonus;
@@ -584,7 +584,7 @@ public class VehicleTools {
 			default:
 				logger.log(Level.WARNING, "DroneAction "+action+" not implemented yet");
 			}
-			
+
 			return pool;
 		}
 
@@ -593,7 +593,7 @@ public class VehicleTools {
 		 * Get the dice pools for using the weapon in a drone
 		 * Rigged = Riggers skill with replaced physical attribute plus implanted
 		 *          simrig rating
-		 * RCC    = 
+		 * RCC    =
 		 */
 		public static DronePool getDroneWeaponPool(Shadowrun6Character model, CarriedItem drone,  CarriedItem weapon) {
 			return getDroneWeaponPool(model, drone, Shadowrun6Tools.getBestRCC(model), weapon);
@@ -654,7 +654,7 @@ public class VehicleTools {
 //				}
 //			});
 			map.values().forEach(c-> list.add(c.toString()));
-			
+
 			String mods = String.join(", ", list);
 			return mods;
 		}
@@ -666,7 +666,7 @@ public class VehicleTools {
 				return null;
 //			if (item.isNoSpecialization())
 //				return null;
-			
+
 			ItemType typeI = item.getItemType(CarryMode.CARRIED);
 			switch (typeI) {
 			case VEHICLES:
@@ -678,7 +678,7 @@ public class VehicleTools {
 				case VANS:
 				case BUS:
 				case TRACKED:
-				case SPECIAL_VEHICLES:			
+				case SPECIAL_VEHICLES:
 				case WALKER:
 					return pilot.getSpecialization("ground_craft") ;
 				case HOVERCRAFT:
@@ -691,7 +691,7 @@ public class VehicleTools {
 				case ROTORCRAFT:
 				case LAV:
 				case LTAV:
-				case GRAV:			
+				case GRAV:
 				case SPACECRAFT:
 				case VTOL:
 					return pilot.getSpecialization("aircraft") ;
@@ -735,5 +735,5 @@ public class VehicleTools {
 			}
 			return null;
 		}
-	
+
 }

@@ -19,6 +19,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AttributeSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.CritterPowerSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.QualityPathsSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.SR6QualitySection;
 import javafx.scene.control.Label;
@@ -41,6 +42,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	private AttributeSection secAttrib;
 	private SR6QualitySection secQualities;
 	private QualityPathsSection secQualPaths;
+	private CritterPowerSection secCritterPower;
 
 	private OptionalNodePane layout;
 
@@ -62,7 +64,8 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		flex.getChildren().addAll(secAttrib, secQualities);
 
 		initQualityPaths();
-		flex.getChildren().addAll(secQualPaths);
+		initCritterPower();
+		flex.getChildren().addAll(secQualPaths, secCritterPower);
 
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -138,6 +141,22 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 	}
 
 	//-------------------------------------------------------------------
+	private void initCritterPower() {
+		secCritterPower = new CritterPowerSection();
+//		((QualitySection)secQualities).updateController(ctrl);
+		FlexGridPane.setMinWidth(secCritterPower, 4);
+		FlexGridPane.setMediumWidth(secCritterPower, 4);
+		FlexGridPane.setMinHeight(secCritterPower, 5);
+		secCritterPower.showHelpForProperty().addListener( (ov,o,n) -> {
+			if (n!=null) {
+				layout.setOptional( new GenericDescriptionVBox( Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+						Shadowrun6Tools.modificationResolver(Locale.getDefault()), n.getModifyable()));
+				layout.setTitle(n.getModifyable().getName());
+			}
+		});
+	}
+
+	//-------------------------------------------------------------------
 	public void setController(SR6CharacterController ctrl) {
 		logger.log(Level.INFO, "setController");
 		if (ctrl==null)
@@ -148,6 +167,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		((QualitySection)secQualities).updateController(ctrl);
 		((AppearanceSection)secPortrait).updateController(ctrl);
 		((QualityPathsSection)secQualPaths).updateController(ctrl);
+		((CritterPowerSection)secCritterPower).updateController(ctrl);
 		refresh();
 	}
 
@@ -166,8 +186,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		secQualities.refresh();
 		secQualPaths.refresh();
 		secPortrait.refresh();
-
-		//FlexGridPane.setMediumWidth(secAttrib, control.getModel().isInCareerMode()?6:9);
+		secCritterPower.refresh();
 	}
 
 }

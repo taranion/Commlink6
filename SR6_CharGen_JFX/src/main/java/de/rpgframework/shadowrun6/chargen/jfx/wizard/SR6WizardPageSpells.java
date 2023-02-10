@@ -14,6 +14,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSpellGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySpellGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySpellGenerator;
 import javafx.geometry.Insets;
@@ -68,10 +69,11 @@ public class SR6WizardPageSpells extends WizardPageSpells<SR6Spell> {
 
 		if (spellCtrl instanceof SR6PrioritySpellGenerator) {
 			backHeaderCP.setVisible(false);
-		} else
-		if (real instanceof ISR6PointBuyGenerator) {
+		} else if (real instanceof ISR6PointBuyGenerator) {
 			backHeaderCP.setValue( ((ISR6PointBuyGenerator)real).getSettings().characterPoints );
 			backHeaderCP.setVisible(true);
+		} else if (real instanceof SR6KarmaSpellGenerator) {
+			backHeaderCP.setVisible(false);
 		}
 	}
 
