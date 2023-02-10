@@ -103,7 +103,10 @@ public enum ItemType {
 			ItemSubType.COMPLEMENTAL_GENETICS
 			),
 	PACK(
-			ItemSubType.COMPLETE_PACK
+			ItemSubType.PACK_COMPLETE,
+			ItemSubType.PACK_WEAPON,
+			ItemSubType.PACK_AUGMENT,
+			ItemSubType.PACK_VEHICLE
 			),
 	WEAPON_CLOSE_COMBAT(
 			ItemSubType.BLADES,

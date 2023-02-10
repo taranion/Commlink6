@@ -526,7 +526,7 @@
    </item>
    <item avail="5I" price="9000" id="onotari_interceptor" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
       <modifications>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" id="48da1286-ef81-4291-89cb-02d0ebaf3428" included="true" />
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
