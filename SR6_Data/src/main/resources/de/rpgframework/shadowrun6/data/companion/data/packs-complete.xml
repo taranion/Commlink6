@@ -34,10 +34,10 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
          <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
          <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable SINs-->
                 <!-- </itemmod> -->
          <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
                 <!-- </valmod> -->
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
       </modifications>
@@ -150,7 +150,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="weapon_focus"> -->
+         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="weapon_focus"> TODO: Allow Weaponfocus to be one of the available close combat weapons -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
                 <!-- <decision choice="de69a2e0-1d0a-4a14-8c88-08f5b3377dad" value="MELEE"/> -->
                 <!-- </itemmod> -->
@@ -418,7 +418,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="renraku_kitsune" id="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" />
-             <!-- <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> -->
+             <!-- <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> TODO: Remove comments once agents are available from hack and slash -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
                 <!-- </embed> -->
              <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" />
@@ -805,7 +805,7 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
          <itemmod type="GEAR" apply="CHARACTER" ref="flash_pak" />
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="fake_license" value="2"> -->
+         <!-- <valmod type="GEAR" apply="CHARACTER" ref="fake_license" value="2"> TODO: Enable licenses -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- </valmod> -->
       </modifications>
@@ -1069,7 +1069,7 @@
                 <decision choice="8d33356c-f3d4-4387-a6a2-a9575c449ae7" value="engineering"/>
                 </itemmod>
          <valmod type="GEAR" apply="CHARACTER" ref="detonator_cap" value="10" />
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
+         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> TODO: Enable Licenses -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- </valmod> -->
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
@@ -1118,7 +1118,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="b63e92cd-3b97-4100-98b6-ad2285484bd0" intoType="HOOK" intoRef="CYBERDECK" ref="shiawase_cyber6" id="6cd08dcc-8c3e-4ef5-be47-8667882f751e" />
-             <!-- <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> -->
+             <!-- <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> TODO: Remove comments once agents are available from hack and slash -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
                 <!-- </embed> -->
              <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" />
@@ -1256,13 +1256,13 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="mct_hornet"/>
                 </embed>
-             <!-- <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> -->
+             <!-- <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> TODO: remove comment once geardef is enabled for items -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet_stinger"/> -->
                 <!-- </embed> -->
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_roadmaster" id="9a481409-5d90-4aef-83f6-9b76a8f8dc88" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="hardpoint_conceal_large" /> -->
+             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="hardpoint_conceal_large" /> TODO: Remove comment once gear from double clutch is available -->
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" id="bf007584-b7d7-4eb1-9552-7273e080dabd" />
              <embed  type="GEAR" intoId="bf007584-b7d7-4eb1-9552-7273e080dabd" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="280dff00-37da-44b9-b5c6-8155bbf15c43" />
              <embed  type="GEAR" intoId="280dff00-37da-44b9-b5c6-8155bbf15c43" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="317dd4af-61e2-460f-a3fe-cdcf37da3619" variant ="internal" />
@@ -1605,10 +1605,10 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
          <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
          <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: SINs -->
                 <!-- </itemmod> -->
          <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
                 <!-- </valmod> -->
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
       </modifications>
@@ -1707,7 +1707,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="weapon_focus"> -->
+         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="weapon_focus"> TODO: Allow Weaponfocus to be one of the available close combat weapons -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
                 <!-- <decision choice="de69a2e0-1d0a-4a14-8c88-08f5b3377dad" value="MELEE"/> -->
                 <!-- </itemmod> -->
@@ -2364,7 +2364,7 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
          <valmod type="GEAR" apply="CHARACTER" ref="flash_pak" value="3" />
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="fake_license" value="2"> -->
+         <!-- <valmod type="GEAR" apply="CHARACTER" ref="fake_license" value="2"> TODO: Enable Licenses -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- </valmod> -->
          <itemmod type="GEAR" apply="CHARACTER" ref="nodachi" />
@@ -2607,7 +2607,7 @@
                 <decision choice="8d33356c-f3d4-4387-a6a2-a9575c449ae7" value="engineering"/>
                 </itemmod>
          <valmod type="GEAR" apply="CHARACTER" ref="detonator_cap" value="10" />
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
+         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> TODO: Enable Licenses -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- </valmod> -->
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="middle" />
@@ -2795,13 +2795,13 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="mct_hornet"/>
                 </embed>
-             <!-- <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> -->
+             <!-- <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> TODO: remove comment once geardef is enabled for items -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet_stinger"/> -->
                 <!-- </embed> -->
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_roadmaster" id="9a481409-5d90-4aef-83f6-9b76a8f8dc88" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="hardpoint_conceal_large" /> -->
+             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="hardpoint_conceal_large" /> TODO: Remove comment once gear from double clutch is available -->
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" id="bf007584-b7d7-4eb1-9552-7273e080dabd" />
              <embed  type="GEAR" intoId="bf007584-b7d7-4eb1-9552-7273e080dabd" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="280dff00-37da-44b9-b5c6-8155bbf15c43" />
              <embed  type="GEAR" intoId="280dff00-37da-44b9-b5c6-8155bbf15c43" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="317dd4af-61e2-460f-a3fe-cdcf37da3619" variant ="internal" />
