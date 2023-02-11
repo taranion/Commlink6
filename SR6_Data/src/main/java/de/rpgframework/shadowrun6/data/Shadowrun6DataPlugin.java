@@ -329,8 +329,11 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz,"companion/data/transhumanism.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" transhumanisms");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-complete.xml");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-weapons.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" complete PACKs");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-weapons.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon PACKs");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-other.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" other PACKs");
 			list = Shadowrun6Core.loadDataItems(LifepathModuleList.class, LifepathModule.class, set, clazz,"companion/data/lifepath.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" lifepath modules");
 
