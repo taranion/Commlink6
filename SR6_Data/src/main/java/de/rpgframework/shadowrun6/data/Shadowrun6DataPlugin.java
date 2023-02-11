@@ -95,8 +95,6 @@ import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6UsageMode;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
-import de.rpgframework.shadowrun6.items.SensorFunction;
-import de.rpgframework.shadowrun6.items.SensorFunctionList;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCostType;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -181,8 +179,6 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" matrix actions");
 			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz, "core/data/actions_edge.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
-			list = Shadowrun6Core.loadDataItems(SensorFunctionList.class, SensorFunction.class, core, clazz.getResourceAsStream("core/data/sensorfunctions.xml"));
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" sensor functions");
 			list = Shadowrun6Core.loadDataItems(ItemEnhancementList.class, SR6ItemEnhancement.class, core, clazz,"core/data/weapon_modifications.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz, "core/data/gear_melee.xml");
