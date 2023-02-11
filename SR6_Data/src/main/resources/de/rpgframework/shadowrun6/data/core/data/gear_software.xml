@@ -142,6 +142,13 @@
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
 	</item>
+	<item avail="4I" price="250" lang="de" id="disarm" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+	   <mode id="active" />
+		<variant id="regular">
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+		</variant>
+	</item>
 	<item avail="4I" price="250" id="exploit" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	   <mode id="active" />
