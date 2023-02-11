@@ -54,6 +54,7 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import de.rpgframework.shadowrun6.items.SensorFunction;
 import de.rpgframework.shadowrun6.persist.ItemAttributeConverter;
 import de.rpgframework.shadowrun6.persist.LifestyleQualityConverter;
 import de.rpgframework.shadowrun6.persist.RuleFlagConverter;
@@ -107,6 +108,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	RULE(new RuleFlagConverter()),
 	QUALITY(Quality.class),
 	SENSE("Sense"),
+	SENSOR_FUNCTION(SensorFunction.class),
 	SIN(FakeRating.class,0),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILL(key -> Shadowrun6Core.getSkill(key)),
