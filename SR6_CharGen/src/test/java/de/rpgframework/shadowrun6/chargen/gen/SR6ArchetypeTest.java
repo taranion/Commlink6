@@ -45,7 +45,6 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
-import de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
@@ -1896,12 +1895,14 @@ public class SR6ArchetypeTest {
 		assertEquals(0, model.getKarmaFree());
 		assertEquals(0, skills.getPointsLeft());
 
-		assertEquals(6, skills.getPointsLeft2());
+		assertEquals(5, skills.getPointsLeft2());
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Commlink Design")) );
+		assertEquals(4, skills.getPointsLeft2());
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Dragons") ));
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Host Design") ));
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Seattle Gangs") ));
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Tacoma Geography") ));
+		assertEquals(0, skills.getPointsLeft2());
 		assertNotNull( skills.select(Shadowrun6Core.getSkill("knowledge"), new Decision(Shadowrun6Core.getSkill("knowledge").getChoices().get(0).getUUID(), "Technomancer Hangouts") ));
 
 		// Complex Forms-------------------------

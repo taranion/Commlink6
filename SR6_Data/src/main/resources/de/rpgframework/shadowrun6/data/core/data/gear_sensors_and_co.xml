@@ -91,7 +91,7 @@
       </modifications>
    </item>
 
-   
+
    <!-- Visual enhancements -->
    <item avail="1" price="250" id="flare_compensation" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
 	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
@@ -139,14 +139,14 @@
    		<usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="1500"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
   		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="1500"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    </item>
    <item avail="2" price="2000" id="smartlink"  type="ACCESSORY" subtype="VISION_ENHANCEMENT">
 	  	<usage mode="EMBEDDED" slot="OPTICAL" value="2"/>
@@ -156,7 +156,7 @@
     		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3L"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
   		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
@@ -164,9 +164,9 @@
    		<attrdef id="AVAILABILITY" value="3L"/>
    		<attrdef id="ESSENCECOST" value="0.2"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    </item>
-   
+
    <item avail="2" price="500" id="thermographic_vision" type="ACCESSORY" subtype="VISION_ENHANCEMENT">
 	  	<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
   		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
@@ -197,7 +197,7 @@
    		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
  		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
@@ -215,7 +215,7 @@
    		<attrdef id="PRICE" value="2000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    	<variant id="bodyware" mode="BODYWARE">
    		<usage mode="IMPLANTED" />
  		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
@@ -228,7 +228,7 @@
          <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="0,0,2,2,2"/>
       </modifications>
    </item>
-   
+
    <!-- Auditory devices -->
    <item avail="2" price="50" id="directional_microphone" subtype="AUDIO" type="ELECTRONICS">
 		<choices>
@@ -282,14 +282,14 @@
 		  	<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="2"/>
    		<attrdef id="PRICE" value="4000"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    	<variant id="bodyware">
 		  	<usage mode="IMPLANTED" />
  		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
    		<attrdef id="PRICE" value="400"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    </item>
    <item avail="3" price="250" id="select_sound_filter" type="ACCESSORY" subtype="AUDIO_ENHANCEMENT">
 		<choices>
@@ -306,7 +306,7 @@
    		<attrdef id="PRICE" value="$RATING*3500"/>
    		<attrdef id="AVAILABILITY" value="4"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    	<variant id="bodyware">
    		<usage mode="IMPLANTED"/>
 			<choices>
@@ -317,7 +317,7 @@
    		<attrdef id="AVAILABILITY" value="4"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    </item>
    <item avail="2" price="1000" id="spatial_recognizer" subtype="AUDIO_ENHANCEMENT" type="ACCESSORY">
    	<usage mode="EMBEDDED" slot="AUDIO" value="2"/>
@@ -326,7 +326,7 @@
    		<attrdef id="PRICE" value="4000"/>
    		<attrdef id="AVAILABILITY" value="3"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    	<variant id="bodyware">
    		<usage mode="IMPLANTED"/>
  		   <attrdef id="ITEMTYPE" value="CYBERWARE"/>
@@ -334,11 +334,11 @@
    		<attrdef id="AVAILABILITY" value="3"/>
    		<attrdef id="ESSENCECOST" value="0.1"/>
    		<flags><flag>AUGMENTATION</flag></flags>
-   	</variant>   	
+   	</variant>
    </item>
 
    <!-- Sensors -->
-    <item avail="1" price="100" id="handheld_housing" type="ELECTRONICS" subtype="SENSOR">    
+    <item avail="1" price="100" id="handheld_housing" type="ELECTRONICS" subtype="SENSOR">
  		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
 		</choices>
@@ -383,30 +383,46 @@
       </modifications>
    </item>
 
-   
-<!--     <item id="atmosphere_sensor" price="0" type="ELECTRONICS" subtype="SENSOR"> -->
-<!--   		<choices> -->
-<!-- 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/> -->
-<!-- 		</choices> -->
-<!-- 		<requires> -->
-<!-- 			<valuereq type="HOOK" ref="SENSOR_FUNCTION" value="1"/> -->
-<!-- 		</requires> -->
-<!--     </item> -->
-<!--     <item id="cyberware_scanner" price="0" type="ELECTRONICS" subtype="SENSOR"> -->
-<!--   		<choices> -->
-<!-- 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/> -->
-<!-- 		</choices> -->
-<!-- 		<requires> -->
-<!-- 			<valuereq type="HOOK" ref="SENSOR_FUNCTION" value="1"/> -->
-<!-- 		</requires> -->
-<!--     </item> -->
-<!--     <item id="geiger_counter" price="0" type="ELECTRONICS" subtype="SENSOR"> -->
-<!--   		<choices> -->
-<!-- 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/> -->
-<!-- 		</choices> -->
-<!-- 		<requires> -->
-<!-- 			<valuereq type="HOOK" ref="SENSOR_FUNCTION" value="1"/> -->
-<!-- 		</requires> -->
-<!--     </item> -->
+    <item id="atmosphere_sensor" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="cyberware_scanner" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="geiger_counter" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="laser_range_finder" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="mad_scanner" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="motion_sensor" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="olfactory_sensor" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="omni_directional_microphone" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="ultrasound" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="camera" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="directional_microphone" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+    <item id="laser_microphone" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
+
+    <!-- from Krime Escalation -->
+    <item id="matrix_signal_scanner" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+   	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
+    </item>
 
 </items>
