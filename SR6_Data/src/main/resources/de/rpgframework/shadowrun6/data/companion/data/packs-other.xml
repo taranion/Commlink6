@@ -213,7 +213,7 @@
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="mage-sight-goggles" />
          <itemmod type="GEAR" apply="CHARACTER" ref="myomeric_rope" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" variant ="optical" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" variant="optical" />
          <itemmod type="GEAR" apply="CHARACTER" ref="periscope" />
       </modifications>
    </item>
@@ -406,7 +406,7 @@
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="mage-sight-goggles" />
          <itemmod type="GEAR" apply="CHARACTER" ref="myomeric_rope" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" variant ="optical" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" variant="optical" />
          <itemmod type="GEAR" apply="CHARACTER" ref="periscope" />
       </modifications>
    </item>
