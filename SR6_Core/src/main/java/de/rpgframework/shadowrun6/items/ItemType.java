@@ -105,6 +105,7 @@ public enum ItemType {
 	PACK(
 			ItemSubType.PACK_COMPLETE,
 			ItemSubType.PACK_WEAPON,
+			ItemSubType.PACK_OTHER,
 			ItemSubType.PACK_AUGMENT,
 			ItemSubType.PACK_VEHICLE
 			),

@@ -220,6 +220,7 @@ public enum ItemSubType {
 	// PACKS
 	PACK_COMPLETE,
 	PACK_WEAPON,
+	PACK_OTHER,
 	PACK_AUGMENT,
 	PACK_VEHICLE
     ;
