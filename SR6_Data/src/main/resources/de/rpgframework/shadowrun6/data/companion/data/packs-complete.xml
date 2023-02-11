@@ -1803,10 +1803,10 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="00818f70-c7d6-4384-bdbf-47d9c31800fa">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 </itemmod>
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="single_sensor"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
-                <!-- <decision choice="UUID tbe" value="ultrasonic"/> -->
-                <!-- </itemmod> -->
+             <embed  type="GEAR" intoId="00818f70-c7d6-4384-bdbf-47d9c31800fa" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="2553e0d2-e1bc-45b9-b2b5-678754cd5594">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+             <embed  type="GEAR" intoId="2553e0d2-e1bc-45b9-b2b5-678754cd5594" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
          <itemmod type="GEAR" apply="CHARACTER" ref="erika_elite">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 </itemmod>
