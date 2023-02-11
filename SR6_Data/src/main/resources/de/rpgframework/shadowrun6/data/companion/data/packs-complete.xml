@@ -34,7 +34,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
          <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
          <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable SINs-->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable SINs -->
                 <!-- </itemmod> -->
          <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->

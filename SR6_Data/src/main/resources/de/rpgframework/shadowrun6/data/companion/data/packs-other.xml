@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Armor Packs US -->
+   <item id="pack_actioneer" price="3000" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="actioneer_business" id="c6eb07a7-98be-4d5d-9e91-b90457c5ede8" />
+             <embed  type="GEAR" intoId="c6eb07a7-98be-4d5d-9e91-b90457c5ede8" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="c6eb07a7-98be-4d5d-9e91-b90457c5ede8" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="c6eb07a7-98be-4d5d-9e91-b90457c5ede8" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="c6eb07a7-98be-4d5d-9e91-b90457c5ede8" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+      </modifications>
+   </item>
+
+   <item id="pack_jacket" price="3200" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor_jacket" id="457f771d-e735-4478-931d-bdc5cc02a801" />
+             <embed  type="GEAR" intoId="457f771d-e735-4478-931d-bdc5cc02a801" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="457f771d-e735-4478-931d-bdc5cc02a801" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="457f771d-e735-4478-931d-bdc5cc02a801" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="457f771d-e735-4478-931d-bdc5cc02a801" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+      </modifications>
+   </item>
+
+   <item id="pack_vest" price="2250" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor_vest" id="a8c9343d-6e9c-409f-837f-faac75395919" />
+             <embed  type="GEAR" intoId="a8c9343d-6e9c-409f-837f-faac75395919" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="a8c9343d-6e9c-409f-837f-faac75395919" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="a8c9343d-6e9c-409f-837f-faac75395919" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="a8c9343d-6e9c-409f-837f-faac75395919" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+      </modifications>
+   </item>
+
+   <item id="pack_chameleon" price="3000" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="chameleon_suit" id="be5f2ffb-7467-4570-b0d4-da3d04a5ead9" />
+             <embed  type="GEAR" intoId="be5f2ffb-7467-4570-b0d4-da3d04a5ead9" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="be5f2ffb-7467-4570-b0d4-da3d04a5ead9" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="be5f2ffb-7467-4570-b0d4-da3d04a5ead9" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="be5f2ffb-7467-4570-b0d4-da3d04a5ead9" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+      </modifications>
+   </item>
+
+   <item id="pack_fullbodyarmor" price="7300" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_with_helmet" id="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" />
+             <embed  type="GEAR" intoId="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" />
+             <embed  type="GEAR" intoId="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+         <!-- <valmod type="GEAR" apply="CHARACTER" ref="fake_license" value="2"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
+                <!-- </valmod> -->
+      </modifications>
+   </item>
+
+   <item id="pack_lined_coat" price="2650" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="lined_coat" id="5cf7a59a-cd0e-4d10-92f2-b04a85e9735a" />
+             <embed  type="GEAR" intoId="5cf7a59a-cd0e-4d10-92f2-b04a85e9735a" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="5cf7a59a-cd0e-4d10-92f2-b04a85e9735a" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="5cf7a59a-cd0e-4d10-92f2-b04a85e9735a" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="5cf7a59a-cd0e-4d10-92f2-b04a85e9735a" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+      </modifications>
+   </item>
+
+   <item id="pack_urban_explorer" price="2300" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="urban_explorer_jumpsuit" id="eba354a9-901f-454e-9941-6dd5ecb1db56" />
+             <embed  type="GEAR" intoId="eba354a9-901f-454e-9941-6dd5ecb1db56" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="eba354a9-901f-454e-9941-6dd5ecb1db56" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="eba354a9-901f-454e-9941-6dd5ecb1db56" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="eba354a9-901f-454e-9941-6dd5ecb1db56" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+      </modifications>
+   </item>
+
+   <item id="pack_smart_helmet" price="2475" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="helmet" id="440d8d0c-1836-45f1-97ee-6864f3cdd0f3" />
+             <embed  type="GEAR" intoId="440d8d0c-1836-45f1-97ee-6864f3cdd0f3" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="440d8d0c-1836-45f1-97ee-6864f3cdd0f3" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="440d8d0c-1836-45f1-97ee-6864f3cdd0f3" intoType="HOOK" intoRef="OPTICAL" ref="smartlink" />
+      </modifications>
+   </item>
+
+   <item id="pack_augm_helmet" price="1975" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="helmet" id="35700428-4a5b-4fa8-8ebc-20d7be250f87" />
+             <embed  type="GEAR" intoId="35700428-4a5b-4fa8-8ebc-20d7be250f87" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="35700428-4a5b-4fa8-8ebc-20d7be250f87" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="35700428-4a5b-4fa8-8ebc-20d7be250f87" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+             <embed  type="GEAR" intoId="35700428-4a5b-4fa8-8ebc-20d7be250f87" intoType="HOOK" intoRef="OPTICAL" ref="thermographic_vision" />
+      </modifications>
+   </item>
+
+   <item id="pack_enh_helmet" price="1200" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="helmet" id="248e6058-152c-4fdd-9ec3-e1235b7e41a6" />
+             <embed  type="GEAR" intoId="248e6058-152c-4fdd-9ec3-e1235b7e41a6" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="248e6058-152c-4fdd-9ec3-e1235b7e41a6" intoType="HOOK" intoRef="OPTICAL" ref="vision_enhancement" />
+             <embed  type="GEAR" intoId="248e6058-152c-4fdd-9ec3-e1235b7e41a6" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
+      </modifications>
+   </item>
+
+<!-- Armor Packs DE -->
+   <item id="pack_jacket" lang="de" price="3000" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor_jacket" id="457f771d-e735-4478-931d-bdc5cc02a801" />
+             <embed  type="GEAR" intoId="457f771d-e735-4478-931d-bdc5cc02a801" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="457f771d-e735-4478-931d-bdc5cc02a801" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="457f771d-e735-4478-931d-bdc5cc02a801" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="457f771d-e735-4478-931d-bdc5cc02a801" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+      </modifications>
+   </item>
+
+   <item id="pack_fullbodyarmor" lang="de" price="7300" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_with_helmet" id="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" />
+             <embed  type="GEAR" intoId="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" />
+             <embed  type="GEAR" intoId="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="d7ca4e68-5e4f-4306-b25b-fa8534d713d5" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+         <!-- <valmod type="GEAR" apply="CHARACTER" ref="fake_license" value="2"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
+                <!-- </valmod> -->
+      </modifications>
+   </item>
+
+   <item id="pack_augm_helmet" lang="de" price="1475" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="helmet" id="35700428-4a5b-4fa8-8ebc-20d7be250f87" />
+             <embed  type="GEAR" intoId="35700428-4a5b-4fa8-8ebc-20d7be250f87" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="35700428-4a5b-4fa8-8ebc-20d7be250f87" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="35700428-4a5b-4fa8-8ebc-20d7be250f87" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+             <embed  type="GEAR" intoId="35700428-4a5b-4fa8-8ebc-20d7be250f87" intoType="HOOK" intoRef="OPTICAL" ref="thermographic_vision" />
+      </modifications>
+   </item>
+
+<!-- Sensor Packs US -->
+   <item id="pack_magical_targeting" price="3700" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="mage-sight-goggles" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="myomeric_rope" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" variant ="optical" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="periscope" />
+      </modifications>
+   </item>
+
+   <item id="pack_contacts_elf_eyes" price="1375" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="685ef7ba-44d6-400c-b37d-f9a47e281c5d">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="685ef7ba-44d6-400c-b37d-f9a47e281c5d" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="685ef7ba-44d6-400c-b37d-f9a47e281c5d" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="685ef7ba-44d6-400c-b37d-f9a47e281c5d" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+      </modifications>
+   </item>
+
+   <item id="pack_contacts_trog_peeps" price="1375" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="8299a833-2af6-4f76-93de-3e3ae25e8970">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="8299a833-2af6-4f76-93de-3e3ae25e8970" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="8299a833-2af6-4f76-93de-3e3ae25e8970" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="8299a833-2af6-4f76-93de-3e3ae25e8970" intoType="HOOK" intoRef="OPTICAL" ref="thermographic_vision" />
+      </modifications>
+   </item>
+
+   <item id="pack_contacts_smart" price="2625" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="bf871eba-0235-4280-89cb-650bc8a3bc1e">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="bf871eba-0235-4280-89cb-650bc8a3bc1e" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="bf871eba-0235-4280-89cb-650bc8a3bc1e" intoType="HOOK" intoRef="OPTICAL" ref="smartlink" />
+      </modifications>
+   </item>
+
+   <item id="pack_glasses_shades" price="1125" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="5bc16d81-7875-49de-bc5e-f0cd154d44c0">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="8299a833-2af6-4f76-93de-3e3ae25e8970" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="5bc16d81-7875-49de-bc5e-f0cd154d44c0" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="5bc16d81-7875-49de-bc5e-f0cd154d44c0" intoType="HOOK" intoRef="OPTICAL" ref="vision_enhancement" />
+      </modifications>
+   </item>
+
+   <item id="pack_glasses_enh" price="1175" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="add82915-ef11-42b3-ae72-fb765c20c8ae">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="add82915-ef11-42b3-ae72-fb765c20c8ae" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="add82915-ef11-42b3-ae72-fb765c20c8ae" intoType="HOOK" intoRef="OPTICAL" ref="vision_enhancement" />
+             <embed  type="GEAR" intoId="add82915-ef11-42b3-ae72-fb765c20c8ae" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
+      </modifications>
+   </item>
+
+   <item id="pack_glasses_aug" price="1675" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="db46b4b8-99cc-4156-b6de-c2dbe31b79a2">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="db46b4b8-99cc-4156-b6de-c2dbe31b79a2" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="db46b4b8-99cc-4156-b6de-c2dbe31b79a2" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="db46b4b8-99cc-4156-b6de-c2dbe31b79a2" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+             <embed  type="GEAR" intoId="db46b4b8-99cc-4156-b6de-c2dbe31b79a2" intoType="HOOK" intoRef="OPTICAL" ref="thermographic_vision" />
+      </modifications>
+   </item>
+
+   <item id="pack_goggles_super" price="3425" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="goggles" id="2b03abbf-2744-4d07-a082-a4989038c634">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="smartlink" />
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
+      </modifications>
+   </item>
+
+   <item id="pack_ultra_contacts" price="1775" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="b6359a21-b51b-4106-809b-a8c677b36fe6">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="b6359a21-b51b-4106-809b-a8c677b36fe6" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="76c32897-9929-4239-a955-2a4c55564693">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+             <embed  type="GEAR" intoId="76c32897-9929-4239-a955-2a4c55564693" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="b10ed964-bbc7-4997-9b7e-04cbac0e2d31">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="b10ed964-bbc7-4997-9b7e-04cbac0e2d31" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="b10ed964-bbc7-4997-9b7e-04cbac0e2d31" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="b10ed964-bbc7-4997-9b7e-04cbac0e2d31" intoType="HOOK" intoRef="OPTICAL" ref="ultrasound_link" />
+      </modifications>
+   </item>
+
+   <item id="pack_ultra_glasses" price="1475" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="4c6cd922-5f21-4eae-b6f2-a27485514f51">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="4c6cd922-5f21-4eae-b6f2-a27485514f51" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="8b630297-41a7-4f67-9ebd-96b243910d89">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+             <embed  type="GEAR" intoId="8b630297-41a7-4f67-9ebd-96b243910d89" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="d47fd581-6481-4a3f-afea-21d14c2fc86f">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="d47fd581-6481-4a3f-afea-21d14c2fc86f" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="d47fd581-6481-4a3f-afea-21d14c2fc86f" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="d47fd581-6481-4a3f-afea-21d14c2fc86f" intoType="HOOK" intoRef="OPTICAL" ref="ultrasound_link" />
+      </modifications>
+   </item>
+
+   <item id="pack_ultra_googles" price="1325" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="4b298917-05ab-4287-a943-aacfc8f6401b">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="4b298917-05ab-4287-a943-aacfc8f6401b" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="3c36f8d1-3b26-49af-b315-ffc0c57e56fd">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="goggles" id="30fcba7b-8e0f-4b50-89c3-e416f51f6214">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="30fcba7b-8e0f-4b50-89c3-e416f51f6214" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="30fcba7b-8e0f-4b50-89c3-e416f51f6214" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="30fcba7b-8e0f-4b50-89c3-e416f51f6214" intoType="HOOK" intoRef="OPTICAL" ref="ultrasound_link" />
+      </modifications>
+   </item>
+
+   <item id="pack_hand_sensor" price="1200" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="65c73adb-a277-407a-8ffd-ce3fca27ada8">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="65c73adb-a277-407a-8ffd-ce3fca27ada8" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="3c36f8d1-3b26-49af-b315-ffc0c57e56fd">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+           <selmod>
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="atmosphere_sensor" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="geiger_counter" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="olfactory_sensor" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="cyberware_scanner" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="mad_scanner" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="directional_microphone" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_range_finder" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_microphone" />
+           </selmod>
+           <selmod>
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="atmosphere_sensor" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="geiger_counter" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="olfactory_sensor" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="cyberware_scanner" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="mad_scanner" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="directional_microphone" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_range_finder" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_microphone" />
+           </selmod>
+           <selmod>
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="atmosphere_sensor" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="geiger_counter" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="olfactory_sensor" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="cyberware_scanner" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="mad_scanner" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="directional_microphone" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_range_finder" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_microphone" />
+           </selmod>
+      </modifications>
+   </item>
+
+<!-- Sensor Packs DE -->
+   <item id="pack_magical_targeting" lang="de" price="3720" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="mage-sight-goggles" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="myomeric_rope" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" variant ="optical" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="periscope" />
+      </modifications>
+   </item>
+
+   <item id="pack_glasses_shades" lang="de" price="2675" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="5bc16d81-7875-49de-bc5e-f0cd154d44c0">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="8299a833-2af6-4f76-93de-3e3ae25e8970" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="5bc16d81-7875-49de-bc5e-f0cd154d44c0" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="5bc16d81-7875-49de-bc5e-f0cd154d44c0" intoType="HOOK" intoRef="OPTICAL" ref="smartlink" />
+      </modifications>
+   </item>
+
+   <item id="pack_goggles_super" lang="de" price="3325" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="goggles" id="2b03abbf-2744-4d07-a082-a4989038c634">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="smartlink" />
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+             <embed  type="GEAR" intoId="2b03abbf-2744-4d07-a082-a4989038c634" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
+      </modifications>
+   </item>
+
+   <item id="pack_ultra_contacts" lang="de" price="1575" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="b6359a21-b51b-4106-809b-a8c677b36fe6">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="b6359a21-b51b-4106-809b-a8c677b36fe6" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="76c32897-9929-4239-a955-2a4c55564693">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+             <embed  type="GEAR" intoId="76c32897-9929-4239-a955-2a4c55564693" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="contacts" id="b10ed964-bbc7-4997-9b7e-04cbac0e2d31">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="b10ed964-bbc7-4997-9b7e-04cbac0e2d31" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="b10ed964-bbc7-4997-9b7e-04cbac0e2d31" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="b10ed964-bbc7-4997-9b7e-04cbac0e2d31" intoType="HOOK" intoRef="OPTICAL" ref="ultrasound_link" />
+      </modifications>
+   </item>
+
+   <item id="pack_ultra_glasses" lang="de" price="1275" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="4c6cd922-5f21-4eae-b6f2-a27485514f51">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="4c6cd922-5f21-4eae-b6f2-a27485514f51" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="8b630297-41a7-4f67-9ebd-96b243910d89">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+             <embed  type="GEAR" intoId="8b630297-41a7-4f67-9ebd-96b243910d89" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="glasses" id="d47fd581-6481-4a3f-afea-21d14c2fc86f">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="d47fd581-6481-4a3f-afea-21d14c2fc86f" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="d47fd581-6481-4a3f-afea-21d14c2fc86f" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="d47fd581-6481-4a3f-afea-21d14c2fc86f" intoType="HOOK" intoRef="OPTICAL" ref="ultrasound_link" />
+      </modifications>
+   </item>
+
+   <item id="pack_ultra_googles" lang="de" price="1125" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="4b298917-05ab-4287-a943-aacfc8f6401b">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="4b298917-05ab-4287-a943-aacfc8f6401b" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="3c36f8d1-3b26-49af-b315-ffc0c57e56fd">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="goggles" id="30fcba7b-8e0f-4b50-89c3-e416f51f6214">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="30fcba7b-8e0f-4b50-89c3-e416f51f6214" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" />
+             <embed  type="GEAR" intoId="30fcba7b-8e0f-4b50-89c3-e416f51f6214" intoType="HOOK" intoRef="OPTICAL" ref="image_link" />
+             <embed  type="GEAR" intoId="30fcba7b-8e0f-4b50-89c3-e416f51f6214" intoType="HOOK" intoRef="OPTICAL" ref="ultrasound_link" />
+      </modifications>
+   </item>
+
+<!-- Other Packs US -->
+   <item id="pack_id_cheap" price="5800" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> TODO: Enable SINs -->
+                <!-- </itemmod> -->
+         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> TODO: Enable Licenses -->
+                <!-- </valmod> -->
+      </modifications>
+   </item>
+
+   <item id="pack_id_risky" price="8700" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> TODO: Enable SINs -->
+                <!-- </itemmod> -->
+         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> TODO: Enable Licenses -->
+                <!-- </valmod> -->
+      </modifications>
+   </item>
+
+   <item id="pack_id_reliable" price="11600" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable SINs -->
+                <!-- </itemmod> -->
+         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
+                <!-- </valmod> -->
+      </modifications>
+   </item>
+
+   <item id="pack_id_solid" price="13500" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> TODO: Enable SINs -->
+                <!-- </itemmod> -->
+         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> TODO: Enable Licenses -->
+                <!-- </valmod> -->
+      </modifications>
+   </item>
+
+   <item id="pack_id_exquisite" price="17400" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> TODO: Enable SINs -->
+                <!-- </itemmod> -->
+         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> TODO: Enable Licenses -->
+                <!-- </valmod> -->
+      </modifications>
+   </item>
+
+   <item id="pack_surveillance" price="5000" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" id="bdd54fa4-5c4c-484f-9826-f88a83153078">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="bdd54fa4-5c4c-484f-9826-f88a83153078" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+             <embed  type="GEAR" intoId="bdd54fa4-5c4c-484f-9826-f88a83153078" intoType="HOOK" intoRef="OPTICAL" ref="vision_enhancement" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="data_tap" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="directional_microphone" id="1f51b125-315a-43cd-bef1-b06a68b755c1">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="1f51b125-315a-43cd-bef1-b06a68b755c1" intoType="HOOK" intoRef="AUDIO" ref="audio_enhancement" />
+             <embed  type="GEAR" intoId="1f51b125-315a-43cd-bef1-b06a68b755c1" intoType="HOOK" intoRef="AUDIO" ref="select_sound_filter">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="1f51b125-315a-43cd-bef1-b06a68b755c1" intoType="HOOK" intoRef="AUDIO" ref="spatial_recognizer" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="laser_microphone" id="3c90f30e-a82b-4e06-878e-b833a513ed54">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="3c90f30e-a82b-4e06-878e-b833a513ed54" intoType="HOOK" intoRef="AUDIO" ref="audio_enhancement" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="microcamera" id="d25f5bee-46f1-4fe8-916d-ed2ab6821445">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="d25f5bee-46f1-4fe8-916d-ed2ab6821445" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+         <valmod type="GEAR" apply="CHARACTER" ref="sensor_tag" value="5" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="186ecfad-52ae-40da-a217-af8882068593">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="186ecfad-52ae-40da-a217-af8882068593" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="bff8822a-abbc-4614-ab07-52fac391a865">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="bff8822a-abbc-4614-ab07-52fac391a865" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="b128dda6-400f-404a-9d4d-ca75aafbcfe8">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="b128dda6-400f-404a-9d4d-ca75aafbcfe8" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="2f1e3f9e-e684-4f1a-b736-27f4f89ced26">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="2f1e3f9e-e684-4f1a-b736-27f4f89ced26" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="6bd15762-be9f-457c-a8db-6be5d89791d6">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="6bd15762-be9f-457c-a8db-6be5d89791d6" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="903246e0-54ae-4165-8900-5672dcfee7b2">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="903246e0-54ae-4165-8900-5672dcfee7b2" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="a64994d8-99fd-4186-adbc-3a88fad38583">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="a64994d8-99fd-4186-adbc-3a88fad38583" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="2c1500db-a904-482d-98ef-4d69ad71ab3d">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="2c1500db-a904-482d-98ef-4d69ad71ab3d" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="olfactory_sensor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="302012ae-4244-4351-a599-6007e92ba7cb">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="302012ae-4244-4351-a599-6007e92ba7cb" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="f591ebf3-0145-4b0f-9fe4-1c9c8e56b8ea">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="f591ebf3-0145-4b0f-9fe4-1c9c8e56b8ea" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+      </modifications>
+   </item>
+
+   <item id="pack_cyberprograms" price="14170" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="agent"> TODO: Remove comments once agents are available from hack and slash -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
+                <!-- </itemmod> -->
+         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="browse" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="configurator" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="edit" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="encryption" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="toolbox" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="biofeedback_filter" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="blackout" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="decryption" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="defuse" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="exploit" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="fork" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="lockdown" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="overclock" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="stealth" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="trace" />
+      </modifications>
+   </item>
+
+<!-- Other Packs DE -->
+   <item id="pack_id_solid" lang="de" price="14500" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> TODO: Enable SINs -->
+                <!-- </itemmod> -->
+         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> TODO: Enable Licenses -->
+                <!-- </valmod> -->
+      </modifications>
+   </item>
+
+   <item id="pack_surveillance" lang="de" price="5820" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="binoculars" id="bdd54fa4-5c4c-484f-9826-f88a83153078">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="bdd54fa4-5c4c-484f-9826-f88a83153078" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+             <embed  type="GEAR" intoId="bdd54fa4-5c4c-484f-9826-f88a83153078" intoType="HOOK" intoRef="OPTICAL" ref="vision_enhancement" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="data_tap" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="directional_microphone" id="1f51b125-315a-43cd-bef1-b06a68b755c1">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="1f51b125-315a-43cd-bef1-b06a68b755c1" intoType="HOOK" intoRef="AUDIO" ref="audio_enhancement" />
+             <embed  type="GEAR" intoId="1f51b125-315a-43cd-bef1-b06a68b755c1" intoType="HOOK" intoRef="AUDIO" ref="select_sound_filter">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="1f51b125-315a-43cd-bef1-b06a68b755c1" intoType="HOOK" intoRef="AUDIO" ref="spatial_recognizer" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="laser_microphone" id="3c90f30e-a82b-4e06-878e-b833a513ed54">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="3c90f30e-a82b-4e06-878e-b833a513ed54" intoType="HOOK" intoRef="AUDIO" ref="audio_enhancement" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="microcamera" id="d25f5bee-46f1-4fe8-916d-ed2ab6821445">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="d25f5bee-46f1-4fe8-916d-ed2ab6821445" intoType="HOOK" intoRef="OPTICAL" ref="low_light_vision" />
+         <valmod type="GEAR" apply="CHARACTER" ref="sensor_tag" value="5" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="186ecfad-52ae-40da-a217-af8882068593">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="186ecfad-52ae-40da-a217-af8882068593" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="bff8822a-abbc-4614-ab07-52fac391a865">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="bff8822a-abbc-4614-ab07-52fac391a865" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="b128dda6-400f-404a-9d4d-ca75aafbcfe8">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="b128dda6-400f-404a-9d4d-ca75aafbcfe8" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="2f1e3f9e-e684-4f1a-b736-27f4f89ced26">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="2f1e3f9e-e684-4f1a-b736-27f4f89ced26" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="6bd15762-be9f-457c-a8db-6be5d89791d6">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="6bd15762-be9f-457c-a8db-6be5d89791d6" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="903246e0-54ae-4165-8900-5672dcfee7b2">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="903246e0-54ae-4165-8900-5672dcfee7b2" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="a64994d8-99fd-4186-adbc-3a88fad38583">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="a64994d8-99fd-4186-adbc-3a88fad38583" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="2c1500db-a904-482d-98ef-4d69ad71ab3d">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+             <embed  type="GEAR" intoId="2c1500db-a904-482d-98ef-4d69ad71ab3d" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="olfactory_sensor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="302012ae-4244-4351-a599-6007e92ba7cb">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </itemmod>
+             <embed  type="GEAR" intoId="302012ae-4244-4351-a599-6007e92ba7cb" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="f591ebf3-0145-4b0f-9fe4-1c9c8e56b8ea">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+             <embed  type="GEAR" intoId="f591ebf3-0145-4b0f-9fe4-1c9c8e56b8ea" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+      </modifications>
+   </item>
+
+   <item id="pack_cyberprograms" lang="de" price="3730" type="PACK" subtype="PACK_OTHER" >
+      <modifications>
+         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="browse" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="configurator" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="edit" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="encryption" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="toolbox" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="virtual_machine" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="biofeedback" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="biofeedback_filter" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="blackout" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="decryption" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="defuse" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="disarm" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="exploit" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="fork" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="lockdown" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="overclock" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="stealth" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="trace" />
+      </modifications>
+   </item>
+
+</items>
