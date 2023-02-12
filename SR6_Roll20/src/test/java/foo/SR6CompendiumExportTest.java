@@ -49,6 +49,8 @@ public class SR6CompendiumExportTest {
 		LicenseManager.storeUserLicensedDatasets(List.of("SHADOWRUN6/CORE"));
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
+		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(5));
+		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(4));
 		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(3));
 		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(2));
 		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(1));
