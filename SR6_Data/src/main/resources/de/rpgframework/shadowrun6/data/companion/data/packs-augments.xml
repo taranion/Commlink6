@@ -75,7 +75,7 @@
    </item>
 
    <item id="pack_hacker_e" price="129170" type="PACK" subtype="PACK_AUGMENT" >
-    <attrdef id="ESSENCECOST" value="3.06" />
+    <attrdef id="ESSENCECOST" value="3.03" /> <!-- US RAW stats Essence 3.06, however the ware does only need 3.03 -->
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberjack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
@@ -265,7 +265,7 @@
     <attrdef id="ESSENCECOST" value="0.3" />
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberears" id="86de79b1-b55e-4f12-bf3b-ed01915ee09d">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> <!-- US RAW state rating 4, however essence and content match rating 3 ear -->
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="86de79b1-b55e-4f12-bf3b-ed01915ee09d" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="audio_enhancement">
@@ -990,7 +990,7 @@
    </item>
 
    <item id="pack_skill_a" lang="de" price="156000" type="PACK" subtype="PACK_AUGMENT" >
-    <attrdef id="ESSENCECOST" value="0.8" />
+    <attrdef id="ESSENCECOST" value="0.7" /> <!-- DE RAW states Essence 0.8, however ware is only 0.7 -->
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="skilljack" id="998d9819-1520-4e1a-8621-06655df81049">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
