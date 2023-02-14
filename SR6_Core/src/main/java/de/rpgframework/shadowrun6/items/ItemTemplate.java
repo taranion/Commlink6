@@ -517,6 +517,26 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	}
 
 	//-------------------------------------------------------------------
+	public String getOverdrive(Locale locale) {
+		String key = "item."+id+".overdrive";
+		String line = getLocalizedString(locale, key);
+		if (!line.equals(key)) {
+			return line;
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	public String getWiFi(Locale locale) {
+		String key = "item."+id+".wifi";
+		String line = getLocalizedString(locale, key);
+		if (!line.equals(key)) {
+			return line;
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
 	public List<AGearData> getPossibilities(CarryMode carry) {
 		List<AGearData> ret = new ArrayList<>();
 		if (getUsage(carry)!=null && !requiresVariant())

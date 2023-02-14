@@ -27,6 +27,8 @@
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
+  		<usage mode="CARRIED"/>
+  		<usage mode="EMBEDDED" slot="MEDKIT"/>
 		<attrdef id="PRICE" value="$RATING*250"/>
    </item>
    <item avail="1" price="100"   id="medkit_supplies"   subtype="BIOTECH" type="BIOLOGY" count="y"/>

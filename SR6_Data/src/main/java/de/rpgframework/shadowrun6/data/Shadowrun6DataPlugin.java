@@ -376,13 +376,16 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_cosmetic.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" cosmetic cyberware");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_earware.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
+			logger.log(Level.DEBUG, "Loaded {0} cyberware", list.size());
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_eyeware.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
+			logger.log(Level.DEBUG, "Loaded {0} cyberware", list.size());
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_headware.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
+			logger.log(Level.DEBUG, "Loaded {0} cyberware", list.size());
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_bodyware.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
+			logger.log(Level.DEBUG, "Loaded {0} cyberware", list.size());
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_cyberlimbs.xml");
+			logger.log(Level.DEBUG, "Loaded {0} cyberlimbs", list.size());
+			System.exit(1);
 
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
