@@ -115,7 +115,7 @@
       <attrdef id="PRICE" value="$RATING*30000"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<checkmod type="SKILL" ref="athletics" value="$RATING" cond="true" what="BONUS"/>
+      	<checkmod type="SKILL" ref="athletics" value="$RATING" cond="true" what="DICE"/>
       </modifications>
    </item>
    <item id="tailored_pheremones" avail="4L" type="BIOWARE" subtype="BIOWARE_STANDARD">
@@ -126,8 +126,8 @@
       <attrdef id="PRICE" value="$RATING*31000"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<checkmod type="SKILL" ref="con" value="$RATING" cond="true" what="BONUS"/>
-      	<checkmod type="SKILL" ref="influence" value="$RATING" cond="true" what="BONUS"/>
+      	<checkmod type="SKILL" ref="con" value="$RATING" cond="true" what="DICE"/>
+      	<checkmod type="SKILL" ref="influence" value="$RATING" cond="true" what="DICE"/>
       </modifications>
    </item>
    <item id="toxin_etractor" avail="4" type="BIOWARE" subtype="BIOWARE_STANDARD">
@@ -149,10 +149,10 @@
       <attrdef id="PRICE" value="$RATING*4500"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<checkmod type="RESISTANCE" ref="TOXIN_POOL" value="$RATING" what="BONUS"/>
+      	<checkmod type="RESISTANCE" ref="TOXIN_POOL" value="$RATING" what="DICE"/>
       </modifications>
    </item>
-   
+
    <!-- Cultured Bioware -->
    <item id="cerebral_booster" avail="5" type="BIOWARE" subtype="BIOWARE_CULTURED">
 		<choices>
