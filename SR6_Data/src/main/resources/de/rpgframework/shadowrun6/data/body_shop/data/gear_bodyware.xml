@@ -58,7 +58,7 @@
  			<attrdef id="PRICE" value="5000"/>
  			<attrdef id="AVAILABILITY" value="5I"/>
  			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
-				<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/exotic_weapons/thagomizer" />
+				<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/thagomizer" />
  			</alternate>
  		</variant>
    </item>

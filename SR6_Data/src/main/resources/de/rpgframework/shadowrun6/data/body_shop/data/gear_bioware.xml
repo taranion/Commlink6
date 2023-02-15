@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   
+
    <!-- Cosmetic Bioware -->
    <item id="clean_metabolism" avail="3" price="1000" type="BIOWARE" subtype="COSMETIC">
       <usage mode="IMPLANTED" value="0.05"/>
@@ -20,7 +20,7 @@
       <usage mode="IMPLANTED" value="0.25"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-         <checkmod type="SKILL" ref="con"  value="1" what="EDGE_TEST_ONLY"/>
+         <checkmod type="SKILL" ref="con"  value="1" what="EDGE_ONLY_TEST"/>
       </modifications>
    </item>
    <item id="perfect_eyes" avail="3" price="500" type="BIOWARE" subtype="COSMETIC">
@@ -32,7 +32,7 @@
       	<attrdef id="PRICE" value="1000"/>
       </variant>
    </item>
-   
+
    <!-- Standard Bioware -->
    <item id="amplified_immune_system" avail="3" price="3" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
@@ -95,22 +95,18 @@
     	<variant id="saltwater"/>
     	<variant id="freshwater"/>
     	<variant id="air"/>
-   	</item>
-	<item id="hand_foot_webbing" avail="3" price="1000" type="BIOWARE" subtype="BIOWARE_STANDARD">
-    	<usage mode="IMPLANTED" value="0.05"/>
-      	<flags><flag>AUGMENTATION</flag></flags>
-   	</item>
+  	</item>
 	<item id="hand_foot_webbing" avail="3" price="1000" type="BIOWARE" subtype="BIOWARE_STANDARD">
     	<usage mode="IMPLANTED" value="0.05"/>
       	<flags><flag>AUGMENTATION</flag></flags>
     	<modifications>
     		<checkmod type="SKILL" ref="athletics" value="1" what="DICE" cond="y"/>
     	</modifications>
-   	</item>
+  	</item>
 	<item id="joint_replacement" avail="2" price="1000" type="BIOWARE" subtype="BIOWARE_STANDARD">
     	<usage mode="IMPLANTED" value="0"/>
       	<flags><flag>AUGMENTATION</flag></flags>
-   	</item>
+  	</item>
 	<item id="metabolic_arrester" avail="3" price="10000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
     	<usage mode="IMPLANTED" value="0.3"/>
       	<flags><flag>AUGMENTATION</flag></flags>
@@ -134,28 +130,28 @@
       	<attrdef id="PRICE" value="$RATING*7500"/>
       	<flags><flag>AUGMENTATION</flag></flags>
     	<modifications>
-    		<valmod type="SKILL" ref="ahtletics" value="$RATING" />
+    		<valmod type="SKILL" ref="athletics" value="$RATING" />
     	</modifications>
    	</item>
 	<item id="replacement_limb_type0" type="BIOWARE" subtype="BIOWARE_STANDARD" reqVariant="true">
       	<flags><flag>AUGMENTATION</flag></flags>
     	<variant id="finger_toe">
-    		<usage mode="IMPLAMTED" value="0.01"/>
+    		<usage mode="IMPLANTED" value="0.01"/>
       		<attrdef id="PRICE" value="1000"/>
       		<attrdef id="AVAILABILITY" value="1"/>
     	</variant>
     	<variant id="hand_foot">
-    		<usage mode="IMPLAMTED" value="0.05"/>
+    		<usage mode="IMPLANTED" value="0.05"/>
       		<attrdef id="PRICE" value="10000"/>
       		<attrdef id="AVAILABILITY" value="2"/>
     	</variant>
     	<variant id="partial_arm_leg">
-    		<usage mode="IMPLAMTED" value="0.1"/>
+    		<usage mode="IMPLANTED" value="0.1"/>
       		<attrdef id="PRICE" value="20000"/>
       		<attrdef id="AVAILABILITY" value="3"/>
     	</variant>
     	<variant id="full_arm_leg">
-    		<usage mode="IMPLAMTED" value="0.15"/>
+    		<usage mode="IMPLANTED" value="0.15"/>
       		<attrdef id="PRICE" value="40000"/>
       		<attrdef id="AVAILABILITY" value="4"/>
     	</variant>
@@ -164,7 +160,7 @@
     	<usage mode="IMPLANTED" value="0.3"/>
       	<flags><flag>AUGMENTATION</flag></flags>
     	<modifications>
-    		<checkmod type="SKILL" ref="ahtletics" value="1" what="HIT" cond="y"/>
+    		<checkmod type="SKILL" ref="athletics" value="1" what="HIT" cond="y"/>
     	</modifications>
    	</item>
 	<item id="spinal_realignment" avail="2" price="4000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
@@ -177,21 +173,21 @@
     		<usage mode="IMPLANTED" value="0.1"/>
       		<attrdef id="PRICE" value="2500"/>
     		<modifications>
-    			<checkmod type="SKILL" ref="ahtletics" value="1" what="EDGE_TEST_ONLY" cond="y"/>
+    			<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
     		</modifications>
     	</variant>
     	<variant id="paddle">
     		<usage mode="IMPLANTED" value="0.1"/>
       		<attrdef id="PRICE" value="2500"/>
     		<modifications>
-    			<checkmod type="SKILL" ref="ahtletics" value="1" what="EDGE_TEST_ONLY" cond="y"/>
+    			<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
     		</modifications>
     	</variant>
     	<variant id="prehensile">
     		<usage mode="IMPLANTED" value="0.25"/>
       		<attrdef id="PRICE" value="5000"/>
     		<modifications>
-    			<checkmod type="SKILL" ref="ahtletics" value="1" what="EDGE_TEST_ONLY" cond="y"/>
+    			<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
     		</modifications>
     	</variant>
     	<variant id="thagomizer">
@@ -206,7 +202,7 @@
       		<attrdef id="PRICE" value="9000"/>
  			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
       			<weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
-   			</alternate>      		
+   			</alternate>
     	</variant>
    	</item>
 	<item id="tailored_critter_pheromones" avail="2" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
@@ -232,21 +228,21 @@
     		<usage mode="IMPLANTED" value="0.1"/>
       		<attrdef id="PRICE" value="5000"/>
     		<modifications>
-    			<checkmod type="SKILL" ref="con" value="1" what="EDGE_TEST_ONLY" cond="y"/>
+    			<checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="y"/>
     		</modifications>
     	</variant>
     	<variant id="range_enhancer">
     		<usage mode="IMPLANTED" value="0.1"/>
       		<attrdef id="PRICE" value="5000"/>
     		<modifications>
-    			<checkmod type="SKILL" ref="con" value="1" what="EDGE_TEST_ONLY" cond="y"/>
+    			<checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="y"/>
     		</modifications>
     	</variant>
     	<variant id="range_extender">
     		<usage mode="IMPLANTED" value="0.2"/>
       		<attrdef id="PRICE" value="7000"/>
     		<modifications>
-    			<checkmod type="SKILL" ref="con" value="1" what="EDGE_TEST_ONLY" cond="y"/>
+    			<checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="y"/>
     		</modifications>
     	</variant>
    	</item>

@@ -71,7 +71,7 @@
 		<skillspec id="spray"/>
 		<skillspec id="laser"/>
 		<skillspec id="emitter"/>
-		<skillspec id="tail"/>
+		<skillspec id="thagomizer"/>
 		<skillspec id="other"/>
     </skill>
     <skill id="firearms"  attr="AGILITY" type="COMBAT" untr="y">

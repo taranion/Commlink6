@@ -28,7 +28,7 @@
    </quality>
    <quality id="catlike"          	  karma="12" pos="true" type="NORMAL" >
      <modifications>
-       <checkmod ref="athletics" type="SKILL" what="BONUS" value="1" apply="CHARACTER"/>
+       <checkmod ref="athletics" type="SKILL" what="EDGE" value="1" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="dermal_deposits"  	  karma="7" pos="true" type="NORMAL" >

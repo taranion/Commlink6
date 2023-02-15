@@ -23,7 +23,7 @@
    <power id="commanding_voice" cost="1.5" hasLevel="true" act="PASSIVE">
       <modifications>
          <relevancemod topic="SOCIAL"/>
-     		<checkmod type="SKILL" ref="influence" value="$LEVEL" what="BONUS" cond="y"  apply="CHARACTER"/>
+     		<checkmod type="SKILL" ref="influence" value="$LEVEL" what="DICE" cond="y"  apply="CHARACTER"/>
       </modifications>
    </power>
    <power id="cool_resolve"  cost="0.25" hasLevel="true" act="PASSIVE">
@@ -133,9 +133,9 @@ a maximum 100 meters. -->
      		<checkmod type="SKILLSPECIALIZATION" ref="stealth/palming" value="1" what="EDGE_COST_MALUS" apply="CHARACTER" cond="y"/>
      		<checkmod type="SKILLSPECIALIZATION" ref="engineering/lockpicking" value="1" what="EDGE_COST_MALUS" apply="CHARACTER" cond="y"/>
      		<checkmod type="SKILLSPECIALIZATION" ref="con/performance" value="1" what="EDGE_COST_MALUS" apply="CHARACTER" cond="y"/>
-     		<checkmod type="SKILLSPECIALIZATION" ref="stealth/palming" value="$LEVEL-1" what="BONUS" apply="CHARACTER" cond="y"/>
-     		<checkmod type="SKILLSPECIALIZATION" ref="engineering/lockpicking" value="$LEVEL-1" what="BONUS" apply="CHARACTER" cond="y"/>
-     		<checkmod type="SKILLSPECIALIZATION" ref="con/performance" value="$LEVEL-1" what="BONUS" apply="CHARACTER" cond="y"/>
+     		<checkmod type="SKILLSPECIALIZATION" ref="stealth/palming" value="$LEVEL-1" what="DICE" apply="CHARACTER" cond="y"/>
+     		<checkmod type="SKILLSPECIALIZATION" ref="engineering/lockpicking" value="$LEVEL-1" what="DICE" apply="CHARACTER" cond="y"/>
+     		<checkmod type="SKILLSPECIALIZATION" ref="con/performance" value="$LEVEL-1" what="DICE" apply="CHARACTER" cond="y"/>
      </modifications>
    </power>
    <power id="pain_relief"     cost="1" act="MAJOR_ACTION" />

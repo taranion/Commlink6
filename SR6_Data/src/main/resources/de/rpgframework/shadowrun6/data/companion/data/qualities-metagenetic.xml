@@ -2,7 +2,7 @@
 <qualities>
    <quality id="pelage_camouflage" karma="4" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
      <modifications>
-       <checkmod ref="stealth" type="SKILL" what="BONUS" value="1"/>
+       <checkmod ref="stealth" type="SKILL" what="DICE" value="1"/>
      </modifications>
    </quality>
    <quality id="insulating_coat" karma="6" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
@@ -15,7 +15,7 @@
        <!-- ToDo: Exotic Weapon (Quills) -->
      </modifications>
    </quality>
-   
+
    <quality id="corrosive_spit" karma="4" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" max="4">
      <modifications>
        <!-- ToDo: Exotic Weapon (Spittle) -->
@@ -56,7 +56,7 @@
      	<!-- CLUSTERFUCK - need a subselection of factors that must be added -->
      </modifications>
    </quality>
-   
+
    <quality id="arcane_arrester" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" max="4">
      <modifications>
        <relevancemod topic="MAGICAL"/>
@@ -114,7 +114,7 @@
      	<!--  ToDo Resist ingested toxins -->
      </modifications>
    </quality>
-   
+
    <quality id="bark" karma="4" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
      <modifications>
 	     <!--valmod type="POOL" ref="DEFENSE_RATING" value="2" set="NATURAL"/-->
@@ -130,12 +130,12 @@
        <choice type="SUBSELECT" ref="variant" uuid="0180ba51-5b30-471d-bdba-5e2482b8440d">
          <subOption id="basic">
 		     <modifications>
-     		    <checkmod ref="stealth" type="SKILL" what="BONUS" value="1"/>
+     		    <checkmod ref="stealth" type="SKILL" what="DICE" value="1"/>
      		  </modifications>
          </subOption>
          <subOption id="dynamic" cost="3">
 		     <modifications>
-     		    <checkmod ref="stealth" type="SKILL" what="BONUS" value="1"/>
+     		    <checkmod ref="stealth" type="SKILL" what="DICE" value="1"/>
      		  </modifications>
          </subOption>
        </choice>
@@ -165,7 +165,7 @@
      	<!--ToDo: Cloth +20%-->
      </modifications>
    </quality>
-   
+
    <quality id="broadened_auditory_spectrum" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES" multi="y">
      <choices>
        <choice type="SUBSELECT" ref="range" uuid="b0121bc0-5074-4157-a6a6-341f61ee5e8d">
@@ -195,8 +195,8 @@
        <checkmod type="SKILL" ref="influence" value="1" what="EDGE"/>
      </modifications>
    </quality>
-   
-   
+
+
    <quality id="degree_sight_360" karma="5" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
      <choices>
        <choice type="SUBSELECT" ref="neurological" uuid="bd1b0a90-eae2-4ef9-ac83-f5f9dcd3f521">
@@ -278,26 +278,26 @@
        <choice type="SUBSELECT" ref="variant" uuid="b237c0da-1eb1-4070-879a-22bc2899c106">
          <subOption id="balance">
     		 <modifications>
-           <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>           
+           <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
      		</modifications>
          </subOption>
          <subOption id="paddle"     cost="2">
     		 <modifications>
-           <checkmod type="SKILL" ref="athletics" value="2" set="NATURAL"/>           
+           <checkmod type="SKILL" ref="athletics" value="2" set="NATURAL"/>
      		</modifications>
          </subOption>
          <subOption id="prehensile" cost="2">
     			<modifications>
-           		<checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>           
+           		<checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
       		</modifications>
          </subOption>
          <subOption id="thagomizer" cost="4">
-           <!-- ToDo Weapon -->      
+           <!-- ToDo Weapon -->
          </subOption>
          <subOption id="whip" cost="4">
      		 <modifications>
-           <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>           
-           <!-- ToDo Weapon -->      
+           <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
+           <!-- ToDo Weapon -->
      		</modifications>
          </subOption>
        </choice>
@@ -351,12 +351,12 @@
      <modifications>
      	<!-- ToDo Movement rate -->
      	<!-- +2 AR in combat when kicking -->
-       <checkmod ref="athletics" type="SKILL" what="BONUS" value="4"/>
+       <checkmod ref="athletics" type="SKILL" what="DICE" value="4"/>
      </modifications>
    </quality>
    <quality id="setae" karma="5" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
      <modifications>
-       <checkmod ref="athletics" type="SKILL" what="BONUS" value="2"/>
+       <checkmod ref="athletics" type="SKILL" what="DICE" value="2"/>
      </modifications>
    </quality>
    <quality id="shiva_arms" karma="5" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE" max="3">
@@ -367,10 +367,10 @@
    </quality>
    <quality id="webbed_digits" karma="4" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
      <modifications>
-       <checkmod ref="athletics" type="SKILL" what="BONUS" value="2"/>
+       <checkmod ref="athletics" type="SKILL" what="DICE" value="2"/>
      </modifications>
    </quality>
-   
+
    <!-- Negative Qualites -->
    <quality id="avian"         karma="4" pos="false" type="METAGENIC" cat="AHD" />
    <quality id="canine_feline" karma="4" pos="false" type="METAGENIC" cat="AHD" />
@@ -456,31 +456,31 @@
    <quality id="poor_healer" karma="8" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS" />
    <quality id="progeria"    karma="10" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS">
      <modifications>
-       <checkmod ref="athletics" type="SKILL" what="BONUS" value="-2"/>
-       <checkmod ref="close_combat" type="SKILL" what="BONUS" value="-2"/>
-       <checkmod ref="exotic_weapons" type="SKILL" what="BONUS" value="-2"/>
-       <checkmod ref="firearms" type="SKILL" what="BONUS" value="-2"/>
-       <checkmod ref="piloting" type="SKILL" what="BONUS" value="-2"/>
-       <checkmod ref="stealth"  type="SKILL" what="BONUS" value="-2"/>
+       <checkmod ref="athletics" type="SKILL" what="DICE" value="-2"/>
+       <checkmod ref="close_combat" type="SKILL" what="DICE" value="-2"/>
+       <checkmod ref="exotic_weapons" type="SKILL" what="DICE" value="-2"/>
+       <checkmod ref="firearms" type="SKILL" what="DICE" value="-2"/>
+       <checkmod ref="piloting" type="SKILL" what="DICE" value="-2"/>
+       <checkmod ref="stealth"  type="SKILL" what="DICE" value="-2"/>
      </modifications>
    </quality>
    <quality id="scent_gland"   karma="4" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS" />
    <quality id="stubby_arms"   karma="10" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS">
      <modifications>
        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING"  value="-1" />
-       <checkmod ref="athletics" type="SKILL" what="BONUS" value="-1"/>
-       <checkmod ref="firearms" type="SKILL" what="BONUS" value="-1"/>
-       <checkmod ref="outdoors" type="SKILL" what="BONUS" value="-1"/>
-       <checkmod ref="stealth" type="SKILL" what="BONUS" value="-1"/>
+       <checkmod ref="athletics" type="SKILL" what="DICE" value="-1"/>
+       <checkmod ref="firearms" type="SKILL" what="DICE" value="-1"/>
+       <checkmod ref="outdoors" type="SKILL" what="DICE" value="-1"/>
+       <checkmod ref="stealth" type="SKILL" what="DICE" value="-1"/>
      </modifications>
    </quality>
-   
+
    <quality id="cold_blooded"  karma="5" pos="false" type="METAGENIC" cat="METAGENIC_THROWBACKS" />
    <quality id="feathers"      karma="5" pos="false" type="METAGENIC" cat="METAGENIC_THROWBACKS" />
    <quality id="hairless"      karma="5" pos="false" type="METAGENIC" cat="METAGENIC_THROWBACKS" >
      <modifications>
-       <checkmod ref="con" type="SKILL" what="BONUS" value="-1" cond="true"/>
-       <checkmod ref="influence" type="SKILL" what="BONUS" value="-1" cond="true" />
+       <checkmod ref="con" type="SKILL" what="DICE" value="-1" cond="true"/>
+       <checkmod ref="influence" type="SKILL" what="DICE" value="-1" cond="true" />
      </modifications>
    </quality>
    <quality id="insectoid_features" karma="6" pos="false" type="METAGENIC" cat="METAGENIC_THROWBACKS" >
@@ -495,6 +495,6 @@
    <quality id="berserker"  karma="8" pos="false" type="METAGENIC" cat="NEUROPATHIC_ADJUSTED_STATES" />
    <quality id="neuralgia"  karma="6" pos="false" type="METAGENIC" cat="NEUROPATHIC_ADJUSTED_STATES" />
    <quality id="nocturnal"  karma="8" pos="false" type="METAGENIC" cat="NEUROPATHIC_ADJUSTED_STATES" />
-   
-   
+
+
 </qualities>

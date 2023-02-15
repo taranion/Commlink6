@@ -9,7 +9,7 @@ import de.rpgframework.genericrpg.data.CheckInfluence;
 public enum ShadowrunCheckInfluence implements CheckInfluence {
 
 	/** Bonus added to result roll */
-	BONUS,
+	HIT,
 	DICE,
 	REDUCE_THRESHOLD,
 	/** Edge gained by a test */
@@ -27,5 +27,5 @@ public enum ShadowrunCheckInfluence implements CheckInfluence {
 	NOT_EARN_EDGE,
 	NOT_SPEND_EDGE,
 	OTHER
-	
+
 }
