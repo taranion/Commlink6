@@ -33,8 +33,8 @@
    </power>
    <power id="cosmetic_control" cost="1" hasLevel="true" max="2" act="MAJOR_ACTION">
      <modifications>
-     		<checkmod type="SKILL" ref="con" value="1" what="EDGE_COST_MALUS" apply="CHARACTER"/>
-     		<checkmod type="SKILL" ref="influence" value="1" what="EDGE_COST_MALUS" cond="y"  apply="CHARACTER"/>
+     		<checkmod type="SKILL" ref="con" value="$LEVEL" what="EDGE_COST_MALUS" apply="CHARACTER"/>
+     		<checkmod type="SKILL" ref="influence" value="$LEVEL" what="EDGE_COST_MALUS" cond="y"  apply="CHARACTER"/>
      </modifications>
    </power>
    <power id="countermagic" cost="0.5" hasLevel="true" act="MINOR_ACTION">S

@@ -43,15 +43,14 @@ public class GetModificationsFromPowers implements ProcessingStep {
 				AdeptPower power = ref.getModifyable();
 				logger.log(Level.DEBUG, "add from power "+power.getId()+" / "+ref+" / dec="+ref.getDecisions());
 				logger.log(Level.DEBUG, "ToDo: "+power.getModifications());
-				System.err.println("GetModificationsFromPowers: "+power.getModifications()+"  value="+ref.getModifiedValue());
 				// Calculate modifications
 				ref.clearModifications();
 
 				int multiplier = ref.getModifiedValue(); //(ref.getModifyable().getMaxLevel()>1)?ref.getModifiedValue():1;
-				if (multiplier==0) {
-					logger.log(Level.WARNING,"Strange! Found AdeptPower with value 0 that should have at least 1 - ignore it: "+ref);
-//					continue;
-				}
+//				if (multiplier==0) {
+//					logger.log(Level.WARNING,"Strange! Found AdeptPower {0} with value 0 that should have at least 1 - ignore it: "+ref, ref.getKey());
+////					continue;
+//				}
 				for (Modification mod : power.getModifications()) {
 					try {
 						Modification realMod = Shadowrun6Tools.instantiateModification(mod, ref, multiplier, model);

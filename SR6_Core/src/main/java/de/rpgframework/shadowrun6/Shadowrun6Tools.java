@@ -913,23 +913,28 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, int multiplier, Shadowrun6Character model) {
-		logger.log(Level.WARNING, "instantiate {0} with multiplier {1}",tmp,multiplier);
+		logger.log(Level.DEBUG, "instantiate {0} with multiplier {1}",tmp,multiplier);
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
-			int modVal = clone.getValue();
-//			int modVal = (clone.getRawValue().equals("$LEVEL"))?value.getDistributed():clone.getValue();
-//			if (clone.getRawValue().equals("$LEVEL")) {
-//				logger.log(Level.WARNING, "Replaced $LEVEL with {0}",modVal);
-//			}
-
-			if (clone.getLookupTable()!=null) {
-				if (modVal>clone.getLookupTable().length) {
-					logger.log(Level.ERROR, "Modification {0}, multiplier {1} is outside table", tmp, multiplier);
+			int modVal = 0;
+			if (clone.hasFormula()) {
+				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
+				logger.log(Level.WARNING, "  model =  "+model);
+				logger.log(Level.WARNING, "  data item value =  "+value);
+				String resolved = FormulaTool.resolve(clone.getReferenceType(), clone.getFormula(), new VariableResolver(value, model));
+				logger.log(Level.WARNING, "  resolved  "+resolved);
+				modVal = Integer.parseInt(resolved);
+			} else {
+				modVal = clone.getValue();
+				if (clone.getLookupTable()!=null) {
+					if (modVal>clone.getLookupTable().length) {
+						logger.log(Level.ERROR, "Modification {0}, multiplier {1} is outside table", tmp, multiplier);
+					}
+					clone.setValue( clone.getLookupTable()[modVal-1] );
+					clone.setLookupTable(null);
+				} else if (multiplier>1) {
+					clone.setValue( modVal*multiplier );
 				}
-				clone.setValue( clone.getLookupTable()[modVal-1] );
-				clone.setLookupTable(null);
-			} else if (multiplier>1) {
-				clone.setValue( modVal*multiplier );
 			}
 			if ("CHOICE".equals( clone.getKey() )) {
 				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
