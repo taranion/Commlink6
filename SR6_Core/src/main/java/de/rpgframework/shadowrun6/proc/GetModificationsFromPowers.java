@@ -47,20 +47,6 @@ public class GetModificationsFromPowers implements ProcessingStep {
 				// Calculate modifications
 				ref.clearModifications();
 
-//				if (power.getChoices().isEmpty()) {
-//					logger.log(Level.INFO, " - "+ref.getModifyable().getId()+" has modifications: "+ref.getModifications());
-//					for (Modification mod : power.getModifications()) {
-//						mod.setSource(ref.getModifyable());
-//					}
-//					logger.log(Level.DEBUG, " - add modifications: "+ref.getModifications());
-//					unprocessed.addAll(ref.getModifications());
-//					continue;
-//				}
-
-//				if (power.needsChoice() && ref.getChoice()==null) {
-//					ref.setChoice(ShadowrunTools.resolveChoiceType(power.getSelectFrom(), ref.getChoiceReference(), model));
-//					logger.log(Level.DEBUG, "resolve "+power.getSelectFrom()+" '"+ref.getChoiceReference()+"' to "+ref.getChoice());
-//				}
 				int multiplier = ref.getModifiedValue(); //(ref.getModifyable().getMaxLevel()>1)?ref.getModifiedValue():1;
 				if (multiplier==0) {
 					logger.log(Level.WARNING,"Strange! Found AdeptPower with value 0 that should have at least 1 - ignore it: "+ref);
@@ -69,7 +55,7 @@ public class GetModificationsFromPowers implements ProcessingStep {
 				for (Modification mod : power.getModifications()) {
 					try {
 						Modification realMod = Shadowrun6Tools.instantiateModification(mod, ref, multiplier, model);
-						logger.log(Level.DEBUG, " add "+realMod);
+						logger.log(Level.DEBUG, " instantiated "+realMod);
 						if (ref.getModifyable().getActivation()!=Activation.PASSIVE) {
 //							if (realMod instanceof DataItemModification)
 //								((DataItemModification)realMod).setConditional(true);
