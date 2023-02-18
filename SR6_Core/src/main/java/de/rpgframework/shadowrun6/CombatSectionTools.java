@@ -59,9 +59,9 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTablePhysical(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable(
+				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
 				SR6ItemAttribute.ATTACK_RATING.getShortName(loc),
-				SR6ItemAttribute.DAMAGE.getShortName(loc),
-				Shadowrun6Core.getI18nResources().getString("label.pool", loc)
+				SR6ItemAttribute.DAMAGE.getShortName(loc)
 				);
 
 		/* Unarmed */
@@ -100,7 +100,11 @@ public class CombatSectionTools {
 	}
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTableAstral(Shadowrun6Character model, Locale loc) {
-		AttackTable ret = new AttackTable();
+		AttackTable ret = new AttackTable(
+				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
+				SR6ItemAttribute.DAMAGE.getShortName(loc),
+				null
+				);
 
 		SR6Skill skill = Shadowrun6Core.getSkill("astral");
 		Pool<Integer> pool = Shadowrun6Tools.getSkillPool(model, skill, ShadowrunAttribute.WILLPOWER, "astral_combat");
@@ -177,7 +181,11 @@ public class CombatSectionTools {
 	}
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTableMatrix(Shadowrun6Character model, Locale loc) {
-		AttackTable ret = new AttackTable();
+		AttackTable ret = new AttackTable(
+				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
+				SR6ItemAttribute.DAMAGE.getShortName(loc),
+				null
+				);
 
 		SR6Skill skill = Shadowrun6Core.getSkill("cracking");
 		Pool<Integer> cracking = Shadowrun6Tools.getSkillPool(model, skill, "cybercombat");
@@ -216,14 +224,14 @@ public class CombatSectionTools {
 	/**
 	 * Get modifications for the attack table
 	 */
-	public static List<AttackEntry> getAttackModifiers(Shadowrun6Character model, Locale loc, WorldType type) {
+	public static AttackTable getAttackModifiers(Shadowrun6Character model, Locale loc, WorldType type) {
 		switch (type) {
 		case PHYSICAL : return getAttackModifiersPhysical(model,loc);
 		case ASTRAL   : return getAttackModifiersAstral(model,loc);
 		case MATRIX   : return getAttackModifiersMatrix(model,loc);
 		case MATRIX_UV: return getAttackModifiersMatrixUV(model,loc);
 		}
-		return new ArrayList<>();
+		return new AttackTable();
 
 	}
 	//-------------------------------------------------------------------
@@ -255,17 +263,21 @@ public class CombatSectionTools {
 		return ret;
 	}
 	//-------------------------------------------------------------------
-	private  static List<AttackEntry> getAttackModifiersAstral(Shadowrun6Character model, Locale loc) {
-		AttackTable ret = new AttackTable("Drain","Dmg","Area");
+	private  static AttackTable getAttackModifiersAstral(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable(
+				Shadowrun6Core.getI18nResources().getString("label.drain.short", loc),
+				Shadowrun6Core.getI18nResources().getString("label.area.short", loc),
+				Shadowrun6Core.getI18nResources().getString("label.damage.short", loc)
+				);
 		// Semi Automatic
-		AttackEntry entry = new AttackEntry("Amp Up");
+		AttackEntry entry = new AttackEntry(Shadowrun6Core.getI18nResources().getString("label.spell.amp_up", loc));
 		entry.setCol1("+2");
-		entry.setCol2("+1");
+		entry.setCol3("+1");
 		ret.add(entry);
 		// Burst fire (narrow)
-		entry = new AttackEntry("Increase Area");
+		entry = new AttackEntry(Shadowrun6Core.getI18nResources().getString("label.spell.increase_area", loc));
 		entry.setCol1("+1");
-		entry.setCol3("+2m");
+		entry.setCol2("+2m");
 		ret.add(entry);
 		return ret;
 	}

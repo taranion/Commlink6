@@ -14,6 +14,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.AttackEntry;
 import de.rpgframework.shadowrun6.CombatSectionTools;
+import de.rpgframework.shadowrun6.CombatSectionTools.AttackTable;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -33,6 +34,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
@@ -52,7 +54,7 @@ public class CombatSection extends Section {
 	private Label lbDevMon, lbStnMon, lbPhyMon;
 	private Label lbIni, lbIniVR;
 
-	private GridPane gridAttackHead;
+//	private GridPane gridAttackHead;
 	private GridPane gridAttack, gridDefense;
 	private GridPane gridAttackMod, gridDefenseMod;
 
@@ -109,25 +111,27 @@ public class CombatSection extends Section {
 		ivSilhoette.setPreserveRatio(true);
 
 		// Attack column
-		gridAttackHead = new GridPane();
-		gridAttackHead.setVgap(5); gridAttackHead.setHgap(10);
-		Label hdPool = new Label(ResourceI18N.get(RES, "section.combat.pool"));
-		Label hdAR   = new Label(ResourceI18N.get(RES, "section.combat.ar"));
-		Label hdDV   = new Label(SR6ItemAttribute.DAMAGE.getShortName());
-		gridAttackHead.add(hdPool , 1, 0);
-		gridAttackHead.add(hdAR , 2, 0);
-		gridAttackHead.add(hdDV , 3, 0);
+//		gridAttackHead = new GridPane();
+//		gridAttackHead.setVgap(5); gridAttackHead.setHgap(10);
+//		Label hdPool = new Label(ResourceI18N.get(RES, "section.combat.pool"));
+//		Label hdAR   = new Label(ResourceI18N.get(RES, "section.combat.ar"));
+//		Label hdDV   = new Label(SR6ItemAttribute.DAMAGE.getShortName());
+//		gridAttackHead.add(hdPool , 1, 0);
+//		gridAttackHead.add(hdAR , 2, 0);
+//		gridAttackHead.add(hdDV , 3, 0);
 
 		Label hdAttacks = new Label(ResourceI18N.get(RES, "section.combat.attacks")); hdAttacks.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		hdAttacks.setStyle("-fx-border-width: 0 0 1 0; -fx-border-color: light");
 		gridAttack = new GridPane();
 		gridAttack.setVgap(5); gridAttack.setHgap(10);
 		Label hdAttackMods = new Label(ResourceI18N.get(RES, "section.combat.attackmods")); hdAttackMods.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		hdAttackMods.setStyle("-fx-border-width: 0 0 1 0; -fx-border-color: light");
 		gridAttackMod = new GridPane();
 		gridAttackMod.setVgap(5); gridAttackMod.setHgap(10);
 
-		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(120));
-		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(30));
-		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(30));
+//		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(120));
+//		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(30));
+//		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(30));
 		gridAttack.getColumnConstraints().add(new ColumnConstraints(120));
 		gridAttack.getColumnConstraints().add(new ColumnConstraints(30));
 		gridAttack.getColumnConstraints().add(new ColumnConstraints(30));
@@ -135,9 +139,14 @@ public class CombatSection extends Section {
 		gridAttackMod.getColumnConstraints().add(new ColumnConstraints(30));
 		gridAttackMod.getColumnConstraints().add(new ColumnConstraints(30));
 
-		VBox colAttack = new VBox(0, lbAttackRating, gridAttackHead, hdAttacks, gridAttack, hdAttackMods, gridAttackMod);
+		hdAttacks.setMaxWidth(Double.MAX_VALUE);
+		hdAttackMods.setMaxWidth(Double.MAX_VALUE);
+//		VBox colAttack = new VBox(0, lbAttackRating, gridAttackHead, hdAttacks, gridAttack, hdAttackMods, gridAttackMod);
+		VBox colAttack = new VBox(0, lbAttackRating, hdAttacks, gridAttack, hdAttackMods, gridAttackMod);
 		colAttack.setAlignment(Pos.TOP_LEFT);
-		VBox.setMargin(gridAttackHead, new Insets(10, 0, 0, 0));
+		VBox.setVgrow(hdAttacks, Priority.ALWAYS);
+		VBox.setVgrow(hdAttackMods, Priority.ALWAYS);
+//		VBox.setMargin(gridAttackHead, new Insets(10, 0, 0, 0));
 		VBox.setMargin(hdAttackMods, new Insets(5, 0, 0, 0));
 
 		// Defense column
@@ -198,14 +207,14 @@ public class CombatSection extends Section {
 		colAttack.getChildren().add(1, gridIni);
 
 		// Re-Do heading
-		gridAttackHead.getChildren().clear();
-		Label hdPool = new Label(ResourceI18N.get(RES, "section.combat.pool"));
-		Label hdDV   = new Label(SR6ItemAttribute.DAMAGE.getShortName());
-		gridAttackHead.add(hdPool , 1, 0);
-		gridAttackHead.add(hdDV , 2, 0);
-		gridAttackHead.getColumnConstraints().clear();
-		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(120));
-		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(30));
+//		gridAttackHead.getChildren().clear();
+//		Label hdPool = new Label(ResourceI18N.get(RES, "section.combat.pool"));
+//		Label hdDV   = new Label(SR6ItemAttribute.DAMAGE.getShortName());
+//		gridAttackHead.add(hdPool , 1, 0);
+//		gridAttackHead.add(hdDV , 2, 0);
+//		gridAttackHead.getColumnConstraints().clear();
+//		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(120));
+//		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(30));
 
 		// Defense
 		Label hdDefensePool = new Label(ShadowrunAttribute.DEFENSE_POOL_MATRIX.getName());
@@ -268,10 +277,21 @@ public class CombatSection extends Section {
 	}
 
 	//-------------------------------------------------------------------
-	private void fillAttackTable(GridPane table, List<AttackEntry> list, boolean withAttackRating) {
+	private void fillAttackTable(GridPane table, AttackTable attTable, boolean withAttackRating) {
 		int count=0;
-		for (AttackEntry weapon : list) {
+		if (attTable.col1Name!=null) {
+			Label hd1 = new Label(attTable.col1Name);
+			Label hd2 = new Label(attTable.col2Name);
+			Label hd3 = new Label(attTable.col3Name);
+			hd1.setStyle("-fx-font-size: small");
+			hd2.setStyle("-fx-font-size: small");
+			hd3.setStyle("-fx-font-size: small");
+			table.add(hd1 , 1, 0);
+			table.add(hd2 , 2, 0);
+			table.add(hd3 , 3, 0);
 			count++;
+		}
+		for (AttackEntry weapon : attTable) {
 			if (count==6) break;
 			Label hdName = new Label(weapon.getName());
 			//hdName.setStyle("-fx-max-width: 8em");
@@ -288,6 +308,7 @@ public class CombatSection extends Section {
 			} else {
 				table.add(new Label( weapon.getCol3()) , 2, count);
 			}
+			count++;
 		}
 	}
 
@@ -313,13 +334,14 @@ public class CombatSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void showAstral(Shadowrun6Character model) {
+
 		setLabelValue(lbAttackRating, model, ShadowrunAttribute.ATTACK_RATING_ASTRAL);
 		setLabelValue(lbDefenseRating, model, ShadowrunAttribute.DEFENSE_RATING_ASTRAL);
 
 		// Initiative
 		setLabelValue(lbIni, model, ShadowrunAttribute.INITIATIVE_ASTRAL, ShadowrunAttribute.INITIATIVE_DICE_ASTRAL);
 
-		fillAttackTable(gridAttack, CombatSectionTools.getAttackTable(model, Locale.getDefault(), WorldType.ASTRAL), true);
+		fillAttackTable(gridAttack   , CombatSectionTools.getAttackTable(model, Locale.getDefault(), WorldType.ASTRAL), true);
 		fillAttackTable(gridAttackMod, CombatSectionTools.getAttackModifiers(model, Locale.getDefault(), WorldType.ASTRAL), true);
 	}
 
