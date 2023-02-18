@@ -247,6 +247,14 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.setDistributed(1); // Base value without modifiers
 		logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
 		logger.log(Level.DEBUG, " INI Physical D6  = "+val.getModifiedValue());
+
+		// Minor actions
+		AttributeValue<ShadowrunAttribute> val2 = model.getAttribute(ShadowrunAttribute.MINOR_ACTION);
+		val2.setDistributed(1);
+		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL.name(), val.getModifiedValue(), ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL);
+		valMod.setSet(ValueType.NATURAL);
+		val2.addModification( valMod );
+		logger.log(Level.DEBUG, "              = "+val2.getDisplayString()+"   "+val2.getModifications());
 	}
 
 	//-------------------------------------------------------------------
