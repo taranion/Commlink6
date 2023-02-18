@@ -32,8 +32,8 @@ public class CombatSectionTools {
 		public String col1Name, col2Name, col3Name;
 		public AttackTable(String c1, String c2, String c3) {
 			this.col1Name = c1;
-			this.col1Name = c2;
-			this.col1Name = c3;
+			this.col2Name = c2;
+			this.col3Name = c3;
 		}
 		public AttackTable() {
 		}
