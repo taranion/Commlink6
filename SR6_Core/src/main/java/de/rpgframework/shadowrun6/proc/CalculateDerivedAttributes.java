@@ -109,21 +109,10 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			val = model.getAttribute(ShadowrunAttribute.RESIST_DRAIN);
 			val.setDistributed(0);
 			if (model.getTradition()!=null) {
-				addNaturalModifier(val, model.getTradition().getDrainAttribute1());
+				addNaturalModifier(val, model.getTradition().getTraditionAttribute());
 				addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
 			}
-			logger.log(Level.DEBUG, " Defensive pool (Drain) = "+val.getModifiedValue());
-
-//			/*
-//			 * Dodge
-//			 */
-//			val = model.getAttribute(ShadowrunAttribute.DODGE);
-//			val.setDistributed(0);
-//			val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.DODGE, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue(), ModificationType.RELATIVE, Attribute.REACTION));
-//			val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.DODGE, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
-//			if (model.getSkillValue(ShadowrunCore.getSkill("athletics"))!=null)
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.DODGE, model.getSkillValue(ShadowrunCore.getSkill("athletics")).getModifiedValue(), ModificationType.RELATIVE, ShadowrunCore.getSkill("athletics")));
-//			logger.log(Level.DEBUG, " Dodge = "+val.getModifiedValue());
+			logger.log(Level.DEBUG, " Resist Drain = "+val.getModifiedValue());
 
 			/*
 			 * Composure
