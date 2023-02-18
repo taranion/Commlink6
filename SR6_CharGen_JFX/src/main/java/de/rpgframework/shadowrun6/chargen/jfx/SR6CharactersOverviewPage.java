@@ -8,6 +8,7 @@ import java.lang.System.Logger.Level;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.Attachment;
@@ -23,6 +24,7 @@ import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.jfx.CharacterHandleBox;
+import de.rpgframework.jfx.pages.CharacterExportPluginConfigPane;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
 import de.rpgframework.jfx.pages.CharactersOverviewPage;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -45,6 +47,7 @@ import javafx.scene.image.Image;
 public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 
 	private final static Logger logger = System.getLogger(SR6CharactersOverviewPage.class.getPackageName());
+	protected final static ResourceBundle RES6 = ResourceBundle.getBundle(SR6CharactersOverviewPage.class.getName());
 
 
 	//-------------------------------------------------------------------
@@ -228,5 +231,18 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		System.err.println("SR6CharactersOverviewPage: "+charac.getName()+" with "+charac.getAttribute(ShadowrunAttribute.ESSENCE));
 		super.exportClicked(handle);
 	}
+
+	//-------------------------------------------------------------------
+	public boolean needsCreationModeWarning(CharacterHandle charac) {
+		Shadowrun6Character model = (Shadowrun6Character) charac.getCharacter();
+		if (model.isInCareerMode()) return false;
+
+		return "prio".equals(model.getCharGenUsed());
+	}
+
+	//-------------------------------------------------------------------
+//	public String getCreationModeWarning(CharacterHandle charac) {
+//		return ResourceI18N.get(CharacterExportPluginConfigPane.RES, "dialog.exportcreationmodewarning.message");
+//	}
 
 }
