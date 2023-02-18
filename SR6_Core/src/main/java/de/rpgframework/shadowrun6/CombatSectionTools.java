@@ -30,6 +30,7 @@ public class CombatSectionTools {
 
 	public static class AttackTable extends ArrayList<AttackEntry> {
 		public String col1Name, col2Name, col3Name;
+		public int numColumns=3;
 		public AttackTable(String c1, String c2, String c3) {
 			this.col1Name = c1;
 			this.col2Name = c2;
@@ -195,7 +196,7 @@ public class CombatSectionTools {
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "tarpit").getName(loc));
 		entry.setCol1(cracking.toString());
 		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol3("1");
+		entry.setCol3("1*");
 		ret.add(entry);
 
 		/* IC Slicer */
@@ -237,7 +238,7 @@ public class CombatSectionTools {
 		entry.setCol3("+1");
 		ret.add(entry);
 		// Burst fire (narrow)
-		entry = new AttackEntry(FireMode.BURST_FIRE.getName(loc)+" (narrow)");
+		entry = new AttackEntry(FireMode.BURST_FIRE.getName(loc)+" "+Shadowrun6Core.getI18nResources().getString("label.burstfire.narrow", loc));
 		entry.setCol2("-4");
 		entry.setCol3("+2");
 		ret.add(entry);
