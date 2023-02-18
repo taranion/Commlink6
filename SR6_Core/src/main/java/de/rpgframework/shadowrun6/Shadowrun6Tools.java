@@ -913,17 +913,23 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, int multiplier, Shadowrun6Character model) {
-		logger.log(Level.WARNING, "instantiate "+tmp);
+		logger.log(Level.WARNING, "instantiate {0} with multiplier {1}",tmp,multiplier);
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
+			int modVal = clone.getValue();
+//			int modVal = (clone.getRawValue().equals("$LEVEL"))?value.getDistributed():clone.getValue();
+//			if (clone.getRawValue().equals("$LEVEL")) {
+//				logger.log(Level.WARNING, "Replaced $LEVEL with {0}",modVal);
+//			}
+
 			if (clone.getLookupTable()!=null) {
-				if (clone.getValue()>clone.getLookupTable().length) {
+				if (modVal>clone.getLookupTable().length) {
 					logger.log(Level.ERROR, "Modification {0}, multiplier {1} is outside table", tmp, multiplier);
 				}
-				clone.setValue( clone.getLookupTable()[clone.getValue()-1] );
+				clone.setValue( clone.getLookupTable()[modVal-1] );
 				clone.setLookupTable(null);
 			} else if (multiplier>1) {
-				clone.setValue( clone.getValue()*multiplier );
+				clone.setValue( modVal*multiplier );
 			}
 			if ("CHOICE".equals( clone.getKey() )) {
 				UUID uuid =  ((ValueModification) tmp).getConnectedChoice();
@@ -1065,6 +1071,7 @@ public class Shadowrun6Tools {
 	 * @param special IDs of specializations to use (only use highest)
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	private static Pool<Integer> getSkillPoolCalculationWithoutAttribute(Shadowrun6Character model, SR6Skill skill, String...special) {
 		Pool<Integer> ret = new Pool<Integer>();
 
@@ -1080,6 +1087,7 @@ public class Shadowrun6Tools {
 				ret.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(-1, RES.format("explain.untrained_skill", skill.getName())));
 			}
 		} else {
+			ret = (Pool<Integer>) sVal.getPool().clone();
 			ret.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(sVal.getDistributed(), Shadowrun6Core.getI18nResources().format( "explain.skillpoints", skill.getName())));
 //			if (sVal.getAlternativePoints()>sVal.getDistributed()) {
 //				ret.clear();
@@ -1104,28 +1112,7 @@ public class Shadowrun6Tools {
 			}
 
 			// Now specializations
-//			// DE: No +2 for skill specializations
-//			if (skill.getId().equals("exotic_weapons") && Locale.getDefault().getLanguage().equals("de")) {
-//				logger.debug("DE players don't get boni from exotic weapon specializations");
-//			} else {
-				SkillSpecializationValue bestSpec = null;
-				for (SkillSpecializationValue spec : sVal.getSpecializations()) {
-					// Test if specializ. matches requested specs
-					if (!Arrays.asList(special).contains(spec.getResolved().getId()))
-						continue;
-					//if (bestSpec == null || spec.isExpertise())
-						bestSpec = spec;
-				}
-//				if (bestSpec != null && !skill.getId().contains("exotic")) {
-//					if (bestSpec.isExpertise()) {
-//						ret.addStep(ValueType.NATURAL, new PoolCalculation(3,
-//								ResourceI18N.format(CORE, "explain.expertise", bestSpec.getSpecial().getName())));
-//					} else {
-//						ret.addStep(ValueType.NATURAL, new PoolCalculation(2,
-//								Resource.format(CORE, "explain.specialization", bestSpec.getSpecial().getName())));
-//					}
-//				}
-//			}
+			addSpecialization(ret, sVal, special);
 		}
 
 		return ret;
@@ -1144,14 +1131,42 @@ public class Shadowrun6Tools {
 	 * @return
 	 */
 	public static Pool<Integer> getSkillPool(Shadowrun6Character model, SR6Skill skill, ShadowrunAttribute useAttrib, String...special) {
-		Pool<Integer> ret = new Pool<Integer>();
-		ret.addAll(getSkillPoolCalculationWithoutAttribute(model, skill, special));
+		SR6SkillValue     sVal = model.getSkillValue(skill);
+		if (sVal!=null) {
+			Pool<Integer> ret = (Pool<Integer>) sVal.getPool().clone();
+			addSpecialization(ret, sVal, special);
+			return ret;
+		}
+
+		Pool<Integer> ret = getSkillPoolCalculationWithoutAttribute(model, skill, special);
 		// Add the attribute
 		if (useAttrib!=null) {
 			ret.addAll(getAttributePoolCalculation(model, useAttrib));
 		}
 
 		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private static void addSpecialization(Pool<Integer> ret, SR6SkillValue sVal, String...special) {
+		SkillSpecializationValue bestSpec = null;
+		for (SkillSpecializationValue spec : sVal.getSpecializations()) {
+			// Test if specializ. matches requested specs
+			if (!Arrays.asList(special).contains(spec.getResolved().getId()))
+				continue;
+			//if (bestSpec == null || spec.isExpertise())
+				bestSpec = spec;
+		}
+		if (bestSpec != null && !sVal.getSkill().getId().contains("exotic")) {
+			if (bestSpec.getDistributed()==2) {
+				ret.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(3,
+						RES.format("explain.expertise", bestSpec.getResolved().getName())));
+			} else {
+				ret.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(2,
+						RES.format("explain.specialization", bestSpec.getResolved().getName())));
+			}
+		}
+
 	}
 
 //	//--------------------------------------------------------------------
