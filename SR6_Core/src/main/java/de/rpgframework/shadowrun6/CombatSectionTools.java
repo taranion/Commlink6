@@ -142,7 +142,7 @@ public class CombatSectionTools {
 				entry = new AttackEntry(weapon.getNameWithoutRating(loc));
 				ret.add(entry);
 				// Col1: Pool
-				entry.setCol1( String.valueOf(Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).getValue(ValueType.AUGMENTED)) );
+				entry.setCol1( String.valueOf(Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).getValue(ValueType.NATURAL)) );
 				entry.setCol1Tooltip( Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).toExplainString() );
 				// Col2: AR
 				int[] ar = (int[])weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
@@ -163,8 +163,8 @@ public class CombatSectionTools {
 	private  static AttackTable getAttackTableAstral(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable(
 				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
-				SR6ItemAttribute.DAMAGE.getShortName(loc),
-				null
+				Shadowrun6Core.getI18nResources().getString("label.ar", loc),
+				SR6ItemAttribute.DAMAGE.getShortName(loc)
 				);
 
 		SR6Skill skill = Shadowrun6Core.getSkill("astral");
@@ -448,14 +448,14 @@ public class CombatSectionTools {
 		// Block / Blocken
 		SR6Skill skill = Shadowrun6Core.getSkill("close_combat");
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "block").getName(loc));
-		pool = Shadowrun6Tools.getSkillPool(model, skill);
+		pool = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, skill);
 		entry.setCol1( "+"+pool.toString() );
 		entry.setCol1Tooltip( pool.toExplainString() );
 		ret.add(entry);
 		// Dodge / Ausweichen
 		skill = Shadowrun6Core.getSkill("athletics");
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "dodge").getName(loc));
-		pool = Shadowrun6Tools.getSkillPool(model, skill);
+		pool = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, skill);
 		entry.setCol1( "+"+pool.toString() );
 		entry.setCol1Tooltip( pool.toExplainString() );
 		ret.add(entry);
@@ -530,11 +530,21 @@ public class CombatSectionTools {
 		entry.setCol1Tooltip( pool.toExplainString() );
 		ret.add(entry);
 		// RESIST_DRAIN
-		entry = new AttackEntry(ShadowrunAttribute.RESIST_DRAIN.getShortName(loc));
-		pool = model.getAttribute(ShadowrunAttribute.RESIST_DRAIN).getPool();
-		entry.setCol1( pool.toString() );
-		entry.setCol1Tooltip( pool.toExplainString() );
-		ret.add(entry);
+		if (model.getMagicOrResonanceType().usesSpells()) {
+			entry = new AttackEntry(ShadowrunAttribute.RESIST_DRAIN.getShortName(loc));
+			pool = model.getAttribute(ShadowrunAttribute.RESIST_DRAIN).getPool();
+			entry.setCol1( pool.toString() );
+			entry.setCol1Tooltip( pool.toExplainString() );
+			ret.add(entry);
+		}
+		// RESIST_DRAIN_ADEPT
+		if (model.getMagicOrResonanceType().usesPowers()) {
+			entry = new AttackEntry(ShadowrunAttribute.RESIST_DRAIN_ADEPT.getShortName(loc));
+			pool = model.getAttribute(ShadowrunAttribute.RESIST_DRAIN_ADEPT).getPool();
+			entry.setCol1( pool.toString() );
+			entry.setCol1Tooltip( pool.toExplainString() );
+			ret.add(entry);
+		}
 
 		return ret;
 	}

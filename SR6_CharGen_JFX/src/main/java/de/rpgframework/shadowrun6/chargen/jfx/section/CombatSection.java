@@ -106,6 +106,7 @@ public class CombatSection extends Section {
 		setContent(upper);
 	}
 
+	//-------------------------------------------------------------------
 	private VBox initAttackColumnLayout() {
 		gridIni = new GridPane();
 		gridIni.setVgap(5); gridIni.setHgap(10);
@@ -119,9 +120,6 @@ public class CombatSection extends Section {
 		gridAttackMod = new GridPane();
 		gridAttackMod.setVgap(5); gridAttackMod.setHgap(10);
 
-//		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(120));
-//		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(30));
-//		gridAttackHead.getColumnConstraints().add(new ColumnConstraints(30));
 		gridAttack.getColumnConstraints().add(new ColumnConstraints(120));
 		gridAttack.getColumnConstraints().add(new ColumnConstraints(30));
 		gridAttack.getColumnConstraints().add(new ColumnConstraints(30));
@@ -131,12 +129,10 @@ public class CombatSection extends Section {
 
 		hdAttacks.setMaxWidth(Double.MAX_VALUE);
 		hdAttackMods.setMaxWidth(Double.MAX_VALUE);
-//		VBox colAttack = new VBox(0, lbAttackRating, gridAttackHead, hdAttacks, gridAttack, hdAttackMods, gridAttackMod);
 		VBox colAttack = new VBox(0, lbAttackRating, gridIni, hdAttacks, gridAttack, hdAttackMods, gridAttackMod);
 		colAttack.setAlignment(Pos.TOP_LEFT);
 		VBox.setVgrow(hdAttacks, Priority.ALWAYS);
 		VBox.setVgrow(hdAttackMods, Priority.ALWAYS);
-//		VBox.setMargin(gridAttackHead, new Insets(10, 0, 0, 0));
 		VBox.setMargin(hdAttackMods, new Insets(5, 0, 0, 0));
 
 		// Center column content of attack grid
@@ -150,6 +146,7 @@ public class CombatSection extends Section {
 		return colAttack;
 	}
 
+	//-------------------------------------------------------------------
 	private VBox initDefenseColumnLayout() {
 		Label hdDefenses = new Label(ResourceI18N.get(RES, "section.combat.defensepools")); hdDefenses.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		hdDefenses.setStyle("-fx-border-width: 0 0 1 0; -fx-border-color: light");
