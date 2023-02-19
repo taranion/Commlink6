@@ -1077,7 +1077,7 @@ public class Shadowrun6Tools {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private static Pool<Integer> getSkillPoolCalculationWithoutAttribute(Shadowrun6Character model, SR6Skill skill, String...special) {
+	public static Pool<Integer> getSkillPoolCalculationWithoutAttribute(Shadowrun6Character model, SR6Skill skill, String...special) {
 		Pool<Integer> ret = new Pool<Integer>();
 
 		// Add the unmodified skill
@@ -1092,7 +1092,6 @@ public class Shadowrun6Tools {
 				ret.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(-1, RES.format("explain.untrained_skill", skill.getName())));
 			}
 		} else {
-			ret = (Pool<Integer>) sVal.getPool().clone();
 			ret.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(sVal.getDistributed(), Shadowrun6Core.getI18nResources().format( "explain.skillpoints", skill.getName())));
 //			if (sVal.getAlternativePoints()>sVal.getDistributed()) {
 //				ret.clear();
@@ -1108,7 +1107,7 @@ public class Shadowrun6Tools {
 					if (sMod.getResolvedKey()==skill && !sMod.isConditional() && sMod.getSet()!=ValueType.ARTIFICIAL && sMod.getSet()!=ValueType.MAX) {
 						int val = Math.min(augAllowed, sMod.getValue());
 						// Mark modifiers being capped with augmentation limit
-						PoolCalculation calc = new PoolCalculation(val, Shadowrun6Tools.getModificationSourceString(sMod.getSource()));
+						PoolCalculation<Integer> calc = new PoolCalculation<Integer>(val, Shadowrun6Tools.getModificationSourceString(sMod.getSource()));
 						calc.hitLimit = val<sMod.getValue();
 						ret.addStep(ValueType.AUGMENTED, calc);
 						augAllowed -= val;
@@ -1154,8 +1153,8 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	private static void addSpecialization(Pool<Integer> ret, SR6SkillValue sVal, String...special) {
-		SkillSpecializationValue bestSpec = null;
-		for (SkillSpecializationValue spec : sVal.getSpecializations()) {
+		SkillSpecializationValue<SR6Skill> bestSpec = null;
+		for (SkillSpecializationValue<SR6Skill> spec : sVal.getSpecializations()) {
 			// Test if specializ. matches requested specs
 			if (!Arrays.asList(special).contains(spec.getResolved().getId()))
 				continue;
@@ -1451,7 +1450,7 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static Pool<Integer> getWeaponPoolCalculation(Shadowrun6Character model, CarriedItem item) {
+	public static Pool<Integer> getWeaponPoolCalculation(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
 		Pool<Integer> pool = new Pool<Integer>();
 
 		SR6Skill skill = (SR6Skill) item.getAsObject(SR6ItemAttribute.SKILL).getValue();
@@ -1461,44 +1460,10 @@ public class Shadowrun6Tools {
 		else
 			pool = getSkillPool(model, skill);
 
-		logger.log(Level.WARNING, "ToDo: getWeaponPoolCalculation");
-
-//		// Find the correct specialization
-//		if (skill.getId().equals("exotic_weapons")) {
-//			// Without skill, you cannot use the weapon
-//			if (sVal==null) {
-//				ret.add(new PoolCalculation(0, RES.format("explain.missing_exotic_skill", item.getResolved().getName())));
-//				return ret;
-//			}
-//			// Find matching specialization
-//			SkillSpecializationValue spec = null;
-//			for (SkillSpecializationValue tmp : sVal.getSkillSpecializations()) {
-//				if (tmp.getSpecial().getExoticItem()==item.getResolved() || tmp.getSpecial()==item.getResolved().getWeaponData().getSpecialization()) {
-//					spec = tmp;
-//					break;
-//				}
-//			}
-//			// Without specialization, the weapon cannot be used
-//			if (spec==null) {
-//				ret.add(new PoolCalculation(0, RES.format( "explain.missing_exotic_specialization", item.getResolved().getName())+": "+sVal));
-//				return ret;
-//			}
-//			// Specialization found
-//			special = spec.getSpecial().getId();
-//		} else {
-//			SkillSpecialization required = item.getItem().getWeaponData().getSpecialization();
-//			if (required!=null) {
-//				special = required.getId();
-//			}
-//		}
-		logger.log(Level.ERROR, "getWeaponPoolCalculation not finished yet");
-
-
-//		ret.addAll( getSkillPoolCalculation(model, skill, skill.getAttribute(), special) );
-
 		/*
 		 * Add eventually existing focus
 		 */
+		logger.log(Level.WARNING, "ToDo: Check for weapon focus or item attunement");
 //		if (item.getUsedFocus()!=null) {
 //			FocusValue focus = item.getUsedFocus();
 //			if (focus.getModifyable().getChoice()==ChoiceType.MELEE_WEAPON) {
@@ -1520,12 +1485,12 @@ public class Shadowrun6Tools {
 	}
 
 	//--------------------------------------------------------------------
-	public static int getWeaponPool(Shadowrun6Character model, CarriedItem item) {
+	public static int getWeaponPool(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
 		return (int)getWeaponPoolCalculation(model, item).getNatural();
 	}
 
 	//--------------------------------------------------------------------
-	public static String getWeaponPoolExplanation(Shadowrun6Character model, CarriedItem item) {
+	public static String getWeaponPoolExplanation(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
 		return getWeaponPoolCalculation(model, item).toExplainString();
 	}
 
@@ -1533,7 +1498,7 @@ public class Shadowrun6Tools {
 	/*
 	 * Called from Shadowrun6_Print
 	 */
-	public static Damage getWeaponDamage(ShadowrunCharacter model, CarriedItem item) {
+	public static Damage getWeaponDamage(ShadowrunCharacter model, CarriedItem<ItemTemplate> item) {
 //		if (item.getResolved().getWeaponData()==null) {
 //			throw new IllegalArgumentException(item.getName()+" is not a weapon but a "+item.getItem().getTypes()+" and of type "+item.getItem().getClass());
 //		}
@@ -1727,9 +1692,9 @@ public class Shadowrun6Tools {
 	//---------------------------------------------------------
 	public static String getAccessoryString(CarriedItem<ItemTemplate> item) {
 		class Counted {
-			CarriedItem inst;
+			CarriedItem<ItemTemplate> inst;
 			int count;
-			public Counted(CarriedItem item) {
+			public Counted(CarriedItem<ItemTemplate> item) {
 				inst = item;
 				count=1;
 			}
@@ -1861,7 +1826,7 @@ public class Shadowrun6Tools {
 	//---------------------------------------------------------
 	public static CarriedItem<ItemTemplate> getPrimaryRangedWeapon(Shadowrun6Character model) {
 		List<CarriedItem<ItemTemplate>> weapons = model.getCarriedItems(ItemType.WEAPON_RANGED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_FIREARMS);
-		for (CarriedItem item : weapons) {
+		for (CarriedItem<ItemTemplate> item : weapons) {
 			if (item.hasFlag(SR6ItemFlag.PRIMARY)) return item;
 		}
 		return weapons.isEmpty()?null:weapons.get(0);
@@ -1870,7 +1835,7 @@ public class Shadowrun6Tools {
 	//---------------------------------------------------------
 	public static CarriedItem<ItemTemplate> getPrimaryMeleeWeapon(Shadowrun6Character model) {
 		List<CarriedItem<ItemTemplate>> weapons = model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT);
-		for (CarriedItem item : weapons) {
+		for (CarriedItem<ItemTemplate> item : weapons) {
 			if (item.hasFlag(SR6ItemFlag.PRIMARY)) return item;
 		}
 		return weapons.isEmpty()?null:weapons.get(0);
