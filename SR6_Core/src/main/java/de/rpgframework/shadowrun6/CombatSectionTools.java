@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun.ASpell.Category;
 import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -297,6 +298,7 @@ public class CombatSectionTools {
 	}
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackModifiersPhysical(Shadowrun6Character model, Locale loc) {
+		AttackTable attackTable = getAttackTablePhysical(model, loc);
 		// Col1: Pool
 		// Col2: AR
 		// Col3: Dmg
@@ -320,6 +322,21 @@ public class CombatSectionTools {
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "take_aim").getName(loc));
 		entry.setCol3("+1");
 		ret.add(entry);
+		// APDS
+		if (attackTable.size()<5) {
+			AmmunitionType ammo = Shadowrun6Core.getItem(AmmunitionType.class, "apds");
+			entry = new AttackEntry(ammo.getName(loc));
+			entry.setCol2("+1");
+			entry.setCol3("-1");
+			ret.add(entry);
+		}
+		// Gel
+		if (attackTable.size()<4) {
+			AmmunitionType ammo = Shadowrun6Core.getItem(AmmunitionType.class, "explosive");
+			entry = new AttackEntry(ammo.getName(loc));
+			entry.setCol3("+1");
+			ret.add(entry);
+		}
 
 		return ret;
 	}
