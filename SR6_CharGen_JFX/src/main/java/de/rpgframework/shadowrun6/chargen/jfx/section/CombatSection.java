@@ -236,14 +236,17 @@ public class CombatSection extends Section {
 					label.setTooltip(new Tooltip(weapon.getCol1Tooltip()));
 				table.add(label , 1, count);
 			}
-			if (withAttackRating) {
+			if (weapon.getCol2()!=null) {
 				Label label = new Label(weapon.getCol2());
 				if (weapon.getCol2Tooltip()!=null && !weapon.getCol2Tooltip().isBlank())
 					label.setTooltip(new Tooltip(weapon.getCol2Tooltip()));
 				table.add(label , 2, count);
-				table.add(new Label( weapon.getCol3()) , 3, count);
-			} else {
-				table.add(new Label( weapon.getCol3()) , 2, count);
+			}
+			if (weapon.getCol3()!=null) {
+				Label label = new Label(weapon.getCol3());
+				if (weapon.getCol3Tooltip()!=null && !weapon.getCol3Tooltip().isBlank())
+					label.setTooltip(new Tooltip(weapon.getCol3Tooltip()));
+				table.add(label , 3, count);
 			}
 			count++;
 		}

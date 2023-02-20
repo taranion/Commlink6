@@ -259,21 +259,21 @@ public class CombatSectionTools {
 		dmg.setDistributed( (int)Math.round( (double)attack / 2.0));
 		entry.setCol1(cracking.toString());
 		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol3(dmg.toString());
+		entry.setCol2(dmg.toString());
 		ret.add(entry);
 
 		/* Tarpit */
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "tarpit").getName(loc));
 		entry.setCol1(cracking.toString());
 		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol3("1*");
+		entry.setCol2("1*");
 		ret.add(entry);
 
 		/* IC Slicer */
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "ic_slicer").getName(loc)+" *");
 		entry.setCol1(cracking.toString());
 		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol3( String.valueOf(attack) );
+		entry.setCol2( String.valueOf(attack) );
 		ret.add(entry);
 		return ret;
 	}

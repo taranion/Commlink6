@@ -213,7 +213,7 @@
       "id": "athletics",
       "attribute": "Agility",
       "rating": 1,
-      "pool": 3,
+      "pool": 0,
       "specializations": [],
       "influencedBy": [],
       "description": ""
@@ -223,14 +223,14 @@
       "id": "conjuring",
       "attribute": "Magic",
       "rating": 4,
-      "pool": 8,
+      "pool": 0,
       "specializations": [
         {
           "name": "Summoning",
           "id": "summoning",
           "expertise": false,
           "attribute": "Magic",
-          "pool": 8,
+          "pool": 0,
           "description": ""
         }
       ],
@@ -245,7 +245,7 @@
       "id": "close_combat",
       "attribute": "Agility",
       "rating": 2,
-      "pool": 5,
+      "pool": 0,
       "specializations": [],
       "influencedBy": [],
       "description": ""
@@ -255,7 +255,7 @@
       "id": "perception",
       "attribute": "Intuition",
       "rating": 2,
-      "pool": 5,
+      "pool": 0,
       "specializations": [],
       "influencedBy": [],
       "description": ""
@@ -265,14 +265,14 @@
       "id": "sorcery",
       "attribute": "Magic",
       "rating": 5,
-      "pool": 7,
+      "pool": 0,
       "specializations": [
         {
           "name": "Spellcasting",
           "id": "spellcasting",
           "expertise": false,
           "attribute": "Magic",
-          "pool": 7,
+          "pool": 0,
           "description": ""
         }
       ],
@@ -284,7 +284,7 @@
       "id": "knowledge",
       "attribute": "Logic",
       "rating": 1,
-      "pool": 3,
+      "pool": 0,
       "specializations": [],
       "influencedBy": [],
       "description": ""
@@ -294,7 +294,7 @@
       "id": "knowledge",
       "attribute": "Logic",
       "rating": 1,
-      "pool": 3,
+      "pool": 0,
       "specializations": [],
       "influencedBy": [],
       "description": ""
