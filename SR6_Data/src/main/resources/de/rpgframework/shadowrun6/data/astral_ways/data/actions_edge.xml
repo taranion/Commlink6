@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+  <action type="EDGE" cat="OTHER"  cost="4" apply="SKILL"  id="prepare_to_board" skill="piloting"/>
+</actions>

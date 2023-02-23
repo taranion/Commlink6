@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<!-- Airships -->
+   <item avail="5"  price="10000" id="buzzard" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="3" acc="20" spdi="30" tspd="300" bod="10" arm="6" sea="5"/>
+   </item>
+</items>

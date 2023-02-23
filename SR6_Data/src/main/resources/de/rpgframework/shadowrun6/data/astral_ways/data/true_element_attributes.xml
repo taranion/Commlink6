@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<trueelements>
+	<trueelement id="disruptive_earth" element="EARTH"/>
+	<trueelement id="elemental_mastery_earth" element="EARTH"/>
+	<trueelement id="familiar_earth"   element="EARTH"/>
+	<trueelement id="protective_earth" element="EARTH"/>
+	<trueelement id="animated_air" element="AIR"/>
+	<trueelement id="disruptive_air" element="AIR"/>
+	<trueelement id="elemental_mastery_air" element="AIR"/>
+	<trueelement id="secretive_air" element="AIR"/>
+	<trueelement id="animated_fire" element="FIRE"/>
+	<trueelement id="dangerous_fire" element="FIRE"/>
+	<trueelement id="elemental_mastery_fire" element="FIRE"/>
+	<trueelement id="familiar_fire" element="FIRE"/>
+	<trueelement id="dangerous_water" element="WATER"/>
+	<trueelement id="elemental_mastery_water" element="WATER"/>
+	<trueelement id="protective_water" element="WATER"/>
+	<trueelement id="secretive_water" element="WATER"/>
+</trueelements>
