@@ -106,6 +106,7 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 
 		refresh();
 
+		initMysticAdeptNode();
 		initInteractivity();
 	}
 

@@ -31,6 +31,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 		}
 	}
 
+	public static Rule CHARGEN_RAISE_ABOVE_6    = new Rule(EffectOn.CHARGEN,"CHARGEN_RAISE_ABOVE_6", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_MAX_INITIATION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_INITIATION", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_MAX_SUBMERSION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_SUBMERSION", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_MAX_TRANSHUMAN   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_TRANSHUMAN", Rule.Type.INTEGER, RES, "99");
@@ -47,6 +48,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	//-------------------------------------------------------------------
 	public static Rule[] values() {
 		Rule[] sr6 = new Rule[] {
+				CHARGEN_RAISE_ABOVE_6,
 				CHARGEN_MAX_INITIATION,
 				CHARGEN_MAX_SUBMERSION,
 				CHARGEN_MAX_TRANSHUMAN,
