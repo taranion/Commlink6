@@ -101,6 +101,7 @@
    <quality id="photometabolism" karma="4" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
      <modifications>
      	<!--  ToDo Lifestyle points -->
+       <valmod   ref="LIFESTYLE_NECESSITIES"   type="PRICEMOD" value="-1"/>
        <checkmod ref="con"       type="SKILL" what="EDGE" value="1"/>
        <checkmod ref="influence" type="SKILL" what="EDGE" value="1"/>
      </modifications>
