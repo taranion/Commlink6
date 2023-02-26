@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="biospikes" avail="4" price="5000" type="BIOWARE" subtype="BIOWARE_WEAPON">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="blade">
+      	<usage mode="IMPLANTED" value="0.15"/>
+      	<attrdef id="PRICE" value="5000"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="3P" attack="7,,,," skill="exotic_weapons" spec="exotic_weapons/biosprayer"/>
+     		</alternate>
+      </variant>
+      <variant id="claws">
+      	<usage mode="IMPLANTED" value="0.1"/>
+      	<attrdef id="PRICE" value="7500"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="2P" attack="7,,,," skill="exotic_weapons" spec="exotic_weapons/biosprayer"/>
+     		</alternate>
+      </variant>
+   </item>
+
+   <item id="biosprayer" avail="5" price="25000" type="BIOWARE" subtype="BIOWARE_WEAPON">
+      <flags><flag>AUGMENTATION</flag></flags>
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<weapon  dmg="0" attack="4,1,,," skill="exotic_weapons" spec="exotic_weapons/biosprayer"/>
+     	</alternate>
+      <variant id="blind1">
+      	<usage mode="IMPLANTED" value="0.35"/>
+      	<attrdef id="PRICE" value="25000"/>
+      </variant>
+      <variant id="blind2">
+      	<usage mode="IMPLANTED" value="0.70"/>
+      	<attrdef id="PRICE" value="50000"/>
+      </variant>
+      <variant id="blind3">
+      	<usage mode="IMPLANTED" value="1.05"/>
+      	<attrdef id="PRICE" value="75000"/>
+      </variant>
+      <variant id="confused1">
+      	<usage mode="IMPLANTED" value="0.35"/>
+      	<attrdef id="PRICE" value="25000"/>
+      </variant>
+      <variant id="confused2">
+      	<usage mode="IMPLANTED" value="0.70"/>
+      	<attrdef id="PRICE" value="50000"/>
+      </variant>
+      <variant id="confused3">
+      	<usage mode="IMPLANTED" value="1.05"/>
+      	<attrdef id="PRICE" value="75000"/>
+      </variant>
+      <variant id="dazed">
+      	<usage mode="IMPLANTED" value="0.35"/>
+      	<attrdef id="PRICE" value="25000"/>
+      </variant>
+      <variant id="nauseated">
+      	<usage mode="IMPLANTED" value="0.35"/>
+      	<attrdef id="PRICE" value="25000"/>
+      </variant>
+   </item>
+
+   <item id="corrosive_spit" avail="5" price="5000" type="BIOWARE" subtype="BIOWARE_WEAPON">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<weapon  dmg="2P" attack="4,,,," skill="exotic_weapons" spec="exotic_weapons/spitter"/>
+     	</alternate>
+   </item>
+   <item id="fangs" avail="3" price="1000" type="BIOWARE" subtype="BIOWARE_WEAPON" reqVariant="y">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="non_retractable">
+      	<usage mode="IMPLANTED" value="0.05"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="2P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="retractable">
+      	<usage mode="IMPLANTED" value="0.15"/>
+      	<attrdef id="PRICE" value="1500"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+   </item>
+   <item id="horns" avail="3" price="500" type="BIOWARE" subtype="BIOWARE_WEAPON">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     	</alternate>
+   </item>
+   <item id="natural_venom" avail="5" price="15000" type="BIOWARE" subtype="BIOWARE_WEAPON">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+
+   <item id="stinger" avail="3" price="5000" type="BIOWARE" subtype="BIOWARE_WEAPON" reqVariant="y">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="tiny">
+      	<usage mode="IMPLANTED" value="0.05"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="medium">
+      	<usage mode="IMPLANTED" value="0.1"/>
+      	<attrdef id="PRICE" value="2500"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="2P" attack="5,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="large">
+      	<usage mode="IMPLANTED" value="0.15"/>
+      	<attrdef id="PRICE" value="8000"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+   </item>
+   <item id="striking_callus" avail="2" price="500" type="BIOWARE" subtype="BIOWARE_WEAPON">
+      <usage mode="IMPLANTED" value="0.05"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+        	<checkmod type="SKILLSPECIALIZATION" ref="close_combat/unarmed"  value="1" what="EDGE_ONLY_TEST"/>
+     	</modifications>
+   </item>
+
+   <item id="tusks" avail="2" price="100" type="BIOWARE" subtype="BIOWARE_WEAPON" reqVariant="y">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="tiny">
+      	<usage mode="IMPLANTED" value="0.1"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="1P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="medium">
+      	<usage mode="IMPLANTED" value="0.15"/>
+      	<attrdef id="PRICE" value="500"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="large">
+      	<usage mode="IMPLANTED" value="0.25"/>
+      	<attrdef id="PRICE" value="1000"/>
+      	<attrdef id="AVAILABILITY" value="8L"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     			<weapon  dmg="3P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+   </item>
+   <item id="quills" avail="6" price="2500" type="BIOWARE" subtype="BIOWARE_WEAPON">
+      <usage mode="IMPLANTED" value="0.25"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<weapon  dmg="3P" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/quills"/>
+     	</alternate>
+   </item>
+
+</items>

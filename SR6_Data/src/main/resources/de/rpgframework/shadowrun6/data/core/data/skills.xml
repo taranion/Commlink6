@@ -68,7 +68,9 @@
 		<skillspec id="chainsaws"/>
 		<skillspec id="launchers"/>
 		<skillspec id="air"/>
+		<skillspec id="quills"/>
 		<skillspec id="spray"/>
+		<skillspec id="spitter"/>
 		<skillspec id="laser"/>
 		<skillspec id="emitter"/>
 		<skillspec id="thagomizer"/>
