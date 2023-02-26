@@ -54,14 +54,17 @@
        <modifications>
          <itemmod type="HOOK" ref="GLAND" />
         </modifications>
-      <variant id="spray" cost="6000">
-     	 <attrdef id="AVAILABILITY" value="8L"/>
+      <variant id="spray">
+     		<attrdef id="AVAILABILITY" value="8L"/>
+      	<attrdef id="PRICE" value="6000"/>
       </variant>
-      <variant id="spit" cost="6000">
-     	 <attrdef id="AVAILABILITY" value="8L"/>
+      <variant id="spit">
+     		<attrdef id="AVAILABILITY" value="8L"/>
+      	<attrdef id="PRICE" value="6000"/>
       </variant>
-      <variant id="weapon" cost="4000">
-     	 <attrdef id="AVAILABILITY" value="7L"/>
+      <variant id="weapon">
+      	<attrdef id="PRICE" value="4000"/>
+     	 	<attrdef id="AVAILABILITY" value="7L"/>
       </variant>
    	</item>
 	<item id="chemical_gland_expanded" avail="6L" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
@@ -217,7 +220,7 @@
     		<checkmod type="SKILL" ref="con" value="$RATING" what="DICE" cond="y"/>
     		<checkmod type="SKILL" ref="influence" value="$RATING" what="DICE" cond="y"/>
     	</modifications>
-   	</item>
+   </item>
 	<item id="vocal_modification" avail="6" type="BIOWARE" subtype="BIOWARE_STANDARD" reqVariant="true">
       	<flags><flag>AUGMENTATION</flag></flags>
     	<variant id="banshee">
@@ -245,5 +248,124 @@
     			<checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="y"/>
     		</modifications>
     	</variant>
-   	</item>
+   </item>
+
+   	<!-- SURGE dermal alterations -->
+	<item id="bark_skin" avail="4" price="1500" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<requires>
+     		<datareq type="CARRIED" ref="rhino_skin" negate="true"/>
+     	</requires>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" set="NATURAL"/>
+	     <!-- TODO: 10% on Armor and clothing -->
+	     <valmod type="PRICEMOD" ref="ARMOR" value="10"/>
+    	</modifications>
+ 	</item>
+	<item id="blubber" avail="5" price="1500" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="camouflage" avail="4" price="1500" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<requires>
+     		<datareq type="ITEMSUBTYPE" ref="BIOWARE_DERMAL" negate="true"/>
+     	</requires>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <checkmod type="SKILL" ref="stealth" value="1" what="DICE" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="chamaeleon_skin" avail="6" type="BIOWARE" subtype="BIOWARE_STANDARD" reqVariant="true">
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="basic">
+    		<usage mode="IMPLANTED" value="0.2"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      	<attrdef id="PRICE" value="2000"/>
+    		<modifications>
+	     		<checkmod type="SKILL" ref="stealth" value="1" what="DICE" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="dynamic">
+    		<usage mode="IMPLANTED" value="0.3"/>
+      	<attrdef id="PRICE" value="4000"/>
+      	<attrdef id="AVAILABILITY" value="7"/>
+    		<modifications>
+	     		<checkmod type="SKILL" ref="stealth" value="1" what="DICE" cond="y"/>
+    		</modifications>
+    	</variant>
+   </item>
+	<item id="chemical_repulsion" avail="8L" price="20000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.25"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <checkmod type="SKILL" ref="athletics" value="0" what="NOT_SPEND_EDGE"/>
+    	</modifications>
+ 	</item>
+	<item id="chloroplast" avail="4" price="2500" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+       <valmod   ref="LIFESTYLE_NECESSITIES"   type="PRICEMOD" value="-1"/>
+       <checkmod ref="con"       type="SKILL" what="EDGE" value="1" cond="y"/>
+       <checkmod ref="influence" type="SKILL" what="EDGE" value="1" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="climate_adaption" avail="3" price="6000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+     	<requires>
+     		<datareq type="CARRIED" ref="dermal_plating" negate="true"/>
+     	</requires>
+    	<modifications>
+	     <checkmod type="SKILL" ref="outdoors" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="defensive_secretion" avail="5" price="5000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="dragon_hide" avail="4" price="2000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="granite_skin" avail="6L" price="50000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.25"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="6" set="NATURAL"/>
+	     <checkmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1" what="HIT" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="greasy_skin" avail="5" price="2000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="insulation_coat" avail="5" price="8000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<requires>
+     		<datareq type="ITEMSUBTYPE" ref="BIOWARE_DERMAL" negate="true"/>
+     	</requires>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="rhino_skin" avail="4" price="3000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+     	<requires>
+     		<datareq type="CARRIED" ref="bark_skin" negate="true"/>
+     	</requires>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="3" set="NATURAL"/>
+    	</modifications>
+ 	</item>
+	<item id="thorns_skin" avail="4" price="2000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="ATTACK_RATING_PHYSICAL" value="1" set="NATURAL" cond="y"/>
+	     <!-- TODO: 10% on Armor and clothing -->
+	     <valmod type="PRICEMOD" ref="CLOTHING" value="20"/>
+    	</modifications>
+ 	</item>
 </items>

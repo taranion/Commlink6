@@ -14,7 +14,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 public enum ItemSubType {
 
 	// BIOWARE
-	BIOWARE_COSMETICS,
+	BIOWARE_DERMAL,
 	BIOWARE_STANDARD,
 	BIOWARE_CULTURED,
 	BIOWARE_IMPLANT_WEAPON,
