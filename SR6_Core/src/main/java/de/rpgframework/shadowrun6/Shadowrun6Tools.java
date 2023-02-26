@@ -56,6 +56,7 @@ import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.Modifyable;
+import de.rpgframework.genericrpg.modification.RelevanceModification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
@@ -967,6 +968,9 @@ public class Shadowrun6Tools {
 			}
 
 			return clone;
+		}
+		if (tmp instanceof RelevanceModification) {
+			return tmp;
 		}
 
 		throw new IllegalArgumentException("Cannot instantiate "+tmp.getClass());
