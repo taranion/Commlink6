@@ -72,6 +72,7 @@
 		<skillspec id="laser"/>
 		<skillspec id="emitter"/>
 		<skillspec id="thagomizer"/>
+		<skillspec id="tongue"/>
 		<skillspec id="other"/>
     </skill>
     <skill id="firearms"  attr="AGILITY" type="COMBAT" untr="y">

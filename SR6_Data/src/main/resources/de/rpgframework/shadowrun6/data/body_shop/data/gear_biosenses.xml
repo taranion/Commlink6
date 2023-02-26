@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="awareness" avail="3" price="1200" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="tactical1">
+      	<usage mode="IMPLANTED" value="0.2"/>
+      	<attrdef id="PRICE" value="15000"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      	<modifications>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL"  value="1" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT"  value="1" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT"  value="1" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL"  value="1" what="DICE"/>
+      	</modifications>
+      </variant>
+      <variant id="tactical2">
+      	<usage mode="IMPLANTED" value="0.4"/>
+      	<attrdef id="PRICE" value="30000"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      	<modifications>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL"  value="2" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT"  value="2" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT"  value="2" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL"  value="2" what="DICE"/>
+      	</modifications>
+      </variant>
+      <variant id="tactical3">
+      	<usage mode="IMPLANTED" value="0.6"/>
+      	<attrdef id="PRICE" value="45000"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      	<modifications>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL"  value="3" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT"  value="3" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT"  value="3" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL"  value="3" what="DICE"/>
+      	</modifications>
+      </variant>
+   </item>
+   <item id="cognitive_shield" avail="6" price="25000" type="BIOWARE" subtype="BIOSENSE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+        	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT"  value="1" what="DICE"/>
+        	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT"  value="1" what="DICE"/>
+        	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL"  value="1" what="DICE"/>
+     	</modifications>
+   </item>
+   <item id="echolocation" avail="6" price="15000" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="electrosense" avail="5" price="5000" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="technosense">
+      	<usage mode="IMPLANTED" value="0.2"/>
+      	<attrdef id="PRICE" value="11000"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      </variant>
+   </item>
+   <item id="hearing_enhancement" avail="2" price="4000" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+        	<checkmod type="SKILL" ref="perception"  value="1" what="EDGE_ONLY_TEST" cond="y"/>
+     	</modifications>
+   </item>
+   <item id="hearing_expansion" avail="4" price="4000" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="magnetosense_organ" avail="4" price="5000" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+        	<checkmod type="SKILL" ref="perception"  value="1" what="EDGE_ONLY_TEST" cond="y"/>
+     	</modifications>
+   </item>
+   <item id="manasense_organ" avail="4" price="5000" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+        	<checkmod type="SKILL" ref="perception"  value="1" what="EDGE_ONLY_TEST" cond="y"/>
+     	</modifications>
+   </item>
+   <item id="setae" avail="5" price="12000" type="BIOWARE" subtype="BIOSENSE" reqVariant="y">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="hands">
+      	<usage mode="IMPLANTED" value="0.1"/>
+      	<attrdef id="PRICE" value="12000"/>
+    		<modifications>
+        		<checkmod type="SKILLSPECIALIZATION" ref="athletics/climbing"  value="2" what="DICE" cond="y"/>
+     		</modifications>
+      </variant>
+      <variant id="feet">
+      	<usage mode="IMPLANTED" value="0.1"/>
+      	<attrdef id="PRICE" value="12000"/>
+    		<modifications>
+        		<checkmod type="SKILLSPECIALIZATION" ref="athletics/climbing"  value="2" what="DICE" cond="y"/>
+     		</modifications>
+      </variant>
+      <variant id="hands_and_feet">
+      	<usage mode="IMPLANTED" value="0.2"/>
+      	<attrdef id="PRICE" value="24000"/>
+    		<modifications>
+        		<checkmod type="SKILLSPECIALIZATION" ref="athletics/climbing"  value="4" what="DICE" cond="y"/>
+     		</modifications>
+      </variant>
+   </item>
+   <item id="tactile_sensivity" avail="4" price="2500" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+        	<checkmod type="SKILLSPECIALIZATION" ref="perception/tactile"  value="1" what="EDGE_ONLY_TEST" cond="y"/>
+        	<checkmod type="SKILLSPECIALIZATION" ref="engineering/lockpicking"  value="1" what="EDGE_ONLY_TEST" cond="y"/>
+     	</modifications>
+   </item>
+   <item id="thermosense_organs" avail="4" price="2500" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="trolls_eyes" avail="6" price="6000" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+        	<itemmod type="QUALITY" ref="thermographic_vision"/>
+     	</modifications>
+   </item>
+   <item id="vomeronasal_gland" avail="6" price="8000" type="BIOWARE" subtype="BIOSENSE">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+        	<checkmod type="SKILLSPECIALIZATION" ref="perception/scent"  value="1" what="EDGE_ONLY_TEST" cond="y"/>
+        	<checkmod type="SKILL" ref="influence"  value="1" what="EDGE_ONLY_TEST" cond="y"/>
+     	</modifications>
+   </item>
+</items>

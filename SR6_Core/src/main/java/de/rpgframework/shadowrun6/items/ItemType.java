@@ -33,6 +33,7 @@ public enum ItemType {
 			ItemSubType.BIOWARE_STANDARD,
 			ItemSubType.BIOWARE_DERMAL,
 			ItemSubType.BIOWARE_CULTURED,
+			ItemSubType.BIOSENSE,
 			ItemSubType.BIOWARE_IMPLANT_WEAPON
 //			ItemSubType.SYMBIONTS
 			),
