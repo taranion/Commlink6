@@ -382,11 +382,11 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded {0} qualities", list.size());
 			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "astral_ways/data/metatypes.xml");
 			logger.log(Level.INFO, "Loaded {0} metatypes", list.size());
-			list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, core, clazz, "astral_ways/data/rituals.xml");
+			list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, set, clazz, "astral_ways/data/rituals.xml");
 			logger.log(Level.DEBUG, "Loaded {0} rituals", list.size());
 			list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"astral_ways/data/spells.xml");
 			logger.log(Level.DEBUG, "Loaded {0} spells", list.size());
-			list = Shadowrun6Core.loadDataItems(FocusList.class, Focus.class, core, clazz, "astral_ways/data/foci.xml");
+			list = Shadowrun6Core.loadDataItems(FocusList.class, Focus.class, set, clazz, "astral_ways/data/foci.xml");
 			logger.log(Level.DEBUG, "Loaded {0} foci", list.size());
 //			System.exit(1);
 
