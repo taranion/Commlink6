@@ -368,6 +368,28 @@ public class Shadowrun6DataPlugin  {
 ////			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_streams.xml");
 ////			logger.log(Level.DEBUG, "Loaded "+list.size()+" streams");
 
+			logger.log(Level.INFO, "START -------------------------------Astral Ways------------------------------------------");
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "ASTRAL_WAYS", "astral_ways.i18n", Locale.ENGLISH);
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "astral_ways/data/actions_edge.xml");
+			logger.log(Level.DEBUG, "Loaded {0} actions", list.size());
+			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "astral_ways/data/critterpower.xml");
+			logger.log(Level.DEBUG, "Loaded {0} critter powe", list.size());
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"astral_ways/data/gear_vehicles.xml");
+			logger.log(Level.DEBUG, "Loaded {0} vehicles", list.size());
+			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "astral_ways/data/metamagics.xml");
+			logger.log(Level.DEBUG, "Loaded {0} metamagics", list.size());
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "astral_ways/data/qualities.xml");
+			logger.log(Level.DEBUG, "Loaded {0} qualities", list.size());
+			list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "astral_ways/data/metatypes.xml");
+			logger.log(Level.INFO, "Loaded {0} metatypes", list.size());
+			list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, core, clazz, "astral_ways/data/rituals.xml");
+			logger.log(Level.DEBUG, "Loaded {0} rituals", list.size());
+			list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"astral_ways/data/spells.xml");
+			logger.log(Level.DEBUG, "Loaded {0} spells", list.size());
+			list = Shadowrun6Core.loadDataItems(FocusList.class, Focus.class, core, clazz, "astral_ways/data/foci.xml");
+			logger.log(Level.DEBUG, "Loaded {0} foci", list.size());
+//			System.exit(1);
+
 			logger.log(Level.INFO, "START -------------------------------BODY SHOP-------------------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "BODY_SHOP", "body_shop.i18n", Locale.ENGLISH);
 			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "body_shop/data/actions.xml");

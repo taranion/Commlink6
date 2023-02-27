@@ -165,6 +165,7 @@ public enum ItemSubType {
 	BOATS,
 	SHIPS,
 	SUBMARINES,
+	AIRSHIP,
 	FIXED_WING,
 	ROTORCRAFT,
 	VTOL,

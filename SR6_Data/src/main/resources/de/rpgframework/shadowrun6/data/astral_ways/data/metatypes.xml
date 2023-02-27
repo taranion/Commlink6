@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metatypes>
 	<!-- Human variants -->
-	<metatype id="tandoran" variantof="human" size="175" weight="78">
+	<metatype id="tandoran" variantof="human" size="175" weight="78" karma="0">
 		<modifications>
            <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="CHARISMA"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
@@ -12,7 +12,7 @@
            <itemmod type="QUALITY" ref="hairless"/>
            <itemmod type="QUALITY" ref="saurian"/>
            <itemmod type="QUALITY" ref="underwater_vision"/>
-           <itemmod type="QUALITY" ref="bark_skin"/>
+           <itemmod type="QUALITY" ref="bark"/>
 		</modifications>
 	</metatype>
 </metatypes>

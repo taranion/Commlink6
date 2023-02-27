@@ -34,8 +34,8 @@ public enum ItemType {
 			ItemSubType.BIOWARE_DERMAL,
 			ItemSubType.BIOWARE_CULTURED,
 			ItemSubType.BIOSENSE,
-			ItemSubType.BIOWARE_WEAPON
-//			ItemSubType.SYMBIONTS
+			ItemSubType.BIOWARE_WEAPON,
+			ItemSubType.SYMBIONTS
 			),
 	CYBERWARE(
 //			ItemSubType.CYBER_COSMETICS,
@@ -180,6 +180,7 @@ public enum ItemType {
 			ItemSubType.BOATS,
 			ItemSubType.SHIPS,
 			ItemSubType.SUBMARINES,
+			ItemSubType.AIRSHIP,
 			ItemSubType.FIXED_WING,
 			ItemSubType.ROTORCRAFT,
 			ItemSubType.VTOL,
