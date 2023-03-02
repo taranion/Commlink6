@@ -96,10 +96,10 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		cbRulePayGear.setGraphicTextGap(0);
 
 		cbRuleNegativeNuyen.selectedProperty().addListener( (ov,o,n) -> {
-			if (model!=null) model.setRuleValue(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN, String.valueOf(n));
+			if (model!=null) control.getRuleController().setRuleValue(ShadowrunRules.CHARGEN_NEGATIVE_NUYEN, n);
 		});
 		cbRulePayGear.selectedProperty().addListener( (ov,o,n) -> {
-			if (model!=null) model.setRuleValue(ShadowrunRules.CAREER_PAY_GEAR, String.valueOf(n));
+			if (model!=null) control.getRuleController().setRuleValue(ShadowrunRules.CAREER_PAY_GEAR, n);
 		});
 
 		setMode(Mode.BACKDROP);

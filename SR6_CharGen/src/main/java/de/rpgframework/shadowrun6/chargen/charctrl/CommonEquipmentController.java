@@ -206,9 +206,17 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		if (carried.get().getAsValue(SR6ItemAttribute.PRICE) != null) {
 			int nuyen = carried.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			if (nuyen>getModel().getNuyen()) {
-				boolean allowNegative = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN);
-				if (!allowNegative) {
-					return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());
+				// Not enough money. Career and CharGen mode both have options to ignore this
+				if (getModel().isInCareerMode()) {
+					boolean payGear = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CAREER_PAY_GEAR);
+					if (payGear) {
+						return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());
+					}
+				} else {
+					boolean allowNegative = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN);
+					if (!allowNegative) {
+						return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());
+					}
 				}
 			}
 		}
