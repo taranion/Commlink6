@@ -33,6 +33,9 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
 import javafx.scene.image.Image;
@@ -108,6 +111,14 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 			if (model.getCharGenUsed() != null) {
 				if (model.getCharGenUsed().equals("prio")) {
 					settings = SR6PrioritySettings.class;
+				} else if (model.getCharGenUsed().equals("sumto10")) {
+					settings = SR6PrioritySettings.class;
+				} else if (model.getCharGenUsed().equals("karma")) {
+					settings = SR6KarmaSettings.class;
+				} else if (model.getCharGenUsed().equals("pointbuy")) {
+					settings = SR6PointBuySettings.class;
+				} else if (model.getCharGenUsed().equals("lifepath")) {
+					settings = SR6LifePathSettings.class;
 				}
 			}
 			if (settings== null) {
