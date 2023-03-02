@@ -514,9 +514,9 @@
     		<usage mode="IMPLANTED" value="0.45"/>
     		<attrdef id="PRICE" value="12000"/>
     		<modifications>
-  			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5"/>
-  			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2"/>
- 			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2"/>
+  				<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="0.5"/>
+  				<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2"/>
+ 				<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2"/>
     			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="6"/>
     		</modifications>
     	</variant>

@@ -926,15 +926,22 @@ public class Shadowrun6Tools {
 				logger.log(Level.WARNING, "  resolved  "+resolved);
 				modVal = Integer.parseInt(resolved);
 			} else {
-				modVal = clone.getValue();
 				if (clone.getLookupTable()!=null) {
+					modVal = clone.getValue();
 					if (modVal>clone.getLookupTable().length) {
 						logger.log(Level.ERROR, "Modification {0}, multiplier {1} is outside table", tmp, multiplier);
 					}
 					clone.setValue( clone.getLookupTable()[modVal-1] );
 					clone.setLookupTable(null);
 				} else if (multiplier>1) {
-					clone.setValue( modVal*multiplier );
+					if (clone.isDouble()) {
+						double newVal = clone.getValueAsDouble()*multiplier;
+						clone.setRawValue( String.valueOf( newVal ));
+					} else {
+						modVal = clone.getValue();
+						clone.setRawValue( String.valueOf( modVal*multiplier ));
+						clone.setValue( modVal*multiplier );
+					}
 				}
 			}
 			if ("CHOICE".equals( clone.getKey() )) {
