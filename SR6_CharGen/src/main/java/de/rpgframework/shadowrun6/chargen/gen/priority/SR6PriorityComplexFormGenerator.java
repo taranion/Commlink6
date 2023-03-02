@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen.priority;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +27,13 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6ComplexFormGenerator;
  */
 public class SR6PriorityComplexFormGenerator extends CommonSR6ComplexFormGenerator implements IComplexFormController, IComplexFormGenerator {
 
+	private final static Logger logger = System.getLogger(SR6PriorityComplexFormGenerator.class.getPackageName()+".cplx");
+
 	//-------------------------------------------------------------------
 	protected SR6PriorityComplexFormGenerator(SR6CharacterController parent) {
 		super(parent);
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
@@ -40,10 +43,10 @@ public class SR6PriorityComplexFormGenerator extends CommonSR6ComplexFormGenerat
 		Possible poss = super.canBeSelected(value, decisions);
 		if (!poss.get())
 			return poss;
-		
+
 		if (free>0)
 			return Possible.TRUE;
-		
+
 		// No more free complex forms. Check if buying with Karma is allowed
 		boolean buyWithKarma = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
 		if (buyWithKarma) {
@@ -66,15 +69,15 @@ public class SR6PriorityComplexFormGenerator extends CommonSR6ComplexFormGenerat
 		try {
 			todos.clear();
 			free = 0;
-			
+
 			Shadowrun6Character model = getModel();
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {				
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
 				SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
 				free = settings.perAttrib.get(ShadowrunAttribute.RESONANCE).base * 2;
 				logger.log(Level.INFO, "Have {0} free complex forms", free);
 			}
 			maxFree = free;
-			
+
 			int byKarma = 0;
 			for (ComplexFormValue val : model.getComplexForms()) {
 				if (free>0)
@@ -85,7 +88,7 @@ public class SR6PriorityComplexFormGenerator extends CommonSR6ComplexFormGenerat
 					logger.log(Level.INFO, "Pay complex form ''{0}'' with 5 Karma", val.getModifyable().getId());
 				}
 			}
-			
+
 			// Summary and eventually warn
 			logger.log(Level.INFO, "Have {0} remaining free complex forms", free);
 			if (free>0) {
@@ -96,7 +99,7 @@ public class SR6PriorityComplexFormGenerator extends CommonSR6ComplexFormGenerat
 					todos.add(new ToDoElement(Severity.STOPPER, "Too many complex forms bought"));
 				}
 			}
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");

@@ -30,10 +30,8 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6ComplexFormGenerator;
  */
 public class SR6KarmaComplexFormGenerator extends CommonSR6ComplexFormGenerator implements IComplexFormController, IComplexFormGenerator {
 
-	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".spells");
+	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".cforms");
 	private static MultiLanguageResourceBundle RES = SR6CharacterGenerator.RES;
-
-	private int max;
 
 	//-------------------------------------------------------------------
 	protected SR6KarmaComplexFormGenerator(SR6CharacterController parent) {
@@ -76,15 +74,15 @@ public class SR6KarmaComplexFormGenerator extends CommonSR6ComplexFormGenerator 
 			todos.clear();
 
 			Shadowrun6Character model = getModel();
-			max = 0;
+			maxFree = 0;
 
 			SR6KarmaSettings settings = parent.getModel().getCharGenSettings(SR6KarmaSettings.class);
 			settings.cforms=0;
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
 				int reso = model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue();
-				max= reso*2;
+				maxFree= reso*2;
 			}
-			logger.log(Level.INFO, "May buy up to {0} complex forms", max);
+			logger.log(Level.INFO, "May buy up to {0} complex forms", maxFree);
 
 			// Pay Karma
 			int karmaNeeded = model.getComplexForms().size()*5;
@@ -93,8 +91,9 @@ public class SR6KarmaComplexFormGenerator extends CommonSR6ComplexFormGenerator 
 			model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
 			model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
 
-			// Ensure not enough complex forms
-			if ((model.getComplexForms().size())>max) {
+			free = maxFree - model.getComplexForms().size();
+			// Ensure not too many complex forms
+			if ((model.getComplexForms().size())>maxFree) {
 				todos.add(new ToDoElement(Severity.STOPPER, RES, SR6RejectReasons.TODO_CFORMS_TOO_MANY));
 			}
 
