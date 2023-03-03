@@ -900,7 +900,6 @@ public class Shadowrun6Tools {
 
 		if (list.isEmpty())
 			return Possible.TRUE;
-		System.err.println("Shadowrun6Tools.areReqMet: Not met for "+data+": "+list);
 		return new Possible(list.toArray(new Requirement[list.size()]));
 	}
 

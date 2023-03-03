@@ -104,7 +104,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		// Ensure enough power points are present
 		float cost = value.getCostForLevel(1);
 		if (cost>freePoints) {
-			return new Possible(Severity.STOPPER, RES, IRejectReasons.IMPOSS_NOT_ENOUGH_PPOINTS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_PPOINTS);
 		}
 
 		return Possible.TRUE;
@@ -187,11 +187,11 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		AdeptPower item = value.getModifyable();
 		// Only valif the power has levels at all
 		if (!item.hasLevel()) {
-			return new Possible(Severity.STOPPER, RES, IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
 		}
 		// Ensure not already at limit
 		if (item.getMaxLevel()!=0 && item.getMaxLevel()<=value.getModifiedValue()) {
-			return new Possible(Severity.STOPPER, RES, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 		}
 
 		// Determine the difference in power cost and ensure enough power points are present
@@ -199,7 +199,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 		float costAfter = item.getCostForLevel(value.getDistributed()+1);
 		float cost = costAfter - costBefore;
 		if (cost>freePoints) {
-			return new Possible(Severity.STOPPER, RES, IRejectReasons.IMPOSS_NOT_ENOUGH_PPOINTS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_PPOINTS);
 		}
 
 		return Possible.TRUE;
