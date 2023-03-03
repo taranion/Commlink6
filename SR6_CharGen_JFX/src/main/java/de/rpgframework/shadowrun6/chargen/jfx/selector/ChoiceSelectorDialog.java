@@ -27,6 +27,7 @@ import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.NavigButtonControl;
 import org.prelle.javafx.OptionalNodePane;
 
+import de.rpgframework.HasName;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
@@ -53,6 +54,7 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunElement;
 import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.SR6NPC;
@@ -442,6 +444,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		case CARRIED:
 			ret.add( handleCARRIED(item, choice));
 			break;
+		case ELEMENT:
+			ret.add( handleGeneric(ShadowrunElement.class, choice));
+			break;
 		case GEAR:
 			ret.add( handleGEAR(item, choice));
 			break;
@@ -735,6 +740,31 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 			updateButtons();
 			showHelpFor(n);
+		 });
+		content.getChildren().add(choicebox);
+
+		return choicebox;
+	}
+
+	//-------------------------------------------------------------------
+	private <T extends HasName> Node handleGeneric(Class<T> item, Choice choice) {
+		ChoiceBox<T> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<T>() {
+			public T fromString(String value) { return null;}
+			public String toString(T value) {
+				if (value==null) return "-";
+				return value.getName(Locale.getDefault());
+			}
+		});
+		choicebox.getItems().addAll(item.getEnumConstants());
+		Collections.sort(choicebox.getItems(), new Comparator<T>() {
+			public int compare(T o1, T o2) {
+				return Collator.getInstance().compare(o1.getName(Locale.getDefault()), o2.getName(Locale.getDefault()));
+			}});
+		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, ((Enum<?>)n).name()));
+			updateButtons();
 		 });
 		content.getChildren().add(choicebox);
 
