@@ -134,10 +134,9 @@ public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 	 */
 	@Override
 	protected void onDelete(AdeptPowerValue item) {
-		logger.log(Level.DEBUG, "onDelete");
-//		if (control.getSkillController().deselect(item)) {
-//			list.getItems().remove(item);
-//		}
+		if (control.getAdeptPowerController().deselect(item)) {
+			list.getItems().remove(item);
+		}
 	}
 
 	//-------------------------------------------------------------------
