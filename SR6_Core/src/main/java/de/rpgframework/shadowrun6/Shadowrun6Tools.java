@@ -522,7 +522,7 @@ public class Shadowrun6Tools {
 				DataItem data2 = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
 				if (data2==null)
 					return "Unknown "+tmp.getKey();
-				return prefix+"Adeptenkraft "+data2.getName(loc);
+				return prefix+ResourceI18N.get(RES, loc, "label.adeptpower")+" "+data2.getName(loc);
 			case MAGIC_RESO:
 			case MARTIAL_ART:
 			case METAECHO:
