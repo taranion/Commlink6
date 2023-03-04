@@ -106,8 +106,8 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" variant="regular" />
       </modifications>
    </item>
 
@@ -770,8 +770,8 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" variant="regular" />
       </modifications>
    </item>
 
