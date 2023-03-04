@@ -147,6 +147,9 @@ public enum ItemType {
 			),
 	AMMUNITION(
 			ItemSubType.AMMUNITION,
+			ItemSubType.BOWS,
+			ItemSubType.CROSSBOWS,
+			ItemSubType.BALLISTAS,
 			ItemSubType.ROCKETS,
 			ItemSubType.MISSILES,
 			ItemSubType.EXPLOSIVES,

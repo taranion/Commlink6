@@ -74,7 +74,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ATTRIBUTE(new AttributeConverter()),
 	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
 	CARRIED("CarriedItem"),
-	CONTACT_TYPES(ContactType.class,0),
+	CONTACT_TYPES(ContactType.class),
 	CONTACT("Contact"),
 	COMPLEX_FORM(ComplexForm.class),
 	CREATION_POINTS(CreatePoints.class,0),

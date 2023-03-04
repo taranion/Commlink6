@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<metaechoes>
-	<metaecho id="transhumanism" type="TRANSHUMANISM">	
-		<modifications>
-			<valmod type="ATTRIBUTE" ref="ESSENCE_HOLE" value="1000" />
-		</modifications>
-		<requires>
-	   		<datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER" />
-		</requires>
-	</metaecho>
-</metaechoes>
+<contacttypes>
+	<contacttype id="ACADEMIC" />
+	<contacttype id="CORPORATE" />
+	<contacttype id="CRIMINAL" />
+	<contacttype id="ENGINEERING" />
+	<contacttype id="GOVERNMENT" />
+	<contacttype id="MAGIC" />
+	<contacttype id="MATRIX" />
+	<contacttype id="MEDICAL" />
+	<contacttype id="STREET" />
+</contacttypes>
