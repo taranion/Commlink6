@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item id="additional_cyberarm" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
+ 		<flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" set="AUGMENTED" value="1" apply="CHARACTER"/>
+			<valmod type="ATTRIBUTE" ref="AGILITY" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
+			<valmod type="ATTRIBUTE" ref="STRENGTH" set="ARTIFICIAL" value="2" apply="CHARACTER"/>
+   	</modifications>
+    	<variant id="fullarm_synthetic">
+    		<usage mode="IMPLANTED" value="1.2"/>
+    		<attrdef id="PRICE" value="20000"/>
+    		<attrdef id="AVAILABILITY" value="6"/>
+    		<modifications>
+    			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="8"/>
+    		</modifications>
+    	</variant>
+    	<variant id="fullarm_obvious">
+    		<usage mode="IMPLANTED" value="1.2"/>
+    		<attrdef id="PRICE" value="15000"/>
+    		<attrdef id="AVAILABILITY" value="5"/>
+    		<modifications>
+    			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="15"/>
+    		</modifications>
+    	</variant>
+    </item>
+	<item id="articulated_weapon_mount" avail="3L" price="10000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+   	<usage mode="IMPLANTED" value="0.5"/>
+		<usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="built-in-medkit" avail="4" price="1000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="0.4"/>
+		<usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+     	<modifications>
+         <itemmod type="HOOK" ref="MEDKIT"/>
+     	</modifications>
+   </item>
+	<item id="built-in-utilitykit" avail="2" price="1000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+		<usage mode="IMPLANTED" value="0.4"/>
+		<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="cyberfinger" avail="2" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE" reqVariant="true">
+		<usage mode="IMPLANTED" value="0.05"/>
+		<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<variant id="finger_gun">
+      	<modifications>
+      		<itemmod type="HOOK" ref="IMPLANT_HOLDOUT"/>
+      	</modifications>
+ 		</variant>
+ 		<variant id="finger_key"/>
+ 		<variant id="finger_lighter"/>
+ 		<variant id="frag_finger"/>
+ 		<variant id="torch_tip"/>
+   </item>
+</items>

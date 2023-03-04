@@ -37,6 +37,7 @@ import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.DataStructure;
 import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.MartialArts;
+import de.rpgframework.shadowrun6.PriceModifiers;
 import de.rpgframework.shadowrun6.ReturnIdAsResultConverter;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
@@ -73,7 +74,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	ATTRIBUTE(new AttributeConverter()),
 	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
 	CARRIED("CarriedItem"),
-	CONTACT_TYPES(ContactType.class,0),
+	CONTACT_TYPES(ContactType.class),
 	CONTACT("Contact"),
 	COMPLEX_FORM(ComplexForm.class),
 	CREATION_POINTS(CreatePoints.class,0),
@@ -100,7 +101,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	METAECHO(MetamagicOrEcho.class),
 	METATYPE(SR6MetaType.class),
 	PARAGON(MentorSpirit.class),
-	POOL("Pool"), // Derived values like defense pool
+	//POOL("Pool"), // Derived values like defense pool
+	PRICEMOD(PriceModifiers.class,0),
 	PROGRAM(ItemTemplate.class), //
 	// All Resistance tests
 	RESISTANCE(Resistance.class,0),

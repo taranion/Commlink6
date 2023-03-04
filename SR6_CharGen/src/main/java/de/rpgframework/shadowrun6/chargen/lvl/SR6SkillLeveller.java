@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.QualityValue;
@@ -48,7 +49,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 			ValueModification amod = (ValueModification)mod;
 			if (!amod.getKey().equals(key.getId()))
 				continue;
-			
+
 			if (mod.getSource()!=this && mod.getSource()!=null)
 				continue;
 			if (ret==null || amod.getExpCost()>ret.getExpCost())
@@ -56,7 +57,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 		}
 		return ret;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillController#canBeSelected(SR6Skill, Decision[])
@@ -67,14 +68,14 @@ public class SR6SkillLeveller extends CommonSkillController {
 		Possible pos = super.canBeSelected(data);
 		if (!pos.get())
 			return pos;
-		
+
 		// No points left - maybe with karma?
 		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
 		return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillController#canBeSelected(SR6Skill, Decision[])
@@ -110,18 +111,18 @@ public class SR6SkillLeveller extends CommonSkillController {
 			int cost = (data.getType()==SkillType.KNOWLEDGE)?3:5;
 			model.setKarmaFree( model.getKarmaFree() - cost);
 			model.setKarmaInvested( model.getKarmaInvested() + cost);
-			
+
 			ValueModification mod = new ValueModification(ShadowrunReference.SKILL, data.getId(), String.valueOf(res.get().getDistributed()));
 			mod.setSet(ValueType.NATURAL);
 			mod.setDate(Date.from(Instant.now()));
 			mod.setExpCost(cost);
 			model.addToHistory(mod);
-			
+
 			parent.runProcessors();
 		}
 		return res;
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillController#deselect(de.rpgframework.shadowrun6.SR6SkillValue)
@@ -137,7 +138,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 			// Decrease from career
 			model.removeFromHistory(toUndo);
 			karma = toUndo.getExpCost();
-			
+
 			logger.log(Level.INFO, "Deselecting"+key+" from prev. career session grants "+karma+" karma  ");
 			model.setKarmaInvested(model.getKarmaInvested()-karma);
 			model.setKarmaFree(model.getKarmaFree()+karma);
@@ -166,14 +167,14 @@ public class SR6SkillLeveller extends CommonSkillController {
 		int newVal = (sVal==null)?1:(sVal.getDistributed()+1);
 
 		// Raising language skills is like a new specialization
-		if (key.getType()==SkillType.KNOWLEDGE) 
+		if (key.getType()==SkillType.KNOWLEDGE)
 			return 3;
 		if (key.getType()==SkillType.LANGUAGE) {
 			return newVal*3;
 		}
 
 		int cost = newVal*5;
-		
+
 		return cost;
 	}
 
@@ -185,9 +186,9 @@ public class SR6SkillLeveller extends CommonSkillController {
 	public Possible canBeIncreased(SR6SkillValue value) {
 		// Check maximum
 		Possible poss = super.canBeIncreased(value);
-		if (!poss.get()) 
+		if (!poss.get())
 			return poss;
-		
+
 		// Enough karma?
 		if (model.getKarmaFree()<getIncreaseCost(value))
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
@@ -195,7 +196,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 
 		// Skills for which groups character is incompetent, cannot be increased
 		for (QualityValue qual : model.getQualities()) {
-			if (qual.getModifyable().getId().equals("incompetent")) { 
+			if (qual.getModifyable().getId().equals("incompetent")) {
 				Decision dec = value.getDecision(UUID.fromString("d0b872d0-0783-4b7a-b38a-35db1cef3685"));
 				if (dec!=null && dec.getValue().equals(value.getKey()))
 					return Possible.FALSE;
@@ -204,7 +205,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 		// Is automatically added
 //		if (model.isAutoSkill(value))
 //			return false;
-		
+
 		return Possible.TRUE;
 	}
 
@@ -217,9 +218,9 @@ public class SR6SkillLeveller extends CommonSkillController {
 		Possible poss = super.canBeDecreased(value);
 		if (!poss.get())
 			return poss;
-		
+
 		// It is ensured here, that there is distributed>=1
-		
+
 		ValueModification toUndo = getHighestModification(value.getModifyable());
 		if (toUndo!=null && value.getStart()<value.getDistributed()) {
 			if (toUndo.getSource()!=null)
@@ -245,11 +246,11 @@ public class SR6SkillLeveller extends CommonSkillController {
 		if (!available.contains(spec)) {
 			return new Possible(Severity.STOPPER, RES, I18N_NOT_AVAILABLE_SPEC, skillVal.getKey(), spec.getId(), expertise);
 		}
-		
+
 		// Need  5 Karma
 		if (model.getKarmaFree()<5)
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
-		
+
 		return Possible.TRUE;
 	}
 
@@ -276,25 +277,25 @@ public class SR6SkillLeveller extends CommonSkillController {
 				logger.log(Level.WARNING, "Tried to select a specialization, which is not allowed because: "+poss.getMostSevere());
 				return new OperationResult<>(poss);
 			}
-			
+
 			SkillSpecializationValue<SR6Skill> ret = new SkillSpecializationValue<>(spec);
 			skillVal.getSpecializations().add(ret);
 			logger.log(Level.INFO, "Select specialization ''{0}'' in skill ''{1}''", spec.getId(), skillVal.getKey());
-			
+
 			// Now pay
 			int cost = 5;
 			model.setKarmaFree( model.getKarmaFree() - cost);
 			model.setKarmaInvested( model.getKarmaInvested() + cost);
-			
+
 			ValueModification mod = new ValueModification(ShadowrunReference.SKILLSPECIALIZATION, skillVal.getSkill().getId()+"/"+ret.getKey(), String.valueOf(expertise?3:2));
 			mod.setSet(ValueType.NATURAL);
 			mod.setDate(Date.from(Instant.now()));
 			mod.setExpCost(cost);
 			mod.setSource(this);
 			model.addToHistory(mod);
-			
+
 			parent.runProcessors();
-			
+
 			return new OperationResult<>(ret);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE: select({0}, {1}, {2})", skillVal.getKey(), spec, expertise);
@@ -342,22 +343,22 @@ public class SR6SkillLeveller extends CommonSkillController {
 			logger.log(Level.WARNING, "Trying to increase {0} which is not possible: {1}", value.getKey(), poss);
 			return new OperationResult<>(poss);
 		}
-		
+
 		value.setDistributed(value.getDistributed() +1);
 		logger.log(Level.INFO, "Increase {0} to {1}", value.getKey(), value.getDistributed());
-		
+
 		int cost = value.getDistributed()*5;
 		model.setKarmaFree( model.getKarmaFree() - cost);
 		model.setKarmaInvested( model.getKarmaInvested() + cost);
-		
+
 		ValueModification mod = new ValueModification(ShadowrunReference.SKILL, value.getModifyable().getId(), String.valueOf(value.getDistributed()));
 		mod.setSet(ValueType.NATURAL);
 		mod.setDate(Date.from(Instant.now()));
 		mod.setExpCost(cost);
 		model.addToHistory(mod);
-		
+
 		parent.runProcessors();
-		
+
 		return new OperationResult<SR6SkillValue>(value);
 	}
 
@@ -372,14 +373,14 @@ public class SR6SkillLeveller extends CommonSkillController {
 			logger.log(Level.WARNING, "Trying to decrease {0} which is not possible: {1}", value.getKey(), poss);
 			return new OperationResult<>(poss);
 		}
-		
+
 		int cost = value.getDistributed()*5;
 		value.setDistributed(value.getDistributed() -1);
 		logger.log(Level.INFO, "Decrease {0} to {1}", value.getKey(), value.getDistributed());
-		
+
 		model.setKarmaFree( model.getKarmaFree() + cost);
 		model.setKarmaInvested( model.getKarmaInvested() - cost);
-		
+
 		ValueModification toUndo = getHighestModification(value.getModifyable());
 		if (toUndo!=null) {
 			// Decrease from career
@@ -394,7 +395,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 			mod.setExpCost(-cost);
 			model.addToHistory(mod);
 		}
-		
+
 		parent.runProcessors();
 		return new OperationResult<SR6SkillValue>(value);
 	}
@@ -406,7 +407,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 	@Override
 	public int getMaximum(SR6SkillValue value) {
 		int max = 9+value.getModifiedValue(ValueType.MAX);
-		if (value.getModifyable().getType()==SkillType.LANGUAGE) 
+		if (value.getModifyable().getType()==SkillType.LANGUAGE)
 			max=3;
 		return max;
 	}
@@ -421,6 +422,11 @@ public class SR6SkillLeveller extends CommonSkillController {
 		todos.clear();
 		for (Modification _mod : previous) {
 			if (_mod.getReferenceType() == ShadowrunReference.SKILL) {
+				if (_mod instanceof AllowModification) {
+					logger.log(Level.WARNING, "TODO: AllowModification for {0}", ((AllowModification)_mod).getKey());
+					continue;
+				}
+
 				ValueModification mod = (ValueModification) _mod;
 				SR6Skill key = mod.getResolvedKey();
 				SR6SkillValue val = getModel().getSkillValue(key);

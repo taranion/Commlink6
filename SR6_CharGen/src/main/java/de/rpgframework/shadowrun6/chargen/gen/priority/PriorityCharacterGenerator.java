@@ -8,6 +8,7 @@ import java.util.function.BiFunction;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.AttributeValue;
@@ -236,13 +237,14 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	 */
 	@Override
 	public void finish() {
-		// TODO Auto-generated method stub
 		logger.log(Level.WARNING, "TODO: finish");
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> attr = model.getAttribute(key);
 			//attr.setDistributed(attr.)
-			attr.setStart(attr.getDistributed());
+			logger.log(Level.DEBUG, "Finalize {0} to {1}", key, attr.getModifiedValue(ValueType.NATURAL));
+			attr.setStart(attr.getModifiedValue(ValueType.NATURAL));
+			attr.setDistributed(attr.getModifiedValue(ValueType.NATURAL));
 		}
 
 

@@ -6,13 +6,18 @@ import java.util.Collection;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.chargen.ai.Recommender;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 
@@ -36,6 +41,19 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	//-------------------------------------------------------------------
 	public int getMaximumValue(ShadowrunAttribute key) {
 		int max = parent.getModel().getAttribute(key).getMaximum();
+		boolean allow = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_RAISE_ABOVE_6);
+		if (!allow) {
+			for (Modification mod : parent.getModel().getAttribute(key).getModifications()) {
+				if (!(mod instanceof ValueModification))
+					continue;
+				ValueModification vMod = (ValueModification)mod;
+				if (vMod.getSet()!=ValueType.MAX)
+					continue;
+				if (mod.getSource() instanceof MetamagicOrEcho) {
+					max -= vMod.getValue();
+				}
+			}
+		}
 		return (max>0)?max:6;
 	}
 

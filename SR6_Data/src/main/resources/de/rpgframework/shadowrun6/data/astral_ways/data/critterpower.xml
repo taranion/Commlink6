@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<critterpowers>
+    <critterpower id="metaplanar_gateway"  type="MANA" action="MAJOR" range="LINE_OF_SIGHT_AREA" dur="SUSTAINED" />
+</critterpowers>

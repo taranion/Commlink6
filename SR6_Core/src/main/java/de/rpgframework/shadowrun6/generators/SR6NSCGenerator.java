@@ -25,7 +25,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
  *
  */
 public class SR6NSCGenerator extends ShadowrunNSCGenerator {
-	
+
 	private final static Logger logger = System.getLogger(SR6NSCGenerator.class.getPackageName());
 
 	//-------------------------------------------------------------------
@@ -63,6 +63,7 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 	public Object generate(Map<GeneratorVariable,Integer> variables, Classification<?>... classifier) {
 		logger.log(Level.INFO, "ENTER: createNSC("+Arrays.toString(classifier)+")");
 		logger.log(Level.INFO, "variables = "+variables);
+		logger.log(Level.INFO, "classifier = "+Arrays.toString(classifier));
 		try {
 			Actor actor =  (Actor)super.generate(variables, classifier);
 			Integer minRat = variables.get(RunVariable.PROF_EXPECTED_MIN);
@@ -70,7 +71,7 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 			NPCType npcType = (NPCType) getHint(ShadowrunTaxonomy.NPCTYPE, classifier);
 			ContactType conType = (ContactType) getHint(ShadowrunTaxonomy.CONTACT, classifier);
 			logger.log(Level.WARNING, "To Do: Find a matching rulespecific object for  "+npcType+"/"+conType+" and rating "+minRat+"-"+maxRat);
-			
+
 			List<SR6NPC> possible = new ArrayList<>();
 			for (SR6NPC npc : Shadowrun6Core.getItemList(SR6NPC.class)) {
 //				logger.log(Level.DEBUG, "Check "+npc.getId()+": "+npc.getType()+"/"+npc.getTypes()+" with rating "+npc.getRating());

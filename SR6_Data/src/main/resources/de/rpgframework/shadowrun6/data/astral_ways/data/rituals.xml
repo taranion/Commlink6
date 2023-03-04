@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rituals>
+   <ritual id="astral_gateway" thr="3">
+      <ritualfeature ref="anchored"/>
+   </ritual>
+   <ritual id="metaplanar_gateway" thr="6">
+      <ritualfeature ref="anchored"/>
+   </ritual>
+</rituals>

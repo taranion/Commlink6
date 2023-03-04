@@ -188,7 +188,7 @@ public class Converter {
 		if (item.getAttribute(SR6ItemAttribute.PRICE).getLookupTable()!=null) {
 			row.createCell(x++, CellType.STRING).setCellValue("TABLE");
 		} else
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.PRICE).getRawValue()));
 
 		// Has rating
 		row.createCell(x++, CellType.BOOLEAN).setCellValue( (item.getAttribute(SR6ItemAttribute.PRICE).getRawValue().contains("RATING"))?"true":"false");
@@ -200,7 +200,7 @@ public class Converter {
 		// Essence cost
 		usage = item.getUsage(CarryMode.IMPLANTED);
 		if (item.getAttribute(SR6ItemAttribute.ESSENCECOST)!=null)
-			row.createCell(x++, CellType.STRING).setCellValue(item.getAttribute(SR6ItemAttribute.ESSENCECOST).getRawValue());
+			row.createCell(x++, CellType.STRING).setCellValue(prettyRating(item.getAttribute(SR6ItemAttribute.ESSENCECOST).getRawValue()));
 		else if (usage!=null) {
 			row.createCell(x++, CellType.STRING).setCellValue(usage.getRawValue());
 		}
@@ -217,16 +217,20 @@ public class Converter {
 	public static void convertAugmentation(CarriedItem<ItemTemplate> item, Locale loc, Row row, int x) {
 		row.createCell(x++, CellType.STRING).setCellValue( ((ItemType)item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()).name());
 		row.createCell(x++, CellType.STRING).setCellValue( ((ItemSubType)item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()).name());
+		// data-app_commlinkVariantID
 		if (item.getVariantID()!=null)
 			row.createCell(x++, CellType.STRING).setCellValue( item.getVariantID() );
 		else x++;
 
+		// data-availability
 		if (item.hasAttribute(SR6ItemAttribute.AVAILABILITY))
 			row.createCell(x++, CellType.STRING).setCellValue( formatAvailability(item.getAsObject(SR6ItemAttribute.AVAILABILITY), loc) );
 		else x++;
-		// Nuyen
+
+		// data-cost
 		row.createCell(x++, CellType.NUMERIC).setCellValue( item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
-		row.createCell(x++, CellType.STRING).setCellValue( prettyRating(item.getResolved().getAttribute(SR6ItemAttribute.PRICE).getRawValue()+" \u00A5"));
+		// data-cost_text
+		row.createCell(x++, CellType.STRING).setCellValue( prettyRating(item.getResolved().getAttribute(SR6ItemAttribute.PRICE).getRawValue())+" \u00A5");
 		// Has rating
 		row.createCell(x++, CellType.BOOLEAN).setCellValue( (item.getResolved().getAttribute(SR6ItemAttribute.PRICE).getRawValue().contains("RATING"))?"true":"false");
 		// Capacity cost
@@ -247,7 +251,11 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	private static String prettyRating(String input) {
-		return input.replace("$RATING", "Rating");
+		if (!input.contains("$RATING")) return input;
+		String r1 = input.replace("$RATING", "Rating");
+		r1 = r1.replace("Rating*", "Rating x ");
+		r1 = r1.replace("*Rating", " x Rating");
+		return r1;
 	}
 
 	//-------------------------------------------------------------------

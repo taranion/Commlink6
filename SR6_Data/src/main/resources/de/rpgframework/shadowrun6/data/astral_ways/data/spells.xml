@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spells>
+
+   <!-- Manipulation -->
+   <spell id="metaplanar_stasis" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="4" />
+
+</spells>

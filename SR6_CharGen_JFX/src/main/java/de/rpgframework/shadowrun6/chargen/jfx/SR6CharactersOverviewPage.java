@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +33,9 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
 import javafx.scene.image.Image;
@@ -45,7 +47,6 @@ import javafx.scene.image.Image;
 public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 
 	private final static Logger logger = System.getLogger(SR6CharactersOverviewPage.class.getPackageName());
-
 
 	//-------------------------------------------------------------------
 	/**
@@ -110,6 +111,14 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 			if (model.getCharGenUsed() != null) {
 				if (model.getCharGenUsed().equals("prio")) {
 					settings = SR6PrioritySettings.class;
+				} else if (model.getCharGenUsed().equals("sumto10")) {
+					settings = SR6PrioritySettings.class;
+				} else if (model.getCharGenUsed().equals("karma")) {
+					settings = SR6KarmaSettings.class;
+				} else if (model.getCharGenUsed().equals("pointbuy")) {
+					settings = SR6PointBuySettings.class;
+				} else if (model.getCharGenUsed().equals("lifepath")) {
+					settings = SR6LifePathSettings.class;
 				}
 			}
 			if (settings== null) {
@@ -228,5 +237,18 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		System.err.println("SR6CharactersOverviewPage: "+charac.getName()+" with "+charac.getAttribute(ShadowrunAttribute.ESSENCE));
 		super.exportClicked(handle);
 	}
+
+	//-------------------------------------------------------------------
+	public boolean needsCreationModeWarning(CharacterHandle charac) {
+		Shadowrun6Character model = (Shadowrun6Character) charac.getCharacter();
+		if (model.isInCareerMode()) return false;
+
+		return "prio".equals(model.getCharGenUsed());
+	}
+
+	//-------------------------------------------------------------------
+//	public String getCreationModeWarning(CharacterHandle charac) {
+//		return ResourceI18N.get(CharacterExportPluginConfigPane.RES, "dialog.exportcreationmodewarning.message");
+//	}
 
 }

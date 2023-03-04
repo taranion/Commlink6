@@ -1,4 +1,4 @@
-package de.rpgframework.shadowrun6.chargen.gen.priority;
+package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -12,7 +12,6 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**

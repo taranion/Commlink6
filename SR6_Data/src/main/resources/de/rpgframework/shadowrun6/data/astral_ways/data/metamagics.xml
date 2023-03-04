@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+	<metaecho id="dinosaur_summoning" type="METAMAGIC">
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+		<requires>
+			<datareq type="METAECHO" ref="invocation"/>
+		</requires>
+	</metaecho>
+</metaechoes>

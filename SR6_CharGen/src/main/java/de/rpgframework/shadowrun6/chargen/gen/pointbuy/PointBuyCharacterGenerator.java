@@ -28,7 +28,6 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.priority.RemainingCPAreNuyenStep;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 
 /**

@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Cosmetic Bioware -->
+   <item id="clean_metabolism" avail="3" price="1000" type="BIOWARE" subtype="COSMETIC">
+      <usage mode="IMPLANTED" value="0.05"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="dietware" avail="3" price="1000" type="BIOWARE" subtype="COSMETIC">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="hair_growth" avail="2" price="500" type="BIOWARE" subtype="COSMETIC">
+      <usage mode="IMPLANTED" value="0"/>
+      <variant id="fullbody">
+      	<attrdef id="PRICE" value="1500"/>
+      </variant>
+   </item>
+   <item id="metahuman_glamour" avail="4" price="15000" type="BIOWARE" subtype="COSMETIC">
+      <usage mode="IMPLANTED" value="0.25"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+      <modifications>
+         <checkmod type="SKILL" ref="con"  value="1" what="EDGE_ONLY_TEST"/>
+      </modifications>
+   </item>
+   <item id="perfect_eyes" avail="3" price="500" type="BIOWARE" subtype="COSMETIC">
+      <usage mode="IMPLANTED" value="0"/>
+   </item>
+   <item id="skin_pigmentation" avail="3" price="100" type="BIOWARE" subtype="COSMETIC">
+      <usage mode="IMPLANTED" value="0"/>
+      <variant id="permanent">
+      	<attrdef id="PRICE" value="1000"/>
+      </variant>
+   </item>
+
+   <!-- Standard Bioware -->
+   <item id="amplified_immune_system" avail="3" price="3" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.1"/>
+      <attrdef id="PRICE" value="$RATING*4000"/>
+      <attrdef id="AVAILABILITY" value="$RATING*3"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="balance_receptor_alteration" avail="4" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+      <usage mode="IMPLANTED" value="0.1"/>
+   </item>
+   <item id="chemical_gland" avail="5L" price="20000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+           <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
+    	</choices>
+      <usage mode="IMPLANTED" value="0.1"/>
+       <modifications>
+         <itemmod type="HOOK" ref="GLAND" />
+        </modifications>
+      <variant id="spray">
+     		<attrdef id="AVAILABILITY" value="8L"/>
+      	<attrdef id="PRICE" value="6000"/>
+      </variant>
+      <variant id="spit">
+     		<attrdef id="AVAILABILITY" value="8L"/>
+      	<attrdef id="PRICE" value="6000"/>
+      </variant>
+      <variant id="weapon">
+      	<attrdef id="PRICE" value="4000"/>
+     	 	<attrdef id="AVAILABILITY" value="7L"/>
+      </variant>
+   	</item>
+	<item id="chemical_gland_expanded" avail="6L" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+           <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
+    	</choices>
+    	<usage mode="EMBEDDED" slot="GLAND"/>
+   	</item>
+  	 <item id="expanded_volume" avail="2" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+      	<usage mode="IMPLANTED" value="$RATING*0.1"/>
+      	<attrdef id="PRICE" value="$RATING*2000"/>
+      	<attrdef id="AVAILABILITY" value="$RATING*2"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+  	 </item>
+	<item id="false_front" avail="2" price="12000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+   		<!--  TODO model effects and variants -->
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+      	<usage mode="IMPLANTED" value="$RATING*0.2"/>
+      	<attrdef id="PRICE" value="$RATING*12000"/>
+      	<attrdef id="AVAILABILITY" value="$RATING*2 I"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="gills" avail="3" price="8000" type="BIOWARE" subtype="BIOWARE_STANDARD" reqVariant="true">
+    	<usage mode="IMPLANTED" value="0.2"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="saltwater"/>
+    	<variant id="freshwater"/>
+    	<variant id="air"/>
+  	</item>
+	<item id="hand_foot_webbing" avail="3" price="1000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+    	<usage mode="IMPLANTED" value="0.05"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+    		<checkmod type="SKILL" ref="athletics" value="1" what="DICE" cond="y"/>
+    	</modifications>
+  	</item>
+	<item id="joint_replacement" avail="2" price="1000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+    	<usage mode="IMPLANTED" value="0"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+  	</item>
+	<item id="metabolic_arrester" avail="3" price="10000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
+    	<usage mode="IMPLANTED" value="0.3"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+    		<valmod type="ATTRIBUTE" ref="DAMAGE_OVERFLOW" value="2" />
+    	</modifications>
+   	</item>
+	<item id="nephritic_screen" avail="1" price="8000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+    	<usage mode="IMPLANTED" value="0.15"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="nictitating_membranes" avail="2" price="1000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
+    	<usage mode="IMPLANTED" value="0.05"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="quadmod" avail="4" price="7500" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      	<usage mode="IMPLANTED" value="$RATING*0.1"/>
+      	<attrdef id="PRICE" value="$RATING*7500"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+    		<valmod type="SKILL" ref="athletics" value="$RATING" />
+    	</modifications>
+   </item>
+	<item id="replacement_limb_type0" type="BIOWARE" subtype="BIOWARE_STANDARD" reqVariant="true">
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="finger_toe">
+    		<usage mode="IMPLANTED" value="0.01"/>
+      		<attrdef id="PRICE" value="1000"/>
+      		<attrdef id="AVAILABILITY" value="1"/>
+    	</variant>
+    	<variant id="hand_foot">
+    		<usage mode="IMPLANTED" value="0.05"/>
+      		<attrdef id="PRICE" value="10000"/>
+      		<attrdef id="AVAILABILITY" value="2"/>
+    	</variant>
+    	<variant id="partial_arm_leg">
+    		<usage mode="IMPLANTED" value="0.1"/>
+      		<attrdef id="PRICE" value="20000"/>
+      		<attrdef id="AVAILABILITY" value="3"/>
+    	</variant>
+    	<variant id="full_arm_leg">
+    		<usage mode="IMPLANTED" value="0.15"/>
+      		<attrdef id="PRICE" value="40000"/>
+      		<attrdef id="AVAILABILITY" value="4"/>
+    	</variant>
+   </item>
+	<item id="spidersilk_gland" avail="6" price="35000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
+    	<usage mode="IMPLANTED" value="0.3"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+    		<checkmod type="SKILL" ref="athletics" value="1" what="HIT" cond="y"/>
+    	</modifications>
+   	</item>
+	<item id="spinal_realignment" avail="2" price="4000" type="BIOWARE" subtype="BIOWARE_STANDARD" >
+    	<usage mode="IMPLANTED" value="0.1"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="tail" avail="6" type="BIOWARE" subtype="BIOWARE_STANDARD" reqVariant="true">
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="balance">
+    		<usage mode="IMPLANTED" value="0.1"/>
+      		<attrdef id="PRICE" value="2500"/>
+    		<modifications>
+    			<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="paddle">
+    		<usage mode="IMPLANTED" value="0.1"/>
+      		<attrdef id="PRICE" value="2500"/>
+    		<modifications>
+    			<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="prehensile">
+    		<usage mode="IMPLANTED" value="0.25"/>
+      		<attrdef id="PRICE" value="5000"/>
+    		<modifications>
+    			<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="thagomizer">
+    		<usage mode="IMPLANTED" value="0.2"/>
+      		<attrdef id="PRICE" value="7000"/>
+ 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+				<weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/thagomizer" />
+ 			</alternate>
+    	</variant>
+    	<variant id="whip">
+    		<usage mode="IMPLANTED" value="0.5"/>
+      		<attrdef id="PRICE" value="9000"/>
+ 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+      			<weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
+   			</alternate>
+    	</variant>
+   	</item>
+	<item id="tailored_critter_pheromones" avail="2" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      	<usage mode="IMPLANTED" value="$RATING*0.1"/>
+      	<attrdef id="PRICE" value="$RATING*2000"/>
+      	<attrdef id="AVAILABILITY" value="$RATING*2"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+    		<checkmod type="SKILL" ref="con" value="$RATING" what="DICE" cond="y"/>
+    		<checkmod type="SKILL" ref="influence" value="$RATING" what="DICE" cond="y"/>
+    	</modifications>
+   </item>
+	<item id="vocal_modification" avail="6" type="BIOWARE" subtype="BIOWARE_STANDARD" reqVariant="true">
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="banshee">
+    		<usage mode="IMPLANTED" value="0.5"/>
+      		<attrdef id="PRICE" value="20000"/>
+    	</variant>
+    	<variant id="growler">
+    		<usage mode="IMPLANTED" value="0.1"/>
+      		<attrdef id="PRICE" value="5000"/>
+    		<modifications>
+    			<checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="range_enhancer">
+    		<usage mode="IMPLANTED" value="0.1"/>
+      		<attrdef id="PRICE" value="5000"/>
+    		<modifications>
+    			<checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="range_extender">
+    		<usage mode="IMPLANTED" value="0.2"/>
+      		<attrdef id="PRICE" value="7000"/>
+    		<modifications>
+    			<checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    		</modifications>
+    	</variant>
+   </item>
+
+   	<!-- SURGE dermal alterations -->
+	<item id="bark_skin" avail="4" price="1500" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<requires>
+     		<datareq type="CARRIED" ref="rhino_skin" negate="true"/>
+     	</requires>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" set="NATURAL"/>
+	     <!-- TODO: 10% on Armor and clothing -->
+	     <valmod type="PRICEMOD" ref="ARMOR" value="10"/>
+    	</modifications>
+ 	</item>
+	<item id="blubber" avail="5" price="1500" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="camouflage" avail="4" price="1500" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<requires>
+     		<datareq type="ITEMSUBTYPE" ref="BIOWARE_DERMAL" negate="true"/>
+     	</requires>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <checkmod type="SKILL" ref="stealth" value="1" what="DICE" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="chamaeleon_skin" avail="6" type="BIOWARE" subtype="BIOWARE_STANDARD" reqVariant="true">
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="basic">
+    		<usage mode="IMPLANTED" value="0.2"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      	<attrdef id="PRICE" value="2000"/>
+    		<modifications>
+	     		<checkmod type="SKILL" ref="stealth" value="1" what="DICE" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="dynamic">
+    		<usage mode="IMPLANTED" value="0.3"/>
+      	<attrdef id="PRICE" value="4000"/>
+      	<attrdef id="AVAILABILITY" value="7"/>
+    		<modifications>
+	     		<checkmod type="SKILL" ref="stealth" value="1" what="DICE" cond="y"/>
+    		</modifications>
+    	</variant>
+   </item>
+	<item id="chemical_repulsion" avail="8L" price="20000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.25"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <checkmod type="SKILL" ref="athletics" value="0" what="NOT_SPEND_EDGE"/>
+    	</modifications>
+ 	</item>
+	<item id="chloroplast" avail="4" price="2500" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+       <valmod   ref="LIFESTYLE_NECESSITIES"   type="PRICEMOD" value="-1"/>
+       <checkmod ref="con"       type="SKILL" what="EDGE" value="1" cond="y"/>
+       <checkmod ref="influence" type="SKILL" what="EDGE" value="1" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="climate_adaption" avail="3" price="6000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+     	<requires>
+     		<datareq type="CARRIED" ref="dermal_plating" negate="true"/>
+     	</requires>
+    	<modifications>
+	     <checkmod type="SKILL" ref="outdoors" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="defensive_secretion" avail="5" price="5000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="dragon_hide" avail="4" price="2000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="granite_skin" avail="6L" price="50000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.25"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="6" set="NATURAL"/>
+	     <checkmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1" what="HIT" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="greasy_skin" avail="5" price="2000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="insulation_coat" avail="5" price="8000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<requires>
+     		<datareq type="ITEMSUBTYPE" ref="BIOWARE_DERMAL" negate="true"/>
+     	</requires>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+	<item id="rhino_skin" avail="4" price="3000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+     	<requires>
+     		<datareq type="CARRIED" ref="bark_skin" negate="true"/>
+     	</requires>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="3" set="NATURAL"/>
+    	</modifications>
+ 	</item>
+	<item id="thorns_skin" avail="4" price="2000" type="BIOWARE" subtype="BIOWARE_DERMAL">
+     	<usage mode="IMPLANTED" value="0.1"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="ATTACK_RATING_PHYSICAL" value="1" set="NATURAL" cond="y"/>
+	     <!-- TODO: 10% on Armor and clothing -->
+	     <valmod type="PRICEMOD" ref="CLOTHING" value="20"/>
+    	</modifications>
+ 	</item>
+
+ 	<!-- Cultured bioware -->
+	<item id="biolink" avail="4" price="5000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+     	<usage mode="IMPLANTED" value="0.5"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+ 	</item>
+ 	<item id="cerebellum_booster" avail="3" price="50000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.2"/>
+      <attrdef id="PRICE" value="$RATING*50000"/>
+      <attrdef id="AVAILABILITY" value="$RATING*3"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="INTUITION" value="1"/>
+    	</modifications>
+   </item>
+ 	<item id="frog_tongue" avail="3" price="2000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+		<alternate mode="WEAPON">
+			<weapon dmg="0S" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/tongue"/>
+		</alternate>
+   </item>
+ 	<item id="knowledge_infusion" avail="3" price="2000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+		<choices>
+			<choice uuid="c93106ce-c038-4dc7-ba45-97c186fb4260" type="TEXT" ref="TEXT"/>
+		</choices>
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	   	<itemmod type="SKILL" ref="knowledge">
+	     		<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="choice:c93106ce-c038-4dc7-ba45-97c186fb4260"/>
+	   	</itemmod>
+    	</modifications>
+   </item>
+	<item id="replacement_limb_cultured" type="BIOWARE" subtype="BIOWARE_CULTURED" reqVariant="true">
+    		<usage mode="IMPLANTED" value="0.1"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="finger_toe">
+      		<attrdef id="PRICE" value="1500"/>
+      		<attrdef id="AVAILABILITY" value="4"/>
+    	</variant>
+    	<variant id="hand_foot">
+     		<attrdef id="PRICE" value="15000"/>
+     		<attrdef id="AVAILABILITY" value="5"/>
+    	</variant>
+    	<variant id="partial_arm_leg">
+     		<attrdef id="PRICE" value="30000"/>
+     		<attrdef id="AVAILABILITY" value="5"/>
+    	</variant>
+    	<variant id="full_arm_leg">
+     		<attrdef id="PRICE" value="60000"/>
+     		<attrdef id="AVAILABILITY" value="5"/>
+    	</variant>
+   </item>
+ 	<item id="myonuclear_permanence" avail="4" price="12000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+		<choices>
+			<choice uuid="f36b109f-14f7-4db1-83b3-ee350c59e890" type="ACTION" options="avoid_incoming,block,dodge,drop_object,drop_prone,hit_the_dirt,intercept,intercept,quick_draw,stand_up,take_cover"/>
+		</choices>
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <checkmod type="ACTION" ref="CHOICE" choice="f36b109f-14f7-4db1-83b3-ee350c59e890" value="0" what="OTHER"/>
+    	</modifications>
+   </item>
+ 	<item id="neuro_retention_amplification" avail="4" price="10000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <itemmod type="QUALITY" ref="photographic_memory"/>
+    	</modifications>
+   </item>
+ 	<item id="pulmonary_arcane_arrester" avail="6" price="12500" type="BIOWARE" subtype="BIOWARE_CULTURED">
+      <usage mode="IMPLANTED" value="0.25"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_MATRIX" value="1" what="EDGE_ONLY_TEST"/>
+    	</modifications>
+   </item>
+ 	<item id="reception_enhancer" avail="6" price="10000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.2"/>
+      <attrdef id="PRICE" value="$RATING*10000"/>
+      <attrdef id="AVAILABILITY" value="$RATING*2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <checkmod type="SKILL" ref="perception" value="1" what="DICE"/>
+	     <checkmod type="ACTION" ref="matrix_perception" value="1" what="DICE" set="NATURAL"/>
+    	</modifications>
+   </item>
+ 	<item id="reproductive_replacement" avail="3" price="15000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+      <usage mode="IMPLANTED" value="0.0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+    	</modifications>
+   </item>
+ 	<item id="tough_gut" avail="4" price="10000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+      <usage mode="IMPLANTED" value="0.0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+      	<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="-1"/>
+	      <checkmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" what="EDGE_ONLY_TEST" />
+    	</modifications>
+   </item>
+ 	<item id="tremor_reducer" avail="2" price="10000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.1"/>
+      <attrdef id="PRICE" value="$RATING*10000"/>
+      <attrdef id="AVAILABILITY" value="$RATING*2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	      <checkmod type="ACTION" ref="take_aim" value="1" what="DICE" />
+    	</modifications>
+   </item>
+ 	<item id="wings" avail="6" price="100000" type="BIOWARE" subtype="BIOWARE_CULTURED">
+      <usage mode="IMPLANTED" value="1.5"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+    	</modifications>
+   </item>
+
+</items>

@@ -59,6 +59,11 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.PriceModifiers",
+  "allDeclaredFields":true,
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.SR6Lifestyle",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]

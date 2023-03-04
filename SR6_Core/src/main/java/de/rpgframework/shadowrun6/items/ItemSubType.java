@@ -14,10 +14,11 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 public enum ItemSubType {
 
 	// BIOWARE
-	BIOWARE_COSMETICS,
+	BIOWARE_DERMAL,
 	BIOWARE_STANDARD,
 	BIOWARE_CULTURED,
-	BIOWARE_IMPLANT_WEAPON,
+	BIOSENSE,
+	BIOWARE_WEAPON,
 	SYMBIONTS,
 	// Weapon
 	CLUBS,
@@ -27,6 +28,8 @@ public enum ItemSubType {
 	OTHER_CLOSE,
 	BOWS,
 	CROSSBOWS,
+	BALLISTAS,
+	CANNON,
 	THROWING,
 	TASERS,
 	HOLDOUTS,
@@ -164,6 +167,7 @@ public enum ItemSubType {
 	BOATS,
 	SHIPS,
 	SUBMARINES,
+	AIRSHIP,
 	FIXED_WING,
 	ROTORCRAFT,
 	VTOL,

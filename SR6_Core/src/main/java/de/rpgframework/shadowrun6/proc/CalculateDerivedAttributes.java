@@ -101,6 +101,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			calculateDefensePoolMatrix();
 
 			calculateResistMatrixDamage();
+			calculateResistAstralDamage();
 			calculateResistToxin();
 
 			/*
@@ -108,22 +109,23 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			 */
 			val = model.getAttribute(ShadowrunAttribute.RESIST_DRAIN);
 			val.setDistributed(0);
+			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
 			if (model.getTradition()!=null) {
-				addNaturalModifier(val, model.getTradition().getDrainAttribute1());
-				addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
+				addNaturalModifier(val, model.getTradition().getTraditionAttribute());
 			}
-			logger.log(Level.DEBUG, " Defensive pool (Drain) = "+val.getModifiedValue());
+			logger.log(Level.DEBUG, " Resist Drain = "+val.getModifiedValue());
 
-//			/*
-//			 * Dodge
-//			 */
-//			val = model.getAttribute(ShadowrunAttribute.DODGE);
-//			val.setDistributed(0);
-//			val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.DODGE, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue(), ModificationType.RELATIVE, Attribute.REACTION));
-//			val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.DODGE, model.getAttribute(ShadowrunAttribute.INTUITION).getModifiedValue(), ModificationType.RELATIVE, Attribute.INTUITION));
-//			if (model.getSkillValue(ShadowrunCore.getSkill("athletics"))!=null)
-//				val.addModification(new AttributeModification(ModificationValueType.NATURAL, Attribute.DODGE, model.getSkillValue(ShadowrunCore.getSkill("athletics")).getModifiedValue(), ModificationType.RELATIVE, ShadowrunCore.getSkill("athletics")));
-//			logger.log(Level.DEBUG, " Dodge = "+val.getModifiedValue());
+			/*
+			 * Adept Drain
+			 */
+			val = model.getAttribute(ShadowrunAttribute.RESIST_DRAIN_ADEPT);
+			val.setDistributed(0);
+			addNaturalModifier(val, ShadowrunAttribute.BODY);
+			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
+//			if (model.getTradition()!=null) {
+//				addNaturalModifier(val, model.getTradition().getTraditionAttribute());
+//			}
+			logger.log(Level.DEBUG, " Resist Adept Drain = "+val.getModifiedValue());
 
 			/*
 			 * Composure
@@ -247,6 +249,14 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.setDistributed(1); // Base value without modifiers
 		logger.log(Level.DEBUG, "              = "+val.getDisplayString()+"   "+val.getModifications());
 		logger.log(Level.DEBUG, " INI Physical D6  = "+val.getModifiedValue());
+
+		// Minor actions
+		AttributeValue<ShadowrunAttribute> val2 = model.getAttribute(ShadowrunAttribute.MINOR_ACTION);
+		val2.setDistributed(1);
+		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL.name(), val.getModifiedValue(), ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL);
+		valMod.setSet(ValueType.NATURAL);
+		val2.addModification( valMod );
+		logger.log(Level.DEBUG, "              = "+val2.getDisplayString()+"   "+val2.getModifications());
 	}
 
 	//-------------------------------------------------------------------
@@ -502,6 +512,14 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.setDistributed(0);
 		addNaturalModifier(val, model.getPersona().getFirewall().getModifiedValue(), SR6ItemAttribute.FIREWALL);
 		logger.log(Level.DEBUG, " Defensive pool Matrix damafe = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateResistAstralDamage() {
+		/** Indirect combat spells */
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.RESIST_DAMAGE_ASTRAL);
+		val.setDistributed(0);
+		addNaturalModifier(val, ShadowrunAttribute.BODY);
 	}
 
 	//-------------------------------------------------------------------

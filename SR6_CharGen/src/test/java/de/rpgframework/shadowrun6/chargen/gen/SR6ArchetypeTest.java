@@ -537,17 +537,17 @@ public class SR6ArchetypeTest {
 		c1.setTypeName("Corporate Wage Mage");
 		contacts.increaseLoyalty(c1);
 		contacts.increaseRating(c1);
-		c1.setType(ContactType.CORPORATE);
+		c1.setType("CORPORATE");
 		Contact c2 = contacts.createContact().get();
 		c2.setTypeName("Crimson Crush Ganger");
 		contacts.increaseLoyalty(c2);
 		contacts.increaseRating(c2);
-		c2.setType(ContactType.CRIMINAL);
+		c2.setType("CRIMINAL");
 		Contact c3 = contacts.createContact().get();
 		c3.setTypeName("Talismonger");
 		contacts.increaseLoyalty(c3);
 		contacts.increaseRating(c3);
-		c3.setType(ContactType.MAGIC);
+		c3.setType("MAGIC");
 
 //		ItemTemplate bow = Shadowrun6Core.getItem(ItemTemplate.class, "bow");
 //		// Try to add bow without rating

@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun.ASpell.Category;
 import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -30,16 +31,78 @@ public class CombatSectionTools {
 
 	public static class AttackTable extends ArrayList<AttackEntry> {
 		public String col1Name, col2Name, col3Name;
+		public int numColumns=3;
 		public AttackTable(String c1, String c2, String c3) {
 			this.col1Name = c1;
-			this.col1Name = c2;
-			this.col1Name = c3;
+			this.col2Name = c2;
+			this.col3Name = c3;
 		}
 		public AttackTable() {
 		}
 	}
 
 	private final static Logger logger = System.getLogger("de.rpgframework.shadowrun6");
+
+	//-------------------------------------------------------------------
+	public static AttackTable getInitiativeTable(Shadowrun6Character model, Locale loc, WorldType type) {
+		switch (type) {
+		case PHYSICAL : return getInitiativeTablePhysical(model,loc);
+		case ASTRAL   : return getInitiativeTableAstral(model,loc);
+		case MATRIX   : return getInitiativeTableMatrix(model,loc);
+//		case MATRIX_UV: return getInitiativeTable(model,loc);
+		}
+		return new AttackTable();
+	}
+
+	//-------------------------------------------------------------------
+	private  static AttackTable getInitiativeTablePhysical(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable();
+
+		AttackEntry entry = new AttackEntry(ShadowrunAttribute.INITIATIVE_PHYSICAL.getName(loc));
+		Pool<Integer> pool1 = model.getAttribute(ShadowrunAttribute.INITIATIVE_PHYSICAL).getPool();
+		Pool<Integer> pool2 = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL).getPool();
+		entry.setCol1( pool1.toString()+" + "+pool2.toString()+Shadowrun6Core.getI18nResources().getString("label.d6", loc) );
+		entry.setCol1Tooltip( pool1.toExplainString()+"\n"+pool2.toExplainString() );
+		ret.add(entry);
+
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private  static AttackTable getInitiativeTableAstral(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable();
+
+		AttackEntry entry = new AttackEntry(ShadowrunAttribute.INITIATIVE_ASTRAL.getName(loc));
+		Pool<Integer> pool1 = model.getAttribute(ShadowrunAttribute.INITIATIVE_ASTRAL).getPool();
+		Pool<Integer> pool2 = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_ASTRAL).getPool();
+		entry.setCol1( pool1.toString()+" + "+pool2.toString()+Shadowrun6Core.getI18nResources().getString("label.d6", loc) );
+		entry.setCol1Tooltip( pool1.toExplainString()+"\n"+pool2.toExplainString() );
+		ret.add(entry);
+
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private  static AttackTable getInitiativeTableMatrix(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable(
+				ShadowrunAttribute.INITIATIVE_MATRIX.getShortName(loc),
+				ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD.getShortName(loc),
+				ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT.getShortName(loc)
+				);
+
+		AttackEntry entry = new AttackEntry(ShadowrunAttribute.INITIATIVE_PHYSICAL.getName(loc));
+		Pool<Integer> pool1 = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX).getPool();
+		Pool<Integer> pool2 = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX).getPool();
+		entry.setCol1( pool1.toString()+"+ "+pool2.getValue(ValueType.NATURAL)+Shadowrun6Core.getI18nResources().getString("label.d6", loc) );
+		entry.setCol1Tooltip( pool1.toExplainString()+"\n"+pool2.toExplainString() );
+		pool1 = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD).getPool();
+		pool2 = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD).getPool();
+		entry.setCol2( pool1.toString()+"+"+pool2.getValue(ValueType.NATURAL)+Shadowrun6Core.getI18nResources().getString("label.d6", loc) );
+		entry.setCol2Tooltip( pool1.toExplainString()+"\n"+pool2.toExplainString() );
+		ret.add(entry);
+
+		return ret;
+	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -53,14 +116,14 @@ public class CombatSectionTools {
 		case MATRIX_UV: return getAttackTableMatrixUV(model,loc);
 		}
 		return new AttackTable();
-
 	}
+
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTablePhysical(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable(
+				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
 				SR6ItemAttribute.ATTACK_RATING.getShortName(loc),
-				SR6ItemAttribute.DAMAGE.getShortName(loc),
-				Shadowrun6Core.getI18nResources().getString("label.pool", loc)
+				SR6ItemAttribute.DAMAGE.getShortName(loc)
 				);
 
 		/* Unarmed */
@@ -80,7 +143,7 @@ public class CombatSectionTools {
 				entry = new AttackEntry(weapon.getNameWithoutRating(loc));
 				ret.add(entry);
 				// Col1: Pool
-				entry.setCol1( String.valueOf(Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).getValue(ValueType.AUGMENTED)) );
+				entry.setCol1( String.valueOf(Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).getValue(ValueType.NATURAL)) );
 				entry.setCol1Tooltip( Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).toExplainString() );
 				// Col2: AR
 				int[] ar = (int[])weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
@@ -99,7 +162,11 @@ public class CombatSectionTools {
 	}
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTableAstral(Shadowrun6Character model, Locale loc) {
-		AttackTable ret = new AttackTable();
+		AttackTable ret = new AttackTable(
+				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
+				Shadowrun6Core.getI18nResources().getString("label.ar", loc),
+				SR6ItemAttribute.DAMAGE.getShortName(loc)
+				);
 
 		SR6Skill skill = Shadowrun6Core.getSkill("astral");
 		Pool<Integer> pool = Shadowrun6Tools.getSkillPool(model, skill, ShadowrunAttribute.WILLPOWER, "astral_combat");
@@ -176,7 +243,11 @@ public class CombatSectionTools {
 	}
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTableMatrix(Shadowrun6Character model, Locale loc) {
-		AttackTable ret = new AttackTable();
+		AttackTable ret = new AttackTable(
+				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
+				SR6ItemAttribute.DAMAGE.getShortName(loc),
+				null
+				);
 
 		SR6Skill skill = Shadowrun6Core.getSkill("cracking");
 		Pool<Integer> cracking = Shadowrun6Tools.getSkillPool(model, skill, "cybercombat");
@@ -188,21 +259,21 @@ public class CombatSectionTools {
 		dmg.setDistributed( (int)Math.round( (double)attack / 2.0));
 		entry.setCol1(cracking.toString());
 		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol3(dmg.toString());
+		entry.setCol2(dmg.toString());
 		ret.add(entry);
 
 		/* Tarpit */
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "tarpit").getName(loc));
 		entry.setCol1(cracking.toString());
 		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol3("1");
+		entry.setCol2("1*");
 		ret.add(entry);
 
 		/* IC Slicer */
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "ic_slicer").getName(loc)+" *");
 		entry.setCol1(cracking.toString());
 		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol3( String.valueOf(attack) );
+		entry.setCol2( String.valueOf(attack) );
 		ret.add(entry);
 		return ret;
 	}
@@ -215,18 +286,19 @@ public class CombatSectionTools {
 	/**
 	 * Get modifications for the attack table
 	 */
-	public static List<AttackEntry> getAttackModifiers(Shadowrun6Character model, Locale loc, WorldType type) {
+	public static AttackTable getAttackModifiers(Shadowrun6Character model, Locale loc, WorldType type) {
 		switch (type) {
 		case PHYSICAL : return getAttackModifiersPhysical(model,loc);
 		case ASTRAL   : return getAttackModifiersAstral(model,loc);
 		case MATRIX   : return getAttackModifiersMatrix(model,loc);
 		case MATRIX_UV: return getAttackModifiersMatrixUV(model,loc);
 		}
-		return new ArrayList<>();
+		return new AttackTable();
 
 	}
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackModifiersPhysical(Shadowrun6Character model, Locale loc) {
+		AttackTable attackTable = getAttackTablePhysical(model, loc);
 		// Col1: Pool
 		// Col2: AR
 		// Col3: Dmg
@@ -237,7 +309,7 @@ public class CombatSectionTools {
 		entry.setCol3("+1");
 		ret.add(entry);
 		// Burst fire (narrow)
-		entry = new AttackEntry(FireMode.BURST_FIRE.getName(loc)+" (narrow)");
+		entry = new AttackEntry(FireMode.BURST_FIRE.getName(loc)+" "+Shadowrun6Core.getI18nResources().getString("label.burstfire.narrow", loc));
 		entry.setCol2("-4");
 		entry.setCol3("+2");
 		ret.add(entry);
@@ -250,21 +322,40 @@ public class CombatSectionTools {
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "take_aim").getName(loc));
 		entry.setCol3("+1");
 		ret.add(entry);
+		// APDS
+		if (attackTable.size()<5) {
+			AmmunitionType ammo = Shadowrun6Core.getItem(AmmunitionType.class, "apds");
+			entry = new AttackEntry(ammo.getName(loc));
+			entry.setCol2("+1");
+			entry.setCol3("-1");
+			ret.add(entry);
+		}
+		// Gel
+		if (attackTable.size()<4) {
+			AmmunitionType ammo = Shadowrun6Core.getItem(AmmunitionType.class, "explosive");
+			entry = new AttackEntry(ammo.getName(loc));
+			entry.setCol3("+1");
+			ret.add(entry);
+		}
 
 		return ret;
 	}
 	//-------------------------------------------------------------------
-	private  static List<AttackEntry> getAttackModifiersAstral(Shadowrun6Character model, Locale loc) {
-		AttackTable ret = new AttackTable("Drain","Dmg","Area");
+	private  static AttackTable getAttackModifiersAstral(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable(
+				Shadowrun6Core.getI18nResources().getString("label.drain.short", loc),
+				Shadowrun6Core.getI18nResources().getString("label.area.short", loc),
+				Shadowrun6Core.getI18nResources().getString("label.damage.short", loc)
+				);
 		// Semi Automatic
-		AttackEntry entry = new AttackEntry("Amp Up");
+		AttackEntry entry = new AttackEntry(Shadowrun6Core.getI18nResources().getString("label.spell.amp_up", loc));
 		entry.setCol1("+2");
-		entry.setCol2("+1");
+		entry.setCol3("+1");
 		ret.add(entry);
 		// Burst fire (narrow)
-		entry = new AttackEntry("Increase Area");
+		entry = new AttackEntry(Shadowrun6Core.getI18nResources().getString("label.spell.increase_area", loc));
 		entry.setCol1("+1");
-		entry.setCol3("+2m");
+		entry.setCol2("+2m");
 		ret.add(entry);
 		return ret;
 	}
@@ -280,6 +371,198 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackModifiersMatrixUV(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * Get attack table - to be used in CombatSections
+	 */
+	public static AttackTable getDefenseTable(Shadowrun6Character model, Locale loc, WorldType type) {
+		switch (type) {
+		case PHYSICAL : return getDefenseTablePhysical(model,loc);
+		case ASTRAL   : return getDefenseTableAstral(model,loc);
+		case MATRIX   : return getDefenseTableMatrix(model,loc);
+//		case MATRIX_UV: return getAttackTableMatrixUV(model,loc);
+		}
+		return new AttackTable();
+	}
+
+	//-------------------------------------------------------------------
+	private  static AttackTable getDefenseTablePhysical(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable();
+		// Physical
+		AttackEntry entry = new AttackEntry(ShadowrunAttribute.DEFENSE_POOL_PHYSICAL.getShortName(loc));
+		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_PHYSICAL).getPool();
+		entry.setCol1( pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+		// Direct Combat Spells
+		entry = new AttackEntry(ShadowrunAttribute.DEFENSE_POOL_COMBAT_DIRECT.getShortName(loc));
+		pool = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_COMBAT_DIRECT).getPool();
+		entry.setCol1( pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+		// Indirect Combat Spells
+		entry = new AttackEntry(ShadowrunAttribute.DEFENSE_POOL_COMBAT_INDIRECT.getShortName(loc));
+		pool = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_COMBAT_INDIRECT).getPool();
+		entry.setCol1( pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private  static AttackTable getDefenseTableAstral(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable();
+		// Physical
+		AttackEntry entry = new AttackEntry(ShadowrunAttribute.DEFENSE_POOL_ASTRAL.getShortName(loc));
+		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_ASTRAL).getPool();
+		entry.setCol1( pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private  static AttackTable getDefenseTableMatrix(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable();
+		// Physical
+		AttackEntry entry = new AttackEntry(ShadowrunAttribute.DEFENSE_POOL_MATRIX.getName(loc));
+		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_MATRIX).getPool();
+		entry.setCol1( pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * Get attack table - to be used in CombatSections
+	 */
+	public static AttackTable getDefenseModifiers(Shadowrun6Character model, Locale loc, WorldType type) {
+		switch (type) {
+		case PHYSICAL : return getDefenseModifiersPhysical(model,loc);
+//		case ASTRAL   : return getAttackTableAstral(model,loc);
+		case MATRIX   : return getDefenseModifiersMatrix(model,loc);
+//		case MATRIX_UV: return getAttackTableMatrixUV(model,loc);
+		}
+		return new AttackTable();
+	}
+
+	//-------------------------------------------------------------------
+	private  static AttackTable getDefenseModifiersPhysical(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable();
+		// Full Defense
+		AttackEntry entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "full_defense").getName(loc));
+		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.WILLPOWER).getPool();
+		entry.setCol1( "+"+pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+		// Block / Blocken
+		SR6Skill skill = Shadowrun6Core.getSkill("close_combat");
+		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "block").getName(loc));
+		pool = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, skill);
+		entry.setCol1( "+"+pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+		// Dodge / Ausweichen
+		skill = Shadowrun6Core.getSkill("athletics");
+		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "dodge").getName(loc));
+		pool = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, skill);
+		entry.setCol1( "+"+pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private  static AttackTable getDefenseModifiersMatrix(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable();
+		// Full Defense
+		AttackEntry entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "full_matrix_defense").getName(loc));
+		entry.setCol1( "+"+model.getPersona().getFirewall().getModifiedValue() );
+		entry.setCol1Tooltip( SR6ItemAttribute.FIREWALL.getName(loc) );
+		ret.add(entry);
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * Get attack table - to be used in CombatSections
+	 */
+	public static AttackTable getDamageTable(Shadowrun6Character model, Locale loc, WorldType type) {
+		switch (type) {
+		case PHYSICAL : return getDamageTablePhysical(model,loc);
+		case ASTRAL   : return getDamageTableAstral(model,loc);
+//		case MATRIX   : return getAttackTableMatrix(model,loc);
+//		case MATRIX_UV: return getAttackTableMatrixUV(model,loc);
+		}
+		return new AttackTable();
+	}
+
+	//-------------------------------------------------------------------
+	private static AttackTable getDamageTablePhysical(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable();
+//		// Stun monitor
+//		AttackEntry entry = new AttackEntry(ShadowrunAttribute.STUN_MONITOR.getShortName(loc));
+//		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getPool();
+//		entry.setCol1( pool.toString() );
+//		entry.setCol1Tooltip( pool.toExplainString() );
+//		ret.add(entry);
+//		// Stun monitor
+//		entry = new AttackEntry(ShadowrunAttribute.PHYSICAL_MONITOR.getShortName(loc));
+//		pool = model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR).getPool();
+//		entry.setCol1( pool.toString() );
+//		entry.setCol1Tooltip( pool.toExplainString() );
+//		ret.add(entry);
+
+		// RESIST_DAMAGE
+		AttackEntry entry = new AttackEntry(ShadowrunAttribute.RESIST_DAMAGE.getName(loc));
+		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.RESIST_DAMAGE).getPool();
+		entry.setCol1( pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+		// RESIST_TOXIN
+		entry = new AttackEntry(ShadowrunAttribute.RESIST_TOXIN.getName(loc));
+		pool = model.getAttribute(ShadowrunAttribute.RESIST_TOXIN).getPool();
+		entry.setCol1( pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private static AttackTable getDamageTableAstral(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = new AttackTable();
+
+		// RESIST_DAMAGE
+		AttackEntry entry = new AttackEntry(ShadowrunAttribute.RESIST_DAMAGE_ASTRAL.getShortName(loc));
+		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.RESIST_DAMAGE_ASTRAL).getPool();
+		entry.setCol1( pool.toString() );
+		entry.setCol1Tooltip( pool.toExplainString() );
+		ret.add(entry);
+		// RESIST_DRAIN
+		if (model.getMagicOrResonanceType().usesSpells()) {
+			entry = new AttackEntry(ShadowrunAttribute.RESIST_DRAIN.getShortName(loc));
+			pool = model.getAttribute(ShadowrunAttribute.RESIST_DRAIN).getPool();
+			entry.setCol1( pool.toString() );
+			entry.setCol1Tooltip( pool.toExplainString() );
+			ret.add(entry);
+		}
+		// RESIST_DRAIN_ADEPT
+		if (model.getMagicOrResonanceType().usesPowers()) {
+			entry = new AttackEntry(ShadowrunAttribute.RESIST_DRAIN_ADEPT.getShortName(loc));
+			pool = model.getAttribute(ShadowrunAttribute.RESIST_DRAIN_ADEPT).getPool();
+			entry.setCol1( pool.toString() );
+			entry.setCol1Tooltip( pool.toExplainString() );
+			ret.add(entry);
+		}
+
 		return ret;
 	}
 

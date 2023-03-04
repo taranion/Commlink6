@@ -30,11 +30,12 @@ public enum ItemType {
 	ARMOR(ItemSubType.ARMOR_BODY, ItemSubType.ARMOR_HELMET, ItemSubType.ARMOR_SHIELD),
 	ARMOR_ADDITION,
 	BIOWARE(
-//			ItemSubType.BIOWARE_COSMETICS,
 			ItemSubType.BIOWARE_STANDARD,
+			ItemSubType.BIOWARE_DERMAL,
 			ItemSubType.BIOWARE_CULTURED,
-			ItemSubType.BIOWARE_IMPLANT_WEAPON
-//			ItemSubType.SYMBIONTS
+			ItemSubType.BIOSENSE,
+			ItemSubType.BIOWARE_WEAPON,
+			ItemSubType.SYMBIONTS
 			),
 	CYBERWARE(
 //			ItemSubType.CYBER_COSMETICS,
@@ -146,6 +147,9 @@ public enum ItemType {
 			),
 	AMMUNITION(
 			ItemSubType.AMMUNITION,
+			ItemSubType.BOWS,
+			ItemSubType.CROSSBOWS,
+			ItemSubType.BALLISTAS,
 			ItemSubType.ROCKETS,
 			ItemSubType.MISSILES,
 			ItemSubType.EXPLOSIVES,
@@ -179,6 +183,7 @@ public enum ItemType {
 			ItemSubType.BOATS,
 			ItemSubType.SHIPS,
 			ItemSubType.SUBMARINES,
+			ItemSubType.AIRSHIP,
 			ItemSubType.FIXED_WING,
 			ItemSubType.ROTORCRAFT,
 			ItemSubType.VTOL,

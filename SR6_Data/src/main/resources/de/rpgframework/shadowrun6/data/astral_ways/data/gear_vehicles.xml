@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<!-- Airships -->
+   <item id="buzzard" avail="5"  price="10000" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="3" acc="20" spdi="30" tspd="300" bod="10" arm="6" sea="5"/>
+   </item>
+   <item id="small_boat_raft" avail="2"  price="5000" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="5" acc="10" spdi="15" tspd="100" bod="10" arm="4" sea="6"/>
+   </item>
+   <item id="light_attack_ship" avail="4"  price="25000" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="3" acc="20" spdi="25" tspd="240" bod="12" arm="8" sea="4"/>
+   </item>
+   <item id="heavy_attack_ship" avail="6"  price="50000" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="4" acc="15" spdi="20" tspd="200" bod="18" arm="12" sea="8"/>
+   </item>
+   <item id="small_transport" avail="3"  price="40000" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="4" acc="10" spdi="20" tspd="200" bod="16" arm="10" sea="8"/>
+   </item>
+   <item id="guardian_airship" avail="8"  price="200000" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="3" acc="25" spdi="30" tspd="300" bod="20" arm="12" sea="15"/>
+   </item>
+   <item id="large_transport" avail="6"  price="150000" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="5" acc="10" spdi="15" tspd="150" bod="24" arm="6" sea="30"/>
+   </item>
+   <item id="huge_airship" avail="9"  price="500000" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="5" acc="5" spdi="15" tspd="150" bod="40" arm="6" sea="60"/>
+   </item>
+   <item id="dis_seeker" avail="99"  price="9999999" type="VEHICLES" subtype="AIRSHIP">
+      <vehicle han="3" acc="30" spdi="35" tspd="350" bod="18" arm="14" sea="8"/>
+   </item>
+
+   <!-- Airship Weapons -->
+   <item id="ballistra_light" avail="4" price="1000" type="WEAPON_RANGED" subtype="BALLISTAS">
+      <weapon dmg="5P" attack="2,8,10,4,2" ammo="1(m)" mode="SS" skill="athletics" spec="athletics/archery"/>
+      <requires>
+      	<valuereq type="ATTRIBUTE" ref="STRENGTH" value="6" apply="CHARACTER"/>
+      </requires>
+   </item>
+   <item id="ballistra_standard" avail="4" price="5000" type="WEAPON_RANGED" subtype="BALLISTAS">
+      <weapon dmg="6P" attack="2,9,11,5,3" ammo="1(m)" mode="SS" skill="athletics" spec="athletics/archery"/>
+      <requires>
+      	<valuereq type="ATTRIBUTE" ref="STRENGTH" value="7" apply="CHARACTER"/>
+      </requires>
+   </item>
+   <item id="ballistra_heavy" avail="5" price="10000" type="WEAPON_RANGED" subtype="BALLISTAS">
+      <weapon dmg="7P" attack="1,8,12,10,5" ammo="1(m)" mode="SS" skill="athletics" spec="athletics/archery"/>
+      <requires>
+      	<valuereq type="ATTRIBUTE" ref="STRENGTH" value="8" apply="CHARACTER"/>
+      </requires>
+   </item>
+   <item id="cannon_light" avail="6" price="15000" type="WEAPON_RANGED" subtype="CANNON">
+      <weapon dmg="6P" attack="1,10,11,7,6" ammo="1(m)" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+   </item>
+   <item id="cannon_standard" avail="7" price="25000" type="WEAPON_RANGED" subtype="CANNON">
+      <weapon dmg="7P" attack="1,10,12,8,7" ammo="1(m)" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+   </item>
+   <item id="cannon_heavy" avail="8" price="50000" type="WEAPON_RANGED" subtype="CANNON">
+      <weapon dmg="8P" attack="1,11,12,9,8" ammo="1(m)" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+   </item>
+
+   <!-- Ballista Ammunition -->
+   <item id="ballista_bolt_light"  price="25" avail="2" type="AMMUNITION" subtype="BALLISTAS" count="y" units="1">
+		<attrdef id="DAMAGE" value="0"/>
+   </item>
+   <item id="ballista_bolt_standard"  price="50" avail="2" type="AMMUNITION" subtype="BALLISTAS" count="y" units="1">
+		<attrdef id="DAMAGE" value="0"/>
+   </item>
+   <item id="ballista_bolt_heavy"  price="100" avail="3" type="AMMUNITION" subtype="BALLISTAS" count="y" units="1">
+		<attrdef id="DAMAGE" value="0"/>
+   </item>
+
+</items>

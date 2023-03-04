@@ -58,12 +58,9 @@
  			<attrdef id="PRICE" value="5000"/>
  			<attrdef id="AVAILABILITY" value="5I"/>
  			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
-				<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/tail" />
+				<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/thagomizer" />
  			</alternate>
  		</variant>
- 			<alternate mode="WEAPON" type="WEAPON_RANGED" subtype="OTHER_CLOSE">
-				<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/tail" />
- 			</alternate>
    </item>
 	<item id="cyberwings" avail="6L" price="50000" type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<usage mode="IMPLANTED" value="2.0"/>

@@ -376,14 +376,16 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			case PISTOLS_HEAVY: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 3); break;
 			case MACHINE_PISTOLS: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 3); break;
 			case SUBMACHINE_GUNS: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
-			case SHOTGUNS     : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 5); break;
-			case RIFLE_SNIPER : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 5); break;
-			case RIFLE_HUNTING: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 5); break;
-			case RIFLE_ASSAULT: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 6); break;
-			case LMG          : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
-			case MMG          : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
-			case HMG          : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			case SHOTGUNS      : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 5); break;
+			case RIFLE_SNIPER  : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 5); break;
+			case RIFLE_HUNTING : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 5); break;
+			case RIFLE_ASSAULT : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 6); break;
+			case LMG           : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			case MMG           : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			case HMG           : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
 			case ASSAULT_CANNON: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			case BALLISTAS     : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0); break;
+			case CANNON        : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0); break;
 			}
 			break;
 		case WEAPON_SPECIAL:
@@ -514,6 +516,26 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		// TODO: Variant
 
 		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public String getOverdrive(Locale locale) {
+		String key = "item."+id+".overdrive";
+		String line = getLocalizedString(locale, key);
+		if (!line.equals(key)) {
+			return line;
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	public String getWiFi(Locale locale) {
+		String key = "item."+id+".wifi";
+		String line = getLocalizedString(locale, key);
+		if (!line.equals(key)) {
+			return line;
+		}
+		return null;
 	}
 
 	//-------------------------------------------------------------------
