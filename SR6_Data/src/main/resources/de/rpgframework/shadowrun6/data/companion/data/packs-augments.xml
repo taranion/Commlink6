@@ -422,9 +422,9 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cybertorso" id="04179174-0a16-455a-ad7d-c8aea40e7cae" variant="synthetic">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="smuggling_compartment">
+             <embed  type="GEAR" intoId="04179174-0a16-455a-ad7d-c8aea40e7cae" intoType="HOOK" intoRef="CYBERLIMB_IMPLANT" ref="smuggling_compartment">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
