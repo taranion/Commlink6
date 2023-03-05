@@ -342,7 +342,6 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded {0} design mods", list.size());
 			list = Shadowrun6Core.loadDataItems(QualityFactorList.class, QualityFactor.class, set, clazz, "double_clutch/data/qualityFactors.xml");
 			logger.log(Level.DEBUG, "Loaded {0} quality factors", list.size());
-			System.exit(1);
 
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH, Locale.GERMAN);
