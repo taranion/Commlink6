@@ -263,7 +263,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"e.rpgframework.shadowrun6.vehicle.ChassisType",
+  "name":"de.rpgframework.shadowrun6.vehicle.ChassisType",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -273,7 +273,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"e.rpgframework.shadowrun6.vehicle.ConsoleType",
+  "name":"de.rpgframework.shadowrun6.vehicle.ConsoleType",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -283,7 +283,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"e.rpgframework.shadowrun6.vehicle.DesignMod",
+  "name":"de.rpgframework.shadowrun6.vehicle.DesignMod",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -293,7 +293,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"e.rpgframework.shadowrun6.vehicle.DesignOption",
+  "name":"de.rpgframework.shadowrun6.vehicle.DesignOption",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -303,7 +303,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"e.rpgframework.shadowrun6.vehicle.Powertrain",
+  "name":"de.rpgframework.shadowrun6.vehicle.Powertrain",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -313,7 +313,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"e.rpgframework.shadowrun6.vehicle.QualityFactor",
+  "name":"de.rpgframework.shadowrun6.vehicle.QualityFactor",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },

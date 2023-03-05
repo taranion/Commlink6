@@ -578,7 +578,6 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 			Shadowrun6Character model = parent.getModel();
 			logger.log(Level.INFO, "MAGIC = "+model.getAttribute(ShadowrunAttribute.MAGIC));
 			for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
-				logger.log(Level.DEBUG, "canBeIncreased {0}: {1} = {2}", key, getModel().getAttribute(key).getMaximum(), canBeIncreased(getModel().getAttribute(key)));
 					PerAttributePoints per = settings.perAttrib.get(key);
 					if (per == null) {
 						logger.log(Level.WARNING, "No data for " + key);
