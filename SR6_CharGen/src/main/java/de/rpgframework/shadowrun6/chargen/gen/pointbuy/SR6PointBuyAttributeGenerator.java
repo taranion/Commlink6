@@ -497,9 +497,6 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 		allowedAdjust.add(ShadowrunAttribute.EDGE);
 		specialFromCP=0;
 		attribFromCP=0;
-		for (AttributeValue tmp : getModel().getAttributes()) {
-			tmp.clearModifications();
-		}
 
 		for (Entry<ShadowrunAttribute,PerAttributePoints> entry : getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.entrySet()) {
 			switch (entry.getKey()) {
@@ -570,6 +567,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 
 			logger.log(Level.DEBUG, "Start with "+special+" adjust and "+attrib+" attrib points");
 			logger.log(Level.INFO, "Adjustment points may be used for "+allowedAdjust);
+			logger.log(Level.WARNING, "CHARISMA = "+getModel().getAttribute(ShadowrunAttribute.CHARISMA));
 
 			ensureMaximumSet();
 			ensureMaximumNotExceeded();
@@ -579,7 +577,8 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 			// Reduce points
 			Shadowrun6Character model = parent.getModel();
 			logger.log(Level.INFO, "MAGIC = "+model.getAttribute(ShadowrunAttribute.MAGIC));
-				for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+				logger.log(Level.DEBUG, "canBeIncreased {0}: {1} = {2}", key, getModel().getAttribute(key).getMaximum(), canBeIncreased(getModel().getAttribute(key)));
 					PerAttributePoints per = settings.perAttrib.get(key);
 					if (per == null) {
 						logger.log(Level.WARNING, "No data for " + key);

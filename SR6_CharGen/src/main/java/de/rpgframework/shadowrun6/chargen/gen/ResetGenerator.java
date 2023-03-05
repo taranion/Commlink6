@@ -6,7 +6,6 @@ import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -14,7 +13,6 @@ import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
@@ -23,8 +21,6 @@ import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerato
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemUtil;
-import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 public class ResetGenerator implements ProcessingStep {
