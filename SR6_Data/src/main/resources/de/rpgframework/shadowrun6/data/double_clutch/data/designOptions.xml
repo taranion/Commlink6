@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<designopts>
+	<designopt id="improved_body" max="4" bp="4">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="BODY" value="1"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_armor" max="DOUBLE_BODY" bp="2">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ARMOR" value="1"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_handling" max="3" bp="5">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="HANDLING" value="-1"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_handling_offroad" max="3" bp="3">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="HANDLING" value="0/-1"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_handling_onroad" max="3" bp="3">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="HANDLING" value="-1/0"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_seating" max="150PERCENT" bp="2">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="SEATS" value="1"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_size" max="MAXSIZE" bp="4">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="SIZE" value="1"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="BODY" value="2"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SEATS" value="50"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_acceleration" max="2" bp="4">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="5"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_speed_interval" max="3" bp="5">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="5"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_top_speed" max="3" bp="5">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="TOPSPEED" value="25"/>
+		</modifications>
+	</designopt>
+	<designopt id="improved_cargo_space" max="3" bp="2">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="CARGO" value="2"/>
+		</modifications>
+	</designopt>
+	<designopt id="easily_modified" max="4" bp="4">
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_BODY" value="2"/>
+		</modifications>
+	</designopt>
+</designopts>

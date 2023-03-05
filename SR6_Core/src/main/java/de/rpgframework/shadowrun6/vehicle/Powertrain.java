@@ -6,6 +6,7 @@ import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
 
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
@@ -15,6 +16,7 @@ import de.rpgframework.shadowrun6.persist.OnRoadOffRoadConverter;
  * @author prelle
  *
  */
+@DataItemTypeKey(id="powertrain")
 public class Powertrain extends DataItem implements Comparable<Powertrain> {
 
 	@Attribute(required=false)
@@ -44,7 +46,7 @@ public class Powertrain extends DataItem implements Comparable<Powertrain> {
 	public int compareTo(Powertrain other) {
 		if (getName()==null) return 0;
 		if (other.getName()==null) return 0;
-		
+
 		return Collator.getInstance().compare(getName(), other.getName());
 	}
 

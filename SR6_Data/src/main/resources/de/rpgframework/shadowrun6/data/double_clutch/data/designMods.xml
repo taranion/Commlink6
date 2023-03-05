@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<designmods>
+	<designmod id="cargo_hauler"  bp="20">
+		<modifications>
+			<!--specrulemod ref="CARGO_HAULER"/-->
+		</modifications>
+	</designmod>
+	<designmod id="heavy_duty"   bp="10" />
+	<designmod id="light_weight" bp="-10" />
+	<designmod id="high_performance_engines" bp="15" >
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+3/+3" />
+			<valmod type="ITEM_ATTRIBUTE" ref="TOPSPEED" value="50"/>
+		</modifications>
+	</designmod>
+	<designmod id="racing_engines" bp="25" >
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+6/+6" />
+			<valmod type="ITEM_ATTRIBUTE" ref="TOPSPEED" value="100"/>
+		</modifications>
+	</designmod>
+	<designmod id="economy_engines" bp="-15" >
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+3/+3" />
+			<valmod type="ITEM_ATTRIBUTE" ref="TOPSPEED" value="-50"/>
+		</modifications>
+	</designmod>
+	<designmod id="integrated_armor" bp="20" />
+	<designmod id="mass_transit" bp="10" />
+	<designmod id="multi_engine" bp="25" /> <!-- US rules:  acceleration and top speed x2 ; DE rules: acceleration and top speed x1,5 -->
+	<designmod id="off_road_chassis" bp="5" />
+	<designmod id="underpowered" bp="-20" />
+</designmods>

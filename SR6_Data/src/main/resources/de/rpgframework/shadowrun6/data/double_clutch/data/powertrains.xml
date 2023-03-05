@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<powertrains>
+	<powertrain id="wheeled"                    acc="15" spdi="20"  tspd="250" bp="10"   type="GROUND"/> 
+	<powertrain id="tracked" subtype="TRACKED"  acc="10" spdi="25"  tspd="150" bp="12"   type="GROUND"/> 
+	<powertrain id="walker"  subtype="WALKER"   acc="10" spdi="15"  tspd="30"  bp="15"   type="GROUND"/> 
+	<powertrain id="hover"   subtype="HOVERCRAFT" acc="15" spdi="45"  tspd="120" bp="12" type="WATER" /> 
+	<powertrain id="propeller_water"            acc="10" spdi="15"  tspd="100"  bp="12"  type="WATER"/> 
+	<powertrain id="jet_water"                  acc="10" spdi="25"  tspd="150"  bp="20"  type="WATER"/> 
+	<powertrain id="sail"                       acc="5"  spdi="5"   tspd="20"   bp="8"   type="WATER"/> 
+	<powertrain id="propeller_air"              acc="15" spdi="25"  tspd="300"  bp="50"  type="AIR"/> 
+	<powertrain id="jet_air"                    acc="20" spdi="40"  tspd="400"  bp="75"  type="AIR"/> 
+	<powertrain id="vectored_thrust"            acc="40" spdi="60"  tspd="500"  bp="100" type="AIR"/> 
+	<powertrain id="glide"                      acc="15" spdi="25"  tspd="150"  bp="5"   type="AIR"/> 
+	<powertrain id="rotor" subtype="ROTORCRAFT" acc="15" spdi="25"  tspd="350"  bp="70"  type="AIR"/> 
+	<powertrain id="gravtech" subtype="LTAV"    acc="20" spdi="200" tspd="1000"  bp="1000" type="AIR"/> 
+</powertrains>
