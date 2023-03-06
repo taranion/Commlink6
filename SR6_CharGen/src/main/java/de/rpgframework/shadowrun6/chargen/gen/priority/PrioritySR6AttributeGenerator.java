@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyWhen;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -656,6 +657,10 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
+				if (tmp instanceof AllowModification) {
+					unprocessed.add(tmp);
+					continue;
+				}
 				if (tmp.getReferenceType()==ShadowrunReference.CREATION_POINTS) {
 					ValueModification mod = (ValueModification)tmp;
 					if (mod.getResolvedKey()==CreatePoints.ADJUST) {

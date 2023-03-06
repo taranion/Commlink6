@@ -61,6 +61,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
 	private SR6WizardPageMetatype race;
 	private WizardPageLifePath1 lifepath1;
+	private SR6WizardPageDrake drake;
 	private SR6WizardPageChangeling surge;
 	private SR6WizardPageMagicOrResonance magic;
 	private SR6WizardPageQualities qualities;
@@ -103,6 +104,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case PRIORITIES   : ret.add(    prios); break;
 			case METATYPE     : ret.add(     race); break;
 			case SR6_LIFEPATH1:ret.add(lifepath1); break;
+			case DRAKE        : ret.add(    drake); break;
 			case SURGE        : ret.add(    surge); break;
 			case MAGIC_OR_RESONANCE: ret.add(magic); break;
 			case QUALITIES    : ret.add(qualities); break;
@@ -145,6 +147,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 				backHeaderCP.setValue(charGen.getModel().hasCharGenSettings(SR6PointBuySettings.class)?charGen.getModel().getCharGenSettings(SR6PointBuySettings.class).characterPoints:0	);
 			}
 		};
+		drake     = new SR6WizardPageDrake(this, wrapper);
 		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());

@@ -52,6 +52,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	protected List<SignatureManeuver> maneuvers;
 	@Element
 	private ASDFMapping asdfMap;
+	@Element
+	private DrakeTypeValue drakeType;
 
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
@@ -412,6 +414,16 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			asdfMap = new ASDFMapping();
 		}
 		return asdfMap;
+	}
+
+	//-------------------------------------------------------------------
+	public DrakeTypeValue getDrakeType() {
+		return drakeType;
+	}
+
+	//-------------------------------------------------------------------
+	public void setDrakeType(DrakeTypeValue value) {
+		this.drakeType = value;
 	}
 
 }

@@ -10,6 +10,10 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.BodyForm;
+import de.rpgframework.shadowrun.BodyType;
+import de.rpgframework.shadowrun.Movement;
+import de.rpgframework.shadowrun.Movement.MovementType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -90,6 +94,12 @@ public class ResetModifications implements ProcessingStep {
 					System.exit(1);
 				}
 			}
+
+			// Prepare minimal body modifications
+			model.clearBodyForms();
+			BodyForm body = new BodyForm(BodyType.METAHUMAN);
+			body.addMovement(new Movement(MovementType.GROUND,10,15,1));
+			model.addBodyForm(body);
 
 			return unprocessed;
 		} finally {

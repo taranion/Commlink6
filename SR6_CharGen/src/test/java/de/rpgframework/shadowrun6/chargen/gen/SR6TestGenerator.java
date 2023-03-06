@@ -35,6 +35,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 
@@ -427,6 +428,12 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 	 */
 	@Override
 	public ICritterPowerController getCritterPowerController() {
+		return null;
+	}
+
+	@Override
+	public SR6DrakeController getDrakeController() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

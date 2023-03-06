@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
@@ -75,7 +76,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
-		return new WizardPageType[] { WizardPageType.METATYPE,
+		return new WizardPageType[] { WizardPageType.METATYPE, WizardPageType.DRAKE,
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
 				WizardPageType.QUALITIES,
 				WizardPageType.ATTRIBUTES,
@@ -144,6 +145,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 
 			processChain.add(new ResetGenerator(this));
 			processChain.add(meta);
+			processChain.add(drake);
 			processChain.add(magicReso);
 			processChain.add(qualities);
 			processChain.add(qPaths);
@@ -244,5 +246,6 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		foci      = new SR6CommonFocusController(this);
 		qPaths    = new CommonQualityPathController(this);
 		martial   = new SR6MartialArtsController(this);
+		drake     = new SR6DrakeController(this, true);
 	}
 }

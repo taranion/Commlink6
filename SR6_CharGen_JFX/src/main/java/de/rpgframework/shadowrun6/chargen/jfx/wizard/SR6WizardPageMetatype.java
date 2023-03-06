@@ -113,7 +113,6 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 								:
 								"images/metatypes/metatype_"+value.getVariantOf().getId()+"_"+value.getId()+".jpg";
 				InputStream in = CommonShadowrunJFXResourceHook.class.getResourceAsStream(name);
-				System.err.println(getClass()+": Search for "+name+" = "+in);
 				if (in!=null) {
 					Image img = new Image(in);
 					if (img.isError()) {
