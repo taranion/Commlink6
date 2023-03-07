@@ -354,4 +354,40 @@
 			<attrdef id="PRICE" value="12000"/>
 		</variant>
 	</item>
+
+	<!-- Transient -->
+	<item id="etchers" avail="3L" price="1200" type="NANOWARE" subtype="NANITES_TRANSIENT">
+			<usage mode="IMPLANTED" value="0"/>
+	</item>
+	<item id="markers" avail="5I" price="2500" type="NANOWARE" subtype="NANITES_TRANSIENT">
+			<usage mode="IMPLANTED" value="0"/>
+	</item>
+	<item id="taggants" avail="3" price="800" type="NANOWARE" subtype="NANITES_TRANSIENT">
+			<usage mode="IMPLANTED" value="0"/>
+	</item>
+
+	<!-- Nanotech kits -->
+	<item id="nanoscanner" avail="3" type="NANOWARE" subtype="NANOTECH_KIT">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+   	</choices>
+		<attrdef id="PRICE" value="$RATING*200"/>
+	</item>
+	<item id="demolisher_spray_kit"      avail="6I" price="8500" type="NANOWARE" subtype="NANOTECH_KIT" />
+	<item id="demolisher_spray_refill"   avail="6I" price="1500" type="NANOWARE" subtype="NANOTECH_KIT" count="y"/>
+	<item id="dynamic_handprint_kit"     avail="6I" price="12000" type="NANOWARE" subtype="NANOTECH_KIT" />
+	<item id="dynamic_handprint_refill"  avail="6I" price="2000" type="NANOWARE" subtype="NANOTECH_KIT" count="y"/>
+	<item id="nanocosmetics_kit"         avail="2" price="700" type="NANOWARE" subtype="NANOTECH_KIT" />
+	<item id="nanocosmetics_refill"      avail="2" price="100" type="NANOWARE" subtype="NANOTECH_KIT" count="y"/>
+	<item id="nanopaste_disguise_kit"    avail="5L" price="1400" type="NANOWARE" subtype="NANOTECH_KIT" />
+	<item id="nanopaste_disguise_refill" avail="5L" price="300" type="NANOWARE" subtype="NANOTECH_KIT" count="y"/>
+	<item id="nanspy_kit"                avail="6I" price="1400" type="NANOWARE" subtype="NANOTECH_KIT" />
+	<item id="nanospy_refill"            avail="6I" price="300" type="NANOWARE" subtype="NANOTECH_KIT" count="y"/>
+	<item id="nanostat_spray_kit"      avail="2" price="650" type="NANOWARE" subtype="NANOTECH_KIT" />
+	<item id="nanostat_spray_refill"   avail="2" price="100" type="NANOWARE" subtype="NANOTECH_KIT" count="y"/>
+	<item id="savior_medkit"           avail="2" price="2000" type="NANOWARE" subtype="NANOTECH_KIT" />
+	<item id="savior_medkit_refill"    avail="2" price="300" type="NANOWARE" subtype="NANOTECH_KIT" count="y"/>
+	<item id="universal_sealant_kit"      avail="3" price="1200" type="NANOWARE" subtype="NANOTECH_KIT" />
+	<item id="universal_sealant_refill"   avail="3" price="150" type="NANOWARE" subtype="NANOTECH_KIT" count="y"/>
+
 </items>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+	<metaecho id="adaptive_coloration" type="DRACOGENESIS_POWER">
+   	<requires>
+   		<datareq type="DRAKE_TYPE" ref="seadrake"/>
+   	</requires>
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="concealment"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="animal_control" type="DRACOGENESIS_POWER" >
+   	<requires>
+   		<datareq type="DRAKE_TYPE" ref="western"/>
+   	</requires>
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="animal_control"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="bursts_of_power" type="DRACOGENESIS_POWER" />
+   <metaecho id="compulsion" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="compulsion"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="corrosive_spit" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="corrosive_spit"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="dracoform_talent" type="DRACOGENESIS_POWER" />
+
+   <metaecho id="heavy_scales" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <valmod type="CRITTER_POWER" ref="hardened_armor" value="2"/>
+     </modifications>
+   </metaecho>
+</metaechoes>
