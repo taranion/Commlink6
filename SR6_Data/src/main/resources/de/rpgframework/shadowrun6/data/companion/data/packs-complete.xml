@@ -421,24 +421,24 @@
              <!-- <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> TODO: Remove comments once agents are available from hack and slash -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
                 <!-- </embed> -->
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="browse" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="edit" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="encryption" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="signal_scrubber" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="toolbox" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="armor" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="biofeedback_filter" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="blackout" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="decryption" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="defuse" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="exploit" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="fork" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="lockdown" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="overclock" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="stealth" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="trace" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="browse" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="edit" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="encryption" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="signal_scrubber" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="toolbox" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="armor" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="biofeedback_filter" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="blackout" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="decryption" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="defuse" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="exploit" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="fork" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="lockdown" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="overclock" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="stealth" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="trace" variant="regular" />
          <itemmod type="GEAR" apply="CHARACTER" ref="shock_gloves" />
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="ad6f8c28-cf11-4ef9-ae80-5be0118a518c" />
              <embed  type="GEAR" intoId="ad6f8c28-cf11-4ef9-ae80-5be0118a518c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
@@ -1121,23 +1121,23 @@
              <!-- <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> TODO: Remove comments once agents are available from hack and slash -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
                 <!-- </embed> -->
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="browse" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="edit" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="encryption" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="signal_scrubber" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="toolbox" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="biofeedback_filter" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="blackout" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="decryption" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="defuse" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="exploit" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="fork" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="lockdown" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="overclock" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="stealth" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="trace" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="browse" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="edit" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="encryption" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="signal_scrubber" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="toolbox" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="biofeedback_filter" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="blackout" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="decryption" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="defuse" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="exploit" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="fork" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="lockdown" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="overclock" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="stealth" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="trace" variant="regular" />
          <itemmod type="GEAR" apply="CHARACTER" ref="rudger_redhawk" id="1e00a53b-30f3-42d7-a41f-94bff0a9f7f9" />
              <embed  type="GEAR" intoId="1e00a53b-30f3-42d7-a41f-94bff0a9f7f9" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="1e00a53b-30f3-42d7-a41f-94bff0a9f7f9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
@@ -1982,24 +1982,24 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="renraku_kitsune" id="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="browse" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="edit" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="encryption" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="signal_scrubber" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="toolbox" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="armor" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="biofeedback_filter" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="blackout" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="decryption" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="defuse" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="exploit" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="fork" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="lockdown" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="overclock" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="stealth" />
-             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="trace" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="browse" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="edit" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="encryption" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="signal_scrubber" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="toolbox" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="armor" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="biofeedback_filter" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="blackout" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="decryption" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="defuse" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="exploit" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="fork" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="lockdown" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="overclock" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="stealth" variant="regular" />
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="trace" variant="regular" />
          <itemmod type="GEAR" apply="CHARACTER" ref="shock_gloves" />
          <itemmod type="GEAR" apply="CHARACTER" ref="colt_cobra_tz100" id="dd49e01b-334b-489e-893a-f81cd9c0ce82" />
              <embed  type="GEAR" intoId="dd49e01b-334b-489e-893a-f81cd9c0ce82" intoType="HOOK" intoRef="BARREL" ref="silencer" />
@@ -2660,23 +2660,23 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="b63e92cd-3b97-4100-98b6-ad2285484bd0" intoType="HOOK" intoRef="CYBERDECK" ref="shiawase_cyber6" id="6cd08dcc-8c3e-4ef5-be47-8667882f751e" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="browse" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="edit" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="encryption" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="signal_scrubber" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="toolbox" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="biofeedback_filter" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="blackout" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="decryption" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="defuse" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="exploit" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="fork" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="lockdown" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="overclock" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="stealth" />
-             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="trace" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="browse" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="edit" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="encryption" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="signal_scrubber" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="toolbox" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="biofeedback_filter" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="blackout" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="decryption" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="defuse" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="exploit" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="fork" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="lockdown" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="overclock" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="stealth" variant="regular" />
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="trace" variant="regular" />
          <itemmod type="GEAR" apply="CHARACTER" ref="rudger_redhawk" id="1e00a53b-30f3-42d7-a41f-94bff0a9f7f9" />
              <embed  type="GEAR" intoId="1e00a53b-30f3-42d7-a41f-94bff0a9f7f9" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="1e00a53b-30f3-42d7-a41f-94bff0a9f7f9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />

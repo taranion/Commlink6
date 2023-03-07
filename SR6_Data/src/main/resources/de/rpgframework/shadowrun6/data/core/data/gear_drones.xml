@@ -96,6 +96,8 @@
 		<vehicle han="3/4" acc="10" spdi="10" tspd="30" bod="6" arm="6" pil="3" sen="2" type="GROUND" />
 		<modifications>
 			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_BODY"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="82dec4cf-b52c-463c-875f-9434a8103fd3" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="0654dd16-b094-4339-b687-72095c446254" />
 		</modifications>
 	</item>
 	<item avail="2" price="5000" id="mct-nissan_roto_drone" type="DRONE_MEDIUM" subtype="AIR">
@@ -125,6 +127,8 @@
 		<vehicle han="3/4" acc="10" spdi="8" tspd="30" bod="9" arm="10" pil="3" sen="2" type="GROUND" />
 		<modifications>
 			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_BODY"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="be2559d7-3ab9-4b94-abfa-97ba737aaefc" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="ef965a1b-accb-4efd-a969-019c14333f7f" />
 		</modifications>
 	</item>
 

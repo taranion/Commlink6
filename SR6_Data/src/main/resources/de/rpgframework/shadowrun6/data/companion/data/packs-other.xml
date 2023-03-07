@@ -613,24 +613,24 @@
          <!-- <itemmod type="GEAR" apply="CHARACTER" ref="agent"> TODO: Remove comments once agents are available from hack and slash -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
                 <!-- </itemmod> -->
-         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="browse" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="configurator" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="edit" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="encryption" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="toolbox" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="armor" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="biofeedback_filter" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="blackout" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="decryption" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="defuse" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="exploit" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="fork" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="lockdown" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="overclock" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="trace" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="browse" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="configurator" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="edit" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="encryption" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="toolbox" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="biofeedback_filter" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="blackout" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="decryption" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="defuse" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="exploit" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="fork" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="lockdown" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="overclock" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="stealth" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="trace" variant="regular" />
       </modifications>
    </item>
 
@@ -711,27 +711,27 @@
 
    <item id="pack_cyberprograms" lang="de" price="3730" type="PACK" subtype="PACK_OTHER" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="browse" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="configurator" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="edit" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="encryption" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="toolbox" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="virtual_machine" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="armor" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="biofeedback" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="biofeedback_filter" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="blackout" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="decryption" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="defuse" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="disarm" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="exploit" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="fork" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="lockdown" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="overclock" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="trace" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="browse" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="configurator" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="edit" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="encryption" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="toolbox" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="virtual_machine" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="armor" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="biofeedback" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="biofeedback_filter" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="blackout" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="decryption" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="defuse" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="disarm" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="exploit" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="fork" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="lockdown" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="overclock" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="stealth" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="trace" variant="regular" />
       </modifications>
    </item>
 
