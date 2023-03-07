@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<draketypes>
+   <draketype id="eastern">
+      <modifications>
+      	<allowmod type="ATTRIBUTE" ref="BODY"     what="DRACOFORM"/>
+      	<allowmod type="ATTRIBUTE" ref="STRENGTH" what="DRACOFORM"/>
+      	<allowmod type="ATTRIBUTE" ref="AGILITY"  what="DRACOFORM"/>
+      	<allowmod type="ATTRIBUTE" ref="LOGIC"    what="DRACOFORM"/>
+      	<itemmod type="CRITTER_POWER" ref="dual_natured"/>
+      	<itemmod type="CRITTER_POWER" ref="elemental_attack">
+      		<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="FIRE"/>
+      	</itemmod>
+      	<itemmod type="CRITTER_POWER" ref="armor"/>
+      	<itemmod type="CRITTER_POWER" ref="natural_weapon"/>
+      	<itemmod type="CRITTER_POWER" ref="vestigial_wings"/>
+      </modifications>
+   </draketype>
+   <draketype id="western">
+      <modifications>
+      	<allowmod type="ATTRIBUTE" ref="BODY"      what="DRACOFORM"/>
+      	<allowmod type="ATTRIBUTE" ref="STRENGTH"  what="DRACOFORM"/>
+      	<allowmod type="ATTRIBUTE" ref="WILLPOWER" what="DRACOFORM"/>
+      	<allowmod type="ATTRIBUTE" ref="CHARISMA"  what="DRACOFORM"/>
+      	<itemmod type="CRITTER_POWER" ref="dual_natured"/>
+      	<itemmod type="CRITTER_POWER" ref="elemental_attack">
+      		<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="FIRE"/>
+      	</itemmod>
+      	<itemmod type="CRITTER_POWER" ref="armor"/>
+      	<itemmod type="CRITTER_POWER" ref="natural_weapon"/>
+      	<itemmod type="CRITTER_POWER" ref="vestigial_wings"/>
+      	<itemmod type="METAECHO" ref="heavy_scales"/>
+      </modifications>
+   </draketype>
+</draketypes>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<critterpowers>
+    <critterpower id="vestigial_wings"  type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" />
+</critterpowers>
