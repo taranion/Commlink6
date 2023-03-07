@@ -265,7 +265,7 @@
 			<valmod type="HOOK" ref="AUDIO" value="$RATING"/>
       </modifications>
    </item>
-   <item avail="1" price="50" id="omnidirectional_microphone" subtype="AUDIO" type="ELECTRONICS">
+   <item avail="1" price="50" id="omni_directional_microphone" subtype="AUDIO" type="ELECTRONICS">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
@@ -404,7 +404,7 @@
     <item id="olfactory_sensor" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
    	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
     </item>
-    <item id="omni_directional_microphone" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+    <item id="omni_directional_microphone_function" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
    	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
     </item>
     <item id="ultrasound" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">

@@ -367,7 +367,7 @@
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="mad_scanner" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
-             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone_function" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="directional_microphone" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_range_finder" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_microphone" />
@@ -380,7 +380,7 @@
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="mad_scanner" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
-             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone_function" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="directional_microphone" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_range_finder" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_microphone" />
@@ -393,7 +393,7 @@
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="mad_scanner" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="motion_sensor" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
-             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+             <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone_function" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="directional_microphone" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_range_finder" />
              <embed  type="GEAR" intoId="3c36f8d1-3b26-49af-b315-ffc0c57e56fd" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="laser_microphone" />
@@ -590,7 +590,7 @@
              <embed  type="GEAR" intoId="6bd15762-be9f-457c-a8db-6be5d89791d6" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="903246e0-54ae-4165-8900-5672dcfee7b2">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>
-             <embed  type="GEAR" intoId="903246e0-54ae-4165-8900-5672dcfee7b2" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+             <embed  type="GEAR" intoId="903246e0-54ae-4165-8900-5672dcfee7b2" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone_function" />
          <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="a64994d8-99fd-4186-adbc-3a88fad38583">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 </itemmod>
@@ -691,7 +691,7 @@
              <embed  type="GEAR" intoId="6bd15762-be9f-457c-a8db-6be5d89791d6" intoType="HOOK" intoRef="SENSOR_HOUSING" ref="single_sensor" id="903246e0-54ae-4165-8900-5672dcfee7b2">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>
-             <embed  type="GEAR" intoId="903246e0-54ae-4165-8900-5672dcfee7b2" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone" />
+             <embed  type="GEAR" intoId="903246e0-54ae-4165-8900-5672dcfee7b2" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="omni_directional_microphone_function" />
          <itemmod type="GEAR" apply="CHARACTER" ref="handheld_housing" id="a64994d8-99fd-4186-adbc-3a88fad38583">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 </itemmod>
