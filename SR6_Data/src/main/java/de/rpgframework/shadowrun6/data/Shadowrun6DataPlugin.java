@@ -367,6 +367,8 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" other PACKs");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-augments.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" augmentation PACKs");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/packs-vehicles.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicle PACKs");
 			list = Shadowrun6Core.loadDataItems(LifepathModuleList.class, LifepathModule.class, set, clazz,"companion/data/lifepath.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" lifepath modules");
 			list = Shadowrun6Core.loadDataItems(ContactTypeList.class, ContactType.class, set, clazz, "companion/data/contact_types.xml");
