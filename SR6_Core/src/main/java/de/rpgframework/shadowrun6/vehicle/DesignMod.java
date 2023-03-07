@@ -5,11 +5,13 @@ import java.text.Collator;
 import org.prelle.simplepersist.Attribute;
 
 import de.rpgframework.genericrpg.data.ComplexDataItem;
+import de.rpgframework.genericrpg.data.DataItemTypeKey;
 
 /**
  * @author prelle
  *
  */
+@DataItemTypeKey(id="designmod")
 public class DesignMod extends ComplexDataItem implements Comparable<DesignMod> {
 
 	@Attribute(required=true)
@@ -31,7 +33,7 @@ public class DesignMod extends ComplexDataItem implements Comparable<DesignMod> 
 	public int compareTo(DesignMod other) {
 		if (getName()==null) return 0;
 		if (other.getName()==null) return 0;
-		
+
 		return Collator.getInstance().compare(getName(), other.getName());
 	}
 

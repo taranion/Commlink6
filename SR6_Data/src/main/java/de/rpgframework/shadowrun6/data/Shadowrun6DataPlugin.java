@@ -100,6 +100,18 @@ import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCostType;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.vehicle.ChassisType;
+import de.rpgframework.shadowrun6.vehicle.ChassisTypeList;
+import de.rpgframework.shadowrun6.vehicle.ConsoleType;
+import de.rpgframework.shadowrun6.vehicle.ConsoleTypeList;
+import de.rpgframework.shadowrun6.vehicle.DesignMod;
+import de.rpgframework.shadowrun6.vehicle.DesignModList;
+import de.rpgframework.shadowrun6.vehicle.DesignOption;
+import de.rpgframework.shadowrun6.vehicle.DesignOptionList;
+import de.rpgframework.shadowrun6.vehicle.Powertrain;
+import de.rpgframework.shadowrun6.vehicle.PowertrainList;
+import de.rpgframework.shadowrun6.vehicle.QualityFactor;
+import de.rpgframework.shadowrun6.vehicle.QualityFactorList;
 
 /**
  * @author Stefan
@@ -313,6 +325,23 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" mentor spirits");
 			list = Shadowrun6Core.loadDataItems(FocusList.class, Focus.class, set, clazz, "street_wyrd/data/foci.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" foci");
+
+			logger.log(Level.INFO, "START -------------------------------Double Clutch------------------------------------------");
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DOUBLE_CLUTCH", "double_clutch.i18n", Locale.ENGLISH, Locale.GERMAN);
+			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "double_clutch/data/actions_edge.xml");
+			logger.log(Level.DEBUG, "Loaded {0} actions", list.size());
+			list = Shadowrun6Core.loadDataItems(ChassisTypeList.class, ChassisType.class, set, clazz, "double_clutch/data/chassisTypes.xml");
+			logger.log(Level.DEBUG, "Loaded {0} chassis types", list.size());
+			list = Shadowrun6Core.loadDataItems(PowertrainList.class, Powertrain.class, set, clazz, "double_clutch/data/powertrains.xml");
+			logger.log(Level.DEBUG, "Loaded {0} power trains", list.size());
+			list = Shadowrun6Core.loadDataItems(ConsoleTypeList.class, ConsoleType.class, set, clazz, "double_clutch/data/consoleTypes.xml");
+			logger.log(Level.DEBUG, "Loaded {0} Console Types", list.size());
+			list = Shadowrun6Core.loadDataItems(DesignOptionList.class, DesignOption.class, set, clazz, "double_clutch/data/designOptions.xml");
+			logger.log(Level.DEBUG, "Loaded {0} design options", list.size());
+			list = Shadowrun6Core.loadDataItems(DesignModList.class, DesignMod.class, set, clazz, "double_clutch/data/designMods.xml");
+			logger.log(Level.DEBUG, "Loaded {0} design mods", list.size());
+			list = Shadowrun6Core.loadDataItems(QualityFactorList.class, QualityFactor.class, set, clazz, "double_clutch/data/qualityFactors.xml");
+			logger.log(Level.DEBUG, "Loaded {0} quality factors", list.size());
 
 			logger.log(Level.INFO, "START -------------------------------COMPANION------------------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH, Locale.GERMAN);

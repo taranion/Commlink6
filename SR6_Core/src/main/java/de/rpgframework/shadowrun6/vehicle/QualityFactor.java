@@ -5,11 +5,13 @@ import java.text.Collator;
 import org.prelle.simplepersist.Attribute;
 
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.data.DataItemTypeKey;
 
 /**
  * @author prelle
  *
  */
+@DataItemTypeKey(id="qualityfactor")
 public class QualityFactor extends DataItem implements Comparable<QualityFactor> {
 
 	@Attribute(required=true)
@@ -38,7 +40,7 @@ public class QualityFactor extends DataItem implements Comparable<QualityFactor>
 	public int compareTo(QualityFactor other) {
 		if (getName()==null) return 0;
 		if (other.getName()==null) return 0;
-		
+
 		return Collator.getInstance().compare(getName(), other.getName());
 	}
 

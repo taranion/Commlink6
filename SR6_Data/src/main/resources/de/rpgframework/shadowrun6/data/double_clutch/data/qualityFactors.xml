@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualityfactors>
+	<qualityfactor id="anthropomorphic"  multi="2" />
+	<qualityfactor id="cutting_edge"     multi="10" />
+	<qualityfactor id="drone"            multi="0.5" />
+	<qualityfactor id="environmental_adaptation"  multi="2" />
+	<qualityfactor id="mass_produced"    multi="0.5" />
+	<qualityfactor id="one-off_custom"   multi="2" />
+	<qualityfactor id="junkyard_frankenstein"  multi="0.5" />
+	<qualityfactor id="specialized_function"   multi="2" />
+	<qualityfactor id="luxury"           multi="1.5" />
+	<qualityfactor id="security"         multi="2" />
+	<qualityfactor id="military"         multi="3" />
+	<qualityfactor id="superstructure"    multi="3" />
+</qualityfactors>

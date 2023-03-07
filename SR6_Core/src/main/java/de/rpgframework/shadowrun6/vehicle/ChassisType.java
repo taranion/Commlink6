@@ -5,6 +5,7 @@ import java.text.Collator;
 import org.prelle.simplepersist.Attribute;
 
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemType;
 
@@ -12,6 +13,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
  * @author prelle
  *
  */
+@DataItemTypeKey(id = "chassistype")
 public class ChassisType extends DataItem implements Comparable<ChassisType> {
 
 	@Attribute(required=true)
@@ -36,8 +38,6 @@ public class ChassisType extends DataItem implements Comparable<ChassisType> {
 	}
 
 	//-------------------------------------------------------------------
-
-	//-------------------------------------------------------------------
 	/**
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
@@ -45,7 +45,7 @@ public class ChassisType extends DataItem implements Comparable<ChassisType> {
 	public int compareTo(ChassisType other) {
 		if (getName()==null) return 0;
 		if (other.getName()==null) return 0;
-		
+
 		return Collator.getInstance().compare(getName(), other.getName());
 	}
 

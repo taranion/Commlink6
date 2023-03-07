@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<consoletypes>
+	<consoletype id="basic"     	pil="1"	sen="1" bp="3"  special="10"/> <!-- "special" has been removed in DE rules -->
+	<consoletype id="intermediate"	pil="2" sen="2" bp="5"  special="12"/> <!-- "special" has been removed in DE rules --> 
+	<consoletype id="expert"     	pil="3" sen="3" bp="8"  /> 
+	<consoletype id="advanced"   	pil="4" sen="4" bp="14" /> 
+</consoletypes>

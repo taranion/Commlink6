@@ -1,16 +1,17 @@
 package de.rpgframework.shadowrun6.vehicle;
 
 import java.text.Collator;
-import java.util.MissingResourceException;
 
 import org.prelle.simplepersist.Attribute;
 
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.data.DataItemTypeKey;
 
 /**
  * @author prelle
  *
  */
+@DataItemTypeKey(id="consoletype")
 public class ConsoleType extends DataItem implements Comparable<ConsoleType> {
 
 	@Attribute(name="pil")
@@ -34,7 +35,7 @@ public class ConsoleType extends DataItem implements Comparable<ConsoleType> {
 	public int compareTo(ConsoleType other) {
 		if (getName()==null) return 0;
 		if (other.getName()==null) return 0;
-		
+
 		return Collator.getInstance().compare(getName(), other.getName());
 	}
 

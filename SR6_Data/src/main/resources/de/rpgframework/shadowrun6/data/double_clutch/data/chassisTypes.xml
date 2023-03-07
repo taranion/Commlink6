@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<chassistypes>
+	<chassistype id="bike"    type="VEHICLES" subtype="BIKES"  bod="4"  arm="2"  hand="3" seat="2"  bp="3"  size="4"/> 
+	<chassistype id="car"     type="VEHICLES" subtype="CARS"   bod="10" arm="4"  hand="3" seat="4"  bp="7"  size="6"/> 
+	<chassistype id="van"     type="VEHICLES" subtype="VANS"   bod="12" arm="10" hand="4" seat="6"  bp="8"  size="7"/> 
+	<chassistype id="truck"   type="VEHICLES" subtype="TRUCKS" bod="14" arm="12" hand="4" seat="2"  bp="8"  size="8"/> 
+	<chassistype id="bus"     type="VEHICLES" subtype="BUS"  bod="16" arm="10" hand="5" seat="12" bp="10" size="9"/> 
+	<chassistype id="personal_watercraft" type="VEHICLES" subtype="PWC"  bod="4"  arm="2"  hand="3" seat="2"  bp="4"  size="4"/> 
+	<chassistype id="boat"        type="VEHICLES" subtype="BOATS"       bod="10" arm="8"  hand="3" seat="6"  bp="8"  size="6"/> 
+	<chassistype id="ship"        type="VEHICLES" subtype="SHIPS"       bod="20" arm="12" hand="4" seat="12" bp="16" size="12"/> 
+	<chassistype id="submersible" type="VEHICLES" subtype="SUBMARINES"  bod="10" arm="8"  hand="4" seat="8"  bp="16" size="6"/> 
+	<chassistype id="fixed_wing"  type="VEHICLES" subtype="FIXED_WING"  bod="12" arm="4"  hand="5" seat="4"  bp="12" size="6"/> 
+	<chassistype id="rotorcraft"  type="VEHICLES" subtype="ROTORCRAFT"  bod="12" arm="8"  hand="4" seat="4"  bp="14" size="6"/> 
+	<chassistype id="vtol_vstol"  type="VEHICLES" subtype="VTOL"        bod="14" arm="12" hand="4" seat="2"  bp="15" size="8"/> 
+	<chassistype id="lta"         type="VEHICLES" subtype="LTAV"        bod="8"  arm="4"  hand="4" seat="4"  bp="8"  size="6"/> 
+
+	<chassistype id="drone_micro"  type="DRONE_MICRO"  subtype="AIR" bod="0"  arm="3"  hand="3" seat="0" bp="4"  size="0"/> 
+	<chassistype id="drone_mini"   type="DRONE_MINI"   subtype="AIR" bod="1"  arm="3"  hand="3" seat="0" bp="6"  size="1"/> 
+	<chassistype id="drone_small"  type="DRONE_SMALL"  subtype="GROUND" bod="2"  arm="3"  hand="3" seat="0" bp="8"  size="2"/> 
+	<chassistype id="drone_medium" type="DRONE_MEDIUM" subtype="GROUND" bod="4"  arm="3"  hand="3" seat="0" bp="10" size="3"/> 
+	<chassistype id="drone_large"  type="DRONE_LARGE"  subtype="GROUND" bod="8"  arm="4"  hand="4" seat="0" bp="12" size="4"/> 
+</chassistypes>
