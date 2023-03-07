@@ -80,7 +80,8 @@ public enum ItemHook implements Hook {
 	/** Custom Cyberdeck case modifications */
 	CASE_MODS(true),
 	CUSTOM_CYBERDECK(false),
-	CYBERHACK(false)
+	CYBERHACK(false),
+	NANITES(true)
 	;
 
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();

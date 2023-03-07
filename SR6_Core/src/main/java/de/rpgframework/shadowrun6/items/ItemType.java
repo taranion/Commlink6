@@ -87,14 +87,19 @@ public enum ItemType {
 			ItemSubType.AUTOSOFT,
 			ItemSubType.BASIC_PROGRAM,
 			ItemSubType.HACKING_PROGRAM,
+			ItemSubType.RIGGER_PROGRAM,
 			ItemSubType.SKILLSOFT,
-			ItemSubType.TAC_NET
+			ItemSubType.TAC_NET,
+			ItemSubType.ESOFT,
+			ItemSubType.OTHER_PROGRAMS
 			),
 	NANOWARE(
-			ItemSubType.NANOWARE_HARD,
-			ItemSubType.NANOWARE_SOFT,
-			ItemSubType.NANO_CYBERWARE,
-			ItemSubType.NANOTECH_EQUIPMENT
+			ItemSubType.NANITES_COSMETIC,
+			ItemSubType.NANITES_THERAPEUTIC,
+			ItemSubType.NANITES_BIOAMP,
+			ItemSubType.NANITES_UTILITIES,
+			ItemSubType.NANITES_TRANSIENT,
+			ItemSubType.NANO_CYBERWARE
 			),
 	GENETICS(
 			ItemSubType.GENOM_CHANGES,

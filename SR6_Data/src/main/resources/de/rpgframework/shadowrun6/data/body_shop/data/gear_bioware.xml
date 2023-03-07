@@ -66,7 +66,7 @@
       	<attrdef id="PRICE" value="4000"/>
      	 	<attrdef id="AVAILABILITY" value="7L"/>
       </variant>
-   	</item>
+   </item>
 	<item id="chemical_gland_expanded" avail="6L" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
            <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
