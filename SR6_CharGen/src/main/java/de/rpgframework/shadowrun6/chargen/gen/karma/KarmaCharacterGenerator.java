@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6KarmaGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
@@ -66,7 +67,7 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
-		return new WizardPageType[] { WizardPageType.METATYPE,
+		return new WizardPageType[] { WizardPageType.METATYPE, WizardPageType.DRAKE,
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
 				WizardPageType.QUALITIES,
 				WizardPageType.ATTRIBUTES,
@@ -133,6 +134,7 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model, locale));
 			processChain.add(new ResetGenerator(this));
 			processChain.add(meta);
+			processChain.add(drake);
 			processChain.add(magicReso);
 			processChain.add(qualities);
 			processChain.add(qPaths);
@@ -223,5 +225,6 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 		foci       = new SR6CommonFocusController(this);
 		qPaths     = new CommonQualityPathController(this);
 		martial    = new SR6MartialArtsController(this);
+		drake     = new SR6DrakeController(this, true);
 	}
 }

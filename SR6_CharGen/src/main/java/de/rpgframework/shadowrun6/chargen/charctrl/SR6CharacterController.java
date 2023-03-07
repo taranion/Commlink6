@@ -23,4 +23,6 @@ public interface SR6CharacterController extends IShadowrunCharacterController<SR
 
 	public IMartialArtsController getMartialArtsController();
 
+	public SR6DrakeController getDrakeController();
+
 }

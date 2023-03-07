@@ -43,6 +43,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected IQualityPathController qPaths;
 	protected IMartialArtsController martial;
 	protected ICritterPowerController critter;
+	protected SR6DrakeController drake;
 
 	protected Locale locale = Locale.getDefault();
 
@@ -217,5 +218,13 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 		return critter;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getDrakeController()
+	 */
+	@Override
+	public SR6DrakeController getDrakeController() {
+		return drake;
+	}
 
 }

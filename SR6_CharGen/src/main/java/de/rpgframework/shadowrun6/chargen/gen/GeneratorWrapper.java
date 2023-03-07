@@ -38,6 +38,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 
@@ -452,6 +453,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public ICritterPowerController getCritterPowerController() {
 		return wrapped.getCritterPowerController();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getDrakeController()
+	 */
+	@Override
+	public SR6DrakeController getDrakeController() {
+		return wrapped.getDrakeController();
 	}
 
 }

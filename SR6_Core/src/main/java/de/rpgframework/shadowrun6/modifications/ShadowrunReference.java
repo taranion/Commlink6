@@ -30,11 +30,13 @@ import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Resistance;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunElement;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.persist.AttributeConverter;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.DataStructure;
+import de.rpgframework.shadowrun6.DrakeType;
 import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.PriceModifiers;
@@ -82,7 +84,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	DATA_STRUCTURE(DataStructure.class),
 	DRAIN_MAGE(new AttributeConverter()),
 	DRAIN_ADEPT(new AttributeConverter()),
-	ELEMENT("Element"),
+	DRAKE_TYPE(DrakeType.class),
+	ELEMENT(ShadowrunElement.class,0),
 	FOCUS(Focus.class),
 	GEAR(ItemTemplate.class),
 	GEARMOD(SR6ItemEnhancement.class),

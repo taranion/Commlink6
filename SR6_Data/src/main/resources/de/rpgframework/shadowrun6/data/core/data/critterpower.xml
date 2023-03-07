@@ -10,7 +10,11 @@
     <critterpower id="confusion"      type="MANA"     action="AUTO"  range="LINE_OF_SIGHT" dur="SUSTAINED"/>
     <critterpower id="corrosive_spit" type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
     <critterpower id="dual_natured"   type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" />
-    <critterpower id="elemental_attack" type="PHYSICAL" action="AUTO"  range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="elemental_attack" type="PHYSICAL" action="AUTO"  range="LINE_OF_SIGHT" dur="INSTANTANEOUS" >
+    	<choices>
+			<choice type="ELEMENT" ref="element" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" />
+    	</choices>
+    </critterpower>
     <critterpower id="energy_aura"    type="PHYSICAL" action="AUTO"  range="LINE_OF_SIGHT" dur="ALWAYS" />
     <critterpower id="engulf"         type="PHYSICAL" action="MAJOR" range="TOUCH"         dur="SUSTAINED" />
     <critterpower id="enhanced_senses" type="PHYSICAL" action="AUTO" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />

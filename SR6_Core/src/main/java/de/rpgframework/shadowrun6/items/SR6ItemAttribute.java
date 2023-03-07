@@ -63,6 +63,8 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	ITEMTYPE( new EnumConverter(ItemType.class)),
 	ITEMSUBTYPE( new EnumConverter(ItemSubType.class)),
 
+	NANITE_VOLUME,
+
 //	/** Maximum rating of embedded items */
 	MAX_SENSOR_RATING,
 	MAX_SKILLSOFT_RATING,

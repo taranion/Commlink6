@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="nanohive" avail="4" type="NANOWARE" subtype="NANO_CYBERWARE">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+		<usage mode="IMPLANTED" value="$RATING*0.2" />
+		<attrdef id="PRICE" value="$RATING*15000"/>
+		<modifications>
+			<valmod type="HOOK" ref="NANITES" value="$RATING*2"/>
+		</modifications>
+		<variant id="distributed">
+			<attrdef id="AVAILABILITY" value="5L"/>
+			<attrdef id="PRICE" value="$RATING*22000"/>
+		</variant>
+   </item>
+   <item id="distributed_construction" avail="5L" type="NANOWARE" subtype="NANO_CYBERWARE">
+   	<requires>
+   		<datareq type="CARRIED" ref="nanohive" />
+   	</requires>
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+		<usage mode="IMPLANTED" value="0" />
+		<attrdef id="PRICE" value="$RATING*7000"/>
+   </item>
+
+	<item id="nanite_pilot" avail="3" price="500" type="SOFTWARE" subtype="OTHER_PROGRAMS">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+	<!-- Cosmetic nanites -->
+	<item id="dynamic_features" avail="3L" price="1200" type="NANOWARE" subtype="NANITES_COSMETIC" reqVariant="y">
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES"/>
+			<attrdef id="AVAILABILITY" value="3L"/>
+			<attrdef id="PRICE" value="12500"/>
+		</variant>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="2L"/>
+			<attrdef id="PRICE" value="1200"/>
+		</variant>
+	</item>
+	<item id="dynamic_handprints" avail="4L" price="1500" type="NANOWARE" subtype="NANITES_COSMETIC" reqVariant="y">
+		<variant id="colony">
+		<usage mode="EMBEDDED" slot="NANITES"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="18000"/>
+		</variant>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="4L"/>
+			<attrdef id="PRICE" value="1500"/>
+		</variant>
+	</item>
+	<item id="nanotattoos" avail="2" price="1500" type="NANOWARE" subtype="NANITES_COSMETIC" reqVariant="y">
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES"/>
+			<attrdef id="PRICE" value="2500"/>
+		</variant>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="PRICE" value="300"/>
+		</variant>
+	</item>
+
+	<!-- Therapeutic -->
+	<item id="anti_rad" avail="2" price="400" type="NANOWARE" subtype="NANITES_THERAPEUTIC" reqVariant="y">
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="PRICE" value="400"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES"/>
+			<attrdef id="AVAILABILITY" value="3"/>
+			<attrdef id="PRICE" value="4000"/>
+		</variant>
+	</item>
+	<item id="nano_health_suites" avail="2" price="600" type="NANOWARE" subtype="NANITES_THERAPEUTIC" reqVariant="y">
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="$NANITE_VOLUME" apply="CHARACTER"/>
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="PRICE" value="600"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES"/>
+			<attrdef id="AVAILABILITY" value="3"/>
+			<attrdef id="PRICE" value="6000"/>
+		</variant>
+	</item>
+	<item id="oxyrush" avail="2L" price="300" type="NANOWARE" subtype="NANITES_THERAPEUTIC" reqVariant="y">
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="2L"/>
+			<attrdef id="PRICE" value="300"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES"/>
+			<attrdef id="AVAILABILITY" value="3L"/>
+			<attrdef id="PRICE" value="2500"/>
+		</variant>
+	</item>
+	<item id="saviour_system" avail="3" price="700" type="NANOWARE" subtype="NANITES_THERAPEUTIC" reqVariant="y">
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="3"/>
+			<attrdef id="PRICE" value="700"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES"/>
+			<attrdef id="AVAILABILITY" value="4"/>
+			<attrdef id="PRICE" value="6500"/>
+		</variant>
+	</item>
+
+	<!-- Bioamplifier Nanites -->
+	<item id="augmented_neural_network" avail="4I" price="4000" type="NANOWARE" subtype="NANITES_BIOAMP" reqVariant="y">
+		<modifications>
+			<checkmod type="ATTRIBUTE" ref="REACTION" value="1" what="DICE" />
+			<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL" value="1" what="DICE" />
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="4I"/>
+			<attrdef id="PRICE" value="4000"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="40000"/>
+		</variant>
+	</item>
+	<item id="bio_response_override" avail="5I" price="3500" type="NANOWARE" subtype="NANITES_BIOAMP" reqVariant="y">
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" set="AUGMENTED"/>
+			<valmod type="ATTRIBUTE" ref="STUN_MONITOR" value="1"/>
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="3500"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="2"/>
+			<attrdef id="AVAILABILITY" value="6I"/>
+			<attrdef id="PRICE" value="35000"/>
+		</variant>
+	</item>
+	<item id="extracellular_reinforcement" avail="4I" price="2500" type="NANOWARE" subtype="NANITES_BIOAMP" reqVariant="y">
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1" set="AUGMENTED"/>
+			<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1"/>
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="4I"/>
+			<attrdef id="PRICE" value="2500"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="3"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="25000"/>
+		</variant>
+	</item>
+	<item id="limbic_neural_amplifier" avail="4I" price="6500" type="NANOWARE" subtype="NANITES_BIOAMP" reqVariant="y">
+		<modifications>
+			<checkmod type="ATTRIBUTE" ref="INTUITION" value="1" what="DICE" />
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="4I"/>
+			<attrdef id="PRICE" value="6500"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="2"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="65000"/>
+		</variant>
+	</item>
+	<item id="neocortical_neural_amplifier" avail="3I" price="5500" type="NANOWARE" subtype="NANITES_BIOAMP" reqVariant="y">
+		<modifications>
+			<checkmod type="ATTRIBUTE" ref="LOGIC" value="1" what="DICE" />
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="3I"/>
+			<attrdef id="PRICE" value="5500"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="2"/>
+			<attrdef id="AVAILABILITY" value="4I"/>
+			<attrdef id="PRICE" value="55000"/>
+		</variant>
+	</item>
+	<item id="neural_pattern_reinforcement" avail="5I" price="7000" type="NANOWARE" subtype="NANITES_BIOAMP" reqVariant="y">
+		<modifications>
+			<checkmod type="ATTRIBUTE" ref="LOGIC" value="1" what="DICE" />
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="7000"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="2"/>
+			<attrdef id="AVAILABILITY" value="6I"/>
+			<attrdef id="PRICE" value="70000"/>
+		</variant>
+	</item>
+	<item id="neurochemical_regulator" avail="3I" price="5500" type="NANOWARE" subtype="NANITES_BIOAMP" reqVariant="y">
+		<modifications>
+			<checkmod type="ATTRIBUTE" ref="CHARISMA" value="1" what="DICE" />
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="3I"/>
+			<attrdef id="PRICE" value="5500"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="2"/>
+			<attrdef id="AVAILABILITY" value="4I"/>
+			<attrdef id="PRICE" value="55000"/>
+		</variant>
+	</item>
+	<item id="neuromuscular_amplifier" avail="4I" price="1500" type="NANOWARE" subtype="NANITES_BIOAMP" reqVariant="y">
+		<modifications>
+			<checkmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" what="DICE" apply="CHARACTER"/>
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="4I"/>
+			<attrdef id="PRICE" value="1500"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="2"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="15000"/>
+		</variant>
+	</item>
+
+	<!-- Utility nanites -->
+	<item id="control_rig_booster" avail="3L" price="1500" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
+		<modifications>
+			<checkmod type="SKILLSPECIALIZATION" ref="engineering/gunnery" value="1" what="DICE" apply="CHARACTER"/>
+			<checkmod type="SKILL" ref="piloting" value="1" what="DICE" apply="CHARACTER"/>
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="3L"/>
+			<attrdef id="PRICE" value="1000"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="2"/>
+			<attrdef id="AVAILABILITY" value="4L"/>
+			<attrdef id="PRICE" value="12000"/>
+		</variant>
+	</item>
+	<item id="demolishers" avail="4I" price="1500" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="4I"/>
+			<attrdef id="PRICE" value="1500"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="2"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="15000"/>
+		</variant>
+	</item>
+	<item id="gastrocutter" avail="3L" price="600" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="3L"/>
+			<attrdef id="PRICE" value="600"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="1"/>
+			<attrdef id="AVAILABILITY" value="4L"/>
+			<attrdef id="PRICE" value="6500"/>
+		</variant>
+	</item>
+	<item id="implant_medic" avail="3" price="1200" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="3"/>
+			<attrdef id="PRICE" value="1200"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="1"/>
+			<attrdef id="AVAILABILITY" value="4"/>
+			<attrdef id="PRICE" value="12000"/>
+		</variant>
+	</item>
+	<item id="nanite_hunter" avail="4L" price="700" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="4L"/>
+			<attrdef id="PRICE" value="700"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="1"/>
+			<attrdef id="AVAILABILITY" value="5L"/>
+			<attrdef id="PRICE" value="7000"/>
+		</variant>
+	</item>
+	<item id="tech_blast" avail="5I" price="3000" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="3000"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="1"/>
+			<attrdef id="AVAILABILITY" value="6I"/>
+			<attrdef id="PRICE" value="30000"/>
+		</variant>
+	</item>
+	<item id="tech_infestation" avail="5I" price="3500" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="3500"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="1"/>
+			<attrdef id="AVAILABILITY" value="6I"/>
+			<attrdef id="PRICE" value="35000"/>
+		</variant>
+	</item>
+	<item id="toughskin" avail="3" price="1200" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
+		<modifications>
+         <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$VOLUME"/>
+		</modifications>
+		<variant id="prebuilt">
+			<usage mode="IMPLANTED" value="0"/>
+			<attrdef id="AVAILABILITY" value="3"/>
+			<attrdef id="PRICE" value="1200"/>
+		</variant>
+		<variant id="colony">
+			<usage mode="EMBEDDED" slot="NANITES" value="2"/>
+			<attrdef id="AVAILABILITY" value="4"/>
+			<attrdef id="PRICE" value="12000"/>
+		</variant>
+	</item>
+</items>

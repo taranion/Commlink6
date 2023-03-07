@@ -106,6 +106,7 @@ import de.rpgframework.shadowrun6.proc.CalculateMeleeAndUnarmed;
 import de.rpgframework.shadowrun6.proc.CalculatePersona;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
+import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromPowers;
@@ -126,6 +127,7 @@ public class Shadowrun6Tools {
 		ResetModifications.class,
 		EnsureAttributePresence.class,
 		GetModificationsFromMetaType.class,
+		GetModificationsForDrakes.class,
 		ApplyModificationsGeneric.class,
 		GetModificationsFromMagicOrResonance.class,
 		GetModificationsFromQualities.class,
@@ -337,7 +339,7 @@ public class Shadowrun6Tools {
 						return attrName+" "+valMod.getValue();
 					}
 				case CRITTER_POWER:
-					return ((CritterPower)valMod.getResolvedKey()).getName(loc)+" "+valMod.getValue();
+					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc)+" "+valMod.getValue());
 				case HOOK:
 					return RES.format("modification.hook.withCap", loc, valMod.getRawValue(),ItemHook.valueOf(valMod.getKey()).getName(loc));
 				case ITEM_ATTRIBUTE:
@@ -373,6 +375,18 @@ public class Shadowrun6Tools {
 					} else {
 						return skillName+" "+valMod.getValue();
 					}
+				default:
+					logger.log(Level.ERROR, "Don't know how to display "+mod);
+					return "Unknown value type "+type;
+				}
+			}
+
+			//
+			if (mod instanceof DataItemModification) {
+				DataItemModification valMod = (DataItemModification)mod;
+				switch (type) {
+				case CRITTER_POWER:
+					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc));
 				default:
 					logger.log(Level.ERROR, "Don't know how to display "+mod);
 					return "Unknown value type "+type;
@@ -521,8 +535,13 @@ public class Shadowrun6Tools {
 			case ADEPT_POWER:
 				DataItem data2 = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
 				if (data2==null)
-					return "Unknown "+tmp.getKey();
+					return "Unknown adept power "+tmp.getKey();
 				return prefix+ResourceI18N.get(RES, loc, "label.adeptpower")+" "+data2.getName(loc);
+			case DRAKE_TYPE:
+				data2 = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				if (data2==null)
+					return "Unknown drake type "+tmp.getKey();
+				return prefix+ResourceI18N.get(RES, loc, "label.draketype")+" "+data2.getName(loc);
 			case MAGIC_RESO:
 			case MARTIAL_ART:
 			case METAECHO:
@@ -745,6 +764,9 @@ public class Shadowrun6Tools {
 			case ADEPT_POWER:
 				if (negated) return !model.hasAdeptPower(req.getKey());
 				return model.hasAdeptPower(req.getKey());
+			case DRAKE_TYPE:
+				if (negated) return model.getDrakeType()==null || item!=model.getDrakeType().getResolved();
+				return model.getDrakeType()!=null || item==model.getDrakeType().getResolved();
 			case QUALITY:
 				if (negated) return !model.hasQuality(req.getKey());
 				return model.hasQuality(req.getKey());
