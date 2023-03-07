@@ -635,7 +635,7 @@
    <item id="pack_mgl6" price="6125" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="armtech_mgl6" id="a0c21b07-fd11-45d8-b41f-e87886feba39" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="airburst_link" />
+             <embed  type="GEAR" intoId="a0c21b07-fd11-45d8-b41f-e87886feba39" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
              <embed  type="GEAR" intoId="a0c21b07-fd11-45d8-b41f-e87886feba39" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="e7dec222-eb8a-48d7-bc38-ea3dcfaa30e7" />
              <embed  type="GEAR" intoId="e7dec222-eb8a-48d7-bc38-ea3dcfaa30e7" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
              <embed  type="GEAR" intoId="a0c21b07-fd11-45d8-b41f-e87886feba39" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
@@ -650,7 +650,7 @@
    <item id="pack_mgl12" price="12325" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="armtech_mgl12" id="1b1572f8-b902-4799-ba7b-e5e20e212e32" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="airburst_link" />
+             <embed  type="GEAR" intoId="1b1572f8-b902-4799-ba7b-e5e20e212e32" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
              <embed  type="GEAR" intoId="1b1572f8-b902-4799-ba7b-e5e20e212e32" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="a7cde599-fbd5-4cbc-8d50-bf2b71ff7d48" />
              <embed  type="GEAR" intoId="a7cde599-fbd5-4cbc-8d50-bf2b71ff7d48" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
              <embed  type="GEAR" intoId="1b1572f8-b902-4799-ba7b-e5e20e212e32" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
@@ -674,7 +674,7 @@
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="onotari_interceptor" id="b8afdfea-78a2-4931-a298-54e86369d756" />
 <!--             <embed  type="GEAR" intoId="b8afdfea-78a2-4931-a298-54e86369d756/48da1286-ef81-4291-89cb-02d0ebaf3428" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" /> TODO: Enable double UUIDs to allow embedding something in a factory installed subitem, first UUID is weapon, second UUID is factory smartlink of that weapon -->
-         <itemmod type="GEAR" apply="CHARACTER" ref="airburst_link" />
+             <embed  type="GEAR" intoId="b8afdfea-78a2-4931-a298-54e86369d756" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
          <valmod type="GEAR" apply="CHARACTER" ref="high_explosive" value="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="fragmentation" value="2" />
       </modifications>
@@ -1056,6 +1056,9 @@
              <embed  type="GEAR" intoId="a026a3bb-fdb3-40fa-b02a-436d8fc358b0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5">
                 <decision choice="82e2d01d-002c-4af8-be85-cf33368e0a96" value="raiden_launcher"/>
                 </embed>
+         <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
+                <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="flechette"/>
+                </valmod>
          <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant="mini" value="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant="mini" value="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="high_explosive_grenade" variant="mini" value="4" />
@@ -1117,7 +1120,7 @@
    <item id="pack_mgl6" lang="de" price="5975" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="armtech_mgl6" id="a0c21b07-fd11-45d8-b41f-e87886feba39" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="airburst_link" />
+             <embed  type="GEAR" intoId="a0c21b07-fd11-45d8-b41f-e87886feba39" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
              <embed  type="GEAR" intoId="a0c21b07-fd11-45d8-b41f-e87886feba39" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="e7dec222-eb8a-48d7-bc38-ea3dcfaa30e7" />
              <embed  type="GEAR" intoId="a0c21b07-fd11-45d8-b41f-e87886feba39" intoType="HOOK" intoRef="TOP" ref="imaging_scope" />
              <embed  type="GEAR" intoId="a0c21b07-fd11-45d8-b41f-e87886feba39" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
@@ -1132,7 +1135,7 @@
    <item id="pack_mgl12" lang="de" price="12175" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="armtech_mgl12" id="1b1572f8-b902-4799-ba7b-e5e20e212e32" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="airburst_link" />
+             <embed  type="GEAR" intoId="1b1572f8-b902-4799-ba7b-e5e20e212e32" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
              <embed  type="GEAR" intoId="1b1572f8-b902-4799-ba7b-e5e20e212e32" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="a7cde599-fbd5-4cbc-8d50-bf2b71ff7d48" />
              <embed  type="GEAR" intoId="1b1572f8-b902-4799-ba7b-e5e20e212e32" intoType="HOOK" intoRef="TOP" ref="imaging_scope" />
              <embed  type="GEAR" intoId="1b1572f8-b902-4799-ba7b-e5e20e212e32" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
@@ -1148,7 +1151,7 @@
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="onotari_interceptor" id="b8afdfea-78a2-4931-a298-54e86369d756" />
              <embed  type="GEAR" intoId="b8afdfea-78a2-4931-a298-54e86369d756" intoType="HOOK" intoRef="TOP" ref="imaging_scope" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="airburst_link" />
+             <embed  type="GEAR" intoId="b8afdfea-78a2-4931-a298-54e86369d756" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
          <valmod type="GEAR" apply="CHARACTER" ref="high_explosive" value="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="fragmentation" value="2" />
       </modifications>
