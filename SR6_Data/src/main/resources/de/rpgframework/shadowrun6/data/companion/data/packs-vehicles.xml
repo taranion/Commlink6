@@ -637,180 +637,180 @@
 
    <item id="pack_autosoft_recon2" price="2000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="clearsight">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth_auto">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_recon3" price="4500" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="clearsight">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth_auto">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_recon4" price="6000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="clearsight">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth_auto">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_recon5" price="7500" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="clearsight">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth_auto">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_recon6" price="9000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="clearsight">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth_auto">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_combat3" price="3000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_combat4" price="4000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_combat5" price="5000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_combat6" price="6000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_sniper3" price="6000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="clearsight">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth_auto">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_sniper4" price="8000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="clearsight">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth_auto">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_sniper5" price="10000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="clearsight">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth_auto">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_sniper6" price="12000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="clearsight">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="stealth_auto">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="stealth_auto">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
@@ -1432,57 +1432,57 @@
 
    <item id="pack_autosoft_combat3" lang="de" price="4500" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="evasion">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="evasion">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_combat4" lang="de" price="6000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="evasion">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="evasion">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_combat5" lang="de" price="7500" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="evasion">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="evasion">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
    <item id="pack_autosoft_combat6" lang="de" price="9000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="targeting">
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="maneuvering">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="evasion">
+                </embed>
+             <embed  type="GEAR" intoId="﻿8fc8c01e-3023-4ba6-9d02-99ba6fcd6979" intoType="HOOK" intoRef="SOFTWARE" ref="evasion">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
+                </embed>
       </modifications>
    </item>
 
