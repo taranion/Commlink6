@@ -381,7 +381,7 @@ public class Shadowrun6DataPlugin  {
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" drake types");
 
 			logger.log(Level.INFO, "START -----------------------------Other Sources from US--------------------------------");
-			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "OTHER_US", "other_us.i18n", Locale.ENGLISH, Locale.GERMAN);
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "OTHER_US", "other_us.i18n", Locale.ENGLISH);
 			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "other_us/data/qualities.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_armor.xml");
