@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item  id="mapmaster_sensor_fob" avail="3" price="300" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+   	<attrdef id="DEVICE_RATING" value="3"/>
+   	<attrdef id="PRICE" value="$RATING*300"/>
+   	<usage mode="CARRIED"/>
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
+   </item>
+
+</items>
