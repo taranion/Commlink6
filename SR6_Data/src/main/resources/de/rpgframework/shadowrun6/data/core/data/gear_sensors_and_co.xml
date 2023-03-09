@@ -410,13 +410,13 @@
     <item id="ultrasound" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
    	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
     </item>
-    <item id="camera" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+    <item id="camera_function" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
    	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
     </item>
-    <item id="directional_microphone" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+    <item id="directional_microphone_function" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
    	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
     </item>
-    <item id="laser_microphone" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
+    <item id="laser_microphone_function" price="0" type="ELECTRONICS" subtype="SENSOR_FUNCTION">
    	<usage mode="EMBEDDED" slot="SENSOR_FUNCTION" value="1"/>
     </item>
 
