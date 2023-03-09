@@ -56,7 +56,7 @@
 	<item id="doctors_right_hand" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
       <alchemy spell="diagnose" trigger="verbal" />
     </item>
-	<item id="doctors_right_hand" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+	<item id="dont_piss_off" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
       <alchemy spell="anaphylaxis" trigger="material" />
     </item>
 	<item id="door_what_door" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
