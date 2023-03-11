@@ -57,6 +57,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getInitiativeTablePhysical(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 
 		AttackEntry entry = new AttackEntry(ShadowrunAttribute.INITIATIVE_PHYSICAL.getName(loc));
 		Pool<Integer> pool1 = model.getAttribute(ShadowrunAttribute.INITIATIVE_PHYSICAL).getPool();
@@ -71,6 +72,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getInitiativeTableAstral(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 
 		AttackEntry entry = new AttackEntry(ShadowrunAttribute.INITIATIVE_ASTRAL.getName(loc));
 		Pool<Integer> pool1 = model.getAttribute(ShadowrunAttribute.INITIATIVE_ASTRAL).getPool();
