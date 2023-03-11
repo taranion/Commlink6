@@ -4,11 +4,6 @@
 <!-- Other Gear -->
 
 	<item id="free_dive_deep_breath_mask" avail="6L" price="150" type="SURVIVAL" subtype="SURVIVAL_GEAR" />
-    <!--item id="improvised_throwing_weapon" avail="0" price="0" modonly="true">
-      <useas type="WEAPON_RANGED" subtype="THROWING"/>
-      <weapon dmg="1S" attack="0,0,0,,"  skill="athletics" spec="athletics/throwing"/>
-    </item-->
-
 
 	<item id="acid_on_demand" avail="6L" price="600" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
       <alchemy spell="acid_stream" trigger="verbal" />
@@ -61,7 +56,7 @@
 	<item id="doctors_right_hand" avail="6L" price="500"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
       <alchemy spell="diagnose" trigger="verbal" />
     </item>
-	<item id="doctors_right_hand" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
+	<item id="dont_piss_off" avail="6L" price="600"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
       <alchemy spell="anaphylaxis" trigger="material" />
     </item>
 	<item id="door_what_door" avail="6L" price="350"  type="MAGICAL" subtype="ALCHEMICAL" count="y">
