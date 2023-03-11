@@ -495,6 +495,23 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
+	private List<Node> processModificationChoice(String title, ModificationChoice choice) {
+		logger.log(Level.WARNING, "ModificationChoice " + choice);
+		List<Node> ret = new ArrayList<>();
+		ret.add(addLabel(title));
+
+		ChoiceBox<Modification> cbChoices = new ChoiceBox<>();
+		cbChoices.setUserData(choice);
+		cbChoices.getItems().addAll(choice.getModificiations());
+		cbChoices.setConverter(new StringConverter<Modification>() {
+			public String toString(Modification mod) { return Shadowrun6Tools.getModificationString(mod, Locale.getDefault()); }
+			public Modification fromString(String string) { return null; }
+		});
+		ret.add(cbChoices);
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
 	private Node handleSKILL(ComplexDataItem item, Choice choice) {
 		ChoiceBox<SR6Skill> cbSub = new ChoiceBox<>();
 		cbSub.setConverter(new StringConverter<SR6Skill>() {
@@ -679,8 +696,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		for (Modification tmp: n.getAdeptModifications()) {
 			if (tmp instanceof ModificationChoice) {
 				ModificationChoice mc = (ModificationChoice)tmp;
-				logger.log(Level.ERROR, "TODO: ModificationChoice  "+mc.getModificiations());
-				System.err.println("ChoiceSelectorDialog: TODO ModificationChoice");
+				List<Node> added = processModificationChoice(ResourceI18N.get(RES,"choice.adept"), mc);
+				logger.log(Level.ERROR, "Added for modification choice: "+added);
+				added.forEach(node -> {
+					node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+					node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+				});
 			} else {
 				DataItemModification mod = (DataItemModification)tmp;
 				Object val = mod.getResolvedKey();
@@ -707,17 +728,27 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	//-------------------------------------------------------------------
 	private void populateMagicianChoices(MentorSpirit n) {
 		for (Modification tmp: n.getMagicianModifications()) {
-			DataItemModification mod = (DataItemModification)tmp;
-			Object val = mod.getResolvedKey();
-			if (val instanceof ComplexDataItem) {
-				ComplexDataItem cplx = (ComplexDataItem) val;
-				for (Choice choice : cplx.getChoices()) {
-					logger.log(Level.WARNING, "Found mentor spirit magician choice {0}", choice);
-					List<Node> added = processChoice(cplx, choice, cplx.getName());
-					added.forEach(node -> {
-						node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
-						node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
-					});
+			if (tmp instanceof ModificationChoice) {
+				ModificationChoice mc = (ModificationChoice)tmp;
+				List<Node> added = processModificationChoice(ResourceI18N.get(RES,"choice.magician"), mc);
+				logger.log(Level.ERROR, "Added for modification choice: "+added);
+				added.forEach(node -> {
+					node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+					node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+				});
+			} else {
+				DataItemModification mod = (DataItemModification)tmp;
+				Object val = mod.getResolvedKey();
+				if (val instanceof ComplexDataItem) {
+					ComplexDataItem cplx = (ComplexDataItem) val;
+					for (Choice choice : cplx.getChoices()) {
+						logger.log(Level.WARNING, "Found mentor spirit magician choice {0}", choice);
+						List<Node> added = processChoice(cplx, choice, cplx.getName());
+						added.forEach(node -> {
+							node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
+							node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
+						});
+				}
 				}
 			}
 		}

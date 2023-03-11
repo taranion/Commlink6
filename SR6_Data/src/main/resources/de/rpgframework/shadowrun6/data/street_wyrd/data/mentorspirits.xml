@@ -106,16 +106,16 @@
     	<modifications>
 			<checkmod type="SKILL" ref="con" value="-1" what="EDGE_BOOST" />
 			<checkmod type="ATTRIBUTE" ref="JUDGE_INTENTIONS" value="-1" what="EDGE_BOOST" />
-    </modifications>
-    <magician>
+    	</modifications>
+    	<magician>
 			<checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
-    </magician>
-    <adept>
-      <selmod uuid="25d96a27-33d4-4540-8ec6-2ab82d983a2b">
-    		<itemmod type="ADEPT_POWER" ref="empathic_sense"/>
-    		<itemmod type="ADEPT_POWER" ref="enthralling_performance"/>
-	  </selmod>
-    </adept>
+    	</magician>
+    	<adept>
+      	<selmod uuid="25d96a27-33d4-4540-8ec6-2ab82d983a2b">
+    			<itemmod type="ADEPT_POWER" ref="empathic_sense"/>
+    			<itemmod type="ADEPT_POWER" ref="enthralling_performance"/>
+	  		</selmod>
+    	</adept>
   </mentorspirit>
 
   <mentorspirit id="klabautermann" lang="de" >
