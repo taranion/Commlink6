@@ -291,6 +291,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 
 			for (Choice choice : choices) {
+				logger.log(Level.WARNING, "Found choice {0}", choice);
 				String forceTitle = null;
 				if (choice.getUUID().equals(ItemTemplate.UUID_RATING)) forceTitle=ResourceI18N.get(RES, "label.rating");
 				if (choice.getUUID().equals(ItemTemplate.UUID_CHEMICAL_CHOICE)) forceTitle=ResourceI18N.get(RES, "label.chemical");
@@ -686,7 +687,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				if (val instanceof ComplexDataItem) {
 					ComplexDataItem cplx = (ComplexDataItem) val;
 					for (Choice choice : cplx.getChoices()) {
-						logger.log(Level.INFO, "...... has choice "+choice);
+						logger.log(Level.WARNING, "Found mentor adept choice {0}", choice);
 						Choice cloned = (Choice) choice.clone();
 						if (mod.getChoiceOptions()!=null && mod.getConnectedChoice()!=null && mod.getConnectedChoice().equals(choice.getUUID())) {
 							logger.log(Level.DEBUG, "Restrict choice options from {0} to {1}", Arrays.toString(cloned.getChoiceOptions()), mod.getChoiceOptions());
@@ -711,7 +712,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			if (val instanceof ComplexDataItem) {
 				ComplexDataItem cplx = (ComplexDataItem) val;
 				for (Choice choice : cplx.getChoices()) {
-					logger.log(Level.INFO, "...... has choice "+choice);
+					logger.log(Level.WARNING, "Found mentor spirit magician choice {0}", choice);
 					List<Node> added = processChoice(cplx, choice, cplx.getName());
 					added.forEach(node -> {
 						node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
@@ -807,6 +808,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	private Node handleMENTOR_SPIRIT(ComplexDataItem item, Choice choice) {
+		logger.log(Level.WARNING, "handleMENTOR_SPIRIT");
 		ChoiceBox<MentorSpirit> cbMentor = new ChoiceBox<>();
 		cbMentor.setConverter(new StringConverter<MentorSpirit>() {
 			public MentorSpirit fromString(String value) { return null;}
@@ -836,7 +838,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}});
 		cbMentor.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			logger.log(Level.WARNING, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
 
 			// Clear content from previous mentor spirit selection
@@ -852,6 +854,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			// Populate with generic decisions
 			logger.log(Level.INFO, "Choices of Mentor spirit: "+n.getChoices());
 			for (Choice tmpChoice : n.getChoices()) {
+				logger.log(Level.WARNING, "Found generic mentor spirit choice {0}", choice);
 				processChoice(item, tmpChoice, null);
 				choices.add(choice);
 			}
@@ -870,6 +873,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 		Shadowrun6Character model = ctrl.getModel();
 		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers() && model.getMagicOrResonanceType().usesSpells()) {
+			logger.log(Level.WARNING, "Mentor spirit magic user: {0}", model.getMagicOrResonanceType());
 			addLabel(ResourceI18N.get(RES, "choice.magician_adept"));
 
 			ChoiceBox<MagicOrResonanceType> cbMagOrAdp = new ChoiceBox<>();
