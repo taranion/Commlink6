@@ -47,6 +47,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
@@ -675,22 +676,28 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	//-------------------------------------------------------------------
 	private void populateAdeptChoices(MentorSpirit n) {
 		for (Modification tmp: n.getAdeptModifications()) {
-			DataItemModification mod = (DataItemModification)tmp;
-			Object val = mod.getResolvedKey();
-			if (val instanceof ComplexDataItem) {
-				ComplexDataItem cplx = (ComplexDataItem) val;
-				for (Choice choice : cplx.getChoices()) {
-					logger.log(Level.INFO, "...... has choice "+choice);
-					Choice cloned = (Choice) choice.clone();
-					if (mod.getChoiceOptions()!=null && mod.getConnectedChoice()!=null && mod.getConnectedChoice().equals(choice.getUUID())) {
-						logger.log(Level.DEBUG, "Restrict choice options from {0} to {1}", Arrays.toString(cloned.getChoiceOptions()), mod.getChoiceOptions());
-						cloned.setChoiceOptions(mod.getChoiceOptions());
+			if (tmp instanceof ModificationChoice) {
+				ModificationChoice mc = (ModificationChoice)tmp;
+				logger.log(Level.ERROR, "TODO: ModificationChoice  "+mc.getModificiations());
+				System.err.println("ChoiceSelectorDialog: TODO ModificationChoice");
+			} else {
+				DataItemModification mod = (DataItemModification)tmp;
+				Object val = mod.getResolvedKey();
+				if (val instanceof ComplexDataItem) {
+					ComplexDataItem cplx = (ComplexDataItem) val;
+					for (Choice choice : cplx.getChoices()) {
+						logger.log(Level.INFO, "...... has choice "+choice);
+						Choice cloned = (Choice) choice.clone();
+						if (mod.getChoiceOptions()!=null && mod.getConnectedChoice()!=null && mod.getConnectedChoice().equals(choice.getUUID())) {
+							logger.log(Level.DEBUG, "Restrict choice options from {0} to {1}", Arrays.toString(cloned.getChoiceOptions()), mod.getChoiceOptions());
+							cloned.setChoiceOptions(mod.getChoiceOptions());
+						}
+						List<Node> added = processChoice(cplx, cloned, cplx.getName());
+						added.forEach(node -> {
+							node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+							node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+						});
 					}
-					List<Node> added = processChoice(cplx, cloned, cplx.getName());
-					added.forEach(node -> {
-						node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
-						node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
-					});
 				}
 			}
 		}
@@ -812,10 +819,17 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		if (choice.getChoiceOptions()!=null) {
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbMentor.getItems().addAll(
-					Shadowrun6Core.getItemList(MentorSpirit.class).stream().filter(s -> ids.contains(s.getId())).collect(Collectors.toList())
+					Shadowrun6Core.getItemList(MentorSpirit.class).stream()
+						.filter(s -> ids.contains(s.getId()))
+						.filter(Shadowrun6Tools.filterByLanguage(MentorSpirit.class, Locale.getDefault()))
+						.collect(Collectors.toList())
 					);
 		} else {
-			cbMentor.getItems().addAll(Shadowrun6Core.getItemList(MentorSpirit.class));
+			cbMentor.getItems().addAll(
+					Shadowrun6Core.getItemList(MentorSpirit.class).stream()
+					.filter(Shadowrun6Tools.filterByLanguage(MentorSpirit.class, Locale.getDefault()))
+					.collect(Collectors.toList())
+				);
 		}
 		Collections.sort(cbMentor.getItems(), new Comparator<MentorSpirit>() {
 			public int compare(MentorSpirit o1, MentorSpirit o2) {
