@@ -1,13 +1,11 @@
 package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger.Level;
-import java.lang.reflect.Constructor;
 import java.util.Locale;
 import java.util.function.BiFunction;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
-import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
@@ -17,7 +15,7 @@ import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTableEntry;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
@@ -262,7 +260,18 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		// ToDo: Resolve PACKS
 		logger.log(Level.WARNING, "TODO: resolve PACKs");
 		model.setInCareerMode(true);
-		System.exit(1);
+		// Reduce Karma
+		int maxKarma =  prioCtrl.getCharacterController().getRuleController().getRuleValueAsInteger(ShadowrunRules.CHARGEN_MAX_KARMA_REMAIN);
+		if (model.getKarmaFree()>maxKarma) {
+			logger.log(Level.WARNING, "Needed to reduce free Karma from {0} to {1}", model.getKarmaFree(), maxKarma);
+			model.setKarmaFree( Math.min(model.getKarmaFree(), maxKarma));
+		}
+		// Reduce Nuyen
+		int maxNuyen =  prioCtrl.getCharacterController().getRuleController().getRuleValueAsInteger(ShadowrunRules.CHARGEN_MAX_NUYEN_REMAIN);
+		if (model.getNuyen()>maxNuyen) {
+			logger.log(Level.WARNING, "Needed to reduce free Karma from {0} to {1}", model.getNuyen(), maxNuyen);
+			model.setNuyen( Math.min(model.getNuyen(), maxNuyen));
+		}
 	}
 
 	//-------------------------------------------------------------------
