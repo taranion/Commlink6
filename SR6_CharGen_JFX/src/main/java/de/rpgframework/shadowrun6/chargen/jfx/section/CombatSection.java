@@ -254,14 +254,15 @@ public class CombatSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void showPhysical(Shadowrun6Character model) {
+		setLabelValue(lbAttackRating, model, ShadowrunAttribute.ATTACK_RATING_ASTRAL);
 		if (model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool()!=null) {
-			lbAttackRating.setText(model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool().toString() );
+			lbAttackRating.setText(CombatSectionTools.getAttackRating(model, type) );
 			lbAttackRating.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool().toExplainString()) );
 		} else {
 			logger.log(Level.ERROR, "No ATTACK_RATING_PHYSICAL pool calculated");
 		}
 		if (model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL).getPool()!=null) {
-			lbDefenseRating.setText(model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL).getPool().toString() );
+			lbDefenseRating.setText(CombatSectionTools.getDefenseRating(model, type) );
 			lbDefenseRating.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL).getPool().toExplainString()) );
 		} else {
 			logger.log(Level.ERROR, "No DEFENSE_RATING_PHYSICAL pool calculated");

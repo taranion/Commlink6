@@ -31,7 +31,7 @@ public class CombatSectionTools {
 
 	public static class AttackTable extends ArrayList<AttackEntry> {
 		public String col1Name, col2Name, col3Name;
-		public int numColumns=1;
+		public int numColumns=3;
 		public AttackTable(String c1, String c2, String c3) {
 			this.col1Name = c1;
 			this.col2Name = c2;
@@ -42,6 +42,28 @@ public class CombatSectionTools {
 	}
 
 	private final static Logger logger = System.getLogger("de.rpgframework.shadowrun6");
+
+	//-------------------------------------------------------------------
+	public static String getAttackRating(Shadowrun6Character model, WorldType type) {
+		switch (type) {
+		case PHYSICAL : return model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool().toString();
+		case ASTRAL   : return model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL).getPool().toString();
+		case MATRIX   : return model.getAttribute(ShadowrunAttribute.ATTACK_RATING_MATRIX).getPool().toString();
+		case MATRIX_UV:
+		}
+		return "?";
+	}
+
+	//-------------------------------------------------------------------
+	public static String getDefenseRating(Shadowrun6Character model, WorldType type) {
+		switch (type) {
+		case PHYSICAL : return model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL).getPool().toString();
+		case ASTRAL   : return model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_ASTRAL).getPool().toString();
+		case MATRIX   : return model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_MATRIX).getPool().toString();
+		case MATRIX_UV:
+		}
+		return "?";
+	}
 
 	//-------------------------------------------------------------------
 	public static AttackTable getInitiativeTable(Shadowrun6Character model, Locale loc, WorldType type) {
@@ -302,6 +324,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackModifiersPhysical(Shadowrun6Character model, Locale loc) {
 		AttackTable attackTable = getAttackTablePhysical(model, loc);
+		attackTable.numColumns=3;
 		// Col1: Pool
 		// Col2: AR
 		// Col3: Dmg
@@ -350,6 +373,7 @@ public class CombatSectionTools {
 				Shadowrun6Core.getI18nResources().getString("label.area.short", loc),
 				Shadowrun6Core.getI18nResources().getString("label.damage.short", loc)
 				);
+		ret.numColumns=3;
 		// Semi Automatic
 		AttackEntry entry = new AttackEntry(Shadowrun6Core.getI18nResources().getString("label.spell.amp_up", loc));
 		entry.setCol1("+2");
@@ -365,6 +389,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackModifiersMatrix(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 		// Take aim
 		AttackEntry entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "virtual_aim").getName(loc));
 		entry.setCol1("+1");
@@ -374,6 +399,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackModifiersMatrixUV(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 		return ret;
 	}
 
@@ -394,6 +420,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getDefenseTablePhysical(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 		// Physical
 		AttackEntry entry = new AttackEntry(ShadowrunAttribute.DEFENSE_POOL_PHYSICAL.getShortName(loc));
 		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_PHYSICAL).getPool();
@@ -419,6 +446,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getDefenseTableAstral(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 		// Physical
 		AttackEntry entry = new AttackEntry(ShadowrunAttribute.DEFENSE_POOL_ASTRAL.getShortName(loc));
 		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_ASTRAL).getPool();
@@ -432,6 +460,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getDefenseTableMatrix(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 		// Physical
 		AttackEntry entry = new AttackEntry(ShadowrunAttribute.DEFENSE_POOL_MATRIX.getName(loc));
 		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.DEFENSE_POOL_MATRIX).getPool();
@@ -459,6 +488,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getDefenseModifiersPhysical(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 		// Full Defense
 		AttackEntry entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "full_defense").getName(loc));
 		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.WILLPOWER).getPool();
@@ -485,6 +515,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getDefenseModifiersMatrix(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 		// Full Defense
 		AttackEntry entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "full_matrix_defense").getName(loc));
 		entry.setCol1( "+"+model.getPersona().getFirewall().getModifiedValue() );
@@ -510,6 +541,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private static AttackTable getDamageTablePhysical(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 //		// Stun monitor
 //		AttackEntry entry = new AttackEntry(ShadowrunAttribute.STUN_MONITOR.getShortName(loc));
 //		Pool<Integer> pool = model.getAttribute(ShadowrunAttribute.STUN_MONITOR).getPool();
@@ -542,6 +574,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private static AttackTable getDamageTableAstral(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable();
+		ret.numColumns=1;
 
 		// RESIST_DAMAGE
 		AttackEntry entry = new AttackEntry(ShadowrunAttribute.RESIST_DAMAGE_ASTRAL.getShortName(loc));
