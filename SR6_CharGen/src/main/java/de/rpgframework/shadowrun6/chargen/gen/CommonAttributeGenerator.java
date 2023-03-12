@@ -41,6 +41,8 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	//-------------------------------------------------------------------
 	public int getMaximumValue(ShadowrunAttribute key) {
 		int max = parent.getModel().getAttribute(key).getMaximum();
+		if (max<3)
+			max = 6+max;
 		boolean allow = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_RAISE_ABOVE_6);
 		if (!allow) {
 			for (Modification mod : parent.getModel().getAttribute(key).getModifications()) {
@@ -54,6 +56,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 				}
 			}
 		}
+		logger.log(Level.WARNING, "Attribute {0} is max {1}", key, max);
 		return (max>0)?max:6;
 	}
 
@@ -63,7 +66,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 		Shadowrun6Character model = parent.getModel();
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
 			AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(key);
-			if (aVal.getModifiedValue() >= model.getAttribute(key).getMaximum())
+			if (aVal.getModifiedValue() >= getMaximumValue(key))
 				maxed.add(key);
 		}
 		return maxed;
@@ -75,10 +78,11 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 			return false;
 
 		Collection<ShadowrunAttribute> alreadyMaxed = getMaximizedAttributes();
+		alreadyMaxed.remove(key);
 		// Only allow to max an attribute, if there isn't one already
 		if ((getModel().getAttribute(key).getModifiedValue()+1)>=getMaximumValue(key) && key.isPrimary()) {
-			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed+" of "+numAttributesToMax);
+//			if (logger.isLoggable(Level.TRACE))
+				logger.log(Level.WARNING, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed+" of "+numAttributesToMax);
 			return alreadyMaxed.size()>=numAttributesToMax;
 		}
 		return false;
@@ -94,12 +98,16 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 			return Possible.FALSE;
 		if (value.getModifyable()==ShadowrunAttribute.RESONANCE && ( parent.getModel().getMagicOrResonanceType()==null || !parent.getModel().getMagicOrResonanceType().usesResonance()))
 			return Possible.FALSE;
-		int max = (value.getMaximum()!=0)?value.getMaximum():6;
-		if (value.getDistributed()>=max)
+		int max = getMaximumValue(value.getModifyable());
+		if (value.getDistributed()>=max) {
+			logger.log(Level.WARNING, "Attribute {0} is already at maximum {1}", value.getModifyable(), max);
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+		}
 		if ((value.getDistributed()+1)==max) {
-			if (isAnotherAttributeAlreadyMaxed(value.getModifyable()))
+			if (isAnotherAttributeAlreadyMaxed(value.getModifyable())) {
+				logger.log(Level.WARNING, "Attribute {0} is not at maximum {1}, but another attribute us", value.getModifyable(), max);
 				return Possible.FALSE;
+			}
 		}
 		return Possible.TRUE;
 	}

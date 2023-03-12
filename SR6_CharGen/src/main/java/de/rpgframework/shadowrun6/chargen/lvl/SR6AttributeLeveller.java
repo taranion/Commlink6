@@ -72,6 +72,7 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 
 		// May not be at maximum yet
 		int maximum = (value.getMaximum()==0)?6:value.getMaximum();
+		if (maximum<4) maximum+=6;
 		if (value.getDistributed() >= maximum) {
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 		}
