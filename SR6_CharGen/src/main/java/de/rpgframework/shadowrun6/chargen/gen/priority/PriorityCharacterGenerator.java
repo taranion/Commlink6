@@ -205,6 +205,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(prioCtrl);
 			processChain.add(meta);
 			processChain.add(drake);
+			processChain.add(new SR6PriorityCalculateMaxPowerPointsStep(this));
 			processChain.add(magicReso);
 			processChain.add(qualities);
 			processChain.add(qPaths);
@@ -240,20 +241,28 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	 */
 	@Override
 	public void finish() {
-		logger.log(Level.WARNING, "TODO: finish");
+		logger.log(Level.WARNING, "TODO: finish###############################################################");
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> attr = model.getAttribute(key);
 			//attr.setDistributed(attr.)
-			logger.log(Level.DEBUG, "Finalize {0} to {1}", key, attr.getModifiedValue(ValueType.NATURAL));
+			logger.log(Level.WARNING, "Finalize {0} to {1}", key, attr.getModifiedValue(ValueType.NATURAL));
 			attr.setStart(attr.getModifiedValue(ValueType.NATURAL));
 			attr.setDistributed(attr.getModifiedValue(ValueType.NATURAL));
 		}
+
+		// Power points
+		AttributeValue<ShadowrunAttribute> attr = model.getAttribute(ShadowrunAttribute.POWER_POINTS);
+		//attr.setDistributed(attr.)
+		logger.log(Level.WARNING, "Finalize {0} to {1}", attr.getModifyable(), attr.getModifiedValue(ValueType.NATURAL));
+		attr.setStart(attr.getModifiedValue(ValueType.NATURAL));
+		attr.setDistributed(attr.getModifiedValue(ValueType.NATURAL));
 
 
 		// ToDo: Resolve PACKS
 		logger.log(Level.WARNING, "TODO: resolve PACKs");
 		model.setInCareerMode(true);
+		System.exit(1);
 	}
 
 	//-------------------------------------------------------------------

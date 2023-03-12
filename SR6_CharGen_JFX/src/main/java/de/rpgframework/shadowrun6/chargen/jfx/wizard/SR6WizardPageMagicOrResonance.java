@@ -119,17 +119,23 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 
 		btnDec.setOnAction( ev -> {
 			SR6PrioritySettings prio = charGen.getModel().getCharGenSettings(SR6PrioritySettings.class);
+			logger.log(Level.WARNING, "Magic for PP before: "+prio.getMagicForPP());
 			if (prio.getMagicForPP()>0) prio.setMagicForPP( prio.getMagicForPP()-1);
 			lbPower.setText(String.valueOf(prio.getMagicForPP()));
 			lbMagic.setText(String.valueOf(prio.mysticAdeptMaxPoints - prio.getMagicForPP()));
 			lbTotal.setText(String.valueOf(prio.mysticAdeptMaxPoints));
+			logger.log(Level.WARNING, "Magic for PP after: "+prio.getMagicForPP());
+			super.charGen.runProcessors();
 		});
 		btnInc.setOnAction( ev -> {
 			SR6PrioritySettings prio = charGen.getModel().getCharGenSettings(SR6PrioritySettings.class);
+			logger.log(Level.WARNING, "Magic for PP before: "+prio.getMagicForPP());
 			if (prio.getMagicForPP()<prio.mysticAdeptMaxPoints) prio.setMagicForPP( prio.getMagicForPP()+1);
 			lbPower.setText(String.valueOf(prio.getMagicForPP()));
 			lbMagic.setText(String.valueOf(prio.mysticAdeptMaxPoints - prio.getMagicForPP()));
 			lbTotal.setText(String.valueOf(prio.mysticAdeptMaxPoints));
+			logger.log(Level.WARNING, "Magic for PP after: "+prio.getMagicForPP());
+			super.charGen.runProcessors();
 		});
 
 		cbAspectSkill.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {

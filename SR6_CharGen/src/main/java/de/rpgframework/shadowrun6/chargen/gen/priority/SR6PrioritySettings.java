@@ -28,11 +28,12 @@ public class SR6PrioritySettings extends CommonSR6GeneratorSettings implements I
 	public Map<PriorityType, Priority> priorities;
 	/** How points and karma is spent on attribute */
 	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib;
-	
+
 	public transient Map<PriorityType, List<PriorityOption>> options;
 
+	/** The total number of points to split between spells and PP */
 	public int mysticAdeptMaxPoints;
-	
+
 	/** Modifier to apply to customization karma */
 	public int karmaMod;
 	public Map<String, PerSkillPoints> perSkill;
@@ -42,7 +43,7 @@ public class SR6PrioritySettings extends CommonSR6GeneratorSettings implements I
 		priorities = new LinkedHashMap<PriorityType, Priority>();
 		perAttrib = new LinkedHashMap<>();
 		options   = new LinkedHashMap<PriorityType, List<PriorityOption>>();
-		
+
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			perAttrib.put(key, new PerAttributePoints());
 		}
@@ -61,7 +62,7 @@ public class SR6PrioritySettings extends CommonSR6GeneratorSettings implements I
 	@Override
 	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib() { return perAttrib; }
 	public Map<PriorityType, Priority> priorities() { return priorities; }
-	
+
 	//-------------------------------------------------------------------
 	public String toSkillString() {
 		StringBuffer buf = new StringBuffer();
@@ -75,24 +76,24 @@ public class SR6PrioritySettings extends CommonSR6GeneratorSettings implements I
 //		}
 		return buf.toString();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public void put(SR6SkillValue sVal, PerSkillPoints per) {
 		SR6Skill skill = sVal.getModifyable();
 		String id = skill.getId();
 		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
 			id+="/"+sVal.getUuid();
-		} 
+		}
 		perSkill.put(id, per);
 	}
-	
+
 	//-------------------------------------------------------------------
 	public PerSkillPoints get(SR6SkillValue sVal) {
 		SR6Skill skill = sVal.getModifyable();
 		String id = skill.getId();
 		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
 			id+="/"+sVal.getUuid();
-		} 
+		}
 		return perSkill.get(id);
 	}
 
@@ -102,7 +103,7 @@ public class SR6PrioritySettings extends CommonSR6GeneratorSettings implements I
 		String id = skill.getId();
 		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
 			id+="/"+sVal.getUuid();
-		} 
+		}
 		perSkill.remove(id);
 	}
 
@@ -117,5 +118,5 @@ public class SR6PrioritySettings extends CommonSR6GeneratorSettings implements I
 		else
 			this.options.remove(type);
 	}
-	
+
 }
