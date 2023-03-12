@@ -348,8 +348,10 @@ public class JSONSR6ExportService {
             JSONArmor jsonArmor = new JSONArmor();
             jsonArmor.name = carriedItem.getNameWithoutRating(loc);
             jsonArmor.isIgnored = carriedItem.hasFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS);
-            jsonArmor.rating = carriedItem.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
-            jsonArmor.socialrating =  carriedItem.getAsValue(SR6ItemAttribute.DEFENSE_SOCIAL).getModifiedValue();
+            if (carriedItem.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL)!=null)
+            	jsonArmor.rating = carriedItem.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
+            if (carriedItem.getAsValue(SR6ItemAttribute.DEFENSE_SOCIAL)!=null)
+            	jsonArmor.socialrating =  carriedItem.getAsValue(SR6ItemAttribute.DEFENSE_SOCIAL).getModifiedValue();
             jsonArmor.accessories = getItemAccessories(carriedItem);
             jsonArmor.page = getPageString(carriedItem.getResolved());
             jsonArmor.description = getDescription(carriedItem.getResolved());
