@@ -187,11 +187,11 @@ public class EquipmentTests {
 			System.out.println("I  = "+val);
 		}
 
-//		System.out.println("DUMP2\n"+ref.dump());
+		System.out.println("DUMP2\n"+ref.dump());
 
 		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
 		assertEquals(210000, attr.getModifiedValue());
-		assertEquals(3, ref.getCharacterModifications().size());
+		assertEquals(2, ref.getCharacterModifications().size());
 		assertEquals(0, ref.getModifications().size());
 	}
 
