@@ -50,12 +50,13 @@ public class SR6PriorityCalculateMaxPowerPointsStep implements ProcessingStep {
 
 		// Regular adepts get free power points matching their magic attribute
 		if (!model.getMagicOrResonanceType().paysPowers()) {
-			ret = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
+			ret = mag.getSum();
 			logger.log(Level.INFO, "Regular adept - get {0,number,integer} power points from MAGIC", ret);
+			logger.log(Level.INFO, "per={0}  useAdjustedMagic={1}  autoPPForKarma={2}", mag, adjustedMagic, autoPPKarma);
 			return ret;
 		}
 		if (model.getMagicOrResonanceType().paysPowers()) {
-			logger.log(Level.INFO, "per={0}  useAdjustedMagic={1}  autoPPForKarma={2}", settings.perAttrib.get(ShadowrunAttribute.MAGIC), adjustedMagic, autoPPKarma);
+			logger.log(Level.INFO, "per={0}  useAdjustedMagic={1}  autoPPForKarma={2}", mag, adjustedMagic, autoPPKarma);
 			// Mystic adepts
 			switch (settings.priorities.get(PriorityType.MAGIC)) {
 			case A: ret=4; break;
