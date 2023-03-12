@@ -55,6 +55,7 @@ import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.genericrpg.modification.Modifyable;
 import de.rpgframework.genericrpg.modification.RelevanceModification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -97,6 +98,7 @@ import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
 import de.rpgframework.shadowrun6.log.Logging;
+import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
@@ -319,9 +321,49 @@ public class Shadowrun6Tools {
 		logger.log(Level.ERROR, "explain "+mod);
 		try {
 			ShadowrunReference type = (ShadowrunReference) mod.getReferenceType();
+			if (mod instanceof CheckModification) {
+				CheckModification valMod = (CheckModification)mod;
+				ShadowrunCheckInfluence what = (ShadowrunCheckInfluence) valMod.getWhat();
+				String prefix = "";
+				switch (what) {
+				case EDGE_BOOST: prefix = RES.getString("modification.check.edge_boost"); break;
+				default:
+					prefix = "TODO("+what.name()+")";
+				}
+				prefix+=" "+valMod.getValue();
+				prefix+=" "+RES.getString("modification.check.for")+" ";
+
+				switch (type) {
+				case ATTRIBUTE:
+					String attrName = null;
+					if (valMod.getConnectedChoice()!=null) {
+						attrName = RES.getString("modification.choice.attribute", loc);
+					} else {
+						attrName = ((ShadowrunAttribute)valMod.getResolvedKey()).getName(loc);
+					}
+					return prefix+attrName;
+				case SKILL:
+					String skillName = null;
+					if (valMod.getConnectedChoice()!=null) {
+						skillName = RES.getString("modification.choice.skill", loc);
+					} else {
+						SR6Skill skill = Shadowrun6Core.getSkill(valMod.getKey());
+						if (skill==null) {
+							Logging.logger.log(Level.WARNING, "Found unknown skill '"+valMod.getKey()+"' in valuemod of "+valMod);
+							skillName = "Unknown skill '"+valMod.getKey()+"'";
+						} else {
+							skillName = Shadowrun6Core.getSkill(valMod.getKey()).getName(loc);
+						}
+					}
+					return prefix+skillName;
+				default:
+					logger.log(Level.ERROR, "Don't know how to display "+mod);
+					return prefix+"Unknown value type "+type;
+				}
+			}
+
 			if (mod instanceof ValueModification) {
 				ValueModification valMod = (ValueModification)mod;
-				String what = type.name();
 				switch (type) {
 				case ATTRIBUTE:
 					String attrName = null;
@@ -359,7 +401,7 @@ public class Shadowrun6Tools {
 				case SKILL:
 					String skillName = null;
 					if (valMod.getConnectedChoice()!=null) {
-						skillName = RES.getString("choice.skill", loc);
+						skillName = RES.getString("modification.choice.skill", loc);
 					} else {
 						SR6Skill skill = Shadowrun6Core.getSkill(valMod.getKey());
 						if (skill==null) {
@@ -387,10 +429,20 @@ public class Shadowrun6Tools {
 				switch (type) {
 				case CRITTER_POWER:
 					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc));
+				case QUALITY:
+					return RES.format("modification.quality", loc, ((Quality)valMod.getResolvedKey()).getName(loc));
 				default:
 					logger.log(Level.ERROR, "Don't know how to display "+mod);
 					return "Unknown value type "+type;
 				}
+			}
+
+			//
+			if (mod instanceof ModificationChoice) {
+				ModificationChoice chMod = (ModificationChoice)mod;
+				List<String> or = new ArrayList<>();
+				chMod.getModificiations().forEach(m -> or.add(getModificationString(m, loc)));
+				return String.join(" "+RES.getString("label.or")+" ", or);
 			}
 
 			logger.log(Level.ERROR, "Don't know how to display "+mod);

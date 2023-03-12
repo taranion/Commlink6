@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
@@ -164,6 +165,9 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		}
 		if (value == null) {
 		}
+		if (mod.getSet()==ValueType.MAX)
+			return false;
+
 
 		value.addModification(mod);
 		if (!(mod instanceof CheckModification)) {

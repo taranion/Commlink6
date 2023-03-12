@@ -47,6 +47,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
@@ -290,6 +291,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 
 			for (Choice choice : choices) {
+				logger.log(Level.WARNING, "Found choice {0}", choice);
 				String forceTitle = null;
 				if (choice.getUUID().equals(ItemTemplate.UUID_RATING)) forceTitle=ResourceI18N.get(RES, "label.rating");
 				if (choice.getUUID().equals(ItemTemplate.UUID_CHEMICAL_CHOICE)) forceTitle=ResourceI18N.get(RES, "label.chemical");
@@ -493,6 +495,23 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
+	private List<Node> processModificationChoice(String title, ModificationChoice choice) {
+		logger.log(Level.WARNING, "ModificationChoice " + choice);
+		List<Node> ret = new ArrayList<>();
+		ret.add(addLabel(title));
+
+		ChoiceBox<Modification> cbChoices = new ChoiceBox<>();
+		cbChoices.setUserData(choice);
+		cbChoices.getItems().addAll(choice.getModificiations());
+		cbChoices.setConverter(new StringConverter<Modification>() {
+			public String toString(Modification mod) { return Shadowrun6Tools.getModificationString(mod, Locale.getDefault()); }
+			public Modification fromString(String string) { return null; }
+		});
+		ret.add(cbChoices);
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
 	private Node handleSKILL(ComplexDataItem item, Choice choice) {
 		ChoiceBox<SR6Skill> cbSub = new ChoiceBox<>();
 		cbSub.setConverter(new StringConverter<SR6Skill>() {
@@ -675,22 +694,32 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	//-------------------------------------------------------------------
 	private void populateAdeptChoices(MentorSpirit n) {
 		for (Modification tmp: n.getAdeptModifications()) {
-			DataItemModification mod = (DataItemModification)tmp;
-			Object val = mod.getResolvedKey();
-			if (val instanceof ComplexDataItem) {
-				ComplexDataItem cplx = (ComplexDataItem) val;
-				for (Choice choice : cplx.getChoices()) {
-					logger.log(Level.INFO, "...... has choice "+choice);
-					Choice cloned = (Choice) choice.clone();
-					if (mod.getChoiceOptions()!=null && mod.getConnectedChoice()!=null && mod.getConnectedChoice().equals(choice.getUUID())) {
-						logger.log(Level.DEBUG, "Restrict choice options from {0} to {1}", Arrays.toString(cloned.getChoiceOptions()), mod.getChoiceOptions());
-						cloned.setChoiceOptions(mod.getChoiceOptions());
+			if (tmp instanceof ModificationChoice) {
+				ModificationChoice mc = (ModificationChoice)tmp;
+				List<Node> added = processModificationChoice(ResourceI18N.get(RES,"choice.adept"), mc);
+				logger.log(Level.ERROR, "Added for modification choice: "+added);
+				added.forEach(node -> {
+					node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+					node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+				});
+			} else {
+				DataItemModification mod = (DataItemModification)tmp;
+				Object val = mod.getResolvedKey();
+				if (val instanceof ComplexDataItem) {
+					ComplexDataItem cplx = (ComplexDataItem) val;
+					for (Choice choice : cplx.getChoices()) {
+						logger.log(Level.WARNING, "Found mentor adept choice {0}", choice);
+						Choice cloned = (Choice) choice.clone();
+						if (mod.getChoiceOptions()!=null && mod.getConnectedChoice()!=null && mod.getConnectedChoice().equals(choice.getUUID())) {
+							logger.log(Level.DEBUG, "Restrict choice options from {0} to {1}", Arrays.toString(cloned.getChoiceOptions()), mod.getChoiceOptions());
+							cloned.setChoiceOptions(mod.getChoiceOptions());
+						}
+						List<Node> added = processChoice(cplx, cloned, cplx.getName());
+						added.forEach(node -> {
+							node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+							node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+						});
 					}
-					List<Node> added = processChoice(cplx, cloned, cplx.getName());
-					added.forEach(node -> {
-						node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
-						node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
-					});
 				}
 			}
 		}
@@ -699,17 +728,27 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	//-------------------------------------------------------------------
 	private void populateMagicianChoices(MentorSpirit n) {
 		for (Modification tmp: n.getMagicianModifications()) {
-			DataItemModification mod = (DataItemModification)tmp;
-			Object val = mod.getResolvedKey();
-			if (val instanceof ComplexDataItem) {
-				ComplexDataItem cplx = (ComplexDataItem) val;
-				for (Choice choice : cplx.getChoices()) {
-					logger.log(Level.INFO, "...... has choice "+choice);
-					List<Node> added = processChoice(cplx, choice, cplx.getName());
-					added.forEach(node -> {
-						node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
-						node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
-					});
+			if (tmp instanceof ModificationChoice) {
+				ModificationChoice mc = (ModificationChoice)tmp;
+				List<Node> added = processModificationChoice(ResourceI18N.get(RES,"choice.magician"), mc);
+				logger.log(Level.ERROR, "Added for modification choice: "+added);
+				added.forEach(node -> {
+					node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+					node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages));
+				});
+			} else {
+				DataItemModification mod = (DataItemModification)tmp;
+				Object val = mod.getResolvedKey();
+				if (val instanceof ComplexDataItem) {
+					ComplexDataItem cplx = (ComplexDataItem) val;
+					for (Choice choice : cplx.getChoices()) {
+						logger.log(Level.WARNING, "Found mentor spirit magician choice {0}", choice);
+						List<Node> added = processChoice(cplx, choice, cplx.getName());
+						added.forEach(node -> {
+							node.visibleProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
+							node.managedProperty().bind(chooseAdeptAdvantages.or(useBothAdvantages).not());
+						});
+				}
 				}
 			}
 		}
@@ -800,6 +839,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	private Node handleMENTOR_SPIRIT(ComplexDataItem item, Choice choice) {
+		logger.log(Level.WARNING, "handleMENTOR_SPIRIT");
 		ChoiceBox<MentorSpirit> cbMentor = new ChoiceBox<>();
 		cbMentor.setConverter(new StringConverter<MentorSpirit>() {
 			public MentorSpirit fromString(String value) { return null;}
@@ -812,17 +852,24 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		if (choice.getChoiceOptions()!=null) {
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbMentor.getItems().addAll(
-					Shadowrun6Core.getItemList(MentorSpirit.class).stream().filter(s -> ids.contains(s.getId())).collect(Collectors.toList())
+					Shadowrun6Core.getItemList(MentorSpirit.class).stream()
+						.filter(s -> ids.contains(s.getId()))
+						.filter(Shadowrun6Tools.filterByLanguage(MentorSpirit.class, Locale.getDefault()))
+						.collect(Collectors.toList())
 					);
 		} else {
-			cbMentor.getItems().addAll(Shadowrun6Core.getItemList(MentorSpirit.class));
+			cbMentor.getItems().addAll(
+					Shadowrun6Core.getItemList(MentorSpirit.class).stream()
+					.filter(Shadowrun6Tools.filterByLanguage(MentorSpirit.class, Locale.getDefault()))
+					.collect(Collectors.toList())
+				);
 		}
 		Collections.sort(cbMentor.getItems(), new Comparator<MentorSpirit>() {
 			public int compare(MentorSpirit o1, MentorSpirit o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}});
 		cbMentor.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			logger.log(Level.WARNING, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.getId()));
 
 			// Clear content from previous mentor spirit selection
@@ -838,6 +885,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			// Populate with generic decisions
 			logger.log(Level.INFO, "Choices of Mentor spirit: "+n.getChoices());
 			for (Choice tmpChoice : n.getChoices()) {
+				logger.log(Level.WARNING, "Found generic mentor spirit choice {0}", choice);
 				processChoice(item, tmpChoice, null);
 				choices.add(choice);
 			}
@@ -856,6 +904,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 		Shadowrun6Character model = ctrl.getModel();
 		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers() && model.getMagicOrResonanceType().usesSpells()) {
+			logger.log(Level.WARNING, "Mentor spirit magic user: {0}", model.getMagicOrResonanceType());
 			addLabel(ResourceI18N.get(RES, "choice.magician_adept"));
 
 			ChoiceBox<MagicOrResonanceType> cbMagOrAdp = new ChoiceBox<>();
