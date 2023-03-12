@@ -31,7 +31,7 @@ public class CombatSectionTools {
 
 	public static class AttackTable extends ArrayList<AttackEntry> {
 		public String col1Name, col2Name, col3Name;
-		public int numColumns=3;
+		public int numColumns=1;
 		public AttackTable(String c1, String c2, String c3) {
 			this.col1Name = c1;
 			this.col2Name = c2;
@@ -91,6 +91,7 @@ public class CombatSectionTools {
 				ShadowrunAttribute.INITIATIVE_MATRIX_VR_COLD.getShortName(loc),
 				ShadowrunAttribute.INITIATIVE_MATRIX_VR_HOT.getShortName(loc)
 				);
+		ret.numColumns=3;
 
 		AttackEntry entry = new AttackEntry(ShadowrunAttribute.INITIATIVE_PHYSICAL.getName(loc));
 		Pool<Integer> pool1 = model.getAttribute(ShadowrunAttribute.INITIATIVE_MATRIX).getPool();
