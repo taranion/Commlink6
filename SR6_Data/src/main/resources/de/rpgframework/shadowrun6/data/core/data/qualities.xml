@@ -51,7 +51,7 @@
        <relevancemod topic="COMBAT"/>
      </modifications>
    </quality>
-   <quality id="exceptional_attribute" karma="12" pos="true" type="NORMAL">
+   <quality id="exceptional_attribute" karma="12" pos="true" type="NORMAL" multi="y">
      <choices>
        <choice type="ATTRIBUTE" uuid="4096584c-eb76-49b2-be6b-1a6c0ca9e50a"/>
      </choices>
