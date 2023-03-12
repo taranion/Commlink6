@@ -208,7 +208,7 @@ public class Shadowrun6Tools {
 			List<Modification> unprocessed = new ArrayList<>();
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
-				logger.log(Level.DEBUG, "------ after {0}     {1}",processor.getClass().getSimpleName(),unprocessed);
+				logger.log(Level.WARNING, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
@@ -677,7 +677,7 @@ public class Shadowrun6Tools {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void resolveChar(Shadowrun6Character model) {
-		logger.log(Level.INFO, "ENTER resolveChar("+model.getName()+")");
+		logger.log(Level.INFO, "ENTER resolveChar({0}) with {1} Karma", model.getName(), model.getKarmaFree());
 		try {
 			logger.log(Level.DEBUG, "resolve qualities");
 			for (QualityValue tmp : model.getQualities()) {
