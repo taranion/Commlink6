@@ -240,7 +240,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void resetCharacter(Shadowrun6Character model, CharacterHandle handle) {
-		logger.log(Level.DEBUG, "resetCharacter");
+		logger.log(Level.WARNING, "resetCharacter  with "+model.getKarmaFree());
 		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 		try {
 			handle.setCharacter(model);
