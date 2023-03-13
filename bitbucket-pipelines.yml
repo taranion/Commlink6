@@ -11,3 +11,12 @@ pipelines:
     - step:
         script: 
           - mvn -B -s settings.xml clean deploy
+    - step:
+        name: Deploy to Staging
+        deployment: Staging
+        trigger: manual
+        caches:
+          - maven
+        script:
+          - cd Commlink6 ; mvn -B -s settings clean package
+          - pwd
