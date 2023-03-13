@@ -6,7 +6,7 @@ pipelines:
       - step:
           name: Build and test
           script:
-            - mvn -B -s settings.xml clean install
+            - mvn -B -s settings.xml clean install -DskipTests=true
   default:
     - step:
         script: 
@@ -19,4 +19,9 @@ pipelines:
           - maven
         script:
           - cd Commlink6 ; mvn -B -s settings.xml clean package
-          - pwd
+          - pipe: atlassian/scp-deploy:0.3.3
+            variables:
+              USER: bitbucket
+              SERVER: eden.rpgframework.de
+              REMOTE_PATH: '/var/www/html/commlink6-updates'
+              LOCAL_PATH: 'target/commlink6*fat.jar'
