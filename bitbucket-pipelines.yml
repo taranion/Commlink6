@@ -18,5 +18,5 @@ pipelines:
         caches:
           - maven
         script:
-          - cd Commlink6 ; mvn -B -s settings clean package
+          - cd Commlink6 ; mvn -B -s settings.xml clean package
           - pwd

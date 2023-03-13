@@ -1,0 +1,37 @@
+Jede dieser Gedankenstriche wird als Layer benötigt
+Armpaare getrennt als links und rechts
+Es darf gerne gespiegelt und kopiert werden
+
+Schädel
+- natürlich
+- künstlich
+
+Torso
+- natürlich
+- künstlich
+
+6x Arm
+- natürlich
+- künstliche Hand
+- künstlicher Unteramr
+- künstlich (komplett)
+
+Unterkörper
+* 2x Beine,
+  - natürlich
+  - künstlicher Fuß
+  - künstlicher Unterschenkel
+  - künstliches (komplett)
+* Schlangenleib
+  - natürlich
+  - künstlich
+* Fischschwanz, natürlich
+* Zentaur
+  - natürlich
+  - künstlich
+* Räder, künstlich
+* Spinnenleib, künstlich
+
+Flügel
+- natürlich
+- künstlich
