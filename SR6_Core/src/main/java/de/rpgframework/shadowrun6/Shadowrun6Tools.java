@@ -1976,6 +1976,12 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
+	@Deprecated
+	public static <T extends DataItem> Predicate<T> filterByLanguage(Class<T> cls, Locale loc) {
+		return (item) -> item.getLanguage()==null || item.getLanguage().equals(loc.getLanguage());
+	}
+
+	//-------------------------------------------------------------------
 	public static <T extends DataItem> List<T> filterByPluginSelection(List<T> unfiltered, Shadowrun6Character model) {
 //		if (model.getPluginMode()==PluginMode.ALL)
 			return unfiltered;
