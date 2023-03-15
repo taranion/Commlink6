@@ -854,13 +854,13 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			cbMentor.getItems().addAll(
 					Shadowrun6Core.getItemList(MentorSpirit.class).stream()
 						.filter(s -> ids.contains(s.getId()))
-						.filter(Shadowrun6Tools.filterByLanguage(MentorSpirit.class, Locale.getDefault()))
+						.filter(Shadowrun6Tools.filterByLanguage(Locale.getDefault()))
 						.collect(Collectors.toList())
 					);
 		} else {
 			cbMentor.getItems().addAll(
 					Shadowrun6Core.getItemList(MentorSpirit.class).stream()
-					.filter(Shadowrun6Tools.filterByLanguage(MentorSpirit.class, Locale.getDefault()))
+					.filter(Shadowrun6Tools.filterByLanguage(Locale.getDefault()))
 					.collect(Collectors.toList())
 				);
 		}

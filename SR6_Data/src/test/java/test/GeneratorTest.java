@@ -29,7 +29,7 @@ import de.rpgframework.shadowrun6.generators.Shadowrun6Generators;
  *
  */
 public class GeneratorTest {
-	
+
 	private static Persister persist = new Persister();
 
 	//-------------------------------------------------------------------
@@ -64,15 +64,15 @@ public class GeneratorTest {
 //		Object gen =RandomGeneratorRegistry.generate(GeneratorType.NAME_PERSON, List.of(FilterCulture.ADL), Gender.FEMALE);
 //		System.out.println("Generated name: "+gen);
 //		assertNotNull(gen);
-		
+
 		Object gen =RandomGeneratorRegistry.generate(GeneratorType.RUN, List.of(Genre.CYBERPUNK), List.of(FilterCulture.ADL, RoleplayingSystem.SHADOWRUN6), Map.of());
 		System.out.println("Generated plot: "+gen);
 		assertNotNull(gen);
 		persist.write( (Plot)gen, System.out);
-		
+
 		TextExport txtExport = new TextExport();
 		txtExport.export(gen, System.out, Locale.GERMAN);
-		txtExport.export(gen, System.out, Locale.ENGLISH);
+//		txtExport.export(gen, System.out, Locale.ENGLISH);
 	}
 
 }

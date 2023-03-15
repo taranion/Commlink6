@@ -1971,7 +1971,7 @@ public class Shadowrun6Tools {
 
 
 	//-------------------------------------------------------------------
-	public static <T extends DataItem> Predicate<T> filterByLanguage(Class<T> cls, Locale loc) {
+	public static <T extends DataItem> Predicate<T> filterByLanguage(Locale loc) {
 		return (item) -> item.getLanguage()==null || item.getLanguage().equals(loc.getLanguage());
 	}
 

@@ -61,7 +61,7 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 	 */
 	@Override
 	public Object generate(Map<GeneratorVariable,Integer> variables, Classification<?>... classifier) {
-		logger.log(Level.INFO, "ENTER: createNSC("+Arrays.toString(classifier)+")");
+		logger.log(Level.INFO, "ENTER: createNSC()");
 		logger.log(Level.INFO, "variables = "+variables);
 		logger.log(Level.INFO, "classifier = "+Arrays.toString(classifier));
 		try {
@@ -81,7 +81,7 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 				if (conType!=null && !npc.isContactType(conType)) continue;
 				possible.add(npc);
 			}
-			logger.log(Level.DEBUG, "Found "+possible.size()+" NPCs to choose from");
+			logger.log(Level.INFO, "Found "+possible.size()+" NPCs to choose from");
 			if (!possible.isEmpty()) {
 				SR6NPC npc = possible.get(RANDOM.nextInt(possible.size()));
 				logger.log(Level.INFO, "Chose "+npc.getName());
