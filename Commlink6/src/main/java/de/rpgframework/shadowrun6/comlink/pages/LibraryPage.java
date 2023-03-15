@@ -215,7 +215,7 @@ public class LibraryPage extends Page {
 					() -> Shadowrun6Core.getItemList(MentorSpirit.class)
 						.stream()
 						.filter(m-> m.getType()==Type.MENTOR_SPIRIT)
-						.filter(Shadowrun6Tools.filterByLanguage(MentorSpirit.class, Locale.getDefault()))
+						.filter(Shadowrun6Tools.filterByLanguage(Locale.getDefault()))
 						.collect(Collectors.toList()),
 					pane
 					) {
