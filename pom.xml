@@ -36,6 +36,7 @@
 		<module>SR6_CharGen_JFX</module>
 		<module>SR6_Foundry_VTT</module>
 		<module>SR6_Export_JSON</module>
+		<module>Commlink6</module>
 	</modules>
 
 	<dependencyManagement>

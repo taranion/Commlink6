@@ -18,13 +18,12 @@ pipelines:
         caches:
           - maven
         script:
-          - cd Commlink6 ; mvn -B -s settings.xml clean package
           - pipe: atlassian/scp-deploy:0.3.3
             variables:
               USER: bitbucket
               SERVER: eden.rpgframework.de
               REMOTE_PATH: '/var/www/html/commlink6-updates/staging'
-              LOCAL_PATH: 'target/commlink6*fat.jar'
+              LOCAL_PATH: 'Commlink6/target/commlink6*fat.jar'
     - step:
         name: Deploy to Production
         deployment: Production
