@@ -165,6 +165,13 @@
 			<url>https://rpgframework.jfrog.io/artifactory/RPGFramework</url>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+			<snapshots><enabled>true</enabled></snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<build>
 		<plugins>
