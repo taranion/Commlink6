@@ -200,7 +200,58 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
 
+			<plugin>
+				<groupId>org.prelle</groupId>
+				<artifactId>update4j-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<configuration>
+					<baseUri>http://eden.rpgframework.de/</baseUri>
+					<basePath>${user.home}/Commlink6/app</basePath>
+					<osHandling>ALL</osHandling>
+					<properties>
+						<property>
+							<key>default.launcher.main.class</key>
+							<value>de.rpgframework.shadowrun6.comlink.ComLinkStarter</value>
+						</property>
+						<property>
+							<key>default.launcher.system.project.version</key>
+							<value>${project.version}</value>
+						</property>
+					</properties>
+					<includes>
+						<include>
+							<url>http://eden.rpgframework.de/commlink6-updates/${project.artifactId}-${project.version}-fat.jar</url>
+							<path>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</path>
+						</include>
+					</includes>
+					<excludes>
+						<exclude>de.rpgframework.shadowrun6:commlink6</exclude>
+						<exclude>org.prelle:javafx-extensions</exclude>
+						<exclude>org.prelle:simple-persist</exclude>
+				<exclude>de.rpgframework:eden-client</exclude>
+				<exclude>de.rpgframework:eden-client-jfx</exclude>
+				<exclude>de.rpgframework:rpgframework-core</exclude>
+				<exclude>de.rpgframework:rpgframework-rules</exclude>
+				<exclude>de.rpgframework:rpgframework-javafx</exclude>
+				<exclude>de.rpgframework:shadowrun-common-core</exclude>
+				<exclude>de.rpgframework:shadowrun-common-chargen</exclude>
+				<exclude>de.rpgframework:shadowrun-common-chargen-jfx</exclude>
+				<exclude>de.rpgframework:shadowrun6-core</exclude>
+				<exclude>de.rpgframework:shadowrun6-chargen</exclude>
+				<exclude>de.rpgframework:shadowrun6-chargen-jfx</exclude>
+				<exclude>de.rpgframework:shadowrun6-data</exclude>
+				<exclude>org.prelle.rpgframework:shadowrun6-export-pdf</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
