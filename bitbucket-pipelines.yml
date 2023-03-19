@@ -19,7 +19,8 @@ pipelines:
           - maven
         script:
           - mvn -B -s settings.xml clean install -DskipTests=true
-          - pipe: atlassian/scp-deploy:0.3.3
+          - ls Commlink6/target
+          - pipe: atlassian/scp-deploy:1.2.1
             variables:
               USER: bitbucket
               SERVER: eden.rpgframework.de
@@ -33,7 +34,7 @@ pipelines:
           - maven
         script:
           - cd Commlink6 ; mvn -B -s settings.xml clean package
-          - pipe: atlassian/scp-deploy:1.0.1
+          - pipe: atlassian/scp-deploy:1.2.1
             variables:
               USER: vaadin
               SERVER: eden.rpgframework.de
