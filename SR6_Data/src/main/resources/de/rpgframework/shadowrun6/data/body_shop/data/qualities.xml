@@ -5,4 +5,54 @@
        <choice type="CARRIED" ref="ItemType:CYBERWARE" uuid="35ed2489-d0af-485b-b58a-61fbd064ed9d"/>
      </choices>
    </quality>
+
+   <quality id="inhuman" karma="0" pos="false" type="TRANSGENIC" selectable="false">
+   </quality>
+   <quality id="im_into_it" karma="2" pos="true" type="TRANSGENIC">
+     <choices>
+       <choice type="TEXT" uuid="35ed2489-d0af-485b-b58a-61fbd064ed9d" i18n="alteration_type"/>
+     </choices>
+   </quality>
+   <quality id="in_a_previous_life_i_was_a_unicorn" karma="10" pos="true" type="TRANSGENIC">
+     <choices>
+       <choice type="TEXT" uuid="35ed2489-d0af-485b-b58a-61fbd064ed9d" i18n="animal"/>
+     </choices>
+   </quality>
+   <quality id="chimeric_soul" karma="15" pos="true" type="TRANSGENIC" />
+   <quality id="conspicious_alterations" karma="6" pos="false" type="TRANSGENIC">
+		<choices>
+			<choice type="SUBSELECT" ref="rank" uuid="55a6dda7-7565-4108-9a04-65b7607081df">
+				<subOption id="rank1" cost="0" />
+				<subOption id="rank2" cost="2" />
+			</choice>
+		</choices>
+   </quality>
+   <quality id="misaligned_souls" karma="10" pos="false" type="TRANSGENIC" />
+   <quality id="a_lifetime_of_rejection" karma="4" pos="false" type="TRANSGENIC">
+		<choices>
+			<choice type="SUBSELECT" ref="rank" uuid="55a6dda7-7565-4108-9a04-65b7607081df">
+				<subOption id="rank1" cost="0">
+					<modifications>
+						<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="500"/>
+					</modifications>
+				</subOption>
+				<subOption id="rank1" cost="4">
+					<modifications>
+						<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="1000"/>
+					</modifications>
+				</subOption>
+			</choice>
+		</choices>
+   </quality>
+   <quality id="fine_young_cannibal" karma="4" pos="false" type="TRANSGENIC" />
+   <quality id="doesn't_quite_fit" karma="2" pos="false" type="TRANSGENIC" >
+		<modifications>
+			<valmod type="PRICEMOD" ref="CLOTHING" value="25"/>
+		</modifications>
+   </quality>
+   <quality id="sensitive_nose" karma="4" pos="false" type="TRANSGENIC" >
+		<modifications>
+			<checkmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="2" what="DICE"/>
+		</modifications>
+   </quality>
 </qualities>
