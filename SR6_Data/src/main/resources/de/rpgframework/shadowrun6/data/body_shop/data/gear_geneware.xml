@@ -197,7 +197,7 @@
       <flags><flag>AUGMENTATION</flag></flags>
   		<modifications>
      		<!-- eliminates 2 ranks of Fatigued -->
-     		<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" val="5"/>
+     		<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="5"/>
   		</modifications>
    </item>
    <item id="increased_myelination" avail="9I" price="99999" type="GENEWARE" subtype="AUGMENTICS">
@@ -209,11 +209,11 @@
      		<checkmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1" what="EDGE_ONLY_TEST"/>
   		</modifications>
    </item>
-   <item id="myostatin_inhibutor" avail="4L" price="15000" type="GENEWARE" subtype="AUGMENTICS">
+   <item id="myostatin_inhibitor" avail="4L" price="15000" type="GENEWARE" subtype="AUGMENTICS">
       <usage mode="IMPLANTED" value="0.05"/>
       <flags><flag>AUGMENTATION</flag></flags>
   		<modifications>
-     		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,0,0,0,0" set="AUGMENTED" applyTo="CHARACTER"/>
+     		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,0,0,0,0" set="AUGMENTED" apply="CHARACTER"/>
      		<checkmod type="ATTRIBUTE" ref="STRENGTH" value="1" what="DICE"/>
   		</modifications>
    </item>
@@ -223,7 +223,7 @@
   		<modifications>
   		</modifications>
    </item>
-   <item id="ndi" avail="4I" price="75000" type="GENEWARE" subtype="AUGMENTICS">
+   <item id="nde" avail="4I" price="75000" type="GENEWARE" subtype="AUGMENTICS">
       <usage mode="IMPLANTED" value="0.2"/>
       <flags><flag>AUGMENTATION</flag></flags>
   		<modifications>
@@ -268,7 +268,7 @@
    	<usage mode="IMPLANTED" value="0.05"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
-	<item id="enhanced_senses" avail="3" price="15000" type="GENEWARE" subtype="THERAPEUTIC" reqVariant="y">
+	<item id="expanded_visual_range" avail="3" price="15000" type="GENEWARE" subtype="THERAPEUTIC" reqVariant="y">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1723" type="TEXT" i18n="vision"/>
 		</choices>
@@ -290,7 +290,7 @@
   		</modifications>
    </item>
 
-   <item id="cerebellum_booster" avail="5L" price="55000" type="GENEWARE" subtype="AUGMENTICS">
+   <item id="cerebellum_booster_enhancer" avail="5L" price="55000" type="GENEWARE" subtype="AUGMENTICS">
       <usage mode="IMPLANTED" value="0.2"/>
       <flags><flag>AUGMENTATION</flag></flags>
   		<modifications>
