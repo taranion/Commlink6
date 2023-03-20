@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Therapeutic Bioware -->
+   <item id="cancer_prevention" avail="4" price="5000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.05"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="gene_therapy" avail="4" price="5000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="leonization" avail="8L" price="2000000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.5"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="lifespan_extension" avail="7L" price="300000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="physical_vigor" avail="6" price="250000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="revitalization" avail="7" price="40000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="revitalization_followup" avail="7" price="10000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="cellular_repair" avail="4" price="20000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="generic_regeneration" avail="3" price="40000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="implants">
+      	<attrdef id="PRICE" value="50000"/>
+      </variant>
+   </item>
+	<item id="optimized_trauma_response" avail="3" price="15000" type="GENEWARE" subtype="THERAPEUTIC">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+   	<usage mode="IMPLANTED" value="0.05*$RATING"/>
+ 		<attrdef id="PRICE" value="$RATING*15000"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="adapsin_therapy" avail="5L" price="30000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="allergen_tolerance" avail="4" price="25000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="cold_adaption" avail="5L" price="35000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="heat_adaption" avail="5L" price="35000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="high_altitude_adaption" avail="4" price="15000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="pathogen_resistance" avail="5" price="15000" type="GENEWARE" subtype="THERAPEUTIC" reqVariant="y">
+   	<usage mode="IMPLANTED" value="0.1"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<variant id="general">
+ 			<attrdef id="PRICE" value="30000"/>
+ 			<attrdef id="AVAILABILITY" value="5"/>
+ 		</variant>
+ 		<variant id="specific">
+			<choices>
+				<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1723" type="TEXT" i18n="pathogen"/>
+			</choices>
+ 			<attrdef id="PRICE" value="15000"/>
+ 			<attrdef id="AVAILABILITY" value="4L"/>
+ 		</variant>
+   </item>
+   <item id="radiation_tolerance" avail="4" price="25000" type="GENEWARE" subtype="THERAPEUTIC">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="toxin_resistance" avail="5" price="15000" type="GENEWARE" subtype="THERAPEUTIC" reqVariant="y">
+   	<usage mode="IMPLANTED" value="0.1"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+ 		<variant id="general">
+ 			<attrdef id="PRICE" value="30000"/>
+ 			<attrdef id="AVAILABILITY" value="5"/>
+ 		</variant>
+ 		<variant id="specific">
+			<choices>
+				<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1723" type="TEXT" i18n="toxin"/>
+			</choices>
+ 			<attrdef id="PRICE" value="15000"/>
+ 			<attrdef id="AVAILABILITY" value="4L"/>
+ 		</variant>
+   </item>
+
+	<!-- Augmentics -->
+   <item id="cosmetic_alteration" avail="4" price="20000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="cosmetic_body_makeover" avail="5" price="35000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="metaposer" avail="4" price="25000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="print_removal" avail="6I" price="20000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="genetic_optimization" avail="7L" price="45000" type="GENEWARE" subtype="AUGMENTICS" reqVariant="y">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="skill">
+     		<usage mode="IMPLANTED" value="0.3"/>
+ 			<attrdef id="PRICE" value="60000"/>
+ 			<attrdef id="AVAILABILITY" value="5"/>
+     		<choices>
+       		<choice type="SKILL" uuid="05ed2489-d0af-485b-b58a-61fbd064ed9c"/>
+     		</choices>
+     		<modifications>
+       		<valmod type="SKILL" ref="CHOICE" choice="05ed2489-d0af-485b-b58a-61fbd064ed9c" value="1" set="MAX" />
+     		</modifications>
+      </variant>
+      <variant id="attribute">
+     		<usage mode="IMPLANTED" value="0.2"/>
+ 			<attrdef id="PRICE" value="45000"/>
+ 			<attrdef id="AVAILABILITY" value="5"/>
+    		<choices>
+       		<choice type="ATTRIBUTE" uuid="4096584c-eb76-49b2-be6b-1a6c0ca9e50a"/>
+     		</choices>
+     		<modifications>
+       		<valmod type="ATTRIBUTE" ref="CHOICE" choice="4096584c-eb76-49b2-be6b-1a6c0ca9e50a" value="1" set="MAX" />
+     		</modifications>
+      </variant>
+   </item>
+
+   <item id="alpha_factor" avail="6I" price="45000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<valmod type="ATTRIBUTE" ref="CHARISMA" value="1" set="AUGMENTED" />
+     		<checkmod type="ATTRIBUTE" ref="MAGIC" value="-1" what="DICE"/>
+  		</modifications>
+   </item>
+   <item id="arcane_inhibitor" avail="5L" price="15000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+      	<relevancemod topic="MAGICAL"/>
+		 	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL" what="EDGE" value="1" apply="CHARACTER"/>
+  		</modifications>
+   </item>
+   <item id="daredrenaline_ii" avail="6I" price="35000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" set="AUGMENTED" />
+     		<valmod type="ATTRIBUTE" ref="STUN_MONITOR" value="1" set="AUGMENTED" />
+     		<checkmod type="ATTRIBUTE" ref="MAGIC" value="-1" what="DICE"/>
+  		</modifications>
+   </item>
+   <item id="fear_response_dampener" avail="4L" price="15000" type="GENEWARE" subtype="AUGMENTICS" reqVariant="y">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="basic">
+     		<usage mode="IMPLANTED" value="0.1"/>
+ 			<attrdef id="PRICE" value="15000"/>
+ 			<attrdef id="AVAILABILITY" value="4L"/>
+     		<modifications>
+     			<!-- prevents Zapped status -->
+     		</modifications>
+      </variant>
+      <variant id="enhanced">
+     		<usage mode="IMPLANTED" value="0.2"/>
+ 			<attrdef id="PRICE" value="25000"/>
+ 			<attrdef id="AVAILABILITY" value="5L"/>
+     		<modifications>
+     			<!-- prevents Zapped status -->
+     			<!-- prevents Panicked status -->
+     		</modifications>
+      </variant>
+   </item>
+   <item id="hyper_glucagon" avail="6I" price="12000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<!-- eliminates 2 ranks of Fatigued -->
+     		<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" val="5"/>
+  		</modifications>
+   </item>
+   <item id="increased_myelination" avail="9I" price="99999" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="99"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<!-- prevents Zapped status -->
+      	<relevancemod topic="COMBAT"/>
+     		<checkmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1" what="EDGE_ONLY_TEST"/>
+  		</modifications>
+   </item>
+   <item id="myostatin_inhibutor" avail="4L" price="15000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.05"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,0,0,0,0" set="AUGMENTED" applyTo="CHARACTER"/>
+     		<checkmod type="ATTRIBUTE" ref="STRENGTH" value="1" what="DICE"/>
+  		</modifications>
+   </item>
+   <item id="narco" avail="4I" price="20000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+  		</modifications>
+   </item>
+   <item id="ndi" avail="4I" price="75000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<checkmod type="ATTRIBUTE" ref="AGILITY" value="1" what="DICE"/>
+  		</modifications>
+   </item>
+   <item id="neoelastian" avail="4I" price="30000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<valmod type="ATTRIBUTE" ref="BODY" value="1" set="AUGMENTED" />
+     		<valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1" set="AUGMENTED" />
+  		</modifications>
+   </item>
+   <item id="pushed" avail="5I" price="60000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<checkmod type="ATTRIBUTE" ref="LOGIC" value="1" what="DICE"/>
+  		</modifications>
+   </item>
+   <item id="qualia" avail="5I" price="65000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<checkmod type="ATTRIBUTE" ref="INTUITION" value="1" what="DICE"/>
+  		</modifications>
+   </item>
+   <item id="reakt" avail="4I" price="45000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<checkmod type="ATTRIBUTE" ref="REACTION" value="1" what="DICE"/>
+     		<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL" value="1" what="DICE"/>
+  		</modifications>
+   </item>
+
+	<item id="enhanced_senses" avail="3" price="12000" type="GENEWARE" subtype="THERAPEUTIC" reqVariant="y">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1723" type="SENSE" options="SIGHT,HEARING,SMELL,TOUCH,TASTE"/>
+		</choices>
+   	<usage mode="IMPLANTED" value="0.05"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="enhanced_senses" avail="3" price="15000" type="GENEWARE" subtype="THERAPEUTIC" reqVariant="y">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1723" type="TEXT" i18n="vision"/>
+		</choices>
+   	<usage mode="IMPLANTED" value="0.05"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="pentachromacy" avail="4" price="20000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST"/>
+  		</modifications>
+   </item>
+   <item id="synch" avail="5" price="25000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<checkmod type="SKILL" ref="perception" value="1" what="DICE"/>
+  		</modifications>
+   </item>
+
+   <item id="cerebellum_booster" avail="5L" price="55000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<valmod type="ATTRIBUTE" ref="INTUITION" value="1"/>
+  		</modifications>
+   </item>
+   <item id="cerebral_booster_enhancer" avail="5L" price="40000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<valmod type="ATTRIBUTE" ref="LOGIC" value="1"/>
+  		</modifications>
+   </item>
+   <item id="synaptic_booster_acceleration" avail="6L" price="90000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.5"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+     		<valmod type="ATTRIBUTE" ref="REACTION" value="1"/>
+  		</modifications>
+   </item>
+
+</items>
