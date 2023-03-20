@@ -312,4 +312,61 @@
   		</modifications>
    </item>
 
+	<!--  Transgenic infusions -->
+   <item id="cosmetic_infusion_minor" avail="4" price="35000" type="GENEWARE" subtype="TRANSGENICS">
+      <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+  		</modifications>
+   </item>
+   <item id="cosmetic_infusion_moderate" avail="5" price="55000" type="GENEWARE" subtype="TRANSGENICS">
+      <usage mode="IMPLANTED" value="0.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+  		</modifications>
+   </item>
+   <item id="aggression_pack" avail="6L" price="85000" type="GENEWARE" subtype="TRANSGENICS">
+      <usage mode="IMPLANTED" value="0.6"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+  		</modifications>
+   </item>
+   <item id="animal_olfaction" avail="3" price="40000" type="GENEWARE" subtype="TRANSGENICS">
+      <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+  		</modifications>
+   </item>
+   <item id="catlike_reflexes" avail="4" price="60000" type="GENEWARE" subtype="TRANSGENICS">
+      <usage mode="IMPLANTED" value="0.3"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+  		</modifications>
+   </item>
+   <item id="claws_talons" avail="5" price="6500" type="GENEWARE" subtype="TRANSGENICS">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+  		</modifications>
+   </item>
+   <item id="digitgrade_legs" avail="6L" price="110000" type="GENEWARE" subtype="TRANSGENICS">
+      <usage mode="IMPLANTED" value="1.2"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+  		</modifications>
+   </item>
+   <item id="skeletal_pneumacity" avail="5" price="50000" type="GENEWARE" subtype="TRANSGENICS">
+      <usage mode="IMPLANTED" value="1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+  		</modifications>
+   </item>
+   <item id="solus" avail="5" price="90000" type="GENEWARE" subtype="TRANSGENICS">
+      <usage mode="IMPLANTED" value="0.6"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+  		<modifications>
+			<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="-15"/>
+  		</modifications>
+   </item>
+
 </items>
