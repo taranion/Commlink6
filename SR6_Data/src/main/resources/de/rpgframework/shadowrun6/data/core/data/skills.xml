@@ -76,8 +76,9 @@
 		<skillspec id="thagomizer"/>
 		<skillspec id="tongue"/>
 		<skillspec id="whiptail" lang="de"/>
-		<skillspec id="probosics" lang="de"/>		
+		<skillspec id="probosics" lang="de"/>
 		<skillspec id="other"/>
+		<skillspec id="biosprayer"/>
     </skill>
     <skill id="firearms"  attr="AGILITY" type="COMBAT" untr="y">
         <skillspec id="tasers" subtypes="TASERS"/>
