@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>   
+
+<!-- Microdrones -->
+
+<!-- Minidrones -->
+
+<!-- Small drones -->
+
+    <item avail="1"  price="250" id="cuddle_cat"  type="DRONE_SMALL" subtype="GROUND">
+      <vehicle han="3/3" acc="2" spdi="4" tspd="5" bod="1" arm="0" pil="1" sen="1" sea="0" type="GROUND"/>
+      <modifications>
+		<!-- <embed type="GEAR" ref="realistic_features2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/> wait for double clutch -->
+		<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true" /> <!-- As this is a walker, it does not have tires -->
+      </modifications>
+   </item>
+
+<!-- Medium drones -->
+   <item avail="8L" price="8000" id="ruhrmetall_murmillo"  type="DRONE_MEDIUM" subtype="GROUND">
+      <vehicle han="3" acc="5" spdi="5" tspd="5" bod="10" arm="18" pil="2" sen="1" />
+      <modifications>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="2e3a8f57-71b5-4d73-b37b-75d4f96c8fb0"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" intoId="2e3a8f57-71b5-4d73-b37b-75d4f96c8fb0" ref="armtech_mgl12" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="aa4ebb89-e94f-42dc-9504-b3f9dff0251a"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" intoId="aa4ebb89-e94f-42dc-9504-b3f9dff0251a" ref="armtech_mgl12" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="flash_pak"/>		 
+	  </modifications>
+   </item>
+
+   <item avail="8L" price="12000" id="ruhrmetall_thraex"  type="DRONE_MEDIUM" subtype="GROUND">
+      <vehicle han="3" acc="5" spdi="5" tspd="5" bod="10" arm="18" pil="2" sen="1" />
+      <modifications>
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_turret_heavy" /> wait for double clutch -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="283b9bb6-5a16-4deb-86a7-6b0d9b603c88"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" intoId="283b9bb6-5a16-4deb-86a7-6b0d9b603c88" ref="armtech_mgl12" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="b176ab77-6869-4ddc-a36e-8f6c3367c8b7"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" intoId="b176ab77-6869-4ddc-a36e-8f6c3367c8b7" ref="armtech_mgl12" />
+      </modifications>
+   </item>
+   
+   <item avail="2" price="6000" id="sony_x_eco4"  type="DRONE_MEDIUM" subtype="ANTHRO">
+      <vehicle han="4" acc="8" spdi="10" tspd="30" bod="4" arm="4" pil="3" sen="1" />
+      <modifications>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" /> <!-- to represent ability of drone to handle weapons with both hands -->
+      </modifications>
+   </item>
+   <item avail="4" price="13500" id="sony_x_reliable4"  type="DRONE_MEDIUM" subtype="ANTHRO">
+      <vehicle han="3/4" acc="12" spdi="10" tspd="40" bod="6" arm="6" pil="4" sen="2" />
+      <modifications>
+		<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_BODY" /> <!-- to represent ability of drone to handle weapons with both hands -->
+		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" /> <!-- For the underarm shield, stated by Raben AAS in Pegasus Forum -->
+      </modifications>
+   </item>
+   <item avail="4L" price="18500" id="sony_x_reliable4_police"  type="DRONE_MEDIUM" subtype="ANTHRO">
+      <vehicle han="3/4" acc="12" spdi="10" tspd="40" bod="6" arm="8" pil="4" sen="3" />
+      <modifications>
+		<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_BODY" /> <!-- to represent ability of drone to handle weapons with both hands -->
+		<!-- <embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" /> wait for double clutch -->
+		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" /> <!-- For the underarm shield, stated by Raben AAS in Pegasus Forum -->
+      </modifications>
+   </item>
+ 
+    <item avail="3"  price="500" id="best_friend"  type="DRONE_MEDIUM" subtype="GROUND">
+      <vehicle han="3/3" acc="3" spdi="5" tspd="6" bod="5" arm="1" pil="1" sen="2" sea="0" />
+      <modifications>
+		<!-- <embed type="GEAR" ref="realistic_features2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/> wait for double clutch -->
+		<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true" /> <!-- As this is a walker, it does not have tires -->
+      </modifications>
+   </item>
+ 
+<!-- Large drones -->
+   <item avail="4" price="20000" id="mixcoatl_ii"  type="DRONE_LARGE" subtype="AIR">
+      <vehicle han="3" acc="30" spdi="30" tspd="220" bod="8" arm="8" pil="3" sen="4" />
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" />
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_walker" /> wait for double clutch -->
+	  </modifications>
+   </item>
+   
+   <item avail="8L" price="45000" id="mk_jagdhund_ii"  type="DRONE_LARGE" subtype="GROUND" >
+      <vehicle han="2/6" acc="25" spdi="30" tspd="250" bod="8" arm="6" pil="5" sen="3" sea="1"/>
+	  <alternate mode="VEHICLE" type="VEHICLES" subtype="BIKES">
+      </alternate>
+      <modifications>
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" /> wait for double clutch -->
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" /> wait for double clutch -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" />
+	  </modifications>
+   </item>
+
+</items>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Holdouts -->
+   <item id="walter_secura_superkompakt" avail="6L" price="1000" type="WEAPON_FIREARMS" subtype="HOLDOUTS">
+      <weapon dmg="3P" attack="10,10,,," mode="SA" ammo="4(c)" skill="firearms" spec="firearms/holdouts"/>
+   </item>
+
+<!-- Machine Pistols -->
+   <item id="walter_p118" avail="4L" price="2300" type="WEAPON_FIREARMS" subtype="MACHINE_PISTOLS">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="GEARMOD" ref="gas-vent_improved"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+      </modifications>
+      <weapon attack="12,10,9,," ammo="24(c)" dmg="2P" mode="SA/BF" skill="firearms" spec="firearms/machine_pistols"/>
+   </item>
+
+<!-- Heavy Pistols -->
+
+   <item id="merlin" avail="3L" price="750" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
+      </modifications>
+      <weapon dmg="3P" attack="12,8,6,," mode="SA" ammo="6(cy)" skill="firearms" spec="firearms/pistols_heavy"/>
+   </item>
+
+   <item id="altmayr_black_moon" avail="3L" price="850" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+      </modifications>
+      <weapon dmg="4P" attack="11,9,7,," mode="SA" ammo="6(cy)" skill="firearms" spec="firearms/pistols_heavy"/>
+   </item>
+
+   <item id="wirtz_sw64t" avail="6L" price="2800" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="UNDER" included="true"/>
+      </modifications>
+      <weapon dmg="4P" attack="8,11,13,8," mode="SS" ammo="8(cy)" skill="firearms" spec="firearms/pistols_heavy"/>
+   </item>
+
+<!-- Submachine Guns -->
+   <item id="hk_223c" avail="5L" price="850" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP" />
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="SIDE_L"/>
+         <itemmod type="HOOK" ref="SIDE_R"/>
+      </modifications>
+      <weapon attack="11,10,7,," ammo="40(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/submachine_guns"/>
+   </item>
+
+   <item id="hk_mp75" avail="5L" price="1000" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP" />
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="GEARMOD" ref="gas-vent_improved"/>
+      </modifications>
+      <weapon attack="10,12,6,," ammo="30(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/submachine_guns"/>
+   </item>
+
+   <item id="hk_223cplus" avail="3L" price="1300" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="SIDE_L"/>
+         <itemmod type="HOOK" ref="SIDE_R"/>
+         <itemmod type="GEARMOD" ref="foregrip"/>
+         <itemmod type="GEARMOD" ref="folding_stock"/>
+      </modifications>
+      <weapon dmg="4P" attack="12,12,8,," ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/submachine_guns"/>
+   </item>
+
+<!-- Shotguns -->
+   <item id="onotari_ks_x" avail="5L" price="1200" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="UNDER" included="true"/>
+      </modifications>
+      <weapon attack="8,12,4,," ammo="12(c)" dmg="4P" mode="SA/BF" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+
+<!-- Rifles -->
+
+   <item id="hanseat" avail="5L" price="4000" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+      </modifications>
+      <weapon dmg="4P" attack="5,10,8,8,3" ammo="36(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+
+   <item id="steyr_ucrp_with_shotgun" avail="7L" price="3500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+         <embed type="GEAR" ref="steyr_ucr_shotgun" intoType="HOOK" intoRef="UNDER" included="true"/>
+      </modifications>
+      <weapon dmg="5P" attack="5,11,11,7,2" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+		<geardef>
+			<item id="steyr_ucr_shotgun" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+				<usage mode="EMBEDDED"/>
+				<weapon dmg="4P" mode="SS/SA" attack="7,9,8,," ammo="4(m)"  skill="firearms" spec="firearms/shotguns"/>
+			</item>
+		</geardef>
+   </item>
+   <item id="steyr_ucrp_with_taser" avail="7L" price="3500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+         <embed type="GEAR" ref="steyr_ucr_taser" intoType="HOOK" intoRef="UNDER" included="true"/>
+      </modifications>
+      <weapon dmg="5P" attack="5,11,11,7,2" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+		<geardef>
+			<item id="steyr_ucr_taser" type="WEAPON_FIREARMS" subtype="TASERS">
+				<usage mode="EMBEDDED"/>
+				<weapon dmg="4S(e)" mode="SS" attack="9,9,,," ammo="4(m)"  skill="firearms" spec="firearms/tasers"/>
+			</item>
+		</geardef>
+   </item>
+   <item id="steyr_ucrp_with_bayonet" avail="7L" price="3500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+         <embed type="GEAR" ref="steyr_ucr_bayonet" intoType="HOOK" intoRef="UNDER" included="true"/>
+      </modifications>
+      <weapon dmg="5P" attack="5,11,11,7,2" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+		<geardef>
+			<item id="steyr_ucr_bayonet" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+				<usage mode="EMBEDDED"/>
+				<weapon  dmg="3P" attack="8,2,,," skill="close_combat" spec="close_combat/blades"/>
+			</item>
+		</geardef>
+   </item>
+   
+   <item id="hk_mr223" avail="3L" price="5500" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="SIDE_L"/>
+         <itemmod type="HOOK" ref="SIDE_R"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+      </modifications>
+      <weapon dmg="5P" attack="4,8,9,8,6" ammo="40(c)" mode="SA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+   <item id="hk_223la" avail="3L" price="3750" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="SIDE_L"/>
+         <itemmod type="HOOK" ref="SIDE_R"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <itemmod type="GEARMOD" ref="foregrip"/>
+      </modifications>
+      <weapon dmg="5P" attack="6,11,10,8,4" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+
+   <item id="hk_g12a4" avail="3L" price="3500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="hkg12_grenade_launcher" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <itemmod type="GEARMOD" ref="rigid_stock"/>
+         <itemmod type="GEARMOD" ref="foregrip"/>
+      </modifications>
+      <weapon dmg="4P" attack="4,11,10,6,1" ammo="32(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+		<geardef>
+			<item id="hkg12_grenade_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+				<usage mode="EMBEDDED"/>
+				<weapon dmg="0P" attack="4,11,7,1," mode="SS" ammo="8(m)" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+			</item>
+		</geardef>
+   </item>
+   <item id="hk_223bw" avail="8L" price="3950" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="SIDE_L"/>
+         <itemmod type="HOOK" ref="SIDE_R"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="hk223_grenade_launcher" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="SIDE_L" included="true"/>
+         <itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
+         <itemmod type="GEARMOD" ref="foregrip"/>
+      </modifications>
+      <weapon dmg="5P" attack="6,11,10,7,1" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+		<geardef>
+			<item id="hk223_grenade_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+				<usage mode="EMBEDDED"/>
+				<weapon dmg="0P" attack="4,12,8,1," mode="SS" ammo="4(m)" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+			</item>
+		</geardef>
+   </item>
+   <item id="hk_223bw-t" avail="8L" price="4150" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="SIDE_L"/>
+         <itemmod type="HOOK" ref="SIDE_R"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="hk223_grenade_launcher" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="SIDE_L" included="true"/>
+         <itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
+         <itemmod type="GEARMOD" ref="foregrip"/>
+         <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+      <weapon dmg="5P" attack="6,11,10,7,1" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+		<geardef>
+			<item id="hk223_grenade_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+				<usage mode="EMBEDDED"/>
+				<weapon dmg="0P" attack="4,12,8,1," mode="SS" ammo="4(m)" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+			</item>
+		</geardef>
+   </item>
+
+
+<!-- Projectile Weapons -->
+
+   <item id="crossbow_hunting" avail="2L" price="300" type="WEAPON_RANGED" subtype="CROSSBOWS">
+      <weapon dmg="3P" attack="3,11,6,," ammo="1(m)" mode="SS"  skill="athletics" spec="athletics/archery"/>
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="GEARMOD" ref="collapsible_stock"/>
+      </modifications>
+   </item>
+
+</items>
