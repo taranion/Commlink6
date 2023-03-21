@@ -391,6 +391,23 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_electronics.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" electronics");
 
+			logger.log(Level.INFO, "START -----------------------------Other Sources from DE--------------------------------");
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "OTHER_DE", "other_de.i18n", Locale.GERMAN);
+			list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "other_de/data/qualities.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_de/data/gear_ammunition.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_de/data/gear_firearms.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_de/data/gear_drones.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_de/data/gear_electronics.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" electronics");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_de/data/gear_software.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" software");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_de/data/gear_vehicles.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+
 			logger.log(Level.INFO, "START -------------------------------HACK&SLASH------------------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "HACK_SLASH", "hack_slash.i18n", Locale.ENGLISH);
 			list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "hack_slash/data/actions.xml");

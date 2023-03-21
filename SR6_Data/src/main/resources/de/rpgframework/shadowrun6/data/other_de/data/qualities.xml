@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   
+   <quality id="route_to_fame" karma="12" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE" apply="CHARACTER"/>
+     </modifications>
+   </quality>
+
+   <quality id="spotlight" karma="6" pos="false" type="NORMAL" />   
+
+</qualities>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Projectile Ammunition -->
+
+    <item id="ammo_bolt_hunting" price="10" avail="0" type="AMMUNITION" subtype="CROSSBOWS" count="y" units="1">
+        <modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" apply="DATA_ITEM"/>
+        </modifications>
+    </item>
+
+    <item id="ammo_bolt_shattering" price="25" avail="4L" type="AMMUNITION" subtype="CROSSBOWS" count="y" units="1" />
+    
+</items>
