@@ -36,6 +36,7 @@
 		<module>SR6_CharGen_JFX</module>
 		<module>SR6_Foundry_VTT</module>
 		<module>SR6_Export_JSON</module>
+		<module>Commlink6</module>
 	</modules>
 
 	<dependencyManagement>
@@ -126,11 +127,20 @@
 		</repository>
 	</distributionManagement>
 
+	<repositories>
+		<repository>
+			<id>jfrog</id>
+			<snapshots><enabled>true</enabled></snapshots>
+			<releases><enabled>true</enabled></releases>
+			<url>https://rpgframework.jfrog.io/ui/native/RPGFramework/</url>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 			</plugin>
 		</plugins>
 	</build>
