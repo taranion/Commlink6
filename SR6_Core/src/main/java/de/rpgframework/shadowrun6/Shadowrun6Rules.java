@@ -18,29 +18,17 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(Shadowrun6Rules.class,
 			Locale.ENGLISH, Locale.GERMAN);
 
-	public static enum PRIORITY_MAGIC {
-		/** Only use magic rating from priority */
-		PRIO_MAGIC,
-		/** Use the priority magic plus any points added by Karma */
-		MAGIC_PLUS_KARMA,
-		/** Use the magic rating with any adjustments */
-		FINAL_MAGIC
-		;
-		public String getName(Locale loc) {
-			return RES.getString("rule.chargen_prio_adept_pp."+name().toLowerCase(), loc);
-		}
-	}
-
 	public static Rule CHARGEN_RAISE_ABOVE_6    = new Rule(EffectOn.CHARGEN,"CHARGEN_RAISE_ABOVE_6", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_MAX_INITIATION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_INITIATION", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_MAX_SUBMERSION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_SUBMERSION", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_MAX_TRANSHUMAN   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_TRANSHUMAN", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule(EffectOn.CHARGEN,"CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
-	public static Rule CHARGEN_PRIO_ADEPT_PP    = new Rule(EffectOn.CHARGEN,"CHARGEN_PRIO_ADEPT_PP", PRIORITY_MAGIC.class, RES, PRIORITY_MAGIC.PRIO_MAGIC);
 	public static Rule CHARGEN_ALLOW_LEGAL_AVAIL7PLUS = new Rule(EffectOn.CHARGEN,"CHARGEN_ALLOW_LEGAL_AVAIL7PLUS", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule(EffectOn.CHARGEN,"CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
+
 	public static Rule ALLOW_TRANSHUMANISM      = new Rule(EffectOn.COMMON,"ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_EXTENDED_CONTACT = new Rule(EffectOn.COMMON,"CHARGEN_EXTENDED_CONTACT", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule CHARGEN_PRIO_ADJUSTED_MAGIC_RESO = new Rule(EffectOn.CHARGEN,"CHARGEN_PRIO_ADJUSTED_MAGIC_RESO", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule(EffectOn.COMMON,"MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
 	public static Rule ADD_STRENGTH_TO_MELEE_AR = new Rule(EffectOn.COMMON,"ADD_STRENGTH_TO_MELEE_AR", Rule.Type.BOOLEAN, RES, "true");
 
@@ -53,7 +41,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_MAX_SUBMERSION,
 				CHARGEN_MAX_TRANSHUMAN,
 				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
-				CHARGEN_PRIO_ADEPT_PP,
+				CHARGEN_PRIO_ADJUSTED_MAGIC_RESO,
 				CHARGEN_BUY_SPELLS_KARMA,
 				CHARGEN_ALLOW_LEGAL_AVAIL7PLUS,
 				ALLOW_TRANSHUMANISM,

@@ -39,6 +39,7 @@ import de.rpgframework.shadowrun6.DataStructure;
 import de.rpgframework.shadowrun6.DrakeType;
 import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.MartialArts;
+import de.rpgframework.shadowrun6.MentorSpiritsEffectConverter;
 import de.rpgframework.shadowrun6.PriceModifiers;
 import de.rpgframework.shadowrun6.ReturnIdAsResultConverter;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -101,6 +102,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	MARTIAL_ART(MartialArts.class),
 	MATRIX_ATTRIBUTE(new ItemAttributeConverter()),
 	MENTOR_SPIRIT(MentorSpirit.class),
+	MENTOR_SPIRIT_EFFECTS(new MentorSpiritsEffectConverter()),
 	METAECHO(MetamagicOrEcho.class),
 	METATYPE(SR6MetaType.class),
 	PARAGON(MentorSpirit.class),

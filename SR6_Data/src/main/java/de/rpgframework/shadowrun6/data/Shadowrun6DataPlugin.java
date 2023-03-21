@@ -536,7 +536,7 @@ public class Shadowrun6DataPlugin  {
 		// See which image is available
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		for (String file : filenames) {
-			logger.log(Level.ERROR, "Check "+file);
+			logger.log(Level.DEBUG, "Check "+file);
 			URL ins = clazz.getResource("placeholder/"+file);
 			if (ins!=null) {
 				return ins;

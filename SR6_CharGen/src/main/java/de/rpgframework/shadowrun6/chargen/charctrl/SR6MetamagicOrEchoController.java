@@ -456,14 +456,18 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 				if (val.getModifyable().getType()==Type.DRACOGENESIS_POWER) continue;
 				if (val.getModifyable().hasLevel()) {
 					for (int i=0; i<val.getDistributed(); i++) {
-						logger.log(Level.INFO, "Pay {0} Karma for metaecho ''{1}'' {2}", payNext, val.getModifyable().getId(), (i+1));
-						model.setKarmaFree( model.getKarmaFree() - payNext);
+						if (isCharGen) {
+							logger.log(Level.INFO, "Pay {0} Karma for metaecho ''{1}'' {2}", payNext, val.getModifyable().getId(), (i+1));
+							model.setKarmaFree( model.getKarmaFree() - payNext);
+						}
 						grade++;
 						payNext++;
 					}
 				} else {
-					logger.log(Level.INFO, "Pay {0} Karma for metaecho ''{1}''", payNext, val.getModifyable().getId());
-					model.setKarmaFree( model.getKarmaFree() - payNext);
+					if (isCharGen) {
+						logger.log(Level.INFO, "Pay {0} Karma for metaecho ''{1}''", payNext, val.getModifyable().getId());
+						model.setKarmaFree( model.getKarmaFree() - payNext);
+					}
 					grade++;
 					payNext++;
 				}

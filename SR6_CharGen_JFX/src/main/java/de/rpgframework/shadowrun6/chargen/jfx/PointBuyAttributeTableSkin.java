@@ -40,6 +40,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
@@ -545,8 +546,12 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 			grid.add(btnIncKar.get(key),10, y);
 			grid.add(   lblAll.get(key),11, y);
 		}
-		grid.getColumnConstraints().add(new ColumnConstraints());
-		grid.getColumnConstraints().add(new ColumnConstraints());
+		ColumnConstraints nameColConst = new ColumnConstraints();
+		nameColConst.setMinWidth(140);
+		//nameColConst.setPrefWidth(250);
+		nameColConst.setHgrow(Priority.ALWAYS);
+		grid.getColumnConstraints().add(new ColumnConstraints()); // Recommend
+		grid.getColumnConstraints().add(nameColConst);
 		grid.getColumnConstraints().add(new ColumnConstraints()); // DecAdj
 		grid.getColumnConstraints().add(new ColumnConstraints(40)); // Adjust
 		grid.getColumnConstraints().add(new ColumnConstraints()); // IncAdj
@@ -556,6 +561,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		grid.getColumnConstraints().add(new ColumnConstraints()); // DecAdj
 		grid.getColumnConstraints().add(new ColumnConstraints(40)); // Adjust
 		grid.getColumnConstraints().add(new ColumnConstraints()); // IncAdj
+		grid.getColumnConstraints().add(new ColumnConstraints(40)); // All
 	}
 
 	//-------------------------------------------------------------------
