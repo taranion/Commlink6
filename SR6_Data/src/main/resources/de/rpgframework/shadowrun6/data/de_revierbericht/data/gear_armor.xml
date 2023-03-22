@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+    <item id="rabotti" avail="1" price="30"  type="ARMOR" subtype="ARMOR_SOCIAL" >
+        <armor rating="0" social="-8" />
+        <modifications>
+			<valmod type="HOOK" ref="ARMOR" value="2" />
+        </modifications>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+		<attrdef id="ARMOR" value="$RATING-1"/>
+		<attrdef id="PRICE" value="$RATING" table="30,100,200,300"/> <!-- Revierbericht does not state price for rating 1 & 2 rabotti overall, estimating 100 & 200-->
+    </item>
+
+    <item id="underground_helmet" avail="2" price="3000" type="ARMOR" subtype="ARMOR_HELMET" >
+        <armor rating="3" social="-6" add="true"/>
+        <modifications>
+ 			<valmod type="HOOK" ref="HELMET_ACCESSORY" value="0" />
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="gas_mask" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="image_link" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="low_light_vision" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="ultrasound_link" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="spatial_recognizer" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="ultrasound_link" included="true"/>
+		</modifications>
+    </item>
+
+    <item id="myrmidon" avail="9I" price="105000"  type="ARMOR" subtype="ARMOR_BODY" >
+        <armor rating="12" social="-12" dr="3" />
+		<alternate mode="ARMOR" type="ARMOR" subtype="ARMOR_HELMET">
+		</alternate>
+        <modifications>
+ 			<valmod type="HOOK" ref="ARMOR" value="0" />
+ 			<valmod type="HOOK" ref="HELMET_ACCESSORY" value="0" />
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				</embed>
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="thermal_damping" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="diving_gear" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="medkit" included="true"/> <!-- no rating stated in Revierbericht -->
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="stim_patch" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				</embed>
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="stim_patch" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				</embed>
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="myrmidon_drone" />
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="weapon_mount_standard" id="d7919fa1-ff4d-4110-8cdd-2a5b22088ec2"/> <!-- switch to small mount with double clutch -->
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" intoId="d7919fa1-ff4d-4110-8cdd-2a5b22088ec2" ref="armtech_mgl6" id="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" />
+            <embed type="GEAR" intoId="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+            <embed type="GEAR" intoId="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" variant="internal" />
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="weapon_mount_standard" id="2ebae10b-9e9e-4956-940a-b772adc1f0e1" /> <!-- switch to small mount with double clutch -->
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" intoId="2ebae10b-9e9e-4956-940a-b772adc1f0e1" ref="armtech_mgl6" id="22b1f566-a4ae-4520-8fff-3dc5b53714dd" />
+            <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+            <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" variant="internal" />
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="myrmidon_commlink" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="image_link" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="flare_compensation" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="thermographic_vision" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="smartlink" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="ultrasound_link" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="audio_enhancement" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="spatial_recognizer" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="cyberware_scanner" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="mad_scanner" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="ultrasound" included="true"/>
+        </modifications>
+		<geardef>
+			<item id="thermal_damping" avail="99" price="0" modonly="true" type="ACCESSORY" subtype="ARMOR_BODY" >
+				<usage mode="EMBEDDED" slot="ARMOR" value="0"/>
+			</item>
+			<item id="myrmidon_commlink" avail="99" price="0" subtype="COMMLINK" type="ELECTRONICS" modonly="true" >
+				<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="0"/>
+				<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+				<modifications>
+					<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+					<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+				</modifications>
+				<matrix d="3" f="2" programs="3" devrat="7"/>
+				<flags><flag>MATRIX_DEVICE</flag></flags>
+			</item>
+			<item id="myrmidon_drone" avail="99"  price="0" modonly="true" type="DRONE_SMALL" subtype="GROUND" >
+				<vehicle han="0" acc="0" spdi="0" tspd="0" bod="0" arm="0" pil="0" sen="4" />
+				<modifications>
+					<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="fe01d7e0-a730-4eb1-875e-30820952d08f"/> <!-- switch to small mount with double clutch -->
+					<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" intoId="fe01d7e0-a730-4eb1-875e-30820952d08f" ref="steyr_tmp" id="3d818acd-d03e-4f87-8328-905ba1d5bacc"/>
+					<embed type="GEAR" intoId="3d818acd-d03e-4f87-8328-905ba1d5bacc" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+					<embed  type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
+						<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+						</embed>
+					<embed  type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
+						<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+						<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="steyr_tmp"/>
+						</embed>
+					<itemmod type="HOOK" ref="VEHICLE_CF" remove="true" />
+					<itemmod type="HOOK" ref="VEHICLE_CHASSIS" remove="true" />
+					<itemmod type="HOOK" ref="VEHICLE_ELECTRONICS" remove="true" />
+					<itemmod type="HOOK" ref="VEHICLE_POWERTRAIN" remove="true" />
+					<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true" />
+					<itemmod type="HOOK" ref="VEHICLE_ACCESSORY" remove="true" />
+				</modifications>
+			</item>
+		</geardef>
+    </item>
+
+</items>

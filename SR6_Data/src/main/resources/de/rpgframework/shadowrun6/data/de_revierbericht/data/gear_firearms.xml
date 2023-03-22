@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Heavy Pistols -->
+
+   <item id="wirtz_sw11" avail="4L" price="250" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" >
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+      </modifications>
+      <weapon dmg="4P" attack="8,11,8,," mode="SS" ammo="2(b)" skill="firearms" spec="firearms/pistols_heavy"/>
+   </item>
+
+<!-- Shotguns -->
+
+   <item id="wirtz_sw31" avail="2L" price="450" type="WEAPON_FIREARMS" subtype="SHOTGUNS" >
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+      <weapon dmg="4P" attack="7,10,6,," mode="SS" ammo="4(cy)" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+
+<!-- Rifles -->
+
+   <item id="wirtz_sw64" avail="4L" price="9500" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING" >
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+			<embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="UNDER" included="true"/>
+      </modifications>
+      <weapon dmg="4P" attack="3,6,13,10,8" mode="SA" ammo="8(d)" skill="firearms" spec="firearms/rifles"/>
+   </item>
+
+<!-- Projectile Weapons -->
+
+   <item id="krim_ultra" price="50" type="WEAPON_RANGED" subtype="CROSSBOWS" >
+		<weapon mode="SS" skill="athletics" spec="athletics/archery"/>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="6,7,8,9,10,11,12,13,14"/> 
+		</choices>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="$RATING" apply="CHARACTER"/>
+		</requires>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+		<attrdef id="PRICE"         value="$RATING*10 +50" />
+		<attrdef id="DAMAGE"        value="$RATING/2 P" />
+		<attrdef id="ATTACK_RATING" value="$RATING,$RATING/2,$RATING/8,," />
+		<attrdef id="AVAILABILITY"  value="$RATING/2 L" />
+	</item>
+
+</items>

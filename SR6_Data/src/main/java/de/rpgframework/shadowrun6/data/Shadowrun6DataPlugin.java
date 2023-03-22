@@ -415,16 +415,12 @@ public class Shadowrun6DataPlugin  {
 
 			logger.log(Level.INFO, "START --------------------------------Revierbericht-----------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_REVIERBERICHT", "de_revierbericht.i18n", Locale.GERMAN);
-			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_preload.xml");
-			// logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition");
-			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_firearms.xml");
-			// logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
-			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_drones.xml");
-			// logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
-			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_armor.xml");
-			// logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
-			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_vehicles.xml");
-			// logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_armor.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_firearms.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_vehicles.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 
 			logger.log(Level.INFO, "START -------------------------------HACK&SLASH------------------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "HACK_SLASH", "hack_slash.i18n", Locale.ENGLISH);
