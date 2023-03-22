@@ -58,6 +58,7 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
 import de.rpgframework.shadowrun6.persist.ItemAttributeConverter;
 import de.rpgframework.shadowrun6.persist.LifestyleQualityConverter;
 import de.rpgframework.shadowrun6.persist.RuleFlagConverter;
@@ -128,6 +129,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SUBSELECT(new ReturnIdAsResultConverter()), // Subselect
 	TECHNIQUE(Technique.class),
 	TEXT("TEXT"),
+	VEHICLE_TYPE(VehicleType.class,0)
 	;
 
 	Class<? extends DataItem> typeClass;

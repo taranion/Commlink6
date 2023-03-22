@@ -101,12 +101,11 @@ public enum ItemType {
 			ItemSubType.NANITES_TRANSIENT,
 			ItemSubType.NANO_CYBERWARE
 			),
-	GENETICS(
-			ItemSubType.GENOM_CHANGES,
-			ItemSubType.EXOTIC_METAGENETICS,
-			ItemSubType.TRANSGENETICS,
-			ItemSubType.MICRO_ENVIRONADAPT,
-			ItemSubType.COMPLEMENTAL_GENETICS
+	GENEWARE(
+			ItemSubType.THERAPEUTIC,
+			ItemSubType.AUGMENTICS,
+			ItemSubType.COMPLEMENTARY_GENETIC_MODS,
+			ItemSubType.TRANSGENICS
 			),
 	PACK(
 			ItemSubType.PACK_COMPLETE,
@@ -290,7 +289,7 @@ public enum ItemType {
     }
 
     public static ItemType[] bodytechTypes() {
-    	return new ItemType[]{CYBERWARE,BIOWARE, NANOWARE, GENETICS};
+    	return new ItemType[]{CYBERWARE,BIOWARE, NANOWARE, GENEWARE};
     }
 
     public static ItemType[] gearTypes() {
