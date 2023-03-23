@@ -17,7 +17,11 @@
     </critterpower>
     <critterpower id="energy_aura"    type="PHYSICAL" action="AUTO"  range="LINE_OF_SIGHT" dur="ALWAYS" />
     <critterpower id="engulf"         type="PHYSICAL" action="MAJOR" range="TOUCH"         dur="SUSTAINED" />
-    <critterpower id="enhanced_senses" type="PHYSICAL" action="AUTO" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="enhanced_sense" type="PHYSICAL" action="AUTO" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" >
+    	<choices>
+			<choice type="TEXT" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" />
+    	</choices>
+    </critterpower>
     <critterpower id="essence_drain"  type="PHYSICAL" action="MAJOR" range="TOUCH"         dur="PERMANENT" />
     <critterpower id="fear"           type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="SPECIAL" />
     <critterpower id="guard"          type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
