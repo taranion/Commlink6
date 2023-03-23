@@ -5,8 +5,9 @@ package de.rpgframework.shadowrun6;
  *
  */
 public enum CreatePoints {
-	
+
 	ADJUST,
+	ADJUST_DRAKE,
 	ATTRIBUTES,
 	CHARACTER_POINTS,
 	CONTACT_POINTS,

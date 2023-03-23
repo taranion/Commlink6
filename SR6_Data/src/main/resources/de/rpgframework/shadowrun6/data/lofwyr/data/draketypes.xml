@@ -12,6 +12,7 @@
       	</itemmod>
       	<itemmod type="CRITTER_POWER" ref="armor"/>
       	<itemmod type="CRITTER_POWER" ref="natural_weapon"/>
+      	<itemmod type="QUALITY" ref="unsteady_hands"/>
       	<itemmod type="CRITTER_POWER" ref="vestigial_wings"/>
       </modifications>
    </draketype>
@@ -27,6 +28,7 @@
       	</itemmod>
       	<itemmod type="CRITTER_POWER" ref="armor"/>
       	<itemmod type="CRITTER_POWER" ref="natural_weapon"/>
+      	<itemmod type="QUALITY" ref="unsteady_hands"/>
       	<itemmod type="CRITTER_POWER" ref="vestigial_wings"/>
       	<itemmod type="METAECHO" ref="heavy_scales"/>
       </modifications>

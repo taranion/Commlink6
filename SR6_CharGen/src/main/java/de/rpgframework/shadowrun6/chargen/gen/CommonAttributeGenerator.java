@@ -56,7 +56,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 				}
 			}
 		}
-		logger.log(Level.WARNING, "Attribute {0} is max {1}", key, max);
+		//logger.log(Level.WARNING, "Attribute {0} is max {1}", key, max);
 		return (max>0)?max:6;
 	}
 
