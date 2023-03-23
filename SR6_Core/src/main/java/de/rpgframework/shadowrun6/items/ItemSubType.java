@@ -138,6 +138,7 @@ public enum ItemSubType {
 	BTL,
 	// Survival
 	SURVIVAL_GEAR,
+	WINTER_GEAR,
 	GRAPPLE_GUN,
 	// Biology
 	BIOTECH,
