@@ -7,20 +7,23 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import de.rpgframework.genericrpg.NumericalValueController;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
+import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.AllowModification;
+import de.rpgframework.genericrpg.modification.AllowModification.AllowType;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.genericrpg.modification.AllowModification.AllowType;
-import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.shadowrun.BodyForm;
+import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
@@ -47,12 +50,25 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 
 	private boolean isCharGen;
 	private int maxGrade = Integer.MAX_VALUE;
+	private DrakeAttributeController attrCtrl;
+
+	private int adjustPoints, adjustPointsMax;
 
 	//-------------------------------------------------------------------
 	public SR6DrakeController(SR6CharacterController parent, boolean isCharGen) {
 		super(parent);
 		this.isCharGen = isCharGen;
 		allowedAdjust = new ArrayList<>();
+		attrCtrl = new DrakeAttributeController(parent, this);
+	}
+
+	//-------------------------------------------------------------------
+	public int getAdjustmentPointsMax() {
+		return adjustPointsMax;
+	}
+	//-------------------------------------------------------------------
+	public int getAdjustmentPointsLeft() {
+		return adjustPoints;
 	}
 
 	//-------------------------------------------------------------------
@@ -95,6 +111,7 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 	 */
 	@Override
 	public List<MetamagicOrEchoValue> getSelected() {
+//		System.err.println("SR6DrakeController.getSelected: "+getModel().getMetamagicOrEchoes().size()+" items");
 		return getModel().getMetamagicOrEchoes().stream().filter(v -> v.getResolved().getType()==Type.DRACOGENESIS_POWER).collect(Collectors.toList());
 	}
 
@@ -169,7 +186,7 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 		}
 
 		// Check if character is aware drake
-		if (!getModel().hasQuality("drake")) {
+		if (getModel().getBodytype()!=BodyType.DRAKE) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_DRAKE_ONLY, karma);
 		}
 
@@ -231,6 +248,7 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 		if (!getSelected().contains(value)) {
 			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
+		if (value.isAutoAdded()) return Possible.FALSE;
 		return Possible.TRUE;
 	}
 
@@ -402,6 +420,18 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 		try {
 			Shadowrun6Character model = getModel();
 			allowedAdjust.clear();
+			adjustPointsMax = 6;
+
+			// If this is in chargen mode, pay drake quality
+			if (isCharGen) {
+				if (model.getBodytype()==BodyType.DRAKE) {
+					logger.log(Level.INFO, "Pay 50 Karma for Drake");
+					model.setKarmaFree( model.getKarmaFree() - 50);
+				} else if (model.getBodytype()==BodyType.DRAKE_LATENT) {
+					logger.log(Level.INFO, "Pay 25 Karma for being a latent Drake");
+					model.setKarmaFree( model.getKarmaFree() - 25);
+				}
+			}
 
 			for (Modification tmp : previous) {
 				if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE && tmp instanceof AllowModification && ((AllowModification)tmp).getWhat()==AllowType.DRACOFORM) {
@@ -429,12 +459,52 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 				unprocessed.add(tmp);
 			}
 			logger.log(Level.DEBUG, "Allowed for dracform adjustment points: {0}", allowedAdjust);
+			adjustPoints = adjustPointsMax;
+
+			if (model.getBodytype()==BodyType.DRAKE) {
+				// Ensure drake form is present
+				BodyForm form = model.getBodyForm(BodyType.DRAKE);
+				if (form==null) {
+					form = new BodyForm(BodyType.DRAKE);
+					model.addBodyForm(form);
+					logger.log(Level.DEBUG, "DRAKE body added");
+				} else {
+					logger.log(Level.DEBUG, "DRAKE body exists");
+				}
+
+				logger.log(Level.DEBUG, "Drake attributes: {0} ", form.getAttributeValues());
+				for (ShadowrunAttribute key : allowedAdjust) {
+					AttributeValue<ShadowrunAttribute> aVal = form.getAttributeValue(key);
+					if (aVal==null) {
+						aVal = new AttributeValue<ShadowrunAttribute>(key,1);
+						form.getAttributeValues().add(allowedAdjust.indexOf(key), aVal);
+						logger.log(Level.DEBUG, "Drake attribute {0} added to body", key);
+					}
+				}
+				logger.log(Level.DEBUG, "Drake attributes: {0} ", form.getAttributeValues());
+				// Clear all attributes from the body that are not allowed
+				for (AttributeValue<ShadowrunAttribute> aVal : new ArrayList<>(form.getAttributeValues())) {
+					ShadowrunAttribute key = aVal.getModifyable();
+					if (!allowedAdjust.contains(key)) {
+						form.getAttributeValues().remove(aVal);
+						logger.log(Level.DEBUG, "Drake attribute {0} removed from body", key);
+					} else {
+						adjustPoints -= aVal.getDistributed();
+					}
+				}
+			}
+
 
 			// Pay karma and apply modifications
 			int payNext = 6;
 			int grade = 0;
 			for (MetamagicOrEchoValue val : model.getMetamagicOrEchoes()) {
 				if (val.getModifyable().getType()!=Type.DRACOGENESIS_POWER) continue;
+				logger.log(Level.DEBUG, "Metaecho {0} is auto={1}", val.getKey(), val.isAutoAdded());
+				if (val.isAutoAdded()) {
+					logger.log(Level.DEBUG, "Ignore auto-added drake power {0}", val.getKey());
+					continue;
+				}
 				if (val.getModifyable().hasLevel()) {
 					for (int i=0; i<val.getDistributed(); i++) {
 						logger.log(Level.INFO, "Pay {0} Karma for dracogenesis power ''{1}'' {2}", payNext, val.getModifyable().getId(), (i+1));
@@ -470,6 +540,66 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 	@Override
 	public int getValue(MetamagicOrEchoValue value) {
 		return value.getDistributed();
+	}
+
+	//-------------------------------------------------------------------
+	public List<ShadowrunAttribute> getDracoformAttributes() {
+		return new ArrayList<>(allowedAdjust);
+	}
+
+	//-------------------------------------------------------------------
+	public NumericalValueController<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> getAttributeController() {
+		return attrCtrl;
+	}
+
+}
+
+
+class DrakeAttributeController extends ControllerImpl<ShadowrunAttribute> implements NumericalValueController<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> {
+
+	public DrakeAttributeController(SR6CharacterController parent, SR6DrakeController drakeParent) {
+		super(parent);
+	}
+
+	@Override
+	public RecommendationState getRecommendationState(ShadowrunAttribute item) {
+		return RecommendationState.NEUTRAL;
+	}
+
+	@Override
+	public List<Modification> process(List<Modification> unprocessed) {
+		// TODO Auto-generated method stub
+		return unprocessed;
+	}
+
+	@Override
+	public int getValue(AttributeValue<ShadowrunAttribute> value) {
+		BodyForm body = parent.getModel().getBodyForm(BodyType.DRAKE);
+		if (body==null) return 0;
+		return value.getDistributed();
+	}
+
+	@Override
+	public Possible canBeIncreased(AttributeValue<ShadowrunAttribute> value) {
+		// TODO Auto-generated method stub
+		return Possible.TRUE;
+	}
+
+	@Override
+	public Possible canBeDecreased(AttributeValue<ShadowrunAttribute> value) {
+		return new Possible(value.getModifiedValue()>1);
+	}
+
+	@Override
+	public OperationResult<AttributeValue<ShadowrunAttribute>> increase(AttributeValue<ShadowrunAttribute> value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OperationResult<AttributeValue<ShadowrunAttribute>> decrease(AttributeValue<ShadowrunAttribute> value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
