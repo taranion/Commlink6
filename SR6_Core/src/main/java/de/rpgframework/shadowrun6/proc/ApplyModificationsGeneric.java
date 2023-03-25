@@ -21,12 +21,15 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
+import de.rpgframework.shadowrun.BodyForm;
+import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.DrakeTypeValue;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -159,9 +162,18 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		} else {
 			item = mod.getReferenceType().resolve(mod.getKey());
 		}
-		AttributeValue<ShadowrunAttribute> value = model.getAttribute(item);
 		if (item == null) {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such attribute {0}", mod.getKey());
+		}
+		AttributeValue<ShadowrunAttribute> value = model.getAttribute(item);
+		if (mod.getApplyTo()==ApplyTo.DRAKE) {
+			BodyForm drake = model.getBodyForm(BodyType.DRAKE);
+			if (drake==null) {
+				logger.log(Level.ERROR, "Should apply {0} to drake body, but there is no such body");
+				return false;
+			}
+			value = drake.getAttributeValue(item);
+
 		}
 		if (value == null) {
 		}
