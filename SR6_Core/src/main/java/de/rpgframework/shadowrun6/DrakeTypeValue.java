@@ -20,6 +20,7 @@ public class DrakeTypeValue extends ComplexDataItemValue<DrakeType> {
 
 	//-------------------------------------------------------------------
 	public DrakeTypeValue() {
+		attributes = new ArrayList<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -28,6 +29,7 @@ public class DrakeTypeValue extends ComplexDataItemValue<DrakeType> {
 	 */
 	public DrakeTypeValue(DrakeType data) {
 		super(data);
+		attributes = new ArrayList<>();
 	}
 
 	//-------------------------------------------------------------------

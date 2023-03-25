@@ -76,6 +76,14 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 		logger.log(Level.INFO, "set Drake Type to {0}",type);
 		if (getModel().getDrakeType()==null || getModel().getDrakeType().getResolved()!=type) {
 			DrakeTypeValue toSet = new DrakeTypeValue(type);
+			for (Modification tmp : type.getModifications()) {
+				if (tmp instanceof AllowModification) {
+					AllowModification allow = (AllowModification)tmp;
+					ShadowrunAttribute key = allow.getResolvedKey();
+					AttributeValue<ShadowrunAttribute> aVal = new AttributeValue<ShadowrunAttribute>(key,1);
+					toSet.setAttribute(aVal);
+				}
+			}
 			getModel().setDrakeType(toSet);
 
 			parent.runProcessors();

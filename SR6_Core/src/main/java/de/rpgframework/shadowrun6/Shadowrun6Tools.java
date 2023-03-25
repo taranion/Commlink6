@@ -792,6 +792,12 @@ public class Shadowrun6Tools {
 				Focus resolved = Shadowrun6Core.getItem(Focus.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
+
+			logger.log(Level.DEBUG, "resolve drake type");
+			if (model.getDrakeType()!=null) {
+				DrakeType resolved =  Shadowrun6Core.getItem(DrakeType.class, model.getDrakeType().getKey());
+				model.getDrakeType().setResolved(resolved);
+			}
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed resolving reference {1} ''{2}'' in character {0}", model.getName(), e.getReferenceError().getType(), e.getReferenceError().getReference(), e);
 		} catch (Exception e) {
