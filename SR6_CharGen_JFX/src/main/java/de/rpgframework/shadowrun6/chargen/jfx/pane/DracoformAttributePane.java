@@ -14,6 +14,7 @@ import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
+import de.rpgframework.shadowrun6.DrakeTypeValue;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -90,12 +91,12 @@ public class DracoformAttributePane extends GridPane {
 		this.ctrl = ctrl;
 		propAttrCtrl.set( ctrl.getAttributeController() );
 		int i=0;
-		BodyForm body = ctrl.getCharacterController().getModel().getBodyForm(BodyType.DRAKE);
+		DrakeTypeValue body = ctrl.getCharacterController().getModel().getDrakeType();
 		for (ShadowrunAttribute attr : ctrl.getDracoformAttributes()) {
-			lbAttrib[i++].setText(attr.getShortName(Locale.getDefault()));
+			lbAttrib[i].setText(attr.getShortName(Locale.getDefault()));
 
 			if (body!=null) {
-				AttributeValue<ShadowrunAttribute> aVal = body.getAttributeValue(attr);
+				AttributeValue<ShadowrunAttribute> aVal = body.getAttribute(attr);
 				if (aVal==null) {
 					try {
 						throw new NullPointerException("No attribute value "+attr+" in body "+body);
@@ -104,10 +105,11 @@ public class DracoformAttributePane extends GridPane {
 						e.printStackTrace();
 					}
 				}
-				for (NumericalValueField<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> tf : tfAttrib) {
-					tf.setData(aVal, propAttrCtrl);
-				}
+//				for (NumericalValueField<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> tf : tfAttrib) {
+					tfAttrib[i].setData(aVal, propAttrCtrl);
+//				}
 			}
+			i++;
 		}
 	}
 

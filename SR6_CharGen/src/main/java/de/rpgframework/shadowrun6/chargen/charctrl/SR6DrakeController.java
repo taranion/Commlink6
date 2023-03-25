@@ -30,6 +30,7 @@ import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.DrakeType;
 import de.rpgframework.shadowrun6.DrakeTypeValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -189,13 +190,14 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 		// Calculate Karma cost
 		int karma = (int)getSelectionCost(value);
 
-		if (getModel().getKarmaFree()<karma) {
-			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
-		}
-
 		// Check if character is aware drake
 		if (getModel().getBodytype()!=BodyType.DRAKE) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_DRAKE_ONLY, karma);
+		}
+
+		if (getModel().getKarmaFree()<karma) {
+			return Possible.FALSE;
+//			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
 
 		return Possible.TRUE;
@@ -448,6 +450,15 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 					allowedAdjust.add(attr);
 					continue;
 				}
+				if (tmp.getReferenceType()==ShadowrunReference.CREATION_POINTS) {
+					ValueModification mod = (ValueModification)tmp;
+					CreatePoints type = tmp.getReferenceType().resolve(mod.getKey());
+					if (type==CreatePoints.ADJUST_DRAKE) {
+						logger.log(Level.DEBUG, "Add {0} to available adjustment points from ''{1}''", mod.getValue(),mod.getKey());
+						adjustPointsMax += mod.getValue();
+						continue;
+					}
+				}
 
 				if (tmp.getReferenceType()==ShadowrunReference.METAECHO) {
 					DataItemModification mod = (DataItemModification)tmp;
@@ -469,34 +480,13 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 			logger.log(Level.DEBUG, "Allowed for dracform adjustment points: {0}", allowedAdjust);
 			adjustPoints = adjustPointsMax;
 
-			if (model.getBodytype()==BodyType.DRAKE) {
-				// Ensure drake form is present
-				BodyForm form = model.getBodyForm(BodyType.DRAKE);
-				if (form==null) {
-					form = new BodyForm(BodyType.DRAKE);
-					model.addBodyForm(form);
-					logger.log(Level.DEBUG, "DRAKE body added");
-				} else {
-					logger.log(Level.DEBUG, "DRAKE body exists");
-				}
-
-				logger.log(Level.DEBUG, "Drake attributes: {0} ", form.getAttributeValues());
-				for (ShadowrunAttribute key : allowedAdjust) {
-					AttributeValue<ShadowrunAttribute> aVal = form.getAttributeValue(key);
-					if (aVal==null) {
-						aVal = new AttributeValue<ShadowrunAttribute>(key,1);
-						form.getAttributeValues().add(allowedAdjust.indexOf(key), aVal);
-						logger.log(Level.DEBUG, "Drake attribute {0} added to body", key);
-					}
-				}
-				logger.log(Level.DEBUG, "Drake attributes: {0} ", form.getAttributeValues());
+			DrakeTypeValue drake = model.getDrakeType();
+			if (drake!=null) {
+				logger.log(Level.DEBUG, "Drake attributes: {0} ", drake.getAttributes());
 				// Clear all attributes from the body that are not allowed
-				for (AttributeValue<ShadowrunAttribute> aVal : new ArrayList<>(form.getAttributeValues())) {
+				for (AttributeValue<ShadowrunAttribute> aVal : new ArrayList<>(drake.getAttributes())) {
 					ShadowrunAttribute key = aVal.getModifyable();
-					if (!allowedAdjust.contains(key)) {
-						form.getAttributeValues().remove(aVal);
-						logger.log(Level.DEBUG, "Drake attribute {0} removed from body", key);
-					} else {
+					if (allowedAdjust.contains(key)) {
 						adjustPoints -= aVal.getDistributed();
 					}
 				}
@@ -565,8 +555,11 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 
 class DrakeAttributeController extends ControllerImpl<ShadowrunAttribute> implements NumericalValueController<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> {
 
+	private SR6DrakeController drakeParent;
+
 	public DrakeAttributeController(SR6CharacterController parent, SR6DrakeController drakeParent) {
 		super(parent);
+		this.drakeParent = drakeParent;
 	}
 
 	@Override
@@ -582,15 +575,14 @@ class DrakeAttributeController extends ControllerImpl<ShadowrunAttribute> implem
 
 	@Override
 	public int getValue(AttributeValue<ShadowrunAttribute> value) {
-		BodyForm body = parent.getModel().getBodyForm(BodyType.DRAKE);
-		if (body==null) return 0;
-		return value.getDistributed();
+		DrakeTypeValue drake = parent.getModel().getDrakeType();
+		if (drake==null) return 0;
+		return drake.getAttribute(value.getModifyable()).getDistributed();
 	}
 
 	@Override
 	public Possible canBeIncreased(AttributeValue<ShadowrunAttribute> value) {
-		// TODO Auto-generated method stub
-		return Possible.TRUE;
+		return new Possible(drakeParent.getAdjustmentPointsLeft()>0);
 	}
 
 	@Override
@@ -600,14 +592,24 @@ class DrakeAttributeController extends ControllerImpl<ShadowrunAttribute> implem
 
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> increase(AttributeValue<ShadowrunAttribute> value) {
-		// TODO Auto-generated method stub
-		return null;
+		DrakeTypeValue drake = parent.getModel().getDrakeType();
+		if (drake==null) return new OperationResult<>(Possible.FALSE);
+
+		logger.log(Level.WARNING, "Increase drake attribute {0}", value.getModifyable());
+		value.setDistributed( value.getDistributed() +1);
+		parent.runProcessors();
+		return new OperationResult<AttributeValue<ShadowrunAttribute>>(value);
 	}
 
 	@Override
 	public OperationResult<AttributeValue<ShadowrunAttribute>> decrease(AttributeValue<ShadowrunAttribute> value) {
-		// TODO Auto-generated method stub
-		return null;
+		DrakeTypeValue drake = parent.getModel().getDrakeType();
+		if (drake==null) return new OperationResult<>(Possible.FALSE);
+
+		logger.log(Level.INFO, "Decrease drake attribute {0}", value.getModifyable());
+		value.setDistributed( value.getDistributed() -1);
+		parent.runProcessors();
+		return new OperationResult<AttributeValue<ShadowrunAttribute>>(value);
 	}
 
 }

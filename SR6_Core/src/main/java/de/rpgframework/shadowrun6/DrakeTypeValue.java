@@ -2,11 +2,13 @@ package de.rpgframework.shadowrun6;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.prelle.simplepersist.ElementList;
 
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 
 /**
@@ -30,6 +32,14 @@ public class DrakeTypeValue extends ComplexDataItemValue<DrakeType> {
 	public DrakeTypeValue(DrakeType data) {
 		super(data);
 		attributes = new ArrayList<>();
+	}
+
+	//-------------------------------------------------------------------
+	public List<ShadowrunAttribute> getDrakeAttributes() {
+		return getResolved().getModifications().stream()
+			.filter(m -> m instanceof AllowModification)
+			.map(m -> (ShadowrunAttribute)((AllowModification)m).getResolvedKey())
+			.collect(Collectors.toList());
 	}
 
 	//-------------------------------------------------------------------

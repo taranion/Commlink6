@@ -116,6 +116,8 @@ public class GetModificationsForDrakes implements ProcessingStep {
 						mVal.setDistributed( ((ValueModification)mod).getValue() );
 					}
 					diMod.getDecisions().forEach(d -> mVal.addDecision(d));
+					mVal.addModification(diMod);
+					model.addMetamagicOrEcho(mVal);
 //					body.addMetaOrEcho(mVal);
 					break;
 				}

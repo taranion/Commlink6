@@ -313,8 +313,14 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				logger.log(Level.DEBUG, "Add decision {0} to critter power {1}", dec, item);
 			}
 
-			model.addCritterPower(value);
-			logger.log(Level.DEBUG, "Add critter power {0} to character", item);
+			if (mod.getApplyTo()==ApplyTo.DRAKE) {
+				logger.log(Level.INFO, "Add critter power {0} to drake body", item);
+				model.getBodyForm(BodyType.DRAKE).addCritterPower(value);
+
+			} else {
+				model.addCritterPower(value);
+				logger.log(Level.INFO, "Add critter power {0} to character", item);
+			}
 		}
 		// Mark as auto-added
 		value.addModification(mod);

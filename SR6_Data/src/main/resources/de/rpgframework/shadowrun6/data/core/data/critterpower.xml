@@ -12,7 +12,7 @@
     <critterpower id="dual_natured"   type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" />
     <critterpower id="elemental_attack" type="PHYSICAL" action="AUTO"  range="LINE_OF_SIGHT" dur="INSTANTANEOUS" >
     	<choices>
-			<choice type="ELEMENT" ref="element" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" />
+			<choice uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" type="ELEMENT" />
     	</choices>
     </critterpower>
     <critterpower id="energy_aura"    type="PHYSICAL" action="AUTO"  range="LINE_OF_SIGHT" dur="ALWAYS" />
@@ -32,7 +32,7 @@
     <critterpower id="influence"      type="MANA"     action="AUTO"  range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
     <critterpower id="innate_spell"   type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS">
     	<choices>
-			<choice type="SPELL" ref="spell" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" />
+			<choice type="SPELL" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" />
     	</choices>
     </critterpower>
     <critterpower id="materialization" type="MANA"     action="MAJOR" range="SELF"          dur="SUSTAINED" />
