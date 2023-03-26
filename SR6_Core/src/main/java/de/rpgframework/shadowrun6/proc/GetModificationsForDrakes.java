@@ -23,7 +23,9 @@ import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.DrakeTypeValue;
+import de.rpgframework.shadowrun6.SR6BodyForm;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -57,8 +59,9 @@ public class GetModificationsForDrakes implements ProcessingStep {
 			}
 
 			// Add new body
-			BodyForm body = new BodyForm(BodyType.DRAKE);
+			SR6BodyForm body = new SR6BodyForm(BodyType.DRAKE);
 			body.addMovement( new Movement( model.getBodyForms().get(0).getMovement(MovementType.GROUND) ));
+			body.addMovement( new Movement( model.getBodyForms().get(0).getMovement(MovementType.WATER) ));
 			model.addBodyForm(body);
 			logger.log(Level.INFO, "Added Drake body");
 
@@ -77,6 +80,11 @@ public class GetModificationsForDrakes implements ProcessingStep {
 				mod.setSet(ValueType.NATURAL);
 				copy.addModification(mod);
 			}
+			
+			// Add natural weapon
+			body.clearWeapons();
+			ItemTemplate natural = new ItemTemplate();
+			
 
 			// Iterate modifications
 			for (Modification mod : drake.getResolved().getModifications()) {

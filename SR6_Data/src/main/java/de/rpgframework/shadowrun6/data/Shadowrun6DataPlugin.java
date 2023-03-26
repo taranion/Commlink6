@@ -376,14 +376,14 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(ContactTypeList.class, ContactType.class, set, clazz, "companion/data/contact_types.xml");
 			logger.log(Level.DEBUG, "Loaded {0} contact types", list.size());
 
-			logger.log(Level.INFO, "START -------------------------------Lofwyrs Legions----------------------------------");
-			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "LOFWYR", "lofwyr.i18n", Locale.ENGLISH);
-			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "lofwyr/data/critterpower.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" critter powers");
-			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "lofwyr/data/dracogenesis_powers.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" dracogenesis powers");
-			list = Shadowrun6Core.loadDataItems(DrakeTypeList.class, DrakeType.class, set, clazz, "lofwyr/data/draketypes.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" drake types");
+//			logger.log(Level.INFO, "START -------------------------------Lofwyrs Legions----------------------------------");
+//			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "LOFWYR", "lofwyr.i18n", Locale.ENGLISH);
+//			list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "lofwyr/data/critterpower.xml");
+//			logger.log(Level.DEBUG, "Loaded "+list.size()+" critter powers");
+//			list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "lofwyr/data/dracogenesis_powers.xml");
+//			logger.log(Level.DEBUG, "Loaded "+list.size()+" dracogenesis powers");
+//			list = Shadowrun6Core.loadDataItems(DrakeTypeList.class, DrakeType.class, set, clazz, "lofwyr/data/draketypes.xml");
+//			logger.log(Level.DEBUG, "Loaded "+list.size()+" drake types");
 
 			logger.log(Level.INFO, "START -----------------------------Other Sources from US--------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "OTHER_US", "other_us.i18n", Locale.ENGLISH);

@@ -1548,6 +1548,11 @@ public class Shadowrun6Tools {
 	public static Pool<Integer> getWeaponPoolCalculation(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
 		Pool<Integer> pool = new Pool<Integer>();
 
+		if (item.getAsObject(SR6ItemAttribute.SKILL)==null) {
+			logger.log(Level.ERROR, "No SKILL attribute for weapon {0}", item.getNameWithoutRating());
+			return new Pool<Integer>();
+		}
+
 		SR6Skill skill = (SR6Skill) item.getAsObject(SR6ItemAttribute.SKILL).getValue();
 		SkillSpecialization<SR6Skill> spec = (SkillSpecialization<SR6Skill>) item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getValue();
 		if (spec!=null)

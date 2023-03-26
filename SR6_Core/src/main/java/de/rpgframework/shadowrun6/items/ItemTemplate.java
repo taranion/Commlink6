@@ -58,6 +58,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			ItemTemplate.UUID_AUGMENTATION_QUALITY,
 			ShadowrunReference.AUGMENTATION_QUALITY);
 	public final static UUID UUID_UNUSED_SOFTWARE_DEVICE = UUID.fromString("8fc8c01e-3023-4ba6-9d02-99ba6fcd6979");
+	public final static UUID UUID_UNARMED = UUID.fromString("9f05953f-0df5-4661-8114-3f02fcf2e669");
 
 	public final static OperationMode MODE_WIRELESS_ON = new OperationMode("WIRELESS");
 

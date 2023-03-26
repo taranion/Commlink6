@@ -10,10 +10,11 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.BodyForm;
+import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
@@ -93,6 +94,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			calculateDefenseRatingPhysical();
 			calculateDefenseRatingMatrix();
 			calculateDefenseRatingAstral();
+			calculateDrakeDefenseRatingPhysical();
 
 			calculateDefensePoolPhysical();
 			calculateDefensePoolCombatDirect();
@@ -196,6 +198,13 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	//-------------------------------------------------------------------
 	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, ShadowrunAttribute attr) {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), model.getAttribute(attr).getModifiedValue(), attr);
+		valMod.setSet(ValueType.NATURAL);
+		val.addModification( valMod );
+	}
+
+	//-------------------------------------------------------------------
+	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, ShadowrunAttribute attr, BodyForm body) {
+		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), body.getAttributeValue(attr).getModifiedValue(), attr);
 		valMod.setSet(ValueType.NATURAL);
 		val.addModification( valMod );
 	}
@@ -424,6 +433,24 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			addNaturalModifier(val, item, SR6ItemAttribute.DEFENSE_PHYSICAL);
 		}
 		logger.log(Level.DEBUG, " Defense Rating Phyiscal = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateDrakeDefenseRatingPhysical() {
+		BodyForm body = model.getBodyForm(BodyType.DRAKE);
+		if (body==null) return;
+
+		Shadowrun6Tools.flagItemWithHighestAttribute(model, SR6ItemAttribute.DEFENSE_PHYSICAL, SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
+		AttributeValue<ShadowrunAttribute> val = body.getAttributeValue(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
+		if (val==null) {
+			val = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
+			body.getAttributeValues().add(val);
+		}
+
+		// Body
+		addNaturalModifier(val,ShadowrunAttribute.BODY);
+
+		logger.log(Level.DEBUG, " Drake Defense Rating Phyiscal = "+val.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------

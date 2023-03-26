@@ -24,6 +24,11 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.DrakeTypeValue",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.LifepathModule",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
