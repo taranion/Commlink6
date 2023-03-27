@@ -63,8 +63,9 @@
       <modifications>
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium"/> wait for double clutch  -->
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures"/> wait for double clutch  -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures" > wait for double clutch  -->
 			<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
+			<!-- </embed> -->
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="multi_terrain_active"/> wait for double clutch -->
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large_offroad"/> wait for double clutch -->
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="satellite_link"/>

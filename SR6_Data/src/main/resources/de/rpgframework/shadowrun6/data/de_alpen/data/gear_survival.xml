@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Winter sport equipment -->
+   <item id="hiking_gear_base" avail="1" price="400" type="SURVIVAL" subtype="WINTER_GEAR" />
+   <item id="hiking_gear_complete" avail="2" price="1200" type="SURVIVAL" subtype="WINTER_GEAR" />
+   <item id="ski_base" avail="1" price="400" type="SURVIVAL" subtype="WINTER_GEAR" />
+   <item id="snow_shoes" avail="2" price="200" type="SURVIVAL" subtype="WINTER_GEAR" />
+   <item id="ski_smart" avail="3" price="1600" type="SURVIVAL" subtype="WINTER_GEAR" />
+   <item id="ares_murmeltier" avail="3" price="1800" type="SURVIVAL" subtype="WINTER_GEAR" />
+   <item id="avalance_airbag" avail="3" price="400" type="SURVIVAL" subtype="WINTER_GEAR" />
+
+   <item id="snow_googles" avail="2" price="1625" type="ELECTRONICS" subtype="IMAGING" >
+      <modifications>
+		<valmod type="HOOK" ref="OPTICAL" value="0" />
+		<embed type="GEAR" intoType="HOOK" intoRef="OPTICAL" ref="image_link" included="true"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="OPTICAL" ref="flare_compensation" included="true"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" included="true"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="OPTICAL" ref="ultrasound_link" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="OPTICAL" ref="single_sensor" id="bbeaef14-11ff-42c3-ba51-11c5c5c2c38b">
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+			<embed  type="GEAR" intoId="bbeaef14-11ff-42c3-ba51-11c5c5c2c38b" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="ultrasound" />
+      </modifications>
+   </item>
+   
+</items>

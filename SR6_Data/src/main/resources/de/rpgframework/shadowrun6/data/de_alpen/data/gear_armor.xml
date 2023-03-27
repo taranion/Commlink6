@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+    <item id="thermo_clothing" avail="3" price="1850" type="ARMOR" subtype="ARMOR_SOCIAL" >
+        <armor rating="2" social="0" />
+        <modifications>
+			<valmod type="HOOK" ref="ARMOR" value="1" />
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+				</embed>
+        </modifications>
+    </item>
+
+</items>

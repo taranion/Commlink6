@@ -167,6 +167,7 @@ public enum ItemType {
 			),
 	SURVIVAL(
 			ItemSubType.SURVIVAL_GEAR,
+			ItemSubType.WINTER_GEAR,
 			ItemSubType.GRAPPLE_GUN
 			),
 	BIOLOGY(
