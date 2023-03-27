@@ -413,6 +413,15 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_other/data/gear_vehicles.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 
+			logger.log(Level.INFO, "START --------------------------------Berlin 2080-----------------------------------");
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_BERLIN2080", "de_berlin2080.i18n", Locale.GERMAN);
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_berlin2080/data/gear_electronics.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" electronics");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_berlin2080/data/gear_firearms.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_berlin2080/data/gear_vehicles.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+
 			logger.log(Level.INFO, "START --------------------------------Revierbericht-----------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_REVIERBERICHT", "de_revierbericht.i18n", Locale.GERMAN);
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_armor.xml");
