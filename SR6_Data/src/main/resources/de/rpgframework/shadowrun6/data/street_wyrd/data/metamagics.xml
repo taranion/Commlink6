@@ -35,7 +35,7 @@
 			<choice uuid="c58eacde-8f30-4984-b711-7a7575462974" type="CARRIED" />
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="ITEM" value="$$INITIATION_GRADE" what="DICE" />
+			<checkmod type="SKILL" ref="ITEM" value="&amp;INITIATION_RANK" what="DICE" />
 		</modifications>
 	</metaecho>
 	<metaecho id="virtuoso" type="METAMAGIC_ADEPT" multi="yes">

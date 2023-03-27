@@ -12,10 +12,12 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
+import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Movement;
 import de.rpgframework.shadowrun.Movement.MovementType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6BodyForm;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.items.ItemHook;
@@ -50,6 +52,7 @@ public class ResetModifications implements ProcessingStep {
 
 		model.clearEdgeModifications();
 		model.clearItemModifications();
+
 		try {
 			// Attributes
 			for (AttributeValue<ShadowrunAttribute> val : model.getAttributes()) {
@@ -68,7 +71,6 @@ public class ResetModifications implements ProcessingStep {
 				}
 			}
 
-
 			// Remove all auto-qualities or quality levels
 			for (QualityValue val : new ArrayList<>(model.getQualities())) {
 				boolean remove = val.isRemoveOnReset();
@@ -76,6 +78,16 @@ public class ResetModifications implements ProcessingStep {
 				if (remove) {
 					logger.log(Level.DEBUG, "Remove quality "+val);
 					model.removeQuality(val);
+				}
+			}
+
+			// Remove all auto-metaechoes
+			for (MetamagicOrEchoValue val : new ArrayList<>(model.getMetamagicOrEchoes())) {
+				boolean remove = val.isAutoAdded();
+				val.clearModifications();
+				if (remove) {
+					logger.log(Level.DEBUG, "Remove metaecho "+val);
+					model.removeMetamagicOrEcho(val);
 				}
 			}
 
@@ -97,8 +109,9 @@ public class ResetModifications implements ProcessingStep {
 
 			// Prepare minimal body modifications
 			model.clearBodyForms();
-			BodyForm body = new BodyForm(BodyType.METAHUMAN);
+			BodyForm body = new SR6BodyForm(BodyType.METAHUMAN);
 			body.addMovement(new Movement(MovementType.GROUND,10,15,1));
+			body.addMovement(new Movement(MovementType.WATER,3,3,1));
 			model.addBodyForm(body);
 
 			return unprocessed;

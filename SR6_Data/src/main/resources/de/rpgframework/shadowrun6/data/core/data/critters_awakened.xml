@@ -27,7 +27,9 @@
 		<critterpowers>
 			<critterpowerval ref="armor" value="4"/>
 			<critterpowerval ref="dual_natured" />
-			<critterpowerval ref="enhanced_senses" />
+			<critterpowerval ref="enhanced_sense">
+				<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="i18n:hearing_smell_sonar"/>
+			</critterpowerval>
 			<critterpowerval ref="fear" />
 			<critterpowerval ref="immunity" />
 			<critterpowerval ref="natural_weapon" />

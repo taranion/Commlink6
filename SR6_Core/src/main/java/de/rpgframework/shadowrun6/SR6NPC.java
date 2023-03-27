@@ -1,7 +1,5 @@
 package de.rpgframework.shadowrun6;
 
-import java.lang.System.Logger.Level;
-
 import org.prelle.simplepersist.Element;
 
 import de.rpgframework.genericrpg.data.DataErrorException;
@@ -30,7 +28,7 @@ public class SR6NPC extends ANPC<ShadowrunAttribute, SR6Skill, SR6SkillValue, SR
 	//-------------------------------------------------------------------
 	private ItemTemplate resolveItem(String key) {
 		if (gearDef==null) return null;
-		
+
 		for (ItemTemplate tmp : gearDef) {
 			if (tmp.getId().equals(key)) {
 				tmp.validate();
@@ -44,7 +42,7 @@ public class SR6NPC extends ANPC<ShadowrunAttribute, SR6Skill, SR6SkillValue, SR
 	/**
 	 * Used in deriving classes to perform validation checks on loading, if
 	 * necessary
-	 * 
+	 *
 	 * @return Error message or NULL
 	 */
 	public void validate() throws DataErrorException {
@@ -79,7 +77,7 @@ public class SR6NPC extends ANPC<ShadowrunAttribute, SR6Skill, SR6SkillValue, SR
 				tmp.setResolved(res);
 			}
 		}
-		
+
 		// Validate gear definitions
 		if (gearDef != null) {
 			for (ItemTemplate tmp : gearDef) {
@@ -87,8 +85,8 @@ public class SR6NPC extends ANPC<ShadowrunAttribute, SR6Skill, SR6SkillValue, SR
 				tmp.assignToDataSet(this.datasets.get(0));
 			}
 		}
-		
-		
+
+
 		// Validate gear references
 		for (CarriedItem tmp : gear) {
 			if (tmp.getResolved() == null) {

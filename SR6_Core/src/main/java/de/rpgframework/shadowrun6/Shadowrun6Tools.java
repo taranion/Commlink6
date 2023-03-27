@@ -83,6 +83,7 @@ import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun.proc.GetModificationsFromFoci;
+import de.rpgframework.shadowrun.proc.GetModificationsFromMetaEchoes;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
@@ -133,6 +134,7 @@ public class Shadowrun6Tools {
 		ApplyModificationsGeneric.class,
 		GetModificationsFromMagicOrResonance.class,
 		GetModificationsFromQualities.class,
+		GetModificationsFromMetaEchoes.class,
 		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),
 		GetModificationsFromFoci.class,
@@ -380,6 +382,8 @@ public class Shadowrun6Tools {
 					} else {
 						return attrName+" "+valMod.getValue();
 					}
+				case CREATION_POINTS:
+					return RES.format("modification.creation_points."+((CreatePoints)valMod.getResolvedKey()).name().toLowerCase(), loc, valMod.getValue());
 				case CRITTER_POWER:
 					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc)+" "+valMod.getValue());
 				case HOOK:
@@ -792,6 +796,12 @@ public class Shadowrun6Tools {
 				Focus resolved = Shadowrun6Core.getItem(Focus.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
+
+			logger.log(Level.DEBUG, "resolve drake type");
+			if (model.getDrakeType()!=null) {
+				DrakeType resolved =  Shadowrun6Core.getItem(DrakeType.class, model.getDrakeType().getKey());
+				model.getDrakeType().setResolved(resolved);
+			}
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed resolving reference {1} ''{2}'' in character {0}", model.getName(), e.getReferenceError().getType(), e.getReferenceError().getReference(), e);
 		} catch (Exception e) {
@@ -994,6 +1004,7 @@ public class Shadowrun6Tools {
 			if (clone.hasFormula()) {
 				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
 				logger.log(Level.WARNING, "  model =  "+model);
+				logger.log(Level.WARNING, "  data item =  "+value.getKey());
 				logger.log(Level.WARNING, "  data item value =  "+value);
 				String resolved = FormulaTool.resolve(clone.getReferenceType(), clone.getFormula(), new VariableResolver(value, model));
 				logger.log(Level.WARNING, "  resolved  "+resolved);
@@ -1536,6 +1547,11 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static Pool<Integer> getWeaponPoolCalculation(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
 		Pool<Integer> pool = new Pool<Integer>();
+
+		if (item.getAsObject(SR6ItemAttribute.SKILL)==null) {
+			logger.log(Level.ERROR, "No SKILL attribute for weapon {0}", item.getNameWithoutRating());
+			return new Pool<Integer>();
+		}
 
 		SR6Skill skill = (SR6Skill) item.getAsObject(SR6ItemAttribute.SKILL).getValue();
 		SkillSpecialization<SR6Skill> spec = (SkillSpecialization<SR6Skill>) item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getValue();

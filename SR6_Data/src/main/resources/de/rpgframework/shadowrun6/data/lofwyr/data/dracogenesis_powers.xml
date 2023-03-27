@@ -5,7 +5,7 @@
    		<datareq type="DRAKE_TYPE" ref="seadrake"/>
    	</requires>
      <modifications>
-       <itemmod type="CRITTER_POWER" ref="concealment"/>
+       <itemmod type="CRITTER_POWER" ref="concealment" apply="DRAKE"/>
      </modifications>
    </metaecho>
    <metaecho id="animal_control" type="DRACOGENESIS_POWER" >
@@ -13,25 +13,189 @@
    		<datareq type="DRAKE_TYPE" ref="western"/>
    	</requires>
      <modifications>
-       <itemmod type="CRITTER_POWER" ref="animal_control"/>
+       <itemmod type="CRITTER_POWER" ref="animal_control" apply="DRAKE"/>
      </modifications>
    </metaecho>
    <metaecho id="bursts_of_power" type="DRACOGENESIS_POWER" />
    <metaecho id="compulsion" type="DRACOGENESIS_POWER" >
      <modifications>
-       <itemmod type="CRITTER_POWER" ref="compulsion"/>
+       <itemmod type="CRITTER_POWER" ref="compulsion" apply="DRAKE"/>
      </modifications>
    </metaecho>
    <metaecho id="corrosive_spit" type="DRACOGENESIS_POWER" >
      <modifications>
-       <itemmod type="CRITTER_POWER" ref="corrosive_spit"/>
+       <itemmod type="CRITTER_POWER" ref="corrosive_spit" apply="DRAKE"/>
      </modifications>
    </metaecho>
    <metaecho id="dracoform_talent" type="DRACOGENESIS_POWER" />
-
-   <metaecho id="heavy_scales" type="DRACOGENESIS_POWER" >
+   <metaecho id="draconic_power" type="DRACOGENESIS_POWER" >
+     <choices>
+       <choice type="ATTRIBUTE" uuid="4096584c-eb76-49b2-be6b-1a6c0ca9e50a" options="EDGE,MAGIC,RESONANCE"/>
+     </choices>
      <modifications>
-       <valmod type="CRITTER_POWER" ref="hardened_armor" value="2"/>
+       <valmod type="ATTRIBUTE" ref="CHOICE" choice="4096584c-eb76-49b2-be6b-1a6c0ca9e50a" value="1" set="MAX" />
      </modifications>
    </metaecho>
+   <metaecho id="dragonspeech" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="mindspeech" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="elemental_mastery" type="DRACOGENESIS_POWER" >
+    	<choices>
+			<choice uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72d" type="ELEMENT"/>
+    	</choices>
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="elemental_attack" apply="DRAKE">
+       	<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="6a8584c5-043d-4e37-bbb2-f56d3c51f72d"/>
+       </itemmod>
+     </modifications>
+   </metaecho>
+   <metaecho id="elemental_resistance" type="DRACOGENESIS_POWER" >
+    	<choices>
+			<choice type="ELEMENT" ref="element" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72d"/>
+    	</choices>
+     <modifications>
+       <itemmod type="QUALITY" ref="elemental_resistance" apply="DRAKE">
+       	<decision choice="b60de552-82ee-470d-b7e6-26a2f46c17b8" value="6a8584c5-043d-4e37-bbb2-f56d3c51f72d"/>
+       </itemmod>
+     </modifications>
+   </metaecho>
+   <metaecho id="energy_aura" type="DRACOGENESIS_POWER" >
+    	<choices>
+			<choice type="ELEMENT" ref="element" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72d" />
+    	</choices>
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="energy_aura" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="enhanced_sense_wideband" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="enhanced_sense" apply="DRAKE">
+       	<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="i18n:wide_band_hearing"/>
+       </itemmod>
+     </modifications>
+   </metaecho>
+   <metaecho id="enhanced_sense_lowlight" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="enhanced_sense" apply="DRAKE">
+       	<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="i18n:lowlight"/>
+       </itemmod>
+     </modifications>
+   </metaecho>
+   <metaecho id="enhanced_sense_smell" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="enhanced_sense" apply="DRAKE">
+       	<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="i18n:smell"/>
+       </itemmod>
+     </modifications>
+   </metaecho>
+   <metaecho id="enhanced_sense_thermo" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="enhanced_sense" apply="DRAKE">
+       	<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="i18n:thermographic"/>
+       </itemmod>
+     </modifications>
+   </metaecho>
+   <metaecho id="improved_armor" type="DRACOGENESIS_POWER" />
+   <metaecho id="improved_flight" type="DRACOGENESIS_POWER" >
+     <modifications>
+     </modifications>
+   </metaecho>
+   <metaecho id="improved_natural_weapon" type="DRACOGENESIS_POWER" max="2">
+     <modifications>
+     		<valmod type="ATTRIBUTE" ref="MELEE_DAMAGE" value="1" set="NATURAL"  apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="fear" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="fear"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="hardened_armor" type="DRACOGENESIS_POWER" />
+   <metaecho id="hardened_mystic_armor" type="DRACOGENESIS_POWER" />
+   <metaecho id="heavy_scales" type="DRACOGENESIS_POWER" >
+   	<requires>
+   		<datareq type="DRAKE_TYPE" ref="western"/>
+   	</requires>
+     <modifications>
+       <valmod type="CRITTER_POWER" ref="hardened_armor" value="2" set="NATURAL" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="influence" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="influence" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="magical_defenses" type="DRACOGENESIS_POWER" >
+   	<requires>
+   		<datareq type="DRAKE_TYPE" ref="eastern"/>
+   	</requires>
+     <modifications>
+       <valmod type="CRITTER_POWER" ref="hardened_mystic_armor" value="2" set="NATURAL" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="magnificent_specimen" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <valmod type="CREATION_POINTS" ref="ADJUST_DRAKE" value="2" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="mystic_armor" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <valmod type="CRITTER_POWER" ref="mystic_armor" value="&amp;EDGE" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="nimble_claws" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="QUALITY" ref="unsteady_hands" remove="true" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="noxious_breath" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="noxious_breath" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="penetrating_natural_weapon" type="DRACOGENESIS_POWER">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="ATTACK_RATING_PHYSICAL" value="2,0,0,0,0" set="NATURAL" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="quicksilver_dracoform" type="DRACOGENESIS_POWER" max="4">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_PHYSICAL" value="1" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="regeneration" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="regeneration" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="resistance_to" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="QUALITY" ref="resistance_pathogens" apply="DRAKE"/>
+       <itemmod type="QUALITY" ref="toxin_resistance" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="spirit_affinity" type="DRACOGENESIS_POWER" >
+    	<choices>
+			<choice type="SPIRIT" ref="element" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72d" />
+    	</choices>
+     <modifications>
+       <itemmod type="QUALITY" ref="spirit_affinity" apply="DRAKE">
+       	<decision choice="e19ecf4c-1508-406e-9a40-70cf09907bc3" value="6a8584c5-043d-4e37-bbb2-f56d3c51f72d"/>
+       </itemmod>
+     </modifications>
+   </metaecho>
+   <metaecho id="swift_transformation" type="DRACOGENESIS_POWER" />
+   <metaecho id="tail_stinger" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="venom" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="toughness" type="DRACOGENESIS_POWER" >
+     <modifications>
+       <itemmod type="QUALITY" ref="toughness" apply="DRAKE"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="transcendence_of_form" type="DRACOGENESIS_POWER" />
 </metaechoes>

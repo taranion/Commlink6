@@ -30,6 +30,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.DracoformAttributePane;
 import javafx.geometry.Insets;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -50,6 +51,7 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 	protected SR6CharacterController charGen;
 
 	private ChoiceBox<DrakeType> cbDrakeType;
+	private DracoformAttributePane paneAttr;
 	protected ComplexDataItemControllerNode<MetamagicOrEcho, MetamagicOrEchoValue> selection;
 	protected GenericDescriptionVBox bxDescription;
 	protected OptionalNodePane layout;
@@ -77,6 +79,7 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 			public String toString(DrakeType data) { return (data==null)?"-":data.getName();}
 			public DrakeType fromString(String string) {return null;}
 		});
+		paneAttr = new DracoformAttributePane();
 
 		lbLevel = new Label("?");
 		lbLevel.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
@@ -108,7 +111,7 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 			super.setBackHeader(backHeader);
 //		}
 
-		VBox content = new VBox(10, cbDrakeType, selection);
+		VBox content = new VBox(10, cbDrakeType, paneAttr, selection);
 
 		layout = new OptionalNodePane(content, bxDescription);
 		setContent(layout);
@@ -147,6 +150,7 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 		backHeader.setValue(charGen.getModel().getKarmaFree());
 		lbLevel.setText( String.valueOf(charGen.getDrakeController().getGrade()));
 		selection.refresh();
+		paneAttr.refresh();
 		activeProperty().set( charGen.getModel().getBodytype()==BodyType.DRAKE);
 	}
 
@@ -159,8 +163,10 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 		logger.log(Level.WARNING, "RCV {0}",type);
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
 			selection.setController(charGen.getDrakeController());
+			paneAttr.setController(charGen.getDrakeController());
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED || type==BasicControllerEvents.GENERATOR_CHANGED) {
+			paneAttr.setController(charGen.getDrakeController());
 			selection.refresh();
 			refresh();
 		}
