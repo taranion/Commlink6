@@ -173,6 +173,8 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
 				if (ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE.equals(tmp.getUuid()))
 					continue;
+				if (ItemTemplate.UUID_UNARMED.equals(tmp.getUuid()))
+					continue;
 				if (!tmp.isAutoAdded()) {
 					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 					if (tmp.getCount()>1)
