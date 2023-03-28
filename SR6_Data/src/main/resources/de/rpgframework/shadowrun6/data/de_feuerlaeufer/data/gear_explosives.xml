@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Explosives -->
+	<item id="fire_ex_grenade" avail="2L" price="75" count="y" type="AMMUNITION" subtype="GRENADES" >
+		<ammo gz="0S" close="0S" near="0S" blast="5" />
+	</item>
+    
+</items>

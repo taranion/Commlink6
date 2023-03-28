@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+    <item id="fire_fighter_suit" avail="2L" price="1790" type="ARMOR" subtype="ARMOR_SOCIAL" >
+        <armor rating="3" social="4"/>
+        <modifications>
+			<valmod type="HOOK" ref="ARMOR" value="2" />
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="biomonitor" included="true" />
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="gear_access" included="true" />
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="fire_resistance" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="thermal_dissipation" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+				</embed>
+        </modifications>
+    </item>
+
+    <item id="fire_helmet" avail="3L" price="1100" type="ARMOR" subtype="ARMOR_HELMET">
+        <armor rating="1" social="-1" add="true"/>
+        <modifications>
+			<valmod type="HOOK" ref="HELMET_ACCESSORY" value="1" />
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="image_link" included="true" />
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="low_light_vision" included="true" />
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="flare_compensation" included="true" />
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="micro-transceiver" included="true" />
+        </modifications>
+    </item>
+
+</items>
