@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Medium drones -->
+
+   <item id="fire_octocopter" avail="3L"  price="8000" type="DRONE_MEDIUM" subtype="AIR" >
+      <vehicle han="4" acc="20" spdi="30" tspd="160" bod="6" arm="4" pil="4" sen="4" />
+      <modifications>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="4f901ca9-a8c9-468b-88ae-cf4587c3571b" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="4f901ca9-a8c9-468b-88ae-cf4587c3571b" />
+      </modifications>
+   </item>
+
+   <item id="fire_rover" avail="4L"  price="12000" type="DRONE_MEDIUM" subtype="GROUND" >
+      <vehicle han="3/4" acc="10" spdi="15" tspd="90" bod="6" arm="5" pil="3" sen="3" />
+      <modifications>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="66bc2aec-ae0a-422e-abd9-9208a86bb175" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="66bc2aec-ae0a-422e-abd9-9208a86bb175" />
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
+				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
+				<!-- <decision choice="??" value="fire"/> -->
+				<!-- </embed> -->
+      </modifications>
+   </item>
+
+   <item id="fire_x_rescue5" avail="2L"  price="22000" type="DRONE_MEDIUM" subtype="ANTHRO" >
+      <vehicle han="3/4" acc="12" spdi="10" tspd="30" bod="5" arm="5" pil="3" sen="3" />
+      <modifications>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" />
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
+				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
+				<!-- <decision choice="??" value="fire"/> -->
+				<!-- </embed> -->
+      </modifications>
+   </item>
+
+   <item id="fire_protector" avail="3L"  price="30000" type="DRONE_MEDIUM" subtype="ANTHRO" >
+      <vehicle han="3/4" acc="10" spdi="10" tspd="30" bod="8" arm="8" pil="3" sen="3" />
+      <modifications>
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
+				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
+				<!-- <decision choice="??" value="fire"/> -->
+				<!-- </embed> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
+				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
+				<!-- <decision choice="??" value="cold"/> -->
+				<!-- </embed> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="integrated_cyberarm" /> wait for double clutch -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="integrated_cyberarm" /> -->
+      </modifications>
+   </item>
+ 
+<!-- Large drones -->
+
+   <item id="fire_drachenodem" avail="4L"  price="800000" type="DRONE_LARGE" subtype="GROUND" >
+      <vehicle han="5/6" acc="10" spdi="15" tspd="70" bod="18" arm="16" pil="3" sen="3" />
+      <modifications>
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
+				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
+				<!-- <decision choice="??" value="fire"/> -->
+				<!-- </embed> -->
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" id="4f901ca9-a8c9-468b-88ae-cf4587c3571b" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ares_charybdis" intoId="6f307bd2-54bc-487a-8f03-02d0028d8fa7" />
+      </modifications>
+   </item>
+   
+</items>

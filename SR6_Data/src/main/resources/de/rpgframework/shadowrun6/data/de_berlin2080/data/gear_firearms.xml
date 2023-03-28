@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Heavy Pistols -->
+   <item id="sorokin_predator_i" avail="5L" price="200" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+      </modifications>
+      <weapon dmg="3P" attack="10,9,8,," mode="SS" ammo="15(c)" skill="firearms" spec="firearms/pistols_heavy" nowifi="true"/>
+   </item>
+   <item id="altmayr_white_star" avail="6L" price="250" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+      </modifications>
+      <weapon dmg="3P" attack="10,9,8,," mode="SA" ammo="12(c)" skill="firearms" spec="firearms/pistols_heavy" nowifi="true"/>
+   </item>
+   
+   <item id="haka_skorpion" avail="6L" price="220" type="WEAPON_FIREARMS" subtype="MACHINE_PISTOLS">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
+      </modifications>
+      <weapon attack="10,9,8,," ammo="30(c)" dmg="2P" mode="SA/BF" skill="firearms" spec="firearms/machine_pistols" nowifi="true"/>
+   </item>
+   
+   <!-- Submachine Guns -->
+   <item avail="4L" price="375" id="haka_mp2" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
+      </modifications>
+      <weapon attack="8,8,7,," ammo="24(c)" dmg="3P" mode="SA/FA" skill="firearms" spec="firearms/submachine_guns" nowifi="true"/>
+   </item>
+   
+   <!-- Shotguns -->
+   <item avail="2L" price="200" id="altmayer_sp" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+      </modifications>
+      <weapon attack="7,10,4,," ammo="5(m)" dmg="4P" mode="SS/SA" skill="firearms" spec="firearms/pistols_heavy" nowifi="true"/>
+   </item>
+   
+   <!-- Rifles -->
+   <item avail="4L" price="1800" id="barzani_ak_47m1" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+      </modifications>
+      <weapon attack="5,11,7,5,1" ammo="30(c)" dmg="5P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles" nowifi="true"/>
+   </item>
+   <item avail="4L" price="3000" id="samopal_vz88v" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+      </modifications>
+      <weapon attack="4,9,8,8,4" ammo="30(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles" nowifi="true"/>
+   </item>
+   <item avail="6L" price="2500" id="sorokin_g9" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+      </modifications>
+      <weapon attack="4,10,9,7,1" ammo="30(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles" nowifi="true"/>
+   </item>
+
+</items>

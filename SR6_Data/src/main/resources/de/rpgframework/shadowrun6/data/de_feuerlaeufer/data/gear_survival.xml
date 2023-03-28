@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Survival gear -->
+   <item id="fire_breather" avail="3L" price="1250" subtype="SURVIVAL_GEAR" type="SURVIVAL" />
+   <item id="fire_rescue_cylinder" avail="4L" price="1500" subtype="SURVIVAL_GEAR" type="SURVIVAL" />
+   <item id="fire_rescue_battery" avail="3" price="850" subtype="SURVIVAL_GEAR" type="SURVIVAL" />
+   <item id="fire_rescue_sp20" avail="4L" price="10000" subtype="SURVIVAL_GEAR" type="SURVIVAL" />
+   <item id="fire_rescue_sp80" avail="6L" price="32000" subtype="SURVIVAL_GEAR" type="SURVIVAL" />
+
+</items>

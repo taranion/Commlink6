@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="volkskomm" avail="2" price="0" type="ELECTRONICS" subtype="COMMLINK" >
+		<usage mode="CARRIED"/>
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+		<modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+		</modifications>
+		<matrix d="1" f="0" programs="0" devrat="1" />
+		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+
+</items>
