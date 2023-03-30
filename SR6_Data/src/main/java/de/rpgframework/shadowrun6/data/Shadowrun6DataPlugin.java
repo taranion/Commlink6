@@ -450,12 +450,10 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_other/data/gear_vehicles.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 
-			// logger.log(Level.INFO, "START ------------------------------DE Piraten-----------------------------------");
-			// set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_PIRATEN", "de_piraten.i18n", Locale.GERMAN);
-			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_piraten/data/gear_preload.xml");
-			// logger.log(Level.DEBUG, "Loaded "+list.size()+" equipment");
-			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_piraten/data/gear_vehicles.xml");
-			// logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+			logger.log(Level.INFO, "START ------------------------------DE Piraten-----------------------------------");
+			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_PIRATEN", "de_piraten.i18n", Locale.GERMAN);
+			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_piraten/data/gear_vehicles.xml");
+			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 
 			logger.log(Level.INFO, "START ------------------------------DE Revierbericht-----------------------------------");
 			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_REVIERBERICHT", "de_revierbericht.i18n", Locale.GERMAN);
