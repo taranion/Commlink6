@@ -1256,10 +1256,10 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="mct_hornet"/>
                 </embed>
-             <!-- <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> TODO: remove comment once geardef is enabled for items -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
-                <!-- <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet_stinger"/> -->
-                <!-- </embed> -->
+             <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet_stinger"/>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_roadmaster" id="9a481409-5d90-4aef-83f6-9b76a8f8dc88" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="hardpoint_conceal_large" /> TODO: Remove comment once gear from double clutch is available -->
@@ -1278,7 +1278,7 @@
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" /> -->
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" /> -->
          <!-- <valmod type="GEAR" apply="CHARACTER" ref="road_strip_spikes" value="6" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector_thermo" /> -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="thermo" />
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" /> -->
          <!-- <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="TIRES" ref="tires_large_shredders" /> -->
@@ -1305,7 +1305,7 @@
              <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" /> -->
              <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" /> -->
          <!-- <valmod type="GEAR" apply="CHARACTER" ref="road_strip_spikes" value="6" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector_thermo" /> -->
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="thermo" />
              <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" /> -->
          <!-- <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
              <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="TIRES" ref="tires_large_shredders" /> -->
@@ -2795,10 +2795,10 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 <decision choice="355a3a45-39fc-4376-8667-661c9873dfdb" value="mct_hornet"/>
                 </embed>
-             <!-- <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> TODO: remove comment once geardef is enabled for items -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
-                <!-- <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet_stinger"/> -->
-                <!-- </embed> -->
+             <embed  type="GEAR" intoId="53fd12c3-a42a-4f7b-8900-a89c62121de3" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="mct_hornet_stinger"/>
+                </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_roadmaster" id="9a481409-5d90-4aef-83f6-9b76a8f8dc88" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_BODY" ref="hardpoint_conceal_large" /> TODO: Remove comment once gear from double clutch is available -->
@@ -2817,7 +2817,7 @@
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" /> -->
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" /> -->
          <!-- <valmod type="GEAR" apply="CHARACTER" ref="road_strip_spikes" value="6" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector_thermo" /> -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="thermo" />
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" /> -->
          <!-- <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
              <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="TIRES" ref="tires_large_shredders" /> -->
@@ -2844,7 +2844,7 @@
              <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" /> -->
              <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" /> -->
          <!-- <valmod type="GEAR" apply="CHARACTER" ref="road_strip_spikes" value="6" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector_thermo" /> -->
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="thermo" />
              <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" /> -->
          <!-- <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
              <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="TIRES" ref="tires_large_shredders" /> -->

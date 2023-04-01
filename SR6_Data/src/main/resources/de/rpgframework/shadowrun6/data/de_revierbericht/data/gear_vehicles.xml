@@ -20,7 +20,7 @@
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/> -->
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/> -->
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="push_bar"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector_normal"/> -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="regular" />
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector"/> -->
       </modifications>
    </item>

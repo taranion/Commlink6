@@ -43,12 +43,13 @@
 		<vehicle han="3" acc="20" spdi="15" tspd="35" bod="1" arm="0" pil="2" sen="2" />
 			<geardef>
 				<item id="mct_hornet_stinger" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+					<usage mode="EMBEDDED"/>
 					<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/blades" /> 
 				<!-- Rules state the existence of the injector, but no data given. Using damage 1P as parashield darts and attack rating 4, to be below AR 6 of a knife -->
 				</item>
 			</geardef>
 		<modifications>
-			<!-- embed type="GEAR" ref="mct_hornet_stinger" intoType="HOOK" intoRef="VEHICLE_BODY"/ -->
+			<embed type="GEAR" ref="mct_hornet_stinger" intoType="HOOK" intoRef="VEHICLE_BODY"/>
 		</modifications>
 	</item>
 
