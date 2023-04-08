@@ -800,6 +800,11 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve drake type");
 			if (model.getDrakeType()!=null) {
 				DrakeType resolved =  Shadowrun6Core.getItem(DrakeType.class, model.getDrakeType().getKey());
+				if (resolved==null) {
+					logger.log(Level.ERROR, "Cannot resolve drake type ''%s''", model.getDrakeType().getKey());
+					System.err.println("Cannot resolve drake type '"+model.getDrakeType().getKey()+"'");
+					System.exit(1);
+				}
 				model.getDrakeType().setResolved(resolved);
 			}
 		} catch (DataErrorException e) {
