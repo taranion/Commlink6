@@ -164,7 +164,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	@Override
 	protected void createPartialController() {
 		prioCtrl  = createPriorityTableController();
-		attributes= new PrioritySR6AttributeGenerator(this);
+		attributes= new SR6PriorityAttributeGenerator(this);
 		meta      = new SR6PriorityMetatypeController(this);
 		magicReso = new PriorityMagicOrResonanceController(this);
 		skills    = new SR6PrioritySkillGenerator(this);
