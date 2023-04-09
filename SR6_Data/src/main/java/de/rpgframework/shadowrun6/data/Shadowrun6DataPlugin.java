@@ -464,18 +464,20 @@ public class Shadowrun6DataPlugin  {
 			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_vehicles.xml");
 			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 
-			logger.log(Level.INFO, "START ------------------------------DE SOTA 2081-----------------------------------");
-			set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_SOTA2081", "de_sota2081.i18n", Locale.GERMAN);
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_firearms_accessories.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" accessories");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_firearms.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_drones.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
-			list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_vehicles.xml");
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
-			list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz.getResourceAsStream("de_sota2081/data/mentorspirits.xml"));
-			logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
+			// logger.log(Level.INFO, "START ------------------------------DE SOTA 2081-----------------------------------");
+			// set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_SOTA2081", "de_sota2081.i18n", Locale.GERMAN);
+			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_firearms_pre.xml");
+			// logger.log(Level.DEBUG, "Loaded "+list.size()+" equipment");
+			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_firearms_accessories.xml");
+			// logger.log(Level.DEBUG, "Loaded "+list.size()+" accessories");
+			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_firearms.xml");
+			// logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_drones.xml");
+			// logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
+			// list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_vehicles.xml");
+			// logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+			// list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz.getResourceAsStream("de_sota2081/data/mentorspirits.xml"));
+			// logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
 
 			// logger.log(Level.INFO, "START ------------------------------DE SOTA 2082-----------------------------------");
 			// set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_SOTA2082", "de_sota2082.i18n", Locale.GERMAN);
