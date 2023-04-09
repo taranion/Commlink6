@@ -295,11 +295,14 @@ public class CombatSectionTools {
 		ret.add(entry);
 
 		/* IC Slicer */
-		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "ic_slicer").getName(loc)+" *");
-		entry.setCol1(cracking.toString());
-		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol2( String.valueOf(attack) );
-		ret.add(entry);
+		Shadowrun6Action slicer = Shadowrun6Core.getItem(Shadowrun6Action.class, "ic_slicer");
+		if (slicer!=null) {
+			entry = new AttackEntry(slicer.getName(loc)+" *");
+			entry.setCol1(cracking.toString());
+			entry.setCol1Tooltip(cracking.toExplainString());
+			entry.setCol2( String.valueOf(attack) );
+			ret.add(entry);
+		}
 		return ret;
 	}
 	//-------------------------------------------------------------------
@@ -391,9 +394,12 @@ public class CombatSectionTools {
 		AttackTable ret = new AttackTable();
 		ret.numColumns=1;
 		// Take aim
-		AttackEntry entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "virtual_aim").getName(loc));
-		entry.setCol1("+1");
-		ret.add(entry);
+		Shadowrun6Action aim = Shadowrun6Core.getItem(Shadowrun6Action.class, "virtual_aim");
+		if (aim!=null) {
+			AttackEntry entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "virtual_aim").getName(loc));
+			entry.setCol1("+1");
+			ret.add(entry);
+		}
 		return ret;
 	}
 	//-------------------------------------------------------------------
