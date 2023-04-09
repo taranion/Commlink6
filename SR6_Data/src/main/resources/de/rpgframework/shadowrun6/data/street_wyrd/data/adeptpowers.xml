@@ -4,7 +4,7 @@
    <power id="air_dance"    cost="1.5" act="PASSIVE" />
    <power id="analytics"    cost="0.5" act="PASSIVE" >
    	<modifications>
-     		<checkmod type="ATTRIBUTE" ref="LOGIC" value="1" what="EDGE"  apply="CHARACTER"/>
+     		<checkmod type="ATTRIBUTE" ref="LOGIC" value="1" what="EDGE_ONLY_TEST"  apply="CHARACTER"/>
      </modifications>
    </power>
    <power id="animal_empathy" cost="0.5" hasLevel="true" max="2" act="PASSIVE"/>
