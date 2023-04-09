@@ -14,7 +14,6 @@
    <power id="combat_sense"      cost="0.5" hasLevel="true" act="PASSIVE">
      <modifications>
         <valmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL" value="$LEVEL"/>
-        <valmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT" value="$LEVEL"/>
         <valmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT" value="$LEVEL"/>
      </modifications>
    </power>

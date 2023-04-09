@@ -15,6 +15,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.modification.AllowModification;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.QualityValue;
@@ -427,7 +428,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 					continue;
 				}
 
-				ValueModification mod = (ValueModification) _mod;
+				DataItemModification mod = (DataItemModification) _mod;
 				SR6Skill key = mod.getResolvedKey();
 				SR6SkillValue val = getModel().getSkillValue(key);
 				if (mod.isConditional()) {
@@ -436,7 +437,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 					logger.log(Level.DEBUG, "Add modification {0} to {1}", mod, key);
 				}
 				val.addModification(mod);
-				if (mod.getSet() == ValueType.MAX) {
+				if ((mod instanceof ValueModification) && ((ValueModification)mod).getSet() == ValueType.MAX) {
 					logger.log(Level.INFO, "Changed maximum of {0} to {1}", key, val.getModifiedValue(ValueType.MAX));
 				}
 			} else

@@ -105,7 +105,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 		}
 		if ((value.getDistributed()+1)==max) {
 			if (isAnotherAttributeAlreadyMaxed(value.getModifyable())) {
-				logger.log(Level.WARNING, "Attribute {0} is not at maximum {1}, but another attribute us", value.getModifyable(), max);
+				logger.log(Level.WARNING, "Attribute {0} is not at maximum {1}, but another attribute is", value.getModifyable(), max);
 				return Possible.FALSE;
 			}
 		}

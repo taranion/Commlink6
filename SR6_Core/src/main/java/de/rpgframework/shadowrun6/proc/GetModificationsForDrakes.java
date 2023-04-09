@@ -85,6 +85,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 
 
 			// Iterate modifications
+			if (drake.getResolved()==null) return unprocessed;
 			for (Modification mod : drake.getResolved().getModifications()) {
 				switch ((ShadowrunReference)mod.getReferenceType()) {
 				case ATTRIBUTE:

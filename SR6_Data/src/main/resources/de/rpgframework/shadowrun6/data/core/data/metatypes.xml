@@ -22,6 +22,7 @@
            <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <itemmod type="QUALITY" ref="toxin_resistance"/>
            <itemmod type="QUALITY" ref="thermographic_vision"/>
+           <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
          </modifications>
     </metatype>
 
@@ -41,9 +42,10 @@
             <valmod ref="AGILITY"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
             <valmod ref="STRENGTH" type="ATTRIBUTE" value="9" set="MAX" when="CREATION"/>
             <valmod ref="CHARISMA" type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
-            <itemmod ref="thermographic_vision" type="QUALITY"/>
-            <valmod ref="built_tough"           type="QUALITY" value="2"/>
-            <itemmod ref="dermal_deposits"      type="QUALITY"/>
+            <itemmod type="QUALITY"  ref="thermographic_vision"/>
+            <valmod  type="QUALITY"  ref="built_tough"       value="2"/>
+            <itemmod type="QUALITY"  ref="dermal_deposits"      />
+            <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
          </modifications>
     </metatype>
 </metatypes>

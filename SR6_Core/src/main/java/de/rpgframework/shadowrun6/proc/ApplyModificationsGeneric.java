@@ -74,7 +74,11 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				case LIFESTYLE  : return applyLifestyle(model, mod);
 				case QUALITY    : return applyQuality(model, mod);
 				case RULE       : return applyRule(model, mod);
-				case SKILL		: return applySkill(model, (ValueModification) mod);
+				case SKILL		:
+					if (mod instanceof ValueModification)
+						return applySkill(model, (ValueModification) mod);
+					else
+						return applySkill(model, mod);
 				case ITEM_ATTRIBUTE:
 				case ACTION:
 					model.addItemModification(mod); return true;
@@ -204,6 +208,24 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		value.addModification(mod);
 		logger.log(Level.INFO, "Added {0} to skill {1} ({2}) from {3}", mod.getValue(), item, mod.getSet(), mod.getSource());
 
+		return true;
+	}
+
+	// -------------------------------------------------------------------
+	private static boolean applySkill(Shadowrun6Character model, DataItemModification mod) {
+		SR6Skill item = mod.getReferenceType().resolve(mod.getKey());
+		// Before adding a new skill, check if it already exists
+		if (mod.getId()!=null) {
+			SR6SkillValue value = model.getSkillValue(mod.getId());
+			if (value!=null)
+				return true;
+		}
+
+		SR6SkillValue value = new SR6SkillValue(item, 1);
+		if (mod.getId()!=null)
+			value.setUuid(mod.getId());
+		value.addModification(mod);
+		logger.log(Level.ERROR, "Added skill {0} (from {1})",  item, mod.getSource());
 		return true;
 	}
 

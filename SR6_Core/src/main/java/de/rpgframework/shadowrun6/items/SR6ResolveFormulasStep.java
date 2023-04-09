@@ -119,7 +119,8 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 		ItemTemplate template = (ItemTemplate) model.getResolved();
 		if (template==null) {
 			logger.log(Level.ERROR, "No resolved template for ''{0}'' in item {1}", model.getKey(), model.getUuid());
-			System.exit(1);
+			System.err.println("SR6ResolveFormulaStep: No resolved template for "+model.getKey());
+			return ret;
 		}
 
 		// Copy attributes from <usage>

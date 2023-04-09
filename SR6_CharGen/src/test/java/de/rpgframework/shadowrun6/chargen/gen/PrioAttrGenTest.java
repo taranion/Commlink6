@@ -26,7 +26,7 @@ import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.priority.PrioritySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -39,7 +39,7 @@ import de.rpgframework.shadowrun6.proc.ResetModifications;
 public class PrioAttrGenTest {
 
 	private Shadowrun6Character model;
-	private PrioritySR6AttributeGenerator ctrl;
+	private SR6PriorityAttributeGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
 
@@ -68,7 +68,7 @@ public class PrioAttrGenTest {
 				ctrl.process(preMods);
 			}
 		};
-		ctrl  = new PrioritySR6AttributeGenerator(charGen);
+		ctrl  = new SR6PriorityAttributeGenerator(charGen);
 		charGen.runProcessors();
 	}
 

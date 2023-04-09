@@ -13,6 +13,7 @@
            	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="sunlight"/>
            </itemmod>
            <itemmod type="QUALITY" ref="unusual_hair"/>
+           <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
 		</modifications>
 	</metatype>
 	<metatype id="gnome" variantof="dwarf" size="80" weight="37" karma="5">
@@ -24,6 +25,7 @@
            <itemmod type="QUALITY" ref="neoteny"/>
            <itemmod type="QUALITY" ref="thermographic_vision"/>
            <itemmod type="QUALITY" ref="toxin_resistance"/>
+           <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
 		</modifications>
 	</metatype>
 	<metatype id="hanuman" variantof="dwarf" size="120" weight="49" karma="5">
@@ -38,6 +40,7 @@
            </itemmod>
            <itemmod type="QUALITY" ref="toxin_resistance"/>
            <itemmod type="QUALITY" ref="unusual_hair"/>
+           <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
 		</modifications>
 	</metatype>
 	<metatype id="koborokuru" variantof="dwarf" size="110" weight="42" karma="5">
@@ -49,6 +52,7 @@
            <itemmod type="QUALITY" ref="thermographic_vision"/>
            <itemmod type="QUALITY" ref="toxin_resistance"/>
            <itemmod type="QUALITY" ref="unusual_hair"/>
+           <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
 		</modifications>
 	</metatype>
 	<metatype id="menehune" variantof="dwarf" size="110" weight="42" karma="5">
@@ -60,9 +64,10 @@
            <itemmod type="QUALITY" ref="toxin_resistance"/>
            <itemmod type="QUALITY" ref="underwater_vision"/>
            <itemmod type="QUALITY" ref="webbed_digits"/>
+           <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
 		</modifications>
 	</metatype>
-	
+
 	<!-- Elf variants -->
 	<metatype id="dalakitnon" variantof="elf" size="170" weight="80" karma="5">
 		<modifications>
@@ -128,7 +133,7 @@
            <itemmod type="QUALITY" ref="photometabolism"/>
 		</modifications>
 	</metatype>
-	
+
 	<!-- Human variants -->
 	<metatype id="nartaki" variantof="human" size="175" weight="86" karma="5">
      <choices>
@@ -158,7 +163,7 @@
            </itemmod>
 		</modifications>
 	</metatype>
-	
+
 	<!-- Ork variants -->
 	<metatype id="hobgoblin" variantof="ork" size="180" weight="98" karma="5">
 		<modifications>
@@ -212,6 +217,7 @@
          <valmod type="QUALITY"   ref="built_tough" value="2"/>
          <itemmod type="QUALITY"  ref="cyclopean_eye"/>
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
+         <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
 		</modifications>
 	</metatype>
 	<metatype id="fomorian" variantof="troll" size="235" weight="224" karma="10">
@@ -222,6 +228,7 @@
          <valmod type="QUALITY"   ref="built_tough" value="2"/>
          <itemmod type="QUALITY"  ref="magic_resistance"/>
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
+         <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
 		</modifications>
 	</metatype>
 	<metatype id="giant" variantof="troll" size="300" weight="467" karma="5">
@@ -233,6 +240,7 @@
          <valmod type="QUALITY"   ref="built_tough" value="2"/>
          <itemmod type="QUALITY"  ref="bark" />
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
+         <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
 		</modifications>
 	</metatype>
 	<metatype id="minotaur" variantof="troll" size="240" weight="265" karma="5">
@@ -244,6 +252,7 @@
          <valmod type="QUALITY"   ref="built_tough" value="2"/>
          <itemmod type="QUALITY"  ref="goring_horns"/>
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
+         <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
 		</modifications>
 	</metatype>
 

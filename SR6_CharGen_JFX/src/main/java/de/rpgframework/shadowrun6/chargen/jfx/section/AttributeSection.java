@@ -19,7 +19,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAttributeGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.priority.PrioritySR6AttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6AttributeLeveller;
 import javafx.beans.property.IntegerProperty;
@@ -77,7 +77,7 @@ public class AttributeSection extends Section {
 
 		IAttributeController attrib = ctrl.getAttributeController();
 		logger.log(Level.DEBUG, "updateController to {0}", attrib.getClass().getSimpleName());
-		if (attrib instanceof PrioritySR6AttributeGenerator) {
+		if (attrib instanceof SR6PriorityAttributeGenerator) {
 // 			System.err.println("AttributeSection: change controller to Priority");
 			table = new PriorityAttributeTable<>(ctrl);
 			((PriorityAttributeTable)table).useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?9:6));
