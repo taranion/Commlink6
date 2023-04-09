@@ -37,7 +37,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		super(parent);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeSelected(ItemTemplate, String, Decision[])
@@ -47,7 +47,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		Possible poss = super.canBeSelected(value, variantID, mode, decisions);
 		if (!poss.get())
 			return poss;
-		
+
 		// Try to build item
 		OperationResult<CarriedItem<ItemTemplate>> carried = null;
 		if (variantID!=null) {
@@ -56,7 +56,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 				return new Possible(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
 			}
 			carried = GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
-		} else {		
+		} else {
 			carried = GearTool.buildItem(value, mode, getModel(), true, decisions);
 		}
 
@@ -67,10 +67,10 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 //				boolean allowLegal = getModel().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ALLOW_LEGAL_AVAIL7PLUS);
 //				if (!allowLegal || avail.getLegality()!=Legality.LEGAL) {
 //					return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,SR6CharacterGenerator.RES, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH, avail.getValue());
-//				}				
+//				}
 //			}
 //		}
-		
+
 		return poss;
 	}
 
@@ -89,7 +89,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 				int nuyen = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 				logger.log(Level.INFO, "Buy {0} for {1} nuyen", value.getId(), nuyen);
 				model.setNuyen( model.getNuyen() - nuyen );
-				
+
 				// Pay essence
 				if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
 					double essenceCost = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
@@ -111,10 +111,10 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 						}
 					}
 				}
-				
+
 				parent.runProcessors();
 			}
-			
+
 			return result;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, mode);
@@ -129,7 +129,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 	public boolean deselect(CarriedItem<ItemTemplate> value) {
 		logger.log(Level.TRACE, "ENTER deselect({0})", value);
 		try {
-			boolean success = deselect(value);
+			boolean success = super.deselect(value);
 			if (!success) {
 				return false;
 			}
@@ -137,8 +137,8 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 			Shadowrun6Character model = getModel();
 			int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			logger.log(Level.INFO, "Sell {0} for {1} nuyen", value.getKey(), nuyen);
-			
-			model.setNuyen( model.getNuyen() - nuyen );
+
+			model.setNuyen( model.getNuyen() + nuyen );
 			parent.runProcessors();
 			return true;
 		} finally {
