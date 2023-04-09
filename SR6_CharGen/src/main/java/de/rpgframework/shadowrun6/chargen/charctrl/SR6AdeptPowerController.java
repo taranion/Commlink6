@@ -277,6 +277,8 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	//-------------------------------------------------------------------
 	protected int determineMaxFreePoints() {
 		Shadowrun6Character model = getModel();
+		if (model.getMagicOrResonanceType()==null || !model.getMagicOrResonanceType().usesPowers())
+			return 0;
 
 		return model.getAttribute(ShadowrunAttribute.POWER_POINTS).getModifiedValue();
 	}
