@@ -62,7 +62,8 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				throw new IllegalArgumentException("More than one possible CarryMode - use other select() method");
 		}
 		OperationResult<CarriedItem<ItemTemplate>> res = select(value, null, mode, decisions);
-		parent.runProcessors();
+//		if (res.wasSuccessful())
+//			parent.runProcessors();
 		return res;
 	}
 
@@ -94,7 +95,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			OperationResult<CarriedItem<ItemTemplate>> ret = SR6GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
-			logger.log(Level.INFO, "Add {0} to model", item.getKey());
+			logger.log(Level.WARNING, "Add {0} to model", item.getKey());
 			getModel().addCarriedItem(item);
 
 			parent.runProcessors();
@@ -112,10 +113,13 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			if (ItemTemplate.UUID_UNARMED.equals(tmp.getUuid()))
 				continue;
 				// Remove old price modifications
-			for (Modification tmpMod : tmp.getModifications()) {
-				if (tmpMod.getReferenceType()==ShadowrunReference.PRICEMOD)
-					tmp.removeModification(tmpMod);
+			ItemAttributeNumericalValue<SR6ItemAttribute> val = tmp.getAsValue(SR6ItemAttribute.PRICE);
+			for (Modification tmpMod : val.getModifications()) {
+				System.err.println("CommonEquipmentGenerator.clearPriceMods: "+tmpMod);
+				if ((tmpMod instanceof ValueModification) && ItemTemplate.UUID_VOLATILE_PRICEMOD.equals(((ValueModification)tmpMod).getId()))
+					val.removeModification(tmpMod);
 			}
+			//val.clearModifications();
 		}
 	}
 
@@ -136,7 +140,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 			List<Modification> unprocessed = new ArrayList<>();
 			// Prepare a list of price modifiers
-			List<ValueModification> priceMods = new ArrayList<>();
+			priceMods.clear();
 			for (Modification tmp : previous) {
 				if (tmp instanceof ValueModification) {
 					ValueModification mod = (ValueModification)tmp;
@@ -206,7 +210,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				if (ItemTemplate.UUID_UNARMED.equals(tmp.getUuid()))
 					continue;
 				if (!tmp.isAutoAdded()) {
-					applyPriceModifiers(priceMods, tmp);
+					applyPriceModifiers(tmp);
 
 					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 					if (tmp.getCount()>1)
@@ -233,7 +237,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	}
 
 	//-------------------------------------------------------------------
-	private void applyPriceModifiers(List<ValueModification> priceMods, CarriedItem<ItemTemplate> tmp) {
+	private void applyPriceModifiers(CarriedItem<ItemTemplate> tmp) {
 		ItemAttributeNumericalValue<SR6ItemAttribute> priceVal = tmp.getAsValue(SR6ItemAttribute.PRICE);
 		double baseCost = priceVal.getDistributed();
 		// Add price modifications that apply
@@ -244,6 +248,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			double factor = priceMod.getValueAsDouble();
 			int extraCost = (int)( factor*baseCost);
 			ValueModification toAdd = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), extraCost, priceMod.getSource());
+			toAdd.setId(ItemTemplate.UUID_VOLATILE_PRICEMOD);
 			switch (pmType) {
 			case CLOTHING:
 				if (subtype==ItemSubType.ARMOR_CLOTHES)

@@ -22,9 +22,11 @@ import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.Usage;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.items.Availability;
+import de.rpgframework.shadowrun6.PriceModifiers;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
@@ -48,9 +50,12 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public abstract class CommonEquipmentController extends ControllerImpl<ItemTemplate> implements ISR6EquipmentController {
 
+	protected List<ValueModification> priceMods;
+
 	//-------------------------------------------------------------------
 	public CommonEquipmentController(SR6CharacterController parent) {
 		super(parent);
+		priceMods = new ArrayList<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -161,6 +166,37 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			ret.add(CarryMode.CARRIED);
 		return ret;
 	}
+	//-------------------------------------------------------------------
+	private int getPerItemPrice(CarriedItem<ItemTemplate> tmp) {
+		ItemAttributeNumericalValue<SR6ItemAttribute> priceVal = tmp.getAsValue(SR6ItemAttribute.PRICE);
+		double baseCost = priceVal.getDistributed();
+		// Add price modifications that apply
+		for (ValueModification priceMod : priceMods) {
+			PriceModifiers pmType = priceMod.getResolvedKey();
+			ItemType type = tmp.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+			ItemSubType subtype = tmp.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+			double factor = priceMod.getValueAsDouble();
+			int extraCost = (int)( factor*baseCost);
+			ValueModification toAdd = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), extraCost, priceMod.getSource());
+			switch (pmType) {
+			case CLOTHING:
+				if (subtype==ItemSubType.ARMOR_CLOTHES)
+					priceVal.addModification(toAdd);
+				break;
+			case ARMOR:
+				if (type==ItemType.ARMOR || type==ItemType.ARMOR_ADDITION) {
+					System.err.println("Add extra "+extraCost+" to "+tmp+"   factor="+factor);
+					priceVal.addModification(toAdd);
+				}
+				break;
+			case EVERYTHING:
+				priceVal.addModification(toAdd);
+				break;
+			}
+		}
+
+		return priceVal.getModifiedValue();
+	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -204,7 +240,9 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		}
 		// Check money
 		if (carried.get().getAsValue(SR6ItemAttribute.PRICE) != null) {
-			int nuyen = carried.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+			//int nuyen = carried.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+			int nuyen = getPerItemPrice(carried.get());
+			System.err.println("Required for "+value.getId()+" are "+nuyen);
 			if (nuyen>getModel().getNuyen()) {
 				// Not enough money. Career and CharGen mode both have options to ignore this
 				if (getModel().isInCareerMode()) {

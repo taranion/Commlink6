@@ -1367,6 +1367,7 @@ public class SR6ArchetypeTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void test07StreetSamurai() throws Exception {
+		charGen.getRuleController().setRuleValue(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN, true);
 		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.B);
 		prio.setPriority(PriorityType.METATYPE, Priority.C);
@@ -1493,6 +1494,7 @@ public class SR6ArchetypeTest {
 		assertEquals(0, contacts.getPointsLeft());
 
 		// Augmentations
+		assertEquals(450000, model.getNuyen());
 		ISR6EquipmentController equip = charGen.getEquipmentController();
 		equip.increaseConversion();
 		equip.increaseConversion();
@@ -1505,10 +1507,20 @@ public class SR6ArchetypeTest {
 		equip.increaseConversion();
 		equip.increaseConversion();
 		equip.increaseConversion();
+		assertEquals(472000, model.getNuyen());
 		OperationResult<CarriedItem<ItemTemplate>> lacing = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "bone_lacing"), "titanium", CarryMode.IMPLANTED,
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		// Ensure cost is correct
+		assertEquals("Without troll tax incorrect", 30000, lacing.get().getAsValue(SR6ItemAttribute.PRICE).getDistributed());
+		assertEquals("Troll tax incorrect", 33000, lacing.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals("Payed different than expected",439000, model.getNuyen());
+		charGen.runProcessors();
+		assertEquals("Payed different than expected",439000, model.getNuyen());
 		OperationResult<CarriedItem<ItemTemplate>> arm = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm"), "fullarm_obvious", CarryMode.IMPLANTED,
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"));
+		assertEquals("Without troll tax incorrect", 15000, arm.get().getAsValue(SR6ItemAttribute.PRICE).getDistributed());
+		assertEquals("Troll tax incorrect", 16500, arm.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals("Payed different than expected",422500, model.getNuyen());
 		assertTrue(equip.embed(
 				arm.get(),
 				ItemHook.CYBERLIMB_IMPLANT,
@@ -1605,6 +1617,9 @@ public class SR6ArchetypeTest {
 				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "1"),
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
 				);
+		assertEquals("Without troll tax incorrect", 40000, wired.get().getAsValue(SR6ItemAttribute.PRICE).getDistributed());
+		assertEquals("Troll tax incorrect", 44000, wired.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals("Payed different than expected",129900, model.getNuyen());
 		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_roadmaster")).wasSuccessful());
 		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_jacket")).wasSuccessful());
 
