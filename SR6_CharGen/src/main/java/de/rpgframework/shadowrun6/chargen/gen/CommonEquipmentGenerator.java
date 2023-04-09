@@ -14,16 +14,20 @@ import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.CreatePoints;
+import de.rpgframework.shadowrun6.PriceModifiers;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
@@ -101,6 +105,21 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	}
 
 	//-------------------------------------------------------------------
+	private void clearPriceModifications() {
+		for (CarriedItem<ItemTemplate> tmp : parent.getModel().getCarriedItems()) {
+			if (ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE.equals(tmp.getUuid()))
+				continue;
+			if (ItemTemplate.UUID_UNARMED.equals(tmp.getUuid()))
+				continue;
+				// Remove old price modifications
+			for (Modification tmpMod : tmp.getModifications()) {
+				if (tmpMod.getReferenceType()==ShadowrunReference.PRICEMOD)
+					tmp.removeModification(tmpMod);
+			}
+		}
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
@@ -113,8 +132,11 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			model.setNuyen(0);
 			conversionRate = 2000;
 			todos.clear();
+			clearPriceModifications();
 
 			List<Modification> unprocessed = new ArrayList<>();
+			// Prepare a list of price modifiers
+			List<ValueModification> priceMods = new ArrayList<>();
 			for (Modification tmp : previous) {
 				if (tmp instanceof ValueModification) {
 					ValueModification mod = (ValueModification)tmp;
@@ -125,6 +147,12 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 						ItemTemplate template = mod.getResolvedKey();
 						model.setNuyen( model.getNuyen() + mod.getValue());
 						logger.log(Level.DEBUG, "add {0}", template);
+					} else if (mod.getReferenceType()==ShadowrunReference.PRICEMOD) {
+						if (mod.getId()==null) {
+							logger.log(Level.ERROR, "PRICEMOD from "+mod.getSource()+" is missing UUID");
+							System.err.println("CommonEquipmentGenerator: PRICEMOD from "+mod.getSource()+" is missing UUID");
+						}
+						priceMods.add(mod);
 					} else
 						unprocessed.add(tmp);
 				} else if (tmp instanceof DataItemModification) {
@@ -165,6 +193,8 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			}
 
 
+			logger.log(Level.ERROR, "Modifiers "+priceMods);
+
 
 			/*
 			 * Walk through all items and pay for them
@@ -176,6 +206,8 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				if (ItemTemplate.UUID_UNARMED.equals(tmp.getUuid()))
 					continue;
 				if (!tmp.isAutoAdded()) {
+					applyPriceModifiers(priceMods, tmp);
+
 					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 					if (tmp.getCount()>1)
 						cost *= tmp.getCount();
@@ -198,6 +230,37 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE");
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private void applyPriceModifiers(List<ValueModification> priceMods, CarriedItem<ItemTemplate> tmp) {
+		ItemAttributeNumericalValue<SR6ItemAttribute> priceVal = tmp.getAsValue(SR6ItemAttribute.PRICE);
+		double baseCost = priceVal.getDistributed();
+		// Add price modifications that apply
+		for (ValueModification priceMod : priceMods) {
+			PriceModifiers pmType = priceMod.getResolvedKey();
+			ItemType type = tmp.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+			ItemSubType subtype = tmp.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+			double factor = priceMod.getValueAsDouble();
+			int extraCost = (int)( factor*baseCost);
+			ValueModification toAdd = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), extraCost, priceMod.getSource());
+			switch (pmType) {
+			case CLOTHING:
+				if (subtype==ItemSubType.ARMOR_CLOTHES)
+					priceVal.addModification(toAdd);
+				break;
+			case ARMOR:
+				if (type==ItemType.ARMOR || type==ItemType.ARMOR_ADDITION) {
+					System.err.println("Add extra "+extraCost+" to "+tmp+"   factor="+factor);
+					priceVal.addModification(toAdd);
+				}
+				break;
+			case EVERYTHING:
+				priceVal.addModification(toAdd);
+				break;
+			}
+		}
+
 	}
 
 	//-------------------------------------------------------------------
