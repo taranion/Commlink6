@@ -52,6 +52,7 @@ import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -220,62 +221,6 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static String getChoiceString(ComplexDataItem data, Choice choice) {
-//		switch ((SplittermondReference)choice.getChooseFrom()) {
-//		case ATTRIBUTE:
-//			if (choice.getChoiceOptions()==null) {
-//				if (choice.getDistribute()!=null) {
-//					int sum = Arrays.asList(choice.getDistribute()).stream().reduce(0, Integer::sum);
-//					return "Verteile "+sum+" Punkte auf "+choice.getDistribute().length+" verschiedene Attribute";
-//				}
-//				return "Wähle ein beliebiges Attribut";
-//			}
-//			List<String> attribs = Arrays.asList( choice.getChoiceOptions() );
-//			List<String> except  = new ArrayList<>();
-//			for (Attribute tmp : Attribute.primaryValues()) {
-//				if (!attribs.contains(tmp.name()))
-//					except.add(tmp.getName());
-//			}
-//			return "Wähle ein Attribut außer "+String.join(", ", except);
-//		case SKILL:
-//			if (choice.getChoiceOptions()==null) {
-//				if (choice.getDistribute()!=null) {
-//					int sum = Arrays.asList(choice.getDistribute()).stream().reduce(0, Integer::sum);
-//					return "Verteile "+sum+" Punkte auf "+choice.getDistribute().length+" verschiedene Fertigkeiten";
-//				}
-//				return "Wähle ein beliebiges Fertigkeit";
-//			}
-//			attribs = Arrays.asList( choice.getChoiceOptions() );
-//			List<String> positive  = new ArrayList<>();
-//			except  = new ArrayList<>();
-//			for (String key : choice.getChoiceOptions()) {
-//				if ("MAGIC".equals(key)) {
-//					positive.add("eine Magieschule");
-//					break;
-//				}
-//				if ("COMBAT".equals(key)) {
-//					positive.add("eine Kampffertigkeit");
-//					break;
-//				}
-//				SMSkill skill = SplitterMondCore.getSkill(key);
-//				if (skill!=null)
-//					positive.add(skill.getName());
-//				else {
-//					Logging.logger.log(Level.WARNING, "Unknown skill reference '"+key+"' in choice "+choice.getUUID()+" from "+data);
-//				}
-//			}
-//			for (SMSkill tmp : SplitterMondCore.getItemList(SMSkill.class)) {
-//				if (!attribs.contains(tmp.getId()))
-//					except.add(tmp.getName());
-//			}
-//			if (except.size()<positive.size())
-//				return "Wähle eine Fertigkeit außer "+String.join(", ", except);
-//			return String.join(" oder ", positive);
-//		}
-		return "Shadowrun6Tools.getChoiceString("+choice.getChooseFrom()+")";
-	}
-
-	//-------------------------------------------------------------------
 	public static String getModificationSourceString(Object source) {
 		if (source==null)
 			return "Unknown source";
@@ -319,6 +264,34 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
+	private static String getValueString(ValueModification valMod, Locale loc) {
+		String level = "";
+		if ("$LEVEL".equals(valMod.getRawValue())) {
+			level = RES.getString("modification.value.level",loc);
+		} else if ("$LEVEL-1".equals(valMod.getRawValue())) {
+				level = RES.getString("modification.value.level",loc)+"-1";
+		} else if ("$LEVEL*2".equals(valMod.getRawValue())) {
+			level = RES.getString("modification.value.level",loc)+"*2";
+		} else
+			level = String.valueOf(valMod.getValue());
+		return level;
+	}
+
+	//-------------------------------------------------------------------
+	private static String getValueString(ValueRequirement valMod, Locale loc) {
+		String level = "";
+		if ("$LEVEL".equals(valMod.getRawValue())) {
+			level = RES.getString("modification.value.level",loc);
+		} else if ("$LEVEL-1".equals(valMod.getRawValue())) {
+				level = RES.getString("modification.value.level",loc)+"-1";
+		} else if ("$LEVEL*2".equals(valMod.getRawValue())) {
+			level = RES.getString("modification.value.level",loc)+"*2";
+		} else
+			level = String.valueOf(valMod.getValue());
+		return level;
+	}
+
+	//-------------------------------------------------------------------
 	private static String getModificationStringWithoutCond(Modification mod, Locale loc) {
 		logger.log(Level.ERROR, "explain "+mod);
 		try {
@@ -326,13 +299,23 @@ public class Shadowrun6Tools {
 			if (mod instanceof CheckModification) {
 				CheckModification valMod = (CheckModification)mod;
 				ShadowrunCheckInfluence what = (ShadowrunCheckInfluence) valMod.getWhat();
+				String level = getValueString(valMod, loc);
+
 				String prefix = "";
 				switch (what) {
-				case EDGE_BOOST: prefix = RES.getString("modification.check.edge_boost"); break;
+				case DICE  :
+					prefix = RES.format("modification.check.dice", level); break;
+				case EDGE_ONLY_TEST  :
+					prefix = RES.format("modification.check.edge_temporary", level); break;
+				case EDGE_BOOST:
+					prefix = RES.format("modification.check.edge_boost",level); break;
+				case EDGE_COST_MALUS:
+					prefix = RES.format("modification.check.edge_cost",level); break;
 				default:
 					prefix = "TODO("+what.name()+")";
+					prefix+= level;
+					logger.log(Level.WARNING, "Not supported: {0}",what);
 				}
-				prefix+=" "+valMod.getValue();
 				prefix+=" "+RES.getString("modification.check.for")+" ";
 
 				switch (type) {
@@ -341,7 +324,7 @@ public class Shadowrun6Tools {
 					if (valMod.getConnectedChoice()!=null) {
 						attrName = RES.getString("modification.choice.attribute", loc);
 					} else {
-						attrName = ((ShadowrunAttribute)valMod.getResolvedKey()).getName(loc);
+						attrName = RES.format("modification.check.attribute", loc, ((ShadowrunAttribute)valMod.getResolvedKey()).getName(loc));
 					}
 					return prefix+attrName;
 				case SKILL:
@@ -358,6 +341,26 @@ public class Shadowrun6Tools {
 						}
 					}
 					return prefix+skillName;
+				case SKILLSPECIALIZATION:
+					if (valMod.getConnectedChoice()!=null) {
+						skillName = RES.getString("modification.choice.skillspec", loc);
+					} else {
+						String[] specPair = valMod.getKey().split("/");
+						SR6Skill skill = Shadowrun6Core.getSkill(specPair[0]);
+						if (skill==null) {
+							Logging.logger.log(Level.WARNING, "Found unknown skill '"+specPair[0]+"' in valuemod of "+valMod);
+							skillName = "Unknown skill '"+valMod.getKey()+"'";
+						} else {
+							SkillSpecialization<SR6Skill> spec = skill.getSpecialization(specPair[1]);
+							if (spec==null) {
+								Logging.logger.log(Level.WARNING, "Found unknown specialization '"+specPair[1]+"' in valuemod of "+valMod);
+								skillName = "Unknown skill '"+valMod.getKey()+"'";
+							} else {
+								skillName = spec.getName(loc);
+							}
+						}
+					}
+					return prefix+skillName;
 				default:
 					logger.log(Level.ERROR, "Don't know how to display "+mod);
 					return prefix+"Unknown value type "+type;
@@ -366,26 +369,28 @@ public class Shadowrun6Tools {
 
 			if (mod instanceof ValueModification) {
 				ValueModification valMod = (ValueModification)mod;
+				String level = getValueString(valMod, loc);
+
 				switch (type) {
 				case ATTRIBUTE:
 					String attrName = null;
 					if (valMod.getConnectedChoice()!=null) {
-						attrName = RES.getString("choice.attribute", loc);
+						attrName = RES.getString("modification.choice.attribute", loc);
 					} else {
 						attrName = ShadowrunAttribute.valueOf(valMod.getKey()).getName(loc);
 					}
 
-					if (valMod.getValue()>0) {
+					if (!valMod.hasFormula() && valMod.getValue()>0) {
 						if (valMod.getSet()==ValueType.MAX)
-							return attrName+" "+valMod.getValue();
-						return attrName+" +"+valMod.getValue();
+							return attrName+" "+level;
+						return attrName+" +"+level;
 					} else {
-						return attrName+" "+valMod.getValue();
+						return attrName+" +"+level;
 					}
 				case CREATION_POINTS:
-					return RES.format("modification.creation_points."+((CreatePoints)valMod.getResolvedKey()).name().toLowerCase(), loc, valMod.getValue());
+					return RES.format("modification.creation_points."+((CreatePoints)valMod.getResolvedKey()).name().toLowerCase(), loc, level);
 				case CRITTER_POWER:
-					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc)+" "+valMod.getValue());
+					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc)+" "+level);
 				case HOOK:
 					return RES.format("modification.hook.withCap", loc, valMod.getRawValue(),ItemHook.valueOf(valMod.getKey()).getName(loc));
 				case ITEM_ATTRIBUTE:
@@ -401,7 +406,7 @@ public class Shadowrun6Tools {
 							return iattrName+" "+valMod.getValue();
 						}
 					}
-					return iattrName+" "+valMod.getRawValue();
+					return iattrName+" +"+level;
 				case SKILL:
 					String skillName = null;
 					if (valMod.getConnectedChoice()!=null) {
@@ -427,6 +432,28 @@ public class Shadowrun6Tools {
 				}
 			}
 
+			// AllowModifications
+			if (mod instanceof AllowModification) {
+				AllowModification valMod = (AllowModification)mod;
+				switch (type) {
+				case SKILL:
+					if (valMod.isNegate()) {
+						if (valMod.getResolvedKey()!=null)
+							return RES.format("modification.forbid.skill", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
+						else
+							return RES.format("modification.forbid.skill_choice", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
+					} else {
+						if (valMod.getResolvedKey()!=null)
+							return RES.format("modification.allow.skill", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
+						else
+							return RES.format("modification.allow.skill_choice", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
+					}
+				default:
+					logger.log(Level.ERROR, "Don't know how to display "+mod);
+					return "Unknown value type "+type;
+				}
+			}
+
 			//
 			if (mod instanceof DataItemModification) {
 				DataItemModification valMod = (DataItemModification)mod;
@@ -435,6 +462,10 @@ public class Shadowrun6Tools {
 					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc));
 				case QUALITY:
 					return RES.format("modification.quality", loc, ((Quality)valMod.getResolvedKey()).getName(loc));
+				case SKILL:
+					return RES.format("modification.skill", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
+				case GEAR:
+					return ((ItemTemplate)valMod.getResolvedKey()).getName(loc);
 				default:
 					logger.log(Level.ERROR, "Don't know how to display "+mod);
 					return "Unknown value type "+type;
@@ -473,8 +504,6 @@ public class Shadowrun6Tools {
 					if (ShadowrunReference.ATTRIBUTE==choice.getChooseFrom()) {
 						if (valMod.getValue()>0) {
 							return "ein beliebiges Attribut +"+valMod.getValue();
-						} else {
-							return getChoiceString(data, choice);
 						}
 					}
 					return "???"+choice.getChooseFrom()+"???";
@@ -498,8 +527,6 @@ public class Shadowrun6Tools {
 					if (ShadowrunReference.SKILL==choice.getChooseFrom()) {
 						if (valMod.getAsKeys().length>4) {
 							return "ein gewählte Fertigkeit +"+valMod.getValue();
-						} else {
-							return getChoiceString(data, choice)+" +"+valMod.getValue();
 						}
 					}
 					return "???"+choice.getChooseFrom()+"???";
@@ -649,6 +676,9 @@ public class Shadowrun6Tools {
 				if (iAttr==SR6ItemAttribute.ITEMSUBTYPE) return ItemSubType.valueOf(tmp.getRawValue()).getName();
 				break;
 			case SKILL:
+				if (tmp.getChoice()!=null) {
+					return RES.format("requirement.choice.skill", loc, getValueString(tmp, loc));
+				}
 				item = ShadowrunReference.resolve(type, req.getKey());
 				return item.getName(loc)+" "+tmp.getRawValue()+"+";
 			case ADEPT_POWER:
