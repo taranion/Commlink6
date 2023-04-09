@@ -87,6 +87,7 @@ import de.rpgframework.shadowrun.proc.GetModificationsFromFoci;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaEchoes;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
 import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
+import de.rpgframework.shadowrun.proc.RealSINUpdater;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemHook;
@@ -157,7 +158,8 @@ public class Shadowrun6Tools {
 		CalculateDerivedAttributes.class,
 		CalculateAttributePools.class,
 		CalculateSkillPools.class,
-		CalculateMeleeAndUnarmed.class
+		CalculateMeleeAndUnarmed.class,
+		RealSINUpdater.class
 	);
 
 	//-------------------------------------------------------------------
