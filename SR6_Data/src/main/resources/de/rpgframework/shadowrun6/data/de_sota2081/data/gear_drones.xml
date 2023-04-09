@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <!-- Small drones -->
+   <item id="monochrom_mulatschak" avail="1"  price="2500" type="DRONE_SMALL" subtype="GROUND" >
+      <vehicle han="3/6" acc="10" spdi="20" tspd="100" bod="5" arm="1" pil="3" sen="2" />
+	  <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="regular" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="mulataschak_soundsystem" />
+      </modifications>
+		<geardef>
+			<item id="mulataschak_soundsystem" type="ACCESSORY" subtype="MOD_MISC" >
+			<usage mode="EMBEDDED"/>
+			</item>
+		</geardef>
+   </item>
+     <item id="ruhrmetall_skarabaeus" avail="6"  price="7500" type="DRONE_SMALL" subtype="GROUND" >
+      <vehicle han="2/4" acc="30" spdi="50" tspd="200" bod="5" arm="7" pil="4" sen="3" />
+	  <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="regular" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="regular" />
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
+                <!-- </embed> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
+                <!-- </embed> -->
+      </modifications>
+   </item>
+   <item id="messerschmitt_kawasaki_hugin" avail="4"  price="2000" type="DRONE_SMALL" subtype="AIR" >
+      <vehicle han="4" acc="15" spdi="20" tspd="120" bod="3" arm="2" pil="3" sen="3" />
+	  <modifications>
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="realistic_features" > -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
+                <!-- </embed> -->
+      </modifications>
+   </item>
+    <item id="messerschmitt_kawasaki_hugin_echt" avail="4"  price="9500" type="DRONE_SMALL" subtype="AIR" >
+      <vehicle han="4" acc="15" spdi="20" tspd="120" bod="3" arm="2" pil="3" sen="3" />
+	  <modifications>
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="realistic_features" > -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
+                <!-- </embed> -->
+      </modifications>
+   </item>
+   <item id="hoch_tief_geomatik" avail="4"  price="6000" type="DRONE_SMALL" subtype="AIR" >
+      <vehicle han="3" acc="15" spdi="10" tspd="90" bod="3" arm="2" pil="4" sen="3" />
+   </item>
+
+
+    <!-- Medium drones -->
+   <item id="shiawase_kurina_162" avail="2"  price="8500" type="DRONE_MEDIUM" subtype="GROUND" >
+      <vehicle han="3/5" acc="5" spdi="20" tspd="50" bod="6" arm="8" pil="3" sen="3" />
+	  <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="mech_arm_large" /> wait for double clutch -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="kurina_cleaning" />
+      </modifications>
+		<geardef>
+			<item id="kurina_cleaning" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" >
+			<usage mode="EMBEDDED"/>
+			</item>
+		</geardef>
+   </item>
+   <item id="messerschmitt_kawasaki_heuschrecke_2" avail="5"  price="12000" type="DRONE_MEDIUM" subtype="AIR" >
+      <vehicle han="3" acc="30" spdi="40" tspd="180" bod="6" arm="7" pil="4" sen="4" />
+	  <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" />
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> -->
+                <!-- </embed> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="maneuvering"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> -->
+                <!-- </embed> -->
+      </modifications>
+   </item>
+
+   <!-- Large drones -->
+   <item id="mitsuhama_fed_ii" avail="3"  price="32000" type="DRONE_LARGE" subtype="AIR" >
+      <vehicle han="2" acc="5" spdi="10" tspd="60" bod="4" arm="4" pil="2" sen="4" />
+	  <modifications>
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="suncell_power" /> wait for double clutch -->
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="searchlight_normal" /> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> -->
+                <!-- </embed> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="chameleon_coating"> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/> -->
+                <!-- </embed> -->
+      </modifications>
+   </item>
+</items>
