@@ -39,16 +39,16 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator implements PriorityAttributeGenerator {
+public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator implements PriorityAttributeGenerator {
 
-	private final static Logger logger = System.getLogger(PrioritySR6AttributeGenerator.class.getPackageName()+".attrib");
+	private final static Logger logger = System.getLogger(SR6PriorityAttributeGenerator.class.getPackageName()+".attrib");
 
 	private int adjustmentPoints;
 	private int attributePoints;
 	private boolean redistribute;
 
 	//-------------------------------------------------------------------
-	public PrioritySR6AttributeGenerator(SR6CharacterController parent) {
+	public SR6PriorityAttributeGenerator(SR6CharacterController parent) {
 		super(parent);
 		Shadowrun6Character model = parent.getModel();
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
@@ -564,7 +564,7 @@ public class PrioritySR6AttributeGenerator extends CommonAttributeGenerator impl
 	private void updateAttributeValues() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
-			AttributeValue val = parent.getModel().getAttribute(key);
+			AttributeValue<ShadowrunAttribute> val = parent.getModel().getAttribute(key);
 			val.setDistributed(per.getSum() -  val.getModifier());
 		}
 	}
