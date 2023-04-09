@@ -151,6 +151,7 @@ public class Shadowrun6DataPlugin  {
 		if (alreadyInitialized)
 			return;
 		alreadyInitialized = true;
+//		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"));
 
 		try {
 			initCore();

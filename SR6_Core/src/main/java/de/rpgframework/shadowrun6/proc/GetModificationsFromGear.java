@@ -53,7 +53,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 		logger.log(Level.TRACE, "ENTER: process");
 		try {
 			Throwable lastException = null;
-			for (CarriedItem<? extends PieceOfGear> item : model.getCarriedItems()) {
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				try {
 					if (item.isDirty()) {
 						SR6GearTool.recalculate("", model, item);

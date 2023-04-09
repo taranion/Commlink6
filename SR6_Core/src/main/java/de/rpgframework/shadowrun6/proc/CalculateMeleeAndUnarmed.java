@@ -84,6 +84,8 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			unarmed.setAttribute(SR6ItemAttribute.DAMAGE, new Damage(2, DamageType.STUN, DamageElement.REGULAR));
 			unarmed.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
 			logger.log(Level.INFO, "Add natural weapon");
+		} else {
+			unarmed.setResolved(unarmedDef);
 		}
 		SR6GearTool.recalculate("", model, unarmed);
 

@@ -68,7 +68,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				}
 			} catch (Exception e) {
 				logger.log(Level.ERROR, "Error processing "+tmp+" from "+tmp.getSource(),e);
-				System.exit(1);
+				System.err.println("ApplyStockModifications: Error processing "+tmp+" from "+tmp.getSource());
 			}
 		}
 
@@ -90,7 +90,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				}
 			} catch (Exception e) {
 				logger.log(Level.ERROR, "Error processing "+tmp+" from "+tmp.getSource(),e);
-				System.exit(1);
+				System.err.println("ApplyStockModifications: Error processing "+tmp+" from "+tmp.getSource());
 			}
 		}
 

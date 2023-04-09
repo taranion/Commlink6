@@ -1266,7 +1266,7 @@ public class Shadowrun6Tools {
 	 */
 	public static Pool<Integer> getSkillPool(Shadowrun6Character model, SR6Skill skill, ShadowrunAttribute useAttrib, String...special) {
 		SR6SkillValue     sVal = model.getSkillValue(skill);
-		if (sVal!=null) {
+		if (sVal!=null && sVal.getPool()!=null) {
 			Pool<Integer> ret = (Pool<Integer>) sVal.getPool().clone();
 			addSpecialization(ret, sVal, special);
 			return ret;
@@ -1809,7 +1809,9 @@ public class Shadowrun6Tools {
 	public static ItemType getItemType(CarriedItem<ItemTemplate> model) {
 		if (!model.hasAttribute(SR6ItemAttribute.ITEMTYPE)) {
 			logger.log(Level.WARNING, "No ITEMTYPE for "+model.getKey());
-			System.exit(1);
+			System.err.println("Shadowrun6Tools.getItemType(): No ITEMTYPE for "+model.getKey());
+			if ("unarmed".equals(model.getKey()))
+				return ItemType.WEAPON_CLOSE_COMBAT;
 			return null;
 		}
 		return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();

@@ -56,10 +56,10 @@
 		<similar>schwein</similar>
 		</similarNames>
     <modifications>
-			<itemmod type="SKILL" ref="knowledge">
+			<itemmod type="SKILL" ref="knowledge" uuid="5f12a923-a8bc-4b0c-8abd-4d79391b3d89">
 				<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.suitable_skill"/>
 			</itemmod>
-			<itemmod type="SKILL" ref="knowledge">
+			<itemmod type="SKILL" ref="knowledge" uuid="488c6ea5-d38c-4071-9a70-63ed76ce7187">
 				<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.suitable_skill"/>
 			</itemmod>
     </modifications>
