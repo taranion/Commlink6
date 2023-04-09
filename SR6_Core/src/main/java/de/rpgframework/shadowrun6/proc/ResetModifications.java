@@ -65,7 +65,7 @@ public class ResetModifications implements ProcessingStep {
 
 			// Remove all auto-added items
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-				if (item.isAutoAdded()) {
+				if (item.isAutoAdded() || ItemTemplate.UUID_UNARMED.equals(item.getUuid())) {
 					model.removeCarriedItem(item);
 				}
 			}
