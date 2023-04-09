@@ -115,11 +115,9 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				// Remove old price modifications
 			ItemAttributeNumericalValue<SR6ItemAttribute> val = tmp.getAsValue(SR6ItemAttribute.PRICE);
 			for (Modification tmpMod : val.getModifications()) {
-				System.err.println("CommonEquipmentGenerator.clearPriceMods: "+tmpMod);
 				if ((tmpMod instanceof ValueModification) && ItemTemplate.UUID_VOLATILE_PRICEMOD.equals(((ValueModification)tmpMod).getId()))
 					val.removeModification(tmpMod);
 			}
-			//val.clearModifications();
 		}
 	}
 
@@ -197,8 +195,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			}
 
 
-			logger.log(Level.ERROR, "Modifiers "+priceMods);
-
+			logger.log(Level.DEBUG, "Modifiers {0}",priceMods);
 
 			/*
 			 * Walk through all items and pay for them
