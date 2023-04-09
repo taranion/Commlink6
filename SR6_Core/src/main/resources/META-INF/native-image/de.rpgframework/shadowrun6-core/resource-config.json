@@ -91,6 +91,34 @@
       ]
     },
    {
+      "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.de_feuerlaeufer",
+      "locales":[
+        "",
+        "de"
+      ]
+    },
+   {
+      "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.de_revierbericht",
+      "locales":[
+        "",
+        "de"
+      ]
+    },
+   {
+      "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.de_other",
+      "locales":[
+        "",
+        "de"
+      ]
+    },
+   {
+      "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.de_piraten",
+      "locales":[
+        "",
+        "de"
+      ]
+    },
+   {
       "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.lofwyr",
       "locales":[
         "",

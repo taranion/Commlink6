@@ -219,6 +219,7 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Failed calculating character "+model.getName(),e);
+			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Failed calculating character "+model.getName(), e);
 		}
 	}
 
@@ -1189,6 +1190,13 @@ public class Shadowrun6Tools {
 	//--------------------------------------------------------------------
 	public static Pool<Integer> getAttributePoolCalculation(Shadowrun6Character model, ShadowrunAttribute attrib) {
 		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attrib);
+		if (aVal.getPool()==null) {
+			logger.log(Level.ERROR, "No pool for {0} in model", attrib);
+			for (AttributeValue<ShadowrunAttribute> val : model.getAttributes()) {
+				logger.log(Level.ERROR, "  {0} = {1} bzw. {2}", val.getModifyable(), val.getDisplayString(), val.getPool());
+			}
+			System.exit(1);
+		}
 		return aVal.getPool();
 //		Pool<Integer> ret = new Pool<>();
 //		// Add the unmodified attribute
