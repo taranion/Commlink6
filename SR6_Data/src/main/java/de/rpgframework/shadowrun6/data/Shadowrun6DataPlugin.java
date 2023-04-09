@@ -169,7 +169,7 @@ public class Shadowrun6DataPlugin  {
 			//initDPSOTA2081();
 			//initDPSOTA2082();
 			//initDPWestphalen();
-			initHackNSlash();
+			//initHackNSlash();
 			initAstralWays();
 			//initBodyShop);
 		} catch (DataErrorException e) {
