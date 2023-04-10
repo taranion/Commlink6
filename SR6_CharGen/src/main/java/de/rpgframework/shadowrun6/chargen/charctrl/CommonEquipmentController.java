@@ -242,7 +242,6 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		if (carried.get().getAsValue(SR6ItemAttribute.PRICE) != null) {
 			//int nuyen = carried.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			int nuyen = getPerItemPrice(carried.get());
-			System.err.println("Required for "+value.getId()+" are "+nuyen);
 			if (nuyen>getModel().getNuyen()) {
 				// Not enough money. Career and CharGen mode both have options to ignore this
 				if (getModel().isInCareerMode()) {
