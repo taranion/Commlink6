@@ -175,6 +175,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			selection.setController(charGen.getQualityController());
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED || type==BasicControllerEvents.GENERATOR_CHANGED) {
+			selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
 			selection.refresh();
 			refresh();
 		}

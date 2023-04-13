@@ -211,6 +211,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		logger.log(Level.DEBUG, "RCV {0}",type);
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
 			selection.setController(charGen.getEquipmentController());
+			selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED || type==BasicControllerEvents.GENERATOR_CHANGED) {
 			refresh();

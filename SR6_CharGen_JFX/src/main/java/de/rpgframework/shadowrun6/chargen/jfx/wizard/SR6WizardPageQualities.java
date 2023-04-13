@@ -7,6 +7,8 @@ import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageQualities;
@@ -62,6 +64,17 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 		Label lbNumberMax = new Label("/6");
 		line.getChildren().addAll(hdNumber, lbNumber, lbNumberMax);
 		HBox.setMargin(hdNumber, new Insets(0,0,0,10));
+	}
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ControllerListener#handleControllerEvent(de.rpgframework.genericrpg.chargen.ControllerEvent, java.lang.Object[])
+	 */
+	@Override
+	public void handleControllerEvent(ControllerEvent type, Object... param) {
+		super.handleControllerEvent(type, param);
+		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
+			selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
+		}
 	}
 
 	//-------------------------------------------------------------------

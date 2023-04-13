@@ -6,6 +6,8 @@ import org.prelle.javafx.SymbolIcon;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageRituals;
@@ -15,6 +17,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyRitualGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityRitualGenerator;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -53,6 +56,17 @@ public class SR6WizardPageRituals extends WizardPageRituals {
 		HBox.setMargin(box, new Insets(0,0,0,10));
 		HBox.setMargin(backHeader.getChildren().get(2), new Insets(0,10,0,0));
 		super.setBackHeader(backHeader);
+	}
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ControllerListener#handleControllerEvent(de.rpgframework.genericrpg.chargen.ControllerEvent, java.lang.Object[])
+	 */
+	@Override
+	public void handleControllerEvent(ControllerEvent type, Object... param) {
+		super.handleControllerEvent(type, param);
+		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
+			selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
+		}
 	}
 
 	//-------------------------------------------------------------------
