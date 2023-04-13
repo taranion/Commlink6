@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
 import java.lang.System.Logger.Level;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -8,6 +9,8 @@ import org.prelle.javafx.SymbolIcon;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
@@ -72,6 +75,20 @@ public class SR6WizardPageAdeptPowers extends WizardPageAdeptPowers {
 		HBox.setMargin(backHeader.getChildren().get(2), new Insets(0,10,0,0));
 		super.setBackHeader(backHeader);
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ControllerListener#handleControllerEvent(de.rpgframework.genericrpg.chargen.ControllerEvent, java.lang.Object[])
+	 */
+	@Override
+	public void handleControllerEvent(ControllerEvent type, Object... param) {
+		super.handleControllerEvent(type, param);
+		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
+			logger.log(Level.INFO, "RCV " + type + " with " + Arrays.toString(param));
+			selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getAdeptPowerController()));
+		}
+	}
+
 	//-------------------------------------------------------------------
 	protected void refresh() {
 		super.refresh();

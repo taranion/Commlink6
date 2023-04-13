@@ -327,7 +327,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	public List<Modification> process(List<Modification> previous) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
 		List<Modification> unprocessed = new ArrayList<>(previous);
-
+		logger.log(Level.INFO, "Running {0} from {1}", getClass(), parent);
 		try {
 			todos.clear();
 			allocatePP();
