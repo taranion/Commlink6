@@ -227,7 +227,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 					int pay = i*5;
 					karmaNeeded += pay;
 				}
-				logger.log(Level.INFO, "  Pay {0} Karma for {1} {2}", karmaNeeded, key, upTo);
+				logger.log(Level.DEBUG, "  Pay {0} Karma for {1} {2}", karmaNeeded, key, upTo);
 				if (karmaNeeded > 0) {
 					model.setKarmaFree(model.getKarmaFree() - karmaNeeded);
 					model.setKarmaInvested(model.getKarmaInvested() + karmaNeeded);

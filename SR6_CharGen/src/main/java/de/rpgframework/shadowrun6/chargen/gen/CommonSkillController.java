@@ -197,8 +197,8 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 			if (sVal!=null)
 				ret.add(sVal);
 		}
-		logger.log(Level.INFO, "getAll() returns {0}",ret);
-		logger.log(Level.INFO, "allowed are {0}",allowed);
+//		logger.log(Level.DEBUG, "getAll() returns {0}",ret);
+//		logger.log(Level.DEBUG, "allowed are {0}",allowed);
 		return ret;
 	}
 
