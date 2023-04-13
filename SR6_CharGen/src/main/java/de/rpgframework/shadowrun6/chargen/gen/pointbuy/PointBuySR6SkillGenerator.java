@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,8 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements NumericalValueWith2PoolsController<SR6Skill,SR6SkillValue> {
+
+	private final static Logger logger = System.getLogger(PointBuySR6SkillGenerator.class.getPackageName()+".skill");
 
 	private int skillsFromCP;
 
@@ -186,6 +189,7 @@ public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements N
 			Shadowrun6Character model = parent.getModel();
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
+			logger.log(Level.WARNING, "Previous = "+previous);
 
 			// Reset values
 			maxLimit = 1;

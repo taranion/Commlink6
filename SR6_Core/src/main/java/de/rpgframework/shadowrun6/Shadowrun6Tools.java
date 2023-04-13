@@ -213,7 +213,7 @@ public class Shadowrun6Tools {
 			List<Modification> unprocessed = new ArrayList<>();
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
-				logger.log(Level.WARNING, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
+				logger.log(Level.DEBUG, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
@@ -1040,12 +1040,12 @@ public class Shadowrun6Tools {
 			ValueModification clone = ((ValueModification)tmp).clone();
 			int modVal = 0;
 			if (clone.hasFormula()) {
-				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
-				logger.log(Level.WARNING, "  model =  "+model);
-				logger.log(Level.WARNING, "  data item =  "+value.getKey());
-				logger.log(Level.WARNING, "  data item value =  "+value);
+//				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
+//				logger.log(Level.WARNING, "  model =  "+model);
+//				logger.log(Level.WARNING, "  data item =  "+value.getKey());
+//				logger.log(Level.WARNING, "  data item value =  "+value);
 				String resolved = FormulaTool.resolve(clone.getReferenceType(), clone.getFormula(), new VariableResolver(value, model));
-				logger.log(Level.WARNING, "  resolved  "+resolved);
+				logger.log(Level.WARNING, "  {0} resolved as {1}", clone.getFormula(),resolved);
 				modVal = Integer.parseInt(resolved);
 			} else {
 				if (clone.getLookupTable()!=null) {
