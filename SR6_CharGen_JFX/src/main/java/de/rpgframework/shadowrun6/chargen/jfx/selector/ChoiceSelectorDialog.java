@@ -291,7 +291,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 
 			for (Choice choice : choices) {
-				logger.log(Level.WARNING, "Found choice {0}", choice);
+				logger.log(Level.WARNING, "Found choice {0} and controller {1}", choice, ctrl);
 				String forceTitle = null;
 				if (choice.getUUID().equals(ItemTemplate.UUID_RATING)) forceTitle=ResourceI18N.get(RES, "label.rating");
 				if (choice.getUUID().equals(ItemTemplate.UUID_CHEMICAL_CHOICE)) forceTitle=ResourceI18N.get(RES, "label.chemical");
