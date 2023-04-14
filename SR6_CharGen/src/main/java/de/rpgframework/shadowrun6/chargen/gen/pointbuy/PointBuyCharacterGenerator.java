@@ -231,7 +231,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		attributes = new SR6PointBuyAttributeGenerator(this);
 		meta       = new PointBuyMetatypeController(this);
 		magicReso = new PointBuyMagicOrResonanceController(this);
-		skills = new PointBuySR6SkillGenerator(this);
+		skills = new SR6PointBuySkillGenerator(this);
 		qualities = new CommonQualityGenerator(this);
 		cpToNuyenStep = new RemainingCPAreNuyenStep(this);
 		equipment = new SR6EquipmentGenerator(this);

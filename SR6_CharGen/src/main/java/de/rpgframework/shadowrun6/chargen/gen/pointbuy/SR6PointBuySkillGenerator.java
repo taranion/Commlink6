@@ -35,14 +35,14 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class PointBuySR6SkillGenerator extends CommonSkillGenerator implements NumericalValueWith2PoolsController<SR6Skill,SR6SkillValue> {
+public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements NumericalValueWith2PoolsController<SR6Skill,SR6SkillValue> {
 
-	private final static Logger logger = System.getLogger(PointBuySR6SkillGenerator.class.getPackageName()+".skill");
+	private final static Logger logger = System.getLogger(SR6PointBuySkillGenerator.class.getPackageName()+".skill");
 
 	private int skillsFromCP;
 
 	//-------------------------------------------------------------------
-	public PointBuySR6SkillGenerator(SR6CharacterGenerator parent) {
+	public SR6PointBuySkillGenerator(SR6CharacterGenerator parent) {
 		super(parent);
 	}
 

@@ -28,7 +28,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuySR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6SkillTablePrioSkin;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
@@ -164,16 +165,17 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 			HBox line = new HBox(5, tsExpertMode, hdPoints1, lbPoints, hdPoints2, lbPoints2);
 			HBox.setMargin(hdPoints2, new Insets(0,0,0,10));
 			return line;
-		} else if (skillCtrl instanceof PointBuySR6SkillGenerator) {
+		} else if (skillCtrl instanceof SR6PointBuySkillGenerator) {
 //			tsExpertMode = new ToggleSwitch("Expert");
 //			tsExpertMode.visibleProperty().bind(table.expertModeAvailableProperty());
 
-			Label hdPoints1 = new Label(((PointBuySR6SkillGenerator)skillCtrl).getColumn1()+":");
+			Label hdPoints1 = new Label(((SR6PointBuySkillGenerator)skillCtrl).getColumn1()+":");
 			Label hdPoints2 = new Label(ResourceI18N.get(RES, "page.skills.head.pointbuy_converted")+":");
 
 			HBox line = new HBox(5, tsExpertMode, hdPoints1, lbPoints, hdPoints2, lbPoints2);
 			HBox.setMargin(hdPoints2, new Insets(0,0,0,10));
 			return line;
+		} else if (skillCtrl instanceof SR6KarmaSkillGenerator) {
 		} else {
 			System.err.println("SR6WizardPageSkills: No generator line for "+skillCtrl);
 		}
@@ -275,6 +277,7 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 
 	//-------------------------------------------------------------------
 	protected void refresh() {
+		logger.log(Level.WARNING, "refresh() - current table controller is "+table.getController()+" - it should be "+charGen.getSkillController());
 		super.refresh();
 		ISkillController<SR6Skill, SR6SkillValue> skillCtrl = charGen.getSkillController();
 		if (skillCtrl instanceof SR6PrioritySkillGenerator) {
@@ -285,9 +288,9 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 
 			}
 		} else
-		if (skillCtrl instanceof PointBuySR6SkillGenerator) {
-			lbPoints .setText( String.valueOf( ((PointBuySR6SkillGenerator)skillCtrl).getPointsLeft()));
-			lbPoints2.setText( String.valueOf( ((PointBuySR6SkillGenerator)skillCtrl).getConvertiblePoints() ));
+		if (skillCtrl instanceof SR6PointBuySkillGenerator) {
+			lbPoints .setText( String.valueOf( ((SR6PointBuySkillGenerator)skillCtrl).getPointsLeft()));
+			lbPoints2.setText( String.valueOf( ((SR6PointBuySkillGenerator)skillCtrl).getConvertiblePoints() ));
 			backHeaderCP.setValue( ((ISR6PointBuyGenerator)charGen).getSettings().characterPoints );
 			backHeaderCP.setVisible(true);
 		} else {
