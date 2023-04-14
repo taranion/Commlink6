@@ -32,24 +32,24 @@
    <quality id="natural_venom" karma="9" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" >
      <choices>
        <choice type="SUBSELECT" ref="vector" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5" count="4">
-         <subOption id="contact" cost="3"/>
-         <subOption id="exhaled" cost="3"/>
-         <subOption id="injected" cost="1"/>
-         <subOption id="spat" cost="5"/>
+         <subOption id="contact" cost="2"/>
+         <subOption id="exhaled" cost="2"/>
+         <subOption id="injected" cost="0"/>
+         <subOption id="spat" cost="4"/>
        </choice>
        <choice type="SUBSELECT" ref="speed" uuid="f9dd21db-30a6-422a-81dc-3c547ec9ccd3" >
-         <subOption id="turn" cost="3"/>
-         <subOption id="immediate" cost="5"/>
+         <subOption id="turn" cost="0"/>
+         <subOption id="immediate" cost="2"/>
        </choice>
        <choice type="SUBSELECT" ref="power" uuid="86b773bc-5c9d-4c7d-baec-75b0a651000d" >
-         <subOption id="2" cost="2"/>
-         <subOption id="4" cost="4"/>
-         <subOption id="6" cost="6"/>
-         <subOption id="8" cost="8"/>
+         <subOption id="2" cost="0"/>
+         <subOption id="4" cost="2"/>
+         <subOption id="6" cost="4"/>
+         <subOption id="8" cost="6"/>
        </choice>
        <choice type="SUBSELECT" ref="effect" uuid="e52e835f-00ff-49f1-a124-31124b42c5a3" >
-         <subOption id="stun"     cost="3"/>
-         <subOption id="physical" cost="5"/>
+         <subOption id="stun"     cost="0"/>
+         <subOption id="physical" cost="2"/>
        </choice>
      </choices>
      <modifications>
