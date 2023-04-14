@@ -96,7 +96,7 @@
        <checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER"/>
      </modifications>
    </quality>
-   <quality id="human-looking" 		  karma="6" pos="true" type="NORMAL">
+   <quality id="human-looking" 		  karma="8" pos="true" type="NORMAL">
      <requires>
        <selreq type="METATYPE" apply="CHARACTER">
          <datareq type="METATYPE" ref="elf" apply="CHARACTER"/>
