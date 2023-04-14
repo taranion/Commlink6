@@ -447,7 +447,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			ret.add( handleCARRIED(item, choice));
 			break;
 		case ELEMENT:
-			ret.add( handleGeneric(ShadowrunElement.class, choice));
+			ret.add( handleGeneric(ShadowrunElement.class, choice, item));
 			break;
 		case GEAR:
 			ret.add( handleGEAR(item, choice));
@@ -786,12 +786,18 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
-	private <T extends HasName> Node handleGeneric(Class<T> item, Choice choice) {
+	private <T extends HasName> Node handleGeneric(Class<T> item, Choice choice, ComplexDataItem parent) {
 		ChoiceBox<T> choicebox = new ChoiceBox<>();
 		choicebox.setConverter(new StringConverter<T>() {
 			public T fromString(String value) { return null;}
 			public String toString(T value) {
 				if (value==null) return "-";
+				// If there is a per choice translation, use it instead of the common translation
+				ChoiceOption opt = new ChoiceOption();
+				opt.setId(value.getId());
+				String key = parent.getChoiceOptionString(choice, value, Locale.getDefault());
+				if (!key.contains("choice"))
+					return key;
 				return value.getName(Locale.getDefault());
 			}
 		});
