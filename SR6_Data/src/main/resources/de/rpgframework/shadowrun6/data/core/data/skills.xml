@@ -108,6 +108,7 @@
         <skillspec id="desert"/>
         <skillspec id="urban"/>
         <skillspec id="other"/>
+        <skillspec id="animal_handling"/>
     </skill>
     <skill id="perception"  attr="INTUITION" type="PHYSICAL" untr="y">
         <skillspec id="visual"/>
