@@ -43,6 +43,7 @@ import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.IReferenceResolver;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
@@ -472,6 +473,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		case SKILL:
 			ret.add( handleSKILL(item, choice) );
 			break;
+		case SKILLSPECIALIZATION:
+			ret.add( handleSKILLSPECIALIZATION(item, choice) );
+			break;
 		case SPELL_CATEGORY:
 			ret.add( handleSPELL_CATEGORY(item, choice) );
 			break;
@@ -532,6 +536,48 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		}
 		Collections.sort(cbSub.getItems(), new Comparator<SR6Skill>() {
 			public int compare(SR6Skill o1, SR6Skill o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+			updateButtons();
+			showHelpFor(n); });
+		content.getChildren().add(cbSub);
+		return cbSub;
+	}
+	//-------------------------------------------------------------------
+	private Node handleSKILLSPECIALIZATION(ComplexDataItem item, Choice choice) {
+		ChoiceBox<SkillSpecialization<SR6Skill>> cbSub = new ChoiceBox<>();
+		cbSub.setConverter(new StringConverter<SkillSpecialization<SR6Skill>>() {
+			public SkillSpecialization<SR6Skill> fromString(String value) { return null;}
+			public String toString(SkillSpecialization<SR6Skill> value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			for (String fullID: ids) {
+				String[] split = fullID.split("/");
+				SR6Skill skill = Shadowrun6Core.getSkill(split[0]);
+				if (skill==null) {
+					logger.log(Level.ERROR, "Item {0} references unknown skill {1}", item.getTypeString(), skill.getId());
+				} else {
+					SkillSpecialization<SR6Skill> spec = skill.getSpecialization(split[1]);
+					if (spec!=null) {
+						cbSub.getItems().add(spec);
+					} else {
+						logger.log(Level.ERROR, "Item {0} references unknown specialization {1} in skill {2}", item.getTypeString(), split[1],skill.getId());
+					}
+				}
+			}
+//		} else {
+//			cbSub.getItems().addAll(Shadowrun6Core.getItemList(SR6Skill.class));
+		}
+		Collections.sort(cbSub.getItems(), new Comparator<SkillSpecialization<SR6Skill>>() {
+			public int compare(SkillSpecialization<SR6Skill> o1, SkillSpecialization<SR6Skill> o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}});
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
