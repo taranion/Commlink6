@@ -143,13 +143,13 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
 		if (ctrl instanceof ISR6EquipmentController) {
-			logger.log(Level.INFO, "Use special info pane for CarriedItem");
+			logger.log(Level.DEBUG, "Use special info pane for CarriedItem");
 			bxDesc = new CarriedItemDescriptionPane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), (SR6CharacterController)charCtrl );
 		} else if (ctrl instanceof IFocusController) {
-			logger.log(Level.INFO, "Use special info pane for FocusValue");
+			logger.log(Level.DEBUG, "Use special info pane for FocusValue");
 			bxDesc = new FocusValueDescriptionPane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), (SR6CharacterController)charCtrl );
 		} else {
-			logger.log(Level.INFO, "Use generic description pane");
+			logger.log(Level.DEBUG, "Use generic description pane");
 			bxDesc = new GenericDescriptionVBox(
 					Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 					Shadowrun6Tools.modificationResolver(Locale.getDefault()));
