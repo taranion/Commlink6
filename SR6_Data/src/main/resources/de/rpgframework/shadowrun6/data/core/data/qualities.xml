@@ -240,6 +240,14 @@
        <valmod type="ATTRIBUTE" ref="CHOICE" choice="7f3a7e00-93b4-4012-883f-c737ca18c1df" value="-1" set="MAX" />
      </modifications>
    </quality>
+   <quality id="impaired" lang="de"    karma="8" pos="false" type="NORMAL">
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="7f3a7e00-93b4-4012-883f-c737ca18c1df"/>
+   	</choices>
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="CHOICE" choice="7f3a7e00-93b4-4012-883f-c737ca18c1df" value="-2" set="MAX" />
+     </modifications>
+   </quality>
    <quality id="incompetent"  	  	  karma="10" pos="false" type="NORMAL">
    	<choices>
    		<choice type="SKILL" uuid="d0b872d0-0783-4b7a-b38a-35db1cef3685"/>
