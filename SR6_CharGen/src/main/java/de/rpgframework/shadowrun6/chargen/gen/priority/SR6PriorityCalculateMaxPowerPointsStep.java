@@ -47,6 +47,7 @@ public class SR6PriorityCalculateMaxPowerPointsStep implements ProcessingStep {
 		boolean autoPPKarma =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP);
 		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 		PerAttributePoints mag = settings.perAttrib.get(ShadowrunAttribute.MAGIC);
+		logger.log(Level.WARNING, "MAGIC "+mag);
 
 		// Regular adepts get free power points matching their magic attribute
 		if (!model.getMagicOrResonanceType().paysPowers()) {
