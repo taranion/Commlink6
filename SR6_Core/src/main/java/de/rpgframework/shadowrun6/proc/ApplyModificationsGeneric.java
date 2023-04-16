@@ -196,10 +196,10 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 	// -------------------------------------------------------------------
 	private static boolean applySkill(Shadowrun6Character model, ValueModification mod) {
 		SR6Skill item = mod.getReferenceType().resolve(mod.getKey());
-		SR6SkillValue value = model.getSkillValue(item);
 		if (item == null) {
-			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such skill {0}", mod.getKey());
+			logger.log(Level.ERROR, "Cannot apply modification " + mod + " from {1} - no such skill {0}", mod.getKey(),mod.getSource());
 		}
+		SR6SkillValue value = model.getSkillValue(item);
 		if (value == null) {
 			logger.log(Level.ERROR, "applySkill for skill unset: "+mod.getKey());
 			return false;

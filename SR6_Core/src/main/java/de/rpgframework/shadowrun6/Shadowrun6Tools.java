@@ -47,6 +47,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
@@ -1047,6 +1048,7 @@ public class Shadowrun6Tools {
 				String resolved = FormulaTool.resolve(clone.getReferenceType(), clone.getFormula(), new VariableResolver(value, model));
 				logger.log(Level.WARNING, "  {0} resolved as {1}", clone.getFormula(),resolved);
 				modVal = Integer.parseInt(resolved);
+				clone.setValue(modVal);
 			} else {
 				if (clone.getLookupTable()!=null) {
 					modVal = clone.getValue();
@@ -1074,6 +1076,40 @@ public class Shadowrun6Tools {
 				} else {
 					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value);
 					System.err.println("Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value);
+				}
+			} else if ("ITEM".equals( clone.getKey() )) {
+				// Get the connected item UUID
+				String source = String.valueOf(value.getModifyable());
+				Choice carriedChoice = value.getModifyable().getChoice(ShadowrunReference.CARRIED);
+				if (carriedChoice==null) {
+					logger.log(Level.ERROR, "Trying to instantiate a ref=ITEM modification, but the {0} has no CARRIED choice",source);
+				} else {
+					Decision dec = value.getDecision(carriedChoice.getUUID());
+					if (dec==null) {
+						logger.log(Level.ERROR, "Trying to instantiate a ref=ITEM modification, but the decision for {0} is missing in {1}",carriedChoice.getUUID(), value);
+					} else {
+						UUID connectedItemUUID = UUID.fromString(dec.getValue());
+						CarriedItem<ItemTemplate> item = model.getCarriedItem(connectedItemUUID);
+						// No act depending on what is needed from referenced item
+						switch ((ShadowrunReference)tmp.getReferenceType()) {
+						case SKILL:
+							ItemAttributeObjectValue<SR6ItemAttribute> attrObj = item.getAsObject(SR6ItemAttribute.SKILL);
+							if (attrObj==null) {
+								logger.log(Level.ERROR, "No SKILL item attribute in carried item {0}", item);
+							} else {
+								SR6Skill skill = attrObj.getModifiedValue();
+								logger.log(Level.INFO, "Set skill {0} in instantiated {1}", skill.getId(), tmp);
+								clone.setKey(skill.getId());
+								logger.log(Level.INFO, "Add modification {0} to {1}", clone, item);
+								item.addModification(clone);
+								return null;
+							}
+							break;
+						default:
+							logger.log(Level.ERROR, "ToDo: Implement fetching {0} from CarriedItem",tmp.getReferenceType());
+							System.err.println("ToDo: Implement fetching "+tmp.getReferenceType()+" from CarriedItem");
+						}
+					}
 				}
 			}
 			if ("$LEVEL".equals(clone.getRawValue())) {
