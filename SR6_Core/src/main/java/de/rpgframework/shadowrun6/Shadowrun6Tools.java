@@ -262,6 +262,7 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static String getModificationString(Modification mod, Locale loc) {
 		String ret = getModificationStringWithoutCond(mod, loc);
+		if (ret==null) return null;
 		if (mod.isConditional()) {
 			return ret+" ("+RES.getString("modification.conditional", loc)+")";
 		}
@@ -298,7 +299,7 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	private static String getModificationStringWithoutCond(Modification mod, Locale loc) {
-		logger.log(Level.ERROR, "explain "+mod);
+		logger.log(Level.TRACE, "explain {0}",mod);
 		try {
 			ShadowrunReference type = (ShadowrunReference) mod.getReferenceType();
 			if (mod instanceof CheckModification) {
@@ -367,8 +368,8 @@ public class Shadowrun6Tools {
 					}
 					return prefix+skillName;
 				default:
-					logger.log(Level.ERROR, "Don't know how to display "+mod);
-					return prefix+"Unknown value type "+type;
+					logger.log(Level.WARNING, "Don't know how to display "+mod);
+					return null;
 				}
 			}
 
@@ -432,8 +433,8 @@ public class Shadowrun6Tools {
 						return skillName+" "+valMod.getValue();
 					}
 				default:
-					logger.log(Level.ERROR, "Don't know how to display "+mod);
-					return "Unknown value type "+type;
+					logger.log(Level.WARNING, "Don't know how to display "+mod);
+					return null;
 				}
 			}
 
@@ -454,8 +455,8 @@ public class Shadowrun6Tools {
 							return RES.format("modification.allow.skill_choice", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
 					}
 				default:
-					logger.log(Level.ERROR, "Don't know how to display "+mod);
-					return "Unknown value type "+type;
+					logger.log(Level.WARNING, "Don't know how to display "+mod);
+					return null;
 				}
 			}
 
@@ -472,8 +473,8 @@ public class Shadowrun6Tools {
 				case GEAR:
 					return ((ItemTemplate)valMod.getResolvedKey()).getName(loc);
 				default:
-					logger.log(Level.ERROR, "Don't know how to display "+mod);
-					return "Unknown value type "+type;
+					logger.log(Level.WARNING, "Don't know how to display "+mod);
+					return null;
 				}
 			}
 
