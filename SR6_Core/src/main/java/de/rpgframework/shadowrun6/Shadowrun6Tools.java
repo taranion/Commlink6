@@ -32,6 +32,7 @@ import de.rpgframework.genericrpg.Reward;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.CheckInfluence;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
@@ -1101,7 +1102,7 @@ public class Shadowrun6Tools {
 								logger.log(Level.INFO, "Set skill {0} in instantiated {1}", skill.getId(), tmp);
 								clone.setKey(skill.getId());
 								logger.log(Level.INFO, "Add modification {0} to {1}", clone, item);
-								item.addModification(clone);
+								item.addCharacterModification(clone);
 								return null;
 							}
 							break;
@@ -1644,30 +1645,37 @@ public class Shadowrun6Tools {
 		/*
 		 * Add eventually existing focus
 		 */
-		logger.log(Level.WARNING, "ToDo: Check for weapon focus or item attunement");
+		logger.log(Level.WARNING, "ToDo: Check for weapon focus");
 //		if (item.getUsedFocus()!=null) {
 //			FocusValue focus = item.getUsedFocus();
 //			if (focus.getModifyable().getChoice()==ChoiceType.MELEE_WEAPON) {
 //				ret.add( new PoolCalculation(focus.getLevel(), focus.getName()));
 //			}
 //		}
-//
-//		/*
-//		 * Add eventually existing item attunement
-//		 */
-//		if (item.getItemAttunement()!=null) {
-//			MetamagicOrEchoValue meta = item.getItemAttunement();
-////			if (focus.getChoice()==item) {
-//				ret.add( new PoolCalculation(model.getInitiateSubmersionLevel(), meta.getName()));
-////			}
-//		}
+
+		/*
+		 * Add eventually existing item attunement
+		 */
+		System.err.println("Modification of "+item+" are "+item.getCharacterModifications());
+		for (Modification mod : item.getCharacterModifications()) {
+			if (mod instanceof CheckModification) {
+				CheckModification cMod = (CheckModification)mod;
+				if (cMod.getWhat()==ShadowrunCheckInfluence.DICE) {
+					String name = ((DataItem)cMod.getSource()).getName();
+					pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(cMod.getValue(),name, true));
+				} else {
+					pool.addCheckModification(cMod);
+				}
+			}
+		}
+		logger.log(Level.WARNING, "Pool of {0} is {1}", item.getNameWithoutRating(), pool.toString());
 
 		return pool;
 	}
 
 	//--------------------------------------------------------------------
-	public static int getWeaponPool(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
-		return (int)getWeaponPoolCalculation(model, item).getNatural();
+	public static Pool<Integer> getWeaponPool(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
+		return getWeaponPoolCalculation(model, item);
 	}
 
 	//--------------------------------------------------------------------
