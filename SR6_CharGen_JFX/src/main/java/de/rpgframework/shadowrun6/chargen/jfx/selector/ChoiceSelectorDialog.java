@@ -140,6 +140,13 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		this.ctrl = ctrl;
 		this.carry = carry;
 		this.context = context;
+		System.err.println("ChoiceSelectorDialog<init<(carry="+carry+", context="+context+")");
+		try {
+			throw new RuntimeException("Trace");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
@@ -215,6 +222,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			if (result.get()!=null) {
 				logger.log(Level.WARNING, "with item");
 				CarriedItem<ItemTemplate> carried = result.get();
+				if (carried.getCarryMode()==CarryMode.EMBEDDED && context instanceof CarriedItem<?>) {
+					carried.setParent( (CarriedItem<ItemTemplate>)context );
+				}
 				logger.log(Level.WARNING, "item has mode "+carried.getCarryMode());
 				@SuppressWarnings("rawtypes")
 				CharacterController c1 = ctrl.getCharacterController();
