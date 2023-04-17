@@ -618,6 +618,9 @@ public class Shadowrun6Tools {
 				if (gear==null)
 					return "Unknown "+tmp.getKey();
 				return prefix+gear.getName(loc);
+			case ITEMTYPE:
+				ItemType type = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				return prefix+type.getName();
 			case ITEMSUBTYPE:
 				ItemSubType subtype = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
 				return prefix+subtype.getName();
