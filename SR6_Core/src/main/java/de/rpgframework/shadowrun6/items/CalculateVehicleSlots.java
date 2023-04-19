@@ -40,6 +40,10 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		if (model.getAsObject(SR6ItemAttribute.VEHICLE_MODSLOTS)!=null) {
 			int[] base = model.getAsObject(SR6ItemAttribute.VEHICLE_MODSLOTS).getValue();
 			int[] changes = model.getModificationSlotChanges();
+			if (changes==null) {
+				changes=new int[] {0,0,0};
+				model.setModificationSlotChanges(changes);
+			}
 
 			ItemAttributeNumericalValue<SR6ItemAttribute> chassis = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.MODSLOTS_CHASSIS, base[0]);
 			ItemAttributeNumericalValue<SR6ItemAttribute> electro = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.MODSLOTS_ELECTRONICS, base[1]);
@@ -53,8 +57,29 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			model.setAttribute(SR6ItemAttribute.MODSLOTS_ELECTRONICS, electro);
 			model.setAttribute(SR6ItemAttribute.MODSLOTS_POWERTRAIN, powertr);
 			logger.log(Level.DEBUG, "Chassis: {0}   Electro: {1}   Powertr: {2}", chassis, electro, powertr);
+
+			// Now create slots
+			ensureSlotSize(model, ItemHook.VEHICLE_CHASSIS, chassis.getModifiedValue());
+			ensureSlotSize(model, ItemHook.VEHICLE_ELECTRONICS, electro.getModifiedValue());
+			ensureSlotSize(model, ItemHook.VEHICLE_POWERTRAIN, powertr.getModifiedValue());
 		}
 		return new OperationResult<List<Modification>>(unprocessed);
+	}
+
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	private void ensureSlotSize(CarriedItem<?> model, ItemHook hook, int size) {
+		logger.log(Level.WARNING, "Ensure slot {0} has capacity {1}", hook, size);
+		AvailableSlot slot = ((CarriedItem<ItemTemplate>)model).getSlot(hook);
+		if (slot==null) {
+			if (size==0) return;
+			slot = new AvailableSlot(hook, size);
+			model.addSlot(slot);
+		} else {
+			if (size==0) model.removeSlot(hook);
+			else
+				slot.setCapacity(size);
+		}
 	}
 
 	//-------------------------------------------------------------------
