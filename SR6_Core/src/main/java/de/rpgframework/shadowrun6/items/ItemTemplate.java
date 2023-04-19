@@ -445,13 +445,17 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 					}
 				}
 			}
+
+			int[] modSlots = new int[] {body,body,pt_slots};
+			setAttribute(SR6ItemAttribute.VEHICLE_MODSLOTS, modSlots);
+//			modifications.add(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.VEHICLE_MODSLOTS.name(), String.format("%d,%d,%d", body,body,pt_slots)));
 			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_ACCESSORY.name(), 99));
-			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_CHASSIS.name(), body));
+//			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_CHASSIS.name(), body));
 			if (cf>0)
-			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_CF.name(), cf));
-			if (pt_slots>0)
-			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_POWERTRAIN.name(), pt_slots));
-			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_ELECTRONICS.name(), body));
+				modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_CF.name(), cf));
+//			if (pt_slots>0)
+//			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_POWERTRAIN.name(), pt_slots));
+//			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_ELECTRONICS.name(), body));
 			break;
 		}
 	}

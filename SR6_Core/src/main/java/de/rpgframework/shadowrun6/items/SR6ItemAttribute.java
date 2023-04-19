@@ -69,6 +69,9 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	MAX_SENSOR_RATING,
 	MAX_SKILLSOFT_RATING,
 	MODIFICATION_SLOTS,
+	MODSLOTS_CHASSIS,
+	MODSLOTS_ELECTRONICS,
+	MODSLOTS_POWERTRAIN,
 	// Vehicle Pilot
 	PILOT,
 	PRICE,
@@ -89,6 +92,8 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	SPEED_INTERVAL,
 	TOPSPEED,
 	VEHICLE_TYPE,
+	// Unmodified modification slots. 3 element array CHASSIS, ELECTRONICS, POWERTRAIN
+	VEHICLE_MODSLOTS,
 
 	ATTACK,
 	SLEAZE,
