@@ -463,6 +463,13 @@ public class Shadowrun6Tools {
 			//
 			if (mod instanceof DataItemModification) {
 				DataItemModification valMod = (DataItemModification)mod;
+				if (valMod.getResolvedKey()==null) {
+					if ("CHOICE".equals(valMod.getKey())) {
+						return RES.getString("modification.choice."+type.name().toLowerCase(), loc);
+					} else {
+						logger.log(Level.ERROR, "No resolution for key ''{0}'' in modification {1}", valMod.getKey(), mod);
+					}
+				}
 				switch (type) {
 				case CRITTER_POWER:
 					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc));
