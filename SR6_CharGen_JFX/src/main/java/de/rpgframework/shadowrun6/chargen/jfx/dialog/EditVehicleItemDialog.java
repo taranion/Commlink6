@@ -2,8 +2,6 @@ package de.rpgframework.shadowrun6.chargen.jfx.dialog;
 
 import java.lang.System.Logger.Level;
 
-import org.prelle.javafx.ScreenManagerProvider;
-
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.ModSlotConfigPane;
