@@ -55,13 +55,13 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 
 //	private static PropertyResourceBundle UI = (PropertyResourceBundle) ResourceBundle.getBundle(EditCarriedItemDialog.class.getName());
 
-	private final static Logger logger = System.getLogger(EditCarriedItemDialog.class.getPackageName());
+	protected final static Logger logger = System.getLogger(EditCarriedItemDialog.class.getPackageName());
 
-	private SR6CharacterController control;
+	protected SR6CharacterController control;
 
 	//--------------------------------------------------------------------
-	public EditCarriedItemDialog(SR6CharacterController ctrl, CarriedItem<ItemTemplate> data, ScreenManagerProvider prov) {
-		super(ctrl, data, prov);
+	public EditCarriedItemDialog(SR6CharacterController ctrl, CarriedItem<ItemTemplate> data) {
+		super(ctrl, data);
 		this.control = ctrl;
 	}
 
@@ -290,7 +290,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 					refresh();
 				} else {
 					logger.log(Level.WARNING, "Failed: " + result.getError());
-					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, result.getError());
 				}
 			}
 		}

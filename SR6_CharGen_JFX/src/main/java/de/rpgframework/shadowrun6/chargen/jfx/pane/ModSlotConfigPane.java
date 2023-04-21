@@ -132,9 +132,18 @@ public class ModSlotConfigPane extends Control {
     	chassis.set(attChassis.getModifiedValue());
     	electronics.set(attElectro.getModifiedValue());
     	power.set(attPowertr.getModifiedValue());
+    	// States
     	if (attChassis.getModifier()<0) chassisState.set(State.MINUS);
     	else if (attChassis.getModifier()>0) chassisState.set(State.PLUS);
     	else chassisState.set(State.NEUTRAL);
+
+    	if (attElectro.getModifier()<0) electroState.set(State.MINUS);
+    	else if (attElectro.getModifier()>0) electroState.set(State.PLUS);
+    	else electroState.set(State.NEUTRAL);
+
+    	if (attPowertr.getModifier()<0) powertrState.set(State.MINUS);
+    	else if (attPowertr.getModifier()>0) powertrState.set(State.PLUS);
+    	else powertrState.set(State.NEUTRAL);
 
     	logger.log(Level.DEBUG,"Chassis {0}",config.get().getAsValue(SR6ItemAttribute.MODSLOTS_CHASSIS));
 

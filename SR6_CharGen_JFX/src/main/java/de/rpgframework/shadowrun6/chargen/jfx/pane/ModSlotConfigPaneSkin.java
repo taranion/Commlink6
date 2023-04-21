@@ -30,11 +30,11 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 	private final static String STATE_PLUS = "state-plus";
 	private final static String STATE_MINUS = "state-minus";
 
-	private final static double PADDING = 25;
-	private final static double RADIUS = 100;
+	private final static double PADDING = 15;
+	private final static double RADIUS = 90;
 
-	private final static Color IDLE = Color.color(0.6, .8, .7, 0.5);
-	private final static Color HOVER = Color.color(0.6, .8, .7, 1);
+	private final static Color IDLE = Color.color(1.0f, 0.7529412f, 0.79607844f, 0.5);//Color.color(0.6, .8, .7, 0.5);
+	private final static Color HOVER = Color.DEEPPINK;
 
 	private Arc[] arcs;
 	private Pane group;
@@ -64,7 +64,7 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 			arcs[i].setLength(44);
 			arcs[i].setType(ArcType.OPEN);
 			arcs[i].setFill(Color.LAVENDER);
-			arcs[i].setStroke(Color.BLACK);
+			arcs[i].setStroke(Color.WHEAT);
 			arcs[i].setStrokeWidth(2);
 			arcs[i].setFill(Color.TRANSPARENT);
 			group.getChildren().add(arcs[i]);
@@ -76,11 +76,11 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 		group.getChildren().add(lbChassisVal);
 		lbElectronicsVal = new Label("02");
 		lbElectronicsVal.setStyle("-fx-font-weight: bold;");
-		lbElectronicsVal.relocate(RADIUS+PADDING +RADIUS*0.78, RADIUS+PADDING +RADIUS*0.38);
+		lbElectronicsVal.relocate(RADIUS+PADDING +RADIUS*0.78, RADIUS+PADDING +RADIUS*0.41);
 		group.getChildren().add(lbElectronicsVal);
 		lbPowerTrainVal = new Label("03");
 		lbPowerTrainVal.setStyle("-fx-font-weight: 600");
-		lbPowerTrainVal.relocate(RADIUS+PADDING -RADIUS*0.90, RADIUS+PADDING +RADIUS*0.38);
+		lbPowerTrainVal.relocate(RADIUS+PADDING -RADIUS*0.90, RADIUS+PADDING +RADIUS*0.41);
 		group.getChildren().add(lbPowerTrainVal);
 
 		lbPowerChass = new Label("a");
@@ -102,6 +102,7 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 		for (int w=51; w<360; w+=60) {
 			Point2D p = getPointForAngle(w);
 			Polygon poly = new Polygon(polyPoints);
+			poly.setFill(Color.WHEAT);
 			poly.relocate(p.getX()-6, p.getY()-6);
 			poly.setRotate(w-90);
 			arrowHeadClockwise[i++] = poly;
@@ -114,6 +115,7 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 		for (int w=9; w<360; w+=60) {
 			Point2D p = getPointForAngle(w);
 			Polygon poly = new Polygon(polyPoints);
+			poly.setFill(Color.WHEAT);
 			poly.relocate(p.getX()-6, p.getY()-6);
 			poly.setRotate(w+90);
 			arrowHeadCounter[i++] = poly;
@@ -127,7 +129,8 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 		for (int w=30; w<360; w+=60) {
 			Point2D p = getPointForAngle(w);
 			Circle btn = new Circle(p.getX()-6, p.getY(), 10);
-			btn.setFill(Color.color(0.6, .8, .7, 0.5));
+			btn.setFill(IDLE);
+//			btn.setFill(Color.color(0.6, .8, .7, 0.5));
 			btn.relocate(p.getX()-10, p.getY()-10);
 
 			tooltip[i] = new Tooltip();
@@ -135,6 +138,7 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 			Tooltip.install(btn, tooltip[i]);
 
 			group.getChildren().add(btn);
+
 			btn.setOnMouseEntered(ev -> btn.setFill(HOVER) );
 			btn.setOnMouseExited (ev -> btn.setFill(IDLE ) );
 			btn.setOnMouseClicked(ev -> clickedSegment(btn));
@@ -169,6 +173,7 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 			Point2D p = getPointForAngle(angle, rad);
 			char c = text.charAt(i);
 			Text t = new Text(String.valueOf(c));
+			t.setStyle("-fx-stroke: transparent; -fx-fill: -fx-text-base-color");
 			t.relocate(p.getX(), p.getY());
 			if (centerAngle>90 && centerAngle<=270) {
 				t.setRotate(angle+180);
@@ -184,7 +189,8 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 		int inner = (int)RADIUS-30;
 		Text t = new Text(text);
 		Point2D p = getPointForAngle(centerAngle, inner);
-		t.relocate(p.getX()+30+PADDING -text.length()*3, p.getY()+45);
+		t.setStyle("-fx-stroke: transparent; -fx-fill: -fx-text-base-color");
+		t.relocate(p.getX()+40+PADDING -text.length()*3, p.getY()+45);
 			if (centerAngle>90 && centerAngle<=270) {
 				t.setRotate(centerAngle+180);
 			} else {
@@ -257,6 +263,34 @@ public class ModSlotConfigPaneSkin extends SkinBase<ModSlotConfigPane> {
 		case MINUS:
 			lbChassisVal.getStyleClass().add(STATE_MINUS);
 			lbChassisVal.getStyleClass().remove(STATE_PLUS);
+			break;
+		}
+
+		switch (getSkinnable().electronicsStateProperty().get()) {
+		case NEUTRAL:
+			lbElectronicsVal.getStyleClass().removeAll(STATE_MINUS, STATE_PLUS);
+			break;
+		case PLUS:
+			lbElectronicsVal.getStyleClass().remove(STATE_MINUS);
+			lbElectronicsVal.getStyleClass().add(STATE_PLUS);
+			break;
+		case MINUS:
+			lbElectronicsVal.getStyleClass().add(STATE_MINUS);
+			lbElectronicsVal.getStyleClass().remove(STATE_PLUS);
+			break;
+		}
+
+		switch (getSkinnable().powertrainStateProperty().get()) {
+		case NEUTRAL:
+			lbPowerTrainVal.getStyleClass().removeAll(STATE_MINUS, STATE_PLUS);
+			break;
+		case PLUS:
+			lbPowerTrainVal.getStyleClass().remove(STATE_MINUS);
+			lbPowerTrainVal.getStyleClass().add(STATE_PLUS);
+			break;
+		case MINUS:
+			lbPowerTrainVal.getStyleClass().add(STATE_MINUS);
+			lbPowerTrainVal.getStyleClass().remove(STATE_PLUS);
 			break;
 		}
 

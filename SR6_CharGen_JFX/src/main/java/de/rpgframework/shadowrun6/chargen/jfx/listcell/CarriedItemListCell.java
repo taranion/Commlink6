@@ -5,8 +5,6 @@ import java.lang.System.Logger.Level;
 import org.prelle.javafx.ApplicationScreen;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
-import org.prelle.javafx.MainScreen;
-import org.prelle.javafx.ScreenManagerProvider;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
@@ -17,7 +15,9 @@ import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.chargen.jfx.dialog.EditCarriedItemDialog;
+import de.rpgframework.shadowrun6.chargen.jfx.dialog.EditVehicleItemDialog;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -32,9 +32,9 @@ import javafx.scene.layout.Region;
  *
  */
 public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTemplate, CarriedItem<ItemTemplate>> {
-	
+
 	private SR6CharacterController charCtrl;
-	
+
 	private Label lbValue;
 	private Label lbEssence;
 
@@ -48,7 +48,7 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 	//-------------------------------------------------------------------
 	protected void initLayout() {
 		super.initLayout();
-		
+
 		lbValue = new Label();
 		lbEssence = new Label();
 		bxActions.getChildren().add(lbValue);
@@ -61,12 +61,12 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 		bxActions.getChildren().add(buf);
 
 		bxActions.getChildren().add(lbEssence);
-		
+
 		// Put Increase/decrease buttons in actions line and make them smaller
 		tiles.setStyle("-fx-padding: -6px 0 0 0;");
 		lblVal.getStyleClass().remove(JavaFXConstants.STYLE_HEADING2);
 		bxActions.getChildren().add(tiles);
-		
+
 		layout.setStyle("-fx-max-width: 22em");
 		layout.setAlignment(Pos.TOP_CENTER);
 	}
@@ -79,7 +79,7 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 	public void updateItem(CarriedItem<ItemTemplate> item, boolean empty) {
 		super.updateItem(item, empty);
 		bxCenter.getChildren().retainAll(line1, sep, bxActions);
-		
+
 		if (item != null) {
 			name.setText(item.getNameWithRating());
 			btnEdit.setVisible(true);
@@ -111,13 +111,13 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 				tiles.setManaged(false);
 //				line2.getChildren().clear();
 			}
-			
+
 			ComplexDataItemController<ItemTemplate, CarriedItem<ItemTemplate>> charGen = controlProvider.get();
 			Possible removeable = charGen.canBeDeselected(item);
 			if (!removeable.get() && !item.getModifications().isEmpty()) {
 				lblLock.setTooltip(new Tooltip(Shadowrun6Tools.getModificationSourceString(item.getModifications().get(0).getSource())));
 			}
-			
+
 			setGraphic(layout);
 		}
 	}
@@ -125,16 +125,19 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 	//-------------------------------------------------------------------
 	@Override
 	protected void editClicked(CarriedItem<ItemTemplate> ref) {
-		logger.log(Level.WARNING, "TODO: editClicked for "+getClass());
-		
-		EditCarriedItemDialog content = new EditCarriedItemDialog(charCtrl, ref, new ScreenManagerProvider() {
-			
-			@Override
-			public MainScreen getScreenManager() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		});
+		logger.log(Level.INFO, "editClicked for "+getClass());
+
+		ItemType type = ref.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+		EditCarriedItemDialog content = null;
+		switch (type) {
+		case VEHICLES:
+		case DRONE_LARGE: case DRONE_MEDIUM: case DRONE_MICRO: case DRONE_MINI: case DRONE_SMALL:
+			content = new EditVehicleItemDialog(charCtrl, ref);
+			break;
+		default:
+			content = new EditCarriedItemDialog(charCtrl, ref);
+		}
+
 		content.refresh();
 		content.setAppLayout(FlexibleApplication.getInstance().getAppLayout());
 		FlexibleApplication.getInstance().openScreen(new ApplicationScreen(content));

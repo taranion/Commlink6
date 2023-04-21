@@ -57,7 +57,7 @@ public class ModSlotConfigPaneTest extends Application {
 //			System.err.println("Handled "+cv.getEventType());
 //		});
 
-		Scene scene = new Scene(pane, 260,260);
+		Scene scene = new Scene(pane, 240,240);
 //        scene.getStylesheets().add(FlexibleApplication.DARK_STYLE);
 ////        scene.getStylesheets().add(de.rpgframework.jfx.Constants.class.getResource("css/rpgframework.css").toExternalForm());
 //        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
