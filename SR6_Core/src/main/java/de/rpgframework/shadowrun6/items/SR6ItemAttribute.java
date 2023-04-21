@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.persist.IntegerConverter;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.persist.AttackRatingArrayConverter;
 import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
 
 /**
@@ -30,7 +31,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	AMMUNITION_CLASS( new EnumConverter(AmmunitionClass.class)),
 	// Vehicle Armor
 	ARMOR,
-	ATTACK_RATING(new IntegerArrayConverter()),
+	ATTACK_RATING(new AttackRatingArrayConverter()),
 	/** Boolean: is this item subject to augmentation grade changes */
 	AUGMENTATION,
 	AVAILABILITY(new AvailabilityConverter()),

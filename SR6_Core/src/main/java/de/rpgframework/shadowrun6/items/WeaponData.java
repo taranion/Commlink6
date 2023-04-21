@@ -10,12 +10,12 @@ import org.prelle.simplepersist.Attribute;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.AGearData;
 import de.rpgframework.genericrpg.items.IGearTypeData;
-import de.rpgframework.genericrpg.persist.IntegerArrayConverter;
 import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun.persist.AmmunitionConverter;
 import de.rpgframework.shadowrun.persist.FireModesConverter;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.persist.AttackRatingArrayConverter;
 import de.rpgframework.shadowrun6.persist.SkillConverter;
 import de.rpgframework.shadowrun6.persist.SkillSpecializationConverter;
 import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
@@ -34,7 +34,7 @@ public class WeaponData implements IGearTypeData {
 	@AttribConvert(value=SkillSpecializationConverter.class)
 	private SkillSpecialization spec;
 	@Attribute(name="attack")
-	@AttribConvert(value=IntegerArrayConverter.class)
+	@AttribConvert(value=AttackRatingArrayConverter.class)
 	private int[] attackRating;
 	private int[] range = new int[] {3,50,250,500,1000};
 
