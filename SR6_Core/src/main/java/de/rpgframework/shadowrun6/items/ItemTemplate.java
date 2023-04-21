@@ -417,45 +417,41 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			if (subtype==ItemSubType.MOD_TRAILER) {
 				pt_slots = 0;
 			}
-			// Determine Cargo Factor
-			int cf = 0;
-			if (getAttribute(SR6ItemAttribute.CARGO)!=null)
-				getAttribute(SR6ItemAttribute.CARGO).getDistributed();
-			if (cf == 0) {
-				if (getAttribute(SR6ItemAttribute.SEATS)!=null)
-					cf = getAttribute(SR6ItemAttribute.SEATS).getDistributed();
-				else
-					logger.log(Level.WARNING, "No information for seats/Cargo Factor for {0}", id);
-				// CF is "seats" *1,25 for subtype BIKES, "seats" *1,5
-				// for all others, +4 for subtype TRUCKS
-				if (subtype==ItemSubType.BIKES) {
-					if (Locale.getDefault().getLanguage().equals("de")) {
-						cf = (int) Math.round(cf * 0.25);
-					} else {
-						cf = (int) Math.round(cf * 1.25);
-					}
-				} else {
-					if (Locale.getDefault().getLanguage().equals("de")) {
-						cf = (int) Math.round(cf * 0.5);
-					} else {
-						cf = (int) Math.round(cf * 1.5);
-					}
-					if (subtype==ItemSubType.TRUCKS) {
-						cf += 4;
-					}
-				}
-			}
+//			// Determine Cargo Factor
+//			int cf = 0;
+//			if (getAttribute(SR6ItemAttribute.CARGO)!=null)
+//				getAttribute(SR6ItemAttribute.CARGO).getDistributed();
+//			if (cf == 0) {
+//				if (getAttribute(SR6ItemAttribute.SEATS)!=null)
+//					cf = getAttribute(SR6ItemAttribute.SEATS).getDistributed();
+//				else
+//					logger.log(Level.WARNING, "No information for seats/Cargo Factor for {0}", id);
+//				// CF is "seats" *1,25 for subtype BIKES, "seats" *1,5
+//				// for all others, +4 for subtype TRUCKS
+//				if (subtype==ItemSubType.BIKES) {
+//					if (Locale.getDefault().getLanguage().equals("de")) {
+//						cf = (int) Math.round(cf * 0.25);
+//					} else {
+//						cf = (int) Math.round(cf * 1.25);
+//					}
+//				} else {
+//					if (Locale.getDefault().getLanguage().equals("de")) {
+//						cf = (int) Math.round(cf * 0.5);
+//					} else {
+//						cf = (int) Math.round(cf * 1.5);
+//					}
+//					if (subtype==ItemSubType.TRUCKS) {
+//						cf += 4;
+//					}
+//				}
+//			}
 
 			int[] modSlots = new int[] {body,body,pt_slots};
 			setAttribute(SR6ItemAttribute.VEHICLE_MODSLOTS, modSlots);
 //			modifications.add(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.VEHICLE_MODSLOTS.name(), String.format("%d,%d,%d", body,body,pt_slots)));
 			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_ACCESSORY.name(), 99));
-//			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_CHASSIS.name(), body));
-			if (cf>0)
-				modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_CF.name(), cf));
-//			if (pt_slots>0)
-//			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_POWERTRAIN.name(), pt_slots));
-//			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_ELECTRONICS.name(), body));
+//			if (cf>0)
+//				modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.VEHICLE_CF.name(), cf));
 			break;
 		}
 	}

@@ -3,8 +3,10 @@ package de.rpgframework.shadowrun6.items;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.List;
+import java.util.Locale;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.chargen.RuleConfiguration;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
@@ -12,6 +14,8 @@ import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -63,6 +67,8 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			ensureSlotSize(model, ItemHook.VEHICLE_ELECTRONICS, electro.getModifiedValue());
 			ensureSlotSize(model, ItemHook.VEHICLE_POWERTRAIN, powertr.getModifiedValue());
 		}
+
+		calculateCargoFactor((Shadowrun6Character) charac, model);
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 
@@ -97,5 +103,37 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 				a2.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, a2.getModifyable().name(), val/2, a1.getModifyable()));
 			}
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateCargoFactor(Shadowrun6Character charac, CarriedItem<?> model) {
+		ItemAttributeNumericalValue<SR6ItemAttribute> seating = model.getAsValue(SR6ItemAttribute.SEATS);
+		int seats = 0;
+		if (seating!=null) seats = seating.getDistributed();
+		if (seats==0)
+			return;
+
+		// Is CF in addition to seating or is seating substracted from cargo factor (substract 1) ?
+		boolean substractSeats = false;
+		if (charac!=null) {
+			RuleConfiguration config = charac.getRuleValue(Shadowrun6Rules.CARGOFACTOR_IS_WITHOUT_SEATS);
+			substractSeats = Shadowrun6Rules.CARGOFACTOR_IS_WITHOUT_SEATS.getDefaultAsBooleanValue();
+			if (config!=null)
+				substractSeats = Boolean.parseBoolean( config.getValueString() );
+		}
+
+		int cf = seats;
+		ItemSubType subtype = model.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
+		if (subtype==ItemSubType.BIKES) {
+			cf = (int) Math.round(cf * (substractSeats?0.25:1.25));
+		} else {
+			cf = (int) Math.round(cf * (substractSeats?0.5:1.5));
+		}
+		if (subtype==ItemSubType.TRUCKS) {
+			cf += 4;
+		}
+		logger.log(Level.INFO, "{0}: CF is {1}   (substractSeats={2}, subtype={3})", model.getKey(), cf, substractSeats, subtype);
+
+		ensureSlotSize(model, ItemHook.VEHICLE_CF, cf);
 	}
 }

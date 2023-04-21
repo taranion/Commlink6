@@ -40,6 +40,7 @@
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="0"/>
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
 			<set rule="CHARGEN_MAX_AVAILABILITY" to="7"/>
+			<set rule="CARGOFACTOR_IS_WITHOUT_SEATS" to="true"/>
 		</rules>
 	</interpretation>
 	<interpretation id="houserules">
