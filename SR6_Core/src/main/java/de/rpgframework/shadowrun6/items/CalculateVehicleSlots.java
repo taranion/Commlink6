@@ -3,7 +3,6 @@ package de.rpgframework.shadowrun6.items;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.List;
-import java.util.Locale;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RuleConfiguration;
