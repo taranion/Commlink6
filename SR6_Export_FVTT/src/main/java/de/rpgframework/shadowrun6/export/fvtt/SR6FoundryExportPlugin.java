@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.export.fvtt;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Locale;
 
@@ -72,6 +73,8 @@ public class SR6FoundryExportPlugin implements CharacterExportPlugin<Shadowrun6C
      */
     @Override
     public byte[] createExport(Shadowrun6Character charac) {
-    	return null;
+    	FoundryExportService service = new FoundryExportService();
+    	String json = service.exportCharacter(charac);
+    	return json.getBytes(Charset.forName("UTF-8"));
     }
 }
