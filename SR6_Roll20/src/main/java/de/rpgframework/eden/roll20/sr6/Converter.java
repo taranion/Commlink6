@@ -736,7 +736,7 @@ public class Converter {
 	//-------------------------------------------------------------------
 	public static void convertEcho(MetamagicOrEcho item, Locale loc, Row row, int x) {
 		// data-rating
-		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.hasLevels());
+		row.createCell(x++, CellType.BOOLEAN).setCellValue(item.hasLevel());
 	}
 
 	//-------------------------------------------------------------------

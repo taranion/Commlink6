@@ -132,6 +132,16 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			// For mystic adepts
 			SR6PrioritySettings sett = (SR6PrioritySettings) model.getCharGenSettings(SR6PrioritySettings.class);
 			sett.mysticAdeptMaxPoints = points;
+			if (type.usesMagic()) {
+				sett.perAttrib.get(ShadowrunAttribute.MAGIC).base=points;
+			} else {
+				sett.perAttrib.get(ShadowrunAttribute.MAGIC).base=0;
+			}
+			if (type.usesResonance()) {
+				sett.perAttrib.get(ShadowrunAttribute.RESONANCE).base=points;
+			} else {
+				sett.perAttrib.get(ShadowrunAttribute.RESONANCE).base=0;
+			}
 			sett.setMagicForPP( Math.min(points, sett.getMagicForPP()) );
 
 			// For aspected magicians

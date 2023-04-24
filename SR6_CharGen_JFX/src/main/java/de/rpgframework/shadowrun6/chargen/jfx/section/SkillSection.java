@@ -37,7 +37,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSkillGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuySR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
@@ -203,7 +203,7 @@ public class SkillSection extends Section {
 
 		table.useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?7:6));
 		if (control.getSkillController() instanceof SR6PrioritySkillGenerator
-				|| control.getSkillController() instanceof PointBuySR6SkillGenerator) {
+				|| control.getSkillController() instanceof SR6PointBuySkillGenerator) {
 			line.setVisible(true);
 			line.setManaged(true);
 		} else {

@@ -23,7 +23,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule CHARGEN_MAX_SUBMERSION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_SUBMERSION", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_MAX_TRANSHUMAN   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_TRANSHUMAN", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule(EffectOn.CHARGEN,"CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
-	public static Rule CHARGEN_ALLOW_LEGAL_AVAIL7PLUS = new Rule(EffectOn.CHARGEN,"CHARGEN_ALLOW_LEGAL_AVAIL7PLUS", Rule.Type.BOOLEAN, RES, "false");
+	public static Rule CHARGEN_MAX_AVAILABILITY = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_AVAILABILITY", Rule.Type.INTEGER, RES, "6");
 	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule(EffectOn.CHARGEN,"CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
 
 	public static Rule ALLOW_TRANSHUMANISM      = new Rule(EffectOn.COMMON,"ALLOW_TRANSHUMANISM", Rule.Type.BOOLEAN, RES, "false");
@@ -31,6 +31,8 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule CHARGEN_PRIO_ADJUSTED_MAGIC_RESO = new Rule(EffectOn.CHARGEN,"CHARGEN_PRIO_ADJUSTED_MAGIC_RESO", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule(EffectOn.COMMON,"MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
 	public static Rule ADD_STRENGTH_TO_MELEE_AR = new Rule(EffectOn.COMMON,"ADD_STRENGTH_TO_MELEE_AR", Rule.Type.BOOLEAN, RES, "true");
+
+	public static Rule CARGOFACTOR_IS_WITHOUT_SEATS = new Rule(EffectOn.COMMON,"CARGOFACTOR_IS_WITHOUT_SEATS", Rule.Type.BOOLEAN, RES, "false");
 
 
 	//-------------------------------------------------------------------
@@ -43,11 +45,12 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
 				CHARGEN_PRIO_ADJUSTED_MAGIC_RESO,
 				CHARGEN_BUY_SPELLS_KARMA,
-				CHARGEN_ALLOW_LEGAL_AVAIL7PLUS,
+				CHARGEN_MAX_AVAILABILITY,
 				ALLOW_TRANSHUMANISM,
 				CHARGEN_EXTENDED_CONTACT,
 				MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP,
 				ADD_STRENGTH_TO_MELEE_AR,
+				CARGOFACTOR_IS_WITHOUT_SEATS
 		};
 
 		List<Rule> merged = new ArrayList<>();

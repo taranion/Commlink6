@@ -2,17 +2,21 @@ package de.rpgframework.shadowrun6.chargen.jfx.selector;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.prelle.javafx.CloseType;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.Selector;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.FilterItemTemplate;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
@@ -20,6 +24,9 @@ import de.rpgframework.shadowrun6.chargen.jfx.pane.ItemTemplatePane;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import javafx.scene.control.CheckBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -73,6 +80,33 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 		genericDescr= new ItemTemplatePane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()),carry);
 
 		logger.log(Level.WARNING, "Show filter for item types");
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.Selector#selectionChanged(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	protected void selectionChanged(ItemTemplate n) {
+		Pane box = getDescriptionNode(n);
+		logger.log(Level.ERROR, "Selected {0} and show description node {1}", n, box);
+		col2.getChildren().setAll(box, lbNotPossible);
+		VBox.setVgrow(box, Priority.ALWAYS);
+		help.getChildren().setAll(col1, col2);
+
+		ISR6EquipmentController sr6Control = (ISR6EquipmentController) control;
+		Possible poss = sr6Control.canBeSelected(n, null, carry);
+//		logger.log(Level.DEBUG, "  poss= {0}  btnCtrl={1}", poss, btnCtrl);
+		if (btnCtrl!=null) {
+			btnCtrl.setDisabled(CloseType.OK, !poss.get());
+		}
+		if (poss.getState()==State.REQUIREMENTS_NOT_MET) {
+			List<String> problems = poss.getUnfulfilledRequirements().stream().map(r -> resolver.apply(r)).collect(Collectors.toList());
+			lbNotPossible.setText(String.join(", ", problems));
+		} else if (!poss.get())
+			lbNotPossible.setText(poss.getMostSevere().getMessage());
+		else
+			lbNotPossible.setText(null);
 	}
 
 }

@@ -1,0 +1,86 @@
+<html>
+  	<head>
+  		<style type="text/css">
+.card {
+  background-image: url("ChapterIntroBG_small.jpg");
+  height:100%;
+  display: flex;
+  flex-direction: column;
+}
+.cardhead {
+  border-top: solid white 2px;
+  border-bottom: solid white 2px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+  text-align: right;
+  font-size: 200%;
+  display: block;
+}
+.cardhead,  .state {
+  background-color: 9b196c;
+}
+.cardhead  img {
+	background-color: white;
+	padding: 5px;
+	margin-top: -20px;
+	margin-bottom: -20px;
+}
+.cardcontent {
+  background-color: white;
+  flex: 1;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.cardcontent:before {
+  content: "";
+  background: url("Transform1.png");
+   width: 264px;
+   height: 20px;
+  display: block;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.cardrules:before {
+  content: "";
+  background: url("Transform2.png");
+   width: 264px;
+   height: 20px;
+  display: block;
+  border-bottom: solid white 2px;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+.cardrules {
+  border-bottom: solid white 2px;
+  color: white;
+  margin-bottom: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.cardrules,  .state {
+  background-color: 9b196c;
+}
+</style>
+	</head>
+  	<body>
+   	<div class="card action" style="width:7cm; height: 9cm; font-size: 8pt; border: solid black 1px;">
+    		<div class="cardhead">
+    			<span>Deckung #</span>
+    			<img alt="" src="SR6_Logo_versetzt.png" width="40px"/>
+    			<span>&nbsp;</span>
+    		</div>
+    		<div class="cardcontent">
+    			<em>Du nimmst hinter einer Mauer, einem Müllcontainer, einer Leiche oder irgendetwas anderem Deckung. Dieser Status schützt dich vor feindlichem Feuer.</em><br/>
+				<p>Es gibt ihn in vier Stufen, die im Prinzip angeben, wie viel des Körpers geschützt ist (ein Viertel, die Hälfte, drei Viertel, alles).</p>
+    		</div>
+    		<div class="cardrules">
+    			<li>+1 auf Verteidigungswert und -pool pro Stufe</li>
+				<li>Angriffe aus Deckung erfordern eine Nebenhandlung</li>
+				<li>Angriffe erhalten kein Edge
+				<li>IV: Würfelpoolmalus -2 auf Angriffe
+    		</div>
+    	</div>
+  	</body>
+</html>

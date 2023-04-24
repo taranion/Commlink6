@@ -401,7 +401,7 @@ public class JSONSR6ExportService {
             jsonCloseCombatWeapon.subtype = getItemSubType(closeCombatWeapon).getName();
             //TODO weapon skill
 //            jsonCloseCombatWeapon.skill = closeCombatWeapon.getResolved().getWeaponData().getSkill().getId();
-            jsonCloseCombatWeapon.pool = Shadowrun6Tools.getWeaponPool(character, closeCombatWeapon);
+            jsonCloseCombatWeapon.pool = Shadowrun6Tools.getWeaponPool(character, closeCombatWeapon).getNatural();
             jsonCloseCombatWeapon.damage = Shadowrun6Tools.getWeaponDamage(character, closeCombatWeapon).toString();
             jsonCloseCombatWeapon.attackRating = Shadowrun6Tools.getAttackRatingString(closeCombatWeapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
             jsonCloseCombatWeapon.wifi = Shadowrun6Tools.getWiFiAdvantageStrings(closeCombatWeapon, loc);
@@ -423,7 +423,7 @@ public class JSONSR6ExportService {
             jsonLongRangeWeapon.subtype = getItemSubType(longRangeWeapon).getName();
             //TODO WeaponSkill
             //jsonLongRangeWeapon.skill = longRangeWeapon.getResolved().getWeaponData().getSkill().getId();
-            jsonLongRangeWeapon.pool = Shadowrun6Tools.getWeaponPool(character, longRangeWeapon);
+            jsonLongRangeWeapon.pool = Shadowrun6Tools.getWeaponPool(character, longRangeWeapon).getNatural();
             jsonLongRangeWeapon.damage = Shadowrun6Tools.getWeaponDamage(character, longRangeWeapon).toString();
             jsonLongRangeWeapon.attackRating = Shadowrun6Tools.getAttackRatingString(longRangeWeapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
             ItemAttributeObjectValue<SR6ItemAttribute> firemodes = longRangeWeapon.getAsObject(SR6ItemAttribute.FIREMODES);

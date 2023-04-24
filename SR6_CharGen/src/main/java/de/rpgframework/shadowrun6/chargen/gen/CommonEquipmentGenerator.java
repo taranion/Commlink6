@@ -20,6 +20,7 @@ import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.PriceModifiers;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
@@ -46,6 +47,39 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	//-------------------------------------------------------------------
 	public CommonEquipmentGenerator(SR6CharacterController parent) {
 		super(parent);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#canBeSelected(ItemTemplate, String, Decision[])
+	 */
+	@Override
+	public Possible canBeSelected(ItemTemplate value, String variantID, CarryMode mode, Decision... decisions) {
+		Possible poss = super.canBeSelected(value, variantID, mode, decisions);
+		if (!poss.get())
+			return poss;
+
+		// Check variant
+		PieceOfGearVariant<SR6VariantMode> variant = null;
+		if (variantID!=null) {
+			variant = value.getVariant(variantID);
+			if (variant==null) {
+				return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_INVALID_VARIANT, variantID, value.getName());
+			}
+		}
+
+		// Try to build item
+		OperationResult<CarriedItem<ItemTemplate>> carried = null;
+		carried = GearTool.buildItem(value, mode, variant, getModel(), false, decisions);
+		// Check availability
+		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
+			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
+			if (avail!=null && avail.getValue() >= 7) {
+				return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH, avail.getValue());
+			}
+		}
+
+		return poss;
 	}
 
 	//-------------------------------------------------------------------

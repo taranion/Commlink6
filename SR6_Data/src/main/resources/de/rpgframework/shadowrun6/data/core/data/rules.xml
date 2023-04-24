@@ -18,6 +18,7 @@
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="5"/>
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
 			<set rule="ADD_STRENGTH_TO_MELEE_AR" to="true"/>
+			<set rule="CHARGEN_MAX_AVAILABILITY" to="6"/>
 		</rules>
 	</interpretation>
 	<interpretation id="srm" lang="en" restrict="prio">
@@ -29,6 +30,7 @@
 			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="false"/>
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="5"/>
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
+			<set rule="CHARGEN_MAX_AVAILABILITY" to="6"/>
 		</rules>
 	</interpretation>
 	<interpretation id="core" lang="de">
@@ -37,6 +39,8 @@
 			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="true"/>
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="0"/>
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
+			<set rule="CHARGEN_MAX_AVAILABILITY" to="7"/>
+			<set rule="CARGOFACTOR_IS_WITHOUT_SEATS" to="true"/>
 		</rules>
 	</interpretation>
 	<interpretation id="houserules">

@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
+import java.util.Locale;
 import java.util.function.Function;
 
 import de.rpgframework.MultiLanguageResourceBundle;
@@ -16,10 +17,10 @@ public class SR6ReferenceTypeConverter<T> implements Function<ModifiedObjectType
 	private final static MultiLanguageResourceBundle CORE = ShadowrunCore.getI18nResources();
 
 	//-------------------------------------------------------------------
-	private static String toString(ShadowrunReference ref) {
+	private static String toString(ShadowrunReference ref, Locale loc) {
 //		if (ref==ShadowrunReference.CULTURE_LORE) return null;
 		String key = "reference."+ref.name().toLowerCase()+".name";
-		return CORE.getString(key);
+		return CORE.getString(key, loc);
 	}
 
 	//-------------------------------------------------------------------
@@ -28,7 +29,7 @@ public class SR6ReferenceTypeConverter<T> implements Function<ModifiedObjectType
 	 */
 	@Override
 	public String apply(ModifiedObjectType t) {
-		return toString((ShadowrunReference) t);
+		return toString((ShadowrunReference) t, Locale.getDefault());
 	}
 
 }

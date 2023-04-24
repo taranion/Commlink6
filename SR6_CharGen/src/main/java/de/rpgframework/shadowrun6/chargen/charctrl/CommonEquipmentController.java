@@ -231,18 +231,10 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		// Try to build item
 		OperationResult<CarriedItem<ItemTemplate>> carried = null;
 		carried = GearTool.buildItem(value, mode, variant, getModel(), false, decisions);
-		// Check availability
-		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
-			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
-			if (avail!=null && avail.getValue() >= 7) {
-				return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH, avail.getValue());
-			}
-		}
 		// Check money
 		if (carried.get().getAsValue(SR6ItemAttribute.PRICE) != null) {
 			//int nuyen = carried.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			int nuyen = getPerItemPrice(carried.get());
-			System.err.println("Required for "+value.getId()+" are "+nuyen);
 			if (nuyen>getModel().getNuyen()) {
 				// Not enough money. Career and CharGen mode both have options to ignore this
 				if (getModel().isInCareerMode()) {

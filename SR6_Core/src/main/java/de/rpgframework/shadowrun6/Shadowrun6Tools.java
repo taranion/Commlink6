@@ -32,6 +32,7 @@ import de.rpgframework.genericrpg.Reward;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.CheckInfluence;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
@@ -47,6 +48,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
@@ -213,7 +215,7 @@ public class Shadowrun6Tools {
 			List<Modification> unprocessed = new ArrayList<>();
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
-				logger.log(Level.WARNING, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
+				logger.log(Level.DEBUG, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
@@ -260,6 +262,7 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static String getModificationString(Modification mod, Locale loc) {
 		String ret = getModificationStringWithoutCond(mod, loc);
+		if (ret==null) return null;
 		if (mod.isConditional()) {
 			return ret+" ("+RES.getString("modification.conditional", loc)+")";
 		}
@@ -296,7 +299,7 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	private static String getModificationStringWithoutCond(Modification mod, Locale loc) {
-		logger.log(Level.ERROR, "explain "+mod);
+		logger.log(Level.TRACE, "explain {0}",mod);
 		try {
 			ShadowrunReference type = (ShadowrunReference) mod.getReferenceType();
 			if (mod instanceof CheckModification) {
@@ -365,8 +368,8 @@ public class Shadowrun6Tools {
 					}
 					return prefix+skillName;
 				default:
-					logger.log(Level.ERROR, "Don't know how to display "+mod);
-					return prefix+"Unknown value type "+type;
+					logger.log(Level.WARNING, "Don't know how to display "+mod);
+					return null;
 				}
 			}
 
@@ -430,8 +433,8 @@ public class Shadowrun6Tools {
 						return skillName+" "+valMod.getValue();
 					}
 				default:
-					logger.log(Level.ERROR, "Don't know how to display "+mod);
-					return "Unknown value type "+type;
+					logger.log(Level.WARNING, "Don't know how to display "+mod);
+					return null;
 				}
 			}
 
@@ -452,14 +455,21 @@ public class Shadowrun6Tools {
 							return RES.format("modification.allow.skill_choice", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
 					}
 				default:
-					logger.log(Level.ERROR, "Don't know how to display "+mod);
-					return "Unknown value type "+type;
+					logger.log(Level.WARNING, "Don't know how to display "+mod);
+					return null;
 				}
 			}
 
 			//
 			if (mod instanceof DataItemModification) {
 				DataItemModification valMod = (DataItemModification)mod;
+				if (valMod.getResolvedKey()==null) {
+					if ("CHOICE".equals(valMod.getKey())) {
+						return RES.getString("modification.choice."+type.name().toLowerCase(), loc);
+					} else {
+						logger.log(Level.ERROR, "No resolution for key ''{0}'' in modification {1}", valMod.getKey(), mod);
+					}
+				}
 				switch (type) {
 				case CRITTER_POWER:
 					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc));
@@ -470,8 +480,8 @@ public class Shadowrun6Tools {
 				case GEAR:
 					return ((ItemTemplate)valMod.getResolvedKey()).getName(loc);
 				default:
-					logger.log(Level.ERROR, "Don't know how to display "+mod);
-					return "Unknown value type "+type;
+					logger.log(Level.WARNING, "Don't know how to display "+mod);
+					return null;
 				}
 			}
 
@@ -615,6 +625,9 @@ public class Shadowrun6Tools {
 				if (gear==null)
 					return "Unknown "+tmp.getKey();
 				return prefix+gear.getName(loc);
+			case ITEMTYPE:
+				ItemType type = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				return prefix+type.getName();
 			case ITEMSUBTYPE:
 				ItemSubType subtype = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
 				return prefix+subtype.getName();
@@ -1040,13 +1053,14 @@ public class Shadowrun6Tools {
 			ValueModification clone = ((ValueModification)tmp).clone();
 			int modVal = 0;
 			if (clone.hasFormula()) {
-				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
-				logger.log(Level.WARNING, "  model =  "+model);
-				logger.log(Level.WARNING, "  data item =  "+value.getKey());
-				logger.log(Level.WARNING, "  data item value =  "+value);
+//				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
+//				logger.log(Level.WARNING, "  model =  "+model);
+//				logger.log(Level.WARNING, "  data item =  "+value.getKey());
+//				logger.log(Level.WARNING, "  data item value =  "+value);
 				String resolved = FormulaTool.resolve(clone.getReferenceType(), clone.getFormula(), new VariableResolver(value, model));
-				logger.log(Level.WARNING, "  resolved  "+resolved);
+				logger.log(Level.WARNING, "  {0} resolved as {1}", clone.getFormula(),resolved);
 				modVal = Integer.parseInt(resolved);
+				clone.setValue(modVal);
 			} else {
 				if (clone.getLookupTable()!=null) {
 					modVal = clone.getValue();
@@ -1074,6 +1088,40 @@ public class Shadowrun6Tools {
 				} else {
 					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value);
 					System.err.println("Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value);
+				}
+			} else if ("ITEM".equals( clone.getKey() )) {
+				// Get the connected item UUID
+				String source = String.valueOf(value.getModifyable());
+				Choice carriedChoice = value.getModifyable().getChoice(ShadowrunReference.CARRIED);
+				if (carriedChoice==null) {
+					logger.log(Level.ERROR, "Trying to instantiate a ref=ITEM modification, but the {0} has no CARRIED choice",source);
+				} else {
+					Decision dec = value.getDecision(carriedChoice.getUUID());
+					if (dec==null) {
+						logger.log(Level.ERROR, "Trying to instantiate a ref=ITEM modification, but the decision for {0} is missing in {1}",carriedChoice.getUUID(), value);
+					} else {
+						UUID connectedItemUUID = UUID.fromString(dec.getValue());
+						CarriedItem<ItemTemplate> item = model.getCarriedItem(connectedItemUUID);
+						// No act depending on what is needed from referenced item
+						switch ((ShadowrunReference)tmp.getReferenceType()) {
+						case SKILL:
+							ItemAttributeObjectValue<SR6ItemAttribute> attrObj = item.getAsObject(SR6ItemAttribute.SKILL);
+							if (attrObj==null) {
+								logger.log(Level.ERROR, "No SKILL item attribute in carried item {0}", item);
+							} else {
+								SR6Skill skill = attrObj.getModifiedValue();
+								logger.log(Level.INFO, "Set skill {0} in instantiated {1}", skill.getId(), tmp);
+								clone.setKey(skill.getId());
+								logger.log(Level.INFO, "Add modification {0} to {1}", clone, item);
+								item.addCharacterModification(clone);
+								return null;
+							}
+							break;
+						default:
+							logger.log(Level.ERROR, "ToDo: Implement fetching {0} from CarriedItem",tmp.getReferenceType());
+							System.err.println("ToDo: Implement fetching "+tmp.getReferenceType()+" from CarriedItem");
+						}
+					}
 				}
 			}
 			if ("$LEVEL".equals(clone.getRawValue())) {
@@ -1608,30 +1656,37 @@ public class Shadowrun6Tools {
 		/*
 		 * Add eventually existing focus
 		 */
-		logger.log(Level.WARNING, "ToDo: Check for weapon focus or item attunement");
+		logger.log(Level.WARNING, "ToDo: Check for weapon focus");
 //		if (item.getUsedFocus()!=null) {
 //			FocusValue focus = item.getUsedFocus();
 //			if (focus.getModifyable().getChoice()==ChoiceType.MELEE_WEAPON) {
 //				ret.add( new PoolCalculation(focus.getLevel(), focus.getName()));
 //			}
 //		}
-//
-//		/*
-//		 * Add eventually existing item attunement
-//		 */
-//		if (item.getItemAttunement()!=null) {
-//			MetamagicOrEchoValue meta = item.getItemAttunement();
-////			if (focus.getChoice()==item) {
-//				ret.add( new PoolCalculation(model.getInitiateSubmersionLevel(), meta.getName()));
-////			}
-//		}
+
+		/*
+		 * Add eventually existing item attunement
+		 */
+		System.err.println("Modification of "+item+" are "+item.getCharacterModifications());
+		for (Modification mod : item.getCharacterModifications()) {
+			if (mod instanceof CheckModification) {
+				CheckModification cMod = (CheckModification)mod;
+				if (cMod.getWhat()==ShadowrunCheckInfluence.DICE) {
+					String name = ((DataItem)cMod.getSource()).getName();
+					pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(cMod.getValue(),name, true));
+				} else {
+					pool.addCheckModification(cMod);
+				}
+			}
+		}
+		logger.log(Level.WARNING, "Pool of {0} is {1}", item.getNameWithoutRating(), pool.toString());
 
 		return pool;
 	}
 
 	//--------------------------------------------------------------------
-	public static int getWeaponPool(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
-		return (int)getWeaponPoolCalculation(model, item).getNatural();
+	public static Pool<Integer> getWeaponPool(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
+		return getWeaponPoolCalculation(model, item);
 	}
 
 	//--------------------------------------------------------------------

@@ -231,4 +231,27 @@ public class EquipmentTests {
 		assertEquals("Expect capacity 3", 3, optical.getCapacity(), 0f);
 		assertEquals("Expect free capacity 3", 3, optical.getFreeCapacity(), 0f);
 	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * Ensure essence is calculated when cyberware is added
+	 */
+	@Test
+	public void testVehicle() {
+		CarriedItem<ItemTemplate> ref = GearTool.buildItem(Shadowrun6Core.getItem(ItemTemplate.class,"chrysler-nissan_jackrabbit"), CarryMode.CARRIED, model, true).get();
+		System.out.println("DUMP1\n"+ref.dump());
+
+		OperationResult<List<Modification>> mods = SR6GearTool.recalculate("", null, ref);
+		assertTrue(mods.wasSuccessful());
+		List<Modification> list = mods.get();
+		for (Modification val : list) {
+			System.out.println("  = "+val);
+		}
+
+		System.out.println("DUMP2\n"+ref.dump());
+
+		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
+		assertEquals(11000, attr.getModifiedValue());
+	}
+
 }

@@ -19,11 +19,11 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 	@Attribute
 	private ItemHook ref;
 
-	
+
 	//-------------------------------------------------------------------
 	public AvailableSlot() {
 	}
-	
+
 	//-------------------------------------------------------------------
 	public AvailableSlot(ItemHook hook) {
 		super();
@@ -33,7 +33,7 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 //			throw new IllegalArgumentException("Hook "+hook+" has capacity - use other constructor");
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	public AvailableSlot(ItemHook hook, float capacity) {
 		super(capacity);
@@ -51,7 +51,7 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 
 	//-------------------------------------------------------------------
 	public float getUsedCapacity() {
-		return 0;
+		return getCapacity() - getFreeCapacity();
 	}
 
 	//-------------------------------------------------------------------

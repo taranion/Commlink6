@@ -55,13 +55,13 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 
 //	private static PropertyResourceBundle UI = (PropertyResourceBundle) ResourceBundle.getBundle(EditCarriedItemDialog.class.getName());
 
-	private final static Logger logger = System.getLogger(EditCarriedItemDialog.class.getPackageName());
+	protected final static Logger logger = System.getLogger(EditCarriedItemDialog.class.getPackageName());
 
-	private SR6CharacterController control;
+	protected SR6CharacterController control;
 
 	//--------------------------------------------------------------------
-	public EditCarriedItemDialog(SR6CharacterController ctrl, CarriedItem<ItemTemplate> data, ScreenManagerProvider prov) {
-		super(ctrl, data, prov);
+	public EditCarriedItemDialog(SR6CharacterController ctrl, CarriedItem<ItemTemplate> data) {
+		super(ctrl, data);
 		this.control = ctrl;
 	}
 
@@ -261,18 +261,18 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		logger.log(Level.INFO, "Closed via "+closed);
 		if (closed==CloseType.OK) {
 			refresh();
-			ItemTemplate selected = selector.getSelected();
+			ItemTemplate toAdd = selector.getSelected();
 			CarryMode carry = CarryMode.EMBEDDED;
 			OperationResult<CarriedItem<ItemTemplate>> result = null;
 			// Eventually show decision dialog
-			boolean needToAsk = !selected.getChoices().isEmpty();
-			needToAsk |= !selected.getVariants().isEmpty();
+			boolean needToAsk = !toAdd.getChoices().isEmpty();
+			needToAsk |= !toAdd.getVariants().isEmpty();
 			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS))
-				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
+				needToAsk |= !toAdd.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
 			if (needToAsk) {
 				logger.log(Level.WARNING, "Select with choices or variants or flags");
 				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry, selectedItem);
-				Decision[] dec = dia2.apply(selected, selected.getChoices());
+				Decision[] dec = dia2.apply(toAdd, toAdd.getChoices());
 				if (dec!=null) {
 					// Not cancelled
 					String variantID = dia2.getSelectedVariant();
@@ -290,7 +290,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 					refresh();
 				} else {
 					logger.log(Level.WARNING, "Failed: " + result.getError());
-					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, result.getError());
 				}
 			}
 		}

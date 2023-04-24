@@ -43,6 +43,7 @@ import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.IReferenceResolver;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.DataItemModification;
@@ -139,17 +140,24 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		this.ctrl = ctrl;
 		this.carry = carry;
 		this.context = context;
+		System.err.println("ChoiceSelectorDialog<init<(carry="+carry+", context="+context+")");
+		try {
+			throw new RuntimeException("Trace");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
 		if (ctrl instanceof ISR6EquipmentController) {
-			logger.log(Level.INFO, "Use special info pane for CarriedItem");
+			logger.log(Level.DEBUG, "Use special info pane for CarriedItem");
 			bxDesc = new CarriedItemDescriptionPane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), (SR6CharacterController)charCtrl );
 		} else if (ctrl instanceof IFocusController) {
-			logger.log(Level.INFO, "Use special info pane for FocusValue");
+			logger.log(Level.DEBUG, "Use special info pane for FocusValue");
 			bxDesc = new FocusValueDescriptionPane(r -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()), (SR6CharacterController)charCtrl );
 		} else {
-			logger.log(Level.INFO, "Use generic description pane");
+			logger.log(Level.DEBUG, "Use generic description pane");
 			bxDesc = new GenericDescriptionVBox(
 					Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 					Shadowrun6Tools.modificationResolver(Locale.getDefault()));
@@ -214,6 +222,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			if (result.get()!=null) {
 				logger.log(Level.WARNING, "with item");
 				CarriedItem<ItemTemplate> carried = result.get();
+				if (carried.getCarryMode()==CarryMode.EMBEDDED && context instanceof CarriedItem<?>) {
+					carried.setParent( (CarriedItem<ItemTemplate>)context );
+				}
 				logger.log(Level.WARNING, "item has mode "+carried.getCarryMode());
 				@SuppressWarnings("rawtypes")
 				CharacterController c1 = ctrl.getCharacterController();
@@ -291,7 +302,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 
 			for (Choice choice : choices) {
-				logger.log(Level.WARNING, "Found choice {0}", choice);
+				logger.log(Level.WARNING, "Found choice {0} and controller {1}", choice, ctrl);
 				String forceTitle = null;
 				if (choice.getUUID().equals(ItemTemplate.UUID_RATING)) forceTitle=ResourceI18N.get(RES, "label.rating");
 				if (choice.getUUID().equals(ItemTemplate.UUID_CHEMICAL_CHOICE)) forceTitle=ResourceI18N.get(RES, "label.chemical");
@@ -447,7 +458,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			ret.add( handleCARRIED(item, choice));
 			break;
 		case ELEMENT:
-			ret.add( handleGeneric(ShadowrunElement.class, choice));
+			ret.add( handleGeneric(ShadowrunElement.class, choice, item));
 			break;
 		case GEAR:
 			ret.add( handleGEAR(item, choice));
@@ -471,6 +482,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			break;
 		case SKILL:
 			ret.add( handleSKILL(item, choice) );
+			break;
+		case SKILLSPECIALIZATION:
+			ret.add( handleSKILLSPECIALIZATION(item, choice) );
 			break;
 		case SPELL_CATEGORY:
 			ret.add( handleSPELL_CATEGORY(item, choice) );
@@ -532,6 +546,48 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		}
 		Collections.sort(cbSub.getItems(), new Comparator<SR6Skill>() {
 			public int compare(SR6Skill o1, SR6Skill o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+			updateButtons();
+			showHelpFor(n); });
+		content.getChildren().add(cbSub);
+		return cbSub;
+	}
+	//-------------------------------------------------------------------
+	private Node handleSKILLSPECIALIZATION(ComplexDataItem item, Choice choice) {
+		ChoiceBox<SkillSpecialization<SR6Skill>> cbSub = new ChoiceBox<>();
+		cbSub.setConverter(new StringConverter<SkillSpecialization<SR6Skill>>() {
+			public SkillSpecialization<SR6Skill> fromString(String value) { return null;}
+			public String toString(SkillSpecialization<SR6Skill> value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			for (String fullID: ids) {
+				String[] split = fullID.split("/");
+				SR6Skill skill = Shadowrun6Core.getSkill(split[0]);
+				if (skill==null) {
+					logger.log(Level.ERROR, "Item {0} references unknown skill {1}", item.getTypeString(), skill.getId());
+				} else {
+					SkillSpecialization<SR6Skill> spec = skill.getSpecialization(split[1]);
+					if (spec!=null) {
+						cbSub.getItems().add(spec);
+					} else {
+						logger.log(Level.ERROR, "Item {0} references unknown specialization {1} in skill {2}", item.getTypeString(), split[1],skill.getId());
+					}
+				}
+			}
+//		} else {
+//			cbSub.getItems().addAll(Shadowrun6Core.getItemList(SR6Skill.class));
+		}
+		Collections.sort(cbSub.getItems(), new Comparator<SkillSpecialization<SR6Skill>>() {
+			public int compare(SkillSpecialization<SR6Skill> o1, SkillSpecialization<SR6Skill> o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}});
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
@@ -786,12 +842,18 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
-	private <T extends HasName> Node handleGeneric(Class<T> item, Choice choice) {
+	private <T extends HasName> Node handleGeneric(Class<T> item, Choice choice, ComplexDataItem parent) {
 		ChoiceBox<T> choicebox = new ChoiceBox<>();
 		choicebox.setConverter(new StringConverter<T>() {
 			public T fromString(String value) { return null;}
 			public String toString(T value) {
 				if (value==null) return "-";
+				// If there is a per choice translation, use it instead of the common translation
+				ChoiceOption opt = new ChoiceOption();
+				opt.setId(value.getId());
+				String key = parent.getChoiceOptionString(choice, value, Locale.getDefault());
+				if (!key.contains("choice"))
+					return key;
 				return value.getName(Locale.getDefault());
 			}
 		});

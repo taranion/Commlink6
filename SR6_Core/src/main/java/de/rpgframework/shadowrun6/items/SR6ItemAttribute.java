@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.persist.IntegerConverter;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.persist.AttackRatingArrayConverter;
 import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
 
 /**
@@ -30,7 +31,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	AMMUNITION_CLASS( new EnumConverter(AmmunitionClass.class)),
 	// Vehicle Armor
 	ARMOR,
-	ATTACK_RATING(new IntegerArrayConverter()),
+	ATTACK_RATING(new AttackRatingArrayConverter()),
 	/** Boolean: is this item subject to augmentation grade changes */
 	AUGMENTATION,
 	AVAILABILITY(new AvailabilityConverter()),
@@ -69,6 +70,9 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	MAX_SENSOR_RATING,
 	MAX_SKILLSOFT_RATING,
 	MODIFICATION_SLOTS,
+	MODSLOTS_CHASSIS,
+	MODSLOTS_ELECTRONICS,
+	MODSLOTS_POWERTRAIN,
 	// Vehicle Pilot
 	PILOT,
 	PRICE,
@@ -89,6 +93,8 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	SPEED_INTERVAL,
 	TOPSPEED,
 	VEHICLE_TYPE,
+	// Unmodified modification slots. 3 element array CHASSIS, ELECTRONICS, POWERTRAIN
+	VEHICLE_MODSLOTS,
 
 	ATTACK,
 	SLEAZE,

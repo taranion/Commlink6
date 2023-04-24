@@ -17,7 +17,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuySR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
@@ -145,7 +145,7 @@ public class PointBuyGenTest {
 		 * Having spent 66 of our 100 CPs, we’ll dump the remaining 34
 		 * points into buying 17 skill points.
 		 */
-		PointBuySR6SkillGenerator skill = (PointBuySR6SkillGenerator) charGen.getSkillController();
+		SR6PointBuySkillGenerator skill = (SR6PointBuySkillGenerator) charGen.getSkillController();
 		assertEquals(12, skill.getPointsLeft());
 		SR6Skill athletics = Shadowrun6Core.getItem(SR6Skill.class, "athletics");
 		assertNotNull(athletics);

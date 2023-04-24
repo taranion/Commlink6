@@ -56,7 +56,7 @@ import javafx.scene.layout.VBox;
  *
  */
 public class ItemUtilJFX {
-	
+
 	private final static Logger logger = System.getLogger("de.rpgframework.shadowrun6.jfx");
 
 	private static PropertyResourceBundle UI = (PropertyResourceBundle) ResourceBundle.getBundle(Shadowrun6Tools.class.getName());
@@ -66,7 +66,7 @@ public class ItemUtilJFX {
 		ItemAttributeValue<?> raw = carried.getAttributeRaw(attrib);
 		if (raw==null)
 			return;
-		
+
 		int x = table.getColumnCount();
 		Label header  = new Label(attrib.getShortName());
 		header.getStyleClass().add("table-head");
@@ -75,7 +75,7 @@ public class ItemUtilJFX {
 
 		table.getColumnConstraints().add(new ColumnConstraints(width));
 		table.add(header, x, 0);
-		
+
 		Label value= getItemAttributeLabel(carried, attrib);
 		table.add(value, x, 1);
 		GridPane.setHalignment(value, HPos.CENTER);
@@ -91,7 +91,7 @@ public class ItemUtilJFX {
 
 		table.getColumnConstraints().add(new ColumnConstraints(width));
 		table.add(header, x, 0);
-		
+
 		Label value2= new Label(value);
 		table.add(value2, x, 1);
 		GridPane.setHalignment(value2, HPos.CENTER);
@@ -105,7 +105,7 @@ public class ItemUtilJFX {
 		logger.log(Level.DEBUG, "create InfoNode for "+item);
 		Shadowrun6Character model = null; // ctrl.getModel();
 		CarryMode carry = item.getCarryMode();
-		
+
 		GridPane table = new GridPane();
 
 		// Weapons
@@ -141,11 +141,11 @@ public class ItemUtilJFX {
 			addColumn(table, item, SR6ItemAttribute.PRICE , 60);
 		}
 
-		
+
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");
 		box.setMaxWidth(Double.MAX_VALUE);
-		
+
 		if (!table.getChildren().isEmpty())
 			box.getChildren().add(table);
 		box.getChildren().add(getAccessoryInfoNode(item, ctrl, detailed));
@@ -159,16 +159,16 @@ public class ItemUtilJFX {
 	 */
 	public static Node getItemInfoNode(FocusValue item, SR6CharacterController ctrl) {
 		logger.log(Level.WARNING, "create InfoNode for "+item);
-		
+
 		GridPane table = new GridPane();
 		// Weapons
 		addColumn(table, ResourceI18N.get(UI, "label.karma"), String.valueOf(item.getCostKarma()), 90);
 		addColumn(table, ResourceI18N.get(UI, "label.nuyen"), String.valueOf(item.getCostNuyen()+" \u00A5"), 90);
-		
+
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");
 		box.setMaxWidth(Double.MAX_VALUE);
-		
+
 		box.getChildren().add(table);
 
 		return box;
@@ -236,7 +236,7 @@ public class ItemUtilJFX {
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");
 		box.setMaxWidth(Double.MAX_VALUE);
-		
+
 		int nextCol = 0;
 
 		GridPane table = new GridPane();
@@ -249,7 +249,7 @@ public class ItemUtilJFX {
 			for (String t : chRating.getChoiceOptions())
 				ratings[pos++] = Integer.parseInt(t);
 		}
-		
+
 		List<AGearData> possibilities = item.getPossibilities(carry);
 		if (possibilities.isEmpty())
 			throw new IllegalArgumentException("CarryMode "+carry+" is not possible in "+item.getId());
@@ -274,8 +274,8 @@ public class ItemUtilJFX {
 				table.add(lbName, nextCol, 1 + i);
 			}
 			nextCol++;
-		}		
-		
+		}
+
 		// Flags to mark what details have been already added
 		boolean augment = false;
 		boolean matrix  = false;
@@ -287,9 +287,9 @@ public class ItemUtilJFX {
 			addMatrixDeviceColumns(item, model, carry, table, possibilities);
 			matrix = true;
 		}
-		
+
 		if (!augment && !matrix) {
-			logger.log(Level.WARNING,"No special display for "+item.getItemType());
+			logger.log(Level.WARNING,"No special display for itemtype "+item.getItemType());
 		}
 
 		nextCol = table.getColumnCount();
@@ -301,10 +301,10 @@ public class ItemUtilJFX {
 		heaPrice.getStyleClass().add("table-head");
 		heaPrice.setAlignment(Pos.CENTER);
 		heaPrice .setMaxWidth(Double.MAX_VALUE);
-		
+
 		table.add(heaAvail, nextCol  , 0);
 		table.add(heaPrice, nextCol+1, 0);
-		
+
 		if (possibilities.size() > 0) {
 			for (int i = 0; i < possibilities.size(); i++) {
 				// Availability
@@ -331,18 +331,18 @@ public class ItemUtilJFX {
 				}
 				table.add(lbAvail, nextCol, 1 + i);
 				table.add(lbPrice, nextCol+1, 1 + i);
-			}			
+			}
 		}
 
-		
+
 		box.getChildren().add(table);
 
-		
+
 //		// WiFi
 //		if (!item.getWiFiAdvantageStrings().isEmpty()) {
 //			box.getChildren().add(getWiFiAdvantagesNode(item));
 //		}
-//		
+//
 //		// Requirements
 //		for (Requirement req : item.getRequirements()) {
 //			if (!ShadowrunTools.isRequirementMet(req, model)) {
@@ -351,7 +351,7 @@ public class ItemUtilJFX {
 //				box.getChildren().add(notMet);
 //			}
 //		}
-		
+
 
 		return box;
 	}
@@ -384,7 +384,7 @@ public class ItemUtilJFX {
 	//-------------------------------------------------------------------
 	private static String makeAttributeValueString(ItemTemplate data, SR6ItemAttribute attrib) {
 		ItemAttributeDefinition def = data.getAttribute(attrib);
-		
+
 		String raw = data.getAttribute(attrib).getRawValue();
 		String[] table = data.getAttribute(attrib).getLookupTable();
 		if (data.requiresVariant()) {
@@ -404,7 +404,7 @@ public class ItemUtilJFX {
 			raw = raw.replace("$RATING", rtg);
 		return raw;
 	}
-	
+
 	//-------------------------------------------------------------------
 	private static Label getItemAttributeLabel(CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
 		Label ret = new Label("?");
@@ -485,11 +485,11 @@ public class ItemUtilJFX {
 					ret.setText("+"+String.valueOf(v));
 			}
 			break;
-			
+
 		default:
 			logger.log(Level.ERROR, "Don't know how to handle "+attr);
 		}
-		
+
 //		if (obj!=null) {
 //			if (!item.getAsObject(attr).getModifications().isEmpty()) {
 //				ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
@@ -522,7 +522,7 @@ public class ItemUtilJFX {
 //				}
 //			}
 //		}
-		
+
 		return ret;
 	}
 
@@ -706,7 +706,7 @@ public class ItemUtilJFX {
 		lbAvail.setAlignment(Pos.CENTER);
 		lbAvail .setMaxWidth(Double.MAX_VALUE);
 		GridPane.setMargin(lbAvail, new Insets(0, 5, 0, 5));
-		
+
 		ItemAttributeDefinition def = data.getAttribute(attrib);
 		logger.log(Level.WARNING, "Def1 {0}", def);
 		if (def==null)
@@ -735,12 +735,12 @@ public class ItemUtilJFX {
 		lbAvail.setAlignment(Pos.CENTER);
 		lbAvail .setMaxWidth(Double.MAX_VALUE);
 		GridPane.setMargin(lbAvail, new Insets(0, 5, 0, 5));
-		
+
 		ItemAttributeValue val = item.getAttributeRaw(attrib);
 		if (val==null)
-			return lbAvail;		
+			return lbAvail;
 		logger.log(Level.WARNING, "Def1 {0}", val);
-				
+
 		StringBuffer buf = new StringBuffer();
 		if (val instanceof ItemAttributeFloatValue) {
 			ItemAttributeFloatValue fVal = (ItemAttributeFloatValue)val;
@@ -813,7 +813,7 @@ public class ItemUtilJFX {
 		if (hasF) table.add(heaPro , startCol+COL_PRO , 0);
 		table.add(heaPrg , startCol+COL_PRG , 0);
 
-		
+
 		// Now add data
 		for (int i = 0; i < possibilities.size(); i++) {
 			AGearData data = possibilities.get(i);
@@ -876,20 +876,20 @@ public class ItemUtilJFX {
 	private static Node getAugmentationNode(CarriedItem item, ShadowrunCharacter model) {
 		if (item==null)
 			throw new NullPointerException("Empty item");
-		
+
 		Label heaQual  = new Label(SR6ItemAttribute.QUALITY.getShortName());
 		Label heaEss   = new Label(SR6ItemAttribute.ESSENCECOST.getShortName());
-		
+
 		Label lblQual= getItemAttributeLabel(item, SR6ItemAttribute.QUALITY);
 		Label lblEss = getItemAttributeLabel(item, SR6ItemAttribute.ESSENCECOST);
-		
+
 		Region spacing = new Region();
 		spacing.setMaxWidth(Double.MAX_VALUE);
-		
+
 		HBox line = new HBox(5, heaQual, lblQual, spacing, heaEss, lblEss);
 		line.setStyle("-fx-max-width: 18em");
 		HBox.setHgrow(spacing, Priority.ALWAYS);
-		
+
 		return line;
 	}
 
@@ -897,7 +897,7 @@ public class ItemUtilJFX {
 	private static void addAugmentationColumns(ItemTemplate item, ShadowrunCharacter model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
 		if (item==null)
 			throw new NullPointerException("Empty item");
-		
+
 		boolean hasE = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.ESSENCECOST)!=null);
 		boolean hasC = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.CAPACITY)!=null);
 		boolean hasS = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.SIZE)!=null);
@@ -921,7 +921,7 @@ public class ItemUtilJFX {
 		heaDev .setAlignment(Pos.CENTER);
 		heaPrg .setAlignment(Pos.CENTER);
 		heaCap .setAlignment(Pos.CENTER);
-		
+
 		int startCol = table.getColumnCount();
 		logger.log(Level.ERROR, "ESS={0} CAP={1} SIZ={2}", hasE, hasC, hasS);
 		logger.log(Level.ERROR, "ESS={0} CAP={1} SIZ={2}", COL_ESS, COL_CAP, COL_SIZ);
@@ -930,7 +930,7 @@ public class ItemUtilJFX {
 		if (hasC) table.add(heaCap, startCol+COL_CAP, 0);
 		if (hasS) table.add(heaPrg, startCol+COL_SIZ, 0);
 		logger.log(Level.ERROR, "After "+table.getColumnCount());
-		
+
 		// Now add data
 		for (int i = 0; i < possibilities.size(); i++) {
 			AGearData data = possibilities.get(i);
@@ -946,11 +946,11 @@ public class ItemUtilJFX {
 	private static void addAugmentationColumns(CarriedItem<ItemTemplate> carried, Shadowrun6Character model, GridPane table) {
 		if (carried==null)
 			throw new NullPointerException("Empty item");
-		
+
 		boolean hasE = carried.getAttributeRaw(SR6ItemAttribute.ESSENCECOST)!=null;
 		boolean hasC = carried.getAttributeRaw(SR6ItemAttribute.CAPACITY)!=null;
 		boolean hasS = carried.getAttributeRaw(SR6ItemAttribute.SIZE)!=null;
-		
+
 		int COL_ESS  = 0;
 		int COL_CAP  = (hasE)?(COL_ESS+1):COL_ESS;
 		int COL_SIZ  = (hasC)?(COL_CAP+1):COL_CAP;
@@ -970,12 +970,12 @@ public class ItemUtilJFX {
 		heaDev .setAlignment(Pos.CENTER);
 		heaPrg .setAlignment(Pos.CENTER);
 		heaCap .setAlignment(Pos.CENTER);
-		
+
 		int startCol = table.getColumnCount();
 		if (hasE) table.add(heaDev, startCol+COL_ESS, 0);
 		if (hasC) table.add(heaCap, startCol+COL_CAP, 0);
 		if (hasS) table.add(heaPrg, startCol+COL_SIZ, 0);
-		
+
 		if (hasE) table.add(createLabelWithValue(carried, SR6ItemAttribute.ESSENCECOST), startCol+COL_ESS, 1);
 		if (hasC) table.add(createLabelWithValue(carried, SR6ItemAttribute.CAPACITY), startCol+COL_CAP, 1);
 		if (hasS) table.add(createLabelWithValue(carried, SR6ItemAttribute.SIZE), startCol+COL_SIZ, 1);

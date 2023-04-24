@@ -20,7 +20,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuySR6SkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 
@@ -31,7 +31,7 @@ import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 public class PointBuySkillGenTest {
 
 	private Shadowrun6Character model;
-	private PointBuySR6SkillGenerator ctrl;
+	private SR6PointBuySkillGenerator ctrl;
 	private SR6CharacterGenerator charGen;
 	private List<Modification> preMods = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class PointBuySkillGenTest {
 				ctrl.process(preMods);
 			}
 		};
-		ctrl  = new PointBuySR6SkillGenerator(charGen);
+		ctrl  = new SR6PointBuySkillGenerator(charGen);
 		charGen.runProcessors();
 	}
 

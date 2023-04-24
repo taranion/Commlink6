@@ -203,7 +203,6 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(prioCtrl);
 			processChain.add(meta);
 			processChain.add(drake);
-			processChain.add(new SR6PriorityCalculateMaxPowerPointsStep(this));
 			processChain.add(magicReso);
 			processChain.add(qualities);
 			processChain.add(qPaths);
@@ -214,6 +213,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(new CalculateSkillPools(model, locale));
 			processChain.add(spells);
 			processChain.add(rituals);
+			processChain.add(new SR6PriorityCalculateMaxPowerPointsStep(this));
 			processChain.add(adeptPowers);
 //			processChain.add(new GetModificationsFromGear(model));
 //			processChain.add(new ApplyModificationsGeneric(model));

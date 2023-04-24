@@ -311,6 +311,7 @@ public class SR6CarriedItemTest {
 		assertEquals(10, item.getAsValue(SR6ItemAttribute.BODY).getModifiedValue());
 	}
 
+	//-------------------------------------------------------------------
 	@Test
 	public void testWithoutChoices() {
 		ItemTemplate honda = Shadowrun6Core.getItem(ItemTemplate.class, "dermal_plating");
@@ -503,6 +504,74 @@ public class SR6CarriedItemTest {
 		SR6GearTool.recalculate("", null, item);
 		assertNotNull(item);
 		assertTrue("No alternates found",item.getAlternates().size()>0);
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testVariableCostAccessories() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "yamaha_growler");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> yamaha = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		SR6GearTool.recalculate("", null, yamaha);
+		assertNotNull(yamaha);
+		assertNotNull(yamaha.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(8000, yamaha.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+
+		ItemTemplate accessory = Shadowrun6Core.getItem(ItemTemplate.class, "realistic_features");
+		assertNotNull(accessory);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(accessory, null, CarryMode.CARRIED);
+		item.addDecision(new Decision(ItemTemplate.UUID_RATING, "3"));
+		SR6GearTool.recalculate("", null, item);
+		assertNotNull(item);
+		// Item has not been added yet - there should be no price
+		assertNull(item.getAsValue(SR6ItemAttribute.PRICE));
+
+		// Now add it to the Yamaha
+		yamaha.addAccessory(item, ItemHook.VEHICLE_ACCESSORY);
+		SR6GearTool.recalculate("", null, item);
+
+		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
+		// Expected price is 1000 * Rating(3) * Body(6)
+		assertEquals(18000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testVariableCostAccessories2() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "chrysler-nissan_jackrabbit");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> yamaha = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		SR6GearTool.recalculate("", null, yamaha);
+		assertNotNull(yamaha);
+		assertNotNull(yamaha.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(11000, yamaha.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals(8, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getFreeCapacity(), 0);
+		assertEquals(8, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getCapacity(), 0);
+		assertEquals(0, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getUsedCapacity(), 0);
+
+		ItemTemplate accessory = Shadowrun6Core.getItem(ItemTemplate.class, "easy_assembly");
+		assertNotNull(accessory);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(accessory, null, CarryMode.EMBEDDED);
+		SR6GearTool.recalculate("", null, item);
+		assertNotNull(item);
+		assertEquals(2000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+
+		// Now add it to the Yamaha
+		yamaha.addAccessory(item, ItemHook.VEHICLE_CHASSIS);
+		SR6GearTool.recalculate("", null, item);
+		System.err.println("----------recalc-------");
+		SR6GearTool.recalculate("", null, yamaha);
+
+		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(13000, yamaha.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		// Expected price is 1000 * Rating(3) * Body(6)
+		assertEquals(5, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getFreeCapacity(), 0);
+		assertEquals(8, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getCapacity(), 0);
+		assertEquals(3, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getUsedCapacity(), 0);
 	}
 
 }

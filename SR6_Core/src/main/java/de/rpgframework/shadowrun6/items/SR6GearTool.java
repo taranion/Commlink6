@@ -9,7 +9,6 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
-import de.rpgframework.genericrpg.data.ReferenceError;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
@@ -38,8 +37,8 @@ public class SR6GearTool extends GearTool {
 			new SR6ResolveFormulasStep(),
 			new ApplyAmmunitionTypeStep(),
 			new ApplyStockModificationsStep(),
-			new AddMissingVehicleSlots(),
 			new AddMissingWeaponSlots(),
+			new CalculateVehicleSlots(),
 			new SR6ResolveTemplatesStep(),
 			new CreateAlternatesStep()
 	};
@@ -47,6 +46,7 @@ public class SR6GearTool extends GearTool {
 	public static CarriedItemProcessor[] SR6_PHASE2_STEPS = new CarriedItemProcessor[] {
 //			new DetermineStandardEssenceStep(),
 			new DeriveCapacityAttributeStep(),
+			new CalculateAccessorySizes(),
 			new HandleAugmentationGradeStep(),
 			new ApplyItemFlagsStep(),
 			new AddUpPricesStep(),

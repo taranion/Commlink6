@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -31,6 +32,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.DracoformAttributePane;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -92,6 +94,7 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 		selection.setAvailableCellFactory(lv -> new ComplexDataItemListCell<MetamagicOrEcho>( () -> selection.getController(), Shadowrun6Tools.requirementResolver(Locale.getDefault())));
 		selection.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell<MetamagicOrEcho,MetamagicOrEchoValue>( ()->selection.getController() ));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
+		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getDrakeController()));
 
 		bxDescription = new GenericDescriptionVBox(Shadowrun6Tools.requirementResolver(Locale.getDefault()), Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 	}
@@ -161,6 +164,13 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.log(Level.WARNING, "RCV {0}",type);
+		logger.log(Level.INFO, "RCV " + type + " with " + Arrays.toString(param));
+
+		if (type == BasicControllerEvents.GENERATOR_CHANGED) {
+			logger.log(Level.INFO, "RCV " + type + " with " + Arrays.toString(param));
+			charGen = (SR6CharacterController) param[0];
+			selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getDrakeController()));
+		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
 			selection.setController(charGen.getDrakeController());
 			paneAttr.setController(charGen.getDrakeController());

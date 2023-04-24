@@ -96,7 +96,7 @@
        <checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER"/>
      </modifications>
    </quality>
-   <quality id="human-looking" 		  karma="6" pos="true" type="NORMAL">
+   <quality id="human-looking" 		  karma="8" pos="true" type="NORMAL">
      <requires>
        <selreq type="METATYPE" apply="CHARACTER">
          <datareq type="METATYPE" ref="elf" apply="CHARACTER"/>
@@ -238,6 +238,14 @@
    	</choices>
      <modifications>
        <valmod type="ATTRIBUTE" ref="CHOICE" choice="7f3a7e00-93b4-4012-883f-c737ca18c1df" value="-1" set="MAX" />
+     </modifications>
+   </quality>
+   <quality id="impaired" lang="de"    karma="8" pos="false" type="NORMAL">
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="7f3a7e00-93b4-4012-883f-c737ca18c1df"/>
+   	</choices>
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="CHOICE" choice="7f3a7e00-93b4-4012-883f-c737ca18c1df" value="-2" set="MAX" />
      </modifications>
    </quality>
    <quality id="incompetent"  	  	  karma="10" pos="false" type="NORMAL">

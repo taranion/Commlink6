@@ -6,6 +6,8 @@ import org.prelle.javafx.SymbolIcon;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
@@ -42,10 +44,11 @@ public class SR6WizardPageComplexForms extends WizardPageComplexForms {
 	//-------------------------------------------------------------------
 	protected void initComponents() {
 		super.initComponents();
-		selection.setOptionCallback( (item,list) -> {
-			ChoiceSelectorDialog<ComplexForm, ComplexFormValue> dialog = new ChoiceSelectorDialog<>(charGen.getComplexFormController());
-			return dialog.apply(item, list);
-		});
+//		selection.setOptionCallback( (item,list) -> {
+//			ChoiceSelectorDialog<ComplexForm, ComplexFormValue> dialog = new ChoiceSelectorDialog<>(charGen.getComplexFormController());
+//			return dialog.apply(item, list);
+//		});
+		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
 	}
 
 	//-------------------------------------------------------------------
@@ -65,6 +68,18 @@ public class SR6WizardPageComplexForms extends WizardPageComplexForms {
 		HBox.setMargin(box, new Insets(0,0,0,10));
 		HBox.setMargin(backHeader.getChildren().get(2), new Insets(0,10,0,0));
 		super.setBackHeader(backHeader);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ControllerListener#handleControllerEvent(de.rpgframework.genericrpg.chargen.ControllerEvent, java.lang.Object[])
+	 */
+	@Override
+	public void handleControllerEvent(ControllerEvent type, Object... param) {
+		super.handleControllerEvent(type, param);
+		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
+			selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
+		}
 	}
 
 	//-------------------------------------------------------------------

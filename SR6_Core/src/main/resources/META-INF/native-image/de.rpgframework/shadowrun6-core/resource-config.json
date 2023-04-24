@@ -91,28 +91,56 @@
       ]
     },
    {
-      "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.de_feuerlaeufer",
+      "name":"de.rpgframework.shadowrun6.data.de_alpen.i18n.de_alpen",
+      "locales":[
+        "",
+        "de"
+      ]
+    },
+    {
+      "name":"de.rpgframework.shadowrun6.data.de_berlin2080.i18n.de_berlin2080",
+      "locales":[
+        "",
+        "de"
+      ]
+    },
+  {
+      "name":"de.rpgframework.shadowrun6.data.de_feuerlaeufer.i18n.de_feuerlaeufer",
       "locales":[
         "",
         "de"
       ]
     },
    {
-      "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.de_revierbericht",
+      "name":"de.rpgframework.shadowrun6.data.de_revierbericht.i18n.de_revierbericht",
       "locales":[
         "",
         "de"
       ]
     },
    {
-      "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.de_other",
+      "name":"de.rpgframework.shadowrun6.data.de_sota2081.i18n.de_sota2081",
       "locales":[
         "",
         "de"
       ]
     },
    {
-      "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.de_piraten",
+      "name":"de.rpgframework.shadowrun6.data.de_other.i18n.de_other",
+      "locales":[
+        "",
+        "de"
+      ]
+    },
+   {
+      "name":"de.rpgframework.shadowrun6.data.other_us.i18n.other_us",
+      "locales":[
+        "",
+        "en"
+      ]
+    },
+   {
+      "name":"de.rpgframework.shadowrun6.data.de_piraten.i18n.de_piraten",
       "locales":[
         "",
         "de"
