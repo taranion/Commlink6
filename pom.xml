@@ -22,11 +22,11 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<log4j.version>2.18.0</log4j.version>
+		<log4j.version>2.19.0</log4j.version>
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
 		<revision>0.0.2-SNAPSHOT</revision>
-		<rpgfw.version>5.0.2-SNAPSHOT</rpgfw.version>
+		<rpgfw.version>5.1.0</rpgfw.version>
 	</properties>
 
 	<modules>
