@@ -168,7 +168,7 @@ public class Shadowrun6DataPlugin  {
 			initDPPiraten();
 			initRevierbericht();
 			initDPSOTA2081();
-			//initDPSOTA2082();
+			initDPSOTA2082();
 			//initDPWestphalen();
 			//initHackNSlash();
 			initAstralWays();
@@ -622,8 +622,8 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------DE SOTA 2082-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_SOTA2082", "de_sota2082.i18n", Locale.GERMAN);
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2082/data/gear_misc.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" misc");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2082/data/gear_ammo.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammo");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2082/data/gear_firearms.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2082/data/gear_drones.xml");

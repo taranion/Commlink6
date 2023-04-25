@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mentorspirits>
+
+  <mentorspirit id="architect">
+		<similarNames>
+			<similar>meisterstratege</similar>
+			<similar>spinne</similar>
+		</similarNames>
+    <modifications>
+		<itemmod type="QUALITY" ref="analytical_mind" />
+    </modifications>
+    <magician>
+		<checkmod type="SPELL" ref="MANIPULATION" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+		<itemmod type="ADEPT_POWER" ref="three_dimensional_memory" />
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="dobermann">
+		<similarNames>
+			<similar>befehl</similar>
+			<similar>fuehrung</similar>
+		</similarNames>
+		<choices>
+			<choice type="SKILL" uuid="4dccce70-2047-41e2-9466-d4c8c2a63ab6" options="close_combat,firearms"/>
+		</choices>
+		<modifications>
+			<checkmod type="SKILL" ref="CHOICE" choice="4dccce70-2047-41e2-9466-d4c8c2a63ab6" value="-1" what="EDGE_BOOST" />
+		</modifications>
+    <magician>
+		<checkmod type="SPELL" ref="COMBAT" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+		<valmod type="ADEPT_POWER" ref="mystic_armor" value="2" />	
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="grosser_bruder">
+		<similarNames>
+			<similar>loyalitaet</similar>
+			<similar>verstorbener_lehrer</similar>
+		</similarNames>
+    <modifications>
+		<valmod type="QUALITY" ref="will_to_live" value="1" />
+    </modifications>
+    <magician>
+		<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+		<valmod type="ADEPT_POWER" ref="cool_resolve" value="3" />	
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="hahn">
+		<similarNames>
+			<similar>zorn</similar>
+		</similarNames>
+    <modifications>
+		<checkmod type="ATTRIBUTE" ref="CHARISMA" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+		<checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+		<itemmod type="ADEPT_POWER" ref="enthralling_performance" />
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="hecht">
+		<similarNames>
+			<similar>attentaeter</similar>
+			<similar>hinterhalt</similar>
+		</similarNames>
+    <modifications>
+		<checkmod type="SKILL" ref="stealth" value="-1" what="EDGE_BOOST" />
+    </modifications>
+	<choices>
+		<choice type="SPELL" uuid="fbe4ffba-916b-4526-86c0-8c532c7bc159" options="ILLUSION,COMBAT"/>
+	</choices>
+    <magician>
+		<checkmod type="SPELL" ref="CHOICE" choice="fbe4ffba-916b-4526-86c0-8c532c7bc159" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+		<valmod type="ADEPT_POWER" ref="spell_shroud" value="2" />	
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="jaeger">
+		<similarNames>
+			<similar>ermittler</similar>
+			<similar>questenritter</similar>
+		</similarNames>
+    <modifications>
+		<checkmod type="SKILL" ref="outdoors" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+		<checkmod type="SPELL" ref="DETECTION" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+		<itemmod type="ADEPT_POWER" ref="enhanced_perception" />
+    </adept>
+  </mentorspirit>
+
+  <mentorspirit id="luchs">
+		<similarNames>
+			<similar>kundschafter</similar>
+			<similar>spaeher</similar>
+		</similarNames>
+    <modifications>
+		<checkmod type="SKILL" ref="outdoors" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+		<checkmod type="SPELL" ref="DETECTION" value="-1" what="EDGE_BOOST" />
+    </magician>
+	<adept>
+		<selmod>
+			<itemmod type="ADEPT_POWER" ref="enhanced_perception" />
+			<!-- <allmod> -->
+				<!-- <itemmod type="ADEPT_POWER" ref="sustenance" /> -->
+				<!-- <itemmod type="ADEPT_POWER" ref="improved_sense" /> -->
+			<!-- </allmod> -->
+		</selmod>
+	</adept>
+
+  </mentorspirit>
+
+  <mentorspirit id="wilde_jagd">
+		<similarNames>
+			<similar>reiter</similar>
+			<similar>walkuere</similar>
+		</similarNames>
+    <modifications>
+		<checkmod type="SKILL" ref="piloting" value="-1" what="EDGE_BOOST" />
+    </modifications>
+    <magician>
+		<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
+    </magician>
+    <adept>
+		<valmod type="ADEPT_POWER" ref="berserk" value="1" />	
+    </adept>
+  </mentorspirit>
+
+</mentorspirits>
