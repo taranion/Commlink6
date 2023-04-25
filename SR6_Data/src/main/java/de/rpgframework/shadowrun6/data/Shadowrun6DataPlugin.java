@@ -169,7 +169,7 @@ public class Shadowrun6DataPlugin  {
 			initRevierbericht();
 			initDPSOTA2081();
 			initDPSOTA2082();
-			//initDPWestphalen();
+			initDPWestphalen();
 			//initHackNSlash();
 			initAstralWays();
 			//initBodyShop);
@@ -640,8 +640,6 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------DE Westphalen-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_WESTPHALEN", "de_westphalen.i18n", Locale.GERMAN);
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_westphalen/data/gear_preload.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" equipment");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_westphalen/data/gear_drones.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
 	}
