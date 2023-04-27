@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="bmw_sparkler" avail="2" price="6000" type="VEHICLES" subtype="BIKES">
+      <vehicle han="5/3" acc="20"  spdi="30" tspd="160" bod="4" arm="2" pil="1" sen="1" sea="1"/>
+      <modifications>
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="improved_economy" /> Rating not  stated in rules, thus assuming 1 -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/> -->
+                <!-- </embed> -->
+      </modifications>
+   </item>
+	
+	<item id="vw_impuls5" avail="2" price="15000" type="VEHICLES" subtype="CARS">
+      <vehicle han="3/5" acc="20"  spdi="20" tspd="140" bod="10" arm="3" pil="1" sen="2" sea="5"/>
+   </item>
+
+	<item id="emc_pepper" avail="3" price="38000" type="VEHICLES" subtype="VANS">
+      <vehicle han="5/5" acc="10"  spdi="10" tspd="120" bod="12" arm="5" pil="3" sen="2" sea="3"/>
+      <modifications>
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter" /> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="suncell_electr" /> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="living_space_middle" /> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2" included="true" /> -->
+                <!-- </embed> -->
+      </modifications>
+   </item>
+
+   <item id="kanalboot" avail="3"  price="120000"  type="VEHICLES" subtype="BOATS">
+      <vehicle han="5" acc="2" spdi="4" tspd="20" bod="16" arm="10" pil="1" sen="1" sea="8"/>
+      <modifications>
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter" /> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities_middle" /> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="living_space_middle" /> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4" included="true" /> -->
+                <!-- </embed> -->
+      </modifications>
+   </item>
+
+   <item id="ruhrmetall_flugscheibe" avail="3L"  price="9999"  type="VEHICLES" subtype="ROTORCRAFT">
+      <vehicle han="3" acc="8" spdi="10" tspd="55" bod="2" arm="6" pil="1" sen="1" sea="2"/>
+   </item>
+
+</items>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Biodrone "Garm" not added to XML, as avail 12 places this out of player reach -->
+
+   <item id="ruhrmetall_hovawart" avail="3L" price="12000" type="DRONE_MINI" subtype="AIR">
+      <vehicle han="3" acc="14" spdi="25" tspd="120" bod="1" arm="1" pil="3" sen="5" sea="0" /> 
+      <modifications>
+		<!-- According to current interpretation of Genesis, to achieve sensor rating 5 needs enhanced_sensors 5, which needs 5 slots, which the drone does not have, thus the mod is marked "included". Base sensor is 3 and enhanced_sensors is rating +2, needing two slots, one from electronics and one created from moving the 1 body and 1 powertrain to electronics.
+		Thus all slots are used. To represent this capacity is reduced to zero for all 3 mod slots. -->
+
+		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="enhanced_sensors" included="true" > wait for double clutch -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> -->
+                <!-- </embed> -->
+		<valmod type="HOOK" ref="VEHICLE_ELECTRONICS" value="-1" />
+		<valmod type="HOOK" ref="VEHICLE_CHASSIS" value="-1" />
+		<valmod type="HOOK" ref="VEHICLE_POWERTRAIN" value="-1" />
+      </modifications>
+   </item> 
+
+   <item id="jena_mewero" avail="2"  price="2500" type="DRONE_MINI" subtype="GROUND">
+      <vehicle han="3/3" acc="10" spdi="15" tspd="20" bod="2" arm="0" pil="2" sen="3" />
+      <modifications>
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="gecko_tips1" /> Gecko tips rating = Size Class 1 -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="powered_breakdown" /> Rating not  stated in rules, thus assuming 1 -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/> -->
+                <!-- </embed> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="distinctive_features" /> -->
+		<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true" /> <!-- As this is a walker, it does not have tires -->
+      </modifications>
+   </item>
+
+   <item id="messerschmitt_kawasaki_aevian" avail="6" price="1200" type="DRONE_SMALL" subtype="AIR" >
+      <vehicle han="3" acc="20" spdi="40" tspd="140" bod="2" arm="0" pil="3" sen="3" />
+   </item>
+    <item id="messerschmitt_kawasaki_aevian_echt" avail="6"  price="4500" type="DRONE_SMALL" subtype="AIR" >
+      <vehicle han="3" acc="20" spdi="40" tspd="140" bod="2" arm="0" pil="3" sen="3" />
+	  <modifications>
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="realistic_features" /> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
+                <!-- </embed> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="modslot_pp_to_chassis" /> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/> -->
+                <!-- </embed> -->
+      </modifications>
+   </item>
+
+   <item id="messerschmitt_kawasaki_jagdschrecke" avail="5L"  price="30000" type="DRONE_MEDIUM" subtype="AIR" >
+      <vehicle han="3" acc="30" spdi="35" tspd="200" bod="5" arm="6" pil="3" sen="2" />
+	  <modifications>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" />
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures" /> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
+                <!-- </embed> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="expanded_ammo" /> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
+                <!-- </embed> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="expanded_ammo" /> -->
+                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
+                <!-- </embed> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </embed>
+		<embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+      </modifications>
+   </item>
+
+   <item id="mk_jagdhund" avail="8" price="45000" type="DRONE_LARGE" subtype="GROUND"> <!-- Jagdhund One does not have the ability to transport a person, but comes with some softs -->
+      <vehicle han="2/6" acc="25" spdi="30" tspd="250" bod="8" arm="6" pil="5" sen="3" />
+      <modifications>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" />
+		<embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+		<embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+	  </modifications>
+   </item>
+
+   <item id="ruhrmetall_wolfsspinne" avail="7L"  price="100000" type="DRONE_MEDIUM" subtype="ANTHRO">
+      <vehicle han="4/4" acc="18" spdi="18" tspd="80" bod="8" arm="8" pil="4" sen="6" />
+      <modifications>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" id="d1b04404-7f78-4d5f-88e8-483a29dad19f" />
+		<embed type="GEAR" intoId="d1b04404-7f78-4d5f-88e8-483a29dad19f" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ruhrmetall_sfm_11m_smart" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" id="1b669365-59ef-43da-8cbd-b42c04226920" />
+		<embed type="GEAR" intoId="1b669365-59ef-43da-8cbd-b42c04226920" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ruhrmetall_sfm_11m_smart" />
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="gecko_tips3" /> Gecko tips rating = Size Class 3 -->		
+		<embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+		<embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                <decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="ruhrmetall_sfm_11m_smart"/>
+                </embed>
+	  </modifications>
+   </item>
+
+</items>

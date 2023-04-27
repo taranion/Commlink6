@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Ammo: Net Missiles for Krupp KD447 -->
+
+    <item id="krupp_AD1" avail="4L" price="3000" count="y" type="AMMUNITION" subtype="MISSILES" >
+        <ammo gz="0P" close="0P" near="0P" blast="3" />
+        <modifications>
+    		<checkmod type="SKILL" ref="firearms" value="1" what="DICE"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING"  value="2" />
+        </modifications>
+    </item>
+    
+    <item id="krupp_AD2" avail="6L" price="4200" count="y" type="AMMUNITION" subtype="MISSILES" >
+        <ammo gz="0P" close="0P" near="0P" blast="3" />
+        <modifications>
+    		<checkmod type="SKILL" ref="firearms" value="2" what="DICE"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING"  value="2" />
+        </modifications>
+    </item>
+    
+    <item id="krupp_AD3" avail="5I" price="4500" count="y" type="AMMUNITION" subtype="MISSILES" >
+        <ammo gz="0P" close="0P" near="0P" blast="3" />
+        <modifications>
+    		<checkmod type="SKILL" ref="firearms" value="3" what="DICE"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING"  value="2" />
+        </modifications>
+    </item>
+    
+<!-- Ammo: Tasers for Walther ESG-1 -->
+	
+	<item id="walther_esg_taser" avail="6" price="150" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" >
+	</item>
+
+	<item id="walther_esg_battery" avail="6" price="500" count="y" units="100" type="AMMUNITION" subtype="AMMUNITION" >
+	</item>
+
+</items>
