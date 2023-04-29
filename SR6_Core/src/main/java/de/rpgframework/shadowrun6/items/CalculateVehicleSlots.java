@@ -68,6 +68,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		}
 
 		calculateCargoFactor((Shadowrun6Character) charac, model);
+		calculateHardpoints((Shadowrun6Character) charac, model);
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 
@@ -134,5 +135,40 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		logger.log(Level.INFO, "{0}: CF is {1}   (substractSeats={2}, subtype={3})", model.getKey(), cf, substractSeats, subtype);
 
 		ensureSlotSize(model, ItemHook.VEHICLE_CF, cf);
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateHardpoints(Shadowrun6Character charac, CarriedItem<?> model) {
+		if (model.getAsObject(SR6ItemAttribute.ITEMTYPE)==null) return;
+		ItemType type = model.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+		ItemSubType subtype = model.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
+		ItemAttributeNumericalValue<SR6ItemAttribute> bodyA = model.getAsValue(SR6ItemAttribute.BODY);
+		int body = 0;
+		if (bodyA!=null) body = bodyA.getDistributed();
+		if (body==0)
+			return;
+
+		int hardpoints = 0;
+		switch (type) {
+		case VEHICLES:
+		case DRONE_LARGE:
+		case DRONE_MEDIUM:
+
+			hardpoints = (int)(body /3.0);
+			break;
+		case DRONE_SMALL:
+			if (body>3)
+				hardpoints=1;
+			break;
+		default:
+			// No extra hardpoints
+			return;
+		}
+
+		// Use unmodified BODY / 3
+		if (hardpoints==0)
+			return;
+
+		ensureSlotSize(model, ItemHook.VEHICLE_HARDPOINT, hardpoints);
 	}
 }

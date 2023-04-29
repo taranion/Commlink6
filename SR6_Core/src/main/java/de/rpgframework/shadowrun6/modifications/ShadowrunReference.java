@@ -50,6 +50,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.SignatureManeuver;
 import de.rpgframework.shadowrun6.Technique;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.ItemHook;
@@ -115,6 +116,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	RULE(new RuleFlagConverter()),
 	QUALITY(Quality.class),
 	SENSE("Sense"),
+	SIGNATURE_MANEUVERS("SIG"),
 	SIN(FakeRating.class,0),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILL(key -> Shadowrun6Core.getSkill(key)),

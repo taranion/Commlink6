@@ -445,7 +445,9 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} vehicles accessories", list.size());
 //		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"double_clutch/data/gear_vehicles.xml");
 //		logger.log(Level.DEBUG, "Loaded {0} vehicles", list.size());
-//		System.exit(1);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "double_clutch/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded {0} qualities", list.size());
+		//System.exit(1);
 	}
 
 	//-------------------------------------------------------------------

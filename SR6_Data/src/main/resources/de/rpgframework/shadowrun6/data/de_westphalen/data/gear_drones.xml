@@ -5,7 +5,7 @@
    <item avail="2"  price="5000" id="cnh_g12" type="DRONE_MEDIUM" subtype="AIR">
       <vehicle han="2" acc="15" spdi="30" tspd="140" bod="4" arm="3" pil="3" sen="4" />
       <modifications>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_walker" /> wait for double clutch -->
       </modifications>
    </item>
@@ -15,11 +15,11 @@
       <vehicle han="5/6" acc="4" spdi="10" tspd="80" bod="22" arm="10" pil="4" sen="4" />
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="mech_arm_large" /> -->
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_k12" />
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="mech_arm_large" /> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_k12" />
       </modifications>
 		<geardef>
 			<item id="weapon_k12" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
@@ -28,9 +28,9 @@
 			</item>
 		</geardef>
    </item>
-   
+
    <item avail="3"  price="50000" id="cnh_t12" type="DRONE_LARGE" subtype="GROUND">
       <vehicle han="5/7" acc="8" spdi="10" tspd="120" bod="20" arm="6" pil="2" sen="1" />
-   </item>   
+   </item>
 
 </items>

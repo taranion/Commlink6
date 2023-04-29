@@ -189,8 +189,8 @@ public class SR6MatrixDevicePage extends Page {
 			Label ret = new Label();
 			ret.setMaxWidth(Double.MAX_VALUE);
 			ret.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-			if (act.getSkill()!=null) {
-				SR6Skill skill = Shadowrun6Core.getSkill(act.getSkill());
+			if (act.getSkills()!=null) {
+				SR6Skill skill = Shadowrun6Core.getSkill(act.getSkills()[0]);
 				ShadowrunAttribute attr = (act.getAttribute()!=null)?act.getAttribute():skill.getAttribute();
 				Pool<Integer> pool = Shadowrun6Tools.getSkillPool(ctrl.getModel(), skill, attr);
 				ret.setText( pool.toString());

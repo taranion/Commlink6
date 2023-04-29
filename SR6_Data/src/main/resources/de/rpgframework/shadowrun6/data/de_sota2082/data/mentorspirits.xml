@@ -32,7 +32,7 @@
 		<checkmod type="SPELL" ref="COMBAT" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-		<valmod type="ADEPT_POWER" ref="mystic_armor" value="2" />	
+		<valmod type="ADEPT_POWER" ref="mystic_armor" value="2" />
     </adept>
   </mentorspirit>
 
@@ -48,7 +48,7 @@
 		<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-		<valmod type="ADEPT_POWER" ref="cool_resolve" value="3" />	
+		<valmod type="ADEPT_POWER" ref="cool_resolve" value="3" />
     </adept>
   </mentorspirit>
 
@@ -82,7 +82,7 @@
 		<checkmod type="SPELL" ref="CHOICE" choice="fbe4ffba-916b-4526-86c0-8c532c7bc159" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-		<valmod type="ADEPT_POWER" ref="spell_shroud" value="2" />	
+		<valmod type="ADEPT_POWER" ref="spell_shroud" value="2" />
     </adept>
   </mentorspirit>
 
@@ -116,10 +116,10 @@
 	<adept>
 		<selmod>
 			<itemmod type="ADEPT_POWER" ref="enhanced_perception" />
-			<!-- <allmod> -->
-				<!-- <itemmod type="ADEPT_POWER" ref="sustenance" /> -->
-				<!-- <itemmod type="ADEPT_POWER" ref="improved_sense" /> -->
-			<!-- </allmod> -->
+			<allmod>
+				<itemmod type="ADEPT_POWER" ref="sustenance" />
+				<itemmod type="ADEPT_POWER" ref="improved_sense" />
+			</allmod>
 		</selmod>
 	</adept>
 
@@ -137,7 +137,7 @@
 		<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-		<valmod type="ADEPT_POWER" ref="berserk" value="1" />	
+		<valmod type="ADEPT_POWER" ref="berserk" value="1" />
     </adept>
   </mentorspirit>
 

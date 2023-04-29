@@ -8,7 +8,7 @@
    </item>
 
    <item avail="99"  price="0" id="fire_stairs" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" modonly="true" >
-  		<usage mode="EMBEDDED" slot="VEHICLE_BODY" value="3"/>
+  		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
    </item>
 
 </items>

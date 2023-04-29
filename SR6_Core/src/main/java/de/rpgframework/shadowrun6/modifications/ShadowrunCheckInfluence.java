@@ -23,9 +23,11 @@ public enum ShadowrunCheckInfluence implements CheckInfluence {
 	EDGE_BOOST,
 	/** Replace one die with a wild die */
 	REPLACE_WITH_WILD,
+	ADD_WILD,
 	/** Cannot earn edge in that test */
 	NOT_EARN_EDGE,
 	NOT_SPEND_EDGE,
+	EDGE_CHASE,
 	OTHER
 
 }

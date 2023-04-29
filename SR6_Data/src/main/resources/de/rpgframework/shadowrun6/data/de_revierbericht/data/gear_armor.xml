@@ -87,7 +87,7 @@
 			<item id="myrmidon_drone" avail="99"  price="0" modonly="true" type="DRONE_SMALL" subtype="GROUND" >
 				<vehicle han="0" acc="0" spdi="0" tspd="0" bod="0" arm="0" pil="0" sen="4" />
 				<modifications>
-					<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="fe01d7e0-a730-4eb1-875e-30820952d08f"/> <!-- switch to small mount with double clutch -->
+					<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="fe01d7e0-a730-4eb1-875e-30820952d08f"/> <!-- switch to small mount with double clutch -->
 					<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" intoId="fe01d7e0-a730-4eb1-875e-30820952d08f" ref="steyr_tmp" id="3d818acd-d03e-4f87-8328-905ba1d5bacc"/>
 					<embed type="GEAR" intoId="3d818acd-d03e-4f87-8328-905ba1d5bacc" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
 					<embed  type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">

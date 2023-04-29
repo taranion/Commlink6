@@ -5,7 +5,7 @@
    	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS"/>
    </item>
    <item avail="4I"  price="2500" id="weapon_mount_standard" type="MOD_HARD" subtype="MOD_MOUNT">
-   	<usage mode="EMBEDDED" slot="VEHICLE_BODY" value="1"/>
+   	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
       <modifications>
          <valmod type="HOOK" ref="VEHICLE_WEAPON" value="1"/>
       </modifications>
@@ -15,7 +15,7 @@
       </variant>
    </item>
    <item avail="5I"  price="5000" id="weapon_mount_heavy" type="MOD_HARD" subtype="MOD_MOUNT">
-   	<usage mode="EMBEDDED" slot="VEHICLE_BODY" value="2"/>
+   	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
       <modifications>
          <valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1"/>
       </modifications>

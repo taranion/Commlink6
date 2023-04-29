@@ -17,7 +17,7 @@
       <vehicle han="2/4" acc="30" spdi="50" tspd="200" bod="5" arm="7" pil="4" sen="3" />
 	  <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="regular" />
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="regular" />
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> -->
@@ -54,8 +54,8 @@
       <vehicle han="3/5" acc="5" spdi="20" tspd="50" bod="6" arm="8" pil="3" sen="3" />
 	  <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="mech_arm_large" /> wait for double clutch -->
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="kurina_cleaning" />
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="mech_arm_large" /> wait for double clutch -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="kurina_cleaning" />
       </modifications>
 		<geardef>
 			<item id="kurina_cleaning" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" >
@@ -66,7 +66,7 @@
    <item id="messerschmitt_kawasaki_heuschrecke_2" avail="5"  price="12000" type="DRONE_MEDIUM" subtype="AIR" >
       <vehicle han="3" acc="30" spdi="40" tspd="180" bod="6" arm="7" pil="4" sen="4" />
 	  <modifications>
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" />
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting"> -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> -->
                 <!-- </embed> -->

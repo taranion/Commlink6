@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-  
+
 <!-- Special Vehicles -->
    <item id="fire_hellhound" avail="3L"  price="85000" type="VEHICLES" subtype="SPECIAL_VEHICLES">
       <vehicle han="3/4" acc="20" spdi="30" tspd="210" bod="14" arm="8" pil="3" sen="3" sea="4"/>
@@ -21,12 +21,12 @@
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="maersk_spider" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> for 3 Rovers, see text -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> wait for double clutch -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_micromini" /> for Hornets, see text  -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_micromini" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_micromini" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> for 3 Rovers, see text -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> wait for double clutch -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_micromini" /> for Hornets, see text  -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_micromini" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_micromini" /> -->
         </modifications>
    </item>
 
@@ -34,30 +34,30 @@
       <vehicle han="5/8" acc="12" spdi="15" tspd="90" bod="16" arm="8" pil="3" sen="3" sea="3"/>
         <modifications>
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="fire_stairs" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="fire_stairs" />
         </modifications>
    </item>
 
    <item id="fire_unimog" avail="2L"  price="650000" type="VEHICLES" subtype="SPECIAL_VEHICLES">
       <vehicle han="4/4" acc="12" spdi="20" tspd="110" bod="16" arm="10" pil="3" sen="3" sea="3"/>
         <modifications>
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="winch_automatic" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="winch_automatic" />
         </modifications>
    </item>
 
    <item id="fire_flf_muc" avail="5L"  price="2150000" type="VEHICLES" subtype="SPECIAL_VEHICLES">
       <vehicle han="4/6" acc="15" spdi="20" tspd="125" bod="18" arm="16" pil="3" sen="3" sea="3"/>
         <modifications>
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> for Protector, see text  --> 
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> for Protector, see text  -->
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
 				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
 				<!-- <decision choice="??" value="fire"/> -->
 				<!-- </embed> -->
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" id="4f901ca9-a8c9-468b-88ae-cf4587c3571b" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="4f901ca9-a8c9-468b-88ae-cf4587c3571b" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ares_charybdis" intoId="6f307bd2-54bc-487a-8f03-02d0028d8fa7" />
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="mech_arm_large" id="2b6ef1a3-2623-4bf5-a259-9672bf5e640a" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" id="eaee01f3-8792-46c0-abc6-3c0434bef4a8" intoId="2b6ef1a3-2623-4bf5-a259-9672bf5e640a" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="mech_arm_large" id="2b6ef1a3-2623-4bf5-a259-9672bf5e640a" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="eaee01f3-8792-46c0-abc6-3c0434bef4a8" intoId="2b6ef1a3-2623-4bf5-a259-9672bf5e640a" /> -->
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ares_charybdis" intoId="eaee01f3-8792-46c0-abc6-3c0434bef4a8" /> -->
         </modifications>
    </item>
@@ -65,7 +65,7 @@
    <item id="fire_dachshund" avail="4L"  price="1650000" type="VEHICLES" subtype="SPECIAL_VEHICLES">
       <vehicle han="4/4" acc="8" spdi="15" tspd="60" bod="18" arm="14" pil="3" sen="3" sea="2"/>
         <modifications>
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
 				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
 				<!-- <decision choice="??" value="fire"/> -->
@@ -75,11 +75,11 @@
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="satellite_link" />
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="retrans_unit" /> see text page 21 -->
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_walker" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="mech_arm_large" id="1faec6ff-fc96-4f7b-8a5d-9bdc308e9b76" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" id="ddfb9b6d-5f52-405e-a82b-44b06c55e026" intoId="1faec6ff-fc96-4f7b-8a5d-9bdc308e9b76" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="mech_arm_large" id="1faec6ff-fc96-4f7b-8a5d-9bdc308e9b76" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="ddfb9b6d-5f52-405e-a82b-44b06c55e026" intoId="1faec6ff-fc96-4f7b-8a5d-9bdc308e9b76" /> -->
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ares_charybdis" intoId="ddfb9b6d-5f52-405e-a82b-44b06c55e026" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="mech_arm_large" id="9e7457fd-c810-4cf8-be66-866c20f3c226" /> arm with chainsaw, see text page 21 --> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="2010d0a8-fc17-49bf-baf8-a2f8efc48c1a" intoId="9e7457fd-c810-4cf8-be66-866c20f3c226" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="mech_arm_large" id="9e7457fd-c810-4cf8-be66-866c20f3c226" /> arm with chainsaw, see text page 21 --> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="2010d0a8-fc17-49bf-baf8-a2f8efc48c1a" intoId="9e7457fd-c810-4cf8-be66-866c20f3c226" /> -->
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ash_arms_combat_chainsaw" variant="monofilament" intoId="2010d0a8-fc17-49bf-baf8-a2f8efc48c1a" /> -->
         </modifications>
    </item>
@@ -96,45 +96,45 @@
 				<!-- <decision choice="??" value="fire"/> -->
 				<!-- </embed> -->
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="ram_plate" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="ram_plate" /> -->
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" id="88277c2b-f8bf-40c4-bd4f-1359b3dbdb89" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="88277c2b-f8bf-40c4-bd4f-1359b3dbdb89" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ares_charybdis" intoId="88277c2b-f8bf-40c4-bd4f-1359b3dbdb89" />
         </modifications>
    </item>
-  
+
    <item id="fire_ruhrort_fire" avail="7L"  price="14800000" type="VEHICLES" subtype="SHIPS">
       <vehicle han="4" acc="15" spdi="20" tspd="90" bod="21" arm="8" pil="3" sen="7" sea="2"/>
         <modifications>
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large" /> -->
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> for Octocopter, see text page 22 -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> for Octocopter, see text page 22 -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="maersk_spider" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="99dc2fa4-a1b0-498e-9357-b57e1a2c5159" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="99dc2fa4-a1b0-498e-9357-b57e1a2c5159" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="99dc2fa4-a1b0-498e-9357-b57e1a2c5159" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="60bc9be9-64b7-4706-a1d6-2d6833e91bbb" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="60bc9be9-64b7-4706-a1d6-2d6833e91bbb" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="60bc9be9-64b7-4706-a1d6-2d6833e91bbb" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="faecafd9-485c-4a7f-bd89-afd96003cc8b" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="faecafd9-485c-4a7f-bd89-afd96003cc8b" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="faecafd9-485c-4a7f-bd89-afd96003cc8b" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="2540a8ff-6ae4-4f6d-854b-7f9da78d727c" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="2540a8ff-6ae4-4f6d-854b-7f9da78d727c" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="2540a8ff-6ae4-4f6d-854b-7f9da78d727c" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="f5fc6e9e-1fef-4b2f-8395-a947ca827101" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="f5fc6e9e-1fef-4b2f-8395-a947ca827101" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="f5fc6e9e-1fef-4b2f-8395-a947ca827101" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="8189c925-a140-4b5b-9e80-b450d4d8f53b" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="8189c925-a140-4b5b-9e80-b450d4d8f53b" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="8189c925-a140-4b5b-9e80-b450d4d8f53b" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard" id="a713818c-7754-4c64-a805-f9b03b701cc0" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="a713818c-7754-4c64-a805-f9b03b701cc0" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="a713818c-7754-4c64-a805-f9b03b701cc0" />
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="network_sharing" included="true"> wait for double clutch see text on page 22 -->
 				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
 				<!-- </embed> -->
         </modifications>
    </item>
-  
+
    <item id="fire_c1100" avail="5L"  price="2100000" type="VEHICLES" subtype="FIXED_WING">
       <vehicle han="5" acc="20" spdi="30" tspd="450" bod="18" arm="10" pil="4" sen="3" sea="3"/>
         <modifications>
@@ -142,23 +142,23 @@
 			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_boat" /> -->
         </modifications>
    </item>
-  
+
    <item id="fire_als694" avail="3"  price="310000" type="VEHICLES" subtype="ROTORCRAFT">
       <vehicle han="5" acc="10" spdi="30" tspd="195" bod="16" arm="8" pil="3" sen="4" sea="2"/>
         <modifications>
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="winch_automatic" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="winch_automatic" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="winch_automatic" /> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="winch_automatic" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="winch_automatic" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="winch_automatic" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="winch_automatic" /> -->
+			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="winch_automatic" /> -->
         </modifications>
    </item>
-  
+
    <item id="fire_eisvogel" avail="9L"  price="2200000" type="VEHICLES" subtype="LAV">
       <vehicle han="4" acc="50" spdi="80" tspd="720" bod="18" arm="10" pil="4" sen="3" sea="2"/>
         <modifications>
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
         </modifications>
    </item>
-  
+
 </items>
