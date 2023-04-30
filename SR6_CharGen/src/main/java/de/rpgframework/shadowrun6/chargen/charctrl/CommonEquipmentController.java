@@ -526,6 +526,20 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		logger.log(Level.INFO, "Items in slot={0},  free capacity={1}  Slot {2} hasCapacity={3}", realSlot.getAllEmbeddedItems().size(), realSlot.getFreeCapacity(), slot.name(), slot.hasCapacity());
 		if (container.getUuid().equals(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE))
 			return Possible.TRUE;
+		// If slot has a limit on size of accessories, verify it
+		if (realSlot.getMaxSizePerItem()!=null) {
+			float required = 1;
+			if (toEmbed.hasAttribute(SR6ItemAttribute.SIZE)) {
+				if (toEmbed.isFloat(SR6ItemAttribute.SIZE))
+					required = toEmbed.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue();
+				else
+					required = toEmbed.getAsValue(SR6ItemAttribute.SIZE).getModifiedValue();
+			}
+			if (required>realSlot.getMaxSizePerItem()) {
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_SIZE, slot.name(), container.getNameWithoutRating());
+			}
+		}
+
 
 		// Special handling for software: check types
 
@@ -533,14 +547,14 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		if (slot.hasCapacity() && realSlot.getCapacity()<99) {
 			float free = realSlot.getFreeCapacity();
 			float required = 1;
-			if (toEmbed.hasAttribute(SR6ItemAttribute.CAPACITY)) {
-				if (toEmbed.isFloat(SR6ItemAttribute.CAPACITY))
-					required = toEmbed.getAsFloat(SR6ItemAttribute.CAPACITY).getModifiedValue();
+			if (toEmbed.hasAttribute(SR6ItemAttribute.SIZE)) {
+				if (toEmbed.isFloat(SR6ItemAttribute.SIZE))
+					required = toEmbed.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue();
 				else
-					required = toEmbed.getAsValue(SR6ItemAttribute.CAPACITY).getModifiedValue();
+					required = toEmbed.getAsValue(SR6ItemAttribute.SIZE).getModifiedValue();
 			}
 			if (free<required) {
-				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, required, slot.getName(), container.getNameWithoutRating(), free);
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, realSlot.getMaxSizePerItem());
 			}
 		} else if (!slot.hasCapacity()) {
 			if (!realSlot.getAllEmbeddedItems().isEmpty()) {
