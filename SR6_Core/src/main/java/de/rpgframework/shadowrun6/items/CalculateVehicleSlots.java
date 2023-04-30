@@ -74,11 +74,11 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
-	private void ensureSlotSize(CarriedItem<?> model, ItemHook hook, int size) {
+	private AvailableSlot ensureSlotSize(CarriedItem<?> model, ItemHook hook, float size) {
 		logger.log(Level.WARNING, "Ensure slot {0} has capacity {1}", hook, size);
 		AvailableSlot slot = ((CarriedItem<ItemTemplate>)model).getSlot(hook);
 		if (slot==null) {
-			if (size==0) return;
+			if (size==0) return null;
 			slot = new AvailableSlot(hook, size);
 			model.addSlot(slot);
 		} else {
@@ -86,6 +86,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			else
 				slot.setCapacity(size);
 		}
+		return slot;
 	}
 
 	//-------------------------------------------------------------------
@@ -148,7 +149,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		if (body==0)
 			return;
 
-		int hardpoints = 0;
+		float hardpoints = 0;
 		switch (type) {
 		case VEHICLES:
 		case DRONE_LARGE:
@@ -158,7 +159,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			break;
 		case DRONE_SMALL:
 			if (body>3)
-				hardpoints=1;
+				hardpoints=0.5f;
 			break;
 		default:
 			// No extra hardpoints
@@ -169,6 +170,11 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		if (hardpoints==0)
 			return;
 
-		ensureSlotSize(model, ItemHook.VEHICLE_HARDPOINT, hardpoints);
+		AvailableSlot slot = ensureSlotSize(model, ItemHook.VEHICLE_HARDPOINT, hardpoints);
+		if (type==ItemType.DRONE_SMALL || type==ItemType.DRONE_MINI) {
+			if (slot!=null) {
+				slot.setMaxSizePerItem(0.5);
+			}
+		}
 	}
 }
