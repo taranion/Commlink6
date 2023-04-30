@@ -11,14 +11,8 @@
         </Root>
         <Logger name="xml" level="warn" />
         <Logger name="prelle.jfx" level="warn" />
-        <Logger name="rpgframework" level="debug" />
-        <Logger name="de.rpgframework.genericrpg" level="DEBUG" />
+        <Logger name="rpgframework" level="INFO" />
         <Logger name="de.rpgframework.genericrpg.items" level="WARN" />
-        <Logger name="de.rpgframework.genericrpg.items.formula" level="WARN" />
-        <Logger name="de.rpgframework.shadowrun.proc" level="INFO" />
-        <Logger name="de.rpgframework.shadowrun.proc.meta" level="DEBUG" />
         <Logger name="de.rpgframework.shadowrun6.items" level="WARN" />
-        <Logger name="de.rpgframework.shadowrun6.proc" level="INFO" />
-        <Logger name="de.rpgframework.shadowrun6.chargen.gen.attrib" level="TRACE" />
     </Loggers>
 </Configuration>

@@ -554,7 +554,10 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 					required = toEmbed.getAsValue(SR6ItemAttribute.SIZE).getModifiedValue();
 			}
 			if (free<required) {
-				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY, realSlot.getMaxSizePerItem());
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_CAPACITY,
+						required,
+						realSlot.getMaxSizePerItem(),
+						container.getKey(), free);
 			}
 		} else if (!slot.hasCapacity()) {
 			if (!realSlot.getAllEmbeddedItems().isEmpty()) {
