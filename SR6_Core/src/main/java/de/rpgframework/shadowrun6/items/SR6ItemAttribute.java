@@ -19,6 +19,7 @@ import de.rpgframework.shadowrun.persist.AmmunitionConverter;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.persist.AttackRatingArrayConverter;
+import de.rpgframework.shadowrun6.persist.OnRoadOffRoadConverter;
 import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
 
 /**
@@ -27,7 +28,7 @@ import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
  */
 public enum SR6ItemAttribute implements IItemAttribute {
 
-	ACCELERATION,
+	ACCELERATION(new OnRoadOffRoadConverter()),
 	AMMUNITION(new AmmunitionConverter()),
 	AMMUNITION_CLASS( new EnumConverter(AmmunitionClass.class)),
 	// Vehicle Armor
@@ -58,7 +59,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	ESSENCECOST(new FloatConverter()),
 	FIREMODES( (StringValueConverter)null),
 	FORCE,
-	HANDLING,
+	HANDLING(new OnRoadOffRoadConverter()),
 //	HAS_RATING,
 	/* For accessories: Where to attach it */
 	HOOK( new EnumConverter(ItemHook.class)),
@@ -91,11 +92,11 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	SKILL( (StringValueConverter)null),
 	SKILL_SPECIALIZATION( (StringValueConverter)null),
 //	SOCIAL,
-	SPEED_INTERVAL,
+	SPEED_INTERVAL(new OnRoadOffRoadConverter()),
 	TOPSPEED,
 	VEHICLE_TYPE( (StringValueConverter)null),
 	// Unmodified modification slots. 3 element array CHASSIS, ELECTRONICS, POWERTRAIN
-	VEHICLE_MODSLOTS,
+	VEHICLE_MODSLOTS( new IntegerArrayConverter()),
 
 	ATTACK,
 	SLEAZE,

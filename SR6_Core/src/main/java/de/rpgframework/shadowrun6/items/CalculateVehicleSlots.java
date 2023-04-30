@@ -43,7 +43,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		if (model.getAsObject(SR6ItemAttribute.VEHICLE_MODSLOTS)!=null) {
 			int[] base = model.getAsObject(SR6ItemAttribute.VEHICLE_MODSLOTS).getValue();
 			int[] changes = model.getModificationSlotChanges();
-			if (changes==null) {
+			if (changes==null || changes.length!=3) {
 				changes=new int[] {0,0,0};
 				model.setModificationSlotChanges(changes);
 			}
@@ -52,7 +52,6 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			ItemAttributeNumericalValue<SR6ItemAttribute> electro = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.MODSLOTS_ELECTRONICS, base[1]);
 			ItemAttributeNumericalValue<SR6ItemAttribute> powertr = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.MODSLOTS_POWERTRAIN, base[2]);
 			// Electronics / Powertrain
-			if (changes.length==0) changes=new int[] {0,0,0};
 			addModifications(chassis, electro, changes[0]);
 			addModifications(electro, powertr, changes[1]);
 			addModifications(powertr, chassis, changes[2]);
