@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="affinity_for_transit" 	  karma="6" pos="true" type="NORMAL" >
+   	<choices>
+   		<choice uuid="58b2700b-918d-4746-83a2-ccc189f1cb1b" type="TEXT"/>
+   	</choices>
+   </quality>
+   <quality id="always_ready" 	  karma="8" pos="true" type="NORMAL" max="7">
+     <modifications>
+       <checkmod type="SKILL" ref="piloting" value="1" what="EDGE" cond="y"/>
+     </modifications>
+   </quality>
+   <quality id="attribute_mastery" 	karma="3" pos="true" type="NORMAL">
+   	<choices>
+   		<choice uuid="58b2700b-918d-4746-83a2-ccc189f1cb1c" type="ATTRIBUTE" options="BODY,AGILITY,REACTION,STRENGTH,WILLPOWER,INTUITION,CHARISMA"/>
+   	</choices>
+   	 <requires>
+   	   <datareq type="QUALITY" ref="analytical_mind" negate="true"/>
+   	 </requires>
+     <modifications>
+       <checkmod type="ATTRIBUTE" ref="CHOICE" choice="58b2700b-918d-4746-83a2-ccc189f1cb1c" value="1" what="EDGE" apply="CHARACTER"/>
+     </modifications>
+   </quality>
+   <quality id="determination" 	  karma="11" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="SKILL" ref="piloting" value="1" what="EDGE_BOOST" />
+     </modifications>
+   </quality>
+   <quality id="driving_style_combat_ace" 	  karma="12" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="attack_run" value="2"/> <!-- This is only in US rules -->
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="aimbot"     value="3"/> <!-- This is only in DE rules -->
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="crossfire"  value="3"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="double_down" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="driving_style_getaway_driver" 	  karma="10" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="evade_pursuit" value="2"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="evasive_action" value="2"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="escape"        value="2"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="double_down" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="driving_style_interceptor" 	  karma="8" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="redline"      value="2"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="focus"        value="1"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="in_the_zone"  value="2"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="double_down"  value="1"/>
+     </modifications>
+   </quality>
+   <quality id="driving_style_reckless_driver" 	  karma="8" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="double_down" value="1"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="chicken"     value="3"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="equalizer"   value="1"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="up_the_ante" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="driving_style_stunt_driver" 	  karma="9" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="bootleg_turn" value="1"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="tokyo_drift"  value="2"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="pickup"       value="4"/>
+       <checkmod type="ACTION" what="EDGE_BOOST" ref="the_exit"     value="6"/>
+     </modifications>
+   </quality>
+   <quality id="grease_monkey" 	  karma="4" pos="true" type="NORMAL" hasLevel="true" max="2">
+		<choices>
+			<choice type="SKILLSPECIALIZATION" ref="engineering" uuid="55a6dda7-7565-4108-9a04-65b7607081e0" />
+		</choices>
+     <modifications>
+       <checkmod type="SKILL" ref="engineering" value="0" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="junkyard_king" 	  karma="4" pos="true" type="NORMAL" hasLevel="true" max="2">
+     <modifications>
+       <checkmod type="SKILL" ref="engineering" value="0" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="motorpool" 	  karma="3" pos="true" type="NORMAL" hasLevel="true" max="3" />
+   <quality id="signature_maneuver"  karma="4" pos="true" type="NORMAL" multi="yes">
+   	<choices>
+   		<choice type="SIGNATURE_MANEUVERS" uuid="1031aa98-982c-4544-b781-219514da7886"/>
+   	</choices>
+   </quality>
+   <quality id="silver_lining"  karma="8" pos="true" type="NORMAL" />
+   <quality id="speed_racer"    karma="8" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" what="EDGE_CHASE" ref="piloting" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="underdog"       karma="7" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="piloting" what="ADD_WILD" value="1"/>
+     </modifications>
+   </quality>
+   <quality id="vehicle_empathy" karma="4" pos="true" type="NORMAL" hasLevel="true" max="2">
+   	<choices>
+   		<choice type="SKILLSPECIALIZATION" ref="piloting" uuid="1031aa98-982c-4544-b781-219514da7890"/>
+   	</choices>
+   </quality>
+
+   <quality id="accident_prone"   karma="3" pos="false" type="NORMAL" />
+   <quality id="bermuda_gremlins" karma="4" pos="false" type="NORMAL" />
+   <quality id="dead_stick"       karma="4" pos="false" type="NORMAL">
+     <modifications>
+       <valmod type="SKILL" ref="piloting" value="0" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="drone_animosity"  karma="4" pos="false" type="NORMAL" />
+   <quality id="easy_mark"        karma="5" pos="false" type="NORMAL">
+     <modifications>
+       <valmod type="SKILL" ref="stealth" value="0" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="fuzz_magnet"      karma="8" pos="false" type="NORMAL" />
+   <quality id="motion_sickness"  karma="4" pos="false" type="NORMAL" />
+   <quality id="perforated_firewall"  karma="3" pos="false" type="NORMAL" />
+   <quality id="remote_pilot"     karma="12" pos="false" type="NORMAL" />
+   <quality id="road_rage"        karma="7" pos="false" type="NORMAL" />
+   <quality id="sore_thumb"       karma="7" pos="false" type="NORMAL" />
+   <quality id="specialist"       karma="8" pos="false" type="NORMAL">
+   	<choices>
+   		<choice type="SKILL" uuid="1031aa98-982c-4544-b781-219514da7891"/>
+   	</choices>
+     	<modifications>
+       	<checkmod type="SKILL" ref="CHOICE" choice="1031aa98-982c-4544-b781-219514da7891" what="NOT_EARN_EDGE" value="0"/>
+       	<checkmod type="SKILL" ref="CHOICE" choice="1031aa98-982c-4544-b781-219514da7891" what="NOT_SPEND_EDGE" value="0"/>
+     	</modifications>
+   </quality>
+   <quality id="target_fixation"  karma="8" pos="false" type="NORMAL" />
+
+</qualities>
