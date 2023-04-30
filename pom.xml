@@ -26,7 +26,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
 		<revision>0.0.2-SNAPSHOT</revision>
-		<rpgfw.version>5.1.0</rpgfw.version>
+		<rpgfw.version>5.1.1</rpgfw.version>
 	</properties>
 
 	<modules>
@@ -36,6 +36,7 @@
 		<module>SR6_CharGen_JFX</module>
 		<module>SR6_Foundry_VTT</module>
 		<module>SR6_Export_JSON</module>
+		<module>SR6_Export_FVTT</module>
 		<!--module>Commlink6</module-->
 	</modules>
 
