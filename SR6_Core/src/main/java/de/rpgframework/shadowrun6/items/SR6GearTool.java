@@ -110,7 +110,7 @@ public class SR6GearTool extends GearTool {
 
 	//-------------------------------------------------------------------
 	public static <I extends IItemAttribute> OperationResult<List<Modification>> recalculate(String indent, Lifeform user, CarriedItem<ItemTemplate> item) {
-		logger.log(Level.INFO, "recalculate "+item.getKey());
+		logger.log(Level.DEBUG, "recalculate {0} of {1}",item.getKey(), (user!=null)?user.getName():null);
 		if (item.getResolved()==null) {
 			if (item.getUuid().equals(ItemTemplate.UUID_UNARMED))
 				return new OperationResult<>(new ArrayList<>());
@@ -120,6 +120,17 @@ public class SR6GearTool extends GearTool {
 			else
 				item.setResolved(temp);
 		}
+
+		// Resolve accessories if necessary
+		for (CarriedItem<ItemTemplate> tmp : item.getAccessories()) {
+			if (tmp.getResolved()==null) {
+				tmp.setResolved(Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey()));
+				if (tmp.getVariantID()!=null && tmp.getVariant()==null) {
+					tmp.setVariant( tmp.getResolved().getVariant(tmp.getCarryMode()) );
+				}
+			}
+		}
+
 		try {
 			item.setDirty(false);
 			return GearTool.recalculate(indent, ShadowrunReference.ITEM_ATTRIBUTE, user, item);

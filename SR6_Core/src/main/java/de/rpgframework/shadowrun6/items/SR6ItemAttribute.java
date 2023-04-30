@@ -86,7 +86,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	SEATS,
 	SENSORS,
 	/** The amount of capacity slots required */
-	SIZE,
+	SIZE(new FloatConverter()),
 	SKILL,
 	SKILL_SPECIALIZATION,
 //	SOCIAL,
