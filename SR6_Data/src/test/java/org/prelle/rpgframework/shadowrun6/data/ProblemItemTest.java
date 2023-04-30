@@ -127,7 +127,7 @@ public class ProblemItemTest {
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getDistributed());
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
 		assertEquals(1750, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
-		assertEquals(7, carried.getAsValue(SR6ItemAttribute.SIZE).getModifiedValue());
+		assertEquals(7, carried.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue(), 0);
 	}
 
 	//-------------------------------------------------------------------
