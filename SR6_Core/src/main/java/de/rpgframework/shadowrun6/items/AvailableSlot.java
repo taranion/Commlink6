@@ -18,6 +18,8 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 
 	@Attribute
 	private ItemHook ref;
+	@Attribute(name="max")
+	private Double maxSizePerItem;
 
 
 	//-------------------------------------------------------------------
@@ -72,6 +74,22 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 		} else {
 			return embedded.isEmpty()?1:0;
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the maxSizePerItem
+	 */
+	public Double getMaxSizePerItem() {
+		return maxSizePerItem;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param maxSizePerItem the maxSizePerItem to set
+	 */
+	public void setMaxSizePerItem(Double maxSizePerItem) {
+		this.maxSizePerItem = maxSizePerItem;
 	}
 
 }
