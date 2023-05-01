@@ -59,7 +59,7 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 	//-------------------------------------------------------------------
 	public float getFreeCapacity() {
 		if (ref.hasCapacity) {
-			float free = capacity;
+			double free = getCapacity();
 			for (CarriedItem<ItemTemplate> accessory : embedded) {
 				float size = 1.0f;
 				if (accessory.hasAttribute(SR6ItemAttribute.SIZE)) {
@@ -70,7 +70,7 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 				}
 				free -= size;
 			}
-			return free;
+			return (float)free;
 		} else {
 			return embedded.isEmpty()?1:0;
 		}
