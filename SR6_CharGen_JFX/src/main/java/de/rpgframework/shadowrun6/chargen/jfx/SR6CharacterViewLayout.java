@@ -34,6 +34,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
+import de.rpgframework.shadowrun6.chargen.jfx.page.BodyPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CareerPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CombatPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.GearPage;
@@ -75,6 +76,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private GearPage pgGear;
 	private LifePage pgLife;
 	private CareerPage pgCareer;
+	private BodyPage pgBody;
 
 	private Label lbMode;
 	private Label lbKarma, lbNuyen;
@@ -157,7 +159,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgGear   = new GearPage();
 		pgLife   = new LifePage();
 		pgCareer = new CareerPage();
-		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife);
+		pgBody   = new BodyPage();
+		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife); //, pgBody);
 	}
 
 	//-------------------------------------------------------------------
@@ -289,6 +292,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgGear.setController(control);
 		pgLife.setController(control);
 		pgCareer.setController(control);
+		pgBody.setController(control);
 		control.setAllowRunProcessor(true);
 
 		refreshPages();
@@ -296,14 +300,14 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 
 		MagicOrResonanceType mtype = control.getModel().getMagicOrResonanceType();
 		if (mtype==null) {
-			getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife);
+			getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
 		} else {
 			if (mtype.usesMagic()) {
-				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear, pgLife);
+				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
 			} else if (mtype.usesResonance()) {
-				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife);
+				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife); //, pgBody);
 			} else {
-				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife);
+				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
 			}
 		}
 		if (control instanceof SR6CharacterLeveller) {
@@ -356,7 +360,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgGear.refresh();
 		pgLife.refresh();
 		pgCareer.refresh();
-
+		pgBody.refresh();
 	}
 
 	//-------------------------------------------------------------------
