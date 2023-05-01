@@ -151,11 +151,14 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				model.addSlot(slot);
 			} else {
 				CarriedItem<ItemTemplate> parent = model.getParent();
+				// If possible, assume slot should be inserted into parent
+				AvailableSlot slot = null;
 				if (parent==null) {
 					logger.log(Level.WARNING, "HOOK modification for item without a parent: {0}", model.getKey());
-					return false;
+					slot = model.getSlot(hook);
+				} else {
+					slot = parent.getSlot(hook);
 				}
-				AvailableSlot slot = parent.getSlot(hook);
 				if (mod.isRemove()) {
 					logger.log(Level.INFO, "Remove slot {0} from {1}", hook, mod.getSource());
 					model.removeSlot(hook);

@@ -47,7 +47,7 @@ public class CalculateAccessorySizes implements CarriedItemProcessor {
 			Usage usage = accessory.getResolved().getUsage(accessory.getCarryMode());
 
 			//logger.log(Level.INFO, indent+"accessory {0} in slot {1}", accessory.getKey(), hook);
-			OperationResult<List<Modification>> sub = GearTool.recalculate("", refType, charac, accessory, strict);
+//			OperationResult<List<Modification>> sub = GearTool.recalculate("", refType, charac, accessory, strict);
 			logger.log(Level.INFO, "Usage ''{0}''", usage);
 			// Check if a resolution is necessary
 			float size = 1;

@@ -353,7 +353,7 @@
          </selreq>
       </requires>
       <modifications>
-      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="2"/>
+      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="2" apply="DATA_ITEM"/>
       </modifications>
    </item>
 
@@ -367,7 +367,7 @@
         </selreq>
       </requires>
       <modifications>
-      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="3"/>
+      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="3" apply="DATA_ITEM"/>
       </modifications>
    </item>
 
