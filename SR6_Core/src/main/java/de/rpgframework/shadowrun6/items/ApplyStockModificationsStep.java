@@ -150,25 +150,39 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				AvailableSlot slot = new AvailableSlot(hook, model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS).getDistributed());
 				model.addSlot(slot);
 			} else {
+				CarriedItem<ItemTemplate> parent = model.getParent();
+				if (parent==null) {
+					logger.log(Level.WARNING, "HOOK modification for item without a parent: {0}", model.getKey());
+					return false;
+				}
+				AvailableSlot slot = parent.getSlot(hook);
 				if (mod.isRemove()) {
 					logger.log(Level.INFO, "Remove slot {0} from {1}", hook, mod.getSource());
 					model.removeSlot(hook);
 				} else {
 					if (hook.hasCapacity) {
 						ValueModification valMod = (ValueModification)mod;
-						AvailableSlot slot = null;
-						if (valMod.isDouble()) {
-							logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2}", hook, valMod.getValueAsDouble(), mod.getSource());
-							slot = new AvailableSlot(hook, (float) valMod.getValueAsDouble());
+						if (slot!=null) {
+							logger.log(Level.INFO, "For slot {0} add capacity {1} from {2}", hook, valMod.getValueAsDouble(), mod.getSource());
+							slot.addModification(valMod);
 						} else {
-							logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2}", hook, valMod.getValue(), mod.getSource());
-							slot = new AvailableSlot(hook, valMod.getValue());
+							if (valMod.isDouble()) {
+								logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2}", hook, valMod.getValueAsDouble(), mod.getSource());
+								slot = new AvailableSlot(hook, (float) valMod.getValueAsDouble());
+							} else {
+								logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2}", hook, valMod.getValue(), mod.getSource());
+								slot = new AvailableSlot(hook, valMod.getValue());
+							}
+							model.addSlot(slot);
 						}
-						model.addSlot(slot);
 					} else {
-						logger.log(Level.INFO, "Add slot {0} without capacity from {1}", hook, mod.getSource());
-						AvailableSlot slot = new AvailableSlot(hook);
-						model.addSlot(slot);
+						if (slot!=null) {
+							logger.log(Level.INFO, "Slot {0} to add from {1} already exists", hook, mod.getSource());
+						} else {
+							logger.log(Level.INFO, "Add slot {0} without capacity from {1}", hook, mod.getSource());
+							slot = new AvailableSlot(hook);
+							model.addSlot(slot);
+						}
 					}
 				}
 			}
