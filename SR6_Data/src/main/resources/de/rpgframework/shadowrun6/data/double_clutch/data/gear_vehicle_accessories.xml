@@ -540,25 +540,25 @@
     		<attrdef id="PRICE" value="250"/>
       </variant>
    </item>
-<!--
-
-
 
    <item id="ejection_seat" avail="6L" price="2000"  type="ACCESSORY" subtype="MOD_INTERIOR">
    	<usage mode="EMBEDDED" slot="VEHICLE_CF" value="1"/>
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
-   </item>
-   <item id="ejection_seat_para" lang="de" avail="6L" price="3000"  type="ACCESSORY" subtype="MOD_INTERIOR">
-   	<usage mode="EMBEDDED" slot="VEHICLE_CF" value="1"/>
-      <requires>
-        <datareq type="ITEMTYPE" ref="VEHICLES" />
-      </requires>
+      <variant id="parachute">
+        <attrdef id="PRICE" value="3000"/>
+      </variant>
    </item>
 
-   <item id="electromag_shielding" avail="3L" price="1000" rate="y" maxrat="999" ratemul="PRICE" type="ACCESSORY" subtype="MOD_INTERIOR">
+
+
+   <item id="electromag_shielding" avail="3L" price="1000" type="ACCESSORY" subtype="MOD_INTERIOR">
+   	<choices>
+  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="99"/>
+   	</choices>
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0.5"/>
+        <attrdef id="PRICE" value="$RATING*1000"/>
    </item>
 
    <item id="internal_security_gas" avail="4I" price="3000"  type="ACCESSORY" subtype="MOD_INTERIOR">
@@ -578,10 +578,9 @@
    <item id="integrated_cyberarm" avail="4" price="15000"  type="ACCESSORY" subtype="MOD_INTERIOR">
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
       <modifications>
-        <itemhookmod capacity="15" hook="CYBERLIMB_IMPLANT" />
+  			<valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="15"/>
       </modifications>
    </item>
-  -->
 
    <item id="life_safety_system" avail="4" price="1000" type="ACCESSORY" subtype="MOD_INTERIOR" reqVariant="y">
       <requires>
@@ -599,16 +598,19 @@
 		</variant>
    </item>
 
-	<!--
-   <item id="passenger_prot_system" avail="3" price="2500" rate="y" maxrat="6" ratemul="PRICE CAPACITY" type="ACCESSORY" subtype="MOD_CARGO">
-   	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0.5"/>
-   	 <useas type="ACCESSORY" subtype="MOD_CARGO" cap="0.5" slot="VEHICLE_CHASSIS"/>
+   <item id="passenger_prot_system" avail="3" price="2500" type="ACCESSORY" subtype="MOD_CARGO">
+   	<choices>
+  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
+   	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0.5*$RATING"/>
+   	<attrdef id="PRICE" value="$RATING*2500"/>
    </item>
 
 
+	<!--
 
    <item id="increase_cargo_space" avail="2" price="800" type="MOD_CHASSIS" subtype="MOD_CARGO" rate="y" ratemul="PRICE CAPACITY MODIFIER" >
    	 <useas type="ACCESSORY" subtype="MOD_CARGO" cap="1" slot="VEHICLE_CHASSIS"/>
@@ -654,66 +656,73 @@
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5" i18n="lifestyle"/>
       </choices>
-			<usage mode="EMBEDDED" value="2*$RATING" slot="VEHICLE_CF"/>
-			<attrdef id="PRICE" value="$RATING" table="500,2000,5000,10000,100000"/>
+		<usage mode="EMBEDDED" value="2*$RATING" slot="VEHICLE_CF"/>
+		<attrdef id="PRICE" value="$RATING" table="500,2000,5000,10000,100000"/>
    </item>
 
-<!--
+
    <item id="portable_facility_install" avail="8" price="25000" type="MOD_CHASSIS" subtype="MOD_CARGO" >
-   	 <useas type="ACCESSORY" subtype="MOD_CARGO" cap="0" slot="VEHICLE_CF"/>
+		<usage mode="EMBEDDED" value="0" slot="VEHICLE_CF"/>
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
    </item>
 
-   <item id="portable_facility" avail="8" price="50000" type="MOD_CHASSIS" subtype="MOD_CARGO" >
-   	 <useas type="ACCESSORY" subtype="MOD_CARGO" cap="50" slot="VEHICLE_CF"/>
+   <item id="portable_facility" avail="8" price="50000" type="MOD_CHASSIS" subtype="MOD_CARGO">
+      <choices>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1800" type="SKILLSPECIALIZATION" />
+      </choices>
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
+		<usage mode="EMBEDDED" value="50" slot="VEHICLE_CF"/>
    </item>
 
    <item id="rigger_cocoon" avail="4" price="3000" type="MOD_CHASSIS" subtype="MOD_CARGO"  >
-   	 <useas type="ACCESSORY" subtype="MOD_CARGO" cap="1" slot="VEHICLE_CF"/>
+		<usage mode="EMBEDDED" value="1" slot="VEHICLE_CF"/>
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
    </item>
 
-   <item id="smuggling_compartment_vehicle" avail="4I" price="1000" rate="y" maxrat="4" ratemul="PRICE CAPACITY" >
-   	 <useas type="ACCESSORY" subtype="MOD_CARGO" slot="VEHICLE_CF" cap="1"/>
+   <item id="smuggling_compartment_vehicle" avail="4I" price="1000" type="MOD_CHASSIS" subtype="MOD_CARGO">
+      <choices>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" i18n="cargo"/>
+      </choices>
+		<usage mode="EMBEDDED" slot="VEHICLE_CF" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*1000"/>
    </item>
 
-   <item id="smuggling_compartment_shielding" avail="4I" price="250" rate="y" maxrat="4" ratemul="PRICE"  >
-   	 <useas type="ACCESSORY" subtype="MOD_CARGO" slot="VEHICLE_CF" cap="0"/>
+   <item id="smuggling_compartment_shielding" avail="4I" price="250" type="MOD_CHASSIS" subtype="MOD_CARGO">
+      <choices>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" i18n="cargo"/>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1801" type="TEXT" i18n="sensor_type"/>
+      </choices>
+		<usage mode="EMBEDDED" value="0" slot="VEHICLE_CF"/>
+		<attrdef id="PRICE" value="$RATING*250"/>
    </item>
 
-   <item id="valkyrie_module" avail="4" price="3000"  >
-   	<useas type="ACCESSORY" subtype="MOD_CARGO" slot="VEHICLE_CF" cap="2"/>
-      <requires>
-         <selreq>
-            <datareq type="ITEMTYPE" ref="VEHICLES" />
-         </selreq>
-      </requires>
-   </item>
-  -->
-   <item id="valkyrie_module_drone" avail="4" price="3000" type="ACCESSORY" subtype="MOD_CARGO">
-   	<usage mode="EMBEDDED" slot="VEHICLE_CF" cap="2"/>
-      <requires>
-        <!-- itemreq item="medevac" does not work as itemreq checks the items into which the new item is installed, it does not check for other installed items in the same top item -->
-         <selreq>
-            <datareq type="ITEMTYPE" ref="DRONE_LARGE" />
-         </selreq>
-      </requires>
+   <item id="valkyrie_module" avail="4" price="3000" type="MOD_CHASSIS" subtype="MOD_CARGO" reqVariant="y">
+		<usage mode="EMBEDDED" value="2" slot="VEHICLE_CF"/>
+		<variant id="regular">
+      	<requires>
+         	<datareq type="ITEMTYPE" ref="VEHICLES"/>
+      	</requires>
+		</variant>
+		<variant id="drone">
+      	<requires>
+         	<datareq type="ITEMTYPE" ref="DRONE_LARGE"/>
+         	<datareq type="CARRIED" ref="medvac" apply="DATA_ITEM"/>
+      	</requires>
+		</variant>
    </item>
 
 
 <!-- Skin Mods -->
 <!-- Forms -->
-	<!--
    <item id="form_stripping" avail="2" price="4000" type="MOD_SKIN" subtype="MOD_FORM"  >
+		<usage mode="EMBEDDED" value="0" slot="VEHICLE_CHASSIS"/>
       <requires>
-        <slotreq capacity="0" slot="VEHICLE_CHASSIS" />
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
       <modifications>
@@ -722,12 +731,11 @@
    </item>
 
    <item id="form_increasing" avail="3" price="6000" type="MOD_SKIN" subtype="MOD_FORM"  >
+		<usage mode="EMBEDDED" value="1" slot="VEHICLE_CHASSIS"/>
       <requires>
-        <slotreq capacity="1" slot="VEHICLE_CHASSIS" />
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
    </item>
- -->
 
    <item id="realistic_features" type="MOD_SKIN" subtype="MOD_FORM"  >
       <choices>
