@@ -47,6 +47,7 @@ public class SR6GearTool extends GearTool {
 //			new DetermineStandardEssenceStep(),
 			new DeriveCapacityAttributeStep(),
 			new CalculateAccessorySizes(),
+			new InsertDefaultAccessories(),
 			new HandleAugmentationGradeStep(),
 			new ApplyItemFlagsStep(),
 			new AddUpPricesStep(),
