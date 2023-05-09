@@ -602,5 +602,17 @@ public class SR6CarriedItemTest {
 		SR6GearTool.recalculate("", null, yamaha);
 		slot = yamaha.getSlot(ItemHook.VEHICLE_HARDPOINT);
 		assertEquals(5, slot.getCapacity(), 0);
+
+		// Add something to the hardpoint slot
+		ItemTemplate mount = Shadowrun6Core.getItem(ItemTemplate.class, "weapon_mount_standard");
+		assertNotNull(mount);
+		CarriedItem<ItemTemplate> mountItem = new CarriedItem<ItemTemplate>(mount, null, CarryMode.EMBEDDED);
+		assertNotNull(mountItem);
+		yamaha.addAccessory(mountItem, ItemHook.VEHICLE_HARDPOINT);
+		slot = yamaha.getSlot(ItemHook.VEHICLE_HARDPOINT);
+		assertEquals(5, slot.getCapacity(), 0);
+		assertEquals(1, slot.getUsedCapacity(), 0);
+
+
 	}
 }
