@@ -76,190 +76,119 @@
 
 
 	<!-- Tires -->
-   <item id="tires_offroad" avail="2" price="800" type="ACCESSORY" subtype="TIRES" reqVariant="y">
+   <item id="tires_small" avail="2" price="400" type="ACCESSORY" subtype="TIRES" reqVariant="y">
   		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <modifications>
-      	<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
-      	<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
-      </modifications>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="1600"/>
-      </variant>
-      <variant id="small_run_flat">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="1200"/>
-      </variant>
-      <variant id="large_run_flat">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="2400"/>
-      </variant>
-   </item>
-
-   <item id="tires_racing" avail="2" price="500" type="ACCESSORY" subtype="TIRES" reqVariant="y">
-  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <modifications>
-      	<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
-      	<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
-      </modifications>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="1000"/>
-      </variant>
-      <variant id="small_run_flat">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="900"/>
-      </variant>
-      <variant id="large_run_flat">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="1800"/>
-      </variant>
-   </item>
-
-   <item id="tires_runflat" avail="2" price="400" type="ACCESSORY" subtype="TIRES" reqVariant="y">
-  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
+     	<requires>
+     		<selreq>
+    			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
+     			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
+     			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
+        	</selreq>
+     	</requires>
+      <variant id="runflat" />
+      <variant id="offroad">
+      	<attrdef id="AVAILABILITY" value="2"/>
       	<attrdef id="PRICE" value="800"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
+      	</modifications>
       </variant>
-   </item>
-
-   <item id="tires_smart" avail="4" price="1200" type="ACCESSORY" subtype="TIRES" reqVariant="y">
-  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <modifications>
-      	<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
-      	<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
-      </modifications>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="2400"/>
-      </variant>
-   </item>
-
-   <item id="tires_shredders" avail="4I" price="600" type="ACCESSORY" subtype="TIRES" reqVariant="y">
-  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <modifications>
-      	<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$$BODY" apply="DATA_ITEM"/>
-      </modifications>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
+      <variant id="offroad_runflat">
+      	<attrdef id="AVAILABILITY" value="2"/>
       	<attrdef id="PRICE" value="1200"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="racing">
+      	<attrdef id="PRICE" value="500"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
+      	</modifications>
+      </variant>
+      <variant id="racing_runflat">
+      	<attrdef id="PRICE" value="900"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
+      	</modifications>
+      </variant>
+      <variant id="smart">
+      	<attrdef id="PRICE" value="1200"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="shredders">
+      	<attrdef id="PRICE" value="600"/>
+      	<attrdef id="AVAILABILITY" value="4I"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$$BODY" apply="DATA_ITEM" cond="y"/>
+      	</modifications>
       </variant>
    </item>
 
+   <item id="tires_large" avail="2" price="800" type="ACCESSORY" subtype="TIRES" reqVariant="y">
+  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
+     	<requires>
+     		<selreq>
+      		<datareq type="ITEMSUBTYPE" ref="CARS"/>
+      		<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
+      		<datareq type="ITEMSUBTYPE" ref="VANS"/>
+      		<datareq type="ITEMSUBTYPE" ref="BUS"/>
+      		<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
+        	</selreq>
+     	</requires>
+      <variant id="runflat" />
+      <variant id="offroad">
+      	<attrdef id="PRICE" value="1600"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="offroad_runflat">
+      	<attrdef id="PRICE" value="2400"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="racing">
+      	<attrdef id="PRICE" value="1000"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
+      	</modifications>
+      </variant>
+      <variant id="racing_runflat">
+      	<attrdef id="PRICE" value="1800"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
+      	</modifications>
+      </variant>
+      <variant id="smart">
+      	<attrdef id="PRICE" value="2400"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="shredders">
+      	<attrdef id="PRICE" value="1200"/>
+      	<attrdef id="AVAILABILITY" value="4I"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$$BODY" apply="DATA_ITEM" cond="y"/>
+      	</modifications>
+      </variant>
+    </item>
 
 
 	<!-- Chassis Mods -->
