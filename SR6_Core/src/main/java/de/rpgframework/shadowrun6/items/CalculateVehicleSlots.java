@@ -43,7 +43,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		if (model.getAsObject(SR6ItemAttribute.VEHICLE_MODSLOTS)!=null) {
 			int[] base = model.getAsObject(SR6ItemAttribute.VEHICLE_MODSLOTS).getValue();
 			int[] changes = model.getModificationSlotChanges();
-			if (changes==null) {
+			if (changes==null || changes.length!=3) {
 				changes=new int[] {0,0,0};
 				model.setModificationSlotChanges(changes);
 			}
@@ -68,16 +68,17 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		}
 
 		calculateCargoFactor((Shadowrun6Character) charac, model);
+		calculateHardpoints((Shadowrun6Character) charac, model);
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
-	private void ensureSlotSize(CarriedItem<?> model, ItemHook hook, int size) {
+	private AvailableSlot ensureSlotSize(CarriedItem<?> model, ItemHook hook, float size) {
 		logger.log(Level.WARNING, "Ensure slot {0} has capacity {1}", hook, size);
 		AvailableSlot slot = ((CarriedItem<ItemTemplate>)model).getSlot(hook);
 		if (slot==null) {
-			if (size==0) return;
+			if (size==0) return null;
 			slot = new AvailableSlot(hook, size);
 			model.addSlot(slot);
 		} else {
@@ -85,6 +86,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			else
 				slot.setCapacity(size);
 		}
+		return slot;
 	}
 
 	//-------------------------------------------------------------------
@@ -134,5 +136,45 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		logger.log(Level.INFO, "{0}: CF is {1}   (substractSeats={2}, subtype={3})", model.getKey(), cf, substractSeats, subtype);
 
 		ensureSlotSize(model, ItemHook.VEHICLE_CF, cf);
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateHardpoints(Shadowrun6Character charac, CarriedItem<?> model) {
+		if (model.getAsObject(SR6ItemAttribute.ITEMTYPE)==null) return;
+		ItemType type = model.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+		ItemSubType subtype = model.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
+		ItemAttributeNumericalValue<SR6ItemAttribute> bodyA = model.getAsValue(SR6ItemAttribute.BODY);
+		int body = 0;
+		if (bodyA!=null) body = bodyA.getDistributed();
+		if (body==0)
+			return;
+
+		float hardpoints = 0;
+		switch (type) {
+		case VEHICLES:
+		case DRONE_LARGE:
+		case DRONE_MEDIUM:
+
+			hardpoints = (int)(body /3.0);
+			break;
+		case DRONE_SMALL:
+			if (body>3)
+				hardpoints=0.5f;
+			break;
+		default:
+			// No extra hardpoints
+			return;
+		}
+
+		// Use unmodified BODY / 3
+		if (hardpoints==0)
+			return;
+
+		AvailableSlot slot = ensureSlotSize(model, ItemHook.VEHICLE_HARDPOINT, hardpoints);
+		if (type==ItemType.DRONE_SMALL || type==ItemType.DRONE_MINI) {
+			if (slot!=null) {
+				slot.setMaxSizePerItem(0.5);
+			}
+		}
 	}
 }

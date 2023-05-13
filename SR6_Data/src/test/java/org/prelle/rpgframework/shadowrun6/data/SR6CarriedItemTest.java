@@ -574,4 +574,45 @@ public class SR6CarriedItemTest {
 		assertEquals(3, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getUsedCapacity(), 0);
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void testAccessoryGrantingModSlots() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "chrysler-nissan_jackrabbit");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> yamaha = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		SR6GearTool.recalculate("", null, yamaha);
+		assertNotNull(yamaha);
+		assertNotNull(yamaha.getAsValue(SR6ItemAttribute.PRICE));
+		assertEquals(11000, yamaha.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals(8, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getFreeCapacity(), 0);
+		assertEquals(8, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getCapacity(), 0);
+		assertEquals(0, yamaha.getSlot(ItemHook.VEHICLE_CHASSIS).getUsedCapacity(), 0);
+
+		AvailableSlot slot = yamaha.getSlot(ItemHook.VEHICLE_HARDPOINT);
+		assertNotNull(slot);
+		assertEquals(2, slot.getCapacity(), 0);
+
+		ItemTemplate accessory = Shadowrun6Core.getItem(ItemTemplate.class, "hardpoint_huge");
+		assertNotNull(accessory);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(accessory, null, CarryMode.EMBEDDED);
+		assertNotNull(item);
+		yamaha.addAccessory(item, ItemHook.VEHICLE_CHASSIS);
+		SR6GearTool.recalculate("", null, yamaha);
+		slot = yamaha.getSlot(ItemHook.VEHICLE_HARDPOINT);
+		assertEquals(5, slot.getCapacity(), 0);
+
+		// Add something to the hardpoint slot
+		ItemTemplate mount = Shadowrun6Core.getItem(ItemTemplate.class, "weapon_mount_standard");
+		assertNotNull(mount);
+		CarriedItem<ItemTemplate> mountItem = new CarriedItem<ItemTemplate>(mount, null, CarryMode.EMBEDDED);
+		assertNotNull(mountItem);
+		yamaha.addAccessory(mountItem, ItemHook.VEHICLE_HARDPOINT);
+		slot = yamaha.getSlot(ItemHook.VEHICLE_HARDPOINT);
+		assertEquals(5, slot.getCapacity(), 0);
+		assertEquals(1, slot.getUsedCapacity(), 0);
+
+
+	}
 }

@@ -124,7 +124,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		// note: SOFTWARE_DRONE uses slot 5, see Kommlinks
 		case VEHICLE_TIRES      : index= 6; break;
 		case VEHICLE_ACCESSORY  : index= 8; break;
-		case VEHICLE_BODY       : index= 9; break;
+		case VEHICLE_HARDPOINT  : index= 1; break;
 		case VEHICLE_CF         : index=10; break; // place for VEHICLE_WEAPON not needed, as those are inside hardpoints (VEHICLE_BODY)
 //		case VEHICLE_COSMETICS  : index=11; break;
 

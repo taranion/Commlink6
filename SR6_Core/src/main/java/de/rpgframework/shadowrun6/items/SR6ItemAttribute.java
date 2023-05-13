@@ -15,9 +15,11 @@ import de.rpgframework.genericrpg.persist.FloatConverter;
 import de.rpgframework.genericrpg.persist.IntegerArrayConverter;
 import de.rpgframework.genericrpg.persist.IntegerConverter;
 import de.rpgframework.shadowrun.items.Availability;
+import de.rpgframework.shadowrun.persist.AmmunitionConverter;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.persist.AttackRatingArrayConverter;
+import de.rpgframework.shadowrun6.persist.OnRoadOffRoadConverter;
 import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
 
 /**
@@ -26,8 +28,8 @@ import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
  */
 public enum SR6ItemAttribute implements IItemAttribute {
 
-	ACCELERATION,
-	AMMUNITION,
+	ACCELERATION(new OnRoadOffRoadConverter()),
+	AMMUNITION(new AmmunitionConverter()),
 	AMMUNITION_CLASS( new EnumConverter(AmmunitionClass.class)),
 	// Vehicle Armor
 	ARMOR,
@@ -55,9 +57,9 @@ public enum SR6ItemAttribute implements IItemAttribute {
 //	DEFENSE_RATING,
 	DEVICE_RATING,
 	ESSENCECOST(new FloatConverter()),
-	FIREMODES,
+	FIREMODES( (StringValueConverter)null),
 	FORCE,
-	HANDLING,
+	HANDLING(new OnRoadOffRoadConverter()),
 //	HAS_RATING,
 	/* For accessories: Where to attach it */
 	HOOK( new EnumConverter(ItemHook.class)),
@@ -86,15 +88,15 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	SEATS,
 	SENSORS,
 	/** The amount of capacity slots required */
-	SIZE,
-	SKILL,
-	SKILL_SPECIALIZATION,
+	SIZE(new FloatConverter()),
+	SKILL( (StringValueConverter)null),
+	SKILL_SPECIALIZATION( (StringValueConverter)null),
 //	SOCIAL,
-	SPEED_INTERVAL,
+	SPEED_INTERVAL(new OnRoadOffRoadConverter()),
 	TOPSPEED,
-	VEHICLE_TYPE,
+	VEHICLE_TYPE( (StringValueConverter)null),
 	// Unmodified modification slots. 3 element array CHASSIS, ELECTRONICS, POWERTRAIN
-	VEHICLE_MODSLOTS,
+	VEHICLE_MODSLOTS( new IntegerArrayConverter()),
 
 	ATTACK,
 	SLEAZE,

@@ -51,7 +51,7 @@ public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
 
 	//-------------------------------------------------------------------
 	public void setData(CarriedItem<ItemTemplate> data) {
-		System.getLogger(CarriedItemDescriptionPane.class.getPackageName()).log(Level.WARNING, "setData {0}",data);
+//		System.getLogger(CarriedItemDescriptionPane.class.getPackageName()).log(Level.DEBUG, "setData {0}",data);
 
 		super.setData(data);
 		extra.getChildren().clear();
@@ -63,7 +63,7 @@ public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
 
 	//-------------------------------------------------------------------
 	public void setData(DataItemValue<?> data) {
-		System.getLogger(CarriedItemDescriptionPane.class.getPackageName()).log(Level.WARNING, "setData {0}",data);
+//		System.getLogger(CarriedItemDescriptionPane.class.getPackageName()).log(Level.DEBUG, "setData {0}",data);
 		if (data instanceof CarriedItem)
 			setData( (CarriedItem)data );
 		else

@@ -50,8 +50,10 @@ import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.SignatureManeuver;
 import de.rpgframework.shadowrun6.Technique;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
+import de.rpgframework.shadowrun6.items.Construction;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -81,6 +83,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	CONTACT_TYPES(ContactType.class),
 	CONTACT("Contact"),
 	COMPLEX_FORM(ComplexForm.class),
+	CONSTRUCTION(Construction.class,0),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
 	DATA_STRUCTURE(DataStructure.class),
@@ -115,6 +118,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	RULE(new RuleFlagConverter()),
 	QUALITY(Quality.class),
 	SENSE("Sense"),
+	SIGNATURE_MANEUVERS("SIG"),
 	SIN(FakeRating.class,0),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
 	SKILL(key -> Shadowrun6Core.getSkill(key)),

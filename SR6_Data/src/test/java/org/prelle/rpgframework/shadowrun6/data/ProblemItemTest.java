@@ -5,12 +5,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.UUID;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.prelle.simplepersist.Persister;
+import org.prelle.simplepersist.SerializationException;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Choice;
@@ -18,12 +21,17 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
+import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
+import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
+import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -119,7 +127,7 @@ public class ProblemItemTest {
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getDistributed());
 		assertEquals(7, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
 		assertEquals(1750, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
-		assertEquals(7, carried.getAsValue(SR6ItemAttribute.SIZE).getModifiedValue());
+		assertEquals(7, carried.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue(), 0);
 	}
 
 	//-------------------------------------------------------------------
@@ -317,6 +325,53 @@ public class ProblemItemTest {
 //		CarriedItem<ItemTemplate> carried2 = result2.get();
 //		assertNotNull("CarriedItem not created",carried2);
 //		assertEquals( (450 + (5-4)*100 + (6-4)*50)*4, carried2.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadNonIntegerSizeAccessory() {
+		ItemTemplate template = Shadowrun6Core.getItem(ItemTemplate.class, "gun_ports");
+		assertNotNull("gun_ports (Double Clutch) not found", template);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(template, null, CarryMode.EMBEDDED);
+		SR6GearTool.recalculate("", null, item);
+		ItemAttributeValue<SR6ItemAttribute> raw = (ItemAttributeValue<SR6ItemAttribute>) item.getAttributeRaw(SR6ItemAttribute.SIZE);
+		assertNotNull("SIZE attribute not set",raw);
+		assertEquals(ItemAttributeFloatValue.class, raw.getClass());
+
+		ItemAttributeFloatValue<SR6ItemAttribute> val = item.getAsFloat(SR6ItemAttribute.SIZE);
+		assertEquals(0.5f, val.getModifiedValue(), 0);
+
+		// Now add it to a slot
+		AvailableSlot slot = new AvailableSlot(ItemHook.VEHICLE_CHASSIS, 8.0f);
+		assertEquals(8.0f, slot.getCapacity(), 0);
+		assertEquals(8.0f, slot.getFreeCapacity(), 0);
+		assertEquals(0f, slot.getUsedCapacity(), 0);
+		slot.addEmbeddedItem(item);
+		assertEquals(8.0f, slot.getCapacity(), 0);
+		assertEquals(7.5f, slot.getFreeCapacity(), 0);
+		assertEquals(0.5f, slot.getUsedCapacity(), 0);
+
+		System.out.println("Slot = "+slot);
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadNonIntegerSizeAccessoryLoaded() throws IOException {
+		String xml = "<item changes=\"0,0,0\" mode=\"CARRIED\" ref=\"chrysler-nissan_jackrabbit\" uuid=\"653ece78-d119-468e-abe3-dd57ef45127b\">\n"
+				+ "         <accessories>\n"
+				+ "            <item mode=\"EMBEDDED\" ref=\"gun_ports\" slot=\"VEHICLE_CHASSIS\" uuid=\"2f4207c3-0169-4e0a-a3ca-d76199af47de\"/>\n"
+				+ "         </accessories>\n"
+				+ "      </item>";
+		Persister persist = new Persister();
+		CarriedItem<ItemTemplate> item = persist.read(CarriedItem.class, xml);
+		assertNotNull(item);
+		SR6GearTool.recalculate("", null, item);
+
+		AvailableSlot slot = item.getSlot(ItemHook.VEHICLE_CHASSIS);
+		assertEquals(8.0f, slot.getCapacity(), 0);
+		assertEquals(7.5f, slot.getFreeCapacity(), 0);
+		assertEquals(0.5f, slot.getUsedCapacity(), 0);
 	}
 
 }

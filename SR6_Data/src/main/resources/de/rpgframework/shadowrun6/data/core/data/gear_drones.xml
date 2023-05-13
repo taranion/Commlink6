@@ -29,13 +29,13 @@
 		<variant id="grenade">
 			<attrdef id="PRICE" value="2500" />
     		<modifications>
-				<embed type="GEAR" ref="smoke_grenade" variant="mini" intoType="HOOK" intoRef="VEHICLE_BODY"/>
+				<embed type="GEAR" ref="smoke_grenade" variant="mini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
     		</modifications>
 		</variant>
 		<variant id="flash_pak">
 			<attrdef id="PRICE" value="2500" />
     		<modifications>
-				<embed type="GEAR" ref="flash_pak" intoType="HOOK" intoRef="VEHICLE_BODY"/>
+				<embed type="GEAR" ref="flash_pak" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
     		</modifications>
 		</variant>
 	</item>
@@ -44,12 +44,12 @@
 			<geardef>
 				<item id="mct_hornet_stinger" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
 					<usage mode="EMBEDDED"/>
-					<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/blades" /> 
+					<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/blades" />
 				<!-- Rules state the existence of the injector, but no data given. Using damage 1P as parashield darts and attack rating 4, to be below AR 6 of a knife -->
 				</item>
 			</geardef>
 		<modifications>
-			<embed type="GEAR" ref="mct_hornet_stinger" intoType="HOOK" intoRef="VEHICLE_BODY"/>
+			<embed type="GEAR" ref="mct_hornet_stinger" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
 		</modifications>
 	</item>
 
@@ -61,7 +61,7 @@
 		<vehicle han="3/4" acc="8" spdi="10" tspd="30" bod="6" arm="2" pil="2" sen="2" />
 	</item>
    <item avail="4L" price="290" id="cyberspace_designs_quadrotor_crossbow" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
-   	<usage mode="EMBEDDED" slot="VEHICLE_BODY" value="0"/>
+   	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/>
       <requires>
          <datareq type="GEAR" ref="cyberspace_designs_quadrotor" apply="DATA_ITEM"/>
       </requires>
@@ -74,8 +74,8 @@
 	<item avail="2" price="5000" id="cyberspace_designs_quadrotor" type="DRONE_SMALL" subtype="AIR">
 		<vehicle han="2" acc="15" spdi="20" tspd="120" bod="3" arm="1" pil="3" sen="2" />
 		<modifications>
-			<itemmod type="HOOK" ref="VEHICLE_BODY" remove="y"/>
-			<valmod type="HOOK" ref="VEHICLE_BODY" value="0" />
+			<itemmod type="HOOK" ref="VEHICLE_HARDPOINT" remove="y"/>
+			<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="0" />
 		</modifications>
 	</item>
 	<item avail="3" price="18000" id="lockheed_optic_x2" type="DRONE_SMALL" subtype="AIR">
@@ -86,25 +86,25 @@
 	<item avail="2" price="6500" id="gm-nissan_dobermann" type="DRONE_MEDIUM" subtype="GROUND">
 		<vehicle han="3/5" acc="10" spdi="15" tspd="100" bod="4" arm="6" pil="2" sen="3" />
 		<modifications>
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
 		</modifications>
 	</item>
    <item id="spurs_samurai_oni" price="0" modonly="true" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" > <!-- Spurs for drones nissan_samurai and nissan_oni -->
-      <usage mode="EMBEDDED" slot="VEHICLE_BODY"/>
+      <usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT"/>
       <weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
 	<item avail="2" price="4500" id="nissan_samurai" type="DRONE_MEDIUM" subtype="ANTHRO">
 		<vehicle han="3/4" acc="10" spdi="10" tspd="30" bod="6" arm="6" pil="3" sen="2" type="GROUND" />
 		<modifications>
-			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_BODY"/>
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="82dec4cf-b52c-463c-875f-9434a8103fd3" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="0654dd16-b094-4339-b687-72095c446254" />
+			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="82dec4cf-b52c-463c-875f-9434a8103fd3" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="0654dd16-b094-4339-b687-72095c446254" />
 		</modifications>
 	</item>
 	<item avail="2" price="5000" id="mct-nissan_roto_drone" type="DRONE_MEDIUM" subtype="AIR">
 		<vehicle han="3" acc="20" spdi="30" tspd="160" bod="5" arm="6" pil="3" sen="2" />
 		<modifications>
-			<valmod type="HOOK" ref="VEHICLE_BODY" value="1" />
+			<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="1" />
 		</modifications>
 	</item>
 	<item avail="3" price="8000" id="federated-boeing_blackhawk" type="DRONE_MEDIUM" subtype="AIR">
@@ -127,9 +127,9 @@
 	<item avail="2" price="6700" id="nissan_oni" type="DRONE_LARGE" subtype="ANTHRO">
 		<vehicle han="3/4" acc="10" spdi="8" tspd="30" bod="9" arm="10" pil="3" sen="2" type="GROUND" />
 		<modifications>
-			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_BODY"/>
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="be2559d7-3ab9-4b94-abfa-97ba737aaefc" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="ef965a1b-accb-4efd-a969-019c14333f7f" />
+			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="be2559d7-3ab9-4b94-abfa-97ba737aaefc" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ef965a1b-accb-4efd-a969-019c14333f7f" />
 		</modifications>
 	</item>
 

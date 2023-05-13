@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <actions>
-  <action type="BOOST" cat="OTHER"    cost="2" id="double_down1"  time="ANYTIME" />
-  <action type="BOOST" cat="OTHER"    cost="4" id="double_down2"  time="ANYTIME" />
-  <action type="BOOST" cat="OTHER"    cost="6" id="double_down3"  time="ANYTIME" />
-  <action type="BOOST" cat="DRIVING"  cost="4" id="evasive_action" time="PRE" />
-
-
+  <action type="BOOST" cat="ANY"     cost="2" id="double_down"    time="ANYTIME" />
+  <action type="BOOST" cat="DRIVING" cost="4" id="evasive_action" time="PRE" />
   <action type="EDGE" cat="DRIVING" cost="6" apply="VEHICLE" id="aimbot" skill="engineering" />
   <action type="EDGE" cat="DRIVING" cost="4" apply="VEHICLE" id="attack_run" skill="engineering"/>
   <action type="EDGE" cat="DRIVING" cost="6" apply="VEHICLE" id="crossfire" />
@@ -15,35 +11,21 @@
   <action type="EDGE" cat="DRIVING" cost="4" apply="VEHICLE" id="pickup" skill="piloting" />
   <action type="EDGE" cat="DRIVING" cost="5" apply="VEHICLE" id="point_defense"  />
   <action type="EDGE" cat="DRIVING" cost="3" apply="VEHICLE" id="riggers_advantage" skill="piloting" /> <!-- US rules cost 1; DE rules cost 3 -->
-  <action type="EDGE" cat="DRIVING" cost="1" apply="VEHICLE" id="smoke_screen1"/>
-  <action type="EDGE" cat="DRIVING" cost="2" apply="VEHICLE" id="smoke_screen2"/>
-  <action type="EDGE" cat="DRIVING" cost="3" apply="VEHICLE" id="smoke_screen3"/>
-  <action type="EDGE" cat="DRIVING" cost="4" apply="VEHICLE" id="smoke_screen4"/>
-
+  <action type="EDGE" cat="DRIVING" cost="1" apply="VEHICLE" id="smoke_screen"/>
   <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="bootleg_turn" skill="piloting"/>
-  <action type="EDGE" cat="DRIVING" cost="5" apply="CHASE" id="change_environment_p" skill="piloting"/>
-  <action type="EDGE" cat="OTHER"   cost="5" apply="CHASE" id="change_environment_a" skill="athletics"/>
-  <action type="EDGE" cat="DRIVING" cost="6" apply="CHASE" id="chicken" skill="piloting"/>
+  <action type="EDGE" cat="DRIVING" cost="5" apply="CHASE" id="change_environment" skill="piloting,athletics"/>
+  <action type="EDGE" cat="DRIVING" cost="6" apply="CHASE" id="chicken"   skill="piloting"/>
   <action type="EDGE" cat="DRIVING" cost="5" apply="CHASE" id="dead_stop" skill="outdoors"/>
-  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="drafting" skill="piloting"/>
-  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="equalizer_p" skill="piloting"/>
-  <action type="EDGE" cat="OTHER"   cost="2" apply="CHASE" id="equalizer_a" skill="athletics"/>
-  <action type="EDGE" cat="DRIVING" cost="4" apply="CHASE" id="escape_p" skill="piloting"/>
-  <action type="EDGE" cat="OTHER"   cost="4" apply="CHASE" id="escape_a" skill="athletics"/>
-  <action type="EDGE" cat="DRIVING" cost="4" apply="CHASE" id="evade_pursuit1" skill="piloting"/>
-  <action type="EDGE" cat="DRIVING" cost="7" apply="CHASE" id="evade_pursuit2" skill="piloting"/> <!-- US rules cost 8; DE rules cost 7 -->
-  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="focus_p" skill="piloting"/>
-  <action type="EDGE" cat="OTHER"   cost="2" apply="CHASE" id="focus_a" skill="athletics"/>
+  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="drafting"  skill="piloting"/>
+  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="equalizer" skill="piloting,athletics"/>
+  <action type="EDGE" cat="DRIVING" cost="4" apply="CHASE" id="escape"    skill="piloting,athletics"/>
+  <action type="EDGE" cat="DRIVING" cost="4" apply="CHASE" id="evade_pursuit"  skill="piloting"/>
+  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="focus"          skill="piloting,athletics"/>
   <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="hit_the_brakes" skill="piloting"/>
-  <action type="EDGE" cat="DRIVING" cost="4" apply="CHASE" id="redline" skill="piloting"/>
-  <action type="EDGE" cat="DRIVING" cost="3" apply="CHASE" id="subtle_pilot" skill="piloting"/>
-  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="tokyo_drift" skill="piloting"/>
-  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="up_the_ante1_p" skill="piloting"/>
-  <action type="EDGE" cat="OTHER"   cost="2" apply="CHASE" id="up_the_ante1_a" skill="athletics"/>
-  <action type="EDGE" cat="DRIVING" cost="4" apply="CHASE" id="up_the_ante2_p" skill="piloting"/>
-  <action type="EDGE" cat="OTHER"   cost="4" apply="CHASE" id="up_the_ante2_a" skill="athletics"/>
-  <action type="EDGE" cat="DRIVING" cost="6" apply="CHASE" id="up_the_ante3_p" skill="piloting"/>
-  <action type="EDGE" cat="OTHER"   cost="6" apply="CHASE" id="up_the_ante3_a" skill="athletics"/>
+  <action type="EDGE" cat="DRIVING" cost="4" apply="CHASE" id="redline"        skill="piloting"/>
+  <action type="EDGE" cat="DRIVING" cost="3" apply="CHASE" id="subtle_pilot"   skill="piloting"/>
+  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="tokyo_drift"    skill="piloting"/>
+  <action type="EDGE" cat="DRIVING" cost="2" apply="CHASE" id="up_the_ante"    skill="piloting,athletics"/>
 
   <action type="EDGE" cat="OTHER"   cost="2" apply="SKILL" id="assembled_with_love" skill="engineering"/>
   <action type="EDGE" cat="OTHER"   cost="2" apply="SKILL" id="black_thumb"         skill="engineering"/>

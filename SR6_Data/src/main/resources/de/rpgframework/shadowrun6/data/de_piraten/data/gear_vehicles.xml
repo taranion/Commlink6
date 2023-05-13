@@ -5,8 +5,8 @@
    <item avail="5L"  price="2500000" id="lkb_t3" type="VEHICLES" subtype="HOVERCRAFT">
       <vehicle han="4/4" acc="25" spdi="15" tspd="130" bod="22" arm="16" pil="2" sen="3" sea="190"/>
       <modifications>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy"/>
       </modifications>
    </item>
 
@@ -26,8 +26,8 @@
       <vehicle han="2" acc="30" spdi="30" tspd="90" bod="7" arm="6" pil="2" sen="2" sea="3"/>
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_standard"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard"/>
       </modifications>
    </item>
 
@@ -54,15 +54,15 @@
 		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="network_sharing"> wait for double clutch -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
                 <!-- </embed> -->
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy"/>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_launcher"/>  -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy"/>
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
+		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>  -->
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>  -->
 		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>  -->
@@ -95,7 +95,7 @@
       </alternate>
       <vehicle han="2" acc="8" spdi="10" tspd="25" bod="4" arm="5" pil="3" sen="2" sea="1"/>
       <modifications>
-		<valmod type="HOOK" ref="VEHICLE_BODY" value="1" />
+		<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="1" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
       </modifications>
    </item>
@@ -113,5 +113,5 @@
 			</item>
 		</geardef>
    </item>
-  
+
 </items>

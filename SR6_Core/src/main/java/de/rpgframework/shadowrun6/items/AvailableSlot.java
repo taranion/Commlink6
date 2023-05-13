@@ -18,6 +18,8 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 
 	@Attribute
 	private ItemHook ref;
+	@Attribute(name="max")
+	private Double maxSizePerItem;
 
 
 	//-------------------------------------------------------------------
@@ -57,7 +59,7 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 	//-------------------------------------------------------------------
 	public float getFreeCapacity() {
 		if (ref.hasCapacity) {
-			float free = capacity;
+			double free = getCapacity();
 			for (CarriedItem<ItemTemplate> accessory : embedded) {
 				float size = 1.0f;
 				if (accessory.hasAttribute(SR6ItemAttribute.SIZE)) {
@@ -68,10 +70,26 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 				}
 				free -= size;
 			}
-			return free;
+			return (float)free;
 		} else {
 			return embedded.isEmpty()?1:0;
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the maxSizePerItem
+	 */
+	public Double getMaxSizePerItem() {
+		return maxSizePerItem;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param maxSizePerItem the maxSizePerItem to set
+	 */
+	public void setMaxSizePerItem(Double maxSizePerItem) {
+		this.maxSizePerItem = maxSizePerItem;
 	}
 
 }

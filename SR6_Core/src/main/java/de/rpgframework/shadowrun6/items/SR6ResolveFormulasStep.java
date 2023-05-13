@@ -57,8 +57,7 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 				conv = new IntegerConverter();
 			Object resolved = conv.read(resolvedString);
 
-			logger.log(Level.DEBUG, val.getModifyable() + ": RAW " + val.getRawValue() + " ==> " + formula + " ==> "
-					+ resolved);
+			logger.log(Level.DEBUG, "{0}: RAW {1} ==> formula={2} ==> {3}",val.getModifyable(), val.getRawValue(), formula, resolved);
 			if (resolved instanceof Integer) {
 				ItemAttributeNumericalValue<?> aVal = new ItemAttributeNumericalValue<>(
 						val.getModifyable());
@@ -130,8 +129,13 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 		if (model.getVariant()!=null && model.getVariant().getUsage(model.getCarryMode())!=null)
 			usage = model.getVariant().getUsage(model.getCarryMode());
 		if (usage!=null && usage.getFormula()!=null) {
-			ItemAttributeDefinition val = new ItemAttributeDefinition(SR6ItemAttribute.ESSENCECOST, usage.getFormula());
+			ItemAttributeDefinition val = new ItemAttributeDefinition(SR6ItemAttribute.SIZE, usage.getFormula());
 			doMagic(user, model, (FormulaImpl) usage.getFormula(), val);
+
+			if (model.hasFlag(SR6ItemFlag.AUGMENTATION)) {
+				val = new ItemAttributeDefinition(SR6ItemAttribute.ESSENCECOST, usage.getFormula());
+				doMagic(user, model, (FormulaImpl) usage.getFormula(), val);
+			}
 		}
 
 		return ret;

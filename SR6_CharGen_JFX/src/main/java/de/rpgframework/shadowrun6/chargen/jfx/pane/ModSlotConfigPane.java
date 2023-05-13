@@ -149,9 +149,11 @@ public class ModSlotConfigPane extends Control {
 
     	int[] changes = config.get().getModificationSlotChanges();
     	logger.log(Level.DEBUG,"changes {0}",Arrays.toString(changes));
-    	chassisToElectronics.set(changes[0]);
-    	electronicsToPower.set(changes[1]);
-    	powerToChassis.set(changes[2]);
+    	if (changes.length>1) {
+    		chassisToElectronics.set(changes[0]);
+    		electronicsToPower.set(changes[1]);
+    		powerToChassis.set(changes[2]);
+    	}
 
     	if (getSkin()!=null)
     		((ModSlotConfigPaneSkin)getSkin()).refresh();

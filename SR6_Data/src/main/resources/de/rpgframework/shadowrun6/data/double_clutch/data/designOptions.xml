@@ -59,7 +59,7 @@
 	</designopt>
 	<designopt id="easily_modified" max="4" bp="4">
 		<modifications>
-			<valmod type="HOOK" ref="VEHICLE_BODY" value="2"/>
+			<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="2"/>
 		</modifications>
 	</designopt>
 </designopts>

@@ -10,7 +10,7 @@ pipelines:
   default:
     - step:
         script: 
-          - mvn -B -s settings.xml -X clean deploy
+          - mvn -U -B -s settings.xml clean deploy
     - step:
         name: Deploy to Staging
         deployment: Staging

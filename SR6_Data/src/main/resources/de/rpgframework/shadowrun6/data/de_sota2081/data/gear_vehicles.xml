@@ -44,9 +44,9 @@
    <item id="messerschmitt_kawasaki_katzenhai" avail="4"  price="46000" type="VEHICLES" subtype="BOATS">
       <vehicle han="3" acc="20" spdi="20" tspd="120" bod="10" arm="10" pil="3" sen="4" sea="12"/>
       <modifications>
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="weapon_mount_heavy" />
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_BODY" ref="drone_rack_medium" /> -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" />
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
+        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
       </modifications>
    </item>
 </items>

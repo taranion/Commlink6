@@ -93,8 +93,8 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 		// Only allow to max an attribute, if there isn't one already
 		if ((per.getSum()+1)>=getMaximumValue(key) && key.isPrimary()) {
-//			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.WARNING, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed+" of "+numAttributesToMax);
+			if (logger.isLoggable(Level.TRACE))
+				logger.log(Level.TRACE, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed+" of "+numAttributesToMax);
 			return alreadyMaxed.size()>=numAttributesToMax;
 		}
 		return false;

@@ -1,0 +1,1891 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Bikes -->
+
+	<item id="evo_stiletto" avail="2" price="11500" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="2/5" acc="35" spdi="40" tspd="250" bod="3" arm="3" pil="2" sen="1" sea="1" type="GROUND"/>
+	</item>
+
+	<item id="harley_centaur" avail="2" price="18500" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="3/3" acc="20" spdi="30" tspd="220" bod="8" arm="7" pil="2" sen="1" sea="1" type="GROUND"/>
+	</item>
+
+	<item id="honda_viking" avail="2" price="15000" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="3/4" acc="15" spdi="30" tspd="210" bod="7" arm="6" pil="1" sen="1" sea="1" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="suzuki_transit" avail="2" price="9000" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="2/3" acc="25" spdi="30" tspd="250" bod="4" arm="1" pil="1" sen="1" sea="2" type="GROUND"/>
+	</item>
+	<item id="suzuki_transit" lang="de" avail="2" price="9000" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="2/5" acc="25" spdi="30" tspd="250" bod="4" arm="1" pil="1" sen="1" sea="2" type="GROUND"/>
+	</item>
+
+	<item id="yamaha_kaburaya" avail="2" price="13500" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="2/4" acc="32" spdi="30" tspd="280" bod="3" arm="2" pil="2" sen="1" sea="1" type="GROUND"/>
+	</item>
+
+	<item id="yamaha_nodachi" avail="2" price="19500" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="3/3" acc="20" spdi="30" tspd="210" bod="9" arm="6" pil="1" sen="1" sea="1" type="GROUND"/>
+	</item>
+
+<!-- ATVS -->
+
+	<item id="honda_rough_rider" avail="2" price="7000" type="VEHICLES" subtype="ATVS" >
+		<vehicle han="4/3" acc="15" spdi="20" tspd="160" bod="5" arm="4" pil="1" sen="1" sea="2" type="GROUND"/>
+	</item>
+
+	<item id="nissan_constellation" avail="2" price="5500" type="VEHICLES" subtype="ATVS" >
+		<vehicle han="2/2" acc="10" spdi="15" tspd="90" bod="3" arm="2" pil="2" sen="1" sea="6" type="GROUND"/>
+	</item>
+
+<!-- CARS -->
+
+	<item id="bmw_tsarina" avail="2" price="22500" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/5" acc="18" spdi="25" tspd="220" bod="12" arm="4" pil="3" sen="2" sea="3"/>
+	</item>
+
+	<item id="eurocar_northstar" avail="3" price="80000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/4" acc="20" spdi="20" tspd="180" bod="16" arm="10" pil="4" sen="4" sea="6"/>
+	</item>
+
+	<item id="mitsubishi_runabout" avail="2" price="10000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/6" acc="25" spdi="15" tspd="150" bod="8" arm="2" pil="2" sen="1" sea="2"/>
+	</item>
+
+	<item id="saab_javelin" avail="3" price="100000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="1/5" acc="26" spdi="34" tspd="240" bod="6" arm="4" pil="4" sen="4" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="saab_gladius" avail="3" price="125000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="2/6" acc="22" spdi="30" tspd="260" bod="6" arm="4" pil="4" sen="4" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="toyota_daytripper" avail="2" price="20000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="4/4" acc="10" spdi="22" tspd="180" bod="12" arm="6" pil="2" sen="2" sea="6"/>
+		<modifications>
+			<!--  <accessorymod item="passenger_prot_system" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" /> US version has slightly different rules for build in protection system versus PPS -->
+		</modifications>
+	</item>
+	<item id="toyota_daytripper" lang="de" avail="2" price="20000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="4/4" acc="10" spdi="22" tspd="180" bod="12" arm="6" pil="2" sen="2" sea="6"/>
+		<modifications>
+ 			<embed type="GEAR" ref="passenger_prot_system" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+		</modifications>
+	</item>
+
+	<item id="toyota_ultra_elite" avail="3" price="225000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/5" acc="15" spdi="20" tspd="180" bod="16" arm="12" pil="4" sen="4" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities" variant="high" intoType="HOOK" intoRef="VEHICLE_CF"/>
+		</modifications>
+	</item>
+
+	<item id="dodge_rampart" avail="2" price="25000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/4" acc="20" spdi="20" tspd="180" bod="12" arm="4" pil="2" sen="1" sea="4"/>
+		<variant id="lev">
+			<vehicle han="3/3" acc="22" spdi="20" tspd="190" bod="14" arm="8" pil="3" sen="4" sea="4"/>
+			<attrdef id="AVAILABILITY" value="4" />
+			<attrdef id="PRICE" value="35000" />
+			<modifications>
+				<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="push_bar" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
+	</item>
+
+	<item id="ford_dasher" avail="3" price="28000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/4" acc="20" spdi="22" tspd="210" bod="10" arm="6" pil="2" sen="4" sea="4"/>
+		<variant id="interceptor">
+			<vehicle han="2/3" acc="24" spdi="28" tspd="240" bod="12" arm="8" pil="3" sen="4" sea="4"/>
+			<attrdef id="AVAILABILITY" value="4" />
+			<attrdef id="PRICE" value="32000" />
+			<modifications>
+				<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="push_bar" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
+	</item>
+	<item id="ford_dasher" lang="de" avail="3" price="28000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/4" acc="20" spdi="22" tspd="210" bod="10" arm="6" pil="2" sen="4" sea="4"/>
+		<variant id="interceptor">
+			<vehicle han="2/3" acc="24" spdi="28" tspd="240" bod="12" arm="8" pil="3" sen="4" sea="4"/>
+			<attrdef id="AVAILABILITY" value="4" />
+			<attrdef id="PRICE" value="32000" />
+			<modifications>
+				<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="ram_plate" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+				<embed type="GEAR" ref="drone_rack_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
+	</item>
+
+	<!-- TRUCKS -->
+
+	<item id="gaz_P183" avail="2" price="18000" type="VEHICLES" subtype="TRUCKS" >
+		<vehicle han="3/4" acc="16" spdi="20" tspd="160" bod="14" arm="4" pil="1" sen="2" sea="2"/>
+	</item>
+
+	<item id="gmc_grizzly" avail="2" price="20000" type="VEHICLES" subtype="TRUCKS" >
+		<vehicle han="3/3" acc="15" spdi="20" tspd="170" bod="16" arm="6" pil="2" sen="1" sea="2"/>
+		<variant id="extended_cab">
+			<attrdef id="SEATS" value="4" />
+			<modifications>
+				<valmod type="HOOK" ref="VEHICLE_CF" value="-5"/> <!-- to get to "base grizzly -2 CF" units -->
+			</modifications>
+		</variant>
+		<variant id="extended_cab_de" lang="de">
+			<attrdef id="SEATS" value="4" />
+			<modifications>
+				<valmod type="HOOK" ref="VEHICLE_CF" value="-2"/> <!-- to get to "base grizzly -2 CF" units -->
+			</modifications>
+		</variant>
+	</item>
+
+	<item id="jeep_trailblazer" avail="2" price="18000" type="VEHICLES" subtype="TRUCKS" >
+		<vehicle han="3/2" acc="18" spdi="20" tspd="180" bod="14" arm="6" pil="2" sen="2" sea="4"/>
+	</item>
+
+	<item id="tata_hotspur" avail="3" price="26000" type="VEHICLES" subtype="TRUCKS" >
+		<vehicle han="2/2" acc="32" spdi="35" tspd="240" bod="12" arm="4" pil="2" sen="1" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+		<variant id="cocoon">
+			<attrdef id="PRICE" value="29000" />
+			<modifications>
+				<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" included="true" />
+			</modifications>
+		</variant>
+	</item>
+
+	<!-- VANS -->
+
+	<item id="ford_bison" avail="3" price="71000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="5/5" acc="15" spdi="25" tspd="140" bod="18" arm="14" pil="3" sen="3" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="ford_lifeline" avail="5" price="400000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="5/6" acc="8" spdi="10" tspd="110" bod="22" arm="18" pil="4" sen="4" sea="10"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1"/>
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /> <!-- equipment needs 15 hardpoints, vehicle only has 7, 8 addl hardpoint slots needed = 4x2 large hardpoints -->
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 2 -->
+			<embed type="GEAR" ref="push_bar" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 0 -->
+			<embed type="GEAR" ref="drone_rack_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 1 -->
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 2 -->
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 2 -->
+			<embed type="GEAR" ref="drone_rack_large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 3 -->
+			<embed type="GEAR" ref="drone_rack_large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 3 -->
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 1 --> <!-- US DC does not state rating, DE states 2  -->
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 1 --> <!-- US DC does not state rating, DE states 2  -->
+		</modifications>
+	</item>
+	<item id="ford_lifeline" lang="de" avail="5L" price="400000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="5/6" acc="3" spdi="0" tspd="110" bod="22" arm="18" pil="4" sen="4" sea="10"/> <!-- Reduced acc by 5 and spdi by 10 to meet stated values with smart tires -->
+		<modifications> <!-- handling at 5/6 to get to stated 4/5 with pilot_by_wire -->
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1"/>
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" count="3"/>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /><!-- equipment needs 15 hardpoints, vehicle only has 7, 8 addl hardpoint slots needed = 4x2 large hardpoints -->
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="pilot_by_wire" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" /> <!-- added in DE -->
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 2 -->
+			<embed type="GEAR" ref="ram_plate" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" rating="22" /> <!-- 1 -->
+			<embed type="GEAR" ref="drone_rack_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 1 -->
+			<embed type="GEAR" ref="drone_rack_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 1 --> <!-- added in DE -->
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 2 -->
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 2 -->
+			<embed type="GEAR" ref="drone_rack_large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 3 -->
+			<embed type="GEAR" ref="drone_rack_large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 3 -->
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 1 -->
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 1 -->
+			<embed type="GEAR" ref="tires_large_smart" intoType="HOOK" intoRef="VEHICLE_TIRES" /> <!-- added in DE -->
+			<valmod ref="VEHICLE_CHASSIS" type="HOOK" value="-8"/> <!-- removing remaining slots-->
+			<valmod ref="VEHICLE_ELECTRONICS" type="HOOK" value="-22"/> <!-- removing remaining slots -->
+			<valmod ref="VEHICLE_POWERTRAIN" type="HOOK" value="-22"/> <!-- removing remaining slots -->
+		</modifications>
+	</item>
+
+	<item id="gmc_forge" avail="4" price="250000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="5/7" acc="6" spdi="8" tspd="110" bod="18" arm="6" pil="4" sen="3" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="portable_facility" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="tow_assembly" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="22"/> <!-- facility needs 50 CF, vehicle has 6/2+4=7, thus need 43 more, 22 chassis slots -->
+			<embed type="GEAR" ref="modslot_pp_to_chassis" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="2"/> <!-- vehicle does not have enough chassis slots, thus moving slots from powertrain -->
+			<embed type="GEAR" ref="modslot_elec_to_chassis" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2"/> <!-- vehicle does not have enough chassis slots, thus moving slots from electronics -->
+		</modifications>
+	</item>
+
+	<item id="nissan_strider" avail="2" price="30000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="3/4" acc="15" spdi="25" tspd="180" bod="14" arm="10" pil="2" sen="1" sea="8"/>
+	</item>
+   <item id="suzuki_sporter" avail="2" price="30000" type="VEHICLES" subtype="VANS" >
+      <vehicle han="3/4" acc="15" spdi="20" tspd="140" bod="12" arm="6" pil="2" sen="1" sea="8"/>
+   </item>
+
+	<item id="toyota_adventure" avail="2" price="26000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="5/6" acc="10" spdi="15" tspd="140" bod="10" arm="6" pil="1" sen="1" sea="12"/>
+	</item>
+	<item id="toyota_adventure" lang="de" avail="2" price="26000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="5/6" acc="10" spdi="15" tspd="140" bod="10" arm="6" pil="1" sen="1" sea="10"/>
+	</item>
+
+	<item id="volkswagen_superkombi" avail="2" price="28000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="4/5" acc="12" spdi="15" tspd="160" bod="14" arm="8" pil="1" sen="2" sea="6"/>
+	</item>
+	<item id="volkswagen_superkombi" lang="de" avail="2" price="28000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="4/5" acc="12" spdi="15" tspd="160" bod="14" arm="8" pil="1" sen="2" sea="8"/>
+	</item>
+
+	<item id="volkswagen_krime" avail="2" price="28000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="4/5" acc="12" spdi="15" tspd="160" bod="14" arm="8" pil="1" sen="2" sea="5"/>
+		<modifications>
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+	<item id="volkswagen_krime" lang="de" avail="2" price="28000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="4/5" acc="12" spdi="15" tspd="160" bod="14" arm="8" pil="1" sen="2" sea="7"/>
+		<modifications>
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<!-- HOVERCRAFT -->
+
+	<item id="bmw_demon" avail="5" price="80000" type="VEHICLES" subtype="HOVERCRAFT" >
+		<vehicle han="4/4" acc="30" spdi="40" tspd="270" bod="4" arm="4" pil="3" sen="3" sea="1" type="WATER"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="chrysler_g12c" avail="2" price="20000" type="VEHICLES" subtype="HOVERCRAFT" >
+		<vehicle han="4/4" acc="12" spdi="20" tspd="160" bod="12" arm="8" pil="1" sen="1" sea="2" type="WATER"/>
+		<modifications>
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<valmod ref="VEHICLE_CF" type="HOOK" value="4"/> <!-- bonus for being pickup -->
+		</modifications>
+	</item>
+
+	<item id="essy_blue_raptor" avail="6" price="500000" type="VEHICLES" subtype="HOVERCRAFT" >
+		<vehicle han="6/6" acc="40" spdi="60" tspd="280" bod="6" arm="2" pil="3" sen="3" sea="2" type="WATER"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="gmc_vacationer" avail="3" price="50000" type="VEHICLES" subtype="HOVERCRAFT" >
+		<vehicle han="4/4" acc="20" spdi="25" tspd="200" bod="10" arm="4" pil="2" sen="1" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+	<item id="gmc_vacationer" lang="de" avail="3" price="50000" type="VEHICLES" subtype="HOVERCRAFT" >
+		<vehicle han="4/4" acc="20" spdi="25" tspd="200" bod="10" arm="4" pil="2" sen="1" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="2" included="true" />
+		</modifications>
+	</item>
+
+	<item id="gmc_patroller" avail="4" price="65000" type="VEHICLES" subtype="HOVERCRAFT" >
+		<vehicle han="3/3" acc="22" spdi="30" tspd="220" bod="12" arm="8" pil="2" sen="2" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+	<item id="gmc_patroller" lang="de" avail="4L" price="65000" type="VEHICLES" subtype="HOVERCRAFT" >
+		<vehicle han="3/3" acc="22" spdi="30" tspd="220" bod="12" arm="8" pil="2" sen="2" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="2" included="true" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+<!-- Military (Mixed Types) -->
+
+	<item id="ares_army_master" avail="7" price="750000" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="5/5" acc="10" spdi="15" tspd="120" bod="22" arm="18" pil="3" sen="3" sea="20"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+	<item id="ares_army_master" lang="de" avail="7I" price="750000" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="5/5" acc="10" spdi="15" tspd="120" bod="22" arm="18" pil="3" sen="3" sea="20"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="bae_centurion" avail="8" price="2000000" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="5/5" acc="20" spdi="30" tspd="150" bod="24" arm="20" pil="3" sen="3" sea="3"/>
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+	<item id="bae_centurion" lang="de" avail="8I" price="2000000" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="5/5" acc="20" spdi="40" tspd="150" bod="24" arm="20" pil="3" sen="3" sea="3"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="24" />
+			<embed type="GEAR" ref="armor_milspec2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack_medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="ferrari_appaloosa" avail="8" price="995000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="3/4" acc="22" spdi="30" tspd="220" bod="20" arm="18" pil="4" sen="3" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+	<item id="ferrari_appaloosa" lang="de" avail="8I" price="995000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="3/4" acc="22" spdi="30" tspd="220" bod="20" arm="18" pil="4" sen="3" sea="7"/>
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="20" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="gd_macarthur" avail="9" price="4000000" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="5/5" acc="25" spdi="30" tspd="160" bod="26" arm="20" pil="4" sen="4" sea="3"/>
+	</item>
+	<item id="gd_macarthur" lang="de" avail="9I" price="4000000" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="5/5" acc="25" spdi="45" tspd="160" bod="26" arm="20" pil="4" sen="4" sea="3"/>
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="26" />
+			<embed type="GEAR" ref="armor_milspec3" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="5" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="gd_flyer" avail="8" price="60000" type="VEHICLES" subtype="ATVS" >
+		<vehicle han="3/3" acc="20" spdi="25" tspd="170" bod="12" arm="6" pil="1" sen="1" sea="5"/>
+		<modifications>
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_standard_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_standard_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="electronic_control_lockout" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+	<item id="gd_flyer" lang="de" avail="8L" price="60000" type="VEHICLES" subtype="ATVS" >
+		<vehicle han="3/3" acc="20" spdi="25" tspd="170" bod="12" arm="6" pil="1" sen="1" sea="5"/>
+		<modifications>
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_small_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+	<item id="gmc_chariot" avail="9" price="2500000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="6/7" acc="10" spdi="15" tspd="100" bod="16" arm="12" pil="4" sen="6" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1"/>
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+	<item id="gmc_chariot" lang="de" avail="9I" price="2500000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="6/7" acc="10" spdi="15" tspd="100" bod="16" arm="12" pil="4" sen="6" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1"/>
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="gmc_trooper" avail="7" price="50000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="3/4" acc="20" spdi="25" tspd="150" bod="14" arm="10" pil="1" sen="4" sea="5"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_turret_standard_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+	<item id="gmc_trooper" lang="de" avail="7I" price="50000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="3/4" acc="20" spdi="25" tspd="150" bod="14" arm="10" pil="1" sen="4" sea="5"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_turret_standard_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="fuel_converter" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="14" />
+		</modifications>
+	</item>
+
+	<item id="honda_diamondback" avail="8" price="75000" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="3/4" acc="30" spdi="30" tspd="250" bod="16" arm="12" pil="3" sen="3" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="targeting" intoType="HOOK" intoRef="SOFTWARE_DRONE" rating="4"/>
+		</modifications>
+	</item>
+	<item id="honda_diamondback" lang="de" avail="8L" price="75000" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="3/4" acc="25" spdi="20" tspd="250" bod="16" arm="12" pil="3" sen="3" sea="1"/> <!-- Reduced acc by 5 and spdi by 10 to meet stated values with smart tires -->
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="12" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="tires_large_smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
+			<embed type="GEAR" ref="targeting" intoType="HOOK" intoRef="SOFTWARE_DRONE" rating="4"/>
+		</modifications>
+	</item>
+
+	<item id="thundercloud_morgan_v1" avail="8" price="11000" type="VEHICLES" subtype="ATVS" >
+		<vehicle han="3/3" acc="32" spdi="35" tspd="220" bod="10" arm="6" pil="1" sen="1" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_turret_standard_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+	<item id="thundercloud_morgan_v1" lang="de" avail="8L" price="11000" type="VEHICLES" subtype="ATVS" >
+		<vehicle han="3/3" acc="32" spdi="35" tspd="220" bod="10" arm="6" pil="1" sen="1" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_turret_heavy_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="electronic_control_lockout" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="thundercloud_morgan_v2" avail="8" price="18000" type="VEHICLES" subtype="ATVS" >
+		<vehicle han="3/3" acc="31" spdi="30" tspd="210" bod="12" arm="10" pil="2" sen="2" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_turret_standard_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+	<item id="thundercloud_morgan_v2" lang="de" avail="8L" price="18000" type="VEHICLES" subtype="ATVS" >
+		<vehicle han="3/3" acc="31" spdi="30" tspd="210" bod="12" arm="10" pil="2" sen="2" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_turret_heavy_manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="electronic_control_lockout" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+<!-- Experiential (Mixed Types) -->
+
+	<item id="bmw_super_bug" avail="9" price="1500000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="1/1" acc="15" spdi="20" tspd="160" bod="8" arm="6" pil="5" sen="5" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+	<item id="bmw_super_bug" lang="de" avail="9" price="1500000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/3" acc="15" spdi="20" tspd="160" bod="8" arm="6" pil="5" sen="5" sea="2"/> <!-- Handling increased to 3/3 so stated value is achieved with pilot_by_wire rating 2 -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="pilot_by_wire" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+		</modifications>
+	</item>
+
+	<item id="spinrad_street_rocket" avail="2" price="6000" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="4/4" acc="10" spdi="30" tspd="90" bod="3" arm="1" pil="1" sen="2" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+	<item id="spinrad_street_rocket" lang="de" avail="2" price="6000" type="VEHICLES" subtype="BIKES" nospec="true" >
+		<vehicle han="4/4" acc="10" spdi="30" tspd="90" bod="3" arm="1" pil="1" sen="2" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+<!-- Powerboats -->
+
+	<item id="mitsubishi_waterbug" avail="2" price="7500" type="VEHICLES" subtype="PWC" >
+		<vehicle han="4" acc="15" spdi="25" tspd="80" bod="5" arm="3" pil="1" sen="0" sea="1"/>
+	</item>
+	<item id="mitsubishi_waterbug" lang="de" avail="2" price="7500" type="VEHICLES" subtype="PWC" >
+		<vehicle han="3" acc="15" spdi="25" tspd="80" bod="5" arm="3" pil="1" sen="1" sea="1"/>
+	</item>
+
+	<item id="mitsubishi_waveskipper" avail="2" price="9000" type="VEHICLES" subtype="PWC" >
+		<vehicle han="5" acc="15" spdi="20" tspd="80" bod="6" arm="3" pil="1" sen="0" sea="2"/>
+	</item>
+	<item id="mitsubishi_waveskipper" lang="de" avail="2" price="9000" type="VEHICLES" subtype="PWC" >
+		<vehicle han="4" acc="15" spdi="20" tspd="80" bod="6" arm="3" pil="1" sen="1" sea="2"/>
+	</item>
+
+	<item id="kawasaki_stingray" avail="2" price="12500" type="VEHICLES" subtype="PWC" >
+		<vehicle han="4" acc="22" spdi="40" tspd="110" bod="7" arm="3" pil="1" sen="1" sea="2"/>
+	</item>
+
+	<item id="kawasaki_manta_ray" avail="2" price="15500" type="VEHICLES" subtype="PWC" >
+		<vehicle han="5" acc="20" spdi="35" tspd="110" bod="8" arm="3" pil="1" sen="1" sea="3"/>
+	</item>
+
+	<item id="zodiac_whisper" avail="2" price="5000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="15" spdi="25" tspd="50" bod="4" arm="2" pil="0" sen="0" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+			<valmod type="HOOK" ref="VEHICLE_CHASSIS" value="-3"/>
+			<itemmod type="HOOK" ref="VEHICLE_ELECTRONICS" remove="true"/>
+			<itemmod type="HOOK" ref="VEHICLE_HARDPOINT" remove="true"/>
+			<itemmod type="HOOK" ref="VEHICLE_CF" remove="true"/>
+		</modifications>
+	</item>
+
+	<item id="zodiac_whisper_mil" avail="7" price="11000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="15" spdi="25" tspd="60" bod="5" arm="4" pil="0" sen="0" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<valmod type="HOOK" ref="VEHICLE_ELECTRONICS" value="-5"/>
+			<valmod type="HOOK" ref="VEHICLE_CHASSIS" value="-3"/>
+			<itemmod type="HOOK" ref="VEHICLE_HARDPOINT" remove="true"/>
+			<itemmod type="HOOK" ref="VEHICLE_CF" remove="true"/>
+		</modifications>
+	</item>
+	<item id="zodiac_whisper_mil" lang="de" avail="7L" price="11000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="15" spdi="25" tspd="60" bod="5" arm="4" pil="0" sen="0" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<valmod type="HOOK" ref="VEHICLE_ELECTRONICS" attr="CAPACITY" value="-5"/>
+			<valmod type="HOOK" ref="VEHICLE_CHASSIS" attr="CAPACITY" value="-3"/>
+			<itemmod type="HOOK" ref="VEHICLE_HARDPOINT" remove="true"/>
+			<itemmod type="HOOK" ref="VEHICLE_CF" remove="true"/>
+		</modifications>
+	</item>
+
+	<item id="bae_atlantic" avail="3" price="35000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="15" spdi="15" tspd="60" bod="8" arm="5" pil="2" sen="3" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="increased_integrity_installed" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="4" />
+		</modifications>
+	</item>
+
+	<item id="bae_pacific" avail="3" price="35000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="15" spdi="15" tspd="60" bod="8" arm="5" pil="2" sen="3" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="increased_integrity_installed" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="4" />
+		</modifications>
+	</item>
+
+	<item id="sea_ray_cottonmouth" avail="6I" price="130000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="5" acc="38" spdi="40" tspd="180" bod="8" arm="4" pil="3" sen="3" sea="4"/>  <!-- Reduced acceleration, so result considering improved_acceleration is correct 50. -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="improved_acceleration" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" rating="2" />
+			<embed type="GEAR" ref="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" rating="2" />
+			<embed type="GEAR" ref="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" rating="2" />
+			<embed type="GEAR" ref="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" rating="2" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1"/>
+			<embed type="GEAR" ref="amenities_squatter" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="2" included="true" />
+		</modifications>
+	</item>
+	<item id="sea_ray_cottonmouth" lang="de" avail="6L" price="130000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="5" acc="38" spdi="40" tspd="180" bod="8" arm="4" pil="3" sen="3" sea="4"/>  <!-- Reduced acceleration, so result considering improved_acceleration is correct 50. -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="improved_acceleration" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" rating="2" />
+			<embed type="GEAR" ref="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" rating="2" />
+			<embed type="GEAR" ref="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" rating="2" />
+			<embed type="GEAR" ref="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" rating="2" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1"/>
+			<embed type="GEAR" ref="amenities_squatter" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="2" included="true" />
+		</modifications>
+	</item>
+
+<!-- Sailboats -->
+
+	<item id="horizon_freedom" avail="2" price="3500" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="2" spdi="3" tspd="10" bod="4" arm="3" pil="0" sen="0" sea="5"/>
+	</item>
+
+	<item id="horizon_freedom_motor" avail="2" price="4000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="2" spdi="3" tspd="10" bod="4" arm="3" pil="0" sen="0" sea="5"/>
+	</item>
+
+	<item id="corsair_elysium" avail="3" price="73000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="5" acc="10" spdi="20" tspd="50" bod="12" arm="9" pil="2" sen="3" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="6" included="true" />
+		</modifications>
+	</item>
+
+	<item id="corsair_ellipse" avail="3" price="58000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="3" spdi="5" tspd="10" bod="12" arm="9" pil="2" sen="3" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="6" included="true" />
+		</modifications>
+	</item>
+
+	<item id="corsair_panther" avail="3" price="130000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="5" acc="20" spdi="30" tspd="60" bod="14" arm="9" pil="2" sen="3" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="8" included="true" />
+		</modifications>
+	</item>
+
+	<item id="corsair_puma" avail="3" price="98000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="4" spdi="5" tspd="15" bod="14" arm="9" pil="2" sen="3" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="8" included="true" />
+		</modifications>
+	</item>
+
+	<item id="corsair_trident" avail="4" price="145000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="5" acc="15" spdi="20" tspd="60" bod="16" arm="9" pil="2" sen="3" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="8" included="true" />
+		</modifications>
+	</item>
+
+	<item id="corsair_triton" avail="2" price="115000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="10" spdi="10" tspd="15" bod="16" arm="9" pil="2" sen="3" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="8" included="true" />
+		</modifications>
+	</item>
+
+<!-- Motorboats -->
+
+	<item id="evo_waterking" avail="2" price="71000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="4" acc="2" spdi="5" tspd="25" bod="18" arm="10" pil="3" sen="2" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="12" included="true" />
+		</modifications>
+	</item>
+
+	<item id="evo_aquavida_1" avail="2" price="93000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="5" acc="2" spdi="5" tspd="20" bod="14" arm="10" pil="2" sen="3" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="2" included="true" />
+		</modifications>
+	</item>
+
+	<item id="evo_aquavida_2" avail="2" price="133000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="5" acc="2" spdi="5" tspd="20" bod="14" arm="10" pil="2" sen="3" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="4" included="true" />
+		</modifications>
+	</item>
+
+	<item id="maersk_wavecutter" avail="8I" price="342000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="4" acc="10" spdi="25" tspd="100" bod="25" arm="20" pil="4" sen="5" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" amount="3" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="4" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" /> <!-- US DC does not state rating, DE states 1  -->
+			<embed type="GEAR" ref="increased_integrity_installed" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="8" />
+			<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 1  -->
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="12" included="true" />
+		</modifications>
+	</item>
+	<item id="maersk_wavecutter" lang="de" avail="8I" price="342000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="4" acc="10" spdi="25" tspd="100" bod="25" arm="20" pil="4" sen="5" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" amount="3" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="4" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" /> <!-- US DC does not state rating, DE states 1  -->
+			<embed type="GEAR" ref="increased_integrity_installed" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="8" />
+			<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 1  -->
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="12" included="true" />
+		</modifications>
+	</item>
+
+<!-- Ships -->
+
+	<item id="cutty_sark" avail="9" price="54835700" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="5" acc="10" spdi="10" tspd="30" bod="36" arm="12" pil="0" sen="0" sea="42"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="28" included="true" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="14" included="true" />
+		</modifications>
+	</item>
+
+	<item id="pseidons_endeavour" avail="9" price="13000000" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="4" acc="8" spdi="12" tspd="50" bod="40" arm="18" pil="4" sen="5" sea="34"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="nanomaintenance_repair" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="2" /> <!-- US DC does not state rating, DE states 2  -->
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="34" included="true" />
+		</modifications>
+	</item>
+	<item id="pseidons_endeavour" lang="de" avail="9" price="13000000" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="4" acc="8" spdi="12" tspd="50" bod="40" arm="18" pil="4" sen="5" sea="34"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="nanomaintenance_repair" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" /> <!-- No rating stated, check in VG -->
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="2" /> <!-- US DC does not state rating, DE states 2  -->
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="34" included="true" />
+		</modifications>
+	</item>
+
+	<item id="cipactli_corvette" avail="9I" price="185389000" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="4" acc="15" spdi="30" tspd="70" bod="44" arm="28" pil="4" sen="6" sea="95"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="increased_integrity_installed" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="24" /> <!-- rating not stated, thus assuming base body of 20 as ship (page 150), delta to 44 as rating -->
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+			<embed type="GEAR" ref="armor_milspec3" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /> <!-- US DC states milspec 4, but mod has max level 3, DE corrects to 3 -->
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="20" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="45" included="true" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="50" included="true" />
+		</modifications>
+	</item>
+	<item id="cipactli_corvette" lang="de" avail="9I" price="185389000" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="4" acc="15" spdi="30" tspd="70" bod="44" arm="28" pil="4" sen="6" sea="95"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" /> <!-- No rating stated, check in VG -->
+			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="increased_integrity_installed" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="24" /> <!-- rating not stated, thus assuming base body of 20 as ship (page 150), delta to 44 as rating -->
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+			<embed type="GEAR" ref="armor_milspec3" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /> <!-- US DC states milspec 4, but mod has max level 3, DE corrects to 3 -->
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="20" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="45" included="true" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="50" included="true" />
+		</modifications>
+	</item>
+
+	<item id="lurssen_mobius" avail="9" price="400000000" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="4" acc="10" spdi="10" tspd="50" bod="36" arm="14" pil="6" sen="5" sea="22"/>
+		<modifications>
+			<embed type="GEAR" ref="searchlight_normal" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" amount="3" /> <!-- one RCC, 2x open slots -->
+			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_control_lockout" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_luxury" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" /> <!-- US DC does not state rating, DE states 1  -->
+			<embed type="GEAR" ref="living_space_luxury" intoType="HOOK" intoRef="VEHICLE_CF" rating ="22" included="true" />
+		</modifications>
+	</item>
+
+	<item id="ranger_battlecruiser" avail="9I" price="123694000" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="5" acc="12" spdi="23" tspd="60" bod="60" arm="45" pil="6" sen="6" sea="535"/>
+	  <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="6" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" amount="38" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="chameleon_coating_huge" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="1" /> <!-- Errata needed: Chameleon coating has no stated rating -->
+			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="2" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />  <!-- US DC does not state rating, DE states 1  -->
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="35" />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="6" />
+			<embed type="GEAR" ref="armor_milspec3" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /> <!-- US DC states milspec 8, but mod has max level 3, DE corrects to 3 -->
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="increased_integrity_installed" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="25" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="60" included="true" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="470" included="true" />
+		</modifications>
+	</item>
+	<item id="ranger_battlecruiser" lang="de" avail="9I" price="123694000" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="5" acc="12" spdi="23" tspd="70" bod="60" arm="45" pil="6" sen="6" sea="535"/>
+	  <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="6" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" amount="38" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" /> <!-- No rating stated, check in VG -->
+			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="chameleon_coating_huge" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="1" /> <!-- Errata needed: Chameleon coating has no stated rating -->
+			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="2" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />  <!-- US DC does not state rating, DE states 1  -->
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="35" />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="6" />
+			<embed type="GEAR" ref="armor_milspec3" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /> <!-- US DC states milspec 8, but mod has max level 3, DE corrects to 3 -->
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="increased_integrity_installed" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="25" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="60" included="true" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="470" included="true" />
+		</modifications>
+	</item>
+
+	<item id="tranquility_princess" avail="9" price="980000000" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="3" acc="8" spdi="10" tspd="40" bod="34" arm="16" pil="4" sen="5" sea="95"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" amount="91" />
+			<embed type="GEAR" ref="amenities_luxury" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="3" />
+			<embed type="GEAR" ref="living_space_luxury" intoType="HOOK" intoRef="VEHICLE_CF" rating ="260" included="true" />
+			<embed type="GEAR" ref="living_space_high" intoType="HOOK" intoRef="VEHICLE_CF" rating ="723" included="true" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="4718" included="true" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="1000" included="true" />
+		</modifications>
+	</item>
+
+	<item id="maersk_uhcs" avail="9" price="185389000" type="VEHICLES" subtype="SHIPS" >
+		<vehicle han="6" acc="4" spdi="8" tspd="40" bod="70" arm="12" pil="4" sen="3" sea="19"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_high" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="31" included="true" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="78" included="true" />
+		</modifications>
+	</item>
+
+	<item id="factory_ship" avail="9" price="999999999" type="VEHICLES" subtype="SHIPS" > <!-- Real cost 7.000.000.000, restricted to 2,1bil due to 32bit signed integer, will not be fixed in Genesis -->
+		<vehicle han="5" acc="5" spdi="10" tspd="20" bod="90" arm="22" pil="4" sen="6" sea="225"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" amount="34" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="4"/>
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="4" />
+			<embed type="GEAR" ref="amenities_high" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="160" included="true" />
+			<embed type="GEAR" ref="living_space_high" intoType="HOOK" intoRef="VEHICLE_CF" rating ="65" included="true" />
+		</modifications>
+	</item>
+	<item id="factory_ship" lang="de" avail="9" price="999999999" type="VEHICLES" subtype="SHIPS" > <!-- Real cost 7.000.000.000, restricted to 2,1bil due to 32bit signed integer, will not be fixed in Genesis -->
+		<vehicle han="5" acc="5" spdi="10" tspd="20" bod="90" arm="22" pil="4" sen="6" sea="225"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" amount="34" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" /> <!-- No rating stated, check in VG -->
+			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="4"/>
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="4" />
+			<embed type="GEAR" ref="amenities_high" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="160" included="true" />
+			<embed type="GEAR" ref="living_space_high" intoType="HOOK" intoRef="VEHICLE_CF" rating ="65" included="true" />
+		</modifications>
+	</item>
+
+<!-- Subs -->
+
+	<item id="aquadyne_basic" avail="1" price="500" type="VEHICLES" subtype="SUBMARINES" >
+		<vehicle han="2" acc="3" spdi="5" tspd="10" bod="4" arm="2" pil="0" sen="0" sea="1"/>
+	</item>
+
+	<item id="aquadyne_sport" avail="1" price="1500" type="VEHICLES" subtype="SUBMARINES" >
+		<vehicle han="3" acc="8" spdi="5" tspd="15" bod="5" arm="2" pil="0" sen="0" sea="1"/>
+	</item>
+
+	<item id="aquadyne_hunter" avail="1" price="1700" type="VEHICLES" subtype="SUBMARINES" >
+		<vehicle han="2" acc="3" spdi="5" tspd="10" bod="4" arm="4" pil="0" sen="0" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="maersk_riptide" avail="5" price="26300" type="VEHICLES" subtype="SUBMARINES" >
+		<vehicle han="4" acc="5" spdi="10" tspd="20" bod="9" arm="8" pil="2" sen="3" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="3" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="proteus_marianas" avail="7" price="195000" type="VEHICLES" subtype="SUBMARINES" >
+		<vehicle han="4" acc="6" spdi="5" tspd="10" bod="15" arm="9" pil="3" sen="6" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="6" />
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+	<item id="proteus_marianas" lang="de" avail="7" price="195000" type="VEHICLES" subtype="SUBMARINES" >
+		<vehicle han="4" acc="6" spdi="5" tspd="10" bod="15" arm="9" pil="3" sen="6" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" /> <!-- No rating stated, check in VG -->
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="6" />
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="proteus_cargo_sub" avail="7" price="1300000000" type="VEHICLES" subtype="SUBMARINES" >
+		<vehicle han="3" acc="8" spdi="15" tspd="40" bod="44" arm="16" pil="3" sen="5" sea="93"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="5" />
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="amenities_high" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="64" included="true" />
+			<embed type="GEAR" ref="living_space_high" intoType="HOOK" intoRef="VEHICLE_CF" rating ="29" included="true" />
+		</modifications>
+	</item>
+	<item id="proteus_cargo_sub" lang="de" avail="7" price="1300000000" type="VEHICLES" subtype="SUBMARINES" >
+		<vehicle han="3" acc="8" spdi="15" tspd="40" bod="44" arm="16" pil="3" sen="5" sea="93"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" /> <!-- No rating stated, check in VG -->
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="5" />
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="amenities_high" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="64" included="true" />
+			<embed type="GEAR" ref="living_space_high" intoType="HOOK" intoRef="VEHICLE_CF" rating ="29" included="true" />
+		</modifications>
+	</item>
+
+	<item id="japan_navy_shio" avail="9I" price="999999999" type="VEHICLES" subtype="SUBMARINES" > <!-- Real cost 4.900.000.000, restricted to 2,1bil due to 32bit signed integer, will not be fixed in Genesis -->
+		<vehicle han="4" acc="15" spdi="15" tspd="60" bod="51" arm="26" pil="4" sen="6" sea="65"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="4"/>
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="6" />
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="17" included="true" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="48" included="true" />
+		</modifications>
+	</item>
+	<item id="japan_navy_shio" lang="de" avail="9I" price="999999999" type="VEHICLES" subtype="SUBMARINES" > <!-- Real cost 4.900.000.000, restricted to 2,1bil due to 32bit signed integer, will not be fixed in Genesis -->
+		<vehicle han="4" acc="15" spdi="15" tspd="60" bod="51" arm="26" pil="4" sen="6" sea="65"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2" /> <!-- No rating stated, check in VG -->
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="4"/>
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="6" />
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_middle" intoType="HOOK" intoRef="VEHICLE_CF" rating ="17" included="true" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="48" included="true" />
+		</modifications>
+	</item>
+
+<!-- Air -->
+
+	<item id="ai_jetpack" avail="1" price="7500" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="5" acc="10" spdi="20" tspd="100" bod="3" arm="1" pil="1" sen="0" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" />
+		</modifications>
+	</item>
+	<item id="ai_jetpack" lang="de" avail="1" price="7500" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="5" acc="10" spdi="20" tspd="100" bod="3" arm="1" pil="1" sen="1" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" />
+		</modifications>
+	</item>
+
+	<item id="ai_jetpack_glider" avail="1" price="12500" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="15" spdi="25" tspd="170" bod="5" arm="1" pil="1" sen="0" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_glide" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="5" />
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+		</modifications>
+	</item>
+	<item id="ai_jetpack_glider" lang="de" avail="1" price="12500" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="15" spdi="25" tspd="170" bod="5" arm="1" pil="1" sen="1" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_glide" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="5" />
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+		</modifications>
+	</item>
+
+	<item id="krime_jetpack" avail="1" price="23000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="6" acc="10" spdi="15" tspd="80" bod="6" arm="2" pil="1" sen="0" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+	<item id="krime_jetpack" lang="de" avail="1" price="23000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="6" acc="10" spdi="15" tspd="80" bod="6" arm="2" pil="1" sen="1" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="ai_glider" avail="1" price="5000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="5" acc="10" spdi="20" tspd="110" bod="2" arm="0" pil="0" sen="1" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_glide" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="2" />
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" />
+		</modifications>
+	</item>
+
+	<item id="ares_dakota" avail="2" price="1100000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="5" acc="20" spdi="30" tspd="300" bod="14" arm="2" pil="2" sen="1" sea="26"/>
+		<modifications>
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" /> <!-- US DC No info how many CF increased, DE deleted this mod -->
+		</modifications>
+	</item>
+	<item id="ares_dakota" lang="de" avail="2" price="1100000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="5" acc="20" spdi="30" tspd="300" bod="14" arm="2" pil="2" sen="1" sea="26"/>
+		<modifications>
+		</modifications>
+	</item>
+
+	<item id="ares_dakota_war" avail="3" price="1900000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="4" acc="20" spdi="25" tspd="275" bod="14" arm="10" pil="2" sen="2" sea="14"/>
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="ares_TR_cargo" avail="2" price="830000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="5" acc="20" spdi="30" tspd="350" bod="14" arm="6" pil="2" sen="2" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" /> <!-- US DC No info how many CF increased, DE deleted this mod -->
+		</modifications>
+	</item>
+	<item id="ares_TR_cargo" lang="de" avail="2" price="830000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="5" acc="20" spdi="30" tspd="350" bod="14" arm="6" pil="2" sen="2" sea="20"/>
+		<modifications>
+		</modifications>
+	</item>
+
+	<item id="ares_TR_ATK" avail="3" price="985000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="25" spdi="40" tspd="400" bod="16" arm="12" pil="2" sen="3" sea="20"/>
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="ejection_seat" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="ares_TR_ATK" lang="de" avail="3" price="985000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="25" spdi="40" tspd="400" bod="16" arm="12" pil="2" sen="3" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="ejection_seat" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="ares_TR_transport" avail="2" price="1275000" type="VEHICLES" subtype="VTOL" > <!-- Errata for Vollgas needed, VG shows copy&paste the data from ATK, which does not match description text -->
+		<vehicle han="3" acc="25" spdi="50" tspd="420" bod="14" arm="14" pil="4" sen="3" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="aztech_aguilar" avail="4" price="465000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="3" acc="40" spdi="70" tspd="600" bod="14" arm="12" pil="4" sen="4" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="aztech_aguilar" lang="de" avail="4I" price="465000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="3" acc="40" spdi="70" tspd="600" bod="14" arm="12" pil="4" sen="4" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="aztech_aguilar_3AT" avail="4" price="420000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="4" acc="35" spdi="70" tspd="500" bod="14" arm="16" pil="4" sen="4" sea="12"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+			<embed type="GEAR" ref="armor_milspec2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="aztech_aguilar_3AT" lang="de" avail="4I" price="420000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="4" acc="35" spdi="70" tspd="500" bod="14" arm="16" pil="4" sen="4" sea="12"/>
+	  <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+			<embed type="GEAR" ref="armor_milspec2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="casa_raven" avail="2" price="175000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="4" acc="25" spdi="30" tspd="300" bod="6" arm="1" pil="1" sen="2" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_glide" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="6" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="casa_heron" avail="1" price="65000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="4" acc="25" spdi="30" tspd="300" bod="5" arm="0" pil="1" sen="1" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_glide" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="5" />
+		</modifications>
+	</item>
+
+	<item id="cessna_airrider" avail="1" price="175000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="5" acc="10" spdi="25" tspd="160" bod="3" arm="0" pil="0" sen="1" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_glide" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="3" />
+		</modifications>
+	</item>
+	<item id="cessna_airrider" lang="de" avail="1" price="35000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="5" acc="10" spdi="25" tspd="160" bod="3" arm="0" pil="0" sen="1" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_glide" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="3" />
+		</modifications>
+	</item>
+
+	<item id="cessna_airrider_XL" avail="1" price="45000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="6" acc="10" spdi="20" tspd="140" bod="4" arm="0" pil="0" sen="1" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="sec_power_glide" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="4"/>
+		</modifications>
+	</item>
+
+	<item id="docwagon_crt" avail="3" price="1200000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="20" spdi="50" tspd="300" bod="10" arm="10" pil="3" sen="4" sea="16"/>
+		<modifications>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="10" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 2  -->
+		</modifications>
+	</item>
+	<item id="docwagon_crt" lang="de" avail="3L" price="1200000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="20" spdi="50" tspd="300" bod="10" arm="10" pil="3" sen="4" sea="16"/>
+		<modifications>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="10" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="docwagon_osprey" avail="3" price="1185000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="30" spdi="70" tspd="400" bod="14" arm="10" pil="3" sen="2" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2"/>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 2  -->
+		</modifications>
+	</item>
+	<item id="docwagon_osprey" lang="de" avail="3L" price="1185000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="30" spdi="70" tspd="400" bod="14" arm="10" pil="3" sen="2" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2"/>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="euro_tiger" avail="4" price="350000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="3" acc="25" spdi="55" tspd="430" bod="16" arm="10" pil="2" sen="4" sea="2"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="ejection_seat" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_milspec1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="euro_tiger" lang="de" avail="4I" price="350000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="3" acc="25" spdi="55" tspd="430" bod="16" arm="10" pil="2" sen="4" sea="2"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="ejection_seat" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_milspec1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="boeing_catalina" avail="2" price="225000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="5" acc="25" spdi="50" tspd="260" bod="10" arm="2" pil="2" sen="2" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_boat" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="10" />
+		</modifications>
+	</item>
+
+	<item id="fokker_cloud9" avail="2" price="175000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="4" acc="30" spdi="40" tspd="300" bod="8" arm="1" pil="2" sen="2" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_boat" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="8" />
+		</modifications>
+	</item>
+
+	<item id="gmc_gryphon" avail="4" price="1800000" type="VEHICLES" subtype="LAV" >
+		<vehicle han="4" acc="50" spdi="95" tspd="800" bod="24" arm="20" pil="4" sen="4" sea="10"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="20" />
+			<embed type="GEAR" ref="armor_milspec3" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="gmc_gryphon" lang="de" avail="4I" price="1800000" type="VEHICLES" subtype="LAV" >
+		<vehicle han="4" acc="50" spdi="95" tspd="800" bod="24" arm="20" pil="4" sen="4" sea="10"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="20" />
+			<embed type="GEAR" ref="armor_milspec3" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="goodyear_commuter" avail="2" price="225000" type="VEHICLES" subtype="LTAV" >
+		<vehicle han="4" acc="10" spdi="30" tspd="140" bod="20" arm="4" pil="2" sen="2" sea="20"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="gti_benevolent" avail="9" price="7500000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="40" spdi="200" tspd="1000" bod="18" arm="10" pil="5" sen="3" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 2  -->
+		</modifications>
+	</item>
+	<item id="gti_benevolent" lang="de" avail="9L" price="7500000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="40" spdi="200" tspd="1000" bod="18" arm="10" pil="5" sen="3" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 2  -->
+		</modifications>
+	</item>
+
+	<item id="gti_malevolent" avail="9" price="7500000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="50" spdi="250" tspd="1000" bod="16" arm="16" pil="5" sen="3" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="ejection_seat" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+		</modifications>
+	</item>
+	<item id="gti_malevolent" lang="de" avail="9L" price="7500000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="50" spdi="250" tspd="1000" bod="16" arm="16" pil="5" sen="3" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="ejection_seat" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+		</modifications>
+	</item>
+
+	<item id="gti_devotee" avail="9" price="999999999" type="VEHICLES" subtype="GRAV" > <!-- Real cost 2.300.000.000, restricted to 2,1bil due to 32bit signed integer, will not be fixed in Genesis -->
+		<vehicle han="3" acc="20" spdi="100" tspd="1000" bod="50" arm="10" pil="5" sen="5" sea="50"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="50" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+	<item id="gti_devotee" lang="de" avail="9I" price="999999999" type="VEHICLES" subtype="GRAV" > <!-- Real cost 2.300.000.000, restricted to 2,1bil due to 32bit signed integer, will not be fixed in Genesis -->
+		<vehicle han="3" acc="20" spdi="100" tspd="1000" bod="50" arm="10" pil="5" sen="5" sea="50"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_middle" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="50" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="50" included="true" />
+		</modifications>
+	</item>
+
+	<item id="gti_devout" avail="9" price="23000000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="180" spdi="800" tspd="6000" bod="14" arm="14" pil="5" sen="4" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="14" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="14" />
+		</modifications>
+	</item>
+	<item id="gti_devout" lang="de" avail="9I" price="23000000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="180" spdi="800" tspd="6000" bod="14" arm="14" pil="5" sen="4" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="14" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="14" />
+		</modifications>
+	</item>
+
+	<item id="gti_evocative" avail="9" price="8900000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="30" spdi="150" tspd="1000" bod="15" arm="10" pil="5" sen="3" sea="10"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_luxury" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="15" />
+		</modifications>
+	</item>
+	<item id="gti_evocative" lang="de" avail="9" price="8900000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="30" spdi="150" tspd="1000" bod="15" arm="10" pil="5" sen="3" sea="10"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="amenities_luxury" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="15" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="4" />
+			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="gti_revolution" avail="9" price="23000000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="120" spdi="410" tspd="2000" bod="20" arm="18" pil="5" sen="4" sea="8"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="modslot_pp_to_chassis" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="2"/> <!-- vehicle does not have enough chassis slots, thus moving slots from powertrain -->
+			<embed type="GEAR" ref="modslot_elec_to_chassis" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2"/> <!-- vehicle does not have enough chassis slots, thus moving slots from electronics -->
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="20" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+			<embed type="GEAR" ref="armor_milspec2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="gti_revolution" lang="de" avail="9L" price="23000000" type="VEHICLES" subtype="GRAV" >
+		<vehicle han="2" acc="120" spdi="410" tspd="2000" bod="20" arm="18" pil="5" sen="4" sea="8"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="modslot_pp_to_chassis" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="2"/> <!-- vehicle does not have enough chassis slots, thus moving slots from powertrain -->
+			<embed type="GEAR" ref="modslot_elec_to_chassis" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" rating="2"/> <!-- vehicle does not have enough chassis slots, thus moving slots from electronics -->
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="20" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+			<embed type="GEAR" ref="armor_milspec2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="huges_clydesdale" avail="3" price="1450000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="2" acc="15" spdi="30" tspd="300" bod="18" arm="12" pil="3" sen="3" sea="20"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 2  -->
+		</modifications>
+	</item>
+
+	<item id="lear_platinum" avail="2" price="600000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="2" acc="25" spdi="40" tspd="350" bod="8" arm="0" pil="3" sen="2" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_high" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="lear_platinum_X" avail="3" price="2400000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="4" acc="40" spdi="60" tspd="700" bod="8" arm="2" pil="3" sen="3" sea="12"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="life_safe_system_1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="8" />
+			<embed type="GEAR" ref="amenities_luxury" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="lear_rover" avail="2" price="140000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="4" acc="20" spdi="30" tspd="300" bod="7" arm="1" pil="1" sen="1" sea="4"/>
+	</item>
+
+	<item id="zeppelin_2079" avail="2" price="400000" type="VEHICLES" subtype="LTAV" >
+		<vehicle han="5" acc="5" spdi="30" tspd="115" bod="30" arm="2" pil="2" sen="2" sea="50"/>
+		<modifications>
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" /> <!-- US DC No info how many CF increased, DE deleted this mod -->
+		</modifications>
+	</item>
+	<item id="zeppelin_2079" lang="de" avail="2" price="400000" type="VEHICLES" subtype="LTAV" >
+		<vehicle han="5" acc="5" spdi="30" tspd="115" bod="30" arm="2" pil="2" sen="2" sea="50"/>
+		<modifications>
+		</modifications>
+	</item>
+
+	<item id="mk_sperber" avail="3" price="400000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="4" acc="25" spdi="50" tspd="400" bod="16" arm="8" pil="2" sen="3" sea="2"/>
+		<modifications>
+		</modifications>
+	</item>
+	<item id="mk_sperber" lang="de" avail="3I" price="400000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="4" acc="25" spdi="50" tspd="400" bod="16" arm="8" pil="2" sen="3" sea="2"/>
+		<modifications>
+		</modifications>
+	</item>
+
+	<item id="moonlight_avenger" avail="3" price="400000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="3" acc="20" spdi="30" tspd="250" bod="8" arm="6" pil="2" sen="2" sea="1"/>
+		<modifications>
+		</modifications>
+	</item>
+
+	<item id="northrup_hornet" avail="4" price="200000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="5" acc="15" spdi="35" tspd="280" bod="16" arm="16" pil="3" sen="4" sea="8"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+			<embed type="GEAR" ref="armor_milspec1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="northrup_hornet" lang="de" avail="4I" price="200000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="5" acc="15" spdi="35" tspd="280" bod="16" arm="16" pil="3" sen="4" sea="8"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+			<embed type="GEAR" ref="armor_milspec1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="northrup_yellowjacket" avail="4" price="135000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="4" acc="20" spdi="30" tspd="300" bod="12" arm="10" pil="3" sen="3" sea="2"/>
+		<modifications>
+		</modifications>
+	</item>
+	<item id="northrup_yellowjacket" lang="de" avail="4L" price="135000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="4" acc="20" spdi="30" tspd="300" bod="12" arm="10" pil="3" sen="3" sea="2"/>
+		<modifications>
+		</modifications>
+	</item>
+
+	<item id="omnistar_valkyrie2_1" avail="4" price="1350000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="3" acc="40" spdi="80" tspd="500" bod="15" arm="8" pil="3" sen="3" sea="10"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="15" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="8" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 2  -->
+		</modifications>
+	</item>
+	<item id="omnistar_valkyrie2_1" lang="de" avail="4L" price="1350000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="3" acc="40" spdi="80" tspd="500" bod="15" arm="8" pil="3" sen="3" sea="10"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="15" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="8" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="omnistar_valkyrie2_2" avail="4" price="1275000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="30" spdi="65" tspd="400" bod="18" arm="18" pil="3" sen="3" sea="18"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+			<embed type="GEAR" ref="armor_milspec1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="omnistar_valkyrie2_2" lang="de" avail="4L" price="1275000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="30" spdi="65" tspd="400" bod="18" arm="18" pil="3" sen="3" sea="18"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+			<embed type="GEAR" ref="armor_milspec1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="omnistar_valkyrie4" avail="3" price="1175000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="30" spdi="80" tspd="480" bod="16" arm="14" pil="4" sen="3" sea="16"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 2  -->
+		</modifications>
+	</item>
+	<item id="omnistar_valkyrie4" lang="de" avail="3L" price="1175000" type="VEHICLES" subtype="VTOL" >
+		<vehicle han="4" acc="30" spdi="80" tspd="480" bod="16" arm="14" pil="4" sen="3" sea="16"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="16" />
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="renegade_mothership" avail="3" price="50000" type="VEHICLES" subtype="LTAV" >
+		<vehicle han="3" acc="5" spdi="30" tspd="120" bod="26" arm="0" pil="1" sen="2" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="winch_automatic" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- US DC does not state rating, DE states 2 -->
+		</modifications>
+	</item>
+
+	<item id="sukhoi_fixer" avail="4" price="1550000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="5" acc="100" spdi="250" tspd="2000" bod="16" arm="12" pil="2" sen="3" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="suspension_racing" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="sukhoi_fixer" lang="de" avail="4I" price="1550000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="5" acc="100" spdi="250" tspd="2000" bod="16" arm="12" pil="2" sen="3" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="suspension_racing" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="kanyuk_interceptor" avail="5" price="1945000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="4" acc="120" spdi="300" tspd="2500" bod="14" arm="12" pil="5" sen="4" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+	<item id="kanyuk_interceptor" lang="de" avail="5I" price="1945000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="4" acc="120" spdi="300" tspd="2500" bod="14" arm="12" pil="5" sen="4" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="desc_I" avail="99" price="999999999" type="VEHICLES" subtype="SPACECRAFT" > <!-- Real cost 23.000.000.000, restricted to 2,1bil due to 32bit signed integer, will not be fixed in Genesis -->
+		<vehicle han="6" acc="30" spdi="3000" tspd="0" bod="200" arm="30" pil="6" sen="6" sea="500"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="200" />
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+	<item id="desc_I" lang="de" avail="99" price="999999999" type="VEHICLES" subtype="SPACECRAFT" > <!-- Real cost 23.000.000.000, restricted to 2,1bil due to 32bit signed integer, will not be fixed in Genesis -->
+		<vehicle han="6" acc="30" spdi="3000" tspd="0" bod="200" arm="30" pil="6" sen="6" sea="500"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="life_safe_system_2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="200" />
+			<embed type="GEAR" ref="amenities_low" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="living_space_low" intoType="HOOK" intoRef="VEHICLE_CF" rating ="400" included="true" />
+		</modifications>
+	</item>
+
+<!-- Trailers and Sidecars -->
+	<item id="trailer_sidecar" avail="2" price="4000" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="1" arm="0" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="4"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_extra_small" avail="2" price="2700" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="2" arm="1" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="9"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_small" avail="2" price="4750" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="5" arm="2" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="19"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_medium" avail="2" price="9800" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="10" arm="2" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="49"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_large" avail="2" price="14850" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="15" arm="3" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="99"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_semi" avail="3" price="20000" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="20" arm="4" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="200"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_sidecar_open" avail="2" price="2000" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="1" arm="0" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="4"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_extra_small_open" avail="2" price="1350" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="2" arm="0" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="9"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_small_open" avail="2" price="2375" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="5" arm="0" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="19"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_medium_open" avail="2" price="4900" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="10" arm="0" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="49"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_large_open" avail="2" price="7425" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="15" arm="0" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="99"/>
+		</modifications>
+	</item>
+
+	<item id="trailer_semi_open" avail="3" price="10000" type="VEHICLES" subtype="MOD_TRAILER" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="20" arm="0" pil="0" sen="0" sea="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="200"/>
+		</modifications>
+	</item>
+
+</items>

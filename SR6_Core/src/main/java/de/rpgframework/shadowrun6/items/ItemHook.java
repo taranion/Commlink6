@@ -60,7 +60,7 @@ public enum ItemHook implements Hook {
 	IMPLANT_RIFLES,
 	IMPLANT_MACHINEGUN,
 	IMPLANT_LAUNCHER,
-	VEHICLE_BODY(true), // Should be HARDPOINTS
+	VEHICLE_HARDPOINT(true),
 	VEHICLE_CHASSIS(true),
 	VEHICLE_CF (true),
 	VEHICLE_POWERTRAIN(true),
