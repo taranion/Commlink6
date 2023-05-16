@@ -245,7 +245,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				addUserSelectableFlag(SR6ItemFlag.USES_CASELESS);
 			}
 			// Also add item hook for mounted weapons
-			if (getUsage(CarryMode.EMBEDDED)==null || !getUsage(CarryMode.EMBEDDED).getSlot().name().startsWith("IMPLANT")) {
+			if (getUsage(CarryMode.EMBEDDED)==null || (getUsage(CarryMode.EMBEDDED).getSlot()!=null) && !getUsage(CarryMode.EMBEDDED).getSlot().name().startsWith("IMPLANT")) {
 				Usage implantUse = new Usage(CarryMode.EMBEDDED);
 				switch (subtype) {
 				case BLADES:

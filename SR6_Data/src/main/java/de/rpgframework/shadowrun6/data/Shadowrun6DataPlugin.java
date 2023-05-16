@@ -441,15 +441,16 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} design mods", list.size());
 		list = Shadowrun6Core.loadDataItems(QualityFactorList.class, QualityFactor.class, set, clazz, "double_clutch/data/qualityFactors.xml");
 		logger.log(Level.DEBUG, "Loaded {0} quality factors", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"double_clutch/data/gear_electronics.xml");
+		logger.log(Level.DEBUG, "Loaded {0} vehicles", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"double_clutch/data/gear_vehicle_accessories.xml");
 		logger.log(Level.DEBUG, "Loaded {0} vehicles accessories", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"double_clutch/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded {0} vehicles", list.size());
-//		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"double_clutch/data/gear_drones.xml");
-//		logger.log(Level.DEBUG, "Loaded {0} drones", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"double_clutch/data/gear_drones.xml");
+		logger.log(Level.DEBUG, "Loaded {0} drones", list.size());
 		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "double_clutch/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded {0} qualities", list.size());
-		System.exit(1);
 	}
 
 	//-------------------------------------------------------------------
