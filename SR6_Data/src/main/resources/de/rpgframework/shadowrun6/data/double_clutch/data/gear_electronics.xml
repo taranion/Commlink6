@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Cyberware -->
+
+<!-- New control rig not necessary as is same as DE version of control rig in Core
+	<item avail="4L" price="30000" id="control_rig_DC" type="CYBERWARE" subtype="CYBER_HEADWARE">
+		<choices>
+			<choice uuid="<GENERATE NEW UUID>" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+		<usage mode="IMPLANTED"/>
+		<attrdef id="PRICE" value="$RATING*30000"/>
+		<attrdef id="ESSENCECOST" value="$RATING"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+	</item>
+ -->
+
+<!-- Note: The ability to implement a remote control rig as cyberware is added as <useas> to the control rigs in Core -->
+
+	<item avail="4L" price="20000" id="medullan_processors" type="CYBERWARE" subtype="CYBER_HEADWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
+		</choices>
+		<usage mode="IMPLANTED"/>
+		<attrdef id="PRICE" value="$RATING*20000"/>
+		<attrdef id="ESSENCECOST" value="$RATING*0.5"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+		<requires>
+			<selreq>
+				<datareq type="CARRIED" ref="control_rig" />
+				<datareq type="CARRIED" ref="control_rig_DC" />
+				<datareq type="CARRIED" ref="control_rig_squared" />
+			</selreq>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX_VR_COLD"  value="$RATING" apply="CHARACTER"/>
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX_VR_HOT"  value="$RATING" apply="CHARACTER"/>
+		</modifications>
+	</item>
+
+	<item id="simsense_overdrive" avail="4L" type="CYBERWARE" subtype="CYBER_HEADWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+		<usage mode="IMPLANTED" value="$RATING*0.2"/>
+		<attrdef id="PRICE" value="$RATING*15000"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="$RATING" cond="true" />
+		</modifications>
+	</item>
+
+
+<!-- Autosofts -->
+
+	<item avail="1" price="500" id="soft_language" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,3,5"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+		<modifications>
+			<valmod type="SKILL" ref="LANGUAGE" value="$RATING/3" />
+		</modifications>
+	</item>
+
+	<item avail="3" price="1500" id="soft_knowledge" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+		<modifications>
+			<valmod type="SKILL" ref="LANGUAGE" value="3" />
+		</modifications>
+	</item>
+
+	<item avail="1" price="500" id="soft_biotech" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+		<modifications>
+			<valmod type="SKILL" ref="biotech" value="$RATING" apply="DATA_ITEM"/>
+		</modifications>
+	</item>
+
+	<item avail="1" price="500" id="soft_con_performance" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1" price="500" id="soft_close_combat" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+		<modifications>
+			<valmod type="SKILL" ref="close_combat" value="$RATING" apply="DATA_ITEM"/>
+		</modifications>
+	</item>
+
+ <!-- Not required, duplicate of existing "electronic_warfare" autosoft
+	<item avail="1" price="500" id="soft_cracking" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="<GENERATE NEW UUID>" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="<GENERATE NEW UUID>" type="GEAR" ref="VEHICLE" />
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+ -->
+
+	<item avail="1" price="500" id="soft_electronics_hardware" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1" price="500" id="soft_engineering" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="712a1bb4-b761-48a7-b2ba-ae5d36f47166" type="SKILLSPECIALIZATION" ref="engineering" />
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1" price="500" id="soft_influence" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1" price="500" id="soft_navigation" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1" price="500" id="soft_tracking" type="SOFTWARE" subtype="AUTOSOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1I" price="500" id="crash_burn" type="SOFTWARE" subtype="ESOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+	   <mode id="active" />
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1I" price="500" id="emergency_override" type="SOFTWARE" subtype="ESOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+	   <mode id="active" />
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1I" price="500" id="reroute" type="SOFTWARE" subtype="ESOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1I" price="500" id="run_silent" type="SOFTWARE" subtype="ESOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="1I" price="500" id="slim_jim" type="SOFTWARE" subtype="ESOFT">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING"/>
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+
+<!-- Rigger Software -->
+
+	<item avail="4I" price="250" id="smart_rig" type="ACCESSORY" subtype="RIGGER_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="1" price="60" id="smart_rig" lang="de" type="ACCESSORY" subtype="RIGGER_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+	<item avail="4I" price="250" id="swarm_rig" type="ACCESSORY" subtype="RIGGER_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="1" price="60" id="swarm_rig" lang="de" type="ACCESSORY" subtype="RIGGER_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<attrdef id="SIZE" value="1"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+
+<!-- Automated Assistance Software AAS, handled as tool item (not as software), because it is not installed in any of the devices that have software slots -->
+
+	<item avail="3" price="2500" id="soft_assist_kit" type="TOOLS" subtype="TOOLS">
+		<choices><choice uuid="d84a7d6d-e853-4ee7-b94a-8e7d7f6b29c7" type="SKILL"/></choices>
+	</item>
+	<item avail="5" price="25000" id="soft_assist_shop" type="TOOLS" subtype="TOOLS">
+		<choices><choice uuid="d84a7d6d-e853-4ee7-b94a-8e7d7f6b29c7" type="SKILL"/></choices>
+		<matrix d="4" f="5" programs="4" devrat="2"/>
+		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+	<item avail="7" price="40000" id="soft_assist_facility" type="TOOLS" subtype="TOOLS">
+		<choices><choice uuid="d84a7d6d-e853-4ee7-b94a-8e7d7f6b29c7" type="SKILL"/></choices>
+		<matrix d="5" f="6" programs="4" devrat="2"/>
+		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+
+
+<!-- Tools -->
+
+	<item avail="8" price="25000" id="nanoforge_case" type="TOOLS" subtype="TOOLS" />
+
+	<item avail="6" price="5000" id="virtual_garage" type="TOOLS" subtype="TOOLS" />
+
+</items>
