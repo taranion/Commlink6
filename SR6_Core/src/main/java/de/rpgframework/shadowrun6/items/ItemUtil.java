@@ -40,7 +40,7 @@ public class ItemUtil {
 	public static Predicate<CarriedItem<ItemTemplate>> MATRIXDEVICES_FILTER = item ->
 			item.hasFlag(SR6ItemFlag.MATRIX_DEVICE)
 			||
-			(List.of( ItemSubType.matrixDevices()).contains(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue())
+			(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE)!=null &&  List.of( ItemSubType.matrixDevices()).contains(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue())
 				||
 				item.getResolved()==ItemUtil.SOFTWARE_LIBRARY_ITEM
 				);

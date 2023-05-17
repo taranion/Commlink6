@@ -15,6 +15,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -68,7 +69,11 @@ public class AugmentationPage extends Page {
 	private void initCyberware() {
 		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE);
 		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> {
-			ItemType type = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+			if (item.getAsObject(SR6ItemAttribute.ITEMTYPE)==null) {
+				logger.log(Level.WARNING, "No ITEMTYPE in "+item.getKey());
+				return false;
+			}
+			ItemType type = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
 			// All items that directly classify as CYBERWARE
 			if (type==ItemType.CYBERWARE && item.getCarryMode()==CarryMode.IMPLANTED) return true;
 			// or that are usually an accessory and now come in a BODYWARE variant
