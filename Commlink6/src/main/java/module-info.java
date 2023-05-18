@@ -11,7 +11,7 @@ open module de.rpgframework.shadowrun6.commlink6 {
 	requires de.rpgframework.shadowrun6.chargen.jfx;
 	requires de.rpgframework.shadowrun6.core;
 	requires de.rpgframework.shadowrun6.data;
-//	requires de.rpgframework.shadowrun6.export.fvtt;
+	requires de.rpgframework.shadowrun6.export.fvtt;
 	requires de.rpgframework.shadowrun6.export.json;
 	requires shadowrun6.export.pdf.standard;
 
