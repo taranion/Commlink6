@@ -32,7 +32,7 @@ public class InsertDefaultAccessories implements CarriedItemProcessor {
 	 *      de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac,
 			CarriedItem<?> model, List<Modification> unprocessed) {
 		// Add "Anti-Theft" to all vehicles with a pilot rating
@@ -40,6 +40,8 @@ public class InsertDefaultAccessories implements CarriedItemProcessor {
 		if (pilotVal!=null && pilotVal.getModifiedValue()>0) {
 			ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "anti_theft");
 			CarriedItem access = new CarriedItem<ItemTemplate>(item, item.getVariant("rating1"), CarryMode.EMBEDDED);
+			access.setInjectedBy("DEFAULT");
+			access.addFlag(SR6ItemFlag.AUTO_ADDED);
 			model.addAccessory(access, ItemHook.VEHICLE_ELECTRONICS);
 		}
 
