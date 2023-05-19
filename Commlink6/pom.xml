@@ -226,7 +226,7 @@
 					<properties>
 						<property>
 							<key>default.launcher.main.class</key>
-							<value>de.rpgframework.shadowrun6.comlink.ComLinkStarter</value>
+							<value>de.rpgframework.shadowrun6.comlink.ComLinkMain</value>
 						</property>
 						<property>
 							<key>default.launcher.system.project.version</key>
