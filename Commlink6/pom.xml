@@ -234,7 +234,7 @@
 					<includes>
 						<include>
 							<comment>Main Shadowrun content</comment>
-							<url>https://eden.rpgframework.de/commlink6-updates/{$type}/${project.artifactId}-${project.version}-fat.jar</url>
+							<url>https://eden.rpgframework.de/commlink6-updates/${type}/${project.artifactId}-${project.version}-fat.jar</url>
 							<path>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</path>
 						</include>
 					</includes>
