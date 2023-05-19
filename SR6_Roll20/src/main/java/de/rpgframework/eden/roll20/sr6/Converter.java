@@ -262,6 +262,10 @@ public class Converter {
 	private static String mapDataSkill(ItemTemplate item, Locale loc) {
 		String id = item.getAttribute(SR6ItemAttribute.SKILL).getRawValue();
 		SR6Skill skill = Shadowrun6Core.getSkill(id);
+		if (skill==null) {
+			logger.log(Level.WARNING, "No skill for {0}", item);
+			return "?";
+		}
 		return skill.getName(loc);
 	}
 
@@ -556,6 +560,10 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	private static String map(AmmunitionSlot value) {
+		if (value.getType()==null) {
+			logger.log(Level.INFO, "No ammunition slot type for "+value);
+			return "?";
+		}
 		switch (value.getType()) {
 		case BELT: return value.getAmount()+"(b)";
 		case BREAK_ACTION: return value.getAmount()+"(ba)";

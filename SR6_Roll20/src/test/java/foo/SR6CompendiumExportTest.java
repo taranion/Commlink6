@@ -49,11 +49,12 @@ public class SR6CompendiumExportTest {
 		LicenseManager.storeUserLicensedDatasets(List.of("SHADOWRUN6/CORE"));
 		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
 		plugin.init();
-		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(5));
-		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(4));
-		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(3));
-		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(2));
-		Shadowrun6Core.removeDataSet(Shadowrun6Core.getDataSets().get(1));
+		for (DataSet set : Shadowrun6Core.getDataSets()) {
+			if (set.getID().equals("FIRING_SQUAD"))
+				continue;
+			System.out.println("...Remove "+set.getID());
+			Shadowrun6Core.removeDataSet(set);
+		}
 
 		workbook = new XSSFWorkbook();
 	}
@@ -83,7 +84,7 @@ public class SR6CompendiumExportTest {
 //		sets.remove(1);
 		Workbook modDeep = Shadowrun6CompendiumFactory.createCompendium(null, null, sets, callback, false);
 		assertNotNull(modDeep);
-		File file = new File("compendium.xlsx");
+		File file = new File("compendium-fs.xlsx");
 		FileOutputStream fos = new FileOutputStream(file);
 		modDeep.write(fos);
 		fos.close();
