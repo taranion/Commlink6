@@ -226,10 +226,15 @@
 							<key>default.launcher.system.project.version</key>
 							<value>${project.version}</value>
 						</property>
+						<property>
+							<key>type2</key>
+							<value>${type}</value>
+						</property>
 					</properties>
 					<includes>
 						<include>
-							<url>http://eden.rpgframework.de/commlink6-updates/${project.artifactId}-${project.version}-fat.jar</url>
+							<comment>Main Shadowrun content</comment>
+							<url>https://eden.rpgframework.de/commlink6-updates/{$type}/${project.artifactId}-${project.version}-fat.jar</url>
 							<path>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</path>
 						</include>
 					</includes>
