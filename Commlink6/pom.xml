@@ -81,11 +81,11 @@
 			<artifactId>util</artifactId>
 			<version>${attach.version}</version>
 		</dependency>
-		<!--dependency>
+		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>attach-pdf</artifactId>
 			<version>${rpgfw.version}</version>
-		</dependency-->
+		</dependency>
 		<dependency>
 			<groupId>org.controlsfx</groupId>
 			<artifactId>controlsfx</artifactId>
