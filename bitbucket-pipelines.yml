@@ -9,6 +9,8 @@ pipelines:
             - mvn -B -s settings.xml clean install
   default:
     - step:
+        caches:
+         - maven
         script: 
           - mvn -U -B -s settings.xml clean deploy -Dtype=develop
           - pipe: atlassian/scp-deploy:1.2.1
@@ -23,8 +25,10 @@ pipelines:
         name: Deploy to Staging
         deployment: Staging
         trigger: manual
+        caches:
+         - maven
         script:
-          - cd Commlink6; mvn -B -s settings.xml update4j:create -Dtype=testing
+          - cd Commlink6; mvn -B -s settings.xml update4j:create -Dtype=testing ; cd ..
           - ls Commlink6/target
           - pipe: atlassian/scp-deploy:1.2.1
             variables:

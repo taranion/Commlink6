@@ -227,7 +227,8 @@
 							<value>${project.version}</value>
 						</property>
 						<property>
-							<key>type2</key>
+							<!-- Take property from environment setting -->
+							<key>type</key>
 							<value>${type}</value>
 						</property>
 					</properties>
