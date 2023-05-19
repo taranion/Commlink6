@@ -11,6 +11,9 @@ pipelines:
     - step:
         script: 
           - mvn -U -B -s settings.xml clean deploy
+        artifacts:
+          - Commlink6/target/commlink6-.*fat.jar
+          - Commlink6/target/config.xml
     - step:
         name: Deploy to Staging
         deployment: Staging
@@ -18,7 +21,7 @@ pipelines:
         caches:
           - maven
         script:
-          - mvn -B -s settings.xml clean install -DskipTests=true
+          #- mvn -B -s settings.xml clean install -DskipTests=true
           - ls Commlink6/target
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
