@@ -6,7 +6,7 @@ pipelines:
       - step:
           name: Build and test
           script:
-            - mvn -B -s settings.xml clean install
+            - mvn -U -B -s settings.xml clean install
   default:
     - step:
         caches:

@@ -86,6 +86,11 @@
 			<artifactId>attach-pdf</artifactId>
 			<version>${rpgfw.version}</version>
 		</dependency-->
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>11.1.2</version>
+		</dependency>
 
 
 		<dependency>
@@ -245,23 +250,23 @@
 						<exclude>org.prelle:simple-persist</exclude>
 						<exclude>de.rpgframework:eden-api</exclude>
 						<exclude>de.rpgframework:eden-client</exclude>
-				<exclude>de.rpgframework:eden-client-jfx</exclude>
-				<exclude>de.rpgframework:rpgframework-core</exclude>
-				<exclude>de.rpgframework:rpgframework-rules</exclude>
-				<exclude>de.rpgframework:rpgframework-javafx</exclude>
-					<exclude>de.rpgframework:attach-pdf</exclude>
-				<exclude>de.rpgframework:shadowrun-common-core</exclude>
-				<exclude>de.rpgframework:shadowrun-common-chargen</exclude>
-				<exclude>de.rpgframework:shadowrun-common-chargen-jfx</exclude>
-				<exclude>de.rpgframework:shadowrun6-core</exclude>
-				<exclude>de.rpgframework:shadowrun6-chargen</exclude>
-				<exclude>de.rpgframework:shadowrun6-chargen-jfx</exclude>
-				<exclude>de.rpgframework:shadowrun6-data</exclude>
-				<exclude>org.prelle.rpgframework:shadowrun6-export-pdf</exclude>
-				<exclude>org.prelle.rpgframework:shadowrun6-export-json</exclude>
-				<exclude>de.rpgframework:shadowrun6-export-fvtt</exclude>
-				<exclude>de.rpgframework:foundryvtt-documents</exclude>
-				<exclude>de.rpgframework:shadowrun6-foundry</exclude>
+						<exclude>de.rpgframework:eden-client-jfx</exclude>
+						<exclude>de.rpgframework:rpgframework-core</exclude>
+						<exclude>de.rpgframework:rpgframework-rules</exclude>
+						<exclude>de.rpgframework:rpgframework-javafx</exclude>
+						<exclude>de.rpgframework:attach-pdf</exclude>
+						<exclude>de.rpgframework:shadowrun-common-core</exclude>
+						<exclude>de.rpgframework:shadowrun-common-chargen</exclude>
+						<exclude>de.rpgframework:shadowrun-common-chargen-jfx</exclude>
+						<exclude>de.rpgframework:shadowrun6-core</exclude>
+						<exclude>de.rpgframework:shadowrun6-chargen</exclude>
+						<exclude>de.rpgframework:shadowrun6-chargen-jfx</exclude>
+						<exclude>de.rpgframework:shadowrun6-data</exclude>
+						<exclude>org.prelle.rpgframework:shadowrun6-export-pdf</exclude>
+						<exclude>org.prelle.rpgframework:shadowrun6-export-json</exclude>
+						<exclude>de.rpgframework:shadowrun6-export-fvtt</exclude>
+						<exclude>de.rpgframework:foundryvtt-documents</exclude>
+						<exclude>de.rpgframework:shadowrun6-foundry</exclude>
 					</excludes>
 				</configuration>
 				<executions>
