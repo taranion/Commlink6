@@ -10,42 +10,49 @@ pipelines:
   default:
     - step:
         script: 
-          - mvn -U -B -s settings.xml clean deploy
+          - mvn -U -B -s settings.xml clean deploy -Dtype=develop
+          - pipe: atlassian/scp-deploy:1.2.1
+            variables:
+              USER: bitbucket
+              SERVER: eden.rpgframework.de
+              REMOTE_PATH: '/var/www/html/commlink6-updates/develop'
+              LOCAL_PATH: 'Commlink6/target/config.xml'
         artifacts:
           - Commlink6/target/commlink6-*fat.jar
-          - Commlink6/target/config.xml
     - step:
         name: Deploy to Staging
         deployment: Staging
         trigger: manual
-        caches:
-          - maven
         script:
-          #- mvn -B -s settings.xml clean install -DskipTests=true
+          - mvn -B -s settings.xml update4j:create -Dtype=testing
           - ls Commlink6/target
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
               USER: bitbucket
               SERVER: eden.rpgframework.de
-              REMOTE_PATH: '/var/www/html/commlink6-updates/staging'
+              REMOTE_PATH: '/var/www/html/commlink6-updates/testing'
               LOCAL_PATH: 'Commlink6/target/config.xml'
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
               USER: bitbucket
               SERVER: eden.rpgframework.de
-              REMOTE_PATH: '/var/www/html/commlink6-updates/staging'
+              REMOTE_PATH: '/var/www/html/commlink6-updates/testing'
               LOCAL_PATH: 'Commlink6/target/commlink6*fat.jar'
     - step:
         name: Deploy to Production
         deployment: Production
         trigger: manual
-        caches:
-          - maven
         script:
-          - cd Commlink6 ; mvn -B -s settings.xml clean package
+          - ls Commlink6/target
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
               USER: bitbucket
               SERVER: eden.rpgframework.de
-              REMOTE_PATH: '/var/www/html/commlink6-updates/release'
+              REMOTE_PATH: '/var/www/html/commlink6-updates/stable'
+              LOCAL_PATH: 'Commlink6/target/config.xml'
+          - pipe: atlassian/scp-deploy:1.2.1
+            variables:
+              USER: bitbucket
+              SERVER: eden.rpgframework.de
+              REMOTE_PATH: '/var/www/html/commlink6-updates/stable'
               LOCAL_PATH: 'target/commlink6*fat.jar'
