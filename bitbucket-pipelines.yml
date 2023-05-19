@@ -12,7 +12,7 @@ pipelines:
         caches:
          - maven
         script: 
-          - mvn -U -B -s settings.xml clean deploy -Dtype=develop
+          - mvn -U -B -s settings.xml clean deploy -Dtype=develop -Pdesktop
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
               USER: bitbucket
@@ -34,7 +34,7 @@ pipelines:
         caches:
          - maven
         script:
-          - cd Commlink6; mvn -B -s settings.xml update4j:create -Dtype=testing ; cd ..
+          - cd Commlink6; mvn -B -s settings.xml update4j:create -Dtype=testing -Pdesktop ; cd ..
           - ls Commlink6/target
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
@@ -53,7 +53,7 @@ pipelines:
         deployment: Production
         trigger: manual
         script:
-          - cd Commlink6; mvn -B -s settings.xml update4j:create -Dtype=testing ; cd ..
+          - cd Commlink6; mvn -B -s settings.xml update4j:create -Dtype=testing -Pdesktop ; cd ..
           - ls Commlink6/target
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
