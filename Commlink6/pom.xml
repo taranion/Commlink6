@@ -221,6 +221,7 @@
 				<configuration>
 					<baseUri>http://eden.rpgframework.de/</baseUri>
 					<basePath>${user.home}/Commlink6/app</basePath>
+					<launcher>de.rpgframework.shadowrun6.updater.CommlinkLauncher</launcher>
 					<osHandling>ALL</osHandling>
 					<properties>
 						<property>
