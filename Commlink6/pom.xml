@@ -198,7 +198,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>de.rpgframework.shadowrun6.comlink.ComLinkStarter</mainClass>
+							<mainClass>de.rpgframework.shadowrun6.comlink.ComLinkMain</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
