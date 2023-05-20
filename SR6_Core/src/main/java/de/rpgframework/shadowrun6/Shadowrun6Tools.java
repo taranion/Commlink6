@@ -814,6 +814,7 @@ public class Shadowrun6Tools {
 				}
 				resolver.process(false, ShadowrunReference.ITEM_ATTRIBUTE, model, tmp, List.of());
 				SR6GearTool.recalculate("", model, tmp);
+				tmp.setDirty(false);
 			}
 
 			logger.log(Level.DEBUG, "resolve martial arts");
@@ -1058,7 +1059,7 @@ public class Shadowrun6Tools {
 //				logger.log(Level.WARNING, "  data item =  "+value.getKey());
 //				logger.log(Level.WARNING, "  data item value =  "+value);
 				String resolved = FormulaTool.resolve(clone.getReferenceType(), clone.getFormula(), new VariableResolver(value, model));
-				logger.log(Level.WARNING, "  {0} resolved as {1}", clone.getFormula(),resolved);
+				logger.log(Level.DEBUG, "  {0} resolved as {1}", clone.getFormula(),resolved);
 				modVal = Integer.parseInt(resolved);
 				clone.setValue(modVal);
 			} else {

@@ -33,7 +33,6 @@ public class AddMissingStandardSlots implements CarriedItemProcessor {
 	@SuppressWarnings("rawtypes")
 	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac,
 			CarriedItem<?> model, List<Modification> unprocessed) {
-		logger.log(Level.WARNING, "############"+model.getKey()+"###type="+model.getAsObject(SR6ItemAttribute.ITEMTYPE));
 		if (model.getAsObject(SR6ItemAttribute.ITEMTYPE)==null)
 			return new OperationResult<List<Modification>>(unprocessed);
 

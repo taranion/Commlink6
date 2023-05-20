@@ -256,7 +256,7 @@
 						<exclude>de.rpgframework:rpgframework-rules</exclude>
 						<exclude>de.rpgframework:rpgframework-javafx</exclude>
 						<exclude>de.rpgframework:attach-pdf</exclude>
-						<exclude>de.rpgframework:attach-pdf-pdfbox</exclude>
+						<!--exclude>de.rpgframework:attach-pdf-pdfbox</exclude-->
 						<exclude>de.rpgframework:shadowrun-common-core</exclude>
 						<exclude>de.rpgframework:shadowrun-common-chargen</exclude>
 						<exclude>de.rpgframework:shadowrun-common-chargen-jfx</exclude>

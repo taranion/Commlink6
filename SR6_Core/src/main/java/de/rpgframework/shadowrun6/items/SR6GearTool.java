@@ -132,14 +132,14 @@ public class SR6GearTool extends GearTool {
 			}
 		}
 
-		try {
-			item.setDirty(false);
-			return GearTool.recalculate(indent, ShadowrunReference.ITEM_ATTRIBUTE, user, item);
-		} catch (DataErrorException e) {
-			item.setDirty(true);
-			if (e.getReferenceError()!=null) e.getReferenceError().setType(ShadowrunReference.GEAR);
-			throw e;
-		}
+			try {
+				item.setDirty(false);
+				return GearTool.recalculate(indent, ShadowrunReference.ITEM_ATTRIBUTE, user, item);
+			} catch (DataErrorException e) {
+				item.setDirty(true);
+				if (e.getReferenceError()!=null) e.getReferenceError().setType(ShadowrunReference.GEAR);
+				throw e;
+			}
 	}
 
 	//-------------------------------------------------------------------

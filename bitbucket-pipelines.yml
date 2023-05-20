@@ -35,7 +35,7 @@ pipelines:
         caches:
          - maven
         script:
-          - cd Commlink6; mvn -B -s settings.xml update4j:create -Dtype=testing -P desktop ; cd ..
+          - cd Commlink6; mvn -U -B -s settings.xml update4j:create -Dtype=testing -P desktop ; cd ..
           - ls Commlink6/target
           - pipe: atlassian/scp-deploy:1.2.1
             variables:
