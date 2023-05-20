@@ -804,9 +804,15 @@ public class Shadowrun6Tools {
 				if (tmp.getUuid()==null)
 					logger.log(Level.WARNING, "Char {0} Item {1} has no UUID", model.getName(), tmp.getKey());
 				if (tmp.getResolved()==null) {
-					tmp.setResolved(Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey()));
-					if (tmp.getVariantID()!=null && tmp.getVariant()==null) {
-						tmp.setVariant( tmp.getResolved().getVariant(tmp.getCarryMode()) );
+					ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
+					if (resolved==null) {
+						logger.log(Level.ERROR, "Char {0} has an unresolvable item: {1}", model.getName(), tmp.getKey());
+						System.err.println("Char "+model.getName()+" has an unresolvable item: "+tmp.getKey());
+					} else {
+					tmp.setResolved(resolved);
+						if (tmp.getVariantID()!=null && tmp.getVariant()==null) {
+							tmp.setVariant( tmp.getResolved().getVariant(tmp.getCarryMode()) );
+						}
 					}
 				}
 				for (ItemEnhancementValue<AItemEnhancement> eVal : tmp.getEnhancements()) {
