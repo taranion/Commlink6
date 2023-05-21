@@ -384,11 +384,6 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"de.rpgframework.shadowrun.ContactType",
-  "allDeclaredFields":true,
-  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
-},
-{
   "name":"de.rpgframework.shadowrun.CritterPower",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]

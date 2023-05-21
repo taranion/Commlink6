@@ -120,10 +120,11 @@
     },
    {
       "name":"de.rpgframework.shadowrun6.data.de_sota2081.i18n.de_sota2081",
-      "locales":[
-        "",
-        "de"
-      ]
+      "locales":["de"]
+    },
+   {
+      "name":"de.rpgframework.shadowrun6.data.de_sota2082.i18n.de_sota2082",
+      "locales":["de"]
     },
    {
       "name":"de.rpgframework.shadowrun6.data.de_other.i18n.de_other",
@@ -147,12 +148,16 @@
       ]
     },
    {
+      "name":"de.rpgframework.shadowrun6.data.de_westphalen.i18n.de_westphalen",
+      "locales":["de"]
+    },
+   {
       "name":"de.rpgframework.shadowrun6.data.lofwyr.i18n.lofwyr",
-      "locales":[
-        "",
-        "de",
-        "en"
-      ]
+      "locales":["", "de", "en"]
+    },
+   {
+      "name":"de.rpgframework.shadowrun6.data.astral_ways.i18n.astral_ways",
+      "locales":["","en"]
     }
   ]
 }
