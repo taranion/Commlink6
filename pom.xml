@@ -37,7 +37,7 @@
 		<module>SR6_Foundry_VTT</module>
 		<module>SR6_Export_JSON</module>
 		<module>SR6_Export_FVTT</module>
-		<!--module>Commlink6</module-->
+		<module>Commlink6</module>
 	</modules>
 
 	<dependencyManagement>

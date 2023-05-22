@@ -12,8 +12,8 @@
         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-1"/>
       </modifications>
     </ammotype>
-    
-	<ammotype id="revo_rounds" cmult="2" wild="true">
+
+	<ammotype id="revo_rounds" cmult="2">
 	  <modifications>
         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,-1,-1,-2,-2"/>
         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="+1"/>

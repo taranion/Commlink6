@@ -140,13 +140,6 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		this.ctrl = ctrl;
 		this.carry = carry;
 		this.context = context;
-		System.err.println("ChoiceSelectorDialog<init<(carry="+carry+", context="+context+")");
-		try {
-			throw new RuntimeException("Trace");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();

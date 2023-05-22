@@ -75,7 +75,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private AvailableSlot ensureSlotSize(CarriedItem<?> model, ItemHook hook, float size) {
-		logger.log(Level.WARNING, "Ensure slot {0} has capacity {1}", hook, size);
+		logger.log(Level.DEBUG, "Ensure slot {0} has capacity {1}", hook, size);
 		AvailableSlot slot = ((CarriedItem<ItemTemplate>)model).getSlot(hook);
 		if (slot==null) {
 			if (size==0) return null;

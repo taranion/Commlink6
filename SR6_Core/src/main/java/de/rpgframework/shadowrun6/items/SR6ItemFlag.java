@@ -36,6 +36,8 @@ public enum SR6ItemFlag implements ItemFlag {
 	 * AUTO FLAG - not to be used by user
 	 */
 	IGNORE_FOR_CALCULATIONS,
+	// Additional way (except by modifications) to mark an item as Auto-Added
+	AUTO_ADDED,
 	CODEMOD,
 	/** Firing Squad p.61: Add alternate usage as melee weapon */
 	MELEE_HARDENING_ALTERNATE,

@@ -19,7 +19,9 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.DataErrorException;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
+import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.genericrpg.items.AGearData;
@@ -243,7 +245,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				addUserSelectableFlag(SR6ItemFlag.USES_CASELESS);
 			}
 			// Also add item hook for mounted weapons
-			if (getUsage(CarryMode.EMBEDDED)==null || !getUsage(CarryMode.EMBEDDED).getSlot().name().startsWith("IMPLANT")) {
+			if (getUsage(CarryMode.EMBEDDED)==null || (getUsage(CarryMode.EMBEDDED).getSlot()!=null) && !getUsage(CarryMode.EMBEDDED).getSlot().name().startsWith("IMPLANT")) {
 				Usage implantUse = new Usage(CarryMode.EMBEDDED);
 				switch (subtype) {
 				case BLADES:
@@ -541,6 +543,19 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	 */
 	public void setItemSubtype(ItemSubType subtype) {
 		this.subtype = subtype;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.data.DataItem#assignToDataSet(de.rpgframework.genericrpg.data.DataSet)
+	 */
+	@Override
+	public void assignToDataSet(DataSet set) {
+		super.assignToDataSet(set);
+		for (SR6PieceOfGearVariant var : variants) {
+			var.setParentItem(this);
+			var.assignToDataSet(set);
+		}
 	}
 
 	//-------------------------------------------------------------------

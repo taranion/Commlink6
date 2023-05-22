@@ -76,8 +76,8 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,,+1,+2,+1" cond="true" condindex="1"/>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,,-2,-2" cond="true" condindex="2"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,,+1,+2,+1" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,,-2,-2" cond="true" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="custom_style" avail="2" price="250">
@@ -121,7 +121,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value=",,-1,-2,-3" cond="true" condindex="1"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value=",,-1,-2,-3" cond="true"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="foregrip" avail="2" price="250">
@@ -283,7 +283,7 @@
 	    </selreq>
 	  </requires>
 	</itemenhancement>
-	<itemenhancement id="nanoconstruction" avail="3L" price="130" wild="true">
+	<itemenhancement id="nanoconstruction" avail="3L" price="130">
 	  <requires>
 	    <selreq>
 	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
@@ -349,9 +349,9 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,,+1,+2,+1" cond="true" condindex="1"/>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,,-2,-2" cond="true" condindex="2"/>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,-1,-2,-3" cond="true" condindex="3"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,,+1,+2,+1" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,,-2,-2" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,-1,-2,-3" cond="true"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="ruthenium_coating" avail="4I" price="1000">
@@ -382,8 +382,8 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value=",+1,+1,+2,+1" cond="true" condindex="1"/>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-1,+1,+1,+2,+1" cond="true" condindex="2"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value=",+1,+1,+2,+1" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-1,+1,+1,+2,+1" cond="true" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="safe_firing_iff_system" avail="3L" price="400" size="2">
@@ -450,7 +450,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,,," cond="true" condindex="1"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,,," cond="true"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="stock" avail="1" price="100">

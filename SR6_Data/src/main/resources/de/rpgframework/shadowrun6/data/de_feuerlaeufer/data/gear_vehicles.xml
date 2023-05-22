@@ -41,7 +41,7 @@
    <item id="fire_unimog" avail="2L"  price="650000" type="VEHICLES" subtype="SPECIAL_VEHICLES">
       <vehicle han="4/4" acc="12" spdi="20" tspd="110" bod="16" arm="10" pil="3" sen="3" sea="3"/>
         <modifications>
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="winch_automatic" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="winch" variant="level2" />
         </modifications>
    </item>
 

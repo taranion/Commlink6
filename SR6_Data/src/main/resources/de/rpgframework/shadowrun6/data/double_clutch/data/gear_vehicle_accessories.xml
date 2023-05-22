@@ -76,190 +76,119 @@
 
 
 	<!-- Tires -->
-   <item id="tires_offroad" avail="2" price="800" type="ACCESSORY" subtype="TIRES" reqVariant="y">
+   <item id="tires_small" avail="2" price="400" type="ACCESSORY" subtype="TIRES" reqVariant="y">
   		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <modifications>
-      	<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
-      	<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
-      </modifications>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="1600"/>
-      </variant>
-      <variant id="small_run_flat">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="1200"/>
-      </variant>
-      <variant id="large_run_flat">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="2400"/>
-      </variant>
-   </item>
-
-   <item id="tires_racing" avail="2" price="500" type="ACCESSORY" subtype="TIRES" reqVariant="y">
-  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <modifications>
-      	<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
-      	<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
-      </modifications>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="1000"/>
-      </variant>
-      <variant id="small_run_flat">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="900"/>
-      </variant>
-      <variant id="large_run_flat">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="1800"/>
-      </variant>
-   </item>
-
-   <item id="tires_runflat" avail="2" price="400" type="ACCESSORY" subtype="TIRES" reqVariant="y">
-  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
+     	<requires>
+     		<selreq>
+    			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
+     			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
+     			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
+        	</selreq>
+     	</requires>
+      <variant id="runflat" />
+      <variant id="offroad">
+      	<attrdef id="AVAILABILITY" value="2"/>
       	<attrdef id="PRICE" value="800"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
+      	</modifications>
       </variant>
-   </item>
-
-   <item id="tires_smart" avail="4" price="1200" type="ACCESSORY" subtype="TIRES" reqVariant="y">
-  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <modifications>
-      	<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
-      	<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
-      </modifications>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
-      	<attrdef id="PRICE" value="2400"/>
-      </variant>
-   </item>
-
-   <item id="tires_shredders" avail="4I" price="600" type="ACCESSORY" subtype="TIRES" reqVariant="y">
-  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
-      <modifications>
-      	<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$$BODY" apply="DATA_ITEM"/>
-      </modifications>
-      <variant id="small">
-      	<requires>
-        		<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="BIKES"/>
-      			<datareq type="ITEMSUBTYPE" ref="ATVS"/>
-      			<datareq type="ITEMSUBTYPE" ref="GROUND"/>
-         	</selreq>
-      	</requires>
-      </variant>
-      <variant id="large">
-      	<requires>
-         	<selreq>
-      			<datareq type="ITEMSUBTYPE" ref="CARS"/>
-      			<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
-      			<datareq type="ITEMSUBTYPE" ref="VANS"/>
-      			<datareq type="ITEMSUBTYPE" ref="BUS"/>
-      			<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
-         	</selreq>
-      	</requires>
+      <variant id="offroad_runflat">
+      	<attrdef id="AVAILABILITY" value="2"/>
       	<attrdef id="PRICE" value="1200"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="racing">
+      	<attrdef id="PRICE" value="500"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
+      	</modifications>
+      </variant>
+      <variant id="racing_runflat">
+      	<attrdef id="PRICE" value="900"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
+      	</modifications>
+      </variant>
+      <variant id="smart">
+      	<attrdef id="PRICE" value="1200"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="shredders">
+      	<attrdef id="PRICE" value="600"/>
+      	<attrdef id="AVAILABILITY" value="4I"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$$BODY" apply="DATA_ITEM" cond="y"/>
+      	</modifications>
       </variant>
    </item>
 
+   <item id="tires_large" avail="2" price="800" type="ACCESSORY" subtype="TIRES" reqVariant="y">
+  		<usage mode="EMBEDDED" slot="VEHICLE_TIRES" value="1"/>
+     	<requires>
+     		<selreq>
+      		<datareq type="ITEMSUBTYPE" ref="CARS"/>
+      		<datareq type="ITEMSUBTYPE" ref="TRUCKS"/>
+      		<datareq type="ITEMSUBTYPE" ref="VANS"/>
+      		<datareq type="ITEMSUBTYPE" ref="BUS"/>
+      		<datareq type="ITEMSUBTYPE" ref="SPECIAL_VEHICLES"/>
+        	</selreq>
+     	</requires>
+      <variant id="runflat" />
+      <variant id="offroad">
+      	<attrdef id="PRICE" value="1600"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="offroad_runflat">
+      	<attrdef id="PRICE" value="2400"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="-10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="-5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="racing">
+      	<attrdef id="PRICE" value="1000"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
+      	</modifications>
+      </variant>
+      <variant id="racing_runflat">
+      	<attrdef id="PRICE" value="1800"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/-10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/-5" />
+      	</modifications>
+      </variant>
+      <variant id="smart">
+      	<attrdef id="PRICE" value="2400"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="SPEED_INTERVAL" value="+10/+10" />
+      		<valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="+5/+5" />
+      	</modifications>
+      </variant>
+      <variant id="shredders">
+      	<attrdef id="PRICE" value="1200"/>
+      	<attrdef id="AVAILABILITY" value="4I"/>
+      	<modifications>
+      		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$$BODY" apply="DATA_ITEM" cond="y"/>
+      	</modifications>
+      </variant>
+    </item>
 
 
 	<!-- Chassis Mods -->
@@ -496,7 +425,7 @@
       </requires>
    	<attrdef id="PRICE" value="$RATING*4500"/>
       <modifications>
-			<valmod type="ITEM_ATTRIBUTE" ref="HANDLING" value="+$RATING/-$RATING" cond="true" condindex="1"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="HANDLING" value="+$RATING/-$RATING" cond="true"/>
       </modifications>
    </item>
 
@@ -849,7 +778,7 @@
    <item id="elemental_hardening" avail="0" price="1000" type="MOD_SKIN" subtype="MOD_ELEMENTS" >
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6"/>
-      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1804" type="ELEMENT" />
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1804" type="DAMAGE_ELEMENT" />
       </choices>
       <usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="$RATING*0.5"/>
       <attrdef id="PRICE" value="$RATING*1000" />
@@ -1121,7 +1050,7 @@
       </requires>
    </item>
 
-   <item id="electronic_countermeasures" avail="4L" price="500" type="MOD_ELEC" subtype="MOD_MISC" rate="y" maxrat="6" ratemul="PRICE" >
+   <item id="electronic_countermeasures" avail="4L" price="500" type="MOD_ELEC" subtype="MOD_MISC">
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6"/>
       </choices>
@@ -1134,8 +1063,13 @@
      	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="0"/>
    </item>
 
-   <item id="nanomaintenance_repair" avail="2L" price="9000" type="MOD_ELEC" subtype="MOD_MISC" rate="y" maxrat="4" ratemul="PRICE CAPACITY AVAIL" >
-     	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="1"/>
+   <item id="nanomaintenance_repair" avail="2L" price="9000" type="MOD_ELEC" subtype="MOD_MISC" >
+      <choices>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="4"/>
+      </choices>
+     	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="$RATING"/>
+      <attrdef id="AVAILABILITY" value="()$RATING*2)L"/>
+      <attrdef id="PRICE" value="$RATING*9000"/>
    </item>
 
    <item id="retrans_unit" avail="3" price="7000" type="MOD_ELEC" subtype="MOD_MISC" >
@@ -1143,258 +1077,217 @@
    </item>
 
 
-<!-- Pilot Mods -->
-<!--
+	<!-- Pilot Mods -->
    <item id="xguide_override" avail="4I" price="5000" type="MOD_ELEC" subtype="MOD_PILOT" >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_ELECTRONICS" />
-      </requires>
+     	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="1"/>
    </item>
 
-   <item id="improved_pilot" avail="1" price="5000" type="MOD_ELEC" subtype="MOD_PILOT" rate="y" maxrat="9" ratemul="PRICE CAPACITY AVAIL" >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_ELECTRONICS" />
-      </requires>
+   <item id="improved_pilot" avail="1" price="5000" type="MOD_ELEC" subtype="MOD_PILOT"  >
+      <choices>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="9"/>
+      </choices>
+     	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="$RATING-$$PILOT"/>
+      <attrdef id="AVAILABILITY" value="$RATING"/>
+      <attrdef id="PRICE" value="$RATING*5000"/>
       <modifications>
-        <valmod type="ITEM_ATTRIBUTE" ref="PILOT" value="1" modType="ABSOLUTE" />
+        <valmod type="ITEM_ATTRIBUTE" ref="PILOT" value="$RATING-$$PILOT" />
       </modifications>
    </item>
 
-   <item id="network_sharing" avail="9L" price="85000" >
-    <useas type="ACCESSORY" subtype="MOD_PILOT" slot="VEHICLE_ELECTRONICS" cap="4" />
+   <item id="network_sharing" avail="9L" price="85000" type="MOD_ELEC" subtype="MOD_PILOT">
+     	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="4"/>
    </item>
-   <item id="network_sharing" lang="de" avail="9L" price="1000" rate="y" maxrat="19" ratemul="BASEPRICE" >
-    <useas type="ACCESSORY" subtype="MOD_PILOT" price="85000" slot="VEHICLE_ELECTRONICS" cap="4" />
+   <item id="network_sharing" lang="de" avail="9L" price="86000" type="MOD_ELEC" subtype="MOD_PILOT">
+      <choices>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="9"/>
+      </choices>
+     	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="4"/>
+      <attrdef id="PRICE" value="85000 + ($RATING*1000)"/>
    </item>
 
-   <item id="enhanced_sensors" avail="1" price="5000" type="MOD_ELEC" subtype="MOD_PILOT" rate="y" maxrat="9" ratemul="PRICE CAPACITY AVAIL MODIFIER" >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_ELECTRONICS" />
-      </requires>
+   <item id="enhanced_sensors" avail="1" price="5000" type="MOD_ELEC" subtype="MOD_PILOT">
+      <choices>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="9"/>
+      </choices>
+     	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="$RATING-$$SENSORS"/>
+      <attrdef id="AVAILABILITY" value="$RATING"/>
+      <attrdef id="PRICE" value="$RATING*5000"/>
       <modifications>
-        <valmod type="ITEM_ATTRIBUTE" ref="SENSORS" modType="ABSOLUTE" value="1" />
-        <valmod type="ITEM_ATTRIBUTE" ref="MAX_SENSOR_RATING" value="1" />
-        <itemhookmod hook="SENSOR_FUNCTION" capacity="1" />
+        <valmod type="ITEM_ATTRIBUTE" ref="SENSORS" value="$RATING-$$SENSORS" />
+        <valmod type="ITEM_ATTRIBUTE" ref="MAX_SENSOR_RATING" value="$RATING-$$SENSORS" />
       </modifications>
    </item>
-   <item id="enhanced_sensors" lang="de" avail="1" price="2000" type="MOD_ELEC" subtype="MOD_PILOT" rate="y" maxrat="9" ratemul="PRICE CAPACITY AVAIL MODIFIER" >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_ELECTRONICS" />
-      </requires>
+   <item id="enhanced_sensors" lang="de" avail="1" price="2000" type="MOD_ELEC" subtype="MOD_PILOT" >
+      <choices>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="9"/>
+      </choices>
+     	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="$RATING-$$SENSORS"/>
+      <attrdef id="AVAILABILITY" value="$RATING"/>
+      <attrdef id="PRICE" value="$RATING*2000"/>
       <modifications>
-        <valmod type="ITEM_ATTRIBUTE" ref="SENSORS" modType="ABSOLUTE" value="1" />
-        <valmod type="ITEM_ATTRIBUTE" ref="MAX_SENSOR_RATING" value="1" />
-        <itemhookmod hook="SENSOR_FUNCTION" capacity="1" />
+        <valmod type="ITEM_ATTRIBUTE" ref="SENSORS" value="$RATING-$$SENSORS" />
+        <valmod type="ITEM_ATTRIBUTE" ref="MAX_SENSOR_RATING" value="$RATING-$$SENSORS" />
       </modifications>
    </item>
- -->
 
-<!-- Hardpoint Devices -->
-<!-- Weapon Mounts -->
-<!--
+	<!-- Hardpoint Devices -->
+	<!-- Weapon Mounts -->
    <item id="weapon_mount_small" avail="3I" price="1500" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="0.5" slot="VEHICLE_HARDPOINT" />
-      </requires>
+     	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
       <modifications>
-         <itemhookmod capacity="1" hook="VEHICLE_WEAPON_SMALL"/>
+         <valmod type="HOOK" ref="VEHICLE_WEAPON_SMALL" value="1"/>
       </modifications>
-   </item>
-   <item id="weapon_mount_small_manual" avail="4I" price="2000" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="0.5" slot="VEHICLE_HARDPOINT" />
-      </requires>
-      <modifications>
-         <itemhookmod capacity="1" hook="VEHICLE_WEAPON_SMALL"/>
-      </modifications>
+      <variant id="manual">
+      	<attrdef id="PRICE" value="2000"/>
+      </variant>
    </item>
    <item id="weapon_turret_small" avail="5I" price="6500" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_HARDPOINT" />
-      </requires>
+     	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
       <modifications>
-         <itemhookmod capacity="1" hook="VEHICLE_WEAPON_SMALL"/>
+         <valmod type="HOOK" ref="VEHICLE_WEAPON" value="1"/>
       </modifications>
+      <variant id="manual">
+      	<attrdef id="PRICE" value="7000"/>
+      </variant>
    </item>
-   <item id="weapon_turret_small_manual" avail="6I" price="7000" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_HARDPOINT" />
-      </requires>
-      <modifications>
-         <itemhookmod capacity="1" hook="VEHICLE_WEAPON_SMALL"/>
-      </modifications>
-   </item>
-
    <item id="weapon_turret_standard" avail="6I" price="8500" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="2" slot="VEHICLE_HARDPOINT" />
-      </requires>
+     	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
       <modifications>
-         <itemhookmod capacity="1" hook="VEHICLE_WEAPON"/>
+         <valmod type="HOOK" ref="VEHICLE_WEAPON" value="1"/>
       </modifications>
-   </item>
-   <item id="weapon_turret_standard_manual" avail="7I" price="9000" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="2" slot="VEHICLE_HARDPOINT" />
-      </requires>
-      <modifications>
-         <itemhookmod capacity="1" hook="VEHICLE_WEAPON"/>
-      </modifications>
+      <variant id="manual">
+      	<attrdef id="PRICE" value="9000"/>
+      </variant>
    </item>
    <item id="weapon_turret_heavy" avail="7I" price="12000" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="3" slot="VEHICLE_HARDPOINT" />
-      </requires>
+     	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
       <modifications>
-         <itemhookmod hook="VEHICLE_WEAPON_LARGE" capacity="1"/>
+         <valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1"/>
       </modifications>
+      <variant id="manual">
+      	<attrdef id="PRICE" value="12500"/>
+      </variant>
    </item>
    <item id="weapon_turret_heavy" lang="de" avail="8I" price="12000" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="3" slot="VEHICLE_HARDPOINT" />
-      </requires>
+     	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
       <modifications>
-         <itemhookmod hook="VEHICLE_WEAPON_LARGE" capacity="1"/>
+         <valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1"/>
       </modifications>
-   </item>
-   <item id="weapon_turret_heavy_manual" avail="8I" price="12500" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="3" slot="VEHICLE_HARDPOINT" />
-      </requires>
-      <modifications>
-         <itemhookmod hook="VEHICLE_WEAPON_LARGE" capacity="1"/>
-      </modifications>
-   </item>
-   <item id="weapon_turret_heavy_manual" lang="de" avail="9I" price="12500" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="3" slot="VEHICLE_HARDPOINT" />
-      </requires>
-      <modifications>
-         <itemhookmod hook="VEHICLE_WEAPON_LARGE" capacity="1"/>
-      </modifications>
-   </item>
-
-   <item id="blow_away_panels" avail="2I" price="100" type="MOD_HARD" subtype="MOD_MOUNT" rate="y" maxrat="4" ratemul="PRICE"  >
-      <requires>
-        <slotreq capacity="0" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="hardpoint_conceal_small" avail="2I" price="1500" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="0.5" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="hardpoint_conceal_standard" avail="3I" price="3000" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="hardpoint_conceal_large" avail="3I" price="4500" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="2" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="hardpoint_conceal_huge" avail="4I" price="6000" type="MOD_HARD" subtype="MOD_MOUNT"  >
-      <requires>
-        <slotreq capacity="3" slot="VEHICLE_HARDPOINT" />
-      </requires>
+      <variant id="manual">
+      	<attrdef id="PRICE" value="12500"/>
+      </variant>
    </item>
 
 
-   <item id="expanded_ammo" avail="3L" price="400" type="MOD_HARD" subtype="MOD_MOUNT" rate="y" maxrat="3" ratemul="PRICE CAPACITY"  >
-      <requires>
-        <slotreq capacity="0.5" slot="VEHICLE_CHASSIS" />
-      </requires>
-   </item>
- -->
-
-<!-- Drone Racks -->
-<!--
-   <item id="drone_rack_micromini" avail="3" price="1000" type="MOD_HARD" subtype="MOD_RACK"  >
-      <requires>
-        <slotreq capacity="0.5" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="drone_rack_small" avail="3" price="2000" type="MOD_HARD" subtype="MOD_RACK"  >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="drone_rack_medium" avail="4" price="5000" type="MOD_HARD" subtype="MOD_RACK"  >
-      <requires>
-        <slotreq capacity="2" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="drone_rack_large" avail="6" price="10000" type="MOD_HARD" subtype="MOD_RACK"  >
-      <requires>
-        <slotreq capacity="3" slot="VEHICLE_HARDPOINT" />
-      </requires>
+   <item id="hardpoint_concealment" type="MOD_HARD" subtype="MOD_MOUNT" reqVariant="y" >
+   	<variant id="blow_away_panels">
+      	<choices>
+      		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="4"/>
+      	</choices>
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/>
+      	<attrdef id="PRICE" value="$RATING*100"/>
+      	<attrdef id="AVAILABILITY" value="2I"/>
+   	</variant>
+   	<variant id="small">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+      	<attrdef id="PRICE" value="1500"/>
+      	<attrdef id="AVAILABILITY" value="2I"/>
+   	</variant>
+   	<variant id="standard">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+      	<attrdef id="PRICE" value="3000"/>
+      	<attrdef id="AVAILABILITY" value="3I"/>
+   	</variant>
+   	<variant id="large">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
+      	<attrdef id="PRICE" value="4500"/>
+      	<attrdef id="AVAILABILITY" value="3I"/>
+   	</variant>
+   	<variant id="huge">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
+      	<attrdef id="PRICE" value="6000"/>
+      	<attrdef id="AVAILABILITY" value="4I"/>
+   	</variant>
    </item>
 
-
-   <item id="drone_rack_expand_micromini" avail="3" price="500" type="MOD_HARD" subtype="MOD_RACK"  >
-      <requires>
-        <slotreq capacity="0.5" slot="VEHICLE_CHASSIS" />
-      </requires>
+   <item id="expanded_ammo" avail="3L" price="400" type="MOD_HARD" subtype="MOD_MOUNT" >
+     	<choices>
+     		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="3"/>
+     	</choices>
+     	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5*$RATING"/>
    </item>
 
-   <item id="drone_rack_expand_small" avail="3" price="1000" type="MOD_HARD" subtype="MOD_RACK"  >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_CHASSIS" />
-      </requires>
+	<!-- Drone Racks -->
+   <item id="drone_rack" avail="3" price="1000" type="MOD_HARD" subtype="MOD_RACK" reqVariant="y" >
+   	<variant id="micromini">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+      	<attrdef id="PRICE" value="1000"/>
+      	<attrdef id="AVAILABILITY" value="3"/>
+   	</variant>
+   	<variant id="small">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+      	<attrdef id="PRICE" value="2000"/>
+      	<attrdef id="AVAILABILITY" value="3"/>
+   	</variant>
+   	<variant id="medium">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
+      	<attrdef id="PRICE" value="5000"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+   	</variant>
+   	<variant id="large">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
+      	<attrdef id="PRICE" value="10000"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+   	</variant>
+   </item>
+   <item id="expanded_drone_storage" avail="3" price="500" type="MOD_HARD" subtype="MOD_RACK" reqVariant="y" >
+   	<variant id="micromini">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+      	<attrdef id="PRICE" value="500"/>
+      	<attrdef id="AVAILABILITY" value="3"/>
+   	</variant>
+   	<variant id="small">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+      	<attrdef id="PRICE" value="1000"/>
+      	<attrdef id="AVAILABILITY" value="3"/>
+   	</variant>
+   	<variant id="medium">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
+      	<attrdef id="PRICE" value="2000"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+   	</variant>
+   	<variant id="large">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
+      	<attrdef id="PRICE" value="5000"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+   	</variant>
    </item>
 
-   <item id="drone_rack_expand_medium" avail="4" price="2000" type="MOD_HARD" subtype="MOD_RACK"  >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_CHASSIS" />
-      </requires>
-   </item>
-   <item id="drone_rack_expand_medium" lang="de" avail="4" price="2500" type="MOD_HARD" subtype="MOD_RACK"  >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_CHASSIS" />
-      </requires>
+
+	<!-- Other Hardpoint Devices -->
+   <item id="mechanical_arm" avail="2" price="2000" type="MOD_HARD" subtype="MOD_OTHERS" reqVariant="y" >
+   	<variant id="small">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+      	<attrdef id="PRICE" value="2000"/>
+      	<attrdef id="AVAILABILITY" value="3"/>
+   	</variant>
+   	<variant id="medium">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+      	<attrdef id="PRICE" value="4000"/>
+      	<attrdef id="AVAILABILITY" value="3"/>
+   	</variant>
+   	<variant id="large">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
+      	<attrdef id="PRICE" value="7000"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+   	</variant>
+   	<variant id="huge">
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
+      	<attrdef id="PRICE" value="11000"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+   	</variant>
    </item>
 
-   <item id="drone_rack_expand_large" avail="4" price="5000" type="MOD_HARD" subtype="MOD_RACK"  >
-      <requires>
-        <slotreq capacity="2" slot="VEHICLE_CHASSIS" />
-      </requires>
-   </item>
--->
-
-<!-- Other Hardpoint Devices -->
-<!--
-   <item id="mech_arm_small" avail="2" price="2000" type="MOD_HARD" subtype="MOD_OTHERS"  >
-      <requires>
-        <slotreq capacity="0.5" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="mech_arm_medium" avail="2" price="4000" type="MOD_HARD" subtype="MOD_OTHERS"  >
-      <requires>
-        <slotreq capacity="1" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="mech_arm_large" avail="3" price="7000" type="MOD_HARD" subtype="MOD_OTHERS"  >
-      <requires>
-        <slotreq capacity="2" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
-
-   <item id="mech_arm_huge" avail="5" price="11000" type="MOD_HARD" subtype="MOD_OTHERS"  >
-      <requires>
-        <slotreq capacity="3" slot="VEHICLE_HARDPOINT" />
-      </requires>
-   </item>
- -->
    <item id="ram_plate" avail="3L" price="250" type="MOD_HARD" subtype="MOD_OTHERS">
    	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
       <attrdef id="PRICE" value="$$BODY*250"/>
@@ -1406,10 +1299,6 @@
    	</choices>
    	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
       <attrdef id="PRICE" value="$RATING" table="750,4000"/>
-   </item>
-
-   <item id="winch_automatic" avail="4" price="4000" type="MOD_HARD" subtype="MOD_OTHERS">
-   	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
    </item>
 
 </items>

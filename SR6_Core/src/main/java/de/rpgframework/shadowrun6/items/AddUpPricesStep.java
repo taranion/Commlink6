@@ -40,12 +40,18 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 
 		ItemAttributeNumericalValue<SR6ItemAttribute> attrib = model.getAsValue(SR6ItemAttribute.PRICE);
 		if (attrib==null) {
-			logger.log(Level.WARNING, "Item {0} has no price", model.getKey());
+			if (!"software_library".equals(model.getKey())) {
+				logger.log(Level.WARNING, "Item {0} has no price", model.getKey());
+			}
 			return new OperationResult<List<Modification>>(unprocessed);
 		}
 
 		// Add prices of accessories
 		for (CarriedItem<? extends PieceOfGear> carried : model.getAccessories()) {
+			if (carried.isAutoAdded() || carried.hasFlag(SR6ItemFlag.AUTO_ADDED)) {
+				logger.log(Level.INFO, "Ignore cost of auto-added {0}", carried.getKey());
+				continue;
+			}
 			ItemAttributeNumericalValue<SR6ItemAttribute> aVal = carried.getAsValue(SR6ItemAttribute.PRICE);
 			if (aVal==null) {
 				logger.log(Level.ERROR, "No attribute PRICE set for item "+carried.getKey()+"/"+carried.getUuid());

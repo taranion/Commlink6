@@ -22,6 +22,7 @@ import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.CritterPower;
+import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
@@ -50,7 +51,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.SignatureManeuver;
 import de.rpgframework.shadowrun6.Technique;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
 import de.rpgframework.shadowrun6.items.Construction;
@@ -86,6 +86,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	CONSTRUCTION(Construction.class,0),
 	CREATION_POINTS(CreatePoints.class,0),
 	CRITTER_POWER(CritterPower.class),
+	DAMAGE_ELEMENT(DamageElement.class,0),
 	DATA_STRUCTURE(DataStructure.class),
 	DRAIN_MAGE(new AttributeConverter()),
 	DRAIN_ADEPT(new AttributeConverter()),
