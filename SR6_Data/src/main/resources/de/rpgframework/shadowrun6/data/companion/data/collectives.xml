@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sets>
+	<set id="monolith" type="QUALITY" cost="15">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="ork"/>
+		 		<datareq type="METATYPE" ref="troll"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="granite"/>
+			<itemmod type="QUALITY" ref="magnetosense"/>
+			<itemmod type="QUALITY" ref="thermographic_vision_metagenetic"/>
+			<itemmod type="QUALITY" ref="stubby_arms"/>
+		</modifications>
+	</set>
+	<set id="raptor" type="QUALITY" cost="15">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="elf"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="beak"/>
+			<itemmod type="QUALITY" ref="functional_wings" variant="type1"/>
+			<selmod uuid="d92f1c31-874e-419d-9b14-b8eaad476784">
+				<itemmod type="QUALITY" ref="feathers"/>
+				<itemmod type="QUALITY" ref="unusual_hair"/>
+			</selmod>
+		</modifications>
+	</set>
+	<set id="anubis" type="QUALITY" cost="8">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="elf"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="fangs"/>
+			<itemmod type="QUALITY" ref="low-light_vision_metagenetic"/>
+			<itemmod type="QUALITY" ref="canine_feline"/>
+			<itemmod type="QUALITY" ref="unusual_hair"/>
+		</modifications>
+	</set>
+	<set id="bastet" type="QUALITY" cost="8">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="elf"/>
+		 		<datareq type="METATYPE" ref="ork"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="fangs"/>
+			<itemmod type="QUALITY" ref="low-light_vision_metagenetic"/>
+			<itemmod type="QUALITY" ref="balance_receptor"/>
+			<itemmod type="QUALITY" ref="canine_feline"/>
+			<itemmod type="QUALITY" ref="unusual_hair"/>
+		</modifications>
+	</set>
+	<set id="sobek" type="QUALITY" cost="12">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="ork"/>
+		 		<datareq type="METATYPE" ref="troll"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="rhino"/>
+			<itemmod type="QUALITY" ref="functional_tail" variant="paddle"/>
+			<itemmod type="QUALITY" ref="underwater_vision"/>
+			<itemmod type="QUALITY" ref="metagenetic_attribute_improvement">
+				<decision choice="dbb18bb4-89a4-4435-bede-3077ee600bc5" value="BODY"/>
+			</itemmod>
+			<itemmod type="QUALITY" ref="reflective_eyes"/>
+			<itemmod type="QUALITY" ref="berserker"/>
+		</modifications>
+	</set>
+	<set id="humboldt" type="QUALITY" cost="15">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="elf"/>
+		 		<datareq type="METATYPE" ref="ork"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="beak"/>
+			<itemmod type="QUALITY" ref="electrosense"/>
+			<itemmod type="QUALITY" ref="webbed_digits"/>
+			<itemmod type="QUALITY" ref="underwater_vision"/>
+			<itemmod type="QUALITY" ref="cephalopod"/>
+			<itemmod type="QUALITY" ref="bioluminescence"/>
+		</modifications>
+	</set>
+	<set id="merfolk" type="QUALITY" cost="15">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="elf"/>
+		 		<datareq type="METATYPE" ref="ork"/>
+		 		<datareq type="METATYPE" ref="troll"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="biosonar"/>
+			<itemmod type="QUALITY" ref="gills"/>
+			<itemmod type="QUALITY" ref="webbed_digits"/>
+			<itemmod type="QUALITY" ref="underwater_vision"/>
+			<itemmod type="QUALITY" ref="scales"/>
+		</modifications>
+	</set>
+	<set id="ganesh" type="QUALITY" cost="15">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="elf"/>
+		 		<datareq type="METATYPE" ref="ork"/>
+		 		<datareq type="METATYPE" ref="troll"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="rhino"/>
+			<itemmod type="QUALITY" ref="keen_eared"/>
+			<itemmod type="QUALITY" ref="larger_tusks"/>
+			<itemmod type="QUALITY" ref="probosics"/>
+			<itemmod type="QUALITY" ref="vestigial_tail"/>
+		</modifications>
+	</set>
+	<set id="kali_ani" type="QUALITY" cost="15">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="elf"/>
+		 		<datareq type="METATYPE" ref="ork"/>
+		 		<datareq type="METATYPE" ref="troll"/>
+		 		<datareq type="METATYPE" ref="naga"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="dragon"/>
+			<valmod type="QUALITY" ref="shiva_arms" value="3"/>
+			<itemmod type="QUALITY" ref="berserker"/>
+			<itemmod type="QUALITY" ref="critter_spook"/>
+			<itemmod type="QUALITY" ref="unusual_hair"/>
+		</modifications>
+	</set>
+	<set id="rakshasa" type="QUALITY" cost="15">
+		<requires>
+		 	<selreq>
+		 		<datareq type="METATYPE" ref="human"/>
+		 		<datareq type="METATYPE" ref="elf"/>
+		 		<datareq type="METATYPE" ref="ork"/>
+		 	</selreq>
+		</requires>
+		<modifications>
+			<itemmod type="QUALITY" ref="fangs"/>
+			<itemmod type="QUALITY" ref="functional_tail" variant="prehensile"/>
+			<itemmod type="QUALITY" ref="canine_feline"/>
+			<itemmod type="QUALITY" ref="unusual_hair"/>
+		</modifications>
+	</set>
+</sets>
