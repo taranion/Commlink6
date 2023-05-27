@@ -114,6 +114,7 @@ import de.rpgframework.shadowrun6.proc.CalculatePersona;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
 import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
+import de.rpgframework.shadowrun6.proc.GetModificationsFromCollectives;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromPowers;
@@ -135,6 +136,7 @@ public class Shadowrun6Tools {
 		EnsureAttributePresence.class,
 		GetModificationsFromMetaType.class,
 		GetModificationsForDrakes.class,
+		GetModificationsFromCollectives.class,
 		ApplyModificationsGeneric.class,
 		GetModificationsFromMagicOrResonance.class,
 		GetModificationsFromQualities.class,
@@ -602,6 +604,10 @@ public class Shadowrun6Tools {
 //			}
 			logger.log(Level.ERROR, "Not supported yet: "+type);
 			return "ToDo: "+type;
+		} else if (mod instanceof ModificationChoice) {
+			ModificationChoice choice = (ModificationChoice)mod;
+			List<String> or = choice.stream().map(m -> getModificationString(data, m, loc)).collect(Collectors.toList());
+			return String.join(" "+RES.getString("label.or")+" ", or);
 		}
 
 		Logging.logger.log(Level.ERROR, "Missing string conversion for "+mod.getClass());

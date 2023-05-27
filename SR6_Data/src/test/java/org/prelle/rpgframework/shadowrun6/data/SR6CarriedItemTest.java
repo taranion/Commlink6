@@ -313,6 +313,27 @@ public class SR6CarriedItemTest {
 
 	//-------------------------------------------------------------------
 	@Test
+	public void testVehicleAntiTheft() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "chrysler-nissan_jackrabbit");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> vehicle = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		List<CarriedItem<ItemTemplate>> thefts = vehicle.getAccessory("anti_theft", "rating1");
+		assertTrue(thefts.isEmpty());
+		SR6GearTool.recalculate("", null, vehicle);
+		thefts = vehicle.getAccessory("anti_theft", "rating1");
+//		System.out.println(vehicle.dump());
+		assertFalse("Anti-Theft missing",thefts.isEmpty());
+		assertEquals(1,thefts.size());
+		SR6GearTool.recalculate("", null, vehicle);
+		thefts = vehicle.getAccessory("anti_theft", "rating1");
+		System.out.println(vehicle.dump());
+		assertFalse("Anti-Theft missing",thefts.isEmpty());
+		assertEquals("Thefts added multiple times",1,thefts.size());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
 	public void testWithoutChoices() {
 		ItemTemplate honda = Shadowrun6Core.getItem(ItemTemplate.class, "dermal_plating");
 		assertNotNull(honda);

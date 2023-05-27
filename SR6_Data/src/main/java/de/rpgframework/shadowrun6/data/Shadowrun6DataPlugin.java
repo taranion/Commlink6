@@ -12,6 +12,8 @@ import java.util.Locale;
 import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.genericrpg.SetItem;
+import de.rpgframework.genericrpg.SetItemList;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.chargen.RuleInterpretationList;
 import de.rpgframework.genericrpg.data.ASkillValue;
@@ -487,6 +489,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" lifepath modules");
 		list = Shadowrun6Core.loadDataItems(ContactTypeList.class, ContactType.class, set, clazz, "companion/data/contact_types.xml");
 		logger.log(Level.DEBUG, "Loaded {0} contact types", list.size());
+		list = Shadowrun6Core.loadDataItems(SetItemList.class, SetItem.class, set, clazz, "companion/data/collectives.xml");
+		logger.log(Level.DEBUG, "Loaded {0} collectives", list.size());
 	}
 
 	//-------------------------------------------------------------------
