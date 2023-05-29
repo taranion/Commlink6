@@ -14,6 +14,7 @@ import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.free.FreeCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
@@ -120,6 +121,7 @@ public class ResetGenerator implements ProcessingStep {
 			}
 			logger.log(Level.INFO, "Start with {0} Karma", settings.startKarma);
 			model.setKarmaFree(settings.startKarma);
+		} else if (real instanceof FreeCharacterGenerator) {
 		} else {
 			model.setKarmaFree(50);
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);

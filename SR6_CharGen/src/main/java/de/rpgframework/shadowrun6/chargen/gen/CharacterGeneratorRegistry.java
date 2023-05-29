@@ -12,9 +12,9 @@ import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.shadowrun.PriorityType;
-import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.free.FreeCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
@@ -40,6 +40,7 @@ public class CharacterGeneratorRegistry {
 		addGenerator(PointBuyCharacterGenerator.class);
 		addGenerator(KarmaCharacterGenerator.class);
 //		addGenerator(LifePathCharacterGenerator.class);
+		addGenerator(FreeCharacterGenerator.class);
 	}
 
 	//-------------------------------------------------------------------

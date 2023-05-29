@@ -15,7 +15,7 @@
         <Logger name="de.rpgframework.random" level="WARN"/>
         <Logger name="rpgframework.random" level="WARN"/>
         <Logger name="shadowrun.rungen" level="WARN" />
-        <Logger name="de.rpgframework.genericrpg.items" level="WARN" />
+        <Logger name="de.rpgframework.genericrpg.items" level="INFO" />
         <Logger name="de.rpgframework.genericrpg.items.formula" level="WARN" />
         <Logger name="de.rpgframework.shadowrun6.proc.attr" level="INFO" />
         <Logger name="de.rpgframework.shadowrun6.items" level="WARN" />

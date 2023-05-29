@@ -18,6 +18,7 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.free.FreeCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
@@ -82,6 +83,8 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 		} else if (realCtrl instanceof PointBuyCharacterGenerator) {
 			return new PointBuyAttributeTable<>(controller);
 		} else if (realCtrl instanceof KarmaCharacterGenerator) {
+			return new KarmaAttributeTable<>(controller);
+		} else if (realCtrl instanceof FreeCharacterGenerator) {
 			return new KarmaAttributeTable<>(controller);
 		}
 		logger.log(Level.ERROR, "Don't know what to return for "+realCtrl);
