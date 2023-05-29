@@ -13,15 +13,15 @@
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy"/>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_conceal_large"/> wait for double clutch -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_conceal_large"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="push_bar"/> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="large" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="large" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="push_bar"/>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="regular" />
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector"/> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector"/>
       </modifications>
    </item>
 
@@ -37,13 +37,15 @@
       <vehicle han="3" acc="25" spdi="40" tspd="350" bod="16" arm="16" pil="2" sen="3" sea="4" />
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/> wait for double clutch -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_small"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="life_safe_system_2"/> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="searchlight_normal"/> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="small" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="life_safety_system" variant="level2" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="searchlight" variant="regular" />
      </modifications>
    </item>
 

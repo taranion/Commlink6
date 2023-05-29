@@ -11,7 +11,7 @@
 	  <alternate mode="VEHICLE" type="VEHICLES" subtype="PWC">
       </alternate>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_boat"/> wait for double clutch -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="boat" />
       </modifications>
    </item>
 
@@ -23,8 +23,8 @@
    <item avail="6L"  price="42000" id="bmw_wasserschwein" type="VEHICLES" subtype="ATVS">
       <vehicle han="4/5" acc="14" spdi="15" tspd="140" bod="8" arm="6" pil="2" sen="4" sea="5"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_small"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_small"/> wait for double clutch  -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="small" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="small" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" variant="manual"/>
       </modifications>
    </item>
@@ -32,7 +32,7 @@
    <item avail="3"  price="15000" id="bmw_ggx" type="VEHICLES" subtype="ATVS">
       <vehicle han="3/3" acc="14" spdi="20" tspd="180" bod="8" arm="6" pil="3" sen="3" sea="2"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/> wait for double clutch -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/>
       </modifications>
    </item>
 
@@ -51,23 +51,27 @@
    </item>
 
 <!-- Vans -->
-   <item avail="3"  price="55000" id="mercedes_multimog-d1" type="VEHICLES" subtype="VANS" > <!-- Adjusted acc from 8 to 13/3 and spdi from 10 to 20/10 to meet stated values acc 8 / spdi 10 with offroad tires -->
-      <vehicle han="4/5" acc="13/3" spdi="20/0" tspd="130" bod="17" arm="14" pil="2" sen="2" sea="10"/> <!-- adjusted handling from 5/4 to 4/5 to make multi_terrain_active work correctly -->
+   <item avail="3"  price="55000" id="mercedes_multimog-d1" type="VEHICLES" subtype="VANS" >
+      <vehicle han="5/4" acc="8" spdi="10" tspd="130" bod="17" arm="14" pil="2" sen="2" sea="10"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="multi_terrain_active"/> wait for double clutch -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large_offroad"/> wait for double clutch -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="multi_terrain_active" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> <!-- no rating stated, assuming 2 -->
+			</embed>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large" variant="offroad" />
       </modifications>
    </item>
-   <item avail="3"  price="85000" id="mercedes_multimog-k4" type="VEHICLES" subtype="VANS"> <!-- Adjusted acc from 8 to 13/3 and spdi from 10 to 20/10 to meet stated values acc 8 / spdi 10 with offroad tires -->
-      <vehicle han="4/5" acc="13/3" spdi="20/0" tspd="120" bod="18" arm="16" pil="4" sen="4" sea="8"/> <!-- adjusted handling from 5/4 to 4/5 to make multi_terrain_active work correctly -->
+   <item avail="3"  price="85000" id="mercedes_multimog-k4" type="VEHICLES" subtype="VANS">
+      <vehicle han="5/4" acc="8" spdi="10" tspd="120" bod="18" arm="16" pil="4" sen="4" sea="8"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures" > wait for double clutch  -->
-			<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
-			<!-- </embed> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="multi_terrain_active"/> wait for double clutch -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large_offroad"/> wait for double clutch -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="multi_terrain_active" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> <!-- no rating stated, assuming 2 -->
+			</embed>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large" variant="offroad" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="satellite_link"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
       </modifications>
@@ -76,9 +80,9 @@
    <item avail="8L"  price="72000" id="bmw_x_infinity" type="VEHICLES" subtype="VANS">
       <vehicle han="4/5" acc="12" spdi="20" tspd="180" bod="14" arm="14" pil="3" sen="4" sea="6"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_ceramic"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" variant="manual"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="extra_entry_points"/> wait for double clutch  -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_ceramic"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" variant="manual"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="extra_entry_points"/>
       </modifications>
    </item>
 
@@ -108,7 +112,7 @@
    <item avail="1"  price="6000" id="katydid" type="VEHICLES" subtype="FIXED_WING">
       <vehicle han="3/5" acc="4" spdi="10" tspd="40" bod="1" arm="0" pil="2" sen="1" sea="1"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_glide"/> wait for double clutch  -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="glide" />
       </modifications>
    </item>
 
@@ -118,24 +122,24 @@
    <item avail="4"  price="2300000" id="hyperion" type="VEHICLES" subtype="LAV">
       <vehicle han="6" acc="30" spdi="70" tspd="420" bod="22" arm="12" pil="2" sen="3" sea="571"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_large"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_large"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_ceramic"/> wait for double clutch  -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="large" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="large" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_ceramic"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/> wait for double clutch  -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
       </modifications>
    </item>
 

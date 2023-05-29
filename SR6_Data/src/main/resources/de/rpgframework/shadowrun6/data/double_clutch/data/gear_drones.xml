@@ -313,18 +313,6 @@
 
 	<item id="bae_ajax" avail="5" price="60000" type="DRONE_LARGE" subtype="GROUND" >
 		<vehicle han="4" acc="25" spdi="30" tspd="130" bod="18" arm="16" pil="4" sen="4" /> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
-		<geardef>
- 			<item id="vehicle_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" > <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter -->
-      		<weapon attack=",5,9,10,8" ammo="2(ml)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" /> <!-- Errata needed: No info on ranges for launcher, using aztechnology_striker -->
-			</item>
-   		<item id="weapon_launcher" avail="99" price="0" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true"> <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter -->
-   			<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
-		      <modifications>
-      		   <itemmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" />
-         		<embed type="GEAR" ref="vehicle_launcher" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
-      		</modifications>
-   		</item>
-		</geardef>
 		<modifications>
 			<!--embed type="GEAR" ref="modslot_pp_to_chassis" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
 			<embed type="GEAR" ref="modslot_elec_to_chassis" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  /-->
