@@ -20,7 +20,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class SR6NPC extends ANPC<ShadowrunAttribute, SR6Skill, SR6SkillValue, SR6Spell> {
+public class SR6NPC extends ANPC<SR6Skill, SR6SkillValue, SR6Spell> {
 
 	@Element(name="geardef")
 	protected ItemTemplateList gearDef;
