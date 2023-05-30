@@ -232,7 +232,7 @@
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks can carry three drones by default -->
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
 			<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true"/> <!-- As this is a walker, it does not have tires -->
 		</modifications>
 	</item>
@@ -243,7 +243,7 @@
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks can carry three drones by default -->
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
 			<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true"/> <!-- As this is a walker, it does not have tires -->
 		</modifications>
 	</item>
@@ -254,7 +254,7 @@
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
 			<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true"/> <!-- As this is a walker, it does not have tires -->
 		</modifications>
 	</item>
@@ -264,7 +264,7 @@
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
 			<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true"/> <!-- As this is a walker, it does not have tires -->
 		</modifications>
 	</item>
@@ -598,7 +598,7 @@
 		<modifications>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
 			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
@@ -608,7 +608,7 @@
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
 		</modifications>
 	</item>
 
