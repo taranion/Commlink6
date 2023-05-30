@@ -6,25 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
-import de.rpgframework.genericrpg.SetItem;
-import de.rpgframework.genericrpg.ValueType;
-import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.modification.DataItemModification;
+import de.rpgframework.genericrpg.SetItemValue;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.BodyForm;
-import de.rpgframework.shadowrun.BodyType;
-import de.rpgframework.shadowrun.CritterPower;
-import de.rpgframework.shadowrun.CritterPowerValue;
-import de.rpgframework.shadowrun.MetamagicOrEcho;
-import de.rpgframework.shadowrun.MetamagicOrEchoValue;
-import de.rpgframework.shadowrun.Movement;
-import de.rpgframework.shadowrun.Movement.MovementType;
-import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -51,14 +35,14 @@ public class GetModificationsFromCollectives implements ProcessingStep {
 
 		logger.log(Level.WARNING, "##################ENTER: process "+model.getSurgeCollective());
 		try {
-			SetItem collective = model.getSurgeCollective();
+			SetItemValue collective = model.getSurgeCollective();
 			if (collective==null) {
 				return previous;
 			}
 
 			// Iterate modifications
-			for (Modification mod : collective.getModifications()) {
-				logger.log(Level.WARNING, "Add for ''{0}'' collective: {1}", collective.getId(), mod);
+			for (Modification mod : collective.getEffectiveModifications(model)) {
+				logger.log(Level.WARNING, "Add for ''{0}'' collective: {1}", collective.getKey(), mod);
 				unprocessed.add(mod);
 //				switch ((ShadowrunReference)mod.getReferenceType()) {
 //				case ATTRIBUTE:

@@ -14,7 +14,7 @@ import org.prelle.simplepersist.Root;
 import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.classification.Gender;
 import de.rpgframework.core.RoleplayingSystem;
-import de.rpgframework.genericrpg.SetItem;
+import de.rpgframework.genericrpg.SetItemValue;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.CheckModification;
@@ -56,7 +56,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	@Element
 	private DrakeTypeValue drakeType;
 	@Element(name="collective")
-	private String surgeCollective;
+	private SetItemValue surgeCollective;
 
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
@@ -433,17 +433,17 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	/**
 	 * @return the surgeCollective
 	 */
-	public SetItem getSurgeCollective() {
-		return Shadowrun6Core.getItem(SetItem.class, surgeCollective);
+	public SetItemValue getSurgeCollective() {
+		return surgeCollective;
 	}
 
 	//-------------------------------------------------------------------
 	/**
 	 * @param surgeCollective the surgeCollective to set
 	 */
-	public void setSurgeCollective(SetItem data) {
-		if (data!=null && !"general".equals(data.getId()))
-			this.surgeCollective = data.getId();
+	public void setSurgeCollective(SetItemValue data) {
+		if (data!=null && !"general".equals(data.getKey()))
+			this.surgeCollective = data;
 		else
 			this.surgeCollective = null;
 	}

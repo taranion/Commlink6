@@ -29,7 +29,6 @@ import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun6.DrakeTypeValue;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
@@ -298,16 +297,17 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());
 		}
 
+		logger.log(Level.WARNING, "Add "+mod+" with decisions "+mod.getDecisions());
 		if (value == null) {
 			value = new QualityValue(item, 0);
 			// Handle decisions
 			for (Decision dec : mod.getDecisions()) {
 				value.addDecision(dec);
-				logger.log(Level.DEBUG, "Add decision {0} to quality {1}", dec, item);
+				logger.log(Level.INFO, "Add decision {0} to quality {1}", dec, item);
 			}
 
 			model.addQuality(value);
-			logger.log(Level.DEBUG, "Add quality {0} to character", item);
+			logger.log(Level.INFO, "Add quality {0} to character", item);
 		}
 		// Mark as auto-added
 		value.addModification(mod);

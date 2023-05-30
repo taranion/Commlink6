@@ -11,6 +11,9 @@ import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.prelle.javafx.AlertManager;
+import org.prelle.javafx.AlertType;
+import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.NodeWithTitle;
 import org.prelle.javafx.WindowMode;
@@ -18,10 +21,22 @@ import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.character.RuleSpecificCharacterObject;
+import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.SetItem;
+import de.rpgframework.genericrpg.SetItemValue;
+import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
+import de.rpgframework.genericrpg.chargen.CharacterController;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
+import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.chargen.RecommendationState;
+import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.IAttribute;
+import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.ComplexDataItemControllerOneColumnSkin;
 import de.rpgframework.jfx.DataItemSpinnerPane;
@@ -45,6 +60,7 @@ import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.QualityFilterNode;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6ReferenceTypeConverter;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -72,6 +88,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 
 	private transient SetItem none;
 	private Comparator<SetItem> comparator;
+	private ChoiceSelectorDialog<SetItem, SetItemValue> selectorDialog;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageChangeling(Wizard wizard, GeneratorWrapper charGen) {
@@ -91,6 +108,88 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	//-------------------------------------------------------------------
 	@SuppressWarnings({ "rawtypes" })
 	private void initComponents() {
+		selectorDialog = new ChoiceSelectorDialog<>(new ComplexDataItemController<SetItem, SetItemValue>() {
+			@Override
+			public <A extends IAttribute, M extends RuleSpecificCharacterObject<A, ?, ?, ?>> CharacterController<A, M> getCharacterController() {
+				return (CharacterController<A, M>) charGen;
+			}
+			@Override
+			public <C extends RuleSpecificCharacterObject<? extends IAttribute, ?, ?, ?>> C getModel() {
+				return (C) charGen.getModel();
+			}
+			@Override
+			public List<ToDoElement> getToDos() {
+				return List.of();
+			}
+			@Override
+			public void roll() {}
+
+			@Override
+			public List<Choice> getChoices() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void decide(SetItem decideFor, Choice choice, Decision decision) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public List<Modification> process(List<Modification> unprocessed) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public List<SetItem> getAvailable() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public List<SetItemValue> getSelected() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public RecommendationState getRecommendationState(SetItem value) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public RecommendationState getRecommendationState(SetItemValue value) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public List<Choice> getChoicesToDecide(SetItem value) {
+				return value.getChoices();
+			}
+			@Override
+			public Possible canBeSelected(SetItem value, Decision... decisions) {
+				return Possible.TRUE;
+			}
+			@Override
+			public OperationResult<SetItemValue> select(SetItem value, Decision... decisions) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			@Override
+			public Possible canBeDeselected(SetItemValue value) {
+				return Possible.TRUE;
+			}
+			@Override
+			public boolean deselect(SetItemValue value) {return false;}
+			@Override
+			public float getSelectionCost(SetItem data) { return data.getCost(); }
+			@Override
+			public String getSelectionCostString(SetItem data) { return String.valueOf(getSelectionCost(data)); }
+		});
 		comparator = new Comparator<SetItem>() {
 			public int compare(SetItem meta1, SetItem meta2) {
 				if (meta1==none) return -1;
@@ -134,7 +233,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 				Shadowrun6Tools.modificationResolver(Locale.getDefault())
 				);
-		contentPane.setShowDecisionColumn(false);
+		contentPane.setShowDecisionColumn(true);
 		contentPane.setShowStatsColumn(false);
 		contentPane.setId("species");
 		contentPane.setImageConverter(new Function<SetItem,Image>(){
@@ -165,6 +264,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		contentPane.setModel(charGen.getModel());
 		contentPane.setDecisionHandler( (r,c) -> {
 			logger.log(Level.WARNING, "ToDo: make decision");
+			System.err.println("SR6WizardPageChangeling: ToDo: make decision "+c);
 //			SplitterJFXUtil.openDecisionDialog(r, c, null);
 		});
 
@@ -206,14 +306,8 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		contentPane.selectedItemProperty().addListener( (ov,o,n) -> {
 			if (updating) return;
 			if (n==null) return;
-			IMetatypeController<SR6MetaType> ctrl = charGen.getMetatypeController();
-			if (ctrl==null) {
-				logger.log(Level.ERROR, charGen.getClass()+".getMetatypeController returns null  (internal "+charGen.getWrapped()+" ) of "+charGen);
-			} else {
-				logger.log(Level.ERROR, "ToDo: Select "+n);
-				charGen.getModel().setSurgeCollective(n);
-				charGen.runProcessors();
-			}
+			logger.log(Level.ERROR, "ToDo: Select "+n);
+			userSelects(n);
 			refresh();
 		});
 
@@ -264,8 +358,8 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			logger.log(Level.WARNING, "Available: "+items);
 			contentPane.setItems(items);
 
-			if (items.contains(model.getSurgeCollective()) && model.getSurgeCollective() != contentPane.getSelectedItem()) {
-				contentPane.setSelectedItem(model.getSurgeCollective());
+			if (items.contains(model.getSurgeCollective().getResolved()) && model.getSurgeCollective().getResolved() != contentPane.getSelectedItem()) {
+				contentPane.setSelectedItem(model.getSurgeCollective().getResolved());
 			} else {
 				contentPane.setSelectedItem(none);
 			}
@@ -310,5 +404,31 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		logger.log(Level.WARNING,"setResponsiveMode({0})", value);
 		selection.setShowHeadings(value!=WindowMode.MINIMAL);
 	}
+
+	// -------------------------------------------------------------------
+	private void userSelects(SetItem toSelect) {
+		logger.log(Level.INFO, "userSelects(" + toSelect + ")");
+		SetItemValue ret = new SetItemValue(toSelect);
+		// Is there a need for a selection
+		if (!toSelect.getChoices().isEmpty()) {
+			// Yes, user must choose
+			List<Choice> options = toSelect.getChoices();
+			logger.log(Level.DEBUG, "called getChoicesToDecide returns {0} choices", options.size());
+			Platform.runLater( () -> {
+				Decision[] decisions = selectorDialog.apply(toSelect, options);
+				if (decisions != null) {
+					for (Decision dec : decisions) {
+						logger.log(Level.WARNING, "Add decision", dec);
+						ret.addDecision(dec);
+					}
+				}
+				charGen.getModel().setSurgeCollective(ret);
+				charGen.runProcessors();
+			});
+		} else {
+			charGen.getModel().setSurgeCollective(ret);
+			charGen.runProcessors();
+		}
+    }
 
 }

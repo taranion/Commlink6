@@ -22,9 +22,15 @@
 		 		<datareq type="METATYPE" ref="elf"/>
 		 	</selreq>
 		</requires>
+		<choices>
+			<choice uuid="d92f1c31-874e-419d-9b14-b8eaad476784" type="QUALITY" options="feathers,unusual_hair"/>
+		</choices>
 		<modifications>
 			<itemmod type="QUALITY" ref="beak"/>
-			<itemmod type="QUALITY" ref="functional_wings" variant="type1"/>
+			<itemmod type="QUALITY" ref="functional_wings">
+				<decision choice="da1c74d5-0b31-4241-abc8-78d045e7b698" value="type1"/>
+			</itemmod>
+			<itemmod type="QUALITY" ref="CHOICE" choice="d92f1c31-874e-419d-9b14-b8eaad476784"/>
 			<selmod uuid="d92f1c31-874e-419d-9b14-b8eaad476784">
 				<itemmod type="QUALITY" ref="feathers"/>
 				<itemmod type="QUALITY" ref="unusual_hair"/>
@@ -71,7 +77,9 @@
 		</requires>
 		<modifications>
 			<itemmod type="QUALITY" ref="rhino"/>
-			<itemmod type="QUALITY" ref="functional_tail" variant="paddle"/>
+			<itemmod type="QUALITY" ref="functional_tail">
+				<decision choice="b237c0da-1eb1-4070-879a-22bc2899c106" value="paddle"/>
+			</itemmod>
 			<itemmod type="QUALITY" ref="underwater_vision"/>
 			<itemmod type="QUALITY" ref="metagenetic_attribute_improvement">
 				<decision choice="dbb18bb4-89a4-4435-bede-3077ee600bc5" value="BODY"/>
@@ -143,7 +151,7 @@
 		</requires>
 		<modifications>
 			<itemmod type="QUALITY" ref="dragon"/>
-			<valmod type="QUALITY" ref="shiva_arms" value="3"/>
+			<valmod type="QUALITY" ref="shiva_arms" value="3" set="NATURAL"/>
 			<itemmod type="QUALITY" ref="berserker"/>
 			<itemmod type="QUALITY" ref="critter_spook"/>
 			<itemmod type="QUALITY" ref="unusual_hair"/>
@@ -159,7 +167,9 @@
 		</requires>
 		<modifications>
 			<itemmod type="QUALITY" ref="fangs"/>
-			<itemmod type="QUALITY" ref="functional_tail" variant="prehensile"/>
+			<itemmod type="QUALITY" ref="functional_tail">
+				<decision choice="b237c0da-1eb1-4070-879a-22bc2899c106" value="prehensile"/>
+			</itemmod>
 			<itemmod type="QUALITY" ref="canine_feline"/>
 			<itemmod type="QUALITY" ref="unusual_hair"/>
 		</modifications>

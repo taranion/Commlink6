@@ -391,6 +391,9 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art techniques");
 		list = Shadowrun6Core.loadDataItems(MartialArtsList.class, MartialArts.class, set, clazz,"firing_squad/data/martialarts.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art styles");
+		list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, set, clazz.getResourceAsStream("firing_squad/data/npcs.xml"));
+		logger.log(Level.DEBUG, "Loaded {0} NPCs", list.size());
+		//System.exit(1);
 	}
 
 	//-------------------------------------------------------------------
