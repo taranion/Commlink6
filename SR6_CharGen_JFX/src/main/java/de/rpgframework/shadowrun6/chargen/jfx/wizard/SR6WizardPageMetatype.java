@@ -103,7 +103,10 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			};
 		};
 
-		contentPane = new DataItemSpinnerPane<SR6MetaType>();
+		contentPane = new DataItemSpinnerPane<SR6MetaType>(
+				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+				Shadowrun6Tools.modificationResolver(Locale.getDefault())
+				);
 		contentPane.setId("species");
 		contentPane.setImageConverter(new Function<SR6MetaType,Image>(){
 			public Image apply(SR6MetaType value) {

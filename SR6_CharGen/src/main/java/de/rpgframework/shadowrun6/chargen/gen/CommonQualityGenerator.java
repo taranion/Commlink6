@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.SetItem;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.data.Choice;
@@ -248,6 +249,14 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 				}
 			}
 
+			// Pay Karma for SURGE collective
+			if (model.getSurgeCollective()!=null) {
+				SetItem collective = model.getSurgeCollective();
+				int cost = collective.getCost();
+				logger.log(Level.INFO, "Pay {0} Karma for SURGE collective ''{1}''", cost, collective.getId());
+				model.setKarmaFree(model.getKarmaFree() - cost);
+			}
+
 			// Pay or grant Karma for qualities
 			for (QualityValue val : model.getQualities()) {
 				Quality item = val.getModifyable();
@@ -280,11 +289,6 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 					numberOfQualities++;
 
 				calculateKarmaSURGE();
-//				// Inject modifications from qualities
-//				for (Modification mod : val.getEffectiveModifications(model)) {
-//					logger.log(Level.DEBUG, "Add modification {0}", mod);
-//					unprocessed.add(mod);
-//				}
 				// Done in GetModificationsFromQualities
 			}
 
