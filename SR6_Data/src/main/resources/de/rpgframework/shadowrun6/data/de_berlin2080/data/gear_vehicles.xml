@@ -15,7 +15,7 @@
    <item avail="2"  price="800" id="tuk_tuk"  type="VEHICLES" subtype="ATVS">
       <vehicle han="4/5" acc="5" spdi="10" tspd="70" bod="3" arm="1" pil="0" sen="0" sea="6" type="GROUND"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities_squatter"/> wait for double clutch  -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="squatter" />
       </modifications>
    </item>
 
@@ -23,21 +23,21 @@
    <item avail="2"  price="4000" id="dreckskarre"  type="VEHICLES" subtype="CARS">
       <vehicle han="4/5" acc="10" spdi="15" tspd="120" bod="8" arm="2" pil="0" sen="0" sea="4" type="GROUND"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities_squatter"/> wait for double clutch  -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="squatter" />
       </modifications>
    </item>
    <item avail="2"  price="8000" id="bessere_dreckskarre"  type="VEHICLES" subtype="CARS">
       <vehicle han="4/4" acc="12" spdi="20" tspd="150" bod="10" arm="4" pil="0" sen="0" sea="4" type="GROUND"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities_squatter"/> wait for double clutch  -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="squatter" />
       </modifications>
    </item>
    <item avail="8"  price="32000" id="baer_schlachtkreuzer"  type="VEHICLES" subtype="CARS">
       <vehicle han="5/5" acc="10" spdi="17" tspd="180" bod="15" arm="12" pil="1" sen="1" sea="4" type="GROUND"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="ram_plate"/> wait for double clutch  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="extra_entry_points"/> wait for double clutch  -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="ram_plate"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="extra_entry_points"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" variant="manual"/>
       </modifications>
    </item>
@@ -46,7 +46,7 @@
    <item avail="2"  price="10000" id="drecks_van"  type="VEHICLES" subtype="VANS">
       <vehicle han="5/6" acc="8" spdi="10" tspd="120" bod="14" arm="8" pil="0" sen="0" sea="8" type="GROUND"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities_squatter"/> wait for double clutch -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="squatter" />
       </modifications>
    </item>
 
@@ -55,9 +55,9 @@
       <vehicle han="3/3" acc="6" spdi="15" tspd="40" bod="4" arm="1" pil="3" sen="2" sea="0" type="GROUND"/>
       <modifications>
 		<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true" /> <!-- As this is a walker, it does not have tires -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="soft_close_combat"> wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
-                <!-- </embed> -->
+		<embed  type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="soft_close_combat">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="single_sensor" id="cdd114e2-4741-42df-aa71-7e09c66f4ba4">
 			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
 			</embed>
@@ -85,17 +85,17 @@
    <item avail="4I"  price="130000" id="ruhrmetall_selket"  type="VEHICLES" subtype="WALKER">
       <vehicle han="3/5" acc="15" spdi="15" tspd="140" bod="18" arm="16" pil="4" sen="4" sea="5" type="GROUND"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_ceramic"/> wait for double clutch -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_wheeled"/> wait for double clutch -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="expanded_ammo" > wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
-                <!-- </embed> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="expanded_ammo" > wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
-                <!-- </embed> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="expanded_ammo" > wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
-                <!-- </embed> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_ceramic"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="wheeled" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="expanded_ammo" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="expanded_ammo" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="expanded_ammo" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
         <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="6eb2b6be-b674-4132-9703-1e778b0252b9" />
         <embed  type="GEAR" intoId="6eb2b6be-b674-4132-9703-1e778b0252b9" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" />
         <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="9b9bb024-26c7-476d-b608-a028b423a4e9" />

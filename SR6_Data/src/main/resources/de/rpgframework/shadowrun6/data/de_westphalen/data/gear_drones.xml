@@ -6,7 +6,7 @@
       <vehicle han="2" acc="15" spdi="30" tspd="140" bod="4" arm="3" pil="3" sen="4" />
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_walker" /> wait for double clutch -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="walker" />
       </modifications>
    </item>
 
@@ -15,10 +15,10 @@
       <vehicle han="5/6" acc="4" spdi="10" tspd="80" bod="22" arm="10" pil="4" sen="4" />
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="mech_arm_large" /> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="mechanical_arm" variant="large" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_k12" />
       </modifications>
 		<geardef>

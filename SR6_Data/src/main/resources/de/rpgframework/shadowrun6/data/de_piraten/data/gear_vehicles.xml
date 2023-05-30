@@ -15,10 +15,8 @@
       </alternate>
       <vehicle han="3" acc="20" spdi="20" tspd="80" bod="10" arm="8" pil="3" sen="3" sea="4"/>
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_sub"/> -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="life_safe_system"> wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
-                <!-- </embed> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="submarine" />
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="life_safety_system" variant="level2" />
       </modifications>
    </item>
 
@@ -32,7 +30,7 @@
    </item>
 
    <item avail="4I"  price="80000000" id="umea" type="VEHICLES" subtype="SHIPS">
-      <vehicle han="4" acc="10" spdi="30" tspd="70" bod="32" arm="20" pil="3" sen="4" sea="45"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+      <vehicle han="4" acc="10" spdi="15" tspd="70" bod="32" arm="20" pil="3" sen="4" sea="45"/>
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
@@ -40,52 +38,52 @@
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="satellite_link"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="satellite_link"/>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="command_control"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="passive_stealth"/>  -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="chameleon_coating_huge"> wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
-                <!-- </embed> -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures"> wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
-                <!-- </embed> -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="integrated_matrix_device"> wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
-                <!-- </embed> -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="network_sharing"> wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
-                <!-- </embed> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="command_control"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="passive_stealth"/>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="chameleon_coating" variant="huge" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </embed>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+                </embed>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="integrated_matrix_device">
+                <!-- <decision choice="number?" value="4"/> -->
+                </embed>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="network_sharing">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </embed>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy"/>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>  -->
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities_middle"/>  -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="living_space_middle" included="true" > wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="10"/> -->
-                <!-- </embed> -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="living_space_low" included="true" > wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="45"/> -->
-                <!-- </embed> -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_milspec" included="true" > wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
-                <!-- </embed> -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="life_safe_system" included="true" > wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
-                <!-- </embed> -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="ram_plating" included="true" > wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
-                <!-- </embed> -->
-		<!-- <embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="increased_integrity_installed" included="true" > wait for double clutch -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="12"/> -->
-                <!-- </embed> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_launcher"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="middle" />
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="living_space" included="true" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> <!-- rating 3 = middle -->
+                <!-- <decision choice="number?" value="10"/> -->
+                </embed>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="living_space" included="true" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- rating 2 = low -->
+                <!-- <decision choice="number?" value="45"/> -->
+                </embed>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_milspec" included="true" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="life_safety_system" variant="level2" />
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="ram_plating" included="true" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </embed>
+		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="increased_integrity" included="true" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="12"/>
+                </embed>
       </modifications>
    </item>
 
@@ -104,7 +102,7 @@
    <item avail="3"  price="12000" id="lz74"  type="DRONE_MEDIUM" subtype="AIR" >
       <vehicle han="5" acc="5" spdi="5" tspd="10" bod="3" arm="4" pil="3" sen="4" />
       <modifications>
-		<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="suncell_power"/> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="suncell_power"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="lz74_cocoon"/>
       </modifications>
 		<geardef>

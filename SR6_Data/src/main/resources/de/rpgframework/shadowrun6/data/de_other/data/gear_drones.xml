@@ -10,7 +10,9 @@
     <item avail="1"  price="250" id="cuddle_cat"  type="DRONE_SMALL" subtype="GROUND">
       <vehicle han="3/3" acc="2" spdi="4" tspd="5" bod="1" arm="0" pil="1" sen="1" sea="0" type="GROUND"/>
       <modifications>
-		<!-- <embed type="GEAR" ref="realistic_features2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/> wait for double clutch -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="realistic_features" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+				</embed>
 		<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true" /> <!-- As this is a walker, it does not have tires -->
       </modifications>
    </item>
@@ -30,7 +32,7 @@
    <item avail="8L" price="12000" id="ruhrmetall_thraex"  type="DRONE_MEDIUM" subtype="GROUND">
       <vehicle han="3" acc="5" spdi="5" tspd="5" bod="10" arm="18" pil="2" sen="1" />
       <modifications>
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" /> wait for double clutch -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="283b9bb6-5a16-4deb-86a7-6b0d9b603c88"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" intoId="283b9bb6-5a16-4deb-86a7-6b0d9b603c88" ref="armtech_mgl12" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="b176ab77-6869-4ddc-a36e-8f6c3367c8b7"/>
@@ -55,7 +57,7 @@
       <vehicle han="3/4" acc="12" spdi="10" tspd="40" bod="6" arm="8" pil="4" sen="3" />
       <modifications>
 		<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- to represent ability of drone to handle weapons with both hands -->
-		<!-- <embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" /> wait for double clutch -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="emergency_lightbars" />
 		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" /> <!-- For the underarm shield, stated by Raben AAS in Pegasus Forum -->
       </modifications>
    </item>
@@ -63,7 +65,9 @@
     <item avail="3"  price="500" id="best_friend"  type="DRONE_MEDIUM" subtype="GROUND">
       <vehicle han="3/3" acc="3" spdi="5" tspd="6" bod="5" arm="1" pil="1" sen="2" sea="0" />
       <modifications>
-		<!-- <embed type="GEAR" ref="realistic_features2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/> wait for double clutch -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="realistic_features" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+				</embed>
 		<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true" /> <!-- As this is a walker, it does not have tires -->
       </modifications>
    </item>
@@ -73,7 +77,7 @@
       <vehicle han="3" acc="30" spdi="30" tspd="220" bod="8" arm="8" pil="3" sen="4" />
       <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" />
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="second_power_walker" /> wait for double clutch -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="walker" />
 	  </modifications>
    </item>
 
@@ -82,8 +86,8 @@
 	  <alternate mode="VEHICLE" type="VEHICLES" subtype="BIKES">
       </alternate>
       <modifications>
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" /> wait for double clutch -->
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" /> wait for double clutch -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" />
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
