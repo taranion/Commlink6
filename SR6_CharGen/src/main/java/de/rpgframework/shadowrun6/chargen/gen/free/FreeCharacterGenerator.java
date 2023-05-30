@@ -15,24 +15,18 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
-import de.rpgframework.shadowrun6.chargen.charctrl.ISR6KarmaGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
-import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.RemainingKarmaNuyenController;
 import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyMetatypeController;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 
 /**
- * @author stefa
  *
  */
 @GeneratorId("karma")
@@ -158,14 +152,6 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 				logger.log(Level.DEBUG, "LEAVE: setupProcessChain()");
 		}
 		logger.log(Level.ERROR, "ToDo");
-	}
-
-	//-------------------------------------------------------------------
-	@Override
-	public void runProcessors() {
-		logger.log(Level.ERROR, "-------------runProcessors-----------------------");
-		SR6FreeSettings settings = getModel().getCharGenSettings(SR6FreeSettings.class);
-		super.runProcessors();
 	}
 
 	//-------------------------------------------------------------------
