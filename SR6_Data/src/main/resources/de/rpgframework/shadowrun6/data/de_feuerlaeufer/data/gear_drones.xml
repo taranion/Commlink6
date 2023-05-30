@@ -16,10 +16,10 @@
       <modifications>
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="66bc2aec-ae0a-422e-abd9-9208a86bb175" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="66bc2aec-ae0a-422e-abd9-9208a86bb175" />
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
-				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
-				<!-- <decision choice="??" value="fire"/> -->
-				<!-- </embed> -->
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="FIRE"/>
+				</embed>
       </modifications>
    </item>
 
@@ -27,26 +27,26 @@
       <vehicle han="3/4" acc="12" spdi="10" tspd="30" bod="5" arm="5" pil="3" sen="3" />
       <modifications>
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
-				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
-				<!-- <decision choice="??" value="fire"/> -->
-				<!-- </embed> -->
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="FIRE"/>
+				</embed>
       </modifications>
    </item>
 
    <item id="fire_protector" avail="3L"  price="30000" type="DRONE_MEDIUM" subtype="ANTHRO" >
       <vehicle han="3/4" acc="10" spdi="10" tspd="30" bod="8" arm="8" pil="3" sen="3" />
       <modifications>
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
-				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> -->
-				<!-- <decision choice="??" value="fire"/> -->
-				<!-- </embed> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
-				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> -->
-				<!-- <decision choice="??" value="cold"/> -->
-				<!-- </embed> -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="integrated_cyberarm" /> wait for double clutch -->
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="integrated_cyberarm" /> -->
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="FIRE"/>
+				</embed>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="COLD"/>
+				</embed>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="integrated_cyberarm" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="integrated_cyberarm" />
       </modifications>
    </item>
 
@@ -55,10 +55,10 @@
    <item id="fire_drachenodem" avail="4L"  price="800000" type="DRONE_LARGE" subtype="GROUND" >
       <vehicle han="5/6" acc="10" spdi="15" tspd="70" bod="18" arm="16" pil="3" sen="3" />
       <modifications>
-			<!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true"> wait for double clutch -->
-				<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> -->
-				<!-- <decision choice="??" value="fire"/> -->
-				<!-- </embed> -->
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="FIRE"/>
+				</embed>
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="4f901ca9-a8c9-468b-88ae-cf4587c3571b" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ares_charybdis" intoId="6f307bd2-54bc-487a-8f03-02d0028d8fa7" />
       </modifications>

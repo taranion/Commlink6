@@ -9,15 +9,15 @@
    <item id="mercedes_clk_170t" avail="2"  price="17000"  subtype="CARS" type="VEHICLES">
       <vehicle han="4/5" acc="12" spdi="20" tspd="195" bod="7" arm="1" pil="1" sen="1" sea="4"/>
       <modifications>
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" /> wait for double clutch -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" />
       </modifications>
    </item>
    <item id="mercedes_clk_170tt" avail="2"  price="17000"  subtype="CARS" type="VEHICLES">
       <vehicle han="4/5" acc="12" spdi="20" tspd="195" bod="7" arm="1" pil="1" sen="1" sea="2"/>
       <modifications>
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" /> -->
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot_troll" /> -->
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_other_troll" /> -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger" />
         <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="increase_cargo_space" > -->
 			<!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/> -->
 			<!-- </embed> -->
@@ -27,7 +27,7 @@
    <item id="mercedes_wsr290" avail="2"  price="20000"  subtype="CARS" type="VEHICLES">
       <vehicle han="3/5" acc="15" spdi="30" tspd="180" bod="10" arm="6" pil="2" sen="2" sea="4"/>
       <modifications>
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities_middle" /> -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="middle" />
       </modifications>
    </item>
 
@@ -45,8 +45,8 @@
       <vehicle han="3" acc="20" spdi="20" tspd="120" bod="10" arm="10" pil="3" sen="4" sea="12"/>
       <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" />
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
-        <!-- <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
       </modifications>
    </item>
 </items>

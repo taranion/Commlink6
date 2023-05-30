@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<!-- Vehicle Accessories -->
 <items>
 
-	<!-- Replacement Parts -->
+<!-- Special Weapons -->
+
+ 	<item id="vehicle_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" > <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter, so needs to be separate -->
+		<weapon attack=",5,9,10,8" ammo="2(ml)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" /> <!-- Errata needed: No info on ranges for launcher, using aztechnology_striker -->
+	</item>
+   	<item id="weapon_launcher" avail="99" price="0" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true"> <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter, umea, so needs to be separate -->
+   		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
+		<modifications>
+			<itemmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" />
+       		<embed type="GEAR" ref="vehicle_launcher" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
+    	</modifications>
+   	</item>
+
+<!-- Replacement Parts -->
    <!--item id="condor_ballon" avail="3" price="100" type="TOOLS" subtype="SPARE_PARTS" count="true" >
    </item>
 
@@ -21,7 +33,6 @@
 
    <item id="road_strip_zapper" avail="3L" price="1000" type="TOOLS" subtype="SPARE_PARTS" count="true" >
    </item-->
-
 
 <!-- Accessories -->
    <item id="emergency_lightbars" avail="4L" price="6000" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" >
@@ -1292,6 +1303,10 @@
    	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
       <attrdef id="PRICE" value="$$BODY*250"/>
    </item>
+
+	<item id="push_bar" type="ARMOR" subtype="ARMOR_BODY"> <!-- used on dodge_rampart and golf_gti_duel so needs to be separate -->
+		<weapon dmg="4P" attack="8,,,," skill="piloting"  />
+	</item>
 
    <item id="winch" avail="2" price="750" type="MOD_HARD" subtype="MOD_OTHERS" >
    	<choices>
