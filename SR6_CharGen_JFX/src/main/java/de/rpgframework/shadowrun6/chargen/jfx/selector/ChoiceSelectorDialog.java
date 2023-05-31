@@ -55,6 +55,7 @@ import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.NPCType;
+import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunElement;
 import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
@@ -472,6 +473,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			break;
 		case PROGRAM:
 			ret.add( handlePROGRAM(item, choice));
+			break;
+		case QUALITY:
+			ret.add( handleQUALITY(item, choice));
 			break;
 		case SKILL:
 			ret.add( handleSKILL(item, choice) );
@@ -1161,6 +1165,39 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 		Collections.sort(choicebox.getItems(), new Comparator<ItemTemplate>() {
 			public int compare(ItemTemplate o1, ItemTemplate o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+
+			updateButtons();
+			showHelpFor(n);
+		 });
+		content.getChildren().add(choicebox);
+
+		return choicebox;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleQUALITY(ComplexDataItem item, Choice choice) {
+		ChoiceBox<Quality> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<Quality>() {
+			public Quality fromString(String value) { return null;}
+			public String toString(Quality value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		List<Quality> items = Shadowrun6Core.getItemList(Quality.class)
+				.stream()
+				.filter( q -> (choice.getChoiceOptions()==null) || List.of(choice.getChoiceOptions()).contains(q.getId()))
+				.toList();
+		// Eventually sort
+		choicebox.getItems().addAll(items);
+
+		Collections.sort(choicebox.getItems(), new Comparator<Quality>() {
+			public int compare(Quality o1, Quality o2) {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}});
 		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {

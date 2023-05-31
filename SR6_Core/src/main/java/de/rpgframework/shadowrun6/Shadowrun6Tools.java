@@ -602,7 +602,7 @@ public class Shadowrun6Tools {
 //
 //			case CRITTER_POWER:
 //			}
-			logger.log(Level.ERROR, "Not supported yet: "+type);
+			logger.log(Level.ERROR, "Not supported yet: Mod without valid reference "+valMod);
 			return "ToDo: "+type;
 		} else if (mod instanceof ModificationChoice) {
 			ModificationChoice choice = (ModificationChoice)mod;
@@ -1669,7 +1669,7 @@ public class Shadowrun6Tools {
 		/*
 		 * Add eventually existing focus
 		 */
-		logger.log(Level.WARNING, "ToDo: Check for weapon focus");
+		logger.log(Level.DEBUG, "Shadowrun6Tool.getWeaponPoolCalculation: ToDo: Check for weapon focus");
 //		if (item.getUsedFocus()!=null) {
 //			FocusValue focus = item.getUsedFocus();
 //			if (focus.getModifyable().getChoice()==ChoiceType.MELEE_WEAPON) {
@@ -1680,7 +1680,7 @@ public class Shadowrun6Tools {
 		/*
 		 * Add eventually existing item attunement
 		 */
-		System.err.println("Modification of "+item+" are "+item.getCharacterModifications());
+		//System.err.println("Shadowrun6Tool.getWeaponPoolCalculation: Modification of "+item+" are "+item.getCharacterModifications());
 		for (Modification mod : item.getCharacterModifications()) {
 			if (mod instanceof CheckModification) {
 				CheckModification cMod = (CheckModification)mod;
@@ -1692,7 +1692,7 @@ public class Shadowrun6Tools {
 				}
 			}
 		}
-		logger.log(Level.WARNING, "Pool of {0} is {1}", item.getNameWithoutRating(), pool.toString());
+		logger.log(Level.DEBUG, "Pool of {0} is {1}", item.getNameWithoutRating(), pool.toString());
 
 		return pool;
 	}
