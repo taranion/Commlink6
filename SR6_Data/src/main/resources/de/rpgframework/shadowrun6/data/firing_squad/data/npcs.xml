@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<npcs>
+	<npc id="lone_star_street_veteran" rating="3" type="GRUNT">
+		<attributes>
+			<attribute id="BODY"      value="4" />
+			<attribute id="AGILITY"   value="3" />
+			<attribute id="REACTION"  value="4" />
+			<attribute id="STRENGTH"  value="3" />
+			<attribute id="WILLPOWER" value="4" />
+			<attribute id="LOGIC"     value="4" />
+			<attribute id="INTUITION" value="4" />
+			<attribute id="CHARISMA"  value="4" />
+			<attribute id="EDGE"      value="0" />
+			<attribute id="MAGIC"     value="0" />
+			<attribute id="RESONANCE" value="0" />
+		</attributes>
+		<skills>
+			<skillval ref="athletics"    value="3"/>
+			<skillval ref="biotech"      value="1"/>
+			<skillval ref="close_combat" value="4"/>
+			<skillval ref="electronics"  value="1"/>
+			<skillval ref="firearms"     value="4"/>
+			<skillval ref="influence"    value="3"/>
+			<skillval ref="outdoors"     value="2"/>
+			<skillval ref="perception"   value="4"/>
+			<skillval ref="stealth"      value="2"/>
+		</skills>
+		<gear>
+ 			<item ref="cybereye">
+ 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+ 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+ 				<accessories>
+            	<item mode="EMBEDDED" ref="camera" slot="CYBEREYE_IMPLANT" />
+         	</accessories>
+ 			</item>
+			<item ref="club"/>
+		</gear>
+	</npc>
+</npcs>
