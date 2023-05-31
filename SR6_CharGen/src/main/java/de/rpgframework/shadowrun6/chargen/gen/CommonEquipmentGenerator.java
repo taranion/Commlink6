@@ -148,6 +148,9 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				continue;
 				// Remove old price modifications
 			ItemAttributeNumericalValue<SR6ItemAttribute> val = tmp.getAsValue(SR6ItemAttribute.PRICE);
+			if (val==null) {
+				logger.log(Level.ERROR, "No PRICE attribute in {0}", tmp);
+			}
 			for (Modification tmpMod : val.getModifications()) {
 				if ((tmpMod instanceof ValueModification) && ItemTemplate.UUID_VOLATILE_PRICEMOD.equals(((ValueModification)tmpMod).getId()))
 					val.removeModification(tmpMod);

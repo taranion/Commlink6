@@ -358,7 +358,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			logger.log(Level.WARNING, "Available: "+items);
 			contentPane.setItems(items);
 
-			if (items.contains(model.getSurgeCollective().getResolved()) && model.getSurgeCollective().getResolved() != contentPane.getSelectedItem()) {
+			if (model.getSurgeCollective()!=null && items.contains(model.getSurgeCollective().getResolved()) && model.getSurgeCollective().getResolved() != contentPane.getSelectedItem()) {
 				contentPane.setSelectedItem(model.getSurgeCollective().getResolved());
 			} else {
 				contentPane.setSelectedItem(none);
