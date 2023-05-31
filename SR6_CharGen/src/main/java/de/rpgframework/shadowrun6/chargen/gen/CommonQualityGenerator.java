@@ -251,7 +251,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 
 			// Pay Karma for SURGE collective
 			if (model.getSurgeCollective()!=null) {
-				SetItem collective = model.getSurgeCollective();
+				SetItem collective = model.getSurgeCollective().getResolved();
 				int cost = collective.getCost();
 				logger.log(Level.INFO, "Pay {0} Karma for SURGE collective ''{1}''", cost, collective.getId());
 				model.setKarmaFree(model.getKarmaFree() - cost);
