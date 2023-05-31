@@ -254,7 +254,7 @@ public class CombatSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void showPhysical(Shadowrun6Character model) {
-		setLabelValue(lbAttackRating, model, ShadowrunAttribute.ATTACK_RATING_ASTRAL);
+		setLabelValue(lbAttackRating, model, ShadowrunAttribute.ATTACK_RATING_PHYSICAL);
 		if (model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool()!=null) {
 			lbAttackRating.setText(CombatSectionTools.getAttackRating(model, type) );
 			lbAttackRating.setTooltip(new Tooltip(model.getAttribute(ShadowrunAttribute.ATTACK_RATING_PHYSICAL).getPool().toExplainString()) );

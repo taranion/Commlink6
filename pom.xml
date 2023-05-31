@@ -26,7 +26,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
 		<revision>0.0.2-SNAPSHOT</revision>
-		<rpgfw.version>5.1.2-SNAPSHOT</rpgfw.version>
+		<rpgfw.version>5.1.2</rpgfw.version>
 	</properties>
 
 	<modules>
@@ -65,17 +65,17 @@
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-core</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-chargen</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-chargen-jfx</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
