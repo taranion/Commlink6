@@ -23,8 +23,7 @@
    <item avail="6L"  price="42000" id="bmw_wasserschwein" type="VEHICLES" subtype="ATVS">
       <vehicle han="4/5" acc="14" spdi="15" tspd="140" bod="8" arm="6" pil="2" sen="4" sea="5"/>
       <modifications>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="small" />
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="small" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="small" /> <!-- text states rack for 2 small drones, however one drone_rack small already carries 3 small drones, thus only one rack added -->
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" variant="manual"/>
       </modifications>
    </item>
