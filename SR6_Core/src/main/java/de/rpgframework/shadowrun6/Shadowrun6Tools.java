@@ -29,10 +29,11 @@ import de.rpgframework.genericrpg.Pool;
 import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Reward;
+import de.rpgframework.genericrpg.SetItem;
+import de.rpgframework.genericrpg.SetItemValue;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.data.CheckInfluence;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
@@ -854,6 +855,13 @@ public class Shadowrun6Tools {
 				tmp.setCharacter(model);
 				Focus resolved = Shadowrun6Core.getItem(Focus.class, tmp.getKey());
 				tmp.setResolved(resolved);
+			}
+
+			logger.log(Level.DEBUG, "resolve SURGE collective");
+			SetItemValue collect = model.getSurgeCollective();
+			if (collect!=null) {
+				SetItem resolved = Shadowrun6Core.getItem(SetItem.class, collect.getKey());
+				collect.setResolved(resolved);
 			}
 
 			logger.log(Level.DEBUG, "resolve drake type");
