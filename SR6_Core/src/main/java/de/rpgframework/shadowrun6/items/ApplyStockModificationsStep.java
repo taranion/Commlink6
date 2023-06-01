@@ -52,7 +52,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		// Read all modifications that are meant for this item
 		for (Modification tmp : model.getModifications()) {
 			try {
-				logger.log(Level.DEBUG, "Process {0}", tmp);
+				logger.log(Level.INFO, "Process {0}", tmp);
 				if (tmp instanceof ValueModification) {
 					applyModification(strict, charac, model2, (ValueModification) tmp);
 				} else if (tmp instanceof EmbedModification) {
@@ -255,7 +255,6 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			}
 			CarriedItem accessory = carriedR.get();
 			accessory.setInjectedBy(mod.getSource());
-			accessory.addModification(mod);
 			//if (mod.isIncludedInStats())
 			// Check if AvailableSlot already exists - if not, create one
 			AvailableSlot slot = (AvailableSlot) model.getSlot(hook);
@@ -269,6 +268,13 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				model.addSlot(slot);
 			}
 			slot.addEmbeddedItem(accessory);
+
+			// Now apply modifications that the new accessory provides
+			for (Modification mod2 : accessory.getModifications()) {
+				if (mod2 instanceof DataItemModification) {
+					applyModification(false, charac, (CarriedItem<ItemTemplate>) model, (DataItemModification)mod2);
+				}
+			}
 			return true;
 		}
 		logger.log(Level.WARNING, "ToDo: EmbedModification " + mod);

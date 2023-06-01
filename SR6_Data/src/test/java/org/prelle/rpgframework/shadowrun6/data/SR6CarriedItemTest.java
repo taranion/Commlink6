@@ -633,7 +633,34 @@ public class SR6CarriedItemTest {
 		slot = yamaha.getSlot(ItemHook.VEHICLE_HARDPOINT);
 		assertEquals(5, slot.getCapacity(), 0);
 		assertEquals(1, slot.getUsedCapacity(), 0);
-
-
 	}
+
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testVehicleAccessories() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "ford_lifeline");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> vehicle = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		SR6GearTool.recalculate("", null, vehicle);
+
+		System.out.println("testVehicleAccessories: accessories = "+vehicle.getAccessories());
+		System.out.println("testVehicleAccessories: effective accessories = "+vehicle.getEffectiveAccessories());
+
+		AvailableSlot core = vehicle.getSlot(ItemHook.VEHICLE_CHASSIS);
+		assertNotNull(core);
+		assertFalse(core.getAllEmbeddedItems().isEmpty());
+		assertEquals("Expect 4 large hardpoints",4,core.getAllEmbeddedItems().size());
+
+		AvailableSlot cf = vehicle.getSlot(ItemHook.VEHICLE_CF);
+		assertNotNull(cf);
+		assertFalse(cf.getAllEmbeddedItems().isEmpty());
+		assertEquals("3x Valkyrie, Rigger cocoon, ameneties",5,cf.getAllEmbeddedItems().size());
+
+		AvailableSlot hp = vehicle.getSlot(ItemHook.VEHICLE_HARDPOINT);
+		assertNotNull(hp);
+		assertEquals("7 + 4x2",15, (int)hp.getCapacity());
+	}
+
 }
