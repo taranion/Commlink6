@@ -28,7 +28,7 @@
 
 
 <!-- Replacement Parts -->
-   <!--item id="condor_ballon" avail="3" price="100" type="TOOLS" subtype="SPARE_PARTS" count="true" >
+   <item id="condor_ballon" avail="3" price="100" type="TOOLS" subtype="SPARE_PARTS" count="true" >
    </item>
 
    <item id="condor_solar_panel" avail="3" price="100" type="TOOLS" subtype="SPARE_PARTS" count="true" >
@@ -37,14 +37,20 @@
    <item id="oil_slick_refill" avail="1" price="50" type="TOOLS" subtype="SPARE_PARTS" count="true" >
    </item>
 
-   <item id="road_strip_spikes" avail="3I" price="250" type="TOOLS" subtype="SPARE_PARTS" count="true" >
+   <item id="road_strip" type="TOOLS" subtype="SPARE_PARTS" reqVariant="y" count="true" >
+  		<variant id="spikes">
+  			<attrdef id="PRICE" value="250"/>
+			<attrdef id="AVAILABILITY" value="3I"/>
+  		</variant>
+  		<variant id="tracking">
+  			<attrdef id="PRICE" value="500"/>
+			<attrdef id="AVAILABILITY" value="3"/>
+  		</variant>
+  		<variant id="zapper">
+  			<attrdef id="PRICE" value="1000"/>
+			<attrdef id="AVAILABILITY" value="3L"/>
+  		</variant>
    </item>
-
-   <item id="road_strip_tracking" avail="3" price="500" type="TOOLS" subtype="SPARE_PARTS" count="true" >
-   </item>
-
-   <item id="road_strip_zapper" avail="3L" price="1000" type="TOOLS" subtype="SPARE_PARTS" count="true" >
-   </item-->
 
 <!-- Accessories -->
    <item id="emergency_lightbars" avail="4L" price="6000" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" >

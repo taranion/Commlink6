@@ -58,7 +58,8 @@ public enum ItemType {
 			ItemSubType.DIGITAL_WEAPON
 			),
 	TOOLS(
-			ItemSubType.TOOLS
+			ItemSubType.TOOLS,
+			ItemSubType.SPARE_PARTS
 			),
 	ELECTRONICS(
 			ItemSubType.COMMLINK,
