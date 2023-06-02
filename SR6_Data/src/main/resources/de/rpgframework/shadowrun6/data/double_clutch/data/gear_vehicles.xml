@@ -147,7 +147,7 @@
 				<valmod type="HOOK" ref="VEHICLE_CF" value="-5"/> <!-- to get to "base grizzly -2 CF" units -->
 			</modifications>
 		</variant>
-		<variant id="extended_cab_de" lang="de">
+		<variant id="extended_cab" lang="de">
 			<attrdef id="SEATS" value="4" />
 			<modifications>
 				<valmod type="HOOK" ref="VEHICLE_CF" value="-2"/> <!-- to get to "base grizzly -2 CF" units -->
