@@ -1262,7 +1262,7 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_roadmaster" id="9a481409-5d90-4aef-83f6-9b76a8f8dc88" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_conceal_large" /> TODO: Remove comment once gear from double clutch is available -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="large" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="bf007584-b7d7-4eb1-9552-7273e080dabd" />
              <embed  type="GEAR" intoId="bf007584-b7d7-4eb1-9552-7273e080dabd" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="280dff00-37da-44b9-b5c6-8155bbf15c43" />
              <embed  type="GEAR" intoId="280dff00-37da-44b9-b5c6-8155bbf15c43" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="317dd4af-61e2-460f-a3fe-cdcf37da3619" variant="internal" />
@@ -1274,16 +1274,16 @@
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="25">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" /> -->
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="road_strip_spikes" value="6" /> -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" />
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" />
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" />
+         <valmod type="GEAR" apply="CHARACTER" ref="road_strip" variant="spikes" value="6" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="thermo" />
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" /> -->
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="TIRES" ref="tires_large_shredders" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="spoof_kit" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="gun_ports" count="4" /> -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" />
+         <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large" variant="shredders" />
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="spoof_kit" />
+			 <valmod type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="gun_ports" value="4" />
          <itemmod type="GEAR" apply="CHARACTER" ref="ford_americar" id="997b0191-e180-4084-8b41-d5c365cd0a13" />
              <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
              <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="18d83454-fc65-479a-9e4b-03e82989b677" />
@@ -1301,15 +1301,15 @@
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" /> -->
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="road_strip_spikes" value="6" /> -->
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" />
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" />
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" />
+         <valmod type="GEAR" apply="CHARACTER" ref="road_strip" variant="spikes" value="6" />
              <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="thermo" />
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" /> -->
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="TIRES" ref="tires_large_shredders" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="spoof_kit" /> -->
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" />
+         <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" />
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large" variant="shredders" />
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="spoof_kit" />
          <valmod type="GEAR" apply="CHARACTER" ref="mct_hornet" value="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="narcoject" value="9" />
          <itemmod type="GEAR" apply="CHARACTER" ref="gm-nissan_flip_flop" />
@@ -1422,12 +1422,12 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="gmc_bulldog" id="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" />
              <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-             <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_conceal_huge" /> -->
-             <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="b7033ca9-53a3-4a5f-b589-4f64b15d149d" /> -->
-             <!-- <embed  type="GEAR" intoId="b7033ca9-53a3-4a5f-b589-4f64b15d149d" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="450b5b33-f177-4141-bde2-79d93de1483f" /> -->
-             <!-- <embed  type="GEAR" intoId="450b5b33-f177-4141-bde2-79d93de1483f" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="3b0d51c4-c01c-471e-848b-f10646d62d19" variant="internal" /> -->
-             <!-- <embed  type="GEAR" intoId="3b0d51c4-c01c-471e-848b-f10646d62d19" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" /> -->
-             <!-- <embed  type="GEAR" intoId="450b5b33-f177-4141-bde2-79d93de1483f" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" /> -->
+             <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="huge" />
+             <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="b7033ca9-53a3-4a5f-b589-4f64b15d149d" />
+             <embed  type="GEAR" intoId="b7033ca9-53a3-4a5f-b589-4f64b15d149d" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="450b5b33-f177-4141-bde2-79d93de1483f" />
+             <embed  type="GEAR" intoId="450b5b33-f177-4141-bde2-79d93de1483f" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="3b0d51c4-c01c-471e-848b-f10646d62d19" variant="internal" />
+             <embed  type="GEAR" intoId="3b0d51c4-c01c-471e-848b-f10646d62d19" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
+             <embed  type="GEAR" intoId="450b5b33-f177-4141-bde2-79d93de1483f" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="25">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -2801,7 +2801,7 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_roadmaster" id="9a481409-5d90-4aef-83f6-9b76a8f8dc88" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_conceal_large" /> TODO: Remove comment once gear from double clutch is available -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="large" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="bf007584-b7d7-4eb1-9552-7273e080dabd" />
              <embed  type="GEAR" intoId="bf007584-b7d7-4eb1-9552-7273e080dabd" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="280dff00-37da-44b9-b5c6-8155bbf15c43" />
              <embed  type="GEAR" intoId="280dff00-37da-44b9-b5c6-8155bbf15c43" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="317dd4af-61e2-460f-a3fe-cdcf37da3619" variant="internal" />
@@ -2813,16 +2813,16 @@
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="20">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" /> -->
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="road_strip_spikes" value="6" /> -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" />
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" />
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" />
+         <valmod type="GEAR" apply="CHARACTER" ref="road_strip" variant="spikes" value="6" />
              <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="thermo" />
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" /> -->
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="TIRES" ref="tires_large_shredders" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="spoof_kit" /> -->
-             <!-- <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="gun_ports" count="4" /> -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" />
+         <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large" variant="shredders" />
+             <embed  type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="spoof_kit" />
+			 <valmod type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="gun_ports" value="4" />
          <itemmod type="GEAR" apply="CHARACTER" ref="ford_americar" id="997b0191-e180-4084-8b41-d5c365cd0a13" />
              <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
              <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="18d83454-fc65-479a-9e4b-03e82989b677" />
@@ -2840,22 +2840,22 @@
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" /> -->
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="road_strip_spikes" value="6" /> -->
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" />
+			 <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="oil_slick_sprayer" />
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector" />
+         <valmod type="GEAR" apply="CHARACTER" ref="road_strip" variant="spikes" value="6" />
              <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="thermo" />
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" /> -->
-         <!-- <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="TIRES" ref="tires_large_shredders" /> -->
-             <!-- <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="spoof_kit" /> -->
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="gas_dispersal" />
+         <valmod type="GEAR" apply="CHARACTER" ref="neuro_stun_x" value="5" />
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large" variant="shredders" />
+             <embed  type="GEAR" intoId="997b0191-e180-4084-8b41-d5c365cd0a13" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="spoof_kit" />
          <itemmod type="GEAR" apply="CHARACTER" ref="saeder-krupp-bentley_concordat" id="434fe0cc-9715-4a06-9b0e-858de23a50df" />
              <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-             <!-- <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" /> -->
-             <!-- <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="passive_stealth" /> -->
-             <!-- <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="spoof_kit" /> -->
-             <!-- <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="xguide_override" /> -->
-             <!-- <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_conceal_standard" /> -->
+             <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electrochromatic_paint" />
+             <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="passive_stealth" />
+             <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="spoof_kit" />
+             <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="xguide_override" />
+             <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="standard" />
              <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="5ceddd69-b0c2-40e2-be83-af8f9b860398" />
              <embed  type="GEAR" intoId="5ceddd69-b0c2-40e2-be83-af8f9b860398" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="34cf40fd-6923-4bf9-8d0f-b7ee1ac71d9e" />
              <embed  type="GEAR" intoId="34cf40fd-6923-4bf9-8d0f-b7ee1ac71d9e" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
@@ -2974,23 +2974,23 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="gmc_bulldog" id="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" />
              <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
-             <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_conceal_huge" /> -->
-             <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="b7033ca9-53a3-4a5f-b589-4f64b15d149d" /> -->
-             <!-- <embed  type="GEAR" intoId="b7033ca9-53a3-4a5f-b589-4f64b15d149d" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="450b5b33-f177-4141-bde2-79d93de1483f" /> -->
-             <!-- <embed  type="GEAR" intoId="450b5b33-f177-4141-bde2-79d93de1483f" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="3b0d51c4-c01c-471e-848b-f10646d62d19" variant="internal" /> -->
-             <!-- <embed  type="GEAR" intoId="3b0d51c4-c01c-471e-848b-f10646d62d19" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" /> -->
-             <!-- <embed  type="GEAR" intoId="450b5b33-f177-4141-bde2-79d93de1483f" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" /> -->
+             <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="huge" />
+             <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="b7033ca9-53a3-4a5f-b589-4f64b15d149d" />
+             <embed  type="GEAR" intoId="b7033ca9-53a3-4a5f-b589-4f64b15d149d" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="450b5b33-f177-4141-bde2-79d93de1483f" />
+             <embed  type="GEAR" intoId="450b5b33-f177-4141-bde2-79d93de1483f" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" id="3b0d51c4-c01c-471e-848b-f10646d62d19" variant="internal" />
+             <embed  type="GEAR" intoId="3b0d51c4-c01c-471e-848b-f10646d62d19" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
+             <embed  type="GEAR" intoId="450b5b33-f177-4141-bde2-79d93de1483f" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="25">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="30">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
-             <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_large" /> -->
-             <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
-             <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
-             <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
-             <!-- <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack_medium" /> -->
+             <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="large" />
+             <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+             <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+             <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
+             <embed  type="GEAR" intoId="0181a151-4614-4bfc-9db2-3a5f45cc6d0d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
          <itemmod type="GEAR" apply="CHARACTER" ref="steel_lynx_combat_drone" id="6687bbba-8a84-4d5d-89a1-dcb6beb42f03" />
              <embed  type="GEAR" intoId="6687bbba-8a84-4d5d-89a1-dcb6beb42f03" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="ac315215-e5f2-4708-ba7d-684ccb429ced" />
              <embed  type="GEAR" intoId="ac315215-e5f2-4708-ba7d-684ccb429ced" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="521c57c2-6db9-4e53-b3f8-58790ed37312" />
@@ -3002,10 +3002,10 @@
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="stick_n_shock"/>
                 </valmod>
-             <!-- <embed  type="GEAR" intoId="6687bbba-8a84-4d5d-89a1-dcb6beb42f03" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_standard" id="1729f6a7-891c-4fc6-913c-ccd6dae98818" /> -->
-             <!-- <embed  type="GEAR" intoId="1729f6a7-891c-4fc6-913c-ccd6dae98818" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="armtech_mgl12" id="22806a88-823e-492c-98cc-fd4dfe58f7c6" /> -->
-             <!-- <embed  type="GEAR" intoId="22806a88-823e-492c-98cc-fd4dfe58f7c6" intoType="HOOK" intoRef="TOP" ref="smartgun_system" /> -->
-             <!-- <embed  type="GEAR" intoId="22806a88-823e-492c-98cc-fd4dfe58f7c6" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" /> -->
+             <embed  type="GEAR" intoId="6687bbba-8a84-4d5d-89a1-dcb6beb42f03" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_standard" id="1729f6a7-891c-4fc6-913c-ccd6dae98818" />
+             <embed  type="GEAR" intoId="1729f6a7-891c-4fc6-913c-ccd6dae98818" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="armtech_mgl12" id="22806a88-823e-492c-98cc-fd4dfe58f7c6" />
+             <embed  type="GEAR" intoId="22806a88-823e-492c-98cc-fd4dfe58f7c6" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="22806a88-823e-492c-98cc-fd4dfe58f7c6" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
          <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant="mini" value="12" />
          <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant="mini" value="12" />
          <valmod type="GEAR" apply="CHARACTER" ref="high_explosive_grenade" variant="mini" value="12" />
