@@ -72,11 +72,6 @@
 
 	<item id="evo_proletarian" avail="2" price="8000" type="DRONE_SMALL" subtype="GROUND" >
 		<vehicle han="2/4" acc="5" spdi="10" tspd="5" bod="3" arm="1" pil="2" sen="2" />
-		<geardef>
-	   	<item id="tool_storage" avail="99" price="0" type="MOD_HARD" subtype="MOD_OTHERS" modonly="true" > <!-- For evo_proletarian and vulcan_utility_one -->
-   			<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/>
-   		</item>
-		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="tool_storage" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
@@ -89,11 +84,6 @@
 
 	<item id="vulcan_utility_one" avail="2" price="8500" type="DRONE_SMALL" subtype="GROUND" > <!-- US DC does not state price or avail, using DE info -->
 		<vehicle han="4/4" acc="4" spdi="5" tspd="4" bod="4" arm="2" pil="2" sen="2" />
-		<geardef>
-	   	<item id="tool_storage" avail="99" price="0" type="MOD_HARD" subtype="MOD_OTHERS" modonly="true" > <!-- For evo_proletarian and vulcan_utility_one -->
-   			<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/>
-   		</item>
-		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
@@ -500,7 +490,11 @@
 			<item id="monofil_beak" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
   				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
 				<weapon dmg="4P" attack="10,,,," skill="close_combat" />
-   		</item>
+			</item>
+			<item id="roomsweeper" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+				<weapon attack="11,10,6,," ammo="4(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/shotguns"/>
+			</item>
 		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
@@ -628,14 +622,6 @@
 
 	<item id="vulcan_jump_master" avail="3" price="2500" type="DRONE_MEDIUM" subtype="AIR" >
 		<vehicle han="3" acc="15" spdi="20" tspd="100" bod="3" arm="0" pil="1" sen="3" />
-		<geardef>
-			<item id="soft_freefall" type="SOFTWARE" subtype="AUTOSOFT">
-				<choices>
-					<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
-				</choices>
-				<usage mode="EMBEDDED" slot="SOFTWARE"/>
-			</item>
-		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="soft_freefall" intoType="HOOK" intoRef="SOFTWARE" >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
@@ -644,14 +630,6 @@
 	</item>
 	<item id="vulcan_jump_master" lang="de" avail="3" price="2500" type="DRONE_MEDIUM" subtype="AIR" >
 		<vehicle han="3" acc="15" spdi="20" tspd="100" bod="3" arm="0" pil="1" sen="3" />
-		<geardef>
-			<item id="soft_freefall" type="SOFTWARE" subtype="AUTOSOFT">
-				<choices>
-					<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
-				</choices>
-				<usage mode="EMBEDDED" slot="SOFTWARE"/>
-			</item>
-		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="maneuvering" intoType="HOOK" intoRef="SOFTWARE">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>

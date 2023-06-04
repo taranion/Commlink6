@@ -93,6 +93,7 @@ public enum ItemSubType {
 	DIGITAL_WEAPON,
 	// TOOLS
 	TOOLS,
+	SPARE_PARTS,
 	// Electronic
 	LIVING_PERSONA,
 	CYBERDECK,
