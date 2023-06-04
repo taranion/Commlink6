@@ -28,6 +28,7 @@ pipelines:
               LOCAL_PATH: 'Commlink6/target/commlink6*fat.jar'
         artifacts:
           - Commlink6/target/commlink6-*fat.jar
+          - Commlink6/target/config.xml
     - step:
         name: Deploy to Staging
         deployment: Staging
