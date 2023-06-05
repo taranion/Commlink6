@@ -165,6 +165,26 @@
 			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" />
 		</modifications>
 	</quality>
+
+
+	<quality id="goblin" karma="27" pos="true" type="INFECTED">
+		<requires>
+			<datareq type="METATYPE" ref="dwarf" apply="CHARACTER"/>
+		</requires>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="AGILITY"   value="6" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="LOGIC"     value="4" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="INTUITION" value="8" set="MAX" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" />
+		</modifications>
+	</quality>
+
+
+
 	<quality id="grendel" karma="32" pos="true" type="INFECTED">
 		<requires>
 			<datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
