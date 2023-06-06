@@ -12,7 +12,7 @@
 
 	<groupId>de.rpgframework.shadowrun6</groupId>
 	<artifactId>commlink6</artifactId>
-	<version>0.12.0</version>
+	<version>0.12.1</version>
 	<packaging>jar</packaging>
 
 	<name>Commlink6</name>
@@ -112,7 +112,7 @@
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>eden-client-jfx</artifactId>
-			<version>0.0.4</version>
+			<version>0.0.5-SNAPSHOT</version>
 		</dependency>
       <dependency>
         <groupId>org.prelle</groupId>
