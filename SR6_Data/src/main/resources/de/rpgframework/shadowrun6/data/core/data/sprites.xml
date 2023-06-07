@@ -10,6 +10,10 @@
   			<attrdef id="DATA_PROCESSING" value="$RATING+1"/>
   			<attrdef id="FIREWALL" value="$RATING+2"/>
 		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
 		<critterpowers>
 			<critterpowerval ref="cookie"/>
 			<critterpowerval ref="hash" />
@@ -25,6 +29,10 @@
   			<attrdef id="DATA_PROCESSING" value="$RATING+2"/>
   			<attrdef id="FIREWALL" value="$RATING+1"/>
 		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
 		<critterpowers>
 			<critterpowerval ref="phantom"/>
 			<critterpowerval ref="suppression" />
@@ -40,6 +48,10 @@
   			<attrdef id="DATA_PROCESSING" value="$RATING+4"/>
   			<attrdef id="FIREWALL" value="$RATING+1"/>
 		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
 		<critterpowers>
 			<critterpowerval ref="camouflage"/>
 			<critterpowerval ref="watermark" />
@@ -55,6 +67,10 @@
   			<attrdef id="DATA_PROCESSING" value="$RATING+1"/>
   			<attrdef id="FIREWALL" value="$RATING+2"/>
 		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
 		<critterpowers>
 			<critterpowerval ref="electron_storm"/>
 			<critterpowerval ref="trap" />
@@ -70,6 +86,10 @@
   			<attrdef id="DATA_PROCESSING" value="$RATING+3"/>
   			<attrdef id="FIREWALL" value="$RATING+2"/>
 		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="engineering" value="0"/>
+		</skills>
 		<critterpowers>
 			<critterpowerval ref="diagnostics"/>
 			<critterpowerval ref="override" />
