@@ -11,13 +11,6 @@
 	<artifactId>shadowrun6-data</artifactId>
 	<name>SR6_Data</name>
 
-	<properties>
-		<maven.install.skip>false</maven.install.skip>
-		<maven.deploy.skip>false</maven.deploy.skip>
-		<maven.compiler.target>11</maven.compiler.target>
-		<maven.compiler.source>11</maven.compiler.source>	  
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.prelle</groupId>

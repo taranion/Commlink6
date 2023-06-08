@@ -10,19 +10,8 @@
 	</parent>
 
 	<artifactId>shadowrun6-export-fvtt</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Shadowrun 6 Export FVTT</name>
 	<description>Export character to Foundry VTT</description>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.target>11</maven.compiler.target>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.install.skip>false</maven.install.skip>
-		<maven.deploy.skip>false</maven.deploy.skip>
-		<rpgFrameworkVersion>5.0.2-SNAPSHOT</rpgFrameworkVersion>
-		<log4jVersion>2.18.0</log4jVersion>
-	</properties>
 
 	<dependencies>
 		<dependency>

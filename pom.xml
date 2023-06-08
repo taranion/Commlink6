@@ -26,7 +26,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
 		<revision>0.0.2-SNAPSHOT</revision>
-		<rpgfw.version>5.1.2</rpgfw.version>
+		<rpgfw.version>5.1.4-SNAPSHOT</rpgfw.version>
 	</properties>
 
 	<modules>
@@ -65,17 +65,17 @@
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-core</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.3-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-chargen</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.3-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-chargen-jfx</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.3-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
@@ -119,21 +119,36 @@
 		</dependencies>
 	</dependencyManagement>
 
-
 	<distributionManagement>
-		<repository>
-			<id>jfrog</id>
-			<url>https://rpgframework.jfrog.io/artifactory/RPGFramework</url>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 	</distributionManagement>
 
+	<ciManagement>
+		<system>Bitbucket Pipelines</system>
+		<url>https://bitbucket.org/rpgframework-cloud/shadowrun-common/pipelines/</url>
+	</ciManagement>
+	<scm>
+		<connection>scm:git:git@bitbucket.org:rpgframework-cloud/shadowrun-common.git</connection>
+		<developerConnection>scm:git:git@bitbucket.org:rpgframework-cloud/shadowrun-common.git</developerConnection>
+		<url>https://bitbucket.org/rpgframework-cloud/shadowrun-common/</url>
+		<tag>HEAD</tag>
+	</scm>
+
 	<repositories>
 		<repository>
-			<id>jfrog</id>
-			<snapshots><enabled>true</enabled></snapshots>
-			<releases><enabled>true</enabled></releases>
-			<url>https://rpgframework.jfrog.io/ui/native/RPGFramework/</url>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 

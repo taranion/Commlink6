@@ -11,11 +11,6 @@
 	<artifactId>shadowrun6-chargen</artifactId>
 	<name>SR6_CharGen</name>
 
-	<properties>
-		<maven.install.skip>false</maven.install.skip>
-		<maven.deploy.skip>false</maven.deploy.skip>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.prelle</groupId>

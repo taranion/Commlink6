@@ -155,7 +155,7 @@
     {
       "name": "Allergy",
       "id": "allergy",
-      "choice": "Common, Mild, Insect Stings",
+      "choice": "Common, Mild, description",
       "positive": false,
       "rating": 0,
       "page": "Core Rulebook 74",
@@ -215,7 +215,9 @@
       "rating": 1,
       "pool": 0,
       "specializations": [],
-      "influencedBy": [],
+      "influencedBy": [
+        "Cat"
+      ],
       "description": ""
     },
     {
@@ -280,7 +282,7 @@
       "description": ""
     },
     {
-      "name": "Knowledge",
+      "name": "Dive Bars",
       "id": "knowledge",
       "attribute": "Logic",
       "rating": 1,
@@ -290,7 +292,7 @@
       "description": ""
     },
     {
-      "name": "Knowledge",
+      "name": "Seattle Shamans",
       "id": "knowledge",
       "attribute": "Logic",
       "rating": 1,
@@ -429,7 +431,24 @@
   "complexForms": [],
   "adeptPowers": [],
   "longRangeWeapons": [],
-  "closeCombatWeapons": [],
+  "closeCombatWeapons": [
+    {
+      "name": "Unarmed",
+      "type": "Close Combat Weapons",
+      "subtype": "Unarmed",
+      "skill": null,
+      "pool": 5,
+      "damage": "0S",
+      "attackRating": "3/-/-/-/-",
+      "wifi": [
+        "?No ParentSet?"
+      ],
+      "accessories": [],
+      "page": "",
+      "description": "",
+      "primary": false
+    }
+  ],
   "armors": [
     {
       "name": "Armor vest ",
