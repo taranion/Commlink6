@@ -9,8 +9,6 @@ pipelines:
             - mvn -U -B -s settings.xml clean install -Dgpg.skip
   default:
     - step:
-        caches:
-         - maven
         script: 
           - mvn help:active-profiles
           - mvn -U -B -s settings.xml clean deploy -Dtype=develop -P desktop
@@ -33,8 +31,6 @@ pipelines:
         name: Deploy to Staging
         deployment: Staging
         trigger: manual
-        caches:
-         - maven
         script:
           - cd Commlink6; mvn -U -B -s settings.xml update4j:create -Dtype=testing -P desktop ; cd ..
           - ls Commlink6/target
