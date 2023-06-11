@@ -25,6 +25,7 @@ public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implem
 	//--------------------------------------------------------------------
 	public Damage(int val, DamageType type, DamageElement element) {
 		super(SR6ItemAttribute.DAMAGE);
+		this.value = val;
 		this.type = type;
 		this.element = element;
 	}
