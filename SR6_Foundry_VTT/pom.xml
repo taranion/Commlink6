@@ -12,11 +12,6 @@
 	<name>SR6_FoundryVTT</name>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.target>11</maven.compiler.target>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.install.skip>false</maven.install.skip>
-		<maven.deploy.skip>false</maven.deploy.skip>
 		<maven.test.skip>true</maven.test.skip>
 	</properties>
 

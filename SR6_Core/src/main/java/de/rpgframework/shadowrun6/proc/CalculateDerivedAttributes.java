@@ -415,7 +415,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 
 	//-------------------------------------------------------------------
 	private void calculateDefenseRatingPhysical() {
-		Shadowrun6Tools.flagItemWithHighestAttribute(model, SR6ItemAttribute.DEFENSE_PHYSICAL, SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
+		Shadowrun6Tools.flagItemWithHighestAttribute(model, SR6ItemAttribute.DEFENSE_PHYSICAL, SR6ItemFlag.PRIMARY, false);
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
 		val.setDistributed(0);
 		// Power Plays "Charismatic Defense"

@@ -2013,11 +2013,18 @@ public class Shadowrun6Tools {
 			// If no previous selection item is better, use it
 			if (best==null || val>highest) {
 				// Old best remove flag
-				if (best!=null) best.setAutoFlag(flag, !set);
+				if (best!=null) {
+					best.setAutoFlag(flag, !set);
+					best.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
+				}
 				best = item;
 				best.setAutoFlag(flag, set);
+				best.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
+				highest = val;
+			} else {
+				item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
 			}
-			logger.log(Level.DEBUG,"*  "+item.getNameWithRating()+" \t"+item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()+": ignored="+item.hasAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS));
+			logger.log(Level.WARNING,"*  "+item.getNameWithRating()+" \t"+item.getAsValue(attrib).getModifiedValue()+": ignored="+item.hasAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS));
 		}
 		return best;
 	}
