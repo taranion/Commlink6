@@ -10,7 +10,6 @@ import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.shadowrun.ANPC;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemTemplateList;

@@ -51,6 +51,7 @@ public class ResetModifications implements ProcessingStep {
 
 		model.clearEdgeModifications();
 		model.clearItemModifications();
+		model.clearGearDefinitions();
 
 		try {
 			// Attributes

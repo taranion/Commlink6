@@ -4,9 +4,13 @@ import java.lang.System.Logger.Level;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.prelle.simplepersist.Element;
+
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.MetaType;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemTemplateList;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -14,6 +18,9 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6MetaType extends MetaType {
+
+	@Element(name="geardef")
+	protected ItemTemplateList gearDef;
 
 	//-------------------------------------------------------------------
 	/**
@@ -42,6 +49,19 @@ public class SR6MetaType extends MetaType {
 	}
 
 	//-------------------------------------------------------------------
+	private ItemTemplate resolveItem(String key) {
+		if (gearDef==null) return null;
+
+		for (ItemTemplate tmp : gearDef) {
+			if (tmp.getId().equals(key)) {
+				tmp.validate();
+				return tmp;
+			}
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.data.DataItem#validate()
 	 */
@@ -50,7 +70,7 @@ public class SR6MetaType extends MetaType {
 		getName();
 		getPageReferences();
 		getDescription();
-		
+
 		for (Modification mod : modifications) {
 			mod.setSource(this);
 			if (mod.getReferenceType()==null) {
@@ -64,6 +84,15 @@ public class SR6MetaType extends MetaType {
 					logger.log(Level.ERROR,"Unknown reference "+mod.getReferenceType()+":'"+key+"' for modification in metatype "+id);
 //					throw new IllegalArgumentException("Unknown reference "+mod.getReferenceType()+":'"+key+"' for metatype "+id);
 				}
+			}
+		}
+
+		// Validate gear definitions
+		if (gearDef != null) {
+			for (ItemTemplate tmp : gearDef) {
+				tmp.validate();
+				tmp.setParentItem(this);
+				tmp.assignToDataSet(this.datasets.get(0));
 			}
 		}
 	}
@@ -84,6 +113,11 @@ public class SR6MetaType extends MetaType {
 	@Override
 	public List<Modification> getNonAttributeModifications() {
 		return getModifications().stream().filter(mod -> mod.getReferenceType()!=ShadowrunReference.ATTRIBUTE).collect(Collectors.toList());
+	}
+
+	//-------------------------------------------------------------------
+	public List<ItemTemplate> getGearDefinitions() {
+		return gearDef;
 	}
 
 }

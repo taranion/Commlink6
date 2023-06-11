@@ -86,6 +86,7 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun.proc.GetModificationsFromCritterPowers;
 import de.rpgframework.shadowrun.proc.GetModificationsFromFoci;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaEchoes;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
@@ -114,6 +115,7 @@ import de.rpgframework.shadowrun6.proc.CalculateMeleeAndUnarmed;
 import de.rpgframework.shadowrun6.proc.CalculatePersona;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
+import de.rpgframework.shadowrun6.proc.GetGearDefinitions;
 import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromCollectives;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
@@ -136,6 +138,7 @@ public class Shadowrun6Tools {
 		ResetModifications.class,
 		EnsureAttributePresence.class,
 		GetModificationsFromMetaType.class,
+		GetGearDefinitions.class,
 		GetModificationsForDrakes.class,
 		GetModificationsFromCollectives.class,
 		ApplyModificationsGeneric.class,
@@ -145,10 +148,11 @@ public class Shadowrun6Tools {
 		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),
 		GetModificationsFromFoci.class,
+		GetModificationsFromPowers.class,
 		ApplyModificationsGeneric.class,
 //		new ApplyAdeptPowerModifications(),
-		GetModificationsFromPowers.class,
 		GetModificationsFromTechniques.class,
+		GetModificationsFromCritterPowers.class,
 		ApplyModificationsGeneric.class,
 //		new ApplyCarriedItemModifications(),
 //		new DistributeAccessoriesToContainers(),

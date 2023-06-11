@@ -281,6 +281,11 @@
 		</modifications>
 	</metatype>
 	<metatype id="naga" size="690" weight="245" karma="15" human="false">
+		<geardef>
+			<item id="bite" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/unarmed" />
+			</item>
+		</geardef>
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="AGILITY"   value="7" set="MAX" when="CREATION"/>
@@ -288,11 +293,14 @@
          <valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" when="CREATION"/>
          <valmod ref="MAGIC"     type="ATTRIBUTE" value="1" when="CREATION"/>
-         <valmod type="CRITTER_POWER" ref="armor" value="4"/>
-         <itemmod type="CRITTER_POWER" ref="guard" />
          <valmod type="QUALITY"   ref="built_tough" value="2"/>
          <itemmod type="QUALITY"   ref="cold_blooded"/>
+         <valmod type="CRITTER_POWER" ref="armor" value="4"/>
+         <itemmod type="CRITTER_POWER" ref="guard" />
          <itemmod type="CRITTER_POWER" ref="dual_natured"/>
+         <itemmod type="CRITTER_POWER" ref="natural_weapon">
+         	<decision choice="b5c11ee6-708e-448c-a5c6-438df8335f09" value="bite" />
+         </itemmod>
 		</modifications>
 	</metatype>
 	<metatype id="pixie" size="60" weight="19" karma="10" human="false">
@@ -316,6 +324,11 @@
 		</modifications>
 	</metatype>
 	<metatype id="sasquatch" size="240" weight="244" karma="10" human="false">
+		<geardef>
+			<item id="kick" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="3S" attack="10,,,," skill="close_combat" spec="close_combat/unarmed" />
+			</item>
+		</geardef>
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
@@ -323,6 +336,9 @@
          <itemmod type="QUALITY"  ref="biosonar"/>
          <itemmod type="CRITTER_POWER" ref="dual_natured"/>
          <itemmod type="CRITTER_POWER" ref="mimicry"/>
+         <itemmod type="CRITTER_POWER" ref="natural_weapon">
+         	<decision choice="b5c11ee6-708e-448c-a5c6-438df8335f09" value="kick" />
+         </itemmod>
 		</modifications>
 	</metatype>
 

@@ -17,6 +17,8 @@ import org.junit.Test;
 
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.SetItem;
+import de.rpgframework.genericrpg.SetItemValue;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.AttributeValue;
@@ -2069,5 +2071,47 @@ public class SR6ArchetypeTest {
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+	}
+
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testNagaKaliAni() {
+		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
+		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
+		prio.setPriority(PriorityType.METATYPE, Priority.C);
+		prio.setPriority(PriorityType.MAGIC, Priority.E);
+		prio.setPriority(PriorityType.SKILLS, Priority.B);
+		prio.setPriority(PriorityType.RESOURCES, Priority.D);
+		assertEquals(50, model.getKarmaFree());
+
+		SR6MetaType human = Shadowrun6Core.getItem(SR6MetaType.class, "naga");
+		assertNotNull("Metatype 'naga' not found", human);
+		assertNotNull("No metatype controller found", charGen.getMetatypeController());
+		charGen.runProcessors();
+		assertTrue("Naga should be selectable",charGen.getMetatypeController().canBeSelected(human));
+		System.out.println("----Now selecting Naga--------");
+		charGen.getMetatypeController().select(human);
+		assertEquals("Naga has only 4 adjustment points on Prio C",4, ((PriorityAttributeGenerator)charGen.getAttributeController()).getPointsLeft());
+
+		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.BODY);
+		assertEquals("Expect 8 maximum from Naga", 8, aVal.getMaximum());
+
+		SetItemValue kali = new SetItemValue(Shadowrun6Core.getItem(SetItem.class, "kali_ani"));
+		model.setSurgeCollective(kali);
+		charGen.runProcessors();
+		assertEquals("Expect 8 from Naga and 3 from Shiva Arms", 11, aVal.getMaximum());
+
+		// Qualities
+		aVal = model.getAttribute(ShadowrunAttribute.LOGIC);
+		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
+		assertTrue(attribs.canBeIncreasedPoints2(aVal).get());
+		assertEquals(20, model.getKarmaFree());
+		IQualityController qualities = charGen.getQualityController();
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "impaired"),
+				new Decision(Shadowrun6Core.getItem(Quality.class, "impaired").getChoices().get(0).getUUID(),"LOGIC")
+				);
+		assertTrue("Should not fail: "+res,res.wasSuccessful());
+		assertTrue(attribs.canBeIncreasedPoints2(aVal).get());
 	}
 }
