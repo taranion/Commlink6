@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.System.Logger;
@@ -244,6 +245,22 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		if (model.isInCareerMode()) return false;
 
 		return "prio".equals(model.getCharGenUsed());
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.pages.CharactersOverviewPage#importCharacter(byte[], java.lang.String)
+	 */
+	@Override
+	protected void importCharacter(byte[] raw, String filename) throws Exception {
+		logger.log(Level.WARNING, "Import {0} bytes from {1}",raw.length, filename);
+
+		// Parse
+		Shadowrun6Character model = (Shadowrun6Character) loadRuleSpecific(raw);
+		Shadowrun6Tools.resolveChar(model);
+		String name = model.getName();
+		CharacterHandle handle = CharacterProviderLoader.getCharacterProvider().createCharacter(name, RoleplayingSystem.SHADOWRUN6);
+		CharacterProviderLoader.getCharacterProvider().addAttachment(handle, Type.CHARACTER, Format.RULESPECIFIC, name, raw);
 	}
 
 	//-------------------------------------------------------------------
