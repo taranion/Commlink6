@@ -1111,8 +1111,10 @@ public class Shadowrun6Tools {
 				if (dec!=null) {
 					clone.setKey( dec.getValue());
 				} else {
-					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value);
+					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value.getKey());
 					System.err.println("Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value);
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value.getKey());
+					clone.setKey(null);
 				}
 			} else if ("ITEM".equals( clone.getKey() )) {
 				// Get the connected item UUID
@@ -2154,10 +2156,26 @@ public class Shadowrun6Tools {
 //		return filtered;
 	}
 
+	//-------------------------------------------------------------------
 	public static List<CheckModification> getEdgeGenerators(Shadowrun6Character model) {
 		List<CheckModification> ret = new ArrayList<>();
 
 		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public static int getDefenseRatingUsing(Shadowrun6Character model, CarriedItem<ItemTemplate> primary) {
+		int base = model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue();
+		// Power Plays "Charismatic Defense"
+		if (model.hasRuleFlag(SR6RuleFlag.CHARISMATIC_DEFENSE)) {
+			base = model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue();
+		}
+
+		if (primary.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL)) {
+			base +=primary.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
+		}
+
+		return base;
 	}
 
 }
