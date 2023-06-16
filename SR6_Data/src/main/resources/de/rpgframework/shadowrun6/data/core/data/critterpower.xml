@@ -2,7 +2,11 @@
 <critterpowers>
     <critterpower id="accident"       type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
     <critterpower id="animal_control" type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED" />
-    <critterpower id="armor"          type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" level="true"/>
+    <critterpower id="armor"          type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" level="true">
+    	<modifications>
+    		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER"/>
+    	</modifications>
+    </critterpower>
     <critterpower id="astral_form"    type="MANA"     action="AUTO"  range="SELF" dur="ALWAYS" />
     <critterpower id="binding"        type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
     <critterpower id="compulsion"     type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED" />

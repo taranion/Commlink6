@@ -2,7 +2,7 @@
 <datastructures>
 	<datastructure id="admonisher">
 		<modifications>
-			<checkmod type="SKILL" ref="tasking" cond="y" value="1" what="BONUS"/>
+			<checkmod type="SKILL" ref="tasking" cond="y" value="1" what="HIT"/>
 		</modifications>
 	</datastructure>
 	<datastructure id="bandersnatch" />
