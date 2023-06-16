@@ -141,24 +141,24 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 //	}
 
 	//-------------------------------------------------------------------
-	private SR6Skill getSkillFromPrioritySettings(String prioritySettingsId) {
-		if (prioritySettingsId.contains("/")) {
-			String key = prioritySettingsId.substring(0, prioritySettingsId.indexOf("/"));
+	private SR6Skill getSkillFromSettings(String settingsId) {
+		if (settingsId.contains("/")) {
+			String key = settingsId.substring(0, settingsId.indexOf("/"));
 			return Shadowrun6Core.getSkill(key);
 		} else {
-			return Shadowrun6Core.getSkill(prioritySettingsId);
+			return Shadowrun6Core.getSkill(settingsId);
 		}
 	}
 
 	//-------------------------------------------------------------------
-	private SR6SkillValue getFromPointBuySettings(String prioritySettingsId) {
-		if (prioritySettingsId.contains("/")) {
-			String key = prioritySettingsId.substring(0, prioritySettingsId.indexOf("/"));
-			String uuid_s = prioritySettingsId.substring(prioritySettingsId.indexOf("/")+1);
+	private SR6SkillValue getFromSettings(String settingsId) {
+		if (settingsId.contains("/")) {
+			String key = settingsId.substring(0, settingsId.indexOf("/"));
+			String uuid_s = settingsId.substring(settingsId.indexOf("/")+1);
 			if (uuid_s==null)
-				logger.log(Level.ERROR, "NPE for id "+prioritySettingsId);
+				logger.log(Level.ERROR, "NPE for id "+settingsId);
 			if ("null".equals(uuid_s)) {
-				logger.log(Level.ERROR, "Pseudo NULL for id "+prioritySettingsId);
+				logger.log(Level.ERROR, "Pseudo NULL for id "+settingsId);
 				return null;
 			}
 			UUID uuid = UUID.fromString(uuid_s);
@@ -171,7 +171,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			logger.log(Level.ERROR, "Did not detected "+key+" | "+uuid+" in "+model.getSkillValues());
 
 		} else {
-			return model.getSkillValue(Shadowrun6Core.getSkill(prioritySettingsId));
+			return model.getSkillValue(Shadowrun6Core.getSkill(settingsId));
 		}
 		return null;
 	}
@@ -298,9 +298,9 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
 				logger.log(Level.DEBUG, "  final {0} = {1}",String.format("%11s",entry.getKey()), entry.getValue());
 				if (entry.getValue().getSum()==0) continue;
-				SR6SkillValue val = getFromPointBuySettings(entry.getKey());
+				SR6SkillValue val = getFromSettings(entry.getKey());
 				if (val==null) {
-					SR6Skill skill = getSkillFromPrioritySettings(entry.getKey());
+					SR6Skill skill = getSkillFromSettings(entry.getKey());
 					if (skill==null) {
 						logger.log(Level.ERROR, "No skill '"+entry.getKey()+"'");
 						System.err.println( "No skill '"+entry.getKey()+"'");
@@ -363,7 +363,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 
 		SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 		for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
-			SR6SkillValue val = getFromPointBuySettings(entry.getKey());
+			SR6SkillValue val = getFromSettings(entry.getKey());
 			SR6Skill skill = val.getResolved();
 			if (skill.isRestricted() && !allowed.contains(skill)) {
 				logger.log(Level.INFO, "Skill {0} is not allowed anymore - remove it from PointBuy settings", skill);

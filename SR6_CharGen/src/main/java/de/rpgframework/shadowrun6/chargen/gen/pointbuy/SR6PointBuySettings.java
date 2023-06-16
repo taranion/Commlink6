@@ -32,9 +32,9 @@ public class SR6PointBuySettings extends CommonSR6GeneratorSettings {
 	/** How points and karma is spent on attribute */
 	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib;
 	public Map<String, PerSkillPoints> perSkill;
-	public Map<SpellValue, Boolean> perSpellPayedWithCP;
-	public Map<RitualValue, Boolean> perRitualPayedWithCP;
-	public Map<ComplexFormValue, Boolean> perCFormPayedWithCP;
+	public Map<String, Boolean> perSpellPayedWithCP;
+	public Map<String, Boolean> perRitualPayedWithCP;
+	public Map<String, Boolean> perCFormPayedWithCP;
 	public int ppCP;
 	public int ppKarma;
 	public int spellsCP;
