@@ -2165,17 +2165,25 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static int getDefenseRatingUsing(Shadowrun6Character model, CarriedItem<ItemTemplate> primary) {
-		int base = model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue();
-		// Power Plays "Charismatic Defense"
-		if (model.hasRuleFlag(SR6RuleFlag.CHARISMATIC_DEFENSE)) {
-			base = model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue();
+		int sum = 0;
+		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
+		for (Modification mod : aVal.getModifications()) {
+			if (mod.getSource() instanceof CarriedItem) {
+				CarriedItem<ItemTemplate> src = (CarriedItem<ItemTemplate>) mod.getSource();
+				if (!src.hasFlag(SR6ItemFlag.PRIMARY)) {
+					// Allow helmets
+					sum += ((ValueModification)mod).getValue();
+				}
+			} else {
+				sum += ((ValueModification)mod).getValue();
+			}
 		}
 
 		if (primary.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL)) {
-			base +=primary.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
+			sum +=primary.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
 		}
 
-		return base;
+		return sum;
 	}
 
 }
