@@ -8,16 +8,12 @@ import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
-import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
-import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
-import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.DamageElement;
@@ -89,11 +85,25 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 		}
 		SR6GearTool.recalculate("", model, unarmed);
 
+		// Rule: High Strength adds to damage (6WC 150)
+		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.STRENGTH);
+		if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.HIGH_STRENGTH_ADDS_DAMAGE) && aVal.getModifiedValue()>6) {
+			int plus = (aVal.getModifiedValue()>=10)?2:1;
+			logger.log(Level.INFO, "Add {0} to damage", plus);
+			ValueModification toAdd = new ValueModification(
+					ShadowrunReference.ITEM_ATTRIBUTE,
+					SR6ItemAttribute.DAMAGE.name(),
+					plus,
+					Shadowrun6Rules.HIGH_STRENGTH_ADDS_DAMAGE);
+			unarmed.getAsObject(SR6ItemAttribute.DAMAGE).addModification(toAdd);
+		}
+
+
 		//------Attack Rating-----------
 
 		try {
 			// Reaction
-			AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.REACTION);
+			aVal = model.getAttribute(ShadowrunAttribute.REACTION);
 			ValueModification reaMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.REACTION);
 			reaMod.setSet(ValueType.NATURAL);
 			unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(reaMod);
