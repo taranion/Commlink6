@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
@@ -17,6 +18,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
 import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
  * A base class for leveller and generator
@@ -44,8 +46,6 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected IMartialArtsController martial;
 	protected ICritterPowerController critter;
 	protected SR6DrakeController drake;
-
-	protected Locale locale = Locale.getDefault();
 
 	//-------------------------------------------------------------------
 	public SR6CharacterControllerImpl() {
