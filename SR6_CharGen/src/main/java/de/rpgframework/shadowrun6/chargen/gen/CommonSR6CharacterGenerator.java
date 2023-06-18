@@ -9,6 +9,7 @@ import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.RuleController;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
@@ -118,6 +119,19 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 	public void finish() {
 		// TODO Auto-generated method stub
 		logger.log(Level.WARNING, "TODO: finish");
+		model.setInCareerMode(true);
+		// Reduce Karma
+		int maxKarma =  getRuleController().getRuleValueAsInteger(ShadowrunRules.CHARGEN_MAX_KARMA_REMAIN);
+		if (model.getKarmaFree()>maxKarma) {
+			logger.log(Level.WARNING, "Needed to reduce free Karma from {0} to {1}", model.getKarmaFree(), maxKarma);
+			model.setKarmaFree( Math.min(model.getKarmaFree(), maxKarma));
+		}
+		// Reduce Nuyen
+		int maxNuyen =  getRuleController().getRuleValueAsInteger(ShadowrunRules.CHARGEN_MAX_NUYEN_REMAIN);
+		if (model.getNuyen()>maxNuyen) {
+			logger.log(Level.WARNING, "Needed to reduce free Karma from {0} to {1}", model.getNuyen(), maxNuyen);
+			model.setNuyen( Math.min(model.getNuyen(), maxNuyen));
+		}
 
 	}
 
