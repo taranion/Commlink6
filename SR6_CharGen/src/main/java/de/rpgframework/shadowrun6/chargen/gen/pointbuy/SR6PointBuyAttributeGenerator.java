@@ -535,7 +535,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 				if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE) {
 					ValueModification mod = (ValueModification)tmp;
 					ShadowrunAttribute attr = mod.getResolvedKey();
-					logger.log(Level.INFO, "Consume "+mod);
+					logger.log(Level.DEBUG, "Consume "+mod);
 					switch (mod.getSet()) {
 					case MAX:
 						// Optional: Allow adjustment points on lowered maximum
