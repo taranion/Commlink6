@@ -282,7 +282,7 @@
 	</metatype>
 	<metatype id="naga" size="690" weight="245" karma="15" human="false">
 		<geardef>
-			<item id="bite" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+			<item id="bite" type="WEAPON_CLOSE_COMBAT" subtype="NATURAL_WEAPON">
 				<weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/unarmed" />
 			</item>
 		</geardef>

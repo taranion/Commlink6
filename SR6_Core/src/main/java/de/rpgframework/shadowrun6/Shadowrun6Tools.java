@@ -819,6 +819,7 @@ public class Shadowrun6Tools {
 					if (resolved==null) {
 						logger.log(Level.ERROR, "Char {0} has an unresolvable item: {1}", model.getName(), tmp.getKey());
 						System.err.println("Char "+model.getName()+" has an unresolvable item: "+tmp.getKey());
+						model.removeCarriedItem(tmp);
 					} else {
 					tmp.setResolved(resolved);
 						if (tmp.getVariantID()!=null && tmp.getVariant()==null) {
@@ -1732,7 +1733,7 @@ public class Shadowrun6Tools {
 
 //		return ((Damage)model.getItem("unarmed").getAsValue(ItemAttribute.DAMAGE));
 
-		Damage damage = (Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
+		Damage damage = (Damage)item.getAsValue(SR6ItemAttribute.DAMAGE);
 //		if (damage.isAddStrength()) {
 //			AttributeValue val = model.getAttribute(Attribute.STRENGTH);
 //			int strHalf = Math.round( val.getModifiedValue() / 2.0f);
