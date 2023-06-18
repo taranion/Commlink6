@@ -2113,5 +2113,10 @@ public class SR6ArchetypeTest {
 				);
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertTrue(attribs.canBeIncreasedPoints2(aVal).get());
+
+		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 9);
+
+		// Add melee weapon
+		charGen.getEquipmentController().select(Shadowrun6Core.getItem(ItemTemplate.class, "katana"));
 	}
 }
