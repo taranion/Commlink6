@@ -364,6 +364,7 @@
      <modifications>
        <valmod type="ATTRIBUTE" ref="BODY" value="1" set="MAX"/>
        <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" set="MAX"/>
+       <valmod type="ATTRIBUTE" ref="MINOR_ACTION" value="1" set="NATURAL"/>
      </modifications>
    </quality>
    <quality id="webbed_digits" karma="4" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">

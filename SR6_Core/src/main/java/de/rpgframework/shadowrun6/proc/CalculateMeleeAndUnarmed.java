@@ -8,16 +8,13 @@ import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
-import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
-import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.DamageElement;
@@ -75,38 +72,80 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 		logger.log(Level.DEBUG, "START: process");
 		List<Modification> unprocessed = new ArrayList<>(previous);
 
+		// Introduce a virtual "Unarmed" item
 		CarriedItem<ItemTemplate> unarmed = model.getCarriedItem(ItemTemplate.UUID_UNARMED);
 		if (unarmed==null) {
 			unarmed = new CarriedItem<>(unarmedDef, null, CarryMode.VIRTUAL);
 			unarmed.setUuid(ItemTemplate.UUID_UNARMED);
-			model.addCarriedItem(unarmed);
 			unarmed.setCustomName(Shadowrun6Core.getI18nResources().getString("weapon.unarmed"));
+
+			// Base attack rating is REA + STR
+			AttributeValue<ShadowrunAttribute> rea = model.getAttribute(ShadowrunAttribute.REACTION);
+			AttributeValue<ShadowrunAttribute> str = model.getAttribute(ShadowrunAttribute.STRENGTH);
+			ValueModification reaMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), rea.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.REACTION);
+			ValueModification strMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), str.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.STRENGTH);
+			ItemAttributeObjectValue<SR6ItemAttribute> unarmedAR = new ItemAttributeObjectValue<>(SR6ItemAttribute.ATTACK_RATING, new int[] {0,0,0,0,0});
+			unarmedAR.addModification(reaMod);
+			unarmedAR.addModification(strMod);
+			unarmed.setAttribute(SR6ItemAttribute.ATTACK_RATING, unarmedAR);
 			unarmed.setAttribute(SR6ItemAttribute.DAMAGE, new Damage(2, DamageType.STUN, DamageElement.REGULAR));
 			unarmed.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
-			logger.log(Level.INFO, "Add natural weapon");
-		} else {
+			unarmed.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<>(SR6ItemAttribute.ITEMTYPE, ItemType.WEAPON_CLOSE_COMBAT));
+			unarmed.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.UNARMED));
+			unarmed.setAttribute(SR6ItemAttribute.SKILL, new ItemAttributeObjectValue<>(SR6ItemAttribute.SKILL, Shadowrun6Core.getSkill("close_combat")));
+			unarmed.setAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION, new ItemAttributeObjectValue<>(SR6ItemAttribute.SKILL_SPECIALIZATION, Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed")));
+			unarmed.setInjectedBy("CORE");
+			model.addVirtualCarriedItem(unarmed);
+			logger.log(Level.INFO, "Add natural weapon 'unarmed'");
 			unarmed.setResolved(unarmedDef);
+		} else {
+			if (unarmed.getInjectedBy()==null) {
+				logger.log(Level.WARNING, "Found an 'unarmed' item in regular inventory - remove it");
+				model.removeCarriedItem(unarmed);
+			}
 		}
 		SR6GearTool.recalculate("", model, unarmed);
+		logger.log(Level.ERROR, "Unarmed AR = "+Arrays.toString((int[])unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue()));
 
-		//------Attack Rating-----------
+		// Prepare modifications to add
+		ValueModification strDMGBonus = null;
+		ValueModification strARMod = null;
 
-		try {
-			// Reaction
-			AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.REACTION);
-			ValueModification reaMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.REACTION);
-			reaMod.setSet(ValueType.NATURAL);
-			unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(reaMod);
-			// Strength
-			if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
-				aVal = model.getAttribute(ShadowrunAttribute.STRENGTH);
-				reaMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.STRENGTH);
-				reaMod.setSet(ValueType.NATURAL);
-				unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(reaMod);
+		// Rule: High Strength adds to damage (6WC 150)
+		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.STRENGTH);
+		if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.HIGH_STRENGTH_ADDS_DAMAGE) && aVal.getModifiedValue()>6) {
+			int plus = (aVal.getModifiedValue()>=10)?2:1;
+			strDMGBonus = new ValueModification(
+					ShadowrunReference.ITEM_ATTRIBUTE,
+					SR6ItemAttribute.DAMAGE.name(),
+					plus,
+					Shadowrun6Rules.HIGH_STRENGTH_ADDS_DAMAGE);
+		}
+
+		// Rule: Add Strength to close combat attack rating for unarmed/melee weapons (CRB Seattle Edition)
+		if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
+			strARMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.STRENGTH);
+			strARMod.setSet(ValueType.NATURAL);
+		}
+
+		// Now walk all melee weapons
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT)) {
+			if (strARMod!=null && item.getUuid()!=ItemTemplate.UUID_UNARMED) {
+				item.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(strARMod);
+				logger.log(Level.ERROR, "Add {0} to attack rating for {1}", strARMod, item.getKey());
 			}
-
-			//logger.log(Level.DEBUG, "Base AR = "+unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING));
-			logger.log(Level.DEBUG, "Base AR = "+Arrays.toString((int[])unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue()));
+			ItemSubType subtype = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
+			switch (subtype) {
+			case BLADES:
+			case CLUBS:
+			case UNARMED:
+				if (strDMGBonus!=null) {
+					System.out.println("CalculateMelee: "+item.getAttributeRaw(SR6ItemAttribute.DAMAGE).getClass());
+					item.getAsValue(SR6ItemAttribute.DAMAGE).addModification(strDMGBonus);
+					logger.log(Level.ERROR, "Add {0} to damage for {1}", strDMGBonus, item.getKey());
+				}
+			}
+		}
 
 			/*
 			 * Modify all weapons with attack rating
@@ -130,12 +169,6 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 //					}
 //				}
 //			}
-
-			logger.log(Level.ERROR, "CloseCombat = "+model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT));
-
-		} finally {
-			logger.log(Level.TRACE,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
-		}
 		return unprocessed;
 	}
 

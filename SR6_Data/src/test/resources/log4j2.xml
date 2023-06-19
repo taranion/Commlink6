@@ -18,6 +18,6 @@
         <Logger name="de.rpgframework.genericrpg.items" level="INFO" />
         <Logger name="de.rpgframework.genericrpg.items.formula" level="WARN" />
         <Logger name="de.rpgframework.shadowrun6.proc.attr" level="INFO" />
-        <Logger name="de.rpgframework.shadowrun6.items" level="WARN" />
+        <Logger name="de.rpgframework.shadowrun6.items" level="INFO" />
     </Loggers>
 </Configuration>

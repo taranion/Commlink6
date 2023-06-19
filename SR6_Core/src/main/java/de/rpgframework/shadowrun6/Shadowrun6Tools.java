@@ -86,6 +86,7 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun.proc.GetModificationsFromCritterPowers;
 import de.rpgframework.shadowrun.proc.GetModificationsFromFoci;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaEchoes;
 import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
@@ -114,6 +115,7 @@ import de.rpgframework.shadowrun6.proc.CalculateMeleeAndUnarmed;
 import de.rpgframework.shadowrun6.proc.CalculatePersona;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
+import de.rpgframework.shadowrun6.proc.GetGearDefinitions;
 import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromCollectives;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
@@ -136,6 +138,7 @@ public class Shadowrun6Tools {
 		ResetModifications.class,
 		EnsureAttributePresence.class,
 		GetModificationsFromMetaType.class,
+		GetGearDefinitions.class,
 		GetModificationsForDrakes.class,
 		GetModificationsFromCollectives.class,
 		ApplyModificationsGeneric.class,
@@ -145,10 +148,11 @@ public class Shadowrun6Tools {
 		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),
 		GetModificationsFromFoci.class,
+		GetModificationsFromPowers.class,
 		ApplyModificationsGeneric.class,
 //		new ApplyAdeptPowerModifications(),
-		GetModificationsFromPowers.class,
 		GetModificationsFromTechniques.class,
+		GetModificationsFromCritterPowers.class,
 		ApplyModificationsGeneric.class,
 //		new ApplyCarriedItemModifications(),
 //		new DistributeAccessoriesToContainers(),
@@ -815,6 +819,7 @@ public class Shadowrun6Tools {
 					if (resolved==null) {
 						logger.log(Level.ERROR, "Char {0} has an unresolvable item: {1}", model.getName(), tmp.getKey());
 						System.err.println("Char "+model.getName()+" has an unresolvable item: "+tmp.getKey());
+						model.removeCarriedItem(tmp);
 					} else {
 					tmp.setResolved(resolved);
 						if (tmp.getVariantID()!=null && tmp.getVariant()==null) {
@@ -1107,8 +1112,10 @@ public class Shadowrun6Tools {
 				if (dec!=null) {
 					clone.setKey( dec.getValue());
 				} else {
-					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value);
+					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value.getKey());
 					System.err.println("Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value);
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value.getKey());
+					clone.setKey(null);
 				}
 			} else if ("ITEM".equals( clone.getKey() )) {
 				// Get the connected item UUID
@@ -1726,7 +1733,7 @@ public class Shadowrun6Tools {
 
 //		return ((Damage)model.getItem("unarmed").getAsValue(ItemAttribute.DAMAGE));
 
-		Damage damage = (Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
+		Damage damage = (Damage)item.getAsValue(SR6ItemAttribute.DAMAGE);
 //		if (damage.isAddStrength()) {
 //			AttributeValue val = model.getAttribute(Attribute.STRENGTH);
 //			int strHalf = Math.round( val.getModifiedValue() / 2.0f);
@@ -2150,10 +2157,34 @@ public class Shadowrun6Tools {
 //		return filtered;
 	}
 
+	//-------------------------------------------------------------------
 	public static List<CheckModification> getEdgeGenerators(Shadowrun6Character model) {
 		List<CheckModification> ret = new ArrayList<>();
 
 		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public static int getDefenseRatingUsing(Shadowrun6Character model, CarriedItem<ItemTemplate> primary) {
+		int sum = 0;
+		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
+		for (Modification mod : aVal.getModifications()) {
+			if (mod.getSource() instanceof CarriedItem) {
+				CarriedItem<ItemTemplate> src = (CarriedItem<ItemTemplate>) mod.getSource();
+				if (!src.hasFlag(SR6ItemFlag.PRIMARY)) {
+					// Allow helmets
+					sum += ((ValueModification)mod).getValue();
+				}
+			} else {
+				sum += ((ValueModification)mod).getValue();
+			}
+		}
+
+		if (primary.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL)) {
+			sum +=primary.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
+		}
+
+		return sum;
 	}
 
 }

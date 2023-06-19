@@ -160,7 +160,7 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 
 			getModel().addSpell(toAdd);
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
-			settings.perSpellPayedWithCP.put(toAdd, true);
+			settings.perSpellPayedWithCP.put(toAdd.getKey(), true);
 			logger.log(Level.INFO, "Added spell {0}", toAdd);
 
 			parent.runProcessors();

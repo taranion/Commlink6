@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
@@ -334,10 +335,12 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 
 			Shadowrun6Character model = getModel();
 
-//			for (AdeptPowerValue val : model.getAdeptPowers()) {
-//				// Apply modifications
-//				unprocessed.addAll(val.getModifications());
-//			}
+			for (AdeptPowerValue val : model.getAdeptPowers()) {
+				Possible poss = GenericRPGTools.areAllDecisionsPresent(val.getResolved(), val.getDecisionArray());
+				if (poss.getMostSevere()!=null) {
+					todos.add(new ToDoElement(ToDoElement.Severity.STOPPER, val.getNameWithoutRating()+": "+poss.toString()));
+				}
+			}
 
 			// Summary and eventually warn
 			logger.log(Level.INFO, "Have {0} remaining power points", freePoints);

@@ -21,30 +21,30 @@ public class SR6PriorityAdeptPowerGenerator extends SR6AdeptPowerController {
 		super(parent);
 	}
 
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
-	 */
-	@Override
-	public List<Modification> process(List<Modification> previous) {
-		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
-		List<Modification> unprocessed = new ArrayList<>(previous);
-
-		try {
-			todos.clear();
-			allocatePP();
-
-			Shadowrun6Character model = getModel();
-
-			for (AdeptPowerValue val : model.getAdeptPowers()) {
-				// Apply modifications
-				unprocessed.addAll(val.getModifications());
-			}
-
-			return unprocessed;
-		} finally {
-			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
-		}
-	}
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
+//	 */
+//	@Override
+//	public List<Modification> process(List<Modification> previous) {
+//		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
+//		List<Modification> unprocessed = new ArrayList<>(previous);
+//
+//		try {
+//			todos.clear();
+//			allocatePP();
+//
+//			Shadowrun6Character model = getModel();
+//
+//			for (AdeptPowerValue val : model.getAdeptPowers()) {
+//				// Apply modifications
+//				unprocessed.addAll(val.getModifications());
+//			}
+//
+//			return unprocessed;
+//		} finally {
+//			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
+//		}
+//	}
 
 }

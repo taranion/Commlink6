@@ -31,6 +31,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule CHARGEN_PRIO_ADJUSTED_MAGIC_RESO = new Rule(EffectOn.CHARGEN,"CHARGEN_PRIO_ADJUSTED_MAGIC_RESO", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule(EffectOn.COMMON,"MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
 	public static Rule ADD_STRENGTH_TO_MELEE_AR = new Rule(EffectOn.COMMON,"ADD_STRENGTH_TO_MELEE_AR", Rule.Type.BOOLEAN, RES, "true");
+	public static Rule HIGH_STRENGTH_ADDS_DAMAGE = new Rule(EffectOn.COMMON,"HIGH_STRENGTH_ADDS_DAMAGE", Rule.Type.BOOLEAN, RES, "false");
 
 	public static Rule CARGOFACTOR_IS_WITHOUT_SEATS = new Rule(EffectOn.COMMON,"CARGOFACTOR_IS_WITHOUT_SEATS", Rule.Type.BOOLEAN, RES, "false");
 
@@ -50,6 +51,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_EXTENDED_CONTACT,
 				MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP,
 				ADD_STRENGTH_TO_MELEE_AR,
+				HIGH_STRENGTH_ADDS_DAMAGE,
 				CARGOFACTOR_IS_WITHOUT_SEATS
 		};
 

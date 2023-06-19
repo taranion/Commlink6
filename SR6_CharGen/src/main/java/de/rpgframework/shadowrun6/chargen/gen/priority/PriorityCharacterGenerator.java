@@ -261,13 +261,13 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		logger.log(Level.WARNING, "TODO: resolve PACKs");
 		model.setInCareerMode(true);
 		// Reduce Karma
-		int maxKarma =  prioCtrl.getCharacterController().getRuleController().getRuleValueAsInteger(ShadowrunRules.CHARGEN_MAX_KARMA_REMAIN);
+		int maxKarma =  getRuleController().getRuleValueAsInteger(ShadowrunRules.CHARGEN_MAX_KARMA_REMAIN);
 		if (model.getKarmaFree()>maxKarma) {
 			logger.log(Level.WARNING, "Needed to reduce free Karma from {0} to {1}", model.getKarmaFree(), maxKarma);
 			model.setKarmaFree( Math.min(model.getKarmaFree(), maxKarma));
 		}
 		// Reduce Nuyen
-		int maxNuyen =  prioCtrl.getCharacterController().getRuleController().getRuleValueAsInteger(ShadowrunRules.CHARGEN_MAX_NUYEN_REMAIN);
+		int maxNuyen =  getRuleController().getRuleValueAsInteger(ShadowrunRules.CHARGEN_MAX_NUYEN_REMAIN);
 		if (model.getNuyen()>maxNuyen) {
 			logger.log(Level.WARNING, "Needed to reduce free Karma from {0} to {1}", model.getNuyen(), maxNuyen);
 			model.setNuyen( Math.min(model.getNuyen(), maxNuyen));

@@ -11,9 +11,6 @@ import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.prelle.javafx.AlertManager;
-import org.prelle.javafx.AlertType;
-import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.NodeWithTitle;
 import org.prelle.javafx.WindowMode;
@@ -45,13 +42,11 @@ import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
 import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
-import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -350,13 +345,13 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			activeProperty().set(false);
 		}
 
-			List<SetItem> items = Shadowrun6Core.getItemList(SetItem.class).stream()
-				.filter(p -> charGen.showDataItem(p))
-				.collect(Collectors.toList());
-			items.add(0, none);
-			Collections.sort(items, comparator);
-			logger.log(Level.WARNING, "Available: "+items);
-			contentPane.setItems(items);
+		List<SetItem> items = Shadowrun6Core.getItemList(SetItem.class).stream()
+			.filter(p -> charGen.showDataItem(p))
+			.filter(p -> Shadowrun6Tools.areRequirementsMet(model, p, new Decision[0]).get())
+			.collect(Collectors.toList());
+		items.add(0, none);
+		Collections.sort(items, comparator);
+		contentPane.setItems(items);
 
 			if (model.getSurgeCollective()!=null && items.contains(model.getSurgeCollective().getResolved()) && model.getSurgeCollective().getResolved() != contentPane.getSelectedItem()) {
 				contentPane.setSelectedItem(model.getSurgeCollective().getResolved());

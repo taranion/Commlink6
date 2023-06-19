@@ -2,7 +2,11 @@
 <critterpowers>
     <critterpower id="accident"       type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
     <critterpower id="animal_control" type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED" />
-    <critterpower id="armor"          type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" level="true"/>
+    <critterpower id="armor"          type="PHYSICAL" action="AUTO"  range="SELF"          dur="ALWAYS" level="true">
+    	<modifications>
+    		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER"/>
+    	</modifications>
+    </critterpower>
     <critterpower id="astral_form"    type="MANA"     action="AUTO"  range="SELF" dur="ALWAYS" />
     <critterpower id="binding"        type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
     <critterpower id="compulsion"     type="MANA"     action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED" />
@@ -41,7 +45,14 @@
     <critterpower id="mist_form"       type="PHYSICAL" action="MAJOR" range="SELF"          dur="SUSTAINED" />
     <critterpower id="movement"        type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
     <critterpower id="mystic_armor"    type="MANA"     action="AUTO"  range="SELF"          dur="ALWAYS" level="true"/>
-    <critterpower id="natural_weapon"  type="PHYSICAL" action="AUTO"  range="TOUCH"         dur="INSTANTANEOUS" />
+    <critterpower id="natural_weapon"  type="PHYSICAL" action="AUTO"  range="TOUCH"         dur="INSTANTANEOUS" >
+    	<choices>
+    		<choice uuid="b5c11ee6-708e-448c-a5c6-438df8335f09" type="GEAR"/>
+    	</choices>
+    	<modifications>
+    		<itemmod type="GEAR" ref="CHOICE" choice="b5c11ee6-708e-448c-a5c6-438df8335f09" apply="CHARACTER"/>
+    	</modifications>
+    </critterpower>
     <critterpower id="noxious_breath"  type="PHYSICAL" action="MAJOR" range="SPECIAL"       dur="INSTANTANEOUS" />
     <critterpower id="paralyzing_howl" type="PHYSICAL" action="MAJOR" range="SPECIAL"      dur="SPECIAL" />
     <critterpower id="paralyzing_touch" type="PHYSICAL" action="MAJOR" range="TOUCH"       dur="SPECIAL" />

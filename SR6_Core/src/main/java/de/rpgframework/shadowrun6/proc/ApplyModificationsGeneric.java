@@ -11,6 +11,7 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
@@ -104,7 +105,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
-				logger.log(Level.DEBUG, "process "+tmp);
+				logger.log(Level.DEBUG, "process "+tmp+" / "+tmp.getApplyTo());
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
 				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
@@ -231,6 +232,13 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 	// -------------------------------------------------------------------
 	private static boolean applyGear(Shadowrun6Character model, DataItemModification mod) {
 		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, mod.getKey());
+		// Check if item is a geardef
+		if (item==null) {
+			item = model.getGearDefinition(mod.getKey());
+			if (item!=null) {
+				logger.log(Level.DEBUG, "Resolved gear {0} from definitions in character", mod.getKey());
+			}
+		}
 		SR6PieceOfGearVariant variant = null;
 		if (mod.getVariant()!=null) {
 			variant = (SR6PieceOfGearVariant) item.getVariant(mod.getVariant());
@@ -342,6 +350,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			} else {
 				model.addCritterPower(value);
 				logger.log(Level.INFO, "Add critter power {0} to character", item);
+				return false;
 			}
 		}
 		// Mark as auto-added

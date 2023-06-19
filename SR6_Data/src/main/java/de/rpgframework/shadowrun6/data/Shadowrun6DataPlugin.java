@@ -63,6 +63,8 @@ import de.rpgframework.shadowrun.SpellFeatureList;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.TraditionList;
 import de.rpgframework.shadowrun6.ActionList;
+import de.rpgframework.shadowrun6.DataStructure;
+import de.rpgframework.shadowrun6.DataStructureList;
 import de.rpgframework.shadowrun6.DrakeType;
 import de.rpgframework.shadowrun6.DrakeTypeList;
 import de.rpgframework.shadowrun6.LifepathModule;
@@ -172,7 +174,7 @@ public class Shadowrun6DataPlugin  {
 			initDPSOTA2081();
 			initDPSOTA2082();
 			initDPWestphalen();
-			//initHackNSlash();
+			initHackNSlash();
 			initAstralWays();
 			//initBodyShop);
 		} catch (DataErrorException e) {
@@ -682,8 +684,8 @@ public class Shadowrun6DataPlugin  {
 //		logger.log(Level.DEBUG, "Loaded "+list.size()+" complex forms");
 //		list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, set, clazz, "hack_slash/data/sprites.xml");
 //		logger.log(Level.DEBUG, "Loaded "+list.size()+" sprites");
-//		list = Shadowrun6Core.loadDataItems(DataStructureList.class, DataStructure.class, set, clazz, "hack_slash/data/datastructures.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" data structures");
+		list = Shadowrun6Core.loadDataItems(DataStructureList.class, DataStructure.class, set, clazz, "hack_slash/data/datastructures.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" data structures");
 //		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
 //		logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 ////		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities.xml");

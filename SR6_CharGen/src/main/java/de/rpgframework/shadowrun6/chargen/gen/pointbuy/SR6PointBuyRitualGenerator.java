@@ -172,7 +172,7 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 		logger.log(Level.INFO, "Pay {0} with CP = {1}", value.getId(), payWithCP);
 		SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 		logger.log(Level.INFO, "Put "+result.get()+" = "+payWithCP);
-		settings.perRitualPayedWithCP.put(result.get(), payWithCP);
+		settings.perRitualPayedWithCP.put(result.get().getKey(), payWithCP);
 
 		parent.runProcessors();
 		return result;

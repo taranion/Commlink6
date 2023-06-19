@@ -12,6 +12,8 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
+import de.rpgframework.shadowrun.DamageElement;
+import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Movement;
 import de.rpgframework.shadowrun.Movement.MovementType;
@@ -19,6 +21,7 @@ import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemUtil;
@@ -51,6 +54,8 @@ public class ResetModifications implements ProcessingStep {
 
 		model.clearEdgeModifications();
 		model.clearItemModifications();
+		model.clearGearDefinitions();
+		model.getCritterPowers().clear();
 
 		try {
 			// Attributes
@@ -90,6 +95,12 @@ public class ResetModifications implements ProcessingStep {
 				}
 			}
 
+			AttributeValue<ShadowrunAttribute> dmg = model.getAttribute(ShadowrunAttribute.MELEE_DAMAGE);
+			if (dmg==null) {
+				dmg = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.MELEE_DAMAGE);
+				model.setAttribute(dmg);
+			}
+			dmg.setDistributed(2);
 
 			// Ensure there is a device for unused software
 			CarriedItem<ItemTemplate> item = model.getSoftwareLibrary();
