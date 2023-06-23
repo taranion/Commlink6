@@ -201,7 +201,7 @@ public class ProblemItemTest {
 
 		Damage expect = new Damage();
 		expect.setValue(-1);
-		assertEquals(expect.getValue(), ((Damage)carried.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getValue());
+		assertEquals(expect.getValue(), ((Damage)carried.getAsValue(SR6ItemAttribute.DAMAGE)).getModifiedValue());
 		int[] modAR = (int[])carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
 		int[] expAR = new int[] {2,2,2,2,2};
 		assertTrue("Expected "+Arrays.toString(expAR)+" but got "+Arrays.toString(modAR),Arrays.equals(expAR, expAR));

@@ -85,9 +85,9 @@ public class SR6CarriedItemTest {
 		assertEquals(Legality.LEGAL, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
 		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
 		assertEquals(500, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
-		assertNotNull(item.getAsObject(SR6ItemAttribute.DAMAGE));
-		assertEquals(5, ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getValue());
-		assertEquals(DamageType.PHYSICAL, ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getType());
+		assertNotNull(item.getAsValue(SR6ItemAttribute.DAMAGE));
+		assertEquals(5, ((Damage)item.getAsValue(SR6ItemAttribute.DAMAGE)).getModifiedValue());
+		assertEquals(DamageType.PHYSICAL, ((Damage)item.getAsValue(SR6ItemAttribute.DAMAGE)).getType());
 		assertNotNull(item.getAsObject(SR6ItemAttribute.ATTACK_RATING));
 		assertArrayEquals(new int[]{9,0,0,0,0}, (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
 		assertNotNull(item.getAsObject(SR6ItemAttribute.SKILL));
@@ -201,10 +201,10 @@ public class SR6CarriedItemTest {
 		assertEquals(Legality.LEGAL, ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
 		assertNotNull(item.getAsValue(SR6ItemAttribute.PRICE));
 		assertEquals(340, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
-		assertNotNull(item.getAsObject(SR6ItemAttribute.DAMAGE));
-		assertEquals(6, ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getValue());
-		assertEquals(DamageType.STUN, ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getType());
-		assertEquals(DamageElement.ELECTRICITY, ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getElement());
+		assertNotNull(item.getAsValue(SR6ItemAttribute.DAMAGE));
+		assertEquals(6, ((Damage)item.getAsValue(SR6ItemAttribute.DAMAGE)).getModifiedValue());
+		assertEquals(DamageType.STUN, ((Damage)item.getAsValue(SR6ItemAttribute.DAMAGE)).getType());
+		assertEquals(DamageElement.ELECTRICITY, ((Damage)item.getAsValue(SR6ItemAttribute.DAMAGE)).getElement());
 		assertNotNull(item.getAsObject(SR6ItemAttribute.ATTACK_RATING));
 		assertArrayEquals(new int[]{10,6,0,0,0}, (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue());
 		assertNotNull(item.getAsObject(SR6ItemAttribute.SKILL));

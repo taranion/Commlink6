@@ -84,6 +84,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private Button btnInc, btnDec;
 	private Label lbConvert;
 	private VBox bxConvert;
+	private Button btnWizard;
 
 	private VBox bxHoverToDo;
 
@@ -144,6 +145,11 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		bxHoverToDo.setId("todos");
 		bxHoverToDo.setStyle("-fx-max-width: 20em");
 		bxHoverToDo.getStyleClass().addAll("hover","todos");
+
+		btnWizard = new Button(null, new SymbolIcon("undo"));
+		btnWizard.setTooltip(new Tooltip(ResourceI18N.get(UI, "action.openWizard")));
+		btnWizard.setOnAction( ev -> openWizard());
+		extraButtonsTopProperty().add(btnWizard);
 	}
 
 	//-------------------------------------------------------------------
@@ -186,17 +192,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			logger.log(Level.INFO, "Wizard closed via "+close);
 			//		controller.refresh();
 			if (close==CloseType.FINISH) {
-//				wrapper.finish();
-//				try {
-//					logger.log(Level.DEBUG, "Call save() on "+wrapper.getClass());
-//					wrapper.save(Shadowrun6Core.encode(wrapper.getModel()));
 					return;
-//				} catch (CharacterIOException e) {
-//					super.showCharacterIOException(e, wrapper.getModel());
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
 			}
 			if (close==CloseType.CANCEL) {
 				//			getApplication().closeAppLayout();
@@ -407,6 +403,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		if (control instanceof SR6CharacterGenerator) {
 			// Don't allow finishing, when there is a stopper
 			btnFinish.setDisable(control.getToDos().stream().anyMatch(td -> td.getSeverity()==Severity.STOPPER));
+			btnWizard.setVisible(true);
+		} else {
+			btnWizard.setVisible(false);
 		}
 	}
 
@@ -428,6 +427,14 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	private void closeRequested() {
 		logger.log(Level.DEBUG, "ENTER closeRequested");
+	}
+
+	//-------------------------------------------------------------------
+	private void openWizard() {
+		logger.log(Level.DEBUG, "reopen wizard");
+		GenerationWizard wizard = new GenerationWizard((GeneratorWrapper) control);
+		CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
+		logger.log(Level.DEBUG, "Wizard closed via {0}",close);
 	}
 
 	//-------------------------------------------------------------------

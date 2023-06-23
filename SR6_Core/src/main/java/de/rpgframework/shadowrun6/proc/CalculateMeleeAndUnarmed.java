@@ -105,7 +105,6 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			}
 		}
 		SR6GearTool.recalculate("", model, unarmed);
-		logger.log(Level.ERROR, "Unarmed AR = "+Arrays.toString((int[])unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue()));
 
 		// Prepare modifications to add
 		ValueModification strDMGBonus = null;

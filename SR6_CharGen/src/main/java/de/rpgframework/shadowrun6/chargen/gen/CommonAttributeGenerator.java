@@ -100,12 +100,12 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 			return Possible.FALSE;
 		int max = getMaximumValue(value.getModifyable());
 		if (value.getDistributed()>=max) {
-			logger.log(Level.WARNING, "Attribute {0} is already at maximum {1}", value.getModifyable(), max);
+			logger.log(Level.DEBUG, "Attribute {0} is already at maximum {1}", value.getModifyable(), max);
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 		}
 		if ((value.getDistributed()+1)==max) {
 			if (isAnotherAttributeAlreadyMaxed(value.getModifyable())) {
-				logger.log(Level.WARNING, "Attribute {0} is not at maximum {1}, but another attribute is", value.getModifyable(), max);
+				logger.log(Level.DEBUG, "Attribute {0} is not at maximum {1}, but another attribute is", value.getModifyable(), max);
 				return Possible.FALSE;
 			}
 		}
