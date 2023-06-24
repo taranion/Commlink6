@@ -35,6 +35,7 @@ import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 
 /**
  * @author prelle
@@ -223,15 +224,6 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			logger.log(Level.INFO, "{0} Nuyen available", model.getNuyen());
 
 
-
-			/* Expand PACKs */
-			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
-				if (getItemType(tmp)==ItemType.PACK) {
-					logger.log(Level.WARNING, "ToDo: handle PACK "+tmp);
-				}
-			}
-
-
 			logger.log(Level.DEBUG, "Modifiers {0}",priceMods);
 
 			/*
@@ -387,6 +379,17 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 //		if (!item.getResolved().isCountable()) return false;
 
 		return true;
+	}
+
+
+	//-------------------------------------------------------------------
+	public void expandPACK(CarriedItem<ItemTemplate> item) {
+		logger.log(Level.ERROR, "TODO: expandPACK");
+		for (Modification mod : item.getModifications() ) {
+			logger.log(Level.ERROR, "Expand "+mod);
+			ApplyModificationsGeneric.applyModification(getModel(), mod);
+		}
+		//System.exit(1);
 	}
 
 }
