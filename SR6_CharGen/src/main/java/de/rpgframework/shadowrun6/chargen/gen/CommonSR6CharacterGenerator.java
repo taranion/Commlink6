@@ -9,6 +9,7 @@ import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.RuleController;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
@@ -20,6 +21,9 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CritterPowerController;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 /**
  * @author prelle
@@ -111,6 +115,13 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 		return true;
 	}
 
+	//-------------------------------------------------------------------
+	public static ItemType getItemType(CarriedItem<ItemTemplate> model) {
+		if (model.hasAttribute(SR6ItemAttribute.ITEMTYPE))
+			return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+		return null;
+	}
+
 	// -------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#finish()
@@ -131,6 +142,14 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 		if (model.getNuyen()>maxNuyen) {
 			logger.log(Level.WARNING, "Needed to reduce free Karma from {0} to {1}", model.getNuyen(), maxNuyen);
 			model.setNuyen( Math.min(model.getNuyen(), maxNuyen));
+		}
+
+		/* Expand PACKs */
+		for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
+			if (getItemType(tmp)==ItemType.PACK) {
+				logger.log(Level.WARNING, "ToDo: handle PACK "+tmp);
+				System.err.println("ToDo: Expand PACK "+tmp);
+			}
 		}
 
 	}
