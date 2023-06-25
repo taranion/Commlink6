@@ -149,6 +149,8 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 			if (getItemType(tmp)==ItemType.PACK) {
 				logger.log(Level.WARNING, "ToDo: handle PACK "+tmp);
 				System.err.println("ToDo: Expand PACK "+tmp);
+				((CommonEquipmentGenerator)getEquipmentController()).expandPACK(tmp);
+				model.removeCarriedItem(tmp);
 			}
 		}
 
