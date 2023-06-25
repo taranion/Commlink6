@@ -6,17 +6,19 @@
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="respirator">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
+         </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="jammer" variant="area">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
-                </itemmod>
+         </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="grapple_gun" />
          <itemmod type="GEAR" apply="CHARACTER" ref="standard_rope" />
          <itemmod type="GEAR" apply="CHARACTER" ref="gas_mask" />
          <itemmod type="GEAR" apply="CHARACTER" ref="gecko_tape_gloves" />
          <itemmod type="GEAR" apply="CHARACTER" ref="climbing_gear" />
          <itemmod type="GEAR" apply="CHARACTER" ref="hermes_ikon" id="dafa952f-ccc5-4bc6-8c08-ed372e409d02" />
-         <embed type="GEAR" ref="mapsoft" intoId="dafa952f-ccc5-4bc6-8c08-ed372e409d02" intoType="HOOK" intoRef="SOFTWARE"/>
+         <embed type="GEAR" ref="mapsoft" intoId="dafa952f-ccc5-4bc6-8c08-ed372e409d02" intoType="HOOK" intoRef="SOFTWARE">
+         	<decision choice="47d1e468-6df7-43ce-9651-44485cc78bb8" value="i18n.localArea"/>
+         </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="meta_link" />
          <itemmod type="GEAR" apply="CHARACTER" ref="micro-transceiver" />
          <itemmod type="GEAR" apply="CHARACTER" ref="miniwelder" />
@@ -33,9 +35,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="trid_projector" />
          <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
          <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
-         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable SINs -->
-                <!-- </itemmod> -->
+         <valmod type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
          <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
                 <!-- </valmod> -->
@@ -1584,7 +1584,9 @@
          <valmod type="GEAR" apply="CHARACTER" ref="flash_pak" value="2" />
          <itemmod type="GEAR" apply="CHARACTER" ref="gas_mask" />
          <itemmod type="GEAR" apply="CHARACTER" ref="gecko_tape_gloves" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="mapsoft" />
+         <embed type="GEAR" ref="mapsoft" intoId="dafa952f-ccc5-4bc6-8c08-ed372e409d02" intoType="HOOK" intoRef="SOFTWARE">
+         	<decision choice="47d1e468-6df7-43ce-9651-44485cc78bb8" value="i18n.localArea"/>
+         </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="climbing_gear" />
          <itemmod type="GEAR" apply="CHARACTER" ref="hermes_ikon" />
          <itemmod type="GEAR" apply="CHARACTER" ref="meta_link" />
@@ -1604,9 +1606,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="trid_projector" />
          <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
          <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
-         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: SINs -->
-                <!-- </itemmod> -->
+         <valmod type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
          <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
                 <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
                 <!-- </valmod> -->

@@ -2068,6 +2068,8 @@ public class SR6ArchetypeTest {
 		assertEquals(50, model.getKarmaFree());
 
 		charGen.getEquipmentController().select(Shadowrun6Core.getItem(ItemTemplate.class, "starterpack"));
+		charGen.runProcessors();
+		charGen.runProcessors();
 		System.out.println("testPACK.finish");
 
 		charGen.finish();

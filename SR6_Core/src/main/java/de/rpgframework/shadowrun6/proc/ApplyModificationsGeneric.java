@@ -29,6 +29,8 @@ import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.SIN;
+import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
@@ -75,6 +77,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				case LIFESTYLE  : return applyLifestyle(model, mod);
 				case QUALITY    : return applyQuality(model, mod);
 				case RULE       : return applyRule(model, mod);
+				case SIN        : return applySIN(model, mod);
 				case SKILL		:
 					if (mod instanceof ValueModification)
 						return applySkill(model, (ValueModification) mod);
@@ -398,6 +401,27 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		} else {
 			model.addRuleFlag(item);
 			logger.log(Level.DEBUG, "Set rule {0} to character", item);
+		}
+		return true;
+	}
+
+	//-------------------------------------------------------------------
+	private static boolean applySIN(Shadowrun6Character model, DataItemModification mod) {
+		if (mod.getSource()==null)
+			throw new IllegalArgumentException("No source in modification");
+		int count =1;
+		if (mod instanceof ValueModification) count=((ValueModification)mod).getValue();
+
+		for (int i=0; i<count; i++) {
+			SIN sin = new SIN(FakeRating.valueOf(mod.getKey()));
+			sin.setName("Jane Doe");
+			if (count>1)
+				sin.setName("Jane Doe "+(i+1));
+			sin.setInjectedBy(mod.getSource());
+			if (mod.getId()!=null && count==1)
+				sin.setUniqueId(mod.getId());
+			logger.log(Level.WARNING, "Inject SIN {0} (from {1})", sin.getUniqueId(), mod.getSource());
+			model.addSIN(sin);
 		}
 		return true;
 	}
