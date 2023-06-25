@@ -2068,6 +2068,9 @@ public class SR6ArchetypeTest {
 		assertEquals(50, model.getKarmaFree());
 
 		charGen.getEquipmentController().select(Shadowrun6Core.getItem(ItemTemplate.class, "starterpack"));
+		System.out.println("testPACK.finish");
+
+		charGen.finish();
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);

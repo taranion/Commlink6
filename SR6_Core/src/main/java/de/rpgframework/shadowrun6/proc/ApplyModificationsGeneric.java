@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.DataItemModification;
+import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.AdeptPower;
@@ -35,6 +36,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
@@ -255,11 +257,30 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.ERROR, "Failed creating {0}/{1}/{2}: {3}", mod.getKey(), mod.getVariant(), carry, result.getError());
 			return false;
 		}
+		if (mod.getId()!=null)
+			result.get().setUuid(mod.getId());
 		result.get().setInjectedBy(mod.getSource());
 		result.get().addModification(mod);
 
-		logger.log(Level.DEBUG, "Put item in inventory: {0}   (from {1})", result.get(), mod.getSource());
-		model.addVirtualCarriedItem(result.get());
+		if (mod instanceof EmbedModification) {
+			EmbedModification embed = (EmbedModification)mod;
+			CarriedItem<ItemTemplate> target = model.getCarriedItem(embed.getIntoId());
+			if (target==null) {
+				logger.log(Level.WARNING, "<embed> specifies unknown item {0}", embed.getIntoId());
+				return false;
+			}
+			AvailableSlot slot = target.getSlot(embed.getHook());
+			if (slot==null) {
+				logger.log(Level.WARNING, "<embed> specifies unknown slot {0} in item {1}", embed.getHook(), target);
+				return false;
+			}
+			logger.log(Level.ERROR, "Put item {0} into slot {1} of {2}", result.get(), embed.getHook(), target);
+			target.addAccessory(result.get(), embed.getHook());
+			slot.addEmbeddedItem(target);
+		} else {
+			logger.log(Level.DEBUG, "Put item in inventory: {0}   (from {1})", result.get(), mod.getSource());
+			model.addVirtualCarriedItem(result.get());
+		}
 		return true;
 	}
 
