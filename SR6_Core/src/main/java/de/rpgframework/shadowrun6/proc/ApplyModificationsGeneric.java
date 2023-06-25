@@ -26,6 +26,7 @@ import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
+import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
@@ -74,6 +75,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				case ATTRIBUTE  : return applyAttribute(model, (ValueModification) mod);
 				case CRITTER_POWER: return applyCritterPower(model, mod);
 				case GEAR       : return applyGear(model, mod);
+				case LICENSE    : return applyLicense(model, mod);
 				case LIFESTYLE  : return applyLifestyle(model, mod);
 				case QUALITY    : return applyQuality(model, mod);
 				case RULE       : return applyRule(model, mod);
@@ -420,8 +422,29 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			sin.setInjectedBy(mod.getSource());
 			if (mod.getId()!=null && count==1)
 				sin.setUniqueId(mod.getId());
-			logger.log(Level.WARNING, "Inject SIN {0} (from {1})", sin.getUniqueId(), mod.getSource());
+			logger.log(Level.DEBUG, "Inject SIN {0} (from {1})", sin.getUniqueId(), mod.getSource());
 			model.addSIN(sin);
+		}
+		return true;
+	}
+
+	//-------------------------------------------------------------------
+	private static boolean applyLicense(Shadowrun6Character model, DataItemModification mod) {
+		if (mod.getSource()==null)
+			throw new IllegalArgumentException("No source in modification");
+		int count =1;
+		if (mod instanceof ValueModification) count=((ValueModification)mod).getValue();
+
+		for (int i=0; i<count; i++) {
+			LicenseValue tmp = new LicenseValue("Undefined",FakeRating.valueOf(mod.getKey()));
+			tmp.setName("Undefined License");
+			if (count>1)
+				tmp.setName("Undefined License "+(i+1));
+			tmp.setInjectedBy(mod.getSource());
+			if (mod.getId()!=null && count==1)
+				tmp.setUniqueId(mod.getId());
+			logger.log(Level.DEBUG, "Inject License {0} (from {1})", tmp.getUniqueId(), mod.getSource());
+			model.addLicense(tmp);
 		}
 		return true;
 	}

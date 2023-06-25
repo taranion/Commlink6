@@ -35,10 +35,8 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="trid_projector" />
          <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
          <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
-         <valmod type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
-                <!-- </valmod> -->
+         <valmod  type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
+         <valmod  type="LICENSE" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
       </modifications>
    </item>
@@ -1607,9 +1605,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
          <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
          <valmod type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
-                <!-- </valmod> -->
+         <valmod  type="LICENSE" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
       </modifications>
    </item>
