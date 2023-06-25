@@ -14,10 +14,12 @@ import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
+import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Movement;
 import de.rpgframework.shadowrun.Movement.MovementType;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -72,6 +74,20 @@ public class ResetModifications implements ProcessingStep {
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				if (item.isAutoAdded() || ItemTemplate.UUID_UNARMED.equals(item.getUuid())) {
 					model.removeCarriedItem(item);
+				}
+			}
+
+			// Remove all auto-added SINs
+			for (SIN sin : new ArrayList<>(model.getSINs())) {
+				if (sin.getInjectedBy()!=null) {
+					model.removeSIN(sin);
+				}
+			}
+
+			// Remove all auto-added License
+			for (LicenseValue tmp : new ArrayList<>(model.getLicenses())) {
+				if (tmp.getInjectedBy()!=null) {
+					model.removeLicense(tmp);
 				}
 			}
 
