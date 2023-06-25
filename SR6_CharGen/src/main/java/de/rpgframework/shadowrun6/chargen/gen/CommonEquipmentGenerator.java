@@ -385,9 +385,24 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	//-------------------------------------------------------------------
 	public void expandPACK(CarriedItem<ItemTemplate> item) {
 		logger.log(Level.ERROR, "TODO: expandPACK");
-		for (Modification mod : item.getModifications() ) {
-			logger.log(Level.ERROR, "Expand "+mod);
+		for (Modification mod : item.getCharacterModifications() ) {
+			logger.log(Level.ERROR, "Expand "+mod.getClass()+" = "+mod);
 			ApplyModificationsGeneric.applyModification(getModel(), mod);
+		}
+		for (Modification mod : item.getModifications() ) {
+			logger.log(Level.ERROR, "Expand "+mod.getClass()+" = "+mod);
+			ApplyModificationsGeneric.applyModification(getModel(), mod);
+		}
+
+		// Move all virtual items from this pack to normal items
+		for (CarriedItem<ItemTemplate> virt : getModel().getVirtualCarriedItems()) {
+//			logger.log(Level.INFO, "Check "+virt+" from "+virt.getInjectedBy()+" or "+item);
+			if (virt.getInjectedBy()==item.getResolved()) {
+				getModel().removeVirtualCarriedItem(virt);
+				getModel().addCarriedItem(virt);
+			} else {
+				logger.log(Level.INFO, "Keep "+virt+" from "+virt.getInjectedBy());
+			}
 		}
 		//System.exit(1);
 	}

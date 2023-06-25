@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.DataItemModification;
+import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.AdeptPower;
@@ -25,9 +26,12 @@ import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
+import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.SIN;
+import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
@@ -35,6 +39,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
@@ -70,9 +75,11 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				case ATTRIBUTE  : return applyAttribute(model, (ValueModification) mod);
 				case CRITTER_POWER: return applyCritterPower(model, mod);
 				case GEAR       : return applyGear(model, mod);
+				case LICENSE    : return applyLicense(model, mod);
 				case LIFESTYLE  : return applyLifestyle(model, mod);
 				case QUALITY    : return applyQuality(model, mod);
 				case RULE       : return applyRule(model, mod);
+				case SIN        : return applySIN(model, mod);
 				case SKILL		:
 					if (mod instanceof ValueModification)
 						return applySkill(model, (ValueModification) mod);
@@ -255,11 +262,30 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.ERROR, "Failed creating {0}/{1}/{2}: {3}", mod.getKey(), mod.getVariant(), carry, result.getError());
 			return false;
 		}
+		if (mod.getId()!=null)
+			result.get().setUuid(mod.getId());
 		result.get().setInjectedBy(mod.getSource());
 		result.get().addModification(mod);
 
-		logger.log(Level.DEBUG, "Put item in inventory: {0}   (from {1})", result.get(), mod.getSource());
-		model.addVirtualCarriedItem(result.get());
+		if (mod instanceof EmbedModification) {
+			EmbedModification embed = (EmbedModification)mod;
+			CarriedItem<ItemTemplate> target = model.getCarriedItem(embed.getIntoId());
+			if (target==null) {
+				logger.log(Level.WARNING, "<embed> specifies unknown item {0}", embed.getIntoId());
+				return false;
+			}
+			AvailableSlot slot = target.getSlot(embed.getHook());
+			if (slot==null) {
+				logger.log(Level.WARNING, "<embed> specifies unknown slot {0} in item {1}", embed.getHook(), target);
+				return false;
+			}
+			logger.log(Level.ERROR, "Put item {0} into slot {1} of {2}", result.get(), embed.getHook(), target);
+			target.addAccessory(result.get(), embed.getHook());
+			slot.addEmbeddedItem(target);
+		} else {
+			logger.log(Level.DEBUG, "Put item in inventory: {0}   (from {1})", result.get(), mod.getSource());
+			model.addVirtualCarriedItem(result.get());
+		}
 		return true;
 	}
 
@@ -377,6 +403,48 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		} else {
 			model.addRuleFlag(item);
 			logger.log(Level.DEBUG, "Set rule {0} to character", item);
+		}
+		return true;
+	}
+
+	//-------------------------------------------------------------------
+	private static boolean applySIN(Shadowrun6Character model, DataItemModification mod) {
+		if (mod.getSource()==null)
+			throw new IllegalArgumentException("No source in modification");
+		int count =1;
+		if (mod instanceof ValueModification) count=((ValueModification)mod).getValue();
+
+		for (int i=0; i<count; i++) {
+			SIN sin = new SIN(FakeRating.valueOf(mod.getKey()));
+			sin.setName("Jane Doe");
+			if (count>1)
+				sin.setName("Jane Doe "+(i+1));
+			sin.setInjectedBy(mod.getSource());
+			if (mod.getId()!=null && count==1)
+				sin.setUniqueId(mod.getId());
+			logger.log(Level.DEBUG, "Inject SIN {0} (from {1})", sin.getUniqueId(), mod.getSource());
+			model.addSIN(sin);
+		}
+		return true;
+	}
+
+	//-------------------------------------------------------------------
+	private static boolean applyLicense(Shadowrun6Character model, DataItemModification mod) {
+		if (mod.getSource()==null)
+			throw new IllegalArgumentException("No source in modification");
+		int count =1;
+		if (mod instanceof ValueModification) count=((ValueModification)mod).getValue();
+
+		for (int i=0; i<count; i++) {
+			LicenseValue tmp = new LicenseValue("Undefined",FakeRating.valueOf(mod.getKey()));
+			tmp.setName("Undefined License");
+			if (count>1)
+				tmp.setName("Undefined License "+(i+1));
+			tmp.setInjectedBy(mod.getSource());
+			if (mod.getId()!=null && count==1)
+				tmp.setUniqueId(mod.getId());
+			logger.log(Level.DEBUG, "Inject License {0} (from {1})", tmp.getUniqueId(), mod.getSource());
+			model.addLicense(tmp);
 		}
 		return true;
 	}

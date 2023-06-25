@@ -78,9 +78,10 @@ public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
 								if (attrib2==null) {
 									logger.log(Level.ERROR, "####"+ valMod.getRawValue());
 									model.setAttribute(key, attrib);
+								} else {
+									logger.log(Level.DEBUG, "Add modification {0} to {1}", mod, attrib2);
+									attrib2.addModification(mod);
 								}
-								logger.log(Level.DEBUG, "Add modification {0} to {1}", mod, attrib2);
-								attrib2.addModification(mod);
 							}
 						} else
 							passUp.add(mod);

@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.ToDoElement;
@@ -10,6 +11,8 @@ import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.shadowrun.LicenseValue;
+import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IMagicOrResonanceController;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
@@ -149,6 +152,22 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 			if (getItemType(tmp)==ItemType.PACK) {
 				logger.log(Level.WARNING, "ToDo: handle PACK "+tmp);
 				System.err.println("ToDo: Expand PACK "+tmp);
+
+				// Remove all auto-added SINs
+				for (SIN sin : new ArrayList<>(model.getSINs())) {
+					if (sin.getInjectedBy()==tmp.getResolved()) {
+						model.removeSIN(sin);
+					}
+				}
+
+				// Remove all auto-added License
+				for (LicenseValue lic : new ArrayList<>(model.getLicenses())) {
+					if (lic.getInjectedBy()==tmp.getResolved()) {
+						model.removeLicense(lic);
+					}
+				}
+				((CommonEquipmentGenerator)getEquipmentController()).expandPACK(tmp);
+				model.removeCarriedItem(tmp);
 			}
 		}
 

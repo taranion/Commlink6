@@ -97,40 +97,6 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 
-//	// -------------------------------------------------------------------
-//	@SuppressWarnings("rawtypes")
-//	private void applyModification(Lifeform charac, CarriedItem<ItemTemplate> model, ValueModification mod) {
-//		if (mod.getApplyTo() == ApplyTo.CHARACTER) {
-//			logger.log(Level.WARNING, "Ignore for now " + mod);
-//			model.addCharacterModification(mod);
-//			return;
-//		}
-//
-//		switch ((ShadowrunReference) mod.getReferenceType()) {
-//		case HOOK:
-//			ItemHook hook = mod.getResolvedKey();
-//			Formula form = mod.getFormula();
-//			AAvailableSlot<ItemHook,ItemTemplate> slot = null;
-//			if (mod.getRawValue()==null) {
-//				logger.log(Level.WARNING, "No value in Hook modification from "+mod.getSource()+" - assume 1");
-//				slot = new AvailableSlot(hook,1);
-//			} else {
-//				slot = new AvailableSlot(hook, mod.getValue());
-//			}
-//			model.addSlot(slot);
-//			logger.log(Level.INFO, "Added slot {0} with capacity {1}", hook, slot.getCapacity());
-//			return;
-//		case ITEM_ATTRIBUTE:
-//			logger.log(Level.INFO, "Found modification " + mod);
-//			ItemUtil.addOrSetItemAttribute(model, mod);
-//			model.addModification(mod);
-//			return;
-//		default:
-//			logger.log(Level.WARNING, "Don't know how to deal with:" + mod);
-//			return;
-//		}
-//	}
-
 	// -------------------------------------------------------------------
 	@SuppressWarnings("rawtypes")
 	private boolean applyModification(boolean strict, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
