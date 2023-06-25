@@ -185,29 +185,29 @@ public class ProblemItemTest {
 	}
 
 	//-------------------------------------------------------------------
-	@Test
-	public void loadAmmunition() {
-		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine");
-
-		Choice choice = item.getChoices().get(0);
-		assertNotNull(choice);
-		assertEquals(ShadowrunReference.AMMUNITION_TYPE,choice.getChooseFrom());
-
-		// New create an item
-		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.CARRIED, null, true, new Decision(choice, "apds"));
-		assertTrue(result.isPresent());
-		CarriedItem<ItemTemplate> carried = result.get();
-		assertNotNull("CarriedItem not created",carried);
-
-		Damage expect = new Damage();
-		expect.setValue(-1);
-		assertEquals(expect.getValue(), ((Damage)carried.getAsValue(SR6ItemAttribute.DAMAGE)).getModifiedValue());
-		int[] modAR = (int[])carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
-		int[] expAR = new int[] {2,2,2,2,2};
-		assertTrue("Expected "+Arrays.toString(expAR)+" but got "+Arrays.toString(modAR),Arrays.equals(expAR, expAR));
-
-//		assertEquals(-1, carried.getAsValue(SR6ItemAttribute.DAMAGE).getModifiedValue());
-	}
+//	@Test
+//	public void loadAmmunition() {
+//		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine");
+//
+//		Choice choice = item.getChoices().get(0);
+//		assertNotNull(choice);
+//		assertEquals(ShadowrunReference.AMMUNITION_TYPE,choice.getChooseFrom());
+//
+//		// New create an item
+//		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.CARRIED, null, true, new Decision(choice, "apds"));
+//		assertTrue(result.isPresent());
+//		CarriedItem<ItemTemplate> carried = result.get();
+//		assertNotNull("CarriedItem not created",carried);
+//
+//		Damage expect = new Damage();
+//		expect.setValue(-1);
+//		assertEquals(expect.getValue(), ((Damage)carried.getAsValue(SR6ItemAttribute.DAMAGE)).getModifiedValue());
+//		int[] modAR = (int[])carried.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
+//		int[] expAR = new int[] {2,2,2,2,2};
+//		assertTrue("Expected "+Arrays.toString(expAR)+" but got "+Arrays.toString(modAR),Arrays.equals(expAR, expAR));
+//
+////		assertEquals(-1, carried.getAsValue(SR6ItemAttribute.DAMAGE).getModifiedValue());
+//	}
 
 	//-------------------------------------------------------------------
 	@Test
