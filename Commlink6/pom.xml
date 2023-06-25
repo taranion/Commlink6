@@ -19,8 +19,8 @@
 
 	<properties>
 		<javafx.version>20.0.1</javafx.version>
-		<maven.skip.deploy>true</maven.skip.deploy>
-		<maven.skip.install>true</maven.skip.install>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.install.skip>true</maven.install.skip>
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
 		<attach.version>4.0.18</attach.version>
 		<rpgfw.version>5.1.4-SNAPSHOT</rpgfw.version>
@@ -162,12 +162,6 @@
 		</dependency>
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>jfrog</id>
-			<url>https://rpgframework.jfrog.io/artifactory/RPGFramework</url>
-		</repository>
-	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>ossrh</id>
