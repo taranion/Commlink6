@@ -908,6 +908,11 @@ public class Shadowrun6Tools {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
 			boolean negated = tmp.isNegate();
 			ShadowrunReference type = (ShadowrunReference)tmp.getType();
+			Object foo = ShadowrunReference.resolve(type, req.getKey());
+			if (!(foo instanceof DataItem)) {
+				logger.log(Level.WARNING, "Character requirement check not implemented for {0}",type);
+				return true;
+			}
 			DataItem item = ShadowrunReference.resolve(type, req.getKey());
 			switch (type) {
 			case ADEPT_POWER:

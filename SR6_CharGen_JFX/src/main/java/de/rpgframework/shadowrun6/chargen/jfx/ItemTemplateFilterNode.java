@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -86,6 +87,12 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 		cbTypes.getItems().addAll(ItemType.values());
 		if (!allowedTypes.isEmpty())
 			cbTypes.getItems().setAll(allowedTypes);
+		Collections.sort(cbTypes.getItems(), new Comparator<ItemType>() {
+			public int compare(ItemType o1, ItemType o2) {
+				// TODO Auto-generated method stub
+				return Collator.getInstance().compare(o1.getName(Locale.getDefault()), o2.getName(Locale.getDefault()));
+			}
+		});
 		if (preselect!=null)
 			cbTypes.setValue(preselect);
 		cbTypes.setConverter(new StringConverter<ItemType>() {

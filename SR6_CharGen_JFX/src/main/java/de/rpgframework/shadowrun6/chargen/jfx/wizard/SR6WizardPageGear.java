@@ -68,6 +68,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 
 	// Shall character requirements be ignored
 	private CheckBox cbIgnoreRequirements;
+	private CheckBox cbShowAutoAdded;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageGear(Wizard wizard, SR6CharacterController charGen) {
@@ -105,8 +106,10 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 
 		//selection.setFilterNode(new ItemTemplateFilterNode(RES, selection, ItemType.PACK));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getEquipmentController()));
+		selection.setSelectedFilter( ci -> !ci.isAutoAdded() || cbShowAutoAdded.isSelected());
 
 		cbIgnoreRequirements = new CheckBox(ResourceI18N.get(RES, "page.gear.rule.ignoreGearRequirements"));
+		cbShowAutoAdded = new CheckBox(ResourceI18N.get(RES, "page.gear.rule.showAutoAdded"));
 	}
 
 	//-------------------------------------------------------------------
@@ -137,7 +140,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 			super.setBackHeader(backHeader);
 //		}
 
-		setBackContent(cbIgnoreRequirements);
+		setBackContent(new VBox(20,cbIgnoreRequirements,cbShowAutoAdded));
 
 		// Information about spent PP
 		Label hdConverted = new Label(ResourceI18N.get(RES, "page.gear.converted"));
@@ -172,6 +175,10 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 			logger.log(Level.INFO, "User chose cbIgnoreGearRequirements = "+n);
 			charGen.getModel().setRuleValue(Shadowrun6Rules.IGNORE_GEAR_REQUIREMENTS, String.valueOf(n));
 			charGen.runProcessors();
+		});
+		cbShowAutoAdded.selectedProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "User chose cbShowAutoAdded = "+n);
+			refresh();
 		});
 	}
 
