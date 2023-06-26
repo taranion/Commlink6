@@ -1728,28 +1728,13 @@ public class Shadowrun6Tools {
 	/*
 	 * Called from Shadowrun6_Print
 	 */
-	public static Damage getWeaponDamage(ShadowrunCharacter model, CarriedItem<ItemTemplate> item) {
-//		if (item.getResolved().getWeaponData()==null) {
-//			throw new IllegalArgumentException(item.getName()+" is not a weapon but a "+item.getItem().getTypes()+" and of type "+item.getItem().getClass());
-//		}
-
-//		return ((Damage)model.getItem("unarmed").getAsValue(ItemAttribute.DAMAGE));
-
+	public static Damage getWeaponDamage(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
 		Damage damage = (Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
-//		if (damage.isAddStrength()) {
-//			AttributeValue val = model.getAttribute(Attribute.STRENGTH);
-//			int strHalf = Math.round( val.getModifiedValue() / 2.0f);
-//			Damage damage2 = new Damage();
-//			damage2.setValue(damage.getValue() + strHalf);
-//			damage2.setType(damage.getType());
-//			damage2.setModifications(damage.getModifications());
-//			return damage2;
-//		}
 		return damage;
 	}
 
 	//-------------------------------------------------------------------
-	public static String getItemAttributeString(ShadowrunCharacter model, CarriedItem item, SR6ItemAttribute attr) {
+	public static String getItemAttributeString(Shadowrun6Character model, CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
 		if (!item.hasAttribute(attr)) return "-";
 		switch (attr) {
 		case FIREMODES:
