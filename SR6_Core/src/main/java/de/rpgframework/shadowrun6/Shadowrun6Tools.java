@@ -80,6 +80,8 @@ import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.SIN;
+import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
@@ -441,6 +443,12 @@ public class Shadowrun6Tools {
 					} else {
 						return skillName+" "+valMod.getValue();
 					}
+				case GEAR:
+					return valMod.getValue()+"x "+((ItemTemplate)valMod.getResolvedKey()).getName(loc);
+				case LICENSE:
+					return valMod.getValue()+"x "+RES.getString("modification.license", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
+				case SIN:
+					return valMod.getValue()+"x "+RES.getString("modification.sin", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
 				default:
 					logger.log(Level.WARNING, "Don't know how to display "+mod);
 					return null;
