@@ -88,7 +88,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			unarmedAR.addModification(reaMod);
 			unarmedAR.addModification(strMod);
 			unarmed.setAttribute(SR6ItemAttribute.ATTACK_RATING, unarmedAR);
-			unarmed.setAttribute(SR6ItemAttribute.DAMAGE, new Damage(2, DamageType.STUN, DamageElement.REGULAR));
+			unarmed.setAttribute(SR6ItemAttribute.DAMAGE, new ItemAttributeObjectValue<>(SR6ItemAttribute.DAMAGE, new Damage(2, DamageType.STUN, DamageElement.REGULAR)));
 			unarmed.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
 			unarmed.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<>(SR6ItemAttribute.ITEMTYPE, ItemType.WEAPON_CLOSE_COMBAT));
 			unarmed.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.UNARMED));
@@ -140,7 +140,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			case UNARMED:
 				if (strDMGBonus!=null) {
 					System.out.println("CalculateMelee: "+item.getAttributeRaw(SR6ItemAttribute.DAMAGE).getClass());
-					item.getAsValue(SR6ItemAttribute.DAMAGE).addModification(strDMGBonus);
+					item.getAsObject(SR6ItemAttribute.DAMAGE).addModification(strDMGBonus);
 					logger.log(Level.ERROR, "Add {0} to damage for {1}", strDMGBonus, item.getKey());
 				}
 			}

@@ -254,7 +254,7 @@ public class CombatSectionTools {
 				ret.add(entry);
 				entry.setCol2( String.valueOf( model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL).getModifiedValue() ));
 				Damage dv = new Damage();
-				dv.setDistributed( (int)Math.round( (double)model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue() /2.0) );
+				dv.setValue( (int)Math.round( (double)model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue() /2.0) );
 				entry.setCol3(  dv.toString() );
 				entry.setCol1( pool.toString() );
 				entry.setCol1Tooltip( pool.toExplainString() );
@@ -281,7 +281,7 @@ public class CombatSectionTools {
 		/* Data Spike */
 		AttackEntry entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "data_spike").getName(loc));
 		Damage dmg = new Damage();
-		dmg.setDistributed( (int)Math.round( (double)attack / 2.0));
+		dmg.setValue( (int)Math.round( (double)attack / 2.0));
 		entry.setCol1(cracking.toString());
 		entry.setCol1Tooltip(cracking.toExplainString());
 		entry.setCol2(dmg.toString());

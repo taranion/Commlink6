@@ -80,6 +80,8 @@ import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.SIN;
+import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.SkillType;
@@ -285,6 +287,8 @@ public class Shadowrun6Tools {
 				level = RES.getString("modification.value.level",loc)+"-1";
 		} else if ("$LEVEL*2".equals(valMod.getRawValue())) {
 			level = RES.getString("modification.value.level",loc)+"*2";
+		} else if (valMod.getRawValue().contains(".")) {
+			level = String.valueOf(valMod.getValueAsDouble());
 		} else
 			level = String.valueOf(valMod.getValue());
 		return level;
@@ -439,6 +443,12 @@ public class Shadowrun6Tools {
 					} else {
 						return skillName+" "+valMod.getValue();
 					}
+				case GEAR:
+					return valMod.getValue()+"x "+((ItemTemplate)valMod.getResolvedKey()).getName(loc);
+				case LICENSE:
+					return valMod.getValue()+"x "+RES.getString("modification.license", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
+				case SIN:
+					return valMod.getValue()+"x "+RES.getString("modification.sin", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
 				default:
 					logger.log(Level.WARNING, "Don't know how to display "+mod);
 					return null;
@@ -898,6 +908,11 @@ public class Shadowrun6Tools {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
 			boolean negated = tmp.isNegate();
 			ShadowrunReference type = (ShadowrunReference)tmp.getType();
+			Object foo = ShadowrunReference.resolve(type, req.getKey());
+			if (!(foo instanceof DataItem)) {
+				logger.log(Level.WARNING, "Character requirement check not implemented for {0}",type);
+				return true;
+			}
 			DataItem item = ShadowrunReference.resolve(type, req.getKey());
 			switch (type) {
 			case ADEPT_POWER:
@@ -1726,28 +1741,13 @@ public class Shadowrun6Tools {
 	/*
 	 * Called from Shadowrun6_Print
 	 */
-	public static Damage getWeaponDamage(ShadowrunCharacter model, CarriedItem<ItemTemplate> item) {
-//		if (item.getResolved().getWeaponData()==null) {
-//			throw new IllegalArgumentException(item.getName()+" is not a weapon but a "+item.getItem().getTypes()+" and of type "+item.getItem().getClass());
-//		}
-
-//		return ((Damage)model.getItem("unarmed").getAsValue(ItemAttribute.DAMAGE));
-
-		Damage damage = (Damage)item.getAsValue(SR6ItemAttribute.DAMAGE);
-//		if (damage.isAddStrength()) {
-//			AttributeValue val = model.getAttribute(Attribute.STRENGTH);
-//			int strHalf = Math.round( val.getModifiedValue() / 2.0f);
-//			Damage damage2 = new Damage();
-//			damage2.setValue(damage.getValue() + strHalf);
-//			damage2.setType(damage.getType());
-//			damage2.setModifications(damage.getModifications());
-//			return damage2;
-//		}
+	public static Damage getWeaponDamage(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
+		Damage damage = (Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
 		return damage;
 	}
 
 	//-------------------------------------------------------------------
-	public static String getItemAttributeString(ShadowrunCharacter model, CarriedItem item, SR6ItemAttribute attr) {
+	public static String getItemAttributeString(Shadowrun6Character model, CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
 		if (!item.hasAttribute(attr)) return "-";
 		switch (attr) {
 		case FIREMODES:

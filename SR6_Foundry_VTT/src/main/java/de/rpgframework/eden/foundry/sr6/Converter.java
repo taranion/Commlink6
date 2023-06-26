@@ -162,7 +162,7 @@ public class Converter {
 			if (tmp.getAttribute(SR6ItemAttribute.FIREMODES)!=null)
 				((FVTTWeapon)data).modes        = toVTTMode(tmp.getAttribute(SR6ItemAttribute.FIREMODES).getValue());
 			try {
-				((FVTTWeapon)data).dmg        = ((Damage)tmp.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getModifiedValue();
+				((FVTTWeapon)data).dmg        = ((Damage)tmp.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getValue();
 			} catch (IllegalStateException e) {
 				logger.log(Level.ERROR, "Error converting {0}: {1}", tmp.getId(), e.toString());
 			}
@@ -219,7 +219,7 @@ public class Converter {
 				if (tmp.getAttribute(SR6ItemAttribute.FIREMODES)!=null)
 					((FVTTWeapon)data).modes        = toVTTMode(tmp.getAttribute(SR6ItemAttribute.FIREMODES).getValue());
 				try {
-					((FVTTWeapon)data).dmg        = ((Damage)tmp.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getModifiedValue();
+					((FVTTWeapon)data).dmg        = ((Damage)tmp.getAttribute(SR6ItemAttribute.DAMAGE).getValue()).getValue();
 				} catch (IllegalStateException e) {
 					logger.log(Level.ERROR, "Error converting {}: {}", tmp.getId(), e.toString());
 				}

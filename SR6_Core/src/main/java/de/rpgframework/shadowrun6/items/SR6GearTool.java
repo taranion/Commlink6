@@ -97,7 +97,7 @@ public class SR6GearTool extends GearTool {
 
 	//-------------------------------------------------------------------
 	public static Damage calculateModifiedValue(Damage base, List<Modification> mods) {
-		Damage ret = new Damage(base, List.of());
+		Damage ret = new Damage(base);
 		for (Modification tmp : mods) {
 			logger.log(Level.ERROR, "########calculateModifiedDamageValue: TODO: "+tmp);
 			if (tmp instanceof ValueModification) {

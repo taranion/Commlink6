@@ -129,7 +129,7 @@ public class LoadSR6DataTest {
 		assertNotNull(def);
 		Damage dmg = def.getValue();
 		assertNotNull(def);
-		assertEquals(6,dmg.getModifiedValue());
+		assertEquals(6,dmg.getValue());
 		assertEquals(DamageType.STUN,dmg.getType());
 		assertEquals(DamageElement.ELECTRICITY,dmg.getElement());
 

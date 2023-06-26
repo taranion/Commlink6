@@ -6,6 +6,7 @@ package de.rpgframework.shadowrun6.items;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
@@ -284,6 +285,11 @@ public enum ItemType {
 	//-------------------------------------------------------------------
 	public String getName() {
 		return Shadowrun6Core.getI18nResources().getString("itemtype."+this.name().toLowerCase());
+	}
+
+	//-------------------------------------------------------------------
+	public String getName(Locale loc) {
+		return Shadowrun6Core.getI18nResources().getString("itemtype."+this.name().toLowerCase(), loc);
 	}
 
     public ItemSubType[] getSubTypes() {

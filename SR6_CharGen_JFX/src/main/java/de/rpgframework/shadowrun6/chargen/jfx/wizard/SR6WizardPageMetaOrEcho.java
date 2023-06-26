@@ -3,12 +3,13 @@ package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.jfx.cells.ComplexDataItemListCell;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageMetaOrEcho;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
@@ -24,8 +25,6 @@ public class SR6WizardPageMetaOrEcho extends AWizardPageMetaOrEcho {
 
 	private final static Logger logger = System.getLogger(SR6WizardPageMetaOrEcho.class.getPackageName()+".metaecho");
 
-	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageMetaOrEcho.class.getPackageName()+".SR6WizardPages");
-
 	//-------------------------------------------------------------------
 	public SR6WizardPageMetaOrEcho(Wizard wizard, GeneratorWrapper charGen) {
 		super(wizard, charGen);
@@ -37,6 +36,7 @@ public class SR6WizardPageMetaOrEcho extends AWizardPageMetaOrEcho {
 //		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getMetamagicOrEchoController()));
 //		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
+		selection.setAvailableCellFactory(lv -> new ComplexDataItemListCell<MetamagicOrEcho>( () -> selection.getController(), Shadowrun6Tools.requirementResolver(Locale.getDefault())));
 
 		bxDescription = new GenericDescriptionVBox(
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),

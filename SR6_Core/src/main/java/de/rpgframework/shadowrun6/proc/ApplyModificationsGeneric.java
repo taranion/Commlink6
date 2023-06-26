@@ -330,7 +330,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());
 		}
 
-		logger.log(Level.WARNING, "Add "+mod+" with decisions "+mod.getDecisions());
+		logger.log(Level.DEBUG, "Add {0} with decisions {1}",mod,mod.getDecisions());
 		if (value == null) {
 			value = new QualityValue(item, 0);
 			// Handle decisions

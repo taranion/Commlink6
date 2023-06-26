@@ -16,14 +16,12 @@ import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
-import de.rpgframework.shadowrun.chargen.gen.QualityGenerator;
-import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 
@@ -31,7 +29,7 @@ import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
  * @author prelle
  *
  */
-public class SR6FreeQualityGenerator extends QualityGenerator<Shadowrun6Character> implements IQualityController {
+public class SR6FreeQualityGenerator extends CommonQualityGenerator implements IQualityController {
 
 	private final static Logger logger = System.getLogger(SR6FreeQualityGenerator.class.getPackageName()+".quality");
 
@@ -58,15 +56,6 @@ public class SR6FreeQualityGenerator extends QualityGenerator<Shadowrun6Characte
 			return poss;
 
 		return Possible.TRUE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getChoicesToDecide(de.rpgframework.genericrpg.data.ComplexDataItem)
-	 */
-	@Override
-	public List<Choice> getChoicesToDecide(Quality value) {
-		return new ArrayList<Choice>( value.getChoices() );
 	}
 
 	//-------------------------------------------------------------------
@@ -150,19 +139,6 @@ public class SR6FreeQualityGenerator extends QualityGenerator<Shadowrun6Characte
 	}
 
 	//-------------------------------------------------------------------
-	private void calculateKarmaSURGE() {
-		karmaSURGE = 0;
-		for (QualityValue val : model.getQualities()) {
-			if (val.isAutoAdded())
-				continue;
-			Quality item = val.getResolved();
-			if (item.getType()!=QualityType.METAGENIC)
-				continue;
-			karmaSURGE += val.getKarmaCost();
-		}
-	}
-
-	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
@@ -241,36 +217,9 @@ public class SR6FreeQualityGenerator extends QualityGenerator<Shadowrun6Characte
 	public List<Quality> getAvailable() {
 		return Shadowrun6Core.getItemList(Quality.class).stream()
 				.filter(p -> parent.showDataItem(p))
-				.filter(p -> p.isFreeSelectable())
+//				.filter(p -> p.isFreeSelectable())
 				.filter(p -> !model.hasQuality(p.getId()) || p.isMulti())
 				.collect(Collectors.toList());
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
-	 */
-	@Override
-	public List<QualityValue> getSelected() {
-		return model.getQualities();
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public float getSelectionCost(Quality data) {
-		return data.getKarmaCost();
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public String getSelectionCostString(Quality data) {
-		return String.valueOf(getSelectionCostString(data));
 	}
 
 }

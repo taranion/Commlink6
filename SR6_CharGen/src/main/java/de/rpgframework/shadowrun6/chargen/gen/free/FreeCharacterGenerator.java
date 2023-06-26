@@ -1,9 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.gen.free;
 
 import java.lang.System.Logger.Level;
-import java.util.Locale;
 
-import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
@@ -29,11 +27,8 @@ import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 /**
  *
  */
-@GeneratorId("karma")
+@GeneratorId("free")
 public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
-
-	static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(FreeCharacterGenerator.class,
-			Locale.ENGLISH, Locale.GERMAN);
 
 	private boolean setupDone;
 
@@ -77,7 +72,7 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 	 */
 	@Override
 	public String getName() {
-		return RES.getString("generator.name");
+		return RES.getString("chargen.FreeCharacterGenerator");
 	}
 
 	//-------------------------------------------------------------------
@@ -86,7 +81,7 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 	 */
 	@Override
 	public String getDescription() {
-		return RES.getString("generator.desc");
+		return RES.getString("chargen.FreeCharacterGenerator.desc");
 	}
 
 	//-------------------------------------------------------------------
