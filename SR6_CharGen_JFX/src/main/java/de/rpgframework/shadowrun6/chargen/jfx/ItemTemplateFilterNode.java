@@ -35,22 +35,22 @@ import javafx.util.StringConverter;
  *
  */
 public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTemplate,CarriedItem<ItemTemplate>> {
-	
+
 	private final static Logger logger = System.getLogger(ItemTemplateFilterNode.class.getPackageName());
-	
+
 	private enum Sort {
 		NAME,
 		KARMA
 	}
-	
+
 	private ResourceBundle RES;
-	
+
 	private List<ItemType> allowedTypes;
 	private ChoiceBox<ItemType> cbTypes;
 	private ChoiceBox<ItemSubType> cbSubTypes;
 	private Button btnSort;
 	private TextField tfSearch;
-	
+
 	private Comparator<ItemTemplate> compareByName = new Comparator<ItemTemplate>() {
 		public int compare(ItemTemplate q1, ItemTemplate q2) {
 			return Collator.getInstance().compare(q1.getName(), q2.getName());
@@ -64,10 +64,10 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 			return c;
 		}
 	};
-	
+
 	private Sort currentSort = Sort.NAME;
 	private ItemType preselect;
-	
+
 	//-------------------------------------------------------------------
 	public ItemTemplateFilterNode(ResourceBundle RES, ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>> parent, ItemType preselect, ItemType...types) {
 		super(parent);
@@ -79,7 +79,7 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 		initInteractivity();
 		refreshAvailable();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		cbTypes = new ChoiceBox<ItemType>();
@@ -98,14 +98,14 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 			public ItemSubType fromString(String arg0) {return null;}
 		});
 		cbSubTypes.setStyle("-fx-min-width: 5em");
-		
+
 		btnSort = new Button(null,new SymbolIcon("sort"));
 		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "quality.sort.tooltip")));
-		
+
 		tfSearch = new TextField();
 		tfSearch.setPromptText(ResourceI18N.get(RES, "quality.search.prompt"));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		HBox line = new HBox(cbTypes, cbSubTypes, btnSort);
@@ -114,10 +114,10 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 		cbTypes.setMaxWidth(Double.MAX_VALUE);
 		cbSubTypes.setMaxWidth(Double.MAX_VALUE);
 		getChildren().addAll(line, tfSearch);
-		
+
 		VBox.setMargin(tfSearch, new Insets(5,0,5,0));
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 		btnSort.setOnAction(ev -> {
@@ -129,7 +129,7 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 
 			refreshAvailable();
 		});
-		
+
 		cbTypes.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.INFO, "Selection changed");
 			updateSubtypes();
@@ -138,10 +138,10 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 		cbSubTypes.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			refreshAvailable();
 		});
-		
+
 		tfSearch.textProperty().addListener( (ov,o,n) -> refreshAvailable());
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void updateSubtypes() {
 		ItemType n = cbTypes.getValue();
@@ -166,8 +166,8 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 		cbSubTypes.getItems().setAll(stList);
 		if (stList.contains(s))
 			cbSubTypes.getSelectionModel().select(s);
-	}	
-	
+	}
+
 	//-------------------------------------------------------------------
 	private void refreshAvailable() {
 		ItemType n = cbTypes.getValue();
@@ -180,7 +180,7 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 			.filter(q -> (s==null || s==q.getItemSubtype()))
 			.filter(q -> (search==null || search.isBlank() || q.getName().toLowerCase().contains(search)))
 			.collect(Collectors.toList());
-		
+
 		switch (currentSort) {
 		case NAME : Collections.sort(filtered, compareByName); break;
 		case KARMA: Collections.sort(filtered, compareByKarma); break;
@@ -197,4 +197,9 @@ public class ItemTemplateFilterNode extends ComplexDataItemListFilter<ItemTempla
 		refreshAvailable();
 	}
 
+	//-------------------------------------------------------------------
+	public void setSelected(ItemType value) {
+		preselect = value;
+		cbTypes.setValue(value);
+	}
 }

@@ -77,6 +77,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		initComponents();
 		initLayout();
 		initInteractivity();
+		((ItemTemplateFilterNode)selection.getFilterNode()).setSelected(ItemType.PACK);
 
 		charGen.addListener(this);
 	}
@@ -98,13 +99,12 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		selection.setAvailableCellFactory(lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController(), null));
 		selection.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell( () -> charGen.getEquipmentController()));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
+		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection,null));
 
 		bxDescription = new CarriedItemDescriptionPane(Shadowrun6Tools.requirementResolver(Locale.getDefault()), charGen);
 
-		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection, ItemType.PACK));
+		//selection.setFilterNode(new ItemTemplateFilterNode(RES, selection, ItemType.PACK));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getEquipmentController()));
-
-		Function<Requirement,String> resolver = (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault());
 
 		cbIgnoreRequirements = new CheckBox(ResourceI18N.get(RES, "page.gear.rule.ignoreGearRequirements"));
 	}
@@ -160,7 +160,6 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		btnDec.setOnAction(ev -> charGen.getEquipmentController().decreaseConversion());
 		btnInc.setOnAction(ev -> charGen.getEquipmentController().increaseConversion());
 		selection.showHelpForProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.INFO, "show help for "+n);
 			bxDescription.setData(n);
 			if (n!=null) {
 				layout.setTitle(n.getName());
