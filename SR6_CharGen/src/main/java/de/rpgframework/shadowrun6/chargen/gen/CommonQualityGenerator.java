@@ -210,7 +210,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 //	}
 
 	//-------------------------------------------------------------------
-	private void calculateKarmaSURGE() {
+	protected void calculateKarmaSURGE() {
 		karmaSURGE = 0;
 		for (QualityValue val : model.getQualities()) {
 			if (val.isAutoAdded())

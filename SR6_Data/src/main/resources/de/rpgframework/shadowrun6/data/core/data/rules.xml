@@ -21,7 +21,7 @@
 			<set rule="ADD_STRENGTH_TO_MELEE_AR" to="false"/>
 		</rules>
 	</interpretation>
-	<interpretation id="srm" lang="en" restrict="prio">
+	<interpretation id="srm" lang="en" restrict="prio,sumto10,pointbuy">
 		<rules>
 			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
 			<set rule="CHARGEN_MAX_INITIATION" to="1"/>
@@ -33,7 +33,7 @@
 			<set rule="CHARGEN_MAX_AVAILABILITY" to="6"/>
 		</rules>
 	</interpretation>
-	<interpretation id="core_de" lang="de">
+	<interpretation id="core_de" lang="de" restrict="prio,sumto10,pointbuy,karma">
 		<rules>
 			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
 			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="true"/>

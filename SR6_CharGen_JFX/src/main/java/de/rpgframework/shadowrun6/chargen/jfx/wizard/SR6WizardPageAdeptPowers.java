@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAdeptPowers;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.free.SR6FreeAdeptPowerGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaAdeptPowerGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAdeptPowerGenerator;
@@ -108,6 +109,8 @@ public class SR6WizardPageAdeptPowers extends WizardPageAdeptPowers {
 			lbValue.setText(String.valueOf(((PointBuyCharacterGenerator)real).getSettings().boughtPP  ));
 		} else if (ctrl instanceof SR6KarmaAdeptPowerGenerator) {
 			hdConvert.setText(ResourceI18N.get(RES, "page.adeptpowers.convertCP"));
+			backHeaderCP.setVisible(false);
+		} else if (ctrl instanceof SR6FreeAdeptPowerGenerator) {
 			backHeaderCP.setVisible(false);
 		} else {
 			logger.log(Level.ERROR,"Unsupported AdeptPowerController: "+ctrl.getClass());

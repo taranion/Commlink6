@@ -285,6 +285,8 @@ public class Shadowrun6Tools {
 				level = RES.getString("modification.value.level",loc)+"-1";
 		} else if ("$LEVEL*2".equals(valMod.getRawValue())) {
 			level = RES.getString("modification.value.level",loc)+"*2";
+		} else if (valMod.getRawValue().contains(".")) {
+			level = String.valueOf(valMod.getValueAsDouble());
 		} else
 			level = String.valueOf(valMod.getValue());
 		return level;
