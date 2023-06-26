@@ -40,7 +40,7 @@ public class CreateAlternatesStep implements CarriedItemProcessor {
 			CarriedItem<ItemTemplate> asMelee = new CarriedItem<ItemTemplate>();
 			asMelee.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<>(SR6ItemAttribute.ITEMTYPE, ItemType.WEAPON_CLOSE_COMBAT.name()));
 			asMelee.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.CLUBS.name()));
-			asMelee.setAttribute(SR6ItemAttribute.DAMAGE, new Damage(3, DamageType.STUN, DamageElement.REGULAR));
+			asMelee.setAttribute(SR6ItemAttribute.DAMAGE, new ItemAttributeObjectValue<>(SR6ItemAttribute.DAMAGE, new Damage(3, DamageType.STUN, DamageElement.REGULAR)));
 			asMelee.setAttribute(SR6ItemAttribute.ATTACK_RATING, new ItemAttributeObjectValue<>(SR6ItemAttribute.ATTACK_RATING, new int[] {4,0,0,0,0}));
 			logger.log(Level.INFO, "Add melee hardening: {0}", asMelee);
 			model.addAlternates(asMelee);

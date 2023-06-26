@@ -1735,7 +1735,7 @@ public class Shadowrun6Tools {
 
 //		return ((Damage)model.getItem("unarmed").getAsValue(ItemAttribute.DAMAGE));
 
-		Damage damage = (Damage)item.getAsValue(SR6ItemAttribute.DAMAGE);
+		Damage damage = (Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
 //		if (damage.isAddStrength()) {
 //			AttributeValue val = model.getAttribute(Attribute.STRENGTH);
 //			int strHalf = Math.round( val.getModifiedValue() / 2.0f);

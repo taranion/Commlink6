@@ -1,9 +1,5 @@
 package de.rpgframework.shadowrun6.items;
 
-import java.util.List;
-
-import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
-import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.items.IDamage;
@@ -12,32 +8,28 @@ import de.rpgframework.shadowrun.items.IDamage;
  * @author Stefan
  *
  */
-public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implements Cloneable, IDamage {
+public class Damage implements Cloneable, IDamage {
 
 	private DamageType type;
 	private DamageElement element = DamageElement.REGULAR;
+	protected int value;
 
 	//--------------------------------------------------------------------
 	public Damage() {
-		super(SR6ItemAttribute.DAMAGE);
 	}
 
 	//--------------------------------------------------------------------
 	public Damage(int val, DamageType type, DamageElement element) {
-		super(SR6ItemAttribute.DAMAGE);
 		this.value = val;
 		this.type = type;
 		this.element = element;
 	}
 
 	//--------------------------------------------------------------------
-	public Damage(Damage copy, List<Modification> mods) {
-		super(SR6ItemAttribute.DAMAGE);
-		super.modifications.addAll(mods);
+	public Damage(Damage copy) {
 		value       = copy.value;
 		type        = copy.getType();
 		element     = copy.getElement();
-		modifications.addAll(mods);
 	}
 
 	//-------------------------------------------------------------------
@@ -64,7 +56,7 @@ public class Damage extends ItemAttributeNumericalValue<SR6ItemAttribute> implem
 	//--------------------------------------------------------------------
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
-		buf.append(String.valueOf(getModifiedValue()));
+		buf.append(String.valueOf(getValue()));
 
 		if (type!=null)
 			buf.append(type.getShortName());
