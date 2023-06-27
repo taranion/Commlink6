@@ -12,7 +12,7 @@ import de.rpgframework.genericrpg.items.IGearTypeData;
 public class MatrixData implements IGearTypeData {
 
 	private transient ItemTemplate parent;
-	
+
 	@Attribute(name="a")
 	private Integer attack;
 	@Attribute(name="s")
@@ -49,8 +49,12 @@ public class MatrixData implements IGearTypeData {
 			copyTo.setAttribute(SR6ItemAttribute.FIREWALL, firewall);
 		if (programSlots!=null)
 			copyTo.setAttribute(SR6ItemAttribute.CONCURRENT_PROGRAMS, programSlots);
-		if (deviceRating!=null)
+		if (deviceRating!=null) {
 			copyTo.setAttribute(SR6ItemAttribute.DEVICE_RATING, deviceRating);
+			if (copyTo.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue()==ItemSubType.RIGGER_CONSOLE) {
+				copyTo.setAttribute(SR6ItemAttribute.NOISE_REDUCTION, deviceRating);
+			}
+		}
 	}
 
 }

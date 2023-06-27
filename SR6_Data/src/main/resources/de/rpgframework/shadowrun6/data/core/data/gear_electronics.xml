@@ -118,7 +118,7 @@
       <matrix a="9" s="8" programs="12" devrat="6"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
-   
+
    <!-- Rigger consoles -->
    <item avail="1L" price="1400" id="scratch_built_junk" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
 		<attrdef id="SOFTWARE_TYPES" value="RCC,AUTOSOFT"/>
@@ -127,7 +127,6 @@
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
 		<matrix d="3" f="2" devrat="1" programs="3" />
-		<attrdef id="NOISE_REDUCTION" value="1"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="3L" price="8000" id="allegiance_control_center" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
@@ -136,7 +135,6 @@
 			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
-		<attrdef id="NOISE_REDUCTION" value="2"/>
 		<matrix d="3" f="3" devrat="2" programs="3" />
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
@@ -147,7 +145,6 @@
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
 		<matrix d="4" f="4" devrat="3" programs="4"/>
-		<attrdef id="NOISE_REDUCTION" value="3"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="4L" price="32000" id="horizons_overseer" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
@@ -157,7 +154,6 @@
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
 		<matrix d="5" f="4" devrat="4" programs="5" />
-		<attrdef id="NOISE_REDUCTION" value="4"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="5L" price="34000" id="maersk_spider" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
@@ -167,7 +163,6 @@
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
 		<matrix d="4" f="5" devrat="4" programs="4" />
-		<attrdef id="NOISE_REDUCTION" value="5"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="5L" price="66000" id="vulcan_liegelord" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
@@ -177,7 +172,6 @@
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
 		<matrix d="6" f="5" devrat="5" programs="6"/>
-		<attrdef id="NOISE_REDUCTION" value="5"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="6L" price="68000" id="proteus_poseidon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
@@ -187,7 +181,6 @@
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
 		<matrix d="5" f="6" devrat="5" programs="5"/>
-		<attrdef id="NOISE_REDUCTION" value="5"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="7L" price="75000" id="transys_eidolon" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
@@ -197,7 +190,6 @@
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
 		<matrix d="6" f="5" devrat="6" programs="6"/>
-		<attrdef id="NOISE_REDUCTION" value="6"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="8L" price="95000" id="ares_red_dog_series" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
@@ -207,7 +199,6 @@
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
 		<matrix d="7" f="6" devrat="6" programs="7"/>
-		<attrdef id="NOISE_REDUCTION" value="6"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item avail="9L" price="140000" id="aztechnology_tlaloc" subtype="RIGGER_CONSOLE" type="ELECTRONICS">
@@ -217,10 +208,9 @@
 			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
 		</modifications>
 		<matrix d="8" f="7" devrat="6" programs="8"/>
-		<attrdef id="NOISE_REDUCTION" value="6"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
-   
+
    <!-- Accessories -->
    <item avail="2" price="100"  id="sim_module" subtype="ELECTRONIC_ACCESSORIES" type="ACCESSORY">
    	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
@@ -262,7 +252,7 @@
 	      <usage mode="IMPLANTED" value="0.2"/>
 			<attrdef id="PRICE" value="4000" />
 			<attrdef id="AVAILABILITY" value="4L" />
- 			<flags><flag>AUGMENTATION</flag></flags>  	
+ 			<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
    </item>
    <item avail="1" price="200"  id="trid_projector" subtype="ELECTRONIC_ACCESSORIES" type="ELECTRONICS">
@@ -282,7 +272,7 @@
    	<usage mode="EMBEDDED" slot="HELMET_ACCESSORY"/>
    	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
    </item>
-   
+
    <!-- RFID -->
    <item avail="1" price="1"  id="standard_tag" subtype="RFID" type="ELECTRONICS" count="y">
    	<attrdef id="DEVICE_RATING" value="1"/>
@@ -297,7 +287,7 @@
    <item avail="2" price="40" id="sensor_tag"   subtype="RFID" type="ELECTRONICS" count="y">
    	<attrdef id="DEVICE_RATING" value="2"/>
    </item>
-   
+
    <!-- Communication and Countermeasures -->
    <item avail="3" price="200" id="bug_scanner" subtype="COMMUNICATION" type="ELECTRONICS"/>
    <item avail="2" price="300" id="data_tap"    subtype="COMMUNICATION" type="ELECTRONICS" count="y"/>
@@ -332,5 +322,5 @@
    <item avail="2" price="100"  id="credstick_gold"     subtype="ID_CREDIT" type="ELECTRONICS"/>
    <item avail="3" price="500"  id="credstick_platin"   subtype="ID_CREDIT" type="ELECTRONICS"/>
    <item avail="5" price="1000" id="credstick_ebony"    subtype="ID_CREDIT" type="ELECTRONICS"/>
-   
+
 </items>
