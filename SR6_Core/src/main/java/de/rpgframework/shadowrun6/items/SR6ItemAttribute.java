@@ -103,6 +103,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	DATA_PROCESSING,
 	FIREWALL,
 	CONCURRENT_PROGRAMS,
+	NOISE_REDUCTION,
 	;
 
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
