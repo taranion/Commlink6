@@ -1,8 +1,217 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <npcs>
-  <npc id="assassin" type="SPRITE"/>
-  <npc id="defender" type="SPRITE"/>
-  <npc id="modular" type="SPRITE"/>
-  <npc id="music" type="SPRITE"/>
-  <npc id="primal" type="SPRITE"/>
+
+<!-- new sprites -->
+
+  <npc id="assassin" type="SPRITE">
+  		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="1" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING+3"/>
+  			<attrdef id="SLEAZE"   value="$RATING+2"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+1"/>
+  			<attrdef id="FIREWALL" value="$RATING"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="death_mark"/>
+			<critterpowerval ref="phantom" />
+			<critterpowerval ref="cybercombat_boost" />
+		</critterpowers>
+	</npc>
+
+  <npc id="defender" type="SPRITE">
+  		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="1" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING"/>
+  			<attrdef id="SLEAZE"   value="$RATING+1"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+2"/>
+  			<attrdef id="FIREWALL" value="$RATING+3"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="shield"/>
+			<critterpowerval ref="stability" />
+			<critterpowerval ref="signal_boost" />
+		</critterpowers>
+	</npc>
+
+  <npc id="modular" type="SPRITE">
+  		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="1" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING+1"/>
+  			<attrdef id="SLEAZE"   value="$RATING+2"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+1"/>
+  			<attrdef id="FIREWALL" value="$RATING+2"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+			<skillval ref="engineering" value="0"/>
+		</skills>
+		<critterpowers>
+			<!-- Powers can be selected by Technomancer -->
+		</critterpowers>
+	</npc>
+
+  <npc id="music" type="SPRITE">
+  		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="4" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING"/>
+  			<attrdef id="SLEAZE"   value="$RATING"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+4"/>
+  			<attrdef id="FIREWALL" value="$RATING"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+			<skillval ref="con"         value="0">
+				<skillspec ref="con/performance" />
+			</skillval>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="captivate"/>
+			<critterpowerval ref="harmonize" />
+			<critterpowerval ref="hyperthreading" />
+		</critterpowers>
+	</npc>
+
+  <npc id="primal" type="SPRITE">
+  		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="3" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING+3"/>
+  			<attrdef id="SLEAZE"   value="$RATING+1"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+3"/>
+  			<attrdef id="FIREWALL" value="$RATING+1"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="digital_scream"/>
+			<critterpowerval ref="fractal_dream" />
+		</critterpowers>
+	</npc>
+
+<!-- updates to base sprites -->
+
+	<npc id="courier" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="1" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING"/>
+  			<attrdef id="SLEAZE"   value="$RATING+3"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+1"/>
+  			<attrdef id="FIREWALL" value="$RATING+2"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="cookie"/>
+			<critterpowerval ref="hash" />
+			<critterpowerval ref="signal_boost" />
+		</critterpowers>
+	</npc>
+  <npc id="crack" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="2" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING"/>
+  			<attrdef id="SLEAZE"   value="$RATING+3"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+2"/>
+  			<attrdef id="FIREWALL" value="$RATING+1"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="phantom"/>
+			<critterpowerval ref="suppression" />
+			<critterpowerval ref="host_ken" />
+		</critterpowers>
+	</npc>
+  <npc id="data" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="4" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING-1"/>
+  			<attrdef id="SLEAZE"   value="$RATING"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+4"/>
+  			<attrdef id="FIREWALL" value="$RATING+1"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="camouflage"/>
+			<critterpowerval ref="watermark" />
+			<critterpowerval ref="hyperthreading" />
+			<critterpowerval ref="file_ken" />
+		</critterpowers>
+	</npc>
+  <npc id="fault" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="1" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING+3"/>
+  			<attrdef id="SLEAZE"   value="$RATING"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+1"/>
+  			<attrdef id="FIREWALL" value="$RATING+2"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="cracking"    value="0"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="electron_storm"/>
+			<critterpowerval ref="trap" />
+			<critterpowerval ref="cybercombat_boost" />
+		</critterpowers>
+	</npc>
+  <npc id="machine" type="SPRITE">
+		<attributes>
+			<attribute id="INITIATIVE_MATRIX_VR_HOT" value="3" />
+		</attributes>
+		<itemattr>
+  			<attrdef id="ATTACK"   value="$RATING+1"/>
+  			<attrdef id="SLEAZE"   value="$RATING"/>
+  			<attrdef id="DATA_PROCESSING" value="$RATING+3"/>
+  			<attrdef id="FIREWALL" value="$RATING+2"/>
+		</itemattr>
+		<skills>
+			<skillval ref="electronics" value="0"/>
+			<skillval ref="engineering" value="0"/>
+		</skills>
+		<critterpowers>
+			<critterpowerval ref="diagnostics"/>
+			<critterpowerval ref="override" />
+			<critterpowerval ref="stability" />
+			<critterpowerval ref="device_ken" />
+		</critterpowers>
+	</npc>
+
 </npcs>

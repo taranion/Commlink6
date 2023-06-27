@@ -1,29 +1,176 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <datastructures>
+
 	<datastructure id="admonisher">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="tasking" cond="y" value="1" what="HIT"/>
+			<checkmod type="SKILL" ref="tasking" cond="y" value="$RATING" what="DICE" /> <!-- decompile -->
 		</modifications>
 	</datastructure>
-	<datastructure id="bandersnatch" />
-	<datastructure id="code_shell" />
-	<datastructure id="data_blade" />
-	<datastructure id="drone_whisperer" />
-	<datastructure id="eavesdropper" />
-	<datastructure id="echo_chamber" />
-	<datastructure id="extra_life" />
-	<datastructure id="grounding_rod" />
-	<datastructure id="logic_virus" />
-	<datastructure id="link_light" />
-	<datastructure id="master_key" />
-	<datastructure id="meat_cleaver" />
-	<datastructure id="oracle" />
-	<datastructure id="phase_shifer" />
-	<datastructure id="resonance_focus" />
-	<datastructure id="resonance_shield" />
+
+	<datastructure id="bandersnatch" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="ACTION" ref="spoof_command" cond="y" value="$RATING" what="DICE" />
+			<checkmod type="SKILL" ref="electronics" cond="y" value="$RATING" what="DICE" /> <!-- puppeteer -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="code_shell" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<relevancemod topic="MATRIX" /> <!-- soak damage -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="data_blade" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="ACTION" ref="data_spike" cond="y" value="$RATING" what="DICE" />
+			<checkmod type="SKILL" ref="cracking" cond="y" value="$RATING" what="DICE" /> <!-- resonance_spike -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="drone_whisperer" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="SKILL" ref="electronics" cond="y" value="$RATING" what="DICE" /> <!-- if target is drone -->
+			<checkmod type="SKILL" ref="cracking" cond="y" value="$RATING" what="DICE" /> <!-- if target is drone -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="eavesdropper" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="ACTION" ref="snoop" cond="y" value="$RATING" what="DICE" />
+			<checkmod type="SKILL" ref="electronics" cond="y" value="$RATING" what="DICE" /> <!-- static_veil -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="echo_chamber" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="SKILL" ref="electronics" cond="y" value="$RATING" what="DICE" /> <!-- all echos -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="extra_life" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<relevancemod topic="MATRIX" /> <!-- soak biofeedback damage -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="grounding_rod" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<relevancemod topic="MATRIX" /> <!-- resist fading -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="logic_virus" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="SKILL" ref="cracking" cond="y" value="$RATING" what="DICE" /> <!-- all attacks against IC -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="link_light" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="ACTION" ref="trace_icon" cond="y" value="$RATING" what="DICE" />
+		</modifications>
+	</datastructure>
+
+	<datastructure id="master_key" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="ACTION" ref="backdoor_entry" cond="y" value="$RATING" what="DICE" />
+			<checkmod type="ACTION" ref="brute_force" cond="y" value="$RATING" what="DICE" />
+			<checkmod type="ACTION" ref="probe" cond="y" value="$RATING" what="DICE" />
+			<checkmod type="ACTION" ref="known_exploit" cond="y" value="$RATING" what="DICE" />
+		</modifications>
+	</datastructure>
+
+	<datastructure id="meat_cleaver" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="ACTION" ref="data_spike" cond="y" value="$RATING" what="DICE" />
+			<checkmod type="SKILL" ref="cracking" cond="y" value="$RATING" what="DICE" /> <!-- resonance spike -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="oracle" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<checkmod type="ACTION" ref="matrix_perception" cond="y" value="$RATING" what="DICE" />
+			<checkmod type="ACTION" ref="matrix_search" cond="y" value="$RATING" what="DICE" />
+		</modifications>
+	</datastructure>
+
+	<datastructure id="phase_shifter" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<relevancemod topic="MATRIX" /> <!-- resist IC -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="resonance_focus" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<relevancemod topic="MATRIX" /> <!-- any test with resonance attribute -->
+		</modifications>
+	</datastructure>
+
+	<datastructure id="resonance_shield" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
+		</choices>
+		<modifications>
+			<relevancemod topic="MATRIX" /> <!-- resist spikes -->
+		</modifications>
+	</datastructure>
+
 	<datastructure id="sprite_caller" multi="true" >
 		<choices>
 			<choice type="SPRITE" uuid="8e69d139-8f47-4d51-a18e-9ea63c365288" />
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
 		</choices>
+		<modifications>
+			<checkmod type="SKILL" ref="tasking" cond="y" value="$RATING" what="DICE" /> <!-- compile -->
+		</modifications>
 	</datastructure>
+	
 </datastructures>

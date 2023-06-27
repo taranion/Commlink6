@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <critterpowers>
+
+	<!-- Sprite Powers -->
+
+    <critterpower id="death_mark"          type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="SUSTAINED" />
+    <critterpower id="shield"              type="RESONANCE" action="MAJOR"  range="SELF"  dur="SUSTAINED" />
+    <critterpower id="captivate"           type="RESONANCE" action="MAJOR"  range="SELF"  dur="SUSTAINED" />
+    <critterpower id="harmonize"           type="RESONANCE" action="MINOR"  range="SELF"  dur="SUSTAINED" />
+    <critterpower id="digital_scream"      type="RESONANCE" action="MINOR"  range="SELF"  dur="INSTANTANEOUS" />
+    <critterpower id="fractal_dream"       type="RESONANCE" action="MAJOR"  range="LINE_OF_SIGHT"  dur="INSTANTANEOUS" />
+	
+	<!-- New Sprite Commands -->
+
+    <critterpower id="signal_boost"        type="RESONANCE" action="AUTO"  range="SELF"  dur="INSTANTANEOUS" />
+    <critterpower id="host_ken"            type="RESONANCE" action="AUTO"  range="SELF"  dur="INSTANTANEOUS" />
+    <critterpower id="hyperthreading"      type="RESONANCE" action="AUTO"  range="SELF"  dur="INSTANTANEOUS" />
+    <critterpower id="file_ken"            type="RESONANCE" action="AUTO"  range="SELF"  dur="INSTANTANEOUS" />
+    <critterpower id="cybercombat_boost"   type="RESONANCE" action="AUTO"  range="SELF"  dur="INSTANTANEOUS" />
+    <critterpower id="device_ken"          type="RESONANCE" action="AUTO"  range="SELF"  dur="INSTANTANEOUS" />
+
+	<!-- Protosapients -->
+
     <critterpower id="authority"           type="RESONANCE" action="AUTO"  range="SELF"  dur="ALWAYS" />
     <critterpower id="entropic_conversion" type="RESONANCE" action="MAJOR" range="SELF"  dur="INSTANTANEOUS" />
     <critterpower id="fnord"               type="RESONANCE" action="AUTO"  range="SELF"  dur="INSTANTANEOUS" />
@@ -8,7 +29,9 @@
     <critterpower id="munge_spark"         type="RESONANCE" action="MINOR" range="TOUCH" dur="INSTANTANEOUS" />
     <critterpower id="noiseless"           type="RESONANCE" action="AUTO"  range="SELF"  dur="ALWAYS" />
     <critterpower id="primal_rage"         type="RESONANCE" action="AUTO"  range="SELF"  dur="ALWAYS" />
-    <critterpower id="noisestorm"          type="RESONANCE" action="MAJOR" range="TOUCH" dur="INSTANTANEOUS" />
-    <critterpower id="psychotropic_biofeedback" type="RESONANCE" action="MAJOR" range="TOUCH" dur="INSTANTANEOUS" />
+
+    <critterpower id="noisestorm"          type="RESONANCE" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="psychotropic_biofeedback" type="RESONANCE" action="MAJOR" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
     <critterpower id="virtual_processing"  type="RESONANCE" action="AUTO"  range="SELF"  dur="ALWAYS" />
+
 </critterpowers>

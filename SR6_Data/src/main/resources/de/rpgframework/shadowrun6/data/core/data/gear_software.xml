@@ -56,6 +56,11 @@
 	</item>
 	<item avail="1" price="60" id="signal_scrubber" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+	   <mode id="active">
+	   <modifications>
+	   		<valmod type="ITEM_ATTRIBUTE" ref="NOISE_REDUCTION" value="2" apply="PERSONA"/>
+	   	</modifications>
+	   </mode>
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 		</variant>

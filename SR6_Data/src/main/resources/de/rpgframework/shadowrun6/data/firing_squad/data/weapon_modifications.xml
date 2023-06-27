@@ -160,6 +160,8 @@
 	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="HMG"/>
 	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="ASSAULT_CANNON"/>
 	    </selreq>
+   		<datareq type="GEAR" ref="gas-vent_system" negate="true" apply="PARENT"/>
+   		<datareq type="GEAR" ref="silencer" negate="true" apply="PARENT"/>
 	  </requires>
 	  <modifications>
          <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value=",+1,+2,+2," />

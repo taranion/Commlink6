@@ -28,4 +28,9 @@
   <action cat="MATRIX" id="password_sequencer" illegal="true" skill="cracking" type="MINOR" access="OUTSIDER" opt="true" />
   <action cat="MATRIX" id="skull_and_crossbones" illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" opt="true" />
   <action cat="MATRIX" id="we_are_in"      illegal="true" skill="cracking" type="MAJOR" access="USER/ADMIN" opt="true" />
+
+  <!-- Spark Actions (KI, Protosapients) -->
+  <action cat="MATRIX" id="emulate_cyberprogram" illegal="true" 				type="MINOR" access="OUTSIDER/USER/ADMIN" />
+  <action cat="MATRIX" id="realignment" illegal="false" 					    type="MAJOR" access="ADMIN" />
+
 </actions>

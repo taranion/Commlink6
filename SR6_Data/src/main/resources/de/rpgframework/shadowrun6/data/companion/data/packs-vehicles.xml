@@ -830,7 +830,7 @@
 
    <item id="pack_upgrade_gunports" price="4000" type="PACK" subtype="PACK_VEHICLE" >
       <modifications>
-			 <valmod type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="gun_ports" value="4" />
+			 <embed type="GEAR" intoId="9a481409-5d90-4aef-83f6-9b76a8f8dc88" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="gun_ports" count="4" />
       </modifications>
    </item>
 
