@@ -174,7 +174,7 @@ public class Shadowrun6DataPlugin  {
 			initDPSOTA2081();
 			initDPSOTA2082();
 			initDPWestphalen();
-//			initHackNSlash();
+			initHackNSlash();
 			initAstralWays();
 			//initBodyShop);
 		} catch (DataErrorException e) {
@@ -690,8 +690,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" data structures");
 //		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "hack_slash/data/gear_customcyber.xml");
 //		logger.log(Level.DEBUG, "Loaded "+list.size()+" custom cyberdeck items");
-//		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
+		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 //		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities.xml");
 //		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 //		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_ai.xml");

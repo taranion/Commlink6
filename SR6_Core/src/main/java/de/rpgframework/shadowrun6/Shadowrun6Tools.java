@@ -80,7 +80,6 @@ import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
@@ -2185,6 +2184,40 @@ public class Shadowrun6Tools {
 		}
 
 		return sum;
+	}
+	
+	//-------------------------------------------------------------------
+	public static Map<ShadowrunReference, List<CarriedItem<ItemTemplate>>> getEmulatedSoftware(Shadowrun6Character model) {
+		Map<ShadowrunReference,List<CarriedItem<ItemTemplate>>> ret = new HashMap<>();
+		
+		// Check complex forms
+		List<CarriedItem<ItemTemplate>> list = new ArrayList<>();
+		int dataProc = model.getPersona().getDataProcessing().getModifiedValue();
+		for (ComplexFormValue val : model.getComplexForms()) {
+			if ("emulate".equals(val.getKey())) {
+				Decision dec = val.getDecisionByRef("PROGRAM");
+				ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, dec.getValue());
+				CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.EMBEDDED);
+				if (temp.getChoice(ItemTemplate.UUID_RATING)!=null) {
+					item.addDecision(new Decision(ItemTemplate.UUID_RATING, String.valueOf(dataProc)));
+				}
+				list.add(item);
+			}
+		}
+		
+		// Build a list of software absorbed by an echo
+		list = new ArrayList<>();
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.SOFTWARE)) {
+			// Has the software been bought
+			if (item.isAutoAdded())
+				continue;
+			// Has the software already been absorbed
+			if (item.hasFlag(SR6ItemFlag.ABSORBED))
+				list.add(item);
+		}
+		ret.put(ShadowrunReference.METAECHO, list);
+		
+		return ret;		
 	}
 
 }
