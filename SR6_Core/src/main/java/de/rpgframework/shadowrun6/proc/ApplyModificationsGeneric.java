@@ -115,6 +115,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
 				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
+						|| tmp.getReferenceType()==ShadowrunReference.ADEPT_POWER
 						|| tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE
 						|| tmp.getReferenceType()==ShadowrunReference.SKILL
 						|| tmp.getReferenceType()==ShadowrunReference.QUALITY
@@ -142,6 +143,10 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		}
 		if (value == null) {
 			value = new AdeptPowerValue(item, 0);
+			value.setInjectedBy(mod.getSource());
+			if (!(mod instanceof ValueModification) && item.hasLevel()) {
+				value.setDistributed(1);
+			}
 			// Handle decisions
 			for (Decision dec : mod.getDecisions()) {
 				value.addDecision(dec);
