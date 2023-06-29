@@ -638,6 +638,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			if (val.getMaximum()==0) {
 				val.addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
 			}
+			logger.log(Level.TRACE, "Maximum of {0} is {1}", key, val.getMaximum());
 		}
 	}
 
@@ -778,7 +779,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 				}
 
 				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(key);
-				logger.log(Level.DEBUG, "Current aVal={0}/{1}  sumWithout={2}  sum={3}", aVal.getModifiedValue(), aVal.getModifier(), per.getSumWithoutBase(), per.getSum());
+				logger.log(Level.DEBUG, "Current {4} aVal={0}/{1}  sumWithout={2}  sum={3}", aVal.getModifiedValue(), aVal.getModifier(), per.getSumWithoutBase(), per.getSum(), key);
 				aVal.setDistributed(per.getSum());
 			}
 			logger.log(Level.DEBUG, "Finish with {0} adjust and {1} attrib points and {2} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());
