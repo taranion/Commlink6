@@ -3,4 +3,5 @@
 	<sense id="taste"/>
 	<sense id="sight"/>
 	<sense id="hearing"/>
+	<sense id="touch"/>
 </senses>
