@@ -121,6 +121,7 @@ import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromCollectives;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
+import de.rpgframework.shadowrun6.proc.GetModificationsFromMentorSpirits;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromPowers;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromTechniques;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
@@ -145,6 +146,7 @@ public class Shadowrun6Tools {
 		ApplyModificationsGeneric.class,
 		GetModificationsFromMagicOrResonance.class,
 		GetModificationsFromQualities.class,
+		GetModificationsFromMentorSpirits.class,
 		GetModificationsFromMetaEchoes.class,
 		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),
