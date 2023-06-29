@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Commlink Apps -->
+   <item avail="2" price="30" id="code_buddy" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
+   <item avail="2" price="100" id="eparkour" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+    	<modifications>
+    		<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    	</modifications>
+   </item>
+   <item avail="3" price="100" id="file_vault" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
+   <item avail="2" price="100" id="simshare" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
+   <item avail="1" price="0" id="mefeed" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+    	<modifications>
+    		<checkmod type="ACTION" ref="matrix_perception" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    	</modifications>
+   </item>
+   <item avail="2" price="100" id="mannequin" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/>
+			<datareq type="GEAR" ref="personal_assistant" apply="PARENT"/>
+		</requires>
+   </item>
+
+   <item avail="2" id="personal_assistant" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*100"/>
+   </item>
+   <item avail="3" price="250" id="p-ice_nope" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/>
+			<datareq type="GEAR" ref="personal_assistant" apply="PARENT"/>
+		</requires>
+   </item>
+   <item avail="3L" price="500" id="p-ice_spines" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/>
+			<datareq type="GEAR" ref="personal_assistant" apply="PARENT"/>
+		</requires>
+   </item>
+   <item avail="3" price="250" id="p-ice_watchdog" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/>
+			<datareq type="GEAR" ref="personal_assistant" apply="PARENT"/>
+		</requires>
+   </item>
+
+    <!-- Basic Programs -->
+	<item avail="1" price="60" id="autosoft_host" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="SKILLSOFT"/>
+		</modifications>
+	</item>
+	<item avail="1" price="60" id="emulator" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
+		<attrdef id="SOFTWARE_TYPES" value="COMMLINK_APP"/>
+		<modifications>
+			<valmod type="HOOK" ref="SOFTWARE" value="$$RATING"/>
+		</modifications>
+	</item>
+
+	<!-- Hacking Programs -->
+	<item avail="4I" price="250" id="blaster_charger" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+    	<modifications>
+    		<relevancemod topic="MATRIX"/> <!-- data_spike -->
+    	</modifications>
+	</item>
+	<item avail="4I" price="250" id="bomb_kit" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+    	<modifications>
+    		<relevancemod topic="MATRIX"/> <!-- set_data_bomb -->
+    	</modifications>
+	</item>
+	<item avail="4I" price="250" id="directional_shield" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+    	<modifications>
+    		<relevancemod topic="MATRIX"/> <!-- full_matrix_defense -->
+    	</modifications>
+	</item>
+	<item avail="4I" price="250" id="defense_pods" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+    	<modifications>
+    		<relevancemod topic="MATRIX"/>
+    	</modifications>
+	</item>
+	<item avail="4I" price="250" id="double_agent" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="4I" price="250" id="drone_master" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="4I" price="250" id="hitchhiker" type="SOFTWARE" subtype="HACKING_PROGRAM"> <!-- page 130 -->
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="4I" price="250" id="quartermaster" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="4I" price="250" id="rocket_launcher" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+    	<modifications>
+    		<relevancemod topic="MATRIX"/> <!-- data_spike -->
+    	</modifications>
+	</item>
+	<item avail="4I" price="250" id="secret_agent" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="4I" price="250" id="smoke_bomb" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+    	<modifications>
+    		<relevancemod topic="MATRIX"/> <!-- hide -->
+    	</modifications>
+	</item>
+	<item avail="4I" price="250" id="special_agent" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="4I" price="250" id="spin_doctor" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="4I" price="250" id="spineshield" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+	<item avail="4I" price="250" id="tapeworm" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+
+   <!-- Agents -->
+   <item id="agent_program" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*1500"/>
+		<attrdef id="AVAILABILITY" value="$RATING L"/>
+   </item>
+
+</items>
