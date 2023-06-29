@@ -17,7 +17,10 @@
    </quality>
    <quality id="shamanic_mask" pos="true" karma="4" type="NORMAL" >
       <modifications>
-     		<checkmod type="SKILL" ref="MAGIC" what="EDGE_ONLY_TEST" value="1"/>
+     		<checkmod type="SKILL" ref="astral" what="EDGE_ONLY_TEST" value="1"/>
+     		<checkmod type="SKILL" ref="conjuring" what="EDGE_ONLY_TEST" value="1"/>
+     		<checkmod type="SKILL" ref="enchanting" what="EDGE_ONLY_TEST" value="1"/>
+     		<checkmod type="SKILL" ref="sorcery" what="EDGE_ONLY_TEST" value="1"/>
       </modifications>
    </quality>
    <quality id="pusillanimous_summoner" pos="false" karma="8" type="NORMAL"  />
