@@ -28,29 +28,38 @@
    <!-- Accessories -->
    <item id="artillery_barrage" avail="5I" price="200" type="SOFTWARE" subtype="TAC_APP">
    	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+	<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
    </item>
    <item id="co-pilot" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
    	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+	<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
    </item>
    <item id="door_gunner" avail="5I" price="200" type="SOFTWARE" subtype="TAC_APP">
    	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+	<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
    </item>
    <item id="ecm_warrior_ii" avail="4I" price="200" type="SOFTWARE" subtype="TAC_APP">
    	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+	<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
    </item>
-   <item id="junk_wall" avail="2I" price="200" type="SOFTWARE" subtype="TAC_APP">SOFTWARE
+   <item id="junk_wall" avail="2I" price="200" type="SOFTWARE" subtype="TAC_APP">
    	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+	<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
    </item>
    <item id="mobile_medic" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
    	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+	<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
    </item>
    <item id="sneak_sneak" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
    	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+	<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
    </item>
    <item id="team_leader" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
    	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+	<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
    </item>
    <item id="target_artist" avail="3I" price="200" type="SOFTWARE" subtype="TAC_APP">
    	<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+	<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
    </item>
 </items>
