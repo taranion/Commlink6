@@ -2185,11 +2185,11 @@ public class Shadowrun6Tools {
 
 		return sum;
 	}
-	
+
 	//-------------------------------------------------------------------
-	public static Map<ShadowrunReference, List<CarriedItem<ItemTemplate>>> getEmulatedSoftware(Shadowrun6Character model) {
-		Map<ShadowrunReference,List<CarriedItem<ItemTemplate>>> ret = new HashMap<>();
-		
+	public static Map<Object, List<CarriedItem<ItemTemplate>>> getCyberPrograms(Shadowrun6Character model) {
+		Map<Object,List<CarriedItem<ItemTemplate>>> ret = new HashMap<>();
+
 		// Check complex forms
 		List<CarriedItem<ItemTemplate>> list = new ArrayList<>();
 		int dataProc = model.getPersona().getDataProcessing().getModifiedValue();
@@ -2204,7 +2204,8 @@ public class Shadowrun6Tools {
 				list.add(item);
 			}
 		}
-		
+		ret.put(ShadowrunReference.COMPLEX_FORM, list);
+
 		// Build a list of software absorbed by an echo
 		list = new ArrayList<>();
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.SOFTWARE)) {
@@ -2216,8 +2217,8 @@ public class Shadowrun6Tools {
 				list.add(item);
 		}
 		ret.put(ShadowrunReference.METAECHO, list);
-		
-		return ret;		
+
+		return ret;
 	}
 
 }

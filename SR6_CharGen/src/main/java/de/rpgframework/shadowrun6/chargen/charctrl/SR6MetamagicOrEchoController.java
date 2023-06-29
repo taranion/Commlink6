@@ -43,10 +43,13 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	private boolean isCharGen;
 	private int maxGrade = Integer.MAX_VALUE;
 
+	private SR6EmulatedSoftwareController emulated;
+
 	//-------------------------------------------------------------------
 	public SR6MetamagicOrEchoController(SR6CharacterController parent, boolean isCharGen) {
 		super(parent);
 		this.isCharGen = isCharGen;
+		emulated = new SR6EmulatedSoftwareController(parent);;
 	}
 
 	//-------------------------------------------------------------------
@@ -493,6 +496,11 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	@Override
 	public int getValue(MetamagicOrEchoValue value) {
 		return value.getDistributed();
+	}
+
+	//-------------------------------------------------------------------
+	public SR6EmulatedSoftwareController getEmulatedSoftwareController() {
+		return emulated;
 	}
 
 }
