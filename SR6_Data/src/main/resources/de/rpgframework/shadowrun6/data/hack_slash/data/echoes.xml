@@ -19,9 +19,7 @@
    		<datareq type="METAECHO" ref="machine_mind" apply="CHARACTER"/>
    	</requires>
      <modifications>
-       <!--itemmod type="GEAR" ref="rigger_command_console" variant="echo_living_command_console">
-       	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="$RESONANCE"/>
-       </itemmod-->
+       <itemmod type="GEAR" ref="living_console"/>
      </modifications>
    </metaecho>
    <metaecho id="living_host" type="ECHO">
@@ -39,7 +37,7 @@
        </itemmod>
      </modifications>
    </metaecho>
-   <metaecho id="mega_sprite"       type="ECHO" />
+   <metaecho id="mega_sprite"       type="ECHO"/>
    <metaecho id="matrix_amplifier"  type="ECHO"/>
    <metaecho id="new_sprite_type"   type="ECHO">
      <modifications>
