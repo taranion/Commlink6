@@ -32,7 +32,7 @@
            <valmod ref="STRENGTH" type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <valmod ref="CHARISMA" type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
            <itemmod type="QUALITY" ref="low-light_vision"/>
-           <valmod type="QUALITY" ref="built_tough" value="1"/>
+           <valmod type="QUALITY" ref="built_tough" value="1" set="NATURAL"/>
         </modifications>
     </metatype>
 
@@ -43,7 +43,7 @@
             <valmod ref="STRENGTH" type="ATTRIBUTE" value="9" set="MAX" when="CREATION"/>
             <valmod ref="CHARISMA" type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
             <itemmod type="QUALITY"  ref="thermographic_vision"/>
-            <valmod  type="QUALITY"  ref="built_tough"       value="2"/>
+            <valmod  type="QUALITY"  ref="built_tough"       value="2" set="NATURAL"/>
             <itemmod type="QUALITY"  ref="dermal_deposits"      />
             <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
          </modifications>
