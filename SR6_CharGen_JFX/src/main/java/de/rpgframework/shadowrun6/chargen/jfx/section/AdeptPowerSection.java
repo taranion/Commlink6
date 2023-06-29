@@ -21,15 +21,11 @@ import de.rpgframework.jfx.Selector;
 import de.rpgframework.jfx.section.ListSection;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
-import de.rpgframework.shadowrun.ComplexFormValue;
-import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.AdeptPowerValueListCell;
-import de.rpgframework.shadowrun.chargen.jfx.pane.SpellSelector;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6AdeptPowerController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -46,8 +42,8 @@ public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 
 	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(AdeptPowerSection.class.getPackageName()+".Section");
 
-	private IShadowrunCharacterController control;
-	private ShadowrunCharacter model;
+	private SR6CharacterController control;
+	private Shadowrun6Character model;
 
 	private Label lbUnspent, lbTotal;
 
@@ -140,10 +136,10 @@ public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 	}
 
 	//-------------------------------------------------------------------
-	public void updateController(IShadowrunCharacterController ctrl) {
+	public void updateController(SR6CharacterController ctrl) {
 		assert ctrl!=null;
 		control = ctrl;
-		model = (ShadowrunCharacter) ctrl.getModel();
+		model = ctrl.getModel();
 		refresh();
 	}
 
