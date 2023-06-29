@@ -2124,4 +2124,25 @@ public class SR6ArchetypeTest {
 		// Add melee weapon
 		charGen.getEquipmentController().select(Shadowrun6Core.getItem(ItemTemplate.class, "katana"));
 	}
+
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testGnomeAttributes() {
+		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
+		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
+		prio.setPriority(PriorityType.METATYPE, Priority.C);
+		prio.setPriority(PriorityType.MAGIC, Priority.E);
+		prio.setPriority(PriorityType.SKILLS, Priority.B);
+		prio.setPriority(PriorityType.RESOURCES, Priority.D);
+		assertEquals(50, model.getKarmaFree());
+		charGen.runProcessors();
+
+		SR6MetaType gnome = Shadowrun6Core.getItem(SR6MetaType.class, "gnome");
+		assertTrue("Failed selecting metatype",charGen.getMetatypeController().select(gnome));
+
+		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.BODY);
+		assertEquals("Expect 4 maximum from Naga", 4, aVal.getMaximum());
+	}
+
 }
