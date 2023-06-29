@@ -81,6 +81,8 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.SR6SpellList;
+import de.rpgframework.shadowrun6.Sense;
+import de.rpgframework.shadowrun6.SenseList;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -256,6 +258,8 @@ public class Shadowrun6DataPlugin  {
 		SR6GearTool.recalculate("", null, ItemUtil.SOFTWARE_LIBRARY);
 
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
+		list = Shadowrun6Core.loadDataItems(SenseList.class, Sense.class, core, clazz.getResourceAsStream("core/data/senses.xml"));
+		logger.log(Level.DEBUG, "Loaded {0} senses", list.size());
 		list = Shadowrun6Core.loadDataItems(SkillList.class, SR6Skill.class, core, clazz,"core/data/skills.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" skills");
 		list = Shadowrun6Core.loadDataItems(SpellFeatureList.class, SpellFeature.class, core, clazz, "core/data/spellfeatures.xml");

@@ -47,6 +47,7 @@ import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.Sense;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -118,7 +119,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	RESISTANCE(Resistance.class,0),
 	RULE(new RuleFlagConverter()),
 	QUALITY(Quality.class),
-	SENSE("Sense"),
+	SENSE(Sense.class),
 	SIGNATURE_MANEUVERS("SIG"),
 	SIN(FakeRating.class,0),
 	SKILL_KNOWLEDGE(SR6Skill.class.getAnnotation(DataItemTypeKey.class).id()),
