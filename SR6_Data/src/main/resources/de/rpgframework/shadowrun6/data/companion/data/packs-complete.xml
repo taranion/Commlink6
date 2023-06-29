@@ -416,9 +416,9 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="renraku_kitsune" id="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" />
-             <!-- <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> TODO: Remove comments once agents are available from hack and slash -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
-                <!-- </embed> -->
+             <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="agent_program">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+                </embed>
              <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" variant="regular" />
              <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="browse" variant="regular" />
              <embed  type="GEAR" intoId="63b3bf99-b2fb-4f59-8a0d-a9d97984d1e5" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" variant="regular" />
@@ -1116,9 +1116,9 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
              <embed  type="GEAR" intoId="b63e92cd-3b97-4100-98b6-ad2285484bd0" intoType="HOOK" intoRef="CYBERDECK" ref="shiawase_cyber6" id="6cd08dcc-8c3e-4ef5-be47-8667882f751e" />
-             <!-- <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="agent"> TODO: Remove comments once agents are available from hack and slash -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
-                <!-- </embed> -->
+             <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="agent_program">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+                </embed>
              <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="baby_monitor" variant="regular" />
              <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="browse" variant="regular" />
              <embed  type="GEAR" intoId="6cd08dcc-8c3e-4ef5-be47-8667882f751e" intoType="HOOK" intoRef="SOFTWARE" ref="configurator" variant="regular" />
