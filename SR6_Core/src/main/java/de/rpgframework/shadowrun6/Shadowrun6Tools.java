@@ -927,8 +927,13 @@ public class Shadowrun6Tools {
 				return model.hasQuality(req.getKey());
 			case METATYPE:
 				if (model.getMetatype()==null) return false;
-				if (negated) return !model.getMetatype().getId().equals(req.getKey());
-				return model.getMetatype().getId().equals(req.getKey());
+				if (negated) {
+					return !model.getMetatype().getId().equals(req.getKey());
+				} else {
+					if (model.getMetatype().getId().equals(req.getKey())) return true;
+					if (model.getMetatype().getVariantOf()!=null && model.getMetatype().getVariantOf().getId().equals(req.getKey())) return true;
+				}
+				return false;
 			case MAGIC_RESO:
 				return model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType()==item;
 			case METAECHO:
