@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.charctrl;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -149,7 +150,7 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 			mod.setExpCost(2500);
 			model.addToHistory(mod);
 		} else {
-			logger.log(Level.INFO, "Add martial art '{0}'", data.getId());
+			logger.log(Level.INFO, "Add martial art ''{0}''", data.getId());
 		}
 
 		parent.runProcessors();
@@ -196,9 +197,31 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
 	@Override
-	public List<Modification> process(List<Modification> unprocessed) {
-		// TODO Auto-generated method stub
-		return unprocessed;
+	public List<Modification> process(List<Modification> previous) {
+		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
+		List<Modification> unprocessed = new ArrayList<>(previous);
+
+		try {
+			todos.clear();
+
+			Shadowrun6Character model = getModel();
+
+			if (!model.isInCareerMode()) {
+				for (MartialArtsValue mVal : model.getMartialArts()) {
+					if (mVal.isAutoAdded())
+						continue;
+					// Pay 7 Karma
+					int karmaNeeded = 7;
+					logger.log(Level.INFO, "Pay {0} Karma for {1}", karmaNeeded, mVal.getKey());
+					model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
+					model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
+				}
+			}
+
+			return unprocessed;
+		} finally {
+			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -210,6 +233,10 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 		return getModel().getMartialArts();
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItem)
+	 */
 	@Override
 	public RecommendationState getRecommendationState(MartialArts value) {
 		return RecommendationState.NEUTRAL;

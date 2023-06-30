@@ -255,9 +255,31 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
 	@Override
-	public List<Modification> process(List<Modification> unprocessed) {
-		// TODO Auto-generated method stub
-		return unprocessed;
+	public List<Modification> process(List<Modification> previous) {
+		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
+		List<Modification> unprocessed = new ArrayList<>(previous);
+
+		try {
+			todos.clear();
+
+			Shadowrun6Character model = getModel();
+
+			if (!model.isInCareerMode()) {
+				for (TechniqueValue mVal : model.getTechniques()) {
+					if (mVal.isAutoAdded())
+						continue;
+					// Pay 7 Karma
+					int karmaNeeded = 5;
+					logger.log(Level.INFO, "Pay {0} Karma for {1}", karmaNeeded, mVal.getKey());
+					model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
+					model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
+				}
+			}
+
+			return unprocessed;
+		} finally {
+			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
+		}
 	}
 
 }

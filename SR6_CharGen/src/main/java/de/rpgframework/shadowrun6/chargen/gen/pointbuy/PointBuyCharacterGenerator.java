@@ -154,6 +154,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			processChain.add(spells);
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
+			processChain.add(martial);
 			processChain.add(cpToNuyenStep);
 			processChain.add(equipment);
 			processChain.add(foci);

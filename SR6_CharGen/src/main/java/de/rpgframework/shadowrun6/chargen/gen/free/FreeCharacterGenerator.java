@@ -132,6 +132,7 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 			processChain.add(spells);
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
+			processChain.add(martial);
 			processChain.add(equipment);
 			processChain.add(foci);
 			processChain.add(complex);

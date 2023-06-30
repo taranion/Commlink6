@@ -217,6 +217,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			processChain.add(adeptPowers);
 //			processChain.add(new GetModificationsFromGear(model));
 //			processChain.add(new ApplyModificationsGeneric(model));
+			processChain.add(martial);
 			processChain.add(equipment);
 			processChain.add(foci);
 			processChain.add(complex);
