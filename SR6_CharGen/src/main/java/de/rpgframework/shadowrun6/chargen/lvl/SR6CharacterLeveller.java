@@ -102,6 +102,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 			processChain.add(spells);
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
+			processChain.add(martial);
 			processChain.add(new GetModificationsFromGear(model));
 			processChain.add(equipment);
 			processChain.add(complex);
