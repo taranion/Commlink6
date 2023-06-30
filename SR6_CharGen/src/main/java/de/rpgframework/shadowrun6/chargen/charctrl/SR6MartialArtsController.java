@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun6.MartialArtsValue;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.TechniqueValue;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -215,6 +216,16 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 					logger.log(Level.INFO, "Pay {0} Karma for {1}", karmaNeeded, mVal.getKey());
 					model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
 					model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
+
+					for (TechniqueValue tVal : model.getTechniques()) {
+						if (mVal.isAutoAdded())
+							continue;
+						// Pay 5 Karma
+						karmaNeeded = 5;
+						logger.log(Level.INFO, "Pay {0} Karma for {1}", karmaNeeded, tVal.getKey());
+						model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
+						model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
+					}
 				}
 			}
 
