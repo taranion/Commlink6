@@ -64,7 +64,20 @@ public class GearPage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initElectro() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS);
+		Predicate<ItemTemplate> selectFilter = (item) -> {
+			if (item.getItemType(CarryMode.CARRIED)!=ItemType.ELECTRONICS) return false;
+			ItemSubType sub = item.getItemSubtype(CarryMode.CARRIED);
+			switch (sub) {
+			case COMMLINK:
+			case CYBERDECK:
+			case RIGGER_CONSOLE:
+			case TAC_NET:
+				return false;
+			default:
+				return true;
+			}
+		};
+
 		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.ELECTRONICS) {
 			public boolean test(CarriedItem<ItemTemplate> item) {
 				boolean isElectronic = super.test(item);

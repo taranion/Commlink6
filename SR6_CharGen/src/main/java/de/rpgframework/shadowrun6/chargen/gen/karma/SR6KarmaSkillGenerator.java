@@ -207,6 +207,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 
 			// Be sure to remove all skills that are not allowed
 			removeRestrictedSkills();
+			updateAvailable();
 
 			// Ensure native language is present
 			ensureNativeLanguage();

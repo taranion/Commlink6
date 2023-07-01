@@ -12,8 +12,8 @@
 			<checkmod type="SKILL" ref="perception" value="-1" what="EDGE_BOOST" />
     	</magician>
     	<adept>
-			<valmod type="ADEPT_POWER" ref="iron_will" value="1" />
-			<valmod type="ADEPT_POWER" ref="cool_resolve" value="1" />
+			<valmod type="ADEPT_POWER" ref="iron_will" value="1" set="NATURAL"/>
+			<valmod type="ADEPT_POWER" ref="cool_resolve" value="1" set="NATURAL"/>
     	</adept>
   </mentorspirit>
 
@@ -29,8 +29,8 @@
 			<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-			<valmod type="ADEPT_POWER" ref="freefall" value="1" />
-			<valmod type="ADEPT_POWER" ref="great_leap" value="1" />
+			<valmod type="ADEPT_POWER" ref="freefall" value="1" set="NATURAL"/>
+			<valmod type="ADEPT_POWER" ref="great_leap" value="1" set="NATURAL"/>
     </adept>
   </mentorspirit>
 
@@ -46,7 +46,7 @@
 			<checkmod type="SPELL" ref="MANIPULATION" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-			<valmod type="ADEPT_POWER" ref="nimble_fingers" value="1" />
+			<valmod type="ADEPT_POWER" ref="nimble_fingers" value="1" set="NATURAL"/>
     </adept>
   </mentorspirit>
 
@@ -186,7 +186,7 @@
 			<checkmod type="SPELL" ref="COMBAT" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-			<valmod type="ADEPT_POWER" ref="combat_sense" value="1" />
+			<valmod type="ADEPT_POWER" ref="combat_sense" value="1" set="NATURAL"/>
     </adept>
   </mentorspirit>
 
@@ -204,7 +204,7 @@
 			<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-    		<itemmod type="ADEPT_POWER" ref="counterstrike"/>
+    		<valmod type="ADEPT_POWER" ref="counterstrike" value="1" set="NATURAL"/>
     </adept>
   </mentorspirit>
 </mentorspirits>

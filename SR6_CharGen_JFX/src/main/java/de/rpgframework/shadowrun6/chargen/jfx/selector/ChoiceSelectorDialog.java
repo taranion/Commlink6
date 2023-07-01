@@ -63,6 +63,7 @@ import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Sense;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -476,6 +477,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			break;
 		case QUALITY:
 			ret.add( handleQUALITY(item, choice));
+			break;
+		case SENSE:
+			ret.add( handleSENSE(item, choice) );
 			break;
 		case SKILL:
 			ret.add( handleSKILL(item, choice) );
@@ -1238,6 +1242,38 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n.name()));
+			updateButtons();
+		 });
+		content.getChildren().add(cbSub);
+		return cbSub;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleSENSE(ComplexDataItem item, Choice choice) {
+		ChoiceBox<Sense> cbSub = new ChoiceBox<>();
+		cbSub.setConverter(new StringConverter<Sense>() {
+			public Sense fromString(String value) { return null;}
+			public String toString(Sense value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		// All but only given options?
+		if (choice.getChoiceOptions()!=null) {
+			List<String> ids = List.of(choice.getChoiceOptions());
+			cbSub.getItems().addAll(
+					Shadowrun6Core.getItemList(Sense.class).stream().filter(s -> ids.contains(s.getId())).collect(Collectors.toList())
+					);
+		} else {
+			cbSub.getItems().addAll(Shadowrun6Core.getItemList(Sense.class));
+		}
+		Collections.sort(cbSub.getItems(), new Comparator<Sense>() {
+			public int compare(Sense o1, Sense o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getName()));
 			updateButtons();
 		 });
 		content.getChildren().add(cbSub);

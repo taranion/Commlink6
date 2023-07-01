@@ -36,6 +36,8 @@ public enum SR6ItemFlag implements ItemFlag {
 	 * AUTO FLAG - not to be used by user
 	 */
 	IGNORE_FOR_CALCULATIONS,
+	/* Marks programs that have been absorbed by software emulator echo */
+	ABSORBED,
 	// Additional way (except by modifications) to mark an item as Auto-Added
 	AUTO_ADDED,
 	CODEMOD,

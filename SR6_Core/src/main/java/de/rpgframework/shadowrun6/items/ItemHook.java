@@ -12,9 +12,9 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
  */
 public enum ItemHook implements Hook {
 
-	MELEE_EXTERNAL,
-	FIREARMS_EXTERNAL,
-	RANGED_EXTERNAL,
+	MELEE_EXTERNAL(true),
+	FIREARMS_EXTERNAL(true),
+	RANGED_EXTERNAL(true),
 	BARREL,
 	INTERNAL, // Only used for auto-added
 	SMARTGUN,

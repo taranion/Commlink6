@@ -26,6 +26,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
+import de.rpgframework.shadowrun6.chargen.jfx.section.EmulatedProgramsSection;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -45,6 +46,7 @@ public class ResonancePage extends Page {
 
 	private ComplexFormSection secCplx;
 	private MetamagicOrEchoSection secMeta;
+	private EmulatedProgramsSection secPrograms;
 
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -65,6 +67,7 @@ public class ResonancePage extends Page {
 	private void initComponents() {
 		initComplexForms();
 		initMetamagic();
+		initPrograms();
 	}
 
 	//-------------------------------------------------------------------
@@ -77,8 +80,8 @@ public class ResonancePage extends Page {
 		secCplx.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secCplx, 4);
 		FlexGridPane.setMinHeight(secCplx, 6);
-		FlexGridPane.setMediumWidth(secCplx, 6);
-		FlexGridPane.setMediumHeight(secCplx, 6);
+		FlexGridPane.setMediumWidth(secCplx, 5);
+		FlexGridPane.setMediumHeight(secCplx, 8);
 	}
 
 	//-------------------------------------------------------------------
@@ -97,11 +100,22 @@ public class ResonancePage extends Page {
 	}
 
 	//-------------------------------------------------------------------
+	private void initPrograms() {
+		secPrograms = new EmulatedProgramsSection(
+				ResourceI18N.get(RES, "page.resonance.section.emulated"));
+		secPrograms.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secPrograms, 4);
+		FlexGridPane.setMinHeight(secPrograms, 6);
+		FlexGridPane.setMediumWidth(secPrograms, 5);
+		FlexGridPane.setMediumHeight(secPrograms, 8);
+	}
+
+	//-------------------------------------------------------------------
 	private void initLayout() {
 
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secCplx,secMeta);
+		flex.getChildren().addAll(secCplx,secMeta, secPrograms);
 
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -112,6 +126,7 @@ public class ResonancePage extends Page {
 	private void initInteractivity() {
 		secCplx.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secMeta.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secPrograms.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
 	//-------------------------------------------------------------------
@@ -147,6 +162,7 @@ public class ResonancePage extends Page {
 		this.ctrl = ctrl;
 		secMeta.updateController(ctrl);
 		secCplx.updateController(ctrl);
+		secPrograms.updateController(ctrl);
 		refresh();
 	}
 
@@ -154,6 +170,7 @@ public class ResonancePage extends Page {
 	public void refresh() {
 		secCplx.refresh();
 		secMeta.refresh();
+		secPrograms.refresh();
 	}
 
 }

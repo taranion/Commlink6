@@ -127,7 +127,9 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 
 			AdeptPowerValue value = new AdeptPowerValue(data, data.hasLevel()?1:0);
 			getModel().addAdeptPower(value);
-			logger.log(Level.INFO, "Selected ''{0}''", value);
+			for (Decision dec : decisions)
+				value.addDecision(dec);
+			logger.log(Level.INFO, "Selected ''{0}''", value.getNameWithRating());
 
 			parent.runProcessors();
 

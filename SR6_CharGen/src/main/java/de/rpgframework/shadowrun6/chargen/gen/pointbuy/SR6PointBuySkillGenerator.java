@@ -232,6 +232,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 				e.printStackTrace();
 			}
 			logger.log(Level.INFO, "Skills in settings3 {0}", settings.perSkill);
+			updateAvailable();
 
 
 			logger.log(Level.DEBUG, "Have {0} free and up to {1} convertible skill points", points1, points2);

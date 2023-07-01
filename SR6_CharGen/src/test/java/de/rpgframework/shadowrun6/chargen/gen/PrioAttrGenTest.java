@@ -387,4 +387,27 @@ public class PrioAttrGenTest {
 		ctrl.increase(model.getAttribute(ShadowrunAttribute.EDGE));
 		assertEquals(7, model.getAttribute(ShadowrunAttribute.EDGE).getDistributed());
 	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testReducedRacialMax() {
+		Shadowrun6Character model = charGen.getModel();
+		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 10));
+		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 10));
+		charGen.runProcessors();
+		assertTrue( ctrl.canBeIncreased(model.getAttribute(ShadowrunAttribute.BODY)).get() );
+		assertEquals(6, model.getAttribute(ShadowrunAttribute.BODY).getMaximum());
+		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, "BODY", 4, ApplyWhen.ALLCREATE, ValueType.MAX));
+		charGen.runProcessors();
+		charGen.runProcessors();
+		assertEquals(4, model.getAttribute(ShadowrunAttribute.BODY).getMaximum());
+		assertTrue( ctrl.canBeIncreased(model.getAttribute(ShadowrunAttribute.BODY)).get() );
+		OperationResult<AttributeValue<ShadowrunAttribute>> result = ctrl.increase(model.getAttribute(ShadowrunAttribute.BODY));
+		assertTrue(result.wasSuccessful());
+		assertEquals(4, model.getAttribute(ShadowrunAttribute.BODY).getMaximum());
+		assertTrue( ctrl.canBeIncreased(model.getAttribute(ShadowrunAttribute.BODY)).get() );
+		result = ctrl.increase(model.getAttribute(ShadowrunAttribute.BODY));
+		assertTrue(result.wasSuccessful());
+	}
+
 }

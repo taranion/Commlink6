@@ -86,7 +86,6 @@
            <itemmod type="HOOK" ref="TOP"/>
            <itemmod type="HOOK" ref="BARREL"/>
            <itemmod type="HOOK" ref="STOCK"/>
-           <embed type="GEAR" ref="laser_sight_standard" intoType="HOOK" intoRef="TOP" included="true"/>
         </modifications>
 	</item>
 	<item id="black_wolf" avail="5L" price="2500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">

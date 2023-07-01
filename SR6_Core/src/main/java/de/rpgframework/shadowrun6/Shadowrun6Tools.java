@@ -80,7 +80,6 @@ import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
@@ -122,6 +121,7 @@ import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromCollectives;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
+import de.rpgframework.shadowrun6.proc.GetModificationsFromMentorSpirits;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromPowers;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromTechniques;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
@@ -146,6 +146,7 @@ public class Shadowrun6Tools {
 		ApplyModificationsGeneric.class,
 		GetModificationsFromMagicOrResonance.class,
 		GetModificationsFromQualities.class,
+		GetModificationsFromMentorSpirits.class,
 		GetModificationsFromMetaEchoes.class,
 		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),
@@ -926,8 +927,13 @@ public class Shadowrun6Tools {
 				return model.hasQuality(req.getKey());
 			case METATYPE:
 				if (model.getMetatype()==null) return false;
-				if (negated) return !model.getMetatype().getId().equals(req.getKey());
-				return model.getMetatype().getId().equals(req.getKey());
+				if (negated) {
+					return !model.getMetatype().getId().equals(req.getKey());
+				} else {
+					if (model.getMetatype().getId().equals(req.getKey())) return true;
+					if (model.getMetatype().getVariantOf()!=null && model.getMetatype().getVariantOf().getId().equals(req.getKey())) return true;
+				}
+				return false;
 			case MAGIC_RESO:
 				return model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType()==item;
 			case METAECHO:
@@ -2185,6 +2191,41 @@ public class Shadowrun6Tools {
 		}
 
 		return sum;
+	}
+
+	//-------------------------------------------------------------------
+	public static Map<Object, List<CarriedItem<ItemTemplate>>> getCyberPrograms(Shadowrun6Character model) {
+		Map<Object,List<CarriedItem<ItemTemplate>>> ret = new HashMap<>();
+
+		// Check complex forms
+		List<CarriedItem<ItemTemplate>> list = new ArrayList<>();
+		int dataProc = model.getPersona().getDataProcessing().getModifiedValue();
+		for (ComplexFormValue val : model.getComplexForms()) {
+			if ("emulate".equals(val.getKey())) {
+				Decision dec = val.getDecisionByRef("PROGRAM");
+				ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, dec.getValue());
+				CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.EMBEDDED);
+				if (temp.getChoice(ItemTemplate.UUID_RATING)!=null) {
+					item.addDecision(new Decision(ItemTemplate.UUID_RATING, String.valueOf(dataProc)));
+				}
+				list.add(item);
+			}
+		}
+		ret.put(ShadowrunReference.COMPLEX_FORM, list);
+
+		// Build a list of software absorbed by an echo
+		list = new ArrayList<>();
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.SOFTWARE)) {
+			// Has the software been bought
+			if (item.isAutoAdded())
+				continue;
+			// Has the software already been absorbed
+			if (item.hasFlag(SR6ItemFlag.ABSORBED))
+				list.add(item);
+		}
+		ret.put(ShadowrunReference.METAECHO, list);
+
+		return ret;
 	}
 
 }

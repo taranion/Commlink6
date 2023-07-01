@@ -71,15 +71,10 @@ public class MartialArtsValueListCell extends ComplexDataItemValueListCell<Marti
 	 */
 	@Override
 	protected void editClicked(MartialArtsValue ref) {
-		logger.log(Level.INFO,"edit martial arts "+getItem());
+		logger.log(Level.DEBUG,"edit martial arts {0}",getItem());
 		MartialArtsValue data = getItem();
 		IMartialArtsController control = (IMartialArtsController) controlProvider.get();
 		EditMartialArtsValueDialog dialog = new EditMartialArtsValueDialog(control, data);
-
-//		ITechniqueController tCtrl = control.getTechniqueController(data);
-//		ComplexDataItemControllerNode<Technique, TechniqueValue> node = new ComplexDataItemControllerNode<>(tCtrl);
-//		node.setAvailableCellFactory(lv -> new TechniqueListCell(tCtrl));
-//		CloseType result = FlexibleApplication.getInstance().showAlertAndCall(AlertType.CONFIRMATION, "header", node);
 
 		CloseType result = FlexibleApplication.getInstance().showAlertAndCall(dialog, dialog.getButtonControl());
 

@@ -1,0 +1,91 @@
+package de.rpgframework.shadowrun6.proc;
+
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.util.ArrayList;
+import java.util.List;
+
+import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.MentorSpirit;
+import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
+
+/**
+ * @author prelle
+ *
+ */
+public class GetModificationsFromMentorSpirits implements ProcessingStep {
+
+	protected static final Logger logger = System.getLogger(GetModificationsFromMentorSpirits.class.getPackageName()+".quality");
+
+	private Shadowrun6Character model;
+
+	//-------------------------------------------------------------------
+	public GetModificationsFromMentorSpirits(Shadowrun6Character model) {
+		this.model = model;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see org.prelle.shadowrun6.proc.CharacterProcessor#process(org.prelle.shadowrun5.ShadowrunCharacter, java.util.List)
+	 */
+	@Override
+	public List<Modification> process(List<Modification> previous) {
+		List<Modification> unprocessed = new ArrayList<>(previous);
+
+		logger.log(Level.TRACE, "ENTER: process");
+		try {
+
+			for (QualityValue val : model.getQualities()) {
+				if (!val.getKey().equals("mentor_spirit"))
+					continue;
+				Quality resolved = val.getResolved();
+				Choice choice = resolved.getChoices().get(0);
+				Decision dec = val.getDecision( choice.getUUID() );
+				if (dec==null) {
+					logger.log(Level.ERROR, "No decision made for Mentor Spirit");
+				} else {
+					MentorSpirit mentor = choice.getChooseFrom().resolve(dec.getValue());
+					if (mentor==null) {
+						logger.log(Level.ERROR, "Unknown Mentor Spirit ''{0}''", dec.getValue());
+					} else {
+						// Build a non-common modification list
+						List<Modification> allMods = new ArrayList<>();
+						MagicOrResonanceType type = model.getMagicOrResonanceType();
+						// Magician modifications
+						if (type.usesSpells() || (type.usesPowers() && model.hasRuleFlag(SR6RuleFlag.MENTOR_SPIRIT_BOTH))) {
+							allMods.addAll(mentor.getMagicianModifications());
+						}
+						// Adept modifications
+						if (type.usesPowers() || (type.usesSpells() && model.hasRuleFlag(SR6RuleFlag.MENTOR_SPIRIT_BOTH))) {
+							allMods.addAll(mentor.getAdeptModifications());
+						}
+
+						for (Modification tmp : allMods) {
+							if (tmp.getReferenceType()==null) {
+								unprocessed.add(tmp);
+							} else {
+								Modification mod = tmp.getReferenceType().instantiateModification(tmp, val, val.getModifiedValue(), model);
+								mod.setSource(mentor);
+								logger.log(Level.DEBUG, "add modification {0} from {1}",mod,mentor);
+								unprocessed.add(mod);
+							}
+						}
+
+
+					}
+				}
+			}
+		} finally {
+			logger.log(Level.TRACE, "LEAVE : process() ends with "+unprocessed.size()+" modifications still to process");
+		}
+		return unprocessed;
+	}
+
+}

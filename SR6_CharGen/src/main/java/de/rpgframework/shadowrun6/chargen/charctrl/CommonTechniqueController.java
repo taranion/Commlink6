@@ -119,6 +119,7 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 	 */
 	@Override
 	public OperationResult<TechniqueValue> select(Technique data, Decision... decisions) {
+		logger.log(Level.ERROR,"Select {0} in style {1}", data.getId(), style.getKey());
 		Possible poss = canBeSelected(data, decisions);
 		if (!poss.get()) {
 			logger.log(Level.WARNING, "Trying to select unselectable technique {0}: {1}", data, poss.toString());
@@ -131,7 +132,7 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 		model.addTechnique(val);
 
 		if (model.isInCareerMode()) {
-			logger.log(Level.INFO, "Add technique '%s' for 5 Karma and 1500 Nuyen", data.getId());
+			logger.log(Level.INFO, "Add technique ''%s'' for 5 Karma and 1500 Nuyen", data.getId());
 			// Pay karma
 			int cost = (int)getSelectionCost(data);
 			model.setKarmaFree(model.getKarmaFree() -cost);
@@ -144,7 +145,7 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 			mod.setExpCost(1500);
 			model.addToHistory(mod);
 		} else {
-			logger.log(Level.INFO, "Add martial art '{0}'", data.getId());
+			logger.log(Level.INFO, "Add martial art ''{0}''", data.getId());
 		}
 
 		parent.runProcessors();
@@ -255,9 +256,8 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
 	@Override
-	public List<Modification> process(List<Modification> unprocessed) {
-		// TODO Auto-generated method stub
-		return unprocessed;
+	public List<Modification> process(List<Modification> previous) {
+		return previous;
 	}
 
 }

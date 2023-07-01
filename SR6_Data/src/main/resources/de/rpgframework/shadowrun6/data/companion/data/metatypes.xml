@@ -140,12 +140,12 @@
        <choice type="SUBSELECT" ref="variant" uuid="c3250d9c-227c-442e-918e-e328749e8bb1">
          <subOption id="one_extra">
 				<modifications>
-          		 <valmod type="QUALITY" ref="shiva_arms" value="1"/>
+          		 <valmod type="QUALITY" ref="shiva_arms" value="1" set="NATURAL"/>
 				</modifications>
          </subOption>
          <subOption id="two_extra" cost="5">
 				<modifications>
-          		 <valmod type="QUALITY" ref="shiva_arms" value="2"/>
+          		 <valmod type="QUALITY" ref="shiva_arms" value="2" set="NATURAL"/>
 				</modifications>
          </subOption>
        </choice>
@@ -214,7 +214,7 @@
          <valmod type="ATTRIBUTE" ref="AGILITY"   value="5" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" when="CREATION"/>
-         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2" set="NATURAL"/>
          <itemmod type="QUALITY"  ref="cyclopean_eye"/>
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
          <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
@@ -225,7 +225,7 @@
          <valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="8" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" when="CREATION"/>
-         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2" set="NATURAL"/>
          <itemmod type="QUALITY"  ref="magic_resistance"/>
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
          <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
@@ -237,7 +237,7 @@
          <valmod type="ATTRIBUTE" ref="AGILITY"   value="5" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" when="CREATION"/>
-         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2" set="NATURAL"/>
          <itemmod type="QUALITY"  ref="bark" />
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
          <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
@@ -249,7 +249,7 @@
          <valmod type="ATTRIBUTE" ref="AGILITY"   value="5" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="CHARISMA"  value="5" set="MAX" when="CREATION"/>
-         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2" set="NATURAL"/>
          <itemmod type="QUALITY"  ref="goring_horns"/>
          <itemmod type="QUALITY"  ref="thermographic_vision"/>
          <valmod  type="PRICEMOD" ref="EVERYTHING"   value="0.1" id="1ca3f612-1697-4c33-8a13-c9c1e3523f5b"/>
@@ -274,7 +274,7 @@
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="9" set="MAX" when="CREATION"/>
          <valmod ref="MAGIC"     type="ATTRIBUTE" value="1" when="CREATION"/>
          <itemmod type="QUALITY"  ref="biosonar"/>
-         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2" set="NATURAL"/>
          <itemmod type="CRITTER_POWER" ref="dual_natured"/>
          <itemmod type="QUALITY"  ref="low-light_vision"/>
          <itemmod type="QUALITY"  ref="underwater_vision"/>
@@ -293,9 +293,9 @@
          <valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="CHARISMA"  value="7" set="MAX" when="CREATION"/>
          <valmod ref="MAGIC"     type="ATTRIBUTE" value="1" when="CREATION"/>
-         <valmod type="QUALITY"   ref="built_tough" value="2"/>
+         <valmod type="QUALITY"   ref="built_tough" value="2" set="NATURAL"/>
          <itemmod type="QUALITY"   ref="cold_blooded"/>
-         <valmod type="CRITTER_POWER" ref="armor" value="4"/>
+         <valmod type="CRITTER_POWER" ref="armor" value="4" set="NATURAL"/>
          <itemmod type="CRITTER_POWER" ref="guard" />
          <itemmod type="CRITTER_POWER" ref="dual_natured"/>
          <itemmod type="CRITTER_POWER" ref="natural_weapon">
