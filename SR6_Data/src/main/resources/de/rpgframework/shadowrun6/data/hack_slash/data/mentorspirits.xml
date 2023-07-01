@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mentorspirits>
+
 	<mentorspirit id="zero_one" type="PARAGON">
-	<similar>world_tree</similar>
 		<modifications>
+			<checkmod type="SKILL" ref="cracking" value="-1" what="EDGE_BOOST" cond="y" /> <!-- entry, thus brute force, probe, backdoor entry, known exploid backdoor entry -->
 		</modifications>
 	</mentorspirit>
 
 	<mentorspirit id="architect" type="PARAGON">
 		<modifications>
+			<checkmod type="SKILL" ref="electronics" value="-1" what="EDGE_BOOST" cond="y" /> <!-- edit actions -->
 		</modifications>
 	</mentorspirit>
 
 	<mentorspirit id="black_hat" type="PARAGON">
 		<modifications>
+			<checkmod type="SKILL" ref="cracking" value="-1" what="EDGE_BOOST" /> 
 		</modifications>
 	</mentorspirit>
 
 	<mentorspirit id="delphi" type="PARAGON">
 		<modifications>
+			<checkmod type="SKILLSPECIALIZATION" ref="electronics/complex_forms" value="-1" what="EDGE_BOOST" /> 
 		</modifications>
 	</mentorspirit>
 
 	<mentorspirit id="shooter" type="PARAGON">
 		<modifications>
+			<checkmod type="SKILLSPECIALIZATION" ref="cracking/cybercombat" value="-1" what="EDGE_BOOST" /> 
 		</modifications>
 	</mentorspirit>
 
