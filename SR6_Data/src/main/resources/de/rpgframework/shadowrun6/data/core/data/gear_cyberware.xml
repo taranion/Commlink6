@@ -69,7 +69,11 @@
 		<attrdef id="ESSENCECOST" value="$RATING"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    	<variant id="echo_machine_mind" modonly="true">
-			<attrdef id="PRICE" value="0"/>
+		<attrdef id="PRICE" value="0"/>
+	   	<attrdef id="ESSENCECOST" value="0.0"/>
+   	</variant>
+   	<variant id="quality_pilot_origin" modonly="true">
+		<attrdef id="PRICE" value="0"/>
 	   	<attrdef id="ESSENCECOST" value="0.0"/>
    	</variant>
    </item>
