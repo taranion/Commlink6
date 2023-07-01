@@ -486,8 +486,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" software items");
 		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
-//		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 //		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_ai.xml");
 //		logger.log(Level.DEBUG, "Loaded "+list.size()+" vitual lifeform qualities");
 //		list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "hack_slash/data/metatypes.xml");
