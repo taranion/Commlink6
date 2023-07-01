@@ -162,7 +162,7 @@ public class Shadowrun6DataPlugin  {
 			initFiringSquad();
 			initStreetWyrd();
 			initDoubleClutch();
-//			initHackNSlash();
+			initHackNSlash();
 			initCompanion();
 			//initLofwyrsLegions();
 			initOtherUS();
@@ -480,8 +480,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" electronic items");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "hack_slash/data/gear_software.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" software items");
-//		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
+		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 //		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities.xml");
 //		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 //		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_ai.xml");
