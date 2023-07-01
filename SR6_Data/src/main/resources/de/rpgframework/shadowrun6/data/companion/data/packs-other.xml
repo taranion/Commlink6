@@ -610,9 +610,9 @@
 
    <item id="pack_cyberprograms" price="14170" type="PACK" subtype="PACK_OTHER" >
       <modifications>
-         <!-- <itemmod type="GEAR" apply="CHARACTER" ref="agent"> TODO: Remove comments once agents are available from hack and slash -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> -->
-                <!-- </itemmod> -->
+         <itemmod type="GEAR" apply="CHARACTER" ref="agent_program">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+                </itemmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" variant="regular" />
          <itemmod type="GEAR" apply="CHARACTER" ref="browse" variant="regular" />
          <itemmod type="GEAR" apply="CHARACTER" ref="configurator" variant="regular" />
