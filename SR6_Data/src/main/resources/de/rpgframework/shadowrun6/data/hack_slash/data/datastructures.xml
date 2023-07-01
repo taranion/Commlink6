@@ -6,7 +6,7 @@
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="tasking" cond="y" value="$RATING" what="DICE" /> <!-- decompile -->
+			<checkmod type="ACTION" ref="decompile_sprite" cond="y" value="$RATING" what="DICE" />
 		</modifications>
 	</datastructure>
 
@@ -16,7 +16,7 @@
 		</choices>
 		<modifications>
 			<checkmod type="ACTION" ref="spoof_command" cond="y" value="$RATING" what="DICE" />
-			<checkmod type="SKILL" ref="electronics" cond="y" value="$RATING" what="DICE" /> <!-- puppeteer -->
+			<checkmod type="COMPLEX_FORM" ref="puppeteer" cond="y" value="$RATING" what="DICE" />
 		</modifications>
 	</datastructure>
 
@@ -35,7 +35,7 @@
 		</choices>
 		<modifications>
 			<checkmod type="ACTION" ref="data_spike" cond="y" value="$RATING" what="DICE" />
-			<checkmod type="SKILL" ref="cracking" cond="y" value="$RATING" what="DICE" /> <!-- resonance_spike -->
+			<checkmod type="COMPLEX_FORM" ref="resonance_spike" cond="y" value="$RATING" what="DICE" />
 		</modifications>
 	</datastructure>
 
@@ -55,7 +55,7 @@
 		</choices>
 		<modifications>
 			<checkmod type="ACTION" ref="snoop" cond="y" value="$RATING" what="DICE" />
-			<checkmod type="SKILL" ref="electronics" cond="y" value="$RATING" what="DICE" /> <!-- static_veil -->
+			<checkmod type="COMPLEX_FORM" ref="static_veil" cond="y" value="$RATING" what="DICE" />
 		</modifications>
 	</datastructure>
 
@@ -64,7 +64,7 @@
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="electronics" cond="y" value="$RATING" what="DICE" /> <!-- all echos -->
+			<checkmod type="SKILLSPECIALIZATION" ref="electronics/complex_forms" value="$RATING" what="DICE" />
 		</modifications>
 	</datastructure>
 
@@ -91,7 +91,7 @@
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="cracking" cond="y" value="$RATING" what="DICE" /> <!-- all attacks against IC -->
+			<checkmod type="SKILLSPECIALIZATION" ref="cracking/cybercombat" cond="y" value="$RATING" what="DICE" /> <!-- all attacks against IC -->
 		</modifications>
 	</datastructure>
 
@@ -122,7 +122,7 @@
 		</choices>
 		<modifications>
 			<checkmod type="ACTION" ref="data_spike" cond="y" value="$RATING" what="DICE" />
-			<checkmod type="SKILL" ref="cracking" cond="y" value="$RATING" what="DICE" /> <!-- resonance spike -->
+			<checkmod type="COMPLEX_FORM" ref="resonance_spike" cond="y" value="$RATING" what="DICE" />
 		</modifications>
 	</datastructure>
 
@@ -169,7 +169,8 @@
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10"/>
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="tasking" cond="y" value="$RATING" what="DICE" /> <!-- compile -->
+			<checkmod type="ACTION" ref="compile_sprite" cond="y" value="$RATING" what="DICE" />
+			<checkmod type="ACTION" ref="register_sprite" cond="y" value="$RATING" what="DICE" />
 		</modifications>
 	</datastructure>
 	
