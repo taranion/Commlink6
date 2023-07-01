@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
 <qualities>
+
    <quality id="machinists" karma="20" type="STREAM" pos="true" >
    	<modifications>
+			<!-- all fade -2 if drone is target -->
+         	<checkmod type="SKILL" ref="tasking"  value="2" what="DICE" cond="y"/> <!-- only for machine sprites -->
+			<itemmod type="GEAR" ref="machinist_console"/>
      		<allowmod type="COMPLEX_FORM" ref="loto"/>
      </modifications>
    </quality>
+
    <quality id="sourceror" karma="20" type="STREAM" pos="true">
    	<modifications>
+			<!-- all complex form fade -2 -->
+			<!-- sustain SubmersionGrade/2 complex forms without penalty -->
      		<allowmod type="COMPLEX_FORM" ref="hyperthreading"/>
      </modifications>
    </quality>
+
    <quality id="technoshaman" karma="20" type="STREAM" pos="true">
    	<modifications>
+			<!-- all compile and decompile fade -2 -->
+			<!-- 1 additional sprite service -->
+			<itemmod type="METAECHO" apply="CHARACTER" ref="hybrid_sprites"/>
      		<allowmod type="COMPLEX_FORM" ref="control_virtual_life"/>
      </modifications>
    </quality>
+
 </qualities>

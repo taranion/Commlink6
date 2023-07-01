@@ -1,26 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
+
+<!-- Positives -->
+
    <quality id="chatty"                karma="12" pos="true" type="VIRTUAL_LIFE" />
    <quality id="designer"              karma= "6" pos="true" type="VIRTUAL_LIFE" />
    <quality id="hello_world"           karma= "8" pos="true" type="VIRTUAL_LIFE" />
-   <quality id="inherent_program"      karma= "7" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="inherent_program"      karma= "7" pos="true" type="VIRTUAL_LIFE">
+     <choices>
+		<choice type="PROGRAM" uuid="d6fad551-128e-4376-a397-95f7aa543ace" options="BASIC_PROGRAM,HACKING_PROGRAM"/>
+     </choices>
+   </quality>
    <quality id="improved_restoration"  karma= "7" pos="true" type="VIRTUAL_LIFE" />
    <quality id="low_profile"           karma="10" pos="true" type="VIRTUAL_LIFE" />
    <quality id="multi_processing"      karma="11" pos="true" type="VIRTUAL_LIFE" />
-   <quality id="pilot_origins"         karma= "8" pos="true" type="VIRTUAL_LIFE" max="3"/>
-   <quality id="redundancy"            karma= "8" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="pilot_origins"         karma= "8" pos="true" type="VIRTUAL_LIFE" max="3">
+     <modifications>
+       <itemmod type="GEAR" ref="control_rig" variant="quality_pilot_origin">
+       	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+       </itemmod>
+     </modifications>
+   </quality>
+   <quality id="redundancy"            karma= "8" pos="true" type="VIRTUAL_LIFE">
+     <modifications>
+       <!-- <valmod type="ATTRIBUTE" ref="MATRIX_MONITOR" value="1" set="NATURAL" apply="CHARACTER" /> MATRIX_MONITOR unknown -->
+     </modifications>
+   </quality>
    <quality id="sapper"                karma= "6" pos="true" type="VIRTUAL_LIFE" />
-   <quality id="sensor_upgrade"        karma= "5" pos="true" type="VIRTUAL_LIFE" />
+   <quality id="sensor_upgrade"        karma= "5" pos="true" type="VIRTUAL_LIFE">
+     <modifications>
+       <!-- <valmod type="ATTRIBUTE" ref="SENSOR" value="1"/> SENSOR unkown -->
+     </modifications>
+   </quality>
    <quality id="snooper"               karma= "8" pos="true" type="VIRTUAL_LIFE" />
    <quality id="virtual_stability"     karma= "5" pos="true" type="VIRTUAL_LIFE" />
+
+<!-- Negatives -->
 	
-   <quality id="cascading_failure"     karma= "9" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="cascading_failure"     karma= "9" pos="false" type="VIRTUAL_LIFE">
+     <modifications>
+       <!-- <itemmod type="RULE" ref="WOUND_MOD_PLUS_1"/> new rule to be established -->
+     </modifications>
+   </quality>
    <quality id="corruptor"             karma="10" pos="false" type="VIRTUAL_LIFE" />
    <quality id="doomscrolling"         karma= "4" pos="false" type="VIRTUAL_LIFE" />
    <quality id="easily_exploitable"    karma= "8" pos="false" type="VIRTUAL_LIFE" />
-   <quality id="fragmentation"         karma="18" pos="false" type="VIRTUAL_LIFE" />
-   <quality id="invalid_references"    karma= "5" pos="false" type="VIRTUAL_LIFE" />
-   <quality id="out_of_memory_exception" karma= "3" pos="false" type="VIRTUAL_LIFE" />
-   <quality id="persnickety_renter"    karma= "6" pos="false" type="VIRTUAL_LIFE" />
+   <quality id="fragmentation"         karma="18" pos="false" type="VIRTUAL_LIFE">
+   	<choices>
+   		<choice type="TEXT" uuid="894b0515-61fe-4078-a4ce-c419d3f25eb8"/>
+   	</choices>
+   </quality>
+   <quality id="invalid_references"    karma= "5" pos="false" type="VIRTUAL_LIFE">
+     <modifications>
+       <!-- <itemmod type="RULE" ref="KARMA_COST_PLUS_1"/> new rule to be established -->
+     </modifications>
+   </quality>
+   <quality id="out_of_memory_exception" karma= "3" pos="false" type="VIRTUAL_LIFE">
+     <modifications>
+         <valmod type="HOOK" ref="SOFTWARE" value="-1"/>
+     </modifications>
+   </quality>
+   <quality id="persnickety_renter"    karma= "6" pos="false" type="VIRTUAL_LIFE">
+   	<choices>
+   		<choice type="TEXT" uuid="ddddf815-1846-4318-b731-01f487d77b7a"/>
+   	</choices>
+   </quality>
    <quality id="real_world_naivete"    karma= "8" pos="false" type="VIRTUAL_LIFE" />
+   
 </qualities>
