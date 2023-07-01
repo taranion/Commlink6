@@ -6,7 +6,7 @@ package de.rpgframework.shadowrun6.items;
  */
 public enum SoftwareTypes {
 
-	// Available on Drones and RCCs
+	// Available on Drones and RCCs (and on Cyberdecks with autosoft_host)
 	AUTOSOFT,
 	// Available on Commlink, Cyberdeck, MTOC and RCC
 	BASIC,
@@ -18,7 +18,9 @@ public enum SoftwareTypes {
 	E_SOFT,
 	// Available on RCCs
 	RCC,
+	// Available on skill jacks (and on Cyberdecks with autosoft_host)
 	SKILLSOFT,
+	// Available only on MTOC
 	TAC_APP
 	
 }

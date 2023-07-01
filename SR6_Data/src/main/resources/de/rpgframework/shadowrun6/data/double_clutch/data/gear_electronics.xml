@@ -185,6 +185,16 @@
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item>
 
+	<item id="soft_freefall" type="SOFTWARE" subtype="AUTOSOFT" modonly="true"> <!-- for vulcan_jump_master -->
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+		</choices>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
+	</item>
+
+<!-- E-Softs -->
+
 	<item avail="1I" price="500" id="crash_burn" type="SOFTWARE" subtype="ESOFT">
 		<usage mode="EMBEDDED" slot="SOFTWARE" />
 		<choices>

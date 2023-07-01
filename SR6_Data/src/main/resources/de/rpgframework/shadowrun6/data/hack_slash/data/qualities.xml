@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
+
+<!-- Positive Qualities -->
+
    <quality id="at_home_in_the_matrix" karma="15" pos="true" type="NORMAL" />
    <quality id="brilliant_heuristics"  karma="10" pos="true" type="NORMAL" />
    <quality id="data_anomaly"          karma= "5" pos="true" type="NORMAL" />
@@ -13,12 +16,20 @@
        <itemmod type="RULE" ref="DECK_5000_PER_KARMA" />
      </modifications>
    </quality>
-   <quality id="fade_to_black"   	  karma="3" pos="true" type="NORMAL" />
-   <quality id="fractal_blast"     	  karma="9" pos="true" type="NORMAL" />
+   <quality id="fade_to_black"   	  karma="3" pos="true" type="NORMAL">
+     <modifications>
+   		<relevancemod topic="MATRIX"/> <!-- hide -->
+     </modifications>
+   </quality>
+   <quality id="fractal_blast"     	  karma="9" pos="true" type="NORMAL">
+     <modifications>
+   		<relevancemod topic="MATRIX"/> <!-- data_spike -->
+     </modifications>
+   </quality>
    <quality id="golden_screwdriver"   karma="5" pos="true" type="NORMAL" />
-   <quality id="hacker_combo"         karma="10" pos="true" type="NORMAL">
+   <quality id="hacker_combo"         karma="10" pos="true" type="NORMAL" multi="true">
      <choices>
-       <choice type="ACTION" ref="MARRIX" uuid="51283af1-cc3d-481f-9e4b-96fc5ac1824e"/>
+       <choice type="ACTION" ref="MATRIX" uuid="51283af1-cc3d-481f-9e4b-96fc5ac1824e"/>
        <choice type="ACTION" ref="MATRIX" uuid="91c5cccf-01d3-4f58-b585-1710a2e8a8c4"/>
        <choice type="TEXT" uuid="2fc3a55c-14cf-43c1-b7db-8ae3e16f32b9"/>
      </choices>
@@ -28,7 +39,7 @@
    <quality id="impenetrable_logic"   karma="7" pos="true" type="NORMAL" />
    <quality id="jack_jockey"     	  karma="11" pos="true" type="NORMAL" />
    <quality id="loner" 	              karma="5" pos="true" type="NORMAL" />
-   <quality id="matrix_attribute_adv" karma="15" pos="true" type="NORMAL" multi="true" max="3">
+   <quality id="matrix_attribute_adv" karma="15" pos="true" type="NORMAL" multi="true" max="3"> <!-- check if this limits to 3 in total or 3 per attribute -->
      <choices>
        <choice type="ITEM_ATTRIBUTE" options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL" uuid="684fc8ad-4256-4229-b6b6-5ff67123917d"/>
      </choices>
@@ -43,17 +54,23 @@
    </quality>
    <quality id="online_fame"          karma="3" pos="true" type="NORMAL" max="6">
      <modifications>
-       <checkmod type="SKILL" ref="influence" value="$LEVEL" what="BONUS"/>
-       <checkmod type="SKILL" ref="con" value="$LEVEL" what="BONUS"/>
+       <checkmod type="SKILL" ref="influence" value="$LEVEL" what="DICE"/>
+       <checkmod type="SKILL" ref="con" value="$LEVEL" what="DICE"/>
      </modifications>
    </quality>
    <quality id="profiler"             karma="7" pos="true" type="NORMAL" />
    <quality id="quick_config"         karma="3" pos="true" type="NORMAL" />
-   <quality id="reverberant"          karma="5" pos="true" type="NORMAL" />
+   <quality id="reverberant"          karma="5" pos="true" type="NORMAL">
+     <modifications>
+   		<relevancemod topic="MATRIX"/> <!-- matrix_perception -->
+     </modifications>
+   </quality>
    <quality id="satisfaction"         karma="3" pos="true" type="NORMAL" />
    <quality id="surgical_strike"      karma="11" pos="true" type="NORMAL" />
    <quality id="voider_of_warranties" karma="13" pos="true" type="NORMAL" />
-	
+
+<!-- Negative Qualities -->
+
    <quality id="achilles_heel"        karma="12" pos="false" type="NORMAL" multi="true" >
    	<choices>
    		<choice type="TEXT" uuid="381fefe1-0404-4457-b090-0f96f3df69b3"/>
@@ -71,7 +88,7 @@
    <quality id="data_liberator"       karma="2" pos="false" type="NORMAL" />
    <quality id="defective_attribute"  karma="7" pos="false" type="NORMAL">
      <choices>
-       <choice type="ITEM_ATTRIBUTE" options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL" uuid="dbe00747-5b23-47bf-81c8-e05f00ab70da"/>
+       <choice type="ITEM_ATTRIBUTE" options="DATA_PROCESSING,FIREWALL" uuid="dbe00747-5b23-47bf-81c8-e05f00ab70da"/>
      </choices>
    </quality>
    <quality id="like_a_boss"          karma="5" pos="false" type="NORMAL" />
@@ -82,7 +99,7 @@
    </quality>
    <quality id="program_dependency"   karma="2" pos="false" type="NORMAL">
      <choices>
-       <choice type="PROGRAM" ref="baby_monitor" uuid="33ed9bd8-e319-4062-b228-4e6b9fa961a1"/>
+       <choice type="PROGRAM" uuid="33ed9bd8-e319-4062-b228-4e6b9fa961a1"/>
      </choices>
    </quality>
    <quality id="simsense_dependency"  karma="16" pos="false" type="NORMAL" />
