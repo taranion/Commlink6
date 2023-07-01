@@ -429,7 +429,13 @@ public class NPCParser {
 				int pos = extra.indexOf("Device Rating") + "Device Rating".length();
 				int rating = Integer.parseInt(extra.substring(pos).trim());
 				for (ItemTemplate raw : Shadowrun6Core.getItemList(ItemTemplate.class)) {
-					if (raw.getItemSubtype()==ItemSubType.COMMLINK && raw.getAttribute(SR6ItemAttribute.DEVICE_RATING).getDistributed()==rating) {
+					ItemSubType subtype = raw.getItemSubtype(CarryMode.CARRIED);
+					if (subtype!=ItemSubType.COMMLINK)
+						continue;
+					if (raw.getAttribute(SR6ItemAttribute.DEVICE_RATING)==null) {
+						continue;
+					}
+					if (subtype==ItemSubType.COMMLINK && raw.getAttribute(SR6ItemAttribute.DEVICE_RATING).getDistributed()==rating) {
 						logger.log(Level.INFO, "Substituted ''{0}'' with "+raw);
 						return raw;
 					}
