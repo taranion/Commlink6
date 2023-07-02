@@ -6,7 +6,6 @@ import java.lang.System.Logger.Level;
 import org.prelle.javafx.ScreenManagerProvider;
 import org.prelle.javafx.Section;
 
-import de.rpgframework.jfx.rules.AttributeTable.Mode;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.jfx.KarmaAttributeTable;
@@ -37,7 +36,7 @@ public class AttributeSection extends Section {
 
 	private ShadowrunAttributeTable<SR6Skill,SR6SkillValue,Shadowrun6Character> table;
 
-	private Mode mode = Mode.GENERATE;
+	private SR6CharacterController control;
 
 	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4);
 
@@ -52,21 +51,11 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void initLayoutNormal() {
-//		HBox layout = new HBox(table);
-//		layout.setStyle("-fx-spacing: 1em;");
-
 		setContent(table);
-//		setMode(org.prelle.javafx.Mode.BACKDROP);
-//		CheckBox cb1 = new CheckBox("Configuration Setting 1");
-//		CheckBox cb2 = new CheckBox("Configuration Setting 2");
-//		VBox back = new VBox(5, cb1, cb2);
-//		setSecondaryContent(back);
 	}
 
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-//		if (getSettingsButton()!=null)
-//			getSettingsButton().setOnAction(ev -> onSettings());
 	}
 
 	//-------------------------------------------------------------------
@@ -74,22 +63,19 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void updateController(SR6CharacterController ctrl) {
+		this.control = ctrl;
 		Shadowrun6Character model = ctrl.getModel();
 
 		IAttributeController attrib = ctrl.getAttributeController();
 		logger.log(Level.DEBUG, "updateController to {0}", attrib.getClass().getSimpleName());
 		if (attrib instanceof SR6PriorityAttributeGenerator) {
-// 			System.err.println("AttributeSection: change controller to Priority");
 			table = new PriorityAttributeTable<>(ctrl);
-			((PriorityAttributeTable)table).useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?9:6));
+			((PriorityAttributeTable<?,?,?>)table).useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?9:6));
 		} else if (attrib instanceof SR6PointBuyAttributeGenerator) {
-// 			System.err.println("AttributeSection: change controller to Point Buy");
 			table = new PointBuyAttributeTable<>(ctrl);
 		} else if (attrib instanceof SR6KarmaAttributeGenerator) {
-// 			System.err.println("AttributeSection: change controller to Karma");
 			table = new KarmaAttributeTable<>(ctrl);
 		} else if (attrib instanceof SR6FreeAttributeGenerator) {
-// 			System.err.println("AttributeSection: change controller to Karma");
 			table = new KarmaAttributeTable<>(ctrl);
 		} else if (attrib instanceof SR6AttributeLeveller) {
 			table = new LevellingAttributeTable<>(ctrl);
@@ -109,29 +95,16 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void refresh() {
-		logger.log(Level.DEBUG, "refresh: "+table.getSkin());
+		logger.log(Level.DEBUG, "refresh: {0}",table.getSkin());
+		if (control!=null) {
+			Shadowrun6Character model = control.getModel();
+			MagicOrResonanceType mor = model.getMagicOrResonanceType();
+			if (mor != null) {
+				table.setShowMagic(mor.usesMagic());
+				table.setShowResonance(mor.usesResonance());
+			}
+		}
 		table.refresh();
-//		derived.refresh();
 	}
-
-//	//-------------------------------------------------------------------
-//	public ReadOnlyObjectProperty<BasePluginData> showHelpForProperty() {
-//		return showHelpFor;
-//	}
-//
-//	//-------------------------------------------------------------------
-//	private void onSettings() {
-//		CharacterLeveller ctrl = (CharacterLeveller) control;
-//
-//		VBox content = new VBox(20);
-//		for (ConfigOption<?> opt : ctrl.getAttributeController().getConfigOptions()) {
-//			CheckBox cb = new CheckBox(opt.getName());
-//			cb.setSelected((Boolean)opt.getValue());
-//			cb.selectedProperty().addListener( (ov,o,n) -> ((ConfigOption<Boolean>)opt).set((Boolean)n));
-//			content.getChildren().add(cb);
-//		}
-//
-//		getManagerProvider().getScreenManager().showAlertAndCall(AlertType.NOTIFICATION, Resource.get(RES,  "dialog.settings.title"), content);
-//	}
 
 }
