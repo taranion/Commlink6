@@ -126,7 +126,8 @@
       <modifications>
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="BARREL" />
-            <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" /> <!-- Smartgun is added versus Black Moon from Schattenload 2021-04 -->
+         <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" /> <!-- Smartgun is added versus Black Moon from Schattenload 2021-04 -->
+			<itemmod type="GEARMOD" ref="accessory_rail_left" />
       </modifications>
       <weapon dmg="4P" attack="11,9,7,," mode="SA" ammo="6(cy)" skill="firearms" spec="firearms/pistols_heavy"/>
    </item>
@@ -136,6 +137,7 @@
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="BARREL" />
          <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+			<itemmod type="GEARMOD" ref="accessory_rail_left" />
 			<itemmod type="GEARMOD" ref="personalized_grip_ranged" />
 			<itemmod type="GEARMOD" ref="custom_style" />
       </modifications>
