@@ -68,7 +68,7 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
     		Possible poss = null;
     		if (carry==CarryMode.EMBEDDED) {
     			poss = charGen.getEquipmentController().canBeEmbedded(container, hook, n, null);
-    		} else {
+    		} else if (n!=null) {
        			poss = charGen.getEquipmentController().canBeSelected(n);
     		}
     		logger.log(Level.DEBUG, "Selection possible = {0}",poss);
