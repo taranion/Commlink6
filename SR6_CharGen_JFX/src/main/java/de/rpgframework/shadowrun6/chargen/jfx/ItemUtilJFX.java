@@ -674,17 +674,13 @@ public class ItemUtilJFX {
 
 		int startCol = table.getColumnCount();
 		table.add(heaDmg, startCol+COL_DMG, 0);
-		logger.log(Level.ERROR, "Before "+table.getColumnCount());
 		if (hasM) table.add(heaMod, startCol+COL_MOD, 0);
 		table.add(heaAR, startCol+COL_AR, 0);
 		if (hasA) table.add(heaAmmo, startCol+COL_AMMO, 0);
-		logger.log(Level.ERROR, "After "+table.getColumnCount());
 
 		// Now add data
 		for (int i = 0; i < possibilities.size(); i++) {
 			AGearData data = possibilities.get(i);
-			logger.log(Level.ERROR, "A "+data.getAttribute(SR6ItemAttribute.ATTACK_RATING));
-			logger.log(Level.ERROR, "  A "+createLabelWithValue(item,carry,data,SR6ItemAttribute.ATTACK_RATING));
 			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.DAMAGE), startCol+COL_DMG, i+1);
 			if (hasM) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.FIREMODES), startCol+COL_MOD, i+1);
 			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.ATTACK_RATING), startCol+COL_AR, i+1);
