@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -20,6 +21,7 @@ import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -98,7 +100,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	}
 
 	// -------------------------------------------------------------------
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "incomplete-switch" })
 	private boolean applyModification(boolean strict, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addCharacterModification(mod);
@@ -109,6 +111,15 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		Decision[] decs = new Decision[mod.getDecisions().size()];
 		decs = mod.getDecisions().toArray(decs);
 		switch ((ShadowrunReference) mod.getReferenceType()) {
+		case GEARMOD:
+			SR6ItemEnhancement itemenh = Shadowrun6Core.getItem(SR6ItemEnhancement.class, mod.getKey());
+			if (itemenh!=null) {
+				ItemEnhancementValue<SR6ItemEnhancement> enhVal = new ItemEnhancementValue<SR6ItemEnhancement>(itemenh);
+				model.addAutoEnhancement(enhVal);
+			} else {
+				logger.log(Level.ERROR, "Unknown item enhancement ''{0}'' referenced in {0}", mod.getSource());
+			}
+			return true;
 		case HOOK:
 			ItemHook hook = mod.getResolvedKey();
 			if (hook==ItemHook.SOFTWARE && model.getAsValue(SR6ItemAttribute.CONCURRENT_PROGRAMS)!=null) {
@@ -171,14 +182,14 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			model.setAutoFlag((Enum)mod.getResolvedKey(), true);
 			return true;
 		}
-		logger.log(Level.WARNING, "ToDo: DataItemModification " + mod);
+		logger.log(Level.WARNING, "ToDo: DataItemModification " + mod+" / "+mod.getReferenceType());
 		System.err.println("ApplyStockModification: unsupported modification type: "+mod.getReferenceType());
 //		model.addModification(mod);
 		return false;
 	}
 
 	// -------------------------------------------------------------------
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "incomplete-switch" })
 	private boolean embedModification(boolean strict, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
 		logger.log(Level.DEBUG, "Before processing "+mod+" Decisions are "+model.getDecisions());
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {

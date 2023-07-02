@@ -497,6 +497,10 @@ public class Shadowrun6Tools {
 					return RES.format("modification.skill", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
 				case GEAR:
 					return ((ItemTemplate)valMod.getResolvedKey()).getName(loc);
+				case GEARMOD:
+					return ((SR6ItemEnhancement)valMod.getResolvedKey()).getName(loc);
+				case HOOK:
+					return null;
 				default:
 					logger.log(Level.WARNING, "Don't know how to display "+mod);
 					return null;
