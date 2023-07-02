@@ -7,7 +7,7 @@
 		</modifications>
 	</mentorspirit>
 
-	<mentorspirit id="architect" type="PARAGON">
+	<mentorspirit id="architect_builder" type="PARAGON">
 		<modifications>
 			<checkmod type="SKILL" ref="electronics" value="-1" what="EDGE_BOOST" cond="y" /> <!-- edit actions -->
 		</modifications>
