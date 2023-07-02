@@ -89,7 +89,7 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 	@Override
 	protected void selectionChanged(ItemTemplate n) {
 		Pane box = getDescriptionNode(n);
-		logger.log(Level.ERROR, "Selected {0} and show description node {1}", n, box);
+		logger.log(Level.DEBUG, "Selected {0} and show description node {1}", n, box);
 		col2.getChildren().setAll(box, lbNotPossible);
 		VBox.setVgrow(box, Priority.ALWAYS);
 		help.getChildren().setAll(col1, col2);
