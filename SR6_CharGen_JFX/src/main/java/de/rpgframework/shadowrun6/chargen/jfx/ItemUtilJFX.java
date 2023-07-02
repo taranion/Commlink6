@@ -29,6 +29,8 @@ import de.rpgframework.shadowrun.items.AmmunitionSlot;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
+import de.rpgframework.shadowrun.persist.AmmunitionConverter;
+import de.rpgframework.shadowrun.persist.FireModesConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -37,6 +39,7 @@ import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
+import de.rpgframework.shadowrun6.persist.AttackRatingArrayConverter;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -60,6 +63,10 @@ public class ItemUtilJFX {
 	private final static Logger logger = System.getLogger("de.rpgframework.shadowrun6.jfx");
 
 	private static PropertyResourceBundle UI = (PropertyResourceBundle) ResourceBundle.getBundle(Shadowrun6Tools.class.getName());
+
+	private static AttackRatingArrayConverter arConv = new AttackRatingArrayConverter();
+	private static FireModesConverter firemodeConv = new FireModesConverter();
+	private static AmmunitionConverter ammoConv = new AmmunitionConverter();
 
 	//-------------------------------------------------------------------
 	private static void addColumn(GridPane table, CarriedItem<ItemTemplate> carried, SR6ItemAttribute attrib, int width) {
@@ -232,7 +239,7 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
-	public static VBox getItemInfoNode(ItemTemplate item, ShadowrunCharacter model, CarryMode carry) {
+	public static VBox getItemInfoNode(ItemTemplate item, Shadowrun6Character model, CarryMode carry) {
 		VBox box = new VBox(10);
 		box.setStyle("-fx-spacing:0.5em; ");
 		box.setMaxWidth(Double.MAX_VALUE);
@@ -289,7 +296,16 @@ public class ItemUtilJFX {
 		}
 
 		if (!augment && !matrix) {
-			logger.log(Level.WARNING,"No special display for itemtype "+item.getItemType());
+			switch (item.getItemType(carry)) {
+			case WEAPON_CLOSE_COMBAT:
+			case WEAPON_FIREARMS:
+			case WEAPON_RANGED:
+			case WEAPON_SPECIAL:
+				addWeaponColumns(item, model, carry, table, possibilities);
+				break;
+			default:
+				logger.log(Level.WARNING,"No special display for itemtype "+item.getItemType(carry));
+			}
 		}
 
 		nextCol = table.getColumnCount();
@@ -623,6 +639,60 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
+	private static void addWeaponColumns(ItemTemplate item, Shadowrun6Character model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
+		if (item==null)
+			throw new NullPointerException("Empty item");
+		logger.log(Level.WARNING,"No special display for itemtype "+item.getItemType(carry));
+
+		boolean hasM = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.FIREMODES)!=null);
+		boolean hasA = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.AMMUNITION)!=null);
+
+		int COL_DMG  = 0;
+		int COL_MOD  = (hasM)?(COL_DMG+1):COL_DMG;
+		int COL_AR   = COL_MOD+1;
+		int COL_AMMO = (hasA)?(COL_AR+1):COL_AR;
+
+		Label heaDmg = new Label(SR6ItemAttribute.DAMAGE.getShortName());
+		Label heaMod = new Label(SR6ItemAttribute.FIREMODES.getShortName());
+		Label heaAR  = new Label(SR6ItemAttribute.ATTACK_RATING.getShortName());
+		Label heaAmmo = new Label(SR6ItemAttribute.AMMUNITION.getShortName());
+
+		heaDmg.getStyleClass().add("table-head");
+		heaAR .getStyleClass().add("table-head");
+		heaMod.getStyleClass().add("table-head");
+		heaAmmo.getStyleClass().add("table-head");
+
+		heaDmg.setMaxWidth(Double.MAX_VALUE);
+		heaAR .setMaxWidth(Double.MAX_VALUE);
+		heaMod.setMaxWidth(Double.MAX_VALUE);
+		heaAmmo.setMaxWidth(Double.MAX_VALUE);
+
+		heaDmg.setAlignment(Pos.CENTER);
+		heaAR .setAlignment(Pos.CENTER);
+		heaMod.setAlignment(Pos.CENTER);
+		heaAmmo.setAlignment(Pos.CENTER);
+
+		int startCol = table.getColumnCount();
+		table.add(heaDmg, startCol+COL_DMG, 0);
+		logger.log(Level.ERROR, "Before "+table.getColumnCount());
+		if (hasM) table.add(heaMod, startCol+COL_MOD, 0);
+		table.add(heaAR, startCol+COL_AR, 0);
+		if (hasA) table.add(heaAmmo, startCol+COL_AMMO, 0);
+		logger.log(Level.ERROR, "After "+table.getColumnCount());
+
+		// Now add data
+		for (int i = 0; i < possibilities.size(); i++) {
+			AGearData data = possibilities.get(i);
+			logger.log(Level.ERROR, "A "+data.getAttribute(SR6ItemAttribute.ATTACK_RATING));
+			logger.log(Level.ERROR, "  A "+createLabelWithValue(item,carry,data,SR6ItemAttribute.ATTACK_RATING));
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.DAMAGE), startCol+COL_DMG, i+1);
+			if (hasM) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.FIREMODES), startCol+COL_MOD, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.ATTACK_RATING), startCol+COL_AR, i+1);
+			if (hasA) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.AMMUNITION), startCol+COL_AMMO, i+1);
+		}
+	}
+
+	//-------------------------------------------------------------------
 	private static Node getMatrixDeviceNode(CarriedItem<ItemTemplate> item, Shadowrun6Character model) {
 		VBox layout = new VBox();
 		layout.setStyle("-fx-spacing: 0.5em");
@@ -708,7 +778,6 @@ public class ItemUtilJFX {
 		GridPane.setMargin(lbAvail, new Insets(0, 5, 0, 5));
 
 		ItemAttributeDefinition def = data.getAttribute(attrib);
-		logger.log(Level.WARNING, "Def1 {0}", def);
 		if (def==null)
 			def = item.getAttribute(attrib);
 		logger.log(Level.WARNING, "Def2 {0}", def);
@@ -721,6 +790,26 @@ public class ItemUtilJFX {
 				lbAvail.setText(translateVariables(usage.getRawValue(), null));
 			} else if (def != null) {
 				lbAvail.setText(translateVariables(def.getRawValue(), def.getLookupTable()));
+			}
+		} else if (attrib == SR6ItemAttribute.ATTACK_RATING) {
+			if (def!=null) {
+				if (def.getRawValue().contains("$RATING")) {
+					lbAvail.setText(translateVariables(def.getRawValue(), def.getLookupTable()));
+				} else {
+					try {
+						lbAvail.setText(arConv.write( (int[])def.getValue()));
+					} catch (Exception e) {
+						logger.log(Level.ERROR, e);
+					}
+				}
+			}
+		} else if (attrib == SR6ItemAttribute.FIREMODES) {
+			if (def!=null) {
+				lbAvail.setText(firemodeConv.write(def.getValue()));
+			}
+		} else if (attrib == SR6ItemAttribute.AMMUNITION) {
+			if (def!=null) {
+				lbAvail.setText(ammoConv.write(def.getValue()));
 			}
 		} else {
 			if (def!=null)
@@ -762,7 +851,7 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
-	private static void addMatrixDeviceColumns(ItemTemplate item, ShadowrunCharacter model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
+	private static void addMatrixDeviceColumns(ItemTemplate item, Shadowrun6Character model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
 		if (item==null)
 			throw new NullPointerException("Empty item");
 
@@ -873,7 +962,7 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
-	private static Node getAugmentationNode(CarriedItem item, ShadowrunCharacter model) {
+	private static Node getAugmentationNode(CarriedItem item, Shadowrun6Character model) {
 		if (item==null)
 			throw new NullPointerException("Empty item");
 
@@ -894,7 +983,7 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
-	private static void addAugmentationColumns(ItemTemplate item, ShadowrunCharacter model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
+	private static void addAugmentationColumns(ItemTemplate item, Shadowrun6Character model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
 		if (item==null)
 			throw new NullPointerException("Empty item");
 
