@@ -488,18 +488,18 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
-//		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_ai.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" vitual lifeform qualities");
-//		list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "hack_slash/data/metatypes.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" AI types");
-//		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"hack_slash/data/gear_codemods.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" codemods");
-//		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,"hack_slash/data/mentorspirits.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" paragons");
-//		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_streams.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" streams");
-//		list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"hack_slash/data/quality_paths.xml");
-//		logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_ai.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vitual lifeform qualities");
+		list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "hack_slash/data/metatypes.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" AI types");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"hack_slash/data/gear_codemods.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" codemods");
+		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,"hack_slash/data/mentorspirits.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" paragons");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities_streams.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" streams");
+		list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"hack_slash/data/quality_paths.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
 
 	}
 

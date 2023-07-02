@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qpaths>
+	
+	<qpath id="cyberadept_path">
+		<step id="cyberadept_novice" level="0">
+			<requires>
+				<datareq type="METAECHO" ref="cyberadept" apply="CHARACTER"/>
+			</requires>
+			<nextSteps>
+				<next>cyberadept_disciple</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="cyberadept_novice"/>
+			</modifications>
+		</step>
+		<step id="cyberadept_disciple" level="1">
+			<requires>
+				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="4"/>
+			</requires>
+			<nextSteps>
+				<next>cyberadept_master</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="cyberadept_novice" remove="true"/>
+				<itemmod type="QUALITY" ref="cyberadept_disciple"/>
+			</modifications>
+		</step>
+		<step id="cyberadept_master" level="2">
+			<requires>
+				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3"/>
+			</requires>
+			<nextSteps>
+				<next>cyberadept_transcendent</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="cyberadept_disciple" remove="true"/>
+				<itemmod type="QUALITY" ref="cyberadept_master"/>
+			</modifications>
+		</step>
+		<step id="cyberadept_transcendent" level="3">
+			<requires>
+				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2"/>
+			</requires>
+			<modifications>
+				<itemmod type="QUALITY" ref="cyberadept_master" remove="true"/>
+				<itemmod type="QUALITY" ref="cyberadept_transcendent"/>
+			</modifications>
+		</step>
+	</qpath>
+	
+</qpaths>

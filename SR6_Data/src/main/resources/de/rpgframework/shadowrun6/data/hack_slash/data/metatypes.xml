@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metatypes>
+
     <metatype id="pilot-ai" ai="true">
         <modifications>
             <valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="7" set="MAX" when="CREATION"/>

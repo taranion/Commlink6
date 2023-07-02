@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
+
+<!-- Attribute Codemods -->
+
 	<item id="attribute_augmentation" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD" reqVariant="y">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" />
@@ -59,10 +62,10 @@
 			</modifications>
 		</variant>
 	</item>
+
 	<item avail="5L" id="quantum_processor" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD">
 		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING"
-				options="1,2,3,4,5,6,7,8" />
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2" />
 		</choices>
 		<attrdef id="PRICE" value="$RATING*40000" />
 		<attrdef id="ESSENCECOST" value="$RATING*0.5" />
@@ -72,6 +75,203 @@
 		</modifications>
 	</item>
 
-	<!-- Core Codemods -->
+<!-- Core Codemods -->
+
+	<item avail="3L" id="core_code_redundancy" type="CODEMODS" subtype="CORE_CODEMOD">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*12000" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.2" />
+		<flags><flag>CODEMOD</flag></flags>
+		<modifications>
+			<!-- <valmod type="ATTRIBUTE" ref="MATRIX_MONITOR" value="$RATING" apply="CHARACTER" /> MATRIX_MONITOR unknown -->	
+		</modifications>
+	</item>
+
+	<item avail="2" id="core_code_shielding" type="CODEMODS" subtype="CORE_CODEMOD">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*3500" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.15" />
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="DEFENSE_MATRIX" value="$RATING"/>
+	</item>
+
+	<item avail="4" price="18500" id="data_mitigation_protocols" type="CODEMODS" subtype="CORE_CODEMOD">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.2" />
+	</item>
+
+	<item avail="5L" id="data_response_overrides" type="CODEMODS" subtype="CORE_CODEMOD">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*3000" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.1" />
+		<flags><flag>CODEMOD</flag></flags>
+		<modifications>
+			<valmod type="RULE" ref="PAIN_TOLERANCE_IGNORE_BOX" value="$RATING"/>
+		</modifications>
+	</item>
+
+	<item avail="3" price="4000" id="data_archive_upgrade" type="CODEMODS" subtype="CORE_CODEMOD">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.1" />
+		<modifications>
+			<itemmod type="QUALITY" apply="CHARACTER" ref="photographic_memory"/>
+		</modifications>
+	</item>
+
+	<item avail="5" price="10000" id="optimized_restoration" type="CODEMODS" subtype="CORE_CODEMOD">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.1" />
+	</item>
+
+<!-- Processor Codemods -->
+
+	<item id="rcc_emulator" type="CODEMODS" subtype="PROCESSOR">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*7500" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.1" />
+		<attrdef id="AVAILABILITY" value="$RATING+1 L" />
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="SOFTWARE_TYPES" value="AUTOSOFT"/>
+		<modifications>
+			<valmod type="HOOK" ref="SOFTWARE" value="$RATING"/>
+		</modifications>
+	</item>
+
+	<item avail="2" id="sideload_processor" type="CODEMODS" subtype="PROCESSOR">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*2000" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.1" />
+		<flags><flag>CODEMOD</flag></flags>
+		<modifications>
+			<valmod type="HOOK" ref="SOFTWARE" value="$RATING"/>
+		</modifications>
+	</item>
+
+	<item avail="5" id="skilldriver_activesoft" type="CODEMODS" subtype="PROCESSOR">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*25000" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.1" />
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="MAX_SKILLSOFT_RATING" value="$RATING"/>
+		<attrdef id="SOFTWARE_TYPES" value="ACTIVESOFT"/>
+		<modifications>
+			<valmod type="HOOK" ref="SKILLJACK" value="1"/>
+		</modifications>
+	</item>
+
+	<item avail="2" price="5000" id="skilldriver_knowsoft" type="CODEMODS" subtype="CORE_CODEMOD">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.1" />
+		<modifications>
+			<valmod type="HOOK" ref="SKILLJACK" value="1"/>
+		</modifications>
+	</item>
+
+	<item avail="2" id="skilldriver_linguasoft" type="CODEMODS" subtype="PROCESSOR">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*4000" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.2" />
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="SOFTWARE_TYPES" value="KNOWSOFT"/>
+		<modifications>
+			<valmod type="HOOK" ref="SKILLJACK" value="1"/>
+		</modifications>
+	</item>
+
+<!-- Input / Output Codemods -->
+
+	<item avail="3" id="active_signal_filter" type="CODEMODS" subtype="IO">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*7000" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.1" />
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="NOISE_REDUCTION" value="$RATING"/>
+	</item>
+
+	<item avail="5L" id="ecm_integration" type="CODEMODS" subtype="IO">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*2500" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.1" />
+		<flags><flag>CODEMOD</flag></flags>
+	</item>
+
+	<item avail="3" id="pan_emulator" type="CODEMODS" subtype="IO">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*14000" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.2" />
+		<flags><flag>CODEMOD</flag></flags>
+	</item>
+
+	<item avail="4L" id="control_rig_integration" type="CODEMODS" subtype="IO">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*30000" />
+		<attrdef id="ESSENCECOST" value="$RATING*0.8" />
+		<flags><flag>CODEMOD</flag></flags>
+		<modifications>
+			<itemmod type="GEAR" apply="CHARACTER" ref="control_rig" variant="control_rig_codemod" />	
+		</modifications>
+	</item>
+
+	<item avail="3L" price="4000" id="smartlink_adapter" type="CODEMODS" subtype="IO">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.2" />
+	</item>
+
+<!-- Digital Weapon Codemods -->
+
+	<item avail="3I" price="5000" id="acid_jet" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.1" />
+	</item>
+
+	<item avail="3I" price="5000" id="limelight" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.1" />
+	</item>
+
+	<item avail="3I" price="5000" id="swordbreaker" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.1" />
+	</item>
+
+	<item avail="4I" price="8000" id="slashing_strike" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.25" />
+		<modifications>
+			<!-- <valmod type="ITEM_ATTRIBUTE" ref="MATRIX_ATTACK_RATING" value="3"/> -->
+			<!-- <valmod type="ITEM_ATTRIBUTE" ref="MATRIX_DAMAGE" value="+1"/> -->
+		</modifications>
+	</item>
+
+	<item avail="6I" price="12000" id="thunder_strike" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<flags><flag>CODEMOD</flag></flags>
+		<attrdef id="ESSENCECOST" value="0.75" />
+		<modifications>
+			<!-- <valmod type="ITEM_ATTRIBUTE" ref="MATRIX_ATTACK_RATING" value="5"/> -->
+			<!-- <valmod type="ITEM_ATTRIBUTE" ref="MATRIX_DAMAGE" value="+2"/> -->
+		</modifications>
+	</item>
 
 </items>
