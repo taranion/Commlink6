@@ -254,6 +254,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 				model.setKarmaInvested( model.getKarmaInvested() +karma);
 				settings.skills += karma;
 			}
+			logger.log(Level.INFO, "Leave with {0} Karma", model.getKarmaFree());
 
 		} catch (Exception e) {
 
