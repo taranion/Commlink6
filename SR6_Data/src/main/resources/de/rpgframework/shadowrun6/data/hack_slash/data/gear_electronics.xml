@@ -60,6 +60,7 @@
          <valmod type="HOOK" ref="CASE_MODS" value="99"/>
          <itemmod type="HOOK" ref="CUSTOM_CYBERDECK"/>
          <itemmod type="HOOK" ref="CYBERHACK"/>
+		 <!-- <itemmod type="RULE" ref="HALF_CYBERDECK_COST"/> -->
       </modifications>
    </item>
    <item id="briefcase" type="CYBERDECK" subtype="CASES" reqVariant="y">
@@ -189,8 +190,8 @@
     	<attrdef id="PRICE"     value="$RATING*500+1500"/>
 		<usage mode="EMBEDDED"  value="$SIZE" slot="CASE_MODS"/>
 		<alternate id="dart_launcher" mode="WEAPON" type="WEAPON_RANGED" subtype="THROWING">
-			<weapon attack="8,8,,," ammo="5(c)" dmg="4S(e)" mode="SS" skill="exotic_weapons" spec="exotic_weapons/air"/>
-    		<attrdef id="AMMUNITION"      value="$RATING"/>
+			<weapon attack="8,8,,," ammo="1(m)" dmg="4S(e)" mode="SS" skill="exotic_weapons" spec="exotic_weapons/air"/>
+    		<attrdef id="AMMUNITION"      value="$RATING(m)"/>
 		</alternate>
    </item>
    <item id="gonzo_hardening" price="2000" avail="4I" type="CYBERDECK" subtype="CASE_MODS">
@@ -199,7 +200,7 @@
    <item id="hardening_case" price="1000" avail="2I" type="CYBERDECK" subtype="CASE_MODS">
       <usage mode="EMBEDDED" value="1" slot="CASE_MODS"/>
    </item>
-   <item id="shock_shield" type="CYBERDECK" subtype="CASE_MODS">
+   <item id="shock_shield" avail="5I" type="CYBERDECK" subtype="CASE_MODS">
    	<choices>
    		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d7" type="ITEM_ATTRIBUTE" ref="SIZE" options="1,2,3,4,5"/>
    	</choices>
@@ -390,7 +391,8 @@
 		<attrdef id="PRICE" value="$RATING*250"/>
       	<requires>
         		<valuereq type="ITEM_ATTRIBUTE" ref="DEVICE_RATING" value="$RATING" />
-      	</requires>
+				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>      	
+		</requires>
    </item>
    <item avail="4I" id="comhack_stealthlink_upgrade" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES">
 		<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
@@ -400,7 +402,11 @@
 		<attrdef id="PRICE" value="$RATING*1000"/>
       	<requires>
         		<valuereq type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="$RATING" />
+				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>      	
       	</requires>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="SLEAZE" value="$RATING"/>
+		</modifications>
    </item>
    <item avail="4L" id="comhack_securelink_upgrade" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES">
 		<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
@@ -410,9 +416,138 @@
 		<attrdef id="PRICE" value="$RATING*500"/>
       	<requires>
         		<valuereq type="ITEM_ATTRIBUTE" ref="FIREWALL" value="$RATING" />
+				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>      	
+      	</requires>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="FIREWALL" value="$RATING"/>
+		</modifications>
+	</item>
+   <item avail="4L" id="comhack_securelink_upgrade" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES" lang="de">
+		<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*500"/>
+      	<requires>
+        		<valuereq type="ITEM_ATTRIBUTE" ref="DEVICE_RATING" value="$RATING*2" /> <!-- DE rules limit to device rating /2 instead base firewall -->
+				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>      	
       	</requires>
 	</item>
+
+   <!-- Dataterms -->
+
+	<item avail="2" price="30" id="eastern_electronics" type="ELECTRONICS" subtype="DATATERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+		<modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+		</modifications>
+		<matrix d="1" f="0" programs="0" devrat="1" />
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+   <item avail="2" price="150" id="xiao_homestation" type="ELECTRONICS" subtype="DATATERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+       <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix d="1" f="1" programs="1" devrat="2"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+   <item avail="2" price="400" id="novatech_edge" type="ELECTRONICS" subtype="DATATERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+       <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix d="2" f="1" programs="1" devrat="3" />
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+   <item avail="2" price="900" id="spectrum_vvx" type="ELECTRONICS" subtype="DATATERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+       <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix d="2" f="2" programs="2" devrat="4"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+   <item avail="2" price="1500" id="leviathan_executive" type="ELECTRONICS" subtype="DATATERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+       <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix d="3" f="2" programs="2" devrat="5"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+   <item avail="3" price="4000" id="hermes_home_connect" type="ELECTRONICS" subtype="DATATERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+      <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix d="3" f="3" programs="3" devrat="6"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+
+   <!-- Cyberterms -->
    
+   <item avail="3I" price="52500" id="aztechnology_aprendiz" type="ELECTRONICS" subtype="CYBERTERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
+       <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix a="4" s="3" d="2" f="1" programs="1" devrat="1"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+   <item avail="3I" price="79900" id="radio_shack_ct200" type="ELECTRONICS" subtype="CYBERTERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
+       <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix a="5" s="4" d="3" f="2" programs="3" devrat="2"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+   <item avail="4I" price="105250" id="microdeck_watchman" type="ELECTRONICS" subtype="CYBERTERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
+       <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix a="6" s="5" d="4" f="3" programs="5" devrat="3"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+   <item avail="5I" price="129000" id="renraku_shugosha" type="ELECTRONICS" subtype="CYBERTERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
+       <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix a="7" s="6" d="5" f="4" programs="7" devrat="4"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+	<item avail="6I" price="254500" id="shiawase_gunso" type="ELECTRONICS" subtype="CYBERTERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
+		<modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+		</modifications>
+	    <matrix a="8" s="7" d="6" f="5" programs="9" devrat="5"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+   <item avail="7I" price="380350" id="fairlight_falchion" type="ELECTRONICS" subtype="CYBERTERM">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
+       <modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+         <valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+      </modifications>
+      <matrix a="9" s="8" d="7" f="6" programs="11" devrat="6"/>
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+   </item>
+
    <!-- Cyberkits -->
 
    <item id="cyberkit" type="ELECTRONICS" subtype="CYBERDECK">
