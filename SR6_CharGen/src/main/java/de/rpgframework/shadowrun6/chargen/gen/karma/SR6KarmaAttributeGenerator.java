@@ -5,7 +5,6 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.rpgframework.genericrpg.NumericalValueController;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -182,7 +181,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 				if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE) {
 					ValueModification mod = (ValueModification)tmp;
 					ShadowrunAttribute attr = mod.getResolvedKey();
-					logger.log(Level.INFO, "Consume "+mod);
+					logger.log(Level.INFO, "Consume {0}",mod);
 					switch (mod.getSet()) {
 					case MAX:
 						// Optional: Allow adjustment points on lowered maximum
@@ -249,7 +248,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 	 */
 	@Override
 	public int getValue(AttributeValue<ShadowrunAttribute> key) {
-		return key.getDistributed();
+		return key.getModifiedValue(ValueType.NATURAL);
 	}
 
 }

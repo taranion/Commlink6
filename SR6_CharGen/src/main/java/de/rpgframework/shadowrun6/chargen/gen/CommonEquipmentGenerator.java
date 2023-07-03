@@ -254,6 +254,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				}
 			}
 			model.setNuyen(nuyen);
+			logger.log(Level.INFO, "Leave with {0} Karma", model.getKarmaFree());
 			logger.log(Level.INFO, "Nuyen remaining: {0}", model.getNuyen());
 
 			return unprocessed;

@@ -32,7 +32,6 @@ public class SR6PriorityCalculateMaxPowerPointsStep implements ProcessingStep {
 	//-------------------------------------------------------------------
 	protected int determineMaxFreePoints() {
 		Shadowrun6Character model = parent.getModel();
-		logger.log(Level.INFO, "MOR = "+model.getMagicOrResonanceType());
 		if (model.getMagicOrResonanceType()==null)
 			return 0;
 		if (!model.getMagicOrResonanceType().usesPowers())

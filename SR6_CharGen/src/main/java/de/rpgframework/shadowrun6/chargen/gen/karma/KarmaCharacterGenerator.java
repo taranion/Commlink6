@@ -30,6 +30,7 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyMetatypeController;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
+import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 
 /**
  * @author stefa
@@ -139,6 +140,7 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 			processChain.add(qualities);
 			processChain.add(qPaths);
 			processChain.add(attributes);
+			processChain.add(new CalculateAttributePools(model, locale));
 			processChain.add(skills);
 			processChain.add(spells);
 			processChain.add(rituals);

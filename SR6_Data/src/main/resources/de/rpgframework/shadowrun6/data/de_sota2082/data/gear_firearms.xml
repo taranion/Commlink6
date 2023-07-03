@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-	
+
 	<item id="hk_urban_fighter" avail="8I" price="2500" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" >
       <modifications>
 			<itemmod type="HOOK" ref="BARREL" />
@@ -23,7 +23,7 @@
       </modifications>
       <weapon dmg="3P" attack="10,12,10,," mode="SA" ammo="25(c)" skill="firearms" spec="firearms/pistols_heavy"/>
    </item>
-   
+
    <item id="hk_urban_enforcer" avail="8I" price="5500"  type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS" >
       <modifications>
 			<itemmod type="HOOK" ref="TOP" />
@@ -106,7 +106,7 @@
       </modifications>
       <weapon attack=",5,9,10,8" ammo="1(ml)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
    </item>
-   
+
    <item id="walther_esg1" avail="6L" price="22500"  type="WEAPON_FIREARMS" subtype="TASERS">
       <modifications>
 			<itemmod type="HOOK" ref="TOP" />
@@ -126,7 +126,8 @@
       <modifications>
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="BARREL" />
-            <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" /> <!-- Smartgun is added versus Black Moon from Schattenload 2021-04 -->
+         <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" /> <!-- Smartgun is added versus Black Moon from Schattenload 2021-04 -->
+			<itemmod type="GEARMOD" ref="accessory_rail_left" />
       </modifications>
       <weapon dmg="4P" attack="11,9,7,," mode="SA" ammo="6(cy)" skill="firearms" spec="firearms/pistols_heavy"/>
    </item>
@@ -135,8 +136,8 @@
       <modifications>
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="BARREL" />
-            <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
-            <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+         <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+			<itemmod type="GEARMOD" ref="accessory_rail_left" />
 			<itemmod type="GEARMOD" ref="personalized_grip_ranged" />
 			<itemmod type="GEARMOD" ref="custom_style" />
       </modifications>

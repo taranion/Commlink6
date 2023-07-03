@@ -240,8 +240,11 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 		tcDist = new TitledComponent(ResourceI18N.get(UI, "wizard.page.mortype.label.distribute"), mysticGrid);
 
 		VBox ret = new VBox(10, tcTrad, tcDist, descTradition);
-		if (charGen.getModel().getCharGenUsed()!=null && charGen.getModel().getCharGenUsed().equals("pointbuy")) {
-			ret.getChildren().remove(tcDist);
+		if (charGen.getModel().getCharGenUsed()!=null) {
+			boolean isPriority = charGen.getModel().getCharGenUsed().equals("prio") || charGen.getModel().getCharGenUsed().equals("sumto10");
+			if (!isPriority) {
+				ret.getChildren().remove(tcDist);
+			}
 		}
 
 		return ret;
