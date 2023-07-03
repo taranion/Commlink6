@@ -554,13 +554,13 @@
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="2,3,4,5,6"/>
 		</choices>
-		<attrdef id="PRICE" value="$RATING" table="1100, 1600, 3700, 6000, 9200"/>
+		<attrdef id="PRICE" value="$RATING" table="0,1100, 1600, 3700, 6000, 9200"/>
 		<attrdef id="AVAILABILITY" value="$RATING I"/>		
 		<matrix programs="0"/>
-		<attrdef id="ATTACK" value="$RATING" table="1,2,2,3,4"/>		
-		<attrdef id="SLEAZE" value="$RATING" table="1,2,2,3,4"/>		
-		<attrdef id="DATA_PROCESSING" value="$RATING" table="1,1,2,2,2"/>		
-		<attrdef id="FIREWALL" value="$RATING" table="1,1,2,2,2"/>		
+		<attrdef id="ATTACK" value="$RATING" table="0,1,2,2,3,4"/>		
+		<attrdef id="SLEAZE" value="$RATING" table="0,1,2,2,3,4"/>		
+		<attrdef id="DATA_PROCESSING" value="$RATING" table="0,1,1,2,2,2"/>		
+		<attrdef id="FIREWALL" value="$RATING" table="0,1,1,2,2,2"/>		
 		<attrdef id="DEVICE_RATING" value="$RATING"/>		
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>

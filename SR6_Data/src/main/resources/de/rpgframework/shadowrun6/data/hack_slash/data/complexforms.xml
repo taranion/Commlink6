@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <complexforms>
-   <complexform id="arc_feedback"       dur="SUSTAINED" fad="2"/>
+   <complexform id="arc_feedback"       dur="SUSTAINED" fad="3"/>
    <complexform id="attack_attribution" dur="SUSTAINED" fad="HITS" />
    <complexform id="bubble_shield"      dur="SUSTAINED" fad="HITS"/>
    <complexform id="btl_irl"            dur="SUSTAINED" fad="4"/>
