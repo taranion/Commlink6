@@ -50,6 +50,8 @@ public class AddMissingStandardSlots implements CarriedItemProcessor {
 			switch (subtype) {
 			case CYBERDECK:
 			case COMMLINK:
+			case DATATERM:
+			case CYBERTERM:
 			case RIGGER_CONSOLE:
 			case TAC_NET:
 				if (model.getSlot(ItemHook.ELECTRONIC_ACCESSORY)==null) {

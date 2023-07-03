@@ -70,6 +70,8 @@ public class GearPage extends Page {
 			switch (sub) {
 			case COMMLINK:
 			case CYBERDECK:
+			case DATATERM:
+			case CYBERTERM:
 			case RIGGER_CONSOLE:
 			case TAC_NET:
 				return false;

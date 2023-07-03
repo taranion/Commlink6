@@ -41,6 +41,8 @@ public enum ItemHook implements Hook {
 	HELMET_ACCESSORY(true),
 	COMMLINK,
 	CYBERDECK,
+	DATATERM,
+	CYBERTERM,
 	RCC,
 	MEDKIT,
 	HEADWARE_IMPLANT(true),

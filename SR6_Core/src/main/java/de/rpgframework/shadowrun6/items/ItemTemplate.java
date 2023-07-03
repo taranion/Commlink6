@@ -627,7 +627,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		ItemAttributeDefinition attr = getAttribute(SR6ItemAttribute.ITEMTYPE);
 		ItemSubType sub = getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
 		return hasFlag(FLAG_MATRIX_DEVICE) || attr.getValue()==ItemType.ELECTRONICS &&
-				( sub==ItemSubType.COMMLINK ||  sub==ItemSubType.CYBERDECK ||  sub==ItemSubType.RIGGER_CONSOLE  ||  sub==ItemSubType.TAC_NET );
+				( sub==ItemSubType.COMMLINK ||  sub==ItemSubType.CYBERDECK ||  sub==ItemSubType.DATATERM ||  sub==ItemSubType.CYBERTERM ||  sub==ItemSubType.RIGGER_CONSOLE  ||  sub==ItemSubType.TAC_NET );
 	}
 
 	//-------------------------------------------------------------------
