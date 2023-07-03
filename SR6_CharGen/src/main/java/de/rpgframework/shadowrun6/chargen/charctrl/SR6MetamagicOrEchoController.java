@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -151,14 +152,14 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public Possible canBeSelected(MetamagicOrEcho value, Decision... decisions) {
+	public Possible areRequirementsMet(MetamagicOrEcho value) {
 		// Check if all requirements are met
 		List<Requirement> notMet = new ArrayList<>();
 		for (Requirement req : value.getRequirements()) {
-			if (!Shadowrun6Tools.isRequirementMet(getModel(), value, req, decisions)) {
+			if (!Shadowrun6Tools.isRequirementMet(getModel(), value, req)) {
 				notMet.add(req);
 			}
 		}
@@ -191,8 +192,18 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
 			}
 		}
-
 		return Possible.TRUE;
+	}
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
+	 */
+	@Override
+	public Possible canBeSelected(MetamagicOrEcho value, Decision... decisions) {
+		Possible poss = areRequirementsMet(value);
+		if (!poss.get())
+			return poss;
+		return GenericRPGTools.areAllDecisionsPresent(value, decisions);
 	}
 
 	//-------------------------------------------------------------------

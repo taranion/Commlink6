@@ -22,6 +22,7 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
+import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -145,6 +146,19 @@ public class SR6FreeMetamagicOrEchoController extends ControllerImpl<MetamagicOr
 				grade ++;
 		}
 		return grade;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public Possible areRequirementsMet(MetamagicOrEcho value) {
+		Possible poss = Shadowrun6Tools.areRequirementsMet((Shadowrun6Character)getModel(), value);
+		if (!poss.get())
+			return poss;
+
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------

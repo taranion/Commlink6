@@ -204,6 +204,19 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public Possible areRequirementsMet(SR6Skill skill) {
+		if (skill.isRestricted() && !available.contains(skill)) {
+			return new Possible(I18N_RESTRICTED_SKILL);
+		}
+
+		return Possible.TRUE;
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.genericrpg.SelectionController#canBeSelected(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
