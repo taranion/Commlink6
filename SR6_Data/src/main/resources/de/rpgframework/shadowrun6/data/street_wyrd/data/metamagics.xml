@@ -27,7 +27,7 @@
 	</metaecho>
 	<metaecho id="infusion" type="METAMAGIC_ADEPT">
 		<requires>
-			<datareq type="ADEPT_POWER" ref="adept_centering"/>
+			<datareq type="METAECHO" ref="adept_centering"/>
 		</requires>
 	</metaecho>
 	<metaecho id="item_attunement" type="METAMAGIC_ADEPT" multi="yes">
