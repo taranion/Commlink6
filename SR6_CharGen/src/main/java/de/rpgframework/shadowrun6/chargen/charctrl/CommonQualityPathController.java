@@ -10,6 +10,7 @@ import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.QualityPathStep;
@@ -176,18 +177,6 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	public int getKarmaBalance() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public Possible areRequirementsMet(QualityPath value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
-		if (!poss.get())
-			return poss;
-		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------

@@ -15,13 +15,11 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
@@ -32,7 +30,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> implements SR6LifestyleController {
-
+	
 	protected final static Logger logger = System.getLogger(SR6LifestyleLeveller.class.getPackageName()+".lifestyle");
 
 	protected Shadowrun6Character model;
@@ -94,19 +92,6 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 	public List<Choice> getChoicesToDecide(LifestyleQuality value) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public Possible areRequirementsMet(LifestyleQuality value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet((Shadowrun6Character)getModel(), value);
-		if (!poss.get())
-			return poss;
-
-		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------
@@ -195,9 +180,9 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 	@Override
 	public void roll() {
 		// TODO Auto-generated method stub
-
+		
 	}
-
+	
 	//-------------------------------------------------------------------
 	private static int getNuyenForLP(int lp) {
 		logger.log(Level.DEBUG, "Get for "+lp);
@@ -232,7 +217,7 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 			}
 		}
 	}
-
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
@@ -259,7 +244,7 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 				} else
 					unprocessed.add(tmp);
 			}
-
+			
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");

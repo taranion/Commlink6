@@ -19,22 +19,22 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
  *
  */
 public abstract class ControllerImpl<A> implements PartialController<A> {
-
+	
 	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName());
 
 	protected static Random random = new Random();
-
+	
 	protected SR6CharacterController parent;
 	protected List<ToDoElement> todos;
 	protected List<Choice> choices;
-
+	
 	//-------------------------------------------------------------------
 	protected ControllerImpl(SR6CharacterController parent) {
 		this.parent = parent;
 		this.todos  = new ArrayList<>();
 		this.choices= new ArrayList<>();
 	}
-
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.PartialController#getCharacterController()
@@ -52,7 +52,7 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 	public Shadowrun6Character getModel() {
 		return parent.getModel();
 	}
-
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.Controller#getToDos()
@@ -70,7 +70,7 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 	public List<Choice> getChoices() {
 		return choices;
 	}
-
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.PartialController#decide(java.lang.Object, de.rpgframework.genericrpg.data.Choice, de.rpgframework.genericrpg.data.Decision)

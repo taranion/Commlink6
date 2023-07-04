@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Quality;
@@ -13,7 +12,6 @@ import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.lvl.AQualityLeveller;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 
 /**
  * @author prelle
@@ -24,19 +22,6 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 	//-------------------------------------------------------------------
 	protected SR6QualityLeveller(IShadowrunCharacterController<?, ?, ?,Shadowrun6Character> parent) {
 		super(parent);
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public Possible areRequirementsMet(Quality value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet((Shadowrun6Character)getModel(), value);
-		if (!poss.get())
-			return poss;
-
-		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------

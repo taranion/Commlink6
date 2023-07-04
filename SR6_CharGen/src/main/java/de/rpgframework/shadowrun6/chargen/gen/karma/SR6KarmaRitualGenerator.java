@@ -71,10 +71,11 @@ public class SR6KarmaRitualGenerator extends CommonRitualController implements I
 	 */
 	@Override
 	public Possible canBeSelected(Ritual value, Decision... decisions) {
-		Possible poss = areRequirementsMet(value);
-		if (!poss.get())
-			return poss;
-
+		// Ensure spell has not been selected yet
+		for (RitualValue tmp : getSelected()) {
+			if (tmp.getResolved()==value)
+				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
+		}
 
 		if ( (getModel().getSpells().size()+getModel().getRituals().size())>=maxSpellsAndRituals) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MAX_SPELLS, maxSpellsAndRituals);
