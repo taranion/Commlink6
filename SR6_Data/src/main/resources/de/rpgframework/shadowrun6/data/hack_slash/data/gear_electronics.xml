@@ -202,7 +202,7 @@
    </item>
    <item id="shock_shield" avail="5I" type="CYBERDECK" subtype="CASE_MODS">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597d7" type="ITEM_ATTRIBUTE" ref="SIZE" options="1,2,3,4,5"/>
+   		<choice uuid="1b768145-7ad0-49bd-adbb-c1ad452d774f" type="ITEM_ATTRIBUTE" ref="SIZE" options="1,2,3,4,5"/>
    	</choices>
       <usage mode="EMBEDDED" value="$SIZE+3" slot="CASE_MODS"/>
       <alternate id="weapon" mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
@@ -220,12 +220,12 @@
    </item>
    <item id="dedicated_program_slot" avail="3I" type="CYBERDECK" subtype="CORE_OPTIONAL" count="y">
    	<choices>
-   		<choice uuid="fcc63c09-5af7-4f00-a2d9-d7c0972597da" type="PROGRAM"/>
+   		<choice uuid="226c44aa-5200-4701-8c30-fe6b875a4fdf" type="PROGRAM"/>
    	</choices>
       <usage mode="EMBEDDED" value="0.5" slot="CORE_SLOTS"/>
     	<attrdef id="PRICE" value="1000"/>
       <modifications>
-         <embed  type="PROGRAM" ref="CHOICE" choice="fcc63c09-5af7-4f00-a2d9-d7c0972597da" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed  type="PROGRAM" ref="CHOICE" choice="226c44aa-5200-4701-8c30-fe6b875a4fdf" intoType="HOOK" intoRef="INTERNAL" included="true"/>
       </modifications>
    </item>
    <item id="response_increase" avail="5I" type="CYBERDECK" subtype="CORE_OPTIONAL">

@@ -21,14 +21,14 @@
 		</variant>
 		<variant id="asdf">
 			<choices>
-				<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ITEM_ATTRIBUTE"
+				<choice uuid="8632ddda-a018-4801-9dfa-2814e759e33d" type="ITEM_ATTRIBUTE"
 					options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL" />
 			</choices>
 			<attrdef id="AVAILABILITY" value="4" />
 			<attrdef id="PRICE" value="$RATING*12000" />
 			<attrdef id="ESSENCECOST" value="$RATING*0.2" />
 			<modifications>
-				<valmod type="ITEM_ATTRIBUTE" ref="CHOICE" choice="c155d3ee-720c-4c47-91d7-daae0b2fd48f" value="$RATING" />
+				<valmod type="ITEM_ATTRIBUTE" ref="CHOICE" choice="8632ddda-a018-4801-9dfa-2814e759e33d" value="$RATING" />
 			</modifications>
 		</variant>
 	</item>
@@ -41,24 +41,24 @@
 		<flags><flag>CODEMOD</flag></flags>
 		<variant id="mental">
 			<choices>
-				<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ATTRIBUTE" options="MENTAL" />
+				<choice uuid="29d53036-2dca-4cc0-9661-49debb278e7a" type="ATTRIBUTE" options="MENTAL" />
 			</choices>
 			<attrdef id="AVAILABILITY" value="4" />
 			<attrdef id="PRICE" value="$RATING*9000" />
 			<attrdef id="ESSENCECOST" value="$RATING*0.25" />
 			<modifications>
-				<valmod type="ATTRIBUTE" ref="CHOICE" choice="c155d3ee-720c-4c47-91d7-daae0b2fd48f" value="$RATING" />
+				<valmod type="ATTRIBUTE" ref="CHOICE" choice="29d53036-2dca-4cc0-9661-49debb278e7a" value="$RATING" />
 			</modifications>
 		</variant>
 		<variant id="asdf">
 			<choices>
-				<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ITEM_ATTRIBUTE" options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL" />
+				<choice uuid="94fec397-0e51-4aee-87f4-01992356265f" type="ITEM_ATTRIBUTE" options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL" />
 			</choices>
 			<attrdef id="AVAILABILITY" value="3" />
 			<attrdef id="PRICE" value="$RATING*5000" />
 			<attrdef id="ESSENCECOST" value="$RATING*0.1" />
 			<modifications>
-				<valmod type="ITEM_ATTRIBUTE" ref="CHOICE" choice="c155d3ee-720c-4c47-91d7-daae0b2fd48f" value="$RATING" />
+				<valmod type="ITEM_ATTRIBUTE" ref="CHOICE" choice="94fec397-0e51-4aee-87f4-01992356265f" value="$RATING" />
 			</modifications>
 		</variant>
 	</item>
