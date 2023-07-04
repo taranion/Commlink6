@@ -484,6 +484,10 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" electronic items");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "hack_slash/data/gear_software.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" software items");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"hack_slash/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"hack_slash/data/gear_ammunition.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition");
 		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "hack_slash/data/echoes.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" echoes");
 		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "hack_slash/data/qualities.xml");

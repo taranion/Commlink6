@@ -1104,6 +1104,9 @@
 
    <item id="integrated_matrix_device" avail="2" price="800" type="MOD_ELEC" subtype="MOD_MISC" count="y">
      	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="0"/>
+		<modifications>
+			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY" />
+		</modifications>
    </item>
 
    <item id="nanomaintenance_repair" avail="2L" price="9000" type="MOD_ELEC" subtype="MOD_MISC" >
@@ -1258,7 +1261,7 @@
      	<choices>
      		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="3"/>
      	</choices>
-     	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5*$RATING"/>
+     	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0.5*$RATING"/>
    </item>
 
 <!-- Hardpoint Devices - Drone Racks -->
@@ -1287,22 +1290,22 @@
    </item>
    <item id="expanded_drone_storage" avail="3" price="500" type="MOD_HARD" subtype="MOD_RACK" reqVariant="y" >
    	<variant id="micromini">
-     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+     		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0.5"/>
       	<attrdef id="PRICE" value="500"/>
       	<attrdef id="AVAILABILITY" value="3"/>
    	</variant>
    	<variant id="small">
-     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+     		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
       	<attrdef id="PRICE" value="1000"/>
       	<attrdef id="AVAILABILITY" value="3"/>
    	</variant>
    	<variant id="medium">
-     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
+     		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="2"/>
       	<attrdef id="PRICE" value="2000"/>
       	<attrdef id="AVAILABILITY" value="4"/>
    	</variant>
    	<variant id="large">
-     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
+     		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="3"/>
       	<attrdef id="PRICE" value="5000"/>
       	<attrdef id="AVAILABILITY" value="4"/>
    	</variant>
