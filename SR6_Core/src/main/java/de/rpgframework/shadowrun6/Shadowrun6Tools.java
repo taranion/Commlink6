@@ -904,7 +904,7 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static boolean isRequirementMet(Shadowrun6Character model, ComplexDataItem requiredFor, Requirement req, Decision[] decisions) {
+	public static boolean isRequirementMet(Shadowrun6Character model, ComplexDataItem requiredFor, Requirement req, Decision... decisions) {
 		if (req.getApply()!=null && req.getApply()!=ApplyTo.CHARACTER) return true;
 
 		try {
@@ -915,7 +915,7 @@ public class Shadowrun6Tools {
 			ShadowrunReference type = (ShadowrunReference)tmp.getType();
 			Object foo = ShadowrunReference.resolve(type, req.getKey());
 			if (!(foo instanceof DataItem)) {
-				logger.log(Level.WARNING, "Character requirement check not implemented for {0}",type);
+				logger.log(Level.WARNING, "Character requirement check not implemented for {0}/obj={1}  (from {2})",type, foo,requiredFor);
 				return true;
 			}
 			DataItem item = ShadowrunReference.resolve(type, req.getKey());
@@ -1074,7 +1074,7 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static Possible areRequirementsMet(Shadowrun6Character model, ComplexDataItem data, Decision[] decisions) {
+	public static Possible areRequirementsMet(Shadowrun6Character model, ComplexDataItem data, Decision... decisions) {
 		List<Requirement> list = new ArrayList<>();
 		for (Requirement req : data.getRequirements()) {
 			if (req.getApply()!=null && req.getApply()!=ApplyTo.CHARACTER)
@@ -1093,6 +1093,7 @@ public class Shadowrun6Tools {
 	public static Possible checkDecisionsAndRequirements(Shadowrun6Character model, ComplexDataItem data, Decision...decisions) {
 		Possible p1 = areRequirementsMet(model, data, decisions);
 		Possible p2 = GenericRPGTools.areAllDecisionsPresent(data, decisions);
+		logger.log(Level.ERROR, data.getId()+": Merge "+p1+" and "+p2+" to "+(new Possible(p1,p2)));
 
 		return new Possible(p1, p2);
 	}

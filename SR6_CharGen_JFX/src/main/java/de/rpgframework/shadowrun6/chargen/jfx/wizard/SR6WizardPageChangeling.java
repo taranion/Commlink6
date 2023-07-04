@@ -184,6 +184,10 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			public float getSelectionCost(SetItem data) { return data.getCost(); }
 			@Override
 			public String getSelectionCostString(SetItem data) { return String.valueOf(getSelectionCost(data)); }
+			@Override
+			public Possible areRequirementsMet(SetItem value) {
+				return Possible.TRUE;
+			}
 		});
 		comparator = new Comparator<SetItem>() {
 			public int compare(SetItem meta1, SetItem meta2) {

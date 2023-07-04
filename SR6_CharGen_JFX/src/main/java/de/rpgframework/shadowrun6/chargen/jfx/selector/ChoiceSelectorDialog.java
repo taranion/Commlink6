@@ -236,9 +236,11 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		if (item instanceof ItemTemplate && ctrl instanceof ISR6EquipmentController) {
 			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
 			possible = ((ISR6EquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, carry, getDecisions() );
-			logger.log(Level.INFO, "canBeSelected({0}) returns "+possible, carry);
+			logger.log(Level.WARNING, "canBeSelected({0}) returns "+possible, carry);
 		} else {
+			logger.log(Level.WARNING, "ask "+ctrl.getClass());
 			possible = ctrl.canBeSelected(item, getDecisions() );
+			logger.log(Level.WARNING, "canBeSelected({0}) with {1} decisions returns "+possible, item, getDecisions().length);
 		}
 		// Set status
 		ToDoElement problem = possible.getMostSevere();

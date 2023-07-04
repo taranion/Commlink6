@@ -24,6 +24,7 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
+import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
@@ -159,6 +160,25 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 				grade ++;
 		}
 		return grade;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public Possible areRequirementsMet(MetamagicOrEcho value) {
+		// Check if all requirements are met
+		List<Requirement> notMet = new ArrayList<>();
+		for (Requirement req : value.getRequirements()) {
+			if (!Shadowrun6Tools.isRequirementMet(getModel(), value, req)) {
+				notMet.add(req);
+			}
+		}
+		if (notMet.size()>0) {
+			return new Possible(notMet, (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+		}
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------

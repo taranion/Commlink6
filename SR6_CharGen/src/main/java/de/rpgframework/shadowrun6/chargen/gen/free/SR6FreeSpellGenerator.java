@@ -117,6 +117,21 @@ public class SR6FreeSpellGenerator extends ControllerImpl<SR6Spell> implements S
 
 	//-------------------------------------------------------------------
 	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
+	 */
+	@Override
+	public Possible areRequirementsMet(SR6Spell value) {
+		// Ensure spell has not been selected yet
+		for (SpellValue<SR6Spell> tmp : getSelected()) {
+			if (tmp.getResolved()==value)
+				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
+		}
+
+		return Possible.TRUE;
+	}
+
+	//-------------------------------------------------------------------
+	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override

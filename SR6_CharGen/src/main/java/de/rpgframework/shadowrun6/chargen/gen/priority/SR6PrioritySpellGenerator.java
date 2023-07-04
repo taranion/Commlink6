@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.RitualValue;
@@ -23,6 +24,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
@@ -32,7 +34,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
  *
  */
 public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implements SR6SpellController, ISpellGenerator<SR6Spell> {
-	
+
 	private int freeSpells;
 	private int maxFree;
 
@@ -55,7 +57,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	public int getFreeSpells() {
 		return freeSpells;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public int getMaxFree() { return maxFree; }
 
@@ -114,26 +116,41 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
+	public Possible areRequirementsMet(SR6Spell value) {
+		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
+		if (!poss.get())
+			return poss;
+
 		// Ensure spell has not been selected yet
 		for (SpellValue<SR6Spell> tmp : getSelected()) {
 			if (tmp.getResolved()==value)
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
-		
+
 		if (freeSpells<1) {
 			boolean karmaAllowed =  parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_BUY_SPELLS_KARMA);
 			if (karmaAllowed && getModel().getKarmaFree()>=5) {
 				return Possible.TRUE;
 			}
-			
+
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 		}
-			
 		return Possible.TRUE;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
+	 */
+	@Override
+	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
+		Possible poss = areRequirementsMet(value);
+		if (!poss.get())
+			return poss;
+		return GenericRPGTools.areAllDecisionsPresent(value, decisions);
 	}
 
 	//-------------------------------------------------------------------
@@ -149,17 +166,17 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return new OperationResult<>(poss);
 			}
-			
+
 			SpellValue<SR6Spell> toAdd = new SpellValue<SR6Spell>(value);
 			for (Decision dec : decisions) {
 				toAdd.addDecision(dec);
 			}
-			
+
 			getModel().addSpell(toAdd);
 			logger.log(Level.INFO, "Added spell {0}", toAdd);
-			
+
 			parent.runProcessors();
-			
+
 			return new OperationResult<>(poss);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1})", value, Arrays.toString(decisions));
@@ -175,11 +192,11 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 		if (!getSelected().contains(value)) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
-		
+
 		if (value.isAutoAdded()) {
 			return new Possible(IRejectReasons.IMPOSS_AUTO_ADDED);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -196,12 +213,12 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return false;
 			}
-			
+
 			getModel().removeSpell(value);
 			logger.log(Level.INFO, "Removed spell {0}", value);
-			
+
 			parent.runProcessors();
-			
+
 			return true;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
@@ -239,9 +256,9 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 		try {
 			todos.clear();
 			freeSpells = 0;
-			
+
 			Shadowrun6Character model = getModel();
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {				
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {
 				SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
 				if (model.getMagicOrResonanceType().usesPowers()) {
 					// Mystic adept
@@ -252,7 +269,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 				logger.log(Level.INFO, "Have {0} free spells", freeSpells);
 			}
 			maxFree = freeSpells;
-			
+
 			int byKarma = 0;
 			// Count Spells
 			for (SpellValue<? extends ASpell> val : model.getSpells()) {
@@ -274,7 +291,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 					logger.log(Level.INFO, "Pay ritual ''{0}'' with 5 Karma", val.getModifyable().getId());
 				}
 			}
-			
+
 			// Summary and eventually warn
 			logger.log(Level.INFO, "Have {0} remaining free spells and rituals", freeSpells);
 			if (freeSpells>0) {
@@ -285,7 +302,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 					todos.add(new ToDoElement(Severity.STOPPER, "Too many spells bought"));
 				}
 			}
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
