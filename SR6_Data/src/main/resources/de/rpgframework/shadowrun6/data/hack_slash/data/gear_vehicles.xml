@@ -27,7 +27,7 @@
 	</item>
 
 	<item id="samael_transport" avail="9I" price="2800000" type="VEHICLES" subtype="LAV" >
-		<vehicle han="3" acc="60" spdi="90" tspd="900" bod="18" arm="18" pil="5" sen="5" sea="8"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<vehicle han="3" acc="60" spdi="90" tspd="900" bod="18" arm="18" pil="5" sen="5" sea="8"/>
 		<modifications>
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
 			<embed type="GEAR" ref="armor_milspec" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
