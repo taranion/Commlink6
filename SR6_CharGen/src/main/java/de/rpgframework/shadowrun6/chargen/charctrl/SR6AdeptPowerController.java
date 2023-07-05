@@ -97,18 +97,14 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 	 */
 	@Override
 	public Possible canBeSelected(AdeptPower value, Decision... decisions) {
-		// Check if all choices have been made and all requirements are fulfilled
-		Possible poss = Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
-		if (!poss.get())
-			return poss;
-
 		// Ensure enough power points are present
 		float cost = value.getCostForLevel(1);
 		if (cost>freePoints) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_PPOINTS);
 		}
 
-		return Possible.TRUE;
+		// Check if all choices have been made and all requirements are fulfilled
+		return Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
 	}
 
 	//-------------------------------------------------------------------
