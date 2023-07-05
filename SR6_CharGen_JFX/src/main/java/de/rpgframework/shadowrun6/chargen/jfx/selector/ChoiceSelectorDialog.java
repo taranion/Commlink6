@@ -205,6 +205,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	private void updateButtons() {
+		logger.log(Level.INFO, "updateButtons");
 		// Special handling for gear
 		if (item instanceof ItemTemplate) {
 			// Build item so far as possible
@@ -233,12 +234,14 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		}
 
 		Possible possible = null;
+		logger.log(Level.INFO, "call canBeSelected on "+ctrl);
 		if (item instanceof ItemTemplate && ctrl instanceof ISR6EquipmentController) {
 			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
 			possible = ((ISR6EquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, carry, getDecisions() );
 			logger.log(Level.INFO, "canBeSelected({0}) returns "+possible, carry);
 		} else {
 			possible = ctrl.canBeSelected(item, getDecisions() );
+			//logger.log(Level.INFO, " returned {0}/{1} from {2}", possible, possible.getRequireDecisions(), ctrl.getClass());
 		}
 		// Set status
 		ToDoElement problem = possible.getMostSevere();
@@ -249,15 +252,20 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			switch (problem.getSeverity()) {
 			case STOPPER: lbProblem.setStyle("-fx-text-fill: -fx-accent"); break;
 			case WARNING: lbProblem.setStyle("-fx-text-fill: primary"); break;
-			case INFO   : lbProblem.setStyle("-fx-text-fill: --fx-text-base-color"); break;
+			case INFO   : lbProblem.setStyle("-fx-text-fill: -fx-text-base-color"); break;
 			}
 		}
 
+		//logger.log(Level.INFO, " btnCtrl "+btnCtrl);
 		if (btnCtrl != null) {
-			if (!possible.get() || (problem != null && problem.getSeverity() == Severity.WARNING)) {
+			if (!possible.getRequireDecisions() || (problem != null && problem.getSeverity() != Severity.INFO)) {
+				logger.log(Level.DEBUG, " disable OK");
 				btnCtrl.setDisabled(CloseType.OK, true);
+				this.buttonDisabledProperty().put(CloseType.OK, true);
 			} else {
+				logger.log(Level.DEBUG, " enable OK ");
 				btnCtrl.setDisabled(CloseType.OK, false);
+				this.buttonDisabledProperty().put(CloseType.OK, false);
 			}
 		}
 	}
@@ -313,8 +321,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 			btnCtrl = new NavigButtonControl();
 			btnCtrl.initialize(FlexibleApplication.getInstance(), this);
-			btnCtrl.setDisabled(CloseType.OK, true);
+//			btnCtrl.setDisabled(CloseType.OK, true);
+//			this.buttonDisabledProperty().put(CloseType.OK, true);
 			updateButtons();
+			logger.log(Level.DEBUG, "showAlertAndCall with btnCtrl="+btnCtrl);
 			closed = FlexibleApplication.getInstance().showAlertAndCall(this, btnCtrl);
 			logger.log(Level.DEBUG, "Closed with "+closed);
 			if (closed==CloseType.CANCEL)
