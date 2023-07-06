@@ -11,7 +11,6 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ShadowrunRules;
@@ -22,8 +21,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.Technique;
-import de.rpgframework.shadowrun6.Technique.Category;
 import de.rpgframework.shadowrun6.TechniqueValue;
+import de.rpgframework.shadowrun6.Technique.Category;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -106,26 +105,12 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public Possible areRequirementsMet(Technique value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
-		if (!poss.get())
-			return poss;
-		return Possible.TRUE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
 	public Possible canBeSelected(Technique value, Decision... decisions) {
-		Possible poss = areRequirementsMet(value);
-		if (!poss.get())
-			return poss;
-		return GenericRPGTools.areAllDecisionsPresent(value, decisions);
+		// TODO Auto-generated method stub
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------

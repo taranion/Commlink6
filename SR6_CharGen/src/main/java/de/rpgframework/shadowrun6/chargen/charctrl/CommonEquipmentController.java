@@ -139,19 +139,6 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public Possible areRequirementsMet(ItemTemplate value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
-		if (!poss.get())
-			return poss;
-
-		return Possible.TRUE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override

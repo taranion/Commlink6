@@ -18,7 +18,10 @@
 	</metatype>
 	<metatype id="gnome" variantof="dwarf" size="80" weight="37" karma="5">
 		<modifications>
-           <valmod ref="BODY"      type="ATTRIBUTE" value="4" set="MAX" when="CREATION"/>
+           <valmod ref="BODY"      type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+           <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="REACTION"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="STRENGTH"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
            <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="LOGIC"     type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <itemmod type="QUALITY" ref="magic_resistance"/>

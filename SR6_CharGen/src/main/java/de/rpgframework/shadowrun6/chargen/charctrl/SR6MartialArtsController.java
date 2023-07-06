@@ -12,7 +12,6 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ShadowrunRules;
@@ -22,8 +21,6 @@ import de.rpgframework.shadowrun6.MartialArtsValue;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.Technique;
 import de.rpgframework.shadowrun6.TechniqueValue;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -55,17 +52,13 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public Possible areRequirementsMet(MartialArts value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
-		if (!poss.get())
-			return poss;
-
+	public Possible canBeSelected(MartialArts data, Decision...dec) {
 		// Is it already selected?
 		for (MartialArtsValue tmp : getModel().getMartialArts()) {
-			if (tmp.getResolved()==value)
+			if (tmp.getResolved()==data)
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 
@@ -80,18 +73,6 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 		}
 
 		return Possible.TRUE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
-	 */
-	@Override
-	public Possible canBeSelected(MartialArts data, Decision...decisions) {
-		Possible poss = areRequirementsMet(data);
-		if (!poss.get())
-			return poss;
-		return GenericRPGTools.areAllDecisionsPresent(data, decisions);
 	}
 
 	//-------------------------------------------------------------------

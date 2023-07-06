@@ -12,10 +12,8 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualValue;
-import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.IRitualGenerator;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 
 public abstract class CommonRitualController extends ControllerImpl<Ritual> implements IRitualGenerator {
 
@@ -127,25 +125,6 @@ public abstract class CommonRitualController extends ControllerImpl<Ritual> impl
 		} finally {
 			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
 		}
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public Possible areRequirementsMet(Ritual value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
-		if (!poss.get())
-			return poss;
-
-		// Ensure spell has not been selected yet
-		for (RitualValue tmp : getSelected()) {
-			if (tmp.getResolved()==value)
-				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
-		}
-
-		return Possible.TRUE;
 	}
 
 }

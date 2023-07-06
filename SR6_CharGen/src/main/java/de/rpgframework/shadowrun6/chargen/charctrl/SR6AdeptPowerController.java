@@ -93,35 +93,18 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public Possible areRequirementsMet(AdeptPower value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
-		if (!poss.get())
-			return poss;
-
+	public Possible canBeSelected(AdeptPower value, Decision... decisions) {
 		// Ensure enough power points are present
 		float cost = value.getCostForLevel(1);
 		if (cost>freePoints) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_PPOINTS);
 		}
 
-		return Possible.TRUE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
-	 */
-	@Override
-	public Possible canBeSelected(AdeptPower value, Decision... decisions) {
 		// Check if all choices have been made and all requirements are fulfilled
-		Possible poss = areRequirementsMet(value);
-		if (!poss.get())
-			return poss;
-
-		return GenericRPGTools.areAllDecisionsPresent(value, decisions);
+		return Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
 	}
 
 	//-------------------------------------------------------------------

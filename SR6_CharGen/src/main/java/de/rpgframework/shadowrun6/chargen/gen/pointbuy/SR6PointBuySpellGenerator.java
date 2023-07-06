@@ -12,7 +12,6 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -22,7 +21,6 @@ import de.rpgframework.shadowrun.chargen.gen.ISpellGenerator;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
@@ -119,41 +117,26 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public Possible areRequirementsMet(SR6Spell value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
-		if (!poss.get())
-			return poss;
-
+	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
 		// Ensure spell has not been selected yet
 		for (SpellValue<SR6Spell> tmp : getSelected()) {
 			if (tmp.getResolved()==value)
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 
-		if ( (getModel().getSpells().size()+getModel().getRituals().size())>=maxSpells) {
+		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+		if (settings.perSpellPayedWithCP.size()>=maxSpells) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MAX_SPELLS, maxSpells);
 		}
-		return Possible.TRUE;
-	}
 
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
-	 */
-	@Override
-	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
-		Possible poss = areRequirementsMet(value);
-		if (!poss.get())
-			return poss;
-
-		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
 		if (settings.characterPoints<2 && parent.getModel().getKarmaFree()<5) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 		}
-		return GenericRPGTools.areAllDecisionsPresent(value, decisions);
+
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------

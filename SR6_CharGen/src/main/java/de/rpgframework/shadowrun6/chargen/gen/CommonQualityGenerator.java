@@ -85,49 +85,6 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.ComplexDataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public Possible areRequirementsMet(Quality value) {
-		if (value==null) return Possible.FALSE;
-		if (model.hasQuality(value.getId()) && !value.isMulti()) {
-			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ALREADY_PRESENT);
-		}
-
-		// Check if all requirements are met
-		List<Requirement> notMet = new ArrayList<>();
-		for (Requirement req : value.getRequirements()) {
-			try {
-				if (!Shadowrun6Tools.isRequirementMet(model, value, req)) {
-					notMet.add(req);
-				}
-			} catch (Exception e) {
-				logger.log(Level.ERROR, "Error in quality "+value.getId(),e);
-				e.printStackTrace();
-				System.exit(1);
-			}
-		}
-		if (notMet.size()>0) {
-			return new Possible(notMet, (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
-		}
-
-		int karma = value.getKarmaCost();
-
-		if (value.isPositive() && karma>model.getKarmaFree()) {
-			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
-		}
-		if (!value.isPositive() && (karmaGain+karma)>20) {
-			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_QUALITY_KARMAGAIN, karma);
-		}
-		if (value.getType()==QualityType.METAGENIC && (karmaSURGE+Math.abs(karma))>30) {
-			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_QUALITY_KARMASURGE, karmaSURGE);
-		}
-
-		return Possible.TRUE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.ComplexDataItem, de.rpgframework.genericrpg.data.Decision[])
-	 */
-	@Override
 	public Possible canBeSelected(Quality value, Decision... decisions) {
 		Possible poss = super.canBeSelected(value, decisions);
 		if (!poss.get())

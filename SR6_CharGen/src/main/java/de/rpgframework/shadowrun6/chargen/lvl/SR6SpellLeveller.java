@@ -11,14 +11,12 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
@@ -88,38 +86,20 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public Possible areRequirementsMet(SR6Spell value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
-		if (!poss.get())
-			return poss;
-
+	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
 		// Ensure spell has not been selected yet
 		for (SpellValue<SR6Spell> tmp : getSelected()) {
 			if (tmp.getResolved()==value)
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
-
-		return Possible.TRUE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
-	 */
-	@Override
-	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
-		Possible poss = areRequirementsMet(value);
-		if (!poss.get())
-			return poss;
-
-		// Ensure spell has not been selected yet
+		
 		if (getModel().getKarmaFree()<5)
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
-
-		return GenericRPGTools.areAllDecisionsPresent(value, decisions);
+		
+		return Possible.TRUE;
 	}
 
 	//-------------------------------------------------------------------
@@ -135,17 +115,17 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return new OperationResult<>(poss);
 			}
-
+			
 			SpellValue<SR6Spell> toAdd = new SpellValue<SR6Spell>(value);
 			for (Decision dec : decisions) {
 				toAdd.addDecision(dec);
 			}
-
+			
 			getModel().addSpell(toAdd);
 			logger.log(Level.INFO, "Added spell {0}", toAdd);
-
+			
 			parent.runProcessors();
-
+			
 			return new OperationResult<>(poss);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1})", value, Arrays.toString(decisions));
@@ -161,11 +141,11 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 		if (!getSelected().contains(value)) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
-
+		
 		if (value.isAutoAdded()) {
 			return new Possible(IRejectReasons.IMPOSS_AUTO_ADDED);
 		}
-
+		
 		return Possible.TRUE;
 	}
 
@@ -182,12 +162,12 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return false;
 			}
-
+			
 			getModel().removeSpell(value);
 			logger.log(Level.INFO, "Removed spell {0}", value);
-
+			
 			parent.runProcessors();
-
+			
 			return true;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
@@ -223,7 +203,7 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 
 		try {
 			todos.clear();
-
+			
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");

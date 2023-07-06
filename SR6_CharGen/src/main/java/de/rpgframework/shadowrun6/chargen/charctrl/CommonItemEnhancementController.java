@@ -5,13 +5,17 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.GenericRPGTools;
+import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.items.AItemEnhancement;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
@@ -19,7 +23,6 @@ import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -123,13 +126,10 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#areRequirementsMet(de.rpgframework.genericrpg.data.DataItem)
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
 	 */
 	@Override
-	public Possible areRequirementsMet(SR6ItemEnhancement value) {
-		Possible poss = Shadowrun6Tools.areRequirementsMet(getModel(), value);
-		if (!poss.get())
-			return poss;
+	public Possible canBeSelected(SR6ItemEnhancement value, Decision... decisions) {
 		ItemAttributeNumericalValue<SR6ItemAttribute> val = toModify.getAsValue(SR6ItemAttribute.MODIFICATION_SLOTS);
 		if (val==null) {
 			logger.log(Level.ERROR, "No information about modification slots for {0}", toModify);
@@ -140,19 +140,6 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 			return new Possible(IRejectReasons.IMPOSS_CAPACITY);
 
 		return Possible.TRUE;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeSelected(de.rpgframework.genericrpg.data.DataItem, de.rpgframework.genericrpg.data.Decision[])
-	 */
-	@Override
-	public Possible canBeSelected(SR6ItemEnhancement value, Decision... decisions) {
-		Possible poss = areRequirementsMet(value);
-		if (!poss.get())
-			return poss;
-
-		return GenericRPGTools.areAllDecisionsPresent(value, decisions);
 	}
 
 	//-------------------------------------------------------------------
