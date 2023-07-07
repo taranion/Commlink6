@@ -220,7 +220,15 @@
    	</choices>
    </quality>
    <quality id="distinctive_style" 	  karma="6" pos="false" type="NORMAL" />
-   <quality id="elf_poser"  	  	  karma="6" pos="false" type="NORMAL" />
+   <quality id="elf_poser"  	  	  karma="6" pos="false" type="NORMAL" >
+     <requires>
+       <selreq type="METATYPE" apply="CHARACTER">
+         <datareq type="METATYPE" ref="human" apply="CHARACTER"/>
+         <datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
+       </selreq>
+     </requires>
+   </quality>
+
    <quality id="glass_jaw"            karma="4" pos="false" type="NORMAL" max="6">
      <modifications>
        <valmod type="ATTRIBUTE" ref="STUN_MONITOR" value="-1" />
@@ -271,7 +279,14 @@
        <itemmod type="RULE" ref="PAIN_TOLERANCE_DOUBLE_MOD"/>
      </modifications>
    </quality>
-   <quality id="ork_poser"  	  	  karma="6" pos="false" type="NORMAL" />
+   <quality id="ork_poser"  	  	  karma="6" pos="false" type="NORMAL" >
+     <requires>
+       <selreq type="METATYPE" apply="CHARACTER">
+         <datareq type="METATYPE" ref="human" apply="CHARACTER"/>
+         <datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
+       </selreq>
+     </requires>
+   </quality>
    <quality id="prejudiced"           karma="8" pos="false" type="NORMAL" multi="true">
    	<choices>
    		<choice type="TEXT" uuid="2310ce02-abc3-4d23-b833-b5f5d68c3f21"/>
