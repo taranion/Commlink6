@@ -45,6 +45,7 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 
 	// Shall character requirements be ignored
 	private CheckBox cbIgnoreRequirements;
+	private SR6PieceOfGearVariant variant;
 
 	//-------------------------------------------------------------------
 	public ItemTemplateSelector(SR6CharacterController charGen, CarryMode mode, Predicate<ItemTemplate> templateFilter, CarriedItem<ItemTemplate> container, ItemHook hook) {
@@ -98,7 +99,11 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 
 		ISR6EquipmentController sr6Control = (ISR6EquipmentController) control;
 		AGearData relevant = n.getMainOrVariant(carry);
-		String variantID = (relevant instanceof SR6PieceOfGearVariant)?((SR6PieceOfGearVariant)relevant).getId():null;
+		String variantID = null;
+		if (relevant instanceof SR6PieceOfGearVariant) {
+			variant = (SR6PieceOfGearVariant) relevant;
+			variantID = relevant.getId();
+		}
 		Possible poss = sr6Control.canBeSelected(n, variantID, carry);
 		//logger.log(Level.TRACE, "  poss= {0}  btnCtrl={1}", poss, btnCtrl);
 		if (btnCtrl!=null) {
@@ -111,6 +116,14 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 			lbNotPossible.setText(poss.getMostSevere().getMessage());
 		else
 			lbNotPossible.setText(null);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the variantID
+	 */
+	public SR6PieceOfGearVariant getVariant() {
+		return variant;
 	}
 
 }

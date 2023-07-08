@@ -36,6 +36,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -152,6 +153,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 		CloseType closed = FlexibleApplication.getInstance().showAndWait(dialog);
 		if (closed==CloseType.OK) {
 			ItemTemplate selected = selector.getSelected();
+			SR6PieceOfGearVariant suggestedVariant = selector.getVariant();
 			OperationResult<CarriedItem<ItemTemplate>> result = null;
 			// Eventually show decision dialog
 			boolean needToAsk = !selected.getChoices().isEmpty();
@@ -161,6 +163,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			if (needToAsk) {
 				logger.log(Level.DEBUG, "Select/Embed with choices or variants or flags");
 				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry);
+				dia2.setSuggestedVariant(suggestedVariant);
 				Decision[] dec = dia2.apply(selected, selected.getChoices());
 				if (dec!=null) {
 					// Not cancelled
