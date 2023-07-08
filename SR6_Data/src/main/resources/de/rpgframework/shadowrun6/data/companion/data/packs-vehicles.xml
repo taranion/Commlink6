@@ -841,7 +841,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>
              <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon" />
-             <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_CF" ref="smuggling_compartment">
+             <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_CF" ref="smuggling_compartment_vehicle">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 </embed>
              <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_CF" ref="smuggling_compartment_shielding">
@@ -1507,7 +1507,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>
              <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon" />
-             <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_CF" ref="smuggling_compartment">
+             <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_CF" ref="smuggling_compartment_vehicle">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
                 </embed>
              <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_CF" ref="smuggling_compartment_shielding">

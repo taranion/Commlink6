@@ -400,6 +400,10 @@ public class Converter {
 			row.createCell(x++, CellType.STRING).setCellValue( "Commlink"); break;
 		case CYBERDECK:
 			row.createCell(x++, CellType.STRING).setCellValue( "Cyberdeck"); break;
+		case DATATERM:
+			row.createCell(x++, CellType.STRING).setCellValue( "Dataterm"); break;
+		case CYBERTERM:
+			row.createCell(x++, CellType.STRING).setCellValue( "Cyberterm"); break;
 		case RIGGER_CONSOLE:
 			row.createCell(x++, CellType.STRING).setCellValue( "Command Console"); break;
 		case TAC_NET:

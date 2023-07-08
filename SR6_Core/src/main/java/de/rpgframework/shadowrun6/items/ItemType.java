@@ -65,6 +65,8 @@ public enum ItemType {
 	ELECTRONICS(
 			ItemSubType.COMMLINK,
 			ItemSubType.CYBERDECK,
+			ItemSubType.DATATERM,
+			ItemSubType.CYBERTERM,
 			ItemSubType.RIGGER_CONSOLE,
 			ItemSubType.ELECTRONIC_ACCESSORIES,
 			ItemSubType.RFID,

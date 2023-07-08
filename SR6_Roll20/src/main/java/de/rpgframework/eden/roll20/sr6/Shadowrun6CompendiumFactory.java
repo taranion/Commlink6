@@ -1105,6 +1105,8 @@ public class Shadowrun6CompendiumFactory {
 			switch (item.getItemSubtype()) {
 			case COMMLINK:
 			case CYBERDECK:
+			case DATATERM:
+			case CYBERTERM:
 			case RIGGER_CONSOLE:
 			case TAC_NET:
 				continue;
@@ -1185,6 +1187,8 @@ public class Shadowrun6CompendiumFactory {
 			switch (item.getItemSubtype()) {
 			case COMMLINK:
 			case CYBERDECK:
+			case DATATERM:
+			case CYBERTERM:
 			case RIGGER_CONSOLE:
 			case TAC_NET:
 				break;
@@ -1210,6 +1214,10 @@ public class Shadowrun6CompendiumFactory {
 				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-commlink"); break;
 			case CYBERDECK:
 				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-cyberdeck"); break;
+			case DATATERM:
+				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-dataterm"); break;
+			case CYBERTERM:
+				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-cyberterm"); break;
 			case RIGGER_CONSOLE:
 				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-command_console"); break;
 			case TAC_NET:

@@ -54,7 +54,7 @@
       <vehicle han="5/4" acc="8" spdi="10" tspd="130" bod="17" arm="14" pil="2" sen="2" sea="10"/>
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="multi_terrain_active" >
-			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> <!-- no rating stated, assuming 2 -->
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- no rating stated, assuming 2 -->
 			</embed>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large" variant="offroad" />
       </modifications>
@@ -68,7 +68,7 @@
 			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
 			</embed>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="multi_terrain_active" >
-			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> <!-- no rating stated, assuming 2 -->
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- no rating stated, assuming 2 -->
 			</embed>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_large" variant="offroad" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="satellite_link"/>

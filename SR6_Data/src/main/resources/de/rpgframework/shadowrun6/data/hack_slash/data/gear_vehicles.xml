@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- GOD Dominion -->
+
+	<item id="ascalon_railgun" avail="8I" price="650000" type="MOD_HARD" subtype="MOD_MOUNT" >
+		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1"/>
+			<embed type="GEAR" ref="ascalon_railgun_weapon" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE"/>
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="16" apply="PARENT"/>
+		</requires>
+		<geardef>
+			<item id="ascalon_railgun_weapon" avail="8I" price="650000" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+				<usage mode="EMBEDDED"/>
+				<weapon attack="15,22,15,12,9" ammo="20(c)" dmg="9P" mode="SS" skill="firearms" spec="firearms/machine_guns"/>
+				<modifications>
+					<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+					<itemmod type="HOOK" ref="TOP"/>
+					<itemmod type="HOOK" ref="BARREL"/>
+					<itemmod type="HOOK" ref="UNDER"/>
+				</modifications>
+			</item>
+		</geardef>
+	</item>
+
+	<item id="samael_transport" avail="9I" price="2800000" type="VEHICLES" subtype="LAV" >
+		<vehicle han="3" acc="60" spdi="90" tspd="900" bod="18" arm="18" pil="5" sen="5" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="armor_milspec" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/></embed>
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></embed>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"/>
+			<embed type="GEAR" ref="extra_entry_points" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="life_safety_system" variant="level2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF"/>
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF"/>
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF"/>
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></embed>
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="9e905390-8401-41ca-9383-e8e82409982d"/>
+				<embed type="GEAR" ref="mtoc_mark1" intoId="9e905390-8401-41ca-9383-e8e82409982d" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY"/>
+			<embed type="GEAR" ref="electromag_shielding" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/></embed>
+			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
+			<embed type="GEAR" ref="hardpoint_huge" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="hardpoint_huge" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="expanded_drone_storage" variant="large" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="ascalon_railgun" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="d8124bb6-4814-4a22-842f-ece15f866c1d"/>
+				<embed type="GEAR" ref="rpk_hmg" intoId="d8124bb6-4814-4a22-842f-ece15f866c1d" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="4d708601-b40f-4241-a2a1-e8f79bac604d"/>
+				<embed type="GEAR" ref="rpk_hmg" intoId="4d708601-b40f-4241-a2a1-e8f79bac604d" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="3232c4f9-5729-4e64-8ed0-461862680aec"/>
+				<embed type="GEAR" ref="onotari_interceptor" intoId="3232c4f9-5729-4e64-8ed0-461862680aec" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE"/>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"/> <!-- not stated in rules, but likely due to rigger cocoons -->
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"/> <!-- not stated in rules, but likely due to rigger cocoons -->
+		</modifications>
+	</item>
+
+	<item id="malakim_drone" avail="9I" price="250000" type="DRONE_LARGE" subtype="AIR">
+		<vehicle han="3" acc="30" spdi="60" tspd="280" bod="9" arm="9" pil="4" sen="5"/>
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/></embed>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"/>
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></embed>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/> <!-- one small rack has space for 3 drones -->
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="c00f397b-512a-4090-b508-c389e7562505"/>
+				<embed type="GEAR" ref="ranger_arms_aa16_warhammer" intoId="c00f397b-512a-4090-b508-c389e7562505" intoType="HOOK" intoRef="VEHICLE_WEAPON"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="f3ff4b94-2e04-4311-abe5-d373430b6209"/>
+				<embed type="GEAR" ref="armtech_mgl12" intoId="f3ff4b94-2e04-4311-abe5-d373430b6209" intoType="HOOK" intoRef="VEHICLE_WEAPON" id="36762f50-f83a-41b3-93b4-1373a1cb970c"/>
+					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="36762f50-f83a-41b3-93b4-1373a1cb970c" intoType="HOOK" intoRef="INTERNAL"/>
+					<embed  type="GEAR" ref="airburst_link" variant="internal" intoId="36762f50-f83a-41b3-93b4-1373a1cb970c" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6f58d91e-baa0-4c77-9472-7252ef1cdbc4"/>
+				<embed type="GEAR" ref="armtech_mgl12" intoId="6f58d91e-baa0-4c77-9472-7252ef1cdbc4" intoType="HOOK" intoRef="VEHICLE_WEAPON" id="c5b23269-a8be-479f-bf33-4b88e009a675"/>
+					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="c5b23269-a8be-479f-bf33-4b88e009a675" intoType="HOOK" intoRef="INTERNAL"/>
+					<embed  type="GEAR" ref="airburst_link" variant="internal" intoId="c5b23269-a8be-479f-bf33-4b88e009a675" intoType="HOOK" intoRef="INTERNAL"/>
+		</modifications>
+	</item>
+
+	<item id="ophanim_drone" avail="9I" price="250000" type="DRONE_LARGE" subtype="AIR">
+		<vehicle han="3" acc="30" spdi="60" tspd="280" bod="9" arm="9" pil="4" sen="7"/>
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/></embed>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"/>
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/></embed>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="b7539702-3f60-4daa-8a79-02b18070b2d3"/>
+				<embed type="GEAR" ref="aztechnology_striker" intoId="b7539702-3f60-4daa-8a79-02b18070b2d3" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" id="1129bea6-219c-4848-a0da-4b9b58a3e61c"/>
+					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="1129bea6-219c-4848-a0da-4b9b58a3e61c" intoType="HOOK" intoRef="INTERNAL"/>
+					<embed  type="GEAR" ref="airburst_link" variant="internal" intoId="1129bea6-219c-4848-a0da-4b9b58a3e61c" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="7789502c-e192-4bd7-b6b1-cfc4c851fc90"/>
+				<embed type="GEAR" ref="stoner_ares_m202" intoId="7789502c-e192-4bd7-b6b1-cfc4c851fc90" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" id="143f3c0b-a19f-4cd3-bd38-b886dc77a897"/>
+					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="143f3c0b-a19f-4cd3-bd38-b886dc77a897" intoType="HOOK" intoRef="INTERNAL"/>
+		</modifications>
+	</item>
+
+</items>

@@ -47,6 +47,8 @@ public class CalculateProgramSlots implements CarriedItemProcessor {
 		switch (subtype) {
 		case COMMLINK:
 		case CYBERDECK:
+		case DATATERM:
+		case CYBERTERM:
 		case RIGGER_CONSOLE:
 		case TAC_NET:
 			if (slot==null) {

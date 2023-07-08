@@ -4,10 +4,10 @@
 
 <!-- Special Items for Drones -->
 
- 	<item id="vehicle_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" > <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter, so needs to be separate -->
+ 	<item id="vehicle_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" > <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter -->
 		<weapon attack=",5,9,10,8" ammo="2(ml)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" /> <!-- Errata needed: No info on ranges for launcher, using aztechnology_striker -->
 	</item>
-   	<item id="weapon_launcher" avail="99" price="0" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true"> <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter, umea, so needs to be separate -->
+   	<item id="weapon_launcher" avail="99" price="0" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true"> <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter, umea -->
    		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
 		<modifications>
 			<itemmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" />
@@ -20,6 +20,7 @@
 	</item>
 
 <!-- Replacement Parts -->
+
    <item id="condor_ballon" avail="3" price="100" type="TOOLS" subtype="SPARE_PARTS" count="true" >
    </item>
 
@@ -45,6 +46,7 @@
    </item>
 
 <!-- Accessories -->
+
    <item id="emergency_lightbars" avail="4L" price="6000" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" >
   		<usage mode="EMBEDDED" slot="VEHICLE_ACCESSORY" value="1"/>
    </item>
@@ -212,7 +214,8 @@
     </item>
 
 
-	<!-- Chassis Mods -->
+<!-- Chassis - Core Mods -->
+
    <item id="easy_assembly" avail="3" price="2000" type="ACCESSORY" subtype="MOD_CORE">
   		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="$$BODY/3"/>
       <requires>
@@ -361,7 +364,8 @@
    </item>
 
 
-	<!-- Handling Mods -->
+<!-- Chassis - Handling Mods -->
+
    <item id="improved_handling" avail="5" price="18000" type="ACCESSORY" subtype="MOD_HANDLING">
    	<choices>
   			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
@@ -451,9 +455,10 @@
    </item>
 
 
-	<!-- Seating and Cargo Mods -->
+<!-- Chassis - Interior Mods -->
+	
    <item id="amenities" avail="1" price="0" type="ACCESSORY" subtype="MOD_INTERIOR" reqVariant="true">
-   	<usage mode="EMBEDDED" slot="VEHICLE_CF" value="0"/>
+   	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
@@ -481,18 +486,31 @@
    		<attrdef id="AVAILABILITY" value="2"/>
       </variant>
    </item>
-   <item id="meta_adjust_pilot" avail="2" price="500" type="ACCESSORY" subtype="MOD_INTERIOR">
-   	<usage mode="EMBEDDED" slot="VEHICLE_CF" value="0"/>
-      <requires>
+
+   <item id="meta_adjust_pilot" avail="2" type="ACCESSORY" subtype="MOD_CARGO" reqVariant="yes">
+   	  <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
-      <variant id="passenger">
+      <variant id="driver_dwarf">
+			<usage mode="EMBEDDED" slot="VEHICLE_CF" value="0"/>
+    		<attrdef id="PRICE" value="500"/>
+      </variant>
+      <variant id="driver_troll">
+			<usage mode="EMBEDDED" slot="VEHICLE_CF" value="1"/>
+			<attrdef id="PRICE" value="500"/>
+      </variant>
+      <variant id="passenger_dwarf">
+			<usage mode="EMBEDDED" slot="VEHICLE_CF" value="0"/>
     		<attrdef id="PRICE" value="250"/>
+      </variant>
+      <variant id="passenger_troll">
+			<usage mode="EMBEDDED" slot="VEHICLE_CF" value="1"/>
+			<attrdef id="PRICE" value="250"/>
       </variant>
    </item>
 
    <item id="ejection_seat" avail="6L" price="2000"  type="ACCESSORY" subtype="MOD_INTERIOR">
-   	<usage mode="EMBEDDED" slot="VEHICLE_CF" value="1"/>
+   	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
@@ -500,8 +518,6 @@
         <attrdef id="PRICE" value="3000"/>
       </variant>
    </item>
-
-
 
    <item id="electromag_shielding" avail="3L" price="1000" type="ACCESSORY" subtype="MOD_INTERIOR">
    	<choices>
@@ -548,7 +564,7 @@
 		</variant>
    </item>
 
-   <item id="passenger_prot_system" avail="3" price="2500" type="ACCESSORY" subtype="MOD_CARGO">
+   <item id="passenger_prot_system" avail="3" price="2500" type="ACCESSORY" subtype="MOD_INTERIOR">
    	<choices>
   			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
    	</choices>
@@ -559,6 +575,7 @@
    	<attrdef id="PRICE" value="$RATING*2500"/>
    </item>
 
+<!-- Chassis - Seating and Cargo Mods -->
 
 	<!--
 
@@ -599,6 +616,9 @@
       </modifications>
    </item>
  -->
+
+<!-- CF - Seating and Cargo Mods -->
+
     <item id="living_space" avail="2" price="500" type="MOD_CHASSIS" subtype="MOD_CARGO" count="true" >
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
@@ -667,9 +687,8 @@
 		</variant>
    </item>
 
+<!-- Chassis - Body Mods - Forms -->
 
-<!-- Skin Mods -->
-<!-- Forms -->
    <item id="form_stripping" avail="2" price="4000" type="MOD_SKIN" subtype="MOD_FORM" reqVariant="true" >
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
@@ -760,8 +779,8 @@
       <attrdef id="AVAILABILITY" value="$RATING *2"/>
    </item>
 
+<!-- Chassis - Body Mods - Foundation / Armor -->
 
-	<!-- Foundations -->
    <item id="armor_standard" avail="3" price="800" type="MOD_SKIN" subtype="MOD_ARMOR" >
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="$$BODY*2"/>
@@ -795,7 +814,8 @@
       </modifications>
    </item>
 
-<!-- Elements -->
+<!-- Chassis - Body Mods - Elements -->
+
    <item id="elemental_hardening" avail="0" price="1000" type="MOD_SKIN" subtype="MOD_ELEMENTS" >
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6"/>
@@ -829,8 +849,8 @@
       </variant>
    </item>
 
-	<!-- Powertrain Mods -->
-	<!-- Acceleration Mods -->
+<!-- Powertrain Mods - Acceleration Mods -->
+
    <item id="improved_acceleration" avail="3" price="15000" type="MOD_POWER" subtype="MOD_ACC" >
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="2"/>
@@ -847,7 +867,7 @@
    </item>
   -->
 
-	<!-- Efficiency Mods -->
+<!-- Powertrain Mods - Efficiency Mods -->
    <item id="gridlink" avail="2" price="500" type="MOD_POWER" subtype="MOD_EFFICIENCY" >
       <usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="0"/>
    </item>
@@ -867,10 +887,10 @@
 
    <item id="suncell_power" avail="2" price="9500" type="MOD_POWER" subtype="MOD_EFFICIENCY" >
       <usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="1"/>
-      <usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="1"/>
    </item>
 
-	<!-- Propulsion Mods -->
+<!-- Powertrain Mods - Propulsion Mods -->
+
    <item id="gecko_tips" avail="3" price="1500" type="MOD_POWER" subtype="MOD_PROPULSION" reqVariant="y">
       <variant id="size1">
       	<usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="0"/>
@@ -964,7 +984,8 @@
 		</variant>
 	</item>
 
-	<!-- Speed Mods -->
+<!-- Powertrain Mods - Speed Mods -->
+
    <item id="improved_stability" avail="3" price="7000" type="MOD_POWER" subtype="MOD_SPEED">
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="3"/>
@@ -1008,8 +1029,8 @@
       </modifications>
    </item>
 
-	<!-- Electronics Mods -->
-	<!-- Electronic Skin Coatings -->
+<!-- Electronics Mods - Skin Coatings -->
+
 	<item id="chameleon_coating" avail="8I" price="4500" type="MOD_ELEC" subtype="MOD_COAT">
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="4"/>
@@ -1037,7 +1058,8 @@
      	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="1"/>
    </item>
 
-	<!-- Miscellaneous Electronic Mods -->
+<!-- Electronics Mods - Miscellaneous -->
+
    <item id="anti_theft" avail="0" price="500" type="MOD_ELEC" subtype="MOD_MISC" >
    	<variant id="rating1">
      		<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="0"/>
@@ -1082,6 +1104,9 @@
 
    <item id="integrated_matrix_device" avail="2" price="800" type="MOD_ELEC" subtype="MOD_MISC" count="y">
      	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="0"/>
+		<modifications>
+			<itemmod type="HOOK" ref="ELECTRONIC_ACCESSORY" />
+		</modifications>
    </item>
 
    <item id="nanomaintenance_repair" avail="2L" price="9000" type="MOD_ELEC" subtype="MOD_MISC" >
@@ -1098,7 +1123,8 @@
    </item>
 
 
-	<!-- Pilot Mods -->
+<!-- Electronics Mods - Pilot Mods -->
+
    <item id="xguide_override" avail="4I" price="5000" type="MOD_ELEC" subtype="MOD_PILOT" >
      	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="1"/>
    </item>
@@ -1151,8 +1177,8 @@
       </modifications>
    </item>
 
-	<!-- Hardpoint Devices -->
-	<!-- Weapon Mounts -->
+<!-- Hardpoint Devices - Weapon Mounts -->
+	
    <item id="weapon_mount_small" avail="3I" price="1500" type="MOD_HARD" subtype="MOD_MOUNT"  >
      	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
       <modifications>
@@ -1235,10 +1261,11 @@
      	<choices>
      		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="3"/>
      	</choices>
-     	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5*$RATING"/>
+     	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0.5*$RATING"/>
    </item>
 
-	<!-- Drone Racks -->
+<!-- Hardpoint Devices - Drone Racks -->
+
    <item id="drone_rack" avail="3" price="1000" type="MOD_HARD" subtype="MOD_RACK" reqVariant="y" >
    	<variant id="micromini">
      		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
@@ -1263,29 +1290,30 @@
    </item>
    <item id="expanded_drone_storage" avail="3" price="500" type="MOD_HARD" subtype="MOD_RACK" reqVariant="y" >
    	<variant id="micromini">
-     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+     		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0.5"/>
       	<attrdef id="PRICE" value="500"/>
       	<attrdef id="AVAILABILITY" value="3"/>
    	</variant>
    	<variant id="small">
-     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+     		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
       	<attrdef id="PRICE" value="1000"/>
       	<attrdef id="AVAILABILITY" value="3"/>
    	</variant>
    	<variant id="medium">
-     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
+     		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="2"/>
       	<attrdef id="PRICE" value="2000"/>
       	<attrdef id="AVAILABILITY" value="4"/>
    	</variant>
    	<variant id="large">
-     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
+     		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="3"/>
       	<attrdef id="PRICE" value="5000"/>
       	<attrdef id="AVAILABILITY" value="4"/>
    	</variant>
    </item>
 
 
-	<!-- Other Hardpoint Devices -->
+<!-- Hardpoint Devices - Other -->
+
    <item id="mechanical_arm" avail="2" price="2000" type="MOD_HARD" subtype="MOD_OTHERS" reqVariant="y" >
    	<variant id="small">
      		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>

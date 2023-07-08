@@ -174,4 +174,10 @@
 		<attrdef id="AVAILABILITY" value="$RATING L"/>
    </item>
 
+   <!-- Nexus -->
+	<item avail="6I" price="1000" id="nexus_protocol" type="SOFTWARE" subtype="HACKING_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
+	</item>
+   
 </items>

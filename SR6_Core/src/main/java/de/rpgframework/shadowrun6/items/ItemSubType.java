@@ -100,6 +100,8 @@ public enum ItemSubType {
 	CYBERDECK,
 	RIGGER_CONSOLE,
 	COMMLINK,
+	DATATERM,
+	CYBERTERM,
 	ELECTRONIC_ACCESSORIES,
 	RFID,
 	COMMUNICATION,
@@ -239,5 +241,5 @@ public enum ItemSubType {
 		return Shadowrun6Core.getI18nResources().getString("itemsubtype."+this.name().toLowerCase());
 	}
 
-	public static ItemSubType[] matrixDevices() { return new ItemSubType[]{COMMLINK, CYBERDECK, RIGGER_CONSOLE, TAC_NET};}
+	public static ItemSubType[] matrixDevices() { return new ItemSubType[]{COMMLINK, CYBERDECK, DATATERM, CYBERTERM, RIGGER_CONSOLE, TAC_NET};}
 }

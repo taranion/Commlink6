@@ -103,7 +103,7 @@
    <quality id="like_a_boss"          karma="5" pos="false" type="NORMAL" />
    <quality id="mode_lock"            karma="7" pos="false" type="NORMAL">
      <choices>
-       <choice type="TEXT" uuid="dbe00747-5b23-47bf-81c8-e05f00ab70da"/>
+       <choice type="TEXT" uuid="8db306ac-cd7a-4909-a302-949a93357639"/>
      </choices>
    </quality>
    <quality id="program_dependency"   karma="2" pos="false" type="NORMAL">
@@ -112,7 +112,7 @@
      </choices>
    </quality>
    <quality id="simsense_dependency"  karma="16" pos="false" type="NORMAL" />
-   <quality id="resonance_burn"   	  karma="13" pos="true" type="NORMAL" >
+   <quality id="resonance_burn"   	  karma="13" pos="false" type="NORMAL" >
    	<requires>
    		<datareq type="MAGIC_RESO" ref="technomancer" apply="CHARACTER"/>
    	</requires>

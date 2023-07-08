@@ -51,7 +51,7 @@
    		<choice type="TEXT" uuid="894b0515-61fe-4078-a4ce-c419d3f25eb8"/>
    	</choices>
    </quality>
-   <quality id="invalid_references"    karma= "5" pos="false" type="VIRTUAL_LIFE">
+   <quality id="invalid_inferences"    karma= "5" pos="false" type="VIRTUAL_LIFE">
      <modifications>
        <!-- <itemmod type="RULE" ref="KARMA_COST_PLUS_1"/> new rule to be established -->
      </modifications>
