@@ -181,7 +181,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 		}
 
 		con.setRating(con.getRating()-1);
-		logger.log(Level.INFO, "Decreased contact rating of "+con.getName());
+		logger.log(Level.INFO, "Decreased contact rating of {0} to {1}",con.getName(), con.getRating());
 
 		parent.runProcessors();
 		return true;

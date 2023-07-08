@@ -16,14 +16,14 @@ import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageContacts;
  *
  */
 public class SR6WizardPageContacts extends WizardPageContacts {
-	
+
 	private final static Logger logger = System.getLogger(SR6WizardPageContacts.class.getPackageName());
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageContacts(Wizard wizard, IShadowrunCharacterController<?, ?, ?,?> charGen) {
 		super(wizard, charGen);
 	}
-	
+
 	//-------------------------------------------------------------------
 	protected ContactDetailPane getRuleSpecificNode() {
 		return new ContactDetailPane(charGen.getContactController());
@@ -36,7 +36,7 @@ public class SR6WizardPageContacts extends WizardPageContacts {
 	@Override
 	public void addClicked() {
 		logger.log(Level.DEBUG, "addClicked");
-		
+
 		OperationResult<Contact> result = charGen.getContactController().createContact();
 		if (result.wasSuccessful()) {
 			Contact toAdd = result.get();
