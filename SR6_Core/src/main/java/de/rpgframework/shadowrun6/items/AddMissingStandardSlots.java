@@ -59,6 +59,23 @@ public class AddMissingStandardSlots implements CarriedItemProcessor {
 				model.addSlot(extern);
 			}
 		}
+		if (type==ItemType.VEHICLES) {
+			switch (subtype) {
+			case BIKES:
+			case ATVS:
+			case CARS:
+			case TRUCKS:
+			case VANS:
+			case BUS:
+				if (model.getSlot(ItemHook.VEHICLE_TIRES)==null) {
+					logger.log(Level.DEBUG, "Add VEHICLE_TIRES slot to {0}", model.getKey());
+					System.err.println("Add VEHICLE_TIRES slot to "+ model.getKey());
+					AvailableSlot extern = new AvailableSlot(ItemHook.VEHICLE_TIRES,1);
+					model.addSlot(extern);
+				}
+				break;
+			}
+		}
 
 		if (type==ItemType.ELECTRONICS) {
 			switch (subtype) {

@@ -122,7 +122,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case VEHICLE_ELECTRONICS: index= 3; break;
 		case VEHICLE_POWERTRAIN : index= 4; break;
 		// note: SOFTWARE_DRONE uses slot 5, see Kommlinks
-		case VEHICLE_TIRES      : index= 6; break;
+		case VEHICLE_TIRES      : index= 5; break;
 		case VEHICLE_ACCESSORY  : index= 8; break;
 		case VEHICLE_HARDPOINT  : index= 1; break;
 		case VEHICLE_CF         : index=10; break; // place for VEHICLE_WEAPON not needed, as those are inside hardpoints (VEHICLE_BODY)
@@ -145,6 +145,8 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		// Procam
 		// note: OPTICAL uses slot 8, see Firearms
 		case PROCAM_SLOT      : index= 3; break;
+		default:
+			logger.log(Level.WARNING, "No defined slot for {0}",slot.getHook());
 		}
 
 		return index;
