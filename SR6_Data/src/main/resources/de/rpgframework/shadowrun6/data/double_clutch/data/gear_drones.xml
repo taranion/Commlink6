@@ -4,11 +4,13 @@
 <!-- Ground Drones -->
 
 	<item id="aztech_gcr" avail="2" price="2000" type="DRONE_MINI" subtype="GROUND" >
-		<vehicle han="3/3" acc="5" spdi="10" tspd="60" bod="2" arm="0" pil="2" sen="1" /> <!-- Reduced acc by 5 and spdi by 10 to meet stated values with smart tires -->
+		<vehicle han="3/3" acc="10" spdi="20" tspd="60" bod="2" arm="0" pil="2" sen="1" />
 		<modifications>
 			<!--embed type="GEAR" ref="modslot_pp_to_elec" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" /-->
 			<embed type="GEAR" ref="tires_small" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
-			<embed type="GEAR" ref="chameleon_coating" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
+			<embed type="GEAR" ref="chameleon_coating" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 		</modifications>
 	</item>
@@ -37,7 +39,7 @@
 	</item>
 
 	<item id="tunnel_rat" avail="2" price="6500" type="DRONE_SMALL" subtype="GROUND" >
-		<vehicle han="2/3" acc="7" spdi="20" tspd="40" bod="2" arm="0" pil="2" sen="3" /> <!-- Reduced acc by 5 and spdi by 10 to meet stated values with smart tires -->
+		<vehicle han="2/3" acc="12" spdi="30" tspd="40" bod="2" arm="0" pil="2" sen="3" />
 		<modifications>
 			<embed type="GEAR" ref="tires_small" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
 			<embed type="GEAR" ref="gecko_tips" variant="size2" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
@@ -55,7 +57,7 @@
 		</variant>
 	</item>
 	<item id="tunnel_rat" lang="de" avail="2" price="6500" type="DRONE_SMALL" subtype="GROUND" >
-		<vehicle han="2/3" acc="7" spdi="20" tspd="40" bod="2" arm="0" pil="2" sen="3" /> <!-- Reduced acc by 5 and spdi by 10 to meet stated values with smart tires -->
+		<vehicle han="2/3" acc="12" spdi="30" tspd="40" bod="2" arm="0" pil="2" sen="3" />
 		<modifications>
 			<embed type="GEAR" ref="tires_small" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
 			<embed type="GEAR" ref="gecko_tips" variant="size2" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
@@ -116,7 +118,7 @@
 		</modifications>
 	</item>
 	<item id="ares_responder" lang="de" avail="2" price="75000" type="DRONE_MEDIUM" subtype="GROUND" >
-		<vehicle han="3/3" acc="0" spdi="0" tspd="7" bod="6" arm="10" pil="4" sen="4" /> <!-- Reduced acc by 5 and spdi by 10 to meet stated values with smart tires -->
+		<vehicle han="3/3" acc="5" spdi="10" tspd="7" bod="6" arm="10" pil="4" sen="4" />
 		<modifications>
 			<!--embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /-->
 			<embed type="GEAR" ref="tires_small" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
@@ -221,8 +223,8 @@
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks can carry three drones by default -->
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks  carry three drones each -->
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks carry five drones each -->
 			<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true"/> <!-- As this is a walker, it does not have tires -->
 		</modifications>
 	</item>
@@ -232,8 +234,8 @@
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks can carry three drones by default -->
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks carry three drones each -->
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks carry five drones each -->
 			<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true"/> <!-- As this is a walker, it does not have tires -->
 		</modifications>
 	</item>
@@ -244,7 +246,7 @@
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks carry five drones each -->
 			<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true"/> <!-- As this is a walker, it does not have tires -->
 		</modifications>
 	</item>
@@ -254,7 +256,7 @@
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks carry five drones each -->
 			<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true"/> <!-- As this is a walker, it does not have tires -->
 		</modifications>
 	</item>
@@ -268,7 +270,7 @@
    		</item>
 		</geardef>
 		<modifications>
-			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" /> <!-- has no rating in US -->
 			<embed type="GEAR" ref="safe_targeting" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
@@ -302,7 +304,7 @@
 	</item>
 
 	<item id="bae_ajax" avail="5" price="60000" type="DRONE_LARGE" subtype="GROUND" >
-		<vehicle han="4" acc="25" spdi="30" tspd="130" bod="18" arm="16" pil="4" sen="4" /> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<vehicle han="4" acc="25" spdi="25" tspd="130" bod="18" arm="16" pil="4" sen="4" />
 		<modifications>
 			<!--embed type="GEAR" ref="modslot_pp_to_chassis" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
 			<embed type="GEAR" ref="modslot_elec_to_chassis" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  /-->
@@ -324,7 +326,7 @@
 		</modifications>
 	</item>
 	<item id="bae_ajax" lang="de" avail="5I" price="60000" type="DRONE_LARGE" subtype="GROUND" >
-		<vehicle han="4" acc="25" spdi="30" tspd="130" bod="18" arm="16" pil="4" sen="4" /> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<vehicle han="4" acc="25" spdi="25" tspd="130" bod="18" arm="16" pil="4" sen="4" />
 		<modifications>
 			<!--embed type="GEAR" ref="modslot_pp_to_chassis" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
 			<embed type="GEAR" ref="modslot_elec_to_chassis" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  /-->
@@ -349,7 +351,9 @@
 	<item id="esprit_scorpion" avail="4" price="30000" type="DRONE_LARGE" subtype="GROUND" >
 		<vehicle han="4/4" acc="12" spdi="12" tspd="60" bod="10" arm="10" pil="3" sen="4" />
 		<modifications>
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
 			<embed type="GEAR" ref="mechanical_arm" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
@@ -357,7 +361,9 @@
 	<item id="esprit_scorpion" lang="de" avail="4L" price="30000" type="DRONE_LARGE" subtype="GROUND" >
 		<vehicle han="4/4" acc="12" spdi="12" tspd="60" bod="10" arm="10" pil="3" sen="4" />
 		<modifications>
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
 			<embed type="GEAR" ref="mechanical_arm" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="mechanical_arm" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="mechanical_arm" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
@@ -366,26 +372,30 @@
 	</item>
 
 	<item id="essy_interceptor" avail="3" price="15000" type="DRONE_LARGE" subtype="GROUND" >
-		<vehicle han="3/4" acc="25" spdi="30" tspd="200" bod="10" arm="6" pil="2" sen="2" /> <!-- Reduced speed, so result considering improved_topspeed is correct. -->
+		<vehicle han="3/4" acc="25" spdi="30" tspd="240" bod="10" arm="6" pil="2" sen="2" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
 			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
 	<item id="essy_interceptor" lang="de" avail="3L" price="15000" type="DRONE_LARGE" subtype="GROUND" >
-		<vehicle han="3/4" acc="25" spdi="30" tspd="200" bod="10" arm="6" pil="2" sen="2" /> <!-- Reduced speed, so result considering improved_topspeed is correct. -->
+		<vehicle han="3/4" acc="25" spdi="30" tspd="240" bod="10" arm="6" pil="2" sen="2" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/> <!-- No rating stated in DE, using same as in US -->
+                </embed>
 			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
 
 	<item id="vulcan_hollenfaust" avail="5" price="50000" type="DRONE_LARGE" subtype="GROUND" >
-		<vehicle han="4/5" acc="10" spdi="30" tspd="60" bod="16" arm="16" pil="4" sen="4" />
+		<vehicle han="4/5" acc="10" spdi="15" tspd="60" bod="16" arm="16" pil="4" sen="4" />
 		<geardef>
 		   <item id="weapon_blisters" avail="99" price="0" type="MOD_HARD" subtype="MOD_MOUNT"  >
    			<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
@@ -402,7 +412,6 @@
       		</modifications>
   			</item>
 		</geardef>
-	  <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
 		<modifications>
 			<!--embed type="GEAR" ref="modslot_pp_to_chassis" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  /--> <!-- drone only has 16 chassis slots but needs 20, thus moving 2 slots from powertrain -->
 			<!--embed type="GEAR" ref="modslot_elec_to_chassis" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  /--> <!-- drone only has 16 chassis slots but needs 20, thus moving 2 slots from electrical -->
@@ -420,7 +429,7 @@
 		</modifications>
 	</item>
 	<item id="vulcan_hollenfaust" lang="de" avail="5I" price="50000" type="DRONE_LARGE" subtype="GROUND" >
-		<vehicle han="4/5" acc="10" spdi="30" tspd="60" bod="16" arm="16" pil="4" sen="4" /> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<vehicle han="4/5" acc="10" spdi="15" tspd="60" bod="16" arm="16" pil="4" sen="4" />
 		<geardef>
 			<item id="vulcan_kr25"  type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
 				<weapon dmg="9P" attack="1,5,16,12,10" mode="SS" ammo="8(m)" skill="engineering" spec="engineering/gunnery"/>
@@ -474,13 +483,17 @@
 	<item id="aero_screamer" avail="4" price="4500" type="DRONE_MINI" subtype="AIR" >
 		<vehicle han="4" acc="1" spdi="1" tspd="1" bod="4" arm="0" pil="1" sen="4" />
 		<modifications>
-			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
 		</modifications>
 	</item>
 	<item id="aero_screamer" lang="de" avail="4" price="4500" type="DRONE_MINI" subtype="AIR" >
 		<vehicle han="4" acc="1" spdi="1" tspd="1" bod="2" arm="0" pil="1" sen="4" />
 		<modifications>
-			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
 		</modifications>
 	</item>
 
@@ -516,13 +529,17 @@
 	<item id="cyberspace_halo" avail="2" price="3000" type="DRONE_SMALL" subtype="AIR" >
 		<vehicle han="4" acc="10" spdi="10" tspd="30" bod="5" arm="0" pil="2" sen="1" />
 		<modifications>
-			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
 		</modifications>
 	</item>
 	<item id="cyberspace_halo" lang="de" avail="2" price="3000" type="DRONE_SMALL" subtype="AIR" >
 		<vehicle han="4" acc="10" spdi="10" tspd="30" bod="5" arm="0" pil="2" sen="1" />
 		<modifications>
-			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
 			<embed type="GEAR" ref="gecko_tips" variant="size2" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 		</modifications>
 	</item>
@@ -530,9 +547,15 @@
 	<item id="boing_sky_commander" avail="4" price="12500" type="DRONE_SMALL" subtype="AIR" >
 		<vehicle han="4" acc="20" spdi="30" tspd="190" bod="4" arm="2" pil="4" sen="5" />
 		<modifications>
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
-			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </embed>
 		</modifications>
 	</item>
 	<item id="boing_sky_commander" lang="de" avail="4" price="12500" type="DRONE_SMALL" subtype="AIR" >
@@ -540,11 +563,17 @@
 		<modifications>
 			<!--embed type="GEAR" ref="modslot_pp_to_elec" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
 			<embed type="GEAR" ref="modslot_chassis_to_elec" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  /-->
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
-			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </embed>
 		</modifications>
 	</item>
 
@@ -592,7 +621,7 @@
 		<modifications>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks carry five drones each -->
 			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
@@ -602,7 +631,7 @@
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks can carry five drones by default -->
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks carry five drones each -->
 		</modifications>
 	</item>
 
@@ -641,13 +670,17 @@
 	</item>
 
 	<item id="dassault_peregrine" avail="5" price="40000" type="DRONE_LARGE" subtype="AIR" >
-		<vehicle han="3" acc="30" spdi="40" tspd="280" bod="10" arm="10" pil="2" sen="5" /> <!-- Handling reduced to meet target handling considering improved_handling -->
+		<vehicle han="2" acc="30" spdi="40" tspd="280" bod="10" arm="10" pil="2" sen="5" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
-			<embed type="GEAR" ref="improved_handling" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+			<embed type="GEAR" ref="improved_handling" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
@@ -655,13 +688,17 @@
 		</modifications>
 	</item>
 	<item id="dassault_peregrine" lang="de" avail="5I" price="40000" type="DRONE_LARGE" subtype="AIR" >
-		<vehicle han="3" acc="30" spdi="40" tspd="280" bod="10" arm="10" pil="2" sen="5" /> <!-- Handling reduced to meet target handling considering improved_handling -->
+		<vehicle han="2" acc="30" spdi="40" tspd="280" bod="10" arm="10" pil="2" sen="5" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
-			<embed type="GEAR" ref="improved_handling" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
+			<embed type="GEAR" ref="improved_handling" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+                </embed>
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
@@ -717,54 +754,76 @@
 		<vehicle han="4" acc="20" spdi="30" tspd="210" bod="20" arm="15" pil="5" sen="6" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
-			<embed type="GEAR" ref="improved_pilot" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<embed type="GEAR" ref="improved_pilot" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
+			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
+			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
+			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
 	  </modifications>
 	</item>
 	<item id="hawker_thunderbolt" lang="de" avail="6I" price="85000" type="DRONE_LARGE" subtype="AIR" >
 		<vehicle han="4" acc="20" spdi="30" tspd="210" bod="20" arm="15" pil="5" sen="6" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
-			<embed type="GEAR" ref="improved_pilot" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<embed type="GEAR" ref="improved_pilot" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
+			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
+			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
+			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
 	  </modifications>
 	</item>
 
 	<item id="saeder_blitz" avail="4" price="30000" type="DRONE_LARGE" subtype="AIR" >
-		<vehicle han="3" acc="35" spdi="45" tspd="194" bod="8" arm="6" pil="1" sen="2" /> <!-- Reduced speed, so result considering improved_topspeed is correct. -->
+		<vehicle han="3" acc="35" spdi="45" tspd="310" bod="8" arm="6" pil="1" sen="2" />
 		<modifications>
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Described as carrying three missiles, which require a heavy mount -->
-			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
 		</modifications>
 	</item>
 	<item id="saeder_blitz" lang="de" avail="4I" price="30000" type="DRONE_LARGE" subtype="AIR" >
-		<vehicle han="3" acc="35" spdi="45" tspd="194" bod="8" arm="6" pil="1" sen="2" /> <!-- Reduced speed, so result considering improved_topspeed is correct. -->
+		<vehicle han="3" acc="35" spdi="45" tspd="310" bod="8" arm="6" pil="1" sen="2" />
 		<modifications>
-			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Described as carrying three missiles, which require a heavy mount -->
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
 	  </modifications>
 	</item>
 
@@ -877,13 +936,15 @@
 	</item>
 
 	<item id="mostrans_wavecutter" avail="5" price="30000" type="DRONE_LARGE" subtype="AQUATIC" >
-		<vehicle han="4" acc="20" spdi="25" tspd="100" bod="14" arm="10" pil="3" sen="2" /> <!-- Reduced speed, so result considering improved_topspeed is correct. -->
+		<vehicle han="4" acc="20" spdi="25" tspd="140" bod="14" arm="10" pil="3" sen="2" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_huge" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
 			<embed type="GEAR" ref="nitro_boost" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
@@ -893,13 +954,15 @@
 		</modifications>
 	</item>
 	<item id="mostrans_wavecutter" lang="de" avail="5I" price="30000" type="DRONE_LARGE" subtype="AQUATIC" >
-		<vehicle han="4" acc="20" spdi="25" tspd="100" bod="14" arm="10" pil="3" sen="2" /> <!-- Reduced speed, so result considering improved_topspeed is correct. -->
+		<vehicle han="4" acc="20" spdi="25" tspd="140" bod="14" arm="10" pil="3" sen="2" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_huge" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_huge" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_huge" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
 			<embed type="GEAR" ref="nitro_boost" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
