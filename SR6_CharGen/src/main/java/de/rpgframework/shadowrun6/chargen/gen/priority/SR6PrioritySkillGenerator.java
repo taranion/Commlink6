@@ -37,6 +37,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator;
@@ -509,7 +510,10 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		try {
 			// Reset values
 			points1   = 0;
-			points2 = model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue();
+			points2 = model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed();
+			if (parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_MORE_KNOWLEDGE)) {
+				points2 = model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed()+model.getAttribute(ShadowrunAttribute.INTUITION).getDistributed();
+			}
 			todos.clear();
 			normalToDos.clear();
 			knowledgeToDos.clear();

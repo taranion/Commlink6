@@ -2206,12 +2206,17 @@ public class Shadowrun6Tools {
 		int dataProc = model.getPersona().getDataProcessing().getModifiedValue();
 		for (ComplexFormValue val : model.getComplexForms()) {
 			if ("emulate".equals(val.getKey())) {
-				Decision dec = val.getDecisionByRef("PROGRAM");
+				Decision dec = val.getDecisionByType(ShadowrunReference.PROGRAM);
+				if (dec==null) {
+					logger.log(Level.ERROR, "No decision what program to emulate in complex form 'emulate'");
+					continue;
+				}
 				ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, dec.getValue());
 				CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.EMBEDDED);
 				if (temp.getChoice(ItemTemplate.UUID_RATING)!=null) {
 					item.addDecision(new Decision(ItemTemplate.UUID_RATING, String.valueOf(dataProc)));
 				}
+				SR6GearTool.recalculate("", model, item);
 				list.add(item);
 			}
 		}

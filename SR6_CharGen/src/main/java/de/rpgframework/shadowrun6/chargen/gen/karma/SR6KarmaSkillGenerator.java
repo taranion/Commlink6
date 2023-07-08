@@ -22,6 +22,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -180,6 +181,9 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			maxLimit = 1;
 			settings.skills = 0;
 			points1   = model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(ValueType.NATURAL);;
+			if (parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_MORE_KNOWLEDGE)) {
+				points1 = model.getAttribute(ShadowrunAttribute.LOGIC).getDistributed()+model.getAttribute(ShadowrunAttribute.INTUITION).getDistributed();
+			}
 			points2   = model.getKarmaFree();
 			available.clear();
 			allowed.clear();
