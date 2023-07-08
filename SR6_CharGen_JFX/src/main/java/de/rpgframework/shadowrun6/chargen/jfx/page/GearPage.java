@@ -110,8 +110,8 @@ public class GearPage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initOther() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.TOOLS, ItemType.BIOLOGY, ItemType.PACK);
-		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.TOOLS, ItemType.BIOLOGY, ItemType.PACK);
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.TOOLS, ItemType.BIOLOGY, ItemType.PACK, ItemType.CHEMICALS);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.CARRIED, ItemType.SURVIVAL, ItemType.TOOLS, ItemType.BIOLOGY, ItemType.PACK, ItemType.CHEMICALS);
 		secOther = new GearSection(
 				ResourceI18N.get(RES, "page.gear.section.other"), selectFilter, showFilter
 				);
