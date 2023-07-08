@@ -12,6 +12,7 @@ import org.prelle.javafx.CloseType;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
+import de.rpgframework.genericrpg.items.AGearData;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.Selector;
@@ -23,6 +24,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.ItemTemplatePane;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -95,8 +97,10 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 		help.getChildren().setAll(col1, col2);
 
 		ISR6EquipmentController sr6Control = (ISR6EquipmentController) control;
-		Possible poss = sr6Control.canBeSelected(n, null, carry);
-//		logger.log(Level.DEBUG, "  poss= {0}  btnCtrl={1}", poss, btnCtrl);
+		AGearData relevant = n.getMainOrVariant(carry);
+		String variantID = (relevant instanceof SR6PieceOfGearVariant)?((SR6PieceOfGearVariant)relevant).getId():null;
+		Possible poss = sr6Control.canBeSelected(n, variantID, carry);
+		//logger.log(Level.TRACE, "  poss= {0}  btnCtrl={1}", poss, btnCtrl);
 		if (btnCtrl!=null) {
 			btnCtrl.setDisabled(CloseType.OK, !poss.get());
 		}
