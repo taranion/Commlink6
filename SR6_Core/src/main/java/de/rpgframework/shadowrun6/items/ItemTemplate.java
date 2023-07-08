@@ -496,6 +496,16 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	}
 
 	//-------------------------------------------------------------------
+	public AGearData getMainOrVariant(CarryMode carry) {
+		if (getUsage(carry)!=null) return this;
+		SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) getVariant(carry);
+		if (variant!=null && variant.getUsage(carry)!=null) {
+			return variant;
+		}
+		return this;
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @param type the type to set
 	 */
