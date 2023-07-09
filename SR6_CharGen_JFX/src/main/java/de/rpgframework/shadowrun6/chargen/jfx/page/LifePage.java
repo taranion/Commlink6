@@ -16,12 +16,14 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ContactType;
+import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.chargen.jfx.section.ContactSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.LifestyleSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.SINSection;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -97,7 +99,7 @@ public class LifePage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initLifestyles() {
-		secLifestyles = new LifestyleSection<SR6Lifestyle>(ResourceI18N.get(RES, "page.life.section.lifestyles"));
+		secLifestyles = new LifestyleSection<SR6Lifestyle>(ResourceI18N.get(RES, "page.life.section.lifestyles"), () -> new SR6Lifestyle(Shadowrun6Core.getItem(LifestyleQuality.class, "low")));
 		secLifestyles.getListView().setCellFactory( lv -> new SR6LifestyleListCell( () -> ctrl));
 		secLifestyles.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secLifestyles, 4);
