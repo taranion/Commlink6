@@ -913,7 +913,9 @@ public class Shadowrun6Tools {
 			ExistenceRequirement tmp = (ExistenceRequirement)req;
 			boolean negated = tmp.isNegate();
 			ShadowrunReference type = (ShadowrunReference)tmp.getType();
-			Object foo = ShadowrunReference.resolve(type, req.getKey());
+			Object foo = null;
+			if (type!=ShadowrunReference.CARRIED)
+				foo = ShadowrunReference.resolve(type, req.getKey());
 			if (!(foo instanceof DataItem)) {
 				logger.log(Level.WARNING, "Character requirement check not implemented for {0}",type);
 				return true;
@@ -944,6 +946,7 @@ public class Shadowrun6Tools {
 				if (negated) return !model.hasMetamagicOrEcho(req.getKey());
 				return model.hasMetamagicOrEcho(req.getKey());
 			case GEAR:
+			case CARRIED:
 				// Character needs to have a specific gear
 				for (CarriedItem<ItemTemplate> gear : model.getCarriedItems()) {
 					if (gear.getModifyable().getId().equals(req.getKey())) {
@@ -1067,7 +1070,7 @@ public class Shadowrun6Tools {
 		return false;
 
 		} catch (Exception e) {
-			logger.log(Level.ERROR, "Error checking requirement "+req,e);
+			logger.log(Level.ERROR, "Error checking requirement "+req+" from "+requiredFor,e);
 			e.printStackTrace();
 		}
 		return false;

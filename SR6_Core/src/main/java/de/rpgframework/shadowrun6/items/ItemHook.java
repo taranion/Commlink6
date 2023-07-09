@@ -71,7 +71,7 @@ public enum ItemHook implements Hook {
 	VEHICLE_WEAPON_SMALL(true),
 	VEHICLE_WEAPON_LARGE(true),
 	VEHICLE_ACCESSORY(true),
-	VEHICLE_TIRES (true),
+	VEHICLE_TIRES ,
 	SOFTWARE(true),
 	SKILLJACK(true),
 	INSTRUMENT_SLOT(true),

@@ -221,7 +221,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 			for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 				AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
 				int karmaNeeded = 0;
-				int upTo = val.getModifiedValue(ValueType.NATURAL);
+				int upTo = val.getDistributed();
 				for (int i=2; i<=upTo; i++) {
 					int pay = i*5;
 					karmaNeeded += pay;

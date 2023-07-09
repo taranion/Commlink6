@@ -126,6 +126,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private BooleanProperty chooseAdeptAdvantages = new SimpleBooleanProperty(false);
 	private BooleanProperty useBothAdvantages = new SimpleBooleanProperty(false);
 
+	private SR6PieceOfGearVariant suggestedVariant;
+	private boolean canBeLeftWithOK;
+
 	//-------------------------------------------------------------------
 	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl) {
 		this(ctrl, null);
@@ -214,20 +217,15 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				logger.log(Level.WARNING, "Mit decision");
 			}
 			OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem( (ItemTemplate)item, carry, selectedVariant, lifeform, true, (IReferenceResolver)context, getDecisions());
-			logger.log(Level.WARNING, "Trying to build "+carry+" returned "+result);
+			logger.log(Level.INFO, "Trying to build "+carry+" returned "+result);
 			if (result.get()!=null) {
-				logger.log(Level.WARNING, "with item");
+				logger.log(Level.DEBUG, "with item");
 				CarriedItem<ItemTemplate> carried = result.get();
 				if (carried.getCarryMode()==CarryMode.EMBEDDED && context instanceof CarriedItem<?>) {
 					carried.setParent( (CarriedItem<ItemTemplate>)context );
 				}
-				logger.log(Level.WARNING, "item has mode "+carried.getCarryMode());
-				@SuppressWarnings("rawtypes")
-				CharacterController c1 = ctrl.getCharacterController();
-				SR6CharacterController charGen = (SR6CharacterController)c1;
-//				Node info = ItemUtilJFX.getItemInfoNode(carried, charGen, true);
-//				logger.log(Level.INFO, "Got info node "+info);
-				logger.log(Level.WARNING, "Update description: "+bxDesc);
+				logger.log(Level.DEBUG, "item has mode "+carried.getCarryMode());
+				logger.log(Level.DEBUG, "Update description: "+bxDesc);
 				bxDesc.setData(carried);
 			} else
 				logger.log(Level.WARNING, "Not successful");
@@ -241,7 +239,6 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			logger.log(Level.INFO, "canBeSelected({0}) returns "+possible, carry);
 		} else {
 			possible = ctrl.canBeSelected(item, getDecisions() );
-			//logger.log(Level.INFO, " returned {0}/{1} from {2}", possible, possible.getRequireDecisions(), ctrl.getClass());
 		}
 		// Set status
 		ToDoElement problem = possible.getMostSevere();
@@ -256,17 +253,24 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 		}
 
-		//logger.log(Level.INFO, " btnCtrl "+btnCtrl);
+		logger.log(Level.INFO, "Item selection possible=={0}   btnCtrl={1}",possible,btnCtrl);
 		if (btnCtrl != null) {
 			if (!possible.getRequireDecisions() || (problem != null && problem.getSeverity() != Severity.INFO)) {
 				logger.log(Level.DEBUG, " disable OK");
+				canBeLeftWithOK = false;
 				btnCtrl.setDisabled(CloseType.OK, true);
 				this.buttonDisabledProperty().put(CloseType.OK, true);
 			} else {
 				logger.log(Level.DEBUG, " enable OK ");
+				canBeLeftWithOK = true;
 				btnCtrl.setDisabled(CloseType.OK, false);
 				this.buttonDisabledProperty().put(CloseType.OK, false);
 			}
+		} else {
+			canBeLeftWithOK = possible.get();
+			if (btnCtrl!=null)
+				btnCtrl.setDisabled(CloseType.OK, !canBeLeftWithOK);
+			this.buttonDisabledProperty().put(CloseType.OK, !canBeLeftWithOK);
 		}
 	}
 
@@ -320,6 +324,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 
 			btnCtrl = new NavigButtonControl();
+			btnCtrl.setCallback( (close) -> isButtonEnabled(close));
 			btnCtrl.initialize(FlexibleApplication.getInstance(), this);
 //			btnCtrl.setDisabled(CloseType.OK, true);
 //			this.buttonDisabledProperty().put(CloseType.OK, true);
@@ -333,6 +338,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		} finally {
 			logger.log(Level.INFO, "LEAVE apply({0}, {1} with {2})", item, choices, closed);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private boolean isButtonEnabled(CloseType close) {
+		if (close==CloseType.CANCEL) return true;
+		return true;
 	}
 
 	// -------------------------------------------------------------------
@@ -407,7 +418,13 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 		}
 
-		cbVariants.getSelectionModel().select(0);
+		if (suggestedVariant!=null) {
+			selectedVariant = suggestedVariant;
+			cbVariants.getSelectionModel().select(suggestedVariant);
+		} else {
+			cbVariants.getSelectionModel().select(0);
+		}
+		updateButtons();
 	}
 
 	// -------------------------------------------------------------------
@@ -1288,6 +1305,11 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		 });
 		content.getChildren().add(cbSub);
 		return cbSub;
+	}
+
+	//-------------------------------------------------------------------
+	public void setSuggestedVariant(SR6PieceOfGearVariant variant) {
+		this.suggestedVariant = variant;
 	}
 
 }

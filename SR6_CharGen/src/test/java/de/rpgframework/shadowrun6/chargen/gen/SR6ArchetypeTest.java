@@ -2142,7 +2142,9 @@ public class SR6ArchetypeTest {
 		assertTrue("Failed selecting metatype",charGen.getMetatypeController().select(gnome));
 
 		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.BODY);
-		assertEquals("Expect 3 maximum from Gnome (Due to Neoteny)", 3, aVal.getMaximum());
+		assertEquals("Expect 4 maximum from Gnome (Not extra reduced by Neoteny)", 4, aVal.getMaximum());
+		aVal = model.getAttribute(ShadowrunAttribute.AGILITY);
+		assertEquals("Expect 6 maximum from Gnome (Not extra reduced by Neoteny)", 6, aVal.getMaximum());
 
 		assertTrue(charGen.getAttributeController().increase(aVal).wasSuccessful()); // 2
 		assertTrue(charGen.getAttributeController().increase(aVal).wasSuccessful()); // 3
