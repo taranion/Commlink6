@@ -109,6 +109,16 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.Sense",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.SenseList",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.Shadowrun6Action",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -299,6 +309,10 @@
 },
 {
   "name":"de.rpgframework.shadowrun6.proc.GetModificationsForDrakes",
+  "methods":[{"name":"<init>","parameterTypes":["de.rpgframework.shadowrun6.Shadowrun6Character"] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.proc.GetModificationsFromMentorSpirits",
   "methods":[{"name":"<init>","parameterTypes":["de.rpgframework.shadowrun6.Shadowrun6Character"] }]
 },
 {
