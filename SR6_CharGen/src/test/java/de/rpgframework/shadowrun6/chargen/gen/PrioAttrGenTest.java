@@ -348,7 +348,7 @@ public class PrioAttrGenTest {
 		karma = 50;
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), 11));
 		preMods.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ATTRIBUTES.name(), 16));
-		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 4));
+		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 4, ApplyWhen.ALLCREATE, ValueType.NATURAL));
 		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.AGILITY.name(), 7, ApplyWhen.ALLCREATE, ValueType.MAX));
 		preMods.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.CHARISMA.name(), 8, ApplyWhen.ALLCREATE, ValueType.MAX));
 		model.setMagicOrResonanceType(Shadowrun6Core.getItem(MagicOrResonanceType.class, "magician"));
