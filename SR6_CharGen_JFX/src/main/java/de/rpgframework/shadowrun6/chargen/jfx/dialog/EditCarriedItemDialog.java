@@ -63,6 +63,19 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 	public EditCarriedItemDialog(SR6CharacterController ctrl, CarriedItem<ItemTemplate> data) {
 		super(ctrl, data);
 		this.control = ctrl;
+
+		switch ((ItemType)data.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue()) {
+		case WEAPON_CLOSE_COMBAT:
+		case WEAPON_RANGED:
+		case WEAPON_FIREARMS:
+		case AMMUNITION: // to enable modifications for grenades
+		case WEAPON_SPECIAL:
+			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
+			view.getList(2).setAll(selectedItem.getEnhancements());
+//			view.setCellFactory(2, (lv)-> new ItemEnhancementValueObjectListCell(selectedItem,control.getEquipmentController()));
+			view.setOnAddAction(2, ev -> addModificationClicked());
+			break;
+		}
 	}
 
 	//--------------------------------------------------------------------
@@ -152,9 +165,43 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		return index;
 	}
 
-	//--------------------------------------------------------------------
-	protected void updateImage()  {
+	//-------------------------------------------------------------------
+	/**
+	 * Position all elements that are NOT AvailableSlots
+	 */
+	protected void positionNonSlots() {
+		logger.log(Level.DEBUG, "positionNonSlots");
+		super.positionNonSlots();
 
+		ItemType type = selectedItem.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+		switch (type) {
+		case WEAPON_CLOSE_COMBAT:
+		case WEAPON_RANGED:
+		case WEAPON_FIREARMS:
+		case AMMUNITION: // to enable modifications for grenades
+		case WEAPON_SPECIAL:
+			logger.log(Level.WARNING, "Show modifications for "+type);
+			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
+			view.getList(2).setAll(selectedItem.getEnhancements());
+			view.setCellFactory(2, new Callback<ListView<Object>, ListCell<Object>>() {
+
+				@Override
+				public ListCell<Object> call(ListView<Object> lv) {
+					ListCell<?> cell =  new ItemEnhancementValueListCell<SR6ItemEnhancement>(control, selectedItem, (c) -> refresh());
+//					ListCell<?> cell = new ComplexDataItemValueListCell<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>>( () -> control.getEquipmentController().getItemEnhancementController(selectedItem));
+					return (ListCell<Object>) cell;
+				}
+			});
+			view.setOnAddAction(2, ev -> addModificationClicked());
+			break;
+		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.jfx.pages.ACarriedItemPage#updateImage()
+	 */
+	protected void updateImage()  {
 		logger.log(Level.INFO, "refresh");
 		ItemSubType sub = selectedItem.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
 		ItemType type = selectedItem.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
@@ -213,28 +260,6 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 					view.setImage(null);
 				}
 			}
-		}
-
-		switch (type) {
-		case WEAPON_CLOSE_COMBAT:
-		case WEAPON_RANGED:
-		case WEAPON_FIREARMS:
-		case AMMUNITION: // to enable modifications for grenades
-		case WEAPON_SPECIAL:
-			logger.log(Level.WARNING, "Show modifications for "+type);
-			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
-			view.getList(2).setAll(selectedItem.getEnhancements());
-			view.setCellFactory(2, new Callback<ListView<Object>, ListCell<Object>>() {
-
-				@Override
-				public ListCell<Object> call(ListView<Object> lv) {
-					ListCell<?> cell =  new ItemEnhancementValueListCell<SR6ItemEnhancement>(control, selectedItem, (c) -> refresh());
-//					ListCell<?> cell = new ComplexDataItemValueListCell<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>>( () -> control.getEquipmentController().getItemEnhancementController(selectedItem));
-					return (ListCell<Object>) cell;
-				}
-			});
-			view.setOnAddAction(2, ev -> addModificationClicked());
-			break;
 		}
 	}
 
