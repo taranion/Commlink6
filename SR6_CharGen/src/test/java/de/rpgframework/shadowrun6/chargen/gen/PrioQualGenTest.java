@@ -24,6 +24,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
@@ -53,6 +54,7 @@ public class PrioQualGenTest {
 		charGen = new SR6TestGenerator(model) {
 			public void runProcessors() {
 				System.out.println("---------------");
+				(new ResetModifications(model)).process(List.of());
 				(new ResetGenerator(charGen)).process(List.of());
 				ctrl.process(new ArrayList<>(preMods));
 			}
@@ -141,7 +143,7 @@ public class PrioQualGenTest {
 	 */
 	@Test
 	public void testSelectDetectMax6WithMods() {
-		preMods.add( new ValueModification(ShadowrunReference.QUALITY, "built_tough", 2) );
+		preMods.add( new ValueModification(ShadowrunReference.QUALITY, "built_tough", 2, "Hello") );
 		charGen.runProcessors();
 
 		assertEquals(0,ctrl.getNumberOfQualities());
