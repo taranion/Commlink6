@@ -123,8 +123,6 @@ public class ResetGenerator implements ProcessingStep {
 			model.setKarmaFree(settings.startKarma);
 		} else if (real instanceof FreeCharacterGenerator) {
 		} else {
-			model.setKarmaFree(50);
-			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			if (level==PowerLevel.PRIME_RUNNER)
 				model.setKarmaFree(100);
 		}
