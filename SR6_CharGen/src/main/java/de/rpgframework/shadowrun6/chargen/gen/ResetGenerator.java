@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
+import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -122,6 +123,7 @@ public class ResetGenerator implements ProcessingStep {
 			model.setKarmaFree(settings.startKarma);
 		} else if (real instanceof FreeCharacterGenerator) {
 		} else {
+			model.setKarmaFree(50);
 			if (level==PowerLevel.PRIME_RUNNER)
 				model.setKarmaFree(100);
 		}
