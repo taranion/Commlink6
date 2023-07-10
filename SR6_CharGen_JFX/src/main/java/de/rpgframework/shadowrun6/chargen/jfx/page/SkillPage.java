@@ -70,7 +70,7 @@ public class SkillPage extends Page {
 		FlexGridPane.setMediumWidth(secNormal, 6);
 		FlexGridPane.setMediumHeight(secNormal, 6);
 //		FlexGridPane.setMaxWidth(secNormal, 7);
-//		FlexGridPane.setMaxHeight(secNormal, 8);
+		FlexGridPane.setMaxHeight(secNormal, 8);
 		secNormal.flexWidthProperty().addListener( (ov,o,n) -> {
 			FlexGridPane.setMediumWidth(secNormal, (Integer)n);
 			flex.refresh();

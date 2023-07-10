@@ -354,4 +354,13 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 		return true;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.ILifestyleController#canBeSelected(de.rpgframework.shadowrun.Lifestyle)
+	 */
+	@Override
+	public Possible canBeSelected(SR6Lifestyle value) {
+		return canBeSelected(value.getResolved());
+	}
+
 }

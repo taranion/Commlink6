@@ -51,6 +51,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -112,7 +113,7 @@ public class SkillSection extends Section {
 
 		line = new HBox(5, tsExpertMode, hdPoints1, lbPoints);
 		VBox layout = new VBox(5, line, table);
-		setContent(layout);
+		setContent(new ScrollPane(layout));
 	}
 
 	//-------------------------------------------------------------------

@@ -30,7 +30,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> implements SR6LifestyleController {
-	
+
 	protected final static Logger logger = System.getLogger(SR6LifestyleLeveller.class.getPackageName()+".lifestyle");
 
 	protected Shadowrun6Character model;
@@ -180,9 +180,9 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 	@Override
 	public void roll() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	//-------------------------------------------------------------------
 	private static int getNuyenForLP(int lp) {
 		logger.log(Level.DEBUG, "Get for "+lp);
@@ -217,7 +217,7 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 			}
 		}
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
@@ -244,7 +244,7 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 				} else
 					unprocessed.add(tmp);
 			}
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
@@ -276,6 +276,15 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 	public boolean decrease(SR6Lifestyle value) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.ILifestyleController#canBeSelected(de.rpgframework.shadowrun.Lifestyle)
+	 */
+	@Override
+	public Possible canBeSelected(SR6Lifestyle value) {
+		return canBeSelected(value.getResolved());
 	}
 
 }

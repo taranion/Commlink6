@@ -2204,38 +2204,59 @@ public class Shadowrun6Tools {
 	public static Map<Object, List<CarriedItem<ItemTemplate>>> getCyberPrograms(Shadowrun6Character model) {
 		Map<Object,List<CarriedItem<ItemTemplate>>> ret = new HashMap<>();
 
-		// Check complex forms
-		List<CarriedItem<ItemTemplate>> list = new ArrayList<>();
-		int dataProc = model.getPersona().getDataProcessing().getModifiedValue();
-		for (ComplexFormValue val : model.getComplexForms()) {
-			if ("emulate".equals(val.getKey())) {
-				Decision dec = val.getDecisionByType(ShadowrunReference.PROGRAM);
-				if (dec==null) {
-					logger.log(Level.ERROR, "No decision what program to emulate in complex form 'emulate'");
-					continue;
+		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+			// Check complex forms
+			List<CarriedItem<ItemTemplate>> list = new ArrayList<>();
+			int dataProc = model.getPersona().getDataProcessing().getModifiedValue();
+			for (ComplexFormValue val : model.getComplexForms()) {
+				if ("emulate".equals(val.getKey())) {
+					Decision dec = val.getDecisionByType(ShadowrunReference.PROGRAM);
+					if (dec==null) {
+						logger.log(Level.ERROR, "No decision what program to emulate in complex form 'emulate'");
+						continue;
+					}
+					ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, dec.getValue());
+					CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.EMBEDDED);
+					if (temp.getChoice(ItemTemplate.UUID_RATING)!=null) {
+						item.addDecision(new Decision(ItemTemplate.UUID_RATING, String.valueOf(dataProc)));
+					}
+					SR6GearTool.recalculate("", model, item);
+					list.add(item);
 				}
-				ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, dec.getValue());
-				CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.EMBEDDED);
-				if (temp.getChoice(ItemTemplate.UUID_RATING)!=null) {
-					item.addDecision(new Decision(ItemTemplate.UUID_RATING, String.valueOf(dataProc)));
-				}
-				SR6GearTool.recalculate("", model, item);
-				list.add(item);
 			}
-		}
-		ret.put(ShadowrunReference.COMPLEX_FORM, list);
+			if (!list.isEmpty())
+				ret.put(ShadowrunReference.COMPLEX_FORM, list);
 
-		// Build a list of software absorbed by an echo
-		list = new ArrayList<>();
-		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.SOFTWARE)) {
-			// Has the software been bought
-			if (item.isAutoAdded())
-				continue;
-			// Has the software already been absorbed
-			if (item.hasFlag(SR6ItemFlag.ABSORBED))
-				list.add(item);
+			// Build a list of software absorbed by an echo
+			list = new ArrayList<>();
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.SOFTWARE)) {
+				// Has the software been bought
+				if (item.isAutoAdded())
+					continue;
+				// Has the software already been absorbed
+				if (item.hasFlag(SR6ItemFlag.ABSORBED))
+					list.add(item);
+			}
+			if (!list.isEmpty())
+				ret.put(ShadowrunReference.METAECHO, list);
 		}
-		ret.put(ShadowrunReference.METAECHO, list);
+
+		// Installed on hardware
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.ELECTRONICS)) {
+			// Has the software been bought
+			if (!item.hasFlag(SR6ItemFlag.MATRIX_DEVICE))
+				continue;
+			List<CarriedItem<ItemTemplate>> list = new ArrayList<>();
+			for (CarriedItem<ItemTemplate> item2 : item.getAccessories()) {
+				ItemType type2 = item2.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+				if (type2!=ItemType.SOFTWARE)
+					continue;
+				list.add(item2);
+			}
+			if (!list.isEmpty())
+				ret.put(item, list);
+		}
+
 
 		return ret;
 	}
