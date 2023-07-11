@@ -593,7 +593,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			container.addAccessory(res.get(), slot);
 			logger.log(Level.DEBUG, "recalculate item after embedding");
 			GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
-			logger.log(Level.INFO, "Embedded {0} into {1}", value.getId()+"/"+variant, container.getKey());
+			logger.log(Level.WARNING, "Embedded {0} into {1}/{2}", value.getId()+"/"+variant, container.getKey(), container.getUuid());
 
 			parent.runProcessors();
 			return res;
@@ -620,7 +620,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		boolean success = container.removeAccessory(toRemove, slot);
 		if (!success)
 			return Possible.FALSE;
-		logger.log(Level.ERROR, "ToDo: recalculate item after removing embedded");
+		logger.log(Level.DEBUG, "ToDo: recalculate item after removing embedded");
 		GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
 
 		parent.runProcessors();
