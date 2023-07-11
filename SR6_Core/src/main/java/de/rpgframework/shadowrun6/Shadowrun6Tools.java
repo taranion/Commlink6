@@ -831,6 +831,8 @@ public class Shadowrun6Tools {
 					logger.log(Level.WARNING, "Char {0} Item {1} has no UUID", model.getName(), tmp.getKey());
 				if (tmp.getResolved()==null) {
 					ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
+					if (resolved==null && tmp.getKey().equals("software_library"))
+						resolved = ItemUtil.SOFTWARE_LIBRARY_ITEM;
 					if (resolved==null) {
 						logger.log(Level.ERROR, "Char {0} has an unresolvable item: {1}", model.getName(), tmp.getKey());
 						System.err.println("Char "+model.getName()+" has an unresolvable item: "+tmp.getKey());
@@ -1914,10 +1916,12 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static ItemType getItemType(CarriedItem<ItemTemplate> model) {
 		if (!model.hasAttribute(SR6ItemAttribute.ITEMTYPE)) {
-			logger.log(Level.WARNING, "No ITEMTYPE for "+model.getKey());
-			System.err.println("Shadowrun6Tools.getItemType(): No ITEMTYPE for "+model.getKey());
 			if ("unarmed".equals(model.getKey()))
 				return ItemType.WEAPON_CLOSE_COMBAT;
+			if ("software_library".equals(model.getKey()))
+				return ItemType.SOFTWARE;
+			logger.log(Level.WARNING, "No ITEMTYPE for "+model.getKey());
+			System.err.println("Shadowrun6Tools.getItemType(): No ITEMTYPE for "+model.getKey());
 			return null;
 		}
 		return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();

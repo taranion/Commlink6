@@ -41,8 +41,6 @@ public class ItemUtil {
 			item.hasFlag(SR6ItemFlag.MATRIX_DEVICE)
 			||
 			(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE)!=null &&  List.of( ItemSubType.matrixDevices()).contains(item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue())
-				||
-				item.getResolved()==ItemUtil.SOFTWARE_LIBRARY_ITEM
 				);
 
 	public static ItemTemplate SOFTWARE_LIBRARY_ITEM = new ItemTemplate();
@@ -59,6 +57,8 @@ public class ItemUtil {
 
 		SOFTWARE_LIBRARY =  new CarriedItem<ItemTemplate>(SOFTWARE_LIBRARY_ITEM, null, CarryMode.VIRTUAL);
 		SOFTWARE_LIBRARY.addSlot(new AvailableSlot(ItemHook.SOFTWARE, 99));
+		SOFTWARE_LIBRARY.setUuid(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+		SOFTWARE_LIBRARY.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
 	}
 
 	//-------------------------------------------------------------------
