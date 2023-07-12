@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.character.ProcessingStep;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPower.Activation;
@@ -44,7 +45,7 @@ public class GetModificationsFromPowers implements ProcessingStep {
 				logger.log(Level.DEBUG, "add from power "+power.getId()+" / "+ref+" / dec="+ref.getDecisions());
 				logger.log(Level.DEBUG, "ToDo: "+power.getModifications());
 				// Calculate modifications
-				ref.clearModifications();
+				ref.reset();
 
 				int multiplier = ref.getModifiedValue(); //(ref.getModifyable().getMaxLevel()>1)?ref.getModifiedValue():1;
 //				if (multiplier==0) {
@@ -56,12 +57,10 @@ public class GetModificationsFromPowers implements ProcessingStep {
 						Modification realMod = Shadowrun6Tools.instantiateModification(mod, ref, multiplier, model);
 						logger.log(Level.DEBUG, " instantiated "+realMod);
 						if (ref.getModifyable().getActivation()!=Activation.PASSIVE) {
-//							if (realMod instanceof DataItemModification)
-//								((DataItemModification)realMod).setConditional(true);
-//							else if (realMod instanceof SkillModification)
-//								((SkillModification)realMod).setConditional(true);
+							if (realMod instanceof DataItemModification)
+								((DataItemModification)realMod).setConditionString("GetModificationsFromPowers");
 						}
-						ref.addModification(realMod);
+						ref.addCharacterModification(realMod);
 					} catch (Exception e) {
 						logger.log(Level.ERROR, "Problem calculating modifications for adept power: "+ref,e);
 					}
