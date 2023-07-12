@@ -76,6 +76,7 @@ import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
@@ -448,6 +449,8 @@ public class Shadowrun6Tools {
 					return valMod.getValue()+"x "+((ItemTemplate)valMod.getResolvedKey()).getName(loc);
 				case LICENSE:
 					return valMod.getValue()+"x "+RES.getString("modification.license", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
+				case QUALITY:
+					return valMod.getValue()+"x "+((Quality)valMod.getResolvedKey()).getName(loc);
 				case SIN:
 					return valMod.getValue()+"x "+RES.getString("modification.sin", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
 				default:
@@ -460,6 +463,12 @@ public class Shadowrun6Tools {
 			if (mod instanceof AllowModification) {
 				AllowModification valMod = (AllowModification)mod;
 				switch (type) {
+				case MAGIC_RESO:
+					if (valMod.isNegate()) {
+						return RES.format("modification.forbid.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
+					} else {
+						return RES.format("modification.allow.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
+					}
 				case SKILL:
 					if (valMod.isNegate()) {
 						if (valMod.getResolvedKey()!=null)

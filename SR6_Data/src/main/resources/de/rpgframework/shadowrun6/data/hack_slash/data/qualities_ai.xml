@@ -19,7 +19,7 @@
 			<itemmod type="GEAR" ref="control_rig" variant="quality_pilot_origin">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
 			</itemmod>
-			<valmod type="HOOK" ref="SOFTWARE" value="$DATA_PROCESSING"/> <!-- do these show up or do we need a virtual RCC to handle the software? -->
+			<!-- valmod type="HOOK" ref="SOFTWARE" value="$DATA_PROCESSING"/--> <!-- do these show up or do we need a virtual RCC to handle the software? -->
      </modifications>
    </quality>
    <quality id="redundancy"            karma= "8" pos="true" type="VIRTUAL_LIFE">
@@ -37,7 +37,7 @@
    <quality id="virtual_stability"     karma= "5" pos="true" type="VIRTUAL_LIFE" />
 
 <!-- Negatives -->
-	
+
    <quality id="cascading_failure"     karma= "9" pos="false" type="VIRTUAL_LIFE">
      <modifications>
        <!-- <itemmod type="RULE" ref="WOUND_MOD_PLUS_1"/> new rule to be established -->
@@ -67,5 +67,5 @@
    	</choices>
    </quality>
    <quality id="real_world_naivete"    karma= "8" pos="false" type="VIRTUAL_LIFE" />
-   
+
 </qualities>

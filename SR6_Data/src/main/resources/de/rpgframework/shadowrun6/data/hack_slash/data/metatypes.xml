@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metatypes>
-
-    <metatype id="pilot-ai" ai="true">
-        <modifications>
+	<metatype id="pilot-ai" ai="true">
+   	<modifications>
+      	<allowmod type="MAGIC_RESO" ref="magician" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="mysticadept" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="adept" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="aspectedmagician" neg="true"/>
             <valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="7" set="MAX" when="CREATION"/>
             <valmod type="ITEM_ATTRIBUTE" ref="ATTACK"          value="7" set="MAX" when="CREATION"/>
             <valmod type="ATTRIBUTE"     ref="LOGIC"            value="5" set="MAX" when="CREATION"/>
@@ -15,6 +18,10 @@
 
     <metatype id="agent-ai" ai="true">
         <modifications>
+      	<allowmod type="MAGIC_RESO" ref="magician" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="mysticadept" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="adept" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="aspectedmagician" neg="true"/>
             <valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="8" set="MAX" when="CREATION"/>
             <valmod type="ITEM_ATTRIBUTE" ref="ATTACK"          value="7" set="MAX" when="CREATION"/>
             <valmod type="ATTRIBUTE"     ref="LOGIC"            value="6" set="MAX" when="CREATION"/>
@@ -25,6 +32,10 @@
 
     <metatype id="deep_foundation_ai" ai="true">
         <modifications>
+      	<allowmod type="MAGIC_RESO" ref="magician" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="mysticadept" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="adept" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="aspectedmagician" neg="true"/>
             <valmod type="ITEM_ATTRIBUTE" ref="FIREWALL"        value="7" set="MAX" when="CREATION"/>
             <valmod type="ITEM_ATTRIBUTE" ref="ATTACK"          value="7" set="MAX" when="CREATION"/>
             <valmod type="ATTRIBUTE"     ref="WILLPOWER"        value="7" set="MAX" when="CREATION"/>
@@ -37,6 +48,10 @@
 
     <metatype id="realms_ai" ai="true">
         <modifications>
+      	<allowmod type="MAGIC_RESO" ref="magician" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="mysticadept" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="adept" neg="true"/>
+      	<allowmod type="MAGIC_RESO" ref="aspectedmagician" neg="true"/>
             <valmod type="ITEM_ATTRIBUTE" ref="SLEAZE"          value="8" set="MAX" when="CREATION"/>
             <valmod type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="5" set="MAX" when="CREATION"/>
             <valmod type="ATTRIBUTE"     ref="WILLPOWER"        value="5" set="MAX" when="CREATION"/>
