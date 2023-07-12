@@ -486,8 +486,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			ret.add( handleGEAR(item, choice));
 			break;
 		case ITEM_ATTRIBUTE:
-			if (choice.getTypeReference()!=null) {
-				SR6ItemAttribute attrib = SR6ItemAttribute.valueOf(choice.getTypeReference());
+			if (choice.getChoiceOptions()!=null) {
 				ret.add( handleITEMATTRIBUTEValues(item, choice));
 			} else {
 				ret.add( handleITEMATTRIBUTE(item, choice));

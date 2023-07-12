@@ -148,6 +148,7 @@ public class Shadowrun6Tools {
 		GetModificationsFromMagicOrResonance.class,
 		GetModificationsFromQualities.class,
 		GetModificationsFromMentorSpirits.class,
+		ApplyModificationsGeneric.class,
 		GetModificationsFromMetaEchoes.class,
 		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),

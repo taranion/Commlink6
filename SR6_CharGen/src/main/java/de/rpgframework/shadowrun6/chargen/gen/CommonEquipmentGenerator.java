@@ -196,17 +196,6 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 						priceMods.add(mod);
 					} else
 						unprocessed.add(tmp);
-				} else if (tmp instanceof DataItemModification) {
-					DataItemModification mod = (DataItemModification)tmp;
-					if (mod.getReferenceType()==ShadowrunReference.GEAR) {
-						ItemTemplate template = mod.getResolvedKey();
-						Decision[] dec = new Decision[mod.getDecisions().size()];
-						OperationResult<CarriedItem<ItemTemplate>> carry = GearTool.buildItem(template, CarryMode.EMBEDDED, getModel(), true, mod.getDecisions().toArray(dec));
-						carry.get().addModification(mod);
-						logger.log(Level.DEBUG, "add {0} due to {1}", template, tmp.getSource());
-						model.addCarriedItem(carry.get());
-					} else
-						unprocessed.add(tmp);
 				} else {
 					// No ValueModification
 					unprocessed.add(tmp);
@@ -222,7 +211,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				model.setKarmaFree( model.getKarmaFree() - sett.getKarmaToNuyen());
 			}
 
-			logger.log(Level.INFO, "{0} Nuyen available", model.getNuyen());
+			logger.log(Level.WARNING, "{0} Nuyen available", model.getNuyen());
 
 
 			logger.log(Level.DEBUG, "Modifiers {0}",priceMods);
@@ -243,7 +232,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 					if (tmp.getCount()>1)
 						cost *= tmp.getCount();
 					//if (logger.isLoggable(Level.TRACE))
-					logger.log(Level.INFO, "Pay {0} for {1}   (before {2})", cost, tmp.getKey(), nuyen);
+					logger.log(Level.WARNING, "Pay {0} for {1}   (before {2})", cost, tmp.getKey(), nuyen);
 					nuyen -= cost;
 				}
 
@@ -256,7 +245,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			}
 			model.setNuyen(nuyen);
 			logger.log(Level.INFO, "Leave with {0} Karma", model.getKarmaFree());
-			logger.log(Level.INFO, "Nuyen remaining: {0}", model.getNuyen());
+			logger.log(Level.WARNING, "Nuyen remaining: {0}", model.getNuyen());
 
 			return unprocessed;
 		} finally {

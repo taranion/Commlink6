@@ -117,9 +117,14 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
 						|| tmp.getReferenceType()==ShadowrunReference.ADEPT_POWER
 						|| tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE
-						|| tmp.getReferenceType()==ShadowrunReference.SKILL
-						|| tmp.getReferenceType()==ShadowrunReference.QUALITY
 						|| tmp.getReferenceType()==ShadowrunReference.CRITTER_POWER
+						|| tmp.getReferenceType()==ShadowrunReference.GEAR
+						|| tmp.getReferenceType()==ShadowrunReference.LICENSE
+						|| tmp.getReferenceType()==ShadowrunReference.LIFESTYLE
+						|| tmp.getReferenceType()==ShadowrunReference.QUALITY
+						|| tmp.getReferenceType()==ShadowrunReference.RULE
+						|| tmp.getReferenceType()==ShadowrunReference.SIN
+						|| tmp.getReferenceType()==ShadowrunReference.SKILL
 						) {
 					if (!applyModification(model, tmp)) {
 						unprocessed.add(tmp);
@@ -250,6 +255,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				logger.log(Level.DEBUG, "Resolved gear {0} from definitions in character", mod.getKey());
 			}
 		}
+		logger.log(Level.WARNING, "applyGear "+mod);
 		SR6PieceOfGearVariant variant = null;
 		if (mod.getVariant()!=null) {
 			variant = (SR6PieceOfGearVariant) item.getVariant(mod.getVariant());
