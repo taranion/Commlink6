@@ -54,7 +54,7 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 	 */
 	@Override
 	public List<MagicOrResonanceType> getAvailable() {
-		return available;
+		return new ArrayList<>(available);
 	}
 
 	//-------------------------------------------------------------------
@@ -85,9 +85,51 @@ public class PointBuyMagicOrResonanceController extends MagicOrResonanceControll
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 		logger.log(Level.DEBUG, "ENTER process()");
-		List<Modification> unprocessed = previous;
+		List<Modification> unprocessed = new ArrayList<>();
 
 		try {
+			available.clear();
+			available.addAll(Shadowrun6Core.getItemList(MagicOrResonanceType.class));
+			List<MagicOrResonanceType> forbidden = new ArrayList<>();
+			// Check for options
+			for (Modification tmp : previous) {
+				if (tmp instanceof ValueModification) {
+					ValueModification mod = (ValueModification) tmp;
+					if (mod.getReferenceType() == ShadowrunReference.MAGIC_RESO) {
+						MagicOrResonanceType type = mod.getResolvedKey();
+						if (forbidden.contains(type)) {
+							logger.log(Level.ERROR, "Would allow {0}, but it has been forbidden",mod.getKey() );
+						} else {
+							if (!available.contains(type))
+								available.add(type);
+							logger.log(Level.DEBUG, "Allow {0}",mod.getKey());
+						}
+					} else {
+						unprocessed.add(mod);
+					}
+				} else if (tmp instanceof AllowModification) {
+					AllowModification mod = (AllowModification)tmp;
+					if (mod.getReferenceType() == ShadowrunReference.MAGIC_RESO) {
+						MagicOrResonanceType type = mod.getResolvedKey();
+						if (mod.isNegate()) {
+							logger.log(Level.DEBUG, "Forbid {0} from {1}",mod.getKey(), available );
+							forbidden.add(type);
+							available.remove(type);
+						}
+					} else {
+						unprocessed.add(mod);
+					}
+				} else {
+					unprocessed.add(tmp);
+				}
+			}
+			Collections.sort(available, new Comparator<MagicOrResonanceType>() {
+				public int compare(MagicOrResonanceType arg0, MagicOrResonanceType arg1) {
+					return Collator.getInstance().compare(arg0.getName(), arg1.getName());
+				}
+			});
+			logger.log(Level.ERROR, "Available = " + available);
+
 			SR6PointBuySettings settings = (SR6PointBuySettings) model.getCharGenSettings(SR6PointBuySettings.class);
 			MagicOrResonanceType type = model.getMagicOrResonanceType();
 			if (type != null) {
