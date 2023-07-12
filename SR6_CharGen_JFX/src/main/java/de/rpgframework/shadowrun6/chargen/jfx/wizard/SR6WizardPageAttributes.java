@@ -108,7 +108,7 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 
 	// -------------------------------------------------------------------
 	protected void refresh() {
-		logger.log(Level.INFO, "refresh");
+		logger.log(Level.DEBUG, "refresh");
 
 		IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, ?, Shadowrun6Character> realCtrl = charGen;
 		if (charGen instanceof GeneratorWrapper) {

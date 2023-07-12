@@ -2,11 +2,13 @@ package de.rpgframework.shadowrun6.chargen.jfx.section;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.function.Function;
 
 import org.prelle.javafx.ScreenManagerProvider;
 import org.prelle.javafx.Section;
 
 import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.jfx.KarmaAttributeTable;
 import de.rpgframework.shadowrun.chargen.jfx.LevellingAttributeTable;
@@ -22,6 +24,7 @@ import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAttributeGener
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6AttributeLeveller;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -39,11 +42,23 @@ public class AttributeSection extends Section {
 	private SR6CharacterController control;
 
 	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4);
+	private Function<ShadowrunAttribute,String> nameMapperAI;
 
 	//-------------------------------------------------------------------
 	public AttributeSection(String title, ScreenManagerProvider provider) {
 		super(title, null);
 		logger.log(Level.DEBUG, "<init>");
+
+		nameMapperAI = (key) -> {
+			switch (key) {
+			case BODY    : return SR6ItemAttribute.FIREWALL.getName();
+			case AGILITY : return SR6ItemAttribute.DATA_PROCESSING.getName();
+			case REACTION: return SR6ItemAttribute.SLEAZE.getName();
+			case STRENGTH: return SR6ItemAttribute.ATTACK.getName();
+			default:
+			}
+			return key.getName();
+		};
 
 		initLayoutNormal();
 		initInteractivity();
@@ -103,6 +118,14 @@ public class AttributeSection extends Section {
 				table.setShowMagic(mor.usesMagic());
 				table.setShowResonance(mor.usesResonance());
 			}
+		}
+
+		if (control.getModel().getMetatype()!=null && control.getModel().getMetatype().isAI()) {
+			if (table.getNameMapper()!=nameMapperAI)
+				table.setNameMapper(nameMapperAI);
+		} else {
+			if (table.getNameMapper()!=null)
+				table.setNameMapper(null);
 		}
 		table.refresh();
 	}
