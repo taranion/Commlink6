@@ -94,6 +94,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
         }
         if (SkinProperties.REFRESH.equals(c.getKey())) {
             refresh();
+            getSkinnable().getProperties().remove(SkinProperties.REFRESH);
         }
     };
 
