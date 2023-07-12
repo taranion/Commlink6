@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
+import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -10,8 +11,10 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.jfx.GenericDescriptionVBox;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageQualities;
+import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
@@ -30,6 +33,7 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
 
 	private Label lbNumber;
+	private QualityFilterNode filter;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageQualities(Wizard wizard, GeneratorWrapper charGen) {
@@ -44,11 +48,11 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 
 //		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getQualityController()));
-		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
+		selection.setSelectedFilter(qv -> typesToShow.contains(qv.getModifyable().getType()) );
 
-		QualityFilterNode filter = new QualityFilterNode(RES, selection, QualityType.NORMAL, QualityType.ADEPT_WAY);
+
+		filter = new QualityFilterNode(RES, selection, QualityType.NORMAL, QualityType.ADEPT_WAY);
 		selection.setFilterNode(filter);
-		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL || qv.getModifyable().getType()==QualityType.ADEPT_WAY);
 		selection.setRequirementResolver(Shadowrun6Tools.requirementResolver(Locale.getDefault()));
 		selection.setModificationResolver(Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 
@@ -79,8 +83,26 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 
 	//-------------------------------------------------------------------
 	protected void refresh() {
-		super.refresh();
 		lbNumber.setText(String.valueOf( ((CommonQualityGenerator)charGen.getQualityController()).getNumberOfQualities()));
+
+		MagicOrResonanceType type = charGen.getModel().getMagicOrResonanceType();
+		SR6MetaType meta = charGen.getModel().getMetatype();
+		System.getLogger(getClass().getPackageName()).log(Level.WARNING, "type="+type);
+
+		typesToShow.clear();
+		typesToShow.add(QualityType.NORMAL);
+		if (type!=null && type.usesPowers()) {
+			typesToShow.add(QualityType.ADEPT_WAY);
+		}
+		if (type!=null && type.usesResonance()) {
+			typesToShow.add(QualityType.STREAM);
+		}
+		if (meta!=null && meta.isAI()) {
+			typesToShow.add(QualityType.VIRTUAL_LIFE);
+		}
+		filter.setAllowedTypes(typesToShow);
+
+		super.refresh();
 	}
 
 }
