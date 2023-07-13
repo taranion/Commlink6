@@ -31,6 +31,7 @@ import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
+import de.rpgframework.shadowrun6.chargen.charctrl.IDataStructureController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
@@ -433,6 +434,12 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 
 	@Override
 	public SR6DrakeController getDrakeController() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IDataStructureController getDataStructureController() {
 		// TODO Auto-generated method stub
 		return null;
 	}

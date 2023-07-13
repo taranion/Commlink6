@@ -25,4 +25,6 @@ public interface SR6CharacterController extends IShadowrunCharacterController<SR
 
 	public SR6DrakeController getDrakeController();
 
+	public IDataStructureController getDataStructureController();
+
 }

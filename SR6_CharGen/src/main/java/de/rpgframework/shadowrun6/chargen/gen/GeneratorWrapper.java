@@ -34,6 +34,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.SINController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.chargen.charctrl.IDataStructureController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
@@ -462,6 +463,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public SR6DrakeController getDrakeController() {
 		return wrapped.getDrakeController();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getDataStructureController()
+	 */
+	@Override
+	public IDataStructureController getDataStructureController() {
+		return wrapped.getDataStructureController();
 	}
 
 }
