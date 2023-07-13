@@ -320,6 +320,7 @@ public class Shadowrun6Tools {
 				CheckModification valMod = (CheckModification)mod;
 				ShadowrunCheckInfluence what = (ShadowrunCheckInfluence) valMod.getWhat();
 				String level = getValueString(valMod, loc);
+				if (what==null) return mod.toString();
 
 				String prefix = "";
 				switch (what) {
