@@ -463,7 +463,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	}
 
 	//-------------------------------------------------------------------
-	public void removeLifestyle(DataStructureValue value) {
+	public void removeDataStructure(DataStructureValue value) {
 		datastructures.remove(value);
 	}
 

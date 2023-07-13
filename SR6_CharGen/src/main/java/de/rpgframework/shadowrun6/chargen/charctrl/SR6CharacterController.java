@@ -15,7 +15,6 @@ public interface SR6CharacterController extends IShadowrunCharacterController<SR
 	public SR6SkillController getSkillController();
 
 	public ISR6EquipmentController getEquipmentController();
-//	public <T extends PieceOfGear<?,?,?,?>, H extends Hook> IEquipmentController<T,H> getEquipmentController();
 
 	public SR6LifestyleController getLifestyleController();
 

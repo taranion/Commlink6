@@ -56,10 +56,10 @@ public abstract class DataStructuresSection extends ComplexDataItemListSection<D
 	 */
 	@Override
 	protected void onAdd() {
-		logger.log(Level.INFO, "opening focus selection dialog");
+		logger.log(Level.WARNING, "opening data structure selection dialog  "+control.getDataStructureController());
 
 		DataStructureSelector selector = new DataStructureSelector(control.getDataStructureController(), null, Shadowrun6Tools.requirementResolver(Locale.getDefault()));
-		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES,"section.foci.selector.title"), selector, CloseType.OK, CloseType.CANCEL);
+		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES,"section.datastructure.selector.title"), selector, CloseType.OK, CloseType.CANCEL);
 
 		CloseType close = (CloseType) FlexibleApplication.getInstance().showAndWait(dialog);
 		logger.log(Level.ERROR,"Closed with "+close);

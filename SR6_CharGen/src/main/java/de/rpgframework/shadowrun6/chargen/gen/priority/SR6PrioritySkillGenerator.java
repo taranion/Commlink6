@@ -703,11 +703,11 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			logger.log(Level.DEBUG, "Finish with {0} skill points and {1} knowledge skill points and {2} Karma", points1, points2, getModel().getKarmaFree());
 
 			if (points1>0) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_SKILL_REMAIN_POINTS, points1));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_SKILL_REMAIN_POINTS, points1));
 				logger.log(Level.INFO, "Have {0} skill points left", points1);
 			}
 			if (points2>0) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_SKILL_REMAIN_POINTS2, points2));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_SKILL_REMAIN_POINTS2, points2));
 				logger.log(Level.INFO, "Have {0} languages/knowledge skills left", points2);
 			}
 		} catch (Exception e) {

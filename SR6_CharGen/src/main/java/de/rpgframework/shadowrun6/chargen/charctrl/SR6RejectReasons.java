@@ -1,5 +1,8 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import java.util.Locale;
+
+import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 
 /**
@@ -7,6 +10,8 @@ import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
  *
  */
 public interface SR6RejectReasons extends IRejectReasons {
+
+	public final static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(SR6RejectReasons.class, Locale.ENGLISH, Locale.GERMAN);
 
 	public final static String IMPOSS_QUALITY_ALREADY_6 = "impossible.qualityAlready6";
 	public final static String IMPOSS_QUALITY_KARMAGAIN = "impossible.qualityMoreThan20Karma";
@@ -30,5 +35,11 @@ public interface SR6RejectReasons extends IRejectReasons {
 	public final static String IMPOSS_FOCUS_EXCEEDS_MAGIC= "impossible.focusExceedsMagic";
 	// Sum of force of all foci exceeds MAGICx5
 	public final static String IMPOSS_SUM_FORCE_EXCEEDS_MAX= "impossible.sumForceExceedsMax";
+	// Cannot bind more foci than MAGIC
+	public final static String IMPOSS_TOO_MANY_DATASTRCTURES  = "impossible.cannotBindMoreDataStructures";
+	// Force of focus may not be higher than MAGIC
+	public final static String IMPOSS_RATING_EXCEEDS_RESONANCE= "impossible.ratingExceedsResonance";
+	// Sum of force of all foci exceeds MAGICx5
+	public final static String IMPOSS_SUM_RATINGS_EXCEEDS_MAX= "impossible.sumRatingsExceedsMax";
 
 }

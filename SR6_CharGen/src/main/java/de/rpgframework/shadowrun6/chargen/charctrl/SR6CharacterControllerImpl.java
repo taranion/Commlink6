@@ -46,8 +46,6 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 
 	//-------------------------------------------------------------------
 	public SR6CharacterControllerImpl() {
-		// Moved to child controller/generators
-		//createPartialController();
 	}
 
 	//-------------------------------------------------------------------

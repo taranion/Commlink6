@@ -44,6 +44,7 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 	protected CommonSR6CharacterGenerator() {
 //		updateEffectiveRules();
 		super.critter = new SR6CritterPowerController(this);
+		super.dataStructures = new SR6DataStructureController(this);
 	}
 
 	//-------------------------------------------------------------------

@@ -192,6 +192,7 @@ public class ResonancePage extends Page {
 		secMeta.updateController(ctrl);
 		secCplx.updateController(ctrl);
 		secPrograms.updateController(ctrl);
+		secDataStruct.updateController(ctrl);
 		refresh();
 	}
 

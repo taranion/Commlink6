@@ -15,6 +15,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
+import de.rpgframework.shadowrun6.chargen.gen.SR6DataStructureController;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
@@ -78,6 +79,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		sins      = new SR6SINLeveller(this);
 		lifestyles= new SR6LifestyleLeveller(this);
 		contacts  = new SR6ContactLeveller(this);
+		dataStructures = new SR6DataStructureController(this);
 
 		setupProcessChain();
 	}
@@ -107,6 +109,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 			processChain.add(equipment);
 			processChain.add(complex);
 			processChain.add(metaEcho);
+			processChain.add(dataStructures);
 			processChain.add(sins);
 			processChain.add(lifestyles);
 			processChain.add(contacts);

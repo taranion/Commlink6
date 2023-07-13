@@ -26,6 +26,7 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.RemainingKarmaNuyenController;
 import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6DataStructureController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
@@ -155,6 +156,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
 			processChain.add(martial);
+			processChain.add(dataStructures);
 			processChain.add(cpToNuyenStep);
 			processChain.add(equipment);
 			processChain.add(foci);
@@ -248,5 +250,6 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		qPaths    = new CommonQualityPathController(this);
 		martial   = new SR6MartialArtsController(this);
 		drake     = new SR6DrakeController(this, true);
+		dataStructures = new SR6DataStructureController(this);
 	}
 }

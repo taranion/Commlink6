@@ -94,7 +94,7 @@ public class SR6KarmaComplexFormGenerator extends CommonSR6ComplexFormGenerator 
 			free = maxFree - model.getComplexForms().size();
 			// Ensure not too many complex forms
 			if ((model.getComplexForms().size())>maxFree) {
-				todos.add(new ToDoElement(Severity.STOPPER, RES, SR6RejectReasons.TODO_CFORMS_TOO_MANY));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_CFORMS_TOO_MANY));
 			}
 
 			return unprocessed;

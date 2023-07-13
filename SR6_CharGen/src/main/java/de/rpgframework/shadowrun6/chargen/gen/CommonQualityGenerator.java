@@ -65,7 +65,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		// For previously not user-selected qualities, ensure limit is not reached yet
 		if (value.getDistributed()==0 && numberOfQualities>=6) {
 			// Already 6 qualities
-			return new Possible(Severity.STOPPER, RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6);
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6);
 		}
 
 		return Possible.TRUE;
@@ -294,15 +294,15 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 
 			// Error conditions
 			if (karmaGain>20) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_KARMAGAIN));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_QUALITY_KARMAGAIN));
 				logger.log(Level.WARNING, "Gained more than 20 Karma ({0})", karmaGain);
 			}
 			if (karmaSURGE>30) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_KARMASURGE));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_QUALITY_KARMASURGE));
 				logger.log(Level.WARNING, "Spent more than 30 Karma ({0}) on SURGE", karmaSURGE);
 			}
 			if (numberOfQualities>6) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_QUALITY_TOO_MANY));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_QUALITY_TOO_MANY));
 				logger.log(Level.WARNING, "Added more than 6 qualities ({0})", numberOfQualities);
 			}
 

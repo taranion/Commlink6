@@ -261,7 +261,7 @@ public class SR6KarmaSpellGenerator extends ControllerImpl<SR6Spell> implements 
 
 			// Ensure not enough spells
 			if ((model.getSpells().size() + model.getRituals().size())>maxSpells) {
-				todos.add(new ToDoElement(Severity.STOPPER, RES, SR6RejectReasons.TODO_SPELLS_TOO_MANY));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_SPELLS_TOO_MANY));
 			}
 
 			return unprocessed;
