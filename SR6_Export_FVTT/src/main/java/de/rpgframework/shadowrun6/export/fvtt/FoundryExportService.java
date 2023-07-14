@@ -33,7 +33,6 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.TechniqueValue;
 import de.rpgframework.shadowrun6.foundry.ActionSkills.ActionSkillValue;
 import de.rpgframework.shadowrun6.foundry.FVTTAdeptPower;
@@ -54,9 +53,7 @@ import de.rpgframework.shadowrun6.foundry.FVTTSIN;
 import de.rpgframework.shadowrun6.foundry.FVTTSkill;
 import de.rpgframework.shadowrun6.foundry.FVTTSpell;
 import de.rpgframework.shadowrun6.foundry.FVTTVehicle;
-import de.rpgframework.shadowrun6.foundry.FVTTVehicleActor;
 import de.rpgframework.shadowrun6.foundry.FVTTWeapon;
-import de.rpgframework.shadowrun6.foundry.LifeformActor;
 import de.rpgframework.shadowrun6.foundry.Shadowrun6FoundryCharacter;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemSubType;
@@ -66,6 +63,7 @@ import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
 import de.rpgframework.shadowrun6.items.WeaponData;
+import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
 
 public class FoundryExportService {
 
@@ -415,7 +413,7 @@ public class FoundryExportService {
 
 	//-------------------------------------------------------------------
 	private void addGear(ActorData<Shadowrun6FoundryCharacter> actor, Shadowrun6Character character) {
-		//		WeaponDamageConverter dmgConv = new WeaponDamageConverter();
+		WeaponDamageConverter dmgConv = new WeaponDamageConverter();
 		for (CarriedItem<ItemTemplate> item : character.getCarriedItems()) {
 			ItemType type = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
 			ItemSubType subtype = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
@@ -426,6 +424,8 @@ public class FoundryExportService {
 			case WEAPON_RANGED:
 			case WEAPON_SPECIAL:
 				gear = new FVTTWeapon();
+				((FVTTWeapon)gear).dmg = ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getValue();
+				((FVTTWeapon)gear).dmgDef = dmgConv.write((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue());
 				break;
 			case ARMOR:
 				gear = new FVTTArmor();

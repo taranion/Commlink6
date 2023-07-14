@@ -33,9 +33,9 @@ public class WeaponDamageConverter implements StringValueConverter<Damage> {
 			ret.setType(DamageType.STUN);
 			v = v.substring(0, v.length()-1);
 		} else {
-			ret.setType(DamageType.NO_CHANGE);			
+			ret.setType(DamageType.NO_CHANGE);
 		}
-		
+
 		ret.setValue(Integer.parseInt(v.trim()));
 		return ret;
 	}
@@ -45,7 +45,7 @@ public class WeaponDamageConverter implements StringValueConverter<Damage> {
 	 * @see org.prelle.simplepersist.StringValueConverter#write(java.lang.Object)
 	 */
 	@Override
-	public String write(Damage v) throws Exception {
+	public String write(Damage v) {
 		if (v==null)
 			return null;
 		StringBuffer buf = new StringBuffer();
