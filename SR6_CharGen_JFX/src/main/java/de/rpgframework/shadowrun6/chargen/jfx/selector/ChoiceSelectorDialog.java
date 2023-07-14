@@ -496,7 +496,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			ret.add( handleITEMATTRIBUTE(item, choice, SR6ItemAttribute.matrixValues()));
 			break;
 		case MENTOR_SPIRIT:
-			ret.add( handleMENTOR_SPIRIT(item, choice) );
+			ret.add( handleMENTOR_SPIRIT(item, choice, MentorSpirit.Type.MENTOR_SPIRIT) );
+			break;
+		case PARAGON:
+			ret.add( handleMENTOR_SPIRIT(item, choice, MentorSpirit.Type.PARAGON) );
 			break;
 		case PROGRAM:
 			ret.add( handlePROGRAM(item, choice));
@@ -927,7 +930,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
-	private Node handleMENTOR_SPIRIT(ComplexDataItem item, Choice choice) {
+	private Node handleMENTOR_SPIRIT(ComplexDataItem item, Choice choice, MentorSpirit.Type type) {
 		logger.log(Level.WARNING, "handleMENTOR_SPIRIT");
 		ChoiceBox<MentorSpirit> cbMentor = new ChoiceBox<>();
 		cbMentor.setConverter(new StringConverter<MentorSpirit>() {
@@ -943,6 +946,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			cbMentor.getItems().addAll(
 					Shadowrun6Core.getItemList(MentorSpirit.class).stream()
 						.filter(s -> ids.contains(s.getId()))
+						.filter(s -> s.getType()==type)
 						.filter(Shadowrun6Tools.filterByLanguage(Locale.getDefault()))
 						.collect(Collectors.toList())
 					);
@@ -950,6 +954,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			cbMentor.getItems().addAll(
 					Shadowrun6Core.getItemList(MentorSpirit.class).stream()
 					.filter(Shadowrun6Tools.filterByLanguage(Locale.getDefault()))
+					.filter(s -> s.getType()==type)
 					.collect(Collectors.toList())
 				);
 		}
