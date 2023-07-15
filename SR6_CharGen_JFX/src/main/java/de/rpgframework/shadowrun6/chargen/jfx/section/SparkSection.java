@@ -15,10 +15,8 @@ import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.jfx.NumericalValueField;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
-import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -51,7 +49,7 @@ public class SparkSection extends Section {
 	private GridPane grid;
 
 	private SR6CharacterController control;
-	private ShadowrunCharacter model;
+	private Shadowrun6Character model;
 	private ObjectProperty<ComplexDataItem> showHelpFor = new SimpleObjectProperty<>();
 
 
@@ -135,7 +133,6 @@ public class SparkSection extends Section {
 		// Transhumanism
 		MetamagicOrEcho transhum = Shadowrun6Core.getItem(MetamagicOrEcho.class, "neuromorphism");
 		NumericalValueController<MetamagicOrEcho, MetamagicOrEchoValue> tCtrl = control.getMetamagicOrEchoController();
-		logger.log(Level.ERROR, "--->can = "+control.getMetamagicOrEchoController().canBeSelected(transhum));
 		MetamagicOrEchoValue mVal = model.getMetamagicOrEcho("neuromorphism");
 		if (transhum != null) {
 			if (mVal == null) {

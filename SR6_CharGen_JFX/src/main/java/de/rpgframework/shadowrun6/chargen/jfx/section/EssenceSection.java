@@ -149,8 +149,6 @@ public class EssenceSection extends Section {
 			allowTransh = Boolean.parseBoolean( conf.getValueString() );
 		nfTranshumanism.setVisible(allowTransh);
 		hdTranshumanism.setVisible(allowTransh);
-		System.err.println("EssenceSection: canIncrease = "+tCtrl.canBeIncreased(mVal)+" for "+mVal);
-		System.err.println("EssenceSection: canDecrease = "+tCtrl.canBeDecreased(mVal)+" for "+mVal);
 
 		lbEssenceLost.setText(String.valueOf( ((double)model.getEssenceCost())/1000.0));
 		// Essence

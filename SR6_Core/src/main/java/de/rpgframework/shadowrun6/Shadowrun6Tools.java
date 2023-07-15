@@ -290,6 +290,8 @@ public class Shadowrun6Tools {
 				level = RES.getString("modification.value.level",loc)+"-1";
 		} else if ("$LEVEL*2".equals(valMod.getRawValue())) {
 			level = RES.getString("modification.value.level",loc)+"*2";
+		} else if ("&INITIATION_RANK".equals(valMod.getRawValue())) {
+			level = RES.getString("modification.value.initiation_rank",loc);
 		} else if (valMod.getRawValue().contains(".")) {
 			level = String.valueOf(valMod.getValueAsDouble());
 		} else
@@ -306,6 +308,8 @@ public class Shadowrun6Tools {
 				level = RES.getString("modification.value.level",loc)+"-1";
 		} else if ("$LEVEL*2".equals(valMod.getRawValue())) {
 			level = RES.getString("modification.value.level",loc)+"*2";
+		} else if ("&INITIATION_RANK".equals(valMod.getRawValue())) {
+			level = RES.getString("modification.value.initiation_rank",loc);
 		} else
 			level = String.valueOf(valMod.getValue());
 		return level;
@@ -352,6 +356,9 @@ public class Shadowrun6Tools {
 					String skillName = null;
 					if (valMod.getConnectedChoice()!=null) {
 						skillName = RES.getString("modification.choice.skill", loc);
+					} else if ("ITEM".equals(valMod.getKey())) {
+						skillName = RES.getString("modification.skill.item", loc);
+
 					} else {
 						SR6Skill skill = Shadowrun6Core.getSkill(valMod.getKey());
 						if (skill==null) {
@@ -465,6 +472,12 @@ public class Shadowrun6Tools {
 			if (mod instanceof AllowModification) {
 				AllowModification valMod = (AllowModification)mod;
 				switch (type) {
+				case COMPLEX_FORM:
+					if (valMod.isNegate()) {
+						return RES.format("modification.forbid.complex_form", loc, ((ComplexForm)valMod.getResolvedKey()).getName(loc));
+					} else {
+						return RES.format("modification.allow.complex_form", loc, ((ComplexForm)valMod.getResolvedKey()).getName(loc));
+					}
 				case MAGIC_RESO:
 					if (valMod.isNegate()) {
 						return RES.format("modification.forbid.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
