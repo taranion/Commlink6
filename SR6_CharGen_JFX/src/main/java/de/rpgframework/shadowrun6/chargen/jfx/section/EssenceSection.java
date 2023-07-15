@@ -18,7 +18,7 @@ import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -51,7 +51,7 @@ public class EssenceSection extends Section {
 	private GridPane grid;
 
 	private SR6CharacterController control;
-	private ShadowrunCharacter model;
+	private Shadowrun6Character model;
 	private ObjectProperty<ComplexDataItem> showHelpFor = new SimpleObjectProperty<>();
 
 
@@ -149,6 +149,8 @@ public class EssenceSection extends Section {
 			allowTransh = Boolean.parseBoolean( conf.getValueString() );
 		nfTranshumanism.setVisible(allowTransh);
 		hdTranshumanism.setVisible(allowTransh);
+		System.err.println("EssenceSection: canIncrease = "+tCtrl.canBeIncreased(mVal)+" for "+mVal);
+		System.err.println("EssenceSection: canDecrease = "+tCtrl.canBeDecreased(mVal)+" for "+mVal);
 
 		lbEssenceLost.setText(String.valueOf( ((double)model.getEssenceCost())/1000.0));
 		// Essence
