@@ -48,9 +48,9 @@ import javafx.scene.layout.VBox;
  */
 public class GearSection extends ComplexDataItemListSection<ItemTemplate, CarriedItem<ItemTemplate>> {
 
-	private final static Logger logger = System.getLogger(GearSection.class.getPackageName());
+	protected final static Logger logger = System.getLogger(GearSection.class.getPackageName());
 
-	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
+	protected static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 
 	private CarryMode carry = CarryMode.CARRIED;
 	private Predicate<CarriedItem<ItemTemplate>> filter;
