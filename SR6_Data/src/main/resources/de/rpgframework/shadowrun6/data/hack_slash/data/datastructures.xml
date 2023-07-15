@@ -173,5 +173,5 @@
 			<checkmod type="ACTION" ref="register_sprite" cond="y" value="$RATING" what="DICE" />
 		</modifications>
 	</datastructure>
-	
+
 </datastructures>

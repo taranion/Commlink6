@@ -64,7 +64,7 @@ public class SR6PriorityComplexFormGenerator extends CommonSR6ComplexFormGenerat
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
-		List<Modification> unprocessed = new ArrayList<>(previous);
+		List<Modification> unprocessed = new ArrayList<>(super.process(previous));
 
 		try {
 			todos.clear();

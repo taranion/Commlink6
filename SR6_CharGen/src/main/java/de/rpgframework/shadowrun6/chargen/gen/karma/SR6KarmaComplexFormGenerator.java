@@ -68,7 +68,7 @@ public class SR6KarmaComplexFormGenerator extends CommonSR6ComplexFormGenerator 
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
-		List<Modification> unprocessed = new ArrayList<>(previous);
+		List<Modification> unprocessed = new ArrayList<>(super.process(previous));
 
 		try {
 			todos.clear();
