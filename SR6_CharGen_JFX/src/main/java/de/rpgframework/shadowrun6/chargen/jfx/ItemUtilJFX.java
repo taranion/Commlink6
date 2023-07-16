@@ -251,10 +251,16 @@ public class ItemUtilJFX {
 		Choice chRating = item.getChoice("RATING");
 		int[] ratings = null;
 		if (chRating!=null) {
-			ratings = new int[chRating.getChoiceOptions().length];
-			int pos=0;
-			for (String t : chRating.getChoiceOptions())
-				ratings[pos++] = Integer.parseInt(t);
+			if (chRating.getChoiceOptions()!=null) {
+				ratings = new int[chRating.getChoiceOptions().length];
+				int pos=0;
+				for (String t : chRating.getChoiceOptions())
+					ratings[pos++] = Integer.parseInt(t);
+			} else {
+				ratings = new int[chRating.getMaxFormula().getAsInteger()];
+				for (int i=0; i<ratings.length; i++)
+					ratings[i] = i+1;
+			}
 		}
 
 		List<AGearData> possibilities = item.getPossibilities(carry);

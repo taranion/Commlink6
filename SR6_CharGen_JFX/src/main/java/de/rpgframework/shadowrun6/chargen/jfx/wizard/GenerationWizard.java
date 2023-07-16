@@ -103,8 +103,8 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			switch (type) {
 			case PRIORITIES   : ret.add(    prios); break;
 			case METATYPE     : ret.add(     race); break;
-			case SR6_LIFEPATH1:ret.add(lifepath1); break;
-//			case DRAKE        : ret.add(    drake); break;
+			case SR6_LIFEPATH1: ret.add(lifepath1); break;
+			case DRAKE        : ret.add(    drake); break;
 			case SURGE        : ret.add(    surge); break;
 			case MAGIC_OR_RESONANCE: ret.add(magic); break;
 			case QUALITIES    : ret.add(qualities); break;

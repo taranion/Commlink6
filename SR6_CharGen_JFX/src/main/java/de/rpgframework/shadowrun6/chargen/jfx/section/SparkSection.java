@@ -20,7 +20,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -35,7 +34,7 @@ public class SparkSection extends Section {
 
 	private final static Logger logger = System.getLogger(GearSection.class.getPackageName());
 
-	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
+	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SparkSection.class.getPackageName()+".Section");
 
 //	private Label hdAcclimation;
 	private Label hdNeuromorphism;
@@ -54,9 +53,9 @@ public class SparkSection extends Section {
 
 
 	//-------------------------------------------------------------------
-	public SparkSection(String title) {
-		super.setId(title);
-		setTitle(title);
+	public SparkSection() {
+		super.setId("spark");
+		setTitle(ResourceI18N.get(RES,"section.spark.title"));
 		initComponents();
 		initLayout();
 		initInteractivity();
@@ -75,10 +74,10 @@ public class SparkSection extends Section {
 	//-------------------------------------------------------------------
 	private void initLayout() {
 //		hdAcclimation   = new Label(ResourceI18N.get(RES, "page.augmentation.section.essence.acclimation"));
-		hdNeuromorphism = new Label(ResourceI18N.get(RES, "page.spark.section.essence.neuromorphism"));
-		Label hdEssenceHole   = new Label(ResourceI18N.get(RES, "page.spark.section.essence.essHole"));
-		Label hdEssenceLost   = new Label(ResourceI18N.get(RES, "page.spark.section.essence.essLost"));
-		Label hdEssenceRemain = new Label(ResourceI18N.get(RES, "page.spark.section.essence.essRemain"));
+		hdNeuromorphism = new Label(ResourceI18N.get(RES, "section.spark.neuromorphism"));
+		Label hdEssenceHole   = new Label(ResourceI18N.get(RES, "section.spark.essHole"));
+		Label hdEssenceLost   = new Label(ResourceI18N.get(RES, "section.spark.essLost"));
+		Label hdEssenceRemain = new Label(ResourceI18N.get(RES, "section.spark.essRemain"));
 		grid = new GridPane();
 		grid.setVgap(10);
 		grid.setHgap(5);
