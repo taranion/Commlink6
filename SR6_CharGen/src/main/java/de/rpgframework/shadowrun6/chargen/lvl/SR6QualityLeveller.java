@@ -104,4 +104,26 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 		return res;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
+	@Override
+	public boolean deselect(QualityValue value) {
+		logger.log(Level.TRACE, "ENTER select({0})", value);
+		int cost = (int)getSelectionCost(value.getResolved());
+		boolean success = super.deselect(value);
+		if (success) {
+			// Add to history
+			DataItemModification mod = new DataItemModification(ShadowrunReference.QUALITY, value.getKey());
+			mod.setDate(Date.from(Instant.now()));
+			if (value.getResolved().isPositive()) cost=0;
+			mod.setExpCost(cost);
+			model.addToHistory(mod);
+
+			parent.runProcessors();
+		}
+		return success;
+	}
+
 }
