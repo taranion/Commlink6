@@ -57,6 +57,7 @@ public class RiggerConsoleSection extends GearSection {
 
 		Label hdAccess = new Label(ResourceI18N.get(RES, "section.rigging.rig"));
 		Label hdDeck   = new Label(ResourceI18N.get(RES, "section.rigging.rcc"));
+		hdAccess.setMinWidth(120);
 		hdAccess.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		hdDeck.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 
