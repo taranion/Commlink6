@@ -217,4 +217,12 @@ public class QualityFilterNode extends ComplexDataItemListFilter<Quality,Quality
 		checkCategoryVisibility();
 	}
 
+	//-------------------------------------------------------------------
+	public void setAllowedTypes(List<QualityType> allowed) {
+		this.allowedTypes = allowed;
+		cbType.getItems().clear();
+		cbType.getItems().add(null);
+		cbType.getItems().addAll(allowedTypes);
+	}
+
 }

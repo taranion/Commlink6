@@ -296,7 +296,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 
 		if (isAnotherAttributeAlreadyMaxed(key))
-			return new Possible(false, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
 		return new Possible(allowedAdjust.contains(value.getModifyable()), "no_special_attribute");
 	}
 
@@ -388,7 +388,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			return Possible.FALSE;
 
 		if (isAnotherAttributeAlreadyMaxed(key))
-			return new Possible(false, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
 		// TODO Auto-generated method stub
 		return Possible.TRUE;
 	}
@@ -495,7 +495,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 
 		if (isAnotherAttributeAlreadyMaxed(key))
-			return new Possible(false, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_ALREADY_MAX_LIMIT);
 
 		int requiredKarma = (per.getSum()+1)*5;
 		if (model.getKarmaFree()<requiredKarma) {
@@ -785,7 +785,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			logger.log(Level.DEBUG, "Finish with {0} adjust and {1} attrib points and {2} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());
 
 			if (adjustmentPoints>0) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, SR6RejectReasons.TODO_ATTRIB_REMAIN_ADJUST, adjustmentPoints));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_ATTRIB_REMAIN_ADJUST, adjustmentPoints));
 			}
 
 			// Copy current setup

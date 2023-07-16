@@ -2,11 +2,13 @@ package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.function.Function;
 
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.KarmaAttributeTable;
@@ -22,6 +24,7 @@ import de.rpgframework.shadowrun6.chargen.gen.free.FreeCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -37,6 +40,8 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 
 	protected NumberUnitBackHeader backHeaderCP;
 
+	private Function<ShadowrunAttribute,String> nameMapperAI;
+
 	//-------------------------------------------------------------------
 	public SR6WizardPageAttributes(Wizard wizard, SR6CharacterGenerator charGen) {
 		super(wizard, charGen);
@@ -45,6 +50,16 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 			logger.log(Level.ERROR, "No content");
 		}
 
+		nameMapperAI = (key) -> {
+			switch (key) {
+			case BODY    : return SR6ItemAttribute.FIREWALL.getName();
+			case AGILITY : return SR6ItemAttribute.DATA_PROCESSING.getName();
+			case REACTION: return SR6ItemAttribute.SLEAZE.getName();
+			case STRENGTH: return SR6ItemAttribute.ATTACK.getName();
+			default:
+			}
+			return key.getName();
+		};
 	}
 
 	// -------------------------------------------------------------------
@@ -93,8 +108,7 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 
 	// -------------------------------------------------------------------
 	protected void refresh() {
-		logger.log(Level.INFO, "refresh");
-		super.refresh();
+		logger.log(Level.DEBUG, "refresh");
 
 		IShadowrunCharacterGenerator<SR6Skill, SR6SkillValue, ?, Shadowrun6Character> realCtrl = charGen;
 		if (charGen instanceof GeneratorWrapper) {
@@ -112,6 +126,15 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 			backHeaderCP.setVisible(false);
 			backHeaderCP.setManaged(false);
 		}
+
+		if (realCtrl.getModel().getMetatype()!=null && realCtrl.getModel().getMetatype().isAI()) {
+			if (table.getNameMapper()!=nameMapperAI)
+				table.setNameMapper(nameMapperAI);
+		} else {
+			if (table.getNameMapper()!=null)
+				table.setNameMapper(null);
+		}
+		super.refresh();
 	}
 
 }

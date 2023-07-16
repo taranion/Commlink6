@@ -26,8 +26,8 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.jfx.section.ComplexDataItemListSection;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.ShadowrunRules;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
@@ -48,16 +48,16 @@ import javafx.scene.layout.VBox;
  */
 public class GearSection extends ComplexDataItemListSection<ItemTemplate, CarriedItem<ItemTemplate>> {
 
-	private final static Logger logger = System.getLogger(GearSection.class.getPackageName());
+	protected final static Logger logger = System.getLogger(GearSection.class.getPackageName());
 
-	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
+	protected static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
 
 	private CarryMode carry = CarryMode.CARRIED;
 	private Predicate<CarriedItem<ItemTemplate>> filter;
 	private Predicate<ItemTemplate> templateFilter;
 
 	protected SR6CharacterController control;
-	protected ShadowrunCharacter model;
+	protected Shadowrun6Character model;
 
 	private ToggleSwitch cbRuleNegativeNuyen;
 	private ToggleSwitch cbRulePayGear;
@@ -176,6 +176,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 					} else {
 						logger.log(Level.WARNING, "Embed with decisions");
 						result = control.getEquipmentController().embed(addToContainer, addToHook, selector.getSelected(), variantID, dec);
+						logger.log(Level.WARNING, "Embedding returned "+result);
 					}
 				}
 			} else {

@@ -23,6 +23,10 @@
 			<valmod type="METATYPE" ref="naga"       value="11"/>
 			<valmod type="METATYPE" ref="pixie"      value="12"/>
 			<valmod type="METATYPE" ref="sasquatch"  value="14"/>
+			<valmod type="METATYPE" ref="pilot-ai"   value="13"/>
+			<valmod type="METATYPE" ref="agent-ai"   value="13"/>
+			<valmod type="METATYPE" ref="deep_foundation_ai" value="13"/>
+			<valmod type="METATYPE" ref="realms_ai"  value="13"/>
 		</modifications>
 	</priotableentry>
 	<priotableentry id="metaB" prio="B" type="METATYPE" adj="11">
@@ -56,6 +60,11 @@
 			<valmod type="METATYPE" ref="naga"       value="9"/>
 			<valmod type="METATYPE" ref="pixie"      value="10"/>
 			<valmod type="METATYPE" ref="sasquatch"  value="11"/>
+
+			<valmod type="METATYPE" ref="pilot-ai"   value="11"/>
+			<valmod type="METATYPE" ref="agent-ai"   value="11"/>
+			<valmod type="METATYPE" ref="deep_foundation_ai" value="11"/>
+			<valmod type="METATYPE" ref="realms_ai"  value="11"/>
 		</modifications>
 	</priotableentry>
 	<priotableentry id="metaC" prio="C" type="METATYPE" adj="9">
@@ -91,6 +100,11 @@
 			<valmod type="METATYPE" ref="pixie"      value="9"/>
 			<valmod type="METATYPE" ref="sasquatch"  value="9"/>
 			<valmod type="METATYPE" ref="tandoran"   value="9"/>
+
+			<valmod type="METATYPE" ref="pilot-ai"   value="9"/>
+			<valmod type="METATYPE" ref="agent-ai"   value="9"/>
+			<valmod type="METATYPE" ref="deep_foundation_ai" value="9"/>
+			<valmod type="METATYPE" ref="realms_ai"  value="9"/>
 		</modifications>
 	</priotableentry>
 	<priotableentry id="metaD" prio="D" type="METATYPE" adj="4">
@@ -126,6 +140,11 @@
 			<valmod type="METATYPE" ref="pixie"      value="4"/>
 			<valmod type="METATYPE" ref="sasquatch"  value="4"/>
 			<valmod type="METATYPE" ref="tandoran"   value="4"/>
+
+			<valmod type="METATYPE" ref="pilot-ai"   value="4"/>
+			<valmod type="METATYPE" ref="agent-ai"   value="4"/>
+			<valmod type="METATYPE" ref="deep_foundation_ai" value="4"/>
+			<valmod type="METATYPE" ref="realms_ai"  value="4"/>
 		</modifications>
 	</priotableentry>
 	<priotableentry id="metaE" prio="E" type="METATYPE" adj="1">
@@ -150,6 +169,11 @@
 			<valmod type="METATYPE" ref="giant"      value="1"/>
 			<valmod type="METATYPE" ref="minotaur"   value="1"/>
 			<valmod type="METATYPE" ref="tandoran"   value="1"/>
+
+			<valmod type="METATYPE" ref="pilot-ai"   value="1"/>
+			<valmod type="METATYPE" ref="agent-ai"   value="1"/>
+			<valmod type="METATYPE" ref="deep_foundation_ai" value="1"/>
+			<valmod type="METATYPE" ref="realms_ai"  value="1"/>
 		</modifications>
 	</priotableentry>
 

@@ -191,6 +191,7 @@ public class SR6ArchetypeTest {
 		// Now another negative quality should work
 		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "sinner")).wasSuccessful());
 		assertEquals(70, model.getKarmaFree());
+		assertEquals(1, model.getSINs().size());
 		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "toughness")).wasSuccessful());
 		assertEquals(58, model.getKarmaFree());
 		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "guts")).wasSuccessful());

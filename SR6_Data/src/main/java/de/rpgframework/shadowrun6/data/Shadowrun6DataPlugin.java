@@ -504,6 +504,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" streams");
 		list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"hack_slash/data/quality_paths.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
+		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz,"hack_slash/data/neuromorphism.xml");
+		logger.log(Level.DEBUG, "Loaded {0} echoes", list.size());
 
 	}
 

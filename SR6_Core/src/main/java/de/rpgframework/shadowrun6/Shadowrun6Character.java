@@ -57,6 +57,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	private DrakeTypeValue drakeType;
 	@Element(name="collective")
 	private SetItemValue surgeCollective;
+	@ElementList(entry="datastructure", type=DataStructureValue.class)
+	protected List<DataStructureValue> datastructures;
 
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
@@ -73,6 +75,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		techniques = new ArrayList<>();
 		martialArts = new ArrayList<>();
 		maneuvers = new ArrayList<>();
+		datastructures = new ArrayList<>();
 		asdfMap = new ASDFMapping();
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
@@ -446,6 +449,22 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			this.surgeCollective = data;
 		else
 			this.surgeCollective = null;
+	}
+
+	//-------------------------------------------------------------------
+	public List<DataStructureValue> getDataStructures() {
+		return datastructures;
+	}
+
+	//-------------------------------------------------------------------
+	public void addDataStructure(DataStructureValue value) {
+		if (!datastructures.contains(value))
+			datastructures.add(value);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeDataStructure(DataStructureValue value) {
+		datastructures.remove(value);
 	}
 
 }

@@ -14,14 +14,17 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -62,11 +65,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	}
 
 	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getAvailable()
-	 */
-	@Override
-	public List<MetamagicOrEcho> getAvailable() {
+	private List<MetamagicOrEcho> getNormalAvailable() {
 		MagicOrResonanceType type = getModel().getMagicOrResonanceType();
 		if (type!=null && type.usesMagic()) {
 			return Shadowrun6Core.getItemList(MetamagicOrEcho.class).stream()
@@ -80,13 +79,38 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 					.filter(p -> !getModel().hasMetamagicOrEcho(p.getId()) || p.hasLevel())
 					.filter(m -> m.getType()==Type.ECHO)
 					.collect(Collectors.toList());
-		} else {
-			return Shadowrun6Core.getItemList(MetamagicOrEcho.class).stream()
+		}
+		return new ArrayList<>();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getAvailable()
+	 */
+	@Override
+	public List<MetamagicOrEcho> getAvailable() {
+		MagicOrResonanceType type = getModel().getMagicOrResonanceType();
+		MetaType meta = getModel().getMetatype();
+
+		List<MetamagicOrEcho> ret = getNormalAvailable();
+		RuleController rules = parent.getRuleController();
+		if (!type.usesMagic() && !type.usesResonance()) {
+			// Only for mundane
+			if (meta.isAI() && rules.getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_NEUROMORPHISM)) {
+				ret.addAll( Shadowrun6Core.getItemList(MetamagicOrEcho.class).stream()
+					.filter(p -> parent.showDataItem(p))
+					.filter(p -> !getModel().hasMetamagicOrEcho(p.getId()) || p.hasLevel())
+					.filter(m -> m.getType()==Type.NEUROMORPHISM)
+					.collect(Collectors.toList()) );
+			} else if ( rules.getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_TRANSHUMANISM)) {
+				ret.addAll( Shadowrun6Core.getItemList(MetamagicOrEcho.class).stream()
 					.filter(p -> parent.showDataItem(p))
 					.filter(p -> !getModel().hasMetamagicOrEcho(p.getId()) || p.hasLevel())
 					.filter(m -> m.getType()==Type.TRANSHUMANISM)
-					.collect(Collectors.toList());
+					.collect(Collectors.toList()) );
+			}
 		}
+		return ret;
 	}
 
 	//-------------------------------------------------------------------
@@ -123,6 +147,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	@Override
 	public int getGrade() {
 		MagicOrResonanceType type = getModel().getMagicOrResonanceType();
+		MetaType meta = getModel().getMetatype();
 		List<MetamagicOrEchoValue> list = null;
 		if (type != null && type.usesMagic()) {
 			list = getSelected().stream()
@@ -134,9 +159,15 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 					.filter(m -> m.getModifyable().getType() == Type.ECHO)
 					.collect(Collectors.toList());
 		} else {
-			list = getSelected().stream()
+			if (meta.isAI()) {
+				list = getSelected().stream()
+						.filter(m -> m.getModifyable().getType() == Type.NEUROMORPHISM)
+						.collect(Collectors.toList());
+			} else {
+				list = getSelected().stream()
 					.filter(m -> m.getModifyable().getType() == Type.TRANSHUMANISM)
 					.collect(Collectors.toList());
+			}
 		}
 		// Determine the grade
 		int grade = 0;
@@ -185,6 +216,9 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		// Check if initiation/immersion/transhumanism is allowed (for chargen)
 		if (isCharGen) {
 			if (value.getType()==Type.TRANSHUMANISM && !parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_TRANSHUMANISM)) {
+				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
+			}
+			if (value.getType()==Type.NEUROMORPHISM && !parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_NEUROMORPHISM)) {
 				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
 			}
 			if (value.getType()!=Type.TRANSHUMANISM && !parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_ALLOW_INITIATION)) {
@@ -252,6 +286,24 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		}
 		return Possible.TRUE;
 	}
+	//-------------------------------------------------------------------
+	private ValueModification getHighestModification(MetamagicOrEcho key) {
+		ValueModification ret = null;
+		for (Modification mod : getModel().getHistory()) {
+			if (!(mod instanceof ValueModification))
+				continue;
+			ValueModification amod = (ValueModification)mod;
+			if (mod.getSource()!=this && mod.getSource()!=null)
+				continue;
+			if (amod.getResolvedKey()!=key)
+				continue;
+			if (amod.getExpCost()<0)
+				continue;
+			if (ret==null || amod.getExpCost()>ret.getExpCost())
+				ret = amod;
+		}
+		return ret;
+	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -272,8 +324,12 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			model.removeMetamagicOrEcho(value);
 			model.setKarmaFree( model.getKarmaFree() + karma);
 			model.setKarmaInvested( model.getKarmaInvested() - karma);
-
 			logger.log(Level.INFO, "Remove metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
+
+			// Undo in history
+			ValueModification mod = getHighestModification(value.getResolved());
+			if (mod!=null)
+				model.removeFromHistory(mod);
 
 			parent.runProcessors();
 			return true;
@@ -308,17 +364,18 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	public Possible canBeIncreased(MetamagicOrEchoValue value) {
 		// It must be already possessed
 		if (!getModel().getMetamagicOrEchoes().contains(value)) {
-			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
+			return canBeSelected(value.getModifyable());
+//			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 
 		MetamagicOrEcho item = value.getModifyable();
 		if (!item.hasLevel()) {
-			return new Possible(IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
 		}
 
 		// Is maximum grade reached
 		if (getGrade()>=maxGrade) {
-			return new Possible(false, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 		}
 
 		// Calculate Karma cost
@@ -373,6 +430,18 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			Shadowrun6Character model = getModel();
 			model.setKarmaFree( model.getKarmaFree() - karma);
 			model.setKarmaInvested( model.getKarmaInvested() + karma);
+			// Increase should work even when increased from 0 - in this case the item needs to be added
+			if (!model.getMetamagicOrEchoes().contains(value)) {
+				model.getMetamagicOrEchoes().add(value);
+			}
+
+			// Log in history
+			DataItemModification mod = new DataItemModification(ShadowrunReference.METAECHO, value.getKey());
+			if (value.getResolved().hasLevel()) {
+				mod = new ValueModification(ShadowrunReference.METAECHO, value.getKey(), 1);
+			}
+			mod.setExpCost(karma);
+			model.addToHistory(mod);
 
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(value);
@@ -389,7 +458,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	public OperationResult<MetamagicOrEchoValue> decrease(MetamagicOrEchoValue value) {
 		logger.log(Level.TRACE, "ENTER decrease({0})", value);
 		try {
-			Possible possible = canBeIncreased(value);
+			Possible possible = canBeDecreased(value);
 			if (possible.getState()!=State.POSSIBLE) {
 				logger.log(Level.ERROR, "Trying to decrease a metamagic/echo that cannot be selected: {0}",possible.getI18NKey());
 				return new OperationResult<MetamagicOrEchoValue>(possible, false);
@@ -402,6 +471,11 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			Shadowrun6Character model = getModel();
 			model.setKarmaFree( model.getKarmaFree() + karma);
 			model.setKarmaInvested( model.getKarmaInvested() - karma);
+
+			// Undo in history
+			ValueModification mod = getHighestModification(value.getResolved());
+			if (mod!=null)
+				model.removeFromHistory(mod);
 
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(value);
@@ -431,7 +505,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 					maxGrade = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_TRANSHUMAN);
 				}
 			}
-			logger.log(Level.ERROR, "Maximum grade is {0}", maxGrade);
+			logger.log(Level.INFO, "Maximum grade is {0}", maxGrade);
 
 			for (Modification tmp : previous) {
 				if (tmp.getReferenceType()==ShadowrunReference.METAECHO) {

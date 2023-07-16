@@ -4,13 +4,14 @@
 <!-- Attribute Codemods -->
 
 	<item id="attribute_augmentation" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD" reqVariant="y">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" />
 		</choices>
 		<flags><flag>CODEMOD</flag></flags>
 		<variant id="mental">
 			<choices>
-				<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ATTRIBUTE" options="MENTAL" />
+				<choice uuid="c155d3ee-720c-4c47-91d7-daae0b2fd48f" type="ATTRIBUTE" options="WILLPOWER,LOGIC,INTUITION,CHARISMA" />
 			</choices>
 			<attrdef id="AVAILABILITY" value="5" />
 			<attrdef id="PRICE" value="$RATING*34000" />
@@ -34,6 +35,7 @@
 	</item>
 
 	<item id="attribute_overclocking" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD" reqVariant="y">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING"
 				options="1,2,3,4,5,6,7,8" />
@@ -64,6 +66,7 @@
 	</item>
 
 	<item avail="5L" id="quantum_processor" type="CODEMODS" subtype="ATTRIBUTE_CODEMOD">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2" />
 		</choices>
@@ -78,6 +81,7 @@
 <!-- Core Codemods -->
 
 	<item avail="3L" id="core_code_redundancy" type="CODEMODS" subtype="CORE_CODEMOD">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" />
 		</choices>
@@ -85,11 +89,12 @@
 		<attrdef id="ESSENCECOST" value="$RATING*0.2" />
 		<flags><flag>CODEMOD</flag></flags>
 		<modifications>
-			<!-- <valmod type="ATTRIBUTE" ref="MATRIX_MONITOR" value="$RATING" apply="CHARACTER" /> MATRIX_MONITOR unknown -->	
+			<!-- <valmod type="ATTRIBUTE" ref="MATRIX_MONITOR" value="$RATING" apply="CHARACTER" /> MATRIX_MONITOR unknown -->
 		</modifications>
 	</item>
 
 	<item avail="2" id="core_code_shielding" type="CODEMODS" subtype="CORE_CODEMOD">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" />
 		</choices>
@@ -100,11 +105,13 @@
 	</item>
 
 	<item avail="4" price="18500" id="data_mitigation_protocols" type="CODEMODS" subtype="CORE_CODEMOD">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.2" />
 	</item>
 
 	<item avail="5L" id="data_response_overrides" type="CODEMODS" subtype="CORE_CODEMOD">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12" />
 		</choices>
@@ -117,6 +124,7 @@
 	</item>
 
 	<item avail="3" price="4000" id="data_archive_upgrade" type="CODEMODS" subtype="CORE_CODEMOD">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.1" />
 		<modifications>
@@ -125,6 +133,7 @@
 	</item>
 
 	<item avail="5" price="10000" id="optimized_restoration" type="CODEMODS" subtype="CORE_CODEMOD">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.1" />
 	</item>
@@ -132,6 +141,7 @@
 <!-- Processor Codemods -->
 
 	<item id="rcc_emulator" type="CODEMODS" subtype="PROCESSOR">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8" />
 		</choices>
@@ -146,6 +156,7 @@
 	</item>
 
 	<item avail="2" id="sideload_processor" type="CODEMODS" subtype="PROCESSOR">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12" />
 		</choices>
@@ -158,6 +169,7 @@
 	</item>
 
 	<item avail="5" id="skilldriver_activesoft" type="CODEMODS" subtype="PROCESSOR">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" />
 		</choices>
@@ -172,6 +184,7 @@
 	</item>
 
 	<item avail="2" price="5000" id="skilldriver_knowsoft" type="CODEMODS" subtype="CORE_CODEMOD">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.1" />
 		<modifications>
@@ -180,6 +193,7 @@
 	</item>
 
 	<item avail="2" id="skilldriver_linguasoft" type="CODEMODS" subtype="PROCESSOR">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4" />
 		</choices>
@@ -195,6 +209,7 @@
 <!-- Input / Output Codemods -->
 
 	<item avail="3" id="active_signal_filter" type="CODEMODS" subtype="IO">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" />
 		</choices>
@@ -205,6 +220,7 @@
 	</item>
 
 	<item avail="5L" id="ecm_integration" type="CODEMODS" subtype="IO">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" />
 		</choices>
@@ -214,6 +230,7 @@
 	</item>
 
 	<item avail="3" id="pan_emulator" type="CODEMODS" subtype="IO">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3" />
 		</choices>
@@ -223,6 +240,7 @@
 	</item>
 
 	<item avail="4L" id="control_rig_integration" type="CODEMODS" subtype="IO">
+		<usage mode="IMPLANTED"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3" />
 		</choices>
@@ -230,11 +248,12 @@
 		<attrdef id="ESSENCECOST" value="$RATING*0.8" />
 		<flags><flag>CODEMOD</flag></flags>
 		<modifications>
-			<itemmod type="GEAR" apply="CHARACTER" ref="control_rig" variant="control_rig_codemod" />	
+			<itemmod type="GEAR" apply="CHARACTER" ref="control_rig" variant="control_rig_codemod" />
 		</modifications>
 	</item>
 
 	<item avail="3L" price="4000" id="smartlink_adapter" type="CODEMODS" subtype="IO">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.2" />
 	</item>
@@ -242,21 +261,25 @@
 <!-- Digital Weapon Codemods -->
 
 	<item avail="3I" price="5000" id="acid_jet" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.1" />
 	</item>
 
 	<item avail="3I" price="5000" id="limelight" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.1" />
 	</item>
 
 	<item avail="3I" price="5000" id="swordbreaker" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.1" />
 	</item>
 
 	<item avail="4I" price="8000" id="slashing_strike" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.25" />
 		<modifications>
@@ -266,6 +289,7 @@
 	</item>
 
 	<item avail="6I" price="12000" id="thunder_strike" type="CODEMODS" subtype="DIGITAL_WEAPON">
+		<usage mode="IMPLANTED"/>
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.75" />
 		<modifications>

@@ -59,10 +59,12 @@ public class CalculatePersona implements ProcessingStep {
 			 * Normally a persona is build from the used commlink or cyber jack
 			 * plus the cyberdeck. Technomancers use their living persona.
 			 */
-			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+			if (model.getMetatype()!=null && model.getMetatype().isAI()) {
+				// Virtual Life
+				calculateAI(model, persona);
+			} else if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
 				// Technomancer
 				calculateTechnomancer(model, persona);
-
 			} else {
 				// Non-Technomancer
 				calculateNonTechnomancer(model, persona);
@@ -99,6 +101,37 @@ public class CalculatePersona implements ProcessingStep {
 
 		// Matrix condition monitor
 		persona.setMonitor(getTechnomancerMonitorArray(model));
+
+		persona.setAttribute(valA);
+		persona.setAttribute(valS);
+		persona.setAttribute(valD);
+		persona.setAttribute(valF);
+	}
+
+	//--------------------------------------------------------------------
+	private void calculateAI(Shadowrun6Character model, Persona persona) {
+		persona.setName(RES.getString("label.living_persona"));
+
+		ItemAttributeNumericalValue<SR6ItemAttribute> valD = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DATA_PROCESSING);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valF = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.FIREWALL);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valA = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.ATTACK);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valS = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.SLEAZE);
+		ItemAttributeNumericalValue<SR6ItemAttribute> valR = new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DEVICE_RATING);
+
+		// Data Processing = AGILITY
+		addNaturalModifier(valD, model.getAttribute(ShadowrunAttribute.AGILITY).getModifiedValue(), SR6ItemAttribute.DATA_PROCESSING);
+		// Firewall = BODY
+		addNaturalModifier(valF, model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue(), SR6ItemAttribute.FIREWALL);
+		// Attack = STRENGTH
+		addNaturalModifier(valA, model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue(), SR6ItemAttribute.ATTACK);
+		// Sleaze = REACTION
+		addNaturalModifier(valS, model.getAttribute(ShadowrunAttribute.REACTION).getModifiedValue(), SR6ItemAttribute.SLEAZE);
+
+		// Device Rating = RESONANCE
+		addNaturalModifier(valR, model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue(), ShadowrunAttribute.RESONANCE);
+
+		// Matrix condition monitor
+		persona.setMonitor(getNormalMonitorArray(persona.getDeviceRating()));
 
 		persona.setAttribute(valA);
 		persona.setAttribute(valS);

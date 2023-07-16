@@ -27,6 +27,13 @@
       ]
     },
     {
+      "name":"de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons",
+      "locales":[
+        "de",
+        "en"
+      ]
+    },
+    {
       "name":"de.rpgframework.shadowrun6.data.companion.i18n.companion",
       "locales":[
         "de",

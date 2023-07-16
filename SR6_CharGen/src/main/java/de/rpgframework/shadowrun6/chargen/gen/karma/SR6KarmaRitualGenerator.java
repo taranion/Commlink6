@@ -180,7 +180,7 @@ public class SR6KarmaRitualGenerator extends CommonRitualController implements I
 
 			// Ensure not overbought spells
 			if ((model.getSpells().size() + model.getRituals().size())>maxSpellsAndRituals) {
-				todos.add(new ToDoElement(Severity.STOPPER, RES, SR6RejectReasons.TODO_SPELLS_TOO_MANY));
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_SPELLS_TOO_MANY));
 			}
 
 			return unprocessed;

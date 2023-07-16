@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metaechoes>
-	<metaecho id="transhumanism" type="TRANSHUMANISM" max="20">
+	<metaecho id="neuromorphism" type="NEUROMORPHISM">
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="ESSENCE_HOLE" value="1000" />
 		</modifications>
 		<requires>
-	   		<datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER" />
+	   	<datareq type="MAGIC_RESO" ref="technomancer" apply="CHARACTER" />
 		</requires>
 	</metaecho>
 </metaechoes>

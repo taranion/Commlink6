@@ -96,6 +96,7 @@ public class ItemTemplateSelector extends Selector<ItemTemplate, CarriedItem<Ite
 		col2.getChildren().setAll(box, lbNotPossible);
 		VBox.setVgrow(box, Priority.ALWAYS);
 		help.getChildren().setAll(col1, col2);
+		if (n==null) return;
 
 		ISR6EquipmentController sr6Control = (ISR6EquipmentController) control;
 		AGearData relevant = n.getMainOrVariant(carry);

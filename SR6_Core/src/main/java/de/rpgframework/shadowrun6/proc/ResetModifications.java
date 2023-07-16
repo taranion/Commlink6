@@ -9,7 +9,10 @@ import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.DamageElement;
@@ -21,13 +24,17 @@ import de.rpgframework.shadowrun.Movement.MovementType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemHook;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 /**
  * @author prelle
@@ -101,6 +108,15 @@ public class ResetModifications implements ProcessingStep {
 				}
 			}
 
+			// Remove all auto-qualities or quality levels
+			for (AdeptPowerValue val : new ArrayList<>(model.getAdeptPowers())) {
+				val.reset();
+//				if (remove) {
+//					logger.log(Level.DEBUG, "Remove quality "+val);
+//					model.removeQuality(val);
+//				}
+			}
+
 			// Remove all auto-metaechoes
 			for (MetamagicOrEchoValue val : new ArrayList<>(model.getMetamagicOrEchoes())) {
 				boolean remove = val.isAutoAdded();
@@ -119,12 +135,10 @@ public class ResetModifications implements ProcessingStep {
 			dmg.setDistributed(2);
 
 			// Ensure there is a device for unused software
-			CarriedItem<ItemTemplate> item = model.getSoftwareLibrary();
+			CarriedItem<ItemTemplate> item = model.getCarriedItem(ShadowrunCharacter.UUID_UNUSED_SOFTWARE_DEVICE);
 			if (item==null) {
-				item = SR6GearTool.buildItem(ItemUtil.SOFTWARE_LIBRARY_ITEM, CarryMode.CARRIED, null, false).get();
-				//item = new CarriedItem<ItemTemplate>(ItemUtil.SOFTWARE_LIBRARY_ITEM, null, CarryMode.CARRIED);
-				item.setUuid(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
-				model.setSoftwareLibrary(item);
+				item = ItemUtil.SOFTWARE_LIBRARY;
+				model.addCarriedItem(item);
 				SR6GearTool.recalculate("", model, item);
 				//item.addSlot(new AvailableSlot(ItemHook.SOFTWARE, 99));
 				if (item.getSlot(ItemHook.SOFTWARE)==null) {
@@ -132,6 +146,10 @@ public class ResetModifications implements ProcessingStep {
 					System.exit(1);
 				}
 			}
+			item.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
+			item.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMTYPE, ItemType.ELECTRONICS));
+			item.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.TOOLS));
+			logger.log(Level.ERROR, "Software Library exists "+model.getSoftwareLibrary()+" and has accessories: "+item.getAccessories());
 
 			// Prepare minimal body modifications
 			model.clearBodyForms();

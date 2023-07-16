@@ -44,6 +44,7 @@ import de.rpgframework.shadowrun6.chargen.jfx.page.ResonancePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SR6MatrixDevicePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.VehiclePage;
+import de.rpgframework.shadowrun6.chargen.jfx.page.VirtualLifePage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
 import javafx.geometry.Insets;
@@ -69,6 +70,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private SkillPage pgSkills;
 	private CombatPage pgCombat;
 	private AugmentationPage pgAugment;
+	private VirtualLifePage pgVirtual;
 	private MagicPage pgMagic;
 	private ResonancePage pgResonance;
 	private SR6MatrixDevicePage pgMatrix;
@@ -158,6 +160,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgSkills = new SkillPage();
 		pgCombat = new CombatPage();
 		pgAugment= new AugmentationPage();
+		pgVirtual= new VirtualLifePage();
 		pgMagic  = new MagicPage();
 		pgResonance= new ResonancePage();
 		pgMatrix = new SR6MatrixDevicePage();
@@ -166,7 +169,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgLife   = new LifePage();
 		pgCareer = new CareerPage();
 		pgBody   = new BodyPage();
-		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife); //, pgBody);
+		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgVirtual, pgMagic, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife); //, pgBody);
 	}
 
 	//-------------------------------------------------------------------
@@ -281,6 +284,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgSkills.setController(control);
 		pgCombat.setController(control);
 		pgAugment.setController(control);
+		pgVirtual.setController(control);
 		pgMagic.setController(control);
 		pgMatrix.setController(control);
 		pgResonance.setController(control);
@@ -304,6 +308,11 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife); //, pgBody);
 			} else {
 				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
+			}
+			if (control.getModel().getMetatype()!=null && control.getModel().getMetatype().isAI()) {
+				int idx = getPages().indexOf(pgAugment);
+				getPages().remove(pgAugment);
+				getPages().add(idx, pgVirtual);
 			}
 		}
 		if (control instanceof SR6CharacterLeveller) {
@@ -349,6 +358,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgSkills.refresh();
 		pgCombat.refresh();
 		pgAugment.refresh();
+		pgVirtual.refresh();
 		pgMagic.refresh();
 		pgMatrix.refresh();
 		pgResonance.refresh();

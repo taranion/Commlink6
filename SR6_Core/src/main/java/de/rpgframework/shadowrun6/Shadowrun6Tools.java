@@ -76,6 +76,7 @@ import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
@@ -147,6 +148,7 @@ public class Shadowrun6Tools {
 		GetModificationsFromMagicOrResonance.class,
 		GetModificationsFromQualities.class,
 		GetModificationsFromMentorSpirits.class,
+		ApplyModificationsGeneric.class,
 		GetModificationsFromMetaEchoes.class,
 		GetModificationsFromGear.class,
 //		new GetModificationsFromMetamagicOrEchoes(),
@@ -288,6 +290,8 @@ public class Shadowrun6Tools {
 				level = RES.getString("modification.value.level",loc)+"-1";
 		} else if ("$LEVEL*2".equals(valMod.getRawValue())) {
 			level = RES.getString("modification.value.level",loc)+"*2";
+		} else if ("&INITIATION_RANK".equals(valMod.getRawValue())) {
+			level = RES.getString("modification.value.initiation_rank",loc);
 		} else if (valMod.getRawValue().contains(".")) {
 			level = String.valueOf(valMod.getValueAsDouble());
 		} else
@@ -304,6 +308,8 @@ public class Shadowrun6Tools {
 				level = RES.getString("modification.value.level",loc)+"-1";
 		} else if ("$LEVEL*2".equals(valMod.getRawValue())) {
 			level = RES.getString("modification.value.level",loc)+"*2";
+		} else if ("&INITIATION_RANK".equals(valMod.getRawValue())) {
+			level = RES.getString("modification.value.initiation_rank",loc);
 		} else
 			level = String.valueOf(valMod.getValue());
 		return level;
@@ -318,6 +324,7 @@ public class Shadowrun6Tools {
 				CheckModification valMod = (CheckModification)mod;
 				ShadowrunCheckInfluence what = (ShadowrunCheckInfluence) valMod.getWhat();
 				String level = getValueString(valMod, loc);
+				if (what==null) return mod.toString();
 
 				String prefix = "";
 				switch (what) {
@@ -349,6 +356,9 @@ public class Shadowrun6Tools {
 					String skillName = null;
 					if (valMod.getConnectedChoice()!=null) {
 						skillName = RES.getString("modification.choice.skill", loc);
+					} else if ("ITEM".equals(valMod.getKey())) {
+						skillName = RES.getString("modification.skill.item", loc);
+
 					} else {
 						SR6Skill skill = Shadowrun6Core.getSkill(valMod.getKey());
 						if (skill==null) {
@@ -448,6 +458,8 @@ public class Shadowrun6Tools {
 					return valMod.getValue()+"x "+((ItemTemplate)valMod.getResolvedKey()).getName(loc);
 				case LICENSE:
 					return valMod.getValue()+"x "+RES.getString("modification.license", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
+				case QUALITY:
+					return valMod.getValue()+"x "+((Quality)valMod.getResolvedKey()).getName(loc);
 				case SIN:
 					return valMod.getValue()+"x "+RES.getString("modification.sin", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
 				default:
@@ -460,6 +472,18 @@ public class Shadowrun6Tools {
 			if (mod instanceof AllowModification) {
 				AllowModification valMod = (AllowModification)mod;
 				switch (type) {
+				case COMPLEX_FORM:
+					if (valMod.isNegate()) {
+						return RES.format("modification.forbid.complex_form", loc, ((ComplexForm)valMod.getResolvedKey()).getName(loc));
+					} else {
+						return RES.format("modification.allow.complex_form", loc, ((ComplexForm)valMod.getResolvedKey()).getName(loc));
+					}
+				case MAGIC_RESO:
+					if (valMod.isNegate()) {
+						return RES.format("modification.forbid.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
+					} else {
+						return RES.format("modification.allow.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
+					}
 				case SKILL:
 					if (valMod.isNegate()) {
 						if (valMod.getResolvedKey()!=null)
@@ -831,6 +855,8 @@ public class Shadowrun6Tools {
 					logger.log(Level.WARNING, "Char {0} Item {1} has no UUID", model.getName(), tmp.getKey());
 				if (tmp.getResolved()==null) {
 					ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
+					if (resolved==null && tmp.getKey().equals("software_library"))
+						resolved = ItemUtil.SOFTWARE_LIBRARY_ITEM;
 					if (resolved==null) {
 						logger.log(Level.ERROR, "Char {0} has an unresolvable item: {1}", model.getName(), tmp.getKey());
 						System.err.println("Char "+model.getName()+" has an unresolvable item: "+tmp.getKey());
@@ -1192,7 +1218,7 @@ public class Shadowrun6Tools {
 			if ("CHOICE".equals( clone.getKey() )) {
 				UUID uuid =  ((DataItemModification) tmp).getConnectedChoice();
 				Decision dec = value.getDecision(uuid);
-				logger.log(Level.WARNING, "instantiate "+clone.getKey()+" with UUID {0} and decision {1}", uuid,dec);
+				logger.log(Level.DEBUG, "instantiate {2} with UUID {0} and decision {1}", uuid,dec,clone.getKey());
 				if (dec!=null) {
 					clone.setKey( dec.getValue());
 				} else {
@@ -1914,10 +1940,12 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static ItemType getItemType(CarriedItem<ItemTemplate> model) {
 		if (!model.hasAttribute(SR6ItemAttribute.ITEMTYPE)) {
-			logger.log(Level.WARNING, "No ITEMTYPE for "+model.getKey());
-			System.err.println("Shadowrun6Tools.getItemType(): No ITEMTYPE for "+model.getKey());
 			if ("unarmed".equals(model.getKey()))
 				return ItemType.WEAPON_CLOSE_COMBAT;
+			if ("software_library".equals(model.getKey()))
+				return ItemType.SOFTWARE;
+			logger.log(Level.WARNING, "No ITEMTYPE for "+model.getKey());
+			System.err.println("Shadowrun6Tools.getItemType(): No ITEMTYPE for "+model.getKey());
 			return null;
 		}
 		return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();

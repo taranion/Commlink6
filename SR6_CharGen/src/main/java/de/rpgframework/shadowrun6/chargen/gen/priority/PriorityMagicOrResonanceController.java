@@ -83,14 +83,38 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			// Clear old available information
 			available.clear();
 
+			Shadowrun6Character model = (Shadowrun6Character)getModel();
+			boolean isAI = false;
+			if (model.getMetatype()!=null) {
+				isAI = model.getMetatype().isAI();
+				logger.log(Level.ERROR, "Is "+model.getMetatype()+" an AI = "+isAI);
+			}
+
+			List<MagicOrResonanceType> forbidden = new ArrayList<>();
 			// Check for options
 			for (Modification tmp : previous) {
 				if (tmp instanceof ValueModification) {
 					ValueModification mod = (ValueModification) tmp;
 					if (mod.getReferenceType() == ShadowrunReference.MAGIC_RESO) {
-						available.put(mod.getResolvedKey(), mod.getValue());
-						logger.log(Level.INFO,
-								"Allow " + mod.getKey() + " with " + mod.getValue() + " points in attribute");
+						MagicOrResonanceType type = mod.getResolvedKey();
+						if (forbidden.contains(type)) {
+							logger.log(Level.ERROR, "Would allow {0}, but it has been forbidden",mod.getKey() );
+						} else {
+							available.put(type, mod.getValue());
+							logger.log(Level.DEBUG, "Allow {0} with {1} points in attribute",mod.getKey(),mod.getValue() );
+						}
+					} else {
+						unprocessed.add(mod);
+					}
+				} else if (tmp instanceof AllowModification) {
+					AllowModification mod = (AllowModification)tmp;
+					if (mod.getReferenceType() == ShadowrunReference.MAGIC_RESO) {
+						MagicOrResonanceType type = mod.getResolvedKey();
+						if (mod.isNegate()) {
+							logger.log(Level.DEBUG, "Forbid {0} from {1}",mod.getKey(), available.keySet() );
+							forbidden.add(type);
+							available.remove(type);
+						}
 					} else {
 						unprocessed.add(mod);
 					}
@@ -98,7 +122,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 					unprocessed.add(tmp);
 				}
 			}
-			logger.log(Level.DEBUG, "Available = " + available.keySet());
+			logger.log(Level.ERROR, "Available = " + available.keySet());
 
 			MagicOrResonanceType type = model.getMagicOrResonanceType();
 			if (type == null || !available.containsKey(type)) {

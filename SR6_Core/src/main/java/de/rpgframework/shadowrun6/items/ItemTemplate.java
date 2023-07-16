@@ -37,6 +37,7 @@ import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -59,7 +60,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	public final static Choice CHOICE_AUGMENTATION_QUALITY = new Choice(
 			ItemTemplate.UUID_AUGMENTATION_QUALITY,
 			ShadowrunReference.AUGMENTATION_QUALITY);
-	public final static UUID UUID_UNUSED_SOFTWARE_DEVICE = UUID.fromString("8fc8c01e-3023-4ba6-9d02-99ba6fcd6979");
+	public final static UUID UUID_UNUSED_SOFTWARE_DEVICE = ShadowrunCharacter.UUID_UNUSED_SOFTWARE_DEVICE;
 	public final static UUID UUID_UNARMED = UUID.fromString("9f05953f-0df5-4661-8114-3f02fcf2e669");
 	public final static UUID UUID_VOLATILE_PRICEMOD = UUID.fromString("b61167ae-c12c-4bdb-a5da-a1a422405c35");
 

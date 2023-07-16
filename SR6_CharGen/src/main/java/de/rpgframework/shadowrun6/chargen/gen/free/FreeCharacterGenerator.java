@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.RemainingKarmaNuyenController;
 import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6DataStructureController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
@@ -135,6 +136,7 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 			processChain.add(martial);
 			processChain.add(equipment);
 			processChain.add(foci);
+			processChain.add(dataStructures);
 			processChain.add(complex);
 			processChain.add(metaEcho);
 			processChain.add(sins);
@@ -198,5 +200,6 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 		qPaths     = new CommonQualityPathController(this);
 		martial    = new SR6MartialArtsController(this);
 		drake     = new SR6DrakeController(this, true);
+		dataStructures = new SR6DataStructureController(this);
 	}
 }

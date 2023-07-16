@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormValue;
@@ -39,13 +40,15 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 	protected int free;
 	protected int maxFree;
 
+	private List<ComplexForm> allowed;
+
 	//-------------------------------------------------------------------
 	/**
 	 * @param parent
 	 */
 	public CommonSR6ComplexFormGenerator(SR6CharacterController parent) {
 		super(parent);
-		// TODO Auto-generated constructor stub
+		allowed = new ArrayList<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -69,7 +72,7 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 		List<ComplexForm> ret = new ArrayList<>();
 		ret.addAll( Shadowrun6Core.getItemList(ComplexForm.class).stream()
 			.filter(cf -> cf.isMultipleSelectable() || getModel().getComplexForm(cf.getId())==null)
-			.filter(cf -> cf.isFreeSelectable())
+			.filter(cf -> cf.isFreeSelectable() || allowed.contains(cf))
 			.sorted( (o1,o2) -> o1.getName().compareTo(o2.getName()))
 			.collect(Collectors.toList())
 		);
@@ -246,25 +249,24 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
-		List<Modification> unprocessed = new ArrayList<>(previous);
+		List<Modification> unprocessed = new ArrayList<>();
 
 		try {
 			todos.clear();
+			allowed.clear();
 
-			Shadowrun6Character model = getModel();
-
-//			for (SpellValue val : model.getAdeptPowers()) {
-//				// Apply modifications
-//				unprocessed.addAll(val.getModifications());
-//			}
-//
-//			// Summary and eventually warn
-//			logger.log(Level.INFO, "Have {0} remaining power points", freePoints);
-//			if (freePoints>0) {
-//				todos.add(new ToDoElement(Severity.WARNING, "Unused power points"));
-//			} else if (freePoints<0) {
-//				todos.add(new ToDoElement(Severity.STOPPER, "Too many power points used"));
-//			}
+			for (Modification mod : previous) {
+				if (mod instanceof AllowModification) {
+					AllowModification allow = (AllowModification)mod;
+					if (allow.getReferenceType()==ShadowrunReference.COMPLEX_FORM) {
+						ComplexForm cForm = allow.getResolvedKey();
+						logger.log(Level.INFO, "Allow restricted CForm "+allow.getKey());
+						allowed.add(cForm);
+					} else
+						unprocessed.add(mod);
+				} else
+					unprocessed.add(mod);
+			}
 
 			return unprocessed;
 		} finally {

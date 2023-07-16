@@ -5,6 +5,7 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
@@ -93,6 +94,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
         }
         if (SkinProperties.REFRESH.equals(c.getKey())) {
             refresh();
+            getSkinnable().getProperties().remove(SkinProperties.REFRESH);
         }
     };
 
@@ -565,6 +567,22 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 	}
 
 	//-------------------------------------------------------------------
+	private void updateAttributeNames() {
+		// Eventually update names
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			Label label = lblNam.get(key);
+			if (label==null) continue;
+			if (getSkinnable().getNameMapper()!=null) {
+				String mapped = getSkinnable().getNameMapper().apply(key);
+				if (mapped!=null)
+					label.setText(mapped);
+			} else {
+				label.setText(key.getName(Locale.getDefault()));
+			}
+		}
+	}
+
+	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private void refresh() {
 		logger.log(Level.DEBUG, "refresh with "+grid.getChildrenUnmodifiable().size()+" children");
@@ -599,6 +617,8 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		btnIncAll.entrySet().forEach(e -> e.getValue().setDisable(!getController().canBeIncreased(value(e.getKey())).get()));
 		btnDecAllMin.entrySet().forEach(e -> e.getValue().setDisable(!canBeDecreasedMinimal(e.getKey())));
 		btnIncAllMin.entrySet().forEach(e -> e.getValue().setDisable(!canBeIncreasedMinimal(e.getKey())));
+
+		updateAttributeNames();
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> val = model.getAttribute(key);

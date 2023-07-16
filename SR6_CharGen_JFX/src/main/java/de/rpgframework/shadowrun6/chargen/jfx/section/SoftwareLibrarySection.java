@@ -20,6 +20,8 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemHook;
@@ -28,6 +30,7 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
@@ -56,13 +59,16 @@ public class SoftwareLibrarySection extends GearSection {
 	static class ProgramRow {
 		ItemSubType type;
 		CarriedItem<ItemTemplate> program;
-		Map<CarriedItem<ItemTemplate>, Boolean> installState = new LinkedHashMap<>();
+		CarriedItem<ItemTemplate> installedOn;
+		Map<CarriedItem<ItemTemplate>, ToggleButton> buttonByDevice = new LinkedHashMap<>();
 		ToggleGroup group = new ToggleGroup();
+		TreeTableView<ProgramRow> treeTable;
 		public ProgramRow(ItemSubType type) {this.type = type;}
-		public ProgramRow(CarriedItem<ItemTemplate> prog) {
+		public ProgramRow(CarriedItem<ItemTemplate> prog, TreeTableView<ProgramRow> treeTable) {
 			if (prog==null) throw new NullPointerException();
 			this.program = prog;
 			group.setUserData(prog);
+			this.treeTable = treeTable;
 		}
 		public String getName() {
 			if (type!=null) return type.getName();
@@ -73,7 +79,6 @@ public class SoftwareLibrarySection extends GearSection {
 	static class ProgramRowDeviceCell extends TreeTableCell<ProgramRow, Boolean> {
 		private ToggleButton button;
 		private ImageView iView;
-		private ProgramRow row;
 		private SR6CharacterController control;
 
 		public ProgramRowDeviceCell(TreeTableColumn<ProgramRow, Boolean> p, SR6CharacterController ctrl) {
@@ -81,16 +86,33 @@ public class SoftwareLibrarySection extends GearSection {
 			button = new ToggleButton("x");
 			button.getStyleClass().add("install-button");
 			setAlignment(Pos.CENTER);
+//			System.out.println("ProgramRowDeviceCell.<init>: "+this);
+			tableRowProperty().addListener( (ov,o,n) -> {
+				if (n==null) return;
+				ProgramRow row = n.getItem();
+				if (row==null) return;
+				CarriedItem<ItemTemplate> device  = (CarriedItem<ItemTemplate>) getTableColumn().getUserData();
+//				logger.log(Level.WARNING, "now "+row.program+" x "+device);
+			});
 		}
 		@SuppressWarnings("unchecked")
 		@Override
 		public void updateItem(Boolean item, boolean empty) {
 			super.updateItem(item, empty);
-			if (empty) {
+			ProgramRow row = getTableRow().getItem();
+			if (empty || row==null) {
 				setGraphic(null);
-			} else {
-				ProgramRow p = getTableRow().getItem();
+				return;
+			}
+			CarriedItem<ItemTemplate> program = (row==null)?null:row.program;
+			CarriedItem<ItemTemplate> device  = (CarriedItem<ItemTemplate>) getTableColumn().getUserData();
+
+//			logger.log(Level.WARNING, "updateItem() for "+program+" x "+device.getKey()+"  item="+item);
+			if (!row.group.getToggles().contains(button))
+				row.group.getToggles().add(button);
+			row.buttonByDevice.put(device, button);
 				CarriedItem<ItemTemplate> dev = (CarriedItem<ItemTemplate>) getTableColumn().getUserData();
+				getTableRow().getItem().buttonByDevice.put(dev, button);
 				// No buttons for devices without software slot
 				if (dev==null || dev.getSlot(ItemHook.SOFTWARE)==null) {
 					logger.log(Level.WARNING, "No SOFTWARE slot for {0}",dev);
@@ -98,19 +120,10 @@ public class SoftwareLibrarySection extends GearSection {
 					return;
 				}
 
-				if (p!=row && row!=null)
-					row.group.getToggles().remove(button);
-				if (p!=null && !p.group.getToggles().contains(button))
-					p.group.getToggles().add(button);
-				row = p;
-
-				if (p==null || p.program==null) {
-					setGraphic(null);
+				// Can it be installed here?
+				if (program==null) {
 					return;
 				}
-
-				// Can it be installed here?
-				CarriedItem<ItemTemplate> program = p.program;
 				if (dev.getAccessories().contains(program)) {
 					button.setDisable(false);
 				} else {
@@ -118,17 +131,14 @@ public class SoftwareLibrarySection extends GearSection {
 							program.getModifyable(), program.getVariantID(),
 							program.getDecisions().toArray(new Decision[program.getDecisions().size()]));
 					button.setDisable(!possInstall.get());
-					if (!possInstall.get())
-						logger.log(Level.WARNING, "Cannot install {0} on {1} because {2}", program, dev,
-								possInstall.toString());
 				}
 
 				setGraphic(button);
 				if (dev!=null) {
 					button.setUserData(dev);
-					button.setSelected(item);
+					if (item)
+						row.group.selectToggle(button);
 				}
-			}
 		}
 	}
 
@@ -144,6 +154,8 @@ public class SoftwareLibrarySection extends GearSection {
 	private TreeTableColumn<ProgramRow, String> colName;
 	private TreeTableColumn<ProgramRow, Boolean> colUnused;
 
+	private Map<CarriedItem<ItemTemplate>, ProgramRow> rowBySoftware;
+
 	private static boolean initializeDone;
 
 	//-------------------------------------------------------------------
@@ -156,6 +168,7 @@ public class SoftwareLibrarySection extends GearSection {
 	private void initTreeTable() {
 		currentlyShowing = new ArrayList<>();
 		cacheDevices     = new ArrayList<>();
+		rowBySoftware    = new HashMap<>();
 		treeTable = new TreeTableView<>();
 		treeTable.setShowRoot(false);
 
@@ -164,8 +177,7 @@ public class SoftwareLibrarySection extends GearSection {
 		treeTable.getColumns().add(colName);
 		treeTable.getColumns().add(colUnused);
 		colName.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().getValue().getName()));
-		colUnused.setCellValueFactory(p -> new SimpleBooleanProperty(isUnused(p.getValue().getValue(), p.getTreeTableColumn())));
-//		colUnused.setCellFactory(p -> new RadioButton("? "))));
+		colUnused.setCellValueFactory(p -> new SimpleBooleanProperty(isUsed(p.getValue().getValue(), p.getTreeTableColumn())));
 		colUnused.setCellFactory(p -> new ProgramRowDeviceCell(p, control));
 		root = new TreeItem<>();
 		treeTable.setRoot(root);
@@ -183,15 +195,11 @@ public class SoftwareLibrarySection extends GearSection {
 
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
-	private boolean isUnused(ProgramRow row, TreeTableColumn<ProgramRow, Boolean> col) {
+	private boolean isUsed(ProgramRow row, TreeTableColumn<ProgramRow, Boolean> col) {
 		if (row.program==null) return true;
 		CarriedItem<ItemTemplate> device = (CarriedItem<ItemTemplate>) col.getUserData();
-		if (device!=null && (device==model.getSoftwareLibrary() || device.getAccessories().contains(row.program))) {
-			logger.log(Level.INFO, "isUnused({0}) = {1} = true", row.program, col.getUserData());
-			return true;
-		}
-		logger.log(Level.INFO, "isUnused({0}) = {1} = false", row.program, col.getUserData());
-		return false;
+		boolean used = device!=null && device.getAccessories().contains(row.program);
+		return used;
 	}
 
 	//-------------------------------------------------------------------
@@ -216,8 +224,6 @@ public class SoftwareLibrarySection extends GearSection {
 				.filter(ItemUtil.MATRIXDEVICES_FILTER)
 				.collect(Collectors.toList());
 
-//		System.err.println("SoftwareLibrarySection.refresh: devices="+devices);
-//		System.err.println("SoftwareLibrarySection.refresh: data="+data);
 		initializeDone = false;
 		if (programsChanged(data)) {
 			refreshPrograms(data);
@@ -264,15 +270,20 @@ public class SoftwareLibrarySection extends GearSection {
 		List<ItemSubType> subtypes = new ArrayList<ItemSubType>(byType.keySet());
 		Collections.sort(subtypes, (s1,s2) -> Integer.compare(s1.ordinal(), s2.ordinal()));
 
+		rowBySoftware.clear();
 		for (ItemSubType key : subtypes) {
 			TreeItem<ProgramRow> item = new TreeItem<ProgramRow>(new ProgramRow(key));
 			treeTable.getRoot().getChildren().add(item);
 			List<CarriedItem<ItemTemplate>> list = byType.get(key);
 			Collections.sort(list, (c1,c2) -> c1.getNameWithRating().compareTo(c2.getNameWithRating()));
 			list.forEach(ci -> {
-				ProgramRow progRow = new ProgramRow(ci);
+				ProgramRow progRow = new ProgramRow(ci, treeTable);
+				rowBySoftware.put(ci, progRow);
 				progRow.group.selectedToggleProperty().addListener( (ov,o,n) -> {
-					if (SoftwareLibrarySection.initializeDone) installationDeviceChanged(progRow, o,n);});
+					if (n==null)
+						o.setSelected(true);
+					else if (SoftwareLibrarySection.initializeDone)
+						installationDeviceChanged(progRow, o,n);});
 				item.getChildren().add(new TreeItem<ProgramRow>(progRow));});
 		}
 		currentlyShowing = data;
@@ -290,30 +301,29 @@ public class SoftwareLibrarySection extends GearSection {
 		if (progRow==null || progRow.program==null) return;
 		if (toDevice==fromDevice) return;
 		CarriedItem<ItemTemplate> program = progRow.program;
-		logger.log(Level.WARNING, "User wants to remove ''{0}'' from {1} and install it on {2}", program.getKey(), fromDevice, toDevice);
+		logger.log(Level.DEBUG, "User wants to remove ''{0}'' from {1} and install it on {2}", program.getKey(), fromDevice, toDevice);
 
 		Possible possRemove = control.getEquipmentController().canBeRemoved(fromDevice, ItemHook.SOFTWARE, program);
 		Possible possInstall = control.getEquipmentController().canBeEmbedded(toDevice, ItemHook.SOFTWARE, program.getModifyable(), program.getVariantID(), program.getDecisions().toArray(new Decision[program.getDecisions().size()]));
 		if (!possRemove.get()) {
 			logger.log(Level.WARNING, "Trying to uninstall {1} from {2}, but {0}", possRemove, program, fromDevice);
-//			control.runProcessors();
-//			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, possRemove.toString());
 			return;
 		}
 		if (!possInstall.get()) {
 			logger.log(Level.WARNING, "Trying to install, but {0}", possInstall);
-//			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, possInstall.toString());
-//			control.runProcessors();
 			return;
 		}
 
-		Possible poss = control.getEquipmentController().removeEmbedded(fromDevice, ItemHook.SOFTWARE, program);
-		if (poss.get()) {
-			logger.log(Level.WARNING, "Uninstall successful - now add to "+toDevice);
-			// Deinstallation successful - change CARRY mode
-			program.setCarryMode(CarryMode.VIRTUAL);
-//			// Deinstallation successful - add to target device
-//			toDevice.addAccessory(program, ItemHook.SOFTWARE);
+		logger.log(Level.INFO, "Should move {0} from {1} to {2}", program.getModifyable(), fromDevice, toDevice);
+		if (fromDevice.getAccessories().contains(program)) {
+			fromDevice.removeAccessory(program, ItemHook.SOFTWARE);
+			GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, model, fromDevice);
+		}
+		if (toDevice.getAccessories().contains(program))
+			return;
+		else {
+			toDevice.addAccessory(program, ItemHook.SOFTWARE);
+			GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, model, toDevice);
 		}
 		control.runProcessors();
 	}
@@ -336,7 +346,7 @@ public class SoftwareLibrarySection extends GearSection {
 			columnDevName.getColumns().add(realColumn);
 
 			realColumn.setUserData(matrixDev);
-			realColumn.setCellValueFactory(p -> new SimpleBooleanProperty(isUnused(p.getValue().getValue(), realColumn)));
+			realColumn.setCellValueFactory(p -> new SimpleBooleanProperty(isUsed(p.getValue().getValue(), realColumn)));
 			realColumn.setCellFactory(p -> new ProgramRowDeviceCell(p, control));
 			makeHeaderWrappable(columnDevName);
 			newColumns.add(columnDevName);

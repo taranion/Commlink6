@@ -34,6 +34,7 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.RemainingKarmaNuyenController;
 import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6DataStructureController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
@@ -182,6 +183,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		qPaths    = new CommonQualityPathController(this);
 		martial   = new SR6MartialArtsController(this);
 		drake     = new SR6DrakeController(this, true);
+		dataStructures = new SR6DataStructureController(this);
 	}
 
 	// --------------------------------------------------------------------
@@ -218,6 +220,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 //			processChain.add(new GetModificationsFromGear(model));
 //			processChain.add(new ApplyModificationsGeneric(model));
 			processChain.add(martial);
+			processChain.add(dataStructures);
 			processChain.add(equipment);
 			processChain.add(foci);
 			processChain.add(complex);

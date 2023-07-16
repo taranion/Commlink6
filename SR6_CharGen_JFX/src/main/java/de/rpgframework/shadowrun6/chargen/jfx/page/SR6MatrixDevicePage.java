@@ -239,6 +239,7 @@ public class SR6MatrixDevicePage extends Page {
 		secSoftware.showHelpForProperty().addListener( (ov,o,n) -> {showDescription(n); clearExceptPrograms(); });
 		secAccessories.showHelpForProperty().addListener( (ov,o,n) -> {showDescription(n); clearExceptAccessories();});
 		secPrograms.selectedDeviceProperty().addListener( (ov,o,n) -> secAccessories.setDevice(n));
+		secDevices.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
 	//-------------------------------------------------------------------
@@ -318,7 +319,7 @@ public class SR6MatrixDevicePage extends Page {
 
 	//--------------------------------------------------------------------
 	public void refresh()  {
-		logger.log(Level.INFO, "refresh");
+		logger.log(Level.ERROR, "refresh");
 		secDevices.refresh();
 		secSoftware.refresh();
 		secPrograms.refresh();
@@ -326,18 +327,6 @@ public class SR6MatrixDevicePage extends Page {
 		secPersona.refresh();
 		secActions.refresh();
 		secCombat.setData(ctrl.getModel());
-
-//		secActions.setAll(
-//				Shadowrun6Core.getItemList(Shadowrun6Action.class)
-//				.stream()
-//				.filter( act -> act.getCategory()==Category.MATRIX)
-//				.sorted(new Comparator<Shadowrun6Action>() {
-//					public int compare(Shadowrun6Action o1, Shadowrun6Action o2) {
-//						return o1.getName().compareTo(o2.getName());
-//					}
-//				})
-//				.collect(Collectors.toList())
-//				);
 	}
 
 	//-------------------------------------------------------------------
