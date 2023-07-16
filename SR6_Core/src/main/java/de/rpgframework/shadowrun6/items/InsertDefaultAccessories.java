@@ -38,7 +38,7 @@ public class InsertDefaultAccessories implements CarriedItemProcessor {
 		// Add "Anti-Theft" to all vehicles with a pilot rating
 		ItemAttributeNumericalValue<SR6ItemAttribute> pilotVal = model.getAsValue(SR6ItemAttribute.PILOT);
 		if (pilotVal!=null && pilotVal.getModifiedValue()>0) {
-			if (model.getAccessory("anti_theft",null)==null) {
+			if (model.getAccessory("anti_theft",null).isEmpty()) {
 				ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "anti_theft");
 				CarriedItem access = new CarriedItem<ItemTemplate>(item, item.getVariant("rating1"), CarryMode.EMBEDDED);
 				SR6GearTool.recalculate("", charac, access);
