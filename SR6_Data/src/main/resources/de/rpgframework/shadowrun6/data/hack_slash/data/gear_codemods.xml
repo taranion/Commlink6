@@ -283,8 +283,8 @@
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.25" />
 		<modifications>
-			<!-- <valmod type="ITEM_ATTRIBUTE" ref="MATRIX_ATTACK_RATING" value="3"/> -->
-			<!-- <valmod type="ITEM_ATTRIBUTE" ref="MATRIX_DAMAGE" value="+1"/> -->
+			<valmod type="ATTRIBUTE" ref="ATTACK_RATING_MATRIX" value="3"/>
+			<!-- <valmod type="ATTRIBUTE" ref="MATRIX_DAMAGE" value="+1"/> -->
 		</modifications>
 	</item>
 
@@ -293,8 +293,8 @@
 		<flags><flag>CODEMOD</flag></flags>
 		<attrdef id="ESSENCECOST" value="0.75" />
 		<modifications>
-			<!-- <valmod type="ITEM_ATTRIBUTE" ref="MATRIX_ATTACK_RATING" value="5"/> -->
-			<!-- <valmod type="ITEM_ATTRIBUTE" ref="MATRIX_DAMAGE" value="+2"/> -->
+			<valmod type="ATTRIBUTE" ref="ATTACK_RATING_MATRIX" value="5"/>
+			<!-- <valmod type="ATTRIBUTE" ref="MATRIX_DAMAGE" value="+2"/> -->
 		</modifications>
 	</item>
 
