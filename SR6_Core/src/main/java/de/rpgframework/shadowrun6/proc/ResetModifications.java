@@ -149,7 +149,6 @@ public class ResetModifications implements ProcessingStep {
 			item.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
 			item.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMTYPE, ItemType.ELECTRONICS));
 			item.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.TOOLS));
-			logger.log(Level.ERROR, "Software Library exists "+model.getSoftwareLibrary()+" and has accessories: "+item.getAccessories());
 
 			// Prepare minimal body modifications
 			model.clearBodyForms();
