@@ -24,6 +24,7 @@ import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.jfx.EquipmentControllerTwoColumnSkin;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -93,7 +94,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		btnInc = new Button("+");
 
 		selection = new ComplexDataItemControllerNode<>(charGen.getEquipmentController());
-
+		selection.setSkin(new EquipmentControllerTwoColumnSkin<ItemTemplate>(selection));
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.available"));
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.selected"));
 
