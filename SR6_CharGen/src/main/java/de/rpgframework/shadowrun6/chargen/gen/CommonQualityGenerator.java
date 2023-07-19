@@ -260,7 +260,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			// Pay or grant Karma for qualities
 			for (QualityValue val : model.getQualities()) {
 				Quality item = val.getModifyable();
-				int cost = val.getKarmaCost();
+				int cost = (int) getSelectionCost(item);
 //				if (item.hasLevel())
 //					cost *= val.getDistributed();
 //				else if (val.isAutoAdded())
@@ -341,6 +341,10 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	 */
 	@Override
 	public float getSelectionCost(Quality data) {
+		if (data.getId().equals("ambidextrous") && ((Shadowrun6Character)getModel()).hasQuality("shiva_arms")) {
+			QualityValue qVal = ((Shadowrun6Character)getModel()).getQuality("shiva_arms");
+			return data.getKarmaCost() * (qVal.getModifiedValue()+1);
+		}
 		return data.getKarmaCost();
 	}
 
@@ -350,7 +354,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	 */
 	@Override
 	public String getSelectionCostString(Quality data) {
-		return String.valueOf(getSelectionCostString(data));
+		return String.valueOf((int)getSelectionCost(data));
 	}
 
 }
