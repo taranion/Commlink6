@@ -27,16 +27,15 @@ import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.rules.SkillTable;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.jfx.ShadowrunSkillTable;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySkillGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SRSkillSettingsPane;
@@ -66,7 +65,7 @@ public class SkillSection extends Section {
 	protected Logger logger = System.getLogger(getClass().getPackageName());
 
 	private SR6CharacterController control;
-	protected ShadowrunCharacter model;
+	protected Shadowrun6Character model;
 	private SkillType[] type;
 
 	private ToggleSwitch tsExpertMode;
@@ -99,6 +98,8 @@ public class SkillSection extends Section {
 	private void initComponents() {
 		table = new SkillTable<ShadowrunAttribute,SR6Skill,SR6SkillValue>();
 		table.setMaxHeight(Double.MAX_VALUE);
+		table.setAttributeMode(SkillTable.Mode.NO_ATTRIB);
+		table.setHidePoolColumn(true);
 		btnAdd = new Button(null, new SymbolIcon("add"));
 		btnDel = new Button(null, new SymbolIcon("delete"));
 		getButtons().addAll(btnAdd, btnDel);
