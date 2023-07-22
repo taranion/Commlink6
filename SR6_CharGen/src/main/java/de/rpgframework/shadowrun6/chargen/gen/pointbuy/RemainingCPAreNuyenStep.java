@@ -44,7 +44,7 @@ public class RemainingCPAreNuyenStep implements ProcessingStep {
 		logger.log(Level.INFO, "End with {0} character points", settings.characterPoints);
 
 		settings.cpToResources = settings.characterPoints;
-		int baseNuyen = 10000 + settings.characterPoints*20000;
+		int baseNuyen = 10000 + Math.max(450000, settings.characterPoints*20000);
 		logger.log(Level.INFO, "With {0} CP we start with {1} nuyen", settings.cpToResources, baseNuyen);
 		unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.NUYEN.name(), baseNuyen));
 
