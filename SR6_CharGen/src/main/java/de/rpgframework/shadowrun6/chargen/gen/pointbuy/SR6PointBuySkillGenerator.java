@@ -248,8 +248,9 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 				/*
 				 * Pay skill points
 				 */
-				if (per.points1>0) {
-					int toPay = per.points1;
+				logger.log(Level.INFO, "Check {0}={1}", entry.getKey(), per);
+				if (per.points1>0 || per.pointSpec>0) {
+					int toPay = per.points1 + per.pointSpec;
 					if (toPay>0 && points1>0) {
 						int payHere = Math.min(points1, toPay);
 						logger.log(Level.INFO, "Pay {0} free SP for {1}", payHere, key);
@@ -274,10 +275,6 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 					int pay = per.getKarmaInvestSR6();
 					logger.log(Level.INFO, "Pay {0} Karma for {1}", pay, key);
 					model.setKarmaFree( model.getKarmaFree() - pay);
-				}
-				if (per.pointSpec>0) {
-					logger.log(Level.INFO, "Pay {0} free SP for specializations in {1}", per.pointSpec, key);
-					points1 -= per.pointSpec;
 				}
 				if (per.karmaSpec>0) {
 					logger.log(Level.INFO, "Pay {0} Karma for specializations in {1}", per.karmaSpec*5, key);

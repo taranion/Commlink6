@@ -239,18 +239,25 @@ public class SR6ArchetypeTest {
 		assertEquals(46, model.getKarmaFree());
 		assertTrue(skills.increase(sVal.get()).wasSuccessful()); // 4
 		assertEquals(26, model.getKarmaFree());
-
+		assertEquals(4, sVal.get().getModifiedValue());
 
 		SR6SkillValue tmp = model.getSkillValue(Shadowrun6Core.getSkill("athletics"));
 		skills.select(tmp, Shadowrun6Core.getSkill("athletics").getSpecialization("throwing"), false);
 		assertEquals(21, model.getKarmaFree());
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
 		tmp = model.getSkillValue(Shadowrun6Core.getSkill("biotech"));
 		skills.select(tmp, Shadowrun6Core.getSkill("biotech").getSpecialization("first_aid"), false);
 		assertEquals(16, model.getKarmaFree());
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
 		tmp = model.getSkillValue(Shadowrun6Core.getSkill("close_combat"));
 		skills.select(tmp, Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed"), false);
 		assertEquals(11, model.getKarmaFree());
+		assertEquals(0, skills.getPointsLeft());
+		assertEquals(2, skills.getPointsLeft2());
 		tmp = model.getSkillValue(Shadowrun6Core.getSkill("perception"));
+		System.out.println("-----------------------\n\n");
 		skills.select(tmp, Shadowrun6Core.getSkill("perception").getSpecialization("visual"), false);
 		assertEquals(6, model.getKarmaFree());
 		assertEquals(0, skills.getPointsLeft());
@@ -426,7 +433,9 @@ public class SR6ArchetypeTest {
 		assertEquals(61, model.getKarmaFree());
 		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "focused_concentration"));
 		assertTrue(res.wasSuccessful());
+		assertEquals(49, model.getKarmaFree());
 		assertTrue(qualities.increase(res.get()).wasSuccessful());
+		assertEquals(37, model.getKarmaFree());
 		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "ar_vertigo")).wasSuccessful());
 		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "astral_beacon")).wasSuccessful());
 		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "aptitude"),

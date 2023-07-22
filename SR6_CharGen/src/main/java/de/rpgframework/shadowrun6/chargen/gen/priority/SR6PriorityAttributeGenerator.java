@@ -683,7 +683,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 					logger.log(Level.DEBUG, "Consume "+mod);
 					getModel().getAttribute(attr).addModification(mod);
 					if (mod.getSet()==ValueType.MAX) {
-						logger.log(Level.INFO, "Consume "+mod+" and set max. value of {0} to {1}", attr, mod.getValue());
+						logger.log(Level.DEBUG, "Consume "+mod+" and set max. value of {0} to {1}", attr, mod.getValue());
 						// Optional: Allow adjustment points on lowered maximum
 						if (mod.getValue()>6 || parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))
 							allowedAdjust.add(attr);

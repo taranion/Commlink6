@@ -46,6 +46,7 @@ import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModificationChoice;
@@ -101,6 +102,8 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private final static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(ChoiceSelectorDialog.class.getPackageName()+".Selectors");
 
 	private final static Logger logger = System.getLogger(ChoiceSelectorDialog.class.getPackageName());
+
+	private final static Choice VARIANT_CHOICE = new Choice(PieceOfGear.VARIANT, null);
 
 	private ComplexDataItemController<T,V> ctrl;
 	/* Only relevant for ItemTemplates */
@@ -375,6 +378,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		cbVariants.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.INFO, "Chose variant {0}", n);
 			selectedVariant = n;
+			if (n==null)
+				decisions.remove(VARIANT_CHOICE);
+			else
+				decisions.put(VARIANT_CHOICE, new Decision(ItemTemplate.VARIANT,n.getId()));
 			// Hide old variant nodes
 			if (perVariantChoices.containsKey(o)) {
 				logger.log(Level.DEBUG, "Hide all UI elements for old variant {0}", o);

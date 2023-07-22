@@ -303,7 +303,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			return new OperationResult<>();
 		} finally {
 			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.TRACE, "ENTER increase({0})", ref);
+				logger.log(Level.TRACE, "LEAVE increase({0})", ref);
 		}
 	}
 
@@ -679,11 +679,13 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					logger.log(Level.WARNING, "Found SR6SkillValue without skill: "+val);
 					continue;
 				}
-				if (val.getSpecializations().isEmpty()) {
-					val.setDistributed(entry.getValue().getSum());
-				} else {
-					val.setDistributed(entry.getValue().getSum()-1);
-				}
+				logger.log(Level.INFO, "Set skill {0} to {1} ", entry.getKey(), entry.getValue().getSum());
+				val.setDistributed(entry.getValue().getSum());
+//				if (val.getSpecializations().isEmpty()) {
+//					val.setDistributed(entry.getValue().getSum());
+//				} else {
+//					val.setDistributed(entry.getValue().getSum()-1);
+//				}
 				usedSkills.add(val);
 			}
 			// Reverse check: all skills in model should be in usedSkills
@@ -834,6 +836,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 
 			skillVal.getSpecializations().remove(spec);
 
+			getCharacterController().runProcessors();
 			return true;
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE: deselect({0}, {1}",skillVal, spec);
