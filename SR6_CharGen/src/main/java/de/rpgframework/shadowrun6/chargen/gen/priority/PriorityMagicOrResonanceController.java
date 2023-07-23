@@ -87,7 +87,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 			boolean isAI = false;
 			if (model.getMetatype()!=null) {
 				isAI = model.getMetatype().isAI();
-				logger.log(Level.ERROR, "Is "+model.getMetatype()+" an AI = "+isAI);
+				logger.log(Level.DEBUG, "Is "+model.getMetatype()+" an AI = "+isAI);
 			}
 
 			List<MagicOrResonanceType> forbidden = new ArrayList<>();
@@ -122,7 +122,7 @@ public class PriorityMagicOrResonanceController extends MagicOrResonanceControll
 					unprocessed.add(tmp);
 				}
 			}
-			logger.log(Level.ERROR, "Available = " + available.keySet());
+			logger.log(Level.DEBUG, "Available = " + available.keySet());
 
 			MagicOrResonanceType type = model.getMagicOrResonanceType();
 			if (type == null || !available.containsKey(type)) {
