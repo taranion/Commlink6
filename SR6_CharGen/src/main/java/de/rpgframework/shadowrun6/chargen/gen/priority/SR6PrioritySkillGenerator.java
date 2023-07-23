@@ -397,15 +397,11 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				return new OperationResult<>(allowed);
 			}
 
-//			if (value.getDistributed()==0) {
-//				logger.log(Level.DEBUG, "Don't increase, but select");
-//				return select(value.getModifyable());
-//			}
-
 			PerSkillPoints per = getPerSkill(value);
 			if (per==null) {
 				per = new PerSkillPoints();
 				setPerSkill(value, per);
+				logger.log(Level.INFO, "Added "+value.getKey()+" to "+model.getCharGenSettings(SR6PrioritySettings.class).perSkill);
 			}
 
 			// Do increase
@@ -587,14 +583,20 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 
 			Shadowrun6Character model = parent.getModel();
 			SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
+			logger.log(Level.INFO, "PerSkill = "+settings.perSkill.keySet());
 			for (Entry<String, PerSkillPoints> entry : settings.perSkill.entrySet()) {
 				logger.log(Level.TRACE, "---> {0}", entry.getKey());
+				// Determine skill key
+				SR6Skill key = null;
 				SR6SkillValue sVal = getFromPrioritySettings(entry.getKey());
 				if (sVal==null) {
-					logger.log(Level.ERROR, "Cannot find SkillValue for ''{0}'' from PrioritySettings", entry.getKey());
+					key = Shadowrun6Core.getSkill(entry.getKey());
+				} else
+					key = sVal.getResolved();
+				if (key==null) {
+					logger.log(Level.ERROR, "Cannot find Skill for ''{0}'' from PrioritySettings", entry.getKey());
 					continue;
 				}
-				SR6Skill key = sVal.getResolved();
 
 				PerSkillPoints per = entry.getValue();
 				logger.log(Level.DEBUG, entry.getKey()+" = "+per.toString());
