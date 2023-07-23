@@ -302,9 +302,13 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeIncreased(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
-	public boolean canBeIncreased(SR6Lifestyle value) {
-		return parent.getModel().getNuyen() >= value.getCostPerMonth();
+	public Possible canBeIncreased(SR6Lifestyle value) {
+		return new Possible(parent.getModel().getNuyen() >= value.getCostPerMonth());
 	}
 
 	//-------------------------------------------------------------------
@@ -312,10 +316,11 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	 * @see de.rpgframework.genericrpg.chargen.NumericalDataItemController#increase(de.rpgframework.genericrpg.data.ComplexDataItemValue)
 	 */
 	@Override
-	public boolean increase(SR6Lifestyle value) {
-		if (!canBeDecreased(value)) {
+	public OperationResult<SR6Lifestyle> increase(SR6Lifestyle value) {
+		Possible poss = canBeIncreased(value);
+		if (!poss.get()) {
 			logger.log(Level.ERROR, "Trying to increase lifestyle {0} which is not allowed", value);
-			return false;
+			return new OperationResult<SR6Lifestyle>(poss);
 		}
 
 		value.setDistributed( value.getDistributed() +1 );
@@ -323,7 +328,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 
 		parent.runProcessors();
 
-		return true;
+		return new OperationResult<SR6Lifestyle>(value);
 	}
 
 	//-------------------------------------------------------------------
@@ -331,8 +336,8 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	 * @see de.rpgframework.genericrpg.chargen.NumericalDataItemController#canBeDecreased(de.rpgframework.genericrpg.data.ComplexDataItemValue)
 	 */
 	@Override
-	public boolean canBeDecreased(SR6Lifestyle value) {
-		return value.getDistributed()>1;
+	public Possible canBeDecreased(SR6Lifestyle value) {
+		return new Possible(value.getDistributed()>1);
 	}
 
 	//-------------------------------------------------------------------
@@ -340,10 +345,11 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	 * @see de.rpgframework.genericrpg.chargen.NumericalDataItemController#decrease(de.rpgframework.genericrpg.data.ComplexDataItemValue)
 	 */
 	@Override
-	public boolean decrease(SR6Lifestyle value) {
-		if (!canBeDecreased(value)) {
+	public OperationResult<SR6Lifestyle> decrease(SR6Lifestyle value) {
+		Possible poss = canBeDecreased(value);
+		if (!canBeDecreased(value).get()) {
 			logger.log(Level.ERROR, "Trying to decrease lifestyle {0} which is not allowed", value);
-			return false;
+			return new OperationResult<SR6Lifestyle>(poss);
 		}
 
 		value.setDistributed( value.getDistributed() -1 );
@@ -351,7 +357,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 
 		parent.runProcessors();
 
-		return true;
+		return new OperationResult<SR6Lifestyle>(value);
 	}
 
 	//-------------------------------------------------------------------
@@ -361,6 +367,15 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	@Override
 	public Possible canBeSelected(SR6Lifestyle value) {
 		return canBeSelected(value.getResolved());
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(SR6Lifestyle value) {
+		return value.getDistributed();
 	}
 
 }
