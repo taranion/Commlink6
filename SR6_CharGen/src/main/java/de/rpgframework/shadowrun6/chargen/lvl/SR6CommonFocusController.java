@@ -22,6 +22,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 
 /**
  * @author stefa
@@ -114,8 +115,8 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		}
 
 		// Determine rating
-		Decision decForce = GenericRPGTools.getDecision(Focus.FORCE_UUID, decisions);
-		int force = Integer.parseInt(decForce.getValue());
+		Decision decForce = GenericRPGTools.getDecision(ItemTemplate.UUID_RATING, decisions);
+		int force = (decForce!=null)?Integer.parseInt(decForce.getValue()):1;
 		// No focus may exceed MAG attribute
 		if (force>magic) {
 			// No. foci larger than magic attribute
@@ -153,7 +154,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 			return new OperationResult<>(poss);
 		}
 
-		Decision decForce = GenericRPGTools.getDecision(Focus.FORCE_UUID, decisions);
+		Decision decForce = GenericRPGTools.getDecision(ItemTemplate.UUID_RATING, decisions);
 		int force = Integer.parseInt(decForce.getValue());
 
 		FocusValue val = new FocusValue(value, force);
