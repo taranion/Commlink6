@@ -903,6 +903,13 @@ public class Shadowrun6Tools {
 				tmp.setResolved(resolved);
 			}
 
+			logger.log(Level.DEBUG, "resolve data structures");
+			for (DataStructureValue tmp : model.getDataStructures()) {
+				tmp.setCharacter(model);
+				DataStructure resolved = Shadowrun6Core.getItem(DataStructure.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+
 			logger.log(Level.DEBUG, "resolve SURGE collective");
 			SetItemValue collect = model.getSurgeCollective();
 			if (collect!=null) {
