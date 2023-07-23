@@ -201,6 +201,7 @@ public class ResonancePage extends Page {
 		secCplx.refresh();
 		secMeta.refresh();
 		secPrograms.refresh();
+		secDataStruct.refresh();
 	}
 
 }

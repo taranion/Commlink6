@@ -104,6 +104,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private final static Logger logger = System.getLogger(ChoiceSelectorDialog.class.getPackageName());
 
 	private final static Choice VARIANT_CHOICE = new Choice(PieceOfGear.VARIANT, null);
+	private final static Choice RATING_CHOICE = new Choice(ItemTemplate.UUID_RATING, null);
 
 	private ComplexDataItemController<T,V> ctrl;
 	/* Only relevant for ItemTemplates */
@@ -118,6 +119,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private T item;
 	private DataItemValue context;
 	private SR6PieceOfGearVariant selectedVariant;
+	private Integer selectedRating;
 	private List<Choice> choices;
 	private Map<SR6PieceOfGearVariant, List<Node>> perVariantChoices = new HashMap<>();
 	private Map<Choice, Decision> decisions = new LinkedHashMap<>();
@@ -190,12 +192,16 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	//-------------------------------------------------------------------
 	private Decision[] getDecisions() {
 		Decision[] ret = new Decision[decisions.size()];
+		if (item.hasLevel() && selectedRating!=null)
+			ret = new Decision[decisions.size()+1];
 		int i=0;
 		for (Entry<Choice, Decision> entry : decisions.entrySet()) {
 			ret[i] = entry.getValue();
 			logger.log(Level.DEBUG, "Decision [{0}] = {1}", i, entry.getValue());
 			i++;
 		}
+		if (item.hasLevel() && selectedRating!=null)
+			ret[i] = new Decision(RATING_CHOICE, String.valueOf(selectedRating));
 //		for (int i=0; i<choices.size(); i++) {
 //			ret[i] = decisions.get(choices.get(i));
 //		}
@@ -310,6 +316,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			if ((item instanceof ItemTemplate) && !((ItemTemplate)item).getVariants().isEmpty()) {
 				processVariants( (ItemTemplate)item );
 			}
+			// Eventually prepare hardcoded rating
+			if (item.hasLevel()) {
+				processRating( item );
+			}
 
 			for (Choice choice : choices) {
 				logger.log(Level.WARNING, "Found choice {0} and controller {1}", choice, ctrl);
@@ -341,6 +351,29 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		} finally {
 			logger.log(Level.INFO, "LEAVE apply({0}, {1} with {2})", item, choices, closed);
 		}
+	}
+
+
+	// -------------------------------------------------------------------
+	private void processRating(ComplexDataItem template) {
+		logger.log(Level.INFO, "hasLevel detected");
+		addLabel(ResourceI18N.get(RES, "label.rating"));
+		ChoiceBox<Integer> cbRatings = new ChoiceBox<>();
+		for (int i=1; i<=10; i++)
+			cbRatings.getItems().add(i);
+		cbRatings.getSelectionModel().select(0);
+		cbRatings.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.INFO, "Chose rating {0}", n);
+			selectedRating = n;
+			if (n==null)
+				decisions.remove(RATING_CHOICE);
+			else
+				decisions.put(RATING_CHOICE, new Decision(ItemTemplate.UUID_RATING, String.valueOf(n)));
+			updateButtons();
+		 });
+		content.getChildren().add(cbRatings);
+
+		updateButtons();
 	}
 
 	//-------------------------------------------------------------------

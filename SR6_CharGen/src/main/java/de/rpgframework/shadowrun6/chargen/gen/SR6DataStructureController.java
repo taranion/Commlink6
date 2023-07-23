@@ -122,7 +122,7 @@ public class SR6DataStructureController extends ControllerImpl<DataStructure> im
 
 		// Determine rating
 		Decision decForce = GenericRPGTools.getDecision(ItemTemplate.UUID_RATING, decisions);
-		int force = Integer.parseInt(decForce.getValue());
+		int force = (decForce!=null)?Integer.parseInt(decForce.getValue()):1;
 		// No focus may exceed MAG attribute
 		if (force>resonance) {
 			// No. foci larger than magic attribute

@@ -9,7 +9,7 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
 @Root(name="datastructure")
 @DataItemTypeKey(id="datastructure")
 public class DataStructure extends ComplexDataItem {
-	
+
 	@Attribute
 	private boolean multi;
 
