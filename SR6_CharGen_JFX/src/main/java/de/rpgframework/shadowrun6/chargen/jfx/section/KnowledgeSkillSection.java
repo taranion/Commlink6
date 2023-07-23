@@ -56,7 +56,6 @@ public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements
 		if (dec!=null) {
 			OperationResult<SR6SkillValue> result = control.getSkillController().select(know, dec);
 			if (result.wasSuccessful()) {
-				list.getItems().add(result.get());
 				list.refresh();
 			} else {
 				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
