@@ -114,8 +114,8 @@ public class RiggerConsoleSection extends GearSection {
 					primaryRCC = item;
 			}
 		}
-		logger.log(Level.WARNING, "refresh with rigItems={0} and rccItems={1}", rigItems, rccItems);
-		logger.log(Level.WARNING, "refresh with primaryRig={0} and primaryRCC={1}", primaryRig, primaryRCC);
+		logger.log(Level.DEBUG, "refresh with rigItems={0} and rccItems={1}", rigItems, rccItems);
+		logger.log(Level.DEBUG, "refresh with primaryRig={0} and primaryRCC={1}", primaryRig, primaryRCC);
 
 		// Update, if necessary
 		if (!cbRig.getItems().containsAll(rigItems)) {
