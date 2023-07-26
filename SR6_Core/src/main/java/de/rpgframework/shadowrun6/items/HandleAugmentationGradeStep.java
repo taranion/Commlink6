@@ -59,6 +59,9 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 				ItemAttributeFloatValue<SR6ItemAttribute> essenceAttr = model.getAsFloat(SR6ItemAttribute.ESSENCECOST);
 				ItemAttributeNumericalValue<SR6ItemAttribute> priceAttr = model.getAsValue(SR6ItemAttribute.PRICE);
 				ItemAttributeObjectValue<SR6ItemAttribute> availAttr = model.getAsObject(SR6ItemAttribute.AVAILABILITY);
+				if (availAttr==null) {
+					logger.log(Level.ERROR, "Item "+model+" has no AVAILABILITY");
+				}
 				switch (quality) {
 				case USED:
 					if (essenceAttr!=null)

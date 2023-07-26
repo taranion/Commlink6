@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen.priority;
 
+import java.lang.System.Logger.Level;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,7 +85,9 @@ public class SR6PrioritySettings extends CommonSR6GeneratorSettings implements I
 		if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE) {
 			id+="/"+sVal.getUuid();
 		}
+		System.getLogger("de.rpgframework.shadowrun6.chargen.gen.skill").log(Level.INFO, "SR6PrioritySettings.put("+id+", "+per+" )");
 		perSkill.put(id, per);
+		System.getLogger("de.rpgframework.shadowrun6.chargen.gen.skill").log(Level.INFO, "Afterwards "+perSkill.keySet());
 	}
 
 	//-------------------------------------------------------------------

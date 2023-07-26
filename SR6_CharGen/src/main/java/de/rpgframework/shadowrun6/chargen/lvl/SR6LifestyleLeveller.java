@@ -251,16 +251,33 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeIncreased(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
-	public boolean canBeIncreased(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return false;
+	public Possible canBeIncreased(SR6Lifestyle value) {
+		return new Possible(parent.getModel().getNuyen() >= value.getCostPerMonth());
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
-	public boolean increase(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return false;
+	public OperationResult<SR6Lifestyle> increase(SR6Lifestyle value) {
+		Possible poss = canBeIncreased(value);
+		if (!poss.get()) {
+			logger.log(Level.ERROR, "Trying to increase lifestyle {0} which is not allowed", value);
+			return new OperationResult<SR6Lifestyle>(poss);
+		}
+
+		value.setDistributed( value.getDistributed() +1 );
+		logger.log(Level.INFO, "Increase paid months for lifestyle {0} to {1}", value, value.getDistributed());
+
+		parent.runProcessors();
+
+		return new OperationResult<SR6Lifestyle>(value);
 	}
 
 	//-------------------------------------------------------------------
@@ -268,14 +285,37 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 	 * @see de.rpgframework.genericrpg.chargen.NumericalDataItemController#canBeDecreased(de.rpgframework.genericrpg.data.ComplexDataItemValue)
 	 */
 	@Override
-	public boolean canBeDecreased(SR6Lifestyle value) {
-		return value.getDistributed()>1;
+	public Possible canBeDecreased(SR6Lifestyle value) {
+		return new Possible(value.getDistributed()>1);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#decrease(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
-	public boolean decrease(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return false;
+	public OperationResult<SR6Lifestyle> decrease(SR6Lifestyle value) {
+		Possible poss = canBeDecreased(value);
+		if (!canBeDecreased(value).get()) {
+			logger.log(Level.ERROR, "Trying to decrease lifestyle {0} which is not allowed", value);
+			return new OperationResult<SR6Lifestyle>(poss);
+		}
+
+		value.setDistributed( value.getDistributed() -1 );
+		logger.log(Level.INFO, "Decrease paid months for lifestyle {0} to {1}", value, value.getDistributed());
+
+		parent.runProcessors();
+
+		return new OperationResult<SR6Lifestyle>(value);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public int getValue(SR6Lifestyle value) {
+		return value.getDistributed();
 	}
 
 	//-------------------------------------------------------------------

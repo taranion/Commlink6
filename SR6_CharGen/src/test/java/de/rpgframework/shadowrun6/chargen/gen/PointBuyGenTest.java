@@ -202,6 +202,7 @@ public class PointBuyGenTest {
 		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 4
 		assertTrue(skill.increase(model.getSkillValue(tasking)).wasSuccessful()); // 5
 		assertEquals(2, settings.characterPoints);
+		System.out.println("\n\n\n###########\n\n");
 		// Specialization
 		poss = skill.canSelectSpecialization(model.getSkillValue(tasking), tasking.getSpecialization("compiling"), false);
 		assertTrue(poss.toString(), poss.get());

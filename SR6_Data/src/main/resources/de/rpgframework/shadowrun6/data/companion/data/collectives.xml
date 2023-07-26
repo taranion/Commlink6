@@ -153,6 +153,7 @@
 			<itemmod type="QUALITY" ref="dragon"/>
 			<valmod type="QUALITY" ref="shiva_arms" value="3" set="NATURAL"/>
 			<itemmod type="QUALITY" ref="berserker"/>
+			<itemmod type="QUALITY" ref="scales"/>
 			<itemmod type="QUALITY" ref="critter_spook"/>
 			<itemmod type="QUALITY" ref="unusual_hair"/>
 		</modifications>

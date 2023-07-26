@@ -319,7 +319,7 @@ public class SR6MatrixDevicePage extends Page {
 
 	//--------------------------------------------------------------------
 	public void refresh()  {
-		logger.log(Level.ERROR, "refresh");
+		logger.log(Level.DEBUG, "refresh");
 		secDevices.refresh();
 		secSoftware.refresh();
 		secPrograms.refresh();

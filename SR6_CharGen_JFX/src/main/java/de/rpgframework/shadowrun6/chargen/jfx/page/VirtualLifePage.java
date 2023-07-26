@@ -78,7 +78,7 @@ public class VirtualLifePage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initEssence() {
-		secTrans = new SparkSection(ResourceI18N.get(RES, "page.virtuallife.section.spark"));
+		secTrans = new SparkSection();
 		secTrans.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secTrans, 4);
 		FlexGridPane.setMinHeight(secTrans, 4);

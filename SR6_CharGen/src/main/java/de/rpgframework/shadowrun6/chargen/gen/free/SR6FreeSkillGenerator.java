@@ -328,6 +328,7 @@ public class SR6FreeSkillGenerator extends CommonSkillGenerator {
 
 			skillVal.getSpecializations().remove(spec);
 
+			getCharacterController().runProcessors();
 			return true;
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE: deselect({0}, {1}",skillVal, spec);

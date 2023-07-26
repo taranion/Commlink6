@@ -260,11 +260,9 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			// Pay or grant Karma for qualities
 			for (QualityValue val : model.getQualities()) {
 				Quality item = val.getModifyable();
-				int cost = val.getKarmaCost();
-//				if (item.hasLevel())
-//					cost *= val.getDistributed();
-//				else if (val.isAutoAdded())
-//					cost = 0;
+				int cost = getKarmaCost(val);
+				// Don't pay auto-added qualities or quality levels
+				logger.log(Level.WARNING, "Quality {0} level={1}  auto={2}  distr={3}", item.getId(), item.hasLevel(),  val.isAutoAdded(), val.getDistributed());
 				if (cost != 0) {
 					if (item.isPositive()) {
 						if (item.hasLevel()) {
@@ -341,7 +339,19 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	 */
 	@Override
 	public float getSelectionCost(Quality data) {
+		if (data.getId().equals("ambidextrous") && ((Shadowrun6Character)getModel()).hasQuality("shiva_arms")) {
+			QualityValue qVal = ((Shadowrun6Character)getModel()).getQuality("shiva_arms");
+			return data.getKarmaCost() * (qVal.getModifiedValue()+1);
+		}
 		return data.getKarmaCost();
+	}
+	public int getKarmaCost(QualityValue val) {
+		Quality data = val.getResolved();
+		if (data.getId().equals("ambidextrous") && ((Shadowrun6Character)getModel()).hasQuality("shiva_arms")) {
+			QualityValue qVal = ((Shadowrun6Character)getModel()).getQuality("shiva_arms");
+			return data.getKarmaCost() * (qVal.getModifiedValue()+1);
+		}
+		return val.getKarmaCost();
 	}
 
 	//-------------------------------------------------------------------
@@ -350,7 +360,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	 */
 	@Override
 	public String getSelectionCostString(Quality data) {
-		return String.valueOf(getSelectionCostString(data));
+		return String.valueOf((int)getSelectionCost(data));
 	}
 
 }

@@ -1,128 +1,99 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <foci>
-	<focus id="alchemical_focus" karma="3" cost="5000">
-		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
-		</choices>
+	<focus id="alchemical_focus" karma="3" cost="5000" hasLevel="true">
 		<modifications>
-			<checkmod type="SKILL" ref="enchanting" value="$FORCE" what="DICE"/>
+			<checkmod type="SKILL" ref="enchanting" value="$LEVEL" what="DICE"/>
 		</modifications>
 	</focus>
-	<focus id="disenchanting_focus" karma="3" cost="5000">
-		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
-		</choices>
+	<focus id="disenchanting_focus" karma="3" cost="5000" hasLevel="true">
 		<modifications>
-			<checkmod type="SKILL" ref="enchanting" value="$FORCE" what="DICE"/>
+			<checkmod type="SKILL" ref="enchanting" value="$LEVEL" what="DICE"/>
 		</modifications>
 	</focus>
-	<focus id="centering_focus" karma="3" cost="9000">
-		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
-		</choices>
+	<focus id="centering_focus" karma="3" cost="9000" hasLevel="true">
 		<modifications>
 			<relevancemod topic="MAGICAL" />
 		</modifications>
 	</focus>
-	<focus id="flexible_signature_focus" karma="3" cost="9000">
-		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
-		</choices>
+	<focus id="flexible_signature_focus" karma="3" cost="9000" hasLevel="true">
 		<modifications>
 			<relevancemod topic="MAGICAL" />
 		</modifications>
 	</focus>
-	<focus id="masking_focus" karma="3" cost="9000">
-		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
-		</choices>
+	<focus id="masking_focus" karma="3" cost="9000" hasLevel="true">
 		<modifications>
 			<relevancemod topic="MAGICAL" />
 		</modifications>
 	</focus>
-	<focus id="spell_shaping_focus" karma="3" cost="9000">
-		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
-		</choices>
+	<focus id="spell_shaping_focus" karma="3" cost="9000" hasLevel="true">
 		<modifications>
 			<relevancemod topic="MAGICAL" />
 		</modifications>
 	</focus>
 
-	<focus id="power_focus" karma="6" cost="18000" avail="3">
-		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
-		</choices>
+	<focus id="power_focus" karma="6" cost="18000" avail="3" hasLevel="true">
 		<modifications>
-			<valmod type="SKILL" ref="sorcery" value="$FORCE" />
+			<valmod type="SKILL" ref="sorcery" value="$LEVEL" />
 		</modifications>
 	</focus>
-	<focus id="qi_focus" karma="2" cost="3000" >
+	<focus id="qi_focus" karma="2" cost="3000" hasLevel="true" >
 		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
 			<choice uuid="37026c81-d5a0-44fe-8fa9-9263acb6059f" type="ADEPT_POWER" />
 		</choices>
 		<modifications>
 			<itemmod type="ADEPT_POWER" ref="CHOICE" choice="37026c81-d5a0-44fe-8fa9-9263acb6059f"/>
 		</modifications>
 	</focus>
-	<focus id="counterspelling_focus" karma="2" cost="4000">
+	<focus id="counterspelling_focus" karma="2" cost="4000" hasLevel="true">
 		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
 			<choice uuid="37026c81-d5a0-44fe-8fa9-9263acb6059f" type="SPELL_CATEGORY" />
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="sorcery" value="$FORCE" cond="true" />
+			<checkmod type="SKILL" ref="sorcery" value="$LEVEL" cond="true" />
 		</modifications>
 	</focus>
-	<focus id="spellcasting_focus" karma="2" cost="4000">
+	<focus id="spellcasting_focus" karma="2" cost="4000" hasLevel="true">
 		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
 			<choice uuid="37026c81-d5a0-44fe-8fa9-9263acb6059f" type="SPELL_CATEGORY" />
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="sorcery" value="$FORCE" cond="true" />
+			<checkmod type="SKILL" ref="sorcery" value="$LEVEL" cond="true" />
 		</modifications>
 	</focus>
-	<focus id="ritualspellcasting_focus" karma="2" cost="4000">
+	<focus id="ritualspellcasting_focus" karma="2" cost="4000" hasLevel="true">
 		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
 			<choice uuid="37026c81-d5a0-44fe-8fa9-9263acb6059f" type="SPELL_CATEGORY" />
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="sorcery" value="$FORCE" cond="true" />
+			<checkmod type="SKILL" ref="sorcery" value="$LEVEL" cond="true" />
 		</modifications>
 	</focus>
-	<focus id="sustaining_focus" karma="2" cost="4000">
+	<focus id="sustaining_focus" karma="2" cost="4000" hasLevel="true">
 		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
 			<choice uuid="37026c81-d5a0-44fe-8fa9-9263acb6059f" type="SPELL_CATEGORY" />
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="sorcery" value="$FORCE" cond="true" />
+			<checkmod type="SKILL" ref="sorcery" value="$LEVEL" cond="true" />
 		</modifications>
 	</focus>
-	<focus id="summoning_focus" karma="2" cost="4000">
+	<focus id="summoning_focus" karma="2" cost="4000" hasLevel="true">
 		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
 			<choice uuid="809f9d8e-e97f-49e7-a937-0c9582bd40fd" type="SPIRIT" />
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="conjuring" value="$FORCE" cond="true" />
+			<checkmod type="SKILL" ref="conjuring" value="$LEVEL" cond="true" />
 		</modifications>
 	</focus>
-	<focus id="banishing_focus" karma="2" cost="4000">
+	<focus id="banishing_focus" karma="2" cost="4000" hasLevel="true">
 		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
 			<choice uuid="809f9d8e-e97f-49e7-a937-0c9582bd40fd" type="SPIRIT" />
 		</choices>
 		<modifications>
-			<checkmod type="SKILL" ref="conjuring" value="$FORCE" cond="true" />
+			<checkmod type="SKILL" ref="conjuring" value="$LEVEL" cond="true" />
 		</modifications>
 	</focus>
-	<focus id="weapon_focus" karma="3" cost="7000" avail="3">
+	<focus id="weapon_focus" karma="3" cost="7000" avail="3" hasLevel="true">
 		<choices>
-			<choice uuid="684e53c3-64d3-4f81-9eed-8c3f183b5c97" type="ITEM_ATTRIBUTE" ref="FORCE" options="1,2,3,4,5,6,7,8,9,10"/>
 			<choice uuid="de69a2e0-1d0a-4a14-8c88-08f5b3377dad" type="CARRIED" ref="MELEE" />
 		</choices>
 	</focus>

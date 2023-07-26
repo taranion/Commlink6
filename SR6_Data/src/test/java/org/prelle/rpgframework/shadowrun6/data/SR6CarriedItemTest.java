@@ -325,6 +325,7 @@ public class SR6CarriedItemTest {
 		assertFalse("Anti-Theft missing",thefts.isEmpty());
 		assertEquals(1,thefts.size());
 		SR6GearTool.recalculate("", null, vehicle);
+		SR6GearTool.recalculate("", null, vehicle);
 		thefts = vehicle.getAccessory("anti_theft", "rating1");
 		System.out.println(vehicle.dump());
 		assertFalse("Anti-Theft missing",thefts.isEmpty());

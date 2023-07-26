@@ -248,8 +248,9 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 				/*
 				 * Pay skill points
 				 */
-				if (per.points1>0) {
-					int toPay = per.points1;
+				logger.log(Level.INFO, "Check {0}={1}", entry.getKey(), per);
+				if (per.points1>0 || per.pointSpec>0) {
+					int toPay = per.points1 + per.pointSpec;
 					if (toPay>0 && points1>0) {
 						int payHere = Math.min(points1, toPay);
 						logger.log(Level.INFO, "Pay {0} free SP for {1}", payHere, key);
@@ -274,6 +275,10 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 					int pay = per.getKarmaInvestSR6();
 					logger.log(Level.INFO, "Pay {0} Karma for {1}", pay, key);
 					model.setKarmaFree( model.getKarmaFree() - pay);
+				}
+				if (per.karmaSpec>0) {
+					logger.log(Level.INFO, "Pay {0} Karma for specializations in {1}", per.karmaSpec*5, key);
+					model.setKarmaFree( model.getKarmaFree() - per.karmaSpec*5);
 				}
 			}
 			logger.log(Level.INFO, "Finish with {0} free and up to {1} convertible skill points", points1, points2);
@@ -614,10 +619,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			}
 			if (points1>0 || (settings.cpToSkills<20 && settings.characterPoints>=2)) {
 				logger.log(Level.INFO, "Pay with free skill points");
-				settings.get(skillVal).points1++;
-//			} else if (points2>0) {
-//				logger.log(Level.INFO, "Pay with converted skill points");
-//				settings.get(skillVal).points1++;
+				settings.get(skillVal).pointSpec++;
 			} else {
 				settings.get(skillVal).karmaSpec++;
 				logger.log(Level.INFO, "Pay with karma");
@@ -645,7 +647,13 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 				return false;
 
 			skillVal.getSpecializations().remove(spec);
+			// Get back
+			SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
+			PerSkillPoints val = settings.perSkill.get(skillVal.getKey());
+			val.karmaSpec=0;
+			val.pointSpec=0;
 
+			getCharacterController().runProcessors();
 			return true;
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE: deselect({0}, {1}",skillVal, spec);
@@ -687,6 +695,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		if (val==null) {
 			return 0;//-1;
 		}
+		logger.log(Level.DEBUG, "{0} = {1}", key.getKey(), val.getSum());
 		return val.getSum();
 	}
 

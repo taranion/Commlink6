@@ -9,10 +9,7 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
-import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.chargen.RecommendationState;
-import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -22,41 +19,26 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
-import de.rpgframework.shadowrun.ShadowrunRules;
-import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
  *
  */
-public class SR6FreeMetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho>
-		implements IMetamagicOrEchoController {
+public class SR6FreeMetamagicOrEchoController extends SR6MetamagicOrEchoController {
 
 	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".metaecho");
 
-	private boolean isCharGen;
-
 	//-------------------------------------------------------------------
 	public SR6FreeMetamagicOrEchoController(SR6CharacterController parent, boolean isCharGen) {
-		super(parent);
-		this.isCharGen = isCharGen;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.RecommendingController#getRecommendationState(java.lang.Object)
-	 */
-	@Override
-	public RecommendationState getRecommendationState(MetamagicOrEcho item) {
-		return RecommendationState.NEUTRAL;
+		super(parent, isCharGen);
 	}
 
 	//-------------------------------------------------------------------
@@ -85,66 +67,6 @@ public class SR6FreeMetamagicOrEchoController extends ControllerImpl<MetamagicOr
 					.filter(m -> m.getType()==Type.TRANSHUMANISM)
 					.collect(Collectors.toList());
 		}
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
-	 */
-	@Override
-	public List<MetamagicOrEchoValue> getSelected() {
-		return getModel().getMetamagicOrEchoes();
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItemValue)
-	 */
-	@Override
-	public RecommendationState getRecommendationState(MetamagicOrEchoValue value) {
-		return RecommendationState.NEUTRAL;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getChoicesToDecide(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public List<Choice> getChoicesToDecide(MetamagicOrEcho value) {
-		return value.getChoices();
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController#getGrade()
-	 */
-	@Override
-	public int getGrade() {
-		MagicOrResonanceType type = getModel().getMagicOrResonanceType();
-		List<MetamagicOrEchoValue> list = null;
-		if (type != null && type.usesMagic()) {
-			list = getSelected().stream()
-					.filter(m -> m.getModifyable()!=null)
-					.filter(m -> m.getModifyable().getType() == Type.METAMAGIC || m.getModifyable().getType() == Type.METAMAGIC_ADEPT)
-					.collect(Collectors.toList());
-		} else if (type != null && type.usesResonance()) {
-			list = getSelected().stream()
-					.filter(m -> m.getModifyable().getType() == Type.ECHO)
-					.collect(Collectors.toList());
-		} else {
-			list = getSelected().stream()
-					.filter(m -> m.getModifyable().getType() == Type.TRANSHUMANISM)
-					.collect(Collectors.toList());
-		}
-		// Determine the grade
-		int grade = 0;
-		for (MetamagicOrEchoValue tmp : list) {
-			if (tmp.getModifyable().hasLevel())
-				grade += tmp.getDistributed();
-			else
-				grade ++;
-		}
-		return grade;
 	}
 
 	//-------------------------------------------------------------------
@@ -429,15 +351,6 @@ public class SR6FreeMetamagicOrEchoController extends ControllerImpl<MetamagicOr
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
 		}
 		return unprocessed;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.NumericalValueController#getValue(de.rpgframework.genericrpg.NumericalValue)
-	 */
-	@Override
-	public int getValue(MetamagicOrEchoValue value) {
-		return value.getDistributed();
 	}
 
 }

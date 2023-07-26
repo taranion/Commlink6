@@ -903,6 +903,13 @@ public class Shadowrun6Tools {
 				tmp.setResolved(resolved);
 			}
 
+			logger.log(Level.DEBUG, "resolve data structures");
+			for (DataStructureValue tmp : model.getDataStructures()) {
+				tmp.setCharacter(model);
+				DataStructure resolved = Shadowrun6Core.getItem(DataStructure.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+
 			logger.log(Level.DEBUG, "resolve SURGE collective");
 			SetItemValue collect = model.getSurgeCollective();
 			if (collect!=null) {
@@ -916,7 +923,7 @@ public class Shadowrun6Tools {
 				if (resolved==null) {
 					logger.log(Level.ERROR, "Cannot resolve drake type ''%s''", model.getDrakeType().getKey());
 					System.err.println("Cannot resolve drake type '"+model.getDrakeType().getKey()+"'");
-					System.exit(1);
+					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, "Cannot resolve drake type '"+model.getDrakeType().getKey()+"' for "+model.getName());
 				}
 				model.getDrakeType().setResolved(resolved);
 			}

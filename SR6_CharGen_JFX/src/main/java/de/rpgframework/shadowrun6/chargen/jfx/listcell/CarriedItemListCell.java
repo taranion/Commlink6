@@ -91,7 +91,8 @@ public class CarriedItemListCell extends ComplexDataItemValueListCell<ItemTempla
 				data.getStyleClass().add("item-info-node");
 			}
 
-			lbValue.setText("\u00A5" + item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+			int price = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue() * (item.getCount()>1?item.getCount():1);
+			lbValue.setText("\u00A5" + price);
 			// Essence
 			lbEssence.setManaged(item.hasAttribute(SR6ItemAttribute.ESSENCECOST));
 			lbEssence.setVisible(item.hasAttribute(SR6ItemAttribute.ESSENCECOST));

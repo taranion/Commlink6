@@ -30,6 +30,8 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.SR6HistoryElementListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.SR6RewardPane;
+import de.rpgframework.shadowrun6.chargen.jfx.section.BasicDataSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.BodyPlanConfigSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CreationSection;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
@@ -49,6 +51,8 @@ public class BodyPage extends Page {
 
 	private transient SR6CharacterController ctrl;
 
+	private BodyPlanConfigSection secConfig;
+
 	private HBox flex;
 	private ImageView ivShape;
 	private OptionalNodePane layout;
@@ -56,6 +60,7 @@ public class BodyPage extends Page {
 	//-------------------------------------------------------------------
 	public BodyPage() {
 		super(ResourceI18N.get(RES, "page.body.title"));
+		initBaseData();
 		initComponents();
 		initLayout();
 		initInteractivity();
@@ -71,7 +76,7 @@ public class BodyPage extends Page {
 	private void initLayout() {
 		flex = new HBox();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(ivShape);
+		flex.getChildren().addAll(secConfig,ivShape);
 
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -81,6 +86,16 @@ public class BodyPage extends Page {
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
 //		secSINs.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+	}
+
+	//-------------------------------------------------------------------
+	private void initBaseData() {
+		secConfig = new BodyPlanConfigSection();
+		secConfig.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secConfig, 4);
+		FlexGridPane.setMinHeight(secConfig, 5);
+		FlexGridPane.setMediumWidth(secConfig, 5);
+		FlexGridPane.setMediumHeight(secConfig, 4);
 	}
 
 	//-------------------------------------------------------------------

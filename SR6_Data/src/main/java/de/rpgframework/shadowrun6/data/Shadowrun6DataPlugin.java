@@ -163,6 +163,7 @@ public class Shadowrun6DataPlugin  {
 			initCore();
 			initFiringSquad();
 			initStreetWyrd();
+//			initPowerPlays();
 			initDoubleClutch();
 			initHackNSlash();
 			initCompanion();
@@ -430,6 +431,16 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" mentor spirits");
 		list = Shadowrun6Core.loadDataItems(FocusList.class, Focus.class, set, clazz, "street_wyrd/data/foci.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" foci");
+	}
+
+	//-------------------------------------------------------------------
+	private void initPowerPlays() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------Power Plays-----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "POWER_PLAYS", "power_plays.i18n", Locale.ENGLISH, Locale.GERMAN);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "power_plays/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded {0} qualities", list.size());
 	}
 
 	//-------------------------------------------------------------------

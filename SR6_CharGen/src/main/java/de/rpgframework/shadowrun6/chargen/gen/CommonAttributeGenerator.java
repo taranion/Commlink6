@@ -41,7 +41,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	//-------------------------------------------------------------------
 	public int getMaximumValue(ShadowrunAttribute key) {
 		int max = parent.getModel().getAttribute(key).getMaximum();
-		if (max<3)
+		if (max<4)
 			max = 6+max;
 		boolean allow = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_RAISE_ABOVE_6);
 		if (!allow) {

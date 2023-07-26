@@ -8,7 +8,6 @@ import org.prelle.simplepersist.AttribConvert;
 import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.ElementList;
 
-import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Lifestyle;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.Quality;
@@ -19,7 +18,7 @@ import de.rpgframework.shadowrun6.persist.LifestyleQualityConverter;
  *
  */
 public class SR6Lifestyle extends Lifestyle {
-	
+
 	@Attribute(name = "neigh")
 	@AttribConvert(LifestyleQualityConverter.class)
 	private LifestyleQuality neighborhood;
@@ -38,7 +37,7 @@ public class SR6Lifestyle extends Lifestyle {
 	@Attribute(name = "space")
 	@AttribConvert(LifestyleQualityConverter.class)
 	private LifestyleQuality space;
-	
+
 	@ElementList(entry = "quality", type = String.class )
 	private List<String> qualities;
 
@@ -58,7 +57,7 @@ public class SR6Lifestyle extends Lifestyle {
 		entertainment= value;
 		space        = value;
 	}
-	
+
 	//-------------------------------------------------------------------
 	public LifestyleQuality getNeighborHood() { return (neighborhood!=null)?neighborhood:getModifyable(); }
 	public LifestyleQuality getNecessities() {return (necessities!=null)?necessities:getModifyable(); }
@@ -80,14 +79,14 @@ public class SR6Lifestyle extends Lifestyle {
 		} catch (Exception e) {
 			System.getLogger(getClass().getPackageName()).log(Level.ERROR, "Lifestyle broken: "+super.getKey(),e);
 		}
-		
+
 		for (String id : qualities) {
 			Quality qual = Shadowrun6Core.getItem(Quality.class, id);
 			if (qual!=null) {
 				sum += qual.getKarmaCost();
 			}
 		}
-		
+
 		return sum;
 	}
 
@@ -102,12 +101,12 @@ public class SR6Lifestyle extends Lifestyle {
 		if (ret<=12) return (ret- 6)*250 + 500;
 		if (ret<=19) return (ret-12)*500 + 2000;
 		if (ret<=27) return (ret-20)*1000 + 6000;
-		
+
 		if (ret<=36) {
 			ret = ret-27;
 			return new int[] {15,20,30,50,75,80,90,95,100} [ret]*1000;
 		}
-		
+
 		return (ret-36)*25000 + 100000;
 	}
 
