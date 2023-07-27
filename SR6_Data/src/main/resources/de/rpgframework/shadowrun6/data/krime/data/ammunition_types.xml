@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ammotypes>
+
+	<ammotype id="krime_power" cmult="1.5" > <!-- avail="3L" -->
+      <modifications>
+      </modifications>
+	</ammotype>
+	
+    <ammotype id="krime_penetrator" cmult="3" > <!-- avail="8I" -->
+      <modifications>
+	    <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1"/>
+      </modifications>
+      <requires>
+         <datareq type="GEAR" ref="ammo_shotgun"/>
+      </requires>
+    </ammotype>
+    
+    <ammotype id="krime_heat" cmult="5" > <!-- avail="9I" -->
+      <modifications>
+	    <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="3"/>
+        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="3"/>
+      </modifications>
+      <requires>
+         <datareq type="GEAR" ref="ammo_shotgun"/>
+      </requires>
+    </ammotype>
+
+    <ammotype id="krime_laser" cmult="2" > <!-- avail="3L" -->
+      <modifications>
+	    <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+      </modifications>
+      <requires>
+		<selreq>
+         <datareq type="GEAR" ref="ammo_holdout_light_machine"/>
+		 <datareq type="GEAR" ref="ammo_heavy_smg"/>
+		 <datareq type="GEAR" ref="ammo_rifles"/>
+		 <datareq type="GEAR" ref="ammo_cannon"/>
+		 <datareq type="GEAR" ref="ammo_machine_gun"/>
+		</selreq>
+      </requires>
+    </ammotype>
+
+    <ammotype id="krime_punisher" cmult="0.75"> <!-- avail="4L" -->
+      <modifications>
+	    <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2"/>
+        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-2"/>
+      </modifications>
+      <requires>
+         <datareq type="GEAR" ref="ammo_cannon"/>
+      </requires>
+    </ammotype>
+
+    <ammotype id="krime_selfdefense" cmult="2"> <!-- avail="2L" -->
+	  <modifications>
+		<itemmod type="RULE" ref="PHYSICAL_DAMAGE_IS_STUN"/>
+      </modifications>
+    </ammotype>
+
+</ammotypes>

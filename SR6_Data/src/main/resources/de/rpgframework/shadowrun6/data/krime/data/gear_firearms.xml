@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="krime_vester" avail="3L" price="170" type="WEAPON_FIREARMS" subtype="HOLDOUTS">
+      <weapon dmg="3P" mode="SS" attack="6,6,,," ammo="2(b)" skill="firearms" spec="firearms/holdouts"/>
+      <modifications>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_heater" avail="4L" price="175" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+      <weapon dmg="4P" mode="SS/SA" attack="6,8,6,," ammo="8(c)" skill="firearms" spec="firearms/pistols_heavy"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+		<itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_varmint" avail="4L" price="300" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+      <weapon dmg="4P" mode="SS/SA" attack="7,9,7,," ammo="8(c)" skill="firearms" spec="firearms/pistols_heavy"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="HOOK" ref="STOCK"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="STOCK" ref="folding_stock" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" included="true"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_chatter" avail="5I" price="180" type="WEAPON_FIREARMS" subtype="MACHINE_PISTOLS">
+      <weapon dmg="3P" mode="FA" attack="8,8,6,," ammo="20(c)/60(d)" skill="firearms" spec="firearms/machine_pistols"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_tradition" avail="7I" price="500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <weapon dmg="4P" mode="SA/FA" attack="9,9,6,," ammo="30(c)/75(d)" skill="firearms" spec="firearms/rifles"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+        <itemmod type="HOOK" ref="STOCK"/>
+        <itemmod type="GEARMOD" ref="gas-vent_improved"/>
+		<itemmod type="GEARMOD" ref="foregrip"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_saint" avail="3I" price="500" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
+      <weapon dmg="5P" mode="SA" attack="8,6,4,," ammo="7(c)/21(c)" skill="firearms" spec="firearms/submachine_guns"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="TOP"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="regular_sling" included="true"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_akm_97" avail="3L" price="3000" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <weapon dmg="5P" mode="SA/BF/FA" attack="4,11,9,7,1" ammo="38(c)" skill="firearms" spec="firearms/rifles"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+        <itemmod type="HOOK" ref="STOCK"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="STOCK" ref="shock_pad"/>
+      </modifications>
+   </item>
+
+   <item id="krime_akm_97_carbine" avail="3L" price="500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <weapon dmg="4P" mode="SA/BF/FA" attack="8,8,4,1," ammo="38(c)" skill="firearms" spec="firearms/rifles"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+        <itemmod type="HOOK" ref="STOCK"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="STOCK" ref="folding_stock" included="true"/>
+      </modifications>
+   </item>
+
+   <item id="krime_ditch" avail="3L" price="700" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
+      <weapon dmg="4P" mode="SS" attack="6,8,6,4,1" ammo="1(b)" skill="firearms" spec="firearms/rifles"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="UNDER" ref="krime_ditch_shotgun" included="true"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+	<geardef>
+		<item id="krime_ditch_shotgun" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+			<usage mode="EMBEDDED"/>
+			<weapon dmg="5P" mode="SS" attack="7,5,1,," ammo="1(b)" skill="firearms" spec="firearms/shotguns"/>
+		</item>
+	</geardef>
+   </item>
+
+   <item id="krime_stopper_ii" avail="3L" price="375" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+      <weapon dmg="4P" mode="SS" attack="7,9,4,," ammo="2(b)" skill="firearms" spec="firearms/shotguns"/>
+      <modifications>
+        <itemmod type="HOOK" ref="TOP"/>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+        <itemmod type="HOOK" ref="STOCK"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="STOCK" ref="folding_stock" included="true"/>
+      </modifications>
+   </item>
+
+   <item id="krime_junior" avail="2L" price="1000" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
+      <weapon dmg="3P" mode="SA" attack="8,10,6,," ammo="10(c)" skill="firearms" spec="firearms/rifles"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+        <itemmod type="HOOK" ref="STOCK"/>
+		<itemmod type="GEARMOD" ref="metahuman_adaption"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="krime_metalink"/>
+      </modifications>
+		<geardef>
+			<item id="krime_metalink" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+				<usage mode="EMBEDDED" slot="INTERNAL"/>
+				<requires>
+					<datareq type="GEAR" ref="krime_junior"/>
+				</requires>
+				<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+				<modifications>
+					<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+					<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+					<embed  type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="tutorsoft">
+						<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+						<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="firearms"/> <!-- how to make this /rifle spec only? -->
+						</embed>
+				</modifications>
+				<matrix d="1" f="0" programs="0" devrat="1" />
+				<flags><flag>MATRIX_DEVICE</flag></flags>
+			</item>
+		</geardef>
+   </item>
+
+   <item id="krime_soldier" avail="7I" price="3500"  type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+      <weapon dmg="5P" mode="SA/BF" attack="1,7,6,3,1" ammo="21(c)" skill="firearms" spec="firearms/rifles"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="UNDER" ref="krime_grenade_launcher" included="true"/>
+      </modifications>
+	<geardef>
+		<item id="krime_grenade_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+			<usage mode="EMBEDDED" slot="UNDER" />
+			<weapon dmg="0P" mode="SS" attack="4,10,6,2," ammo="4(m)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
+		</item>
+	</geardef>
+   </item>
+
+   <item id="krime_kar_97" avail="5I" price="3000" type="WEAPON_FIREARMS" subtype="LMG">
+      <weapon dmg="5P" mode="FA" attack="4,11,10,8,2" ammo="38(c)/114(d)" skill="firearms" spec="firearms/machine_guns"/>
+      <modifications>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+        <itemmod type="HOOK" ref="STOCK"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="UNDER" ref="bipod" included="true"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_monster" avail="9I" price="1500" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+      <weapon dmg="6P" mode="BF" attack=",4,4,4,1" ammo="100(belt)" skill="firearms" spec="firearms/assault_cannons"/>
+      <modifications>
+        <itemmod type="HOOK" ref="TOP"/>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_confederate" avail="10I" price="3500" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+      <weapon dmg="8P" mode="SS" attack="1,6,6,3,1" ammo="2(b)" skill="firearms" spec="firearms/assault_cannons"/>
+      <modifications>
+        <itemmod type="HOOK" ref="TOP"/>
+		<itemmod type="HOOK" ref="BARREL"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_t_shirt_cannon" avail="4" price="500" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+      <weapon dmg="0S" mode="SS" attack="8,11,6,2,1" ammo="5(m)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
+      <modifications>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+   </item>
+
+   <item id="krime_escalation" avail="5I" price="2500"  type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+      <weapon dmg="0P" mode="SS" attack=",4,10,9,6" ammo="1(ml)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
+      <modifications>
+        <itemmod type="HOOK" ref="TOP"/>
+        <itemmod type="HOOK" ref="UNDER"/>
+		<itemmod type="GEARMOD" ref="metahuman_adaption"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="TOP" ref="imaging_scope" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="krime_matrix_scanner"/>
+      </modifications>
+		<geardef>
+			<item id="krime_matrix_scanner" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+				<usage mode="EMBEDDED" slot="INTERNAL"/>
+				<requires>
+					<datareq type="GEAR" ref="krime_escalation"/>
+				</requires>
+			</item>
+		</geardef>
+   </item>
+
+   <!-- This is a special weapon mount, only for the Krime Calliope. Instead of buying the weapon you buy this mount with the pre-installed weapon. -->   
+   <item id="krime_calliope" avail="5I" price="12500" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="VEHICLE_ACCESSORY"/>
+      <requires>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="8" apply="PARENT"/>
+      </requires>
+      <modifications>
+		<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="krime_calliope_gun"/>
+      </modifications>
+		<geardef>
+			<item id="krime_calliope_gun" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" />
+				<weapon dmg="0P" mode="SS/FA" attack=",4,10,9,6" ammo="10(ml)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
+				<modifications>
+					<itemmod type="GEARMOD" ref="metahuman_adaption"/>
+				</modifications>
+			</item>
+   		</geardef>
+	</item>
+   
+   <item id="krime_carpet" avail="6L" price="2000"  type="ACCESSORY" subtype="LAUNCHERS">
+		<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" value="1"/>
+      <weapon dmg="0P" mode="FA" attack="4,11,7,1,1" ammo="6(m)" skill="engineering" spec="engineering/gunnery"/>
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
+   </item>
+
+</items>
