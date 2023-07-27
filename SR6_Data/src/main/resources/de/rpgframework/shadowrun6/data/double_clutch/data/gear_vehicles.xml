@@ -2091,7 +2091,7 @@
 		</modifications>
 	</item>
 
-	<item id="desc_I" avail="99" price="999999999" type="VEHICLES" subtype="SPACECRAFT" > <!-- Real cost 23.000.000.000, restricted to 2,1bil due to 32bit signed integer -->
+	<item id="dsec_i" avail="99" price="999999999" type="VEHICLES" subtype="SPACECRAFT" > <!-- Real cost 23.000.000.000, restricted to 2,1bil due to 32bit signed integer -->
 		<vehicle han="6" acc="30" spdi="3000" tspd="0" bod="200" arm="30" pil="6" sen="6" sea="500"/>
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
@@ -2099,7 +2099,7 @@
 			<embed type="GEAR" ref="amenities" variant="low" intoType="HOOK" intoRef="VEHICLE_CF" />
 		</modifications>
 	</item>
-	<item id="desc_I" lang="de" avail="99" price="999999999" type="VEHICLES" subtype="SPACECRAFT" > <!-- Real cost 23.000.000.000, restricted to 2,1bil due to 32bit signed integer -->
+	<item id="dsec_i" lang="de" avail="99" price="999999999" type="VEHICLES" subtype="SPACECRAFT" > <!-- Real cost 23.000.000.000, restricted to 2,1bil due to 32bit signed integer -->
 		<vehicle han="6" acc="30" spdi="3000" tspd="0" bod="200" arm="30" pil="6" sen="6" sea="500"/>
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />

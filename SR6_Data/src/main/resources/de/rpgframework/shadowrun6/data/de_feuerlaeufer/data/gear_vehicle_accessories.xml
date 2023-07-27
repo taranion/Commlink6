@@ -3,11 +3,11 @@
 
 <!-- Vehicle Accessories -->
 
-   <item id="fire_extinguisher" avail="99"  price="0" type="WEAPON_SPECIAL" subtype="THROWERS" modonly="true">
+   <item id="fire_extinguisher" type="WEAPON_SPECIAL" subtype="THROWERS" modonly="true">
       <weapon dmg="4S" mode="SS" attack="6,10,,," ammo="0" skill="exotic_weapons" spec="exotic_weapons/spray"/> <!-- stats estimated from Ares Charybdis and Hell Turtle -->
    </item>
 
-   <item avail="99"  price="0" id="fire_stairs" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" modonly="true" >
+   <item id="fire_stairs" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" modonly="true" >
   		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
    </item>
 
