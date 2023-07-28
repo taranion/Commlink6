@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Firearms Accessories -->
+
+   <item id="krime_stun_bayonet" lang="de" avail="3" price="700"  type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="BARREL" />
+		<usage mode="EMBEDDED" slot="UNDER" />
+	  <weapon  dmg="2S(e)" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+
+   <item id="krime_smartgun_dual" avail="2L" price="500" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="TOP" />
+		<usage mode="EMBEDDED" slot="UNDER" />
+      <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2" cond="y"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1" cond="y"/>
+		<valmod type="HOOK" ref="OPTICAL" value="1"/>
+		<valmod type="HOOK" ref="SMARTGUN" value="1"/>
+      </modifications>
+   </item>
+
+   <item id="krime_offline_support" avail="0" price="25" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL" />
+      <requires>
+         <selreq>
+            <datareq type="GEAR" ref="krime_vester"/>
+			<datareq type="GEAR" ref="krime_heater"/>
+			<datareq type="GEAR" ref="krime_varmint"/>
+			<datareq type="GEAR" ref="krime_chatter"/>
+			<datareq type="GEAR" ref="krime_tradition"/>
+			<datareq type="GEAR" ref="krime_saint"/>
+			<datareq type="GEAR" ref="krime_akm_97"/>
+			<datareq type="GEAR" ref="krime_akm_97_carbine"/>
+			<datareq type="GEAR" ref="krime_ditch"/>
+			<datareq type="GEAR" ref="krime_stopper_ii"/>
+			<datareq type="GEAR" ref="krime_junior"/>
+			<datareq type="GEAR" ref="krime_soldier"/>
+			<datareq type="GEAR" ref="krime_kar_97"/>
+			<datareq type="GEAR" ref="krime_monster"/>
+			<datareq type="GEAR" ref="krime_confederate"/>
+			<datareq type="GEAR" ref="krime_t_shirt_cannon"/>
+			<datareq type="GEAR" ref="krime_escalation"/>
+			<datareq type="GEAR" ref="krime_calliope"/>
+			<datareq type="GEAR" ref="krime_ripper_weapon"/>
+			<datareq type="GEAR" ref="krime_carpet"/>
+			<datareq type="GEAR" ref="krime_ripper" />
+         </selreq>
+      </requires>
+   </item>
+
+   <item id="krime_loudener" avail="0" price="250" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="BARREL" />
+   </item>
+   <item id="krime_loudener" lang="de" avail="0" price="250" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="BARREL" />
+      <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,,"/>
+      </modifications>
+   </item>
+
+   <item id="krime_tripod" avail="6L" price="1000" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="UNDER" />
+   </item>
+   <item id="krime_tripod_pitons" avail="6L" price="300" count="y" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL" />
+   </item>
+   <item id="krime_keeper" avail="0" price="50" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL" />
+   </item>
+
+   <item id="krime_drum" avail="2" price="5" count="y" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL" />
+      <requires>
+         <selreq>
+			<datareq type="GEAR" ref="krime_chatter"/>
+			<datareq type="GEAR" ref="krime_tradition"/>
+			<datareq type="GEAR" ref="krime_kar_97"/>
+         </selreq>
+      </requires>
+   </item>
+
+</items>

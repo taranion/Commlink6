@@ -106,7 +106,7 @@
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="lz74_cocoon"/>
       </modifications>
 		<geardef>
-			<item id="lz74_cocoon" avail="99" price="0" modonly="True" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" >
+			<item id="lz74_cocoon" type="ACCESSORY" subtype="VEHICLE_ACCESSORY" >
 			<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
 			</item>
 		</geardef>
