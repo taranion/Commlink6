@@ -26,7 +26,7 @@
 		<attrdef id="AVAILABILITY"  value="($RATING+2)/4 L" />
 		<weapon skill="athletics" spec="athletics/archery" />
    </item>
-    <item id="iron_hawk_arrow" price="10" avail="4L" count="y" type="AMMUNITION" subtype="AMMUNITION" >
+    <item id="iron_hawk_arrow" price="10" avail="4L" count="y" type="AMMUNITION" subtype="BOWS" >
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/>
 		</choices>
@@ -164,7 +164,6 @@
            <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
 		<weapon dmg="3P" mode="SS" attack="6,10,,," ammo="15(c)/150(belt)" skill="exotic_weapons" spec="exotic_weapons/spray"  wild="true"/>
-      <attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
 	</item>
 	<item id="honey_badger" avail="6I" price="7500" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
 		<modifications>

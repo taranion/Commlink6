@@ -3,7 +3,7 @@
 
 <!-- GOD Dominion -->
 
-	<item id="ascalon_railgun" avail="8I" price="650000" type="MOD_HARD" subtype="MOD_MOUNT" >
+	<item id="ascalon_railgun" avail="8I" price="650000" type="MOD_HARD" subtype="MOD_MOUNT" > <!-- ascalion railgun always comes with proprietary turret -->
 		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
 		<modifications>
 			<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1"/>
@@ -13,7 +13,7 @@
 			<valuereq type="ATTRIBUTE" ref="BODY" value="16" apply="PARENT"/>
 		</requires>
 		<geardef>
-			<item id="ascalon_railgun_weapon" avail="8I" price="650000" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+			<item id="ascalon_railgun_weapon" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
 				<usage mode="EMBEDDED"/>
 				<weapon attack="15,22,15,12,9" ammo="20(c)" dmg="9P" mode="SS" skill="firearms" spec="firearms/machine_guns"/>
 				<modifications>

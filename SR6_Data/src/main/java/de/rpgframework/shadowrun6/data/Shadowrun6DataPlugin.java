@@ -169,6 +169,8 @@ public class Shadowrun6DataPlugin  {
 			initCompanion();
 			//initLofwyrsLegions();
 			initOtherUS();
+			initKrime();
+			initCollapsing();
 			initDPAlpen();
 			initBerlin();
 			initDPFeuerläufer();
@@ -570,6 +572,38 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" dracogenesis powers");
 		list = Shadowrun6Core.loadDataItems(DrakeTypeList.class, DrakeType.class, set, clazz, "lofwyr/data/draketypes.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drake types");
+	}
+
+	//-------------------------------------------------------------------
+	private void initKrime() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------Krime Katalog-----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "KRIME", "krime.i18n", Locale.ENGLISH, Locale.GERMAN);
+		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"krime/data/ammunition_types.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"krime/data/gear_ammunition.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"krime/data/gear_firearms_accessories.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms accessories");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"krime/data/gear_firearms.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"krime/data/gear_drones.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"krime/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+	}
+
+	//-------------------------------------------------------------------
+	private void initCollapsing() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------Collapsing Now-----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COLLAPSING_NOW", "collapsing_now.i18n", Locale.ENGLISH, Locale.GERMAN);
+		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz, "collapsing_now/data/adeptpowers.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"collapsing_now/data/gear_firearms.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
 	}
 
 	//-------------------------------------------------------------------

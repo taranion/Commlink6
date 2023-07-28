@@ -265,7 +265,7 @@
 		<vehicle han="3/4" acc="12" spdi="12" tspd="60" bod="12" arm="12" pil="4" sen="5" />
 		<attrdef id="SEATS" value="1"/>
 		<geardef>
-		   <item id="safe_targeting" avail="99" price="0" type="MOD_ELEC" subtype="MOD_PILOT" modonly="true" > <!-- For ares_gunrunner -->
+		   <item id="safe_targeting" type="MOD_ELEC" subtype="MOD_PILOT" >
    			<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="0"/>
    		</item>
 		</geardef>
@@ -286,7 +286,7 @@
 		<vehicle han="3/4" acc="12" spdi="12" tspd="60" bod="12" arm="12" pil="4" sen="5" />
 		<attrdef id="SEATS" value="1"/>
 		<geardef>
-		   <item id="safe_targeting" avail="99" price="0" type="MOD_ELEC" subtype="MOD_PILOT" modonly="true" > <!-- For ares_gunrunner -->
+		   <item id="safe_targeting" type="MOD_ELEC" subtype="MOD_PILOT">
    			<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="0"/>
    		</item>
 		</geardef>
@@ -397,7 +397,7 @@
 	<item id="vulcan_hollenfaust" avail="5" price="50000" type="DRONE_LARGE" subtype="GROUND" >
 		<vehicle han="4/5" acc="10" spdi="15" tspd="60" bod="16" arm="16" pil="4" sen="4" />
 		<geardef>
-		   <item id="weapon_blisters" avail="99" price="0" type="MOD_HARD" subtype="MOD_MOUNT"  >
+		   <item id="weapon_blisters" type="MOD_HARD" subtype="MOD_MOUNT">
    			<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
    		</item>
 			<item id="vulcan_kr25" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
@@ -431,10 +431,10 @@
 	<item id="vulcan_hollenfaust" lang="de" avail="5I" price="50000" type="DRONE_LARGE" subtype="GROUND" >
 		<vehicle han="4/5" acc="10" spdi="15" tspd="60" bod="16" arm="16" pil="4" sen="4" />
 		<geardef>
-			<item id="vulcan_kr25"  type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
+			<item id="vulcan_kr25"  type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
 				<weapon dmg="9P" attack="1,5,16,12,10" mode="SS" ammo="8(m)" skill="engineering" spec="engineering/gunnery"/>
 			</item>
-		   <item id="weapon_blisters" avail="99" price="0" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" > <!-- For vulcan_hollenfaust -->
+		   <item id="weapon_blisters" type="MOD_HARD" subtype="MOD_MOUNT">
    			<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
    		</item>
    		<item id="weapon_turret_kr25" type="MOD_HARD" subtype="MOD_MOUNT">
@@ -500,11 +500,11 @@
 	<item id="cyberspace_dragonfly" avail="3" price="3000" type="DRONE_MINI" subtype="AIR" >
 		<vehicle han="3" acc="22" spdi="20" tspd="40" bod="2" arm="1" pil="3" sen="2" />
 		<geardef>
-			<item id="monofil_beak" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+			<item id="monofil_beak" type="MOD_HARD" subtype="MOD_MOUNT">
   				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
 				<weapon dmg="4P" attack="10,,,," skill="close_combat" />
 			</item>
-			<item id="roomsweeper" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+			<item id="roomsweeper" type="MOD_HARD" subtype="MOD_MOUNT">
   				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
 				<weapon attack="11,10,6,," ammo="4(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/shotguns"/>
 			</item>
@@ -836,7 +836,7 @@
 				<weapon dmg="5P" attack="10,,,," skill="close_combat" />
       		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
 			</item>
-			<item id="marine_sea_snake_injector" avail="99" price="0" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+			<item id="marine_sea_snake_injector" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
 				<weapon dmg="0P" attack="9,,,," ammo="4(m)" skill="close_combat" />
 			</item>
 		</geardef>
@@ -870,9 +870,6 @@
 	<item id="proteus_krake" avail="2" price="4000" type="DRONE_SMALL" subtype="AQUATIC" >
 		<vehicle han="3" acc="20" spdi="25" tspd="50" bod="5" arm="0" pil="2" sen="2" />
 		<geardef>
-			<item id="micro_torpedo_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" modonly="true" > <!-- For proteus_krake, marine_silent_hunter -->
-				<weapon dmg="0P" attack=",8,8,3," mode="SS" ammo="4(c)" skill="exotic_weapons" spec="exotic_weapons/launchers"/> <!-- Errata needed: No info on ranges for micro launcher, using armtech_mgl6 -->
-			</item>
 			<item id="emc_ink_dispenser" type="ACCESSORY" subtype="LAUNCHERS">
 				<usage mode="EMBEDDED" slot="VEHICLE_ACCESSORY" value="1"/>
 			</item>
@@ -886,9 +883,6 @@
 	<item id="proteus_krake" lang="de" avail="2L" price="4000" type="DRONE_SMALL" subtype="AQUATIC" >
 		<vehicle han="3" acc="20" spdi="25" tspd="50" bod="5" arm="0" pil="2" sen="2" />
 		<geardef>
-			<item id="micro_torpedo_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" modonly="true" >
-				<weapon dmg="0P" attack=",8,8,3," mode="SS" ammo="4(c)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
-			</item>
 			<item id="emc_ink_dispenser" type="ACCESSORY" subtype="LAUNCHERS">
 				<usage mode="EMBEDDED" slot="VEHICLE_ACCESSORY" value="1"/>
 			</item>
