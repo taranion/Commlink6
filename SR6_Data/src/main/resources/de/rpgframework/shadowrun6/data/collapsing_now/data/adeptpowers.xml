@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<powers>
+   <power id="improved_mental_attribute" cost="1" hasLevel="true" act="PASSIVE">
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc087e" options="CHARISMA,LOGIC,INTUITION,WILLPOWER"/>
+   	</choices>
+     <modifications>
+        <valmod type="ATTRIBUTE" ref="CHOICE" choice="4fbc6994-a69c-4708-9d08-12ff9ffc087e" value="1"/>
+     </modifications>
+   </power>
+</powers>
