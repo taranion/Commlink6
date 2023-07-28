@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Grenades -->
+
+	<item id="krime_cleaner" avail="5I" price="200" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo gz="0S" close="0S" near="0S" blast="15" />
+		<variant id="mini"/>
+	</item>
+
+	<item id="krime_party" avail="7I" price="190" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo gz="16P" close="12P" near="8P" blast="20" />
+      <modifications>
+        <itemmod type="GEARMOD" ref="metahuman_adaption"/>
+      </modifications>
+	  <!-- Krime Party not offered as Mini as description states an oversized external case and data includes "metahuman_adation" for Trolls -->
+	</item>
+
+	<item id="krime_cocktails" avail="7I" price="100" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo gz="10P" close="4P" near="2P" blast="5" />
+		<variant id="mini"/>
+	</item>
+
+	<item id="krime_stinger" avail="4L" price="125" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo gz="16S" close="12S" near="8S" blast="20" />
+		<variant id="mini"/>
+	</item>
+
+</items>

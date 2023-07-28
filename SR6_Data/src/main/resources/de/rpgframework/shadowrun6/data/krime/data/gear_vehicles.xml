@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="krime_wageslave" avail="0"  price="10000" subtype="CARS" type="VEHICLES">
+      <vehicle han="2/5" acc="4" spdi="20" tspd="60" bod="3" arm="1" pil="1" sen="1" sea="1"/>
+      <modifications>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
+      </modifications>
+   </item>
+
+   <item id="krime_bazoo_basic" avail="0"  price="22000" subtype="CARS" type="VEHICLES">
+      <vehicle han="2/4" acc="4" spdi="10" tspd="60" bod="4" arm="1" pil="1" sen="1" sea="4"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
+      </modifications>
+   </item>
+
+   <item id="krime_bazoo_red" avail="2"  price="25000" subtype="CARS" type="VEHICLES">
+      <vehicle han="2/4" acc="8" spdi="20" tspd="80" bod="4" arm="1" pil="1" sen="1" sea="4"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
+      </modifications>
+   </item>
+
+   <item id="krime_bazoo_chrome" avail="4"  price="40000" subtype="CARS" type="VEHICLES">
+      <vehicle han="2/4" acc="8" spdi="20" tspd="80" bod="4" arm="1" pil="1" sen="1" sea="4"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="distinctive_features" />
+      </modifications>
+   </item>
+
+   <item id="krime_big_bazoo_basic" avail="2"  price="23000" subtype="CARS" type="VEHICLES">
+      <vehicle han="3/3" acc="4" spdi="10" tspd="60" bod="4" arm="2" pil="1" sen="1" sea="4"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="tuned_suspension" variant="offroad"/>
+      </modifications>
+   </item>
+   
+   <item id="krime_big_bazoo_red" avail="3"  price="26000" subtype="CARS" type="VEHICLES">
+      <vehicle han="3/3" acc="8" spdi="20" tspd="80" bod="4" arm="2" pil="1" sen="1" sea="4"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="tuned_suspension" variant="offroad"/>
+      </modifications>
+   </item>
+
+   <item id="krime_big_bazoo_chrome" avail="6"  price="45000" subtype="CARS" type="VEHICLES">
+      <vehicle han="3/3" acc="8" spdi="20" tspd="80" bod="4" arm="2" pil="1" sen="1" sea="4"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="distinctive_features" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="tuned_suspension" variant="offroad"/>
+      </modifications>
+   </item>
+   
+   <item id="krime_sv-2" avail="6"  price="120000" subtype="CARS" type="VEHICLES">
+      <vehicle han="1/4" acc="15" spdi="20" tspd="60" bod="7" arm="5" pil="2" sen="2" sea="4"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="life_safety_system" variant="level1"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="passenger_prot_system" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
+      </modifications>
+   </item>
+
+   <item id="krime_sv-2" lang="de" avail="6"  price="120000" subtype="CARS" type="VEHICLES">
+      <vehicle han="1/4" acc="15" spdi="20" tspd="160" bod="7" arm="5" pil="2" sen="2" sea="4"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="life_safety_system" variant="level1"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="passenger_prot_system" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
+      </modifications>
+   </item>
+
+   <item id="krime_prowler" avail="8L"  price="145000" subtype="CARS" type="VEHICLES">
+      <vehicle han="3/5" acc="30" spdi="30" tspd="200" bod="8" arm="6" pil="2" sen="2" sea="5"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="gridlink"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="gun_ports"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="ram_plate"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="passenger_prot_system" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="road_strip_ejector"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="searchlight" variant="thermo"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="searchlight" variant="regular"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="distinctive_features" />
+		<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+		<valmod type="HOOK" ref="VEHICLE_CHASSIS" value="-5" />
+		<itemmod type="HOOK" ref="VEHICLE_POWERTRAIN" remove="true"/>
+	  </modifications>
+   </item>
+
+   <item id="krime_prowler" lang="de" avail="8L"  price="145000" subtype="CARS" type="VEHICLES">
+      <vehicle han="3/5" acc="30" spdi="30" tspd="200" bod="8" arm="6" pil="2" sen="2" sea="5"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="gridlink"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="gun_ports"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="ram_plate"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="searchlight" variant="thermo"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="searchlight" variant="regular"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="distinctive_features" />
+		<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+	  </modifications>
+   </item>
+
+   <item id="krime_detruck" avail="8L"  price="100000" subtype="TRUCKS" type="VEHICLES">
+      <vehicle han="4/4" acc="15" spdi="20" tspd="160" bod="9" arm="4" pil="2" sen="2" sea="3"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="middle"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="distinctive_features" />
+      </modifications>
+   </item>
+
+   <item id="krime_dix" avail="9"  price="200000" subtype="TRACKED" type="VEHICLES">
+      <vehicle han="4/3" acc="10" spdi="15" tspd="150" bod="10" arm="5" pil="3" sen="3" sea="30"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+		<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/>
+		<valmod type="HOOK" ref="VEHICLE_CF" value="4" /> <!-- Add 4 CF for open bed, as other trucks -->
+      </modifications>
+   </item>
+
+   <item id="krime_barco" avail="6"  price="50000" subtype="BOATS" type="VEHICLES">
+      <vehicle han="4" acc="10" spdi="10" tspd="120" bod="10" arm="3" pil="1" sen="1" sea="6"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="passenger_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="satellite_link"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/>
+      </modifications>
+   </item>
+
+   <item id="krime_tankette" avail="9I"  price="200000" subtype="TRACKED" type="VEHICLES">
+      <vehicle han="3/3" acc="10" spdi="10" tspd="100" bod="5" arm="10" pil="3" sen="3" sea="1"/>
+      <modifications>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="weapon_turret_heavy" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="weapon_turret_standard" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="searchlight" variant="thermo"/>
+		<valmod type="HOOK" ref="VEHICLE_CHASSIS" value="-1" />
+
+		<itemmod type="HOOK" ref="VEHICLE_ELECTRONICS" remove="true"/>
+		<itemmod type="HOOK" ref="VEHICLE_POWERTRAIN" remove="true"/>
+      </modifications>
+   </item>
+
+</items>
