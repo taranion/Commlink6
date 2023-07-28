@@ -170,6 +170,7 @@ public class Shadowrun6DataPlugin  {
 			//initLofwyrsLegions();
 			initOtherUS();
 			initKrime();
+			initCollapsing();
 			initDPAlpen();
 			initBerlin();
 			initDPFeuerläufer();
@@ -591,6 +592,18 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"krime/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+	}
+
+	//-------------------------------------------------------------------
+	private void initCollapsing() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------Collapsing Now-----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COLLAPSING_NOW", "collapsing_now.i18n", Locale.ENGLISH, Locale.GERMAN);
+		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz, "collapsing_now/data/adeptpowers.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"collapsing_now/data/gear_firearms.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
 	}
 
 	//-------------------------------------------------------------------

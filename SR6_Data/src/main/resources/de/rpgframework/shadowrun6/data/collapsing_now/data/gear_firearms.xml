@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+    <!-- Weapon -->
+
+   <item id="acidthrower_mimung" avail="5I" price="2000" type="WEAPON_SPECIAL" subtype="THROWERS">
+      <weapon dmg="3P" mode="SS" attack="14,10,6,," ammo="4(m)" skill="exotic_weapons" spec="exotic_weapons/spray"/>
+   </item>
+
+    <!-- Explosives -->
+
+	<item id="spore_grenade" avail="4I" price="50" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo />
+		<variant id="mini"/>
+	</item>
+	<item id="allergy_grenade" avail="4I" price="50" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo />
+		<variant id="mini"/>
+	</item>
+
+</items>
