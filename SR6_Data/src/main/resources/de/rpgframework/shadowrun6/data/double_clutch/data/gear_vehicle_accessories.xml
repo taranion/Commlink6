@@ -7,7 +7,7 @@
 	<item id="micro_torpedo_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS"> <!-- For proteus_krake, marine_silent_hunter -->
 		<weapon dmg="0P" attack=",8,8,3," mode="SS" ammo="4(c)" skill="exotic_weapons" spec="exotic_weapons/launchers"/> <!-- Errata needed: No info on ranges for micro launcher, using armtech_mgl6 -->
 	</item>
-		
+
  	<item id="vehicle_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" > <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter -->
 		<weapon dmg="0P" attack=",5,9,10,8" mode="SS" ammo="2(ml)" skill="exotic_weapons" spec="exotic_weapons/launchers" /> <!-- Errata needed: No info on ranges for launcher, using aztechnology_striker -->
 	</item>
@@ -331,7 +331,7 @@
 
    <item id="increased_integrity" avail="4" price="5000" type="MOD_CHASSIS" subtype="MOD_CORE"  > <!-- for later modification of vehicles -->
    	<choices>
-  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="$$BODY*1.5"/>
+  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="@BODY*1.5"/>
    	</choices>
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
    	<attrdef id="PRICE" value="$RATING*5000"/>
@@ -461,7 +461,7 @@
 
 
 <!-- Chassis - Interior Mods -->
-	
+
    <item id="amenities" avail="1" price="0" type="ACCESSORY" subtype="MOD_INTERIOR" reqVariant="true">
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
       <requires>
@@ -1183,7 +1183,7 @@
    </item>
 
 <!-- Hardpoint Devices - Weapon Mounts -->
-	
+
    <item id="weapon_mount_small" avail="3I" price="1500" type="MOD_HARD" subtype="MOD_MOUNT"  >
      	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
       <modifications>

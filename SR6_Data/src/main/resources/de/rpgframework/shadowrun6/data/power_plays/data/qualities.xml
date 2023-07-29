@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+	<quality id="firearm_diplomacy" karma="3" pos="false" type="NORMAL" />
+	<quality id="inside_contact" karma="12" pos="true" type="NORMAL">
+		<modifications>
+			<!--contmod infl="2" loyal="2" name="Knight Errant Contact"/ -->
+			<valmod type="CONTACT" ref="CORPORATE" value="2"/>
+		</modifications>
+	</quality>
+	<quality id="aztechnologiy_death_warrant" karma="10"
+		pos="false" type="NORMAL">
+		<modifications>
+      	<checkmod type="SKILL" ref="con" what="NOT_EARN_EDGE" value="1" apply="CHARACTER"/>
+      	<checkmod type="SKILL" ref="influence" what="NOT_EARN_EDGE" value="1" apply="CHARACTER"/>
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="blood_magic_resistance" karma="12" pos="true" type="NORMAL" />
+	<quality id="evo-insider" karma="4" pos="true" type="NORMAL" />
+	<quality id="revolutionary" karma="10" pos="true" type="NORMAL" />
+	<quality id="hipster" karma="6" pos="true" type="NORMAL">
+		<modifications>
+      	<checkmod type="SKILL" ref="con" what="EDGE" value="1" apply="CHARACTER" cond="y"/>
+      	<checkmod type="SKILL" ref="influence" what="EDGE" value="1" apply="CHARACTER" cond="y"/>
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="charismatic_defense" karma="12" pos="true" type="NORMAL">
+		<modifications>
+			<itemmod type="RULE" ref="CHARISMATIC_DEFENSE" />
+		</modifications>
+	</quality>
+	<quality id="mct_born_and_raised" karma="4" pos="true" type="NORMAL">
+		<modifications>
+      	<checkmod type="SKILL" ref="con" what="EDGE" value="1" apply="CHARACTER" cond="y"/>
+      	<checkmod type="SKILL" ref="influence" what="EDGE" value="1" apply="CHARACTER" cond="y"/>
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="zero-zone_mentality" karma="6" pos="false" type="NORMAL">
+		<modifications>
+      	<checkmod type="SKILL" ref="con" what="NOT_SPEND_EDGE" value="1" apply="CHARACTER" cond="y"/>
+      	<checkmod type="SKILL" ref="influence" what="NOT_SPEND_EDGE" value="1" apply="CHARACTER" cond="y"/>
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="networked_in" karma="4" pos="true" type="NORMAL">
+		<modifications>
+			<itemmod type="RULE" ref="CONTACT_RATING4_PLUS_1" />
+		</modifications>
+	</quality>
+	<quality id="honorbound_corporate_bushido" karma="10"
+		pos="false" type="NORMAL" />
+	<quality id="s-k_swagger" karma="5" pos="false" type="NORMAL">
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="survival_of_the_fittest_local" karma="2"
+		pos="true" type="NORMAL">
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="survival_of_the_fittest_regional" karma="4"
+		pos="true" type="NORMAL">
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="survival_of_the_fittest_global" karma="6"
+		pos="true" type="NORMAL">
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="human20" karma="25" pos="true" type="NORMAL">
+		<requires>
+			<metareq ref="human" />
+			<magresreq type="mundane" />
+		</requires>
+		<modifications>
+			<attrmod attr="CHARISMA" val="1" type="MAX" />
+			<attrmod attr="WILLPOWER" val="1" type="MAX" />
+			<edgemod skill="influence" type="USAGE" />
+		</modifications>
+	</quality>
+	<quality id="dog_on_a_leash" karma="8" pos="false" type="NORMAL" />
+	<quality id="shinto_summoner" karma="6" pos="true" type="NORMAL">
+		<requires>
+			<skillreq skill="conjuring" val="1"/>
+		</requires>
+		<modifications>
+			<skillmod ref="conjuring" val="1" cond="true" />
+		</modifications>
+	</quality>
+	<quality id="fashion_influencer" karma="5" pos="true" type="NORMAL">
+		<modifications>
+			<specrulemod ref="FASHION_50_PERCENT" />
+		</modifications>
+	</quality>
+	<quality id="social_outcast" karma="6" pos="false" type="NORMAL">
+		<modifications>
+			<edgemod skill="con" type="USAGE" />
+			<edgemod skill="influence" type="USAGE" />
+			<relevancemod topic="SOCIAL" />
+		</modifications>
+	</quality>
+	<quality id="we_ship_anywhere" karma="4" pos="true" type="NORMAL" />
+
+</qualities>
