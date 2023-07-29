@@ -99,21 +99,10 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		// Melee weapons
 		// Slot 2 is used for modifications
 		case MELEE_EXTERNAL    : index= 9; break;
-		// Firearms
+
+		// Ranged weapons
 		// Slot 2 is used for modifications
-		case UNDER             : index= 3; break;
-		case UNDER_WEAPON_MOUNT: index= 3; break; // Ok to overlap with UNDER as UNDER_WEAPON_MOUNT replaces UNDER
-		case STOCK             : index= 4; break;
-		// case INTERNAL          : index= 4; break; // This slot is no longer used
-		case WEAPON_SECURITY   : index= 5; break; // Overlaps with SIDE_R, ideally choice of WEAPON_SECURITY should be a mod inside the modification, not a new slot
-		case SIDE_R            : index= 5; break;
-		case SIDE_L            : index= 6; break;
-		// case SMARTGUN          : index= 6; break; // This slot is no longer used
-		case OPTICAL           : index= 8; break; // Created by smartgun_system, also affects ELECTRONICS OPTICAL
-//		case RANGED_EXTERNAL   : index= 9; break;
-		case FIREARMS_EXTERNAL : index= 9; break;
-		case TOP               : index=10; break;
-		case BARREL            : index=11; break;
+		case RANGED_EXTERNAL   : index= 9; break;
 
 		// Armor
 		case ARMOR             : index= 2; break;
@@ -129,35 +118,48 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case CYBEREYE_IMPLANT   : index= 8; break;
 		case CYBEREAR_IMPLANT   : index= 9; break;
 
-		// Vehicles
-//		case VEHICLE_PROTECTION : index= 3; break;
-		case VEHICLE_CHASSIS    : index= 2; break;
-		case VEHICLE_ELECTRONICS: index= 3; break;
-		case VEHICLE_POWERTRAIN : index= 4; break;
-		// note: SOFTWARE_DRONE uses slot 5, see Kommlinks
-		case VEHICLE_TIRES      : index= 5; break;
-		case VEHICLE_ACCESSORY  : index= 8; break;
-		case VEHICLE_HARDPOINT  : index= 1; break;
-		case VEHICLE_CF         : index=10; break; // place for VEHICLE_WEAPON not needed, as those are inside hardpoints (VEHICLE_BODY)
-//		case VEHICLE_COSMETICS  : index=11; break;
-
 		// Kommlinks/Rigger Consoles/Decks/Tac-Nets
 		case ELECTRONIC_ACCESSORY: index= 3; break;
 		case SOFTWARE            : index= 8; break;
 
 		// Devices
-		// note: OPTICAL uses slot 8, see Firearms
-		case AUDIO             : index= 9; break;
 		case SENSOR_HOUSING    : index= 2; break;
 		case SENSOR_FUNCTION   : index= 3; break;
+		case PROCAM_SLOT       : index= 4; break;
+		case OPTICAL           : index= 8; break;
+		case AUDIO             : index= 9; break;
 
 		// Instruments
 		case INSTRUMENT_SLOT  : index= 2; break;
 		case INSTRUMENT_WEAPON: index= 9; break;
 
-		// Procam
-		// note: OPTICAL uses slot 8, see Firearms
-		case PROCAM_SLOT      : index= 3; break;
+		// Firearms
+		// Slot 2 is used for modifications
+		case UNDER             : index= 3; break;
+		case UNDER_WEAPON_MOUNT: index= 3; break; // Ok to overlap with UNDER as UNDER_WEAPON_MOUNT replaces UNDER
+		case STOCK             : index= 4; break;
+		case SIDE_R            : index= 5; break;
+		//case WEAPON_SECURITY   : index= 5; break; // Overlaps with SIDE_R, should be a mod (pen symbol) inside the modification, not a new slot
+		case SIDE_L            : index= 6; break;
+		case INTERNAL          : index= 8; break;
+		//case OPTICAL           : index= 8; break; // Created by smartgun_system, should be a mod (pen symbol) inside smartgun, not a new slot
+		case FIREARMS_EXTERNAL : index= 9; break;
+		case TOP               : index=10; break;
+		case BARREL            : index=11; break;
+
+		// Vehicles
+		case VEHICLE_CHASSIS    : index= 2; break;
+		case VEHICLE_ELECTRONICS: index= 3; break;
+		case VEHICLE_POWERTRAIN : index= 4; break;
+		case VEHICLE_TIRES      : index= 5; break;
+		case VEHICLE_ACCESSORY  : index= 6; break;
+		// SOFTWARE uses slot 8, see Kommlinks
+		case VEHICLE_HARDPOINT  : index= 9; break;
+		case VEHICLE_CF         : index=10; break; 
+		// slot 11 used for modslot circle (body, powertrain, electrical)
+		// slot for VEHICLE_WEAPON not needed, as those are inside hardpoints (VEHICLE_BODY)
+		
+
 		default:
 			logger.log(Level.WARNING, "No defined slot for {0}",slot.getHook());
 		}
