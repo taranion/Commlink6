@@ -21,6 +21,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.shadowrun.FocusValue;
@@ -430,6 +431,9 @@ public class ItemUtilJFX {
 	//-------------------------------------------------------------------
 	private static Label getItemAttributeLabel(CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
 		Label ret = new Label("?");
+		if (!item.hasAttribute(attr))
+			return ret;
+
 		Object obj = null;
 		switch (attr) {
 		case AMMUNITION:
@@ -441,8 +445,12 @@ public class ItemUtilJFX {
 			ret.setText(String.valueOf( (Availability)obj));
 			break;
 		case ATTACK_RATING:
-			obj = item.getAsObject(attr).getModifiedValue();
-			ret.setText(Shadowrun6Tools.getAttackRatingString( (int[])obj));
+			if (item.getAttributeRaw(attr) instanceof ItemAttributeObjectValue) {
+				obj = item.getAsObject(attr).getModifiedValue();
+				ret.setText(Shadowrun6Tools.getAttackRatingString( (int[])obj));
+			} else {
+				ret.setText( String.valueOf( item.getAsValue(attr).getModifiedValue() ));
+			}
 			break;
 		case PRICE:
 			int ny = item.getAsValue(attr).getModifiedValue();
