@@ -18,5 +18,6 @@
     	<Logger name="de.rpgframework.genericrpg" level="ERROR"/>
     	<Logger name="de.rpgframework.shadowrun6.items" level="ERROR"/>
     	<Logger name="de.rpgframework.shadowrun6.proc" level="WARN"/>
+    	<Logger name="commlink6.updater" level="DEBUG"/>
 	</Loggers>
 </Configuration>
