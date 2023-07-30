@@ -1256,7 +1256,7 @@ public class Shadowrun6Tools {
 		String[] ratings = new String[attackRating.length];
 		for (int i=0; i<ratings.length; i++) {
 			int val = attackRating[i];
-			if (val>0)
+			if (val!=0)
 				ratings[i] = String.valueOf(val);
 			else
 				ratings[i] = "-";
