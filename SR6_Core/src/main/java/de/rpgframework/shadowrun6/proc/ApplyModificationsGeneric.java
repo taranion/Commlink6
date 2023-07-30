@@ -255,7 +255,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				logger.log(Level.DEBUG, "Resolved gear {0} from definitions in character", mod.getKey());
 			}
 		}
-		logger.log(Level.WARNING, "applyGear "+mod);
+		logger.log(Level.DEBUG, "applyGear {0}",mod);
 		SR6PieceOfGearVariant variant = null;
 		if (mod.getVariant()!=null) {
 			variant = (SR6PieceOfGearVariant) item.getVariant(mod.getVariant());

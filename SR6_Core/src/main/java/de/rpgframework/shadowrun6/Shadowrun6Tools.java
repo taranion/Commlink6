@@ -1183,6 +1183,12 @@ public class Shadowrun6Tools {
 				} else {
 					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value.getKey());
 					System.err.println("Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value);
+					try {
+						throw new RuntimeException("Trace");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value.getKey());
 					clone.setKey(null);
 				}
