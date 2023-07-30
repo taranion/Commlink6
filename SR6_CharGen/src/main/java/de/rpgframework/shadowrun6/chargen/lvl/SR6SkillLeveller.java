@@ -430,12 +430,14 @@ public class SR6SkillLeveller extends CommonSkillController {
 
 				DataItemModification mod = (DataItemModification) _mod;
 				SR6Skill key = mod.getResolvedKey();
-				SR6SkillValue val = getModel().getSkillValue(key);
 				if (mod.isConditional()) {
 					logger.log(Level.DEBUG, "Add conditional modification {0} to {1}", mod, key);
 				} else {
 					logger.log(Level.DEBUG, "Add modification {0} to {1}", mod, key);
 				}
+				SR6SkillValue val = getModel().getSkillValue(key);
+				if (val==null)
+					continue;
 				val.addModification(mod);
 				if ((mod instanceof ValueModification) && ((ValueModification)mod).getSet() == ValueType.MAX) {
 					logger.log(Level.INFO, "Changed maximum of {0} to {1}", key, val.getModifiedValue(ValueType.MAX));
