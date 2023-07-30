@@ -131,7 +131,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT)) {
 			if (strARMod!=null && item.getUuid()!=ItemTemplate.UUID_UNARMED) {
 				item.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(strARMod);
-				logger.log(Level.ERROR, "Add {0} to attack rating for {1}", strARMod, item.getKey());
+				logger.log(Level.TRACE, "Add {0} to attack rating for {1}", strARMod, item.getKey());
 			}
 			ItemSubType subtype = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
 			switch (subtype) {
@@ -139,7 +139,6 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			case CLUBS:
 			case UNARMED:
 				if (strDMGBonus!=null) {
-					System.out.println("CalculateMelee: "+item.getAttributeRaw(SR6ItemAttribute.DAMAGE).getClass());
 					item.getAsObject(SR6ItemAttribute.DAMAGE).addModification(strDMGBonus);
 					logger.log(Level.ERROR, "Add {0} to damage for {1}", strDMGBonus, item.getKey());
 				}

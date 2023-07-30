@@ -81,6 +81,8 @@ import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.Ritual;
+import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
@@ -822,6 +824,12 @@ public class Shadowrun6Tools {
 				SR6Spell resolved = Shadowrun6Core.getItem(SR6Spell.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
+			logger.log(Level.DEBUG, "resolve rituals");
+			for (RitualValue tmp : model.getRituals()) {
+				tmp.setCharacter(model);
+				Ritual resolved = Shadowrun6Core.getItem(Ritual.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
 			logger.log(Level.DEBUG, "resolve complex forms");
 			for (ComplexFormValue tmp : model.getComplexForms()) {
 				tmp.setCharacter(model);
@@ -1175,6 +1183,12 @@ public class Shadowrun6Tools {
 				} else {
 					logger.log(Level.ERROR, "No decision for {0} found in {1}", uuid, value.getKey());
 					System.err.println("Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value);
+					try {
+						throw new RuntimeException("Trace");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Shadowrun6Tools.instantiate: No decision for "+uuid+" found in "+value.getKey());
 					clone.setKey(null);
 				}
@@ -1248,7 +1262,7 @@ public class Shadowrun6Tools {
 		String[] ratings = new String[attackRating.length];
 		for (int i=0; i<ratings.length; i++) {
 			int val = attackRating[i];
-			if (val>0)
+			if (val!=0)
 				ratings[i] = String.valueOf(val);
 			else
 				ratings[i] = "-";
@@ -1736,7 +1750,11 @@ public class Shadowrun6Tools {
 		}
 
 		SR6Skill skill = (SR6Skill) item.getAsObject(SR6ItemAttribute.SKILL).getValue();
-		SkillSpecialization<SR6Skill> spec = (SkillSpecialization<SR6Skill>) item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getValue();
+		ItemAttributeObjectValue<SR6ItemAttribute> aSpec = item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION);
+		if (aSpec==null) {
+			logger.log(Level.ERROR, "No SKILL_SPECIALIZATION attribute for weapon {0}", item.getNameWithoutRating());
+		}
+		SkillSpecialization<SR6Skill> spec = (aSpec!=null)?(SkillSpecialization<SR6Skill>) aSpec.getValue():null;
 		if (spec!=null)
 			pool = getSkillPool(model, skill, spec.getId());
 		else

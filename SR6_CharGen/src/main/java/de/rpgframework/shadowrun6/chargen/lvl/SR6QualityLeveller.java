@@ -69,7 +69,7 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 	 */
 	@Override
 	public String getSelectionCostString(Quality data) {
-		return String.valueOf(getSelectionCostString(data));
+		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------

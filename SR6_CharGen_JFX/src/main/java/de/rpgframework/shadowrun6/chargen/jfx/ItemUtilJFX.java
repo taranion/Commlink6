@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +22,7 @@ import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.shadowrun.FocusValue;
@@ -248,7 +250,11 @@ public class ItemUtilJFX {
 
 		GridPane table = new GridPane();
 
-		Choice chRating = item.getChoice("RATING");
+		Choice chRating = item.getChoice(ItemTemplate.UUID_RATING);
+		if (chRating==null)
+			chRating = item.getChoice("RATING");
+		System.err.println("ItemUtilJFX: Choice = "+chRating);
+
 		int[] ratings = null;
 		if (chRating!=null) {
 			if (chRating.getChoiceOptions()!=null) {
@@ -262,8 +268,10 @@ public class ItemUtilJFX {
 					ratings[i] = i+1;
 			}
 		}
+		logger.log(Level.WARNING, "ratings = "+Arrays.toString(ratings));
 
 		List<AGearData> possibilities = item.getPossibilities(carry);
+		logger.log(Level.WARNING, "possibilities of {0} = {1}", carry,possibilities);
 		if (possibilities.isEmpty())
 			throw new IllegalArgumentException("CarryMode "+carry+" is not possible in "+item.getId());
 
@@ -430,6 +438,9 @@ public class ItemUtilJFX {
 	//-------------------------------------------------------------------
 	private static Label getItemAttributeLabel(CarriedItem<ItemTemplate> item, SR6ItemAttribute attr) {
 		Label ret = new Label("?");
+		if (!item.hasAttribute(attr))
+			return ret;
+
 		Object obj = null;
 		switch (attr) {
 		case AMMUNITION:
@@ -441,8 +452,12 @@ public class ItemUtilJFX {
 			ret.setText(String.valueOf( (Availability)obj));
 			break;
 		case ATTACK_RATING:
-			obj = item.getAsObject(attr).getModifiedValue();
-			ret.setText(Shadowrun6Tools.getAttackRatingString( (int[])obj));
+			if (item.getAttributeRaw(attr) instanceof ItemAttributeObjectValue) {
+				obj = item.getAsObject(attr).getModifiedValue();
+				ret.setText(Shadowrun6Tools.getAttackRatingString( (int[])obj));
+			} else {
+				ret.setText( String.valueOf( item.getAsValue(attr).getModifiedValue() ));
+			}
 			break;
 		case PRICE:
 			int ny = item.getAsValue(attr).getModifiedValue();

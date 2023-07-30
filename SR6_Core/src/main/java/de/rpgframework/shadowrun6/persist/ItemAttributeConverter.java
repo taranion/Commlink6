@@ -2,7 +2,9 @@ package de.rpgframework.shadowrun6.persist;
 
 import org.prelle.simplepersist.StringValueConverter;
 
+import de.rpgframework.genericrpg.data.ReferenceException;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -25,7 +27,11 @@ public class ItemAttributeConverter implements StringValueConverter<SR6ItemAttri
 	 */
 	@Override
 	public SR6ItemAttribute read(String idref) throws Exception {
-		return SR6ItemAttribute.valueOf(idref.toUpperCase());
+		try {
+			return SR6ItemAttribute.valueOf(idref.toUpperCase());
+		} catch (IllegalArgumentException e) {
+			throw new ReferenceException(ShadowrunReference.ITEM_ATTRIBUTE, idref);
+		}
 	}
 
 }

@@ -241,7 +241,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		}
 
 		Possible possible = null;
-		logger.log(Level.INFO, "call canBeSelected on "+ctrl);
+		logger.log(Level.INFO, "call canBeSelected on "+ctrl.getClass().getSimpleName()+" with "+Arrays.toString(getDecisions()));
 		if (item instanceof ItemTemplate && ctrl instanceof ISR6EquipmentController) {
 			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
 			possible = ((ISR6EquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, carry, getDecisions() );
@@ -985,6 +985,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			List<String> ids = List.of(choice.getChoiceOptions());
 			cbMentor.getItems().addAll(
 					Shadowrun6Core.getItemList(MentorSpirit.class).stream()
+						.filter(s -> ctrl.getCharacterController().showDataItem(s))
 						.filter(s -> ids.contains(s.getId()))
 						.filter(s -> s.getType()==type)
 						.filter(Shadowrun6Tools.filterByLanguage(Locale.getDefault()))
@@ -1054,6 +1055,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				decisions.put(magicianOrAdept, new Decision(magicianOrAdept, n.getId()));
 				chooseAdeptAdvantages.setValue (n!=null && n.usesPowers());
 			});
+			cbMagOrAdp.getSelectionModel().select(0);
 		}
 
 		return cbMentor;

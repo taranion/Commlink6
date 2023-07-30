@@ -93,6 +93,20 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			logger.log(Level.DEBUG, "  requires resolving: "+mod.getFormula());
 			String result = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, (FormulaImpl) mod.getFormula(), new VariableResolver(model, charac));
 			logger.log(Level.DEBUG, "  resolved to "+result);
+			// Follow table
+			if (mod.getLookupTable()!=null) {
+				int index = 1;
+				try { index = Integer.parseInt(result); } catch (NumberFormatException nfe) {
+					logger.log(Level.ERROR, "Found a table in {1}, but index is not a number: {0}",result, mod);
+				}
+				if (index>=mod.getLookupTable().length) {
+					logger.log(Level.ERROR, "Found a table in {1}, but index {0} is outside table",index, mod);
+					index = mod.getLookupTable().length;
+				}
+				index--;
+				result = String.valueOf(mod.getLookupTable()[index]);
+				logger.log(Level.DEBUG, "  using table resolved to "+result);
+			}
 			mod.setValue(result);
 			mod.getFormula().isResolved();
 			logger.log(Level.DEBUG, "  Resolve "+mod.getFormula()+" to "+result+" and add "+mod);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mentorspirits>
-  <mentorspirit id="autobahn">
+  <mentorspirit id="autobahn" lang="de">
 		<similarNames>
 			<similar>rennfahrer</similar>
 			<similar>wanderfalke</similar>
@@ -16,7 +16,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="badger" >
+  <mentorspirit id="badger" lang="de">
 		<similarNames>
 			<similar>gardist</similar>
 			<similar>schaefer</similar>
@@ -32,7 +32,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="elektromarder" >
+  <mentorspirit id="elektromarder" lang="de" >
 		<similarNames>
 			<similar>blitz</similar>
 			<similar>technocritter</similar>
@@ -58,7 +58,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="fuchs" >
+  <mentorspirit id="fuchs" lang="de">
     <modifications>
 		<checkmod type="SKILL" ref="stealth" value="-1" what="EDGE_BOOST" />
     </modifications>
@@ -71,7 +71,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="gezeiten">
+  <mentorspirit id="gezeiten" lang="de">
 		<similarNames>
 			<similar>gletscher</similar>
 			<similar>wandel</similar>
@@ -96,7 +96,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="heinzelmaennchen" >
+  <mentorspirit id="heinzelmaennchen" lang="de">
 		<similarNames>
 			<similar>hausgeist</similar>
 			<similar>helfende_hand</similar>
@@ -114,7 +114,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="moewe" >
+  <mentorspirit id="moewe" lang="de">
 		<similarNames>
 			<similar>ueberlebenskuenstler</similar>
 			<similar>vagabund</similar>
@@ -179,7 +179,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="murmeltier" >
+  <mentorspirit id="murmeltier" lang="de">
 		<similarNames>
 			<similar>praeriehund</similar>
 		</similarNames>
@@ -194,7 +194,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="myst_waechter" >
+  <mentorspirit id="myst_waechter" lang="de">
 		<similarNames>
 			<similar>falke</similar>
 			<similar>leibwaechter</similar>
@@ -211,7 +211,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="robbe" >
+  <mentorspirit id="robbe" lang="de">
 		<similarNames>
 			<similar>nymphe</similar>
 			<similar>spiegelwelten</similar>
@@ -227,7 +227,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="rotkaeppchen" >
+  <mentorspirit id="rotkaeppchen" lang="de">
 		<similarNames>
 			<similar>unschuld</similar>
 			<similar>ziege</similar>
@@ -246,7 +246,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="steinbock" >
+  <mentorspirit id="steinbock" lang="de">
 		<similarNames>
 			<similar>entschlossenheit</similar>
 			<similar>widder</similar>
@@ -262,7 +262,7 @@
     </adept>
   </mentorspirit>
 
-  <mentorspirit id="storch" >
+  <mentorspirit id="storch" lang="de">
 		<similarNames>
 			<similar>fuersorge</similar>
 			<similar>treue</similar>

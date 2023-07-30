@@ -374,4 +374,31 @@ public class ProblemItemTest {
 		assertEquals(0.5f, slot.getUsedCapacity(), 0);
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void itemWithTableMod() throws IOException {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "cyberears");
+		assertNotNull("infostick (Street Wyrd) not found", item);
+
+		Choice choice = item.getChoice(ItemTemplate.UUID_RATING);
+		assertNotNull(choice);
+		assertEquals(ShadowrunReference.ITEM_ATTRIBUTE,choice.getChooseFrom());
+		assertNotNull(choice.getChoiceOptions());
+		assertEquals(5,choice.getChoiceOptions().length);
+
+		Choice choice2 = new Choice(ItemTemplate.UUID_AUGMENTATION_QUALITY, null);
+
+		// New normal item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.IMPLANTED, null,null, true,
+				new Decision(choice , "4"),
+				new Decision(choice2, "STANDARD")
+				);
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+		assertEquals(7500, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals(12, carried.getAsValue(SR6ItemAttribute.CAPACITY).getModifiedValue());
+
+	}
+
 }

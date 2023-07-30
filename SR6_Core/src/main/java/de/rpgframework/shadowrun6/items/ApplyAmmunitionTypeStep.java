@@ -14,12 +14,15 @@ import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.genericrpg.persist.IntegerArrayConverter;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.persist.AttackRatingArrayConverter;
 
 /**
  * @author prelle
@@ -76,8 +79,15 @@ public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
 								SR6ItemAttribute key = valMod.getResolvedKey();
 								ItemAttributeValue<SR6ItemAttribute> attrib2 = (ItemAttributeValue<SR6ItemAttribute>) model.getAttributeRaw(key);
 								if (attrib2==null) {
-									logger.log(Level.ERROR, "####"+ valMod.getRawValue());
-									model.setAttribute(key, attrib);
+									// Item Attribute value does not yet exist
+									attrib2 = new ItemAttributeNumericalValue<SR6ItemAttribute>(key, valMod.getValue());
+									try {
+										if (key==SR6ItemAttribute.ATTACK_RATING)
+											attrib2 = new ItemAttributeObjectValue<>(key, (new AttackRatingArrayConverter()).read(valMod.getRawValue()));
+									} catch (Exception e) {
+										logger.log(Level.ERROR, "Failed converting attack rating: "+valMod.getRawValue(),e);
+									}
+									model.setAttribute(key, attrib2);
 								} else {
 									logger.log(Level.DEBUG, "Add modification {0} to {1}", mod, attrib2);
 									attrib2.addModification(mod);
