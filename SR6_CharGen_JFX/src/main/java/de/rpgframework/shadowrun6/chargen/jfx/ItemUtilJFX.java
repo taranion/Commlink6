@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.jfx;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -249,7 +250,11 @@ public class ItemUtilJFX {
 
 		GridPane table = new GridPane();
 
-		Choice chRating = item.getChoice("RATING");
+		Choice chRating = item.getChoice(ItemTemplate.UUID_RATING);
+		if (chRating==null)
+			chRating = item.getChoice("RATING");
+		System.err.println("ItemUtilJFX: Choice = "+chRating);
+
 		int[] ratings = null;
 		if (chRating!=null) {
 			if (chRating.getChoiceOptions()!=null) {
@@ -263,8 +268,10 @@ public class ItemUtilJFX {
 					ratings[i] = i+1;
 			}
 		}
+		logger.log(Level.WARNING, "ratings = "+Arrays.toString(ratings));
 
 		List<AGearData> possibilities = item.getPossibilities(carry);
+		logger.log(Level.WARNING, "possibilities of {0} = {1}", carry,possibilities);
 		if (possibilities.isEmpty())
 			throw new IllegalArgumentException("CarryMode "+carry+" is not possible in "+item.getId());
 
