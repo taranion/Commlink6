@@ -7,7 +7,7 @@
 
 	<ammotype id="apds" cmult="3">
 		<modifications>
-			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2" apply="DATA_ITEM"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2" apply="DATA_ITEM"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-1" apply="DATA_ITEM"/>
 		</modifications>
 	</ammotype>
@@ -20,7 +20,7 @@
 
 	<ammotype id="flechette" cmult="1.5">
 		<modifications>
-			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-1"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-1,-1,-1,-1,-1"/>
 			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-1"/>
 		</modifications>
 	</ammotype>
