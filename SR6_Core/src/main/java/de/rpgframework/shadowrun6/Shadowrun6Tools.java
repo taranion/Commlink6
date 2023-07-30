@@ -1736,7 +1736,11 @@ public class Shadowrun6Tools {
 		}
 
 		SR6Skill skill = (SR6Skill) item.getAsObject(SR6ItemAttribute.SKILL).getValue();
-		SkillSpecialization<SR6Skill> spec = (SkillSpecialization<SR6Skill>) item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getValue();
+		ItemAttributeObjectValue<SR6ItemAttribute> aSpec = item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION);
+		if (aSpec==null) {
+			logger.log(Level.ERROR, "No SKILL_SPECIALIZATION attribute for weapon {0}", item.getNameWithoutRating());
+		}
+		SkillSpecialization<SR6Skill> spec = (aSpec!=null)?(SkillSpecialization<SR6Skill>) aSpec.getValue():null;
 		if (spec!=null)
 			pool = getSkillPool(model, skill, spec.getId());
 		else
