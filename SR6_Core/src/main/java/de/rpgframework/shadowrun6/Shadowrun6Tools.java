@@ -81,6 +81,8 @@ import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.Ritual;
+import de.rpgframework.shadowrun.RitualValue;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
@@ -820,6 +822,12 @@ public class Shadowrun6Tools {
 			for (SpellValue tmp : model.getSpells()) {
 				tmp.setCharacter(model);
 				SR6Spell resolved = Shadowrun6Core.getItem(SR6Spell.class, tmp.getKey());
+				tmp.setResolved(resolved);
+			}
+			logger.log(Level.DEBUG, "resolve rituals");
+			for (RitualValue tmp : model.getRituals()) {
+				tmp.setCharacter(model);
+				Ritual resolved = Shadowrun6Core.getItem(Ritual.class, tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve complex forms");
