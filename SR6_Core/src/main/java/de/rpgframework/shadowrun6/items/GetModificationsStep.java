@@ -93,6 +93,11 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			logger.log(Level.DEBUG, "  requires resolving: "+mod.getFormula());
 			String result = FormulaTool.resolve(ShadowrunReference.ITEM_ATTRIBUTE, (FormulaImpl) mod.getFormula(), new VariableResolver(model, charac));
 			logger.log(Level.DEBUG, "  resolved to "+result);
+			// Follow table
+			if (mod.getLookupTable()!=null) {
+				result = String.valueOf(mod.getLookupTable()[Integer.parseInt(result)-1]);
+				logger.log(Level.DEBUG, "  using table resolved to "+result);
+			}
 			mod.setValue(result);
 			mod.getFormula().isResolved();
 			logger.log(Level.DEBUG, "  Resolve "+mod.getFormula()+" to "+result+" and add "+mod);
