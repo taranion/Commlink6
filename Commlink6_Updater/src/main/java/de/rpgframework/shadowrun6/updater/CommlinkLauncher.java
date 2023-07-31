@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.update4j.Configuration;
+import org.update4j.DynamicClassLoader;
 import org.update4j.LaunchContext;
 import org.update4j.service.DefaultLauncher;
 import org.update4j.service.Launcher;
@@ -86,7 +87,9 @@ public class CommlinkLauncher extends DefaultLauncher implements Launcher {
             }
 
             try {
-                Class<?> clazz = context.getClassLoader().loadClass(mainClass);
+            	DynamicClassLoader loader = new DynamicClassLoader(context.getClassLoader());
+                //Class<?> clazz = context.getClassLoader().loadClass(mainClass);
+                Class<?> clazz = loader.loadClass(mainClass);
 
                 // first check for JavaFx start method
                 Class<?> javafx = null;
@@ -101,7 +104,8 @@ public class CommlinkLauncher extends DefaultLauncher implements Launcher {
                 String[] argsArray = localArgs.toArray(new String[localArgs.size()]);
                 if (javafx != null && javafx.isAssignableFrom(clazz)) {
                 	try {
-						EdenSettings.setupDirectories("CommLink6");
+                		loader.loadClass("de.rpgframework.eden.client.jfx.EdenSettings").getMethod("setupDirectories", String.class).invoke(null,"CommLink6");
+						//EdenSettings.setupDirectories("CommLink6");
                 		logger.log(Level.DEBUG, "Call "+clazz.getName()+".<init>");
 						javafx.application.Application app = (Application)clazz.getConstructor().newInstance();
 						Platform.runLater( () -> {
@@ -115,8 +119,7 @@ public class CommlinkLauncher extends DefaultLauncher implements Launcher {
 								app.init();
 								app.start(primaryStage);
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								logger.log(Level.ERROR, "Error executing business application",e);
 							}
 						});
 					} catch (Exception e) {
