@@ -41,6 +41,7 @@ public class EssenceSection extends Section {
 
 	private Label hdAcclimation;
 	private Label hdTranshumanism;
+	private Label lbEssenceHoleArt;
 	private Label lbEssenceHole;
 	private Label lbEssenceLost;
 	private Label lbEssenceRemain;
@@ -70,6 +71,7 @@ public class EssenceSection extends Section {
 		nfAcclimation   = new NumericalValueField<Quality,QualityValue>();
 		nfTranshumanism = new NumericalValueField<MetamagicOrEcho,MetamagicOrEchoValue>();
 		lbEssenceHole   = new Label("?");
+		lbEssenceHoleArt= new Label("?");
 		lbEssenceLost   = new Label("?");
 		lbEssenceRemain = new Label("?");
 	}
@@ -79,21 +81,24 @@ public class EssenceSection extends Section {
 		hdAcclimation   = new Label(ResourceI18N.get(RES, "page.augmentation.section.essence.acclimation"));
 		hdTranshumanism = new Label(ResourceI18N.get(RES, "page.augmentation.section.essence.transhumanism"));
 		Label hdEssenceHole   = new Label(ResourceI18N.get(RES, "page.augmentation.section.essence.essHole"));
+		Label hdEssenceHoleArt= new Label(ResourceI18N.get(RES, "page.augmentation.section.essence.essHoleArtificial"));
 		Label hdEssenceLost   = new Label(ResourceI18N.get(RES, "page.augmentation.section.essence.essLost"));
 		Label hdEssenceRemain = new Label(ResourceI18N.get(RES, "page.augmentation.section.essence.essRemain"));
 		grid = new GridPane();
 		grid.setVgap(10);
 		grid.setHgap(5);
-		grid.add(hdAcclimation, 0, 0);
-		grid.add(nfAcclimation, 1, 0);
-		grid.add(hdTranshumanism, 0, 1);
-		grid.add(nfTranshumanism, 1, 1);
-		grid.add(hdEssenceHole  , 0, 2);
-		grid.add(lbEssenceHole  , 1, 2);
-		grid.add(hdEssenceLost  , 0, 3);
-		grid.add(lbEssenceLost  , 1, 3);
-		grid.add(hdEssenceRemain, 0, 4);
-		grid.add(lbEssenceRemain, 1, 4);
+		grid.add(hdAcclimation   , 0, 0);
+		grid.add(nfAcclimation   , 1, 0);
+		grid.add(hdTranshumanism , 0, 1);
+		grid.add(nfTranshumanism , 1, 1);
+		grid.add(hdEssenceHoleArt, 0, 2);
+		grid.add(lbEssenceHoleArt, 1, 2);
+		grid.add(hdEssenceHole  , 0, 3);
+		grid.add(lbEssenceHole  , 1, 3);
+		grid.add(hdEssenceLost  , 0, 4);
+		grid.add(lbEssenceLost  , 1, 4);
+		grid.add(hdEssenceRemain, 0, 5);
+		grid.add(lbEssenceRemain, 1, 5);
 	}
 
 	//-------------------------------------------------------------------
@@ -151,15 +156,17 @@ public class EssenceSection extends Section {
 		hdTranshumanism.setVisible(allowTransh);
 
 		lbEssenceLost.setText(String.valueOf( ((double)model.getEssenceCost())/1000.0));
+		lbEssenceHole.setText(String.valueOf( ((double)model.getEssenceHoleUnused())/1000.0));
 		// Essence
-		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ESSENCE);
-		if (val != null) {
-			if (val != null)
-				lbEssenceRemain.setText(String.valueOf(val.getModifiedValue() / 1000.0));
-			// Essence hole
-			val = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
-			if (val != null)
-				lbEssenceHole.setText(String.valueOf(val.getModifiedValue() / 1000.0));
+		AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);
+		AttributeValue<ShadowrunAttribute> essHol = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
+		if (essVal != null) {
+			lbEssenceRemain.setText(String.valueOf(essVal.getModifiedValue() / 1000.0));
+		}
+		if (essHol!=null) {
+			lbEssenceHoleArt.setText(String.valueOf( essHol.getModifiedValue()/1000.0));
+		} else {
+			lbEssenceHoleArt.setText("-");
 		}
 	}
 }

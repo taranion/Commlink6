@@ -6,20 +6,25 @@ import java.util.List;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 
@@ -93,21 +98,19 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 				// Pay essence
 				if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
 					double essenceCost = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
-					int essHole = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE).getModifiedValue();
+					logger.log(Level.ERROR, "Need to pay {0} essence ", essenceCost);
+					int toPay = (int)(essenceCost *1000);
+					int essHole = model.getEssenceHoleUnused();
 					if (essHole>0) {
-						double essHole2 = (double)essHole / 2.0;
-						if (essHole2>essenceCost) {
+						if (essHole>toPay) {
 							// Pay fully by reducing essence hole
-							essHole2 -= essenceCost;
-							logger.log(Level.INFO, "Fully pay {0} essence by reducing essence hole to {1}", essenceCost, essHole2);
-							model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE).setDistributed((int)(essHole2*1000));
-							essenceCost = 0;
-						} else if (essHole2>0){
-							double orig = essenceCost;
-							essenceCost -= essHole2;
-							logger.log(Level.INFO, "Partially pay {0} essence by reducing essence hole to 0 and pay remaining {1}", orig, essenceCost);
+							model.setEssenceHoleUnsed( essHole - toPay);
+							logger.log(Level.ERROR, "Fully pay {0} essence by reducing essence hole to {1}", essenceCost, model.getEssenceHoleUnused());
 						} else {
-							logger.log(Level.INFO, "Pay {0} ", essenceCost);
+							// Partial pay
+							toPay -= model.getEssenceHoleUnused();
+							model.setEssenceHoleUnsed(0);
+							logger.log(Level.ERROR, "Partially pay {0} essence by reducing essence hole to 0 and pay remaining {1}", toPay, essenceCost);
 						}
 					}
 				}
@@ -139,6 +142,15 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 			logger.log(Level.INFO, "Sell {0} for {1} nuyen", value.getKey(), nuyen);
 
 			model.setNuyen( model.getNuyen() + nuyen );
+
+			// Eventually handle essence
+			if (value.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
+				ItemAttributeFloatValue<SR6ItemAttribute> val = value.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+				logger.log(Level.WARNING, "\n\n\n\nAdd an essence hole of {0}", val.getModifiedValue());
+				// Add to essence hole
+				model.setEssenceHoleUnsed((int)val.getModifiedValue()*1000);
+			}
+
 			parent.runProcessors();
 			return true;
 		} finally {
