@@ -64,9 +64,12 @@ public class CalculateAccessorySizes implements CarriedItemProcessor {
 				} else {
 					VariableResolver resolver = new VariableResolver(accessory, charac);
 					String resolved = FormulaTool.resolve(refType, usage.getFormula(), resolver);
-					logger.log(Level.DEBUG, "Resolved {0}", resolved);
-					size = Math.round(Float.parseFloat(resolved));
-					logger.log(Level.DEBUG, "Resolved Size is {0}", size);
+					if (resolved==null) {
+						logger.log(Level.ERROR, "Resolved size {0} of {1} to {2}", usage.getFormula(), accessory.getKey(), resolved);
+					} else {
+						size = Math.round(Float.parseFloat(resolved));
+						logger.log(Level.DEBUG, "Resolved Size is {0}", size);
+					}
 				}
 			}
 
