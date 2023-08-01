@@ -262,7 +262,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 				Quality item = val.getModifyable();
 				int cost = getKarmaCost(val);
 				// Don't pay auto-added qualities or quality levels
-				logger.log(Level.WARNING, "Quality {0} level={1}  auto={2}  distr={3}", item.getId(), item.hasLevel(),  val.isAutoAdded(), val.getDistributed());
+				logger.log(Level.DEBUG, "Quality {0} level={1}  auto={2}  distr={3}", item.getId(), item.hasLevel(),  val.isAutoAdded(), val.getDistributed());
 				if (cost != 0) {
 					if (item.isPositive()) {
 						if (item.hasLevel()) {
