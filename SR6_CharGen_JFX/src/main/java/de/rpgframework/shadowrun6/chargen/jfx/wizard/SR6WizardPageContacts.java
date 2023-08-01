@@ -26,7 +26,7 @@ public class SR6WizardPageContacts extends WizardPageContacts {
 
 	//-------------------------------------------------------------------
 	protected ContactDetailPane getRuleSpecificNode() {
-		return new ContactDetailPane(charGen.getContactController());
+		return new ContactDetailPane(charGen.getContactController(), ()->selection.refresh());
 	}
 
 	//-------------------------------------------------------------------
