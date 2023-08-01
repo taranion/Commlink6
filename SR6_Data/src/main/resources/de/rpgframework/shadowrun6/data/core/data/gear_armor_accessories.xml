@@ -10,7 +10,7 @@
 	</item>
 	<item avail="5" price="3000" id="chemical_seal" type="ACCESSORY"
 		subtype="ARMOR_BODY">
-  		<usage mode="EMBEDDED" slot="ARMOR" value="$RATING"/>
+  		<usage mode="EMBEDDED" slot="ARMOR" value="6"/>
 		<attrdef id="SIZE" value="6" />
 		<requires>
 			<datareq type="GEAR" ref="full_body_armor_with_helmet" apply="DATA_ITEM"/>
