@@ -45,7 +45,7 @@ public class CalculatePersona implements ProcessingStep {
 	public List<Modification> process(List<Modification> previous) {
 		List<Modification> unprocessed = new ArrayList<>(previous);
 
-		logger.log(Level.INFO,"START: process");
+		logger.log(Level.TRACE,"START: process");
 		try {
 			// Ensure a persona is present
 			Persona persona = model.getPersona();
@@ -72,7 +72,7 @@ public class CalculatePersona implements ProcessingStep {
 
 			logger.log(Level.INFO, "ASDF: {0}  {1}  {2}  {3}", persona.getAttack(), persona.getSleaze(), persona.getDataProcessing(), persona.getFirewall());
 		} finally {
-			logger.log(Level.INFO,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
+			logger.log(Level.TRACE,"STOP : process() ends with "+unprocessed.size()+" modifications still to process");
 		}
 		return unprocessed;
 	}
