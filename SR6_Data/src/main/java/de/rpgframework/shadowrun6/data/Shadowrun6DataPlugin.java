@@ -171,6 +171,7 @@ public class Shadowrun6DataPlugin  {
 			initOtherUS();
 //			initKrime();
 //			initCollapsing();
+			initSlip();
 			initDPAlpen();
 			initBerlin();
 			initDPFeuerläufer();
@@ -604,6 +605,18 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"collapsing_now/data/gear_firearms.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+	}
+
+	//-------------------------------------------------------------------
+	private void initSlip() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------Slip Streams-----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "SLIP_STREAMS", "slip_streams.i18n", Locale.ENGLISH, Locale.GERMAN);
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"slip_streams/data/gear_auto.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" item");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "slip_streams/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 	}
 
 	//-------------------------------------------------------------------

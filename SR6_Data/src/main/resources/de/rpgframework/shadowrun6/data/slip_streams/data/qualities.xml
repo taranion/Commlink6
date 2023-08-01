@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+<!-- returned soldier main quality -->
+
+   <quality id="returned_soldier" karma="12" pos="true" type="NORMAL">
+		<choices>
+			<choice type="QUALITY" uuid="6f0bc28e-4b41-4242-97fb-fd3ffad51939" options="astral_vision,distant_vision,gecko_grip,returned_gills,foresight,returned_frog_tongue,returned_prehensile_tail,spectral_hand,stone_skin,telekinesis"/>
+			<choice type="QUALITY" uuid="325375df-01ba-43af-b751-1cbe3dd92b61" options="astral_vision,distant_vision,gecko_grip,returned_gills,foresight,returned_frog_tongue,returned_prehensile_tail,spectral_hand,stone_skin,telekinesis"/>
+			<choice type="QUALITY" uuid="8b6deb68-cc2c-4c31-96e1-96fa29599d79" options="doppelgaenger,memory_hole,missing_features"/>
+		</choices>
+		<modifications>
+			<itemmod type="QUALITY" ref="CHOICE" choice="6f0bc28e-4b41-4242-97fb-fd3ffad51939"/>
+			<itemmod type="QUALITY" ref="CHOICE" choice="325375df-01ba-43af-b751-1cbe3dd92b61"/>
+			<itemmod type="QUALITY" ref="CHOICE" choice="8b6deb68-cc2c-4c31-96e1-96fa29599d79"/>
+		</modifications>
+   </quality>
+
+<!-- returned soldier powers  -->
+
+   <quality id="astral_vision" 				karma="0" pos="true" type="NORMAL" selectable="false">
+     <modifications>
+       <relevancemod topic="MAGICAL"/>
+     </modifications>
+   </quality>
+   <quality id="distant_vision" 			karma="0" pos="true" type="NORMAL" selectable="false">
+     <modifications>
+		<valmod type="ATTRIBUTE" ref="MAGIC" value="3" set="MIN"/> <!-- oder type="MIN" ? -->
+		<valmod type="SKILL" ref="sorcery" value="2" set="MIN"/> <!-- oder type="MIN" ? -->
+     </modifications>
+   </quality>
+   <quality id="gecko_grip" 				karma="0" pos="true" type="NORMAL" selectable="false"/>
+   <quality id="returned_gills" 			karma="0" pos="true" type="NORMAL" selectable="false"/>
+   <quality id="foresight" 					karma="0" pos="true" type="NORMAL" selectable="false"/>
+   <quality id="returned_frog_tongue" 		karma="0" pos="true" type="NORMAL" selectable="false"/>
+   <quality id="returned_prehensile_tail" 	karma="0" pos="true" type="NORMAL" selectable="false">
+     <modifications>
+		<checkmod type="SKILL" ref="athletics" value="-1" what="EDGE_BOOST" />
+     </modifications>
+   </quality>
+   <quality id="spectral_hand" 				karma="0" pos="true" type="NORMAL" selectable="false"/>
+   <quality id="stone_skin" 				karma="0" pos="true" type="NORMAL" selectable="false">
+     <modifications>
+		<itemmod type="GEAR" apply="CHARACTER" ref="stone_skin_armor"/>
+    </modifications>
+   </quality>
+   <quality id="telekinesis" 				karma="0" pos="true" type="NORMAL" selectable="false"/>
+   
+<!-- returned soldier characteristics  -->   
+   
+   <quality id="doppelgaenger"    karma="0" pos="false" type="NORMAL" selectable="false"/>
+   <quality id="memory_hole"      karma="0" pos="false" type="NORMAL" selectable="false"/>
+   <quality id="missing_features" karma="0" pos="false" type="NORMAL" selectable="false"/>
+
+</qualities>
