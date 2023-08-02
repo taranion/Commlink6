@@ -16,8 +16,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CommonMetatypeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
-import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
@@ -28,9 +28,9 @@ import javafx.util.StringConverter;
  *
  */
 public class BasicDataSection extends Section {
-	
+
 	private final static ResourceBundle RES = PropertyResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
-	
+
 	private SR6CharacterController control;
 
 	private TextField tfStreetName;
@@ -40,16 +40,16 @@ public class BasicDataSection extends Section {
 	private ChoiceBox<MagicOrResonanceType> cbMOR;
 	private TextField tfHeat;
 	private TextField tfRep;
-	
+
 	//-------------------------------------------------------------------
 	public BasicDataSection(String title) {
 		super(title, null);
-		
+
 		initComponents();
 		initLayout();
 		initInteractivity();
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		tfStreetName = new TextField();
@@ -78,15 +78,15 @@ public class BasicDataSection extends Section {
 		tfRep        = new TextField();
 		tfRep.setPrefColumnCount(2);
 	}
-	
+
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		FlowPane layout = new FlowPane(
-				new TitledComponent(ResourceI18N.get(RES, "label.streetname"),  tfStreetName).setTitleMinWidth(120d), 
-				new TitledComponent(ResourceI18N.get(RES, "label.realname"), tfRealName).setTitleMinWidth(120d), 
-				new TitledComponent(ResourceI18N.get(RES, "label.gender"), cbGender).setTitleMinWidth(120d), 
-				new TitledComponent(ResourceI18N.get(RES, "label.metatype"), cbMetatype).setTitleMinWidth(120d), 
-				new TitledComponent(ResourceI18N.get(RES, "label.magicOrResonance"), cbMOR).setTitleMinWidth(120d), 
+				new TitledComponent(ResourceI18N.get(RES, "label.streetname"),  tfStreetName).setTitleMinWidth(120d),
+				new TitledComponent(ResourceI18N.get(RES, "label.realname"), tfRealName).setTitleMinWidth(120d),
+				new TitledComponent(ResourceI18N.get(RES, "label.gender"), cbGender).setTitleMinWidth(120d),
+				new TitledComponent(ResourceI18N.get(RES, "label.metatype"), cbMetatype).setTitleMinWidth(120d),
+				new TitledComponent(ResourceI18N.get(RES, "label.magicOrResonance"), cbMOR).setTitleMinWidth(120d),
 				new TitledComponent(ResourceI18N.get(RES, "label.heat"), tfHeat).setTitleMinWidth(60d),
 				new TitledComponent(ResourceI18N.get(RES, "label.reputation"), tfRep)
 				);
@@ -110,11 +110,16 @@ public class BasicDataSection extends Section {
 				if (!tfHeat.getStyleClass().contains("invalid"))
 					tfHeat.getStyleClass().add("invalid");
 			}
-		});	
-		
+		});
+
 		cbMOR.getSelectionModel().selectedItemProperty().addListener((ov,o,n) -> {
 			if (control instanceof SR6CharacterGenerator) {
 				((SR6CharacterGenerator)control).getMagicOrResonanceController().select(n);
+			}
+		});
+		cbMetatype.getSelectionModel().selectedItemProperty().addListener((ov,o,n) -> {
+			if (control instanceof SR6CharacterGenerator) {
+				 ((CommonMetatypeGenerator) ((SR6CharacterGenerator)control).getMetatypeController()).select(n);
 			}
 		});
 	}
@@ -140,7 +145,7 @@ public class BasicDataSection extends Section {
 			tfHeat.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.HEAT).getDistributed()));
 		if (model.getAttribute(ShadowrunAttribute.REPUTATION)!=null)
 			tfRep.setText(String.valueOf(model.getAttribute(ShadowrunAttribute.REPUTATION).getDistributed()));
-		
+
 		cbMetatype.setDisable(model.isInCareerMode());
 		cbMOR.setDisable(model.isInCareerMode());
 	}

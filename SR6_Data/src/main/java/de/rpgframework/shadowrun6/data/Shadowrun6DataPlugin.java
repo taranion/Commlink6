@@ -169,8 +169,8 @@ public class Shadowrun6DataPlugin  {
 			initCompanion();
 			//initLofwyrsLegions();
 			initOtherUS();
-//			initKrime();
-//			initCollapsing();
+			initKrime();
+			initCollapsing();
 			initSlip();
 			initDPAlpen();
 			initBerlin();

@@ -61,6 +61,7 @@ public class GetModificationsFromPowers implements ProcessingStep {
 								((DataItemModification)realMod).setConditionString("GetModificationsFromPowers");
 						}
 						ref.addCharacterModification(realMod);
+						unprocessed.add(realMod);
 					} catch (Exception e) {
 						logger.log(Level.ERROR, "Problem calculating modifications for adept power: "+ref,e);
 					}

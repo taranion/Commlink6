@@ -1029,13 +1029,13 @@ public class ItemUtilJFX {
 		heaCap .setAlignment(Pos.CENTER);
 
 		int startCol = table.getColumnCount();
-		logger.log(Level.ERROR, "ESS={0} CAP={1} SIZ={2}", hasE, hasC, hasS);
-		logger.log(Level.ERROR, "ESS={0} CAP={1} SIZ={2}", COL_ESS, COL_CAP, COL_SIZ);
-		logger.log(Level.ERROR, "Before "+table.getColumnCount());
+//		logger.log(Level.ERROR, "ESS={0} CAP={1} SIZ={2}", hasE, hasC, hasS);
+//		logger.log(Level.ERROR, "ESS={0} CAP={1} SIZ={2}", COL_ESS, COL_CAP, COL_SIZ);
+//		logger.log(Level.ERROR, "Before "+table.getColumnCount());
 		if (hasE) table.add(heaDev, startCol+COL_ESS, 0);
 		if (hasC) table.add(heaCap, startCol+COL_CAP, 0);
 		if (hasS) table.add(heaPrg, startCol+COL_SIZ, 0);
-		logger.log(Level.ERROR, "After "+table.getColumnCount());
+//		logger.log(Level.ERROR, "After "+table.getColumnCount());
 
 		// Now add data
 		for (int i = 0; i < possibilities.size(); i++) {
