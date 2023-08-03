@@ -113,7 +113,7 @@ public abstract class CommonMetatypeGenerator extends ControllerImpl<SR6MetaType
 		logger.log(Level.WARNING, "POST: "+ pick);
 		SR6MetaType toSelect = pick.get(random.nextInt(pick.size()));
 		logger.log(Level.WARNING, "Selected "+toSelect);
-		
+
 		select(toSelect);
 	}
 
@@ -129,7 +129,7 @@ public abstract class CommonMetatypeGenerator extends ControllerImpl<SR6MetaType
 		if (isDiverse) {
 			getModel().setGender(Gender.DIVERSE);
 		} else {
-			getModel().setGender( (gauss1>=0.0f)?Gender.MALE:Gender.FEMALE ); 
+			getModel().setGender( (gauss1>=0.0f)?Gender.MALE:Gender.FEMALE );
 		}
 
 		MetaType value = getModel().getMetatype();
@@ -145,7 +145,7 @@ public abstract class CommonMetatypeGenerator extends ControllerImpl<SR6MetaType
 			if (gauss>1.0f || gauss<-1.0f)
 				continue;
 			break;
-		}	
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -156,6 +156,7 @@ public abstract class CommonMetatypeGenerator extends ControllerImpl<SR6MetaType
 	public boolean selectBodyType(BodyType value) {
 		logger.log(Level.DEBUG, "ENTER selectBodyType("+value+")");
 		try {
+			logger.log(Level.INFO, "select body type {0}",value);
 			getModel().setBodytype(value);
 
 			parent.runProcessors();
