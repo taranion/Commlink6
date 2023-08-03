@@ -57,7 +57,7 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
-		return new WizardPageType[] { WizardPageType.METATYPE, WizardPageType.DRAKE,
+		return new WizardPageType[] { WizardPageType.METATYPE, //WizardPageType.DRAKE,
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
 				WizardPageType.QUALITIES,
 				WizardPageType.ATTRIBUTES,
