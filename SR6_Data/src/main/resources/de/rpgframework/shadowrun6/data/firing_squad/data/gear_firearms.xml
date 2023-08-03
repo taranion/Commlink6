@@ -416,6 +416,10 @@
    <!-- Launchers -->
    <item id="krime_thumper" avail="3L" price="1500" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
       <weapon dmg="0P" mode="SA" attack=",8,7,5," ammo="3(m)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+      </modifications>
    </item>
 
     <!-- Explosives Special -->
