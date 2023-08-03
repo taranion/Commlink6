@@ -1,7 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.jfx;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.System.Logger;
@@ -34,6 +33,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CharacterGeneratorRegistry;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.free.SR6FreeSettings;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
@@ -120,6 +120,8 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 					settings = SR6PointBuySettings.class;
 				} else if (model.getCharGenUsed().equals("lifepath")) {
 					settings = SR6LifePathSettings.class;
+				} else if (model.getCharGenUsed().equals("free")) {
+					settings = SR6FreeSettings.class;
 				}
 			}
 			if (settings== null) {
