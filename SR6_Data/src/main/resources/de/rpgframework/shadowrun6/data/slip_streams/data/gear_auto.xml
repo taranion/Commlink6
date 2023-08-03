@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item avail="0" price="0" id="stone_skin_armor" modonly="true" type="ARMOR" subtype="ARMOR_BODY">
+	  <armor rating="2" add="true"/>
+   </item>
+</items>
