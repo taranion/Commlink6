@@ -441,18 +441,18 @@
    <quality id="unusual_hair"    karma="2" pos="false" type="METAGENIC" cat="METAGENIC_ANOMALIES" />
    <quality id="impaired_metagenetic"  karma="8" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS" multi="true" max="6">
    	<choices>
-   		<choice type="ATTRIBUTE" uuid="aa118fb8-b5ac-485a-be34-85edf3b53abc"/>
+   		<choice type="ATTRIBUTE" uuid="7f3a7e00-93b4-4012-883f-c737ca18c1df"/>
    	</choices>
      <modifications>
-       <valmod type="ATTRIBUTE" ref="CHOICE" choice="aa118fb8-b5ac-485a-be34-85edf3b53abc" value="-1" set="MAX" />
+       <valmod type="ATTRIBUTE" ref="CHOICE" choice="7f3a7e00-93b4-4012-883f-c737ca18c1df" value="-1" set="MAX" />
      </modifications>
    </quality>
    <quality id="impaired_metagenetic" lang="de" karma="8" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS">
    	<choices>
-   		<choice type="ATTRIBUTE" uuid="aa118fb8-b5ac-485a-be34-85edf3b53abc"/>
+   		<choice type="ATTRIBUTE" uuid="7f3a7e00-93b4-4012-883f-c737ca18c1df"/>
    	</choices>
      <modifications>
-       <valmod type="ATTRIBUTE" ref="CHOICE" choice="aa118fb8-b5ac-485a-be34-85edf3b53abc" value="-2" set="MAX" />
+       <valmod type="ATTRIBUTE" ref="CHOICE" choice="7f3a7e00-93b4-4012-883f-c737ca18c1df" value="-2" set="MAX" />
      </modifications>
    </quality>
    <quality id="neoteny"  karma="10" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS">
