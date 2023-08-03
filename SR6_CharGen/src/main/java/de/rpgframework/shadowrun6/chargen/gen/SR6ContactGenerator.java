@@ -130,7 +130,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 		} else {
 			// Core rules
 			int max = Math.min(8, getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue());
-			if (con.getLoyalty()>=max)
+			if (con.getRating()>=max)
 				return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 			if (pointsLeft<1)
 				return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
