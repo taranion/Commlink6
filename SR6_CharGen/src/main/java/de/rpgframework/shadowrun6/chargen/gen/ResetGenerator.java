@@ -122,11 +122,15 @@ public class ResetGenerator implements ProcessingStep {
 			logger.log(Level.INFO, "Start with {0} Karma", settings.startKarma);
 			model.setKarmaFree(settings.startKarma);
 		} else if (real instanceof FreeCharacterGenerator) {
+			model.setKarmaFree(50);
+			if (level==PowerLevel.PRIME_RUNNER)
+				model.setKarmaFree(100);
 		} else {
 			model.setKarmaFree(50);
 			if (level==PowerLevel.PRIME_RUNNER)
 				model.setKarmaFree(100);
 		}
+		logger.log(Level.WARNING, "Start with {0} karma", model.getKarmaFree());
 
 		return unprocessed;
 	}
