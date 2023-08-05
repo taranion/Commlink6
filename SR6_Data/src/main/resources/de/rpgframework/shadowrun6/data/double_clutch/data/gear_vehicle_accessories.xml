@@ -4,11 +4,11 @@
 
 <!-- Special Items for Drones -->
 
-	<item id="micro_torpedo_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS"> <!-- For proteus_krake, marine_silent_hunter -->
+	<item id="micro_torpedo_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" modonly="true"> <!-- For proteus_krake, marine_silent_hunter -->
 		<weapon dmg="0P" attack=",8,8,3," mode="SS" ammo="4(c)" skill="exotic_weapons" spec="exotic_weapons/launchers"/> <!-- Errata needed: No info on ranges for micro launcher, using armtech_mgl6 -->
 	</item>
 
- 	<item id="vehicle_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" > <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter -->
+ 	<item id="vehicle_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" modonly="true"> <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter -->
 		<weapon dmg="0P" attack=",5,9,10,8" mode="SS" ammo="2(ml)" skill="exotic_weapons" spec="exotic_weapons/launchers" /> <!-- Errata needed: No info on ranges for launcher, using aztechnology_striker -->
 	</item>
 
