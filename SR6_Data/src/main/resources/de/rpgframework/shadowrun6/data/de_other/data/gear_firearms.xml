@@ -4,6 +4,7 @@
 <!-- Holdouts -->
    <item id="walter_secura_superkompakt" avail="6L" price="1000" type="WEAPON_FIREARMS" subtype="HOLDOUTS">
       <weapon dmg="3P" attack="10,10,,," mode="SA" ammo="4(c)" skill="firearms" spec="firearms/holdouts"/>
+		<attrdef id="AMMUNITION_CLASS" value="HEAVY" />
    </item>
 
 <!-- Machine Pistols -->
@@ -67,6 +68,7 @@
          <itemmod type="GEARMOD" ref="gas-vent_improved"/>
       </modifications>
       <weapon attack="10,12,6,," ammo="30(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/submachine_guns"/>
+		<attrdef id="AMMUNITION_CLASS" value="RIFLES" />
    </item>
 
    <item id="hk_223cplus" avail="3L" price="1300" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS" >
@@ -80,6 +82,7 @@
          <itemmod type="GEARMOD" ref="folding_stock"/>
       </modifications>
       <weapon dmg="4P" attack="12,12,8,," ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/submachine_guns"/>
+		<attrdef id="AMMUNITION_CLASS" value="RIFLES" />
    </item>
 
 <!-- Shotguns -->
