@@ -650,6 +650,10 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					model.setKarmaFree( model.getKarmaFree() - pay );
 					logger.log(Level.DEBUG, "  Pay {0} karma for specializations {1}", pay, key);
 				}
+				if (per.pointSpec>0) {
+					points1 -= per.pointSpec;
+					logger.log(Level.DEBUG, "  Pay {0} skillpoints for specializations {1}", per.pointSpec, key);
+				}
 
 				// Update model
 			}
@@ -808,7 +812,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			}
 			if (points1>0) {
 				logger.log(Level.INFO, "Pay with skill points");
-				settings.get(skillVal).points1++;
+				settings.get(skillVal).pointSpec++;
 			} else {
 				settings.get(skillVal).karmaSpec++;
 				logger.log(Level.INFO, "Pay with karma");
@@ -837,6 +841,16 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				return false;
 
 			skillVal.getSpecializations().remove(spec);
+			// Now pay
+			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+			PerSkillPoints per = settings.get(skillVal);
+			if (per!=null) {
+				if (per.karmaSpec>0) {
+					per.karmaSpec--;
+				} else if (per.pointSpec>0) {
+					per.pointSpec--;
+				}
+			}
 
 			getCharacterController().runProcessors();
 			return true;
