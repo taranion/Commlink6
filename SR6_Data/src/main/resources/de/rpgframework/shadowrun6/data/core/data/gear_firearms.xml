@@ -380,7 +380,7 @@
          <!-- embed type="GEAR" ref="raiden_launcher" intoType="HOOK" intoRef="UNDER" included="true"/ -->
       </modifications>
    </item>
-   <item avail="4I" price="11000" id="ares_desert_strike" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+   <item avail="4I" price="11000" id="ares_desert_strike" type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER">
       <modifications>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
