@@ -13,7 +13,6 @@
    <item id="colt_agent_special" avail="3" price="400" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" >
       <weapon dmg="3P" attack="10,8,,," mode="SS/SA" ammo="8(c)" skill="firearms" spec="firearms/pistols_light"/>
       <attrdef id="AMMUNITION_CLASS" value="HEAVY"/>
-      <attrdef id="MODIFICATION_SLOTS" value="HEAVY"/>
    </item>
 	<item id="colt_agent_special_laser_sight" avail="1" price="50" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
 		<usage mode="EMBEDDED" slot="INTERNAL" />
