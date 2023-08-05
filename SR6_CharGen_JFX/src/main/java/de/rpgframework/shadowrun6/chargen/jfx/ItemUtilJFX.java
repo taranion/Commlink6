@@ -253,7 +253,6 @@ public class ItemUtilJFX {
 		Choice chRating = item.getChoice(ItemTemplate.UUID_RATING);
 		if (chRating==null)
 			chRating = item.getChoice("RATING");
-		System.err.println("ItemUtilJFX: Choice = "+chRating);
 
 		int[] ratings = null;
 		if (chRating!=null) {
@@ -268,10 +267,9 @@ public class ItemUtilJFX {
 					ratings[i] = i+1;
 			}
 		}
-		logger.log(Level.WARNING, "ratings = "+Arrays.toString(ratings));
 
 		List<AGearData> possibilities = item.getPossibilities(carry);
-		logger.log(Level.WARNING, "possibilities of {0} = {1}", carry,possibilities);
+		logger.log(Level.DEBUG, "possibilities of {0} = {1}", carry,possibilities);
 		if (possibilities.isEmpty())
 			throw new IllegalArgumentException("CarryMode "+carry+" is not possible in "+item.getId());
 
@@ -663,7 +661,6 @@ public class ItemUtilJFX {
 	private static void addWeaponColumns(ItemTemplate item, Shadowrun6Character model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
 		if (item==null)
 			throw new NullPointerException("Empty item");
-		logger.log(Level.WARNING,"No special display for itemtype "+item.getItemType(carry));
 
 		boolean hasM = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.FIREMODES)!=null);
 		boolean hasA = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.AMMUNITION)!=null);
@@ -797,12 +794,10 @@ public class ItemUtilJFX {
 		ItemAttributeDefinition def = data.getAttribute(attrib);
 		if (def==null)
 			def = item.getAttribute(attrib);
-		logger.log(Level.WARNING, "Def2 {0}", def);
 		if (attrib == SR6ItemAttribute.ESSENCECOST) {
 			Usage usage = data.getUsage(carry);
 			if (usage == null)
 				usage = item.getUsage(carry);
-			logger.log(Level.WARNING, "Def3 {0}", usage);
 			if (usage != null && usage.getRawValue() != null) {
 				lbAvail.setText(translateVariables(usage.getRawValue(), null));
 			} else if (def != null) {
