@@ -7,21 +7,18 @@ import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.RuleController;
-import de.rpgframework.shadowrun.proc.GetModificationsFromMetaType;
-import de.rpgframework.shadowrun.proc.GetModificationsFromQualities;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.SR6DataStructureController;
-import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
-import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
@@ -95,11 +92,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 				return;
 			}
 
-			processChain.add(new ResetModifications(model));
-			processChain.add(new GetModificationsFromMetaType(model));
-			processChain.add(new ApplyModificationsGeneric(model));
-			processChain.add(new GetModificationsFromQualities(model));
-//			processChain.add(new ResetGenerator(this));
+			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model, locale));
 			processChain.add(qualities);
 			processChain.add(attributes);
 			processChain.add(skills);
