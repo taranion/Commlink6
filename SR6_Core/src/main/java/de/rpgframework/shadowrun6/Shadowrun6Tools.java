@@ -108,6 +108,7 @@ import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6ResolveTemplatesStep;
+import de.rpgframework.shadowrun6.items.WeaponSize;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -742,6 +743,7 @@ public class Shadowrun6Tools {
 				SR6ItemAttribute iAttr = SR6ItemAttribute.valueOf(tmp.getKey());
 				if (iAttr==SR6ItemAttribute.ITEMTYPE) return ItemType.valueOf(tmp.getRawValue()).getName();
 				if (iAttr==SR6ItemAttribute.ITEMSUBTYPE) return ItemSubType.valueOf(tmp.getRawValue()).getName();
+				if (iAttr==SR6ItemAttribute.WEAPON_SIZE) return WeaponSize.valueOf(tmp.getRawValue()).getName();
 				break;
 			case SKILL:
 				if (tmp.getChoice()!=null) {

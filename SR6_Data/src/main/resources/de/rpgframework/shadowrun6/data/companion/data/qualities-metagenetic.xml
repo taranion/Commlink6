@@ -126,7 +126,7 @@
 		     	<!--  ToDo ? Kälteangriffe -->
      </modifications>
    </quality>
-   <quality id="camouflage" karma="7" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
+   <quality id="camouflage" karma="5" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
      <choices>
        <choice type="SUBSELECT" ref="variant" uuid="0180ba51-5b30-471d-bdba-5e2482b8440d">
          <subOption id="basic">
@@ -134,7 +134,7 @@
      		    <checkmod ref="stealth" type="SKILL" what="DICE" value="1"/>
      		  </modifications>
          </subOption>
-         <subOption id="dynamic" cost="3">
+         <subOption id="dynamic" cost="5">
 		     <modifications>
      		    <checkmod ref="stealth" type="SKILL" what="DICE" value="1"/>
      		  </modifications>

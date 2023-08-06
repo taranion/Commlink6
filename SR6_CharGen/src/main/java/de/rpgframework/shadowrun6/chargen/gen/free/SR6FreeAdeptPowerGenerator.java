@@ -1,11 +1,8 @@
 package de.rpgframework.shadowrun6.chargen.gen.free;
 
 import java.lang.System.Logger.Level;
-import java.util.List;
 
-import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6AdeptPowerController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -30,7 +27,7 @@ public class SR6FreeAdeptPowerGenerator extends SR6AdeptPowerController {
 	 */
 	@Override
 	public boolean canBuyPowerPoints() {
-		return false;
+		return true;
 	}
 
 	//-------------------------------------------------------------------
@@ -63,6 +60,9 @@ public class SR6FreeAdeptPowerGenerator extends SR6AdeptPowerController {
 			getModel().setAttribute(val);
 		}
 		val.setDistributed( val.getDistributed() +1);
+		logger.log(Level.INFO, "Increase power points to {0}", val.getDistributed());
+
+		parent.runProcessors();
 		return true;
 	}
 
@@ -79,22 +79,9 @@ public class SR6FreeAdeptPowerGenerator extends SR6AdeptPowerController {
 		val.setDistributed( val.getDistributed() -1);
 		if (val.getDistributed()<1)
 			val.setDistributed(0);
+		logger.log(Level.INFO, "Decrease power points to {0}", val.getDistributed());
+		parent.runProcessors();
 		return true;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
-	 */
-	@Override
-	public List<Modification> process(List<Modification> previous) {
-		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
-		try {
-
-			return previous;
-		} finally {
-			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
-		}
 	}
 
 }

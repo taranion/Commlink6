@@ -269,6 +269,10 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			} else if (param[0] instanceof IPriorityGenerator) {
 				tcDist.setVisible(true);
 				tcDist.setManaged(true);
+			} else {
+				lvMoRType.setCellFactory( lv -> new MagicOrResonanceCellWith("page.mortypecell.norules",charGen.getMagicOrResonanceController()));
+				tcDist.setVisible(false);
+				tcDist.setManaged(false);
 			}
 			refresh();
 		} else {

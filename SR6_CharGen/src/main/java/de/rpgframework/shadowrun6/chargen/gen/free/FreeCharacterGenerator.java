@@ -43,6 +43,11 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 	}
 
 	//-------------------------------------------------------------------
+	public SR6FreeSettings getSettings() {
+		return getModel().getCharGenSettings(SR6FreeSettings.class);
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator#getId()
 	 */
