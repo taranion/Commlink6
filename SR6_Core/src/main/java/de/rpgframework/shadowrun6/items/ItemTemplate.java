@@ -238,6 +238,12 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 
 		// If it is a firearm, mark it that the user may select to use caseless
 		// ammo with it
+		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS || this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_SPECIAL) {
+			validateWeaponSize();
+		}
+
+		// If it is a firearm, mark it that the user may select to use caseless
+		// ammo with it
 		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS) {
 			// Auto-detect ammunition class, if necessary
 			validateAmmunitionClass();
@@ -357,6 +363,45 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			this.setAttribute(SR6ItemAttribute.AMMUNITION_CLASS, AmmunitionClass.INJECTION_DART); break;
 		default:
 			logger.log(Level.WARNING, "No autodetection of ammunition for firearm {0}",subtype);
+		}
+		} // End of ammunition check
+	}
+
+	//-------------------------------------------------------------------
+	private void validateWeaponSize() {
+		if (getAttribute(SR6ItemAttribute.WEAPON_SIZE)==null) {
+		switch (subtype) {
+		case TASERS:
+		case HOLDOUTS:
+		case PISTOLS_LIGHT:
+			this.setAttribute(SR6ItemAttribute.WEAPON_SIZE, WeaponSize.TINY);
+			break;
+		case MACHINE_PISTOLS:
+		case PISTOLS_HEAVY:
+		case DMSO:
+		case DART:
+			this.setAttribute(SR6ItemAttribute.WEAPON_SIZE, WeaponSize.SMALL);
+			break;
+		case SUBMACHINE_GUNS:
+			this.setAttribute(SR6ItemAttribute.WEAPON_SIZE, WeaponSize.MEDIUM);
+			break;
+		case SHOTGUNS:
+		case RIFLE_ASSAULT:
+		case RIFLE_HUNTING:
+		case RIFLE_SNIPER:
+			this.setAttribute(SR6ItemAttribute.WEAPON_SIZE, WeaponSize.LARGE); break;
+		case LMG:
+		case MMG:
+		case HMG:
+		case ASSAULT_CANNON:
+		case LAUNCHERS:
+		case THROWERS:
+		case BALLISTAS:
+		case CANNON:
+			this.setAttribute(SR6ItemAttribute.WEAPON_SIZE, WeaponSize.BIG);
+			break;
+		default:
+			logger.log(Level.WARNING, "No autodetection of weapon size for firearm {0}",subtype);
 		}
 		} // End of ammunition check
 	}
