@@ -15,6 +15,7 @@ import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAdeptPowers;
@@ -112,6 +113,8 @@ public class SR6WizardPageAdeptPowers extends WizardPageAdeptPowers {
 			backHeaderCP.setVisible(false);
 		} else if (ctrl instanceof SR6FreeAdeptPowerGenerator) {
 			backHeaderCP.setVisible(false);
+			hdConvert.setText(ResourceI18N.get(RES, "page.adeptpowers.convertFree"));
+			lbValue.setText(String.valueOf(real.getModel().getAttribute(ShadowrunAttribute.POWER_POINTS).getModifiedValue()));
 		} else {
 			logger.log(Level.ERROR,"Unsupported AdeptPowerController: "+ctrl.getClass());
 			System.err.println("Unsupported AdeptPowerController");
