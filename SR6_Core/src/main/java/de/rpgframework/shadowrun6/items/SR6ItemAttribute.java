@@ -97,7 +97,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	VEHICLE_TYPE( (StringValueConverter)null),
 	// Unmodified modification slots. 3 element array CHASSIS, ELECTRONICS, POWERTRAIN
 	VEHICLE_MODSLOTS( new IntegerArrayConverter()),
-	WEAPON_SIZE,
+	WEAPON_SIZE( new EnumConverter(WeaponSize.class)),
 
 	ATTACK,
 	SLEAZE,
