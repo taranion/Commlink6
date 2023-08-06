@@ -155,9 +155,10 @@
 		</modifications>
 		<weapon dmg="7P" mode="SA/BF" attack="3,8,12,8,8" ammo="8(c)" skill="firearms" spec="firearms/assault_cannons"  wild="true"/>
 	</item>
-	<item id="pulse" avail="7I" price="3500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+	<item id="pulse" avail="7I" price="3500" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
 		<weapon dmg="1S" mode="SS" attack="8,10,,," ammo="20(c)" skill="exotic_weapons" spec="exotic_weapons/emitter"  wild="true"/>
-      <attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
 	</item>
 	<item id="hell_turtle" avail="6I" price="3500" type="WEAPON_SPECIAL" subtype="THROWERS">
 		<modifications>
@@ -179,12 +180,14 @@
 		</modifications>
 		<weapon mode="SS" attack=",4,8,10,9" ammo="1(ml)" dmg="0P" skill="exotic_weapons" spec="exotic_weapons/launchers"  wild="true"/>
 	</item>
-	<item id="crimson_wasp" avail="6I" price="1500" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+	<item id="crimson_wasp" avail="6I" price="1500" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
 		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
 		<weapon dmg="5P" mode="SA" attack="16,14,11,6," ammo="15(c)" skill="exotic_weapons" spec="exotic_weapons/laser"  wild="true"/>
 	</item>
-	<item id="red_fox" avail="6I" price="2800" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+	<item id="red_fox" avail="6I" price="2800" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
 		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
 		<weapon dmg="6P" mode="SA/BF" attack="14,16,16,9," ammo="30(c)" skill="exotic_weapons" spec="exotic_weapons/laser"  wild="true"/>
 	</item>
 
