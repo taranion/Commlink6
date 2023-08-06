@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
@@ -65,25 +66,16 @@ public class SR6FreeQualityGenerator extends CommonQualityGenerator implements I
 	@Override
 	public Possible canBeSelected(Quality value, Decision... decisions) {
 		Possible poss = super.canBeSelected(value, decisions);
-		if (!poss.get())
-			return poss;
-
-//		// Check if all requirements are met
-//		List<Requirement> notMet = new ArrayList<>();
-//		for (Requirement req : value.getRequirements()) {
-//			try {
-//				if (!Shadowrun6Tools.isRequirementMet(model, value, req, decisions)) {
-//					notMet.add(req);
-//				}
-//			} catch (Exception e) {
-//				logger.log(Level.ERROR, "Error in quality "+value.getId(),e);
-//				e.printStackTrace();
-//				System.exit(1);
-//			}
-//		}
-//		if (notMet.size()>0) {
-//			return new Possible(notMet, (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
-//		}
+		if (!poss.get()) {
+			if (poss.getMostSevere()==null) return poss;
+			switch (poss.getMostSevere().getKey()) {
+			case SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6:
+			case SR6RejectReasons.IMPOSS_QUALITY_KARMAGAIN:
+				break;
+			default:
+				return poss;
+			}
+		}
 
 
 		List<Choice> requiredChoices = value.getChoices();
