@@ -171,7 +171,7 @@ public class Shadowrun6DataPlugin  {
 			initOtherUS();
 			initKrime();
 			initCollapsing();
-			initSlip();
+			//initSlip();
 			initDPAlpen();
 			initBerlin();
 			initDPFeuerläufer();
