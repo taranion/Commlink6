@@ -83,12 +83,10 @@ public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 	protected void onAdd() {
 		logger.log(Level.DEBUG, "opening power selection dialog");
 
-		Selector<AdeptPower,AdeptPowerValue> selector = new Selector<AdeptPower,AdeptPowerValue>(control.getAdeptPowerController(),
+		Selector<AdeptPower,AdeptPowerValue> selector = new Selector<AdeptPower,AdeptPowerValue>(control.getAdeptPowerController(), null,
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
-				null
-				){
-
+				null){
 		};
 		NavigButtonControl btnCtrl = new NavigButtonControl();
     	btnCtrl.setDisabled(CloseType.OK, true);

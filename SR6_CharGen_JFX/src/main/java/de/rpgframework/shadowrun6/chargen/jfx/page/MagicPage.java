@@ -86,6 +86,8 @@ public class MagicPage extends Page {
 		FlexGridPane.setMinHeight(secAdeptPowers, 6);
 		FlexGridPane.setMediumWidth(secAdeptPowers, 5);
 		FlexGridPane.setMediumHeight(secAdeptPowers, 6);
+		FlexGridPane.setMaxWidth(secAdeptPowers, 6);
+		FlexGridPane.setMaxHeight(secAdeptPowers, 8);
 	}
 
 	//-------------------------------------------------------------------
