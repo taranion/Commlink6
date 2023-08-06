@@ -39,7 +39,7 @@
    </item>
    
    <!-- Shotguns -->
-   <item avail="2L" price="200" id="altmayer_sp" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+   <item avail="2L" price="200" id="altmayr_sp" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
