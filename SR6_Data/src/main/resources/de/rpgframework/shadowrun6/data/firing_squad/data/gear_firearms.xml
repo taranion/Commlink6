@@ -385,21 +385,20 @@
       	</selreq>
       </requires>
    </item>
+
    <item id="horizon_flynn_dcom_holdout" avail="3" price="250" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
       <weapon dmg="2P" mode="SS" attack="10,10,,," ammo="8(m)" skill="firearms" spec="firearms/holdouts"/>
+		<attrdef id="WEAPON_SIZE" value="TINY"/>
    </item>
    <item id="horizon_flynn_dcom_light_pistol" avail="3L" price="350" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
       <weapon dmg="2P" mode="SS/SA" attack="8,10,4,," ammo="6(m)" skill="firearms" spec="firearms/pistols_light"/>
+		<attrdef id="WEAPON_SIZE" value="TINY"/>
    </item>
    <item id="horizon_flynn_dcom_taser" avail="3L" price="350" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
       <weapon dmg="5S(e)" mode="SS" attack="8,8,6,," ammo="4(m)" skill="firearms" spec="firearms/tasers"/>
+		<attrdef id="WEAPON_SIZE" value="TINY"/>
    </item>
-   <item id="horizon_flynn_dcom_knife" avail="3" price="200" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
-      <weapon dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/blades" />
-   </item>
-   <item id="horizon_flynn_dcom_garotte" avail="4" price="200" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
-      <weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
-   </item>
+
    <item id="narcojet_hornet" avail="3" price="500" type="WEAPON_SPECIAL" subtype="DART">
       <attrdef id="MODIFICATION_SLOTS" value="3"/>
       <weapon dmg="0P" mode="SS" attack="6,8,10,," ammo="9(m)" skill="exotic_weapons" spec="exotic_weapons/air"/>
@@ -410,6 +409,7 @@
 
    <item id="shiawase_blazer" avail="4L" price="2500" type="WEAPON_SPECIAL" subtype="THROWERS">
       <weapon dmg="6P" mode="SS" attack="14,12,10,," ammo="5(m)" skill="exotic_weapons" spec="exotic_weapons/spray"/>
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
    </item>
 
    <!-- Launchers -->

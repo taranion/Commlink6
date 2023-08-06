@@ -493,6 +493,7 @@
          <itemmod type="HOOK" ref="UNDER"/>
           <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
       </modifications>
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
       <weapon attack="5,8,11,3," ammo="6(m)" dmg="1P" mode="SS" skill="exotic_weapons"/>
    </item>
     <item avail="3I" price="5900" id="ares_antioch-2" type="WEAPON_SPECIAL" subtype="LAUNCHERS">

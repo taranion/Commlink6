@@ -200,6 +200,7 @@
 
    <item id="krime_t_shirt_cannon" avail="4" price="500" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
       <weapon dmg="0S" mode="SS" attack="8,11,6,2,1" ammo="5(m)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
+		<attrdef id="WEAPON_SIZE" value="BIG"/>
       <modifications>
         <itemmod type="HOOK" ref="TOP"/>
         <itemmod type="GEARMOD" ref="metahuman_adaption"/>

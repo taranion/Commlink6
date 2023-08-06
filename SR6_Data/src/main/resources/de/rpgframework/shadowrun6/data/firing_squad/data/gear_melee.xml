@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <!-- Melee weapons -->
+   <!-- Blades -->
    <item id="hand_talons" avail="4L" price="75" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="2P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
@@ -27,6 +27,17 @@
    </item>
    <item id="trench_knife" avail="3" price="100" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+
+   <item id="urban_tribe_tomahawk_mkii" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon  dmg="2P" attack="10,9,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="xiphos_tactical_gladius" avail="4" price="300" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon  dmg="3P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+
+   <item id="horizon_flynn_dcom_knife" avail="3" price="200" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <weapon dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/blades" />
    </item>
 
    <!-- Clubs -->
@@ -77,6 +88,10 @@
       </variant>
    </item>
 
+   <item id="tonfa" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+      <weapon  dmg="3S" attack="6,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+
    <!-- Exotic Melee -->
    <item id="ash_arms_combat_chainsaw" avail="3" price="1000" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
       <weapon  dmg="4P" attack="10,,,," skill="exotic_weapons" spec="exotic_weapons/chainsaws"/>
@@ -98,14 +113,9 @@
    <item id="manriki_chain" avail="2" price="150" lang="de" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
       <weapon  dmg="4S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/whips"/>
    </item>
-   <item id="tonfa" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
-      <weapon  dmg="3S" attack="6,,,," skill="close_combat" spec="close_combat/clubs"/>
-   </item>
-   <item id="urban_tribe_tomahawk_mkii" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
-      <weapon  dmg="2P" attack="10,9,,," skill="close_combat" spec="close_combat/blades"/>
-   </item>
-   <item id="xiphos_tactical_gladius" avail="4" price="300" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
-      <weapon  dmg="3P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
+
+   <item id="horizon_flynn_dcom_garotte" avail="4" price="200" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+      <weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
    </item>
 
    <!-- Zoe heritage -->
@@ -197,6 +207,7 @@
    <!-- Projectiles -->"
    <item id="crossbow_collapsible_light" avail="3L" price="300" type="WEAPON_RANGED" subtype="CROSSBOWS">
       <weapon dmg="2P" mode="SS" attack="6,8,2,," ammo="4(m)" skill="athletics" spec="athletics/archery"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
       <modifications>
          <itemmod type="HOOK" ref="TOP" />
          <itemmod type="HOOK" ref="UNDER"/>
