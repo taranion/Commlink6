@@ -1,5 +1,7 @@
 package de.rpgframework.shadowrun6.items;
 
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+
 /**
  *
  */
@@ -15,5 +17,11 @@ public enum WeaponSize {
 	LARGE,
 	/** (for weapon_mount_heavy) = LMG, MMG, HMG, ASSAULT_CANNON, LAUNCHERS, THROWERS, BALLISTAS, CANNON */
 	BIG
+	;
+
+	//-------------------------------------------------------------------
+	public String getName() {
+		return Shadowrun6Core.getI18nResources().getString("weaponsize."+this.name().toLowerCase());
+	}
 
 }
