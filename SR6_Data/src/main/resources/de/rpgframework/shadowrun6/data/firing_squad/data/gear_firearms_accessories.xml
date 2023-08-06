@@ -185,7 +185,6 @@
 	<!-- Melee weapon accessories -->
    <item avail="2" price="160" id="quick_draw_scabbard" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
 	  <usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
-      <usage mode="EMBEDDED" slot="RANGED_EXTERNAL"/>
       <usage mode="CARRIED" />
       <requires>
      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
@@ -193,7 +192,6 @@
    </item>
    <item avail="2" price="50" id="concealable_sheath" type="ACCESSORY" subtype="WEAPON_ACCESSORY" >
 	  <usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
-      <usage mode="EMBEDDED" slot="RANGED_EXTERNAL"/>
       <usage mode="CARRIED"/>
       <requires>
       	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
@@ -204,7 +202,6 @@
    </item>
    <item avail="2" price="115" id="melee_quick_draw_sheath" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
 	  <usage mode="EMBEDDED" slot="MELEE_EXTERNAL"/>
-      <usage mode="EMBEDDED" slot="RANGED_EXTERNAL"/>
       <usage mode="CARRIED"/>
       <requires>
      		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
