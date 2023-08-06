@@ -5,6 +5,7 @@
    </item>
    <item id="iron_fang_combat_knife" avail="3" price="350" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="3P" attack="9,1,,," skill="close_combat" spec="close_combat/blades" wild="true"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
    </item>
    <item id="steel_claw_combat_broadsword" avail="3" price="500" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="4P" attack="10,,,," skill="close_combat" spec="close_combat/blades" wild="true"/>
