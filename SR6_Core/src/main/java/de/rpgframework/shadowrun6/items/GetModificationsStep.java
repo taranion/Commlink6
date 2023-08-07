@@ -109,6 +109,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			}
 			mod.setValue(result);
 			mod.getFormula().isResolved();
+			mod.setInstantiated(true);
 			logger.log(Level.DEBUG, "  Resolve "+mod.getFormula()+" to "+result+" and add "+mod);
 		}
 		logger.log(Level.INFO, "Add modification {0}", mod);

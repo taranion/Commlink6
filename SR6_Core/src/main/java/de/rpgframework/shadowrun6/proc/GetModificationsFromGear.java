@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemUtil;
@@ -63,9 +64,12 @@ public class GetModificationsFromGear implements ProcessingStep {
 					for (Modification mod : item.getCharacterModifications()) {
 						logger.log(Level.INFO, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());
 						// Make specific instances of the modification (if necessary)
+						int multiplier = ItemUtil.getRating((CarriedItem<ItemTemplate>) item);
+						if (mod instanceof ValueModification && ((ValueModification)mod).isInstantiated())
+							multiplier=1;
 						// Calls ShadowrunTools.instantiateModification
 						logger.log(Level.TRACE, "--item {0}: preMod={1} ", item.getKey(), mod);
-						Modification realMod = mod.getReferenceType().instantiateModification(mod, item, ItemUtil.getRating((CarriedItem<ItemTemplate>) item), model);
+						Modification realMod = mod.getReferenceType().instantiateModification(mod, item, multiplier, model);
 						logger.log(Level.TRACE, "--item {0}: realMod={1} ", item.getKey(), realMod);
 
 						unprocessed.add(realMod);
