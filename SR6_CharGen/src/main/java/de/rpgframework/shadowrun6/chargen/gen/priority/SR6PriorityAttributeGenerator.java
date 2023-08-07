@@ -29,7 +29,6 @@ import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.chargen.gen.CommonAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
@@ -565,7 +564,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			AttributeValue<ShadowrunAttribute> val = parent.getModel().getAttribute(key);
-			val.setDistributed(per.getSum() -  val.getModifier());
+			val.setDistributed(per.getSumWithoutBase());
 		}
 	}
 
@@ -579,7 +578,6 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 	 */
 	private void ensureMaximumNotExceeded() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
-			AttributeValue<ShadowrunAttribute> val = parent.getModel().getAttribute(key);
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			int max = getMaximumValue(key);
 			if (per!=null && per.getSum()>max) {
