@@ -1,81 +1,292 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qpaths>
+
 	<qpath id="critter_bond">
-		<step id="initial_bond" level="0">
+		<step id="critter_initial_bond" level="0">
 			<requires>
 				<datareq type="QUALITY" ref="critter_trainer" apply="CHARACTER"/>
 			</requires>
 			<choices>
-				<choice uuid="" type="SUBSELECT" ref="crittertype">
+				<choice uuid="611050a1-082d-4431-8547-6490b16ec545" type="SUBSELECT" ref="crittertype">
 					<subOption id="mundane_herbivore">
 						<modifications>
 							<valmod type="QUALITY" ref="dependents" value="1">
-								<decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Critter"/> 
+								<decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Critter (Herbivore)"/> 
 							</valmod>
 						</modifications>
 					</subOption>
 					<subOption id="mundane_carnivore">
 						<modifications>
 							<valmod type="QUALITY" ref="dependents" value="2">
-								<decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Critter"/> 
+								<decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Critter (Carnivore)"/> 
 							</valmod>
 						</modifications>
 					</subOption>
 					<subOption id="awakened_emerged">
 						<modifications>
 							<valmod type="QUALITY" ref="dependents" value="3">
-								<decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Critter"/> 
+								<decision choice="b22770d5-de1c-40ed-89ba-a858efa86710" value="Critter (Awakened/Emerged)"/> 
 							</valmod>
 						</modifications>
 					</subOption>
 				</choice>
 			</choices>
 			<nextSteps>
-				<next>greater_bond</next>
+				<next>critter_greater_bond</next>
 			</nextSteps>
 			<modifications>
-				<!--itemmod type="QUALITY" ref="broken_code"/-->
+				<itemmod type="QUALITY" ref="critter_initial_bond"/>
 			</modifications>
 		</step>
-		<step id="greater_bond" level="1">
+		<step id="critter_greater_bond" level="1">
 			<nextSteps>
-				<next>permanent_improvement</next>
+				<next>critter_improvement</next>
+				<next>critter_lost</next>
+				<next>critter_goodbye</next>
 			</nextSteps>
 			<modifications>
-				<!--itemmod type="QUALITY" ref="permanent_improvement"/-->
+				<itemmod type="QUALITY" ref="critter_initial_bond" remove="true"/>
+				<itemmod type="QUALITY" ref="critter_greater_bond"/>
 			</modifications>
 		</step>
-		<step id="permanent_improvement" level="2">
+		<step id="critter_improvement" level="2">
 			<nextSteps>
-				<next>lost</next>
-				<next>saying_goodbye</next>
+				<next>critter_lost</next>
+				<next>critter_goodbye</next>
 			</nextSteps>
 			<modifications>
-				<!--itemmod type="QUALITY" ref="greater_bond"/-->
+				<itemmod type="QUALITY" ref="critter_improvement"/>
 			</modifications>
 		</step>
-		<step id="lost" level="3">
+		<step id="critter_lost" level="3">
 			<nextSteps>
-				<next>permanent_improvement</next>
-				<next>saying_goodbye</next>
+				<next>critter_improvement</next>
+				<next>critter_goodbye</next>
 			</nextSteps>
 			<modifications>
-				<!--itemmod type="QUALITY" ref="greater_bond"/-->
+				<itemmod type="QUALITY" ref="critter_lost"/>
 			</modifications>
 		</step>
-		<step id="broken_trust" level="3">
+		<step id="critter_broken" level="3">
 			<nextSteps>
-				<next>permanent_improvement</next>
-				<next>saying_goodbye</next>
+				<next>critter_improvement</next>
+				<next>critter_goodbye</next>
 			</nextSteps>
 			<modifications>
-				<!--itemmod type="QUALITY" ref="greater_bond"/-->
+				<itemmod type="QUALITY" ref="critter_broken"/>
 			</modifications>
 		</step>
-		<step id="saying_goodbye" level="4">
+		<step id="critter_goodbye" level="4">
 			<modifications>
-				<!--itemmod type="QUALITY" ref="greater_bond"/-->
+				<itemmod type="QUALITY" ref="critter_goodbye"/>
 			</modifications>
 		</step>
 	</qpath>
+
+	<qpath id="obsession">
+		<step id="obsession_consumed" level="0">
+			<nextSteps>
+				<next>obsession_fulfilled</next>
+				<next>obsession_misfortune</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="obsession_consumed"/>
+			</modifications>
+		</step>
+		<step id="obsession_fulfilled" level="1">
+			<nextSteps>
+				<next>obsession_obsessive</next>
+				<next>obsession_goal</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="obsession_consumed" remove="true"/>
+				<itemmod type="QUALITY" ref="obsession_fulfilled"/>
+			</modifications>
+		</step>
+		<step id="obsession_obsessive" level="2">
+			<nextSteps>
+				<next>obsession_misfortune</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="obsession_fulfilled" remove="true"/>
+				<itemmod type="QUALITY" ref="obsession_obsessive"/>
+			</modifications>
+		</step>
+		<step id="obsession_goal" level="2">
+			<modifications>
+				<itemmod type="QUALITY" ref="obsession_fulfilled" remove="true"/>
+				<itemmod type="QUALITY" ref="obsession_goal"/>
+			</modifications>
+		</step>
+		<step id="obsession_misfortune" level="3">
+			<modifications>
+				<itemmod type="QUALITY" ref="obsession_misfortune"/>
+			</modifications>
+		</step>
+	</qpath>
+
+	<qpath id="favored_weapon">
+		<step id="favored_weapon_extension" level="0">
+			<choices>
+				<choice uuid="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" type="CARRIED" ref="WEAPON" />
+			</choices>
+			<requires>
+				<!-- ToDo: <datareq type="SKILL" ref="expertise" apply="CHARACTER"/> requires expertise in the skill used for the weapon selected in choice -->
+			</requires>
+			<nextSteps>
+				<next>favored_weapon_customization</next>
+				<next>favored_weapon_attachment</next>
+				<next>favored_weapon_lost</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="favored_weapon_extension"/>
+			</modifications>
+		</step>
+		<step id="favored_weapon_customization" level="1">
+			<nextSteps>
+				<next>favored_weapon_customization</next>
+				<next>favored_weapon_attachment</next>
+				<next>favored_weapon_lost</next>
+			</nextSteps>
+			<choices>
+				<choice uuid="cb435880-281d-4648-b0a5-04c14af0e4cd" type="SUBSELECT" ref="favored_weapon_custom">
+					<subOption id="fav_weapon_kill">
+						<modifications>
+							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_kill"/>
+						</modifications>
+					</subOption>
+					<subOption id="fav_weapon_sighted">
+						<modifications>
+							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_sighted"/>
+						</modifications>
+					</subOption>
+					<subOption id="fav_weapon_deadly">
+						<modifications>
+							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_deadly"/>
+						</modifications>
+					</subOption>
+					<subOption id="fav_weapon_extra_mod">
+						<requires>
+							<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_CLOSE_COMBAT"/>
+						</requires>
+						<modifications>
+							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_extra_mod"/>
+						</modifications>
+					</subOption>
+					<subOption id="fav_weapon_extra_acc">
+						<requires>
+							<selreq>
+								<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_FIREARMS"/>
+								<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_RANGED"/>
+							</selreq>
+						</requires>
+						<modifications>
+							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_extra_acc"/>
+						</modifications>
+					</subOption>
+					<subOption id="fav_weapon_defensive">
+						<requires>
+							<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_CLOSE_COMBAT"/>
+						</requires>
+						<modifications>
+							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_defensive"/>
+						</modifications>
+					</subOption>
+					<subOption id="fav_weapon_offensive">
+						<requires>
+							<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_CLOSE_COMBAT"/>
+						</requires>
+						<modifications>
+							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_offensive"/>
+						</modifications>
+					</subOption>
+					<subOption id="fav_weapon_wicked">
+						<modifications>
+							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_wicked"/>
+						</modifications>
+					</subOption>
+				</choice>
+			</choices>
+		</step>
+		<step id="favored_weapon_attachment" level="1">
+			<nextSteps>
+				<next>favored_weapon_customization</next>
+				<next>favored_weapon_lost</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="favored_weapon_attachment"/>
+			</modifications>
+		</step>
+		<step id="favored_weapon_lost" level="2">
+			<nextSteps>
+				<next>critter_improvement</next>
+				<next>critter_goodbye</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="favored_weapon_extension" remove="true"/>
+				<itemmod type="QUALITY" ref="favored_weapon_custom" remove="true"/>
+				<itemmod type="QUALITY" ref="favored_weapon_custom" remove="true"/>
+				<itemmod type="QUALITY" ref="favored_weapon_custom" remove="true"/>
+			</modifications>
+		</step>
+	</qpath>
+
+	<qpath id="vendetta">
+		<step id="vendetta_start" level="0">
+			<nextSteps>
+				<next>vendetta_lielow</next>
+				<next>vendetta_shutdown</next>
+				<next>vendetta_fine</next>
+			</nextSteps>
+			<modifications>
+			</modifications>
+		</step>
+		<step id="vendetta_lielow" level="1">
+			<modifications>
+			</modifications>
+		</step>
+		<step id="vendetta_shutdown" level="1">
+			<modifications>
+			</modifications>
+		</step>
+		<step id="vendetta_fine" level="1">
+			<modifications>
+			</modifications>
+		</step>
+	</qpath>
+
+	<qpath id="sinners_path">
+		<step id="sinners_path_record" level="0">
+			<requires>
+				<datareq type="QUALITY" ref="sinner" apply="CHARACTER"/>
+			</requires>
+			<nextSteps>
+				<next>sinners_path_criminal</next>
+				<next>sinners_path_shadows</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="sinners_path_record"/>
+			</modifications>
+		</step>
+		<step id="sinners_path_criminal" level="1">
+			<nextSteps>
+				<next>sinners_path_shadows</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="sinners_path_criminal"/>
+			</modifications>
+		</step>
+		<step id="sinners_path_shadows" level="2">
+			<modifications>
+				<itemmod type="QUALITY" ref="sinner" remove="true"/>
+				<itemmod type="QUALITY" ref="sinners_path_criminal" remove="true"/>
+				<itemmod type="QUALITY" ref="sinners_path_record" remove="true"/>
+				<itemmod type="QUALITY" ref="sinners_path_shadows"/>
+			</modifications>
+		</step>
+	</qpath>
+
+
+
+
 </qpaths>

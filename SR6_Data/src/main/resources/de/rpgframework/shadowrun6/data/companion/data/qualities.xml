@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
+
+	<!-- Positive qualities -->
+
 	<quality id="augmentation_acclimation" karma="2" pos="true" type="NORMAL" max="10">
 		<requires>
 			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3"/>
@@ -94,6 +97,7 @@
 	<quality id="teflon_coated"  karma="12" pos="true" type="NORMAL" />
 
 	<!-- Negative qualities -->
+	
 	<quality id="all_business" karma="8" pos="false" type="NORMAL">
 		<modifications>
 			<itemmod type="RULE" ref="MAX_3_CONTACT_LOYALTY"/>
@@ -143,8 +147,10 @@
    </quality>
 	<quality id="trust_issues" karma="10" pos="false" type="NORMAL">
 		<modifications>
-			<checkmod type="SKILL" ref="con"       value="0" what="USAGE"/>
-			<checkmod type="SKILL" ref="influence" value="0" what="USAGE"/>
+			<checkmod type="SKILL" ref="con"       value="0" what="NOT_SPEND_EDGE"/>
+			<checkmod type="SKILL" ref="influence" value="0" what="NOT_SPEND_EDGE"/>
+			<checkmod type="SKILL" ref="con"       value="0" what="NOT_EARN_EDGE"/>
+			<checkmod type="SKILL" ref="influence" value="0" what="NOT_EARN_EDGE"/>
 		</modifications>
 	</quality>
 	<quality id="twitchy" karma="5" pos="false" type="NORMAL">
@@ -152,5 +158,76 @@
 			<valmod type="ATTRIBUTE" ref="COMPOSURE" value="$INITIATIVE_DICE_PHYSICAL"/>
 		</modifications>
 	</quality>
+
+	<!-- Qualities for quality paths -->
+
+	<quality id="critter_initial_bond" karma="10" pos="true" type="QUALITY_PATH">
+		<modifications>
+			<relevancemod topic="outdoors/animal_handling"/>
+		</modifications>
+	</quality>
+	<quality id="critter_greater_bond" karma="10" pos="true" type="QUALITY_PATH">
+		<modifications>
+			<relevancemod topic="outdoors/animal_handling"/>
+		</modifications>
+	</quality>
+	<quality id="critter_improvement" karma="0" pos="true" type="QUALITY_PATH"> <!-- ToDo: costs based on improvement for critter -->
+		<modifications>
+			<relevancemod topic="outdoors/animal_handling"/>
+		</modifications>
+	</quality>
+	<quality id="critter_lost" karma="0" pos="false" type="QUALITY_PATH">
+		<modifications>
+			<relevancemod topic="outdoors/animal_handling"/>
+		</modifications>
+	</quality>
+	<quality id="critter_broken" karma="0" pos="false" type="QUALITY_PATH">
+		<modifications>
+			<relevancemod topic="outdoors/animal_handling"/>
+		</modifications>
+	</quality>
+	<quality id="critter_goodbye" karma="0" pos="false" type="QUALITY_PATH">
+		<modifications>
+			<relevancemod topic="outdoors/animal_handling"/>
+		</modifications>
+	</quality>
+
+	<quality id="obsession_consumed" karma="0" pos="false" type="QUALITY_PATH"/>
+	<quality id="obsession_fulfilled" karma="15" pos="false" type="QUALITY_PATH"/>
+	<quality id="obsession_obsessive" karma="0" pos="false" type="QUALITY_PATH"/>
+	<quality id="obsession_goal" karma="0" pos="false" type="QUALITY_PATH">
+		<modifications>
+			<!-- ToDo: Reduce karma cost for quality focused_ambition from 6 (doubled for in-game to 12) to 8 (or 4, not considering doubling) -->
+		</modifications>
+	</quality>
+	<quality id="obsession_misfortune" karma="0" pos="false" type="QUALITY_PATH">
+		<modifications>
+			<relevancemod topic="COMPOSURE"/>
+			<!-- ToDo: Ability to buy off for 25 Karma -->
+		</modifications>
+	</quality>
+
+	<quality id="favored_weapon_extension" karma="10" pos="true" type="QUALITY_PATH"/>
+	<quality id="favored_weapon_custom" karma="5" pos="true" type="QUALITY_PATH" multi="y" max="3">
+		<choices>
+			<choice type="SUBSELECT" ref="variant" uuid="06f71621-9cf3-4d54-ae82-a21cc00ef966">
+				<subOption id="fav_weapon_kill" />
+				<subOption id="fav_weapon_sighted" />
+				<subOption id="fav_weapon_deadly" />
+				<subOption id="fav_weapon_extra_mod" />
+				<subOption id="fav_weapon_extra_acc" />
+				<subOption id="fav_weapon_defensive" />
+				<subOption id="fav_weapon_offensive" />
+				<subOption id="fav_weapon_wicked" />
+			</choice>
+		</choices>
+	</quality>
+	<quality id="favored_weapon_attachment" karma="5" pos="false" type="QUALITY_PATH"/>
+	<quality id="favored_weapon_lost" karma="0" pos="false" type="QUALITY_PATH"/>
+
+	<quality id="sinners_path_record" karma="5" pos="false" type="QUALITY_PATH"/>
+	<quality id="sinners_path_criminal" karma="0" pos="false" type="QUALITY_PATH"/>
+	<quality id="sinners_path_shadows" karma="18" pos="true" type="QUALITY_PATH"/>
+
 
 </qualities>
