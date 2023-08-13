@@ -217,7 +217,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		}
 		SR6SkillValue value = model.getSkillValue(item);
 		if (value == null) {
-			logger.log(Level.ERROR, "applySkill for skill unset: "+mod.getKey());
+			logger.log(Level.WARNING, "applySkill for skill unset: "+mod.getKey());
 			return false;
 		}
 
