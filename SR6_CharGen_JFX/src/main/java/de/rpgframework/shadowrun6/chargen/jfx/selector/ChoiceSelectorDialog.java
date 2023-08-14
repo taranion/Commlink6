@@ -657,6 +657,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 					}
 				}
 			}
+		} else if (choice.getTypeReference()!=null) {
+			SR6Skill skill = Shadowrun6Core.getSkill(choice.getTypeReference());
+			List<SkillSpecialization<?>> list = skill.getSpecializations();
+			for (SkillSpecialization<?> spec : list) {
+				cbSub.getItems().add((SkillSpecialization<SR6Skill>) spec);
+			}
 //		} else {
 //			cbSub.getItems().addAll(Shadowrun6Core.getItemList(SR6Skill.class));
 		}
@@ -666,7 +672,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}});
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
-			decisions.put(choice, new Decision(choice, n.getId()));
+			decisions.put(choice, new Decision(choice, n.getSkill().getId()+"/"+n.getId()));
 			updateButtons();
 			showHelpFor(n); });
 		content.getChildren().add(cbSub);
