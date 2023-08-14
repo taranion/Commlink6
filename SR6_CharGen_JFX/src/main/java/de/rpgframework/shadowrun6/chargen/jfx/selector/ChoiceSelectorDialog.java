@@ -359,7 +359,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		logger.log(Level.INFO, "hasLevel detected");
 		addLabel(ResourceI18N.get(RES, "label.rating"));
 		ChoiceBox<Integer> cbRatings = new ChoiceBox<>();
-		for (int i=1; i<=10; i++)
+		int max = 10;
+		if (template instanceof Quality && ((Quality)template).getMax()>0)
+			max = ((Quality)template).getMax();
+		for (int i=1; i<=max; i++)
 			cbRatings.getItems().add(i);
 		cbRatings.getSelectionModel().select(0);
 		cbRatings.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
@@ -628,6 +631,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 	//-------------------------------------------------------------------
 	private Node handleSKILLSPECIALIZATION(ComplexDataItem item, Choice choice) {
+		logger.log(Level.ERROR, "handleSKILLSPECIALIZATION");
 		ChoiceBox<SkillSpecialization<SR6Skill>> cbSub = new ChoiceBox<>();
 		cbSub.setConverter(new StringConverter<SkillSpecialization<SR6Skill>>() {
 			public SkillSpecialization<SR6Skill> fromString(String value) { return null;}
