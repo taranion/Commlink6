@@ -54,12 +54,6 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			per.base=1;
 		}
-//		try {
-//			throw new RuntimeException("Trace "+this);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
 
 	//-------------------------------------------------------------------
@@ -564,7 +558,14 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			AttributeValue<ShadowrunAttribute> val = parent.getModel().getAttribute(key);
-			val.setDistributed(per.getSum());
+			switch (key) {
+			case MAGIC:
+			case RESONANCE:
+				val.setDistributed(per.getSumWithoutBase());
+				break;
+			default:
+				val.setDistributed(per.getSum());
+			}
 		}
 	}
 
@@ -778,7 +779,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 
 				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(key);
 				logger.log(Level.DEBUG, "Current {4} aVal={0}/{1}  sumWithout={2}  sum={3}", aVal.getModifiedValue(), aVal.getModifier(), per.getSumWithoutBase(), per.getSum(), key);
-				aVal.setDistributed(per.getSum());
+				aVal.setDistributed(per.getSumWithoutBase());
 			}
 			logger.log(Level.DEBUG, "Finish with {0} adjust and {1} attrib points and {2} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());
 
