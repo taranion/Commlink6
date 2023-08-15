@@ -90,7 +90,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 					model.addItemModification(mod); return true;
 				default:
 					logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
-					System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
+					//System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
 				}
 			}
 		} catch (Exception e) {
