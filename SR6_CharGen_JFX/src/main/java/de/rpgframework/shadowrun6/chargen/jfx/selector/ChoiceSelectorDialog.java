@@ -1169,8 +1169,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 					items.addAll(temp.getGearSubDefinitions());
 				}
 				break;
+			case "WEAPON":
+				// Used for targeting autosoft
+				List<ItemTemplate> allVehicles = items.stream().filter(i -> ItemType.isVehicle(i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue())).collect(Collectors.toList());
+				logger.log(Level.ERROR, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'.\nAll vehicles are "+allVehicles);
 			default:
-				logger.log(Level.WARNING, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
+				logger.log(Level.ERROR, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
 			}
 		}
 		choicebox.getItems().addAll(items);
