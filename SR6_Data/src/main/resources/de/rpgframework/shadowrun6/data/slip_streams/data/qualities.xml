@@ -41,7 +41,7 @@
    <quality id="spectral_hand" 				karma="0" pos="true" type="NORMAL" selectable="false"/>
    <quality id="stone_skin" 				karma="0" pos="true" type="NORMAL" selectable="false">
      <modifications>
-		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="2" apply="CHARACTER" cond="y"/>
+		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" apply="CHARACTER" cond="y"/>
     </modifications>
    </quality>
    <quality id="telekinesis" 				karma="0" pos="true" type="NORMAL" selectable="false"/>
