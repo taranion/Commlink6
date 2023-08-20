@@ -679,10 +679,11 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 				} else if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE) {
 					ValueModification mod = (ValueModification)tmp;
 					ShadowrunAttribute attr = mod.getResolvedKey();
-					logger.log(Level.DEBUG, "Consume "+mod);
-					getModel().getAttribute(attr).addModification(mod);
+					AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
+					logger.log(Level.DEBUG, "Consume {0} when old val is {1} and old max is {2}", mod, aVal.getModifiedValue(),aVal.getMaximum());
+					aVal.addModification(mod);
 					if (mod.getSet()==ValueType.MAX) {
-						logger.log(Level.DEBUG, "Consume "+mod+" and set max. value of {0} to {1}", attr, mod.getValue());
+//						logger.log(Level.DEBUG, "After consuming {0} max is {1}", mod, aVal.getMaximum());
 						// Optional: Allow adjustment points on lowered maximum
 						if (mod.getValue()>6 || parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))
 							allowedAdjust.add(attr);
