@@ -4,7 +4,7 @@
 	<quality id="inside_contact" karma="12" pos="true" type="NORMAL">
 		<modifications>
 			<!--contmod infl="2" loyal="2" name="Knight Errant Contact"/ -->
-			<valmod type="CONTACT" ref="CORPORATE" value="2"/>
+			<valmod type="CONTACT_TYPES" ref="CORPORATE" value="2"/>
 		</modifications>
 	</quality>
 	<quality id="aztechnologiy_death_warrant" karma="10"
@@ -46,71 +46,63 @@
 	</quality>
 	<quality id="networked_in" karma="4" pos="true" type="NORMAL">
 		<modifications>
-			<itemmod type="RULE" ref="CONTACT_RATING4_PLUS_1" />
+			<!--itemmod type="RULE" ref="CONTACT_RATING4_PLUS_1" /-->
 		</modifications>
 	</quality>
-	<quality id="honorbound_corporate_bushido" karma="10"
-		pos="false" type="NORMAL" />
+	<quality id="honorbound_corporate_bushido" karma="10" pos="false" type="NORMAL" />
 	<quality id="s-k_swagger" karma="5" pos="false" type="NORMAL">
 		<modifications>
-			<edgemod skill="con" type="USAGE" />
-			<edgemod skill="influence" type="USAGE" />
+      	<checkmod type="SKILL" ref="influence" what="NOT_EARN_EDGE"  value="1" apply="CHARACTER" cond="y" />
+      	<checkmod type="SKILL" ref="influence" what="NOT_SPEND_EDGE" value="1" apply="CHARACTER" cond="y" />
+      	<checkmod type="SKILL" ref="influence" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y" />
+      	<checkmod type="SKILL" ref="con" what="NOT_EARN_EDGE"  value="1" apply="CHARACTER" cond="y" />
+      	<checkmod type="SKILL" ref="con" what="NOT_SPEND_EDGE" value="1" apply="CHARACTER" cond="y" />
+      	<checkmod type="SKILL" ref="con" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y" />
 			<relevancemod topic="SOCIAL" />
 		</modifications>
 	</quality>
-	<quality id="survival_of_the_fittest_local" karma="2"
-		pos="true" type="NORMAL">
+	<quality id="survival_of_the_fittest" karma="2" pos="true" type="NORMAL">
+		<choices>
+			<choice type="SUBSELECT" ref="reach" uuid="55a6dda7-7565-4108-9a04-65b7607081df">
+				<subOption id="local"    cost="0" />
+				<subOption id="regional" cost="2" />
+				<subOption id="global"   cost="4" />
+			</choice>
+		</choices>
 		<modifications>
-			<edgemod skill="con" type="USAGE" />
-			<edgemod skill="influence" type="USAGE" />
-			<relevancemod topic="SOCIAL" />
-		</modifications>
-	</quality>
-	<quality id="survival_of_the_fittest_regional" karma="4"
-		pos="true" type="NORMAL">
-		<modifications>
-			<edgemod skill="con" type="USAGE" />
-			<edgemod skill="influence" type="USAGE" />
-			<relevancemod topic="SOCIAL" />
-		</modifications>
-	</quality>
-	<quality id="survival_of_the_fittest_global" karma="6"
-		pos="true" type="NORMAL">
-		<modifications>
-			<edgemod skill="con" type="USAGE" />
-			<edgemod skill="influence" type="USAGE" />
+      	<checkmod type="SKILL" ref="con" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y" />
+      	<checkmod type="SKILL" ref="influence" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y" />
 			<relevancemod topic="SOCIAL" />
 		</modifications>
 	</quality>
 	<quality id="human20" karma="25" pos="true" type="NORMAL">
 		<requires>
-			<metareq ref="human" />
-			<magresreq type="mundane" />
+			<valuereq type="METATYPE" value="human"/>
+			<valuereq type="MAGIC_RESO" value="mundane"/>
 		</requires>
 		<modifications>
-			<attrmod attr="CHARISMA" val="1" type="MAX" />
-			<attrmod attr="WILLPOWER" val="1" type="MAX" />
-			<edgemod skill="influence" type="USAGE" />
+			<valmod type="ATTRIBUTE" ref="CHARISMA" value="1" set="MAX"/>
+			<valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" set="MAX"/>
 		</modifications>
 	</quality>
 	<quality id="dog_on_a_leash" karma="8" pos="false" type="NORMAL" />
 	<quality id="shinto_summoner" karma="6" pos="true" type="NORMAL">
 		<requires>
-			<skillreq skill="conjuring" val="1"/>
+			<valuereq type="SKILL" ref="conjuring" value="1"/>
 		</requires>
 		<modifications>
-			<skillmod ref="conjuring" val="1" cond="true" />
+			<valmod type="SKILL" ref="conjuring" value="1" cond="y"/>
 		</modifications>
 	</quality>
 	<quality id="fashion_influencer" karma="5" pos="true" type="NORMAL">
 		<modifications>
-			<specrulemod ref="FASHION_50_PERCENT" />
+			<itemmod type="RULE" ref="FASHION_50_PERCENT" />
 		</modifications>
 	</quality>
 	<quality id="social_outcast" karma="6" pos="false" type="NORMAL">
 		<modifications>
-			<edgemod skill="con" type="USAGE" />
-			<edgemod skill="influence" type="USAGE" />
+      	<checkmod type="SKILL" ref="con" what="OTHER" value="1" apply="CHARACTER" cond="y" />
+      	<checkmod type="SKILL" ref="influence" what="OTHER" value="1" apply="CHARACTER" cond="y" />
 			<relevancemod topic="SOCIAL" />
 		</modifications>
 	</quality>

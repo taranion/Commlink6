@@ -40,6 +40,8 @@ public enum SR6RuleFlag implements RuleFlag {
 	MAX_3_CONTACT_LOYALTY,
 	DECK_5000_PER_KARMA,
 	KNOWLEDGE_COST2_AT_GEN,
+	// Power Plays (Quality Fasion Influencer)
+	FASHION_50_PERCENT
 
 
 }

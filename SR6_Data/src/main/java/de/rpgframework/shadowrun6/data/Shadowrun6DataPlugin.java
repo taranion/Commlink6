@@ -163,7 +163,7 @@ public class Shadowrun6DataPlugin  {
 			initCore();
 			initFiringSquad();
 			initStreetWyrd();
-//			initPowerPlays();
+			initPowerPlays();
 			initDoubleClutch();
 			initHackNSlash();
 			initCompanion();
