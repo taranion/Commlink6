@@ -5,15 +5,18 @@
 	</item>
    <item id="combat_knife" avail="2" price="220" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="3P" attack="8,2,,," skill="close_combat" spec="close_combat/blades"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
    </item>
    <item id="survival_knife" avail="2" price="220" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="3P" attack="8,2,,," skill="close_combat" spec="close_combat/blades"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
    </item>  
    <item id="forearm_snap_blades" avail="3" price="185" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
    <item id="knife" avail="1" price="20" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon dmg="2P" attack="6,1,,," skill="close_combat" spec="close_combat/blades"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
    </item>
    <item id="katana" avail="3" price="350" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon dmg="4P" attack="10,,,," skill="close_combat" spec="close_combat/blades"/>
@@ -31,9 +34,11 @@
    </item>
    <item id="extendable_baton" avail="2" price="50" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
       <weapon dmg="2S" attack="5,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
    </item>
    <item id="sap" avail="1" price="75" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
       <weapon dmg="2S" attack="6,,,,"  skill="close_combat" spec="close_combat/clubs"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
    </item>
    <item id="staff" avail="1" price="150" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
       <weapon dmg="4S" attack="8,,,,"  skill="close_combat" spec="close_combat/clubs"/>
@@ -53,6 +58,7 @@
    </item>
    <item id="knucks" avail="1" price="100" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
       <weapon dmg="3P" attack="5,,,,"  skill="close_combat" spec="close_combat/unarmed"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
    </item>
    <item id="shock_gloves" avail="4" price="790" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
       <weapon dmg="4S(e)" attack="5,,,,"  skill="close_combat" spec="close_combat/unarmed"/>
@@ -101,8 +107,10 @@
    </item>
    <item id="throwing_knives" avail="2" price="155" type="WEAPON_RANGED" subtype="THROWING" count="y">
       <weapon dmg="2P" attack="10,9,3,,"  skill="athletics" spec="athletics/throwing"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
    </item>
    <item id="throwing_stars" avail="2" price="160" type="WEAPON_RANGED" subtype="THROWING" count="y">
       <weapon dmg="2P" attack="9,11,4,,"  skill="athletics" spec="athletics/throwing"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
    </item>
 </items>
