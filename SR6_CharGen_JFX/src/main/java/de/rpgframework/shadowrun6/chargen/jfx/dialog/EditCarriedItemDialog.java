@@ -10,7 +10,9 @@ import java.util.Locale;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import org.prelle.javafx.ApplicationScreen;
 import org.prelle.javafx.CloseType;
+import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.NavigButtonControl;
 import org.prelle.javafx.ScreenManagerProvider;
@@ -115,7 +117,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case HEADWARE_IMPLANT   : index= 2; break;
 		case SKILLJACK          : index= 3; break;
 		case CYBERLIMB_IMPLANT  : index= 4; break;
-		case CYBEREYE_IMPLANT   : index= 8; break;
+		case CYBEREYE_IMPLANT   : index= 9; break;
 		case CYBEREAR_IMPLANT   : index= 9; break;
 
 		// Kommlinks/Rigger Consoles/Decks/Tac-Nets
@@ -155,10 +157,10 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case VEHICLE_ACCESSORY  : index= 6; break;
 		// SOFTWARE uses slot 8, see Kommlinks
 		case VEHICLE_HARDPOINT  : index= 9; break;
-		case VEHICLE_CF         : index=10; break; 
+		case VEHICLE_CF         : index=10; break;
 		// slot 11 used for modslot circle (body, powertrain, electrical)
 		// slot for VEHICLE_WEAPON not needed, as those are inside hardpoints (VEHICLE_BODY)
-		
+
 
 		default:
 			logger.log(Level.WARNING, "No defined slot for {0}",slot.getHook());
@@ -369,6 +371,22 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
      			}
 //			}
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.jfx.pages.ACarriedItemPage#editAccessory(de.rpgframework.genericrpg.items.CarriedItem)
+	 */
+	@Override
+	protected void editAccessory(CarriedItem<ItemTemplate> accessoryToEdit) {
+		logger.log(Level.ERROR, "TODO: override editAccessory() method of "+getClass());
+		EditCarriedItemDialog dialog = new EditCarriedItemDialog(control, accessoryToEdit);
+		dialog.setAppLayout(FlexibleApplication.getInstance().getAppLayout());
+		FlexibleApplication.getInstance().openScreen(new ApplicationScreen(dialog));
+//		CloseType result = (CloseType) FlexibleApplication.getInstance().showAlertAndCall(dialog, dialog.getButtonControl());
+//		if (result==CloseType.OK) {
+//			this.requestLayout();
+//		}
 	}
 
 

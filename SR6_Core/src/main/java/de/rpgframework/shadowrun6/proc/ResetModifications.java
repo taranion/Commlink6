@@ -8,15 +8,12 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
-import de.rpgframework.shadowrun.DamageElement;
-import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Movement;
@@ -27,7 +24,6 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -42,7 +38,7 @@ import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
  */
 public class ResetModifications implements ProcessingStep {
 
-	private final static Logger logger = System.getLogger(ResetModifications.class.getPackageName());
+	private final static Logger logger = System.getLogger(ResetModifications.class.getPackageName()+".reset");
 
 	private Shadowrun6Character model;
 
@@ -60,7 +56,7 @@ public class ResetModifications implements ProcessingStep {
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
-
+		logger.log(Level.WARNING, "ENTER process");
 		model.clearEdgeModifications();
 		model.clearItemModifications();
 		model.clearGearDefinitions();

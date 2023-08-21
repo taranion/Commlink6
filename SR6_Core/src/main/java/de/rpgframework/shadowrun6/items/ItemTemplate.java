@@ -19,7 +19,6 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.DataErrorException;
-import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.IReferenceResolver;
@@ -242,8 +241,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			validateWeaponSize();
 		}
 
-		// If it is a firearm, mark it that the user may select to use caseless
-		// ammo with it
+		validateVehicleWeaponMountSlots();
 		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS) {
 			// Auto-detect ammunition class, if necessary
 			validateAmmunitionClass();
@@ -404,6 +402,43 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			logger.log(Level.WARNING, "No autodetection of weapon size for firearm {0}",subtype);
 		}
 		} // End of ammunition check
+	}
+
+	//-------------------------------------------------------------------
+	private void validateVehicleWeaponMountSlots() {
+		ItemType carriedType = this.getItemType(CarryMode.CARRIED);
+		if (carriedType==null || !ItemType.isWeapon(carriedType))
+			return;
+		ItemSubType carriedSubtype = this.getItemSubtype(CarryMode.CARRIED);
+
+		switch (carriedSubtype) {
+		case BLADES:
+		case WHIPS:
+		case CLUBS:
+		case BOWS:
+		case CROSSBOWS:
+		case RIFLE_HUNTING:
+		case RIFLE_SNIPER:
+		case HMG:
+		case LAUNCHERS:
+		case THROWERS:
+			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_LARGE));
+
+		case SHOTGUNS:
+		case RIFLE_ASSAULT:
+		case LMG:
+		case MMG:
+			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON));
+
+		case TASERS:
+		case HOLDOUTS:
+		case PISTOLS_LIGHT  :
+		case MACHINE_PISTOLS:
+		case PISTOLS_HEAVY  :
+		case SUBMACHINE_GUNS:
+			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_SMALL));
+			break;
+		}
 	}
 
 	//-------------------------------------------------------------------

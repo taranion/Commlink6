@@ -163,7 +163,7 @@ public class Shadowrun6DataPlugin  {
 			initCore();
 			initFiringSquad();
 			initStreetWyrd();
-//			initPowerPlays();
+			initPowerPlays();
 			initDoubleClutch();
 			initHackNSlash();
 			initCompanion();
@@ -171,7 +171,7 @@ public class Shadowrun6DataPlugin  {
 			initOtherUS();
 			initKrime();
 			initCollapsing();
-			//initSlip();
+			initSlip();
 			initDPAlpen();
 			initBerlin();
 			initDPFeuerläufer();
@@ -613,8 +613,6 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------Slip Streams-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "SLIP_STREAMS", "slip_streams.i18n", Locale.ENGLISH, Locale.GERMAN);
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"slip_streams/data/gear_auto.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" item");
 		list = Shadowrun6Core.loadDataItems(QualityList.class, Quality.class, set, clazz, "slip_streams/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 	}

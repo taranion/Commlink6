@@ -237,7 +237,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			AvailableSlot slot = (AvailableSlot) model.getSlot(hook);
 			if (slot==null) {
 				if (hook.hasCapacity && strict) {
-					logger.log(Level.ERROR, "Item {0} (from {1}) has an <embed> for a not existing slot {2}, but cannot auto-create slot since no capacity is given",
+					logger.log(Level.WARNING, "Item {0} (from {1}) has an <embed> for a not existing slot {2}, but cannot auto-create slot since no capacity is given",
 							mod.getKey(), mod.getSource(), hook);
 					return false;
 				}

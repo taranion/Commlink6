@@ -41,13 +41,13 @@
    <quality id="spectral_hand" 				karma="0" pos="true" type="NORMAL" selectable="false"/>
    <quality id="stone_skin" 				karma="0" pos="true" type="NORMAL" selectable="false">
      <modifications>
-		<itemmod type="GEAR" apply="CHARACTER" ref="stone_skin_armor"/>
+		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" apply="CHARACTER" cond="y"/>
     </modifications>
    </quality>
    <quality id="telekinesis" 				karma="0" pos="true" type="NORMAL" selectable="false"/>
-   
-<!-- returned soldier characteristics  -->   
-   
+
+<!-- returned soldier characteristics  -->
+
    <quality id="doppelgaenger"    karma="0" pos="false" type="NORMAL" selectable="false"/>
    <quality id="memory_hole"      karma="0" pos="false" type="NORMAL" selectable="false"/>
    <quality id="missing_features" karma="0" pos="false" type="NORMAL" selectable="false"/>

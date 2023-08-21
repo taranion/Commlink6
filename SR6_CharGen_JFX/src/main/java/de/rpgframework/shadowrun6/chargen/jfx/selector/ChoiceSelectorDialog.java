@@ -359,7 +359,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		logger.log(Level.INFO, "hasLevel detected");
 		addLabel(ResourceI18N.get(RES, "label.rating"));
 		ChoiceBox<Integer> cbRatings = new ChoiceBox<>();
-		for (int i=1; i<=10; i++)
+		int max = 10;
+		if (template instanceof Quality && ((Quality)template).getMax()>0)
+			max = ((Quality)template).getMax();
+		for (int i=1; i<=max; i++)
 			cbRatings.getItems().add(i);
 		cbRatings.getSelectionModel().select(0);
 		cbRatings.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
@@ -628,6 +631,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 	//-------------------------------------------------------------------
 	private Node handleSKILLSPECIALIZATION(ComplexDataItem item, Choice choice) {
+		logger.log(Level.ERROR, "handleSKILLSPECIALIZATION");
 		ChoiceBox<SkillSpecialization<SR6Skill>> cbSub = new ChoiceBox<>();
 		cbSub.setConverter(new StringConverter<SkillSpecialization<SR6Skill>>() {
 			public SkillSpecialization<SR6Skill> fromString(String value) { return null;}
@@ -653,6 +657,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 					}
 				}
 			}
+		} else if (choice.getTypeReference()!=null) {
+			SR6Skill skill = Shadowrun6Core.getSkill(choice.getTypeReference());
+			List<SkillSpecialization<?>> list = skill.getSpecializations();
+			for (SkillSpecialization<?> spec : list) {
+				cbSub.getItems().add((SkillSpecialization<SR6Skill>) spec);
+			}
 //		} else {
 //			cbSub.getItems().addAll(Shadowrun6Core.getItemList(SR6Skill.class));
 		}
@@ -662,7 +672,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}});
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
-			decisions.put(choice, new Decision(choice, n.getId()));
+			decisions.put(choice, new Decision(choice, n.getSkill().getId()+"/"+n.getId()));
 			updateButtons();
 			showHelpFor(n); });
 		content.getChildren().add(cbSub);
@@ -1159,8 +1169,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 					items.addAll(temp.getGearSubDefinitions());
 				}
 				break;
+			case "WEAPON":
+				// Used for targeting autosoft
+				List<ItemTemplate> allVehicles = items.stream().filter(i -> ItemType.isVehicle(i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue())).collect(Collectors.toList());
+				logger.log(Level.ERROR, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'.\nAll vehicles are "+allVehicles);
 			default:
-				logger.log(Level.WARNING, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
+				logger.log(Level.ERROR, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
 			}
 		}
 		choicebox.getItems().addAll(items);

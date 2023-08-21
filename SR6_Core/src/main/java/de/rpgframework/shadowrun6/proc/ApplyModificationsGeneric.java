@@ -90,7 +90,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 					model.addItemModification(mod); return true;
 				default:
 					logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
-					System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
+					//System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
 				}
 			}
 		} catch (Exception e) {
@@ -217,7 +217,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		}
 		SR6SkillValue value = model.getSkillValue(item);
 		if (value == null) {
-			logger.log(Level.ERROR, "applySkill for skill unset: "+mod.getKey());
+			logger.log(Level.WARNING, "applySkill for skill unset: "+mod.getKey());
 			return false;
 		}
 

@@ -54,12 +54,6 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			PerAttributePoints per = model.getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			per.base=1;
 		}
-//		try {
-//			throw new RuntimeException("Trace "+this);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
 
 	//-------------------------------------------------------------------
@@ -564,7 +558,14 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			AttributeValue<ShadowrunAttribute> val = parent.getModel().getAttribute(key);
-			val.setDistributed(per.getSum());
+			switch (key) {
+			case MAGIC:
+			case RESONANCE:
+				val.setDistributed(per.getSumWithoutBase());
+				break;
+			default:
+				val.setDistributed(per.getSum());
+			}
 		}
 	}
 
@@ -678,10 +679,11 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 				} else if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE) {
 					ValueModification mod = (ValueModification)tmp;
 					ShadowrunAttribute attr = mod.getResolvedKey();
-					logger.log(Level.DEBUG, "Consume "+mod);
-					getModel().getAttribute(attr).addModification(mod);
+					AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
+					logger.log(Level.DEBUG, "Consume {0} when old val is {1} and old max is {2}", mod, aVal.getModifiedValue(),aVal.getMaximum());
+					aVal.addModification(mod);
 					if (mod.getSet()==ValueType.MAX) {
-						logger.log(Level.DEBUG, "Consume "+mod+" and set max. value of {0} to {1}", attr, mod.getValue());
+//						logger.log(Level.DEBUG, "After consuming {0} max is {1}", mod, aVal.getMaximum());
 						// Optional: Allow adjustment points on lowered maximum
 						if (mod.getValue()>6 || parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))
 							allowedAdjust.add(attr);
@@ -778,7 +780,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 
 				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(key);
 				logger.log(Level.DEBUG, "Current {4} aVal={0}/{1}  sumWithout={2}  sum={3}", aVal.getModifiedValue(), aVal.getModifier(), per.getSumWithoutBase(), per.getSum(), key);
-				aVal.setDistributed(per.getSum());
+				aVal.setDistributed(per.getSumWithoutBase());
 			}
 			logger.log(Level.DEBUG, "Finish with {0} adjust and {1} attrib points and {2} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());
 

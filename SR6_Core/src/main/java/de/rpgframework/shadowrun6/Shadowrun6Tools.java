@@ -2099,7 +2099,7 @@ public class Shadowrun6Tools {
 			} else {
 				item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
 			}
-			logger.log(Level.WARNING,"*  "+item.getNameWithRating()+" \t"+item.getAsValue(attrib).getModifiedValue()+": ignored="+item.hasAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS));
+			logger.log(Level.DEBUG,"*  "+item.getNameWithRating()+" \t"+item.getAsValue(attrib).getModifiedValue()+": ignored="+item.hasAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS));
 		}
 		return best;
 	}

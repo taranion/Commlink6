@@ -67,7 +67,7 @@ public class AugmentationPage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initCyberware() {
-		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE);
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.CYBERWARE, ItemType.ELECTRONICS);
 		Predicate<CarriedItem<ItemTemplate>> showFilter = item -> {
 			if (item.getAsObject(SR6ItemAttribute.ITEMTYPE)==null) {
 				logger.log(Level.WARNING, "No ITEMTYPE in "+item.getKey());
@@ -76,6 +76,7 @@ public class AugmentationPage extends Page {
 			ItemType type = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
 			// All items that directly classify as CYBERWARE
 			if (type==ItemType.CYBERWARE && item.getCarryMode()==CarryMode.IMPLANTED) return true;
+			if (type==ItemType.ELECTRONICS && item.getCarryMode()==CarryMode.IMPLANTED) return true;
 			// or that are usually an accessory and now come in a BODYWARE variant
 			//if (type==ItemType.ACCESSORY)
 			return item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE;
