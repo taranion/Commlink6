@@ -1145,15 +1145,15 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, int multiplier, Shadowrun6Character model) {
-		logger.log(Level.DEBUG, "instantiate {0} with multiplier {1}",tmp,multiplier);
+		logger.log(Level.INFO, "instantiate {0} with multiplier {1}",tmp,multiplier);
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
 			int modVal = 0;
 			if (clone.hasFormula()) {
-//				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
-//				logger.log(Level.WARNING, "  model =  "+model);
-//				logger.log(Level.WARNING, "  data item =  "+value.getKey());
-//				logger.log(Level.WARNING, "  data item value =  "+value);
+				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
+				logger.log(Level.WARNING, "  model =  "+model);
+				logger.log(Level.WARNING, "  data item =  "+value.getKey());
+				logger.log(Level.WARNING, "  data item value =  "+value);
 				String resolved = FormulaTool.resolve(clone.getReferenceType(), clone.getFormula(), new VariableResolver(value, model));
 				logger.log(Level.DEBUG, "  {0} resolved as {1}", clone.getFormula(),resolved);
 				modVal = Integer.parseInt(resolved);

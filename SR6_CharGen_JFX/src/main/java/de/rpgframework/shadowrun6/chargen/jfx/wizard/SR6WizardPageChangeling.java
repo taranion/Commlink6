@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -126,7 +127,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			}
 
 			@Override
-			public void decide(SetItem decideFor, Choice choice, Decision decision) {
+			public void decide(SetItem decideFor, UUID choice, Decision decision) {
 				// TODO Auto-generated method stub
 
 			}

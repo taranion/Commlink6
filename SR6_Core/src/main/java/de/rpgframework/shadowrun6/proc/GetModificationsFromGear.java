@@ -10,7 +10,6 @@ import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -24,7 +23,7 @@ import de.rpgframework.shadowrun6.items.SR6GearTool;
  */
 public class GetModificationsFromGear implements ProcessingStep {
 
-	protected static final Logger logger = System.getLogger(GetModificationsFromGear.class.getPackageName());
+	protected static final Logger logger = System.getLogger(GetModificationsFromGear.class.getPackageName()+".gear");
 
 	private Shadowrun6Character model;
 

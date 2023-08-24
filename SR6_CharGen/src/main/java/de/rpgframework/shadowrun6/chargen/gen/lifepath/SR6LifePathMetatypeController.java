@@ -5,16 +5,14 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
-import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.BodyType;
@@ -57,7 +55,7 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 	}
 
 	@Override
-	public void decide(SR6MetaType decideFor, Choice choice, Decision decision) {
+	public void decide(SR6MetaType decideFor, UUID choice, Decision decision) {
 		// TODO Auto-generated method stub
 
 	}
