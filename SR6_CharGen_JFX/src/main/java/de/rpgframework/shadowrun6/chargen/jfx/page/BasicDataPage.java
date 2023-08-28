@@ -112,7 +112,7 @@ public class BasicDataPage extends Page implements IShadowrunCharacterController
 
 	//-------------------------------------------------------------------
 	private void initAttributes() {
-		secAttrib = new AttributeSection(ResourceI18N.get(RES, "page.basicdata.section.attributes.title"), null);
+		secAttrib = new AttributeSection(ResourceI18N.get(RES, "page.basicdata.section.attributes.title"));
 //		((AttributeSection)secAttrib).updateController(ctrl);
 	}
 

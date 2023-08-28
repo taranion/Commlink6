@@ -11,7 +11,9 @@ import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.PartialController;
 import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 
@@ -27,7 +29,7 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 
 	protected SR6CharacterController parent;
 	protected List<ToDoElement> todos;
-	protected List<Choice> choices;
+	protected List<UUID> choices;
 
 	//-------------------------------------------------------------------
 	protected ControllerImpl(SR6CharacterController parent) {
@@ -65,11 +67,21 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.PartialController#getChoices()
+	 * @see de.rpgframework.genericrpg.chargen.PartialController#getChoiceUUIDs()
 	 */
 	@Override
-	public List<Choice> getChoices() {
+	public List<UUID> getChoiceUUIDs() {
 		return choices;
+	}
+
+	//-------------------------------------------------------------------
+	public Choice getAsChoice(ComplexDataItem value, UUID uuid) {
+		return value.getChoice(uuid);
+	}
+
+	//-------------------------------------------------------------------
+	public ModificationChoice getAsModificationChoice(ComplexDataItem value, UUID uuid) {
+		return value.getModificationChoice(uuid);
 	}
 
 	//-------------------------------------------------------------------

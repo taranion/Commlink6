@@ -96,7 +96,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 
 	//-------------------------------------------------------------------
 	private void initAttributes() {
-		secAttrib = new AttributeSection(ResourceI18N.get(RES, "page.basicdata.section.attributes.title"), null);
+		secAttrib = new AttributeSection(ResourceI18N.get(RES, "page.basicdata.section.attributes.title"));
 //		((AttributeSection)secAttrib).updateController(ctrl);
 
 		FlexGridPane.setMinWidth(secAttrib, 4);

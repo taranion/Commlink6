@@ -32,9 +32,11 @@ import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.ComplexDataItemControllerOneColumnSkin;
 import de.rpgframework.jfx.DataItemSpinnerPane;
@@ -121,7 +123,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			public void roll() {}
 
 			@Override
-			public List<Choice> getChoices() {
+			public List<UUID> getChoiceUUIDs() {
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -185,6 +187,16 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			public float getSelectionCost(SetItem data) { return data.getCost(); }
 			@Override
 			public String getSelectionCostString(SetItem data) { return String.valueOf(getSelectionCost(data)); }
+			@Override
+			public Choice getAsChoice(ComplexDataItem value, UUID uuid) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			@Override
+			public ModificationChoice getAsModificationChoice(ComplexDataItem value, UUID uuid) {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		});
 		comparator = new Comparator<SetItem>() {
 			public int compare(SetItem meta1, SetItem meta2) {

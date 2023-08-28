@@ -133,7 +133,6 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 			//System.exit(1);
 			return leveller;
 		} else {
-
 			GeneratorWrapper wrapper = new GeneratorWrapper((Shadowrun6Character) model, handle);
 			logger.log(Level.INFO, "ToDo: Detect previously used generator: {0}", model.getCharGenUsed());
 			try {
@@ -153,15 +152,6 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 				if (model.getCharGenUsed() == null) {
 					throw new NullPointerException(ResourceI18N.get(RES, "error.no_chargen_in_character"));
 				}
-//			switch (model.getCharGenUsed()) {
-//			case "prio":
-//				model.setCharGenSettings( (new Gson()).fromJson(model.getChargenSettingsJSON(), SR6PrioritySettings.class) );
-//				break;
-//			default:
-//				logger.log(Level.ERROR, "Don't know how to read settings from "+model.getCharGenUsed());
-//				System.exit(1);
-//			}
-
 				SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator(model.getCharGenUsed(), model,
 						handle);
 				wrapper.setWrapped(charGen);
