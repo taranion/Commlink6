@@ -29,6 +29,8 @@ import org.prelle.javafx.OptionalNodePane;
 
 import de.rpgframework.HasName;
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.core.BabylonEventBus;
+import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
@@ -1134,6 +1136,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 		});
 		List<ItemTemplate> items = new ArrayList<>();
+		List<CarriedItem<ItemTemplate>> carried = ((Shadowrun6Character)ctrl.getModel()).getCarriedItemsRecursive();
 		// If options are given, use those
 		if (choice.getChoiceOptions()!=null && choice.getChoiceOptions().length>0) {
 			List<ItemTemplate> overwrite = new ArrayList<>();
@@ -1145,12 +1148,20 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			}
 			items.clear();
 			items.addAll(overwrite);
+		} else {
+			items = Shadowrun6Core.getItemList(ItemTemplate.class).stream().filter(data -> ctrl.getCharacterController().showDataItem(data)).collect(Collectors.toList());
 		}
+
+		Predicate<ItemTemplate> filterIsCarried = new Predicate<ItemTemplate>() {
+			public boolean test(ItemTemplate item) {
+				return (carried.stream().anyMatch(ci -> ci.getResolved()==item)) ;
+			}
+
+		};
 
 		// Eventually sort
 		if (choice.getTypeReference()!=null) {
 			logger.log(Level.DEBUG, "Reduce gear to select from to "+choice.getTypeReference());
-			System.err.println("ChoiceSelectorDialog: Reduce gear to select from to "+choice.getTypeReference());
 			switch (choice.getTypeReference()) {
 			case "MELEE":
 				items = items.stream().filter(i -> i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.WEAPON_CLOSE_COMBAT).collect(Collectors.toList());
@@ -1169,13 +1180,32 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 					items.addAll(temp.getGearSubDefinitions());
 				}
 				break;
+			case "VEHICLE":
+				// Used for maneuvering autosoft
+				logger.log(Level.ERROR, "Reduce {0} gear items",items.size());
+				items = items.stream()
+						.filter(i -> ItemType.isVehicle(i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()))
+						.filter(filterIsCarried)
+						.collect(Collectors.toList());
+				logger.log(Level.ERROR, "Reduce GEAR to ''{0}''.\nAll vehicles are {1} results",choice.getTypeReference(),items.size());
+				break;
 			case "WEAPON":
 				// Used for targeting autosoft
-				List<ItemTemplate> allVehicles = items.stream().filter(i -> ItemType.isVehicle(i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue())).collect(Collectors.toList());
-				logger.log(Level.ERROR, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'.\nAll vehicles are "+allVehicles);
+				items = items.stream()
+						.filter(i -> ItemType.isWeapon(i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()))
+						.filter(filterIsCarried)
+						.collect(Collectors.toList());
+				logger.log(Level.ERROR, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'.\nAll weapons are {0} results",items.size());
+				break;
 			default:
 				logger.log(Level.ERROR, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
+				System.err.println("ChoiceSelectorDialog: Don't know how to reduce gear to select from to "+choice.getTypeReference());
 			}
+		}
+		if (items.isEmpty()) {
+			System.err.println("PROBLEM: Reducing gear selection to empty list");
+			logger.log(Level.ERROR, "PROBLEM: Reducing gear selection to empty list");
+			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, "Selecting all "+choice.getTypeReference()+" returns an empty list.");
 		}
 		choicebox.getItems().addAll(items);
 
