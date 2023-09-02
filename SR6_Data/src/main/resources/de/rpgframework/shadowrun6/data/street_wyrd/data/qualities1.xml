@@ -16,6 +16,9 @@
      </modifications>
    </quality>
    <quality id="shamanic_mask" pos="true" karma="4" type="NORMAL" >
+   	<requires>
+   		<datareq type="QUALITY" ref="mentor_spirit"/>
+   	</requires>
       <modifications>
      		<checkmod type="SKILL" ref="astral" what="EDGE_ONLY_TEST" value="1"/>
      		<checkmod type="SKILL" ref="conjuring" what="EDGE_ONLY_TEST" value="1"/>
