@@ -97,7 +97,7 @@
 	<quality id="teflon_coated"  karma="12" pos="true" type="NORMAL" />
 
 	<!-- Negative qualities -->
-	
+
 	<quality id="all_business" karma="8" pos="false" type="NORMAL">
 		<modifications>
 			<itemmod type="RULE" ref="MAX_3_CONTACT_LOYALTY"/>
@@ -140,7 +140,7 @@
 	<quality id="momentous_misfortune" karma="25" pos="false" type="NORMAL"/>
 	<quality id="non_lethal"     karma="5"   pos="false" type="NORMAL"/>
 	<quality id="stim_patch_allergy" karma="10" pos="false" type="NORMAL"/>
-   <quality id="toxin_susceptibility" karma="10" pos="false" type="NORMAL">
+   <quality id="toxin_susceptibility" karma="2" pos="false" type="NORMAL">
      <choices>
        <choice type="TEXT" uuid="05ed2489-d0af-485b-658a-61fbd064ed9d"/>
      </choices>
