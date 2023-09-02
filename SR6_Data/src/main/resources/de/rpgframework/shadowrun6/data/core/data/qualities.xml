@@ -269,7 +269,7 @@
    		<choice type="TEXT" uuid="3011a0ca-1cc5-4ca1-b046-0870a282c3be"/>
    	</choices>
      <modifications>
-        <!--itemmod type="RULE" ref="IN_DEBT"/-->
+        <itemmod type="RULE" ref="IN_DEBT"/>
      </modifications>
    </quality>
    <quality id="insomnia" 	  	  	  karma="4" pos="false" type="NORMAL" />
