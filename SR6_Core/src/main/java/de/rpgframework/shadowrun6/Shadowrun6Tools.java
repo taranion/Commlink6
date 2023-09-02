@@ -960,7 +960,7 @@ public class Shadowrun6Tools {
 			if (type!=ShadowrunReference.CARRIED)
 				foo = ShadowrunReference.resolve(type, req.getKey());
 			if (!(foo instanceof DataItem)) {
-				logger.log(Level.WARNING, "Character requirement check not implemented for {0}",type);
+				logger.log(Level.WARNING, "Character requirement check not implemented for {0} and foo={1}",type, foo);
 				return true;
 			}
 			DataItem item = ShadowrunReference.resolve(type, req.getKey());
