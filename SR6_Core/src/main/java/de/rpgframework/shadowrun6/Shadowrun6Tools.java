@@ -39,6 +39,7 @@ import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.data.DataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
@@ -75,6 +76,7 @@ import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.FocusValue;
+import de.rpgframework.shadowrun.Lifestyle;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
@@ -264,6 +266,9 @@ public class Shadowrun6Tools {
 //			return ((FocusValue)source).getName();
 		} else if (source instanceof DataItem) {
 			return ((DataItem)source).getName();
+		} else if (source instanceof DataItemValue) {
+			DataItem di = ((DataItemValue)source).getResolved();
+			return di.getName();
 		}
 		logger.log(Level.WARNING,"Missing treatment for modification source: "+source.getClass());
 		return "?"+source.getClass().getSimpleName();
