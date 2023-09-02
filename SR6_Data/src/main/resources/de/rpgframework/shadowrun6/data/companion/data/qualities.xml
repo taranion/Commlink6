@@ -120,7 +120,7 @@
 	<quality id="gourmand"      karma="5"  pos="false" type="NORMAL"/>
 	<quality id="hooder"        karma="5"  pos="false" type="NORMAL" max="3">
 		<modifications>
-			<valmod type="ATTRIBUTE" ref="MONTHLY_COST" value="1000"/>
+			<valmod type="ATTRIBUTE" ref="MONTHLY_COST" value="1000" set="NATURAL"/>
 		</modifications>
 	</quality>
 	<quality id="hunted"        karma="5"  pos="false" type="NORMAL" max="5"/>
