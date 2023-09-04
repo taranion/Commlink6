@@ -29,6 +29,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemTemplateFilterNode;
+import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
@@ -93,13 +94,20 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		btnDec = new Button("-");
 		btnInc = new Button("+");
 
-		selection = new ComplexDataItemControllerNode<>(charGen.getEquipmentController());
+		selection = new ComplexDataItemControllerNode<ItemTemplate, CarriedItem<ItemTemplate>>(charGen.getEquipmentController());
 		selection.setSkin(new EquipmentControllerTwoColumnSkin<ItemTemplate>(selection));
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.available"));
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.gear.placeholder.selected"));
 
 		selection.setAvailableCellFactory(lv -> new ItemTemplateListCell( () -> charGen.getEquipmentController(), null));
-		selection.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell( () -> charGen.getEquipmentController()));
+		selection.setSelectedCellFactory(lv -> new CarriedItemListCell(charGen) {
+			public void updateItem(CarriedItem<ItemTemplate> item, boolean empty) {
+				super.updateItem(item, empty);
+				layout.setStyle("-fx-max-width: 30em");
+				btnEdit.setVisible(false);
+				btnEdit.setManaged(false);
+			}
+		});
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection,null));
 
