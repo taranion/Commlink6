@@ -198,6 +198,13 @@ public class ItemUtil {
 				if (rawAttr==null)
 					return false;
 				switch (iAttr) {
+				case AMMUNITION_CLASS:
+					AmmunitionClass ammoCls = ((ItemAttributeObjectValue<SR6ItemAttribute>)rawAttr).getModifiedValue();
+					if (ammoCls==null) {
+						logger.log(Level.ERROR, "No valud AMMUNICATION_CLASS value in "+container);
+						return false;
+					}
+					return ammoCls.name().equals(req.getRawValue());
 				case SOFTWARE_TYPES:
 					Object x = ((ItemAttributeObjectValue)rawAttr).getValue();
 					if (x instanceof List)
