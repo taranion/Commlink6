@@ -235,9 +235,9 @@
      	<!-- ToDo Waffe: Spurs -->
      </modifications>
    </quality>
-   <quality id="celerity" karma="10" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+   <quality id="celerity" karma="5" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
      <modifications>
-     	<!-- ToDo Armor teurer -->
+     	<valmod type="ATTRIBUTE" ref="MELEE_DAMAGE" value="1" set="NATURAL" />
      	<!-- ToDo Waffe: Spurs -->
      </modifications>
    </quality>
