@@ -41,7 +41,7 @@
 			<valmod type="METATYPE" ref="dalakitnon" value="11"/>
 			<valmod type="METATYPE" ref="dryad"      value="11"/>
 			<valmod type="METATYPE" ref="nocturna"   value="10"/>
-			<valmod type="METATYPE" ref="wakayambi"  value="12"/>
+			<valmod type="METATYPE" ref="wakyambi"   value="12"/>
 			<valmod type="METATYPE" ref="xapiri_thepe" value="10"/>
 			<valmod type="METATYPE" ref="valkyrie"   value="11"/>
 
@@ -79,7 +79,7 @@
 			<valmod type="METATYPE" ref="dalakitnon" value="9"/>
 			<valmod type="METATYPE" ref="dryad"      value="9"/>
 			<valmod type="METATYPE" ref="nocturna"   value="8"/>
-			<valmod type="METATYPE" ref="wakayambi"  value="9"/>
+			<valmod type="METATYPE" ref="wakyambi"   value="9"/>
 			<valmod type="METATYPE" ref="xapiri_thepe" value="8"/>
 			<valmod type="METATYPE" ref="human"      value="9"/>
 			<valmod type="METATYPE" ref="nartaki"    value="10"/>
@@ -119,7 +119,7 @@
 			<valmod type="METATYPE" ref="dalakitnon" value="4"/>
 			<valmod type="METATYPE" ref="dryad"      value="4"/>
 			<valmod type="METATYPE" ref="nocturna"   value="4"/>
-			<valmod type="METATYPE" ref="wakayambi"  value="4"/>
+			<valmod type="METATYPE" ref="wakyambi"   value="4"/>
 			<valmod type="METATYPE" ref="xapiri_thepe" value="4"/>
 			<valmod type="METATYPE" ref="human"      value="4"/>
 			<valmod type="METATYPE" ref="nartaki"    value="4"/>
