@@ -464,8 +464,8 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 				return new OperationResult<MetamagicOrEchoValue>(possible, false);
 			}
 
-			value.setDistributed(value.getDistributed()+1);
-			int karma = 10 + getGrade() +1;
+			value.setDistributed(value.getDistributed()-1);
+			int karma = 10 + getGrade() -1;
 
 			logger.log(Level.INFO, "Decreased metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
 			Shadowrun6Character model = getModel();
