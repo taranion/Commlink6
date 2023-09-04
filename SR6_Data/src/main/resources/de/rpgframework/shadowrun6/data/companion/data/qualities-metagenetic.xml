@@ -236,10 +236,9 @@
      </modifications>
    </quality>
    <quality id="celerity" karma="5" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
-     <modifications>
-     	<valmod type="ATTRIBUTE" ref="MELEE_DAMAGE" value="1" set="NATURAL" />
-     	<!-- ToDo Waffe: Spurs -->
-     </modifications>
+   	<modifications>
+     		<valmod type="ATTRIBUTE" ref="MOVEMENT" value="3/6/1" set="NATURAL" />
+     	</modifications>
    </quality>
    <quality id="claws" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
      <choices>
@@ -350,7 +349,7 @@
    </quality>
    <quality id="satyr_legs" karma="12" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
      <modifications>
-     	<!-- ToDo Movement rate -->
+     	<valmod type="ATTRIBUTE" ref="MOVEMENT" value="3/6/1" set="NATURAL" />
      	<!-- +2 AR in combat when kicking -->
        <checkmod ref="athletics" type="SKILL" what="DICE" value="4"/>
      </modifications>
