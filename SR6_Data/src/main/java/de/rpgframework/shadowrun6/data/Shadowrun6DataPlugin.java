@@ -561,6 +561,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} contact types", list.size());
 		list = Shadowrun6Core.loadDataItems(SetItemList.class, SetItem.class, set, clazz, "companion/data/collectives.xml");
 		logger.log(Level.DEBUG, "Loaded {0} collectives", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 	}
 
 	//-------------------------------------------------------------------

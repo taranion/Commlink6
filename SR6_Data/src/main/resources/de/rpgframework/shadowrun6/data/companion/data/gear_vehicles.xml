@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+   <item id="evo_landtreader" avail="4L"  price="15000" subtype="BIKES" type="VEHICLES">
+      <vehicle han="2" acc="5" spdi="10" tspd="20" bod="2" arm="1" pil="2" sen="1" sea="1"/>
+      <modifications>
+		<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+      </modifications>
+   </item>
+</items>
