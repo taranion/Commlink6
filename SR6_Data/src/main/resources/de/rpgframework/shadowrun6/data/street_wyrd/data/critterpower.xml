@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<critterpowers>
+    <critterpower id="astral_gateway" type="MANA"     action="MAJOR" range="LINE_OF_SIGHT_AREA" dur="SUSTAINED" />
+    <critterpower id="astral_project" type="MANA"     action="MAJOR" range="SELF" dur="SPECIAL" />
+    <critterpower id="aura_masking"   type="MANA"     action="MINOR" range="SELF" dur="SUSTAINED" />
+    <critterpower id="divining"       type="MANA"     action="SPECIAL" range="SELF" dur="SPECIAL" />
+    <critterpower id="endowment"      type="MANA"     action="MAJOR" range="TOUCH" dur="SUSTAINED" />
+    <critterpower id="energy_drain"   type="MANA"     action="MINOR" range="TOUCH" dur="INSTANTANEOUS" />
+    <critterpower id="hidden_life"    type="PHYSICAL" action="MAJOR" range="TOUCH" dur="PERMANENT" />
+    <critterpower id="inhabitation"   type="PHYSICAL" action="AUTO" range="SELF" dur="SPECIAL" />
+    <critterpower id="magical_guard"  type="MANA"     action="SPECIAL" range="LINE_OF_SIGHT" dur="INSTANTANEOUS" />
+    <critterpower id="mutable_form"   type="PHYSICAL" action="AUTO" range="SELF" dur="SPECIAL" />
+    <critterpower id="personal_domain" type="MANA"     action="AUTO" range="LINE_OF_SIGHT" dur="SUSTAINED" />
+    <critterpower id="possession"     type="PHYSICAL" action="MAJOR" range="TOUCH" dur="SPECIAL" />
+    <critterpower id="quake"          type="PHYSICAL" action="MAJOR" range="SPECIAL" dur="INSTANTANEOUS" />
+    <critterpower id="realistic_form" type="PHYSICAL" action="AUTO" range="SELF" dur="SPECIAL" />
+    <critterpower id="spirit_regen"   type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" />
+    <critterpower id="shadow_cloak"   type="PHYSICAL" action="MINOR" range="SPECIAL" dur="SUSTAINED" />
+    <critterpower id="silence"        type="PHYSICAL" action="MAJOR" range="SPECIAL" dur="SUSTAINED" />
+    <critterpower id="storm"          type="PHYSICAL" action="MAJOR" range="SPECIAL" dur="SUSTAINED" />
+    <critterpower id="temp_displace"  type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT_AREA" dur="SUSTAINED" />
+    <critterpower id="vessel_trade"   type="PHYSICAL" action="MAJOR" range="TOUCH" dur="INSTANTANEOUS" />
+    <critterpower id="wealth"         type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="SPECIAL" />
+ </critterpowers>

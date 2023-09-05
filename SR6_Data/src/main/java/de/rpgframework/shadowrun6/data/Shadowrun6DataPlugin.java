@@ -428,6 +428,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" spell features");
 		list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"street_wyrd/data/spells.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
+		list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "street_wyrd/data/critterpower.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" spirit powers");
 		list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, set, clazz,"street_wyrd/data/spirits.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" spirits");
 		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,"street_wyrd/data/mentorspirits.xml");

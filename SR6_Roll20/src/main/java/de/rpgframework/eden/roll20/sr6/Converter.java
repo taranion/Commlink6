@@ -598,6 +598,7 @@ public class Converter {
 		case MAJOR: return "Major";
 		case MINOR: return "Minor";
 		case AUTO: return "Auto";
+		case SPECIAL: return "Special";
 		default:
 		return value.name();
 		}
