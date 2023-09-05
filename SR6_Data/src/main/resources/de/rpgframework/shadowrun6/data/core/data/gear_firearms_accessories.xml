@@ -209,7 +209,7 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
       </requires>
    </item>
-   <item avail="2" price="30" id="spare_clip_variable" type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y" >
+   <item avail="2" price="30" id="spare_clip_predator" type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y" >
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
     	<selreq>
