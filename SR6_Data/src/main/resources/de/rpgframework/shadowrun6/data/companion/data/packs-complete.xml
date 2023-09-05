@@ -546,7 +546,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
              <embed  type="GEAR" intoId="1a543671-eaf0-482e-a832-2927672eb5db" intoType="HOOK" intoRef="IMPLANT_PISTOL_HEAVY" ref="ares_predator_vi" id="8cb174b8-22a5-4f76-8a22-0446012aab20" />
-             <embed  type="GEAR" intoId="8cb174b8-22a5-4f76-8a22-0446012aab20" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="8cb174b8-22a5-4f76-8a22-0446012aab20" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberleg" id="d8733145-f652-4d92-9044-5f9b212cf17d" variant="fullleg_obvious">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -749,7 +749,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" />
              <embed  type="GEAR" intoId="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
              <embed  type="GEAR" intoId="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -1215,7 +1215,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" />
              <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="BARREL" ref="silencer" />
              <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -1540,7 +1540,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="da3af0cd-9453-494a-8497-1c94c3890314" />
              <embed  type="GEAR" intoId="da3af0cd-9453-494a-8497-1c94c3890314" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="quick_draw_holster" />
              <embed  type="GEAR" intoId="da3af0cd-9453-494a-8497-1c94c3890314" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="da3af0cd-9453-494a-8497-1c94c3890314" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="da3af0cd-9453-494a-8497-1c94c3890314" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -2107,7 +2107,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="ALPHA"/>
                 </embed>
              <embed  type="GEAR" intoId="1a543671-eaf0-482e-a832-2927672eb5db" intoType="HOOK" intoRef="IMPLANT_PISTOL_HEAVY" ref="ares_predator_vi" id="8cb174b8-22a5-4f76-8a22-0446012aab20" />
-             <embed  type="GEAR" intoId="8cb174b8-22a5-4f76-8a22-0446012aab20" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="8cb174b8-22a5-4f76-8a22-0446012aab20" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberleg" id="d8733145-f652-4d92-9044-5f9b212cf17d" variant="fullleg_obvious">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -2306,7 +2306,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" />
              <embed  type="GEAR" intoId="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
              <embed  type="GEAR" intoId="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="c7a86d0a-12f3-442b-b64a-6bc4f9d01abe" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -2752,7 +2752,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" />
              <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="BARREL" ref="silencer" />
              <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="4a6e3bd2-7cf7-4061-a1a9-41f18cc910e0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -3096,7 +3096,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="da3af0cd-9453-494a-8497-1c94c3890314" />
              <embed  type="GEAR" intoId="da3af0cd-9453-494a-8497-1c94c3890314" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="quick_draw_holster" />
              <embed  type="GEAR" intoId="da3af0cd-9453-494a-8497-1c94c3890314" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="da3af0cd-9453-494a-8497-1c94c3890314" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="da3af0cd-9453-494a-8497-1c94c3890314" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="15">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>

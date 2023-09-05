@@ -200,7 +200,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="c5c431cd-2a82-425b-9a67-9e5caae325f3" />
              <embed  type="GEAR" intoId="c5c431cd-2a82-425b-9a67-9e5caae325f3" intoType="HOOK" intoRef="UNDER" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="c5c431cd-2a82-425b-9a67-9e5caae325f3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="quick_draw_holster" />
-             <embed  type="GEAR" intoId="c5c431cd-2a82-425b-9a67-9e5caae325f3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="c5c431cd-2a82-425b-9a67-9e5caae325f3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -215,7 +215,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="4137523a-ef75-4ff7-8173-d77487966ae7" />
              <embed  type="GEAR" intoId="4137523a-ef75-4ff7-8173-d77487966ae7" intoType="HOOK" intoRef="UNDER" ref="silencer" />
              <embed  type="GEAR" intoId="4137523a-ef75-4ff7-8173-d77487966ae7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="4137523a-ef75-4ff7-8173-d77487966ae7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="4137523a-ef75-4ff7-8173-d77487966ae7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -243,7 +243,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="colt_government_2076" id="ed3b20ed-24e4-4dff-9be1-591e8eb34274" />
              <embed  type="GEAR" intoId="ed3b20ed-24e4-4dff-9be1-591e8eb34274" intoType="HOOK" intoRef="UNDER" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="ed3b20ed-24e4-4dff-9be1-591e8eb34274" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="quick_draw_holster" />
-             <embed  type="GEAR" intoId="ed3b20ed-24e4-4dff-9be1-591e8eb34274" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="ed3b20ed-24e4-4dff-9be1-591e8eb34274" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -258,7 +258,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="colt_government_2076" id="5846a706-eea3-438c-9ac0-df0db12c2798" />
              <embed  type="GEAR" intoId="5846a706-eea3-438c-9ac0-df0db12c2798" intoType="HOOK" intoRef="UNDER" ref="silencer" />
              <embed  type="GEAR" intoId="5846a706-eea3-438c-9ac0-df0db12c2798" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="5846a706-eea3-438c-9ac0-df0db12c2798" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="5846a706-eea3-438c-9ac0-df0db12c2798" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -825,7 +825,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="c5c431cd-2a82-425b-9a67-9e5caae325f3" />
              <embed  type="GEAR" intoId="c5c431cd-2a82-425b-9a67-9e5caae325f3" intoType="HOOK" intoRef="UNDER" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="c5c431cd-2a82-425b-9a67-9e5caae325f3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="quick_draw_holster" />
-             <embed  type="GEAR" intoId="c5c431cd-2a82-425b-9a67-9e5caae325f3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="c5c431cd-2a82-425b-9a67-9e5caae325f3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -840,7 +840,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="4137523a-ef75-4ff7-8173-d77487966ae7" />
              <embed  type="GEAR" intoId="4137523a-ef75-4ff7-8173-d77487966ae7" intoType="HOOK" intoRef="UNDER" ref="silencer" />
              <embed  type="GEAR" intoId="4137523a-ef75-4ff7-8173-d77487966ae7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="4137523a-ef75-4ff7-8173-d77487966ae7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_predator" count="5" />
+             <embed  type="GEAR" intoId="4137523a-ef75-4ff7-8173-d77487966ae7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_variable" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>

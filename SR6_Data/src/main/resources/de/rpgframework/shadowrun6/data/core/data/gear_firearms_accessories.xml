@@ -209,10 +209,15 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
       </requires>
    </item>
-   <item avail="2" price="30" id="spare_clip_predator" type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y" >
+   <item avail="2" price="30" id="spare_clip_variable" type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y" >
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
+    	<selreq>
 			<datareq type="GEAR" ref="ares_predator_vi" apply="DATA_ITEM"/>
+			<datareq type="GEAR" ref="cavalier_marshal" apply="DATA_ITEM"/>
+			<datareq type="GEAR" ref="black_wolf" apply="DATA_ITEM"/>
+			<datareq type="GEAR" ref="raven" apply="DATA_ITEM"/>
+    	</selreq>
       </requires>
    </item>
    <item avail="1" price="25" id="speed_loader" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
