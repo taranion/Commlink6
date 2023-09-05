@@ -168,6 +168,10 @@
    {
       "name":"de.rpgframework.shadowrun6.data.slip_streams.i18n.slip_streams",
       "locales":["en", "de"]
+    },
+   {
+      "name":"de.rpgframework.shadowrun6.data.power_plays.i18n.power_plays",
+      "locales":["en", "de"]
     }
   ]
 }

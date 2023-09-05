@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -31,9 +32,11 @@ import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.ComplexDataItemControllerOneColumnSkin;
 import de.rpgframework.jfx.DataItemSpinnerPane;
@@ -120,13 +123,13 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			public void roll() {}
 
 			@Override
-			public List<Choice> getChoices() {
+			public List<UUID> getChoiceUUIDs() {
 				// TODO Auto-generated method stub
 				return null;
 			}
 
 			@Override
-			public void decide(SetItem decideFor, Choice choice, Decision decision) {
+			public void decide(SetItem decideFor, UUID choice, Decision decision) {
 				// TODO Auto-generated method stub
 
 			}
@@ -184,6 +187,16 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			public float getSelectionCost(SetItem data) { return data.getCost(); }
 			@Override
 			public String getSelectionCostString(SetItem data) { return String.valueOf(getSelectionCost(data)); }
+			@Override
+			public Choice getAsChoice(ComplexDataItem value, UUID uuid) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			@Override
+			public ModificationChoice getAsModificationChoice(ComplexDataItem value, UUID uuid) {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		});
 		comparator = new Comparator<SetItem>() {
 			public int compare(SetItem meta1, SetItem meta2) {

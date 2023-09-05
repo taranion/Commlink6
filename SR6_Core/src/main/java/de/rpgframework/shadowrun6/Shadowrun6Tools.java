@@ -39,6 +39,7 @@ import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItem;
+import de.rpgframework.genericrpg.data.DataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
@@ -75,6 +76,7 @@ import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.FocusValue;
+import de.rpgframework.shadowrun.Lifestyle;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
@@ -264,6 +266,9 @@ public class Shadowrun6Tools {
 //			return ((FocusValue)source).getName();
 		} else if (source instanceof DataItem) {
 			return ((DataItem)source).getName();
+		} else if (source instanceof DataItemValue) {
+			DataItem di = ((DataItemValue)source).getResolved();
+			return di.getName();
 		}
 		logger.log(Level.WARNING,"Missing treatment for modification source: "+source.getClass());
 		return "?"+source.getClass().getSimpleName();
@@ -960,7 +965,7 @@ public class Shadowrun6Tools {
 			if (type!=ShadowrunReference.CARRIED)
 				foo = ShadowrunReference.resolve(type, req.getKey());
 			if (!(foo instanceof DataItem)) {
-				logger.log(Level.WARNING, "Character requirement check not implemented for {0}",type);
+				logger.log(Level.WARNING, "Character requirement check not implemented for {0} and foo={1}",type, foo);
 				return true;
 			}
 			DataItem item = ShadowrunReference.resolve(type, req.getKey());
@@ -1145,15 +1150,15 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, int multiplier, Shadowrun6Character model) {
-		logger.log(Level.DEBUG, "instantiate {0} with multiplier {1}",tmp,multiplier);
+		logger.log(Level.INFO, "instantiate {0} with multiplier {1}",tmp,multiplier);
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
 			int modVal = 0;
 			if (clone.hasFormula()) {
-//				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
-//				logger.log(Level.WARNING, "  model =  "+model);
-//				logger.log(Level.WARNING, "  data item =  "+value.getKey());
-//				logger.log(Level.WARNING, "  data item value =  "+value);
+				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
+				logger.log(Level.WARNING, "  model =  "+model);
+				logger.log(Level.WARNING, "  data item =  "+value.getKey());
+				logger.log(Level.WARNING, "  data item value =  "+value);
 				String resolved = FormulaTool.resolve(clone.getReferenceType(), clone.getFormula(), new VariableResolver(value, model));
 				logger.log(Level.DEBUG, "  {0} resolved as {1}", clone.getFormula(),resolved);
 				modVal = Integer.parseInt(resolved);

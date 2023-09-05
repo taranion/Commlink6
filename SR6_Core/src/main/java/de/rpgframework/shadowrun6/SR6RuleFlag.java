@@ -13,6 +13,8 @@ import de.rpgframework.genericrpg.data.RuleFlag;
  */
 public enum SR6RuleFlag implements RuleFlag {
 
+	// Convert 1 Karma to 5000 Nuyen
+	IN_DEBT,
 	UNARMED_DAMAGE_IS_PHYSICAL,
 	// Physical damage gets converted to stun damage
 	PHYSICAL_DAMAGE_IS_STUN,

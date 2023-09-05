@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
@@ -19,6 +20,7 @@ import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.CreatePoints;
@@ -204,11 +206,17 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 			CommonSR6GeneratorSettings sett = getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
 			if (sett.getKarmaToNuyen()>0) {
-				int rate = 2000;
+				int rate = model.hasRuleFlag(SR6RuleFlag.IN_DEBT)?5000:2000;
 				int add  = sett.getKarmaToNuyen()*rate;
 				logger.log(Level.INFO, "Convert {0} Karma into {1} Nuyen (Rate 1:{2})", sett.getKarmaToNuyen(), add, rate);
 				model.setNuyen( model.getNuyen() + add);
 				model.setKarmaFree( model.getKarmaFree() - sett.getKarmaToNuyen());
+
+				if (model.hasRuleFlag(SR6RuleFlag.IN_DEBT)) {
+					model.setDebtRate(sett.getKarmaToNuyen()*500);
+					model.setDebt(add);
+				}
+
 			}
 
 			logger.log(Level.WARNING, "{0} Nuyen available", model.getNuyen());

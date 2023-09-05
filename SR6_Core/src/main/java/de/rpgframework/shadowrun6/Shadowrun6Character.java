@@ -79,7 +79,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		asdfMap = new ASDFMapping();
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
-			attributes.add(new AttributeValue<ShadowrunAttribute>(key, 1));
+			setAttribute(new AttributeValue<ShadowrunAttribute>(key, 1));
 		}
 		setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.MAGIC, 0));
 		setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.RESONANCE, 0));

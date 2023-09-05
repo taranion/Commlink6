@@ -16,9 +16,12 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.DamageType;
+import de.rpgframework.shadowrun.Lifestyle;
+import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
@@ -105,6 +108,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			calculateResistMatrixDamage();
 			calculateResistAstralDamage();
 			calculateResistToxin();
+			calculateMonthlyCost();
 
 			/*
 			 * Drain
@@ -244,6 +248,23 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.setDistributed(8);
 		addNaturalModifier(val, Math.round(model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue()/2.0f), ShadowrunAttribute.WILLPOWER.getName()+"/2");
 		logger.log(Level.DEBUG, " Monitor Stun     = "+val.getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	private void calculateMonthlyCost() {
+		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.MONTHLY_COST);
+		val.setDistributed(0);
+		for (Lifestyle lifestyle : model.getLifestyles()) {
+			int toPay = lifestyle.getCostPerMonth();
+			addNaturalModifier(val, toPay, lifestyle);
+		}
+
+		// In Debt
+		if (model.getDebtRate()>0) {
+			addNaturalModifier(val, model.getDebtRate(), Shadowrun6Core.getItem(Quality.class, "in_debt"));
+		}
+
+		logger.log(Level.DEBUG, " Monthly cost   = "+val.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------

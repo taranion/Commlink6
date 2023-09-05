@@ -155,7 +155,7 @@
     {
       "name": "Allergy",
       "id": "allergy",
-      "choice": "Common, Mild, description",
+      "choice": "Common, Mild, Insect Stings",
       "positive": false,
       "rating": 0,
       "page": "Core Rulebook 74",
@@ -438,7 +438,7 @@
       "subtype": "Unarmed",
       "skill": null,
       "pool": 5,
-      "damage": "0S",
+      "damage": "2S",
       "attackRating": "3/-/-/-/-",
       "wifi": [
         "?No ParentSet?"
@@ -461,7 +461,18 @@
       "primary": false
     }
   ],
-  "items": [],
+  "items": [
+    {
+      "name": "Software Library ",
+      "count": 0,
+      "rating": 0,
+      "type": "Electronic",
+      "subType": "Tools",
+      "page": "Core Rulebook 271",
+      "accessories": [],
+      "description": ""
+    }
+  ],
   "augmentations": [],
   "vehicles": [
     {

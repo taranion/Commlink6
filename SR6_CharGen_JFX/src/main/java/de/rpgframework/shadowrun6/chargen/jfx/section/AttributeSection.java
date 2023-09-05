@@ -4,7 +4,6 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.function.Function;
 
-import org.prelle.javafx.ScreenManagerProvider;
 import org.prelle.javafx.Section;
 
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -45,7 +44,7 @@ public class AttributeSection extends Section {
 	private Function<ShadowrunAttribute,String> nameMapperAI;
 
 	//-------------------------------------------------------------------
-	public AttributeSection(String title, ScreenManagerProvider provider) {
+	public AttributeSection(String title) {
 		super(title, null);
 		logger.log(Level.DEBUG, "<init>");
 

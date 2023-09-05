@@ -187,7 +187,6 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		logger.log(Level.ERROR, "Inform "+wrapper.getWrapped());
 		handleControllerEvent(BasicControllerEvents.GENERATOR_CHANGED, wrapper);
 
-//		wrapper.setWrapped(new PriorityCharacterGenerator());
 		logger.log(Level.ERROR, "Create wizard for "+wrapper.getWrapped());
 		GenerationWizard wizard = new GenerationWizard(wrapper);
 		while (true) {
@@ -384,10 +383,6 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
 			refreshPages();
 		}
-//		Page page = getVisiblePage();
-//		if (page!=null && page instanceof ControllerListener) {
-//			((ControllerListener)page).handleControllerEvent(type, param);
-//		}
 
 		refreshSidebar();
 		refreshToDos();
