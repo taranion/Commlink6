@@ -17,6 +17,7 @@
     <critterpower id="spirit_regen"   type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" />
     <critterpower id="shadow_cloak"   type="PHYSICAL" action="MINOR" range="SPECIAL" dur="SUSTAINED" />
     <critterpower id="silence"        type="PHYSICAL" action="MAJOR" range="SPECIAL" dur="SUSTAINED" />
+    <critterpower id="skill"          type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" />
     <critterpower id="storm"          type="PHYSICAL" action="MAJOR" range="SPECIAL" dur="SUSTAINED" />
     <critterpower id="temp_displace"  type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT_AREA" dur="SUSTAINED" />
     <critterpower id="vessel_trade"   type="PHYSICAL" action="MAJOR" range="TOUCH" dur="INSTANTANEOUS" />

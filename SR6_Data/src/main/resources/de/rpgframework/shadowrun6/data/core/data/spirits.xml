@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <npcs>
+
   <npc id="spirit_air" type="SPIRIT">
   	<attributes>
   		<attribute id="BODY"      value="+2"/>
@@ -15,25 +16,28 @@
   	</attributes>
 	<skills>
 			<skillval ref="astral"       value="0"/>
-			<skillval ref="athletics"    value="0"/>
 			<skillval ref="close_combat" value="0"/>
-			<skillval ref="exotic_weapons"    value="0">
-				<skillspec ref="exotic_weapons/air" />
-			</skillval>
 			<skillval ref="perception"   value="0"/>
+
+			<skillval ref="athletics"    value="0"/>
+			<skillval ref="exotic_weapons"    value="0">
+				<skillspec ref="exotic_weapons/critterpower" />
+			</skillval>
 	</skills>
 		<critterpowers>
-			<critterpowerval ref="accident"/>
 			<critterpowerval ref="astral_form" />
+			<critterpowerval ref="materialization" />
+			<critterpowerval ref="sapience" />
+
+			<critterpowerval ref="accident"/>
 			<critterpowerval ref="concealment" />
 			<critterpowerval ref="confusion" />
 			<critterpowerval ref="engulf" />
-			<critterpowerval ref="materialization" />
 			<critterpowerval ref="movement" />
-			<critterpowerval ref="sapience" />
 			<critterpowerval ref="search" />
 		</critterpowers>
   </npc>
+
   <npc id="spirit_beasts" type="SPIRIT">
   	<attributes>
   		<attribute id="BODY"      value="+2"/>
@@ -47,7 +51,25 @@
   		<attribute id="MAGIC"     value="0"/>
   		<attribute id="ESSENCE"   value="0"/>
   	</attributes>
+	<skills>
+			<skillval ref="astral"       value="0"/>
+			<skillval ref="close_combat" value="0"/>
+			<skillval ref="perception"   value="0"/>
+	</skills>
+		<critterpowers>
+			<critterpowerval ref="astral_form" />
+			<critterpowerval ref="materialization" />
+			<critterpowerval ref="sapience" />
+
+			<critterpowerval ref="animal_control"/>
+			<critterpowerval ref="enhanced_sense">
+				<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="hearing, low-light vision, smell"/>
+			</critterpowerval>
+			<critterpowerval ref="fear" />
+			<critterpowerval ref="movement" />
+		</critterpowers>
   </npc>
+
   <npc id="spirit_earth"  type="SPIRIT">
   	<attributes>
   		<attribute id="BODY"      value="+4"/>
@@ -61,7 +83,27 @@
   		<attribute id="MAGIC"     value="0"/>
   		<attribute id="ESSENCE"   value="0"/>
   	</attributes>
+	<skills>
+			<skillval ref="astral"       value="0"/>
+			<skillval ref="close_combat" value="0"/>
+			<skillval ref="perception"   value="0"/>
+
+			<skillval ref="exotic_weapons"    value="0">
+				<skillspec ref="exotic_weapons/critterpower" />
+			</skillval>
+	</skills>
+		<critterpowers>
+			<critterpowerval ref="astral_form" />
+			<critterpowerval ref="materialization" />
+			<critterpowerval ref="sapience" />
+
+			<critterpowerval ref="binding" />
+			<critterpowerval ref="guard" />
+			<critterpowerval ref="movement" />
+			<critterpowerval ref="search" />
+		</critterpowers>
   </npc>
+
   <npc id="spirit_fire"   type="SPIRIT">
   	<attributes>
   		<attribute id="BODY"      value="+1"/>
@@ -75,7 +117,31 @@
   		<attribute id="MAGIC"     value="0"/>
   		<attribute id="ESSENCE"   value="0"/>
   	</attributes>
+	<skills>
+			<skillval ref="astral"       value="0"/>
+			<skillval ref="close_combat" value="0"/>
+			<skillval ref="perception"   value="0"/>
+
+			<skillval ref="athletics"    value="0"/>
+			<skillval ref="exotic_weapons"    value="0">
+				<skillspec ref="exotic_weapons/critterpower" />
+			</skillval>
+	</skills>
+		<critterpowers>
+			<critterpowerval ref="astral_form" />
+			<critterpowerval ref="materialization" />
+			<critterpowerval ref="sapience" />
+
+			<critterpowerval ref="accident"/>
+			<critterpowerval ref="confusion" />
+			<critterpowerval ref="engulf" />
+			<critterpowerval ref="elemental_attack">
+				<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="FIRE"/>
+			</critterpowerval>
+			<critterpowerval ref="energy_aura" />
+		</critterpowers>
   </npc>
+
   <npc id="spirit_kin"    type="SPIRIT">
   	<attributes>
   		<attribute id="BODY"      value="+1"/>
@@ -89,7 +155,30 @@
   		<attribute id="MAGIC"     value="0"/>
   		<attribute id="ESSENCE"   value="0"/>
   	</attributes>
+	<skills>
+			<skillval ref="astral"       value="0"/>
+			<skillval ref="close_combat" value="0"/>
+			<skillval ref="perception"   value="0"/>
+
+			<skillval ref="sorcery"    value="0"/>
+	</skills>
+		<critterpowers>
+			<critterpowerval ref="astral_form" />
+			<critterpowerval ref="materialization" />
+			<critterpowerval ref="sapience" />
+
+			<critterpowerval ref="accident"/>
+			<critterpowerval ref="concealment" />
+			<critterpowerval ref="confusion" />
+			<critterpowerval ref="enhanced_sense">
+				<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="low-light vision, thermographic vision"/>
+			</critterpowerval>
+			<critterpowerval ref="guard" />
+			<critterpowerval ref="influence" />
+			<critterpowerval ref="search" />
+		</critterpowers>
   </npc>
+
   <npc id="spirit_water"  type="SPIRIT">
   	<attributes>
   		<attribute id="BODY"      value="0"/>
@@ -103,5 +192,29 @@
   		<attribute id="MAGIC"     value="0"/>
   		<attribute id="ESSENCE"   value="0"/>
   	</attributes>
+	<skills>
+			<skillval ref="astral"       value="0"/>
+			<skillval ref="close_combat" value="0"/>
+			<skillval ref="perception"   value="0"/>
+
+			<skillval ref="athletics"    value="0">
+				<skillspec ref="athletics/swimming" />
+			</skillval>
+			<skillval ref="exotic_weapons"    value="0">
+				<skillspec ref="exotic_weapons/critterpower" />
+			</skillval>
+	</skills>
+		<critterpowers>
+			<critterpowerval ref="astral_form" />
+			<critterpowerval ref="materialization" />
+			<critterpowerval ref="sapience" />
+
+			<critterpowerval ref="concealment" />
+			<critterpowerval ref="confusion" />
+			<critterpowerval ref="engulf" />
+			<critterpowerval ref="movement" />
+			<critterpowerval ref="search" />
+		</critterpowers>
   </npc>
+
 </npcs>
