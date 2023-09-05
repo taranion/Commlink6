@@ -63,7 +63,7 @@
 
 			<critterpowerval ref="animal_control"/>
 			<critterpowerval ref="enhanced_sense">
-				<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="hearing, low-light vision, smell"/>
+				<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="i18n:hearing_smell_lowlight"/>
 			</critterpowerval>
 			<critterpowerval ref="fear" />
 			<critterpowerval ref="movement" />
@@ -171,7 +171,7 @@
 			<critterpowerval ref="concealment" />
 			<critterpowerval ref="confusion" />
 			<critterpowerval ref="enhanced_sense">
-				<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="low-light vision, thermographic vision"/>
+				<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72e" value="i18n:lowlight_thermo"/>
 			</critterpowerval>
 			<critterpowerval ref="guard" />
 			<critterpowerval ref="influence" />
