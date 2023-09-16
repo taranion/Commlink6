@@ -4,10 +4,12 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import de.rpgframework.classification.Classification;
+import de.rpgframework.classification.ClassificationType;
 import de.rpgframework.classification.GenericClassificationType;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.random.Actor;
@@ -33,6 +35,15 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 	 */
 	public SR6NSCGenerator() {
 		// TODO Auto-generated constructor stub
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.random.RandomGenerator#getRequiredVariables()
+	 */
+	@Override
+	public Collection<ClassificationType> getRequiredVariables() {
+		return List.of(GenericClassificationType.RULES);
 	}
 
 	//-------------------------------------------------------------------
