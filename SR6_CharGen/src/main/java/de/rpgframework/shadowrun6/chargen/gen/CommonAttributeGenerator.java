@@ -127,13 +127,12 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	 */
 	@Override
 	public RecommendationState getRecommendationState(ShadowrunAttribute item) {
-		Recommender recommender = getModel().getRecommender();
 		// No recommender set, means no recommendation
-		if (recommender==null) {
+		if (parent.getRecommender().isEmpty()) {
 			return RecommendationState.NEUTRAL;
 		}
 
-		return recommender.getRecommendationState(item);
+		return parent.getRecommender().get().getRecommendationState(item);
 	}
 
 	//-------------------------------------------------------------------

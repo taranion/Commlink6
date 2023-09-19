@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.ToDoElement;
@@ -15,6 +16,8 @@ import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
+import de.rpgframework.genericrpg.chargen.IRecommender;
+import de.rpgframework.genericrpg.chargen.LevellingProfileController;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -195,6 +198,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public RuleController getRuleController() {
 		return wrapped.getRuleController();
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getProfileController()
+	 */
+	@Override
+	public LevellingProfileController getProfileController() {
+		return wrapped.getProfileController();
 	}
 
 	//-------------------------------------------------------------------
@@ -482,6 +494,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public IDataStructureController getDataStructureController() {
 		return wrapped.getDataStructureController();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getRecommender()
+	 */
+	@Override
+	public Optional<IRecommender<ShadowrunAttribute>> getRecommender() {
+		return wrapped.getRecommender();
 	}
 
 }
