@@ -11,6 +11,7 @@ open module de.rpgframework.shadowrun6.core {
 
 	requires transitive de.rpgframework.core;
 	requires transitive de.rpgframework.rules;
+	requires transitive de.rpgframework.generator;
 	requires java.xml;
 	requires transitive shadowrun.common;
 	requires simple.persist;

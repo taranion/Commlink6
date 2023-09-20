@@ -6,6 +6,7 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.ToDoElement;
@@ -68,6 +69,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public String getId() {
 		return wrapped.getId();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getLocale()
+	 */
+	@Override
+	public Locale getLocale() {
+		return wrapped.getLocale();
 	}
 
 	//-------------------------------------------------------------------

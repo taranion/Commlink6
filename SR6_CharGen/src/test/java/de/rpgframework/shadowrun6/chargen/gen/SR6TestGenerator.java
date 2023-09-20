@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterIOException;
@@ -55,6 +56,15 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 	public SR6TestGenerator(Shadowrun6Character model) {
 		this.model = model;
 
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getLocale()
+	 */
+	@Override
+	public Locale getLocale() {
+		return Locale.getDefault();
 	}
 
 	//-------------------------------------------------------------------
