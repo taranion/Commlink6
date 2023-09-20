@@ -167,7 +167,7 @@
 					</subOption>
 					<subOption id="fav_weapon_extra_mod">
 						<requires>
-							<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_CLOSE_COMBAT"/>
+							<valuereq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_CLOSE_COMBAT"/>
 						</requires>
 						<modifications>
 							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_extra_mod"/>
@@ -176,8 +176,8 @@
 					<subOption id="fav_weapon_extra_acc">
 						<requires>
 							<selreq>
-								<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_FIREARMS"/>
-								<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_RANGED"/>
+								<valuereq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_FIREARMS"/>
+								<valuereq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_RANGED"/>
 							</selreq>
 						</requires>
 						<modifications>
@@ -186,7 +186,7 @@
 					</subOption>
 					<subOption id="fav_weapon_defensive">
 						<requires>
-							<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_CLOSE_COMBAT"/>
+							<valuereq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_CLOSE_COMBAT"/>
 						</requires>
 						<modifications>
 							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_defensive"/>
@@ -194,7 +194,7 @@
 					</subOption>
 					<subOption id="fav_weapon_offensive">
 						<requires>
-							<datareq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_CLOSE_COMBAT"/>
+							<valuereq type="GEAR" ref="CHOICE" choice="a30b08e1-d56d-48c8-8471-bbae5e7efc6f" value="WEAPON_CLOSE_COMBAT"/>
 						</requires>
 						<modifications>
 							<itemmod type="QUALITY" ref="favored_weapon_custom" variant="fav_weapon_offensive"/>
@@ -218,10 +218,6 @@
 			</modifications>
 		</step>
 		<step id="favored_weapon_lost" level="2">
-			<nextSteps>
-				<next>critter_improvement</next>
-				<next>critter_goodbye</next>
-			</nextSteps>
 			<modifications>
 				<itemmod type="QUALITY" ref="favored_weapon_extension" remove="true"/>
 				<itemmod type="QUALITY" ref="favored_weapon_custom" remove="true"/>

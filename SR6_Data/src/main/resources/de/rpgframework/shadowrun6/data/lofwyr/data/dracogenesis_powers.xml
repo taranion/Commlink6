@@ -9,13 +9,11 @@
      </modifications>
    </metaecho>
    <metaecho id="animal_control" type="DRACOGENESIS_POWER" >
-   	<requires>
-   		<datareq type="DRAKE_TYPE" ref="western"/>
-   	</requires>
      <modifications>
        <itemmod type="CRITTER_POWER" ref="animal_control" apply="DRAKE"/>
      </modifications>
    </metaecho>
+   <metaecho id="astral_projection_drake" type="DRACOGENESIS_POWER" />
    <metaecho id="bursts_of_power" type="DRACOGENESIS_POWER" />
    <metaecho id="compulsion" type="DRACOGENESIS_POWER" >
      <modifications>
@@ -188,6 +186,9 @@
    </metaecho>
    <metaecho id="swift_transformation" type="DRACOGENESIS_POWER" />
    <metaecho id="tail_stinger" type="DRACOGENESIS_POWER" >
+   	<requires>
+   		<datareq type="DRAKE_TYPE" ref="feathered"/>
+   	</requires>
      <modifications>
        <itemmod type="CRITTER_POWER" ref="venom" apply="DRAKE"/>
      </modifications>
