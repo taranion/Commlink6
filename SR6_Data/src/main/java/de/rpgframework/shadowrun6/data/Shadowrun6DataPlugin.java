@@ -428,6 +428,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" spell features");
 		list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"street_wyrd/data/spells.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
+		list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "street_wyrd/data/critterpower.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" spirit powers");
 		list = Shadowrun6Core.loadDataItems(NPCList.class, SR6NPC.class, set, clazz,"street_wyrd/data/spirits.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" spirits");
 		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,"street_wyrd/data/mentorspirits.xml");
@@ -559,6 +561,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} contact types", list.size());
 		list = Shadowrun6Core.loadDataItems(SetItemList.class, SetItem.class, set, clazz, "companion/data/collectives.xml");
 		logger.log(Level.DEBUG, "Loaded {0} collectives", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 	}
 
 	//-------------------------------------------------------------------
@@ -571,6 +575,10 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" critter powers");
 		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "lofwyr/data/dracogenesis_powers.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" dracogenesis powers");
+		list = Shadowrun6Core.loadDataItems(TechniqueList.class, Technique.class, set, clazz,"lofwyr/data/techniques.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art techniques");
+		list = Shadowrun6Core.loadDataItems(MartialArtsList.class, MartialArts.class, set, clazz,"lofwyr/data/martialarts.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art styles");
 		list = Shadowrun6Core.loadDataItems(DrakeTypeList.class, DrakeType.class, set, clazz, "lofwyr/data/draketypes.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drake types");
 	}
