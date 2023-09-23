@@ -1,14 +1,15 @@
-package de.rpgframework.shadowrun6.chargen.gen.pointbuy;
+package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 
 import java.lang.System.Logger.Level;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
+import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.RuleController;
-import de.rpgframework.shadowrun.chargen.gen.PointBuyAttributeGenerator;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -16,7 +17,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
-import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
@@ -30,36 +30,38 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6DataStructureController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyMagicOrResonanceController;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyMetatypeController;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.RemainingCPAreNuyenStep;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAdeptPowerGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyComplexFormGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyRitualGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySkillGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySpellGenerator;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 
 /**
- * @author prelle
- *
+ * @Author prelle
  */
-@GeneratorId("pointbuy")
-public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  implements ISR6PointBuyGenerator {
+@GeneratorId("lifepath")
+public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator implements CharacterGenerator<ShadowrunAttribute, Shadowrun6Character> {
 
 	static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PointBuyCharacterGenerator.class,
 			Locale.ENGLISH, Locale.GERMAN);
 
-	public static String TODO_SKILLS_TOO_MANY_CP_CONVERTED = "pointbuy.todo.skills.too_many_converted";
-	public static String TODO_ATTRIB_TOO_MANY_CP_CONV_REG  = "pointbuy.todo.attrib.too_many_regular";
-	public static String TODO_ATTRIB_TOO_MANY_CP_CONV_SPEC = "pointbuy.todo.attrib.too_many_special";
-
-	private RemainingCPAreNuyenStep cpToNuyenStep;
-
-
 	private boolean setupDone;
-
+	
 	//-------------------------------------------------------------------
-	public PointBuyCharacterGenerator() {
-//		try {throw new RuntimeException("Trace");} catch (Exception e) {e.printStackTrace();}
+	public SR6LifepathCharacterGenerator() {
 	}
 
 	//-------------------------------------------------------------------
-	public PointBuyCharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
-		super(model, handle, SR6PointBuySettings.class);
-//		try {throw new RuntimeException("Trace");} catch (Exception e) {e.printStackTrace();}
+	public SR6LifepathCharacterGenerator(Shadowrun6Character model, CharacterHandle handle,
+			Class<?> charGenSettingsClazz) {
+		super(model, handle, charGenSettingsClazz);
 	}
 
 	//-------------------------------------------------------------------
@@ -68,7 +70,8 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	 */
 	@Override
 	public String getId() {
-		return "pointbuy";
+		// TODO Auto-generated method stub
+		return "lifepath";
 	}
 
 	//-------------------------------------------------------------------
@@ -93,7 +96,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	 */
 	@Override
 	public String getName() {
-		return RES.getString("generator.name");
+		return RES.getString("generator.lifepath.name");
 	}
 
 	//-------------------------------------------------------------------
@@ -102,7 +105,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	 */
 	@Override
 	public String getDescription() {
-		return RES.getString("generator.desc");
+		return RES.getString("generator.lifepath.desc");
 	}
 
 	//-------------------------------------------------------------------
@@ -142,29 +145,28 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			createPartialController();
 
 			// First the regular processing steps
-			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model,locale));
-
-			processChain.add(new ResetGenerator(this));
+			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model, locale));
+			processChain.add(new SR6LifePathResetGenerator(this));
 			processChain.add(meta);
 			processChain.add(drake);
 			processChain.add(magicReso);
-			processChain.add(qualities);
-			processChain.add(qPaths);
-			processChain.add(attributes);
-			processChain.add(skills);
-			processChain.add(spells);
-			processChain.add(rituals);
-			processChain.add(adeptPowers);
-			processChain.add(martial);
-			processChain.add(dataStructures);
-			processChain.add(cpToNuyenStep);
-			processChain.add(equipment);
-			processChain.add(foci);
-			processChain.add(complex);
-			processChain.add(metaEcho);
-			processChain.add(sins);
-			processChain.add(lifestyles);
-			processChain.add(contacts);
+//			processChain.add(qualities);
+//			processChain.add(qPaths);
+//			processChain.add(attributes);
+//			processChain.add(skills);
+//			processChain.add(spells);
+//			processChain.add(rituals);
+//			processChain.add(adeptPowers);
+//			processChain.add(martial);
+//			processChain.add(dataStructures);
+////			processChain.add(cpToNuyenStep);
+//			processChain.add(equipment);
+//			processChain.add(foci);
+//			processChain.add(complex);
+//			processChain.add(metaEcho);
+//			processChain.add(sins);
+//			processChain.add(lifestyles);
+//			processChain.add(contacts);
 			processChain.add(new RemainingKarmaNuyenController(this));
 
 			setupDone = true;
@@ -177,35 +179,6 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.CharacterControllerImpl#runProcessors()
-	 */
-	@Override
-	public void runProcessors() {
-		SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
-		settings.characterPoints = 100;
-		super.runProcessors();
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator#getSettings()
-	 */
-	@Override
-	public SR6PointBuySettings getSettings() {
-		return getModel().getCharGenSettings(SR6PointBuySettings.class);
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator#getPointBuyAttributeController()
-	 */
-	@Override
-	public PointBuyAttributeGenerator getPointBuyAttributeController() {
-		return (PointBuyAttributeGenerator) super.attributes;
-	}
-
-	//-------------------------------------------------------------------
-	/**
 	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#initializeModel()
 	 */
 	@Override
@@ -213,11 +186,11 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		if (model.getCharGenSettings(CommonSR6GeneratorSettings.class) == null  || !(model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings) ) {
 			if (model.getChargenSettingsJSON() != null  && (model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings)) {
 				logger.log(Level.INFO, "Restore generator config from {0}", model.getChargenSettingsJSON());
-				SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+				SR6LifePathSettings settings = model.getCharGenSettings(SR6LifePathSettings.class);
 				model.setCharGenSettings(settings);
 			} else {
 				logger.log(Level.INFO, "Create new generator config");
-				SR6PointBuySettings settings = new SR6PointBuySettings();
+				SR6LifePathSettings settings = new SR6LifePathSettings();
 //		settings.variant = PowerLevel.STANDARD;
 				model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "human"));
 				model.setCharGenUsed(getId());
@@ -234,25 +207,43 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	 */
 	@Override
 	protected void createPartialController() {
-		attributes = new SR6PointBuyAttributeGenerator(this);
-		meta       = new PointBuyMetatypeController(this);
-		magicReso = new PointBuyMagicOrResonanceController(this);
-		skills = new SR6PointBuySkillGenerator(this);
-		qualities = new CommonQualityGenerator(this);
-		cpToNuyenStep = new RemainingCPAreNuyenStep(this);
-		equipment = new SR6EquipmentGenerator(this);
-		spells    = new SR6PointBuySpellGenerator(this);
-		rituals   = new SR6PointBuyRitualGenerator(this);
-		adeptPowers = new SR6PointBuyAdeptPowerGenerator(this);
-		complex   = new SR6PointBuyComplexFormGenerator(this);
-		metaEcho  = new SR6MetamagicOrEchoController(this, true);
-		sins      = new SR6SINGenerator(this);
-		lifestyles= new SR6LifestyleGenerator(this);
-		contacts  = new SR6ContactGenerator(this);
-		foci      = new SR6CommonFocusController(this);
-		qPaths    = new CommonQualityPathController(this);
-		martial   = new SR6MartialArtsController(this);
-		drake     = new SR6DrakeController(this, true);
-		dataStructures = new SR6DataStructureController(this);
+		meta = new SR6LifePathMetatypeController(this);
+		magicReso = new SR6LifePathMagicOrResonanceController(this);
+//		attributes = new SR6PointBuyAttributeGenerator(this);
+//		meta       = new PointBuyMetatypeController(this);
+//		magicReso = new PointBuyMagicOrResonanceController(this);
+//		skills = new SR6PointBuySkillGenerator(this);
+//		qualities = new CommonQualityGenerator(this);
+////		cpToNuyenStep = new RemainingCPAreNuyenStep(this);
+//		equipment = new SR6EquipmentGenerator(this);
+////		spells    = new SR6PointBuySpellGenerator(this);
+//		rituals   = new SR6PointBuyRitualGenerator(this);
+//		adeptPowers = new SR6PointBuyAdeptPowerGenerator(this);
+////		complex   = new SR6PointBuyComplexFormGenerator(this);
+//		metaEcho  = new SR6MetamagicOrEchoController(this, true);
+//		sins      = new SR6SINGenerator(this);
+//		lifestyles= new SR6LifestyleGenerator(this);
+//		contacts  = new SR6ContactGenerator(this);
+//		foci      = new SR6CommonFocusController(this);
+//		qPaths    = new CommonQualityPathController(this);
+//		martial   = new SR6MartialArtsController(this);
+//		drake     = new SR6DrakeController(this, true);
+//		dataStructures = new SR6DataStructureController(this);
 	}
+
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator#getSettings()
+//	 */
+//	@Override
+//	public SR6LifePathSettings getSettings() {
+//		return getModel().getCharGenSettings(SR6LifePathSettings.class);
+//	}
+
+	//-------------------------------------------------------------------
+	public void setNativeLanguage(String n) {
+		logger.log(Level.WARNING, "ToDo: setLanguage");
+		//skill.setLanguage(n);
+	}
+
 }

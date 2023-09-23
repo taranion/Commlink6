@@ -6,26 +6,19 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
-import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.MagicOrResonanceOption;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
-import de.rpgframework.shadowrun.MetaTypeOption;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.chargen.gen.IShadowrunCharacterGenerator;
 import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
-import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.gen.LifePathCharacterGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -34,7 +27,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class SR6LifePathMagicOrResonanceController extends MagicOrResonanceController {
 
-	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(LifePathCharacterGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
+	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(SR6LifepathCharacterGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
 
 	private final static Logger logger = System.getLogger(SR6LifePathMagicOrResonanceController.class.getPackageName());
 

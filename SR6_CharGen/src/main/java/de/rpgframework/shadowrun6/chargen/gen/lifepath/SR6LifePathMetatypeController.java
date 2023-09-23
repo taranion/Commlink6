@@ -25,7 +25,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.gen.LifePathCharacterGenerator;
 
 /**
  * @author prelle
@@ -33,7 +32,7 @@ import de.rpgframework.shadowrun6.chargen.gen.LifePathCharacterGenerator;
  */
 public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> implements IMetatypeController<SR6MetaType> {
 
-	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(LifePathCharacterGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
+	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(SR6LifepathCharacterGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
 
 	private List<MetaTypeOption> available;
 	private static Random random = new Random();

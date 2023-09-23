@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.UUID;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.prelle.javafx.JavaFXConstants;
@@ -39,7 +38,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.ComplexDataItemControllerOneColumnSkin;
-import de.rpgframework.jfx.DataItemSpinnerPane;
+import de.rpgframework.jfx.DataItemPane;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.Quality;
@@ -63,6 +62,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.util.Callback;
 
 /**
  * @author prelle
@@ -78,7 +78,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 
 	private Label lbNetKarma;
 
-	private DataItemSpinnerPane<SetItem> contentPane;
+	private DataItemPane<SetItem> contentPane;
 	private ComplexDataItemControllerNode<Quality, QualityValue> selection;
 	private NumberUnitBackHeader backHeader;
 	/* When TRUE asynchronous updates are happening and user events shall be ignored */
@@ -237,15 +237,15 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 
 	private void initContentPane() {
 
-		contentPane = new DataItemSpinnerPane<SetItem>(
+		contentPane = new DataItemPane<SetItem>(
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 				Shadowrun6Tools.modificationResolver(Locale.getDefault())
 				);
 		contentPane.setShowDecisionColumn(true);
 		contentPane.setShowStatsColumn(false);
 		contentPane.setId("species");
-		contentPane.setImageConverter(new Function<SetItem,Image>(){
-			public Image apply(SetItem value) {
+		contentPane.setImageConverter(new Callback<SetItem,Image>(){
+			public Image call(SetItem value) {
 				String name = "images/metatypes/surge_"+value.getId()+".png";
 				logger.log(Level.INFO, "Search "+name);
 				InputStream in = CommonShadowrunJFXResourceHook.class.getResourceAsStream(name);
@@ -269,7 +269,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		});
 //		contentPane.setModificationConverter((m) -> SplitterTools.getModificationString(contentPane.getSelectedItem(),m));
 //		contentPane.setChoiceConverter((c) -> SplitterTools.getChoiceString(contentPane.getSelectedItem(), c));
-		contentPane.setModel(charGen.getModel());
+		contentPane.setUseForChoices(charGen.getModel());
 		contentPane.setDecisionHandler( (r,c) -> {
 			logger.log(Level.WARNING, "ToDo: make decision");
 			System.err.println("SR6WizardPageChangeling: ToDo: make decision "+c);
@@ -319,16 +319,6 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			refresh();
 		});
 
-		selection.showHelpForProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.ERROR, "show help for "+n);
-			contentPane.setShowHelpFor(n);
-//			bxDescription.setData(n);
-//			if (n!=null) {
-//				layout.setTitle(n.getName());
-//			} else {
-//				layout.setTitle(null);
-//			}
-		});
 	}
 
 	//-------------------------------------------------------------------
