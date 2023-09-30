@@ -17,21 +17,21 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
+import de.rpgframework.genericrpg.chargen.DataSetMode;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.jfx.wizard.WizardPageDatasets;
 import de.rpgframework.jfx.wizard.WizardPageGenerator;
+import de.rpgframework.jfx.wizard.WizardPageProfiles;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageLifestyles;
-import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageRituals;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageAdeptPowers;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageContacts;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageName;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPagePriority;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSINs;
-import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSpells;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
-import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
@@ -45,7 +45,6 @@ import javafx.util.Callback;
 
 /**
  * @author prelle
- * @param <WizardPageAdeptPowers>
  *
  */
 public class GenerationWizard extends Wizard implements ControllerListener {
@@ -57,7 +56,8 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private GeneratorWrapper wrapper;
 
 	private WizardPageGenerator<ShadowrunAttribute ,Shadowrun6Character, CommonSR6CharacterGenerator> chargen;
-//	private WizardPageProfiles profiles;
+	private WizardPageDatasets datasets;
+	private WizardPageProfiles profiles;
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
 	private SR6WizardPageMetatype race;
 	private WizardPageLifePath1 lifepath1;
@@ -130,6 +130,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private void initPages() {
+		datasets = new WizardPageDatasets(this, wrapper, Shadowrun6Core.getDataSets(), DataSetMode.values());
 		chargen= new WizardPageGenerator(this, wrapper,
 				CharacterGeneratorRegistry.getGenerators(),
 				Shadowrun6Core.getItemList(RuleInterpretation.class),
@@ -164,6 +165,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		name   = new WizardPageName<>(this, wrapper);
 
 		getPages().add(chargen);
+		getPages().add(datasets);
 		getPages().addAll(getPageList());
 		logger.log(Level.WARNING, "Pages: "+getPages());
 	}
