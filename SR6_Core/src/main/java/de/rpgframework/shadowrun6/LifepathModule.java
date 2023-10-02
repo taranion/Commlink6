@@ -67,4 +67,12 @@ public class LifepathModule extends ComplexDataItem {
 
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @return the type
+	 */
+	public Type getType() {
+		return type;
+	}
+
 }

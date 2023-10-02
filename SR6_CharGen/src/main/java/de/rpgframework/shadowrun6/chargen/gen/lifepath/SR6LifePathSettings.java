@@ -1,14 +1,9 @@
 package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
-import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
-import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
-import de.rpgframework.shadowrun6.PowerLevel;
-import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.LifepathModuleValue;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
 /**
@@ -16,6 +11,8 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
  *
  */
 public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
+
+	private List<LifepathModuleValue> modules;
 
 //	public int characterPoints;
 //	public int cpBoughtSpecial;
@@ -30,11 +27,27 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 	/**
 	 */
 	public SR6LifePathSettings() {
+		modules = new ArrayList<>();
 //		perAttrib = new LinkedHashMap<>();
 //		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 //			perAttrib.put(key, new PerAttributePoints());
 //		}
 //		perSkill = new LinkedHashMap<>();
+	}
+
+	//-------------------------------------------------------------------
+	public List<LifepathModuleValue> getModules() {
+		return modules;
+	}
+
+	//-------------------------------------------------------------------
+	public void addModule(LifepathModuleValue module) {
+		modules.add(module);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeModule(LifepathModuleValue module) {
+		modules.remove(module);
 	}
 
 	//-------------------------------------------------------------------
@@ -48,7 +61,7 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 //		}
 		return buf.toString();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public String toSkillString() {
 		StringBuffer buf = new StringBuffer();

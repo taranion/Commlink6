@@ -103,4 +103,13 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 		logger.log(Level.ERROR, "roll() not implemented");
 	}
 
+	//-------------------------------------------------------------------
+	protected void updateChoices(ComplexDataItem value) {
+		choices.clear();
+		choices.addAll(value.getChoices().stream().map(c -> c.getUUID()).toList());
+		choices.addAll(value.getModifications().stream()
+			.filter(m -> m instanceof ModificationChoice)
+			.map(mc -> ((ModificationChoice)mc).getUUID()).toList());
+	}
+
 }

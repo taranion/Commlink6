@@ -13,11 +13,15 @@ import java.util.UUID;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetaTypeOption;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -25,6 +29,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -147,16 +152,24 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 
 			// Add modifications from selection
 			MetaType meta = getModel().getMetatype();
-			if (meta == null) {
-				logger.log(Level.ERROR, "No metatype selected yet");
-				todos.add(new ToDoElement(Severity.STOPPER, RES, IRejectReasons.TODO_METATYPE_NOT_SELECTED));
-			} else {
+			if (meta != null) {
 				if (meta.getKarma() != 0) {
 					logger.log(Level.INFO, "Pay {0} Karma for metatype '{1}'", meta.getKarma(), meta.getId());
 					model.setKarmaFree(model.getKarmaFree() - meta.getKarma());
 				}
-				// Add more modifications
-				unprocessed.addAll(meta.getModifications());
+				// "Any attributes for which your metatype has an increased maximum (higher than six) start at 2. All other attributes start at 1.""
+				for (Modification tmp : previous) {
+					if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE && tmp instanceof ValueModification) {
+						ValueModification val = (ValueModification)tmp;
+						ShadowrunAttribute attr = val.getResolvedKey();
+						if (attr.isPrimary() && val.getValue()>6) {
+							logger.log(Level.INFO, "Increase metatype attribute {0} to 2", attr);
+							AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attr);
+							aVal.addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, attr.name(), 1, meta, ValueType.NATURAL));
+						}
+
+					}
+				}
 			}
 		return unprocessed;
 		} finally {

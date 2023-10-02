@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -96,18 +97,18 @@ public class SR6LifePathMagicOrResonanceController extends MagicOrResonanceContr
 		logger.log(Level.INFO, "BORN THIS WAY: "+type);
 		switch (type.getId()) {
 		case "technomancer":
-			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), 1));
+			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), 1, type, ValueType.NATURAL));
 			break;
 		case "magician":
 		case "mysticadept":
 		case "adept":
-			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1));
+			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 1, type, ValueType.NATURAL));
 			break;
 		case "aspectedmagician":
-			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 2));
+			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), 2, type, ValueType.NATURAL));
 			break;
 		case "mundane":
-			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.EDGE.name(), 1));
+			unprocessed.add(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.EDGE.name(), 1, type, ValueType.NATURAL));
 			break;
 		}
 
