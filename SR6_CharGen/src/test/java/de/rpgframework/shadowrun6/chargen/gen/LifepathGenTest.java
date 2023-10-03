@@ -74,7 +74,7 @@ public class LifepathGenTest {
 		assertEquals(50, model.getKarmaFree());
 //		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 //		assertEquals(100, settings.characterPoints);
-		model.setName("Ex DocWagon Heal-Mage");
+		model.setName("Lucifer Lifepath");
 
 		// Magic/Resonance
 		charGen.getMagicOrResonanceController().select(Shadowrun6Core.getItem(MagicOrResonanceType.class, "mundane"));
@@ -89,6 +89,13 @@ public class LifepathGenTest {
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.AGILITY).getModifiedValue());
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue());
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.EDGE    ).getModifiedValue());
+
+		/*
+		 * The nationality will be UCAS, and our native language will be English. The quality
+		 * this character feels they were born with is Tough as Nails at level 2, which costs us 8 Karma.
+		 */
+		charGen.getBornThisWayGenerator().getQualityController().select(Shadowrun6Core.getItem(Quality.class, "built_tough"));
+		charGen.getBornThisWayGenerator().selectNativeLanguage("English");
 
 		// Modules
 		SR6LifePathModuleGenerator modules = charGen.getModuleGenerator();

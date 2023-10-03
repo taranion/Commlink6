@@ -8,6 +8,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.BornThisWayGenerator;
 
 /**
  * @author prelle
@@ -16,5 +17,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 public interface SR6CharacterGenerator extends SR6CharacterController, IShadowrunCharacterGenerator<SR6Skill,SR6SkillValue, SR6Spell, Shadowrun6Character> {
 
 	public final static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(SR6CharacterGenerator.class, Locale.ENGLISH, Locale.GERMAN);;
-	
+
+	default public BornThisWayGenerator getBornThisWayGenerator() {
+		return null;
+	}
 }

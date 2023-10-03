@@ -3,7 +3,9 @@ package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.LifepathModuleValue;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
 /**
@@ -14,14 +16,8 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 
 	private List<LifepathModuleValue> modules;
 
-//	public int characterPoints;
-//	public int cpBoughtSpecial;
-//	public int cpBoughtAttrib;
-//	public int cpToSkills;
-//	public int cpToResources;
-//	/** How points and karma is spent on attribute */
-//	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib;
-//	public Map<SR6SkillValue, PerSkillPoints> perSkill;
+	private String nativeLanguage;
+	private String bornQual1, bornQual2;
 
 	//-------------------------------------------------------------------
 	/**
@@ -72,5 +68,39 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 //				buf.append(String.format("\n%10s : %s", ent.getKey().getSkill(), ent.getValue().toString()));
 //		}
 		return buf.toString();
+	}
+
+	//-------------------------------------------------------------------
+	public Quality getBornQuality1() {
+		if (bornQual1 == null) return null;
+		return Shadowrun6Core.getItem(Quality.class, bornQual1);
+	}
+
+	//-------------------------------------------------------------------
+	public void setBornQuality1(Quality value) {
+		if (value==null) this.bornQual1=null;
+		else this.bornQual1 = value.getId();
+	}
+
+	//-------------------------------------------------------------------
+	public Quality getBornQuality2() {
+		if (bornQual2 == null) return null;
+		return Shadowrun6Core.getItem(Quality.class, bornQual2);
+	}
+
+	//-------------------------------------------------------------------
+	public void setBornQuality2(Quality value) {
+		if (value==null) this.bornQual2=null;
+		else this.bornQual2 = value.getId();
+	}
+
+	//-------------------------------------------------------------------
+	public String getNativeLanguage() {
+		return nativeLanguage;
+	}
+
+	//-------------------------------------------------------------------
+	public void setNativeLanguage(String value) {
+		this.nativeLanguage = value;
 	}
 }

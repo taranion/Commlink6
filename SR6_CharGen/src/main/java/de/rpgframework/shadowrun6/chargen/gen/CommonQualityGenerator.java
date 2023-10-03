@@ -16,6 +16,7 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ChoiceOption;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Quality;
@@ -38,7 +39,7 @@ import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
  */
 public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character> implements IQualityController {
 
-	private final static Logger logger = System.getLogger(CommonQualityGenerator.class.getPackageName()+".quality");
+	protected final static Logger logger = System.getLogger(CommonQualityGenerator.class.getPackageName()+".quality");
 
 	public final static MultiLanguageResourceBundle RES = SR6CharacterGenerator.RES;
 
@@ -89,23 +90,25 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		Possible poss = super.canBeSelected(value, decisions);
 		if (!poss.get())
 			return poss;
-
-		// Check if all requirements are met
-		List<Requirement> notMet = new ArrayList<>();
-		for (Requirement req : value.getRequirements()) {
-			try {
-				if (!Shadowrun6Tools.isRequirementMet(model, value, req, decisions)) {
-					notMet.add(req);
-				}
-			} catch (Exception e) {
-				logger.log(Level.ERROR, "Error in quality "+value.getId(),e);
-				e.printStackTrace();
-				System.exit(1);
-			}
-		}
-		if (notMet.size()>0) {
-			return new Possible(notMet, (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
-		}
+		poss = Shadowrun6Tools.checkDecisionsAndRequirements(parent.getModel(), value, decisions);
+//		// Check if all requirements are met
+//		List<Requirement> notMet = new ArrayList<>();
+//		for (Requirement req : value.getRequirements()) {
+//			try {
+//				if (!Shadowrun6Tools.isRequirementMet(model, value, req, decisions)) {
+//					notMet.add(req);
+//				}
+//			} catch (Exception e) {
+//				logger.log(Level.ERROR, "Error in quality "+value.getId(),e);
+//				e.printStackTrace();
+//				System.exit(1);
+//			}
+//		}
+//		if (notMet.size()>0) {
+//			return new Possible(notMet, (r) -> Shadowrun6Tools.getRequirementString(r, Locale.getDefault()));
+//		}
+		if (!poss.get())
+			return poss;
 
 
 		int karma = value.getKarmaCost();

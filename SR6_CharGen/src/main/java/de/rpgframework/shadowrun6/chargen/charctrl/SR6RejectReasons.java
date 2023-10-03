@@ -42,4 +42,7 @@ public interface SR6RejectReasons extends IRejectReasons {
 	// Sum of force of all foci exceeds MAGICx5
 	public final static String IMPOSS_SUM_RATINGS_EXCEEDS_MAX= "impossible.sumRatingsExceedsMax";
 
+	public static final String TODO_BORN_QUALITY_MISSING = "todo.lifepath.born.quality.missing";
+	public static final String TODO_LANGUAGE_NOT_SET     = "todo.lifepath.languageNotSet";
+
 }

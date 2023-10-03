@@ -18,9 +18,12 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
+import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.RemainingKarmaNuyenController;
+import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
@@ -36,6 +39,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 
 	private boolean setupDone;
 
+	private BornThisWayGenerator bornThisWay;
 	private SR6LifePathModuleGenerator modules;
 
 	//-------------------------------------------------------------------
@@ -64,12 +68,14 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	public WizardPageType[] getWizardPages() {
 		return new WizardPageType[] { WizardPageType.METATYPE, //WizardPageType.DRAKE,
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
+				WizardPageType.LP_BORN_THIS_WAY,
 				WizardPageType.QUALITIES,
 				WizardPageType.ATTRIBUTES,
-				WizardPageType.SKILLS, WizardPageType.POWERS, WizardPageType.SPELLS,
-				WizardPageType.RITUALS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO,
-				WizardPageType.GEAR, WizardPageType.SIN_LICENSE, WizardPageType.LIFESTYLE,
-				WizardPageType.CONTACTS, WizardPageType.NAME, };
+//				WizardPageType.SKILLS, WizardPageType.POWERS, WizardPageType.SPELLS,
+//				WizardPageType.RITUALS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO,
+//				WizardPageType.GEAR, WizardPageType.SIN_LICENSE, WizardPageType.LIFESTYLE,
+//				WizardPageType.CONTACTS, WizardPageType.NAME,
+				};
 	}
 
 	//-------------------------------------------------------------------
@@ -127,11 +133,13 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 			createPartialController();
 
 			// First the regular processing steps
+			processChain.clear();
 			processChain.addAll(Shadowrun6Tools.getCharacterProcessingSteps(model, locale));
 			processChain.add(new SR6LifePathResetGenerator(this));
 			processChain.add(meta);
 			processChain.add(drake);
 			processChain.add(magicReso);
+			processChain.add(bornThisWay);
 //			processChain.add(qualities);
 			processChain.add(modules);
 //			processChain.add(qPaths);
@@ -193,14 +201,13 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	protected void createPartialController() {
 		meta = new SR6LifePathMetatypeController(this);
 		magicReso = new SR6LifePathMagicOrResonanceController(this);
+		bornThisWay = new BornThisWayGenerator(this);
 		modules   = new SR6LifePathModuleGenerator(this);
 		attributes = new SR6LifePathAttributeGenerator(this);
-//		meta       = new PointBuyMetatypeController(this);
-//		magicReso = new PointBuyMagicOrResonanceController(this);
 //		skills = new SR6PointBuySkillGenerator(this);
-//		qualities = new CommonQualityGenerator(this);
+		qualities = new CommonQualityGenerator(this);
 ////		cpToNuyenStep = new RemainingCPAreNuyenStep(this);
-//		equipment = new SR6EquipmentGenerator(this);
+		equipment = new SR6EquipmentGenerator(this);
 ////		spells    = new SR6PointBuySpellGenerator(this);
 //		rituals   = new SR6PointBuyRitualGenerator(this);
 //		adeptPowers = new SR6PointBuyAdeptPowerGenerator(this);
@@ -212,7 +219,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 //		foci      = new SR6CommonFocusController(this);
 //		qPaths    = new CommonQualityPathController(this);
 //		martial   = new SR6MartialArtsController(this);
-//		drake     = new SR6DrakeController(this, true);
+		drake     = new SR6DrakeController(this, true);
 //		dataStructures = new SR6DataStructureController(this);
 	}
 
@@ -256,6 +263,15 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	//-------------------------------------------------------------------
 	public SR6LifePathModuleGenerator getModuleGenerator() {
 		return modules;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator#getBornThisWayGenerator()
+	 */
+	@Override
+	public BornThisWayGenerator getBornThisWayGenerator() {
+		return bornThisWay;
 	}
 
 }

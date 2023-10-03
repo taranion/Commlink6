@@ -64,6 +64,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageDrake drake;
 	private SR6WizardPageChangeling surge;
 	private SR6WizardPageMagicOrResonance magic;
+	private SR6WizardPageBornThisWay bornThisWay;
 	private SR6WizardPageQualities qualities;
 	private SR6WizardPageAttributes attrib;
 	private SR6WizardPageSkills skills;
@@ -107,6 +108,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case DRAKE        : ret.add(    drake); break;
 			case SURGE        : ret.add(    surge); break;
 			case MAGIC_OR_RESONANCE: ret.add(magic); break;
+			case LP_BORN_THIS_WAY: ret.add(bornThisWay); break;
 			case QUALITIES    : ret.add(qualities); break;
 			case ATTRIBUTES   : ret.add(   attrib); break;
 			case SKILLS       : ret.add(   skills); break;
@@ -149,6 +151,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			}
 		};
 		drake     = new SR6WizardPageDrake(this, wrapper);
+		bornThisWay = new SR6WizardPageBornThisWay(this, wrapper);
 		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());

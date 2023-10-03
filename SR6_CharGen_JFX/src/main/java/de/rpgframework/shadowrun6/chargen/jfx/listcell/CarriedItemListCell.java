@@ -83,7 +83,8 @@ public class CarriedItemListCell extends ACarriedItemListCell<ItemTemplate> {
 	 */
 	@Override
 	public int getSinglePrice(CarriedItem<ItemTemplate> item) {
-		return item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue() / item.getCount();
+		int count = (item.getCount()>0) ? item.getCount() : 1;
+		return item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue() / count;
 	}
 
 	//-------------------------------------------------------------------
@@ -94,5 +95,5 @@ public class CarriedItemListCell extends ACarriedItemListCell<ItemTemplate> {
 	public String getModificationSourceString(Object modSource) {
 		return Shadowrun6Tools.getModificationSourceString(modSource);
 	}
-	
+
 }
