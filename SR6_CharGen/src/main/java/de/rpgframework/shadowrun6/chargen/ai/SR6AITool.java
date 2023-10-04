@@ -31,7 +31,7 @@ public class SR6AITool {
 
 	//-------------------------------------------------------------------
 	public static void initialize() {
-		DataSet core = new DataSet(new SR6AITool(), RoleplayingSystem.SPLITTERMOND, "profiles", null, Locale.GERMAN);
+		DataSet core = new DataSet(new SR6AITool(), RoleplayingSystem.SHADOWRUN6, "profiles", null, Locale.GERMAN);
 		Class<SR6AITool> clazz = SR6AITool.class;
 		try {
 			List list = Shadowrun6Core.loadDataItems(LevellingProfileList.class, LevellingProfile.class, core, clazz.getResourceAsStream("profiles.xml"));
