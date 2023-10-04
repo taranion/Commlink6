@@ -16,6 +16,7 @@ import de.rpgframework.classification.Gender;
 import de.rpgframework.classification.Genre;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
+import de.rpgframework.random.GeneratorReference;
 import de.rpgframework.random.GeneratorType;
 import de.rpgframework.random.Plot;
 import de.rpgframework.random.RandomGeneratorRegistry;
@@ -36,7 +37,7 @@ public class GeneratorTest {
 	//-------------------------------------------------------------------
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+ModifiedObjectType.class.getName(), ShadowrunReference.class);
+		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+ModifiedObjectType.class.getName(), GeneratorReference.class);
 		GenericShadowrunGenerators.initialize();
 		Shadowrun6Generators.initialize();
 	}
