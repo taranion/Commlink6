@@ -151,7 +151,7 @@ public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 		logger.log(Level.TRACE, "refresh");
 
 		SR6AdeptPowerController ctrl = (SR6AdeptPowerController) control.getAdeptPowerController();
-		if (model!=null) {
+		if (model!=null && ctrl!=null) {
 			setData(model.getAdeptPowers());
 			lbTotal.setText( String.valueOf( ctrl.getMaxPowerPoints() ));
 			lbUnspent.setText( String.valueOf( ctrl.getUnsedPowerPoints() ));

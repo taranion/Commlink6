@@ -76,7 +76,6 @@ import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.FocusValue;
-import de.rpgframework.shadowrun.Lifestyle;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;

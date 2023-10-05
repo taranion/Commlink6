@@ -3,7 +3,6 @@ package de.rpgframework.shadowrun6.chargen.jfx.listcell;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.List;
-import java.util.Locale;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -11,12 +10,14 @@ import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.MartialArtsValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController;
 import de.rpgframework.shadowrun6.chargen.jfx.dialog.EditMartialArtsValueDialog;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 
 /**
@@ -34,7 +35,16 @@ public class MartialArtsValueListCell extends ComplexDataItemValueListCell<Marti
 		super(ctrlProv);
 		lbTechniques = new Label();
 		lbTechniques.setWrapText(true);
-		bxCenter.getChildren().add(2, lbTechniques);
+		addAction(new CellAction("Edit",ICON_PEN, "tooltip", (act,item) -> editClicked(item)));
+	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.cells.ComplexDataItemValueListCell#getContentNode(de.rpgframework.genericrpg.data.ComplexDataItemValue)
+	 */
+	@Override
+	public Parent getContentNode(MartialArtsValue item) {
+		return lbTechniques;
 	}
 
 	//-------------------------------------------------------------------
@@ -51,11 +61,7 @@ public class MartialArtsValueListCell extends ComplexDataItemValueListCell<Marti
 		} else {
 			IMartialArtsController control = (IMartialArtsController) controlProvider.get();
 			Shadowrun6Character model = control.getModel();
-//			lblType.setText(String.valueOf(item.getCost()));
 			try {
-				name.setText(item.getResolved().getName(Locale.getDefault()));
-				model.getTechniques(item.getResolved());
-
 				List<String> techniqueNames = model.getTechniques(item.getResolved()).stream().map(tech -> tech.getResolved().getName()).collect(Collectors.toList());
 				lbTechniques.setText(String.join(",", techniqueNames));
 			} catch (Exception e) {
@@ -66,11 +72,7 @@ public class MartialArtsValueListCell extends ComplexDataItemValueListCell<Marti
 	}
 
 	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.jfx.cells.ComplexDataItemValueListCell#editClicked(de.rpgframework.genericrpg.data.ComplexDataItemValue)
-	 */
-	@Override
-	protected void editClicked(MartialArtsValue ref) {
+	protected OperationResult<MartialArtsValue> editClicked(MartialArtsValue ref) {
 		logger.log(Level.DEBUG,"edit martial arts {0}",getItem());
 		MartialArtsValue data = getItem();
 		IMartialArtsController control = (IMartialArtsController) controlProvider.get();
@@ -80,7 +82,9 @@ public class MartialArtsValueListCell extends ComplexDataItemValueListCell<Marti
 
 		if (result==CloseType.OK) {
 			this.requestLayout();
+			return new OperationResult<>(ref);
 		}
+		return new OperationResult<>();
 	}
 
 }

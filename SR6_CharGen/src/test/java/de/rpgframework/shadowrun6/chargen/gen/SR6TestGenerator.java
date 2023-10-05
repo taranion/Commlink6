@@ -5,15 +5,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
+import de.rpgframework.genericrpg.chargen.IRecommender;
+import de.rpgframework.genericrpg.chargen.LevellingProfileController;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
 import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.shadowrun.MetaType;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
@@ -452,6 +456,18 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 	public IDataStructureController getDataStructureController() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public LevellingProfileController getProfileController() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<IRecommender<ShadowrunAttribute>> getRecommender() {
+		// TODO Auto-generated method stub
+		return Optional.empty();
 	}
 
 }

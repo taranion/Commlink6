@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <lifemods>
+  <lifemod id="ganger" type="ADULT">
+    <choices>
+      <choice uuid="dd8bb000-fc65-4195-a8cf-1866fa01f2ed" type="ATTRIBUTE" options="BODY,AGILITY,REACTION,STRENGTH" />
+      <choice uuid="5e000fdb-8415-4a0c-9a1d-1e55f633ed34" type="SKILL" options="athletics,firearms,close_combat,perception" />
+      <choice uuid="72f10b55-0eb5-41b6-874a-00d3b738c905" type="SKILL" options="influence,stealth,outdoor,con" />
+    </choices>
+    <modifications>
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="dd8bb000-fc65-4195-a8cf-1866fa01f2ed" value="1" set="NATURAL"/>
+      <valmod type="SKILL" ref="CHOICE" choice="5e000fdb-8415-4a0c-9a1d-1e55f633ed34" value="1" set="NATURAL" />
+      <valmod type="SKILL" ref="CHOICE" choice="72f10b55-0eb5-41b6-874a-00d3b738c905" value="1" set="NATURAL" />
+      <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
+      <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
+      <allowmod type="CONTACT_TYPES" ref="STREET" />
+      <selmod>
+        <valmod type="SKILL" ref="language" value="1" />
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.gang_in_area" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.black_market" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.streets_of_sprawl" />
+        </itemmod>
+      </selmod>
+    </modifications>
+  </lifemod>
 	<lifemod id="it_support" type="ADULT">
 		<requires>
 			<datareq type="LIFEMOD" ref="technical_school"/>

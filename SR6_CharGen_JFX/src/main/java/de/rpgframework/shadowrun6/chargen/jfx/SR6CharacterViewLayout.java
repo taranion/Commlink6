@@ -279,19 +279,23 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	//-------------------------------------------------------------------
 	private void refreshController(boolean runProcessors) {
 		control.setAllowRunProcessor(false);
-		pgBasic.setController(control);
-		pgSkills.setController(control);
-		pgCombat.setController(control);
-		pgAugment.setController(control);
-		pgVirtual.setController(control);
-		pgMagic.setController(control);
-		pgMatrix.setController(control);
-		pgResonance.setController(control);
-		pgVehicles.setController(control);
-		pgGear.setController(control);
-		pgLife.setController(control);
-		pgCareer.setController(control);
-		pgBody.setController(control);
+		try {
+			pgBasic.setController(control);
+			pgSkills.setController(control);
+			pgCombat.setController(control);
+			pgAugment.setController(control);
+			pgVirtual.setController(control);
+			pgMagic.setController(control);
+			pgMatrix.setController(control);
+			pgResonance.setController(control);
+			pgVehicles.setController(control);
+			pgGear.setController(control);
+			pgLife.setController(control);
+			pgCareer.setController(control);
+			pgBody.setController(control);
+		} catch (Exception e) {
+			logger.log(Level.WARNING, "Failed setting controller", e);
+		}
 		control.setAllowRunProcessor(true);
 
 		refreshPages();

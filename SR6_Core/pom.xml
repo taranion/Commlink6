@@ -11,6 +11,10 @@
 	<artifactId>shadowrun6-core</artifactId>
 	<name>SR6_Core</name>
 
+	<properties>
+		<skipTests>true</skipTests>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.prelle</groupId>

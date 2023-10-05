@@ -8,7 +8,6 @@ import java.util.List;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
-import de.rpgframework.genericrpg.chargen.ai.Recommender;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -127,13 +126,12 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 	 */
 	@Override
 	public RecommendationState getRecommendationState(ShadowrunAttribute item) {
-		Recommender recommender = getModel().getRecommender();
 		// No recommender set, means no recommendation
-		if (recommender==null) {
+		if (parent.getRecommender().isEmpty()) {
 			return RecommendationState.NEUTRAL;
 		}
 
-		return recommender.getRecommendationState(item);
+		return parent.getRecommender().get().getRecommendationState(item);
 	}
 
 	//-------------------------------------------------------------------

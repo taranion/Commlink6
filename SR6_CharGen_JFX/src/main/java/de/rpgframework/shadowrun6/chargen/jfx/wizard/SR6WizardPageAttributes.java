@@ -131,7 +131,7 @@ public class SR6WizardPageAttributes extends WizardPageAttributes<SR6Skill, SR6S
 			if (table.getNameMapper()!=nameMapperAI)
 				table.setNameMapper(nameMapperAI);
 		} else {
-			if (table.getNameMapper()!=null)
+			if (table!=null && table.getNameMapper()!=null)
 				table.setNameMapper(null);
 		}
 		super.refresh();

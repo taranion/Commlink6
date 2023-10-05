@@ -1,0 +1,26 @@
+Komplexe Form "[Programm] emulieren" (GRW 189) stellt für 5 Karma je ein 
+Programm zur Verfügung -> während komplexe Form läuft
+
+Echo "Software Emulator" (AUS 69) mit Echo "Lebendes Netzwerk" (GRW 195)
+bieten die Möglichkeit gekaufte Programme bis Stufe 6 für 1 Karma zu 
+"absorbieren". Die absorbierten Programme können ausgeführt werden.
+Die Anzahl der auf diese Art ausführbaren Programme ist RES/2, aber man
+kann mehr haben
+
+Hinzufügen eines User-Flags "ABSORBED" zu CarriedItem, wenn dieses 
+absorbiert wird. Absorbierte Items werden nicht in normalen Listen aufgeführt.
+Entsprechende Methoden
+- canBeAbsorbed(Item, boolean)
+- setAbsorbed(Item, boolean=
+- getAbsorbed
+- getAvailableForAbsorbtion
+in extra Controller / MetaEchoController
+
+Baue eine Ankreuzliste aus Programmen (mit Stufenangabe), unterteilt in
+Rubriken "Software Emulator" und "Komplexe Formen"
+
+Via komplexe Formen
+==========================
+
+Via Software-Emulator Echo
+==========================

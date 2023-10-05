@@ -216,9 +216,22 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " from {1} - no such skill {0}", mod.getKey(),mod.getSource());
 		}
 		SR6SkillValue value = model.getSkillValue(item);
+		if (value==null  && mod.getSet()==ValueType.NATURAL) {
+			value = new SR6SkillValue(item, mod.getValue());
+			model.addSkillValue(value);
+		}
 		if (value == null) {
-			logger.log(Level.WARNING, "applySkill for skill unset: "+mod.getKey());
-			return false;
+			if ("language".equals(item.getId()) || "knowledge".equals(item.getId())) {
+				value = new SR6SkillValue(item, 0);
+				model.addSkillValue(value);
+				for (Decision dec : mod.getDecisions()) {
+					value.addDecision(dec);
+					logger.log(Level.DEBUG, "Add decision {0} to skill {1}", dec, item);
+				}
+			} else {
+				logger.log(Level.WARNING, "applySkill for skill unset: "+mod.getKey());
+				return false;
+			}
 		}
 
 		value.addModification(mod);

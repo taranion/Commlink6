@@ -8,7 +8,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.prelle.javafx.CloseType;
@@ -24,7 +23,7 @@ import de.rpgframework.classification.Gender;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
-import de.rpgframework.jfx.DataItemSpinnerPane;
+import de.rpgframework.jfx.DataItemPane;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
@@ -44,6 +43,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 /**
@@ -58,7 +58,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 
 	private GeneratorWrapper charGen;
 
-	private DataItemSpinnerPane<SR6MetaType> contentPane;
+	private DataItemPane<SR6MetaType> contentPane;
 
 	private ChoiceBox<Gender> cbGender;
 	private Button btnRoll;
@@ -79,9 +79,8 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 		setTitle(ResourceI18N.get(RES, "page.title"));
 		initComponents();
 		initLayout();
-//		refreshDataTab();
+		refresh();
 
-		contentPane.getValueFactory().setValue(charGen.getModel().getMetatype());
 		initInteractivity();
 	}
 
@@ -103,13 +102,13 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			};
 		};
 
-		contentPane = new DataItemSpinnerPane<SR6MetaType>(
+		contentPane = new DataItemPane<SR6MetaType>(
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 				Shadowrun6Tools.modificationResolver(Locale.getDefault())
 				);
 		contentPane.setId("species");
-		contentPane.setImageConverter(new Function<SR6MetaType,Image>(){
-			public Image apply(SR6MetaType value) {
+		contentPane.setImageConverter(new Callback<SR6MetaType,Image>(){
+			public Image call(SR6MetaType value) {
 				String name = (value.getVariantOf()==null)
 						?
 								"images/metatypes/metatype_"+value.getId()+".jpg"
@@ -141,7 +140,7 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 		});
 //		contentPane.setModificationConverter((m) -> SplitterTools.getModificationString(contentPane.getSelectedItem(),m));
 //		contentPane.setChoiceConverter((c) -> SplitterTools.getChoiceString(contentPane.getSelectedItem(), c));
-		contentPane.setModel(charGen.getModel());
+		contentPane.setUseForChoices(charGen.getModel());
 		contentPane.setDecisionHandler( (r,c) -> {
 			logger.log(Level.WARNING, "ToDo: make decision");
 //			SplitterJFXUtil.openDecisionDialog(r, c, null);

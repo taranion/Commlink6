@@ -11,6 +11,7 @@ import org.junit.Test;
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.chargen.ai.AITool;
+import de.rpgframework.genericrpg.chargen.ai.LevellingProfile;
 import de.rpgframework.genericrpg.chargen.ai.Recommender;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -32,16 +33,15 @@ public class RecommenderTest {
 	//-------------------------------------------------------------------
 	@Before
 	public void setup() {
-		MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(RecommenderTest.class.getPackageName()+".Recommender", Locale.ENGLISH);
-		AITool.loadProfiles(RecommenderTest.class.getResourceAsStream("profiles.xml"), RES);
+		SR6AITool.initialize();
 	}
 
 	//-------------------------------------------------------------------
 	@Test
 	public void test1() {
 		Recommender recommender = new Recommender();
-		recommender.addConfiguration( AITool.getProfile("pick_every_lock").getModifications() );
-		recommender.addConfiguration( AITool.getProfile("gun_master").getModifications() );
+		recommender.addConfiguration( Shadowrun6Core.getItem(LevellingProfile.class,"pick_every_lock").getModifications() );
+		recommender.addConfiguration( Shadowrun6Core.getItem(LevellingProfile.class,"gun_master").getModifications() );
 
 		assertEquals(RecommendationState.RECOMMENDED, recommender.getRecommendationState(Shadowrun6Core.getSkill("engineering")));
 		assertEquals(RecommendationState.RECOMMENDED, recommender.getRecommendationState(ShadowrunAttribute.LOGIC));

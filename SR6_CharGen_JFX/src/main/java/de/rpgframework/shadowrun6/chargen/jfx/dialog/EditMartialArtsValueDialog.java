@@ -68,11 +68,7 @@ public class EditMartialArtsValueDialog extends ManagedDialog implements Control
 	private void initCompoments() {
 		node = new ComplexDataItemControllerNode<>(control);
 		node.setAvailableCellFactory(lv -> new TechniqueListCell(control));
-		node.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell<>(()->control ) {
-			{
-				btnEdit.setVisible(false);
-			}
-		});
+		node.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell<>(()->control ));
 		//lvSelected .setStyle("-fx-min-width: 25em;");
 		description = new GenericDescriptionVBox(
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),

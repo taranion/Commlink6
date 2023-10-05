@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.free.FreeCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSettings;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifepathCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
 import de.rpgframework.shadowrun6.chargen.gen.priority.PriorityCharacterGenerator;
@@ -39,7 +40,7 @@ public class CharacterGeneratorRegistry {
 		addGenerator(SumToTenCharacterGenerator.class);
 		addGenerator(PointBuyCharacterGenerator.class);
 		addGenerator(KarmaCharacterGenerator.class);
-//		addGenerator(LifePathCharacterGenerator.class);
+		addGenerator(SR6LifepathCharacterGenerator.class);
 		addGenerator(FreeCharacterGenerator.class);
 	}
 

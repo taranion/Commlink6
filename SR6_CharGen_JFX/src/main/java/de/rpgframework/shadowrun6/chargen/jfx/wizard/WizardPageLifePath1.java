@@ -26,7 +26,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.LifePathCharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifepathCharacterGenerator;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -188,7 +188,7 @@ public class WizardPageLifePath1 extends WizardPage {
 		});
 
 		tfLanguage.textProperty().addListener( (ov,o,n) -> {
-			((LifePathCharacterGenerator)charGen).setNativeLanguage(n);
+			((SR6LifepathCharacterGenerator)charGen).setNativeLanguage(n);
 		});
 		tfNationality.textProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.WARNING, "ToDo: set nationality");

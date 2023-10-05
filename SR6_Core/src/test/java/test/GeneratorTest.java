@@ -15,6 +15,8 @@ import org.prelle.simplepersist.Persister;
 import de.rpgframework.classification.Gender;
 import de.rpgframework.classification.Genre;
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.genericrpg.modification.ModifiedObjectType;
+import de.rpgframework.random.GeneratorReference;
 import de.rpgframework.random.GeneratorType;
 import de.rpgframework.random.Plot;
 import de.rpgframework.random.RandomGeneratorRegistry;
@@ -22,18 +24,20 @@ import de.rpgframework.shadowrun.generators.GenericShadowrunGenerators;
 import de.rpgframework.shadowrun.generators.FilterCulture;
 import de.rpgframework.shadowrun.generators.TextExport;
 import de.rpgframework.shadowrun6.generators.Shadowrun6Generators;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
  *
  */
 public class GeneratorTest {
-	
+
 	private static Persister persist = new Persister();
 
 	//-------------------------------------------------------------------
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		Persister.putContext(Persister.PREFIX_KEY_INTERFACE+"."+ModifiedObjectType.class.getName(), GeneratorReference.class);
 		GenericShadowrunGenerators.initialize();
 		Shadowrun6Generators.initialize();
 	}
@@ -60,12 +64,12 @@ public class GeneratorTest {
 //		Object gen =RandomGeneratorRegistry.generate(GeneratorType.NAME_PERSON, List.of(FilterCulture.ADL), Gender.FEMALE);
 //		System.out.println("Generated name: "+gen);
 //		assertNotNull(gen);
-		
+
 		Object gen =RandomGeneratorRegistry.generate(GeneratorType.RUN, List.of(Genre.CYBERPUNK), List.of(FilterCulture.ADL, RoleplayingSystem.SHADOWRUN6), Map.of());
 		System.out.println("Generated plot: "+gen);
 		assertNotNull(gen);
 		persist.write( (Plot)gen, System.out);
-		
+
 		TextExport txtExport = new TextExport();
 		txtExport.export(gen, System.out, Locale.GERMAN);
 		System.out.println("Plot export done");

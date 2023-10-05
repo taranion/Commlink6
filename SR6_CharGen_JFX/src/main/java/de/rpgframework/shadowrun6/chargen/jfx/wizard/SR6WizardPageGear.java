@@ -4,7 +4,6 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.OptionalNodePane;
@@ -19,9 +18,7 @@ import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
-import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.jfx.EquipmentControllerTwoColumnSkin;
@@ -104,8 +101,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 			public void updateItem(CarriedItem<ItemTemplate> item, boolean empty) {
 				super.updateItem(item, empty);
 				layout.setStyle("-fx-max-width: 30em");
-				btnEdit.setVisible(false);
-				btnEdit.setManaged(false);
+				extraActionLineNodes.clear();
 			}
 		});
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);

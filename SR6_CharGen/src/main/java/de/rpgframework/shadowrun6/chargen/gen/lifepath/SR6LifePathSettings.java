@@ -1,14 +1,11 @@
 package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
-import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
-import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
-import de.rpgframework.shadowrun6.PowerLevel;
-import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun6.LifepathModuleValue;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
 /**
@@ -17,24 +14,36 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
  */
 public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 
-//	public int characterPoints;
-//	public int cpBoughtSpecial;
-//	public int cpBoughtAttrib;
-//	public int cpToSkills;
-//	public int cpToResources;
-//	/** How points and karma is spent on attribute */
-//	public Map<ShadowrunAttribute, PerAttributePoints> perAttrib;
-//	public Map<SR6SkillValue, PerSkillPoints> perSkill;
+	private List<LifepathModuleValue> modules;
+
+	private String nativeLanguage;
+	private String bornQual1, bornQual2;
 
 	//-------------------------------------------------------------------
 	/**
 	 */
 	public SR6LifePathSettings() {
+		modules = new ArrayList<>();
 //		perAttrib = new LinkedHashMap<>();
 //		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 //			perAttrib.put(key, new PerAttributePoints());
 //		}
 //		perSkill = new LinkedHashMap<>();
+	}
+
+	//-------------------------------------------------------------------
+	public List<LifepathModuleValue> getModules() {
+		return modules;
+	}
+
+	//-------------------------------------------------------------------
+	public void addModule(LifepathModuleValue module) {
+		modules.add(module);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeModule(LifepathModuleValue module) {
+		modules.remove(module);
 	}
 
 	//-------------------------------------------------------------------
@@ -48,7 +57,7 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 //		}
 		return buf.toString();
 	}
-	
+
 	//-------------------------------------------------------------------
 	public String toSkillString() {
 		StringBuffer buf = new StringBuffer();
@@ -59,5 +68,39 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 //				buf.append(String.format("\n%10s : %s", ent.getKey().getSkill(), ent.getValue().toString()));
 //		}
 		return buf.toString();
+	}
+
+	//-------------------------------------------------------------------
+	public Quality getBornQuality1() {
+		if (bornQual1 == null) return null;
+		return Shadowrun6Core.getItem(Quality.class, bornQual1);
+	}
+
+	//-------------------------------------------------------------------
+	public void setBornQuality1(Quality value) {
+		if (value==null) this.bornQual1=null;
+		else this.bornQual1 = value.getId();
+	}
+
+	//-------------------------------------------------------------------
+	public Quality getBornQuality2() {
+		if (bornQual2 == null) return null;
+		return Shadowrun6Core.getItem(Quality.class, bornQual2);
+	}
+
+	//-------------------------------------------------------------------
+	public void setBornQuality2(Quality value) {
+		if (value==null) this.bornQual2=null;
+		else this.bornQual2 = value.getId();
+	}
+
+	//-------------------------------------------------------------------
+	public String getNativeLanguage() {
+		return nativeLanguage;
+	}
+
+	//-------------------------------------------------------------------
+	public void setNativeLanguage(String value) {
+		this.nativeLanguage = value;
 	}
 }
