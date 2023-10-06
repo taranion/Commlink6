@@ -70,7 +70,6 @@ public class QualityPathsSection extends ListSection<QualityPathValue> {
 			if (result.hasError()) {
 				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
 			} else {
-				list.getItems().add(result.get());
 				list.refresh();
 			}
 		}
