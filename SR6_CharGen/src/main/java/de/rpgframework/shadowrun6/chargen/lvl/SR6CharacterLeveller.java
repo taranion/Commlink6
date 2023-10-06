@@ -11,6 +11,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
@@ -68,6 +69,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		attributes= new SR6AttributeLeveller(this);
 		skills    = new SR6SkillLeveller(this);
 		qualities = new SR6QualityLeveller(this);
+		qPaths    = new CommonQualityPathController(this);
 		equipment = new SR6EquipmentLeveller(this);
 		spells    = new SR6SpellLeveller(this);
 		rituals   = new SR6RitualLeveller(this);
