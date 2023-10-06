@@ -465,6 +465,7 @@ public class JSONSR6ExportService {
         for (Contact connection : character.getContacts()) {
             JSONContact jsonContact = new JSONContact();
             jsonContact.name = connection.getName();
+            if (jsonContact.name==null) jsonContact.name="Unnamed";
             jsonContact.type = connection.getTypeName();
             jsonContact.loyalty = connection.getLoyalty();
             jsonContact.influence = connection.getRating();
