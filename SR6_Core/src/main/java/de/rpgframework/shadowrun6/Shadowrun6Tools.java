@@ -700,7 +700,6 @@ public class Shadowrun6Tools {
 				return prefix+ResourceI18N.get(RES, loc, "label.draketype")+" "+data2.getName(loc);
 			case MAGIC_RESO:
 			case MARTIAL_ART:
-			case METAECHO:
 			case METATYPE:
 			case QUALITY:
 			case TECHNIQUE:
@@ -708,6 +707,18 @@ public class Shadowrun6Tools {
 				if (data==null)
 					return "Unknown "+tmp.getKey();
 				return prefix+data.getName(loc);
+			case METAECHO:
+				data = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				if (data==null)
+					return "Unknown "+tmp.getKey();
+				String meType = "";
+				switch ( ((MetamagicOrEcho)data).getType() ) {
+				case ECHO: meType = RES.getString("label.echo"); break;
+				case METAMAGIC: meType = RES.getString("label.metamagic"); break;
+				case METAMAGIC_ADEPT: meType = RES.getString("label.metamagic"); break;
+				case DRACOGENESIS_POWER: meType = RES.getString("label.dracogenesis"); break;
+				}
+				return prefix+meType+" "+data.getName(loc);
 			case SKILL:
 				String value = (req instanceof ValueRequirement)?((ValueRequirement)req).getRawValue():"";
 				if ("CHOICE".equals(tmp.getKey())) {
@@ -756,6 +767,7 @@ public class Shadowrun6Tools {
 				item = ShadowrunReference.resolve(type, req.getKey());
 				return item.getName(loc)+" "+tmp.getRawValue()+"+";
 			case ADEPT_POWER:
+			case METAECHO:
 			case QUALITY:
 			case TECHNIQUE:
 				DataItem qual = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());

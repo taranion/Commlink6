@@ -9,6 +9,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -91,7 +92,7 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	 */
 	@Override
 	public Possible canBeSelected(QualityPath value, Decision... decisions) {
-		return Possible.TRUE;
+		return Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
 	}
 
 	//-------------------------------------------------------------------
@@ -152,15 +153,6 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	@Override
 	public float getSelectionCost(QualityPath data) {
 		return 0;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public String getSelectionCostString(QualityPath data) {
-		return String.valueOf(getSelectionCost(data));
 	}
 
 	//-------------------------------------------------------------------
