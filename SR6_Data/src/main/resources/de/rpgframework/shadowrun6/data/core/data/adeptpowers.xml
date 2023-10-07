@@ -52,7 +52,7 @@
        <valuereq type="SKILL" ref="CHOICE" choice="97fb1dcd-14e4-456c-aad7-17a7bf8cbbae" value="1" apply="CHARACTER"/>
      </requires>
    </power>
-   <power id="improved_physical_attribute" cost="1" hasLevel="true" act="PASSIVE">
+   <power id="improved_physical_attribute" cost="1" hasLevel="true" act="PASSIVE" multi="yes">
 		<choices>
 			<choice type="ATTRIBUTE" ref="CHOICE" uuid="7282ba2c-fe33-4220-8fce-2ed77e0a3068" options="BODY,AGILITY,REACTION,STRENGTH" />
 		</choices>
