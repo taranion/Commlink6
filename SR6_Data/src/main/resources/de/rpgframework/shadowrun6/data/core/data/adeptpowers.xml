@@ -6,7 +6,7 @@
        <allowmod type="SKILL" ref="astral" />
      </modifications>
    </power>
-   <power id="attribute_boost"   cost="0.25" hasLevel="true" act="MAJOR_ACTION">
+   <power id="attribute_boost"   cost="0.25" hasLevel="true" act="MAJOR_ACTION" multi="yes">
 		<choices>
 			<choice type="ATTRIBUTE" ref="CHOICE" uuid="1ec3bdd5-f9da-4ad2-8d44-9120529830e2" options="BODY,AGILITY,REACTION,STRENGTH" />
 		</choices>
