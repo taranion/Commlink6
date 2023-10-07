@@ -426,7 +426,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.DEBUG, "Clear rule {0} from character", item);
 		} else {
 			model.addRuleFlag(item);
-			logger.log(Level.DEBUG, "Set rule {0} to character", item);
+			logger.log(Level.INFO, "Set rule {0} to character", item);
 		}
 		return true;
 	}
