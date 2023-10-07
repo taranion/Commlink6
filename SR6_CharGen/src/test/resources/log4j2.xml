@@ -12,8 +12,8 @@
         <Logger name="xml" level="warn" />
         <Logger name="prelle.jfx" level="warn" />
         <Logger name="rpgframework" level="INFO" />
-        <Logger name="de.rpgframework.genericrpg.items" level="WARN" />
-        <Logger name="de.rpgframework.shadowrun6.items" level="WARN" />
+        <Logger name="de.rpgframework.genericrpg.items" level="TRACE" />
+        <Logger name="de.rpgframework.shadowrun6.items" level="DEBUG" />
         <Logger name="de.rpgframework.shadowrun.proc.quality" level="WARN" />
         <Logger name="de.rpgframework.shadowrun6.chargen.gen.priority.attrib" level="DEBUG" />
         <Logger name="de.rpgframework.shadowrun6.proc.reset" level="TRACE"/>

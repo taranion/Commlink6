@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -99,13 +100,27 @@ public class SR6GearTool extends GearTool {
 	public static Damage calculateModifiedValue(Damage base, List<Modification> mods) {
 		Damage ret = new Damage(base);
 		for (Modification tmp : mods) {
-			logger.log(Level.ERROR, "########calculateModifiedDamageValue: TODO: "+tmp);
+//			logger.log(Level.ERROR, "########calculateModifiedDamageValue: TODO: "+tmp);
 			if (tmp instanceof ValueModification) {
 				ValueModification mod = (ValueModification)tmp;
 				ret.setValue( ret.getValue() + mod.getValue());
 			}
 		}
-		logger.log(Level.ERROR, "--->Base damage {0} plus {1} = {2}", base, mods, ret);
+//		logger.log(Level.ERROR, "--->Base damage {0} plus {1} = {2}", base, mods, ret);
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public static AugmentationQuality calculateModifiedValue(AugmentationQuality base, List<Modification> mods) {
+		AugmentationQuality ret = base;
+		for (Modification tmp : mods) {
+//			logger.log(Level.ERROR, "########calculateModifiedValue: TODO: "+tmp);
+			if (tmp instanceof ValueModification) {
+				ValueModification mod = (ValueModification)tmp;
+				ret =  AugmentationQuality.valueOf(mod.getRawValue()) ;
+			}
+		}
+//		logger.log(Level.ERROR, "--->Base quality {0} plus {1} = {2}", base, mods, ret);
 		return ret;
 	}
 

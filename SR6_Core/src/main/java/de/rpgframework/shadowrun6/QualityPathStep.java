@@ -15,12 +15,15 @@ import de.rpgframework.genericrpg.data.DataItemTypeKey;
  */
 @DataItemTypeKey(id="step")
 public class QualityPathStep extends ComplexDataItem {
-	
+
 	@ElementList(type = String.class, entry = "next")
 	private List<String> nextSteps;
-	
+
 	@Attribute
 	private int level;
+
+	@Attribute
+	private int cost;
 
 	//-------------------------------------------------------------------
 	public QualityPathStep() {
@@ -41,6 +44,14 @@ public class QualityPathStep extends ComplexDataItem {
 	 */
 	public int getLevel() {
 		return level;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the cost
+	 */
+	public int getCost() {
+		return cost;
 	}
 
 }

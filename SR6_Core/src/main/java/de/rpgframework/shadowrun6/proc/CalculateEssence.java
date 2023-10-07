@@ -9,15 +9,19 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -35,6 +39,62 @@ public class CalculateEssence implements ProcessingStep {
 	//-------------------------------------------------------------------
 	public CalculateEssence(Shadowrun6Character model) {
 		this.model = model;
+	}
+
+	//-------------------------------------------------------------------
+	private BigDecimal getOverriddenEssenceCost(CarriedItem<ItemTemplate> item) {
+		double old = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValueDouble();
+		AugmentationQuality effectiveQuality = item.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue();
+		// Check if this is a cyberadept
+		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_NOVICE)) {
+			switch (effectiveQuality) {
+			case USED    : effectiveQuality = AugmentationQuality.STANDARD; break;
+			case STANDARD: effectiveQuality = AugmentationQuality.ALPHA; break;
+			default:
+			}
+			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_NOVICE", item.getNameWithoutRating(), effectiveQuality);
+		}
+		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_DISCIPLE)) {
+			switch (effectiveQuality) {
+			case STANDARD: effectiveQuality = AugmentationQuality.ALPHA; break;
+			case ALPHA  : effectiveQuality = AugmentationQuality.BETA; break;
+			default:
+			}
+			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_DISCIPLE", item.getNameWithoutRating(), effectiveQuality);
+		}
+		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_MASTER)) {
+			switch (effectiveQuality) {
+			case ALPHA  : effectiveQuality = AugmentationQuality.BETA; break;
+			case BETA  : effectiveQuality = AugmentationQuality.DELTA; break;
+			default:
+			}
+			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_DISCIPLE", item.getNameWithoutRating(), effectiveQuality);
+		}
+
+		AugmentationQuality regularQuality = item.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue();
+		if (regularQuality!=effectiveQuality) {
+			logger.log(Level.INFO, "Due to cyberadept quality of {0} changes from {1} to {2}", item.getNameWithoutRating(), regularQuality, effectiveQuality);
+			CarriedItem<ItemTemplate> copy = new CarriedItem<ItemTemplate>(item);
+			copy.removeDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY);
+			copy.addDecision(new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, effectiveQuality.name()));
+			SR6GearTool.recalculate("", null, model, copy);
+			ItemAttributeFloatValue<SR6ItemAttribute> aVal = copy.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+			double ess = aVal.getModifiedValueDouble();
+			logger.log(Level.INFO, "Essence changes from {0} to {1}", old, ess);
+			item.getAsObject(SR6ItemAttribute.QUALITY).addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), effectiveQuality.name(), SR6RuleFlag.CYBERADEPT_NOVICE));
+			double diff = ess - old;
+			item.getAsFloat(SR6ItemAttribute.ESSENCECOST).addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), (int)(diff*1000), SR6RuleFlag.CYBERADEPT_NOVICE));
+//			System.out.println("A "+aVal);
+//			logger.log(Level.INFO, "A {0}", aVal);
+//			logger.log(Level.INFO, "B {0}", aVal.getModifiedValueDouble());
+			System.err.println(item.dump());
+//			System.err.println(copy.dump());
+//			System.exit(1);
+			return aVal.getModifiedValueBigDecimal();
+		}
+
+		ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+		return aVal.getModifiedValueBigDecimal();
 	}
 
 	//-------------------------------------------------------------------
@@ -66,8 +126,9 @@ public class CalculateEssence implements ProcessingStep {
 					logger.log(Level.DEBUG, "  essence = {0} for {1}",aVal, item.getKey());
 					if (aVal==null) continue;
 					double essence = aVal.getModifiedValueDouble();
-					logger.log(Level.INFO,"* "+item.getNameWithoutRating()+" = "+essence);
-					essenceCostBD = essenceCostBD.add(aVal.getModifiedValueBigDecimal());
+
+					logger.log(Level.INFO,"* {0} = {1}  / {2}",item.getNameWithoutRating(),essence,getOverriddenEssenceCost(item).doubleValue());
+					essenceCostBD = essenceCostBD.add(getOverriddenEssenceCost(item));
 				}
 			}
 			int essenceCost = essenceCostBD.multiply(new BigDecimal(1000)).intValue();

@@ -42,6 +42,7 @@ import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.MentorSpiritsEffectConverter;
 import de.rpgframework.shadowrun6.PriceModifiers;
+import de.rpgframework.shadowrun6.QualityPathStep;
 import de.rpgframework.shadowrun6.ReturnIdAsResultConverter;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
@@ -119,6 +120,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	RESISTANCE(Resistance.class,0),
 	RULE(new RuleFlagConverter()),
 	QUALITY(Quality.class),
+	QUALITY_PATH_STEP(QualityPathStep.class),
 	SENSE(Sense.class),
 	SIGNATURE_MANEUVERS("SIG"),
 	SIN(FakeRating.class,0),

@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qpaths>
-	
+
 	<qpath id="cyberadept_path">
-		<step id="cyberadept_novice" level="0">
+		<requires>
+			<datareq type="METAECHO" ref="cyberadept" apply="CHARACTER"/>
+		</requires>
+		<step id="cyberadept_novice" level="0" cost="10">
 			<requires>
 				<datareq type="METAECHO" ref="cyberadept" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="cyborg" negate="true" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="augmentation_acclimation" negate="true" apply="CHARACTER"/>
 			</requires>
 			<nextSteps>
 				<next>cyberadept_disciple</next>
@@ -13,7 +18,7 @@
 				<itemmod type="QUALITY" ref="cyberadept_novice"/>
 			</modifications>
 		</step>
-		<step id="cyberadept_disciple" level="1">
+		<step id="cyberadept_disciple" level="1" cost="10">
 			<requires>
 				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="4"/>
 			</requires>
@@ -25,7 +30,7 @@
 				<itemmod type="QUALITY" ref="cyberadept_disciple"/>
 			</modifications>
 		</step>
-		<step id="cyberadept_master" level="2">
+		<step id="cyberadept_master" level="2" cost="10">
 			<requires>
 				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3"/>
 			</requires>
@@ -37,7 +42,7 @@
 				<itemmod type="QUALITY" ref="cyberadept_master"/>
 			</modifications>
 		</step>
-		<step id="cyberadept_transcendent" level="3">
+		<step id="cyberadept_transcendent" level="3" cost="10">
 			<requires>
 				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2"/>
 			</requires>
@@ -47,5 +52,5 @@
 			</modifications>
 		</step>
 	</qpath>
-	
+
 </qpaths>
