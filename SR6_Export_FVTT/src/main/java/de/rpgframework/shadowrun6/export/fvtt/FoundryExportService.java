@@ -723,6 +723,8 @@ public class FoundryExportService {
 			data.description = item.getDescription();
 
 			ItemData<FVTTContact> foundry = new ItemData<FVTTContact>(item.getName(), "contact", data);
+			if (foundry.name==null)
+				foundry.name = "Unnamed";
 			actor.addItem(foundry);
 		}
 	}
