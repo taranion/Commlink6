@@ -77,10 +77,10 @@ public class ResetModifications implements ProcessingStep {
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				if (item.isAutoAdded() || ItemTemplate.UUID_UNARMED.equals(item.getUuid())) {
 					model.removeCarriedItem(item);
-//				} else if (item.isDirty()) {
-//					item.reset();
+				} else if (item.isDirty()) {
+					item.reset();
 				}
-				item.reset();
+//				item.reset();
 			}
 
 			// Remove all auto-added SINs
