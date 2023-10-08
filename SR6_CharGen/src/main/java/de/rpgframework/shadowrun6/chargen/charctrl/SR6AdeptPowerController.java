@@ -299,6 +299,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 				float cost = 0;
 				if (val.getModifyable().hasLevel()) {
 					cost = val.getModifyable().getCostForLevel(val.getDistributed());
+				} else if (val.isAutoAdded()) {
 				} else {
 					cost = val.getModifyable().getCost();
 				}
@@ -338,14 +339,6 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 				if (poss.getMostSevere()!=null) {
 					todos.add(new ToDoElement(ToDoElement.Severity.STOPPER, val.getNameWithoutRating()+": "+poss.toString()));
 				}
-			}
-
-			// Summary and eventually warn
-			logger.log(Level.INFO, "Have {0} remaining power points", freePoints);
-			if (freePoints>0) {
-				todos.add(new ToDoElement(Severity.WARNING, "Unused power points"));
-			} else if (freePoints<0) {
-				todos.add(new ToDoElement(Severity.STOPPER, "Too many power points used"));
 			}
 
 			return unprocessed;
