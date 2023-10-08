@@ -102,7 +102,7 @@ public class ResetModifications implements ProcessingStep {
 				boolean remove = val.isRemoveOnReset();
 				val.clearModifications();
 				if (remove) {
-					logger.log(Level.DEBUG, "Remove quality "+val);
+					logger.log(Level.WARNING, "Remove quality "+val);
 					model.removeQuality(val);
 				}
 			}
