@@ -240,6 +240,8 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			// Reset
 			todos.clear();
 			numberOfQualities=0;
+			CommonSR6GeneratorSettings settings = parent.getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
+			settings.setKarmaForNegativeQualities(0);
 //			reset();
 
 			// Walk modifications for creation points
@@ -279,6 +281,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 						logger.log(Level.INFO, "Get {0} Karma for ''{1}''  (previous {2})", cost, item.getId(), model.getKarmaFree());
 						model.setKarmaFree(model.getKarmaFree() + cost);
 						karmaGain += cost;
+						settings.setKarmaForNegativeQualities( settings.getKarmaForNegativeQualities() + cost );
 					}
 				}
 
