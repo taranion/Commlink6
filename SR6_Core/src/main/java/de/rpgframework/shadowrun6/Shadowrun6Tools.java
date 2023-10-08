@@ -1263,6 +1263,20 @@ public class Shadowrun6Tools {
 				clone.setValue(multiplier);
 			}
 
+			// Copy all decisions
+			if (clone.getResolvedKey() instanceof ComplexDataItem) {
+				List<UUID> expected = ((ComplexDataItem)clone.getResolvedKey()).getChoices()
+						.stream()
+						.map( c -> c.getUUID() )
+						.collect(Collectors.toList())
+						;
+				if (!expected.isEmpty()) {
+					List<Decision> accepted = value.getDecisions().stream().filter( d -> expected.contains(d.getChoiceUUID()) ).collect(Collectors.toList());
+					logger.log(Level.INFO, "Decisions from {0} that are added to instantiaeted modiciation: {1}", value.getKey(),accepted);
+					clone.setDecisions(accepted);
+				}
+			}
+
 			return clone;
 		}
 		if (tmp instanceof DataItemModification) {
