@@ -128,6 +128,8 @@ public class CharacterGeneratorRegistry {
 		// Karma to nuyen
 		CommonSR6GeneratorSettings settings = model.getCharGenSettings(CommonSR6GeneratorSettings.class);
 		if (settings!=null) {
+			ret.add(RES.format("chargeninfo.common.init", loc, settings.getKarmaForInitiation()));
+			ret.add(RES.format("chargeninfo.common.negqual", loc, settings.getKarmaForNegativeQualities()));
 			ret.add( RES.format("chargeninfo.conversion.nuyen", loc, settings.getKarmaToNuyen()));
 			ret.add( RES.format("chargeninfo.conversion.contacts", loc, settings.getBoughtContactPoints()));
 		}
