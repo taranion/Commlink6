@@ -5,6 +5,7 @@ import java.util.Locale;
 import org.prelle.javafx.ResponsiveControl;
 
 import de.rpgframework.jfx.Selector;
+import de.rpgframework.jfx.cells.ComplexDataItemListCell;
 import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.QualityPathValue;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -25,16 +26,9 @@ public class QualityPathSelector extends Selector<QualityPath, QualityPathValue>
 		super(ctrl, Shadowrun6Tools.requirementResolver(Locale.getDefault()), Shadowrun6Tools.modificationResolver(Locale.getDefault()), null);
 		if (descr==null)
 			descr = new QualityPathDescriptionPane();
-		listPossible.setCellFactory(lv -> new ListCell<QualityPath>() {
-			public void updateItem(QualityPath item, boolean empty) {
-				super.updateItem(item, empty);
-				if (empty) {
-					setText(null);
-				} else {
-					setText(item.getName());
-				}
-			}
-		});
+		listPossible.setCellFactory(lv -> new ComplexDataItemListCell<>(
+				() -> ctrl,
+				Shadowrun6Tools.requirementResolver(Locale.getDefault())));
 
 	}
 

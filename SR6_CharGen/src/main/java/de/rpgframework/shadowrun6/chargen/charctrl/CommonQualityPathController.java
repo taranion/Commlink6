@@ -1,16 +1,21 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
 import java.lang.System.Logger.Level;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.QualityPathStep;
@@ -18,6 +23,7 @@ import de.rpgframework.shadowrun6.QualityPathStepValue;
 import de.rpgframework.shadowrun6.QualityPathValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author stefa
@@ -91,7 +97,7 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	 */
 	@Override
 	public Possible canBeSelected(QualityPath value, Decision... decisions) {
-		return Possible.TRUE;
+		return Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
 	}
 
 	//-------------------------------------------------------------------
@@ -156,15 +162,6 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public String getSelectionCostString(QualityPath data) {
-		return String.valueOf(getSelectionCost(data));
-	}
-
-	//-------------------------------------------------------------------
-	/**
 	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
 	 */
 	@Override
@@ -210,7 +207,7 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 
 		// Now that we know possible next steps, check if requested step is among them
 		if (!possible.contains(step)) {
-			logger.log(Level.WARNING, "cannot select "+step+" , because not among next steps ("+possible+")");
+//			logger.log(Level.WARNING, "cannot select "+step+" , because not among next steps ("+possible+")");
 			return new Possible(IRejectReasons.IMPOSS_NOT_AVAILABLE);
 		}
 
@@ -221,7 +218,10 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 			return poss;
 		}
 
-		// TODo: Check for enough Karma
+		// Check for enough Karma
+		if (step.getCost()>getModel().getKarmaFree()) {
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_NOT_ENOUGH_KARMA, step.getCost());
+		}
 		return Possible.TRUE;
 	}
 
@@ -243,9 +243,21 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 		logger.log(Level.INFO, "Took step on quality path ''{0}'': {1}", path.getResolved().getId(), step.getId());
 
 		// Pay
-		//parent.getQualityController().getSelectionCost(null);
+		int cost = step.getCost();
+		String id = path.getKey()+"/"+step.getId();
+		if (cost>0) {
+			getModel().setKarmaFree( getModel().getKarmaFree() -cost );
+			getModel().setKarmaInvested( getModel().getKarmaInvested() +cost );
+			logger.log(Level.INFO, "Pay {0} Karma to select {1}", cost, id);
+		}
+		// Log
+		DataItemModification valMod = new DataItemModification(ShadowrunReference.QUALITY_PATH_STEP, id);
+		valMod.setExpCost(cost);
+		valMod.setDate(Date.from(Instant.now()));
+		valMod.setSource(path.getResolved());
+		getModel().addToHistory(valMod);
 
-
+		parent.runProcessors();
 		return new OperationResult<>(stepVal);
 	}
 
@@ -261,10 +273,48 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 		return Possible.TRUE;
 	}
 
+	//-------------------------------------------------------------------
+	private DataItemModification getHistoryModification(QualityPathValue path, QualityPathStepValue step) {
+		String id = path.getKey()+"/"+step.getKey();
+		DataItemModification ret = null;
+		for (Modification mod : getModel().getHistory()) {
+			if (!(mod instanceof DataItemModification))
+				continue;
+			DataItemModification amod = (DataItemModification)mod;
+			if (id.equals(amod.getKey()))
+				return amod;
+		}
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController#deselect(de.rpgframework.shadowrun6.QualityPathValue, de.rpgframework.shadowrun6.QualityPathStepValue)
+	 */
 	@Override
 	public OperationResult<QualityPathStepValue> deselect(QualityPathValue path, QualityPathStepValue step) {
-		// TODO Auto-generated method stub
-		return null;
+		Possible poss = canBeDeselected(path, step);
+		if (!poss.get()) {
+			logger.log(Level.WARNING, "Trying to deselect undeselectable quality path ''{0}'': {1}", step.getKey(), poss.toString());
+			return new OperationResult<>(poss);
+		}
+
+		// Check if it is in history
+		DataItemModification mod = getHistoryModification(path, step);
+		String id = path.getKey()+"/"+step.getKey();
+		if (mod!=null) {
+			getModel().setKarmaFree( getModel().getKarmaFree() +mod.getExpCost() );
+			getModel().setKarmaInvested( getModel().getKarmaInvested() -mod.getExpCost() );
+			logger.log(Level.INFO, "Grant {0} Karma to unselect {1}", mod.getExpCost(), id);
+			getModel().removeFromHistory(mod);
+		}
+
+		// Undo
+		path.removeStepTaken(step);
+		logger.log(Level.INFO, "Removed step on quality path ''{0}'': {1}", path.getResolved().getId(), step.getKey());
+
+		parent.runProcessors();
+		return new OperationResult<>(step);
 	}
 
 }

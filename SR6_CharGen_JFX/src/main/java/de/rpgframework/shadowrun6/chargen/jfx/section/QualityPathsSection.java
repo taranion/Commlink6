@@ -40,11 +40,15 @@ public class QualityPathsSection extends ListSection<QualityPathValue> {
 	public QualityPathsSection() {
 		super(RES.getString("section.qualitypaths.title"));
 		list.setCellFactory(lv -> new ComplexDataItemValueListCell<QualityPath,QualityPathValue>(() -> control.getQualityPathController()){
-			protected void editClicked(QualityPathValue ref) {
+			{
+				addAction(new CellAction("Edit",ICON_PEN, ResourceI18N.get(RES, "label.edit"), (act,item) -> editClicked(item)));
+			}
+			protected OperationResult<QualityPathValue> editClicked(QualityPathValue ref) {
 				logger.log(Level.WARNING, "TODO: editClicked for "+getClass());
 				QualityPathPage page = new QualityPathPage(control,ref);
 				ApplicationScreen screen = new ApplicationScreen(page);
 				FlexibleApplication.getInstance().openScreen(screen);
+				return new OperationResult<QualityPathValue>(ref);
 			}
 		});
 	}
@@ -66,7 +70,6 @@ public class QualityPathsSection extends ListSection<QualityPathValue> {
 			if (result.hasError()) {
 				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
 			} else {
-				list.getItems().add(result.get());
 				list.refresh();
 			}
 		}

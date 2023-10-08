@@ -124,31 +124,34 @@
 
    <quality id="cyberadept_novice"     karma="10" pos="true" type="QUALITY_PATH"> <!-- Karma cost not doubled -->
      <modifications>
+     	<itemmod type="RULE" ref="CYBERADEPT_NOVICE"/>
    		<!-- augmentation overdrive: reroll wild die on -->
-   		<!-- increase standard and used cyberware by one grade -->		
-   		<!-- new cyberware needs to be alpha or better -->		
+   		<!-- increase standard and used cyberware by one grade -->
+   		<!-- new cyberware needs to be alpha or better -->
      </modifications>
    </quality>
    <quality id="cyberadept_disciple"   karma="10" pos="true" type="QUALITY_PATH"> <!-- Karma cost not doubled -->
      <modifications>
+     	<itemmod type="RULE" ref="CYBERADEPT_DISCIPLE"/>
    		<!-- augmentation overdrive: improve by resonance -->
-   		<!-- increase alpha and standard cyberware by one grade -->		
-   		<!-- new cyberware needs to be beta or better -->		
+   		<!-- increase alpha and standard cyberware by one grade -->
+   		<!-- new cyberware needs to be beta or better -->
      </modifications>
    </quality>
    <quality id="cyberadept_master"     karma="10" pos="true" type="QUALITY_PATH"> <!-- Karma cost not doubled -->
      <modifications>
+     	<itemmod type="RULE" ref="CYBERADEPT_MASTER"/>
    		<!-- add submergence grade to defense tests of augments  -->
-   		<!-- increase beta and alpha cyberware by one grade -->		
-   		<!-- new cyberware needs to be delta -->		
+   		<!-- increase beta and alpha cyberware by one grade -->
+   		<!-- new cyberware needs to be delta -->
      </modifications>
    </quality>
    <quality id="cyberadept_transcendent"     karma="25" pos="true" type="QUALITY_PATH"> <!-- Karma cost not doubled -->
      <modifications>
    		<!-- reroll wild die on augmentation overdrive -->
-   		<!-- increase all cyberware to gamma -->		
-   		<!-- new cyberware needs to be delta -->		
+   		<!-- increase all cyberware to gamma -->
+   		<!-- new cyberware needs to be delta -->
      </modifications>
    </quality>
-   
+
 </qualities>

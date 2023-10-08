@@ -1,13 +1,16 @@
 package de.rpgframework.shadowrun6.chargen.jfx.listcell;
 
 import java.lang.System.Logger.Level;
+import java.util.Locale;
 
 import org.prelle.javafx.ApplicationScreen;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.jfx.cells.ACarriedItemListCell;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -17,6 +20,7 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 
 /**
  * @author prelle
@@ -34,6 +38,7 @@ public class CarriedItemListCell extends ACarriedItemListCell<ItemTemplate> {
 		this.charCtrl = control;
 		lbEssence = new Label();
 		name.getStyleClass().add(JavaFXConstants.STYLE_HEADING4);
+		addExtraActionLine(new Label(SR6ItemAttribute.ESSENCECOST.getShortName(Locale.getDefault())+":"));
 		addExtraActionLine(lbEssence);
 	}
 
@@ -50,7 +55,15 @@ public class CarriedItemListCell extends ACarriedItemListCell<ItemTemplate> {
 			lbEssence.setManaged(item.hasAttribute(SR6ItemAttribute.ESSENCECOST));
 			lbEssence.setVisible(item.hasAttribute(SR6ItemAttribute.ESSENCECOST));
 			if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
-				lbEssence.setText( item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue()+"");
+				ItemAttributeFloatValue<SR6ItemAttribute> essVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+				lbEssence.setText( essVal.getModifiedValue()+"");
+				if (essVal.getModifications().size()>0) {
+					//lbEssence.setText( essVal.getDistributed()+"("+essVal.getModifiedValue()+")");
+					lbEssence.setTooltip(new Tooltip(Shadowrun6Tools.toExplainStringFloat(essVal.getModifications())));
+					lbEssence.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+				} else {
+					lbEssence.getStyleClass().remove(JavaFXConstants.STYLE_HEADING5);
+				}
 			}
 		}
 	}

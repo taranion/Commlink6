@@ -8,6 +8,7 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
@@ -73,6 +74,10 @@ public class GetModificationsFromMentorSpirits implements ProcessingStep {
 							} else {
 								Modification mod = tmp.getReferenceType().instantiateModification(tmp, val, val.getModifiedValue(), model);
 								mod.setSource(mentor);
+//								// Copy all decisions
+//								if (mod instanceof DataItemModification) {
+//									((DataItemModification)mod).setDecisions(val.getDecisions());
+//								}
 								logger.log(Level.DEBUG, "add modification {0} from {1}",mod,mentor);
 								unprocessed.add(mod);
 							}

@@ -12,7 +12,7 @@ import de.rpgframework.genericrpg.data.ComplexDataItemValue;
  *
  */
 public class QualityPathValue extends ComplexDataItemValue<QualityPath> {
-	
+
 	@ElementList(type = QualityPathStepValue.class, entry = "step", inline=true)
 	private List<QualityPathStepValue> stepsTaken;
 
@@ -33,6 +33,11 @@ public class QualityPathValue extends ComplexDataItemValue<QualityPath> {
 	}
 
 	//-------------------------------------------------------------------
+	public void removeStepTaken(QualityPathStepValue step) {
+		stepsTaken.remove(step);
+	}
+
+	//-------------------------------------------------------------------
 	public List<QualityPathStepValue> getStepsTaken() {
 		return stepsTaken;
 	}
@@ -49,5 +54,5 @@ public class QualityPathValue extends ComplexDataItemValue<QualityPath> {
 	public boolean hasStepTaken(QualityPathStep step) {
 		return stepsTaken.stream().map(sv -> sv.getResolved()).anyMatch(s -> s==step);
 	}
-	
+
 }

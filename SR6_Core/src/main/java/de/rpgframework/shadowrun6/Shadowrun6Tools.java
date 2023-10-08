@@ -128,6 +128,7 @@ import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromMentorSpirits;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromPowers;
+import de.rpgframework.shadowrun6.proc.GetModificationsFromQualityPaths;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromTechniques;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
@@ -146,6 +147,8 @@ public class Shadowrun6Tools {
 		EnsureAttributePresence.class,
 		GetModificationsFromMetaType.class,
 		GetGearDefinitions.class,
+		GetModificationsFromQualityPaths.class,
+		ApplyModificationsGeneric.class,
 		GetModificationsForDrakes.class,
 		GetModificationsFromCollectives.class,
 		ApplyModificationsGeneric.class,
@@ -700,7 +703,6 @@ public class Shadowrun6Tools {
 				return prefix+ResourceI18N.get(RES, loc, "label.draketype")+" "+data2.getName(loc);
 			case MAGIC_RESO:
 			case MARTIAL_ART:
-			case METAECHO:
 			case METATYPE:
 			case QUALITY:
 			case TECHNIQUE:
@@ -708,6 +710,18 @@ public class Shadowrun6Tools {
 				if (data==null)
 					return "Unknown "+tmp.getKey();
 				return prefix+data.getName(loc);
+			case METAECHO:
+				data = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				if (data==null)
+					return "Unknown "+tmp.getKey();
+				String meType = "";
+				switch ( ((MetamagicOrEcho)data).getType() ) {
+				case ECHO: meType = RES.getString("label.echo"); break;
+				case METAMAGIC: meType = RES.getString("label.metamagic"); break;
+				case METAMAGIC_ADEPT: meType = RES.getString("label.metamagic"); break;
+				case DRACOGENESIS_POWER: meType = RES.getString("label.dracogenesis"); break;
+				}
+				return prefix+meType+" "+data.getName(loc);
 			case SKILL:
 				String value = (req instanceof ValueRequirement)?((ValueRequirement)req).getRawValue():"";
 				if ("CHOICE".equals(tmp.getKey())) {
@@ -756,6 +770,7 @@ public class Shadowrun6Tools {
 				item = ShadowrunReference.resolve(type, req.getKey());
 				return item.getName(loc)+" "+tmp.getRawValue()+"+";
 			case ADEPT_POWER:
+			case METAECHO:
 			case QUALITY:
 			case TECHNIQUE:
 				DataItem qual = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
@@ -798,13 +813,23 @@ public class Shadowrun6Tools {
 			for (QualityPathValue tmp : model.getQualityPaths()) {
 				tmp.setCharacter(model);
 				QualityPath resolved = Shadowrun6Core.getItem(QualityPath.class, tmp.getKey());
+				if (resolved==null) {
+					logger.log(Level.ERROR, "Character {0} contains unknown quality path '{1}'", model.getName(), tmp.getKey());
+					continue;
+				}
 				tmp.setResolved(resolved);
+
+				for (QualityPathStepValue v : tmp.getStepsTaken()) {
+					QualityPathStep resolved2 = resolved.getStep(v.getKey());
+					if (resolved2==null) logger.log(Level.ERROR, "Character {0} contains unknown quality path step '{1}'", model.getName(), tmp.getKey());
+					v.setResolved(resolved2);
+				}
 			}
 
 			logger.log(Level.DEBUG, "resolve skills");
 			for (SR6SkillValue tmp : model.getSkillValues()) {
 				SR6Skill resolved = Shadowrun6Core.getItem(SR6Skill.class, tmp.getKey());
-				if (resolved==null) logger.log(Level.ERROR, "Character {} contains unknown skill '{}'", model.getName(), tmp.getKey());
+				if (resolved==null) logger.log(Level.ERROR, "Character {0} contains unknown skill '{1}'", model.getName(), tmp.getKey());
 				tmp.setResolved(resolved);
 				// Specs
 				for (SkillSpecializationValue<SR6Skill> v : tmp.getSpecializations()) {
@@ -1149,7 +1174,7 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, int multiplier, Shadowrun6Character model) {
-		logger.log(Level.INFO, "instantiate {0} with multiplier {1}",tmp,multiplier);
+		logger.log(Level.DEBUG, "instantiate {0} with multiplier {1}",tmp,multiplier);
 		if (tmp instanceof ValueModification) {
 			ValueModification clone = ((ValueModification)tmp).clone();
 			int modVal = 0;
@@ -1236,6 +1261,20 @@ public class Shadowrun6Tools {
 			if ("$LEVEL".equals(clone.getRawValue())) {
 				logger.log(Level.DEBUG, "Replace $LEVEL with {0}", multiplier);
 				clone.setValue(multiplier);
+			}
+
+			// Copy all decisions
+			if (clone.getResolvedKey() instanceof ComplexDataItem) {
+				List<UUID> expected = ((ComplexDataItem)clone.getResolvedKey()).getChoices()
+						.stream()
+						.map( c -> c.getUUID() )
+						.collect(Collectors.toList())
+						;
+				if (!expected.isEmpty()) {
+					List<Decision> accepted = value.getDecisions().stream().filter( d -> expected.contains(d.getChoiceUUID()) ).collect(Collectors.toList());
+					logger.log(Level.INFO, "Decisions from {0} that are added to instantiaeted modiciation: {1}", value.getKey(),accepted);
+					clone.setDecisions(accepted);
+				}
 			}
 
 			return clone;
@@ -2318,6 +2357,51 @@ public class Shadowrun6Tools {
 
 
 		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public static String toExplainString(List<Modification> modifications) {
+		if (modifications.isEmpty()) return null;
+		List<String> ret = modifications.stream()
+				.map(pc -> ((ValueModification)pc).getValue()+" "+pc.getSource())
+				.collect(Collectors.toList());
+		return String.join("\n", ret);
+	}
+
+	//-------------------------------------------------------------------
+	public static String toExplainStringFloat(List<Modification> modifications) {
+		if (modifications.isEmpty()) return null;
+		List<String> ret = modifications.stream()
+				.map(pc -> (((ValueModification)pc).getValueAsDouble()/1000.0)+" "+pc.getSource())
+				.collect(Collectors.toList());
+		return String.join("\n", ret);
+	}
+
+	//-------------------------------------------------------------------
+	public static String toExplainStringObject(List<Modification> modifications) {
+		if (modifications.isEmpty()) return null;
+		List<String> ret = modifications.stream()
+				.map(pc -> ((ValueModification)pc).getRawValue()+" "+pc.getSource())
+				.collect(Collectors.toList());
+		return String.join("\n", ret);
+	}
+
+	//-------------------------------------------------------------------
+	public static <T extends ComplexDataItem, V extends ComplexDataItemValue<T>> V getMatchIncludingDecisions(List<V> haystack, String needleID, List<Decision> decisions) {
+		for (V value : haystack) {
+			if (!(value.getKey().equals(needleID)))
+				continue;
+			// ID matches - now compare decisions
+			T resolved = value.getResolved();
+			for (Choice choice : resolved.getChoices()) {
+				Decision haystackDecision = value.getDecision(choice.getUUID());
+				Decision needleDecision = decisions.stream().filter(d -> d.getChoiceUUID().equals(choice.getUUID())).findFirst().orElse(null);
+				if (haystackDecision!=null && needleDecision!=null && haystackDecision.getValue().equals(needleDecision.getValue())) {
+					return value;
+				}
+			}
+		}
+		return null;
 	}
 
 }

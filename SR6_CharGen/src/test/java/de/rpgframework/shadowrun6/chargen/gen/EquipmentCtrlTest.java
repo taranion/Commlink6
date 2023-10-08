@@ -20,9 +20,11 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -33,6 +35,8 @@ import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemUtil;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
 
@@ -235,6 +239,31 @@ public class EquipmentCtrlTest {
 		// Test correct variant
 		poss = ctrl.canBeEmbedded(container, ItemHook.SOFTWARE, itemRaw, "rcc");
 		assertTrue("Should be possible to embed 'rcc' variant in typed slot: "+poss+"/"+poss.getUnfulfilledRequirements(), poss.get());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testCyberadept() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "datajack");
+		assertNotNull(item);
+		CarriedItem<ItemTemplate> carried = SR6GearTool.buildItem(item, CarryMode.IMPLANTED, model, true,
+				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, AugmentationQuality.STANDARD.name())).get();
+		assertEquals(AugmentationQuality.STANDARD, carried.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue());
+
+//		DataItemModification itemMod = new DataItemModification(ShadowrunReference.AUGMENTATION_QUALITY, AugmentationQuality.ALPHA.name());
+//		carried.addModification(itemMod);
+		ValueModification valMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), "ALPHA", AugmentationQuality.ALPHA);
+		carried.getAsObject(SR6ItemAttribute.QUALITY).addModification(valMod);
+		assertEquals(AugmentationQuality.ALPHA, carried.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue());
+		ValueModification valMod2 = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), "DELTA", AugmentationQuality.DELTA);
+		carried.getAsObject(SR6ItemAttribute.QUALITY).addModification(valMod2);
+		assertEquals(AugmentationQuality.DELTA, carried.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue());
+
+//		SR6GearTool.recalculate("", model, carried);
+		System.out.println(carried.dump());
+
+		carried.reset();
+		System.out.println(carried.dump());
 	}
 
 }

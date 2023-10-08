@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.persist.EnumConverter;
 import de.rpgframework.genericrpg.persist.FloatConverter;
 import de.rpgframework.genericrpg.persist.IntegerArrayConverter;
 import de.rpgframework.genericrpg.persist.IntegerConverter;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.persist.AmmunitionConverter;
 import de.rpgframework.shadowrun.persist.AvailabilityConverter;
@@ -135,6 +136,8 @@ public enum SR6ItemAttribute implements IItemAttribute {
 			return (T) SR6GearTool.calculateModifiedValue((int[]) base, mods);
 		if (this==DAMAGE)
 			return (T) SR6GearTool.calculateModifiedValue((Damage) base, mods);
+		if (this==QUALITY)
+			return (T) SR6GearTool.calculateModifiedValue((AugmentationQuality) base, mods);
 		if (this!=ITEMSUBTYPE && this!=ITEMTYPE)
 			System.err.println("SR6ItemAttribute: Don't know how to calculate modified value for "+this+" /"+this.getClass());
 		return (T)base;

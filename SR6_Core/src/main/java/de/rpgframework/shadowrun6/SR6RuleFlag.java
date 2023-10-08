@@ -43,7 +43,13 @@ public enum SR6RuleFlag implements RuleFlag {
 	DECK_5000_PER_KARMA,
 	KNOWLEDGE_COST2_AT_GEN,
 	// Power Plays (Quality Fasion Influencer)
-	FASHION_50_PERCENT
+	FASHION_50_PERCENT,
+
+	/** Used and standard cyberware gets upgraded by one */
+	CYBERADEPT_NOVICE,
+	/** Standard and alphacyberware gets upgraded by one (in addition to NOVICE) */
+	CYBERADEPT_DISCIPLE,
+	CYBERADEPT_MASTER,
 
 
 }

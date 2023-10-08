@@ -39,6 +39,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
@@ -142,10 +143,15 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 	// -------------------------------------------------------------------
 	private static boolean applyAdeptPower(Shadowrun6Character model, DataItemModification mod) {
 		AdeptPower item = Shadowrun6Core.getItem(AdeptPower.class, mod.getKey());
-		AdeptPowerValue value = model.getAdeptPower(mod.getKey());
 		if (item == null) {
-			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());
+			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such adept power {0}", mod.getKey());
+			return false;
 		}
+		AdeptPowerValue value = model.getAdeptPower(mod.getKey());
+		// Find an adept power that matches ID
+		// AND decisions
+		value = Shadowrun6Tools.getMatchIncludingDecisions(model.getAdeptPowers(),mod.getKey(), mod.getDecisions());
+
 		if (value == null) {
 			value = new AdeptPowerValue(item, 0);
 			value.setInjectedBy(mod.getSource());
@@ -158,7 +164,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				logger.log(Level.DEBUG, "Add decision {0} to adept power {1}", dec, item);
 			}
 
-			model.addAdeptPower(value);
+			model.addAutoAdeptPower(value);
 			logger.log(Level.DEBUG, "Add adept power {0} to character", item);
 		}
 		// Mark as auto-added
@@ -426,7 +432,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.DEBUG, "Clear rule {0} from character", item);
 		} else {
 			model.addRuleFlag(item);
-			logger.log(Level.DEBUG, "Set rule {0} to character", item);
+			logger.log(Level.INFO, "Set rule {0} to character", item);
 		}
 		return true;
 	}
