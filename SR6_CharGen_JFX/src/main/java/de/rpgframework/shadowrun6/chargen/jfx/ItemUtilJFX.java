@@ -128,6 +128,7 @@ public class ItemUtilJFX {
 		// Vehicle
 		addColumn(table, item, SR6ItemAttribute.HANDLING, 50);
 		addColumn(table, item, SR6ItemAttribute.ACCELERATION, 50);
+		addColumn(table, item, SR6ItemAttribute.SPEED_INTERVAL, 50);
 		addColumn(table, item, SR6ItemAttribute.TOPSPEED, 50);
 		addColumn(table, item, SR6ItemAttribute.BODY    , 50);
 		addColumn(table, item, SR6ItemAttribute.ARMOR   , 40);
@@ -1140,6 +1141,7 @@ public class ItemUtilJFX {
 
 		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Handling
 		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Acceleration
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Speed Interval
 		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Speed
 		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Body
 		table.getColumnConstraints().add(new ColumnConstraints( 40)); // Armor
