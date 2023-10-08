@@ -2386,4 +2386,22 @@ public class Shadowrun6Tools {
 		return String.join("\n", ret);
 	}
 
+	//-------------------------------------------------------------------
+	public static <T extends ComplexDataItem, V extends ComplexDataItemValue<T>> V getMatchIncludingDecisions(List<V> haystack, String needleID, List<Decision> decisions) {
+		for (V value : haystack) {
+			if (!(value.getKey().equals(needleID)))
+				continue;
+			// ID matches - now compare decisions
+			T resolved = value.getResolved();
+			for (Choice choice : resolved.getChoices()) {
+				Decision haystackDecision = value.getDecision(choice.getUUID());
+				Decision needleDecision = decisions.stream().filter(d -> d.getChoiceUUID().equals(choice.getUUID())).findFirst().orElse(null);
+				if (haystackDecision!=null && needleDecision!=null && haystackDecision.getValue().equals(needleDecision.getValue())) {
+					return value;
+				}
+			}
+		}
+		return null;
+	}
+
 }
