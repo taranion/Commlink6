@@ -107,7 +107,6 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		Shadowrun6Character model = (Shadowrun6Character) rawModel;
 
 		if (model.isInCareerMode()) {
-			logger.log(Level.ERROR, "ToDo: Create Karma Leveller");
 			Class<? extends CommonSR6GeneratorSettings> settings = null;
 			if (model.getCharGenUsed() != null) {
 				if (model.getCharGenUsed().equals("prio")) {
