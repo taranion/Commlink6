@@ -5,9 +5,12 @@ import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.RuleController;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -232,5 +235,16 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 		martial    = new SR6MartialArtsController(this);
 		drake     = new SR6DrakeController(this, true);
 		dataStructures = new SR6DataStructureController(this);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#finish()
+	 */
+	@Override
+	public void finish() {
+		logger.log(Level.WARNING, "TODO: finish###############################################################");
+
+		super.finish();
 	}
 }

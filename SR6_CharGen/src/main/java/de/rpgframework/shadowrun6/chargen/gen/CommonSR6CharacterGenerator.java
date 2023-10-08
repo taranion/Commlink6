@@ -135,6 +135,7 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 		// TODO Auto-generated method stub
 		logger.log(Level.WARNING, "TODO: finish");
 		model.setInCareerMode(true);
+		model.setKarmaInvested(0);
 		// Reduce Karma
 		int maxKarma =  getRuleController().getRuleValueAsInteger(ShadowrunRules.CHARGEN_MAX_KARMA_REMAIN);
 		if (model.getKarmaFree()>maxKarma) {
