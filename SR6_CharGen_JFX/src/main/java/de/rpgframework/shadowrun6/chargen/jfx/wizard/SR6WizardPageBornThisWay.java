@@ -29,6 +29,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
+import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
@@ -236,13 +237,19 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 
 	//-------------------------------------------------------------------
 	protected void refresh() {
-		SR6LifePathSettings settings = charGen.getModel().getCharGenSettings(SR6LifePathSettings.class);
+		boolean isLifepath =  charGen.getId().equals("lifepath");
+		activeProperty().set( isLifepath );
+		if (!isLifepath)
+			return;
 
 		backHeader.setValue(charGen.getModel().getKarmaFree());
 		String mor = (charGen.getModel().getMagicOrResonanceType()!=null)?charGen.getModel().getMagicOrResonanceType().getName():"?";
 		lbMOR.setText(ResourceI18N.format(RES, "page.born_this_way.mor", mor));
-		String meta = (charGen.getModel().getMetatype()!=null)?charGen.getModel().getMetatype().getName():"?";
-		lbMetatype.setText(ResourceI18N.format(RES, "page.born_this_way.metatype", meta, "NATION", settings.getNativeLanguage()));
+		if (isLifepath) {
+			SR6LifePathSettings settings = charGen.getModel().getCharGenSettings(SR6LifePathSettings.class);
+			String meta = (charGen.getModel().getMetatype()!=null)?charGen.getModel().getMetatype().getName():"?";
+			lbMetatype.setText(ResourceI18N.format(RES, "page.born_this_way.metatype", meta, "NATION", settings.getNativeLanguage()));
+		}
 
 		selection.refresh();
 	}
@@ -260,10 +267,15 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 			logger.log(Level.INFO, "RCV " + type + " with " + Arrays.toString(param));
 			charGen = (SR6CharacterGenerator) param[0];
 			bornThisWay =  ((SR6CharacterGenerator)charGen).getBornThisWayGenerator();
-			selection.setController(bornThisWay.getQualityController());
-			selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getQualityController()));
-			filter = new QualityFilterNode(RES, selection, QualityType.NORMAL);
-			selection.setFilterNode(filter);
+			if (bornThisWay!=null) {
+				selection.setController(bornThisWay.getQualityController());
+				selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getQualityController()));
+				filter = new QualityFilterNode(RES, selection, QualityType.NORMAL);
+				selection.setFilterNode(filter);
+				activeProperty().set( true );
+			} else {
+				activeProperty().set( false );
+			}
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
 			refresh();

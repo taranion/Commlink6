@@ -40,6 +40,7 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 	//-------------------------------------------------------------------
 	public FreeCharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
 		super(model, handle, SR6FreeSettings.class);
+		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN, true);
 	}
 
 	//-------------------------------------------------------------------
@@ -179,6 +180,7 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 			}
 		}
 		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
+		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN, true);
 	}
 
 	//-------------------------------------------------------------------

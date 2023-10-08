@@ -32,6 +32,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -527,6 +528,10 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			}
 
 			// Pay karma and apply modifications
+			CommonSR6GeneratorSettings settings = parent.getModel().getCharGenSettings(CommonSR6GeneratorSettings.class);
+			if (isCharGen) {
+				settings.setKarmaForInitiation(0);
+			}
 			int payNext = 11;
 			int grade = 0;
 			for (MetamagicOrEchoValue val : model.getMetamagicOrEchoes()) {
@@ -544,6 +549,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 					if (isCharGen) {
 						logger.log(Level.INFO, "Pay {0} Karma for metaecho ''{1}''", payNext, val.getModifyable().getId());
 						model.setKarmaFree( model.getKarmaFree() - payNext);
+						settings.setKarmaForInitiation( settings.getKarmaForInitiation() + payNext);
 					}
 					grade++;
 					payNext++;

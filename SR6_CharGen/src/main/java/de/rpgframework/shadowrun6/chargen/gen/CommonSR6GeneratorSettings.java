@@ -12,6 +12,8 @@ public class CommonSR6GeneratorSettings extends ACommonCharacterSettings {
 	public PowerLevel variant;
 	protected int mysticAdeptPowerPoints;
 	private int toContacts;
+	private int negQualities;
+	public int initiation;
 
 	/** Define how many points of the MAG rating have been spent for PP (for MysAds) */
 	public void setMagicForPP(int val) { mysticAdeptPowerPoints = val; }
@@ -20,5 +22,11 @@ public class CommonSR6GeneratorSettings extends ACommonCharacterSettings {
 
 	public int getBoughtContactPoints() { return toContacts; }
 	public void setBoughtContactPoints(int val) { toContacts = val; }
+
+	public int getKarmaForNegativeQualities() { return negQualities; }
+	public void setKarmaForNegativeQualities(int val) { negQualities = val; }
+
+	public void setKarmaForInitiation(int val) { initiation = val; }
+	public int getKarmaForInitiation() { return initiation; }
 
 }
