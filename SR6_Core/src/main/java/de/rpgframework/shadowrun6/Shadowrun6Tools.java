@@ -235,6 +235,7 @@ public class Shadowrun6Tools {
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
 				logger.log(Level.DEBUG, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
+				logger.log(Level.INFO, "------ after {0}     {1}",processor.getClass().getSimpleName(), model.getQuality("impaired"));
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
@@ -805,14 +806,14 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve qualities");
 			for (QualityValue tmp : model.getQualities()) {
 				tmp.setCharacter(model);
-				Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey());
+				Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 
 			logger.log(Level.DEBUG, "resolve quality paths");
 			for (QualityPathValue tmp : model.getQualityPaths()) {
 				tmp.setCharacter(model);
-				QualityPath resolved = Shadowrun6Core.getItem(QualityPath.class, tmp.getKey());
+				QualityPath resolved = Shadowrun6Core.getItem(QualityPath.class, tmp.getKey(), tmp.getLanguage());
 				if (resolved==null) {
 					logger.log(Level.ERROR, "Character {0} contains unknown quality path '{1}'", model.getName(), tmp.getKey());
 					continue;
@@ -828,7 +829,7 @@ public class Shadowrun6Tools {
 
 			logger.log(Level.DEBUG, "resolve skills");
 			for (SR6SkillValue tmp : model.getSkillValues()) {
-				SR6Skill resolved = Shadowrun6Core.getItem(SR6Skill.class, tmp.getKey());
+				SR6Skill resolved = Shadowrun6Core.getItem(SR6Skill.class, tmp.getKey(), tmp.getLanguage());
 				if (resolved==null) logger.log(Level.ERROR, "Character {0} contains unknown skill '{1}'", model.getName(), tmp.getKey());
 				tmp.setResolved(resolved);
 				// Specs
@@ -846,43 +847,43 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve adept powers");
 			for (AdeptPowerValue tmp : model.getAdeptPowers()) {
 				tmp.setCharacter(model);
-				AdeptPower resolved = Shadowrun6Core.getItem(AdeptPower.class, tmp.getKey());
+				AdeptPower resolved = Shadowrun6Core.getItem(AdeptPower.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve spells");
 			for (SpellValue tmp : model.getSpells()) {
 				tmp.setCharacter(model);
-				SR6Spell resolved = Shadowrun6Core.getItem(SR6Spell.class, tmp.getKey());
+				SR6Spell resolved = Shadowrun6Core.getItem(SR6Spell.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve rituals");
 			for (RitualValue tmp : model.getRituals()) {
 				tmp.setCharacter(model);
-				Ritual resolved = Shadowrun6Core.getItem(Ritual.class, tmp.getKey());
+				Ritual resolved = Shadowrun6Core.getItem(Ritual.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve complex forms");
 			for (ComplexFormValue tmp : model.getComplexForms()) {
 				tmp.setCharacter(model);
-				ComplexForm resolved = Shadowrun6Core.getItem(ComplexForm.class, tmp.getKey());
+				ComplexForm resolved = Shadowrun6Core.getItem(ComplexForm.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve metamagics or echoes");
 			for (MetamagicOrEchoValue tmp : model.getMetamagicOrEchoes()) {
 				tmp.setCharacter(model);
-				MetamagicOrEcho resolved = Shadowrun6Core.getItem(MetamagicOrEcho.class, tmp.getKey());
+				MetamagicOrEcho resolved = Shadowrun6Core.getItem(MetamagicOrEcho.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve critter powers");
 			for (CritterPowerValue tmp : model.getCritterPowers()) {
 				tmp.setCharacter(model);
-				CritterPower resolved = Shadowrun6Core.getItem(CritterPower.class, tmp.getKey());
+				CritterPower resolved = Shadowrun6Core.getItem(CritterPower.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 			logger.log(Level.DEBUG, "resolve lifestyles");
 			for (SR6Lifestyle tmp : model.getLifestyles()) {
 				tmp.setCharacter(model);
-				LifestyleQuality resolved = Shadowrun6Core.getItem(LifestyleQuality.class, tmp.getKey());
+				LifestyleQuality resolved = Shadowrun6Core.getItem(LifestyleQuality.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 
@@ -893,7 +894,7 @@ public class Shadowrun6Tools {
 				if (tmp.getUuid()==null)
 					logger.log(Level.WARNING, "Char {0} Item {1} has no UUID", model.getName(), tmp.getKey());
 				if (tmp.getResolved()==null) {
-					ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
+					ItemTemplate resolved = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey(), tmp.getLanguage());
 					if (resolved==null && tmp.getKey().equals("software_library"))
 						resolved = ItemUtil.SOFTWARE_LIBRARY_ITEM;
 					if (resolved==null) {
@@ -908,7 +909,7 @@ public class Shadowrun6Tools {
 					}
 				}
 				for (ItemEnhancementValue<AItemEnhancement> eVal : tmp.getEnhancements()) {
-					eVal.setResolved( Shadowrun6Core.getItem(SR6ItemEnhancement.class, eVal.getKey()));
+					eVal.setResolved( Shadowrun6Core.getItem(SR6ItemEnhancement.class, eVal.getKey(), eVal.getLanguage()));
 				}
 				resolver.process(false, ShadowrunReference.ITEM_ATTRIBUTE, model, tmp, List.of());
 				SR6GearTool.recalculate("", model, tmp);
@@ -918,7 +919,7 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve martial arts");
 			for (MartialArtsValue tmp : model.getMartialArts()) {
 				tmp.setCharacter(model);
-				MartialArts resolved = Shadowrun6Core.getItem(MartialArts.class, tmp.getKey());
+				MartialArts resolved = Shadowrun6Core.getItem(MartialArts.class, tmp.getKey(), tmp.getKey());
 				tmp.setResolved(resolved);
 				Technique resolved2 = Shadowrun6Core.getItem(Technique.class, resolved.getSignatureTechniqueID());
 				if (resolved2==null) {
@@ -931,28 +932,28 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve martial arts techniques");
 			for (TechniqueValue tmp : model.getTechniquesAll()) {
 				tmp.setCharacter(model);
-				Technique resolved = Shadowrun6Core.getItem(Technique.class, tmp.getKey());
+				Technique resolved = Shadowrun6Core.getItem(Technique.class, tmp.getKey(), tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 
 			logger.log(Level.DEBUG, "resolve foci");
 			for (FocusValue tmp : model.getFoci()) {
 				tmp.setCharacter(model);
-				Focus resolved = Shadowrun6Core.getItem(Focus.class, tmp.getKey());
+				Focus resolved = Shadowrun6Core.getItem(Focus.class, tmp.getKey(), tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 
 			logger.log(Level.DEBUG, "resolve data structures");
 			for (DataStructureValue tmp : model.getDataStructures()) {
 				tmp.setCharacter(model);
-				DataStructure resolved = Shadowrun6Core.getItem(DataStructure.class, tmp.getKey());
+				DataStructure resolved = Shadowrun6Core.getItem(DataStructure.class, tmp.getKey(), tmp.getKey());
 				tmp.setResolved(resolved);
 			}
 
 			logger.log(Level.DEBUG, "resolve SURGE collective");
 			SetItemValue collect = model.getSurgeCollective();
 			if (collect!=null) {
-				SetItem resolved = Shadowrun6Core.getItem(SetItem.class, collect.getKey());
+				SetItem resolved = Shadowrun6Core.getItem(SetItem.class, collect.getKey(), collect.getKey());
 				collect.setResolved(resolved);
 			}
 
@@ -1179,10 +1180,10 @@ public class Shadowrun6Tools {
 			ValueModification clone = ((ValueModification)tmp).clone();
 			int modVal = 0;
 			if (clone.hasFormula()) {
-				logger.log(Level.WARNING, "Found a formula :(  "+clone.getFormula());
-				logger.log(Level.WARNING, "  model =  "+model);
-				logger.log(Level.WARNING, "  data item =  "+value.getKey());
-				logger.log(Level.WARNING, "  data item value =  "+value);
+				logger.log(Level.DEBUG, "Found a formula :(  "+clone.getFormula());
+				logger.log(Level.DEBUG, "  model =  "+model);
+				logger.log(Level.DEBUG, "  data item =  "+value.getKey());
+				logger.log(Level.DEBUG, "  data item value =  "+value);
 				String resolved = FormulaTool.resolve(clone.getReferenceType(), clone.getFormula(), new VariableResolver(value, model));
 				logger.log(Level.DEBUG, "  {0} resolved as {1}", clone.getFormula(),resolved);
 				modVal = Integer.parseInt(resolved);
