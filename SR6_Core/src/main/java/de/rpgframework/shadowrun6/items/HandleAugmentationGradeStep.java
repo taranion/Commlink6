@@ -65,7 +65,7 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 					logger.log(Level.ERROR, "Item "+model+" has no AVAILABILITY");
 				}
 				switch (quality) {
-				case EXOWARE:
+				case EXO:
 					if (essenceAttr!=null)
 					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
 					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), -(int)(priceAttr.getDistributed()*0.2), quality));
@@ -105,7 +105,7 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*1.5f), quality));
 					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +3, quality));
 					break;
-				case GAMMAWARE:
+				case GAMMA:
 					if (essenceAttr!=null)
 					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-600), quality));
 					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*2f), quality));
