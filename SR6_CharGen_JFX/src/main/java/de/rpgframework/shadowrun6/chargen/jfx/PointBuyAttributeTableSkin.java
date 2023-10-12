@@ -448,8 +448,6 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		grid.getColumnConstraints().add(new ColumnConstraints(150));
 		grid.getColumnConstraints().add(new ColumnConstraints()); // Dec
 		grid.getColumnConstraints().add(new ColumnConstraints(50)); // Value
-
-		grid.setGridLinesVisible(true);
 	}
 
 	//-------------------------------------------------------------------
