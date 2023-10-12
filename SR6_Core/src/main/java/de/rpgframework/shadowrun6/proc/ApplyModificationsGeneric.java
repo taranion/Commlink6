@@ -299,6 +299,10 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 
 		if (mod instanceof EmbedModification) {
 			EmbedModification embed = (EmbedModification)mod;
+			if (embed.getIntoId()==null) {
+				logger.log(Level.ERROR, "Cannot apply EmbedModification {0} from {1} since into UUID is null", embed, embed.getSource());
+				return false;
+			}
 			CarriedItem<ItemTemplate> target = model.getCarriedItem(embed.getIntoId());
 			if (target==null) {
 				logger.log(Level.WARNING, "<embed> specifies unknown item {0}", embed.getIntoId());
