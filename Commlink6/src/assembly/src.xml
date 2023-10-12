@@ -2,7 +2,7 @@
 	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
-	<id>fat</id>
+	<id>complete</id>
 	<formats>
 		<format>jar</format>
 	</formats>
@@ -28,8 +28,6 @@
 				<include>de.rpgframework:rpgframework-core</include>
 				<include>de.rpgframework:rpgframework-rules</include>
 				<include>de.rpgframework:rpgframework-javafx</include>
-				<include>de.rpgframework:attach-pdf</include>
-				<include>de.rpgframework:attach-pdf-pdfbox</include>
 				<include>de.rpgframework:shadowrun-common-core</include>
 				<include>de.rpgframework:shadowrun-common-chargen</include>
 				<include>de.rpgframework:shadowrun-common-chargen-jfx</include>
@@ -42,12 +40,19 @@
 				<include>org.prelle.rpgframework:shadowrun6-export-fvtt</include>
 			</includes>
 			<excludes>
+				<exclude>javax.servlet:javax.servlet-api</exclude>
 				<exclude>com.google.code.gson:gson</exclude>
 				<exclude>org.controlsfx:*</exclude>
 				<exclude>org.openjfx:javafx-base</exclude>
 				<exclude>org.openjfx:javafx-graphics</exclude>
 				<exclude>org.openjfx:javafx-controls</exclude>
+				<exclude>org.openjfx:javafx-fxml</exclude>
+				<exclude>org.openjfx:javafx-media</exclude>
+				<exclude>org.openjfx:javafx-graphics</exclude>
+				<exclude>org.openjfx:javafx-swing</exclude>
+				<exclude>org.openjfx:javafx-web</exclude>
 				<exclude>com.gluonhq.attach:browser</exclude>
+				<exclude>com.gluonhq.attach:connectivity</exclude>
 				<exclude>com.gluonhq.attach:device</exclude>
 				<exclude>com.gluonhq.attach:display</exclude>
 				<exclude>com.gluonhq.attach:lifecycle</exclude>
@@ -61,7 +66,6 @@
 				<exclude>org.bouncycastle:bctsp-jdk15on</exclude>
 				<exclude>org.bouncycastle:bcprov-jdk15on</exclude>
 				<exclude>org.bouncycastle:bcmail-jdk15on</exclude>
-				<exclude>de.rpgframework:itextpdf</exclude>
 				<exclude>commons-logging:commons-logging</exclude>
 			</excludes>
 		</dependencySet>
