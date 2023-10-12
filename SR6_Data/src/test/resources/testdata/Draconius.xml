@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sr6char essMax="6000" gender="MALE" karmaF="4" meta="elf" nuyen="50000">
+   <powerLevel>STANDARD</powerLevel>
+   <asdfMap/>
+   <drakeType ref="western">
+      <attributes>
+         <attributes id="BODY" value="1"/>
+         <attributes id="STRENGTH" value="1"/>
+         <attributes id="WILLPOWER" value="1"/>
+         <attributes id="CHARISMA" value="1"/>
+      </attributes>
+   </drakeType>
+   <chargenSettings>{&#x0022;priorities&#x0022;:{&#x0022;METATYPE&#x0022;:&#x0022;C&#x0022;,&#x0022;ATTRIBUTE&#x0022;:&#x0022;A&#x0022;,&#x0022;MAGIC&#x0022;:&#x0022;E&#x0022;,&#x0022;SKILLS&#x0022;:&#x0022;B&#x0022;,&#x0022;RESOURCES&#x0022;:&#x0022;D&#x0022;},&#x0022;perAttrib&#x0022;:{&#x0022;BODY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;AGILITY&#x0022;:{&#x0022;points1&#x0022;:4,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;REACTION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;STRENGTH&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;WILLPOWER&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;LOGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;INTUITION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;CHARISMA&#x0022;:{&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:4,&#x0022;points3&#x0022;:0},&#x0022;EDGE&#x0022;:{&#x0022;points1&#x0022;:4,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;MAGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;RESONANCE&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}},&#x0022;mysticAdeptMaxPoints&#x0022;:0,&#x0022;karmaMod&#x0022;:0,&#x0022;perSkill&#x0022;:{&#x0022;language/1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;influence&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;stealth&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:7,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;outdoors&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;exotic_weapons&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:5,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;piloting&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;electronics&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;cracking&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;athletics&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;knowledge/1313c256-f4d6-4f57-bda3-b8cd5ee8ddad&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/e24e276e-e7d2-4512-b8d1-19485c5dbd33&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;language/260a7b31-eb53-429f-87e8-0b8f82617177&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0}},&#x0022;mysticAdeptPowerPoints&#x0022;:0,&#x0022;toContacts&#x0022;:0,&#x0022;toNuyen&#x0022;:0}</chargenSettings>
+   <type>DRAKE</type>
+   <mortype>mundane</mortype>
+   <qualities>
+      <quality ref="astral_beacon_metagenetic"/>
+      <quality ref="low-light_vision"/>
+      <quality ref="unsteady_hands"/>
+   </qualities>
+   <metaEchoes>
+      <metaEcho ref="animal_control"/>
+      <metaEcho ref="heavy_scales"/>
+   </metaEchoes>
+   <critterPowers>
+      <critterpower ref="dual_natured"/>
+      <critterpower ref="elemental_attack">
+         <decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="FIRE"/>
+      </critterpower>
+      <critterpower ref="armor"/>
+      <critterpower ref="natural_weapon"/>
+      <critterpower ref="vestigial_wings"/>
+   </critterPowers>
+   <name>Draconius</name>
+   <datasets/>
+   <rules>
+      <set rule="CAREER_UNDO_FROM_CAREER" to="true"/>
+      <set rule="CAREER_PAY_GEAR" to="true"/>
+   </rules>
+   <size>168</size>
+   <weight>74</weight>
+   <attributes>
+      <attributes id="BODY" value="5"/>
+      <attributes id="AGILITY" value="7"/>
+      <attributes id="REACTION" value="3"/>
+      <attributes id="STRENGTH" value="4"/>
+      <attributes id="WILLPOWER" value="4"/>
+      <attributes id="LOGIC" value="3"/>
+      <attributes id="INTUITION" value="5"/>
+      <attributes id="CHARISMA" value="6"/>
+      <attributes id="EDGE" value="5"/>
+      <attributes id="MAGIC" value="0"/>
+      <attributes id="RESONANCE" value="0"/>
+      <attributes id="POWER_POINTS" value="0"/>
+   </attributes>
+   <skills>
+      <skill ref="athletics" value="2"/>
+      <skill ref="athletics" value="2"/>
+      <skill ref="close_combat"/>
+      <skill ref="cracking" value="1"/>
+      <skill ref="electronics" value="1"/>
+      <skill ref="exotic_weapons" value="5"/>
+      <skill ref="exotic_weapons" value="5"/>
+      <skill ref="firearms"/>
+      <skill ref="influence" value="3"/>
+      <skill ref="outdoors" value="3"/>
+      <skill ref="piloting" value="2"/>
+      <skill ref="stealth" value="7"/>
+      <skill ref="language" uuid="260a7b31-eb53-429f-87e8-0b8f82617177" value="1">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Language"/>
+      </skill>
+      <skill ref="language" uuid="1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b" value="4">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Native Language"/>
+      </skill>
+      <skill ref="knowledge" uuid="1313c256-f4d6-4f57-bda3-b8cd5ee8ddad" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Knowledge"/>
+      </skill>
+      <skill ref="knowledge" uuid="e24e276e-e7d2-4512-b8d1-19485c5dbd33" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Knowledge"/>
+      </skill>
+   </skills>
+   <charGenUsed>prio</charGenUsed>
+   <strictness>core</strictness>
+   <history>
+      <itemmod expCost="6" ref="animal_control" type="METAECHO"/>
+   </history>
+</sr6char>

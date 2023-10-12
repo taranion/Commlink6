@@ -961,7 +961,7 @@ public class Shadowrun6Tools {
 			if (model.getDrakeType()!=null) {
 				DrakeType resolved =  Shadowrun6Core.getItem(DrakeType.class, model.getDrakeType().getKey());
 				if (resolved==null) {
-					logger.log(Level.ERROR, "Cannot resolve drake type ''%s''", model.getDrakeType().getKey());
+					logger.log(Level.ERROR, "Cannot resolve drake type ''%s'' in character ''{1}''", model.getDrakeType().getKey(), model.getName());
 					System.err.println("Cannot resolve drake type '"+model.getDrakeType().getKey()+"'");
 					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, "Cannot resolve drake type '"+model.getDrakeType().getKey()+"' for "+model.getName());
 				}

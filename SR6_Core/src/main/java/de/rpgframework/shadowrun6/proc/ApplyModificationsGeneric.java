@@ -127,8 +127,12 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 						|| tmp.getReferenceType()==ShadowrunReference.SIN
 						|| tmp.getReferenceType()==ShadowrunReference.SKILL
 						) {
-					if (!applyModification(model, tmp)) {
-						unprocessed.add(tmp);
+					try {
+						if (!applyModification(model, tmp)) {
+							unprocessed.add(tmp);
+						}
+					} catch (Exception e) {
+						logger.log(Level.ERROR, "Error applying "+tmp+" from "+tmp.getSource(),e);
 					}
 				} else {
 					unprocessed.add(tmp);
@@ -289,7 +293,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		Decision[] dec = mod.getDecisions().toArray(new Decision[mod.getDecisions().size()]);
 		OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem(item, carry, variant, model, false, dec);
 		if (result.hasError()) {
-			logger.log(Level.ERROR, "Failed creating {0}/{1}/{2}: {3}", mod.getKey(), mod.getVariant(), carry, result.getError());
+			logger.log(Level.DEBUG, "Failed creating {0}/{1}/{2}: {3}", mod.getKey(), mod.getVariant(), carry, result.getError());
 			return false;
 		}
 		if (mod.getId()!=null)
