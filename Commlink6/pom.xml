@@ -8,23 +8,26 @@
 		<groupId>de.rpgframework</groupId>
 		<artifactId>shadowrun6-master</artifactId>
 		<version>0.0.2-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<groupId>de.rpgframework.shadowrun6</groupId>
 	<artifactId>commlink6</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.3.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Commlink6</name>
+	<description>Main Application</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javafx.version>20.0.1</javafx.version>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven.install.skip>true</maven.install.skip>
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
+		<client.plugin.version>1.0.18</client.plugin.version>
 		<attach.version>4.0.18</attach.version>
 		<rpgfw.version>5.1.4-SNAPSHOT</rpgfw.version>
-		<mainClassName>de.rpgframework.shadowrun6.comlink.ComLinkStarter</mainClassName>
 	</properties>
 
 	<dependencies>
@@ -162,21 +165,8 @@
 		</dependency>
 	</dependencies>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<snapshots><enabled>true</enabled></snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.1</version>
-			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -211,8 +201,8 @@
 				<artifactId>update4j-plugin</artifactId>
 				<version>1.0-SNAPSHOT</version>
 				<configuration>
-					<baseUri>http://eden.rpgframework.de/</baseUri>
-					<basePath>${user.home}/Commlink6/app</basePath>
+					<baseUri>https://eden.rpgframework.de/</baseUri>
+					<basePath>${user.home}/Commlink6/app/STABILITY</basePath>
 					<launcher>de.rpgframework.shadowrun6.updater.CommlinkLauncher</launcher>
 					<osHandling>ALL</osHandling>
 					<properties>
@@ -224,17 +214,12 @@
 							<key>default.launcher.system.project.version</key>
 							<value>${project.version}</value>
 						</property>
-						<property>
-							<!-- Take property from environment setting -->
-							<key>type</key>
-							<value>${type}</value>
-						</property>
 					</properties>
 					<includes>
 						<include>
 							<comment>Main Shadowrun content</comment>
-							<url>http://eden.rpgframework.de/commlink6-updates/${type}/${project.artifactId}-${project.version}-fat.jar</url>
-							<path>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</path>
+							<url>http://eden.rpgframework.de/commlink6-updates/${project.artifactId}-${project.version}-complete.jar</url>
+							<path>${project.build.directory}/${project.artifactId}-${project.version}-complete.jar</path>
 						</include>
 					</includes>
 					<excludes>
@@ -247,6 +232,7 @@
 						<exclude>de.rpgframework:rpgframework-core</exclude>
 						<exclude>de.rpgframework:rpgframework-rules</exclude>
 						<exclude>de.rpgframework:rpgframework-javafx</exclude>
+						<exclude>de.rpgframework:itextpdf</exclude>
 						<exclude>de.rpgframework:attach-pdf</exclude>
 						<!--exclude>de.rpgframework:attach-pdf-pdfbox</exclude-->
 						<exclude>de.rpgframework:shadowrun-common-core</exclude>
@@ -274,159 +260,15 @@
 		</plugins>
 	</build>
 
-	<profiles>
-		<profile>
-			<id>desktop</id>
-			<activation><activeByDefault>true</activeByDefault></activation>
-			<properties>
-				<gluonfx.target>host</gluonfx.target>
-			</properties>
-			<dependencies>
-                 <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>browser</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-               <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>device</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-               <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>display</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>settings</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>storage</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-                <dependency>
-                    <groupId>de.rpgframework</groupId>
-                    <artifactId>attach-pdf-pdfbox</artifactId>
-                    <version>${rpgfw.version}</version>
-                    <scope>runtime</scope>
-                 </dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>desktop-binary</id>
-			<activation><activeByDefault>true</activeByDefault></activation>
-			<properties>
-				<gluonfx.target>host</gluonfx.target>
-			</properties>
-			<dependencies>
-                 <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>browser</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-               <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>device</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-               <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>display</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>settings</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>storage</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>android</id>
-			<properties>
-				<gluonfx.target>android</gluonfx.target>
-			</properties>
-		</profile>
-		<profile>
-			<id>ios</id>
-			<properties>
-				<gluonfx.target>ios</gluonfx.target>
-			</properties>
-		</profile>
-		<profile>
-			<id>interpreted</id>
-			<properties>
-				<gluonfx.target>host</gluonfx.target>
-			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<dependencies>
-                 <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>browser</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-               <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>device</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-               <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>display</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>settings</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>storage</artifactId>
-                    <version>${attach.version}</version>
-                    <classifier>desktop</classifier>
-                    <scope>runtime</scope>
-                </dependency>
-			</dependencies>
-		</profile>
-	</profiles>
+	<pluginRepositories>
+		<pluginRepository>
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </pluginRepository>
+		<pluginRepository>
+			<id>gluon-releases</id>
+			<url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>
