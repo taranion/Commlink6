@@ -26,6 +26,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.core.RoleplayingSystem;
+import de.rpgframework.eden.client.jfx.AccountPage;
 import de.rpgframework.eden.client.jfx.EdenClientApplication;
 import de.rpgframework.eden.client.jfx.EdenSettings;
 import de.rpgframework.eden.client.jfx.PDFPage;
@@ -58,7 +59,7 @@ public class ComLinkMain extends EdenClientApplication {
 
 	//-------------------------------------------------------------------
     public static void main(String[] args) {
-    	LicenseManager.storeGlobalLicenses(List.of("SHADOWRUN6/CORE","SHADOWRUN6/COMPANION","SHADOWRUN6/FIRING_SQUAD","SHADOWRUN6/STREET_WYRD"));
+    	//LicenseManager.storeGlobalLicenses(List.of("SHADOWRUN6/CORE","SHADOWRUN6/COMPANION","SHADOWRUN6/FIRING_SQUAD","SHADOWRUN6/STREET_WYRD","SHADOWRUN6/DOUBLE_CLUTCH","SHADOWRUN6/HACK_SLASH"));
     	System.out.println("ComLinkMain.main");
     	checkInit();
     	System.out.println("Default locale = "+Locale.getDefault());
@@ -76,7 +77,7 @@ public class ComLinkMain extends EdenClientApplication {
 //			System.out.println("argument "+key);
 //		}
 
-    	System.setProperty("javafx.preloader", CommlinkPreloader.class.getName());
+    	//System.setProperty("javafx.preloader", CommlinkPreloader.class.getName());
        launch(args);
 
     }
@@ -160,9 +161,7 @@ public class ComLinkMain extends EdenClientApplication {
      */
 	@Override
     public void start(Stage stage) throws Exception {
-    	stage.setOnShowing((ev) -> System.out.println("----SHOWING"));
-    	stage.setOnShown((ev) -> System.out.println("----SHOWN"));
-     	int prefWidth = Math.min( (int)Screen.getPrimary().getVisualBounds().getWidth(), 1500);
+     	int prefWidth = Math.min( (int)Screen.getPrimary().getVisualBounds().getWidth(), 1600);
     	int prefHeight = Math.min( (int)Screen.getPrimary().getVisualBounds().getHeight(), 900);
     	System.out.println("Start with "+prefWidth+"x"+prefHeight);
 		stage.setWidth(prefWidth);
@@ -181,15 +180,11 @@ public class ComLinkMain extends EdenClientApplication {
         stage.getScene().getStylesheets().add(de.rpgframework.jfx.Constants.class.getResource("css/rpgframework.css").toExternalForm());
         stage.getScene().getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
-
-//       ScenicView.show(stage.getScene());
-
         PDFViewerConfig.setPDFPathResolver( (id,lang) -> getPDFPathFor(RoleplayingSystem.SHADOWRUN6,id,lang));
         PDFViewerConfig.setEnabled( super.isPDFEnabled());
 
         getAppLayout().visibleProperty().addListener( (ov,o,n) -> {
         	logger.log(Level.INFO, "Visibility changed to "+n+"-------------------");
-        	System.err.println("Visibility changed to "+n+"-------------------");
             ResponsiveControlManager.initialize(getAppLayout());
         });
 		logger.log(Level.INFO, "LEAVE start (thread {0})", Thread.currentThread());
@@ -361,7 +356,8 @@ public class ComLinkMain extends EdenClientApplication {
 				CharacterProviderLoader.getCharacterProvider().setListener(pg);
 				return pg;
 			} else if (menuItem == navigAccount) {
-				return new Shadowrun6ContentPacksPage(eden);
+				return new AccountPage(this, RoleplayingSystem.SHADOWRUN6, new Shadowrun6ContentPacksPage(eden));
+
 			} else if (menuItem == navigPDF) {
 				return new PDFPage(this, RoleplayingSystem.SHADOWRUN6);
 			} else {

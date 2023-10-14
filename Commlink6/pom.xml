@@ -232,6 +232,7 @@
 						<exclude>de.rpgframework:rpgframework-core</exclude>
 						<exclude>de.rpgframework:rpgframework-rules</exclude>
 						<exclude>de.rpgframework:rpgframework-javafx</exclude>
+						<exclude>de.rpgframework:rpgframework-generator</exclude>
 						<exclude>de.rpgframework:itextpdf</exclude>
 						<exclude>de.rpgframework:attach-pdf</exclude>
 						<!--exclude>de.rpgframework:attach-pdf-pdfbox</exclude-->
