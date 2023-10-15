@@ -7,6 +7,11 @@
 			<username>${env.OSSRH_USER_TOKEN}</username>
 			<password>${env.OSSRH_PWD_TOKEN}</password>
 		</server>
+		<server>
+			<id>github</id>
+			<username>${env.GITHUB_USER}</username>
+			<password>${env.GITHUB_PASS}</password>
+		</server>
 	</servers>
 	<profiles>
 		<profile>
