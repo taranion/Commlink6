@@ -81,7 +81,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 		// Only allow to max an attribute, if there isn't one already
 		if ((getModel().getAttribute(key).getModifiedValue()+1)>=getMaximumValue(key) && key.isPrimary()) {
 //			if (logger.isLoggable(Level.TRACE))
-				logger.log(Level.WARNING, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed+" of "+numAttributesToMax);
+//				logger.log(Level.WARNING, "Increasing "+key+" would reach maximum of "+getMaximumValue(key)+".  Is already one maxed = "+alreadyMaxed+" of "+numAttributesToMax);
 			return alreadyMaxed.size()>=numAttributesToMax;
 		}
 		return false;

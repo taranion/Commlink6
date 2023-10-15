@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sr6char essMax="5300" gender="FEMALE" karmaF="2" meta="naga" nuyen="9650">
+   <powerLevel>STANDARD</powerLevel>
+   <lifestyles>
+      <lifestyle comfort="low" entert="low" necess="low" neigh="low" ref="low" security="low" space="low" value="1"/>
+   </lifestyles>
+   <asdfMap/>
+   <collective ref="kali_ani"/>
+   <chargenSettings>{&#x0022;priorities&#x0022;:{&#x0022;METATYPE&#x0022;:&#x0022;C&#x0022;,&#x0022;ATTRIBUTE&#x0022;:&#x0022;A&#x0022;,&#x0022;MAGIC&#x0022;:&#x0022;E&#x0022;,&#x0022;SKILLS&#x0022;:&#x0022;B&#x0022;,&#x0022;RESOURCES&#x0022;:&#x0022;D&#x0022;},&#x0022;perAttrib&#x0022;:{&#x0022;BODY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:9,&#x0022;points3&#x0022;:0},&#x0022;AGILITY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:5,&#x0022;points3&#x0022;:0},&#x0022;REACTION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;STRENGTH&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:5,&#x0022;points3&#x0022;:0},&#x0022;WILLPOWER&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:1},&#x0022;LOGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:1},&#x0022;INTUITION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;CHARISMA&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:1},&#x0022;EDGE&#x0022;:{&#x0022;points1&#x0022;:4,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;MAGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;RESONANCE&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}},&#x0022;mysticAdeptMaxPoints&#x0022;:0,&#x0022;karmaMod&#x0022;:0,&#x0022;perSkill&#x0022;:{&#x0022;language/1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;firearms&#x0022;:{&#x0022;karmaSpec&#x0022;:1,&#x0022;points1&#x0022;:5,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;athletics&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:5,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;perception&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:3,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;close_combat&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:7,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;con&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;biotech&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;influence&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;outdoors&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;language/cd545082-2fea-422f-890e-14d678bdf5af&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0},&#x0022;knowledge/a1d17fad-fdc7-4804-bb5e-909a88eb0881&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0}},&#x0022;mysticAdeptPowerPoints&#x0022;:0,&#x0022;toContacts&#x0022;:0,&#x0022;toNuyen&#x0022;:0}</chargenSettings>
+   <type>METAHUMAN</type>
+   <mortype>mundane</mortype>
+   <qualities>
+      <quality ref="attribute_mastery">
+         <decision choice="58b2700b-918d-4746-83a2-ccc189f1cb1c" value="AGILITY"/>
+      </quality>
+      <quality ref="distinctive_style"/>
+      <quality ref="impaired" value="1">
+         <decision choice="7f3a7e00-93b4-4012-883f-c737ca18c1df" value="LOGIC"/>
+      </quality>
+      <quality ref="combat_junkie"/>
+      <quality ref="built_tough"/>
+      <quality ref="cold_blooded"/>
+      <quality ref="dragon"/>
+      <quality ref="shiva_arms"/>
+      <quality ref="berserker"/>
+      <quality ref="critter_spook"/>
+      <quality ref="unusual_hair"/>
+   </qualities>
+   <critterPowers>
+      <critterpower ref="armor"/>
+      <critterpower ref="dual_natured"/>
+      <critterpower ref="guard"/>
+      <critterpower ref="natural_weapon">
+         <decision choice="b5c11ee6-708e-448c-a5c6-438df8335f09" value="bite"/>
+      </critterpower>
+   </critterPowers>
+   <name>Plissken</name>
+   <datasets/>
+   <rules>
+      <set rule="CAREER_UNDO_FROM_CAREER" to="true"/>
+      <set rule="CAREER_PAY_GEAR" to="true"/>
+   </rules>
+   <size>733</size>
+   <weight>255</weight>
+   <attributes>
+      <attributes id="BODY" value="10"/>
+      <attributes id="AGILITY" value="6"/>
+      <attributes id="REACTION" value="4"/>
+      <attributes id="STRENGTH" value="6"/>
+      <attributes id="WILLPOWER" value="2"/>
+      <attributes id="LOGIC" value="2"/>
+      <attributes id="INTUITION" value="3"/>
+      <attributes id="CHARISMA" value="2"/>
+      <attributes id="EDGE" value="5"/>
+      <attributes id="MAGIC" value="0"/>
+      <attributes id="RESONANCE" value="0"/>
+      <attributes id="POWER_POINTS" value="0"/>
+   </attributes>
+   <skills>
+      <skill ref="athletics" uuid="50b196d8-ed85-4331-9ff0-a4d0e4441df6" value="5"/>
+      <skill ref="biotech" uuid="78f421e9-2d4d-4278-a78f-8e35e4ffee07" value="1"/>
+      <skill ref="influence" uuid="acd25756-3117-48e5-b13a-a9d5b8f8be70" value="1"/>
+      <skill ref="firearms" uuid="5cee55cc-869d-46c4-9c39-162d715e6c28" value="4">
+         <skillspec ref="pistols_heavy"/>
+      </skill>
+      <skill ref="close_combat" uuid="c88f5447-4afb-4fb9-a0ac-fb5972e29f24" value="6">
+         <skillspec ref="blades"/>
+      </skill>
+      <skill ref="outdoors" uuid="75e7c57e-04e0-4bf8-8baf-6efe11e79d1a" value="1"/>
+      <skill ref="perception" uuid="5821aaf5-06f6-4ce9-8184-eabbd4c20735" value="3"/>
+      <skill ref="con" uuid="8dcc367c-bc1e-41b8-a5b5-151352a21a4f" value="1"/>
+      <skill ref="language" uuid="cd545082-2fea-422f-890e-14d678bdf5af" value="1">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Englisch"/>
+      </skill>
+      <skill ref="language" uuid="1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b" value="4">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Muttersprache"/>
+      </skill>
+      <skill ref="knowledge" uuid="a1d17fad-fdc7-4804-bb5e-909a88eb0881" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Irgendwas"/>
+      </skill>
+   </skills>
+   <charGenUsed>prio</charGenUsed>
+   <strictness>core</strictness>
+   <items>
+      <item mode="CARRIED" ref="dirt_poor" uuid="92da7f99-d439-4c68-a44a-5cba185ff00b"/>
+      <item mode="IMPLANTED" ref="muscle_replacement" uuid="25f20305-aa17-4301-8594-94fabaf13abd">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
+      </item>
+      <item mode="CARRIED" ref="katana" uuid="06b8bc09-30a1-441a-af00-ec17f6212b8a"/>
+      <item mode="VIRTUAL" ref="unarmed" uuid="9f05953f-0df5-4661-8114-3f02fcf2e669">
+         <customName>Unbewaffnet</customName>
+      </item>
+   </items>
+</sr6char>

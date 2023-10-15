@@ -167,7 +167,7 @@ public class Shadowrun6DataPlugin  {
 			initDoubleClutch();
 			initHackNSlash();
 			initCompanion();
-			//initLofwyrsLegions();
+			initLofwyrsLegions();
 			initOtherUS();
 			initKrime();
 			initCollapsing();

@@ -87,6 +87,7 @@ public class AttributeSection extends Section {
 			((PriorityAttributeTable<?,?,?>)table).useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?9:6));
 		} else if (attrib instanceof SR6PointBuyAttributeGenerator) {
 			table = new PointBuyAttributeTable<>(ctrl);
+			((PointBuyAttributeTable<?,?,?>)table).useExpertModeProperty().addListener( (ov,o,n) -> flexWidthProperty.set(n?10:6));
 		} else if (attrib instanceof SR6KarmaAttributeGenerator) {
 			table = new KarmaAttributeTable<>(ctrl);
 		} else if (attrib instanceof SR6FreeAttributeGenerator) {

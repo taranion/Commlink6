@@ -132,7 +132,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	private void initPages() {
-		datasets = new WizardPageDatasets(this, wrapper, Shadowrun6Core.getDataSets(), DataSetMode.values());
+//		datasets = new WizardPageDatasets(this, wrapper, Shadowrun6Core.getDataSets(), DataSetMode.values());
 		chargen= new WizardPageGenerator(this, wrapper,
 				CharacterGeneratorRegistry.getGenerators(),
 				Shadowrun6Core.getItemList(RuleInterpretation.class),
@@ -168,7 +168,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		name   = new WizardPageName<>(this, wrapper);
 
 		getPages().add(chargen);
-		getPages().add(datasets);
+		//getPages().add(datasets);
 		getPages().addAll(getPageList());
 		logger.log(Level.WARNING, "Pages: "+getPages());
 	}

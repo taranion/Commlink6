@@ -448,8 +448,6 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		grid.getColumnConstraints().add(new ColumnConstraints(150));
 		grid.getColumnConstraints().add(new ColumnConstraints()); // Dec
 		grid.getColumnConstraints().add(new ColumnConstraints(50)); // Value
-
-		grid.setGridLinesVisible(true);
 	}
 
 	//-------------------------------------------------------------------
@@ -624,7 +622,10 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 			AttributeValue<ShadowrunAttribute> val = model.getAttribute(key);
 			PerAttributePoints per = settings.perAttrib.get(key);
 
-			lblAll.get(key).setText(String.valueOf(val.getDistributed()));
+//			lblAll.get(key).setText(String.valueOf(val.getDistributed()));
+			lblAll.get(key).setText(val.getPool().toString());
+			lblAll.get(key).setTooltip(new Tooltip(val.getPool().toExplainString()));
+			System.err.println("PointBuyAttributeTableSkin: "+key+" = "+val.getPool().toExplainString());
 			if (lblAdj.get(key)!=null) {
 				lblAdj.get(key).setText(String.valueOf(per.points1));
 				if (toggles.getSelectedToggle()==headBtnAdjust) {
