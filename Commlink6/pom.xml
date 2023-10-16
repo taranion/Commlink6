@@ -218,7 +218,7 @@
 					<includes>
 						<include>
 							<comment>Main Shadowrun content</comment>
-							<url>http://eden.rpgframework.de/commlink6-updates/${project.artifactId}-${project.version}-complete.jar</url>
+							<url>https://eden.rpgframework.de/commlink6-updates/${project.artifactId}-${project.version}-complete.jar</url>
 							<path>${project.build.directory}/${project.artifactId}-${project.version}-complete.jar</path>
 						</include>
 					</includes>
@@ -249,6 +249,12 @@
 						<exclude>de.rpgframework:foundryvtt-documents</exclude>
 						<exclude>de.rpgframework:shadowrun6-foundry</exclude>
 					</excludes>
+					<includes>
+						<include>com.gluonhq.attach:browser:4.0.18:desktop</include>
+						<include>com.gluonhq.attach:display:4.0.18:desktop</include>
+						<include>com.gluonhq.attach:settings:4.0.18:desktop</include>
+						<include>com.gluonhq.attach:storage:4.0.18:desktop</include>
+					</includes>
 				</configuration>
 				<executions>
 					<execution>
