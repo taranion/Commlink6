@@ -19,11 +19,6 @@
 		<url>http://www.rpgframework.de/</url>
 	</organization>
 
-	<properties>
-		<maven.install.skip>false</maven.install.skip>
-		<maven.deploy.skip>false</maven.deploy.skip>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
