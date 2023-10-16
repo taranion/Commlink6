@@ -167,7 +167,7 @@ public class Shadowrun6DataPlugin  {
 			initDoubleClutch();
 			initHackNSlash();
 			initCompanion();
-			initLofwyrsLegions();
+			//initLofwyrsLegions();
 			initOtherUS();
 			initKrime();
 			initCollapsing();
@@ -182,7 +182,7 @@ public class Shadowrun6DataPlugin  {
 			initDPSOTA2082();
 			initDPWestphalen();
 			initAstralWays();
-			//initBodyShop);
+			initBodyShop();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
