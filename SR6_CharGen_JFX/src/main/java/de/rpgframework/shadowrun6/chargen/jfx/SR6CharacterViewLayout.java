@@ -191,9 +191,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		GenerationWizard wizard = new GenerationWizard(wrapper);
 		while (true) {
 			CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
-			logger.log(Level.INFO, "Wizard closed via "+close);
+			logger.log(Level.WARNING, "Wizard closed via "+close);
 			//		controller.refresh();
 			if (close==CloseType.FINISH) {
+				refreshPages();
 					return;
 			}
 			if (close==CloseType.CANCEL) {
@@ -301,23 +302,6 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		refreshPages();
 		refreshSidebar();
 
-		MagicOrResonanceType mtype = control.getModel().getMagicOrResonanceType();
-		if (mtype==null) {
-			getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
-		} else {
-			if (mtype.usesMagic()) {
-				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
-			} else if (mtype.usesResonance()) {
-				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife); //, pgBody);
-			} else {
-				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
-			}
-			if (control.getModel().getMetatype()!=null && control.getModel().getMetatype().isAI()) {
-				int idx = getPages().indexOf(pgAugment);
-				getPages().remove(pgAugment);
-				getPages().add(idx, pgVirtual);
-			}
-		}
 		if (control instanceof SR6CharacterLeveller) {
 			getPages().addAll(pgCareer);
 		}
@@ -370,6 +354,24 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgLife.refresh();
 		pgCareer.refresh();
 		pgBody.refresh();
+
+		MagicOrResonanceType mtype = control.getModel().getMagicOrResonanceType();
+		if (mtype==null) {
+			getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
+		} else {
+			if (mtype.usesMagic()) {
+				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
+			} else if (mtype.usesResonance()) {
+				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife); //, pgBody);
+			} else {
+				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
+			}
+			if (control.getModel().getMetatype()!=null && control.getModel().getMetatype().isAI()) {
+				int idx = getPages().indexOf(pgAugment);
+				getPages().remove(pgAugment);
+				getPages().add(idx, pgVirtual);
+			}
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -443,7 +445,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		logger.log(Level.DEBUG, "reopen wizard");
 		GenerationWizard wizard = new GenerationWizard((GeneratorWrapper) control);
 		CloseType close = FlexibleApplication.getInstance().showAndWait(wizard);
-		logger.log(Level.DEBUG, "Wizard closed via {0}",close);
+		logger.log(Level.WARNING, "Wizard closed via {0}",close);
+		refreshPages();
 	}
 
 	//-------------------------------------------------------------------
