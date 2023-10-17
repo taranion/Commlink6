@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
@@ -146,12 +147,13 @@ public class CalculateEssence implements ProcessingStep {
 
 			// Ensure presence of attributes
 			AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);
+			logger.log(Level.WARNING, "Essence is "+essVal.getModifiedValue());
 			if (essVal==null) {
 				essVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE, essenceRemain);
 				model.setAttribute(essVal);
 			} else
 				essVal.setDistributed(essenceRemain);
-			essVal.clearModifications();
+//			essVal.clearModifications();
 
 
 			float remain = essVal.getModifiedValue() / 1000f;
@@ -168,6 +170,19 @@ public class CalculateEssence implements ProcessingStep {
 			}
 			// Also decrease maximum
 			model.getAttribute(ShadowrunAttribute.MAGIC).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.MAX));
+			// Eventually decrease social rating (Body Shop p.168)
+			int socialMalus = (int) Math.floor( ((double)essenceCost)/2000d);
+			QualityValue retention = model.getQuality("empathic_retention");
+			if (retention!=null) {
+				int buffer = Math.min(2,retention.getModifiedValue());
+				logger.log(Level.WARNING,"APPLY Empathic Retention "+magicMalus);
+				socialMalus -= buffer;
+			}
+			if (socialMalus<0) socialMalus=0;
+			logger.log(Level.DEBUG,"Social malus is "+magicMalus);
+			if (socialMalus!=0) {
+				model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_SOCIAL).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.DEFENSE_RATING_SOCIAL.name(), -socialMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
+			}
 
 		} finally {
 			logger.log(Level.TRACE, "LEAVE: process");
