@@ -112,7 +112,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
-				logger.log(Level.DEBUG, "process "+tmp+" / "+tmp.getApplyTo());
+				logger.log(Level.WARNING, "process "+tmp+" / "+tmp.getApplyTo());
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
 				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
@@ -213,7 +213,10 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 
 		value.addModification(mod);
 		if (!(mod instanceof CheckModification)) {
-			logger.log(Level.INFO, "Added {0} to attribute {1} ({2}) from {3}", mod.getValue(), item, mod.getSet(), mod.getSource());
+			if (mod.isDouble()) {
+				logger.log(Level.WARNING, "Added {0} to attribute {1} ({2}) from {3}", mod.getValueAsDouble(), item, mod.getSet(), mod.getSource());
+			} else
+				logger.log(Level.WARNING, "Added {0} to attribute {1} ({2}) from {3}", mod.getValue(), item, mod.getSet(), mod.getSource());
 		}
 
 		return true;

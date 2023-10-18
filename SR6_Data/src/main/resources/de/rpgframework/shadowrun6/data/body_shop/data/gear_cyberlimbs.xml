@@ -9,6 +9,7 @@
    	</modifications>
     	<variant id="fullarm_synthetic">
     		<usage mode="IMPLANTED" value="1.2"/>
+ 			<flags><flag>CYBERLIMB</flag></flags>
     		<attrdef id="PRICE" value="20000"/>
     		<attrdef id="AVAILABILITY" value="6"/>
     		<modifications>
@@ -17,6 +18,7 @@
     	</variant>
     	<variant id="fullarm_obvious">
     		<usage mode="IMPLANTED" value="1.2"/>
+ 			<flags><flag>CYBERLIMB</flag></flags>
     		<attrdef id="PRICE" value="15000"/>
     		<attrdef id="AVAILABILITY" value="5"/>
     		<modifications>

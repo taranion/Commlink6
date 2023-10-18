@@ -48,11 +48,24 @@ public enum SR6ItemFlag implements ItemFlag {
 	/** Nuyen base cost is Karma of selection multiplied with 1000 */
 	NUYEN_COST_KARMA1000,
 	/** Essence base cost is Karma divided by 10 */
-	ESSENCE_COST_KARMA_10
+	ESSENCE_COST_KARMA_10,
+	/** This item counts as a cyberlimb with regard to some essence qualities */
+	CYBERLIMB,
+
+	// Dynamic Flags
+	CANNOT_OVERCLOCK(true)
 	;
 
 
+	boolean dynamic;
+
 	private static MultiLanguageResourceBundle RES = Shadowrun6Core.getI18nResources();
+
+	//-------------------------------------------------------------------
+	SR6ItemFlag() {}
+	SR6ItemFlag(boolean value) {
+		dynamic =value;
+	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -70,6 +83,13 @@ public enum SR6ItemFlag implements ItemFlag {
 	@Override
 	public String getName(Locale loc) {
 		return RES.getString("itemflag."+this.name().toLowerCase(), loc);
+	}
+	//-------------------------------------------------------------------
+	/**
+	 * @return the dynamic
+	 */
+	public boolean isDynamic() {
+		return dynamic;
 	}
 
 

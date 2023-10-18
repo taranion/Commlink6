@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
+   <quality id="divergent_essence" karma="5" pos="false" type="NORMAL" max="3">
+   	<choices>
+			<choice type="TEXT" ref="description" uuid="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" />
+   	</choices>
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="ESSENCE" value="-1000" set="NATURAL" apply="CHARACTER" />
+     </modifications>
+   </quality>
+   <quality id="permanent_damage" karma="5" pos="false" type="NORMAL">
+     <modifications>
+       <itemmod type="RULE" ref="CANNOT_USE_ESSENCE_HOLE" apply="CHARACTER" />
+     </modifications>
+   </quality>
+   <quality id="essence_regrowth" karma="5" pos="true" type="NORMAL">
+     <modifications>
+       <itemmod type="RULE" ref="ESSENCE_REGROWTH" apply="CHARACTER" />
+     </modifications>
+   </quality>
+
    <quality id="dying_cyberware" karma="5" pos="false" type="NORMAL">
      <choices>
        <choice type="CARRIED" ref="ItemType:CYBERWARE" uuid="35ed2489-d0af-485b-b58a-61fbd064ed9d"/>
@@ -55,4 +74,45 @@
 			<checkmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="2" what="DICE"/>
 		</modifications>
    </quality>
+
+	<!--  Edge of Essence -->
+   <quality id="cyber_singularity_seeker" karma="10" pos="true" type="NORMAL">
+     <modifications>
+       <itemmod type="RULE" ref="CYBER_SINGULARITY_SEEKER" apply="CHARACTER" />
+     </modifications>
+   </quality>
+   <quality id="drug_tolerant" karma="5" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" apply="CHARACTER" what="EDGE"/>
+     </modifications>
+   </quality>
+   <quality id="empathic_retention" karma="4" pos="true" type="NORMAL" max="2"/>
+   <quality id="redliner" karma="10" pos="true" type="NORMAL">
+   	<modifications>
+       <itemmod type="RULE" ref="REDLINER" apply="CHARACTER" />
+     	</modifications>
+   </quality>
+	<quality id="chronic_dissociation_syndrome" karma="10" pos="false" type="NORMAL">
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3"/>
+		</requires>
+		<modifications>
+      	<checkmod type="ATTRIBUTE" ref="WILLPOWER" value="-3" apply="CHARACTER" what="DICE"/>
+		</modifications>
+	</quality>
+	<quality id="delusion" karma="10" pos="false" type="NORMAL" />
+   <quality id="emotional_flatline" karma="5" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="SKILL" ref="con"       value="1" apply="CHARACTER" what="OTHER"/>
+       <checkmod type="SKILL" ref="influence" value="1" apply="CHARACTER" what="OTHER"/>
+     </modifications>
+   </quality>
+   <quality id="emotion_leak" karma="10" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="SKILL" ref="con" value="1" apply="CHARACTER" what="NOT_SPEND_EDGE"/>
+       <checkmod type="SKILL" ref="influence" value="1" apply="CHARACTER" what="NOT_SPEND_EDGE"/>
+     </modifications>
+   </quality>
+	<quality id="hallucinations" karma="10" pos="false" type="NORMAL" />
+
 </qualities>

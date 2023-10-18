@@ -1,5 +1,7 @@
 package de.rpgframework.shadowrun6;
 
+import de.rpgframework.genericrpg.chargen.Rule;
+import de.rpgframework.genericrpg.chargen.Rule.EffectOn;
 import de.rpgframework.genericrpg.data.RuleFlag;
 
 /**
@@ -42,7 +44,7 @@ public enum SR6RuleFlag implements RuleFlag {
 	MAX_3_CONTACT_LOYALTY,
 	DECK_5000_PER_KARMA,
 	KNOWLEDGE_COST2_AT_GEN,
-	// Power Plays (Quality Fasion Influencer)
+	// Power Plays (Quality Fashion Influencer)
 	FASHION_50_PERCENT,
 
 	/** Used and standard cyberware gets upgraded by one */
@@ -50,6 +52,13 @@ public enum SR6RuleFlag implements RuleFlag {
 	/** Standard and alphacyberware gets upgraded by one (in addition to NOVICE) */
 	CYBERADEPT_DISCIPLE,
 	CYBERADEPT_MASTER,
+	CANNOT_USE_ESSENCE_HOLE,
+	ESSENCE_REGROWTH,
+
+	/** BS 168: Pair of cyberlimbs increase willpower */
+	CYBER_SINGULARITY_SEEKER,
+	/** BS 168: Pair of cyberlimbs increases STR+AGI (up to +2), but only half PHYSICAL_MONITOR */
+	REDLINER,
 
 
 }

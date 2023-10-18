@@ -131,6 +131,7 @@ import de.rpgframework.shadowrun6.proc.GetModificationsFromPowers;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromQualityPaths;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromTechniques;
 import de.rpgframework.shadowrun6.proc.ResetModifications;
+import de.rpgframework.shadowrun6.proc.SpecialRuleStep;
 
 /**
  * @author prelle
@@ -166,14 +167,7 @@ public class Shadowrun6Tools {
 		GetModificationsFromTechniques.class,
 		GetModificationsFromCritterPowers.class,
 		ApplyModificationsGeneric.class,
-//		new ApplyCarriedItemModifications(),
-//		new DistributeAccessoriesToContainers(),
-//		new ApplyAttributeModifications(),
-//		new ApplySkillModifications(),
-//		new ApplyMemorizedUUIDModifications(),
-////		new ApplySINModifications(),
-//		new ConnectSignatureManeuvers(),
-//		new ApplyRelevanceAndEdgeMods(),
+		SpecialRuleStep.class,
 		CalculateEssence.class,
 		CalculatePersona.class,
 		CalculateDerivedAttributes.class,
@@ -235,7 +229,6 @@ public class Shadowrun6Tools {
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
 				logger.log(Level.DEBUG, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
-				logger.log(Level.INFO, "------ after {0}     {1}",processor.getClass().getSimpleName(), model.getQuality("impaired"));
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");

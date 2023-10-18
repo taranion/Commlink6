@@ -147,13 +147,13 @@ public class CalculateEssence implements ProcessingStep {
 
 			// Ensure presence of attributes
 			AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);
-			logger.log(Level.WARNING, "Essence is "+essVal.getModifiedValue());
 			if (essVal==null) {
 				essVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE, essenceRemain);
 				model.setAttribute(essVal);
 			} else
 				essVal.setDistributed(essenceRemain);
 //			essVal.clearModifications();
+			logger.log(Level.WARNING, "Essence is "+essVal.getModifiedValue());
 
 
 			float remain = essVal.getModifiedValue() / 1000f;

@@ -372,6 +372,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 				getPages().add(idx, pgVirtual);
 			}
 		}
+		if (control instanceof SR6CharacterLeveller) {
+			getPages().addAll(pgCareer);
+		}
 	}
 
 	//-------------------------------------------------------------------
