@@ -439,6 +439,7 @@
  		<flags><flag>AUGMENTATION</flag></flags>
     	<variant id="fullarm_synthetic">
     		<usage mode="IMPLANTED" value="1"/>
+ 			<flags><flag>CYBERLIMB</flag></flags>
     		<attrdef id="PRICE" value="20000"/>
     		<attrdef id="AVAILABILITY" value="4"/>
     		<modifications>
@@ -450,6 +451,7 @@
     	</variant>
     	<variant id="fullarm_obvious">
     		<usage mode="IMPLANTED" value="1"/>
+ 			<flags><flag>CYBERLIMB</flag></flags>
     		<attrdef id="PRICE" value="15000"/>
     		<attrdef id="AVAILABILITY" value="4"/>
     		<modifications>

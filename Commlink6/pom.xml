@@ -249,6 +249,12 @@
 						<exclude>de.rpgframework:foundryvtt-documents</exclude>
 						<exclude>de.rpgframework:shadowrun6-foundry</exclude>
 					</excludes>
+					<includeExtras>
+						<includeExtra>com.gluonhq.attach:browser:4.0.18:desktop</includeExtra>
+						<includeExtra>com.gluonhq.attach:display:4.0.18:desktop</includeExtra>
+						<includeExtra>com.gluonhq.attach:settings:4.0.18:desktop</includeExtra>
+						<includeExtra>com.gluonhq.attach:storage:4.0.18:desktop</includeExtra>
+					</includeExtras>
 				</configuration>
 				<executions>
 					<execution>

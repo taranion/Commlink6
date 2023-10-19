@@ -86,7 +86,7 @@ public class CalculateAttributePools implements ProcessingStep {
 		}
 
 		// Find all augmentations
-		int sumAugmentations=0;
+		double sumAugmentations=0;
 		for (Modification tmp : aVal.getModifications()) {
 			if (!(tmp instanceof ValueModification))
 				continue;
@@ -95,7 +95,7 @@ public class CalculateAttributePools implements ProcessingStep {
 			ValueModification mod = (ValueModification)tmp;
 			if (mod.getSet()!=ValueType.AUGMENTED)
 				continue;
-			int value = mod.getValue();
+			int value = (mod.isDouble() ? (int)(mod.getValueAsDouble()*1000) : mod.getValue());
 			if (mod.getLookupTable() != null && mod.getLookupTable().length >= value) {
 				String lookup = mod.getLookupTable()[value - 1];
 				value = Integer.parseInt(lookup);
@@ -106,8 +106,9 @@ public class CalculateAttributePools implements ProcessingStep {
 			String name = Shadowrun6Tools.getModificationSourceString(mod.getSource());
 			PoolCalculation<Integer> toAdd = new PoolCalculation<Integer>(value, name);
 			toAdd.augment = true;
-			if (sumAugmentations+value > 4) {
-				value = 4 - sumAugmentations;
+			double maybeAdd = (value>=100)?(value/1000.0):value;
+			if (sumAugmentations+maybeAdd > 4) {
+				value = (int)Math.round( 4 - sumAugmentations );
 				toAdd.value = value;
 				toAdd.hitLimit = true;
 			}

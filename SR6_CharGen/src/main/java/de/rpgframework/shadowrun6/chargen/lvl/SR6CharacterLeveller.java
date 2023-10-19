@@ -111,7 +111,6 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 			processChain.add(lifestyles);
 			processChain.add(contacts);
 //			processChain.add(new RemainingKarmaNuyenController(this));
-			processChain.add(new CalculateEssence(model));
 			processChain.add(new CalculateDerivedAttributes(model));
 
 			setupDone = true;
