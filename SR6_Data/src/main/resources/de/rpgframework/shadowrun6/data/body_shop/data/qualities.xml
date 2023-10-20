@@ -114,5 +114,46 @@
      </modifications>
    </quality>
 	<quality id="hallucinations" karma="10" pos="false" type="NORMAL" />
+   <quality id="meat_surrogacy" karma="2" pos="false" type="NORMAL" max="3">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="ESSENCE" value="-1000" set="NATURAL" apply="CHARACTER" />
+     </modifications>
+   </quality>
+	<quality id="superhuman_ego" karma="12" pos="false" type="NORMAL" >
+     <modifications>
+       <checkmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER" what="NOT_EARN_EDGE"/>
+     </modifications>
+   </quality>
+	<quality id="tlex" karma="10" pos="false" type="NORMAL">
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3"/>
+		</requires>
+	</quality>
+	<quality id="uncontrolled_metastasis" karma="10" pos="false" type="NORMAL" max="2">
+		<choices>
+			<choice type="SUBSELECT" ref="tempo" uuid="55a6dda7-7565-4108-9a04-65b7607081e0">
+				<subOption id="slow" cost="0">
+     				<modifications>
+       				<valmod type="ATTRIBUTE" ref="MONTHLY_COST" value="1000" apply="CHARACTER"/>
+     				</modifications>
+				</subOption>
+				<subOption id="fast" cost="10" >
+     				<modifications>
+       				<valmod type="ATTRIBUTE" ref="MONTHLY_COST" value="2000" apply="CHARACTER"/>
+       				<checkmod type="SKILL" ref="con" value="-2" apply="CHARACTER" what="DICE"/>
+      				<checkmod type="SKILL" ref="influence" value="-2" apply="CHARACTER" what="DICE"/>
+     				</modifications>
+				</subOption>
+			</choice>
+		</choices>
+	</quality>
+	<quality id="will_to_die" karma="10" pos="false" type="NORMAL">
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2"/>
+		</requires>
+		<modifications>
+      	<valmod type="ATTRIBUTE" ref="DAMAGE_OVERFLOW" value="-2" apply="CHARACTER"/>
+		</modifications>
+	</quality>
 
 </qualities>
