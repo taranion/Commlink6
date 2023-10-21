@@ -49,7 +49,7 @@
    <quality id="misaligned_souls" karma="10" pos="false" type="TRANSGENIC" />
    <quality id="a_lifetime_of_rejection" karma="4" pos="false" type="TRANSGENIC">
 		<choices>
-			<choice type="SUBSELECT" ref="rank" uuid="55a6dda7-7565-4108-9a04-65b7607081df">
+			<choice type="SUBSELECT" ref="rating" uuid="55a6dda7-7565-4108-9a04-65b7607081df">
 				<subOption id="rank1" cost="0">
 					<modifications>
 						<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="500"/>
