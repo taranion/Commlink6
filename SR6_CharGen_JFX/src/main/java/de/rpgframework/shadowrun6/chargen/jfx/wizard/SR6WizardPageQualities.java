@@ -10,9 +10,11 @@ import org.prelle.javafx.Wizard;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.Quality.QualityType;
+import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageQualities;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -49,6 +51,11 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 //		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getQualityController()));
 		selection.setSelectedFilter(qv -> typesToShow.contains(qv.getModifyable().getType()) );
+		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController()) {
+			public String requirementToText(Requirement req) {
+				return Shadowrun6Tools.getRequirementString(req, Locale.getDefault());
+			}
+		});
 
 
 		filter = new QualityFilterNode(RES, selection, QualityType.NORMAL, QualityType.ADEPT_WAY);
