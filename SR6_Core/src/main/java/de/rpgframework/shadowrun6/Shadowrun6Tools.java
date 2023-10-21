@@ -334,6 +334,8 @@ public class Shadowrun6Tools {
 				switch (what) {
 				case DICE  :
 					prefix = RES.format("modification.check.dice", level); break;
+				case EDGE  :
+					prefix = RES.format("modification.check.edge", level); break;
 				case EDGE_ONLY_TEST  :
 					prefix = RES.format("modification.check.edge_temporary", level); break;
 				case EDGE_BOOST:
