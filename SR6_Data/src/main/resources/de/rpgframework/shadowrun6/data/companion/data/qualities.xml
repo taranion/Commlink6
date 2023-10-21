@@ -101,7 +101,7 @@
 	<quality id="all_business" karma="8" pos="false" type="NORMAL">
 		<modifications>
 			<itemmod type="RULE" ref="MAX_3_CONTACT_LOYALTY"/>
-			<checkmod type="SKILL" ref="influence" value="0" what="EDGE_ONLY_TEST" cond="true"/>
+			<checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" cond="true"/>
 		</modifications>
 	</quality>
 	<quality id="bad_back"      karma="12" pos="false" type="NORMAL"/>
