@@ -370,6 +370,10 @@
   "methods":[{"name":"<init>","parameterTypes":["de.rpgframework.shadowrun6.Shadowrun6Character"] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.proc.SpecialRuleStep",
+  "methods":[{"name":"<init>","parameterTypes":["de.rpgframework.shadowrun6.Shadowrun6Character", "java.util.Locale"] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.vehicle.ChassisType",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
