@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -33,13 +32,13 @@ import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.PageReference;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.reality.Player;
-import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.SR6NPC;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.foundry.FVTTAdeptPower;
@@ -363,7 +362,7 @@ public class Shadowrun6CompendiumFactory {
 
 		StringBuffer buf = new StringBuffer();
 		Gson gson = new GsonBuilder().create();
-		List<Quality> list = Shadowrun6Core.getItemList(Quality.class);
+		List<SR6Quality> list = Shadowrun6Core.getItemList(SR6Quality.class);
 		list.sort(new Comparator<Quality>() {
 			public int compare(Quality o1, Quality o2) {
 				return o1.getName(Locale.ENGLISH).compareTo(o2.getName(Locale.ENGLISH));

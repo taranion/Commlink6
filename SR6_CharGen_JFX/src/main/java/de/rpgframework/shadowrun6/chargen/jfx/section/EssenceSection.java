@@ -18,6 +18,7 @@ import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
@@ -126,7 +127,7 @@ public class EssenceSection extends Section {
 	 */
 	public void refresh() {
 		//Acclimation
-		Quality acclimQual = Shadowrun6Core.getItem(Quality.class, "augmentation_acclimation");
+		Quality acclimQual = Shadowrun6Core.getItem(SR6Quality.class, "augmentation_acclimation");
 		NumericalValueController<Quality, QualityValue> qCtrl = control.getQualityController();
 		QualityValue qVal = model.getQuality("augmentation_acclimation");
 		if (acclimQual!=null) {

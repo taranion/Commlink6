@@ -34,6 +34,7 @@ import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -365,7 +366,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 
 	//-------------------------------------------------------------------
 	private static boolean applyQuality(Shadowrun6Character model, DataItemModification mod) {
-		Quality item = Shadowrun6Core.getItem(Quality.class, mod.getKey());
+		Quality item = Shadowrun6Core.getItem(SR6Quality.class, mod.getKey());
 		QualityValue value = model.getQuality(mod.getKey());
 		if (item == null) {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());

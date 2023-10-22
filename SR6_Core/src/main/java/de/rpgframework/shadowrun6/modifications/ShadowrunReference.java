@@ -27,7 +27,6 @@ import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Resistance;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -46,6 +45,7 @@ import de.rpgframework.shadowrun6.QualityPathStep;
 import de.rpgframework.shadowrun6.ReturnIdAsResultConverter;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Sense;
@@ -119,7 +119,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	// All Resistance tests
 	RESISTANCE(Resistance.class,0),
 	RULE(new RuleFlagConverter()),
-	QUALITY(Quality.class),
+	QUALITY(SR6Quality.class),
 	QUALITY_PATH_STEP(QualityPathStep.class),
 	SENSE(Sense.class),
 	SIGNATURE_MANEUVERS("SIG"),

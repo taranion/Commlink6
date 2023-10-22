@@ -3,43 +3,25 @@ package de.rpgframework.shadowrun6.chargen.gen;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.rpgframework.character.CharacterIOException;
-import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.shadowrun.Contact;
-import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
-import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.SkillType;
-import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
-import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
-import de.rpgframework.shadowrun.chargen.charctrl.ISkillController;
-import de.rpgframework.shadowrun.chargen.charctrl.ISpellController;
 import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.LifepathModuleValue;
 import de.rpgframework.shadowrun6.SR6MetaType;
-import de.rpgframework.shadowrun6.SR6Skill;
-import de.rpgframework.shadowrun6.SR6SkillValue;
-import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6SkillController;
-import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathModuleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifepathCharacterGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
-import de.rpgframework.shadowrun6.items.ItemTemplate;
 
 /**
  * @author prelle
@@ -94,7 +76,7 @@ public class LifepathGenTest {
 		 * The nationality will be UCAS, and our native language will be English. The quality
 		 * this character feels they were born with is Tough as Nails at level 2, which costs us 8 Karma.
 		 */
-		charGen.getBornThisWayGenerator().getQualityController().select(Shadowrun6Core.getItem(Quality.class, "built_tough"));
+		charGen.getBornThisWayGenerator().getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "built_tough"));
 		charGen.getBornThisWayGenerator().selectNativeLanguage("English");
 
 		// Modules

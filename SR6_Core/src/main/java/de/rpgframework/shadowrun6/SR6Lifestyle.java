@@ -81,7 +81,7 @@ public class SR6Lifestyle extends Lifestyle {
 		}
 
 		for (String id : qualities) {
-			Quality qual = Shadowrun6Core.getItem(Quality.class, id);
+			Quality qual = Shadowrun6Core.getItem(SR6Quality.class, id);
 			if (qual!=null) {
 				sum += qual.getKarmaCost();
 			}

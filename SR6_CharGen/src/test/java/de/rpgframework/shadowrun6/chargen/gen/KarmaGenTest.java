@@ -18,7 +18,6 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.SkillType;
@@ -27,6 +26,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IContactController;
 import de.rpgframework.shadowrun.chargen.charctrl.ISkillController;
 import de.rpgframework.shadowrun.chargen.charctrl.ISpellController;
 import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
@@ -191,13 +191,13 @@ public class KarmaGenTest {
 		assertEquals(5, model.getKarmaFree());
 
 		// Qualities
-		assertTrue(charGen.getQualityController().select(Shadowrun6Core.getItem(Quality.class, "non_lethal")).wasSuccessful()); // 5
+		assertTrue(charGen.getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "non_lethal")).wasSuccessful()); // 5
 		assertEquals(10, model.getKarmaFree());
-		assertTrue(charGen.getQualityController().select(Shadowrun6Core.getItem(Quality.class, "team_player")).wasSuccessful()); // 10
+		assertTrue(charGen.getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "team_player")).wasSuccessful()); // 10
 		assertEquals(0, model.getKarmaFree());
-		assertTrue(charGen.getQualityController().select(Shadowrun6Core.getItem(Quality.class, "sinner")).wasSuccessful()); // 8
+		assertTrue(charGen.getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "sinner")).wasSuccessful()); // 8
 		assertEquals(8, model.getKarmaFree());
-		OperationResult<QualityValue>  res = charGen.getQualityController().select(Shadowrun6Core.getItem(Quality.class, "stim_patch_allergy"));
+		OperationResult<QualityValue>  res = charGen.getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "stim_patch_allergy"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(18, model.getKarmaFree());
 

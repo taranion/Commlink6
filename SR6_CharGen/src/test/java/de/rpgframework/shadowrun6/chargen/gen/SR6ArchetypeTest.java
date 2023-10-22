@@ -37,7 +37,6 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityType;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
@@ -53,6 +52,7 @@ import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -164,37 +164,37 @@ public class SR6ArchetypeTest {
 		// Qualitites
 		assertEquals(50, model.getKarmaFree());
 		IQualityController qualities = charGen.getQualityController();
-		Possible poss = qualities.canBeSelected(Shadowrun6Core.getItem(Quality.class, "ar_vertigo"));
+		Possible poss = qualities.canBeSelected(Shadowrun6Core.getItem(SR6Quality.class, "ar_vertigo"));
 		assertTrue("Selecting failed:"+poss,poss.get());
-		OperationResult<QualityValue> res = qualities.select(Shadowrun6Core.getItem(Quality.class, "ar_vertigo"));
+		OperationResult<QualityValue> res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "ar_vertigo"));
 		assertNotNull(res);
 		assertTrue(res.wasSuccessful());
 		assertEquals(60, model.getKarmaFree());
 		// Honorbound
-		poss = qualities.canBeSelected(Shadowrun6Core.getItem(Quality.class, "honorbound"));
+		poss = qualities.canBeSelected(Shadowrun6Core.getItem(SR6Quality.class, "honorbound"));
 		assertNotNull(poss.getMostSevere());
 		assertEquals(Possible.State.DECISIONS_MISSING, poss.getState());
 		assertTrue(poss.toString(), poss.get()); // Non-stopper warnings should not lead to blocking
-		poss = qualities.canBeSelected(Shadowrun6Core.getItem(Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(Quality.class, "honorbound").getChoices().get(0).getUUID(),"Code Duello"));
+		poss = qualities.canBeSelected(Shadowrun6Core.getItem(SR6Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(SR6Quality.class, "honorbound").getChoices().get(0).getUUID(),"Code Duello"));
 		assertNull(poss.getMostSevere());
 		assertTrue(poss.toString(), poss.get());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "honorbound"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "honorbound"));
 		assertFalse("Should have failed: "+res,res.wasSuccessful());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(Quality.class, "honorbound").getChoices().get(0).getUUID(),"Code Duello"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(SR6Quality.class, "honorbound").getChoices().get(0).getUUID(),"Code Duello"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(70, model.getKarmaFree());
 		// Adding another negative quality should not be possible, because it generates >20 Karma
-		assertFalse("More than 20 netto Karma gain not detected" ,qualities.select(Shadowrun6Core.getItem(Quality.class, "sinner")).wasSuccessful());
+		assertFalse("More than 20 netto Karma gain not detected" ,qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "sinner")).wasSuccessful());
 		// Take "Quick Healer" first
-		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "quick_healer")).wasSuccessful());
+		assertTrue(qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "quick_healer")).wasSuccessful());
 		assertEquals(62, model.getKarmaFree());
 		// Now another negative quality should work
-		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "sinner")).wasSuccessful());
+		assertTrue(qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "sinner")).wasSuccessful());
 		assertEquals(70, model.getKarmaFree());
 		assertEquals(1, model.getSINs().size());
-		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "toughness")).wasSuccessful());
+		assertTrue(qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "toughness")).wasSuccessful());
 		assertEquals(58, model.getKarmaFree());
-		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "guts")).wasSuccessful());
+		assertTrue(qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "guts")).wasSuccessful());
 		assertEquals(46, model.getKarmaFree());
 
 		// Skills -------------------------------------------
@@ -424,26 +424,26 @@ public class SR6ArchetypeTest {
 		// Qualitites
 		assertEquals(50, model.getKarmaFree());
 		IQualityController qualities = charGen.getQualityController();
-		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "allergy"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(0).getUUID(),"common"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(1).getUUID(),"mild"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(2).getUUID(),"Grass")
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "allergy"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(0).getUUID(),"common"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(1).getUUID(),"mild"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(2).getUUID(),"Grass")
 				);
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(61, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "focused_concentration"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "focused_concentration"));
 		assertTrue(res.wasSuccessful());
 		assertEquals(49, model.getKarmaFree());
 		assertTrue(qualities.increase(res.get()).wasSuccessful());
 		assertEquals(37, model.getKarmaFree());
-		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "ar_vertigo")).wasSuccessful());
-		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "astral_beacon")).wasSuccessful());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "aptitude"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "aptitude").getChoices().get(0).getUUID(),"sorcery")
+		assertTrue(qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "ar_vertigo")).wasSuccessful());
+		assertTrue(qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "astral_beacon")).wasSuccessful());
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "aptitude"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "aptitude").getChoices().get(0).getUUID(),"sorcery")
 				);
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "spirit_bane"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "spirit_bane").getChoices().get(0).getUUID(),"spirit_of_water")
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "spirit_bane"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "spirit_bane").getChoices().get(0).getUUID(),"spirit_of_water")
 				);
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 
@@ -615,26 +615,26 @@ public class SR6ArchetypeTest {
 		// Qualitites
 		assertEquals(50, model.getKarmaFree());
 		IQualityController qualities = charGen.getQualityController();
-		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "addiction"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "addiction").getChoices().get(0).getUUID(),"Nic-stick")
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "addiction"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "addiction").getChoices().get(0).getUUID(),"Nic-stick")
 				);
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		qualities.increase(res.get());
 		qualities.increase(res.get());
 		assertEquals(56, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "aptitude"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "aptitude").getChoices().get(0).getUUID(),"stealth")
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "aptitude"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "aptitude").getChoices().get(0).getUUID(),"stealth")
 				);
 		assertEquals(44, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "blandness"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "blandness"));
 		assertEquals(36, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "honorbound"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "honorbound").getChoices().get(0).getUUID(),"White Hat")
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "honorbound"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "honorbound").getChoices().get(0).getUUID(),"White Hat")
 				);
 		assertEquals(46, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "photographic_memory"));
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "prejudiced"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "prejudiced").getChoices().get(0).getUUID(),"Technomancers")
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "photographic_memory"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "prejudiced"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "prejudiced").getChoices().get(0).getUUID(),"Technomancers")
 				);
 		assertEquals(42, model.getKarmaFree());
 
@@ -916,30 +916,30 @@ public class SR6ArchetypeTest {
 		// Qualitites
 		assertEquals(50, model.getKarmaFree());
 		IQualityController qualities = charGen.getQualityController();
-		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "allergy"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(0).getUUID(),"common"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(1).getUUID(),"moderate"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(2).getUUID(),"dairy")
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "allergy"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(0).getUUID(),"common"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(1).getUUID(),"moderate"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(2).getUUID(),"dairy")
 				);
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(64, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "analytical_mind"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "analytical_mind"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(61, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "aptitude"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "aptitude").getChoices().get(0).getUUID(),"cracking")
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "aptitude"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "aptitude").getChoices().get(0).getUUID(),"cracking")
 				);
 		assertEquals(49, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "dependents"), new Decision(Shadowrun6Core.getItem(Quality.class, "dependents").getChoices().get(0).getUUID(),"Parent"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "dependents"), new Decision(Shadowrun6Core.getItem(SR6Quality.class, "dependents").getChoices().get(0).getUUID(),"Parent"));
 		assertTrue(res.wasSuccessful());
 		assertEquals(53, model.getKarmaFree());
 		assertTrue(qualities.increase(res.get()).wasSuccessful());
 		assertEquals(57, model.getKarmaFree());
 		assertTrue(qualities.increase(res.get()).wasSuccessful());
 		assertEquals(61, model.getKarmaFree());
-		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "gearhead")).wasSuccessful());
+		assertTrue(qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "gearhead")).wasSuccessful());
 		assertEquals(51, model.getKarmaFree());
-		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "hardening")).wasSuccessful());
+		assertTrue(qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "hardening")).wasSuccessful());
 		assertEquals(41, model.getKarmaFree());
 
 		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
@@ -1189,15 +1189,15 @@ public class SR6ArchetypeTest {
 		// Qualitites
 		assertEquals(50, model.getKarmaFree());
 		IQualityController qualities = charGen.getQualityController();
-		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "aptitude"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "aptitude").getChoices().get(0).getUUID(),"piloting")
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "aptitude"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "aptitude").getChoices().get(0).getUUID(),"piloting")
 				);
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
-		assertTrue( qualities.select(Shadowrun6Core.getItem(Quality.class, "bad_rep")).wasSuccessful() );
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "dependents"), new Decision(Shadowrun6Core.getItem(Quality.class, "dependents").getChoices().get(0).getUUID(),"Estranged Child"));
+		assertTrue( qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "bad_rep")).wasSuccessful() );
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "dependents"), new Decision(Shadowrun6Core.getItem(SR6Quality.class, "dependents").getChoices().get(0).getUUID(),"Estranged Child"));
 		assertTrue(res.wasSuccessful());
-		assertTrue( qualities.select(Shadowrun6Core.getItem(Quality.class, "elf_poser")).wasSuccessful() );
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "in_debt"), new Decision(Shadowrun6Core.getItem(Quality.class, "dependents").getChoices().get(0).getUUID(),"Estranged Child"));
+		assertTrue( qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "elf_poser")).wasSuccessful() );
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "in_debt"), new Decision(Shadowrun6Core.getItem(SR6Quality.class, "dependents").getChoices().get(0).getUUID(),"Estranged Child"));
 
 		PriorityAttributeGenerator attribs = (PriorityAttributeGenerator) charGen.getAttributeController();
 		assertEquals(12, attribs.getPointsLeft2());
@@ -1408,20 +1408,20 @@ public class SR6ArchetypeTest {
 		raiseAttributeTo(ShadowrunAttribute.CHARISMA , 2);
 
 		IQualityController qualities = charGen.getQualityController();
-		OperationResult<QualityValue> res = qualities.select(Shadowrun6Core.getItem(Quality.class, "ambidextrous"));
+		OperationResult<QualityValue> res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "ambidextrous"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(46, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "aptitude"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "aptitude").getChoices().get(0).getUUID(),"close_combat")
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "aptitude"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "aptitude").getChoices().get(0).getUUID(),"close_combat")
 				);
 		assertEquals(34, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "dependents"), new Decision(Shadowrun6Core.getItem(Quality.class, "dependents").getChoices().get(0).getUUID(),"Siblings"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "dependents"), new Decision(Shadowrun6Core.getItem(SR6Quality.class, "dependents").getChoices().get(0).getUUID(),"Siblings"));
 		assertTrue(res.wasSuccessful());
 		assertTrue(qualities.increase(res.get()).wasSuccessful());
 		assertEquals(42, model.getKarmaFree());
-		assertTrue( qualities.select(Shadowrun6Core.getItem(Quality.class, "high_pain_tolerance")).wasSuccessful() );
+		assertTrue( qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "high_pain_tolerance")).wasSuccessful() );
 		assertEquals(35, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(Quality.class, "honorbound").getChoices().get(0).getUUID(),"Bushido"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "honorbound"), new Decision(Shadowrun6Core.getItem(SR6Quality.class, "honorbound").getChoices().get(0).getUUID(),"Bushido"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(45, model.getKarmaFree());
 
@@ -1707,31 +1707,31 @@ public class SR6ArchetypeTest {
 		// Qualitites
 		assertEquals(50, model.getKarmaFree());
 		IQualityController qualities = charGen.getQualityController();
-		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "allergy"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(0).getUUID(),"common"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(1).getUUID(),"mild"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(2).getUUID(),"Insect Stings")
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "allergy"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(0).getUUID(),"common"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(1).getUUID(),"mild"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(2).getUUID(),"Insect Stings")
 				);
 		assertNotNull(res);
 		assertTrue(res.wasSuccessful());
 		assertEquals(61, model.getKarmaFree());
 		// Honorbound
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "distinctive_style"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "distinctive_style"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertEquals(67, model.getKarmaFree());
-		assertTrue(qualities.select(Shadowrun6Core.getItem(Quality.class, "focused_concentration")).wasSuccessful());
+		assertTrue(qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "focused_concentration")).wasSuccessful());
 		assertEquals(55, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "mentor_spirit"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "mentor_spirit").getChoices().get(0).getUUID(),"cat"),
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "mentor_spirit"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "mentor_spirit").getChoices().get(0).getUUID(),"cat"),
 				new Decision(Shadowrun6Core.getItem(MentorSpirit.class, "cat").getChoices().get(0).getUUID(),"athletics")
 				);
 		assertEquals(45, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "spirit_affinity"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "spirit_affinity").getChoices().get(0).getUUID(),"beast")
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "spirit_affinity"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "spirit_affinity").getChoices().get(0).getUUID(),"beast")
 				);
 		assertEquals(31, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "spirit_bane"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "spirit_bane").getChoices().get(0).getUUID(),"fire")
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "spirit_bane"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "spirit_bane").getChoices().get(0).getUUID(),"fire")
 				);
 		assertEquals(43, model.getKarmaFree());
 
@@ -1854,20 +1854,20 @@ public class SR6ArchetypeTest {
 		// Qualitites
 		assertEquals(50, model.getKarmaFree());
 		IQualityController qualities = charGen.getQualityController();
-		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "allergy"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(0).getUUID(),"common"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(1).getUUID(),"moderate"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "allergy").getChoices().get(2).getUUID(),"Grass")
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "allergy"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(0).getUUID(),"common"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(1).getUUID(),"moderate"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(2).getUUID(),"Grass")
 				);
 		assertNotNull(res);
 		assertTrue(res.wasSuccessful());
 		assertEquals(64, model.getKarmaFree());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "analytical_mind"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "analytical_mind"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "social_stress"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "social_stress").getChoices().get(0).getUUID(),"Social gatherings")
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "social_stress"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "social_stress").getChoices().get(0).getUUID(),"Social gatherings")
 				);
-		res = qualities.select(Shadowrun6Core.getItem(Quality.class, "focused_concentration"));
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "focused_concentration"));
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		res = qualities.increase(res.get());
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
@@ -2123,8 +2123,8 @@ public class SR6ArchetypeTest {
 		assertTrue(attribs.canBeIncreasedPoints2(aVal).get());
 		assertEquals(20, model.getKarmaFree());
 		IQualityController qualities = charGen.getQualityController();
-		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(Quality.class, "impaired"),
-				new Decision(Shadowrun6Core.getItem(Quality.class, "impaired").getChoices().get(0).getUUID(),"LOGIC")
+		OperationResult<QualityValue>  res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "impaired"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "impaired").getChoices().get(0).getUUID(),"LOGIC")
 				);
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertTrue(attribs.canBeIncreasedPoints2(aVal).get());

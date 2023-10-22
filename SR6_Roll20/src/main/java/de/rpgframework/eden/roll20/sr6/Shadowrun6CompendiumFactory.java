@@ -3,18 +3,15 @@ package de.rpgframework.eden.roll20.sr6;
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.zip.ZipEntry;
 
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -41,6 +38,7 @@ import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun6.SR6NPC;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.items.ItemSubType;
@@ -626,9 +624,9 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(9, CellType.STRING).setCellValue("data-game_effect");
 		head.createCell(10, CellType.STRING).setCellValue("data-cost_text");
 
-		List<Quality> list = Shadowrun6Core.getItemList(Quality.class);
-		Collections.sort(list, new Comparator<Quality>() {
-			public int compare(Quality o1, Quality o2) {
+		List<SR6Quality> list = Shadowrun6Core.getItemList(SR6Quality.class);
+		Collections.sort(list, new Comparator<SR6Quality>() {
+			public int compare(SR6Quality o1, SR6Quality o2) {
 				return o1.getName().compareTo(o2.getName());
 			}
 		});
@@ -675,9 +673,9 @@ public class Shadowrun6CompendiumFactory {
 		head.createCell(10, CellType.STRING).setCellValue("data-game_effect");
 		head.createCell(11, CellType.STRING).setCellValue("data-cost_text");
 
-		List<Quality> list = Shadowrun6Core.getItemList(Quality.class);
-		Collections.sort(list, new Comparator<Quality>() {
-			public int compare(Quality o1, Quality o2) {
+		List<SR6Quality> list = Shadowrun6Core.getItemList(SR6Quality.class);
+		Collections.sort(list, new Comparator<SR6Quality>() {
+			public int compare(SR6Quality o1, SR6Quality o2) {
 				return o1.getName().compareTo(o2.getName());
 			}
 		});

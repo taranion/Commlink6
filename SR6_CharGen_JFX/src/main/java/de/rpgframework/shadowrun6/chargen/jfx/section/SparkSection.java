@@ -118,7 +118,7 @@ public class SparkSection extends Section {
 	 */
 	public void refresh() {
 //		//Acclimation
-//		Quality acclimQual = Shadowrun6Core.getItem(Quality.class, "augmentation_acclimation");
+//		Quality acclimQual = Shadowrun6Core.getItem(SR6Quality.class, "augmentation_acclimation");
 //		NumericalValueController<Quality, QualityValue> qCtrl = control.getQualityController();
 //		QualityValue qVal = model.getQuality("augmentation_acclimation");
 //		if (acclimQual!=null) {

@@ -16,15 +16,14 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ChoiceOption;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.QualityGenerator;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -323,7 +322,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	 */
 	@Override
 	public List<Quality> getAvailable() {
-		return Shadowrun6Core.getItemList(Quality.class).stream()
+		return Shadowrun6Core.getItemList(SR6Quality.class).stream()
 				.filter(p -> parent.showDataItem(p))
 				.filter(p -> p.isFreeSelectable())
 				.filter(p -> !model.hasQuality(p.getId()) || p.isMulti())

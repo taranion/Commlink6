@@ -624,7 +624,7 @@ public class Shadowrun6Tools {
 					Logging.logger.log(Level.WARNING, "TODO: value modification for quality with choice: "+valMod);
 				}
 
-				Quality quality = Shadowrun6Core.getItem(Quality.class, valMod.getKey());
+				Quality quality = Shadowrun6Core.getItem(SR6Quality.class, valMod.getKey());
 				if (quality==null) {
 					Logging.logger.log(Level.WARNING, "Found unknown quality '"+valMod.getKey()+"' in valuemod of "+data);
 					return "Unknown quality '"+valMod.getKey()+"'";
@@ -654,7 +654,7 @@ public class Shadowrun6Tools {
 
 //			switch (type) {
 //			case QUALITY:
-//				Quality qual = Shadowrun6Core.getItem(Quality.class, valMod.getKey());
+//				Quality qual = Shadowrun6Core.getItem(SR6Quality.class, valMod.getKey());
 //				if (qual==null) {
 //					return "Unknown quality '"+valMod.getKey()+"'";
 //				}
@@ -813,7 +813,7 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve qualities");
 			for (QualityValue tmp : model.getQualities()) {
 				tmp.setCharacter(model);
-				Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey(), tmp.getLanguage());
+				Quality resolved = Shadowrun6Core.getItem(SR6Quality.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 

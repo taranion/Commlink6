@@ -3,8 +3,8 @@ package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.LifepathModuleValue;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
@@ -71,25 +71,25 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 	}
 
 	//-------------------------------------------------------------------
-	public Quality getBornQuality1() {
+	public SR6Quality getBornQuality1() {
 		if (bornQual1 == null) return null;
-		return Shadowrun6Core.getItem(Quality.class, bornQual1);
+		return Shadowrun6Core.getItem(SR6Quality.class, bornQual1);
 	}
 
 	//-------------------------------------------------------------------
-	public void setBornQuality1(Quality value) {
+	public void setBornQuality1(SR6Quality value) {
 		if (value==null) this.bornQual1=null;
 		else this.bornQual1 = value.getId();
 	}
 
 	//-------------------------------------------------------------------
-	public Quality getBornQuality2() {
+	public SR6Quality getBornQuality2() {
 		if (bornQual2 == null) return null;
-		return Shadowrun6Core.getItem(Quality.class, bornQual2);
+		return Shadowrun6Core.getItem(SR6Quality.class, bornQual2);
 	}
 
 	//-------------------------------------------------------------------
-	public void setBornQuality2(Quality value) {
+	public void setBornQuality2(SR6Quality value) {
 		if (value==null) this.bornQual2=null;
 		else this.bornQual2 = value.getId();
 	}
