@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6;
 
 import org.prelle.simplepersist.Element;
 
+import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -37,6 +38,19 @@ public class SR6Quality extends Quality implements IReferenceResolver {
 			}
 		}
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.data.ComplexDataItem#validate()
+	 */
+	public void validate() throws DataErrorException {
+		super.validate();
+		if (gearDef!=null) {
+			for (ItemTemplate tmp : gearDef) {
+				tmp.setParentItem(this);
+			}
+		}
 	}
 
 }

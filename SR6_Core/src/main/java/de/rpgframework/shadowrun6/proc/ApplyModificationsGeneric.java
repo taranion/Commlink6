@@ -29,10 +29,12 @@ import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
+import de.rpgframework.shadowrun.Movement;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
+import de.rpgframework.shadowrun.persist.MovementConverter;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6Quality;
@@ -207,11 +209,15 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			value = drake.getAttributeValue(item);
 
 		}
-		if (value == null) {
-		}
 		if (mod.getSet()==ValueType.MAX)
 			return false;
 
+		if (item==ShadowrunAttribute.MOVEMENT) {
+			BodyForm body = model.getBodyForms().get(0);
+			Movement mov = MovementConverter.convert(mod.getRawValue());
+			body.addMovement(mov);
+			return true;
+		}
 
 		value.addModification(mod);
 		if (!(mod instanceof CheckModification)) {

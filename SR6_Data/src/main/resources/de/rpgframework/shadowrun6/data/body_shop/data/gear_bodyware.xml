@@ -120,7 +120,7 @@
  		<modifications>
  			<valmod type="ATTRIBUTE" ref="REACTION" value="$RATING*2" apply="CHARACTER"/>
  			<valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING*2" apply="CHARACTER"/>
- 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION"  value="$RATING*2" apply="CHARACTER"/>
+ 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION_PHYSICAL"  value="$RATING*2" apply="CHARACTER"/>
  		</modifications>
    </item>
 	<item id="nutrition_storage_system" avail="2" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE">
@@ -150,7 +150,7 @@
  		<modifications>
  			<valmod type="ATTRIBUTE" ref="REACTION" value="$RATING*2" apply="CHARACTER"/>
  			<valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING*2" apply="CHARACTER"/>
- 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION"  value="$RATING*2" apply="CHARACTER"/>
+ 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION_PHYSICAL"  value="$RATING*2" apply="CHARACTER"/>
  		</modifications>
    </item>
 	<item id="speed_boster" avail="4I" price="25000" type="CYBERWARE" subtype="CYBER_BODYWARE">
@@ -161,7 +161,7 @@
  		<attrdef id="PRICE" value="$RATING*25000"/>
  		<flags><flag>AUGMENTATION</flag></flags>
  		<modifications>
- 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION"  value="$RATING" apply="CHARACTER"/>
+ 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION_PHYSICAL"  value="$RATING" apply="CHARACTER"/>
  		</modifications>
    </item>
 	<item id="touch_link" avail="1" price="250" type="CYBERWARE" subtype="CYBER_BODYWARE">

@@ -154,6 +154,10 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.Shadowrun6Rules",
+  "allDeclaredFields":true
+},
+{
   "name":"de.rpgframework.shadowrun6.SkillList",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]

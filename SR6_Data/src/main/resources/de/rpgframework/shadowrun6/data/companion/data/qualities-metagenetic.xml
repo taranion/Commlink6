@@ -420,7 +420,7 @@
      <modifications>
        <valmod type="ATTRIBUTE" ref="BODY" value="1" set="MAX"/>
        <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" set="MAX"/>
-       <valmod type="ATTRIBUTE" ref="MINOR_ACTION" value="1" set="NATURAL"/>
+       <valmod type="ATTRIBUTE" ref="MINOR_ACTION_PHYSICAL" value="1" set="NATURAL"/>
        <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af9f"/>
      </modifications>
    </quality>

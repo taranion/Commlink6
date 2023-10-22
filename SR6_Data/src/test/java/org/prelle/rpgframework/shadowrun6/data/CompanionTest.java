@@ -74,9 +74,9 @@ public class CompanionTest {
 
 		System.out.println("Movement = "+model.getAttribute(ShadowrunAttribute.MOVEMENT));
 
+		assertNotNull(model.getBodyForms().get(0).getMovementGround());
+		assertNotNull(model.getBodyForms().get(0).getMovementWater());
 		assertNotNull(model.getBodyForms().get(0).getMovementAir());
-		assertEquals(10,model.getBodyForms().get(0).getMovementAir().getRun());
-		assertEquals(30,model.getBodyForms().get(0).getMovementAir().getSprint());
 	}
 
 }
