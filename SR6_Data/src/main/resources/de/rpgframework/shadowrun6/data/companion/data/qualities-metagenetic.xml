@@ -237,15 +237,35 @@
    </quality>
    <quality id="celerity" karma="5" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
    	<modifications>
-     		<valmod type="ATTRIBUTE" ref="MOVEMENT" value="3/6/1" set="NATURAL" />
+     		<valmod type="ATTRIBUTE" ref="MOVEMENT" value="3/6/1/GROUND" set="NATURAL" />
      	</modifications>
    </quality>
    <quality id="claws" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+		<geardef>
+			<item id="claws_digging" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed" />
+    		</item>
+			<item id="claws_razor" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed" />
+    		</item>
+		</geardef>
      <choices>
        <choice type="SUBSELECT" ref="variant" uuid="7204c631-53e0-4158-b155-ba3912089231">
-         <subOption id="digging" />
-         <subOption id="razor"  />
-         <subOption id="retractable"  cost="2"/>
+         <subOption id="digging">
+         	<modifications>
+         		<itemmod type="GEAR" apply="CHARACTER" ref="claws_digging"/>
+         	</modifications>
+         </subOption>
+         <subOption id="razor"  >
+         	<modifications>
+         		<itemmod type="GEAR" apply="CHARACTER" ref="claws_razor"/>
+         	</modifications>
+         </subOption>
+         <subOption id="retractable"  cost="2">
+         	<modifications>
+         		<itemmod type="GEAR" apply="CHARACTER" ref="claws_razor"/>
+         	</modifications>
+         </subOption>
        </choice>
      </choices>
      <modifications>
@@ -264,16 +284,34 @@
      </modifications>
    </quality>
    <quality id="fangs" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+		<geardef>
+			<item id="fangs" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="2P" attack="5,,,," skill="close_combat" spec="close_combat/unarmed" />
+    		</item>
+		</geardef>
      <modifications>
-     	<!-- ToDo Waffe: Fangs -->
+     		<itemmod type="GEAR" apply="CHARACTER" ref="fangs"/>
      </modifications>
    </quality>
    <quality id="frog_tongue" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+		<geardef>
+			<item id="frog_tongue" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="2P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/tongue" />
+    		</item>
+		</geardef>
      <modifications>
-     	<!-- ToDo Waffe: Tongue -->
+     	<itemmod type="GEAR" apply="CHARACTER" ref="frog_tongue"/>
      </modifications>
    </quality>
    <quality id="functional_tail" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+		<geardef>
+			<item id="thagomizer_tail" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/thagomizer" />
+    		</item>
+   		<item id="bullwhip_tail" avail="4" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+      		<weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
+  			 </item>
+		</geardef>
      <choices>
        <choice type="SUBSELECT" ref="variant" uuid="b237c0da-1eb1-4070-879a-22bc2899c106">
          <subOption id="balance">
@@ -292,19 +330,18 @@
       		</modifications>
          </subOption>
          <subOption id="thagomizer" cost="4">
-           <!-- ToDo Weapon -->
+     		 	<modifications>
+            	<itemmod type="GEAR" apply="CHARACTER" ref="thagomizer_tail"/>
+     			</modifications>
          </subOption>
          <subOption id="whip" cost="4">
-     		 <modifications>
-           <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
-           <!-- ToDo Weapon -->
-     		</modifications>
+     			<modifications>
+           		<checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
+            	<itemmod type="GEAR" apply="CHARACTER" ref="bullwhip_tail"/>
+     			</modifications>
          </subOption>
        </choice>
      </choices>
-     <modifications>
-     	<!-- ToDo Waffe: Claws -->
-     </modifications>
    </quality>
     <quality id="functional_wings" karma="12" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
      <choices>
@@ -312,14 +349,15 @@
          <subOption id="type1">
          	<modifications>
          		<itemmod type="GEAR" apply="CHARACTER" ref="claws1"/>
+     				<valmod type="ATTRIBUTE" ref="MOVEMENT" value="10/40/3/AIR" set="NATURAL" />
+         		<valmod  type="ATTRIBUTE" ref="RESIST_DAMAGE" value="-2"/>
           	</modifications>
-     	<!-- ToDo Waffe: Claws -->
          </subOption>
          <subOption id="type2" cost="8">
          	<modifications>
          		<itemmod type="GEAR" apply="CHARACTER" ref="claws2"/>
+     				<valmod type="ATTRIBUTE" ref="MOVEMENT" value="10/30/3/AIR" set="NATURAL" />
          	</modifications>
-     	<!-- ToDo Waffe: Claws -->
          </subOption>
        </choice>
      </choices>
@@ -336,8 +374,13 @@
      </modifications>
    </quality>
    <quality id="goring_horns" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+		<geardef>
+			<item id="goring_horns" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed" />
+    		</item>
+		</geardef>
      <modifications>
-     	<!-- ToDo Waffe: Horns -->
+     	<itemmod type="GEAR" apply="CHARACTER" ref="goring_horns"/>
      </modifications>
    </quality>
    <quality id="keen_eared" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_SENSES">

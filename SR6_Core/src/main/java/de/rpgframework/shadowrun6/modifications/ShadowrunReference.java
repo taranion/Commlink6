@@ -220,6 +220,13 @@ public enum ShadowrunReference implements ModifiedObjectType {
 			}
 		} else if (type.resolver!=null) {
 			return (T)type.resolver.apply(key);
+		} else if (type.converter!=null) {
+			try {
+				return (T)type.converter.read(key);
+			} catch (Exception e) {
+				System.err.println(ShadowrunReference.class.getSimpleName()+".resolve()-4:");
+				e.printStackTrace();
+			}
 		} else {
 			if (type==ShadowrunReference.TEXT)
 				return (T)key;

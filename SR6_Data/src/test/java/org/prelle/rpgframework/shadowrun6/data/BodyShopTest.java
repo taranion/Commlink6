@@ -14,9 +14,9 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -107,7 +107,7 @@ public class BodyShopTest {
 		assertEquals(0, aVal.getModifier());
 		assertEquals(1, aVal.getModifiedValue());
 
-		model.addQuality(new QualityValue(Shadowrun6Core.getItem(Quality.class, "cyber_singularity_seeker"), 0));
+		model.addQuality(new QualityValue(Shadowrun6Core.getItem(SR6Quality.class, "cyber_singularity_seeker"), 0));
 		Shadowrun6Tools.runProcessors(model, Locale.ENGLISH);
 		assertEquals(1, aVal.getModifier());
 		assertEquals(2, aVal.getModifiedValue());
@@ -123,7 +123,7 @@ public class BodyShopTest {
 		assertEquals(0, aVal.getModifier());
 		assertEquals(1, aVal.getModifiedValue());
 
-		model.addQuality(new QualityValue(Shadowrun6Core.getItem(Quality.class, "redliner"), 0));
+		model.addQuality(new QualityValue(Shadowrun6Core.getItem(SR6Quality.class, "redliner"), 0));
 		Shadowrun6Tools.runProcessors(model, Locale.ENGLISH);
 		assertEquals(1, aVal.getModifier());
 		assertEquals(2, aVal.getModifiedValue());

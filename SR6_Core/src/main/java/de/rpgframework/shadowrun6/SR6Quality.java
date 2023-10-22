@@ -2,23 +2,15 @@ package de.rpgframework.shadowrun6;
 
 import org.prelle.simplepersist.Element;
 
-import de.rpgframework.genericrpg.data.DataErrorException;
-import de.rpgframework.genericrpg.data.SkillSpecialization;
-import de.rpgframework.genericrpg.data.SkillSpecializationValue;
-import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.PieceOfGear;
-import de.rpgframework.shadowrun.CritterPower;
-import de.rpgframework.shadowrun.CritterPowerValue;
+import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemTemplateList;
-import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  *
  */
-public class SR6Quality extends Quality {
+public class SR6Quality extends Quality implements IReferenceResolver {
 
 	@Element(name="geardef")
 	protected ItemTemplateList gearDef;
@@ -31,7 +23,11 @@ public class SR6Quality extends Quality {
 	}
 
 	//-------------------------------------------------------------------
-	private ItemTemplate resolveItem(String key) {
+	/**
+	 * @see de.rpgframework.genericrpg.data.IReferenceResolver#resolveItem(java.lang.String)
+	 */
+	@Override
+	public ItemTemplate resolveItem(String key) {
 		if (gearDef==null) return null;
 
 		for (ItemTemplate tmp : gearDef) {

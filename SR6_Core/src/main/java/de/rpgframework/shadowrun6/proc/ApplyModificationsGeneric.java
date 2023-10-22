@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.AllowModification;
@@ -281,6 +282,16 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			if (item!=null) {
 				logger.log(Level.DEBUG, "Resolved gear {0} from definitions in character", mod.getKey());
 			}
+		}
+		if (item==null && mod.getSource()!=null && mod.getSource() instanceof IReferenceResolver) {
+			item =((IReferenceResolver)mod.getSource()).resolveItem(mod.getKey());
+			if (item!=null) {
+				logger.log(Level.DEBUG, "Resolved gear {0} from definitions in data item", mod.getKey());
+			}
+		}
+		if (item==null) {
+			logger.log(Level.ERROR, "Cannot resolve gear {0} from modification {1}", mod.getKey(), mod);
+			return false;
 		}
 		logger.log(Level.DEBUG, "applyGear {0}",mod);
 		SR6PieceOfGearVariant variant = null;
