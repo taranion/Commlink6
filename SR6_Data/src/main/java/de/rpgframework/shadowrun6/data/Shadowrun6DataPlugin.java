@@ -22,6 +22,7 @@ import de.rpgframework.genericrpg.data.CostType;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
+import de.rpgframework.genericrpg.data.DataSet.DataSetType;
 import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.items.AlternateUsage;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -258,6 +259,8 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -------------------------------Core-----------------------------------------------");
 		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"));
+		core.setType(DataSetType.RULES);
+		core.setReleased(201908);
 		ItemUtil.SOFTWARE_LIBRARY_ITEM.assignToDataSet(core);
 		SR6GearTool.recalculate("", null, ItemUtil.SOFTWARE_LIBRARY);
 
@@ -368,6 +371,8 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FIRING_SQUAD", "firing_squad.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.RULES);
+		set.setReleased(202005);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "firing_squad/data/actions_edge.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
 		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"firing_squad/data/ammunition_types.xml");
@@ -412,6 +417,8 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "STREET_WYRD", "street_wyrd.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.RULES);
+		set.setReleased(202101);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "street_wyrd/data/gear_magical.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" alchemical artifacts");
 		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz, "street_wyrd/data/adeptpowers.xml");
@@ -444,6 +451,8 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------Power Plays-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "POWER_PLAYS", "power_plays.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.BACKGROUND);
+		set.setReleased(202104);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "power_plays/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded {0} qualities", list.size());
 	}
@@ -454,6 +463,8 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DOUBLE_CLUTCH", "double_clutch.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.RULES);
+		set.setReleased(202110);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "double_clutch/data/actions_edge.xml");
 		logger.log(Level.DEBUG, "Loaded {0} actions", list.size());
 		list = Shadowrun6Core.loadDataItems(ChassisTypeList.class, ChassisType.class, set, clazz, "double_clutch/data/chassisTypes.xml");
@@ -486,6 +497,8 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -------------------------------HACK&SLASH------------------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "HACK_SLASH", "hack_slash.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.RULES);
+		set.setReleased(202210);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "hack_slash/data/actions.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" actions");
 		list = Shadowrun6Core.loadDataItems(ComplexFormList.class, ComplexForm.class, set, clazz, "hack_slash/data/complexforms.xml");
@@ -531,6 +544,8 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.RULES);
+		set.setReleased(202205);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "companion/data/qualities-metagenetic.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" metagenic qualities");
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "companion/data/qualities-infected.xml");
@@ -571,6 +586,8 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "LOFWYR", "lofwyr.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
+		set.setReleased(202201);
 		list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "lofwyr/data/critterpower.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" critter powers");
 		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "lofwyr/data/dracogenesis_powers.xml");
@@ -589,6 +606,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------Krime Katalog-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "KRIME", "krime.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
 		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"krime/data/ammunition_types.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"krime/data/gear_ammunition.xml");
@@ -609,6 +627,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------Collapsing Now-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COLLAPSING_NOW", "collapsing_now.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.BACKGROUND);
 		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz, "collapsing_now/data/adeptpowers.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"collapsing_now/data/gear_firearms.xml");
@@ -621,6 +640,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------Slip Streams-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "SLIP_STREAMS", "slip_streams.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.BACKGROUND);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "slip_streams/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 	}
@@ -631,6 +651,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------DE Datapuls Alpen-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_ALPEN", "de_alpen.i18n", Locale.GERMAN);
+		set.setType(DataSetType.LOCATION);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_alpen/data/gear_armor.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_alpen/data/gear_survival.xml");
@@ -647,6 +668,8 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -------------------------------DE Berlin 2080-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_BERLIN2080", "de_berlin2080.i18n", Locale.GERMAN);
+		set.setType(DataSetType.LOCATION);
+		set.setReleased(201910);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_berlin2080/data/gear_electronics.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" electronics");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_berlin2080/data/gear_firearms.xml");
@@ -661,6 +684,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ----------------------------DE Datapuls Feuerlaeufer---------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_FEUERLAEUFER", "de_feuerlaeufer.i18n", Locale.GERMAN);
+		set.setType(DataSetType.OTHER);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_feuerlaeufer/data/gear_vehicle_accessories.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicle accessories");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_feuerlaeufer/data/gear_armor.xml");
@@ -683,6 +707,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -----------------------------Other Sources from US--------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "OTHER_US", "other_us.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.OTHER);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "other_us/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_armor.xml");
@@ -699,6 +724,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -----------------------------DE Other Sources--------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_OTHER", "de_other.i18n", Locale.GERMAN);
+		set.setType(DataSetType.OTHER);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "de_other/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_other/data/gear_ammunition.xml");
@@ -721,6 +747,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------DE Piraten-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_PIRATEN", "de_piraten.i18n", Locale.GERMAN);
+		set.setType(DataSetType.OTHER);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_piraten/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 	}
@@ -731,6 +758,8 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------DE SOTA 2081-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_SOTA2081", "de_sota2081.i18n", Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
+		set.setReleased(202005);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_firearms_accessories.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" accessories");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2081/data/gear_firearms.xml");
@@ -749,6 +778,8 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------DE SOTA 2082-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_SOTA2082", "de_sota2082.i18n", Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
+		set.setReleased(202207);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2082/data/gear_ammo.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammo");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2082/data/gear_firearms.xml");
@@ -767,6 +798,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------DE Westphalen-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_WESTPHALEN", "de_westphalen.i18n", Locale.GERMAN);
+		set.setType(DataSetType.LOCATION);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_westphalen/data/gear_drones.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
 	}
@@ -777,6 +809,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------DE Revierbericht-----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_REVIERBERICHT", "de_revierbericht.i18n", Locale.GERMAN);
+		set.setType(DataSetType.LOCATION);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_armor.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_revierbericht/data/gear_firearms.xml");
@@ -791,6 +824,8 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -------------------------------Astral Ways------------------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "ASTRAL_WAYS", "astral_ways.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.BACKGROUND);
+		set.setReleased(202302);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "astral_ways/data/actions_edge.xml");
 		logger.log(Level.DEBUG, "Loaded {0} actions", list.size());
 		list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "astral_ways/data/critterpower.xml");
@@ -819,6 +854,8 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -------------------------------BODY SHOP-------------------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "BODY_SHOP", "body_shop.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.RULES);
+		set.setReleased(202306);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "body_shop/data/actions.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" actions");
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "body_shop/data/actions_edge.xml");
@@ -844,7 +881,7 @@ public class Shadowrun6DataPlugin  {
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_biosenses.xml");
 		logger.log(Level.DEBUG, "Loaded {0} bioware", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_bioweapons.xml");
-		logger.log(Level.DEBUG, "Loaded {0} biowwapons", list.size());
+		logger.log(Level.DEBUG, "Loaded {0} bioweapons", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_symbionts.xml");
 		logger.log(Level.DEBUG, "Loaded {0} symbionts", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_nanoware.xml");

@@ -373,6 +373,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	@Override
 	public void pageVisited() {
 		logger.log(Level.INFO, "pageVisited");
+		refresh();
 		selection.refresh();
 	}
 

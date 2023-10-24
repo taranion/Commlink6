@@ -116,7 +116,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
-				logger.log(Level.WARNING, "process "+tmp+" / "+tmp.getApplyTo());
+				logger.log(Level.DEBUG, "process "+tmp+" / "+tmp.getApplyTo());
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
 				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
