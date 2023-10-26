@@ -388,6 +388,12 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.addModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 2, "VR Hot Sim") );
 		model.getPersona().setAttribute(val);
 		logger.log(Level.DEBUG, " INI Matrix VR D6 Hot   "+val.getModifiedValue());
+
+		// Minor actions (Astral)
+		val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_MATRIX);
+		val.setDistributed(1);
+		addNaturalModifier(val,ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT);
+		logger.log(Level.DEBUG, "                 = "+val.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------
