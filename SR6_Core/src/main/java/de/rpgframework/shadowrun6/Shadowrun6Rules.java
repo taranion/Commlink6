@@ -34,6 +34,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule ADD_STRENGTH_TO_MELEE_AR = new Rule(EffectOn.COMMON,"ADD_STRENGTH_TO_MELEE_AR" , Rule.Type.BOOLEAN, RES, "true");
 	public static Rule HIGH_STRENGTH_ADDS_DAMAGE= new Rule(EffectOn.COMMON,"HIGH_STRENGTH_ADDS_DAMAGE", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_MORE_KNOWLEDGE   = new Rule(EffectOn.COMMON,"CHARGEN_MORE_KNOWLEDGE"   , Rule.Type.BOOLEAN, RES, "false");
+	public static Rule CHARGEN_ERRATED_POINT_BUY= new Rule(EffectOn.COMMON,"CHARGEN_ERRATED_POINT_BUY"   , Rule.Type.BOOLEAN, RES, "false");
 
 	public static Rule CARGOFACTOR_IS_WITHOUT_SEATS = new Rule(EffectOn.COMMON,"CARGOFACTOR_IS_WITHOUT_SEATS", Rule.Type.BOOLEAN, RES, "false");
 
@@ -49,6 +50,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_PRIO_ADJUSTED_MAGIC_RESO,
 				CHARGEN_BUY_SPELLS_KARMA,
 				CHARGEN_MAX_AVAILABILITY,
+				CHARGEN_ERRATED_POINT_BUY,
 				ALLOW_TRANSHUMANISM,
 				ALLOW_NEUROMORPHISM,
 				CHARGEN_EXTENDED_CONTACT,
