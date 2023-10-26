@@ -2091,13 +2091,13 @@ public class SR6ArchetypeTest {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testNagaKaliAni() {
+	public void testNagaKaliAni() throws CharacterIOException {
 		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
 		prio.setPriority(PriorityType.METATYPE, Priority.C);
-		prio.setPriority(PriorityType.MAGIC, Priority.E);
+		prio.setPriority(PriorityType.MAGIC, Priority.D);
 		prio.setPriority(PriorityType.SKILLS, Priority.B);
-		prio.setPriority(PriorityType.RESOURCES, Priority.D);
+		prio.setPriority(PriorityType.RESOURCES, Priority.E);
 		assertEquals(50, model.getKarmaFree());
 
 		SR6MetaType human = Shadowrun6Core.getItem(SR6MetaType.class, "naga");
@@ -2129,10 +2129,22 @@ public class SR6ArchetypeTest {
 		assertTrue("Should not fail: "+res,res.wasSuccessful());
 		assertTrue(attribs.canBeIncreasedPoints2(aVal).get());
 
-		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 9);
+		res = qualities.select(Shadowrun6Core.getItem(SR6Quality.class, "functional_wings"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "functional_wings").getChoices().get(0).getUUID(),"type2")
+				);
+
+
+		raiseAttributeTo(ShadowrunAttribute.STRENGTH , 10);
+		raiseAttributeTo(ShadowrunAttribute.BODY , 10);
+		raiseAttributeTo(ShadowrunAttribute.AGILITY , 6);
+		raiseAttributeTo(ShadowrunAttribute.REACTION , 5);
+		raiseAttributeTo(ShadowrunAttribute.INTUITION , 2);
 
 		// Add melee weapon
 		charGen.getEquipmentController().select(Shadowrun6Core.getItem(ItemTemplate.class, "katana"));
+		byte[] raw = Shadowrun6Core.encode(model);
+		String xml = new String(raw);
+		System.out.println(xml);
 	}
 
 	//-------------------------------------------------------------------

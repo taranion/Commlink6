@@ -120,14 +120,6 @@
 		</dependencies>
 	</dependencyManagement>
 
- 	<distributionManagement>
-   	<repository>
-      	<id>github</id>
-      	<name>GitHub Packages</name>
-      	<url>https://maven.pkg.github.com/taranion/CommLink</url>
-    	</repository>
-  </distributionManagement>
-
 	<ciManagement>
 		<system>Bitbucket Pipelines</system>
 		<url>https://bitbucket.org/rpgframework-cloud/shadowrun-common/pipelines/</url>

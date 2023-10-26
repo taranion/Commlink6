@@ -321,7 +321,7 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	private static String getModificationStringWithoutCond(Modification mod, Locale loc) {
-		logger.log(Level.WARNING, "explain {0}",mod);
+		logger.log(Level.DEBUG, "explain {0}",mod);
 		try {
 			ShadowrunReference type = (ShadowrunReference) mod.getReferenceType();
 			if (mod instanceof CheckModification) {
