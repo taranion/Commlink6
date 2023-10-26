@@ -10,7 +10,6 @@ import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.items.Availability;
-import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -30,7 +29,6 @@ public class SR6EquipmentGenerator extends CommonEquipmentGenerator {
 	 */
 	public SR6EquipmentGenerator(SR6CharacterController parent) {
 		super(parent);
-		// TODO Auto-generated constructor stub
 	}
 
 	//-------------------------------------------------------------------
