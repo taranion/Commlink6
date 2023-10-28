@@ -180,7 +180,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>de.rpgframework.shadowrun6.comlink.ComLinkMain</mainClass>
+							<mainClass>de.rpgframework.shadowrun6.comlink.ComLinkStarter</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -203,12 +203,12 @@
 				<configuration>
 					<baseUri>https://eden.rpgframework.de/</baseUri>
 					<basePath>${user.home}/Commlink6/app/STABILITY</basePath>
-					<launcher>de.rpgframework.shadowrun6.updater.CommlinkLauncher</launcher>
+					<launcher>de.rpgframework.shadowrun6.updater.CommlinkLauncher2</launcher>
 					<osHandling>ALL</osHandling>
 					<properties>
 						<property>
 							<key>default.launcher.main.class</key>
-							<value>de.rpgframework.shadowrun6.comlink.ComLinkMain</value>
+							<value>de.rpgframework.shadowrun6.comlink.ComLinkStarter</value>
 						</property>
 						<property>
 							<key>default.launcher.system.project.version</key>

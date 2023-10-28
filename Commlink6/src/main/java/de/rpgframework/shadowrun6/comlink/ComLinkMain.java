@@ -7,6 +7,7 @@ import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -65,17 +66,17 @@ public class ComLinkMain extends EdenClientApplication {
     	System.out.println("Default locale = "+Locale.getDefault());
 //    	System.setProperty("prism.forceGPU", "true");
     	System.setProperty("prism.verbose", "false");
-//    	List<String> keys = new ArrayList<String>();
-//    	System.getProperties().keySet().forEach(k -> keys.add( (String)k));
-//    	Collections.sort(keys);
-//		for (String key : keys) {
-//			if (key.startsWith("com.sun") || key.startsWith("java."))
-//				continue;
-//			System.out.println("PROP "+key+" \t= "+System.getProperties().getProperty(key));
-//		}
-//		for (String key : args) {
-//			System.out.println("argument "+key);
-//		}
+    	List<String> keys = new ArrayList<String>();
+    	System.getProperties().keySet().forEach(k -> keys.add( (String)k));
+    	Collections.sort(keys);
+		for (String key : keys) {
+			if (key.startsWith("com.sun") || key.startsWith("java."))
+				continue;
+			System.out.println("PROP "+key+" \t= "+System.getProperties().getProperty(key));
+		}
+		for (String key : args) {
+			System.out.println("argument "+key);
+		}
 
     	//System.setProperty("javafx.preloader", CommlinkPreloader.class.getName());
        launch(args);
