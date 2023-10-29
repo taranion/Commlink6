@@ -89,6 +89,11 @@
   "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
 },
 {
+  "name":"de.rpgframework.shadowrun6.QualityList",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"de.rpgframework.shadowrun6.QualityPath",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -125,6 +130,11 @@
 },
 {
   "name":"de.rpgframework.shadowrun6.SR6SkillValue",
+  "allDeclaredFields":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"de.rpgframework.shadowrun6.SR6Quality",
   "allDeclaredFields":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
