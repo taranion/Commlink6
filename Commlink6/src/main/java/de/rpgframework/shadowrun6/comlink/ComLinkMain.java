@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import org.prelle.javafx.BitmapIcon;
 import org.prelle.javafx.FlexibleApplication;
@@ -162,7 +163,16 @@ public class ComLinkMain extends EdenClientApplication {
      */
 	@Override
     public void start(Stage stage) throws Exception {
-     	int prefWidth = Math.min( (int)Screen.getPrimary().getVisualBounds().getWidth(), 1600);
+		// Set icons
+		List<String> sizes = List.of("032", "064", "128", "192", "512");
+		List<Image> images = sizes.stream()
+						.map(s -> ("icons/CL6_" + s + ".png"))
+						.map(s -> getClass().getResource(s).toExternalForm())
+						.map(Image::new)
+						.collect(Collectors.toList());
+		stage.getIcons().addAll(images);
+
+		int prefWidth = Math.min( (int)Screen.getPrimary().getVisualBounds().getWidth(), 1600);
     	int prefHeight = Math.min( (int)Screen.getPrimary().getVisualBounds().getHeight(), 900);
     	System.out.println("Start with "+prefWidth+"x"+prefHeight);
 		stage.setWidth(prefWidth);
