@@ -33,7 +33,6 @@ import de.rpgframework.eden.client.jfx.EdenClientApplication;
 import de.rpgframework.eden.client.jfx.EdenSettings;
 import de.rpgframework.eden.client.jfx.PDFPage;
 import de.rpgframework.eden.client.jfx.steps.StartupStep;
-import de.rpgframework.genericrpg.LicenseManager;
 import de.rpgframework.genericrpg.export.ExportPluginRegistry;
 import de.rpgframework.jfx.attach.PDFViewerConfig;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
