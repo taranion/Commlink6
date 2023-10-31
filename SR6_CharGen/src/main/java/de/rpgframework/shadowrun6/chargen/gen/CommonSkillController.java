@@ -323,4 +323,23 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		return value.getChoices();
 	}
 
+	//-------------------------------------------------------------------
+	protected void updateAvailable() {
+		available.clear();
+
+		for (SR6Skill skill : Shadowrun6Core.getItemList(SR6Skill.class)) {
+			// If it is restricted, don't add it
+			if (skill.isRestricted() && !allowed.contains(skill)) {
+				continue;
+			}
+
+			// If it is a knowledge skill or not present yet, it is available
+			if (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE)
+				available.add(skill);
+			else if (model.getSkillValue(skill)==null || model.getSkillValue(skill).getModifiedValue()==0) {
+				available.add(skill);
+			}
+		}
+	}
+
 }
