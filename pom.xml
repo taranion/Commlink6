@@ -46,7 +46,7 @@
 			<dependency>
 				<groupId>org.prelle</groupId>
 				<artifactId>simple-persist</artifactId>
-				<version>3.5.0</version>
+				<version>3.5.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
@@ -119,14 +119,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
- 	<distributionManagement>
-   	<repository>
-      	<id>github</id>
-      	<name>GitHub Packages</name>
-      	<url>https://maven.pkg.github.com/taranion/CommLink</url>
-    	</repository>
-  </distributionManagement>
 
 	<ciManagement>
 		<system>Bitbucket Pipelines</system>

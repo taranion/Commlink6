@@ -60,6 +60,26 @@ public class SR6SkillLeveller extends CommonSkillController {
 	}
 
 	//-------------------------------------------------------------------
+	private ValueModification getHighestModification(SR6Skill key, SkillSpecialization<SR6Skill> spec) {
+		ValueModification ret = null;
+		for (Modification mod : model.getHistory()) {
+			if (!(mod instanceof ValueModification))
+				continue;
+			if (mod.getReferenceType()!=ShadowrunReference.SKILLSPECIALIZATION)
+				continue;
+			ValueModification amod = (ValueModification)mod;
+			if (!amod.getKey().equals(key.getId()))
+				continue;
+
+			if (mod.getSource()!=this && mod.getSource()!=null)
+				continue;
+			if (ret==null || amod.getExpCost()>ret.getExpCost())
+				ret = amod;
+		}
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillController#canBeSelected(SR6Skill, Decision[])
 	 */
@@ -309,8 +329,42 @@ public class SR6SkillLeveller extends CommonSkillController {
 	 */
 	@Override
 	public boolean deselect(SR6SkillValue skillVal, SkillSpecializationValue<SR6Skill> spec) {
-		// TODO Auto-generated method stub
-		return false;
+		logger.log(Level.DEBUG, "ENTER: deselect({0}, {1}",skillVal, spec);
+		try {
+			Possible poss = canDeselectSpecialization(skillVal, spec);
+			if (!poss.get())
+				return false;
+
+			String key = skillVal.getSkill().getId()+"/"+spec.getKey();
+			ValueModification toUndo = getHighestModification(skillVal.getModifyable(), spec.getModifyable());
+			int karma = 5;
+			if (toUndo!=null) {
+				// Decrease from career
+				model.removeFromHistory(toUndo);
+				karma = toUndo.getExpCost();
+
+				logger.log(Level.INFO, "Deselecting"+key+" from prev. career session grants "+karma+" karma  ");
+				model.setKarmaInvested(model.getKarmaInvested()-karma);
+				model.setKarmaFree(model.getKarmaFree()+karma);
+			} else {
+				// Deselect from creation value
+				logger.log(Level.INFO, "Removing specialization {0} from chargen granting {1} karma  ", key, karma);
+				model.setKarmaInvested(model.getKarmaInvested() - karma);
+				model.setKarmaFree(model.getKarmaFree() + karma);
+				// Since it granted Karma, log it
+				ValueModification mod = new ValueModification(ShadowrunReference.SKILLSPECIALIZATION, key, String.valueOf(spec.getDistributed()));
+				mod.setSet(ValueType.NATURAL);
+				mod.setDate(Date.from(Instant.now()));
+				mod.setExpCost(-karma);
+				model.addToHistory(mod);
+			}
+			skillVal.getSpecializations().remove(spec);
+
+			getCharacterController().runProcessors();
+			return true;
+		} finally {
+			logger.log(Level.DEBUG, "LEAVE: deselect({0}, {1}",skillVal, spec);
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -319,18 +373,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 	 */
 	@Override
 	public float getSelectionCost(SR6Skill data) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCostString(de.rpgframework.genericrpg.data.DataItem)
-	 */
-	@Override
-	public String getSelectionCostString(SR6Skill data) {
-		// TODO Auto-generated method stub
-		return null;
+		return 5;
 	}
 
 	//-------------------------------------------------------------------
@@ -421,6 +464,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 	public List<Modification> process(List<Modification> previous) {
 		List<Modification> unprocessed = new ArrayList<>();
 		todos.clear();
+		updateAvailable();
 		for (Modification _mod : previous) {
 			if (_mod.getReferenceType() == ShadowrunReference.SKILL) {
 				if (_mod instanceof AllowModification) {

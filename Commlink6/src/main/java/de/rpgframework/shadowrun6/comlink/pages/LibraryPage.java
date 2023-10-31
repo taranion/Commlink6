@@ -37,6 +37,7 @@ import de.rpgframework.shadowrun6.DataStructure;
 import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6NPC;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -343,7 +344,7 @@ public class LibraryPage extends Page {
 		try {
 			FilteredListPage<Quality> page =new FilteredListPage<Quality>(
 					ResourceI18N.get(LibraryPage.RES, "category.qualities"),
-					() -> Shadowrun6Core.getItemList(Quality.class),
+					() -> Shadowrun6Core.getItemList(SR6Quality.class),
 					new GenericDescriptionVBox(
 							Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 							Shadowrun6Tools.modificationResolver(Locale.getDefault())

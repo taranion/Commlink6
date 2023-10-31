@@ -321,31 +321,35 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	private static String getModificationStringWithoutCond(Modification mod, Locale loc) {
-		logger.log(Level.TRACE, "explain {0}",mod);
+		logger.log(Level.DEBUG, "explain {0}",mod);
 		try {
 			ShadowrunReference type = (ShadowrunReference) mod.getReferenceType();
 			if (mod instanceof CheckModification) {
 				CheckModification valMod = (CheckModification)mod;
 				ShadowrunCheckInfluence what = (ShadowrunCheckInfluence) valMod.getWhat();
 				String level = getValueString(valMod, loc);
-				if (what==null) return mod.toString();
-
-				String prefix = "";
-				switch (what) {
-				case DICE  :
-					prefix = RES.format("modification.check.dice", level); break;
-				case EDGE_ONLY_TEST  :
-					prefix = RES.format("modification.check.edge_temporary", level); break;
-				case EDGE_BOOST:
-					prefix = RES.format("modification.check.edge_boost",level); break;
-				case EDGE_COST_MALUS:
-					prefix = RES.format("modification.check.edge_cost",level); break;
-				default:
-					prefix = "TODO("+what.name()+")";
-					prefix+= level;
-					logger.log(Level.WARNING, "Not supported: {0}",what);
+				String prefix = RES.getString("modification.check.for")+" ";
+				if (what!=null) {
+					switch (what) {
+					case DICE  :
+						prefix = RES.format("modification.check.dice", level); break;
+					case EDGE  :
+						prefix = RES.format("modification.check.edge", level); break;
+					case EDGE_ONLY_TEST  :
+						prefix = RES.format("modification.check.edge_temporary", level); break;
+					case EDGE_BOOST:
+						prefix = RES.format("modification.check.edge_boost",level); break;
+					case EDGE_COST_MALUS:
+						prefix = RES.format("modification.check.edge_cost",level); break;
+					case NOT_EARN_EDGE:
+						prefix = RES.getString("modification.check.not_earn_edge"); break;
+					default:
+						prefix = "TODO("+what.name()+")";
+						prefix+= level;
+						logger.log(Level.WARNING, "Not supported: {0}",what);
+					}
+					prefix+=" "+RES.getString("modification.check.for")+" ";
 				}
-				prefix+=" "+RES.getString("modification.check.for")+" ";
 
 				switch (type) {
 				case ATTRIBUTE:
@@ -509,6 +513,9 @@ public class Shadowrun6Tools {
 			//
 			if (mod instanceof DataItemModification) {
 				DataItemModification valMod = (DataItemModification)mod;
+				if (valMod.getKey()!=null && valMod.getKey().startsWith("CHOICE")) {
+					return RES.getString("modification.choice."+type.name().toLowerCase(), loc);
+				}
 				if (valMod.getResolvedKey()==null) {
 					if ("CHOICE".equals(valMod.getKey())) {
 						return RES.getString("modification.choice."+type.name().toLowerCase(), loc);
@@ -541,6 +548,13 @@ public class Shadowrun6Tools {
 				List<String> or = new ArrayList<>();
 				chMod.getModificiations().forEach(m -> or.add(getModificationString(m, loc)));
 				return String.join(" "+RES.getString("label.or")+" ", or);
+			}
+			if (mod instanceof RelevanceModification) {
+				RelevanceModification rMod = (RelevanceModification)mod;
+				switch (rMod.getType()) {
+				case "COMBAT": return RES.getString("modification.relevance.combat");
+				}
+				return RES.format("modification.relevance", rMod.getType());
 			}
 
 			logger.log(Level.ERROR, "Don't know how to display "+mod);
@@ -610,7 +624,7 @@ public class Shadowrun6Tools {
 					Logging.logger.log(Level.WARNING, "TODO: value modification for quality with choice: "+valMod);
 				}
 
-				Quality quality = Shadowrun6Core.getItem(Quality.class, valMod.getKey());
+				Quality quality = Shadowrun6Core.getItem(SR6Quality.class, valMod.getKey());
 				if (quality==null) {
 					Logging.logger.log(Level.WARNING, "Found unknown quality '"+valMod.getKey()+"' in valuemod of "+data);
 					return "Unknown quality '"+valMod.getKey()+"'";
@@ -640,7 +654,7 @@ public class Shadowrun6Tools {
 
 //			switch (type) {
 //			case QUALITY:
-//				Quality qual = Shadowrun6Core.getItem(Quality.class, valMod.getKey());
+//				Quality qual = Shadowrun6Core.getItem(SR6Quality.class, valMod.getKey());
 //				if (qual==null) {
 //					return "Unknown quality '"+valMod.getKey()+"'";
 //				}
@@ -799,7 +813,7 @@ public class Shadowrun6Tools {
 			logger.log(Level.DEBUG, "resolve qualities");
 			for (QualityValue tmp : model.getQualities()) {
 				tmp.setCharacter(model);
-				Quality resolved = Shadowrun6Core.getItem(Quality.class, tmp.getKey(), tmp.getLanguage());
+				Quality resolved = Shadowrun6Core.getItem(SR6Quality.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
 

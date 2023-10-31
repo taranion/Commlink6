@@ -11,6 +11,10 @@
 	<artifactId>shadowrun6-data</artifactId>
 	<name>SR6_Data</name>
 
+	<properties>
+		<maven.deploy.skip>false</maven.deploy.skip>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.prelle</groupId>
@@ -95,4 +99,16 @@
 
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
 </project>

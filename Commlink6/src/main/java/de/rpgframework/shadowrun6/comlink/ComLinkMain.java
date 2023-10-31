@@ -7,9 +7,11 @@ import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import org.prelle.javafx.BitmapIcon;
 import org.prelle.javafx.FlexibleApplication;
@@ -31,7 +33,6 @@ import de.rpgframework.eden.client.jfx.EdenClientApplication;
 import de.rpgframework.eden.client.jfx.EdenSettings;
 import de.rpgframework.eden.client.jfx.PDFPage;
 import de.rpgframework.eden.client.jfx.steps.StartupStep;
-import de.rpgframework.genericrpg.LicenseManager;
 import de.rpgframework.genericrpg.export.ExportPluginRegistry;
 import de.rpgframework.jfx.attach.PDFViewerConfig;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -65,17 +66,17 @@ public class ComLinkMain extends EdenClientApplication {
     	System.out.println("Default locale = "+Locale.getDefault());
 //    	System.setProperty("prism.forceGPU", "true");
     	System.setProperty("prism.verbose", "false");
-//    	List<String> keys = new ArrayList<String>();
-//    	System.getProperties().keySet().forEach(k -> keys.add( (String)k));
-//    	Collections.sort(keys);
-//		for (String key : keys) {
-//			if (key.startsWith("com.sun") || key.startsWith("java."))
-//				continue;
-//			System.out.println("PROP "+key+" \t= "+System.getProperties().getProperty(key));
-//		}
-//		for (String key : args) {
-//			System.out.println("argument "+key);
-//		}
+    	List<String> keys = new ArrayList<String>();
+    	System.getProperties().keySet().forEach(k -> keys.add( (String)k));
+    	Collections.sort(keys);
+		for (String key : keys) {
+			if (key.startsWith("com.sun") || key.startsWith("java."))
+				continue;
+			System.out.println("PROP "+key+" \t= "+System.getProperties().getProperty(key));
+		}
+		for (String key : args) {
+			System.out.println("argument "+key);
+		}
 
     	//System.setProperty("javafx.preloader", CommlinkPreloader.class.getName());
        launch(args);
@@ -161,7 +162,16 @@ public class ComLinkMain extends EdenClientApplication {
      */
 	@Override
     public void start(Stage stage) throws Exception {
-     	int prefWidth = Math.min( (int)Screen.getPrimary().getVisualBounds().getWidth(), 1600);
+		// Set icons
+		List<String> sizes = List.of("032", "064", "128", "192", "512");
+		List<Image> images = sizes.stream()
+						.map(s -> ("icons/CL6_" + s + ".png"))
+						.map(s -> getClass().getResource(s).toExternalForm())
+						.map(Image::new)
+						.collect(Collectors.toList());
+		stage.getIcons().addAll(images);
+
+		int prefWidth = Math.min( (int)Screen.getPrimary().getVisualBounds().getWidth(), 1600);
     	int prefHeight = Math.min( (int)Screen.getPrimary().getVisualBounds().getHeight(), 900);
     	System.out.println("Start with "+prefWidth+"x"+prefHeight);
 		stage.setWidth(prefWidth);

@@ -77,8 +77,8 @@
 	</quality>
 	<quality id="human20" karma="25" pos="true" type="NORMAL">
 		<requires>
-			<valuereq type="METATYPE" value="human"/>
-			<valuereq type="MAGIC_RESO" value="mundane"/>
+			<datareq type="METATYPE" ref="human"/>
+			<datareq type="MAGIC_RESO" ref="mundane"/>
 		</requires>
 		<modifications>
 			<valmod type="ATTRIBUTE" ref="CHARISMA" value="1" set="MAX"/>

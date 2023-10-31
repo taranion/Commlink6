@@ -13,10 +13,11 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Quality;
-import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.Quality.QualityType;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
 import de.rpgframework.shadowrun.chargen.lvl.AQualityLeveller;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -38,7 +39,7 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 	 */
 	@Override
 	public List<Quality> getAvailable() {
-		return Shadowrun6Core.getItemList(Quality.class).stream()
+		return Shadowrun6Core.getItemList(SR6Quality.class).stream()
 				.filter(p -> parent.showDataItem(p))
 				.filter(p -> !model.hasQuality(p.getId()) || p.isMulti())
 				.filter(p -> p.getType()!=QualityType.QUALITY_PATH)

@@ -64,6 +64,7 @@ import de.rpgframework.shadowrun.ShadowrunElement;
 import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.SR6NPC;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Sense;
@@ -1302,15 +1303,15 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	private Node handleQUALITY(ComplexDataItem item, Choice choice) {
-		ChoiceBox<Quality> choicebox = new ChoiceBox<>();
-		choicebox.setConverter(new StringConverter<Quality>() {
-			public Quality fromString(String value) { return null;}
-			public String toString(Quality value) {
+		ChoiceBox<SR6Quality> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<SR6Quality>() {
+			public SR6Quality fromString(String value) { return null;}
+			public String toString(SR6Quality value) {
 				if (value==null) return "-";
 				return value.getName();
 			}
 		});
-		List<Quality> items = Shadowrun6Core.getItemList(Quality.class)
+		List<SR6Quality> items = Shadowrun6Core.getItemList(SR6Quality.class)
 				.stream()
 				.filter( q -> (choice.getChoiceOptions()==null) || List.of(choice.getChoiceOptions()).contains(q.getId()))
 				.toList();

@@ -23,6 +23,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -56,7 +57,7 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 
 //	//-------------------------------------------------------------------
 //	public List<Quality> getAvailable1() {
-//		return Shadowrun6Core.getItemList(Quality.class).stream()
+//		return Shadowrun6Core.getItemList(SR6Quality.class).stream()
 //				.filter(p -> parent.showDataItem(p))
 //				.filter(p -> p.isFreeSelectable())
 //				.collect(Collectors.toList());
@@ -65,7 +66,7 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 //	//-------------------------------------------------------------------
 //	public List<Quality> getAvailable2() {
 //		if (parent.getSettings().getBornQuality1()==null) return List.of();
-//		return Shadowrun6Core.getItemList(Quality.class).stream()
+//		return Shadowrun6Core.getItemList(SR6Quality.class).stream()
 //				.filter(p -> parent.showDataItem(p))
 //				.filter(p -> p.isFreeSelectable())
 //				.filter(p -> !parent.getModel().hasQuality(p.getId()))
@@ -200,9 +201,9 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 	public OneOrTwoQualityController getQualityController() {
 		return new OneOrTwoQualityController(parent,
 				() -> parent.getSettings().getBornQuality1(),
-				 q -> parent.getSettings().setBornQuality1(q),
+				 q -> parent.getSettings().setBornQuality1((SR6Quality) q),
 				() -> parent.getSettings().getBornQuality2(),
-				 q -> parent.getSettings().setBornQuality2(q)
+				 q -> parent.getSettings().setBornQuality2((SR6Quality) q)
 				 );
 	}
 

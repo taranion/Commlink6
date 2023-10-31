@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
 import de.rpgframework.genericrpg.chargen.IRecommender;
 import de.rpgframework.genericrpg.chargen.LevellingProfileController;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IAdeptPowerController;
@@ -100,6 +101,8 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	public String getDescription() {
 		return wrapped.getDescription();
 	}
+
+	public boolean showDataItem(DataItem item) { return wrapped.showDataItem(item); }
 
 	//-------------------------------------------------------------------
 	/**
@@ -199,7 +202,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	public RuleController getRuleController() {
 		return wrapped.getRuleController();
 	}
-	
+
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.CharacterController#getProfileController()

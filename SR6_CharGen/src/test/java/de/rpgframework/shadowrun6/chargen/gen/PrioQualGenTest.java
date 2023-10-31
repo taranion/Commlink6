@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
@@ -83,7 +84,7 @@ public class PrioQualGenTest {
 	 */
 	@Test
 	public void testNonExisting() {
-		QualityValue val = new QualityValue(Shadowrun6Core.getItem(Quality.class,"built_tough"), 0);
+		QualityValue val = new QualityValue(Shadowrun6Core.getItem(SR6Quality.class,"built_tough"), 0);
 		// Increasing or decreasing should not be possible
 		assertFalse(ctrl.canBeDecreased(val).get());
 		assertFalse(ctrl.canBeIncreased(val).get());
@@ -104,7 +105,7 @@ public class PrioQualGenTest {
 //		charGen.runProcessors();
 //		assertEquals(1, ctrl.getPointsLeft());
 
-		OperationResult<QualityValue> selected = ctrl.select(Shadowrun6Core.getItem(Quality.class,"built_tough"));
+		OperationResult<QualityValue> selected = ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"built_tough"));
 		assertNotNull(selected);
 		assertFalse(selected.hasError());
 		assertTrue(selected.getError().isBlank());
@@ -122,16 +123,16 @@ public class PrioQualGenTest {
 	public void testSelectDetectMax6() {
 		charGen.runProcessors();
 
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"sinner"));
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"ork_poser"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"sinner"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"ork_poser"));
 		assertEquals(2,ctrl.getNumberOfQualities());
 		assertEquals(64, model.getKarmaFree());
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"built_tough"));
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"dermal_deposits"));
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"high_pain_tolerance"));
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"analytical_mind"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"built_tough"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"dermal_deposits"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"high_pain_tolerance"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"analytical_mind"));
 		assertEquals(6,ctrl.getNumberOfQualities());
-		OperationResult<QualityValue> selected = ctrl.select(Shadowrun6Core.getItem(Quality.class,"catlike"));
+		OperationResult<QualityValue> selected = ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"catlike"));
 		assertNotNull(selected);
 		assertFalse(selected.toString(), selected.wasSuccessful());
 		assertFalse(selected.getError().isBlank());
@@ -147,13 +148,13 @@ public class PrioQualGenTest {
 		charGen.runProcessors();
 
 		assertEquals(0,ctrl.getNumberOfQualities());
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"sinner"));
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"ork_poser"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"sinner"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"ork_poser"));
 		assertEquals(2,ctrl.getNumberOfQualities());
 		assertEquals(64, model.getKarmaFree());
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"dermal_deposits"));
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"high_pain_tolerance"));
-		ctrl.select(Shadowrun6Core.getItem(Quality.class,"analytical_mind"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"dermal_deposits"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"high_pain_tolerance"));
+		ctrl.select(Shadowrun6Core.getItem(SR6Quality.class,"analytical_mind"));
 		assertEquals(5,ctrl.getNumberOfQualities());
 		OperationResult<QualityValue> selected = ctrl.increase(model.getQuality("built_tough"));
 		assertNotNull(selected);

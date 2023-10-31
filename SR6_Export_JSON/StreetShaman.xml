@@ -441,7 +441,7 @@
       "damage": "2S",
       "attackRating": "3/-/-/-/-",
       "wifi": [
-        "?No ParentSet?"
+        "?No ParentSet?item.unarmed.wifi"
       ],
       "accessories": [],
       "page": "",
@@ -451,7 +451,7 @@
   ],
   "armors": [
     {
-      "name": "Armor vest ",
+      "name": "Armor vest",
       "rating": 3,
       "socialrating": -1,
       "accessories": [],
@@ -463,7 +463,7 @@
   ],
   "items": [
     {
-      "name": "Software Library ",
+      "name": "Software Library",
       "count": 0,
       "rating": 0,
       "type": "Electronic",
@@ -476,7 +476,7 @@
   "augmentations": [],
   "vehicles": [
     {
-      "name": "Suzuki Mirage ",
+      "name": "Suzuki Mirage",
       "type": null,
       "subtype": null,
       "handlOn": 2,
@@ -503,7 +503,7 @@
   "licenses": [],
   "matrixItems": [
     {
-      "name": "Meta Link ",
+      "name": "Meta Link",
       "dataProcessing": 1,
       "firewall": 0,
       "attack": 0,

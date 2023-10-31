@@ -100,12 +100,14 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		selection.setSelectedCellFactory(lv -> new CarriedItemListCell(charGen) {
 			public void updateItem(CarriedItem<ItemTemplate> item, boolean empty) {
 				super.updateItem(item, empty);
-				layout.setStyle("-fx-max-width: 30em");
+				bxDescription.setStyle("-fx-max-width: 30em");
 				extraActionLineNodes.clear();
 			}
 		});
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection,null));
+		selection.getFilterNode().setStyle("-fx-min-width: 20em; -fx-pref-width: 28em");
+
 
 		bxDescription = new CarriedItemDescriptionPane(Shadowrun6Tools.requirementResolver(Locale.getDefault()), charGen);
 
@@ -156,6 +158,8 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		conversion.setAlignment(Pos.CENTER_LEFT);
 
 		VBox col1 = new VBox(10, lbIntro, conversion, selection);
+		selection.setAvailableStyle("-fx-min-width: 20em; -fx-pref-width: 28em");
+		selection.setSelectedStyle("-fx-min-width: 20em; -fx-pref-width: 25em");
 
 
 		layout = new OptionalNodePane(col1, bxDescription);

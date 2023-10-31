@@ -7,7 +7,7 @@
    </quality>
    <quality id="always_ready" 	  karma="8" pos="true" type="NORMAL" max="7">
      <modifications>
-       <checkmod type="SKILL" ref="piloting" value="1" what="EDGE" cond="y"/>
+       <valmod type="ATTRIBUTE" ref="EDGE" value="1" what="EDGE" cond="y"/>
      </modifications>
    </quality>
    <quality id="attribute_mastery" 	karma="3" pos="true" type="NORMAL">

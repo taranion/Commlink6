@@ -17,8 +17,8 @@ import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.Lifestyle;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -261,7 +261,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 
 		// In Debt
 		if (model.getDebtRate()>0) {
-			addNaturalModifier(val, model.getDebtRate(), Shadowrun6Core.getItem(Quality.class, "in_debt"));
+			addNaturalModifier(val, model.getDebtRate(), Shadowrun6Core.getItem(SR6Quality.class, "in_debt"));
 		}
 
 		logger.log(Level.DEBUG, " Monthly cost   = "+val.getModifiedValue());
@@ -281,7 +281,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		logger.log(Level.DEBUG, " INI Physical D6  = "+val.getModifiedValue());
 
 		// Minor actions
-		AttributeValue<ShadowrunAttribute> val2 = model.getAttribute(ShadowrunAttribute.MINOR_ACTION);
+		AttributeValue<ShadowrunAttribute> val2 = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_PHYSICAL);
 		val2.setDistributed(1);
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL.name(), val.getModifiedValue(), ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL);
 		valMod.setSet(ValueType.NATURAL);
@@ -388,6 +388,12 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.addModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 2, "VR Hot Sim") );
 		model.getPersona().setAttribute(val);
 		logger.log(Level.DEBUG, " INI Matrix VR D6 Hot   "+val.getModifiedValue());
+
+		// Minor actions (Astral)
+		val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_MATRIX);
+		val.setDistributed(1);
+		addNaturalModifier(val,ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT);
+		logger.log(Level.DEBUG, "                 = "+val.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------

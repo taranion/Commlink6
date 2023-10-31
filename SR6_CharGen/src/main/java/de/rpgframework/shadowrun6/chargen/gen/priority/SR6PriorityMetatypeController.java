@@ -30,9 +30,9 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class SR6PriorityMetatypeController extends CommonMetatypeGenerator {
 
 	private final static Logger logger = System.getLogger(SR6PriorityMetatypeController.class.getPackageName()+".meta");
-	
+
 	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PriorityCharacterGenerator.class, Locale.ENGLISH, Locale.GERMAN);
-	
+
 	//-------------------------------------------------------------------
 	public SR6PriorityMetatypeController(SR6CharacterController parent) {
 		super(parent);
@@ -51,13 +51,15 @@ public class SR6PriorityMetatypeController extends CommonMetatypeGenerator {
 		try {
 			availableOptions.clear();
 			todos.clear();
-			
+
 			for (Modification mod : previous) {
 				if (mod.getReferenceType()==ShadowrunReference.METATYPE) {
 					if (mod instanceof ValueModification) {
 						ValueModification vMod = (ValueModification)mod;
 						SR6MetaType meta = vMod.getResolvedKey();
 						if (meta!=null) {
+							if (!parent.showDataItem(meta))
+								continue;
 							MetaTypeOption opt = new MetaTypeOption(meta, meta.getKarma());
 							opt.setSpecialAttributePoints(vMod.getValue());
 							availableOptions.put(meta, opt);
@@ -101,9 +103,9 @@ public class SR6PriorityMetatypeController extends CommonMetatypeGenerator {
 					meta = null;
 					return unprocessed;
 				}
-				
-				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), opt.getSpecialAttributePoints()));				
-				
+
+				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.ADJUST.name(), opt.getSpecialAttributePoints()));
+
 				if (meta.getKarma() != 0) {
 					logger.log(Level.INFO, "Pay {0} Karma for metatype ''{1}''", meta.getKarma(), meta.getId());
 					model.setKarmaFree(model.getKarmaFree() - meta.getKarma());

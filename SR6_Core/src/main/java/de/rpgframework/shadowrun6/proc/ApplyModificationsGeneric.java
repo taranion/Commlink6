@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.AllowModification;
@@ -28,12 +29,15 @@ import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
+import de.rpgframework.shadowrun.Movement;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
+import de.rpgframework.shadowrun.persist.MovementConverter;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -112,7 +116,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
-				logger.log(Level.WARNING, "process "+tmp+" / "+tmp.getApplyTo());
+				logger.log(Level.DEBUG, "process "+tmp+" / "+tmp.getApplyTo());
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
 				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
@@ -205,11 +209,15 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			value = drake.getAttributeValue(item);
 
 		}
-		if (value == null) {
-		}
 		if (mod.getSet()==ValueType.MAX)
 			return false;
 
+		if (item==ShadowrunAttribute.MOVEMENT) {
+			BodyForm body = model.getBodyForms().get(0);
+			Movement mov = MovementConverter.convert(mod.getRawValue());
+			body.addMovement(mov);
+			return true;
+		}
 
 		value.addModification(mod);
 		if (!(mod instanceof CheckModification)) {
@@ -280,6 +288,16 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			if (item!=null) {
 				logger.log(Level.DEBUG, "Resolved gear {0} from definitions in character", mod.getKey());
 			}
+		}
+		if (item==null && mod.getSource()!=null && mod.getSource() instanceof IReferenceResolver) {
+			item =((IReferenceResolver)mod.getSource()).resolveItem(mod.getKey());
+			if (item!=null) {
+				logger.log(Level.DEBUG, "Resolved gear {0} from definitions in data item", mod.getKey());
+			}
+		}
+		if (item==null) {
+			logger.log(Level.ERROR, "Cannot resolve gear {0} from modification {1}", mod.getKey(), mod);
+			return false;
 		}
 		logger.log(Level.DEBUG, "applyGear {0}",mod);
 		SR6PieceOfGearVariant variant = null;
@@ -365,7 +383,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 
 	//-------------------------------------------------------------------
 	private static boolean applyQuality(Shadowrun6Character model, DataItemModification mod) {
-		Quality item = Shadowrun6Core.getItem(Quality.class, mod.getKey());
+		Quality item = Shadowrun6Core.getItem(SR6Quality.class, mod.getKey());
 		QualityValue value = model.getQuality(mod.getKey());
 		if (item == null) {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());

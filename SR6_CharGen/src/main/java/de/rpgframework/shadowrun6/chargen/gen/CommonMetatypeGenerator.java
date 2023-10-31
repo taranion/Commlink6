@@ -106,7 +106,7 @@ public abstract class CommonMetatypeGenerator extends ControllerImpl<SR6MetaType
 	public void roll() {
 		// Meta
 		float gauss = (float)random.nextGaussian();
-		boolean useVariants = (gauss<-1 || gauss>1);
+		boolean useVariants = (gauss<-1 || gauss>1) && (availableOptions.size()>5);
 		logger.log(Level.WARNING, "Roll {0} means useVariants={1}", gauss, useVariants);
 		logger.log(Level.WARNING, "PRE: "+ availableOptions.keySet());
 		List<SR6MetaType> pick = availableOptions.keySet().stream().filter(m -> (useVariants?(m.getVariantOf()!=null || m.isMetahuman()==false):(m.getVariantOf()==null && m.isMetahuman()))).collect(Collectors.toList());
