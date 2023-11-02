@@ -72,10 +72,10 @@ public class ComLinkMain extends EdenClientApplication {
 		for (String key : keys) {
 			if (key.startsWith("com.sun") || key.startsWith("java."))
 				continue;
-			System.out.println("PROP "+key+" \t= "+System.getProperties().getProperty(key));
+			System.getLogger(EdenClientApplication.class.getPackageName()).log(Level.INFO,"PROP "+key+" \t= "+System.getProperties().getProperty(key));
 		}
 		for (String key : args) {
-			System.out.println("argument "+key);
+			System.getLogger(EdenClientApplication.class.getPackageName()).log(Level.INFO,"argument "+key);
 		}
 
     	//System.setProperty("javafx.preloader", CommlinkPreloader.class.getName());
