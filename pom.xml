@@ -26,7 +26,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
 		<revision>0.0.2-SNAPSHOT</revision>
-		<rpgfw.version>5.1.4-SNAPSHOT</rpgfw.version>
+		<rpgfw.version>5.1.4</rpgfw.version>
 		<maven.deploy.skip>true</maven.deploy.skip>
 	</properties>
 
