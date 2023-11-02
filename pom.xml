@@ -5,7 +5,7 @@
 
 	<groupId>de.rpgframework</groupId>
 	<artifactId>shadowrun6-master</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>Shadowrun6 Master</name>
 	<packaging>pom</packaging>
 
@@ -25,7 +25,7 @@
 		<log4j.version>2.19.0</log4j.version>
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
-		<revision>0.0.2-SNAPSHOT</revision>
+		<revision>0.0.3-SNAPSHOT</revision>
 		<rpgfw.version>5.1.4</rpgfw.version>
 		<maven.deploy.skip>true</maven.deploy.skip>
 	</properties>
@@ -61,6 +61,11 @@
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-javafx</artifactId>
+				<version>${rpgfw.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>rpgframework-generator</artifactId>
 				<version>${rpgfw.version}</version>
 			</dependency>
 			<dependency>
@@ -125,11 +130,11 @@
 		<url>https://bitbucket.org/rpgframework-cloud/shadowrun-common/pipelines/</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:git:git@bitbucket.org:rpgframework-cloud/shadowrun-common.git</connection>
-		<developerConnection>scm:git:git@bitbucket.org:rpgframework-cloud/shadowrun-common.git</developerConnection>
-		<url>https://bitbucket.org/rpgframework-cloud/shadowrun-common/</url>
-		<tag>HEAD</tag>
+  		<connection>scm:git:git://bitbucket.org/rpgframework-cloud/shadowrun6.git</connection>
+ 		<developerConnection>scm:git:ssh://bitbucket.org:rpgframework-cloud/shadowrun6.git</developerConnection>
+  		<url>https://bitbucket.org/rpgframework-cloud/shadowrun6/src</url>
 	</scm>
+
 
 	<repositories>
 		<repository>

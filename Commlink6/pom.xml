@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>de.rpgframework</groupId>
 		<artifactId>shadowrun6-master</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -156,12 +156,12 @@
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>shadowrun6-export-fvtt</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.0.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-export-json</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.0.3-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

@@ -5,12 +5,9 @@ import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
-import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
-import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.RuleController;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
