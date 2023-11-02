@@ -98,6 +98,11 @@
 				<artifactId>shadowrun6-chargen</artifactId>
 				<version>${revision}</version>
 			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>shadowrun6-chargen-jfx</artifactId>
+				<version>${revision}</version>
+			</dependency>
 
 		   <dependency>
 			   <groupId>org.apache.logging.log4j</groupId>

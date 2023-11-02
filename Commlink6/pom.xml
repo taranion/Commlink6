@@ -142,7 +142,6 @@
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>shadowrun6-chargen-jfx</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
