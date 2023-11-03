@@ -27,7 +27,7 @@
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
 		<client.plugin.version>1.0.18</client.plugin.version>
 		<attach.version>4.0.18</attach.version>
-		<rpgfw.version>5.1.4</rpgfw.version>
+		<rpgfw.version>5.1.5-SNAPSHOT</rpgfw.version>
 	</properties>
 
 	<dependencies>
