@@ -179,7 +179,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.DEBUG, "Add adept power {0} to character", item);
 		}
 		// Mark as auto-added
-		value.addModification(mod);
+		value.addIncomingModification(mod);
 
 		if (item.hasLevel()) {
 			logger.log(Level.DEBUG, " Level is now distr={0}   mod={1} = " + value.getNameWithoutRating(), value.getDistributed(),
@@ -222,7 +222,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			return true;
 		}
 
-		value.addModification(mod);
+		value.addIncomingModification(mod);
 		if (!(mod instanceof CheckModification)) {
 			if (mod.isDouble()) {
 				logger.log(Level.WARNING, "Added {0} to attribute {1} ({2}) from {3}", mod.getValueAsDouble(), item, mod.getSet(), mod.getSource());
@@ -258,7 +258,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			}
 		}
 
-		value.addModification(mod);
+		value.addIncomingModification(mod);
 		logger.log(Level.INFO, "Added {0} to skill {1} ({2}) from {3}", mod.getValue(), item, mod.getSet(), mod.getSource());
 
 		return true;
@@ -277,7 +277,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		SR6SkillValue value = new SR6SkillValue(item, 1);
 		if (mod.getId()!=null)
 			value.setUuid(mod.getId());
-		value.addModification(mod);
+		value.addIncomingModification(mod);
 		logger.log(Level.ERROR, "Added skill {0} (from {1})",  item, mod.getSource());
 		return true;
 	}
@@ -323,7 +323,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		if (mod.getId()!=null)
 			result.get().setUuid(mod.getId());
 		result.get().setInjectedBy(mod.getSource());
-		result.get().addModification(mod);
+		result.get().addIncomingModification(mod);
 
 		if (mod instanceof EmbedModification) {
 			EmbedModification embed = (EmbedModification)mod;
@@ -380,7 +380,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.DEBUG, "Add lifestyle {0} to character", item);
 //		}
 		// Mark as auto-added
-		value.addModification(mod);
+		value.addIncomingModification(mod);
 		return true;
 	}
 
@@ -405,7 +405,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.INFO, "Add quality {0} to character", item);
 		}
 		// Mark as auto-added
-		value.addModification(mod);
+		value.addIncomingModification(mod);
 
 		if (item.hasLevel()) {
 			logger.log(Level.DEBUG, " Level is now distr={0}   mod={1} = " + value.getName(), value.getDistributed(),
@@ -441,7 +441,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			}
 		}
 		// Mark as auto-added
-		value.addModification(mod);
+		value.addIncomingModification(mod);
 
 		if (item.hasLevel()) {
 			logger.log(Level.INFO, " Level is now distr={0}   mod={1} = " + value.getName(), value.getDistributed(),

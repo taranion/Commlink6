@@ -259,7 +259,7 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 					continue;
 				}
 				logger.log(Level.DEBUG, "Add modification {0} to {1}", mod, key);
-				val.addModification(mod);
+				val.addIncomingModification(mod);
 				if (mod.getSet() == ValueType.MAX && mod.getValue() > 6)
 					metatypeAttribute.add(key);
 			} else

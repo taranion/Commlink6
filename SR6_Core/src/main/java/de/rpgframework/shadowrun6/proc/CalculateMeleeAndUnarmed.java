@@ -89,8 +89,8 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			ValueModification reaMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), rea.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.REACTION);
 			ValueModification strMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), str.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.STRENGTH);
 			ItemAttributeObjectValue<SR6ItemAttribute> unarmedAR = new ItemAttributeObjectValue<>(SR6ItemAttribute.ATTACK_RATING, new int[] {0,0,0,0,0});
-			unarmedAR.addModification(reaMod);
-			unarmedAR.addModification(strMod);
+			unarmedAR.addIncomingModification(reaMod);
+			unarmedAR.addIncomingModification(strMod);
 			unarmed.setAttribute(SR6ItemAttribute.ATTACK_RATING, unarmedAR);
 			unarmed.setAttribute(SR6ItemAttribute.DAMAGE, new ItemAttributeObjectValue<>(SR6ItemAttribute.DAMAGE, new Damage(2, DamageType.STUN, DamageElement.REGULAR)));
 			unarmed.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
@@ -108,6 +108,14 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 				logger.log(Level.WARNING, "Found an 'unarmed' item in regular inventory - remove it");
 				model.removeCarriedItem(unarmed);
 			}
+
+//			ItemAttributeObjectValue<SR6ItemAttribute> unarmedAR = unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING);
+//			AttributeValue<ShadowrunAttribute> rea = model.getAttribute(ShadowrunAttribute.REACTION);
+//			AttributeValue<ShadowrunAttribute> str = model.getAttribute(ShadowrunAttribute.STRENGTH);
+//			ValueModification reaMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), rea.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.REACTION);
+//			ValueModification strMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), str.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.STRENGTH);
+//			unarmedAR.addModification(reaMod);
+//			unarmedAR.addModification(strMod);
 		}
 		applyGlobalItemModificatios(model, unarmed);
 		checkUnarmedIsPhysical(model, unarmed);
@@ -137,15 +145,15 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 		// Now walk all melee weapons
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT)) {
 			// Remove eventually existing STRENGTH mod
-			for (Modification tmpRaw : item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifications()) {
+			for (Modification tmpRaw : item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getIncomingModifications()) {
 				ValueModification tmp = (ValueModification) tmpRaw;
 				if (tmp.getSource().equals(ShadowrunAttribute.STRENGTH)) {
-					item.getAsObject(SR6ItemAttribute.ATTACK_RATING).removeModification(tmp);
+					item.getAsObject(SR6ItemAttribute.ATTACK_RATING).removeIncomingModification(tmp);
 				}
 			}
 
 			if (strARMod!=null && item.getUuid()!=ItemTemplate.UUID_UNARMED) {
-				item.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(strARMod);
+				item.getAsObject(SR6ItemAttribute.ATTACK_RATING).addIncomingModification(strARMod);
 				logger.log(Level.TRACE, "Add {0} to attack rating for {1}", strARMod, item.getKey());
 			}
 			ItemSubType subtype = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
@@ -154,7 +162,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			case CLUBS:
 			case UNARMED:
 				if (strDMGBonus!=null) {
-					item.getAsObject(SR6ItemAttribute.DAMAGE).addModification(strDMGBonus);
+					item.getAsObject(SR6ItemAttribute.DAMAGE).addIncomingModification(strDMGBonus);
 					logger.log(Level.ERROR, "Add {0} to damage for {1}", strDMGBonus, item.getKey());
 				}
 			}
@@ -187,7 +195,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 
 	private void clearOldItemModificatios(Shadowrun6Character model, CarriedItem<ItemTemplate> unarmed) {
 		for (ItemAttributeValue<IItemAttribute> val : unarmed.getAttributes()) {
-			val.clearModifications();
+			val.clearIncomingModifications();
 		}
 	}
 
@@ -199,7 +207,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			if (mod.getApplyTo()==ApplyTo.UNARMED || mod.getApplyTo()==ApplyTo.MELEE) {
 				ValueModification vMod = (ValueModification)mod;
 				SR6ItemAttribute attr = vMod.getResolvedKey();
-				unarmed.getAttributeRaw(attr).addModification(vMod);
+				unarmed.getAttributeRaw(attr).addIncomingModification(vMod);
 				logger.log(Level.INFO, "Add modification {0} to UNARMED = {1}", vMod, unarmed.getAttributeRaw(attr));
 			}
 		}

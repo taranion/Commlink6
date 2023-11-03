@@ -90,13 +90,13 @@ public class SR6PriorityTable extends PriorityTable<Shadowrun6Character, SR6Prio
 	@Override
 	public Node getMagicOrResonanceNode(Priority prio) {
 		PriorityTableEntry entry = resolver.apply(PriorityType.MAGIC, prio);
-		logger.log(Level.INFO,"----"+entry.getType()+":"+entry.getPriority()+" with "+entry.getModifications().size()+" modifications");
+		logger.log(Level.INFO,"----"+entry.getType()+":"+entry.getPriority()+" with "+entry.getOutgoingModifications().size()+" modifications");
 		VBox ret = new VBox();
 		
 		int oldPoints = -1;
 		StringBuffer buf = null;
 		MagicOrResonanceType lastType = null;
-		for (Modification tmp : entry.getModifications()) {
+		for (Modification tmp : entry.getOutgoingModifications()) {
 			ValueModification mod = (ValueModification)tmp;
 			MagicOrResonanceType type = mod.getReferenceType().resolve(mod.getKey());
 			int points = mod.getValue();

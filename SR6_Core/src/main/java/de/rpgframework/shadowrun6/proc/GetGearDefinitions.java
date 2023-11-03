@@ -8,8 +8,6 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Technique;
-import de.rpgframework.shadowrun6.TechniqueValue;
 
 /**
  * @author prelle

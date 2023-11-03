@@ -156,7 +156,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
 			if (val.getMaximum()==0) {
-				val.addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
+				val.addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
 			}
 		}
 	}
@@ -189,15 +189,15 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 							logger.log(Level.DEBUG, "Allow adjustment points for {0}",attr);
 							allowedAdjust.add(attr);
 						}
-						getModel().getAttribute(attr).addModification(mod);
+						getModel().getAttribute(attr).addIncomingModification(mod);
 						break;
 					case NATURAL:
 						// Update base
 						logger.log(Level.INFO, "Updated base of "+attr+" with +"+mod.getValue());
-						getModel().getAttribute(attr).addModification(mod);
+						getModel().getAttribute(attr).addIncomingModification(mod);
 						break;
 					default:
-						getModel().getAttribute(attr).addModification(mod);
+						getModel().getAttribute(attr).addIncomingModification(mod);
 					}
 				} else {
 					unprocessed.add(tmp);

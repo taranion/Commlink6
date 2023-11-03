@@ -91,7 +91,7 @@ public class SR6RewardPane extends RewardPane {
 			reward.removeModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.HEAT.name());
 			if (n==null || n.isBlank()) { return; }
 			try {
-				reward.addModification( new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.HEAT.name(), Integer.parseInt(n)) );
+				reward.addIncomingModification( new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.HEAT.name(), Integer.parseInt(n)) );
 			} catch (NumberFormatException e) {
 			}
 		});
@@ -100,7 +100,7 @@ public class SR6RewardPane extends RewardPane {
 			reward.removeModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.REPUTATION.name());
 			if (n==null || n.isBlank()) { return; }
 			try {
-				reward.addModification( new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.REPUTATION.name(), Integer.parseInt(n)) );
+				reward.addIncomingModification( new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.REPUTATION.name(), Integer.parseInt(n)) );
 			} catch (NumberFormatException e) {
 			}
 		});

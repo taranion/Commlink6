@@ -55,7 +55,7 @@ public class AddChemicalPriceStep implements CarriedItemProcessor {
 				int chemPrice = chemical.getAttribute(SR6ItemAttribute.PRICE).getDistributed() * multiplier;
 				logger.log(Level.INFO, "Add {0} Nuyen for {1} units of chemical {2}", chemPrice, multiplier, chemical.getId());
 				ItemAttributeNumericalValue<SR6ItemAttribute> attrib = model.getAsValue(SR6ItemAttribute.PRICE);
-				attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), chemPrice, chemical) );
+				attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), chemPrice, chemical) );
 			}
 		}
 

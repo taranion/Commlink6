@@ -165,7 +165,7 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 						if (attr.isPrimary() && val.getValue()>6) {
 							logger.log(Level.INFO, "Increase metatype attribute {0} to 2", attr);
 							AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attr);
-							aVal.addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, attr.name(), 1, meta, ValueType.NATURAL));
+							aVal.addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, attr.name(), 1, meta, ValueType.NATURAL));
 						}
 
 					}

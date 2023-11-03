@@ -52,7 +52,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		@SuppressWarnings("unchecked")
 		CarriedItem<ItemTemplate> model2 = (CarriedItem<ItemTemplate>) model;
 		// Read all modifications that are meant for this item
-		for (Modification tmp : model.getModifications()) {
+		for (Modification tmp : model.getIncomingModifications()) {
 			try {
 				logger.log(Level.INFO, "Process {0}", tmp);
 				if (tmp instanceof ValueModification) {
@@ -144,7 +144,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 						ValueModification valMod = (ValueModification)mod;
 						if (slot!=null) {
 							logger.log(Level.INFO, "For slot {0} add capacity {1} from {2}", hook, valMod.getValueAsDouble(), mod.getSource());
-							slot.addModification(valMod);
+							slot.addIncomingModification(valMod);
 						} else {
 							if (valMod.isDouble()) {
 								logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2}", hook, valMod.getValueAsDouble(), mod.getSource());
@@ -247,7 +247,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			slot.addEmbeddedItem(accessory);
 
 			// Now apply modifications that the new accessory provides
-			for (Modification mod2 : accessory.getModifications()) {
+			for (Modification mod2 : accessory.getIncomingModifications()) {
 				if (mod2 instanceof DataItemModification) {
 					applyModification(false, charac, (CarriedItem<ItemTemplate>) model, (DataItemModification)mod2);
 				}

@@ -482,7 +482,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 				SR6SkillValue val = getModel().getSkillValue(key);
 				if (val==null)
 					continue;
-				val.addModification(mod);
+				val.addIncomingModification(mod);
 				if ((mod instanceof ValueModification) && ((ValueModification)mod).getSet() == ValueType.MAX) {
 					logger.log(Level.INFO, "Changed maximum of {0} to {1}", key, val.getModifiedValue(ValueType.MAX));
 				}

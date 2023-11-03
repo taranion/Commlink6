@@ -44,7 +44,7 @@ public abstract class CommonAttributeGenerator extends ControllerImpl<ShadowrunA
 			max = 6+max;
 		boolean allow = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_RAISE_ABOVE_6);
 		if (!allow) {
-			for (Modification mod : parent.getModel().getAttribute(key).getModifications()) {
+			for (Modification mod : parent.getModel().getAttribute(key).getIncomingModifications()) {
 				if (!(mod instanceof ValueModification))
 					continue;
 				ValueModification vMod = (ValueModification)mod;

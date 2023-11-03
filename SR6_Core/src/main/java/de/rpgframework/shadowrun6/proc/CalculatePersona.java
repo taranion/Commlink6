@@ -193,8 +193,8 @@ public class CalculatePersona implements ProcessingStep {
 		persona.setAttribute(valF);
 
 		List<Modification> allItemMods = new ArrayList<>();
-		if (bestAS!=null) allItemMods.addAll(bestAS.getModifications());
-		if (bestDF!=null) allItemMods.addAll(bestDF.getModifications());
+		if (bestAS!=null) allItemMods.addAll(bestAS.getIncomingModifications());
+		if (bestDF!=null) allItemMods.addAll(bestDF.getIncomingModifications());
 		for (Modification mod : allItemMods) {
 			logger.log(Level.INFO, "TODO: item mod "+mod);
 		}
@@ -257,7 +257,7 @@ public class CalculatePersona implements ProcessingStep {
 	private void addNaturalModifier(ItemAttributeNumericalValue<SR6ItemAttribute> val, int value, Object source) {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, val.getModifyable().name(), value, source);
 		valMod.setSet(ValueType.NATURAL);
-		val.addModification( valMod );
+		val.addIncomingModification( valMod );
 	}
 
 	//-------------------------------------------------------------------
@@ -270,7 +270,7 @@ public class CalculatePersona implements ProcessingStep {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), item.getAsValue(attr).getModifiedValue(), attr);
 		valMod.setSet(ValueType.NATURAL);
 		valMod.setSource(attr);
-		val.addModification( valMod );
+		val.addIncomingModification( valMod );
 	}
 
 }

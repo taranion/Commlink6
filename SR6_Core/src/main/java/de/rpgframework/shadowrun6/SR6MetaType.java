@@ -103,7 +103,7 @@ public class SR6MetaType extends MetaType {
 	 */
 	@Override
 	public List<Modification> getAttributeModifications() {
-		return getModifications().stream().filter(mod -> mod.getReferenceType()==ShadowrunReference.ATTRIBUTE).collect(Collectors.toList());
+		return getOutgoingModifications().stream().filter(mod -> mod.getReferenceType()==ShadowrunReference.ATTRIBUTE).collect(Collectors.toList());
 	}
 
 	//-------------------------------------------------------------------
@@ -112,7 +112,7 @@ public class SR6MetaType extends MetaType {
 	 */
 	@Override
 	public List<Modification> getNonAttributeModifications() {
-		return getModifications().stream().filter(mod -> mod.getReferenceType()!=ShadowrunReference.ATTRIBUTE).collect(Collectors.toList());
+		return getOutgoingModifications().stream().filter(mod -> mod.getReferenceType()!=ShadowrunReference.ATTRIBUTE).collect(Collectors.toList());
 	}
 
 	//-------------------------------------------------------------------

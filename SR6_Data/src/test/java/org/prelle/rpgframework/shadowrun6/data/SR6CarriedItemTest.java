@@ -162,9 +162,9 @@ public class SR6CarriedItemTest {
 		assertEquals(96000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 
 		// Now validate modifications
-		assertNotNull(item.getModifications());
+		assertNotNull(item.getIncomingModifications());
 		assertNotNull(item.getCharacterModifications());
-		assertTrue("Muscle toner should only have character modifications",item.getModifications().isEmpty());
+		assertTrue("Muscle toner should only have character modifications",item.getIncomingModifications().isEmpty());
 		assertFalse("Muscle toner should have character modifications",item.getCharacterModifications().isEmpty());
 
 		Modification cMod = item.getCharacterModifications().get(0);
@@ -260,7 +260,7 @@ public class SR6CarriedItemTest {
 				Math.round(essenceAttr.getDistributed()*-300),
 				AugmentationQuality.BETA
 				);
-		essenceAttr.addModification(mod);
+		essenceAttr.addIncomingModification(mod);
 		assertEquals(0.42f, essenceAttr.getModifiedValue(), 0f);
 
 		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "reaction_enhancers");
@@ -349,11 +349,11 @@ public class SR6CarriedItemTest {
 	public void testItemWithCharMods() {
 		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "bone_lacing");
 		assertNotNull(temp);
-		assertEquals("No. modifications wrong in ItemTemplate.",1, temp.getModifications().size());
+		assertEquals("No. modifications wrong in ItemTemplate.",1, temp.getOutgoingModifications().size());
 
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, temp.getVariant("aluminium"), CarryMode.IMPLANTED);
 		SR6GearTool.recalculate("", null, item);
-		assertEquals("No. modifications wrong in CI.",0, item.getModifications().size());
+		assertEquals("No. modifications wrong in CI.",0, item.getIncomingModifications().size());
 		assertEquals("No. char modifications wrong in CI.",5, item.getCharacterModifications().size());
 		Decision decision = new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, AugmentationQuality.STANDARD.name());
 		item.setDecisions(List.of(decision));

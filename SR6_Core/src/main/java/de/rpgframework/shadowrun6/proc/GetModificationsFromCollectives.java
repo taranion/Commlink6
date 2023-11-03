@@ -40,7 +40,8 @@ public class GetModificationsFromCollectives implements ProcessingStep {
 			}
 
 			// Iterate modifications
-			for (Modification mod : collective.getEffectiveModifications(model)) {
+			collective.updateOutgoingModificiations(model);
+			for (Modification mod : collective.getOutgoingModifications()) {
 				logger.log(Level.DEBUG, "Add for ''{0}'' collective: {1}", collective.getKey(), mod);
 				unprocessed.add(mod);
 			}

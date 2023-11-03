@@ -66,6 +66,12 @@ public class CalculateCharTest {
         ar = item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
         assertArrayEquals(new int[]{17,0,0,0,0}, ar);
 
+        // Unarmed
+		CarriedItem<ItemTemplate> unarmed = character.getCarriedItem(ItemTemplate.UUID_UNARMED);
+		assertNotNull(unarmed);
+		System.out.println("Unarmed AR = "+unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING));
+        ar = unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
+        assertArrayEquals(new int[]{2,0,0,0,0}, ar);
 	}
 
 	//-------------------------------------------------------------------

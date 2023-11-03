@@ -65,7 +65,7 @@ public class ResetModifications implements ProcessingStep {
 		try {
 			// Attributes
 			for (AttributeValue<ShadowrunAttribute> val : model.getAttributes()) {
-				val.clearModifications();
+				val.clearIncomingModifications();
 			}
 			// Ensure base melee damage of 2
 			if (model.getAttribute(ShadowrunAttribute.MELEE_DAMAGE)!=null)
@@ -75,7 +75,7 @@ public class ResetModifications implements ProcessingStep {
 
 			// Skills
 			for (SR6SkillValue val : model.getSkillValues()) {
-				val.clearModifications();
+				val.clearIncomingModifications();
 			}
 
 			// Remove all auto-added items
@@ -105,7 +105,7 @@ public class ResetModifications implements ProcessingStep {
 			// Remove all auto-qualities or quality levels
 			for (QualityValue val : new ArrayList<>(model.getQualities())) {
 				boolean remove = val.isRemoveOnReset();
-				val.clearModifications();
+				val.clearIncomingModifications();
 				if (remove) {
 					logger.log(Level.WARNING, "Remove quality "+val);
 					model.removeQuality(val);
@@ -115,7 +115,7 @@ public class ResetModifications implements ProcessingStep {
 			// Remove all auto-qualities or quality levels
 			for (AdeptPowerValue val : new ArrayList<>(model.getAdeptPowers())) {
 				val.reset();
-				val.clearModifications();
+				val.clearIncomingModifications();
 //				if (remove) {
 //					logger.log(Level.DEBUG, "Remove quality "+val);
 //					model.removeQuality(val);
@@ -125,7 +125,7 @@ public class ResetModifications implements ProcessingStep {
 			// Remove all auto-metaechoes
 			for (MetamagicOrEchoValue val : new ArrayList<>(model.getMetamagicOrEchoes())) {
 				boolean remove = val.isAutoAdded();
-				val.clearModifications();
+				val.clearIncomingModifications();
 				if (remove) {
 					logger.log(Level.DEBUG, "Remove metaecho "+val);
 					model.removeMetamagicOrEcho(val);

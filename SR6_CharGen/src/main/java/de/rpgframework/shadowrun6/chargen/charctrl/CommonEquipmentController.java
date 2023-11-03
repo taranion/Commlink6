@@ -180,16 +180,16 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			switch (pmType) {
 			case CLOTHING:
 				if (subtype==ItemSubType.ARMOR_CLOTHES)
-					priceVal.addModification(toAdd);
+					priceVal.addIncomingModification(toAdd);
 				break;
 			case ARMOR:
 				if (type==ItemType.ARMOR || type==ItemType.ARMOR_ADDITION) {
 					System.err.println("Add extra "+extraCost+" to "+tmp+"   factor="+factor);
-					priceVal.addModification(toAdd);
+					priceVal.addIncomingModification(toAdd);
 				}
 				break;
 			case EVERYTHING:
-				priceVal.addModification(toAdd);
+				priceVal.addIncomingModification(toAdd);
 				break;
 			}
 		}

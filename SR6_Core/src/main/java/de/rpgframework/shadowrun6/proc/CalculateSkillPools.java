@@ -76,7 +76,7 @@ public class CalculateSkillPools implements ProcessingStep {
 		 */
 		pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(sVal.getDistributed(), sVal.getModifyable().getName(loc)));
 		// Add all natural modifiers
-		for (Modification tmp : sVal.getModifications()) {
+		for (Modification tmp : sVal.getIncomingModifications()) {
 			if (!(tmp instanceof ValueModification))
 				continue;
 			ValueModification mod = (ValueModification)tmp;
@@ -93,7 +93,7 @@ public class CalculateSkillPools implements ProcessingStep {
 
 		// Find all augmentations
 		int sumAugmentations=0;
-		for (Modification tmp : sVal.getModifications()) {
+		for (Modification tmp : sVal.getIncomingModifications()) {
 			if (!(tmp instanceof ValueModification))
 				continue;
 			ValueModification mod = (ValueModification)tmp;
@@ -126,7 +126,7 @@ public class CalculateSkillPools implements ProcessingStep {
 
 		/* Artificial */
 		int sumArt = 0;
-		for (Modification tmp : sVal.getModifications()) {
+		for (Modification tmp : sVal.getIncomingModifications()) {
 			if (!(tmp instanceof ValueModification))
 				continue;
 			ValueModification mod = (ValueModification)tmp;

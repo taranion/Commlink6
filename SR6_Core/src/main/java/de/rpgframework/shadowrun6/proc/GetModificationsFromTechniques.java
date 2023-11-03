@@ -41,7 +41,7 @@ public class GetModificationsFromTechniques implements ProcessingStep {
 				Technique techn = ref.getResolved();
 				logger.log(Level.WARNING, "TODO  add from technique "+techn.getId()+" / "+ref);
 				// Calculate modifications
-				ref.clearModifications();
+				ref.clearIncomingModifications();
 //				for (Modification mod : ref.getTechnique().getModifications()) {
 //					Modification realMod = ShadowrunTools.instantiateModification(mod, ref.getChoice(), 0);
 //					logger.log(Level.DEBUG, "  instantiated mod "+realMod);

@@ -67,15 +67,15 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 				switch (quality) {
 				case EXO:
 					if (essenceAttr!=null)
-					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
-					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), -(int)(priceAttr.getDistributed()*0.2), quality));
-					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), -1, quality));
+					essenceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
+					priceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), -(int)(priceAttr.getDistributed()*0.2), quality));
+					availAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), -1, quality));
 					break;
 				case OMEGA:
 					if (essenceAttr!=null)
-					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
-					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), -priceAttr.getDistributed()/2, quality));
-					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), -1, quality));
+					essenceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
+					priceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), -priceAttr.getDistributed()/2, quality));
+					availAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), -1, quality));
 					DataItemModification addBadLuck = new DataItemModification(ShadowrunReference.QUALITY, "bad_luck");
 					addBadLuck.setApplyTo(ApplyTo.CHARACTER);
 					addBadLuck.setSource(model);
@@ -83,33 +83,33 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 					break;
 				case USED:
 					if (essenceAttr!=null)
-					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
-					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), -priceAttr.getDistributed()/2, quality));
-					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), -1, quality));
+					essenceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
+					priceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), -priceAttr.getDistributed()/2, quality));
+					availAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), -1, quality));
 					break;
 				case ALPHA:
 					if (essenceAttr!=null)
-					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-200), quality));
-					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*0.2f), quality));
-					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +1, quality));
+					essenceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-200), quality));
+					priceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*0.2f), quality));
+					availAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +1, quality));
 					break;
 				case BETA:
 					if (essenceAttr!=null)
-					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-300f), quality));
-					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*0.5f), quality));
-					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +2, quality));
+					essenceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-300f), quality));
+					priceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*0.5f), quality));
+					availAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +2, quality));
 					break;
 				case DELTA:
 					if (essenceAttr!=null)
-					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-500), quality));
-					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*1.5f), quality));
-					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +3, quality));
+					essenceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-500), quality));
+					priceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*1.5f), quality));
+					availAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +3, quality));
 					break;
 				case GAMMA:
 					if (essenceAttr!=null)
-					essenceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-600), quality));
-					priceAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*2f), quality));
-					availAttr.addModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +6, quality));
+					essenceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*-600), quality));
+					priceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), Math.round(priceAttr.getDistributed()*2f), quality));
+					availAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), +6, quality));
 					break;
 				}
 //				System.exit(1);

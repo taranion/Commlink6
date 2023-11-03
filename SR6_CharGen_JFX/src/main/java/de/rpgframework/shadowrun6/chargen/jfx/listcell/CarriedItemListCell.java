@@ -57,9 +57,9 @@ public class CarriedItemListCell extends ACarriedItemListCell<ItemTemplate> {
 			if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
 				ItemAttributeFloatValue<SR6ItemAttribute> essVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
 				lbEssence.setText( essVal.getModifiedValue()+"");
-				if (essVal.getModifications().size()>0) {
+				if (essVal.getIncomingModifications().size()>0) {
 					//lbEssence.setText( essVal.getDistributed()+"("+essVal.getModifiedValue()+")");
-					lbEssence.setTooltip(new Tooltip(Shadowrun6Tools.toExplainStringFloat(essVal.getModifications())));
+					lbEssence.setTooltip(new Tooltip(Shadowrun6Tools.toExplainStringFloat(essVal.getIncomingModifications())));
 					lbEssence.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 				} else {
 					lbEssence.getStyleClass().remove(JavaFXConstants.STYLE_HEADING5);

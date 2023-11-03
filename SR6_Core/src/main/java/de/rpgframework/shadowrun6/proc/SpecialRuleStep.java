@@ -69,7 +69,7 @@ public class SpecialRuleStep implements ProcessingStep {
 			ValueModification mod = new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.WILLPOWER.name(), bonus);
 			mod.setSource(model.getQuality("cyber_singularity_seeker"));
 			mod.setSet(ValueType.AUGMENTED);
-			model.getAttribute(ShadowrunAttribute.WILLPOWER).addModification(mod);
+			model.getAttribute(ShadowrunAttribute.WILLPOWER).addIncomingModification(mod);
 		}
 	}
 
@@ -85,11 +85,11 @@ public class SpecialRuleStep implements ProcessingStep {
 			ValueModification mod = new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.AGILITY.name(), bonus);
 			mod.setSource(model.getQuality("redliner"));
 			mod.setSet(ValueType.AUGMENTED);
-			model.getAttribute(ShadowrunAttribute.AGILITY).addModification(mod);
+			model.getAttribute(ShadowrunAttribute.AGILITY).addIncomingModification(mod);
 			mod = new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.STRENGTH.name(), bonus);
 			mod.setSource(model.getQuality("redliner"));
 			mod.setSet(ValueType.AUGMENTED);
-			model.getAttribute(ShadowrunAttribute.STRENGTH).addModification(mod);
+			model.getAttribute(ShadowrunAttribute.STRENGTH).addIncomingModification(mod);
 		}
 		// Mark items as "not overclockable"
 		for (CarriedItem<ItemTemplate> limb : limbs) {

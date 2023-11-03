@@ -68,10 +68,10 @@ public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
 					int target = (int) (attrib.getDistributed() * type.getCostMultiplier());
 					int diff = target - attrib.getDistributed();
 					logger.log(Level.DEBUG, "Ammo type ''{0}'' multiplies with {1}, therefore add {2} Nuyen", dec.getValue(), type.getCostMultiplier(), diff);
-					attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), diff) );
+					attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), diff) );
 
 					List<Modification> passUp = new ArrayList<>();
-					for (Modification mod : type.getModifications()) {
+					for (Modification mod : type.getOutgoingModifications()) {
 						logger.log(Level.INFO, "Add modification {0} -> {1}",mod.getApplyTo(),mod);
 						if (mod.getApplyTo()==null || mod.getApplyTo()==ApplyTo.DATA_ITEM) {
 							if (mod.getReferenceType()==ShadowrunReference.ITEM_ATTRIBUTE) {
@@ -90,7 +90,7 @@ public class ApplyAmmunitionTypeStep implements CarriedItemProcessor {
 									model.setAttribute(key, attrib2);
 								} else {
 									logger.log(Level.DEBUG, "Add modification {0} to {1}", mod, attrib2);
-									attrib2.addModification(mod);
+									attrib2.addIncomingModification(mod);
 								}
 							}
 						} else

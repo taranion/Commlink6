@@ -53,7 +53,7 @@ public class ItemUtil {
 		def.setRawValue(tmp.substring(1, tmp.length()-1));
 		SOFTWARE_LIBRARY_ITEM.setAttribute(def);
 		SOFTWARE_LIBRARY_ITEM.setId("software_library");
-		SOFTWARE_LIBRARY_ITEM.addModifications(List.of(new ValueModification(ShadowrunReference.HOOK, ItemHook.SOFTWARE.name(), "99")));
+		SOFTWARE_LIBRARY_ITEM.addOutgoingModifications(List.of(new ValueModification(ShadowrunReference.HOOK, ItemHook.SOFTWARE.name(), "99")));
 
 		SOFTWARE_LIBRARY =  new CarriedItem<ItemTemplate>(SOFTWARE_LIBRARY_ITEM, null, CarryMode.VIRTUAL);
 		SOFTWARE_LIBRARY.addSlot(new AvailableSlot(ItemHook.SOFTWARE, 99));
@@ -69,7 +69,7 @@ public class ItemUtil {
 		ItemAttributeValue<?> val = ref.getAttributeRaw(attr);
 		if (val!=null) {
 			logger.log(Level.DEBUG, "Add modification to existing attribute: {0}",mod);
-			val.addModification(mod);
+			val.addIncomingModification(mod);
 			return;
 		}
 
@@ -240,7 +240,7 @@ public class ItemUtil {
 		for (ItemAttributeDefinition attr : item.getAttributes()) {
 			virtual.setAttribute(attr);
 		}
-		virtual.addModifications( item.getModifications() );
+		virtual.addOutgoingModifications( item.getOutgoingModifications() );
 		virtual.addFlags(item.getFlags());
 
 		Usage usage = item.getUsage(carry);
@@ -265,17 +265,17 @@ public class ItemUtil {
 			for (ItemAttributeDefinition attr : variant.getAttributes()) {
 				virtual.setAttribute(attr);
 			}
-			virtual.addModifications( variant.getModifications() );
+			virtual.addOutgoingModifications( variant.getOutgoingModifications() );
 			virtual.addFlags(variant.getFlags());
 		}
 
 		// If only one hook is present, use it as CAPACITY
-		long hooks = virtual.getModifications().stream()
+		long hooks = virtual.getOutgoingModifications().stream()
 			.filter(m -> m instanceof ValueModification)
 			.filter(m -> ((ValueModification)m).getReferenceType()==ShadowrunReference.HOOK)
 			.count();
 		if (hooks==1) {
-			ValueModification vMod = (ValueModification) virtual.getModifications().stream()
+			ValueModification vMod = (ValueModification) virtual.getOutgoingModifications().stream()
 					.filter(m -> m instanceof ValueModification)
 					.filter(m -> ((ValueModification)m).getReferenceType()==ShadowrunReference.HOOK)
 					.findFirst().get();

@@ -429,7 +429,7 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	private static void fillAccessories(ActorData actor, ItemTemplate item, Locale loc) {
-		for (Modification mod : item.getModifications()) {
+		for (Modification mod : item.getOutgoingModifications()) {
 			System.err.println("fillAccessories("+item.getId()+"): "+mod);
 			if (mod instanceof EmbedModification) {
 				EmbedModification embed = (EmbedModification)mod;

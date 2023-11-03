@@ -1446,7 +1446,7 @@ public class Shadowrun6Tools {
 //			}
 			// Now add modifiers from the skill
 			int augAllowed = 4;
-			for (Modification mod : sVal.getModifications()) {
+			for (Modification mod : sVal.getIncomingModifications()) {
 				if (mod.getReferenceType()==ShadowrunReference.SKILL && mod instanceof ValueModification) {
 					ValueModification sMod = (ValueModification)mod;
 					if (sMod.getResolvedKey()==skill && !sMod.isConditional() && sMod.getSet()!=ValueType.ARTIFICIAL && sMod.getSet()!=ValueType.MAX) {
@@ -2113,7 +2113,7 @@ public class Shadowrun6Tools {
 	// -------------------------------------------------------------------
 	public static List<DataItem> getInfluences(Modifyable val) {
 		List<DataItem> ret = new ArrayList<>();
-		for (Modification mod : val.getModifications()) {
+		for (Modification mod : val.getIncomingModifications()) {
 			if (mod.isConditional() || mod instanceof CheckModification) {
 				if (mod.getSource() == null) {
 					System.err.println("Shadowrun6Tools.getInfluences: No source for Modification " + mod);
@@ -2288,7 +2288,7 @@ public class Shadowrun6Tools {
 	public static int getDefenseRatingUsing(Shadowrun6Character model, CarriedItem<ItemTemplate> primary) {
 		int sum = 0;
 		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
-		for (Modification mod : aVal.getModifications()) {
+		for (Modification mod : aVal.getIncomingModifications()) {
 			if (mod.getSource() instanceof CarriedItem) {
 				CarriedItem<ItemTemplate> src = (CarriedItem<ItemTemplate>) mod.getSource();
 				if (!src.hasFlag(SR6ItemFlag.PRIMARY)) {

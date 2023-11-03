@@ -209,7 +209,7 @@ public class EquipmentCtrlTest {
 
 		// Check that it can be assigned to library as well
 		// ResetModifications creates SoftwareLibrary
-		(new ResetModifications(model)).process(ItemUtil.SOFTWARE_LIBRARY_ITEM.getModifications());
+		(new ResetModifications(model)).process(ItemUtil.SOFTWARE_LIBRARY_ITEM.getOutgoingModifications());
 		poss = ctrl.canBeEmbedded(model.getSoftwareLibrary(), ItemHook.SOFTWARE, needle, null,
 				new Decision(ItemTemplate.UUID_RATING, "3"),
 				new Decision(UUID.fromString("2baf4c6e-417b-4d1a-943c-edfa816d50bf"), "ares_predator_vi")
@@ -253,10 +253,10 @@ public class EquipmentCtrlTest {
 //		DataItemModification itemMod = new DataItemModification(ShadowrunReference.AUGMENTATION_QUALITY, AugmentationQuality.ALPHA.name());
 //		carried.addModification(itemMod);
 		ValueModification valMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), "ALPHA", AugmentationQuality.ALPHA);
-		carried.getAsObject(SR6ItemAttribute.QUALITY).addModification(valMod);
+		carried.getAsObject(SR6ItemAttribute.QUALITY).addIncomingModification(valMod);
 		assertEquals(AugmentationQuality.ALPHA, carried.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue());
 		ValueModification valMod2 = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), "DELTA", AugmentationQuality.DELTA);
-		carried.getAsObject(SR6ItemAttribute.QUALITY).addModification(valMod2);
+		carried.getAsObject(SR6ItemAttribute.QUALITY).addIncomingModification(valMod2);
 		assertEquals(AugmentationQuality.DELTA, carried.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue());
 
 //		SR6GearTool.recalculate("", model, carried);

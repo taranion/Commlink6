@@ -160,7 +160,7 @@ public class EquipmentTests {
 		assertEquals(7, ((Availability)ref.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
 		assertEquals(Legality.RESTRICTED, ((Availability)ref.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
 		assertEquals(5, ref.getCharacterModifications().size());
-		assertEquals(0, ref.getModifications().size());
+		assertEquals(0, ref.getIncomingModifications().size());
 	}
 
 	//-------------------------------------------------------------------
@@ -183,7 +183,7 @@ public class EquipmentTests {
 		for (Modification val : ref.getCharacterModifications()) {
 			System.out.println("C  = "+val);
 		}
-		for (Modification val : ref.getModifications()) {
+		for (Modification val : ref.getIncomingModifications()) {
 			System.out.println("I  = "+val);
 		}
 
@@ -192,7 +192,7 @@ public class EquipmentTests {
 		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
 		assertEquals(210000, attr.getModifiedValue());
 		assertEquals(2, ref.getCharacterModifications().size());
-		assertEquals(0, ref.getModifications().size());
+		assertEquals(0, ref.getIncomingModifications().size());
 	}
 
 	//-------------------------------------------------------------------

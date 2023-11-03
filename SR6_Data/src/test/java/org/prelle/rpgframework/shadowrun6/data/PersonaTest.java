@@ -53,8 +53,8 @@ public class PersonaTest {
 		ItemTemplate prog1 = Shadowrun6Core.getItem(ItemTemplate.class, "armor");
 		CarriedItem<ItemTemplate> prog1CI = SR6GearTool.buildItem(prog1, CarryMode.EMBEDDED, null, true).get();
 		System.out.println("testProgram: operationModeOptions="+prog1CI.getOperationModes(true));
-		assertNotNull(prog1CI.getModifications());
-		assertTrue(prog1CI.getModifications().isEmpty());
+		assertNotNull(prog1CI.getIncomingModifications());
+		assertTrue(prog1CI.getIncomingModifications().isEmpty());
 		assertNotNull(prog1CI.getCharacterModifications());
 		assertTrue("Mode not activated yet - should not have modifications",prog1CI.getCharacterModifications().isEmpty());
 

@@ -54,7 +54,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			break;
 		case ACTIVE_GEAR:
 		case DATA_ITEM:
-			model.addModification(realMod);
+			model.addIncomingModification(realMod);
 			break;
 		default:
 			logger.log(Level.WARNING, "Don't know how to decide for "+ apply);
@@ -153,16 +153,16 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			List<Modification> unprocessed) {
 
 		if (model.getResolved() != null) {
-			model.getResolved().getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
+			model.getResolved().getOutgoingModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
 		}
 		if (model.getVariant() != null) {
-			model.getVariant().getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
+			model.getVariant().getOutgoingModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
 		}
 		// Get modifications from enhancements
 		for (ItemEnhancementValue<AItemEnhancement> enh : model.getEnhancements()) {
 			SR6ItemEnhancement real = (SR6ItemEnhancement) enh.getResolved();
-			real.getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
-			model.getAsValue(SR6ItemAttribute.PRICE).addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), real.getPrice(), real));
+			real.getOutgoingModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
+			model.getAsValue(SR6ItemAttribute.PRICE).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), real.getPrice(), real));
 		}
 
 		for (OperationMode mode : model.getActiveOperationModes(true)) {

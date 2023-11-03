@@ -40,8 +40,8 @@ public class RecommenderTest {
 	@Test
 	public void test1() {
 		Recommender recommender = new Recommender();
-		recommender.addConfiguration( Shadowrun6Core.getItem(LevellingProfile.class,"pick_every_lock").getModifications() );
-		recommender.addConfiguration( Shadowrun6Core.getItem(LevellingProfile.class,"gun_master").getModifications() );
+		recommender.addConfiguration( Shadowrun6Core.getItem(LevellingProfile.class,"pick_every_lock").getOutgoingModifications() );
+		recommender.addConfiguration( Shadowrun6Core.getItem(LevellingProfile.class,"gun_master").getOutgoingModifications() );
 
 		assertEquals(RecommendationState.RECOMMENDED, recommender.getRecommendationState(Shadowrun6Core.getSkill("engineering")));
 		assertEquals(RecommendationState.RECOMMENDED, recommender.getRecommendationState(ShadowrunAttribute.LOGIC));
