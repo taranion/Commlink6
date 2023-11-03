@@ -129,6 +129,14 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 
 		// Now walk all melee weapons
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT)) {
+			// Remove eventually existing STRENGTH mod
+			for (Modification tmpRaw : item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifications()) {
+				ValueModification tmp = (ValueModification) tmpRaw;
+				if (tmp.getSource().equals(ShadowrunAttribute.STRENGTH)) {
+					item.getAsObject(SR6ItemAttribute.ATTACK_RATING).removeModification(tmp);
+				}
+			}
+
 			if (strARMod!=null && item.getUuid()!=ItemTemplate.UUID_UNARMED) {
 				item.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(strARMod);
 				logger.log(Level.TRACE, "Add {0} to attack rating for {1}", strARMod, item.getKey());
