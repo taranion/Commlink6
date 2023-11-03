@@ -44,7 +44,8 @@ public class FilteredDatasetTest {
 	public void setup() {
 		model = new Shadowrun6Character();
 		preMods.clear();
-		charGen = new KarmaCharacterGenerator(model,null) ;
+		charGen = new KarmaCharacterGenerator() ;
+		charGen.setModel(model, null);
 		charGen.runProcessors();
 	}
 

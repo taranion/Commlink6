@@ -47,8 +47,10 @@ public class PointBuyMetatypeController extends CommonMetatypeGenerator {
 
 		availableOptions.clear();
 		for (SR6MetaType meta : Shadowrun6Core.getItemList(SR6MetaType.class)) {
-			if (!parent.showDataItem(meta))
+			if (!parent.showDataItem(meta)) {
+				logger.log(Level.WARNING, "Skipping "+meta.getName());
 				continue;
+			}
 			MetaTypeOption opt = new MetaTypeOption(meta, meta.getKarma());
 			opt.setSpecialAttributePoints(0);
 			availableOptions.put(meta, opt);

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.rpgframework</groupId>
 		<artifactId>shadowrun6-master</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>shadowrun6-cards</artifactId>
 	<name>SR6_Cards</name>

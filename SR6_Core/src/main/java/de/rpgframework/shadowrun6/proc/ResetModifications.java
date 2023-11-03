@@ -67,6 +67,11 @@ public class ResetModifications implements ProcessingStep {
 			for (AttributeValue<ShadowrunAttribute> val : model.getAttributes()) {
 				val.clearModifications();
 			}
+			// Ensure base melee damage of 2
+			if (model.getAttribute(ShadowrunAttribute.MELEE_DAMAGE)!=null)
+				model.getAttribute(ShadowrunAttribute.MELEE_DAMAGE).setDistributed(2);
+			else
+				model.setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.MELEE_DAMAGE, 2));
 
 			// Skills
 			for (SR6SkillValue val : model.getSkillValues()) {

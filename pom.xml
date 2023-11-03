@@ -5,7 +5,7 @@
 
 	<groupId>de.rpgframework</groupId>
 	<artifactId>shadowrun6-master</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>Shadowrun6 Master</name>
 	<packaging>pom</packaging>
 
@@ -25,9 +25,9 @@
 		<log4j.version>2.19.0</log4j.version>
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
-		<revision>0.0.2-SNAPSHOT</revision>
-		<rpgfw.version>5.1.4-SNAPSHOT</rpgfw.version>
-		<maven.deploy.skip>true</maven.deploy.skip>
+		<revision>0.0.3-SNAPSHOT</revision>
+		<rpgfw.version>5.1.5-SNAPSHOT</rpgfw.version>
+		<maven.deploy.skip>false</maven.deploy.skip>
 	</properties>
 
 	<modules>
@@ -65,6 +65,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
+				<artifactId>rpgframework-generator</artifactId>
+				<version>${rpgfw.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-core</artifactId>
 				<version>0.0.3-SNAPSHOT</version>
 			</dependency>
@@ -91,6 +96,11 @@
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun6-chargen</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.rpgframework</groupId>
+				<artifactId>shadowrun6-chargen-jfx</artifactId>
 				<version>${revision}</version>
 			</dependency>
 
@@ -125,11 +135,11 @@
 		<url>https://bitbucket.org/rpgframework-cloud/shadowrun-common/pipelines/</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:git:git@bitbucket.org:rpgframework-cloud/shadowrun-common.git</connection>
-		<developerConnection>scm:git:git@bitbucket.org:rpgframework-cloud/shadowrun-common.git</developerConnection>
-		<url>https://bitbucket.org/rpgframework-cloud/shadowrun-common/</url>
-		<tag>HEAD</tag>
+  		<connection>scm:git:git://bitbucket.org/rpgframework-cloud/shadowrun6.git</connection>
+ 		<developerConnection>scm:git:ssh://bitbucket.org:rpgframework-cloud/shadowrun6.git</developerConnection>
+  		<url>https://bitbucket.org/rpgframework-cloud/shadowrun6/src</url>
 	</scm>
+
 
 	<repositories>
 		<repository>
@@ -140,6 +150,18 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
 		<plugins>

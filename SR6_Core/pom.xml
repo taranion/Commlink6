@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.rpgframework</groupId>
 		<artifactId>shadowrun6-master</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>shadowrun6-core</artifactId>
 	<name>SR6_Core</name>
@@ -32,7 +32,6 @@
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>rpgframework-generator</artifactId>
-			<version>5.1.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>

@@ -33,7 +33,7 @@
    </quality>
    <quality id="dermal_deposits"  	  karma="7" pos="true" type="NORMAL" >
      <modifications>
-       <valmod type="ATTRIBUTE" ref="MELEE_DAMAGE" value="1" set="NATURAL" />
+       <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" set="NATURAL" apply="UNARMED"/>
        <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" set="NATURAL" />
        <itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" />
      </modifications>

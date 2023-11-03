@@ -9,17 +9,21 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
+import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
@@ -95,6 +99,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			unarmed.setAttribute(SR6ItemAttribute.SKILL, new ItemAttributeObjectValue<>(SR6ItemAttribute.SKILL, Shadowrun6Core.getSkill("close_combat")));
 			unarmed.setAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION, new ItemAttributeObjectValue<>(SR6ItemAttribute.SKILL_SPECIALIZATION, Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed")));
 			unarmed.setInjectedBy("CORE");
+
 			model.addVirtualCarriedItem(unarmed);
 			logger.log(Level.INFO, "Add natural weapon 'unarmed'");
 			unarmed.setResolved(unarmedDef);
@@ -104,6 +109,8 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 				model.removeCarriedItem(unarmed);
 			}
 		}
+		applyGlobalItemModificatios(model, unarmed);
+		checkUnarmedIsPhysical(model, unarmed);
 		SR6GearTool.recalculate("", model, unarmed);
 
 		// Prepare modifications to add
@@ -129,6 +136,14 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 
 		// Now walk all melee weapons
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT)) {
+			// Remove eventually existing STRENGTH mod
+			for (Modification tmpRaw : item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifications()) {
+				ValueModification tmp = (ValueModification) tmpRaw;
+				if (tmp.getSource().equals(ShadowrunAttribute.STRENGTH)) {
+					item.getAsObject(SR6ItemAttribute.ATTACK_RATING).removeModification(tmp);
+				}
+			}
+
 			if (strARMod!=null && item.getUuid()!=ItemTemplate.UUID_UNARMED) {
 				item.getAsObject(SR6ItemAttribute.ATTACK_RATING).addModification(strARMod);
 				logger.log(Level.TRACE, "Add {0} to attack rating for {1}", strARMod, item.getKey());
@@ -168,6 +183,35 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 //				}
 //			}
 		return unprocessed;
+	}
+
+	private void clearOldItemModificatios(Shadowrun6Character model, CarriedItem<ItemTemplate> unarmed) {
+		for (ItemAttributeValue<IItemAttribute> val : unarmed.getAttributes()) {
+			val.clearModifications();
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void applyGlobalItemModificatios(Shadowrun6Character model, CarriedItem<ItemTemplate> unarmed) {
+		clearOldItemModificatios(model, unarmed);
+
+		for (Modification mod : model.getItemModifications()) {
+			if (mod.getApplyTo()==ApplyTo.UNARMED || mod.getApplyTo()==ApplyTo.MELEE) {
+				ValueModification vMod = (ValueModification)mod;
+				SR6ItemAttribute attr = vMod.getResolvedKey();
+				unarmed.getAttributeRaw(attr).addModification(vMod);
+				logger.log(Level.INFO, "Add modification {0} to UNARMED = {1}", vMod, unarmed.getAttributeRaw(attr));
+			}
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void checkUnarmedIsPhysical(Shadowrun6Character model, CarriedItem<ItemTemplate> unarmed) {
+		Damage dmg = unarmed.getAsObject(SR6ItemAttribute.DAMAGE).getValue();
+		if (dmg.getType()==DamageType.STUN && model.hasRuleFlag(SR6RuleFlag.UNARMED_DAMAGE_IS_PHYSICAL)) {
+			logger.log(Level.INFO, "Apply UNARMED_DAMAGE_IS_PHYSICAL");
+			dmg.setType(DamageType.PHYSICAL);
+		}
 	}
 
 }
