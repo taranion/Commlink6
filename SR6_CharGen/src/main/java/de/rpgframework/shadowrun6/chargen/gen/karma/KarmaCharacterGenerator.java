@@ -5,9 +5,12 @@ import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.RuleController;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -241,6 +244,21 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 	@Override
 	public void finish() {
 		logger.log(Level.WARNING, "TODO: finish###############################################################");
+
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			AttributeValue<ShadowrunAttribute> attr = model.getAttribute(key);
+			//attr.setDistributed(attr.)
+			logger.log(Level.WARNING, "Finalize {0} to {1}", key, attr.getModifiedValue(ValueType.NATURAL));
+			attr.setStart(attr.getModifiedValue(ValueType.NATURAL));
+			attr.setDistributed(attr.getModifiedValue(ValueType.NATURAL));
+		}
+
+		// Power points
+		AttributeValue<ShadowrunAttribute> attr = model.getAttribute(ShadowrunAttribute.POWER_POINTS);
+		//attr.setDistributed(attr.)
+		logger.log(Level.WARNING, "Finalize {0} to {1}", attr.getModifyable(), attr.getModifiedValue(ValueType.NATURAL));
+		attr.setStart(attr.getModifiedValue(ValueType.NATURAL));
+		attr.setDistributed(attr.getModifiedValue(ValueType.NATURAL));
 
 		super.finish();
 	}
