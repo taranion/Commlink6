@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Guizhen Shields -->
+   <item id="guizhen_shield_glasses" avail="5" price="1500" type="ACCESSORY" subtype="OPTICAL">
+	  	<usage mode="EMBEDDED" slot="OPTICAL" value="4"/>
+   </item>
+   <item id="guizhen_shield_visor" avail="5" price="1800" type="ACCESSORY" subtype="OPTICAL">
+	  	<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="5"/>
+   </item>
+
+</items>

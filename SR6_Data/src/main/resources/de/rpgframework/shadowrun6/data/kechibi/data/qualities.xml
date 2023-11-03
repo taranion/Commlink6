@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+	<quality id="chopsticks" karma="3" pos="true" type="NORMAL" />
+	<quality id="kai_takker" karma="3" pos="true" type="NORMAL" />
+	<quality id="corp_scapegoat" karma="5" pos="false" type="NORMAL">
+		<choices>
+			<choice type="TEXT" ref="description" uuid="4ecd3877-344f-4747-9f4a-dce0e1268abd" />
+		</choices>
+	</quality>
+	<quality id="k_puppet_trauma" karma="3" pos="false" type="NORMAL" />
+   
+</qualities>

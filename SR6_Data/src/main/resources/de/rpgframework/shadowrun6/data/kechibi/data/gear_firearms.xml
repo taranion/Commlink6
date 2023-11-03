@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Emitter -->
+	<item id="guizhen_1_handheld" avail="6I" price="2000" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<weapon dmg="5S" mode="SS" attack="10,6,,," ammo="20(c)" skill="exotic_weapons" spec="exotic_weapons/emitter" />
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
+	</item>
+	<item id="guizhen_1_flash_scope" avail="8I" price="5000" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<weapon dmg="5S" mode="SS/SA" attack="10,7,3,," ammo="20(c)" skill="exotic_weapons" spec="exotic_weapons/emitter" />
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
+	</item>
+	<item id="guizhen_1_mob_light" avail="8I" price="9500" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<weapon dmg="5S" mode="SS/SA" attack="12,9,4,," ammo="50(c)" skill="exotic_weapons" spec="exotic_weapons/emitter" />
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
+	</item>
+
+	<item id="guizhen_2_storm_shield" avail="7I" price="6000" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<weapon dmg="10S" mode="SS/SA" attack="9,8,1,," ammo="12(c)" skill="exotic_weapons" spec="exotic_weapons/emitter" />
+		<attrdef id="WEAPON_SIZE" value="BIG"/>
+	</item>
+	<item id="guizhen_2_pulse_hammer" avail="8I" price="12000" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<weapon dmg="10S" mode="SS/SA" attack="10,9,6,," ammo="12(c)" skill="exotic_weapons" spec="exotic_weapons/emitter" />
+		<attrdef id="WEAPON_SIZE" value="BIG"/>
+	</item>
+	<item id="guizhen_2_hall_of_tears" avail="7I" price="15000" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<weapon dmg="10S" mode="SS" attack="12,9,,," ammo="0" skill="exotic_weapons" spec="exotic_weapons/emitter" />
+	</item>
+  
+</items>

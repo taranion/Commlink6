@@ -173,6 +173,7 @@ public class Shadowrun6DataPlugin  {
 			initKrime();
 			initCollapsing();
 			initSlip();
+			initKechibi();
 			initDPAlpen();
 			initBerlin();
 			initDPFeuerläufer();
@@ -642,6 +643,21 @@ public class Shadowrun6DataPlugin  {
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "SLIP_STREAMS", "slip_streams.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.BACKGROUND);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "slip_streams/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+	}
+
+	//-------------------------------------------------------------------
+	private void initKechibi() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------Kechibi Code-----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "KECHIBI", "kechibi.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.BACKGROUND);
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"kechibi/data/gear_firearms.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"kechibi/data/gear_vision.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vision systems");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "kechibi/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 	}
 
