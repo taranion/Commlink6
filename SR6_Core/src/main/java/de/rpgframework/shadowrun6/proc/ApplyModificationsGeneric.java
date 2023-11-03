@@ -92,6 +92,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 						return applySkill(model, mod);
 				case ITEM_ATTRIBUTE:
 				case ACTION:
+					logger.log(Level.INFO, "Add global item modification {0}", mod);
 					model.addItemModification(mod); return true;
 				default:
 					logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
@@ -117,6 +118,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
 				logger.log(Level.DEBUG, "process "+tmp+" / "+tmp.getApplyTo());
+
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
 				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
@@ -139,6 +141,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 						logger.log(Level.ERROR, "Error applying "+tmp+" from "+tmp.getSource(),e);
 					}
 				} else {
+					logger.log(Level.INFO, "Unprocessed "+tmp);
 					unprocessed.add(tmp);
 				}
 			}
