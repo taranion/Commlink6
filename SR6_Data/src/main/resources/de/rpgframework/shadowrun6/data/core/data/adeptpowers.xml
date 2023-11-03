@@ -19,7 +19,7 @@
    </power>
    <power id="critical_strike"   cost="1" hasLevel="true" act="PASSIVE">
      <modifications>
-        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" mode="WEAPON_CLOSE_COMBAT" />
+        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" mode="WEAPON_CLOSE_COMBAT" apply="MELEE"/>
      </modifications>
    </power>
    <power id="danger_sense"      cost="0.5" act="PASSIVE" />
@@ -27,7 +27,7 @@
    <power id="enhanced_perception" cost="0.5" act="PASSIVE" />
    <power id="enhanced_accuracy" cost="0.5" act="PASSIVE">
      <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,2,2,2,2" apply="CHARACTER"/>
      </modifications>
    </power>
    <power id="improved_ability"  cost="0.5" hasLevel="true" act="PASSIVE" multi="yes">

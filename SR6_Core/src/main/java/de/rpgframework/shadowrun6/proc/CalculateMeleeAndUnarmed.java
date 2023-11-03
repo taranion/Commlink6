@@ -191,11 +191,12 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 		}
 	}
 
+	//-------------------------------------------------------------------
 	private void applyGlobalItemModificatios(Shadowrun6Character model, CarriedItem<ItemTemplate> unarmed) {
 		clearOldItemModificatios(model, unarmed);
 
 		for (Modification mod : model.getItemModifications()) {
-			if (mod.getApplyTo()==ApplyTo.UNARMED) {
+			if (mod.getApplyTo()==ApplyTo.UNARMED || mod.getApplyTo()==ApplyTo.MELEE) {
 				ValueModification vMod = (ValueModification)mod;
 				SR6ItemAttribute attr = vMod.getResolvedKey();
 				unarmed.getAttributeRaw(attr).addModification(vMod);
@@ -204,6 +205,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 		}
 	}
 
+	//-------------------------------------------------------------------
 	private void checkUnarmedIsPhysical(Shadowrun6Character model, CarriedItem<ItemTemplate> unarmed) {
 		Damage dmg = unarmed.getAsObject(SR6ItemAttribute.DAMAGE).getValue();
 		if (dmg.getType()==DamageType.STUN && model.hasRuleFlag(SR6RuleFlag.UNARMED_DAMAGE_IS_PHYSICAL)) {

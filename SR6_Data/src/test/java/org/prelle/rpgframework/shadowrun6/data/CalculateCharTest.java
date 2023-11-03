@@ -13,6 +13,8 @@ import org.junit.Test;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
+import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -91,6 +93,14 @@ public class CalculateCharTest {
         assertEquals(DamageType.PHYSICAL, dmg.getType());
 
         // Add adept power critical strike
+        AdeptPowerValue adept = new AdeptPowerValue(Shadowrun6Core.getItem(AdeptPower.class, "critical_strike"),2);
+		model.addAdeptPower(adept);
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
+        unarmed = model.getCarriedItem(ItemTemplate.UUID_UNARMED);
+		dmg = unarmed.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
+		assertNotNull(dmg);
+        assertEquals(5, dmg.getValue());
+        assertEquals(DamageType.PHYSICAL, dmg.getType());
 
 	}
 

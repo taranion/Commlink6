@@ -121,7 +121,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
-				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED
+				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER || tmp.getApplyTo()==ApplyTo.UNARMED || tmp.getApplyTo()==ApplyTo.MELEE
 						|| tmp.getReferenceType()==ShadowrunReference.ADEPT_POWER
 						|| tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE
 						|| tmp.getReferenceType()==ShadowrunReference.CRITTER_POWER
