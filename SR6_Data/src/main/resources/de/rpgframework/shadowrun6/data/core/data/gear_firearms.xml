@@ -18,7 +18,7 @@
 			<itemmod type="HOOK" ref="TOP" />
 		</modifications>
 		<weapon dmg="4S(e)" attack="9,9,,," mode="SS" ammo="4(m)" skill="firearms" spec="firearms/tasers" />
-		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS" id="melee">
 			<weapon dmg="3S" attack="6,,,,"  skill="close_combat" spec="close_combat/clubs"/>
 		</alternate>
 	</item>

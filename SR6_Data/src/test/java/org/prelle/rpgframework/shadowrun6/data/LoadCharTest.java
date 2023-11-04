@@ -72,4 +72,16 @@ public class LoadCharTest {
         }
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void loadStreetSam() throws IOException {
+		String name = "Takeda";
+		FileInputStream fis = new FileInputStream("src/test/resources/testdata/"+ name + ".xml");
+		byte[] data = fis.readAllBytes();
+        Shadowrun6Character character = Shadowrun6Core.decode(data);
+
+        Shadowrun6Tools.resolveChar(character);
+        Shadowrun6Tools.runProcessors(character, Locale.getDefault());
+	}
+
 }

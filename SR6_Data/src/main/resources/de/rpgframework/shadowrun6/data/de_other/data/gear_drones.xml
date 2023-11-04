@@ -83,7 +83,7 @@
 
    <item avail="8L" price="45000" id="mk_jagdhund_ii"  type="DRONE_LARGE" subtype="GROUND" >
       <vehicle han="2/6" acc="25" spdi="30" tspd="250" bod="8" arm="6" pil="5" sen="3" sea="1"/>
-	  <alternate mode="VEHICLE" type="VEHICLES" subtype="BIKES">
+	  <alternate mode="VEHICLE" type="VEHICLES" subtype="BIKES" id="bike">
       </alternate>
       <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />

@@ -8,7 +8,7 @@
 
    <item avail="5"  price="18500" id="m-k-revolution" type="VEHICLES" subtype="BIKES">
       <vehicle han="3/5" acc="25" spdi="25" tspd="220" bod="7" arm="6" pil="2" sen="2" sea="1"/>
-	  <alternate mode="VEHICLE" type="VEHICLES" subtype="PWC">
+	  <alternate mode="VEHICLE" type="VEHICLES" subtype="PWC" id="pwc">
       </alternate>
       <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="boat" />

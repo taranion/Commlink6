@@ -11,8 +11,6 @@
    </item>
 
    <item avail="4"  price="350000" id="selkie" type="VEHICLES" subtype="SUBMARINES">
-      <alternate mode="VEHICLE" type="VEHICLES" subtype="BOATS">
-      </alternate>
       <vehicle han="3" acc="20" spdi="20" tspd="80" bod="10" arm="8" pil="3" sen="3" sea="4"/>
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="submarine" />
@@ -89,8 +87,6 @@
 
  <!-- Submarines -->
    <item avail="3"  price="5500" id="dreizack" type="VEHICLES" subtype="SUBMARINES" >
-      <alternate mode="VEHICLE" type="DRONE_MEDIUM" subtype="AQUATIC">
-      </alternate>
       <vehicle han="2" acc="8" spdi="10" tspd="25" bod="4" arm="5" pil="3" sen="2" sea="1"/>
       <modifications>
 		<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="1" />

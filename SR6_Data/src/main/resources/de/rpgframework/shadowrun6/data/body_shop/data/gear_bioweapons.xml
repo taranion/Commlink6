@@ -5,14 +5,14 @@
       <variant id="blade">
       	<usage mode="IMPLANTED" value="0.15"/>
       	<attrdef id="PRICE" value="5000"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="3P" attack="7,,,," skill="exotic_weapons" spec="exotic_weapons/biosprayer"/>
      		</alternate>
       </variant>
       <variant id="claws">
       	<usage mode="IMPLANTED" value="0.1"/>
       	<attrdef id="PRICE" value="7500"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="2P" attack="7,,,," skill="exotic_weapons" spec="exotic_weapons/biosprayer"/>
      		</alternate>
       </variant>
@@ -20,7 +20,7 @@
 
    <item id="biosprayer" avail="5" price="25000" type="BIOWARE" subtype="BIOWARE_WEAPON">
       <flags><flag>AUGMENTATION</flag></flags>
-     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      		<weapon  dmg="0" attack="4,1,,," skill="exotic_weapons" spec="exotic_weapons/biosprayer"/>
      	</alternate>
       <variant id="blind1">
@@ -63,7 +63,7 @@
 		</choices>
       <usage mode="IMPLANTED" value="$RATING*0.1"/>
       <flags><flag>AUGMENTATION</flag></flags>
-     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      		<weapon  dmg="2P" attack="4,,,," skill="exotic_weapons" spec="exotic_weapons/spitter"/>
      	</alternate>
    </item>
@@ -71,7 +71,7 @@
       <flags><flag>AUGMENTATION</flag></flags>
       <variant id="non_retractable">
       	<usage mode="IMPLANTED" value="0.05"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="2P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>
       </variant>
@@ -79,7 +79,7 @@
       	<usage mode="IMPLANTED" value="0.15"/>
       	<attrdef id="PRICE" value="1500"/>
       	<attrdef id="AVAILABILITY" value="4"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>
       </variant>
@@ -87,7 +87,7 @@
    <item id="horns" avail="3" price="500" type="BIOWARE" subtype="BIOWARE_WEAPON">
       <usage mode="IMPLANTED" value="0.1"/>
       <flags><flag>AUGMENTATION</flag></flags>
-     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      		<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed"/>
      	</alternate>
    </item>
@@ -100,7 +100,7 @@
       <flags><flag>AUGMENTATION</flag></flags>
       <variant id="tiny">
       	<usage mode="IMPLANTED" value="0.05"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>
       </variant>
@@ -108,7 +108,7 @@
       	<usage mode="IMPLANTED" value="0.1"/>
       	<attrdef id="PRICE" value="2500"/>
       	<attrdef id="AVAILABILITY" value="4"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="2P" attack="5,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>
       </variant>
@@ -116,7 +116,7 @@
       	<usage mode="IMPLANTED" value="0.15"/>
       	<attrdef id="PRICE" value="8000"/>
       	<attrdef id="AVAILABILITY" value="4"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>
       </variant>
@@ -133,7 +133,7 @@
       <flags><flag>AUGMENTATION</flag></flags>
       <variant id="tiny">
       	<usage mode="IMPLANTED" value="0.1"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="1P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>
       </variant>
@@ -141,7 +141,7 @@
       	<usage mode="IMPLANTED" value="0.15"/>
       	<attrdef id="PRICE" value="500"/>
       	<attrdef id="AVAILABILITY" value="4"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>
       </variant>
@@ -149,7 +149,7 @@
       	<usage mode="IMPLANTED" value="0.25"/>
       	<attrdef id="PRICE" value="1000"/>
       	<attrdef id="AVAILABILITY" value="8L"/>
-     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="3P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>
       </variant>
@@ -157,7 +157,7 @@
    <item id="quills" avail="6" price="2500" type="BIOWARE" subtype="BIOWARE_WEAPON">
       <usage mode="IMPLANTED" value="0.25"/>
       <flags><flag>AUGMENTATION</flag></flags>
-     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      		<weapon  dmg="3P" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/quills"/>
      	</alternate>
    </item>
