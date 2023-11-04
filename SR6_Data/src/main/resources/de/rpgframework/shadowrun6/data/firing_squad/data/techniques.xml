@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <techniques>
   <technique cat="WEAPON"   id="ballestra" >
-    <modifications></modifications>    
-  </technique> 
-  <technique cat="WEAPON"   id="baton_lock" /> 
-  <technique cat="MOBILITY" id="bending_of_the_reed_melee"/> 
-  <technique cat="MOBILITY" id="bending_of_the_reed_ranged" /> 
-  <technique cat="RANGED"   id="close_quarter_firearms_handguns" /> 
-  <technique cat="RANGED"   id="close_quarter_firearms" /> 
-  <technique cat="MOBILITY" id="defiant_dance" /> 
-  <technique cat="STRIKING" id="dim_mak" /> 
-  <technique cat="MOBILITY" id="drunken_boxing" /> 
-  <technique cat="MOBILITY" id="elbows_tight"> 
+    <modifications></modifications>
+  </technique>
+  <technique cat="WEAPON"   id="baton_lock" />
+  <technique cat="MOBILITY" id="bending_of_the_reed_melee"/>
+  <technique cat="MOBILITY" id="bending_of_the_reed_ranged" />
+  <technique cat="RANGED"   id="close_quarter_firearms_handguns" />
+  <technique cat="RANGED"   id="close_quarter_firearms" />
+  <technique cat="MOBILITY" id="defiant_dance" />
+  <technique cat="STRIKING" id="dim_mak" />
+  <technique cat="MOBILITY" id="drunken_boxing" />
+  <technique cat="MOBILITY" id="elbows_tight">
     <modifications><checkmod type="ACTION" ref="block" value="1" what="EDGE_ONLY_TEST" cond="no_weapon"/></modifications>
-  </technique> 
-  <technique cat="WEAPON"   id="end_them_rightly" /> 
-  <technique cat="WEAPON"   id="entanglement" /> 
-  <technique cat="GENERAL"  id="feint" /> 
+  </technique>
+  <technique cat="WEAPON"   id="end_them_rightly" />
+  <technique cat="WEAPON"   id="entanglement" />
+  <technique cat="GENERAL"  id="feint" />
   <technique cat="STRIKING" id="flying_kick">
     <requires>
       <datareq type="TECHNIQUE" ref="kick_attack"/>
     </requires>
-  </technique> 
-  <technique cat="GRAPPLING" id="ground_fighter" /> 
-  <technique cat="WEAPON"   id="half_sword" /> 
-  <technique cat="WEAPON"   id="iaijutsu" /> 
-  <technique cat="STRIKING" id="iron_limbs" > 
-    <modifications><valmod type="ATTRIBUTE" ref="MELEE_DAMAGE"  value="1"/></modifications>
-  </technique> 
-  <technique cat="GRAPPLING" id="jiao_di" /> 
-  <technique cat="GRAPPLING" id="joint_lock" /> 
-  <technique cat="STRIKING" id="kick_attack" /> 
-  <technique cat="STRIKING" id="mean_right_hook" > 
+  </technique>
+  <technique cat="GRAPPLING" id="ground_fighter" />
+  <technique cat="WEAPON"   id="half_sword" />
+  <technique cat="WEAPON"   id="iaijutsu" />
+  <technique cat="STRIKING" id="iron_limbs" >
+    <modifications><valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" set="NATURAL" apply="UNARMED"/></modifications>
+  </technique>
+  <technique cat="GRAPPLING" id="jiao_di" />
+  <technique cat="GRAPPLING" id="joint_lock" />
+  <technique cat="STRIKING" id="kick_attack" />
+  <technique cat="STRIKING" id="mean_right_hook" >
     <modifications><checkmod type="ACTION" ref="knockout_blow" value="1" what="EDGE_COST_MALUS"/></modifications>
-  </technique> 
+  </technique>
   <technique cat="STRIKING" id="meridian_strike">
     <requires>
       <datareq type="ADEPT_POWER" ref="killing_hands"/>
     </requires>
-  </technique> 
-  <technique cat="MOBILITY" id="multi_opponent_combat" /> 
-  <technique cat="MOBILITY" id="multi_opponent_defense" /> 
-  <technique cat="GENERAL"  id="neijia" /> 
-  <technique cat="MOBILITY" id="oaken_stance" /> 
-  <technique cat="WEAPON"   id="parry" > 
+  </technique>
+  <technique cat="MOBILITY" id="multi_opponent_combat" />
+  <technique cat="MOBILITY" id="multi_opponent_defense" />
+  <technique cat="GENERAL"  id="neijia" />
+  <technique cat="MOBILITY" id="oaken_stance" />
+  <technique cat="WEAPON"   id="parry" >
     <modifications><checkmod type="ACTION" ref="block" value="1" what="EDGE_ONLY_TEST" cond="with_weapon"/></modifications>
-  </technique> 
-  <technique cat="WEAPON"   id="pin" /> 
-  <technique cat="WEAPON"   id="precision_strike_blades" /> 
-  <technique cat="WEAPON"   id="precision_strike_clubs" /> 
-  <technique cat="WEAPON"   id="precision_strike_exotic" /> 
+  </technique>
+  <technique cat="WEAPON"   id="pin" />
+  <technique cat="WEAPON"   id="precision_strike_blades" />
+  <technique cat="WEAPON"   id="precision_strike_clubs" />
+  <technique cat="WEAPON"   id="precision_strike_exotic" />
   <technique cat="GRAPPLING,STRIKING" id="releasing_talons" >
     <modifications><checkmod type="ACTION" ref="wrest" value="1" what="EDGE_COST_MALUS"/></modifications>
-  </technique>    
-  <technique cat="MOBILITY"   id="rolling_clouds" /> 
-  <technique cat="GRAPPLING" id="sacrifice_throw" /> 
-  <technique cat="GENERAL"  id="striking_the_darkness" /> 
-  <technique cat="GRAPPLING,STRIKING" id="sweep_the_leg"> 
+  </technique>
+  <technique cat="MOBILITY"   id="rolling_clouds" />
+  <technique cat="GRAPPLING" id="sacrifice_throw" />
+  <technique cat="GENERAL"  id="striking_the_darkness" />
+  <technique cat="GRAPPLING,STRIKING" id="sweep_the_leg">
     <modifications><checkmod type="ACTION" ref="trip" value="1" what="EDGE_ONLY_TEST" cond="unarmed"/></modifications>
-  </technique>    
-  <technique cat="STRIKING" id="tameshiwari" /> 
-  <technique cat="WEAPON"   id="threatening_edge" /> 
-  <technique cat="GRAPPLING" id="ti_khao" /> 
-  <technique cat="GENERAL"  id="tricking" /> 
-  <technique cat="WEAPON"   id="two_weapon_fighting" /> 
+  </technique>
+  <technique cat="STRIKING" id="tameshiwari" />
+  <technique cat="WEAPON"   id="threatening_edge" />
+  <technique cat="GRAPPLING" id="ti_khao" />
+  <technique cat="GENERAL"  id="tricking" />
+  <technique cat="WEAPON"   id="two_weapon_fighting" />
   <technique cat="GENERAL"  id="weapon_breaker" >
     <modifications><checkmod type="ACTION" ref="called_shot_disarm" value="1" what="EDGE_COST_MALUS"/></modifications>
-  </technique>    
+  </technique>
 </techniques>
