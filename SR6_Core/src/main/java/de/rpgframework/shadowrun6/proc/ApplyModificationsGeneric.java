@@ -118,7 +118,12 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		try {
 			// Walk modifications for creation points
 			for (Modification tmp : previous) {
-				logger.log(Level.DEBUG, "process "+tmp+" / "+tmp.getApplyTo());
+				logger.log(Level.DEBUG, "process {0} / {1}",tmp,tmp.getApplyTo());
+
+				if (tmp.getSource()!=null && model.isForbiddenSource(tmp.getSource())) {
+					logger.log(Level.WARNING, "Ignore {0} from forbidden source {1}", tmp, tmp.getSource());
+					continue;
+				}
 
 				if (tmp instanceof AllowModification) {
 					unprocessed.add(tmp);
@@ -393,7 +398,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());
 		}
 
-		logger.log(Level.DEBUG, "Add {0} with decisions {1}",mod,mod.getDecisions());
+		logger.log(Level.WARNING, "Add {0} with decisions {1}",mod,mod.getDecisions());
 		if (value == null) {
 			value = new QualityValue(item, 0);
 			// Handle decisions

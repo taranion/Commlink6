@@ -316,10 +316,8 @@
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
           <itemmod type="QUALITY" ref="dermal_deposits" remove="true" apply="CHARACTER"/>
+   		 <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$RATING" apply="CHARACTER" set="NATURAL"/>
       </modifications>
-     	<alternate mode="ARMOR" type="ARMOR" subtype="ARMOR_BODY" id="armor">
-     		<attrdef id="DEFENSE_PHYSICAL" value="$RATING" set="NATURAL"/>
-     	</alternate>
    </item>
    <item avail="2" price="3000" id="fingertip_compartment" type="CYBERWARE" subtype="CYBER_BODYWARE">
       <usage mode="IMPLANTED" value="0.1" />

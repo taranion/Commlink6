@@ -114,6 +114,7 @@ import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
+import de.rpgframework.shadowrun6.proc.BuildForbiddenSources;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
@@ -151,6 +152,7 @@ public class Shadowrun6Tools {
 		GetModificationsFromMetaType.class,
 		GetGearDefinitions.class,
 		GetModificationsFromQualityPaths.class,
+		BuildForbiddenSources.class,
 		ApplyModificationsGeneric.class,
 		GetModificationsForDrakes.class,
 		GetModificationsFromCollectives.class,
@@ -231,9 +233,6 @@ public class Shadowrun6Tools {
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
 				logger.log(Level.WARNING, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
-				if (model.getCarriedItem(ItemTemplate.UUID_UNARMED)!=null)
-					logger.log(Level.INFO, "\"------ after {0}    {1}" ,processor.getClass().getSimpleName(),model.getCarriedItem(ItemTemplate.UUID_UNARMED).getAttributeRaw(SR6ItemAttribute.DAMAGE));
-
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");

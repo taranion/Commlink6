@@ -51,7 +51,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 					}
 
 					for (Modification mod : item.getOutgoingModifications()) {
-						logger.log(Level.INFO, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());
+						logger.log(Level.TRACE, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());
 						// Make specific instances of the modification (if necessary)
 						int multiplier = ItemUtil.getRating((CarriedItem<ItemTemplate>) item);
 						if (mod instanceof ValueModification && ((ValueModification)mod).isInstantiated())
@@ -59,7 +59,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 						// Calls ShadowrunTools.instantiateModification
 						logger.log(Level.TRACE, "--item {0}: preMod={1} ", item.getKey(), mod);
 						Modification realMod = mod.getReferenceType().instantiateModification(mod, item, multiplier, model);
-						logger.log(Level.TRACE, "--item {0}: realMod={1} ", item.getKey(), realMod);
+						logger.log(Level.WARNING, "--item {0}: realMod={1} ", item.getKey(), realMod);
 
 						unprocessed.add(realMod);
 					}
@@ -84,6 +84,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 		} finally {
 			logger.log(Level.TRACE, "LEAVE : process() ends with "+unprocessed.size()+" modifications still to process");
 		}
+		logger.log(Level.WARNING,"return "+ unprocessed);
 		return unprocessed;
 	}
 
