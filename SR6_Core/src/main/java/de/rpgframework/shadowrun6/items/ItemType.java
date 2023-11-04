@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
  */
 public enum ItemType {
 
+	VIRTUAL,
 	ACCESSORY(
 			ItemSubType.ACCESSORY,
 			ItemSubType.MODIFICATION,

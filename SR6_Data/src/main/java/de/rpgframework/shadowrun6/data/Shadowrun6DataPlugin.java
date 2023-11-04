@@ -264,7 +264,6 @@ public class Shadowrun6DataPlugin  {
 		core.setReleased(201908);
 		ItemUtil.SOFTWARE_LIBRARY_ITEM.assignToDataSet(core);
 		ItemUtil.UNARMED_ITEM.assignToDataSet(core);
-		SR6GearTool.recalculate("", null, ItemUtil.SOFTWARE_LIBRARY);
 
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		list = Shadowrun6Core.loadDataItems(SenseList.class, Sense.class, core, clazz.getResourceAsStream("core/data/senses.xml"));
@@ -365,9 +364,7 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
 		list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" rule presets");
-		
-		ItemUtil.SOFTWARE_LIBRARY.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMTYPE, ItemType.ELECTRONICS));
-		ItemUtil.SOFTWARE_LIBRARY.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.TOOLS));
+
 		ItemUtil.UNARMED_ITEM.setAttribute(SR6ItemAttribute.SKILL, Shadowrun6Core.getSkill("close_combat"));
 		ItemUtil.UNARMED_ITEM.setAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION, Shadowrun6Core.getSkill("close_combat"));
 	}

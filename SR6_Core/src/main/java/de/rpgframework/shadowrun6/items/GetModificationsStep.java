@@ -51,10 +51,12 @@ public class GetModificationsStep implements CarriedItemProcessor {
 		case CHARACTER:
 		case UNARMED:
 		case PERSONA:
+			logger.log(Level.INFO, "Add outgoing {2} modification {0} to {1}", realMod, model, apply);
 			model.addOutgoingModification(realMod);
 			break;
 		case ACTIVE_GEAR:
 		case DATA_ITEM:
+			logger.log(Level.INFO, "Add incoming {2} modification {0} to {1}", realMod, model, apply);
 			model.addIncomingModification(realMod);
 			break;
 		default:
@@ -111,9 +113,10 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			mod.setValue(result);
 			mod.getFormula().isResolved();
 			mod.setInstantiated(true);
+			mod.setOrigin(Origin.CHILDREN);
 			logger.log(Level.DEBUG, "  Resolve "+mod.getFormula()+" to "+result+" and add "+mod);
 		}
-		logger.log(Level.INFO, "Add modification {0}", mod);
+		logger.log(Level.TRACE, "instantiated modification {0} with direction {1}", mod, mod.getOrigin());
 		return mod;
 	}
 

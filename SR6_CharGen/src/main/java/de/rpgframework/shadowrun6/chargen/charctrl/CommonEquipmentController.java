@@ -604,7 +604,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 	//-------------------------------------------------------------------
 	public Possible canBeRemoved(CarriedItem<ItemTemplate> container, ItemHook slot, CarriedItem<ItemTemplate> toRemove) {
-		if (container==ItemUtil.SOFTWARE_LIBRARY && slot==ItemHook.SOFTWARE) return Possible.TRUE;
+		if (container.getUuid()==ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE && slot==ItemHook.SOFTWARE) return Possible.TRUE;
 		return new Possible( container.getAccessories().contains(toRemove) );
 	}
 

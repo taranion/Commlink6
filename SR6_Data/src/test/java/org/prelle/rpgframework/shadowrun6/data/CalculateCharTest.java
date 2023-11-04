@@ -110,6 +110,8 @@ public class CalculateCharTest {
         assertEquals(5, dmg.getValue());
         assertEquals(DamageType.PHYSICAL, dmg.getType());
 
+		assertNotNull("No virtual software library",model.getSoftwareLibrary());
+
 	}
 
 }

@@ -46,7 +46,7 @@ public class ItemUtil {
 				);
 
 	public static ItemTemplate SOFTWARE_LIBRARY_ITEM = new ItemTemplate();
-	public static CarriedItem<ItemTemplate> SOFTWARE_LIBRARY;
+//	public static CarriedItem<ItemTemplate> SOFTWARE_LIBRARY;
 	public static ItemTemplate UNARMED_ITEM = new ItemTemplate();
 
 
@@ -57,14 +57,8 @@ public class ItemUtil {
 		SOFTWARE_LIBRARY_ITEM.setAttribute(def);
 		SOFTWARE_LIBRARY_ITEM.setId("software_library");
 		SOFTWARE_LIBRARY_ITEM.addOutgoingModifications(List.of(new ValueModification(ShadowrunReference.HOOK, ItemHook.SOFTWARE.name(), "99")));
-
-		SOFTWARE_LIBRARY =  new CarriedItem<ItemTemplate>(SOFTWARE_LIBRARY_ITEM, null, CarryMode.VIRTUAL);
-		SOFTWARE_LIBRARY.addSlot(new AvailableSlot(ItemHook.SOFTWARE, 99));
-		SOFTWARE_LIBRARY.setUuid(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
-		SOFTWARE_LIBRARY.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
-		SOFTWARE_LIBRARY.setInjectedBy("CORE");
-		SOFTWARE_LIBRARY.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMTYPE, ItemType.ELECTRONICS));
-		SOFTWARE_LIBRARY.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.TOOLS));
+		SOFTWARE_LIBRARY_ITEM.setAttribute(SR6ItemAttribute.ITEMTYPE, ItemType.ELECTRONICS);
+		SOFTWARE_LIBRARY_ITEM.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.TOOLS);
 
 		UNARMED_ITEM = new ItemTemplate();
 		UNARMED_ITEM.setId("unarmed");

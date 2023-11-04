@@ -467,4 +467,9 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		datastructures.remove(value);
 	}
 
+	//-------------------------------------------------------------------
+	public CarriedItem<ItemTemplate> getSoftwareLibrary() {
+		return getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+	}
+
 }

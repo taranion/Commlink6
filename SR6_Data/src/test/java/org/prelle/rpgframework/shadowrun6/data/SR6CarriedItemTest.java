@@ -430,6 +430,10 @@ public class SR6CarriedItemTest {
 		item.addAccessory(incSTR, ItemHook.CYBERLIMB_IMPLANT);
 		System.out.println("\n\n--------Recalculate----------");
 		SR6GearTool.recalculate("", null, item);
+		System.out.println(item.dump());
+		for (Modification mod : item.getOutgoingModifications()) {
+			System.out.println("OUT "+mod);
+		}
 		// Artificial strength should be 6
 		assertEquals(6, getArtifical(ShadowrunAttribute.STRENGTH, item.getOutgoingModifications()));
 	}
