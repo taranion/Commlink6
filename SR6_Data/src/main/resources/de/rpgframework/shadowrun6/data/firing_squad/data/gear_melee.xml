@@ -52,8 +52,7 @@
       <variant id="blade">
       	<attrdef id="PRICE" value="550"/>
       	<attrdef id="DAMAGE" value="4P"/>
-      	<alternate>
-      		<attrdef id="ITEMSUBTYPE" value="BLADES"/>
+      	<alternate type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="blade">
       		<attrdef id="DAMAGE" value="2P"/>
       		<attrdef id="ATTACK_RATING" value="8,,,,"/>
       		<attrdef id="SKILL_SPECIALIZATION" value="close_combat/blades"/>
@@ -62,12 +61,10 @@
    </item>
    <item id="dassault_alpenstock" avail="3L" price="500" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
       <weapon  dmg="4S" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
-      <alternate id="knife">
-			<attrdef id="ITEMSUBTYPE" value="BLADES"/>
+      <alternate type="WEAPON_CLOSE_COMBAT" subtype="BLADES"  id="knife">
       	<weapon  dmg="2P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>
-      <alternate id="spear">
-			<attrdef id="ITEMSUBTYPE" value="BLADES"/>
+      <alternate type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="spear">
       	<weapon  dmg="4P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>
    </item>
