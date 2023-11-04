@@ -56,18 +56,16 @@ public class CalculateSkillPools implements ProcessingStep {
 	private void calculatePool(SR6SkillValue sVal) {
 		Pool<Integer> pool = new Pool<Integer>();
 		sVal.setPool(pool);
+
 		// Clone pool for attribute, if possible
 		ShadowrunAttribute attr = sVal.getSkill().getAttribute();
 		if (attr!=null) {
 //			pool = (Pool<Integer>) model.getAttribute(attr).getPool().clone();
 			AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attr);
 			pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(
-					Math.max(aVal.getModifiedValue(ValueType.NATURAL), aVal.getModifiedValue(ValueType.NATURAL)),
+					Math.max(aVal.getModifiedValue(ValueType.ARTIFICIAL), aVal.getModifiedValue(ValueType.AUGMENTED)),
 					attr.getName(loc)));
 		}
-//		if (pool==null) {
-//			pool = new Pool<Integer>();
-//		}
 
 		int augmentedMax = sVal.getDistributed() + 4;
 
