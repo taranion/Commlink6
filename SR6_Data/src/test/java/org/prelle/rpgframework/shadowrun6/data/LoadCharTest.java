@@ -10,11 +10,14 @@ import java.util.Locale;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 /**
  * @author prelle
@@ -82,6 +85,10 @@ public class LoadCharTest {
 
         Shadowrun6Tools.resolveChar(character);
         Shadowrun6Tools.runProcessors(character, Locale.getDefault());
+
+        for (CarriedItem<ItemTemplate> item : character.getCarriedItems()) {
+			System.out.println("## "+item+" \t= "+item.getAsObject(SR6ItemAttribute.ITEMTYPE));
+		}
 	}
 
 }

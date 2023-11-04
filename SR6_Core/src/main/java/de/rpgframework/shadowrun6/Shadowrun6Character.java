@@ -219,7 +219,6 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			.filter(filter)
 			.collect(Collectors.toList())
 			;
-
 	}
 
 	//-------------------------------------------------------------------

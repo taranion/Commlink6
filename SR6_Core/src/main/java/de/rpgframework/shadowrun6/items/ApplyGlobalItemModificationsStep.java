@@ -61,8 +61,7 @@ public class ApplyGlobalItemModificationsStep implements CarriedItemProcessor {
 				if (model.getUuid()==ItemTemplate.UUID_UNARMED && tmp.getApplyTo()==ApplyTo.UNARMED) {
 					logger.log(Level.INFO, "Apply global mod {0} to {1}", tmp, model);
 					model.addModificationFromCharacter((ValueModification) tmp);
-				} else
-				if (tmp.getApplyTo()==ApplyTo.MELEE && isMelee) {
+				} else if (tmp.getApplyTo()==ApplyTo.MELEE && isMelee) {
 					model.addModificationFromCharacter((ValueModification) tmp);
 				} else {
 					logger.log(Level.WARNING, "Don't know how to deal with "+tmp);

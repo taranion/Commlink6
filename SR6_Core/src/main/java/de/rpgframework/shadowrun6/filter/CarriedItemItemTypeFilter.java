@@ -42,12 +42,17 @@ public class CarriedItemItemTypeFilter implements Predicate<CarriedItem<ItemTemp
 			return false;
 		}
 		ItemType foundType = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
-		
+		if (foundType==null) {
+			System.getLogger(CarriedItemItemTypeFilter.class.getPackageName()).log(Level.WARNING, "Empty attribute ITEMTYPE in "+item.getKey());
+			System.err.println("Empty attribute ITEMTYPE in "+item.getKey());
+			return false;
+		}
+
 		boolean hasCarryMode = mode==null;
 		if (mode!=null && item.getCarryMode()==mode) hasCarryMode=true;
-		
+
 		boolean typeMatches = validTypes.contains(foundType);
-		
+
 		return hasCarryMode && typeMatches;
 	}
 

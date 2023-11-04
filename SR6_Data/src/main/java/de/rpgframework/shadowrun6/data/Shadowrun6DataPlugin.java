@@ -377,6 +377,7 @@ public class Shadowrun6DataPlugin  {
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FIRING_SQUAD", "firing_squad.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.RULES);
 		set.setReleased(202005);
+		ItemUtil.FIRING_SQUAD_MELEE_HARDNING.assignToDataSet(set);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "firing_squad/data/actions_edge.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
 		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"firing_squad/data/ammunition_types.xml");

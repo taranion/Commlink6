@@ -33,16 +33,6 @@ public class GetModificationsFromGear implements ProcessingStep {
 	}
 
 	//-------------------------------------------------------------------
-	private List<Modification> calculateModifications(CarriedItem<ItemTemplate> item) {
-		OperationResult<List<Modification>> modResult = SR6GearTool.recalculate("", model, item);
-		if (modResult.hasError()) {
-			logger.log(Level.WARNING, "Problem with {0}: {1}", item.getKey(), modResult.getError());
-			return new ArrayList<>();
-		}
-		return modResult.get();
-	}
-
-	//-------------------------------------------------------------------
 	/**
 	 * @see org.prelle.shadowrun6.proc.CharacterProcessor#process(org.prelle.shadowrun5.ShadowrunCharacter, java.util.List)
 	 */
@@ -78,6 +68,14 @@ public class GetModificationsFromGear implements ProcessingStep {
 					logger.log(Level.ERROR, "Error was",e);
 					lastException = e;
 				}
+
+				// Check for alternate usages
+				checkAlternateUsages(item);
+
+				// Check accessories for alternate usages
+				for (CarriedItem<ItemTemplate> alt : item.getAccessories()) {
+					checkAlternateUsages(alt);
+				}
 			}
 			// If there was an error, inform user
 			if (lastException!=null) {
@@ -87,6 +85,17 @@ public class GetModificationsFromGear implements ProcessingStep {
 			logger.log(Level.TRACE, "LEAVE : process() ends with "+unprocessed.size()+" modifications still to process");
 		}
 		return unprocessed;
+	}
+
+	//-------------------------------------------------------------------
+	private void checkAlternateUsages(CarriedItem<ItemTemplate> item) {
+		for (CarriedItem<?> alt : item.getAlternates()) {
+			logger.log(Level.WARNING, "Found alternate item {0} of {1}", alt, item);
+			System.err.println("Found alternate item "+alt);
+			alt.setInjectedBy(item);
+			logger.log(Level.WARNING, alt.dump());
+			model.addVirtualCarriedItem((CarriedItem<ItemTemplate>) alt);
+		}
 	}
 
 }

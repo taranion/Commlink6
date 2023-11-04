@@ -55,6 +55,8 @@ public class CleanVirtualItems implements ProcessingStep {
 		boolean missingSoftware= true;
 		for (CarriedItem<ItemTemplate> item : model.getVirtualCarriedItems()) {
 			UUID uuid = item.getUuid();
+			if (uuid==null)
+				logger.log(Level.ERROR, "No UUID for item {0}", item);
 			if (uuid.equals(ItemTemplate.UUID_UNARMED)) {
 				logger.log(Level.INFO, "Reset UNARMED "+item.getAttributeRaw(SR6ItemAttribute.DAMAGE));
 				item.clearModificationsFromCharacter();

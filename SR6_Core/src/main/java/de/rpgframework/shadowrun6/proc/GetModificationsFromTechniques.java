@@ -8,6 +8,7 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.Technique;
 import de.rpgframework.shadowrun6.TechniqueValue;
 
@@ -16,11 +17,11 @@ import de.rpgframework.shadowrun6.TechniqueValue;
  *
  */
 public class GetModificationsFromTechniques implements ProcessingStep {
-	
+
 	protected static final Logger logger = System.getLogger(GetModificationsFromTechniques.class.getPackageName());
-	
+
 	private Shadowrun6Character model;
-	
+
 	//-------------------------------------------------------------------
 	public GetModificationsFromTechniques(Shadowrun6Character model) {
 		this.model = model;
@@ -42,13 +43,14 @@ public class GetModificationsFromTechniques implements ProcessingStep {
 				logger.log(Level.WARNING, "TODO  add from technique "+techn.getId()+" / "+ref);
 				// Calculate modifications
 				ref.clearIncomingModifications();
-//				for (Modification mod : ref.getTechnique().getModifications()) {
-//					Modification realMod = ShadowrunTools.instantiateModification(mod, ref.getChoice(), 0);
+				for (Modification mod : techn.getOutgoingModifications()) {
+					logger.log(Level.ERROR, "TODO  from technique "+techn.getId()+" / "+mod);
+//					Modification realMod = Shadowrun6Tools.instantiateModification(mod, ref.getChoice(), 0);
 //					logger.log(Level.DEBUG, "  instantiated mod "+realMod);
 //					ref.addModification(realMod);
-//				}
-//				
-//				
+				}
+
+
 //				if (ref.getModifications()!=null && !ref.getModifications().isEmpty()) {
 //					logger.log(Level.DEBUG, " - "+ref.getTechnique().getId()+" has modifications: "+ref.getModifications());
 //					for (Modification mod : ref.getModifications()) {

@@ -1980,7 +1980,15 @@ public class Shadowrun6Tools {
 			System.err.println("Shadowrun6Tools.getItemType(): No ITEMTYPE for "+model.getKey());
 			return null;
 		}
-		return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+		try {
+			return model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+		} catch (ClassCastException e) {
+			logger.log(Level.ERROR, model.dump());
+			logger.log(Level.ERROR, "Wrong attribute type for ITEMTYPE {0} in item {1}",model.getAttributeRaw(SR6ItemAttribute.ITEMTYPE), model.getKey());
+			logger.log(Level.ERROR, "asObject = "+model.getAsObject(SR6ItemAttribute.ITEMTYPE));
+			model.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+			throw e;
+		}
 	}
 
 	//-------------------------------------------------------------------

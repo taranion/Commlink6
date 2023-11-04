@@ -48,6 +48,7 @@ public class ItemUtil {
 	public static ItemTemplate SOFTWARE_LIBRARY_ITEM = new ItemTemplate();
 //	public static CarriedItem<ItemTemplate> SOFTWARE_LIBRARY;
 	public static ItemTemplate UNARMED_ITEM = new ItemTemplate();
+	public static ItemTemplate FIRING_SQUAD_MELEE_HARDNING = new ItemTemplate();
 
 
 	static {
@@ -66,6 +67,11 @@ public class ItemUtil {
 		UNARMED_ITEM.setAttribute(SR6ItemAttribute.ATTACK_RATING, new int[5]);
 		UNARMED_ITEM.setAttribute(SR6ItemAttribute.ITEMTYPE, ItemType.WEAPON_CLOSE_COMBAT);
 		UNARMED_ITEM.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.UNARMED);
+
+		FIRING_SQUAD_MELEE_HARDNING = new ItemTemplate();
+		FIRING_SQUAD_MELEE_HARDNING.setId("firing_squad_melee_hardening");
+		FIRING_SQUAD_MELEE_HARDNING.setAttribute(SR6ItemAttribute.ATTACK_RATING, new int[] {4,0,0,0,0});
+		FIRING_SQUAD_MELEE_HARDNING.setAttribute(SR6ItemAttribute.DAMAGE, new Damage(3, DamageType.STUN, DamageElement.REGULAR));
 	}
 
 	//-------------------------------------------------------------------
