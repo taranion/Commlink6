@@ -174,8 +174,8 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			 * Damage Resistance
 			 */
 			val = model.getAttribute(ShadowrunAttribute.RESIST_DAMAGE);
-			val.setDistributed(0);
-			addNaturalModifier(val, ShadowrunAttribute.BODY);
+			val.setDistributed(model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue());
+			//addNaturalModifier(val, ShadowrunAttribute.BODY);
 			logger.log(Level.DEBUG, "Damage Resistance = "+val);
 
 			/*
@@ -579,8 +579,9 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	private void calculateResistAstralDamage() {
 		/** Indirect combat spells */
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.RESIST_DAMAGE_ASTRAL);
-		val.setDistributed(0);
-		addNaturalModifier(val, ShadowrunAttribute.BODY);
+		val.setDistributed(model.getAttribute(ShadowrunAttribute.BODY).getModifiedValue());
+//		val.setDistributed(0);
+//		addNaturalModifier(val, ShadowrunAttribute.BODY);
 	}
 
 	//-------------------------------------------------------------------
