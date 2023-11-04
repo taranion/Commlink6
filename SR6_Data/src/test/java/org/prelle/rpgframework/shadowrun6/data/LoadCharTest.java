@@ -87,7 +87,7 @@ public class LoadCharTest {
         Shadowrun6Tools.runProcessors(character, Locale.getDefault());
 
         for (CarriedItem<ItemTemplate> item : character.getCarriedItems()) {
-			System.out.println("## "+item+" \t= "+item.getAsObject(SR6ItemAttribute.ITEMTYPE));
+			System.out.println("## "+item+" \t= "+item.getAsObject(SR6ItemAttribute.ATTACK_RATING));
 		}
 	}
 

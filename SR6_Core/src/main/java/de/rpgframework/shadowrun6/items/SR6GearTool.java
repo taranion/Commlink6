@@ -81,7 +81,9 @@ public class SR6GearTool extends GearTool {
 				String[] keys = mod.getValueAsKeys();
 				if (keys.length==1) {
 					for (int i=0; i<base.length; i++) {
-						ret[i] += mod.getValue();
+						if (ret[i]>0) {
+							ret[i] += mod.getValue();
+						}
 					}
 				} else {
 					for (int i=0; i<Math.min(base.length,keys.length); i++) {
