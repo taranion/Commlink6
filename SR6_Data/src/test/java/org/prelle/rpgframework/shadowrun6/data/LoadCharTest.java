@@ -86,9 +86,6 @@ public class LoadCharTest {
         Shadowrun6Tools.resolveChar(character);
         Shadowrun6Tools.runProcessors(character, Locale.getDefault());
 
-        for (CarriedItem<ItemTemplate> item : character.getCarriedItems()) {
-			System.out.println("## "+item+" \t= "+item.getOutgoingModifications());
-		}
 	}
 
 }

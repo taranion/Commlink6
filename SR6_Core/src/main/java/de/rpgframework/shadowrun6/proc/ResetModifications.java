@@ -77,7 +77,6 @@ public class ResetModifications implements ProcessingStep {
 			// Reset all incoming parent modifications
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				item.clearModificationsFromCharacter();
-				logger.log(Level.INFO, "Cleared modifications from character for {0}", item);
 			}
 
 			// Remove all auto-added SINs

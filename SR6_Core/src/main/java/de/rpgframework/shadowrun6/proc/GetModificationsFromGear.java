@@ -59,7 +59,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 						// Calls ShadowrunTools.instantiateModification
 						logger.log(Level.TRACE, "--item {0}: preMod={1} ", item.getKey(), mod);
 						Modification realMod = mod.getReferenceType().instantiateModification(mod, item, multiplier, model);
-						logger.log(Level.WARNING, "--item {0}: realMod={1} ", item.getKey(), realMod);
+						logger.log(Level.TRACE, "--item {0}: realMod={1} ", item.getKey(), realMod);
 
 						unprocessed.add(realMod);
 					}
@@ -92,9 +92,8 @@ public class GetModificationsFromGear implements ProcessingStep {
 	private void checkAlternateUsages(CarriedItem<ItemTemplate> item) {
 		for (CarriedItem<?> alt : item.getAlternates()) {
 			logger.log(Level.WARNING, "Found alternate item {0} of {1}", alt, item);
-			System.err.println("Found alternate item "+alt);
 			alt.setInjectedBy(item);
-			logger.log(Level.WARNING, alt.dump());
+			logger.log(Level.TRACE, "{0}",alt.dump());
 			model.addVirtualCarriedItem((CarriedItem<ItemTemplate>) alt);
 		}
 	}
