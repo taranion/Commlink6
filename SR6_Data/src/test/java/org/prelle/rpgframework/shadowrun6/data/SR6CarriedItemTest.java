@@ -163,11 +163,11 @@ public class SR6CarriedItemTest {
 
 		// Now validate modifications
 		assertNotNull(item.getIncomingModifications());
-		assertNotNull(item.getCharacterModifications());
+		assertNotNull(item.getOutgoingModifications());
 		assertTrue("Muscle toner should only have character modifications",item.getIncomingModifications().isEmpty());
-		assertFalse("Muscle toner should have character modifications",item.getCharacterModifications().isEmpty());
+		assertFalse("Muscle toner should have character modifications",item.getOutgoingModifications().isEmpty());
 
-		Modification cMod = item.getCharacterModifications().get(0);
+		Modification cMod = item.getOutgoingModifications().get(0);
 		ValueModification vMod = (ValueModification)cMod;
 		assertEquals(ShadowrunReference.ATTRIBUTE,vMod.getReferenceType());
 		assertEquals(ApplyTo.CHARACTER, vMod.getApplyTo());
@@ -354,16 +354,16 @@ public class SR6CarriedItemTest {
 		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, temp.getVariant("aluminium"), CarryMode.IMPLANTED);
 		SR6GearTool.recalculate("", null, item);
 		assertEquals("No. modifications wrong in CI.",0, item.getIncomingModifications().size());
-		assertEquals("No. char modifications wrong in CI.",5, item.getCharacterModifications().size());
+		assertEquals("No. char modifications wrong in CI.",5, item.getOutgoingModifications().size());
 		Decision decision = new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, AugmentationQuality.STANDARD.name());
 		item.setDecisions(List.of(decision));
-		assertEquals("No. modifications wrong in CI.",5, item.getCharacterModifications().size());
+		assertEquals("No. modifications wrong in CI.",5, item.getOutgoingModifications().size());
 		OperationResult<List<Modification>> modR = SR6GearTool.recalculate("", null, item);
-		assertEquals("No. modifications wrong in CI.",5, item.getCharacterModifications().size());
+		assertEquals("No. modifications wrong in CI.",5, item.getOutgoingModifications().size());
 		assertTrue(modR.wasSuccessful());
-		assertFalse(item.getCharacterModifications().isEmpty());
-//		assertTrue( item.getCharacterModifications().contains( new DataItemModification(ShadowrunReference.RULE, SR6RuleFlag.UNARMED_DAMAGE_IS_PHYSICAL.name())));
-//		assertTrue( item.getCharacterModifications().contains( new DataItemModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESIST_DAMAGE.name())));
+		assertFalse(item.getOutgoingModifications().isEmpty());
+//		assertTrue( item.getOutgoingModifications().contains( new DataItemModification(ShadowrunReference.RULE, SR6RuleFlag.UNARMED_DAMAGE_IS_PHYSICAL.name())));
+//		assertTrue( item.getOutgoingModifications().contains( new DataItemModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESIST_DAMAGE.name())));
 //		assertEquals("No. modifications wrong.",5, modR.get().size());
 
 		assertNotNull(item.getAsObject(SR6ItemAttribute.AVAILABILITY));
@@ -414,10 +414,10 @@ public class SR6CarriedItemTest {
 		assertNotNull("No PRICE set",item.getAsValue(SR6ItemAttribute.PRICE));
 		assertEquals(15000, item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 
-		assertEquals(3, item.getCharacterModifications().size() );
+		assertEquals(3, item.getOutgoingModifications().size() );
 		// Artificial strength should be 2
-		assertEquals(2, getArtifical(ShadowrunAttribute.STRENGTH, item.getCharacterModifications()));
-		assertEquals(2, getArtifical(ShadowrunAttribute.AGILITY, item.getCharacterModifications()));
+		assertEquals(2, getArtifical(ShadowrunAttribute.STRENGTH, item.getOutgoingModifications()));
+		assertEquals(2, getArtifical(ShadowrunAttribute.AGILITY, item.getOutgoingModifications()));
 
 		// Increase STR
 		CarriedItem<ItemTemplate> incSTR = new CarriedItem<ItemTemplate>(Shadowrun6Core.getItem(ItemTemplate.class, "attribute_increase"), null, CarryMode.EMBEDDED);
@@ -425,13 +425,13 @@ public class SR6CarriedItemTest {
 		incSTR.addDecision(new Decision(ItemTemplate.UUID_RATING, "4"));
 		incSTR.addDecision(new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "STRENGTH"));
 		SR6GearTool.recalculate("", null, incSTR);
-		assertEquals(4, getArtifical(ShadowrunAttribute.STRENGTH, incSTR.getCharacterModifications()));
+		assertEquals(4, getArtifical(ShadowrunAttribute.STRENGTH, incSTR.getOutgoingModifications()));
 
 		item.addAccessory(incSTR, ItemHook.CYBERLIMB_IMPLANT);
 		System.out.println("\n\n--------Recalculate----------");
 		SR6GearTool.recalculate("", null, item);
 		// Artificial strength should be 6
-		assertEquals(6, getArtifical(ShadowrunAttribute.STRENGTH, item.getCharacterModifications()));
+		assertEquals(6, getArtifical(ShadowrunAttribute.STRENGTH, item.getOutgoingModifications()));
 	}
 
 	//-------------------------------------------------------------------
@@ -442,7 +442,7 @@ public class SR6CarriedItemTest {
 		incSTR.addDecision(new Decision(ItemTemplate.UUID_RATING, "4"));
 		incSTR.addDecision(new Decision(UUID.fromString("d5c88f1f-eb6f-4057-b9d0-b65c212747e6"), "STRENGTH"));
 		SR6GearTool.recalculate("", null, incSTR);
-		assertEquals(4, getArtifical(ShadowrunAttribute.STRENGTH, incSTR.getCharacterModifications()));
+		assertEquals(4, getArtifical(ShadowrunAttribute.STRENGTH, incSTR.getOutgoingModifications()));
 	}
 
 	//-------------------------------------------------------------------

@@ -10,6 +10,7 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
@@ -76,6 +77,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 				ValueModification mod = new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), aVal.getModifiedValue());
 				mod.setSource(BodyType.DRAKE);
 				mod.setSet(ValueType.NATURAL);
+				mod.setOrigin(Origin.OUTSIDE);
 				copy.addIncomingModification(mod);
 			}
 

@@ -20,6 +20,7 @@ import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
@@ -92,7 +93,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 						return applySkill(model, mod);
 				case ITEM_ATTRIBUTE:
 				case ACTION:
-					logger.log(Level.INFO, "Add global item modification {0}", mod);
+					logger.log(Level.INFO, "Add global item {1} modification {0}", mod, mod.getOrigin());
 					model.addItemModification(mod); return true;
 				default:
 					logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
@@ -405,6 +406,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.INFO, "Add quality {0} to character", item);
 		}
 		// Mark as auto-added
+		mod.setOrigin(Origin.OUTSIDE);
 		value.addIncomingModification(mod);
 
 		if (item.hasLevel()) {

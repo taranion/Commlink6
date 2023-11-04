@@ -23,6 +23,8 @@ import de.rpgframework.genericrpg.requirements.AnyRequirement;
 import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
+import de.rpgframework.shadowrun.DamageElement;
+import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
@@ -45,6 +47,7 @@ public class ItemUtil {
 
 	public static ItemTemplate SOFTWARE_LIBRARY_ITEM = new ItemTemplate();
 	public static CarriedItem<ItemTemplate> SOFTWARE_LIBRARY;
+	public static ItemTemplate UNARMED_ITEM = new ItemTemplate();
 
 
 	static {
@@ -59,6 +62,16 @@ public class ItemUtil {
 		SOFTWARE_LIBRARY.addSlot(new AvailableSlot(ItemHook.SOFTWARE, 99));
 		SOFTWARE_LIBRARY.setUuid(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
 		SOFTWARE_LIBRARY.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
+		SOFTWARE_LIBRARY.setInjectedBy("CORE");
+		SOFTWARE_LIBRARY.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMTYPE, ItemType.ELECTRONICS));
+		SOFTWARE_LIBRARY.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.TOOLS));
+
+		UNARMED_ITEM = new ItemTemplate();
+		UNARMED_ITEM.setId("unarmed");
+		UNARMED_ITEM.setAttribute(SR6ItemAttribute.DAMAGE, new Damage(2, DamageType.STUN, DamageElement.REGULAR));
+		UNARMED_ITEM.setAttribute(SR6ItemAttribute.ATTACK_RATING, new int[5]);
+		UNARMED_ITEM.setAttribute(SR6ItemAttribute.ITEMTYPE, ItemType.WEAPON_CLOSE_COMBAT);
+		UNARMED_ITEM.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.UNARMED);
 	}
 
 	//-------------------------------------------------------------------

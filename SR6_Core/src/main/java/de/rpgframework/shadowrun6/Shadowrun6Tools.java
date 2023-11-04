@@ -120,6 +120,7 @@ import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.CalculateMeleeAndUnarmed;
 import de.rpgframework.shadowrun6.proc.CalculatePersona;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
+import de.rpgframework.shadowrun6.proc.CleanVirtualItems;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
 import de.rpgframework.shadowrun6.proc.GetGearDefinitions;
 import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
@@ -145,6 +146,7 @@ public class Shadowrun6Tools {
 
 	public final static List<Class<? extends ProcessingStep>> RECALCULATE_STEPS = Arrays.asList(
 		ResetModifications.class,
+		CleanVirtualItems.class,
 		EnsureAttributePresence.class,
 		GetModificationsFromMetaType.class,
 		GetGearDefinitions.class,
@@ -224,11 +226,14 @@ public class Shadowrun6Tools {
 	public static void runProcessors(Shadowrun6Character model, Locale loc) {
 		List<ProcessingStep> processChain = getCharacterProcessingSteps(model, loc);
 		try {
-			logger.log(Level.DEBUG, "\n\nSTART: runProcessors: "+processChain.size()+"-------------------------------------------------------");
+			logger.log(Level.WARNING, "\n\nSTART: runProcessors: "+processChain.size()+"-------------------------------------------------------");
 			List<Modification> unprocessed = new ArrayList<>();
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
 				logger.log(Level.WARNING, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
+				if (model.getCarriedItem(ItemTemplate.UUID_UNARMED)!=null)
+					logger.log(Level.INFO, "\"------ after {0}    {1}" ,processor.getClass().getSimpleName(),model.getCarriedItem(ItemTemplate.UUID_UNARMED).getAttributeRaw(SR6ItemAttribute.DAMAGE));
+
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
@@ -1256,7 +1261,7 @@ public class Shadowrun6Tools {
 								logger.log(Level.INFO, "Set skill {0} in instantiated {1}", skill.getId(), tmp);
 								clone.setKey(skill.getId());
 								logger.log(Level.INFO, "Add modification {0} to {1}", clone, item);
-								item.addCharacterModification(clone);
+								item.addOutgoingModification(clone);
 								return null;
 							}
 							break;
@@ -1362,58 +1367,6 @@ public class Shadowrun6Tools {
 
 	}
 
-//	//--------------------------------------------------------------------
-//	public static Pool<Integer> getAttributeModifierCalculation(Shadowrun6Character model, ShadowrunAttribute attrib) {
-//		 Pool<Integer> ret = new  Pool<Integer>();
-//		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attrib);
-//		// Now add modifiers from the attribute
-//		int augAllowed = 4;
-//		if (attrib.name().startsWith("DEFENSIVE_POOL")) {
-//			augAllowed = 99;
-//		}
-//		for (Modification mod : aVal.getModifications()) {
-//			if (mod.getReferenceType()==ShadowrunReference.ATTRIBUTE && mod instanceof ValueModification) {
-//				ValueModification sMod = (ValueModification)mod;
-//				if (!sMod.isConditional() && sMod.getSet()!=ValueType.MAX && sMod.getSet()!=ValueType.ARTIFICIAL) {
-//					int val = Math.min(augAllowed, sMod.getValue());
-//					if (sMod.getSet()==ValueType.NATURAL)
-//						val = sMod.getValue();
-//					// Mark modifiers being capped with augmentation limit
-//					PoolCalculation<Integer> calc = new PoolCalculation<Integer>(val, Shadowrun6Tools.getModificationSourceString(sMod.getSource()));
-//					// Augmentation limit is only valid if not NATURAL
-//					if (sMod.getSet()!=ValueType.NATURAL)
-//						calc.hitLimit = val<sMod.getValue();
-//					ret.addStep(ValueType.NATURAL, calc);
-//					augAllowed -= val;
-//				}
-//			}
-//		}
-//
-//		return ret;
-//	}
-
-	//--------------------------------------------------------------------
-	public static Pool<Integer> getAttributePoolCalculation(Shadowrun6Character model, ShadowrunAttribute attrib) {
-		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attrib);
-		if (aVal.getPool()==null) {
-			logger.log(Level.ERROR, "No pool for {0} in model", attrib);
-			for (AttributeValue<ShadowrunAttribute> val : model.getAttributes()) {
-				logger.log(Level.ERROR, "  {0} = {1} bzw. {2}", val.getModifyable(), val.getDisplayString(), val.getPool());
-			}
-			System.exit(1);
-		}
-		return aVal.getPool();
-//		Pool<Integer> ret = new Pool<>();
-//		// Add the unmodified attribute
-//		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attrib);
-//		if (aVal.getDistributed()>0)
-//			ret.addStep(ValueType.NATURAL,new PoolCalculation<Integer>(aVal.getDistributed(), aVal.getModifyable().getName()));
-//		// Now add modifiers from the attribute
-//		ret.addAll(getAttributeModifierCalculation(model, attrib));
-//
-//		return ret;
-	}
-
 	//--------------------------------------------------------------------
 	/**
 	 * @param skill
@@ -1490,7 +1443,7 @@ public class Shadowrun6Tools {
 		Pool<Integer> ret = getSkillPoolCalculationWithoutAttribute(model, skill, special);
 		// Add the attribute
 		if (useAttrib!=null) {
-			ret.addAll(getAttributePoolCalculation(model, useAttrib));
+			ret.addAll(model.getAttribute(useAttrib).getPool());
 		}
 
 		return ret;
@@ -1829,7 +1782,7 @@ public class Shadowrun6Tools {
 		 * Add eventually existing item attunement
 		 */
 		//System.err.println("Shadowrun6Tool.getWeaponPoolCalculation: Modification of "+item+" are "+item.getCharacterModifications());
-		for (Modification mod : item.getCharacterModifications()) {
+		for (Modification mod : item.getOutgoingModifications()) {
 			if (mod instanceof CheckModification) {
 				CheckModification cMod = (CheckModification)mod;
 				if (cMod.getWhat()==ShadowrunCheckInfluence.DICE) {

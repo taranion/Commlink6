@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -169,7 +170,7 @@ public class CalculateEssence implements ProcessingStep {
 				model.getAttribute(ShadowrunAttribute.POWER_POINTS).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.POWER_POINTS.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
 			}
 			// Also decrease maximum
-			model.getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.MAX));
+			model.getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.MAX).setOrigin(Origin.OUTSIDE));
 			// Eventually decrease social rating (Body Shop p.168)
 			int socialMalus = (int) Math.floor( ((double)essenceCost)/2000d);
 			QualityValue retention = model.getQuality("empathic_retention");

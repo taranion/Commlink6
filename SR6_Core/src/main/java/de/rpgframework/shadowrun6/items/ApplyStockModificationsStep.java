@@ -103,8 +103,9 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	@SuppressWarnings({ "rawtypes", "incomplete-switch" })
 	private boolean applyModification(boolean strict, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
-			model.addCharacterModification(mod);
+			model.addOutgoingModification(mod); // Is direction correct?
 			logger.log(Level.WARNING, "Ignore for now " + mod);
+			System.exit(1);
 			return false;
 		}
 
@@ -168,7 +169,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			}
 			return true;
 		case GEAR:
-			model.addCharacterModification(mod);
+			model.addIncomingModification(mod);
 			return true;
 		case ITEM_ATTRIBUTE:
 			if (mod instanceof ValueModification) {
@@ -193,8 +194,9 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	private boolean embedModification(boolean strict, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
 		logger.log(Level.DEBUG, "Before processing "+mod+" Decisions are "+model.getDecisions());
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
-			model.addCharacterModification(mod);
+			model.addOutgoingModification(mod); // Is direction correct?
 			logger.log(Level.WARNING, "Ignore for now " + mod);
+			System.exit(1);
 			return false;
 		}
 

@@ -71,7 +71,7 @@ public class CalculateCharTest {
 		assertNotNull(unarmed);
 		System.out.println("Unarmed AR = "+unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING));
         ar = unarmed.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
-        assertArrayEquals(new int[]{2,0,0,0,0}, ar);
+        assertArrayEquals(new int[]{9,0,0,0,0}, ar);
 	}
 
 	//-------------------------------------------------------------------
@@ -92,9 +92,11 @@ public class CalculateCharTest {
         model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "troll"));
         Shadowrun6Tools.runProcessors(model, Locale.getDefault());
         Shadowrun6Tools.runProcessors(model, Locale.getDefault());
+        Shadowrun6Tools.runProcessors(model, Locale.getDefault());
         unarmed = model.getCarriedItem(ItemTemplate.UUID_UNARMED);
 		dmg = unarmed.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
 		assertNotNull(dmg);
+		System.out.println("trollDamage: "+unarmed.getAsObject(SR6ItemAttribute.DAMAGE));
         assertEquals(3, dmg.getValue());
         assertEquals(DamageType.PHYSICAL, dmg.getType());
 

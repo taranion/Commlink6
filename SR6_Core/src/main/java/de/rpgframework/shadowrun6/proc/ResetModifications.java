@@ -8,9 +8,11 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
@@ -67,11 +69,6 @@ public class ResetModifications implements ProcessingStep {
 			for (AttributeValue<ShadowrunAttribute> val : model.getAttributes()) {
 				val.clearIncomingModifications();
 			}
-			// Ensure base melee damage of 2
-			if (model.getAttribute(ShadowrunAttribute.MELEE_DAMAGE)!=null)
-				model.getAttribute(ShadowrunAttribute.MELEE_DAMAGE).setDistributed(2);
-			else
-				model.setAttribute(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.MELEE_DAMAGE, 2));
 
 			// Skills
 			for (SR6SkillValue val : model.getSkillValues()) {
@@ -80,12 +77,17 @@ public class ResetModifications implements ProcessingStep {
 
 			// Remove all auto-added items
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-				if (item.isAutoAdded() || ItemTemplate.UUID_UNARMED.equals(item.getUuid())) {
+				if (item.isAutoAdded()) {
 					model.removeCarriedItem(item);
-				} else if (item.isDirty()) {
-					item.reset();
+//				} else if (item.isDirty()) {
+//					item.reset();
 				}
-//				item.reset();
+			}
+
+			// Reset all incoming parent modifications
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+				item.clearModificationsFromCharacter();
+				logger.log(Level.INFO, "Cleared modifications from character for {0}", item);
 			}
 
 			// Remove all auto-added SINs
@@ -131,29 +133,6 @@ public class ResetModifications implements ProcessingStep {
 					model.removeMetamagicOrEcho(val);
 				}
 			}
-
-			AttributeValue<ShadowrunAttribute> dmg = model.getAttribute(ShadowrunAttribute.MELEE_DAMAGE);
-			if (dmg==null) {
-				dmg = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.MELEE_DAMAGE);
-				model.setAttribute(dmg);
-			}
-			dmg.setDistributed(2);
-
-			// Ensure there is a device for unused software
-			CarriedItem<ItemTemplate> item = model.getCarriedItem(ShadowrunCharacter.UUID_UNUSED_SOFTWARE_DEVICE);
-			if (item==null) {
-				item = ItemUtil.SOFTWARE_LIBRARY;
-				model.addCarriedItem(item);
-				SR6GearTool.recalculate("", model, item);
-				//item.addSlot(new AvailableSlot(ItemHook.SOFTWARE, 99));
-				if (item.getSlot(ItemHook.SOFTWARE)==null) {
-					logger.log(Level.ERROR, "Missing software slot");
-					System.exit(1);
-				}
-			}
-			item.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
-			item.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMTYPE, ItemType.ELECTRONICS));
-			item.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.TOOLS));
 
 			// Prepare minimal body modifications
 			model.clearBodyForms();

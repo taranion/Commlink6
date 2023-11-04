@@ -381,7 +381,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	//-------------------------------------------------------------------
 	public void expandPACK(CarriedItem<ItemTemplate> item) {
 		logger.log(Level.ERROR, "TODO: expandPACK");
-		for (Modification mod : item.getCharacterModifications() ) {
+		for (Modification mod : item.getOutgoingModifications() ) {
 			logger.log(Level.ERROR, "Expand "+mod.getClass()+" = "+mod);
 			ApplyModificationsGeneric.applyModification(getModel(), mod);
 		}

@@ -49,6 +49,7 @@ public class SR6GearTool extends GearTool {
 			new DeriveCapacityAttributeStep(),
 			new CalculateAccessorySizes(),
 			new InsertDefaultAccessories(),
+			new CalculateUnarmedAttackRating(),
 			new ApplyGlobalItemModificationsStep(),
 			new HandleAugmentationGradeStep(),
 			new ApplyItemFlagsStep(),
@@ -128,8 +129,8 @@ public class SR6GearTool extends GearTool {
 	//-------------------------------------------------------------------
 	public static <I extends IItemAttribute> OperationResult<List<Modification>> recalculate(String indent, Lifeform user, CarriedItem<ItemTemplate> item) {
 		logger.log(Level.DEBUG, "recalculate {0} of {1}",item.getKey(), (user!=null)?user.getName():null);
-		if (item.getUuid().equals(ItemTemplate.UUID_UNARMED))
-			return new OperationResult<>(new ArrayList<>());
+//		if (item.getUuid().equals(ItemTemplate.UUID_UNARMED))
+//			return new OperationResult<>(new ArrayList<>());
 		if (item.getResolved()==null) {
 			ItemTemplate temp = ShadowrunReference.GEAR.resolve(item.getTemplateID());
 			if (temp==null)

@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
@@ -67,7 +68,7 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 				switch (quality) {
 				case EXO:
 					if (essenceAttr!=null)
-					essenceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality));
+					essenceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), Math.round(essenceAttr.getDistributed()*100), quality).setOrigin(Origin.OUTSIDE));
 					priceAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), -(int)(priceAttr.getDistributed()*0.2), quality));
 					availAttr.addIncomingModification( new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.AVAILABILITY.name(), -1, quality));
 					break;
@@ -79,7 +80,8 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 					DataItemModification addBadLuck = new DataItemModification(ShadowrunReference.QUALITY, "bad_luck");
 					addBadLuck.setApplyTo(ApplyTo.CHARACTER);
 					addBadLuck.setSource(model);
-					model.addCharacterModification(addBadLuck);
+					addBadLuck.setOrigin(Origin.OUTSIDE);
+					model.addIncomingModification(addBadLuck);
 					break;
 				case USED:
 					if (essenceAttr!=null)

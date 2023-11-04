@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.DamageType;
@@ -196,6 +197,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, int value, Object source) {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), value, source);
 		valMod.setSet(ValueType.NATURAL);
+		valMod.setOrigin(Origin.OUTSIDE);
 		val.addIncomingModification( valMod );
 	}
 
@@ -203,6 +205,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, ShadowrunAttribute attr) {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), model.getAttribute(attr).getModifiedValue(), attr);
 		valMod.setSet(ValueType.NATURAL);
+		valMod.setOrigin(Origin.OUTSIDE);
 		val.addIncomingModification( valMod );
 	}
 
@@ -210,6 +213,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, ShadowrunAttribute attr, BodyForm body) {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), body.getAttributeValue(attr).getModifiedValue(), attr);
 		valMod.setSet(ValueType.NATURAL);
+		valMod.setOrigin(Origin.OUTSIDE);
 		val.addIncomingModification( valMod );
 	}
 
@@ -231,6 +235,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), item.getAsValue(attr).getModifiedValue(), attr);
 		valMod.setSet(ValueType.NATURAL);
 		valMod.setSource(item);
+		valMod.setOrigin(Origin.OUTSIDE);
 		val.addIncomingModification( valMod );
 	}
 
@@ -285,6 +290,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val2.setDistributed(1);
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL.name(), val.getModifiedValue(), ShadowrunAttribute.INITIATIVE_DICE_PHYSICAL);
 		valMod.setSet(ValueType.NATURAL);
+		valMod.setOrigin(Origin.OUTSIDE);
 		val2.addIncomingModification( valMod );
 		logger.log(Level.DEBUG, "              = "+val2.getDisplayString()+"   "+val2.getIncomingModifications());
 	}
@@ -357,7 +363,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		// Initiave Dice (Physical)
 		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_COLD);
 		val.setDistributed(1); // Base value without modifiers
-		val.addIncomingModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 1, "VR Cold Sim") );
+		val.addIncomingModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 1, "VR Cold Sim").setOrigin(Origin.OUTSIDE) );
 		model.getPersona().setAttribute(val);
 		logger.log(Level.DEBUG, " INI Matrix VR D6    "+val.getModifiedValue());
 	}
@@ -385,7 +391,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		// Initiave Dice (Physical)
 		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_MATRIX_VR_HOT);
 		val.setDistributed(1); // Base value without modifiers
-		val.addIncomingModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 2, "VR Hot Sim") );
+		val.addIncomingModification( new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), 2, "VR Hot Sim").setOrigin(Origin.OUTSIDE) );
 		model.getPersona().setAttribute(val);
 		logger.log(Level.DEBUG, " INI Matrix VR D6 Hot   "+val.getModifiedValue());
 

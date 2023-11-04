@@ -60,7 +60,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 						SR6GearTool.recalculate("", model, item);
 					}
 
-					for (Modification mod : item.getCharacterModifications()) {
+					for (Modification mod : item.getOutgoingModifications()) {
 						logger.log(Level.INFO, "--item "+item.getKey()+": "+mod+"  apply="+mod.getApplyTo());
 						// Make specific instances of the modification (if necessary)
 						int multiplier = ItemUtil.getRating((CarriedItem<ItemTemplate>) item);
