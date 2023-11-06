@@ -36,7 +36,7 @@ public class DrakeTypeValue extends ComplexDataItemValue<DrakeType> {
 
 	//-------------------------------------------------------------------
 	public List<ShadowrunAttribute> getDrakeAttributes() {
-		return getResolved().getModifications().stream()
+		return getResolved().getOutgoingModifications().stream()
 			.filter(m -> m instanceof AllowModification)
 			.map(m -> (ShadowrunAttribute)((AllowModification)m).getResolvedKey())
 			.collect(Collectors.toList());

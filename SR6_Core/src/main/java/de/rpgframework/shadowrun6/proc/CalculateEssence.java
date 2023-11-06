@@ -13,6 +13,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -82,9 +83,9 @@ public class CalculateEssence implements ProcessingStep {
 			ItemAttributeFloatValue<SR6ItemAttribute> aVal = copy.getAsFloat(SR6ItemAttribute.ESSENCECOST);
 			double ess = aVal.getModifiedValueDouble();
 			logger.log(Level.INFO, "Essence changes from {0} to {1}", old, ess);
-			item.getAsObject(SR6ItemAttribute.QUALITY).addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), effectiveQuality.name(), SR6RuleFlag.CYBERADEPT_NOVICE));
+			item.getAsObject(SR6ItemAttribute.QUALITY).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), effectiveQuality.name(), SR6RuleFlag.CYBERADEPT_NOVICE));
 			double diff = ess - old;
-			item.getAsFloat(SR6ItemAttribute.ESSENCECOST).addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), (int)(diff*1000), SR6RuleFlag.CYBERADEPT_NOVICE));
+			item.getAsFloat(SR6ItemAttribute.ESSENCECOST).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), (int)(diff*1000), SR6RuleFlag.CYBERADEPT_NOVICE));
 //			System.out.println("A "+aVal);
 //			logger.log(Level.INFO, "A {0}", aVal);
 //			logger.log(Level.INFO, "B {0}", aVal.getModifiedValueDouble());
@@ -164,12 +165,12 @@ public class CalculateEssence implements ProcessingStep {
 			if (magicMalus<0) magicMalus=0;
 			logger.log(Level.DEBUG,"Magic/Resonance malus is "+magicMalus);
 			if (magicMalus!=0) {
-				model.getAttribute(ShadowrunAttribute.MAGIC).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
-				model.getAttribute(ShadowrunAttribute.RESONANCE).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
-				model.getAttribute(ShadowrunAttribute.POWER_POINTS).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.POWER_POINTS.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
+				model.getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
+				model.getAttribute(ShadowrunAttribute.RESONANCE).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
+				model.getAttribute(ShadowrunAttribute.POWER_POINTS).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.POWER_POINTS.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
 			}
 			// Also decrease maximum
-			model.getAttribute(ShadowrunAttribute.MAGIC).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.MAX));
+			model.getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.MAX).setOrigin(Origin.OUTSIDE));
 			// Eventually decrease social rating (Body Shop p.168)
 			int socialMalus = (int) Math.floor( ((double)essenceCost)/2000d);
 			QualityValue retention = model.getQuality("empathic_retention");
@@ -181,7 +182,7 @@ public class CalculateEssence implements ProcessingStep {
 			if (socialMalus<0) socialMalus=0;
 			logger.log(Level.DEBUG,"Social malus is "+magicMalus);
 			if (socialMalus!=0) {
-				model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_SOCIAL).addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.DEFENSE_RATING_SOCIAL.name(), -socialMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
+				model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_SOCIAL).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.DEFENSE_RATING_SOCIAL.name(), -socialMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
 			}
 
 		} finally {

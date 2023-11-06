@@ -64,7 +64,7 @@ public class CalculateAttributePools implements ProcessingStep {
 		if (aVal.getDistributed()!=0)
 			pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(aVal.getDistributed(), aVal.getModifyable().getName(loc)));
 		// Add all natural modifiers
-		for (Modification tmp : aVal.getModifications()) {
+		for (Modification tmp : aVal.getIncomingModifications()) {
 			if (!(tmp instanceof ValueModification))
 				continue;
 			if (tmp instanceof CheckModification)
@@ -87,7 +87,7 @@ public class CalculateAttributePools implements ProcessingStep {
 
 		// Find all augmentations
 		double sumAugmentations=0;
-		for (Modification tmp : aVal.getModifications()) {
+		for (Modification tmp : aVal.getIncomingModifications()) {
 			if (!(tmp instanceof ValueModification))
 				continue;
 			if (tmp instanceof CheckModification)
@@ -124,7 +124,7 @@ public class CalculateAttributePools implements ProcessingStep {
 
 		/* Artificial */
 		int sumArt = 0;
-		for (Modification tmp : aVal.getModifications()) {
+		for (Modification tmp : aVal.getIncomingModifications()) {
 			if (!(tmp instanceof ValueModification))
 				continue;
 			if (tmp instanceof CheckModification)

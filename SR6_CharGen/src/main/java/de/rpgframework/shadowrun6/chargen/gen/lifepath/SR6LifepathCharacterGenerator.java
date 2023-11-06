@@ -242,14 +242,14 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
 			int total = val.getModifiedValue();
-			val.clearModifications();
+			val.clearIncomingModifications();
 			val.setDistributed(total);
 			val.setStart(total);
 		}
 
 		for (SR6SkillValue val : getModel().getSkillValues()) {
 			int total = val.getModifiedValue();
-			val.clearModifications();
+			val.clearIncomingModifications();
 			val.setDistributed(total);
 			val.setStart(total);
 		}

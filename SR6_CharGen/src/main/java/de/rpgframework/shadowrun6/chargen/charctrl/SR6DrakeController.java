@@ -77,7 +77,7 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 		logger.log(Level.INFO, "set Drake Type to {0}",type);
 		if (getModel().getDrakeType()==null || getModel().getDrakeType().getResolved()!=type) {
 			DrakeTypeValue toSet = new DrakeTypeValue(type);
-			for (Modification tmp : type.getModifications()) {
+			for (Modification tmp : type.getOutgoingModifications()) {
 				if (tmp instanceof AllowModification) {
 					AllowModification allow = (AllowModification)tmp;
 					ShadowrunAttribute key = allow.getResolvedKey();
@@ -466,11 +466,11 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 					MetamagicOrEchoValue val = model.getMetamagicOrEcho(mod.getKey());
 					if (val==null || !item.hasLevel()) {
 						val = new MetamagicOrEchoValue(item);
-						val.addModification(mod);
+						val.addIncomingModification(mod);
 						getModel().addMetamagicOrEcho(val);
 						logger.log(Level.DEBUG, "Auto-Added Dracogenesis Power ''{0}''", mod.getKey());
 					} else {
-						val.addModification(mod);
+						val.addIncomingModification(mod);
 						logger.log(Level.DEBUG, "Auto-Increased Dracogenesis Power ''{0}''", mod.getKey());
 					}
 					continue;
@@ -517,7 +517,7 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 					payNext++;
 				}
 				// Add modifications
-				for (Modification mod : val.getModifications()) {
+				for (Modification mod : val.getIncomingModifications()) {
 					Modification copy = Shadowrun6Tools.instantiateModification(mod, val, val.getDistributed(), model);
 					logger.log(Level.DEBUG, "Add modification "+copy);
 					unprocessed.add(copy);

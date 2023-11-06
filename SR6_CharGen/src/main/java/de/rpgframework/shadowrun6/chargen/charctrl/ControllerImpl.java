@@ -107,7 +107,7 @@ public abstract class ControllerImpl<A> implements PartialController<A> {
 	protected void updateChoices(ComplexDataItem value) {
 		choices.clear();
 		choices.addAll(value.getChoices().stream().map(c -> c.getUUID()).toList());
-		choices.addAll(value.getModifications().stream()
+		choices.addAll(value.getOutgoingModifications().stream()
 			.filter(m -> m instanceof ModificationChoice)
 			.map(mc -> ((ModificationChoice)mc).getUUID()).toList());
 	}

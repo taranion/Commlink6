@@ -40,7 +40,7 @@ public class LifepathModule extends ComplexDataItem {
 		super.validate();
 
 		// Check for i18n strings in decisions
-		for (Modification mod : getModifications()) {
+		for (Modification mod : getOutgoingModifications()) {
 			if (mod instanceof ModificationChoice) {
 				for (Modification m2 :((ModificationChoice)mod).getModificiations()) {
 					if (m2 instanceof DataItemModification) {

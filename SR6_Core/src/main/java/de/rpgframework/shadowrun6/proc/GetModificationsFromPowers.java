@@ -43,7 +43,7 @@ public class GetModificationsFromPowers implements ProcessingStep {
 			for (AdeptPowerValue ref :model.getAdeptPowers()) {
 				AdeptPower power = ref.getModifyable();
 				logger.log(Level.DEBUG, "add from power "+power.getId()+" / "+ref+" / dec="+ref.getDecisions());
-				logger.log(Level.DEBUG, "ToDo: "+power.getModifications());
+				logger.log(Level.DEBUG, "ToDo: "+power.getOutgoingModifications());
 				// Calculate modifications
 				ref.reset();
 
@@ -52,7 +52,7 @@ public class GetModificationsFromPowers implements ProcessingStep {
 //					logger.log(Level.WARNING,"Strange! Found AdeptPower {0} with value 0 that should have at least 1 - ignore it: "+ref, ref.getKey());
 ////					continue;
 //				}
-				for (Modification mod : power.getModifications()) {
+				for (Modification mod : power.getOutgoingModifications()) {
 					try {
 						Modification realMod = Shadowrun6Tools.instantiateModification(mod, ref, multiplier, model);
 						logger.log(Level.DEBUG, " instantiated "+realMod);
@@ -60,7 +60,7 @@ public class GetModificationsFromPowers implements ProcessingStep {
 							if (realMod instanceof DataItemModification)
 								((DataItemModification)realMod).setConditionString("GetModificationsFromPowers");
 						}
-						ref.addCharacterModification(realMod);
+						ref.addOutgoingModification(realMod);
 						unprocessed.add(realMod);
 					} catch (Exception e) {
 						logger.log(Level.ERROR, "Problem calculating modifications for adept power: "+ref,e);
@@ -69,13 +69,13 @@ public class GetModificationsFromPowers implements ProcessingStep {
 
 
 
-				if (ref.getModifications()!=null && !ref.getModifications().isEmpty()) {
-					logger.log(Level.DEBUG, " - "+ref.getModifyable().getId()+" has modifications: "+ref.getModifications());
-					for (Modification mod : ref.getModifications()) {
+				if (ref.getIncomingModifications()!=null && !ref.getIncomingModifications().isEmpty()) {
+					logger.log(Level.DEBUG, " - "+ref.getModifyable().getId()+" has modifications: "+ref.getIncomingModifications());
+					for (Modification mod : ref.getIncomingModifications()) {
 						mod.setSource(ref.getModifyable());
 					}
 //					logger.log(Level.DEBUG, " - add modifications: "+ref.getModifications());
-					unprocessed.addAll(ref.getModifications());
+					unprocessed.addAll(ref.getIncomingModifications());
 				}
 			}
 		} finally {

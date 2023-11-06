@@ -251,7 +251,7 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 			settings.spellsKarma=0;
 			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells()) {
 				logger.log(Level.INFO, "Magic = "+model.getAttribute(ShadowrunAttribute.MAGIC));
-				logger.log(Level.INFO, " mods = "+model.getAttribute(ShadowrunAttribute.MAGIC).getModifications());
+				logger.log(Level.INFO, " mods = "+model.getAttribute(ShadowrunAttribute.MAGIC).getIncomingModifications());
 				int magic = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue();
 				if (model.getMagicOrResonanceType().paysPowers()) {
 					// "mystic adepts subtract PP from Magic for this calculation"

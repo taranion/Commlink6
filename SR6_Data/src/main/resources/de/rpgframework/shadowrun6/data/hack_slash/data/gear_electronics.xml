@@ -18,7 +18,7 @@
    </item>
 
    <!-- Custom Cyberdecks -->
-   
+
    <item id="cyberdeck_core" type="CYBERDECK" subtype="CORE">
    	<choices>
    		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
@@ -52,7 +52,7 @@
          <valmod type="ITEM_ATTRIBUTE" ref="SLEAZE" value="$RATING"/>
       </modifications>
    </item>
-   
+
    <item id="breadbox_case" type="CYBERDECK" subtype="CASES">
     	<attrdef id="PRICE"        value="0"/>
     	<attrdef id="AVAILABILITY" value="2I"/>
@@ -132,7 +132,7 @@
    		</modifications>
    	</variant>
    </item>
-   
+
    <item id="rcc_case" type="CYBERDECK" subtype="CASES" reqVariant="y">
     	<attrdef id="PRICE"        value="500"/>
     	<attrdef id="AVAILABILITY" value="4I"/>
@@ -155,7 +155,7 @@
    		</modifications>
    	</variant>
    </item>
-   
+
    <item id="wearable_case" type="CYBERDECK" subtype="CASES">
     	<attrdef id="PRICE"        value="500"/>
     	<attrdef id="AVAILABILITY" value="4I"/>
@@ -210,7 +210,7 @@
     	<attrdef id="DAMAGE"     value="(4+2*$SIZE)S"/>
       </alternate>
    </item>
-   
+
    <!-- Optional Components -->
    <item id="internal_program_slot" price="2000" avail="2I" type="CYBERDECK" subtype="CORE_OPTIONAL" count="y">
       <usage mode="EMBEDDED" value="1" slot="CORE_SLOTS"/>
@@ -235,7 +235,7 @@
       <usage mode="EMBEDDED" value="$RATING*2" slot="CORE_SLOTS"/>
     	<attrdef id="PRICE" value="$RATING*10000"/>
       <modifications>
-         	<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX" value="$RATING"/> 
+         	<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX" value="$RATING"/>
       </modifications>
 		<requires>
 			<datareq type="GEAR" ref="cyberjack" negate="true" apply="CHARACTER"/> <!-- not compatible with cyber jacks, only with cyber hacks -->
@@ -308,9 +308,9 @@
    </item>
 
    <item avail="4I" price="750" id="grapple_tapper" type="ELECTRONICS" subtype="COMMUNICATION">
-			<alternate mode="WEAPON" type="WEAPON_RANGED" subtype="BOWS">
-				<weapon skill="athletics" spec="athletics/archery"/>
-			</alternate>
+		<alternate mode="WEAPON" type="WEAPON_RANGED" subtype="BOWS" id="bow">
+			<weapon skill="athletics" spec="athletics/archery"/>
+		</alternate>
    </item>
    <item avail="2" price="50" id="grapple_tapper_cable" type="ELECTRONICS" subtype="COMMUNICATION"/>
    <item avail="4I" price="350" id="grapple_tapper_pod" type="ELECTRONICS" subtype="COMMUNICATION"/>
@@ -322,7 +322,7 @@
    <item avail="5I" price="400" id="taser_tap" type="ELECTRONICS" subtype="COMMUNICATION"/>
 
    <!-- Gizmos Matrix Relay -->
-   
+
    <item id="matrix_relay" type="ELECTRONICS" subtype="COMMUNICATION">
    	<choices>
    		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
@@ -339,7 +339,7 @@
 	</choices>
 	<attrdef id="PRICE" value="$RATING*500"/>
    </item>
-   
+
    <item avail="2I" id="rfid_screamer_bomb" type="ELECTRONICS" subtype="RFID">
    	<choices>
 		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
@@ -366,7 +366,7 @@
 
    <item avail="3I" id="comhack_agent_box" type="ELECTRONICS" subtype="COMMLINK">
    	<choices>
-		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/> 
+		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 	</choices>
 	<attrdef id="PRICE" value="$RATING" table="200,900,1300,2900,5500,8600"/> <!-- Including cost of commlink in price -->
    </item>
@@ -382,7 +382,7 @@
 	</choices>
 	<attrdef id="PRICE" value="$RATING" table="200,1200,5300"/> <!-- Including cost of commlink in price -->
    </item>
-   
+
    <item avail="4L" id="comhack_armorlink_upgrade" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES">
 		<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
 		<choices>
@@ -391,7 +391,7 @@
 		<attrdef id="PRICE" value="$RATING*250"/>
       	<requires>
         		<valuereq type="ITEM_ATTRIBUTE" ref="DEVICE_RATING" value="$RATING" />
-				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>      	
+				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>
 		</requires>
    </item>
    <item avail="4I" id="comhack_stealthlink_upgrade" type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES">
@@ -402,7 +402,7 @@
 		<attrdef id="PRICE" value="$RATING*1000"/>
       	<requires>
         		<valuereq type="ITEM_ATTRIBUTE" ref="DATA_PROCESSING" value="$RATING" />
-				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>      	
+				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>
       	</requires>
 		<modifications>
 			<valmod type="ITEM_ATTRIBUTE" ref="SLEAZE" value="$RATING"/>
@@ -416,7 +416,7 @@
 		<attrdef id="PRICE" value="$RATING*500"/>
       	<requires>
         		<valuereq type="ITEM_ATTRIBUTE" ref="FIREWALL" value="$RATING" />
-				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>      	
+				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>
       	</requires>
 		<modifications>
 			<valmod type="ITEM_ATTRIBUTE" ref="FIREWALL" value="$RATING"/>
@@ -430,7 +430,7 @@
 		<attrdef id="PRICE" value="$RATING*500"/>
       	<requires>
         		<valuereq type="ITEM_ATTRIBUTE" ref="DEVICE_RATING" value="$RATING*2" /> <!-- DE rules limit to device rating /2 instead base firewall -->
-				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>      	
+				<datareq type="ITEMSUBTYPE" ref="COMMLINK" apply="DATA_ITEM"/>
       	</requires>
 	</item>
 
@@ -492,7 +492,7 @@
    </item>
 
    <!-- Cyberterms -->
-   
+
    <item avail="3I" price="52500" id="aztechnology_aprendiz" type="ELECTRONICS" subtype="CYBERTERM">
 		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
        <modifications>
@@ -555,13 +555,13 @@
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="2,3,4,5,6"/>
 		</choices>
 		<attrdef id="PRICE" value="$RATING" table="0,1100, 1600, 3700, 6000, 9200"/>
-		<attrdef id="AVAILABILITY" value="$RATING I"/>		
+		<attrdef id="AVAILABILITY" value="$RATING I"/>
 		<matrix programs="0"/>
-		<attrdef id="ATTACK" value="$RATING" table="0,1,2,2,3,4"/>		
-		<attrdef id="SLEAZE" value="$RATING" table="0,1,2,2,3,4"/>		
-		<attrdef id="DATA_PROCESSING" value="$RATING" table="0,1,1,2,2,2"/>		
-		<attrdef id="FIREWALL" value="$RATING" table="0,1,1,2,2,2"/>		
-		<attrdef id="DEVICE_RATING" value="$RATING"/>		
+		<attrdef id="ATTACK" value="$RATING" table="0,1,2,2,3,4"/>
+		<attrdef id="SLEAZE" value="$RATING" table="0,1,2,2,3,4"/>
+		<attrdef id="DATA_PROCESSING" value="$RATING" table="0,1,1,2,2,2"/>
+		<attrdef id="FIREWALL" value="$RATING" table="0,1,1,2,2,2"/>
+		<attrdef id="DEVICE_RATING" value="$RATING"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
    <item id="cyberkit_recharge" type="ELECTRONICS" subtype="CYBERDECK">
@@ -569,9 +569,9 @@
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="2,3,4,5,6"/>
 		</choices>
 		<attrdef id="PRICE" value="$RATING*100"/>
-		<attrdef id="AVAILABILITY" value="$RATING I"/>		
+		<attrdef id="AVAILABILITY" value="$RATING I"/>
    </item>
-   
+
    <!-- Echos and Streams  -->
    <item id="living_console" subtype="RIGGER_CONSOLE" type="ELECTRONICS" modonly="true">
 		<attrdef id="SOFTWARE_TYPES" value="RCC,AUTOSOFT"/>
@@ -595,5 +595,5 @@
 		<attrdef id="NOISE_REDUCTION" value="$WILLPOWER"/>
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
-   
+
 </items>

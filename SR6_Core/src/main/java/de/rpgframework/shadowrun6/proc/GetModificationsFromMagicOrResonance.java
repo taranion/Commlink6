@@ -37,7 +37,7 @@ public class GetModificationsFromMagicOrResonance implements ProcessingStep {
 			// Apply modifications by Magic Or Resonance
 			if (model.getMagicOrResonanceType()!=null) {
 				logger.log(Level.DEBUG,"Apply modifications from MagicOrResonance "+model.getMagicOrResonanceType().getId());
-				unprocessed.addAll(model.getMagicOrResonanceType().getModifications());
+				unprocessed.addAll(model.getMagicOrResonanceType().getOutgoingModifications());
 			}
 		} finally {
 			logger.log(Level.TRACE,"LEAVE: process() ends with "+unprocessed.size()+" modifications still to process");

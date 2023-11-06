@@ -44,7 +44,7 @@ public class GetModificationsFromQualityPaths implements ProcessingStep {
 						BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "Quality path '"+qpVal.getKey()+"' has unknown step '"+stepVal.getKey()+"'");
 						continue;
 					}
-					for (Modification mod : stepVal.getResolved().getModifications()) {
+					for (Modification mod : stepVal.getResolved().getOutgoingModifications()) {
 						logger.log(Level.DEBUG, "Quality path ''{0}'' step ''{1}'' adds: {2}", qpVal.getKey(), stepVal.getKey(),mod);
 						unprocessed.add(mod);
 					}
@@ -52,7 +52,7 @@ public class GetModificationsFromQualityPaths implements ProcessingStep {
 			}
 
 		} finally {
-			logger.log(Level.TRACE, "LEAVE : process() ends with "+unprocessed.size()+" modifications still to process");
+			logger.log(Level.TRACE, "LEAVE : process() ends with {0} modifications still to process",unprocessed.size());
 		}
 		return unprocessed;
 	}

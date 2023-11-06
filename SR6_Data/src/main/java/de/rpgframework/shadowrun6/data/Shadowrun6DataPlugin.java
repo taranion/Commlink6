@@ -30,6 +30,7 @@ import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.IUsageMode;
 import de.rpgframework.genericrpg.items.IVariantMode;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ANPC;
@@ -263,7 +264,7 @@ public class Shadowrun6DataPlugin  {
 		core.setType(DataSetType.RULES);
 		core.setReleased(201908);
 		ItemUtil.SOFTWARE_LIBRARY_ITEM.assignToDataSet(core);
-		SR6GearTool.recalculate("", null, ItemUtil.SOFTWARE_LIBRARY);
+		ItemUtil.UNARMED_ITEM.assignToDataSet(core);
 
 //		PluginSkeleton CORE = new PluginSkeleton("CORE", "Splittermond Core Rules");
 		list = Shadowrun6Core.loadDataItems(SenseList.class, Sense.class, core, clazz.getResourceAsStream("core/data/senses.xml"));
@@ -364,6 +365,9 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" Mentor Spirit");
 		list = Shadowrun6Core.loadDataItems(RuleInterpretationList.class, RuleInterpretation.class, core, clazz.getResourceAsStream("core/data/rules.xml"));
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" rule presets");
+
+		ItemUtil.UNARMED_ITEM.setAttribute(SR6ItemAttribute.SKILL, Shadowrun6Core.getSkill("close_combat"));
+		ItemUtil.UNARMED_ITEM.setAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION, Shadowrun6Core.getSkill("close_combat"));
 	}
 
 	//-------------------------------------------------------------------
@@ -374,6 +378,7 @@ public class Shadowrun6DataPlugin  {
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FIRING_SQUAD", "firing_squad.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.RULES);
 		set.setReleased(202005);
+		ItemUtil.FIRING_SQUAD_MELEE_HARDNING.assignToDataSet(set);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "firing_squad/data/actions_edge.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
 		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"firing_squad/data/ammunition_types.xml");

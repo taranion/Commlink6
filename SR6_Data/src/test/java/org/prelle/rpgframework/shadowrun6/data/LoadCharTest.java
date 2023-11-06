@@ -10,11 +10,14 @@ import java.util.Locale;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 
 /**
  * @author prelle
@@ -70,6 +73,19 @@ public class LoadCharTest {
 			form.getQualities().forEach(System.out::println);
 			form.getCritterPowers().forEach(System.out::println);
         }
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void loadStreetSam() throws IOException {
+		String name = "Takeda";
+		FileInputStream fis = new FileInputStream("src/test/resources/testdata/"+ name + ".xml");
+		byte[] data = fis.readAllBytes();
+        Shadowrun6Character character = Shadowrun6Core.decode(data);
+
+        Shadowrun6Tools.resolveChar(character);
+        Shadowrun6Tools.runProcessors(character, Locale.getDefault());
+
 	}
 
 }

@@ -3,33 +3,26 @@ package org.prelle.rpgframework.shadowrun6.data;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 import java.util.UUID;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.ItemHook;
-import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemType;
-import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
-import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 
 /**
  * @author prelle
@@ -53,15 +46,15 @@ public class PersonaTest {
 		ItemTemplate prog1 = Shadowrun6Core.getItem(ItemTemplate.class, "armor");
 		CarriedItem<ItemTemplate> prog1CI = SR6GearTool.buildItem(prog1, CarryMode.EMBEDDED, null, true).get();
 		System.out.println("testProgram: operationModeOptions="+prog1CI.getOperationModes(true));
-		assertNotNull(prog1CI.getModifications());
-		assertTrue(prog1CI.getModifications().isEmpty());
-		assertNotNull(prog1CI.getCharacterModifications());
-		assertTrue("Mode not activated yet - should not have modifications",prog1CI.getCharacterModifications().isEmpty());
+		assertNotNull(prog1CI.getIncomingModifications());
+		assertTrue(prog1CI.getIncomingModifications().isEmpty());
+		assertNotNull(prog1CI.getOutgoingModifications());
+		assertTrue("Mode not activated yet - should not have modifications",prog1CI.getOutgoingModifications().isEmpty());
 
 		prog1CI.setMode(prog1CI.getOperationModes(false).get(0).getModes().get(0), true);
 		SR6GearTool.recalculate("", null, prog1CI);
-		assertNotNull(prog1CI.getCharacterModifications());
-		assertFalse("Mode activated now- should have modifications",prog1CI.getCharacterModifications().isEmpty());
+		assertNotNull(prog1CI.getOutgoingModifications());
+		assertFalse("Mode activated now- should have modifications",prog1CI.getOutgoingModifications().isEmpty());
 	}
 
 	//-------------------------------------------------------------------

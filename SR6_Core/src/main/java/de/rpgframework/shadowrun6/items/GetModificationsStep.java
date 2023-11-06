@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -50,11 +51,13 @@ public class GetModificationsStep implements CarriedItemProcessor {
 		case CHARACTER:
 		case UNARMED:
 		case PERSONA:
-			model.addCharacterModification(realMod);
+			logger.log(Level.INFO, "Add outgoing {2} modification {0} to {1}", realMod, model, apply);
+			model.addOutgoingModification(realMod);
 			break;
 		case ACTIVE_GEAR:
 		case DATA_ITEM:
-			model.addModification(realMod);
+			logger.log(Level.INFO, "Add incoming {2} modification {0} to {1}", realMod, model, apply);
+			model.addIncomingModification(realMod);
 			break;
 		default:
 			logger.log(Level.WARNING, "Don't know how to decide for "+ apply);
@@ -110,9 +113,10 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			mod.setValue(result);
 			mod.getFormula().isResolved();
 			mod.setInstantiated(true);
+			mod.setOrigin(Origin.CHILDREN);
 			logger.log(Level.DEBUG, "  Resolve "+mod.getFormula()+" to "+result+" and add "+mod);
 		}
-		logger.log(Level.INFO, "Add modification {0}", mod);
+		logger.log(Level.TRACE, "instantiated modification {0} with direction {1}", mod, mod.getOrigin());
 		return mod;
 	}
 
@@ -153,20 +157,20 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			List<Modification> unprocessed) {
 
 		if (model.getResolved() != null) {
-			model.getResolved().getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
+			model.getResolved().getOutgoingModifications().forEach(m ->  decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac));
 		}
 		if (model.getVariant() != null) {
-			model.getVariant().getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
+			model.getVariant().getOutgoingModifications().forEach(m -> decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac));
 		}
 		// Get modifications from enhancements
 		for (ItemEnhancementValue<AItemEnhancement> enh : model.getEnhancements()) {
 			SR6ItemEnhancement real = (SR6ItemEnhancement) enh.getResolved();
-			real.getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
-			model.getAsValue(SR6ItemAttribute.PRICE).addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), real.getPrice(), real));
+			real.getOutgoingModifications().forEach(m -> decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac));
+			model.getAsValue(SR6ItemAttribute.PRICE).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), real.getPrice(), real));
 		}
 
 		for (OperationMode mode : model.getActiveOperationModes(true)) {
-			mode.getModifications().forEach(m -> decideModification(m, unprocessed, model, charac));
+			mode.getModifications().forEach(m -> decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac));
 		}
 
 		return new OperationResult<List<Modification>>(unprocessed);

@@ -1652,7 +1652,7 @@ public class SR6ArchetypeTest {
 
 		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.STRENGTH);
 		System.out.println("Strength = "+aVal.getDisplayString());
-		System.out.println("Strength = "+aVal.getModifications());
+		System.out.println("Strength = "+aVal.getIncomingModifications());
 		System.out.println("Strength NAT = "+aVal.getPool().getCalculation(ValueType.NATURAL));
 		System.out.println("Strength ART = "+aVal.getPool().getCalculation(ValueType.ARTIFICIAL));
 		System.out.println("Strength ALL = "+aVal.getPool().toString());

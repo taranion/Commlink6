@@ -159,8 +159,8 @@ public class EquipmentTests {
 		assertEquals(ItemSubType.CYBER_BODYWARE, ref.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue());
 		assertEquals(7, ((Availability)ref.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getValue());
 		assertEquals(Legality.RESTRICTED, ((Availability)ref.getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue()).getLegality());
-		assertEquals(5, ref.getCharacterModifications().size());
-		assertEquals(0, ref.getModifications().size());
+		assertEquals(5, ref.getOutgoingModifications().size());
+		assertEquals(0, ref.getIncomingModifications().size());
 	}
 
 	//-------------------------------------------------------------------
@@ -180,10 +180,10 @@ public class EquipmentTests {
 		for (Modification val : list) {
 			System.out.println("U  = "+val);
 		}
-		for (Modification val : ref.getCharacterModifications()) {
+		for (Modification val : ref.getOutgoingModifications()) {
 			System.out.println("C  = "+val);
 		}
-		for (Modification val : ref.getModifications()) {
+		for (Modification val : ref.getIncomingModifications()) {
 			System.out.println("I  = "+val);
 		}
 
@@ -191,8 +191,8 @@ public class EquipmentTests {
 
 		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
 		assertEquals(210000, attr.getModifiedValue());
-		assertEquals(2, ref.getCharacterModifications().size());
-		assertEquals(0, ref.getModifications().size());
+		assertEquals(2, ref.getOutgoingModifications().size());
+		assertEquals(0, ref.getIncomingModifications().size());
 	}
 
 	//-------------------------------------------------------------------

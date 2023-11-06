@@ -61,7 +61,7 @@ public class SR6HistoryElementListCell extends HistoryElementListCell implements
 	private int getAttributeChange(HistoryElement item, ShadowrunAttribute key) {
 		int sum = 0;
 		for (Reward reward : item.getGained()) {
-			for (Modification tmp : reward.getModifications()) {
+			for (Modification tmp : reward.getIncomingModifications()) {
 				if (tmp instanceof ValueModification && tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE) {
 					ValueModification mod = (ValueModification)tmp;
 					if (mod.getResolvedKey()==key)

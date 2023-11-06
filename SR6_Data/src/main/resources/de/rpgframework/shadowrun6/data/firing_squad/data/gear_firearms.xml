@@ -73,7 +73,7 @@
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
       </modifications>
       <weapon dmg="3P" attack="9,8,8," mode="SA" ammo="12(c)" skill="firearms" spec="firearms/pistols_heavy"/>
-      <alternate type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <alternate type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="melee">
       	<weapon  dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>
    </item>
@@ -104,7 +104,7 @@
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
       <weapon dmg="3P" attack="10,8,8," mode="BF/FA" ammo="32(c)" skill="firearms" spec="firearms/submachine_guns"/>
-      <alternate type="WEAPON_SPECIAL" subtype="DART">
+      <alternate type="WEAPON_SPECIAL" subtype="DART" id="dart_gun">
       	<weapon  dmg="1P" mode="SS/SA" attack="10,8,,," ammo="6(c)" skill="exotic_weapons" spec="exotic_weapons/air"/>
       </alternate>
    </item>
@@ -170,7 +170,7 @@
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
       </modifications>
       <weapon dmg="3P" mode="BF/FA" attack="4,10,8,," ammo="8(c)" skill="firearms" spec="firearms/rifles"/>
-      <alternate type="WEAPON_SPECIAL"   subtype="LAUNCHERS" >
+      <alternate type="WEAPON_SPECIAL"   subtype="LAUNCHERS" id="launcher">
       	<weapon attack="3,9,5,1," ammo="1(m)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
       </alternate>
    </item>
@@ -214,7 +214,7 @@
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
       </modifications>
       <weapon dmg="5P" mode="SA/BF/FA" attack="4,11,9,6,2" ammo="38(c)" skill="firearms" spec="firearms/rifles"/>
-      <alternate type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+      <alternate type="WEAPON_FIREARMS" subtype="SHOTGUNS" id="shotgun">
       	<weapon dmg="3P" attack="7,10,6,," mode="SS/SA" ammo="6(c)" skill="firearms" spec="firearms/shotguns"/>
       </alternate>
    </item>
@@ -335,7 +335,7 @@
       <variant id="model2">
       	<attrdef id="PRICE" value="7500"/>
       	<weapon dmg="3P" mode="SS/SA/BF" attack="4,10,10,4," ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
-     		<alternate id="long_barrel">
+     		<alternate id="long_barrel" type="WEAPON_FIREARMS" subtype="LMG">
        		<weapon dmg="4P" mode="SA/BF/FA" attack="2,11,12,8,2" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
       	</alternate>
       </variant>

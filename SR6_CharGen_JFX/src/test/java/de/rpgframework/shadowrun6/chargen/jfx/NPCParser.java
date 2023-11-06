@@ -274,7 +274,7 @@ public class NPCParser {
 			int p2 = t.indexOf(")");
 			if (p1>0) {
 				aVal.setDistributed( Integer.parseInt(t.substring(0, p1)));
-				aVal.addModification(new ValueModification(
+				aVal.addIncomingModification(new ValueModification(
 						ShadowrunReference.ATTRIBUTE,
 						attr.name(),
 						Integer.parseInt(t.substring( p1+1, p2))

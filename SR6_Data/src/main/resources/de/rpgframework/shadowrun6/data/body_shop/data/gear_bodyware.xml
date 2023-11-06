@@ -57,7 +57,7 @@
 			<usage mode="IMPLANTED" value="0.5"/>
  			<attrdef id="PRICE" value="5000"/>
  			<attrdef id="AVAILABILITY" value="5I"/>
- 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+ 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" id="weapon">
 				<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/thagomizer" />
  			</alternate>
  		</variant>
@@ -135,9 +135,9 @@
 		<usage mode="IMPLANTED" value="0.2"/>
 		<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
- 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
-				<weapon dmg="2P" attack="4,,,," skill="close_combat" spec="close_combat/blades" />
- 			</alternate>
+ 		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" id="melee" >
+			<weapon dmg="2P" attack="4,,,," skill="close_combat" spec="close_combat/blades" />
+ 		</alternate>
    </item>
 	<item id="skill_hardwires" avail="4" price="8000" type="CYBERWARE" subtype="CYBER_BODYWARE">
 		<choices>

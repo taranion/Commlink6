@@ -43,7 +43,6 @@ public class VehicleTools {
 
 	//---------------------------------------------------------
 	public static VehicleUnarmedAttack getVehicleUnarmed(Shadowrun6Character model, CarriedItem<ItemTemplate> vehicle, VehicleOperationMode mode) {
-		logger.log(Level.WARNING, "TODO: getVehicleUnarmed not implemented yet");
 		// Collect some necessary data
 		CarriedItem<ItemTemplate> simrig = model.getCarriedItem("control_rig");
 		int simRigRating = (simrig==null)?0:ItemUtil.getRating(simrig);
@@ -105,64 +104,64 @@ public class VehicleTools {
 			ret.setPool(attPool);
 			break;
 		case JUMPED_IN:
-//			// The Attack Rating of a vehicle is Piloting of the driver + Sensor.
-//			// Assume rating of simrig is added
-//			if (simrig==null)
-//				return null;
+			// The Attack Rating of a vehicle is Piloting of the driver + Sensor.
+			// Assume rating of simrig is added
+			if (simrig==null)
+				return null;
 			arPool = new ArrayList<>(driverPilotPool);
-//			arPool.add(new Shadowrun6Tools.PoolCalculation(sensor, ItemAttribute.SENSORS.getName()));
-//			arPool.add(new Shadowrun6Tools.PoolCalculation(simRigRating, simrig.getNameWithRating()));
-//			ar = (int)arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-//			ret.setAttackRating(ar);
-//			ret.setAttackRating(arPool);
-////			logger.info("Unarmed: "+vehicle.getName()+": Rigged "+arPool);
-//			// The attempt to hit another being or vehicle is an Opposed test
-//			// — Piloting + Reaction vs.
-//			attPool = new ArrayList<>(driverPilotPool);
-//			attPool.addAll(Shadowrun6Tools.getAttributePoolCalculation(model, Attribute.INTUITION));
-//			if (simSenseOverdrive!=null) {
-//				int maxAdd = 4 - model.getAttribute(Attribute.INTUITION).getModifier();
-//				int add  = Math.min(maxAdd, simSenseOverdrive.getRating());
-//				attPool.add(new PoolCalculation(add, simSenseOverdrive.getNameWithRating()));
-//			}
-//			attPool.add(new Shadowrun6Tools.PoolCalculation(simRigRating, simrig.getNameWithRating()));
-//			//logger.info("Unarmed: "+vehicle.getName()+": Rigged "+attPool);
-//			dice = (int)attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-//			ret.setPool(dice);
-//			ret.setPool(attPool);
-//			logger.info("Unarmed(JUMPED ): "+vehicle.getName()+"::  "+attPool);
+			arPool.add(new PoolCalculation(sensor, SR6ItemAttribute.SENSORS.getName()));
+			arPool.add(new PoolCalculation(simRigRating, simrig.getNameWithRating()));
+			ar = (int)arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+			ret.setAttackRating(ar);
+			ret.setAttackRating(arPool);
+//			logger.info("Unarmed: "+vehicle.getName()+": Rigged "+arPool);
+			// The attempt to hit another being or vehicle is an Opposed test
+			// — Piloting + Reaction vs.
+			attPool = new ArrayList<>(driverPilotPool);
+			attPool.addAll(model.getAttribute(ShadowrunAttribute.INTUITION).getPool().getCalculation(ValueType.AUGMENTED));
+			if (simSenseOverdrive!=null) {
+				int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
+				int add  = Math.min(maxAdd, simSenseOverdrive.getDistributed());
+				attPool.add(new PoolCalculation(add, simSenseOverdrive.getNameWithRating()));
+			}
+			attPool.add(new PoolCalculation(simRigRating, simrig.getNameWithRating()));
+			//logger.info("Unarmed: "+vehicle.getName()+": Rigged "+attPool);
+			dice = (int)attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+			ret.setPool(dice);
+			ret.setPool(attPool);
+			logger.log(Level.INFO,"Unarmed(JUMPED ): "+vehicle.getNameWithoutRating()+"::  "+attPool);
 			break;
 		case AUTONOMOUS:
 			arPool = new ArrayList<>(driverPilotPool);
-//			arPool.add(new Shadowrun6Tools.PoolCalculation(sensor, ItemAttribute.SENSORS.getName()));
-//			ar = (int) arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-//			ret.setAttackRating(ar);
-//			ret.setAttackRating(arPool);
-////			logger.info("Unarmed: "+vehicle.getName()+": Autonom "+arPool);
-//			// The attempt to hit another being or vehicle is an Opposed test
-//			// — Piloting + Reaction vs.
-//			attPool = new ArrayList<>(driverPilotPool);
-//			attPool.add(new Shadowrun6Tools.PoolCalculation(pilot, ItemAttribute.PILOT.getName()));
-//			dice = (int) attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-//			ret.setPool(dice);
-//			ret.setPool(attPool);
-//			//logger.info("Unarmed(AUTONOM): "+vehicle.getName()+"::  "+attPool);
+			arPool.add(new PoolCalculation(sensor, SR6ItemAttribute.SENSORS.getName()));
+			ar = (int) arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+			ret.setAttackRating(ar);
+			ret.setAttackRating(arPool);
+//			logger.info("Unarmed: "+vehicle.getName()+": Autonom "+arPool);
+			// The attempt to hit another being or vehicle is an Opposed test
+			// — Piloting + Reaction vs.
+			attPool = new ArrayList<>(driverPilotPool);
+			attPool.add(new PoolCalculation(pilot, SR6ItemAttribute.PILOT.getName()));
+			dice = (int) attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+			ret.setPool(dice);
+			ret.setPool(attPool);
+			//logger.info("Unarmed(AUTONOM): "+vehicle.getName()+"::  "+attPool);
 			break;
 		case RCC:
 			arPool = new ArrayList<>(driverPilotPool);
-//			arPool.add(new Shadowrun6Tools.PoolCalculation(sensor, ItemAttribute.SENSORS.getName()));
-//			ar = (int) arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-//			ret.setAttackRating(ar);
-//			ret.setAttackRating(arPool);
-////			logger.info("Unarmed: "+vehicle.getName()+": RCC "+arPool);
-//			// The attempt to hit another being or vehicle is an Opposed test
-//			// — Piloting + Reaction vs.
-//			attPool = new ArrayList<>(driverPilotPool);
-//			attPool.add(new Shadowrun6Tools.PoolCalculation(pilot, ItemAttribute.PILOT.getName()));
-//			dice = (int) attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
-//			//logger.info("Unarmed(RCC    ): "+vehicle.getName()+"::  "+attPool);
-//			ret.setPool(dice);
-//			ret.setPool(attPool);
+			arPool.add(new PoolCalculation(sensor, SR6ItemAttribute.SENSORS.getName()));
+			ar = (int) arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+			ret.setAttackRating(ar);
+			ret.setAttackRating(arPool);
+//			logger.info("Unarmed: "+vehicle.getName()+": RCC "+arPool);
+			// The attempt to hit another being or vehicle is an Opposed test
+			// — Piloting + Reaction vs.
+			attPool = new ArrayList<>(driverPilotPool);
+			attPool.add(new PoolCalculation(pilot, SR6ItemAttribute.PILOT.getName()));
+			dice = (int) attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
+			//logger.info("Unarmed(RCC    ): "+vehicle.getName()+"::  "+attPool);
+			ret.setPool(dice);
+			ret.setPool(attPool);
 			break;
 		}
 

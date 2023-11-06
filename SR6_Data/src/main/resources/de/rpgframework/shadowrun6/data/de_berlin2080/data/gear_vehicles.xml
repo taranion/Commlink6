@@ -73,12 +73,12 @@
    </item>
 
    <item avail="6"  price="3000" id="kuznechik"  type="DRONE_MEDIUM" subtype="AIR" >
-	  <alternate mode="VEHICLE" type="VEHICLES" subtype="ROTORCRAFT">
-      </alternate>
       <vehicle han="3/3" acc="25" spdi="30" tspd="140" bod="6" arm="2" pil="1" sen="2" sea="1" type="AIR"/>
       <modifications>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
 	  </modifications>
+	  <alternate mode="VEHICLE" type="VEHICLES" subtype="ROTORCRAFT" id="rotorcraft">
+      </alternate>
    </item>
 
    <!-- Walkers -->

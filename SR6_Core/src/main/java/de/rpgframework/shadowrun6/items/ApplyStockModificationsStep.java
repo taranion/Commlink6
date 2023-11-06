@@ -52,7 +52,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 		@SuppressWarnings("unchecked")
 		CarriedItem<ItemTemplate> model2 = (CarriedItem<ItemTemplate>) model;
 		// Read all modifications that are meant for this item
-		for (Modification tmp : model.getModifications()) {
+		for (Modification tmp : model.getIncomingModifications()) {
 			try {
 				logger.log(Level.INFO, "Process {0}", tmp);
 				if (tmp instanceof ValueModification) {
@@ -103,8 +103,9 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	@SuppressWarnings({ "rawtypes", "incomplete-switch" })
 	private boolean applyModification(boolean strict, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
-			model.addCharacterModification(mod);
+			model.addOutgoingModification(mod); // Is direction correct?
 			logger.log(Level.WARNING, "Ignore for now " + mod);
+			System.exit(1);
 			return false;
 		}
 
@@ -144,7 +145,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 						ValueModification valMod = (ValueModification)mod;
 						if (slot!=null) {
 							logger.log(Level.INFO, "For slot {0} add capacity {1} from {2}", hook, valMod.getValueAsDouble(), mod.getSource());
-							slot.addModification(valMod);
+							slot.addIncomingModification(valMod);
 						} else {
 							if (valMod.isDouble()) {
 								logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2}", hook, valMod.getValueAsDouble(), mod.getSource());
@@ -168,7 +169,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			}
 			return true;
 		case GEAR:
-			model.addCharacterModification(mod);
+			model.addIncomingModification(mod);
 			return true;
 		case ITEM_ATTRIBUTE:
 			if (mod instanceof ValueModification) {
@@ -193,8 +194,9 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	private boolean embedModification(boolean strict, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
 		logger.log(Level.DEBUG, "Before processing "+mod+" Decisions are "+model.getDecisions());
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
-			model.addCharacterModification(mod);
+			model.addOutgoingModification(mod); // Is direction correct?
 			logger.log(Level.WARNING, "Ignore for now " + mod);
+			System.exit(1);
 			return false;
 		}
 
@@ -247,7 +249,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			slot.addEmbeddedItem(accessory);
 
 			// Now apply modifications that the new accessory provides
-			for (Modification mod2 : accessory.getModifications()) {
+			for (Modification mod2 : accessory.getIncomingModifications()) {
 				if (mod2 instanceof DataItemModification) {
 					applyModification(false, charac, (CarriedItem<ItemTemplate>) model, (DataItemModification)mod2);
 				}

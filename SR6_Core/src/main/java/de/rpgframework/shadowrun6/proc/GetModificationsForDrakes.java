@@ -10,6 +10,7 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
@@ -76,7 +77,8 @@ public class GetModificationsForDrakes implements ProcessingStep {
 				ValueModification mod = new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), aVal.getModifiedValue());
 				mod.setSource(BodyType.DRAKE);
 				mod.setSet(ValueType.NATURAL);
-				copy.addModification(mod);
+				mod.setOrigin(Origin.OUTSIDE);
+				copy.addIncomingModification(mod);
 			}
 
 			// Add natural weapon
@@ -86,7 +88,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 
 			// Iterate modifications
 			if (drake.getResolved()==null) return unprocessed;
-			for (Modification mod : drake.getResolved().getModifications()) {
+			for (Modification mod : drake.getResolved().getOutgoingModifications()) {
 				switch ((ShadowrunReference)mod.getReferenceType()) {
 				case ATTRIBUTE:
 					logger.log(Level.INFO, "Drake {0} allows {1}", drake.getKey(), mod);
@@ -123,7 +125,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 						mVal.setDistributed( ((ValueModification)mod).getValue() );
 					}
 					diMod.getDecisions().forEach(d -> mVal.addDecision(d));
-					mVal.addModification(diMod);
+					mVal.addIncomingModification(diMod);
 					model.addMetamagicOrEcho(mVal);
 //					body.addMetaOrEcho(mVal);
 					break;

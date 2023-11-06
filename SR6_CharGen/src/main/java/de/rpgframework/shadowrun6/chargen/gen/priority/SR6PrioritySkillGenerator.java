@@ -560,7 +560,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 							model.addSkillValue(val);
 						}
 						logger.log(Level.INFO, "Consume {0} in skillval {1}", mod, val);
-						val.addModification(mod);
+						val.addIncomingModification(mod);
 						if (mod.getSet()==ValueType.MAX) {
 							logger.log(Level.INFO, "Maximum of skill {0} is now {1}", key, getMaximum(val));
 						}

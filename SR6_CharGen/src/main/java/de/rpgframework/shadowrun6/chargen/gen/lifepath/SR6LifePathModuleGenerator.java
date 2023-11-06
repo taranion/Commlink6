@@ -202,7 +202,7 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 			for (LifepathModuleValue modVal : getSelected()) {
 				selectionsLeft--;
 				LifepathModule module = modVal.getResolved();
-				for (Modification tmp : module.getModifications()) {
+				for (Modification tmp : module.getOutgoingModifications()) {
 					if (tmp instanceof DataItemModification) {
 						DataItemModification mod = (DataItemModification)tmp;
 						if (mod.getConnectedChoice()!=null) {

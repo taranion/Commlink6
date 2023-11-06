@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -28,6 +29,7 @@ import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
@@ -209,7 +211,8 @@ public class EquipmentCtrlTest {
 
 		// Check that it can be assigned to library as well
 		// ResetModifications creates SoftwareLibrary
-		(new ResetModifications(model)).process(ItemUtil.SOFTWARE_LIBRARY_ITEM.getModifications());
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
+		assertNotNull("No virtual software library",model.getSoftwareLibrary());
 		poss = ctrl.canBeEmbedded(model.getSoftwareLibrary(), ItemHook.SOFTWARE, needle, null,
 				new Decision(ItemTemplate.UUID_RATING, "3"),
 				new Decision(UUID.fromString("2baf4c6e-417b-4d1a-943c-edfa816d50bf"), "ares_predator_vi")
@@ -253,10 +256,10 @@ public class EquipmentCtrlTest {
 //		DataItemModification itemMod = new DataItemModification(ShadowrunReference.AUGMENTATION_QUALITY, AugmentationQuality.ALPHA.name());
 //		carried.addModification(itemMod);
 		ValueModification valMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), "ALPHA", AugmentationQuality.ALPHA);
-		carried.getAsObject(SR6ItemAttribute.QUALITY).addModification(valMod);
+		carried.getAsObject(SR6ItemAttribute.QUALITY).addIncomingModification(valMod);
 		assertEquals(AugmentationQuality.ALPHA, carried.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue());
 		ValueModification valMod2 = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), "DELTA", AugmentationQuality.DELTA);
-		carried.getAsObject(SR6ItemAttribute.QUALITY).addModification(valMod2);
+		carried.getAsObject(SR6ItemAttribute.QUALITY).addIncomingModification(valMod2);
 		assertEquals(AugmentationQuality.DELTA, carried.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue());
 
 //		SR6GearTool.recalculate("", model, carried);

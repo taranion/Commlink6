@@ -133,9 +133,9 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	private static String mapModifications(ComplexDataItem item) {
-		if (!item.getModifications().isEmpty()) {
+		if (!item.getOutgoingModifications().isEmpty()) {
 			List<String> modNames = new ArrayList<>();
-			for (Modification tmp : item.getModifications()) {
+			for (Modification tmp : item.getOutgoingModifications()) {
 				if (tmp instanceof ValueModification) {
 					ValueModification mod = (ValueModification)tmp;
 					switch ((ShadowrunReference)mod.getReferenceType()) {
@@ -154,9 +154,9 @@ public class Converter {
 
 	//-------------------------------------------------------------------
 	private static String mapModifications(ComplexDataItemValue item) {
-		if (!item.getModifications().isEmpty()) {
+		if (!item.getIncomingModifications().isEmpty()) {
 			List<String> modNames = new ArrayList<>();
-			for (Modification tmp : item.getModifications()) {
+			for (Modification tmp : item.getIncomingModifications()) {
 				if (tmp instanceof ValueModification) {
 					ValueModification mod = (ValueModification)tmp;
 					switch ((ShadowrunReference)mod.getReferenceType()) {

@@ -239,7 +239,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 			}
 		});
 		for (AttributeValue val : sorted)
-			logger.log(Level.DEBUG, val.getModifyable()+" = "+val.getModifiedValue()+" = "+val.getModifications()+"   \tmax="+val.getMaximum());
+			logger.log(Level.DEBUG, val.getModifyable()+" = "+val.getModifiedValue()+" = "+val.getIncomingModifications()+"   \tmax="+val.getMaximum());
 
 //		// Pay MAGIC, RESONANCE and EDGE with adjustment points
 //		payAdjustment(settings, ShadowrunAttribute.EDGE );
@@ -484,7 +484,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
 			if (val.getMaximum()==0) {
-				val.addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
+				val.addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
 			}
 		}
 	}
@@ -543,7 +543,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 							logger.log(Level.DEBUG, "Allow adjustment points for {0}",attr);
 							allowedAdjust.add(attr);
 						}
-						getModel().getAttribute(attr).addModification(mod);
+						getModel().getAttribute(attr).addIncomingModification(mod);
 						break;
 					case NATURAL:
 						// Update base
@@ -551,7 +551,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 						settings.perAttrib.get(attr).base += mod.getValue();
 						break;
 					default:
-						getModel().getAttribute(attr).addModification(mod);
+						getModel().getAttribute(attr).addIncomingModification(mod);
 					}
 				} else {
 					unprocessed.add(tmp);

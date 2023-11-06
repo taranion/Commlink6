@@ -213,7 +213,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 
 
 		// Validate hook identifier in modifications
-		for (Modification tmp : getModifications()) {
+		for (Modification tmp : getOutgoingModifications()) {
 			tmp.setSource(this);
 			tmp.validate();
 			if (tmp instanceof EmbedModification) {
@@ -281,7 +281,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		// If this is a drone, ensure there is a SOFTWARE slot with Pilot/2 round up capacity
 		if (ItemType.isDrone(type) || type.name().contains("DRONE")) {
 			this.countable = true;
-			boolean hasSoftwareSlot = getModifications().stream().anyMatch( mod -> (mod instanceof DataItemModification) && mod.getReferenceType()==ShadowrunReference.HOOK && ((DataItemModification)mod).getKey().equals(ItemHook.SOFTWARE.name()));
+			boolean hasSoftwareSlot = getOutgoingModifications().stream().anyMatch( mod -> (mod instanceof DataItemModification) && mod.getReferenceType()==ShadowrunReference.HOOK && ((DataItemModification)mod).getKey().equals(ItemHook.SOFTWARE.name()));
 			if (!hasSoftwareSlot) {
 				// Auto-add modification
 				double pilot = 0;

@@ -215,7 +215,7 @@
         <valmod type="HOOK" ref="CYBEREYE_IMPLANT" value="4"/>
         <embed  type="GEAR" ref="image_link" intoType="HOOK" intoRef="INTERNAL" included="true"/>
       </modifications>
-      <alternate mode="VEHICLE" type="DRONE_MINI" subtype="AIR">
+      <alternate mode="VEHICLE" type="DRONE_MINI" subtype="AIR" id="drone">
 			<vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" />
       </alternate>
    </item>
@@ -277,7 +277,7 @@
    		<attrdef id="PRICE" value="8000"/>
    		<modifications>
    			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1"  apply="CHARACTER"/>
-   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER"/>
+   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER" set="NATURAL"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" apply="UNARMED"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,,,," apply="UNARMED"/>
    		</modifications>
@@ -288,7 +288,7 @@
    		<attrdef id="PRICE" value="18000"/>
    		<modifications>
    			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="2" apply="CHARACTER"/>
-   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER"/>
+   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER" set="NATURAL"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="2" apply="UNARMED"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,,,," apply="UNARMED"/>
    		</modifications>
@@ -299,7 +299,7 @@
    		<attrdef id="PRICE" value="30000"/>
    		<modifications>
    			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="2" apply="CHARACTER"/>
-   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" apply="CHARACTER"/>
+   			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" apply="CHARACTER" set="NATURAL"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="2" apply="UNARMED"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="3,,,," apply="UNARMED"/>
    		</modifications>
@@ -316,10 +316,8 @@
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
           <itemmod type="QUALITY" ref="dermal_deposits" remove="true" apply="CHARACTER"/>
+   		 <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$RATING" apply="CHARACTER" set="NATURAL"/>
       </modifications>
-     	<alternate mode="ARMOR" type="ARMOR" subtype="ARMOR_BODY">
-     		<attrdef id="DEFENSE_PHYSICAL" value="$RATING"/>
-     	</alternate>
    </item>
    <item avail="2" price="3000" id="fingertip_compartment" type="CYBERWARE" subtype="CYBER_BODYWARE">
       <usage mode="IMPLANTED" value="0.1" />
@@ -582,10 +580,8 @@
 		<attrdef id="AVAILABILITY" value="$RATING L"/>
 		<attrdef id="PRICE"        value="$RATING*5000"/>
 		<modifications>
+			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$RATING" apply="CHARACTER" set="NATURAL"/>
 		</modifications>
-		<alternate mode="ARMOR" type="ARMOR" subtype="ARMOR_BODY">
-			<attrdef id="DEFENSE_PHYSICAL" value="$RATING"/>
-		</alternate>
     </item>
    <item avail="5L" price="3000" id="cyber_slide" type="ACCESSORY" subtype="CYBER_LIMB_ACCESSORY">
 		<usage mode="EMBEDDED" value="3" slot="CYBERLIMB_IMPLANT"/>
@@ -672,7 +668,7 @@
       <usage mode="EMBEDDED" value="1" slot="HEADWARE_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.1"/>
  		<flags><flag>AUGMENTATION</flag></flags>
-      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="melee">
       	<weapon  dmg="5P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed"/>
       </alternate>
    </item>
@@ -680,7 +676,7 @@
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.1"/>
  		<flags><flag>AUGMENTATION</flag></flags>
-      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="melee">
       	<weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
       </alternate>
    </item>
@@ -688,14 +684,14 @@
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.25"/>
  		<flags><flag>AUGMENTATION</flag></flags>
-      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="melee">
       	<weapon  dmg="4S(e)" attack="5,,,," skill="close_combat" spec="close_combat/unarmed"/>
       </alternate>
    </item>
    <item avail="4I" price="2000" id="handblade" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.15"/>
-      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="melee">
       	<weapon  dmg="4S(e)" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>
  		<flags><flag>AUGMENTATION</flag></flags>
@@ -708,7 +704,7 @@
    <item avail="3I" price="1000" id="handrazors" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.15"/>
-      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="melee">
       	<weapon  dmg="4S(e)" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>
  		<flags><flag>AUGMENTATION</flag></flags>
@@ -722,7 +718,7 @@
       <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
       <usage mode="IMPLANTED" value="0.15"/>
  		<flags><flag>AUGMENTATION</flag></flags>
-      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+      <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="melee">
       	<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
       </alternate>
       <variant id="retractable">

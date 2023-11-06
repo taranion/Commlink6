@@ -219,7 +219,6 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 			.filter(filter)
 			.collect(Collectors.toList())
 			;
-
 	}
 
 	//-------------------------------------------------------------------
@@ -465,6 +464,11 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public void removeDataStructure(DataStructureValue value) {
 		datastructures.remove(value);
+	}
+
+	//-------------------------------------------------------------------
+	public CarriedItem<ItemTemplate> getSoftwareLibrary() {
+		return getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
 	}
 
 }

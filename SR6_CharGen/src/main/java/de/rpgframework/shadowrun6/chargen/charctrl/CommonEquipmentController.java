@@ -180,16 +180,16 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			switch (pmType) {
 			case CLOTHING:
 				if (subtype==ItemSubType.ARMOR_CLOTHES)
-					priceVal.addModification(toAdd);
+					priceVal.addIncomingModification(toAdd);
 				break;
 			case ARMOR:
 				if (type==ItemType.ARMOR || type==ItemType.ARMOR_ADDITION) {
 					System.err.println("Add extra "+extraCost+" to "+tmp+"   factor="+factor);
-					priceVal.addModification(toAdd);
+					priceVal.addIncomingModification(toAdd);
 				}
 				break;
 			case EVERYTHING:
-				priceVal.addModification(toAdd);
+				priceVal.addIncomingModification(toAdd);
 				break;
 			}
 		}
@@ -604,7 +604,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 	//-------------------------------------------------------------------
 	public Possible canBeRemoved(CarriedItem<ItemTemplate> container, ItemHook slot, CarriedItem<ItemTemplate> toRemove) {
-		if (container==ItemUtil.SOFTWARE_LIBRARY && slot==ItemHook.SOFTWARE) return Possible.TRUE;
+		if (container.getUuid()==ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE && slot==ItemHook.SOFTWARE) return Possible.TRUE;
 		return new Possible( container.getAccessories().contains(toRemove) );
 	}
 

@@ -42,7 +42,7 @@ public class SR6AdeptPowerLeveller extends SR6AdeptPowerController {
 			
 			for (AdeptPowerValue val : model.getAdeptPowers()) {
 				// Apply modifications
-				unprocessed.addAll(val.getModifications());
+				unprocessed.addAll(val.getIncomingModifications());
 			}
 			
 			return unprocessed;

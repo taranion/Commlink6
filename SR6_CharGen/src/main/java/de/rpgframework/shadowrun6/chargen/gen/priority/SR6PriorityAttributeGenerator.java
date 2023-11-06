@@ -193,7 +193,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			}
 		});
 		for (AttributeValue val : sorted)
-			logger.log(Level.DEBUG, val.getModifyable()+" = "+val.getModifiedValue()+" = "+val.getModifications()+"   \tmax="+val.getMaximum());
+			logger.log(Level.DEBUG, val.getModifyable()+" = "+val.getModifiedValue()+" = "+val.getIncomingModifications()+"   \tmax="+val.getMaximum());
 
 		// Pay MAGIC, RESONANCE and EDGE with adjustment points
 		payAdjustment(settings, ShadowrunAttribute.EDGE );
@@ -635,7 +635,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
 			if (val.getMaximum()==0) {
-				val.addModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
+				val.addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
 			}
 			logger.log(Level.TRACE, "Maximum of {0} is {1}", key, val.getMaximum());
 		}
@@ -681,7 +681,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 					ShadowrunAttribute attr = mod.getResolvedKey();
 					AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
 					logger.log(Level.DEBUG, "Consume {0} when old val is {1} and old max is {2}", mod, aVal.getModifiedValue(),aVal.getMaximum());
-					aVal.addModification(mod);
+					aVal.addIncomingModification(mod);
 					if (mod.getSet()==ValueType.MAX) {
 //						logger.log(Level.DEBUG, "After consuming {0} max is {1}", mod, aVal.getMaximum());
 						// Optional: Allow adjustment points on lowered maximum

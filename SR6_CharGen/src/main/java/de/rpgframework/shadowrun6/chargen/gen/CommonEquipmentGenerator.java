@@ -151,9 +151,9 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			if (val==null) {
 				logger.log(Level.ERROR, "No PRICE attribute in {0}", tmp);
 			} else {
-				for (Modification tmpMod : val.getModifications()) {
+				for (Modification tmpMod : val.getIncomingModifications()) {
 					if ((tmpMod instanceof ValueModification) && ItemTemplate.UUID_VOLATILE_PRICEMOD.equals(((ValueModification)tmpMod).getId()))
-						val.removeModification(tmpMod);
+						val.removeIncomingModification(tmpMod);
 				}
 			}
 		}
@@ -274,16 +274,16 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			switch (pmType) {
 			case CLOTHING:
 				if (subtype==ItemSubType.ARMOR_CLOTHES)
-					priceVal.addModification(toAdd);
+					priceVal.addIncomingModification(toAdd);
 				break;
 			case ARMOR:
 				if (type==ItemType.ARMOR || type==ItemType.ARMOR_ADDITION) {
 					System.err.println("Add extra "+extraCost+" to "+tmp+"   factor="+factor);
-					priceVal.addModification(toAdd);
+					priceVal.addIncomingModification(toAdd);
 				}
 				break;
 			case EVERYTHING:
-				priceVal.addModification(toAdd);
+				priceVal.addIncomingModification(toAdd);
 				break;
 			}
 		}
@@ -381,11 +381,11 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	//-------------------------------------------------------------------
 	public void expandPACK(CarriedItem<ItemTemplate> item) {
 		logger.log(Level.ERROR, "TODO: expandPACK");
-		for (Modification mod : item.getCharacterModifications() ) {
+		for (Modification mod : item.getOutgoingModifications() ) {
 			logger.log(Level.ERROR, "Expand "+mod.getClass()+" = "+mod);
 			ApplyModificationsGeneric.applyModification(getModel(), mod);
 		}
-		for (Modification mod : item.getModifications() ) {
+		for (Modification mod : item.getIncomingModifications() ) {
 			logger.log(Level.ERROR, "Expand "+mod.getClass()+" = "+mod);
 			ApplyModificationsGeneric.applyModification(getModel(), mod);
 		}

@@ -196,14 +196,14 @@
     	<variant id="thagomizer">
     		<usage mode="IMPLANTED" value="0.2"/>
       		<attrdef id="PRICE" value="7000"/>
- 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+ 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" id="weapon">
 				<weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/thagomizer" />
  			</alternate>
     	</variant>
     	<variant id="whip">
     		<usage mode="IMPLANTED" value="0.5"/>
       		<attrdef id="PRICE" value="9000"/>
- 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+ 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS" id="weapon">
       			<weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
    			</alternate>
     	</variant>
@@ -389,7 +389,7 @@
  	<item id="frog_tongue" avail="3" price="2000" type="BIOWARE" subtype="BIOWARE_CULTURED">
       <usage mode="IMPLANTED" value="0.1"/>
       <flags><flag>AUGMENTATION</flag></flags>
-		<alternate mode="WEAPON">
+		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS" id="weapon">
 			<weapon dmg="0S" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/tongue"/>
 		</alternate>
    </item>

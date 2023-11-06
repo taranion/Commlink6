@@ -95,13 +95,13 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			if (val<0) {
 				logger.log(Level.DEBUG, "Transfer {0} points from {1} to {2}", Math.abs(val), a2.getModifyable(), a1.getModifyable());
 				// Transfer 2:1 points from A2 to A1
-				a2.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, a2.getModifyable().name(), val, a1.getModifyable()));
-				a1.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, a1.getModifyable().name(), -val/2, a2.getModifyable()));
+				a2.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, a2.getModifyable().name(), val, a1.getModifyable()));
+				a1.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, a1.getModifyable().name(), -val/2, a2.getModifyable()));
 			} else {
 				logger.log(Level.DEBUG, "Transfer {0} points from {1} to {2}", val, a1.getModifyable(), a2.getModifyable());
 				// Transfer 2:1 points from A1 to A2
-				a1.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, a1.getModifyable().name(), -val, a2.getModifyable()));
-				a2.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, a2.getModifyable().name(), val/2, a1.getModifyable()));
+				a1.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, a1.getModifyable().name(), -val, a2.getModifyable()));
+				a2.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, a2.getModifyable().name(), val/2, a1.getModifyable()));
 			}
 		}
 	}

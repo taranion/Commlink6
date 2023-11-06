@@ -28,8 +28,6 @@
 
     <item id="myrmidon" avail="9I" price="105000"  type="ARMOR" subtype="ARMOR_BODY" >
         <armor rating="12" social="-12" dr="3" />
-		<alternate mode="ARMOR" type="ARMOR" subtype="ARMOR_HELMET">
-		</alternate>
         <modifications>
  			<valmod type="HOOK" ref="ARMOR" value="0" />
  			<valmod type="HOOK" ref="HELMET_ACCESSORY" value="0" />

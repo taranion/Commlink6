@@ -86,7 +86,7 @@ public class QualityPathPage extends Page {
 				}
 			});
 			infoNodes[i] = new HBox(20);
-			logger.log(Level.WARNING, "Modifications of "+step.getId()+" = "+step.getModifications());
+			logger.log(Level.WARNING, "Modifications of "+step.getId()+" = "+step.getOutgoingModifications());
 			infoNodes[i].getChildren().add(getRequirementBox(step));
 			infoNodes[i].getChildren().add(getModificationBox(step));
 		}

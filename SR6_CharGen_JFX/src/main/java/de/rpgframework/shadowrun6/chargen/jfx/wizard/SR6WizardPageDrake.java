@@ -130,7 +130,7 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 			logger.log(Level.WARNING, "show help for "+n);
 			bxDescription.setData(n);
 			if (n!=null) {
-				logger.log(Level.WARNING, "  modifications = "+n.getModifications());
+				logger.log(Level.WARNING, "  modifications = "+n.getOutgoingModifications());
 				layout.setTitle(n.getName());
 			} else {
 				layout.setTitle(null);

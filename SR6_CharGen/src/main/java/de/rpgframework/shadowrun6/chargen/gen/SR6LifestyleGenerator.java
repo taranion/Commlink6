@@ -272,7 +272,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 						months = Math.max(1,((ValueModification)mod).getValue());
 					SR6Lifestyle life = new SR6Lifestyle(qual);
 					life.setDistributed(months);
-					life.addModification(mod);
+					life.addIncomingModification(mod);
 					logger.log(Level.DEBUG, "Add lifestyle {0} for {1} months", qual, months);
 					model.addLifestyle(life);
 				} else

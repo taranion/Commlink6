@@ -20,7 +20,7 @@ import de.rpgframework.genericrpg.items.AlternateUsage;
 @DataItemTypeKey(id="alternate")
 @IgnoreMissingAttributes("id")
 public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
-	
+
 	@Attribute
 	private ItemType type;
 	@Attribute
@@ -32,7 +32,7 @@ public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
 		@ElementList(entry="matrix", type=MatrixData.class, inline=true),
 		@ElementList(entry="vehicle", type=VehicleData.class, inline=true),
 	})
-	private List<IGearTypeData> shortcuts; 
+	private List<IGearTypeData> shortcuts;
 
 	//-------------------------------------------------------------------
 	public SR6AlternateUsage() {
@@ -51,8 +51,7 @@ public class SR6AlternateUsage extends AlternateUsage<SR6UsageMode> {
 	 */
 	@Override
 	public List<? extends IGearTypeData> getTypeData() {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
+		return shortcuts;
 	}
 
 	//-------------------------------------------------------------------

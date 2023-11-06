@@ -66,7 +66,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			SR6SkillValue val = new SR6SkillValue(Shadowrun6Core.getSkill("language"),4);
 			val.setUuid(NATIVE_LANGUAGE);
 			val.addDecision(new Decision(Shadowrun6Core.getSkill("language").getChoices().get(0).getUUID(), RES.getString("label.native_language")));
-			val.addModification(nat);
+			val.addIncomingModification(nat);
 			model.addSkillValue(val);
 
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);

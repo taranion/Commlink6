@@ -40,7 +40,7 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 
 		ItemAttributeNumericalValue<SR6ItemAttribute> attrib = model.getAsValue(SR6ItemAttribute.PRICE);
 		if (attrib==null) {
-			if (!"software_library".equals(model.getKey())) {
+			if (!"software_library".equals(model.getKey()) && !"unarmed".equals(model.getKey())) {
 				logger.log(Level.WARNING, "Item {0} has no price", model.getKey());
 			}
 			return new OperationResult<List<Modification>>(unprocessed);
@@ -59,7 +59,7 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 			}
 			int cost = aVal.getModifiedValue();
 			logger.log(Level.INFO, "Increase cost by {0} from {1}", cost, carried.getKey());
-			attrib.addModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), cost) );
+			attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), cost) );
 		}
 
 		return new OperationResult<List<Modification>>(unprocessed);

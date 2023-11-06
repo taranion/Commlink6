@@ -315,11 +315,11 @@ public class SR6FreeMetamagicOrEchoController extends SR6MetamagicOrEchoControll
 					MetamagicOrEchoValue val = model.getMetamagicOrEcho(mod.getKey());
 					if (val==null || !item.hasLevel()) {
 						val = new MetamagicOrEchoValue(item);
-						val.addModification(mod);
+						val.addIncomingModification(mod);
 						getModel().addMetamagicOrEcho(val);
 						logger.log(Level.DEBUG, "Auto-Added Metamagic/Echo ''{0}''", mod.getKey());
 					} else {
-						val.addModification(mod);
+						val.addIncomingModification(mod);
 						logger.log(Level.DEBUG, "Auto-Increased Metamagic/Echo ''{0}''", mod.getKey());
 					}
 					continue;
@@ -339,7 +339,7 @@ public class SR6FreeMetamagicOrEchoController extends SR6MetamagicOrEchoControll
 					grade++;
 				}
 				// Add modifications
-				for (Modification mod : val.getModifications()) {
+				for (Modification mod : val.getIncomingModifications()) {
 					Modification copy = Shadowrun6Tools.instantiateModification(mod, val, val.getDistributed(), model);
 					logger.log(Level.DEBUG, "Add modification "+copy);
 					unprocessed.add(copy);
