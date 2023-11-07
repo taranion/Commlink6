@@ -11,6 +11,7 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
+import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.jfx.cells.ACarriedItemListCell;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -97,7 +98,9 @@ public class CarriedItemListCell extends ACarriedItemListCell<ItemTemplate> {
 	@Override
 	public int getSinglePrice(CarriedItem<ItemTemplate> item) {
 		int count = (item.getCount()>0) ? item.getCount() : 1;
-		return item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue() / count;
+		ItemAttributeNumericalValue<SR6ItemAttribute> priceV = item.getAsValue(SR6ItemAttribute.PRICE);
+		int price = (priceV!=null) ? priceV.getModifiedValue() : 0;
+		return price / count;
 	}
 
 	//-------------------------------------------------------------------
