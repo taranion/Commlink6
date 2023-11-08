@@ -15,7 +15,6 @@ import de.rpgframework.shadowrun.Priority;
 import de.rpgframework.shadowrun.PriorityTableEntry;
 import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
@@ -265,6 +264,10 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	}
 
 	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator#getPriorityController()
+	 */
+	@Override
 	public PriorityTableController<Shadowrun6Character,SR6PrioritySettings> getPriorityController() {
 		return prioCtrl;
 	}
