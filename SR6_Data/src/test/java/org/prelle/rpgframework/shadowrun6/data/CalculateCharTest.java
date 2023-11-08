@@ -94,11 +94,13 @@ public class CalculateCharTest {
         Shadowrun6Tools.runProcessors(model, Locale.getDefault());
         Shadowrun6Tools.runProcessors(model, Locale.getDefault());
         unarmed = model.getCarriedItem(ItemTemplate.UUID_UNARMED);
+		System.out.println("trollDamage 1: "+unarmed.getAsObject(SR6ItemAttribute.DAMAGE));
 		dmg = unarmed.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
+		System.out.println("trollDamage 2: "+dmg);
 		assertNotNull(dmg);
-		System.out.println("trollDamage: "+unarmed.getAsObject(SR6ItemAttribute.DAMAGE));
         assertEquals(3, dmg.getValue());
         assertEquals(DamageType.PHYSICAL, dmg.getType());
+        System.exit(1);
 
         // Add adept power critical strike
         AdeptPowerValue adept = new AdeptPowerValue(Shadowrun6Core.getItem(AdeptPower.class, "critical_strike"),2);
