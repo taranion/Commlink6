@@ -87,7 +87,8 @@ public class CalculateCharTest {
 		assertNotNull(unarmed);
 		Damage dmg = unarmed.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
 		assertNotNull(dmg);
-        assertEquals(2, dmg.getValue());
+		System.out.println("trollDamage 0: "+dmg);
+       assertEquals(2, dmg.getValue());
         assertEquals(DamageType.STUN, dmg.getType());
 
         // Now make character into a troll (with dermal deposits)
