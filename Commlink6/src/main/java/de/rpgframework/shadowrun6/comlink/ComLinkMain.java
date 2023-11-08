@@ -153,6 +153,9 @@ public class ComLinkMain extends EdenClientApplication {
 	public void init() {
 		super.init();
 	    //   loadData();
+		for (String key : super.getParameters().getRaw()) {
+			System.getLogger(EdenClientApplication.class.getPackageName()).log(Level.INFO,"parameter "+key);
+		}
 	}
 
     //-------------------------------------------------------------------
