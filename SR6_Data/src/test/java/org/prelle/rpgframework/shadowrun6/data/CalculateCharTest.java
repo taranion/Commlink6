@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.Locale;
 
 import org.junit.BeforeClass;
@@ -12,7 +14,6 @@ import org.junit.Test;
 
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.DamageType;
@@ -26,6 +27,7 @@ import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.proc.ResetModifications;
 
 /**
  * @author prelle
@@ -94,13 +96,16 @@ public class CalculateCharTest {
         Shadowrun6Tools.runProcessors(model, Locale.getDefault());
         Shadowrun6Tools.runProcessors(model, Locale.getDefault());
         unarmed = model.getCarriedItem(ItemTemplate.UUID_UNARMED);
+        Logger logger = System.getLogger(ResetModifications.class.getPackageName());
+        logger.log(Level.INFO, "Unarmed: "+unarmed.getAsObject(SR6ItemAttribute.DAMAGE));
 		System.out.println("trollDamage 1: "+unarmed.getAsObject(SR6ItemAttribute.DAMAGE));
 		dmg = unarmed.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
-		System.out.println("trollDamage 2: "+dmg);
+		logger.log(Level.INFO, "Unarmed 2: "+dmg);
+		System.out.println("trollDamage 1: "+dmg);
 		assertNotNull(dmg);
         assertEquals(3, dmg.getValue());
         assertEquals(DamageType.PHYSICAL, dmg.getType());
-        System.exit(1);
+        //System.exit(1);
 
         // Add adept power critical strike
         AdeptPowerValue adept = new AdeptPowerValue(Shadowrun6Core.getItem(AdeptPower.class, "critical_strike"),2);
