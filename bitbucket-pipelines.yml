@@ -61,7 +61,7 @@ pipelines:
             variables:
               USER: bitbucket
               SERVER: eden.rpgframework.de
-              REMOTE_PATH: '/var/www/html/commlink6-updates'
+              REMOTE_PATH: '/var/www/html/commlink6-updates/stable'
               LOCAL_PATH: 'Commlink6/target/config.xml'
           - pipe: atlassian/scp-deploy:1.4.1
             variables:

@@ -206,7 +206,7 @@
 				<version>1.0-SNAPSHOT</version>
 				<configuration>
 					<baseUri>https://eden.rpgframework.de/</baseUri>
-					<basePath>${user.home}/Commlink6/app/STABILITY</basePath>
+					<basePath>${user.home}/CommLink6/app/STABILITY</basePath>
 					<launcher>de.rpgframework.shadowrun6.updater.CommlinkLauncher2</launcher>
 					<osHandling>ALL</osHandling>
 					<properties>
