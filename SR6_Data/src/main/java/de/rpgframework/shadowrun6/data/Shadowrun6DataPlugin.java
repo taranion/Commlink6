@@ -367,6 +367,10 @@ public class Shadowrun6DataPlugin  {
 
 		ItemUtil.UNARMED_ITEM.setAttribute(SR6ItemAttribute.SKILL, Shadowrun6Core.getSkill("close_combat"));
 		ItemUtil.UNARMED_ITEM.setAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION, Shadowrun6Core.getSkill("close_combat"));
+
+		// Berlin Edition
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, core, clazz,"core/data/qualities_berlin.xml");
+		logger.log(Level.INFO, "Loaded "+list.size()+" qualities from Berlin Edition");
 	}
 
 	//-------------------------------------------------------------------
