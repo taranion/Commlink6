@@ -368,9 +368,22 @@ public class Shadowrun6DataPlugin  {
 		ItemUtil.UNARMED_ITEM.setAttribute(SR6ItemAttribute.SKILL, Shadowrun6Core.getSkill("close_combat"));
 		ItemUtil.UNARMED_ITEM.setAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION, Shadowrun6Core.getSkill("close_combat"));
 
+		// Seattle Edition
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE_SEATTLE", "core.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
+		core.setReleased(202109);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "core/data/qualities_seattle.xml");
+		logger.log(Level.DEBUG, "Loaded {0} qualities from Seattle City Edition", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"core/data/gear_seattle.xml");
+		logger.log(Level.DEBUG, "Loaded {0} armor", list.size());
+
+
 		// Berlin Edition
-		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, core, clazz,"core/data/qualities_berlin.xml");
-		logger.log(Level.INFO, "Loaded "+list.size()+" qualities from Berlin Edition");
+		set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE_BERLIN", "core.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
+		core.setReleased(202311);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"core/data/qualities_berlin.xml");
+		logger.log(Level.INFO, "Loaded {0} qualities from Berlin City Edition", list.size());
 	}
 
 	//-------------------------------------------------------------------
@@ -717,10 +730,6 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.INFO, "START -----------------------------Other Sources from US--------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "OTHER_US", "other_us.i18n", Locale.ENGLISH);
 		set.setType(DataSetType.OTHER);
-		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "other_us/data/qualities.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_armor.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_drones.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_electronics.xml");
