@@ -185,6 +185,7 @@ public class Shadowrun6DataPlugin  {
 			initDPWestphalen();
 			initAstralWays();
 			initBodyShop();
+			initEasyCome();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -906,7 +907,21 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} nanoware", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_geneware.xml");
 		logger.log(Level.DEBUG, "Loaded {0} geneware", list.size());
+	}
 
+	//-------------------------------------------------------------------
+	private void initEasyCome() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START -----------------------------Easy Come, Easy Go--------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "easycome", "sif_new_orleans.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.LOCATION);
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"sif_new_orleans/data/gear_easycome.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" gear from 'Easy Come'");
+		list = Shadowrun6Core.loadDataItems(ItemEnhancementList.class, SR6ItemEnhancement.class, set, clazz,"sif_new_orleans/data/modifications_easycome.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications from 'Easy Come'");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"sif_new_orleans/data/qualities_easycome.xml");
+		logger.log(Level.DEBUG, "Loaded {0} qualities", list.size());
 	}
 
 }

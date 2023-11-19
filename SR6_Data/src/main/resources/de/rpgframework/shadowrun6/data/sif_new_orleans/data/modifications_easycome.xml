@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<itemenhancements>
+	<itemenhancement id="hunters_alloy_regular" avail="5L" price="325">
+	  <requires>
+	  	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="BLADES"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="hunters_alloy_orichalcum" avail="7L" price="7500">
+	  <requires>
+	  	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="BLADES"/>
+	  </requires>
+	</itemenhancement>
+	<itemenhancement id="flashlight_uv" avail="2" price="100">
+	  <requires>
+        <selreq>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_RANGED"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_SPECIAL"/>
+        </selreq>
+	  </requires>
+	</itemenhancement>
+</itemenhancements>
