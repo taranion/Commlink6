@@ -55,6 +55,7 @@ import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.NPCType;
@@ -525,6 +526,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		case CARRIED:
 			ret.add( handleCARRIED(item, choice));
 			break;
+		case DAMAGE_ELEMENT:
+			ret.add( handleGeneric(DamageElement.class, choice, item));
+			break;
 		case ELEMENT:
 			ret.add( handleGeneric(ShadowrunElement.class, choice, item));
 			break;
@@ -534,6 +538,8 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		case ITEM_ATTRIBUTE:
 			if (choice.getChoiceOptions()!=null) {
 				ret.add( handleITEMATTRIBUTEValues(item, choice));
+			} else if (choice.getTypeReference()!=null && choice.getMaxFormula()!=null) {
+				ret.add( handleITEMATTRIBUTEValues(item, choice, SR6ItemAttribute.valueOf(choice.getTypeReference()) ,choice.getMaxFormula().getAsInteger()));
 			} else {
 				ret.add( handleITEMATTRIBUTE(item, choice));
 			}
@@ -791,6 +797,21 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		}
 		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n));
+			updateButtons();
+		 });
+		content.getChildren().add(cbSub);
+		return cbSub;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleITEMATTRIBUTEValues(ComplexDataItem item, Choice choice, SR6ItemAttribute attrib, int max) {
+		ChoiceBox<String> cbSub = new ChoiceBox<>();
+		for (int i=1; i<=max; i++) {
+			cbSub.getItems().add(i+"");
+		}
+		cbSub.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1} in {2]", n, attrib, choice.getUUID());
 			decisions.put(choice, new Decision(choice, n));
 			updateButtons();
 		 });
