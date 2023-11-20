@@ -961,7 +961,16 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				return value.getName(Locale.getDefault());
 			}
 		});
-		choicebox.getItems().addAll(item.getEnumConstants());
+		if (choice.getChoiceOptions()!=null) {
+			List<String> valid = List.of(choice.getChoiceOptions());
+			for (T opt : item.getEnumConstants()) {
+				if (valid.contains(opt.getId().toUpperCase())) {
+					choicebox.getItems().add(opt);
+				}
+			}
+		} else {
+			choicebox.getItems().addAll(item.getEnumConstants());
+		}
 		Collections.sort(choicebox.getItems(), new Comparator<T>() {
 			public int compare(T o1, T o2) {
 				return Collator.getInstance().compare(o1.getName(Locale.getDefault()), o2.getName(Locale.getDefault()));
