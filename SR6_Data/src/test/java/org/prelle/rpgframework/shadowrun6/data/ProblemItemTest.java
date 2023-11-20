@@ -401,4 +401,30 @@ public class ProblemItemTest {
 
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void loadElementalHardening() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "elemental_hardening");
+		assertNotNull(item);
+		assertEquals(2, item.getChoices().size());
+		Choice choice = item.getChoices().get(0);
+		assertNotNull(choice);
+		Choice choice2 = item.getChoices().get(1);
+
+		assertEquals(ShadowrunReference.ITEM_ATTRIBUTE,choice.getChooseFrom());
+		assertEquals("RATING",choice.getTypeReference());
+
+		// New create an item
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.EMBEDDED, null, true,
+				new Decision(choice, "4"),
+				new Decision(choice2, "FIRE"));
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+		SR6GearTool.recalculate("", null, carried);
+
+		assertEquals(4, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
+		assertEquals(4000, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+	}
+
 }
