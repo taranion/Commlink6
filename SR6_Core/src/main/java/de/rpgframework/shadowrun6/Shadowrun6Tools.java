@@ -1812,6 +1812,10 @@ public class Shadowrun6Tools {
 	 * Called from Shadowrun6_Print
 	 */
 	public static Damage getWeaponDamage(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
+		if (!item.hasAttribute(SR6ItemAttribute.DAMAGE)) {
+			logger.log(Level.ERROR, "No DAMAGE attribute for weapon {0}", item.getNameWithoutRating());
+			return new Damage();
+		}
 		Damage damage = (Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
 		return damage;
 	}

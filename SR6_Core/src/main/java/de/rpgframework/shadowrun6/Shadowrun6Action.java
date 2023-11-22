@@ -16,4 +16,12 @@ public class Shadowrun6Action extends ShadowrunAction {
 	@Attribute(name="iattr")
 	private SR6ItemAttribute itemAttribute;
 
+	@Attribute(name="spark")
+	private boolean spark;
+
+	//-------------------------------------------------------------------
+	public boolean requiresSpark() {
+		return spark;
+	}
+
 }
