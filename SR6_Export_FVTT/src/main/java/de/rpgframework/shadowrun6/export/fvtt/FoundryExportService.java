@@ -415,6 +415,8 @@ public class FoundryExportService {
 	private void addGear(ActorData<Shadowrun6FoundryCharacter> actor, Shadowrun6Character character) {
 		WeaponDamageConverter dmgConv = new WeaponDamageConverter();
 		for (CarriedItem<ItemTemplate> item : character.getCarriedItems()) {
+			if (ItemTemplate.UUID_UNARMED.equals( item.getUuid())) continue;
+
 			ItemType type = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
 			ItemSubType subtype = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
 			FVTTGear gear = new FVTTGear();
@@ -448,6 +450,7 @@ public class FoundryExportService {
 				gear.avail = ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getValue()).getValue();
 				gear.availDef = ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getValue()).toString();
 			}
+			System.out.println("Item "+item.getNameWithoutRating());
 			gear.price = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			gear.notes = item.getNotes();
 			gear.customName = item.getCustomName();
@@ -483,9 +486,9 @@ public class FoundryExportService {
 //					((FVTTWeapon)gear).modes  = getFireModes(weapon);
 //				}
 //			}
-			if (item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
+			if (item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL) && gear instanceof FVTTArmor)
 				((FVTTArmor)gear).defense = item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
-			if (item.hasAttribute(SR6ItemAttribute.DEFENSE_SOCIAL))
+			if (item.hasAttribute(SR6ItemAttribute.DEFENSE_SOCIAL) && gear instanceof FVTTArmor)
 				((FVTTArmor)gear).social = item.getAsValue(SR6ItemAttribute.DEFENSE_SOCIAL).getModifiedValue();
 
 			if (gear instanceof FVTTBodyware) {
