@@ -553,6 +553,10 @@
       ]
     },
     {
+      "name":"de.rpgframework.shadowrun6.data.sif_new_orleans.i18n.easycome",
+      "locales":["en"]
+    },
+    {
       "name":"org.prelle.javafx.JavaFXConstants",
       "locales":[
         "",
