@@ -266,7 +266,7 @@ public class ComLinkMain extends EdenClientApplication {
      */
     @Override
 	public Image getSecurityDialogImage() {
-		return new Image(ComLinkMain.class.getResourceAsStream("SecurityDialog.png"));
+		return new Image(ComLinkMain.class.getResourceAsStream("LoginImage.png"));
 	}
 
 //	//-------------------------------------------------------------------
