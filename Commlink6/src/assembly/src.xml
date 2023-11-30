@@ -68,6 +68,7 @@
 				<exclude>org.bouncycastle:bcprov-jdk15on</exclude>
 				<exclude>org.bouncycastle:bcmail-jdk15on</exclude>
 				<exclude>commons-logging:commons-logging</exclude>
+				<exclude>de.rpgframework:attach-pdf-pdfbox</exclude>
 			</excludes>
 		</dependencySet>
 	</dependencySets>
