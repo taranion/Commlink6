@@ -27,7 +27,7 @@
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
 		<client.plugin.version>1.0.21</client.plugin.version>
 		<attach.version>4.0.19</attach.version>
-		<rpgfw.version>5.1.5-SNAPSHOT</rpgfw.version>
+		<rpgfw.version>5.1.6-SNAPSHOT</rpgfw.version>
 	</properties>
 
 	<dependencies>
@@ -263,7 +263,7 @@
 						<includeExtra>com.gluonhq.attach:display:4.0.19:desktop</includeExtra>
 						<includeExtra>com.gluonhq.attach:settings:4.0.19:desktop</includeExtra>
 						<includeExtra>com.gluonhq.attach:storage:4.0.19:desktop</includeExtra>
-						<includeExtra>de.rpgframework:attach-pdf-pdfbox:5.1.5-SNAPSHOT</includeExtra>
+						<includeExtra>de.rpgframework:attach-pdf-pdfbox:5.1.6-SNAPSHOT</includeExtra>
 					</includeExtras>
 				</configuration>
 				<executions>
