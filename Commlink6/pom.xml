@@ -93,6 +93,11 @@
 			<version>${rpgfw.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>de.rpgframework</groupId>
+			<artifactId>attach-pdf-pdfbox</artifactId>
+			<version>${rpgfw.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.controlsfx</groupId>
 			<artifactId>controlsfx</artifactId>
 			<version>11.1.2</version>
@@ -258,7 +263,6 @@
 						<includeExtra>com.gluonhq.attach:display:4.0.19:desktop</includeExtra>
 						<includeExtra>com.gluonhq.attach:settings:4.0.19:desktop</includeExtra>
 						<includeExtra>com.gluonhq.attach:storage:4.0.19:desktop</includeExtra>
-						<includeExtra>de.rpgframework:attach-pdf-pdfbox:5.1.5-SNAPSHOT</includeExtra>
 					</includeExtras>
 				</configuration>
 				<executions>
