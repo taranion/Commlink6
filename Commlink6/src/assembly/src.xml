@@ -23,6 +23,7 @@
 				<include>de.rpgframework.shadowrun6:commlink6</include>
 				<include>org.prelle:javafx-extensions</include>
 				<include>org.prelle:simple-persist</include>
+				<include>de.rpgframework:attach-pdf</include>
 				<include>de.rpgframework:eden-client</include>
 				<include>de.rpgframework:eden-client-jfx</include>
 				<include>de.rpgframework:rpgframework-core</include>
