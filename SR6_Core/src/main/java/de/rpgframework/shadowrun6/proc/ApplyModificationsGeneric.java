@@ -172,6 +172,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		if (value == null) {
 			value = new AdeptPowerValue(item, 0);
 			value.setInjectedBy(mod.getSource());
+			value.addIncomingModification(mod);
 			if (!(mod instanceof ValueModification) && item.hasLevel()) {
 				value.setDistributed(1);
 			}
