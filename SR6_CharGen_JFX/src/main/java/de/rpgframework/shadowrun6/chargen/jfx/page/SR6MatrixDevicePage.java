@@ -172,7 +172,8 @@ public class SR6MatrixDevicePage extends Page {
 		secPersona = new SR6PersonaSection(ResourceI18N.get(RES, "page.matrix.section.persona"));
 
 		FlexGridPane.setMinWidth(secPersona, 4);
-		FlexGridPane.setMinHeight(secPersona, 5);
+		FlexGridPane.setMaxWidth(secPersona, 10);
+		FlexGridPane.setMinHeight(secPersona, 8);
 	}
 
 	//-------------------------------------------------------------------

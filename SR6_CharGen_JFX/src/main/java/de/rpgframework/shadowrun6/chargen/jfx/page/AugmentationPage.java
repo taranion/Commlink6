@@ -47,6 +47,7 @@ public class AugmentationPage extends Page {
 	private EssenceSection secTrans;
 	private GearSection secCyber;
 	private GearSection secBio;
+	private GearSection secNano;
 
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -66,6 +67,7 @@ public class AugmentationPage extends Page {
 		initEssence();
 		initCyberware();
 		initBioware();
+		initNanoware();
 	}
 
 	//-------------------------------------------------------------------
@@ -110,6 +112,20 @@ public class AugmentationPage extends Page {
 	}
 
 	//-------------------------------------------------------------------
+	private void initNanoware() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.NANOWARE);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.IMPLANTED, ItemType.NANOWARE);
+		secNano = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.nanoware"), CarryMode.IMPLANTED, selectFilter, showFilter);
+		secNano.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secNano, 4);
+		FlexGridPane.setMinHeight(secNano, 6);
+		FlexGridPane.setMediumWidth(secNano, 5);
+		FlexGridPane.setMediumHeight(secNano, 6);
+		FlexGridPane.setMaxWidth(secNano, 5);
+		FlexGridPane.setMaxHeight(secNano, 9);
+	}
+
+	//-------------------------------------------------------------------
 	private void initEssence() {
 		secTrans = new EssenceSection(ResourceI18N.get(RES, "page.augmentation.section.essence"));
 		secTrans.setMaxHeight(Double.MAX_VALUE);
@@ -123,7 +139,7 @@ public class AugmentationPage extends Page {
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secTrans, secCyber, secBio);
+		flex.getChildren().addAll(secTrans, secCyber, secBio, secNano);
 
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -134,6 +150,7 @@ public class AugmentationPage extends Page {
 	private void initInteractivity() {
 		secCyber.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secBio  .showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secNano .showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secTrans.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
@@ -171,6 +188,7 @@ public class AugmentationPage extends Page {
 		secCyber.updateController(ctrl);
 		secBio  .updateController(ctrl);
 		secTrans.updateController(ctrl);
+		secNano .updateController(ctrl);
 		refresh();
 	}
 
@@ -179,6 +197,7 @@ public class AugmentationPage extends Page {
 		secCyber.refresh();
 		secBio  .refresh();
 		secTrans.refresh();
+		secNano .refresh();
 	}
 
 }
