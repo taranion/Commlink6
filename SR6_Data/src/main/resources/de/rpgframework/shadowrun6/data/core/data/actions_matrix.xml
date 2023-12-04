@@ -9,13 +9,16 @@
   <action cat="MATRIX" id="crash_program"  illegal="true" skill="cracking" type="MAJOR" access="ADMIN" />
   <action cat="MATRIX" id="data_spike"     illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" iattr="ATTACK" apply="MATRIX_COMBAT"/>
   <action cat="MATRIX" id="disarm_data_bomb" illegal="false" skill="cracking" type="MAJOR" access="USER/ADMIN" />
+  <action cat="MATRIX" id="disarm_data_bomb" illegal="false" skill="electronics" type="MAJOR" access="USER/ADMIN" lang="de"/>
   <action cat="MATRIX" id="edit_file"      illegal="false" skill="electronics" type="MAJOR" access="USER/ADMIN" />
   <action cat="MATRIX" id="encrypt_file"   illegal="false" skill="electronics" type="MAJOR" access="USER/ADMIN" />
   <action cat="MATRIX" id="enter_host"     illegal="false" type="MINOR" access="SELF" />
   <action cat="MATRIX" id="erase_matrix_signature" illegal="true" skill="electronics" type="MAJOR" access="USER/ADMIN" />
+  <action cat="MATRIX" id="erase_matrix_signature" illegal="true" skill="cracking" type="MAJOR" access="USER/ADMIN" lang="de"/>
   <action cat="MATRIX" id="format_device"  illegal="false" skill="electronics" type="MAJOR" access="ADMIN" />
   <action cat="MATRIX" id="full_matrix_defense" illegal="false" type="MAJOR" access="OUTSIDER/USER/ADMIN" apply="MATRIX_COMBAT"/>
   <action cat="MATRIX" id="hash_check"     illegal="true" skill="electronics" type="MAJOR" access="USER" />
+  <action cat="MATRIX" id="hash_check"     illegal="true" skill="cracking" type="MAJOR" access="USER" lang="de"/>
   <action cat="MATRIX" id="hide"           illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" />
   <action cat="MATRIX" id="jack_out"       illegal="false" skill="electronics" type="MAJOR" access="OUTSIDER/USER/ADMIN" attr="WILLPOWER"/>
   <action cat="MATRIX" id="jam_signals"    illegal="true" skill="cracking" type="MAJOR" access="SELF" />
@@ -28,11 +31,13 @@
   <action cat="MATRIX" id="running_silent" illegal="false" type="MINOR" access="SELF" />
   <action cat="MATRIX" id="send_message"   illegal="false" type="MINOR" access="OUTSIDER/USER/ADMIN" />
   <action cat="MATRIX" id="set_data_bomb"  illegal="true" skill="electronics" type="MAJOR" access="ADMIN" />
+  <action cat="MATRIX" id="set_data_bomb"  illegal="true" skill="cracking" type="MAJOR" access="ADMIN" lang="de"/>
   <action cat="MATRIX" id="snoop"          illegal="true" skill="cracking" type="MAJOR" access="ADMIN" />
   <action cat="MATRIX" id="spoof_command"  illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" />
   <action cat="MATRIX" id="switch_ifmode"  illegal="false" type="MINOR" access="SELF" />
   <action cat="MATRIX" id="tarpit"         illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" iattr="ATTACK" apply="MATRIX_COMBAT"/>
   <action cat="MATRIX" id="trace_icon"     illegal="true" skill="electronics" type="MAJOR" access="ADMIN" attr="INTUITION"/>
+  <action cat="MATRIX" id="trace_icon"     illegal="true" skill="cracking" type="MAJOR" access="ADMIN" attr="INTUITION" lang="de"/>
   <!-- Technomancer only -->
   <action cat="RESONANCE" id="compile_sprite" illegal="false" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
   <action cat="RESONANCE" id="register_sprite" illegal="false" skill="tasking" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
