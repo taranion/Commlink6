@@ -264,9 +264,10 @@
 						<includeExtra>com.gluonhq.attach:settings:4.0.19:desktop</includeExtra>
 						<includeExtra>com.gluonhq.attach:storage:4.0.19:desktop</includeExtra>
 						<includeExtra>de.rpgframework:attach-pdf-pdfbox:5.1.5</includeExtra>
-						<includeExtra>org.apache.pdfbox:pdfbox:3.0.0</includeExtra>
-						<includeExtra>org.apache.pdfbox:pdfbox-io:3.0.0</includeExtra>
+						<includeExtra>org.apache.pdfbox:pdfbox:3.0.1</includeExtra>
+						<includeExtra>org.apache.pdfbox:pdfbox-io:3.0.1</includeExtra>
 						<includeExtra>commons-logging:commons-logging:1.2</includeExtra>
+						<includeExtra>org.apache.pdfbox:fontbox:3.0.1</includeExtra>
 					</includeExtras>
 				</configuration>
 				<executions>
