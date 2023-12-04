@@ -266,7 +266,7 @@
 						<includeExtra>de.rpgframework:attach-pdf-pdfbox:5.1.5</includeExtra>
 						<includeExtra>org.apache.pdfbox:pdfbox:3.0.0</includeExtra>
 						<includeExtra>org.apache.pdfbox:pdfbox-io:3.0.0</includeExtra>
-						<includeExtra>org.apache.commons:commons-logging:1.2</includeExtra>
+						<includeExtra>commons-logging:commons-logging:1.2</includeExtra>
 					</includeExtras>
 				</configuration>
 				<executions>
