@@ -104,8 +104,8 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	private boolean applyModification(boolean strict, Lifeform charac, CarriedItem<ItemTemplate> model, DataItemModification mod) {
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addOutgoingModification(mod); // Is direction correct?
-			logger.log(Level.WARNING, "Ignore for now " + mod);
-			System.exit(1);
+			logger.log(Level.ERROR, "Ignore for now " + mod);
+			System.err.println("ApplyStockModifications.applyModification: Ignore for now " + mod);
 			return false;
 		}
 
@@ -116,6 +116,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			SR6ItemEnhancement itemenh = Shadowrun6Core.getItem(SR6ItemEnhancement.class, mod.getKey());
 			if (itemenh!=null) {
 				ItemEnhancementValue<SR6ItemEnhancement> enhVal = new ItemEnhancementValue<SR6ItemEnhancement>(itemenh);
+				enhVal.setInjectedBy(mod.getSource());
 				model.addAutoEnhancement(enhVal);
 			} else {
 				logger.log(Level.ERROR, "Unknown item enhancement ''{0}'' referenced in {0}", mod.getSource());
@@ -142,6 +143,16 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 					model.removeSlot(hook);
 				} else {
 					if (hook.hasCapacity) {
+						if (!(mod instanceof ValueModification)) {
+							logger.log(Level.INFO, "Add slot {0} (from {1}) to {2} ", hook, mod.getSource(), model);
+							if (slot!=null) {
+								slot.setCapacity(slot.getCapacity()+1);
+							} else {
+								slot = new AvailableSlot(hook, 1);
+								model.addSlot(slot);
+							}
+							return true;
+						}
 						ValueModification valMod = (ValueModification)mod;
 						if (slot!=null) {
 							logger.log(Level.INFO, "For slot {0} add capacity {1} from {2}", hook, valMod.getValueAsDouble(), mod.getSource());

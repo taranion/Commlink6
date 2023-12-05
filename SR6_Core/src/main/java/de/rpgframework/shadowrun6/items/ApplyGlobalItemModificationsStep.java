@@ -63,6 +63,7 @@ public class ApplyGlobalItemModificationsStep implements CarriedItemProcessor {
 					model.addModificationFromCharacter((ValueModification) tmp);
 				} else if (tmp.getApplyTo()==ApplyTo.MELEE && isMelee) {
 					model.addModificationFromCharacter((ValueModification) tmp);
+				} else if (tmp.getApplyTo()==ApplyTo.CHARACTER && tmp.getReferenceType()==ShadowrunReference.ACTION) {
 				} else {
 					logger.log(Level.WARNING, "Don't know how to deal with "+tmp);
 				}

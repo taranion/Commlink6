@@ -9,8 +9,8 @@
    <quality id="salish_shaman"  	  karma="3" pos="true" type="NORMAL" lang="en"/>
    <quality id="big_brothers_blindspot"	  karma="14" pos="true" type="NORMAL" lang="en">
      <modifications>
-       <checkmod type="SKILL" ref="stealth" value="1" what="EDGE" cond="true" />
-       <checkmod type="SKILL" ref="perception" value="1" what="EDGE" cond="true" />
+       <checkmod type="SKILL" ref="stealth" value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST" cond="true" />
        <itemmod type="SKILL" ref="knowledge">
        	<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.surveillance_technology"/>
        </itemmod>
@@ -18,8 +18,8 @@
    </quality>
    <quality id="northgate_optimist"	  karma="3" pos="true" type="NORMAL" lang="en">
      <modifications>
-       <checkmod type="SKILL" ref="con" value="1" what="EDGE" cond="true" />
-       <checkmod type="SKILL" ref="influence" value="1" what="EDGE" cond="true" />
+       <checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" cond="true" />
      </modifications>
    </quality>
    <quality id="bilko_contacts"	  karma="7" pos="true" type="NORMAL" multi="true" lang="en">

@@ -172,6 +172,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		if (value == null) {
 			value = new AdeptPowerValue(item, 0);
 			value.setInjectedBy(mod.getSource());
+			value.addIncomingModification(mod);
 			if (!(mod instanceof ValueModification) && item.hasLevel()) {
 				value.setDistributed(1);
 			}
@@ -231,9 +232,9 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		value.addIncomingModification(mod);
 		if (!(mod instanceof CheckModification)) {
 			if (mod.isDouble()) {
-				logger.log(Level.WARNING, "Added {0} to attribute {1} ({2}) from {3}", mod.getValueAsDouble(), item, mod.getSet(), mod.getSource());
+				logger.log(Level.DEBUG, "Added {0} to attribute {1} ({2}) from {3}", mod.getValueAsDouble(), item, mod.getSet(), mod.getSource());
 			} else
-				logger.log(Level.WARNING, "Added {0} to attribute {1} ({2}) from {3}", mod.getValue(), item, mod.getSet(), mod.getSource());
+				logger.log(Level.DEBUG, "Added {0} to attribute {1} ({2}) from {3}", mod.getValue(), item, mod.getSet(), mod.getSource());
 		}
 
 		return true;
@@ -398,7 +399,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());
 		}
 
-		logger.log(Level.WARNING, "Add {0} with decisions {1}",mod,mod.getDecisions());
+		logger.log(Level.INFO, "Add {0} with decisions {1}",mod,mod.getDecisions());
 		if (value == null) {
 			value = new QualityValue(item, 0);
 			// Handle decisions

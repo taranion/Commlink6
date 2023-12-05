@@ -3,7 +3,7 @@
 	<priotableentry id="metaA" prio="A" type="METATYPE" adj="13">
 		<modifications>
 			<valmod type="METATYPE" ref="dwarf"      value="13"/>
-			<valmod type="METATYPE" ref="dour"       value="13"/>
+			<valmod type="METATYPE" ref="duende"     value="13"/>
 			<valmod type="METATYPE" ref="gnome"      value="13"/>
 			<valmod type="METATYPE" ref="hanuman"    value="12"/>
 			<valmod type="METATYPE" ref="koborokuru" value="13"/>
@@ -32,7 +32,7 @@
 	<priotableentry id="metaB" prio="B" type="METATYPE" adj="11">
 		<modifications>
 			<valmod type="METATYPE" ref="dwarf"      value="11"/>
-			<valmod type="METATYPE" ref="dour"       value="11"/>
+			<valmod type="METATYPE" ref="duende"     value="11"/>
 			<valmod type="METATYPE" ref="gnome"      value="11"/>
 			<valmod type="METATYPE" ref="hanuman"    value="10"/>
 			<valmod type="METATYPE" ref="koborokuru" value="11"/>
@@ -70,7 +70,7 @@
 	<priotableentry id="metaC" prio="C" type="METATYPE" adj="9">
 		<modifications>
 			<valmod type="METATYPE" ref="dwarf"      value="9"/>
-			<valmod type="METATYPE" ref="dour"       value="9"/>
+			<valmod type="METATYPE" ref="duende"     value="9"/>
 			<valmod type="METATYPE" ref="gnome"      value="9"/>
 			<valmod type="METATYPE" ref="hanuman"    value="9"/>
 			<valmod type="METATYPE" ref="koborokuru" value="9"/>
@@ -110,7 +110,7 @@
 	<priotableentry id="metaD" prio="D" type="METATYPE" adj="4">
 		<modifications>
 			<valmod type="METATYPE" ref="dwarf"      value="4"/>
-			<valmod type="METATYPE" ref="dour"       value="4"/>
+			<valmod type="METATYPE" ref="duende"     value="4"/>
 			<valmod type="METATYPE" ref="gnome"      value="4"/>
 			<valmod type="METATYPE" ref="hanuman"    value="4"/>
 			<valmod type="METATYPE" ref="koborokuru" value="4"/>
@@ -150,7 +150,7 @@
 	<priotableentry id="metaE" prio="E" type="METATYPE" adj="1">
 		<modifications>
 			<valmod type="METATYPE" ref="dwarf"      value="1"/>
-			<valmod type="METATYPE" ref="dour"       value="1"/>
+			<valmod type="METATYPE" ref="duende"     value="1"/>
 			<valmod type="METATYPE" ref="gnome"      value="1"/>
 			<valmod type="METATYPE" ref="hanuman"    value="1"/>
 			<valmod type="METATYPE" ref="koborokuru" value="1"/>

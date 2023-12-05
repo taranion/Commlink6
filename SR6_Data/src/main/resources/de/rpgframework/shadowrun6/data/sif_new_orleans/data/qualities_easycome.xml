@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="bayou_born" 	  karma="10" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="stealth"    value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="outdoors"    value="1" what="EDGE_ONLY_TEST" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="carib_league_pipeline"  karma="3" pos="true" type="NORMAL" />
+   <quality id="soul_of_jazz"  karma="12" pos="true" type="NORMAL" />
+
+   <quality id="boutique_bougie" 	  karma="6" pos="false" type="NORMAL" >
+   	<modifications>
+     		<valmod type="ATTRIBUTE" ref="MONTHLY_COST" value="1000"/>
+     </modifications>
+   </quality>
+   <quality id="former_zombie" 	  karma="6" pos="false" type="NORMAL" />>
+   <quality id="thick_accent" 	  karma="6" pos="false" type="NORMAL" >
+   	<modifications>
+      	<checkmod type="SKILL" ref="con"    value="1" what="NOT_EARN_EDGE" />
+      	<checkmod type="SKILL" ref="con"    value="1" what="NOT_SPEND_EDGE" />
+     </modifications>
+   </quality>
+
+</qualities>

@@ -18,24 +18,24 @@
   <action cat="MATRIX" id="subvert_infra"   illegal="true"  skill="electronics" type="MAJOR" access="ADMIN"/>
   <action cat="MATRIX" id="subvert_infra"   illegal="true"  skill="cracking" 	type="MAJOR" access="ADMIN" lang="de"/>
   <action cat="MATRIX" id="threat_analysis" illegal="false" skill="electronics" type="MAJOR" access="OUTSIDER/USER/ADMIN"/>
-  <action cat="MATRIX" id="virtual_aim"     illegal="false"                     type="MINOR" access="OUTSIDER"/>
+  <action cat="MATRIX" id="virtual_aim"     illegal="false"                     type="MINOR" access="OUTSIDER" apply="MATRIX_COMBAT"/>
   <action cat="MATRIX" id="watchdog"        illegal="true"  skill="cracking"    type="MINOR" access="USER/ADMIN"/>
 
-  <action type="EDGE" cat="MATRIX" cost="1" apply="MATRIX" id="batch_execution" /> 
-  <action type="EDGE" cat="MATRIX" cost="2" apply="MATRIX" id="intervene" /> 
-  <action type="EDGE" cat="MATRIX" cost="1" apply="MATRIX" id="paint_target" /> 
-  
+  <action type="EDGE" cat="MATRIX" cost="1" apply="MATRIX" id="batch_execution" />
+  <action type="EDGE" cat="MATRIX" cost="2" apply="MATRIX" id="intervene" />
+  <action type="EDGE" cat="MATRIX" cost="1" apply="MATRIX" id="paint_target" />
+
   <!-- Optional Rules -->
   <action cat="MATRIX" id="computer_virus" illegal="true" skill="cracking"    type="MAJOR" access="OUTSIDER/USER/ADMIN"  opt="true"/>
   <action cat="MATRIX" id="enhance"        illegal="false" skill="electronics" type="MINOR" access="USER/ADMIN" opt="true" />
-  <action cat="MATRIX" id="ic_slicer"      illegal="true" skill="cracking"    type="MAJOR" access="USER/ADMIN" opt="true" iattr="ATTACK"/>
+  <action cat="MATRIX" id="ic_slicer"      illegal="true" skill="cracking"    type="MAJOR" access="USER/ADMIN" opt="true" iattr="ATTACK" apply="MATRIX_COMBAT"/>
   <action cat="MATRIX" id="keyboard_commando" illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER" opt="true" />
   <action cat="MATRIX" id="password_sequencer" illegal="true" skill="cracking" type="MINOR" access="OUTSIDER" opt="true" />
   <action cat="MATRIX" id="skull_and_crossbones" illegal="true" skill="cracking" type="MAJOR" access="OUTSIDER/USER/ADMIN" opt="true" />
   <action cat="MATRIX" id="we_are_in"      illegal="true" skill="cracking" type="MAJOR" access="USER/ADMIN" opt="true" />
 
   <!-- Spark Actions (KI, Protosapients) -->
-  <action cat="MATRIX" id="emulate_cyberprogram" illegal="true" 				type="MINOR" access="OUTSIDER/USER/ADMIN" />
-  <action cat="MATRIX" id="realignment" illegal="false" 					    type="MAJOR" access="ADMIN" />
+  <action cat="MATRIX" id="emulate_cyberprogram" illegal="true" spark="true"	type="MINOR" access="OUTSIDER/USER/ADMIN" />
+  <action cat="MATRIX" id="realignment" illegal="false" 			 spark="true"  type="MAJOR" access="ADMIN" />
 
 </actions>

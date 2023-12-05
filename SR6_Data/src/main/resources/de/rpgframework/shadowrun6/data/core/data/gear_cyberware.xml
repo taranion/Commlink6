@@ -177,7 +177,7 @@
       <usage mode="IMPLANTED" value="0.0"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
-   <item avail="4" price="36000" id="ultrasound_sensor" type="CYBERWARE" subtype="CYBER_HEADWARE">
+   <item avail="4" price="3600" id="ultrasound_sensor" type="CYBERWARE" subtype="CYBER_HEADWARE">
       <usage mode="EMBEDDED" slot="HEADWARE_IMPLANT" value="2"/>
       <usage mode="IMPLANTED" value="0.3"/>
  		<flags><flag>AUGMENTATION</flag></flags>

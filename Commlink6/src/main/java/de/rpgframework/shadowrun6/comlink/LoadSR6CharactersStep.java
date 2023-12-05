@@ -48,6 +48,9 @@ public class LoadSR6CharactersStep implements StartupStep {
 	 */
 	@Override
 	public void run() {
+//		logger.log(Level.ERROR, "TODO: Should Loading characters");
+//		if (true)
+//			return;
 		try {
 			logger.log(Level.INFO, "CharacterProvider {0}", CharacterProviderLoader.getCharacterProvider());
 			List<CharacterHandle> handles = CharacterProviderLoader.getCharacterProvider().getMyCharacters(RoleplayingSystem.SHADOWRUN6);

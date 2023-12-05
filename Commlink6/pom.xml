@@ -13,7 +13,7 @@
 
 	<groupId>de.rpgframework.shadowrun6</groupId>
 	<artifactId>commlink6</artifactId>
-	<version>1.3.2-SNAPSHOT</version>
+	<version>1.4.1</version>
 	<packaging>jar</packaging>
 
 	<name>Commlink6</name>
@@ -25,9 +25,9 @@
 		<maven.deploy.skip>false</maven.deploy.skip>
 		<maven.install.skip>false</maven.install.skip>
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
-		<client.plugin.version>1.0.18</client.plugin.version>
-		<attach.version>4.0.18</attach.version>
-		<rpgfw.version>5.1.5-SNAPSHOT</rpgfw.version>
+		<client.plugin.version>1.0.21</client.plugin.version>
+		<attach.version>4.0.19</attach.version>
+		<rpgfw.version>5.1.6-SNAPSHOT</rpgfw.version>
 	</properties>
 
 	<dependencies>
@@ -92,6 +92,11 @@
 			<artifactId>attach-pdf</artifactId>
 			<version>${rpgfw.version}</version>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>de.rpgframework</groupId>-->
+<!--			<artifactId>attach-pdf-pdfbox</artifactId>-->
+<!--			<version>${rpgfw.version}</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.controlsfx</groupId>
 			<artifactId>controlsfx</artifactId>
@@ -118,7 +123,7 @@
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>eden-client-jfx</artifactId>
-			<version>0.0.5-SNAPSHOT</version>
+			<version>0.0.6-SNAPSHOT</version>
 		</dependency>
       <dependency>
         <groupId>org.prelle</groupId>
@@ -155,7 +160,7 @@
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-export-pdf</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
@@ -206,7 +211,7 @@
 				<version>1.0-SNAPSHOT</version>
 				<configuration>
 					<baseUri>https://eden.rpgframework.de/</baseUri>
-					<basePath>${user.home}/Commlink6/app/STABILITY</basePath>
+					<basePath>${user.home}/CommLink6/app/STABILITY</basePath>
 					<launcher>de.rpgframework.shadowrun6.updater.CommlinkLauncher2</launcher>
 					<osHandling>ALL</osHandling>
 					<properties>
@@ -254,10 +259,15 @@
 						<exclude>de.rpgframework:shadowrun6-foundry</exclude>
 					</excludes>
 					<includeExtras>
-						<includeExtra>com.gluonhq.attach:browser:4.0.18:desktop</includeExtra>
-						<includeExtra>com.gluonhq.attach:display:4.0.18:desktop</includeExtra>
-						<includeExtra>com.gluonhq.attach:settings:4.0.18:desktop</includeExtra>
-						<includeExtra>com.gluonhq.attach:storage:4.0.18:desktop</includeExtra>
+						<includeExtra>com.gluonhq.attach:browser:4.0.19:desktop</includeExtra>
+						<includeExtra>com.gluonhq.attach:display:4.0.19:desktop</includeExtra>
+						<includeExtra>com.gluonhq.attach:settings:4.0.19:desktop</includeExtra>
+						<includeExtra>com.gluonhq.attach:storage:4.0.19:desktop</includeExtra>
+						<includeExtra>de.rpgframework:attach-pdf-pdfbox:5.1.5</includeExtra>
+						<includeExtra>org.apache.pdfbox:pdfbox:3.0.1</includeExtra>
+						<includeExtra>org.apache.pdfbox:pdfbox-io:3.0.1</includeExtra>
+						<includeExtra>commons-logging:commons-logging:1.2</includeExtra>
+						<includeExtra>org.apache.pdfbox:fontbox:3.0.1</includeExtra>
 					</includeExtras>
 				</configuration>
 				<executions>

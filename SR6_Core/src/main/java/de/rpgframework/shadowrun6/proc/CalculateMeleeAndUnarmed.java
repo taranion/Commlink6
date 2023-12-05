@@ -116,7 +116,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
 				if (strARMod!=null && item.getUuid()!=ItemTemplate.UUID_UNARMED) {
 					item.addModificationFromCharacter(strARMod);
-					logger.log(Level.WARNING, "Add {0} to attack rating for {1}", strARMod, item.getKey());
+					logger.log(Level.INFO, "Add {0} to attack rating for {1}", strARMod, item.getKey());
 				}
 			}
 			ItemSubType subtype = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
@@ -129,7 +129,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 					logger.log(Level.ERROR, "Add {0} to damage for {1}", strDMGBonus, item.getKey());
 				}
 			}
-			logger.log(Level.WARNING, "Leaving {0} with {1}", item, item.getAsObject(SR6ItemAttribute.DAMAGE));
+			logger.log(Level.DEBUG, "Leaving {0} with {1}", item, item.getAsObject(SR6ItemAttribute.DAMAGE));
 
 		}
 

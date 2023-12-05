@@ -104,13 +104,10 @@ public class ResetModifications implements ProcessingStep {
 			}
 
 			// Remove all auto-qualities or quality levels
+			model.clearAutoAdeptPower();
 			for (AdeptPowerValue val : new ArrayList<>(model.getAdeptPowers())) {
 				val.reset();
 				val.clearIncomingModifications();
-//				if (remove) {
-//					logger.log(Level.DEBUG, "Remove quality "+val);
-//					model.removeQuality(val);
-//				}
 			}
 
 			// Remove all auto-metaechoes

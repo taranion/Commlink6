@@ -11,7 +11,7 @@ pipelines:
     - step:
         name: Build
         script:
-          - mvn -U -B -s settings.xml clean deploy
+          - mvn -U -B -s settings.xml clean deploy -DskipTests
         artifacts:
           - Commlink6/target/commlink6-*complete.jar
           - Commlink6/target/config.xml
@@ -37,7 +37,7 @@ pipelines:
         deployment: Staging
         trigger: manual
         script:
-          - sed -i 's/STABILITY/develop/g' Commlink6/target/config.xml
+          - sed -i 's/STABILITY/testing/g' Commlink6/target/config.xml
           - pipe: atlassian/scp-deploy:1.4.1
             variables:
               USER: bitbucket
@@ -56,12 +56,12 @@ pipelines:
         trigger: manual
         script:
           - ls Commlink6/target
-          - sed -i 's/STABILITY/testing/g' Commlink6/target/config.xml
+          - sed -i 's/STABILITY/stable/g' Commlink6/target/config.xml
           - pipe: atlassian/scp-deploy:1.4.1
             variables:
               USER: bitbucket
               SERVER: eden.rpgframework.de
-              REMOTE_PATH: '/var/www/html/commlink6-updates'
+              REMOTE_PATH: '/var/www/html/commlink6-updates/stable'
               LOCAL_PATH: 'Commlink6/target/config.xml'
           - pipe: atlassian/scp-deploy:1.4.1
             variables:

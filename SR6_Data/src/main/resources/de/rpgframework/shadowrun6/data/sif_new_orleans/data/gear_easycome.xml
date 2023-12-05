@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item  id="stake" avail="3" price="25" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" reqVariant="y">
+   	<attrdef id="ATTACK_RATING" value="5,,,,"/>
+   	<variant id="wooden">
+			<attrdef id="DAMAGE" value="2P"/>
+	   	<attrdef id="PRICE" value="25"/>
+   	</variant>
+   	<variant id="silver">
+			<attrdef id="DAMAGE" value="3P"/>
+	   	<attrdef id="PRICE" value="35"/>
+	   	<attrdef id="AVAILABILITY" value="4"/>
+   	</variant>
+   	<variant id="hunters_alloy">
+			<attrdef id="DAMAGE" value="3P"/>
+	   	<attrdef id="PRICE" value="345"/>
+	   	<attrdef id="AVAILABILITY" value="4"/>
+   	</variant>
+   </item>
+
+    <item id="silver_arrow"  price="2" avail="1" type="AMMUNITION" subtype="BOWS" count="y" units="1">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/>
+		</choices>
+		<attrdef id="DAMAGE" value="0"/>
+		<attrdef id="PRICE" value="10+$RATING*2"/>
+		<attrdef id="AVAILABILITY" value="$RATING/2"/>
+    </item>
+    <item id="silver_bolt"  price="15" avail="4" type="AMMUNITION" subtype="CROSSBOWS" count="y" units="1"/>
+
+    <item id="awakened_bug_spray"  price="100" avail="3" type="SURVIVAL" subtype="SURVIVAL_GEAR" />
+    <item id="liars_medium_divination"  price="55" avail="5" type="MAGICAL" subtype="MAGICAL_SUPPLIES" />
+    <item id="uv_flashlight"  price="100" avail="0" type="TOOLS" subtype="TOOLS" />
+    <item id="uv_floodlight"  price="100" avail="0" type="TOOLS" subtype="TOOLS" />
+
+  	<item id="mct_fox" avail="0"  price="30000" type="VEHICLES" subtype="TRUCKS">
+      <vehicle han="4/4" acc="12" spdi="20" tspd="150" bod="14" arm="6" pil="3" sen="2" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="secondary_propulsion_system" variant="tracked" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+   </item>
+	<item id="mitsubischi_heziba" avail="2" price="35000" type="VEHICLES" subtype="HOVERCRAFT" >
+		<vehicle han="5/3" acc="10" spdi="10" tspd="140" bod="8" arm="6" pil="1" sen="1" sea="2" type="WATER"/>
+		<modifications>
+			<embed type="GEAR" ref="secondary_propulsion_system" variant="wheeled" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<valmod ref="VEHICLE_CF" type="HOOK" value="4"/> <!-- bonus for being pickup -->
+		</modifications>
+	</item>
+	<item id="gaeatronics_cypruss" avail="3" price="25000" type="DRONE_LARGE" subtype="ANTHRO" reqVariant="y">
+		<vehicle han="3/3" acc="5" spdi="5" tspd="10" bod="12" arm="12" pil="3" sen="4" />
+		<modifications>
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+			</embed>
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+		<variant id="drone_rack">
+			<modifications>
+				<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
+		<variant id="weapon">
+			<modifications>
+				<embed type="GEAR" ref="weapon_turret_standard" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
+	</item>
+	<item id="gaeatronics_kneader" avail="4" price="5000" type="DRONE_MEDIUM" subtype="ANTHRO">
+		<vehicle han="5/5" acc="5" spdi="5" tspd="10" bod="4" arm="4" pil="2" sen="3" />
+		<modifications>
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="weapon_turret_standard" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+	<item id="surfstar_marine_seacop" avail="62" price="20000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="4/3" acc="20" spdi="20" tspd="60" bod="14" arm="14" pil="1" sen="2" sea="4" type="WATER"/>
+		<modifications>
+			<embed type="GEAR" ref="electronic_warfare" intoType="HOOK" intoRef="SOFTWARE"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+			</embed>
+			<embed type="GEAR" ref="weapon_turret_heavy" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+</items>

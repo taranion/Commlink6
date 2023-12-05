@@ -173,6 +173,12 @@
       "pattern":"\\Qde/rpgframework/shadowrun6/data/core/data/traditions.xml\\E"
     },
     {
+      "pattern":"\\Qde/rpgframework/shadowrun6/data/core/data/gear_seattle.xml\\E"
+    },
+    {
+      "pattern":"\\Qde/rpgframework/shadowrun6/data/core/data/qualities_seattle.xml\\E"
+    },
+    {
       "pattern":"\\Qde/rpgframework/shadowrun6/data/hack_slash/data/actions.xml\\E"
     },
     {
@@ -508,6 +514,14 @@
       ]
     },
     {
+      "name":"de.rpgframework.shadowrun6.data.core.i18n.core_seattle",
+      "locales":[
+        "",
+        "de",
+        "en"
+      ]
+    },
+    {
       "name":"de.rpgframework.shadowrun6.data.body_shop.i18n.body_shop",
       "locales":[
         "",
@@ -537,6 +551,10 @@
         "de",
         "en"
       ]
+    },
+    {
+      "name":"de.rpgframework.shadowrun6.data.sif_new_orleans.i18n.easycome",
+      "locales":["en"]
     },
     {
       "name":"org.prelle.javafx.JavaFXConstants",

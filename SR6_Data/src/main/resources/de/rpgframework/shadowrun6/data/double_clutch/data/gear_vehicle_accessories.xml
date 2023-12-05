@@ -824,7 +824,7 @@
    <item id="elemental_hardening" avail="0" price="1000" type="MOD_SKIN" subtype="MOD_ELEMENTS" >
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6"/>
-      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1804" type="DAMAGE_ELEMENT" />
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c1804" type="DAMAGE_ELEMENT" options="FIRE,COLD,ELECTRICITY,CHEMICAL"/>
       </choices>
       <usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="$RATING*0.5"/>
       <attrdef id="PRICE" value="$RATING*1000" />

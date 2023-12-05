@@ -74,7 +74,7 @@ public class CleanVirtualItems implements ProcessingStep {
 			CarriedItem<ItemTemplate> unarmed = res.get();
 			unarmed.setInjectedBy("CORE");
 			unarmed.setUuid(ItemTemplate.UUID_UNARMED);
-			logger.log(Level.WARNING, "Inject UNARMED");
+			logger.log(Level.INFO, "Inject UNARMED");
 			model.addVirtualCarriedItem(unarmed);
 		}
 

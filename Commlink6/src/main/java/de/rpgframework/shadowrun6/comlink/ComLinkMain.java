@@ -153,6 +153,9 @@ public class ComLinkMain extends EdenClientApplication {
 	public void init() {
 		super.init();
 	    //   loadData();
+		for (String key : super.getParameters().getRaw()) {
+			System.getLogger(EdenClientApplication.class.getPackageName()).log(Level.INFO,"parameter "+key);
+		}
 	}
 
     //-------------------------------------------------------------------
@@ -263,7 +266,7 @@ public class ComLinkMain extends EdenClientApplication {
      */
     @Override
 	public Image getSecurityDialogImage() {
-		return new Image(ComLinkMain.class.getResourceAsStream("SecurityDialog.png"));
+		return new Image(ComLinkMain.class.getResourceAsStream("LoginImage.png"));
 	}
 
 //	//-------------------------------------------------------------------
@@ -320,16 +323,13 @@ public class ComLinkMain extends EdenClientApplication {
 		//FontIcon icoAbout   = new FontIcon("\uD83D\uDEC8");
 		SymbolIcon icoAbout = new SymbolIcon("setting");
 		FontIcon icoAccount = new FontIcon("\uE2AF");
-//		SymbolIcon icoPDF     = new SymbolIcon("pdf");
 		navigChars  = new MenuItem(ResourceI18N.get(RES, "navig.chars"), new SymbolIcon("people"));
 		navigLookup = new MenuItem(ResourceI18N.get(RES, "navig.lookup"), icoLookup);
 		navigAccount= new MenuItem(ResourceI18N.get(RES, "navig.account"), icoAccount);
-//		navigPDF    = new MenuItem(ResourceI18N.get(RES, "navig.pdf"), icoPDF);
 		navigAbout  = new MenuItem(ResourceI18N.get(RES, "navig.about"), icoAbout);
 		navigChars  .setId("navig-chars");
 		navigLookup .setId("navig-lookup");
 		navigAbout  .setId("navig-about");
-//		navigPDF    .setId("navig-pdf");
 		navigAccount.setId("navig-account");
 
 		drawer.getItems().addAll(navigChars, navigLookup, navigAbout);
