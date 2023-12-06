@@ -10,11 +10,13 @@ import com.google.gson.GsonBuilder;
 
 import de.rpgframework.foundry.ActorData;
 import de.rpgframework.foundry.ItemData;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun.AdeptPowerValue;
 import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.Contact;
+import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.Lifestyle;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
@@ -62,7 +64,6 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
-import de.rpgframework.shadowrun6.items.WeaponData;
 import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
 
 public class FoundryExportService {
@@ -396,10 +397,10 @@ public class FoundryExportService {
 	}
 
 	//-------------------------------------------------------------------
-	private static FVTTWeapon.FireMode getFireModes(WeaponData weapon) {
+	private static FVTTWeapon.FireMode getFireModes(List<FireMode> value) {
 		FVTTWeapon.FireMode modes = new FVTTWeapon.FireMode();
-		if (weapon.getFireModes()!=null) {
-			for (FireMode mode : weapon.getFireModes()) {
+		if (value!=null) {
+			for (FireMode mode : value) {
 				switch (mode) {
 				case BURST_FIRE: modes.BF=true; break;
 				case FULL_AUTO : modes.FA=true; break;
@@ -451,7 +452,8 @@ public class FoundryExportService {
 				gear.availDef = ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getValue()).toString();
 			}
 			System.out.println("Item "+item.getNameWithoutRating());
-			gear.price = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+			if (item.hasAttribute(SR6ItemAttribute.PRICE))
+				gear.price = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			gear.notes = item.getNotes();
 			gear.customName = item.getCustomName();
 			gear.countable  = item.getResolved().isCountable();
@@ -468,24 +470,28 @@ public class FoundryExportService {
 				gear.accessories = String.join(", ", accList);
 			}
 
-//			if (!item.getWeaponDataRecursive().isEmpty()) {
-//				WeaponData weapon = item.getWeaponDataRecursive().get(0);
-//				if (weapon.getSkill()!=null)
-//					gear.skill = weapon.getSkill().getId();
-//				if (weapon.getSpecialization()!=null)
-//					gear.skillSpec = weapon.getSpecialization().getId();
-//				Damage dmg = new Damage(weapon.getDamage(), new ArrayList<>());
-//				if (item.hasAttribute(SR6ItemAttribute.DAMAGE))
-//					dmg.setValue(item.getAsValue(SR6ItemAttribute.DAMAGE).getModifiedValue());
-//				if (gear instanceof FVTTWeapon) {
-//					if (item.hasAttribute(SR6ItemAttribute.ATTACK_RATING))
-//						((FVTTWeapon)gear).attackRating = (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
-//					((FVTTWeapon)gear).dmg    = dmg.getModifiedValue();
-//					((FVTTWeapon)gear).dmgDef = dmg.toString();
-//					((FVTTWeapon)gear).stun   = dmg.getType()==Type.STUN;
-//					((FVTTWeapon)gear).modes  = getFireModes(weapon);
-//				}
-//			}
+			if (ItemType.isWeapon(type)) {
+				if (item.hasAttribute(SR6ItemAttribute.SKILL)) {
+					SR6Skill skill = item.getAsObject(SR6ItemAttribute.SKILL).getModifiedValue();
+					gear.skill = skill.getId();
+				}
+				if (item.hasAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)) {
+					SkillSpecialization<SR6Skill> spec = item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getModifiedValue();
+					gear.skillSpec = spec.getId();
+				}
+				if (item.hasAttribute(SR6ItemAttribute.DAMAGE)) {
+					Damage dmg = item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
+					((FVTTWeapon)gear).dmg    = dmg.getValue();
+					((FVTTWeapon)gear).dmgDef = dmg.toString();
+					((FVTTWeapon)gear).stun   = dmg.getType()==DamageType.STUN;
+				}
+				if (item.hasAttribute(SR6ItemAttribute.ATTACK_RATING)) {
+					((FVTTWeapon)gear).attackRating = (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
+				}
+				if (item.hasAttribute(SR6ItemAttribute.FIREMODES)) {
+					((FVTTWeapon)gear).modes = getFireModes((List<FireMode>)item.getAsObject(SR6ItemAttribute.FIREMODES).getModifiedValue());
+				}
+			}
 			if (item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL) && gear instanceof FVTTArmor)
 				((FVTTArmor)gear).defense = item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
 			if (item.hasAttribute(SR6ItemAttribute.DEFENSE_SOCIAL) && gear instanceof FVTTArmor)
