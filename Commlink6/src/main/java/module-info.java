@@ -30,5 +30,6 @@ open module de.rpgframework.shadowrun6.commlink6 {
 	requires rpgframework.pdfviewer;
 	requires java.prefs;
 	requires org.controlsfx.controls;
+	requires com.gluonhq.attach.browser;
 
 }
