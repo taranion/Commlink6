@@ -41,7 +41,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharactersOverviewPage;
 import de.rpgframework.shadowrun6.comlink.pages.AboutPage;
 import de.rpgframework.shadowrun6.comlink.pages.LibraryPage;
-import de.rpgframework.shadowrun6.comlink.pages.Shadowrun6ContentPacksPage;
 import de.rpgframework.shadowrun6.export.fvtt.SR6FoundryExportPlugin;
 import de.rpgframework.shadowrun6.export.json.SR6JSONExportPlugin;
 import javafx.scene.control.Label;
@@ -332,7 +331,7 @@ public class ComLinkMain extends EdenClientApplication {
 		navigAbout  .setId("navig-about");
 		navigAccount.setId("navig-account");
 
-		drawer.getItems().addAll(navigChars, navigLookup, navigAbout);
+		drawer.getItems().addAll(navigChars, navigLookup, navigAccount, navigAbout);
 //		if (!Platform.isDesktop() || !PDFViewerServiceFactory.create().isPresent()) {
 //			drawer.getItems().remove(navigPDF);
 //		}
@@ -366,7 +365,7 @@ public class ComLinkMain extends EdenClientApplication {
 				CharacterProviderLoader.getCharacterProvider().setListener(pg);
 				return pg;
 			} else if (menuItem == navigAccount) {
-				return new AccountPage(this, RoleplayingSystem.SHADOWRUN6, new Shadowrun6ContentPacksPage(eden));
+				return new AccountPage(this, RoleplayingSystem.SHADOWRUN6);
 
 			} else if (menuItem == navigPDF) {
 				return new PDFPage(this, RoleplayingSystem.SHADOWRUN6);
