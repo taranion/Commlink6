@@ -100,7 +100,7 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 		btnDel.setDisable(true);
 		lvQualities = new ListView<>();
 		lvQualities.setPlaceholder(phQualities);
-		lvQualities.setCellFactory(lv -> new QualityValueListCell( () -> charGen, null, true));
+		lvQualities.setCellFactory(lv -> new QualityValueListCell( () -> charGen, true));
 		tfArea = new TextField();
 
 		taDescription = new TextArea();

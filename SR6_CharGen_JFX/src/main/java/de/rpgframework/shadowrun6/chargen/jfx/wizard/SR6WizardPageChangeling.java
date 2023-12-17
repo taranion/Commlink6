@@ -220,12 +220,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.surge.placeholder.selected"));
 
 		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController()));
-		selection.setSelectedCellFactory(lv -> new QualityValueListCell(
-				new IShadowrunCharacterControllerProvider<IShadowrunCharacterController>() {
-					public IShadowrunCharacterController getCharacterController() {
-						return charGen;
-					}},
-				null, true));
+		selection.setSelectedCellFactory(lv -> new QualityValueListCell( ()->charGen, true));
 		selection.setShowHeadings(false);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
 		selection.setSkin(new ComplexDataItemControllerOneColumnSkin(selection));
