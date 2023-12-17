@@ -60,11 +60,11 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private WizardPageProfiles profiles;
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
 	private SR6WizardPageMetatype race;
-	private WizardPageLifePath1 lifepath1;
 	private SR6WizardPageDrake drake;
 	private SR6WizardPageChangeling surge;
 	private SR6WizardPageMagicOrResonance magic;
 	private SR6WizardPageBornThisWay bornThisWay;
+	private SR6WizardPageLPChildhood lpChildhood;
 	private SR6WizardPageQualities qualities;
 	private SR6WizardPageAttributes attrib;
 	private SR6WizardPageSkills skills;
@@ -104,11 +104,11 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			switch (type) {
 			case PRIORITIES   : ret.add(    prios); break;
 			case METATYPE     : ret.add(     race); break;
-			case SR6_LIFEPATH1: ret.add(lifepath1); break;
 			case DRAKE        : ret.add(    drake); break;
 			case SURGE        : ret.add(    surge); break;
 			case MAGIC_OR_RESONANCE: ret.add(magic); break;
 			case LP_BORN_THIS_WAY: ret.add(bornThisWay); break;
+			case LP_CHILDHOOD : ret.add(lpChildhood); break;
 			case QUALITIES    : ret.add(qualities); break;
 			case ATTRIBUTES   : ret.add(   attrib); break;
 			case SKILLS       : ret.add(   skills); break;
@@ -140,7 +140,6 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 				nameGetter);
 		prios  = new WizardPagePriority<>(this, wrapper.getWrapped(), new SR6PriorityTable( (type,prio) -> Shadowrun6Core.getPriorityTableEntry(type, prio)));
 		race   = new SR6WizardPageMetatype(this, wrapper);
-		lifepath1 = new WizardPageLifePath1(this, wrapper);
 		surge  = new SR6WizardPageChangeling(this, wrapper);
 		magic  = new SR6WizardPageMagicOrResonance(this, wrapper) {
 			protected void refresh() {
@@ -152,6 +151,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		};
 		drake     = new SR6WizardPageDrake(this, wrapper);
 		bornThisWay = new SR6WizardPageBornThisWay(this, wrapper);
+		lpChildhood = new SR6WizardPageLPChildhood(this, wrapper);
 		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());

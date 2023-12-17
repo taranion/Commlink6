@@ -40,7 +40,7 @@ public class CharacterGeneratorRegistry {
 		addGenerator(SumToTenCharacterGenerator.class);
 		addGenerator(PointBuyCharacterGenerator.class);
 		addGenerator(KarmaCharacterGenerator.class);
-//		addGenerator(SR6LifepathCharacterGenerator.class);
+		addGenerator(SR6LifepathCharacterGenerator.class);
 		addGenerator(FreeCharacterGenerator.class);
 	}
 
