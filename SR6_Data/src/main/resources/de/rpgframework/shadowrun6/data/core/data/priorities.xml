@@ -164,10 +164,10 @@
 			<valmod type="METATYPE" ref="hobgoblin"  value="1"/>
 			<valmod type="METATYPE" ref="ogre"       value="1"/>
 			<valmod type="METATYPE" ref="oni"        value="1"/>
-			<valmod type="METATYPE" ref="satyr"      value="1"/>
+			<!--valmod type="METATYPE" ref="satyr"      value="1"/-->
 			<valmod type="METATYPE" ref="troll"      value="1"/>
 			<valmod type="METATYPE" ref="cyclops"    value="1"/>
-			<valmod type="METATYPE" ref="fomorian"   value="1"/>
+			<!--valmod type="METATYPE" ref="fomorian"   value="1"/-->
 			<valmod type="METATYPE" ref="giant"      value="1"/>
 			<valmod type="METATYPE" ref="minotaur"   value="1"/>
 
