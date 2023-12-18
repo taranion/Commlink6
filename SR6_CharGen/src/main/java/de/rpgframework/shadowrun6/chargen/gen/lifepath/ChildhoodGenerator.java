@@ -233,8 +233,9 @@ public class ChildhoodGenerator implements PartialController<Quality> {
 			public void select(SR6Skill skill) {
 				List<SR6Skill> skills = parent.getSettings().getChildhoodSkills();
 				skills.add(skill);
-				logger.log(Level.INFO, "Selected childhood skill {0}", skill);
-				parent.getSettings().setChildhoodSkills(skills);
+				logger.log(Level.WARNING, "Selected childhood skill {0}", skill);
+				if (skills.size()<=4)
+					parent.getSettings().setChildhoodSkills(skills);
 				parent.runProcessors();
 			}
 
