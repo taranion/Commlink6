@@ -55,7 +55,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 
 	private GeneratorWrapper wrapper;
 
-	private WizardPageGenerator<ShadowrunAttribute ,Shadowrun6Character, CommonSR6CharacterGenerator> chargen;
+	private SR6WizardPageGenerator chargen;
 	private WizardPageDatasets datasets;
 	private WizardPageProfiles profiles;
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
@@ -133,7 +133,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	@SuppressWarnings("unchecked")
 	private void initPages() {
 		datasets = new WizardPageDatasets(this, wrapper, Shadowrun6Core.getDataSets(), DataSetMode.values());
-		chargen= new WizardPageGenerator(this, wrapper,
+		chargen= new SR6WizardPageGenerator(this, wrapper,
 				CharacterGeneratorRegistry.getGenerators(),
 				Shadowrun6Core.getItemList(RuleInterpretation.class),
 				Shadowrun6Rules.values(),

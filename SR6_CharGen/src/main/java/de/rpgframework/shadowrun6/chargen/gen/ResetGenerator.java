@@ -76,7 +76,7 @@ public class ResetGenerator implements ProcessingStep {
 			case STREET_LEVEL:
 				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), 6));
 				break;
-			case EILTE:
+			case ELITE:
 				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), 10));
 				break;
 			default:
@@ -97,7 +97,7 @@ public class ResetGenerator implements ProcessingStep {
 			case STREET_LEVEL:
 				settings.characterPoints = 80;
 				break;
-			case EILTE:
+			case ELITE:
 				settings.characterPoints = 120;
 				break;
 			default:
@@ -112,7 +112,7 @@ public class ResetGenerator implements ProcessingStep {
 			case STREET_LEVEL:
 				settings.startKarma = 800;
 				break;
-			case EILTE:
+			case ELITE:
 				settings.startKarma = 1200;
 				break;
 			default:
