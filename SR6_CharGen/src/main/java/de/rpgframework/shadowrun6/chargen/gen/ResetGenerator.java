@@ -59,10 +59,10 @@ public class ResetGenerator implements ProcessingStep {
 		}
 
 		model.setKarmaInvested(0);
-		PowerLevel level = model.getPowerLevel();
+		PowerLevel level = model.getCharGenSettings(CommonSR6GeneratorSettings.class).variant;
 		if (level==null) {
 			level=PowerLevel.STANDARD;
-			model.setPowerLevel(level);
+			model.getCharGenSettings(CommonSR6GeneratorSettings.class).variant = level;
 		}
 
 		SR6CharacterGenerator real = charGen;
@@ -104,7 +104,7 @@ public class ResetGenerator implements ProcessingStep {
 				settings.characterPoints = 100;
 				break;
 			}
-			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
+			logger.log(Level.WARNING, "Start with {0} character points", settings.characterPoints);
 			logger.log(Level.INFO, "MAGIC0 = "+model.getAttribute(ShadowrunAttribute.MAGIC));
 		} else if (real instanceof KarmaCharacterGenerator) {
 			SR6KarmaSettings settings = model.getCharGenSettings(SR6KarmaSettings.class);

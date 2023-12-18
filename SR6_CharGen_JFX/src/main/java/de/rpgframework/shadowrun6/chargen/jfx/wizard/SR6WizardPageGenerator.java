@@ -9,6 +9,7 @@ import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.Wizard;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.IGeneratorWrapper;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
@@ -17,6 +18,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
@@ -46,7 +48,8 @@ public class SR6WizardPageGenerator<G extends SR6CharacterGenerator> extends Wiz
 		});
 		cbLevel.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
 			if (n!=null) {
-				model.getModel().setPowerLevel(n);
+				model.getModel().getCharGenSettings(CommonSR6GeneratorSettings.class).variant = n;
+				//model.fireEvent(BasicControllerEvents.CHARACTER_CHANGED, model);
 				model.runProcessors();
 			}
 		});
@@ -54,8 +57,19 @@ public class SR6WizardPageGenerator<G extends SR6CharacterGenerator> extends Wiz
 		lbLevel.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		HBox bxLevel = new HBox(10, lbLevel, cbLevel);
 		bxLevel.setAlignment(Pos.CENTER_LEFT);
-		cbLevel.setValue( model.getModel().getPowerLevel() );
+		cbLevel.setValue( model.getModel().getCharGenSettings(CommonSR6GeneratorSettings.class).variant );
 		setExtraNode(bxLevel);
+	}
+
+
+	//-------------------------------------------------------------------
+	/**
+	 * Called when a new character has been created - allows to apply power level
+	 */
+	@Override
+	protected void newCharGenCreated(G newGen, Shadowrun6Character model) {
+		CommonSR6GeneratorSettings settings = model.getCharGenSettings(CommonSR6GeneratorSettings.class);
+		settings.variant = cbLevel.getSelectionModel().getSelectedItem();
 	}
 
 }
