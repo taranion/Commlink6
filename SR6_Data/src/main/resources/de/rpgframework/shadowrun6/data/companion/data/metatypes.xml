@@ -12,6 +12,8 @@
            	 <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="extreme"/>
            	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="sunlight"/>
            </itemmod>
+           <itemmod type="QUALITY" ref="thermographic_vision"/>
+           <itemmod type="QUALITY" ref="low-light_vision"/>
            <itemmod type="QUALITY" ref="unusual_hair"/>
            <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
 		</modifications>
