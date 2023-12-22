@@ -117,7 +117,9 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			val = model.getAttribute(ShadowrunAttribute.RESIST_DRAIN);
 			val.setDistributed(0);
 			addNaturalModifier(val, ShadowrunAttribute.WILLPOWER);
-			if (model.getTradition()!=null) {
+			if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesResonance()) {
+				addNaturalModifier(val, ShadowrunAttribute.LOGIC);
+			} else if (model.getTradition()!=null) {
 				addNaturalModifier(val, model.getTradition().getTraditionAttribute());
 			}
 			logger.log(Level.DEBUG, " Resist Drain = "+val.getModifiedValue());
