@@ -1719,9 +1719,9 @@ public class Shadowrun6Tools {
 				SR6SkillValue val = model.getSkillValue(skill);
 				if (val==null) {
 					if (skill.isUseUntrained()) {
-						val = new SR6SkillValue(skill, 0);
+						val = new SR6SkillValue(skill, 0); // -1
 					} else
-						val = new SR6SkillValue(skill, -1);
+						val = new SR6SkillValue(skill, -1); // -99
 				}
 				ret.add(val);
 				break;
