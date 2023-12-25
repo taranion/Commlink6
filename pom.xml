@@ -71,17 +71,17 @@
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-core</artifactId>
-				<version>0.0.3-SNAPSHOT</version>
+				<version>0.0.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-chargen</artifactId>
-				<version>0.0.3-SNAPSHOT</version>
+				<version>0.0.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>shadowrun-common-chargen-jfx</artifactId>
-				<version>0.0.3-SNAPSHOT</version>
+				<version>0.0.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
