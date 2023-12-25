@@ -7,6 +7,7 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonSINController;
@@ -57,7 +58,7 @@ public class SR6SINLeveller extends CommonSINController {
 					DataItemModification mod = (DataItemModification)tmp;
 					logger.log(Level.DEBUG, "process "+mod);
 					FakeRating qual = mod.getResolvedKey();
-					
+
 					// Re-use an eventually existing REAL_SIN
 					if (qual==FakeRating.REAL_SIN) {
 						autoAddedRealSIN = true;
@@ -73,17 +74,56 @@ public class SR6SINLeveller extends CommonSINController {
 				} else
 					unprocessed.add(tmp);
 			}
-			
+
 			// If a real SIN exists, but isn't auto-added anymore, remove it
 			if (real!=null && !autoAddedRealSIN) {
 				getModel().removeSIN(real);
 				logger.log(Level.INFO, "removed REAL sin");
 			}
-			
+
 		} finally {
-			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");			
+			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
 		}
 		return unprocessed;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.SINController#createNewSIN(java.lang.String, de.rpgframework.shadowrun.SIN.FakeRating, int)
+	 */
+	@Override
+	public SIN[] createNewSIN(FakeRating quality, int count) {
+		int cost = quality.getValue() * 2500 * count;
+		logger.log(Level.INFO, "Pay {0} nuyen for {2} rating {1} SIN", cost, quality.getValue(), count);
+		getModel().setNuyen( getModel().getNuyen() - cost);
+
+		return super.createNewSIN(quality, count);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.SINController#createNewSIN(java.lang.String, de.rpgframework.shadowrun.SIN.FakeRating)
+	 */
+	@Override
+	public SIN createNewSIN(String name, FakeRating quality) {
+		int cost = quality.getValue() * 2500;
+		logger.log(Level.INFO, "Pay {0} nuyen for rating {1} SIN", cost, quality.getValue());
+		getModel().setNuyen( getModel().getNuyen() - cost);
+
+		return super.createNewSIN(name, quality);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.SINController#createNewLicense(de.rpgframework.shadowrun.LicenseType, de.rpgframework.shadowrun.SIN, de.rpgframework.shadowrun.SIN.FakeRating, java.lang.String)
+	 */
+	@Override
+	public LicenseValue createNewLicense(SIN sin, FakeRating quality, String name) {
+		int cost = quality.getValue() * 200;
+		logger.log(Level.INFO, "Pay {0} nuyen for rating {1} license", cost, quality.getValue());
+		getModel().setNuyen( getModel().getNuyen() - cost);
+
+		return super.createNewLicense(sin, quality, name);
 	}
 
 }
