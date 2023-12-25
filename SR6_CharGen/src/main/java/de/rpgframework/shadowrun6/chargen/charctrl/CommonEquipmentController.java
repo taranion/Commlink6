@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,8 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public abstract class CommonEquipmentController extends ControllerImpl<ItemTemplate> implements ISR6EquipmentController {
+
+	protected static Logger logger = System.getLogger(CommonEquipmentController.class.getPackageName());
 
 	protected List<ValueModification> priceMods;
 
@@ -391,8 +394,8 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 */
 	@Override
 	public Possible canBeIncreased(CarriedItem<ItemTemplate> value) {
-		if (!value.getModifyable().isCountable())
-			return Possible.FALSE;
+//		if (!value.getModifyable().isCountable())
+//			return Possible.FALSE;
 
 		int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 		if (getModel().getNuyen()<nuyen) {
@@ -410,8 +413,8 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 */
 	@Override
 	public Possible canBeDecreased(CarriedItem<ItemTemplate> value) {
-		if (!value.getModifyable().isCountable())
-			return Possible.FALSE;
+//		if (!value.getModifyable().isCountable())
+//			return Possible.FALSE;
 		if (value.getCount()<2)
 			return Possible.FALSE;
 		return Possible.TRUE;
@@ -431,9 +434,12 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		}
 
 		value.setCount( value.getCount()+1 );
+		value.setDirty(true);
 		logger.log(Level.INFO, "Increase count of {0} to {1}", value, value.getCount());
 
 		parent.runProcessors();
+		int price = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+		logger.log(Level.INFO, "Price now {0}",price);
 		return new OperationResult<>(value);
 	}
 

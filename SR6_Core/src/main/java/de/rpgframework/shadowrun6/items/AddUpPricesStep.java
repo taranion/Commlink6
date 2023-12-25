@@ -62,6 +62,11 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 			attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), cost) );
 		}
 
+		if (model.getCount()>1) {
+			int total = attrib.getModifiedValue() * (model.getCount()-1);
+			attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), total, "+"+(model.getCount()-1)+"x") );
+		}
+
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 

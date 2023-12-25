@@ -16,6 +16,7 @@ import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -91,9 +92,12 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 			if (result.wasSuccessful()) {
 				CarriedItem<ItemTemplate> item = result.get();
 				Shadowrun6Character model = getModel();
-				int nuyen = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
-				logger.log(Level.INFO, "Buy {0} for {1} nuyen", value.getId(), nuyen);
-				model.setNuyen( model.getNuyen() - nuyen );
+				boolean payGear = parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR);
+				if (payGear) {
+					int nuyen = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+					logger.log(Level.INFO, "Buy {0} for {1} nuyen", value.getId(), nuyen);
+					model.setNuyen( model.getNuyen() - nuyen );
+				}
 
 				// Pay essence
 				if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
@@ -167,40 +171,67 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		return 0;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController#getConversionRateKarma()
+	 */
 	@Override
 	public int getConversionRateKarma() {
 		return 0;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController#canIncreaseConversion()
+	 */
 	@Override
 	public boolean canIncreaseConversion() {
 		return false;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController#increaseConversion()
+	 */
 	@Override
 	public boolean increaseConversion() {
 		return false;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController#canDecreaseConversion()
+	 */
 	@Override
 	public boolean canDecreaseConversion() {
 		return false;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController#decreaseConversion()
+	 */
 	@Override
 	public boolean decreaseConversion() {
 		return false;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.character.ProcessingStep#process(java.util.List)
+	 */
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		return unprocessed;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IEquipmentController#canChangeCount(de.rpgframework.genericrpg.items.CarriedItem, int)
+	 */
 	@Override
 	public boolean canChangeCount(CarriedItem<ItemTemplate> item, int newCount) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }
