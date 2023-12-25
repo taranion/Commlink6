@@ -10,6 +10,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonSINController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -93,9 +94,14 @@ public class SR6SINLeveller extends CommonSINController {
 	 */
 	@Override
 	public SIN[] createNewSIN(FakeRating quality, int count) {
-		int cost = quality.getValue() * 2500 * count;
-		logger.log(Level.INFO, "Pay {0} nuyen for {2} rating {1} SIN", cost, quality.getValue(), count);
-		getModel().setNuyen( getModel().getNuyen() - cost);
+		boolean payGear = parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR);
+		if (payGear) {
+			int cost = quality.getValue() * 2500 * count;
+			logger.log(Level.INFO, "Pay {0} nuyen for {2} rating {1} SIN", cost, quality.getValue(), count);
+			getModel().setNuyen( getModel().getNuyen() - cost);
+		} else {
+			logger.log(Level.INFO, "CAREER_PAY_GEAR is not active");
+		}
 
 		return super.createNewSIN(quality, count);
 	}
@@ -106,9 +112,14 @@ public class SR6SINLeveller extends CommonSINController {
 	 */
 	@Override
 	public SIN createNewSIN(String name, FakeRating quality) {
-		int cost = quality.getValue() * 2500;
-		logger.log(Level.INFO, "Pay {0} nuyen for rating {1} SIN", cost, quality.getValue());
-		getModel().setNuyen( getModel().getNuyen() - cost);
+		boolean payGear = parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR);
+		if (payGear) {
+			int cost = quality.getValue() * 2500;
+			logger.log(Level.INFO, "Pay {0} nuyen for rating {1} SIN", cost, quality.getValue());
+			getModel().setNuyen( getModel().getNuyen() - cost);
+		} else {
+			logger.log(Level.INFO, "CAREER_PAY_GEAR is not active");
+		}
 
 		return super.createNewSIN(name, quality);
 	}
@@ -119,9 +130,14 @@ public class SR6SINLeveller extends CommonSINController {
 	 */
 	@Override
 	public LicenseValue createNewLicense(SIN sin, FakeRating quality, String name) {
-		int cost = quality.getValue() * 200;
-		logger.log(Level.INFO, "Pay {0} nuyen for rating {1} license", cost, quality.getValue());
-		getModel().setNuyen( getModel().getNuyen() - cost);
+		boolean payGear = parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR);
+		if (payGear) {
+			int cost = quality.getValue() * 200;
+			logger.log(Level.INFO, "Pay {0} nuyen for rating {1} license", cost, quality.getValue());
+			getModel().setNuyen( getModel().getNuyen() - cost);
+		} else {
+			logger.log(Level.INFO, "CAREER_PAY_GEAR is not active");
+		}
 
 		return super.createNewLicense(sin, quality, name);
 	}
