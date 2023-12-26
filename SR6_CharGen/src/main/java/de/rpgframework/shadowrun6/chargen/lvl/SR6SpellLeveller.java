@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.lvl;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
@@ -11,6 +12,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.SpellValue;
@@ -20,6 +22,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6SpellController;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -95,10 +98,13 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 			if (tmp.getResolved()==value)
 				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
-		
+
 		if (getModel().getKarmaFree()<5)
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
-		
+
+		if (getModel().getNuyen()<getNuyenCost(value))
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, getNuyenCost(value));
+
 		return Possible.TRUE;
 	}
 
@@ -115,17 +121,31 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return new OperationResult<>(poss);
 			}
-			
+
 			SpellValue<SR6Spell> toAdd = new SpellValue<SR6Spell>(value);
 			for (Decision dec : decisions) {
 				toAdd.addDecision(dec);
 			}
-			
 			getModel().addSpell(toAdd);
 			logger.log(Level.INFO, "Added spell {0}", toAdd);
-			
+
+			// Pay Karma
+			int cost = 5;
+			getModel().setKarmaFree(getModel().getKarmaFree()-cost);
+			getModel().setKarmaInvested(getModel().getKarmaInvested()+cost);
+
+			// Record in history
+			DataItemModification mod = new DataItemModification(ShadowrunReference.SPELL, value.getId());
+			mod.setExpCost(cost);
+			mod.setDate(new Date());
+			getModel().addToHistory(mod);
+
+			// Pay Money
+			int nuyen = getNuyenCost(value);
+			getModel().setNuyen( getModel().getNuyen() - nuyen );
+
 			parent.runProcessors();
-			
+
 			return new OperationResult<>(poss);
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1})", value, Arrays.toString(decisions));
@@ -141,11 +161,11 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 		if (!getSelected().contains(value)) {
 			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
-		
+
 		if (value.isAutoAdded()) {
 			return new Possible(IRejectReasons.IMPOSS_AUTO_ADDED);
 		}
-		
+
 		return Possible.TRUE;
 	}
 
@@ -162,12 +182,12 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 				logger.log(Level.WARNING, "Trying to select a spell which cannot be selected: {0}",poss);
 				return false;
 			}
-			
+
 			getModel().removeSpell(value);
 			logger.log(Level.INFO, "Removed spell {0}", value);
-			
+
 			parent.runProcessors();
-			
+
 			return true;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
@@ -203,7 +223,7 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 
 		try {
 			todos.clear();
-			
+
 			return unprocessed;
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
