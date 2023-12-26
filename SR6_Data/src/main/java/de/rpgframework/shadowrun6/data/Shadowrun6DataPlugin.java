@@ -872,7 +872,7 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -------------------------------BODY SHOP-------------------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "BODY_SHOP", "body_shop.i18n", Locale.ENGLISH);
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "BODY_SHOP", "body_shop.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.RULES);
 		set.setReleased(202306);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "body_shop/data/actions.xml");
