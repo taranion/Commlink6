@@ -42,6 +42,7 @@
 			<set rule="CHARGEN_MAX_AVAILABILITY" to="6"/>
 			<set rule="CARGOFACTOR_IS_WITHOUT_SEATS" to="true"/>
 			<set rule="CHARGEN_ERRATED_POINT_BUY" to="true"/>
+			<set rule="ALLOW_USED_CULTURED_BIOWARE" to="false"/>
 		</rules>
 	</interpretation>
 	<interpretation id="houserules">
