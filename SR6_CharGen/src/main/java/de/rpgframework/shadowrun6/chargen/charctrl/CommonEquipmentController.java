@@ -25,7 +25,9 @@ import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.PriceModifiers;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -230,6 +232,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_INVALID_CARRYMODE, mode.name(), String.valueOf(allowed));
 		}
 
+
 		// Try to build item
 		OperationResult<CarriedItem<ItemTemplate>> carried = null;
 		carried = GearTool.buildItem(value, mode, variant, getModel(), false, decisions);
@@ -249,6 +252,17 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 					if (!allowNegative) {
 						return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());
 					}
+				}
+			}
+		}
+
+		// Prevent "used" cultured bioware
+		if (value.getItemType(mode)==ItemType.BIOWARE && value.getItemSubtype(mode)==ItemSubType.BIOWARE_CULTURED) {
+			Decision dec = carried.get().getDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY);
+			if (dec!=null) {
+				AugmentationQuality quality = AugmentationQuality.valueOf( dec.getValue() );
+				if (AugmentationQuality.USED.equals(quality) && !parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALLOW_USED_CULTURED_BIOWARE)) {
+					return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_USED_CULTURED_BIOWARE);
 				}
 			}
 		}
