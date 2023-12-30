@@ -225,7 +225,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		}
 	}
 
-	// -------------------------------------------------------------------
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#select(de.rpgframework.genericrpg.data.ComplexDataItem,
 	 *      de.rpgframework.genericrpg.data.Decision[])
@@ -237,6 +237,19 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			Shadowrun6Tools.recordEssenceChange(model, result.get());
 		}
 		return result;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
+	@Override
+	public boolean deselect(QualityValue value) {
+		boolean success = super.deselect(value);
+		if (success) {
+			Shadowrun6Tools.removeEssenceChange(model, value);
+		}
+		return success;
 	}
 
 	//-------------------------------------------------------------------

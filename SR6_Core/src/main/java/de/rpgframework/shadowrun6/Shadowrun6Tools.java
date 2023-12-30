@@ -2383,19 +2383,18 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static int recordEssenceChange(Shadowrun6Character model, ComplexDataItemValue<?> value) {
+	private static ValueModification toValueMod(Shadowrun6Character model, ComplexDataItemValue<?> value) {
 		if (value instanceof CarriedItem) {
 			CarriedItem<ItemTemplate> item = (CarriedItem<ItemTemplate>) value;
 			if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
 				double essence = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
 				if (essence<100)
 					essence *= 1000;
-				ValueModification mod = new ValueModification(ShadowrunReference.CARRIED, value.getResolved().getId(), (int)(essence*1000));
+				ValueModification mod = new ValueModification(ShadowrunReference.CARRIED, value.getResolved().getId(), (int)(essence));
 				mod.setId(value.getUuid());
 				mod.setWhen(null);
 				mod.setSet(null);
-				model.getEssenceChanges().add(mod);
-				return (int)essence;
+				return mod;
 			}
 		}
 
@@ -2413,12 +2412,32 @@ public class Shadowrun6Tools {
 					mod.setId(value.getUuid());
 					mod.setWhen(null);
 					mod.setSet(null);
-					model.getEssenceChanges().add(mod);
-					return (int) essence;
+					return mod;
 				}
 			}
 		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	public static int recordEssenceChange(Shadowrun6Character model, ComplexDataItemValue<?> value) {
+		ValueModification mod = toValueMod(model, value);
+		if (mod!=null) {
+			model.getEssenceChanges().add(mod);
+			return mod.getValue();
+		}
 		return 0;
+	}
+
+	//-------------------------------------------------------------------
+	public static void removeEssenceChange(Shadowrun6Character model, ComplexDataItemValue<?> value) {
+		for (ValueModification vMod : model.getEssenceChanges()) {
+			if (vMod.getId().equals(value.getUuid())) {
+				model.getEssenceChanges().remove(vMod);
+				return ;
+			}
+		}
+
 	}
 
 }
