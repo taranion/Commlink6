@@ -111,7 +111,7 @@ public class CalculateEssence implements ProcessingStep {
 				holeVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0);
 				model.setAttribute(holeVal);
 			}
-			logger.log(Level.DEBUG, "Essence hole: {0}   not spent: {1}",holeVal.getModifiedValue(), model.getEssenceHoleUnused());
+			logger.log(Level.WARNING, "Essence hole: {0}   not spent: {1}",holeVal.getModifiedValue(), model.getEssenceHoleUnused());
 
 			// Max essence is 6.0 plus bonus essence hole minus unused essence hole
 			// This may be larger than 6000
@@ -121,6 +121,9 @@ public class CalculateEssence implements ProcessingStep {
 			// Now substract all items from it
 			BigDecimal essenceCostBD = new BigDecimal(0);
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+				// Ignore pure virtual items
+				if (model.getVirtualCarriedItems().contains(item))
+					continue;
 				ItemType type = Shadowrun6Tools.getItemType(item);
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(type) || (item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE)) {
 //					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
