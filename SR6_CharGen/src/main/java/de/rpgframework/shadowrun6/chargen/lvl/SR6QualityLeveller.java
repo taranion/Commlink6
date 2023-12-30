@@ -7,11 +7,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
@@ -20,6 +24,7 @@ import de.rpgframework.shadowrun.chargen.lvl.AQualityLeveller;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -79,6 +84,19 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 	 */
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
+		todos.clear();
+		// Check if requirements of qualities are still met
+		for (QualityValue val : model.getQualities()) {
+			Quality q = val.getResolved();
+			for (Requirement req : q.getRequirements()) {
+				Possible poss = Shadowrun6Tools.areRequirementsMet(model, q, val.getDecisionArray());
+				if (!poss.get()) {
+					logger.log(Level.WARNING, "Requirement of {0} not met: {1}", val.getName(), req);
+					todos.add(new ToDoElement(Severity.WARNING, q.getName(parent.getLocale())+": "+Shadowrun6Tools.getRequirementString(req, parent.getLocale())));
+				}
+			}
+		}
+
 		return unprocessed;
 	}
 

@@ -763,6 +763,9 @@ public class Shadowrun6Tools {
 			switch ((ShadowrunReference)tmp.getType()) {
 			case ATTRIBUTE:
 				if (tmp.getMaxValue()>0) {
+					if (tmp.getMaxValue()>=100) {
+						return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" <="+( ((double)tmp.getMaxValue()/1000));
+					}
 					return ShadowrunAttribute.valueOf(req.getKey()).getName(loc)+" <="+tmp.getMaxValue();
 				}
 				if ("$RATING".equals(tmp.getRawValue())) {
