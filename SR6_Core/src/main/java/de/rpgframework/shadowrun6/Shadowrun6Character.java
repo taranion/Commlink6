@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.RelevanceModification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAction;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -60,6 +61,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	private SetItemValue surgeCollective;
 	@ElementList(entry="datastructure", type=DataStructureValue.class)
 	protected List<DataStructureValue> datastructures;
+	@ElementList(entry="valmod", type=ValueModification.class)
+	protected List<ValueModification> essenceChanges;
 
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
@@ -78,6 +81,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		maneuvers = new ArrayList<>();
 		datastructures = new ArrayList<>();
 		asdfMap = new ASDFMapping();
+		essenceChanges = new ArrayList<>();
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			setAttribute(new AttributeValue<ShadowrunAttribute>(key, 1));
@@ -470,6 +474,11 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public CarriedItem<ItemTemplate> getSoftwareLibrary() {
 		return getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+	}
+
+	//-------------------------------------------------------------------
+	public List<ValueModification> getEssenceChanges() {
+		return essenceChanges;
 	}
 
 }

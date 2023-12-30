@@ -88,4 +88,20 @@ public class LoadCharTest {
 
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void testFixEssenceChanges() throws IOException {
+		String name = "streetsam_without_essencechanges";
+		FileInputStream fis = new FileInputStream("src/test/resources/testdata/"+ name + ".xml");
+		byte[] data = fis.readAllBytes();
+        Shadowrun6Character character = Shadowrun6Core.decode(data);
+
+        Shadowrun6Tools.resolveChar(character);
+        Shadowrun6Tools.runProcessors(character, Locale.getDefault());
+
+		byte[] raw = Shadowrun6Core.encode(character);
+		String xml = new String(raw);
+		System.out.println(xml);
+	}
+
 }

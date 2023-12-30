@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.SetItem;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ChoiceOption;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
@@ -222,6 +223,20 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 				continue;
 			karmaSURGE += val.getKarmaCost();
 		}
+	}
+
+	// -------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#select(de.rpgframework.genericrpg.data.ComplexDataItem,
+	 *      de.rpgframework.genericrpg.data.Decision[])
+	 */
+	@Override
+	public OperationResult<QualityValue> select(Quality value, Decision... decisions) {
+		OperationResult<QualityValue> result = super.select(value, decisions);
+		if (result.wasSuccessful()) {
+			Shadowrun6Tools.recordEssenceChange(model, result.get());
+		}
+		return result;
 	}
 
 	//-------------------------------------------------------------------

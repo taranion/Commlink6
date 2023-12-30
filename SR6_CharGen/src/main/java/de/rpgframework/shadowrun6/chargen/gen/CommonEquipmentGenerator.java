@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
+import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -132,6 +133,16 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			logger.log(Level.WARNING, "Add {0} to model", item.getKey());
 			getModel().addCarriedItem(item);
 
+			// Eventually record item in essence change list
+			if (mode==CarryMode.IMPLANTED) {
+				ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+				double essence = aVal.getModifiedValueDouble();
+				ValueModification mod = new ValueModification(ShadowrunReference.CARRIED, item.getResolved().getId(), (int)(essence*1000));
+				mod.setId(item.getUuid());
+				mod.setWhen(null);
+				getModel().getEssenceChanges().add(mod);
+			}
+
 			parent.runProcessors();
 			return new OperationResult<CarriedItem<ItemTemplate>>(item);
 		} finally {
@@ -237,7 +248,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 					if (tmp.getCount()>1)
 						cost *= tmp.getCount();
 					//if (logger.isLoggable(Level.TRACE))
-					logger.log(Level.WARNING, "Pay {0} for {1}   (before {2})", cost, tmp.getKey(), nuyen);
+					logger.log(Level.INFO, "Pay {0} for {1}   (before {2})", cost, tmp.getKey(), nuyen);
 					nuyen -= cost;
 				}
 

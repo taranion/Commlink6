@@ -99,6 +99,8 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 					model.setNuyen( model.getNuyen() - nuyen );
 				}
 
+				Shadowrun6Tools.recordEssenceChange(model, item);
+
 				// Pay essence
 				if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
 					double essenceCost = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();

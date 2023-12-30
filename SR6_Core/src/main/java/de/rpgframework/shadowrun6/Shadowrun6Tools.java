@@ -123,6 +123,7 @@ import de.rpgframework.shadowrun6.proc.CalculatePersona;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 import de.rpgframework.shadowrun6.proc.CleanVirtualItems;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
+import de.rpgframework.shadowrun6.proc.FixEssenceChanges;
 import de.rpgframework.shadowrun6.proc.GetGearDefinitions;
 import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromCollectives;
@@ -172,6 +173,7 @@ public class Shadowrun6Tools {
 		GetModificationsFromCritterPowers.class,
 		ApplyModificationsGeneric.class,
 		SpecialRuleStep.class,
+		FixEssenceChanges.class,
 		CalculateEssence.class,
 		CalculatePersona.class,
 		CalculateDerivedAttributes.class,
@@ -2378,6 +2380,45 @@ public class Shadowrun6Tools {
 			}
 		}
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	public static int recordEssenceChange(Shadowrun6Character model, ComplexDataItemValue<?> value) {
+		if (value instanceof CarriedItem) {
+			CarriedItem<ItemTemplate> item = (CarriedItem<ItemTemplate>) value;
+			if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
+				double essence = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
+				if (essence<100)
+					essence *= 1000;
+				ValueModification mod = new ValueModification(ShadowrunReference.CARRIED, value.getResolved().getId(), (int)(essence*1000));
+				mod.setId(value.getUuid());
+				mod.setWhen(null);
+				mod.setSet(null);
+				model.getEssenceChanges().add(mod);
+				return (int)essence;
+			}
+		}
+
+		ShadowrunReference type = ShadowrunReference.valueOf(value.getResolved().getTypeString().toUpperCase());
+		for (Modification tmp : value.getOutgoingModifications()) {
+			if (tmp instanceof ValueModification) {
+				ValueModification vmod = (ValueModification)tmp;
+				if (vmod.getReferenceType()==ShadowrunReference.ATTRIBUTE && (vmod.getKey().equals("ESSENCE") || vmod.getKey().equals("ESSENCE_HOLE"))) {
+					double essence = vmod.getValueAsDouble();
+					if (essence<100)
+						essence *= 1000;
+					if (vmod.getKey().equals("ESSENCE_HOLE"))
+						essence *= -1;
+					ValueModification mod = new ValueModification(type, value.getResolved().getId(), (int)essence);
+					mod.setId(value.getUuid());
+					mod.setWhen(null);
+					mod.setSet(null);
+					model.getEssenceChanges().add(mod);
+					return (int) essence;
+				}
+			}
+		}
+		return 0;
 	}
 
 }
