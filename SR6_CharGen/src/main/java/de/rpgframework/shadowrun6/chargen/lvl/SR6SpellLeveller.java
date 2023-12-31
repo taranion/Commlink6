@@ -52,7 +52,6 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<SpellValue<SR6Spell>> getSelected() {
 		List<SpellValue<SR6Spell>> ret = new ArrayList<>();
@@ -170,6 +169,15 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 	}
 
 	//-------------------------------------------------------------------
+	private DataItemModification getHistoryEntryFor(SpellValue<SR6Spell> value) {
+		for (DataItemModification mod : getModel().getHistory()) {
+			if (mod.getReferenceType()==ShadowrunReference.SPELL && mod.getKey().equals(value.getKey()))
+				return mod;
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
 	 */
@@ -185,6 +193,12 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 
 			getModel().removeSpell(value);
 			logger.log(Level.INFO, "Removed spell {0}", value);
+
+			// Remove from history
+			DataItemModification mod = getHistoryEntryFor(value);
+			if (mod!=null) {
+				getModel().removeFromHistory(mod);
+			}
 
 			parent.runProcessors();
 
