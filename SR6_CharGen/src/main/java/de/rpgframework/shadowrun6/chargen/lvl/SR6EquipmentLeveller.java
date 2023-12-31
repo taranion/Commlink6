@@ -1,21 +1,21 @@
 package de.rpgframework.shadowrun6.chargen.lvl;
 
 import java.lang.System.Logger.Level;
+import java.util.Date;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
-import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -25,9 +25,9 @@ import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -91,15 +91,22 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 			OperationResult<CarriedItem<ItemTemplate>> result = super.select(value, variantID, mode, decisions);
 			if (result.wasSuccessful()) {
 				CarriedItem<ItemTemplate> item = result.get();
+
+				ValueModification logMod = new ValueModification(ShadowrunReference.CARRIED, value.getId(), 0);
+				logMod.setId(item.getUuid());
+				logMod.setDate(new Date());
+
 				Shadowrun6Character model = getModel();
 				boolean payGear = parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR);
 				if (payGear) {
 					int nuyen = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 					logger.log(Level.INFO, "Buy {0} for {1} nuyen", value.getId(), nuyen);
 					model.setNuyen( model.getNuyen() - nuyen );
+					logMod.setValue(nuyen);
 				}
 
 				Shadowrun6Tools.recordEssenceChange(model, item);
+				model.addToHistory(logMod);
 
 				// Pay essence
 				if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
@@ -135,33 +142,76 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
 	 */
 	@Override
-	public boolean deselect(CarriedItem<ItemTemplate> value) {
-		logger.log(Level.TRACE, "ENTER deselect({0})", value);
-		try {
-			boolean success = super.deselect(value);
-			if (!success) {
-				return false;
+	public boolean deselect(CarriedItem<ItemTemplate> value, RemoveMode mode) {
+		boolean success = super.deselect(value, mode);
+		if (success) {
+
+			if (mode==RemoveMode.UNDO) {
+				Shadowrun6Character model = getModel();
+				int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+				logger.log(Level.INFO, "Sell {0} for {1} nuyen", value.getKey(), nuyen);
+
+				model.setNuyen( model.getNuyen() + nuyen );
+
+				// Remove the history modification
+				for (Modification mod : model.getHistory()) {
+					if (mod instanceof DataItemModification) {
+						if (((DataItemModification)mod).getId().equals(value.getUuid())) {
+							model.getHistory().remove(mod);
+							break;
+						}
+					}
+				}
 			}
+			Shadowrun6Tools.removeEssenceChange(getModel(), value, mode);
 
-			Shadowrun6Character model = getModel();
-			int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
-			logger.log(Level.INFO, "Sell {0} for {1} nuyen", value.getKey(), nuyen);
-
-			model.setNuyen( model.getNuyen() + nuyen );
-
-			// Eventually handle essence
-			if (value.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
-				ItemAttributeFloatValue<SR6ItemAttribute> val = value.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-				logger.log(Level.WARNING, "\n\n\n\nAdd an essence hole of {0}", val.getModifiedValue());
-				// Add to essence hole
-				model.setEssenceHoleUnsed((int)val.getModifiedValue()*1000);
-			}
+//			// Eventually handle essence
+//			if (value.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
+//				ItemAttributeFloatValue<SR6ItemAttribute> val = value.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+//				logger.log(Level.WARNING, "\n\n\n\nAdd an essence hole of {0}", val.getModifiedValue());
+//				// Add to essence hole
+//				model.setEssenceHoleUnsed((int)val.getModifiedValue()*1000);
+//			}
 
 			parent.runProcessors();
-			return true;
-		} finally {
-			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
+
 		}
+		return success;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
+	@Override
+	public boolean deselect(CarriedItem<ItemTemplate> value) {
+		return deselect(value, RemoveMode.UNDO);
+//		logger.log(Level.TRACE, "ENTER deselect({0})", value);
+//		try {
+//			boolean success = super.deselect(value);
+//			if (!success) {
+//				return false;
+//			}
+//
+//			Shadowrun6Character model = getModel();
+//			int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+//			logger.log(Level.INFO, "Sell {0} for {1} nuyen", value.getKey(), nuyen);
+//
+//			model.setNuyen( model.getNuyen() + nuyen );
+//
+//			// Eventually handle essence
+//			if (value.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
+//				ItemAttributeFloatValue<SR6ItemAttribute> val = value.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+//				logger.log(Level.WARNING, "\n\n\n\nAdd an essence hole of {0}", val.getModifiedValue());
+//				// Add to essence hole
+//				model.setEssenceHoleUnsed((int)val.getModifiedValue()*1000);
+//			}
+//
+//			parent.runProcessors();
+//			return true;
+//		} finally {
+//			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
+//		}
 	}
 
 	//-------------------------------------------------------------------

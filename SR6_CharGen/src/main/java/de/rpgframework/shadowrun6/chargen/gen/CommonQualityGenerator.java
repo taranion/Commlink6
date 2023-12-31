@@ -247,7 +247,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	public boolean deselect(QualityValue value) {
 		boolean success = super.deselect(value);
 		if (success) {
-			Shadowrun6Tools.removeEssenceChange(model, value);
+			Shadowrun6Tools.removeEssenceChange(model, value, RemoveMode.UNDO);
 		}
 		return success;
 	}

@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.chargen.charctrl;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerValue;
@@ -24,6 +26,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -126,6 +129,10 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 			for (Decision dec : decisions)
 				value.addDecision(dec);
 			logger.log(Level.INFO, "Selected ''{0}''", value.getNameWithRating());
+
+			// Record in history
+			DataItemModification mod = new DataItemModification(ShadowrunReference.ADEPT_POWER, data.getId());
+			getModel().addToHistory(mod);
 
 			parent.runProcessors();
 

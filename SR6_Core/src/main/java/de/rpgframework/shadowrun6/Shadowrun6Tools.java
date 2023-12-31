@@ -32,6 +32,7 @@ import de.rpgframework.genericrpg.Reward;
 import de.rpgframework.genericrpg.SetItem;
 import de.rpgframework.genericrpg.SetItemValue;
 import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController.RemoveMode;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Choice;
@@ -2430,12 +2431,18 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static void removeEssenceChange(Shadowrun6Character model, ComplexDataItemValue<?> value) {
-		for (ValueModification vMod : model.getEssenceChanges()) {
-			if (vMod.getId().equals(value.getUuid())) {
-				model.getEssenceChanges().remove(vMod);
-				return ;
+	public static void removeEssenceChange(Shadowrun6Character model, ComplexDataItemValue<?> value, RemoveMode mode) {
+		if (mode==RemoveMode.UNDO) {
+			for (ValueModification vMod : model.getEssenceChanges()) {
+				if (vMod.getId().equals(value.getUuid())) {
+					model.getEssenceChanges().remove(vMod);
+					return ;
+				}
 			}
+		} else {
+			ValueModification mod = toValueMod(model, value);
+			mod.setValue( mod.getValue() * -1);
+			model.getEssenceChanges().add(mod);
 		}
 
 	}
