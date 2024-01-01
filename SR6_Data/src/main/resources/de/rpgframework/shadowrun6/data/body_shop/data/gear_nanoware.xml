@@ -267,7 +267,7 @@
 			<attrdef id="PRICE" value="12000"/>
 		</variant>
 	</item>
-	<item id="demolishers" avail="4I" price="1500" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
+	<item id="demolishers" avail="4I" price="15000" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
 		<variant id="prebuilt">
 			<usage mode="IMPLANTED" value="0"/>
 			<attrdef id="AVAILABILITY" value="4I"/>
