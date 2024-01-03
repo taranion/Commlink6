@@ -219,13 +219,6 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 		} else {
 			quality2Consumer.accept(quality);
 		}
-//		if (handleFirstQuality) {
-//			logger.log(Level.ERROR, "call "+quality1Consumer);
-//			quality1Consumer.accept(quality);
-//		} else {
-//			logger.log(Level.ERROR, "call "+quality2Consumer);
-//			quality2Consumer.accept(quality);
-//		}
 
 		if (parent.getModel().hasQuality(quality.getId())) {
 			ret = parent.getModel().getQuality(quality.getId());

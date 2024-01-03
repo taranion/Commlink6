@@ -59,10 +59,10 @@ public class ResetGenerator implements ProcessingStep {
 		}
 
 		model.setKarmaInvested(0);
-		PowerLevel level = model.getPowerLevel();
+		PowerLevel level = model.getCharGenSettings(CommonSR6GeneratorSettings.class).variant;
 		if (level==null) {
 			level=PowerLevel.STANDARD;
-			model.setPowerLevel(level);
+			model.getCharGenSettings(CommonSR6GeneratorSettings.class).variant = level;
 		}
 
 		SR6CharacterGenerator real = charGen;
@@ -76,7 +76,7 @@ public class ResetGenerator implements ProcessingStep {
 			case STREET_LEVEL:
 				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), 6));
 				break;
-			case EILTE:
+			case ELITE:
 				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), 10));
 				break;
 			default:
@@ -97,14 +97,14 @@ public class ResetGenerator implements ProcessingStep {
 			case STREET_LEVEL:
 				settings.characterPoints = 80;
 				break;
-			case EILTE:
+			case ELITE:
 				settings.characterPoints = 120;
 				break;
 			default:
 				settings.characterPoints = 100;
 				break;
 			}
-			logger.log(Level.INFO, "Start with {0} character points", settings.characterPoints);
+			logger.log(Level.WARNING, "Start with {0} character points", settings.characterPoints);
 			logger.log(Level.INFO, "MAGIC0 = "+model.getAttribute(ShadowrunAttribute.MAGIC));
 		} else if (real instanceof KarmaCharacterGenerator) {
 			SR6KarmaSettings settings = model.getCharGenSettings(SR6KarmaSettings.class);
@@ -112,7 +112,7 @@ public class ResetGenerator implements ProcessingStep {
 			case STREET_LEVEL:
 				settings.startKarma = 800;
 				break;
-			case EILTE:
+			case ELITE:
 				settings.startKarma = 1200;
 				break;
 			default:

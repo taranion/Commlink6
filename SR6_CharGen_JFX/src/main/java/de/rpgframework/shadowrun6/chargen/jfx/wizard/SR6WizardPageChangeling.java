@@ -44,8 +44,6 @@ import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
 import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
@@ -220,12 +218,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.surge.placeholder.selected"));
 
 		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController()));
-		selection.setSelectedCellFactory(lv -> new QualityValueListCell(
-				new IShadowrunCharacterControllerProvider<IShadowrunCharacterController>() {
-					public IShadowrunCharacterController getCharacterController() {
-						return charGen;
-					}},
-				null, true));
+		selection.setSelectedCellFactory(lv -> new QualityValueListCell( ()->charGen, true));
 		selection.setShowHeadings(false);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
 		selection.setSkin(new ComplexDataItemControllerOneColumnSkin(selection));
@@ -383,7 +376,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	 */
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
-		logger.log(Level.WARNING, "RCV {0}",type);
+		logger.log(Level.DEBUG, "RCV {0}",type);
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
 			selection.setController(charGen.getQualityController());
 		}

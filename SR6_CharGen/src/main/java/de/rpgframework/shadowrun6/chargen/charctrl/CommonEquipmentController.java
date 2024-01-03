@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.charctrl;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,9 @@ import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.PriceModifiers;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -48,6 +51,8 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  *
  */
 public abstract class CommonEquipmentController extends ControllerImpl<ItemTemplate> implements ISR6EquipmentController {
+
+	protected static Logger logger = System.getLogger(CommonEquipmentController.class.getPackageName());
 
 	protected List<ValueModification> priceMods;
 
@@ -227,6 +232,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_INVALID_CARRYMODE, mode.name(), String.valueOf(allowed));
 		}
 
+
 		// Try to build item
 		OperationResult<CarriedItem<ItemTemplate>> carried = null;
 		carried = GearTool.buildItem(value, mode, variant, getModel(), false, decisions);
@@ -246,6 +252,17 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 					if (!allowNegative) {
 						return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, nuyen, getModel().getNuyen());
 					}
+				}
+			}
+		}
+
+		// Prevent "used" cultured bioware
+		if (value.getItemType(mode)==ItemType.BIOWARE && value.getItemSubtype(mode)==ItemSubType.BIOWARE_CULTURED) {
+			Decision dec = carried.get().getDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY);
+			if (dec!=null) {
+				AugmentationQuality quality = AugmentationQuality.valueOf( dec.getValue() );
+				if (AugmentationQuality.USED.equals(quality) && !parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALLOW_USED_CULTURED_BIOWARE)) {
+					return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_USED_CULTURED_BIOWARE);
 				}
 			}
 		}
@@ -391,8 +408,8 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 */
 	@Override
 	public Possible canBeIncreased(CarriedItem<ItemTemplate> value) {
-		if (!value.getModifyable().isCountable())
-			return Possible.FALSE;
+//		if (!value.getModifyable().isCountable())
+//			return Possible.FALSE;
 
 		int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 		if (getModel().getNuyen()<nuyen) {
@@ -410,8 +427,8 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 */
 	@Override
 	public Possible canBeDecreased(CarriedItem<ItemTemplate> value) {
-		if (!value.getModifyable().isCountable())
-			return Possible.FALSE;
+//		if (!value.getModifyable().isCountable())
+//			return Possible.FALSE;
 		if (value.getCount()<2)
 			return Possible.FALSE;
 		return Possible.TRUE;
@@ -431,9 +448,12 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		}
 
 		value.setCount( value.getCount()+1 );
+		value.setDirty(true);
 		logger.log(Level.INFO, "Increase count of {0} to {1}", value, value.getCount());
 
 		parent.runProcessors();
+		int price = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+		logger.log(Level.INFO, "Price now {0}",price);
 		return new OperationResult<>(value);
 	}
 

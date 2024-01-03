@@ -19,6 +19,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
@@ -40,6 +41,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	private boolean setupDone;
 
 	private BornThisWayGenerator bornThisWay;
+	private ChildhoodGenerator childhood;
 	private SR6LifePathModuleGenerator modules;
 
 	//-------------------------------------------------------------------
@@ -68,7 +70,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	public WizardPageType[] getWizardPages() {
 		return new WizardPageType[] { WizardPageType.METATYPE, //WizardPageType.DRAKE,
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
-				WizardPageType.LP_BORN_THIS_WAY,
+				WizardPageType.LP_BORN_THIS_WAY, WizardPageType.LP_CHILDHOOD, WizardPageType.LP_TEENAGE, WizardPageType.LP_ADULT,
 				WizardPageType.QUALITIES,
 				WizardPageType.ATTRIBUTES,
 //				WizardPageType.SKILLS, WizardPageType.POWERS, WizardPageType.SPELLS,
@@ -202,6 +204,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 		meta = new SR6LifePathMetatypeController(this);
 		magicReso = new SR6LifePathMagicOrResonanceController(this);
 		bornThisWay = new BornThisWayGenerator(this);
+		childhood = new ChildhoodGenerator(this);
 		modules   = new SR6LifePathModuleGenerator(this);
 		attributes = new SR6LifePathAttributeGenerator(this);
 //		skills = new SR6PointBuySkillGenerator(this);
@@ -212,7 +215,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 //		rituals   = new SR6PointBuyRitualGenerator(this);
 //		adeptPowers = new SR6PointBuyAdeptPowerGenerator(this);
 ////		complex   = new SR6PointBuyComplexFormGenerator(this);
-//		metaEcho  = new SR6MetamagicOrEchoController(this, true);
+		metaEcho  = new SR6MetamagicOrEchoController(this, true);
 //		sins      = new SR6SINGenerator(this);
 //		lifestyles= new SR6LifestyleGenerator(this);
 //		contacts  = new SR6ContactGenerator(this);
@@ -272,6 +275,15 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	@Override
 	public BornThisWayGenerator getBornThisWayGenerator() {
 		return bornThisWay;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator#getChildhoodGenerator()
+	 */
+	@Override
+	public ChildhoodGenerator getChildhoodGenerator() {
+		return childhood;
 	}
 
 }

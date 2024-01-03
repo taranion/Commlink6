@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.CheckModification;
 import de.rpgframework.genericrpg.modification.RelevanceModification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAction;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -40,6 +41,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillValue, ItemTemplate, SR6Spell> implements RuleSpecificCharacterObject<ShadowrunAttribute, SR6Skill, SR6SkillValue, ItemTemplate> {
 
 	@Element
+	@Deprecated
 	private PowerLevel powerLevel;
 	@ElementList(entry="lifestyle", type = SR6Lifestyle.class, inline = false)
 	private List<SR6Lifestyle> lifestyles;
@@ -59,6 +61,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	private SetItemValue surgeCollective;
 	@ElementList(entry="datastructure", type=DataStructureValue.class)
 	protected List<DataStructureValue> datastructures;
+	@ElementList(entry="valmod", type=ValueModification.class)
+	protected List<ValueModification> essenceChanges;
 
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
@@ -77,6 +81,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		maneuvers = new ArrayList<>();
 		datastructures = new ArrayList<>();
 		asdfMap = new ASDFMapping();
+		essenceChanges = new ArrayList<>();
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			setAttribute(new AttributeValue<ShadowrunAttribute>(key, 1));
@@ -167,21 +172,21 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		return Shadowrun6Core.getItem(Tradition.class, tradition);
 	}
 
-	//-------------------------------------------------------------------
-	/**
-	 * @return the powerLevel
-	 */
-	public PowerLevel getPowerLevel() {
-		return powerLevel;
-	}
-
-	//-------------------------------------------------------------------
-	/**
-	 * @param powerLevel the powerLevel to set
-	 */
-	public void setPowerLevel(PowerLevel powerLevel) {
-		this.powerLevel = powerLevel;
-	}
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @return the powerLevel
+//	 */
+//	public PowerLevel getPowerLevel() {
+//		return powerLevel;
+//	}
+//
+//	//-------------------------------------------------------------------
+//	/**
+//	 * @param powerLevel the powerLevel to set
+//	 */
+//	public void setPowerLevel(PowerLevel powerLevel) {
+//		this.powerLevel = powerLevel;
+//	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -469,6 +474,11 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public CarriedItem<ItemTemplate> getSoftwareLibrary() {
 		return getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+	}
+
+	//-------------------------------------------------------------------
+	public List<ValueModification> getEssenceChanges() {
+		return essenceChanges;
 	}
 
 }

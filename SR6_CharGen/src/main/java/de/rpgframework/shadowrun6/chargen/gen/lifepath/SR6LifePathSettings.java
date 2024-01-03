@@ -5,6 +5,7 @@ import java.util.List;
 
 import de.rpgframework.shadowrun6.LifepathModuleValue;
 import de.rpgframework.shadowrun6.SR6Quality;
+import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
@@ -18,17 +19,15 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 
 	private String nativeLanguage;
 	private String bornQual1, bornQual2;
+	private String childhoodArea;
+	private String basicSkills;
+	private String childQual1, childQual2;
 
 	//-------------------------------------------------------------------
 	/**
 	 */
 	public SR6LifePathSettings() {
 		modules = new ArrayList<>();
-//		perAttrib = new LinkedHashMap<>();
-//		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
-//			perAttrib.put(key, new PerAttributePoints());
-//		}
-//		perSkill = new LinkedHashMap<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -102,5 +101,59 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 	//-------------------------------------------------------------------
 	public void setNativeLanguage(String value) {
 		this.nativeLanguage = value;
+	}
+
+	//-------------------------------------------------------------------
+	public SR6Quality getChildhoodQuality1() {
+		if (childQual1 == null) return null;
+		return Shadowrun6Core.getItem(SR6Quality.class, childQual1);
+	}
+
+	//-------------------------------------------------------------------
+	public void setChildhoodQuality1(SR6Quality value) {
+		if (value==null) this.childQual1=null;
+		else this.childQual1 = value.getId();
+	}
+
+	//-------------------------------------------------------------------
+	public SR6Quality getChildhoodQuality2() {
+		if (childQual2 == null) return null;
+		return Shadowrun6Core.getItem(SR6Quality.class, childQual2);
+	}
+
+	//-------------------------------------------------------------------
+	public void setChildhoodQuality2(SR6Quality value) {
+		if (value==null) this.childQual2=null;
+		else this.childQual2 = value.getId();
+	}
+
+	//-------------------------------------------------------------------
+	public String getChildhoodArea() {
+		return childhoodArea;
+	}
+
+	//-------------------------------------------------------------------
+	public void setChildhoodArea(String value) {
+		this.childhoodArea = value;
+	}
+
+	//-------------------------------------------------------------------
+	public List<SR6Skill> getChildhoodSkills() {
+		List<SR6Skill> ret = new ArrayList<>();
+		if (basicSkills!=null) {
+			String[] keys = basicSkills.split(",");
+			for (String key : keys) {
+				SR6Skill skill = Shadowrun6Core.getItem(SR6Skill.class, key.trim());
+				if (skill!=null) ret.add(skill);
+			}
+		}
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public void setChildhoodSkills(List<SR6Skill> keys) {
+		if (keys.size()>4)
+			throw new IllegalArgumentException("Too many skills selected");
+		basicSkills = String.join(",", keys.stream().map(key -> key.getId()).toList());
 	}
 }

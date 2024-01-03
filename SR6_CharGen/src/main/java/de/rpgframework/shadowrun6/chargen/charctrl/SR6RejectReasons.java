@@ -44,5 +44,7 @@ public interface SR6RejectReasons extends IRejectReasons {
 
 	public static final String TODO_BORN_QUALITY_MISSING = "todo.lifepath.born.quality.missing";
 	public static final String TODO_LANGUAGE_NOT_SET     = "todo.lifepath.languageNotSet";
+	public static final String TODO_CHILD_QUALITY_MISSING = "todo.lifepath.child.quality.missing";
+	public static final String TODO_CHILDAREA_NOT_SET     = "todo.lifepath.childAreaNotSet";
 
 }

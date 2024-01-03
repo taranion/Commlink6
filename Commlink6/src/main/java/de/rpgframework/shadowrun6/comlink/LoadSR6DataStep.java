@@ -1,6 +1,6 @@
 package de.rpgframework.shadowrun6.comlink;
 
-import de.rpgframework.eden.client.jfx.steps.StartupStep;
+import de.rpgframework.core.StartupStep;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 
 /**
@@ -25,7 +25,7 @@ public class LoadSR6DataStep implements StartupStep {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.eden.client.jfx.steps.StartupStep#canRun()
+	 * @see de.rpgframework.core.StartupStep#canRun()
 	 */
 	@Override
 	public boolean canRun() {

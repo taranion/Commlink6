@@ -18,10 +18,11 @@ import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.core.RoleplayingSystem;
-import de.rpgframework.eden.client.jfx.steps.StartupStep;
+import de.rpgframework.core.StartupStep;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import javafx.application.Platform;
 
 /**
  * @author prelle
@@ -97,7 +98,9 @@ public class LoadSR6CharactersStep implements StartupStep {
 					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, ResourceI18N.format(RES, "error.loading_character", handle.getName()));
 				}
 			}
-			BabylonEventBus.fireEvent(BabylonEventType.CHAR_MODIFIED, 2);
+
+			Platform.runLater( () -> BabylonEventBus.fireEvent(BabylonEventType.CHAR_MODIFIED, 2));
+
 		} catch (CharacterIOException e) {
 			logger.log(Level.ERROR, "Error accessing characters",e);
 			main.handleError(e);
@@ -110,7 +113,7 @@ public class LoadSR6CharactersStep implements StartupStep {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.eden.client.jfx.steps.StartupStep#canRun()
+	 * @see de.rpgframework.core.StartupStep#canRun()
 	 */
 	@Override
 	public boolean canRun() {

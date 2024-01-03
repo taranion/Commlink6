@@ -130,6 +130,14 @@ public class CombatSectionTools {
 	}
 
 	//-------------------------------------------------------------------
+	public static AttackTable getAttackTableCombined(Shadowrun6Character model, Locale loc) {
+		AttackTable ret = getAttackTablePhysical(model, loc);
+		ret.addAll(getAttackTableAstral(model, loc));
+		ret.addAll(getAttackTableMatrix(model, loc));
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * Get attack table - to be used in CombatSections
 	 */

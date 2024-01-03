@@ -14,6 +14,7 @@ import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.gen.IPrioritySettings;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;

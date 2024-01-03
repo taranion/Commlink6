@@ -492,7 +492,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			sin.setInjectedBy(mod.getSource());
 			if (mod.getId()!=null && count==1)
 				sin.setUniqueId(mod.getId());
-			logger.log(Level.DEBUG, "Inject SIN {0} (from {1})", sin.getUniqueId(), mod.getSource());
+			logger.log(Level.INFO, "Inject SIN {0} (from {1})", sin.getUniqueId(), mod.getSource());
 			model.addSIN(sin);
 		}
 		return true;

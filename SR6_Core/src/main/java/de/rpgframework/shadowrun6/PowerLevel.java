@@ -1,17 +1,18 @@
 package de.rpgframework.shadowrun6;
 
-import java.util.ResourceBundle;
-
-import de.rpgframework.ResourceI18N;
+import java.util.Locale;
 
 public enum PowerLevel {
 	LOW_LEVEL,
 	STREET_LEVEL,
 	STANDARD,
 	PRIME_RUNNER,
-	EILTE,
+	ELITE,
 	;
-	public String getName() { 
-		return ResourceI18N.get(ResourceBundle.getBundle(Shadowrun6Character.class.getName()), "variant."+this.name().toLowerCase());
+	public String getName() {
+		return getName(Locale.getDefault());
+	}
+	public String getName(Locale loc) {
+		return Shadowrun6Core.getI18nResources().getString( "powerlevel."+this.name().toLowerCase(), loc);
 	}
 }

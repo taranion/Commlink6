@@ -62,7 +62,7 @@ public class SumToTenCharacterGenerator extends PriorityCharacterGenerator {
 	 */
 	@Override
 	protected PriorityTableController<Shadowrun6Character,SR6PrioritySettings> createPriorityTableController() {
-		return new SumToTenPriorityTableController<Shadowrun6Character, SR6PrioritySettings>(this, SR6PrioritySettings.class, resolver);
+		return new SR6Sum2TenPriorityTableController(this, resolver);
 	}
 
 }

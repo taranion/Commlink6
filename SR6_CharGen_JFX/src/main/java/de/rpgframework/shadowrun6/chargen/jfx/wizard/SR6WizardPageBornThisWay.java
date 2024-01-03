@@ -116,12 +116,7 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.born_this_way.placeholder.selected"));
 
 		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController()));
-		selection.setSelectedCellFactory(lv -> new QualityValueListCell(
-				new IShadowrunCharacterControllerProvider<IShadowrunCharacterController>() {
-					public IShadowrunCharacterController getCharacterController() {
-						return charGen;
-					}},
-				null, true));
+		selection.setSelectedCellFactory(lv -> new QualityValueListCell( ()->charGen, true));
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
 		selection.setRequirementResolver(Shadowrun6Tools.requirementResolver(Locale.getDefault()));
 		selection.setModificationResolver(Shadowrun6Tools.modificationResolver(Locale.getDefault()));

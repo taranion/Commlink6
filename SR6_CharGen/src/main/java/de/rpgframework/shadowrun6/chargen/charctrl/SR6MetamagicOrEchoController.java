@@ -268,6 +268,9 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			mod.setExpCost(karma);
 			model.addToHistory(mod);
 
+			// Record eventually meaning for essence
+			Shadowrun6Tools.recordEssenceChange(model, selected);
+
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(selected);
 		} finally {

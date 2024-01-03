@@ -19,6 +19,7 @@ import de.rpgframework.shadowrun.chargen.gen.IPriorityGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PriorityTableController;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -124,7 +125,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 	//--------------------------------------------------------------------
 	protected PriorityTableController<Shadowrun6Character,SR6PrioritySettings> createPriorityTableController() {
-		return new PriorityTableController<Shadowrun6Character,SR6PrioritySettings>(this, SR6PrioritySettings.class, resolver);
+		return new SR6PriorityTableController(this, resolver);
 	}
 
 	//-------------------------------------------------------------------
@@ -141,12 +142,25 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			} else {
 				logger.log(Level.INFO, "Create new generator config");
 				SR6PrioritySettings settings = new SR6PrioritySettings();
-//		settings.variant = PowerLevel.STANDARD;
-				settings.priorities.put(PriorityType.METATYPE, Priority.C);
-				settings.priorities.put(PriorityType.ATTRIBUTE, Priority.A);
-				settings.priorities.put(PriorityType.MAGIC, Priority.E);
-				settings.priorities.put(PriorityType.SKILLS, Priority.B);
-				settings.priorities.put(PriorityType.RESOURCES, Priority.D);
+				if (settings.variant==PowerLevel.ELITE) {
+					settings.priorities.put(PriorityType.METATYPE, Priority.B);
+					settings.priorities.put(PriorityType.ATTRIBUTE, Priority.A);
+					settings.priorities.put(PriorityType.MAGIC, Priority.D);
+					settings.priorities.put(PriorityType.SKILLS, Priority.B);
+					settings.priorities.put(PriorityType.RESOURCES, Priority.C);
+				} else if (settings.variant==PowerLevel.STREET_LEVEL) {
+					settings.priorities.put(PriorityType.METATYPE, Priority.C);
+					settings.priorities.put(PriorityType.ATTRIBUTE, Priority.B);
+					settings.priorities.put(PriorityType.MAGIC, Priority.E);
+					settings.priorities.put(PriorityType.SKILLS, Priority.C);
+					settings.priorities.put(PriorityType.RESOURCES, Priority.D);
+				} else {
+					settings.priorities.put(PriorityType.METATYPE, Priority.C);
+					settings.priorities.put(PriorityType.ATTRIBUTE, Priority.A);
+					settings.priorities.put(PriorityType.MAGIC, Priority.E);
+					settings.priorities.put(PriorityType.SKILLS, Priority.B);
+					settings.priorities.put(PriorityType.RESOURCES, Priority.D);
+				}
 //		model.addRule(Shadowrun6Rules.CHARGEN_ALLOW_INITIATION, "false");
 				model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "human"));
 				model.setCharGenUsed(getId());
