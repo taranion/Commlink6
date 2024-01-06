@@ -10,7 +10,7 @@
    <item id="steel_claw_combat_broadsword" avail="3" price="500" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
       <weapon  dmg="4P" attack="10,,,," skill="close_combat" spec="close_combat/blades" wild="true"/>
    </item>
-   <item id="iron_hawk_composite_bow" avail="1L" price="265" type="WEAPON_RANGED" subtype="BOWS">
+   <item id="iron_hawk_composite_bow" avail="4L" price="265" type="WEAPON_RANGED" subtype="BOWS">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12,13,14"/>
 		</choices>
