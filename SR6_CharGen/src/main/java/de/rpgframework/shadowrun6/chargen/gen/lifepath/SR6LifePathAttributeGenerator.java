@@ -202,15 +202,9 @@ public class SR6LifePathAttributeGenerator extends CommonAttributeGenerator impl
 		allowedAdjust.add(ShadowrunAttribute.EDGE);
 		numAttributesToMax = 1;
 
-//		for (Entry<ShadowrunAttribute,PerAttributePoints> entry : getModel().getCharGenSettings(SR6LifePathSettings.class).perAttrib.entrySet()) {
-//			switch (entry.getKey()) {
-//			case MAGIC: case RESONANCE:
-//				entry.getValue().base=0;
-//				break;
-//			default:
-//				entry.getValue().base=1;
-//			}
-//		}
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			getModel().getAttribute(key).clearIncomingModifications();
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -249,13 +243,18 @@ public class SR6LifePathAttributeGenerator extends CommonAttributeGenerator impl
 					ValueModification mod = (ValueModification)tmp;
 					ShadowrunAttribute attr = mod.getResolvedKey();
 					AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(attr);
-					logger.log(Level.DEBUG, "Consume {0} when old val is {1} and old max is {2}", mod, aVal.getModifiedValue(),aVal.getMaximum());
+					logger.log(Level.INFO, "Consume {0} when old val is {1} and old max is {2}", mod, aVal.getModifiedValue(),aVal.getMaximum());
 					aVal.addIncomingModification(mod);
 					if (mod.getSet()==ValueType.MAX) {
 //						logger.log(Level.DEBUG, "After consuming {0} max is {1}", mod, aVal.getMaximum());
 						// Optional: Allow adjustment points on lowered maximum
 						if (mod.getValue()>6 || parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_ADJUSTMENT_ON_LOWERED_MAX))
 							allowedAdjust.add(attr);
+						if (mod.getValue()>6) {
+							ValueModification mod2 = new ValueModification(ShadowrunReference.ATTRIBUTE, attr.name(), 1, ApplyWhen.ALLCREATE, ValueType.NATURAL);
+							mod2.setSource(mod.getSource());
+							aVal.addIncomingModification(mod2);
+						}
 					}
 //					// Update base
 //					if (mod.getSet()==ValueType.NATURAL && prioSettings.perAttrib.get(attr)!=null) {

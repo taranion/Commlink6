@@ -142,6 +142,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 			processChain.add(drake);
 			processChain.add(magicReso);
 			processChain.add(bornThisWay);
+			processChain.add(childhood);
 //			processChain.add(qualities);
 			processChain.add(modules);
 //			processChain.add(qPaths);

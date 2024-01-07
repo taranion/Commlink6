@@ -19,6 +19,8 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -163,9 +165,16 @@ public class ChildhoodGenerator implements PartialController<Quality> {
 		} else {
 			logger.log(Level.INFO, "Childhood area: {0}", parent.getSettings().getNativeLanguage());
 			SR6Skill lang = Shadowrun6Core.getSkill("knowledge");
-			ValueModification mod = new ValueModification(ShadowrunReference.SKILL, "knowledge", 1, ValueType.NATURAL);
+			ValueModification mod = new ValueModification(ShadowrunReference.SKILL, "knowledge", 1, ChildhoodGenerator.class, ValueType.NATURAL);
 			UUID uuid = lang.getChoices().get(0).getUUID();
 			mod.getDecisions().add(new Decision(uuid, parent.getSettings().getChildhoodArea()));
+			unprocessed.add(mod);
+		}
+
+		// Skills
+		parent.getSettings().getChildhoodSkills();
+		for (SR6Skill skill : parent.getSettings().getChildhoodSkills()) {
+			ValueModification mod = new ValueModification(ShadowrunReference.SKILL, skill.getId(), 2, ChildhoodGenerator.class, ValueType.NATURAL);
 			unprocessed.add(mod);
 		}
 		return unprocessed;
@@ -178,8 +187,8 @@ public class ChildhoodGenerator implements PartialController<Quality> {
 	}
 
 	@Override
-	public <C extends RuleSpecificCharacterObject<? extends IAttribute, ?, ?, ?>> C getModel() {
-		return (C) parent.getModel();
+	public Shadowrun6Character getModel() {
+		return parent.getModel();
 	}
 
 	@Override
