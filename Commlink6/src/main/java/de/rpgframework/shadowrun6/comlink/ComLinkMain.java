@@ -62,20 +62,20 @@ public class ComLinkMain extends EdenClientApplication {
     	//LicenseManager.storeGlobalLicenses(List.of("SHADOWRUN6/CORE","SHADOWRUN6/COMPANION","SHADOWRUN6/FIRING_SQUAD","SHADOWRUN6/STREET_WYRD","SHADOWRUN6/DOUBLE_CLUTCH","SHADOWRUN6/HACK_SLASH"));
     	System.out.println("ComLinkMain.main");
     	checkInit();
-    	System.out.println("Default locale = "+Locale.getDefault());
-//    	System.setProperty("prism.forceGPU", "true");
-    	System.setProperty("prism.verbose", "false");
-    	List<String> keys = new ArrayList<String>();
-    	System.getProperties().keySet().forEach(k -> keys.add( (String)k));
-    	Collections.sort(keys);
-		for (String key : keys) {
-			if (key.startsWith("com.sun") || key.startsWith("java."))
-				continue;
-			System.getLogger(EdenClientApplication.class.getPackageName()).log(Level.INFO,"PROP "+key+" \t= "+System.getProperties().getProperty(key));
-		}
-		for (String key : args) {
-			System.getLogger(EdenClientApplication.class.getPackageName()).log(Level.INFO,"argument "+key);
-		}
+//    	System.out.println("Default locale = "+Locale.getDefault());
+////    	System.setProperty("prism.forceGPU", "true");
+//    	System.setProperty("prism.verbose", "false");
+//    	List<String> keys = new ArrayList<String>();
+//    	System.getProperties().keySet().forEach(k -> keys.add( (String)k));
+//    	Collections.sort(keys);
+//		for (String key : keys) {
+//			if (key.startsWith("com.sun") || key.startsWith("java."))
+//				continue;
+//			System.getLogger(EdenClientApplication.class.getPackageName()).log(Level.INFO,"PROP "+key+" \t= "+System.getProperties().getProperty(key));
+//		}
+//		for (String key : args) {
+//			System.getLogger(EdenClientApplication.class.getPackageName()).log(Level.INFO,"argument "+key);
+//		}
 
     	//System.setProperty("javafx.preloader", CommlinkPreloader.class.getName());
        launch(args);
@@ -96,17 +96,18 @@ public class ComLinkMain extends EdenClientApplication {
 
     //-------------------------------------------------------------------
 	private static void checkInit() {
+		System.out.println("ComLinkMain: ENTER checkInit");
+		logger.log(Level.INFO, "ENTER checkInit");
 		try {
 			if (out != null) {
 				System.out.println("Already initialized");
 				return;
 			}
-			//Path home = Paths.get(System.getProperty("user.home"));
 			Path logDir = EdenSettings.logDir; //home.resolve("commlink-logs");
 			System.setProperty("logdir", logDir.toAbsolutePath().toString());
-			System.out.println("Log directory = " + logDir.toAbsolutePath().toString());
+			System.out.println("ComLinkMain: Log directory = " + logDir.toAbsolutePath().toString());
 			if (!Files.exists(logDir)) {
-				System.out.println("Log dir does not exist");
+				System.out.println("ComLinkMain: Log dir does not exist");
 				Files.createDirectories(logDir);
 			}
 			// Delete all files
@@ -125,6 +126,8 @@ public class ComLinkMain extends EdenClientApplication {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
+			System.out.println("ComLinkMain: LEAVE checkInit");
+			logger.log(Level.INFO, "LEAVE checkInit");
 		}
 	}
 
@@ -138,7 +141,7 @@ public class ComLinkMain extends EdenClientApplication {
 
 	//-------------------------------------------------------------------
 	@Override
-	protected List<StartupStep> getPostGUISteps() {
+	public List<StartupStep> getPostGUISteps() {
 		List<StartupStep> merged = new ArrayList<>(super.getPostGUISteps());
 		merged.add(new LoadSR6CharactersStep(this));
 		return merged;
@@ -209,9 +212,6 @@ public class ComLinkMain extends EdenClientApplication {
     @Override
 	protected void loadData() {
     	logger.log(Level.INFO, "Loading data-------------------------------------");
-//		Shadowrun6DataPlugin plugin = new Shadowrun6DataPlugin();
-//		plugin.init( );
-//		logger.log(Level.INFO, "Loaded "+Shadowrun6Core.getItemList(SR6Spell.class).size()+" spells");
 	}
 
     //-------------------------------------------------------------------
@@ -267,42 +267,6 @@ public class ComLinkMain extends EdenClientApplication {
 	public Image getSecurityDialogImage() {
 		return new Image(ComLinkMain.class.getResourceAsStream("LoginImage.png"));
 	}
-
-//	//-------------------------------------------------------------------
-//	/**
-//	 * @see de.rpgframework.eden.client.jfx.EdenClientApplication#showUIMessage(int, java.lang.String, java.lang.Throwable)
-//	 */
-//    @Override
-//	protected void showUIMessage(int type, String mess, Throwable cause, Path file) {
-//		String title = (type==0)?ResourceI18N.get(RES, "uimessage.info"):((type==1)?ResourceI18N.get(RES, "uimessage.warning"):ResourceI18N.get(RES, "uimessage.error"));
-//
-//		Label content= new Label(mess);
-//		content.setWrapText(true);
-//		content.getStyleClass().add("text-body");
-//
-//
-//		VBox layout = new VBox(10, content);
-//		if (cause!=null) {
-//			StringWriter out = new StringWriter();
-//			cause.printStackTrace(new PrintWriter(out));
-//			TextArea taTrace = new TextArea(out.toString());
-//			taTrace.setPrefColumnCount(40);
-//			TitledPane tpTrace = new TitledPane(ResourceI18N.get(RES, "uimessage.stacktrace"), taTrace);
-//			tpTrace.setStyle("-fx-font-size: 100%");
-//			Accordion accord = new Accordion(tpTrace);
-//			if (file!=null) {
-//				TitledPane tpPath = new TitledPane(ResourceI18N.get(RES, "uimessage.file"), new Label(file.toAbsolutePath().toString()));
-//				tpPath.setStyle("-fx-font-size: 100%");
-//				accord.getPanes().add(tpPath);
-//			}
-//			layout.getChildren().add(accord);
-//		}
-//
-//		ManagedDialog dialog = new ManagedDialog(title, layout, CloseType.OK);
-//		dialog.setImage(new Image(ComLinkMain.class.getResourceAsStream("Dialog1.png")));
-//
-//		showAlertAndCall(dialog, null);
-//	}
 
 	//-------------------------------------------------------------------
 	/**

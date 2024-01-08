@@ -25,6 +25,7 @@ import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
@@ -145,8 +146,10 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 
 		if (parent.getSettings().getBornQuality1()==null) {
 			todos.add( new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_BORN_QUALITY_MISSING));
-		} else
+		} else {
 			logger.log(Level.INFO, "Born this way Quality 1: {0}", parent.getSettings().getBornQuality1());
+			getModel().addQuality(new QualityValue(parent.getSettings().getBornQuality1(), 1));
+		}
 		logger.log(Level.INFO, "Born this way Quality 2: {0}", parent.getSettings().getBornQuality2());
 
 		if (parent.getSettings().getNativeLanguage()==null) {
@@ -154,7 +157,7 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 		} else {
 			logger.log(Level.INFO, "Native language: {0}", parent.getSettings().getNativeLanguage());
 			SR6Skill lang = Shadowrun6Core.getSkill("language");
-			ValueModification mod = new ValueModification(ShadowrunReference.SKILL, "language", 4, ValueType.NATURAL);
+			ValueModification mod = new ValueModification(ShadowrunReference.SKILL, "language", 4, BornThisWayGenerator.class, ValueType.NATURAL);
 			UUID uuid = lang.getChoices().get(0).getUUID();
 			mod.getDecisions().add(new Decision(uuid, parent.getSettings().getNativeLanguage()));
 			unprocessed.add(mod);
@@ -169,8 +172,8 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 	}
 
 	@Override
-	public <C extends RuleSpecificCharacterObject<? extends IAttribute, ?, ?, ?>> C getModel() {
-		return (C) parent.getModel();
+	public Shadowrun6Character getModel() {
+		return  parent.getModel();
 	}
 
 	@Override

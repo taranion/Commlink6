@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.LifepathModuleValue;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Quality;
+import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathModuleGenerator;
@@ -95,4 +96,44 @@ public class LifepathGenTest {
 		System.out.println(xml);
 	}
 
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testGaius() throws CharacterIOException {
+		charGen.runProcessors();
+		assertEquals(50, model.getKarmaFree());
+//		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+//		assertEquals(100, settings.characterPoints);
+		model.setName("Gaius");
+
+		// Magic/Resonance
+		charGen.getMagicOrResonanceController().select(Shadowrun6Core.getItem(MagicOrResonanceType.class, "mysticadept"));
+		assertEquals(50, model.getKarmaFree());
+		assertEquals(1, model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue());
+		assertEquals(1, model.getAttribute(ShadowrunAttribute.AGILITY).getModifiedValue());
+		assertEquals(2, model.getAttribute(ShadowrunAttribute.EDGE    ).getModifiedValue());
+		assertEquals(1, model.getAttribute(ShadowrunAttribute.MAGIC   ).getModifiedValue());
+
+		SR6MetaType human = Shadowrun6Core.getItem(SR6MetaType.class, "elf");
+		assertNotNull("No metatype controller found", charGen.getMetatypeController());
+		charGen.getMetatypeController().canBeSelected(human);
+		charGen.getMetatypeController().select(human);
+		assertEquals(50, model.getKarmaFree());
+		assertEquals(2, model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue());
+		assertEquals(2, model.getAttribute(ShadowrunAttribute.AGILITY).getModifiedValue());
+		assertEquals(1, model.getAttribute(ShadowrunAttribute.EDGE    ).getModifiedValue());
+		assertEquals(1, model.getAttribute(ShadowrunAttribute.MAGIC   ).getModifiedValue());
+		charGen.getBornThisWayGenerator().selectNativeLanguage("German");
+		charGen.getBornThisWayGenerator().getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "sinner"));
+
+		charGen.getChildhoodGenerator().getSkillController().select(Shadowrun6Core.getItem(SR6Skill.class, "con"));
+		charGen.getChildhoodGenerator().getSkillController().select(Shadowrun6Core.getItem(SR6Skill.class, "influence"));
+		charGen.getChildhoodGenerator().getSkillController().select(Shadowrun6Core.getItem(SR6Skill.class, "perception"));
+		charGen.getChildhoodGenerator().getSkillController().select(Shadowrun6Core.getItem(SR6Skill.class, "athletics"));
+
+		charGen.finish();
+		byte[] raw = Shadowrun6Core.encode(model);
+		String xml = new String(raw);
+		System.out.println(xml);
+	}
 }

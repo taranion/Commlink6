@@ -39,6 +39,14 @@ public class CombatSectionTools {
 		}
 		public AttackTable() {
 		}
+		public String dump() {
+			StringBuffer ret = new StringBuffer();
+			ret.append(String.format("%18s  %8s  %2s  %3s", "",col1Name, col2Name, col3Name));
+			for (AttackEntry entry : this) {
+				ret.append(String.format("\n%18s  %8s  %2s  %3s", entry.getName(), entry.getCol1(), entry.getCol2(), entry.getCol3()));
+			}
+			return ret.toString();
+		}
 	}
 
 	private final static Logger logger = System.getLogger("de.rpgframework.shadowrun6");
@@ -134,6 +142,8 @@ public class CombatSectionTools {
 		AttackTable ret = getAttackTablePhysical(model, loc);
 		ret.addAll(getAttackTableAstral(model, loc));
 		ret.addAll(getAttackTableMatrix(model, loc));
+
+		logger.log(Level.INFO, "getAttackTableCombined:\n"+ret.dump());
 		return ret;
 	}
 
@@ -154,36 +164,51 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTablePhysical(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable(
-				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
 				SR6ItemAttribute.ATTACK_RATING.getShortName(loc),
+				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
 				SR6ItemAttribute.DAMAGE.getShortName(loc)
 				);
 
 		/* Unarmed */
 		SR6Skill skill = Shadowrun6Core.getSkill("close_combat");
-		AttackEntry entry = new AttackEntry(skill.getSpecialization("unarmed").getName(loc));
+		AttackEntry unarmed = new AttackEntry(skill.getSpecialization("unarmed").getName(loc)+" (PHY)");
 		Pool<Integer> pool = Shadowrun6Tools.getSkillPool(model, skill, "unarmed");
-		entry.setCol1( pool.toString() );
-		entry.setCol1Tooltip( pool.toExplainString() );
-		ret.add(entry);
+		unarmed.setCol1( pool.toString() );
+		unarmed.setCol1Tooltip( pool.toExplainString() );
+		ret.add(unarmed);
 
 		try {
 			List<CarriedItem<ItemTemplate>> weapons = model.getCarriedItems(ItemType.weaponTypes());
 			int count=0;
 			for (CarriedItem<ItemTemplate> weapon : weapons) {
 				count++;
+				if (weapon.getKey().equals("unarmed")) {
+					unarmed.setCol2(String.valueOf(Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).getValue(ValueType.NATURAL)) );
+					unarmed.setCol2Tooltip( Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).toExplainString() );
+					// Col2: AR
+					int[] ar = (int[])weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
+					if (ar[1]==0) {
+						unarmed.setCol1(String.valueOf(ar[0]));
+					} else {
+						unarmed.setCol1(String.valueOf(ar[1]));
+					}
+					// Col3: Dmg
+					unarmed.setCol3(  Shadowrun6Tools.getWeaponDamage(model, weapon).toString() );
+					continue;
+				}
+
 				if (count==5) break;
-				entry = new AttackEntry(weapon.getNameWithoutRating(loc));
+				AttackEntry entry = new AttackEntry(weapon.getNameWithoutRating(loc));
 				ret.add(entry);
 				// Col1: Pool
-				entry.setCol1( String.valueOf(Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).getValue(ValueType.NATURAL)) );
-				entry.setCol1Tooltip( Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).toExplainString() );
+				entry.setCol2( String.valueOf(Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).getValue(ValueType.NATURAL)) );
+				entry.setCol2Tooltip( Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).toExplainString() );
 				// Col2: AR
 				int[] ar = (int[])weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
 				if (ar[1]==0) {
-					entry.setCol2(String.valueOf(ar[0]));
+					entry.setCol1(String.valueOf(ar[0]));
 				} else {
-					entry.setCol2(String.valueOf(ar[1]));
+					entry.setCol1(String.valueOf(ar[1]));
 				}
 				// Col3: Dmg
 				entry.setCol3(  Shadowrun6Tools.getWeaponDamage(model, weapon).toString() );
@@ -196,8 +221,8 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTableAstral(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable(
-				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
 				Shadowrun6Core.getI18nResources().getString("label.ar", loc),
+				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
 				SR6ItemAttribute.DAMAGE.getShortName(loc)
 				);
 
@@ -205,7 +230,7 @@ public class CombatSectionTools {
 		Pool<Integer> pool = Shadowrun6Tools.getSkillPool(model, skill, ShadowrunAttribute.WILLPOWER, "astral_combat");
 
 		/* Unarmed */
-		AttackEntry entry = new AttackEntry(Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed").getName(loc));
+		AttackEntry entry = new AttackEntry(Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed").getName(loc)+" (AST)");
 		// Col1: Pool
 		entry.setCol1(pool.toString());
 		entry.setCol1Tooltip(pool.toExplainString());
@@ -277,10 +302,13 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTableMatrix(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable(
+				Shadowrun6Core.getI18nResources().getString("label.ar", loc),
 				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
-				SR6ItemAttribute.DAMAGE.getShortName(loc),
-				null
+				SR6ItemAttribute.DAMAGE.getShortName(loc)
 				);
+
+
+		int ar = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_MATRIX).getModifiedValue();
 
 		SR6Skill skill = Shadowrun6Core.getSkill("cracking");
 		Pool<Integer> cracking = Shadowrun6Tools.getSkillPool(model, skill, "cybercombat");
@@ -290,25 +318,27 @@ public class CombatSectionTools {
 		AttackEntry entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "data_spike").getName(loc));
 		Damage dmg = new Damage();
 		dmg.setValue( (int)Math.round( (double)attack / 2.0));
-		entry.setCol1(cracking.toString());
-		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol2(dmg.toString());
+		entry.setCol1(String.valueOf(ar));
+		entry.setCol2(cracking.toString());
+		entry.setCol2Tooltip(cracking.toExplainString());
+		entry.setCol3(dmg.toString());
 		ret.add(entry);
 
 		/* Tarpit */
 		entry = new AttackEntry(Shadowrun6Core.getItem(Shadowrun6Action.class, "tarpit").getName(loc));
-		entry.setCol1(cracking.toString());
-		entry.setCol1Tooltip(cracking.toExplainString());
-		entry.setCol2("1*");
+		entry.setCol1(String.valueOf(ar));
+		entry.setCol2(cracking.toString());
+		entry.setCol2Tooltip(cracking.toExplainString());
+		entry.setCol3("1");
 		ret.add(entry);
 
 		/* IC Slicer */
 		Shadowrun6Action slicer = Shadowrun6Core.getItem(Shadowrun6Action.class, "ic_slicer");
 		if (slicer!=null) {
-			entry = new AttackEntry(slicer.getName(loc)+" *");
-			entry.setCol1(cracking.toString());
-			entry.setCol1Tooltip(cracking.toExplainString());
-			entry.setCol2( String.valueOf(attack) );
+			entry = new AttackEntry(slicer.getName(loc)+" (spec)");
+			entry.setCol2(cracking.toString());
+			entry.setCol2Tooltip(cracking.toExplainString());
+			entry.setCol3( String.valueOf(attack) );
 			ret.add(entry);
 		}
 		return ret;
