@@ -27,6 +27,7 @@ public enum ItemType {
 			ItemSubType.CYBERDECK,
 			ItemSubType.CYBER_LIMB_ENHANCEMENT,
 			ItemSubType.CYBER_LIMB_ACCESSORY,
+			ItemSubType.INSTRUMENT_ACCESSORY,
 			ItemSubType.VEHICLE_ACCESSORY
 			),
 	ARMOR(ItemSubType.ARMOR_BODY, ItemSubType.ARMOR_HELMET, ItemSubType.ARMOR_SHIELD),
@@ -61,7 +62,8 @@ public enum ItemType {
 			),
 	TOOLS(
 			ItemSubType.TOOLS,
-			ItemSubType.SPARE_PARTS
+			ItemSubType.SPARE_PARTS,
+			ItemSubType.SUPPLIES
 			),
 	ELECTRONICS(
 			ItemSubType.COMMLINK,
@@ -79,7 +81,8 @@ public enum ItemType {
 			ItemSubType.SENSOR_HOUSING,
 			ItemSubType.SECURITY,
 			ItemSubType.BREAKING,
-			ItemSubType.TAC_NET
+			ItemSubType.TAC_NET,
+			ItemSubType.INSTRUMENT
 			),
 	/** Hack&Slash custom cyberdecks */
 	CYBERDECK(

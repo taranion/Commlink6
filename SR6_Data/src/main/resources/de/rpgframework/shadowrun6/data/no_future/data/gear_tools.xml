@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="liter_milk" avail="1" price="3" type="BIOLOGY" subtype="SLAP_PATCHES" count="y"/>
+   <item id="graffiti_kit" avail="1" price="100" type="TOOLS" subtype="TOOLS"/>
+
+   <item id="press_pass" avail="2L" price="50" type="ELECTRONICS" subtype="ID_CREDIT">
+		<choices>
+           <choice type="GEAR" ref="SIN" uuid="d74d13f6-d6a0-45b1-9f6e-3f053ccd1529"/>
+    	</choices>
+   </item>
+
+   <item id="smartcam_external" avail="2" price="200" type="ACCESSORY" subtype="IMAGING">
+      <usage mode="EMBEDDED" value="1" slot="PROCAM_SLOT"/>      
+      <modifications>
+		<checkmod type="SKILL" ref="perception" value="1" what="EDGE" cond="true"/>
+      </modifications>
+   </item>
+   <item id="smartcam_internal" avail="99" price="0" type="ACCESSORY" subtype="IMAGING" modonly="true">
+      <usage mode="EMBEDDED" value="1" slot="PROCAM_SLOT"/>      
+      <modifications>
+		<checkmod type="SKILL" ref="perception" value="1" what="EDGE" cond="true"/>
+		<checkmod type="SKILL" ref="perception" value="1" what="DICE" cond="true"/>
+      </modifications>
+   </item>
+
+   <item id="procam" avail="1" price="250" type="ELECTRONICS" subtype="IMAGING">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
+		</choices>
+  		<usage mode="CARRIED"/>
+  		<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="3"/> <!-- no size given, estimating 3 to prevent use on micro and mini drones -->
+		<attrdef id="PRICE" value="$RATING*250"/>
+		<modifications>
+			<valmod type="HOOK" ref="OPTICAL" value="$RATING"/> <!-- TODO: NoFuture errata: can install visual, audio enhancements and single sensors -->
+			<valmod type="HOOK" ref="PROCAM_SLOT" value="1"/>
+      </modifications>
+   </item>
+
+   <item id="procam_with_smart" avail="4" price="500" type="ELECTRONICS" subtype="IMAGING">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9,10,11,12"/>
+		</choices>
+  		<usage mode="CARRIED"/>
+  		<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="3"/> <!-- no size given, estimating 3 to prevent use on micro and mini drones -->
+		<attrdef id="PRICE" value="$RATING*500"/>
+		<modifications>
+			<valmod type="HOOK" ref="OPTICAL" value="$RATING"/> <!-- TODO: NoFuture errata: can install visual, audio enhancements and single sensors -->
+			<valmod type="HOOK" ref="PROCAM_SLOT" value="1"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="PROCAM_SLOT" ref="smartcam_internal"/>
+      </modifications>
+   </item>
+
+   <item id="press_basic" avail="1" price="500" type="TOOLS" subtype="TOOLS"/>
+   <item id="press_small" avail="4" price="5000" type="TOOLS" subtype="TOOLS"/>
+   <item id="press_industrial" avail="7" price="50000" type="TOOLS" subtype="TOOLS"/>
+   <item id="paper" avail="1" price="1" type="TOOLS" subtype="SUPPLIES"/>
+   <item id="ink_black" avail="1" price="5" type="TOOLS" subtype="SUPPLIES"/>
+   <item id="ink_color" avail="1" price="20" type="TOOLS" subtype="SUPPLIES"/>
+
+</items>

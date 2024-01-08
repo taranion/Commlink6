@@ -174,6 +174,9 @@ public class Shadowrun6DataPlugin  {
 			initKrime();
 			initCollapsing();
 			initSlip();
+			initKechibi();
+			initNoFuture();
+			initFiction();
 			initDPAlpen();
 			initBerlin();
 			initDPFeuerläufer();
@@ -666,6 +669,65 @@ public class Shadowrun6DataPlugin  {
 		set.setType(DataSetType.BACKGROUND);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "slip_streams/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+	}
+
+	//-------------------------------------------------------------------
+	private void initKechibi() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------Kechibi Code-----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "KECHIBI", "kechibi.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.BACKGROUND);
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"kechibi/data/gear_firearms.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"kechibi/data/gear_vision.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vision systems");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "kechibi/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+	}
+
+	//-------------------------------------------------------------------
+	private void initNoFuture() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------No Future-----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "NO_FUTURE", "no_future.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.BACKGROUND);
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"no_future/data/gear_ammunition.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"no_future/data/gear_bioware.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" bioware");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"no_future/data/gear_clothing.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" clothing");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"no_future/data/gear_cyberware.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"no_future/data/gear_instruments.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" instruments");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"no_future/data/gear_melee.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" melee");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"no_future/data/gear_tools.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" tools");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"no_future/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+		list = Shadowrun6Core.loadDataItems(LifepathModuleList.class, LifepathModule.class, set, clazz,"no_future/data/lifepath.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" lifepath modules");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "no_future/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+	}
+
+	//-------------------------------------------------------------------
+	private void initFiction() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------Enhanced Fiction / Other US -----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FICTION", "fiction.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.BACKGROUND);
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"fiction/data/gear_ammunition.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" grenades");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"fiction/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,("fiction/data/mentorspirits.xml"));
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" mentor spirits");
 	}
 
 	//-------------------------------------------------------------------

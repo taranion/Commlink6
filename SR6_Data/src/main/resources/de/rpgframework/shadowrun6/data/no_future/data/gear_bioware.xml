@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="vocal_expansion" avail="6" price="8000" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<usage mode="IMPLANTED" value="0.1"/>
+		<!-- rating set to 1 with NoFuture errata, gives edge for sound based con -->
+		<modifications>
+			<checkmod type="SKILL" ref="con" value="1" what="EDGE" cond="true"/>
+		</modifications>
+   </item>
+
+</items>

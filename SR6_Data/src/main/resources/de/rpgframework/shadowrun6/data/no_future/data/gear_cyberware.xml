@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+    <!-- Eyeware --> 
+   <item id="cybereye6" avail="4" price="18000" type="CYBERWARE" subtype="CYBER_EYEWARE">
+		<usage mode="IMPLANTED" value="0.6"/>
+		<modifications>
+			<valmod type="HOOK" ref="CYBEREYE_IMPLANT" value="20"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="image_link" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="camera" included="true"/>
+		</modifications>
+   </item>
+
+   <item id="cybereye7" avail="5" price="22000" type="CYBERWARE" subtype="CYBER_EYEWARE">
+		<usage mode="IMPLANTED" value="0.7"/>
+		<modifications>
+			<valmod type="HOOK" ref="CYBEREYE_IMPLANT" value="24"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="image_link" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="camera" included="true"/>
+		</modifications>
+   </item>
+	<!-- vision_enhancement_advanced deleted with NoFuture errata -->
+
+    <!-- Earware --> 
+
+   <item id="cyberears6" avail="4" price="15500" type="CYBERWARE" subtype="CYBER_EARWARE">
+		<usage mode="IMPLANTED" value="0.6"/>
+		<modifications>
+			<valmod type="HOOK" ref="CYBEREAR_IMPLANT" value="20"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="soundlink" included="true"/>
+		</modifications>
+   </item>
+
+   <item id="cyberears7" avail="5" price="21000" type="CYBERWARE" subtype="CYBER_EARWARE">
+		<usage mode="IMPLANTED" value="0.7"/>
+		<modifications>
+			<valmod type="HOOK" ref="CYBEREAR_IMPLANT" value="24"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="soundlink" included="true"/>
+		</modifications>
+   </item>
+
+	<!-- audio_enhancement_advanced deleted with NoFuture errata -->
+ 
+    <!-- Voice --> 
+	
+   <item id="autovoice" avail="1" price="1000" type="CYBERWARE" subtype="CYBER_HEADWARE">
+		<usage mode="IMPLANTED" value="0.2"/>
+		<!-- rating set to 1 with NoFuture errata, gives edge for sound based con and performance test -->
+		<modifications>
+			<checkmod type="SKILL" ref="con" value="1" what="EDGE" cond="true"/>
+		</modifications>
+   </item>
+
+	<!-- hacked autovoice deleted with NoFuture errata -->
+
+</items>

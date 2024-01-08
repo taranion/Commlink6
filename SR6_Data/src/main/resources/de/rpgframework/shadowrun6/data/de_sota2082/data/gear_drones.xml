@@ -82,7 +82,7 @@
 	  </modifications>
    </item>
 
-   <item id="ruhrmetall_wolfsspinne" avail="7L"  price="100000" type="DRONE_MEDIUM" subtype="ANTHRO">
+   <item id="ruhrmetall_wolfsspinne" avail="7L"  price="100000" type="DRONE_MEDIUM" subtype="WALKER">
       <vehicle han="4/4" acc="18" spdi="18" tspd="80" bod="8" arm="8" pil="4" sen="6" />
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="d1b04404-7f78-4d5f-88e8-483a29dad19f" />

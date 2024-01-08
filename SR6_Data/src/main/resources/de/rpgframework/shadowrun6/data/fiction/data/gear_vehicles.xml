@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>   
+ <!-- Age of Rust -->
+   <item avail="6"  price="70000" id="buzzard_transit" type="VEHICLES" subtype="BUS">
+      <vehicle han="5/7" acc="8" spdi="15" tspd="130" bod="18" arm="10" pil="5" sen="4" sea="15"/>
+      <modifications>
+		<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks  carry three drones each -->
+      </modifications>
+   </item>
+
+ <!-- Adversary -->
+   <item avail="4"  price="40000" id="turbobunny_americar" type="VEHICLES" subtype="CARS">
+      <vehicle han="4/5" acc="26" spdi="30" tspd="260" bod="12" arm="10" pil="2" sen="2" sea="4"/>
+      <modifications>
+		<embed type="GEAR" ref="ram_plate" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
+      </modifications>
+   </item>
+
+<!-- Items forgotten in Double Clutch, see https://forums.shadowruntabletop.com/index.php?topic=32992.msg553756#msg553756 -->
+   <item id="hitch_trailer" avail="2" price="400" type="MOD_HARD" subtype="MOD_OTHERS">
+		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
+   </item> 
+
+   <item id="hitch_connector" avail="2" price="600" type="MOD_HARD" subtype="MOD_OTHERS">
+		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
+   </item> 
+
+   <item id="hitch_fith_wheel" avail="3" price="900" type="MOD_HARD" subtype="MOD_OTHERS">
+		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="2"/>
+   </item> 
+
+   <item id="hitch_construction" avail="5" price="2000" type="MOD_HARD" subtype="MOD_OTHERS">
+		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="3"/>
+   </item> 
+
+</items>

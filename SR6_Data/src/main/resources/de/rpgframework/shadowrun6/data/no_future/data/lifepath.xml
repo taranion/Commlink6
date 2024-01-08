@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- NoFuture lifestyles not separately established as all (except sideliner) have equivalent cost to a CRB lifestyle and sideliner can be created using the companion modular lifestyle rules -->
+
+<lifemods>
+
+<!-- Lifepath modules accoring to Oct 2023 erratas -->
+
+	<!-- "student athlete" and "professional athlete" to use SR6 companion "athlete" module -->
+
+  <lifemod id="teen_diva" type="ADULT">
+    <choices>
+      <choice uuid="a0f06a0d-f7a2-4e88-80df-282576a0ace0" type="ATTRIBUTE" options="AGILITY,CHARISMA" />
+      <choice uuid="8d4ccd8e-6c4b-415e-a411-e44a22262df1" type="SKILL" options="influence,con" />
+      <!-- <choice uuid="1b5e95d8-2aea-46bd-99e1-dc867c4e1a5e" type="SKILL_SPECIALIZATION" options="acting, performance" /> TODO: Enable selecting one of the available skill specializations -->
+    </choices>
+    <modifications>
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="a0f06a0d-f7a2-4e88-80df-282576a0ace0" value="1" set="NATURAL"/>
+      <valmod type="SKILL" ref="CHOICE" choice="8d4ccd8e-6c4b-415e-a411-e44a22262df1" value="1" set="NATURAL" />
+      <!-- <valmod type="SKILL_SPECIALIZATION" ref="CHOICE" choice="1b5e95d8-2aea-46bd-99e1-dc867c4e1a5e" value="1" set="NATURAL" /> TODO: Enable selecting one of the available skill specializations -->
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="4" />
+      <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
+      <allowmod type="CONTACT_TYPES" ref="MEDIA" />
+      <selmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="c700b37d-f770-49cd-81f4-63d332290b64" value="i18n.musical_genre" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="946af37a-bf54-44d5-81cb-52c06911e226" value="i18n.dance_style" />
+        </itemmod>
+      </selmod>
+      <selmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="0c22d375-61ac-4bd2-972c-03a48b54d014" value="i18n.entertainment_media" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="7d33c4ec-86d2-4133-aa48-fa1fa1b9923f" value="i18n.fashion" />
+        </itemmod>
+        <valmod type="SKILL" ref="language" value="2" />
+      </selmod>
+    </modifications>
+  </lifemod>
+
+	<lifemod id="15_min_fame" type="ADULT">
+		<choices>
+			<choice type="ATTRIBUTE" uuid="2be3e2c6-407f-4749-86bb-9315d99b101c" options="BODY,AGILITY,REACTION,STRENGTH,CHARISMA,INTUITION"/>
+		</choices>
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="CHOICE" choice="2be3e2c6-407f-4749-86bb-9315d99b101c" value="1"/>
+			<valmod type="CREATION_POINTS" ref="NUYEN" value="75000"/>
+			<valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="4"/>
+			<allowmod type="CONTACT_TYPES" ref="CORPORATE"/>
+			<allowmod type="CONTACT_TYPES" ref="MEDIA"/>
+		</modifications>
+		<!-- TODO: select one negative quality -->
+	</lifemod>
+</lifemods>
+

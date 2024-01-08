@@ -95,6 +95,7 @@ public enum ItemSubType {
 	// TOOLS
 	TOOLS,
 	SPARE_PARTS,
+	SUPPLIES,
 	// Electronic
 	LIVING_PERSONA,
 	CYBERDECK,
@@ -113,6 +114,7 @@ public enum ItemSubType {
 	SECURITY,
 	BREAKING,
 	TAC_NET,
+	INSTRUMENT,
 	//
 	CORE,
 	CASES,
@@ -135,6 +137,7 @@ public enum ItemSubType {
 	AUDIO_ENHANCEMENT,
 	SENSOR,
 	SENSOR_FUNCTION,
+	INSTRUMENT_ACCESSORY,
     // Chemicals
 	INDUSTRIAL_CHEMICALS,
 	TOXINS,

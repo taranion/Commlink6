@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+    <item id="trenchcoat" avail="1" price="100" type="ARMOR" subtype="ARMOR_CLOTHES">
+        <armor rating="0" social="0"/>
+        <modifications>
+            <valmod type="HOOK" ref="ARMOR" value="0"/>
+        </modifications>
+    </item>
+
+    <item id="fedora" avail="1" price="30" type="ARMOR" subtype="ARMOR_CLOTHES">
+        <armor rating="0" social="0" add="true"/>
+        <modifications>
+            <valmod type="HOOK" ref="HELMET_ACCESSORY" value="0"/>
+        </modifications>
+    </item>
+
+    <item id="trilby" avail="1" price="20" type="ARMOR" subtype="ARMOR_CLOTHES">
+        <armor rating="0" social="0" add="true"/>
+        <modifications>
+            <valmod type="HOOK" ref="HELMET_ACCESSORY" value="0"/>
+        </modifications>
+    </item>
+
+    <item id="homburg" avail="1" price="40" type="ARMOR" subtype="ARMOR_CLOTHES">
+        <armor rating="0" social="0" add="true"/>
+        <modifications>
+            <valmod type="HOOK" ref="HELMET_ACCESSORY" value="0"/>
+        </modifications>
+    </item>
+
+    <item id="bowler" avail="1" price="10" type="ARMOR" subtype="ARMOR_CLOTHES">
+        <armor rating="0" social="0" add="true"/>
+        <modifications>
+            <valmod type="HOOK" ref="HELMET_ACCESSORY" value="0"/>
+        </modifications>
+    </item>
+
+</items>

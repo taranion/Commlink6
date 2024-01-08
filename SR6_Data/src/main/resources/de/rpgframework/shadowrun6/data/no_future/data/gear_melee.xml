@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="yoyo_hardened" avail="2" price="600" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+      <weapon dmg="2S" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/whips"/>
+   </item>
+   <item id="yoyo_bladed" avail="3L" price="625" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+      <weapon dmg="2P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/whips"/>
+   </item>
+   <item id="yoyo_monofil" avail="6I" price="12000" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+      <weapon dmg="5P" attack="14,,,," skill="exotic_weapons" spec="exotic_weapons/whips"/>
+   </item>
+
+   <item id="skateboard_hardened" avail="2" price="600" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+      <weapon dmg="2S" attack="8,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   <item id="skateboard_bladed" avail="3L" price="625" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+      <weapon dmg="2P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+   <item id="roller_skates_bladed" avail="3L" price="625" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+      <weapon dmg="2P" attack="8,,,," skill="close_combat" spec="close_combat/unarmed"/>
+   </item>
+
+   <item id="torch_weapon" avail="1" price="10" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+      <weapon dmg="3S" attack="11,,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+   
+   <item id="pitchfork" avail="1" price="25" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+      <weapon dmg="3P" attack="10,4,,," skill="close_combat" spec="close_combat/blades"/>
+   </item>
+
+</items>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="ford_broadcast" avail="2"  price="50000" type="VEHICLES" subtype="VANS">
+      <vehicle han="3/3" acc="12" spdi="20" tspd="180" bod="16" arm="10" pil="3" sen="3" sea="4"/>
+      <modifications>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="horizons_overseer"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="satellite_link"/>
+      </modifications>
+   </item>
+
+   <item id="sb_condor" avail="3"  price="120000" type="VEHICLES" subtype="ROTORCRAFT">
+      <vehicle han="4" acc="14" spdi="25" tspd="200" bod="12" arm="9" pil="2" sen="6" sea="2"/>
+      <modifications>
+		<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" >
+			<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+		</embed>
+      </modifications>
+   </item>
+   
+</items>
