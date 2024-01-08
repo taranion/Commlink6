@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Normal Instruments -->
+
+   <item id="instrument_simple" avail="1" price="50" type="ELECTRONICS" subtype="INSTRUMENT">
+      <modifications>
+		<valmod type="SKILL" ref="con" value="-1" cond="y"/>
+		<valmod type="HOOK" ref="INSTRUMENT_SLOT" value="1"/>
+      </modifications>
+   </item>
+
+   <item id="instrument_professional" avail="1" price="500" type="ELECTRONICS" subtype="INSTRUMENT">
+      <modifications>
+		<valmod type="SKILL" ref="con" value="0" cond="y"/>
+		<valmod type="HOOK" ref="INSTRUMENT_SLOT" value="1"/>
+      </modifications>
+   </item>
+
+   <item id="instrument_rising_star" avail="2" price="5000" type="ELECTRONICS" subtype="INSTRUMENT">
+      <modifications>
+		<valmod type="SKILL" ref="con" value="0" cond="y"/>
+		<valmod type="HOOK" ref="INSTRUMENT_SLOT" value="1"/>
+      </modifications>
+   </item>
+
+   <item id="instrument_big_time" avail="3" price="50000" type="ELECTRONICS" subtype="INSTRUMENT">
+      <modifications>
+		<valmod type="SKILL" ref="con" value="1" cond="y"/>
+		<valmod type="HOOK" ref="INSTRUMENT_SLOT" value="1"/>
+      </modifications>
+   </item>
+
+   <item id="instrument_replacement" avail="1" price="1000" type="ELECTRONICS" subtype="INSTRUMENT">
+   </item>
+
+<!-- Instruments of Death -->
+
+   <item id="instrument_death_simple" avail="3" price="500" type="ELECTRONICS" subtype="INSTRUMENT">
+      <modifications>
+		<valmod type="SKILL" ref="con" value="-1" cond="y"/>
+		<valmod type="HOOK" ref="INSTRUMENT_SLOT" value="1"/>
+		<valmod type="HOOK" ref="INSTRUMENT_WEAPON" value="1"/>
+      </modifications>
+   </item>
+
+   <item id="instrument_death_professional" avail="4" price="5000" type="ELECTRONICS" subtype="INSTRUMENT">
+      <modifications>
+		<valmod type="SKILL" ref="con" value="0" cond="y"/>
+		<valmod type="HOOK" ref="INSTRUMENT_SLOT" value="1"/>
+		<valmod type="HOOK" ref="INSTRUMENT_WEAPON" value="1"/>
+      </modifications>
+   </item>
+
+   <item id="instrument_death_rising_star" avail="5" price="50000" type="ELECTRONICS" subtype="INSTRUMENT">
+      <modifications>
+		<valmod type="SKILL" ref="con" value="0" cond="y"/>
+		<valmod type="HOOK" ref="INSTRUMENT_SLOT" value="1"/>
+		<valmod type="HOOK" ref="INSTRUMENT_WEAPON" value="1"/>
+      </modifications>
+   </item>
+
+<!-- Accessories -->
+
+   <item id="external_synth" avail="1" price="2000" type="ACCESSORY" subtype="INSTRUMENT_ACCESSORY">
+      <usage mode="EMBEDDED" value="1" slot="INSTRUMENT_SLOT"/>      
+	  <modifications>
+		<valmod type="SKILL" ref="con" value="1" cond="y"/>
+      </modifications>
+   </item>
+   
+   <item id="internal_synth" avail="2" price="4000" type="ACCESSORY" subtype="INSTRUMENT_ACCESSORY">
+      <usage mode="EMBEDDED" value="1" slot="INSTRUMENT_SLOT"/>      
+      <modifications>
+		<valmod type="SKILL" ref="con" value="2" cond="y"/>
+        <checkmod type="SKILL" ref="con" value="1" what="REPLACE_WITH_WILD" apply="CHARACTER" />
+      </modifications>
+   </item>
+
+</items>

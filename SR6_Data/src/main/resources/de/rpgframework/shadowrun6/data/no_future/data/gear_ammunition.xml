@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<!-- Grenades -->
+	<item id="molotov" avail="1I" price="15" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo gz="10P" close="4P" near="2P" blast="5"/>
+	</item>
+
+</items>
