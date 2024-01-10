@@ -176,7 +176,6 @@ public class Shadowrun6DataPlugin  {
 			initSlip();
 			initKechibi();
 			initNoFuture();
-			initFiction();
 			initDPAlpen();
 			initBerlin();
 			initDPFeuerläufer();
@@ -379,8 +378,11 @@ public class Shadowrun6DataPlugin  {
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "core/data/qualities_seattle.xml");
 		logger.log(Level.DEBUG, "Loaded {0} qualities from Seattle City Edition", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"core/data/gear_seattle.xml");
-		logger.log(Level.DEBUG, "Loaded {0} armor", list.size());
-
+		logger.log(Level.DEBUG, "Loaded {0} armor from Seattle City Edition", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"core/data/gear_drones_seattle.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones from Seattle City Edition");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"core/data/gear_electronics_seattle.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" electronics from Seattle City Edition");
 
 		// Berlin Edition
 		set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE_BERLIN", "core.i18n", Locale.ENGLISH, Locale.GERMAN);
@@ -716,17 +718,17 @@ public class Shadowrun6DataPlugin  {
 	}
 
 	//-------------------------------------------------------------------
-	private void initFiction() throws IOException {
+	private void initOtherUS() throws IOException {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
-		logger.log(Level.INFO, "START ------------------------------Enhanced Fiction / Other US -----------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "FICTION", "fiction.i18n", Locale.ENGLISH, Locale.GERMAN);
+		logger.log(Level.INFO, "START ------------------------------ Other US -----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "OTHER_US", "other_us.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.BACKGROUND);
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"fiction/data/gear_ammunition.xml");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_ammunition.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" grenades");
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"fiction/data/gear_vehicles.xml");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
-		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,("fiction/data/mentorspirits.xml"));
+		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,("other_us/data/mentorspirits.xml"));
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" mentor spirits");
 	}
 
@@ -784,19 +786,6 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" survival");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_feuerlaeufer/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
-	}
-
-	//-------------------------------------------------------------------
-	private void initOtherUS() throws IOException {
-		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
-		List<? extends DataItem> list = null;
-		logger.log(Level.INFO, "START -----------------------------Other Sources from US--------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "OTHER_US", "other_us.i18n", Locale.ENGLISH);
-		set.setType(DataSetType.OTHER);
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_drones.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_electronics.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" electronics");
 	}
 
 	//-------------------------------------------------------------------
