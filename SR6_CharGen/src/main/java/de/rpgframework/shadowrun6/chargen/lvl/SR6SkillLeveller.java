@@ -129,7 +129,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 		OperationResult<SR6SkillValue> res = super.select(data, decisions);
 		if (res.wasSuccessful()) {
 			// Now pay
-			int cost = (data.getType()==SkillType.KNOWLEDGE)?3:5;
+			int cost = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 			model.setKarmaFree( model.getKarmaFree() - cost);
 			model.setKarmaInvested( model.getKarmaInvested() + cost);
 
