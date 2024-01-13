@@ -62,8 +62,7 @@ public enum ItemType {
 			),
 	TOOLS(
 			ItemSubType.TOOLS,
-			ItemSubType.SPARE_PARTS,
-			ItemSubType.SUPPLIES
+			ItemSubType.SPARE_PARTS
 			),
 	ELECTRONICS(
 			ItemSubType.COMMLINK,
