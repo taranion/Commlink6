@@ -227,7 +227,6 @@ public class SkillSection extends Section {
 			if (dec!=null) {
 				OperationResult<SR6SkillValue> result = control.getSkillController().select(lang, dec);
 				if (result.wasSuccessful()) {
-					table.getItems().add(result.get());
 					table.refresh();
 				} else {
 					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
