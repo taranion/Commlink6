@@ -11,13 +11,13 @@
    </item>
 
    <item id="smartcam_external" avail="2" price="200" type="ACCESSORY" subtype="IMAGING">
-      <usage mode="EMBEDDED" value="1" slot="PROCAM_SLOT"/>      
+      <usage mode="EMBEDDED" value="1" slot="PROCAM_SLOT"/>
       <modifications>
 		<checkmod type="SKILL" ref="perception" value="1" what="EDGE" cond="true"/>
       </modifications>
    </item>
    <item id="smartcam_internal" avail="99" price="0" type="ACCESSORY" subtype="IMAGING" modonly="true">
-      <usage mode="EMBEDDED" value="1" slot="PROCAM_SLOT"/>      
+      <usage mode="EMBEDDED" value="1" slot="PROCAM_SLOT"/>
       <modifications>
 		<checkmod type="SKILL" ref="perception" value="1" what="EDGE" cond="true"/>
 		<checkmod type="SKILL" ref="perception" value="1" what="DICE" cond="true"/>
@@ -54,8 +54,8 @@
    <item id="press_basic" avail="1" price="500" type="TOOLS" subtype="TOOLS"/>
    <item id="press_small" avail="4" price="5000" type="TOOLS" subtype="TOOLS"/>
    <item id="press_industrial" avail="7" price="50000" type="TOOLS" subtype="TOOLS"/>
-   <item id="paper" avail="1" price="1" type="TOOLS" subtype="SUPPLIES"/>
-   <item id="ink_black" avail="1" price="5" type="TOOLS" subtype="SUPPLIES"/>
-   <item id="ink_color" avail="1" price="20" type="TOOLS" subtype="SUPPLIES"/>
+   <item id="paper" avail="1" price="1" type="TOOLS" subtype="TOOLS"/>
+   <item id="ink_black" avail="1" price="5" type="TOOLS" subtype="TOOLS"/>
+   <item id="ink_color" avail="1" price="20" type="TOOLS" subtype="TOOLS"/>
 
 </items>

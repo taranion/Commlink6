@@ -432,6 +432,10 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 */
 	@Override
 	public float getSelectionCost(SR6Skill data) {
+		if (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE) {
+			return 3;
+		}
+
 		return 5;
 	}
 

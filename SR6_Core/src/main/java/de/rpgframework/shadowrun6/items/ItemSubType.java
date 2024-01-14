@@ -95,7 +95,6 @@ public enum ItemSubType {
 	// TOOLS
 	TOOLS,
 	SPARE_PARTS,
-	SUPPLIES,
 	// Electronic
 	LIVING_PERSONA,
 	CYBERDECK,
