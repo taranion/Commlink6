@@ -2399,7 +2399,9 @@ public class Shadowrun6Tools {
 			}
 		}
 
-		ShadowrunReference type = ShadowrunReference.valueOf(value.getResolved().getTypeString().toUpperCase());
+		String typeString = value.getResolved().getTypeString().toUpperCase();
+		if (typeString.equals("ITEM")) typeString = "GEAR";
+		ShadowrunReference type = ShadowrunReference.valueOf(typeString);
 		for (Modification tmp : value.getOutgoingModifications()) {
 			if (tmp instanceof ValueModification) {
 				ValueModification vmod = (ValueModification)tmp;

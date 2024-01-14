@@ -49,6 +49,8 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 			ValueModification amod = (ValueModification)mod;
 			if (mod.getSource()!=this && mod.getSource()!=null)
 				continue;
+			if (ShadowrunReference.CARRIED==amod.getReferenceType())
+				continue;
 			if (amod.getResolvedKey()!=key)
 				continue;
 			if (amod.getExpCost()<0)
