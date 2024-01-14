@@ -67,7 +67,7 @@
 	<!--  Apotropaic Magic -->
 	<metaecho id="absorption" type="METAMAGIC" >
 		<requires>
-			<datareq type="METAECHO" ref="masking"/>
+			<datareq type="METAECHO" ref="shielding"/>
 		</requires>
 	</metaecho>
 	<metaecho id="reflection" type="METAMAGIC" >
