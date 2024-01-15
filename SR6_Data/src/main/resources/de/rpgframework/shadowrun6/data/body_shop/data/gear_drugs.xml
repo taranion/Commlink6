@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Drugs and Toxins-->
+
+   <item id="aisa" avail="2" price="70" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="anabolic" avail="1" price="20" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="arsenic" avail="1" price="70" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="betameth" avail="2I" price="25" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="blight" avail="4I" price="250" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="burn" avail="2I" price="5" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="cereprax" avail="7I" price="900" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="cyanide" avail="2" price="70" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="dopadrine" avail="4" price="45" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="eel" avail="8I" price="900" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="ex" avail="1L" price="20" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="forget_me_not" avail="5I" price="400" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="fugu" avail="5L" price="500" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="galak" avail="2L" price="50" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="green_ring_3" avail="5L" price="60" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="green_ring_8" avail="6L" price="70" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="greys_resistor" avail="6I" price="750" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="guts" avail="4L" price="60" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="hurlg" avail="1L" price="20" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="hyper" avail="2L" price="35" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="k_10" avail="8I" price="900" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="monoamine" avail="2L" price="40" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="nightwatch" avail="1L" price="25" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="pine" avail="4I" price="260" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="push" avail="2I" price="20" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="q_bars" avail="3I" price="250" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="red_mescaline" avail="2L" price="40" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="slab" avail="4L" price="270" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="snuff" avail="1L" price="10" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="soothsayer" avail="8I" price="150" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="spell_stripper" avail="5L" price="800" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="void_burst" avail="6I" price="1050" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="woad" avail="2L" price="15" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="zone" avail="2L" price="300" count="y" type="CHEMICALS" subtype="DRUGS"/>
+
+   <!-- Awakened Drugs -->
+
+   <item id="animal_tongue" avail="3L" price="1500" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="ayaos_will" avail="7I" price="750" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="hecates_blessing" avail="6I" price="500" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="immortal_flower" avail="7L" price="2500" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="laes" avail="6I" price="750" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="leal" avail="5I" price="500" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="little_smoke" avail="6I" price="1700" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="manaproof" avail="6" price="280" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="oneiro" avail="3I" price="1200" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="overdrive" avail="5I" price="800" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="pixie_dust" avail="8I" price="800" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="rock_lizard_blood" avail="5L" price="1600" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="shade" avail="3I" price="1000" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="spirit_strength" avail="5I" price="1200" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="tempo" avail="5I" price="150" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="warp_bubble" avail="4L" price="700" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="witchs_moss" avail="4I" price="1800" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="wudu_aku" avail="6I" price="2400" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="zombie_dust" avail="6I" price="1500" count="y" type="CHEMICALS" subtype="TOXINS"/>
+
+   <!-- Resonant Drugs -->
+
+   <item id="baud" avail="3L" price="900" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="deep_impact" avail="4L" price="1500" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="the_exploding_boy" avail="4I" price="1800" count="y" type="CHEMICALS" subtype="TOXINS"/>
+   <item id="i_see_dead_icons" avail="3L" price="1100" count="y" type="CHEMICALS" subtype="DRUGS"/>
+   <item id="soul_splice" avail="7I" price="2500" count="y" type="CHEMICALS" subtype="DRUGS"/>
+
+   <!-- Ripjacks -->
+
+   <item id="deprivation" avail="3I" price="200" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+   <item id="pacifier" avail="4I" price="400" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*400"/>
+   </item>
+   <item id="pantophobia" avail="4I" price="200" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+   <item id="rave" avail="4I" price="200" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+   <item id="rigor_mortis" avail="4I" price="300" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*300"/>
+   </item>
+   <item id="vomit_comet" avail="3I" price="300" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*300"/>
+   </item>
+
+   <!-- BTLs -->
+
+   <item id="berserker" avail="4I" price="200" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+   <item id="bodyguard" avail="3L" price="200" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+   <item id="casanova" avail="4I" price="150" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*150"/>
+   </item>
+   <item id="chill" avail="3L" price="150" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*150"/>
+   </item>
+   <item id="downer" avail="3I" price="150" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*150"/>
+   </item>
+   <item id="fear_free" avail="2L" price="50" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*50"/>
+   </item>
+   <item id="god_chip" avail="5I" price="250" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*250"/>
+   </item>
+   <item id="good_times" avail="4L" price="200" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+   <item id="hyper_BTL" avail="4I" price="200" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+   <item id="infiltrator" avail="5L" price="400" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*400"/>
+   </item>
+   <item id="peddler" avail="3L" price="400" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*400"/>
+   </item>
+   <item id="vulcan" avail="4L" price="300" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*300"/>
+   </item>
+   <item id="upper" avail="3I" price="150" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*150"/>
+   </item>
+   <item id="urge_stopper" avail="4L" price="200" count="y" type="ELECTRONICS" subtype="BTLS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+      <attrdef id="PRICE" value="$RATING*200"/>
+   </item>
+
+</items>

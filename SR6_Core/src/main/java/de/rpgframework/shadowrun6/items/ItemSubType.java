@@ -114,6 +114,7 @@ public enum ItemSubType {
 	BREAKING,
 	TAC_NET,
 	INSTRUMENT,
+	BTLS,
 	//
 	CORE,
 	CASES,
