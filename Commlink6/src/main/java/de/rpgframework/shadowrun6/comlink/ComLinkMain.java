@@ -22,6 +22,7 @@ import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.SymbolIcon;
 import org.prelle.shadowrun6.export.beginner.plugin.SR6BeginnerPDFPlugin;
 import org.prelle.shadowrun6.export.compact.plugin.SR6CompactPDFPlugin;
+import org.prelle.shadowrun6.export.dndlike.plugin.DnDLikePDFPlugin;
 import org.prelle.shadowrun6.export.standard.StandardPDFPlugin;
 
 import de.rpgframework.ResourceI18N;
@@ -89,6 +90,7 @@ public class ComLinkMain extends EdenClientApplication {
 
 		ExportPluginRegistry.register(new StandardPDFPlugin());
 		ExportPluginRegistry.register(new SR6BeginnerPDFPlugin());
+		ExportPluginRegistry.register(new DnDLikePDFPlugin());
 		ExportPluginRegistry.register(new SR6CompactPDFPlugin());
 		ExportPluginRegistry.register(new SR6FoundryExportPlugin());
 		ExportPluginRegistry.register(new SR6JSONExportPlugin());

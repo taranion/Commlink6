@@ -345,6 +345,15 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 */
 	@Override
 	public boolean deselect(CarriedItem<ItemTemplate> value) {
+		return deselect(value, RemoveMode.UNDO);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
+	@Override
+	public boolean deselect(CarriedItem<ItemTemplate> value, RemoveMode mode) {
 		logger.log(Level.TRACE, "ENTER deselect({0})", value);
 		try {
 			Possible poss = canBeDeselected(value);
