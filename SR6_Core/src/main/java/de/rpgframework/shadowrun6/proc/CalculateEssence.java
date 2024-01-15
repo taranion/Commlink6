@@ -110,6 +110,7 @@ public class CalculateEssence implements ProcessingStep {
 			double essence = 6000;
 			double holeTotal = 0;
 			double hole    = 0;
+			double essenceCostTotal = 0;
 			for (ValueModification mod : model.getEssenceChanges()) {
 				int change = mod.getValue();
 				String name = mod.getKey();
@@ -147,6 +148,7 @@ public class CalculateEssence implements ProcessingStep {
 					holeTotal += change;
 					logger.log(Level.INFO, "{0}: Increase essence hole by {1} to {2}", name, change, hole);
 				} else {
+					essenceCostTotal += change;
 					if (hole>0) {
 						if (change>hole) {
 							logger.log(Level.INFO, "{0}: Partially pay essence with hole {1}", name, hole);
@@ -174,6 +176,7 @@ public class CalculateEssence implements ProcessingStep {
 			holeVal.setDistributed((int) -holeTotal);
 			holeVal.clearIncomingModifications();
 			model.setEssenceHoleUnsed((int) hole);
+			model.setEssenceCost((int) essenceCostTotal);
 
 			// Ensure presence of attributes
 			AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);
