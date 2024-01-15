@@ -2411,6 +2411,8 @@ public class Shadowrun6Tools {
 						essence *= 1000;
 					if (vmod.getKey().equals("ESSENCE_HOLE"))
 						essence *= -1;
+					// Indicate that essence whole changes should be calculated at runtime
+					if (vmod.getKey().equals("ESSENCE_HOLE")) essence=0;
 					ValueModification mod = new ValueModification(type, value.getResolved().getId(), (int)essence);
 					mod.setId(value.getUuid());
 					mod.setWhen(null);
