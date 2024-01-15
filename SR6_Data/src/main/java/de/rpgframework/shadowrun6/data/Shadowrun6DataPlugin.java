@@ -958,6 +958,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} nanoware", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_geneware.xml");
 		logger.log(Level.DEBUG, "Loaded {0} geneware", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_drugs.xml");
+		logger.log(Level.DEBUG, "Loaded {0} drugs", list.size());
 	}
 
 	//-------------------------------------------------------------------
