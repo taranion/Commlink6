@@ -5,6 +5,7 @@ import java.lang.System.Logger.Level;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
@@ -107,7 +108,9 @@ public class CalculateEssence implements ProcessingStep {
 		try {
 			// Base essence
 			double essence = 6000;
+			double holeTotal = 0;
 			double hole    = 0;
+			double essenceCostTotal = 0;
 			for (ValueModification mod : model.getEssenceChanges()) {
 				int change = mod.getValue();
 				String name = mod.getKey();
@@ -122,10 +125,30 @@ public class CalculateEssence implements ProcessingStep {
 					break;
 				}
 
+				if (change==0) {
+					logger.log(Level.WARNING, "Essence 0 for "+mod);
+					switch ( (ShadowrunReference)mod.getReferenceType()) {
+					case QUALITY:
+						QualityValue quality = model.getQuality(mod.getKey());
+						System.err.println(quality.getOutgoingModifications());
+						Optional<ValueModification> valMod = quality.getOutgoingModifications()
+								.stream()
+								.filter(m -> m instanceof ValueModification && ((ValueModification)m).getKey().equals("ESSENCE_HOLE"))
+								.map(m -> (ValueModification)m)
+								.findFirst();
+						if (valMod.isPresent()) {
+							change = - valMod.get().getValue();
+						} else
+							logger.log(Level.ERROR, "Did not find ESSENCE_HOLE for quality {0}", quality);
+					}
+				}
+
 				if (change<0) {
 					hole -= change;
+					holeTotal += change;
 					logger.log(Level.INFO, "{0}: Increase essence hole by {1} to {2}", name, change, hole);
 				} else {
+					essenceCostTotal += change;
 					if (hole>0) {
 						if (change>hole) {
 							logger.log(Level.INFO, "{0}: Partially pay essence with hole {1}", name, hole);
@@ -150,8 +173,10 @@ public class CalculateEssence implements ProcessingStep {
 				holeVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0);
 				model.setAttribute(holeVal);
 			}
-			holeVal.setDistributed((int) hole);
+			holeVal.setDistributed((int) -holeTotal);
+			holeVal.clearIncomingModifications();
 			model.setEssenceHoleUnsed((int) hole);
+			model.setEssenceCost((int) essenceCostTotal);
 
 			// Ensure presence of attributes
 			AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);

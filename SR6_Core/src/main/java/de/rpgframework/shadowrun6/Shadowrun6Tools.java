@@ -2399,7 +2399,9 @@ public class Shadowrun6Tools {
 			}
 		}
 
-		ShadowrunReference type = ShadowrunReference.valueOf(value.getResolved().getTypeString().toUpperCase());
+		String typeString = value.getResolved().getTypeString().toUpperCase();
+		if (typeString.equals("ITEM")) typeString = "GEAR";
+		ShadowrunReference type = ShadowrunReference.valueOf(typeString);
 		for (Modification tmp : value.getOutgoingModifications()) {
 			if (tmp instanceof ValueModification) {
 				ValueModification vmod = (ValueModification)tmp;
@@ -2409,6 +2411,8 @@ public class Shadowrun6Tools {
 						essence *= 1000;
 					if (vmod.getKey().equals("ESSENCE_HOLE"))
 						essence *= -1;
+					// Indicate that essence whole changes should be calculated at runtime
+					if (vmod.getKey().equals("ESSENCE_HOLE")) essence=0;
 					ValueModification mod = new ValueModification(type, value.getResolved().getId(), (int)essence);
 					mod.setId(value.getUuid());
 					mod.setWhen(null);

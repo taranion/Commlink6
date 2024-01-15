@@ -1,5 +1,7 @@
 package de.rpgframework.shadowrun6.export.fvtt;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -67,6 +69,8 @@ import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
 import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
 
 public class FoundryExportService {
+
+	private final static Logger logger = System.getLogger(FoundryExportService.class.getPackageName());
 
 	public final static String VERSION = "0.8.9";
 
@@ -416,123 +420,127 @@ public class FoundryExportService {
 	private void addGear(ActorData<Shadowrun6FoundryCharacter> actor, Shadowrun6Character character) {
 		WeaponDamageConverter dmgConv = new WeaponDamageConverter();
 		for (CarriedItem<ItemTemplate> item : character.getCarriedItems()) {
-			if (ItemTemplate.UUID_UNARMED.equals( item.getUuid())) continue;
+			System.out.println("Item "+item.getNameWithoutRating()+" / "+item.getKey());
+			try {
+				if (ItemTemplate.UUID_UNARMED.equals( item.getUuid())) continue;
 
-			ItemType type = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
-			ItemSubType subtype = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
-			FVTTGear gear = new FVTTGear();
-			switch (type) {
-			case WEAPON_CLOSE_COMBAT:
-			case WEAPON_FIREARMS:
-			case WEAPON_RANGED:
-			case WEAPON_SPECIAL:
-				gear = new FVTTWeapon();
-				((FVTTWeapon)gear).dmg = ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getValue();
-				((FVTTWeapon)gear).dmgDef = dmgConv.write((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue());
-				break;
-			case ARMOR:
-				gear = new FVTTArmor();
-				break;
-			case BIOWARE:
-			case CYBERWARE:
-			case NANOWARE:
-				gear = new FVTTBodyware();
-				break;
-			case VEHICLES:
-			case DRONE_LARGE: case DRONE_MEDIUM: case DRONE_MICRO: case DRONE_MINI: case DRONE_SMALL:
-				gear = new FVTTVehicle();
-				break;
-			}
+				ItemType type = item.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
+				ItemSubType subtype = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
+				FVTTGear gear = new FVTTGear();
+				switch (type) {
+				case WEAPON_CLOSE_COMBAT:
+				case WEAPON_FIREARMS:
+				case WEAPON_RANGED:
+				case WEAPON_SPECIAL:
+					gear = new FVTTWeapon();
+					((FVTTWeapon)gear).dmg = ((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getValue();
+					((FVTTWeapon)gear).dmgDef = dmgConv.write((Damage)item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue());
+					break;
+				case ARMOR:
+					gear = new FVTTArmor();
+					break;
+				case BIOWARE:
+				case CYBERWARE:
+				case NANOWARE:
+					gear = new FVTTBodyware();
+					break;
+				case VEHICLES:
+				case DRONE_LARGE: case DRONE_MEDIUM: case DRONE_MICRO: case DRONE_MINI: case DRONE_SMALL:
+					gear = new FVTTVehicle();
+					break;
+				}
 
-			gear.genesisID = item.getResolved().getId();
-			gear.type = type.name();
-			gear.subtype = subtype.name();
-			if (item.hasAttribute(SR6ItemAttribute.AVAILABILITY)) {
-				gear.avail = ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getValue()).getValue();
-				gear.availDef = ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getValue()).toString();
-			}
-			System.out.println("Item "+item.getNameWithoutRating());
-			if (item.hasAttribute(SR6ItemAttribute.PRICE))
-				gear.price = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
-			gear.notes = item.getNotes();
-			gear.customName = item.getCustomName();
-			gear.countable  = item.getResolved().isCountable();
-			if (item.getResolved().isCountable())
-				gear.count = item.getCount();
-			gear.needsRating = item.getResolved().getChoice(ItemTemplate.UUID_RATING)!=null;
-			if (gear.needsRating)
-				gear.rating = item.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
+				gear.genesisID = item.getResolved().getId();
+				gear.type = type.name();
+				gear.subtype = subtype.name();
+				if (item.hasAttribute(SR6ItemAttribute.AVAILABILITY)) {
+					gear.avail = ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getValue()).getValue();
+					gear.availDef = ((Availability)item.getAsObject(SR6ItemAttribute.AVAILABILITY).getValue()).toString();
+				}
+				if (item.hasAttribute(SR6ItemAttribute.PRICE))
+					gear.price = item.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+				gear.notes = item.getNotes();
+				gear.customName = item.getCustomName();
+				gear.countable  = item.getResolved().isCountable();
+				if (item.getResolved().isCountable())
+					gear.count = item.getCount();
+				gear.needsRating = item.getResolved().getChoice(ItemTemplate.UUID_RATING)!=null;
+				if (gear.needsRating)
+					gear.rating = item.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
 
-			// Accessories
-			List<String> accList = new ArrayList<>();
-			item.getEffectiveAccessories().forEach( ci -> accList.add(ci.getNameWithRating()));
-			if (!accList.isEmpty()) {
-				gear.accessories = String.join(", ", accList);
-			}
+				// Accessories
+				List<String> accList = new ArrayList<>();
+				item.getEffectiveAccessories().forEach( ci -> accList.add(ci.getNameWithRating()));
+				if (!accList.isEmpty()) {
+					gear.accessories = String.join(", ", accList);
+				}
 
-			if (ItemType.isWeapon(type)) {
-				if (item.hasAttribute(SR6ItemAttribute.SKILL)) {
-					SR6Skill skill = item.getAsObject(SR6ItemAttribute.SKILL).getModifiedValue();
-					gear.skill = skill.getId();
+				if (ItemType.isWeapon(type)) {
+					if (item.hasAttribute(SR6ItemAttribute.SKILL)) {
+						SR6Skill skill = item.getAsObject(SR6ItemAttribute.SKILL).getModifiedValue();
+						gear.skill = skill.getId();
+					}
+					if (item.hasAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)) {
+						SkillSpecialization<SR6Skill> spec = item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getModifiedValue();
+						gear.skillSpec = spec.getId();
+					}
+					if (item.hasAttribute(SR6ItemAttribute.DAMAGE)) {
+						Damage dmg = item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
+						((FVTTWeapon)gear).dmg    = dmg.getValue();
+						((FVTTWeapon)gear).dmgDef = dmg.toString();
+						((FVTTWeapon)gear).stun   = dmg.getType()==DamageType.STUN;
+					}
+					if (item.hasAttribute(SR6ItemAttribute.ATTACK_RATING)) {
+						((FVTTWeapon)gear).attackRating = (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
+					}
+					if (item.hasAttribute(SR6ItemAttribute.FIREMODES)) {
+						((FVTTWeapon)gear).modes = getFireModes((List<FireMode>)item.getAsObject(SR6ItemAttribute.FIREMODES).getModifiedValue());
+					}
 				}
-				if (item.hasAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION)) {
-					SkillSpecialization<SR6Skill> spec = item.getAsObject(SR6ItemAttribute.SKILL_SPECIALIZATION).getModifiedValue();
-					gear.skillSpec = spec.getId();
-				}
-				if (item.hasAttribute(SR6ItemAttribute.DAMAGE)) {
-					Damage dmg = item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
-					((FVTTWeapon)gear).dmg    = dmg.getValue();
-					((FVTTWeapon)gear).dmgDef = dmg.toString();
-					((FVTTWeapon)gear).stun   = dmg.getType()==DamageType.STUN;
-				}
-				if (item.hasAttribute(SR6ItemAttribute.ATTACK_RATING)) {
-					((FVTTWeapon)gear).attackRating = (int[])item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
-				}
-				if (item.hasAttribute(SR6ItemAttribute.FIREMODES)) {
-					((FVTTWeapon)gear).modes = getFireModes((List<FireMode>)item.getAsObject(SR6ItemAttribute.FIREMODES).getModifiedValue());
-				}
-			}
-			if (item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL) && gear instanceof FVTTArmor)
-				((FVTTArmor)gear).defense = item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
-			if (item.hasAttribute(SR6ItemAttribute.DEFENSE_SOCIAL) && gear instanceof FVTTArmor)
-				((FVTTArmor)gear).social = item.getAsValue(SR6ItemAttribute.DEFENSE_SOCIAL).getModifiedValue();
+				if (item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL) && gear instanceof FVTTArmor)
+					((FVTTArmor)gear).defense = item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue();
+				if (item.hasAttribute(SR6ItemAttribute.DEFENSE_SOCIAL) && gear instanceof FVTTArmor)
+					((FVTTArmor)gear).social = item.getAsValue(SR6ItemAttribute.DEFENSE_SOCIAL).getModifiedValue();
 
-			if (gear instanceof FVTTBodyware) {
-				if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST))
-					((FVTTBodyware)gear).essence = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
-				if (item.hasAttribute(SR6ItemAttribute.CAPACITY))
-					((FVTTBodyware)gear).capacity = (int)item.getAsValue(SR6ItemAttribute.CAPACITY).getModifiedValue();
-			}
-			if (gear instanceof FVTTVehicle) {
-				if (item.hasAttribute(SR6ItemAttribute.ACCELERATION)) {
-					((FVTTVehicle)gear).accOff = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.ACCELERATION).getModifiedValue()).getOffRoad();
-					((FVTTVehicle)gear).accOn  = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.ACCELERATION).getModifiedValue()).getOnRoad();
+				if (gear instanceof FVTTBodyware) {
+					if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST))
+						((FVTTBodyware)gear).essence = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
+					if (item.hasAttribute(SR6ItemAttribute.CAPACITY))
+						((FVTTBodyware)gear).capacity = (int)item.getAsValue(SR6ItemAttribute.CAPACITY).getModifiedValue();
 				}
-				if (item.hasAttribute(SR6ItemAttribute.HANDLING)) {
-					((FVTTVehicle)gear).handlOff = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.HANDLING).getModifiedValue()).getOffRoad();
-					((FVTTVehicle)gear).handlOn  = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.HANDLING).getModifiedValue()).getOnRoad();
+				if (gear instanceof FVTTVehicle) {
+					if (item.hasAttribute(SR6ItemAttribute.ACCELERATION)) {
+						((FVTTVehicle)gear).accOff = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.ACCELERATION).getModifiedValue()).getOffRoad();
+						((FVTTVehicle)gear).accOn  = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.ACCELERATION).getModifiedValue()).getOnRoad();
+					}
+					if (item.hasAttribute(SR6ItemAttribute.HANDLING)) {
+						((FVTTVehicle)gear).handlOff = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.HANDLING).getModifiedValue()).getOffRoad();
+						((FVTTVehicle)gear).handlOn  = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.HANDLING).getModifiedValue()).getOnRoad();
+					}
+					if (item.hasAttribute(SR6ItemAttribute.SPEED_INTERVAL))
+						((FVTTVehicle)gear).spdiOff = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.SPEED_INTERVAL).getModifiedValue()).getOffRoad();
+						((FVTTVehicle)gear).spdiOn  = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.SPEED_INTERVAL).getModifiedValue()).getOnRoad();
+					if (item.hasAttribute(SR6ItemAttribute.TOPSPEED))
+						((FVTTVehicle)gear).tspd = item.getAsValue(SR6ItemAttribute.TOPSPEED).getModifiedValue();
+					if (item.hasAttribute(SR6ItemAttribute.BODY))
+						((FVTTVehicle)gear).bod = item.getAsValue(SR6ItemAttribute.BODY).getModifiedValue();
+					if (item.hasAttribute(SR6ItemAttribute.ARMOR))
+						((FVTTVehicle)gear).arm = item.getAsValue(SR6ItemAttribute.ARMOR).getModifiedValue();
+					if (item.hasAttribute(SR6ItemAttribute.PILOT))
+						((FVTTVehicle)gear).pil = item.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue();
+					if (item.hasAttribute(SR6ItemAttribute.SENSORS))
+						((FVTTVehicle)gear).sen = item.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue();
+					if (item.hasAttribute(SR6ItemAttribute.SEATS))
+						((FVTTVehicle)gear).sea = item.getAsValue(SR6ItemAttribute.SEATS).getModifiedValue();
+					if (item.hasAttribute(SR6ItemAttribute.VEHICLE_TYPE))
+						((FVTTVehicle)gear).vtype = ((VehicleType)item.getAsObject(SR6ItemAttribute.VEHICLE_TYPE).getModifiedValue()).name();
 				}
-				if (item.hasAttribute(SR6ItemAttribute.SPEED_INTERVAL))
-					((FVTTVehicle)gear).spdiOff = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.SPEED_INTERVAL).getModifiedValue()).getOffRoad();
-					((FVTTVehicle)gear).spdiOn  = ((OnRoadOffRoadValue)item.getAsObject(SR6ItemAttribute.SPEED_INTERVAL).getModifiedValue()).getOnRoad();
-				if (item.hasAttribute(SR6ItemAttribute.TOPSPEED))
-					((FVTTVehicle)gear).tspd = item.getAsValue(SR6ItemAttribute.TOPSPEED).getModifiedValue();
-				if (item.hasAttribute(SR6ItemAttribute.BODY))
-					((FVTTVehicle)gear).bod = item.getAsValue(SR6ItemAttribute.BODY).getModifiedValue();
-				if (item.hasAttribute(SR6ItemAttribute.ARMOR))
-					((FVTTVehicle)gear).arm = item.getAsValue(SR6ItemAttribute.ARMOR).getModifiedValue();
-				if (item.hasAttribute(SR6ItemAttribute.PILOT))
-					((FVTTVehicle)gear).pil = item.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue();
-				if (item.hasAttribute(SR6ItemAttribute.SENSORS))
-					((FVTTVehicle)gear).sen = item.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue();
-				if (item.hasAttribute(SR6ItemAttribute.SEATS))
-					((FVTTVehicle)gear).sea = item.getAsValue(SR6ItemAttribute.SEATS).getModifiedValue();
-				if (item.hasAttribute(SR6ItemAttribute.VEHICLE_TYPE))
-					((FVTTVehicle)gear).vtype = ((VehicleType)item.getAsObject(SR6ItemAttribute.VEHICLE_TYPE).getModifiedValue()).name();
-			}
 
-			ItemData<FVTTGear> foundry = new ItemData<FVTTGear>(item.getNameWithoutRating(), "gear", gear);
-			actor.addItem(foundry);
+				ItemData<FVTTGear> foundry = new ItemData<FVTTGear>(item.getNameWithoutRating(), "gear", gear);
+				actor.addItem(foundry);
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Could not add item " + item, e);
+			}
 		}
 	}
 

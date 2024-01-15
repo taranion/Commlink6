@@ -141,7 +141,8 @@ public class CombatSectionTools {
 	public static AttackTable getAttackTableCombined(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = getAttackTablePhysical(model, loc);
 		ret.addAll(getAttackTableAstral(model, loc));
-		ret.addAll(getAttackTableMatrix(model, loc));
+		if (model.getPersona().getAttack() != null && model.getPersona().getAttack().getModifiedValue()>3)
+			ret.addAll(getAttackTableMatrix(model, loc));
 
 		logger.log(Level.INFO, "getAttackTableCombined:\n"+ret.dump());
 		return ret;
@@ -171,7 +172,7 @@ public class CombatSectionTools {
 
 		/* Unarmed */
 		SR6Skill skill = Shadowrun6Core.getSkill("close_combat");
-		AttackEntry unarmed = new AttackEntry(skill.getSpecialization("unarmed").getName(loc)+" (PHY)");
+		AttackEntry unarmed = new AttackEntry(skill.getSpecialization("unarmed").getShortName(loc)+" (PHY)");
 		Pool<Integer> pool = Shadowrun6Tools.getSkillPool(model, skill, "unarmed");
 		unarmed.setCol1( pool.toString() );
 		unarmed.setCol1Tooltip( pool.toExplainString() );
@@ -230,7 +231,7 @@ public class CombatSectionTools {
 		Pool<Integer> pool = Shadowrun6Tools.getSkillPool(model, skill, ShadowrunAttribute.WILLPOWER, "astral_combat");
 
 		/* Unarmed */
-		AttackEntry entry = new AttackEntry(Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed").getName(loc)+" (AST)");
+		AttackEntry entry = new AttackEntry(Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed").getShortName(loc)+" (AST)");
 		// Col1: Pool
 		entry.setCol1(pool.toString());
 		entry.setCol1Tooltip(pool.toExplainString());
