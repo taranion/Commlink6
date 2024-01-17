@@ -81,7 +81,8 @@ public enum ItemType {
 			ItemSubType.SECURITY,
 			ItemSubType.BREAKING,
 			ItemSubType.TAC_NET,
-			ItemSubType.INSTRUMENT
+			ItemSubType.INSTRUMENT,
+			ItemSubType.BTLS
 			),
 	/** Hack&Slash custom cyberdecks */
 	CYBERDECK(
@@ -169,8 +170,7 @@ public enum ItemType {
 	CHEMICALS(
 			ItemSubType.INDUSTRIAL_CHEMICALS,
 			ItemSubType.TOXINS,
-			ItemSubType.DRUGS,
-			ItemSubType.BTL
+			ItemSubType.DRUGS
 			),
 	SURVIVAL(
 			ItemSubType.SURVIVAL_GEAR,

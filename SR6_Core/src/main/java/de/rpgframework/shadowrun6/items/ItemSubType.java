@@ -142,7 +142,6 @@ public enum ItemSubType {
 	INDUSTRIAL_CHEMICALS,
 	TOXINS,
 	DRUGS,
-	BTL,
 	// Survival
 	SURVIVAL_GEAR,
 	WINTER_GEAR,
