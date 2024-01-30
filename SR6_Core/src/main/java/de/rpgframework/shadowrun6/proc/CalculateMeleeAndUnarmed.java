@@ -126,7 +126,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			case UNARMED:
 				if (strDMGBonus!=null) {
 					item.addIncomingModification(strDMGBonus);
-					logger.log(Level.ERROR, "Add {0} to damage for {1}", strDMGBonus, item.getKey());
+					logger.log(Level.DEBUG, "Add {0} to damage for {1}", strDMGBonus, item.getKey());
 				}
 			}
 			logger.log(Level.DEBUG, "Leaving {0} with {1}", item, item.getAsObject(SR6ItemAttribute.DAMAGE));

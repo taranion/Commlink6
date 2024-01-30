@@ -84,7 +84,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 		} finally {
 			logger.log(Level.TRACE, "LEAVE : process() ends with "+unprocessed.size()+" modifications still to process");
 		}
-		logger.log(Level.WARNING,"return "+ unprocessed);
+		logger.log(Level.DEBUG,"return "+ unprocessed);
 		return unprocessed;
 	}
 

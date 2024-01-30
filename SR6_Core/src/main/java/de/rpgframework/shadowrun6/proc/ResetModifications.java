@@ -47,7 +47,7 @@ public class ResetModifications implements ProcessingStep {
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
-		logger.log(Level.WARNING, "ENTER process");
+		logger.log(Level.DEBUG, "ENTER process");
 		model.clearEdgeModifications();
 		model.clearItemModifications();
 		model.clearGearDefinitions();
@@ -99,7 +99,7 @@ public class ResetModifications implements ProcessingStep {
 				boolean remove = val.isRemoveOnReset();
 				val.clearIncomingModifications();
 				if (remove) {
-					logger.log(Level.WARNING, "Remove quality "+val);
+					logger.log(Level.DEBUG, "Remove quality "+val);
 					model.removeQuality(val);
 				}
 			}
