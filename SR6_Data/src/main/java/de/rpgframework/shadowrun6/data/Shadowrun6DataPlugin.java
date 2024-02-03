@@ -893,7 +893,7 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -------------------------------Astral Ways------------------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "ASTRAL_WAYS", "astral_ways.i18n", Locale.ENGLISH);
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "ASTRAL_WAYS", "astral_ways.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.BACKGROUND);
 		set.setReleased(202302);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "astral_ways/data/actions_edge.xml");
