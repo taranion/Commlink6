@@ -29,6 +29,7 @@
 		<attach.version>4.0.19</attach.version>
 		<rpgfw.version>5.1.6-SNAPSHOT</rpgfw.version>
 	</properties>
+	<!-- Comment for no real purpose -->
 
 	<dependencies>
 		<dependency>
