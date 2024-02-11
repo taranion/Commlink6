@@ -130,7 +130,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SLOT(ItemHook.class,0),
 	SPELL(SR6Spell.class),
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
-	SPELL_CATEGORY(ASpell.Category.class.getAnnotation(DataItemTypeKey.class).id()),
+	SPELL_CATEGORY(ASpell.Category.class,0),
 	SPIRIT(SR6NPC.class),
 	SPRITE(SR6NPC.class),
 	SPRITE_POWER("SpritePower"),
