@@ -17,11 +17,8 @@ import java.util.ResourceBundle;
  */
 public class ConsoleLogger implements Logger {
 
-	private static DateTimeFormatter FORMAT = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
-
 	private String name;
 	private Level minLevel;
-
 
 	//-------------------------------------------------------------------
 	public ConsoleLogger(String name, Level minLevel) {
@@ -97,12 +94,12 @@ public class ConsoleLogger implements Logger {
 			if (params!=null && params.length>0) {
 				System.out.printf("[%7s][%10s]: %s%n", level, name, prefix+MessageFormat.format(format, params));
 				if (ComLinkMain.out!=null && !ComLinkMain.out.checkError()) {
-					ComLinkMain.out.printf("[%s][%7s][%10s]: %s%n", FORMAT.format(now) ,level, name, prefix+MessageFormat.format(format, params));
+					ComLinkMain.out.printf("[%s][%7s][%10s]: %s%n", now ,level, name, prefix+MessageFormat.format(format, params));
 				}
 			} else {
 				System.out.printf("[%7s][%10s]: %s%n", level, name, prefix+format);
 				if (ComLinkMain.out!=null && !ComLinkMain.out.checkError()) {
-					ComLinkMain.out.printf("[%s][%7s][%10s]: %s%n", FORMAT.format(now) ,level, name, prefix+format);
+					ComLinkMain.out.printf("[%s][%7s][%10s]: %s%n", now ,level, name, prefix+format);
 				}
 			}
 		} catch (Exception e) {
