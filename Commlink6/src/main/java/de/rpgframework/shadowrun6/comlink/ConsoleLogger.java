@@ -3,12 +3,7 @@ package de.rpgframework.shadowrun6.comlink;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.System.Logger;
-import java.text.DateFormat;
 import java.text.MessageFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
 
 /**
@@ -64,10 +59,9 @@ public class ConsoleLogger implements Logger {
 			prefix="("+element.getClassName().substring(element.getClassName().lastIndexOf(".")+1)+".java:"+element.getLineNumber()+") : ";
 		}
 
-		Instant now = Instant.now();
-		System.out.printf("[%10s][%7s][%10s]: %s\n%s", now, level, name, prefix+msg, out.toString());
+		System.out.printf("[%7s][%10s]: %s\n%s", level, name, prefix+msg, out.toString());
 		if (ComLinkMain.out!=null && !ComLinkMain.out.checkError()) {
-			ComLinkMain.out.printf("[%s][%s]: %s - %s", now, level, name, prefix+msg, thrown);
+			ComLinkMain.out.printf("[%s]: %s - %s", level, name, prefix+msg, thrown);
 			ComLinkMain.out.append(out.toString());
 			ComLinkMain.out.flush();
 		}
@@ -89,17 +83,16 @@ public class ConsoleLogger implements Logger {
 				element = e.getStackTrace()[5];
 			prefix="("+element.getClassName().substring(element.getClassName().lastIndexOf(".")+1)+".java:"+element.getLineNumber()+") : ";
 		}
-		LocalDateTime now = LocalDateTime.now();
 		try {
 			if (params!=null && params.length>0) {
 				System.out.printf("[%7s][%10s]: %s%n", level, name, prefix+MessageFormat.format(format, params));
 				if (ComLinkMain.out!=null && !ComLinkMain.out.checkError()) {
-					ComLinkMain.out.printf("[%s][%7s][%10s]: %s%n", now ,level, name, prefix+MessageFormat.format(format, params));
+					ComLinkMain.out.printf("[%7s][%10s]: %s%n", level, name, prefix+MessageFormat.format(format, params));
 				}
 			} else {
 				System.out.printf("[%7s][%10s]: %s%n", level, name, prefix+format);
 				if (ComLinkMain.out!=null && !ComLinkMain.out.checkError()) {
-					ComLinkMain.out.printf("[%s][%7s][%10s]: %s%n", now ,level, name, prefix+format);
+					ComLinkMain.out.printf("[%7s][%10s]: %s%n", level, name, prefix+format);
 				}
 			}
 		} catch (Exception e) {
