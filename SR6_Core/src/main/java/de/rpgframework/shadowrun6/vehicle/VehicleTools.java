@@ -25,6 +25,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
@@ -599,24 +600,25 @@ public class VehicleTools {
 		}
 
 		//---------------------------------------------------------
-		public static String getVehicleAccessoryString(CarriedItem item) {
+		public static String getVehicleAccessoryString(CarriedItem<ItemTemplate> item) {
 			logger.log(Level.WARNING, "TODO: getVehicleAccessoryString not implemented yet");
+			System.err.println("VehicleTools.getVehicleAccessoryString not implemented yet");
 			class Counted {
-				CarriedItem inst;
+				CarriedItem<ItemTemplate> inst;
 				int count;
-				public Counted(CarriedItem item) {
+				public Counted(CarriedItem<ItemTemplate> item) {
 					inst = item;
 					count=1;
 				}
 				public String toString() {
-					//if (count==1) return inst.getNameWithCount();
+					if (count==1) return inst.getNameWithRating();
 					return inst.getNameWithRating()+" ("+count+"x)";
 				}
 			}
 			Map<ItemTemplate, Counted> map = new LinkedHashMap<>();
 			List<String> list = new ArrayList<>();
-//			item.getEffectiveAccessories().forEach( ci -> {
-//				ItemSubType sub = ItemSubType.ACCESSORY;
+			for (CarriedItem<ItemTemplate> ci : item.getEffectiveAccessories()) {
+				ItemSubType sub = (ItemSubType)ci.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
 //				if (ci!=null && ci.getUsedAsSubType()!=null)
 //					sub = ci.getUsedAsSubType();
 //				else {
@@ -625,33 +627,33 @@ public class VehicleTools {
 //					} else
 //						logger.warn("No subtype set for "+ci+" / "+ci.getUsedAsType()+" / "+ci.getItem().getSubtype(ci.getUsedAsType()));
 //				}
-//				switch (sub) {
-//				case HACKING_PROGRAM:
-//				case BASIC_PROGRAM:
-//				case RIGGER_PROGRAM:
-//				case AUTOSOFT:
-//				case SKILLSOFT:
-//					break;
-//				default:
-//					// Don't print hardpoints
-//					if (ci.getItem().getId().startsWith("hardpoint"))
-//						return;
-//					if (ci.getItem().getId().startsWith("modslot_"))
-//						return;
-//					if (ci.getItem().getId().startsWith("improved_"))
-//						return;
-//					if (ci.getItem().getId().startsWith("enhanced_"))
-//						return;
-//					if (ci.getItem().getId().startsWith("weapon_mount"))
-//						return;
-//					// Sum up
-//					if (map.containsKey(ci.getItem())) {
-//						map.get(ci.getItem()).count++;
-//					} else {
-//						map.put(ci.getItem(), new Counted(ci));
-//					}
-//				}
-//			});
+				switch (sub) {
+				case HACKING_PROGRAM:
+				case BASIC_PROGRAM:
+				case RIGGER_PROGRAM:
+				case AUTOSOFT:
+				case SKILLSOFT:
+					break;
+				default:
+					// Don't print hardpoints
+					if (ci.getResolved().getId().startsWith("hardpoint"))
+						continue;
+					if (ci.getResolved().getId().startsWith("modslot_"))
+						continue;
+					if (ci.getResolved().getId().startsWith("improved_"))
+						continue;
+					if (ci.getResolved().getId().startsWith("enhanced_"))
+						continue;
+					if (ci.getResolved().getId().startsWith("weapon_mount"))
+						continue;
+					// Sum up
+					if (map.containsKey(ci.getResolved())) {
+						map.get(ci.getResolved()).count++;
+					} else {
+						map.put(ci.getResolved(), new Counted(ci));
+					}
+				}
+			};
 			map.values().forEach(c-> list.add(c.toString()));
 
 			String mods = String.join(", ", list);
