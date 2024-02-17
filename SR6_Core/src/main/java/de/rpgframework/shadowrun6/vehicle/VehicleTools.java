@@ -601,8 +601,6 @@ public class VehicleTools {
 
 		//---------------------------------------------------------
 		public static String getVehicleAccessoryString(CarriedItem<ItemTemplate> item) {
-			logger.log(Level.WARNING, "TODO: getVehicleAccessoryString not implemented yet");
-			System.err.println("VehicleTools.getVehicleAccessoryString not implemented yet");
 			class Counted {
 				CarriedItem<ItemTemplate> inst;
 				int count;
