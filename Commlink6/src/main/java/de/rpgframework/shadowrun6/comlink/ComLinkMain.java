@@ -297,7 +297,7 @@ public class ComLinkMain extends EdenClientApplication {
 		navigAbout  .setId("navig-about");
 		navigAccount.setId("navig-account");
 
-		drawer.getItems().addAll(navigChars, navigLookup, navigAccount, navigAbout);
+		drawer.getItems().addAll(navigChars, navigLookup, navigAbout);
 //		if (!Platform.isDesktop() || !PDFViewerServiceFactory.create().isPresent()) {
 //			drawer.getItems().remove(navigPDF);
 //		}
