@@ -138,14 +138,24 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 	}
 
 	//-------------------------------------------------------------------
+	private ValueModification getModificationFromEssenceChange(CarriedItem<ItemTemplate> value) {
+		for (ValueModification mod : getModel().getEssenceChanges()) {
+			if (mod.getId()!=null && mod.getId().equals(value.getUuid())) {
+				return mod;
+			}
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
 	 */
 	@Override
 	public boolean deselect(CarriedItem<ItemTemplate> value, RemoveMode mode) {
+		logger.log(Level.INFO, "deselect {0} via {1}", value, mode);
 		boolean success = super.deselect(value, mode);
 		if (success) {
-
 			if (mode==RemoveMode.UNDO) {
 				Shadowrun6Character model = getModel();
 				int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
@@ -156,6 +166,11 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 				// Remove the history modification
 				for (Modification mod : model.getHistory()) {
 					if (mod instanceof DataItemModification) {
+						if (((DataItemModification)mod).getId()==null) {
+							logger.log(Level.ERROR, "The character history has a modification without UUID: {0}", mod);
+							continue;
+						}
+
 						if (((DataItemModification)mod).getId().equals(value.getUuid())) {
 							model.getHistory().remove(mod);
 							break;
@@ -163,15 +178,6 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 					}
 				}
 			}
-			Shadowrun6Tools.removeEssenceChange(getModel(), value, mode);
-
-//			// Eventually handle essence
-//			if (value.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
-//				ItemAttributeFloatValue<SR6ItemAttribute> val = value.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-//				logger.log(Level.WARNING, "\n\n\n\nAdd an essence hole of {0}", val.getModifiedValue());
-//				// Add to essence hole
-//				model.setEssenceHoleUnsed((int)val.getModifiedValue()*1000);
-//			}
 
 			parent.runProcessors();
 
