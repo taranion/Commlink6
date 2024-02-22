@@ -364,8 +364,9 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 			logger.log(Level.INFO, "Remove {0} from model", value.toString());
 			getModel().removeCarriedItem(value);
+			Shadowrun6Tools.removeEssenceChange(getModel(), value, mode);
 
-			parent.runProcessors();
+//			parent.runProcessors();
 			return true;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE deselect({0})", value);

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lifemods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <lifemod id="Adeptenausbildung (Nur Adepten)" type="ADULT">
+    <choices>
+      <choice uuid="ff3db73a-9e60-4017-90bb-039cf3c366ad" type="ATTRIBUTE" options="EDGE,MAGIC" />
+      <choice uuid="fe0149f0-4703-4b9d-ab15-1a623d707e36" type="ATTRIBUTE" options="BODY,AGILITY,REACTION,STRENGTH" />
+      <choice uuid="276a8cca-6dca-4f19-ba52-60246ca172ba" type="ATTRIBUTE" options="WILLPOWER,LOGIC,INTUITION,CHARISMA" />
+      <choice uuid="5aa1a06d-dda7-4d51-983c-c382b596651e" type="SKILL" options="astral,cracking,summoning,exotic_weapons,sorcery,tasking,enchanting,biotech,engineering,athletics,firearms,piloting,outdoor,influence,stealth,con,perception,close_combat,electronics" />
+    </choices>
+    <modifications>
+      <valmod type="ATTRIBUTE" choice="ff3db73a-9e60-4017-90bb-039cf3c366ad" val="1" />
+      <valmod type="ATTRIBUTE" choice="fe0149f0-4703-4b9d-ab15-1a623d707e36" val="1" />
+      <valmod type="ATTRIBUTE" choice="276a8cca-6dca-4f19-ba52-60246ca172ba" val="1" />
+      <valmod type="SKILL" ref="choice" choice="5aa1a06d-dda7-4d51-983c-c382b596651e" val="1" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" val="2" />
+      <allowmod type="CONTACT_TYPES" ref="MAGIC" />
+      <selmod>
+        <valmod type="SKILL" ref="language" val="1" />
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="51cb84a0-2afd-469c-9c02-e6700f1ccd20" value="i18n.Arkana" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="3995c68f-9f25-4f79-ae4e-698b47add47b" value="i18n.Magische Theorien" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="d915f34a-2016-4d77-becf-2874ab367554" value="i18n.Magische Traditionen" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="aefc6c58-5a7d-4a96-a1a6-91ab2899c7cd" value="i18n.Straßen von [Sprawl]" />
+        </itemmod>
+      </selmod>
+    </modifications>
+  </lifemod>
+  <lifemod id="Astraler Kundschafter (Nur Erwachte)" type="ADULT">
+    <choices>
+      <choice uuid="1ba19504-73bd-404f-8035-8927045d3d6d" type="ATTRIBUTE" options="WILLPOWER,CHARISMA,MAGIC" />
+      <choice uuid="0181f0f3-eca5-4d99-b66e-2d14042449ea" type="SKILL" options="astral,summoning,perception" />
+    </choices>
+    <modifications>
+      <valmod type="ATTRIBUTE" choice="1ba19504-73bd-404f-8035-8927045d3d6d" val="1" />
+      <valmod type="SKILL" ref="choice" choice="0181f0f3-eca5-4d99-b66e-2d14042449ea" val="1" />
+      <selmod>
+        <valmod type="astral" ref="SKILL" val="1" />
+        <valmod type="LOGIC" ref="ATTRIBUTE" val="1" />
+        <valmod type="MAGIC" ref="ATTRIBUTE" val="1" />
+      </selmod>
+      <selmod />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" val="0" />
+      <selmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="8f73c4a0-db52-4302-8787-f9f429b470f1" value="i18n.Arkana" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="ce28882c-812d-4846-945a-b427ace17159" value="i18n.Geisterarten" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="f4fe51ad-c9c0-433b-adb5-af8a74a362ed" value="i18n.Metaebenen" />
+        </itemmod>
+      </selmod>
+    </modifications>
+  </lifemod>
+  <lifemod id="Athletin" type="ADULT">
+    <choices>
+      <choice uuid="100fc0dc-ccbf-441e-8e95-44e19e67934c" type="ATTRIBUTE" options="BODY,STRENGTH,WILLPOWER" />
+      <choice uuid="b2c2808d-b2a3-4e3e-9c74-13e4c577b241" type="ATTRIBUTE" options="AGILITY,REACTION,EDGE" />
+      <choice uuid="564e5768-3d93-41fd-b971-56862f6011f4" type="SKILL" options="athletics,close_combat,piloting" />
+    </choices>
+    <modifications>
+      <valmod type="ATTRIBUTE" choice="100fc0dc-ccbf-441e-8e95-44e19e67934c" val="1" />
+      <valmod type="ATTRIBUTE" choice="b2c2808d-b2a3-4e3e-9c74-13e4c577b241" val="1" />
+      <valmod type="SKILL" ref="choice" choice="564e5768-3d93-41fd-b971-56862f6011f4" val="1" />
+      <valmod type="CREATION_POINTS" ref="NUYEN" val="25000" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" val="2" />
+      <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
+      <allowmod type="CONTACT_TYPES" ref="MEDIA" />
+      <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
+      <selmod>
+        <valmod type="SKILL" ref="language" val="2" />
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="17f2bb03-74c9-4a54-a5b1-fa48b36c8ec0" value="i18n.Combatbiking" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="c3e0fd30-957a-4ca5-aafd-310a759c6fb4" value="i18n.Combatbiking" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="e63a322f-a6dd-4d99-a921-3929ad917b32" value="i18n.[Sportart]" />
+        </itemmod>
+      </selmod>
+    </modifications>
+  </lifemod>
+  <lifemod id="Technische Ausbildung" type="ADULT">
+    <choices>
+      <choice uuid="8827f6d3-e1c6-4ab8-ab2d-bba48078409d" type="ATTRIBUTE" options="LOGIC,INTUITION,CHARISMA" />
+      <choice uuid="732e624a-dbc6-497a-81d2-5a1f0d4c9424" type="ATTRIBUTE" options="AGILITY,WILLPOWER,EDGE" />
+      <choice uuid="9436c639-9b08-4deb-95eb-33507db1a2cb" type="SKILL" options="biotech,cracking,electronics,engineering" />
+    </choices>
+    <modifications>
+      <valmod type="ATTRIBUTE" choice="8827f6d3-e1c6-4ab8-ab2d-bba48078409d" val="1" />
+      <valmod type="ATTRIBUTE" choice="732e624a-dbc6-497a-81d2-5a1f0d4c9424" val="1" />
+      <valmod type="SKILL" ref="choice" choice="9436c639-9b08-4deb-95eb-33507db1a2cb" val="2" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" val="2" />
+      <allowmod type="CONTACT_TYPES" ref="MATRIX" />
+      <allowmod type="CONTACT_TYPES" ref="MEDICAL" />
+      <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
+      <selmod>
+        <valmod type="SKILL" ref="language" val="1" />
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="cf93ef38-8737-4244-8877-5e4d971a3a33" value="i18n.Drohnen und Fahrzeugmodelle" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="4c4f2790-8578-4e6b-88f9-9d391242737e" value="i18n.Technologie Unternehmen" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="8e3742a9-3abf-4974-886b-0330aa201a9e" value="i18n.Waffenhersteller" />
+        </itemmod>
+      </selmod>
+    </modifications>
+  </lifemod>
+</lifemods>

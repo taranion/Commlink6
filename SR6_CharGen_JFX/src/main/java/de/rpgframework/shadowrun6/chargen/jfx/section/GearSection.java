@@ -11,15 +11,18 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.controlsfx.control.ToggleSwitch;
+import org.prelle.javafx.AlertType;
 import org.prelle.javafx.CloseType;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.ManagedDialog;
 import org.prelle.javafx.Mode;
+import org.prelle.javafx.SymbolIcon;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController.RemoveMode;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.genericrpg.data.Decision;
@@ -39,6 +42,8 @@ import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -50,7 +55,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 
 	protected final static Logger logger = System.getLogger(GearSection.class.getPackageName());
 
-	protected static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
+	protected static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(GearSection.class.getPackageName()+".Section");
 
 	private CarryMode carry = CarryMode.CARRIED;
 	private Predicate<CarriedItem<ItemTemplate>> filter;
@@ -218,10 +223,25 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 			}
 		} else {
 			logger.log(Level.WARNING, "onDelete {0} ", item);
-			if (control.getEquipmentController().deselect(item)) {
+			RemoveMode mode = RemoveMode.UNDO;
+			if (model.isInCareerMode()) {
+				mode = askRemoveMode(item);
+			}
+			if (control.getEquipmentController().deselect(item, mode)) {
 				refresh();
 			}
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private RemoveMode askRemoveMode(CarriedItem<ItemTemplate> item) {
+		Label lblQuest = new Label(ResourceI18N.get(RES, "section.gear.delete.question"));
+		CloseType closed = FlexibleApplication.getInstance().showAlertAndCall(AlertType.QUESTION,
+				ResourceI18N.get(RES, "section.gear.delete.title"), lblQuest, null, CloseType.UNDO, CloseType.TRASH);
+		if (closed==CloseType.UNDO) return RemoveMode.UNDO;
+		if (closed==CloseType.TRASH) return RemoveMode.REMOVE_LATE;
+
+		return RemoveMode.UNDO;
 	}
 
 	//-------------------------------------------------------------------

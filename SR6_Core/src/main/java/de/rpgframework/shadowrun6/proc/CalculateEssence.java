@@ -117,7 +117,12 @@ public class CalculateEssence implements ProcessingStep {
 				switch ( (ShadowrunReference)mod.getReferenceType() ) {
 				case CARRIED:
 					CarriedItem<ItemTemplate> carried = model.getCarriedItem(mod.getId());
-					name = carried.getNameWithRating();
+//					if (carried!=null) {
+						name = carried.getNameWithRating();
+//					} else {
+//						logger.log(Level.INFO, "Removed item found: "+mod.getId()+" / "+mod.getSource());
+//						name = "BOOM";
+//					}
 					break;
 				case QUALITY:
 					QualityValue quality = model.getQuality(mod.getKey());

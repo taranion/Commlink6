@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<itemenhancements>
+	<itemenhancement id="bulk_modifications" avail="3L" price="75">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+	  <requires>
+	    <selreq>
+	    	<datareq type="GEAR" ref="cyberarm"/>
+	    	<datareq type="GEAR" ref="cyberleg"/>
+	    	<datareq type="GEAR" ref="cyberarm_custom"/>
+	    	<datareq type="GEAR" ref="cyberleg_custom"/>
+	    </selreq>
+	  </requires>
+	  <modifications>
+         <valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="$RATING"/>
+	  </modifications>
+	</itemenhancement>
+</itemenhancements>

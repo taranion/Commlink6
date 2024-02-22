@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Vehicles and Drones which are duplicated from Core, because they get installed mods with Double Clutch -->
+
+<!-- Bikes -->
+	<item id="dodge_scoot" avail="2" cost="3000" subtype="BIKES" type="VEHICLES">
+		<vehicle han="5/7" acc="4" spdi="10" tspd="80" bod="2" arm="0" pil="1" sen="0" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="1" />
+		</modifications>
+	</item>
+
+	<item id="harley-davidson_scorpion" avail="2" cost="14000" subtype="BIKES" type="VEHICLES">
+		<vehicle han="3/5" acc="16" spdi="30" tspd="200" bod="7" arm="6" pil="1" sen="1" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="meta_adjust_pilot_troll" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="suzuki_mirage" avail="2" cost="12000" subtype="BIKES" type="VEHICLES">
+		<vehicle han="2/6" acc="29" spdi="30" tspd="260" bod="4" arm="2" pil="1" sen="1" sea="1" />
+		<modifications>
+			<embed type="GEAR" ref="suspension_onroad" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+
+<!-- Cars -->
+
+	<item id="eurocar_westwind_x80" avail="3" cost="115000" subtype="CARS" type="VEHICLES">
+		<vehicle han="2/6" acc="24" spdi="30" tspd="250" bod="6" arm="1" pil="4" sen="3" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="suspension_racing" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+	<item id="hyundai_shin-hyung" avail="2" cost="20000" subtype="CARS" type="VEHICLES">
+		<vehicle han="3/5" acc="12" spdi="25" tspd="200" bod="7" arm="1" pil="1" sen="1" sea="3"/>
+		<modifications>
+			<itemhookmod hook="VEHICLE_POWERTRAIN" attr="CAPACITY" value="4" />
+		</modifications>
+	</item>
+
+	<item id="saeder-krupp-bentley_concordat" avail="3" cost="65000" subtype="CARS" type="VEHICLES">
+		<vehicle han="3/5" acc="18" spdi="30" tspd="180" bod="14" arm="8" pil="3" sen="3" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_high" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+	<item id="mitsubishi_nightsky" avail="3" cost="259000" subtype="CARS" type="VEHICLES">
+		<vehicle han="4/6" acc="10" spdi="10" tspd="160" bod="18" arm="10" pil="3" sen="4" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_luxury" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="life_safe_system_1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+		</modifications>
+	</item>
+
+
+<!-- Trucks and Vans -->
+
+	<item id="gmc_bulldog" avail="2" cost="35000" type="VEHICLES" subtype="VANS">
+		<vehicle han="5/7" acc="10" spdi="10" tspd="140" bod="16" arm="12" pil="2" sen="3" sea="10"/>
+		<modifications>
+			<itemhookmod hook="VEHICLE_CHASSIS" attr="CAPACITY" value="4" />
+		</modifications>
+	</item>
+	
+<!-- Boats -->
+	<item id="aztechnology_sunrunner" avail="3" cost="39000" type="VEHICLES" subtype="BOATS">
+		<vehicle han="4" acc="20" spdi="20" tspd="120" bod="8" arm="3" pil="3" sen="3" sea="5"/>
+		<modifications>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+	<item id="aztechnology_nightrunner" avail="3" cost="39000" type="VEHICLES" subtype="BOATS">
+		<vehicle han="4" acc="20" spdi="20" tspd="120" bod="8" arm="3" pil="3" sen="3" sea="5"/>
+		<modifications>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+	
+<!-- Fixed wing aircrafts -->
+	<item avail="2" cost="20000" id="artemis_industries_nightwing" type="VEHICLES" subtype="FIXED_WING">
+		<vehicle han="4" acc="15" spdi="25" tspd="150" bod="2" arm="0" pil="1" sen="1" sea="1"/>
+		<modifications>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" />
+		</modifications>
+	</item>
+	<item avail="2" cost="300000" id="mct-sikorsky-bell_seahawk" type="VEHICLES" subtype="FIXED_WING">
+		<vehicle han="5" acc="30" spdi="50" tspd="500" bod="12" arm="4" pil="2" sen="2" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="sec_power_boat" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" rating="12" />
+		</modifications>
+	</item>
+	
+<!-- Rotorcraft -->
+	<item avail="4" cost="423000" id="mct-sikorsky-bell_wolfhound" type="VEHICLES" subtype="ROTORCRAFT">
+		<vehicle han="3" acc="20" spdi="40" tspd="320" bod="12" arm="14" pil="4" sen="4" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="12" />
+		</modifications>
+	</item>
+	 
+<!-- VTOL/VSTOL -->
+	<item avail="4" cost="800000" id="federated_boeing_osprey_x" type="VEHICLES" subtype="VTOL">
+		<vehicle han="3" acc="35" spdi="80" tspd="420" bod="16" arm="16" pil="4" sen="4" sea="10"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities_high" intoType="HOOK" intoRef="VEHICLE_CF" />
+		</modifications>
+	</item>
+
+<!-- LAV -->
+	<item avail="3" cost="400000" id="ares_venture" type="VEHICLES" subtype="LAV">
+		<vehicle han="4" acc="40" spdi="60" tspd="680" bod="16" arm="12" pil="2" sen="2" sea="8"/>
+		<modifications>
+			<itemhookmod hook="VEHICLE_CHASSIS" attr="CAPACITY" value="4" />
+			<itemhookmod hook="VEHICLE_POWERTRAIN" attr="CAPACITY" value="4" />
+		</modifications>
+	</item>
+	<item avail="4" cost="1300000" id="gmc_banshee" type="VEHICLES" subtype="LAV">
+		<vehicle han="3" acc="60" spdi="95" tspd="900" bod="18" arm="18" pil="4" sen="4" sea="12"/> <!-- Increased speed_interval, so final result considering armor_milspec meets target -->
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="18" />
+			<embed type="GEAR" ref="armor_milspec1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="6" />
+		</modifications>
+	</item>
+
+	<!-- Microdrones -->
+	<item avail="2" cost="900" id="shiawase_kanmushi" type="DRONE_MICRO" subtype="GROUND">
+		<vehicle han="2/3" acc="4" spdi="5" tspd="15" bod="0" arm="0" pil="3" sen="2"/>
+		<modifications>
+			<embed type="GEAR" ref="gecko_tips1" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" /> <!-- Gecko tips rating = Size Class 0 -->
+		</modifications>
+	</item>
+	<item avail="2" cost="800" id="mct_gnat" type="DRONE_MICRO" subtype="AIR">
+		<vehicle han="3" acc="4" spdi="10" tspd="30" bod="0" arm="0" pil="2" sen="1"/>
+		<modifications>
+			<embed type="GEAR" ref="realistic_features4" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="0" />
+		</modifications>
+	</item>
+
+	<!-- Minidrones -->
+	<item avail="2" cost="1100" id="shiawase_inu" type="DRONE_MINI" subtype="GROUND">
+		<vehicle han="2/3" acc="6" spdi="8" tspd="24" bod="1" arm="0" pil="2" sen="2" />
+		<modifications>
+			<embed type="GEAR" ref="realistic_features2" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" included="true" />
+		</modifications>
+	</item>
+	<item avail="2" cost="1600" id="shiawase_inu_better_suit" type="DRONE_MINI" subtype="GROUND">
+		<vehicle han="2/3" acc="6" spdi="8" tspd="24" bod="1" arm="0" pil="2" sen="2" />
+		<modifications>
+			<embed type="GEAR" ref="realistic_features3" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" included="true" />
+		</modifications>
+	</item>
+	<item avail="2" cost="2100" id="mct_hornet" type="DRONE_MINI" subtype="AIR">
+		<vehicle han="3" acc="20" spdi="15" tspd="35" bod="1" arm="0" pil="2" sen="2" />
+		<modifications>
+			<embed type="GEAR" ref="realistic_features1" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="1" />
+			<embed type="GEAR" ref="hornet_injector_mount" intoType="HOOK" intoRef="VEHICLE_BODY" />
+		</modifications>
+	</item>
+
+	<!-- Small drones -->
+	<item avail="3" cost="11000" id="chrysler-nissan_pursuit_v" type="DRONE_SMALL" subtype="GROUND">
+		<vehicle han="3/6" acc="30" spdi="50" tspd="280" bod="4" arm="2" pil="4" sen="3" />
+		<modifications>
+			<embed type="GEAR" ref="suspension_onroad" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item avail="3" cost="18000" id="lockheed_optic_x2" type="DRONE_SMALL" subtype="AIR">
+		<vehicle han="4" acc="15" spdi="30" tspd="140" bod="2" arm="4" pil="4" sen="4" />
+		<modifications>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+		</modifications>
+	</item>
+
+	<!-- Medium drones -->
+	<item avail="2" cost="4500" id="nissan_samurai" type="DRONE_MEDIUM" subtype="ANTHRO">
+		<vehicle han="3/4" acc="10" spdi="10" tspd="30" bod="6" arm="6" pil="3" sen="2" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_BODY" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="weapon_mount_small" intoType="HOOK" intoRef="VEHICLE_BODY" />
+			<embed type="GEAR" ref="weapon_mount_small" intoType="HOOK" intoRef="VEHICLE_BODY" />
+		</modifications>
+	</item>
+	<item id="mct-nissan_roto_drone" avail="2" cost="5000" type="DRONE_MEDIUM" subtype="AIR">
+		<vehicle han="3" acc="20" spdi="30" tspd="160" bod="5" arm="6" pil="3" sen="2" />
+		<modifications>
+			<itemhookmod hook="VEHICLE_CHASSIS" attr="CAPACITY" value="4" />
+			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+	<item id="federated-boeing_blackhawk" avail="3" cost="8000" type="DRONE_MEDIUM" subtype="AIR">
+		<vehicle han="3" acc="35" spdi="40" tspd="200" bod="8" arm="6" pil="3" sen="3" />
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="8" />
+		</modifications>
+	</item>
+
+	<!-- Large drones -->
+	<item id="steel_lynx_combat_drone" avail="4" cost="25000" type="DRONE_LARGE" subtype="GROUND">
+		<vehicle han="3/5" acc="15" spdi="15" tspd="80" bod="12" arm="16" pil="4" sen="4" />
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="12" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_BODY" />
+		</modifications>
+	</item>
+	<item id="ares_packmule" avail="3" cost="10000" type="DRONE_LARGE" subtype="GROUND">
+		<vehicle han="3/4" acc="6" spdi="5" tspd="30" bod="8" arm="6" pil="2" sen="1" />
+		<modifications>
+			<itemhookmod hook="VEHICLE_CF" attr="CAPACITY" value="4" /> 
+		</modifications>
+	</item>
+	<item id="cyberspace_designs_dalmatian" avail="3" cost="10000" type="DRONE_LARGE" subtype="AIR">
+		<vehicle han="3" acc="13" spdi="20" tspd="130" bod="6" arm="4" pil="3" sen="3" />
+		<modifications>
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="2" />
+		</modifications>
+	</item>
+	<item id="ares_black_sky" avail="5" cost="43000" type="DRONE_LARGE" subtype="AIR">
+		<vehicle han="2" acc="25" spdi="50" tspd="300" bod="8" arm="10" pil="4" sen="4" />
+		<modifications>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="6" />
+		</modifications>
+	</item>
+	<item id="nissan_oni" avail="2" cost="6700" type="DRONE_LARGE" subtype="ANTHRO">
+		<vehicle han="3/4" acc="10" spdi="8" tspd="30" bod="9" arm="10" pil="3" sen="2" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_BODY" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" />
+		</modifications>
+	</item>
+</items>

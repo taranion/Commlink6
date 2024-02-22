@@ -9,6 +9,7 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController.RemoveMode;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -148,6 +149,18 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, mode);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
+	@Override
+	public boolean deselect(CarriedItem<ItemTemplate> value, RemoveMode mode) {
+		boolean success = super.deselect(value, mode);
+		if (success)
+			parent.runProcessors();
+		return success;
 	}
 
 	//-------------------------------------------------------------------
