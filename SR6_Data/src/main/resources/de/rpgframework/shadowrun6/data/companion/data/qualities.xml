@@ -24,7 +24,7 @@
 	</quality>
 	<quality id="cyborg" karma="5" pos="true" type="NORMAL" max="10">
 		<requires>
-			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="1"/>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="1000"/>
 			<valuereq type="QUALITY" ref="augmentation_acclimation" apply="CHARACTER" value="10"/>
 		</requires>
 		<modifications>
@@ -53,7 +53,7 @@
 	<quality id="maximum_overdrive"  karma="7" pos="true" type="NORMAL" />
 	<quality id="more_machine_than_metahuman" karma="5" pos="true" type="NORMAL">
 		<requires>
-			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2"/>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2000"/>
 		</requires>
 	</quality>
 	<quality id="muscles" karma="6" pos="true" type="NORMAL">
@@ -111,7 +111,7 @@
 	<quality id="combat_junkie" karma="6"  pos="false" type="NORMAL"/>
 	<quality id="cyber_psychosis" karma="8" pos="false" type="NORMAL" max="3">
 		<requires>
-			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="1"/>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="1000"/>
 		</requires>
 	</quality>
 	<quality id="finesse"       karma="7" pos="false" type="NORMAL"/>
