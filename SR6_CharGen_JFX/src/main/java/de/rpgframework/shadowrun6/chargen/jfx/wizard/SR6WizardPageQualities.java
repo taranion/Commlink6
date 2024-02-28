@@ -39,7 +39,7 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageQualities(Wizard wizard, GeneratorWrapper charGen) {
-		super(wizard, charGen);
+		super(wizard, charGen, Shadowrun6Tools.requirementResolver(Locale.getDefault()));
 	}
 
 	//-------------------------------------------------------------------
@@ -51,11 +51,7 @@ public class SR6WizardPageQualities extends AWizardPageQualities {
 //		selection.setFilterNode(new QualityFilterNode(RES, selection, QualityType.NORMAL));
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getQualityController()));
 		selection.setSelectedFilter(qv -> typesToShow.contains(qv.getModifyable().getType()) );
-		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController()) {
-			public String requirementToText(Requirement req) {
-				return Shadowrun6Tools.getRequirementString(req, Locale.getDefault());
-			}
-		});
+		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController(), Shadowrun6Tools.requirementResolver(Locale.getDefault())) );
 
 
 		filter = new QualityFilterNode(RES, selection, QualityType.NORMAL, QualityType.ADEPT_WAY);

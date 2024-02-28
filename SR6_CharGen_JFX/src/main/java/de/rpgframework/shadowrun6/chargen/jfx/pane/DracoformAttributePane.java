@@ -106,7 +106,9 @@ public class DracoformAttributePane extends GridPane {
 					}
 				}
 //				for (NumericalValueField<ShadowrunAttribute, AttributeValue<ShadowrunAttribute>> tf : tfAttrib) {
-					tfAttrib[i].setData(aVal, propAttrCtrl);
+				tfAttrib[i].setValueFactory( () -> body.getAttribute(attr));
+				tfAttrib[i].setController(propAttrCtrl.get());
+//					tfAttrib[i].setData(aVal, propAttrCtrl);
 //				}
 			}
 			i++;

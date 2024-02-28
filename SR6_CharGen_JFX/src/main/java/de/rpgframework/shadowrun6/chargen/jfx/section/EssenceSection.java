@@ -56,6 +56,8 @@ public class EssenceSection extends Section {
 	private Shadowrun6Character model;
 	private ObjectProperty<ComplexDataItem> showHelpFor = new SimpleObjectProperty<>();
 
+	private static Quality acclimQual = Shadowrun6Core.getItem(SR6Quality.class, "augmentation_acclimation");
+	private static MetamagicOrEcho transhum = Shadowrun6Core.getItem(MetamagicOrEcho.class, "transhumanism");
 
 	//-------------------------------------------------------------------
 	public EssenceSection(String title) {
@@ -69,8 +71,14 @@ public class EssenceSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		nfAcclimation   = new NumericalValueField<Quality,QualityValue>();
-		nfTranshumanism = new NumericalValueField<MetamagicOrEcho,MetamagicOrEchoValue>();
+		nfAcclimation   = new NumericalValueField<Quality,QualityValue>( ()-> {
+				QualityValue val = model.getQuality("augmentation_acclimation");
+				return (val==null)?(new QualityValue(acclimQual,0)):val;
+				});
+		nfTranshumanism = new NumericalValueField<MetamagicOrEcho,MetamagicOrEchoValue>( () -> {
+			MetamagicOrEchoValue val = model.getMetamagicOrEcho("transhumanism");
+			return (val==null)?(new MetamagicOrEchoValue(transhum)):val;
+			});
 		lbEssenceHole   = new Label("?");
 		lbEssenceHoleArt= new Label("?");
 		lbEssenceLost   = new Label("?");
@@ -118,6 +126,9 @@ public class EssenceSection extends Section {
 		logger.log(Level.DEBUG, "updateController");
 		this.control = ctrl;
 		model = ctrl.getModel();
+		nfAcclimation.setController(control.getQualityController());
+		nfTranshumanism.setController(control.getMetamagicOrEchoController());
+
 		refresh();
 	}
 
@@ -127,14 +138,13 @@ public class EssenceSection extends Section {
 	 */
 	public void refresh() {
 		//Acclimation
-		Quality acclimQual = Shadowrun6Core.getItem(SR6Quality.class, "augmentation_acclimation");
 		NumericalValueController<Quality, QualityValue> qCtrl = control.getQualityController();
 		QualityValue qVal = model.getQuality("augmentation_acclimation");
 		if (acclimQual!=null) {
 			if (qVal==null) {
 				qVal = new QualityValue(acclimQual, 0);
 			}
-			nfAcclimation.setData(qVal, new SimpleObjectProperty<NumericalValueController<Quality, QualityValue>>(qCtrl));
+//			nfAcclimation.setData(qVal, new SimpleObjectProperty<NumericalValueController<Quality, QualityValue>>(qCtrl));
 			nfAcclimation.setUserData(acclimQual);
 		}
 
@@ -146,7 +156,7 @@ public class EssenceSection extends Section {
 			if (mVal == null) {
 				mVal = new MetamagicOrEchoValue(transhum);
 			}
-			nfTranshumanism.setData(mVal, new SimpleObjectProperty<NumericalValueController<MetamagicOrEcho, MetamagicOrEchoValue>>(tCtrl));
+//			nfTranshumanism.setData(mVal, new SimpleObjectProperty<NumericalValueController<MetamagicOrEcho, MetamagicOrEchoValue>>(tCtrl));
 			nfTranshumanism.setUserData(Shadowrun6Core.getItem(MetamagicOrEcho.class, "transhumanism"));
 		}
 		boolean allowTransh = Boolean.parseBoolean(Shadowrun6Rules.ALLOW_TRANSHUMANISM.getDefaultValue()) && (transhum!=null);

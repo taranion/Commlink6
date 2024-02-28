@@ -351,7 +351,7 @@ public class LibraryPage extends Page {
 							)
 					);
 			page.setAppLayout(getAppLayout());
-			page.setCellFactory(lv -> new QualityListCell(null));
+			page.setCellFactory(lv -> new QualityListCell(null, Shadowrun6Tools.requirementResolver(Locale.getDefault())));
 			page.setFilterInjector(new FilterQualities());
 			getAppLayout().getApplication().openScreen(new ApplicationScreen(page));
 		} catch (Exception e) {
