@@ -33,6 +33,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import de.rpgframework.shadowrun6.chargen.jfx.selector.FilterItemEnhancement;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemEnhancementSelector;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
@@ -343,7 +344,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		//List<SR6ItemEnhancement> data = control.getEquipmentController().getAvailableEnhancementsFor(selectedItem);
 
 		//Predicate<ItemTemplate> templateFilter = i -> data.contains(i);
-		ItemEnhancementSelector selector = new ItemEnhancementSelector(control.getEquipmentController(), selectedItem, null);
+		ItemEnhancementSelector selector = new ItemEnhancementSelector(control.getEquipmentController(), selectedItem, new FilterItemEnhancement());
 		ManagedDialog dialog = new ManagedDialog(
 				ResourceI18N.get(UI, "dialog.add.modification.title"),
 				selector,
