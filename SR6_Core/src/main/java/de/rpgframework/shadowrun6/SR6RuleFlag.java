@@ -47,6 +47,9 @@ public enum SR6RuleFlag implements RuleFlag {
 	// Power Plays (Quality Fashion Influencer)
 	FASHION_50_PERCENT,
 
+	// 6WC: Physical monitor round down (e.g. Neoteny from 6WC)
+	PHYSICAL_ROUND_DOWN,
+
 	/** Used and standard cyberware gets upgraded by one */
 	CYBERADEPT_NOVICE,
 	/** Standard and alphacyberware gets upgraded by one (in addition to NOVICE) */

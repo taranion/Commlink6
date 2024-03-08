@@ -516,6 +516,7 @@
        <valmod type="ATTRIBUTE" ref="REACTION" value="-1" set="MAX" />
        <valmod type="ATTRIBUTE" ref="STRENGTH" value="-1" set="MAX" />
        <valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="-2" set="NATURAL" />
+       <itemmod type="RULE" ref="PHYSICAL_ROUND_DOWN" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="poor_healer" karma="8" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS" />
