@@ -58,6 +58,8 @@ public class CalculateSkillPools implements ProcessingStep {
 		sVal.setPool(pool);
 
 		// Clone pool for attribute, if possible
+		String memArtName = null;
+		int memArtVal  = 0;
 		ShadowrunAttribute attr = sVal.getSkill().getAttribute();
 		if (attr!=null) {
 //			pool = (Pool<Integer>) model.getAttribute(attr).getPool().clone();
@@ -65,6 +67,8 @@ public class CalculateSkillPools implements ProcessingStep {
 			pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(
 					Math.max(aVal.getModifiedValue(ValueType.ARTIFICIAL), aVal.getModifiedValue(ValueType.AUGMENTED)),
 					attr.getName(loc)));
+			memArtName = attr.getName(loc);
+			memArtVal = Math.max(aVal.getModifiedValue(ValueType.ARTIFICIAL), aVal.getModifiedValue(ValueType.AUGMENTED));
 		}
 
 		int augmentedMax = sVal.getDistributed() + 4;
@@ -143,6 +147,9 @@ public class CalculateSkillPools implements ProcessingStep {
 			}
 			sumArt += value;
 			pool.addStep(ValueType.ARTIFICIAL, toAdd);
+		}
+		if (sumArt>0) {
+			pool.addStep(ValueType.ARTIFICIAL, new PoolCalculation<Integer>(memArtVal, memArtName));
 		}
 		logger.log(Level.DEBUG, "ARTIFICIAL: {0}",pool.getCalculation(ValueType.ARTIFICIAL));
 
