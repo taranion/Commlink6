@@ -46,9 +46,6 @@ public class CalculatePersona implements ProcessingStep {
 		List<Modification> unprocessed = new ArrayList<>(previous);
 
 		logger.log(Level.TRACE,"START: process");
-		if (model.getName().contains("Puppy")) {
-			logger.log(Level.WARNING, "Trace here");
-		}
 		try {
 			// Ensure a persona is present
 			Persona persona = model.getPersona();
