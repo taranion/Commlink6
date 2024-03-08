@@ -119,6 +119,7 @@ import de.rpgframework.shadowrun6.proc.BuildForbiddenSources;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
 import de.rpgframework.shadowrun6.proc.CalculateEssence;
+import de.rpgframework.shadowrun6.proc.CalculateExowareBonus;
 import de.rpgframework.shadowrun6.proc.CalculateMeleeAndUnarmed;
 import de.rpgframework.shadowrun6.proc.CalculatePersona;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
@@ -181,6 +182,7 @@ public class Shadowrun6Tools {
 		CalculateAttributePools.class,
 		CalculateSkillPools.class,
 		CalculateMeleeAndUnarmed.class,
+		CalculateExowareBonus.class,
 		RealSINUpdater.class
 	);
 

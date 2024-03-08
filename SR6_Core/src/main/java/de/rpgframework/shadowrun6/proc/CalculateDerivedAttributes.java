@@ -196,7 +196,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 	}
 
 	//-------------------------------------------------------------------
-	private void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, int value, Object source) {
+	public static void addNaturalModifier(AttributeValue<ShadowrunAttribute> val, int value, Object source) {
 		ValueModification valMod = new ValueModification(ShadowrunReference.ATTRIBUTE, val.getModifyable().name(), value, source);
 		valMod.setSet(ValueType.NATURAL);
 		valMod.setOrigin(Origin.OUTSIDE);
