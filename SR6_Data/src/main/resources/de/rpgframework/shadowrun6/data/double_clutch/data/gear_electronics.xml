@@ -49,8 +49,8 @@
 			<checkmod type="ACTION" ref="matrix_perception" value="$RATING"  />
 			<checkmod type="ACTION" ref="matrix_search" value="$RATING"  />
 			<checkmod type="ACTION" ref="trace_icon" value="$RATING"  />
-			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX_VR_COLD" value="$RATING"  />
-			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX_VR_HOT" value="$RATING"  />
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_MATRIX_VR_COLD" value="$RATING"  />
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_MATRIX_VR_HOT" value="$RATING"  />
 		</modifications>
 	</item>
 
