@@ -46,7 +46,11 @@
 		<attrdef id="PRICE" value="$RATING*15000"/>
 		<flags><flag>AUGMENTATION</flag></flags>
 		<modifications>
-			<valmod type="ATTRIBUTE" ref="INTUITION" value="$RATING" cond="true" />
+			<checkmod type="ACTION" ref="matrix_perception" value="$RATING"  />
+			<checkmod type="ACTION" ref="matrix_search" value="$RATING"  />
+			<checkmod type="ACTION" ref="trace_icon" value="$RATING"  />
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX_VR_COLD" value="$RATING"  />
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX_VR_HOT" value="$RATING"  />
 		</modifications>
 	</item>
 
