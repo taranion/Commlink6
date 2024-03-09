@@ -69,6 +69,7 @@ import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Sense;
+import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -78,6 +79,8 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.FocusValueDescriptionPane;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
+import de.rpgframework.shadowrun6.items.AvailableSlot;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -121,6 +124,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private NavigButtonControl btnCtrl;
 
 	private T item;
+	private ItemHook hook;
 	private DataItemValue context;
 	private SR6PieceOfGearVariant selectedVariant;
 	private Integer selectedRating;
@@ -145,15 +149,16 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 	//-------------------------------------------------------------------
 	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl, CarryMode carry) {
-		this(ctrl, carry, null);
+		this(ctrl, carry, null, null);
 	}
 
 	//-------------------------------------------------------------------
-	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl, CarryMode carry, DataItemValue context) {
+	public ChoiceSelectorDialog(ComplexDataItemController<T,V> ctrl, CarryMode carry, ItemHook hook, DataItemValue context) {
 		super("Select",null, CloseType.CANCEL, CloseType.OK);
 		this.ctrl = ctrl;
 		this.carry = carry;
 		this.context = context;
+		this.hook  = hook;
 
 		content = new VBox(10);
 		CharacterController<ShadowrunAttribute,Shadowrun6Character> charCtrl = ctrl.getCharacterController();
@@ -220,39 +225,64 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	}
 
 	//-------------------------------------------------------------------
-	private void updateButtons() {
-		logger.log(Level.INFO, "updateButtons");
-		// Special handling for gear
-		if (item instanceof ItemTemplate) {
-			// Build item so far as possible
-			Shadowrun6Character lifeform = ctrl.getModel();
-			if (getDecisions().length>0) {
-				logger.log(Level.WARNING, "Mit decision");
+	private Possible updateButtonsForItemTemplate() {
+		CarriedItem<ItemTemplate> container = (context instanceof CarriedItem)?((CarriedItem<ItemTemplate>)context):null;
+		CarriedItem<ItemTemplate> carried = null;
+		ISR6EquipmentController control = (ISR6EquipmentController)ctrl;
+
+		// Build item so far as possible
+		Shadowrun6Character lifeform = ctrl.getModel();
+		OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem( (ItemTemplate)item, carry, selectedVariant, lifeform, true, (IReferenceResolver)context, getDecisions());
+		logger.log(Level.DEBUG, "Trying to build {0} returned {1}",carry,result);
+		if (result.get()!=null) {
+			logger.log(Level.INFO, "item to embed: {0}", result.get());
+			carried = result.get();
+			if (carried.getCarryMode()==CarryMode.EMBEDDED && container!=null) {
+				carried.setParent(container);
 			}
-			OperationResult<CarriedItem<ItemTemplate>> result = SR6GearTool.buildItem( (ItemTemplate)item, carry, selectedVariant, lifeform, true, (IReferenceResolver)context, getDecisions());
-			logger.log(Level.INFO, "Trying to build "+carry+" returned "+result);
-			if (result.get()!=null) {
-				logger.log(Level.DEBUG, "with item");
-				CarriedItem<ItemTemplate> carried = result.get();
-				if (carried.getCarryMode()==CarryMode.EMBEDDED && context instanceof CarriedItem<?>) {
-					carried.setParent( (CarriedItem<ItemTemplate>)context );
-				}
-				logger.log(Level.DEBUG, "item has mode "+carried.getCarryMode());
-				logger.log(Level.DEBUG, "Update description: "+bxDesc);
-				bxDesc.setData(carried);
-			} else
-				logger.log(Level.WARNING, "Not successful");
+			logger.log(Level.DEBUG, "item definition for {0} is {1} ",carry,((ItemTemplate)item).getMainOrVariant(carry));
+			logger.log(Level.DEBUG, "item def. class for {0} is {1} ",carry,((ItemTemplate)item).getMainOrVariant(carry).getClass());
+			logger.log(Level.DEBUG, "usage of {0} is {1} ",carry,((ItemTemplate)item).getMainOrVariant(carry).getUsage(carry));
+			bxDesc.setData(carried);
+		} else {
+			logger.log(Level.WARNING, "Not successful to build item");
+			return Possible.FALSE;
 		}
 
+		logger.log(Level.DEBUG, "from item {0}", item);
+		logger.log(Level.DEBUG, ".. and variant {0}", selectedVariant);
+		logger.log(Level.DEBUG, ".. build carried {0}", carried);
+
+
 		Possible possible = null;
-		logger.log(Level.INFO, "call canBeSelected on "+ctrl.getClass().getSimpleName()+" with "+Arrays.toString(getDecisions()));
-		if (item instanceof ItemTemplate && ctrl instanceof ISR6EquipmentController) {
+		if (carry==CarryMode.EMBEDDED) {
+			logger.log(Level.DEBUG, ".. and now try to {0} it in {1} of {2}", carry, hook, container);
+			logger.log(Level.INFO, "call canBeEmbedded on {0} with {1} in hook {2} ",ctrl.getClass().getSimpleName(),Arrays.toString(getDecisions()), hook);
 			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
-			possible = ((ISR6EquipmentController)ctrl).canBeSelected((ItemTemplate)item, variantID, carry, getDecisions() );
+			possible = control.canBeEmbedded(container, hook,
+						(ItemTemplate)item, variantID, getDecisions() );
+			logger.log(Level.INFO, "canBeEmbedded({0}) returns "+possible, carry);
+		} else {
+			logger.log(Level.INFO, "call canBeSelected on "+ctrl.getClass().getSimpleName()+" with "+Arrays.toString(getDecisions()));
+			String variantID = (selectedVariant!=null)?selectedVariant.getId():null;
+			possible = control.canBeSelected((ItemTemplate)item, variantID, carry, getDecisions() );
 			logger.log(Level.INFO, "canBeSelected({0}) returns "+possible, carry);
+		}
+
+		return possible;
+	}
+
+	//-------------------------------------------------------------------
+	private void updateButtons() {
+		logger.log(Level.INFO, "updateButtons");
+		Possible possible = null;
+		// Special handling for gear
+		if (item instanceof ItemTemplate) {
+			possible = updateButtonsForItemTemplate();
 		} else {
 			possible = ctrl.canBeSelected(item, getDecisions() );
 		}
+
 		// Set status
 		ToDoElement problem = possible.getMostSevere();
 		if (problem==null) {
@@ -505,6 +535,10 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				forceTitle);
 		ret.add(label);
 		switch ((ShadowrunReference) choice.getChooseFrom()) {
+		case ACTION:
+//			ret.add( handleGeneric(ShadowrunElement.class, choice, item));
+			ret.add( handleACTION(item, choice) );
+			break;
 		case ADEPT_POWER:
 			ret.add( handleGeneric(item, choice, AdeptPower.class, null));
 			break;
@@ -1426,6 +1460,45 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		 });
 		content.getChildren().add(cbSub);
 		return cbSub;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleACTION(ComplexDataItem item, Choice choice) {
+		ChoiceBox<Shadowrun6Action> cbAmmoType = new ChoiceBox<>();
+		cbAmmoType.setConverter(new StringConverter<Shadowrun6Action>() {
+			public Shadowrun6Action fromString(String value) { return null;}
+			public String toString(Shadowrun6Action value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		if (choice.getChoiceOptions()!=null && choice.getChoiceOptions().length>0) {
+			// Specific actions
+			List<String> options = List.of(choice.getChoiceOptions());
+			for (Shadowrun6Action tmp : Shadowrun6Core.getItemList(Shadowrun6Action.class)) {
+				if (options.contains(tmp.getId()))
+					cbAmmoType.getItems().add(tmp);
+			}
+		} else {
+			// All actions unfiltered
+			cbAmmoType.getItems().addAll(Shadowrun6Core.getItemList(Shadowrun6Action.class));
+		}
+		Collections.sort(cbAmmoType.getItems(), new Comparator<Shadowrun6Action>() {
+			public int compare(Shadowrun6Action o1, Shadowrun6Action o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+
+
+		cbAmmoType.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+
+			updateButtons();
+			showHelpFor(n);
+		 });
+		content.getChildren().add(cbAmmoType);
+
+		return cbAmmoType;
 	}
 
 	//-------------------------------------------------------------------
