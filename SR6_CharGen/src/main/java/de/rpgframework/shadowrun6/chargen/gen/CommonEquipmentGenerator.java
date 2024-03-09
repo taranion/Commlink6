@@ -26,6 +26,7 @@ import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.PriceModifiers;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -76,7 +77,8 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 		// Check availability
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
 			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
-			if (avail!=null && avail.getValue() >= 7) {
+			int max = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_AVAILABILITY);
+			if (avail!=null && avail.getValue() > max) {
 				return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH, avail.getValue());
 			}
 		}
