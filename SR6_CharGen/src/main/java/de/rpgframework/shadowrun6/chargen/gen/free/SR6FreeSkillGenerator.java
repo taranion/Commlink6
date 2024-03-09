@@ -256,11 +256,6 @@ public class SR6FreeSkillGenerator extends CommonSkillGenerator {
 	@Override
 	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec,
 			boolean expertise) {
-		/*
-		 * You cannot acquire more than one specialization in a skill at character creation,
-		 * and you cannot acquire an expertise.
-		 */
-		if (expertise) return Possible.FALSE;
 
 		// Check if there already is one specialization in this skill
 		if (!skillVal.getSpecializations().isEmpty())
