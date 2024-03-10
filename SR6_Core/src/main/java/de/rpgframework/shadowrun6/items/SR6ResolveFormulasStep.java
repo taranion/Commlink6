@@ -57,19 +57,19 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 				conv = new IntegerConverter();
 			Object resolved = conv.read(resolvedString);
 
-			logger.log(Level.DEBUG, "{0}: RAW {1} ==> formula={2} ==> {3}",val.getModifyable(), val.getRawValue(), formula, resolved);
+			logger.log(Level.TRACE, "{0}: RAW {1} ==> formula={2} ==> {3}",val.getModifyable(), val.getRawValue(), formula, resolved);
 			if (resolved instanceof Integer) {
 				ItemAttributeNumericalValue<?> aVal = new ItemAttributeNumericalValue<>(
 						val.getModifyable());
 				aVal.setDistributed((int) resolved);
 				model.setAttribute(aVal.getModifyable(), aVal);
-				logger.log(Level.DEBUG, "Set attribute "+val+" to numerical "+aVal+" because type is "+resolved.getClass());
+				logger.log(Level.TRACE, "Set attribute "+val+" to numerical "+aVal+" because type is "+resolved.getClass());
 			} else if (resolved instanceof Float) {
 				ItemAttributeFloatValue<?> aVal = new ItemAttributeFloatValue<>(
 						val.getModifyable());
 				aVal.setDistributed((float) resolved);
 				model.setAttribute(aVal.getModifyable(), aVal);
-				logger.log(Level.DEBUG, "Set attribute "+val+" to float "+aVal+" because type is "+resolved.getClass());
+				logger.log(Level.TRACE, "Set attribute "+val+" to float "+aVal+" because type is "+resolved.getClass());
 			} else {
 				ItemAttributeObjectValue<?> aVal = new ItemAttributeObjectValue<>(val);
 				aVal.setValue(resolved);
