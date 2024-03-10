@@ -46,9 +46,6 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 			}
 			return new OperationResult<List<Modification>>(unprocessed);
 		}
-		if (model.getKey().equals("armor_jacket")) {
-			logger.log(Level.ERROR, "...Step from here");
-		}
 
 		// Add prices of accessories
 		for (CarriedItem<? extends PieceOfGear> carried : model.getAccessories()) {
@@ -69,13 +66,15 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 //			valMod.setOrigin(Origin.CHILDREN);
 //			attrib.addIncomingModification(valMod );
 		}
-		logger.log(Level.INFO, "Price before multiply {0}", model.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
-
-		if (model.getCount()>1) {
-			int total = attrib.getModifiedValue() * (model.getCount()-1);
-			attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), total, "+"+(model.getCount()-1)+"x") );
-		}
-		logger.log(Level.INFO, "Price after multiply {0}", model.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+//		logger.log(Level.INFO, "Price before multiply {0}", model.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+//
+//		if (model.getCount()>1) {
+//			int total = attrib.getModifiedValue() * (model.getCount()-1);
+//			ValueModification valMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), total, "+"+(model.getCount()-1)+"x");
+//			valMod.setOrigin(Origin.OUTSIDE);
+//			attrib.addIncomingModification(valMod);
+//		}
+//		logger.log(Level.INFO, "Price after multiply {0}", model.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 
 		return new OperationResult<List<Modification>>(unprocessed);
 	}

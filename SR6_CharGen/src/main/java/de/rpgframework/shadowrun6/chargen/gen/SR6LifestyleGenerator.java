@@ -286,7 +286,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 					logger.log(Level.DEBUG, "Don't pay for auto-added lifestyle {0}", val.getKey());
 					continue;
 				}
-				logger.log(Level.DEBUG, "Pay {1} for lifestyle {1}", val.getNameWithRating(), getLifestyleCost(val));
+				logger.log(Level.INFO, "Pay {1} for lifestyle {1}", val.getNameWithRating(), getLifestyleCost(val));
 				model.setNuyen( model.getNuyen() - getLifestyleCost(val));
 			}
 

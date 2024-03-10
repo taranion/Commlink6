@@ -265,7 +265,6 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 						cost *= tmp.getCount();
 					//if (logger.isLoggable(Level.TRACE))
 					logger.log(Level.INFO, "Pay {0} for {1}   (before {2})", cost, tmp.getKey(), nuyen);
-					logger.log(Level.INFO, "  accessories {0}", tmp.getAccessories());
 					nuyen -= cost;
 				}
 
@@ -288,11 +287,10 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	private void applyPriceModifiers(CarriedItem<ItemTemplate> tmp) {
-		
+
 		ItemAttributeNumericalValue<SR6ItemAttribute> priceVal = tmp.getAsValue(SR6ItemAttribute.PRICE);
-		logger.log(Level.ERROR, "applyPriceModifiers({0}: {1} bzw. {2}", tmp, priceVal, priceVal.getIncomingModifications());
-		logger.log(Level.ERROR, "  accessories {0}", tmp.getAccessories());
-		double baseCost = priceVal.getModifiedValue();
+
+		double baseCost = priceVal.getDistributed();
 		// Add price modifications that apply
 		for (ValueModification priceMod : priceMods) {
 			PriceModifiers pmType = priceMod.getResolvedKey();
@@ -318,7 +316,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				break;
 			}
 		}
-
+		logger.log(Level.ERROR, "applyPriceModifiers({0}: {1} ==> {2}", tmp, baseCost, priceVal.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------

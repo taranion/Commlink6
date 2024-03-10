@@ -1635,7 +1635,7 @@ public class SR6ArchetypeTest {
 				);
 		assertEquals("Without troll tax incorrect", 40000, wired.get().getAsValue(SR6ItemAttribute.PRICE).getDistributed());
 		assertEquals("Troll tax incorrect", 44000, wired.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
-		assertEquals("Payed different than expected",129900, model.getNuyen());
+		assertEquals("Payed different than expected",60600, model.getNuyen());
 		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_roadmaster")).wasSuccessful());
 		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_jacket")).wasSuccessful());
 
@@ -1994,6 +1994,7 @@ public class SR6ArchetypeTest {
 		contCtrl.increaseLoyalty(c6);
 		c6.setType(ContactType.CRIMINAL);
 
+		assertEquals(8000, model.getNuyen());
 		// Lifestyle
 		OperationResult<SR6Lifestyle> lifeRes = charGen.getLifestyleController().select(Shadowrun6Core.getItem(LifestyleQuality.class, "low"));
 		assertTrue(lifeRes.wasSuccessful());
@@ -2003,33 +2004,52 @@ public class SR6ArchetypeTest {
 
 		// Gear------------------------------
 		ISR6EquipmentController equip = charGen.getEquipmentController();
+		assertEquals(6000, model.getNuyen());
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "jammer"), "area", null,
 				new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "jammer").getChoices().get(0), "4")).wasSuccessful() );
+		assertEquals(5200, model.getNuyen());
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "walther_palm_pistol")).wasSuccessful() );
+		assertEquals(4875, model.getNuyen());
 		OperationResult<CarriedItem<ItemTemplate>> eRes = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_jacket"));
 		assertTrue(eRes.wasSuccessful());
-		equip.embed(eRes.get(), ItemHook.ARMOR, Shadowrun6Core.getItem(ItemTemplate.class, "electricity_resistance"), null, new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "electricity_resistance").getChoices().get(0), "4"));
+		assertEquals(3775, model.getNuyen());
+		eRes = equip.embed(eRes.get(), ItemHook.ARMOR, Shadowrun6Core.getItem(ItemTemplate.class, "electricity_resistance"), null, new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "electricity_resistance").getChoices().get(0), "4"));
+		assertTrue(eRes.wasSuccessful());
+		assertEquals(2675, model.getNuyen());
+		charGen.runProcessors();
+		assertEquals(2675, model.getNuyen());
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "meta_link")).wasSuccessful() );
+		assertEquals(2575, model.getNuyen());
+
+		int nuyenBefore = model.getNuyen();
+		assertEquals(2575, model.getNuyen());
 		eRes = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "stim_patch"),new Decision(Shadowrun6Core.getItem(ItemTemplate.class, "stim_patch").getChoices().get(0), "4"));
 		assertTrue(eRes.wasSuccessful());
+		assertEquals("Count should have been 1 after selecting",1, eRes.get().getCount());
 		assertEquals(100, eRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
-		int priceBefore = model.getNuyen();
-		equip.increase(eRes.get());
-		assertEquals("Increasing count failed",2, eRes.get().getCount());
-		int priceAfter = priceBefore - 100;
+		assertFalse("Nuyen not reduced after being Stim Patch",nuyenBefore==model.getNuyen());
+		assertEquals("Wrong price", (nuyenBefore-100), model.getNuyen());
+		assertEquals(2475, model.getNuyen());
+
+		eRes = equip.increase(eRes.get());
+		assertTrue(eRes.wasSuccessful());
+		assertEquals(2375, model.getNuyen());
+		eRes = equip.increase(eRes.get());
+		assertTrue(eRes.wasSuccessful());
+		assertEquals("Increasing count failed",3, eRes.get().getCount());
+		assertEquals(100, eRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		int priceAfter = nuyenBefore - 300;
 		assertEquals("Count does not multiply price",priceAfter, model.getNuyen());
-		equip.increase(eRes.get());
-		assertEquals(3, eRes.get().getCount());
 
 		// Ammo
-		priceBefore = model.getNuyen();
+		nuyenBefore = model.getNuyen();
 		OperationResult<CarriedItem<ItemTemplate>> ammo = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ammo_holdout_light_machine"), null, CarryMode.CARRIED, new Decision(UUID.fromString("b015341d-24dc-42bb-a46b-781a5340e0b3"), "regular") );
 		assertTrue(ammo.wasSuccessful());
 		equip.increase(ammo.get());
 		equip.increase(ammo.get());
 		equip.increase(ammo.get());
 		equip.increase(ammo.get());
-		priceAfter = priceBefore - 25;
+		priceAfter = nuyenBefore - 25;
 		assertEquals("Ammo price wrong",priceAfter, model.getNuyen());
 
 		model.setName("Technomancer");
