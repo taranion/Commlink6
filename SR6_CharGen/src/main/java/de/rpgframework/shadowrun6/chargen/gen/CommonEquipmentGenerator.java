@@ -265,6 +265,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 						cost *= tmp.getCount();
 					//if (logger.isLoggable(Level.TRACE))
 					logger.log(Level.INFO, "Pay {0} for {1}   (before {2})", cost, tmp.getKey(), nuyen);
+					logger.log(Level.INFO, "  accessories {0}", tmp.getAccessories());
 					nuyen -= cost;
 				}
 
@@ -287,8 +288,11 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	private void applyPriceModifiers(CarriedItem<ItemTemplate> tmp) {
+		
 		ItemAttributeNumericalValue<SR6ItemAttribute> priceVal = tmp.getAsValue(SR6ItemAttribute.PRICE);
-		double baseCost = priceVal.getDistributed();
+		logger.log(Level.ERROR, "applyPriceModifiers({0}: {1} bzw. {2}", tmp, priceVal, priceVal.getIncomingModifications());
+		logger.log(Level.ERROR, "  accessories {0}", tmp.getAccessories());
+		double baseCost = priceVal.getModifiedValue();
 		// Add price modifications that apply
 		for (ValueModification priceMod : priceMods) {
 			PriceModifiers pmType = priceMod.getResolvedKey();
@@ -305,7 +309,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				break;
 			case ARMOR:
 				if (type==ItemType.ARMOR || type==ItemType.ARMOR_ADDITION) {
-					System.err.println("Add extra "+extraCost+" to "+tmp+"   factor="+factor);
+					System.err.println("CommonEquipmentGenerator: Add extra "+extraCost+" to "+tmp+"   factor="+factor);
 					priceVal.addIncomingModification(toAdd);
 				}
 				break;

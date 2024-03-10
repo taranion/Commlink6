@@ -11,6 +11,7 @@ import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.PieceOfGear;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -45,6 +46,9 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 			}
 			return new OperationResult<List<Modification>>(unprocessed);
 		}
+		if (model.getKey().equals("armor_jacket")) {
+			logger.log(Level.ERROR, "...Step from here");
+		}
 
 		// Add prices of accessories
 		for (CarriedItem<? extends PieceOfGear> carried : model.getAccessories()) {
@@ -59,13 +63,19 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 			}
 			int cost = aVal.getModifiedValue();
 			logger.log(Level.INFO, "Increase cost by {0} from {1}", cost, carried.getKey());
-			attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), cost) );
+			attrib.setDistributed( attrib.getDistributed() + cost);
+//			ValueModification valMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), cost);
+//			valMod.setSource("item:"+carried.getKey());
+//			valMod.setOrigin(Origin.CHILDREN);
+//			attrib.addIncomingModification(valMod );
 		}
+		logger.log(Level.INFO, "Price before multiply {0}", model.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 
 		if (model.getCount()>1) {
 			int total = attrib.getModifiedValue() * (model.getCount()-1);
 			attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), total, "+"+(model.getCount()-1)+"x") );
 		}
+		logger.log(Level.INFO, "Price after multiply {0}", model.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 
 		return new OperationResult<List<Modification>>(unprocessed);
 	}

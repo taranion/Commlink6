@@ -629,9 +629,10 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 				return res;
 			}
 			container.addAccessory(res.get(), slot);
-			logger.log(Level.DEBUG, "recalculate item after embedding");
+			logger.log(Level.INFO, "recalculate item after embedding  (worth before: {0})", container.getAsValue(SR6ItemAttribute.PRICE));
 			GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
 			logger.log(Level.WARNING, "Embedded {0} into {1}/{2}", value.getId()+"/"+variant, container.getKey(), container.getUuid());
+			logger.log(Level.INFO, "recalculate item after embedding  (worth after: {0})", container.getAsValue(SR6ItemAttribute.PRICE));
 
 			parent.runProcessors();
 			return res;
