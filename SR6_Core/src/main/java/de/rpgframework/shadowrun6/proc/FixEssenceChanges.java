@@ -102,7 +102,6 @@ public class FixEssenceChanges implements ProcessingStep {
 
 			int essence = 6000;
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-				logger.log(Level.INFO, "Test "+item.getKey());
 				// Ignore pure virtual items
 				if (model.getVirtualCarriedItems().contains(item))
 					continue;
