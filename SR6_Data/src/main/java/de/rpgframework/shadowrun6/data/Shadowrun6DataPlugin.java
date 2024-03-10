@@ -225,7 +225,7 @@ public class Shadowrun6DataPlugin  {
 				}
 			} else {
 				if (filenames.indexOf(file)>=2)
-					logger.log(Level.WARNING, "Failed on ''placeholder/{0}''", file);
+					logger.log(Level.DEBUG, "Failed on ''placeholder/{0}''", file);
 			}
 		}
 		return null;
