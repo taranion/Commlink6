@@ -95,7 +95,7 @@
    <item id="pack_hacker_f" price="64870" type="PACK" subtype="PACK_AUGMENT" >
     <attrdef id="ESSENCECOST" value="2.8" />
       <modifications>
-         <itemmod type="GEAR" apply="CHARACTER" ref="cyberjack">
+         <itemmod type="GEAR" apply="CHARACTER" ref="cyberjack" id="adacb827-d331-483f-bba6-3a7c855b08c2">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="USED"/>
          </itemmod>
@@ -103,11 +103,11 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
          </itemmod>
          <embed  type="GEAR" intoId="ed3c4dfa-d05e-4fb0-b335-829117304a90" intoType="HOOK" intoRef="CYBERDECK" ref="erika_mcd6" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
+         <itemmod type="GEAR" apply="CHARACTER" ref="datajack" id="df2df752-1127-4017-9b5f-a2d4d252c008">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
          </itemmod>
-         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" variant="regular" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" variant="regular" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="baby_monitor" variant="regular" id="f0056a8a-86b8-4232-a684-43add1f7e70b"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="signal_scrubber" variant="regular" id="945adb97-26b9-431f-9132-06463bdb06ae"/>
       </modifications>
    </item>
 

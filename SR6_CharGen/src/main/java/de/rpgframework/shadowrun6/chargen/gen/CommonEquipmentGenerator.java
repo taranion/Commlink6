@@ -130,6 +130,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				return new OperationResult<>(poss);
 			}
 
+			logger.log(Level.WARNING, "Now build CarriedItem of {0}  in mode {1}", value, mode);
 			OperationResult<CarriedItem<ItemTemplate>> ret = SR6GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
@@ -406,9 +407,9 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	public void expandPACK(CarriedItem<ItemTemplate> item) {
-		logger.log(Level.ERROR, "TODO: expandPACK");
+		logger.log(Level.ERROR, "TODO: expandPACK {0}", item);
 		for (Modification mod : item.getOutgoingModifications() ) {
-			logger.log(Level.ERROR, "Expand "+mod.getClass()+" = "+mod);
+			logger.log(Level.ERROR, "Expand "+mod);
 			ApplyModificationsGeneric.applyModification(getModel(), mod);
 		}
 		for (Modification mod : item.getIncomingModifications() ) {

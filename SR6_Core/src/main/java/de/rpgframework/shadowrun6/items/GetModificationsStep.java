@@ -11,6 +11,7 @@ import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.AItemEnhancement;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.items.OperationMode;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
@@ -100,7 +101,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			if (mod.getLookupTable()!=null) {
 				int index = 1;
 				try { index = Integer.parseInt(result); } catch (NumberFormatException nfe) {
-					logger.log(Level.ERROR, "Found a table in {1}, but index is not a number: {0}",result, mod);
+					logger.log(Level.ERROR, "Found a table in {1}, but index is not a number: {0}/{2}",result, mod, mod.getFormula());
 				}
 				if (index>=mod.getLookupTable().length) {
 					logger.log(Level.ERROR, "Found a table in {1}, but index {0} is outside table",index, mod);
@@ -157,7 +158,22 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			List<Modification> unprocessed) {
 
 		if (model.getResolved() != null) {
-			model.getResolved().getOutgoingModifications().forEach(m ->  decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac));
+			model.getResolved().getOutgoingModifications().forEach(m ->  {
+				if (m.getReferenceType()==ShadowrunReference.GEAR &&  m instanceof DataItemModification) {
+					ItemTemplate pack = ((DataItemModification)m).getResolvedKey();
+					if (pack!=null && pack.getItemType()==ItemType.PACK) {
+						logger.log(Level.WARNING, "Gear {0} adds a {1} PACK", model.getKey(), pack.getId());
+						for (Modification mod : pack.getOutgoingModifications()) {
+							decideModification(mod, unprocessed, model, charac);
+						}
+						logger.log(Level.WARNING, "Done adding from PACK");
+					} else {
+						decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac);
+					}
+				} else {
+					decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac);
+				}
+			});
 		}
 		if (model.getVariant() != null) {
 			model.getVariant().getOutgoingModifications().forEach(m -> decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac));

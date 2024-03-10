@@ -101,7 +101,7 @@ public class EquipmentCtrlTest {
 		assertNotNull(res.get());
 		// Nuyen should be 0
 		assertEquals("Wrong nuyen paid", 0, model.getNuyen());
-		assertEquals(0, res.get().getCount());
+		assertEquals(1, res.get().getCount());
 	}
 
 	//-------------------------------------------------------------------

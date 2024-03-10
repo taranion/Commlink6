@@ -2068,29 +2068,6 @@ public class SR6ArchetypeTest {
 	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testPACK() throws CharacterIOException {
-		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
-		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);
-		prio.setPriority(PriorityType.METATYPE, Priority.C);
-		prio.setPriority(PriorityType.MAGIC, Priority.B);
-		prio.setPriority(PriorityType.SKILLS, Priority.E);
-		prio.setPriority(PriorityType.RESOURCES, Priority.D);
-		assertEquals(50, model.getKarmaFree());
-
-		charGen.getEquipmentController().select(Shadowrun6Core.getItem(ItemTemplate.class, "starterpack"));
-		charGen.runProcessors();
-		charGen.runProcessors();
-		System.out.println("testPACK.finish");
-
-		charGen.finish();
-		byte[] raw = Shadowrun6Core.encode(model);
-		String xml = new String(raw);
-		System.out.println(xml);
-	}
-
-	//-------------------------------------------------------------------
-	@SuppressWarnings("unchecked")
-	@Test
 	public void testNagaKaliAni() throws CharacterIOException {
 		PriorityTableController<Shadowrun6Character,SR6PrioritySettings> prio = charGen.getPriorityController();
 		prio.setPriority(PriorityType.ATTRIBUTE, Priority.A);

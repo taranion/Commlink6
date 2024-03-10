@@ -546,6 +546,14 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			}
 		}
 
+		if (value.getId().equals("smartgun_system")) {
+			logger.log(Level.INFO, "mode {0}", toEmbed.getCarryMode());
+			logger.log(Level.INFO, "variantID {0}", toEmbed.getVariantID());
+			logger.log(Level.INFO, "variant {0}", toEmbed.getVariant());
+			logger.log(Level.INFO, "usages {0}", toEmbed.getAllowedHooks());
+			logger.log(Level.WARNING, "SMARTGUN");
+		}
+
 		// Check if capacity is sufficient
 		AvailableSlot realSlot = (AvailableSlot) container.getSlot(slot);
 		logger.log(Level.INFO, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
