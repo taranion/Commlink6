@@ -1863,7 +1863,7 @@ public class Shadowrun6Tools {
 		} else {
 			CarriedItem<ItemTemplate> best = null;
 			int bestSum = 0;
-			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItemsRecursive()) {
 				if (!item.hasAttribute(SR6ItemAttribute.DATA_PROCESSING))
 					continue;
 				item.removeFlag(SR6ItemFlag.PRIMARY);
@@ -1897,7 +1897,7 @@ public class Shadowrun6Tools {
 		} else {
 			CarriedItem<ItemTemplate> bestAS = null;
 			int bestSum = 0;
-			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+			for (CarriedItem<ItemTemplate> item : model.getCarriedItemsRecursive()) {
 				if (!item.hasAttribute(SR6ItemAttribute.ATTACK))
 					continue;
 				item.removeFlag(SR6ItemFlag.PRIMARY);
