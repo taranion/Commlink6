@@ -12,8 +12,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.data.RuleFlag;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -93,6 +95,36 @@ public class PersonaTest {
 		assertEquals(9, model.getPersona().getAttack().getModifiedValue());
 		assertEquals(7, model.getPersona().getSleaze().getModifiedValue());
 		assertEquals(8, model.getPersona().getDataProcessing().getModifiedValue());
+		assertEquals(8, model.getPersona().getFirewall().getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testPersonaDetectionForHeadware() {
+		ItemTemplate headware = Shadowrun6Core.getItem(ItemTemplate.class, "cyberdeck");
+		CarriedItem<ItemTemplate> headwareCI = SR6GearTool.buildItem(headware, CarryMode.IMPLANTED, null, true).get();
+
+		ItemTemplate deck = Shadowrun6Core.getItem(ItemTemplate.class, "shiawase_cyber6");
+		CarriedItem<ItemTemplate> deckCI = SR6GearTool.buildItem(deck, CarryMode.EMBEDDED, null, true).get();
+		headwareCI.addAccessory(deckCI, ItemHook.CYBERDECK);
+
+		ItemTemplate jack = Shadowrun6Core.getItem(ItemTemplate.class, "cyberjack");
+		CarriedItem<ItemTemplate> jackCI = SR6GearTool.buildItem(jack, CarryMode.IMPLANTED, null, true, new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD"), new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "6")).get();
+
+		Shadowrun6Character model = new Shadowrun6Character();
+		model.addCarriedItem(jackCI);
+		model.addCarriedItem(headwareCI);
+
+
+		System.out.println("testPersona: runProcessor----------------------");
+		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
+
+		assertNotNull(model.getPersona());
+		assertTrue( jackCI.hasFlag(SR6ItemFlag.PRIMARY));
+		assertTrue( deckCI.hasFlag(SR6ItemFlag.PRIMARY));
+		assertEquals(8, model.getPersona().getAttack().getModifiedValue());
+		assertEquals(7, model.getPersona().getSleaze().getModifiedValue());
+		assertEquals(9, model.getPersona().getDataProcessing().getModifiedValue());
 		assertEquals(8, model.getPersona().getFirewall().getModifiedValue());
 	}
 
