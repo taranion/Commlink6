@@ -3,18 +3,6 @@
 
 <!-- Cyberware -->
 
-<!-- New control rig not necessary as is same as DE version of control rig in Core
-	<item avail="4L" price="30000" id="control_rig_DC" type="CYBERWARE" subtype="CYBER_HEADWARE">
-		<choices>
-			<choice uuid="<GENERATE NEW UUID>" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
-		</choices>
-		<usage mode="IMPLANTED"/>
-		<attrdef id="PRICE" value="$RATING*30000"/>
-		<attrdef id="ESSENCECOST" value="$RATING"/>
-		<flags><flag>AUGMENTATION</flag></flags>
-	</item>
- -->
-
 <!-- Note: The ability to implement a remote control rig as cyberware is added as <useas> to the control rigs in Core -->
 
 	<item avail="4L" price="20000" id="medullan_processors" type="CYBERWARE" subtype="CYBER_HEADWARE">
@@ -37,6 +25,18 @@
 			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_MATRIX_VR_HOT"  value="$RATING" apply="CHARACTER"/>
 		</modifications>
 	</item>
+
+   <item avail="4L" price="4000" id="rcc_headware" type="CYBERWARE" subtype="CYBER_HEADWARE">
+  		<usage mode="EMBEDDED" slot="HEADWARE_IMPLANT" value="3"/>
+   	<flags><flag>AUGMENTATION</flag></flags>
+   	<variant id="bodyware">
+	   	<usage mode="IMPLANTED"/>
+	   	<attrdef id="ESSENCECOST" value="0.3"/>
+   	</variant>
+     <modifications>
+         <itemmod type="HOOK" ref="RCC"/>
+     </modifications>
+   </item>
 
 	<item id="simsense_overdrive" avail="4L" type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
