@@ -141,22 +141,15 @@
 
 	<!-- Human variants -->
 	<metatype id="nartaki" variantof="human" size="175" weight="86" karma="5">
-     <choices>
-       <choice type="SUBSELECT" ref="variant" uuid="c3250d9c-227c-442e-918e-e328749e8bb1">
-         <subOption id="one_extra">
-				<modifications>
-          		 <valmod type="QUALITY" ref="shiva_arms" value="1" set="NATURAL"/>
-				</modifications>
-         </subOption>
-         <subOption id="two_extra" cost="5">
-				<modifications>
-          		 <valmod type="QUALITY" ref="shiva_arms" value="2" set="NATURAL"/>
-				</modifications>
-         </subOption>
-       </choice>
-     </choices>
 		<modifications>
-           <itemmod type="QUALITY" ref="striking_skin"/>
+			<valmod type="QUALITY" ref="shiva_arms" value="1" set="NATURAL"/>
+         <itemmod type="QUALITY" ref="striking_skin"/>
+		</modifications>
+	</metatype>
+	<metatype id="nartaki2" variantof="human" size="175" weight="86" karma="10">
+		<modifications>
+      	<valmod type="QUALITY" ref="shiva_arms" value="2" set="NATURAL"/>
+         <itemmod type="QUALITY" ref="striking_skin"/>
 		</modifications>
 	</metatype>
 	<metatype id="valkyrie" variantof="human" size="176" weight="115" karma="15">
