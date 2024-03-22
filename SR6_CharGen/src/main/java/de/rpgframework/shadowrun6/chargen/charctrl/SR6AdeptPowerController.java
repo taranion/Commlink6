@@ -154,7 +154,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 
 		// Power may not be auto-added
 		if (value.isAutoAdded())
-			return new Possible(Severity.INFO, IRejectReasons.RES, IRejectReasons.IMPOSS_AUTO_ADDED);
+			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_AUTO_ADDED);
 
 		return Possible.TRUE;
 	}

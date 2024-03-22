@@ -290,6 +290,11 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		if (!getSelected().contains(value)) {
 			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
+
+		// may not be deleted, because auto-added
+		if (value.isAutoAdded())
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_AUTO_ADDED);
+
 		return Possible.TRUE;
 	}
 	//-------------------------------------------------------------------
