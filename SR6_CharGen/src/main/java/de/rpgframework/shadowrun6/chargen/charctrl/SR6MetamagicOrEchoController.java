@@ -154,10 +154,12 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			list = getSelected().stream()
 					.filter(m -> m.getModifyable()!=null)
 					.filter(m -> m.getModifyable().getType() == Type.METAMAGIC || m.getModifyable().getType() == Type.METAMAGIC_ADEPT)
+					.filter(m -> !m.isAutoAdded())
 					.collect(Collectors.toList());
 		} else if (type != null && type.usesResonance()) {
 			list = getSelected().stream()
 					.filter(m -> m.getModifyable().getType() == Type.ECHO)
+					.filter(m -> !m.isAutoAdded())
 					.collect(Collectors.toList());
 		} else {
 			if (meta.isAI()) {
