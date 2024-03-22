@@ -112,6 +112,7 @@ public class ResetModifications implements ProcessingStep {
 			}
 
 			// Remove all auto-metaechoes
+			model.clearAutoMetamagicOrEchoes();
 			for (MetamagicOrEchoValue val : new ArrayList<>(model.getMetamagicOrEchoes())) {
 				boolean remove = val.isAutoAdded();
 				val.clearIncomingModifications();
