@@ -316,6 +316,21 @@ public class ItemUtilJFX {
 			case WEAPON_SPECIAL:
 				addWeaponColumns(item, model, carry, table, possibilities);
 				break;
+			case ARMOR:
+				addArmorColumns(item, model, carry, table, possibilities);
+				break;
+			case CYBERDECK:
+			case ELECTRONICS:
+				addMatrixDeviceColumns(item, model, carry, table, possibilities);
+				break;
+			case DRONE_LARGE:
+			case DRONE_MEDIUM:
+			case DRONE_SMALL:
+			case DRONE_MICRO:
+			case DRONE_MINI:
+			case VEHICLES:
+				addVehicleColumns(item, model, carry, table, possibilities);
+				break;
 			default:
 				logger.log(Level.WARNING,"No special display for itemtype "+item.getItemType(carry));
 			}
@@ -708,6 +723,141 @@ public class ItemUtilJFX {
 	}
 
 	//-------------------------------------------------------------------
+	private static void addArmorColumns(ItemTemplate item, Shadowrun6Character model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
+		if (item==null)
+			throw new NullPointerException("Empty item");
+
+		boolean hasM = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.FIREMODES)!=null);
+		boolean hasA = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.AMMUNITION)!=null);
+
+		int COL_ARM  = 0;
+		int COL_SOC   = 1;
+
+		Label heaArm = new Label(SR6ItemAttribute.DEFENSE_PHYSICAL.getShortName());
+		Label heaSoc = new Label(SR6ItemAttribute.DEFENSE_SOCIAL.getShortName());
+		heaArm.setStyle("-fx-padding: 0 5 0 5");
+		heaSoc.setStyle("-fx-padding: 0 5 0 5");
+//		GridPane.setMargin(heaArm, new Insets(0,5,0,5));
+//		GridPane.setMargin(heaSoc, new Insets(0,5,0,5));
+
+		heaArm.getStyleClass().add("table-head");
+		heaSoc.getStyleClass().add("table-head");
+
+		heaArm.setMaxWidth(Double.MAX_VALUE);
+		heaSoc.setMaxWidth(Double.MAX_VALUE);
+
+		heaArm.setAlignment(Pos.CENTER);
+		heaSoc.setAlignment(Pos.CENTER);
+
+		int startCol = table.getColumnCount();
+		table.add(heaArm, startCol+COL_ARM, 0);
+		table.add(heaSoc, startCol+COL_SOC, 0);
+
+		// Now add data
+		for (int i = 0; i < possibilities.size(); i++) {
+			AGearData data = possibilities.get(i);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.DEFENSE_PHYSICAL), startCol+COL_ARM, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.DEFENSE_SOCIAL), startCol+COL_SOC, i+1);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private static void addVehicleColumns(ItemTemplate item, Shadowrun6Character model, CarryMode carry, GridPane table, List<AGearData> possibilities) {
+		if (item==null)
+			throw new NullPointerException("Empty item");
+
+		boolean hasS = possibilities.stream().anyMatch(p -> p.getAttribute(SR6ItemAttribute.SEATS)!=null);
+
+		int COL_HAND = 0;
+		int COL_ACCL = 1;
+		int COL_SPDI = 2;
+		int COL_SPED = 3;
+		int COL_BODY = 4;
+		int COL_ARMR = 5;
+		int COL_PILT = 6;
+		int COL_SENS = 7;
+		int COL_SEAT = 8;
+
+		Label heaHand  = new Label(SR6ItemAttribute.HANDLING.getShortName());
+		Label heaAccl   = new Label(SR6ItemAttribute.ACCELERATION.getShortName());
+		Label heaSpdI = new Label(SR6ItemAttribute.SPEED_INTERVAL.getShortName());
+		Label heaSpd  = new Label(SR6ItemAttribute.TOPSPEED.getShortName());
+		Label heaBody  = new Label(SR6ItemAttribute.BODY.getShortName());
+		Label heaArmr = new Label(SR6ItemAttribute.ARMOR.getShortName());
+		Label heaPilt   = new Label(SR6ItemAttribute.PILOT.getShortName());
+		Label heaAmmo = new Label(SR6ItemAttribute.SENSORS.getShortName());
+		Label heaSeat = new Label(SR6ItemAttribute.SEATS.getShortName());
+		heaHand.getStyleClass().add("table-head");
+		heaAccl.getStyleClass().add("table-head");
+		heaSpdI.getStyleClass().add("table-head");
+		heaSpd .getStyleClass().add("table-head");
+		heaBody.getStyleClass().add("table-head");
+		heaArmr.getStyleClass().add("table-head");
+		heaPilt.getStyleClass().add("table-head");
+		heaAmmo.getStyleClass().add("table-head");
+		heaSeat.getStyleClass().add("table-head");
+
+		heaHand.setMaxWidth(Double.MAX_VALUE);
+		heaAccl.setMaxWidth(Double.MAX_VALUE);
+		heaSpdI.setMaxWidth(Double.MAX_VALUE);
+		heaSpd .setMaxWidth(Double.MAX_VALUE);
+		heaBody.setMaxWidth(Double.MAX_VALUE);
+		heaArmr.setMaxWidth(Double.MAX_VALUE);
+		heaPilt.setMaxWidth(Double.MAX_VALUE);
+		heaAmmo.setMaxWidth(Double.MAX_VALUE);
+		heaSeat.setMaxWidth(Double.MAX_VALUE);
+
+		heaHand.setAlignment(Pos.CENTER);
+		heaAccl.setAlignment(Pos.CENTER);
+		heaSpdI.setAlignment(Pos.CENTER);
+		heaSpd .setAlignment(Pos.CENTER);
+		heaBody.setAlignment(Pos.CENTER);
+		heaArmr.setAlignment(Pos.CENTER);
+		heaPilt.setAlignment(Pos.CENTER);
+		heaAmmo.setAlignment(Pos.CENTER);
+		heaSeat.setAlignment(Pos.CENTER);
+		int startCol = table.getColumnCount();
+
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Handling
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Acceleration
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Speed Interval
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Speed
+		table.getColumnConstraints().add(new ColumnConstraints( 50)); // Body
+		table.getColumnConstraints().add(new ColumnConstraints( 40)); // Armor
+		table.getColumnConstraints().add(new ColumnConstraints( 40)); // Pilot
+		table.getColumnConstraints().add(new ColumnConstraints( 40)); // Sensor
+		if (hasS)
+			table.getColumnConstraints().add(new ColumnConstraints( 40)); // Seats
+
+		table.add(heaHand, COL_HAND, 0);
+		table.add(heaAccl, COL_ACCL, 0);
+		table.add(heaSpdI, COL_SPDI, 0);
+		table.add(heaSpd , COL_SPED, 0);
+		table.add(heaBody, COL_BODY , 0);
+		table.add(heaArmr, COL_ARMR, 0);
+		table.add(heaPilt, COL_PILT  , 0);
+		table.add(heaAmmo, COL_SENS, 0);
+		if (hasS)
+			table.add(heaSeat, COL_SEAT, 0);
+
+
+		// Now add data
+		for (int i = 0; i < possibilities.size(); i++) {
+			AGearData data = possibilities.get(i);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.HANDLING    ), startCol+COL_HAND, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.ACCELERATION), startCol+COL_ACCL, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.SPEED_INTERVAL), startCol+COL_SPDI, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.TOPSPEED    ), startCol+COL_SPED, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.BODY    ), startCol+COL_BODY, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.ARMOR   ), startCol+COL_ARMR, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.PILOT   ), startCol+COL_PILT, i+1);
+			table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.SENSORS ), startCol+COL_SENS, i+1);
+			if (hasS)
+				table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.SEATS ), startCol+COL_SEAT, i+1);
+		}
+	}
+
+	//-------------------------------------------------------------------
 	private static Node getMatrixDeviceNode(CarriedItem<ItemTemplate> item, Shadowrun6Character model) {
 		VBox layout = new VBox();
 		layout.setStyle("-fx-spacing: 0.5em");
@@ -1036,8 +1186,6 @@ public class ItemUtilJFX {
 		// Now add data
 		for (int i = 0; i < possibilities.size(); i++) {
 			AGearData data = possibilities.get(i);
-			logger.log(Level.ERROR, "A "+data.getAttribute(SR6ItemAttribute.CAPACITY));
-			logger.log(Level.ERROR, "  A "+createLabelWithValue(item,carry,data,SR6ItemAttribute.CAPACITY));
 			if (hasE) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.ESSENCECOST), startCol+COL_ESS, i+1);
 			if (hasC) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.CAPACITY), startCol+COL_CAP, i+1);
 			if (hasS) table.add(createLabelWithValue(item,carry,data,SR6ItemAttribute.SIZE), startCol+COL_SIZ, i+1);
