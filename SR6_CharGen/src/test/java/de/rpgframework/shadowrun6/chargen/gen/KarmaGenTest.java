@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -147,6 +148,12 @@ public class KarmaGenTest {
 
 		//Spells
 		ISpellController<SR6Spell> spells = charGen.getSpellController();
+		assertFalse(spells.select(Shadowrun6Core.getItem(SR6Spell.class, "increase_attribute")).wasSuccessful()); // Does not have sorcery skill yet
+
+		// Skills
+		SR6SkillController skills = charGen.getSkillController();
+		assertEquals(105,increaseSkill("sorcery", 6));
+
 		assertTrue(spells.select(Shadowrun6Core.getItem(SR6Spell.class, "increase_attribute")).wasSuccessful());
 		assertTrue(spells.select(Shadowrun6Core.getItem(SR6Spell.class, "treat")).wasSuccessful());
 		assertTrue(spells.select(Shadowrun6Core.getItem(SR6Spell.class, "stunbolt")).wasSuccessful());
@@ -156,14 +163,13 @@ public class KarmaGenTest {
 		assertTrue(spells.select(Shadowrun6Core.getItem(SR6Spell.class, "detect_life")).wasSuccessful());
 		assertTrue(spells.select(Shadowrun6Core.getItem(SR6Spell.class, "physical_barrier")).wasSuccessful());
 		assertTrue(spells.select(Shadowrun6Core.getItem(SR6Spell.class, "stabilize")).wasSuccessful());
-		assertEquals(365, model.getKarmaFree());
+		assertEquals(260, model.getKarmaFree());
 
 		// Skills
-		SR6SkillController skills = charGen.getSkillController();
 		assertEquals(30,increaseSkill("astral", 3));
 		assertTrue(skills.select(model.getSkillValue(Shadowrun6Core.getSkill("astral")),
 				Shadowrun6Core.getSkill("astral").getSpecialization("astral_signatures"), false).wasSuccessful());
-		assertEquals(330, model.getKarmaFree());
+		assertEquals(225, model.getKarmaFree());
 		assertEquals(15,increaseSkill("athletics", 2));
 		assertEquals(50,increaseSkill("biotech", 4));
 		assertTrue(skills.select(model.getSkillValue(Shadowrun6Core.getSkill("biotech")),
@@ -171,7 +177,6 @@ public class KarmaGenTest {
 		assertEquals(5,increaseSkill("electronics", 1));
 		assertEquals(30,increaseSkill("firearms", 3));
 		assertEquals(30,increaseSkill("stealth", 3));
-		assertEquals(105,increaseSkill("sorcery", 6));
 		assertTrue(skills.select(model.getSkillValue(Shadowrun6Core.getSkill("sorcery")),
 				Shadowrun6Core.getSkill("sorcery").getSpecialization("spellcasting"), false).wasSuccessful());
 		assertEquals(15,increaseSkill("close_combat", 2));
