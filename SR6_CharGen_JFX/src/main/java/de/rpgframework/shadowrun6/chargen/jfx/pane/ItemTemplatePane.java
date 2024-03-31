@@ -10,6 +10,7 @@ import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.jfx.ItemUtilJFX;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.scene.Node;
 
 /**
@@ -47,9 +48,18 @@ public class ItemTemplatePane extends GenericDescriptionVBox {
 		}
 
 		if (data != null) {
-			perTypeStats = ItemUtilJFX.getItemInfoNode((ItemTemplate)data, null, carry);
+			CarryMode realCarry = carry;
+			if (realCarry==null) {
+				ItemTemplate temp = (ItemTemplate) data;
+				if (temp.getUsages().isEmpty()) {
+					realCarry = temp.getVariants().iterator().next().getUsages().get(0).getMode();
+				} else {
+					realCarry = temp.getUsages().get(0).getMode();
+				}
+			}
+			perTypeStats = ItemUtilJFX.getItemInfoNode((ItemTemplate)data, null, realCarry);
 			if (perTypeStats != null) {
-				super.inner.getChildren().add(2, perTypeStats);
+				super.inner.getChildren().add(0, perTypeStats);
 			}
 		}
 	}

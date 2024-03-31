@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -29,25 +30,71 @@ import javafx.util.StringConverter;
  *
  */
 public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
-	
+
 	private final static Logger logger = System.getLogger(FilterItemTemplate.class.getPackageName());
-	
+
 	private final static ResourceBundle RES = ResourceBundle.getBundle(FilterItemTemplate.class.getPackageName()+".Filters");
 
 	private CarryMode carry;
-	private ItemType[] allowed;
-	
+	private List<ItemTemplate> cache = new ArrayList<>();
+	private List<ItemType> allowed;
+	private IRefreshableList page;
+
 	private ChoiceBox<ItemType> cbType;
 	private ChoiceBox<ItemSubType> cbSubtype;
 	private TextField tfSearch;
-	
+
 	private ItemType lastType;
 
 	//-------------------------------------------------------------------
 	public FilterItemTemplate(CarryMode carry, ItemType...allowed) {
 		this.carry   = carry;
-		this.allowed = allowed;
+		this.allowed = List.of(allowed);
 		logger.log(Level.INFO, "FilterItemTemplate for "+carry);
+	}
+
+	//-------------------------------------------------------------------
+	private CarryMode getRealCarry(ItemTemplate item) {
+		CarryMode realCarry = carry;
+		if (realCarry==null) {
+			if (item.getUsages().isEmpty()) {
+				realCarry = item.getVariants().iterator().next().getUsages().get(0).getMode();
+			} else {
+				realCarry = item.getUsages().get(0).getMode();
+			}
+		}
+		return realCarry;
+	}
+
+	//-------------------------------------------------------------------
+	private void itemTypeChanged(List<ItemTemplate> available) {
+		List<ItemSubType> existingSub = new ArrayList<>();
+		for (ItemTemplate item : available) {
+			CarryMode realCarry = getRealCarry(item);
+
+			SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) item.getVariant(realCarry);
+			if (item.getUsage(realCarry)!=null) {
+				ItemType type = (item.getAttribute(SR6ItemAttribute.ITEMTYPE)!=null)?item.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue(): item.getItemType();
+				ItemSubType subtype = (item.getAttribute(SR6ItemAttribute.ITEMSUBTYPE)!=null)?item.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue(): item.getItemSubtype();
+				if (!existingSub.contains(subtype))
+					existingSub.add(subtype);
+			} else if (variant!=null && variant.getUsage(realCarry)!=null) {
+				// Inspect variant
+				ItemType type = (variant.getAttribute(SR6ItemAttribute.ITEMTYPE)!=null)?variant.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue(): item.getItemType();
+				ItemSubType subtype = (variant.getAttribute(SR6ItemAttribute.ITEMSUBTYPE)!=null)?variant.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue(): item.getItemSubtype();
+				if (!existingSub.contains(subtype))
+					existingSub.add(subtype);
+			} else {
+				logger.log(Level.TRACE, "Item {0} from available list has no carry mode {1}", item.getId(), realCarry);
+			}
+		}
+
+		existingSub.add(0, null);
+		ItemSubType last = cbSubtype.getValue();
+		cbSubtype.getItems().setAll(existingSub);
+		cbSubtype.setValue(last);
+
+		page.refreshList();
 	}
 
 	//-------------------------------------------------------------------
@@ -59,24 +106,26 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 		List<ItemType> existing = new ArrayList<>();
 		List<ItemSubType> existingSub = new ArrayList<>();
 		for (ItemTemplate item : available) {
-			SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) item.getVariant(carry);
-			if (item.getUsage(carry)!=null) {
+			CarryMode realCarry = getRealCarry(item);
+
+			SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) item.getVariant(realCarry);
+			if (item.getUsage(realCarry)!=null) {
 				ItemType type = (item.getAttribute(SR6ItemAttribute.ITEMTYPE)!=null)?item.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue(): item.getItemType();
 				ItemSubType subtype = (item.getAttribute(SR6ItemAttribute.ITEMSUBTYPE)!=null)?item.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue(): item.getItemSubtype();
 				if (!existing.contains(type))
 					existing.add(type);
 				if (!existingSub.contains(subtype))
 					existingSub.add(subtype);
-			} else if (variant!=null && variant.getUsage(carry)!=null) {
+			} else if (variant!=null && variant.getUsage(realCarry)!=null) {
 				// Inspect variant
 				ItemType type = (variant.getAttribute(SR6ItemAttribute.ITEMTYPE)!=null)?variant.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue(): item.getItemType();
 				ItemSubType subtype = (variant.getAttribute(SR6ItemAttribute.ITEMSUBTYPE)!=null)?variant.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue(): item.getItemSubtype();
-				if (!existing.contains(type)) 
+				if (!existing.contains(type))
 					existing.add(type);
 				if (!existingSub.contains(subtype))
 					existingSub.add(subtype);
 			} else {
-				logger.log(Level.TRACE, "Item {0} from available list has no carry mode {1}", item.getId(), carry);
+				logger.log(Level.TRACE, "Item {0} from available list has no carry mode {1}", item.getId(), realCarry);
 			}
 		}
 		// Sort them by ordinal
@@ -92,12 +141,16 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 			}
 		});
 		// Overwrite allowed types
-		allowed = existing.toArray(new ItemType[existing.size()]);
+//		allowed = existing.toArray(new ItemType[existing.size()]);
 		// Allow empty selection
 		existing.add(0, null);
-		cbType.getItems().setAll(existing);
-		
-		cbSubtype.getItems().setAll(existingSub);
+		if (cbType.getItems().size()<2) {
+			cbType.getItems().setAll(existing);
+		}
+
+//		cbSubtype.getItems().setAll(existingSub);
+		logger.log(Level.DEBUG, "after updateChoices() have {0} itemtypes: {1}", existing.size(), existing);
+		logger.log(Level.DEBUG, "after updateChoices() have {0} itemsubtypes: {1}", existingSub.size(), existingSub);
 	}
 
 	//-------------------------------------------------------------------
@@ -106,6 +159,7 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 	 */
 	@Override
 	public void addFilter(IRefreshableList page, Pane filterPane) {
+		this.page = page;
 		/*
 		 * Item Type
 		 */
@@ -120,7 +174,7 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}
 		});
-		cbType.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> page.refreshList());
+		cbType.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> itemTypeChanged(cache));
 		cbType.setConverter(new StringConverter<ItemType>() {
 			public String toString(ItemType val) {
 				if (val==null) return ResourceI18N.get(RES, "filter.itemtemplate.type.all");
@@ -168,41 +222,52 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 	 */
 	@Override
 	public List<ItemTemplate> applyFilter(List<ItemTemplate> input) {
+		logger.log(Level.INFO, "Start with {0} items", input.size());
+		cache = input;
 		// Match item type
 		if (cbType.getValue()!=null) {
 			input = input.stream()
 					.filter(data -> data.getItemType()==cbType.getValue())
+					.filter(data -> data.getLanguage()==null || (data.getLanguage().equals(Locale.getDefault().getLanguage())))
 					.collect(Collectors.toList());
-			logger.log(Level.INFO, "After filter cbType={0} remain {1} items", cbType, input.size());
-			
+			logger.log(Level.INFO, "After filter cbType={0} remain {1} items", cbType.getValue(), input.size());
+
 			if (cbType.getValue()!=lastType || lastType==null) {
 				List<ItemSubType> appear = new ArrayList<>();
-				input.forEach(item -> {if (item.getItemSubtype(carry)!=null &&!appear.contains(item.getItemSubtype(carry))) appear.add(item.getItemSubtype(carry));});
+				input.forEach(item -> {
+					CarryMode realCarry = getRealCarry(item);
+					if (item.getItemSubtype(realCarry)!=null &&!appear.contains(item.getItemSubtype(realCarry))) appear.add(item.getItemSubtype(realCarry));
+					});
 				Collections.sort(appear);
 				cbSubtype.getItems().setAll(appear);
 			}
 		} else {
-			if (allowed!=null) {
+			if (allowed!=null && allowed.size()>0) {
 				input = input.stream()
-					.filter(data -> data.getItemType(carry)!=null && List.of(allowed).contains(data.getItemType(carry)))
+					.filter(data -> {
+						CarryMode realCarry = getRealCarry(data);
+						return data.getItemType(realCarry)!=null && List.of(allowed).contains(data.getItemType(realCarry));})
 					.collect(Collectors.toList());
 			}
 			logger.log(Level.INFO, "After filter cbType={0} remain {1} items", cbType, input.size());
 			if (cbType.getValue()!=lastType) {
 				List<ItemSubType> appear = new ArrayList<>();
-				input.forEach(item -> {if (item.getItemSubtype(carry)!=null &&!appear.contains(item.getItemSubtype(carry))) appear.add(item.getItemSubtype(carry));});
+				input.forEach(item -> {CarryMode realCarry = getRealCarry(item); if (item.getItemSubtype(realCarry)!=null &&!appear.contains(item.getItemSubtype(realCarry))) appear.add(item.getItemSubtype(realCarry));});
 				Collections.sort(appear);
 				cbSubtype.getItems().setAll(appear);
 			}
-			
+
+			logger.log(Level.INFO, "After no filter remain {0} items", input.size());
 		}
 		lastType = cbType.getValue();
 		// Match item subtype
 		if (cbSubtype.getValue()!=null) {
 			input = input.stream()
-					.filter(data -> data.getItemSubtype(carry)==cbSubtype.getValue())
+					.filter(data -> {
+						CarryMode realCarry = getRealCarry(data);
+						return data.getItemSubtype(realCarry)==cbSubtype.getValue();})
 					.collect(Collectors.toList());
-			logger.log(Level.INFO, "After filter cbSubType={0} remain {1} items", cbType, input.size());
+			logger.log(Level.INFO, "After filter cbSubType={0} remain {1} items", cbSubtype.getValue(), input.size());
 		}
 		// Match keyword
 		if (tfSearch.getText()!=null && !tfSearch.getText().isBlank()) {
@@ -212,7 +277,8 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 					.collect(Collectors.toList());
 			logger.log(Level.INFO, "After filter text={0} remain {1} items", key, input.size());
 		}
-		
+
+		logger.log(Level.INFO, "applyFilter() returns with {0} items, {1} types and {2} subtypes", input.size(), cbType.getItems().size(), cbSubtype.getItems().size());
 		return input;
 	}
 
