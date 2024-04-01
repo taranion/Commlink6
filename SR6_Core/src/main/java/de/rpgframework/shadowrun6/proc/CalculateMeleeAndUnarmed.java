@@ -83,6 +83,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 		// Prepare modifications to add
 		ValueModification strDMGBonus = null;
 		ValueModification strARMod = null;
+		ValueModification reaARMod = null;
 
 		// Rule: High Strength adds to damage (6WC 150)
 		AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(ShadowrunAttribute.STRENGTH);
@@ -98,12 +99,16 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 
 		strARMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.STRENGTH);
 		strARMod.setSet(ValueType.NATURAL);
+		reaARMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue(), ShadowrunAttribute.REACTION);
+		reaARMod.setSet(ValueType.NATURAL);
 
 		// Now walk all melee weapons
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.WEAPON_CLOSE_COMBAT)) {
 			if (item!=unarmed) {
 				item.clearModificationsFromCharacter();
 			}
+			ItemSubType sub = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
+
 //			// Remove eventually existing STRENGTH mod
 //			for (Modification tmpRaw : item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getIncomingModifications()) {
 //				ValueModification tmp = (ValueModification) tmpRaw;
@@ -114,6 +119,10 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 
 			// Rule: Add Strength to close combat attack rating for unarmed/melee weapons (CRB Seattle Edition)
 			if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
+				if (sub==ItemSubType.WHIPS) {
+					item.addModificationFromCharacter(reaARMod);
+					logger.log(Level.INFO, "Add {0} to attack rating for {1}", reaARMod, item.getKey());
+				} else
 				if (strARMod!=null && item.getUuid()!=ItemTemplate.UUID_UNARMED) {
 					item.addModificationFromCharacter(strARMod);
 					logger.log(Level.INFO, "Add {0} to attack rating for {1}", strARMod, item.getKey());
