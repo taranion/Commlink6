@@ -2343,9 +2343,17 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static String toExplainString(List<Modification> modifications) {
 		if (modifications.isEmpty()) return null;
-		List<String> ret = modifications.stream()
-				.map(pc -> ((ValueModification)pc).getValue()+" "+pc.getSource())
-				.collect(Collectors.toList());
+		List<String> ret = new ArrayList<>();
+		for (Modification mod : modifications) {
+			Object srcO = mod.getSource();
+			String src = String.valueOf(srcO);
+			if (srcO instanceof ShadowrunAttribute) {
+				src = ((ShadowrunAttribute)srcO).getName();
+			} else if (srcO instanceof DataItem) {
+				src = ((DataItem)srcO).getName();
+			}
+			ret.add(  ((ValueModification)mod).getValue()+" "+src);
+		}
 		return String.join("\n", ret);
 	}
 
@@ -2361,9 +2369,20 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static String toExplainStringObject(List<Modification> modifications) {
 		if (modifications.isEmpty()) return null;
-		List<String> ret = modifications.stream()
-				.map(pc -> ((ValueModification)pc).getRawValue()+" "+pc.getSource())
-				.collect(Collectors.toList());
+		List<String> ret = new ArrayList<>();
+		for (Modification mod : modifications) {
+			Object srcO = mod.getSource();
+			String src = String.valueOf(srcO);
+			if (srcO instanceof ShadowrunAttribute) {
+				src = ((ShadowrunAttribute)srcO).getName();
+			} else if (srcO instanceof DataItem) {
+				src = ((DataItem)srcO).getName();
+			}
+			ret.add(  ((ValueModification)mod).getValue()+" "+src);
+		}
+//		List<String> ret = modifications.stream()
+//				.map(pc -> ((ValueModification)pc).getRawValue()+" "+pc.getSource())
+//				.collect(Collectors.toList());
 		return String.join("\n", ret);
 	}
 

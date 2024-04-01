@@ -415,7 +415,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.setDistributed(0);
 		addNaturalModifier(val,ShadowrunAttribute.STRENGTH);
 		addNaturalModifier(val,ShadowrunAttribute.REACTION);
-		logger.log(Level.DEBUG, " Attack Rating Phyiscal = "+val.getModifiedValue());
+		logger.log(Level.WARNING, " Attack Rating Phyiscal = "+val.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------
