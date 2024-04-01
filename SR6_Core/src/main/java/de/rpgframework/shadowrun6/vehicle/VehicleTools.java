@@ -356,7 +356,7 @@ public class VehicleTools {
 		 * @return Pool object or null, if not a drone
 		 */
 		public static DronePool getDronePool(Shadowrun6Character model, CarriedItem<ItemTemplate> drone, DroneAction action) {
-			logger.log(Level.INFO, "....{0}....{1}",drone.getNameWithoutRating(),action);
+			logger.log(Level.INFO, "{2}....{0}....{1}",drone.getNameWithoutRating(),action, model.getName());
 			// Ensure it is a drone or vehicle
 			if (!Shadowrun6Tools.isType(drone, ItemType.vehicleTypes())) {
 				logger.log(Level.ERROR,"{0} is neither a vehicle, nor a drone", drone);
@@ -368,6 +368,8 @@ public class VehicleTools {
 			int rigRating = (ctrlRig==null)?0:SR6GearTool.getRating( ctrlRig);
 			CarriedItem<ItemTemplate> rcc = Shadowrun6Tools.getBestRCC(model);
 			CarriedItem<ItemTemplate> simSenseOverdrive = model.getCarriedItem("simsense_overdrive");
+			logger.log(Level.INFO, "Rating of control rig: {0}", rigRating);
+			logger.log(Level.INFO, "RCC                  : {0}", rcc);
 
 			DronePool pool = new DronePool();
 			SR6Skill pilotSkill = Shadowrun6Core.getSkill("piloting");
