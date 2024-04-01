@@ -114,6 +114,7 @@ import de.rpgframework.shadowrun6.items.WeaponSize;
 import de.rpgframework.shadowrun6.log.Logging;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.persist.WeaponDamageConverter;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 import de.rpgframework.shadowrun6.proc.BuildForbiddenSources;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
@@ -185,6 +186,27 @@ public class Shadowrun6Tools {
 		CalculateExowareBonus.class,
 		RealSINUpdater.class
 	);
+
+	public static class WeaponValues {
+		private String name;
+		private String dmg;
+		private int[] attackRating;
+		private int pool;
+		private boolean inactive;
+		public String getName() { return name; }
+		public String getDamage() { return dmg; }
+		public int[] getAttackRating() { return attackRating; }
+		public int getPool() { return pool; }
+		public boolean isInactive() { return inactive; }
+		public String toString() {
+			return name+"  DMG:"+dmg+"  AR:"+Arrays.toString(attackRating)+"  Pool:"+pool;
+		}
+		public WeaponValues() {}
+		public WeaponValues(String n, int[] ar) {
+			this.name = n;
+			this.attackRating = ar;
+		}
+	}
 
 	//-------------------------------------------------------------------
 	static {
@@ -1814,6 +1836,227 @@ public class Shadowrun6Tools {
 	public static String getWeaponPoolExplanation(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
 		return getWeaponPoolCalculation(model, item).toExplainString();
 	}
+
+	//---------------------------------------------------------
+	public static List<WeaponValues> getWeaponModes(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
+		List<WeaponValues> ret = new ArrayList<>();
+
+		ItemType type = (ItemType) item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+		if (ItemType.isWeapon(type)) {
+			Damage damage = item.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
+			WeaponDamageConverter conv = new WeaponDamageConverter();
+			int[] rawAR = (int[]) item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
+
+			WeaponValues ss = new WeaponValues();
+			ss.name = FireMode.SINGLE_SHOT.getName(Locale.getDefault());
+			ss.attackRating = rawAR;
+			ss.pool = getWeaponPool(model, item).getValue(ValueType.NATURAL);
+			try { ss.dmg  = conv.write(damage); } catch (Exception e) {
+				logger.log(Level.ERROR,"Failed converting weapon damage",e);
+			}
+			logger.log(Level.WARNING, ss.toString());
+			ret.add(ss);
+
+			List<FireMode> modes = item.getAsObject(SR6ItemAttribute.FIREMODES).getModifiedValue();
+			if (modes!=null) {
+				// Semi-Automatic (CRB 109)
+				if (modes.contains(FireMode.SEMI_AUTOMATIC)) {
+					WeaponValues sa = new WeaponValues();
+					sa.name = FireMode.SEMI_AUTOMATIC.getName(Locale.getDefault());
+					sa.attackRating = new int[5];
+					for (int i=0; i<5; i++) {
+						switch (rawAR[i]) {
+						case 0: case 1:
+							sa.attackRating[i]=0; break;
+						default:
+							sa.attackRating[i]= rawAR[i]-2;
+						}
+					}
+					sa.pool = getWeaponPool(model, item).getValue(ValueType.NATURAL);
+					Damage tmp = new Damage(
+							damage.getValue() +1,
+							damage.getType(),
+							damage.getElement()
+							);
+					try { sa.dmg  = conv.write(tmp); } catch (Exception e) {
+						logger.log(Level.ERROR,"Failed converting weapon damage",e);
+					}
+					logger.log(Level.WARNING,sa.toString());
+					ret.add(sa);
+				}
+				// Burst Fire (Wide and Narrow)
+				// Semi-Automatic (CRB 109)
+				if (modes.contains(FireMode.BURST_FIRE)) {
+					// Wide
+					WeaponValues sa = new WeaponValues();
+					sa.name = FireMode.BURST_FIRE.getName(Locale.getDefault())+" "+Shadowrun6Core.getI18nResources().getString("label.burstfire.wide");
+					sa.attackRating = new int[5];
+					for (int i=0; i<5; i++) {
+						switch (rawAR[i]) {
+						case 0: case 1:
+							sa.attackRating[i]=0; break;
+						default:
+							sa.attackRating[i]= rawAR[i]-2;
+						}
+					}
+					sa.pool = getWeaponPool(model, item).getValue(ValueType.NATURAL) /2;
+					Damage tmp = new Damage(
+							damage.getValue() +1,
+							damage.getType(),
+							damage.getElement()
+							);
+					try { sa.dmg  = conv.write(tmp); } catch (Exception e) {
+						logger.log(Level.ERROR,"Failed converting weapon damage",e);
+					}
+					ret.add(sa);
+					// Narrow
+					sa = new WeaponValues();
+					sa.name = FireMode.BURST_FIRE.getName(Locale.getDefault())+" "+Shadowrun6Core.getI18nResources().getString("label.burstfire.narrow");
+					sa.attackRating = new int[5];
+					for (int i=0; i<5; i++) {
+						switch (rawAR[i]) {
+						case 0: case 1: case 2: case 3:
+							sa.attackRating[i]=0; break;
+						default:
+							sa.attackRating[i]= rawAR[i]-4;
+						}
+					}
+					sa.pool = getWeaponPool(model, item).getValue(ValueType.NATURAL);
+					tmp = new Damage(
+							damage.getValue() +2,
+							damage.getType(),
+							damage.getElement()
+							);
+					try { sa.dmg  = conv.write(tmp); } catch (Exception e) {
+						logger.log(Level.ERROR,"Failed converting weapon damage",e);
+					}
+					ret.add(sa);
+				}
+				// Full Auto(CRB 109)
+				if (modes.contains(FireMode.FULL_AUTO)) {
+					WeaponValues sa = new WeaponValues();
+					sa.name = FireMode.FULL_AUTO.getName(Locale.getDefault());
+					sa.attackRating = new int[5];
+					for (int i=0; i<5; i++) {
+						switch (rawAR[i]) {
+						case 0: case 1: case 2: case 3: case 4: case 5:
+							sa.attackRating[i]=0; break;
+						default:
+							sa.attackRating[i]= rawAR[i]-6;
+						}
+					}
+					sa.pool = getWeaponPool(model, item).getValue(ValueType.NATURAL);
+					Damage tmp = damage;
+					try { sa.dmg  = conv.write(tmp); } catch (Exception e) {
+						logger.log(Level.ERROR,"Failed converting weapon damage",e);
+					}
+					logger.log(Level.WARNING, sa.toString());
+					ret.add(sa);
+				}
+			} // FireModes!=null
+		}
+
+		return ret;
+	}
+
+	//---------------------------------------------------------
+	public static List<WeaponValues> getConditionalWeaponValues(ShadowrunCharacter model, CarriedItem<ItemTemplate> item) {
+		List<WeaponValues> ret = new ArrayList<>();
+		ItemType type = (ItemType) item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+		if (!ItemType.isWeapon(type))
+			return ret;
+
+		// Start with base value
+		ret.add(new WeaponValues(item.getResolved().getName(), item.getResolved().getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue()));
+
+		// Now use all non-conditional modifications to the attack rating
+		ItemAttributeObjectValue foo = item.getAsObject(SR6ItemAttribute.ATTACK_RATING);
+		for (Modification tmp : foo.getIncomingModifications()) {
+			ValueModification mod = (ValueModification)tmp;
+			String[] raw = mod.getValueAsKeys();
+			int[] ar = (raw.length<=1)?new int[1]:new int[5];
+			for (int i=0; i<raw.length; i++) {
+				ar[i] = Integer.parseInt(raw[i]);
+			}
+
+			String name = "Unknown source";
+			if (mod.getSource()!=null) {
+				if (mod.getSource() instanceof DataItem) {
+					name = ((DataItem)mod.getSource()).getName();
+				} else if (mod.getSource() instanceof ShadowrunAttribute) {
+					name = ((ShadowrunAttribute)mod.getSource()).getName();
+				}
+			}
+
+			if (mod.isConditional()) {
+				logger.log(Level.WARNING,"TODO: Ignore conditional "+mod+" for later: "+mod.getConditionString());
+				ret.add(new WeaponValues(name, ar));
+			} else {
+				ret.add(new WeaponValues(name, ar));
+			}
+		}
+
+
+		/*
+		 * Memorize current settings and than clear all condidtions
+		 */
+//		List<HasOptionalCondition> memorizedConditions = new ArrayList<>();
+//
+//		for (HasOptionalCondition cond : item.getAvailableConditions()) {
+//			logger.warn("Memorize = "+cond);
+//			if (item.assumesCondition(cond)) {
+//				memorizedConditions.add(cond);
+//				item.removeCondition(cond);
+//			}
+//		}
+
+
+			WeaponDamageConverter conv = new WeaponDamageConverter();
+//			for (HasOptionalCondition cond : item.getAvailableConditions()) {
+////				item.addCondition(cond);
+//				logger.info("Arg ="+cond);
+//				WeaponValues val = new WeaponValues();
+//				val.name = item.getItem().getConditionName(cond);
+//				val.pool = getWeaponPool(model, item);
+//				val.inactive = !item.assumesCondition(cond);
+//
+//				if (cond instanceof ItemAttributeModification) {
+//					ItemAttributeModification mod = (ItemAttributeModification) cond;
+//					int[] ar = (int[]) mod.getObjectValue();
+//					if (ar == null)
+//						ar = new int[5];
+//					if (mod.getValue() != 0) {
+//						for (int i = 0; i < ar.length; i++)
+//							ar[i] = mod.getValue();
+//					}
+//					val.attackRating = ar;
+//				} else {
+//					val.attackRating = (int[]) item.getAsObject(ItemAttribute.ATTACK_RATING).getModifiedValue();
+//				}
+//				try {
+//					Damage tmp = new Damage(
+//							item.getAsValue(ItemAttribute.DAMAGE).getModifiedValue(),
+//							false,
+//							item.getItem().getWeaponData().getDamage().getType(),
+//							item.getItem().getWeaponData().getDamage().getWeaponDamageType()
+//							);
+//					val.dmg  = conv.write(tmp);
+//				} catch (Exception e) {
+//					logger.error("Failed converting weapon damage",e);
+//				}
+//				ret.add(val);
+//
+////				item.removeCondition(cond);
+//			}
+
+		// Reapply memorized conditions
+//		for (HasOptionalCondition memo : memorizedConditions) {
+//			item.addCondition(memo);
+//		}
+
+		return ret;
+	}
+
 
 	//-------------------------------------------------------------------
 	/*
