@@ -189,7 +189,6 @@ public class VehicleTools {
 	//---------------------------------------------------------
 	public static List<CarriedItem<ItemTemplate>> getVehicleWeapons(Shadowrun6Character model, CarriedItem<ItemTemplate> vehicle) {
 		List<CarriedItem<ItemTemplate>> list = new ArrayList<>();
-		logger.log(Level.WARNING, "TODO: getVehicleWeapons not implemented yet");
 		ItemType type = vehicle.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
 		// Ensure it is a drone or vehicle
 		if (!List.of(ItemType.droneTypes()).contains(type) && type!=ItemType.VEHICLES)
@@ -372,7 +371,6 @@ public class VehicleTools {
 			String specS = (spec!=null)?spec.getId():null;
 			List<PoolCalculation<Integer>> pilotPool = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.REACTION, specS).getCalculation(ValueType.ARTIFICIAL);
 
-			logger.log(Level.WARNING, "TODO: getDronePool not implemented yet");
 			switch (action) {
 			case EVADE:
 				// Manually driven
@@ -664,6 +662,7 @@ public class VehicleTools {
 //				return null;
 
 			ItemType typeI = item.getItemType(CarryMode.CARRIED);
+			ItemSubType typeS = item.getItemSubtype(CarryMode.CARRIED);
 			switch (typeI) {
 			case VEHICLES:
 				switch (item.getItemSubtype(CarryMode.CARRIED)) {
@@ -700,8 +699,15 @@ public class VehicleTools {
 			case DRONE_MEDIUM:
 			case DRONE_LARGE:
 				VehicleType type = item.getTypeData(VehicleData.class).getType();
-				if (type==null) {
-					logger.log(Level.ERROR,"Cannot detect skill for drone without type");
+				if (type==null && typeS!=null) {
+					switch (typeS) {
+					case GROUND: type = VehicleType.GROUND;
+					case AIR: type = VehicleType.AIR;
+					case AQUATIC: type = VehicleType.WATER;
+					}
+				}
+				if (type==null ) {
+					logger.log(Level.ERROR,"Cannot detect skill for drone without type: "+item);
 					return null;
 				}
 				switch (type) {
