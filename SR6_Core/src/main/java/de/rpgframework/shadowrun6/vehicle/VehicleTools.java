@@ -3,11 +3,11 @@ package de.rpgframework.shadowrun6.vehicle;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
@@ -224,108 +224,108 @@ public class VehicleTools {
 		public static DronePool getDroneWeaponPool(Shadowrun6Character model, CarriedItem<ItemTemplate> drone, CarriedItem<ItemTemplate> rcc, CarriedItem<ItemTemplate> weapon) {
 			// Collect some necessary data
 			logger.log(Level.WARNING, "TODO: getDroneWeaponPool not implemented yet");
-//			CarriedItem rig = model.getItem("control_rig");
-//			int rigRating = (rig==null)?0:rig.getRating();
-//
+			CarriedItem<ItemTemplate> rig = model.getCarriedItem("control_rig");
+			int rigRating = (rig==null)?0:rig.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
+
 			DronePool pool = new DronePool();
-//			/*
-//			 *  Rigged
-//			 */
-//			Skill skill = Shadowrun6Core.getSkill("engineering");
-//			if (rig==null) {
-//				pool.rigged = 0;
-//			} else {
-//				pool.rigged = Shadowrun6Tools.getSkillPool(model, skill, "gunnery");
-//				if (Locale.GERMAN != Locale.getDefault()) {
-//					int modifier = (model.getSkillValue(skill)!=null)?model.getSkillValue(skill).getModifier():0;
-//					int maxBonusRemain = (4-modifier);
-//					pool.rigged += Math.min(maxBonusRemain, rigRating);
-//				}
-//			}
-//
-//			/*
-//			 * Driven (using Gunnery)
-//			 */
-//			pool.manual = Shadowrun6Tools.getSkillPool(model, skill, "gunnery");
-//
-//			/*
-//			 * RCC
-//			 * Requires targeting autosoft on RCC
-//			 */
-//			CarriedItem rccAutosoft = null;
-//			if (rcc==null) {
-//				pool.viaRCC = 0;
-//			} else {
-//				// Search matching autosoft
-//	//			boolean anyTargeting = false;
-//				CarriedItem autosoft = null;
-//				for (CarriedItem item : rcc.getEffectiveAccessories()) {
-//					if (!item.getItem().getId().equals("targeting"))
-//						continue;
-//	//				anyTargeting = true;
-//					if (item.getChoiceReference()==null) {
-//						logger.warn("Weapon model of targeting autosoft not defined in drone "+drone);
-//					} else if (item.getChoiceReference().equals(weapon.getItem().getId()))
-//						autosoft = item;
-//				}
-//				if (autosoft!=null) {
-//					// Matching autosoft
-//					rccAutosoft = autosoft;
-//					pool.viaRCC = drone.getAsValue(ItemAttribute.SENSORS).getModifiedValue() + autosoft.getRating();
-//				} else {
-//					// If the drone does not have the [Weapon] Targeting autosoft, then use Sensor rating – 1.
-//					pool.viaRCC = drone.getAsValue(ItemAttribute.SENSORS).getModifiedValue()-1;
-//				}
-//			}
-//			// Autonomous
-//			// Search matching autosoft
-//	//		boolean anyTargeting = false;
-//			CarriedItem autosoft = null;
-//			switch (weapon.getUsedAsSubType()) {
-//			case BLADES:
-//			case CLUBS:
-//			case WHIPS:
-//			case UNARMED:
-//			case OTHER_CLOSE:
-//				for (CarriedItem item : drone.getEffectiveAccessories()) {
-//					if (!item.getItem().getId().equals("soft_close_combat"))
-//						continue;
-//					// anyTargeting = true;
-//					if (item.getChoiceReference() == null) {
-//						logger.warn("Weapon model of soft_close_combat autosoft not defined in drone " + drone);
-//					} else if (item.getChoiceReference().equals(weapon.getItem().getId()))
-//						autosoft = item;
-//				}
-//				break;
-//			default:
-//				for (CarriedItem item : drone.getEffectiveAccessories()) {
-//					if (!item.getItem().getId().equals("targeting"))
-//						continue;
-//					// anyTargeting = true;
-//					if (item.getChoiceReference() == null) {
-//						logger.warn("Weapon model of targeting autosoft not defined in drone " + drone);
-//					} else if (item.getChoiceReference().equals(weapon.getItem().getId()))
-//						autosoft = item;
-//				}
-//			}
-//			if (autosoft!=null) {
-//				// Matching autosoft
-//				pool.autonomous = drone.getAsValue(ItemAttribute.SENSORS).getModifiedValue() + autosoft.getRating();
-//			} else {
-//				// If the drone does not have the [Weapon] Targeting autosoft, then use Sensor rating – 1.
-//				pool.autonomous = drone.getAsValue(ItemAttribute.SENSORS).getModifiedValue()-1;
-//			}
-//			// German special rules: if the local autosoft is better, the
-//			//   rcc controlled drone may use this instead
-//			if (rccAutosoft!=null && autosoft!=null && autosoft.getRating()>rccAutosoft.getRating()) {
-//				pool.viaRCC = drone.getAsValue(ItemAttribute.SENSORS).getModifiedValue() + autosoft.getRating();
-//			}
+			/*
+			 *  Rigged
+			 */
+			SR6Skill skill = Shadowrun6Core.getSkill("engineering");
+			if (rig==null) {
+				pool.rigged = 0;
+			} else {
+				pool.rigged = Shadowrun6Tools.getSkillPool(model, skill, "gunnery").getValue(ValueType.NATURAL);
+				if (Locale.GERMAN != Locale.getDefault()) {
+					int modifier = (model.getSkillValue(skill)!=null)?model.getSkillValue(skill).getModifier():0;
+					int maxBonusRemain = (4-modifier);
+					pool.rigged += Math.min(maxBonusRemain, rigRating);
+				}
+			}
+
+			/*
+			 * Driven (using Gunnery)
+			 */
+			pool.manual = Shadowrun6Tools.getSkillPool(model, skill, "gunnery").getNatural();
+
+			/*
+			 * RCC
+			 * Requires targeting autosoft on RCC
+			 */
+			CarriedItem<ItemTemplate> rccAutosoft = null;
+			if (rcc==null) {
+				pool.viaRCC = 0;
+			} else {
+				// Search matching autosoft
+	//			boolean anyTargeting = false;
+				CarriedItem<ItemTemplate> autosoft = null;
+				for (CarriedItem<ItemTemplate> item : rcc.getEffectiveAccessories()) {
+					if (!item.getKey().equals("targeting"))
+						continue;
+	//				anyTargeting = true;
+					UUID weaponDec = UUID.fromString("2baf4c6e-417b-4d1a-943c-edfa816d50bf");
+					if (item.getDecision(weaponDec)==null) {
+						logger.log(Level.WARNING,"Weapon model of targeting autosoft not defined in drone "+drone);
+					} else if (item.getDecision(weaponDec).getValue().equals(weapon.getKey()))
+						autosoft = item;
+				}
+				if (autosoft!=null) {
+					// Matching autosoft
+					rccAutosoft = autosoft;
+					pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + autosoft.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
+				} else {
+					// If the drone does not have the [Weapon] Targeting autosoft, then use Sensor rating – 1.
+					pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue()-1;
+				}
+			}
+			// Autonomous
+			// Search matching autosoft
+	//		boolean anyTargeting = false;
+			CarriedItem<ItemTemplate> autosoft = null;
+			ItemType weaponType = weapon.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
+			switch (weaponType) {
+			case WEAPON_CLOSE_COMBAT:
+				for (CarriedItem<ItemTemplate> item : drone.getEffectiveAccessories()) {
+					if (!item.getKey().equals("soft_close_combat"))
+						continue;
+					// anyTargeting = true;
+					UUID weaponDec = UUID.fromString("2baf4c6e-417b-4d1a-943c-edfa816d50bf");
+					if (item.getDecision(weaponDec)==null) {
+						logger.log(Level.WARNING,"Weapon model of soft_close_combat autosoft not defined in drone " + drone);
+					} else if (item.getDecision(weaponDec).getValue().equals(weapon.getKey()))
+						autosoft = item;
+				}
+				break;
+			default:
+				for (CarriedItem<ItemTemplate> item : drone.getEffectiveAccessories()) {
+					if (!item.getKey().equals("targeting"))
+						continue;
+					// anyTargeting = true;
+					UUID weaponDec = UUID.fromString("2baf4c6e-417b-4d1a-943c-edfa816d50bf");
+					if (item.getDecision(weaponDec)==null) {
+						logger.log(Level.WARNING, "Weapon model of targeting autosoft not defined in drone " + drone);
+					} else if (item.getDecision(weaponDec).getValue().equals(weapon.getKey()))
+						autosoft = item;
+				}
+			}
+			if (autosoft!=null) {
+				// Matching autosoft
+				pool.autonomous = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + autosoft.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
+			} else {
+				// If the drone does not have the [Weapon] Targeting autosoft, then use Sensor rating – 1.
+				pool.autonomous = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue()-1;
+			}
+			// German special rules: if the local autosoft is better, the
+			//   rcc controlled drone may use this instead
+			if (rccAutosoft!=null && autosoft!=null && autosoft.getDecision(ItemTemplate.UUID_RATING).getValueAsInt()>rccAutosoft.getDecision(ItemTemplate.UUID_RATING).getValueAsInt()) {
+				pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + autosoft.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
+			}
 
 			return pool;
 		}
 
 		//-------------------------------------------------------------------
-		public static int[] getDroneMonitorArray(CarriedItem item) {
+		public static int[] getDroneMonitorArray(CarriedItem<ItemTemplate> item) {
 			ItemAttributeNumericalValue val = item.getAsValue(SR6ItemAttribute.BODY);
 			if (val==null)
 				throw new IllegalArgumentException("Item does not have a BODY attribute");
