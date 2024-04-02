@@ -3,6 +3,7 @@ package de.rpgframework.shadowrun6.vehicle;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -24,7 +25,9 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -184,37 +187,29 @@ public class VehicleTools {
 	}
 
 	//---------------------------------------------------------
-	public static List<CarriedItem<ItemTemplate>> getVehicleWeapons(Shadowrun6Character model, CarriedItem vehicle) {
+	public static List<CarriedItem<ItemTemplate>> getVehicleWeapons(Shadowrun6Character model, CarriedItem<ItemTemplate> vehicle) {
 		List<CarriedItem<ItemTemplate>> list = new ArrayList<>();
 		logger.log(Level.WARNING, "TODO: getVehicleWeapons not implemented yet");
+		ItemType type = vehicle.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
 		// Ensure it is a drone or vehicle
-//		if (!vehicle.getItem().isType(Arrays.asList(ItemType.droneTypes())) && !vehicle.getItem().isType(ItemType.VEHICLES))
-//			return list;
-//
-//		vehicle.getEffectiveAccessories().forEach( ci -> {
-//			// Add all mounted weapons
-//			// Medium
-//			AvailableSlot slot = ci.getSlot(ItemHook.VEHICLE_WEAPON);
-//			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
-//				list.add(slot.getAllEmbeddedItems().get(0));
-//			// Large
-//			slot = ci.getSlot(ItemHook.VEHICLE_WEAPON_LARGE);
-//			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
-//				list.add(slot.getAllEmbeddedItems().get(0));
-//			// Small
-//			slot = ci.getSlot(ItemHook.VEHICLE_WEAPON_SMALL);
-//			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
-//				list.add(slot.getAllEmbeddedItems().get(0));
-//
-//			switch (ci.getUsedAsType()) {
-//			case WEAPON_CLOSE_COMBAT:
-//			case WEAPON_FIREARMS:
-//			case WEAPON_RANGED:
-//			case WEAPON_SPECIAL:
-//				list.add(ci);
-//				break;
-//			}
-//		});
+		if (!List.of(ItemType.droneTypes()).contains(type) && type!=ItemType.VEHICLES)
+			return list;
+
+		vehicle.getEffectiveAccessories().forEach( ci -> {
+			// Add all mounted weapons
+			// Medium
+			AvailableSlot slot = ci.getSlot(ItemHook.VEHICLE_WEAPON);
+			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
+				list.add(slot.getAllEmbeddedItems().get(0));
+			// Large
+			slot = ci.getSlot(ItemHook.VEHICLE_WEAPON_LARGE);
+			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
+				list.add(slot.getAllEmbeddedItems().get(0));
+			// Small
+			slot = ci.getSlot(ItemHook.VEHICLE_WEAPON_SMALL);
+			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
+				list.add(slot.getAllEmbeddedItems().get(0));
+		});
 
 		return list;
 	}
@@ -226,7 +221,7 @@ public class VehicleTools {
 		 *          simrig rating
 		 * RCC    =
 		 */
-		public static DronePool getDroneWeaponPool(Shadowrun6Character model, CarriedItem drone, CarriedItem rcc, CarriedItem weapon) {
+		public static DronePool getDroneWeaponPool(Shadowrun6Character model, CarriedItem<ItemTemplate> drone, CarriedItem<ItemTemplate> rcc, CarriedItem<ItemTemplate> weapon) {
 			// Collect some necessary data
 			logger.log(Level.WARNING, "TODO: getDroneWeaponPool not implemented yet");
 //			CarriedItem rig = model.getItem("control_rig");
