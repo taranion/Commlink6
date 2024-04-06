@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
+	<quality id="leaking_essence" karma="0" pos="false" type="NORMAL">
+	</quality>
    <quality id="divergent_essence" karma="5" pos="false" type="NORMAL" max="3">
    	<choices>
 			<choice type="TEXT" ref="description" uuid="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" />
@@ -64,7 +66,7 @@
 		</choices>
    </quality>
    <quality id="fine_young_cannibal" karma="4" pos="false" type="TRANSGENIC" />
-   <quality id="doesn't_quite_fit" karma="2" pos="false" type="TRANSGENIC" >
+   <quality id="doesnt_quite_fit" karma="2" pos="false" type="TRANSGENIC" >
 		<modifications>
 			<valmod type="PRICEMOD" ref="CLOTHING" value="25"/>
 		</modifications>
