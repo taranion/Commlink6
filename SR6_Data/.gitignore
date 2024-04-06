@@ -1,3 +1,4 @@
 /.settings/
 /workbook.xlsx
 /.~lock.workbook.xlsx#
+.classpath
