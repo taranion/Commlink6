@@ -10,6 +10,10 @@
 	    	<datareq type="GEAR" ref="cyberleg"/>
 	    	<datareq type="GEAR" ref="cyberarm_custom"/>
 	    	<datareq type="GEAR" ref="cyberleg_custom"/>
+	    	<datareq type="GEAR" ref="additional_cyberarm"/>
+	    	<datareq type="GEAR" ref="digitigrade_legs"/>
+	    	<datareq type="GEAR" ref="lower_body_replacement"/>
+	    	<datareq type="GEAR" ref="primitive_cyberlimb"/>
 	    </selreq>
 	  </requires>
 	  <modifications>

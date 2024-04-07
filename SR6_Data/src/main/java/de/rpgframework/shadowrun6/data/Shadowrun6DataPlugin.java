@@ -944,6 +944,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} cyberware", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_cyberlimbs.xml");
 		logger.log(Level.DEBUG, "Loaded {0} cyberlimbs", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_cyberweapons.xml");
+		logger.log(Level.DEBUG, "Loaded {0} cyberweapons", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_bioware.xml");
 		logger.log(Level.DEBUG, "Loaded {0} bioware", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_biosenses.xml");
