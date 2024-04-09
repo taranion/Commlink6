@@ -58,7 +58,7 @@ public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
 			extra.getChildren().clear();
 
 		Node node = ItemUtilJFX.getItemInfoNode(data, ctrl, true);
-		if (node!=null)
+		if (node!=null && extra!=null)
 			extra.getChildren().add(node);
 	}
 
