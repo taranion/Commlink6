@@ -1976,7 +1976,10 @@ public class Shadowrun6Tools {
 			String[] raw = mod.getValueAsKeys();
 			int[] ar = (raw.length<=1)?new int[1]:new int[5];
 			for (int i=0; i<raw.length; i++) {
-				ar[i] = Integer.parseInt(raw[i]);
+				ar[i] = 0;
+				if (!raw[i].isBlank()) {
+					ar[i] = Integer.parseInt(raw[i]);
+				}
 			}
 
 			String name = "Unknown source";
