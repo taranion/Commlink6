@@ -6,6 +6,7 @@
            <valmod ref="BODY"      type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="REACTION"  type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="INTUITION" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <itemmod type="QUALITY" ref="toxin_resistance"/>
            <itemmod type="QUALITY" ref="allergy">
            	 <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
