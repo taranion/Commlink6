@@ -17,6 +17,7 @@ import org.prelle.javafx.public_skins.GridPaneTableViewSkin.HeaderLine;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.ISkillController;
@@ -62,7 +63,7 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 		if (getContent()==null) {
 			logger.log(Level.ERROR, "No content");
 		}
-		bxDescription.setResolver( req -> Shadowrun6Tools.getRequirementString(req, Locale.getDefault()));
+		bxDescription.setResolver( req -> Shadowrun6Tools.getRequirementString( (Requirement)req, Locale.getDefault()));
 
 		table.setActionCallback(sVal -> openActionDialog(sVal));
 		knowTable.setActionCallback(sVal -> openActionDialog(sVal));

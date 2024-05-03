@@ -38,14 +38,23 @@ public class FocusValueDescriptionPane extends GenericDescriptionVBox {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.jfx.GenericDescriptionVBox#initLayout()
+	 * @see de.rpgframework.jfx.GenericDescriptionVBox#initExtraComponents()
 	 */
-	protected void initLayout() {
-		super.initLayout();
+	@Override
+	protected void initExtraComponents() {
+		super.initExtraComponents();
 		extra = new VBox(5);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.GenericDescriptionVBox#initExtraLayout()
+	 */
+	@Override
+	protected void initExtraLayout() {
+		super.initExtraLayout();
 		inner.getChildren().add(0, extra);
 		setStyle("-fx-max-width: 20em");
-
 	}
 
 	//-------------------------------------------------------------------
@@ -58,11 +67,4 @@ public class FocusValueDescriptionPane extends GenericDescriptionVBox {
 		extra.getChildren().add(node);
 	}
 
-	//-------------------------------------------------------------------
-	public void setData(DataItemValue<?> data) {
-		if (data instanceof FocusValue)
-			setData( (FocusValue)data );
-		else
-			super.setData(data);
-	}
 }

@@ -1,10 +1,8 @@
 package de.rpgframework.shadowrun6.chargen.jfx.pane;
 
-import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.function.Function;
 
-import de.rpgframework.genericrpg.data.DataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.jfx.GenericDescriptionVBox;
@@ -19,7 +17,7 @@ import javafx.scene.layout.VBox;
  * @author prelle
  *
  */
-public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
+public class CarriedItemDescriptionPane extends GenericDescriptionVBox<ItemTemplate> {
 
 	private SR6CharacterController ctrl;
 	private VBox extra;
@@ -39,14 +37,23 @@ public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.jfx.GenericDescriptionVBox#initLayout()
+	 * @see de.rpgframework.jfx.GenericDescriptionVBox#initExtraComponents()
 	 */
-	protected void initLayout() {
-		super.initLayout();
+	@Override
+	protected void initExtraComponents() {
+		super.initExtraComponents();
 		extra = new VBox(5);
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.jfx.GenericDescriptionVBox#initExtraLayout()
+	 */
+	@Override
+	protected void initExtraLayout() {
+		super.initExtraLayout();
 		inner.getChildren().add(0, extra);
 		setStyle("-fx-max-width: 20em");
-
 	}
 
 	//-------------------------------------------------------------------
@@ -62,12 +69,4 @@ public class CarriedItemDescriptionPane extends GenericDescriptionVBox {
 			extra.getChildren().add(node);
 	}
 
-	//-------------------------------------------------------------------
-	public void setData(DataItemValue<?> data) {
-//		System.getLogger(CarriedItemDescriptionPane.class.getPackageName()).log(Level.DEBUG, "setData {0}",data);
-		if (data instanceof CarriedItem)
-			setData( (CarriedItem)data );
-		else
-			super.setData(data);
-	}
 }
