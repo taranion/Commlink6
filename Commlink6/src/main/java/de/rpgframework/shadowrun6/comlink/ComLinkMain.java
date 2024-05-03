@@ -7,7 +7,6 @@ import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -145,6 +144,7 @@ public class ComLinkMain extends EdenClientApplication {
 	@Override
 	public List<StartupStep> getPostGUISteps() {
 		List<StartupStep> merged = new ArrayList<>(super.getPostGUISteps());
+		merged.add(new LoadCustomSR6DataStep());
 		merged.add(new LoadSR6CharactersStep(this));
 		return merged;
 	}
