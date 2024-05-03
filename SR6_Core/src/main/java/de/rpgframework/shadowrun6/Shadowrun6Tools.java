@@ -1857,7 +1857,7 @@ public class Shadowrun6Tools {
 			logger.log(Level.WARNING, ss.toString());
 			ret.add(ss);
 
-			List<FireMode> modes = item.getAsObject(SR6ItemAttribute.FIREMODES).getModifiedValue();
+			List<FireMode> modes = (item.hasAttribute(SR6ItemAttribute.FIREMODES))?item.getAsObject(SR6ItemAttribute.FIREMODES).getModifiedValue():List.of();
 			if (modes!=null) {
 				// Semi-Automatic (CRB 109)
 				if (modes.contains(FireMode.SEMI_AUTOMATIC)) {
