@@ -55,6 +55,7 @@ import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
+import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.DamageElement;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MentorSpirit;
@@ -559,6 +560,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			break;
 		case CARRIED:
 			ret.add( handleCARRIED(item, choice));
+			break;
+		case CONTACT:
+			ret.add( handleCONTACT(item, choice));
 			break;
 		case DAMAGE_ELEMENT:
 			ret.add( handleGeneric(DamageElement.class, choice, item));
@@ -1326,6 +1330,48 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 			updateButtons();
 			showHelpFor(n);
+		 });
+		content.getChildren().add(choicebox);
+
+		return choicebox;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleCONTACT(ComplexDataItem item, Choice choice) {
+		ChoiceBox<Contact> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<Contact>() {
+			public Contact fromString(String value) { return null;}
+			public String toString(Contact value) {
+				if (value==null) return "-";
+				return value.getName()+" ( "+value.getTypeName()+")";
+			}
+		});
+		List<Contact> items = ((Shadowrun6Character)ctrl.getModel()).getContacts();
+
+//		// Eventually sort
+//		if (choice.getTypeReference()!=null) {
+//			logger.log(Level.DEBUG, "Reduce contact to select from to "+choice.getTypeReference());
+//			System.err.println("Reduce contact to select from to "+choice.getTypeReference());
+//			switch (choice.getTypeReference()) {
+//			case "MELEE":
+//				items = items.stream().filter(i -> i.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.WEAPON_CLOSE_COMBAT).collect(Collectors.toList());
+//				break;
+//			default:
+//				logger.log(Level.WARNING, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'");
+//			}
+//		}
+		choicebox.getItems().addAll(items);
+
+		Collections.sort(choicebox.getItems(), new Comparator<Contact>() {
+			public int compare(Contact o1, Contact o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId().toString()));
+
+			updateButtons();
+			//showHelpFor(n);
 		 });
 		content.getChildren().add(choicebox);
 
