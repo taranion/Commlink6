@@ -77,6 +77,11 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 		// Check availability
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
 			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
+			// Handle rule that decreases availability
+			if (parent.getModel().hasRuleFlag(SR6RuleFlag.DECREASE_AVAILABILITY_2)) {
+				avail.setValue( Math.max(1, avail.getValue()-2) );
+			}
+
 			int max = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_AVAILABILITY);
 			if (avail!=null && avail.getValue() > max) {
 				return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH, avail.getValue());
