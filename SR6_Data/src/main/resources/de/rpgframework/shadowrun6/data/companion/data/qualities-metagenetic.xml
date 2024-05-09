@@ -414,7 +414,7 @@
        <checkmod ref="athletics" type="SKILL" what="DICE" value="2"/>
      </modifications>
    </quality>
-   <quality id="shiva_arms" karma="5" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS" max="3">
+   <quality id="shiva_arms" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS" max="3">
      <modifications>
        <valmod type="ATTRIBUTE" ref="BODY" value="1" set="MAX"/>
        <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" set="MAX"/>
