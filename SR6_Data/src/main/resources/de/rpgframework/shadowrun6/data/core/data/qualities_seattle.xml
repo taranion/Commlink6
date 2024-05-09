@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
-   <quality id="you_get_used_to_it"	  karma="5" pos="true" type="NORMAL" lang="en">
+   <quality id="you_get_used_to_it"	  karma="5" pos="true" type="NORMAL">
      <modifications>
        <valmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" set="NATURAL" apply="CHARACTER" />
      </modifications>
    </quality>
-   <quality id="i_belong_here"  	  karma="3" pos="true" type="NORMAL" lang="en"/>
-   <quality id="salish_shaman"  	  karma="3" pos="true" type="NORMAL" lang="en"/>
-   <quality id="big_brothers_blindspot"	  karma="14" pos="true" type="NORMAL" lang="en">
+	<quality id="i_belong_here" karma="3" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="SKILL" ref="con" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y"/>
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER" cond="y"/>
+     </modifications>
+	</quality>
+   <quality id="salish_shaman"  	  karma="9" pos="true" type="NORMAL" />
+   <quality id="big_brothers_blindspot"	  karma="14" pos="true" type="NORMAL" >
      <modifications>
        <checkmod type="SKILL" ref="stealth" value="1" what="EDGE_ONLY_TEST" cond="true" />
        <checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST" cond="true" />
@@ -16,13 +21,13 @@
        </itemmod>
      </modifications>
    </quality>
-   <quality id="northgate_optimist"	  karma="3" pos="true" type="NORMAL" lang="en">
+   <quality id="northgate_optimist"	  karma="3" pos="true" type="NORMAL" >
      <modifications>
        <checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="true" />
        <checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" cond="true" />
      </modifications>
    </quality>
-   <quality id="bilko_contacts"	  karma="7" pos="true" type="NORMAL" multi="true" lang="en">
+   <quality id="bilko_contacts"	  karma="7" pos="true" type="NORMAL" multi="true" >
    	<choices>
    		<choice type="CONTACT" uuid="75f01ecc-60f3-4b5b-98de-c80008ebffec"/>
          <choice type="SUBSELECT" ref="variant" uuid="0180ba51-5b30-471d-bdba-5e2482b8440d">
@@ -31,34 +36,34 @@
          </choice>
    	</choices>
    </quality>
-   <quality id="water_born"	  karma="5" pos="true" type="NORMAL" hasLevel="true" max="2" lang="en">
+   <quality id="water_born"	  karma="5" pos="true" type="NORMAL" hasLevel="true" max="2" >
      <modifications>
        <valmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" set="NATURAL" apply="CHARACTER" />
      </modifications>
    </quality>
-   <quality id="the_briar_patch"	  karma="5" pos="true" type="NORMAL" hasLevel="true" max="2" lang="en">
+   <quality id="the_briar_patch"	  karma="5" pos="true" type="NORMAL" hasLevel="true" max="2" >
      <modifications>
        <checkmod type="SKILL" ref="cracking" value="0" apply="CHARACTER" cond="1"/>
      </modifications>
    </quality>
-   <quality id="what_doesnt_kill_you"	  karma="3" pos="true" type="NORMAL" lang="en">
+   <quality id="what_doesnt_kill_you"	  karma="3" pos="true" type="NORMAL" >
      <modifications>
        <checkmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" what="REPLACE_WITH_WILD" apply="CHARACTER" />
      </modifications>
    </quality>
-   <quality id="good_ol_folks"	  karma="7" pos="true" type="NORMAL" lang="en">
+   <quality id="good_ol_folks"	  karma="7" pos="true" type="NORMAL" >
      <modifications>
        <checkmod type="SKILL" ref="con" value="1" what="EDGE" cond="true" />
        <checkmod type="SKILL" ref="influence" value="1" what="EDGE" cond="true" />
      </modifications>
    </quality>
-   <quality id="clean_living"	  karma="10" pos="true" type="NORMAL" lang="en">
+   <quality id="clean_living"	  karma="10" pos="true" type="NORMAL" >
      <modifications>
        <valmod type="ATTRIBUTE" ref="BODY" value="1" set="NATURAL" />
        <!-- TODO: Increase lifestyle cost +500 -->
      </modifications>
    </quality>
-   <quality id="import_export"	  karma="10" pos="true" type="NORMAL" lang="en">
+   <quality id="import_export"	  karma="10" pos="true" type="NORMAL" >
    	<choices>
          <choice type="SUBSELECT" ref="variant" uuid="0180ba51-5b30-471d-bdba-5e2482b8440d">
            <subOption id="regular" />
@@ -66,6 +71,6 @@
          </choice>
    	</choices>
    </quality>
-   <quality id="mental_mapmaker"  	  karma="5" pos="true" type="NORMAL" lang="en"/>
+   <quality id="mental_mapmaker"  	  karma="5" pos="true" type="NORMAL" />
 
 </qualities>

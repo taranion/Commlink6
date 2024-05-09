@@ -186,6 +186,7 @@ public class Shadowrun6DataPlugin  {
 			initAstralWays();
 			initBodyShop();
 			initEasyCome();
+			initEmeraldCity();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -975,6 +976,19 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications from 'Easy Come'");
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"sif_new_orleans/data/qualities_easycome.xml");
 		logger.log(Level.DEBUG, "Loaded {0} qualities", list.size());
+	}
+
+	//-------------------------------------------------------------------
+	private void initEmeraldCity() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START -----------------------------Emerald_City------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "emerald", "emerald.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.LOCATION);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"emerald/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities from 'Emerald City'");
+
+//		System.exit(1);
 	}
 
 }

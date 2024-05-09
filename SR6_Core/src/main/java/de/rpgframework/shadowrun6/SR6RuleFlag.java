@@ -27,6 +27,8 @@ public enum SR6RuleFlag implements RuleFlag {
 	/* Ignore damage box before calculating modifiers */
 	PAIN_TOLERANCE_IGNORE_BOX,
 
+	DECREASE_AVAILABILITY_2,
+
 	// Apply Adept and Magican effects of the mentor spirit
 	MENTOR_SPIRIT_BOTH,
 	/* Use CHA for defense rating */
