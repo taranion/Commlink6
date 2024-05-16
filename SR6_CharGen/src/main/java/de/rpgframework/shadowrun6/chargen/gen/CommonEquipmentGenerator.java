@@ -9,7 +9,6 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.chargen.ComplexDataItemController.RemoveMode;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -294,6 +293,9 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	private void applyPriceModifiers(CarriedItem<ItemTemplate> tmp) {
 
 		ItemAttributeNumericalValue<SR6ItemAttribute> priceVal = tmp.getAsValue(SR6ItemAttribute.PRICE);
+		if (priceVal==null) {
+			logger.log(Level.ERROR, "No PRICE attribute for {0}", tmp);
+		}
 
 		double baseCost = priceVal.getDistributed();
 		// Add price modifications that apply
