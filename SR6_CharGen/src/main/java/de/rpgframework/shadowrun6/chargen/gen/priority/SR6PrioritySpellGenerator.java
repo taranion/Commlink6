@@ -127,7 +127,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 		// Ensure spell has not been selected yet
 		for (SpellValue<SR6Spell> tmp : getSelected()) {
 			if (tmp.getResolved()==value)
-				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
+				return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 
 		if (freeSpells<1) {
@@ -136,7 +136,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 				return Possible.TRUE;
 			}
 
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 		}
 
 		return Possible.TRUE;
@@ -179,11 +179,11 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	@Override
 	public Possible canBeDeselected(SpellValue<SR6Spell> value) {
 		if (!getSelected().contains(value)) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 
 		if (value.isAutoAdded()) {
-			return new Possible(IRejectReasons.IMPOSS_AUTO_ADDED);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_AUTO_ADDED);
 		}
 
 		return Possible.TRUE;

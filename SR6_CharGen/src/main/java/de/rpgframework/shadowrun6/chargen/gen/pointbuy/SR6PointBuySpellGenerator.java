@@ -139,7 +139,7 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 		}
 
 		if (settings.characterPoints<2 && parent.getModel().getKarmaFree()<5) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES , IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 		}
 
 		return Possible.TRUE;
@@ -184,11 +184,11 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	@Override
 	public Possible canBeDeselected(SpellValue<SR6Spell> value) {
 		if (!getSelected().contains(value)) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 
 		if (value.isAutoAdded()) {
-			return new Possible(IRejectReasons.IMPOSS_AUTO_ADDED);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_AUTO_ADDED);
 		}
 
 		return Possible.TRUE;

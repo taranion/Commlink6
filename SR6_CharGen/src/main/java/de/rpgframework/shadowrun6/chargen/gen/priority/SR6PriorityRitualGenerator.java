@@ -2,20 +2,15 @@ package de.rpgframework.shadowrun6.chargen.gen.priority;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualValue;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.IRitualGenerator;
 import de.rpgframework.shadowrun.chargen.gen.ISpellGenerator;
@@ -74,7 +69,7 @@ public class SR6PriorityRitualGenerator extends CommonRitualController implement
 		// Ensure spell has not been selected yet
 		for (RitualValue tmp : getSelected()) {
 			if (tmp.getResolved()==value)
-				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
+				return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 
 		if (freeLeft<1) {
@@ -83,7 +78,7 @@ public class SR6PriorityRitualGenerator extends CommonRitualController implement
 				return Possible.TRUE;
 			}
 
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 		}
 
 		return Possible.TRUE;
@@ -96,11 +91,11 @@ public class SR6PriorityRitualGenerator extends CommonRitualController implement
 	@Override
 	public Possible canBeDeselected(RitualValue value) {
 		if (!getSelected().contains(value)) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 
 		if (value.isAutoAdded()) {
-			return new Possible(IRejectReasons.IMPOSS_AUTO_ADDED);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_AUTO_ADDED);
 		}
 
 		return Possible.TRUE;
