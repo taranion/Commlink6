@@ -26,6 +26,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -126,8 +127,13 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 
 			AdeptPowerValue value = new AdeptPowerValue(data, data.hasLevel()?1:0);
 			getModel().addAdeptPower(value);
-			for (Decision dec : decisions)
-				value.addDecision(dec);
+			for (Decision dec : decisions) {
+				if (dec.getChoiceUUID().equals(ItemTemplate.UUID_RATING)) {
+					value.setDistributed( dec.getValueAsInt());
+				} else {
+					value.addDecision(dec);
+				}
+			}
 			logger.log(Level.INFO, "Selected ''{0}''", value.getNameWithRating());
 
 			// Record in history
