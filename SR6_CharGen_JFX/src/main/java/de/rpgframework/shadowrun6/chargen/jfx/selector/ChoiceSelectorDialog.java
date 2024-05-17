@@ -352,7 +352,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				processVariants( (ItemTemplate)item );
 			}
 			// Eventually prepare hardcoded rating
-			if (item.hasLevel()) {
+			if (item.hasLevel() && !(item instanceof Quality)) {
 				processRating( item );
 			}
 
