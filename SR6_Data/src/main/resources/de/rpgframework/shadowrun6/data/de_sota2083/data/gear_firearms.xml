@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="ruhrmetall_blizzard" avail="6L" price="3500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="GEARMOD" ref="rigid_stock" />
+			<itemmod type="GEARMOD" ref="gas_vent_system" />
+			<itemmod type="GEARMOD" ref="foregrip" />
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+			<itemmod type="GEARMOD" ref="accessory_rail_left" />
+			<itemmod type="GEARMOD" ref="accessory_rail_right" />
+      </modifications>
+      <weapon dmg="5P" attack="4,11,10,6,2" mode="SA/BF/FA" ammo="32(c)" skill="firearms" spec="firearms/rifles"/>
+   </item>
+	<item id="glock_giftzwerg_2" avail="2L" price="400" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" >
+		<modifications>
+			<itemmod type="HOOK" ref="TOP" />
+			<itemmod type="HOOK" ref="BARREL" />
+			<itemmod type="GEARMOD" ref="melee_hardening" />
+      </modifications>
+      <weapon dmg="3P" attack="9,10,8,," mode="SA" ammo="6(c)" skill="firearms" spec="firearms/pistols_light"/>
+   </item>
+   <item id="blaser_conqueror" avail="2L" price="9500" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
+      <modifications>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="STOCK"/>
+		 	<itemmod type="GEARMOD" ref="biometric_gun_lock" />
+		 	<itemmod type="GEARMOD" ref="easy_breakdown" />
+			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="weapon_commlink" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+      </modifications>
+      <weapon attack="2,6,11,11,5"  ammo="8(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/>
+   </item>
+
+</items>
