@@ -89,9 +89,11 @@ public class LoadCustomSR6DataStep implements StartupStep {
 	public void run() {
 		CustomDataSetManager manager = CustomDataSetManagerLoader.getInstance();
 		if (manager==null) {
+			logger.log(Level.WARNING, "No custom data handler found");
 			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, "No custom data handler found - if you make use of inofficial datasets you won't be able to load them.");
 			return;
 		}
+		logger.log(Level.INFO, "Got instanceof Custom Data handler: "+manager);
 		List<CustomDataSetHandle> list = manager.getCustomDataProducts();
 		for (CustomDataSetHandle handle : list) {
 			DataSet set = handle.getName();
