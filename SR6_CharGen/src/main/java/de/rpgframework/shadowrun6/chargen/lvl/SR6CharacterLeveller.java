@@ -72,6 +72,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		equipment = new SR6EquipmentLeveller(this);
 		spells    = new SR6SpellLeveller(this);
 		rituals   = new SR6RitualLeveller(this);
+		foci      = new SR6FocusLeveller(this);
 		adeptPowers = new SR6AdeptPowerLeveller(this);
 		complex   = new SR6ComplexFormLeveller(this);
 		metaEcho  = new SR6MetamagicOrEchoController(this, false);

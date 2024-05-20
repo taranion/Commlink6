@@ -220,7 +220,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 //		sins      = new SR6SINGenerator(this);
 //		lifestyles= new SR6LifestyleGenerator(this);
 //		contacts  = new SR6ContactGenerator(this);
-//		foci      = new SR6CommonFocusController(this);
+//		foci      = new SR6FocusGenerator(this);
 //		qPaths    = new CommonQualityPathController(this);
 //		martial   = new SR6MartialArtsController(this);
 		drake     = new SR6DrakeController(this, true);

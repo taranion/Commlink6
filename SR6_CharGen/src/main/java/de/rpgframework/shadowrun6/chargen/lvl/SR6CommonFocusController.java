@@ -155,7 +155,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		}
 
 		Decision decForce = GenericRPGTools.getDecision(ItemTemplate.UUID_RATING, decisions);
-		int force = Integer.parseInt(decForce.getValue());
+		int force = (decForce!=null)?Integer.parseInt(decForce.getValue()):1;
 
 		FocusValue val = new FocusValue(value, force);
 		for (Decision dec : decisions) {
