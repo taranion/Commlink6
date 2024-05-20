@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.chargen.jfx.page;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -12,6 +13,7 @@ import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
@@ -21,7 +23,9 @@ import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.RitualValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.Tradition;
+import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.chargen.jfx.pane.SpellDescriptionPane;
 import de.rpgframework.shadowrun.chargen.jfx.section.FocusSection;
 import de.rpgframework.shadowrun.chargen.jfx.section.MetamagicOrEchoSection;
@@ -161,12 +165,22 @@ public class MagicPage extends Page {
 				Decision[] dec = dialog.apply(value, value.getChoices());
 				logger.log(Level.WARNING, "decisions: "+Arrays.toString(dec));
 				return dec;
-			}};
+			}
+			public void refresh() {
+				super.refresh();
+
+				IFocusController ctrl = control.getFocusController();
+				if (model!=null && ctrl!=null) {
+					lbNum.setText(model.getFoci().size()+" / "+model.getAttribute(ShadowrunAttribute.MAGIC).getDistributed());
+					lbSum.setText(ctrl.getFocusPointsLeft()+" / "+(model.getAttribute(ShadowrunAttribute.MAGIC).getDistributed()*5));
+				}
+			}
+		};
 		secFoci.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secFoci, 4);
 		FlexGridPane.setMinHeight(secFoci, 6);
 		FlexGridPane.setMediumWidth(secFoci, 5);
-		FlexGridPane.setMediumHeight(secFoci, 8);
+		FlexGridPane.setMediumHeight(secFoci, 6);
 	}
 
 	//-------------------------------------------------------------------
