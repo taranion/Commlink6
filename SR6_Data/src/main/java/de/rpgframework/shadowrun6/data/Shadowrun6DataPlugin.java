@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.lang.reflect.GenericDeclaration;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.DataSet.DataSetType;
+import de.rpgframework.genericrpg.data.GenericCore;
 import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.items.AlternateUsage;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -120,6 +122,7 @@ import de.rpgframework.shadowrun6.vehicle.Powertrain;
 import de.rpgframework.shadowrun6.vehicle.PowertrainList;
 import de.rpgframework.shadowrun6.vehicle.QualityFactor;
 import de.rpgframework.shadowrun6.vehicle.QualityFactorList;
+import de.rpgframework.world.LocalWorldManager;
 
 /**
  * @author Stefan
@@ -254,6 +257,13 @@ public class Shadowrun6DataPlugin  {
 			}
 		}
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	private void initWorld() throws IOException {
+		GenericCore core = new GenericCore() {
+		};
+		LocalWorldManager mgr = new LocalWorldManager(null);
 	}
 
 	//-------------------------------------------------------------------

@@ -361,8 +361,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			contact.setType(Shadowrun6Core.getItemList(ContactType.class).get(type).getId());
 
 			// Generate a name
-			Map<GeneratorVariable,Integer> variables = new HashMap<>();
-			String name = (String) nameGen.generate(variables);
+			String name = (String) nameGen.generate();
 			contact.setName(name);
 
 			logger.log(Level.ERROR, "Generated {0}: {1}", name, contact);

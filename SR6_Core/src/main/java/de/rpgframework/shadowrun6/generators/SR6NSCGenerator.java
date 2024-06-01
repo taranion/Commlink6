@@ -61,8 +61,8 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 	 * @see de.rpgframework.random.RandomGenerator#understandsHint(de.rpgframework.classification.Classification)
 	 */
 	@Override
-	public boolean understandsHint(Classification<?> filter) {
-		if (filter==RoleplayingSystem.SHADOWRUN6) return true;
+	public boolean understandsHint(ClassificationType filter) {
+		if (filter==GenericClassificationType.RULES) return true;
 		return false;
 	}
 
@@ -71,12 +71,12 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 	 * @see de.rpgframework.random.RandomGenerator#generate(de.rpgframework.classification.Classification[])
 	 */
 	@Override
-	public Object generate(Map<GeneratorVariable,Integer> variables, Classification<?>... classifier) {
+	public Object generate() {
 		logger.log(Level.INFO, "ENTER: createNSC()");
 		logger.log(Level.INFO, "variables = "+variables);
-		logger.log(Level.INFO, "classifier = "+Arrays.toString(classifier));
+		logger.log(Level.INFO, "classifier = "+classifier);
 		try {
-			Actor actor =  (Actor)super.generate(variables, classifier);
+			Actor actor =  (Actor)super.generate();
 			Integer minRat = variables.get(RunVariable.PROF_EXPECTED_MIN);
 			Integer maxRat = variables.get(RunVariable.PROF_EXPECTED_MAX);
 			NPCType npcType = (NPCType) getHint(ShadowrunTaxonomy.NPCTYPE, classifier);
@@ -100,7 +100,7 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 			}
 			return actor;
 		} finally {
-			logger.log(Level.INFO, "LEAVE: createNSC("+Arrays.toString(classifier)+")");
+			logger.log(Level.INFO, "LEAVE: createNSC("+classifier+")");
 		}
 	}
 }
