@@ -3,17 +3,15 @@ package de.rpgframework.shadowrun6.generators;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import de.rpgframework.classification.Classification;
 import de.rpgframework.classification.ClassificationType;
 import de.rpgframework.classification.GenericClassificationType;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.random.Actor;
-import de.rpgframework.random.GeneratorVariable;
+import de.rpgframework.random.VariableHolderNode;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.generators.RunVariable;
@@ -71,16 +69,16 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 	 * @see de.rpgframework.random.RandomGenerator#generate(de.rpgframework.classification.Classification[])
 	 */
 	@Override
-	public Object generate() {
+	public Object generate(VariableHolderNode context) {
 		logger.log(Level.INFO, "ENTER: createNSC()");
-		logger.log(Level.INFO, "variables = "+variables);
-		logger.log(Level.INFO, "classifier = "+classifier);
+		logger.log(Level.INFO, "variables = "+context.getGenericVariables());
+		logger.log(Level.INFO, "classifier = "+context.getHints());
 		try {
-			Actor actor =  (Actor)super.generate();
-			Integer minRat = variables.get(RunVariable.PROF_EXPECTED_MIN);
-			Integer maxRat = variables.get(RunVariable.PROF_EXPECTED_MAX);
-			NPCType npcType = (NPCType) getHint(ShadowrunTaxonomy.NPCTYPE, classifier);
-			ContactType conType = (ContactType) getHint(ShadowrunTaxonomy.CONTACT, classifier);
+			Actor actor =  (Actor)super.generate(context);
+			Integer minRat = context.getVariable(RunVariable.PROF_EXPECTED_MIN);
+			Integer maxRat = context.getVariable(RunVariable.PROF_EXPECTED_MAX);
+			NPCType npcType = (NPCType) getHint(ShadowrunTaxonomy.NPCTYPE, context.getHints());
+			ContactType conType = (ContactType) getHint(ShadowrunTaxonomy.CONTACT, context.getHints());
 			logger.log(Level.WARNING, "To Do: Find a matching rulespecific object for  "+npcType+"/"+conType+" and rating "+minRat+"-"+maxRat);
 
 			List<SR6NPC> possible = new ArrayList<>();
@@ -100,7 +98,7 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 			}
 			return actor;
 		} finally {
-			logger.log(Level.INFO, "LEAVE: createNSC("+classifier+")");
+			logger.log(Level.INFO, "LEAVE: createNSC()");
 		}
 	}
 }

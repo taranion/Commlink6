@@ -69,7 +69,7 @@ public class GeneratorTest {
 //		assertNotNull(gen);
 
 		Object gen =RandomGeneratorRegistry.generate(GeneratorType.RUN, List.of(Genre.CYBERPUNK), List.of(FilterCulture.ADL, RoleplayingSystem.SHADOWRUN6), Map.of());
-		System.out.println("Generated plot: "+gen);
+		System.out.println("Generated plot: "+gen.getClass());
 		assertNotNull(gen);
 		persist.write( (Plot)gen, System.out);
 
