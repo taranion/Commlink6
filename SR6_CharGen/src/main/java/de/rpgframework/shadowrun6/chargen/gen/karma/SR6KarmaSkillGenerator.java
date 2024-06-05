@@ -217,6 +217,9 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			ensureNativeLanguage();
 
 			for (SR6SkillValue val : model.getSkillValues()) {
+				if (!allowed.contains(val.getSkill()) && val.getDistributed()>0) {
+					val.setDistributed(0);
+				}
 				int karma = 0;
 				switch (val.getSkill().getType()) {
 				case LANGUAGE:
