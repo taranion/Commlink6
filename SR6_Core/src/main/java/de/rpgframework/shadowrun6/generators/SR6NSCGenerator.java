@@ -11,6 +11,7 @@ import de.rpgframework.classification.ClassificationType;
 import de.rpgframework.classification.GenericClassificationType;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.random.Actor;
+import de.rpgframework.random.DataType;
 import de.rpgframework.random.VariableHolderNode;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.NPCType;
@@ -77,13 +78,14 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 			Actor actor =  (Actor)super.generate(context);
 			Integer minRat = context.getVariable(RunVariable.PROF_EXPECTED_MIN);
 			Integer maxRat = context.getVariable(RunVariable.PROF_EXPECTED_MAX);
+			if (maxRat==0) maxRat=12;
 			NPCType npcType = (NPCType) getHint(ShadowrunTaxonomy.NPCTYPE, context.getHints());
 			ContactType conType = (ContactType) getHint(ShadowrunTaxonomy.CONTACT, context.getHints());
 			logger.log(Level.WARNING, "To Do: Find a matching rulespecific object for  "+npcType+"/"+conType+" and rating "+minRat+"-"+maxRat);
 
 			List<SR6NPC> possible = new ArrayList<>();
 			for (SR6NPC npc : Shadowrun6Core.getItemList(SR6NPC.class)) {
-//				logger.log(Level.DEBUG, "Check "+npc.getId()+": "+npc.getType()+"/"+npc.getTypes()+" with rating "+npc.getRating());
+				logger.log(Level.INFO, "Check "+npc.getId()+": "+npc.getType()+"/"+npc.getTypes()+" with rating "+npc.getRating());
 				if (minRat!=null && npc.getRating()<minRat) continue;
 				if (maxRat!=null && npc.getRating()>maxRat) continue;
 				if (npcType!=null && npc.getType()!=npcType) continue;
@@ -100,5 +102,14 @@ public class SR6NSCGenerator extends ShadowrunNSCGenerator {
 		} finally {
 			logger.log(Level.INFO, "LEAVE: createNSC()");
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.random.RandomGenerator#getProvidedData()
+	 */
+	@Override
+	public Collection<DataType> getProvidedData() {
+		return List.of(DataType.ACTOR_BASEDATA, DataType.RULEDATA);
 	}
 }

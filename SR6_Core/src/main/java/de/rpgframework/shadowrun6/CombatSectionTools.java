@@ -231,7 +231,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTableAstral(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable(
-				Shadowrun6Core.getI18nResources().getString("label.ar", loc),
+				SR6ItemAttribute.ATTACK_RATING.getShortName(loc),
 				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
 				SR6ItemAttribute.DAMAGE.getShortName(loc)
 				);
@@ -241,13 +241,13 @@ public class CombatSectionTools {
 
 		/* Unarmed */
 		AttackEntry entry = new AttackEntry(Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed").getShortName(loc)+" (AST)");
-		// Col1: Pool
-		entry.setCol1(pool.toString());
-		entry.setCol1Tooltip(pool.toExplainString());
-		// Col2: AR
-		pool = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL).getPool();
+		// Col2: Pool
 		entry.setCol2(pool.toString());
 		entry.setCol2Tooltip(pool.toExplainString());
+		// Col1: AR
+		pool = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL).getPool();
+		entry.setCol1(pool.toString());
+		entry.setCol1Tooltip(pool.toExplainString());
 		// Col3: DMG
 		AttributeValue<ShadowrunAttribute> tradAttr = null;
 		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells() && model.getTradition()!=null) {
