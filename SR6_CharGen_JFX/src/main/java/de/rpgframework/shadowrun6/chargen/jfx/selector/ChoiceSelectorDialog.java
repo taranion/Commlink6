@@ -74,6 +74,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.SignatureManeuver;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
@@ -333,6 +334,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	@Override
 	public Decision[] apply(T item, List<Choice> choices) {
 		logger.log(Level.INFO, "ENTER apply({0}, {1})", item, choices);
+		logger.log(Level.INFO, "  context = {0}", context);
 		this.item = item;
 		this.choices = choices;
 		CloseType closed = null;
@@ -599,6 +601,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			break;
 		case SENSE:
 			ret.add( handleSENSE(item, choice) );
+			break;
+		case SIGNATURE_MANEUVERS:
+			ret.add( handleSignatureManeuvers(item, choice));
 			break;
 		case SKILL:
 			ret.add( handleSKILL(item, choice) );
@@ -1438,6 +1443,39 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 
 			updateButtons();
 			showHelpFor(n);
+		 });
+		content.getChildren().add(choicebox);
+
+		return choicebox;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleSignatureManeuvers(ComplexDataItem item, Choice choice) {
+		ChoiceBox<SignatureManeuver> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<SignatureManeuver>() {
+			public SignatureManeuver fromString(String value) { return null;}
+			public String toString(SignatureManeuver value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		List<SignatureManeuver> items = (new ArrayList<SignatureManeuver>())
+				.stream()
+//				.filter( q -> (choice.getChoiceOptions()==null) || List.of(choice.getChoiceOptions()).contains(q.getId()))
+				.toList();
+		// Eventually sort
+		choicebox.getItems().addAll(items);
+
+		Collections.sort(choicebox.getItems(), new Comparator<SignatureManeuver>() {
+			public int compare(SignatureManeuver o1, SignatureManeuver o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getUuid().toString()));
+
+			updateButtons();
+			//showHelpFor(n);
 		 });
 		content.getChildren().add(choicebox);
 
