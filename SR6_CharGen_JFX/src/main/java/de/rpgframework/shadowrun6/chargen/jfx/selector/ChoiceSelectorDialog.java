@@ -62,6 +62,7 @@ import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.ShadowrunElement;
 import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
@@ -128,6 +129,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	private T item;
 	private ItemHook hook;
 	private DataItemValue context;
+	private Shadowrun6Character model;
 	private SR6PieceOfGearVariant selectedVariant;
 	private Integer selectedRating;
 	private List<Choice> choices;
@@ -185,6 +187,11 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		Shadowrun6Character model = ctrl.getModel();
 		chooseAdeptAdvantages.setValue( model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesPowers());
 		useBothAdvantages.set(model.hasRuleFlag(SR6RuleFlag.MENTOR_SPIRIT_BOTH_ADVANTAGES));
+	}
+
+	//-------------------------------------------------------------------
+	public void setModel(Shadowrun6Character model) {
+		this.model = model;
 	}
 
 	//-------------------------------------------------------------------
@@ -335,6 +342,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	public Decision[] apply(T item, List<Choice> choices) {
 		logger.log(Level.INFO, "ENTER apply({0}, {1})", item, choices);
 		logger.log(Level.INFO, "  context = {0}", context);
+		try {
+			throw new RuntimeException("Trace");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.item = item;
 		this.choices = choices;
 		CloseType closed = null;
@@ -1459,10 +1472,8 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				return value.getName();
 			}
 		});
-		List<SignatureManeuver> items = (new ArrayList<SignatureManeuver>())
-				.stream()
-//				.filter( q -> (choice.getChoiceOptions()==null) || List.of(choice.getChoiceOptions()).contains(q.getId()))
-				.toList();
+
+		List<SignatureManeuver> items = (model!=null)?model.getSignatureManeuvers():List.of();
 		// Eventually sort
 		choicebox.getItems().addAll(items);
 
