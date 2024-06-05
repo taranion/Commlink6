@@ -62,7 +62,6 @@ import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.NPCType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.ShadowrunElement;
 import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
@@ -82,7 +81,6 @@ import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.FocusValueDescriptionPane;
 import de.rpgframework.shadowrun6.items.AmmunitionType;
-import de.rpgframework.shadowrun6.items.AvailableSlot;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -341,13 +339,6 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	@Override
 	public Decision[] apply(T item, List<Choice> choices) {
 		logger.log(Level.INFO, "ENTER apply({0}, {1})", item, choices);
-		logger.log(Level.INFO, "  context = {0}", context);
-		try {
-			throw new RuntimeException("Trace");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.item = item;
 		this.choices = choices;
 		CloseType closed = null;

@@ -230,6 +230,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 		} else {
 			if (type==ShadowrunReference.TEXT)
 				return (T)key;
+			if (type==ShadowrunReference.SIGNATURE_MANEUVERS)
+				return (T)key;
 			if (type==ShadowrunReference.CARRIED) {
 				System.getLogger("de.rpgframework.shadowrun6").log(Level.WARNING, "TODO: resolve "+key);
 			}

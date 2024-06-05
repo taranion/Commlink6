@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.jfx.dialog;
 
+import java.lang.System.Logger.Level;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.PropertyResourceBundle;
@@ -15,6 +16,7 @@ import de.rpgframework.shadowrun.ShadowrunAction;
 import de.rpgframework.shadowrun.ShadowrunAction.Category;
 import de.rpgframework.shadowrun.ShadowrunAction.Type;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.SignatureManeuver;
 import javafx.scene.control.ChoiceBox;
@@ -38,15 +40,15 @@ public class EditSignatureManeuverDialog extends ManagedDialog {
 	private ChoiceBox<SR6Skill> cbSkill;
 	private ChoiceBox<ShadowrunAction.Category> cbActionCat1;
 	private ChoiceBox<ShadowrunAction.Category> cbActionCat2;
-	private ChoiceBox<ShadowrunAction> cbAction1;
-	private ChoiceBox<ShadowrunAction> cbAction2;
+	private ChoiceBox<Shadowrun6Action> cbAction1;
+	private ChoiceBox<Shadowrun6Action> cbAction2;
 	private TextField tfName;
 
 	private SignatureManeuver selectedItem;
 
 	//--------------------------------------------------------------------
 	public EditSignatureManeuverDialog(SignatureManeuver data, boolean isEdit) {
-		super(ResourceI18N.get(UI,"dialog.title"), null, CloseType.APPLY);
+		super(ResourceI18N.get(UI,"dialog.editsignature.dialog.title"), null, CloseType.APPLY);
 		if (!isEdit) {
 			buttons.setAll(CloseType.OK, CloseType.CANCEL);
 		}
@@ -86,11 +88,11 @@ public class EditSignatureManeuverDialog extends ManagedDialog {
 			public Category fromString(String arg0) {return null;}
 		});
 		cbAction1 = new ChoiceBox<>();
-		cbAction1.getItems().addAll(Shadowrun6Core.getItemList(ShadowrunAction.class).stream().filter(a -> a.getType()==Type.BOOST||a.getType()==Type.EDGE).collect(Collectors.toList()));
+		cbAction1.getItems().addAll(Shadowrun6Core.getItemList(Shadowrun6Action.class).stream().filter(a -> a.getType()==Type.BOOST||a.getType()==Type.EDGE).collect(Collectors.toList()));
 		Collections.sort(cbAction1.getItems());
-		cbAction1.setConverter(new StringConverter<ShadowrunAction>() {
-			public String toString(ShadowrunAction val) { return (val!=null)?(val.getName()+" ("+val.getCost()+")"):"-"; }
-			public ShadowrunAction fromString(String arg0) {return null;}
+		cbAction1.setConverter(new StringConverter<Shadowrun6Action>() {
+			public String toString(Shadowrun6Action val) { return (val!=null)?(val.getName()+" ("+val.getCost()+")"):"-"; }
+			public Shadowrun6Action fromString(String arg0) {return null;}
 		});
 
 		cbActionCat2 = new ChoiceBox<>();
@@ -100,24 +102,24 @@ public class EditSignatureManeuverDialog extends ManagedDialog {
 			public Category fromString(String arg0) {return null;}
 		});
 		cbAction2 = new ChoiceBox<>();
-		cbAction2.getItems().addAll(Shadowrun6Core.getItemList(ShadowrunAction.class).stream().filter(a -> a.getType()==Type.BOOST||a.getType()==Type.EDGE).collect(Collectors.toList()));
-		cbAction2.setConverter(new StringConverter<ShadowrunAction>() {
-			public String toString(ShadowrunAction val) { return (val!=null)?(val.getName()+" ("+val.getCost()+")"):"-"; }
-			public ShadowrunAction fromString(String arg0) {return null;}
+		cbAction2.getItems().addAll(Shadowrun6Core.getItemList(Shadowrun6Action.class).stream().filter(a -> a.getType()==Type.BOOST||a.getType()==Type.EDGE).collect(Collectors.toList()));
+		cbAction2.setConverter(new StringConverter<Shadowrun6Action>() {
+			public String toString(Shadowrun6Action val) { return (val!=null)?(val.getName()+" ("+val.getCost()+")"):"-"; }
+			public Shadowrun6Action fromString(String arg0) {return null;}
 		});
 
 		tfName = new TextField();
-		tfName.setPromptText(ResourceI18N.get(UI, "prompt.name"));
+		tfName.setPromptText(ResourceI18N.get(UI, "dialog.editsignature.prompt.name"));
 	}
 
 	//--------------------------------------------------------------------
 	private void initLayout() {
 		// Description
-		Label whenPerformingA = new Label(ResourceI18N.get(UI, "label.whenPerformingA"));
-		Label test = new Label(ResourceI18N.get(UI, "label.test"));
-		Label combine = new Label(ResourceI18N.get(UI, "label.combine"));
-		Label and = new Label(ResourceI18N.get(UI, "label.and"));
-		Label nameThis = new Label(ResourceI18N.get(UI, "label.nameThis"));
+		Label whenPerformingA = new Label(ResourceI18N.get(UI, "dialog.editsignature.label.whenPerformingA"));
+		Label test = new Label(ResourceI18N.get(UI, "dialog.editsignature.label.test"));
+		Label combine = new Label(ResourceI18N.get(UI, "dialog.editsignature.label.combine"));
+		Label and = new Label(ResourceI18N.get(UI, "dialog.editsignature.label.and"));
+		Label nameThis = new Label(ResourceI18N.get(UI, "dialog.editsignature.label.nameThis"));
 
 		HBox bxOpt1 = new HBox(5, cbActionCat1, cbAction1);
 		HBox bxOpt2 = new HBox(5, cbActionCat2, cbAction2);
@@ -153,7 +155,7 @@ public class EditSignatureManeuverDialog extends ManagedDialog {
 		});
 
 		cbActionCat1.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			cbAction1.getItems().setAll(Shadowrun6Core.getItemList(ShadowrunAction.class).stream()
+			cbAction1.getItems().setAll(Shadowrun6Core.getItemList(Shadowrun6Action.class).stream()
 					.filter(a -> a.getCategory()==n)
 					.filter(a -> a.getType()==Type.BOOST||a.getType()==Type.EDGE).collect(Collectors.toList()));
 			Collections.sort(cbAction1.getItems(), compare);
@@ -165,7 +167,7 @@ public class EditSignatureManeuverDialog extends ManagedDialog {
 			updateOKButton();
 		});
 		cbActionCat2.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
-			cbAction2.getItems().setAll(Shadowrun6Core.getItemList(ShadowrunAction.class).stream()
+			cbAction2.getItems().setAll(Shadowrun6Core.getItemList(Shadowrun6Action.class).stream()
 					.filter(a -> a.getCategory()==n)
 					.filter(a -> a.getType()==Type.BOOST||a.getType()==Type.EDGE).collect(Collectors.toList()));
 			Collections.sort(cbAction2.getItems(), compare);
@@ -180,11 +182,11 @@ public class EditSignatureManeuverDialog extends ManagedDialog {
 
 	//-------------------------------------------------------------------
 	private void updateOKButton() {
-		btnControl.setDisabled(CloseType.OK,
+		btnControl.setDisabled(CloseType.OK, !(
 				tfName.getText()!=null &&
 				cbSkill.getValue()!=null &&
 				cbAction1.getValue()!=null
-				&& cbAction2.getValue()!=null);
+				&& cbAction2.getValue()!=null));
 	}
 
 	//--------------------------------------------------------------------
