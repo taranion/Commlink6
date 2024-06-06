@@ -245,7 +245,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 					continue;
 				}
 				// If skill is not allowed, remove points
-				if (!allowed.contains(key) && per.getSum()>0) {
+				if (key.isRestricted() && !allowed.contains(key) && per.getSum()>0) {
 					per.points1=0;
 					per.points2=0;
 					per.points3=3;
