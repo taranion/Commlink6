@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6.comlink.pages;
 
 import java.io.File;
+import java.lang.System.Logger.Level;
 import java.util.Locale;
 
 import org.prelle.javafx.PagePile;
@@ -28,22 +29,30 @@ public class AboutPage extends PagePile {
 
 	//-------------------------------------------------------------------
 	public AboutPage(File[] directories, EdenClientApplication app, RoleplayingSystem rules) {
+		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage<init>");
 		pgSettings = new EdenSettingsPage(Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"));
 //		pgSettings.addSettingsOneLine(ComLinkMain.RES ,"page.about.settings.style", cbStyle);
 
+		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage, calling PDFage<init>");
 		pgPDF = new PDFPage(app, rules);
+		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage, calling InfoPage<init>");
 		pgInfo = new InfoPage();
+		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage, calling CopyrightPage<init>");
 		pgCopy  = new CopyrightPage();
+		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage, calling EdenDebugPage<init>");
 		pgDebug = new EdenDebugPage(directories);
+		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage, after creating tabs");
 
 		getPages().addAll(pgSettings, pgPDF, pgInfo, pgCopy, pgDebug);
 		if (!Platform.isDesktop() || !PDFViewerServiceFactory.create().isPresent()) {
 			getPages().remove(pgPDF);
 		}
 //		setStartPage(pgInfo);
+		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage, calling EdenDebugPage.refrsh");
 		pgDebug.refresh();
 
 		visibleProperty().addListener( (ov,o,n) -> pgDebug.refresh());
+		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage<init> done");
 	}
 
 }
