@@ -126,6 +126,7 @@ import de.rpgframework.shadowrun6.proc.CalculatePersona;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 import de.rpgframework.shadowrun6.proc.CleanVirtualItems;
 import de.rpgframework.shadowrun6.proc.EnsureAttributePresence;
+import de.rpgframework.shadowrun6.proc.FixCharacterStep;
 import de.rpgframework.shadowrun6.proc.FixEssenceChanges;
 import de.rpgframework.shadowrun6.proc.GetGearDefinitions;
 import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
@@ -152,6 +153,7 @@ public class Shadowrun6Tools {
 	public final static List<Class<? extends ProcessingStep>> RECALCULATE_STEPS = Arrays.asList(
 		ResetModifications.class,
 		CleanVirtualItems.class,
+		FixCharacterStep.class,
 		EnsureAttributePresence.class,
 		GetModificationsFromMetaType.class,
 		GetGearDefinitions.class,
@@ -2625,7 +2627,11 @@ public class Shadowrun6Tools {
 			} else if (srcO instanceof DataItem) {
 				src = ((DataItem)srcO).getName();
 			}
-			ret.add(  ((ValueModification)mod).getValue()+" "+src);
+			try {
+				ret.add(  ((ValueModification)mod).getValue()+" "+src);
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Error converting "+mod+" to display string",e);
+			}
 		}
 //		List<String> ret = modifications.stream()
 //				.map(pc -> ((ValueModification)pc).getRawValue()+" "+pc.getSource())
