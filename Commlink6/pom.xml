@@ -13,7 +13,7 @@
 
 	<groupId>de.rpgframework.shadowrun6</groupId>
 	<artifactId>commlink6</artifactId>
-	<version>1.7.1</version>
+	<version>1.7.2-SHAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Commlink6</name>
