@@ -48,6 +48,7 @@ public class AugmentationPage extends Page {
 	private GearSection secCyber;
 	private GearSection secBio;
 	private GearSection secNano;
+	private GearSection secGene;
 
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -68,6 +69,7 @@ public class AugmentationPage extends Page {
 		initCyberware();
 		initBioware();
 		initNanoware();
+		initGeneware();
 	}
 
 	//-------------------------------------------------------------------
@@ -91,9 +93,9 @@ public class AugmentationPage extends Page {
 		secCyber.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secCyber, 4);
 		FlexGridPane.setMinHeight(secCyber, 6);
-		FlexGridPane.setMediumWidth(secCyber, 5);
+		FlexGridPane.setMediumWidth(secCyber, 4);
 		FlexGridPane.setMediumHeight(secCyber, 6);
-		FlexGridPane.setMaxWidth(secCyber, 5);
+		FlexGridPane.setMaxWidth(secCyber, 4);
 		FlexGridPane.setMaxHeight(secCyber, 9);
 	}
 
@@ -105,9 +107,9 @@ public class AugmentationPage extends Page {
 		secBio.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secBio, 4);
 		FlexGridPane.setMinHeight(secBio, 6);
-		FlexGridPane.setMediumWidth(secBio, 5);
+		FlexGridPane.setMediumWidth(secBio, 4);
 		FlexGridPane.setMediumHeight(secBio, 6);
-		FlexGridPane.setMaxWidth(secBio, 5);
+		FlexGridPane.setMaxWidth(secBio, 4);
 		FlexGridPane.setMaxHeight(secBio, 9);
 	}
 
@@ -119,27 +121,41 @@ public class AugmentationPage extends Page {
 		secNano.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secNano, 4);
 		FlexGridPane.setMinHeight(secNano, 6);
-		FlexGridPane.setMediumWidth(secNano, 5);
+		FlexGridPane.setMediumWidth(secNano, 4);
 		FlexGridPane.setMediumHeight(secNano, 6);
-		FlexGridPane.setMaxWidth(secNano, 5);
+		FlexGridPane.setMaxWidth(secNano, 4);
 		FlexGridPane.setMaxHeight(secNano, 9);
+	}
+
+	//-------------------------------------------------------------------
+	private void initGeneware() {
+		Predicate<ItemTemplate> selectFilter = new ItemTypeFilter(CarryMode.IMPLANTED, ItemType.GENEWARE);
+		Predicate<CarriedItem<ItemTemplate>> showFilter = new CarriedItemItemTypeFilter(CarryMode.IMPLANTED, ItemType.GENEWARE);
+		secGene = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.geneware"), CarryMode.IMPLANTED, selectFilter, showFilter);
+		secGene.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secGene, 4);
+		FlexGridPane.setMinHeight(secGene, 6);
+		FlexGridPane.setMediumWidth(secGene, 5);
+		FlexGridPane.setMediumHeight(secGene, 6);
+		FlexGridPane.setMaxWidth(secGene, 4);
+		FlexGridPane.setMaxHeight(secGene, 9);
 	}
 
 	//-------------------------------------------------------------------
 	private void initEssence() {
 		secTrans = new EssenceSection(ResourceI18N.get(RES, "page.augmentation.section.essence"));
 		secTrans.setMaxHeight(Double.MAX_VALUE);
-		FlexGridPane.setMinWidth(secTrans, 4);
-		FlexGridPane.setMinHeight(secTrans, 4);
-		FlexGridPane.setMediumWidth(secTrans, 4);
-		FlexGridPane.setMediumHeight(secTrans, 4);
+		FlexGridPane.setMinWidth(secTrans, 3);
+		FlexGridPane.setMinHeight(secTrans, 3);
+		FlexGridPane.setMediumWidth(secTrans, 3);
+		FlexGridPane.setMediumHeight(secTrans, 3);
 	}
 
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secTrans, secCyber, secBio, secNano);
+		flex.getChildren().addAll(secTrans, secCyber, secBio, secNano, secGene);
 
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -152,6 +168,7 @@ public class AugmentationPage extends Page {
 		secBio  .showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secNano .showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secTrans.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		secGene .showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 	}
 
 	//-------------------------------------------------------------------
@@ -189,6 +206,7 @@ public class AugmentationPage extends Page {
 		secBio  .updateController(ctrl);
 		secTrans.updateController(ctrl);
 		secNano .updateController(ctrl);
+		secGene .updateController(ctrl);
 		refresh();
 	}
 
@@ -198,6 +216,7 @@ public class AugmentationPage extends Page {
 		secBio  .refresh();
 		secTrans.refresh();
 		secNano .refresh();
+		secGene .refresh();
 	}
 
 }
