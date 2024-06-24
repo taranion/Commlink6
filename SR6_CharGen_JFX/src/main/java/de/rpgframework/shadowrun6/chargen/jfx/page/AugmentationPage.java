@@ -147,8 +147,8 @@ public class AugmentationPage extends Page {
 		secTrans.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secTrans, 3);
 		FlexGridPane.setMinHeight(secTrans, 3);
-		FlexGridPane.setMediumWidth(secTrans, 3);
-		FlexGridPane.setMediumHeight(secTrans, 3);
+		FlexGridPane.setMediumWidth(secTrans, 4);
+		FlexGridPane.setMediumHeight(secTrans, 4);
 	}
 
 	//-------------------------------------------------------------------
