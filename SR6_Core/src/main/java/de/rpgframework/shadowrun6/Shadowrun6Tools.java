@@ -1970,7 +1970,7 @@ public class Shadowrun6Tools {
 
 		// Start with base value
 		if (item.getResolved().getAttribute(SR6ItemAttribute.ATTACK_RATING)!=null)
-			ret.add(new WeaponValues(item.getResolved().getName(), item.getResolved().getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue()));
+			ret.add(new WeaponValues(item.getResolved().getName(), item.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue()));
 
 		// Now use all non-conditional modifications to the attack rating
 		ItemAttributeObjectValue foo = item.getAsObject(SR6ItemAttribute.ATTACK_RATING);
