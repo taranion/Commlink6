@@ -104,4 +104,17 @@ public class LoadCharTest {
 		System.out.println(xml);
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void loadCharWithBows() throws IOException {
+		String name = "Horse Power";
+		FileInputStream fis = new FileInputStream("src/test/resources/testdata/"+ name + ".xml");
+		byte[] data = fis.readAllBytes();
+        Shadowrun6Character character = Shadowrun6Core.decode(data);
+
+        Shadowrun6Tools.resolveChar(character);
+        Shadowrun6Tools.runProcessors(character, Locale.getDefault());
+
+	}
+
 }
