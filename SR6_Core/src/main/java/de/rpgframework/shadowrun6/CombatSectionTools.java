@@ -209,10 +209,10 @@ public class CombatSectionTools {
 				int baseExplain = 0;
 				if (ar[1]==0) {
 					entry.setCol1(String.valueOf(ar[0]));
-					baseExplain = ((int[])weapon.getResolved().getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue())[0];
+					baseExplain = ((int[])weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue())[0];
 				} else {
 					entry.setCol1(String.valueOf(ar[1]));
-					baseExplain = ((int[])weapon.getResolved().getAttribute(SR6ItemAttribute.ATTACK_RATING).getValue())[1];
+					baseExplain = ((int[])weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue())[1];
 				}
 				String explain = Shadowrun6Tools.toExplainStringObject(foo.getIncomingModifications());
 				if (explain==null) explain="";
