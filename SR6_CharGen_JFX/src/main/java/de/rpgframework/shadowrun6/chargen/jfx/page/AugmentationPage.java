@@ -120,11 +120,11 @@ public class AugmentationPage extends Page {
 		secNano = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.nanoware"), CarryMode.IMPLANTED, selectFilter, showFilter);
 		secNano.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secNano, 4);
-		FlexGridPane.setMinHeight(secNano, 6);
+		FlexGridPane.setMinHeight(secNano, 4);
 		FlexGridPane.setMediumWidth(secNano, 4);
-		FlexGridPane.setMediumHeight(secNano, 6);
+		FlexGridPane.setMediumHeight(secNano, 5);
 		FlexGridPane.setMaxWidth(secNano, 4);
-		FlexGridPane.setMaxHeight(secNano, 9);
+		FlexGridPane.setMaxHeight(secNano, 5);
 	}
 
 	//-------------------------------------------------------------------
@@ -134,11 +134,11 @@ public class AugmentationPage extends Page {
 		secGene = new GearSection(ResourceI18N.get(RES, "page.augmentation.section.geneware"), CarryMode.IMPLANTED, selectFilter, showFilter);
 		secGene.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secGene, 4);
-		FlexGridPane.setMinHeight(secGene, 6);
+		FlexGridPane.setMinHeight(secGene, 4);
 		FlexGridPane.setMediumWidth(secGene, 5);
-		FlexGridPane.setMediumHeight(secGene, 6);
+		FlexGridPane.setMediumHeight(secGene, 4);
 		FlexGridPane.setMaxWidth(secGene, 4);
-		FlexGridPane.setMaxHeight(secGene, 9);
+		FlexGridPane.setMaxHeight(secGene, 4);
 	}
 
 	//-------------------------------------------------------------------
