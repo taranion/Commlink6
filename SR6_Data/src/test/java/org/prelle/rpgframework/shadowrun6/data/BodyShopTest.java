@@ -94,7 +94,8 @@ public class BodyShopTest {
 		// Physical monitor should be +3.5
 		aVal = model.getAttribute(ShadowrunAttribute.PHYSICAL_MONITOR);
 		System.out.println("PHYSICAL_MONITOR "+aVal);
-		assertEquals(5, aVal.getModifier());
+		// 5 without Exoware bonus, but should be 6
+		assertEquals(6, aVal.getModifier());
 	}
 
 	//-------------------------------------------------------------------

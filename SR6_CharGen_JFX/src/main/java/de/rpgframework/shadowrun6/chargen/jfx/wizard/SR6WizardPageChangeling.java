@@ -217,7 +217,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "page.surge.placeholder.available"));
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.surge.placeholder.selected"));
 
-		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController()));
+		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController(), Shadowrun6Tools.requirementResolver(Locale.getDefault())));
 		selection.setSelectedCellFactory(lv -> new QualityValueListCell( ()->charGen, true));
 		selection.setShowHeadings(false);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));

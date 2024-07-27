@@ -92,6 +92,12 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 	 */
 	@Override
 	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
+		// Ensure character is caster and has sorcery
+		if (!getModel().getMagicOrResonanceType().usesSpells())
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SPELLCASTER);
+		if (getModel().getSkillValue("sorcery")==null || getModel().getSkillValue("sorcery").getModifiedValue()==0)
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SPELLCASTER);
+
 		// Ensure spell has not been selected yet
 		for (SpellValue<SR6Spell> tmp : getSelected()) {
 			if (tmp.getResolved()==value)

@@ -15,6 +15,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IFocusController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -30,7 +31,7 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
  */
 public class SR6CommonFocusController extends ControllerImpl<Focus> implements IFocusController {
 
-	private int forcePool;
+	protected int forcePool;
 
 	//-------------------------------------------------------------------
 	/**
@@ -120,13 +121,14 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		// No focus may exceed MAG attribute
 		if (force>magic) {
 			// No. foci larger than magic attribute
-			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_FOCUS_EXCEEDS_MAGIC);
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_FOCUS_EXCEEDS_MAGIC, force, magic);
 		}
 
-		// maximum force
-		if (force>forcePool) {
+		// Would force pool be exceeded?
+		int newForcePool = forcePool + force;
+		if (newForcePool>(magic*5)) {
 			// Sum of force of all foci exceeds Magic*5
-			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_SUM_FORCE_EXCEEDS_MAX);
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_SUM_FORCE_EXCEEDS_MAX, newForcePool, magic*5);
 		}
 
 		// Enough Karma for bonding
@@ -135,8 +137,10 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		}
 
 		// Enough Nuyen for bonding
+		boolean payGear = parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR);
 		if ( (force*value.getNuyenCost())>model.getNuyen()) {
-			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, force*value.getNuyenCost(), model.getNuyen());
+			if (!model.isInCareerMode() || (model.isInCareerMode() && payGear))
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, force*value.getNuyenCost(), model.getNuyen());
 		}
 
 		return Possible.TRUE;
@@ -155,7 +159,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		}
 
 		Decision decForce = GenericRPGTools.getDecision(ItemTemplate.UUID_RATING, decisions);
-		int force = Integer.parseInt(decForce.getValue());
+		int force = (decForce!=null)?Integer.parseInt(decForce.getValue()):1;
 
 		FocusValue val = new FocusValue(value, force);
 		for (Decision dec : decisions) {
@@ -164,7 +168,6 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		getModel().addFocus(val);
 		logger.log(Level.INFO, "Selected focus "+val);
 
-		parent.runProcessors();
 		return new OperationResult<FocusValue>(val);
 	}
 

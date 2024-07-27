@@ -40,25 +40,16 @@ public class GetModificationsFromTechniques implements ProcessingStep {
 			// Calculate effective modifications from available techniques
 			for (TechniqueValue ref :model.getTechniquesAll()) {
 				Technique techn = ref.getResolved();
-				logger.log(Level.WARNING, "TODO  add from technique "+techn.getId()+" / "+ref);
+				logger.log(Level.DEBUG, "TODO  add from technique "+techn.getId()+" / "+ref);
 				// Calculate modifications
 				ref.clearIncomingModifications();
 				for (Modification mod : techn.getOutgoingModifications()) {
 					logger.log(Level.ERROR, "TODO  from technique "+techn.getId()+" / "+mod);
-//					Modification realMod = Shadowrun6Tools.instantiateModification(mod, ref.getChoice(), 0);
-//					logger.log(Level.DEBUG, "  instantiated mod "+realMod);
-//					ref.addModification(realMod);
+					Modification realMod = mod.getReferenceType().instantiateModification(mod, ref, 1, model);
+					realMod.setSource(ref);
+					logger.log(Level.INFO, "--item {0}: realMod={1} ", ref.getKey(), realMod);
+					unprocessed.add(realMod);
 				}
-
-
-//				if (ref.getModifications()!=null && !ref.getModifications().isEmpty()) {
-//					logger.log(Level.DEBUG, " - "+ref.getTechnique().getId()+" has modifications: "+ref.getModifications());
-//					for (Modification mod : ref.getModifications()) {
-//						mod.setSource(ref.getTechnique());
-//					}
-////					logger.log(Level.DEBUG, " - add modifications: "+ref.getModifications());
-//					unprocessed.addAll(ref.getModifications());
-//				}
 			}
 		} finally {
 			logger.log(Level.TRACE,  "STOP : process() ends with "+unprocessed.size()+" modifications still to process");

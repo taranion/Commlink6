@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sr6char career="true" gender="MALE" karmaF="3" meta="centaur" nuyen="5000">
+   <lifestyles>
+      <lifestyle comfort="street" entert="street" lang="en" necess="street" neigh="street" ref="street" security="street" space="street" value="1"/>
+   </lifestyles>
+   <qpaths>
+      <qpath lang="en" ref="favored_weapon"/>
+   </qpaths>
+   <martialArts>
+      <martialartref lang="en" ref="oni_ryu_taijutsu"/>
+   </martialArts>
+   <asdfMap/>
+   <chargenSettings>{&#x0022;priorities&#x0022;:{&#x0022;METATYPE&#x0022;:&#x0022;B&#x0022;,&#x0022;ATTRIBUTE&#x0022;:&#x0022;A&#x0022;,&#x0022;MAGIC&#x0022;:&#x0022;C&#x0022;,&#x0022;SKILLS&#x0022;:&#x0022;D&#x0022;,&#x0022;RESOURCES&#x0022;:&#x0022;B&#x0022;},&#x0022;perAttrib&#x0022;:{&#x0022;BODY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:5,&#x0022;points3&#x0022;:1},&#x0022;AGILITY&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;REACTION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;STRENGTH&#x0022;:{&#x0022;points1&#x0022;:5,&#x0022;points2&#x0022;:5,&#x0022;points3&#x0022;:0},&#x0022;WILLPOWER&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;LOGIC&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;INTUITION&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:3,&#x0022;points3&#x0022;:0},&#x0022;CHARISMA&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:2,&#x0022;points3&#x0022;:0},&#x0022;EDGE&#x0022;:{&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;MAGIC&#x0022;:{&#x0022;points1&#x0022;:4,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;RESONANCE&#x0022;:{&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0}},&#x0022;mysticAdeptMaxPoints&#x0022;:2,&#x0022;karmaMod&#x0022;:0,&#x0022;perSkill&#x0022;:{&#x0022;language/1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;pointSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;athletics&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;pointSpec&#x0022;:0,&#x0022;points1&#x0022;:5,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;close_combat&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;pointSpec&#x0022;:0,&#x0022;points1&#x0022;:6,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;firearms&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;pointSpec&#x0022;:0,&#x0022;points1&#x0022;:1,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;perception&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;pointSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;outdoors&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;pointSpec&#x0022;:0,&#x0022;points1&#x0022;:2,&#x0022;points2&#x0022;:0,&#x0022;points3&#x0022;:0},&#x0022;knowledge/28142c56-9e7d-4403-b8cf-4b39830783ce&#x0022;:{&#x0022;karmaSpec&#x0022;:0,&#x0022;pointSpec&#x0022;:0,&#x0022;points1&#x0022;:0,&#x0022;points2&#x0022;:1,&#x0022;points3&#x0022;:0}},&#x0022;variant&#x0022;:&#x0022;ELITE&#x0022;,&#x0022;mysticAdeptPowerPoints&#x0022;:0,&#x0022;toContacts&#x0022;:0,&#x0022;negQualities&#x0022;:38,&#x0022;initiation&#x0022;:0,&#x0022;toNuyen&#x0022;:0}</chargenSettings>
+   <realName>Corneighlius</realName>
+   <type>METAHUMAN</type>
+   <mortype>adept</mortype>
+   <qualities>
+      <quality lang="en" ref="achilles_heel" uuid="9e17dfe9-13ba-450f-bad0-0573d27c77d9">
+         <decision choice="381fefe1-0404-4457-b090-0f96f3df69b3" value="Data Spike"/>
+      </quality>
+      <quality lang="en" ref="incompetent" uuid="916cd72f-f39a-4691-a0e7-e32c20dd41ed">
+         <decision choice="d0b872d0-0783-4b7a-b38a-35db1cef3685" value="cracking"/>
+      </quality>
+      <quality lang="en" ref="ar_vertigo" uuid="0202ef81-f239-4385-8579-dc0c0e320257"/>
+      <quality lang="en" ref="shiva_arms" uuid="0dfc359e-239e-4dae-8862-1981839aa482" value="2"/>
+      <quality lang="en" ref="gremlins" uuid="b9666e43-b58b-410b-b7f0-9c97b789c991"/>
+      <quality lang="en" ref="ambidextrous" uuid="5bb51154-0c0c-4208-b1a6-f413235c10c4"/>
+      <quality lang="en" ref="low-light_vision"/>
+      <quality lang="en" ref="manasense"/>
+      <quality lang="en" ref="thermographic_vision"/>
+   </qualities>
+   <adeptPowers>
+      <adeptpower lang="en" ref="distance_strike"/>
+      <adeptpower lang="en" ref="wall_running"/>
+      <adeptpower lang="en" ref="dash" value="2"/>
+      <adeptpower lang="en" ref="killing_hands"/>
+      <adeptpower lang="en" ref="enhanced_accuracy"/>
+      <adeptpower lang="en" ref="critical_strike" value="1"/>
+      <adeptpower lang="en" ref="elemental_missile">
+         <decision choice="4fbc6994-a69c-4708-9d08-12ff9ffc0880" value="AIR"/>
+         <decision choice="4fbc6994-a69c-4708-9d08-12ff9ffc0881" value="Mana infused arrows to short-circuit tech"/>
+      </adeptpower>
+      <adeptpower lang="en" ref="freefall" value="1"/>
+      <adeptpower lang="en" ref="mystic_armor" value="1"/>
+   </adeptPowers>
+   <sins>
+      <sin name="Jane Doe 1" quality="SUPERFICIALLY_PLAUSIBLE" uniqueid="c19aeb16-2e02-4ce5-9c7d-f49648c8a1bc"/>
+      <sin name="Jane Doe 2" quality="SUPERFICIALLY_PLAUSIBLE" uniqueid="45f5e2d2-91ce-46a0-a942-cd124dd34dfa"/>
+   </sins>
+   <licenses>
+      <licenses name="Undefined License 1" rating="SUPERFICIALLY_PLAUSIBLE" uniqueid="b2c4de1f-4b63-474e-801f-c9bd20f6a857"/>
+      <licenses name="Undefined License 2" rating="SUPERFICIALLY_PLAUSIBLE" uniqueid="0401594f-c98d-4979-b5fe-482e3a194e97"/>
+   </licenses>
+   <contacts>
+      <contact id="5431f0ce-7a76-4630-b498-28061b6925e3" loy="3" name="Josie" rat="3" type="CRIMINAL" typename="Ganger"/>
+      <contact id="f386193d-4592-4fc5-a27c-4a62024ab916" loy="3" name="Bonnie" rat="3" type="STREET" typename="Homeless"/>
+      <contact id="311bdcdd-bc04-4319-9fa9-ff21b47a4cdd" loy="3" name="Greg" rat="3" type="MEDICAL" typename="Retired Vet"/>
+   </contacts>
+   <critterPowers>
+      <critterpower lang="en" ref="search"/>
+   </critterPowers>
+   <name>Horse Power</name>
+   <datasets mode="ALL"/>
+   <rules>
+      <set rule="HIGH_STRENGTH_ADDS_DAMAGE" to="true"/>
+      <set rule="CAREER_UNDO_FROM_CAREER" to="true"/>
+      <set rule="CHARGEN_NEGATIVE_NUYEN" to="true"/>
+      <set rule="CAREER_PAY_GEAR" to="true"/>
+   </rules>
+   <size>194</size>
+   <weight>413</weight>
+   <attributes>
+      <attributes id="BODY" start="7" value="7"/>
+      <attributes id="AGILITY" start="4" value="4"/>
+      <attributes id="REACTION" start="4" value="4"/>
+      <attributes id="STRENGTH" start="11" value="11"/>
+      <attributes id="WILLPOWER" start="4" value="4"/>
+      <attributes id="LOGIC" start="1" value="1"/>
+      <attributes id="INTUITION" start="4" value="4"/>
+      <attributes id="CHARISMA" start="3" value="3"/>
+      <attributes id="EDGE" start="3" value="3"/>
+      <attributes id="MAGIC" start="6" value="6"/>
+      <attributes id="RESONANCE" value="0"/>
+      <attributes id="POWER_POINTS" start="6" value="6"/>
+   </attributes>
+   <skills>
+      <skill lang="en" ref="athletics" uuid="b7962160-97fd-4c47-b967-fdd226c0997b" value="5"/>
+      <skill lang="en" ref="close_combat" uuid="e36f06f8-0229-47f7-ae7b-10a6e7392e4e" value="6"/>
+      <skill lang="en" ref="firearms" uuid="5d436188-9fec-496d-ad5d-0d5c46ec8b42" value="1"/>
+      <skill lang="en" ref="knowledge" uuid="28142c56-9e7d-4403-b8cf-4b39830783ce" value="1">
+         <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="Gangs"/>
+      </skill>
+      <skill lang="en" ref="language" uuid="1ab9b4c2-b6d2-4d84-8c82-91920cbefe8b" value="4">
+         <decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="Native Language"/>
+      </skill>
+      <skill lang="en" ref="outdoors" uuid="334d0957-caed-4901-a0c7-141280008366" value="2"/>
+      <skill lang="en" ref="perception" uuid="90d92290-c105-40a5-8d35-e8063d8a84b5" value="2"/>
+   </skills>
+   <charGenUsed>sumto10</charGenUsed>
+   <strictness>houserules</strictness>
+   <items>
+      <item lang="en" mode="CARRIED" ref="knucks" uuid="5fa5c3d2-4ab1-48f6-ab4a-d58512b3c611"/>
+      <item lang="en" mode="CARRIED" ref="full_body_armor_with_helmet" uuid="b85fdf53-4fe1-443c-95fd-50bde6a7b5e0">
+         <flag>PRIMARY</flag>
+      </item>
+      <item count="50" lang="en" mode="CARRIED" ref="iron_hawk_arrow" uuid="1b8e3c62-0569-4fc1-908c-68196a628e35">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="11"/>
+      </item>
+      <item count="50" lang="en" mode="CARRIED" ref="ammo_arrow" uuid="20b01a03-5317-47e0-bbb6-63c8732e4d82">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="11"/>
+      </item>
+      <item lang="en" mode="CARRIED" ref="bow" uuid="cabd7f9d-c1d5-49ff-931a-61cebd145523">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="11"/>
+      </item>
+      <item lang="en" mode="CARRIED" ref="iron_hawk_composite_bow" uuid="339c21f9-d970-4864-af92-e0de79b46934">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="11"/>
+      </item>
+      <item lang="en" mode="CARRIED" ref="riot_shield" uuid="24fa89e8-34bc-47aa-b509-05be3a1cb5f5"/>
+      <item count="5" lang="en" mode="CARRIED" ref="boost_pill" uuid="aa07e4d2-a3e8-4d59-b185-7d59395c0970">
+         <decision choice="96afe3d6-adf9-4e78-829c-b25f2c7f6b78" value="STRENGTH"/>
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="8"/>
+         <decision choice="96afe3d6-adf9-4e78-829c-b25f2c7f6b76" value="6"/>
+         <decision choice="96afe3d6-adf9-4e78-829c-b25f2c7f6b77" value="?"/>
+      </item>
+      <item count="3" lang="en" mode="CARRIED" ref="emergency_exit" uuid="17402120-47b2-4f9d-9148-9851f3a28447" variant="extended">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="8"/>
+         <decision choice="96afe3d6-adf9-4e78-829c-b25f2c7f6b76" value="6"/>
+         <decision choice="96afe3d6-adf9-4e78-829c-b25f2c7f6b77" value="?"/>
+      </item>
+      <item count="1" lang="en" mode="CARRIED" ref="door_what_door" uuid="f5d33918-48cf-4b7e-b98a-703a597239ee" variant="extended">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="8"/>
+         <decision choice="96afe3d6-adf9-4e78-829c-b25f2c7f6b76" value="6"/>
+         <decision choice="96afe3d6-adf9-4e78-829c-b25f2c7f6b77" value="?"/>
+      </item>
+      <item count="1" lang="en" mode="CARRIED" ref="plant_superfood" uuid="7b27c3c1-4313-4776-a018-1770a18d0404" variant="extended">
+         <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="8"/>
+         <decision choice="96afe3d6-adf9-4e78-829c-b25f2c7f6b76" value="6"/>
+         <decision choice="96afe3d6-adf9-4e78-829c-b25f2c7f6b77" value="?"/>
+      </item>
+   </items>
+   <history>
+      <itemmod date="2024-07-02T10:58:19.955-06:00" ref="distance_strike" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T10:58:30.477-06:00" ref="distance_strike" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T10:58:36.433-06:00" ref="wall_running" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T11:01:52.571-06:00" ref="dash" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T11:03:49.609-06:00" ref="killing_hands" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T11:04:07.038-06:00" ref="enhanced_perception" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T11:04:23.214-06:00" ref="enhanced_accuracy" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T11:05:04.452-06:00" ref="critical_strike" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T11:06:37.151-06:00" ref="elemental_missile" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T11:08:24.640-06:00" ref="freefall" type="ADEPT_POWER"/>
+      <itemmod date="2024-07-02T11:10:52.380-06:00" ref="mystic_armor" type="ADEPT_POWER"/>
+   </history>
+</sr6char>

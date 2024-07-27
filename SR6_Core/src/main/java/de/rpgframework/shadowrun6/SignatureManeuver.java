@@ -13,21 +13,21 @@ import de.rpgframework.shadowrun.ShadowrunAction;
  *
  */
 public class SignatureManeuver {
-	
+
 	@Attribute
 	private String skill;
-	
+
 	@Attribute
 	private String action1;
 	@Attribute
 	private String action2;
-	
+
 	@Element
 	private UUID uuid;
-	
+
 	@Element
 	private String name;
-	
+
 	private transient QualityValue quality;
 
 	//---------------------------------------------------------
@@ -55,8 +55,8 @@ public class SignatureManeuver {
 	/**
 	 * @return the action1
 	 */
-	public ShadowrunAction getAction1() {
-		return Shadowrun6Core.getItem(ShadowrunAction.class, action1);
+	public Shadowrun6Action getAction1() {
+		return Shadowrun6Core.getItem(Shadowrun6Action.class, action1);
 	}
 
 	//---------------------------------------------------------
@@ -71,8 +71,8 @@ public class SignatureManeuver {
 	/**
 	 * @return the action2
 	 */
-	public ShadowrunAction getAction2() {
-		return Shadowrun6Core.getItem(ShadowrunAction.class, action2);
+	public Shadowrun6Action getAction2() {
+		return Shadowrun6Core.getItem(Shadowrun6Action.class, action2);
 	}
 
 	//---------------------------------------------------------

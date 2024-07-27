@@ -81,7 +81,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	AMMUNITION_TYPE(AmmunitionType.class),
 	ATTRIBUTE(new AttributeConverter()),
 	AUGMENTATION_QUALITY(AugmentationQuality.class,0),
-	CARRIED("CarriedItem"),
+	CARRIED(ItemTemplate.class),
 	CONTACT_TYPES(ContactType.class),
 	CONTACT("Contact"),
 	COMPLEX_FORM(ComplexForm.class),
@@ -130,7 +130,7 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	SLOT(ItemHook.class,0),
 	SPELL(SR6Spell.class),
 	SPELLFEATURE(SpellFeature.class.getAnnotation(DataItemTypeKey.class).id()),
-	SPELL_CATEGORY(ASpell.Category.class.getAnnotation(DataItemTypeKey.class).id()),
+	SPELL_CATEGORY(ASpell.Category.class,0),
 	SPIRIT(SR6NPC.class),
 	SPRITE(SR6NPC.class),
 	SPRITE_POWER("SpritePower"),
@@ -229,6 +229,8 @@ public enum ShadowrunReference implements ModifiedObjectType {
 			}
 		} else {
 			if (type==ShadowrunReference.TEXT)
+				return (T)key;
+			if (type==ShadowrunReference.SIGNATURE_MANEUVERS)
 				return (T)key;
 			if (type==ShadowrunReference.CARRIED) {
 				System.getLogger("de.rpgframework.shadowrun6").log(Level.WARNING, "TODO: resolve "+key);

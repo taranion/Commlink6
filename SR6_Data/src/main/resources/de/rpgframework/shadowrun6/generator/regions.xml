@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<table type="REGION">
+	<entry id="europe">
+		<entry id="france"/>
+		<entry id="germany">
+			<entry id="hamburg"/>
+			<entry id="berlin"/>
+			<entry id="rheinruhrplex"/>
+		</entry>
+		<entry id="netherlands"/>
+	</entry>
+	<entry id="north_america"/>
+	<entry id="south_america"/>
+	<entry id="asia"/>
+	<entry id="africa"/>
+	<entry id="australia"/>
+</table>

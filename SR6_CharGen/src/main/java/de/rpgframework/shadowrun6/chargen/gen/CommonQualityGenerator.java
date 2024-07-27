@@ -145,6 +145,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			Choice choice = value.getChoice( dec.getChoiceUUID() );
 			if (choice==null) continue;
 			switch ( (ShadowrunReference)choice.getChooseFrom()) {
+			case CONTACT:
 			case SUBSELECT:
 			case TEXT:
 				continue;

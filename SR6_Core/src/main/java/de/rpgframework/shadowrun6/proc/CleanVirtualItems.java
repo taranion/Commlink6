@@ -80,7 +80,7 @@ public class CleanVirtualItems implements ProcessingStep {
 
 		// Eventually add missing unused software library
 		if (missingSoftware) {
-			logger.log(Level.WARNING, "Inject SOFTWARE_LIBRARY");
+			logger.log(Level.DEBUG, "Inject SOFTWARE_LIBRARY");
 			model.addVirtualCarriedItem(createSoftwareLibrary());
 		}
 

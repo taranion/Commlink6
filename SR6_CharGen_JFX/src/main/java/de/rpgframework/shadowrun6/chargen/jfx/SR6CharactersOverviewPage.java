@@ -254,9 +254,4 @@ public class SR6CharactersOverviewPage extends CharactersOverviewPage {
 		CharacterProviderLoader.getCharacterProvider().addAttachment(handle, Type.CHARACTER, Format.RULESPECIFIC, name, raw);
 	}
 
-	//-------------------------------------------------------------------
-//	public String getCreationModeWarning(CharacterHandle charac) {
-//		return ResourceI18N.get(CharacterExportPluginConfigPane.RES, "dialog.exportcreationmodewarning.message");
-//	}
-
 }

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+	<!-- Auburn -->
+	<quality id="hunting_permit" karma="5" pos="true" type="NORMAL" />
+	<quality id="union_man" karma="8" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="SKILL" ref="con" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y"/>
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER" cond="y"/>
+     </modifications>
+	</quality>
+   <quality id="you_get_used_to_it"	  karma="5" pos="true" type="NORMAL">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" set="NATURAL" apply="CHARACTER" />
+     </modifications>
+   </quality>
+
+	<!-- Bellevue -->
+	<quality id="guardians_at_the_gates" karma="3" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="ATTRIBUTE" ref="MEMORY" what="DICE" value="99" apply="CHARACTER" cond="y"/>
+     </modifications>
+	</quality>
+	<quality id="i_belong_here" karma="3" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="SKILL" ref="con" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y"/>
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER" cond="y"/>
+     </modifications>
+	</quality>
+	<quality id="so_many_rich_friends" karma="3" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="SKILL" ref="con" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y"/>
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" apply="CHARACTER" cond="y"/>
+     </modifications>
+	</quality>
+
+	<!-- Council Island -->
+	<quality id="council_island_access" karma="5" pos="true" type="NORMAL">
+		<choices>
+			<choice type="SUBSELECT" ref="quality" uuid="55a6dda7-7565-4108-9a04-65b7607081df">
+				<subOption id="regular" cost="0" />
+				<subOption id="high" cost="7" />
+			</choice>
+		</choices>
+	</quality>
+	<quality id="salish_shaman" karma="9" pos="true" type="NORMAL" />
+
+	<!-- Downtown -->
+   <quality id="big_brothers_blindspot"	  karma="14" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="stealth" value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <itemmod type="SKILL" ref="knowledge">
+       	<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.surveillance_technology"/>
+       </itemmod>
+     </modifications>
+   </quality>
+	<quality id="corp_flash" karma="10" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="SKILL" ref="con"       what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y"/>
+       <checkmod type="SKILL" ref="influence" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y"/>
+       <valmod type="SKILL" ref="knowledge" value="1" >
+       	<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.fashion"/>
+       </valmod>
+     </modifications>
+	</quality>
+	<quality id="paparazzi_savvy" karma="10" pos="true" type="NORMAL">
+     <modifications>
+       <checkmod type="SKILL" ref="perception" what="EDGE_ONLY_TEST" value="1" apply="CHARACTER" cond="y"/>
+       <valmod type="SKILL" ref="knowledge" value="1" >
+       	<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.celebrity_gossip"/>
+       </valmod>
+     </modifications>
+	</quality>
+
+	<!-- Everett -->
+   <quality id="border_hopper"	  karma="3" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="outdoors" value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="knowledge" value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="northgate_optimist"	  karma="3" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="con"       value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="union_supporter"	  karma="3" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="con"       value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" cond="true" />
+     </modifications>
+   </quality>
+
+	<!-- Fort Lewis -->
+   <quality id="stolen_valor"	  karma="10" pos="false" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="con"       value="1" what="NOT_EARN_EDGE" cond="true" />
+       <checkmod type="SKILL" ref="influence" value="1" what="NOT_EARN_EDGE" cond="true" />
+       <checkmod type="SKILL" ref="con"       value="-2" what="DICE" cond="true" />
+       <checkmod type="SKILL" ref="influence" value="-2" what="DICE" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="advanced_combat_training"	  karma="10" pos="true" type="NORMAL" >
+     <modifications>
+       <relevancemod type="SKILL" topic="COMBAT" />
+     </modifications>
+   </quality>
+   <quality id="bilko_contacts"	  karma="7" pos="true" type="NORMAL" multi="true" >
+   	<choices>
+   		<choice type="CONTACT" uuid="75f01ecc-60f3-4b5b-98de-c80008ebffec"/>
+         <choice type="SUBSELECT" ref="variant" uuid="0180ba51-5b30-471d-bdba-5e2482b8440d">
+           <subOption id="regular" />
+           <subOption id="better" cost="5" />
+         </choice>
+   	</choices>
+   </quality>
+
+	<!--  Outremer -->
+	<quality id="vashonista"	  karma="10" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="con"       value="1" what="EDGE_ONLY_TEST" cond="true" />
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" cond="true" />
+     </modifications>
+   </quality>
+   <quality id="water_born"	  karma="5" pos="true" type="NORMAL" hasLevel="true" max="2" >
+     <modifications>
+       <!--  TODO Swimming speed -->
+     </modifications>
+   </quality>
+
+	<!-- Puyallup -->
+   <quality id="what_doesnt_kill_you"	  karma="3" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="ATTRIBUTE" ref="RESIST_TOXIN" value="1" what="REPLACE_WITH_WILD" apply="CHARACTER" />
+     </modifications>
+   </quality>
+   <quality id="the_briar_patch"	  karma="5" pos="true" type="NORMAL" hasLevel="true" max="2" >
+     <modifications>
+       <checkmod type="SKILL" ref="cracking" value="0" apply="CHARACTER" cond="1"/>
+     </modifications>
+   </quality>
+   <quality id="carbonado_smuggler"	  karma="3" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="outdoors" value="1" what="DICE" apply="CHARACTER" cond="1"/>
+     </modifications>
+   </quality>
+
+	<!-- Redmond -->
+	<quality id="big_dreams" karma="10" pos="true" type="NORMAL" />
+	<quality id="school_of_hard_knocks" karma="10" pos="true" type="NORMAL" >
+		<requires>
+			<datareq type="QUALITY" ref="big_dreams"/>
+		</requires>
+	</quality>
+	<quality id="beat_in" karma="10" pos="true" type="NORMAL" />
+	<quality id="beat_out" karma="10" pos="true" type="NORMAL" >
+		<requires>
+			<datareq type="QUALITY" ref="beat_in"/>
+		</requires>
+	</quality>
+	<quality id="snitch" karma="4" pos="false" type="NORMAL" />
+
+	<!-- Renton -->
+   <quality id="good_ol_folks"	  karma="7" pos="true" type="NORMAL" >
+     <modifications>
+       <checkmod type="SKILL" ref="con" value="1" what="EDGE" cond="true" />
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE" cond="true" />
+     </modifications>
+   </quality>
+	<quality id="socialite" karma="5" pos="true" type="NORMAL" />
+	<quality id="suburbanite" karma="5" pos="true" type="NORMAL" />
+
+	<!-- Snohomish -->
+	<quality id="heart_of_humanis" karma="3" pos="true" type="NORMAL" />
+   <quality id="clean_living"	  karma="10" pos="true" type="NORMAL">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="BODY" value="1" set="NATURAL" />
+       <!-- TODO: Increase lifestyle cost +500 -->
+     </modifications>
+   </quality>
+	<quality id="black_fence_farmer" karma="5" pos="true" type="NORMAL" />
+
+	<!-- Tacoma -->
+   <quality id="import_export"	  karma="10" pos="true" type="NORMAL" >
+   	<choices>
+         <choice type="SUBSELECT" ref="variant" uuid="0180ba51-5b30-471d-bdba-5e2482b8440d">
+           <subOption id="regular" />
+           <subOption id="better" cost="4" />
+         </choice>
+   	</choices>
+   </quality>
+	<quality id="golden_cage" karma="12" pos="false" type="NORMAL" >
+		<requires>
+			<datareq type="QUALITY" ref="sinner"/>
+		</requires>
+	</quality>
+	<quality id="earner" karma="5" pos="true" type="NORMAL" />
+	<quality id="connected" karma="10" pos="true" type="NORMAL" >
+		<requires>
+			<datareq type="QUALITY" ref="earner"/>
+		</requires>
+	</quality>
+	<quality id="made" karma="20" pos="true" type="NORMAL" >
+		<requires>
+			<datareq type="QUALITY" ref="earner"/>
+		</requires>
+	</quality>
+
+	<!-- Seattle Underground -->
+   <quality id="event_horizon_access"	  karma="15" pos="true" type="NORMAL" >
+     <modifications>
+       <itemmod type="RULE" ref="DECREASE_AVAILABILITY_2"  />
+     </modifications>
+   </quality>
+   <quality id="mental_mapmaker"  	  karma="5" pos="true" type="NORMAL" />
+
+</qualities>

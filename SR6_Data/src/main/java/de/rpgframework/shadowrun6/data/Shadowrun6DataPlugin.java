@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.lang.reflect.GenericDeclaration;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.DataSet.DataSetType;
+import de.rpgframework.genericrpg.data.GenericCore;
 import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.items.AlternateUsage;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -30,7 +32,6 @@ import de.rpgframework.genericrpg.items.Hook;
 import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.IUsageMode;
 import de.rpgframework.genericrpg.items.IVariantMode;
-import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun.ANPC;
@@ -101,7 +102,6 @@ import de.rpgframework.shadowrun6.items.ItemTemplateList;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6AlternateUsage;
-import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
@@ -122,6 +122,7 @@ import de.rpgframework.shadowrun6.vehicle.Powertrain;
 import de.rpgframework.shadowrun6.vehicle.PowertrainList;
 import de.rpgframework.shadowrun6.vehicle.QualityFactor;
 import de.rpgframework.shadowrun6.vehicle.QualityFactorList;
+import de.rpgframework.world.LocalWorldManager;
 
 /**
  * @author Stefan
@@ -188,6 +189,7 @@ public class Shadowrun6DataPlugin  {
 			initAstralWays();
 			initBodyShop();
 			initEasyCome();
+			initEmeraldCity();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -225,7 +227,7 @@ public class Shadowrun6DataPlugin  {
 				}
 			} else {
 				if (filenames.indexOf(file)>=2)
-					logger.log(Level.WARNING, "Failed on ''placeholder/{0}''", file);
+					logger.log(Level.DEBUG, "Failed on ''placeholder/{0}''", file);
 			}
 		}
 		return null;
@@ -255,6 +257,13 @@ public class Shadowrun6DataPlugin  {
 			}
 		}
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	private void initWorld() throws IOException {
+		GenericCore core = new GenericCore() {
+		};
+		LocalWorldManager mgr = new LocalWorldManager(null);
 	}
 
 	//-------------------------------------------------------------------
@@ -893,7 +902,7 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -------------------------------Astral Ways------------------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "ASTRAL_WAYS", "astral_ways.i18n", Locale.ENGLISH);
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "ASTRAL_WAYS", "astral_ways.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.BACKGROUND);
 		set.setReleased(202302);
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "astral_ways/data/actions_edge.xml");
@@ -946,6 +955,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} cyberware", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_cyberlimbs.xml");
 		logger.log(Level.DEBUG, "Loaded {0} cyberlimbs", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_cyberweapons.xml");
+		logger.log(Level.DEBUG, "Loaded {0} cyberweapons", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_bioware.xml");
 		logger.log(Level.DEBUG, "Loaded {0} bioware", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "body_shop/data/gear_biosenses.xml");
@@ -975,6 +986,19 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications from 'Easy Come'");
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"sif_new_orleans/data/qualities_easycome.xml");
 		logger.log(Level.DEBUG, "Loaded {0} qualities", list.size());
+	}
+
+	//-------------------------------------------------------------------
+	private void initEmeraldCity() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START -----------------------------Emerald_City------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "emerald", "emerald.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.LOCATION);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"emerald/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities from 'Emerald City'");
+
+//		System.exit(1);
 	}
 
 }

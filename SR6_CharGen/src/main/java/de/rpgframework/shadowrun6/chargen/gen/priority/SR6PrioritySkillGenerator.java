@@ -600,6 +600,15 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 
 				PerSkillPoints per = entry.getValue();
 				logger.log(Level.DEBUG, entry.getKey()+" = "+per.toString());
+				// If skill is not allowed, remove points
+				if (key.isRestricted() && !allowed.contains(key) && per.getSum()>0) {
+					per.points1=0;
+					per.points2=0;
+					per.points3=3;
+					per.pointSpec=0;
+					per.karmaSpec=0;
+				}
+
 				/*
 				 * Pay skill points
 				 */

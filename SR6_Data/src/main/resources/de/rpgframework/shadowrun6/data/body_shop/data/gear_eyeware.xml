@@ -2,7 +2,7 @@
 <items>
 	<item id="eye_light_system" avail="1" price="500" type="CYBERWARE" subtype="CYBER_EYEWARE">
    		<usage mode="IMPLANTED" value="0.2"/>
-    	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
+    	<usage mode="EMBEDDED" value="1" slot="CYBEREYE_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
         <modifications>
         	<checkmod type="SKILL" ref="perception" value="1" what="EDGE_ONLY_TEST" cond="y"/>
@@ -10,11 +10,11 @@
    	</item>
 	<item id="microscopic_lenses" avail="2" price="1000" type="CYBERWARE" subtype="CYBER_EYEWARE">
    		<usage mode="IMPLANTED" value="0.2"/>
-    	<usage mode="EMBEDDED" value="3" slot="CYBERLIMB_IMPLANT"/>
+    	<usage mode="EMBEDDED" value="3" slot="CYBEREYE_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    	</item>
 	<item id="rolling_video_recorder" avail="1" price="500" type="CYBERWARE" subtype="CYBER_EYEWARE">
-    	<usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
+    	<usage mode="EMBEDDED" value="1" slot="CYBEREYE_IMPLANT"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    	</item>
 	<item id="single_cybereye" type="CYBERWARE" subtype="CYBER_EYEWARE">

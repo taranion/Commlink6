@@ -1,32 +1,20 @@
 package de.rpgframework.shadowrun6.items;
 
 import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.data.Choice;
-import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
-import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
-import de.rpgframework.genericrpg.items.ItemEnhancementValue;
-import de.rpgframework.genericrpg.modification.DataItemModification;
-import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.Modification.Origin;
-import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**

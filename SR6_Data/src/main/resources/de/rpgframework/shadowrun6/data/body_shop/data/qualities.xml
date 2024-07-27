@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
+	<quality id="leaking_essence" karma="0" pos="false" type="NORMAL">
+	</quality>
    <quality id="divergent_essence" karma="5" pos="false" type="NORMAL" max="3">
    	<choices>
 			<choice type="TEXT" ref="description" uuid="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" />

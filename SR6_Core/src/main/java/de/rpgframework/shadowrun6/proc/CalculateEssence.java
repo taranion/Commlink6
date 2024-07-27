@@ -44,61 +44,61 @@ public class CalculateEssence implements ProcessingStep {
 		this.model = model;
 	}
 
-	//-------------------------------------------------------------------
-	private BigDecimal getOverriddenEssenceCost(CarriedItem<ItemTemplate> item) {
-		double old = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValueDouble();
-		AugmentationQuality effectiveQuality = item.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue();
-		// Check if this is a cyberadept
-		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_NOVICE)) {
-			switch (effectiveQuality) {
-			case USED    : effectiveQuality = AugmentationQuality.STANDARD; break;
-			case STANDARD: effectiveQuality = AugmentationQuality.ALPHA; break;
-			default:
-			}
-			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_NOVICE", item.getNameWithoutRating(), effectiveQuality);
-		}
-		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_DISCIPLE)) {
-			switch (effectiveQuality) {
-			case STANDARD: effectiveQuality = AugmentationQuality.ALPHA; break;
-			case ALPHA  : effectiveQuality = AugmentationQuality.BETA; break;
-			default:
-			}
-			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_DISCIPLE", item.getNameWithoutRating(), effectiveQuality);
-		}
-		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_MASTER)) {
-			switch (effectiveQuality) {
-			case ALPHA  : effectiveQuality = AugmentationQuality.BETA; break;
-			case BETA  : effectiveQuality = AugmentationQuality.DELTA; break;
-			default:
-			}
-			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_DISCIPLE", item.getNameWithoutRating(), effectiveQuality);
-		}
-
-		AugmentationQuality regularQuality = item.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue();
-		if (regularQuality!=effectiveQuality) {
-			logger.log(Level.INFO, "Due to cyberadept quality of {0} changes from {1} to {2}", item.getNameWithoutRating(), regularQuality, effectiveQuality);
-			CarriedItem<ItemTemplate> copy = new CarriedItem<ItemTemplate>(item);
-			copy.removeDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY);
-			copy.addDecision(new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, effectiveQuality.name()));
-			SR6GearTool.recalculate("", null, model, copy);
-			ItemAttributeFloatValue<SR6ItemAttribute> aVal = copy.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-			double ess = aVal.getModifiedValueDouble();
-			logger.log(Level.INFO, "Essence changes from {0} to {1}", old, ess);
-			item.getAsObject(SR6ItemAttribute.QUALITY).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), effectiveQuality.name(), SR6RuleFlag.CYBERADEPT_NOVICE));
-			double diff = ess - old;
-			item.getAsFloat(SR6ItemAttribute.ESSENCECOST).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), (int)(diff*1000), SR6RuleFlag.CYBERADEPT_NOVICE));
-//			System.out.println("A "+aVal);
-//			logger.log(Level.INFO, "A {0}", aVal);
-//			logger.log(Level.INFO, "B {0}", aVal.getModifiedValueDouble());
-			System.err.println(item.dump());
-//			System.err.println(copy.dump());
-//			System.exit(1);
-			return aVal.getModifiedValueBigDecimal();
-		}
-
-		ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-		return aVal.getModifiedValueBigDecimal();
-	}
+//	//-------------------------------------------------------------------
+//	private BigDecimal getOverriddenEssenceCost(CarriedItem<ItemTemplate> item) {
+//		double old = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValueDouble();
+//		AugmentationQuality effectiveQuality = item.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue();
+//		// Check if this is a cyberadept
+//		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_NOVICE)) {
+//			switch (effectiveQuality) {
+//			case USED    : effectiveQuality = AugmentationQuality.STANDARD; break;
+//			case STANDARD: effectiveQuality = AugmentationQuality.ALPHA; break;
+//			default:
+//			}
+//			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_NOVICE", item.getNameWithoutRating(), effectiveQuality);
+//		}
+//		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_DISCIPLE)) {
+//			switch (effectiveQuality) {
+//			case STANDARD: effectiveQuality = AugmentationQuality.ALPHA; break;
+//			case ALPHA  : effectiveQuality = AugmentationQuality.BETA; break;
+//			default:
+//			}
+//			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_DISCIPLE", item.getNameWithoutRating(), effectiveQuality);
+//		}
+//		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_MASTER)) {
+//			switch (effectiveQuality) {
+//			case ALPHA  : effectiveQuality = AugmentationQuality.BETA; break;
+//			case BETA  : effectiveQuality = AugmentationQuality.DELTA; break;
+//			default:
+//			}
+//			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_DISCIPLE", item.getNameWithoutRating(), effectiveQuality);
+//		}
+//
+//		AugmentationQuality regularQuality = item.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue();
+//		if (regularQuality!=effectiveQuality) {
+//			logger.log(Level.INFO, "Due to cyberadept quality of {0} changes from {1} to {2}", item.getNameWithoutRating(), regularQuality, effectiveQuality);
+//			CarriedItem<ItemTemplate> copy = new CarriedItem<ItemTemplate>(item);
+//			copy.removeDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY);
+//			copy.addDecision(new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, effectiveQuality.name()));
+//			SR6GearTool.recalculate("", null, model, copy);
+//			ItemAttributeFloatValue<SR6ItemAttribute> aVal = copy.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+//			double ess = aVal.getModifiedValueDouble();
+//			logger.log(Level.INFO, "Essence changes from {0} to {1}", old, ess);
+//			item.getAsObject(SR6ItemAttribute.QUALITY).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), effectiveQuality.name(), SR6RuleFlag.CYBERADEPT_NOVICE));
+//			double diff = ess - old;
+//			item.getAsFloat(SR6ItemAttribute.ESSENCECOST).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), (int)(diff*1000), SR6RuleFlag.CYBERADEPT_NOVICE));
+////			System.out.println("A "+aVal);
+////			logger.log(Level.INFO, "A {0}", aVal);
+////			logger.log(Level.INFO, "B {0}", aVal.getModifiedValueDouble());
+//			System.err.println(item.dump());
+////			System.err.println(copy.dump());
+////			System.exit(1);
+//			return aVal.getModifiedValueBigDecimal();
+//		}
+//
+//		ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+//		return aVal.getModifiedValueBigDecimal();
+//	}
 
 	//-------------------------------------------------------------------
 	@Override
@@ -117,7 +117,12 @@ public class CalculateEssence implements ProcessingStep {
 				switch ( (ShadowrunReference)mod.getReferenceType() ) {
 				case CARRIED:
 					CarriedItem<ItemTemplate> carried = model.getCarriedItem(mod.getId());
-					name = carried.getNameWithRating();
+					if (carried!=null) {
+						name = carried.getNameWithRating();
+					} else {
+						logger.log(Level.INFO, "Removed item found: "+mod.getId()+" / "+mod.getSource());
+						name = "BOOM";
+					}
 					break;
 				case QUALITY:
 					QualityValue quality = model.getQuality(mod.getKey());
@@ -252,14 +257,14 @@ public class CalculateEssence implements ProcessingStep {
 //			double min = 6.0f - (((double)essenceCost)/1000f); //Math.min(model.getEssence(), 6.0f-sum);
 			int magicMalus = (int) Math.ceil( ((double)essenceCost)/1000d);
 			if (magicMalus<0) magicMalus=0;
-			logger.log(Level.INFO,"Magic/Resonance malus is "+magicMalus);
+			logger.log(Level.WARNING,"Magic/Resonance malus is "+magicMalus);
 			if (magicMalus!=0) {
 				model.getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
 				model.getAttribute(ShadowrunAttribute.RESONANCE).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.RESONANCE.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
 				model.getAttribute(ShadowrunAttribute.POWER_POINTS).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.POWER_POINTS.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.NATURAL));
 			}
 			// Also decrease maximum
-			model.getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.MAX).setOrigin(Origin.OUTSIDE));
+//			model.getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.MAX).setOrigin(Origin.OUTSIDE));
 			// Eventually decrease social rating (Body Shop p.168)
 			int socialMalus = (int) Math.floor( ((double)essenceCost)/2000d);
 			QualityValue retention = model.getQuality("empathic_retention");

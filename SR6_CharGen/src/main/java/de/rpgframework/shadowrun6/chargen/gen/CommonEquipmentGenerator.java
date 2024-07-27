@@ -25,6 +25,7 @@ import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.PriceModifiers;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -75,7 +76,13 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 		// Check availability
 		if (carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY) != null) {
 			Availability avail = carried.get().getAsObject(SR6ItemAttribute.AVAILABILITY).getModifiedValue();
-			if (avail!=null && avail.getValue() >= 7) {
+			// Handle rule that decreases availability
+			if (parent.getModel().hasRuleFlag(SR6RuleFlag.DECREASE_AVAILABILITY_2)) {
+				avail.setValue( Math.max(1, avail.getValue()-2) );
+			}
+
+			int max = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_MAX_AVAILABILITY);
+			if (avail!=null && avail.getValue() > max) {
 				return new Possible(Possible.State.IMPOSSIBLE, Severity.STOPPER,IRejectReasons.RES, IRejectReasons.IMPOSS_AVAILABLE_TOO_HIGH, avail.getValue());
 			}
 		}
@@ -127,6 +134,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				return new OperationResult<>(poss);
 			}
 
+			logger.log(Level.WARNING, "Now build CarriedItem of {0}  in mode {1}", value, mode);
 			OperationResult<CarriedItem<ItemTemplate>> ret = SR6GearTool.buildItem(value, mode, variant, getModel(), true, decisions);
 			CarriedItem<ItemTemplate> item = ret.get();
 			if (value.isCountable()) item.setCount(1);
@@ -148,6 +156,18 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, mode);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
+	@Override
+	public boolean deselect(CarriedItem<ItemTemplate> value, RemoveMode mode) {
+		boolean success = super.deselect(value, mode);
+		if (success)
+			parent.runProcessors();
+		return success;
 	}
 
 	//-------------------------------------------------------------------
@@ -271,7 +291,12 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	private void applyPriceModifiers(CarriedItem<ItemTemplate> tmp) {
+
 		ItemAttributeNumericalValue<SR6ItemAttribute> priceVal = tmp.getAsValue(SR6ItemAttribute.PRICE);
+		if (priceVal==null) {
+			logger.log(Level.ERROR, "No PRICE attribute for {0}", tmp);
+		}
+
 		double baseCost = priceVal.getDistributed();
 		// Add price modifications that apply
 		for (ValueModification priceMod : priceMods) {
@@ -289,7 +314,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				break;
 			case ARMOR:
 				if (type==ItemType.ARMOR || type==ItemType.ARMOR_ADDITION) {
-					System.err.println("Add extra "+extraCost+" to "+tmp+"   factor="+factor);
+					System.err.println("CommonEquipmentGenerator: Add extra "+extraCost+" to "+tmp+"   factor="+factor);
 					priceVal.addIncomingModification(toAdd);
 				}
 				break;
@@ -298,7 +323,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				break;
 			}
 		}
-
+		logger.log(Level.ERROR, "applyPriceModifiers({0}: {1} ==> {2}", tmp, baseCost, priceVal.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------
@@ -391,9 +416,9 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 
 	//-------------------------------------------------------------------
 	public void expandPACK(CarriedItem<ItemTemplate> item) {
-		logger.log(Level.ERROR, "TODO: expandPACK");
+		logger.log(Level.ERROR, "TODO: expandPACK {0}", item);
 		for (Modification mod : item.getOutgoingModifications() ) {
-			logger.log(Level.ERROR, "Expand "+mod.getClass()+" = "+mod);
+			logger.log(Level.ERROR, "Expand "+mod);
 			ApplyModificationsGeneric.applyModification(getModel(), mod);
 		}
 		for (Modification mod : item.getIncomingModifications() ) {

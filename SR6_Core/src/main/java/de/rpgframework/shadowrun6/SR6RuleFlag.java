@@ -27,6 +27,8 @@ public enum SR6RuleFlag implements RuleFlag {
 	/* Ignore damage box before calculating modifiers */
 	PAIN_TOLERANCE_IGNORE_BOX,
 
+	DECREASE_AVAILABILITY_2,
+
 	// Apply Adept and Magican effects of the mentor spirit
 	MENTOR_SPIRIT_BOTH,
 	/* Use CHA for defense rating */
@@ -46,6 +48,9 @@ public enum SR6RuleFlag implements RuleFlag {
 	KNOWLEDGE_COST2_AT_GEN,
 	// Power Plays (Quality Fashion Influencer)
 	FASHION_50_PERCENT,
+
+	// 6WC: Physical monitor round down (e.g. Neoteny from 6WC)
+	PHYSICAL_ROUND_DOWN,
 
 	/** Used and standard cyberware gets upgraded by one */
 	CYBERADEPT_NOVICE,

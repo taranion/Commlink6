@@ -47,12 +47,7 @@
 	</item>
 	<item avail="1" price="60" id="encryption" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
-		<variant id="regular">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
-		</variant>
-		<variant id="rcc">
-			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
-		</variant>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="BASIC" apply="DATA_ITEM"/></requires>
 	</item>
 	<item avail="1" price="60" id="signal_scrubber" type="SOFTWARE" subtype="BASIC_PROGRAM" reqVariant="true">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
@@ -160,6 +155,15 @@
 		<variant id="regular">
 			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="HACKING" apply="DATA_ITEM"/></requires>
 		</variant>
+	</item>
+	<item avail="4I" price="250" id="encryption_rcc" type="SOFTWARE" subtype="RIGGER_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+			<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="RCC" apply="DATA_ITEM"/></requires>
+		<mode id="active">
+			<modifications>
+				<valmod type="ITEM_ATTRIBUTE" ref="FIREWALL" value="2" apply="PERSONA"/>
+			</modifications>
+		</mode>
 	</item>
 	<item avail="4I" price="250" id="fork" type="SOFTWARE" subtype="HACKING_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>

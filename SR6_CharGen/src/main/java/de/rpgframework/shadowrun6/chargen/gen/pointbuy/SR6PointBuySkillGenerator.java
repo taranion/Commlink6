@@ -244,6 +244,14 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 					logger.log(Level.WARNING, "No data for " + key);
 					continue;
 				}
+				// If skill is not allowed, remove points
+				if (key.isRestricted() && !allowed.contains(key) && per.getSum()>0) {
+					per.points1=0;
+					per.points2=0;
+					per.points3=3;
+					per.pointSpec=0;
+					per.karmaSpec=0;
+				}
 
 				/*
 				 * Pay skill points

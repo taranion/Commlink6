@@ -36,9 +36,9 @@ import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6ContactGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6DataStructureController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6FocusGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
-import de.rpgframework.shadowrun6.chargen.lvl.SR6CommonFocusController;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 
@@ -192,7 +192,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 		sins      = new SR6SINGenerator(this);
 		lifestyles= new SR6LifestyleGenerator(this);
 		contacts  = new SR6ContactGenerator(this);
-		foci      = new SR6CommonFocusController(this);
+		foci      = new SR6FocusGenerator(this);
 		qPaths    = new CommonQualityPathController(this);
 		martial   = new SR6MartialArtsController(this);
 		drake     = new SR6DrakeController(this, true);

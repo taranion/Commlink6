@@ -12,13 +12,17 @@ import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.CharacterControllerImpl;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
+import de.rpgframework.genericrpg.data.ApplyWhen;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.chargen.gen.MagicOrResonanceController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
@@ -268,6 +272,24 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 				unprocessed.add(_mod);
 		}
 		logger.log(Level.WARNING, "  Metatype attributes are: " + metatypeAttribute);
+
+		/* Calculate raised maximum */
+		MagicOrResonanceType mrType = getModel().getMagicOrResonanceType();
+		if (mrType.usesMagic()) {
+			int rank = getModel().getAttribute(ShadowrunAttribute.INITIATION_RANK).getModifiedValue();
+			if (rank>0) {
+				getModel().getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, "MAGIC", rank, MetamagicOrEcho.Type.METAMAGIC, ValueType.MAX));
+				logger.log(Level.ERROR, "Through initiation the maximum of MAGIC is {0} ", getModel().getAttribute(ShadowrunAttribute.MAGIC).getMaximum());
+			}
+		}
+		if (mrType.usesResonance()) {
+			int rank = getModel().getAttribute(ShadowrunAttribute.SUBMERSION_RANK).getModifiedValue();
+			if (rank>0) {
+				getModel().getAttribute(ShadowrunAttribute.RESONANCE).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, "RESONANCE", rank, MetamagicOrEcho.Type.METAMAGIC, ValueType.MAX));
+				logger.log(Level.ERROR, "Through initiation the maximum of RESONANCE is {0} ", getModel().getAttribute(ShadowrunAttribute.RESONANCE).getMaximum());
+			}
+		}
+
 
 		return unprocessed;
 	}

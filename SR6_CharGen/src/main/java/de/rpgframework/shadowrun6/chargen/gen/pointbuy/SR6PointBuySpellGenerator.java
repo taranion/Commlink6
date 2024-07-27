@@ -121,6 +121,12 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 */
 	@Override
 	public Possible canBeSelected(SR6Spell value, Decision... decisions) {
+		// Ensure character is caster and has sorcery
+		if (!getModel().getMagicOrResonanceType().usesSpells())
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SPELLCASTER);
+		if (getModel().getSkillValue("sorcery")==null || getModel().getSkillValue("sorcery").getModifiedValue()==0)
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SPELLCASTER);
+
 		// Ensure spell has not been selected yet
 		for (SpellValue<SR6Spell> tmp : getSelected()) {
 			if (tmp.getResolved()==value)
@@ -133,7 +139,7 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 		}
 
 		if (settings.characterPoints<2 && parent.getModel().getKarmaFree()<5) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES , IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 		}
 
 		return Possible.TRUE;
@@ -178,11 +184,11 @@ public class SR6PointBuySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	@Override
 	public Possible canBeDeselected(SpellValue<SR6Spell> value) {
 		if (!getSelected().contains(value)) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 
 		if (value.isAutoAdded()) {
-			return new Possible(IRejectReasons.IMPOSS_AUTO_ADDED);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_AUTO_ADDED);
 		}
 
 		return Possible.TRUE;

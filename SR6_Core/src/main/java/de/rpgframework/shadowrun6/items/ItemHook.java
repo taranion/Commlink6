@@ -50,7 +50,7 @@ public enum ItemHook implements Hook {
 	CYBEREAR_IMPLANT(true),
 	CYBERLIMB_IMPLANT(true),
 	GLAND,
-	/* Mounted means: used as implant weapon here */
+	/* used as implant weapon here */
 	IMPLANT_MELEE,
 	IMPLANT_RANGED,
 	IMPLANT_HOLDOUT,
@@ -62,6 +62,7 @@ public enum ItemHook implements Hook {
 	IMPLANT_RIFLES,
 	IMPLANT_MACHINEGUN,
 	IMPLANT_LAUNCHER,
+	IMPLANT_ASSAULT_CANNON,
 	VEHICLE_HARDPOINT(true),
 	VEHICLE_CHASSIS(true),
 	VEHICLE_CF (true),

@@ -41,8 +41,13 @@ import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.jfx.FilterItemTemplate;
+import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
+import de.rpgframework.shadowrun6.chargen.jfx.pane.ItemTemplatePane;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.MentorSpiritDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.QualityPathDescriptionPane;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -65,6 +70,7 @@ public class LibraryPage extends Page {
 	private Button btnQualities;
 	private Button btnSpells;
 	private Button btnPowers;
+	private Button btnGear;
 	private Button btnFoci;
 	private Button btnMentor;
 	private Button btnComplex;
@@ -125,6 +131,11 @@ public class LibraryPage extends Page {
 		btnFoci.getStyleClass().add("category-button");
 		btnFoci.graphicProperty().addListener( scaleButtons);
 
+		btnGear   = new Button(ResourceI18N.get(RES, "category.gear"));
+		btnGear.setId("gear");
+		btnGear.getStyleClass().add("category-button");
+		btnGear.graphicProperty().addListener( scaleButtons);
+
 		btnComplex = new Button(ResourceI18N.get(RES, "category.complexforms"));
 		btnComplex.setId("complexforms");
 		btnComplex.getStyleClass().add("category-button");
@@ -163,7 +174,7 @@ public class LibraryPage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		content = new FlowPane(btnMetatypes, btnQualities, btnQualityPaths, btnSpells, btnPowers, btnMentor, btnFoci, btnComplex, btnParagon, btnDataStruct, btnCritterPowers); //, btnCritterPowers, btnCritters, btnGrunts);
+		content = new FlowPane(btnMetatypes, btnQualities, btnQualityPaths, btnGear, btnSpells, btnPowers, btnMentor, btnFoci, btnComplex, btnParagon, btnDataStruct, btnCritterPowers); //, btnCritterPowers, btnCritters, btnGrunts);
 		content.setVgap(10);
 		content.setHgap(10);
 		content.setId("categories");
@@ -193,6 +204,7 @@ public class LibraryPage extends Page {
 		btnMetatypes.setOnAction(ev -> openMetatypes(ev));
 		btnMentor.setOnAction(ev -> openMentors(ev));
 		btnFoci.setOnAction(ev -> openFoci(ev));
+		btnGear.setOnAction(ev -> openGear(ev));
 		btnComplex.setOnAction(ev -> openComplexForms(ev));
 		btnParagon.setOnAction(ev -> openParagon(ev));
 		btnDataStruct.setOnAction(ev -> openDataStructures(ev));
@@ -351,7 +363,7 @@ public class LibraryPage extends Page {
 							)
 					);
 			page.setAppLayout(getAppLayout());
-			page.setCellFactory(lv -> new QualityListCell(null));
+			page.setCellFactory(lv -> new QualityListCell(null, Shadowrun6Tools.requirementResolver(Locale.getDefault())));
 			page.setFilterInjector(new FilterQualities());
 			getAppLayout().getApplication().openScreen(new ApplicationScreen(page));
 		} catch (Exception e) {
@@ -386,6 +398,27 @@ public class LibraryPage extends Page {
 			getAppLayout().getApplication().openScreen(new ApplicationScreen(page));
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Error opening MetatypesPage",e);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void openGear(ActionEvent ev) {
+		logger.log(Level.DEBUG, "Navigate Gear");
+		try {
+			FilteredListPage<ItemTemplate> page =new FilteredListPage<ItemTemplate>(
+					ResourceI18N.get(LibraryPage.RES, "category.gear"),
+					() -> Shadowrun6Core.getItemList(ItemTemplate.class),
+					new ItemTemplatePane(
+							Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+							null
+							)
+					);
+			page.setAppLayout(getAppLayout());
+			page.setCellFactory(lv -> new ItemTemplateListCell(null, null));
+			page.setFilterInjector(new FilterItemTemplate(null));
+			getAppLayout().getApplication().openScreen(new ApplicationScreen(page));
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Error opening GearPage",e);
 		}
 	}
 

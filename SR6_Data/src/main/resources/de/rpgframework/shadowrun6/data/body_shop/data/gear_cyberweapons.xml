@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item id="cyberweapon_buzzsaw" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="2000"/>
+        <attrdef id="AVAILABILITY" value="3I"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="8"/>
+        <usage mode="IMPLANTED" value="0.5"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="weapon">
+            <weapon dmg="4P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+        </alternate>
+    </item>
+    <item id="cyberweapon_crab_claw" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="2000"/>
+        <attrdef id="AVAILABILITY" value="3I"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="8"/>
+        <usage mode="IMPLANTED" value="0.5"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+            <weapon dmg="5P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+        </alternate>
+    </item>
+    <item id="cyberweapon_drone_rack" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="15000"/>
+        <attrdef id="AVAILABILITY" value="5"/>
+        <usage mode="IMPLANTED" value="1.2"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <modifications>
+            <valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="15"/>
+        </modifications>
+    </item>
+    <item id="cyberweapon_fangs" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="500"/>
+        <attrdef id="AVAILABILITY" value="3L"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="3"/>
+        <usage mode="IMPLANTED" value="0.1"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+            <weapon dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
+        </alternate>
+    </item>
+    <item id="cyberweapon_flametosser" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="4000"/>
+        <attrdef id="AVAILABILITY" value="6I"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="8"/>
+        <usage mode="IMPLANTED" value="1.0"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_RANGED" subtype="THROWERS" id="weapon">
+            <weapon dmg="5P" attack="14,12,,," mode="SS" ammo="5(m)" skill="exotic_weapons" spec="exotic_weapons/spray"/>
+        </alternate>
+    </item>
+    <item id="cyberweapon_goring_horns" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="500"/>
+        <attrdef id="AVAILABILITY" value="2L"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="3"/>
+        <usage mode="IMPLANTED" value="0.2"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+            <weapon dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+        </alternate>
+    </item>
+    <item id="cyberweapon_heavy_implanted_weapon" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="4000"/>
+        <attrdef id="AVAILABILITY" value="6I"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="16"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <modifications>
+            <itemmod type="HOOK" ref="IMPLANT_RIFLES"/>
+            <itemmod type="HOOK" ref="IMPLANT_MACHINEGUN"/>
+            <itemmod type="HOOK" ref="IMPLANT_ASSAULT_CANNON"/>
+            <itemmod type="HOOK" ref="IMPLANT_LAUNCHER"/>
+        </modifications>
+    </item>
+    <item id="cyberweapon_oral_slasher" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="1000"/>
+        <attrdef id="AVAILABILITY" value="6I"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="3"/>
+        <usage mode="IMPLANTED" value="0.25"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+            <weapon dmg="2P" attack="2,,,," skill="exotic_weapons" spec="exotic_weapons/other"/>
+        </alternate>
+    </item>
+    <item id="cyberweapon_shotgun_knee" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="1000"/>
+        <attrdef id="AVAILABILITY" value="3I"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="5"/>
+        <usage mode="IMPLANTED" value="0.6"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+            <weapon dmg="5P" attack="6,,,," ammo="1(c)" mode="SS" skill="close_combat" spec="close_combat/unarmed"/>
+        </alternate>
+    </item>
+    <item id="cyberweapon_tesla_coil" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="15000"/>
+        <attrdef id="AVAILABILITY" value="7I"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="8"/>
+        <usage mode="IMPLANTED" value="1.0"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_RANGED" subtype="THROWERS" id="weapon">
+            <weapon dmg="5S(e)" attack="8,10,,," mode="SS" ammo="5(c)" skill="exotic_weapons" spec="exotic_weapons/other"/>
+        </alternate>
+    </item>
+    <item id="cyberweapon_wrecker" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="500"/>
+        <attrdef id="AVAILABILITY" value="1I"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="6"/>
+        <usage mode="IMPLANTED" value="0.4"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS" id="weapon">
+            <weapon dmg="6S" attack="7,,,," skill="close_combat" spec="close_combat/clubs"/>
+        </alternate>
+    </item>
+    <item id="cyberweapon_wrist_shield" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="2000"/>
+        <attrdef id="AVAILABILITY" value="5L"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="10"/>
+        <usage mode="IMPLANTED" value="0.5"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+        <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="weapon">
+            <weapon dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
+        </alternate>
+        <alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS" id="weapon">
+            <weapon dmg="3S" attack="6,,,," skill="close_combat" spec="close_combat/clubs"/>
+        </alternate>
+    </item>
+</items>

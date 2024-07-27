@@ -15,11 +15,13 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.SignatureManeuver;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.GearSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.RiggerConsoleSection;
+import de.rpgframework.shadowrun6.chargen.jfx.section.SignatureManeuverSection;
 import de.rpgframework.shadowrun6.filter.CarriedItemItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -39,6 +41,7 @@ public class VehiclePage extends Page {
 	private RiggerConsoleSection secRigging;
 	private GearSection secVehicles;
 	private GearSection secDrones;
+	private SignatureManeuverSection secSignature;
 
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -58,6 +61,7 @@ public class VehiclePage extends Page {
 		initRigging();
 		initDrones();
 		initVehicles();
+		initSignatureManeuvers();
 	}
 
 	//-------------------------------------------------------------------
@@ -68,6 +72,16 @@ public class VehiclePage extends Page {
 		FlexGridPane.setMinWidth(secRigging, 4);
 		FlexGridPane.setMinHeight(secRigging, 6);
 		FlexGridPane.setMediumWidth(secRigging, 6);
+	}
+
+	//-------------------------------------------------------------------
+	private void initSignatureManeuvers() {
+		secSignature = new SignatureManeuverSection();
+		secSignature.setId("signature");
+		secSignature.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secSignature, 4);
+		FlexGridPane.setMinHeight(secSignature, 6);
+		FlexGridPane.setMediumWidth(secSignature, 6);
 	}
 
 	//-------------------------------------------------------------------
@@ -106,7 +120,7 @@ public class VehiclePage extends Page {
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secRigging,secDrones, secVehicles);
+		flex.getChildren().addAll(secRigging,secDrones, secVehicles, secSignature);
 
 		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
 		setContent(layout);
@@ -139,6 +153,7 @@ public class VehiclePage extends Page {
 		secRigging.updateController(ctrl);
 		secVehicles.updateController(ctrl);
 		secDrones.updateController(ctrl);
+		secSignature.updateController(ctrl);
 		refresh();
 	}
 
@@ -147,6 +162,7 @@ public class VehiclePage extends Page {
 		secRigging.refresh();
 		secVehicles.refresh();
 		secDrones.refresh();
+		secSignature.refresh();
 	}
 
 }

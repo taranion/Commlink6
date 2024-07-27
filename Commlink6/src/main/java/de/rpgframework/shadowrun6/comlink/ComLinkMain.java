@@ -7,7 +7,6 @@ import java.lang.System.Logger.Level;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -30,10 +29,13 @@ import de.rpgframework.character.CharacterIOException;
 import de.rpgframework.character.CharacterProviderLoader;
 import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.core.StartupStep;
+import de.rpgframework.eden.client.RemoteAndLocalCustomDataSetManager;
+import de.rpgframework.eden.client.RemoteAndLocalCustomResourceManager;
 import de.rpgframework.eden.client.jfx.AccountPage;
 import de.rpgframework.eden.client.jfx.EdenClientApplication;
 import de.rpgframework.eden.client.jfx.EdenSettings;
 import de.rpgframework.eden.client.jfx.PDFPage;
+import de.rpgframework.genericrpg.data.CustomDataSetManagerLoader;
 import de.rpgframework.genericrpg.export.ExportPluginRegistry;
 import de.rpgframework.jfx.attach.PDFViewerConfig;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -145,6 +147,7 @@ public class ComLinkMain extends EdenClientApplication {
 	@Override
 	public List<StartupStep> getPostGUISteps() {
 		List<StartupStep> merged = new ArrayList<>(super.getPostGUISteps());
+		merged.add(new LoadCustomSR6DataStep());
 		merged.add(new LoadSR6CharactersStep(this));
 		return merged;
 	}
@@ -297,7 +300,7 @@ public class ComLinkMain extends EdenClientApplication {
 		navigAbout  .setId("navig-about");
 		navigAccount.setId("navig-account");
 
-		drawer.getItems().addAll(navigChars, navigLookup, navigAccount, navigAbout);
+		drawer.getItems().addAll(navigChars, navigLookup, navigAbout);
 //		if (!Platform.isDesktop() || !PDFViewerServiceFactory.create().isPresent()) {
 //			drawer.getItems().remove(navigPDF);
 //		}

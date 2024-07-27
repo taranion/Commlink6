@@ -65,7 +65,7 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 		// Ensure spell has not been selected yet
 		for (RitualValue tmp : getSelected()) {
 			if (tmp.getResolved()==value)
-				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
+				return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 
 		if (!parent.getModel().hasCharGenSettings(SR6PointBuySettings.class)) {
@@ -75,10 +75,10 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 
 		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
 		if (settings.characterPoints<2)
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 
 		if (settings.sumSpellsRituals>=maxSpellsAndRituals)
-			return new Possible(IRejectReasons.IMPOSS_MAX_SPELLS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_MAX_SPELLS);
 
 		return Possible.TRUE;
 	}
@@ -88,11 +88,11 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 		// Ensure spell has not been selected yet
 		for (RitualValue tmp : getSelected()) {
 			if (tmp.getResolved()==value)
-				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
+				return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 
 		if (parent.getModel().getKarmaFree()<5)
-			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
 
 		if (!parent.getModel().hasCharGenSettings(SR6PointBuySettings.class)) {
 			logger.log(Level.ERROR, "Expected SR6PointBuySettings not found");
@@ -101,7 +101,7 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 
 		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
 		if (settings.sumSpellsRituals>=maxSpellsAndRituals)
-			return new Possible(IRejectReasons.IMPOSS_MAX_SPELLS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_MAX_SPELLS);
 
 		return Possible.TRUE;
 	}
@@ -115,7 +115,7 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 		// Ensure spell has not been selected yet
 		for (RitualValue tmp : getSelected()) {
 			if (tmp.getResolved()==value)
-				return new Possible(IRejectReasons.IMPOSS_ALREADY_PRESENT);
+				return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_ALREADY_PRESENT);
 		}
 
 		Possible p1 = canBeSelectedCP(value, decisions);
@@ -132,11 +132,11 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 	@Override
 	public Possible canBeDeselected(RitualValue value) {
 		if (!getSelected().contains(value)) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 
 		if (value.isAutoAdded()) {
-			return new Possible(IRejectReasons.IMPOSS_AUTO_ADDED);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_AUTO_ADDED);
 		}
 
 		return Possible.TRUE;

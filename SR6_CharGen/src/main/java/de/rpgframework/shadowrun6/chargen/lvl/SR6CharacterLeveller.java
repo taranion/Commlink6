@@ -18,7 +18,6 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.SR6DataStructureController;
 import de.rpgframework.shadowrun6.proc.CalculateDerivedAttributes;
-import de.rpgframework.shadowrun6.proc.CalculateEssence;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 
 /**
@@ -73,6 +72,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		equipment = new SR6EquipmentLeveller(this);
 		spells    = new SR6SpellLeveller(this);
 		rituals   = new SR6RitualLeveller(this);
+		foci      = new SR6FocusLeveller(this);
 		adeptPowers = new SR6AdeptPowerLeveller(this);
 		complex   = new SR6ComplexFormLeveller(this);
 		metaEcho  = new SR6MetamagicOrEchoController(this, false);
@@ -111,7 +111,6 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 			processChain.add(lifestyles);
 			processChain.add(contacts);
 //			processChain.add(new RemainingKarmaNuyenController(this));
-			processChain.add(new CalculateDerivedAttributes(model));
 
 			setupDone = true;
 		} finally {

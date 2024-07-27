@@ -72,6 +72,8 @@ public class CalculateAttributePools implements ProcessingStep {
 			ValueModification mod = (ValueModification)tmp;
 			if (mod.getSet()!=ValueType.NATURAL)
 				continue;
+			if (mod.isConditional())
+				continue;
 			int value = mod.getValue();
 			if (mod.getLookupTable() != null && mod.getLookupTable().length >= value) {
 				String lookup = mod.getLookupTable()[value - 1];
@@ -94,6 +96,8 @@ public class CalculateAttributePools implements ProcessingStep {
 				continue;
 			ValueModification mod = (ValueModification)tmp;
 			if (mod.getSet()!=ValueType.AUGMENTED)
+				continue;
+			if (mod.isConditional())
 				continue;
 			int value = (mod.isDouble() ? (int)(mod.getValueAsDouble()*1000) : mod.getValue());
 			if (mod.getLookupTable() != null && mod.getLookupTable().length >= value) {

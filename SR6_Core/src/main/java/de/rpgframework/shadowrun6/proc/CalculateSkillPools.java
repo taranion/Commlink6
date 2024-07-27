@@ -57,20 +57,21 @@ public class CalculateSkillPools implements ProcessingStep {
 		Pool<Integer> pool = new Pool<Integer>();
 		sVal.setPool(pool);
 
-		// Clone pool for attribute, if possible
+		// Determine attribute
+		String memArtName = null;
+		int memArtVal  = 0;
 		ShadowrunAttribute attr = sVal.getSkill().getAttribute();
 		if (attr!=null) {
-//			pool = (Pool<Integer>) model.getAttribute(attr).getPool().clone();
 			AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(attr);
-			pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(
-					Math.max(aVal.getModifiedValue(ValueType.ARTIFICIAL), aVal.getModifiedValue(ValueType.AUGMENTED)),
-					attr.getName(loc)));
+			memArtName = attr.getName(loc);
+			// Use either augmented natural or artificial value - whatever is better
+			memArtVal = Math.max(aVal.getModifiedValue(ValueType.ARTIFICIAL), aVal.getModifiedValue(ValueType.NATURAL, ValueType.AUGMENTED));
+			pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(memArtVal,memArtName));
 		}
 
 		int augmentedMax = sVal.getDistributed() + 4;
-
 		/*
-		 * Natural attribute first
+		 * Natural skill first
 		 */
 		pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(sVal.getDistributed(), sVal.getModifyable().getName(loc)));
 		// Add all natural modifiers
@@ -143,6 +144,9 @@ public class CalculateSkillPools implements ProcessingStep {
 			}
 			sumArt += value;
 			pool.addStep(ValueType.ARTIFICIAL, toAdd);
+		}
+		if (sumArt>0) {
+			pool.addStep(ValueType.ARTIFICIAL, new PoolCalculation<Integer>(memArtVal, memArtName));
 		}
 		logger.log(Level.DEBUG, "ARTIFICIAL: {0}",pool.getCalculation(ValueType.ARTIFICIAL));
 

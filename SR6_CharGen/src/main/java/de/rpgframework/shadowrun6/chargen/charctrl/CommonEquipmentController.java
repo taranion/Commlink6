@@ -364,8 +364,9 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 
 			logger.log(Level.INFO, "Remove {0} from model", value.toString());
 			getModel().removeCarriedItem(value);
+			Shadowrun6Tools.removeEssenceChange(getModel(), value, mode);
 
-			parent.runProcessors();
+//			parent.runProcessors();
 			return true;
 		} finally {
 			logger.log(Level.TRACE, "LEAVE deselect({0})", value);
@@ -545,6 +546,14 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			}
 		}
 
+		if (value.getId().equals("smartgun_system")) {
+			logger.log(Level.INFO, "mode {0}", toEmbed.getCarryMode());
+			logger.log(Level.INFO, "variantID {0}", toEmbed.getVariantID());
+			logger.log(Level.INFO, "variant {0}", toEmbed.getVariant());
+			logger.log(Level.INFO, "usages {0}", toEmbed.getAllowedHooks());
+			logger.log(Level.WARNING, "SMARTGUN");
+		}
+
 		// Check if capacity is sufficient
 		AvailableSlot realSlot = (AvailableSlot) container.getSlot(slot);
 		logger.log(Level.INFO, "Slot to add element in: {0}  with capacity = {1}", realSlot, slot.hasCapacity());
@@ -620,7 +629,6 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 				return res;
 			}
 			container.addAccessory(res.get(), slot);
-			logger.log(Level.DEBUG, "recalculate item after embedding");
 			GearTool.recalculate("", ShadowrunReference.ITEM_ATTRIBUTE, getModel(), container);
 			logger.log(Level.WARNING, "Embedded {0} into {1}/{2}", value.getId()+"/"+variant, container.getKey(), container.getUuid());
 

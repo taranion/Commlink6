@@ -1,7 +1,10 @@
 package de.rpgframework.shadowrun6;
 
+import java.util.Locale;
+
 import org.prelle.simplepersist.Element;
 
+import de.rpgframework.genericrpg.data.CommonCharacter;
 import de.rpgframework.genericrpg.data.DataErrorException;
 import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.shadowrun.Quality;

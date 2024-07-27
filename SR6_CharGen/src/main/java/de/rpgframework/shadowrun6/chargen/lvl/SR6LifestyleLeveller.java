@@ -7,6 +7,7 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
@@ -102,7 +103,7 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 	public Possible canBeSelected(LifestyleQuality value, Decision... decisions) {
 		int cost = value.getCost();
 		if (model.getNuyen()<cost) {
-			return new Possible(false, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES , IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN);
 		}
 		return Possible.TRUE;
 	}

@@ -148,9 +148,7 @@
  		<attrdef id="PRICE" value="$RATING*8000" />
  		<flags><flag>AUGMENTATION</flag></flags>
  		<modifications>
- 			<valmod type="ATTRIBUTE" ref="REACTION" value="$RATING*2" apply="CHARACTER"/>
- 			<valmod type="ATTRIBUTE" ref="AGILITY"  value="$RATING*2" apply="CHARACTER"/>
- 			<valmod type="ATTRIBUTE" ref="MINOR_ACTION_PHYSICAL"  value="$RATING*2" apply="CHARACTER"/>
+ 			<valmod type="SKILL" ref="CHOICE" choice="45ba07c3-69e3-44b9-9ab9-0d0337c2d10e" value="$RATING" set="ARTIFICIAL" apply="CHARACTER"/>
  		</modifications>
    </item>
 	<item id="speed_boster" avail="4I" price="25000" type="CYBERWARE" subtype="CYBER_BODYWARE">

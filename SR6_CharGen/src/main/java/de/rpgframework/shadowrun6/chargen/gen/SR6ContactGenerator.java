@@ -2,18 +2,15 @@ package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.data.GenericCore;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.random.GeneratorVariable;
+import de.rpgframework.random.VariableHolderNode;
 import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -361,8 +358,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 			contact.setType(Shadowrun6Core.getItemList(ContactType.class).get(type).getId());
 
 			// Generate a name
-			Map<GeneratorVariable,Integer> variables = new HashMap<>();
-			String name = (String) nameGen.generate(variables);
+			String name = (String) nameGen.generate(new VariableHolderNode());
 			contact.setName(name);
 
 			logger.log(Level.ERROR, "Generated {0}: {1}", name, contact);

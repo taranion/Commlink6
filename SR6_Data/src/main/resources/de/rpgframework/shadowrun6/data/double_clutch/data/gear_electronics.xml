@@ -3,18 +3,6 @@
 
 <!-- Cyberware -->
 
-<!-- New control rig not necessary as is same as DE version of control rig in Core
-	<item avail="4L" price="30000" id="control_rig_DC" type="CYBERWARE" subtype="CYBER_HEADWARE">
-		<choices>
-			<choice uuid="<GENERATE NEW UUID>" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
-		</choices>
-		<usage mode="IMPLANTED"/>
-		<attrdef id="PRICE" value="$RATING*30000"/>
-		<attrdef id="ESSENCECOST" value="$RATING"/>
-		<flags><flag>AUGMENTATION</flag></flags>
-	</item>
- -->
-
 <!-- Note: The ability to implement a remote control rig as cyberware is added as <useas> to the control rigs in Core -->
 
 	<item avail="4L" price="20000" id="medullan_processors" type="CYBERWARE" subtype="CYBER_HEADWARE">
@@ -38,6 +26,18 @@
 		</modifications>
 	</item>
 
+   <item avail="4L" price="4000" id="rcc_headware" type="CYBERWARE" subtype="CYBER_HEADWARE">
+  		<usage mode="EMBEDDED" slot="HEADWARE_IMPLANT" value="3"/>
+   	<flags><flag>AUGMENTATION</flag></flags>
+   	<variant id="bodyware">
+	   	<usage mode="IMPLANTED"/>
+	   	<attrdef id="ESSENCECOST" value="0.3"/>
+   	</variant>
+     <modifications>
+         <itemmod type="HOOK" ref="RCC"/>
+     </modifications>
+   </item>
+
 	<item id="simsense_overdrive" avail="4L" type="CYBERWARE" subtype="CYBER_HEADWARE">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
@@ -46,7 +46,11 @@
 		<attrdef id="PRICE" value="$RATING*15000"/>
 		<flags><flag>AUGMENTATION</flag></flags>
 		<modifications>
-			<valmod type="ATTRIBUTE" ref="INTUITION" value="$RATING" cond="true" />
+			<checkmod type="ACTION" ref="matrix_perception" value="$RATING"  />
+			<checkmod type="ACTION" ref="matrix_search" value="$RATING"  />
+			<checkmod type="ACTION" ref="trace_icon" value="$RATING"  />
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_MATRIX_VR_COLD" value="$RATING"  />
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_MATRIX_VR_HOT" value="$RATING"  />
 		</modifications>
 	</item>
 
@@ -105,6 +109,7 @@
 		<usage mode="EMBEDDED" slot="SOFTWARE" />
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="GEAR" ref="WEAPON" />
 		</choices>
 		<attrdef id="AVAILABILITY" value="$RATING"/>
 		<attrdef id="PRICE" value="$RATING*500"/>

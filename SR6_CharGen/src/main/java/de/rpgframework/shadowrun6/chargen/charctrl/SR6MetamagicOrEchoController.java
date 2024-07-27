@@ -154,10 +154,12 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			list = getSelected().stream()
 					.filter(m -> m.getModifyable()!=null)
 					.filter(m -> m.getModifyable().getType() == Type.METAMAGIC || m.getModifyable().getType() == Type.METAMAGIC_ADEPT)
+					.filter(m -> !m.isAutoAdded())
 					.collect(Collectors.toList());
 		} else if (type != null && type.usesResonance()) {
 			list = getSelected().stream()
 					.filter(m -> m.getModifyable().getType() == Type.ECHO)
+					.filter(m -> !m.isAutoAdded())
 					.collect(Collectors.toList());
 		} else {
 			if (meta.isAI()) {
@@ -288,6 +290,11 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 		if (!getSelected().contains(value)) {
 			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
+
+		// may not be deleted, because auto-added
+		if (value.isAutoAdded())
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_AUTO_ADDED);
+
 		return Possible.TRUE;
 	}
 	//-------------------------------------------------------------------

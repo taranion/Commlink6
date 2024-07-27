@@ -83,6 +83,7 @@
 			<valmod type="METATYPE" ref="xapiri_thepe" value="8"/>
 			<valmod type="METATYPE" ref="human"      value="9"/>
 			<valmod type="METATYPE" ref="nartaki"    value="10"/>
+			<valmod type="METATYPE" ref="nartaki2"    value="10"/>
 			<valmod type="METATYPE" ref="valkyrie"   value="10"/>
 			<valmod type="METATYPE" ref="ork"        value="9"/>
 			<valmod type="METATYPE" ref="hobgoblin"  value="9"/>
@@ -123,6 +124,7 @@
 			<valmod type="METATYPE" ref="xapiri_thepe" value="4"/>
 			<valmod type="METATYPE" ref="human"      value="4"/>
 			<valmod type="METATYPE" ref="nartaki"    value="4"/>
+			<valmod type="METATYPE" ref="nartaki2"    value="4"/>
 			<valmod type="METATYPE" ref="valkyrie"   value="4"/>
 			<valmod type="METATYPE" ref="ork"        value="4"/>
 			<valmod type="METATYPE" ref="hobgoblin"  value="4"/>

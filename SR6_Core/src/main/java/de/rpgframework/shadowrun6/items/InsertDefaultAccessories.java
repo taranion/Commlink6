@@ -9,9 +9,11 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -41,8 +43,10 @@ public class InsertDefaultAccessories implements CarriedItemProcessor {
 			if (model.getAccessory("anti_theft",null).isEmpty()) {
 				ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "anti_theft");
 				CarriedItem access = new CarriedItem<ItemTemplate>(item, item.getVariant("rating1"), CarryMode.EMBEDDED);
+
 				SR6GearTool.recalculate("", charac, access);
 				access.setInjectedBy("DEFAULT");
+				access.addIncomingModification(new DataItemModification(ShadowrunReference.GEAR, "anti_theft"));
 				access.addFlag(SR6ItemFlag.AUTO_ADDED);
 				model.addAccessory(access, ItemHook.VEHICLE_ELECTRONICS);
 			}

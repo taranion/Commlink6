@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.shadowrun.ASpell.Category;
 import de.rpgframework.shadowrun.FocusValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -192,7 +193,8 @@ public class CombatSectionTools {
 						unarmed.setCol1(String.valueOf(ar[0]));
 					} else {
 						unarmed.setCol1(String.valueOf(ar[1]));
-					}
+						}
+					unarmed.setCol1Tooltip(Shadowrun6Tools.toExplainStringObject(weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getIncomingModifications()));
 					// Col3: Dmg
 					unarmed.setCol3(  Shadowrun6Tools.getWeaponDamage(model, weapon).toString() );
 					continue;
@@ -201,16 +203,23 @@ public class CombatSectionTools {
 				if (count==5) break;
 				AttackEntry entry = new AttackEntry(weapon.getNameWithoutRating(loc));
 				ret.add(entry);
-				// Col1: Pool
-				entry.setCol2( String.valueOf(Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).getValue(ValueType.NATURAL)) );
-				entry.setCol2Tooltip( Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).toExplainString() );
-				// Col2: AR
+				// Col1: AR
+				ItemAttributeObjectValue<SR6ItemAttribute> foo = weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING);
 				int[] ar = (int[])weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue();
+				int baseExplain = 0;
 				if (ar[1]==0) {
 					entry.setCol1(String.valueOf(ar[0]));
+					baseExplain = ((int[])weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue())[0];
 				} else {
 					entry.setCol1(String.valueOf(ar[1]));
+					baseExplain = ((int[])weapon.getAsObject(SR6ItemAttribute.ATTACK_RATING).getModifiedValue())[1];
 				}
+				String explain = Shadowrun6Tools.toExplainStringObject(foo.getIncomingModifications());
+				if (explain==null) explain="";
+				entry.setCol1Tooltip( baseExplain+" "+weapon.getResolved().getName()+"\n"+  explain);
+				// Col2: Pool
+				entry.setCol2( String.valueOf(Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).getValue(ValueType.NATURAL)) );
+				entry.setCol2Tooltip( Shadowrun6Tools.getWeaponPoolCalculation(model, weapon).toExplainString() );
 				// Col3: Dmg
 				entry.setCol3(  Shadowrun6Tools.getWeaponDamage(model, weapon).toString() );
 		}
@@ -222,7 +231,7 @@ public class CombatSectionTools {
 	//-------------------------------------------------------------------
 	private  static AttackTable getAttackTableAstral(Shadowrun6Character model, Locale loc) {
 		AttackTable ret = new AttackTable(
-				Shadowrun6Core.getI18nResources().getString("label.ar", loc),
+				SR6ItemAttribute.ATTACK_RATING.getShortName(loc),
 				Shadowrun6Core.getI18nResources().getString("label.pool", loc),
 				SR6ItemAttribute.DAMAGE.getShortName(loc)
 				);
@@ -232,13 +241,13 @@ public class CombatSectionTools {
 
 		/* Unarmed */
 		AttackEntry entry = new AttackEntry(Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed").getShortName(loc)+" (AST)");
-		// Col1: Pool
-		entry.setCol1(pool.toString());
-		entry.setCol1Tooltip(pool.toExplainString());
-		// Col2: AR
-		pool = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL).getPool();
+		// Col2: Pool
 		entry.setCol2(pool.toString());
 		entry.setCol2Tooltip(pool.toExplainString());
+		// Col1: AR
+		pool = model.getAttribute(ShadowrunAttribute.ATTACK_RATING_ASTRAL).getPool();
+		entry.setCol1(pool.toString());
+		entry.setCol1Tooltip(pool.toExplainString());
 		// Col3: DMG
 		AttributeValue<ShadowrunAttribute> tradAttr = null;
 		if (model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType().usesSpells() && model.getTradition()!=null) {

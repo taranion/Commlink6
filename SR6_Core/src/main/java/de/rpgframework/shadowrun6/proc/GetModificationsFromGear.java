@@ -45,7 +45,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 			Throwable lastException = null;
 			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 				try {
-					logger.log(Level.DEBUG, "isDirty({0}) = {1}", item.getKey(), item.isDirty());
+					logger.log(Level.DEBUG, "GetModifications({0}): dirty={1}", item.getKey(), item.isDirty());
 					if (item.isDirty()) {
 						SR6GearTool.recalculate("", model, item);
 					}
@@ -84,7 +84,7 @@ public class GetModificationsFromGear implements ProcessingStep {
 		} finally {
 			logger.log(Level.TRACE, "LEAVE : process() ends with "+unprocessed.size()+" modifications still to process");
 		}
-		logger.log(Level.WARNING,"return "+ unprocessed);
+		logger.log(Level.DEBUG,"return "+ unprocessed);
 		return unprocessed;
 	}
 

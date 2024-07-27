@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <techniques>
-  <technique cat="GRAPPLING" id="arm_bar_breaker" />
-  <technique cat="STRIKING"  id="steel_typhon" /> 
-  <technique cat="STRIKING"   id="soul_breaking" >
-    <requires>
-    	<datareq type="TECHNIQUE" ref="tameshiwari"/>
-    	<selreq>
-    		<datareq type="CARRIED" ref="bone_lacing"/>
-    		<datareq type="CARRIED" ref="bone_density"/>
-    		<datareq type="CARRIED" ref="cyberleg" variant="full"/>
-    	</selreq>
-    </requires>
-  </technique> 
-  <technique cat="GENERAL"  id="limb_dropping" /> 
-  <technique cat="GENERAL"   id="plasteel_shirt" >
-    <requires>
-    	<!-- user must have a cybertorso or at least
-2.0 Essence spent on cyberlimbs and bodyware cyberware. -->
-    </requires>
-  </technique> 
-  <technique cat="MOBILITY" id="sense_the_breeze" >
-  	<requires>
-  		<!-- user must have at least +1 Reaction bonus from augmentations -->
-  		<selreq>
-  			<datareq type="TECHNIQUE" ref="bending_of_the_reed_melee"/>
-  			<datareq type="TECHNIQUE" ref="bending_of_the_reed_ranged"/>
-  		</selreq>
-  	</requires>
-  </technique> 
+    <technique cat="GRAPPLING" id="arm_bar_breaker"/>
+    <technique cat="STRIKING" id="steel_typhon"/>
+    <technique cat="STRIKING" id="soul_breaking">
+        <requires>
+            <datareq type="TECHNIQUE" ref="tameshiwari"/>
+            <selreq>
+                <datareq type="CARRIED" ref="bone_lacing"/>
+                <datareq type="CARRIED" ref="bone_density"/>
+                <datareq type="CARRIED" ref="cyberleg" variant="full"/>
+            </selreq>
+        </requires>
+    </technique>
+    <technique cat="GENERAL" id="limb_dropping"/>
+    <technique cat="GENERAL" id="plasteel_shirt">
+        <requires>
+            <!-- user must have a cybertorso or at least
+    2.0 Essence spent on cyberlimbs and bodyware cyberware. -->
+        </requires>
+    </technique>
+    <technique cat="MOBILITY" id="sense_the_breeze">
+        <requires>
+            <!-- user must have at least +1 Reaction bonus from augmentations -->
+            <selreq>
+                <datareq type="TECHNIQUE" ref="bending_of_the_reed_melee"/>
+                <datareq type="TECHNIQUE" ref="bending_of_the_reed_ranged"/>
+            </selreq>
+        </requires>
+    </technique>
 </techniques>

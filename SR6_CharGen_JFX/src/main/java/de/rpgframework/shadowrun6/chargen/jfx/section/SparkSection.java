@@ -35,6 +35,7 @@ public class SparkSection extends Section {
 	private final static Logger logger = System.getLogger(GearSection.class.getPackageName());
 
 	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(SparkSection.class.getPackageName()+".Section");
+	private static MetamagicOrEcho transhum = Shadowrun6Core.getItem(MetamagicOrEcho.class, "neuromorphism");
 
 //	private Label hdAcclimation;
 	private Label hdNeuromorphism;
@@ -65,7 +66,10 @@ public class SparkSection extends Section {
 	//-------------------------------------------------------------------
 	private void initComponents() {
 //		nfAcclimation   = new NumericalValueField<Quality,QualityValue>();
-		nfNeuromorphism = new NumericalValueField<MetamagicOrEcho,MetamagicOrEchoValue>();
+		nfNeuromorphism = new NumericalValueField<MetamagicOrEcho,MetamagicOrEchoValue>( ()->{
+			MetamagicOrEchoValue val = model.getMetamagicOrEcho("neuromorphism");
+			return (val==null)?(new MetamagicOrEchoValue(transhum)):val;
+			});
 		lbEssenceHole   = new Label("?");
 		lbEssenceLost   = new Label("?");
 		lbEssenceRemain = new Label("?");
@@ -109,6 +113,7 @@ public class SparkSection extends Section {
 		logger.log(Level.DEBUG, "updateController");
 		this.control = ctrl;
 		model = ctrl.getModel();
+		nfNeuromorphism.setController(control.getMetamagicOrEchoController());
 		refresh();
 	}
 
@@ -137,7 +142,7 @@ public class SparkSection extends Section {
 			if (mVal == null) {
 				mVal = new MetamagicOrEchoValue(transhum);
 			}
-			nfNeuromorphism.setData(mVal, new SimpleObjectProperty<NumericalValueController<MetamagicOrEcho, MetamagicOrEchoValue>>(tCtrl));
+//			nfNeuromorphism.setData(mVal, new SimpleObjectProperty<NumericalValueController<MetamagicOrEcho, MetamagicOrEchoValue>>(tCtrl));
 			nfNeuromorphism.setUserData(Shadowrun6Core.getItem(MetamagicOrEcho.class, "neuromorphism"));
 		}
 		boolean allowTransh = Boolean.parseBoolean(Shadowrun6Rules.ALLOW_NEUROMORPHISM.getDefaultValue()) && (transhum!=null);

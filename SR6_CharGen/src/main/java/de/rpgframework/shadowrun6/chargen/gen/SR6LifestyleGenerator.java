@@ -109,7 +109,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	public Possible canBeSelected(LifestyleQuality value, Decision... decisions) {
 		int cost = value.getCost();
 		if (model.getNuyen()<cost) {
-			return new Possible(false, IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES , IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN);
 		}
 		return Possible.TRUE;
 	}
@@ -152,7 +152,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	@Override
 	public Possible canBeDeselected(SR6Lifestyle value) {
 		if (!model.getLifestyles().contains(value)) {
-			return new Possible(IRejectReasons.IMPOSS_NOT_PRESENT);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES ,IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 
 		return Possible.TRUE;
@@ -286,7 +286,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 					logger.log(Level.DEBUG, "Don't pay for auto-added lifestyle {0}", val.getKey());
 					continue;
 				}
-				logger.log(Level.DEBUG, "Pay {1} for lifestyle {1}", val.getNameWithRating(), getLifestyleCost(val));
+				logger.log(Level.INFO, "Pay {1} for lifestyle {1}", val.getNameWithRating(), getLifestyleCost(val));
 				model.setNuyen( model.getNuyen() - getLifestyleCost(val));
 			}
 

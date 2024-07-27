@@ -12,9 +12,10 @@
         <Logger name="xml" level="warn" />
         <Logger name="prelle.jfx" level="warn" />
         <Logger name="rpgframework" level="INFO" />
-        <Logger name="de.rpgframework.genericrpg.items" level="INFO" />
-        <Logger name="de.rpgframework.shadowrun6.items" level="DEBUG" />
-        <Logger name="de.rpgframework.shadowrun.proc.quality" level="WARN" />
+        <Logger name="de.rpgframework.genericrpg.items" level="WARN" />
+        <Logger name="de.rpgframework.shadowrun6.items" level="INFO" />
+        <Logger name="de.rpgframework.genericrpg.items.formula" level="WARN" />
+         <Logger name="de.rpgframework.shadowrun.proc.quality" level="WARN" />
         <Logger name="de.rpgframework.shadowrun6.proc" level="WARN"/>
         <Logger name="de.rpgframework.shadowrun6.proc.essence" level="TRACE"/>
     </Loggers>

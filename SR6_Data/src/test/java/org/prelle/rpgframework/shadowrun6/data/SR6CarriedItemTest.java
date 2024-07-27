@@ -667,4 +667,21 @@ public class SR6CarriedItemTest {
 		assertEquals("7 + 4x2",15, (int)hp.getCapacity());
 	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void testCybereye() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "cybereye");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		item.addDecision(new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, AugmentationQuality.STANDARD.name()));
+		item.addDecision(new Decision(ItemTemplate.UUID_RATING, "4"));
+		SR6GearTool.recalculate("", null, item);
+
+		AvailableSlot core = item.getSlot(ItemHook.CYBEREYE_IMPLANT);
+		assertNotNull(core);
+		assertFalse(core.getAllEmbeddedItems().isEmpty());
+		assertEquals("Table-Attribute of valmod not used",12,core.getFreeCapacity(),0);
+	}
+
 }

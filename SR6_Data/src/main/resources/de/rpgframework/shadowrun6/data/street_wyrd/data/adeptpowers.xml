@@ -54,7 +54,7 @@
    <power id="distance_strike" cost="2" act="PASSIVE" />
    <power id="elemental_missile" cost="0.5" act="MINOR_ACTION" multi="y">
    	<choices>
-   		<choice type="ELEMENT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0880" options="fire,water,air,earth"/>
+   		<choice type="ELEMENT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0880" options="FIRE,WATER,AIR,EARTH"/>
    		<choice type="TEXT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0881"/>
    	</choices>
    </power>
@@ -63,12 +63,12 @@
      		<datareq type="ADEPT_POWER" ref="killing_hands"/>
      </requires>
    	<choices>
-   		<choice type="ELEMENT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0880" options="fire,water,air,earth"/>
+   		<choice type="ELEMENT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0880" options="FIRE,WATER,AIR,EARTH"/>
    	</choices>
    </power>
    <power id="elemental_weapon" cost="0.5" act="MINOR_ACTION" multi="y">
    	<choices>
-   		<choice type="ELEMENT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0880" options="fire,water,air,earth"/>
+   		<choice type="ELEMENT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0880" options="FIRE,WATER,AIR,EARTH"/>
    	</choices>
    </power>
    <power id="empathic_healing" cost="0.75" act="MAJOR_ACTION"/>

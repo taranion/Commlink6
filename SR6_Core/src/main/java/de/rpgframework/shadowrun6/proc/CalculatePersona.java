@@ -155,11 +155,11 @@ public class CalculatePersona implements ProcessingStep {
 		// otherwise only do standard
 		if (bestDF==null && bestAS==null) {
 		} else if (bestDF!=null && bestAS==null) {
-			addNaturalModifier(valA, bestDF.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getDistributed(), bestDF);
-			addNaturalModifier(valA, bestDF.getAsValue(SR6ItemAttribute.FIREWALL).getDistributed(), bestDF);
+			addNaturalModifier(valD, bestDF.getAsValue(SR6ItemAttribute.DATA_PROCESSING).getDistributed(), bestDF);
+			addNaturalModifier(valF, bestDF.getAsValue(SR6ItemAttribute.FIREWALL).getDistributed(), bestDF);
 		} else if (bestDF==null && bestAS!=null) {
 			addNaturalModifier(valA, bestAS.getAsValue(SR6ItemAttribute.ATTACK).getDistributed(), bestAS);
-			addNaturalModifier(valA, bestAS.getAsValue(SR6ItemAttribute.SLEAZE).getDistributed(), bestAS);
+			addNaturalModifier(valS, bestAS.getAsValue(SR6ItemAttribute.SLEAZE).getDistributed(), bestAS);
 		} else {
 			SR6ItemAttribute attrD = model.getMatrixAttributeMapping(SR6ItemAttribute.DATA_PROCESSING);
 			SR6ItemAttribute attrF = model.getMatrixAttributeMapping(SR6ItemAttribute.FIREWALL);
