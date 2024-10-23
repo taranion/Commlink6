@@ -25,9 +25,9 @@
 		<maven.deploy.skip>false</maven.deploy.skip>
 		<maven.install.skip>false</maven.install.skip>
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
-		<client.plugin.version>1.0.21</client.plugin.version>
-		<attach.version>4.0.19</attach.version>
-		<rpgfw.version>5.2.0-SNAPSHOT</rpgfw.version>
+		<client.plugin.version>1.0.24</client.plugin.version>
+		<attach.version>4.0.21</attach.version>
+		<rpgfw.version>5.2.0</rpgfw.version>
 	</properties>
 	<!-- Comment for no real purpose -->
 
