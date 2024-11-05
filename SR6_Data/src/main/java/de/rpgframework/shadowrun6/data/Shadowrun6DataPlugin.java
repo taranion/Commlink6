@@ -1010,7 +1010,9 @@ public class Shadowrun6DataPlugin  {
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "smooth_operations", "smooth_operations.i18n", Locale.ENGLISH);
 		set.setType(DataSetType.LOCATION);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"smooth_operations/data/qualities.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities from 'Smooth Operations'");
+		logger.log(Level.DEBUG, "Loaded {0} qualities from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"smooth_operations/data/spells.xml");
+		logger.log(Level.DEBUG, "Loaded {0} spells from 'Smooth Operations'", list.size());
 
 		System.exit(1);
 	}
