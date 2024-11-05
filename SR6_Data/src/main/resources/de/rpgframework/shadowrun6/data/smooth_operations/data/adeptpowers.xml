@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<powers>
+   <power id="authorative_tone"  cost="0.5" hasLevel="true" act="MAJOR_ACTION"/>
+   <power id="calming_voice"     cost="0.5" hasLevel="true" act="MAJOR_ACTION"/>
+   <power id="charismatic_endurance" cost="0.25" act="PASSIVE">
+     <modifications>
+         <relevancemod topic="SOCIAL" />
+     </modifications>
+   </power>
+   <power id="facial_sculpt"   cost="0.25" hasLevel="true" act="MAJOR_ACTION" max="4">
+		<modifications>
+			<checkmod type="SKILL" ref="stealth" value="1" />
+		</modifications>
+	</power>
+   <power id="lie_detector" cost="0.25" hasLevel="true" act="PASSIVE">
+     <modifications>
+         <valmod type="ATTRIBUTE" ref="JUDGE_INTENTIONS" value="$LEVEL"/>
+     </modifications>
+   </power>
+   <power id="pheromone_control"  cost="0.5" act="MAJOR_ACTION" multi="y">
+      <choices>
+         <choice type="TEXT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0881" i18n="pheromone_control.status"/>
+      </choices>
+   </power>
+   <power id="sharp_tongue"      cost="1.0" act="MAJOR_ACTION"/>
+   <power id="ventriloquism"     cost="0.25" act="MAJOR_ACTION"/>
+
+</powers>

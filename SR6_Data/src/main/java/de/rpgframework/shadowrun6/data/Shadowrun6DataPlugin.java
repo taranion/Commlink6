@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.lang.reflect.GenericDeclaration;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -1013,6 +1012,10 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} qualities from 'Smooth Operations'", list.size());
 		list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"smooth_operations/data/spells.xml");
 		logger.log(Level.DEBUG, "Loaded {0} spells from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, set, clazz,"smooth_operations/data/rituals.xml");
+		logger.log(Level.DEBUG, "Loaded {0} rituals from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz,"smooth_operations/data/adeptpowers.xml");
+		logger.log(Level.DEBUG, "Loaded {0} adept powers from 'Smooth Operations'", list.size());
 
 		System.exit(1);
 	}
