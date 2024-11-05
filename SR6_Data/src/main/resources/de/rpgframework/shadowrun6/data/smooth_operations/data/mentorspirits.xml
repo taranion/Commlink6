@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mentorspirits>
+	<mentorspirit id="chaos">
+		<similarNames>
+		 <similar>trickster</similar>
+		 <similar>troublemaker</similar>
+		</similarNames>
+   	<modifications>
+         <checkmod type="SKILL" ref="con" value="-1" what="EDGE_BOOST" />
+    	</modifications>
+    	<magician>
+         <checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
+    	</magician>
+    	<adept>
+         <itemmod type="ADEPT_POWER" ref="pheremone_control" />
+    	</adept>
+  </mentorspirit>
+  
+   <mentorspirit id="moon">
+      <similarNames>
+       <similar>raven</similar>
+       <similar>cobra</similar>
+      </similarNames>
+      <modifications>
+         <checkmod type="SKILL" ref="influence" value="-1" what="EDGE_BOOST" />
+      </modifications>
+      <magician>
+         <checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
+      </magician>
+      <adept>
+         <valmod type="ADEPT_POWER" ref="facial_sculpt" value="2" set="NATURAL"/>
+      </adept>
+  </mentorspirit>
+  
+   <mentorspirit id="peacemaker">
+      <similarNames>
+       <similar>dove</similar>
+       <similar>mediator</similar>
+       <similar>pacifist</similar>
+      </similarNames>
+      <modifications>
+         <checkmod type="SKILL" ref="influence" value="-1" what="EDGE_BOOST" />
+      </modifications>
+      <magician>
+         <checkmod type="SPELL" ref="DETECTION" value="-1" what="EDGE_BOOST" />
+      </magician>
+      <adept>
+         <itemmod type="ADEPT_POWER" ref="enhanced_perception" />
+      </adept>
+  </mentorspirit>
+  
+</mentorspirits>
