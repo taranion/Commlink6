@@ -64,6 +64,9 @@ public enum SR6RuleFlag implements RuleFlag {
 	CYBER_SINGULARITY_SEEKER,
 	/** BS 168: Pair of cyberlimbs increases STR+AGI (up to +2), but only half PHYSICAL_MONITOR */
 	REDLINER,
+	
+	// SO 162
+	CONTACTS_START_LOYAL2,
 
 
 }

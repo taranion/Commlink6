@@ -190,6 +190,7 @@ public class Shadowrun6DataPlugin  {
 			initBodyShop();
 			initEasyCome();
 			initEmeraldCity();
+			initSmoothOperations();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -999,6 +1000,19 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities from 'Emerald City'");
 
 //		System.exit(1);
+	}
+
+	//-------------------------------------------------------------------
+	private void initSmoothOperations() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START -----------------------------Smooth_Operations------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "smooth_operations", "smooth_operations.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.LOCATION);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"smooth_operations/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities from 'Smooth Operations'");
+
+		System.exit(1);
 	}
 
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="air_pf_superiority" karma="5" pos="true" type="NORMAL" />
+   <quality id="combat_commander"   karma="8" pos="true" type="NORMAL" >
+     <requires>
+       <datareq type="SKILL" ref="knowledge"/>
+     </requires>
+   </quality>
+   <quality id="damage_control" karma="11" pos="true" type="NORMAL" />
+   <quality id="dream_work"     karma="5"  pos="true" type="NORMAL" />
+   <quality id="false_tell"     karma="5" pos="true" type="NORMAL">
+      <modifications>
+         <checkmod type="SKILL" ref="con" what="OTHER" value="1" apply="CHARACTER" cond="y"/>
+         <relevancemod topic="SOCIAL" />
+      </modifications>
+   </quality>
+   <quality id="fast_friend"    karma="8"  pos="true" type="NORMAL" >
+     <requires>
+       <valuereq type="ATTRIBUTE" ref="CHARISMA" value="2"/>
+     </requires>
+     <modifications>
+       <itemmod type="RULE" ref="CONTACTS_START_LOYAL2" />
+     </modifications>
+   </quality>
+   <quality id="flirt" karma="5" pos="true" type="NORMAL">
+      <modifications>
+         <checkmod type="SKILL" ref="influence" what="EDGE" value="1" apply="CHARACTER" cond="y"/>
+         <relevancemod topic="SOCIAL" />
+      </modifications>
+   </quality>
+   <quality id="gambler"     karma="10"  pos="true" type="NORMAL" />
+   <quality id="honest_face" karma="9"  pos="true" type="NORMAL" />
+   <quality id="impeccable_style" karma="5" pos="true" type="NORMAL" max="4">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_SOCIAL" value="1" set="NATURAL" apply="CHARACTER" />
+     </modifications>
+   </quality>
+   <quality id="interrogator" karma="6" pos="true" type="NORMAL">
+      <modifications>
+         <checkmod type="SKILL" ref="influence" what="EDGE" value="1" apply="CHARACTER" cond="y"/>
+         <relevancemod topic="SOCIAL" />
+      </modifications>
+   </quality>
+   <quality id="master_of_rhetoric" karma="5" pos="true" type="NORMAL" max="3">
+     <modifications>
+       <checkmod type="SKILL" ref="influence" value="1" what="EDGE_BOOST" cond="y"/>
+     </modifications>
+   </quality>
+   <quality id="mean_look" karma="8"  pos="true" type="NORMAL" />
+   <quality id="orator"    karma="4"  pos="true" type="NORMAL" />
+   <quality id="poker_face" karma="6" pos="true" type="NORMAL">
+      <modifications>
+         <checkmod type="ATTRIBUTE" ref="COMPOSURE" what="EDGE" value="1" apply="CHARACTER" cond="y"/>
+         <relevancemod topic="SOCIAL" />
+      </modifications>
+   </quality>
+   <quality id="practiced_paranoia" karma="4" pos="true" type="NORMAL">
+      <modifications>
+         <checkmod type="ATTRIBUTE" ref="JUDGE_INTENTIONS" what="EDGE" value="1" apply="CHARACTER" cond="y"/>
+         <relevancemod topic="SOCIAL" />
+      </modifications>
+   </quality>
+   <quality id="scathing_rebuke" karma="13"  pos="true" type="NORMAL" />
+   <quality id="signature_maneuver_upgrade"    karma="6"  pos="true" type="NORMAL" >
+     <requires>
+       <datareq type="QUALITY" ref="signature_maneuver" />
+     </requires>
+      <choices>
+         <choice type="SIGNATURE_MANEUVERS" uuid="1031aa98-982c-4544-b781-219514da7886"/>
+      </choices>
+   </quality>
+   <quality id="social_style"    karma="7"  pos="true" type="NORMAL" >
+      <choices>
+         <choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="$CHARISMA"/>
+      </choices>
+   </quality>
+   <quality id="stiff_upper_lip" karma="9"  pos="true" type="NORMAL" />
+
+
+   <quality id="anti_augmentation_bias" karma="6"  pos="false" type="NORMAL" />
+   <quality id="bad_liar"          karma="6"  pos="false" type="NORMAL" />
+   <quality id="brittle_composure" karma="4"  pos="false" type="NORMAL" />
+   <quality id="easy_mark_social"  karma="4"  pos="false" type="NORMAL" />
+   <quality id="hot_mess"          karma="2"  pos="false" type="NORMAL" max="4"/>
+   <quality id="out_of_favor"      karma="5"  pos="false" type="NORMAL" />
+   <quality id="peer_pressure"     karma="5"  pos="false" type="NORMAL" />
+   <quality id="supportive_follower" karma="5"  pos="false" type="NORMAL">
+     <requires>
+       <selreq>
+         <valuereq type="SKILL" ref="con" value="3"/>
+         <valuereq type="SKILL" ref="influence" value="3"/>
+       </selreq>
+     </requires>
+   </quality>
+   <quality id="teetotaler"        karma="5"  pos="false" type="NORMAL" />
+   <quality id="zero_sum_mentality" karma="11"  pos="false" type="NORMAL" />
+</qualities>
