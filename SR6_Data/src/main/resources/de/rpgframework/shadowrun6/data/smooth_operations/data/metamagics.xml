@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+	<metaecho id="astral_bluff" type="METAMAGIC" />
+	<metaecho id="astral_scrutiny" type="METAMAGIC" >
+		<requires>
+		    <valuereq type="SKILL" ref="astral" value="4"/>
+			 <datareq type="SKILLSPECIALIZATION" ref="astral/astral_signatures"/>
+		</requires>
+	</metaecho>
+   <metaecho id="astral_camouflage" type="METAMAGIC" >
+      <requires>
+          <valuereq type="SKILL" ref="astral" value="5"/>
+      </requires>
+   </metaecho>
+   <metaecho id="charlatan" type="METAMAGIC" />
+	<metaecho id="empathy" type="METAMAGIC">
+     <modifications>
+         <checkmod type="SKILL" ref="con"       what="EDGE" value="1" apply="CHARACTER"/>
+         <checkmod type="SKILL" ref="influence" what="EDGE" value="1" apply="CHARACTER"/>
+         <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_SOCIAL" value="$MAGIC"/>
+     </modifications>
+	</metaecho>
+</metaechoes>

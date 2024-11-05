@@ -1016,6 +1016,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} rituals from 'Smooth Operations'", list.size());
 		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz,"smooth_operations/data/adeptpowers.xml");
 		logger.log(Level.DEBUG, "Loaded {0} adept powers from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz,"smooth_operations/data/metamagics.xml");
+		logger.log(Level.DEBUG, "Loaded {0} metamagic from 'Smooth Operations'", list.size());
 
 		System.exit(1);
 	}
