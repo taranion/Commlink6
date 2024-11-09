@@ -38,6 +38,7 @@ public enum ItemHook implements Hook {
 	ARMOR_REACTIVE(true),
 	ARMOR_ADDITION(true),
 	ARMOR_MEMS(true),
+	FASHION(true),
 	HELMET_ACCESSORY(true),
 	COMMLINK,
 	CYBERDECK,
