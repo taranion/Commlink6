@@ -1028,6 +1028,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} gear items 'Smooth Operations'", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "smooth_operations/data/gear_espionage.xml");
 		logger.log(Level.DEBUG, "Loaded {0} gear items 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "smooth_operations/data/actions_edge.xml");
+		logger.log(Level.DEBUG, "Loaded {0} edge actions 'Smooth Operations'", list.size());
 
 //		System.exit(1);
 	}
