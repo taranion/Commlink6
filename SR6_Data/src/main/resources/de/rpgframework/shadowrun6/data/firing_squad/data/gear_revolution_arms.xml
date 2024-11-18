@@ -23,7 +23,7 @@
       </modifications>
 		<attrdef id="PRICE"         value="$RATING*15 +250" />
 		<attrdef id="DAMAGE"        value="($RATING+1)/2 P" />
-		<attrdef id="ATTACK_RATING" value="($RATING/2)+1,($RATING+2),($RATING/3),($RATING/4),-" />
+		<attrdef id="ATTACK_RATING" value="($RATING/2)+1,($RATING+2),($RATING/3),($RATING/4)," />
 		<attrdef id="AVAILABILITY"  value="($RATING+2)/4 L" />
 		<weapon skill="athletics" spec="athletics/archery" />
    </item>

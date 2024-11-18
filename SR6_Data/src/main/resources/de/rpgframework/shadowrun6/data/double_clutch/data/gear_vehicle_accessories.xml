@@ -580,7 +580,31 @@
    	<attrdef id="PRICE" value="$RATING*2500"/>
    </item>
 
-<!-- Chassis - Seating and Cargo Mods -->
+	<!-- Chassis - Seating and Cargo Mods -->
+   <item id="increase_cargo_space" avail="2" price="800" type="MOD_CHASSIS" subtype="MOD_CARGO">
+   	<choices>
+  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+      <requires>
+        <datareq type="ITEMTYPE" ref="VEHICLES" />
+      </requires>
+   	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="$RATING"/>
+      <modifications>
+      	<valmod type="HOOK" ref="VEHICLE_CF" value="$RATING*2"/>
+      </modifications>
+   </item>
+   <item id="reduce_cargo_space" avail="2" price="800" type="MOD_CHASSIS" subtype="MOD_CARGO">
+   	<choices>
+  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+      <requires>
+        <datareq type="ITEMTYPE" ref="VEHICLES" />
+      </requires>
+   	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="$RATING"/>
+      <modifications>
+      	<valmod type="HOOK" ref="VEHICLE_CF" value="$RATING*-2"/>
+      </modifications>
+   </item>
 
 	<!--
 
