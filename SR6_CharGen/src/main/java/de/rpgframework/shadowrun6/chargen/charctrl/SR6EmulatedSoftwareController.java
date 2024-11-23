@@ -44,7 +44,7 @@ public class SR6EmulatedSoftwareController extends ControllerImpl<CarriedItem<It
 
 	//-------------------------------------------------------------------
 	public List<CarriedItem<ItemTemplate>> getSelected() {
-		logger.log(Level.ERROR, "getSelected()");
+		logger.log(Level.DEBUG, "getSelected()");
 		List<CarriedItem<ItemTemplate>> ret = new ArrayList<>();
 		for (CarriedItem<ItemTemplate> item : getModel().getCarriedItems(ItemType.SOFTWARE)) {
 			// Has the software been bought

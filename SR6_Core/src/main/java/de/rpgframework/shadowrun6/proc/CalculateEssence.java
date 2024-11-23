@@ -193,69 +193,15 @@ public class CalculateEssence implements ProcessingStep {
 //			essVal.clearModifications();
 			logger.log(Level.WARNING, "Essence is "+essVal.getModifiedValue());
 
-
-
-//			// The maximum essence is 6.0 + essence hole
-//			AttributeValue<ShadowrunAttribute> holeVal = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
-//			if (holeVal==null) {
-//				holeVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0);
-//				model.setAttribute(holeVal);
-//			}
-//			logger.log(Level.WARNING, "Essence hole: {0}   not spent: {1}",holeVal.getModifiedValue(), model.getEssenceHoleUnused());
-//
-//			// Max essence is 6.0 plus bonus essence hole minus unused essence hole
-//			// This may be larger than 6000
-//			int max = 6000 + holeVal.getModifiedValue() - model.getEssenceHoleUnused();
-//			logger.log(Level.DEBUG, "Calculatory max essence = {0}",max);
-//
-//			// Now substract all items from it
-//			BigDecimal essenceCostBD = new BigDecimal(0);
-//			for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-//				// Ignore pure virtual items
-//				if (model.getVirtualCarriedItems().contains(item))
-//					continue;
-//				ItemType type = Shadowrun6Tools.getItemType(item);
-//				if (Arrays.asList(ItemType.bodytechTypes()).contains(type) || (item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE)) {
-////					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
-//					ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-//					logger.log(Level.DEBUG, "  essence = {0} for {1}",aVal, item.getKey());
-//					if (aVal==null) continue;
-//					essence = aVal.getModifiedValueDouble();
-//
-//					logger.log(Level.INFO,"* {0} = {1}  / {2}",item.getNameWithoutRating(),essence,getOverriddenEssenceCost(item).doubleValue());
-//					essenceCostBD = essenceCostBD.add(getOverriddenEssenceCost(item));
-//				}
-//			}
-//			int essenceCost = essenceCostBD.multiply(new BigDecimal(1000)).intValue();
-//			model.setEssenceCost(essenceCost);
-//			logger.log(Level.DEBUG, "Essence cost of all items {0}",essenceCost);
-//			int essenceRemain = max - essenceCost;
-//			// If there is more than 6000 essence left, fill up essence hole unused
-//			if (essenceRemain-6000 >0) {
-//				model.setEssenceHoleUnsed( model.getEssenceHoleUnused() + (essenceRemain-6000));
-//				logger.log(Level.WARNING, "Remaining essence > 6,0 -> increase unused essence hole by difference");
-//				essenceRemain = 6000;
-//			}
-//			logger.log(Level.DEBUG, "Remaining essence; {0}",essenceRemain);
-//
-//
-//			// Ensure presence of attributes
-//			AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);
-//			if (essVal==null) {
-//				essVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE, essenceRemain);
-//				model.setAttribute(essVal);
-//			} else
-//				essVal.setDistributed(essenceRemain);
-////			essVal.clearModifications();
-//			logger.log(Level.WARNING, "Essence is "+essVal.getModifiedValue());
-//
-//
-//			float remain = essVal.getModifiedValue() / 1000f;
-//			logger.log(Level.DEBUG, "Essence cost is {0}, hole is {1}, resulting remain essence is {2}", essenceCost, holeVal.getModifiedValue(), remain);
-			int essenceCost = (int) (6000 - essence);
+			// Calculate with essence loss
+			int essenceLoss = (int) (6000 - essence);
+			if (model.getEssenceLossZero()!=null) {
+				essenceLoss = Math.max( (int)(model.getEssenceLossZero() - essence), 0);
+				logger.log(Level.INFO, "Latent awakening at {0}", model.getEssenceLossZero());
+			}
 
 //			double min = 6.0f - (((double)essenceCost)/1000f); //Math.min(model.getEssence(), 6.0f-sum);
-			int magicMalus = (int) Math.ceil( ((double)essenceCost)/1000d);
+			int magicMalus = (int) Math.ceil( ((double)essenceLoss)/1000d);
 			if (magicMalus<0) magicMalus=0;
 			logger.log(Level.WARNING,"Magic/Resonance malus is "+magicMalus);
 			if (magicMalus!=0) {
@@ -266,7 +212,7 @@ public class CalculateEssence implements ProcessingStep {
 			// Also decrease maximum
 //			model.getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.MAGIC.name(), -magicMalus, ShadowrunAttribute.ESSENCE, ValueType.MAX).setOrigin(Origin.OUTSIDE));
 			// Eventually decrease social rating (Body Shop p.168)
-			int socialMalus = (int) Math.floor( ((double)essenceCost)/2000d);
+			int socialMalus = (int) Math.floor( ((double)essenceLoss)/2000d);
 			QualityValue retention = model.getQuality("empathic_retention");
 			if (retention!=null) {
 				int buffer = Math.min(2,retention.getModifiedValue());

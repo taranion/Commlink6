@@ -569,6 +569,8 @@ public class Shadowrun6Tools {
 					return ((SR6ItemEnhancement)valMod.getResolvedKey()).getName(loc);
 				case HOOK:
 					return null;
+				case MAGIC_RESO:
+					return RES.format("modification.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
 				default:
 					logger.log(Level.WARNING, "Don't know how to display "+mod);
 					return null;

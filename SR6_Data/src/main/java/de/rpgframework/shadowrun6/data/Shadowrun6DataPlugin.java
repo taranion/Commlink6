@@ -1040,7 +1040,7 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ----------------------------DE Datapuls Bundeswehr---------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_BUNDESWEHR", "de_bundewehr.i18n", Locale.GERMAN);
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_BUNDESWEHR", "de_bundeswehr.i18n", Locale.GERMAN);
 		set.setType(DataSetType.OTHER);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_bundeswehr/data/gear_weapons.xml");
 		logger.log(Level.DEBUG, "Loaded {0} weapons", list.size());

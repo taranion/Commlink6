@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
 
-<!--    <item id="defiance_super_shock" avail="1" price="340" type="WEAPON_FIREARMS" subtype="TASERS">
+    <item id="defiance_super_shock" avail="1" price="340" type="WEAPON_FIREARMS" subtype="TASERS">
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
       </modifications>
       <weapon dmg="6S(e)" attack="10,6,,," mode="SS" ammo="4(m)" skill="firearms" spec="firearms/tasers"/>
    </item>
- -->
+
 </items>

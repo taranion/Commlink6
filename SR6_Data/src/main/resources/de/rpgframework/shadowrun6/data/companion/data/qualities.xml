@@ -229,5 +229,40 @@
 	<quality id="sinners_path_criminal" karma="0" pos="false" type="QUALITY_PATH"/>
 	<quality id="sinners_path_shadows" karma="18" pos="true" type="QUALITY_PATH"/>
 
+   <quality id="latent_awakening" karma="15" pos="true" type="NORMAL">
+      <requires>
+         <datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER"/>
+      </requires>
+      <choices>
+         <choice type="SUBSELECT" ref="type" uuid="55a6dda7-7565-4108-9a04-65b7607081df">
+            <subOption id="aspectedmagician" cost="0">
+               <modifications>
+                  <itemmod type="MAGIC_RESO" ref="aspectedmagician" />
+               </modifications>
+            </subOption>
+            <subOption id="adept" cost="10" >
+               <modifications>
+                  <itemmod type="MAGIC_RESO" ref="adept" />
+               </modifications>
+            </subOption>
+            <subOption id="magician" cost="10" >
+               <modifications>
+                  <itemmod type="MAGIC_RESO" ref="magician" apply="CHARACTER"/>
+                  <valmod type="ATTRIBUTE" ref="MAGIC" value="0" apply="CHARACTER"/>
+                </modifications>
+            </subOption>
+            <subOption id="mysticadept" cost="10" >
+               <modifications>
+                  <itemmod type="MAGIC_RESO" ref="mysticadept" />
+               </modifications>
+            </subOption>
+            <subOption id="technomancer" cost="10" >
+               <modifications>
+                  <itemmod type="MAGIC_RESO" ref="technomancer" />
+               </modifications>
+            </subOption>
+         </choice>
+      </choices>
+   </quality>
 
 </qualities>
