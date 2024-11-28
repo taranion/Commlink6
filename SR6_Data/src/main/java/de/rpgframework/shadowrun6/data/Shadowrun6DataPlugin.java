@@ -979,7 +979,7 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -----------------------------Easy Come, Easy Go--------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "easycome", "sif_new_orleans.i18n", Locale.ENGLISH);
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "easycome", "sif_new_orleans.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.LOCATION);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"sif_new_orleans/data/gear_easycome.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" gear from 'Easy Come'");
