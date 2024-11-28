@@ -372,7 +372,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(SR6Skill data) {
+	public float getSelectionCost(SR6Skill data, Decision... decisions) {
 		return 5;
 	}
 

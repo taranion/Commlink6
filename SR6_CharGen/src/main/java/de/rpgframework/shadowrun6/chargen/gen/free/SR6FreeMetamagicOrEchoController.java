@@ -185,7 +185,7 @@ public class SR6FreeMetamagicOrEchoController extends SR6MetamagicOrEchoControll
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(MetamagicOrEcho data) {
+	public float getSelectionCost(MetamagicOrEcho data, Decision... decisions) {
 		return 10 + getGrade() +1;
 	}
 

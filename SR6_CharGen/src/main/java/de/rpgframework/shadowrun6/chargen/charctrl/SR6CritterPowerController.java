@@ -302,7 +302,7 @@ public class SR6CritterPowerController extends ControllerImpl<CritterPower> impl
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(CritterPower data) {
+	public float getSelectionCost(CritterPower data, Decision... decisions) {
 		return  0;
 	}
 

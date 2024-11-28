@@ -182,7 +182,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			@Override
 			public boolean deselect(SetItemValue value) {return false;}
 			@Override
-			public float getSelectionCost(SetItem data) { return data.getCost(); }
+			public float getSelectionCost(SetItem data, Decision... decisions) { return data.getCost(); }
 			@Override
 			public String getSelectionCostString(SetItem data) { return String.valueOf(getSelectionCost(data)); }
 			@Override

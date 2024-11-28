@@ -106,7 +106,7 @@ public class SR6KarmaRitualGenerator extends CommonRitualController implements I
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(Ritual data) {
+	public float getSelectionCost(Ritual data, Decision... decisions) {
 		return 5;
 	}
 

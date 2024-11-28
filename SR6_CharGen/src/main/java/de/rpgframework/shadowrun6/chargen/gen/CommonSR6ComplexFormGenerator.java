@@ -21,7 +21,6 @@ import de.rpgframework.shadowrun.ComplexFormValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IComplexFormController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.IComplexFormGenerator;
-import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -228,7 +227,7 @@ public class CommonSR6ComplexFormGenerator extends ControllerImpl<ComplexForm> i
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(ComplexForm data) {
+	public float getSelectionCost(ComplexForm data, Decision... decisions) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

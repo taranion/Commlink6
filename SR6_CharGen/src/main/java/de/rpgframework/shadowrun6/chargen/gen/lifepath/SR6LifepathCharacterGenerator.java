@@ -42,6 +42,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 
 	private BornThisWayGenerator bornThisWay;
 	private ChildhoodGenerator childhood;
+	private EarlyAdultGenerator earlyAdult;
 	private SR6LifePathModuleGenerator modules;
 
 	//-------------------------------------------------------------------
@@ -143,6 +144,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 			processChain.add(magicReso);
 			processChain.add(bornThisWay);
 			processChain.add(childhood);
+			processChain.add(earlyAdult);
 //			processChain.add(qualities);
 			processChain.add(modules);
 //			processChain.add(qPaths);
@@ -161,7 +163,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 //			processChain.add(metaEcho);
 //			processChain.add(sins);
 //			processChain.add(lifestyles);
-//			processChain.add(contacts);
+			processChain.add(contacts);
 			processChain.add(new RemainingKarmaNuyenController(this));
 
 			setupDone = true;
@@ -206,6 +208,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 		magicReso = new SR6LifePathMagicOrResonanceController(this);
 		bornThisWay = new BornThisWayGenerator(this);
 		childhood = new ChildhoodGenerator(this);
+		earlyAdult= new EarlyAdultGenerator(this);
 		modules   = new SR6LifePathModuleGenerator(this);
 		attributes = new SR6LifePathAttributeGenerator(this);
 //		skills = new SR6PointBuySkillGenerator(this);
@@ -219,7 +222,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 		metaEcho  = new SR6MetamagicOrEchoController(this, true);
 //		sins      = new SR6SINGenerator(this);
 //		lifestyles= new SR6LifestyleGenerator(this);
-//		contacts  = new SR6ContactGenerator(this);
+		contacts  = new SR6LifePathContactGenerator(this);
 //		foci      = new SR6FocusGenerator(this);
 //		qPaths    = new CommonQualityPathController(this);
 //		martial   = new SR6MartialArtsController(this);
@@ -285,6 +288,15 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	@Override
 	public ChildhoodGenerator getChildhoodGenerator() {
 		return childhood;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator#getEarlyAdultGenerator()
+	 */
+	@Override
+	public EarlyAdultGenerator getEarlyAdultGenerator() {
+		return earlyAdult;
 	}
 
 }

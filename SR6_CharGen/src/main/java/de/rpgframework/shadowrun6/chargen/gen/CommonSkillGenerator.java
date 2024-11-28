@@ -431,7 +431,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(SR6Skill data) {
+	public float getSelectionCost(SR6Skill data, Decision... decisions) {
 		if (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE) {
 			return 3;
 		}

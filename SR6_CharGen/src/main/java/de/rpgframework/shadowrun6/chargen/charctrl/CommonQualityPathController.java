@@ -14,8 +14,6 @@ import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.genericrpg.modification.ValueModification;
-import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.QualityPathStep;
@@ -156,7 +154,7 @@ public class CommonQualityPathController extends ControllerImpl<QualityPath> imp
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(QualityPath data) {
+	public float getSelectionCost(QualityPath data, Decision... decisions) {
 		return 0;
 	}
 

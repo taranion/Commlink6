@@ -22,7 +22,6 @@ import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.Requirement;
-import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
@@ -296,7 +295,7 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(MetamagicOrEcho data) {
+	public float getSelectionCost(MetamagicOrEcho data, Decision... decisions) {
 		return 5 + getGrade() +1;
 	}
 

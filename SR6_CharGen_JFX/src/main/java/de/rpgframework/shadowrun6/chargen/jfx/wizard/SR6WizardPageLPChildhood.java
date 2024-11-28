@@ -41,12 +41,14 @@ import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
 import de.rpgframework.shadowrun.chargen.jfx.pages.FilterQualities;
 import de.rpgframework.shadowrun.chargen.jfx.pane.QualitySelector;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageQualities;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.ChildhoodGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.ChildhoodGenerator.SimpleSkillController;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.SelectedSkillListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
@@ -114,6 +116,7 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 		negQuality = new BlankableValueControl<>(ResourceI18N.get(RES, "page.childhood.quality.negative"));
 		posQuality.setController(new SingleComplexDataItemController<Quality, QualityValue>() {
 			public void selectClicked() {
+				logger.log(Level.WARNING, "selectClicked on "+posQuality.getSelected());
 				if (posQuality.getSelected()!=null) {
 					childhood.getQualityController().deselect(posQuality.getSelected());
 					posQuality.setSelected(null);
@@ -123,8 +126,10 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 				}
 			}
 			public OperationResult<QualityValue> select(Quality value, Decision... decisions) {
-				logger.log(Level.WARNING, "Select");
-				return null;
+				logger.log(Level.WARNING, "Select "+value);
+				OperationResult<QualityValue> res = childhood.getQualityController().select(value, decisions);
+				posQuality.setSelected(res.get());
+				return res;
 			}
 			public boolean deselect(QualityValue value) {
 				return childhood.getQualityController().deselect(value);
@@ -136,12 +141,13 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 		});
 		negQuality.setController(new SingleComplexDataItemController<Quality, QualityValue>() {
 			public void selectClicked() {
-				if (posQuality.getSelected()!=null) {
-					childhood.getQualityController().deselect(posQuality.getSelected());
-					posQuality.setSelected(null);
+				SR6LifePathSettings settings = charGen.getModel().getCharGenSettings(SR6LifePathSettings.class);
+				if (negQuality.getSelected()!=null) {
+					childhood.getQualityController().deselect(negQuality.getSelected());
+					negQuality.setSelected(null);
 				} else {
 					QualityValue val = onAddQuality(false);
-					posQuality.setSelected(val);
+					negQuality.setSelected(val);
 				}
 			}
 			public OperationResult<QualityValue> select(Quality value, Decision... decisions) {
@@ -434,10 +440,11 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 					}
 				} else {
 					// No
-					logger.log(Level.DEBUG, "call select(option)");
+					logger.log(Level.ERROR, "call select(option)");
 					OperationResult<QualityValue> res = ctrl.select(toSelect);
 					if (res.wasSuccessful()) {
-						logger.log(Level.INFO, "Selecting {0} was successful", toSelect);
+						logger.log(Level.ERROR, "Selecting {0} was successful", toSelect);
+						return res.get();
 					} else {
 						logger.log(Level.WARNING, "Selecting {0} failed: {1}", toSelect, res.getError());
 						AlertManager.showAlertAndCall(javafx.scene.control.Alert.AlertType.ERROR, "Failed adding", res.getError());

@@ -91,7 +91,7 @@ public class SR6FreeRitualGenerator extends CommonRitualController implements IR
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(Ritual data) {
+	public float getSelectionCost(Ritual data, Decision... decisions) {
 		return 0;
 	}
 

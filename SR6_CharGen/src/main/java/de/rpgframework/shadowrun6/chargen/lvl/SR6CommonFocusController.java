@@ -207,7 +207,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(Focus data) {
+	public float getSelectionCost(Focus data, Decision... decisions) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
