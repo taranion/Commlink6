@@ -71,8 +71,14 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(Quality data) {
-		return data.getKarmaCost()*2;
+	public float getSelectionCost(Quality data, Decision... decisions) {
+		QualityValue fake = new QualityValue(data,0);
+		for (Decision dec : decisions) fake.addDecision(dec);
+		int cost = fake.getKarmaCost();
+		
+		if (data.isNoDouble())
+			return cost;
+		return cost;
 	}
 
 	//-------------------------------------------------------------------
@@ -114,10 +120,11 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 	@Override
 	public OperationResult<QualityValue> select(Quality value, Decision... decisions) {
 		logger.log(Level.TRACE, "ENTER select({0})", value);
-		int cost = (int)getSelectionCost(value);
+		int cost = (int)getSelectionCost(value, decisions);
 		OperationResult<QualityValue> res = super.select(value, decisions);
 		if (res.wasSuccessful()) {
 			// Add to history
+			cost = res.get().getKarmaCost();
 			DataItemModification mod = new DataItemModification(ShadowrunReference.QUALITY, value.getId());
 			mod.setDate(Date.from(Instant.now()));
 			if (!value.isPositive()) cost=0;
