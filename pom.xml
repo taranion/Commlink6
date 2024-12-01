@@ -26,7 +26,7 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
 		<revision>0.0.3-SNAPSHOT</revision>
-		<rpgfw.version>5.2.0</rpgfw.version>
+		<rpgfw.version>[5.2.2-SNAPSHOT,)</rpgfw.version>
 		<maven.deploy.skip>false</maven.deploy.skip>
 	</properties>
 
@@ -46,7 +46,7 @@
 			<dependency>
 				<groupId>org.prelle</groupId>
 				<artifactId>simple-persist</artifactId>
-				<version>3.5.3-SNAPSHOT</version>
+				<version>3.6.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>

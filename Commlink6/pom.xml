@@ -27,7 +27,7 @@
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
 		<client.plugin.version>1.0.24</client.plugin.version>
 		<attach.version>4.0.21</attach.version>
-		<rpgfw.version>5.2.0</rpgfw.version>
+		<rpgfw.version>5.2.2-SNAPSHOT</rpgfw.version>
 	</properties>
 	<!-- Comment for no real purpose -->
 
@@ -131,6 +131,16 @@
 			<groupId>de.rpgframework</groupId>
 			<artifactId>eden-client-jfx</artifactId>
 			<version>0.0.6-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bctsp-jdk15on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcmail-jdk15on</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
       <dependency>
         <groupId>org.prelle</groupId>
