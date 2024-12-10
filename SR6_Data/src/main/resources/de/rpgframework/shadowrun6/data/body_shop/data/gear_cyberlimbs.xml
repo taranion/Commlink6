@@ -228,7 +228,7 @@
             <flag>AUGMENTATION</flag>
         </flags>
     </item>
-    <item id="telescoping_modification" type="CYBERWARE" subtype="CYBER_BODYWARE" reqVariant="y">
+    <item id="telescoping_modification" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE" reqVariant="y">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
 		</choices>
