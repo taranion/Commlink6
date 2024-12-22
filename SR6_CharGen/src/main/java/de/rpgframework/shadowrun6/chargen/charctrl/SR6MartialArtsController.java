@@ -268,7 +268,7 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(MartialArts data) {
+	public float getSelectionCost(MartialArts data, Decision... decisions) {
 		if (getModel().hasRuleFlag(SR6RuleFlag.MARTIAL_ARTS_PRODIGY))
 			return 5;
 		return 7;

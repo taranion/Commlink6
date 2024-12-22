@@ -188,7 +188,7 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(LifestyleQuality data) {
+	public float getSelectionCost(LifestyleQuality data, Decision... decisions) {
 		return data.getCost();
 	}
 

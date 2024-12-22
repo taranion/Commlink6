@@ -27,6 +27,7 @@ public class CustomLoggerFinder extends LoggerFinder {
 	static void initialize() {
 		InputStream ins = ClassLoader.getSystemResourceAsStream("loglevel.properties");
 		if (ins!=null) {
+			System.out.println("Configure logging from "+ClassLoader.getSystemResource("loglevel.properties"));
 			try {
 				BufferedReader read = new BufferedReader(new InputStreamReader(ins));
 				while (true) {

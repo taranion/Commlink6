@@ -17,6 +17,7 @@ import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
@@ -154,11 +155,16 @@ public class ChildhoodGenerator implements PartialController<Quality> {
 	public List<Modification> process(List<Modification> unprocessed) {
 		todos.clear();
 
-		if (parent.getSettings().getBornQuality1()==null) {
+		if (parent.getSettings().getChildhoodQuality1()==null) {
 			todos.add( new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_CHILD_QUALITY_MISSING));
-		} else
-			logger.log(Level.INFO, "Born this way Quality 1: {0}", parent.getSettings().getBornQuality1());
-		logger.log(Level.INFO, "Born this way Quality 2: {0}", parent.getSettings().getBornQuality2());
+		} else {
+			logger.log(Level.INFO, "Childhood Quality 1: {0}", parent.getSettings().getChildhoodQuality1());
+			getModel().addQuality(new QualityValue(parent.getSettings().getChildhoodQuality1(), 1));
+		}
+		logger.log(Level.INFO, "Childhood Quality 2: {0}", parent.getSettings().getChildhoodQuality2());
+		if (parent.getSettings().getChildhoodQuality2()!=null) {
+			getModel().addQuality(new QualityValue(parent.getSettings().getChildhoodQuality2(), 1));
+		}
 
 		if (parent.getSettings().getChildhoodArea()==null) {
 			todos.add( new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_CHILDAREA_NOT_SET));

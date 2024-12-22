@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+	<item id="cold_shower_in_a_bottle" avail="6L" price="200" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+      <alchemy spell="cold_shower" trigger="material" />
+   </item>
+   <item id="love_potion_10" avail="6L" price="450" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+      <alchemy spell="desire" trigger="material" />
+   </item>
+   <item id="no_means_no" avail="6L" price="350" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+      <alchemy spell="antipathy" trigger="material" />
+   </item>
+   <item id="fear_of_god" avail="6L" price="450" type="MAGICAL" subtype="ALCHEMICAL"  count="y">
+      <alchemy spell="evil_eye" trigger="material" />
+   </item>
+</items>

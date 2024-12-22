@@ -236,7 +236,7 @@ public class CommonTechniqueController extends ControllerImpl<Technique> impleme
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(Technique data) {
+	public float getSelectionCost(Technique data, Decision... decisions) {
 		if (getModel().hasRuleFlag(SR6RuleFlag.MARTIAL_ARTS_PRODIGY))
 			return 3;
 		return 5;

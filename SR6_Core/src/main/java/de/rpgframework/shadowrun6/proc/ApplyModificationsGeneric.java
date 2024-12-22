@@ -30,6 +30,7 @@ import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.LicenseValue;
 import de.rpgframework.shadowrun.LifestyleQuality;
+import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Movement;
@@ -86,6 +87,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				case LICENSE    : return applyLicense(model, mod);
 				case LIFESTYLE  : return applyLifestyle(model, mod);
 				case METAECHO   : return applyMetaEcho(model, mod);
+				case MAGIC_RESO : return applyMagicOrResonance(model, mod);
 				case QUALITY    : return applyQuality(model, mod);
 				case RULE       : return applyRule(model, mod);
 				case SIN        : return applySIN(model, mod);
@@ -100,7 +102,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 					model.addItemModification(mod); return true;
 				default:
 					logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
-					//System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
+					System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
 				}
 			}
 		} catch (Exception e) {
@@ -137,6 +139,8 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 						|| tmp.getReferenceType()==ShadowrunReference.GEAR
 						|| tmp.getReferenceType()==ShadowrunReference.LICENSE
 						|| tmp.getReferenceType()==ShadowrunReference.LIFESTYLE
+						|| tmp.getReferenceType()==ShadowrunReference.MAGIC_RESO
+						|| tmp.getReferenceType()==ShadowrunReference.GEAR
 						|| tmp.getReferenceType()==ShadowrunReference.QUALITY
 						|| tmp.getReferenceType()==ShadowrunReference.RULE
 						|| tmp.getReferenceType()==ShadowrunReference.SIN
@@ -145,6 +149,10 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 					try {
 						if (!applyModification(model, tmp)) {
 							unprocessed.add(tmp);
+						} else if (tmp.getReferenceType()==ShadowrunReference.MAGIC_RESO) {
+							logger.log(Level.WARNING, "TODO: Reapply modifications from magic/reso: {0} ",model.getMagicOrResonanceType().getOutgoingModifications());
+							System.err.println("TODO: Reapply modifications from magic/reso "+model.getMagicOrResonanceType().getOutgoingModifications());
+							unprocessed.addAll(model.getMagicOrResonanceType().getOutgoingModifications());
 						}
 					} catch (Exception e) {
 						logger.log(Level.ERROR, "Error applying "+tmp+" from "+tmp.getSource(),e);
@@ -391,6 +399,20 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 //		}
 		// Mark as auto-added
 		value.addIncomingModification(mod);
+		return true;
+	}
+
+	// -------------------------------------------------------------------
+	private static boolean applyMagicOrResonance(Shadowrun6Character model, DataItemModification mod) {
+		MagicOrResonanceType item = Shadowrun6Core.getItem(MagicOrResonanceType.class, mod.getKey());
+		if (item == null) {
+			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such magic_reso {0}", mod.getKey());
+			return false;
+		}
+		
+		model.setMagicOrResonanceType(item);
+		logger.log(Level.INFO, "Changed magic/resonance type to {0}", item);
+
 		return true;
 	}
 

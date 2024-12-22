@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item id="scavanged_rags" avail="1" price="0" type="ARMOR" subtype="ARMOR_SOCIAL">
+        <armor rating="0" social="-8"/>
+    </item>
+    <item id="cheap_clothes" avail="1" price="10" type="ARMOR" subtype="ARMOR_SOCIAL">
+        <armor rating="0" social="-4"/>
+    </item>
+    <item id="blue_collar" avail="1" price="50" type="ARMOR" subtype="ARMOR_SOCIAL">
+        <armor rating="0" social="-2"/>
+        <modifications>
+            <valmod type="HOOK" value="1" ref="FASHION"/>
+        </modifications>
+    </item>
+    <item id="casual_wear" avail="1" price="50" type="ARMOR" subtype="ARMOR_SOCIAL">
+        <armor rating="0" social="0"/>
+        <modifications>
+            <valmod type="HOOK" value="2" ref="FASHION"/>
+        </modifications>
+    </item>
+    <item id="business_casual" avail="1" price="100" type="ARMOR" subtype="ARMOR_SOCIAL">
+        <armor rating="0" social="0"/>
+        <modifications>
+            <valmod type="HOOK" value="2" ref="FASHION"/>
+        </modifications>
+    </item>
+    <item id="uniform" avail="4" price="50" type="ARMOR" subtype="ARMOR_SOCIAL">
+      <choices>
+         <choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/> 
+      </choices>
+      <attrdef id="PRICE" value="$RATING*50"/>
+      <attrdef id="DEFENSE_SOCIAL" value="$RATING"/>
+      <armor rating="0" social="0"/>
+      <modifications>
+          <valmod type="HOOK" value="2" ref="FASHION"/>
+      </modifications>
+    </item>
+    <item id="power_suit" avail="1" price="500" type="ARMOR" subtype="ARMOR_SOCIAL">
+      <choices>
+         <choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="12"/> 
+      </choices>
+      <attrdef id="PRICE" value="$RATING*500"/>
+      <attrdef id="DEFENSE_SOCIAL" value="$RATING"/>
+      <armor rating="0" social="0"/>
+      <modifications>
+          <valmod type="HOOK" value="3" ref="FASHION"/>
+      </modifications>
+    </item>
+    <item id="tres_chic" avail="1" price="1000" type="ARMOR" subtype="ARMOR_SOCIAL">
+      <choices>
+         <choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="12"/> 
+      </choices>
+      <attrdef id="PRICE" value="$RATING*500"/>
+      <attrdef id="DEFENSE_SOCIAL" value="$RATING"/>
+      <armor rating="0" social="0"/>
+      <modifications>
+          <valmod type="HOOK" value="$RATING/2" ref="FASHION"/>
+      </modifications>
+    </item>
+    
+    <item id="faceblind_truckers_cap" avail="2" price="50" type="ARMOR" subtype="ARMOR_CLOTHES">
+    </item>
+    <item id="faceblind_glasses" avail="2" price="100" type="ARMOR" subtype="ARMOR_CLOTHES">
+    </item>
+    <item id="krime_rave_complete" avail="2" price="1050" type="ARMOR" subtype="ARMOR_SOCIAL">
+      <armor rating="0" social="4"/>
+    </item>
+    <item id="krime_rave_slacks" avail="2" price="100" type="ARMOR" subtype="ARMOR_SOCIAL" />
+    <item id="krime_rave_shirt"  avail="2" price="75" type="ARMOR" subtype="ARMOR_SOCIAL" />
+    <item id="krime_rave_vest"   avail="2" price="125" type="ARMOR" subtype="ARMOR_SOCIAL" />
+    <item id="krime_rave_jacket" avail="2" price="200" type="ARMOR" subtype="ARMOR_SOCIAL" />
+    <item id="krime_rave_cane"   avail="2" price="300" type="ARMOR" subtype="ARMOR_SOCIAL" />
+    <item id="krime_rave_hat"    avail="2" price="150" type="ARMOR" subtype="ARMOR_SOCIAL" />
+    <item id="krime_rave_boots"  avail="2" price="100" type="ARMOR" subtype="ARMOR_SOCIAL" />
+</items>

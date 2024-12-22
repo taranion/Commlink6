@@ -144,7 +144,11 @@ public class SR6GearTool extends GearTool {
 		// Resolve accessories if necessary
 		for (CarriedItem<ItemTemplate> tmp : item.getAccessories()) {
 			if (tmp.getResolved()==null) {
-				tmp.setResolved(Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey()));
+				ItemTemplate templ = Shadowrun6Core.getItem(ItemTemplate.class, tmp.getKey());
+				if (templ==null) {
+					logger.log(Level.WARNING, "CarriedItem with unresolved template ''{0}''", tmp.getKey());
+				}
+				tmp.setResolved(templ);
 				if (tmp.getVariantID()!=null && tmp.getVariant()==null) {
 					tmp.setVariant( tmp.getResolved().getVariant(tmp.getCarryMode()) );
 				}

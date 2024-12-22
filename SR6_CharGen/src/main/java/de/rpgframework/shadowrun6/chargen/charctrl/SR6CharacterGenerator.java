@@ -10,6 +10,7 @@ import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.BornThisWayGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.ChildhoodGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.EarlyAdultGenerator;
 
 /**
  * @author prelle
@@ -24,6 +25,10 @@ public interface SR6CharacterGenerator extends SR6CharacterController, IShadowru
 	}
 
 	default public ChildhoodGenerator getChildhoodGenerator() {
+		return null;
+	}
+
+	default public EarlyAdultGenerator getEarlyAdultGenerator() {
 		return null;
 	}
 

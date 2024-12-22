@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.lang.reflect.GenericDeclaration;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -190,6 +189,8 @@ public class Shadowrun6DataPlugin  {
 			initBodyShop();
 			initEasyCome();
 			initEmeraldCity();
+			initSmoothOperations();
+			initDPBundeswehr();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -978,7 +979,7 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -----------------------------Easy Come, Easy Go--------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "easycome", "sif_new_orleans.i18n", Locale.ENGLISH);
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "easycome", "sif_new_orleans.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.LOCATION);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"sif_new_orleans/data/gear_easycome.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" gear from 'Easy Come'");
@@ -999,6 +1000,52 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities from 'Emerald City'");
 
 //		System.exit(1);
+	}
+
+	//-------------------------------------------------------------------
+	private void initSmoothOperations() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START -----------------------------Smooth_Operations------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "smooth_operations", "smooth_operations.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.LOCATION);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"smooth_operations/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded {0} qualities from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"smooth_operations/data/spells.xml");
+		logger.log(Level.DEBUG, "Loaded {0} spells from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, set, clazz,"smooth_operations/data/rituals.xml");
+		logger.log(Level.DEBUG, "Loaded {0} rituals from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz,"smooth_operations/data/adeptpowers.xml");
+		logger.log(Level.DEBUG, "Loaded {0} adept powers from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz,"smooth_operations/data/metamagics.xml");
+		logger.log(Level.DEBUG, "Loaded {0} metamagic from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,"smooth_operations/data/mentorspirits.xml");
+		logger.log(Level.DEBUG, "Loaded {0} mentor spirits from 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "smooth_operations/data/gear_magical.xml");
+		logger.log(Level.DEBUG, "Loaded {0} alchemical preparations 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "smooth_operations/data/gear_clothing.xml");
+		logger.log(Level.DEBUG, "Loaded {0} gear items 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "smooth_operations/data/gear_software.xml");
+		logger.log(Level.DEBUG, "Loaded {0} gear items 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz, "smooth_operations/data/gear_espionage.xml");
+		logger.log(Level.DEBUG, "Loaded {0} gear items 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "smooth_operations/data/actions_edge.xml");
+		logger.log(Level.DEBUG, "Loaded {0} edge actions 'Smooth Operations'", list.size());
+
+//		System.exit(1);
+	}
+
+	//-------------------------------------------------------------------
+	private void initDPBundeswehr() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ----------------------------DE Datapuls Bundeswehr---------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_BUNDESWEHR", "de_bundeswehr.i18n", Locale.GERMAN);
+		set.setType(DataSetType.OTHER);
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_bundeswehr/data/gear_weapons.xml");
+		logger.log(Level.DEBUG, "Loaded {0} weapons", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_bundeswehr/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded {0} vehicles", list.size());
 	}
 
 }

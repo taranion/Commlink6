@@ -35,18 +35,13 @@
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>foundryvtt-documents</artifactId>
-			<version>9.249</version>
+			<version>9.250</version>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.rpgframework</groupId>
-			<artifactId>foundryvtt-documents</artifactId>
-			<version>9.249</version>
 		</dependency>
 	</dependencies>
 

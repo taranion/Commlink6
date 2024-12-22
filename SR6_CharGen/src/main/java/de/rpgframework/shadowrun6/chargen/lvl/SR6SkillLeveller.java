@@ -372,7 +372,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(SR6Skill data) {
+	public float getSelectionCost(SR6Skill data, Decision... decisions) {
 		return 5;
 	}
 
@@ -468,7 +468,11 @@ public class SR6SkillLeveller extends CommonSkillController {
 		for (Modification _mod : previous) {
 			if (_mod.getReferenceType() == ShadowrunReference.SKILL) {
 				if (_mod instanceof AllowModification) {
-					logger.log(Level.WARNING, "TODO: AllowModification for {0}", ((AllowModification)_mod).getKey());
+					AllowModification mod = (AllowModification)_mod;
+					SR6Skill key = mod.getResolvedKey();
+					logger.log(Level.INFO, "Allow skill {0}", mod.getKey());
+					if (key!=null)
+						allowed.add(key);
 					continue;
 				}
 

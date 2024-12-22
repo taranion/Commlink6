@@ -130,6 +130,14 @@ public class LifepathGenTest {
 		charGen.getChildhoodGenerator().getSkillController().select(Shadowrun6Core.getItem(SR6Skill.class, "influence"));
 		charGen.getChildhoodGenerator().getSkillController().select(Shadowrun6Core.getItem(SR6Skill.class, "perception"));
 		charGen.getChildhoodGenerator().getSkillController().select(Shadowrun6Core.getItem(SR6Skill.class, "athletics"));
+		charGen.getChildhoodGenerator().getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "charismatic_defense"));
+		charGen.getChildhoodGenerator().getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "allergy"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(0).getUUID(),"seasonal"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(1).getUUID(),"mild"),
+				new Decision(Shadowrun6Core.getItem(SR6Quality.class, "allergy").getChoices().get(2).getUUID(),"Pollen")
+				);
+
+		charGen.getEarlyAdultGenerator().getSkillController().select(Shadowrun6Core.getItem(SR6Skill.class, "sorcery"));
 
 		charGen.finish();
 		byte[] raw = Shadowrun6Core.encode(model);

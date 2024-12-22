@@ -5,17 +5,12 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.rpgframework.character.RuleSpecificCharacterObject;
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ToDoElement;
-import de.rpgframework.genericrpg.chargen.CharacterController;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
-import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.items.AItemEnhancement;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
@@ -205,7 +200,7 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(SR6ItemEnhancement data) {
+	public float getSelectionCost(SR6ItemEnhancement data, Decision... decisions) {
 		return data.getPrice();
 	}
 

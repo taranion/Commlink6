@@ -147,7 +147,7 @@ public class SR6PointBuyRitualGenerator extends CommonRitualController implement
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(Ritual data) {
+	public float getSelectionCost(Ritual data, Decision... decisions) {
 		return 2;
 	}
 

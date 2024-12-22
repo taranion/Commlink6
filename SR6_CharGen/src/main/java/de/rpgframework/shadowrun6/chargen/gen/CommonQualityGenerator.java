@@ -372,7 +372,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(Quality data) {
+	public float getSelectionCost(Quality data, Decision... decisions) {
 		if (data.getId().equals("ambidextrous") && ((Shadowrun6Character)getModel()).hasQuality("shiva_arms")) {
 			QualityValue qVal = ((Shadowrun6Character)getModel()).getQuality("shiva_arms");
 			return data.getKarmaCost() * (qVal.getModifiedValue()+1);

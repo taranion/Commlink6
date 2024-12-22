@@ -6,21 +6,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualValue;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.charctrl.IRitualController;
-import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
@@ -184,7 +179,7 @@ public class SR6RitualLeveller extends ControllerImpl<Ritual> implements IRitual
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(Ritual data) {
+	public float getSelectionCost(Ritual data, Decision... decisions) {
 		return 5;
 	}
 

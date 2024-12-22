@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+  <action type="EDGE" cat="SOCIAL"  cost="1" apply="SKILL"  id="attitude" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="bad_cop" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="5" apply="SKILL"  id="cease_fire" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="3" apply="SKILL"  id="coordinated_effort" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="3" apply="SKILL"  id="dont_shoot" skill="con"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="3" apply="SKILL"  id="familiarity" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="good_cop" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="improvised_disguise" skill="con"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="inspire" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="3" apply="SKILL"  id="sharp_expertise" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="stirring_performance" skill="con"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="ultimatum" skill="influence"/> 
+  <!-- Edge Status actions -->
+  <action type="EDGE" cat="SOCIAL"  cost="5" apply="SKILL"  id="ace_up_your_sleeve" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="5" apply="SKILL"  id="discombobulate" skill="con"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="enthralling_performance" skill="con"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="gatekeeper" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="3" apply="SKILL"  id="mocking_taunt" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="3" apply="SKILL"  id="quicker_than_the_eye" skill="stealth"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="5" apply="SKILL"  id="suggestive_gesture" skill="con"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="terrify" skill="con"/> 
+  
+  <!-- Edge Response Actions -->
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="follow_through" time="ANYTIME" /> 
+  <action type="EDGE" cat="SOCIAL"  cost="1" apply="SKILL"  id="how_dare_you" /> 
+  <action type="EDGE" cat="COMBAT"  cost="1" id="it_is_not_so_bad" /> 
+  <action type="EDGE" cat="OTHER"   cost="1" apply="SKILL"  id="lucky_fail" /> 
+  <action type="EDGE" cat="SOCIAL"  cost="1" apply="SKILL"  id="paranoid_mindset" /> 
+  <action type="EDGE" cat="SOCIAL"  cost="2" apply="SKILL"  id="slapback" /> 
+  <action type="EDGE" cat="OTHER"   cost="1" id="waterworks" /> 
+</actions>

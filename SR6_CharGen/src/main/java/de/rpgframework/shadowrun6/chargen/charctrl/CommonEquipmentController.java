@@ -378,7 +378,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(ItemTemplate data) {
+	public float getSelectionCost(ItemTemplate data, Decision... decisions) {
 		return data.getAttribute(SR6ItemAttribute.PRICE).getDistributed();
 	}
 

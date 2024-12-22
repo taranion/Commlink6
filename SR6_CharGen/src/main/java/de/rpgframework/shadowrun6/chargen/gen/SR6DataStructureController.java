@@ -217,7 +217,7 @@ public class SR6DataStructureController extends ControllerImpl<DataStructure> im
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(DataStructure data) {
+	public float getSelectionCost(DataStructure data, Decision... decisions) {
 		return 1;
 	}
 

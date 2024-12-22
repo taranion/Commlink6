@@ -63,6 +63,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	protected List<DataStructureValue> datastructures;
 	@ElementList(entry="valmod", type=ValueModification.class)
 	protected List<ValueModification> essenceChanges;
+	@Element
+	protected Integer essenceLossZero;
 
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
@@ -479,6 +481,22 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public List<ValueModification> getEssenceChanges() {
 		return essenceChanges;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the essenceLossZero
+	 */
+	public Integer getEssenceLossZero() {
+		return essenceLossZero;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @param essenceLossZero the essenceLossZero to set
+	 */
+	public void setEssenceLossZero(Integer essenceLossZero) {
+		this.essenceLossZero = essenceLossZero;
 	}
 
 }

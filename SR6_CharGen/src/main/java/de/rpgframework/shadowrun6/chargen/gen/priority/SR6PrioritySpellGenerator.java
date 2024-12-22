@@ -219,7 +219,7 @@ public class SR6PrioritySpellGenerator extends ControllerImpl<SR6Spell> implemen
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(SR6Spell data) {
+	public float getSelectionCost(SR6Spell data, Decision... decisions) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

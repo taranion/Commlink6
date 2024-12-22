@@ -22,6 +22,8 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 	private String childhoodArea;
 	private String basicSkills;
 	private String childQual1, childQual2;
+	private String earlySkill;
+	private String earlyQual1, earlyQual2;
 
 	//-------------------------------------------------------------------
 	/**
@@ -155,5 +157,19 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 		if (keys.size()>4)
 			throw new IllegalArgumentException("Too many skills selected");
 		basicSkills = String.join(",", keys.stream().map(key -> key.getId()).toList());
+	}
+
+	//-------------------------------------------------------------------
+	public SR6Skill getEarlyAdultSkill() {
+		SR6Skill ret = null;
+		if (earlySkill!=null) {
+			ret = Shadowrun6Core.getItem(SR6Skill.class, earlySkill.trim());
+		}
+		return ret;
+	}
+	
+	//-------------------------------------------------------------------
+	public void setEarlyAdultSkill(SR6Skill skill) {
+		earlySkill=(skill!=null)?skill.getId():null;
 	}
 }

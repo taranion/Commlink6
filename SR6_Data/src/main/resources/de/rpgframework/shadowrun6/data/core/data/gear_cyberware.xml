@@ -166,7 +166,7 @@
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
 		</choices>
-      <usage mode="IMPLANTED" value="$RATING*0.1"/>
+      <usage mode="IMPLANTED" value="0.1"/>
 		<attrdef id="PRICE" value="$RATING*1000"/>
 		<attrdef id="MAX_SKILLSOFT_RATING" value="$RATING"/>
  		<flags><flag>AUGMENTATION</flag></flags>

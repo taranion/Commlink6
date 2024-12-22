@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Commlink Apps -->
+   <item avail="4L" price="700" id="comm_spoofer" type="SOFTWARE" subtype="COMMLINK_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
+   <item avail="4L" price="700" id="facial_scanner" type="SOFTWARE" subtype="COMMLINK_APP">
+      <usage mode="EMBEDDED" slot="SOFTWARE"/>
+      <requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
+   <item avail="4L" price="700" id="social_hud" type="SOFTWARE" subtype="COMMLINK_APP">
+      <usage mode="EMBEDDED" slot="SOFTWARE"/>
+      <requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
+   <item avail="4L" price="700" id="pheromone_detection" type="SOFTWARE" subtype="COMMLINK_APP">
+      <usage mode="EMBEDDED" slot="SOFTWARE"/>
+      <requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
+   <item avail="4L" price="700" id="thermal_mood_reading" type="SOFTWARE" subtype="COMMLINK_APP">
+      <usage mode="EMBEDDED" slot="SOFTWARE"/>
+      <requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
+   <item avail="4L" price="700" id="vocal_tension_detection" type="SOFTWARE" subtype="COMMLINK_APP">
+      <usage mode="EMBEDDED" slot="SOFTWARE"/>
+      <requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
+   
+</items>

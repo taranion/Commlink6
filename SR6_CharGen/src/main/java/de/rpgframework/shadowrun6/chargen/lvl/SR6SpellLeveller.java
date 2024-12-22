@@ -219,7 +219,7 @@ public class SR6SpellLeveller extends ControllerImpl<SR6Spell> implements SR6Spe
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(SR6Spell data) {
+	public float getSelectionCost(SR6Spell data, Decision... decisions) {
 		return 5;
 	}
 

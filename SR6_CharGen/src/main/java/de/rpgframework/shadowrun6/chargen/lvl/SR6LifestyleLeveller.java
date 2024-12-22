@@ -156,7 +156,7 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelectionCost(de.rpgframework.genericrpg.data.DataItem)
 	 */
 	@Override
-	public float getSelectionCost(LifestyleQuality data) {
+	public float getSelectionCost(LifestyleQuality data, Decision... decisions) {
 		return data.getCost();
 	}
 
