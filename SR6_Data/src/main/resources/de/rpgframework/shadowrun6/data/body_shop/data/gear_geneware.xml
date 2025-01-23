@@ -193,7 +193,7 @@
       </variant>
    </item>
    <item id="hyper_glucagon" avail="6I" price="12000" type="GENEWARE" subtype="AUGMENTICS">
-      <usage mode="IMPLANTED" value="0.2"/>
+      <usage mode="IMPLANTED" value="0.05"/>
       <flags><flag>AUGMENTATION</flag></flags>
   		<modifications>
      		<!-- eliminates 2 ranks of Fatigued -->
