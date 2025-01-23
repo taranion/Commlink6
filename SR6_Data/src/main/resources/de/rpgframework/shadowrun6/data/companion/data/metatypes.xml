@@ -183,6 +183,17 @@
           <itemmod type="QUALITY" ref="tough_gut"/>
 		</modifications>
 	</metatype>
+   <metatype id="ogre" variantof="ork" size="170" weight="101" karma="5" lang="de">
+      <modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="REACTION"  value="5" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="WILLPOWER" value="7" set="MAX" when="CREATION"/>
+          <itemmod type="QUALITY" ref="low-light_vision"/>
+          <itemmod type="QUALITY" ref="tough_gut"/>
+         <valmod type="QUALITY"   ref="built_tough" value="1" set="NATURAL"/>
+      </modifications>
+   </metatype>
 	<metatype id="oni" variantof="ork" size="190" weight="128" karma="5">
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="8" set="MAX" when="CREATION"/>
