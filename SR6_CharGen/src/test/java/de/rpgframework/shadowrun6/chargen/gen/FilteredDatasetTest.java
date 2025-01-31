@@ -58,7 +58,8 @@ public class FilteredDatasetTest {
 
 		control.mode = DataSetMode.ALL;
 		charGen.runProcessors();
-		assertEquals(full, charGen.getMetatypeController().getAvailable().size());
+		// Ogre exists in two language variants, but only one is returned as available
+		assertEquals(full-1, charGen.getMetatypeController().getAvailable().size());
 
 		control.mode = DataSetMode.SELECTED;
 		//control.selected.add("CORE");

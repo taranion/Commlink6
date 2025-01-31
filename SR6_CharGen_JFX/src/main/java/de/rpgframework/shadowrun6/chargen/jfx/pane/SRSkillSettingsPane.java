@@ -140,8 +140,11 @@ public class SRSkillSettingsPane extends VBox {
 		for (SkillSpecialization<SR6Skill> spec : boxesExpert.keySet()) {
 			CheckBox cb = boxesExpert.get(spec);
 			SkillSpecializationValue<SR6Skill> val =  data.getSpecialization(spec);
+			logger.log(Level.WARNING, "refreshing "+spec+" is "+val+" / "+data.getSpecializations());
 			boolean selected = val!=null && val.getDistributed()==1;
+			logger.log(Level.WARNING, "set expertise "+spec+" to "+selected);
 			cb.setSelected(selected);
+			logger.log(Level.WARNING, "set expertise selected to "+selected);
 			if (selected) {
 				cb.setDisable( !control.canDeselectSpecialization(data, val).get());
 			} else {

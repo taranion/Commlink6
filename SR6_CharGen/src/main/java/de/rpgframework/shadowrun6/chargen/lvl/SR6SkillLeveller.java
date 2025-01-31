@@ -267,10 +267,40 @@ public class SR6SkillLeveller extends CommonSkillController {
 		if (!available.contains(spec)) {
 			return new Possible(Severity.STOPPER, RES, I18N_NOT_AVAILABLE_SPEC, skillVal.getKey(), spec.getId(), expertise);
 		}
+		
+		if (expertise) {
+			// Must have a specialization
+			if (skillVal.getDistributed()<5) {
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS, 5);
+			}
+			// Must have a normal specialization
+			SkillSpecializationValue<SR6Skill> specVal = skillVal.getSpecialization(spec);
+			if (specVal==null) {
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_AVAILABLE, 5);
+			}
+			if (specVal.getDistributed()==1) {
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ALREADY_PRESENT);
+			}
+			// No other expertise may be present
+			if (skillVal.getSpecializations().stream().anyMatch(sv -> sv.getDistributed()==1)) {
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ALREADY_PRESENT);
+			}
+			logger.log(Level.WARNING, "All clear for expe: "+skillVal.getSpecializations());
+		} else {
+			// May not have any other specialization
+			if (skillVal.getSpecializations().stream().anyMatch(sv -> sv.getDistributed()==0)) {
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ALREADY_PRESENT);
+			}
+			// May not already have anything in that field
+			if (skillVal.getSpecializations().stream().anyMatch(sv -> sv.getResolved()==spec)) {
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ALREADY_PRESENT);
+			}
+		}
 
 		// Need  5 Karma
-		if (model.getKarmaFree()<5)
+		if (model.getKarmaFree()<5) {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
+		}
 
 		return Possible.TRUE;
 	}
@@ -299,9 +329,15 @@ public class SR6SkillLeveller extends CommonSkillController {
 				return new OperationResult<>(poss);
 			}
 
-			SkillSpecializationValue<SR6Skill> ret = new SkillSpecializationValue<>(spec);
-			skillVal.getSpecializations().add(ret);
-			logger.log(Level.INFO, "Select specialization ''{0}'' in skill ''{1}''", spec.getId(), skillVal.getKey());
+			SkillSpecializationValue<SR6Skill> ret = null;
+			if (expertise) {
+				ret = skillVal.getSpecialization(spec);
+				ret.setDistributed(1);
+			} else {
+				ret = new SkillSpecializationValue<>(spec);
+				skillVal.getSpecializations().add(ret);
+			}
+			logger.log(Level.WARNING, "Select specialization ''{0}'' in skill ''{1}'' as {2}", spec.getId(), skillVal.getKey(), skillVal.getSpecializations());
 
 			// Now pay
 			int cost = 5;
@@ -358,7 +394,12 @@ public class SR6SkillLeveller extends CommonSkillController {
 				mod.setExpCost(-karma);
 				model.addToHistory(mod);
 			}
-			skillVal.getSpecializations().remove(spec);
+			
+			if (spec.getDistributed()==1) {
+				spec.setDistributed(0);
+			} else {
+				skillVal.getSpecializations().remove(spec);
+			}
 
 			getCharacterController().runProcessors();
 			return true;

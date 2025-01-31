@@ -193,15 +193,15 @@
       </variant>
    </item>
    <item id="hyper_glucagon" avail="6I" price="12000" type="GENEWARE" subtype="AUGMENTICS">
-      <usage mode="IMPLANTED" value="0.2"/>
+      <usage mode="IMPLANTED" value="0.05"/>
       <flags><flag>AUGMENTATION</flag></flags>
   		<modifications>
      		<!-- eliminates 2 ranks of Fatigued -->
      		<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="5"/>
   		</modifications>
    </item>
-   <item id="increased_myelination" avail="9I" price="99999" type="GENEWARE" subtype="AUGMENTICS">
-      <usage mode="IMPLANTED" value="99"/>
+   <item id="increased_myelination" avail="9I" price="13000" type="GENEWARE" subtype="AUGMENTICS">
+      <usage mode="IMPLANTED" value="0.01"/>
       <flags><flag>AUGMENTATION</flag></flags>
   		<modifications>
      		<!-- prevents Zapped status -->
