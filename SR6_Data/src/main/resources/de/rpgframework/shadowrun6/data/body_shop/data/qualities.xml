@@ -27,8 +27,9 @@
      </choices>
    </quality>
 
-   <quality id="inhuman" karma="0" pos="false" type="TRANSGENIC" selectable="false">
-   </quality>
+   <!-- <quality id="inhuman" karma="0" pos="false" type="TRANSGENIC" selectable="false">
+   </quality> -->
+   
    <quality id="im_into_it" karma="2" pos="true" type="TRANSGENIC">
      <choices>
        <choice type="TEXT" uuid="35ed2489-d0af-485b-b58a-61fbd064ed9d" i18n="alteration_type"/>
@@ -57,7 +58,7 @@
 						<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="500"/>
 					</modifications>
 				</subOption>
-				<subOption id="rank1" cost="4">
+				<subOption id="rank2" cost="4">
 					<modifications>
 						<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="1000"/>
 					</modifications>
