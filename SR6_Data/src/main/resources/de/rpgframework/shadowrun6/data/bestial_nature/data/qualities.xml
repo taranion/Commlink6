@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+   <quality id="shifter" karma="15" pos="true" type="SHIFTER">
+      <geardef>
+         <item id="shifter_weapon" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+            <weapon dmg="4P" attack="0,,,," skill="close_combat" spec="close_combat/unarmed" />
+         </item>
+      </geardef>
+      <choices>
+         <choice type="SUBSELECT" ref="type" uuid="55a6dda7-7565-4108-9a04-65b7607081d3">
+            <subOption id="furry" cost="0">
+				  <requires>
+				     <valuereq type="ATTRIBUTE" ref="BODY" value="3" />
+                 <valuereq type="ATTRIBUTE" ref="STRENGTH" value="3" />
+				  </requires>
+				  <modifications>
+                  <itemmod type="CRITTER_POWER" ref="natural_weapon"/>
+                  <itemmod type="QUALITY" ref="environmental_adaption"/>
+					</modifications>
+				</subOption>
+            <subOption id="scaly" cost="0">
+              <modifications>
+                  <itemmod type="CRITTER_POWER" ref="natural_weapon"/>
+                  <itemmod type="QUALITY" ref="environmental_adaption"/>
+               </modifications>
+            </subOption>
+            <subOption id="feathery" cost="3">
+              <requires>
+                 <valuereq type="ATTRIBUTE" ref="BODY" max="3" />
+                 <valuereq type="ATTRIBUTE" ref="STRENGTH" max="3" />
+              </requires>
+              <modifications>
+                  <itemmod type="CRITTER_POWER" ref="natural_weapon"/>
+               </modifications>
+            </subOption>
+            <subOption id="fins" cost="0">
+              <modifications>
+                  <itemmod type="CRITTER_POWER" ref="natural_weapon"/>
+                  <itemmod type="QUALITY" ref="environmental_adaption"/>
+               </modifications>
+            </subOption>
+			</choice>
+		</choices>
+		<modifications>
+         <itemmod type="CRITTER_POWER" ref="dual_natured"/>
+         <itemmod type="QUALITY" ref="supernatural_recovery"/>
+         <itemmod type="QUALITY" ref="shift"/>
+                 <itemmod type="QUALITY" ref="allergy">
+                     <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="uncommon"/>
+                     <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="extreme" />
+                     <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="i18n.gold"/>
+                  </itemmod>
+		</modifications>
+   </quality>
+   <quality id="environmental_adaption" karma="4" pos="true" type="SHIFTER">
+      <choices>
+         <choice type="TEXT" ref="description" uuid="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" />
+      </choices>
+   </quality>
+   <quality id="shifter_functional_tail" karma="6" pos="true" type="SHIFTER" >
+      <geardef>
+         <item id="thagomizer_tail" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+            <weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/thagomizer" />
+         </item>
+         <item id="bullwhip_tail" avail="4" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+            <weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
+          </item>
+      </geardef>
+     <choices>
+       <choice type="SUBSELECT" ref="variant" uuid="b237c0da-1eb1-4070-879a-22bc2899c106">
+         <subOption id="balance">
+          <modifications>
+           <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
+         </modifications>
+         </subOption>
+         <subOption id="paddle"     cost="2">
+          <modifications>
+           <checkmod type="SKILL" ref="athletics" value="2" set="NATURAL"/>
+         </modifications>
+         </subOption>
+         <subOption id="prehensile" cost="2">
+            <modifications>
+               <checkmod type="SKILL" ref="athletics" value="1" what="EDGE"/>
+            </modifications>
+         </subOption>
+       </choice>
+     </choices>
+   </quality>
+   <quality id="shifter_armor" karma="2" pos="true" type="SHIFTER" max="4">
+      <modifications>
+         <!-- Animal form gains the Armor power -->
+         <valmod type="CRITTER_POWER" ref="armor" value="1" apply="ANIMAL"/>
+      </modifications>
+   </quality>
+   <quality id="supernatural_recovery" karma="0" pos="true" type="SHIFTER" selectable="false">
+      <requires>
+         <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6" />
+      </requires>
+   </quality>
+   <quality id="shift" karma="0" pos="true" type="SHIFTER" selectable="false">
+      <requires>
+         <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6" />
+      </requires>
+   </quality>
+</qualities>

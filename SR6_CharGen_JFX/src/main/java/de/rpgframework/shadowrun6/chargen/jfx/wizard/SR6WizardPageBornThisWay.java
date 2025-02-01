@@ -108,7 +108,7 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 		taDescription.setPromptText(ResourceI18N.get(RES, "page.born_this_way.prompt"));
 		bxDescription = new GenericDescriptionVBox(Shadowrun6Tools.requirementResolver(Locale.getDefault()), Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 
-		selection = new ComplexDataItemControllerNode<>(null);
+		selection = new ComplexDataItemControllerNode<>(charGen.getQualityController());
 		selection.setAvailableStyle("-fx-min-width: 20em; -fx-max-width: 25em");
 		selection.setSelectedStyle("-fx-min-width: 20em; -fx-max-width: 30em; -fx-max-height: 10em");
 

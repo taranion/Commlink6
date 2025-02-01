@@ -39,6 +39,7 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6FocusGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6ShifterGenerator;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 
@@ -114,7 +115,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
-		return new WizardPageType[] { WizardPageType.PRIORITIES, WizardPageType.METATYPE, //WizardPageType.DRAKE,
+		return new WizardPageType[] { WizardPageType.PRIORITIES, WizardPageType.METATYPE, WizardPageType.SHIFTER, //WizardPageType.DRAKE,
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
 				WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
 				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,
@@ -217,6 +218,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 			// Now add generator specifics on top
 			processChain.add(prioCtrl);
 			processChain.add(meta);
+			processChain.add(shifter);
 			processChain.add(drake);
 			processChain.add(magicReso);
 			processChain.add(qualities);

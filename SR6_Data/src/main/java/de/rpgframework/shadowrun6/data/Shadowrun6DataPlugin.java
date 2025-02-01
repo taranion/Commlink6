@@ -191,6 +191,7 @@ public class Shadowrun6DataPlugin  {
 			initEmeraldCity();
 			initSmoothOperations();
 			initDPBundeswehr();
+			initBestialNature();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -1046,6 +1047,18 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} weapons", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_bundeswehr/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded {0} vehicles", list.size());
+	}
+
+	//-------------------------------------------------------------------
+	private void initBestialNature() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ----------------------------Bestial Nature---------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "bestial_nature", "bestial_nature.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.RULES);
+		set.setReleased(202306);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"bestial_nature/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded {0} shifter qualities", list.size());
 	}
 
 }

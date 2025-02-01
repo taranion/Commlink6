@@ -8,6 +8,7 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.chargen.gen.SR6ShifterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.BornThisWayGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.ChildhoodGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.EarlyAdultGenerator;
@@ -31,5 +32,7 @@ public interface SR6CharacterGenerator extends SR6CharacterController, IShadowru
 	default public EarlyAdultGenerator getEarlyAdultGenerator() {
 		return null;
 	}
+
+	public SR6ShifterGenerator getShifterGenerator() ;
 
 }
