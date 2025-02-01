@@ -278,8 +278,8 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			}
 		}
 
-		// If this is a drone, ensure there is a SOFTWARE slot with Pilot/2 round up capacity
-		if (ItemType.isDrone(type) || type.name().contains("DRONE")) {
+		// If this is a drone or vehicle, ensure there is a SOFTWARE slot with Pilot/2 round up capacity
+		if (ItemType.isDrone(type) || ItemType.isVehicle(type) || type.name().contains("DRONE") || type.name().contains("VEHICLES")) {
 			this.countable = true;
 			boolean hasSoftwareSlot = getOutgoingModifications().stream().anyMatch( mod -> (mod instanceof DataItemModification) && mod.getReferenceType()==ShadowrunReference.HOOK && ((DataItemModification)mod).getKey().equals(ItemHook.SOFTWARE.name()));
 			if (!hasSoftwareSlot) {
