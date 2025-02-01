@@ -69,7 +69,7 @@ public class AddMissingStandardSlots implements CarriedItemProcessor {
 			case BUS:
 				if (model.getSlot(ItemHook.VEHICLE_TIRES)==null) {
 					logger.log(Level.DEBUG, "Add VEHICLE_TIRES slot to {0}", model.getKey());
-					System.err.println("Add VEHICLE_TIRES slot to "+ model.getKey());
+					// System.err.println("Add VEHICLE_TIRES slot to "+ model.getKey());
 					AvailableSlot extern = new AvailableSlot(ItemHook.VEHICLE_TIRES,1);
 					model.addSlot(extern);
 				}

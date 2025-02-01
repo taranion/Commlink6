@@ -3,31 +3,31 @@
 
 	<!-- Airships -->
    <item id="buzzard" avail="5"  price="10000" type="VEHICLES" subtype="AIRSHIP">
-      <vehicle han="3" acc="20" spdi="30" tspd="300" bod="10" arm="6" sea="5"/>
+      <vehicle han="3" acc="20" spdi="30" tspd="300" bod="10" arm="6" pil="0" sen="0" sea="5"/>
    </item>
    <item id="small_boat_raft" avail="2"  price="5000" type="VEHICLES" subtype="AIRSHIP">
-      <vehicle han="5" acc="10" spdi="15" tspd="100" bod="10" arm="4" sea="6"/>
+      <vehicle han="5" acc="10" spdi="15" tspd="100" bod="10" arm="4" pil="0" sen="0" sea="6"/>
    </item>
    <item id="light_attack_ship" avail="4"  price="25000" type="VEHICLES" subtype="AIRSHIP">
-      <vehicle han="3" acc="20" spdi="25" tspd="240" bod="12" arm="8" sea="4"/>
+      <vehicle han="3" acc="20" spdi="25" tspd="240" bod="12" arm="8" pil="0" sen="0" sea="4"/>
    </item>
    <item id="heavy_attack_ship" avail="6"  price="50000" type="VEHICLES" subtype="AIRSHIP">
-      <vehicle han="4" acc="15" spdi="20" tspd="200" bod="18" arm="12" sea="8"/>
+      <vehicle han="4" acc="15" spdi="20" tspd="200" bod="18" arm="12" pil="0" sen="0" sea="8"/>
    </item>
    <item id="small_transport" avail="3"  price="40000" type="VEHICLES" subtype="AIRSHIP">
-      <vehicle han="4" acc="10" spdi="20" tspd="200" bod="16" arm="10" sea="8"/>
+      <vehicle han="4" acc="10" spdi="20" tspd="200" bod="16" arm="10" pil="0" sen="0" sea="8"/>
    </item>
    <item id="guardian_airship" avail="8"  price="200000" type="VEHICLES" subtype="AIRSHIP">
-      <vehicle han="3" acc="25" spdi="30" tspd="300" bod="20" arm="12" sea="15"/>
+      <vehicle han="3" acc="25" spdi="30" tspd="300" bod="20" arm="12" pil="0" sen="0" sea="15"/>
    </item>
    <item id="large_transport" avail="6"  price="150000" type="VEHICLES" subtype="AIRSHIP">
-      <vehicle han="5" acc="10" spdi="15" tspd="150" bod="24" arm="6" sea="30"/>
+      <vehicle han="5" acc="10" spdi="15" tspd="150" bod="24" arm="6" pil="0" sen="0" sea="30"/>
    </item>
    <item id="huge_airship" avail="9"  price="500000" type="VEHICLES" subtype="AIRSHIP">
-      <vehicle han="5" acc="5" spdi="15" tspd="150" bod="40" arm="6" sea="60"/>
+      <vehicle han="5" acc="5" spdi="15" tspd="150" bod="40" arm="6" pil="0" sen="0" sea="60"/>
    </item>
    <item id="dis_seeker" avail="99"  price="9999999" type="VEHICLES" subtype="AIRSHIP">
-      <vehicle han="3" acc="30" spdi="35" tspd="350" bod="18" arm="14" sea="8"/>
+      <vehicle han="3" acc="30" spdi="35" tspd="350" bod="18" arm="14" pil="0" sen="0" sea="8"/>
    </item>
 
    <!-- Airship Weapons -->

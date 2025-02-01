@@ -130,9 +130,9 @@ public class PersonaConfigPane extends VBox implements ResponsiveControl {
 		TextFlow flowVR = new TextFlow(new Label(ResourceI18N.get(RES, "pane.persona.ifmode.requires")+": "));
 		flowVR.getChildren().add(cbCyberjack); flowVR.getChildren().add(new Label(", "));
 		flowVR.getChildren().add(cbDatajack); flowVR.getChildren().add(new Label(", "));
-		flowVR.getChildren().add(cbControlRig); flowVR.getChildren().add(new Label(", "));
 		flowVR.getChildren().add(cbTrodes);
 		TextFlow flowHot = new TextFlow(new Label(ResourceI18N.get(RES, "pane.persona.ifmode.requires")+": "));
+		flowHot.getChildren().add(cbControlRig); flowHot.getChildren().add(new Label(", "));
 		flowHot.getChildren().add(cbHotSim); flowHot.getChildren().add(new Label(", "));
 		flowHot.getChildren().add(new Label(ResourceI18N.get(RES, "pane.persona.ifmode.orCyberdeck")));
 
