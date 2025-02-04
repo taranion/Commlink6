@@ -508,4 +508,13 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 		return wrapped.getRecommender();
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator#getShifterGenerator()
+	 */
+	@Override
+	public SR6ShifterGenerator getShifterGenerator() {
+		return wrapped.getShifterGenerator();
+	}
+
 }

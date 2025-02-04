@@ -39,12 +39,14 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 
 	protected IMetatypeController meta;
 	protected MagicOrResonanceController magicReso;
+	protected SR6ShifterGenerator shifter;
 
 	// -------------------------------------------------------------------
 	protected CommonSR6CharacterGenerator() {
 //		updateEffectiveRules();
 		super.critter = new SR6CritterPowerController(this);
 		super.dataStructures = new SR6DataStructureController(this);
+		shifter   = new SR6ShifterGenerator(this);
 	}
 
 	//-------------------------------------------------------------------
@@ -52,6 +54,7 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 		super(model, handle, charGenSettingsClazz);
 		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
 //		updateEffectiveRules();
+		shifter   = new SR6ShifterGenerator(this);
 		createPartialController();
 	}
 
@@ -198,6 +201,11 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 	@Override
 	public IMagicOrResonanceController getMagicOrResonanceController() {
 		return magicReso;
+	}
+
+	//-------------------------------------------------------------------
+	public SR6ShifterGenerator getShifterGenerator() {
+		return shifter;
 	}
 
 }

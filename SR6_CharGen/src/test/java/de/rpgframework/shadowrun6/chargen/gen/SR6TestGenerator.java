@@ -470,4 +470,10 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 		return Optional.empty();
 	}
 
+	@Override
+	public SR6ShifterGenerator getShifterGenerator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
