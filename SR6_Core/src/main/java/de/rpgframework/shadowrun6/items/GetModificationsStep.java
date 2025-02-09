@@ -22,6 +22,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
+import de.rpgframework.genericrpg.modification.RelevanceModification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -140,6 +141,8 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			}
 		} else if (check instanceof ModificationChoice ){
 			return ApplyTo.DATA_ITEM;
+		} else if (check instanceof RelevanceModification ){
+			return ApplyTo.CHARACTER;
 		} else {
 			logger.log(Level.ERROR, "Don't know how to handle "+ check.getClass());
 		}
