@@ -808,7 +808,8 @@ public class Shadowrun6Tools {
 				if (iAttr==SR6ItemAttribute.ITEMTYPE) return ItemType.valueOf(tmp.getRawValue()).getName();
 				if (iAttr==SR6ItemAttribute.ITEMSUBTYPE) return ItemSubType.valueOf(tmp.getRawValue()).getName();
 				if (iAttr==SR6ItemAttribute.WEAPON_SIZE) return WeaponSize.valueOf(tmp.getRawValue()).getName();
-				break;
+				if (iAttr==SR6ItemAttribute.SOFTWARE_TYPES) return "Device runs "+tmp.getRawValue();
+				return iAttr.getName(loc)+" "+tmp.getRawValue()+"+";
 			case SKILL:
 				if (tmp.getChoice()!=null) {
 					return RES.format("requirement.choice.skill", loc, getValueString(tmp, loc));

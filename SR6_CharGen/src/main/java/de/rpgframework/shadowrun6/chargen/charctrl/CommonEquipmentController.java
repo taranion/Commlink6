@@ -524,7 +524,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			return new Possible(unmet);
 		}
 
-		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, variant, getModel(), true, decisions);
+		OperationResult<CarriedItem<ItemTemplate>> res = GearTool.buildItem(value, CarryMode.EMBEDDED, variant, getModel(), false, decisions);
 		if (res.hasError()) {
 			State state = State.POSSIBLE;
 			for (ToDoElement error : res.getMessages()) {

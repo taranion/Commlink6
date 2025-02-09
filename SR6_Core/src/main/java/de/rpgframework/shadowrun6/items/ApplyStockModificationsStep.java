@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
+import de.rpgframework.genericrpg.modification.RelevanceModification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -65,6 +66,8 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 					if (strict) {
 						logger.log(Level.ERROR, "Unsupported modification: " + tmp);
 					}
+				} else if (tmp instanceof RelevanceModification) {
+					logger.log(Level.WARNING, "Ignoring modification: " + tmp);
 				} else {
 					logger.log(Level.ERROR, "Unsupported modification: " + tmp);
 				}

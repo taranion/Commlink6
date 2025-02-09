@@ -167,7 +167,7 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
 			if (needToAsk) {
 				logger.log(Level.DEBUG, "Select/Embed with choices or variants or flags");
-				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry);
+				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry, addToHook, addToContainer);
 				dia2.setSuggestedVariant(suggestedVariant);
 				Decision[] dec = dia2.apply(selected, selected.getChoices());
 				if (dec!=null) {
