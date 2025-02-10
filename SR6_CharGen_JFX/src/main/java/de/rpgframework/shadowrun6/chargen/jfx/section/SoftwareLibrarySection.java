@@ -206,7 +206,6 @@ public class SoftwareLibrarySection extends GearSection {
 	/**
 	 * @see org.prelle.javafx.Section#refresh()
 	 */
-	@SuppressWarnings("unchecked")
 	public void refresh() {
 		if (model==null) return;
 		if (root==null) return;

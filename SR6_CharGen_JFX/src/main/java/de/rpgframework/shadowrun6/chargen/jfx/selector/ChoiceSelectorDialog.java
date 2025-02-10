@@ -338,7 +338,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 	 */
 	@Override
 	public Decision[] apply(T item, List<Choice> choices) {
-		logger.log(Level.INFO, "ENTER apply({0}, {1})", item, choices);
+		logger.log(Level.WARNING, "ENTER apply({0}, {1}) for container {2}", item, choices, context);
 		this.item = item;
 		this.choices = choices;
 		CloseType closed = null;
