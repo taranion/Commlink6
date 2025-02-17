@@ -9,6 +9,7 @@
     <skill id="athletics"  attr="AGILITY" type="PHYSICAL" untr="y">
         <skillspec id="climbing"/>
         <skillspec id="flying"/>
+        <skillspec id="freefall"/>
         <skillspec id="gymnastics"/>
         <skillspec id="sprinting"/>
         <skillspec id="swimming"/>
