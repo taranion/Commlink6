@@ -51,18 +51,6 @@
             <flag>AUGMENTATION</flag>
         </flags>
     </item>
-	
-	<item id="bulk_modification" avail="2" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE">
-        <usage mode="EMBEDDED" value="0" slot="CYBERLIMB_IMPLANT"/>
-		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
-		</choices>
- 		<attrdef id="PRICE" value="$RATING*500"/>
-        <modifications>
-          <valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="$RATING"/>
-        </modifications>
-	</item>
-		
     <!--item id="custom-fitted_cyberlimb" avail="5" price="1000" type="CYBERWARE" subtype="CYBER_BODYWARE">
         <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
         <flags>
