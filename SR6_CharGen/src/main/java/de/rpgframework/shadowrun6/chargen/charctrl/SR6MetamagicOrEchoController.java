@@ -91,6 +91,8 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	public List<MetamagicOrEcho> getAvailable() {
 		MagicOrResonanceType type = getModel().getMagicOrResonanceType();
 		MetaType meta = getModel().getMetatype();
+		if (meta==null)
+			return List.of();
 
 		List<MetamagicOrEcho> ret = getNormalAvailable();
 		RuleController rules = parent.getRuleController();
@@ -148,6 +150,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	public int getGrade() {
 		MagicOrResonanceType type = getModel().getMagicOrResonanceType();
 		MetaType meta = getModel().getMetatype();
+		if (meta==null) return 0;
 		List<MetamagicOrEchoValue> list = null;
 		if (type != null && type.usesMagic()) {
 			list = getSelected().stream()
