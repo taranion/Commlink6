@@ -104,13 +104,13 @@
 		</modifications>
 	</quality>
 	<quality id="delusion" karma="10" pos="false" type="NORMAL" />
-   <quality id="emotional_flatline" karma="5" pos="true" type="NORMAL">
+   <quality id="emotional_flatline" karma="5" pos="false" type="NORMAL">
      <modifications>
        <checkmod type="SKILL" ref="con"       value="1" apply="CHARACTER" what="OTHER"/>
        <checkmod type="SKILL" ref="influence" value="1" apply="CHARACTER" what="OTHER"/>
      </modifications>
    </quality>
-   <quality id="emotion_leak" karma="10" pos="true" type="NORMAL">
+   <quality id="emotion_leak" karma="10" pos="false" type="NORMAL">
      <modifications>
        <checkmod type="SKILL" ref="con" value="1" apply="CHARACTER" what="NOT_SPEND_EDGE"/>
        <checkmod type="SKILL" ref="influence" value="1" apply="CHARACTER" what="NOT_SPEND_EDGE"/>
