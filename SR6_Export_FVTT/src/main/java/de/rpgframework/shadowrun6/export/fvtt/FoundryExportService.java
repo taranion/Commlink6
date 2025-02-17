@@ -736,7 +736,7 @@ public class FoundryExportService {
 
 			data.rating      = item.getRating();
 			data.loyalty     = item.getLoyalty();
-			data.type        = item.getType().getName();
+			data.type        = (item.getType()!=null)?item.getType().getName():"NOT_SET";
 			data.description = item.getDescription();
 
 			ItemData<FVTTContact> foundry = new ItemData<FVTTContact>(item.getName(), "contact", data);
