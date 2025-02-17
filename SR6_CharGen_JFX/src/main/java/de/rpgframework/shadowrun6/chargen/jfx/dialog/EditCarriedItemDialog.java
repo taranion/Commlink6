@@ -79,6 +79,14 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 			view.setOnAddAction(2, ev -> addModificationClicked());
 			break;
 		}
+
+		switch ((ItemSubType)data.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()) {
+		case CYBER_LIMBS:
+			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
+			view.getList(2).setAll(selectedItem.getEnhancements());
+			view.setOnAddAction(2, ev -> addModificationClicked());
+			break;
+		}
 	}
 
 	//--------------------------------------------------------------------

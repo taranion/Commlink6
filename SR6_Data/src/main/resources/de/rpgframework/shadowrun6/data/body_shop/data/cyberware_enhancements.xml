@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <itemenhancements>
-	<itemenhancement id="bulk_modifications" avail="3L" price="75">
+	<itemenhancement id="bulk_modification" avail="2" price="500">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
 		</choices>
+      <!-- attrdef id="PRICE" value="$RATING*500"/ -->
 	  <requires>
 	    <selreq>
 	    	<datareq type="GEAR" ref="cyberarm"/>
