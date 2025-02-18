@@ -272,7 +272,9 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		List<SetItem> items = Shadowrun6Core.getItemList(SetItem.class).stream()
 				.filter(p -> charGen.showDataItem(p))
 				.collect(Collectors.toList());
-		none.assignToDataSet( items.get(0).getAssignedDataSets().iterator().next() );
+		if (!items.isEmpty()) {
+			none.assignToDataSet( items.get(0).getAssignedDataSets().iterator().next() );
+		}
 		items.add(0, none);
 		Collections.sort(items, comparator);
 		logger.log(Level.WARNING, "Available: "+items);

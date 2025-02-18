@@ -18,9 +18,12 @@ import de.rpgframework.genericrpg.SetItemValue;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.CheckModification;
+import de.rpgframework.genericrpg.modification.DataItemModification;
+import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.RelevanceModification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAction;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunCharacter;
@@ -65,6 +68,9 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	protected List<ValueModification> essenceChanges;
 	@Element
 	protected Integer essenceLossZero;
+	@ElementList(entry="quality", type = QualityValue.class, inline = false)
+	private List<QualityValue> shifterAddons;
+	private transient List<QualityValue> shifterAuto;
 
 	protected transient List<CheckModification> edgeMods;
 	protected transient List<RelevanceModification> relevanceMods;
@@ -84,6 +90,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		datastructures = new ArrayList<>();
 		asdfMap = new ASDFMapping();
 		essenceChanges = new ArrayList<>();
+		shifterAuto    = new ArrayList<>();
+		shifterAddons  = new ArrayList<>();
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesPlusEdge()) {
 			setAttribute(new AttributeValue<ShadowrunAttribute>(key, 1));
@@ -497,6 +505,58 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	 */
 	public void setEssenceLossZero(Integer essenceLossZero) {
 		this.essenceLossZero = essenceLossZero;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the qualities
+	 */
+	public List<QualityValue> getShifterAddOns() {
+		return (shifterAddons==null)?List.of():shifterAddons;
+	}
+
+	//-------------------------------------------------------------------
+	public void addShifterAddOn(QualityValue value) {
+		if (!shifterAddons.contains(value))
+			shifterAddons.add(value);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeShifterAddOn(QualityValue value) {
+		shifterAddons.remove(value);
+	}
+
+//	//-------------------------------------------------------------------
+//	private void refreshAuto() {
+//		if (auto.isEmpty()) {
+//			for (Modification mod : base.getOutgoingModifications()) {
+//				System.err.println("ShifterQuality.getQualities: "+mod);
+//				if (mod instanceof DataItemModification diMod && diMod.getReferenceType()==ShadowrunReference.QUALITY) {
+//					SR6Quality resolved = Shadowrun6Core.getItem(SR6Quality.class, diMod.getKey());
+//					QualityValue fixed = new QualityValue(resolved,0);
+//					auto.add(fixed);
+//				}
+//			}			
+//		}
+//	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @return the shifterAuto
+	 */
+	public List<QualityValue> getShifterAuto() {
+		return shifterAuto;
+	}
+
+	//-------------------------------------------------------------------
+	public void clearShifterAuto() {
+		shifterAuto.clear();
+	}
+
+	//-------------------------------------------------------------------
+	public void addShifterAuto(QualityValue value) {
+		if (!shifterAuto.contains(value))
+			shifterAuto.add(value);
 	}
 
 }

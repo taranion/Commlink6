@@ -54,6 +54,7 @@ public class ResetModifications implements ProcessingStep {
 		model.clearForbiddenSources();
 		model.getCritterPowers().clear();
 		model.clearRuleFlags();
+		model.clearShifterAuto();
 
 		try {
 			// Attributes
