@@ -378,7 +378,12 @@
 		</choices>
 		<usage mode="EMBEDDED" slot="SENSOR_HOUSING" value="1"/>
 		<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
-  		<attrdef id="MAX_SENSOR_RATING" value="$RATING"/>
+	  	<usage mode="EMBEDDED" slot="AUDIO" value="1"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
+        <usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="1"/>
+        <usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="1"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="1"/>
+	  <attrdef id="MAX_SENSOR_RATING" value="$RATING"/>
   		<attrdef id="PRICE" value="$RATING*100"/>
       <modifications>
 			<valmod type="HOOK" ref="SENSOR_FUNCTION" value="1"/>
