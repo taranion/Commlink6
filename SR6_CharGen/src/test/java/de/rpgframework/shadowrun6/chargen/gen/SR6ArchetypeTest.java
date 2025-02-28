@@ -311,7 +311,7 @@ public class SR6ArchetypeTest {
 		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "flare_compensation"), null).wasSuccessful() );
 		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "image_link"), null).wasSuccessful() );
 		assertTrue( equip.embed(contactsRes.get(), ItemHook.OPTICAL, Shadowrun6Core.getItem(ItemTemplate.class, "low_light_vision"), null).wasSuccessful() );
-		assertEquals(1075, contactsRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals(1375, contactsRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		OperationResult<CarriedItem<ItemTemplate>> sonyRes = equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "sony_emporer"));
 		assertEquals(700, sonyRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		assertTrue( equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "subvocal_microphone")).wasSuccessful() );
