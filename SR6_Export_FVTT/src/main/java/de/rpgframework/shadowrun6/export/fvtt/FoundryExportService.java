@@ -465,7 +465,7 @@ public class FoundryExportService {
 				if (item.getResolved().isCountable())
 					gear.count = item.getCount();
 				gear.needsRating = item.getResolved().getChoice(ItemTemplate.UUID_RATING)!=null;
-				if (gear.needsRating)
+				if (gear.needsRating && item.getDecision(ItemTemplate.UUID_RATING)!=null)
 					gear.rating = item.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
 
 				// Accessories
