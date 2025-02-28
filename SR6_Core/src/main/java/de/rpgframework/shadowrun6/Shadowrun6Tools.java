@@ -2175,7 +2175,8 @@ public class Shadowrun6Tools {
 	 */
 	public static CarriedItem<ItemTemplate> getBestRCC(Shadowrun6Character model) {
 		CarriedItem<ItemTemplate> ret = null;
-		for (CarriedItem<ItemTemplate> item : model.getCarriedItems(ItemType.ELECTRONICS)) {
+		//look for carried and  embedded RCCs
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItemsRecursive()) {
 			// Only evaluate RIGGER_CONSOLEs
 			if (getItemSubType(item)!=ItemSubType.RIGGER_CONSOLE)
 				continue;
