@@ -478,7 +478,7 @@ public class VehicleTools {
 				// Jumped in
 				if (ctrlRig!=null) {
 					String specID = (SR6GearTool.getSpecializationForVehicle(drone.getResolved())!=null)?SR6GearTool.getSpecializationForVehicle(drone.getResolved()).getId():null;
-					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.LOGIC,specID).getValue(ValueType.AUGMENTED) + rigRating;
+					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.LOGIC,specID).getValue(ValueType.AUGMENTED);
 					// Question: does this include SimRig rating? German says "bei Proben, bei denen es um das Steuern eines Fahrzeugs geht"
 					//    while US says: "all tests involving the operation of a vehicle"
 					if (Locale.getDefault()!=Locale.GERMAN) {
