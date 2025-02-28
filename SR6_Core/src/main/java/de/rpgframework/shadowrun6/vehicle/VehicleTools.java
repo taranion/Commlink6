@@ -653,19 +653,17 @@ public class VehicleTools {
 			return mods;
 		}
 
-		//-------------------------------------------------------------------
+		//------------- Select correct piloting specialization for given vehicle or drone
 		public static SkillSpecialization getSpecializationForVehicle(ItemTemplate item) {
 			SR6Skill pilot = Shadowrun6Core.getSkill("piloting");
 			if (pilot==null)
 				return null;
-//			if (item.isNoSpecialization())
-//				return null;
 
 			ItemType typeI = item.getItemType(CarryMode.CARRIED);
 			ItemSubType typeS = item.getItemSubtype(CarryMode.CARRIED);
 			switch (typeI) {
 			case VEHICLES:
-				switch (item.getItemSubtype(CarryMode.CARRIED)) {
+				switch (typeS) {
 				case BIKES:
 				case ATVS:
 				case CARS:
@@ -698,40 +696,14 @@ public class VehicleTools {
 			case DRONE_SMALL:
 			case DRONE_MEDIUM:
 			case DRONE_LARGE:
-				VehicleType type = item.getTypeData(VehicleData.class).getType();
-				if (type==null && typeS!=null) {
-					switch (typeS) {
-					case GROUND: type = VehicleType.GROUND;
-					case AIR: type = VehicleType.AIR;
-					case AQUATIC: type = VehicleType.WATER;
-					}
-				}
-				if (type==null ) {
-					logger.log(Level.ERROR,"Cannot detect skill for drone without type: "+item);
-					return null;
-				}
-				switch (type) {
+				switch (typeS) {
 				case GROUND:
 					return pilot.getSpecialization("ground_craft") ;
 				case AIR:
 					return pilot.getSpecialization("aircraft") ;
-				case WATER:
+				case AQUATIC:
 					return pilot.getSpecialization("watercraft") ;
 				}
-//				switch (item.getSubtype()) {
-//				case BIKES:
-//				case CARS:
-//				case TRUCKS:
-//					return Shadowrun6Core.getSkill("pilot_ground_craft");
-//				case BOATS:
-//				case SUBMARINES:
-//					return Shadowrun6Core.getSkill("pilot_watercraft");
-//				case FIXED_WING:
-//				case ROTORCRAFT:
-//				case VTOL:
-//					return Shadowrun6Core.getSkill("pilot_aircraft");
-//				default:
-//				}
 
 			default:
 			}
