@@ -24,7 +24,7 @@
 			</choices>
 			<attrdef id="PRICE" value="$RATING*50"/>
 			<modifications>
-				<valmod type="HOOK" ref="IMAGING" value="$RATING"/>
+				<valmod type="HOOK" ref="OPTICAL" value="$RATING"/>
 			</modifications>
 		</variant>
 		<variant id="optical">
