@@ -465,7 +465,7 @@ public class FoundryExportService {
 				if (item.getResolved().isCountable())
 					gear.count = item.getCount();
 				gear.needsRating = item.getResolved().getChoice(ItemTemplate.UUID_RATING)!=null;
-				if (gear.needsRating)
+				if (gear.needsRating && item.getDecision(ItemTemplate.UUID_RATING)!=null)
 					gear.rating = item.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
 
 				// Accessories
@@ -736,7 +736,7 @@ public class FoundryExportService {
 
 			data.rating      = item.getRating();
 			data.loyalty     = item.getLoyalty();
-			data.type        = item.getType().getName();
+			data.type        = (item.getType()!=null)?item.getType().getName():"NOT_SET";
 			data.description = item.getDescription();
 
 			ItemData<FVTTContact> foundry = new ItemData<FVTTContact>(item.getName(), "contact", data);

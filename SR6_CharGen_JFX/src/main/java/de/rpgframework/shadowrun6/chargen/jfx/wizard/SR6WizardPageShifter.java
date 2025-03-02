@@ -3,13 +3,10 @@ package de.rpgframework.shadowrun6.chargen.jfx.wizard;
 import java.io.InputStream;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.NodeWithTitle;
@@ -18,25 +15,13 @@ import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.character.RuleSpecificCharacterObject;
-import de.rpgframework.genericrpg.Possible;
-import de.rpgframework.genericrpg.SetItem;
 import de.rpgframework.genericrpg.SetItemValue;
-import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
-import de.rpgframework.genericrpg.chargen.CharacterController;
-import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
-import de.rpgframework.genericrpg.chargen.OperationResult;
-import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ChoiceOption;
-import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
-import de.rpgframework.genericrpg.data.IAttribute;
-import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.genericrpg.modification.ModificationChoice;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.ComplexDataItemControllerOneColumnSkin;
 import de.rpgframework.jfx.DataItemPane;
@@ -52,12 +37,10 @@ import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
-import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.QualityFilterNode;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6ReferenceTypeConverter;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -76,7 +59,8 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 
 	private GeneratorWrapper charGen;
 
-	private Label lbNetKarma;
+	private Label lbCurrent;
+	private Label lbMinimum;
 
 	private DataItemPane<ChoiceOption> contentPane;
 	private ComplexDataItemControllerNode<Quality, QualityValue> selection;
@@ -99,14 +83,13 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 		List<ChoiceOption> items = Shadowrun6Core.getItem(SR6Quality.class, "shifter")
 				.getChoice(UUID.fromString("55a6dda7-7565-4108-9a04-65b7607081d3"))
 				.getSubOptions();
-		contentPane.setSelectedItem(items.get(3));
 	}
 
 	//-------------------------------------------------------------------
-	@SuppressWarnings({ "rawtypes" })
 	private void initComponents() {
-		lbNetKarma = new Label("?");
-		lbNetKarma.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		lbCurrent = new Label("?");
+		lbCurrent.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
+		lbMinimum = new Label("/??");
 
 		selection = new ComplexDataItemControllerNode<>(charGen.getShifterGenerator());
 		QualityFilterNode filter = new QualityFilterNode(RES, selection, QualityType.SHIFTER);
@@ -121,15 +104,15 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 		selection.setSelectedCellFactory(lv -> new QualityValueListCell( ()->charGen, true));
 		selection.setShowHeadings(false);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
-//		selection.setSkin(new ComplexDataItemControllerOneColumnSkin(selection));
+		selection.setSkin(new ComplexDataItemControllerOneColumnSkin<Quality,QualityValue>(selection));
 
 //		bxDescription = new GenericDescriptionVBox(
 //				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 //				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
 	}
 
+	//-------------------------------------------------------------------
 	private void initContentPane() {
-
 		contentPane = new DataItemPane<ChoiceOption>(
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 				Shadowrun6Tools.modificationResolver(Locale.getDefault())
@@ -183,14 +166,14 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 	//-------------------------------------------------------------------
 	private void initLayout() {
 		contentPane.setCustomNode1(new NodeWithTitle(ResourceI18N.get(RES,"tab.custom"), selection));
-
+//		selection.setSkin(new ComplexDataItemControllerOneColumnSkin<Quality,QualityValue>(selection));
+		
 		setContent(contentPane);
 		//ResponsiveBox responsive = new ResponsiveBox(selection, bxDescription);
 //		AutoBox responsive = new AutoBox();
 //		responsive.getContent().addAll(selection, bxDescription);
 		Label hdPointsSpent = new Label(ResourceI18N.get(RES, "page.shifter.pointsSpent"));
-		Label lbMax = new Label("/30");
-		HBox line = new HBox(5, hdPointsSpent, lbNetKarma, lbMax);
+		HBox line = new HBox(5, hdPointsSpent, lbCurrent, lbMinimum);
 		selection.setSelectedListHead(line);
 
 		// Back header
@@ -222,29 +205,33 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 			Shadowrun6Character model = charGen.getModel();
 			backHeader.setValue(model.getKarmaFree());
 
-		lbNetKarma.setText(String.valueOf( ((CommonQualityGenerator)charGen.getQualityController()).getKarmaForSURGE()));
-		BodyType type = charGen.getModel().getBodytype();
-		if (type!=null) {
-			// Enable or disable page
-			boolean isShifter = type==BodyType.SHAPESHIFTER;
-			if (isShifter) {
-				logger.log(Level.DEBUG, type+" can have shifter qualities - enable page");
-				activeProperty().set(true);
+			lbCurrent.setText(String.valueOf( charGen.getShifterGenerator().getCurrentKarmaCost()));
+			lbMinimum.setText("/"+String.valueOf( charGen.getShifterGenerator().getMinimalKarmaCost()));
+			BodyType type = charGen.getModel().getBodytype();
+			if (type!=null) {
+				// Enable or disable page
+				boolean isShifter = type==BodyType.SHAPESHIFTER;
+				if (isShifter) {
+					logger.log(Level.DEBUG, type+" can have shifter qualities - enable page");
+					activeProperty().set(true);
+				} else {
+					logger.log(Level.DEBUG, type+" is not a shifter - disable page");
+					activeProperty().set(false);
+				}
 			} else {
-				logger.log(Level.DEBUG, type+" is not a shifter - disable page");
+				logger.log(Level.WARNING, "No body type selected yet");
 				activeProperty().set(false);
 			}
-		} else {
-			logger.log(Level.WARNING, "No body type selected yet");
-			activeProperty().set(false);
-		}
 
-
-//			if (model.getSurgeCollective()!=null && items.contains(model.getSurgeCollective().getResolved()) && model.getSurgeCollective().getResolved() != contentPane.getSelectedItem()) {
-//				contentPane.setSelectedItem(model.getSurgeCollective().getResolved());
-//			} else {
-//				contentPane.setSelectedItem(none);
-//			}
+			if (model.getQuality("shifter")!=null) {
+				List<Decision> decs = model.getQuality("shifter").getDecisions();
+				if (!decs.isEmpty()) {
+					ChoiceOption opt = model.getQuality("shifter").getResolved().getChoice(decs.get(0).getChoiceUUID()).getSubOption(decs.get(0).getValue());
+					contentPane.setSelectedItem(opt);
+				} else {
+					contentPane.setSelectedItem(null);
+				}
+			}
 		} finally {
 			updating = false;
 		}
@@ -268,9 +255,9 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 	@Override
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.log(Level.DEBUG, "RCV {0}",type);
-		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
-			selection.setController(charGen.getQualityController());
-		}
+//		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
+//			selection.setController(charGen.getShifterGenerator());
+//		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED || type==BasicControllerEvents.GENERATOR_CHANGED) {
 			selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
 			selection.refresh();
@@ -291,27 +278,12 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 	// -------------------------------------------------------------------
 	private void userSelects(ChoiceOption toSelect) {
 		logger.log(Level.INFO, "userSelects(" + toSelect + ")");
-//		SetItemValue ret = new SetItemValue(toSelect);
-//		// Is there a need for a selection
-//		if (!toSelect.getChoices().isEmpty()) {
-//			// Yes, user must choose
-//			List<Choice> options = toSelect.getChoices();
-//			logger.log(Level.DEBUG, "called getChoicesToDecide returns {0} choices", options.size());
-//			Platform.runLater( () -> {
-//				Decision[] decisions = selectorDialog.apply(toSelect, options);
-//				if (decisions != null) {
-//					for (Decision dec : decisions) {
-//						logger.log(Level.WARNING, "Add decision", dec);
-//						ret.addDecision(dec);
-//					}
-//				}
-//				charGen.getModel().setSurgeCollective(ret);
-//				charGen.runProcessors();
-//			});
-//		} else {
-//			charGen.getModel().setSurgeCollective(ret);
-//			charGen.runProcessors();
-//		}
+		Choice choice = Shadowrun6Core.getItem(SR6Quality.class, "shifter").getChoices().get(0);
+		QualityValue shifter = charGen.getModel().getQuality("shifter");
+		shifter.removeDecision(choice.getUUID());
+		shifter.addDecision(new Decision(choice.getUUID(), toSelect.getId()));
+		
+		charGen.runProcessors();
     }
 
 }

@@ -10,11 +10,15 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import de.rpgframework.classification.Gender;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetaTypeOption;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.SR6Quality;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 
@@ -156,10 +160,25 @@ public abstract class CommonMetatypeGenerator extends ControllerImpl<SR6MetaType
 	public boolean selectBodyType(BodyType value) {
 		logger.log(Level.DEBUG, "ENTER selectBodyType("+value+")");
 		try {
-			logger.log(Level.INFO, "select body type {0}",value);
-			getModel().setBodytype(value);
+			if (value!=getModel().getBodytype()) {
+				logger.log(Level.INFO, "select body type {0}",value);
+				getModel().setBodytype(value);
+				QualityValue shifter = getModel().getQuality("shifter");
+				if (shifter!=null)
+					getModel().removeQuality(shifter);
 
-			parent.runProcessors();
+				switch (value) {
+				case SHAPESHIFTER:
+					SR6Quality shifterDef = Shadowrun6Core.getItem(SR6Quality.class, "shifter");
+					shifter = new QualityValue(shifterDef, 0);
+					Decision fins = new Decision(shifterDef.getChoices().get(0), "fins");
+					shifter.addDecision(fins);
+					getModel().addQuality(shifter);
+					break;
+				}
+
+				parent.runProcessors();
+			}
 			return true;
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE selectBodyType("+value+")");

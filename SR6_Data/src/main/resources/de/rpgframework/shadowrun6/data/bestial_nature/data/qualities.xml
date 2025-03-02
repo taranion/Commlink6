@@ -14,14 +14,14 @@
                  <valuereq type="ATTRIBUTE" ref="STRENGTH" value="3" />
 				  </requires>
 				  <modifications>
-                  <itemmod type="CRITTER_POWER" ref="natural_weapon"/>
-                  <itemmod type="QUALITY" ref="environmental_adaption"/>
+                  <itemmod type="CRITTER_POWER" ref="natural_weapon" applyTo="ANIMAL"/>
+                  <itemmod type="QUALITY" ref="environmental_adaption" applyTo="ANIMAL"/>
 					</modifications>
 				</subOption>
             <subOption id="scaly" cost="0">
               <modifications>
                   <itemmod type="CRITTER_POWER" ref="natural_weapon"/>
-                  <itemmod type="QUALITY" ref="environmental_adaption"/>
+                  <itemmod type="QUALITY" ref="environmental_adaption" applyTo="ANIMAL"/>
                </modifications>
             </subOption>
             <subOption id="feathery" cost="3">
@@ -36,14 +36,14 @@
             <subOption id="fins" cost="0">
               <modifications>
                   <itemmod type="CRITTER_POWER" ref="natural_weapon"/>
-                  <itemmod type="QUALITY" ref="environmental_adaption"/>
+                  <itemmod type="QUALITY" ref="environmental_adaption" applyTo="ANIMAL"/>
                </modifications>
             </subOption>
 			</choice>
 		</choices>
 		<modifications>
          <itemmod type="CRITTER_POWER" ref="dual_natured"/>
-         <itemmod type="QUALITY" ref="supernatural_recovery"/>
+         <itemmod type="QUALITY" ref="supernatural_recovery" applyTo="ANIMAL"/>
          <itemmod type="QUALITY" ref="shift"/>
                  <itemmod type="QUALITY" ref="allergy">
                      <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="uncommon"/>

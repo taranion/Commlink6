@@ -35,6 +35,7 @@ import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Movement;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
@@ -467,7 +468,10 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 				logger.log(Level.INFO, "Add decision {0} to quality {1}", dec, item);
 			}
 
-			model.addQuality(value);
+			if (item.getType()==QualityType.SHIFTER) {
+				model.addShifterAuto(value);
+			} else
+				model.addQuality(value);
 			logger.log(Level.INFO, "Add quality {0} to character", item);
 		}
 		// Mark as auto-added
