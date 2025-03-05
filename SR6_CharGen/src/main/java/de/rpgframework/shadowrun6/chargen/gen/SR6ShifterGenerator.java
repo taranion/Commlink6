@@ -228,4 +228,16 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 		return null;
 	}
 
+	@Override
+	public RecommendationState getRecommendationState(Quality value) {
+		// TODO Auto-generated method stub
+		return RecommendationState.NEUTRAL;
+	}
+
+	@Override
+	public RecommendationState getRecommendationState(QualityValue value) {
+		// TODO Auto-generated method stub
+		return RecommendationState.NEUTRAL;
+	}
+
 }
