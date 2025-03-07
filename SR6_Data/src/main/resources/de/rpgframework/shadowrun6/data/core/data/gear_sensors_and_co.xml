@@ -24,7 +24,7 @@
 			</choices>
 			<attrdef id="PRICE" value="$RATING*50"/>
 			<modifications>
-				<valmod type="HOOK" ref="IMAGING" value="$RATING"/>
+				<valmod type="HOOK" ref="OPTICAL" value="$RATING"/>
 			</modifications>
 		</variant>
 		<variant id="optical">
@@ -376,9 +376,14 @@
   		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
 		</choices>
-		<usage mode="EMBEDDED" slot="SENSOR_HOUSING" value="$RATING"/>
-		<usage mode="EMBEDDED" slot="OPTICAL" value="$RATING"/>
-  		<attrdef id="MAX_SENSOR_RATING" value="$RATING"/>
+		<usage mode="EMBEDDED" slot="SENSOR_HOUSING" value="1"/>
+		<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
+	  	<usage mode="EMBEDDED" slot="AUDIO" value="1"/>
+  		<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="1"/>
+        <usage mode="EMBEDDED" slot="CYBEREYE_IMPLANT" value="1"/>
+        <usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="1"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="1"/>
+	  <attrdef id="MAX_SENSOR_RATING" value="$RATING"/>
   		<attrdef id="PRICE" value="$RATING*100"/>
       <modifications>
 			<valmod type="HOOK" ref="SENSOR_FUNCTION" value="1"/>
