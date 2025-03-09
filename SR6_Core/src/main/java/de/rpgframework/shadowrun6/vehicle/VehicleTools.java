@@ -56,7 +56,7 @@ public class VehicleTools {
 		SkillSpecialization<SR6Skill> spec = getSpecializationForVehicle(vehicle.getResolved());
 		String specS = (spec!=null)?spec.getId():null;
 
-		List<PoolCalculation<Integer>> driverPilotPool = Shadowrun6Tools.getSkillPool(model, pilotSkill,(ShadowrunAttribute)null, specS).getCalculation(ValueType.ARTIFICIAL);
+		List<PoolCalculation<Integer>> driverPilotPool = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, pilotSkill, specS).getCalculation(ValueType.NATURAL);
 		if (mode==VehicleOperationMode.AUTONOMOUS) {
 			CarriedItem<ItemTemplate> autosoft = vehicle.getEmbeddedItem("maneuvering");
 			driverPilotPool.clear();
@@ -98,32 +98,31 @@ public class VehicleTools {
 			int ar = (int)arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
 			ret.setAttackRating(ar);
 			ret.setAttackRating(arPool);
-			logger.log(Level.INFO,"Unarmed: "+vehicle.getNameWithoutRating()+": AR   driven "+arPool);
-//			 The attempt to hit another being or vehicle is an Opposed test
-//			 — Piloting + Reaction vs.
+			// logger.log(Level.INFO,"Unarmed: "+vehicle.getNameWithoutRating()+": AR   driven "+arPool);
+			// The attempt to hit another being or vehicle is an Opposed test
+			// — Piloting + Reaction vs. opponent
 			List<PoolCalculation<Integer>> attPool = new ArrayList<>(driverPilotPool);
-			//attPool.addAll(Shadowrun6Tools.getAttributePoolCalculation(model, ShadowrunAttribute.REACTION));
-//			//logger.debug("Unarmed(MANUAL  ): "+vehicle.getName()+"::  "+attPool);
+			attPool.addAll(model.getAttribute(ShadowrunAttribute.REACTION).getPool().getCalculation(ValueType.NATURAL));
+			//logger.debug("Unarmed(MANUAL  ): "+vehicle.getName()+"::  "+attPool);
 			int dice = (int)attPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
 			ret.setPool(dice);
 			ret.setPool(attPool);
 			break;
 		case JUMPED_IN:
 			// The Attack Rating of a vehicle is Piloting of the driver + Sensor.
-			// Assume rating of ctrlRig is added
 			if (ctrlRig==null)
 				return null;
 			arPool = new ArrayList<>(driverPilotPool);
 			arPool.add(new PoolCalculation(sensor, SR6ItemAttribute.SENSORS.getName()));
-			arPool.add(new PoolCalculation(rigRating, ctrlRig.getNameWithRating()));
+			// arPool.add(new PoolCalculation(rigRating, ctrlRig.getNameWithRating())); rating of rig is not added to AR
 			ar = (int)arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
 			ret.setAttackRating(ar);
 			ret.setAttackRating(arPool);
-//			logger.info("Unarmed: "+vehicle.getName()+": Rigged "+arPool);
+			// logger.info("Unarmed: "+vehicle.getName()+": Rigged "+arPool);
 			// The attempt to hit another being or vehicle is an Opposed test
-			// — Piloting + Reaction vs.
+			// — Piloting + Intuition vs. opponent
 			attPool = new ArrayList<>(driverPilotPool);
-			attPool.addAll(model.getAttribute(ShadowrunAttribute.INTUITION).getPool().getCalculation(ValueType.AUGMENTED));
+			attPool.addAll(model.getAttribute(ShadowrunAttribute.INTUITION).getPool().getCalculation(ValueType.NATURAL));
 			if (simSenseOverdrive!=null) {
 				int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
 				int add  = Math.min(maxAdd, simSenseOverdrive.getDistributed());
@@ -173,7 +172,7 @@ public class VehicleTools {
 		return ret;
 	}
 
-//----------Get ram attack pools -----------------------------------------------
+//----------Create list of ram attack pools -----------------------------------------------
 	public static List<VehicleUnarmedAttack> getVehicleRamming(Shadowrun6Character model, CarriedItem vehicle) {
 		List<VehicleUnarmedAttack> list = new ArrayList<>();
 		list.add(getVehicleUnarmed(model, vehicle, VehicleOperationMode.DRIVING));
