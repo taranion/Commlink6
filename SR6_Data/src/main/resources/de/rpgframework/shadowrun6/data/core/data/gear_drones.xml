@@ -60,7 +60,7 @@
 	<item avail="2" price="4500" id="aztechnology_crawler" type="DRONE_SMALL" subtype="GROUND">
 		<vehicle han="3/4" acc="8" spdi="10" tspd="30" bod="6" arm="2" pil="2" sen="2" />
 	</item>
-   <item avail="4L" price="290" id="cyberspace_designs_quadrotor_crossbow" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+   <item avail="4L" price="290" id="cyberspace_designs_quadrotor_crossbow" type="WEAPON_RANGED" subtype="CROSSBOWS">
    	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/>
       <requires>
          <datareq type="GEAR" ref="cyberspace_designs_quadrotor" apply="DATA_ITEM"/>
