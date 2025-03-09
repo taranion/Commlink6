@@ -213,16 +213,21 @@ public class VehicleTools {
 		return list;
 	}
 
-//----------Get weapon pools ---------------------------------------------------
+//--------------------------------------------------------------------
 		/**
 		 * Get the dice pools for using the weapon in a drone
 		 * Rigged = Riggers skill with replaced physical attribute plus implanted
-		 *          ctrlRig rating
-		 * RCC    =
+		 *          simrig rating
+		 * RCC    = Autosoft + Sensor
 		 */
+
+		public static DronePool getDroneWeaponPool(Shadowrun6Character model, CarriedItem drone,  CarriedItem weapon) {
+			return getDroneWeaponPool(model, drone, Shadowrun6Tools.getBestRCC(model), weapon);
+		}
+
 		public static DronePool getDroneWeaponPool(Shadowrun6Character model, CarriedItem<ItemTemplate> drone, CarriedItem<ItemTemplate> rcc, CarriedItem<ItemTemplate> weapon) {
 			// Collect some necessary data
-			logger.log(Level.WARNING, "TODO: getDroneWeaponPool not implemented yet");
+			// logger.log(Level.WARNING, "TODO: getDroneWeaponPool not implemented yet");
 			CarriedItem<ItemTemplate> rig = model.getCarriedItem("control_rig");
 			int rigRating = (rig==null)?0:rig.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
 
@@ -235,6 +240,7 @@ public class VehicleTools {
 				pool.rigged = 0;
 			} else {
 				pool.rigged = Shadowrun6Tools.getSkillPool(model, skill, "gunnery").getValue(ValueType.NATURAL);
+				// if not Germany, add rig rating
 				if (Locale.GERMAN != Locale.getDefault()) {
 					int modifier = (model.getSkillValue(skill)!=null)?model.getSkillValue(skill).getModifier():0;
 					int maxBonusRemain = (4-modifier);
@@ -256,12 +262,12 @@ public class VehicleTools {
 				pool.viaRCC = 0;
 			} else {
 				// Search matching autosoft
-	//			boolean anyTargeting = false;
+				// boolean anyTargeting = false;
 				CarriedItem<ItemTemplate> autosoft = null;
 				for (CarriedItem<ItemTemplate> item : rcc.getEffectiveAccessories()) {
 					if (!item.getKey().equals("targeting"))
 						continue;
-	//				anyTargeting = true;
+				// anyTargeting = true;
 					UUID weaponDec = UUID.fromString("2baf4c6e-417b-4d1a-943c-edfa816d50bf");
 					if (item.getDecision(weaponDec)==null) {
 						logger.log(Level.WARNING,"Weapon model of targeting autosoft not defined in drone "+drone);
@@ -279,7 +285,7 @@ public class VehicleTools {
 			}
 			// Autonomous
 			// Search matching autosoft
-	//		boolean anyTargeting = false;
+			// boolean anyTargeting = false;
 			CarriedItem<ItemTemplate> autosoft = null;
 			ItemType weaponType = weapon.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
 			switch (weaponType) {
@@ -287,7 +293,7 @@ public class VehicleTools {
 				for (CarriedItem<ItemTemplate> item : drone.getEffectiveAccessories()) {
 					if (!item.getKey().equals("soft_close_combat"))
 						continue;
-					// anyTargeting = true;
+				// anyTargeting = true;
 					UUID weaponDec = UUID.fromString("2baf4c6e-417b-4d1a-943c-edfa816d50bf");
 					if (item.getDecision(weaponDec)==null) {
 						logger.log(Level.WARNING,"Weapon model of soft_close_combat autosoft not defined in drone " + drone);
@@ -299,7 +305,7 @@ public class VehicleTools {
 				for (CarriedItem<ItemTemplate> item : drone.getEffectiveAccessories()) {
 					if (!item.getKey().equals("targeting"))
 						continue;
-					// anyTargeting = true;
+				// anyTargeting = true;
 					UUID weaponDec = UUID.fromString("2baf4c6e-417b-4d1a-943c-edfa816d50bf");
 					if (item.getDecision(weaponDec)==null) {
 						logger.log(Level.WARNING, "Weapon model of targeting autosoft not defined in drone " + drone);
