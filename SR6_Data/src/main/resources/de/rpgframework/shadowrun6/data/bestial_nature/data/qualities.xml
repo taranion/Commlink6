@@ -42,7 +42,7 @@
 			</choice>
 		</choices>
 		<modifications>
-         <itemmod type="CRITTER_POWER" ref="dual_natured"/>
+         <itemmod type="QUALITY" ref="shifter_dual_natured" />
          <itemmod type="QUALITY" ref="supernatural_recovery" applyTo="ANIMAL"/>
          <itemmod type="QUALITY" ref="shift"/>
                  <itemmod type="QUALITY" ref="allergy">
@@ -51,6 +51,85 @@
                      <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="i18n.gold"/>
                   </itemmod>
 		</modifications>
+   </quality>
+   <quality id="shifter_armor" karma="2" pos="true" type="SHIFTER" max="4">
+      <modifications>
+         <!-- Animal form gains the Armor power -->
+         <valmod type="CRITTER_POWER" ref="armor" value="1" apply="ANIMAL"/>
+      </modifications>
+   </quality>
+   <quality id="built_tough"          karma="4" pos="true" type="SHIFTER" max="4">
+     <modifications>
+       <valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1" set="NATURAL" apply="CHARACTER" />
+       <valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1" set="NATURAL" apply="ANIMAL" />
+     </modifications>
+   </quality>
+   <quality id="catlike"              karma="12" pos="true" type="SHIFTER" >
+     <modifications>
+       <checkmod ref="athletics" type="SKILL" what="EDGE" value="1" apply="CHARACTER"/>
+       <checkmod ref="athletics" type="SKILL" what="EDGE" value="1" apply="ANIMAL"/>
+     </modifications>
+   </quality>
+   <quality id="constriction"         karma="6" pos="true" type="SHIFTER" >
+      <requires>
+         <datareq  type="QUALITY" ref="SHIFTER" variant="scaly"/>
+      </requires>
+     <modifications>
+     </modifications>
+   </quality>
+   <quality id="shifter_dual_natured" karma="0" pos="true" type="SHIFTER" selectable="false">
+      <requires>
+         <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6" />
+      </requires>
+     <modifications>
+       <itemmod type="CRITTER_POWER" ref="dual_natured" apply="ANIMAL" />
+       <itemmod type="CRITTER_POWER" ref="dual_natured" apply="CHARACTER" />
+       <allowmod type="SKILL" ref="astral" />
+     </modifications>
+   </quality>
+   <quality id="enhanced_senses_hearing"  karma="4" pos="true" type="SHIFTER" >
+     <modifications>
+       <checkmod ref="perception" type="SKILL" what="EDGE" value="1" apply="CHARACTER"/>
+     </modifications>
+   </quality>
+   <quality id="enhanced_senses_taste"  karma="4" pos="true" type="SHIFTER" >
+     <modifications>
+       <checkmod ref="perception" type="SKILL" what="EDGE" value="1" apply="CHARACTER"/>
+     </modifications>
+   </quality>
+   <quality id="enhanced_senses_visual_acuity"  karma="4" pos="true" type="SHIFTER" >
+     <modifications>
+       <checkmod ref="perception" type="SKILL" what="EDGE" value="1" apply="CHARACTER"/>
+     </modifications>
+   </quality>
+   <quality id="enhanced_senses_low_light"  karma="6" pos="true" type="SHIFTER" >
+     <modifications>
+         <itemmod type="QUALITY" ref="low-light_vision" applyTo="CHARACTER"/>
+         <itemmod type="QUALITY" ref="low-light_vision" applyTo="ANIMAL"/>
+     </modifications>
+   </quality>
+   <quality id="enhanced_senses_sonar"  karma="4" pos="true" type="SHIFTER" >
+      <requires>
+         <datareq  type="QUALITY" ref="SHIFTER" variant="fins"/>
+      </requires>
+     <modifications>
+     </modifications>
+   </quality>
+   <quality id="enhanced_senses_termographic"  karma="6" pos="true" type="SHIFTER" >
+     <modifications>
+         <itemmod type="QUALITY" ref="thermographic_vision" applyTo="CHARACTER"/>
+         <itemmod type="QUALITY" ref="thermographic_vision" applyTo="ANIMAL"/>
+     </modifications>
+   </quality>
+   <quality id="enhanced_senses_vomeronasal"  karma="6" pos="true" type="SHIFTER" >
+     <modifications>
+       <checkmod ref="perception" type="SKILL" what="EDGE" value="1" apply="CHARACTER"/>
+       <checkmod ref="influence" type="SKILL" what="EDGE" value="1" apply="CHARACTER"/>
+     </modifications>
+   </quality>
+   <quality id="enhanced_movement_speed"      karma="1" pos="true" type="SHIFTER" max="4">
+     <modifications>
+     </modifications>
    </quality>
    <quality id="environmental_adaption" karma="4" pos="true" type="SHIFTER">
       <choices>
@@ -86,20 +165,109 @@
        </choice>
      </choices>
    </quality>
-   <quality id="shifter_armor" karma="2" pos="true" type="SHIFTER" max="4">
-      <modifications>
-         <!-- Animal form gains the Armor power -->
-         <valmod type="CRITTER_POWER" ref="armor" value="1" apply="ANIMAL"/>
-      </modifications>
+   <quality id="shifter_long_reach"  karma="12" pos="true" type="SHIFTER" >
+     <modifications>
+         <itemmod type="QUALITY" ref="long_reach" applyTo="CHARACTER"/>
+         <itemmod type="QUALITY" ref="long_reach" applyTo="ANIMAL"/>
+     </modifications>
+   </quality>
+   <quality id="shifter_natural_venom" karma="9" pos="true" type="SHIFTER" cat="BENEFICIAL_SECRETIONS" >
+     <choices>
+       <choice type="SUBSELECT" ref="vector" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5" count="4">
+         <subOption id="contact" cost="2"/>
+         <subOption id="exhaled" cost="2"/>
+         <subOption id="injected" cost="0"/>
+         <subOption id="spat" cost="4"/>
+       </choice>
+       <choice type="SUBSELECT" ref="speed" uuid="f9dd21db-30a6-422a-81dc-3c547ec9ccd3" >
+         <subOption id="turn" cost="0"/>
+         <subOption id="immediate" cost="2"/>
+       </choice>
+       <choice type="SUBSELECT" ref="power" uuid="86b773bc-5c9d-4c7d-baec-75b0a651000d" >
+         <subOption id="2" cost="0"/>
+         <subOption id="4" cost="2"/>
+         <subOption id="6" cost="4"/>
+         <subOption id="8" cost="6"/>
+       </choice>
+       <choice type="SUBSELECT" ref="effect" uuid="e52e835f-00ff-49f1-a124-31124b42c5a3" >
+         <subOption id="stun"     cost="0"/>
+         <subOption id="physical" cost="2"/>
+       </choice>
+     </choices>
+     <modifications>
+      <!-- CLUSTERFUCK - need a subselection of factors that must be added -->
+     </modifications>
    </quality>
    <quality id="supernatural_recovery" karma="0" pos="true" type="SHIFTER" selectable="false">
       <requires>
          <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6" />
       </requires>
    </quality>
+   <quality id="sharpened_natural_weapon"  karma="8" pos="true" type="SHIFTER" >
+     <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,,," applyTo="ANIMAL"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" applyTo="ANIMAL"/>
+     </modifications>
+   </quality>
    <quality id="shift" karma="0" pos="true" type="SHIFTER" selectable="false">
       <requires>
          <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6" />
       </requires>
+   </quality>
+   <quality id="shifter_grace"  karma="5" pos="true" type="SHIFTER" max="4">
+     <modifications>
+         <valmod type="ATTRIBUTE" ref="AGILITY" value="1" applyTo="ANIMAL"/>
+     </modifications>
+   </quality>
+   <quality id="shifter_might"  karma="5" pos="true" type="SHIFTER" max="4">
+     <modifications>
+         <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" applyTo="ANIMAL"/>
+     </modifications>
+   </quality>
+   <quality id="shifter_reflexes"  karma="5" pos="true" type="SHIFTER" max="4">
+     <modifications>
+         <valmod type="ATTRIBUTE" ref="REACTION" value="1" applyTo="ANIMAL"/>
+     </modifications>
+   </quality>
+   
+   <!-- Negative -->
+   <quality id="apex_predator" karma="12" pos="false" type="SHIFTER" >
+      <requires>
+         <datareq type="QUALITY" ref="pack_animal" neg="true" />
+      </requires>
+   </quality>
+   <quality id="cold_blooded" karma="5" pos="false" type="SHIFTER" >
+      <requires>
+      </requires>
+   </quality>
+   <quality id="pack_animal" karma="7" pos="false" type="SHIFTER" >
+      <requires>
+         <datareq type="QUALITY" ref="apex_predator" neg="true" />
+      </requires>
+   </quality>
+   <quality id="shifter_barbarian" karma="10" pos="false" type="SHIFTER" >
+      <modifications>
+       <checkmod type="SKILL" ref="electronics"  value="1" what="USAGE"/>
+       <checkmod type="SKILL" ref="cracking"     value="1" what="USAGE"/>
+       <checkmod type="SKILL" ref="engineering"  value="1" what="USAGE"/>
+      </modifications>
+   </quality>
+   <quality id="shifter_modesty" karma="8" pos="false" type="SHIFTER" >
+      <modifications>
+       <relevancemod type="SKILL" topic="SOCIAL"/>
+      </modifications>
+   </quality>
+   <quality id="shifter_naivety" karma="10" pos="false" type="SHIFTER" >
+      <modifications>
+       <relevancemod type="SKILL" topic="SOCIAL"/>
+      </modifications>
+   </quality>
+   <quality id="shifter_preference" karma="12" pos="false" type="SHIFTER" >
+      <modifications>
+      </modifications>
+   </quality>
+   <quality id="shifter_tell" karma="10" pos="false" type="SHIFTER" >
+      <modifications>
+      </modifications>
    </quality>
 </qualities>
