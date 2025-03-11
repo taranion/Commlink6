@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.items;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.List;
 
 import org.prelle.simplepersist.Attribute;
 
@@ -76,7 +77,7 @@ public class ArmorData implements IGearTypeData {
 		copyTo.setAttribute(SR6ItemAttribute.DEFENSE_SOCIAL, social);
 		copyTo.setAttribute(SR6ItemAttribute.DAMAGE_REDUCTION, damageReduction);
 		if (addsToMain) {
-			copyTo.getFlags().add(SR6ItemFlag.CUMULATIVE.name());
+			copyTo.addFlags(List.of(SR6ItemFlag.CUMULATIVE.name()));
 		}
 	}
 
