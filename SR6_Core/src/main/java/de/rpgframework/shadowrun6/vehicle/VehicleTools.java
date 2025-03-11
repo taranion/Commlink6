@@ -68,16 +68,15 @@ public class VehicleTools {
 			if (rcc==null) return null;
 			CarriedItem<ItemTemplate> autosoftRcc = rcc.getEmbeddedItem("maneuvering");
 			CarriedItem<ItemTemplate> autosoftDrone = vehicle.getEmbeddedItem("maneuvering");
+			CarriedItem<ItemTemplate> autosoft = autosoftRcc;
+			if (autosoftRcc==null || (autosoftDrone!=null && (ItemUtil.getRating(autosoftDrone) > ItemUtil.getRating(autosoftRcc))))
+				autosoft = autosoftDrone;
 			driverPilotPool.clear();
-			if (autosoftRcc == null && autosoftDrone==null)
+			if (autosoft == null)
 				driverPilotPool.add(new PoolCalculation<Integer>(-1, Shadowrun6Core.getItem(ItemTemplate.class,"maneuvering").getName()));
-			if (autosoftDrone!=null) 
-				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoftDrone), autosoftDrone.getNameWithRating()));
-			if (autosoftRcc!=null) 
-				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoftRcc), autosoftRcc.getNameWithRating()));
-			if (autosoftRcc!=null && autosoftDrone!=null && ItemUtil.getRating( autosoftDrone )>ItemUtil.getRating( autosoftRcc )) 
-				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoftRcc), autosoftDrone.getNameWithRating()));	
-			}
+			else
+				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoft), autosoft.getNameWithRating()));
+		}
 		
 		int sensor = vehicle.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue();
 		int body   = vehicle.getAsValue(SR6ItemAttribute.BODY).getModifiedValue();
