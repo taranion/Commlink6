@@ -40,7 +40,7 @@ public class DetermineStandardEssenceStep implements CarriedItemProcessor {
 	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model, List<Modification> unprocessed) {
 			ItemTemplate templ = (ItemTemplate) model.getResolved();
 			SR6PieceOfGearVariant variant = (SR6PieceOfGearVariant) model.getVariant();
-			if (templ.hasFlag(ItemTemplate.FLAG_AUGMENTATION) || (variant!=null && variant.hasFlag(ItemTemplate.FLAG_AUGMENTATION))) {
+			if (templ.hasFlag(SR6ItemFlag.AUGMENTATION.name()) || (variant!=null && variant.hasFlag(SR6ItemFlag.AUGMENTATION.name()))) {
 				float essence = 0.0f;
 				// Ask for regular essence definition first
 				ItemAttributeDefinition iDef = templ.getAttribute(SR6ItemAttribute.ESSENCECOST);

@@ -49,8 +49,6 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 @DataItemTypeKey(id = "item")
 public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6PieceOfGearVariant,SR6AlternateUsage> implements IReferenceResolver {
 
-	public final static String FLAG_AUGMENTATION = "AUGMENTATION";
-	public final static String FLAG_MATRIX_DEVICE = "MATRIX_DEVICE";
 	private static String FLAG_NOWIFI = "NOWIFI";
 	public final static UUID UUID_AUGMENTATION_QUALITY = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170c");
 	public final static UUID UUID_RATING = UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d");
@@ -306,7 +304,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 
 
 		// If it has an AUGMENTATION flag, add that decision
-		if (flags.contains(ItemTemplate.FLAG_AUGMENTATION) && this.getChoice(ItemTemplate.UUID_AUGMENTATION_QUALITY)==null) {
+		if (flags.contains(SR6ItemFlag.AUGMENTATION.name()) && this.getChoice(ItemTemplate.UUID_AUGMENTATION_QUALITY)==null) {
 			addChoice(CHOICE_AUGMENTATION_QUALITY);
 		}
 		if (variants!=null) {
@@ -321,7 +319,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 					}
 				}
 
-				if (variant.hasFlag(FLAG_AUGMENTATION) && variant.getChoice(UUID_AUGMENTATION_QUALITY)==null) {
+				if (variant.hasFlag(SR6ItemFlag.AUGMENTATION.name()) && variant.getChoice(UUID_AUGMENTATION_QUALITY)==null) {
 					variant.addChoice(CHOICE_AUGMENTATION_QUALITY);
 				}
 			}
@@ -710,14 +708,14 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 	//-------------------------------------------------------------------
 	public boolean isAugmentation() {
 		ItemAttributeDefinition attr = getAttribute(SR6ItemAttribute.ITEMTYPE);
-		return hasFlag(FLAG_AUGMENTATION) || attr.getValue()==ItemType.CYBERWARE || attr.getValue()==ItemType.BIOWARE;
+		return hasFlag(SR6ItemFlag.AUGMENTATION.name()) || attr.getValue()==ItemType.CYBERWARE || attr.getValue()==ItemType.BIOWARE;
 	}
 
 	//-------------------------------------------------------------------
 	public boolean isMatrixDevice() {
 		ItemAttributeDefinition attr = getAttribute(SR6ItemAttribute.ITEMTYPE);
 		ItemSubType sub = getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
-		return hasFlag(FLAG_MATRIX_DEVICE) || attr.getValue()==ItemType.ELECTRONICS &&
+		return hasFlag(SR6ItemFlag.MATRIX_DEVICE.name()) || attr.getValue()==ItemType.ELECTRONICS &&
 				( sub==ItemSubType.COMMLINK ||  sub==ItemSubType.CYBERDECK ||  sub==ItemSubType.DATATERM ||  sub==ItemSubType.CYBERTERM ||  sub==ItemSubType.RIGGER_CONSOLE  ||  sub==ItemSubType.TAC_NET );
 	}
 

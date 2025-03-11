@@ -1,19 +1,16 @@
 package de.rpgframework.shadowrun6.items;
 
-import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.prelle.simplepersist.Attribute;
 import org.prelle.simplepersist.ElementList;
 import org.prelle.simplepersist.ElementListUnion;
-import org.prelle.simplepersist.IgnoreMissingAttributes;
 
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.DataItemTypeKey;
 import de.rpgframework.genericrpg.items.IGearTypeData;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
-import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -81,7 +78,7 @@ public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	public void validate() {
 		super.validate();
 		// If it has an AUGMENTATION flag, add that decision
-		if (flags.contains(ItemTemplate.FLAG_AUGMENTATION) && this.getChoice(ItemTemplate.UUID_AUGMENTATION_QUALITY)==null) {
+		if (flags.contains(SR6ItemFlag.AUGMENTATION.name()) && this.getChoice(ItemTemplate.UUID_AUGMENTATION_QUALITY)==null) {
 			Choice choice = new Choice(ItemTemplate.UUID_AUGMENTATION_QUALITY, ShadowrunReference.AUGMENTATION_QUALITY);
 //			choice.setChoiceOptions("STANDARD,ALPHA,BETA,DELTA,USED");
 			choices.add(choice);

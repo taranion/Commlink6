@@ -1396,7 +1396,7 @@ public class Shadowrun6Tools {
 	public static List<CarriedItem<ItemTemplate>> getMatrixItems(Shadowrun6Character model) {
 		return model.getCarriedItems()
 				.stream()
-				.filter(ci -> ci.hasFlag(ItemTemplate.FLAG_MATRIX_DEVICE))
+				.filter(ci -> ci.hasFlag(SR6ItemFlag.MATRIX_DEVICE.name()))
 				.collect(Collectors.toList());
 
 	}
