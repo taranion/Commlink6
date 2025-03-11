@@ -66,7 +66,11 @@ public class VehicleTools {
 				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoft), autosoft.getNameWithRating()));
 		} else if (mode==VehicleOperationMode.RCC) {
 			if (rcc==null) return null;
-			CarriedItem<ItemTemplate> autosoft = rcc.getEmbeddedItem("maneuvering");
+			CarriedItem<ItemTemplate> autosoftRcc = rcc.getEmbeddedItem("maneuvering");
+			CarriedItem<ItemTemplate> autosoftDrone = vehicle.getEmbeddedItem("maneuvering");
+			CarriedItem<ItemTemplate> autosoft = autosoftRcc;
+			if (autosoftRcc==null || (autosoftDrone!=null && (ItemUtil.getRating(autosoftDrone) > ItemUtil.getRating(autosoftRcc))))
+				autosoft = autosoftDrone;
 			driverPilotPool.clear();
 			if (autosoft == null)
 				driverPilotPool.add(new PoolCalculation<Integer>(-1, Shadowrun6Core.getItem(ItemTemplate.class,"maneuvering").getName()));
