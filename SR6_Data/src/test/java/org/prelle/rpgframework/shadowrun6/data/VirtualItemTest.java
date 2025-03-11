@@ -21,6 +21,7 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 
 /**
@@ -54,7 +55,7 @@ public class VirtualItemTest {
 		assertEquals(new Availability(2, false), virtual.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue());
 		assertEquals(800, (int)virtual.getAttribute(SR6ItemAttribute.PRICE).getValue());
 		assertEquals(0.1f, (float)virtual.getAttribute(SR6ItemAttribute.ESSENCECOST).getValue(), 0f);
-		assertTrue(virtual.hasFlag(ItemTemplate.FLAG_AUGMENTATION));
+		assertTrue(virtual.hasFlag(SR6ItemFlag.AUGMENTATION.name()));
 
 		// Regular
 		carry = CarryMode.EMBEDDED;
@@ -68,7 +69,7 @@ public class VirtualItemTest {
 		assertEquals(new Availability(1, false), virtual.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue());
 		assertEquals(25, (int)virtual.getAttribute(SR6ItemAttribute.PRICE).getValue());
 		assertNull(virtual.getAttribute(SR6ItemAttribute.ESSENCECOST));
-		assertFalse(virtual.hasFlag(ItemTemplate.FLAG_AUGMENTATION));
+		assertFalse(virtual.hasFlag(SR6ItemFlag.AUGMENTATION.name()));
 	}
 
 	//-------------------------------------------------------------------
@@ -91,7 +92,7 @@ public class VirtualItemTest {
 		assertEquals(new Availability(3, false), virtual.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue());
 		assertEquals(12000, (int)virtual.getAttribute(SR6ItemAttribute.PRICE).getValue());
 		assertEquals(0.45f, (float)virtual.getAttribute(SR6ItemAttribute.ESSENCECOST).getValue(), 0f);
-		assertTrue(virtual.hasFlag(ItemTemplate.FLAG_AUGMENTATION));
+		assertTrue(virtual.hasFlag(SR6ItemFlag.AUGMENTATION.name()));
 	}
 
 	//-------------------------------------------------------------------
@@ -115,7 +116,7 @@ public class VirtualItemTest {
 		assertEquals(new Availability(3, false), virtual.getAttribute(SR6ItemAttribute.AVAILABILITY).getValue());
 		assertEquals(7500, (int)virtual.getAttribute(SR6ItemAttribute.PRICE).getValue());
 		assertEquals(0.2f, (float)virtual.getAttribute(SR6ItemAttribute.ESSENCECOST).getValue(), 0f);
-		assertTrue(virtual.hasFlag(ItemTemplate.FLAG_AUGMENTATION));
+		assertTrue(virtual.hasFlag(SR6ItemFlag.AUGMENTATION.name()));
 	}
 
 	//-------------------------------------------------------------------

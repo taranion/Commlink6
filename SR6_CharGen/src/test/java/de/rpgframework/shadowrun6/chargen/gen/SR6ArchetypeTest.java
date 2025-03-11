@@ -71,6 +71,7 @@ import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 
 /**
@@ -1109,7 +1110,7 @@ public class SR6ArchetypeTest {
 		// To be sure: try ti find matrix devices
 		List<CarriedItem<ItemTemplate>> matrixDevices = model.getCarriedItems()
 				.stream()
-				.filter(ci -> ci.hasFlag(ItemTemplate.FLAG_MATRIX_DEVICE))
+				.filter(ci -> ci.hasFlag(SR6ItemFlag.MATRIX_DEVICE.name()))
 				.collect(Collectors.toList());
 		matrixDevices.forEach(ci -> System.out.println("SR6ArchetypeTest.test04Decker: Matrix device is "+ci));
 		assertTrue("Cyberjack not detected as matrix device",matrixDevices.contains(jack.get()));

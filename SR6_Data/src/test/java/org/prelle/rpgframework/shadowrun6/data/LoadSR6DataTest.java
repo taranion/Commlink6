@@ -45,6 +45,7 @@ import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6AlternateUsage;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.items.SR6UsageMode;
 import de.rpgframework.shadowrun6.items.WeaponData;
@@ -255,7 +256,7 @@ public class LoadSR6DataTest {
 		Usage usage = item.getUsages().get(0);
 		assertEquals(CarryMode.IMPLANTED, usage.getMode());
 		assertEquals(0.1f, usage.getSize(), 0);
-		assertTrue(item.hasFlag(ItemTemplate.FLAG_AUGMENTATION));
+		assertTrue(item.hasFlag(SR6ItemFlag.AUGMENTATION.name()));
 	}
 
 	//-------------------------------------------------------------------
@@ -276,7 +277,7 @@ public class LoadSR6DataTest {
 		assertEquals(CarryMode.IMPLANTED, usage.getMode());
 		assertFalse(usage.getFormula().isResolved());
 		assertEquals(0.0f, usage.getSize(), 0);
-		assertTrue(item.hasFlag(ItemTemplate.FLAG_AUGMENTATION));
+		assertTrue(item.hasFlag(SR6ItemFlag.AUGMENTATION.name()));
 	}
 
 //	//-------------------------------------------------------------------
