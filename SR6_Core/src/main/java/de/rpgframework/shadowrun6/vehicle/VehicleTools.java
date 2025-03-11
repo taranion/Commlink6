@@ -66,14 +66,19 @@ public class VehicleTools {
 				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoft), autosoft.getNameWithRating()));
 		} else if (mode==VehicleOperationMode.RCC) {
 			if (rcc==null) return null;
-			CarriedItem<ItemTemplate> autosoft = rcc.getEmbeddedItem("maneuvering");
+			CarriedItem<ItemTemplate> autosoftRcc = rcc.getEmbeddedItem("maneuvering");
+			CarriedItem<ItemTemplate> autosoftDrone = vehicle.getEmbeddedItem("maneuvering");
 			driverPilotPool.clear();
-			if (autosoft == null)
+			if (autosoftRcc == null && autosoftDrone==null)
 				driverPilotPool.add(new PoolCalculation<Integer>(-1, Shadowrun6Core.getItem(ItemTemplate.class,"maneuvering").getName()));
-			else
-				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoft), autosoft.getNameWithRating()));
-		}
-
+			if (autosoftDrone!=null) 
+				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoftDrone), autosoftDrone.getNameWithRating()));
+			if (autosoftRcc!=null) 
+				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoftRcc), autosoftRcc.getNameWithRating()));
+			if (autosoftRcc!=null && autosoftDrone!=null && ItemUtil.getRating( autosoftDrone )>ItemUtil.getRating( autosoftRcc )) 
+				driverPilotPool.add(new PoolCalculation<Integer>(ItemUtil.getRating(autosoftRcc), autosoftDrone.getNameWithRating()));	
+			}
+		
 		int sensor = vehicle.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue();
 		int body   = vehicle.getAsValue(SR6ItemAttribute.BODY).getModifiedValue();
 		int armor  = vehicle.getAsValue(SR6ItemAttribute.ARMOR).getModifiedValue();
@@ -141,7 +146,7 @@ public class VehicleTools {
 			ar = (int) arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
 			ret.setAttackRating(ar);
 			ret.setAttackRating(arPool);
-//			logger.info("Unarmed: "+vehicle.getName()+": Autonom "+arPool);
+			//			logger.info("Unarmed: "+vehicle.getName()+": Autonom "+arPool);
 			// The attempt to hit another being or vehicle is an Opposed test
 			// — Piloting + Reaction vs.
 			attPool = new ArrayList<>(driverPilotPool);
@@ -157,7 +162,7 @@ public class VehicleTools {
 			ar = (int) arPool.stream().collect(Collectors.summarizingInt(pc -> pc.value)).getSum();
 			ret.setAttackRating(ar);
 			ret.setAttackRating(arPool);
-//			logger.info("Unarmed: "+vehicle.getName()+": RCC "+arPool);
+			//			logger.info("Unarmed: "+vehicle.getName()+": RCC "+arPool);
 			// The attempt to hit another being or vehicle is an Opposed test
 			// — Piloting + Reaction vs.
 			attPool = new ArrayList<>(driverPilotPool);
@@ -216,8 +221,8 @@ public class VehicleTools {
 //--------------------------------------------------------------------
 		/**
 		 * Get the dice pools for using the weapon in a drone
-		 * Rigged = Riggers skill with replaced physical attribute plus implanted
-		 *          simrig rating
+		 * Rigged = Riggers skill with replaced physical attribute plus implanted 
+		 *          ctrlrig rating
 		 * RCC    = Autosoft + Sensor
 		 */
 
@@ -320,9 +325,11 @@ public class VehicleTools {
 				// If the drone does not have the [Weapon] Targeting autosoft, then use Sensor rating – 1.
 				pool.autonomous = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue()-1;
 			}
-			// German special rules: if the local autosoft is better, the
-			//   rcc controlled drone may use this instead
+			// if the local autosoft is better, the rcc controlled drone may use this instead
 			if (rccAutosoft!=null && autosoft!=null && autosoft.getDecision(ItemTemplate.UUID_RATING).getValueAsInt()>rccAutosoft.getDecision(ItemTemplate.UUID_RATING).getValueAsInt()) {
+				pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + autosoft.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
+			}
+			if (rccAutosoft==null && autosoft!=null) {
 				pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + autosoft.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
 			}
 
@@ -396,17 +403,23 @@ public class VehicleTools {
 					pool.rigged = 0;
 				}
 
-				// Via RCC: Requires evasion autosoft on rcc
+				// Via RCC: Requires autosoft evasion on rcc or drone
 				if (rcc==null) {
 					pool.viaRCC = 0;
-				} else {
-					CarriedItem<ItemTemplate> autosoft = rcc.getEmbeddedItem("evasion");
-					if (autosoft==null)
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue()-1;
-					else
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating( autosoft );
-				}
-
+					} else {
+					CarriedItem<ItemTemplate> autosoftRcc = rcc.getEmbeddedItem("evasion");
+					CarriedItem<ItemTemplate> autosoftDrone = drone.getEmbeddedItem("evasion");
+					if (autosoftRcc==null && autosoftDrone==null) 
+						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue()-1; { 
+						if (autosoftDrone!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating(autosoftDrone);
+						if (autosoftRcc!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating(autosoftRcc);
+						if (autosoftRcc!=null && autosoftDrone!=null && SR6GearTool.getRating( autosoftDrone )>SR6GearTool.getRating( autosoftRcc )) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating( autosoftDrone );						
+						}
+					}
+				
 				// Autonomous
 				CarriedItem<ItemTemplate> autosoft = drone.getEmbeddedItem("evasion");
 				if (autosoft==null)
@@ -436,17 +449,23 @@ public class VehicleTools {
 					pool.rigged = 0;
 				}
 
-				// Via RCC: Requires clearsight autosoft on rcc
+				// Via RCC: Requires autosoft clearsight on rcc or drone
 				if (rcc==null) {
 					pool.viaRCC = 0;
-				} else {
-					autosoft = rcc.getEmbeddedItem("clearsight");
-					if (autosoft==null)
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue()-1;
-					else
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + SR6GearTool.getRating(autosoft);
-				}
-
+					} else {
+					CarriedItem<ItemTemplate> autosoftRcc = rcc.getEmbeddedItem("clearsight");
+					CarriedItem<ItemTemplate> autosoftDrone = drone.getEmbeddedItem("clearsight");
+					if (autosoftRcc==null && autosoftDrone==null) 
+						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue()-1; { 
+						if (autosoftDrone!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + SR6GearTool.getRating(autosoftDrone);
+						if (autosoftRcc!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + SR6GearTool.getRating(autosoftRcc);
+						if (autosoftRcc!=null && autosoftDrone!=null && SR6GearTool.getRating( autosoftDrone )>SR6GearTool.getRating( autosoftRcc )) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + SR6GearTool.getRating( autosoftDrone );						
+						}
+					}
+				
 				// Autonomous
 				autosoft = drone.getEmbeddedItem("clearsight");
 				if (autosoft==null)
@@ -468,17 +487,23 @@ public class VehicleTools {
 					pool.rigged = 0;
 				}
 
-				// Via RCC: Requires electronic warfare autosoft on rcc
+				// Via RCC: Requires autosoft electronic_warfare on rcc or drone
 				if (rcc==null) {
 					pool.viaRCC = 0;
-				} else {
-					autosoft = rcc.getEmbeddedItem("electronic_warfare");
-					if (autosoft==null)
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue()-1;
-					else
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + SR6GearTool.getRating(autosoft);
-				}
-
+					} else {
+					CarriedItem<ItemTemplate> autosoftRcc = rcc.getEmbeddedItem("electronic_warfare");
+					CarriedItem<ItemTemplate> autosoftDrone = drone.getEmbeddedItem("electronic_warfare");
+					if (autosoftRcc==null && autosoftDrone==null) 
+						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue()-1; { 
+						if (autosoftDrone!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + SR6GearTool.getRating(autosoftDrone);
+						if (autosoftRcc!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + SR6GearTool.getRating(autosoftRcc);
+						if (autosoftRcc!=null && autosoftDrone!=null && SR6GearTool.getRating( autosoftDrone )>SR6GearTool.getRating( autosoftRcc )) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.SENSORS).getModifiedValue() + SR6GearTool.getRating( autosoftDrone );						
+						}
+					}
+				
 				// Autonomous
 				autosoft = drone.getEmbeddedItem("electronic_warfare");
 				if (autosoft==null)
@@ -504,16 +529,23 @@ public class VehicleTools {
 					pool.rigged = 0;
 				}
 
-				// Via RCC: Requires stealth autosoft on rcc
+				// Via RCC: Requires autosoft stealth_auto on rcc or drone
 				if (rcc==null) {
 					pool.viaRCC = 0;
-				} else {
-					autosoft = rcc.getEmbeddedItem("stealth_auto");
-					if (autosoft==null)
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue()-1;
-					else
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating(autosoft);
-				}
+					} else {
+					CarriedItem<ItemTemplate> autosoftRcc = rcc.getEmbeddedItem("stealth_auto");
+					CarriedItem<ItemTemplate> autosoftDrone = drone.getEmbeddedItem("stealth_auto");
+					if (autosoftRcc==null && autosoftDrone==null) 
+						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue()-1; { 
+						if (autosoftDrone!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating(autosoftDrone);
+						if (autosoftRcc!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating(autosoftRcc);
+						if (autosoftRcc!=null && autosoftDrone!=null && SR6GearTool.getRating( autosoftDrone )>SR6GearTool.getRating( autosoftRcc )) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating( autosoftDrone );						
+						}
+					}
+
 				// Autonomous
 				autosoft = drone.getEmbeddedItem("stealth_auto");
 				if (autosoft==null)
@@ -540,17 +572,23 @@ public class VehicleTools {
 					pool.rigged = 0;
 				}
 
-				// Via RCC: Requires pilot maneuver on rcc
+				// Via RCC: Requires autosoft maneuvering on rcc or drone
 				if (rcc==null) {
 					pool.viaRCC = 0;
-				} else {
-					autosoft = rcc.getEmbeddedItem("maneuvering");
-					if (autosoft==null)
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue()-1;
-					else
-						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating(autosoft);
-				}
-
+					} else {
+					CarriedItem<ItemTemplate> autosoftRcc = rcc.getEmbeddedItem("maneuvering");
+					CarriedItem<ItemTemplate> autosoftDrone = drone.getEmbeddedItem("maneuvering");
+					if (autosoftRcc==null && autosoftDrone==null) 
+						pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue()-1; { 
+						if (autosoftDrone!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating(autosoftDrone);
+						if (autosoftRcc!=null) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating(autosoftRcc);
+						if (autosoftRcc!=null && autosoftDrone!=null && SR6GearTool.getRating( autosoftDrone )>SR6GearTool.getRating( autosoftRcc )) 
+							pool.viaRCC = drone.getAsValue(SR6ItemAttribute.PILOT).getModifiedValue() + SR6GearTool.getRating( autosoftDrone );						
+						}
+					}
+				
 				// Autonomous
 				autosoft = drone.getEmbeddedItem("maneuvering");
 				if (autosoft==null)
@@ -564,11 +602,11 @@ public class VehicleTools {
 				int armor = drone.getAsValue(SR6ItemAttribute.ARMOR).getModifiedValue();
 
 				// Driven
-				pool.manual = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, pilotSkill, "maneuvering").getValue(ValueType.NATURAL) + armor;
+				pool.manual = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, pilotSkill, specS).getValue(ValueType.NATURAL) + armor;
 
 				// Jumped in
 				if (ctrlRig!=null) {
-					pool.rigged = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, pilotSkill, "maneuvering").getValue(ValueType.NATURAL) + armor;
+					pool.rigged = Shadowrun6Tools.getSkillPoolCalculationWithoutAttribute(model, pilotSkill, specS).getValue(ValueType.NATURAL) + armor;
 					//				Rig rating does not add to DR
 					//					int modifier = (model.getSkillValue(pilotSkill)!=null)?model.getSkillValue(pilotSkill).getModifier():0;
 					//					int cappedRigBonus = Math.min( (4-modifier), rigRating);
@@ -578,16 +616,22 @@ public class VehicleTools {
 					pool.rigged = 0;
 				}
 
-				// Via RCC: Requires electronic warfare autosoft on rcc
+				// Via RCC: Requires autosoft maneuvering on rcc or drone
 				if (rcc==null) {
 					pool.viaRCC = 0;
-				} else {
-					autosoft = rcc.getEmbeddedItem("maneuvering");
-					if (autosoft==null)
-						pool.viaRCC = armor;
-					else
-						pool.viaRCC = armor + SR6GearTool.getRating(autosoft);
-				}
+					} else {
+					CarriedItem<ItemTemplate> autosoftRcc = rcc.getEmbeddedItem("maneuvering");
+					CarriedItem<ItemTemplate> autosoftDrone = drone.getEmbeddedItem("maneuvering");
+					if (autosoftRcc==null && autosoftDrone==null) 
+						pool.viaRCC = armor; else { 
+						if (autosoftDrone!=null) 
+							pool.viaRCC = armor + SR6GearTool.getRating(autosoftDrone);
+						if (autosoftRcc!=null) 
+							pool.viaRCC = armor + SR6GearTool.getRating(autosoftRcc);
+						if (autosoftRcc!=null && autosoftDrone!=null && SR6GearTool.getRating( autosoftDrone )>SR6GearTool.getRating( autosoftRcc )) 
+							pool.viaRCC = armor + SR6GearTool.getRating(autosoftDrone);						
+						}
+					}
 
 				// Autonomous
 				autosoft = drone.getEmbeddedItem("maneuvering");

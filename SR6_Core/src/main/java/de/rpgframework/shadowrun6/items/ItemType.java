@@ -30,7 +30,13 @@ public enum ItemType {
 			ItemSubType.INSTRUMENT_ACCESSORY,
 			ItemSubType.VEHICLE_ACCESSORY
 			),
-	ARMOR(ItemSubType.ARMOR_BODY, ItemSubType.ARMOR_HELMET, ItemSubType.ARMOR_SHIELD),
+	ARMOR(
+			ItemSubType.ARMOR_BODY,
+			ItemSubType.ARMOR_SOCIAL,
+			ItemSubType.ARMOR_CLOTHES,
+			ItemSubType.ARMOR_HELMET,
+			ItemSubType.ARMOR_SHIELD
+			),
 	ARMOR_ADDITION,
 	BIOWARE(
 			ItemSubType.BIOWARE_STANDARD,
