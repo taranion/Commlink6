@@ -12,9 +12,6 @@
 		subtype="ARMOR_BODY">
   		<usage mode="EMBEDDED" slot="ARMOR" value="6"/>
 		<attrdef id="SIZE" value="6" />
-		<requires>
-			<datareq type="GEAR" ref="full_body_armor_with_helmet" apply="DATA_ITEM"/>
-		</requires>
 	</item>
 	<item avail="3" price="250" id="cold_resistance" type="ACCESSORY" subtype="ARMOR_BODY">
 		<choices>

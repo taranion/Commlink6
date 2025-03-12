@@ -644,7 +644,8 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="stun_baton" />
          <itemmod type="GEAR" apply="CHARACTER" ref="katana" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_with_helmet" id="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_helmet" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor" id="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" />
              <embed  type="GEAR" intoId="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" />
              <embed  type="GEAR" intoId="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
@@ -1036,7 +1037,8 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_with_helmet" id="8820f080-b3ab-43e6-90d5-eda0fd55446e" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_helmet" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor" id="8820f080-b3ab-43e6-90d5-eda0fd55446e" />
              <embed  type="GEAR" intoId="8820f080-b3ab-43e6-90d5-eda0fd55446e" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" />
              <embed  type="GEAR" intoId="8820f080-b3ab-43e6-90d5-eda0fd55446e" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
@@ -2206,7 +2208,8 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="stun_baton" />
          <itemmod type="GEAR" apply="CHARACTER" ref="katana" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_with_helmet" id="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_helmet" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor" id="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" />
              <embed  type="GEAR" intoId="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" />
              <embed  type="GEAR" intoId="0eb11eb7-de7b-49aa-ae24-43cc84ee58e8" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
@@ -2575,7 +2578,8 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="helmet" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_with_helmet" id="8820f080-b3ab-43e6-90d5-eda0fd55446e" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor_helmet" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="full_body_armor" id="8820f080-b3ab-43e6-90d5-eda0fd55446e" />
              <embed  type="GEAR" intoId="8820f080-b3ab-43e6-90d5-eda0fd55446e" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" />
              <embed  type="GEAR" intoId="8820f080-b3ab-43e6-90d5-eda0fd55446e" intoType="HOOK" intoRef="ARMOR" ref="cold_resistance">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>

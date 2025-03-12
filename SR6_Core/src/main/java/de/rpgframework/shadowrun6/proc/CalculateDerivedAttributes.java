@@ -24,6 +24,7 @@ import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
@@ -453,22 +454,33 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		logger.log(Level.DEBUG, " Attack Rating Matrix = "+val.getModifiedValue()+ "  /  "+val.getIncomingModifications());
 	}
 
-	//-------------------------------------------------------------------
+	//----------Calculate Defense Rating Physical---------------------------------------------------------
+	// note that this only considers armor from items, not from adept power mystical armor or critter armor
 	private void calculateDefenseRatingPhysical() {
-		Shadowrun6Tools.flagItemWithHighestAttribute(model, SR6ItemAttribute.DEFENSE_PHYSICAL, SR6ItemFlag.PRIMARY, false);
 		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.DEFENSE_RATING_PHYSICAL);
 		val.setDistributed(0);
-		// Power Plays "Charismatic Defense"
+
+		// Base value is body or (in case of quality "Charismatic Defense" from Power Plays) charisma
 		if (model.hasRuleFlag(SR6RuleFlag.CHARISMATIC_DEFENSE)) {
 			addNaturalModifier(val,ShadowrunAttribute.CHARISMA);
 		} else {
 			addNaturalModifier(val,ShadowrunAttribute.BODY);
 		}
 
+		// Find best base armor
+		Shadowrun6Tools.getPrimaryArmor(model);
+		// Find best helmet
+		Shadowrun6Tools.getSecondaryArmor(model, ItemSubType.ARMOR_HELMET);
+		// Find best shield
+		Shadowrun6Tools.getSecondaryArmor(model, ItemSubType.ARMOR_SHIELD);
+		// Find best other cumulative armor
+		Shadowrun6Tools.getSecondaryArmor(model, ItemSubType.ARMOR_BODY); // note that ARMOR_CLOTHES and ARMOR_SOCIAL are not searched for cumulative armor
+		
+		// Add values of armor pieces to get total defense rating
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
 				continue;
-			if (item.hasFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS))
+ 			if (item.hasFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS))
 				continue;
 			addNaturalModifier(val, item, SR6ItemAttribute.DEFENSE_PHYSICAL);
 		}
