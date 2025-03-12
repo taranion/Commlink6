@@ -2383,30 +2383,49 @@ public class Shadowrun6Tools {
 		return best;
 	}
 
-	//---------------------------------------------------------
+	//-----------Get primary armor = has defense_physical and NOT has Cumulative-------------------------------------
 	public static CarriedItem<ItemTemplate> getPrimaryArmor(Shadowrun6Character model) {
 		CarriedItem<ItemTemplate> bestArmor = null;
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
-			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL))
+			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL) || item.hasFlag(SR6ItemFlag.CUMULATIVE))
 				continue;
-			item.removeFlag(SR6ItemFlag.PRIMARY);
+			item.setAutoFlag(SR6ItemFlag.PRIMARY, false);
 			item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
 			// If no previous selection or armor is better, use it
 			if (bestArmor==null || item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()> bestArmor.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue() )
 				bestArmor = item;
-			// Gear pieces that add armor are also allowed
-//			if (item.getItem().getArmorData()!=null && item.getItem().getArmorData().addsToMain())
-//				item.setIgnoredForCalculations(false);
 			logger.log(Level.DEBUG,"*  "+item.getNameWithRating()+" \t"+item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()+": ignored="+item.hasAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS));
 		}
 		if (bestArmor!=null) {
 			bestArmor.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
-			bestArmor.addFlag(SR6ItemFlag.PRIMARY);
+			bestArmor.setAutoFlag(SR6ItemFlag.PRIMARY, true);
 			return bestArmor;
 		}
 		return null;
 	}
 
+	//-----------Get secondary armor = has defense_physical and has Cumulative and is of a given itemSubType-----------------
+	public static CarriedItem<ItemTemplate> getSecondaryArmor(Shadowrun6Character model, ItemSubType subtype) {
+		CarriedItem<ItemTemplate> bestArmor = null;
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL) || !item.hasFlag(SR6ItemFlag.CUMULATIVE))
+				continue;
+			if (!Shadowrun6Tools.isSubtype(item, subtype))
+				continue;
+			item.setAutoFlag(SR6ItemFlag.PRIMARY, false);
+			item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
+			// If no previous selection or armor is better, use it
+			if (bestArmor==null || item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()> bestArmor.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue() )
+				bestArmor = item;
+			logger.log(Level.DEBUG,"*  "+item.getNameWithRating()+" \t"+item.getAsValue(SR6ItemAttribute.DEFENSE_PHYSICAL).getModifiedValue()+": ignored="+item.hasAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS));
+		}
+		if (bestArmor!=null) {
+			bestArmor.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
+			return bestArmor;
+		}
+		return null;
+	}
+	
 	//---------------------------------------------------------
 	public static CarriedItem<ItemTemplate> getPrimaryRangedWeapon(Shadowrun6Character model) {
 		List<CarriedItem<ItemTemplate>> weapons = model.getCarriedItems(ItemType.WEAPON_RANGED, ItemType.WEAPON_FIREARMS, ItemType.WEAPON_FIREARMS);
