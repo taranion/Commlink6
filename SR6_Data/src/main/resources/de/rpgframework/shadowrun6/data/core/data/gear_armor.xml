@@ -69,7 +69,7 @@
 		</modifications>
 	</item>
 	<item id="full_body_armor_helmet" avail="4L" price="500" type="ARMOR" subtype="ARMOR_HELMET">
-		<armor rating="2" social="-4" />
+		<armor rating="2" social="-4"  add="true"/>
 		<modifications>
 			<valmod type="HOOK" ref="HELMET_ACCESSORY" value="6" />
 		</modifications>
