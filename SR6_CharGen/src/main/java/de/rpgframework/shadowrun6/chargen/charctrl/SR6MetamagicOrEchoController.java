@@ -226,7 +226,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			if (value.getType()==Type.NEUROMORPHISM && !parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_NEUROMORPHISM)) {
 				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
 			}
-			if (value.getType()!=Type.TRANSHUMANISM && !parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_ALLOW_INITIATION)) {
+			if (value.getType()!=Type.METAMAGIC && !parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_ALLOW_INITIATION)) {
 				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
 			}
 		}
