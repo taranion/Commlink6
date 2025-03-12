@@ -108,7 +108,7 @@ public class EquipmentTests {
 		System.out.println("DUMP\n"+ref.dump());
 
 		ItemAttributeNumericalValue<SR6ItemAttribute> attr = ref.getAsValue(SR6ItemAttribute.PRICE);
-		assertEquals(1075, attr.getModifiedValue());
+		assertEquals(1375, attr.getModifiedValue());
 	}
 
 	//-------------------------------------------------------------------

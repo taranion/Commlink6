@@ -15,7 +15,6 @@ import org.prelle.javafx.Wizard;
 import org.prelle.javafx.WizardPage;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.genericrpg.SetItemValue;
 import de.rpgframework.genericrpg.chargen.BasicControllerEvents;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
@@ -25,11 +24,14 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.ComplexDataItemControllerOneColumnSkin;
 import de.rpgframework.jfx.DataItemPane;
+import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
+import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
 import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
@@ -101,7 +103,12 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.shifter.placeholder.selected"));
 
 		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController(), Shadowrun6Tools.requirementResolver(Locale.getDefault())));
-		selection.setSelectedCellFactory(lv -> new QualityValueListCell( ()->charGen, true));
+		
+		selection.setSelectedCellFactory(lv -> {
+			QualityValueListCell zelle = new QualityValueListCell( ()->charGen, false);
+			zelle.setControlProvider( () -> charGen.getShifterGenerator() );
+			return zelle;
+		});
 		selection.setShowHeadings(false);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
 		selection.setSkin(new ComplexDataItemControllerOneColumnSkin<Quality,QualityValue>(selection));
