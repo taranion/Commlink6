@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
 
+    <item id="ballistic_hood_armor" avail="99" price="0" type="ARMOR" subtype="ARMOR_HELMET" modonly="true">
+        <armor rating="1" social="0" add="true"/>
+	</item>
+
 	<item id="ballistic_hood" avail="2" price="300" type="ACCESSORY" subtype="ARMOR_BODY">
   		<usage mode="EMBEDDED" slot="ARMOR" value="0"/>
   		<attrdef id="PRICE" value="$$PRICE*1.05"/>
 		<modifications>
-			<valmod type="ITEM_ATTRIBUTE" ref="DEFENSE_PHYSICAL" value="1" />
+			<itemmod type="GEAR" apply="CHARACTER" ref="ballistic_hood_armor" />
 		</modifications>
 	</item>
 
