@@ -26,11 +26,41 @@
 		</modifications>
     </item>
 
-    <item id="myrmidon" avail="9I" price="105000"  type="ARMOR" subtype="ARMOR_BODY" >
-        <armor rating="12" social="-12" dr="3" />
+    <item id="myrmidon_helmet" avail="99" price="0"  type="ARMOR" subtype="ARMOR_HELMET" modonly="true">
+        <armor rating="4" social="-4" add="true"/>
         <modifications>
- 			<valmod type="HOOK" ref="ARMOR" value="0" />
  			<valmod type="HOOK" ref="HELMET_ACCESSORY" value="0" />
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="myrmidon_commlink" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="image_link" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="flare_compensation" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="thermographic_vision" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="smartlink" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="ultrasound_link" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="audio_enhancement" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="spatial_recognizer" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="cyberware_scanner" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="mad_scanner" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="ultrasound" included="true"/>
+        </modifications>
+		<geardef>
+			<item id="myrmidon_commlink" subtype="COMMLINK" type="ELECTRONICS" >
+				<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="0"/>
+				<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+				<modifications>
+					<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+					<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+				</modifications>
+				<matrix d="3" f="2" programs="3" devrat="7"/>
+				<flags><flag>MATRIX_DEVICE</flag></flags>
+			</item>
+		</geardef>
+    </item>
+
+    <item id="myrmidon" avail="9I" price="105000"  type="ARMOR" subtype="ARMOR_BODY" >
+        <armor rating="8" social="-8" dr="3" />
+        <modifications>
+			<itemmod type="GEAR" apply="CHARACTER" ref="myrmidon_helmet" />
+ 			<valmod type="HOOK" ref="ARMOR" value="0" />
 			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" included="true"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance" included="true">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
@@ -56,31 +86,10 @@
 			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" intoId="2ebae10b-9e9e-4956-940a-b772adc1f0e1" ref="armtech_mgl6" id="22b1f566-a4ae-4520-8fff-3dc5b53714dd" />
             <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
             <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" variant="internal" />
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="myrmidon_commlink" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="image_link" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="flare_compensation" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="thermographic_vision" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="smartlink" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="ultrasound_link" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="audio_enhancement" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="spatial_recognizer" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="cyberware_scanner" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="mad_scanner" included="true"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="ultrasound" included="true"/>
         </modifications>
 		<geardef>
 			<item id="thermal_damping" type="ACCESSORY" subtype="ARMOR_BODY" >
 				<usage mode="EMBEDDED" slot="ARMOR" value="0"/>
-			</item>
-			<item id="myrmidon_commlink" subtype="COMMLINK" type="ELECTRONICS" >
-				<usage mode="EMBEDDED" slot="HELMET_ACCESSORY" value="0"/>
-				<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
-				<modifications>
-					<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
-					<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
-				</modifications>
-				<matrix d="3" f="2" programs="3" devrat="7"/>
-				<flags><flag>MATRIX_DEVICE</flag></flags>
 			</item>
 			<item id="myrmidon_drone" type="DRONE_SMALL" subtype="GROUND" >
 				<vehicle han="0" acc="0" spdi="0" tspd="0" bod="0" arm="0" pil="0" sen="4" />
