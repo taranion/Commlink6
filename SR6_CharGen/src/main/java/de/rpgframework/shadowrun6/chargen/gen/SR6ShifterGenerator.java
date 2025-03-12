@@ -47,12 +47,8 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 
 	//-------------------------------------------------------------------
 	public int getCurrentKarmaCost() {
-		System.err.println("SR6ShifterGenerator.getCurrentKarmaCost: Addons="+getModel().getShifterAddOns());
 		return getModel().getShifterAddOns().stream()
-				.map(qv -> {
-					System.err.println("Karmacost of "+qv+" is "+qv.getKarmaCost()+" / "+qv.getModifiedValue());
-					return qv;})
-				.map(qv -> qv.getKarmaCost())
+				.map(qv -> qv.getResolved().isPositive()?qv.getKarmaCost():-qv.getKarmaCost())
 				.reduce(0, Integer::sum);
 	}
 
@@ -71,9 +67,17 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 			}
 		} else {
 			if (!getModel().hasQuality(SHIFTER_QUALITY_ID)) {
-				QualityValue shifter = getModel().getQuality(SHIFTER_QUALITY_ID);
-				
-//				getModel().addQuality(shifterQual);
+				QualityValue shifter = getModel().getQuality(SHIFTER_QUALITY_ID);				
+				getModel().addQuality(shifter);
+			}
+			
+			QualityValue shifter = getModel().getQuality(SHIFTER_QUALITY_ID);
+			int min = shifter.getKarmaCost();
+			int real = getCurrentKarmaCost();
+			if (real>min) {
+				int extra = real - min;
+				getModel().setKarmaFree( getModel().getKarmaFree() - extra);
+				getModel().setKarmaInvested( getModel().getKarmaInvested() + extra);
 			}
 		}
 		return unprocessed;
@@ -204,28 +208,72 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 		return value.getModifiedValue();
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeIncreased(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
 	public Possible canBeIncreased(QualityValue value) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Possible(value.getDistributed()<value.getResolved().getMax());
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeDecreased(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
 	public Possible canBeDecreased(QualityValue value) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Possible(value.getDistributed()>1);
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
 	public OperationResult<QualityValue> increase(QualityValue value) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.log(Level.TRACE, "ENTER increase({0})", value);
+		try {
+			Possible poss = canBeIncreased(value);
+			if (!poss.get()) {
+				logger.log(Level.ERROR, "Tried to increase {0} which is not allowed: {1}", value, poss.toString());
+				return new OperationResult<QualityValue>(poss);
+			}
+
+			value.setDistributed(value.getDistributed()+1);
+			logger.log(Level.INFO, "increased quality ''{0}'' to {1}", value.getModifyable().getId(), value.getDistributed());
+
+			parent.runProcessors();
+
+			return new OperationResult<QualityValue>(value);
+		} finally {
+			logger.log(Level.TRACE, "LEAVE increase({0})", value);
+		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#decrease(de.rpgframework.genericrpg.NumericalValue)
+	 */
 	@Override
 	public OperationResult<QualityValue> decrease(QualityValue value) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.log(Level.TRACE, "ENTER decrease({0})", value);
+		try {
+			Possible poss = canBeDecreased(value);
+			if (!poss.get()) {
+				logger.log(Level.ERROR, "Tried to decrease {0} which is not allowed: {1}", value, poss.toString());
+				return new OperationResult<QualityValue>(poss);
+			}
+
+			value.setDistributed(value.getDistributed()-1);
+			logger.log(Level.INFO, "decreased quality '{0}' to {1}", value.getModifyable().getId(), value.getDistributed());
+
+			parent.runProcessors();
+
+			return new OperationResult<QualityValue>(value);
+		} finally {
+			logger.log(Level.TRACE, "LEAVE decrease({0})", value);
+		}
 	}
 
 	@Override
