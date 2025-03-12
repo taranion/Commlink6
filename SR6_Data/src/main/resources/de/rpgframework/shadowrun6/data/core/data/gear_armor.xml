@@ -61,10 +61,16 @@
 			<valmod type="HOOK" ref="ARMOR" value="10" />
 		</modifications>
 	</item>
-	<item id="full_body_armor_with_helmet" avail="4L" price="2500" type="ARMOR" subtype="ARMOR_BODY">
+	<item id="full_body_armor_with_helmet" avail="4L" price="2500" type="ARMOR" subtype="ARMOR_BODY" modonly="true">
 		<armor rating="7" social="-9" />
 		<modifications>
 			<valmod type="HOOK" ref="ARMOR" value="10" />
+			<valmod type="HOOK" ref="HELMET_ACCESSORY" value="6" />
+		</modifications>
+	</item>
+	<item id="full_body_armor_helmet" avail="4L" price="500" type="ARMOR" subtype="ARMOR_HELMET">
+		<armor rating="2" social="-4" />
+		<modifications>
 			<valmod type="HOOK" ref="HELMET_ACCESSORY" value="6" />
 		</modifications>
 	</item>
