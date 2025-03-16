@@ -481,6 +481,9 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			}
 
 			value.setDistributed(value.getDistributed()-1);
+			
+			// TODO: If value = 0, delecte complete line
+			
 			int karma = 10 + getGrade() + 1; //cost to be refunded is 10+1+grade as grade has already been reduced
 
 			logger.log(Level.INFO, "Decreased metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
