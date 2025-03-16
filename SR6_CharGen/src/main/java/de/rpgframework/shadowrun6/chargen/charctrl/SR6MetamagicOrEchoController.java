@@ -453,6 +453,9 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			if (value.getResolved().hasLevel()) {
 				mod = new ValueModification(ShadowrunReference.METAECHO, value.getKey(), 1);
 			}
+			
+			// TODO: Record essence change for difference
+			
 			mod.setExpCost(karma);
 			model.addToHistory(mod);
 
@@ -489,6 +492,8 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			ValueModification mod = getHighestModification(value.getResolved());
 			if (mod!=null)
 				model.removeFromHistory(mod);
+
+			// TODO: Undo essence change for difference
 
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(value);
