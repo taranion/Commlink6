@@ -8,7 +8,7 @@
            <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="INTUITION" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <itemmod type="QUALITY" ref="toxin_resistance"/>
-           <itemmod type="QUALITY" ref="allergy">
+           <itemmod type="QUALITY" ref="allergy" id="fe2953dc-b337-4a44-bdf1-d010508e301b">
            	 <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
            	 <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="extreme"/>
            	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="sunlight"/>
@@ -81,7 +81,7 @@
            <valmod ref="LOGIC"     type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <valmod ref="INTUITION" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="CHARISMA"  type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
-           <itemmod type="QUALITY" ref="allergy">
+           <itemmod type="QUALITY" ref="allergy" id="fe2953dc-b337-4a44-bdf1-d010508e301b">
            	 <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
            	 <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="moderate"/>
            	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="spices"/>
@@ -104,7 +104,7 @@
            <valmod ref="BODY"      type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
            <valmod ref="AGILITY"   type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
            <valmod ref="CHARISMA"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
-           <itemmod type="QUALITY" ref="allergy">
+           <itemmod type="QUALITY" ref="allergy" id="fe2953dc-b337-4a44-bdf1-d010508e301b">
            	 <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
            	 <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="mild"/>
            	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="sunlight"/>
@@ -129,7 +129,7 @@
 		<modifications>
            <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="CHARISMA"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
-           <itemmod type="QUALITY" ref="allergy">
+           <itemmod type="QUALITY" ref="allergy" id="fe2953dc-b337-4a44-bdf1-d010508e301b">
            	 <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
            	 <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="mild"/>
            	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="pollutants"/>
