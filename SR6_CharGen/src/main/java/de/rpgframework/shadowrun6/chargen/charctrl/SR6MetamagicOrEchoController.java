@@ -226,7 +226,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			if (value.getType()==Type.NEUROMORPHISM && !parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_NEUROMORPHISM)) {
 				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
 			}
-			if (value.getType()!=Type.TRANSHUMANISM && !parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_ALLOW_INITIATION)) {
+			if (value.getType()!=Type.METAMAGIC && !parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CHARGEN_ALLOW_INITIATION)) {
 				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
 			}
 		}
@@ -445,7 +445,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			model.setKarmaInvested( model.getKarmaInvested() + karma);
 			// Increase should work even when increased from 0 - in this case the item needs to be added
 			if (!model.getMetamagicOrEchoes().contains(value)) {
-				model.getMetamagicOrEchoes().add(value);
+				model.addMetamagicOrEcho(value);
 			}
 
 			// Log in history
@@ -481,7 +481,10 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			}
 
 			value.setDistributed(value.getDistributed()-1);
-			int karma = 10 + getGrade() -1;
+			
+			// TODO: If value = 0, delecte complete line
+			
+			int karma = 10 + getGrade() + 1; //cost to be refunded is 10+1+grade as grade has already been reduced
 
 			logger.log(Level.INFO, "Decreased metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
 			Shadowrun6Character model = getModel();
