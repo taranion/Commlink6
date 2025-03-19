@@ -130,6 +130,7 @@ import de.rpgframework.shadowrun6.proc.FixCharacterStep;
 import de.rpgframework.shadowrun6.proc.FixEssenceChanges;
 import de.rpgframework.shadowrun6.proc.GetGearDefinitions;
 import de.rpgframework.shadowrun6.proc.GetModificationsForDrakes;
+import de.rpgframework.shadowrun6.proc.GetModificationsForShifters;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromCollectives;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromGear;
 import de.rpgframework.shadowrun6.proc.GetModificationsFromMagicOrResonance;
@@ -150,6 +151,20 @@ public class Shadowrun6Tools {
 
 	private static MultiLanguageResourceBundle RES;
 
+	private static class Counted {
+		CarriedItem<ItemTemplate> inst;
+		int count;
+		public Counted(CarriedItem<ItemTemplate> item) {
+			inst = item;
+			count=1;
+		}
+		public String toString() {
+			if (count==1) return inst.getNameWithoutRating();
+			return inst.getNameWithoutRating()+" ("+count+"x)";
+		}
+	}
+
+	
 	public final static List<Class<? extends ProcessingStep>> RECALCULATE_STEPS = Arrays.asList(
 		ResetModifications.class,
 		CleanVirtualItems.class,
@@ -161,6 +176,7 @@ public class Shadowrun6Tools {
 		BuildForbiddenSources.class,
 		ApplyModificationsGeneric.class,
 		GetModificationsForDrakes.class,
+		GetModificationsForShifters.class,
 		GetModificationsFromCollectives.class,
 		ApplyModificationsGeneric.class,
 		GetModificationsFromMagicOrResonance.class,
@@ -2268,18 +2284,6 @@ public class Shadowrun6Tools {
 
 	//---------------------------------------------------------
 	public static String getAccessoryString(CarriedItem<ItemTemplate> item) {
-		class Counted {
-			CarriedItem<ItemTemplate> inst;
-			int count;
-			public Counted(CarriedItem<ItemTemplate> item) {
-				inst = item;
-				count=1;
-			}
-			public String toString() {
-				if (count==1) return inst.getNameWithoutRating();
-				return inst.getNameWithoutRating()+" ("+count+"x)";
-			}
-		}
 		Map<ItemTemplate, Counted> map = new LinkedHashMap<>();
 		List<String> list = new ArrayList<>();
 		item.getEffectiveAccessories().forEach( ci -> {
@@ -2292,32 +2296,12 @@ public class Shadowrun6Tools {
 				} else
 					logger.log(Level.WARNING, "No subtype set for "+ci+" / "+getItemType(ci)+" / "+getItemSubType(ci));
 			}
-//			switch (sub) {
-//			case HACKING_PROGRAM:
-//			case BASIC_PROGRAM:
-//			case RIGGER_PROGRAM:
-//			case AUTOSOFT:
-//			case SKILLSOFT:
-//				break;
-//			default:
-//				// Don't print hardpoints
-//				if (ci.getItem().getId().startsWith("hardpoint"))
-//					return;
-//				if (ci.getItem().getId().startsWith("modslot_"))
-//					return;
-//				if (ci.getItem().getId().startsWith("improved_"))
-//					return;
-//				if (ci.getItem().getId().startsWith("enhanced_"))
-//					return;
-//				if (ci.getItem().getId().startsWith("weapon_mount"))
-//					return;
 				// Sum up
 				if (map.containsKey(ci.getResolved())) {
 					map.get(ci.getResolved()).count++;
 				} else {
 					map.put(ci.getResolved(), new Counted(ci));
 				}
-//			}
 		});
 		map.values().forEach(c-> list.add(c.toString()));
 
