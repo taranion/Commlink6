@@ -5,6 +5,7 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
@@ -24,6 +25,7 @@ import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
@@ -453,12 +455,22 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			if (value.getResolved().hasLevel()) {
 				mod = new ValueModification(ShadowrunReference.METAECHO, value.getKey(), 1);
 			}
-			
-			// TODO: Record essence change for difference
-			
 			mod.setExpCost(karma);
 			model.addToHistory(mod);
-
+			
+			// Record meaning for essence
+			Optional <Integer> ggfEssence = value.getOutgoingModifications().stream()
+					  .filter(modA -> modA.getReferenceType()==ShadowrunReference.ATTRIBUTE)
+					  .filter(modA -> ((ValueModification)modA).getKey().equals( ShadowrunAttribute.ESSENCE_HOLE.name() ))
+					  .map   (modA -> ((ValueModification)modA).getValue()  )
+					  .findFirst();
+			int essence = - ggfEssence.orElse(0);			
+			ValueModification modEssence = new ValueModification(ShadowrunReference.METAECHO, value.getResolved().getId(),(int)essence);
+			modEssence.setId(value.getUuid());
+			modEssence.setWhen(null);
+			modEssence.setSet(null);
+			model.getEssenceChanges().add(modEssence);
+			
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(value);
 		} finally {
@@ -482,14 +494,17 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 
 			value.setDistributed(value.getDistributed()-1);
 			
-			// TODO: If value = 0, delecte complete line
-			
 			int karma = 10 + getGrade() + 1; //cost to be refunded is 10+1+grade as grade has already been reduced
 
 			logger.log(Level.INFO, "Decreased metamagic/echo '" + value.getModifyable().getId() + "' for " + karma + " karma");
 			Shadowrun6Character model = getModel();
 			model.setKarmaFree( model.getKarmaFree() + karma);
 			model.setKarmaInvested( model.getKarmaInvested() - karma);
+
+			// If value = 0, delete MetamagicOrEcho completely
+			if (getGrade()==0) {
+			model.removeMetamagicOrEcho(value);
+			}
 
 			// Undo in history
 			ValueModification mod = getHighestModification(value.getResolved());
