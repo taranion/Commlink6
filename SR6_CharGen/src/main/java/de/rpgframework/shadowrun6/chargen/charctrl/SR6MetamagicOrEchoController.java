@@ -458,24 +458,11 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			if (value.getResolved().hasLevel()) {
 				mod = new ValueModification(ShadowrunReference.METAECHO, value.getKey(), 1);
 			}
-			// TODO: Record essence change for difference
-			Shadowrun6Tools.recordEssenceChange(model, value.getResolved());
-
 			mod.setExpCost(karma);
 			model.addToHistory(mod);
-			
-			// Record meaning for essence
-			Optional <Integer> ggfEssence = value.getOutgoingModifications().stream()
-					  .filter(modA -> modA.getReferenceType()==ShadowrunReference.ATTRIBUTE)
-					  .filter(modA -> ((ValueModification)modA).getKey().equals( ShadowrunAttribute.ESSENCE_HOLE.name() ))
-					  .map   (modA -> ((ValueModification)modA).getValue()  )
-					  .findFirst();
-			int essence = - ggfEssence.orElse(0);			
-			ValueModification modEssence = new ValueModification(ShadowrunReference.METAECHO, value.getResolved().getId(),(int)essence);
-			modEssence.setId(value.getUuid());
-			modEssence.setWhen(null);
-			modEssence.setSet(null);
-			model.getEssenceChanges().add(modEssence);
+
+			// Record essence change for difference
+			Shadowrun6Tools.recordEssenceChange(model, value.getResolved());
 			
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(value);
