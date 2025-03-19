@@ -138,6 +138,8 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 				model.setEssenceLossZero(val);
 			}
 
+			Shadowrun6Tools.recordEssenceChange(model, value);
+			
 			parent.runProcessors();
 		}
 		return res;
@@ -166,9 +168,65 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 				model.setEssenceLossZero(null);
 			}
 
+			Shadowrun6Tools.removeEssenceChange(model, value, RemoveMode.UNDO);
+
 			parent.runProcessors();
 		}
 		return success;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public OperationResult<QualityValue> increase(QualityValue value) {
+		logger.log(Level.TRACE, "ENTER increase({0})", value);
+		try {
+			Possible poss = canBeIncreased(value);
+			if (!poss.get()) {
+				logger.log(Level.ERROR, "Tried to increase {0} which is not allowed: {1}", value, poss.toString());
+				return new OperationResult<QualityValue>(poss);
+			}
+
+			value.setDistributed(value.getDistributed()+1);
+			logger.log(Level.INFO, "increased quality ''{0}'' to {1}", value.getModifyable().getId(), value.getDistributed());
+
+			Shadowrun6Tools.recordEssenceChange(model, value.getResolved());
+
+			parent.runProcessors();
+
+			return new OperationResult<QualityValue>(value);
+		} finally {
+			logger.log(Level.TRACE, "LEAVE increase({0})", value);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#decrease(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public OperationResult<QualityValue> decrease(QualityValue value) {
+		logger.log(Level.TRACE, "ENTER decrease({0})", value);
+		try {
+			Possible poss = canBeDecreased(value);
+			if (!poss.get()) {
+				logger.log(Level.ERROR, "Tried to decrease {0} which is not allowed: {1}", value, poss.toString());
+				return new OperationResult<QualityValue>(poss);
+			}
+
+			value.setDistributed(value.getDistributed()-1);
+			logger.log(Level.INFO, "decreased quality '{0}' to {1}", value.getModifyable().getId(), value.getDistributed());
+
+			Shadowrun6Tools.removeEssenceChange(model, value.getResolved(), RemoveMode.UNDO);
+
+			parent.runProcessors();
+
+			return new OperationResult<QualityValue>(value);
+		} finally {
+			logger.log(Level.TRACE, "LEAVE decrease({0})", value);
+		}
 	}
 
 }

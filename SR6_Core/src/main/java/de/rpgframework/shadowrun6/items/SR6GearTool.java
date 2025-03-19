@@ -192,6 +192,7 @@ public class SR6GearTool extends GearTool {
 			case TRACKED:
 			case SPECIAL_VEHICLES:
 			case WALKER:
+			case GROUND:
 				return pilot.getSpecialization("ground_craft") ;
 			case HOVERCRAFT:
 			case PWC:
@@ -219,10 +220,13 @@ public class SR6GearTool extends GearTool {
 				case GROUND:
 				case ANTHRO:
 					return pilot.getSpecialization("ground_craft") ;
-				case AIR:
-					return pilot.getSpecialization("aircraft") ;
 				case AQUATIC:
 					return pilot.getSpecialization("watercraft") ;
+				case FIXED_WING:
+				case ROTORCRAFT:
+				case VTOL:
+				case AIR:
+					return pilot.getSpecialization("aircraft") ;
 				}
 
 		default:

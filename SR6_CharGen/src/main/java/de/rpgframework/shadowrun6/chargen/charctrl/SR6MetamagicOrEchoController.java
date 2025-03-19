@@ -275,7 +275,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			model.addToHistory(mod);
 
 			// Record eventually meaning for essence
-			Shadowrun6Tools.recordEssenceChange(model, selected);
+			Shadowrun6Tools.recordEssenceChange(model, selected.getResolved());
 
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(selected);
@@ -345,6 +345,9 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			ValueModification mod = getHighestModification(value.getResolved());
 			if (mod!=null)
 				model.removeFromHistory(mod);
+
+			// Record eventually meaning for essence
+			Shadowrun6Tools.removeEssenceChange(model, value.getResolved(), RemoveMode.UNDO);
 
 			parent.runProcessors();
 			return true;
@@ -455,6 +458,9 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			if (value.getResolved().hasLevel()) {
 				mod = new ValueModification(ShadowrunReference.METAECHO, value.getKey(), 1);
 			}
+			// TODO: Record essence change for difference
+			Shadowrun6Tools.recordEssenceChange(model, value.getResolved());
+
 			mod.setExpCost(karma);
 			model.addToHistory(mod);
 			
@@ -511,7 +517,8 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			if (mod!=null)
 				model.removeFromHistory(mod);
 
-			// TODO: Undo essence change for difference
+			// Undo essence change for difference
+			Shadowrun6Tools.removeEssenceChange(model, value.getResolved(), RemoveMode.UNDO);
 
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(value);

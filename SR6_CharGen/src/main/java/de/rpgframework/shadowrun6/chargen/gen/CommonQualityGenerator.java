@@ -235,7 +235,8 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	public OperationResult<QualityValue> select(Quality value, Decision... decisions) {
 		OperationResult<QualityValue> result = super.select(value, decisions);
 		if (result.wasSuccessful()) {
-			Shadowrun6Tools.recordEssenceChange(model, result.get());
+			Shadowrun6Tools.recordEssenceChange(model, value);
+			parent.runProcessors();
 		}
 		return result;
 	}
@@ -248,7 +249,8 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	public boolean deselect(QualityValue value) {
 		boolean success = super.deselect(value);
 		if (success) {
-			Shadowrun6Tools.removeEssenceChange(model, value, RemoveMode.UNDO);
+			Shadowrun6Tools.removeEssenceChange(model, value.getResolved(), RemoveMode.UNDO);
+			parent.runProcessors();
 		}
 		return success;
 	}
@@ -415,7 +417,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			logger.log(Level.INFO, "increased quality ''{0}'' to {1}", value.getModifyable().getId(), value.getDistributed());
 
 			// TODO: Record essence change for difference
-			
+			Shadowrun6Tools.recordEssenceChange(model, value.getResolved());
 			
 			parent.runProcessors();
 
@@ -443,6 +445,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			logger.log(Level.INFO, "decreased quality '{0}' to {1}", value.getModifyable().getId(), value.getDistributed());
 
 			// TODO: Undo essence change for difference
+			Shadowrun6Tools.removeEssenceChange(model, value.getResolved(), RemoveMode.UNDO);
 
 			parent.runProcessors();
 
