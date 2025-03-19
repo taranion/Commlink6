@@ -217,6 +217,7 @@ public class SR6GearTool extends GearTool {
 		case DRONE_LARGE:
 				switch (sub) {
 				case GROUND:
+				case ANTHRO:
 					return pilot.getSpecialization("ground_craft") ;
 				case AIR:
 					return pilot.getSpecialization("aircraft") ;
