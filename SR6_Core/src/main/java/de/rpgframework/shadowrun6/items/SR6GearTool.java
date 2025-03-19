@@ -177,8 +177,6 @@ public class SR6GearTool extends GearTool {
 		SR6Skill pilot = Shadowrun6Core.getSkill("piloting");
 		if (pilot==null)
 			return null;
-//		if (item.isNoSpecialization())
-//			return null;
 
 		ItemType typeI = item.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue();
 		ItemSubType sub = item.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
@@ -218,17 +216,9 @@ public class SR6GearTool extends GearTool {
 		case DRONE_SMALL:
 		case DRONE_MEDIUM:
 		case DRONE_LARGE:
-			ItemAttributeDefinition vecTypDef = item.getAttribute(SR6ItemAttribute.VEHICLE_TYPE);
-			if (vecTypDef==null) {
-				// No explicit vehicle type given - use subtype for a default
 				switch (sub) {
-				case BIKES:
-				case CARS:
-				case TRUCKS:
 				case GROUND:
 					return pilot.getSpecialization("ground_craft") ;
-				case BOATS:
-				case SUBMARINES:
 				case AQUATIC:
 					return pilot.getSpecialization("watercraft") ;
 				case FIXED_WING:
@@ -236,19 +226,7 @@ public class SR6GearTool extends GearTool {
 				case VTOL:
 				case AIR:
 					return pilot.getSpecialization("aircraft") ;
-				default:
 				}
-				return null;
-			}
-			VehicleType type = vecTypDef.getValue();
-			switch (type) {
-			case GROUND:
-				return pilot.getSpecialization("ground_craft") ;
-			case AIR:
-				return pilot.getSpecialization("aircraft") ;
-			case WATER:
-				return pilot.getSpecialization("watercraft") ;
-			}
 
 		default:
 		}
