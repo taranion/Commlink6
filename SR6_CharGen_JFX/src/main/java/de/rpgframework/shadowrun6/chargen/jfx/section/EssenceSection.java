@@ -168,16 +168,16 @@ public class EssenceSection extends Section {
 		hdTranshumanism.setVisible(allowTransh);
 		nfTranshumanism.refresh();
 
-		lbEssenceLost.setText(String.valueOf( ((double)model.getEssenceCost())/1000.0));
-		lbEssenceHole.setText(String.valueOf( ((double)model.getEssenceHoleUnused())/1000.0));
+		lbEssenceLost.setText(String.valueOf( ((double)model.getEssenceCost())/1000.0)); // "Essence lost"
+		lbEssenceHole.setText(String.valueOf( ((double)model.getEssenceHoleUnused())/1000.0)); // "Essence hole (unused)"
 		// Essence
 		AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);
 		AttributeValue<ShadowrunAttribute> essHol = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
 		if (essVal != null) {
-			lbEssenceRemain.setText(String.valueOf(essVal.getModifiedValue() / 1000.0));
+			lbEssenceRemain.setText(String.valueOf(essVal.getModifiedValue() / 1000.0)); // "Essence remaining"
 		}
 		if (essHol!=null) {
-			lbEssenceHoleArt.setText(String.valueOf( essHol.getModifiedValue()/1000.0));
+			lbEssenceHoleArt.setText(String.valueOf( essHol.getModifiedValue()/1000.0)); // "Essence hole (artificial)"
 		} else {
 			lbEssenceHoleArt.setText("-");
 		}
