@@ -30,6 +30,10 @@ public class RiggerConsoleSection extends GearSection {
 	private static PropertyResourceBundle RES = (PropertyResourceBundle) ResourceBundle.getBundle(AdeptPowerSection.class.getPackageName()+".Section");
 	private final static Predicate<ItemTemplate> SELECT_FILTER = (c) -> c.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.ELECTRONICS && c.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue()==ItemSubType.RIGGER_CONSOLE ;
 	private final static Predicate<CarriedItem<ItemTemplate>> SHOW_FILTER = (ci) -> {
+		if (ci.getAsObject(SR6ItemAttribute.ITEMSUBTYPE)==null) {
+			System.err.println("Böser "+ci);
+			return false;
+		}
 		return ci.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()==ItemSubType.RIGGER_CONSOLE;
 	};
 

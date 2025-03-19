@@ -14,14 +14,14 @@
                  <valuereq type="ATTRIBUTE" ref="STRENGTH" value="3" />
 				  </requires>
 				  <modifications>
-                  <itemmod type="CRITTER_POWER" ref="natural_weapon" applyTo="ANIMAL"/>
-                  <itemmod type="QUALITY" ref="environmental_adaption" applyTo="ANIMAL"/>
+                  <itemmod type="CRITTER_POWER" ref="natural_weapon" apply="ANIMAL"/>
+                  <itemmod type="QUALITY" ref="environmental_adaption" apply="ANIMAL"/>
 					</modifications>
 				</subOption>
             <subOption id="scaly" cost="0">
               <modifications>
                   <itemmod type="CRITTER_POWER" ref="natural_weapon"/>
-                  <itemmod type="QUALITY" ref="environmental_adaption" applyTo="ANIMAL"/>
+                  <itemmod type="QUALITY" ref="environmental_adaption" apply="ANIMAL"/>
                </modifications>
             </subOption>
             <subOption id="feathery" cost="3">
@@ -36,20 +36,20 @@
             <subOption id="fins" cost="0">
               <modifications>
                   <itemmod type="CRITTER_POWER" ref="natural_weapon"/>
-                  <itemmod type="QUALITY" ref="environmental_adaption" applyTo="ANIMAL"/>
+                  <itemmod type="QUALITY" ref="environmental_adaption" apply="ANIMAL"/>
                </modifications>
             </subOption>
 			</choice>
 		</choices>
 		<modifications>
          <itemmod type="QUALITY" ref="shifter_dual_natured" />
-         <itemmod type="QUALITY" ref="supernatural_recovery" applyTo="ANIMAL"/>
+         <itemmod type="QUALITY" ref="supernatural_recovery" apply="ANIMAL"/>
          <itemmod type="QUALITY" ref="shift"/>
-                 <itemmod type="QUALITY" ref="allergy">
-                     <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="uncommon"/>
-                     <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="extreme" />
-                     <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="i18n.gold"/>
-                  </itemmod>
+         <itemmod type="QUALITY" ref="allergy" id="ee384939-9971-4ded-b07c-c269630af17e">
+            <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="uncommon"/>
+            <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="extreme" />
+            <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="i18n.gold"/>
+         </itemmod>
 		</modifications>
    </quality>
    <quality id="shifter_armor" karma="2" pos="true" type="SHIFTER" max="4">
@@ -104,8 +104,8 @@
    </quality>
    <quality id="enhanced_senses_low_light"  karma="6" pos="true" type="SHIFTER" >
      <modifications>
-         <itemmod type="QUALITY" ref="low-light_vision" applyTo="CHARACTER"/>
-         <itemmod type="QUALITY" ref="low-light_vision" applyTo="ANIMAL"/>
+         <itemmod type="QUALITY" ref="low-light_vision" apply="CHARACTER"/>
+         <itemmod type="QUALITY" ref="low-light_vision" apply="ANIMAL"/>
      </modifications>
    </quality>
    <quality id="enhanced_senses_sonar"  karma="4" pos="true" type="SHIFTER" >
@@ -117,8 +117,8 @@
    </quality>
    <quality id="enhanced_senses_termographic"  karma="6" pos="true" type="SHIFTER" >
      <modifications>
-         <itemmod type="QUALITY" ref="thermographic_vision" applyTo="CHARACTER"/>
-         <itemmod type="QUALITY" ref="thermographic_vision" applyTo="ANIMAL"/>
+         <itemmod type="QUALITY" ref="thermographic_vision" apply="CHARACTER"/>
+         <itemmod type="QUALITY" ref="thermographic_vision" apply="ANIMAL"/>
      </modifications>
    </quality>
    <quality id="enhanced_senses_vomeronasal"  karma="6" pos="true" type="SHIFTER" >
@@ -167,8 +167,8 @@
    </quality>
    <quality id="shifter_long_reach"  karma="12" pos="true" type="SHIFTER" >
      <modifications>
-         <itemmod type="QUALITY" ref="long_reach" applyTo="CHARACTER"/>
-         <itemmod type="QUALITY" ref="long_reach" applyTo="ANIMAL"/>
+         <itemmod type="QUALITY" ref="long_reach" apply="CHARACTER"/>
+         <itemmod type="QUALITY" ref="long_reach" apply="ANIMAL"/>
      </modifications>
    </quality>
    <quality id="shifter_natural_venom" karma="9" pos="true" type="SHIFTER" cat="BENEFICIAL_SECRETIONS" >
@@ -205,8 +205,8 @@
    </quality>
    <quality id="sharpened_natural_weapon"  karma="8" pos="true" type="SHIFTER" >
      <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,,," applyTo="ANIMAL"/>
-         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" applyTo="ANIMAL"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,,," apply="ANIMAL"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" apply="ANIMAL"/>
      </modifications>
    </quality>
    <quality id="shift" karma="0" pos="true" type="SHIFTER" selectable="false">
@@ -216,17 +216,17 @@
    </quality>
    <quality id="shifter_grace"  karma="5" pos="true" type="SHIFTER" max="4">
      <modifications>
-         <valmod type="ATTRIBUTE" ref="AGILITY" value="1" applyTo="ANIMAL"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY" value="1" apply="ANIMAL"/>
      </modifications>
    </quality>
    <quality id="shifter_might"  karma="5" pos="true" type="SHIFTER" max="4">
      <modifications>
-         <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" applyTo="ANIMAL"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" apply="ANIMAL"/>
      </modifications>
    </quality>
    <quality id="shifter_reflexes"  karma="5" pos="true" type="SHIFTER" max="4">
      <modifications>
-         <valmod type="ATTRIBUTE" ref="REACTION" value="1" applyTo="ANIMAL"/>
+         <valmod type="ATTRIBUTE" ref="REACTION" value="1" apply="ANIMAL"/>
      </modifications>
    </quality>
    

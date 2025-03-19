@@ -111,9 +111,11 @@ public class CalculateEssence implements ProcessingStep {
 			double holeTotal = 0;
 			double hole    = 0;
 			double essenceCostTotal = 0;
+			logger.log(Level.WARNING, "Essence changes: "+model.getEssenceChanges());
 			for (ValueModification mod : model.getEssenceChanges()) {
 				int change = mod.getValue();
 				String name = mod.getKey();
+				logger.log(Level.DEBUG, "Type "+mod.getReferenceType()+" for "+mod);
 				switch ( (ShadowrunReference)mod.getReferenceType() ) {
 				case CARRIED:
 					CarriedItem<ItemTemplate> carried = model.getCarriedItem(mod.getId());
@@ -130,23 +132,24 @@ public class CalculateEssence implements ProcessingStep {
 					break;
 				}
 
-				if (change==0) {
-					logger.log(Level.WARNING, "Essence 0 for "+mod);
-					switch ( (ShadowrunReference)mod.getReferenceType()) {
-					case QUALITY:
-						QualityValue quality = model.getQuality(mod.getKey());
-						System.err.println(quality.getOutgoingModifications());
-						Optional<ValueModification> valMod = quality.getOutgoingModifications()
-								.stream()
-								.filter(m -> m instanceof ValueModification && ((ValueModification)m).getKey().equals("ESSENCE_HOLE"))
-								.map(m -> (ValueModification)m)
-								.findFirst();
-						if (valMod.isPresent()) {
-							change = - valMod.get().getValue();
-						} else
-							logger.log(Level.ERROR, "Did not find ESSENCE_HOLE for quality {0}", quality);
-					}
-				}
+				// The following code block deducts ESSENCE_HOLE from the quality
+//				if (change==0) {
+//					logger.log(Level.WARNING, "Essence 0 for "+mod);
+//					switch ( (ShadowrunReference)mod.getReferenceType()) {
+//					case QUALITY:
+//						QualityValue quality = model.getQuality(mod.getKey());
+//						System.err.println(quality.getOutgoingModifications());
+//						Optional<ValueModification> valMod = quality.getOutgoingModifications()
+//								.stream()
+//								.filter(m -> m instanceof ValueModification && ((ValueModification)m).getKey().equals("ESSENCE_HOLE"))
+//								.map(m -> (ValueModification)m)
+//								.findFirst();
+//						if (valMod.isPresent()) {
+//							change = - valMod.get().getValue();
+//						} else
+//							logger.log(Level.ERROR, "Did not find ESSENCE_HOLE for quality {0}", quality);
+//					}
+//				}
 
 				if (change<0) {
 					hole -= change;

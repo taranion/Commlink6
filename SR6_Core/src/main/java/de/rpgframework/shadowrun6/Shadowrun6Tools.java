@@ -2667,6 +2667,33 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
+	private static ValueModification toValueMod(Shadowrun6Character model, ComplexDataItem value) {
+		String typeString = value.getTypeString().toUpperCase();
+		if (typeString.equals("ITEM")) typeString = "GEAR";
+		ShadowrunReference type = ShadowrunReference.valueOf(typeString);
+		for (Modification tmp : value.getOutgoingModifications()) {
+			if (tmp instanceof ValueModification) {
+				ValueModification vmod = (ValueModification)tmp;
+				if (vmod.getReferenceType()==ShadowrunReference.ATTRIBUTE && (vmod.getKey().equals("ESSENCE") || vmod.getKey().equals("ESSENCE_HOLE"))) {
+					double essence = vmod.getValueAsDouble();
+					if (essence<100)
+						essence *= 1000;
+					if (vmod.getKey().equals("ESSENCE_HOLE"))
+						essence *= -1;
+//					// Indicate that essence whole changes should be calculated at runtime
+//					if (vmod.getKey().equals("ESSENCE_HOLE")) essence=0;
+					ValueModification mod = new ValueModification(type, value.getId(), (int)essence);
+					mod.setWhen(null);
+					mod.setSet(null);
+					mod.setSource(value);
+					return mod;
+				}
+			}
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
 	private static ValueModification toValueMod(Shadowrun6Character model, ComplexDataItemValue<?> value) {
 		if (value instanceof CarriedItem) {
 			CarriedItem<ItemTemplate> item = (CarriedItem<ItemTemplate>) value;
@@ -2678,6 +2705,7 @@ public class Shadowrun6Tools {
 				mod.setId(value.getUuid());
 				mod.setWhen(null);
 				mod.setSet(null);
+				mod.setSource(value);
 				return mod;
 			}
 		}
@@ -2700,6 +2728,7 @@ public class Shadowrun6Tools {
 					mod.setId(value.getUuid());
 					mod.setWhen(null);
 					mod.setSet(null);
+					mod.setSource(value);
 					return mod;
 				}
 			}
@@ -2709,6 +2738,16 @@ public class Shadowrun6Tools {
 
 	//-------------------------------------------------------------------
 	public static int recordEssenceChange(Shadowrun6Character model, ComplexDataItemValue<?> value) {
+		ValueModification mod = toValueMod(model, value);
+		if (mod!=null) {
+			model.getEssenceChanges().add(mod);
+			return mod.getValue();
+		}
+		return 0;
+	}
+
+	//-------------------------------------------------------------------
+	public static int recordEssenceChange(Shadowrun6Character model, ComplexDataItem value) {
 		ValueModification mod = toValueMod(model, value);
 		if (mod!=null) {
 			model.getEssenceChanges().add(mod);
@@ -2738,6 +2777,37 @@ public class Shadowrun6Tools {
 		if (mode==RemoveMode.REMOVE_LATE) {
 			ValueModification mod = toValueMod(model, value);
 			String lblEssHole = RES.format("label.essencehole_for",  value.getNameWithoutDecisions(Locale.getDefault()));
+			mod = new ValueModification(ShadowrunReference.TEXT, lblEssHole, mod.getValue());
+			logger.log(Level.WARNING, "hole mod = "+mod);
+//			mod.setValue( mod.getValue() * -1);
+			model.getEssenceChanges().add(pos, mod);
+		}
+		} finally {
+			logger.log(Level.WARNING, "LEAVE removeEssenceChange: now {0}", model.getEssenceChanges());
+		}
+	}
+
+	//-------------------------------------------------------------------
+	public static void removeEssenceChange(Shadowrun6Character model, ComplexDataItem value, RemoveMode mode) {
+		logger.log(Level.WARNING, "ENTER removeEssenceChange( {1}, {0} )", mode, value);
+		try {
+		ValueModification toRemove = null;
+		for (ValueModification vMod : model.getEssenceChanges()) {
+			if (vMod.getKey().equals(value.getId())) {
+				toRemove = vMod;
+				break;
+			}
+		}
+		logger.log(Level.WARNING, "remove essence change {0}",toRemove);
+
+		if (toRemove==null)
+			return;
+		int pos = model.getEssenceChanges().indexOf(toRemove);
+		model.getEssenceChanges().remove(toRemove);
+
+		if (mode==RemoveMode.REMOVE_LATE) {
+			ValueModification mod = toValueMod(model, value);
+			String lblEssHole = RES.format("label.essencehole_for",  value.getName(Locale.getDefault()));
 			mod = new ValueModification(ShadowrunReference.TEXT, lblEssHole, mod.getValue());
 			logger.log(Level.WARNING, "hole mod = "+mod);
 //			mod.setValue( mod.getValue() * -1);

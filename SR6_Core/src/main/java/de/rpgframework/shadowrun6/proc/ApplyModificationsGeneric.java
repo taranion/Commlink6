@@ -454,7 +454,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 	//-------------------------------------------------------------------
 	private static boolean applyQuality(Shadowrun6Character model, DataItemModification mod) {
 		Quality item = Shadowrun6Core.getItem(SR6Quality.class, mod.getKey());
-		QualityValue value = model.getQuality(mod.getKey());
+		QualityValue value = model.getQuality(mod.getKey(), mod.getId());
 		if (item == null) {
 			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such quality {0}", mod.getKey());
 		}
