@@ -554,6 +554,7 @@
    </item>
 
    <item id="life_safety_system" avail="4" price="1000" type="ACCESSORY" subtype="MOD_INTERIOR" reqVariant="y">
+   		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/> <!-- add smallest size as base to make it selectable on list -->
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
@@ -921,6 +922,7 @@
 <!-- Powertrain Mods - Propulsion Mods -->
 
    <item id="gecko_tips" avail="3" price="1500" type="MOD_POWER" subtype="MOD_PROPULSION" reqVariant="y">
+      	<usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="0"/> <!-- add smallest size as base to make it selectable on list -->
       <variant id="size1">
       	<usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="0"/>
       	<attrdef id="PRICE" value="1500"/>
@@ -956,6 +958,7 @@
    </item>
 
 	<item id="secondary_propulsion_system"  type="MOD_POWER" subtype="MOD_PROPULSION" reqVariant="y">
+      	<usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="2"/> <!-- add smallest size as base to make it selectable on list -->
 		<variant id="submarine">
       	<usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="4"/>
       	<attrdef id="AVAILABILITY" value="6L"/>
@@ -1256,6 +1259,7 @@
 
 
    <item id="hardpoint_concealment" type="MOD_HARD" subtype="MOD_MOUNT" reqVariant="y" >
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/> <!-- add smallest size as base to make it selectable on list -->
    	<variant id="blow_away_panels">
       	<choices>
       		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="4"/>
@@ -1296,6 +1300,7 @@
 <!-- Hardpoint Devices - Drone Racks -->
 
    <item id="drone_rack" avail="3" price="1000" type="MOD_HARD" subtype="MOD_RACK" reqVariant="y" >
+    <usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/> <!-- add smallest size as base to make it selectable on list -->
    	<variant id="micromini">
      		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
       	<attrdef id="PRICE" value="1000"/>
@@ -1318,6 +1323,7 @@
    	</variant>
    </item>
    <item id="expanded_drone_storage" avail="3" price="500" type="MOD_HARD" subtype="MOD_RACK" reqVariant="y" >
+     		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0.5"/> <!-- add smallest size as base to make it selectable on list -->
    	<variant id="micromini">
      		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0.5"/>
       	<attrdef id="PRICE" value="500"/>
@@ -1344,6 +1350,7 @@
 <!-- Hardpoint Devices - Other -->
 
    <item id="mechanical_arm" avail="2" price="2000" type="MOD_HARD" subtype="MOD_OTHERS" reqVariant="y" >
+    <usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/> <!-- add smallest size as base to make it selectable on list -->
    	<variant id="small">
      		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
       	<attrdef id="PRICE" value="2000"/>
