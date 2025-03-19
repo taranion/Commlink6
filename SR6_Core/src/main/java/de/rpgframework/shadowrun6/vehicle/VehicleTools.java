@@ -750,6 +750,7 @@ public class VehicleTools {
 			case DRONE_LARGE:
 				switch (typeS) {
 				case GROUND:
+				case ANTHRO:
 					return pilot.getSpecialization("ground_craft") ;
 				case AIR:
 					return pilot.getSpecialization("aircraft") ;
