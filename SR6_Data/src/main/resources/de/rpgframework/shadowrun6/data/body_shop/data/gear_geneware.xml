@@ -179,7 +179,7 @@
  			<attrdef id="PRICE" value="15000"/>
  			<attrdef id="AVAILABILITY" value="4L"/>
      		<modifications>
-     			<!-- prevents Zapped status -->
+     			<!-- prevents Panicked status -->
      		</modifications>
       </variant>
       <variant id="enhanced">
@@ -187,7 +187,7 @@
  			<attrdef id="PRICE" value="25000"/>
  			<attrdef id="AVAILABILITY" value="5L"/>
      		<modifications>
-     			<!-- prevents Zapped status -->
+     			<!-- prevents Frightened status -->
      			<!-- prevents Panicked status -->
      		</modifications>
       </variant>
