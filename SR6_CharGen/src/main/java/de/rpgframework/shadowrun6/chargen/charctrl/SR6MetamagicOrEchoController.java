@@ -275,9 +275,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			model.addToHistory(mod);
 
 			// Record eventually meaning for essence
-			ValueModification essenceMod = Shadowrun6Tools.recordEssenceChange(model, selected.getResolved());
-			if (essenceMod!=null)
-				essenceMod.setId(selected.getUuid());
+			Shadowrun6Tools.recordEssenceChange(model, selected.getResolved());
 
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(selected);
@@ -464,9 +462,7 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 			model.addToHistory(mod);
 
 			// Record essence change for difference
-			ValueModification essenceMod = Shadowrun6Tools.recordEssenceChange(model, value.getResolved());
-			if (essenceMod!=null)
-				essenceMod.setId(value.getUuid());
+			Shadowrun6Tools.recordEssenceChange(model, value.getResolved());
 			
 			parent.runProcessors();
 			return new OperationResult<MetamagicOrEchoValue>(value);

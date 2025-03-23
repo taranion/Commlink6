@@ -2732,23 +2732,23 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
-	public static ValueModification recordEssenceChange(Shadowrun6Character model, ComplexDataItemValue<?> value) {
+	public static int recordEssenceChange(Shadowrun6Character model, ComplexDataItemValue<?> value) {
 		ValueModification mod = toValueMod(model, value);
 		if (mod!=null) {
 			model.getEssenceChanges().add(mod);
-			return mod;
+			return mod.getValue();
 		}
-		return null;
+		return 0;
 	}
 
 	//-------------------------------------------------------------------
-	public static ValueModification recordEssenceChange(Shadowrun6Character model, ComplexDataItem value) {
+	public static int recordEssenceChange(Shadowrun6Character model, ComplexDataItem value) {
 		ValueModification mod = toValueMod(model, value);
 		if (mod!=null) {
 			model.getEssenceChanges().add(mod);
-			return mod;
+			return mod.getValue();
 		}
-		return null;
+		return 0;
 	}
 
 	//-------------------------------------------------------------------
@@ -2757,7 +2757,7 @@ public class Shadowrun6Tools {
 		try {
 		ValueModification toRemove = null;
 		for (ValueModification vMod : model.getEssenceChanges()) {
-			if (vMod.getId()!=null && vMod.getId().equals(value.getUuid())) {
+			if (vMod.getId().equals(value.getUuid())) {
 				toRemove = vMod;
 				break;
 			}
@@ -2786,10 +2786,6 @@ public class Shadowrun6Tools {
 	public static void removeEssenceChange(Shadowrun6Character model, ComplexDataItem value, RemoveMode mode) {
 		logger.log(Level.WARNING, "ENTER removeEssenceChange( {1}, {0} )", mode, value);
 		try {
-			model.getEssenceChanges().stream()
-				.filter(vMod -> vMod.getKey().equals(value.getId()))
-				.forEach(mod -> model.getEssenceChanges().remove(mod));
-			
 		ValueModification toRemove = null;
 		for (ValueModification vMod : model.getEssenceChanges()) {
 			if (vMod.getKey().equals(value.getId())) {
