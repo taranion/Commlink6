@@ -871,6 +871,12 @@ public class Shadowrun6Tools {
 				Quality resolved = Shadowrun6Core.getItem(SR6Quality.class, tmp.getKey(), tmp.getLanguage());
 				tmp.setResolved(resolved);
 			}
+			logger.log(Level.DEBUG, "resolve shifter qualities");
+			for (QualityValue tmp : model.getShifterAddOns()) {
+				tmp.setCharacter(model);
+				Quality resolved = Shadowrun6Core.getItem(SR6Quality.class, tmp.getKey(), tmp.getLanguage());
+				tmp.setResolved(resolved);
+			}
 
 			logger.log(Level.DEBUG, "resolve quality paths");
 			for (QualityPathValue tmp : model.getQualityPaths()) {
@@ -1484,20 +1490,9 @@ public class Shadowrun6Tools {
 	 */
 	public static Pool<Integer> getSkillPool(Shadowrun6Character model, SR6Skill skill, ShadowrunAttribute useAttrib, String...special) {
 		Pool<Integer> ret = getSkillPoolCalculationWithoutAttribute(model, skill, special);
-		ret.addAll(model.getAttribute( (useAttrib==null)?skill.getAttribute():useAttrib).getPool());
-//		SR6SkillValue     sVal = model.getSkillValue(skill);
-//		if (sVal!=null && sVal.getPool()!=null) {
-//			Pool<Integer> ret = (Pool<Integer>) sVal.getPool().clone();
-//			addSpecialization(ret, sVal, special);
-//			return ret;
-//		}
-//
-//		Pool<Integer> ret = getSkillPoolCalculationWithoutAttribute(model, skill, special);
-//		// Add the attribute
-//		if (useAttrib!=null) {
-//			ret.addAll(model.getAttribute(useAttrib).getPool());
-//		}
-
+		ret.addAll(
+				model.getAttribute( (useAttrib==null)?skill.getAttribute():useAttrib).getPool()
+				);
 		return ret;
 	}
 

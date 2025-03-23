@@ -18,8 +18,6 @@ import de.rpgframework.genericrpg.SetItemValue;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.CheckModification;
-import de.rpgframework.genericrpg.modification.DataItemModification;
-import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.RelevanceModification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
