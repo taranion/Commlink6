@@ -10,6 +10,7 @@ import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.data.ComplexDataItemValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.genericrpg.requirements.ValueRequirement;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -94,7 +95,8 @@ public class FixEssenceChanges implements ProcessingStep {
 				ItemType type = Shadowrun6Tools.getItemType(item);
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(type) || (item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE)) {
 					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
-					int essenceChange = Shadowrun6Tools.recordEssenceChange(model, item);
+					ValueModification vMod = Shadowrun6Tools.recordEssenceChange(model, item);
+					int essenceChange = vMod.getValue();
 					logger.log(Level.INFO, " essence change of {0} is {1}", item.getKey(), essenceChange);
 					essence -= essenceChange;
 
