@@ -32,6 +32,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 
 	public static Rule ALLOW_TRANSHUMANISM      = new Rule(EffectOn.COMMON,"ALLOW_TRANSHUMANISM"      , Rule.Type.BOOLEAN, RES, "false");
 	public static Rule ALLOW_NEUROMORPHISM      = new Rule(EffectOn.COMMON,"ALLOW_NEUROMORPHISM"      , Rule.Type.BOOLEAN, RES, "false");
+	public static Rule ALLOW_ANIMALISM          = new Rule(EffectOn.COMMON,"ALLOW_ANIMALISM"          , Rule.Type.BOOLEAN, RES, "false");
 	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule(EffectOn.COMMON,"MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
 	public static Rule ADD_STRENGTH_TO_MELEE_AR = new Rule(EffectOn.COMMON,"ADD_STRENGTH_TO_MELEE_AR" , Rule.Type.BOOLEAN, RES, "true");
 	public static Rule HIGH_STRENGTH_ADDS_DAMAGE= new Rule(EffectOn.COMMON,"HIGH_STRENGTH_ADDS_DAMAGE", Rule.Type.BOOLEAN, RES, "false");
