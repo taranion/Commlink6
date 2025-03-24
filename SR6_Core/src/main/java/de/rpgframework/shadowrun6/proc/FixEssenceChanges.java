@@ -96,11 +96,13 @@ public class FixEssenceChanges implements ProcessingStep {
 				if (Arrays.asList(ItemType.bodytechTypes()).contains(type) || (item.getVariant()!=null && item.getVariant().getEquipMode()==SR6VariantMode.BODYWARE)) {
 					logger.log(Level.INFO, "Test "+item.getKey()+" with "+type);
 					ValueModification vMod = Shadowrun6Tools.recordEssenceChange(model, item);
-					int essenceChange = vMod.getValue();
-					logger.log(Level.INFO, " essence change of {0} is {1}", item.getKey(), essenceChange);
-					essence -= essenceChange;
+					if (vMod!=null) {
+						int essenceChange = vMod.getValue();
+						logger.log(Level.INFO, " essence change of {0} is {1}", item.getKey(), essenceChange);
+						essence -= essenceChange;
 
-					tryToInsertStashed(checkLater, essence);
+						tryToInsertStashed(checkLater, essence);
+					}
 				}
 			}
 
