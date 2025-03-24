@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+	<metaecho id="are_you_sure" type="ANIMALISM" />
+	<metaecho id="astral_blending" type="ANIMALISM" />
+	<metaecho id="animal_pheromones" type="ANIMALISM">
+		<modifications>
+       <checkmod type="SKILL" ref="con" what="DICE" value="1" apply="CHARACTER"/>
+       <checkmod type="SKILL" ref="influence" what="DICE" value="1" apply="CHARACTER"/>
+		</modifications>
+	</metaecho>
+   <metaecho id="augmentation_integration" max="99" type="ANIMALISM">
+      <modifications>
+         <valmod type="ATTRIBUTE" ref="ESSENCE_HOLE" value="100" />
+      </modifications>
+   </metaecho>
+	<metaecho id="fury" type="ANIMALISM" max="10"/>
+   <metaecho id="increase_physical_attribute" max="4" type="ANIMALISM">
+      <choices>
+         <choice type="ATTRIBUTE" ref="CHOICE" uuid="7282ba2c-fe33-4220-8fce-2ed77e0a3068" options="BODY,AGILITY,REACTION,STRENGTH" />
+      </choices>
+     <modifications>
+        <valmod type="ATTRIBUTE" ref="CHOICE" choice="7282ba2c-fe33-4220-8fce-2ed77e0a3068" value="1" set="AUGMENTED"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="increase_initiative" type="ANIMALISM" max="4" >
+     <modifications>
+        <valmod type="ATTRIBUTE" ref="REACTION" value="1" set="AUGMENTED"/>
+        <valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_PHYSICAL" value="1" set="AUGMENTED"/>
+     </modifications>
+   </metaecho>
+   <metaecho id="king_of_the_jungle" type="ANIMALISM" max="10">
+      <modifications>
+        <itemmod type="CRITTER_POWER" ref="animal_control"/>
+      </modifications>
+   </metaecho>
+	<metaecho id="masterful_pounce" type="ANIMALISM" />
+	<metaecho id="resilience" type="ANIMALISM">
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+	</metaecho>
+   <metaecho id="savage_rend" type="ANIMALISM" max="8" >
+     <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="0.5" apply="ANIMAL"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="0.5" apply="ANIMAL"/>
+     </modifications>
+   </metaecho>
+	<metaecho id="slinking" type="ANIMALISM" />
+   <metaecho id="toxin_resistance" type="ANIMALISM" />
+</metaechoes>

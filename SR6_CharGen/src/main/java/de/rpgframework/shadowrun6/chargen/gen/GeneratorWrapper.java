@@ -43,6 +43,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.IDataStructureController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6AnimalismController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
@@ -515,6 +516,15 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 	@Override
 	public SR6ShifterGenerator getShifterGenerator() {
 		return wrapped.getShifterGenerator();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getAnimalismController()
+	 */
+	@Override
+	public SR6AnimalismController getAnimalismController() {
+		return wrapped.getAnimalismController();
 	}
 
 }

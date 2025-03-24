@@ -1061,6 +1061,8 @@ public class Shadowrun6DataPlugin  {
 		set.setReleased(202306);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"bestial_nature/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded {0} shifter qualities", list.size());
+		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz,"bestial_nature/data/metamagics.xml");
+		logger.log(Level.DEBUG, "Loaded {0} animalisms", list.size());
 	}
 
 }

@@ -73,6 +73,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageRituals rituals;
 	private WizardPageAdeptPowers powers;
 	private SR6WizardPageComplexForms complexForms;
+	private SR6WizardPageAnimalism animalism;
 	private SR6WizardPageMetaOrEcho metaEchoes;
 	private SR6WizardPageGear gear;
 	private WizardPageName<SR6Skill, SR6SkillValue, Shadowrun6Character> name;
@@ -107,7 +108,10 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case METATYPE     : ret.add(     race); break;
 			case DRAKE        : ret.add(    drake); break;
 			case SURGE        : ret.add(    surge); break;
-			case SHIFTER      : ret.add(  shifter); break;
+			case SHIFTER      : 
+				ret.add(  shifter); 
+				ret.add(  animalism); 
+				break;
 			case MAGIC_OR_RESONANCE: ret.add(magic); break;
 			case LP_BORN_THIS_WAY: ret.add(bornThisWay); break;
 			case LP_CHILDHOOD : ret.add(lpChildhood); break;
@@ -153,6 +157,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			}
 		};
 		drake     = new SR6WizardPageDrake(this, wrapper);
+		animalism   = new SR6WizardPageAnimalism(this, wrapper);
 		bornThisWay = new SR6WizardPageBornThisWay(this, wrapper);
 		lpChildhood = new SR6WizardPageLPChildhood(this, wrapper);
 		qualities = new SR6WizardPageQualities(this, wrapper);
