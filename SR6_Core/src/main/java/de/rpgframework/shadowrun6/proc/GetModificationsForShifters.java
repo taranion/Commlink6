@@ -111,6 +111,7 @@ public class GetModificationsForShifters implements ProcessingStep {
 			naturalWeapon.setAttribute(SR6ItemAttribute.ATTACK_RATING, 
 					new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.ATTACK_RATING, 
 							0));
+			naturalWeapon.setInjectedBy("Shifter");
 			model.addVirtualCarriedItem(naturalWeapon);
 			
 			List<QualityValue> shifterQualities = new ArrayList<>();
