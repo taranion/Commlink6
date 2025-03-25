@@ -51,7 +51,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,,+1,+2,+2"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,0,+1,+2,+2"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="biometric_gun_lock" avail="2L" price="100">
@@ -76,7 +76,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,,+1,+2,+1" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,0,+1,+2,+1" cond="true"/>
          <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,0,-2,-2" cond="true" />
 	  </modifications>
 	</itemenhancement>
