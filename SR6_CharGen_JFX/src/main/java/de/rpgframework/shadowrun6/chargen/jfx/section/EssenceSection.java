@@ -96,8 +96,8 @@ public class EssenceSection extends Section {
 		grid = new GridPane();
 		grid.setVgap(10);
 		grid.setHgap(5);
-		grid.add(hdAcclimation   , 0, 0);
-		grid.add(nfAcclimation   , 1, 0);
+//		grid.add(hdAcclimation   , 0, 0); //do not show augmentation acclimation until solution for showing cyborg quality as well found
+//		grid.add(nfAcclimation   , 1, 0); //do not show augmentation acclimation until solution for showing cyborg quality as well found
 		grid.add(hdTranshumanism , 0, 1);
 		grid.add(nfTranshumanism , 1, 1);
 		grid.add(hdEssenceHoleArt, 0, 2);
