@@ -37,9 +37,8 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule(EffectOn.COMMON,"MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
 	public static Rule ADD_STRENGTH_TO_MELEE_AR = new Rule(EffectOn.COMMON,"ADD_STRENGTH_TO_MELEE_AR" , Rule.Type.BOOLEAN, RES, "true");
 	public static Rule HIGH_STRENGTH_ADDS_DAMAGE= new Rule(EffectOn.COMMON,"HIGH_STRENGTH_ADDS_DAMAGE", Rule.Type.BOOLEAN, RES, "false");
-
 	public static Rule CARGOFACTOR_IS_WITHOUT_SEATS = new Rule(EffectOn.COMMON,"CARGOFACTOR_IS_WITHOUT_SEATS", Rule.Type.BOOLEAN, RES, "false");
-
+	public static Rule EXPANDED_SPECIALIZATIONS = new Rule(EffectOn.COMMON,"EXPANDED_SPECIALIZATIONS", Rule.Type.BOOLEAN, RES, "false");
 
 	//-------------------------------------------------------------------
 	public static Rule[] values() {
@@ -61,7 +60,8 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				ADD_STRENGTH_TO_MELEE_AR,
 				HIGH_STRENGTH_ADDS_DAMAGE,
 				CHARGEN_MORE_KNOWLEDGE,
-				CARGOFACTOR_IS_WITHOUT_SEATS
+				CARGOFACTOR_IS_WITHOUT_SEATS,
+				EXPANDED_SPECIALIZATIONS
 		};
 
 		List<Rule> merged = new ArrayList<>();

@@ -27,6 +27,7 @@ import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSkillController;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 
 /**
  * @author prelle
@@ -288,7 +289,8 @@ public class SR6SkillLeveller extends CommonSkillController {
 			logger.log(Level.WARNING, "All clear for expe: "+skillVal.getSpecializations());
 		} else {
 			// May not have any other specialization
-			if (skillVal.getSpecializations().stream().anyMatch(sv -> sv.getDistributed()==0)) {
+			boolean allow = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.EXPANDED_SPECIALIZATIONS);
+			if (!allow && skillVal.getSpecializations().stream().anyMatch(sv -> sv.getDistributed()==0)) {
 				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ALREADY_PRESENT);
 			}
 			// May not already have anything in that field
