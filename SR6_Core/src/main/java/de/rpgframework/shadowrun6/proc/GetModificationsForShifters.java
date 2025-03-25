@@ -12,6 +12,7 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
@@ -19,6 +20,8 @@ import de.rpgframework.shadowrun.BodyForm;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
+import de.rpgframework.shadowrun.DamageElement;
+import de.rpgframework.shadowrun.DamageType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Movement;
@@ -28,7 +31,10 @@ import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.items.Damage;
+import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
@@ -48,6 +54,8 @@ public class GetModificationsForShifters implements ProcessingStep {
 	static {
 		NATURAL_WEAPON.setId("natural_weapon");
 		NATURAL_WEAPON.setAttribute(SR6ItemAttribute.DAMAGE, 4);
+		NATURAL_WEAPON.setAttribute(SR6ItemAttribute.ITEMTYPE, ItemType.WEAPON_CLOSE_COMBAT);
+		NATURAL_WEAPON.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.UNARMED);
 	}
 
 	//-------------------------------------------------------------------
@@ -100,11 +108,14 @@ public class GetModificationsForShifters implements ProcessingStep {
 			body.getNaturalWeapons().clear();
 			CarriedItem<ItemTemplate> naturalWeapon = new CarriedItem<ItemTemplate>();
 			naturalWeapon.setResolved(NATURAL_WEAPON);
-			naturalWeapon.setAttribute(SR6ItemAttribute.DAMAGE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DAMAGE, 4));
+			naturalWeapon.setAttribute(SR6ItemAttribute.DAMAGE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.DAMAGE, new Damage(4, DamageType.PHYSICAL, DamageElement.REGULAR)));
+			naturalWeapon.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMTYPE, ItemType.WEAPON_CLOSE_COMBAT));
+			naturalWeapon.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.UNARMED));
 			naturalWeapon.setAttribute(SR6ItemAttribute.ATTACK_RATING, 
-					new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.ATTACK_RATING, 
-							0));
-			
+					new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.ATTACK_RATING, 
+							new int[] {0,0,0,0,0}));
+			naturalWeapon.setInjectedBy("Shifter");
+			model.addVirtualCarriedItem(naturalWeapon);
 			
 			List<QualityValue> shifterQualities = new ArrayList<>();
 			shifterQualities.addAll(model.getShifterAuto());

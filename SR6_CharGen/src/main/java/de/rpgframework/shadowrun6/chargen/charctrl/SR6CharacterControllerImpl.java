@@ -42,6 +42,7 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	protected IMartialArtsController martial;
 	protected ICritterPowerController critter;
 	protected SR6DrakeController drake;
+	protected SR6AnimalismController animalism;
 	protected IDataStructureController dataStructures;
 
 	//-------------------------------------------------------------------
@@ -230,4 +231,14 @@ public abstract class SR6CharacterControllerImpl extends CharacterControllerImpl
 	public IDataStructureController getDataStructureController() {
 		return dataStructures;
 	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController#getAnimalismController()
+	 */
+	@Override
+	public SR6AnimalismController getAnimalismController() {
+		return animalism;
+	}
+
 }

@@ -22,6 +22,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule CHARGEN_MAX_INITIATION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_INITIATION", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_MAX_SUBMERSION   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_SUBMERSION", Rule.Type.INTEGER, RES, "99");
 	public static Rule CHARGEN_MAX_TRANSHUMAN   = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_TRANSHUMAN", Rule.Type.INTEGER, RES, "99");
+	public static Rule CHARGEN_MAX_ANIMALISM    = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_ANIMALISM" , Rule.Type.INTEGER, RES, "2");
 	public static Rule CHARGEN_ADJUSTMENT_ON_LOWERED_MAX = new Rule(EffectOn.CHARGEN,"CHARGEN_ADJUSTMENT_ON_LOWERED_MAX", Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_MAX_AVAILABILITY = new Rule(EffectOn.CHARGEN,"CHARGEN_MAX_AVAILABILITY", Rule.Type.INTEGER, RES, "6");
 	public static Rule CHARGEN_BUY_SPELLS_KARMA = new Rule(EffectOn.CHARGEN,"CHARGEN_BUY_SPELLS_KARMA", Rule.Type.BOOLEAN, RES, "false");
@@ -47,6 +48,7 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_MAX_INITIATION,
 				CHARGEN_MAX_SUBMERSION,
 				CHARGEN_MAX_TRANSHUMAN,
+				CHARGEN_MAX_ANIMALISM,
 				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
 				CHARGEN_PRIO_ADJUSTED_MAGIC_RESO,
 				CHARGEN_BUY_SPELLS_KARMA,

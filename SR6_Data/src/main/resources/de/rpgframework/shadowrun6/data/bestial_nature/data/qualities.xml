@@ -58,13 +58,13 @@
          <valmod type="CRITTER_POWER" ref="armor" value="1" apply="ANIMAL"/>
       </modifications>
    </quality>
-   <quality id="built_tough"          karma="4" pos="true" type="SHIFTER" max="4">
+   <quality id="shifter_built_tough"          karma="4" pos="true" type="SHIFTER" max="4">
      <modifications>
        <valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1" set="NATURAL" apply="CHARACTER" />
        <valmod type="ATTRIBUTE" ref="PHYSICAL_MONITOR" value="1" set="NATURAL" apply="ANIMAL" />
      </modifications>
    </quality>
-   <quality id="catlike"              karma="12" pos="true" type="SHIFTER" >
+   <quality id="shifter_catlike"              karma="12" pos="true" type="SHIFTER" >
      <modifications>
        <checkmod ref="athletics" type="SKILL" what="EDGE" value="1" apply="CHARACTER"/>
        <checkmod ref="athletics" type="SKILL" what="EDGE" value="1" apply="ANIMAL"/>
@@ -236,7 +236,7 @@
          <datareq type="QUALITY" ref="pack_animal" neg="true" />
       </requires>
    </quality>
-   <quality id="cold_blooded" karma="5" pos="false" type="SHIFTER" >
+   <quality id="shifter_cold_blooded" karma="5" pos="false" type="SHIFTER" >
       <requires>
       </requires>
    </quality>

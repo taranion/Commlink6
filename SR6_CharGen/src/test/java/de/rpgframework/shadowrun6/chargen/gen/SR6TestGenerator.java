@@ -40,6 +40,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.IDataStructureController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IMartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.IQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6AnimalismController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6LifestyleController;
@@ -472,6 +473,12 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 
 	@Override
 	public SR6ShifterGenerator getShifterGenerator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SR6AnimalismController getAnimalismController() {
 		// TODO Auto-generated method stub
 		return null;
 	}
