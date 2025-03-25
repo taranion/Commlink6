@@ -24,7 +24,7 @@
       <modifications>
          <valmod type="ATTRIBUTE" ref="RESIST_DAMAGE"  value="$RATING"/>
    		<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="$RATING" table="1,1,2,2" apply="UNARMED"/>
-   		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$RATING" table="1,,,,|2,,,,|2,,,,|3,,,," apply="UNARMED"/>
+   		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$RATING" table="1,0,0,0,0|2,0,0,0,0|2,0,0,0,0|3,0,0,0,0" apply="UNARMED"/>
       	<itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL"/>
       </modifications>
    </item>

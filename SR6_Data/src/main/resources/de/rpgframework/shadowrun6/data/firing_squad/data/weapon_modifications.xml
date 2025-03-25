@@ -77,7 +77,7 @@
 	  </requires>
 	  <modifications>
          <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,,+1,+2,+1" cond="true"/>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,,-2,-2" cond="true" />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,0,-2,-2" cond="true" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="custom_style" avail="2" price="250">
@@ -97,7 +97,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,,,,"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,0,0,0,0"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="easy_breakdown" avail="3I" price="400">
@@ -121,7 +121,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value=",,-1,-2,-3" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="0,0,-1,-2,-3" cond="true"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="foregrip" avail="2" price="250">
@@ -141,7 +141,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+2,+1,," />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+2,+1,0,0" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="gas-vent_improved" avail="3" price="600">
@@ -164,7 +164,7 @@
    		<datareq type="GEAR" ref="silencer" negate="true" apply="PARENT"/>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value=",+1,+2,+2," />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value=",+1,+2,+2,0" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="gecko_grip" avail="2" price="90">
@@ -222,7 +222,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,+2,+1,," />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,+2,+1,0,0" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="light_weight" avail="3" price="175">
@@ -243,7 +243,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,0,-2,," />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,0,-2,0,0" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="melee_hardening" avail="3" price="300" size="2">
@@ -309,7 +309,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,-1,-2,-3" />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,0,-1,-2,-3" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="personalized_grip_ranged" avail="3L" price="200">
@@ -320,7 +320,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,,," />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,0,0,0" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="personalized_grip_melee" avail="3L" price="200">
@@ -328,7 +328,7 @@
 	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,,," />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,0,0,0,0" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="revolution_arms_collapsible_stock" avail="3L" price="700">
@@ -351,9 +351,9 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,,+1,+2,+1" cond="true"/>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,,-2,-2" cond="true"/>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,-1,-2,-3" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,0,+1,+2,+1" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+1,+1,0,-2,-2" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,0,-1,-2,-3" cond="true"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="ruthenium_coating" avail="4I" price="1000">
@@ -384,7 +384,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value=",+1,+1,+2,+1" cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="0,+1,+1,+2,+1" cond="true"/>
          <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-1,+1,+1,+2,+1" cond="true" />
 	  </modifications>
 	</itemenhancement>
@@ -422,7 +422,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,+1,-2,,-99"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,+1,-2,0,-99"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="side_ammo_mount" avail="2L" price="150">
@@ -452,7 +452,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,,," cond="true"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,0,0,0,0" cond="true"/>
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="stock" avail="1" price="100">
@@ -475,7 +475,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-1,+2,+1,," />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-1,+2,+1,0,0" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="trigger_removal" avail="3L" price="250" size="2">
@@ -537,7 +537,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,+1,+1,," />
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,+1,+1,0,0" />
 	  </modifications>
 	</itemenhancement>
 	<itemenhancement id="weapon_security_system" avail="2" price="500" size="2">
