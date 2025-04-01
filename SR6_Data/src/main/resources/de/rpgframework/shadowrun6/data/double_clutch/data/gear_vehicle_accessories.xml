@@ -1263,6 +1263,14 @@
    </item>
 
    <item id="hardpoint_concealment" type="MOD_HARD" subtype="MOD_MOUNT" reqVariant="y" >
+   	<variant id="blow_away_panels" modonly="true">
+      	<choices>
+      		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="4"/>
+      	</choices>
+     		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/>
+      	<attrdef id="PRICE" value="$RATING*100"/>
+      	<attrdef id="AVAILABILITY" value="2I"/>
+   	</variant>
    	<variant id="small">
      		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
       	<attrdef id="PRICE" value="1500"/>
