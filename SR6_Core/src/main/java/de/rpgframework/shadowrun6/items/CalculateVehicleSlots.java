@@ -155,6 +155,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		case DRONE_LARGE:
 		case DRONE_MEDIUM:
 
+			// Use unmodified BODY / 3
 			hardpoints = (int)(body /3.0);
 			break;
 		case DRONE_SMALL:
@@ -166,7 +167,16 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			return;
 		}
 
-		// Use unmodified BODY / 3
+		// Add hardpoints from mods in vehicle_chassis
+		for (CarriedItem<ItemTemplate> acc : ((CarriedItem<ItemTemplate>)model).getAccessories()) {
+			hardpoints += (float)acc.getResolved().getOutgoingModifications().stream()
+				    .filter(mod -> mod instanceof ValueModification)
+				    .filter(mod -> ((ValueModification)mod).getReferenceType()==ShadowrunReference.HOOK) 
+				    .filter(mod -> ((ValueModification)mod).getResolvedKey()==ItemHook.VEHICLE_HARDPOINT)
+				    .mapToDouble(mod -> ((ValueModification)mod).getValueAsDouble())
+				    .sum();
+				}
+		
 		if (hardpoints==0)
 			return;
 
