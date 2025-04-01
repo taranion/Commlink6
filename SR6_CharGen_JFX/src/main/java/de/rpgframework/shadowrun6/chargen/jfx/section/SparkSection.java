@@ -153,16 +153,19 @@ public class SparkSection extends Section {
 		hdNeuromorphism.setVisible(allowTransh);
 		nfNeuromorphism.refresh();
 
-		lbEssenceLost.setText(String.valueOf( ((double)model.getEssenceCost())/1000.0));
 		// Essence
-		AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.ESSENCE);
-		if (val != null) {
-			if (val != null)
-				lbEssenceRemain.setText(String.valueOf(val.getModifiedValue() / 1000.0));
-			// Essence hole
-			val = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
-			if (val != null)
-				lbEssenceHole.setText(String.valueOf(val.getModifiedValue() / 1000.0));
+		AttributeValue<ShadowrunAttribute> essVal = model.getAttribute(ShadowrunAttribute.ESSENCE);
+		AttributeValue<ShadowrunAttribute> essHol = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
+		double EssCost = model.getEssenceCost() - (essHol.getModifiedValue() - model.getEssenceHoleUnused()); // essence lost should not consider essence paid by essence holes
+		lbEssenceLost.setText(String.valueOf(EssCost/1000.0)); // "Essence lost"
+		lbEssenceHole.setText(String.valueOf( ((double)model.getEssenceHoleUnused())/1000.0)); // "Essence hole (unused)"
+		if (essVal != null) {
+			lbEssenceRemain.setText(String.valueOf(essVal.getModifiedValue() / 1000.0)); // "Essence remaining"
+			}
+		if (essHol !=null) {
+			lbEssenceHole.setText(String.valueOf( essHol.getModifiedValue()/1000.0)); // "Essence hole (total)"
+			} else {
+			lbEssenceHole.setText("-");
 		}
 	}
 }

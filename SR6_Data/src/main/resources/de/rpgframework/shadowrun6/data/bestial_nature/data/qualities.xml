@@ -205,7 +205,7 @@
    </quality>
    <quality id="sharpened_natural_weapon"  karma="8" pos="true" type="SHIFTER" >
      <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,,,," apply="ANIMAL"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,0,0,0,0" apply="ANIMAL"/>
          <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" apply="ANIMAL"/>
      </modifications>
    </quality>

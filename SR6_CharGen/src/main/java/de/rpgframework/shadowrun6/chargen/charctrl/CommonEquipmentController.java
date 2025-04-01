@@ -565,7 +565,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 			return Possible.TRUE;
 		// If slot has a limit on size of accessories, verify it
 		if (realSlot.getMaxSizePerItem()!=null) {
-			float required = 1;
+			float required = 0.5f; // set smallest size as start point to enable selecting mods that have variants and thus have no size attribute prior selection
 			if (toEmbed.hasAttribute(SR6ItemAttribute.SIZE)) {
 				if (toEmbed.isFloat(SR6ItemAttribute.SIZE))
 					required = toEmbed.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue();
@@ -578,12 +578,10 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		}
 
 
-		// Special handling for software: check types
-
-
+		// Check if slot has sufficient size (ignore for software slots with 99 capacity)
 		if (slot.hasCapacity() && realSlot.getCapacity()<99) {
 			float free = realSlot.getFreeCapacity();
-			float required = 1;
+			float required = 0.5f; // set smallest size as start point to enable selecting mods that have variants and thus have no size attribute prior selection
 			if (toEmbed.hasAttribute(SR6ItemAttribute.SIZE)) {
 				if (toEmbed.isFloat(SR6ItemAttribute.SIZE))
 					required = toEmbed.getAsFloat(SR6ItemAttribute.SIZE).getModifiedValue();

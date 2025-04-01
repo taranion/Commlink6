@@ -291,7 +291,7 @@
    			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1"  apply="CHARACTER"/>
    			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER" set="NATURAL"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" apply="UNARMED"/>
-   			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,,,," apply="UNARMED"/>
+   			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,0,0,0,0" apply="UNARMED"/>
    		</modifications>
    	</variant>
    	<variant id="aluminium">
@@ -302,7 +302,7 @@
    			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="2" apply="CHARACTER"/>
    			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" apply="CHARACTER" set="NATURAL"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="2" apply="UNARMED"/>
-   			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,,,," apply="UNARMED"/>
+   			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,0,0,0,0" apply="UNARMED"/>
    		</modifications>
    	</variant>
    	<variant id="titanium">
@@ -313,7 +313,7 @@
    			<valmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="2" apply="CHARACTER"/>
    			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" apply="CHARACTER" set="NATURAL"/>
    			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="2" apply="UNARMED"/>
-   			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="3,,,," apply="UNARMED"/>
+   			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="3,0,0,0,0" apply="UNARMED"/>
    		</modifications>
    	</variant>
    </item>

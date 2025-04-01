@@ -2767,15 +2767,16 @@ public class Shadowrun6Tools {
 		if (toRemove==null)
 			return;
 		int pos = model.getEssenceChanges().indexOf(toRemove);
-		model.getEssenceChanges().remove(toRemove);
 
 		if (mode==RemoveMode.REMOVE_LATE) {
 			ValueModification mod = toValueMod(model, value);
 			String lblEssHole = RES.format("label.essencehole_for",  value.getNameWithoutDecisions(Locale.getDefault()));
-			mod = new ValueModification(ShadowrunReference.TEXT, lblEssHole, mod.getValue());
+			int EssHole = (-1 * mod.getValue()); // essence hole gets negative value
+			mod = new ValueModification(ShadowrunReference.TEXT, lblEssHole, EssHole);
 			logger.log(Level.WARNING, "hole mod = "+mod);
-//			mod.setValue( mod.getValue() * -1);
-			model.getEssenceChanges().add(pos, mod);
+			model.getEssenceChanges().add(mod); // essence hole needs to be added to end of list
+		} else {
+			model.getEssenceChanges().remove(toRemove); // only remove original line if not REMOVE_LATE
 		}
 		} finally {
 			logger.log(Level.WARNING, "LEAVE removeEssenceChange: now {0}", model.getEssenceChanges());
@@ -2792,7 +2793,7 @@ public class Shadowrun6Tools {
 			
 		ValueModification toRemove = null;
 		for (ValueModification vMod : model.getEssenceChanges()) {
-			if (vMod.getKey().equals(value.getId())) {
+			if (vMod.getKey()!=null && vMod.getKey().equals(value.getId())) {
 				toRemove = vMod;
 				break;
 			}
@@ -2802,15 +2803,16 @@ public class Shadowrun6Tools {
 		if (toRemove==null)
 			return;
 		int pos = model.getEssenceChanges().indexOf(toRemove);
-		model.getEssenceChanges().remove(toRemove);
 
 		if (mode==RemoveMode.REMOVE_LATE) {
 			ValueModification mod = toValueMod(model, value);
 			String lblEssHole = RES.format("label.essencehole_for",  value.getName(Locale.getDefault()));
-			mod = new ValueModification(ShadowrunReference.TEXT, lblEssHole, mod.getValue());
+			int EssHole = (-1 * mod.getValue()); // essence hole gets negative value
+			mod = new ValueModification(ShadowrunReference.TEXT, lblEssHole, EssHole);
 			logger.log(Level.WARNING, "hole mod = "+mod);
-//			mod.setValue( mod.getValue() * -1);
-			model.getEssenceChanges().add(pos, mod);
+			model.getEssenceChanges().add(mod); // essence hole needs to be added to end of list
+		} else {
+			model.getEssenceChanges().remove(toRemove); // only remove original line if not REMOVE_LATE
 		}
 		} finally {
 			logger.log(Level.WARNING, "LEAVE removeEssenceChange: now {0}", model.getEssenceChanges());

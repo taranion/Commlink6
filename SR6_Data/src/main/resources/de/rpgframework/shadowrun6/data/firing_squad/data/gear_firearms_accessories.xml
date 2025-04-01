@@ -89,14 +89,14 @@
       <usage mode="EMBEDDED" slot="TOP"/>
       <usage mode="EMBEDDED" slot="UNDER"/>
       <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,,,"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,0,0,0"/>
       </modifications>
    </item>
    <item avail="1" price="125" id="laser_sight_standard" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="TOP"/>
       <usage mode="EMBEDDED" slot="UNDER"/>
       <modifications>
-         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,,"/>
+         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,0,0"/>
       </modifications>
    </item>
    <item avail="1" price="200" id="laser_sight_high_power" type="ACCESSORY" subtype="WEAPON_ACCESSORY">

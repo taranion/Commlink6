@@ -31,6 +31,7 @@
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="5"/>
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
 			<set rule="CHARGEN_MAX_AVAILABILITY" to="7"/>
+			<set rule="EXPANDED_SPECIALIZATIONS" to="true"/>
 		</rules>
 	</interpretation>
 	<interpretation id="core_de" lang="de" restrict="prio,sumto10,pointbuy,karma">
