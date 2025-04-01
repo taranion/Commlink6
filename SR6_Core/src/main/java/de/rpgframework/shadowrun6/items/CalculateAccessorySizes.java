@@ -59,11 +59,11 @@ public class CalculateAccessorySizes implements CarriedItemProcessor {
 			float size = 1;
 			if (usage.getFormula()!=null) {
 				if (usage.getFormula().isResolved()) {
-					logger.log(Level.DEBUG, "Already resolved Size is {0}", usage.getSize());
 					if (usage.getFormula().isFloat()) // do not use getSize, as that divides by 1.000 if value is an integer
 						size = usage.getFormula().getAsFloat(); 
 					else
 						size = usage.getFormula().getAsInteger();
+					logger.log(Level.DEBUG, "Size is {0}", size);
 				} else {
 					VariableResolver resolver = new VariableResolver(accessory, charac);
 					String resolved = FormulaTool.resolve(refType, usage.getFormula(), resolver);
