@@ -68,7 +68,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		}
 
 		calculateCargoFactor((Shadowrun6Character) charac, model);
-		calculateHardpoints((Shadowrun6Character) charac, model);
+		createUnmodifiedHardpointsSlotForVehicle((Shadowrun6Character) charac, model);
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 
@@ -139,10 +139,9 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 	}
 
 	//-------------------------------------------------------------------
-	private void calculateHardpoints(Shadowrun6Character charac, CarriedItem<?> model) {
+	private void createUnmodifiedHardpointsSlotForVehicle(Shadowrun6Character charac, CarriedItem<?> model) {
 		if (model.getAsObject(SR6ItemAttribute.ITEMTYPE)==null) return;
 		ItemType type = model.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue();
-		ItemSubType subtype = model.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
 		ItemAttributeNumericalValue<SR6ItemAttribute> bodyA = model.getAsValue(SR6ItemAttribute.BODY);
 		int body = 0;
 		if (bodyA!=null) body = bodyA.getDistributed();
@@ -154,7 +153,6 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 		case VEHICLES:
 		case DRONE_LARGE:
 		case DRONE_MEDIUM:
-
 			// Use unmodified BODY / 3
 			hardpoints = (int)(body /3.0);
 			break;
@@ -167,16 +165,6 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			return;
 		}
 
-		// Add hardpoints from mods in vehicle_chassis
-		for (CarriedItem<ItemTemplate> acc : ((CarriedItem<ItemTemplate>)model).getAccessories()) {
-			hardpoints += (float)acc.getResolved().getOutgoingModifications().stream()
-				    .filter(mod -> mod instanceof ValueModification)
-				    .filter(mod -> ((ValueModification)mod).getReferenceType()==ShadowrunReference.HOOK) 
-				    .filter(mod -> ((ValueModification)mod).getResolvedKey()==ItemHook.VEHICLE_HARDPOINT)
-				    .mapToDouble(mod -> ((ValueModification)mod).getValueAsDouble())
-				    .sum();
-				}
-		
 		if (hardpoints==0)
 			return;
 
