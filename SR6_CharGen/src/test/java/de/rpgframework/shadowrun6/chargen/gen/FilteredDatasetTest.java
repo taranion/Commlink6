@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
@@ -59,11 +60,14 @@ public class FilteredDatasetTest {
 
 		control.mode = DataSetMode.ALL;
 		charGen.runProcessors();
+		List<String> ids = new ArrayList<String>( charGen.getMetatypeController().getAvailable().stream().map(m -> m.getId()).toList() );
+		assertTrue("Nartaki with 6 arms missing", ids.contains("nartaki2"));
 //		// Ogre exists in two language variants, but only one is returned as available
-//		for (MetaTypeOption meta : charGen.getMetatypeController().getAvailable()) {
-//			System.out.println("FilteredDatasetTest: "+meta.getId());
+//		Collections.sort(ids);
+//		for (String id : ids) {
+//			System.out.println("FilteredDatasetTest: "+id);
 //		}
-		assertEquals(full, charGen.getMetatypeController().getAvailable().size());
+		assertEquals("Ogre should only appear once",1, ids.stream().filter(id -> "ogre".equals(id)).toList().size());
 
 		control.mode = DataSetMode.SELECTED;
 		//control.selected.add("CORE");
