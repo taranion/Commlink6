@@ -22,7 +22,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<log4j.version>2.21.1</log4j.version>
+		<log4j.version>2.24.3</log4j.version>
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
 		<revision>0.0.3-SNAPSHOT</revision>
@@ -46,7 +46,7 @@
 			<dependency>
 				<groupId>org.prelle</groupId>
 				<artifactId>simple-persist</artifactId>
-				<version>3.6.0</version>
+				<version>3.8.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
