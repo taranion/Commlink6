@@ -16,6 +16,7 @@ import org.junit.Test;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun6.SR6Quality;
@@ -50,11 +51,12 @@ public class ShifterTest {
 	@Before
 	public void setup() {
 		model = new Shadowrun6Character();
+		model.setName("ShifterTest.setup");
 		model.setCharGenSettings(new SR6PrioritySettings());
 		preMods.clear();
 		charGen = new SR6TestGenerator(model) {
 			public void runProcessors() {
-				System.out.println("---------------");
+				System.out.println("---------------:"+model.getName()+": "+model.getQualities());
 				(new ResetModifications(model)).process(List.of());
 				(new ResetGenerator(charGen)).process(List.of());
 				ctrl.process(new ArrayList<>(preMods));
@@ -84,13 +86,15 @@ public class ShifterTest {
 		SR6ShifterGenerator shiftGen = charGen.getShifterGenerator();
 		assertNotNull(shiftGen);
 		
+		model.setBodytype(BodyType.SHAPESHIFTER);
 		SR6Quality shifter = Shadowrun6Core.getItem(SR6Quality.class, "shifter"); 
 		SR6Quality armor = Shadowrun6Core.getItem(SR6Quality.class, "shifter_armor"); 
 		assertFalse("Should not be possible without shifter base mod", shiftGen.canBeSelected(armor).get() );
 		
+		assertEquals(qual, charGen.getQualityController());
 		OperationResult<QualityValue> result = charGen.getQualityController().select(shifter, new Decision("55a6dda7-7565-4108-9a04-65b7607081d3", "fins"));
 		assertTrue(result.isPresent());
-		assertTrue("Should not possible with shifter base mod", shiftGen.canBeSelected(armor).get() );
+		assertTrue("Should be possible with shifter base mod", shiftGen.canBeSelected(armor).get() );
 	}
 
 }
