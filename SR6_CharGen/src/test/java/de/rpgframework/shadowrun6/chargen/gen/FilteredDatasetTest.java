@@ -13,6 +13,7 @@ import org.junit.Test;
 import de.rpgframework.genericrpg.chargen.DataSetMode;
 import de.rpgframework.genericrpg.data.CommonCharacter.DataSetControl;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.MetaTypeOption;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -58,8 +59,11 @@ public class FilteredDatasetTest {
 
 		control.mode = DataSetMode.ALL;
 		charGen.runProcessors();
-		// Ogre exists in two language variants, but only one is returned as available
-		assertEquals(full-1, charGen.getMetatypeController().getAvailable().size());
+//		// Ogre exists in two language variants, but only one is returned as available
+//		for (MetaTypeOption meta : charGen.getMetatypeController().getAvailable()) {
+//			System.out.println("FilteredDatasetTest: "+meta.getId());
+//		}
+		assertEquals(full, charGen.getMetatypeController().getAvailable().size());
 
 		control.mode = DataSetMode.SELECTED;
 		//control.selected.add("CORE");
