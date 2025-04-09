@@ -133,17 +133,16 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				model.addSlot(slot);
 			} else {
 				CarriedItem<ItemTemplate> parent = model.getParent();
-				// If possible, assume slot should be inserted into parent
-				AvailableSlot slot = null;
-				if (parent==null) {
-					//logger.log(Level.WARNING, "HOOK {1} modification for item without a parent: {0}", model.getKey(), hook);
-					slot = model.getSlot(hook);
-				} else {
-					slot = parent.getSlot(hook);
+				if (mod.getApplyTo()==ApplyTo.PARENT && parent==null) {
+					logger.log(Level.ERROR, "Cannot apply modification {0} from {1} to parent, since parent is unknown", mod, model);
+//					System.exit(1);
 				}
+				// If possible, assume slot should be inserted into parent
+				CarriedItem<ItemTemplate> addTo = (mod.getApplyTo()==ApplyTo.PARENT)?parent:model;
+				AvailableSlot slot = addTo.getSlot(hook);
 				if (mod.isRemove()) {
 					logger.log(Level.INFO, "Remove slot {0} from {1}", hook, mod.getSource());
-					model.removeSlot(hook);
+					addTo.removeSlot(hook);
 				} else {
 					if (hook.hasCapacity) {
 						if (!(mod instanceof ValueModification)) {
@@ -152,7 +151,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 								slot.setCapacity(slot.getCapacity()+1);
 							} else {
 								slot = new AvailableSlot(hook, 1);
-								model.addSlot(slot);
+								addTo.addSlot(slot);
 							}
 							return true;
 						}
@@ -165,10 +164,10 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 								logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2}", hook, valMod.getValueAsDouble(), mod.getSource());
 								slot = new AvailableSlot(hook, (float) valMod.getValueAsDouble());
 							} else {
-								logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2}", hook, valMod.getValue(), mod.getSource());
+								logger.log(Level.INFO, "Add slot {0} with capacity {1} from {2} in {3}", hook, valMod.getValue(), mod.getSource(), addTo);
 								slot = new AvailableSlot(hook, valMod.getValue());
 							}
-							model.addSlot(slot);
+							addTo.addSlot(slot);
 						}
 					} else {
 						if (slot!=null) {
@@ -204,7 +203,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 	}
 
 	// -------------------------------------------------------------------
-	@SuppressWarnings({ "rawtypes", "incomplete-switch" })
+	@SuppressWarnings({ "rawtypes", "incomplete-switch", "unchecked" })
 	private boolean embedModification(boolean strict, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
 		logger.log(Level.DEBUG, "Before processing "+mod+" Decisions are "+model.getDecisions());
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
@@ -247,7 +246,9 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 				return true;
 			}
 			CarriedItem accessory = carriedR.get();
+			accessory.setParent(model);
 			accessory.setInjectedBy(mod.getSource());
+			SR6GearTool.recalculate("", charac, accessory);
 			//if (mod.isIncludedInStats())
 			// Check if AvailableSlot already exists - if not, create one
 			AvailableSlot slot = (AvailableSlot) model.getSlot(hook);
@@ -263,7 +264,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			slot.addEmbeddedItem(accessory);
 
 			// Now apply modifications that the new accessory provides
-			for (Modification mod2 : accessory.getIncomingModifications()) {
+			for (Modification mod2 : accessory.getOutgoingModifications()) {
 				if (mod2 instanceof DataItemModification) {
 					applyModification(false, charac, (CarriedItem<ItemTemplate>) model, (DataItemModification)mod2);
 				}

@@ -1,11 +1,14 @@
 package org.prelle.rpgframework.shadowrun6.data;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.UUID;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,8 +19,10 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
+import de.rpgframework.shadowrun6.items.AvailableSlot;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 
 /**
  * @author prelle
@@ -114,7 +119,24 @@ public class LoadCharTest {
 
         Shadowrun6Tools.resolveChar(character);
         Shadowrun6Tools.runProcessors(character, Locale.getDefault());
+	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void loadAndCalculateHardpoints() throws IOException {
+		FileInputStream fis = new FileInputStream("src/test/resources/testdata/Eisen.xml");
+		byte[] data = fis.readAllBytes();
+        Shadowrun6Character character = Shadowrun6Core.decode(data);
+
+        Shadowrun6Tools.resolveChar(character);
+        Shadowrun6Tools.runProcessors(character, Locale.getDefault());
+        
+        CarriedItem<ItemTemplate> car = character.getCarriedItem(UUID.fromString("d15f0363-5df9-4a9f-b7af-972d290fe295"));
+        assertNotNull(car);
+        SR6GearTool.recalculate("", character, car);
+        AvailableSlot slot = car.getSlot(ItemHook.VEHICLE_HARDPOINT);
+        assertNotNull(slot);
+        assertEquals(5.0f, slot.getCapacity(), 0f);
 	}
 
 }
