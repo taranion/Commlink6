@@ -10,7 +10,6 @@ import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
-import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.BodyType;
@@ -63,6 +62,7 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 		if (getModel().getBodytype()!=BodyType.SHAPESHIFTER) {
 			// Remove an eventually existing shifter property
 			if (getModel().hasQuality(SHIFTER_QUALITY_ID)) {
+				logger.log(Level.WARNING, "Found shifter quality, but body type is not a shifter - remove it");
 				getModel().removeQuality( getModel().getQuality(SHIFTER_QUALITY_ID));
 			}
 		} else {

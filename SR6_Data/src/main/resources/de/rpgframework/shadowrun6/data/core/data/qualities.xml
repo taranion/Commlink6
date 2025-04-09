@@ -34,8 +34,8 @@
    <quality id="dermal_deposits"  	  karma="7" pos="true" type="NORMAL" >
      <modifications>
        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1" set="NATURAL" apply="UNARMED"/>
-       <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" set="NATURAL" />
-       <itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" />
+       <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" set="NATURAL" apply="CHARACTER"/>
+       <itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="double_jointed"   	  karma="12" pos="true" type="NORMAL" >

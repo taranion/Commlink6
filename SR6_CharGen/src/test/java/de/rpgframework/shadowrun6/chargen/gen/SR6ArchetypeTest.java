@@ -1574,11 +1574,12 @@ public class SR6ArchetypeTest {
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
 				).wasSuccessful()
 				);
+		assertEquals(1, arm.get().getSlot(ItemHook.CYBERLIMB_IMPLANT).getFreeCapacity(), 0);
 		assertTrue(equip.embed(
 				arm.get(),
 				ItemHook.CYBERLIMB_IMPLANT,
 				Shadowrun6Core.getItem(ItemTemplate.class, "spurs"),
-				"retractable",
+				null,
 				new Decision(ItemTemplate.CHOICE_AUGMENTATION_QUALITY, "STANDARD")
 				).wasSuccessful()
 				);
@@ -1636,7 +1637,7 @@ public class SR6ArchetypeTest {
 				);
 		assertEquals("Without troll tax incorrect", 40000, wired.get().getAsValue(SR6ItemAttribute.PRICE).getDistributed());
 		assertEquals("Troll tax incorrect", 44000, wired.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
-		assertEquals("Payed different than expected",60600, model.getNuyen());
+		assertEquals("Payed different than expected",62800, model.getNuyen());
 		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "ares_roadmaster")).wasSuccessful());
 		assertTrue(equip.select(Shadowrun6Core.getItem(ItemTemplate.class, "armor_jacket")).wasSuccessful());
 

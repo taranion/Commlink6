@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
@@ -13,6 +14,7 @@ import org.junit.Test;
 import de.rpgframework.genericrpg.chargen.DataSetMode;
 import de.rpgframework.genericrpg.data.CommonCharacter.DataSetControl;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.shadowrun.MetaTypeOption;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -58,8 +60,14 @@ public class FilteredDatasetTest {
 
 		control.mode = DataSetMode.ALL;
 		charGen.runProcessors();
-		// Ogre exists in two language variants, but only one is returned as available
-		assertEquals(full-1, charGen.getMetatypeController().getAvailable().size());
+		List<String> ids = new ArrayList<String>( charGen.getMetatypeController().getAvailable().stream().map(m -> m.getId()).toList() );
+		assertTrue("Nartaki with 6 arms missing", ids.contains("nartaki2"));
+//		// Ogre exists in two language variants, but only one is returned as available
+//		Collections.sort(ids);
+//		for (String id : ids) {
+//			System.out.println("FilteredDatasetTest: "+id);
+//		}
+		assertEquals("Ogre should only appear once",1, ids.stream().filter(id -> "ogre".equals(id)).toList().size());
 
 		control.mode = DataSetMode.SELECTED;
 		//control.selected.add("CORE");

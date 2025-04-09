@@ -283,7 +283,7 @@
          </selreq>
       </requires>
       <modifications>
-      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="0.5"/>
+      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="0.5" apply="PARENT"/>
       </modifications>
    </item>
 
@@ -297,7 +297,7 @@
          </selreq>
       </requires>
       <modifications>
-      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="1"/>
+      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="1" apply="PARENT"/>
       </modifications>
    </item>
 
@@ -311,7 +311,7 @@
          </selreq>
       </requires>
       <modifications>
-      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="2" apply="DATA_ITEM"/>
+      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="2" apply="PARENT"/>
       </modifications>
    </item>
 
@@ -325,7 +325,7 @@
         </selreq>
       </requires>
       <modifications>
-      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="3" apply="DATA_ITEM"/>
+      	<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="3" apply="PARENT"/>
       </modifications>
    </item>
 

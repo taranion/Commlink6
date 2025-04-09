@@ -80,22 +80,22 @@ public class CalculateCharTest {
 	@Test
 	public void trollDamage() throws IOException {
         Shadowrun6Character model = new Shadowrun6Character();
-        Shadowrun6Tools.runProcessors(model, Locale.getDefault());
-        Shadowrun6Tools.runProcessors(model, Locale.getDefault());
+        model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "human"));
+       Shadowrun6Tools.runProcessors(model, Locale.getDefault());
+//        Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 
 		CarriedItem<ItemTemplate> unarmed = model.getCarriedItem(ItemTemplate.UUID_UNARMED);
 		assertNotNull(unarmed);
 		Damage dmg = unarmed.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue();
 		assertNotNull(dmg);
-		System.out.println("trollDamage 0: "+dmg);
        assertEquals(2, dmg.getValue());
         assertEquals(DamageType.STUN, dmg.getType());
 
         // Now make character into a troll (with dermal deposits)
         model.setMetatype(Shadowrun6Core.getItem(SR6MetaType.class, "troll"));
         Shadowrun6Tools.runProcessors(model, Locale.getDefault());
-        Shadowrun6Tools.runProcessors(model, Locale.getDefault());
-        Shadowrun6Tools.runProcessors(model, Locale.getDefault());
+//        Shadowrun6Tools.runProcessors(model, Locale.getDefault());
+//        Shadowrun6Tools.runProcessors(model, Locale.getDefault());
         unarmed = model.getCarriedItem(ItemTemplate.UUID_UNARMED);
         Logger logger = System.getLogger(ResetModifications.class.getPackageName());
         logger.log(Level.INFO, "Unarmed: "+unarmed.getAsObject(SR6ItemAttribute.DAMAGE));

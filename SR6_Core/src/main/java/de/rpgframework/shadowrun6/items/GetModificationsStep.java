@@ -61,6 +61,17 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			logger.log(Level.INFO, "Add incoming {2} modification {0} to {1}", realMod, model, apply);
 			model.addIncomingModification(realMod);
 			break;
+//		case PARENT:
+//			logger.log(Level.INFO, "Add incoming {2} modification {0} to {1}", realMod, model.getParent(), apply);
+//			if (model.getParent()==null) {
+//				logger.log(Level.INFO, "No parent found for "+model);
+//				return;
+//			}
+//			if (realMod.getReferenceType()==ShadowrunReference.HOOK)
+//				realMod.setApplyTo(ApplyTo.DATA_ITEM);
+//			model.addOutgoingModification(realMod);
+//			model.getParent().addIncomingModification(realMod);
+//			break;
 		default:
 			logger.log(Level.WARNING, "Don't know how to decide for "+ apply);
 			unprocessed.add(realMod);
