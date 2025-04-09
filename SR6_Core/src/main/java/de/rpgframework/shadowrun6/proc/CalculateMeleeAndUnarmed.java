@@ -151,6 +151,9 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 		if (dmg.getType()==DamageType.STUN && model.hasRuleFlag(SR6RuleFlag.UNARMED_DAMAGE_IS_PHYSICAL)) {
 			logger.log(Level.INFO, "Apply UNARMED_DAMAGE_IS_PHYSICAL");
 			dmg.setType(DamageType.PHYSICAL);
+		} else if (dmg.getType()!=DamageType.STUN && !model.hasRuleFlag(SR6RuleFlag.UNARMED_DAMAGE_IS_PHYSICAL)){
+			logger.log(Level.INFO, "NOT Apply UNARMED_DAMAGE_IS_PHYSICAL");
+			dmg.setType(DamageType.STUN);
 		}
 	}
 
