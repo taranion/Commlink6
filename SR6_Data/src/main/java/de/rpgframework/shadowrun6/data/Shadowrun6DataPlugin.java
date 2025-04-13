@@ -1063,6 +1063,12 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} shifter qualities", list.size());
 		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz,"bestial_nature/data/metamagics.xml");
 		logger.log(Level.DEBUG, "Loaded {0} animalisms", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"bestial_nature/data/gear_items.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" items");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"bestial_nature/data/gear_drones.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
+		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"bestial_nature/data/ammunition_types.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
 	}
 
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="mitsuhama_helping_hand" avail="4" price="3000" type="DRONE_SMALL" subtype="ANTHRO" >
+		<vehicle han="4/4" acc="2" spdi="5" tspd="6" bod="1" arm="0" pil="2" sen="1" />
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="gecko_tips" variant="size2" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+	<item id="renraku_pelican_2" avail="2" price="4500" type="DRONE_SMALL" subtype="AIR" >
+		<vehicle han="2" acc="10" spdi="30" tspd="60" bod="1" arm="0" pil="2" sen="1" />
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="1"/>
+			<embed type="GEAR" ref="increased_integrity" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1" />
+			</embed>
+		</modifications>
+	</item>
+
+	<item id="shiawase_buoy" avail="4" price="5000" type="DRONE_SMALL" subtype="AQUATIC" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="4"/> <!-- rating is number of ports -->
+		</choices>
+		<vehicle han="4" acc="1" spdi="1" tspd="5" bod="1" arm="0" pil="1" sen="1" />
+		<attrdef id="PRICE" value="5000 + ($RATING -1) *100"/>
+		<modifications>
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+	
+</items>

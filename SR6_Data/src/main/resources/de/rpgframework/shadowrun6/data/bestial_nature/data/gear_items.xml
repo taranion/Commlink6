@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- armor and clothing -->
+
+	<item id="shifter_barding_light" avail="6" price="1000" type="ARMOR" subtype="ARMOR_BODY" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="20" /> <!-- max="$$BODY" does not work yet -->
+		</choices>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="$RATING" apply="CHARACTER"/> <!-- In US rules light barding has no upper rating limit, which makes no sense, thus using the DE rule of limiting to body -->
+		</requires>
+		<armor rating="1" social="0" />
+		<attrdef id="PRICE" value="$RATING *500"/> <!-- US rules have 1.000, however DE rules including errata feedback have 500 -->
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="$RATING" />
+		</modifications>
+	</item>
+
+	<item id="shifter_barding_heavy" avail="6" price="500" type="ARMOR" subtype="ARMOR_BODY" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="20" /> <!-- max="$$BODY" does not work yet -->
+		</choices>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="$RATING" apply="CHARACTER"/>
+		</requires>
+		<armor rating="4" social="0" />
+		<attrdef id="PRICE" value="$RATING *1000"/> <!-- US rules have 500, however DE rules including errata feedback have 1.000 -->
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="$RATING *2" />
+		</modifications>
+	</item>
+
+	<item id="smart_clothes" avail="2" price="1500" type="ARMOR" subtype="ARMOR_CLOTHES" reqVariant="y" >
+		<armor rating="0" social="0" />
+		<variant id="full_size">
+			<attrdef id="PRICE" value="1500 + $$BODY *250"/>
+		</variant>
+		<variant id="half_size">
+			<attrdef id="PRICE" value="1500 + $$BODY /2 *250"/>
+		</variant>
+		<variant id="quarter_size">
+			<attrdef id="PRICE" value="1500 + $$BODY /4 *250"/>
+		</variant>
+	</item>
+
+	<item id="myomeric_smart_harness" avail="4" price="1500" type="ARMOR" subtype="ARMOR_CLOTHES" >
+		<armor rating="0" social="0" />
+	</item>
+
+<!-- electronics -->
+
+   <item id="trode_patch" avail="2" price="300"  type="ELECTRONICS" subtype="ELECTRONIC_ACCESSORIES">
+		<attrdef id="DEVICE_RATING" value="3" /> <!-- no info stated in bestial nature, thus using normal trodes device rating -->
+   	<usage mode="CARRIED"/>
+   </item>
+
+	<item id="smart_manacles" avail="4" price="5000" type="ELECTRONICS" subtype="SECURITY" count="true" >
+	</item>
+
+	<item id="stun_cage" avail="6" price="7500" type="ELECTRONICS" subtype="SECURITY" count="true" >
+	</item>
+
+	<item id="stun_cage_troll" avail="6" price="10000" type="ELECTRONICS" subtype="SECURITY" count="true" >
+	</item>
+
+<!-- spare parts -->
+
+   <item id="buoy_cable" avail="4" price="250" type="TOOLS" subtype="SPARE_PARTS" count="true" >
+   </item>
+
+</items>
