@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
 
-	<item avail="1" price="10" id="clothing_street" subtype="ARMOR_BODY" type="ARMOR">
+	<item avail="1" price="10" id="clothing_street" subtype="ARMOR_CLOTHES" type="ARMOR">
 	</item>
 
-	<item avail="1" price="10" id="clothing_squatter" subtype="ARMOR_BODY" type="ARMOR">
+	<item avail="1" price="10" id="clothing_squatter" subtype="ARMOR_CLOTHES" type="ARMOR">
 	</item>
 
-	<item avail="1" price="100" id="clothing_low" subtype="ARMOR_BODY" type="ARMOR">
+	<item avail="1" price="100" id="clothing_low" subtype="ARMOR_CLOTHES" type="ARMOR">
 	</item>
 
-	<item avail="1" price="1000" id="clothing_middle" subtype="ARMOR_BODY" type="ARMOR">
+	<item avail="1" price="1000" id="clothing_middle" subtype="ARMOR_CLOTHES" type="ARMOR">
 	</item>
 
-	<item avail="1" price="5000" id="clothing_high" subtype="ARMOR_BODY" type="ARMOR">
+	<item avail="1" price="5000" id="clothing_high" subtype="ARMOR_CLOTHES" type="ARMOR">
 	</item>
 
-	<item avail="1" price="10000" id="clothing_luxury" subtype="ARMOR_BODY" type="ARMOR">
+	<item avail="1" price="10000" id="clothing_luxury" subtype="ARMOR_CLOTHES" type="ARMOR">
 	</item>
 
 	<item id="synthleather_jacket" avail="1" price="300" type="ARMOR" subtype="ARMOR_BODY">
