@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
 	<item id="ammo_battery_pulse" price="100" avail="7I" type="AMMUNITION" subtype="AMMUNITION" count="y">
-		<choices>
-			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
-		</choices>
 		<attrdef id="DAMAGE" value="0"/>
 		<attrdef id="ATTACK_RATING" value="0,0,0,0,0"/>
 		<requires>
@@ -12,9 +9,6 @@
 	</item>
 
 	<item id="ammo_battery_laser" price="100" avail="6I" type="AMMUNITION" subtype="AMMUNITION" count="y">
-		<choices>
-			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
-		</choices>
 		<attrdef id="DAMAGE" value="0"/>
 		<attrdef id="ATTACK_RATING" value="0,0,0,0,0"/>
 		<requires>
