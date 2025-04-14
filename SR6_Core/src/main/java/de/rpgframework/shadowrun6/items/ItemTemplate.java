@@ -417,16 +417,16 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		case CROSSBOWS:
 		case RIFLE_HUNTING:
 		case RIFLE_SNIPER:
+		case LMG:
+		case MMG:
 		case HMG:
 		case LAUNCHERS:
 		case THROWERS:
-			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_LARGE));
+			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_LARGE)); // Double Clutch 142 "any man-portable weapon"
 
 		case SHOTGUNS:
 		case RIFLE_ASSAULT:
-		case LMG:
-		case MMG:
-			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON));
+			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON)); // Double Clutch 142 "any assault rifle or smaller firearm"
 
 		case TASERS:
 		case HOLDOUTS:
@@ -434,7 +434,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		case MACHINE_PISTOLS:
 		case PISTOLS_HEAVY  :
 		case SUBMACHINE_GUNS:
-			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_SMALL));
+			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_SMALL)); // Double Clutch 142 "any SMG or smaller firearm"
 			break;
 		}
 	}
