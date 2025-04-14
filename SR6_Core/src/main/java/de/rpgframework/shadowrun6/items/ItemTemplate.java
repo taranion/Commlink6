@@ -423,10 +423,13 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		case LAUNCHERS:
 		case THROWERS:
 			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_LARGE)); // Double Clutch 142 "any man-portable weapon"
+			break;
 
 		case SHOTGUNS:
 		case RIFLE_ASSAULT:
 			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON)); // Double Clutch 142 "any assault rifle or smaller firearm"
+			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_LARGE));
+			break;
 
 		case TASERS:
 		case HOLDOUTS:
@@ -435,6 +438,8 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		case PISTOLS_HEAVY  :
 		case SUBMACHINE_GUNS:
 			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_SMALL)); // Double Clutch 142 "any SMG or smaller firearm"
+			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON));
+			this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_LARGE));
 			break;
 		}
 	}
