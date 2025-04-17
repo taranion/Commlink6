@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ammotypes>
 
-	<ammotype id="krime_power" cmult="1.5" > <!-- avail="3L" -->
+	<ammotype id="krime_power" cmult="1.5" > <!-- avail="3L" not implemented yet, see COM6-453 -->
       <modifications>
       </modifications>
 	</ammotype>
 	
-    <ammotype id="krime_penetrator" cmult="3" > <!-- avail="8I" -->
+    <ammotype id="krime_penetrator" cmult="3" > <!-- avail="8I" not implemented yet, see COM6-453 -->
       <modifications>
 	    <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="1"/>
@@ -16,7 +16,7 @@
       </requires>
     </ammotype>
     
-    <ammotype id="krime_heat" cmult="5" > <!-- avail="9I" -->
+    <ammotype id="krime_heat" cmult="5" > <!-- avail="9I" not implemented yet, see COM6-453 -->
       <modifications>
 	    <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="3"/>
         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="3"/>
@@ -26,7 +26,7 @@
       </requires>
     </ammotype>
 
-    <ammotype id="krime_laser" cmult="2" > <!-- avail="3L" -->
+    <ammotype id="krime_laser" cmult="2" > <!-- avail="3L" not implemented yet, see COM6-453 -->
       <modifications>
 	    <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
       </modifications>
@@ -41,7 +41,7 @@
       </requires>
     </ammotype>
 
-    <ammotype id="krime_punisher" cmult="0.75"> <!-- avail="4L" -->
+    <ammotype id="krime_punisher" cmult="0.75"> <!-- avail="4L" not implemented yet, see COM6-453 -->
       <modifications>
 	    <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2"/>
         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-2"/>
@@ -51,7 +51,7 @@
       </requires>
     </ammotype>
 
-    <ammotype id="krime_selfdefense" cmult="2"> <!-- avail="2L" -->
+    <ammotype id="krime_selfdefense" cmult="2"> <!-- avail="2L" not implemented yet, see COM6-453 -->
 	  <modifications>
 		<itemmod type="RULE" ref="PHYSICAL_DAMAGE_IS_STUN"/>
       </modifications>
