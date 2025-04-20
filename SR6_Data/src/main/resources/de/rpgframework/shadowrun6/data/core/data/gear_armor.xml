@@ -25,7 +25,7 @@
 			<valmod type="HOOK" ref="ARMOR" value="3" />
 		</modifications>
 	</item>
-	<item id="actioneer_business" avail="2" price="1500" type="ARMOR" subtype="ARMOR_BODY">
+	<item id="actioneer_business" avail="2" price="1500" type="ARMOR" subtype="ARMOR_SOCIAL">
 		<armor rating="2" social="+2" />
 		<modifications>
 			<valmod type="HOOK" ref="ARMOR" value="6" />
