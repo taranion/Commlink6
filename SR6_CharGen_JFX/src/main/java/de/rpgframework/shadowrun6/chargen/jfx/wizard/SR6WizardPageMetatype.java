@@ -322,6 +322,12 @@ public class SR6WizardPageMetatype extends WizardPage implements ControllerListe
 			}
 
 			// Only metahumans can use body type
+			try {
+				System.err.println("SR6WizardPageMetatype: metahuman = "+model.getMetatype().isMetahuman());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (model.getMetatype() != null) {
 				cbSpecialBody.setDisable(!model.getMetatype().isMetahuman());
 				if (!model.getMetatype().isMetahuman()) {

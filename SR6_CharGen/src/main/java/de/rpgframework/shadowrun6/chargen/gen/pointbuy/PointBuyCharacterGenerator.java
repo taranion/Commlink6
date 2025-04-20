@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6AnimalismController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
@@ -159,6 +160,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
 			processChain.add(martial);
+			processChain.add(animalism);
 			processChain.add(dataStructures);
 			processChain.add(cpToNuyenStep);
 			processChain.add(equipment);
@@ -256,6 +258,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		qPaths    = new CommonQualityPathController(this);
 		martial   = new SR6MartialArtsController(this);
 		drake     = new SR6DrakeController(this, true);
+		animalism = new SR6AnimalismController(this, true);
 		dataStructures = new SR6DataStructureController(this);
 	}
 
