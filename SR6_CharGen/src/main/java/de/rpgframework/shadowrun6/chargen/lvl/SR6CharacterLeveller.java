@@ -12,6 +12,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6AnimalismController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
@@ -79,6 +80,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		sins      = new SR6SINLeveller(this);
 		lifestyles= new SR6LifestyleLeveller(this);
 		contacts  = new SR6ContactLeveller(this);
+		animalism = new SR6AnimalismController(this, true);
 		dataStructures = new SR6DataStructureController(this);
 		martial   = new SR6MartialArtsController(this);
 
@@ -106,6 +108,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 			processChain.add(equipment);
 			processChain.add(complex);
 			processChain.add(metaEcho);
+			processChain.add(animalism);
 			processChain.add(dataStructures);
 			processChain.add(sins);
 			processChain.add(lifestyles);
@@ -118,15 +121,5 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 				logger.log(Level.DEBUG, "LEAVE: setupProcessChain()");
 		}
 	}
-
-//	//-------------------------------------------------------------------
-//	/**
-//	 * @see de.rpgframework.genericrpg.chargen.CharacterControllerImpl#updateEffectiveRules()
-//	 */
-//	@Override
-//	protected void updateEffectiveRules() {
-//		// TODO Auto-generated method stub
-//
-//	}
 
 }
