@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 
 /**
@@ -334,6 +335,12 @@ public enum ItemType {
 
     public static boolean isWeapon(ItemType type) {
     	return getWeaponTypes().contains(type);
+    }
+    public static boolean isWeapon(CarriedItem<ItemTemplate> item) {
+    	return getWeaponTypes().contains(item.getAsObject(SR6ItemAttribute.ITEMTYPE).getModifiedValue());
+    }
+    public static boolean isWeapon(ItemTemplate item) {
+    	return getWeaponTypes().contains(item.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue());
     }
     public static boolean isVehicle(ItemType type) {
     	return Arrays.asList(vehicleTypes()).contains(type) || Arrays.asList(droneTypes()).contains(type);

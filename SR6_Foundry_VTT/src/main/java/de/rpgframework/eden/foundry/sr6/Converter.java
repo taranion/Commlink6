@@ -187,7 +187,7 @@ public class Converter {
 
 		FVTTGear data = new FVTTGear();
 		try {
-			if (ItemType.isWeapon(val.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue()))
+			if (ItemType.isWeapon(val))
 				data = new FVTTWeapon();
 			if (ItemType.isVehicle(val.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue()))
 				data = new FVTTVehicle();
