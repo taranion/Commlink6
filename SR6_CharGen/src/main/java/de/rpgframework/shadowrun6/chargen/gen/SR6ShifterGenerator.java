@@ -36,6 +36,7 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 	 */
 	public SR6ShifterGenerator(SR6CharacterGenerator parent) {
 		super(parent);
+		logger = System.getLogger(SR6ShifterGenerator.class.getPackageName()+".shift");
 	}
 
 	//-------------------------------------------------------------------
@@ -71,14 +72,9 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 				getModel().addQuality(shifter);
 			}
 			
-			QualityValue shifter = getModel().getQuality(SHIFTER_QUALITY_ID);
-			int min = shifter.getKarmaCost();
-			int real = getCurrentKarmaCost();
-			if (real>min) {
-				int extra = real - min;
-				getModel().setKarmaFree( getModel().getKarmaFree() - extra);
-				getModel().setKarmaInvested( getModel().getKarmaInvested() + extra);
-			}
+			int cost = getCurrentKarmaCost();
+			getModel().setKarmaFree( getModel().getKarmaFree() - cost);
+			getModel().setKarmaInvested( getModel().getKarmaInvested() + cost);
 		}
 		return unprocessed;
 	}
@@ -89,7 +85,6 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 	 */
 	@Override
 	public List<Quality> getAvailable() {
-		logger.log(Level.WARNING, "getAvailable()");
 		return Shadowrun6Core.getItemList(SR6Quality.class).stream()
 			.filter(q -> q.getType()==QualityType.SHIFTER)
 			.filter(q -> getModel().getShifterAuto().stream().map(qv -> qv.getResolved()).anyMatch(x -> x!=q))
@@ -103,14 +98,15 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 	 */
 	@Override
 	public List<QualityValue> getSelected() {
-		logger.log(Level.WARNING, "getSelected()");
 		QualityValue baseShifter = getModel().getQuality(SHIFTER_QUALITY_ID);
 		if (baseShifter==null)
 			return List.of();
 		
 		List<QualityValue> ret = new ArrayList<>();
 		ret.addAll(getModel().getShifterAuto());		
+		logger.log(Level.WARNING, "getSelected() returns1 "+ret);
 		ret.addAll(getModel().getShifterAddOns());
+		logger.log(Level.WARNING, "getSelected() returns2 "+ret);
 		return ret;
 	}
 

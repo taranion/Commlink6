@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6;
 
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -553,6 +554,11 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 
 	//-------------------------------------------------------------------
 	public void addShifterAuto(QualityValue value) {
+		System.getLogger("de.rpgframework.shadowrun").log(Level.WARNING, "Add "+value+" as shifter auto");
+		if (shifterAuto.stream().anyMatch(x -> x.getModifyable()==value.getModifyable())) {
+			System.getLogger("de.rpgframework.shadowrun").log(Level.WARNING, "No, don't add "+value+" as shifter auto");
+			return;
+		}
 		if (!shifterAuto.contains(value))
 			shifterAuto.add(value);
 	}

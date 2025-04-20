@@ -130,6 +130,7 @@ public class GetModificationsForShifters implements ProcessingStep {
 				for (Modification rmod : qv.getResolved().getOutgoingModifications()) {
 					Modification mod = Shadowrun6Tools.instantiateModification(rmod, qv, qv.getDistributed(), model);
 					if (mod.getApplyTo()!=ApplyTo.ANIMAL) {
+						logger.log(Level.WARNING, "Adding {0} from Shifter AddOn {1}", mod, qv);
 						unprocessed.add(mod);
 						continue;
 					}
@@ -154,7 +155,7 @@ public class GetModificationsForShifters implements ProcessingStep {
 						break;
 					case QUALITY:
 						diMod = (DataItemModification)mod;
-						logger.log(Level.INFO, "Add quality {0} to shifter body", diMod.getKey());
+						logger.log(Level.WARNING, "Add quality {0} to shifter body", diMod.getKey());
 						Quality qual = mod.getReferenceType().resolve( diMod.getKey() );
 						QualityValue qVal = new QualityValue(qual,0);
 						if (mod instanceof ValueModification) {
