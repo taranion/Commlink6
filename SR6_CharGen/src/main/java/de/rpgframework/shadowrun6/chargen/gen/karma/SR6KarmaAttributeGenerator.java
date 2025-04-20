@@ -45,8 +45,10 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 	public Possible canBeIncreased(AttributeValue<ShadowrunAttribute> value) {
 		// Check if raising to the new value is allowed
 		Possible possible = super.canBeIncreased(value);
-		if (!possible.get())
+		if (!possible.get()) {
+			logger.log(Level.WARNING, "Cannot increase {0} because {1}", value.getModifyable(), possible);
 			return possible;
+		}
 
 		int karmaNeeded = (value.getDistributed()+1)*5;
 		if (parent.getModel().getKarmaFree()<karmaNeeded) return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);

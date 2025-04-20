@@ -196,8 +196,8 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			model.setAutoFlag((Enum)mod.getResolvedKey(), true);
 			return true;
 		}
-		logger.log(Level.WARNING, "ToDo: DataItemModification " + mod+" / "+mod.getReferenceType());
-		System.err.println("ApplyStockModification: unsupported modification type: "+mod.getReferenceType());
+//		logger.log(Level.WARNING, "ToDo: DataItemModification " + mod+" / "+mod.getReferenceType());
+//		System.err.println("ApplyStockModification: unsupported modification type: "+mod.getReferenceType());
 //		model.addModification(mod);
 		return false;
 	}

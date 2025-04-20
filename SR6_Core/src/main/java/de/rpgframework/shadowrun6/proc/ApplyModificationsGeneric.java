@@ -469,6 +469,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			}
 
 			if (item.getType()==QualityType.SHIFTER) {
+				logger.log(Level.WARNING, "Add "+value+" as shifter auto");
 				model.addShifterAuto(value);
 			} else
 				model.addQuality(value);

@@ -11,12 +11,12 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.cells.ComplexDataItemListCell;
+import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun.BodyType;
-import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
-import de.rpgframework.shadowrun.ShadowrunRules;
+import de.rpgframework.shadowrun.MetamagicOrEchoValue;
+import de.rpgframework.shadowrun.ShadowrunCharacter;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageMetaOrEcho;
-import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
@@ -48,6 +48,7 @@ public class SR6WizardPageAnimalism extends AWizardPageMetaOrEcho {
 		selection.setOptionCallback(new ChoiceSelectorDialog<>( ((SR6CharacterController)charGen).getAnimalismController()));
 //		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
 		selection.setAvailableCellFactory(lv -> new ComplexDataItemListCell<MetamagicOrEcho>( () -> selection.getController(), Shadowrun6Tools.requirementResolver(Locale.getDefault())));
+		selection.setSelectedCellFactory(lv -> new ComplexDataItemValueListCell<MetamagicOrEcho,MetamagicOrEchoValue>( () -> selection.getController()));
 
 		bxDescription = new GenericDescriptionVBox(
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
@@ -61,6 +62,7 @@ public class SR6WizardPageAnimalism extends AWizardPageMetaOrEcho {
 	@Override
 	public void refresh() {
 		super.refresh();
+		lbGrade.setText( String.valueOf(((SR6CharacterController)charGen).getAnimalismController().getGrade()));
 
 		if (charGen.getModel().getBodytype()==BodyType.SHAPESHIFTER) {
 			logger.log(Level.DEBUG, "Animalism allowed enable page");
@@ -69,6 +71,11 @@ public class SR6WizardPageAnimalism extends AWizardPageMetaOrEcho {
 			logger.log(Level.DEBUG, "Not a shifter - disable page");
 			activeProperty().set(false);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	public void pageVisited() {
+		refresh();
 	}
 
 }

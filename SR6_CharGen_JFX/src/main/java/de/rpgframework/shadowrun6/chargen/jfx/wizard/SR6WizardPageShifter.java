@@ -24,14 +24,11 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.ComplexDataItemControllerNode;
 import de.rpgframework.jfx.ComplexDataItemControllerOneColumnSkin;
 import de.rpgframework.jfx.DataItemPane;
-import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterController;
-import de.rpgframework.shadowrun.chargen.charctrl.IShadowrunCharacterControllerProvider;
 import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
@@ -89,9 +86,9 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 
 	//-------------------------------------------------------------------
 	private void initComponents() {
-		lbCurrent = new Label("?");
+		lbCurrent = new Label("+?");
 		lbCurrent.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
-		lbMinimum = new Label("/??");
+		lbMinimum = new Label("?");
 
 		selection = new ComplexDataItemControllerNode<>(charGen.getShifterGenerator());
 		QualityFilterNode filter = new QualityFilterNode(RES, selection, QualityType.SHIFTER);
@@ -180,7 +177,7 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 //		AutoBox responsive = new AutoBox();
 //		responsive.getContent().addAll(selection, bxDescription);
 		Label hdPointsSpent = new Label(ResourceI18N.get(RES, "page.shifter.pointsSpent"));
-		HBox line = new HBox(5, hdPointsSpent, lbCurrent, lbMinimum);
+		HBox line = new HBox(5, hdPointsSpent, lbMinimum, lbCurrent);
 		selection.setSelectedListHead(line);
 
 		// Back header
@@ -195,11 +192,13 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 		contentPane.selectedItemProperty().addListener( (ov,o,n) -> {
 			if (updating) return;
 			if (n==null) return;
-			logger.log(Level.ERROR, "ToDo: Select "+n);
 			userSelects(n);
 			refresh();
 		});
-
+		
+		selection.showHelpForProperty().addListener( (obj,o,n) -> {
+			logger.log(Level.INFO, "ToDo: Find a way to show description of "+n);
+		});
 	}
 
 	//-------------------------------------------------------------------
@@ -212,8 +211,8 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 			Shadowrun6Character model = charGen.getModel();
 			backHeader.setValue(model.getKarmaFree());
 
-			lbCurrent.setText(String.valueOf( charGen.getShifterGenerator().getCurrentKarmaCost()));
-			lbMinimum.setText("/"+String.valueOf( charGen.getShifterGenerator().getMinimalKarmaCost()));
+			lbCurrent.setText("+"+String.valueOf( charGen.getShifterGenerator().getCurrentKarmaCost()));
+			lbMinimum.setText(String.valueOf( charGen.getShifterGenerator().getMinimalKarmaCost()));
 			BodyType type = charGen.getModel().getBodytype();
 			if (type!=null) {
 				// Enable or disable page
