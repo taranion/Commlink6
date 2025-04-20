@@ -13,7 +13,7 @@
 		</modifications>
 	</item>
 
-	<item id="disposable_cloak" avail="1" price="5" type="ARMOR" subtype="ARMOR_BODY">
+	<item id="disposable_cloak" avail="1" price="5" type="ARMOR" subtype="ARMOR_CLOTHES">
 	</item>
 
 	<item id="armorweave_cloak" avail="2" price="200" type="ARMOR" subtype="ARMOR_BODY">
