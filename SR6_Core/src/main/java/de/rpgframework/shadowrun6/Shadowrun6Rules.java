@@ -31,9 +31,9 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 	public static Rule CHARGEN_EXTENDED_CONTACT = new Rule(EffectOn.CHARGEN,"CHARGEN_EXTENDED_CONTACT" , Rule.Type.BOOLEAN, RES, "false");
 	public static Rule CHARGEN_MORE_KNOWLEDGE   = new Rule(EffectOn.CHARGEN,"CHARGEN_MORE_KNOWLEDGE"   , Rule.Type.BOOLEAN, RES, "false");
 
-	public static Rule ALLOW_TRANSHUMANISM      = new Rule(EffectOn.COMMON,"ALLOW_TRANSHUMANISM"      , Rule.Type.BOOLEAN, RES, "false");
-	public static Rule ALLOW_NEUROMORPHISM      = new Rule(EffectOn.COMMON,"ALLOW_NEUROMORPHISM"      , Rule.Type.BOOLEAN, RES, "false");
-	public static Rule ALLOW_ANIMALISM          = new Rule(EffectOn.COMMON,"ALLOW_ANIMALISM"          , Rule.Type.BOOLEAN, RES, "false");
+	public static Rule ALLOW_TRANSHUMANISM      = new Rule(EffectOn.CHARGEN,"ALLOW_TRANSHUMANISM"      , Rule.Type.BOOLEAN, RES, "true");
+	public static Rule ALLOW_NEUROMORPHISM      = new Rule(EffectOn.CHARGEN,"ALLOW_NEUROMORPHISM"      , Rule.Type.BOOLEAN, RES, "true");
+	public static Rule ALLOW_ANIMALISM          = new Rule(EffectOn.CHARGEN,"ALLOW_ANIMALISM"          , Rule.Type.BOOLEAN, RES, "true");
 	public static Rule MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP = new Rule(EffectOn.COMMON,"MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP", Rule.Type.BOOLEAN, RES, "true");
 	public static Rule ADD_STRENGTH_TO_MELEE_AR = new Rule(EffectOn.COMMON,"ADD_STRENGTH_TO_MELEE_AR" , Rule.Type.BOOLEAN, RES, "true");
 	public static Rule HIGH_STRENGTH_ADDS_DAMAGE= new Rule(EffectOn.COMMON,"HIGH_STRENGTH_ADDS_DAMAGE", Rule.Type.BOOLEAN, RES, "false");
@@ -46,15 +46,16 @@ public interface Shadowrun6Rules extends ShadowrunRules {
 				CHARGEN_RAISE_ABOVE_6,
 				CHARGEN_MAX_INITIATION,
 				CHARGEN_MAX_SUBMERSION,
+				ALLOW_TRANSHUMANISM,
 				CHARGEN_MAX_TRANSHUMAN,
+				ALLOW_ANIMALISM,
 				CHARGEN_MAX_ANIMALISM,
+				ALLOW_NEUROMORPHISM,
 				CHARGEN_ADJUSTMENT_ON_LOWERED_MAX,
 				CHARGEN_PRIO_ADJUSTED_MAGIC_RESO,
 				CHARGEN_BUY_SPELLS_KARMA,
 				CHARGEN_MAX_AVAILABILITY,
 				CHARGEN_ERRATED_POINT_BUY,
-				ALLOW_TRANSHUMANISM,
-				ALLOW_NEUROMORPHISM,
 				CHARGEN_EXTENDED_CONTACT,
 				MYSTADEPT_ADVANCE_RAISE_MAGIC_RAISE_PP,
 				ADD_STRENGTH_TO_MELEE_AR,

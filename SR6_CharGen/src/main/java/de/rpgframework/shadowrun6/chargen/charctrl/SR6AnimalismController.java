@@ -131,12 +131,11 @@ public class SR6AnimalismController extends ControllerImpl<MetamagicOrEcho>
 	public int getGrade() {
 		MetaType meta = getModel().getMetatype();
 		if (meta==null) return 0;
-		List<MetamagicOrEchoValue> list = null;
-			list = getSelected().stream()
-					.filter(m -> m.getModifyable()!=null)
-					.filter(m -> m.getModifyable().getType() == Type.ANIMALISM)
-					.filter(m -> !m.isAutoAdded())
-					.collect(Collectors.toList());
+		List<MetamagicOrEchoValue> list = getSelected().stream()
+				.filter(m -> m.getModifyable()!=null)
+				.filter(m -> m.getModifyable().getType() == Type.ANIMALISM)
+				.filter(m -> !m.isAutoAdded())
+				.collect(Collectors.toList());
 		// Determine the grade
 		int grade = 0;
 		for (MetamagicOrEchoValue tmp : list) {
@@ -166,12 +165,12 @@ public class SR6AnimalismController extends ControllerImpl<MetamagicOrEcho>
 		}
 		// Is it available in general?
 		if (!getAvailable().contains(value)) {
-			return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_AVAILABLE);
 		}
 
 		// Is maximum grade reached
 		if (getGrade()>=maxGrade) {
-			return new Possible(false, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 		}
 
 		// Calculate Karma cost
@@ -184,7 +183,7 @@ public class SR6AnimalismController extends ControllerImpl<MetamagicOrEcho>
 		// Check if initiation/immersion/transhumanism is allowed (for chargen)
 		if (isCharGen) {
 			if (value.getType()==Type.ANIMALISM && !parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.ALLOW_ANIMALISM)) {
-				return new Possible(false, IRejectReasons.IMPOSS_NOT_AVAILABLE);
+				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_AVAILABLE);
 			}
 		}
 
@@ -216,7 +215,7 @@ public class SR6AnimalismController extends ControllerImpl<MetamagicOrEcho>
 
 			int karma = 10 + getGrade() +1;
 			getModel().addMetamagicOrEcho(selected);
-			logger.log(Level.INFO, "Add animalism '" + value.getId() + "' for " + karma + " karma");
+			logger.log(Level.WARNING, "Add animalism '" + value.getId() + "' for " + karma + " karma");
 			Shadowrun6Character model = getModel();
 			model.setKarmaFree( model.getKarmaFree() - karma);
 			model.setKarmaInvested( model.getKarmaInvested() + karma);
@@ -249,7 +248,7 @@ public class SR6AnimalismController extends ControllerImpl<MetamagicOrEcho>
 	public Possible canBeDeselected(MetamagicOrEchoValue value) {
 		// Is it selected?
 		if (!getSelected().contains(value)) {
-			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 
 		// may not be deleted, because auto-added
@@ -370,16 +369,16 @@ public class SR6AnimalismController extends ControllerImpl<MetamagicOrEcho>
 	public Possible canBeDecreased(MetamagicOrEchoValue value) {
 		// It must be already possessed
 		if (!getModel().getMetamagicOrEchoes().contains(value)) {
-			return new Possible(false, IRejectReasons.IMPOSS_NOT_PRESENT);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_PRESENT);
 		}
 
 		MetamagicOrEcho item = value.getModifyable();
 		if (!item.hasLevel()) {
-			return new Possible(IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ITEM_HAS_NO_LEVELS);
 		}
 
 		if (value.getDistributed()<1) {
-			return new Possible(false, IRejectReasons.IMPOSS_MIN_LEVEL_REACHED);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_MIN_LEVEL_REACHED);
 		}
 		return Possible.TRUE;
 	}

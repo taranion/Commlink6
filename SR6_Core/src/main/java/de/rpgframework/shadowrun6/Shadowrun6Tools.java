@@ -483,12 +483,12 @@ public class Shadowrun6Tools {
 					if (valMod.getFormula().isObject()) {
 						return iattrName+" "+valMod.getRawValue();
 					} else if (valMod.getFormula().isInteger() || valMod.getFormula().isFloat()) {
-						if (valMod.getValue()>0) {
+						if (valMod.getValueAsDouble()>0) {
 							if (valMod.getSet()==ValueType.MAX)
-								return iattrName+" "+valMod.getValue();
-							return iattrName+" +"+valMod.getValue();
+								return iattrName+" "+valMod.getValueAsDouble();
+							return iattrName+" +"+valMod.getValueAsDouble();
 						} else {
-							return iattrName+" "+valMod.getValue();
+							return iattrName+" "+valMod.getValueAsDouble();
 						}
 					}
 					return iattrName+" +"+level;
