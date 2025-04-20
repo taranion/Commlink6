@@ -6,8 +6,10 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Lifeform;
+import de.rpgframework.genericrpg.items.AItemEnhancement;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
+import de.rpgframework.genericrpg.items.ItemEnhancementValue;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -54,7 +56,11 @@ public class SR6ResolveTemplatesStep implements CarriedItemProcessor {
 		// Depth first
 		// Since setResolved() triggers recalculation, resolve children first
 		for (CarriedItem<ItemTemplate> child : ((CarriedItem<ItemTemplate>)model).getAccessories()) {
+			child.setParent((CarriedItem<ItemTemplate>) model);
 			OperationResult<List<Modification>> sub = this.process(strict, ref, charac, child, unprocessed);
+		}
+		for (ItemEnhancementValue<AItemEnhancement> eVal : model.getEnhancements()) {
+			eVal.setResolved( Shadowrun6Core.getItem(SR6ItemEnhancement.class, eVal.getKey(), eVal.getLanguage()));
 		}
 
 		if (changed) {
