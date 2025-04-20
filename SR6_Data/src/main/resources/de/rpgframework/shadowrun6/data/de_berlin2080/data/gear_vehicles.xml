@@ -65,9 +65,16 @@
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_junkdog_bite" />
       </modifications>
 		<geardef>
-			<item id="weapon_junkdog_bite" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" modonly="true" >
-				<usage mode="EMBEDDED"/>
+			<item id="weapon_junkdog_bite_weapon" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" modonly="true" >
+				<usage mode="EMBEDDED"  slot="VEHICLE_WEAPON" value="1" />
 				<weapon dmg="2P" mode="SS" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+			</item>
+			<item id="weapon_junkdog_bite" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+				<modifications>
+					<valmod type="HOOK" ref="VEHICLE_WEAPON" value="1" />
+					<embed type="GEAR" ref="weapon_junkdog_bite_weapon" intoType="HOOK" intoRef="VEHICLE_WEAPON" />
+				</modifications>
 			</item>
 		</geardef>
    </item>

@@ -13,8 +13,8 @@
 			<valuereq type="ATTRIBUTE" ref="BODY" value="16" apply="PARENT"/>
 		</requires>
 		<geardef>
-			<item id="ascalon_railgun_weapon" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
-				<usage mode="EMBEDDED"/>
+			<item id="ascalon_railgun_weapon" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" value="1" />
 				<weapon attack="15,22,15,12,9" ammo="20(c)" dmg="9P" mode="SS" skill="firearms" spec="firearms/machine_guns"/>
 				<modifications>
 					<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
