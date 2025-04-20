@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ammotypes>
+
+    <ammotype id="metal_bullets_copper" cmult="2" > <!-- avail="2L" not implemented yet, see COM6-453 -->
+      <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,1,1"/>
+      </modifications>
+    </ammotype>
+
+    <ammotype id="metal_bullets_silver" cmult="5" > <!-- avail="2L" not implemented yet, see COM6-453 -->
+      <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,1,1"/>
+      </modifications>
+    </ammotype>
+
+    <ammotype id="metal_bullets_gold" cmult="10" > <!-- avail="2L" not implemented yet, see COM6-453 -->
+      <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,1,1"/>
+      </modifications>
+    </ammotype>
+
+</ammotypes>
