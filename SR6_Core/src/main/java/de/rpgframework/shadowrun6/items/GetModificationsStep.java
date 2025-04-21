@@ -195,6 +195,10 @@ public class GetModificationsStep implements CarriedItemProcessor {
 		// Get modifications from enhancements
 		for (ItemEnhancementValue<AItemEnhancement> enh : model.getEnhancements()) {
 			SR6ItemEnhancement real = (SR6ItemEnhancement) enh.getResolved();
+			if (real==null) {
+				logger.log(Level.ERROR, "No resolution for item enhancement "+enh.getKey());
+				continue;
+			}
 			real.getOutgoingModifications().forEach(m -> decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac));
 			model.getAsValue(SR6ItemAttribute.PRICE).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), real.getPrice(), real));
 		}

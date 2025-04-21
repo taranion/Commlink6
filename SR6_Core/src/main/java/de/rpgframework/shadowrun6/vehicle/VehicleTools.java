@@ -200,6 +200,10 @@ public class VehicleTools {
 
 		vehicle.getEffectiveAccessories().forEach( ci -> {
 			// Add all mounted weapons
+			if (ItemType.isWeapon(ci)) {
+				list.add(ci);
+			}
+			
 			// Medium
 			AvailableSlot slot = ci.getSlot(ItemHook.VEHICLE_WEAPON);
 			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
