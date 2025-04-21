@@ -10,6 +10,7 @@ public class ComLinkStarter {
 	public static void main(String[] args) {
 		LogManager.getLogManager().reset();
 		EdenSettings.setupDirectories("CommLink6");
+		System.out.println("Locale = "+EdenSettings.getPreferredLangauge("CommLink6"));
 		Locale.setDefault(EdenSettings.getPreferredLangauge("CommLink6"));
 		ComLinkMain.main(args);
 	}
