@@ -2632,7 +2632,7 @@ public class Shadowrun6Tools {
 				src = ((DataItem)srcO).getName();
 			}
 			try {
-				ret.add(  ((ValueModification)mod).getValue()+" "+src);
+				ret.add(  ((ValueModification)mod).getRawValue()+" "+src);
 			} catch (Exception e) {
 				logger.log(Level.ERROR, "Error converting "+mod+" to display string",e);
 			}
