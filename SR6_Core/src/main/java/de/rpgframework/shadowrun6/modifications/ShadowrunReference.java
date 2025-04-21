@@ -200,6 +200,9 @@ public enum ShadowrunReference implements ModifiedObjectType {
 		} else if (type.enumType!=null) {
 			try {
 				Method valueOf = type.enumType.getMethod("valueOf", String.class);
+				if ("CHOICE".equals(key)) {
+					return null;
+				}
 				return (T) valueOf.invoke(null, key);
 			} catch (InvocationTargetException ivte) {
 				Throwable ee = ivte.getTargetException();
