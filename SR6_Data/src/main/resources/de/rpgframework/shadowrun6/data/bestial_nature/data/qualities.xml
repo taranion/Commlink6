@@ -7,6 +7,7 @@
          </item>
       </geardef>
       <choices>
+         <choice type="TEXT" ref="description" uuid="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" />
          <choice type="SUBSELECT" ref="type" uuid="55a6dda7-7565-4108-9a04-65b7607081d3">
             <subOption id="furry" cost="0">
 				  <requires>
@@ -233,7 +234,7 @@
    <!-- Negative -->
    <quality id="apex_predator" karma="12" pos="false" type="SHIFTER" >
       <requires>
-         <datareq type="QUALITY" ref="pack_animal" neg="true" />
+         <datareq type="QUALITY" ref="pack_animal" negate="true" />
       </requires>
    </quality>
    <quality id="shifter_cold_blooded" karma="5" pos="false" type="SHIFTER" >
@@ -242,7 +243,7 @@
    </quality>
    <quality id="pack_animal" karma="7" pos="false" type="SHIFTER" >
       <requires>
-         <datareq type="QUALITY" ref="apex_predator" neg="true" />
+         <datareq type="QUALITY" ref="apex_predator" negate="true" />
       </requires>
    </quality>
    <quality id="shifter_barbarian" karma="10" pos="false" type="SHIFTER" >

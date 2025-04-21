@@ -64,6 +64,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 			for (Modification _mod : previous) {
 				ShadowrunReference ref = (ShadowrunReference) _mod.getReferenceType();
 				if (ref==null) continue;
+				if (!(_mod instanceof DataItemModification)) continue;
 				String key = ((DataItemModification)_mod).getKey();
 				switch (ref) {
 				case RULE:

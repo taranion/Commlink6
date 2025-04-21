@@ -6,6 +6,7 @@ import java.util.List;
 
 import de.rpgframework.genericrpg.NumericalValueController;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -60,6 +61,8 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 	public List<Modification> process(List<Modification> unprocessed) {
 		logger.log(Level.WARNING, "process shifter");
 		
+		todos.clear();
+		
 		if (getModel().getBodytype()!=BodyType.SHAPESHIFTER) {
 			// Remove an eventually existing shifter property
 			if (getModel().hasQuality(SHIFTER_QUALITY_ID)) {
@@ -71,8 +74,16 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 				QualityValue shifter = getModel().getQuality(SHIFTER_QUALITY_ID);				
 				getModel().addQuality(shifter);
 			}
+			if (getModel().getMagicOrResonanceType()!=null && getModel().getMagicOrResonanceType().usesResonance()) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_SHIFTER_MUST_HAVE_MAGIC));
+			}
+			if (getModel().getMetatype()!=null && !getModel().getMetatype().isMetahuman()) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_SHIFTER_MUST_BE_METAHUMAN));
+			}
 			
-			int cost = getCurrentKarmaCost();
+			QualityValue shifter = getModel().getQuality(SHIFTER_QUALITY_ID);
+			int min = shifter.getKarmaCost();
+			int cost = Math.max(0, getCurrentKarmaCost());
 			getModel().setKarmaFree( getModel().getKarmaFree() - cost);
 			getModel().setKarmaInvested( getModel().getKarmaInvested() + cost);
 		}

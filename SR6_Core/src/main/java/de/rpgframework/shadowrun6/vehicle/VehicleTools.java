@@ -212,6 +212,13 @@ public class VehicleTools {
 			slot = ci.getSlot(ItemHook.VEHICLE_WEAPON_SMALL);
 			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
 				list.add(slot.getAllEmbeddedItems().get(0));
+			// Hardpoints
+			slot = ci.getSlot(ItemHook.VEHICLE_HARDPOINT);
+			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
+				slot.getAllEmbeddedItems().stream()
+					.filter(item -> ItemType.isWeapon(item))
+					.map(item -> {System.err.println("VehicleTools.getVehicleWeapons: "+item);return item;})
+					.forEach(item -> list.add(item));
 		});
 
 		return list;

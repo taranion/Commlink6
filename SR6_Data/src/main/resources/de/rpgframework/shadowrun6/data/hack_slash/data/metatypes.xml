@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <metatypes>
-	<metatype id="pilot-ai" ai="true">
+	<metatype id="pilot-ai" ai="true" human="false">
    	<modifications>
       	<allowmod type="MAGIC_RESO" ref="magician" neg="true"/>
       	<allowmod type="MAGIC_RESO" ref="mysticadept" neg="true"/>
@@ -16,7 +16,7 @@
         </modifications>
     </metatype>
 
-    <metatype id="agent-ai" ai="true">
+    <metatype id="agent-ai" ai="true" human="false">
         <modifications>
       	<allowmod type="MAGIC_RESO" ref="magician" neg="true"/>
       	<allowmod type="MAGIC_RESO" ref="mysticadept" neg="true"/>
@@ -30,7 +30,7 @@
         </modifications>
     </metatype>
 
-    <metatype id="deep_foundation_ai" ai="true">
+    <metatype id="deep_foundation_ai" ai="true" human="false">
         <modifications>
       	<allowmod type="MAGIC_RESO" ref="magician" neg="true"/>
       	<allowmod type="MAGIC_RESO" ref="mysticadept" neg="true"/>
@@ -46,7 +46,7 @@
         </modifications>
     </metatype>
 
-    <metatype id="realms_ai" ai="true">
+    <metatype id="realms_ai" ai="true" human="false">
         <modifications>
       	<allowmod type="MAGIC_RESO" ref="magician" neg="true"/>
       	<allowmod type="MAGIC_RESO" ref="mysticadept" neg="true"/>

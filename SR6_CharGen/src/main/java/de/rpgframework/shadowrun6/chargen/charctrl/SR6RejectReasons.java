@@ -48,4 +48,7 @@ public interface SR6RejectReasons extends IRejectReasons {
 	public static final String TODO_CHILDAREA_NOT_SET     = "todo.lifepath.childAreaNotSet";
 	public static final String TODO_EARLY_SKILL_MISSING = "todo.lifepath.early.skill.missing";
 
+	public static final String TODO_SHIFTER_MUST_HAVE_MAGIC = "todo.shifter_must_have_magic";
+	public static final String TODO_SHIFTER_MUST_BE_METAHUMAN = "todo.shifter_must_be_metahuman";
+
 }

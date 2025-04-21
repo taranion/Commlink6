@@ -1270,7 +1270,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			case "WEAPON":
 				// Used for targeting autosoft
 				items = items.stream()
-						.filter(i -> ItemType.isWeapon(i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()))
+						.filter(i -> ItemType.isWeapon(i))
 						.filter(filterIsCarried)
 						.collect(Collectors.toList());
 				logger.log(Level.ERROR, "Don't know how to reduce GEAR to '"+choice.getTypeReference()+"'.\nAll weapons are {0} results",items.size());
