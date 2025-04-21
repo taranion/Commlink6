@@ -105,7 +105,7 @@ public class ResetModifications implements ProcessingStep {
 				}
 			}
 
-			// Remove all auto-qualities or quality levels
+			// Remove all auto-powers or quality levels
 			model.clearAutoAdeptPower();
 			for (AdeptPowerValue val : new ArrayList<>(model.getAdeptPowers())) {
 				val.reset();

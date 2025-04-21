@@ -4,14 +4,14 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.Pool;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.IItemAttribute;
-import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -79,6 +79,9 @@ public class GetModificationsForShifters implements ProcessingStep {
 			if (shifter==null) {
 				return previous;
 			}
+			shifter.clearOutgoingModifications();
+			shifter.setCustomName(shifter.getResolved().getName()+": "+model.getShifterAnimal());
+			shifter.getName();
 
 			// Add new body
 			BodyForm body = new BodyForm(BodyType.SHAPESHIFTER);
@@ -101,7 +104,8 @@ public class GetModificationsForShifters implements ProcessingStep {
 			// Copy basic shifter qualities over
 			for (Modification mod : shifter.getResolved().getOutgoingModifications()) {
 				logger.log(Level.INFO, mod);
-				shifter.getOutgoingModifications().add(mod);
+				mod.setSource(shifter.getResolved());
+				shifter.addOutgoingModification(mod);
 				ApplyModificationsGeneric.applyModification(model, mod);
 			}
 
@@ -164,7 +168,17 @@ public class GetModificationsForShifters implements ProcessingStep {
 						if (mod instanceof ValueModification) {
 							qVal.setDistributed( ((ValueModification)mod).getValue() );
 						}
-						diMod.getDecisions().forEach(d -> qVal.addDecision(d));
+						diMod.getDecisions().forEach(d -> {
+							if (d.getValue().startsWith("i18n.")) {
+								Decision newDec = new Decision(d.getChoiceUUID(), d.getValue());
+								String key = qual.getTypeString()+"."+qual.getId()+".choice."+d.getValue().substring(5);
+								String result = qual.getLocalizedString(Locale.getDefault(), key);
+								newDec.setValue(result);
+								qVal.addDecision(newDec);
+							} else {
+								qVal.addDecision(d);
+							}
+						});
 						body.addQuality(qVal);
 						break;
 					case METAECHO:

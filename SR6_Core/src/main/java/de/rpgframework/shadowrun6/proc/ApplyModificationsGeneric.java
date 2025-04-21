@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import de.rpgframework.character.ProcessingStep;
@@ -11,6 +12,7 @@ import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.IReferenceResolver;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -39,8 +41,8 @@ import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
-import de.rpgframework.shadowrun.persist.MovementConverter;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.persist.MovementConverter;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
@@ -462,10 +464,21 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		logger.log(Level.INFO, "Add {0} with decisions {1}",mod,mod.getDecisions());
 		if (value == null) {
 			value = new QualityValue(item, 0);
+			if (mod.getId()!=null) value.setUuid(mod.getId());
 			// Handle decisions
 			for (Decision dec : mod.getDecisions()) {
-				value.addDecision(dec);
-				logger.log(Level.INFO, "Add decision {0} to quality {1}", dec, item);
+				if (dec.getValue().startsWith("i18n.")) {
+					Decision newDec = new Decision(dec.getChoiceUUID(), dec.getValue());
+					DataItem source = (DataItem)mod.getSource();
+					String key = source.getTypeString()+"."+source.getId()+".choice."+dec.getValue().substring(5);
+					String result = source.getLocalizedString(Locale.getDefault(), key);
+					newDec.setValue(result);
+					value.addDecision(newDec);
+					logger.log(Level.INFO, "Add decision {0} to quality {1}", newDec, item);
+				} else {
+					value.addDecision(dec);
+					logger.log(Level.INFO, "Add decision {0} to quality {1}", dec, item);
+				}
 			}
 
 			if (item.getType()==QualityType.SHIFTER) {
