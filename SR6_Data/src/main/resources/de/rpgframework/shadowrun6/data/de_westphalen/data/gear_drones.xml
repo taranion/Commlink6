@@ -22,16 +22,9 @@
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_k12" />
       </modifications>
 		<geardef>
-			<item id="weapon_k12_weapon" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true" >
-				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" value="1" />
+			<item id="weapon_k12" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" />
 				<weapon dmg="12P" attack="20,,,," skill="piloting" spec="piloting/ground_craft"/>
-			</item>
-			<item id="weapon_k12" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
-				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
-				<modifications>
-					<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1" />
-					<embed type="GEAR" ref="weapon_k12_weapon" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
-				</modifications>
 			</item>
 		</geardef>
    </item>

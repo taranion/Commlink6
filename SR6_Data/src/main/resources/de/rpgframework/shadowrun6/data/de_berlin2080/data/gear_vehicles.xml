@@ -53,6 +53,12 @@
    <!-- Drones -->
    <item avail="4"  price="3500" id="junkdog"  type="DRONE_MEDIUM" subtype="GROUND">
       <vehicle han="3/3" acc="6" spdi="15" tspd="40" bod="4" arm="1" pil="3" sen="2" sea="0" type="GROUND"/>
+		<geardef>
+			<item id="weapon_junkdog_bite" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" modonly="true" >
+				<usage mode="EMBEDDED"  slot="VEHICLE_HARDPOINT" />
+				<weapon dmg="2P" mode="SS" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+			</item>
+		</geardef>
       <modifications>
 		<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true" /> <!-- As this is a walker, it does not have tires -->
 		<embed  type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="soft_close_combat">
@@ -64,19 +70,6 @@
 			<embed  type="GEAR" intoId="cdd114e2-4741-42df-aa71-7e09c66f4ba4" intoType="HOOK" intoRef="SENSOR_FUNCTION" ref="olfactory_sensor" />
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_junkdog_bite" />
       </modifications>
-		<geardef>
-			<item id="weapon_junkdog_bite_weapon" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" modonly="true" >
-				<usage mode="EMBEDDED"  slot="VEHICLE_WEAPON" value="1" />
-				<weapon dmg="2P" mode="SS" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
-			</item>
-			<item id="weapon_junkdog_bite" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
-  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
-				<modifications>
-					<valmod type="HOOK" ref="VEHICLE_WEAPON" value="1" />
-					<embed type="GEAR" ref="weapon_junkdog_bite_weapon" intoType="HOOK" intoRef="VEHICLE_WEAPON" />
-				</modifications>
-			</item>
-		</geardef>
    </item>
 
    <item avail="6"  price="3000" id="kuznechik"  type="DRONE_MEDIUM" subtype="AIR" >
