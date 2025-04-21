@@ -881,13 +881,13 @@
 	<item id="proteus_krake" avail="2" price="4000" type="DRONE_SMALL" subtype="AQUATIC" >
 		<vehicle han="3" acc="20" spdi="25" tspd="50" bod="5" arm="0" pil="2" sen="2" />
 		<geardef>
-			<item id="emc_ink_dispenser" type="ACCESSORY" subtype="LAUNCHERS">
-				<usage mode="EMBEDDED" slot="VEHICLE_ACCESSORY" value="1"/>
+			<item id="emc_ink_dispenser" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT"/>
 			</item>
 		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="emc_ink_dispenser" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="emc_ink_dispenser" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="micro_torpedo_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
@@ -895,7 +895,7 @@
 		<vehicle han="3" acc="20" spdi="25" tspd="50" bod="5" arm="0" pil="2" sen="2" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="emc_ink_dispenser" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="emc_ink_dispenser" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="micro_torpedo_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="tool_storage" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
