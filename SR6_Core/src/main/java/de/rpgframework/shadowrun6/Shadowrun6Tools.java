@@ -2425,7 +2425,7 @@ public class Shadowrun6Tools {
 
 	//---------------------------------------------------------
 	public static void applyReward(Shadowrun6Character model, Reward reward) {
-		logger.log(Level.INFO, "Apply reward ''{0}'' to character", reward.getTitle());
+		logger.log(Level.INFO, "Apply reward ''{0}'' to character", reward);
 		model.addReward(reward);
 
 		if (reward.getExperiencePoints()!=0) {
