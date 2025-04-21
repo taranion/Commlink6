@@ -211,9 +211,9 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 		});
 		
 		tfAnimal.textProperty().addListener( (ov,o,n) -> {
-			Quality shifter = Shadowrun6Core.getItem(SR6Quality.class, "shifter");
-			QualityValue val = charGen.getModel().getQuality("shifter");
-			val.setCustomName(tfAnimal+" "+shifter.getName(Locale.getDefault()));
+			n = n.replace("<", "").replace(">", "");
+			charGen.getModel().setShifterAnimal(n);
+			
 		});
 	}
 
