@@ -2425,7 +2425,7 @@ public class Shadowrun6Tools {
 
 	//---------------------------------------------------------
 	public static void applyReward(Shadowrun6Character model, Reward reward) {
-		logger.log(Level.INFO, "Apply reward ''{0}'' to character", reward.getTitle());
+		logger.log(Level.INFO, "Apply reward ''{0}'' to character", reward);
 		model.addReward(reward);
 
 		if (reward.getExperiencePoints()!=0) {
@@ -2632,7 +2632,7 @@ public class Shadowrun6Tools {
 				src = ((DataItem)srcO).getName();
 			}
 			try {
-				ret.add(  ((ValueModification)mod).getValue()+" "+src);
+				ret.add(  ((ValueModification)mod).getRawValue()+" "+src);
 			} catch (Exception e) {
 				logger.log(Level.ERROR, "Error converting "+mod+" to display string",e);
 			}

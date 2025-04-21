@@ -76,10 +76,10 @@
 		<checkmod type="SKILL" ref="stealth" value="-1" what="EDGE_BOOST" />
     </modifications>
 	<choices>
-		<choice type="SPELL" uuid="fbe4ffba-916b-4526-86c0-8c532c7bc159" options="ILLUSION,COMBAT"/>
+		<choice type="SPELL_CATEGORY" uuid="fbe4ffba-916b-4526-86c0-8c532c7bc159" options="ILLUSION,COMBAT"/>
 	</choices>
     <magician>
-		<checkmod type="SPELL" ref="CHOICE" choice="fbe4ffba-916b-4526-86c0-8c532c7bc159" value="-1" what="EDGE_BOOST" />
+		<checkmod type="SPELL_CATEGORY" ref="CHOICE" choice="fbe4ffba-916b-4526-86c0-8c532c7bc159" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
 		<valmod type="ADEPT_POWER" ref="spell_shroud" value="2" />

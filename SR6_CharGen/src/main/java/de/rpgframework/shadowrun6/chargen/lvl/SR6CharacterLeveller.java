@@ -80,7 +80,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		sins      = new SR6SINLeveller(this);
 		lifestyles= new SR6LifestyleLeveller(this);
 		contacts  = new SR6ContactLeveller(this);
-		animalism = new SR6AnimalismController(this, true);
+		animalism = new SR6AnimalismController(this, false);
 		dataStructures = new SR6DataStructureController(this);
 		martial   = new SR6MartialArtsController(this);
 
