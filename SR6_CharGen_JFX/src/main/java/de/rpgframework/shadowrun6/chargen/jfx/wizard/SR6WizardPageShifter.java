@@ -42,8 +42,10 @@ import de.rpgframework.shadowrun6.chargen.jfx.SR6ReferenceTypeConverter;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 /**
@@ -58,6 +60,7 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 
 	private GeneratorWrapper charGen;
 
+	private TextField tfAnimal;
 	private Label lbCurrent;
 	private Label lbMinimum;
 
@@ -86,6 +89,7 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 
 	//-------------------------------------------------------------------
 	private void initComponents() {
+		tfAnimal  = new TextField();
 		lbCurrent = new Label("+?");
 		lbCurrent.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 		lbMinimum = new Label("?");
@@ -108,6 +112,12 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 		});
 		selection.setShowHeadings(false);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
+		
+		// Pre-pane
+		Label hdAnimal = new Label(ResourceI18N.get(RES, "page.shifter.type_of_animal"));
+		VBox pre = new VBox(5, hdAnimal, tfAnimal);
+		pre.setStyle("-fx-padding: 0 0 1em 0");
+		selection.setSelectedPre(pre);
 		selection.setSkin(new ComplexDataItemControllerOneColumnSkin<Quality,QualityValue>(selection));
 
 //		bxDescription = new GenericDescriptionVBox(
@@ -198,6 +208,12 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 		
 		selection.showHelpForProperty().addListener( (obj,o,n) -> {
 			logger.log(Level.INFO, "ToDo: Find a way to show description of "+n);
+		});
+		
+		tfAnimal.textProperty().addListener( (ov,o,n) -> {
+			n = n.replace("<", "").replace(">", "");
+			charGen.getModel().setShifterAnimal(n);
+			
 		});
 	}
 

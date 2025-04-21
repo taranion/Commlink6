@@ -69,6 +69,8 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	protected Integer essenceLossZero;
 	@ElementList(entry="quality", type = QualityValue.class, inline = false)
 	private List<QualityValue> shifterAddons;
+	@Element
+	private String shifterAnimal;
 	private transient List<QualityValue> shifterAuto;
 
 	protected transient List<CheckModification> edgeMods;
@@ -561,6 +563,16 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 		}
 		if (!shifterAuto.contains(value))
 			shifterAuto.add(value);
+	}
+
+	//-------------------------------------------------------------------
+	public String getShifterAnimal() {
+		return shifterAnimal;
+	}
+
+	//-------------------------------------------------------------------
+	public void setShifterAnimal(String shifterAnimal) {
+		this.shifterAnimal = shifterAnimal;
 	}
 
 }

@@ -115,7 +115,7 @@
 		</requires>
 	</quality>
 	<quality id="finesse"       karma="7" pos="false" type="NORMAL"/>
-	<quality id="gear_acquisition_syndrome" karma="6" pos="false" type="NORMAL" max="3"/>
+	<quality id="gear_acquisition_syndrome" karma="5" pos="false" type="NORMAL" max="3"/>
 	<quality id="glitchy"       karma="12" pos="false" type="NORMAL"/>
 	<quality id="gourmand"      karma="5"  pos="false" type="NORMAL"/>
 	<quality id="hooder"        karma="5"  pos="false" type="NORMAL" max="3">

@@ -142,35 +142,39 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 		// Shifter natural weapon
 		if (model.getBodytype()==BodyType.SHAPESHIFTER) {
 			BodyForm body = model.getBodyForm(BodyType.SHAPESHIFTER);
+			if (body==null) {
+				logger.log(Level.ERROR, "Character {0} is a SHAPESHIFTER, but misses the BodyForm", model.getName());
+			} else {
+				// Prepare modifications to add
+				strDMGBonus = null;
+				strARMod = null;
+				reaARMod = null;
 
-			// Prepare modifications to add
-			strDMGBonus = null;
-			strARMod = null;
-			reaARMod = null;
-
-			// Rule: High Strength adds to damage (6WC 150)
-			aVal = body.getAttributeValue(ShadowrunAttribute.STRENGTH);
-			if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.HIGH_STRENGTH_ADDS_DAMAGE) && aVal.getModifiedValue()>6) {
-				int plus = (aVal.getModifiedValue()>=10)?2:1;
-				strDMGBonus = new ValueModification(
-						ShadowrunReference.ITEM_ATTRIBUTE,
-						SR6ItemAttribute.DAMAGE.name(),
-						plus,
-						Shadowrun6Rules.HIGH_STRENGTH_ADDS_DAMAGE);
-			}
+				// Rule: High Strength adds to damage (6WC 150)
+				aVal = body.getAttributeValue(ShadowrunAttribute.STRENGTH);
+				if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.HIGH_STRENGTH_ADDS_DAMAGE) && aVal.getModifiedValue()>6) {
+					int plus = (aVal.getModifiedValue()>=10)?2:1;
+					strDMGBonus = new ValueModification(
+							ShadowrunReference.ITEM_ATTRIBUTE,
+							SR6ItemAttribute.DAMAGE.name(),
+							plus,
+							Shadowrun6Rules.HIGH_STRENGTH_ADDS_DAMAGE);
+				}
 
 
-			strARMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.STRENGTH);
-			strARMod.setSet(ValueType.NATURAL);
-			aVal = body.getAttributeValue(ShadowrunAttribute.REACTION);
-			reaARMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue(), ShadowrunAttribute.REACTION);
-			reaARMod.setSet(ValueType.NATURAL);
-			for (CarriedItem<ItemTemplate> natural : body.getNaturalWeapons()) {
-				Pool<Integer> pool = Shadowrun6Tools.getWeaponPool(model, natural);
-				natural.setPool(pool);
-				natural.addModificationFromCharacter(strARMod);
-				if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
+				strARMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue()+",0,0,0,0", ShadowrunAttribute.STRENGTH);
+				strARMod.setSet(ValueType.NATURAL);
+				aVal = body.getAttributeValue(ShadowrunAttribute.REACTION);
+				reaARMod = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ATTACK_RATING.name(), aVal.getModifiedValue(), ShadowrunAttribute.REACTION);
+				reaARMod.setSet(ValueType.NATURAL);
+				for (CarriedItem<ItemTemplate> natural : body.getNaturalWeapons()) {
+					Pool<Integer> pool = Shadowrun6Tools.getWeaponPool(model, natural);
+					natural.setPool(pool);
 					natural.addModificationFromCharacter(strARMod);
+					natural.addModificationFromCharacter(reaARMod);
+					if (ruleCtrl.getRuleValueAsBoolean(Shadowrun6Rules.ADD_STRENGTH_TO_MELEE_AR)) {
+						natural.addModificationFromCharacter(strARMod);
+					}
 				}
 			}
 		}
