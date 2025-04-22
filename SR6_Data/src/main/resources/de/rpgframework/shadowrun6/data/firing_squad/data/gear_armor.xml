@@ -68,7 +68,7 @@
             <valmod type="HOOK" value="6" ref="ARMOR"/>
         </modifications>
     </item>
-    <item id="murder_armor" avail="4L" price="5000" type="ARMOR" subtype="ARMOR_BODY">
+    <item id="murder_armor" avail="4L" price="5000" type="ARMOR" subtype="ARMOR_BODY"> <!-- category ARMOR_BODY in spite of positive social value due to being listed unter normal armor in firing squad -->
         <armor rating="4" social="+2"/>
         <modifications>
             <valmod type="HOOK" value="4" ref="ARMOR"/>
@@ -123,7 +123,7 @@
 		<choices>
       	<choice type="GEAR" ref="CHOICE" uuid="dbb18bb4-89a4-4535-bede-3077ee600bc1" options="cold_resistance,fire_resistance,chemical_protection" />
       </choices>
-        <armor rating="4" social="-4"/>
+        <armor rating="4" social="-4"/> <!-- category ARMOR_SOCIAL in spite of negative social value due to being listed unter style armor in firing squad -->
         <modifications>
             <valmod type="HOOK" value="7" ref="ARMOR"/>
             	<embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="CHOICE" choice="dbb18bb4-89a4-4535-bede-3077ee600bc1" included="true">
@@ -150,7 +150,7 @@
        <choice type="SUBSELECT" ref="model" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5">
          <subOption id="basic"   >
         		<modifications>
-            	<valmod type="ITEM_ATTRIBUTE" value="-1" ref="DEFENSE_SOCIAL"/>
+            	<valmod type="ITEM_ATTRIBUTE" value="-1" ref="DEFENSE_SOCIAL"/> <!-- category ARMOR_SOCIAL in spite of negative social value due to being listed unter style armor in firing squad -->
        		</modifications>
          </subOption>
          <subOption id="elite"   cost="100">
@@ -185,7 +185,7 @@
 		<choices>
       	<choice type="GEAR" ref="CHOICE" uuid="dbb18bb4-89a4-4535-bede-3077ee600bc1" options="cold_resistance,fire_resistance" />
       </choices>
-        <armor rating="3" social="-2"/>
+        <armor rating="3" social="-2"/> <!-- category ARMOR_SOCIAL in spite of negative social value due to being listed unter style armor in firing squad -->
         <modifications>
             <valmod type="HOOK" value="8" ref="ARMOR"/>
             <embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="CHOICE" choice="dbb18bb4-89a4-4535-bede-3077ee600bc1" included="true">
@@ -195,7 +195,7 @@
     </item>
     
     <item id="cyclewear" avail="3" price="500" type="ARMOR" subtype="ARMOR_SOCIAL">
-        <armor rating="3" social="-5"/>
+        <armor rating="3" social="-5"/> <!-- category ARMOR_SOCIAL in spite of negative social value due to being listed unter style armor in firing squad -->
         <modifications>
             <valmod type="HOOK" value="8" ref="ARMOR"/>
         </modifications>

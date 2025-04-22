@@ -239,7 +239,7 @@
       </modifications>
 		<geardef>
 			<item id="krime_calliope_gun" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
-				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" />
+				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" value="1" />
 				<weapon dmg="0P" mode="SS/FA" attack=",4,10,9,6" ammo="10(ml)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
 				<modifications>
 					<itemmod type="GEARMOD" ref="metahuman_adaption"/>

@@ -41,13 +41,13 @@
 	</item>
 	<item avail="2" price="2100" id="mct_hornet" type="DRONE_MINI" subtype="AIR">
 		<vehicle han="3" acc="20" spdi="15" tspd="35" bod="1" arm="0" pil="2" sen="2" />
-			<geardef>
-				<item id="mct_hornet_stinger" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
-					<usage mode="EMBEDDED"/>
-					<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/blades" />
+		<geardef>
+			<item id="mct_hornet_stinger" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" />
+				<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/blades" />
 				<!-- Rules state the existence of the injector, but no data given. Using damage 1P as parashield darts and attack rating 4, to be below AR 6 of a knife -->
-				</item>
-			</geardef>
+			</item>
+		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="mct_hornet_stinger" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
 		</modifications>
@@ -60,16 +60,25 @@
 	<item avail="2" price="4500" id="aztechnology_crawler" type="DRONE_SMALL" subtype="GROUND">
 		<vehicle han="3/4" acc="8" spdi="10" tspd="30" bod="6" arm="2" pil="2" sen="2" />
 	</item>
-   <item avail="4L" price="290" id="cyberspace_designs_quadrotor_crossbow" type="WEAPON_RANGED" subtype="CROSSBOWS">
-   	<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/>
-      <requires>
-         <datareq type="GEAR" ref="cyberspace_designs_quadrotor" apply="DATA_ITEM"/>
-      </requires>
-      <weapon dmg="3P" attack="2,10,4,2," ammo="4(m)" mode="SS"  skill="engineering" spec="engineering/gunnery"/>
-      <modifications>
-         <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="UNDER"/>
-      </modifications>
+   <item avail="4L" price="290" id="cyberspace_designs_quadrotor_crossbow" type="MOD_HARD" subtype="MOD_MOUNT">
+		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/>
+		<requires>
+			<datareq type="GEAR" ref="cyberspace_designs_quadrotor" apply="DATA_ITEM"/>
+		</requires>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_WEAPON_SMALL" value="1"/>
+			<embed type="GEAR" ref="cyberspace_designs_quadrotor_crossbow_weapon" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL"/>
+		</modifications>
+		<geardef>
+			<item id="cyberspace_designs_quadrotor_crossbow_weapon" type="WEAPON_RANGED" subtype="CROSSBOWS" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_SMALL" value="1"/>
+				<weapon dmg="3P" attack="2,10,4,2," ammo="4(m)" mode="SS"  skill="engineering" spec="engineering/gunnery"/>
+					<modifications>
+						<itemmod type="HOOK" ref="TOP"/>
+						<itemmod type="HOOK" ref="UNDER"/>
+					</modifications>
+			</item>
+		</geardef>
 	</item>
 	<item avail="2" price="5000" id="cyberspace_designs_quadrotor" type="DRONE_SMALL" subtype="AIR">
 		<vehicle han="2" acc="15" spdi="20" tspd="120" bod="3" arm="1" pil="3" sen="2" />
@@ -89,16 +98,26 @@
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
 		</modifications>
 	</item>
-   <item id="spurs_samurai_oni" price="0" modonly="true" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" > <!-- Spurs for drones nissan_samurai and nissan_oni -->
-      <usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT"/>
-      <weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
+
+   <item id="spurs_samurai_oni" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" modonly="true" > <!-- Spurs for drones nissan_samurai and nissan_oni -->
+		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" />
+		<weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
+
 	<item avail="2" price="4500" id="nissan_samurai" type="DRONE_MEDIUM" subtype="ANTHRO">
 		<vehicle han="3/4" acc="10" spdi="10" tspd="30" bod="6" arm="6" pil="3" sen="2" type="GROUND" />
+		<geardef>
+			<item id="samurai_mount_small" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+				<modifications>
+					<valmod type="HOOK" ref="VEHICLE_WEAPON_SMALL" value="1"/>
+				</modifications>
+			</item>
+		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="82dec4cf-b52c-463c-875f-9434a8103fd3" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="0654dd16-b094-4339-b687-72095c446254" />
+			<embed type="GEAR" ref="samurai_mount_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="82dec4cf-b52c-463c-875f-9434a8103fd3" />
+			<embed type="GEAR" ref="samurai_mount_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="0654dd16-b094-4339-b687-72095c446254" />
 		</modifications>
 	</item>
 	<item avail="2" price="5000" id="mct-nissan_roto_drone" type="DRONE_MEDIUM" subtype="AIR">

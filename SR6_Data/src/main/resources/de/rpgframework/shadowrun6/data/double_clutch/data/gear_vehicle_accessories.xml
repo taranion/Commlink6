@@ -15,7 +15,7 @@
    	<item id="weapon_launcher" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true"> <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter, umea -->
    		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
 		<modifications>
-			<itemmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" />
+			<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1"/>
        		<embed type="GEAR" ref="vehicle_launcher" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
     	</modifications>
    	</item>

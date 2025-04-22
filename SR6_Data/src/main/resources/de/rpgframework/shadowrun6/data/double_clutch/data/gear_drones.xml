@@ -397,19 +397,19 @@
 	<item id="vulcan_hollenfaust" avail="5" price="50000" type="DRONE_LARGE" subtype="GROUND" >
 		<vehicle han="4/5" acc="10" spdi="15" tspd="60" bod="16" arm="16" pil="4" sen="4" />
 		<geardef>
-		   <item id="weapon_blisters" type="MOD_HARD" subtype="MOD_MOUNT">
-   			<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
-   		</item>
+			<item id="weapon_blisters" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+			</item>
 			<item id="vulcan_kr25" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
   				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" value="1"/>
 				<weapon dmg="18P" attack="1,5,16,12,10" mode="SS" ammo="8(m)" skill="engineering" spec="engineering/gunnery"/>
 			</item>
-   		<item id="weapon_turret_kr25" type="MOD_HARD" subtype="MOD_MOUNT">
+			<item id="weapon_turret_kr25" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
   				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
-	      	<modifications>
-         		<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="0" />
-         		<embed type="GEAR" ref="vulcan_kr25" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
-      		</modifications>
+				<modifications>
+					<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1" />
+					<embed type="GEAR" ref="vulcan_kr25" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
+				</modifications>
   			</item>
 		</geardef>
 		<modifications>
@@ -431,18 +431,19 @@
 	<item id="vulcan_hollenfaust" lang="de" avail="5I" price="50000" type="DRONE_LARGE" subtype="GROUND" >
 		<vehicle han="4/5" acc="10" spdi="15" tspd="60" bod="16" arm="16" pil="4" sen="4" />
 		<geardef>
-			<item id="vulcan_kr25"  type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+			<item id="weapon_blisters" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+			</item>
+			<item id="vulcan_kr25" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" value="1"/>
 				<weapon dmg="9P" attack="1,5,16,12,10" mode="SS" ammo="8(m)" skill="engineering" spec="engineering/gunnery"/>
 			</item>
-		   <item id="weapon_blisters" type="MOD_HARD" subtype="MOD_MOUNT">
-   			<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
-   		</item>
-   		<item id="weapon_turret_kr25" type="MOD_HARD" subtype="MOD_MOUNT">
+			<item id="weapon_turret_kr25" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
   				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
-	      	<modifications>
-         		<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="0" />
-         		<embed type="GEAR" ref="vulcan_kr25" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
-      		</modifications>
+				<modifications>
+					<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1" />
+					<embed type="GEAR" ref="vulcan_kr25" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
+				</modifications>
   			</item>
 		</geardef>
 		<modifications>
@@ -500,20 +501,27 @@
 	<item id="cyberspace_dragonfly" avail="3" price="3000" type="DRONE_MINI" subtype="AIR" >
 		<vehicle han="3" acc="22" spdi="20" tspd="40" bod="2" arm="1" pil="3" sen="2" />
 		<geardef>
-			<item id="monofil_beak" type="MOD_HARD" subtype="MOD_MOUNT">
-  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+			<item id="monofil_beak" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT"/>
 				<weapon dmg="4P" attack="10,,,," skill="close_combat" />
 			</item>
-			<item id="roomsweeper" type="MOD_HARD" subtype="MOD_MOUNT">
-  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+			<item id="dragonfly_roomsweeper_weapon" type="WEAPON_FIREARMS" subtype="SHOTGUNS" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_SMALL" value="1"/>
 				<weapon attack="11,10,6,," ammo="4(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/shotguns"/>
 			</item>
+			<item id="dragonfly_roomsweeper" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+				<modifications>
+					<valmod type="HOOK" ref="VEHICLE_WEAPON_SMALL" value="1" />
+					<embed type="GEAR" ref="dragonfly_roomsweeper_weapon" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" />
+				</modifications>
+  			</item>
 		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="monofil_beak" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="remington_roomsweeper" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="dragonfly_roomsweeper" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
 	<item id="cyberspace_dragonfly" lang="de" avail="3L" price="3000" type="DRONE_MINI" subtype="AIR" >
@@ -522,7 +530,7 @@
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="monofil_beak" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="remington_roomsweeper" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="dragonfly_roomsweeper" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
 
@@ -596,8 +604,8 @@
 	<item id="whispering_death" avail="4" price="2000" type="DRONE_SMALL" subtype="AIR" >
 		<vehicle han="3" acc="6" spdi="8" tspd="12" bod="3" arm="0" pil="3" sen="1" />
 		<geardef>
-			<item id="monofilament_lines" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
-      		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+			<item id="monofilament_lines" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
 				<weapon dmg="6P" attack="14,,,," skill="close_combat" />
 			</item>
 		</geardef>
@@ -605,6 +613,7 @@
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="whispering_death" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="monofilament_lines" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
 	<item id="whispering_death" lang="de" avail="4I" price="2000" type="DRONE_SMALL" subtype="AIR" >
@@ -613,6 +622,7 @@
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="whispering_death" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="monofilament_lines" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
 
@@ -832,11 +842,12 @@
 	<item id="marine_sea_snake" avail="3" price="6000" type="DRONE_SMALL" subtype="AQUATIC" >
 		<vehicle han="2" acc="5" spdi="10" tspd="30" bod="5" arm="6" pil="3" sen="2" />
 		<geardef>
-			<item id="marine_sea_snake_bit" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+			<item id="marine_sea_snake_bit" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" />
 				<weapon dmg="5P" attack="10,,,," skill="close_combat" />
-      		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
 			</item>
-			<item id="marine_sea_snake_injector" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+			<item id="marine_sea_snake_injector" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" />
 				<weapon dmg="0P" attack="9,,,," ammo="4(m)" skill="close_combat" />
 			</item>
 		</geardef>
@@ -870,26 +881,21 @@
 	<item id="proteus_krake" avail="2" price="4000" type="DRONE_SMALL" subtype="AQUATIC" >
 		<vehicle han="3" acc="20" spdi="25" tspd="50" bod="5" arm="0" pil="2" sen="2" />
 		<geardef>
-			<item id="emc_ink_dispenser" type="ACCESSORY" subtype="LAUNCHERS">
-				<usage mode="EMBEDDED" slot="VEHICLE_ACCESSORY" value="1"/>
+			<item id="emc_ink_dispenser" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT"/>
 			</item>
 		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="emc_ink_dispenser" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="emc_ink_dispenser" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="micro_torpedo_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
 	<item id="proteus_krake" lang="de" avail="2L" price="4000" type="DRONE_SMALL" subtype="AQUATIC" >
 		<vehicle han="3" acc="20" spdi="25" tspd="50" bod="5" arm="0" pil="2" sen="2" />
-		<geardef>
-			<item id="emc_ink_dispenser" type="ACCESSORY" subtype="LAUNCHERS">
-				<usage mode="EMBEDDED" slot="VEHICLE_ACCESSORY" value="1"/>
-			</item>
-		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="emc_ink_dispenser" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="emc_ink_dispenser" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="micro_torpedo_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="tool_storage" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
