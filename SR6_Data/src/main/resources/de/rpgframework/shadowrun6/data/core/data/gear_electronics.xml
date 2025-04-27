@@ -358,10 +358,10 @@
    </item>
 
     <!-- ID and Credit -->
-   <item avail="1" price="5"    id="credstick_standard" subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="1" price="20"   id="credstick_silver"   subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="2" price="100"  id="credstick_gold"     subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="3" price="500"  id="credstick_platin"   subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="5" price="1000" id="credstick_ebony"    subtype="ID_CREDIT" type="ELECTRONICS"/>
+   <item avail="1" price="5"    id="credstick_standard" subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
+   <item avail="1" price="20"   id="credstick_silver"   subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
+   <item avail="2" price="100"  id="credstick_gold"     subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
+   <item avail="3" price="500"  id="credstick_platin"   subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
+   <item avail="5" price="1000" id="credstick_ebony"    subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
 
 </items>
