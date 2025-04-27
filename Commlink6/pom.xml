@@ -26,7 +26,7 @@
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
 		<client.plugin.version>1.0.25</client.plugin.version>
 		<attach.version>4.0.22</attach.version>
-		<rpgfw.version>5.3.1-SNAPSHOT</rpgfw.version>
+		<rpgfw.version>5.3.1</rpgfw.version>
 	</properties>
 	<!-- Comment for no real purpose -->
 
@@ -271,6 +271,7 @@
 						<exclude>de.rpgframework:rpgframework-rules</exclude>
 						<exclude>de.rpgframework:rpgframework-javafx</exclude>
 						<exclude>de.rpgframework:rpgframework-generator</exclude>
+                  <exclude>de.rpgframework:rpgframework-crypto</exclude>
 						<exclude>de.rpgframework:itextpdf</exclude>
 						<exclude>de.rpgframework:attach-pdf</exclude>
 						<!--exclude>de.rpgframework:attach-pdf-pdfbox</exclude-->
