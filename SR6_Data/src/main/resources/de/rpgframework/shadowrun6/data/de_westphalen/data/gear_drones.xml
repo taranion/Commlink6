@@ -23,7 +23,7 @@
       </modifications>
 		<geardef>
 			<item id="weapon_k12" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true" >
-				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" />
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
 				<weapon dmg="12P" attack="20,,,," skill="piloting" spec="piloting/ground_craft"/>
 			</item>
 		</geardef>

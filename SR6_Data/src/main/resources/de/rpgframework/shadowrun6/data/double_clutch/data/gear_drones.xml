@@ -397,20 +397,14 @@
 	<item id="vulcan_hollenfaust" avail="5" price="50000" type="DRONE_LARGE" subtype="GROUND" >
 		<vehicle han="4/5" acc="10" spdi="15" tspd="60" bod="16" arm="16" pil="4" sen="4" />
 		<geardef>
-			<item id="weapon_blisters" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+			<item id="weapon_blisters" type="AMMUNITION" subtype="GRENADES" modonly="true" >
 				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+				<ammo gz="16P" close="12P" near="8P" blast="20" />
 			</item>
-			<item id="vulcan_kr25" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
-  				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" value="1"/>
+			<item id="weapon_vulcan_kr25" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
 				<weapon dmg="18P" attack="1,5,16,12,10" mode="SS" ammo="8(m)" skill="engineering" spec="engineering/gunnery"/>
 			</item>
-			<item id="weapon_turret_kr25" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
-  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
-				<modifications>
-					<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1" />
-					<embed type="GEAR" ref="vulcan_kr25" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
-				</modifications>
-  			</item>
 		</geardef>
 		<modifications>
 			<!--embed type="GEAR" ref="modslot_pp_to_chassis" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  /--> <!-- drone only has 16 chassis slots but needs 20, thus moving 2 slots from powertrain -->
@@ -424,27 +418,21 @@
 			</embed>
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /> <!-- Drone has only 5 hardpoints, but needs 7 thus adding one large -->
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_kr25" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_vulcan_kr25" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_blisters" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
 	<item id="vulcan_hollenfaust" lang="de" avail="5I" price="50000" type="DRONE_LARGE" subtype="GROUND" >
 		<vehicle han="4/5" acc="10" spdi="15" tspd="60" bod="16" arm="16" pil="4" sen="4" />
 		<geardef>
-			<item id="weapon_blisters" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+			<item id="weapon_blisters" type="AMMUNITION" subtype="GRENADES" modonly="true" >
 				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
+				<ammo gz="16P" close="12P" near="8P" blast="20" />
 			</item>
-			<item id="vulcan_kr25" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
-  				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" value="1"/>
-				<weapon dmg="9P" attack="1,5,16,12,10" mode="SS" ammo="8(m)" skill="engineering" spec="engineering/gunnery"/>
-			</item>
-			<item id="weapon_turret_kr25" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
+			<item id="weapon_vulcan_kr25" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
   				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
-				<modifications>
-					<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1" />
-					<embed type="GEAR" ref="vulcan_kr25" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
-				</modifications>
-  			</item>
+				<weapon dmg="18P" attack="1,5,16,12,10" mode="SS" ammo="8(m)" skill="engineering" spec="engineering/gunnery"/>
+			</item>
 		</geardef>
 		<modifications>
 			<!--embed type="GEAR" ref="modslot_pp_to_chassis" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  /--> <!-- drone only has 16 chassis slots but needs 20, thus moving 2 slots from powertrain -->
@@ -459,7 +447,7 @@
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /> <!-- Drone has only 5 hardpoints, but needs 8 thus adding one large, one standard -->
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /> <!-- Drone has only 5 hardpoints, but needs 8 thus adding one large, one standard -->
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_kr25" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_vulcan_kr25" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_blisters" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_blisters" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
@@ -502,20 +490,13 @@
 		<vehicle han="3" acc="22" spdi="20" tspd="40" bod="2" arm="1" pil="3" sen="2" />
 		<geardef>
 			<item id="monofil_beak" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" modonly="true" >
-  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT"/>
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
 				<weapon dmg="4P" attack="10,,,," skill="close_combat" />
 			</item>
-			<item id="dragonfly_roomsweeper_weapon" type="WEAPON_FIREARMS" subtype="SHOTGUNS" modonly="true" >
-  				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_SMALL" value="1"/>
+			<item id="dragonfly_roomsweeper" type="WEAPON_FIREARMS" subtype="SHOTGUNS" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
 				<weapon attack="11,10,6,," ammo="4(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/shotguns"/>
 			</item>
-			<item id="dragonfly_roomsweeper" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true" >
-  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
-				<modifications>
-					<valmod type="HOOK" ref="VEHICLE_WEAPON_SMALL" value="1" />
-					<embed type="GEAR" ref="dragonfly_roomsweeper_weapon" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" />
-				</modifications>
-  			</item>
 		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
@@ -526,6 +507,16 @@
 	</item>
 	<item id="cyberspace_dragonfly" lang="de" avail="3L" price="3000" type="DRONE_MINI" subtype="AIR" >
 		<vehicle han="3" acc="22" spdi="20" tspd="40" bod="2" arm="1" pil="3" sen="2" />
+		<geardef>
+			<item id="monofil_beak" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+				<weapon dmg="4P" attack="10,,,," skill="close_combat" />
+			</item>
+			<item id="dragonfly_roomsweeper" type="WEAPON_FIREARMS" subtype="SHOTGUNS" modonly="true" >
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+				<weapon attack="11,10,6,," ammo="4(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/shotguns"/>
+			</item>
+		</geardef>
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
@@ -843,11 +834,11 @@
 		<vehicle han="2" acc="5" spdi="10" tspd="30" bod="5" arm="6" pil="3" sen="2" />
 		<geardef>
 			<item id="marine_sea_snake_bit" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true" >
-  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" />
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5" />
 				<weapon dmg="5P" attack="10,,,," skill="close_combat" />
 			</item>
 			<item id="marine_sea_snake_injector" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true" >
-  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" />
+  				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5" />
 				<weapon dmg="0P" attack="9,,,," ammo="4(m)" skill="close_combat" />
 			</item>
 		</geardef>
@@ -882,7 +873,7 @@
 		<vehicle han="3" acc="20" spdi="25" tspd="50" bod="5" arm="0" pil="2" sen="2" />
 		<geardef>
 			<item id="emc_ink_dispenser" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
-				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT"/>
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
 			</item>
 		</geardef>
 		<modifications>
