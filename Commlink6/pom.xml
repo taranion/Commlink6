@@ -307,8 +307,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+               <groupId>org.sonatype.central</groupId>
+               <artifactId>central-publishing-maven-plugin</artifactId>
+               <version>0.7.0</version>
+               <extensions>true</extensions>
+               <configuration>
+                  <autoPublish>false</autoPublish>
+                  <skipPublishing>true</skipPublishing>
+               </configuration>
+         </plugin>
 		</plugins>
 	</build>
+
+   <distributionManagement>
+      <repository>
+         <id>github</id>
+         <name>GitHub Packages</name>
+         <url>https://maven.pkg.github.com/taranion/CommLink</url>
+      </repository>
+  </distributionManagement>
 
 	<pluginRepositories>
 		<pluginRepository>
