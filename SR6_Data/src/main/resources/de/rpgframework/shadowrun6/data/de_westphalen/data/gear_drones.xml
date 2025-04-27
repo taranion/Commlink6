@@ -22,8 +22,8 @@
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_k12" />
       </modifications>
 		<geardef>
-			<item id="weapon_k12" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
-				<usage mode="EMBEDDED"/>
+			<item id="weapon_k12" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" />
 				<weapon dmg="12P" attack="20,,,," skill="piloting" spec="piloting/ground_craft"/>
 			</item>
 		</geardef>
