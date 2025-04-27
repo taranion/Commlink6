@@ -204,6 +204,7 @@ public class VehicleTools {
 				list.add(ci);
 			}
 			
+/* code below has been replaced by code above. Restriction: factory installed weapons need to be mounted directly into hardpoint not via weapon_mount 
 			// Medium
 			AvailableSlot slot = ci.getSlot(ItemHook.VEHICLE_WEAPON);
 			if (slot!=null && !slot.getAllEmbeddedItems().isEmpty())
@@ -223,6 +224,7 @@ public class VehicleTools {
 					.filter(item -> ItemType.isWeapon(item))
 					.map(item -> {System.err.println("VehicleTools.getVehicleWeapons: "+item);return item;})
 					.forEach(item -> list.add(item));
+*/		
 		});
 
 		return list;
