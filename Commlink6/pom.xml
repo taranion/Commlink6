@@ -8,7 +8,6 @@
 		<groupId>de.rpgframework</groupId>
 		<artifactId>shadowrun6-master</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<groupId>de.rpgframework.shadowrun6</groupId>
