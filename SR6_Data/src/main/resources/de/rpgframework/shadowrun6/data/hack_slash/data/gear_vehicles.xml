@@ -3,27 +3,18 @@
 
 <!-- GOD Dominion -->
 
-	<item id="ascalon_railgun" avail="8I" price="650000" type="MOD_HARD" subtype="MOD_MOUNT" > <!-- ascalion railgun always comes with proprietary turret -->
+	<item id="ascalon_railgun" avail="8I" price="650000" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" >
 		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="3"/>
-		<modifications>
-			<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1"/>
-			<embed type="GEAR" ref="ascalon_railgun_weapon" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE"/>
-		</modifications>
 		<requires>
 			<valuereq type="ATTRIBUTE" ref="BODY" value="16" apply="PARENT"/>
 		</requires>
-		<geardef>
-			<item id="ascalon_railgun_weapon" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON" modonly="true" >
-				<usage mode="EMBEDDED" slot="VEHICLE_WEAPON_LARGE" value="1" />
-				<weapon attack="15,22,15,12,9" ammo="20(c)" dmg="9P" mode="SS" skill="firearms" spec="firearms/machine_guns"/>
-				<modifications>
-					<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-					<itemmod type="HOOK" ref="TOP"/>
-					<itemmod type="HOOK" ref="BARREL"/>
-					<itemmod type="HOOK" ref="UNDER"/>
-				</modifications>
-			</item>
-		</geardef>
+		<weapon attack="15,22,15,12,9" ammo="20(c)" dmg="9P" mode="SS" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+		</modifications>
 	</item>
 
 	<item id="samael_transport" avail="9I" price="2800000" type="VEHICLES" subtype="LAV" >

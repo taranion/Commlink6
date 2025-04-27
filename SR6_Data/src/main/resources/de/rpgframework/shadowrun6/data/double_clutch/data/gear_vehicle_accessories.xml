@@ -8,17 +8,10 @@
 		<weapon dmg="0P" attack=",8,8,3," mode="SS" ammo="4(c)" skill="exotic_weapons" spec="exotic_weapons/launchers"/> <!-- Errata needed: No info on ranges for micro launcher, using armtech_mgl6 -->
 	</item>
 
- 	<item id="vehicle_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" modonly="true"> <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter -->
+ 	<item id="weapon_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS" modonly="true"> <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter -->
+   		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
 		<weapon dmg="0P" attack=",5,9,10,8" mode="SS" ammo="2(ml)" skill="exotic_weapons" spec="exotic_weapons/launchers" /> <!-- Errata needed: No info on ranges for launcher, using aztechnology_striker -->
 	</item>
-
-   	<item id="weapon_launcher" type="MOD_HARD" subtype="MOD_MOUNT" modonly="true"> <!-- For bae_ajax, dassault_peregrine, marine_silent_hunter, mostrans_wavecutter, umea -->
-   		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="2"/>
-		<modifications>
-			<valmod type="HOOK" ref="VEHICLE_WEAPON_LARGE" value="1"/>
-       		<embed type="GEAR" ref="vehicle_launcher" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" />
-    	</modifications>
-   	</item>
 
    	<item id="tool_storage" type="MOD_HARD" subtype="MOD_OTHERS" modonly="true" > <!-- For evo_proletarian, vulcan_utility_one and proteus_krake -->
 		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0"/>
