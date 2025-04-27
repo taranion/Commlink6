@@ -8,12 +8,11 @@
 		<groupId>de.rpgframework</groupId>
 		<artifactId>shadowrun6-master</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<groupId>de.rpgframework.shadowrun6</groupId>
 	<artifactId>commlink6</artifactId>
-	<version>1.9.0-SNAPSHOT</version>
+	<version>1.9.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Commlink6</name>
@@ -25,8 +24,8 @@
 		<maven.deploy.skip>false</maven.deploy.skip>
 		<maven.install.skip>false</maven.install.skip>
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
-		<client.plugin.version>1.0.24</client.plugin.version>
-		<attach.version>4.0.21</attach.version>
+		<client.plugin.version>1.0.25</client.plugin.version>
+		<attach.version>4.0.22</attach.version>
 		<rpgfw.version>5.3.1-SNAPSHOT</rpgfw.version>
 	</properties>
 	<!-- Comment for no real purpose -->
@@ -308,8 +307,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+               <groupId>org.sonatype.central</groupId>
+               <artifactId>central-publishing-maven-plugin</artifactId>
+               <version>0.7.0</version>
+               <extensions>true</extensions>
+               <configuration>
+                  <autoPublish>false</autoPublish>
+                  <skipPublishing>true</skipPublishing>
+               </configuration>
+         </plugin>
 		</plugins>
 	</build>
+
+   <distributionManagement>
+      <repository>
+         <id>github</id>
+         <name>GitHub Packages</name>
+         <url>https://maven.pkg.github.com/taranion/CommLink</url>
+      </repository>
+  </distributionManagement>
 
 	<pluginRepositories>
 		<pluginRepository>
