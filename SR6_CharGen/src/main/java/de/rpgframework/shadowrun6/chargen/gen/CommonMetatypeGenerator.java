@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetaTypeOption;
+import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -48,6 +49,14 @@ public abstract class CommonMetatypeGenerator extends ControllerImpl<SR6MetaType
 	 */
 	@Override
 	public List<MetaTypeOption> getAvailable() {
+//		return new ArrayList<MetaTypeOption>(availableOptions.values().stream()
+//				.filter(p -> parent.showDataItem(p))
+//				.collect(Collectors.toMap(
+//						MetaTypeOption::getId,          // Key-Mapper: ID as Key
+//                        item -> item,             // Value-Mapper: The item as value
+//                        (existing, replacement) -> // Merge-Function for duplicates:
+//                            existing.getLanguage() != null ? existing : replacement  // prefer Item with Locale
+//                )).values());
 		List<MetaTypeOption> ret = new ArrayList<>(availableOptions.values());
 		return ret;
 	}

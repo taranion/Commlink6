@@ -2,6 +2,8 @@ package de.rpgframework.shadowrun6.comlink.pages;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
@@ -11,6 +13,7 @@ import org.prelle.javafx.ApplicationScreen;
 import org.prelle.javafx.Page;
 
 import de.rpgframework.ResourceI18N;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.jfx.FilteredListPage;
 import de.rpgframework.jfx.GenericDescriptionVBox;
@@ -46,7 +49,6 @@ import de.rpgframework.shadowrun6.chargen.jfx.listcell.ItemTemplateListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.ItemTemplatePane;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.MentorSpiritDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.QualityPathDescriptionPane;
-import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -379,16 +381,16 @@ public class LibraryPage extends Page {
 				return Shadowrun6Tools.getModificationString(data, t, Locale.getDefault());
 			}
 		};
-		MetatypePane<SR6MetaType> descPane = new MetatypePane<SR6MetaType>(modResolver);
-		descPane.setItems(
-				Shadowrun6Core.getItemList(SR6MetaType.class).stream()
+		List<SR6MetaType> data = Shadowrun6Core.getItemList(SR6MetaType.class).stream()
 				.filter(Shadowrun6Tools.filterByLanguage(Locale.getDefault()))
-				.collect(Collectors.toList())
-				);
+				.collect(DataItem.toListPreferringLocale());
+		
+		MetatypePane<SR6MetaType> descPane = new MetatypePane<SR6MetaType>(modResolver);
+		descPane.setItems(data);
 		try {
 			FilteredListPage<SR6MetaType> page =new FilteredListPage<SR6MetaType>(
 					ResourceI18N.get(LibraryPage.RES, "category.metatypes"),
-					() -> Shadowrun6Core.getItemList(SR6MetaType.class),
+					() -> data,
 					descPane
 					);
 			page.setId("filtered-meta");

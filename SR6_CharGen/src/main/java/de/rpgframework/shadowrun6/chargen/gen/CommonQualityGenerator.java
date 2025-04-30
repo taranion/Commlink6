@@ -5,7 +5,6 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
@@ -16,6 +15,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Choice;
 import de.rpgframework.genericrpg.data.ChoiceOption;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.Quality;
@@ -357,7 +357,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 				.filter(p -> parent.showDataItem(p))
 				.filter(p -> p.isFreeSelectable())
 				.filter(p -> !model.hasQuality(p.getId()) || p.isMulti())
-				.collect(Collectors.toList());
+				.collect(DataItem.toListPreferringLocale());
 	}
 
 	//-------------------------------------------------------------------
