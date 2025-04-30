@@ -79,7 +79,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 
 		for (Modification tmp : new ArrayList<>(unprocessed)) {
 			try {
-				logger.log(Level.WARNING, "Process {0}", tmp);
+				logger.log(Level.TRACE, "Process {0}", tmp);
 				boolean processed = false;
 				if (tmp instanceof ValueModification) {
 					processed = applyModification(strict, charac, model2, (ValueModification) tmp);
@@ -134,8 +134,8 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			} else {
 				CarriedItem<ItemTemplate> parent = model.getParent();
 				if (mod.getApplyTo()==ApplyTo.PARENT && parent==null) {
-					logger.log(Level.ERROR, "Cannot apply modification {0} from {1} to parent, since parent is unknown", mod, model);
-//					System.exit(1);
+					logger.log(Level.TRACE, "Cannot apply modification {0} from {1} to parent, since parent is unknown", mod, model);
+					return false;
 				}
 				// If possible, assume slot should be inserted into parent
 				CarriedItem<ItemTemplate> addTo = (mod.getApplyTo()==ApplyTo.PARENT)?parent:model;

@@ -104,10 +104,16 @@ public class ItemUtil {
 		case CONCEALABILITY:
 			return;
 		case PRICE2:
-			val = new ItemAttributeNumericalValue<SR6ItemAttribute>(attr, Integer.valueOf(mod.getRawValue()));
-			ref.setAttribute(attr, val);
-			logger.log(Level.DEBUG, "Set new item attribute "+val);
-			return;
+		case TOPSPEED:
+		case BODY:
+		case SENSORS:
+		case MAX_SENSOR_RATING:
+			if (mod.getRawValue()!=null) {
+				val = new ItemAttributeNumericalValue<SR6ItemAttribute>(attr, Integer.valueOf(mod.getRawValue()));
+				ref.setAttribute(attr, val);
+				logger.log(Level.DEBUG, "Set new item attribute "+val);
+				return;
+			}
 		default:
 			logger.log(Level.WARNING, "Unsuported addOrSetItemAttribute {0} with {1}  val={2}", attr, mod.getRawValue(), val);
 		}

@@ -48,7 +48,8 @@ public class InsertDefaultAccessories implements CarriedItemProcessor {
 				access.setInjectedBy("DEFAULT");
 				access.addIncomingModification(new DataItemModification(ShadowrunReference.GEAR, "anti_theft"));
 				access.addFlag(SR6ItemFlag.AUTO_ADDED);
-				model.addAccessory(access, ItemHook.VEHICLE_ELECTRONICS);
+				if (model.getSlot(ItemHook.VEHICLE_ELECTRONICS)!=null)
+					model.addAccessory(access, ItemHook.VEHICLE_ELECTRONICS);
 			}
 		}
 
