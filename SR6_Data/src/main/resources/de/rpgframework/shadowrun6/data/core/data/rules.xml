@@ -24,7 +24,7 @@
          <set rule="CHARGEN_MAX_AVAILABILITY" to="6"/>
 		</rules>
 	</interpretation>
-	<interpretation id="srm" lang="en" restrict="prio,sumto10,pointbuy">
+	<interpretation id="srm" restrict="prio,sumto10,pointbuy">
 		<rules>
 			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
          <set rule="CHARGEN_SUM_TO_TEN_ELITE" to="12" />

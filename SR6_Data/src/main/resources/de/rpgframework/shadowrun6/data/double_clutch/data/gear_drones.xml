@@ -603,7 +603,6 @@
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="whispering_death" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="monofilament_lines" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
@@ -612,7 +611,6 @@
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="whispering_death" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="monofilament_lines" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>

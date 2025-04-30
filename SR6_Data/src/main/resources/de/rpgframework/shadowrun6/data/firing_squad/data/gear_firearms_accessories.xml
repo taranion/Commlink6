@@ -29,7 +29,19 @@
       <usage mode="EMBEDDED" slot="BARREL"/>
       <weapon  dmg="2P" attack="5,2,,," skill="close_combat" spec="close_combat/blades"/>
    </item>
-   <item avail="2" price="225" id="concealbale_quickdraw_holster" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+   <item avail="2" price="70" id="concealbale_quickdraw_holster" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+      	<selreq apply="DATA_ITEM">
+	         <valuereq type="ITEM_ATTRIBUTE" ref="WEAPON_SIZE" value="TINY"/>
+	         <valuereq type="ITEM_ATTRIBUTE" ref="WEAPON_SIZE" value="SMALL"/>
+      	</selreq>
+      </requires>
+      <modifications>
+         <valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="1"/>
+      </modifications>
+   </item>
+   <item avail="2" price="225" id="concealbale_quickdraw_holster" type="ACCESSORY" subtype="WEAPON_ACCESSORY" lang="de">
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
       	<selreq apply="DATA_ITEM">
