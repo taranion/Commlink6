@@ -23,7 +23,7 @@ public class SR6PriorityTableController extends PriorityTableController<Shadowru
 	private final static Map<PowerLevel, String> ALLOWED_BY_LEVEL = Map.of(
 			PowerLevel.STANDARD    , "ABCDE",
 			PowerLevel.STREET_LEVEL, "BCCDE",
-			PowerLevel.ELITE       , "AABCD"
+			PowerLevel.ELITE       , "ABBCD"
 			);
 
 	private PowerLevel oldLevel;
