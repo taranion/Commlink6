@@ -3,6 +3,7 @@
 	<interpretation id="core_seattle" lang="en">
 		<rules>
 			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
+			<set rule="CHARGEN_SUM_TO_TEN_ELITE" to="12" />
 			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="false"/>
 			<set rule="CHARGEN_BUY_SPELLS_KARMA" to="false"/>
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="5"/>
@@ -14,6 +15,7 @@
 	<interpretation id="core" lang="en">
 		<rules>
 			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
+         <set rule="CHARGEN_SUM_TO_TEN_ELITE" to="12" />
 			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="false"/>
 			<set rule="CHARGEN_BUY_SPELLS_KARMA" to="false"/>
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="5"/>
@@ -25,6 +27,7 @@
 	<interpretation id="srm" lang="en" restrict="prio,sumto10,pointbuy">
 		<rules>
 			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
+         <set rule="CHARGEN_SUM_TO_TEN_ELITE" to="12" />
 			<set rule="CHARGEN_MAX_INITIATION" to="1"/>
 			<set rule="CHARGEN_MAX_SUBMERSION" to="2"/>
 			<set rule="CHARGEN_MAX_TRANSHUMAN" to="1"/>
@@ -38,6 +41,7 @@
 	<interpretation id="core_de" lang="de" restrict="prio,sumto10,pointbuy,karma">
 		<rules>
 			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
+         <set rule="CHARGEN_SUM_TO_TEN_ELITE" to="13" />
 			<set rule="CHARGEN_ADJUSTMENT_ON_LOWERED_MAX" to="true"/>
 			<set rule="CHARGEN_MAX_KARMA_REMAIN" to="5"/>
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
