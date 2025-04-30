@@ -9,6 +9,7 @@ import de.rpgframework.shadowrun.PriorityType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.SumToTenPriorityTableController;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 
 /**
  *
@@ -28,7 +29,10 @@ public class SR6Sum2TenPriorityTableController extends SumToTenPriorityTableCont
 			switch (settings.variant) {
 			case STANDARD: max=10; break;
 			case STREET_LEVEL: max=8; break;
-			case ELITE: max=13; break;
+			case ELITE: 
+				//max=13; // 13 is only for DE 
+				max = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_SUM_TO_TEN_ELITE);
+				break;
 			}
 		}
 		super.setPriority(option, prio);
