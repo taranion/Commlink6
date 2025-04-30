@@ -518,7 +518,7 @@ public class SR6AnimalismController extends ControllerImpl<MetamagicOrEcho>
 			int payNext = 11;
 			int grade = 0;
 			for (MetamagicOrEchoValue val : model.getMetamagicOrEchoes()) {
-				if (val.getModifyable().getType()==Type.ANIMALISM) continue;
+				if (val.getModifyable().getType()!=Type.ANIMALISM) continue;
 				if (val.getModifyable().hasLevel()) {
 					for (int i=0; i<val.getDistributed(); i++) {
 						if (isCharGen) {
