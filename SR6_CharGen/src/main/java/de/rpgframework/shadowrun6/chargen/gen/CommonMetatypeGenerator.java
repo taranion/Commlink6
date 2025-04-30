@@ -82,7 +82,7 @@ public abstract class CommonMetatypeGenerator extends ControllerImpl<SR6MetaType
 	public boolean select(SR6MetaType value) {
 		logger.log(Level.DEBUG, "ENTER select("+value+")");
 		try {
-			if (!canBeSelected(value)) {
+			if (value==null && !canBeSelected(value)) {
 				logger.log(Level.ERROR,"Trying to select {0} which is not allowed", value.getId());
 				return false;
 			}
