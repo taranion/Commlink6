@@ -15,6 +15,7 @@ import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.genericrpg.chargen.IRecommender;
 import de.rpgframework.genericrpg.chargen.LevellingProfileController;
 import de.rpgframework.genericrpg.chargen.RecommendingController;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
@@ -481,6 +482,12 @@ public class SR6TestGenerator implements SR6CharacterGenerator {
 	public SR6AnimalismController getAnimalismController() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean showDataItem(DataItem item) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

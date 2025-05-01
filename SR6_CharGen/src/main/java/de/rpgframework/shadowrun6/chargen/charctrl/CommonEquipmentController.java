@@ -3,17 +3,23 @@ package de.rpgframework.shadowrun6.chargen.charctrl;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Gatherer;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController.RemoveMode;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
+import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -93,7 +99,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		return Shadowrun6Core.getItemList(ItemTemplate.class).stream()
 				.filter(p -> parent.showDataItem(p))
 				.filter(p -> !p.isModOnly())
-				.collect(Collectors.toList());
+				.collect(DataItem.toListPreferringLocale());
 	}
 
 	//-------------------------------------------------------------------

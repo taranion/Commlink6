@@ -269,6 +269,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			return Possible.FALSE;
 		}
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(value.getModifyable());
+		if (per==null) return Possible.FALSE;
 		return new Possible(per.points1>0);
 	}
 
@@ -359,6 +360,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			return Possible.FALSE;
 		}
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(value.getModifyable());
+		if (per==null) return Possible.FALSE;
 		return new Possible(per.points2>0);
 	}
 

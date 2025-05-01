@@ -73,7 +73,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 //			model.getParent().addIncomingModification(realMod);
 //			break;
 		default:
-			logger.log(Level.WARNING, "Don't know how to decide for "+ apply);
+//			logger.log(Level.WARNING, "Don't know how to decide for "+ apply);
 			unprocessed.add(realMod);
 		}
 	}
