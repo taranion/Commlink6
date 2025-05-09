@@ -410,6 +410,7 @@
    <item id="shiawase_blazer" avail="4L" price="2500" type="WEAPON_SPECIAL" subtype="THROWERS">
       <weapon dmg="6P" mode="SS" attack="14,12,10,," ammo="5(m)" skill="exotic_weapons" spec="exotic_weapons/spray"/>
 		<attrdef id="WEAPON_SIZE" value="LARGE"/>
+		<attrdef id="AMMUNITION_CLASS" value="FUEL"/>
    </item>
 
    <!-- Launchers -->

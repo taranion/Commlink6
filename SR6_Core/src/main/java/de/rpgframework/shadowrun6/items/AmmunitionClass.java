@@ -17,6 +17,7 @@ public enum AmmunitionClass {
 	MACHINE_GUN,
 	DMSO,
 	SHOTGUN,
-	BATTERY
-	
+	BATTERY,
+	FUEL,
+	FOAM
 }
