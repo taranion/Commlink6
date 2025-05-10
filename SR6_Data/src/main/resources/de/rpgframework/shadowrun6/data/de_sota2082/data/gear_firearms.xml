@@ -6,7 +6,9 @@
 			<itemmod type="HOOK" ref="BARREL" />
 			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" />
 			<itemmod type="GEARMOD" ref="melee_hardening" />
-			<itemmod type="GEARMOD" ref="weapon_security_system" />
+			<itemmod type="GEARMOD" ref="weapon_security_system" >
+				<decision choice="bbd4e50c-b717-4a16-a96a-963121b462c2" value="wss_no_extra"/>	
+			</itemmod>
       </modifications>
       <weapon dmg="3P" attack="10,9,8,," mode="SA" ammo="25(c)" skill="firearms" spec="firearms/pistols_heavy"/>
    </item>
@@ -18,7 +20,9 @@
 			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" />
 			<itemmod type="GEARMOD" ref="rigid_stock" />
 			<itemmod type="GEARMOD" ref="melee_hardening" />
-			<itemmod type="GEARMOD" ref="weapon_security_system" />
+			<itemmod type="GEARMOD" ref="weapon_security_system" >
+				<decision choice="bbd4e50c-b717-4a16-a96a-963121b462c2" value="wss_no_extra"/>	
+			</itemmod>
 			<itemmod type="GEARMOD" ref="foregrip" />
       </modifications>
       <weapon dmg="3P" attack="10,12,10,," mode="SA" ammo="25(c)" skill="firearms" spec="firearms/pistols_heavy"/>
@@ -52,7 +56,9 @@
 			<itemmod type="GEARMOD" ref="easy_breakdown" />
 			<itemmod type="GEARMOD" ref="ruthenium_coating" />
 			<itemmod type="GEARMOD" ref="weapon_commlink" />
-			<itemmod type="GEARMOD" ref="weapon_security_system" />
+			<itemmod type="GEARMOD" ref="weapon_security_system" >
+				<decision choice="bbd4e50c-b717-4a16-a96a-963121b462c2" value="wss_no_extra"/>	
+			</itemmod>
       </modifications>
       <weapon dmg="5P" attack="1,7,14,14,10" mode="SA" ammo="24(c)" skill="firearms" spec="firearms/rifles"/>
    </item>
