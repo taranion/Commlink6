@@ -21,21 +21,5 @@
      <useas type="ACCESSORY" subtype="FIREARMS_ACCESSORY" slot="UNDER_WEAPON_MOUNT"/>
       <weapon dmg="0S" attack="2,4,8,," mode="SS" ammo="1" skill="exotic_weapons" spec="exotic_weapons/launchers" />
    </item>
-   <!-- p.60 Weapon security system -->
-   <item id="wss_ap_spikes" avail="3I" cost="100">
-     <useas type="ACCESSORY" subtype="WEAPON_SECURITY" slot="WEAPON_SECURITY"/>
-      <weapon dmg="3P" attack="5,,,," skill="close_combat" spec="close_combat/unarmed"/>
-   </item>
-   <item id="wss_taser_shock" avail="3L" cost="150">
-     <useas type="ACCESSORY" subtype="WEAPON_SECURITY" slot="WEAPON_SECURITY"/>
-      <weapon dmg="4S" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
-   </item>
-   <item id="wss_explosive" avail="4I" cost="200">
-     <useas type="ACCESSORY" subtype="WEAPON_SECURITY" slot="WEAPON_SECURITY"/>
-      <weapon dmg="10P" attack=",,,," skill="close_combat" spec="close_combat/unarmed"/>
-   </item>
-   <item id="wss_rfid_tracker" avail="2" cost="75">
-     <useas type="ACCESSORY" subtype="WEAPON_SECURITY" slot="WEAPON_SECURITY"/>
-   </item>
    
 </items>
