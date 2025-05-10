@@ -581,7 +581,7 @@
 			<datareq type="GEAR" ref="weapon_security_system" apply="PARENT"/>
 		</requires>
 		<choices>
-		<choice type="SUBSELECT" ref="wss_option" uuid="bbd4e50c-b717-4a16-a96a-963121b462c2" >
+		<choice type="SUBSELECT" ref="wss_option" uuid="9a85d6e6-262b-4400-a0b1-d04d6187e94f" >
 			<subOption id="wss_spikes" >
 				<attrdef id="AVAILABILITY" value="3I"/>
 				<attrdef id="PRICE" value="100"/>
