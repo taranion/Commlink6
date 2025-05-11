@@ -166,6 +166,7 @@
            <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
 		<weapon dmg="3P" mode="SS" attack="6,10,,," ammo="15(c)/150(belt)" skill="exotic_weapons" spec="exotic_weapons/spray"  wild="true"/>
+		<attrdef id="AMMUNITION_CLASS" value="FUEL"/>
 	</item>
 	<item id="honey_badger" avail="6I" price="7500" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
 		<modifications>
