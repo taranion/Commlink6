@@ -37,7 +37,7 @@
   	<item id="mct_fox" avail="0"  price="30000" type="VEHICLES" subtype="TRUCKS">
       <vehicle han="4/4" acc="12" spdi="20" tspd="150" bod="14" arm="6" pil="3" sen="2" sea="2"/>
 		<modifications>
-			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extreme_environment" variant="swamp" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="secondary_propulsion_system" variant="tracked" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 		</modifications>
    </item>
@@ -51,7 +51,7 @@
 	<item id="gaeatronics_cypruss" avail="3" price="25000" type="DRONE_LARGE" subtype="ANTHRO" reqVariant="y">
 		<vehicle han="3/3" acc="5" spdi="5" tspd="10" bod="12" arm="12" pil="3" sen="4" />
 		<modifications>
-			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extreme_environment" variant="swamp" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
 			</embed>
@@ -73,7 +73,7 @@
 	<item id="gaeatronics_kneader" avail="4" price="5000" type="DRONE_MEDIUM" subtype="ANTHRO">
 		<vehicle han="5/5" acc="5" spdi="5" tspd="10" bod="4" arm="4" pil="2" sen="3" />
 		<modifications>
-			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extreme_environment" variant="swamp" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
 			</embed>

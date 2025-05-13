@@ -255,9 +255,21 @@
 
    <item id="extreme_environment" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE">
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
-   </item>
+	<variant id="heat" />
+	<variant id="cold" />
+	<variant id="depth" />
+	<variant id="height" />
+	<variant id="water" />
+	<variant id="swamp" />
+	</item>
    <item id="extreme_environment" lang="de" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE">
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="2"/>
+	<variant id="heat" />
+	<variant id="cold" />
+	<variant id="depth" />
+	<variant id="height" />
+	<variant id="water" />
+	<variant id="swamp" />
    </item>
 
    <item id="gun_ports" avail="3L" price="1000" type="MOD_CHASSIS" subtype="MOD_CORE">

@@ -1313,7 +1313,7 @@
 			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> <!-- No rating stated. Based on pilot 3 meaning expert console with sensor 3, improvent to level 6 is 3 -->
                 </embed>
-			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="amenities" variant="low" intoType="HOOK" intoRef="VEHICLE_CF" />
@@ -1329,7 +1329,7 @@
 			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> <!-- No rating stated. Based on pilot 3 meaning expert console with sensor 3, improvent to level 6 is 3 -->
                 </embed>
-			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="amenities" variant="low" intoType="HOOK" intoRef="VEHICLE_CF" />
@@ -1345,7 +1345,7 @@
 			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Based on pilot 3 meaning expert console with sensor 3, improvent to level 5 is 2 -->
                 </embed>
-			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="amenities" variant="high" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="64">
@@ -1367,7 +1367,7 @@
 			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Based on pilot 3 meaning expert console with sensor 3, improvent to level 5 is 2 -->
                 </embed>
-			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="amenities" variant="high" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="64">
@@ -1391,7 +1391,7 @@
 			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Based on pilot 4 meaning advanced console with sensor 4, improvent to level 6 is 2 -->
                 </embed>			
-			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="amenities" variant="middle" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="17">
@@ -1416,7 +1416,7 @@
 			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Based on pilot 4 meaning advanced console with sensor 4, improvent to level 6 is 2 -->
                 </embed>
-			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="amenities" variant="middle" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" >
