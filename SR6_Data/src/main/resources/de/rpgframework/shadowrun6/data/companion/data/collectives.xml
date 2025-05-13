@@ -122,6 +122,26 @@
 			<itemmod type="QUALITY" ref="scales"/>
 		</modifications>
 	</set>
+   <set id="shellback" type="QUALITY" cost="15" lang="en">
+      <requires>
+         <selreq>
+            <datareq type="METATYPE" ref="human"/>
+            <datareq type="METATYPE" ref="elf"/>
+            <datareq type="METATYPE" ref="ork"/>
+            <datareq type="METATYPE" ref="dwarf"/>
+            <datareq type="METATYPE" ref="troll"/>
+         </selreq>
+      </requires>
+      <modifications>
+         <itemmod type="QUALITY" ref="rhino"/>
+         <itemmod type="QUALITY" ref="functional_tail">
+            <decision choice="b237c0da-1eb1-4070-879a-22bc2899c106" value="paddle"/>
+         </itemmod>
+         <itemmod type="QUALITY" ref="underwater_vision"/>
+         <itemmod type="QUALITY" ref="poor_healer"/>
+         <itemmod type="QUALITY" ref="vestigial_tail"/>
+      </modifications>
+   </set>
 	<set id="ganesh" type="QUALITY" cost="15">
 		<requires>
 		 	<selreq>
