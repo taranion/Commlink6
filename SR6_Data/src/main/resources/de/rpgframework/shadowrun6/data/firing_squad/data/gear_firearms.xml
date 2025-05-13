@@ -50,6 +50,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
+		 <embed type="GEAR" ref="variable_ammo" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
       </modifications>
       <weapon dmg="3P" attack="8,10,6," mode="SS/SA" ammo="6(cy)" skill="firearms" spec="firearms/pistols_heavy"/>

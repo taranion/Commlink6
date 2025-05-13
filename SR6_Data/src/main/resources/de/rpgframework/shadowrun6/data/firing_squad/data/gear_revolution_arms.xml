@@ -55,7 +55,7 @@
 		<modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-			<itemmod type="GEARMOD" ref="side_ammo_mount" />
+		 <embed type="GEAR" ref="variable_ammo" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
 		<weapon dmg="2P" mode="SA" attack="10,8,5,," ammo="16(c)" skill="firearms" spec="firearms/pistols_light"  wild="true"/>
 	</item>
@@ -95,6 +95,7 @@
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="UNDER" />
             <itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="variable_ammo" intoType="HOOK" intoRef="INTERNAL" included="true"/>
             <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
 		<weapon dmg="5P" mode="SA/BF/FA" attack="5,9,10,9,1" ammo="40(c)" skill="firearms" spec="firearms/rifles"  wild="true"/>

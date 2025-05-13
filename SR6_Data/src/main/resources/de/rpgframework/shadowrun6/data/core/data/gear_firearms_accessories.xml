@@ -217,8 +217,12 @@
 			<datareq type="GEAR" ref="cavalier_marshal" apply="DATA_ITEM"/>
 			<datareq type="GEAR" ref="black_wolf" apply="DATA_ITEM"/>
 			<datareq type="GEAR" ref="raven" apply="DATA_ITEM"/>
+			<datareq type="GEAR" ref="ruger_lawbringer" apply="DATA_ITEM"/>
     	</selreq>
       </requires>
+   </item>
+   <item id="variable_ammo" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="INTERNAL"/>
    </item>
    <item avail="1" price="25" id="speed_loader" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>

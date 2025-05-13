@@ -124,6 +124,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
+		 <embed type="GEAR" ref="variable_ammo" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 	  </modifications>
       <weapon attack="10,10,8,," ammo="15(c)" dmg="3P" mode="SA/BF" skill="firearms" spec="firearms/pistols_heavy"/>
