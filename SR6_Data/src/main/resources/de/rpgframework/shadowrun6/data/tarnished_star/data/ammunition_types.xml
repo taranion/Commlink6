@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ammotypes>
+
+    <ammotype id="masterkey" cmult="3" > <!-- avail="4L" not implemented yet, see COM6-453 --> <!-- cost is 45 per 10, normal shotgun is 15 per 10, so cmult 3 -->
+      <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2,0,0,0,0"/>
+        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-4"/> <!-- damage -2 at close range, -4 at all other distances, +2 when used at close range against barriers -->
+      </modifications>
+      <requires>
+         <datareq type="GEAR" ref="ammo_shotgun"/>
+      </requires>
+    </ammotype>
+
+</ammotypes>

@@ -192,6 +192,7 @@ public class Shadowrun6DataPlugin  {
 			initSmoothOperations();
 			initDPBundeswehr();
 			initBestialNature();
+			initTarnishedStar();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -1069,6 +1070,25 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
 		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"bestial_nature/data/ammunition_types.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+	}
+
+	//-------------------------------------------------------------------
+	private void initTarnishedStar() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ----------------------------Tarnished Star---------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "tarnished_star", "tarnished_star.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.BACKGROUND);
+		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"tarnished_star/data/ammunition_types.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"tarnished_star/data/gear_weapons.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapons");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"tarnished_star/data/gear_armor.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"tarnished_star/data/gear_tools.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" tools");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"tarnished_star/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 	}
 
 }

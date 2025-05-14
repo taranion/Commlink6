@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <!-- Light pistols -->
+	<item id="neo_nambu" avail="2L" price="200" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" >
+		<weapon dmg="2P" attack="8,6,6,," mode="SS" ammo="5(cy)" skill="firearms" spec="firearms/pistols_light"/>
+	</item>
+
+   <!-- Heavy pistols -->
+	<item id="ruger_lawbringer" avail="6I" price="3250" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+		<weapon dmg="3P" attack="9,12,10," mode="SA/BF" ammo="16(c)" skill="firearms" spec="firearms/pistols_heavy"/>
+		<geardef>
+			<item id="vaass" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+				<usage mode="EMBEDDED" slot="INTERNAL"/>
+			</item>
+		</geardef>
+      <modifications>
+		<itemmod type="HOOK" ref="TOP"/>
+		<itemmod type="HOOK" ref="BARREL"/>
+		<itemmod type="GEARMOD" ref="biometric_gun_lock"/>
+		<itemmod type="GEARMOD" ref="gas-vent_improved"/>
+		<itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
+		<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		<itemmod type="GEARMOD" ref="weapon_security_system">
+			<decision choice="bbd4e50c-b717-4a16-a96a-963121b462c2" value="wss_taser"/>	
+		</itemmod>
+		<itemmod type="GEARMOD" ref="weapon_security_system_add_option">
+			<decision choice="9a85d6e6-262b-4400-a0b1-d04d6187e94f" value="wss_rfid"/>	
+		</itemmod>
+		<itemmod type="GEARMOD" ref="weapon_commlink"/>
+		<embed type="GEAR" ref="vaass" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+      </modifications>
+   </item>
+
+   <item id="ruger_lawbringer_cs" avail="4L" price="950" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+      <weapon dmg="3P" attack="8,9,6," mode="SA/BF" ammo="9(c)" skill="firearms" spec="firearms/pistols_heavy"/>
+      <modifications>
+		<itemmod type="HOOK" ref="TOP"/>
+		<itemmod type="HOOK" ref="BARREL"/>
+		<itemmod type="GEARMOD" ref="biometric_gun_lock"/>
+		<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		<valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="1" />
+      </modifications>
+   </item>
+
+   <!-- Shotguns -->
+   <item id="defiance_t-290" avail="2L" price="550" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+      <modifications>
+         <itemmod type="HOOK" ref="TOP"/>
+         <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="GEARMOD" ref="foregrip"/>
+      </modifications>
+      <weapon dmg="4P" mode="SS" attack="12,7,,," ammo="3(m)" skill="firearms" spec="firearms/shotguns"/>
+   </item>
+
+   <!-- Melee weapons -->
+
+   <item id="mancatcher" avail="3L" price="300" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
+      <weapon  dmg="2S" attack="7,6,,," skill="close_combat" spec="close_combat/clubs"/>
+   </item>
+
+   <!-- Exotic Weapons -->
+
+	<item id="foamtek_carbine" avail="4L" price="4250" type="WEAPON_SPECIAL" subtype="THROWERS">
+		<weapon dmg="0S" mode="SS" attack="8,10,6,," ammo="10" skill="exotic_weapons" spec="exotic_weapons/spray"/>
+		<attrdef id="WEAPON_SIZE" value="LARGE"/> <!-- using size LARGE same as rifles, normally THROWERS are BIG -->
+		<attrdef id="AMMUNITION_CLASS" value="FOAM"/>
+	</item>
+
+	<item id="foamtek_cannon" avail="6L" price="8600" type="WEAPON_SPECIAL" subtype="THROWERS">
+		<weapon dmg="0S" mode="SS" attack="3,8,12,6," ammo="20" skill="exotic_weapons" spec="exotic_weapons/spray"/>
+		<attrdef id="AMMUNITION_CLASS" value="FOAM"/>
+	</item>
+
+	<item id="parashield_zapgun" avail="4" price="2250" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<weapon dmg="6S" mode="SS" attack="10,7,4,," ammo="10(c)" skill="exotic_weapons" spec="exotic_weapons/emitter"/>
+		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<attrdef id="WEAPON_SIZE" value="MEDIUM"/> <!-- no size given, using MEDIUM, same as SMG -->
+	</item>
+
+   <!-- Ammunition -->
+
+	<item id="ammo_foam_carbine" price="200" avail="4L" type="AMMUNITION" subtype="AMMUNITION" count="y">
+		<attrdef id="DAMAGE" value="0"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="FOAM" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+	<item id="ammo_foam_cannon" price="1000" avail="6L" type="AMMUNITION" subtype="AMMUNITION" count="y">
+		<attrdef id="DAMAGE" value="0"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="FOAM" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_battery_zapgun" price="120" avail="4" type="AMMUNITION" subtype="AMMUNITION" count="y">
+		<attrdef id="DAMAGE" value="0"/>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="BATTERY" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+    <!-- Explosives -->
+
+	<item id="foamtek_grenade_ap" avail="4L" price="250" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo gz="8" close="5" near="3" blast="15" />
+	</item>
+
+	<item id="foamtek_grenade_av" avail="4L" price="550" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo gz="12" close="8" near="6" blast="20" />
+	</item>
+
+    <item id="foamtek_rocket" avail="6L" price="3800" count="y" type="AMMUNITION" subtype="ROCKETS" reqVariant="y">
+    	<ammo gz="18" close="12" near="4" blast="10" />
+      <variant id="rocket"/>
+      <variant id="missile">
+      	<choices>
+				<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+        	</choices>
+        	<attrdef id="PRICE" value="3800+($RATING*500)"/>
+        	<modifications>
+        		<checkmod type="SKILL" ref="firearms" value="$RATING" what="DICE"/>
+        		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="2"/>
+        	</modifications>
+        </variant>
+    </item>
+
+    <!-- Chemicals -->
+
+   <item id="foamtek_solvent" avail="6I" price="150" subtype="INDUSTRIAL_CHEMICALS" type="CHEMICALS" count="y"/>
+
+</items>

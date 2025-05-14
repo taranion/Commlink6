@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Autosofts -->
+
+	<item id="soft_know_law" type="SOFTWARE" subtype="AUTOSOFT" modonly="true"> <!-- for silverstar and k-10 -->
+		<usage mode="EMBEDDED" slot="SOFTWARE" />
+		<attrdef id="SIZE" value="1"/>
+	</item>
+
+<!-- Bikes -->
+
+	<item id="evo_pet" avail="3" price="8500" type="VEHICLES" subtype="BIKES" > 
+		<vehicle han="2/7" acc="5" spdi="10" tspd="40" bod="3" arm="1" pil="3" sen="3" sea="1" type="GROUND"/>
+		<modifications>
+      		<itemmod type="CONSTRUCTION" ref="OPEN"/>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="gridlink" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+	<item id="honda_raptor" avail="3" price="14900" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="2/6" acc="40" spdi="50" tspd="360" bod="4" arm="2" pil="2" sen="2" sea="1" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+      		<itemmod type="CONSTRUCTION" ref="OPEN"/>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_small" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="racing" />
+			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+			<!-- "high_performance_engine" is a design mod, not a vehicle mod, thus cannot be added -->
+		</modifications> 
+	</item>
+
+	<item id="gmc_elk" avail="3" price="10500" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="4/2" acc="10" spdi="25" tspd="90" bod="6" arm="4" pil="2" sen="2" sea="2" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+      		<itemmod type="CONSTRUCTION" ref="OPEN"/>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="extreme_environment" variant="cold" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="fuel_converter" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications> 
+	</item>
+
+	<item id="vaa_estrada" avail="3" price="18900" type="VEHICLES" subtype="BIKES" >
+		<vehicle han="3/5" acc="15" spdi="30" tspd="120" bod="10" arm="6" pil="2" sen="2" sea="2" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+      		<itemmod type="CONSTRUCTION" ref="OPEN"/>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications> 
+	</item>
+
+<!-- Cars -->
+
+	<item id="isuzu_hop" avail="2" price="9500" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/5" acc="10" spdi="20" tspd="80" bod="6" arm="0" pil="2" sen="2" sea="2"/>
+		<modifications>
+      		<itemmod type="CONSTRUCTION" ref="OPEN"/>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications> 
+	</item>
+
+	<item id="dodge_vindicator" avail="4" price="38000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="2/4" acc="26" spdi="40" tspd="260" bod="12" arm="8" pil="3" sen="4" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
+			<embed type="GEAR" ref="nitro_boost" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+            <embed type="GEAR" ref="road_strip_ejector" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications> 
+	</item>
+
+	<item id="ford_stinger" avail="3" price="29500" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/4" acc="12" spdi="30" tspd="210" bod="11" arm="4" pil="2" sen="2" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="runflat" />
+			<embed type="GEAR" ref="improved_handling" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+				</embed>
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications> 
+	</item>
+
+	<item id="ke_victory" avail="8" price="62000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="2/5" acc="20" spdi="40" tspd="220" bod="10" arm="8" pil="2" sen="2" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="extra_entry_points" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="runflat" />
+			<embed type="GEAR" ref="passenger_prot_system" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				</embed>
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="nanomaintenance_repair" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- no rating stated in US or DE, assuming 2 as 4 would be to expensive -->
+				</embed>
+			<embed type="GEAR" ref="internal_security_zapper" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="hardpoint_concealment" variant="standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="hardpoint_concealment" variant="standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications> 
+	</item>
+
+	<item id="chrysler_patrol6" avail="4" price="68000" type="VEHICLES" subtype="CARS" reqVariant="y" >
+		<vehicle han="3/4" acc="15" spdi="30" tspd="180" bod="14" arm="12" pil="3" sen="4" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications> 
+		<variant id="cargo" >
+			<modifications>
+				<valmod ref="VEHICLE_CF" type="HOOK" value="25"/>
+			</modifications>
+		</variant>
+		<variant id="drones" >
+			<modifications>
+				<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
+	</item>
+	<item id="chrysler_patrol6" lang="de" avail="4" price="68000" type="VEHICLES" subtype="CARS" reqVariant="y" >
+		<vehicle han="3/4" acc="15" spdi="30" tspd="180" bod="14" arm="12" pil="3" sen="4" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications> 
+		<variant id="cargo" >
+			<modifications>
+				<valmod ref="VEHICLE_CF" type="HOOK" value="22"/> <!-- difference US to DE is CF bonus -->
+			</modifications>
+		</variant>
+		<variant id="drones" >
+			<modifications>
+				<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
+	</item>
+
+<!-- Vans -->
+
+   <item id="black_mariah" avail="4"  price="142800" type="VEHICLES" subtype="VANS" reqVariant="y" >
+      <vehicle han="5/6" acc="15" spdi="20" tspd="140" bod="18" arm="18" pil="3" sen="3" sea="10"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="internal_security_gas" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications> 
+		<!-- US version has choice of cargo or drones, but that is a copy&paste error from patrol-6 above. DE version does not have that choice. -->
+   </item>
+
+	<item id="gmc_bearcat" avail="4" price="96500" type="VEHICLES" subtype="VANS" >
+		<vehicle han="4/6" acc="15" spdi="20" tspd="160" bod="16" arm="18" pil="4" sen="4" sea="7"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
+			<embed type="GEAR" ref="life_safety_system" variant="level1" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="ram_plate" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
+			<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />			
+		</modifications> 
+		<variant id="small_drones" >
+			<modifications>
+				<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
+		<variant id="large_drone" >
+			<modifications>
+				<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
+	</item>
+
+	<item id="gmc_commander" avail="4" price="184500" type="VEHICLES" subtype="VANS" >
+		<vehicle han="4/6" acc="15" spdi="20" tspd="160" bod="16" arm="18" pil="4" sen="5" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
+			<embed type="GEAR" ref="life_safety_system" variant="level2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="renraku_kitsune" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="mtoc_mark1" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+<!-- Trucks -->
+
+	<item id="ares_riotmaster" avail="7" price="450000" type="VEHICLES" subtype="TRUCKS" >
+		<vehicle han="5/7" acc="8" spdi="10" tspd="120" bod="18" arm="14" pil="2" sen="3" sea="20"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
+			<embed type="GEAR" ref="life_safety_system" variant="level2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="renraku_kitsune" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="mtoc_mark1" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />			
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="gmc_e83" avail="8" price="285000" type="VEHICLES" subtype="TRUCKS" >
+		<vehicle han="4/4" acc="20" spdi="25" tspd="150" bod="14" arm="12" pil="3" sen="3" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_milspec" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
+			<embed type="GEAR" ref="life_safety_system" variant="level1" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="mtoc_mark2" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="ram_plate" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />			
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />			
+			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+<!-- Powerboats -->
+
+	<item id="surfstar_seacop" avail="5" price="155000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="4" acc="50" spdi="50" tspd="200" bod="10" arm="6" pil="3" sen="3" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+<!-- Air -->
+
+	<item id="northrup_thunderhawk" avail="4" price="115000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="4" acc="20" spdi="40" tspd="280" bod="12" arm="8" pil="3" sen="3" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
+			<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+				</embed>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+	
+   <item id="gmc_pegasus" avail="4"  price="775000" type="VEHICLES" subtype="LAV">
+      <vehicle han="3" acc="60" spdi="90" tspd="800" bod="14" arm="10" pil="4" sen="4" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+   </item>
+	
+<!-- Ground Drones -->
+
+	<item id="cyberspace_terrier" avail="2" price="12000" type="DRONE_MEDIUM" subtype="GROUND" >
+		<vehicle han="3/3" acc="5" spdi="10" tspd="30" bod="6" arm="4" pil="3" sen="4" />
+		<modifications>
+			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
+			<embed type="GEAR" ref="mechanical_arm" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" variant="large" />
+			<embed type="GEAR" ref="soft_engineering" intoType="HOOK" intoRef="SOFTWARE" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				</embed>
+		</modifications>
+		<variant id="cyberarm" >
+			<modifications>
+				<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			</modifications>
+		</variant>
+		<variant id="medevac" >
+			<modifications>
+				<embed type="GEAR" ref="medevac" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			</modifications>
+		</variant>
+		<variant id="hardening_fire" >
+			<modifications>
+				<embed type="GEAR" ref="elemental_hardening" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="FIRE"/>
+					</embed>
+			</modifications>
+		</variant>
+		<variant id="hardening_cold" >
+			<modifications>
+				<embed type="GEAR" ref="elemental_hardening" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="COLD"/>
+					</embed>
+			</modifications>
+		</variant>
+		<variant id="hardening_electricity" >
+			<modifications>
+				<embed type="GEAR" ref="elemental_hardening" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="ELECTRICITY"/>
+					</embed>
+			</modifications>
+		</variant>
+		<variant id="hardening_chemical" >
+			<modifications>
+				<embed type="GEAR" ref="elemental_hardening" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="CHEMICAL"/>
+					</embed>
+			</modifications>
+		</variant>
+		<variant id="winch" >
+			<modifications>
+				<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+					</embed>
+			</modifications>
+		</variant>
+	</item>
+
+	<item id="nissan_johnny" avail="3" price="8500" type="DRONE_MEDIUM" subtype="GROUND">
+		<vehicle han="3/5" acc="10" spdi="15" tspd="90" bod="8" arm="6" pil="3" sen="3" />
+		<modifications>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="409a9917-5583-414e-8a3d-9bfcb146368b" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="foamtek_carbine" intoId="409a9917-5583-414e-8a3d-9bfcb146368b" />
+		</modifications>
+	</item>
+
+	<item id="nissan_johnny" lang="de" avail="3" price="8500" type="DRONE_MEDIUM" subtype="GROUND">
+		<vehicle han="3/5" acc="10" spdi="15" tspd="90" bod="8" arm="6" pil="3" sen="3" />
+		<modifications>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="409a9917-5583-414e-8a3d-9bfcb146368b" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="foamtek_carbine" intoId="409a9917-5583-414e-8a3d-9bfcb146368b" />
+			<embed type="GEAR" ref="targeting" intoType="HOOK" intoRef="SOFTWARE"> <!-- differnce DE to US is addition of targeting autosoft -->
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="foamtek_carbine" />
+				</embed>
+		</modifications>
+	</item>
+
+<!-- Anthro Drones -->
+
+	<item id="shiawase_silverstar" avail="4" price="9000" type="DRONE_MEDIUM" subtype="ANTHRO" >
+		<vehicle han="3/3" acc="5" spdi="10" tspd="30" bod="8" arm="4" pil="3" sen="3" />
+		<modifications>
+			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+				</embed>
+			<embed type="GEAR" ref="soft_know_law" intoType="HOOK" intoRef="SOFTWARE" />
+		</modifications>
+	</item>
+
+<!-- Air Drones -->
+
+	<item id="k-10" avail="4" price="10500" type="DRONE_MEDIUM" subtype="AIR" >
+		<vehicle han="4" acc="10" spdi="20" tspd="60" bod="5" arm="2" pil="3" sen="4" />
+		<modifications>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="soft_know_law" intoType="HOOK" intoRef="SOFTWARE" />
+		</modifications>
+	</item>
+	<item id="k-10" lang="de" avail="4" price="10500" type="DRONE_MEDIUM" subtype="AIR" >
+		<vehicle han="4" acc="10" spdi="20" tspd="60" bod="5" arm="2" pil="3" sen="4" />
+		<modifications>
+			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
+			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<!-- DE version misses the extra hardpoint -->
+			<embed type="GEAR" ref="soft_know_law" intoType="HOOK" intoRef="SOFTWARE" />
+		</modifications>
+	</item>
+
+	<item id="sk_wyvern" avail="4" price="28000" type="DRONE_MEDIUM" subtype="AIR" >
+		<vehicle han="2" acc="20" spdi="40" tspd="220" bod="8" arm="4" pil="3" sen="4" />
+		<modifications>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </embed>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+ <!-- Walkers -->
+ 
+	<item id="vulcan_centurion" avail="6"  price="35000" type="DRONE_LARGE" subtype="ANTHRO">
+		<vehicle han="3/4" acc="10" spdi="20" tspd="90" bod="16" arm="10" pil="3" sen="3" />
+		<modifications>
+			<embed type="GEAR" ref="mechanical_arm" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" variant="large" />
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+</items>
