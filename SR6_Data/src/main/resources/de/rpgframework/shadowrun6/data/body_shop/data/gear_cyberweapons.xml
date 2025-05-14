@@ -47,11 +47,13 @@
             <weapon dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
         </alternate>
     </item>
+
     <item id="cyberweapon_flametosser" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
         <attrdef id="PRICE" value="4000"/>
         <attrdef id="AVAILABILITY" value="6I"/>
         <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="8"/>
         <usage mode="IMPLANTED" value="1.0"/>
+		<attrdef id="AMMUNITION_CLASS" value="FUEL"/>
         <flags>
             <flag>AUGMENTATION</flag>
         </flags>
@@ -59,6 +61,21 @@
             <weapon dmg="5P" attack="14,12,,," mode="SS" ammo="5(m)" skill="exotic_weapons" spec="exotic_weapons/spray"/>
         </alternate>
     </item>
+    <item id="cyberweapon_flametosser_extra_fuel_capacity" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+        <attrdef id="PRICE" value="500"/>
+        <attrdef id="AVAILABILITY" value="6I"/>
+        <usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="2"/>
+        <usage mode="IMPLANTED" value="0.2"/>
+        <flags>
+            <flag>AUGMENTATION</flag>
+        </flags>
+    </item>
+	<item id="ammo_flametosser" price="200" avail="3I" type="AMMUNITION" subtype="AMMUNITION" count="y">
+      <requires>
+			<datareq type="GEAR" ref="cyberweapon_flametosser" apply="DATA_ITEM"/>
+      </requires>
+	</item>
+	
     <item id="cyberweapon_goring_horns" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
         <attrdef id="PRICE" value="500"/>
         <attrdef id="AVAILABILITY" value="2L"/>
