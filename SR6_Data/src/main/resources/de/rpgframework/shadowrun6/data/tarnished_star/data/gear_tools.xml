@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Electronics -->
+
+   <item id="badge_camera" type="ELECTRONICS" subtype="IMAGING" reqVariant="y" >
+		<variant id="lone_star">
+			<attrdef id="AVAILABILITY" value="2L"/>
+			<attrdef id="PRICE" value="200"/>
+			<modifications>
+				<valmod type="HOOK" ref="OPTICAL" value="2"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="OPTICAL" ref="image_link" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="OPTICAL" ref="thermographic_vision" included="true"/>
+			</modifications>
+		</variant>
+		<variant id="knight_errant">
+			<attrdef id="AVAILABILITY" value="3L"/>
+			<attrdef id="PRICE" value="800"/>
+			<modifications>
+				<valmod type="HOOK" ref="OPTICAL" value="3"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="OPTICAL" ref="thermographic_vision" included="true"/>
+			</modifications>
+		</variant>
+		<variant id="neo_pd">
+			<attrdef id="AVAILABILITY" value="4L"/>
+			<attrdef id="PRICE" value="425"/>
+			<modifications>
+				<valmod type="HOOK" ref="OPTICAL" value="4"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="OPTICAL" ref="image_link" included="true"/>
+			</modifications>
+		</variant>
+   </item>
+
+   <item id="inhibitor_band" type="ELECTRONICS" subtype="SECURITY"  reqVariant="y" count="y">
+		<variant id="cuff">
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="1400"/>
+		</variant>
+		<variant id="collar">
+			<attrdef id="AVAILABILITY" value="7I"/>
+			<attrdef id="PRICE" value="2100"/>
+		</variant>
+   </item>
+
+   <item id="security_scanner" type="ELECTRONICS" subtype="SECURITY" reqVariant="y" >
+		<variant id="booth">
+			<attrdef id="AVAILABILITY" value="3"/>
+			<attrdef id="PRICE" value="11200"/>
+			<attrdef id="RATING" value="8"/>
+		</variant>
+		<variant id="mounted">
+			<attrdef id="AVAILABILITY" value="3"/>
+			<attrdef id="PRICE" value="8400"/>
+			<attrdef id="RATING" value="6"/>
+		</variant>
+		<variant id="portable">
+			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="PRICE" value="6400"/>
+			<attrdef id="RATING" value="4"/>
+		</variant>
+		<variant id="wand">
+			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="PRICE" value="1800"/>
+			<attrdef id="RATING" value="3"/>
+		</variant>
+   </item>
+   
+   <item id="sin_scanner" avail="2" type="ELECTRONICS" subtype="SECURITY" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" />
+		</choices>
+		<attrdef id="PRICE" value="$RATING*500"/>
+   </item>
+
+<!-- Chemical Backup -->
+
+   <item id="tango" avail="6I" price="2250" type="CHEMICALS" subtype="DRUGS" count="y" />
+   <item id="black_tide" avail="6I" price="3000" type="CHEMICALS" subtype="DRUGS" count="y" />
+   <item id="pyrric_victory" avail="9I" price="25000" type="CHEMICALS" subtype="DRUGS" count="y" />
+
+   <item id="external_injector_rig" avail="4" type="BIOLOGY" subtype="BIOTECH" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+		</choices>
+  		<usage mode="CARRIED"/>
+		<attrdef id="PRICE" value="$RATING*1500"/> <!-- US version shows 1.5000 which must be a typo, using 1.500 from DE version -->
+   </item>
+
+</items>

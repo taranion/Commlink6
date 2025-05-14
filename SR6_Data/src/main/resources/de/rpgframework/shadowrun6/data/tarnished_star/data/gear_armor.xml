@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Shields -->
+
+	<item id="ares_rampart_mk1" avail="4" price="500" type="ARMOR" subtype="ARMOR_SHIELD">
+		<armor rating="1" add="true"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="2" />
+		</modifications>
+		<alternate mode="WEAPON" id="melee" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+			<weapon dmg="1S" attack="3,,,," skill="exotic_weapons" />
+		</alternate>
+	</item>
+
+	<item id="ares_rampart_mk2" avail="4" price="900" type="ARMOR" subtype="ARMOR_SHIELD">
+		<armor rating="1" add="true"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="0" />
+		</modifications>
+		<alternate mode="WEAPON" id="melee" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+			<weapon dmg="4S(e)" attack="3,,,," ammo="10(m)" skill="exotic_weapons" />
+		</alternate>
+	</item>
+
+	<item id="ares_rampart_mk3" avail="6" price="2500" type="ARMOR" subtype="ARMOR_SHIELD">
+		<armor rating="2" add="true"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="2" />
+		</modifications>
+	</item>
+
+	<item id="ares_rampart_mk4" avail="4" price="1800" type="ARMOR" subtype="ARMOR_SHIELD">
+		<armor rating="1" add="true"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="1" />
+		</modifications>
+	</item>
+
+
+<!-- Armor Accessories -->
+
+	<item id="trauma_response_system" type="ACCESSORY" subtype="ARMOR_BODY" reqVariant="y">
+		<variant id="basic">
+			<usage mode="EMBEDDED" slot="ARMOR" value="3"/>
+			<attrdef id="AVAILABILITY" value="3"/>
+			<attrdef id="PRICE" value="2400"/>
+			<attrdef id="RATING" value="4"/>
+		</variant>
+		<variant id="advanced">
+			<usage mode="EMBEDDED" slot="ARMOR" value="5"/>
+			<attrdef id="AVAILABILITY" value="5"/>
+			<attrdef id="PRICE" value="8500"/>
+			<attrdef id="RATING" value="6"/>
+		</variant>
+	</item>
+
+<!-- Armor -->
+
+    <item id="silver_shield_gaps" type="ARMOR" subtype="ARMOR_BODY" reqVariant="y" >
+		<variant id="light">
+			<attrdef id="AVAILABILITY" value="4"/>
+			<attrdef id="PRICE" value="7500"/>
+			<armor rating="4" social="-3" />
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="2" />
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection" included="true">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+					</embed>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance" included="true">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+					</embed>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="thermal_dissipation" included="true">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+					</embed>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="gear_access" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="biomonitor" included="true" />
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="erika_elite" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="trauma_response_system" variant="basic" included="true" />
+			</modifications>
+		</variant>
+		<variant id="medium">
+			<attrdef id="AVAILABILITY" value="6"/>
+			<attrdef id="PRICE" value="12500"/>
+			<armor rating="6" social="-5" />
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="4" />
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="chemical_protection" included="true">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+					</embed>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance" included="true">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+					</embed>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="thermal_dissipation" included="true">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+					</embed>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="mems_basic_harness" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="biomonitor" included="true" />
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="erika_elite" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="trauma_response_system" variant="basic" included="true" />
+			</modifications>
+		</variant>
+		<variant id="heavy">
+			<attrdef id="AVAILABILITY" value="8"/>
+			<attrdef id="PRICE" value="32500"/>
+			<armor rating="8" social="-8" />
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="6" />
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="chemical_seal" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="electricity_resistance" included="true">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+					</embed>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="thermal_dissipation" included="true">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+					</embed>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="mems_basic_harness" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="biomonitor" included="true" />
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="erika_elite" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="trauma_response_system" variant="advanced" included="true" />
+			</modifications>
+		</variant>
+    </item>
+
+    <item id="silver_shield_gaps_helmet" type="ARMOR" subtype="ARMOR_HELMET" reqVariant="y" >
+		<variant id="patrol">
+			<attrdef id="AVAILABILITY" value="4"/>
+			<attrdef id="PRICE" value="2800"/>
+			<armor rating="1" social="-1" add="true"/>
+			<modifications>
+				<valmod type="HOOK" ref="HELMET_ACCESSORY" value="2" />
+				<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="image_link" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="flare_compensation" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="smartlink" included="true"/>
+			</modifications>
+		</variant>
+		<variant id="combat">
+			<attrdef id="AVAILABILITY" value="6"/>
+			<attrdef id="PRICE" value="4200"/>
+			<armor rating="2" social="-2" add="true"/>
+			<modifications>
+				<valmod type="HOOK" ref="HELMET_ACCESSORY" value="4" />
+				<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="image_link" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="flare_compensation" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="smartlink" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="thermographic_vision" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="vision_enhancement" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="audio_enhancement" included="true"/>
+			</modifications>
+		</variant>
+    </item>
+
+</items>
