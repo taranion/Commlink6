@@ -76,7 +76,7 @@
       </modifications>
    </item>
 
-   <item avail="8L"  price="72000" id="bmw_x_infinity" type="VEHICLES" subtype="VANS">
+   <item avail="8L"  price="72000" id="bmw_x_infinity" type="VEHICLES" subtype="CARS">
       <vehicle han="4/5" acc="12" spdi="20" tspd="180" bod="14" arm="14" pil="3" sen="4" sea="6"/>
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_ceramic"/>
