@@ -640,7 +640,7 @@
 		</modifications>
 	</item>
 
-<!-- Powerboats -->
+<!-- Personal Water Craft -->
 
 	<item id="mitsubishi_waterbug" avail="2" price="7500" type="VEHICLES" subtype="PWC" >
 		<vehicle han="4" acc="15" spdi="25" tspd="80" bod="5" arm="3" pil="1" sen="0" sea="1"/>
@@ -663,6 +663,8 @@
 	<item id="kawasaki_manta_ray" avail="2" price="15500" type="VEHICLES" subtype="PWC" >
 		<vehicle han="5" acc="20" spdi="35" tspd="110" bod="8" arm="3" pil="1" sen="1" sea="3"/>
 	</item>
+
+<!-- Powerboats -->
 
 	<item id="zodiac_whisper" avail="2" price="5000" type="VEHICLES" subtype="BOATS" >
 		<vehicle han="3" acc="15" spdi="25" tspd="50" bod="4" arm="2" pil="0" sen="0" sea="4"/>
