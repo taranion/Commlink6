@@ -892,7 +892,7 @@
       <usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="$RATING"/>
       <attrdef id="PRICE" value="$RATING*15000" />
       <modifications>
-        <valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="$$ACCELERATION*0.3" />
+        <!-- <valmod type="ITEM_ATTRIBUTE" ref="ACCELERATION" value="$$ACCELERATION*0.3" /> --> <!-- reference to $$ ACCELERATION crashes Commlink -->
       </modifications>
    </item>
 
