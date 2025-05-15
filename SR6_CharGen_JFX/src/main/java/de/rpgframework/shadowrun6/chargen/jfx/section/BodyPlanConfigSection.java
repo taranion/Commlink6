@@ -9,21 +9,11 @@ import org.prelle.javafx.Section;
 import org.prelle.javafx.TitledComponent;
 
 import de.rpgframework.ResourceI18N;
-import de.rpgframework.classification.Gender;
-import de.rpgframework.genericrpg.NumericalValue;
-import de.rpgframework.shadowrun.MagicOrResonanceType;
-import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
-import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
-import javafx.util.StringConverter;
 
 /**
  * @author prelle
