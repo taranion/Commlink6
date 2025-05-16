@@ -65,6 +65,7 @@ public class CalculateVehicleSlots implements CarriedItemProcessor {
 			ensureSlotSize(model, ItemHook.VEHICLE_CHASSIS, chassis.getModifiedValue());
 			ensureSlotSize(model, ItemHook.VEHICLE_ELECTRONICS, electro.getModifiedValue());
 			ensureSlotSize(model, ItemHook.VEHICLE_POWERTRAIN, powertr.getModifiedValue());
+			ensureSlotSize(model, ItemHook.VEHICLE_ACCESSORY, 99);
 		}
 
 		calculateCargoFactor((Shadowrun6Character) charac, model);
