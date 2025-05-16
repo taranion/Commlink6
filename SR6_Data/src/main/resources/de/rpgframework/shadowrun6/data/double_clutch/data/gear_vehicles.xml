@@ -972,25 +972,6 @@
 			<embed type="GEAR" ref="nanomaintenance_repair" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>
-			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" /> <!-- has no rating in US -->
-			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </embed>
-			<embed type="GEAR" ref="amenities" variant="middle" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="34">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-			</embed>
-		</modifications>
-	</item>
-	<item id="pseidons_endeavour" lang="de" avail="9" price="13000000" type="VEHICLES" subtype="SHIPS" >
-		<vehicle han="4" acc="8" spdi="12" tspd="50" bod="40" arm="18" pil="4" sen="5" sea="34"/>
-		<modifications>
-			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="nanomaintenance_repair" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </embed>
 			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Minimum is 2. Only one cocoon. -->
                 </embed>
@@ -1007,37 +988,6 @@
 	</item>
 
 	<item id="cipactli_corvette" avail="9I" price="185389000" type="VEHICLES" subtype="SHIPS" >
-		<vehicle han="4" acc="15" spdi="15" tspd="70" bod="44" arm="28" pil="4" sen="6" sea="95"/>
-		<modifications>
-			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-			</embed>
-			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" /> <!-- has no rating in US -->
-			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
-                </embed>
-			<embed type="GEAR" ref="amenities" variant="middle" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="increased_integrity" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="24"/>
-			</embed>
-			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </embed>
-			<embed type="GEAR" ref="armor_milspec" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-			</embed>
-			<embed type="GEAR" ref="life_safety_system" variant="level2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="45">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-			</embed>
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="50">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-			</embed>
-		</modifications>
-	</item>
-	<item id="cipactli_corvette" lang="de" avail="9I" price="185389000" type="VEHICLES" subtype="SHIPS" >
 		<vehicle han="4" acc="15" spdi="15" tspd="70" bod="44" arm="28" pil="4" sen="6" sea="95"/>
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
@@ -1102,7 +1052,9 @@
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
 			</embed>
 			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" count="38" />
-			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" /> <!-- has no rating in US -->
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> <!-- No rating stated. 6 rigger consoles. -->
+                </embed>
 			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="chameleon_coating" variant="huge" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"  /> <!-- Errata needed: Chameleon coating has no stated rating -->
 			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
@@ -1234,32 +1186,6 @@
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" count="34" />
-			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" /> <!-- has no rating in US -->
-			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-			</embed>
-			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-                </embed>
-			<embed type="GEAR" ref="amenities" variant="high" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="160">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-			</embed>
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="65">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-			</embed>
-		</modifications>
-	</item>
-	<item id="factory_ship" lang="de" avail="9" price="999999999" type="VEHICLES" subtype="SHIPS" > <!-- Real cost 7.000.000.000, restricted to 2,1bil due to 32bit signed integer -->
-		<vehicle han="5" acc="5" spdi="10" tspd="20" bod="90" arm="22" pil="4" sen="6" sea="225"/>
-		<modifications>
-			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" count="34" />
 			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> <!-- No rating stated. 4 Rigger consoles. -->
                 </embed>
@@ -1311,20 +1237,6 @@
 		<vehicle han="4" acc="6" spdi="5" tspd="10" bod="15" arm="9" pil="3" sen="6" sea="6"/>
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS"/> <!-- has no rating in US -->
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> <!-- No rating stated. Based on pilot 3 meaning expert console with sensor 3, improvent to level 6 is 3 -->
-                </embed>
-			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="amenities" variant="low" intoType="HOOK" intoRef="VEHICLE_CF" />
-		</modifications>
-	</item>
-	<item id="proteus_marianas" lang="de" avail="7" price="195000" type="VEHICLES" subtype="SUBMARINES" >
-		<vehicle han="4" acc="6" spdi="5" tspd="10" bod="15" arm="9" pil="3" sen="6" sea="6"/>
-		<modifications>
-			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Minimum is 2. Low number of seats. -->
                 </embed>
@@ -1339,26 +1251,6 @@
 	</item>
 
 	<item id="proteus_cargo_sub" avail="7" price="1300000000" type="VEHICLES" subtype="SUBMARINES" >
-		<vehicle han="3" acc="8" spdi="15" tspd="40" bod="44" arm="16" pil="3" sen="5" sea="93"/>
-		<modifications>
-			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" /> <!-- has no rating in US -->
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Based on pilot 3 meaning expert console with sensor 3, improvent to level 5 is 2 -->
-                </embed>
-			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="amenities" variant="high" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="64">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-			</embed>
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="29">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-			</embed>
-		</modifications>
-	</item>
-	<item id="proteus_cargo_sub" lang="de" avail="7" price="1300000000" type="VEHICLES" subtype="SUBMARINES" >
 		<vehicle han="3" acc="8" spdi="15" tspd="40" bod="44" arm="16" pil="3" sen="5" sea="93"/>
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
@@ -1386,29 +1278,6 @@
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" /> <!-- has no rating in US -->
-			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
-			</embed>
-			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Based on pilot 4 meaning advanced console with sensor 4, improvent to level 6 is 2 -->
-                </embed>			
-			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="amenities" variant="middle" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="17">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
-			</embed>
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="48">
-				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-			</embed>
-		</modifications>
-	</item>
-	<item id="japan_navy_shio" lang="de" avail="9I" price="999999999" type="VEHICLES" subtype="SUBMARINES" > <!-- Real cost 4.900.000.000, restricted to 2,1bil due to 32bit signed integer -->
-		<vehicle han="4" acc="15" spdi="15" tspd="60" bod="51" arm="26" pil="4" sen="6" sea="65"/>
-		<modifications>
-			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Minimum is 2. Only one cocoon. -->
                 </embed>
@@ -1421,10 +1290,10 @@
 			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="amenities" variant="middle" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" >
+			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="17">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
 			</embed>
-			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" >
+			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="48">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
 			</embed>
 		</modifications>
