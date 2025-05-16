@@ -53,9 +53,7 @@
       		<itemmod type="CONSTRUCTION" ref="OPEN"/>
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
-			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
-                </embed>
+			<valmod type="HOOK" ref="VEHICLE_CF" value="4"/> <!-- factory installed mods do not change base values, so installing an increase_cargo_space mod does not change CF -->
 			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 </embed>
