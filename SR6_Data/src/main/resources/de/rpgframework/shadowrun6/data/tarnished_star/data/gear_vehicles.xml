@@ -365,6 +365,7 @@
 			<embed type="GEAR" ref="mechanical_arm" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" variant="large" />
 			<embed type="GEAR" ref="soft_engineering" intoType="HOOK" intoRef="SOFTWARE" >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				<decision choice="712a1bb4-b761-48a7-b2ba-ae5d36f47166" value="engineering/industrial_mechanic"/>
 				</embed>
 		</modifications>
 		<variant id="cyberarm" >
