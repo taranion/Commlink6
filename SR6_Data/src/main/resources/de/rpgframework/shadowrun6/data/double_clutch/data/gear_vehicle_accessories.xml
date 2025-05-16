@@ -1175,10 +1175,7 @@
       </modifications>
    </item>
 
-   <item id="network_sharing" avail="9L" price="85000" type="MOD_ELEC" subtype="MOD_PILOT">
-     	<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="4"/>
-   </item>
-   <item id="network_sharing" lang="de" avail="9L" price="86000" type="MOD_ELEC" subtype="MOD_PILOT">
+   <item id="network_sharing" avail="9L" price="86000" type="MOD_ELEC" subtype="MOD_PILOT">
       <choices>
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="9"/>
       </choices>

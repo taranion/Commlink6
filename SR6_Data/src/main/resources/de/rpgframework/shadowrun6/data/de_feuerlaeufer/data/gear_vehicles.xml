@@ -131,7 +131,7 @@
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="8189c925-a140-4b5b-9e80-b450d4d8f53b" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="a713818c-7754-4c64-a805-f9b03b701cc0" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="fire_extinguisher" intoId="a713818c-7754-4c64-a805-f9b03b701cc0" />
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="network_sharing" included="true"> <!-- see text on page 22 -->
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="network_sharing"> <!-- see text on page 22 -->
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
 				</embed>
         </modifications>
