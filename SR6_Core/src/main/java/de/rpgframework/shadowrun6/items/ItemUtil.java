@@ -101,6 +101,15 @@ public class ItemUtil {
 				e.printStackTrace();
 			}
 			return;
+		case ACCELERATION:
+			try {
+				objVal = new ItemAttributeObjectValue<>(attr, SR6ItemAttribute.ACCELERATION.getConverter().read(mod.getRawValue()));
+				ref.setAttribute(attr, objVal);
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Error converting {0} to ACCELERATION int[] (from {1})", mod.getRawValue(), mod);
+				e.printStackTrace();
+			}
+			return;
 		case CONCEALABILITY:
 			return;
 		case PRICE2:
