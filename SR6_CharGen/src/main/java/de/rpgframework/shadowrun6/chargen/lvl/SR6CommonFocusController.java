@@ -39,7 +39,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 	 */
 	public SR6CommonFocusController(SR6CharacterController parent) {
 		super(parent);
-		// TODO Auto-generated constructor stub
+		logger = System.getLogger(SR6CommonFocusController.class.getPackageName());
 	}
 
 	//-------------------------------------------------------------------
