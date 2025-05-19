@@ -308,7 +308,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 			 * Count invested power points
 			 */
 			for (AdeptPowerValue val : model.getAdeptPowers()) {
-				logger.log(Level.WARNING, "Power {0}: dist={1}  mod={2}", val.getKey(), val.getDistributed(), val.getModifier());
+				logger.log(Level.DEBUG, "Power {0}: dist={1}  mod={2}", val.getKey(), val.getDistributed(), val.getModifier());
 				float cost = 0;
 				if (val.getModifyable().hasLevel()) {
 					cost = val.getModifyable().getCostForLevel(val.getDistributed());
