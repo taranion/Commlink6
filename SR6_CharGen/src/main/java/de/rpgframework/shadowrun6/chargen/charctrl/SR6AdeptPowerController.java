@@ -308,6 +308,7 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 			 * Count invested power points
 			 */
 			for (AdeptPowerValue val : model.getAdeptPowers()) {
+				logger.log(Level.WARNING, "Power {0}: dist={1}  mod={2}", val.getKey(), val.getDistributed(), val.getModifier());
 				float cost = 0;
 				if (val.getModifyable().hasLevel()) {
 					cost = val.getModifyable().getCostForLevel(val.getDistributed());
@@ -322,9 +323,9 @@ public class SR6AdeptPowerController extends ControllerImpl<AdeptPower> implemen
 			// Summary and eventually warn
 			logger.log(Level.INFO, "Have {0} remaining power points", freePoints);
 			if (freePoints>0) {
-				todos.add(new ToDoElement(Severity.WARNING, SR6CharacterGenerator.RES, IRejectReasons.TODO_UNUSED_POWER_POINTS, freePoints));
+				todos.add(new ToDoElement(Severity.WARNING, IRejectReasons.RES, IRejectReasons.TODO_UNUSED_POWER_POINTS, freePoints));
 			} else if (freePoints<0) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6CharacterGenerator.RES, IRejectReasons.TODO_TOO_MANY_POWERS, -freePoints));
+				todos.add(new ToDoElement(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.TODO_TOO_MANY_POWERS, -freePoints));
 			}
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
