@@ -6,6 +6,7 @@ import java.util.List;
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.Possible.State;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.Choice;
@@ -108,7 +109,8 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		 *   can’t exceed your Magic x 5.
 		 */
 
-		int magic = model.getAttribute(ShadowrunAttribute.MAGIC).getDistributed();
+		int magic = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue(ValueType.NATURAL);
+		logger.log(Level.WARNING, "Magic = {0}   count={1}", magic, model.getFoci().size());
 		// Can't bond more foci than MAG
 		if (model.getFoci().size()>=magic) {
 			// No. foci larger than magic attribute
@@ -118,6 +120,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		// Determine rating
 		Decision decForce = GenericRPGTools.getDecision(ItemTemplate.UUID_RATING, decisions);
 		int force = (decForce!=null)?Integer.parseInt(decForce.getValue()):1;
+		logger.log(Level.WARNING, "Force = {0}  ", force);
 		// No focus may exceed MAG attribute
 		if (force>magic) {
 			// No. foci larger than magic attribute
@@ -125,8 +128,8 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		}
 
 		// Would force pool be exceeded?
-		int newForcePool = forcePool + force;
-		if (newForcePool>(magic*5)) {
+		int newForcePool = forcePool - force;
+		if (newForcePool<0) {
 			// Sum of force of all foci exceeds Magic*5
 			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_SUM_FORCE_EXCEEDS_MAX, newForcePool, magic*5);
 		}
@@ -167,6 +170,8 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 		}
 		getModel().addFocus(val);
 		logger.log(Level.INFO, "Selected focus "+val);
+		
+		parent.runProcessors();
 
 		return new OperationResult<FocusValue>(val);
 	}
@@ -230,7 +235,7 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 	public List<Modification> process(List<Modification> unprocessed) {
 		Shadowrun6Character model = getModel();
 		try {
-			forcePool = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue()*5;
+			forcePool = model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue(ValueType.NATURAL)*5;
 
 //			// Pay karma for selected foci - Nuyen are paid in EquipmentController
 			for (FocusValue focus : model.getFoci()) {
@@ -248,11 +253,20 @@ public class SR6CommonFocusController extends ControllerImpl<Focus> implements I
 
 	//-------------------------------------------------------------------
 	/**
-	 * @see de.rpgframework.shadowrun.chargen.charctrl.IFocusController#getFocusPointsLeft()
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IFocusController#getFocusPointsMax()
 	 */
 	@Override
-	public int getFocusPointsLeft() {
-		return forcePool;
+	public int getFocusPointsMax() {
+		return getModel().getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue(ValueType.NATURAL)*5;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IFocusController#getFocusPointsSpent()
+	 */
+	@Override
+	public int getFocusPointsSpent() {
+		return getFocusPointsMax() - forcePool;
 	}
 
 }
