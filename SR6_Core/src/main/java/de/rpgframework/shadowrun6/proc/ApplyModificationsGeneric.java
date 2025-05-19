@@ -187,6 +187,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			value = new AdeptPowerValue(item, 0);
 			value.setInjectedBy(mod.getSource());
 			value.addIncomingModification(mod);
+			// For non-rating adept powers, assume rating 1
 			if (!(mod instanceof ValueModification) && item.hasLevel()) {
 				value.setDistributed(1);
 			}
