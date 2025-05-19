@@ -171,8 +171,8 @@ public class MagicPage extends Page {
 
 				IFocusController ctrl = control.getFocusController();
 				if (model!=null && ctrl!=null) {
-					lbNum.setText(model.getFoci().size()+" / "+model.getAttribute(ShadowrunAttribute.MAGIC).getDistributed());
-					lbSum.setText(ctrl.getFocusPointsLeft()+" / "+(model.getAttribute(ShadowrunAttribute.MAGIC).getDistributed()*5));
+					lbNum.setText(model.getFoci().size()+" / "+model.getAttribute(ShadowrunAttribute.MAGIC).getModifiedValue(ValueType.NATURAL));
+					lbSum.setText(ctrl.getFocusPointsSpent()+" / "+ctrl.getFocusPointsMax());
 				}
 			}
 		};
