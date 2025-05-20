@@ -225,7 +225,7 @@
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
         <valmod type="HOOK" ref="CYBEREYE_IMPLANT" value="4"/>
-        <embed  type="GEAR" ref="image_link" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+        <embed  type="GEAR" ref="image_link" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" included="true" apply="DATA_ITEM"/>
       </modifications>
       <alternate mode="VEHICLE" type="DRONE_MINI" subtype="AIR" id="drone">
 			<vehicle han="3" acc="15" spdi="15" tspd="40" bod="1" arm="0" pil="2" sen="2" />
@@ -254,7 +254,7 @@
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
          <valmod type="HOOK" ref="CYBEREAR_IMPLANT" value="$RATING" table="1,4,8,12,16"/>
-         <embed  type="GEAR" ref="soundlink" intoType="HOOK" intoRef="INTERNAL" included="true" apply="DATA_ITEM"/>
+         <embed  type="GEAR" ref="soundlink" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" included="true" apply="DATA_ITEM"/>
        	<checkmod type="SKILL" ref="perception" value="1" what="EDGE"/>
       </modifications>
    </item>
